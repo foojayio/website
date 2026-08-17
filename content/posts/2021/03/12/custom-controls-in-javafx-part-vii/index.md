@@ -37,37 +37,43 @@ First of all, I extended a JavaFX Label which is made from a Labeled container t
 
 In the SelectableLabel class I've added a Region to the Label using the setGraphics() method and aligned it to the right by calling setContentDisplay(ContentDisplay.RIGHT) as you can see in the following code snippet:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">selectionArrow = new Region();
+```java
+selectionArrow = new Region();
 selectionArrow.getStyleClass().add("selection-arrow");
 selectionArrow.prefWidthProperty().bind(heightProperty());
 selectionArrow.prefHeightProperty().bind(heightProperty());
 
 if (selectionArrowEnabled) { setGraphic(selectionArrow); }
-setContentDisplay(ContentDisplay.RIGHT);</pre>
+setContentDisplay(ContentDisplay.RIGHT);
+```
+
 
 To the added Region named selectionArrow I've added the style class named "selection-arrow".
 
 Now let's take a look at the CSS code that is involved here:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">.jdk-butler .selectable-label &gt; .selection-arrow,
-.jdk-butler:dark .selectable-label &gt; .selection-arrow {
+```java
+.jdk-butler .selectable-label > .selection-arrow,
+.jdk-butler:dark .selectable-label > .selection-arrow {
     -fx-background-color : transparent;
     -fx-scale-shape      : true;
     -fx-shape            : "M0,10 L10,0 L10,20 L0,10z";
     -fx-translate-x      : 4;
 }
-.jdk-butler:dark .selectable-label:selected &gt; .selection-arrow {
+.jdk-butler:dark .selectable-label:selected > .selection-arrow {
     -fx-background-color : -dark-border-color, -dark-content-background;
     -fx-scale-x          : 1;
     -fx-scale-y          : 1.5;
     -fx-background-insets: -1 0 -1 0, 0 0 0 2.5;
 }
-.jdk-butler .selectable-label:selected &gt; .selection-arrow {
+.jdk-butler .selectable-label:selected > .selection-arrow {
     -fx-background-color : -light-border-color, -light-content-background;
     -fx-scale-x          : 1;
     -fx-scale-y          : 1.5;
     -fx-background-insets: -1 0 -1 0, 0 0 0 2.5;
-}</pre>
+}
+```
+
 
 So first we add a simple svg shape (the triangle) to the Region (.selection-arrow) which will be filled with the transparent color to hide it as default. We also shift the path 4px to the right.
 
@@ -113,8 +119,10 @@ So my own SearchTextField looks similar to the original one in MacOS and good en
 
 Some of you (probably the ones working on Mac) might already wonder why JDK Butler comes in dark mode. Because JavaFX does not recognize dark/light modes you have to create the whole window on your own. Fortunately that is possible in JavaFX because you can set the Stage style to transparent by calling:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">stage.initStyle(StageStyle.TRANSPARENT);
-</pre>
+```java
+stage.initStyle(StageStyle.TRANSPARENT);
+```
+
 
 The thing you have to keep in mind is that, if you set the stage style to transparent, you also lose the ability to resize and move the window. So that's another thing you have to take care of on your own. Lucky us because there are solutions to handle this, [in the tools package of JDK Butler](https://github.com/HanSolo/jdkbutler/blob/main/src/main/java/eu/hansolo/fx/jdkbutler/tools/ResizeHelper.java) you will find a class called ResizeHelper which has a method called addResizeListener(). You simply call this method and pass your stage object to it and resizing is done. 🙂 The window dragging can simply be realized by adding a listener to the MousePressed and MouseDragged events on the header.
 

@@ -66,7 +66,8 @@ The benchmark runs different types of queries:
 
 The benchmark source code is available on [GitHub](https://github.com/rusher/JdbcLoomPerftest/blob/main/src/main/java/org/mariadb/loom/BenchmarkLoom.java) and is rather straightforward. Here's an example using the "SELECT 1" command:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">@Benchmark
+```java
+@Benchmark
 public void Select1Platform(MyState state, Blackhole blackHole) throws InterruptedException {
     try (var executor = Executors.newCachedThreadPool()) {
         executeSelect1(state, executor, blackHole);
@@ -81,7 +82,7 @@ public void Select1Virtual(MyState state, Blackhole blackHole) throws Interrupte
 }
 
 private void executeSelect1(MyState state, ExecutorService executor, Blackhole blackHole) throws InterruptedException {
-    IntStream.range(0, state.numberOfTasks).forEach(i -&gt; executor.submit(() -&gt; {
+    IntStream.range(0, state.numberOfTasks).forEach(i -> executor.submit(() -> {
         try (var conn = state.pool.getConnection()) {
             try (Statement stmt = conn.createStatement()) {
                 try (ResultSet rs = stmt.executeQuery("select 1")) {
@@ -95,7 +96,9 @@ private void executeSelect1(MyState state, ExecutorService executor, Blackhole b
     }));
     executor.shutdown();
     executor.awaitTermination(1, TimeUnit.MINUTES);
-}</pre>
+}
+```
+
 
 Notice how platform threads are created and used (pool) vs how virtual threads are (no pool).
 

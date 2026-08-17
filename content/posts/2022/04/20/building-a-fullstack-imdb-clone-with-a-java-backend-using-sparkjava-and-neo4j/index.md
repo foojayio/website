@@ -67,9 +67,12 @@ We went with a traditional Java dev setup, installing Java 17 and Apache Maven v
 
 As Java 17 brings string blocks and records, we wanted to make use of those niceties.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="shell">sdk install java 17-open
+```bash
+sdk install java 17-open
 sdk use java 17-open
-sdk install maven</pre>
+sdk install maven
+```
+
 
 Web Framework - SparkJava {#_web_framework_sparkjava}
 -----------------------------------------------------
@@ -84,19 +87,23 @@ So, moving the code over from JavaScript to Java was pretty straightforward, wit
 
 The minimal hello world example looks like this:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">import static spark.Spark.*;
+```java
+import static spark.Spark.*;
 
 public class HelloWorld {
     public static void main(String[] args) {
-        get("/hello", (req, res) -&gt; "Hello World");
+        get("/hello", (req, res) -> "Hello World");
     }
-}</pre>
+}
+```
+
 
 Our whole main app that registers the routes, adds error handling, verifies auth, serves public files formatting in JSON (using GSON), and starts the server is not more than 20 lines.
 
 The [docs for SparkJava](https://sparkjava.com/documentation#examples-and-faq) are really short and comprehensive at the same time, everything you need can be found quickly.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">package neoflix;
+```java
+package neoflix;
 
 import static spark.Spark.*;
 
@@ -117,15 +124,15 @@ public class NeoflixApp {
 
         staticFiles.location("/public");
         String jwtSecret = AppUtils.getJwtSecret();
-        before((req, res) -&gt; AppUtils.handleAuthAndSetUser(req, jwtSecret));
-        path("/api", () -&gt; {
+        before((req, res) -> AppUtils.handleAuthAndSetUser(req, jwtSecret));
+        path("/api", () -> {
             path("/movies", new MovieRoutes(driver, gson));
             path("/genres", new GenreRoutes(driver, gson));
             path("/auth", new AuthRoutes(driver, gson, jwtSecret));
             path("/account", new AccountRoutes(driver, gson));
             path("/people", new PeopleRoutes(driver, gson));
         });
-        exception(ValidationException.class, (exception, request, response) -&gt; {
+        exception(ValidationException.class, (exception, request, response) -> {
             response.status(422);
             var body = Map.of("message",exception.getMessage(), "details", exception.getDetails());
             response.body(gson.toJson(body));
@@ -133,18 +140,23 @@ public class NeoflixApp {
         });
         System.out.printf("Server listening on http://localhost:%d/%n", port);
     }
-}</pre>
+}
+```
+
 
 Routes - AccountRoutes {#_routes_accountroutes}
 -----------------------------------------------
 
 The routes can be grouped by root path and then handled in a simple DSL. Here is the route for getting the favorites list in `AccountRoutes`
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">get("/favorites", (req, res) -&gt; {
+```java
+get("/favorites", (req, res) -> {
     var params = Params.parse(req, Params.MOVIE_SORT);
     String userId = AppUtils.getUserId(req);
     return favoriteService.all(userId, params);
-}, gson::toJson);</pre>
+}, gson::toJson);
+```
+
 
 We first parse some params from the request URL then extract the userId from the request attributes and call the FavoriteService to query the database.
 
@@ -159,14 +171,18 @@ The original Javascript app used JS files to hold the fixtures as JS objects but
 
 So, we converted the fixtures into JSON files and then read them into `List<Map>` structures in the services that used the fixtures.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public static List&lt;Map&gt; loadFixtureList(final String name) {
+```java
+public static List<Map> loadFixtureList(final String name) {
     var fixture = new InputStreamReader(AppUtils.class.getResourceAsStream("/fixtures/" + name + ".json"));
     return GsonUtils.gson().fromJson(fixture,List.class);
-}</pre>
+}
+```
+
 
 Which can then be used in the service with `this.popular = AppUtils.loadFixtureList("popular");`.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="json">[{
+```json
+[{
 	"actors": [
 	  {"name": "Tim Robbins","tmdbId": "0000209"},
 	  {"name": "William Sadler","tmdbId": "0006669"},
@@ -183,32 +199,40 @@ Which can then be used in the service with `this.popular = AppUtils.loadFixtureL
 	"favorite": false,
 	"title": "Shawshank Redemption, The",
 	"poster": "https://image.tmdb.org/t/p/w440_and_h660_face/5KCVkau1HEl7ZzfPsKAPM0sMiKc.jpg"
-}]</pre>
+}]
+```
+
 
 To make it not completely static we used some Java Streams processing fun to at least handle some of the filtering, sorting and pagination even with the fixture data.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public static List&lt;Map&gt; process(
-                List&lt;Map&gt; result, Params params) {
+```java
+public static List<Map> process(
+                List<Map> result, Params params) {
     return params == null ? result : result.stream()
-        .sorted((m1, m2) -&gt;
+        .sorted((m1, m2) ->
             (params.order() == Params.Order.ASC ? 1 : -1) *
                 ((Comparable)m1.getOrDefault(params.sort().name(),"")).compareTo(
                         m2.getOrDefault(params.sort().name(),"")
                 ))
         .skip(params.skip()).limit(params.limit())
         .toList();
-}</pre>
+}
+```
+
 
 Which is then used in the services, like this:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public List&lt;Map&gt; all(Params params, String userId) {
+```java
+public List<Map> all(Params params, String userId) {
     // TODO: Open an Session
     // TODO: Execute a query in a new Read Transaction
     // TODO: Get a list of Movies from the Result
     // TODO: Close the session
 
     return AppUtils.process(popular, params);
-}</pre>
+}
+```
+
 
 Neo4j Driver {#_neo4j_driver}
 -----------------------------
@@ -227,12 +251,15 @@ Within a session, you can use read- and write-transactions to do your (units of)
 
 We got the connection credentials from `application.properties` which we had read in and set as System properties for convenience and initialized the Driver.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">static Driver initDriver() {
+```java
+static Driver initDriver() {
     AuthToken auth = AuthTokens.basic(getNeo4jUsername(), getNeo4jPassword());
     Driver driver = GraphDatabase.driver(getNeo4jUri(), auth);
     driver.verifyConnectivity();
     return driver;
-}</pre>
+}
+```
+
 
 Services - FavoriteService {#_services_favoriteservice}
 -------------------------------------------------------
@@ -241,14 +268,15 @@ The driver is then passed to each service on construction and can be used from t
 
 Here in an example of the `FavoriteService` for listing the favorites of a user, you can see how we use String blocks for the Cypher statement and lambdas for the callback of `readTransaction`
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public List&lt;Map&gt; all(String userId, Params params) {
+```java
+public List<Map> all(String userId, Params params) {
     // Open a new session
     try (var session = this.driver.session()) {
 
         // Retrieve a list of movies favorited by the user
-        var favorites = session.readTransaction(tx -&gt; {
+        var favorites = session.readTransaction(tx -> {
             String query = """
-                        MATCH (u:User {userId: $userId})-[r:HAS_FAVORITE]-&gt;(m:Movie)
+                        MATCH (u:User {userId: $userId})-[r:HAS_FAVORITE]->(m:Movie)
                         RETURN m {
                             .*,
                             favorite: true
@@ -259,24 +287,27 @@ Here in an example of the `FavoriteService` for listing the favorites of a user,
                     """;
             var res = tx.run(query, Values.parameters("userId", userId, "skip",
                                         params.skip(), "limit", params.limit()));
-            return res.list(row -&gt; row.get("movie").asMap());
+            return res.list(row -> row.get("movie").asMap());
         });
         return favorites;
     }
-}</pre>
+}
+```
+
 
 When adding a favorite movie, we use `FavoriteService.add` with a write transaction to create the `FAVORITE` relationship between the user and the movie.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public Map add(String userId, String movieId) {
+```java
+public Map add(String userId, String movieId) {
     // Open a new Session
     try (var session = this.driver.session()) {
         // Create HAS_FAVORITE relationship within a Write Transaction
-        var favorite = session.writeTransaction(tx -&gt; {
+        var favorite = session.writeTransaction(tx -> {
             String statement = """
                         MATCH (u:User {userId: $userId})
                         MATCH (m:Movie {tmdbId: $movieId})
 
-                        MERGE (u)-[r:HAS_FAVORITE]-&gt;(m)
+                        MERGE (u)-[r:HAS_FAVORITE]->(m)
                                 ON CREATE SET r.createdAt = datetime()
 
                         RETURN m {
@@ -294,7 +325,9 @@ When adding a favorite movie, we use `FavoriteService.add` with a write transact
         throw new ValidationException("Could not create favorite movie for user",
             Map.of("movie",movieId, "user",userId));
     }
-}</pre>
+}
+```
+
 
 The `result.single()` method would fail if there is *not exactly one* result with an `NoSuchRecordException`, so we don't need to check for that within the query.
 
@@ -313,11 +346,12 @@ For registration and authentication, we store the user directly as a Node in Neo
 
 Here is an example from the `authenticate` method of `AuthService`.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public Map authenticate(String email, String plainPassword) {
+```java
+public Map authenticate(String email, String plainPassword) {
     // Open a new Session
     try (var session = this.driver.session()) {
         // Find the User node within a Read Transaction
-        var user = session.readTransaction(tx -&gt; {
+        var user = session.readTransaction(tx -> {
             String statement = "MATCH (u:User {email: $email}) RETURN u";
             var res = tx.run(statement, Values.parameters("email", email));
             return res.single().get("u").asMap();
@@ -334,23 +368,28 @@ Here is an example from the `authenticate` method of `AuthService`.
     } catch(NoSuchRecordException e) {
         throw new ValidationException("Incorrect email", Map.of("email","Incorrect email"));
     }
-}</pre>
+}
+```
+
 
 For passing authentication information as [JWT tokens](https://jwt.io) to the browser and back, we use the [Auth0 Java Library](https://github.com/auth0/auth0-java) to generate the token and then also validate it.
 
 This is done with a `before` handler in SparkJava, that on successful validation stores the `sub` which contains the `userId` in a request attribute that the routes then can access, e.g. for personalization or ratings.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">static void handleAuthAndSetUser(Request req, String jwtSecret) {
+```java
+static void handleAuthAndSetUser(Request req, String jwtSecret) {
     String token = req.headers("Authorization");
     String bearer = "Bearer ";
-    if (token != null &amp;amp;&amp;amp; !token.isBlank() &amp;amp;&amp;amp; token.startsWith(bearer)) {
+    if (token != null &amp;&amp; !token.isBlank() &amp;&amp; token.startsWith(bearer)) {
         token = token.substring(bearer.length());
         String userId = AuthUtils.verify(token, jwtSecret);
         req.attribute("user", userId);
     }
 }
 // usage in NeoflixApp
-before((req, res) -&gt; AppUtils.handleAuthAndSetUser(req, jwtSecret));</pre>
+before((req, res) -> AppUtils.handleAuthAndSetUser(req, jwtSecret));
+```
+
 
 Java 17 Records {#_java_17_records}
 -----------------------------------
@@ -363,13 +402,19 @@ And, the results from the Neo4j Java Driver were not minimalistically convertibl
 
 As we didn't want to add a lot of noise to the educational code, esp. if you want to keep the single-line lambda closure for the callback, we kept the `toMap()` API that the driver results offer.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">var movies = tx.run(query, params)
-    .list(row -&gt; row.get("movie")
-                    .computeOrDefault(v -&gt;
+```java
+var movies = tx.run(query, params)
+    .list(row -> row.get("movie")
+                    .computeOrDefault(v ->
                         new Movie(v.get("title").asString(),v.get("tmbdId").asString()),
-                            v.get("published").asLocalDate())));</pre>
+                            v.get("published").asLocalDate())));
+```
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">var movies = tx.run(query, params).list(row -&gt; row.get("movie").toMap());</pre>
+
+```java
+var movies = tx.run(query, params).list(row -> row.get("movie").toMap());
+```
+
 
 Testing {#_testing}
 -------------------

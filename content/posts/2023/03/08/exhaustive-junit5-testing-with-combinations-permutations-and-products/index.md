@@ -59,27 +59,34 @@ Before we continue, we remind ourselves of what combinations, permutations, and 
 
 The combinations of X are:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">[]
+```
+[]
 [A]
 [B]
 [C]
 [A, B]
 [A, C]
 [B, C]
-[A, B, C]</pre>
+[A, B, C]
+```
+
 
 The permutations of X are:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">[A, B, C]
+```
+[A, B, C]
 [A, C, B]
 [B, A, C]
 [B, C, A]
 [C, A, B]
-[C, B, A]</pre>
+[C, B, A]
+```
+
 
 The permutations of all combinations of X are:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">[]
+```
+[]
 [A]
 [B]
 [C]
@@ -94,7 +101,9 @@ The permutations of all combinations of X are:
 [B, A, C]
 [B, C, A]
 [C, A, B]
-[C, B, A]</pre>
+[C, B, A]
+```
+
 
 Where \[\] denotes a sequence of no elements. As can be seen from the sequences above, the number of variants will increase very rapidly as the number of set members increases.
 
@@ -104,10 +113,13 @@ Another concept (not exemplified in this article) is "Products" (aka [Cartesian 
 
 The product of s1 and s2 is:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">[A, 1]
+```
+[A, 1]
 [A, 2]
 [B, 1]
-[B, 2]</pre>
+[B, 2]
+```
+
 
 Products have many similarities with database "join" operations and relate to nested loops.
 
@@ -115,52 +127,73 @@ Products have many similarities with database "join" operations and relate to ne
 
 In this test, we will be using open-source[Chronicle-Test-Framework](https://github.com/OpenHFT/Chronicle-Test-Framework " Chronicle-Test-Framework") that supports the aforementioned combination, permutation, and product features. Here is an example:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">// Prints: [], [A], [B], [C], [A, B], [B, C], … (8 sequences)
+```
+// Prints: [], [A], [B], [C], [A, B], [B, C], … (8 sequences)
 Combination.of("A", "B", "C")
-    .forEach(System.out::println)</pre>
+    .forEach(System.out::println)
+```
+
 
 This prints all the combinations of {A, B, C} the result being the same as in the previous chapter. In the same way, the following example will print out all the permutations of {A, B, C}:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">// Prints: [A, B, C], [A, C, B], [B, A, C], … (6 sequences)
+```
+// Prints: [A, B, C], [A, C, B], [B, A, C], … (6 sequences)
 Permutation.of("A", "B", "C")
-    .forEach(System.out::println)</pre>
+    .forEach(System.out::println)
+```
+
 
 In this following example, we combine the capabilities of combinations and permutations:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">// Prints: [], [A], [B], [C], [A, B], [B, A], …(16 sequences)
+```
+// Prints: [], [A], [B], [C], [A, B], [B, A], …(16 sequences)
 Combination.of("A", "B", "C")
     .flatMap(Permutation::of)
-    .forEach(System.out::println)</pre>
+    .forEach(System.out::println)
+```
+
 
 The methods above produce a Stream of Collection elements allowing easy adaptations to other frameworks such as JUnit5.
 
 When it comes to products, things work slightly differently. Here is an example:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">final List&lt;String&gt; strings = Arrays.asList("A", "B");
-final List&lt;Integer&gt; integers = Arrays.asList(1, 2);
+```
+final List<String> strings = Arrays.asList("A", "B");
+final List<Integer> integers = Arrays.asList(1, 2);
 
 Product.of(strings, integers)
-        .forEach(System.out::println);</pre>
+        .forEach(System.out::println);
+```
+
 
 This will print:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">Product2Impl{first=A, second=1}
+```
+Product2Impl{first=A, second=1}
 Product2Impl{first=A, second=2}
 Product2Impl{first=B, second=1}
-Product2Impl{first=B, second=2}</pre>
+Product2Impl{first=B, second=2}
+```
+
 
 If a more recent Java version is used, the following scheme would typically be used instead:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">record StringInteger(String string, Integer integer){}
+```
+record StringInteger(String string, Integer integer){}
 Product.of(strings, integers, StringInteger::new)
-        .forEach(System.out::println);</pre>
+        .forEach(System.out::println);
+```
+
 
 This will produce:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">StringInteger[string=A, integer=1]
+```
+StringInteger[string=A, integer=1]
 StringInteger[string=A, integer=2]
 StringInteger[string=B, integer=1]
-StringInteger[string=B, integer=2]</pre>
+StringInteger[string=B, integer=2]
+```
+
 
 In my opinion, the above is better than the default Product2Impl tuple because the record is a "nominal tuple" where the names and types of the state elements are declared in the record header compared to the Product2Impl which relies on generic types and "first" and "second" as names.
 
@@ -170,12 +203,15 @@ Suppose that we want to make sure two java.lang.List implementations behave the 
 
 We start by identifying the mutating operations to use. One (arbitrary) suggestion is to use the following operations:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">list.clear()
+```
+list.clear()
 list.add(1)
 list.remove((Integer) 1) // Will remove the object 1 and not @index 1
 list.addAll(Arrays.asList(2, 3, 4, 5))
 list.removeIf(ODD)
-Where Predicate&lt;Integer&gt; ODD = v -&gt; v % 2 == 1.</pre>
+Where Predicate<Integer> ODD = v -> v % 2 == 1.
+```
+
 
 In this article, we will initially use ArrayList and LinkedList for comparison.
 
@@ -187,31 +223,34 @@ JUnit5 provides a @TestFactory annotation and DynamicTest objects, allowing a te
 
 This is something that we can leverage, as shown below:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">private static final Collection&lt;NamedConsumer&lt;List&lt;Integer&gt;&gt;&gt; OPERATIONS =
+```
+private static final Collection<NamedConsumer<List<Integer>>> OPERATIONS =
      Arrays.asList(
         NamedConsumer.of(List::clear, "clear()"),
-        NamedConsumer.of(list -&gt; list.add(1), "add(1)"),
-        NamedConsumer.of(list -&gt; list.remove((Integer) 1), "remove(1)"),
-        NamedConsumer.of(list -&gt; list.addAll(Arrays.asList(2, 3, 4, 5)),
+        NamedConsumer.of(list -> list.add(1), "add(1)"),
+        NamedConsumer.of(list -> list.remove((Integer) 1), "remove(1)"),
+        NamedConsumer.of(list -> list.addAll(Arrays.asList(2, 3, 4, 5)),
                                  "addAll(2,3,4,5)"),
-        NamedConsumer.of(list -&gt; list.removeIf(ODD), "removeIf(ODD)")
+        NamedConsumer.of(list -> list.removeIf(ODD), "removeIf(ODD)")
 );
 
 @TestFactory
-Stream&lt;DynamicTest&gt; validate() {
+Stream<DynamicTest> validate() {
     return DynamicTest.stream(Combination.of(OPERATIONS)
                     .flatMap(Permutation::of),
             Object::toString,
-            operations -&gt; {
-                List&lt;Integer&gt; first = new ArrayList&lt;&gt;();
-                List&lt;Integer&gt; second = new LinkedList&lt;&gt;();
-                operations.forEach(op -&gt; {
+            operations -> {
+                List<Integer> first = new ArrayList<>();
+                List<Integer> second = new LinkedList<>();
+                operations.forEach(op -> {
                     op.accept(first);
                     op.accept(second);
                 });
                 assertEquals(first, second);
             });
-}</pre>
+}
+```
+
 
 This is the entire solution, and when run under IntelliJ (or other similar tools), the following tests will be performed (only the first 16 of the 326 tests are shown for brevity):
 
@@ -227,35 +266,42 @@ It certainly looks better in the output and provides much better debug capabilit
 
 Suppose we have a more significant number of List implementations we'd like to test, such as:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">ArrayList
+```
+ArrayList
 LinkedList
 CopyOnWriteArrayList
 Stack
-Vector</pre>
+Vector
+```
+
 
 To expand the concept, we begin by creating a collection of List constructors:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">private static final Collection&lt;Supplier&lt;List&lt;Integer&gt;&gt;&gt; CONSTRUCTORS =
+```
+private static final Collection<Supplier<List<Integer>>> CONSTRUCTORS =
         Arrays.asList(
             ArrayList::new,
             LinkedList::new,
             CopyOnWriteArrayList::new,
             Stack::new,
-            Vector::new);</pre>
+            Vector::new);
+```
+
 
 The reason for working with constructors rather than instances is that we need to be able to create new List implementations for each dynamic test.
 
 Now, we only need to do minor modifications to the previous test:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">@TestFactory
-Stream&lt;DynamicTest&gt; validateMany() {
+```
+@TestFactory
+Stream<DynamicTest> validateMany() {
     return DynamicTest.stream(Combination.of(OPERATIONS)
                     .flatMap(Permutation::of),
             Object::toString,
-            operations -&gt; {
+            operations -> {
 
                 // Create a fresh list of List implementations
-                List&lt;List&lt;Integer&gt;&gt; lists = CONSTRUCTORS.stream()
+                List<List<Integer>> lists = CONSTRUCTORS.stream()
                         .map(Supplier::get)
                         .collect(Collectors.toList());
 
@@ -266,15 +312,17 @@ Stream&lt;DynamicTest&gt; validateMany() {
                 Combination.of(lists)
 
                     // Filter out only combinations with two lists
-                    .filter(set -&gt; set.size() == 2)
+                    .filter(set -> set.size() == 2)
 
                     // Convert the Set to a List for easy access below
                     .map(ArrayList::new)
 
                     // Assert the pair equals
-                    .forEach(pair -&gt; assertEquals(pair.get(0), pair.get(1)))
+                    .forEach(pair -> assertEquals(pair.get(0), pair.get(1)))
             });
-}</pre>
+}
+```
+
 
 Strictly, this is a bit of cheating as a single dynamic test contains several subtests for a plurality of List pairs.
 
@@ -293,9 +341,12 @@ More generally, it can be shown that: poc(s) = poc(s -- 1) \* s + 1.
 
 If in doubt, the number of combinations can be checked using the .count() stream operation which will return the number of sequences returned as shown below:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">long poc6 = Combination.of(1, 2, 3, 4, 5, 6)
+```
+long poc6 = Combination.of(1, 2, 3, 4, 5, 6)
         .flatMap(Permutation::of)
-        .count();</pre>
+        .count();
+```
+
 
 The stream above will, unsurprisingly, return 1,957 as there are six input elements.
 

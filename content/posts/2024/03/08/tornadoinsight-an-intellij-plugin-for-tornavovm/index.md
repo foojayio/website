@@ -37,7 +37,7 @@ TornadoInsight has been implemented by Tianyu Zuo for his master thesis at the U
 
 <br />
 
-*** ** * ** ***
+
 
 Key Features: {#h2-0-key-features}
 ----------------------------------
@@ -81,7 +81,7 @@ Then, it invokes the TornadoVM runtime on the developer's machine to run the gen
 If it is not compatible, it will output an exception stack trace. In addition, the elapsed time for running the checks is displayed in the bottom right corner.
 ![](TornadoInsight_unsuccessful_compilation-1024x645.webp)
 
-*** ** * ** ***
+
 
 How to use TornadoInsight? {#h2-3-how-to-use-tornadoinsight}
 ------------------------------------------------------------
@@ -126,7 +126,10 @@ Additionally, developers should indicate a tentative "Max array size" that can b
 
 In **macOS Catalina** and **later,** there may be the need to remove the quarantine attribute before selecting the JDK. To do this, run the following:{#vcaap82116}
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ sudo xattr -r -d com.apple.quarantine path/to/jdk</pre>
+```
+$ sudo xattr -r -d com.apple.quarantine path/to/jdk
+```
+
 
 ### 4. Utilization of the TornadoInsight On-the-Fly Static Checker {#ieank24013}
 

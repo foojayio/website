@@ -54,24 +54,28 @@ Spring Boot is the paladin. It is familiar to almost every Java developer, built
 
 The JPA repository is the clearest example of what that means in practice:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public interface QuestRepository extends JpaRepository&lt;Quest, Long&gt; {
+```
+public interface QuestRepository extends JpaRepository<Quest, Long> {
 
-    List&lt;Quest&gt; findByDifficulty(Difficulty difficulty);
+    List<Quest> findByDifficulty(Difficulty difficulty);
 
-    List&lt;Quest&gt; findByRequiredClassIgnoreCase(String requiredClass);
+    List<Quest> findByRequiredClassIgnoreCase(String requiredClass);
 
-    List&lt;Quest&gt; findByDifficultyAndRequiredClassIgnoreCase(
+    List<Quest> findByDifficultyAndRequiredClassIgnoreCase(
             Difficulty difficulty,
             String requiredClass
     );
 
-}</pre>
+}
+```
+
 
 No implementation. Spring can even generate the queries from the method names. Define what you want, and Spring figures out how to fetch it.
 
 The controller follows the same pattern: annotations declare intent, Spring wires everything up:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@RestController
+```
+@RestController
 @RequestMapping("/quests")
 public class QuestController {
 
@@ -87,7 +91,7 @@ public class QuestController {
     }
 
     @GetMapping
-    public List&lt;Quest&gt; search(
+    public List<Quest> search(
             @RequestParam(required = false) Difficulty difficulty,
             @RequestParam(required = false) String requiredClass
     ) {
@@ -99,7 +103,9 @@ public class QuestController {
     public Quest create(@Valid @RequestBody CreateQuestRequest request) {
         return service.create(request);
     }
-}</pre>
+}
+```
+
 
 Spring covers far more than what's visible here: Security, JPA, validation, messaging, batch, cloud config, observability, GraphQL. If you need it, there's almost certainly a starter for it.
 
@@ -114,18 +120,19 @@ If Spring is a heavily-armed warrior, Quarkus is a ranger: fast and very knowled
 
 The structure will feel familiar to Spring developers. Quarkus uses CDI and JAX-RS under the hood rather than Spring's annotation model, but the Panache repository keeps data access clean:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@ApplicationScoped
-public class QuestRepository implements PanacheRepository&lt;Quest&gt; {
+```
+@ApplicationScoped
+public class QuestRepository implements PanacheRepository<Quest> {
 
-    public List&lt;Quest&gt; findByDifficulty(Difficulty difficulty) {
+    public List<Quest> findByDifficulty(Difficulty difficulty) {
         return list("difficulty", difficulty);
     }
 
-    public List&lt;Quest&gt; findByRequiredClassIgnoreCase(String requiredClass) {
+    public List<Quest> findByRequiredClassIgnoreCase(String requiredClass) {
         return list("lower(requiredClass) = lower(?1)", requiredClass);
     }
 
-    public List&lt;Quest&gt; findByDifficultyAndRequiredClassIgnoreCase(
+    public List<Quest> findByDifficultyAndRequiredClassIgnoreCase(
             Difficulty difficulty,
             String requiredClass
     ) {
@@ -135,11 +142,14 @@ public class QuestRepository implements PanacheRepository&lt;Quest&gt; {
                 requiredClass
         );
     }
-}</pre>
+}
+```
+
 
 The JAX-RS resource uses `@Path` and `@Inject` instead of `@RequestMapping` and `@Autowired`, but the shape is the same:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@Path("/quests")
+```
+@Path("/quests")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 public class QuestResource {
@@ -162,7 +172,9 @@ public class QuestResource {
         Quest quest = service.create(request);
         return Response.status(Response.Status.CREATED).entity(quest).build();
     }
-}</pre>
+}
+```
+
 
 The dev experience is genuinely good. Live coding, where code changes are reflected in the running app automatically, is built in, including remote mode for containerized environments. Continuous testing is triggered on every save.
 
@@ -177,23 +189,27 @@ Jooby {#h2-3-jooby}
 
 Jooby is the monk. It travels light and advocates for minimalism: You pick every piece yourself. No annotation-driven magic to reverse-engineer. Routes are functions:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">get("/quests/{id}", ctx -&gt; service.findById(ctx.path("id").longValue()));
+```
+get("/quests/{id}", ctx -> service.findById(ctx.path("id").longValue()));
 
-get("/quests", ctx -&gt; service.search(
+get("/quests", ctx -> service.search(
         ctx.query("difficulty").toOptional(Difficulty.class).orElse(null),
         ctx.query("requiredClass").toOptional().orElse(null)
 ));
 
-post("/quests", ctx -&gt; {
+post("/quests", ctx -> {
     var request = ctx.body(CreateQuestRequest.class);
     ctx.setResponseCode(StatusCode.CREATED);
     return service.create(request);
-});</pre>
+});
+```
+
 
 Instead of JPA, Jooby offers a JDBI module --- the middle ground between raw JDBC and full ORM. You write SQL, get type-safe results, and see exactly what goes to the database:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public Optional&lt;Quest&gt; findById(Long id) {
-    return jdbi.withHandle(handle -&gt; handle
+```
+public Optional<Quest> findById(Long id) {
+    return jdbi.withHandle(handle -> handle
             .createQuery("""
                     select id, title, difficulty, reward, required_class, status, assigned_hero
                     from quests
@@ -202,7 +218,9 @@ Instead of JPA, Jooby offers a JDBI module --- the middle ground between raw JDB
             .bind("id", id)
             .map(QUEST_MAPPER)
             .findOne());
-}</pre>
+}
+```
+
 
 The SQL is right there in the method. There are no hidden queries or N+1 surprises waiting for production traffic.
 
@@ -217,9 +235,10 @@ Vert.x is often called a framework, but technically, it is a toolkit for buildin
 
 That warning tells you everything about Vert.x. It provides building blocks for reactive applications on the JVM (async database clients, event-bus messaging, non-blocking I/O) without imposing an application model on top. Use it right and the results are excellent:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public Future&lt;AssignQuestResponse&gt; assign(Long id, AssignQuestRequest request) {
+```
+public Future<AssignQuestResponse> assign(Long id, AssignQuestRequest request) {
     return repository.assign(id, request.heroName())
-            .map(quest -&gt; {
+            .map(quest -> {
                 eventBus.publish("quest.assigned", new JsonObject()
                         .put("questId", quest.id())
                         .put("heroName", request.heroName())
@@ -231,17 +250,22 @@ That warning tells you everything about Vert.x. It provides building blocks for 
                         quest.status()
                 );
             });
-}</pre>
+}
+```
+
 
 Clean, composable, genuinely async. The problem is what you write before you get there. The quest app's main verticle runs to nearly 90 lines to get the server started --- config loading, connection pool creation, router setup, health checks, validation, error handling, all explicit, all yours:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@Override
-public Future&lt;?&gt; start() {
+```
+@Override
+public Future<?> start() {
     return loadConfig()
             .map(AppConfig::from)
-            .compose(config -&gt; runFlyway(config)
-                    .compose(ignored -&gt; startHttpServer(config)));
-}</pre>
+            .compose(config -> runFlyway(config)
+                    .compose(ignored -> startHttpServer(config)));
+}
+```
+
 
 That chain of `.compose()` calls bootstraps the entire application. Each step is a separate method you write yourself. Writing the application took 530 lines (the most of any framework in these tests) because every piece of that setup was manual. The container image is 147MB and startup is 0.73 seconds, the leanest numbers here. The problem didn't need that much boilerplate to solve.
 

@@ -43,12 +43,14 @@ A dedicated launcher file, such as `Launcher.java`, serves as the entry point fo
 
 For instance, if your main JavaFX application class is named `MainApplication`, create another Java file named Launcher.java and include the following code:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public class Launcher {
+```
+public class Launcher {
     public static void main(String[] args) {
         MainApplication.main(args);
     }
 }
-</pre>
+```
+
 
 ### Prerequisites {#h3-2-prerequisites}
 
@@ -56,7 +58,8 @@ The process that is used here, is based on Gradle. Include the following code sn
 
 A FatJAR is essential because it bundles an entire Java application with all its dependencies into a single file. This eliminates the hassle of managing external libraries separately, ensuring easy deployment and portability across various systems. It simplifies distribution, maintains version consistency, and allows the application to run independently without relying on external dependencies, making it an efficient and self-contained package for seamless execution.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">task customFatJar(type: Jar) {
+```
+task customFatJar(type: Jar) {
     manifest {
         attributes 'Main-Class': 'YOUR.PACKAGE.Launcher'
     }
@@ -65,7 +68,8 @@ A FatJAR is essential because it bundles an entire Java application with all its
     from { configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) } }
     with jar
 }
-</pre>
+```
+
 
 * `task customFatJar(type: Jar)`: Defines a new task named customFatJar of type Jar, indicating that this task will generate a JAR file.
 * `manifest {...}`: Sets the Main-Class attribute in the JAR's manifest file to point to the Launcher class, which serves as the entry point of your application.
@@ -84,8 +88,9 @@ To validate the functionality of your JAR file, execute it using the command: `j
 
 To confirm whether `jpackage` is installed on your system, run the command `jpackage --help` on CMD or Terminal. If installed, this command will display the help information for the `jpackage` utility, confirming its presence and functionality.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ jpackage --help
-Usage: jpackage &lt;options&gt;
+```
+$ jpackage --help
+Usage: jpackage <options>
 
 Sample usages:
 --------------
@@ -97,7 +102,9 @@ Sample usages:
                 --main-class className --main-jar myJar.jar
         From a pre-built application image:
             jpackage -n name --app-image appImageDir
-...</pre>
+...
+```
+
 
 Creating a native executable application requires performing the build on the target platform. For each platform, the required additional steps and the `jpackage` command are explained.
 
@@ -109,12 +116,17 @@ By using GitHub Actions, we can remove the need to have different platforms avai
 
 Installing the [WiX Toolset](https://wixtoolset.org/), version 3.0 or later for Windows is necessary. After completing the prerequisites, execute the following command:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">jpackage --input &lt;direcory of jar file&gt; --name &lt;name&gt; --main-jar &lt;main jar file &gt; --main-class &lt;main class&gt; --type &lt;type&gt; --win-dir-chooser</pre>
+```
+jpackage --input <direcory of jar file> --name <name> --main-jar <main jar file > --main-class <main class> --type <type> --win-dir-chooser
+```
+
 
 Example:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">jpackage --input build/ --name PackageDemo --main-jar &lt;mPackageDemoJAR.jar &gt; --main-class &lt;com.heshanthenura.packagedemo.Launcher&gt; --type msi --win-dir-chooser
-</pre>
+```
+jpackage --input build/ --name PackageDemo --main-jar <mPackageDemoJAR.jar > --main-class <com.heshanthenura.packagedemo.Launcher> --type msi --win-dir-chooser
+```
+
 
 ### Linux {#h3-6-linux}
 
@@ -124,13 +136,19 @@ For Red Hat Linux, it's necessary to install `rpm-build package`. Run the follow
 
 After completing the prerequisites, execute the following command:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">jpackage --input &lt;direcory of jar file&gt; --name &lt;name&gt; --main-jar &lt;main jar file&gt; --main-class &lt;main class&gt; --type &lt;type&gt;</pre>
+```
+jpackage --input <direcory of jar file> --name <name> --main-jar <main jar file> --main-class <main class> --type <type>
+```
+
 
 ### MacOS {#h3-7-macos}
 
 For macOS, no additional installations are needed and you can immediately execute the following example command:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">jpackage --input build/libs/ --name PackageDemo --main-jar PackageDemoJAR-1.0-SNAPSHOT.jar --main-class com.heshanthenura.packagedemo.Launcher --type dmg --dest build/macos/ --app-version 1.0 --vendor "Heshan Thenura"</pre>
+```
+jpackage --input build/libs/ --name PackageDemo --main-jar PackageDemoJAR-1.0-SNAPSHOT.jar --main-class com.heshanthenura.packagedemo.Launcher --type dmg --dest build/macos/ --app-version 1.0 --vendor "Heshan Thenura"
+```
+
 
 Conclusion {#h2-8-conclusion}
 -----------------------------

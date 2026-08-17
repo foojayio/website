@@ -85,9 +85,12 @@ Groovy and Kotlin are both JVM languages, meaning they can run seamlessly inside
 
 For example, the following Groovy build script creates [a Groovy `Closure`](https://groovy-lang.org/closures.html) instance and passes the `Closure` instance to [`Project.repositories(Closure)` method](https://github.com/gradle/gradle/blob/6121fa83ce4ac07a27ee043d8e69b0f5f99d1c49/subprojects/core-api/src/main/java/org/gradle/api/Project.java#L1533) on the `Project` instance created in the previous initialization phase.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">repositories {
+```
+repositories {
     mavenCentral()
-}</pre>
+}
+```
+
 
 Don't worry if you don't fully understand build script execution at this stage. We'll explain the details of build script execution in the next blog of this series.
 
@@ -101,11 +104,14 @@ For example, the following build script snippet registers a `hello` task into Gr
 
 This process is usually called "configuration," i.e., configuring the data structure; that's why this phase is called the "configuration phase."
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">tasks.register("hello") {
+```
+tasks.register("hello") {
     doLast {
         println("Hello world!")
     }
-}</pre>
+}
+```
+
 
 After the build script execution finishes, the build data structures are configured with the necessary data for the build.
 
@@ -123,14 +129,17 @@ Each `Task` has a list of actions made up of chunks of code to be executed.
 
 For example, if you wonder what the [`Test` task](https://github.com/gradle/gradle/blob/a45bfed1cd64efe32d8ca4f4414250247d5b3738/subprojects/testing-jvm/src/main/java/org/gradle/api/tasks/testing/Test.java) does, just search `@TaskAction` in the source code, you'll find:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">class Test {
+```
+class Test {
     ...
 
     @TaskAction
     public void executeTests() {
         ...
     }
-}</pre>
+}
+```
+
 
 When we say "a task is executed," we mean "the code in its actions is executed in the daemon JVM."
 

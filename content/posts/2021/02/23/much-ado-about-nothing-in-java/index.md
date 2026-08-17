@@ -24,7 +24,10 @@ This was recently the case for `null`.
 
 Before I started using Java, the main programming language I used was C. This was great for things like operating systems and device drivers because it uses ***explicit*** pointers. References to data are through a numerical address that can be manipulated if required. This was probably (for me at least) the hardest thing to master, especially when you try to figure out things like this:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="c" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">char *(*foo)(char *);</pre>
+```c
+char *(*foo)(char *);
+```
+
 
 Eventually, you learn the order of precedence for pointers and understand that, in this case, `foo` is a pointer to a function that takes a pointer to a `char` as a parameter and returns a pointer to a `char`.
 
@@ -32,7 +35,10 @@ Explicit pointers provide an exact reference to an address in memory (albeit oft
 
 Using simple arithmetic on an explicit pointer is often useful for accessing data by calculating its position as an offset to the pointer. The drawback is that you need to be sure your calculations are correct. It's all too easy to make a mistake and end up with a pointer that attempts to use an invalid address when dereferenced. To avoid this problem, Java takes a different approach to references and uses ***implicit*** pointers. When you instantiate an object, e.g.:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">Properties p = new Properties();</pre>
+```java
+Properties p = new Properties();
+```
+
 
 The value of `p` will be a reference to an instantiated instance of the `Properties` class. We have no way, however, of determining the actual address of this object. Trying to manipulate a reference as if it was an address is not valid Java syntax and will fail to compile. (There is no way to get the address of a variable as we can do in C with the \& operator.)
 
@@ -42,9 +48,12 @@ We may well have a situation where the scope we want for our variable prevents u
 
 We can do this by setting the value to be `null`, either implicitly or explicitly:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">String t;             // Implicit, instance variable
+```java
+String t;             // Implicit, instance variable
 
-String s = null;      // Explicit, local variable</pre>
+String s = null;      // Explicit, local variable
+```
+
 
 At this point, I'm sure you're thinking, "Hmmm. This is all Java 101... so, what's the big deal?"
 
@@ -52,13 +61,19 @@ To which, the related question is, "What is the type of `null`?"
 
 In the examples above, this is easy to answer: it's `String`. Great, but is it really? Let's look at an example from JDK 10, when local variable type inference was introduced:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">var x = “Hello, World!”;</pre>
+```java
+var x = “Hello, World!”;
+```
+
 
 By replacing an explicit type with `var`, we are now leaving it to the compiler to ***infer*** the correct type of `x`. Here, it's straightforward, as we've assigned a `String` literal, so the type can only be `String`.
 
 What about this, though:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">var y = null;</pre>
+```java
+var y = null;
+```
+
 
 This code will not compile, resulting in the messages "`error: cannot infer type for local variable y`" and "`variable initializer is 'null'`". You could be forgiven for thinking (as I did initially) that the compiler could infer a type here. In Java, we know that all classes ultimately inherit from `Object`.
 
@@ -93,7 +108,8 @@ This is why `var` won't work with a `null` assignment: because no specific type 
 
 Another place where the `null` type may not behave the way you expect is with the *instanceof* operator. Let's look at this piece of code:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">Date d = null;
+```java
+Date d = null;
 
 if (d instanceof Date)
   System.out.println("We have a Date!");
@@ -103,17 +119,23 @@ else
 if (d instanceof Object)
   System.out.println("We have an Object!");
 else
-  System.out.println("No Object here...");</pre>
+  System.out.println("No Object here...");
+```
+
 
 The variable `d` is explicitly defined as a `Date`, so surely `d` is an instance of `Date`, correct? When you run this code, it will print the following:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">No Date here…
+```
+No Date here…
 
-No Object here…</pre>
+No Object here…
+```
+
 
 The variable `d` therefore holds neither a `Date` *nor* an `Object`. To get to the bottom of this, we need to look at the bytecodes generated by the compiler. Using `javap -c` we can do that and see:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">Code:
+```
+Code:
        0: aconst_null
        1: astore_1
        2: aload_1
@@ -137,13 +159,17 @@ The variable `d` therefore holds neither a `Date` *nor* an `Object`. To get to t
       49: ldc           #27   // String No Object here...
       51: invokevirtual #17   // Method java/io/PrintStream.println
       54: return
-</pre>
+```
+
 
 The key here is the first instruction, `aconst_null`, where we assign `null` to our variable, `d`. The description of this operation in the Java Virtual Machine Specification is "*Push the null object reference onto the operand stack.* " It also says, "*The Java Virtual Machine does not mandate a concrete value for null.* " Since the `null` object reference is neither a `Date` nor `Object` type, the tests fail.
 
 The JLS tells us that null can be cast to any reference type, so we could try casting our null to a `Date` type:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">Date d = (Date)null;</pre>
+```java
+Date d = (Date)null;
+```
+
 
 Doing this makes no difference to either the results of running the application or the bytecodes generated by the compiler.
 

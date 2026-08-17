@@ -29,31 +29,40 @@ JEP 470: PEM Encodings of Cryptographic Objects (Preview) {#h2-0-jep-470-pem-enc
 
 New preview feature that provides support for the [Privacy-Enhanced Mail](https://en.wikipedia.org/wiki/Privacy-Enhanced_Mail "Privacy-Enhanced") (PEM) format to Java. This format is widely used to communicate, for example, keys or certificates, as it is an easy-to-use text format. It is also a [PKCS#8](https://www.rfc-editor.org/rfc/rfc5208 "PKCS#8") standard. This format is now supported for private keys, public keys, certificates and certificate revocation lists. A PEM text is a Base64-encoded representation of a cryptographic object. For example, for an elliptic curve public key :
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">-----BEGIN PUBLIC KEY-----
+```
+-----BEGIN PUBLIC KEY-----
 MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEi/kRGOL7wCPTN4KJ2ppeSt5UYB6u
 cPjjuKDtFTXbguOIFDdZ65O/8HTUqS/sVzRF+dg7H3/tkQ/36KdtuADbwQ==
------END PUBLIC KEY----- </pre>
+-----END PUBLIC KEY-----
+```
+
 
 To encode a cryptographic object in PEM format, we'll use the new `PEMEncoder` class:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">PEMencoder pe = PEMEncoder.of();
+```
+PEMencoder pe = PEMEncoder.of();
 
 // plaintext
 byte[] pem = pe.encode(publicKey);
 
 // password encrypted
-byte[] pemWithPassword = pe.withEncryption(password).encode(privateKey);</pre>
+byte[] pemWithPassword = pe.withEncryption(password).encode(privateKey);
+```
+
 
 You can supply a password to encode the PEM text using the `withEncryption()` method; you can also encode it directly as a String using the `encodeToString()` method. To decode a PEM text into a cryptographic object, we\\'ll use the new `PEMDecoder` class:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">PEMDecoder pd = PEMDecoder.of();
+```
+PEMDecoder pd = PEMDecoder.of();
 
 // plaintext
 Certificate cert = pd.decode(pem, X509Certificate.class);
 
 // password encrypted
 Certificate certWithPassord = pd.withDecryption(password)
-    .decode(pem, X509Certificate.class);</pre>
+    .decode(pem, X509Certificate.class);
+```
+
 
 More information in the [JEP 470](https://openjdk.org/jeps/5470 "JEP").
 
@@ -68,34 +77,43 @@ It\\'s quite common to delay the initialization of a class attribute when it\\'s
 
 With Stable Values, we now have an API for that!
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">private final StableValue&lt;Logger&gt; logger = StableValue.of();
+```
+private final StableValue<Logger> logger = StableValue.of();
 
 Logger getLogger() {
-    return logger.orElseSet(() -&gt; Logger.create(MyClass.class));
+    return logger.orElseSet(() -> Logger.create(MyClass.class));
 }
 
 void saySomething() {
     getLogger().info(I have nothing to say);
-}</pre>
+}
+```
+
 
 There are several ways to create stable values, instead of using `orElseSet()` you can use a supplier, for example:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">private final Supplier&lt;Logger&gt; logger = StableValue
-    .supplier(() -&gt; Logger.create(MyClass.class));
+```
+private final Supplier<Logger> logger = StableValue
+    .supplier(() -> Logger.create(MyClass.class));
 
 void saySomething() {
     logger().get().info(I have nothing to say);
-}</pre>
+}
+```
+
 
 The JVM will guarantee that the stable value `logger` will be initialized once and only once, the first time it is used, and will enable the JIT to optimize its use (constant folding). It\\'s also possible to build a list of stable values, with each element initialized only once on its first access. Very useful for creating object pools.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">static final List&lt;Connection&gt; connections = StableValue
-    .list(POOL_SIZE, _ -&gt; new Connection());
+```
+static final List<Connection> connections = StableValue
+    .list(POOL_SIZE, _ -> new Connection());
 
 void doSomething() {
     long index = Thread.currentThread().threadId() % POOL_SIZE;
     Connection con = connections.get((int) index);
-}</pre>
+}
+```
+
 
 More information in the [JEP 502](https://openjdk.org/jeps/502 "JEP").
 
@@ -119,7 +137,10 @@ Linux systems support precise measurement of CPU cycle consumption by sending si
 
 With JEP 509, JFR can now use the mechanism offered by Linux to issue a new monitoring event: `jdk.CPUTimeSample`, this new event is not active by default. The following command line will activate the event when the application is launched:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">java -XX:StartFlightRecording=jdk.CPUTimeSample#enabled=true,filename=profile.jfr ...</pre>
+```
+java -XX:StartFlightRecording=jdk.CPUTimeSample#enabled=true,filename=profile.jfr ...
+```
+
 
 To find out more, read these interesting articles by Johannes Bechberger[Java 25's new CPU-Time Profiler (1)](https://mostlynerdless.de/blog/2025/06/11/java-25s-new-cpu-time-profiler-1/) and [Java 25's new CPU-Time Profiler: The Implementation (2)](https://mostlynerdless.de/blog/2025/07/30/java-25s-new-cpu-time-profiler-the-implementation-2/).
 
@@ -138,7 +159,10 @@ This was to be done in three steps:
 
 With the JEP 514, this process has been simplified and can now be done in just two steps, with the first two steps being done in a single step via the command line:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">java -XX:AOTCacheOutput=app.aot -cp app.jar com.example.App ...</pre>
+```
+java -XX:AOTCacheOutput=app.aot -cp app.jar com.example.App ...
+```
+
 
 The list of classes will be saved while the application is running, then the AOT cache will be created when the application is stopped.
 
@@ -177,11 +201,17 @@ To measure execution time and trace method invocations, tools such as JMH [(Java
 
 Two new events, `jdk.MethodTiming` and `jdk.MethodTrace`, have been added to JFR; they can be configured via a filter to specify which methods are to be monitored. For example, the following command will enable tracing of the `java.util.HashMap::resize` method:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">java -XX:StartFlightRecording:jdk.MethodTrace#filter=java.util.HashMap::resize,filename=recording.jfr ...</pre>
+```
+java -XX:StartFlightRecording:jdk.MethodTrace#filter=java.util.HashMap::resize,filename=recording.jfr ...
+```
+
 
 The following command line will activate the timing of all static initialization blocks:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">java '-XX:StartFlightRecording:method-timing=::&lt;clinit&gt;,filename=clinit.jfr' ...</pre>
+```
+java '-XX:StartFlightRecording:method-timing=::<clinit>,filename=clinit.jfr' ...
+```
+
 
 More information in the [JEP 520](https://openjdk.org/jeps/520 "JEP").
 

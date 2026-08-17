@@ -146,7 +146,7 @@ Just as I finish this post, my friend Stefano Fago has posted on another relevan
 * [Apache SkyWalking](https://skywalking.apache.org/)
 * [Apache Doris](https://doris.apache.org/)
 
-*** ** * ** ***
+
 
 *Originally published at [A Java Geek](https://blog.frankel.ch/five-apache-projects/) on December 17^th^, 2023*
 

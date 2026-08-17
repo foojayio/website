@@ -31,9 +31,12 @@ Well, `Optional` is a well known class of Java, it's used for objects that can h
 
 Here are some examples
 
-<pre class="EnlighterJSRAW EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">Optional&lt;String&gt; job = Optional.empty();
-Optional&lt;Integer&gt; age = Optional.empty();
-Integer age = null; // null when unknown</pre>
+```java
+Optional<String> job = Optional.empty();
+Optional<Integer> age = Optional.empty();
+Integer age = null; // null when unknown
+```
+
 
 Now if you see a colleague adding an `Optional<Integer>` or an `Integer` object, you can now make the remark that there is an [**`OptionalInt`**](https://docs.oracle.com/javase/8/docs/api/java/util/OptionalInt.html) class in Java.  
 
@@ -68,7 +71,8 @@ What is less known is that `LinkedHashMap` has a constructor where you can speci
 
 Here is an example
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public class LRUCache&lt;K, V&gt; extends LinkedHashMap&lt;K, V&gt; {
+```java
+public class LRUCache<K, V> extends LinkedHashMap<K, V> {
     private final capacity;
 
     public LRUCache(int capacity) {
@@ -77,10 +81,12 @@ Here is an example
     }
 
     @Override
-    protected boolean removeEldestEntry(Map.Entry&lt;K, V&gt; eldest) {
-        return size() &gt; capacity;
+    protected boolean removeEldestEntry(Map.Entry<K, V> eldest) {
+        return size() > capacity;
     }
-}</pre>
+}
+```
+
 
 If you are using this cache from multiple threads, don't forget to make it a synchronized map using `Collections.synchronizedMap(new LRUCache(20));`
 

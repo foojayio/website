@@ -36,7 +36,8 @@ I developed code related to the Java debugging protocol in the second quarter of
 
 You can read [my short primer on Java debugging internals](https://foojay.io/today/a-short-primer-on-java-debugging-internals/) to get a glimpse of this work. During the development, I encountered a problem: How can I profile my code, especially unit tests? I had many unit tests like the following, which tested specific aspects of my code:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@Test
+```java
+@Test
 public void testEvaluateSwitchStatement() {
     var program = Program.parse("((= x 1) (switch (const x)" +
         "(case 1 (= v (collect 2))) (case 2 (= v (collect 1)))" +
@@ -44,7 +45,9 @@ public void testEvaluateSwitchStatement() {
     var funcs = new RecordingFunctions();
     new Evaluator(vm, funcs).evaluate(program);
     assertEquals(List.of(wrap(2L)), funcs.values);
-}</pre>
+}
+```
+
 
 I wanted to use an open-source profiler, as I had no access to the paid version of [IntelliJ](https://www.jetbrains.com/idea/), which includes profiling support. Multiple tools are available, but it essentially boils down to [async-profiler](https://krzysztofslusarski.github.io/2022/12/12/async-manual.html) and [JMC](https://github.com/openjdk/jmc). Both tools have their advantages and disadvantages regarding their UI, but it essentially boils down to ease of use vs. available features:
 ![](https://mostlynerdless.de/wp-content/uploads/2023/01/FOSDEM-FirefoxProfiler-1-2000x888.png)

@@ -66,7 +66,8 @@ Code {#h2-1-code}
 
 I simply used the Vert.X web "hello world" example:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">    private void changePwmValue(RoutingContext routingContext) {
+```java
+    private void changePwmValue(RoutingContext routingContext) {
         String range = routingContext.pathParam("id");
 
         System.out.println(range); //just to see calls
@@ -83,7 +84,9 @@ I simply used the Vert.X web "hello world" example:
                 .putHeader("content-type", "application/json")
                 .setStatusCode(200)
                 .end(Json.encodePrettily(range));
-    }</pre>
+    }
+```
+
 
 Disclaimer -- I got the CSS from [here](https://codepen.io/jean-emmanuel/pen/GpxYdg).
 
@@ -91,6 +94,6 @@ You can get the full code on my [GitHub](https://github.com/igfasouza/Vert.x-Pot
 
 {{< youtube Lyd8RQ2WS-I >}}
 
-*** ** * ** ***
+
 
 Originally posted on [Igor Souza](http://www.igfasouza.com/blog/raspberry-pi-vert-x-web-potentiometer/ "Igor Zouza")'s blog.

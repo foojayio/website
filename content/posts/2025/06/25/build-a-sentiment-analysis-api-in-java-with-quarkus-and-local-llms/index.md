@@ -62,11 +62,14 @@ No need to manually install Ollama. Quarkus will take care of that for you durin
 
 Open a terminal and scaffold a new project with the necessary extensions:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash">mvn io.quarkus.platform:quarkus-maven-plugin:3.22.1:create 
+```bash
+mvn io.quarkus.platform:quarkus-maven-plugin:3.22.1:create 
  -DprojectGroupId=org.acme 
  -DprojectArtifactId=sentiment-analysis 
  -Dextensions="rest-jackson,langchain4j-ollama" 
-cd quarkus-local-sentiment</pre>
+cd quarkus-local-sentiment
+```
+
 
 You now have a Quarkus project with:
 
@@ -77,11 +80,14 @@ You now have a Quarkus project with:
 
 Open `src/main/resources/application.properties` and configure the local model:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash"># Use Phi-3 Mini, a small and capable LLM from Ollama Hub 
+```bash
+# Use Phi-3 Mini, a small and capable LLM from Ollama Hub 
 quarkus.langchain4j.ollama.chat-model.model-id=phi3:mini 
 
 # Increase timeout for initial model loading 
-quarkus.langchain4j.ollama.timeout=120s</pre>
+quarkus.langchain4j.ollama.timeout=120s
+```
+
 
 That's all. Quarkus Dev Services will handle pulling the Docker image, downloading the model, and wiring up the service when you run in dev mode.
 
@@ -89,8 +95,11 @@ That's all. Quarkus Dev Services will handle pulling the Docker image, downloadi
 
 Create `src/main/java/org/acme/Sentiment.java`:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">package org.acme; 
-public enum Sentiment { POSITIVE, NEGATIVE, NEUTRAL }</pre>
+```java
+package org.acme; 
+public enum Sentiment { POSITIVE, NEGATIVE, NEUTRAL }
+```
+
 
 Just a simple enum class with the sentiments.
 
@@ -100,7 +109,8 @@ Quarkus Langchain4j allows you to define an interface and annotate it with `@AiS
 
 Create `src/main/java/org/acme/SentimentAnalyzer.java`:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">package org.acme; 
+```java
+package org.acme; 
 import dev.langchain4j.service.SystemMessage; 
 import dev.langchain4j.service.UserMessage; 
 import io.quarkiverse.langchain4j.RegisterAiService; 
@@ -123,7 +133,9 @@ public interface SentimentAnalyzer {
 "The report contains data from the last quarter.", "NEUTRAL", 
 "The sky is currently overcast.", "NEUTRAL" }) 
 @UserMessage("Analyze sentiment of {{text}}") Sentiment classifySentiment(String text); 
-@UserMessage("Does {{text}} have a positive sentiment?") boolean isPositive(String text); }</pre>
+@UserMessage("Does {{text}} have a positive sentiment?") boolean isPositive(String text); }
+```
+
 
 This is where the magic happens. With a few lines, you've created an AI-powered sentiment classifier.
 
@@ -131,7 +143,8 @@ This is where the magic happens. With a few lines, you've created an AI-powered 
 
 Create `src/main/java/org/acme/SentimentResource.java`:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">package org.acme;
+```java
+package org.acme;
 
 import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
@@ -170,7 +183,9 @@ public class SentimentResource {
             return "Error during analysis. See server logs.";
         }
     }
-}</pre>
+}
+```
+
 
 This class provides a simple GET endpoint for testing in the browser or via `curl`.
 
@@ -178,7 +193,10 @@ This class provides a simple GET endpoint for testing in the browser or via `cur
 
 Ensure Podman is running, then launch the app in dev mode:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">./mvnw quarkus:dev</pre>
+```
+./mvnw quarkus:dev
+```
+
 
 On first startup, Quarkus will:
 
@@ -192,18 +210,27 @@ Be patient, it might take a few minutes.
 
 Try some sample requests:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">curl "http://localhost:8080/sentiment?text=Quarkus+Dev+Services+are+so+convenient!"</pre>
+```
+curl "http://localhost:8080/sentiment?text=Quarkus+Dev+Services+are+so+convenient!"
+```
+
 
 Sample output:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">Analyzed Text: 'Quarkus Dev Services are so convenient!' 
+```
+Analyzed Text: 'Quarkus Dev Services are so convenient!' 
 Predicted Sentiment: POSITIVE 
-(Model: Ollama/phi3:mini)</pre>
+(Model: Ollama/phi3:mini)
+```
+
 
 Try negative or neutral examples too:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">curl "http://localhost:8080/sentiment?text=This+local+model+is+slow+sometimes." 
-curl "http://localhost:8080/sentiment?text=The+Ollama+container+started+successfully."</pre>
+```
+curl "http://localhost:8080/sentiment?text=This+local+model+is+slow+sometimes." 
+curl "http://localhost:8080/sentiment?text=The+Ollama+container+started+successfully."
+```
+
 
 > **Note:** While local models like Phi-3 Mini are fast and private, they're also smaller and less instruction-tuned than cloud-hosted LLMs, so sentiment predictions might occasionally be off, especially for nuanced or ambiguous text. Fine-tuning examples and careful prompting help, but results may vary.
 

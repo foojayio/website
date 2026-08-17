@@ -69,7 +69,8 @@ We can create a new class called 'LoggingAspect' and annotate it with `@Aspect` 
 
 Here's an example of a `LoggingAspect`:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">@Aspect
+```
+@Aspect
 @Component
 public class LoggingAspect {
   private static final Logger logger = LoggerFactory.getLogger(LoggingAspect.class);
@@ -87,7 +88,9 @@ public class LoggingAspect {
     logger.debug("Method [{}] executed in {} ms", joinPoint.getSignature(), elapsedTime);
     return result;
   }
-}</pre>
+}
+```
+
 
 Pointcut methods are empty because their sole purpose is to define a pointcut expression, which determines the join points (i.e., specific points in the execution of a program) where the aspect should be applied. The method body itself does not contain any logic, as the behavior of the aspect is defined in the advice methods (e.g., `@Before`, `@After`, `@Around`, etc.).
 
@@ -104,7 +107,8 @@ Adding logs to the entire application is impractical in most cases and we'd only
 
 The following code shows such a logger that can print out every entry/exit and the arguments or return values:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">@Aspect
+```
+@Aspect
 @Component
 public class LoggingAspect {
     private static final Logger logger = LoggerFactory.getLogger(LoggingAspect.class);
@@ -128,14 +132,17 @@ public class LoggingAspect {
         // Return the result
         return result;
     }
-}</pre>
+}
+```
+
 
 The Tip of the Iceberg {#h2-3-the-tip-of-the-iceberg}
 -----------------------------------------------------
 
 Logging to keep track of performance or method entry/exit is powerful but basic. We can go much deeper than that. We can create an aspect to log incoming HTTP requests and responses. This aspect intercepts the methods with the `@RequestMapping` annotation, which is typically used for handling HTTP requests in Spring Boot applications:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">@Aspect
+```
+@Aspect
 @Component
 public class RequestResponseLoggingAspect {
     private static final Logger logger = LoggerFactory.getLogger(RequestResponseLoggingAspect.class);
@@ -149,16 +156,19 @@ public class RequestResponseLoggingAspect {
         logger.debug("Request: {} {} - Parameters: {}", request.getMethod(), request.getRequestURI(), request.getParameterMap());
         Object result = joinPoint.proceed();
         if (result instanceof ResponseEntity) {
-            ResponseEntity&lt;?&gt; responseEntity = (ResponseEntity&lt;?&gt;) result;
+            ResponseEntity<?> responseEntity = (ResponseEntity<?>) result;
             logger.debug("Response: Status {} - Body: {}", responseEntity.getStatusCode(), responseEntity.getBody());
         }
         return result;
     }
-}</pre>
+}
+```
+
 
 Another important aspect is bean creation and destruction. We can create an aspect to log these events. This aspect intercepts the methods annotated with `@PostConstruct` and `@PreDestroy` which doesn't apply to all beans but would help us keep track of the applicable code in a large application:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">@Aspect
+```
+@Aspect
 @Component
 public class BeanLifecycleLoggingAspect {
     private static final Logger logger = LoggerFactory.getLogger(BeanLifecycleLoggingAspect.class);
@@ -178,11 +188,14 @@ public class BeanLifecycleLoggingAspect {
     public void logBeanDestruction(JoinPoint joinPoint) {
         logger.debug("Bean Destroyed: {}", joinPoint.getTarget().getClass().getSimpleName());
     }
-}</pre>
+}
+```
+
 
 We can even log dependency injection events. This aspect intercepts the methods with the `@Autowired` annotation. It doesn't track constructor injection though but we can use it to track the instance type that gets injected into a bean:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">@Aspect
+```
+@Aspect
 @Component
 public class DependencyInjectionLoggingAspect {
     private static final Logger logger = LoggerFactory.getLogger(DependencyInjectionLoggingAspect.class);
@@ -193,7 +206,9 @@ public class DependencyInjectionLoggingAspect {
     public void logDependencyInjection(JoinPoint joinPoint) {
         logger.debug("Autowired: {} - Target: {}", joinPoint.getSignature(), joinPoint.getTarget().getClass().getSimpleName());
     }
-}</pre>
+}
+```
+
 
 Final Word {#h2-4-final-word}
 -----------------------------

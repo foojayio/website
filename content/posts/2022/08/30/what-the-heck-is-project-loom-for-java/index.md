@@ -64,23 +64,32 @@ The new virtual threads in Java 19 will be pretty easy to use. Compare the below
 
 **Virtual thread**
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">Thread.startVirtualThread(() -&gt; {
+```
+Thread.startVirtualThread(() -> {
     System.out.println("Hello, Project Loom!");
-});</pre>
+});
+```
+
 
 **Goroutine**
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">go func() {
+```
+go func() {
     println("Hello, Goroutines!")
-}()</pre>
+}()
+```
+
 
 **Kotlin coroutine**
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">runBlocking {
+```
+runBlocking {
     launch {
         println("Hello, Kotlin coroutines!")
     }
-}</pre>
+}
+```
+
 
 Fun fact: before JDK 1.1, Java had support for green threads (aka virtual threads), but the feature was removed in JDK 1.1 as that implementation was not any better than platform threads.
 
@@ -103,27 +112,33 @@ First, let's see how many platform threads vs. virtual threads we can create on 
 
 **Platform threads**
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">var counter = new AtomicInteger();
+```
+var counter = new AtomicInteger();
 while (true) {
-    new Thread(() -&gt; {
+    new Thread(() -> {
         int count = counter.incrementAndGet();
         System.out.println("Thread count = " + count);
         LockSupport.park();
     }).start();
-}</pre>
+}
+```
+
 
 On my machine, the code crashed after **32_539** platform threads.
 
 **Virtual threads**
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">var counter = new AtomicInteger();
+```
+var counter = new AtomicInteger();
 while (true) {
-    Thread.startVirtualThread(() -&gt; {
+    Thread.startVirtualThread(() -> {
         int count = counter.incrementAndGet();
         System.out.println("Thread count = " + count);
         LockSupport.park();
     });
-}</pre>
+}
+```
+
 
 On my machine, the process hung after **14_625_956** virtual threads but didn't crash, and as memory became available, it kept going slowly. You may be wondering why this behavior! It's due to the parked virtual threads being garbage collected, and the JVM is able to create more virtual threads and assign them to the underlying platform thread.
 
@@ -131,41 +146,53 @@ On my machine, the process hung after **14_625_956** virtual threads but didn't 
 
 Let's try to run 100,000 tasks using platform threads.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">try (var executor = Executors.newThreadPerTaskExecutor(Executors.defaultThreadFactory())) {
-    IntStream.range(0, 100_000).forEach(i -&gt; executor.submit(() -&gt; {
+```
+try (var executor = Executors.newThreadPerTaskExecutor(Executors.defaultThreadFactory())) {
+    IntStream.range(0, 100_000).forEach(i -> executor.submit(() -> {
         Thread.sleep(Duration.ofSeconds(1));
         System.out.println(i);
         return i;
     }));
-}</pre>
+}
+```
+
 
 This uses the `newThreadPerTaskExecutor` with the default thread factory and thus uses a thread group. When I ran this code and timed it, I got the numbers shown here. I get better performance when I use a thread pool with `Executors.newCachedThreadPool()`.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic"># 'newThreadPerTaskExecutor' with 'defaultThreadFactory'
+```
+# 'newThreadPerTaskExecutor' with 'defaultThreadFactory'
 0:18.77 real,   18.15 s user,   7.19 s sys,     135% 3891pu,    0 amem,         743584 mmem
 # 'newCachedThreadPool' with 'defaultThreadFactory'
-0:11.52 real,   13.21 s user,   4.91 s sys,     157% 6019pu,    0 amem,         2215972 mmem</pre>
+0:11.52 real,   13.21 s user,   4.91 s sys,     157% 6019pu,    0 amem,         2215972 mmem
+```
+
 
 Not so bad. Now, let's do the same using virtual threads.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">try (var executor = Executors.newVirtualThreadPerTaskExecutor()) {
-    IntStream.range(0, 100_000).forEach(i -&gt; executor.submit(() -&gt; {
+```
+try (var executor = Executors.newVirtualThreadPerTaskExecutor()) {
+    IntStream.range(0, 100_000).forEach(i -> executor.submit(() -> {
         Thread.sleep(Duration.ofSeconds(1));
         System.out.println(i);
         return i;
     }));
-}</pre>
+}
+```
+
 
 If I run and time it, I get the following numbers.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">0:02.62 real,   6.83 s user,    1.46 s sys,     316% 14840pu,   0 amem,         350268 mmem
-</pre>
+```
+0:02.62 real,   6.83 s user,    1.46 s sys,     316% 14840pu,   0 amem,         350268 mmem
+```
+
 
 This is far more performant than using platform threads with thread pools. Of course, these are simple use cases; both thread pools and virtual thread implementations can be further optimized for better performance, but that's not the point of this post.
 
 Running Java Microbenchmark Harness (JMH) with the same code gives the following results, and you can see that virtual threads outperform platform threads by a huge margin.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic"># Throughput
+```
+# Throughput
 Benchmark                             Mode  Cnt  Score   Error  Units
 LoomBenchmark.platformThreadPerTask  thrpt    5  0.362 ± 0.079  ops/s
 LoomBenchmark.platformThreadPool     thrpt    5  0.528 ± 0.067  ops/s
@@ -175,7 +202,9 @@ LoomBenchmark.virtualThreadPerTask   thrpt    5  1.843 ± 0.093  ops/s
 Benchmark                             Mode  Cnt  Score   Error  Units
 LoomBenchmark.platformThreadPerTask   avgt    5  5.600 ± 0.768   s/op
 LoomBenchmark.platformThreadPool      avgt    5  3.887 ± 0.717   s/op
-LoomBenchmark.virtualThreadPerTask    avgt    5  1.098 ± 0.020   s/op</pre>
+LoomBenchmark.virtualThreadPerTask    avgt    5  1.098 ± 0.020   s/op
+```
+
 
 You can find the benchmark [source code on GitHub](https://github.com/deepu105/java-loom-benchmarks). Here are some other meaningful benchmarks for virtual threads:
 
@@ -191,17 +220,20 @@ You can find the benchmark [source code on GitHub](https://github.com/deepu105/j
 
 Consider the following example using `java.util.concurrent.ExecutorService`.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">void handleOrder() throws ExecutionException, InterruptedException {
+```java
+void handleOrder() throws ExecutionException, InterruptedException {
     try (var esvc = new ScheduledThreadPoolExecutor(8)) {
-        Future&lt;Integer&gt; inventory = esvc.submit(() -&gt; updateInventory());
-        Future&lt;Integer&gt; order = esvc.submit(() -&gt; updateOrder());
+        Future<Integer> inventory = esvc.submit(() -> updateInventory());
+        Future<Integer> order = esvc.submit(() -> updateOrder());
 
         int theInventory = inventory.get();   // Join updateInventory
         int theOrder = order.get();           // Join updateOrder
 
         System.out.println("Inventory " + theInventory + " updated for order " + theOrder);
     }
-}</pre>
+}
+```
+
 
 We want `updateInventory()` and `updateOrder()` subtasks to be executed concurrently. Each of those can succeed or fail independently. Ideally, the `handleOrder()` method should fail if any subtask fails. However, if a failure occurs in one subtask, things get messy.
 
@@ -213,10 +245,11 @@ For these situations, we would have to carefully write workarounds and failsafe,
 
 We can achieve the same functionality with structured concurrency using the code below.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">void handleOrder() throws ExecutionException, InterruptedException {
+```java
+void handleOrder() throws ExecutionException, InterruptedException {
     try (var scope = new StructuredTaskScope.ShutdownOnFailure()) {
-        Future&lt;Integer&gt; inventory = scope.fork(() -&gt; updateInventory());
-        Future&lt;Integer&gt; order = scope.fork(() -&gt; updateOrder());
+        Future<Integer> inventory = scope.fork(() -> updateInventory());
+        Future<Integer> order = scope.fork(() -> updateOrder());
 
         scope.join();           // Join both forks
         scope.throwIfFailed();  // ... and propagate errors
@@ -224,7 +257,9 @@ We can achieve the same functionality with structured concurrency using the code
         // Here, both forks have succeeded, so compose their results
         System.out.println("Inventory " + inventory.resultNow() + " updated for order " + order.resultNow());
     }
-}</pre>
+}
+```
+
 
 Unlike the previous sample using `ExecutorService`, we can now use `StructuredTaskScope` to achieve the same result while confining the lifetimes of the subtasks to the lexical scope, in this case, the body of the *try-with-resources* statement. The code is much more readable, and the intent is also clear. `StructuredTaskScope` also ensures the following behavior automatically.
 

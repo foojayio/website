@@ -53,7 +53,10 @@ There are two ways to implement the Fixed Rate Limiter with Redis. The simplest 
 
 ### 1. Use the INCR command to increment the counter in Redis each time a request is allowed {#h3-6-1-use-the-incr-command-to-increment-the-counter-in-redis-each-time-a-request-is-allowed}
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">INCR my_counter</pre>
+```
+INCR my_counter
+```
+
 
 If there's no counter set yet, the INCR command will create one as zero and then increment it to one. If the counter is already set, the INCR commany will simply increment it by one.
 
@@ -61,13 +64,19 @@ If there's no counter set yet, the INCR command will create one as zero and then
 
 If the counter doesn't exist, we need to set a time-to-live to ensure the time window lasts only for the specified period. **But we should only set an expiration if it doesn't already exist** . Otherwise, Redis would reset the expiration, and older requests could be counted beyond the allowed time. We'll use the EXPIRE command with the NX flag on the key. **The NX flag ensures the expiration is only set if the key doesn't already have one.** This approach is smart because the counter will only track requests during the key's lifespan. **Once the key expires and is removed, the counter resets, ensuring we only account for requests within the intended time window.**
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">EXPIRE my_counter 60 NX</pre>
+```
+EXPIRE my_counter 60 NX
+```
+
 
 ### 3. Check the counter for each new request {#h3-8-3-check-the-counter-for-each-new-request}
 
 When a new request comes in, check the counter to see how many requests have been made. If it's below the threshold, allow the process and increment the counter. If not, block the process from proceeding. If the key doesn't exist, assume the counter starts at 0.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">GET my_counter</pre>
+```
+GET my_counter
+```
+
 
 Cool! Now that we understand the basics of our implementation, let's implement it in Java with Jedis.
 
@@ -80,9 +89,12 @@ Implementing it with Jedis {#h2-9-implementing-it-with-jedis}
 
 Check the latest version [here](https://redis.io/docs/latest/develop/clients/jedis/).
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">redis.clients
+```
+redis.clients
 jedis
-5.2.0</pre>
+5.2.0
+```
+
 
 ### Create a FixedWindowRateLimiter class: {#h3-11-create-a-fixedwindowratelimiter-class}
 
@@ -92,7 +104,8 @@ The class will take:
 2. A time window size (e.g., 60 seconds).
 3. The maximum number of allowed requests. 
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">package io.redis;
+```
+package io.redis;
 
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.Transaction;
@@ -109,33 +122,43 @@ public class FixedWindowRateLimiter {
         this.limit = limit;
         this.windowSize = windowSize;
     }
-}</pre>
+}
+```
+
 
 ### Validate the Requests {#h3-12-validate-the-requests}
 
 The main job of this rate limiter is to check if a client is within their allowed request limit. If yes, the request is allowed, and the counter is updated. If not, the request is blocked. **Step 1: Generate a key** We'll store each client's request count as a Redis key. To make keys unique for each client, we'll format them like this:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">public boolean isAllowed(String clientId) {
+```
+public boolean isAllowed(String clientId) {
     String key = "rate_limit:" + clientId;
-}</pre>
+}
+```
+
 
 For example, if the client ID is user123, their key would be rate_limit:user123. **Step 2: Fetch the Current Counter** We'll use Redis's GET command to check how many requests the client has made so far. If the key doesn't exist, we assume the client hasn't made any requests, so the counter is 0.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">public boolean isAllowed(String clientId) {
+```
+public boolean isAllowed(String clientId) {
     String key = "rate_limit:" + clientId;
     String currentCountStr = jedis.get(key);
     int currentCount = currentCountStr != null ? Integer.parseInt(currentCountStr) : 0;
-}</pre>
+}
+```
+
 
 **Step 3: Check the Request Limit** Next, we compare the current count to the allowed limit. If the counter is less than the limit, the request is allowed. Otherwise, it's blocked.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">public boolean isAllowed(String clientId) {
+```
+public boolean isAllowed(String clientId) {
     String key = "rate_limit:" + clientId;
     String currentCountStr = jedis.get(key);
     int currentCount = currentCountStr != null ? Integer.parseInt(currentCountStr) : 0;
 
     boolean isAllowed = currentCount   The first request marks the start of the time window. Any subsequent requests during this window’s lifespan will increment the counter.
-</pre>
+```
+
 
 > Once the window expires, the key is automatically removed from Redis. The next request after that will define the start of a new window. If we didn't set the NX flag, the expiration would be reset everytime the counter is incremented, increasing the lifespan of the window.
 
@@ -143,7 +166,8 @@ For example, if the client ID is user123, their key would be rate_limit:user123.
 
 Here's the full code for the FixedWindowRateLimiter class:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">package io.redis;
+```
+package io.redis;
 
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.Transaction;
@@ -166,7 +190,7 @@ public class FixedWindowRateLimiter {
         String currentCountStr = jedis.get(key);
         int currentCount = currentCountStr != null ? Integer.parseInt(currentCountStr) : 0;
 
-        boolean isAllowed = currentCount &lt; limit;
+        boolean isAllowed = currentCount < limit;
 
         if (isAllowed) {
             Transaction transaction = jedis.multi();
@@ -177,7 +201,9 @@ public class FixedWindowRateLimiter {
 
         return isAllowed;
     }
-}</pre>
+}
+```
+
 
 And we're ready to start testing it's behavior!
 
@@ -196,7 +222,8 @@ Let's begin by adding the necessary dependencies to our pom.xml.
 
 Here's what you'll need in your Maven pom.xml file:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">org.junit.jupiter
+```
+org.junit.jupiter
 junit-jupiter-engine
 5.10.0
 test
@@ -209,7 +236,9 @@ test
 org.assertj
 assertj-core
 3.11.1
-test<code></code></pre>
+test<code></code>
+```
+
 
 Once you've added these dependencies, you're ready to start writing your test class.
 
@@ -223,7 +252,8 @@ The first step is to create a test class named FixedWindowRateLimiterTest. Insid
 
 Here's how the skeleton of our test class looks:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">public class FixedWindowRateLimiterTest {
+```
+public class FixedWindowRateLimiterTest {
 
     private static final RedisContainer redisContainer = new RedisContainer("redis:latest")
             .withExposedPorts(6379);
@@ -235,7 +265,9 @@ Here's how the skeleton of our test class looks:
     static {
         redisContainer.start();
     }
-}</pre>
+}
+```
+
 
 ### **Preparing the Environment Before Each Test** {#h3-17-preparing-the-environment-before-each-test}
 
@@ -246,11 +278,14 @@ Before running any test, we need to ensure a clean Redis environment. Here's wha
 
 We'll set this up in a method annotated with @BeforeEach, which runs before every test case.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">@BeforeEach
+```
+@BeforeEach
 public void setup() {
     jedis = new Jedis(redisContainer.getHost(), redisContainer.getFirstMappedPort());
     jedis.flushAll();
-}</pre>
+}
+```
+
 
 > FLUSHALL is an actual Redis command that deletes all the keys of all the existing databases. [Read more about it in the official documentation](https://redis.io/docs/latest/commands/flushall/).
 
@@ -258,16 +293,20 @@ public void setup() {
 
 After each test, we need to close the Jedis connection to free up resources. This ensures no lingering connections interfere with subsequent tests.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">@AfterEach
+```
+@AfterEach
 public void tearDown() {
     jedis.close();
-}</pre>
+}
+```
+
 
 ### **Full Setup** {#h3-19-full-setup}
 
 Here's how the complete test class looks with everything in place:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">public class FixedWindowRateLimiterTest {
+```
+public class FixedWindowRateLimiterTest {
     private static final RedisContainer redisContainer = new RedisContainer("redis:latest")
             .withExposedPorts(6379);
 
@@ -288,30 +327,36 @@ Here's how the complete test class looks with everything in place:
     public void tearDown() {
         jedis.close();
     }
-}</pre>
+}
+```
+
 
 ### **Verifying Requests Within the Limit** {#h3-20-verifying-requests-within-the-limit}
 
 This test ensures the rate limiter allows requests within the defined limit. We configure it with a **limit of** **5 requests** and a **10-second window** , then call isAllowed("client-1") **5 times** . Each call should return true, confirming the rate limiter correctly tracks and permits requests under the limit.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">@Test
+```
+@Test
 public void shouldAllowRequestsWithinLimit() {
     rateLimiter = new FixedWindowRateLimiter(jedis, 10, 5);
-    for (int i = 1; i &lt;= 5; i++) {
+    for (int i = 1; i <= 5; i++) {
         assertThat(rateLimiter.isAllowed("client-1"))
                 .withFailMessage("Request " + i + " should be allowed")
                 .isTrue();
     }
-}</pre>
+}
+```
+
 
 ### Verifying **Requests Beyond the Limit** {#h3-21-verifying-requests-beyond-the-limit}
 
 This test ensures the rate limiter correctly denies requests once the defined limit is exceeded. Configured with a **limit of** **5 requests** in a **60-second window** , we call isAllowed("client-1") **5 times** and expect all to return true. On the 6th call, it should return false, verifying the rate limiter blocks requests beyond the allowed limit.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">@Test
+```
+@Test
 public void shouldDenyRequestsOnceLimitIsExceeded() {
     rateLimiter = new FixedWindowRateLimiter(jedis, 60, 5);
-    for (int i = 1; i &lt;= 5; i++) {
+    for (int i = 1; i <= 5; i++) {
         assertThat(rateLimiter.isAllowed("client-1"))
                 .withFailMessage("Request " + i + " should be allowed")
                 .isTrue();
@@ -320,20 +365,23 @@ public void shouldDenyRequestsOnceLimitIsExceeded() {
     assertThat(rateLimiter.isAllowed("client-1"))
             .withFailMessage("Request beyond limit should be denied")
             .isFalse();
-}</pre>
+}
+```
+
 
 ### **Verifying Requests After Window Reset** {#h3-22-verifying-requests-after-window-reset}
 
 This test ensures the rate limiter resets correctly after the fixed window expires. Configured with a **limit of 5 requests** and a **1-second window** , the first 5 requests (isAllowed("client-1")) return true, while the 6th request is denied (false). After waiting for the window to expire, the next request is allowed (true), confirming the reset behavior works as expected.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">@Test
+```
+@Test
 public void shouldAllowRequestsAgainAfterFixedWindowResets() throws InterruptedException {
     int limit = 5;
     String clientId = "client-1";
     int windowSize = 1;
     rateLimiter = new FixedWindowRateLimiter(jedis, windowSize, limit);
 
-    for (int i = 1; i &lt;= limit; i++) {
+    for (int i = 1; i <= limit; i++) {
         assertThat(rateLimiter.isAllowed(clientId))
                 .withFailMessage("Request " + i + " should be allowed")
                 .isTrue();
@@ -348,13 +396,16 @@ public void shouldAllowRequestsAgainAfterFixedWindowResets() throws InterruptedE
     assertThat(rateLimiter.isAllowed(clientId))
             .withFailMessage("Request after window reset should be allowed")
             .isTrue();
-}</pre>
+}
+```
+
 
 ### **Verifying Independent Handling of Multiple Clients** {#h3-23-verifying-independent-handling-of-multiple-clients}
 
 This test ensures the rate limiter handles multiple clients independently. Configured with a **limit of 5 requests** and a **10-second window** , the first 5 requests from **client-1** are allowed (true), while the 6th is denied (false). Simultaneously, all 5 requests from **client-2** are allowed (true), confirming the rate limiter maintains separate counters for each client.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">@Test
+```
+@Test
 public void shouldHandleMultipleClientsIndependently() {
     int limit = 5;
     String clientId1 = "client-1";
@@ -362,7 +413,7 @@ public void shouldHandleMultipleClientsIndependently() {
     int windowSize = 10;
     rateLimiter = new FixedWindowRateLimiter(jedis, windowSize, limit);
 
-    for (int i = 1; i &lt;= limit; i++) {
+    for (int i = 1; i <= limit; i++) {
         assertThat(rateLimiter.isAllowed(clientId1))
                 .withFailMessage("Client 1 request " + i + " should be allowed")
                 .isTrue();
@@ -372,25 +423,28 @@ public void shouldHandleMultipleClientsIndependently() {
             .withFailMessage("Client 1 request beyond limit should be denied")
             .isFalse();
 
-    for (int i = 1; i &lt;= limit; i++) {
+    for (int i = 1; i <= limit; i++) {
         assertThat(rateLimiter.isAllowed(clientId2))
                 .withFailMessage("Client 2 request " + i + " should be allowed")
                 .isTrue();
     }
-}</pre>
+}
+```
+
 
 ### **Verifying Requests Are Denied Until Fixed Window Resets** {#h3-24-verifying-requests-are-denied-until-fixed-window-resets}
 
 This test ensures the rate limiter denies additional requests until the fixed window expires. Configured with a **limit of 3 requests** and a **5-second window** , the first 3 requests (isAllowed("client-1")) are allowed (true), while the 4th is denied (false). After waiting for half the window duration (2.5 seconds), requests are still denied (false). Once the window fully resets (after another 2.5 seconds), the next request is allowed (true), confirming proper behavior during and after the fixed window.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">@Test
+```
+@Test
 public void shouldDenyAdditionalRequestsUntilFixedWindowResets() throws InterruptedException {
     int limit = 3;
     int windowSize = 5;
     String clientId = "client-1";
     rateLimiter = new FixedWindowRateLimiter(jedis, windowSize, limit);
 
-    for (int i = 1; i &lt;= limit; i++) {
+    for (int i = 1; i <= limit; i++) {
         assertThat(rateLimiter.isAllowed(clientId))
                 .withFailMessage("Request " + i + " should be allowed within limit")
                 .isTrue();
@@ -411,20 +465,23 @@ public void shouldDenyAdditionalRequestsUntilFixedWindowResets() throws Interrup
     assertThat(rateLimiter.isAllowed(clientId))
             .withFailMessage("Request should be allowed after fixed window reset")
             .isTrue();
-}</pre>
+}
+```
+
 
 ### **Verifying Denied Requests Are Not Counted** {#h3-25-verifying-denied-requests-are-not-counted}
 
 This test ensures that requests denied by the rate limiter are not included in the request count. Configured with a limit of 3 requests and a 5-second window, the first 3 requests (isAllowed("client-1")) are allowed (true), while the 4th is denied (false). Afterward, the Redis key for the client is checked to confirm the stored count equals the limit (3), ensuring denied requests do not increase the counter.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">@Test
+```
+@Test
 public void testRateLimitDeniedRequestsAreNotCounted() {
     int limit = 3;
     int windowSize = 5;
     String clientId = "client-1";
     rateLimiter = new FixedWindowRateLimiter(jedis, windowSize, limit);
 
-    for (int i = 1; i &lt;= limit; i++) {
+    for (int i = 1; i <= limit; i++) {
         assertThat(rateLimiter.isAllowed(clientId))
                 .withFailMessage("Request " + i + " should be allowed")
                 .isTrue();
@@ -439,7 +496,9 @@ public void testRateLimitDeniedRequestsAreNotCounted() {
     assertThat(requestCount)
             .withFailMessage("The count (" + requestCount + ") should be equal to the limit (" + limit + "), not counting the denied request")
             .isEqualTo(limit);
-}</pre>
+}
+```
+
 
 Is there any other behavior we should verify? Let me know in the comments! The Fixed Window Rate Limiter is a simple yet effective way to manage request rates, and **Redis** makes it incredibly fast and reliable. By using commands like INCR and EXPIRE, we created a solution that tracks and limits requests while automatically resetting counters when the time window expires. With **Jedis** , we built an easy-to-understand Java implementation, and thanks to thorough testing with Redis TestContainers, JUnit 5, and AssertJ, we can trust it works as expected. This approach is a great starting point for handling request limits and can easily be adapted for more complex scenarios if needed.
 

@@ -46,7 +46,8 @@ It leverages both classical threads, using a fixed thread pool, and virtual thre
 
 The objective is to examine how each threading model impacts the performance of the web crawler.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">package ca.bazlur;
+```java
+package ca.bazlur;
 
 import java.io.IOException;
 import java.net.HttpURLConnection;
@@ -67,12 +68,12 @@ public class Crawler implements Runnable {
     public static final Condition QUEUE_NOT_EMPTY = QUEUE_LOCK.newCondition();
     private static final int MAX_PAGES_TO_SEARCH = 100;
     private final AtomicInteger count;
-    private final ConcurrentMap&lt;String, Boolean&gt; visited;
+    private final ConcurrentMap<String, Boolean> visited;
     private final String url;
-    private final Queue&lt;String&gt; pageQueue;
+    private final Queue<String> pageQueue;
 
-    public Crawler(AtomicInteger count, ConcurrentMap&lt;String, Boolean&gt; visited, String url,
-                   Queue&lt;String&gt; pageQueue) {
+    public Crawler(AtomicInteger count, ConcurrentMap<String, Boolean> visited, String url,
+                   Queue<String> pageQueue) {
         this.count = count;
         this.visited = visited;
         this.url = url;
@@ -81,14 +82,14 @@ public class Crawler implements Runnable {
 
     @Override
     public void run() {
-        while (!visited.containsKey(url) &amp;&amp; count.get() &lt; MAX_PAGES_TO_SEARCH) {
+        while (!visited.containsKey(url) && count.get() < MAX_PAGES_TO_SEARCH) {
             try {
                 var connection = (HttpURLConnection) new URL(url).openConnection();
                 connection.setRequestMethod("HEAD");
                 connection.connect();
                 String contentType = connection.getContentType();
 
-                if (contentType != null &amp;&amp; (contentType.startsWith("text/") || contentType.contains("xml"))) {
+                if (contentType != null && (contentType.startsWith("text/") || contentType.contains("xml"))) {
                     Document document = Jsoup.connect(url).get();
                     Elements linksOnPage = document.select("a[href]");
                     visited.put(url, true);
@@ -96,7 +97,7 @@ public class Crawler implements Runnable {
 
                     for (Element link : linksOnPage) {
                         String nextUrl = link.attr("abs:href");
-                        if (nextUrl.startsWith("http") &amp;&amp; !visited.containsKey(nextUrl)) {
+                        if (nextUrl.startsWith("http") && !visited.containsKey(nextUrl)) {
                             pageQueue.add(nextUrl);
                         }
                     }
@@ -128,8 +129,8 @@ public class Crawler implements Runnable {
     //Throughput: 26.77079425706783 pages/sec
 
     public static void main(String[] args) {
-        final ConcurrentMap&lt;String, Boolean&gt; visited = new ConcurrentHashMap&lt;&gt;();
-        final Queue&lt;String&gt; pageQueue = new LinkedBlockingDeque&lt;&gt;();
+        final ConcurrentMap<String, Boolean> visited = new ConcurrentHashMap<>();
+        final Queue<String> pageQueue = new LinkedBlockingDeque<>();
         pageQueue.add("https://foojay.io/");
 
         long startTime = System.currentTimeMillis();
@@ -137,13 +138,13 @@ public class Crawler implements Runnable {
 
  //       try (var executor = Executors.newVirtualThreadPerTaskExecutor()) {
        try (var executor = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors())) {
-            while (pageCount.get() &lt; MAX_PAGES_TO_SEARCH) {
+            while (pageCount.get() < MAX_PAGES_TO_SEARCH) {
                 QUEUE_LOCK.lock();
                 while (pageQueue.isEmpty()) {
                     QUEUE_NOT_EMPTY.await();
                 }
                 String poll = pageQueue.poll();
-                if (poll != null &amp;&amp; !visited.containsKey(poll)) {
+                if (poll != null && !visited.containsKey(poll)) {
                     executor.submit(new Crawler(pageCount, visited, poll, pageQueue));
                 }
                 QUEUE_LOCK.unlock();
@@ -165,7 +166,9 @@ public class Crawler implements Runnable {
         double pagesPerSecond = (double) visited.size() / (totalTime / 1000.0);
         System.out.println("Throughput: " + pagesPerSecond + " pages/sec");
     }
-}</pre>
+}
+```
+
 
 ### Key Components {#h3-2-key-components}
 
@@ -203,13 +206,16 @@ If you prefer to manage dependencies using a build tool, both Maven and Gradle o
 
 * **Add Dependency** : In your `pom.xml`, include the following dependency for JSoup version 1.16.1:` `
 
-<pre class="EnlighterJSRAW" data-enlighter-language="xml" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&lt;dependencies&gt;
-     &lt;dependency&gt;
-         &lt;groupId&gt;org.jsoup&lt;/groupId&gt;
-         &lt;artifactId&gt;jsoup&lt;/artifactId&gt;
-         &lt;version&gt;1.16.1&lt;/version&gt;
-     &lt;/dependency&gt;
- &lt;/dependencies&gt;</pre>
+```xml
+<dependencies>
+     <dependency>
+         <groupId>org.jsoup</groupId>
+         <artifactId>jsoup</artifactId>
+         <version>1.16.1</version>
+     </dependency>
+ </dependencies>
+```
+
 
 * **Compile and Run** : Navigate to your project directory and execute:` mvn compile exec:java -Dexec.mainClass="``Crawler``"` .
 

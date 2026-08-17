@@ -107,21 +107,25 @@ As we want to interact with the GPIOs with Pi4J, we need some extra dependencies
 
 Because we already have a Spring application pre-generated, we can easily extend it with a service to manage all the Pi4J-related methods. Let's start with the initialization of the Pi4J Context that is responsible for all GPIO interactions.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">private final Context pi4j;
+```java
+private final Context pi4j;
 
 private static final int PIN_BUTTON = 24; // PIN 18 = BCM 24
 private static final int PIN_LED = 22; // PIN 15 = BCM 22
 
-private final Queue&lt;ButtonListener&gt; buttonListeners;
+private final Queue<ButtonListener> buttonListeners;
 private DigitalOutput led;
 
 public Pi4JService() {
     pi4j = Pi4J.newAutoContext();
-    buttonListeners = new ConcurrentLinkedQueue&lt;&gt;();</pre>
+    buttonListeners = new ConcurrentLinkedQueue<>();
+```
+
 
 Once we have the context, we can use it to configure and initialize a DigitalOutput for the LED, and DigitalInput for the button. In our example application, we only have one component that changes based on the button state, but by using a ButtonListener-interface and a list of implementations, we can link an unlimited number of components with the state of the button.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">private void initLed() {
+```java
+private void initLed() {
     try {
         var ledConfig = DigitalOutput.newConfigBuilder(pi4j)
                 .id("led")
@@ -156,9 +160,9 @@ private void initButton() {
                 .debounce(3000L)
                 .provider("pigpio-digital-input");
         var button = pi4j.create(buttonConfig);
-        button.addListener(e -&gt; {
+        button.addListener(e -> {
             logger.info("Button state changed to {}", e.state());
-            buttonListeners.forEach(bl -&gt; bl.onButtonEvent(e.state()));
+            buttonListeners.forEach(bl -> bl.onButtonEvent(e.state()));
         });
         logger.info("The button has been initialized on pin {}", PIN_BUTTON);
     } catch (Exception ex) {
@@ -173,11 +177,14 @@ private void initButton() {
 */
 public void addButtonListener(ButtonListener buttonListener) {
     buttonListeners.add(buttonListener);
-}</pre>
+}
+```
+
 
 Additionally, there are some helper methods to show the state of the Pi4J library. This is only one of them, please check the sources for the full implementations:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">/**
+```java
+/**
 * Providers are intended to represent I/O implementations and provide access to the I/O interfaces available on
 * the system. Providers 'provide' concrete runtime implementations of I/O interfaces.
 */
@@ -186,15 +193,18 @@ public String getProviders() {
         return "None";
     }
     return pi4j.providers().all().entrySet().stream()
-            .map(e -&gt; e.getKey() + ": " + e.getValue())
+            .map(e -> e.getKey() + ": " + e.getValue())
             .collect(Collectors.joining(","));
-}</pre>
+}
+```
+
 
 ### UI to toggle the LED {#h3-6-ui-to-toggle-the-led}
 
 Now let's change the first page to control the LED. The code is actually very limited as we are using a `Checkbox` and add a value-listener to tell our Pi4JService to change the state of the LED.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public class ButtonView extends HorizontalLayout implements ButtonListener {
+```java
+public class ButtonView extends HorizontalLayout implements ButtonListener {
 
     Logger logger = LoggerFactory.getLogger(ButtonView.class);
 
@@ -216,9 +226,11 @@ Now let's change the first page to control the LED. The code is actually very li
     public void onButtonEvent(DigitalState state) {
         var isPressed = state.equals(DigitalState.HIGH);
         logger.info("Button event in listener: {} - Is on: {}", state, isPressed);
-        ui.accessSynchronously(() -&gt; lbl.setText(isPressed ? "Button is pressed" : "Button is released"));
+        ui.accessSynchronously(() -> lbl.setText(isPressed ? "Button is pressed" : "Button is released"));
     }
-}</pre>
+}
+```
+
 
 ![](https://dz2cdn1.dzone.com/storage/temp/15731191-ui-led.png)
 
@@ -226,7 +238,8 @@ Now let's change the first page to control the LED. The code is actually very li
 
 This UI has a bit more code. It extends the `ButtonListener` so needs to override the `onButtonEvent`, but the other parts of the code are very self-explaining. One extra thing to notice here: we need to use `ui.accessSynchronously` to change the component which is part of the view as the Pi4JService and user interface are running in separate threads.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public class ButtonView extends HorizontalLayout implements ButtonListener {
+```java
+public class ButtonView extends HorizontalLayout implements ButtonListener {
 
     Logger logger = LoggerFactory.getLogger(ButtonView.class);
 
@@ -248,25 +261,31 @@ This UI has a bit more code. It extends the `ButtonListener` so needs to overrid
     public void onButtonEvent(DigitalState state) {
         var isPressed = state.equals(DigitalState.HIGH);
         logger.info("Button event in listener: {} - Is on: {}", state, isPressed);
-        ui.accessSynchronously(() -&gt; lbl.setText(isPressed ? "Button is pressed" : "Button is released"));
+        ui.accessSynchronously(() -> lbl.setText(isPressed ? "Button is pressed" : "Button is released"));
     }
-}</pre>
+}
+```
+
 
 ![](https://dz2cdn1.dzone.com/storage/temp/15731192-ui-button.png)
 
 An additional change is needed in the main class. Because we want to send changes from the `backend` to the `user interface` we need to add the [@Push attribute](https://vaadin.com/docs/latest/flow/advanced/server-push). This tiny change, allows you to update the UI from the server, without the user explicitly requesting updates. This is based on a client-server connection (WebSocket if supported, or alternative) which the client establishes and the server can then use to send updates to the client.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@SpringBootApplication
+```java
+@SpringBootApplication
 @Theme(value = "pi4jdemo")
 @NpmPackage(value = "line-awesome", version = "1.3.0")
 @Push
-public class Application extends SpringBootServletInitializer implements AppShellConfigurator {</pre>
+public class Application extends SpringBootServletInitializer implements AppShellConfigurator {
+```
+
 
 ### UI with Pi4J Information {#h3-8-ui-with-pi4j-information}
 
 To be able to debug how Pi4J interacts with the GPIOs, some additional info is added to the "About" screen to show the loaded platforms and providers. The Registry contains a list of all the initialized inputs and outputs, so we expect to see the LED and button here.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public class AboutView extends VerticalLayout {
+```java
+public class AboutView extends VerticalLayout {
     public AboutView(@Autowired Pi4JService pi4JService) {
         setSpacing(false);
         add(
@@ -281,7 +300,9 @@ To be able to debug how Pi4J interacts with the GPIOs, some additional info is a
         setSizeFull();
         getStyle().set("text-align", "left");
     }
-}</pre>
+}
+```
+
 
 ![](https://dz2cdn1.dzone.com/storage/temp/15731197-ui-about.png)
 
@@ -312,7 +333,8 @@ If you installed Java with SDKMAN as a normal user, you will probably get this e
 
 One way to fix this is let the command itself lookup where Java is installed by using ```which java```:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ sudo `which java` -jar /home/pi/pi4jdemo-1.0-SNAPSHOT.jar
+```java
+$ sudo `which java` -jar /home/pi/pi4jdemo-1.0-SNAPSHOT.jar
 
  ____   _  _  _        _   ____                          
 |  _ \ (_)| || |      | | |  _ \   ___  _ __ ___    ___  
@@ -343,7 +365,9 @@ INFO 1807 --- [nio-8080-exec-1] c.vaadin.flow.spring.SpringInstantiator  : The n
 INFO 1807 --- [       Thread-7] b.w.vaadin.pi4j.service.Pi4JService      : Button state changed to LOW
 INFO 1807 --- [       Thread-7] b.w.vaadin.pi4j.views.button.ButtonView  : Button event in listener: LOW - Is on: false
 INFO 1807 --- [       Thread-8] b.w.vaadin.pi4j.service.Pi4JService      : Button state changed to HIGH
-INFO 1807 --- [ &nbsp; &nbsp; &nbsp; Thread-8] b.w.vaadin.pi4j.views.button.ButtonView &nbsp;: Button event in listener: HIGH - Is on: true</pre>
+INFO 1807 --- [       Thread-8] b.w.vaadin.pi4j.views.button.ButtonView  : Button event in listener: HIGH - Is on: true
+```
+
 
 In this video, you can see the logs of the running application on the Raspberry Pi, a browser on a PC in the same network to illustrate the responsive web interface, and a camera view of the breadboard and Raspberry Pi with the LED and button:
 

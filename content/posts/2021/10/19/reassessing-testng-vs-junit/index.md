@@ -34,7 +34,8 @@ Parameterization {#h2-0-parameterization}
 
 I wrote the initial post in 2008, and I think JUnit was available in version 3 at the time. Let's skip directly to version 4: JUnit did indeed offer parameterization. Here's a snippet from their wiki:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">@RunWith(Parameterized.class)                               // 1
+```java
+@RunWith(Parameterized.class)                               // 1
 public class FibonacciTest {
 
     private int fInput;                                     // 2
@@ -46,7 +47,7 @@ public class FibonacciTest {
     }
 
     @Parameters                                             // 4
-    public static Collection&lt;Object[]&gt; data() {             // 5
+    public static Collection<Object[]> data() {             // 5
         return Arrays.asList(new Object[][] {
             { 0, 0 }, { 1, 1 }, { 2, 1 }, { 3, 2 }, { 4, 3 }, { 5, 5 }, { 6, 8 }
         });
@@ -56,7 +57,9 @@ public class FibonacciTest {
     public void test() {
         assertEquals(fExpected, Fibonacci.compute(fInput));
     }
-}</pre>
+}
+```
+
 
 1. Set the runner
 2. Define an attribute for each test parameter
@@ -66,7 +69,8 @@ public class FibonacciTest {
 
 Here's how you'd achieve the same with TestNG:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public class FibonacciTest {
+```java
+public class FibonacciTest {
 
     @DataProvider                                             // 1
     public Object[][] data() {                                // 2
@@ -79,7 +83,9 @@ Here's how you'd achieve the same with TestNG:
     public void test(String input, String expected) {
         assertEquals(input, expected);
     }
-}</pre>
+}
+```
+
 
 1. Annotate with `@DataProvider`
 2. Must return a `Object[][]`, no need to be `static`
@@ -103,7 +109,8 @@ Grouping {#h2-1-grouping}
 
 Again, the initial post mentions that with JUnit 3, one cannot run only a subset of them. JUnit 4 provides two orthogonal ways to group tests. The first one is test suites:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public class A {
+```java
+public class A {
 
   @Test
   public void a() {}
@@ -119,11 +126,14 @@ public class B {
 }
 
 @SuiteClasses( { A.class, B.class })
-public class ABSuite {}</pre>
+public class ABSuite {}
+```
+
 
 From that point, you can run `ABSuite` to run both `A` and `B`. For more fine-grained purposes, you can also use *categories*.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public interface Fast {}
+```java
+public interface Fast {}
 public interface Slow {}
 
 public class A {
@@ -141,7 +151,9 @@ public class B {
 
   @Test
   public void c() {}
-}</pre>
+}
+```
+
 
 Here's how you can run only desired categories with Maven:
 
@@ -151,7 +163,8 @@ mvn test -Dtest.categories=Fast
 
 TestNG is pretty similar to categories (or the other way around):
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public class A {
+```java
+public class A {
 
   @Test
   public void a() {}
@@ -165,7 +178,9 @@ public class B {
 
   @Test
   public void c() {}
-}</pre>
+}
+```
+
 
 ```bash
 mvn test -Dgroups=fast
@@ -173,7 +188,8 @@ mvn test -Dgroups=fast
 
 JUnit 5 has redesigned its approach with the `@Tag` annotation. Tags are labels that you annotate your class with. Then you can filter the tags you want to run during test execution:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public class A {
+```java
+public class A {
 
   @Test
   public void a() {}
@@ -189,7 +205,9 @@ public class B {
 
   @Test
   public void c() {}
-}</pre>
+}
+```
+
 
 Both frameworks implement similarly running a subset of tests.
 
@@ -213,7 +231,8 @@ For this reason, JUnit was not suited for integration testing. It would not stan
 
 TestNG implements ordering by enforcing dependencies between test methods. It computes a directed acyclic graph of the dependent methods at runtime and runs the methods accordingly. Here's a sample relevant to the e-commerce above:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public class CheckoutIT {
+```java
+public class CheckoutIT {
 
     @Test
     public void browseCatalog() {}
@@ -226,7 +245,9 @@ TestNG implements ordering by enforcing dependencies between test methods. It co
 
     @Test(dependsOnMethods = { "checkout" })
     public void pay() {}
-}</pre>
+}
+```
+
 
 JUnit 5 provides a couple of ways to implement test method ordering:
 
@@ -239,7 +260,8 @@ JUnit 5 provides a couple of ways to implement test method ordering:
 
 One can implement the same e-commerce testing scenario like the following:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">@TestMethodOrder(OrderAnnotation.class)              // 1
+```java
+@TestMethodOrder(OrderAnnotation.class)              // 1
 public class CheckoutIT {
 
     @Test
@@ -257,7 +279,9 @@ public class CheckoutIT {
     @Test
     @Order(4)                                        // 2
     public void pay() {}
-}</pre>
+}
+```
+
 
 1. Define the order based on `@Order`
 2. Set the order for each method

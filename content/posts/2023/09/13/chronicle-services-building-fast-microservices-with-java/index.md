@@ -90,7 +90,8 @@ Detailed functional testing is available through a powerful testing framework, w
 
 [Configuration of Services](https://portal.chronicle.software/docs/services-cookbook/chronicle-services-documentation/RG00-introduction/introduction.html "Configuration of Services") is available through APIs or using a declarative approach based on external files, or even dynamic configuration updates through events. An example of the static configuration file for a simple Services application is shown below:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">!ChronicleServicesCfg {
+```
+!ChronicleServicesCfg {
     queues: {
         sumServiceIn: { path: data/sumServiceIn },
         sumServiceOut: { path: data/sumServiceOut },
@@ -116,7 +117,9 @@ Detailed functional testing is available through a powerful testing framework, w
             implClass: !type software.chronicle.services.ex1.services.SumServiceDownstream,
         }
     }
-}</pre>
+}
+```
+
 
 Each Service is defined in terms of its implementation class and the Chronicle Queues that are used for the transmission of Events. There is enough information here for the Chronicle Services runtime to create and start each service.
 

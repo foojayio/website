@@ -38,17 +38,23 @@ Updating your Apache Tomcat version {#h2-0-updating-your-apache-tomcat-version}
 
 This project uses Docker, so you can update the version of Apache Tomcat from 9 to 10 in your Docker file:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">FROM tomcat:9-jdk17
+```
+FROM tomcat:9-jdk17
 ADD target/MyWebApp.war /usr/local/tomcat/webapps/MyWebApp.war
 EXPOSE 8080
-CMD ["catalina.sh", "run"]</pre>
+CMD ["catalina.sh", "run"]
+```
+
 
 Now your Docker file will look like this:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">FROM tomcat:10-jdk17
+```
+FROM tomcat:10-jdk17
 ADD target/MyWebApp.war /usr/local/tomcat/webapps/MyWebApp.war
 EXPOSE 8080
-CMD ["catalina.sh", "run"]</pre>
+CMD ["catalina.sh", "run"]
+```
+
 
 Before we start the migration from `javax` to `jakarta` let's run the project again from the run icon in the gutter of the`docker-compose.yml` file adjacent to services because we want the image to be rebuilt.
 
@@ -56,8 +62,11 @@ You can check the logs for your container to ensure you're running Tomcat 10.0 i
 
 ![Services Window showing Tomcat version](services-app-container-tc-10.png)
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">2022-03-23T13:40:24.787157700Z 23-Mar-2022 13:40:24.776 INFO 
-[main] org.apache.catalina.startup.VersionLoggerListener.log Server version name: Apache Tomcat/10.0.17</pre>
+```
+2022-03-23T13:40:24.787157700Z 23-Mar-2022 13:40:24.776 INFO 
+[main] org.apache.catalina.startup.VersionLoggerListener.log Server version name: Apache Tomcat/10.0.17
+```
+
 
 Now we're confident that we're using Apache Tomcat 10.0, let's go to the webserver front end and see what happens. In your browser, go to [localhost:8080/MyWebApp](8080/MyWebApp) and try to enter a name and fruit - you will get a 404 error. We're getting this error because Tomcat 9 used Java Servlet 4.0 which uses `javax.*` and Apache Tomcat 10 uses Jakarta Servlet 5.0 which uses `jakarta.*`. Let's fix the problem now!
 
@@ -68,26 +77,32 @@ The first thing we need to do is update our dependencies. This project uses Mave
 
 Look for the following dependencies:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">&lt;dependency&gt;
-   &lt;groupId&gt;javax.servlet&lt;/groupId&gt;
-   &lt;artifactId&gt;javax.servlet-api&lt;/artifactId&gt;
-   &lt;version&gt;4.0.1&lt;/version&gt;
-   &lt;scope&gt;provided&lt;/scope&gt;  
-&lt;/dependency&gt;
-&lt;dependency&gt;
-   &lt;groupId&gt;org.hibernate&lt;/groupId&gt;
-   &lt;artifactId&gt;hibernate-core&lt;/artifactId&gt;
-   &lt;version&gt;5.6.3.Final&lt;/version&gt;
-&lt;/dependency&gt;</pre>
+```
+<dependency>
+   <groupId>javax.servlet</groupId>
+   <artifactId>javax.servlet-api</artifactId>
+   <version>4.0.1</version>
+   <scope>provided</scope>  
+</dependency>
+<dependency>
+   <groupId>org.hibernate</groupId>
+   <artifactId>hibernate-core</artifactId>
+   <version>5.6.3.Final</version>
+</dependency>
+```
+
 
 The first step is to replace the dependency for `javax.servlet` with `jakarta.servlet`:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">&lt;dependency&gt;
-   &lt;groupId&gt;jakarta.servlet&lt;/groupId&gt;
-   &lt;artifactId&gt;jakarta.servlet-api&lt;/artifactId&gt;
-   &lt;version&gt;5.0.0&lt;/version&gt;
-   &lt;scope&gt;provided&lt;/scope&gt;
-&lt;/dependency&gt;</pre>
+```
+<dependency>
+   <groupId>jakarta.servlet</groupId>
+   <artifactId>jakarta.servlet-api</artifactId>
+   <version>5.0.0</version>
+   <scope>provided</scope>
+</dependency>
+```
+
 
 However, the `org.hibernate` dependency has a transitive dependency on `javax.persistence-api` as well which is part of the old Java Persistence API so this needs to be updated as well. You can see this dependency in the Maven window in IntelliJ IDEA if you expand the Dependencies node. Alternatively, in IntelliJ IDEA Ultimate, you can right-click on the dependency name and select Show Dependencies Popup or **⌥⌘U** (macOS), **Ctrl+Alt+U** (Windows/Linux).
 
@@ -97,20 +112,25 @@ Since we want to move from the `javax` to `jakarta` namespace in our application
 
 We need to change the version number here:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">&lt;dependency&gt;
-   &lt;groupId&gt;org.hibernate&lt;/groupId&gt;
-   &lt;artifactId&gt;hibernate-core&lt;/artifactId&gt;
-   &lt;version&gt;5.6.3.Final&lt;/version&gt;
-&lt;/dependency&gt;
-</pre>
+```
+<dependency>
+   <groupId>org.hibernate</groupId>
+   <artifactId>hibernate-core</artifactId>
+   <version>5.6.3.Final</version>
+</dependency>
+```
+
 
 To this beta version:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">&lt;dependency&gt;
-   &lt;groupId&gt;org.hibernate&lt;/groupId&gt;
-   &lt;artifactId&gt;hibernate-core&lt;/artifactId&gt;
-   &lt;version&gt;6.0.0.Beta3&lt;/version&gt;
-&lt;/dependency&gt;</pre>
+```
+<dependency>
+   <groupId>org.hibernate</groupId>
+   <artifactId>hibernate-core</artifactId>
+   <version>6.0.0.Beta3</version>
+</dependency>
+```
+
 
 Next, we need to reload our `pom.xml` file with **⇧⌘I** (macOS), or **Ctrl+Shift+O** (Windows/Linux), or click the little Maven icon to reload your project.
 
@@ -140,35 +160,46 @@ Now if you do a search across your whole project with **⌘⇧F** or **Crl+Shift
 
 We need to update the `persistence.xml` file and change the namespace from:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">&lt;persistence xmlns="http://xmlns.jcp.org/xml/ns/persistence" 
-             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd" version="2.2"&gt;</pre>
+```
+<persistence xmlns="http://xmlns.jcp.org/xml/ns/persistence" 
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd" version="2.2">
+```
+
 
 to:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">&lt;persistence version="3.0" xmlns="https://jakarta.ee/xml/ns/persistence"
+```
+<persistence version="3.0" xmlns="https://jakarta.ee/xml/ns/persistence"
              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-             xsi:schemaLocation="https://jakarta.ee/xml/ns/persistence https://jakarta.ee/xml/ns/persistence/persistence_3_0.xsd"&gt;
-</pre>
+             xsi:schemaLocation="https://jakarta.ee/xml/ns/persistence https://jakarta.ee/xml/ns/persistence/persistence_3_0.xsd">
+```
+
 
 Now you need to change the property names from `javax` to `jakarta`:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">&lt;properties&gt;
-    &lt;property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/&gt;
-    &lt;property name="javax.persistence.jdbc.url" value="jdbc:mysql://app-db/myDB"/&gt;
-    &lt;property name="javax.persistence.jdbc.user" value="root"/&gt;
-    &lt;property name="javax.persistence.jdbc.password" value="password"/&gt;
-    &lt;property name="hibernate.hbm2ddl.auto" value="update"/&gt;
-&lt;/properties&gt;</pre>
+```
+<properties>
+    <property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
+    <property name="javax.persistence.jdbc.url" value="jdbc:mysql://app-db/myDB"/>
+    <property name="javax.persistence.jdbc.user" value="root"/>
+    <property name="javax.persistence.jdbc.password" value="password"/>
+    <property name="hibernate.hbm2ddl.auto" value="update"/>
+</properties>
+```
+
 
 to:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">&lt;properties&gt;
-   &lt;property name="jakarta.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/&gt;
-   &lt;property name="jakarta.persistence.jdbc.url" value="jdbc:mysql://app-db/myDB"/&gt;
-   &lt;property name="jakarta.persistence.jdbc.user" value="root"/&gt;
-   &lt;property name="jakarta.persistence.jdbc.password" value="password"/&gt;
-   &lt;property name="hibernate.hbm2ddl.auto" value="update"/&gt;
-&lt;/properties&gt;</pre>
+```
+<properties>
+   <property name="jakarta.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
+   <property name="jakarta.persistence.jdbc.url" value="jdbc:mysql://app-db/myDB"/>
+   <property name="jakarta.persistence.jdbc.user" value="root"/>
+   <property name="jakarta.persistence.jdbc.password" value="password"/>
+   <property name="hibernate.hbm2ddl.auto" value="update"/>
+</properties>
+```
+
 
 Now let's rebuild our application again with **⌘F9** (macOS), or **Ctrl+F9** (Windows/Linux) and then run it with **Shift** +**F10** \|**⌃R**.
 

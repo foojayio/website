@@ -59,7 +59,8 @@ Here's another one, slightly more inflammatory:
 
 For example, here's some gibberish-y code:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="kotlin">data class Foo(val bar: String)
+```kotlin
+data class Foo(val bar: String)
 
 class Baz : IllegalArgumentException()
 
@@ -67,11 +68,14 @@ data class Qux(val quux: Double, val foo: Foo) {
     operator fun plus(qux: Qux) =
         if (foo != qux.foo) throw Baz()
         else Qux(quux + qux.quux, foo)
-}</pre>
+}
+```
+
 
 Thanks to the usage of APIs, namely `IllegalArgumentException` and `plus()`, you may infer somewhat what the code does. However, correctly renaming classes and fields reveals our intent:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="kotlin">data class Currency(val symbol: String)
+```kotlin
+data class Currency(val symbol: String)
 
 class MismatchCurrencyException : IllegalArgumentException()
 
@@ -80,7 +84,9 @@ data class Amount(val number: Double, val currency: Currency) {
         if (currency != amount.currency) throw MismatchCurrencyException()
         else Amount(number + amount.number, currency)
     }
-}</pre>
+}
+```
+
 
 When I worked on projects, I always cautioned about the following issues when talking with the business:
 

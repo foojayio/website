@@ -47,14 +47,18 @@ To get a sense of the latter part you can check out the [Spring Modulith](https:
 
 The Spring Modulith isn't based on [Java platform modularization (Jigsaw)](https://www.youtube.com/watch?v=RD25xkGgxk8). They enforce the separation during testing and in runtime, this is a regular Spring Boot project. It has some additional runtime capabilities for modular observability but it's mostly an enforcer of "best practices". This value of this separation goes beyond what we're normally used to with microservices but also has some tradeoffs. Let's give an example. A traditional Spring monolith would feature a layered architecture with packages like:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">com.debugagent.myapp
+```
+com.debugagent.myapp
 com.debugagent.myapp.services
 com.debugagent.myapp.db
-com.debugagent.myapp.rest</pre>
+com.debugagent.myapp.rest
+```
+
 
 This is valuable since it can help us avoid dependencies between layers. E.g. the DB layer shouldn't depend on the service layer. We can use modules like that and effectively force the dependency graph in one direction: downwards. But this doesn't make much sense as we grow. Each layer will fill up with business logic classes and database complexities. With a Modulith, we'd have an architecture that looks more like this:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">com.debugagent.myapp.customers
+```
+com.debugagent.myapp.customers
 com.debugagent.myapp.customers.services
 com.debugagent.myapp.customers.db
 com.debugagent.myapp.customers.rest
@@ -67,7 +71,9 @@ com.debugagent.myapp.invoicing.rest
 com.debugagent.myapp.hr
 com.debugagent.myapp.hr.services
 com.debugagent.myapp.hr.db
-com.debugagent.myapp.hr.rest</pre>
+com.debugagent.myapp.hr.rest
+```
+
 
 This looks pretty close to a proper microservice architecture. We separated all the pieces based on the business logic. Here the cross dependencies can be better contained and the teams can focus on their own isolated area without stepping on each other's toes. That's a lot of the value of microservices without the overhead.
 

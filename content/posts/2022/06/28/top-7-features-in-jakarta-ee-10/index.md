@@ -46,7 +46,8 @@ Although it is pretty much the same as [ExecutorService](https://docs.oracle.com
 
 To configure the thread pool, we had a vendor-specific setting. Now it can be defined with just annotations. This is a more standard way of configuring the thread pool.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">package ca.bazlur;
+```java
+package ca.bazlur;
 
 import static jakarta.enterprise.concurrent.ContextServiceDefinition.APPLICATION;
 import static jakarta.enterprise.concurrent.ContextServiceDefinition.SECURITY;
@@ -78,15 +79,16 @@ public class WorkService {
   private ManagedExecutorService executor;
 
   @Asynchronous
-  public CompletableFuture&lt;Long&gt; hoursWorked(LocalDate from, LocalDate to) {
-    return CompletableFuture.supplyAsync(() -&gt; heavyAPICall(from, to), executor);
+  public CompletableFuture<Long> hoursWorked(LocalDate from, LocalDate to) {
+    return CompletableFuture.supplyAsync(() -> heavyAPICall(from, to), executor);
   }
 
   private static long heavyAPICall(LocalDate from, LocalDate to) {
     return Duration.between(from, to).toMillis();
   }
 }
-</pre>
+```
+
 
 <br />
 
@@ -99,7 +101,8 @@ Also, in EJB, we can't specify the thread pool. It used to use the app server's 
 
 comes with [Jakarta EE Concurrency 3.0](https://jakarta.ee/specifications/concurrency/3.0/), which doesn't require using EJB, and we can specify the thread pool. It can be used with any CDI bean. Each asynchronous method execution corresponds to a managed `java.util.concurrent.CompletableFuture` instance that is backed by a `jakarta.enterprise.concurrent.ManagedExecutorService` as its default asynchronous execution facility.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">package ca.bazlur;
+```java
+package ca.bazlur;
 
 import jakarta.enterprise.concurrent.Asynchronous;
 import jakarta.enterprise.context.ApplicationScoped;
@@ -112,7 +115,7 @@ import java.util.concurrent.CompletionException;
 public class PaymentService {
 
   @Asynchronous(executor = "java:app/concurrent/MyExecutorService")
-  public CompletableFuture&lt;Confirmation&gt; processPayment(final Order order) {
+  public CompletableFuture<Confirmation> processPayment(final Order order) {
     try {
       var status = processOrder(order);
 
@@ -135,7 +138,8 @@ record Confirmation() {
 
 record Order() {
 }
-</pre>
+```
+
 
 <br />
 
@@ -159,7 +163,8 @@ That's why, for years, developers needed either Servlets or a vendor-specific RE
 
 With the Jakarta REST 3.1, we no longer have to deal with such an issue, and it adds full support for multipart form data, which is standard.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">package ca.bazlur;
+```java
+package ca.bazlur;
 
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.FormParam;
@@ -188,7 +193,8 @@ public class FileResource {
       MediaType mediaType1, InputStream content1) {
   }
 }
-</pre>
+```
+
 
 5. **@OpenIdAuthenticationDefinition** {#h2-4-5-openidauthenticationdefinition}
 -------------------------------------------------------------------------------
@@ -199,7 +205,8 @@ The OpenID Connect protocol powers this kind of authentication. With [Jakarta Se
 
 Life is much simpler now; specify the required properties, such as Provider URI, clientId, clientSecret, redirect URI, etc.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@OpenIdAuthenticationDefinition(
+```java
+@OpenIdAuthenticationDefinition(
        providerURI = "https://sample-openid-server.com",
        clientId = "87068hgfg5675htfv6mrucov57bknst.apps.sample.com",
        clientSecret = "{my-secret}",
@@ -210,14 +217,17 @@ Life is much simpler now; specify the required properties, such as Provider URI,
        }
 )
 public class SecurityConfig {
-}</pre>
+}
+```
+
 
 6. **UUID Key** {#h2-5-6-uuid-key}
 ----------------------------------
 
 [Jakarta Persistence 3.1](https://jakarta.ee/specifications/persistence/3.1/) brings `java.util.UUID` is to be used as a basic type of field, which is very convenient for entity IDs for the cloud environment since many databases don't automatically generate UUID.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">package ca.bazlur;
+```java
+package ca.bazlur;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -235,7 +245,8 @@ public class User {
   private String username;
   private String password;
 }
-</pre>
+```
+
 
 Besides, it brings several functions to the query language and Criteria API. The new functions fall into three categories:
 

@@ -51,12 +51,14 @@ The compiler has been significantly tightened:
   Runtime Execution  
   Core runtime operations are noticeably faster:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">// All of these are faster in 1.11.0 — no code changes needed
+```java
+// All of these are faster in 1.11.0 — no code changes needed
 result = myClass.doWork()           // Faster class construction via this.get()
 found  = myArray.find( "value" )    // arrayFind optimized, avoids stream overhead
 flag   = isBoolean( "true" )        // Faster boolean string parsing
 someBif( arg1, arg2 )               // Arg/return type casting via keys, not reflection
-</pre>
+```
+
 
 Memory \& Concurrency
 
@@ -73,14 +75,16 @@ Memory \& Concurrency
 
 Two critical bugs in the exclusive lock system have been resolved. Before 1.11.0, exclusive locks could occasionally allow more than one thread into a supposedly exclusive section under high load ([BL-2203](http://https://ortussolutions.atlassian.net/browse/BL-2203 "BL-2203"), [BL-2205](http://https://ortussolutions.atlassian.net/browse/BL-2205 "BL-2205")).
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">// This critical section is now truly exclusive under concurrent load
+```java
+// This critical section is now truly exclusive under concurrent load
 lock name="processPayment_#orderId#" type="exclusive" timeout="30" {
     // Only ONE thread will be here at a time — guaranteed in 1.11.0
     if ( !paymentProcessed( orderId ) ) {
         processPayment( orderId )
     }
 }
-</pre>
+```
+
 
 Lock storage has also been improved ([BL-2201](http://https://ortussolutions.atlassian.net/browse/BL-2201 "BL-2201")) for better performance and memory efficiency. If you rely on exclusive locks for payment processing, inventory management, or any critical section --- this is an important upgrade.
 
@@ -88,31 +92,35 @@ Lock storage has also been improved ([BL-2201](http://https://ortussolutions.atl
 
 A comprehensive sweep of DateTime casting fixes ensures robust date handling across all common formats and edge cases:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">// All of these now work reliably in 1.11.0
+```java
+// All of these now work reliably in 1.11.0
 date1 = createDateTime( "01-31-2026 23:59:  59" )          // BL-2189
 date2 = createDateTime( "9-30-2010" )                     // BL-2222
 date3 = parseDateTime( "2026-01-31 00:00: 00.000" )        // ODBC Timestamp (BL-2143)
 
 // Query of Queries with ODBC Timestamp columns now compiles correctly
 qoq = queryExecute(
-    "SELECT * FROM myQuery WHERE dateCol &gt; :dt",
+    "SELECT * FROM myQuery WHERE dateCol > :dt",
     { dt : now() },
     { dbtype : "query" }
 )  // BL-2144
 
 // DateTimeCaster now handles ODBC Date/Time formats
 cast1 = dateTimeFormat( odbcDate, "yyyy-mm-dd" )          // BL-2188
-</pre>
+```
+
 
 ### 🆕 **`enforceUDFTypeChecks`** Configuration Setting {#h3-4-enforceudftypechecks-configuration-setting}
 
 A new runtime setting allows you to skip UDF argument and return type validation --- useful for trusted high-performance codebases:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">// boxlang.json
+```java
+// boxlang.json
 {
     "enforceUDFTypeChecks": false
 }
-</pre>
+```
+
 
 When false, BoxLang skips argument type validation and return type casting on function calls --- similar to how the Java compiler performs generic type erasure. This can improve performance but removes the safety net of runtime type checks.
 
@@ -120,7 +128,8 @@ When false, BoxLang skips argument type validation and return type casting on fu
 
 `getTickCount()` now supports `nano` and `second` units alongside the existing `millisecond` support:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">// Micro-benchmark with nanosecond precision
+```java
+// Micro-benchmark with nanosecond precision
 start   = getTickCount( "nano" )
 doExpensiveWork()
 elapsed = getTickCount( "nano" ) - start
@@ -131,22 +140,25 @@ start   = getTickCount( "second" )
 sleep( 2000 )
 elapsed = getTickCount( "second" ) - start
 println( "Elapsed: #elapsed# seconds" )  // 2
-</pre>
+```
+
 
 ### 🗑️ New BIF: `ExecutorDelete()` {#h3-6-new-bif-executordelete}
 
 The missing `ExecutorDelete()` BIF has been added, completing the executor lifecycle management API. Previously, shutting down an executor did not remove it from the executor registry (BL-2168), causing issues when recreating executors with the same name.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">// Create an executor
+```java
+// Create an executor
 myExecutor = executorNew( "myPool", "fixed", 10 )
 
 // Submit work
-future = executorSubmit( myExecutor, () =&gt; doWork() )
+future = executorSubmit( myExecutor, () => doWork() )
 future.get()
 
 // Full cleanup — now properly removes it from the registry
 executorDelete( "myPool" )
-</pre>
+```
+
 
 🤖 Core Runtime Updates {#h2-7-core-runtime-updates}
 ----------------------------------------------------
@@ -196,16 +208,20 @@ executorDelete( "myPool" )
 
 The MiniServer now automatically detects and loads a .boxlang.json file from the current working directory, merging it with the base BoxLang configuration (BL-2218):
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java"># Start the server — .boxlang.json is automatically picked up
+```java
+# Start the server — .boxlang.json is automatically picked up
 $ boxlang server start
-</pre>
+```
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">// .boxlang.json — project-level configuration, committed to source control
+
+```java
+// .boxlang.json — project-level configuration, committed to source control
 {
     "enforceUDFTypeChecks": false,
     "defaultDatasource": "mydb"
 }
-</pre>
+```
+
 
 This makes project-level BoxLang configuration portable and self-contained --- ideal for containerized deployments and team environments.
 
@@ -213,7 +229,8 @@ This makes project-level BoxLang configuration portable and self-contained --- i
 
 You can now tune Undertow, socket, and WebSocket low-level options directly from `miniserver.json`:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">{
+```java
+{
     "undertow": {
         "ioThreads": 8,
         "workerThreads": 64,
@@ -228,7 +245,8 @@ You can now tune Undertow, socket, and WebSocket low-level options directly from
         "maxTextMessageSize": 65536
     }
 }
-</pre>
+```
+
 
 ### 📂 Logging Directory Output {#h3-17-logging-directory-output}
 
@@ -264,7 +282,8 @@ All handled before any application overhead kicks in.
 
 The `--bx-printast` CLI flag now supports **file paths and standard input piping** ([BL-2187](http://https://ortussolutions.atlassian.net/browse/BL-2187 "BL-2187")), making it far more useful for debugging parser output and build tooling integration:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java"># Print AST for a specific file
+```java
+# Print AST for a specific file
 boxlang --bx-printast /path/to/MyClass.bx
 
 # Pipe source code directly
@@ -272,13 +291,15 @@ echo 'result = 1 + 2' | boxlang --bx-printast
 
 # Integrate with editors and build pipelines
 cat MyComponent.bx | boxlang --bx-printast | jq '.body[0]'
-</pre>
+```
+
 
 ### 🧩 SOAP Client --- Binary and Map Type Support {#h3-23-soap-client-binary-and-map-type-support}
 
 The SOAP client now supports binary data and map/struct types for both requests and responses. It also allows you to call service methods directly without going through `invoke()`:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">ws = soap( "http://example.com/DataService?wsdl" )
+```java
+ws = soap( "http://example.com/DataService?wsdl" )
 
 // Send binary data
 result = ws.uploadDocument( {
@@ -291,17 +312,20 @@ result = ws.updateRecord( {
     id       : 123,
     metadata : { region : "US", tier : "premium" }  // Map/Struct now supported
 } )
-</pre>
+```
+
 
 ### 🔧 Session Configuration in `boxlang.json` {#h3-24-session-configuration-in-boxlang-json}
 
 Two previously missing session configuration settings are now supported ([BL-1859](http://https://ortussolutions.atlassian.net/browse/BL-1859 "BL-1859")):
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">{
+```java
+{
     "sessionManagement": true,
     "sessionCluster": false
 }
-</pre>
+```
+
 
 ### 📋 Improved CLI Error Messages {#h3-25-improved-cli-error-messages}
 
@@ -348,15 +372,17 @@ CLI error messages now provide clearer context and actionable information when B
 
 BoxLang 1.11.0 is a drop-in upgrade. No code changes are required to benefit from the performance improvements.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java"># CommandBox
-box install <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="d8bab7a0b4b9b6bf98e9f6e9e9f6e8">[email&nbsp;protected]</a>
+```java
+# CommandBox
+box install <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="d8bab7a0b4b9b6bf98e9f6e9e9f6e8">[email protected]</a>
 
 # BVM
-bvm install 1.11.0 &amp;&amp; bvm use 1.11.0
+bvm install 1.11.0 && bvm use 1.11.0
 
 # Docker
 FROM ortussolutions/boxlang:1.11.0
-</pre>
+```
+
 
 Full release notes, documentation, and downloads are available at [boxlang.io](http://https://boxlang.io/?_gl=1*1i9icmx*_gcl_au*NDk3OTAwOTEuMTc2ODUxNjQ4Nw..*_ga*MTg5MDU4NDYzMS4xNzMyMDQwMzg2*_ga_663JFQ7YGX*czE3NzM0MTYwNzYkbzkyJGcxJHQxNzczNDE2MTAyJGozNCRsMCRoMA.. "boxlang.io") and [boxlang.ortusbooks.com](http://https://boxlang.ortusbooks.com/ "boxlang.ortusbooks.com").
 

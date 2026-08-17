@@ -39,17 +39,24 @@ JEP 476 proposes the ability to import all packages exported by a module with a 
 
 Consider a scenario where you need to use multiple classes from the java.util package. Traditionally, you would write:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">import java.util.List;
+```java
+import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;</pre>
+import java.util.stream.Collectors;
+```
+
 
 With JEP 476, this can be simplified to:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">import module java.base;</pre>
+```java
+import module java.base;
+```
+
 
 This single line imports all necessary classes, making the code cleaner and more concise. Consider the following example:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">import module java.base;
+```java
+import module java.base;
 
 void main() {
 
@@ -63,7 +70,7 @@ void main() {
     var now = Instant.now();
     println("Current Time: " + now);
 
-    var greetings = new ArrayList&lt;&gt;();
+    var greetings = new ArrayList<>();
     greetings.add("Hello, World!");
     greetings.add("স্বাগতম বিশ্ব!");
     greetings.add("مرحبا بالعالم!");
@@ -81,7 +88,8 @@ void main() {
 }
 
 //java --enable-preview --source 23 Helloworld.java
-</pre>
+```
+
 
 <br />
 

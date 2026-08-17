@@ -121,11 +121,14 @@ See the detailed info below for each application.
 
 #### **Building and running MoleculeSampleApp**
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ cd MoleculeSampleApp
+```
+$ cd MoleculeSampleApp
 $ mvn clean package
 $ java --module-path /home/frank/javafx-sdk-16/lib 
       --add-modules=javafx.controls 
-      -jar target/moleculesampleapp-0.0.1-jar-with-dependencies.jar</pre>
+      -jar target/moleculesampleapp-0.0.1-jar-with-dependencies.jar
+```
+
 
 And oh yeah it runs! As we can expect from Java's promise for backwards compatibility, this demo created for a Java version in 2013, still works many years later on a much later version of the JDK.
 
@@ -137,11 +140,14 @@ And oh yeah it runs! As we can expect from Java's promise for backwards compatib
 
 #### **Building and running 3DViewer**
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ cd 3DViewer
+```
+$ cd 3DViewer
 $ mvn clean package
 $ java --module-path /home/frank/javafx-sdk-16/lib 
      --add-modules=javafx.controls,javafx.fxml 
-     -jar target/Jfx3dViewerApp-0.0.1-jar-with-dependencies.jar</pre>
+     -jar target/Jfx3dViewerApp-0.0.1-jar-with-dependencies.jar
+```
+
 
 When the application has started, I opened the Duke image "allStacked_solidColors_w0005_loweredPawnHat.ma" from the Duke Chess directory. The viewer provides multiple options to change the 3D visualization, lighting, etc.
 

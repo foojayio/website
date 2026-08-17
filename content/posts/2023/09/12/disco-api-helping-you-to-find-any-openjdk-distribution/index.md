@@ -74,13 +74,17 @@ Let's look at a few examples.
 
 Every 6 months, we get a new version of Java, so we can expect 21 later in September. Via the API we can check all the major versions which are currently maintained.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">curl -X 'GET' 
+```
+curl -X 'GET' 
   'https://api.foojay.io/disco/v3.0/major_versions?maintained=true' 
-  -H 'accept: application/json'</pre>
+  -H 'accept: application/json'
+```
+
 
 This will return the following result, in which we can see that version 22 is already available as Early Access (EA).
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">{
+```
+{
     "result":[
     {
         "major_version":22,
@@ -108,7 +112,9 @@ This will return the following result, in which we can see that version 22 is al
     ...
   ],
   "message":""
-}</pre>
+}
+```
+
 
 #### Get Packages For Filter
 
@@ -121,13 +127,17 @@ The packages API provides a long list of filters. This examples searches for all
 * For macOS
 * Available as dmg or pkg
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">curl -X 'GET' 
-  'https://api.foojay.io/disco/v3.0/packages?version=17&amp;architecture=aarch64&amp;archive_type=dmg&amp;archive_type=pkg&amp;package_type=jdk&amp;operating_system=macos&amp;javafx_bundled=true&amp;latest=available' 
-  -H 'accept: application/json'</pre>
+```
+curl -X 'GET' 
+  'https://api.foojay.io/disco/v3.0/packages?version=17&architecture=aarch64&archive_type=dmg&archive_type=pkg&package_type=jdk&operating_system=macos&javafx_bundled=true&latest=available' 
+  -H 'accept: application/json'
+```
+
 
 This filter will return the following result:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">{
+```
+{
     "result":[
         {
             "id":"10140b8f207d245186992f9095c100a0",
@@ -169,7 +179,9 @@ This filter will return the following result:
         }
     ],
     "message":"4 package(s) found"
-}</pre>
+}
+```
+
 
 Tools {#h2-4-tools}
 -------------------
@@ -205,7 +217,8 @@ JDKMon is another little tool written in JavaFX that tries to detect all JDKs in
 
 To be able to use any OpenJDK distribution in a GitHub Action, you can't use the well-known `actions/setup-java@v2` as it only allows you to use the adopt, adopt-openj9, and zulu distributions. Thanks to `foojay2020/setup-java@disco`, that works with the same arguments, you can use all the distributions that are available in the Disco API.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">    steps:
+```
+    steps:
     - uses: actions/checkout@v1
     - name: Set up JDK
       uses: foojay2020/setup-java@disco
@@ -214,7 +227,9 @@ To be able to use any OpenJDK distribution in a GitHub Action, you can't use the
         java-version: 11.0.10
         distro: zulu
     - name: Build with Maven
-      run: ./mvnw package</pre>
+      run: ./mvnw package
+```
+
 
 You can check all available combinations on the [Disco Testing Matrix](https://github.com/foojayio/discoTestingMatrix). It verifies JDK tests on various distros and versions using Github Actions.
 

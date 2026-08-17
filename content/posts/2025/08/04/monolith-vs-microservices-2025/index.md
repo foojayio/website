@@ -28,7 +28,7 @@ From Infrastructure as Code (IaC) to "vibecoding" culture, and from startups to 
 
 So, what has actually changed?
 
-*** ** * ** ***
+
 
 🔵⚪⚪⚪⚪⚪
 
@@ -57,7 +57,7 @@ Infrastructure as Code tools like Terraform make architecture changes easier. Ne
 * [ThoughtWorks Tech Radar](https://www.thoughtworks.com/en-us/radar)
 * [Martin Fowler -- Microservice Trade-Offs](https://martinfowler.com/articles/microservice-trade-offs.html)
 
-*** ** * ** ***
+
 
 🔵🔵⚪⚪⚪⚪
 
@@ -86,7 +86,7 @@ Vibecoding---the focus on great developer experience---often favors centralized 
 * [DHH -- The Majestic Monolith](https://world.hey.com/dhh/how-to-recover-from-microservices-ce3803cc)
 * [YT: Mastering Developer Experience at Shopify with Eytan Seidman](https://youtu.be/pJyIuKPnLfQ)
 
-*** ** * ** ***
+
 
 🔵🔵🔵⚪⚪⚪
 
@@ -110,7 +110,7 @@ Surprisingly, many large enterprises now return to modular monoliths or packaged
 * [INNOQ -- Self-Contained Systems](https://www.innoq.com/en/articles/2016/11/self-contained-systems-different-microservices/)
 * [Amazon Prime Video's 90% Cost Reduction throuh moving to Monolithic](https://dev.to/indika_wimalasuriya/amazon-prime-videos-90-cost-reduction-throuh-moving-to-monolithic-k4a)
 
-*** ** * ** ***
+
 
 🔵🔵🔵🔵⚪⚪
 
@@ -136,7 +136,7 @@ In 2025, sustainability and clarity matter more than theoretical elasticity.
 * [Microservices to Monoliths -- Sysctl](https://sysctl.id/microservices-to-monoliths-pendulum-swing/)
 * [Post-Monolith Architectures -- DZone](https://dzone.com/articles/post-monolith-architecture-2025)
 
-*** ** * ** ***
+
 
 🔵🔵🔵🔵🔵⚪
 
@@ -154,13 +154,13 @@ Moreover, modern tools like Terraform, devcontainers, and powerful CI/CD platfor
 Whether working in a monolith, a modulith, or a well-tooled microservice ecosystem, balance, clarity, and team alignment matter most.
 > 🎯 Maybe the future isn't monolith *or* microservices---it's the ability to move between them with purpose.
 
-*** ** * ** ***
+
 
 🔵🔵🔵🔵🔵🔵
 
 {{< youtube KFFCQJdp-oo >}}
 
-*** ** * ** ***
+
 
 🎓 Wanna level up your game with world-class Java and Spring certifications?  
 

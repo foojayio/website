@@ -134,13 +134,19 @@ Java declarations are not always independent. One constant may depend on another
 
 For example, this order is safe:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">private static final int DEFAULT_TIMEOUT_SECONDS = 30;
-private static final int API_REQUEST_TIMEOUT_SECONDS = DEFAULT_TIMEOUT_SECONDS * 2;</pre>
+```java
+private static final int DEFAULT_TIMEOUT_SECONDS = 30;
+private static final int API_REQUEST_TIMEOUT_SECONDS = DEFAULT_TIMEOUT_SECONDS * 2;
+```
+
 
 Blind alphabetical sorting may accidentally produce this:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">private static final int API_REQUEST_TIMEOUT_SECONDS = DEFAULT_TIMEOUT_SECONDS * 2;
-private static final int DEFAULT_TIMEOUT_SECONDS = 30;</pre>
+```java
+private static final int API_REQUEST_TIMEOUT_SECONDS = DEFAULT_TIMEOUT_SECONDS * 2;
+private static final int DEFAULT_TIMEOUT_SECONDS = 30;
+```
+
 
 Now the change is not only cosmetic. `API_REQUEST_TIMEOUT_SECONDS` depends on `DEFAULT_TIMEOUT_SECONDS`, so the base constant must stay above the derived one.
 

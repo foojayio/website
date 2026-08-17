@@ -22,16 +22,22 @@ Make sure that input validation relies on allow-listing and not blocklisting. Th
 
 In some cases, sanitization can be achieved by enforcing specific encoding for user input. For example, you can encode an untrusted value specifically for HTML. This way, inserting a JavaScript string will not have any effect. A good starting point is the [OWASP Java encoding library](https://github.com/OWASP/owasp-java-encoder)that provides you with a lot of encoders.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="xml" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&lt;dependency&gt;
-   &lt;groupId&gt;org.owasp.encoder&lt;/groupId&gt;
-   &lt;artifactId&gt;encoder&lt;/artifactId&gt;
-   &lt;version&gt;1.2.3&lt;/version&gt;
-&lt;/dependency&gt;</pre>
+```xml
+<dependency>
+   <groupId>org.owasp.encoder</groupId>
+   <artifactId>encoder</artifactId>
+   <version>1.2.3</version>
+</dependency>
+```
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">String untrusted = "&lt;script&gt; alert(1); &lt;/script&gt;";
+
+```java
+String untrusted = "<script> alert(1); </script>";
 System.out.println(Encode.forHtml(untrusted));
 
-// output: &lt;script&gt; alert(1); &lt;/script&gt;</pre>
+// output: <script> alert(1); </script>
+```
+
 
 Sanitizing user text input is an obvious one. But what about the data you retrieve from a database, even when it's your own database? What if your database was breached and someone planted some malicious text in a database field or document?
 

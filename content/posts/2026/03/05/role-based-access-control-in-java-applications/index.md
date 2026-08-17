@@ -36,11 +36,14 @@ Authorization Is a Business Concern {#h2-0-authorization-is-a-business-concern}
 
 In Spring applications, it is very easy to find authorization hidden within annotations:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@PreAuthorize("hasRole('ADMIN')")
+```
+@PreAuthorize("hasRole('ADMIN')")
 Or embedded directly within controllers:
 if (!user.getRoles().contains("ADMIN")) {
-&nbsp;&nbsp;&nbsp;&nbsp;throw new ForbiddenException();
-}</pre>
+    throw new ForbiddenException();
+}
+```
+
 
 Technically, both approaches work. The real problem is that they tend to spread authorization rules across various levels, mixing business logic with security concepts. The issue is complex and the difference is very subtle. Authorization rules are rarely purely technical rules. The fact that only finance users can approve reimbursements is not a framework configuration detail. It is a business rule.
 
@@ -60,37 +63,43 @@ A common mistake is to think about roles before permissions. Permissions represe
 
 Let's assume we have a system with simple authorization requirements. All this can be expressed in Java as follows:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public enum Permission {
-&nbsp;&nbsp;&nbsp;&nbsp;ORDER_CREATE,
-&nbsp;&nbsp;&nbsp;&nbsp;ORDER_CANCEL,
-&nbsp;&nbsp;&nbsp;&nbsp;ORDER_VIEW,
-&nbsp;&nbsp;&nbsp;&nbsp;REFUND_APPROVE,
-&nbsp;&nbsp;&nbsp;&nbsp;USER_MANAGE
-}</pre>
+```
+public enum Permission {
+    ORDER_CREATE,
+    ORDER_CANCEL,
+    ORDER_VIEW,
+    REFUND_APPROVE,
+    USER_MANAGE
+}
+```
+
 
 These permissions describe the functionalities present within the system. They are part of the logic implemented by the application itself. Roles therefore become sets of permissions:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public enum Role {
-&nbsp;&nbsp;&nbsp;&nbsp;CUSTOMER(Set.of(
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Permission.ORDER_CREATE,
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Permission.ORDER_CANCEL,
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Permission.ORDER_VIEW
-&nbsp;&nbsp;&nbsp;&nbsp;)),
+```
+public enum Role {
+    CUSTOMER(Set.of(
+        Permission.ORDER_CREATE,
+        Permission.ORDER_CANCEL,
+        Permission.ORDER_VIEW
+    )),
 
-&nbsp;&nbsp;&nbsp;&nbsp;FINANCE(Set.of(
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Permission.ORDER_VIEW,
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Permission.REFUND_APPROVE
-&nbsp;&nbsp;&nbsp;&nbsp;)),
-&nbsp;&nbsp;&nbsp;&nbsp;ADMIN(Set.of(Permission.values()));
-&nbsp;&nbsp;&nbsp;&nbsp;private final Set&lt;Permission&gt; permissions;
-&nbsp;&nbsp;&nbsp;&nbsp;Role(Set&lt;Permission&gt; permissions) {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this.permissions = permissions;
-&nbsp;&nbsp;&nbsp;&nbsp;}
+    FINANCE(Set.of(
+        Permission.ORDER_VIEW,
+        Permission.REFUND_APPROVE
+    )),
+    ADMIN(Set.of(Permission.values()));
+    private final Set<Permission> permissions;
+    Role(Set<Permission> permissions) {
+        this.permissions = permissions;
+    }
 
-&nbsp;&nbsp;&nbsp;&nbsp;public Set&lt;Permission&gt; permissions() {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return permissions;
-&nbsp;&nbsp;&nbsp;&nbsp;}
-}</pre>
+    public Set<Permission> permissions() {
+        return permissions;
+    }
+}
+```
+
 
 A design like this has two important consequences. First, permissions are clear and can be versioned: if a new feature is added, it is expressed within the application code. If a role changes, the difference is traceable.
 
@@ -105,24 +114,30 @@ Flexibility therefore becomes a fundamental requirement.
 
 Below, let's try to imagine a simple document representing a user
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">{
-&nbsp;&nbsp;"_id": "user-123",
-&nbsp;&nbsp;"email": "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="d5b4b9bcb6b095b0adb4b8a5b9b0fbb6bab8">[email&nbsp;protected]</a>",
-&nbsp;&nbsp;"roles": ["CUSTOMER"],
-&nbsp;&nbsp;"status": "ACTIVE"
-}</pre>
+```
+{
+  "_id": "user-123",
+  "email": "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="d5b4b9bcb6b095b0adb4b8a5b9b0fbb6bab8">[email protected]</a>",
+  "roles": ["CUSTOMER"],
+  "status": "ACTIVE"
+}
+```
+
 
 With Spring Data MongoDB, mapping is simple:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@Document(collection = "users")
+```
+@Document(collection = "users")
 public class UserDocument {
-&nbsp;&nbsp;&nbsp;&nbsp;@Id
-&nbsp;&nbsp;&nbsp;&nbsp;private String id;
-&nbsp;&nbsp;&nbsp;&nbsp;private String email;
-&nbsp;&nbsp;&nbsp;&nbsp;private Set&lt;String&gt; roles;
-&nbsp;&nbsp;&nbsp;&nbsp;private String status;
-&nbsp;&nbsp;&nbsp;&nbsp;// constructors and getters omitted
-}</pre>
+    @Id
+    private String id;
+    private String email;
+    private Set<String> roles;
+    private String status;
+    // constructors and getters omitted
+}
+```
+
 
 MongoDB does one thing and one thing only: it persists metadata. It does not decide on permissions for a given user. It does not evaluate security policies. It simply stores the data from which authorization decisions can be made.
 
@@ -133,35 +148,41 @@ From Infrastructure Model to Application Principal {#h2-3-from-infrastructure-mo
 
 Instead of using a representation of the User as UserDocument, contaminating its representation with persistence logic, we use a representation closer to the domain, such as the following
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public class UserPrincipal {
-&nbsp;&nbsp;&nbsp;&nbsp;private final String id;
-&nbsp;&nbsp;&nbsp;&nbsp;private final Set&lt;Role&gt; roles;
-&nbsp;&nbsp;&nbsp;&nbsp;public UserPrincipal(String id, Set&lt;Role&gt; roles) {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this.id = id;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this.roles = roles;
-&nbsp;&nbsp;&nbsp;&nbsp;}
+```
+public class UserPrincipal {
+    private final String id;
+    private final Set<Role> roles;
+    public UserPrincipal(String id, Set<Role> roles) {
+        this.id = id;
+        this.roles = roles;
+    }
 
-&nbsp;&nbsp;&nbsp;&nbsp;public boolean hasPermission(Permission permission) {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return roles.stream()
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.flatMap(role -&gt; role.permissions().stream())
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.anyMatch(p -&gt; p == permission);
-&nbsp;&nbsp;&nbsp;&nbsp;}
+    public boolean hasPermission(Permission permission) {
+        return roles.stream()
+                .flatMap(role -> role.permissions().stream())
+                .anyMatch(p -> p == permission);
+    }
 
-&nbsp;&nbsp;&nbsp;&nbsp;public String id() {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return id;
-&nbsp;&nbsp;&nbsp;&nbsp;}
-}</pre>
+    public String id() {
+        return id;
+    }
+}
+```
+
 
 Mapping becomes a concept that can be managed by an adapter:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public class UserMapper {
-&nbsp;&nbsp;&nbsp;&nbsp;public static UserPrincipal toPrincipal(UserDocument document) {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Set&lt;Role&gt; roles = document.getRoles().stream()
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.map(Role::valueOf)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.collect(Collectors.toSet());
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return new UserPrincipal(document.getId(), roles);
-&nbsp;&nbsp;&nbsp;&nbsp;}
-}</pre>
+```
+public class UserMapper {
+    public static UserPrincipal toPrincipal(UserDocument document) {
+        Set<Role> roles = document.getRoles().stream()
+                .map(Role::valueOf)
+                .collect(Collectors.toSet());
+        return new UserPrincipal(document.getId(), roles);
+    }
+}
+```
+
 
 By doing this, authorization works on the application domain and not on a MongoDB entity or a specific framework principle.
 
@@ -170,29 +191,35 @@ Centralizing Authorization Logic {#h2-4-centralizing-authorization-logic}
 
 We explicitly introduce an AuthorizationService, which allows us to centralize authorization control in a single place, rather than spreading it throughout the codebase.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public class AuthorizationService {
-&nbsp;&nbsp;&nbsp;&nbsp;public void checkPermission(UserPrincipal user, Permission permission) {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (!user.hasPermission(permission)) {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;throw new ForbiddenException(
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"Missing permission: " + permission
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;);
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
-&nbsp;&nbsp;&nbsp;&nbsp;}
-}</pre>
+```
+public class AuthorizationService {
+    public void checkPermission(UserPrincipal user, Permission permission) {
+        if (!user.hasPermission(permission)) {
+            throw new ForbiddenException(
+                "Missing permission: " + permission
+            );
+        }
+    }
+}
+```
+
 
 Application services can now clearly expose their authorization logic:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public class OrderService {
-&nbsp;&nbsp;&nbsp;&nbsp;private final AuthorizationService authorizationService;
-&nbsp;&nbsp;&nbsp;&nbsp;public OrderService(AuthorizationService authorizationService) {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this.authorizationService = authorizationService;
-&nbsp;&nbsp;&nbsp;&nbsp;}
+```
+public class OrderService {
+    private final AuthorizationService authorizationService;
+    public OrderService(AuthorizationService authorizationService) {
+        this.authorizationService = authorizationService;
+    }
 
-&nbsp;&nbsp;&nbsp;&nbsp;public void cancelOrder(UserPrincipal user, String orderId) {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;authorizationService.checkPermission(user, Permission.ORDER_CANCEL);
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// domain logic here
-&nbsp;&nbsp;&nbsp;&nbsp;}
-}</pre>
+    public void cancelOrder(UserPrincipal user, String orderId) {
+        authorizationService.checkPermission(user, Permission.ORDER_CANCEL);
+        // domain logic here
+    }
+}
+```
+
 
 When reading this method, the authorization requirement is clear: there are no hidden or nested annotations, no proxy magic. The rule is located where it matters, namely protecting the boundary between application behavior and the domain.
 
@@ -208,29 +235,35 @@ These constraints can be modeled in two complementary ways:
 
 Contextual rules reside within domain logic:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public void cancelOrder(UserPrincipal user, Order order) {
-&nbsp;&nbsp;&nbsp;&nbsp;authorizationService.checkPermission(user, Permission.ORDER_CANCEL);
-&nbsp;&nbsp;&nbsp;&nbsp;if (!order.belongsTo(user.id())) {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;throw new ForbiddenException("Cannot cancel another user's order");
-&nbsp;&nbsp;&nbsp;&nbsp;}
-&nbsp;&nbsp;&nbsp;&nbsp;// continue with cancellation
-}</pre>
+```
+public void cancelOrder(UserPrincipal user, Order order) {
+    authorizationService.checkPermission(user, Permission.ORDER_CANCEL);
+    if (!order.belongsTo(user.id())) {
+        throw new ForbiddenException("Cannot cancel another user's order");
+    }
+    // continue with cancellation
+}
+```
+
 
 The same constraint can be expressed as context-aware RBAC, making the permission conditional on the role:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public boolean canCancel(Order order, Authentication authentication) {
-&nbsp;&nbsp;&nbsp;&nbsp; if (order == null || authentication == null || !authentication.isAuthenticated()) {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return false;
-&nbsp;&nbsp;&nbsp;&nbsp; }
+```
+public boolean canCancel(Order order, Authentication authentication) {
+     if (order == null || authentication == null || !authentication.isAuthenticated()) {
+         return false;
+     }
 
-&nbsp;&nbsp;&nbsp;&nbsp; Object principal = authentication.getPrincipal();
+     Object principal = authentication.getPrincipal();
 
-&nbsp;&nbsp;&nbsp;&nbsp; if (principal instanceof UserPrincipal up) {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; //Contextual-contrstraint: can only cancel their own orders
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return order.belongsTo(up.id());
-&nbsp;&nbsp;&nbsp;&nbsp; }
-&nbsp;&nbsp;&nbsp;&nbsp; return false;
-}</pre>
+     if (principal instanceof UserPrincipal up) {
+         //Contextual-contrstraint: can only cancel their own orders
+         return order.belongsTo(up.id());
+     }
+     return false;
+}
+```
+
 
 In practice, RBAC tells you whether the action is allowed "in general," while context constraints---whether you choose to implement them in domain logic or as context-aware RBAC in the policy engine---tell you whether the action is allowed here and now. Keeping these layers separate helps avoid confusing identity-based access with business constraints related to the specific case.
 

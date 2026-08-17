@@ -30,10 +30,13 @@ Reading the Java Version in the Terminal {#WhatJavaversionareyourunning?Takingal
 
 Probably the easiest way to find the installed version is by using the `java -version` terminal command:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ java -version
+```
+$ java -version
 openjdk version "19" 2022-09-20
 OpenJDK Runtime Environment Zulu19.28+81-CA (build 19+36)
-OpenJDK 64-Bit Server VM Zulu19.28+81-CA (build 19+36, mixed mode, sharing)</pre>
+OpenJDK 64-Bit Server VM Zulu19.28+81-CA (build 19+36, mixed mode, sharing)
+```
+
 
 Checking Version Files in the Installation Directory {#WhatJavaversionareyourunning?TakingalookunderthehoodsoftheJDK.-CheckingVersionFilesintheInstallationDirectory}
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -44,18 +47,22 @@ Let's explore what we can find there.
 
 On my machine, as I use [SDKMAN](https://sdkman.io/) to switch between different Java versions, all my versions are stored here:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ ls -l /Users/frankdelporte/.sdkman/candidates/java/
+```
+$ ls -l /Users/frankdelporte/.sdkman/candidates/java/
 total 0
 drwxr-xr-x  15 frankdelporte  staff  480 Apr 17  2022 11.0.15-zulu
 drwxr-xr-x  16 frankdelporte  staff  512 Apr 17  2022 17.0.3.fx-zulu
 drwxr-xr-x  15 frankdelporte  staff  480 Mar 29  2022 18.0.1-zulu
 drwxr-xr-x  15 frankdelporte  staff  480 Sep  7 18:36 19-zulu
 drwxr-xr-x  18 frankdelporte  staff  576 Apr 18  2022 8.0.332-zulu
-lrwxr-xr-x   1 frankdelporte  staff    7 Nov 21 21:09 current -&gt; 19-zulu</pre>
+lrwxr-xr-x   1 frankdelporte  staff    7 Nov 21 21:09 current -> 19-zulu
+```
+
 
 And in each of these directories a release file can be found which also shows us the version information, including some extra information.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ cat /Users/frankdelporte/.sdkman/candidates/java/19-zulu/release
+```
+$ cat /Users/frankdelporte/.sdkman/candidates/java/19-zulu/release
 IMPLEMENTOR="Azul Systems, Inc."
 IMPLEMENTOR_VERSION="Zulu19.28+81-CA"
 JAVA_VERSION="19"
@@ -65,13 +72,15 @@ MODULES="java.base java.compiler ... jdk.unsupported jdk.unsupported.desktop jdk
 OS_ARCH="aarch64"
 OS_NAME="Darwin"
 SOURCE=".:git:3d665268e905"
-&nbsp;
+ 
 $ cat /Users/frankdelporte/.sdkman/candidates/java/8.0.332-zulu//release
 JAVA_VERSION="1.8.0_332"
 OS_NAME="Darwin"
 OS_VERSION="11.2"
 OS_ARCH="aarch64"
-SOURCE="git:f4b2b4c5882e"</pre>
+SOURCE="git:f4b2b4c5882e"
+```
+
 
 Getting More Information With showSettings {#WhatJavaversionareyourunning?TakingalookunderthehoodsoftheJDK.-GettingMoreInformationWithshowSettings}
 ---------------------------------------------------------------------------------------------------------------------------------------------------
@@ -87,67 +96,70 @@ The cleanest way to call this flag, is by adding `-version`, otherwise you will 
 
 By using the `-XshowSettings:properties` flag, a long list of various properties is shown.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ java -XshowSettings:properties -version
+```
+$ java -XshowSettings:properties -version
 Property settings:
-&nbsp;&nbsp;&nbsp;&nbsp;file.encoding = UTF-8
-&nbsp;&nbsp;&nbsp;&nbsp;file.separator = /
-&nbsp;&nbsp;&nbsp;&nbsp;ftp.nonProxyHosts = local|*.local|169.254/16|*.169.254/16
-&nbsp;&nbsp;&nbsp;&nbsp;http.nonProxyHosts = local|*.local|169.254/16|*.169.254/16
-&nbsp;&nbsp;&nbsp;&nbsp;java.class.path =
-&nbsp;&nbsp;&nbsp;&nbsp;java.class.version = 63.0
-&nbsp;&nbsp;&nbsp;&nbsp;java.home = /Users/frankdelporte/.sdkman/candidates/java/19-zulu/zulu-19.jdk/Contents/Home
-&nbsp;&nbsp;&nbsp;&nbsp;java.io.tmpdir = /var/folders/np/6j1kls013kn2gpg_k6tz2lkr0000gn/T/
-&nbsp;&nbsp;&nbsp;&nbsp;java.library.path = /Users/frankdelporte/Library/Java/Extensions
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/Library/Java/Extensions
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/Network/Library/Java/Extensions
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/System/Library/Java/Extensions
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/usr/lib/java
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.
-&nbsp;&nbsp;&nbsp;&nbsp;java.runtime.name = OpenJDK Runtime Environment
-&nbsp;&nbsp;&nbsp;&nbsp;java.runtime.version = 19+36
-&nbsp;&nbsp;&nbsp;&nbsp;java.specification.name = Java Platform API Specification
-&nbsp;&nbsp;&nbsp;&nbsp;java.specification.vendor = Oracle Corporation
-&nbsp;&nbsp;&nbsp;&nbsp;java.specification.version = 19
-&nbsp;&nbsp;&nbsp;&nbsp;java.vendor = Azul Systems, Inc.
-&nbsp;&nbsp;&nbsp;&nbsp;java.vendor.url = http://www.azul.com/
-&nbsp;&nbsp;&nbsp;&nbsp;java.vendor.url.bug = http://www.azul.com/support/
-&nbsp;&nbsp;&nbsp;&nbsp;java.vendor.version = Zulu19.28+81-CA
-&nbsp;&nbsp;&nbsp;&nbsp;java.version = 19
-&nbsp;&nbsp;&nbsp;&nbsp;java.version.date = 2022-09-20
-&nbsp;&nbsp;&nbsp;&nbsp;java.vm.compressedOopsMode = Zero based
-&nbsp;&nbsp;&nbsp;&nbsp;java.vm.info = mixed mode, sharing
-&nbsp;&nbsp;&nbsp;&nbsp;java.vm.name = OpenJDK 64-Bit Server VM
-&nbsp;&nbsp;&nbsp;&nbsp;java.vm.specification.name = Java Virtual Machine Specification
-&nbsp;&nbsp;&nbsp;&nbsp;java.vm.specification.vendor = Oracle Corporation
-&nbsp;&nbsp;&nbsp;&nbsp;java.vm.specification.version = 19
-&nbsp;&nbsp;&nbsp;&nbsp;java.vm.vendor = Azul Systems, Inc.
-&nbsp;&nbsp;&nbsp;&nbsp;java.vm.version = 19+36
-&nbsp;&nbsp;&nbsp;&nbsp;jdk.debug = release
-&nbsp;&nbsp;&nbsp;&nbsp;line.separator = \n
-&nbsp;&nbsp;&nbsp;&nbsp;native.encoding = UTF-8
-&nbsp;&nbsp;&nbsp;&nbsp;os.arch = aarch64
-&nbsp;&nbsp;&nbsp;&nbsp;os.name = Mac OS X
-&nbsp;&nbsp;&nbsp;&nbsp;os.version = 13.0.1
-&nbsp;&nbsp;&nbsp;&nbsp;path.separator = :
-&nbsp;&nbsp;&nbsp;&nbsp;socksNonProxyHosts = local|*.local|169.254/16|*.169.254/16
-&nbsp;&nbsp;&nbsp;&nbsp;stderr.encoding = UTF-8
-&nbsp;&nbsp;&nbsp;&nbsp;stdout.encoding = UTF-8
-&nbsp;&nbsp;&nbsp;&nbsp;sun.arch.data.model = 64
-&nbsp;&nbsp;&nbsp;&nbsp;sun.boot.library.path = /Users/frankdelporte/.sdkman/candidates/java/19-zulu/zulu-19.jdk/Contents/Home/lib
-&nbsp;&nbsp;&nbsp;&nbsp;sun.cpu.endian = little
-&nbsp;&nbsp;&nbsp;&nbsp;sun.io.unicode.encoding = UnicodeBig
-&nbsp;&nbsp;&nbsp;&nbsp;sun.java.launcher = SUN_STANDARD
-&nbsp;&nbsp;&nbsp;&nbsp;sun.jnu.encoding = UTF-8
-&nbsp;&nbsp;&nbsp;&nbsp;sun.management.compiler = HotSpot 64-Bit Tiered Compilers
-&nbsp;&nbsp;&nbsp;&nbsp;user.country = BE
-&nbsp;&nbsp;&nbsp;&nbsp;user.dir = /Users/frankdelporte
-&nbsp;&nbsp;&nbsp;&nbsp;user.home = /Users/frankdelporte
-&nbsp;&nbsp;&nbsp;&nbsp;user.language = en
-&nbsp;&nbsp;&nbsp;&nbsp;user.name = frankdelporte
-&nbsp;
+    file.encoding = UTF-8
+    file.separator = /
+    ftp.nonProxyHosts = local|*.local|169.254/16|*.169.254/16
+    http.nonProxyHosts = local|*.local|169.254/16|*.169.254/16
+    java.class.path =
+    java.class.version = 63.0
+    java.home = /Users/frankdelporte/.sdkman/candidates/java/19-zulu/zulu-19.jdk/Contents/Home
+    java.io.tmpdir = /var/folders/np/6j1kls013kn2gpg_k6tz2lkr0000gn/T/
+    java.library.path = /Users/frankdelporte/Library/Java/Extensions
+        /Library/Java/Extensions
+        /Network/Library/Java/Extensions
+        /System/Library/Java/Extensions
+        /usr/lib/java
+        .
+    java.runtime.name = OpenJDK Runtime Environment
+    java.runtime.version = 19+36
+    java.specification.name = Java Platform API Specification
+    java.specification.vendor = Oracle Corporation
+    java.specification.version = 19
+    java.vendor = Azul Systems, Inc.
+    java.vendor.url = http://www.azul.com/
+    java.vendor.url.bug = http://www.azul.com/support/
+    java.vendor.version = Zulu19.28+81-CA
+    java.version = 19
+    java.version.date = 2022-09-20
+    java.vm.compressedOopsMode = Zero based
+    java.vm.info = mixed mode, sharing
+    java.vm.name = OpenJDK 64-Bit Server VM
+    java.vm.specification.name = Java Virtual Machine Specification
+    java.vm.specification.vendor = Oracle Corporation
+    java.vm.specification.version = 19
+    java.vm.vendor = Azul Systems, Inc.
+    java.vm.version = 19+36
+    jdk.debug = release
+    line.separator = \n
+    native.encoding = UTF-8
+    os.arch = aarch64
+    os.name = Mac OS X
+    os.version = 13.0.1
+    path.separator = :
+    socksNonProxyHosts = local|*.local|169.254/16|*.169.254/16
+    stderr.encoding = UTF-8
+    stdout.encoding = UTF-8
+    sun.arch.data.model = 64
+    sun.boot.library.path = /Users/frankdelporte/.sdkman/candidates/java/19-zulu/zulu-19.jdk/Contents/Home/lib
+    sun.cpu.endian = little
+    sun.io.unicode.encoding = UnicodeBig
+    sun.java.launcher = SUN_STANDARD
+    sun.jnu.encoding = UTF-8
+    sun.management.compiler = HotSpot 64-Bit Tiered Compilers
+    user.country = BE
+    user.dir = /Users/frankdelporte
+    user.home = /Users/frankdelporte
+    user.language = en
+    user.name = frankdelporte
+ 
 openjdk version "19" 2022-09-20
 OpenJDK Runtime Environment Zulu19.28+81-CA (build 19+36)
-OpenJDK 64-Bit Server VM Zulu19.28+81-CA (build 19+36, mixed mode, sharing)</pre>
+OpenJDK 64-Bit Server VM Zulu19.28+81-CA (build 19+36, mixed mode, sharing)
+```
+
 
 If you ever faced the problem of an unsupported Java version 59 (are similar), you'll now also understand where this value is defined, it's right here in this list as `java.class.version`.
 
@@ -161,21 +173,24 @@ It's an internal number used by Java to define the version.
 
 In case you didn't know yet, I live in Belgium and use English as my computer language, as you can see when using the `-XshowSettings:locale` flag:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ java -XshowSettings:locale -version
+```
+$ java -XshowSettings:locale -version
 Locale settings:
-&nbsp;&nbsp;&nbsp;&nbsp;default locale = English (Belgium)
-&nbsp;&nbsp;&nbsp;&nbsp;default display locale = English (Belgium)
-&nbsp;&nbsp;&nbsp;&nbsp;default format locale = English (Belgium)
-&nbsp;&nbsp;&nbsp;&nbsp;available locales = , af, af_NA, af_ZA, af_ZA_#Latn, agq, agq_CM, agq_CM_#Latn,
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ak, ak_GH, ak_GH_#Latn, am, am_ET, am_ET_#Ethi, ar, ar_001,
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ar_AE, ar_BH, ar_DJ, ar_DZ, ar_EG, ar_EG_#Arab, ar_EH, ar_ER,
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;zh_MO_#Hant, zh_SG, zh_SG_#Hans, zh_TW, zh_TW_#Hant, zh__#Hans, zh__#Hant, zu,
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;zu_ZA, zu_ZA_#Latn
-&nbsp;
+    default locale = English (Belgium)
+    default display locale = English (Belgium)
+    default format locale = English (Belgium)
+    available locales = , af, af_NA, af_ZA, af_ZA_#Latn, agq, agq_CM, agq_CM_#Latn,
+        ak, ak_GH, ak_GH_#Latn, am, am_ET, am_ET_#Ethi, ar, ar_001,
+        ar_AE, ar_BH, ar_DJ, ar_DZ, ar_EG, ar_EG_#Arab, ar_EH, ar_ER,
+        ...
+        zh_MO_#Hant, zh_SG, zh_SG_#Hans, zh_TW, zh_TW_#Hant, zh__#Hans, zh__#Hant, zu,
+        zu_ZA, zu_ZA_#Latn
+ 
 openjdk version "19" 2022-09-20
 OpenJDK Runtime Environment Zulu19.28+81-CA (build 19+36)
-OpenJDK 64-Bit Server VM Zulu19.28+81-CA (build 19+36, mixed mode, sharing)</pre>
+OpenJDK 64-Bit Server VM Zulu19.28+81-CA (build 19+36, mixed mode, sharing)
+```
+
 
 ### Reading the VM Settings {#WhatJavaversionareyourunning?TakingalookunderthehoodsoftheJDK.-ReadingtheVMSettings}
 
@@ -183,23 +198,26 @@ With the `-XshowSettings:vm` flag, some info is shown about the Java Virtual Mac
 
 As you can see in the second example, the amount of maximum heap memory size can be defined with the `-Xmx` flag.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ java -XshowSettings:vm -version
+```
+$ java -XshowSettings:vm -version
 VM settings:
-&nbsp;&nbsp;&nbsp;&nbsp;Max. Heap Size (Estimated): 8.00G
-&nbsp;&nbsp;&nbsp;&nbsp;Using VM: OpenJDK 64-Bit Server VM
-&nbsp;
+    Max. Heap Size (Estimated): 8.00G
+    Using VM: OpenJDK 64-Bit Server VM
+ 
 openjdk version "19" 2022-09-20
 OpenJDK Runtime Environment Zulu19.28+81-CA (build 19+36)
 OpenJDK 64-Bit Server VM Zulu19.28+81-CA (build 19+36, mixed mode, sharing)
-&nbsp;
+ 
 $ java -XshowSettings:vm -Xmx512M -version
 VM settings:
-&nbsp;&nbsp;&nbsp;&nbsp;Max. Heap Size: 512.00M
-&nbsp;&nbsp;&nbsp;&nbsp;Using VM: OpenJDK 64-Bit Server VM
-&nbsp;
+    Max. Heap Size: 512.00M
+    Using VM: OpenJDK 64-Bit Server VM
+ 
 openjdk version "19" 2022-09-20
 OpenJDK Runtime Environment Zulu19.28+81-CA (build 19+36)
-OpenJDK 64-Bit Server VM Zulu19.28+81-CA (build 19+36, mixed mode, sharing)</pre>
+OpenJDK 64-Bit Server VM Zulu19.28+81-CA (build 19+36, mixed mode, sharing)
+```
+
 
 ### Reading all at Once {#WhatJavaversionareyourunning?TakingalookunderthehoodsoftheJDK.-ReadingallatOnce}
 

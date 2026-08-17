@@ -34,7 +34,10 @@ In this tutorial, you'll:
 
 You can find all the code presented in this tutorial in the [GitHub repository](https://github.com/soujava/data-driven-test-mongodb):
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">git clone <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="12757b6652757b667a67703c717d7f">[email&nbsp;protected]</a>:soujava/data-driven-test-mongodb.git</pre>
+```
+git clone <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="12757b6652757b667a67703c717d7f">[email protected]</a>:soujava/data-driven-test-mongodb.git
+```
+
 
 Prerequisites {#h2-0-prerequisites}
 -----------------------------------
@@ -49,7 +52,10 @@ For this tutorial, you'll need:
 
 You can use the following Docker command to start a standalone MongoDB instance:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">docker run --rm -d --name mongodb-instance -p 27017:27017 mongo</pre>
+```
+docker run --rm -d --name mongodb-instance -p 27017:27017 mongo
+```
+
 
 Data-driven testing is a technique where a single test is executed with different input data sets to validate multiple scenarios. Instead of writing repetitive test methods, you define combinations of inputs and expected outcomes, making it easier to test edge cases, business rules, and regression scenarios with clarity and efficiency.
 
@@ -64,96 +70,100 @@ Step 1: Create the entities {#h2-1-step-1-create-the-entities}
 
 The first step is to create a plain Maven project, where we can use Maven Archetype[quick start](https://maven.apache.org/archetypes/maven-archetype-quickstart/). After making the Maven project, the next step is to include Jupiter, Mockito, AssertJ, and Testcontainers for test proposals. For the Java integration and MongoDB, we will explore it using the Java Enterprise specification, Jakarta EE, where we will utilize both specifications, Jakarta NoSQL and Jakarta Data, both of which are implemented by Eclipse JNoSQL. We don't need to spend a considerable amount of time setting it up; you can clone the GitHub repository. The pom.xml shows the dependencies using Java with the Apache Maven Project:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&lt;dependencies&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;dependency&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;groupId&gt;net.datafaker&lt;/groupId&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;artifactId&gt;datafaker&lt;/artifactId&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;version&gt;2.4.4&lt;/version&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/dependency&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;dependency&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;groupId&gt;org.eclipse.jnosql.databases&lt;/groupId&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;artifactId&gt;jnosql-mongodb&lt;/artifactId&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;version&gt;${jnosql.version}&lt;/version&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/dependency&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;dependency&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;groupId&gt;org.jboss.weld.se&lt;/groupId&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;artifactId&gt;weld-se-shaded&lt;/artifactId&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;version&gt;${weld.se.core.version}&lt;/version&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;scope&gt;compile&lt;/scope&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/dependency&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;dependency&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;groupId&gt;org.eclipse&lt;/groupId&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;artifactId&gt;yasson&lt;/artifactId&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;version&gt;3.0.4&lt;/version&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;scope&gt;compile&lt;/scope&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/dependency&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;dependency&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;groupId&gt;io.smallrye.config&lt;/groupId&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;artifactId&gt;smallrye-config-core&lt;/artifactId&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;version&gt;3.13.3&lt;/version&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;scope&gt;compile&lt;/scope&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/dependency&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;dependency&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;groupId&gt;org.eclipse.microprofile.config&lt;/groupId&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;artifactId&gt;microprofile-config-api&lt;/artifactId&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;version&gt;3.1&lt;/version&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;scope&gt;compile&lt;/scope&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/dependency&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;dependency&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;groupId&gt;org.junit.jupiter&lt;/groupId&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;artifactId&gt;junit-jupiter-api&lt;/artifactId&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;version&gt;${junit.version}&lt;/version&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;scope&gt;test&lt;/scope&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/dependency&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;dependency&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;groupId&gt;org.junit.jupiter&lt;/groupId&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;artifactId&gt;junit-jupiter-engine&lt;/artifactId&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;version&gt;${junit.version}&lt;/version&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;scope&gt;test&lt;/scope&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/dependency&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;dependency&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;groupId&gt;org.junit.jupiter&lt;/groupId&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;artifactId&gt;junit-jupiter-params&lt;/artifactId&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;version&gt;${junit.version}&lt;/version&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;scope&gt;test&lt;/scope&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/dependency&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;dependency&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;groupId&gt;org.mockito&lt;/groupId&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;artifactId&gt;mockito-core&lt;/artifactId&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;version&gt;${mockito.verson}&lt;/version&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;scope&gt;test&lt;/scope&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/dependency&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;dependency&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;groupId&gt;org.mockito&lt;/groupId&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;artifactId&gt;mockito-junit-jupiter&lt;/artifactId&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;version&gt;${mockito.verson}&lt;/version&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;scope&gt;test&lt;/scope&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/dependency&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;dependency&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;groupId&gt;org.jboss.weld&lt;/groupId&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;artifactId&gt;weld-junit5&lt;/artifactId&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;version&gt;5.0.1.Final&lt;/version&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;scope&gt;test&lt;/scope&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/dependency&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;dependency&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;groupId&gt;org.testcontainers&lt;/groupId&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;artifactId&gt;mongodb&lt;/artifactId&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;version&gt;1.21.3&lt;/version&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;scope&gt;test&lt;/scope&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/dependency&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;dependency&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;groupId&gt;org.assertj&lt;/groupId&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;artifactId&gt;assertj-core&lt;/artifactId&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;version&gt;3.27.3&lt;/version&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;scope&gt;test&lt;/scope&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/dependency&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&lt;/dependencies&gt;</pre>
+```
+<dependencies>
+        <dependency>
+            <groupId>net.datafaker</groupId>
+            <artifactId>datafaker</artifactId>
+            <version>2.4.4</version>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.jnosql.databases</groupId>
+            <artifactId>jnosql-mongodb</artifactId>
+            <version>${jnosql.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.jboss.weld.se</groupId>
+            <artifactId>weld-se-shaded</artifactId>
+            <version>${weld.se.core.version}</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse</groupId>
+            <artifactId>yasson</artifactId>
+            <version>3.0.4</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.smallrye.config</groupId>
+            <artifactId>smallrye-config-core</artifactId>
+            <version>3.13.3</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.microprofile.config</groupId>
+            <artifactId>microprofile-config-api</artifactId>
+            <version>3.1</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-engine</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-params</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-core</artifactId>
+            <version>${mockito.verson}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-junit-jupiter</artifactId>
+            <version>${mockito.verson}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.jboss.weld</groupId>
+            <artifactId>weld-junit5</artifactId>
+            <version>5.0.1.Final</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.testcontainers</groupId>
+            <artifactId>mongodb</artifactId>
+            <version>1.21.3</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.assertj</groupId>
+            <artifactId>assertj-core</artifactId>
+            <version>3.27.3</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+```
+
 
 With the project done, the next step is setting and defining the entities. In our sample, we will explore a simple hotel management system, where we will extract some use cases to further explore the data-driven test. Naturally, a hotel management system brings way more complexity than that. Thus, we won't cover points such as payment. Therefore, we will create a Room entity and its enums that will bring the Value Object perspective.
 
 In the src/main/java directory, create a *Room* class:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">import jakarta.nosql.Column;
+```
+import jakarta.nosql.Column;
 import jakarta.nosql.Entity;
 import jakarta.nosql.Id;
 
@@ -162,48 +172,50 @@ import java.util.Objects;
 @Entity
 public class Room {
 
-&nbsp;&nbsp;&nbsp;&nbsp;@Id
-&nbsp;&nbsp;&nbsp;&nbsp;private String id;
+    @Id
+    private String id;
 
-&nbsp;&nbsp;&nbsp;&nbsp;@Column
-&nbsp;&nbsp;&nbsp;&nbsp;private int number;
+    @Column
+    private int number;
 
-&nbsp;&nbsp;&nbsp;&nbsp;@Column
-&nbsp;&nbsp;&nbsp;&nbsp;private RoomType type;
+    @Column
+    private RoomType type;
 
-&nbsp;&nbsp;&nbsp;&nbsp;@Column
-&nbsp;&nbsp;&nbsp;&nbsp;private RoomStatus status;
+    @Column
+    private RoomStatus status;
 
-&nbsp;&nbsp;&nbsp;&nbsp;@Column
-&nbsp;&nbsp;&nbsp;&nbsp;private CleanStatus cleanStatus;
+    @Column
+    private CleanStatus cleanStatus;
 
-&nbsp;&nbsp;&nbsp;&nbsp;@Column
-&nbsp;&nbsp;&nbsp;&nbsp;private boolean smokingAllowed;
+    @Column
+    private boolean smokingAllowed;
 
-&nbsp;&nbsp;&nbsp;&nbsp;@Column
-&nbsp;&nbsp;&nbsp;&nbsp;private boolean underMaintenance;
+    @Column
+    private boolean underMaintenance;
 
 }
 
 public enum RoomStatus {
-&nbsp;&nbsp;&nbsp;&nbsp;AVAILABLE,
-&nbsp;&nbsp;&nbsp;&nbsp;RESERVED,
-&nbsp;&nbsp;&nbsp;&nbsp;UNDER_MAINTENANCE,
-&nbsp;&nbsp;&nbsp;&nbsp;OUT_OF_SERVICE
+    AVAILABLE,
+    RESERVED,
+    UNDER_MAINTENANCE,
+    OUT_OF_SERVICE
 }
 
 public enum RoomType {
-&nbsp;&nbsp;&nbsp;&nbsp;STANDARD,
-&nbsp;&nbsp;&nbsp;&nbsp;DELUXE,
-&nbsp;&nbsp;&nbsp;&nbsp;SUITE,
-&nbsp;&nbsp;&nbsp;&nbsp;VIP_SUITE
+    STANDARD,
+    DELUXE,
+    SUITE,
+    VIP_SUITE
 }
 
 public enum CleanStatus {
-&nbsp;&nbsp;&nbsp;&nbsp;CLEAN,
-&nbsp;&nbsp;&nbsp;&nbsp;DIRTY,
-&nbsp;&nbsp;&nbsp;&nbsp;INSPECTION_NEEDED
-}</pre>
+    CLEAN,
+    DIRTY,
+    INSPECTION_NEEDED
+}
+```
+
 
 Explanation of annotations: {#h2-2-explanation-of-annotations}
 --------------------------------------------------------------
@@ -214,31 +226,34 @@ Explanation of annotations: {#h2-2-explanation-of-annotations}
 
 Finally, with the entity done, we will create a repository where the goal is to find rooms by type, insert a new room, and check for availability on rooms---both standard and VIP rooms:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@Repository
+```
+@Repository
 public interface RoomRepository {
 
-&nbsp;&nbsp;&nbsp;&nbsp;@Query("WHERE type = 'VIP_SUITE' AND status = 'AVAILABLE' AND underMaintenance = false")
-&nbsp;&nbsp;&nbsp;&nbsp;List&lt;Room&gt; findVipRoomsReadyForGuests();
+    @Query("WHERE type = 'VIP_SUITE' AND status = 'AVAILABLE' AND underMaintenance = false")
+    List<Room> findVipRoomsReadyForGuests();
 
-&nbsp;&nbsp;&nbsp;&nbsp;@Query(" WHERE type &lt;&gt; 'VIP_SUITE' AND status = 'AVAILABLE' AND cleanStatus = 'CLEAN'")
-&nbsp;&nbsp;&nbsp;&nbsp;List&lt;Room&gt; findAvailableStandardRooms();
+    @Query(" WHERE type <> 'VIP_SUITE' AND status = 'AVAILABLE' AND cleanStatus = 'CLEAN'")
+    List<Room> findAvailableStandardRooms();
 
-&nbsp;&nbsp;&nbsp;&nbsp;@Query("WHERE cleanStatus &lt;&gt; 'CLEAN' AND status &lt;&gt; 'OUT_OF_SERVICE'")
-&nbsp;&nbsp;&nbsp;&nbsp;List&lt;Room&gt; findRoomsNeedingCleaning();
+    @Query("WHERE cleanStatus <> 'CLEAN' AND status <> 'OUT_OF_SERVICE'")
+    List<Room> findRoomsNeedingCleaning();
 
-&nbsp;&nbsp;&nbsp;&nbsp;@Query("WHERE smokingAllowed = true AND status = 'AVAILABLE'")
-&nbsp;&nbsp;&nbsp;&nbsp;List&lt;Room&gt; findAvailableSmokingRooms();
+    @Query("WHERE smokingAllowed = true AND status = 'AVAILABLE'")
+    List<Room> findAvailableSmokingRooms();
 
-&nbsp;&nbsp;&nbsp;&nbsp;@Save
-&nbsp;&nbsp;&nbsp;&nbsp;void save(List&lt;Room&gt; rooms);
+    @Save
+    void save(List<Room> rooms);
 
-&nbsp;&nbsp;&nbsp;&nbsp;@Save
-&nbsp;&nbsp;&nbsp;&nbsp;Room newRoom(Room room);
-&nbsp;&nbsp;&nbsp;&nbsp;void deleteBy();
+    @Save
+    Room newRoom(Room room);
+    void deleteBy();
 
-&nbsp;&nbsp;&nbsp;&nbsp;@Query("WHERE type = :type")
-&nbsp;&nbsp;&nbsp;&nbsp;List&lt;Room&gt; findByType(@Param("type") RoomType type);
-}</pre>
+    @Query("WHERE type = :type")
+    List<Room> findByType(@Param("type") RoomType type);
+}
+```
+
 
 We have those queries that explore Jakarta Data Queries, but are they properly working? In the next step, we will generate some tests to check it.
 
@@ -249,7 +264,8 @@ After the entity and repository are done, the next step is to generate the test 
 
 Thus, at src/test/java, create the DatabaseContainer class.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">import org.eclipse.jnosql.communication.Settings;
+```
+import org.eclipse.jnosql.communication.Settings;
 import org.eclipse.jnosql.databases.mongodb.communication.MongoDBDocumentConfiguration;
 import org.eclipse.jnosql.databases.mongodb.communication.MongoDBDocumentConfigurations;
 import org.eclipse.jnosql.databases.mongodb.communication.MongoDBDocumentManager;
@@ -262,35 +278,37 @@ import java.util.HashMap;
 import java.util.Map;
 public enum DatabaseContainer {
 
-&nbsp;&nbsp;&nbsp;&nbsp;INSTANCE;
+    INSTANCE;
 
-&nbsp;&nbsp;&nbsp;&nbsp;private final GenericContainer&lt;?&gt; mongodb =
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;new GenericContainer&lt;&gt;("mongo:latest")
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.withExposedPorts(27017)
-&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.waitingFor(Wait.defaultWaitStrategy());
+    private final GenericContainer<?> mongodb =
+            new GenericContainer<>("mongo:latest")
+                    .withExposedPorts(27017)
+                    .waitingFor(Wait.defaultWaitStrategy());
 
-&nbsp;&nbsp;&nbsp;&nbsp;{
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;mongodb.start();
-&nbsp;&nbsp;&nbsp;&nbsp;}
+    {
+        mongodb.start();
+    }
 
-&nbsp;&nbsp;&nbsp;&nbsp;public MongoDBDocumentManager get(String database) {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Settings settings = getSettings(database);
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MongoDBDocumentConfiguration configuration = new MongoDBDocumentConfiguration();
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MongoDBDocumentManagerFactory factory = configuration.apply(settings);
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return factory.apply(database);
-&nbsp;&nbsp;&nbsp;&nbsp;}
+    public MongoDBDocumentManager get(String database) {
+        Settings settings = getSettings(database);
+        MongoDBDocumentConfiguration configuration = new MongoDBDocumentConfiguration();
+        MongoDBDocumentManagerFactory factory = configuration.apply(settings);
+        return factory.apply(database);
+    }
 
-&nbsp;&nbsp;&nbsp;&nbsp;private Settings getSettings(String database) {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Map&lt;String,Object&gt; settings = new HashMap&lt;&gt;();
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;settings.put(MongoDBDocumentConfigurations.HOST.get()+".1", host());
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;settings.put(MappingConfigurations.DOCUMENT_DATABASE.get(), database);
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return Settings.of(settings);
-&nbsp;&nbsp;&nbsp;&nbsp;}
+    private Settings getSettings(String database) {
+        Map<String,Object> settings = new HashMap<>();
+        settings.put(MongoDBDocumentConfigurations.HOST.get()+".1", host());
+        settings.put(MappingConfigurations.DOCUMENT_DATABASE.get(), database);
+        return Settings.of(settings);
+    }
 
-&nbsp;&nbsp;&nbsp;&nbsp;public String host() {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return mongodb.getHost() + ":" + mongodb.getFirstMappedPort();
-&nbsp;&nbsp;&nbsp;&nbsp;}
-}</pre>
+    public String host() {
+        return mongodb.getHost() + ":" + mongodb.getFirstMappedPort();
+    }
+}
+```
+
 
 In the code, we will generate a MongoDB database instance by container that we have a DatabaseConfiguration.
 
@@ -298,7 +316,8 @@ With the database container ready, the next step is to instruct CDI to use a Mon
 
 At src//test/java, create the ManagerSupplier class.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">import jakarta.annotation.Priority;
+```
+import jakarta.annotation.Priority;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.enterprise.inject.Alternative;
 import jakarta.enterprise.inject.Default;
@@ -315,16 +334,18 @@ import java.util.function.Supplier;
 @ApplicationScoped
 @Alternative
 @Priority(Interceptor.Priority.APPLICATION)
-public class ManagerSupplier implements Supplier&lt;DatabaseManager&gt; {
+public class ManagerSupplier implements Supplier<DatabaseManager> {
 
-&nbsp;&nbsp;&nbsp;&nbsp;@Produces
-&nbsp;&nbsp;&nbsp;&nbsp;@Database(DatabaseType.DOCUMENT)
-&nbsp;&nbsp;&nbsp;&nbsp;@Default
-&nbsp;&nbsp;&nbsp;&nbsp;@Typed({DatabaseManager.class, MongoDBDocumentManager.class})
-&nbsp;&nbsp;&nbsp;&nbsp;public MongoDBDocumentManager get() {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return DatabaseContainer.INSTANCE.get("hotel");
-&nbsp;&nbsp;&nbsp;&nbsp;}
-}</pre>
+    @Produces
+    @Database(DatabaseType.DOCUMENT)
+    @Default
+    @Typed({DatabaseManager.class, MongoDBDocumentManager.class})
+    public MongoDBDocumentManager get() {
+        return DatabaseContainer.INSTANCE.get("hotel");
+    }
+}
+```
+
 
 On this class, we can see that we are overwriting the behavior at test where we are using the DatabaseContainer where the database is called hotel. With the structure done, the next step is playing with tests and DDT.
 
@@ -335,7 +356,8 @@ One of the goals of data-driven testing is to achieve test coverage across vario
 
 At src/test/java, create the RoomServiceTest class.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@EnableAutoWeld
+```
+@EnableAutoWeld
 @AddPackages(value = {Database.class, EntityConverter.class, DocumentTemplate.class, MongoDBTemplate.class})
 @AddPackages(Room.class)
 @AddPackages(ManagerSupplier.class)
@@ -353,55 +375,61 @@ private static final Faker FAKER = new Faker();
 @ParameterizedTest
 @MethodSource("room")
 void shouldSaveRoom(Room room) {
-&nbsp;&nbsp;&nbsp;&nbsp;Room updateRoom = this.repository.newRoom(room);
-&nbsp;&nbsp;&nbsp;&nbsp;SoftAssertions.assertSoftly(softly -&gt; {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;softly.assertThat(updateRoom).isNotNull();
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;softly.assertThat(updateRoom.getId()).isNotNull();
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;softly.assertThat(updateRoom.getNumber()).isEqualTo(room.getNumber());
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;softly.assertThat(updateRoom.getType()).isEqualTo(room.getType());
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;softly.assertThat(updateRoom.getStatus()).isEqualTo(room.getStatus());
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;softly.assertThat(updateRoom.getCleanStatus()).isEqualTo(room.getCleanStatus());
+    Room updateRoom = this.repository.newRoom(room);
+    SoftAssertions.assertSoftly(softly -> {
+        softly.assertThat(updateRoom).isNotNull();
+        softly.assertThat(updateRoom.getId()).isNotNull();
+        softly.assertThat(updateRoom.getNumber()).isEqualTo(room.getNumber());
+        softly.assertThat(updateRoom.getType()).isEqualTo(room.getType());
+        softly.assertThat(updateRoom.getStatus()).isEqualTo(room.getStatus());
+        softly.assertThat(updateRoom.getCleanStatus()).isEqualTo(room.getCleanStatus());
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;softly.assertThat(updateRoom.isSmokingAllowed()).isEqualTo(room.isSmokingAllowed());
-&nbsp;&nbsp;&nbsp;&nbsp;});
+        softly.assertThat(updateRoom.isSmokingAllowed()).isEqualTo(room.isSmokingAllowed());
+    });
 }
 
-&nbsp;&nbsp;static Stream&lt;Arguments&gt; room() {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return Stream.of(Arguments.of(getRoom(), Arguments.of(getRoom(), Arguments.of(getRoom()))));
-&nbsp;&nbsp;&nbsp;&nbsp;}
+  static Stream<Arguments> room() {
+        return Stream.of(Arguments.of(getRoom(), Arguments.of(getRoom(), Arguments.of(getRoom()))));
+    }
 
-&nbsp;&nbsp;&nbsp;&nbsp;private static Room getRoom() {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return new RoomBuilder()
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.roomNumber(FAKER.number().numberBetween(100, 999))
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.type(randomEnum(RoomType.class))
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.status(randomEnum(RoomStatus.class))
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.cleanStatus(randomEnum(CleanStatus.class))
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.smokingAllowed(FAKER.bool().bool())
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.build();
-&nbsp;&nbsp;&nbsp;&nbsp;}
+    private static Room getRoom() {
+        return new RoomBuilder()
+                .roomNumber(FAKER.number().numberBetween(100, 999))
+                .type(randomEnum(RoomType.class))
+                .status(randomEnum(RoomStatus.class))
+                .cleanStatus(randomEnum(CleanStatus.class))
+                .smokingAllowed(FAKER.bool().bool())
+                .build();
+    }
 
-private static &lt;T extends Enum&lt;?&gt;&gt; T randomEnum(Class&lt;T&gt; enumClass) {
-&nbsp;&nbsp;&nbsp;&nbsp;T[] constants = enumClass.getEnumConstants();
-&nbsp;&nbsp;&nbsp;&nbsp;int index = ThreadLocalRandom.current().nextInt(constants.length);
-&nbsp;&nbsp;&nbsp;&nbsp;return constants[index];
+private static <T extends Enum<?>> T randomEnum(Class<T> enumClass) {
+    T[] constants = enumClass.getEnumConstants();
+    int index = ThreadLocalRandom.current().nextInt(constants.length);
+    return constants[index];
 }
 
-}</pre>
+}
+```
+
 
 At the header of RoomService, we have a couple of annotations to activate Weld, the CDI implementation, in addition to which classes and packages the CDI should scan. It facilitates and makes the test startup lighter than scanning the whole class. Here, we are using AssertJ to further explore the fluent API for checking the database. We are using soft assertions that execute the whole validations and then show which conditions have break. It is way more useful when we need to do several validations in a single method.
 
 We will generate a new test scenario that allows us to find rooms by type. Naturally, we want to ensure that it works for any kind of search. At the same class, we will generate a method where we will inject the enum by parameter, as you can see in the code below:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@ParameterizedTest(name = "should find rooms by type {0}")
+```
+@ParameterizedTest(name = "should find rooms by type {0}")
 @EnumSource(RoomType.class)
 void shouldFindRoomByType(RoomType type) {
-&nbsp;&nbsp;&nbsp;&nbsp;List&lt;Room&gt; rooms = this.repository.findByType(type);
-&nbsp;&nbsp;&nbsp;&nbsp;SoftAssertions.assertSoftly(softly -&gt; softly.assertThat(rooms).allMatch(room -&gt; room.getType().equals(type)));
-}</pre>
+    List<Room> rooms = this.repository.findByType(type);
+    SoftAssertions.assertSoftly(softly -> softly.assertThat(rooms).allMatch(room -> room.getType().equals(type)));
+}
+```
+
 
 We are injecting several inputs to validate the tests, and we can explore it even further to see if the tests qualify:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">import jakarta.inject.Inject;
+```
+import jakarta.inject.Inject;
 import net.datafaker.Faker;
 import org.assertj.core.api.SoftAssertions;
 import org.eclipse.jnosql.databases.mongodb.mapping.MongoDBTemplate;
@@ -437,165 +465,167 @@ import java.util.stream.Stream;
 @AddExtensions({ReflectionEntityMetadataExtension.class, DocumentExtension.class})
 class RoomServiceTest {
 
-&nbsp;&nbsp;&nbsp;&nbsp;@Inject
-&nbsp;&nbsp;&nbsp;&nbsp;private RoomRepository repository;
+    @Inject
+    private RoomRepository repository;
 
-&nbsp;&nbsp;&nbsp;&nbsp;private static final&nbsp; Faker FAKER = new Faker();
+    private static final  Faker FAKER = new Faker();
 
-&nbsp;&nbsp;&nbsp;&nbsp;@BeforeEach
-&nbsp;&nbsp;&nbsp;&nbsp;void setUP() {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Room vipRoom1 = new RoomBuilder()
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.roomNumber(101)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.type(RoomType.VIP_SUITE)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.status(RoomStatus.AVAILABLE)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.cleanStatus(CleanStatus.CLEAN)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.smokingAllowed(false)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.build();
+    @BeforeEach
+    void setUP() {
+        Room vipRoom1 = new RoomBuilder()
+                .roomNumber(101)
+                .type(RoomType.VIP_SUITE)
+                .status(RoomStatus.AVAILABLE)
+                .cleanStatus(CleanStatus.CLEAN)
+                .smokingAllowed(false)
+                .build();
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Room vipRoom2 = new RoomBuilder()
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.roomNumber(102)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.type(RoomType.VIP_SUITE)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.status(RoomStatus.AVAILABLE)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.cleanStatus(CleanStatus.CLEAN)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.smokingAllowed(true)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.build();
+        Room vipRoom2 = new RoomBuilder()
+                .roomNumber(102)
+                .type(RoomType.VIP_SUITE)
+                .status(RoomStatus.AVAILABLE)
+                .cleanStatus(CleanStatus.CLEAN)
+                .smokingAllowed(true)
+                .build();
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Room standardRoom1 = new RoomBuilder()
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.roomNumber(201)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.type(RoomType.STANDARD)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.status(RoomStatus.AVAILABLE)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.cleanStatus(CleanStatus.CLEAN)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.smokingAllowed(false)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.build();
+        Room standardRoom1 = new RoomBuilder()
+                .roomNumber(201)
+                .type(RoomType.STANDARD)
+                .status(RoomStatus.AVAILABLE)
+                .cleanStatus(CleanStatus.CLEAN)
+                .smokingAllowed(false)
+                .build();
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Room standardRoom2 = new RoomBuilder()
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.roomNumber(202)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.type(RoomType.DELUXE)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.status(RoomStatus.AVAILABLE)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.cleanStatus(CleanStatus.CLEAN)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.smokingAllowed(false)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.build();
+        Room standardRoom2 = new RoomBuilder()
+                .roomNumber(202)
+                .type(RoomType.DELUXE)
+                .status(RoomStatus.AVAILABLE)
+                .cleanStatus(CleanStatus.CLEAN)
+                .smokingAllowed(false)
+                .build();
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Room dirtyReservedRoom = new RoomBuilder()
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.roomNumber(301)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.type(RoomType.DELUXE)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.status(RoomStatus.RESERVED)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.cleanStatus(CleanStatus.DIRTY)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.smokingAllowed(false)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.build();
+        Room dirtyReservedRoom = new RoomBuilder()
+                .roomNumber(301)
+                .type(RoomType.DELUXE)
+                .status(RoomStatus.RESERVED)
+                .cleanStatus(CleanStatus.DIRTY)
+                .smokingAllowed(false)
+                .build();
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Room dirtySuiteRoom = new RoomBuilder()
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.roomNumber(302)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.type(RoomType.SUITE)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.status(RoomStatus.UNDER_MAINTENANCE)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.cleanStatus(CleanStatus.INSPECTION_NEEDED)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.smokingAllowed(false)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.build();
+        Room dirtySuiteRoom = new RoomBuilder()
+                .roomNumber(302)
+                .type(RoomType.SUITE)
+                .status(RoomStatus.UNDER_MAINTENANCE)
+                .cleanStatus(CleanStatus.INSPECTION_NEEDED)
+                .smokingAllowed(false)
+                .build();
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Room smokingAllowedRoom = new RoomBuilder()
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.roomNumber(401)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.type(RoomType.STANDARD)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.status(RoomStatus.AVAILABLE)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.cleanStatus(CleanStatus.CLEAN)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.smokingAllowed(true)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.build();
+        Room smokingAllowedRoom = new RoomBuilder()
+                .roomNumber(401)
+                .type(RoomType.STANDARD)
+                .status(RoomStatus.AVAILABLE)
+                .cleanStatus(CleanStatus.CLEAN)
+                .smokingAllowed(true)
+                .build();
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;repository.save(List.of(
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;vipRoom1, vipRoom2,
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;standardRoom1, standardRoom2,
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dirtyReservedRoom, dirtySuiteRoom,
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;smokingAllowedRoom
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;));
-&nbsp;&nbsp;&nbsp;&nbsp;}
+        repository.save(List.of(
+                vipRoom1, vipRoom2,
+                standardRoom1, standardRoom2,
+                dirtyReservedRoom, dirtySuiteRoom,
+                smokingAllowedRoom
+        ));
+    }
 
-&nbsp;&nbsp;&nbsp;&nbsp;@AfterEach
-&nbsp;&nbsp;&nbsp;&nbsp;void cleanUp() {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;repository.deleteBy();
-&nbsp;&nbsp;&nbsp;&nbsp;}
+    @AfterEach
+    void cleanUp() {
+        repository.deleteBy();
+    }
 
-&nbsp;&nbsp;&nbsp;&nbsp;@ParameterizedTest(name = "should find rooms by type {0}")
-&nbsp;&nbsp;&nbsp;&nbsp;@EnumSource(RoomType.class)
-&nbsp;&nbsp;&nbsp;&nbsp;void shouldFindRoomByType(RoomType type) {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;List&lt;Room&gt; rooms = this.repository.findByType(type);
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SoftAssertions.assertSoftly(softly -&gt; softly.assertThat(rooms).allMatch(room -&gt; room.getType().equals(type)));
-&nbsp;&nbsp;&nbsp;&nbsp;}
+    @ParameterizedTest(name = "should find rooms by type {0}")
+    @EnumSource(RoomType.class)
+    void shouldFindRoomByType(RoomType type) {
+        List<Room> rooms = this.repository.findByType(type);
+        SoftAssertions.assertSoftly(softly -> softly.assertThat(rooms).allMatch(room -> room.getType().equals(type)));
+    }
 
-&nbsp;&nbsp;&nbsp;&nbsp;@ParameterizedTest
-&nbsp;&nbsp;&nbsp;&nbsp;@MethodSource("room")
-&nbsp;&nbsp;&nbsp;&nbsp;void shouldSaveRoom(Room room) {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Room updateRoom = this.repository.newRoom(room);
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SoftAssertions.assertSoftly(softly -&gt; {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;softly.assertThat(updateRoom).isNotNull();
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;softly.assertThat(updateRoom.getId()).isNotNull();
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;softly.assertThat(updateRoom.getNumber()).isEqualTo(room.getNumber());
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;softly.assertThat(updateRoom.getType()).isEqualTo(room.getType());
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;softly.assertThat(updateRoom.getStatus()).isEqualTo(room.getStatus());
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;softly.assertThat(updateRoom.getCleanStatus()).isEqualTo(room.getCleanStatus());
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;softly.assertThat(updateRoom.isSmokingAllowed()).isEqualTo(room.isSmokingAllowed());
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;});
-&nbsp;&nbsp;&nbsp;&nbsp;}
+    @ParameterizedTest
+    @MethodSource("room")
+    void shouldSaveRoom(Room room) {
+        Room updateRoom = this.repository.newRoom(room);
+        SoftAssertions.assertSoftly(softly -> {
+            softly.assertThat(updateRoom).isNotNull();
+            softly.assertThat(updateRoom.getId()).isNotNull();
+            softly.assertThat(updateRoom.getNumber()).isEqualTo(room.getNumber());
+            softly.assertThat(updateRoom.getType()).isEqualTo(room.getType());
+            softly.assertThat(updateRoom.getStatus()).isEqualTo(room.getStatus());
+            softly.assertThat(updateRoom.getCleanStatus()).isEqualTo(room.getCleanStatus());
+            softly.assertThat(updateRoom.isSmokingAllowed()).isEqualTo(room.isSmokingAllowed());
+        });
+    }
 
-&nbsp;&nbsp;&nbsp;&nbsp;@Test
-&nbsp;&nbsp;&nbsp;&nbsp;void shouldFindRoomReadyToGuest() {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;List&lt;Room&gt; rooms = this.repository.findAvailableStandardRooms();
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SoftAssertions.assertSoftly(softly -&gt; {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;softly.assertThat(rooms).hasSize(3);
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;softly.assertThat(rooms).allMatch(room -&gt; room.getStatus().equals(RoomStatus.AVAILABLE));
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;softly.assertThat(rooms).allMatch(room -&gt; !room.isUnderMaintenance());
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;});
-&nbsp;&nbsp;&nbsp;&nbsp;}
+    @Test
+    void shouldFindRoomReadyToGuest() {
+        List<Room> rooms = this.repository.findAvailableStandardRooms();
+        SoftAssertions.assertSoftly(softly -> {
+            softly.assertThat(rooms).hasSize(3);
+            softly.assertThat(rooms).allMatch(room -> room.getStatus().equals(RoomStatus.AVAILABLE));
+            softly.assertThat(rooms).allMatch(room -> !room.isUnderMaintenance());
+        });
+    }
 
-&nbsp;&nbsp;&nbsp;&nbsp;@Test
-&nbsp;&nbsp;&nbsp;&nbsp;void shouldFindVipRoomsReadyForGuests() {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;List&lt;Room&gt; rooms = this.repository.findVipRoomsReadyForGuests();
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SoftAssertions.assertSoftly(softly -&gt; {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;softly.assertThat(rooms).hasSize(2);
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;softly.assertThat(rooms).allMatch(room -&gt; room.getType().equals(RoomType.VIP_SUITE));
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;softly.assertThat(rooms).allMatch(room -&gt; room.getStatus().equals(RoomStatus.AVAILABLE));
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;softly.assertThat(rooms).allMatch(room -&gt; !room.isUnderMaintenance());
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;});
-&nbsp;&nbsp;&nbsp;&nbsp;}
+    @Test
+    void shouldFindVipRoomsReadyForGuests() {
+        List<Room> rooms = this.repository.findVipRoomsReadyForGuests();
+        SoftAssertions.assertSoftly(softly -> {
+            softly.assertThat(rooms).hasSize(2);
+            softly.assertThat(rooms).allMatch(room -> room.getType().equals(RoomType.VIP_SUITE));
+            softly.assertThat(rooms).allMatch(room -> room.getStatus().equals(RoomStatus.AVAILABLE));
+            softly.assertThat(rooms).allMatch(room -> !room.isUnderMaintenance());
+        });
+    }
 
-&nbsp;&nbsp;&nbsp;&nbsp;@Test
-&nbsp;&nbsp;&nbsp;&nbsp;void shouldFindAvailableSmokingRooms() {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;List&lt;Room&gt; rooms = this.repository.findAvailableSmokingRooms();
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SoftAssertions.assertSoftly(softly -&gt; {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;softly.assertThat(rooms).hasSize(2);
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;softly.assertThat(rooms).allMatch(room -&gt; room.isSmokingAllowed());
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;softly.assertThat(rooms).allMatch(room -&gt; room.getStatus().equals(RoomStatus.AVAILABLE));
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;});
-&nbsp;&nbsp;&nbsp;&nbsp;}
+    @Test
+    void shouldFindAvailableSmokingRooms() {
+        List<Room> rooms = this.repository.findAvailableSmokingRooms();
+        SoftAssertions.assertSoftly(softly -> {
+            softly.assertThat(rooms).hasSize(2);
+            softly.assertThat(rooms).allMatch(room -> room.isSmokingAllowed());
+            softly.assertThat(rooms).allMatch(room -> room.getStatus().equals(RoomStatus.AVAILABLE));
+        });
+    }
 
-&nbsp;&nbsp;&nbsp;&nbsp;@Test
-&nbsp;&nbsp;&nbsp;&nbsp;void shouldFindRoomsNeedingCleaning() {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;List&lt;Room&gt; rooms = this.repository.findRoomsNeedingCleaning();
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SoftAssertions.assertSoftly(softly -&gt; {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;softly.assertThat(rooms).hasSize(2);
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;softly.assertThat(rooms).allMatch(room -&gt; !room.getCleanStatus().equals(CleanStatus.CLEAN));
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;softly.assertThat(rooms).allMatch(room -&gt; !room.getStatus().equals(RoomStatus.OUT_OF_SERVICE));
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;});
-&nbsp;&nbsp;&nbsp;&nbsp;}
+    @Test
+    void shouldFindRoomsNeedingCleaning() {
+        List<Room> rooms = this.repository.findRoomsNeedingCleaning();
+        SoftAssertions.assertSoftly(softly -> {
+            softly.assertThat(rooms).hasSize(2);
+            softly.assertThat(rooms).allMatch(room -> !room.getCleanStatus().equals(CleanStatus.CLEAN));
+            softly.assertThat(rooms).allMatch(room -> !room.getStatus().equals(RoomStatus.OUT_OF_SERVICE));
+        });
+    }
 
-&nbsp;&nbsp;&nbsp;&nbsp;static Stream&lt;Arguments&gt; room() {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return Stream.of(Arguments.of(getRoom(), Arguments.of(getRoom(), Arguments.of(getRoom()))));
-&nbsp;&nbsp;&nbsp;&nbsp;}
+    static Stream<Arguments> room() {
+        return Stream.of(Arguments.of(getRoom(), Arguments.of(getRoom(), Arguments.of(getRoom()))));
+    }
 
-&nbsp;&nbsp;&nbsp;&nbsp;private static Room getRoom() {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return new RoomBuilder()
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.roomNumber(FAKER.number().numberBetween(100, 999))
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.type(randomEnum(RoomType.class))
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.status(randomEnum(RoomStatus.class))
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.cleanStatus(randomEnum(CleanStatus.class))
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.smokingAllowed(FAKER.bool().bool())
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.build();
-&nbsp;&nbsp;&nbsp;&nbsp;}
+    private static Room getRoom() {
+        return new RoomBuilder()
+                .roomNumber(FAKER.number().numberBetween(100, 999))
+                .type(randomEnum(RoomType.class))
+                .status(randomEnum(RoomStatus.class))
+                .cleanStatus(randomEnum(CleanStatus.class))
+                .smokingAllowed(FAKER.bool().bool())
+                .build();
+    }
 
-&nbsp;&nbsp;&nbsp;&nbsp;private static &lt;T extends Enum&lt;?&gt;&gt; T randomEnum(Class&lt;T&gt; enumClass) {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;T[] constants = enumClass.getEnumConstants();
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;int index = ThreadLocalRandom.current().nextInt(constants.length);
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return constants[index];
-&nbsp;&nbsp;&nbsp;&nbsp;}
-}</pre>
+    private static <T extends Enum<?>> T randomEnum(Class<T> enumClass) {
+        T[] constants = enumClass.getEnumConstants();
+        int index = ThreadLocalRandom.current().nextInt(constants.length);
+        return constants[index];
+    }
+}
+```
+
 
 Conclusion {#h2-5-conclusion}
 -----------------------------

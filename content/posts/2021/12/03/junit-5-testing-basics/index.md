@@ -32,7 +32,8 @@ Tests in JUnit5 are annotated with the **@Test** annotation. *Unlike prior versi
 
 **Example** : **[@Test](https://github.com/c-guntur/java-katas/blob/main/java-datetime/src/test/java/none/cvg/datetime/TestKata1InstantAndDateInterop.java#L43)** (<https://github.com/c-guntur/java-katas/blob/main/java-datetime/src/test/java/none/cvg/datetime/TestKata1InstantAndDateInterop.java#L43>[)](https://github.com/c-guntur/java-katas/blob/baseline/java-datetime/src/solutions/java/none/cvg/datetime/STest1InstantAndDateInteropTest.java#L43)
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">    &lt;strong&gt;@Test&lt;/strong&gt;
+```java
+    <strong>@Test</strong>
     @Tag("PASSING")
     @Order(1)
     public void verifyInstantAndDateHaveSameEpochMilliseconds() {
@@ -49,7 +50,8 @@ Tests in JUnit5 are annotated with the **@Test** annotation. *Unlike prior versi
                 instant.toEpochMilli(),
                 "Date and Instant milliseconds should be equal");
     }
-</pre>
+```
+
 
 ### Assertions {#h3-2-assertions}
 
@@ -76,7 +78,8 @@ Typically, unit tests statically import the assertions required for the given te
 
 **Example** : **[Assertion](https://github.com/c-guntur/java-katas/blob/main/java-datetime/src/test/java/none/cvg/datetime/TestKata1InstantAndDateInterop.java#L56)** (<https://github.com/c-guntur/java-katas/blob/main/java-datetime/src/test/java/none/cvg/datetime/TestKata1InstantAndDateInterop.java#L56>)
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">    @Test
+```java
+    @Test
     @Tag("PASSING")
     @Order(1)
     public void verifyInstantAndDateHaveSameEpochMilliseconds() {
@@ -89,15 +92,17 @@ Typically, unit tests statically import the assertions required for the given te
         // DONE: Replace the "null" below to get milliseconds from epoch from the Instant
         //  Use an Instant API which converts it into milliseconds
         //  Check: java.time.Instant.toEpochMilli()
-        &lt;strong&gt;assertEquals(Long.valueOf(classicDate.getTime()),
+        <strong>assertEquals(Long.valueOf(classicDate.getTime()),
                 instant.toEpochMilli(),
-                "Date and Instant milliseconds should be equal");&lt;/strong&gt;
+                "Date and Instant milliseconds should be equal");</strong>
     }
-</pre>
+```
+
 
 **See also** : **[Static Import](https://github.com/c-guntur/java-katas/blob/baseline/java-datetime/src/solutions/java/none/cvg/datetime/STest1InstantAndDateInteropTest.java#L18)** ([](https://github.com/c-guntur/java-katas/blob/baseline/java-datetime/src/solutions/java/none/cvg/datetime/STest1InstantAndDateInteropTest.java#L18)<https://github.com/c-guntur/java-katas/blob/main/java-datetime/src/test/java/none/cvg/datetime/TestKata1InstantAndDateInterop.java#L18>)
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">import java.text.SimpleDateFormat;
+```java
+import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.util.Date;
 import java.util.TimeZone;
@@ -112,9 +117,10 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 
 import static none.cvg.datetime.LenientAssert.assertAlmostEquals;
-&lt;strong&gt;import static org.junit.jupiter.api.Assertions.assertEquals;&lt;/strong&gt;
+<strong>import static org.junit.jupiter.api.Assertions.assertEquals;</strong>
 import static org.junit.jupiter.api.Assertions.assertTrue;
-</pre>
+```
+
 
 > ***NOTE**: Assertion parameter ordering in JUnit 5 is different from the order in prior versions. In my opinion, the current parameter arrangement makes a lot more sense.*
 
@@ -127,8 +133,9 @@ Tags are a means to categorize test methods and classes. Tagging also leads to d
 
 **Example: [@Tag](https://github.com/c-guntur/java-katas/blob/main/java-datetime/src/test/java/none/cvg/datetime/TestKata1InstantAndDateInterop.java#L62)** ([](https://github.com/c-guntur/java-katas/blob/main/java-datetime/src/test/java/none/cvg/datetime/TestKata1InstantAndDateInterop.java#L62)<https://github.com/c-guntur/java-katas/blob/main/java-datetime/src/test/java/none/cvg/datetime/TestKata1InstantAndDateInterop.java#L62>)
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">    @Test
-    &lt;strong&gt;@Tag("PASSING")&lt;/strong&gt;
+```java
+    @Test
+    <strong>@Tag("PASSING")</strong>
     @Order(1)
     public void verifyInstantAndDateHaveSameEpochMilliseconds() {
 
@@ -144,7 +151,8 @@ Tags are a means to categorize test methods and classes. Tagging also leads to d
                 instant.toEpochMilli(),
                 "Date and Instant milliseconds should be equal");
     }
-</pre>
+```
+
 
 ### Assumptions {#h3-5-assumptions}
 
@@ -155,23 +163,25 @@ Assumptions are conditions that determine if the rest of the test code block sho
 
 Similar to assertions, assumptions are grouped as static methods, in a factory utility class, [**Assumptions**](https://junit.org/junit5/docs/5.5.0/api/org/junit/jupiter/api/Assumptions.html) (<https://junit.org/junit5/docs/5.5.0/user-guide/#writing-tests-assumptions>).
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">class TestWithAssumptions {
+```java
+class TestWithAssumptions {
 
     @Test
     void testOnlyOnHost123() {
-        &lt;strong&gt;assumeTrue("host123".equals(System.getenv("HOSTNAME")));&lt;/strong&gt;
+        <strong>assumeTrue("host123".equals(System.getenv("HOSTNAME")));</strong>
         // remainder of test
     }
 
     @Test
     void testOnHost123OrAbortWithMessage() {
-        &lt;strong&gt;assumeTrue("host123".equals(System.getenv("HOSTNAME")),
-            () -&gt; "Aborting test: not on host123");&lt;/strong&gt;
+        <strong>assumeTrue("host123".equals(System.getenv("HOSTNAME")),
+            () -> "Aborting test: not on host123");</strong>
         // remainder of test
     }
 
 }
-</pre>
+```
+
 
 Typically, unit tests statically import the assumptions required for the given tests in a test class.
 
@@ -198,7 +208,8 @@ More custom orders can be created by implementing the `MethodOrderer` interface.
 
 **Example** : **[@TestMethodOrder](https://github.com/c-guntur/java-katas/blob/main/java-datetime/src/test/java/none/cvg/datetime/TestKata1InstantAndDateInterop.java#L31)** ([](https://github.com/c-guntur/java-katas/blob/baseline/java-datetime/src/solutions/java/none/cvg/datetime/STest1InstantAndDateInteropTest.java#L31)<https://github.com/c-guntur/java-katas/blob/main/java-datetime/src/test/java/none/cvg/datetime/TestKata1InstantAndDateInterop.java#L31>)
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">/**
+```java
+/**
  * The tests in this class aim to show interoperability between
  * `java.util.Date` and the newer `java.time.Instant`.
  *
@@ -208,9 +219,10 @@ More custom orders can be created by implementing the `MethodOrderer` interface.
  */
 @DisplayNameGeneration(DateTimeKataDisplayNames.class)
 @DisplayName("Instant And Date Interoperability")
-&lt;strong&gt;@TestMethodOrder(MethodOrderer.OrderAnnotation.class)&lt;/strong&gt;
+<strong>@TestMethodOrder(MethodOrderer.OrderAnnotation.class)</strong>
 public class STest1InstantAndDateInteropTest {
-</pre>
+```
+
 
 #### Extra Step (For OrderAnnotation only): Adding an Order via annotations
 
@@ -218,9 +230,10 @@ In addition to the above annotation instructing JUnit to order test methods, **a
 
 **Example** : **[@Order](https://github.com/c-guntur/java-katas/blob/main/java-datetime/src/test/java/none/cvg/datetime/TestKata1InstantAndDateInterop.java#L45)** (<https://github.com/c-guntur/java-katas/blob/main/java-datetime/src/test/java/none/cvg/datetime/TestKata1InstantAndDateInterop.java#L45>)
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">    @Test
+```java
+    @Test
     @Tag("PASSING")
-    &lt;strong&gt;@Order(1)&lt;/strong&gt;
+    <strong>@Order(1)</strong>
     public void verifyInstantAndDateHaveSameEpochMilliseconds() {
 
         // DONE: Replace the Instant.now() with an instant from classicDate.
@@ -235,7 +248,8 @@ In addition to the above annotation instructing JUnit to order test methods, **a
                 instant.toEpochMilli(),
                 "Date and Instant milliseconds should be equal");
     }
-</pre>
+```
+
 
 That's a wrap of part two of this series on Junit 5.
 

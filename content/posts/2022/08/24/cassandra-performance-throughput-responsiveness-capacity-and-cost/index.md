@@ -120,7 +120,10 @@ Our tests all used a tlp-stress benchmarking configuration similar to the one de
 
 The following tlp-stress command was used:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">tlp-stress run BasicTimeSeries -d 150m -p 100M -c 50 --pg sequence -t 8 -r 0.2 --rate &lt;desired rate&gt; --populate 200000 --response-time-warmup 30m --csv ./tlp_stress_metrics_1.csv --hdr ./tlp_stress_metrics_1.hdr</pre>
+```
+tlp-stress run BasicTimeSeries -d 150m -p 100M -c 50 --pg sequence -t 8 -r 0.2 --rate <desired rate> --populate 200000 --response-time-warmup 30m --csv ./tlp_stress_metrics_1.csv --hdr ./tlp_stress_metrics_1.hdr
+```
+
 
 All workloads ran for 150 minutes, allowing compaction loads to be exhibited during the runs.
 

@@ -46,7 +46,8 @@ Another very convenient way to install Java and switch between different version
 
 Installing one of these versions is a one-line command `sdk install java VERSION`. As you can see in the following output SDKMAN shows it has detected that it's running on a `Linux ARM 64bit` system, and it only shows the versions created for this platform:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ sdk list java
+```
+$ sdk list java
 ================================================================================
 Available Java Versions for Linux ARM 64bit
 ================================================================================
@@ -59,7 +60,7 @@ Available Java Versions for Linux ARM 64bit
 ...
                |     | 21.0.3.fx    | zulu    |            | 21.0.3.fx-zulu
 ...
-               | &gt;&gt;&gt; | 17.0.11.fx   | zulu    | installed  | 17.0.11.fx-zulu
+               | >>> | 17.0.11.fx   | zulu    | installed  | 17.0.11.fx-zulu
 ...
                |     | 11.0.23.fx   | zulu    |            | 11.0.23.fx-zulu
 ...
@@ -77,7 +78,9 @@ OpenJDK 64-Bit Server VM Zulu22.30+13-CA (build 22.0.1+8, mixed mode, sharing)
 
 # If you already installed a version before and want to switch back to it, use:
 $ sdk use java 22.0.1.fx-zulu
-Using java version 22.0.1.fx-zulu in this shell.</pre>
+Using java version 22.0.1.fx-zulu in this shell.
+```
+
 
 JavaFX Demo Experiment {#RunningJavaFXonRaspberryPiwithAzulZulu-JavaFXExperiment}
 ---------------------------------------------------------------------------------
@@ -86,7 +89,8 @@ Let's try it out with a simple JavaFX application on this Raspberry Pi. You can 
 
 As you can see in the code, changing the value of `NUMBER_OF_BALLS` allows you to quickly test how much animation your system can handle before the framerate drops. All the code is included in one file, and the first three lines enable us to run it with [J'BANG!](https://www.jbang.dev/) to avoid the need to build a full Maven or Gradle project.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">///usr/bin/env jbang "$0" "$@" ; exit $?
+```java
+///usr/bin/env jbang "$0" "$@" ; exit $?
 
 //DEPS org.openjfx:javafx-controls:22.0.2
 //DEPS org.openjfx:javafx-graphics:22.0.2:${os.detected.jfxname}
@@ -129,23 +133,31 @@ public class FxDemo extends Application {
     }
 
     ...
-}</pre>
+}
+```
+
 
 As we already used SDKMAN to install Java, we can also use it to install J'BANG! and check if it installed correctly by running these commands:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ sdk install jbang
+```
+$ sdk install jbang
 $ jbang --version
-0.117.1</pre>
+0.117.1
+```
+
 
 Get the code from GitHub and save it as FxDemo.java. You can now start the application without the need to compile any code, J'BANG! will handle this for us:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ jbang FxDemo.java
+```
+$ jbang FxDemo.java
 [jbang] Building jar for FxDemo.java...
 
 # If you are connected via SSH, add the display.
 # Otherwise you get this error:
 # "UnsupportedOperationException: Unable to open DISPLAY"
-$ DISPLAY=:0 jbang FxDemo.java</pre>
+$ DISPLAY=:0 jbang FxDemo.java
+```
+
 
 Conclusion {#RunningJavaFXonRaspberryPiwithAzulZulu-Conclusion}
 ---------------------------------------------------------------

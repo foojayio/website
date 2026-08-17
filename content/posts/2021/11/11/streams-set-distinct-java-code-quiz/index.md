@@ -31,17 +31,18 @@ Stream Set Distinct Challenge {#h2-0-stream-set-distinct-challenge}
 
 Can you guess what will happen when running the following Java code?
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">import java.util.Set;
+```java
+import java.util.Set;
 
 public class StreamDistinctChallenge {
 
     public static void main(String... doYourBest) {
-        Set&lt;Warrior&gt; warriors = Set.of(new Warrior("Ezio"), new Warrior("Ezio"),
+        Set<Warrior> warriors = Set.of(new Warrior("Ezio"), new Warrior("Ezio"),
                 new Warrior("Kratos"), new Warrior("Cloud"), new Warrior("Alucard"));
 
         warriors.stream()
                 .distinct()
-                .forEach(w -&gt; System.out.println(w.name));
+                .forEach(w -> System.out.println(w.name));
     }
 
     static class Warrior {
@@ -59,7 +60,9 @@ public class StreamDistinctChallenge {
             return this.name.equals(((Warrior) obj).name);
         }
     }
-}</pre>
+}
+```
+
 
 A) Cloud Ezio Alucard Kratos  
 
@@ -73,7 +76,10 @@ D) NullPointerException will be thrown
 
 The catch of this quiz is the Set.of factory method behavior. Note that we are passing "Ezio" twice, so that will be equal and will have the same hashcode number.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">Set.of(new Warrior("Ezio"), new Warrior("Ezio"), new Warrior("Kratos"), new Warrior("Cloud"), new Warrior("Alucard"));</pre>
+```java
+Set.of(new Warrior("Ezio"), new Warrior("Ezio"), new Warrior("Kratos"), new Warrior("Cloud"), new Warrior("Alucard"));
+```
+
 
 The problem is that when we use two objects that are equal, the Set.of method will do something specific, because of the duplicated elements, one of the answers above. 🙂
 

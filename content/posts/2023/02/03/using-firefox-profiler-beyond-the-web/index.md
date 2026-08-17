@@ -39,9 +39,11 @@ There are other tools that output use Firefox Profiler for their front end. A gr
 >
 > 
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">% cargo install samply
+```bash
+% cargo install samply
 % samply record ./your-command your-arguments
-</pre>
+```
+
 
 > [GiTHUB](https://github.com/mstange/samply)
 
@@ -85,7 +87,8 @@ The following shows the main components of the profile format, omitting and summ
 
 The topmost level of a profile is the [Profile](https://github.com/firefox-devtools/profiler/blob/d960fc68ab0ccd04759bbaeef228adc76f41b300/src/types/profile.js#L908) type:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="js" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">type Profile = {|
+```javascript
+type Profile = {|
   meta: ProfileMeta,    // meta information, like application name
   libs: Lib[],          // used shared native libraries
   ...
@@ -94,7 +97,8 @@ The topmost level of a profile is the [Profile](https://github.com/firefox-devto
   threads: Thread[],    // samples per thread
   ...
 |};
-</pre>
+```
+
 
 A profile consists of the metadata, shared libraries, CPU and memory counters, and the rest of the data per thread.
 
@@ -102,7 +106,8 @@ A profile consists of the metadata, shared libraries, CPU and memory counters, a
 
 A profile can have lots of metadata shown in the UI. The [ProfileMeta](https://github.com/firefox-devtools/profiler/blob/d960fc68ab0ccd04759bbaeef228adc76f41b300/src/types/profile.js#L750) type specifies this:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="js" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">type ProfileMeta = {|
+```javascript
+type ProfileMeta = {|
   // The interval at which the threads are sampled.
   interval: Milliseconds,
   // The number of milliseconds since midnight January 1, 1970 GMT.
@@ -152,7 +157,9 @@ A profile can have lots of metadata shown in the UI. The [ProfileMeta](https://g
   initialSelectedThreads?: ThreadIndex[],
   // Keep the defined thread order
   keepProfileThreadOrder?: boolean,
-|};</pre>
+|};
+```
+
 
 And there is more. It might feel overwhelming, but this data structure also allows you to tailor the profiler UI slightly to your needs.
 
@@ -160,11 +167,14 @@ And there is more. It might feel overwhelming, but this data structure also allo
 
 Many parts of the profile are associated with a [Category](https://github.com/firefox-devtools/profiler/blob/d960fc68ab0ccd04759bbaeef228adc76f41b300/src/types/profile.js#L447) and a subcategory. A category is defined as:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="js" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">type Category = {|
+```javascript
+type Category = {|
   name: string,
   color: string,
   subcategories: string[],
-|};</pre>
+|};
+```
+
 
 Categories are referenced by their index in the category list of the `ProfileMeta` data structure and subcategories by their index in the field of their parent category.
 
@@ -177,7 +187,8 @@ Now to the individual threads:
 
 The [thread](https://github.com/firefox-devtools/profiler/blob/d960fc68ab0ccd04759bbaeef228adc76f41b300/src/types/profile.js#L610)data structure combines all information related to a single thread. There can be multiple threads per process Id. The thread with the name GeckoMain is handled differently than the others. It is the main thread that is shown in the process timeline.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="js" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">type Thread = {|
+```javascript
+type Thread = {|
   ...
   processStartupTime: Milliseconds,
   processShutdownTime: Milliseconds | null,
@@ -200,7 +211,9 @@ The [thread](https://github.com/firefox-devtools/profiler/blob/d960fc68ab0ccd047
   funcTable: FuncTable,
   resourceTable: ResourceTable,
   ...
-|};</pre>
+|};
+```
+
 
 The file format stores all stack traces in a space-efficient format which the front end can handle fast. It uses an array of strings (`stringTable`) to store all strings that appear in the stack traces (like function names), the other data structures only refer to strings by their index in this array.
 
@@ -208,7 +221,8 @@ The file format stores all stack traces in a space-efficient format which the fr
 
 This [data structure](https://github.com/firefox-devtools/profiler/blob/d960fc68ab0ccd04759bbaeef228adc76f41b300/src/types/profile.js#L153) associates a captured stack with a capture time and an optional weight:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="js" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">/**
+```javascript
+/**
  * The Gecko Profiler records samples of what function was currently being executed, and
  * the callstack that is associated with it. This is done at a fixed but configurable
  * rate, e.g. every 1 millisecond. This table represents the minimal amount of
@@ -217,7 +231,7 @@ This [data structure](https://github.com/firefox-devtools/profiler/blob/d960fc68
  */
 type SamplesTable = {|
   ...
-  stack: Array&lt;IndexIntoStackTable | null&gt;,
+  stack: Array<IndexIntoStackTable | null>,
   time: Milliseconds[],
   // An optional weight array. If not present, then the weight is assumed to be 1.
   // See the WeightType type for more information.
@@ -225,19 +239,24 @@ type SamplesTable = {|
   weightType: WeightType,  // 'samples' or 'tracing-ms'
   // CPU usage value of the current thread. Its values are null only if the back-end
   // fails to get the CPU usage from operating system.
-  threadCPUDelta?: Array&lt;number | null&gt;,
+  threadCPUDelta?: Array<number | null>,
   length: number,
-|};</pre>
+|};
+```
+
 
 Filling this with data from a sampling profiler is easy, just add references to the stacks and their occurrence time. For example consider you sampled the stack `A-B` at 0 and `A-B-C` at 2, then the samples table is:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="js" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">SamplesTable = {
+```javascript
+SamplesTable = {
   stack: [A-B, A-B-C], // references into the stack table
   time:  [0, 2],
   weigth: null,
   weigthType: 'samples',
   length: 2
-}</pre>
+}
+```
+
 
 Filling the `threadCPUDelta` property allows you to specify the CPU time a thread has used since the last sample. The Firefox Profiler uses this property to show the CPU usage curves in the timeline:
 ![](https://mostlynerdless.de/wp-content/uploads/2023/01/image-4-2000x64.png)
@@ -246,37 +265,44 @@ Filling the `threadCPUDelta` property allows you to specify the CPU time a threa
 
 All stacks are stored in the [stack table](https://github.com/firefox-devtools/profiler/blob/d960fc68ab0ccd04759bbaeef228adc76f41b300/src/types/profile.js#L84) using a prefix array:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="js" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">type StackTable = {|
+```javascript
+type StackTable = {|
   frame: IndexIntoFrameTable[],
   // Imported profiles may not have categories. In this case fill the array with 0s.
   category: IndexIntoCategoryList[],
   subcategory: IndexIntoSubcategoryListForCategory[],
-  prefix: Array&lt;IndexIntoStackTable | null&gt;,
+  prefix: Array<IndexIntoStackTable | null>,
   length: number,
-|};</pre>
+|};
+```
+
 
 Category and subcategory of a stack `n` gives information on the whole stack, the frame just on its topmost frame. The prefix denotes the stack related to the second-top-most frame or that this stack only has one frame if `null`. This allows the efficient storage of stacks.
 
 Now consider our example from before. We could store the stack `A-B-C` as follows:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="js" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">StackTable = {
+```javascript
+StackTable = {
   frame:  [A, B, C], // references into the frame table
   prefix: [1, 2, 0],
   ...
-}</pre>
+}
+```
+
 
 ### Frame Table {#h3-10-frame-table}
 
 The frames themselves are stored in the [frame table](https://github.com/firefox-devtools/profiler/blob/d960fc68ab0ccd04759bbaeef228adc76f41b300/src/types/profile.js#L272):
 
-<pre class="EnlighterJSRAW" data-enlighter-language="js" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">/**
+```javascript
+/**
  * Frames contain the context information about the function execution at the moment in
  * time. The caller/callee relationship between frames is defined by the StackTable.
  */
 type FrameTable = {|
   // If this is a frame for native code, the address is the address of the frame's
   // assembly instruction,  relative to the native library that contains it.
-  address: Array&lt;Address | -1&gt;,
+  address: Array<Address | -1>,
 
   // The inline depth for this frame. If there is an inline stack at an address,
   // we create multiple frames with the same address, one for each depth.
@@ -290,7 +316,9 @@ type FrameTable = {|
   line: (number | null)[],
   column: (number | null)[],
   length: number,
-|};</pre>
+|};
+```
+
 
 Each frame is related to a function, which is in turn stored in the `FuncTable`.
 
@@ -298,51 +326,57 @@ Each frame is related to a function, which is in turn stored in the `FuncTable`.
 
 The function table stores all functions with some metadata:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="js" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">type FuncTable = {|
+```javascript
+type FuncTable = {|
   // The function name.
-  name: Array&lt;IndexIntoStringTable&gt;,
+  name: Array<IndexIntoStringTable>,
 
   // isJS and relevantForJS describe the function type. Non-JavaScript functions
   // can be marked as "relevant for JS" so that for example DOM API label functions
   // will show up in any JavaScript stack views.
   // It may be worth combining these two fields into one:
   // https://github.com/firefox-devtools/profiler/issues/2543
-  isJS: Array&lt;boolean&gt;,
-  relevantForJS: Array&lt;boolean&gt;,
+  isJS: Array<boolean>,
+  relevantForJS: Array<boolean>,
 
   // The resource describes "Which bag of code did this function come from?".
   // For JS functions, the resource is of type addon, webhost, otherhost, or url.
   // For native functions, the resource is of type library.
   // For labels and for other unidentified functions, we set the resource to -1.
-  resource: Array&lt;IndexIntoResourceTable | -1&gt;,
+  resource: Array<IndexIntoResourceTable | -1>,
 
   // These are non-null for JS functions only. The line and column describe the
   // location of the *start* of the JS function. As for the information about which
   // which lines / columns inside the function were actually hit during execution,
   // that information is stored in the frameTable, not in the funcTable.
-  fileName: Array&lt;IndexIntoStringTable | null&gt;,
-  lineNumber: Array&lt;number | null&gt;,
-  columnNumber: Array&lt;number | null&gt;,
+  fileName: Array<IndexIntoStringTable | null>,
+  lineNumber: Array<number | null>,
+  columnNumber: Array<number | null>,
 
   length: number,
-|};</pre>
+|};
+```
+
 
 ### Resource Table {#h3-12-resource-table}
 
 The last table I'll show in this article is the resource table. It depends on you and what you map to it:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="js" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">/**
+```javascript
+/**
  * The ResourceTable holds additional information about functions. It tends to contain
  * sparse arrays. Multiple functions can point to the same resource.
  */
 type ResourceTable = {|
   length: number,
   ...
-  name: Array&lt;IndexIntoStringTable&gt;,
+  name: Array<IndexIntoStringTable>,
   ...
   // 0: unknown, library: 1, addon: 2, webhost: 3, otherhost: 4, url: 5
   type: resourceTypeEnum[],
-|};</pre>
+|};
+```
+
 
 This was quite a technical article, so thanks for reading till the end. I hope it helps you when you try to target the Firefox Profiler, and see you for the next blog post.
 

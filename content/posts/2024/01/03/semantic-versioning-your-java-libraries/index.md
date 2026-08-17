@@ -68,38 +68,42 @@ There are two ways of integrating the automatic version check in your current pi
    `mvn package io.github.jagodevreede:semver-check-maven-plugin:check`
 2. and/or add it to the pom.xml (and replace VERSION_NUMBER with the [latest released version](https://github.com/jagodevreede/semver-check/releases))
 
-<pre class="EnlighterJSRAW" data-enlighter-language="xml">&lt;build&gt;
+```xml
+<build>
     ...
-    &lt;plugins&gt;
+    <plugins>
         ...
-        &lt;plugin&gt;
-            &lt;artifactId&gt;semver-check-maven-plugin&lt;/artifactId&gt;
-            &lt;groupId&gt;io.github.jagodevreede&lt;/groupId&gt;
-            &lt;version&gt;VERSION_NUMBER&lt;/version&gt;
-            &lt;configuration&gt;
-                &lt;haltOnFailure&gt;true&lt;/haltOnFailure&gt;
-                &lt;outputFileName&gt;nextVersion.txt&lt;/outputFileName&gt;
-            &lt;/configuration&gt;
-            &lt;executions&gt;
-                &lt;execution&gt;
-                    &lt;id&gt;check&lt;/id&gt;
-                    &lt;phase&gt;verify&lt;/phase&gt;
-                    &lt;goals&gt;
-                        &lt;goal&gt;check&lt;/goal&gt;
-                    &lt;/goals&gt;
-                &lt;/execution&gt;
-            &lt;/executions&gt;
-        &lt;/plugin&gt;
+        <plugin>
+            <artifactId>semver-check-maven-plugin</artifactId>
+            <groupId>io.github.jagodevreede</groupId>
+            <version>VERSION_NUMBER</version>
+            <configuration>
+                <haltOnFailure>true</haltOnFailure>
+                <outputFileName>nextVersion.txt</outputFileName>
+            </configuration>
+            <executions>
+                <execution>
+                    <id>check</id>
+                    <phase>verify</phase>
+                    <goals>
+                        <goal>check</goal>
+                    </goals>
+                </execution>
+            </executions>
+        </plugin>
         ...
-    &lt;/plugins&gt;
+    </plugins>
     ...
-&lt;/build&gt;</pre>
+</build>
+```
+
 
 You need to run at least the package phase to be able to have valid results of the semver-check
 
 The output of this run will be something like this:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="raw">[INFO] --- semver-check-maven-plugin:0.4.1:check (default-cli) @ some-module-core ---
+```
+[INFO] --- semver-check-maven-plugin:0.4.1:check (default-cli) @ some-module-core ---
 Downloading from central: https://.../some-module/0.4.1/some-module-core-0.4.1.pom
 Downloaded from central: https://.../some-module/0.4.1/some-module-core-0.4.1.pom (1.4 kB at 14 kB/s)
 Downloading from central: https://.../some-module/0.4.1/some-module-core-0.4.1.jar
@@ -109,7 +113,9 @@ Downloaded from central: https://.../some-module/0.4.1/some-module-core-0.4.1.ja
 [INFO] Class org.acme.example.MyClass has been changed on byte level
 [INFO] Class org.acme.example.OtherClass has been changed on byte level
 [INFO] File META-INF/MANIFEST.MF has been changed
-[INFO] Determined SemVer type as patch and is currently none, next version should be: 0.4.2</pre>
+[INFO] Determined SemVer type as patch and is currently none, next version should be: 0.4.2
+```
+
 
 The output gives us a summary of what the next version should be and a summary of why. Please note that the plugin stops searching for *patch* changes if it already detects a *minor* update for example. This keeps execution time as low as possible.
 

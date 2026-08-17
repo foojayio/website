@@ -52,8 +52,11 @@ JEP 430 String Interpolation {#h2-0-jep-430-string-interpolation}
 
 One of the big features coming to JDK 21 is [JEP 430](https://openjdk.org/jeps/430), which is a string interpolation language change. It will allow writing code like this:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">String name = "Joan";
-String info = STR."My name is \{name}";</pre>
+```
+String name = "Joan";
+String info = STR."My name is \{name}";
+```
+
 
 In this case, `info` will have the value `"My name is Joan"`. This is just the tip of the iceberg in this JSR as the entire architecture is pluggable. I will discuss this in a future video but for now, the basic functionality we see here is pretty fantastic.
 
@@ -66,54 +69,60 @@ Before we dive into the code, I want to remind you that all the code for this an
 
 String templating has no dependencies. We still need to make changes to the pom file but we don't need to add dependencies. I'm adding one dependency here for the advanced templates we will discuss soon. All that's needed is the compiler plugin. That means that string templates are a compile-time feature and have no runtime impact!
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">&lt;dependencies&gt;
-   &lt;dependency&gt;
-       &lt;groupId&gt;systems.manifold&lt;/groupId&gt;
-       &lt;artifactId&gt;manifold-templates-rt&lt;/artifactId&gt;
-       &lt;version&gt;${manifold.version}&lt;/version&gt;
-   &lt;/dependency&gt;
-&lt;/dependencies&gt;
+```
+<dependencies>
+   <dependency>
+       <groupId>systems.manifold</groupId>
+       <artifactId>manifold-templates-rt</artifactId>
+       <version>${manifold.version}</version>
+   </dependency>
+</dependencies>
 
-&lt;build&gt;
-   &lt;plugins&gt;
-       &lt;plugin&gt;
-           &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;
-           &lt;artifactId&gt;maven-compiler-plugin&lt;/artifactId&gt;
-           &lt;version&gt;3.8.0&lt;/version&gt;
-           &lt;configuration&gt;
-               &lt;source&gt;19&lt;/source&gt;
-               &lt;target&gt;19&lt;/target&gt;
-               &lt;encoding&gt;UTF-8&lt;/encoding&gt;
-               &lt;compilerArgs&gt;
-                   &lt;!-- Configure manifold plugin --&gt;
-                   &lt;arg&gt;-Xplugin:Manifold&lt;/arg&gt;
-               &lt;/compilerArgs&gt;
+<build>
+   <plugins>
+       <plugin>
+           <groupId>org.apache.maven.plugins</groupId>
+           <artifactId>maven-compiler-plugin</artifactId>
+           <version>3.8.0</version>
+           <configuration>
+               <source>19</source>
+               <target>19</target>
+               <encoding>UTF-8</encoding>
+               <compilerArgs>
+                   <!-- Configure manifold plugin -->
+                   <arg>-Xplugin:Manifold</arg>
+               </compilerArgs>
 
-               &lt;!-- Add the processor path for the plugin --&gt;
-               &lt;annotationProcessorPaths&gt;
-                   &lt;path&gt;
-                       &lt;groupId&gt;systems.manifold&lt;/groupId&gt;
-                       &lt;artifactId&gt;manifold-strings&lt;/artifactId&gt;
-                       &lt;version&gt;${manifold.version}&lt;/version&gt;
-                   &lt;/path&gt;
-                   &lt;path&gt;
-                       &lt;groupId&gt;systems.manifold&lt;/groupId&gt;
-                       &lt;artifactId&gt;manifold-templates&lt;/artifactId&gt;
-                       &lt;version&gt;${manifold.version}&lt;/version&gt;
-                   &lt;/path&gt;
-               &lt;/annotationProcessorPaths&gt;
-           &lt;/configuration&gt;
-       &lt;/plugin&gt;
-   &lt;/plugins&gt;
-&lt;/build&gt;</pre>
+               <!-- Add the processor path for the plugin -->
+               <annotationProcessorPaths>
+                   <path>
+                       <groupId>systems.manifold</groupId>
+                       <artifactId>manifold-strings</artifactId>
+                       <version>${manifold.version}</version>
+                   </path>
+                   <path>
+                       <groupId>systems.manifold</groupId>
+                       <artifactId>manifold-templates</artifactId>
+                       <version>${manifold.version}</version>
+                   </path>
+               </annotationProcessorPaths>
+           </configuration>
+       </plugin>
+   </plugins>
+</build>
+```
+
 
 Manifold String Interpolation {#h2-2-manifold-string-interpolation}
 -------------------------------------------------------------------
 
 To begin, we can create a new variable that we can use to get external input. In the second line, we integrate that variable into the printout:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">String world = args.length &gt; 0 ? args[0] : "world";
-System.out.println("Hello $world! I can write \$world as the variable...");</pre>
+```
+String world = args.length > 0 ? args[0] : "world";
+System.out.println("Hello $world! I can write \$world as the variable...");
+```
+
 
 The backslash syntax implicitly disables the templating behavior, just like in other string elements in Java. This will print `"Hello world! I can write $world as the variable..."`.
 
@@ -129,41 +138,53 @@ Notice the `$world` expression, it is colored differently. It's no longer just a
 
 There's another way to escape a string, and we can use the `@DisableStringLiteralTemplates` annotation on a method or a class to disable this functionality in the respective block of code. This can be useful if we use the dollar sign frequently in a block of code:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">@DisableStringLiteralTemplates
+```
+@DisableStringLiteralTemplates
 private static void noTemplate(String word) {
    System.out.println("Hello $world!");
-}</pre>
+}
+```
+
 
 Templates {#h2-3-templates}
 ---------------------------
 
 The Manifold project allows us to create JSP-like templates without all of the baggage. We can define a base class to a template to create generic code for the templates and place common functionality in a single location. We can create a file called HelloTemplate.html.mtl in the resources/templates directory with the following content. Notice the params we define in the template file can be anything:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">&lt;%@ params(String title, String body) %&gt;
-&lt;!DOCTYPE html&gt;
-&lt;html lang="en"&gt;
-&lt;head&gt;
- &lt;meta charset="UTF-8"&gt;
- &lt;title&gt;${title}&lt;/title&gt;
-&lt;/head&gt;
-&lt;body&gt;
+```
+<%@ params(String title, String body) %>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <title>${title}</title>
+</head>
+<body>
    ${body}
-&lt;/body&gt;
-&lt;/html&gt;</pre>
+</body>
+</html>
+```
+
 
 This will seem very familiar to those of us with a JSP background. We can then use the file in the Java code like this, we can pass the parameters and they will replace the appropriate blocks in the HTML file:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">System.out.println(HelloTemplate.render("My Title", "My Body"));</pre>
+```
+System.out.println(HelloTemplate.render("My Title", "My Body"));
+```
+
 
 Notice the generated template it compiled to a class, similarly to JSP. Unlike JSP this template isn't a servlet and can be used in any context. A local application, a server, etc. The templating language is more lightweight and doesn't depend on various server APIs. It is also less mature. The main value is in using such an API to generate arbitrary files like Java source files or configuration files.
 
 The templating capabilities are powerful yet simple. Just like we could in JSP, we can embed Java source code into the template e.g. we can include control flow and similar restrictions just like we could in JSP:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">&lt;% if(body != null) {%&gt;
+```
+<% if(body != null) {%>
 
    ${body}
 
-&lt;% } %&gt;</pre>
+<% } %>
+```
+
 
 ### Why Not: JSP, Velocity, Thymeleaf or Freemarker? {#h3-4-why-not-jsp-velocity-thymeleaf-or-freemarker}
 
@@ -177,8 +198,10 @@ Another big advantage is size and performance. All of these frameworks have many
 
 We can import Java packages just like we can in every Java class using code like this:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">&lt;%@ import com.debugagent.stringtemplates.* %&gt;
-</pre>
+```
+<%@ import com.debugagent.stringtemplates.* %>
+```
+
 
 Once imported we can use any class within the code. Notice that this import statement must come above other lines in the code, just like a regular import statement.
 
@@ -186,8 +209,10 @@ Once imported we can use any class within the code. Notice that this import stat
 
 We can use include to simply include another template into the current template, allowing us to assemble sophisticated templates like headers and footers. If we want to generate a complex Java class, we can wrap the boilerplate in a generic template and include that in. We can conditionally include a template using an if statement and use a for loop to include multiple entries:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">&lt;%@ include JavaCode("ClassName", classBody) %&gt;
-</pre>
+```
+<%@ include JavaCode("ClassName", classBody) %>
+```
+
 
 Notice that we can include an entry with parameters and pass them along to the underlying template. We can pass hardcoded strings or variables along the include chain.
 

@@ -103,12 +103,15 @@ Now we know which holes in our testing remain, we can work towards fixing these 
 
 For example, let's add quite a (too) simplistic check for our decay:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">@Test
+```java
+@Test
 void decays() {
     int initialSize = 100;
     int result = Main.calculateSize(false, 100, true, true, 5, 5);
-    assertTrue(initialSize &amp;gt; result);
-}</pre>
+    assertTrue(initialSize &gt; result);
+}
+```
+
 
 If we then run Pitest again, we'll already see some improvements:
 
@@ -122,7 +125,8 @@ For example, the second one, which makes sense given both `100 - 5 * 5` and `100
 
 Now if we replace the above test with:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">@Test
+```java
+@Test
 void decays() {
     boolean alive = false;
     int initialSize = 100;
@@ -134,7 +138,9 @@ void decays() {
 
     int result = Main.calculateSize(alive, initialSize, acceleratedGrowth, badWeather, growthPerYear, years);
     assertEquals(expected, result, "The expected size, and resulting size should be equal!");
-}</pre>
+}
+```
+
 
 And rerun our tests we'll see that 2 more mutations have joined the choir invisible:
 
@@ -154,7 +160,8 @@ Now if we take a look at the remaining mutations we notice we can cover a lot of
 
 By adding this test case
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">@Test
+```java
+@Test
 void aliveWithNiceWeatherAndNormalGrowth() {
     boolean alive = true;
     int initialSize = 100;
@@ -166,7 +173,9 @@ void aliveWithNiceWeatherAndNormalGrowth() {
 
     int result = Main.calculateSize(alive, initialSize, acceleratedGrowth, badWeather, growthPerYear, years);
     assertEquals(expected, result, "The expected size, and resulting size should be equal!");
-}</pre>
+}
+```
+
 
 And as we can see after our run:
 
@@ -192,43 +201,46 @@ Sample setup {#_sample_setup}
 
 Personally, I like to use this setup:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="xml">&lt;profile&gt;
-    &lt;id&gt;pitest&lt;/id&gt;
-    &lt;build&gt;
-        &lt;plugins&gt;
-            &lt;plugin&gt;
-                &lt;groupId&gt;org.pitest&lt;/groupId&gt;
-                &lt;artifactId&gt;pitest-maven&lt;/artifactId&gt;
-                &lt;version&gt;1.14.2&lt;/version&gt;
-                &lt;dependencies&gt;
-                    &lt;dependency&gt;
-                        &lt;groupId&gt;org.pitest&lt;/groupId&gt;
-                        &lt;artifactId&gt;pitest-junit5-plugin&lt;/artifactId&gt;
-                        &lt;version&gt;1.2.0&lt;/version&gt;
-                    &lt;/dependency&gt;
-                &lt;/dependencies&gt;
-                &lt;executions&gt;
-                    &lt;execution&gt;
-                        &lt;id&gt;pitest&lt;/id&gt;
-                        &lt;phase&gt;test&lt;/phase&gt;
-                        &lt;goals&gt;
-                            &lt;goal&gt;mutationCoverage&lt;/goal&gt;
-                        &lt;/goals&gt;
-                    &lt;/execution&gt;
-                &lt;/executions&gt;
-                &lt;configuration&gt;
-                    &lt;failWhenNoMutations&gt;false&lt;/failWhenNoMutations&gt;
-                    &lt;timestampedReports&gt;false&lt;/timestampedReports&gt;
-                    &lt;mutators&gt;STRONGER&lt;/mutators&gt;
-                    &lt;withHistory&gt;true&lt;/withHistory&gt;
-                    &lt;features&gt;
+```xml
+<profile>
+    <id>pitest</id>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.pitest</groupId>
+                <artifactId>pitest-maven</artifactId>
+                <version>1.14.2</version>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.pitest</groupId>
+                        <artifactId>pitest-junit5-plugin</artifactId>
+                        <version>1.2.0</version>
+                    </dependency>
+                </dependencies>
+                <executions>
+                    <execution>
+                        <id>pitest</id>
+                        <phase>test</phase>
+                        <goals>
+                            <goal>mutationCoverage</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <failWhenNoMutations>false</failWhenNoMutations>
+                    <timestampedReports>false</timestampedReports>
+                    <mutators>STRONGER</mutators>
+                    <withHistory>true</withHistory>
+                    <features>
                         +auto_threads
-                    &lt;/features&gt;
-                &lt;/configuration&gt;
-            &lt;/plugin&gt;
-        &lt;/plugins&gt;
-    &lt;/build&gt;
-&lt;/profile&gt;</pre>
+                    </features>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</profile>
+```
+
 
 With this setup, I can just run `mvn -Ppitest test` to have everything mutated in my project, or I can pass in a glob to limit what gets mutated (`-DtargetClasses="dev.simonverhoeven.analyseme"`).  
 

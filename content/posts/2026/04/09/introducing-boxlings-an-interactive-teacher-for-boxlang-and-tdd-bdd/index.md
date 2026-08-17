@@ -31,7 +31,7 @@ But here's what makes BoxLings different: **we teach TDD/BDD as a first-class sk
 
 From day one, you'll read **TestBox** specs before touching any implementation code. You'll learn to think in tests. By the time you hit the intermediate exercises, you'll be writing your own. By Phase 3, you'll be doing the full red-green-refactor cycle like a pro.
 
-*** ** * ** ***
+
 
 The Full Learning Path {#h2-1-the-full-learning-path}
 -----------------------------------------------------
@@ -88,7 +88,7 @@ Master BoxLang-specific and power-user features:
 | 28 | **Range**         | 2         | The `..` range operator and functional methods          |
 | 29 | **Assert**        | 2         | The `assert` statement with custom messages             |
 
-*** ** * ** ***
+
 
 The TDD/BDD Learning Journey {#h2-5-the-tdd-bdd-learning-journey}
 -----------------------------------------------------------------
@@ -111,7 +111,7 @@ Now *you* write the specs. Practice `describe` / `it` / `expect` from scratch.
 
 Red → Green → Refactor. The real deal.
 
-*** ** * ** ***
+
 
 How It Works {#h2-6-how-it-works}
 ---------------------------------
@@ -137,7 +137,7 @@ BoxLings drops you into **watch mode** --- it monitors your exercise files and r
 
 Three exercise types are supported: scripts (`.bxs`), classes (`.bx`), and templates (`.bxm`), covering the full breadth of how BoxLang is used in practice.
 
-*** ** * ** ***
+
 
 Built for Learners, Classrooms \& Workshops {#h2-7-built-for-learners-classrooms-workshops}
 -------------------------------------------------------------------------------------------
@@ -150,7 +150,7 @@ BoxLings is self-contained and runs completely offline after the initial clone. 
 * 💻 Experienced developers new to BoxLang: \~6--10 hours
 * 🔥 Java developers: \~4--6 hours
 
-*** ** * ** ***
+
 
 Get Started {#h2-8-get-started}
 -------------------------------
@@ -171,7 +171,7 @@ cd boxlings
 boxlang BoxLings.bx
 ```
 
-*** ** * ** ***
+
 
 Join the Community {#h2-9-join-the-community}
 ---------------------------------------------

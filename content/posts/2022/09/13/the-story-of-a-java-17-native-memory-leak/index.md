@@ -88,16 +88,19 @@ To work around the challenge of the leak being so slow to manifest and the awkwa
 
 Here's a snippet of the kind of thing they got working...
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">ManagementFactory.getPlatformMBeanServer().invoke(
+```java
+ManagementFactory.getPlatformMBeanServer().invoke(
     new ObjectName("com.sun.management:type=DiagnosticCommand"),
     "vmNativeMemory,
     new Object[]{"summary"},
     new String[]{"[Ljava.lang.String;"});
-</pre>
+```
+
 
 The output from this was effectively the same as running `jcmd ${pid} VM.native_memory summary` against a running process from a terminal, for example:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ jcmd 1 VM.native_memory summary
+```
+$ jcmd 1 VM.native_memory summary
 1:
 
 Native Memory Tracking:
@@ -191,7 +194,8 @@ Total: reserved=1530885KB, committed=1079713KB
 
 -                   Unknown (reserved=32KB, committed=32KB)
                             (mmap: reserved=32KB, committed=32KB)
-</pre>
+```
+
 
 The output was then parsed and transformed into the correct metric format for Prometheus and exposed via a metrics endpoint on the service.
 

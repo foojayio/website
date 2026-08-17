@@ -80,17 +80,21 @@ Basic steps:
 
 3. Pull it locally:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">docker pull azul-zulu:17-jdk-debian13
-</pre>
+```
+docker pull azul-zulu:17-jdk-debian13
+```
+
 
 4. Use it in your Dockerfile:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">FROM azul-zulu:17-jdk-debian13
+```
+FROM azul-zulu:17-jdk-debian13
 
 WORKDIR /app
 COPY target/app.jar app.jar
 CMD ["java", "-jar", "app.jar"]
-</pre>
+```
+
 
 5. Wire it into your CI/CD templates so all new services share the same trusted base.
 

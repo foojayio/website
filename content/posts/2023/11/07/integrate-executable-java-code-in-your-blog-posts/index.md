@@ -31,31 +31,37 @@ Integration examples {#h2-0-integration-examples}
 
 To integrate "plain" Java code in your post or page, use the following syntax and add it as "Custom HTML" widget:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&lt;div data-pym-src='https://www.jdoodle.com/plugin' 
+```
+<div data-pym-src='https://www.jdoodle.com/plugin' 
    data-language="java" 
-   data-version-index="4"&gt;
+   data-version-index="4">
      // This is the place to put the code
-&lt;/div&gt;
-&lt;script src="https://www.jdoodle.com/assets/jdoodle-pym.min.js" type="text/javascript"&gt;&lt;/script&gt;</pre>
+</div>
+<script src="https://www.jdoodle.com/assets/jdoodle-pym.min.js" type="text/javascript"></script>
+```
+
 
 For example, this "Custom HTML":
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&lt;div data-pym-src='https://www.jdoodle.com/plugin' 
+```
+<div data-pym-src='https://www.jdoodle.com/plugin' 
    data-language="java" 
-   data-version-index="4"&gt;
+   data-version-index="4">
 public class MainArguments {
     public static void main (String[] args) {
         System.out.println("Number of arguments: " + args.length);
-        if (args.length &gt; 0) {
+        if (args.length > 0) {
             System.out.println("First argument: " + args[0]);
         }
-        for (int i = 0; i &lt; args.length; i++) {
+        for (int i = 0; i < args.length; i++) {
             System.out.println("Argument " + (i + 1) + ": " + args[i]);
         }
     }
 }
-&lt;/div&gt;
-&lt;script src="https://www.jdoodle.com/assets/jdoodle-pym.min.js" type="text/javascript"&gt;&lt;/script&gt;</pre>
+</div>
+<script src="https://www.jdoodle.com/assets/jdoodle-pym.min.js" type="text/javascript"></script>
+```
+
 
 Will produce the following output. Hit the "Execute" button to run the code.
 
@@ -68,31 +74,39 @@ Will produce the following output. Hit the "Execute" button to run the code.
  </figure>
  <h3 class="wp-block-heading" id="h3-2-code-with-external-data-files">Code with external data files</h3>
  <p class="wp-block-paragraph">In one of the more advanced tutorial steps, I wanted to read data from a text file. This can also be done with JDoodle, but needs a slightly different "Custom HTML" block that looks like this:</p>
- <pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&lt;div data-pym-src="https://www.jdoodle.com/plugin" 
+ 
+
+```
+<div data-pym-src="https://www.jdoodle.com/plugin" 
    data-version-index="4"
    data-language="java" 
    data-client-id="34d6e81ae45d88cdb9fb98fed1415b81" 
-   data-has-files="true"&gt;
-   &lt;div data-type="file" data-file-name="testdata.csv"&gt;
+   data-has-files="true">
+   <div data-type="file" data-file-name="testdata.csv">
         // This is the place to put the text data
-   &lt;/div&gt;
-   &lt;div data-type="script"&gt;&lt;xmp&gt;
+   </div>
+   <div data-type="script"><xmp>
         // This is the place to put the code
-   &lt;/xmp&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;script src="https://www.jdoodle.com/assets/jdoodle-pym.min.js" type="text/javascript"&gt;&lt;/script&gt;</pre>
+   </xmp></div>
+</div>
+<script src="https://www.jdoodle.com/assets/jdoodle-pym.min.js" type="text/javascript"></script>
+```
+
  <p class="wp-block-paragraph">The <code>data-client-id</code> is important here to allow the use of external files, but is only valid when used on the Foojay website! Create your own <a target="_blank" href="https://www.jdoodle.com">account on the JDoodle site</a> if you want to use this functionality on another website.</p>
  <p class="wp-block-paragraph">This is a simple example to read data from a CSV file:</p>
- <pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&lt;div data-pym-src="https://www.jdoodle.com/plugin" 
+ 
+
+```
+<div data-pym-src="https://www.jdoodle.com/plugin" 
    data-version-index="4"
    data-language="java" 
    data-client-id="34d6e81ae45d88cdb9fb98fed1415b81" 
-   data-has-files="true"&gt;
-   &lt;div data-type="file" data-file-name="testdata.csv"&gt;
+   data-has-files="true">
+   <div data-type="file" data-file-name="testdata.csv">
 1,Ada,Gomez,40,Mabvob Pike,Radafso,LA,60500
 2,Bernard,Jordan,28,Dotcu Court,Cewbufbim,MS,17422
-   &lt;/div&gt;
-   &lt;div data-type="script"&gt;&lt;xmp&gt;
+   </div>
+   <div data-type="script"><xmp>
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
@@ -109,9 +123,11 @@ public class ReadTextFile {
         }
     }
 }
-   &lt;/xmp&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;script src="https://www.jdoodle.com/assets/jdoodle-pym.min.js" type="text/javascript"&gt;&lt;/script&gt;</pre>
+   </xmp></div>
+</div>
+<script src="https://www.jdoodle.com/assets/jdoodle-pym.min.js" type="text/javascript"></script>
+```
+
  <p class="wp-block-paragraph"></p>
  <p class="wp-block-paragraph">A full example with this approach can be found in the tutorial: <a href="https://foojay.io/java-quick-start/quick-start-tutorial/reading-a-text-file/">"Reading a Text File"</a>.</p>
  <h2 class="wp-block-heading" id="h2-3-conclusion">Conclusion</h2>

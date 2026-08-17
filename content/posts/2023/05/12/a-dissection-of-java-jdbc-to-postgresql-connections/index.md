@@ -97,7 +97,8 @@ By now,you should have an understanding of the two common PostgreSQL JDBC implem
 Sample Java test {#h2-3-sample-java-test}
 -----------------------------------------
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">// begin file: simple.java
+```java
+// begin file: simple.java
 import java.sql.*;
 import java.util.Properties;
 //
@@ -130,7 +131,8 @@ class Simple
     }
 }
 // end of file: simple.java
-</pre>
+```
+
 
 To build this java executable on the CLI:
 
@@ -151,46 +153,57 @@ For the purpose of this article, the networking layer is the best place to look 
 
 This is how to install Wireshark CLI on Red Hat-compatible Linux systems:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">sudo yum install wireshark-cli
-</pre>
+```
+sudo yum install wireshark-cli
+```
+
 
 To list the network traffic with a PostgreSQL summary, use:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">sudo tshark -i any -f 'tcp port 5432' -d tcp.port==5432,pgsql</pre>
+```
+sudo tshark -i any -f 'tcp port 5432' -d tcp.port==5432,pgsql
+```
+
 
 To list the network traffic with the PostgreSQL traffic fully decoded, use:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">sudo tshark -i any -f 'tcp port 5432' -d tcp.port==5432,pgsql -O pgsql</pre>
+```
+sudo tshark -i any -f 'tcp port 5432' -d tcp.port==5432,pgsql -O pgsql
+```
+
 
 The First Look at JDBC Traffic Using Wireshark {#h2-5-the-first-look-at-jdbc-traffic-using-wireshark}
 -----------------------------------------------------------------------------------------------------
 
 When you start the sample test, Wireshark will capture the following traffic between the JDBC driver and the database:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic"> 1 0.000000000    127.0.0.1 ? 127.0.0.1    TCP 76 38212 ? 5432 [SYN] Seq=0 Win=43690 Len=0 MSS=65495 SACK_PERM=1 TSval=591859564 TSecr=0 WS=128
+```
+ 1 0.000000000    127.0.0.1 ? 127.0.0.1    TCP 76 38212 ? 5432 [SYN] Seq=0 Win=43690 Len=0 MSS=65495 SACK_PERM=1 TSval=591859564 TSecr=0 WS=128
  2 0.000009360    127.0.0.1 ? 127.0.0.1    TCP 76 5432 ? 38212 [SYN, ACK] Seq=0 Ack=1 Win=43690 Len=0 MSS=65495 SACK_PERM=1 TSval=591859564 TSecr=591859564 WS=128
  3 0.000016616    127.0.0.1 ? 127.0.0.1    TCP 68 38212 ? 5432 [ACK] Seq=1 Ack=1 Win=43776 Len=0 TSval=591859564 TSecr=591859564
- 4 0.011656311    127.0.0.1 ? 127.0.0.1    PGSQL 76 &gt;
+ 4 0.011656311    127.0.0.1 ? 127.0.0.1    PGSQL 76 >
  5 0.011851190    127.0.0.1 ? 127.0.0.1    TCP 68 5432 ? 38212 [ACK] Seq=1 Ack=9 Win=43776 Len=0 TSval=591859575 TSecr=591859575
- 6 0.011907696    127.0.0.1 ? 127.0.0.1    PGSQL 69 &lt;
+ 6 0.011907696    127.0.0.1 ? 127.0.0.1    PGSQL 69 <
  7 0.011912049    127.0.0.1 ? 127.0.0.1    TCP 68 38212 ? 5432 [ACK] Seq=9 Ack=2 Win=43776 Len=0 TSval=591859576 TSecr=591859576
- 8 0.028942611    127.0.0.1 ? 127.0.0.1    PGSQL 178 &gt;
- 9 0.031848981    127.0.0.1 ? 127.0.0.1    PGSQL 448 &lt;R/S/S/S/S/S/S/S/S/S/S/S/S/S/K/Z
-10 0.059421848    127.0.0.1 ? 127.0.0.1    PGSQL 131 &gt;P/B/E/S
-11 0.059825705    127.0.0.1 ? 127.0.0.1    PGSQL 93 &lt;1/2/C/Z
-12 0.060284645    127.0.0.1 ? 127.0.0.1    PGSQL 152 &gt;P/B/E/S
-13 0.060613934    127.0.0.1 ? 127.0.0.1    PGSQL 138 &lt;1/2/C/S/Z
-14 0.089038523    127.0.0.1 ? 127.0.0.1    PGSQL 124 &gt;P/B/D/E/S
-15 0.089662938    127.0.0.1 ? 127.0.0.1    PGSQL 167 &lt;1/2/T/D/C/Z
-16 0.101702993    127.0.0.1 ? 127.0.0.1    PGSQL 73 &gt;X
+ 8 0.028942611    127.0.0.1 ? 127.0.0.1    PGSQL 178 >
+ 9 0.031848981    127.0.0.1 ? 127.0.0.1    PGSQL 448 <R/S/S/S/S/S/S/S/S/S/S/S/S/S/K/Z
+10 0.059421848    127.0.0.1 ? 127.0.0.1    PGSQL 131 >P/B/E/S
+11 0.059825705    127.0.0.1 ? 127.0.0.1    PGSQL 93 <1/2/C/Z
+12 0.060284645    127.0.0.1 ? 127.0.0.1    PGSQL 152 >P/B/E/S
+13 0.060613934    127.0.0.1 ? 127.0.0.1    PGSQL 138 <1/2/C/S/Z
+14 0.089038523    127.0.0.1 ? 127.0.0.1    PGSQL 124 >P/B/D/E/S
+15 0.089662938    127.0.0.1 ? 127.0.0.1    PGSQL 167 <1/2/T/D/C/Z
+16 0.101702993    127.0.0.1 ? 127.0.0.1    PGSQL 73 >X
 17 0.101862798    127.0.0.1 ? 127.0.0.1    TCP 68 38212 ? 5432 [FIN, ACK] Seq=327 Ack=576 Win=44800 Len=0 TSval=591859666 TSecr=591859653
 18 0.104742459    127.0.0.1 ? 127.0.0.1    TCP 68 5432 ? 38212 [FIN, ACK] Seq=576 Ack=328 Win=43776 Len=0 TSval=591859668 TSecr=591859665
 19 0.104749357    127.0.0.1 ? 127.0.0.1    TCP 68 38212 ? 5432 [ACK] Seq=328 Ack=577 Win=44800 Len=0 TSval=591859668 TSecr=591859668
-</pre>
+```
+
 
 This overview of network frames (i.e. the actual data sent over the network) looks a bit daunting, so let's examine the Java code and look at the lines that actually perform database network requests:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">class Simple
+```
+class Simple
 {
     public static void main(String[] args)
     {
@@ -223,7 +236,9 @@ This overview of network frames (i.e. the actual data sent over the network) loo
             e.printStackTrace();
         }
     }
-}</pre>
+}
+```
+
 
 1 - Create the database connection  
 
@@ -235,32 +250,40 @@ Now, let's see which part of the network traffic belongs to which Java request:
 
 1 (create the database connection)
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic"> 1 0.000000000    127.0.0.1 ? 127.0.0.1    TCP 76 38212 ? 5432 [SYN] Seq=0 Win=43690 Len=0 MSS=65495 SACK_PERM=1 TSval=591859564 TSecr=0 WS=128
+```
+ 1 0.000000000    127.0.0.1 ? 127.0.0.1    TCP 76 38212 ? 5432 [SYN] Seq=0 Win=43690 Len=0 MSS=65495 SACK_PERM=1 TSval=591859564 TSecr=0 WS=128
  2 0.000009360    127.0.0.1 ? 127.0.0.1    TCP 76 5432 ? 38212 [SYN, ACK] Seq=0 Ack=1 Win=43690 Len=0 MSS=65495 SACK_PERM=1 TSval=591859564 TSecr=591859564 WS=128
  3 0.000016616    127.0.0.1 ? 127.0.0.1    TCP 68 38212 ? 5432 [ACK] Seq=1 Ack=1 Win=43776 Len=0 TSval=591859564 TSecr=591859564
- 4 0.011656311    127.0.0.1 ? 127.0.0.1    PGSQL 76 &gt;
+ 4 0.011656311    127.0.0.1 ? 127.0.0.1    PGSQL 76 >
  5 0.011851190    127.0.0.1 ? 127.0.0.1    TCP 68 5432 ? 38212 [ACK] Seq=1 Ack=9 Win=43776 Len=0 TSval=591859575 TSecr=591859575
- 6 0.011907696    127.0.0.1 ? 127.0.0.1    PGSQL 69 &lt;
+ 6 0.011907696    127.0.0.1 ? 127.0.0.1    PGSQL 69 <
  7 0.011912049    127.0.0.1 ? 127.0.0.1    TCP 68 38212 ? 5432 [ACK] Seq=9 Ack=2 Win=43776 Len=0 TSval=591859576 TSecr=591859576
- 8 0.028942611    127.0.0.1 ? 127.0.0.1    PGSQL 178 &gt;
- 9 0.031848981    127.0.0.1 ? 127.0.0.1    PGSQL 448 &lt;R/S/S/S/S/S/S/S/S/S/S/S/S/S/K/Z
-10 0.059421848    127.0.0.1 ? 127.0.0.1    PGSQL 131 &gt;P/B/E/S
-11 0.059825705    127.0.0.1 ? 127.0.0.1    PGSQL 93 &lt;1/2/C/Z
-12 0.060284645    127.0.0.1 ? 127.0.0.1    PGSQL 152 &gt;P/B/E/S
-13 0.060613934    127.0.0.1 ? 127.0.0.1    PGSQL 138 &lt;1/2/C/S/Z</pre>
+ 8 0.028942611    127.0.0.1 ? 127.0.0.1    PGSQL 178 >
+ 9 0.031848981    127.0.0.1 ? 127.0.0.1    PGSQL 448 <R/S/S/S/S/S/S/S/S/S/S/S/S/S/K/Z
+10 0.059421848    127.0.0.1 ? 127.0.0.1    PGSQL 131 >P/B/E/S
+11 0.059825705    127.0.0.1 ? 127.0.0.1    PGSQL 93 <1/2/C/Z
+12 0.060284645    127.0.0.1 ? 127.0.0.1    PGSQL 152 >P/B/E/S
+13 0.060613934    127.0.0.1 ? 127.0.0.1    PGSQL 138 <1/2/C/S/Z
+```
+
 
 2 (execute statement)
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">14 0.089038523    127.0.0.1 ? 127.0.0.1    PGSQL 124 &gt;P/B/D/E/S
-15 0.089662938    127.0.0.1 ? 127.0.0.1    PGSQL 167 &lt;1/2/T/D/C/Z</pre>
+```
+14 0.089038523    127.0.0.1 ? 127.0.0.1    PGSQL 124 >P/B/D/E/S
+15 0.089662938    127.0.0.1 ? 127.0.0.1    PGSQL 167 <1/2/T/D/C/Z
+```
+
 
 3 (close connection)
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">16 0.101702993    127.0.0.1 ? 127.0.0.1    PGSQL 73 &gt;X
+```
+16 0.101702993    127.0.0.1 ? 127.0.0.1    PGSQL 73 >X
 17 0.101862798    127.0.0.1 ? 127.0.0.1    TCP 68 38212 ? 5432 [FIN, ACK] Seq=327 Ack=576 Win=44800 Len=0 TSval=591859666 TSecr=591859653
 18 0.104742459    127.0.0.1 ? 127.0.0.1    TCP 68 5432 ? 38212 [FIN, ACK] Seq=576 Ack=328 Win=43776 Len=0 TSval=591859668 TSecr=591859665
 19 0.104749357    127.0.0.1 ? 127.0.0.1    TCP 68 38212 ? 5432 [ACK] Seq=328 Ack=577 Win=44800 Len=0 TSval=591859668 TSecr=591859668
-</pre>
+```
+
 
 The summarized network capture output has the following format: packet capture number, time relative to first packet captured in seconds, found protocol, size, and protocol dependent output.
 
@@ -275,7 +298,8 @@ Analyzing Statement Execution Frames {#h2-6-analyzing-statement-execution-frames
 
 Let's look at the statement execution flow in more detail, because that is what will generally be done when using a PostgreSQL database. The below statement execution details are from the frames captured above, but now with the traffic fully decoded. This shows all the details required to understand that frame 14 was the frame which sent the statement to the PostgreSQL backend:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">Frame 14: 124 bytes on wire (992 bits), 124 bytes captured (992 bits) on interface 0
+```
+Frame 14: 124 bytes on wire (992 bits), 124 bytes captured (992 bits) on interface 0
 Linux cooked capture
 Internet Protocol Version 4, Src: 127.0.0.1, Dst: 127.0.0.1
 Transmission Control Protocol, Src Port: 56220, Dst Port: 5432, Seq: 266, Ack: 477, Len: 56
@@ -304,7 +328,9 @@ PostgreSQL
     Returns: all rows
 PostgreSQL
     Type: Sync
-    Length: 4</pre>
+    Length: 4
+```
+
 
 This is the Java/client execution request that, for a single execution request performs five PostgreSQL requests:
 
@@ -319,7 +345,8 @@ Note that these PostgreSQL level messages are all contained inside a single fram
 
 Next, the database server sends back the following response (frame 15 of the complete network packet):
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">Frame 15: 167 bytes on wire (1336 bits), 167 bytes captured (1336 bits) on interface 0
+```
+Frame 15: 167 bytes on wire (1336 bits), 167 bytes captured (1336 bits) on interface 0
 Linux cooked capture
 Internet Protocol Version 4, Src: 127.0.0.1, Dst: 127.0.0.1
 Transmission Control Protocol, Src Port: 5432, Dst Port: 56220, Seq: 477, Ack: 322, Len: 99
@@ -353,7 +380,9 @@ PostgreSQL
 PostgreSQL
     Type: Ready for query
     Length: 5
-    Status: Idle (73)</pre>
+    Status: Idle (73)
+```
+
 
 There are six distinct messages within the response frame :
 
@@ -375,13 +404,18 @@ Let's compare the network traffic of the extended protocol to the simple protoco
 
 Many clients, including the common PostgreSQL CLI 'psql', use the simple query protocol exclusively. The simple query protocol can be set for the test class by setting the preferQueryMode property to 'simple':
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">properties.setProperty("preferQueryMode", "simple");
-</pre>
+```
+properties.setProperty("preferQueryMode", "simple");
+```
+
 
 The request flow changes in the following way:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">14 0.087775192    127.0.0.1 ? 127.0.0.1    PGSQL 86 &gt;Q
-15 0.089352778    127.0.0.1 ? 127.0.0.1    PGSQL 157 &lt;T/D/C/Z</pre>
+```
+14 0.087775192    127.0.0.1 ? 127.0.0.1    PGSQL 86 >Q
+15 0.089352778    127.0.0.1 ? 127.0.0.1    PGSQL 157 <T/D/C/Z
+```
+
 
 This means the request sequence of Parse, Bind, Execute, Sync are all now combined in the 'Q' message.
 
@@ -418,21 +452,27 @@ To create a PostgreSQL database side prepared statement, a Java PostgreSQL JDBC 
 
 Change the code of the class above with the following code:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">// --
+```
+// --
 ResultSet result;
 PreparedStatement statement = connection.prepareStatement("select now()");
 result = statement.executeQuery();
 result.next();
 result.close();
 statement.close();
-// --</pre>
+// --
+```
+
 
 (make sure `preferQueryMode` is set to `extended` again)
 
 Let's see what this does using wireshark:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">14 0.088640230    127.0.0.1 ? 127.0.0.1    PGSQL 124 &gt;P/B/D/E/S
-15 0.089329790    127.0.0.1 ? 127.0.0.1    PGSQL 167 &lt;1/2/T/D/C/Z</pre>
+```
+14 0.088640230    127.0.0.1 ? 127.0.0.1    PGSQL 124 >P/B/D/E/S
+15 0.089329790    127.0.0.1 ? 127.0.0.1    PGSQL 167 <1/2/T/D/C/Z
+```
+
 
 As before, the wireshark summary output shows the request to be performing P/parse, B/bind, D/describe, E/execute and S/synchronize. The response shows 1/parse completion, 2/bind completion, T/row description, D/data row, C/command completion, Z/ready for query. This is identical to the previous regular (non prepared) statement execution.
 
@@ -442,7 +482,8 @@ That means that a PostgreSQL prepared statement can only take advantage of being
 
 Change the code of the class with the following code:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">// --
+```
+// --
 ResultSet result;
 PreparedStatement statement = connection.prepareStatement("select now()");
 result = statement.executeQuery();
@@ -450,14 +491,19 @@ result = statement.executeQuery();
 result.next();
 result.close();
 statement.close();
-// --</pre>
+// --
+```
+
 
 Look at the wireshark output again:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">14 0.088497830    127.0.0.1 ? 127.0.0.1    PGSQL 124 &gt;P/B/D/E/S
-15 0.089362126    127.0.0.1 ? 127.0.0.1    PGSQL 167 &lt;1/2/T/D/C/Z
-16 0.099519555    127.0.0.1 ? 127.0.0.1    PGSQL 124 &gt;P/B/D/E/S
-17 0.099773414    127.0.0.1 ? 127.0.0.1    PGSQL 167 &lt;1/2/T/D/C/Z</pre>
+```
+14 0.088497830    127.0.0.1 ? 127.0.0.1    PGSQL 124 >P/B/D/E/S
+15 0.089362126    127.0.0.1 ? 127.0.0.1    PGSQL 167 <1/2/T/D/C/Z
+16 0.099519555    127.0.0.1 ? 127.0.0.1    PGSQL 124 >P/B/D/E/S
+17 0.099773414    127.0.0.1 ? 127.0.0.1    PGSQL 167 <1/2/T/D/C/Z
+```
+
 
 The first execution with frame 14 and the response with frame 15 can be seen. The next execution can be seen in frame 16, which does include P/parse again. This does not show the optimization that prepared statements promise by having the ability to skip the parse phase. What is going on?
 
@@ -477,74 +523,82 @@ Looking at Actual Database Prepared Statement Execution {#h2-10-looking-at-actua
 
 Change the code of the class with the following code:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">// --
+```
+// --
 ResultSet result;
 PreparedStatement statement = connection.prepareStatement("select now()");
-for (int i=0; i&lt;=6; i+=1)
+for (int i=0; i<=6; i+=1)
 {
     result = statement.executeQuery();
 }
 result.close();
 statement.close();
 // --
+```
 
-</pre>
 
 This is how it looks like using wireshark:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic"> &nbsp;&nbsp;14 0.087452579&nbsp;&nbsp;&nbsp;&nbsp;127.0.0.1 ? 127.0.0.1&nbsp;&nbsp;&nbsp;&nbsp;PGSQL 124 &gt;P/B/D/E/S&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;- first execution
-   15 0.088431742&nbsp;&nbsp;&nbsp;&nbsp;127.0.0.1 ? 127.0.0.1&nbsp;&nbsp;&nbsp;&nbsp;PGSQL 167 &lt;1/2/T/D/C/Z
-   16 0.099370527&nbsp;&nbsp;&nbsp;&nbsp;127.0.0.1 ? 127.0.0.1&nbsp;&nbsp;&nbsp;&nbsp;PGSQL 124 &gt;P/B/D/E/S
- &nbsp;&nbsp;17 0.099661109&nbsp;&nbsp;&nbsp;&nbsp;127.0.0.1 ? 127.0.0.1&nbsp;&nbsp;&nbsp;&nbsp;PGSQL 167 &lt;1/2/T/D/C/Z
- &nbsp;&nbsp;18 0.099839810&nbsp;&nbsp;&nbsp;&nbsp;127.0.0.1 ? 127.0.0.1&nbsp;&nbsp;&nbsp;&nbsp;PGSQL 124 &gt;P/B/D/E/S
- &nbsp;&nbsp;19 0.099949285&nbsp;&nbsp;&nbsp;&nbsp;127.0.0.1 ? 127.0.0.1&nbsp;&nbsp;&nbsp;&nbsp;PGSQL 167 &lt;1/2/T/D/C/Z
- &nbsp;&nbsp;20 0.100094460&nbsp;&nbsp;&nbsp;&nbsp;127.0.0.1 ? 127.0.0.1&nbsp;&nbsp;&nbsp;&nbsp;PGSQL 124 &gt;P/B/D/E/S
- &nbsp;&nbsp;21 0.100368924&nbsp;&nbsp;&nbsp;&nbsp;127.0.0.1 ? 127.0.0.1&nbsp;&nbsp;&nbsp;&nbsp;PGSQL 167 &lt;1/2/T/D/C/Z
- &nbsp;&nbsp;22 0.100866737&nbsp;&nbsp;&nbsp;&nbsp;127.0.0.1 ? 127.0.0.1&nbsp;&nbsp;&nbsp;&nbsp;PGSQL 130 &gt;P/B/D/E/S&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;- fifth execution
- &nbsp;&nbsp;23 0.101059578&nbsp;&nbsp;&nbsp;&nbsp;127.0.0.1 ? 127.0.0.1&nbsp;&nbsp;&nbsp;&nbsp;PGSQL 167 &lt;1/2/T/D/C/Z
- &nbsp;&nbsp;24 0.101214370&nbsp;&nbsp;&nbsp;&nbsp;127.0.0.1 ? 127.0.0.1&nbsp;&nbsp;&nbsp;&nbsp;PGSQL 101 &gt;B/E/S&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;- sixth execution
- &nbsp;&nbsp;25 0.101284790&nbsp;&nbsp;&nbsp;&nbsp;127.0.0.1 ? 127.0.0.1&nbsp;&nbsp;&nbsp;&nbsp;PGSQL 112 &lt;2/D/C/Z</pre>
+```
+   14 0.087452579    127.0.0.1 ? 127.0.0.1    PGSQL 124 >P/B/D/E/S      <- first execution
+   15 0.088431742    127.0.0.1 ? 127.0.0.1    PGSQL 167 <1/2/T/D/C/Z
+   16 0.099370527    127.0.0.1 ? 127.0.0.1    PGSQL 124 >P/B/D/E/S
+   17 0.099661109    127.0.0.1 ? 127.0.0.1    PGSQL 167 <1/2/T/D/C/Z
+   18 0.099839810    127.0.0.1 ? 127.0.0.1    PGSQL 124 >P/B/D/E/S
+   19 0.099949285    127.0.0.1 ? 127.0.0.1    PGSQL 167 <1/2/T/D/C/Z
+   20 0.100094460    127.0.0.1 ? 127.0.0.1    PGSQL 124 >P/B/D/E/S
+   21 0.100368924    127.0.0.1 ? 127.0.0.1    PGSQL 167 <1/2/T/D/C/Z
+   22 0.100866737    127.0.0.1 ? 127.0.0.1    PGSQL 130 >P/B/D/E/S      <- fifth execution
+   23 0.101059578    127.0.0.1 ? 127.0.0.1    PGSQL 167 <1/2/T/D/C/Z
+   24 0.101214370    127.0.0.1 ? 127.0.0.1    PGSQL 101 >B/E/S          <- sixth execution
+   25 0.101284790    127.0.0.1 ? 127.0.0.1    PGSQL 112 <2/D/C/Z
+```
+
 
 For the first five executions you should recognise the PostgreSQL protocol letters. Only the sixth time (frame 24) you see that no P (parse) is requested, indicating the use of a database-side prepared statement.
 
 If you look at a detailed dissection of the PostgreSQL-level packet information, you can see how this works. I've printed the packet information from frame number 22 (the fifth execution that generates the prepared statement) up to frame number 25:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">Frame 22: 130 bytes on wire (1040 bits), 130 bytes captured (1040 bits) on interface 0
+```
+Frame 22: 130 bytes on wire (1040 bits), 130 bytes captured (1040 bits) on interface 0
 Linux cooked capture
 Internet Protocol Version 4, Src: 127.0.0.1, Dst: 127.0.0.1
 Transmission Control Protocol, Src Port: 40808, Dst Port: 5432, Seq: 490, Ack: 873, Len: 62
 PostgreSQL
- &nbsp;&nbsp;&nbsp;Type: Parse
- &nbsp;&nbsp;&nbsp;Length: 23
- &nbsp;&nbsp;&nbsp;Statement: S_1
- &nbsp;&nbsp;&nbsp;Query: select now()
- &nbsp;&nbsp;&nbsp;Parameters: 0
-PostgreSQL
- &nbsp;&nbsp;&nbsp;Type: Bind
- &nbsp;&nbsp;&nbsp;Length: 15
- &nbsp;&nbsp;&nbsp;Portal:&nbsp;&nbsp;&nbsp;&nbsp;
+    Type: Parse
+    Length: 23
     Statement: S_1
- &nbsp;&nbsp;&nbsp;Parameter formats: 0
- &nbsp;&nbsp;&nbsp;Parameter values: 0
- &nbsp;&nbsp;&nbsp;Result formats: 0
+    Query: select now()
+    Parameters: 0
 PostgreSQL
- &nbsp;&nbsp;&nbsp;Type: Describe
- &nbsp;&nbsp;&nbsp;Length: 6
- &nbsp;&nbsp;&nbsp;Portal:
+    Type: Bind
+    Length: 15
+    Portal:    
+    Statement: S_1
+    Parameter formats: 0
+    Parameter values: 0
+    Result formats: 0
 PostgreSQL
- &nbsp;&nbsp;&nbsp;Type: Execute
- &nbsp;&nbsp;&nbsp;Length: 9
- &nbsp;&nbsp;&nbsp;Portal:
- &nbsp;&nbsp;&nbsp;Returns: all rows
+    Type: Describe
+    Length: 6
+    Portal:
 PostgreSQL
- &nbsp;&nbsp;&nbsp;Type: Sync
-&nbsp;&nbsp;&nbsp;&nbsp;Length: 4</pre>
+    Type: Execute
+    Length: 9
+    Portal:
+    Returns: all rows
+PostgreSQL
+    Type: Sync
+    Length: 4
+```
+
 
 This is a regular execution flow of the extended query protocol with P (parse), B (bind), D (describe), E (execute) and S (sync) messages in it. You'll get this flow for the first five executions of a query.
 
 Next, if you look closely, you see that the 'Statement:' indicates a name: 'S_1'. This is the little difference that creates a prepared statement at the database side, because the statement is named. The previous parse and bind executions have no name with the Statement: property. The response for extended execution with prepared statement creation is identical to non-prepared statement creation, because during creation it cannot take advantage of the prepared statement being created. The Java prepared statement object will store the row description from this response, and use it when the prepared statement is executed the sixth time:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">Frame 23: 167 bytes on wire (1336 bits), 167 bytes captured (1336 bits) on interface 0
+```
+Frame 23: 167 bytes on wire (1336 bits), 167 bytes captured (1336 bits) on interface 0
 Linux cooked capture
 Internet Protocol Version 4, Src: 127.0.0.1, Dst: 127.0.0.1
 Transmission Control Protocol, Src Port: 5432, Dst Port: 40808, Seq: 873, Ack: 552, Len: 99
@@ -578,11 +632,14 @@ PostgreSQL
 PostgreSQL
     Type: Ready for query
     Length: 5
-    Status: Idle (73)</pre>
+    Status: Idle (73)
+```
+
 
 This is how execution for a prepared statement looks when you execute the prepared statement java object the sixth time: no P/parse and D/describe messages, just directly a B/bind message for a named (S_1) statement, along with E/execute and S/synchronize:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">Frame 24: 101 bytes on wire (808 bits), 101 bytes captured (808 bits) on interface 0
+```
+Frame 24: 101 bytes on wire (808 bits), 101 bytes captured (808 bits) on interface 0
 Linux cooked capture
 Internet Protocol Version 4, Src: 127.0.0.1, Dst: 127.0.0.1
 Transmission Control Protocol, Src Port: 40808, Dst Port: 5432, Seq: 552, Ack: 972, Len: 33
@@ -602,11 +659,14 @@ PostgreSQL
     Returns: all rows
 PostgreSQL
     Type: Sync
-    Length: 4</pre>
+    Length: 4
+```
+
 
 The response for a prepared statement is different (less messages): the bind needs to be acknowledged, and because we didn't call describe, we directly get the data row, and the execution is ended using the C/Command completion and Z/Ready for query responses:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">Frame 25: 112 bytes on wire (896 bits), 112 bytes captured (896 bits) on interface 0
+```
+Frame 25: 112 bytes on wire (896 bits), 112 bytes captured (896 bits) on interface 0
 Linux cooked capture
 Internet Protocol Version 4, Src: 127.0.0.1, Dst: 127.0.0.1
 Transmission Control Protocol, Src Port: 5432, Dst Port: 40808, Seq: 972, Ack: 585, Len: 44
@@ -626,7 +686,9 @@ PostgreSQL
 PostgreSQL
     Type: Ready for query
     Length: 5
-    Status: Idle (73)</pre>
+    Status: Idle (73)
+```
+
 
 In general, my experience is that the prepareThreshold is almost never changed from the default, and therefore requires a PreparedStatement object to be executed five times before it will create a database prepared statement. However, it is possible to change the prepareThreshold value to a different value to influence when to create a database prepared statement. A Java side prepared statement is always created. Setting the prepareThreshold to zero disables database side prepared statements.
 
@@ -635,7 +697,8 @@ Binding Values for a Prepared Statement {#h2-11-binding-values-for-a-prepared-st
 
 Besides the advantage of prepared statements to skip the parse phase, the other advantage is the ability to create a statement with bind variables that can be bound to their values before sending the bind and execution messages. In many cases, reusing a statement requires the variables to change. This is an example of using a prepared statement with bind variables:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">// -- 
+```
+// -- 
 ResultSet result; 
 PreparedStatement statement = connection.prepareStatement( 
   "select table_name, table_type from information_schema.tables where table_name = ? and table_type = ?"); 
@@ -648,11 +711,14 @@ while (result.next())
 } 
 result.close(); 
 statement.close(); 
-// --</pre>
+// --
+```
+
 
 The frame sending the messages to the PostgreSQL backend looks like this:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">Frame 14: 252 bytes on wire (2016 bits), 252 bytes captured (2016 bits) on interface 0
+```
+Frame 14: 252 bytes on wire (2016 bits), 252 bytes captured (2016 bits) on interface 0
 Linux cooked capture
 Internet Protocol Version 4, Src: 127.0.0.1, Dst: 127.0.0.1
 Transmission Control Protocol, Src Port: 51702, Dst Port: 5432, Seq: 266, Ack: 477, Len: 184
@@ -689,7 +755,9 @@ PostgreSQL
     Returns: all rows
 PostgreSQL
     Type: Sync
-    Length: 4</pre>
+    Length: 4
+```
+
 
 The important thing to see is that the statement with the parse message has two bind variable placeholders ($1 and $2), for which both the type is explicitly defined, thereby mitigating the risk of SQL injection. The bind message also specifies the bind variables, and their actual values. During the bind phase, the database plans the execution and at that point requires the data to be known in order to calculate the cost of the execution plan options for generating the plan, because the bind can change the cardinality of the plan lines it is involved with.
 

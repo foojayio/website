@@ -43,26 +43,29 @@ Setup {#_setup}
 
 To get started we just need the following dependencies in our pom.xml:
 
-<pre class="EnlighterJSRAW">&lt;dependencies&gt;
-    &lt;dependency&gt;
-        &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
-        &lt;artifactId&gt;spring-boot-starter-graphql&lt;/artifactId&gt;
-    &lt;/dependency&gt;
-    &lt;dependency&gt;
-        &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
-        &lt;artifactId&gt;spring-boot-starter-websocket&lt;/artifactId&gt;
-    &lt;/dependency&gt;
-    &lt;dependency&gt;
-        &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
-        &lt;artifactId&gt;spring-boot-starter-test&lt;/artifactId&gt;
-        &lt;scope&gt;test&lt;/scope&gt;
-    &lt;/dependency&gt;
-    &lt;dependency&gt;
-        &lt;groupId&gt;org.springframework.graphql&lt;/groupId&gt;
-        &lt;artifactId&gt;spring-graphql-test&lt;/artifactId&gt;
-        &lt;scope&gt;test&lt;/scope&gt;
-    &lt;/dependency&gt;
-&lt;/dependencies&gt;</pre>
+```
+<dependencies>
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-graphql</artifactId>
+    </dependency>
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-websocket</artifactId>
+    </dependency>
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-test</artifactId>
+        <scope>test</scope>
+    </dependency>
+    <dependency>
+        <groupId>org.springframework.graphql</groupId>
+        <artifactId>spring-graphql-test</artifactId>
+        <scope>test</scope>
+    </dependency>
+</dependencies>
+```
+
 
 |-----------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Note:** | We're using Spring MVC here, but we could also use web/webflux/rsocket here (see for reference: [possible starters](https://docs.spring.io/spring-boot/docs/current/reference/html/web.html#web.graphql)) |
@@ -77,7 +80,8 @@ These files define our graph's data types, the relationships between them and po
 
 Our basic schema will look like this:
 
-<pre class="EnlighterJSRAW">type Query {
+```
+type Query {
     bookById(id: ID): Book
 }
 
@@ -96,7 +100,9 @@ type Author {
   lastName: String!
   shortBio: String!
   linkedinUrl: String!
-}</pre>
+}
+```
+
 
 We define a top-level `Query` type (every GraphQL service has to have one, mutations are optional), which contains the exposed operations and its arguments. Here we can see we're exposing a `bookById` query which expects an `ID` to be passed in, and will return a `Book` type.
 
@@ -111,7 +117,10 @@ More information on how to define a `Schema` can be found on the [GraphQL schema
 
 We'll also be enabling the graphical interactive GraphQL IDE ([GraphiQL](https://github.com/graphql/graphiql)), by adding:
 
-<pre class="EnlighterJSRAW">spring.graphql.graphiql.enabled=true</pre>
+```
+spring.graphql.graphiql.enabled=true
+```
+
 
 to our `application.properties`.
 
@@ -119,7 +128,10 @@ This allows us to easily interact with \& develop GraphQL APIs.
 
 And since we want to use Subscriptions in GraphIQL we'll also add:
 
-<pre class="EnlighterJSRAW">spring.graphql.websocket.path=/graphql</pre>
+```
+spring.graphql.websocket.path=/graphql
+```
+
 
 ![graphiql.png](https://github.com/SimonVerhoeven/spring-graphql-demo/blob/main/raw/graphiql.png?raw=true)
 
@@ -134,33 +146,45 @@ In some cases, you might need more than the default Scalar types that we mention
 
 Let us add a simple Article:
 
-<pre class="EnlighterJSRAW">type Article {
+```
+type Article {
   id: ID
   title: String!
   publicationDate: Date!
-}</pre>
+}
+```
+
 
 As you can see our `publicationDate` is of type `Date` which is not known by default.
 
 To resolve this we can add the `graphql-java-extended-scalars` dependency to our project,
 
-<pre class="EnlighterJSRAW">&lt;dependency&gt;
-    &lt;groupId&gt;com.graphql-java&lt;/groupId&gt;
-    &lt;artifactId&gt;graphql-java-extended-scalars&lt;/artifactId&gt;
-    &lt;version&gt;21.0&lt;/version&gt;
-&lt;/dependency&gt;</pre>
+```
+<dependency>
+    <groupId>com.graphql-java</groupId>
+    <artifactId>graphql-java-extended-scalars</artifactId>
+    <version>21.0</version>
+</dependency>
+```
+
 
 and then we can add the following to our `@Configuration` to register the `Date` scalar:
 
-<pre class="EnlighterJSRAW">@Bean
+```
+@Bean
 public RuntimeWiringConfigurer runtimeWiringConfigurer() {
-    return runtimeWiringConfigurer -&gt; runtimeWiringConfigurer
+    return runtimeWiringConfigurer -> runtimeWiringConfigurer
             .scalar(ExtendedScalars.Date);
-}</pre>
+}
+```
+
 
 And finally, also add this Scalar to our `schema.graphqls`
 
-<pre class="EnlighterJSRAW">scalar Date @specifiedBy(url:"https://tools.ietf.org/html/rfc3339")</pre>
+```
+scalar Date @specifiedBy(url:"https://tools.ietf.org/html/rfc3339")
+```
+
 
 And then when we query for this Article, we'll get our `publicationDate` back properly.
 
@@ -187,10 +211,13 @@ These are:
 
 For our earlier book query, we can add:
 
-<pre class="EnlighterJSRAW">@QueryMapping
+```
+@QueryMapping
 public Book bookById(@Argument String id) {
     return Book.getById(id);
-}</pre>
+}
+```
+
 
 Which makes use of the implicit mapping.
 
@@ -198,16 +225,20 @@ Now in the case of our `Book`, we'll also need to do a little bit extra. Because
 
 We can resolve this by adding this to our controller:
 
-<pre class="EnlighterJSRAW">@SchemaMapping
+```
+@SchemaMapping
 public Author author(Book book) {
     return Author.getById(book.authorId());
-}</pre>
+}
+```
+
 
 Which will act as the `DataFetcher` for the `Author` field.
 
 Which we can then test using the following query in GraphiQL:
 
-<pre class="EnlighterJSRAW">{
+```
+{
  authorById(id: "a535fe2f-7d06-41bd-bbff-c802e42a8b06") {
    id
    firstName
@@ -215,18 +246,26 @@ Which we can then test using the following query in GraphiQL:
    shortBio
    linkedinUrl
  }
-}</pre>
+}
+```
+
 
 If we add the following to our schema file:
 
-<pre class="EnlighterJSRAW">authorById(id: ID): Author</pre>
+```
+authorById(id: ID): Author
+```
+
 
 We can set up an explicit mapping using the following, in case we don't want to call our function `authorById`
 
-<pre class="EnlighterJSRAW">@QueryMapping("authorById")
+```
+@QueryMapping("authorById")
 public Author findAuthor(@Argument String id) {
     return Author.getById(id);
-}</pre>
+}
+```
+
 
 Note that here we've explicitly added `authorById` to our `@QueryMapping`
 
@@ -238,15 +277,19 @@ We use `@MutationMapping` for these, and jut like with `@QueryMapping` our metho
 
 We'd love to be able to add some of our favourite authors, so we'll add the following to our `schema.graphqls`
 
-<pre class="EnlighterJSRAW">type Mutation {
+```
+type Mutation {
   addAuthor(firstName: String!, lastName: String!, shortBio: String!): Author
-}</pre>
+}
+```
+
 
 As you can see, we expect the first name, last name \& a short bio for the Author to be passed in, and we'll get an `Author` response.
 
 This aligns with:
 
-<pre class="EnlighterJSRAW">@MutationMapping("addAuthor")
+```
+@MutationMapping("addAuthor")
 public Author createAuthor(
         @Argument String firstName,
         @Argument String lastName,
@@ -256,7 +299,9 @@ public Author createAuthor(
     Author author = new Author(UUID.randomUUID().toString(), firstName, lastName, shortBio, "");
     Author.addAuthor(author);
     return author;
-}</pre>
+}
+```
+
 
 As you can see, our inputs are annotated with `@Argument`.
 
@@ -265,7 +310,8 @@ As you can see, our inputs are annotated with `@Argument`.
 
 We can then create a new one using:
 
-<pre class="EnlighterJSRAW">mutation addAuthor {
+```
+mutation addAuthor {
     addAuthor(
       firstName: "Venkat"
       lastName: "Subramaniam"
@@ -275,7 +321,9 @@ We can then create a new one using:
       firstName
       lastName
     }
-}</pre>
+}
+```
+
 
 ### Subscriptions {#_subscriptions}
 
@@ -286,28 +334,37 @@ In case we want to stay up to date, we can also set up a subscription.
 
 Say we want to get a stream of new books we can add this to our schema:
 
-<pre class="EnlighterJSRAW">type Subscription {
+```
+type Subscription {
   notifyNewBook: Book
-}</pre>
+}
+```
+
 
 Then in our controller, we can add:
 
-<pre class="EnlighterJSRAW">@SubscriptionMapping("notifyNewBook")
-public Flux&lt;Book&gt; newBooks() {
+```
+@SubscriptionMapping("notifyNewBook")
+public Flux<Book> newBooks() {
 ...
-}</pre>
+}
+```
+
 
 And we'll get an incoming stream of new books.
 
 We can just do:
 
-<pre class="EnlighterJSRAW">subscription {
+```
+subscription {
   notifyNewBook {
     id
     isbn
     name
   }
-}</pre>
+}
+```
+
 
 Testing {#_testing}
 -------------------
@@ -327,7 +384,8 @@ We can pass in a document (thank you text blocks!), or pass in a document filena
 
 Let's start with a basic request test, where we check the expected output. (we could also )
 
-<pre class="EnlighterJSRAW">@Test
+```
+@Test
 void bookById() {
     this.graphQlTester
         .documentName("bookInfo") //1
@@ -335,7 +393,9 @@ void bookById() {
         .execute() //3
         .path("bookById")
         .matchesJson(CLEAN_CODE_PAYLOAD);
-}</pre>
+}
+```
+
 
 1. reference to the `bookInfo.graphql` file in our resources folder
 2. passing in the variable we want to use for the call
@@ -345,12 +405,15 @@ void bookById() {
 
 The flow for a mutation is basically the same as for a query:
 
-<pre class="EnlighterJSRAW">final Author author = this.graphQlTester
+```
+final Author author = this.graphQlTester
         .document(document)
         .execute()
         .path("addAuthor")
         .entity(Author.class)
-        .get();</pre>
+        .get();
+```
+
 
 ### Testing a subscription {#_testing_a_subscription}
 
@@ -358,24 +421,33 @@ Subscriptions are a bit different in that we invoke `executeSubscription` instea
 
 To start we'll need to add the `reactor-test` dependency:
 
-<pre class="EnlighterJSRAW">&lt;dependency&gt;
-    &lt;groupId&gt;io.projectreactor&lt;/groupId&gt;
-    &lt;artifactId&gt;reactor-test&lt;/artifactId&gt;
-    &lt;version&gt;3.5.10&lt;/version&gt;
-    &lt;scope&gt;test&lt;/scope&gt;
-&lt;/dependency&gt;</pre>
+```
+<dependency>
+    <groupId>io.projectreactor</groupId>
+    <artifactId>reactor-test</artifactId>
+    <version>3.5.10</version>
+    <scope>test</scope>
+</dependency>
+```
+
 
 Then we can get our Flux using:
 
-<pre class="EnlighterJSRAW">final var bookFlux = this.graphQlTester.document(document)
+```
+final var bookFlux = this.graphQlTester.document(document)
     .executeSubscription()
-    .toFlux("notifyNewBook", Book.class);</pre>
+    .toFlux("notifyNewBook", Book.class);
+```
+
 
 And let's add an easy-to-test to check we received Kent Beck's 9 books. (the API itself offers us a lot more options!)
 
-<pre class="EnlighterJSRAW">final var bookFlux = this.graphQlTester.document(document)
+```
+final var bookFlux = this.graphQlTester.document(document)
     .executeSubscription()
-    .toFlux("notifyNewBook", Book.class);</pre>
+    .toFlux("notifyNewBook", Book.class);
+```
+
 
 ### Handling errors {#_handling_errors}
 
@@ -383,7 +455,8 @@ If we use verify, any errors in the "errors" key will lead to an Assertion failu
 
 For example with this test case:
 
-<pre class="EnlighterJSRAW">@Test
+```
+@Test
 void bookById_verify() {
     this.graphQlTester
             .documentName("bookInfo")
@@ -394,33 +467,47 @@ void bookById_verify() {
             .path("data.bookById.name")
             .entity(String.class)
             .isEqualTo("Clean Code");
-}</pre>
+}
+```
+
 
 If we want to suppress specific error(s) we can filter these out using:
 
-<pre class="EnlighterJSRAW">.errors()
-.filter(error -&gt; ...)
-.path("data.bookById.name")</pre>
+```
+.errors()
+.filter(error -> ...)
+.path("data.bookById.name")
+```
+
 
 We can also apply this filtering on the builder level, so they apply to all our tests using:
 
-<pre class="EnlighterJSRAW">WebGraphQlTester.builder(client)
-    .errorFilter(error -&gt; ...)
-    .build()</pre>
+```
+WebGraphQlTester.builder(client)
+    .errorFilter(error -> ...)
+    .build()
+```
+
 
 Additionally, we can also inspect the errors through a `Consumer` using `satisfy`, which will also mark them as filtered so that we can inspect the data in the response.
 
-<pre class="EnlighterJSRAW">.errors()
-.satisfy(responseErrors -&gt; ...)
-.verify()</pre>
+```
+.errors()
+.satisfy(responseErrors -> ...)
+.verify()
+```
+
 
 The other way around, in case we want to verify that an error exists we can use `expect` instead.  
 
 This will lead to an assertion error if the expected error is not present.
 
-<pre class="EnlighterJSRAW">.errors()
-.expect(error -&gt; ...)
-.verify()</pre>
+```
+.errors()
+.expect(error -> ...)
+.verify()
+```
+
 
 (Dis)advantages {#_disadvantages}
 ---------------------------------
@@ -458,20 +545,29 @@ We can make use of this report to easily detect whether all our schema fields ha
 
 To enable it we'll need to enable introspection in our application.properties
 
-<pre class="EnlighterJSRAW">spring.graphql.schema.introspection.enabled</pre>
+```
+spring.graphql.schema.introspection.enabled
+```
+
 
 And add a bean to our configuration to handle the reporting, for example to log it:
 
-<pre class="EnlighterJSRAW">@Bean
+```
+@Bean
 GraphQlSourceBuilderCustomizer inspectionCustomizer() {
-    return schemaResourceBuilder -&gt; schemaResourceBuilder.inspectSchemaMappings(reportConsumer -&gt; log.info(reportConsumer.toString()));
-}</pre>
+    return schemaResourceBuilder -> schemaResourceBuilder.inspectSchemaMappings(reportConsumer -> log.info(reportConsumer.toString()));
+}
+```
+
 
 When we then start our application we'll get a report akin to the following in our console:
 
-<pre class="EnlighterJSRAW">Unmapped fields: {}
+```
+Unmapped fields: {}
 Unmapped registrations: {}
-Skipped types: []</pre>
+Skipped types: []
+```
+
 
 |--------------|--------------------------------------------------------------------------------------------------------------------------------------|
 | **Warning:** | Introspected should be disabled in production as it exposes quite a bit of information about your API which might not be desireable. |

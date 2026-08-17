@@ -83,42 +83,49 @@ Remember that our event criteria requires us to need all these views. Let's impo
 
 I spun up a local instance of Neo4j using the Neo4j Desktop application and started with sessions data. Here's the import statement:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="cypher">LOAD CSV WITH HEADERS FROM "file:///sessions.csv" as row
+```cypher
+LOAD CSV WITH HEADERS FROM "file:///sessions.csv" as row
 MERGE (s:Session {sessionId: row.`Session Id`})
  SET s.title = row.Title, s.description = row.Description,
     s.status = row.Status, s.setup = row.`Internet/AV Setup`,
 	s.notes = row.`Owner Notes`, s.dateSubmitted = row.`Date Submitted`,
 	s.sessionFormat = row.`Session format`
-RETURN count(s);</pre>
+RETURN count(s);
+```
+
 
 That Cypher statement gives us 200 `Session` nodes. We left out a few fields due to not needing them for scheduling purposes, so we can always import later if requirements change. There are also a couple fields that need special attention because the values are lists. Let's add those to our existing session nodes.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="cypher">LOAD CSV WITH HEADERS FROM "file:///sessions.csv" as row
+```cypher
+LOAD CSV WITH HEADERS FROM "file:///sessions.csv" as row
 MATCH (s:Session {sessionId: row.`Session Id`})
 WITH row, s, apoc.text.split(row.`Speaker Ids`,',') as speakerIds
 UNWIND speakerIds as speakerId
 MERGE (sp:Speaker {speakerId: speakerId})
-MERGE (s)-[r:GIVEN_BY]-&amp;gt;(sp)
+MERGE (s)-[r:GIVEN_BY]-&gt;(sp)
 WITH row, s, apoc.text.split(row.`Topic of your presentation`,',') as topics
 UNWIND topics as topic
 MERGE (t:Topic {name: trim(topic)})
-MERGE (s)-[r2:TAGGED_WITH]-&amp;gt;(t)
+MERGE (s)-[r2:TAGGED_WITH]-&gt;(t)
 WITH row, s, apoc.text.split(row.`Level`,',') as levels
 UNWIND levels as level
 MERGE (l:Level {level: trim(level)})
-MERGE (s)-[r3:CATEGORIZED_IN]-&amp;gt;(l)
-RETURN count(row);</pre>
+MERGE (s)-[r3:CATEGORIZED_IN]-&gt;(l)
+RETURN count(row);
+```
+
 
 Next, we need to hydrate the `Speaker` entities with a little more data - specifically, timezone, company affiliation, and whether they are a part of Neo4j or a special Neo4j community program.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="cypher">LOAD CSV WITH HEADERS FROM "file:///speakers.csv" as row
+```cypher
+LOAD CSV WITH HEADERS FROM "file:///speakers.csv" as row
 MERGE (sp:Speaker {speakerId: row.`Speaker Id`})
  SET sp.lastName = row.LastName, sp.firstName = row.FirstName,
 	sp.email = row.Email, sp.tagline = row.TagLine, sp.profilePicLink = row.`Profile Picture`
 WITH row, sp, apoc.text.split(row.timezone,',') as timezones
 UNWIND timezones as zone
 MERGE (t:Timezone {timezone: trim(zone)})
-MERGE (sp)-[r:IN]-&amp;gt;(t)
+MERGE (sp)-[r:IN]-&gt;(t)
 WITH row, sp
 CALL {
     WITH row, sp
@@ -133,11 +140,14 @@ CALL {
         SET sp:Ninja
     RETURN sp as ninjaSp
 }
-RETURN count(row);</pre>
+RETURN count(row);
+```
+
 
 Next, I'll add an extra label for each timezone to make it easier to filter sessions by region.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="cypher">MATCH (t:Timezone)
+```cypher
+MATCH (t:Timezone)
 WITH t, CASE t.timezone
 WHEN = "GMT+5", = "GMT+6", = "GMT+7", = "GMT+8", = "GMT+9", = "GMT+10", = "GMT+11", = "GMT+12"
     THEN "APAC"
@@ -147,17 +157,22 @@ END AS result
 WITH t, result
  CALL apoc.create.addLabels( t, [ result ] )
 YIELD node
-RETURN count(node);</pre>
+RETURN count(node);
+```
+
 
 **Side note:** The offset numbers for each timezone would be different for daylight savings time.
 
 Last, but not least, we need to import session ratings so that we can filter sessions by rating.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="cypher">LOAD CSV WITH HEADERS FROM "file:///evaluation-results.csv" as row
+```cypher
+LOAD CSV WITH HEADERS FROM "file:///evaluation-results.csv" as row
 MATCH (s:Session {sessionId: row.`Session Id`})
 MERGE (r:Rating {rating: toFloat(row.`Final Evaluation`)})
-MERGE (s)-[r2:HAS_RATING]-&amp;gt;(r)
-RETURN count(row);</pre>
+MERGE (s)-[r2:HAS_RATING]-&gt;(r)
+RETURN count(row);
+```
+
 
 With all the data in, let's see what the data model looks like!
 
@@ -169,13 +184,16 @@ Now we can start querying the data to see what we have and how we can start to p
 
 First, we need to see what sessions are available in each region. We started with anything over a specific rating threshold and filtered by region timezones. The query looked something like this for Asia/Pacific:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="cypher">//Retrieve sessions in APAC region timezones with rating threshold
-MATCH (s:Session)-[r1:GIVEN_BY]-&amp;gt;(sp:Speaker)-[r2]-&amp;gt;(t:Timezone)
+```cypher
+//Retrieve sessions in APAC region timezones with rating threshold
+MATCH (s:Session)-[r1:GIVEN_BY]-&gt;(sp:Speaker)-[r2]-&gt;(t:Timezone)
 WHERE t:APAC
 WITH s, sp, t
-MATCH (s)-[r2:HAS_RATING]-&amp;gt;(r:Rating)
-WHERE r.rating &amp;gt;= 4.0
-RETURN s.sessionId, s.title, sp.lastName, sp.firstName, collect(t.timezone), r.rating;</pre>
+MATCH (s)-[r2:HAS_RATING]-&gt;(r:Rating)
+WHERE r.rating &gt;= 4.0
+RETURN s.sessionId, s.title, sp.lastName, sp.firstName, collect(t.timezone), r.rating;
+```
+
 
 This query returned a list of sessions that met the criteria, which we used to start building a schedule. I was able to export to a CSV straight from Neo4j Browser tool. Then we did similar queries for Europe and Americas regions.
 
@@ -187,11 +205,14 @@ Once we had a good idea of the schedule, we could then accept the desired sessio
 
 With our content solidified, we wanted to create speaker cards for each session, so that Neo4j and the speakers can highlight and promote their upcoming content. Because some sessions have a single speaker and some have multiple speakers, I needed two separate queries to populate two different templates.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="cypher">//Single speaker session card
-MATCH (s:Session)-[r:GIVEN_BY]-&amp;gt;(sp:Speaker)
+```cypher
+//Single speaker session card
+MATCH (s:Session)-[r:GIVEN_BY]-&gt;(sp:Speaker)
 WHERE s.status = "Accepted"
-AND COUNT { (s)-[:GIVEN_BY]-&amp;gt;(:Speaker) } = 1
-RETURN sp.firstName+" "+sp.lastName as speakerName, sp.tagline as tagline, sp.profilePic as profilePicture, s.title as sessionTitle</pre>
+AND COUNT { (s)-[:GIVEN_BY]-&gt;(:Speaker) } = 1
+RETURN sp.firstName+" "+sp.lastName as speakerName, sp.tagline as tagline, sp.profilePic as profilePicture, s.title as sessionTitle
+```
+
 
 Wrapping Up! {#_wrapping_up}
 ----------------------------

@@ -48,31 +48,35 @@ We will deploy all components of Thanos and Prometheus in a single cluster, but 
 
 For Thanos receive and query components to be available outside the cluster and secured with TLS, we will need [ingress-nginx](https://github.com/kubernetes/ingress-nginx) and [cert-manager](https://cert-manager.io/). For ingress, deploy the Helm chart using the following command, to account for this [issue](https://github.com/Azure/AKS/issues/2955) with AKS clusters \>1.23:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">helm upgrade --install ingress-nginx ingress-nginx \
+```
+helm upgrade --install ingress-nginx ingress-nginx \
   --repo https://kubernetes.github.io/ingress-nginx \
   --set controller.service.annotations."service\.beta\.kubernetes\.io/azure-load-balancer-health-probe-request-path"=/healthz \
   --set controller.service.externalTrafficPolicy=Local \
-  --namespace ingress-nginx --create-namespace</pre>
+  --namespace ingress-nginx --create-namespace
+```
+
 
 Notice the extra annotations and the `externalTrafficPolicy` set to `Local`.
 
 Next, we need `cert-manager` to automatically provision SSL certificates from Let's Encrypt; we will just need a valid email address for the ClusterIssuer:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">helm upgrade -i cert-manager \
+```
+helm upgrade -i cert-manager \
   --namespace cert-manager --create-namespace \
   --set installCRDs=true \
   --set ingressShim.defaultIssuerName=letsencrypt-prod \
   --set ingressShim.defaultIssuerKind=ClusterIssuer \
   --repo https://charts.jetstack.io cert-manager
 
-kubectl apply -f - &lt;&lt;EOF
+kubectl apply -f - <<EOF
 apiVersion: cert-manager.io/v1
 kind: ClusterIssuer
 metadata:
   name: letsencrypt-prod
 spec:
   acme:
-    email: <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="57323a363e3b17323a363e3b7934383a">[email&nbsp;protected]</a>
+    email: <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="57323a363e3b17323a363e3b7934383a">[email protected]</a>
     server: https://acme-v02.api.letsencrypt.org/directory
     privateKeySecretRef:
       name: letsencrypt-prod
@@ -80,12 +84,17 @@ spec:
     - http01:
         ingress:
           class: nginx
-EOF</pre>
+EOF
+```
+
 
 Last but not least, we will add a DNS record for our ingress Loadbalancer IP, so it will be seamless to get public FQDNs for our endpoints for Thanos receive and Thanos Query.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">az network dns record-set a add-record  -n "*.thanos" -g dns -z cookingwithazure.com \
---ipv4-address $(kubectl get svc ingress-nginx-controller -n ingress-nginx -o jsonpath="{.status.loadBalancer.ingress[0].ip}")</pre>
+```
+az network dns record-set a add-record  -n "*.thanos" -g dns -z cookingwithazure.com \
+--ipv4-address $(kubectl get svc ingress-nginx-controller -n ingress-nginx -o jsonpath="{.status.loadBalancer.ingress[0].ip}")
+```
+
 
 Note how we use `kubectl` with `jsonpath` type output to get the ingress public IP. We can now leverage the wildcard FQDN `*.thanos.cookingwithazure.com` in our ingresses and cert-manager will be able to obtain the relative certificate seamlessly.
 
@@ -95,15 +104,19 @@ Because we do not want to store any secret or service principal in-cluster, we w
 
 Once you have created or identified the storage account to use and created a container within it, to store the Thanos metrics, assign the roles using the `azure cli`; first, determine the clientID of the managed identity:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">clientid=$(az aks show -g &lt;rg&gt; -n &lt;cluster_name&gt; -o json --query identityProfile.kubeletidentity.clientId)
-</pre>
+```
+clientid=$(az aks show -g <rg> -n <cluster_name> -o json --query identityProfile.kubeletidentity.clientId)
+```
+
 
 Now, assign the role of `Reader and Data Access` to the **Storage account** (you need this so the cloud controller can generate access keys for the containers) and the `Storage Blob Data Contributor` role **to the container only** (there's no need to give this permission at the storage account level, because it will enable writing to *every* container, which we don't need. Always remember to apply the [principles of least privileges](https://www.cisa.gov/uscert/bsi/articles/knowledge/principles/least-privilege)!)
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">az role assignment create --role "Reader and data access" --assignee $clientid --scope /subscriptions/&lt;subID&gt;/resourceGroups/&lt;rg&gt;/providers/Microsoft.Storage/storageAccounts/&lt;account_name&gt;
+```
+az role assignment create --role "Reader and data access" --assignee $clientid --scope /subscriptions/<subID>/resourceGroups/<rg>/providers/Microsoft.Storage/storageAccounts/<account_name>
 
-az role assignment create --role "Storage Blob Data Contributor" --assignee $clientid --scope /subscriptions/&lt;subID&gt;/resourceGroups/&lt;rg&gt;/providers/Microsoft.Storage/storageAccounts/&lt;account_name&gt;/containers/&lt;container_name&gt;
-</pre>
+az role assignment create --role "Storage Blob Data Contributor" --assignee $clientid --scope /subscriptions/<subID>/resourceGroups/<rg>/providers/Microsoft.Storage/storageAccounts/<account_name>/containers/<container_name>
+```
+
 
 ### Create basic auth credentials {#h3-5-create-basic-auth-credentials}
 
@@ -111,7 +124,8 @@ Ok, we kinda cheated in the title: you **do** need one credential at least for t
 
 We will use the same credentials (but feel free to generate a different one) to push metrics from Prometheus to Thanos using `remote-write` via the ingress controller. You'll need a strong password stored into a file called `pass` locally:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">htpasswd -c  -i auth thanos &lt; pass
+```
+htpasswd -c  -i auth thanos < pass
 
 #Create the namespaces
 kubectl create ns thanos
@@ -123,7 +137,9 @@ kubectl create secret generic -n thanos basic-auth --from-file=auth
 #for Prometheus remote write
 kubectl create secret generic -n prometheus remotewrite-secret \
 --from-literal=user=thanos \
---from-literal=password=$(cat pass)</pre>
+--from-literal=password=$(cat pass)
+```
+
 
 We now have the secrets in place for the ingresses and for deploying Prometheus.
 
@@ -131,34 +147,43 @@ We now have the secrets in place for the ingresses and for deploying Prometheus.
 
 We will use the [Bitnami chart](https://github.com/bitnami/charts/tree/master/bitnami/thanos/) to deploy the Thanos components we need.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">helm upgrade -i thanos -n monitoring --create-namespace --values thanos-values.yaml bitnami/thanos
-</pre>
+```
+helm upgrade -i thanos -n monitoring --create-namespace --values thanos-values.yaml bitnami/thanos
+```
+
 
 Let's go thru the relevant sections of the [values file](https://github.com/ams0/ams0/blob/main/blog/dev.to/posts/stateless-monitoring-with-aks-thanos-prometheus-grafana/assets/files/thanos-values.yaml):
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">objstoreConfig: |-
+```
+objstoreConfig: |-
   type: AZURE
   config:
     storage_account: "thanostore"
     container: "thanostore"
     endpoint: "blob.core.windows.net"
     max_retries: 0
-    user_assigned_id: "5c424851-e907-4cb0-acb5-3ea42fc56082"</pre>
+    user_assigned_id: "5c424851-e907-4cb0-acb5-3ea42fc56082"
+```
+
 
 (replace the `user_assigned_id` with the object id of your kubeletIdentity, for more information about AKS identities, check out [this article](https://docs.microsoft.com/en-us/azure/aks/use-managed-identity#use-a-pre-created-kubelet-managed-identity)) This section instructs the Thanos Store Gateway and Compactor to use an Azure Blob store, and to use the kubelet identity to access it. Next, we enable the ruler and the query components:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">ruler:
+```
+ruler:
   enabled: true
 
 query:
   enabled: true
 ...
 queryFrontend:
-  enabled: true</pre>
+  enabled: true
+```
+
 
 We also enable autoscaling for the stateless query components (the `query` and the `query-frontend`; the latter helps aggregating read queries), and we enable simple authentication for the Query frontend service using `ingress-nginx` annotations:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">queryFrontend:
+```
+queryFrontend:
 ...
   ingress:
     enabled: true
@@ -169,7 +194,9 @@ We also enable autoscaling for the stateless query components (the `query` and t
       nginx.ingress.kubernetes.io/auth-realm: 'Authentication Required - thanos'
     hostname: query.thanos.cookingwithazure.com
     ingressClassName: nginx
-    tls: true</pre>
+    tls: true
+```
+
 
 The annotation references the `basic-auth` secret we created before from the `htpasswd` credentials.
 
@@ -179,21 +206,27 @@ Note that the same annotations are also under the `receive` section, as we're us
 
 Until full support for Agent mode lands in the Prometheus operator (follow this [issue](https://github.com/prometheus-community/helm-charts/issues/1519)), we can use the [remote write feature](https://prometheus.io/docs/operating/integrations/#remote-endpoints-and-storage) to ship every metrics instantly to a remote endpoint, in our case represented by the Thanos Query Frontend ingress. Let's start by deploying Prometheus using the [kube-prometheus-stack helm chart](https://github.com/prometheus-community/helm-charts/tree/main/charts/kube-prometheus-stack):
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">helm  upgrade -i -n prometheus promremotewrite -f prom-remotewrite.yaml prometheus-community/kube-prometheus-stack
-</pre>
+```
+helm  upgrade -i -n prometheus promremotewrite -f prom-remotewrite.yaml prometheus-community/kube-prometheus-stack
+```
+
 
 Let's go thru the [values file](https://github.com/ams0/ams0/blob/main/blog/dev.to/posts/stateless-monitoring-with-aks-thanos-prometheus-grafana/assets/files/prometheus-values.yaml) to explain the options we need to enable remote-write:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">prometheus:
+```
+prometheus:
   enabled: true
   prometheusSpec:
     externalLabels:
       datacenter: westeu
-      cluster: playground</pre>
+      cluster: playground
+```
+
 
 This enables Prometheus and attaches two extra labels to every metrics, so it becomes easier to filter data coming from multiple sources/clusters later in Grafana.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">remoteWrite:
+```
+remoteWrite:
 - url: "https://receive.thanos.cookingwithazure.com/api/v1/receive"
   name: Thanos
   basicAuth:
@@ -202,7 +235,9 @@ This enables Prometheus and attaches two extra labels to every metrics, so it be
       key: user
     password:
       name: remotewrite-secret
-      key: password</pre>
+      key: password
+```
+
 
 This section points to the remote endpoint (secured via SSL using Let's Encrypt certificates, thus trusted by the certificate store on the AKS nodes; if you use a non-trusted certificate, refer to the [TLSConfig](https://github.com/prometheus-operator/prometheus-operator/blob/main/Documentation/api.md#tlsconfig) section of the PrometheusSpec API). Note how the credentials to access the remote endpoint are coming from the secret created beforehand and stored in the `prometheus` namespace.
 

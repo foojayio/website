@@ -28,7 +28,7 @@ I have been analyzing the latest [**Sonar Leaderboard**](https://www.sonarsource
 
 Not all "high-end" models write code that you would want to push to production. Here is what the numbers and the code say, straight up. 👇
 
-*** ** * ** ***
+
 
 **1. The "Bloatware" Trap: Precision vs. Verbosity 📉** {#h2-0-1-the-bloatware-trap-precision-vs-verbosity}
 -----------------------------------------------------------------------------------------------------------
@@ -48,68 +48,74 @@ Based on the cyclomatic complexity metrics from the report, this is how the code
 
 **What you could expect from a "Verbose" model (GPT-5.2 High style):** They usually add a lot of unnecessary defense, classic loops, and high complexity.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">// ❌ Simulated example of a model with high verbosity/complexity
+```java
+// ❌ Simulated example of a model with high verbosity/complexity
 
-public List&lt;String&gt; filterValidUsers(List&lt;User&gt; users) {
+public List<String> filterValidUsers(List<User> users) {
 
-&nbsp;&nbsp;&nbsp;&nbsp;List&lt;String&gt; validNames = new ArrayList&lt;&gt;();
+    List<String> validNames = new ArrayList<>();
 
-&nbsp;&nbsp;&nbsp;&nbsp;if (users != null) {
+    if (users != null) {
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for (User u : users) {
+        for (User u : users) {
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (u != null) {
+            if (u != null) {
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;try {
+                try {
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;String name = u.getName();
+                    String name = u.getName();
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (name != null &amp;&amp; !name.trim().isEmpty()) {
+                    if (name != null && !name.trim().isEmpty()) {
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;validNames.add(name);
+                        validNames.add(name);
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+                    }
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} catch (Exception e) {
+                } catch (Exception e) {
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// Defensive try-catch inside a loop... bad idea 🤦‍♂️
+                    // Defensive try-catch inside a loop... bad idea 🤦‍♂️
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;continue;&nbsp;
+                    continue; 
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+                }
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+            }
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+        }
 
-&nbsp;&nbsp;&nbsp;&nbsp;}
+    }
 
-&nbsp;&nbsp;&nbsp;&nbsp;return validNames;
+    return validNames;
 
-}</pre>
+}
+```
+
 
 **What an "Efficient" model would tend to generate (Gemini 3 Pro / OpenCoder style):** Direct, readable, and using the Streams API correctly.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">// ✅ Simulated example of an optimized and concise model
+```java
+// ✅ Simulated example of an optimized and concise model
 
-public List&lt;String&gt; filterValidUsers(List&lt;User&gt; users) {
+public List<String> filterValidUsers(List<User> users) {
 
-&nbsp;&nbsp;&nbsp;&nbsp;if (users == null) return Collections.emptyList();
+    if (users == null) return Collections.emptyList();
 
-&nbsp;&nbsp;&nbsp;&nbsp;return users.stream()
+    return users.stream()
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.map(User::getName)
+        .map(User::getName)
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.filter(name -&gt; name != null &amp;&amp; !name.isBlank())
+        .filter(name -> name != null && !name.isBlank())
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.toList(); // Java 16+ style
+        .toList(); // Java 16+ style
 
-}</pre>
+}
+```
+
 
 Which one do you prefer to maintain in 6 months? Exactly.
 ![](Screenshot-2026-01-09-at-19.51.13-1024x217.png)
 
-*** ** * ** ***
+
 
 **2. Security: A "Bug" is not the same as an "Open Door" 🚨** {#h2-2-2-security-a-bug-is-not-the-same-as-an-open-door}
 ----------------------------------------------------------------------------------------------------------------------
@@ -126,40 +132,46 @@ I have seen that new models, when trying to be "flexible", can reintroduce vulne
 
 A model with high issue density **could generate** code that prioritizes building the String fast rather than security:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">// ❌ Critical Security Hotspot (SQL Injection)
+```java
+// ❌ Critical Security Hotspot (SQL Injection)
 
 // Typical of models that don't "think" (Chain of Thought) before writing
 
-public List&lt;User&gt; search(String username) {
+public List<User> search(String username) {
 
-&nbsp;&nbsp;&nbsp;&nbsp;String query = "SELECT * FROM users WHERE name = '" + username + "'";
+    String query = "SELECT * FROM users WHERE name = '" + username + "'";
 
-&nbsp;&nbsp;&nbsp;&nbsp;return entityManager.createNativeQuery(query, User.class).getResultList();
+    return entityManager.createNativeQuery(query, User.class).getResultList();
 
-}</pre>
+}
+```
+
 
 While a secure model (like **Opus 4.5 Thinking** ) would **tend** to use *Prepared Statements* by default:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">// ✅ Secure Code
+```java
+// ✅ Secure Code
 
-public List&lt;User&gt; search(String username) {
+public List<User> search(String username) {
 
-&nbsp;&nbsp;&nbsp;&nbsp;String query = "SELECT * FROM users WHERE name = :username";
+    String query = "SELECT * FROM users WHERE name = :username";
 
-&nbsp;&nbsp;&nbsp;&nbsp;return entityManager.createNativeQuery(query, User.class)
+    return entityManager.createNativeQuery(query, User.class)
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.setParameter("username", username)
+        .setParameter("username", username)
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.getResultList();
+        .getResultList();
 
-}</pre>
+}
+```
+
 
 **Pro Tip:** If you use a model with high *Issue Density* (\>25), assume there are vulnerabilities. ALWAYS run a comprehensive code scanner (like SonarQube) before accepting the PR.
 
 Difference in terms of issue density on the main model of each organization:
 ![](Screenshot-2026-01-09-at-19.51.23-1024x634.png)
 
-*** ** * ** ***
+
 
 **3. "New" does not guarantee "Better Code" 📉** {#h2-4-3-new-does-not-guarantee-better-code}
 ---------------------------------------------------------------------------------------------
@@ -173,23 +185,26 @@ Look at the regressions in technical quality:
 
 Sometimes, new models reintroduce basic **Code Smells**, like generic exception handling, just to "get by" and give you a quick answer.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">// 🤢 The classic "Smell" that usually reappears in rushed models
+```java
+// 🤢 The classic "Smell" that usually reappears in rushed models
 
 try {
 
-&nbsp;&nbsp;&nbsp;&nbsp;processData();
+    processData();
 
-} catch (Exception e) {&nbsp;
+} catch (Exception e) { 
 
-&nbsp;&nbsp;&nbsp;&nbsp;// Catching 'Exception' is lazy and hides real errors
+    // Catching 'Exception' is lazy and hides real errors
 
-&nbsp;&nbsp;&nbsp;&nbsp;e.printStackTrace();&nbsp;
+    e.printStackTrace(); 
 
-}</pre>
+}
+```
+
 
 ![](Screenshot-2026-01-09-at-19.51.31-1024x326.png)
 
-*** ** * ** ***
+
 
 **4. The Summary: Which model should I use for Java?** {#h2-5-4-the-summary-which-model-should-i-use-for-java}
 --------------------------------------------------------------------------------------------------------------
@@ -219,7 +234,7 @@ The balanced option.
 * **Power:** Solves very hard problems.
 * **Cons:** Be prepared to refactor a lot of verbose code and clean *bad smells*.
 
-*** ** * ** ***
+
 
 ### **Final Summary 📝** {#h3-9-final-summary}
 

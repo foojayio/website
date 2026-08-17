@@ -41,9 +41,12 @@ The fact that many systems only used the last two digits of the year would defin
 
 For instance, database systems storing dates in the format YYMMDD would contain this data, where it is obvious the sorting would be "messed up" from the year 2000 onwards:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">February 28th of 1970   --&gt;     700228
-October 23st of 1982    --&gt;     821023
-January 1st of 2000     --&gt;     000101</pre>
+```
+February 28th of 1970   -->     700228
+October 23st of 1982    -->     821023
+January 1st of 2000     -->     000101
+```
+
 
 <figure class="wp-block-image size-medium">
  <img fetchpriority="high" decoding="async" width="454" height="510" src="y2k-454x510.jpg" alt="" class="wp-image-61216">
@@ -63,7 +66,8 @@ It enables quick testing of Java code. If you have a JDK installed, you can use 
 
 To check your Java version and start `jshell`:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ java -version
+```
+$ java -version
 openjdk version "19" 2022-09-20
 OpenJDK Runtime Environment Zulu19.28+81-CA (build 19+36)
 OpenJDK 64-Bit Server VM Zulu19.28+81-CA (build 19+36, mixed mode, sharing)
@@ -72,11 +76,14 @@ $ jshell
 |  Welcome to JShell -- Version 19
 |  For an introduction type: /help intro
 
-jshell&gt;</pre>
+jshell>
+```
+
 
 To find out what you can do, type `/help intro`:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">jshell&gt; /help intro
+```
+jshell> /help intro
 |
 |                                   intro
 |                                   =====
@@ -90,26 +97,34 @@ To find out what you can do, type `/help intro`:
 |  There are also the jshell tool commands that allow you to understand and
 |  control what you are doing, like:  /list
 |
-|  For a list of commands: /help</pre>
+|  For a list of commands: /help
+```
+
 
 A simple example:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">jshell&gt; var txt = "Hello World!"
-txt ==&gt; "Hello World!"
+```
+jshell> var txt = "Hello World!"
+txt ==> "Hello World!"
 
-jshell&gt; txt
-txt ==&gt; "Hello World!"
+jshell> txt
+txt ==> "Hello World!"
 
-jshell&gt; txt + (5*4)
-$3 ==&gt; "Hello World!20"
+jshell> txt + (5*4)
+$3 ==> "Hello World!20"
 
-jshell&gt; txt.substring(2, 5)
-$4 ==&gt; "llo"</pre>
+jshell> txt.substring(2, 5)
+$4 ==> "llo"
+```
+
 
 To end `jshell`, use `/exit`
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">jshell&gt; /exit
-|  Goodbye</pre>
+```
+jshell> /exit
+|  Goodbye
+```
+
 
 What will happen in 2038? {#h2-2-what-will-happen-in-2038}
 ----------------------------------------------------------
@@ -122,9 +137,12 @@ Let's take a look at the problem with `jshell`.
 
 First, we need to import some packages as we will be using some time methods.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">jshell&gt; import java.time.Instant
-jshell&gt; import java.time.ZoneId
-jshell&gt; import java.time.ZonedDateTime</pre>
+```
+jshell> import java.time.Instant
+jshell> import java.time.ZoneId
+jshell> import java.time.ZonedDateTime
+```
+
 
 As you may know, a lot of date formats, started on January 1st in 1970. This is very nicely explained by [Matt Howells](https://stackoverflow.com/users/16881/matt-howells) and community contributions in this [StackOverflow answer](https://stackoverflow.com/questions/1090869/why-is-1-1-1970-the-epoch-time):
 
@@ -138,41 +156,50 @@ Based on this answer, it becomes clear that the use of integers to store dates i
 
 Something that can be perfectly tested with a few lines of code:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">jshell&gt; var testDate = ZonedDateTime.of(1970, 1, 1, 0, 0, 0, 0, ZoneId.of("UTC"));
-testDate ==&gt; 1970-01-01T00:00Z[UTC]
+```
+jshell> var testDate = ZonedDateTime.of(1970, 1, 1, 0, 0, 0, 0, ZoneId.of("UTC"));
+testDate ==> 1970-01-01T00:00Z[UTC]
 
-jshell&gt; testDate.toEpochSecond()
-$4 ==&gt; 0</pre>
+jshell> testDate.toEpochSecond()
+$4 ==> 0
+```
+
 
 Indeed 1970-01-01 returns the value 0 as epoch. Now let's travel to the future and assign the maximum integer value to our test date:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">jshell&gt; testDate = ZonedDateTime.ofInstant(Instant.ofEpochSecond(Integer.MAX_VALUE), ZoneId.of("UTC"));
-testDate ==&gt; 2038-01-19T03:14:07Z[UTC]
+```
+jshell> testDate = ZonedDateTime.ofInstant(Instant.ofEpochSecond(Integer.MAX_VALUE), ZoneId.of("UTC"));
+testDate ==> 2038-01-19T03:14:07Z[UTC]
 
-jshell&gt; testDate.toEpochSecond()
-$5 ==&gt; 2147483647
+jshell> testDate.toEpochSecond()
+$5 ==> 2147483647
 
-jshell&gt; testDate = testDate.minusSeconds(1)
-testDate ==&gt; 2038-01-19T03:14:06Z[UTC]
+jshell> testDate = testDate.minusSeconds(1)
+testDate ==> 2038-01-19T03:14:06Z[UTC]
 
-jshell&gt; testDate.toEpochSecond()
-$6 ==&gt; 2147483646
+jshell> testDate.toEpochSecond()
+$6 ==> 2147483646
 
-jshell&gt; testDate = testDate.plusSeconds(2)
-testDate ==&gt; 2038-01-19T03:14:08Z[UTC]
+jshell> testDate = testDate.plusSeconds(2)
+testDate ==> 2038-01-19T03:14:08Z[UTC]
 
-jshell&gt; testDate.toEpochSecond()
-$7 ==&gt; 2147483648</pre>
+jshell> testDate.toEpochSecond()
+$7 ==> 2147483648
+```
+
 
 Everything still seems to be OK, but as `toEpochSecond()` returns a long, the problem becomes clear when we convert that last value to an integer.
 
 It becomes a negative value, that when used as an instant to recreate the date, makes us travel back into time to December 13th of 1901!
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">jshell&gt; (int) testDate.toEpochSecond()
-$8 ==&gt; -2147483648
+```
+jshell> (int) testDate.toEpochSecond()
+$8 ==> -2147483648
 
-jshell&gt; testDate = ZonedDateTime.ofInstant(Instant.ofEpochSecond(-2147483648), ZoneId.of("UTC"));
-testDate ==&gt; 1901-12-13T20:45:52Z[UTC]</pre>
+jshell> testDate = ZonedDateTime.ofInstant(Instant.ofEpochSecond(-2147483648), ZoneId.of("UTC"));
+testDate ==> 1901-12-13T20:45:52Z[UTC]
+```
+
 
 Conclusion {#h2-3-conclusion}
 -----------------------------

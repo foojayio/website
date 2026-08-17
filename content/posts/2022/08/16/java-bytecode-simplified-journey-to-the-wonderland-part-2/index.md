@@ -36,7 +36,8 @@ An intriguing aspect of `javap`, is that we do not need to deal with Java source
 
 Let's see an example:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">package ca.bazlur;
+```java
+package ca.bazlur;
 
 public class Lamp {
     private boolean isOn;
@@ -60,7 +61,9 @@ public class Lamp {
         lamp.turnOn();
         lamp.turnOff();
     }
-}</pre>
+}
+```
+
 
 If we compile this code using `javac` we will get a class file, and then we can use `javap` to disassemble the bytecode from the command line as follows:
 
@@ -68,19 +71,23 @@ If we compile this code using `javac` we will get a class file, and then we can 
 
 We will get the following output.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">Compiled from "Lamp.java"
+```java
+Compiled from "Lamp.java"
 public class ca.bazlur.Lamp {
   public ca.bazlur.Lamp();
   public void turnOn();
   public void turnOff();
   public static void main(java.lang.String[]);
-}</pre>
+}
+```
+
 
 Note that it prints only the public, protected, and default methods. Abobe, it did not print private methods. If we also wish to view the private method, we must specify an additional switch `-p`.
 
 `javap -p Lamp`
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">Compiled from "Lamp.java"
+```java
+Compiled from "Lamp.java"
 public class ca.bazlur.Lamp {
   private boolean isOn;
   public ca.bazlur.Lamp();
@@ -88,18 +95,21 @@ public class ca.bazlur.Lamp {
   public void turnOff();
   private void printStatus();
   public static void main(java.lang.String[]);
-}</pre>
+}
+```
+
 
 Nonetheless, this only prints the names of the methods. We would be looking for more information, including the bytecode used in the method body. This requires another switch, which is `-c`.
 
 `javap -c Lamp`
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">Compiled from "Lamp.java"
+```
+Compiled from "Lamp.java"
 public class ca.bazlur.Lamp {
   public ca.bazlur.Lamp();
     Code:
        0: aload_0
-       1: invokespecial #1                  // Method java/lang/Object."&lt;init&gt;":()V
+       1: invokespecial #1                  // Method java/lang/Object."<init>":()V
        4: return
 
   public void turnOn();
@@ -124,14 +134,16 @@ public class ca.bazlur.Lamp {
     Code:
        0: new           #8                  // class ca/bazlur/Lamp
        3: dup
-       4: invokespecial #36                 // Method "&lt;init&gt;":()V
+       4: invokespecial #36                 // Method "<init>":()V
        7: astore_1
        8: aload_1
        9: invokevirtual #37                 // Method turnOn:()V
       12: aload_1
       13: invokevirtual #40                 // Method turnOff:()V
       16: return
-}</pre>
+}
+```
+
 
 Now, this becomes significantly more intriguing, and we can observe the presence of all bytecodes. If we examine the first line of the main method, we see the following:
 
@@ -141,7 +153,8 @@ In addition to this, the code has other locations with numbers such as #1, #2, e
 
 `javap -v Lamp`
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">Classfile /bytecode-simplified/src/main/java/ca/bazlur/Lamp.class
+```
+Classfile /bytecode-simplified/src/main/java/ca/bazlur/Lamp.class
   Last modified Aug. 11, 2022; size 1245 bytes
   SHA-256 checksum cf727468acdcc0b2dd0a6a858a313110e437e01a6625cf4e03f1f0fa41910dae
   Compiled from "Lamp.java"
@@ -153,11 +166,11 @@ public class ca.bazlur.Lamp
   super_class: #2                         // java/lang/Object
   interfaces: 0, fields: 1, methods: 5, attributes: 3
 Constant pool:
-   #1 = Methodref          #2.#3          // java/lang/Object."&lt;init&gt;":()V
+   #1 = Methodref          #2.#3          // java/lang/Object."<init>":()V
    #2 = Class              #4             // java/lang/Object
-   #3 = NameAndType        #5:#6          // "&lt;init&gt;":()V
+   #3 = NameAndType        #5:#6          // "<init>":()V
    #4 = Utf8               java/lang/Object
-   #5 = Utf8               &lt;init&gt;
+   #5 = Utf8               <init>
    #6 = Utf8               ()V
    #7 = Fieldref           #8.#9          // ca/bazlur/Lamp.isOn:Z
    #8 = Class              #10            // ca/bazlur/Lamp
@@ -188,7 +201,7 @@ Constant pool:
   #33 = Utf8               java/io/PrintStream
   #34 = Utf8               println
   #35 = Utf8               (Ljava/lang/String;)V
-  #36 = Methodref          #8.#3          // ca/bazlur/Lamp."&lt;init&gt;":()V
+  #36 = Methodref          #8.#3          // ca/bazlur/Lamp."<init>":()V
   #37 = Methodref          #8.#38         // ca/bazlur/Lamp.turnOn:()V
   #38 = NameAndType        #39:#6         // turnOn:()V
   #39 = Utf8               turnOn
@@ -204,7 +217,8 @@ Constant pool:
   #49 = Utf8               ([Ljava/lang/String;)V
   #50 = Utf8               SourceFile
   #51 = Utf8               Lamp.java
-</pre>
+```
+
 
 The output is quite large, so only a portion of the code for the constant pool is shown here.
 
@@ -212,10 +226,13 @@ Bytecode starts with minor and major versions. This allows us to determine the v
 
 It can be considered a multidimensional array. In fact, in the JVM specification, the general format mentioned as follows:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">cp_info {
+```
+cp_info {
     u1 tag;
     u1 info[];
-}</pre>
+}
+```
+
 
 It contains numerous elements, including class name, field name, interface name, String, numbers, pointers to classes or methods, type descriptor, etc., and has an index.  
 

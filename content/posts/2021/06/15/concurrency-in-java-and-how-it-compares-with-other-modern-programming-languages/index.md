@@ -35,7 +35,7 @@ The chapters of this series are as below, with part 6 here on Foojay.io, the pla
 7. Concurrent web server in Kotlin with JVM
 8. Comparison and conclusion of benchmarks
 
-*** ** * ** ***
+
 
 Concurrency in Java {#h2-0-concurrency-in-java}
 -----------------------------------------------
@@ -75,7 +75,8 @@ Now that we have some basic understanding of concurrency features in Java, let u
 
 This example is closer to the Rust multi-threaded example we built in the [rust chapter](https://deepu.tech/concurrency-in-modern-languages-rust/), I have omitted import statements for brevity. You can find the full example on [GitHub here](https://github.com/deepu105/concurrency-benchmarks/tree/main/javaws). We use `java.net.ServerSocket` for this. We are not using any external dependency in this case.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public class JavaHTTPServer {
+```java
+public class JavaHTTPServer {
     public static void main(String[] args) {
         var count = 0; // count used to introduce delays
         // bind listener
@@ -148,13 +149,16 @@ class ServerThread extends Thread {
             System.err.println("Error with exception : " + ex);
         }
     }
-}</pre>
+}
+```
+
 
 As you can see, we bind a TCP listener using `ServerSocket` to port 8080 and listen to all incoming requests. Each request is processed in a new thread.
 
 Let us run a benchmark using ApacheBench. We will make 10000 requests with 100 concurrent requests.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="raw">❯ ab -c 100 -n 10000 http://127.0.0.1:8080/
+```
+❯ ab -c 100 -n 10000 http://127.0.0.1:8080/
 This is ApacheBench, Version 2.3 Revision: 1879490
 ...
 
@@ -188,7 +192,9 @@ Percentage of the requests served within a certain time (ms)
   95%   2001
   98%   2003
   99%   2006
- 100%   2025 (longest request)</pre>
+ 100%   2025 (longest request)
+```
+
 
 As you can see, the request handler thread sleeps for 2 seconds for every 10th request. In a real-world scenario, the thread pool itself could become the bottleneck and you may not be able to set so many threads as the OS may not be able to provide so many thus creating increased resource usage and bottleneck. In this simple use case, since each thread spawns and processes the request really fast we won't encounter an issue.
 
@@ -198,7 +204,8 @@ So let's see if we can have another solution without such a bottleneck.
 
 This example is closer to the asynchronous example from the [rust chapter](https://deepu.tech/concurrency-in-modern-languages-rust/), I have omitted import statements for brevity. You can find the full example on [GitHub here](https://github.com/deepu105/concurrency-benchmarks/tree/main/javaws). Notice that we are using `java.nio.channels.AsynchronousServerSocketChannel`here and no external dependencies.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public class JavaAsyncHTTPServer {
+```java
+public class JavaAsyncHTTPServer {
     public static void main(String[] args) throws Exception {
         new JavaAsyncHTTPServer().start();
         Thread.currentThread().join(); // Wait forever
@@ -214,7 +221,7 @@ This example is closer to the asynchronous example from the [rust chapter](https
         final int[] count = {0}; // count used to introduce delays
 
         // listen to all incoming requests
-        server.accept(null, new CompletionHandler&lt;&gt;() {
+        server.accept(null, new CompletionHandler<>() {
             @Override
             public void completed(final AsynchronousSocketChannel result, final Object attachment) {
                 if (server.isOpen()) {
@@ -242,7 +249,7 @@ This example is closer to the asynchronous example from the [rust chapter](https
                 System.out.println("Adding delay. Count: " + count);
                 Thread.sleep(2000);
             }
-            if (ch != null &amp;&amp; ch.isOpen()) {
+            if (ch != null && ch.isOpen()) {
                 // Read the first 1024 bytes of data from the stream
                 final ByteBuffer buffer = ByteBuffer.allocate(1024);
                 // read the request fully to avoid connection reset errors
@@ -271,15 +278,18 @@ This example is closer to the asynchronous example from the [rust chapter](https
             System.out.println("Connection handler error: " + e);
         }
     }
-}</pre>
+}
+```
+
 
 As you can see, we bind an asynchronous listener to port 8080 and listen to all incoming requests. Each request is processed in a new task provided by `AsynchronousServerSocketChannel`. We are not using any thread pools here and all the incoming requests are processed asynchronously and hence we don't have a bottleneck for maximum connections. But one thing you may immediately notice is that the code is much more complex now.
 
 Let us run a benchmark using ApacheBench. We will make 10000 requests with 100 concurrent requests.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="raw">ab -c 100 -n 10000 http://127.0.0.1:8080/
+```
+ab -c 100 -n 10000 http://127.0.0.1:8080/
 
-This is ApacheBench, Version 2.3 &lt;$Revision: 1879490 $&gt;
+This is ApacheBench, Version 2.3 <$Revision: 1879490 $>
 ...
 
 Document Path:          /
@@ -312,7 +322,9 @@ Percentage of the requests served within a certain time (ms)
   95%   2001
   98%   2002
   99%   2003
- 100%   2026 (longest request)</pre>
+ 100%   2026 (longest request)
+```
+
 
 We have almost identical results here, this one is even faster by 100ms. Hence this version seems much more efficient than the multi-threaded version for this particular use case, however, at the cost of added complexity.
 
@@ -325,7 +337,7 @@ Instead, it's a simple test for a very particular use case, a simple concurrent 
 
 The idea is to see the differences in solutions and to understand how concurrency works in Java. And for this particular use case, asynchronous solutions do seem to be the best choice.
 
-*** ** * ** ***
+
 
 References {#h2-7-references}
 -----------------------------
@@ -338,7 +350,7 @@ References {#h2-7-references}
 * [dzone.com](https://dzone.com/articles/async-await-in-java)
 * [www.baeldung.com](https://www.baeldung.com/akka-actors-java)
 
-*** ** * ** ***
+
 
 If you like this article, please leave a like or a comment.
 

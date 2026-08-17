@@ -66,11 +66,14 @@ Apache APISIX provides two kinds of authentications: internal, with APISIX check
 
 APISIX assigns authenticated calls to a *consumer* . For example, we can create a consumer authenticated with the `key-auth` plugin:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml">consumers:
+```yaml
+consumers:
   - username: john
     plugins:
       key-auth:
-        key: mykey</pre>
+        key: mykey
+```
+
 
 Every request containing the header `apikey` with the key `mykey` will be assigned to the consumer `john`.
 
@@ -84,7 +87,8 @@ Authentication alone isn't enough. Once a request to a URL has been authenticate
 
 Apache APISIX implements authorization mainly via the [consumer-restriction](https://apisix.apache.org/docs/apisix/plugins/consumer-restriction/) plugin. Here's the most straightforward usage of the `consumer-restriction` plugin:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml">consumers:
+```yaml
+consumers:
   - username: johndoe                     #1
     plugins:
       keyauth:
@@ -96,7 +100,9 @@ routes:
       keyauth: ~
       consumer-restriction:
         whitelist:                        #3
-          - johndoe</pre>
+          - johndoe
+```
+
 
 1. Define a consumer
 2. Reference an already existing upstream
@@ -104,7 +110,8 @@ routes:
 
 Most real-world authorization models avoid binding an identity directly to a permission. They generally bind a group (and even a role) so that it becomes easier to manage many identities. Apache APISIX provides the [consumer group](https://apisix.apache.org/docs/apisix/terminology/consumer-group/) abstraction for this.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml">consumer_groups:
+```yaml
+consumer_groups:
   - id: accountants                      #1
 
 consumers:
@@ -121,7 +128,9 @@ routes:
       consumer-restriction:
         type: consumer_group_id          #3
         whitelist:
-          - accountants</pre>
+          - accountants
+```
+
 
 1. Define a consumer group
 2. Assign the consumer to the previously defined consumer group
@@ -141,13 +150,16 @@ IP Whitelisting {#h2-3-ip-whitelisting}
 
 Apache APISIX implements IP Whitelisting via the [ip-restriction](https://apisix.apache.org/docs/apisix/plugins/ip-restriction/) plugin. You can define either regular IPs or CIDR blocks.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml">routes:
+```yaml
+routes:
   - upstream_id: 1
     plugins:
       ip-restriction:
         whitelist:
           - 127.0.0.1
-          - 13.74.26.106/24</pre>
+          - 13.74.26.106/24
+```
+
 
 Logging and Monitoring {#h2-4-logging-and-monitoring}
 -----------------------------------------------------
@@ -188,17 +200,21 @@ Rate Limiting protects upstreams from Distributed Denial of Services attacks, *a
 
 Let's use `limit-count` for the sake of example:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml">routes:
+```yaml
+routes:
   - upstream_id: 1
     plugins:
       limit-count:
         count: 10
         time_window: 1
-        rejected_code: 429</pre>
+        rejected_code: 429
+```
+
 
 The above configuration snippet protects the upstream from being hit by more than ten requests per second. It applies to every IP address because of the default configuration. The complete snippet would look like the following:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml">routes:
+```yaml
+routes:
   - upstream_id: 1
     plugins:
       limit-count:
@@ -206,13 +222,16 @@ The above configuration snippet protects the upstream from being hit by more tha
         time_window: 1
         rejected_code: 429
         key_type: var
-        key: remote_addr</pre>
+        key: remote_addr
+```
+
 
 When dealing with APIs, there's a considerable chance you want to differentiate between your clients. Some might get a better rate for different reasons: they paid a premium offer; they are considered strategic; they are internal clients, etc. The same consumer could also use different IP addresses because they run on various machines with other APIs. Allowing the same consumer more calls because they execute their requests on a distributed infrastructure would be unfair.
 
 As it stands, the IP is not a great way to assign the limit; we prefer to use a named consumer or, even better, a consumer group. It's perfectly possible with APISIX:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">consumer_groups:
+```
+consumer_groups:
   - id: basic
     plugins:
       limit-count:
@@ -241,7 +260,9 @@ consumers:
 routes:
   - upstream_id: 1
     plugins:
-      key-auth: ~</pre>
+      key-auth: ~
+```
+
 
 Now, `johndoe` can only send a request every second, as he's part of the `basic` plan, while `janedoe` can request ten times as much as part of the premium plan.
 
@@ -256,6 +277,6 @@ The rules left could be less straightforward to implement; [we will cover them i
 
 <br />
 
-*** ** * ** ***
+
 
 *Originally published at [A Java Geek](https://blog.frankel.ch/secure-api-practices-apisix/1/) on February 18^th^, 2024*

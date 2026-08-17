@@ -29,7 +29,8 @@ GTFS is based on two kinds of data, static data, and dynamic data. Static data m
 
 As a developer, I'm lazy and wanted to automate this task. I used GitHub Actions for that:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml">name: Refresh Dataset
+```yaml
+name: Refresh Dataset
 on:
   schedule:
     - cron: '12 2 * * 1'                                                     # 1
@@ -41,14 +42,16 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2                                            # 2
       - name: Fetch dataset archive
-        run: curl -o archive.zip https://api.511.org/transit/datafeeds\?api_key\=${{secrets.FIVEONEONE_API_KEY}}\&amp;operator_id\=RG  # 3
+        run: curl -o archive.zip https://api.511.org/transit/datafeeds\?api_key\=${{secrets.FIVEONEONE_API_KEY}}\&operator_id\=RG  # 3
       - name: Extract archive
         run: unzip -o -d ./infrastructure/data/current/ archive.zip          # 4
-      - name: Add &amp; commit
+      - name: Add & commit
         uses: stefanzweifel/git-auto-commit-action@v4                        # 5
         with:
           commit_message: Update to latest data files
-          add_options: '-u'</pre>
+          add_options: '-u'
+```
+
 
 1. Run the action weekly
 2. Checkout the repository
@@ -65,7 +68,8 @@ Yet, I was not happy with the above automation:
 
 Hence, I decided to switch to an alternative approach. Instead of committing, I updated the script to open a Pull Request. If I need to run the demo, I'll merge it (and pull locally); if not, it will stay open. If an opened PR already exists, the action will overwrite it. Now, I can schedule the action more frequently.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml">name: Refresh Dataset
+```yaml
+name: Refresh Dataset
 on:
   schedule:
     - cron: '12 2 * * *'                                                     # 1
@@ -77,7 +81,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2                                            # 2
       - name: Fetch dataset archive
-        run: curl -o archive.zip https://api.511.org/transit/datafeeds\?api_key\=${{secrets.FIVEONEONE_API_KEY}}\&amp;operator_id\=RG  # 3
+        run: curl -o archive.zip https://api.511.org/transit/datafeeds\?api_key\=${{secrets.FIVEONEONE_API_KEY}}\&operator_id\=RG  # 3
       - name: Extract files of interest from the archive
         run: unzip -o -j archive.zip agency.txt routes.txt stop_times.txt stops.txt trips.txt -d ./infrastructure/data/current  # 4
       - name: Remove archive
@@ -89,7 +93,9 @@ jobs:
           branch: data/refresh
           delete-branch: true
           title: Refresh data files to latest version
-          body: ""</pre>
+          body: ""
+```
+
 
 1. Run the action *daily*
 2. Checkout the repository

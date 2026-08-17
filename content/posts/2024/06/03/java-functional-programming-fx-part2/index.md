@@ -56,7 +56,10 @@ After we determine the lambda expression's type from the functional interface cl
 
 Composing a lambda expression involves three components:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">() -&gt; { }</pre>
+```java
+() -> { }
+```
+
 
 1. A block of parameters
 2. An Arrow and Java uses meager arrows(-\>)
@@ -66,20 +69,26 @@ Nevertheless, we can streamline the syntax from `() -> {}` to `argument -> block
 
 **For example** , for the below list, we can convert the **anonymous inner class** syntax which takes too many lines to express the basic concept.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">List names = List.of("Foojay", "Java", "Steve", "Mahi");
+```java
+List names = List.of("Foojay", "Java", "Steve", "Mahi");
 
 Collections.sort(names, new Comparator() {
   @Override
   public int compare(String str1, String str2) {
       return str1.compareTo(str2);
   }
-});</pre>
+});
+```
+
 
 Using the **lamda expression**, we can simplify the above code snippet like the below,
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">List names = List.of("Foojay", "Java", "Steve", "Mahi");
+```java
+List names = List.of("Foojay", "Java", "Steve", "Mahi");
 
-names.sort((str1, str2) -&gt; str1.compareTo(str2));</pre>
+names.sort((str1, str2) -> str1.compareTo(str2));
+```
+
 
 The provided code snippet describes the lambda expression and sorting method used for the list of names as follows:
 
@@ -116,13 +125,19 @@ A lambda expression can be substituted with a method reference in the following 
 
 Suppose you have the following Lambda Expression code:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">List&lt;String&gt; names = List.of("Foojay", "Java", "Steve", "Mahi");
-names.sort((str1, str2) -&gt; str1.compareTo(str2));</pre>
+```java
+List<String> names = List.of("Foojay", "Java", "Steve", "Mahi");
+names.sort((str1, str2) -> str1.compareTo(str2));
+```
+
 
 The above code can be rewritten as
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">List&lt;String&gt; names = List.of("Foojay", "Java", "Steve", "Mahi");
-names.sort(String::compareTo);</pre>
+```java
+List<String> names = List.of("Foojay", "Java", "Steve", "Mahi");
+names.sort(String::compareTo);
+```
+
 
 In this instance, the `compareTo` method within the String class serves as a Method Reference for `String::compareTo`, effectively substituting the lambda expression `(str1, str2) -> str1.compareTo(str2)`.
 
@@ -138,23 +153,32 @@ When you demonstrate a suitable example of a specific object's instance method, 
 
 **Create custom comparator class**
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public class CustomComparator {
+```java
+public class CustomComparator {
     public int compareStrings(String str1, String str2) {
         return str1.compareToIgnoreCase(str2);
     }
-}</pre>
+}
+```
+
 
 **Lambda Expression Code**
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">List&lt;String&gt; names = List.of("Foojay", "Java", "Steve", "Mahi");
+```java
+List<String> names = List.of("Foojay", "Java", "Steve", "Mahi");
 var comparator = new CustomComparator();
-names.sort((str1, str2) -&gt; comparator.compareStrings(str1, str2));</pre>
+names.sort((str1, str2) -> comparator.compareStrings(str1, str2));
+```
+
 
 **Using Method References**
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">List&lt;String&gt; names = List.of("Foojay", "Java", "Steve", "Mahi");
+```java
+List<String> names = List.of("Foojay", "Java", "Steve", "Mahi");
 var comparator = new CustomComparator();
-names.sort(comparator::compareStrings);</pre>
+names.sort(comparator::compareStrings);
+```
+
 
 The method reference `comparator::compareStrings` refers to the compareStrings method of the comparator object, replacing the lambda expression `(str1, str2) -> comparator.compareStrings(str1, str2`. This substitution enhances the code's conciseness and readability.
 
@@ -166,11 +190,17 @@ Let's consider the following example
 
 **Lambda Expression**
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">Consumer&lt;String&gt; result = (s) -&gt; System.out.println(s);</pre>
+```java
+Consumer<String> result = (s) -> System.out.println(s);
+```
+
 
 **Using Bounded Method References**
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">Consumer&lt;String&gt; printer = System.out::println;</pre>
+```java
+Consumer<String> printer = System.out::println;
+```
+
 
 ### 4. Constructor Method References {#_4_constructor_method_references}
 
@@ -178,11 +208,17 @@ This is pretty straigthforward, for example
 
 **Lambda Expression code** : `(args) -> new ClassName(args)`
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">Supplier&lt;List&lt;String&gt;&gt; supplier = () -&gt; new ArrayList&lt;&gt;();</pre>
+```java
+Supplier<List<String>> supplier = () -> new ArrayList<>();
+```
+
 
 **Constructor Method References** : `ClassName::new`
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">Supplier&lt;List&lt;String&gt;&gt; supplier = ArrayList::new;</pre>
+```java
+Supplier<List<String>> supplier = ArrayList::new;
+```
+
 
 3. Functional Interfaces {#_3_functional_interfaces}
 ----------------------------------------------------
@@ -199,14 +235,20 @@ The functional interfaces can be categorized as follows:
 
 This interface is extremely straightforward: it solely consists of a `get()` method and does not include any default or static methods. The interface is presented below.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">@FunctionalInterface
-public interface Supplier&lt;T&gt; {
+```java
+@FunctionalInterface
+public interface Supplier<T> {
      T get();
- }</pre>
+ }
+```
+
 
 The subsequent lambda implements the aforementioned interface.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">Supplier&lt;String&gt; supplier = () -&gt; "Hello Foojay!";`</pre>
+```java
+Supplier<String> supplier = () -> "Hello Foojay!";`
+```
+
 
 The JDK comes with four of specialized suppliers which will avoid unneccessary boxing / unboxing
 
@@ -219,16 +261,22 @@ The JDK comes with four of specialized suppliers which will avoid unneccessary b
 
 It does contain one abstract method, and many default methods
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">@FunctionalInterface
-public interface Consumer&lt;T&gt; {
+```java
+@FunctionalInterface
+public interface Consumer<T> {
 
      void accept(T t);
     // default methods ....
-}</pre>
+}
+```
+
 
 The subsequent lambda implements the aforementioned interface.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">Consumer&lt;String&gt; printer = str -&gt; System.out.println(str);</pre>
+```java
+Consumer<String> printer = str -> System.out.println(str);
+```
+
 
 There are specialized versions of `BiConsumer` interface which handles the primitive types
 
@@ -240,16 +288,22 @@ There are specialized versions of `BiConsumer` interface which handles the primi
 
 It contains an abstract method which takes an object and returns a boolean value.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">@FunctionalInterface
-public interface Predicate&lt;T&gt; {
+```java
+@FunctionalInterface
+public interface Predicate<T> {
 
      boolean test(T t);
      // default and static methods
-}</pre>
+}
+```
+
 
 The subsequent lambda implements the aforementioned interface.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">Predicate&lt;String&gt; lengthCheck = s -&gt; s.length() == 9;</pre>
+```java
+Predicate<String> lengthCheck = s -> s.length() == 9;
+```
+
 
 It also contains specialized versions of interfaces
 
@@ -261,18 +315,22 @@ It also contains specialized versions of interfaces
 
 The abstract function's method takes an object of type T as input and produces a transformation of that object to a different type U. Furthermore, this interface contains default and static methods.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">@FunctionalInterface
-public interface Function&lt;T, R&gt; {
+```java
+@FunctionalInterface
+public interface Function<T, R> {
 
     R apply(U u);
 
     // default and static methods
-}</pre>
+}
+```
+
 
 Example
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">// Function that converts a String to its length
- Function&lt;String, Integer&gt; stringLength = String::length;
+```java
+// Function that converts a String to its length
+ Function<String, Integer> stringLength = String::length;
 
 // Example string
 String example = "Hello, Foojay Friends!";
@@ -281,7 +339,9 @@ String example = "Hello, Foojay Friends!";
 int length = stringLength.apply(example);
 
 // Printing the result
-System.out.println("The length of the string is: " + length);</pre>
+System.out.println("The length of the string is: " + length);
+```
+
 
 Key Benefits {#_key_benefits}
 -----------------------------

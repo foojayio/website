@@ -77,8 +77,11 @@ Generating will download the project as a zip, so we can unzip it and move it to
 
 The `pom.xml` contains the dependencies and software versions we set up on the Spring Initializr, so we can move to the `application.properties` file in the `src/main/resources` folder.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="text">server.port=8888
-spring.cloud.config.server.git.uri=${HOME}/Projects/config/microservices-java-config</pre>
+```
+server.port=8888
+spring.cloud.config.server.git.uri=${HOME}/Projects/config/microservices-java-config
+```
+
 
 Just like with our other services, we need to specify a port number for this application to use so that its traffic doesn't conflict with our other services. The default port for Spring Cloud Config server is `8888`, so we will use that. Next, we will use [git](https://git-scm.com/) to version-track our local configuration file, so we need to specify the folder (or public repository URL, if we had that instead) as the value for the second property.
 
@@ -88,13 +91,16 @@ On to the project code!
 
 There is very little we need to add, since we are using the default setup. We don't have any big customizations or features required for now. So, there is only one small annotation we need to add to the `ConfigServerApplication.java` class.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">@SpringBootApplication
+```java
+@SpringBootApplication
 @EnableConfigServer
 public class ConfigServerApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(ConfigServerApplication.class, args);
 	}
-}</pre>
+}
+```
+
 
 The `@EnableConfigServer` annotation notifies Spring that this application needs to operate as the config server.
 
@@ -107,19 +113,25 @@ We need an externalized place for our configuration values to reside, i.e. a fil
 
 A sample of the file is in the `microservices-java-config` folder of the [Github project](https://github.com/JMHReif/microservices-level7).
 
-<pre class="EnlighterJSRAW" data-enlighter-language="text">spring:
+```
+spring:
   neo4j:
-    uri: &lt;insert Neo4j URI here&gt;
-    database: &lt;insert Neo4j database here&gt;
+    uri: <insert Neo4j URI here>
+    database: <insert Neo4j database here>
     authentication:
-      username: &lt;insert Neo4j username here&gt;
-      password: &lt;insert Neo4j password here&gt;</pre>
+      username: <insert Neo4j username here>
+      password: <insert Neo4j password here>
+```
+
 
 We will need to fill in the values for our Neo4j AuraDB free instance in place of the dummy URL, database, username, and password shown above. **Note:** Database should be `neo4j`, unless you have specifically used commands to change the default. Then, we need to save the file and check it into to [git](https://git-scm.com/) by running the next statements from the command line.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="shell">microservices-java-config % git init
+```bash
+microservices-java-config % git init
 microservices-java-config % git add
-microservices-java-config % git commit -am "Initial commit"</pre>
+microservices-java-config % git commit -am "Initial commit"
+```
+
 
 Let's test our config server application!
 
@@ -145,37 +157,43 @@ Service4 - modifications {#_service4_modifications}
 
 To start, we need to add a dependency to `service4` for the Spring Cloud Config client. Open the `pom.xml` and add the following items:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="xml">&lt;properties&gt;
+```xml
+<properties>
 	//java version property
-	&lt;spring-cloud.version&gt;2021.0.3&lt;/spring-cloud.version&gt;
-&lt;/properties&gt;
-&lt;dependencies&gt;
+	<spring-cloud.version>2021.0.3</spring-cloud.version>
+</properties>
+<dependencies>
 	//other dependencies
-	&lt;dependency&gt;
-		&lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;
-		&lt;artifactId&gt;spring-cloud-starter-config&lt;/artifactId&gt;
-	&lt;/dependency&gt;
-&lt;/dependencies&gt;
-&lt;dependencyManagement&gt;
-	&lt;dependencies&gt;
-		&lt;dependency&gt;
-			&lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;
-			&lt;artifactId&gt;spring-cloud-dependencies&lt;/artifactId&gt;
-			&lt;version&gt;${spring-cloud.version}&lt;/version&gt;
-			&lt;type&gt;pom&lt;/type&gt;
-			&lt;scope&gt;import&lt;/scope&gt;
-		&lt;/dependency&gt;
-	&lt;/dependencies&gt;
-&lt;/dependencyManagement&gt;</pre>
+	<dependency>
+		<groupId>org.springframework.cloud</groupId>
+		<artifactId>spring-cloud-starter-config</artifactId>
+	</dependency>
+</dependencies>
+<dependencyManagement>
+	<dependencies>
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-dependencies</artifactId>
+			<version>${spring-cloud.version}</version>
+			<type>pom</type>
+			<scope>import</scope>
+		</dependency>
+	</dependencies>
+</dependencyManagement>
+```
+
 
 On the [third line of the above code](https://github.com/JMHReif/microservices-level7/blob/main/service4/pom.xml#L18), we add a property for the Spring Cloud Version. This allows us to source this value anywhere it's needed in the pom. In the dependencies section, we need to add the config client dependency ([seventh line](https://github.com/JMHReif/microservices-level7/blob/main/service4/pom.xml#L34)), making this application a client that will use the config server. Last, but not least, we add a dependency management section ([line twelve](https://github.com/JMHReif/microservices-level7/blob/main/service4/pom.xml#L50)) to handle versioning of Spring Cloud.
 
 Now we need to update the application properties in the `src/main/resources` folder.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="text">server.port=8083
+```
+server.port=8083
 
 spring.application.name=neo4j-client
-spring.config.import=configserver:http://localhost:8888/</pre>
+spring.config.import=configserver:http://localhost:8888/
+```
+
 
 We leave the port property alone, but we can remove the database credential properties because those are being stored in the config server now. The next two properties specify the application name and where the config server is running. Remember that our application name and the name of our config file MUST match. So, that means our `spring.application.name` needs to be `neo4j-client`, as our config file name is `neo4j-client.yaml`. This is also the name that would be referenced between microservices or for service discovery, though we haven't delved into that part of microservices yet. 😉 Our config server is running locally and on the default config server port, so the value of the last property should look familiar.
 

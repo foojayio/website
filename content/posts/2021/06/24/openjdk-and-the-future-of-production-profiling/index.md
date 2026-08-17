@@ -81,19 +81,23 @@ Also, given that you might have millions of (virtual) threads, you probably don'
 
 This means that different profilers probably want these wall-clock samples to be picked differently. One way to accomplish this would be to allow users of JFR to commit events on a separate thread.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">Event#commit(Thread)
+```java
+Event#commit(Thread)
+```
 
-</pre>
 
 This would allow someone to build a profiler by simply periodically committing events on the threads it currently cares about. It would also allow building other kinds of profilers and sampling behaviours.
 
 Another way of accomplishing this would be to add an annotation to override default stuff captured by JFR in an event.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">class MyEvent extends Event {
+```java
+class MyEvent extends Event {
 
     @overridejfr
     Thread overrideThread;
-}</pre>
+}
+```
+
 
 An advantage with this variant is that you could potentially add more override behaviours that are handled by JFR over time.
 

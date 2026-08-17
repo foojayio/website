@@ -32,7 +32,8 @@ One example contrasts a classic data class with a record.
 
 **Before**
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public class User {
+```java
+public class User {
     private final String name;
     private final int age;
 
@@ -43,15 +44,20 @@ One example contrasts a classic data class with a record.
 
     public String getName() { return name; }
     public int getAge() { return age; }
-}</pre>
+}
+```
+
 
 **After**
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public record User(String name, int age) {}</pre>
+```java
+public record User(String name, int age) {}
+```
+
 
 The goal is not a new capability but a clearer expression. Modern Java often removes ceremony around concepts that already existed.
 
-*** ** * ** ***
+
 
 Safer Type Handling and Control Flow {#h2-1-safer-type-handling-and-control-flow}
 ---------------------------------------------------------------------------------
@@ -60,21 +66,27 @@ The site also shows improvements in type checks and switch logic.
 
 **Pattern matching**
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">if (obj instanceof String s) {
+```java
+if (obj instanceof String s) {
     System.out.println(s.length());
-}</pre>
+}
+```
+
 
 **Switch expression**
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">int letters = switch (day) {
-    case MONDAY, FRIDAY, SUNDAY -&gt; 6;
-    case TUESDAY -&gt; 7;
-    default -&gt; 0;
-};</pre>
+```java
+int letters = switch (day) {
+    case MONDAY, FRIDAY, SUNDAY -> 6;
+    case TUESDAY -> 7;
+    default -> 0;
+};
+```
+
 
 These changes shift common runtime mistakes into compile-time guarantees.
 
-*** ** * ** ***
+
 
 Why It Matters {#h2-2-why-it-matters}
 -------------------------------------
@@ -83,7 +95,7 @@ Java's evolution has been gradual, making improvements easy to miss. Seen indivi
 
 Community reactions suggest a clear use case: onboarding developers and guiding code reviews in mature systems. Rather than debating style, teams can reference concrete transformations.
 
-*** ** * ** ***
+
 
 Community Perspective {#h2-3-community-perspective}
 ---------------------------------------------------

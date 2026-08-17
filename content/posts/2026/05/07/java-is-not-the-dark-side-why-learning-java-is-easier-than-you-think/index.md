@@ -66,12 +66,14 @@ Let's test it in the Jedi Archives (also known as: actual code).
 
 Even a youngling in the Jedi Temple can write this:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public class Main {
+```java
+public class Main {
    public static void main(String[] args) {
        System.out.println("May the Force be with Java.");
    }
 }
-</pre>
+```
+
 
 No lightsaber required.  
 
@@ -94,11 +96,13 @@ In the Jedi Temple on Coruscant, every Jedi has a record in the Archives.
 
 In Java, that's a class.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">class Jedi {
+```java
+class Jedi {
    String name;
    String rank;
 }
-</pre>
+```
+
 
 This is your Jedi identity stored in code.  
 
@@ -112,7 +116,8 @@ A class is theory.
 
 An object is action.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public class Main {
+```java
+public class Main {
    public static void main(String[] args) {
 
        Jedi luke = new Jedi();
@@ -122,7 +127,8 @@ An object is action.
        System.out.println(luke.name + " begins his training.");
    }
 }
-</pre>
+```
+
 
 Luke didn't become a Jedi by reading scrolls on Tatooine.  
 
@@ -136,7 +142,8 @@ It is used.
 
 So are methods.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">class Jedi {
+```java
+class Jedi {
 
    String name;
 
@@ -144,19 +151,24 @@ So are methods.
        System.out.println(name + " uses the Force like Master Yoda taught.");
    }
 }
-</pre>
+```
+
 
 And when invoked:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">Jedi obiWan = new Jedi();
+```java
+Jedi obiWan = new Jedi();
 obiWan.name = "Obi-Wan Kenobi";
 obiWan.useForce();
-</pre>
+```
+
 
 Output:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">Obi-Wan Kenobi uses the Force like Master Yoda taught.
-</pre>
+```java
+Obi-Wan Kenobi uses the Force like Master Yoda taught.
+```
+
 
 ![](duke_st_03-1024x687.jpg)
 
@@ -180,14 +192,16 @@ Why Java Feels Like the Jedi Code (But Isn't Hard) {#h2-4-why-java-feels-like-th
 
 #### The Jedi Code of Java Logic
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">int midiChlorians = 12000;
+```java
+int midiChlorians = 12000;
 
-if (midiChlorians &gt; 10000) {
+if (midiChlorians > 10000) {
    System.out.println("You are strong with the Force.");
 } else {
    System.out.println("You are still a Padawan.");
 }
-</pre>
+```
+
 
 In the Jedi Order, everything has meaning and structure.
 
@@ -210,10 +224,12 @@ Strike. Block. Meditate. Repeat.
 
 Java loops reflect this perfectly:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">for (int i = 1; i &lt;= 3; i++) {
+```java
+for (int i = 1; i <= 3; i++) {
    System.out.println("Jedi training session " + i);
 }
-</pre>
+```
+
 
 Even Luke Skywalker didn't master the Force in one training montage.
 
@@ -224,8 +240,10 @@ Let's map your path through the galaxy:
 
 #### Youngling Stage (Tatooine Beginnings)
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">int lightsaber = 1;
-</pre>
+```java
+int lightsaber = 1;
+```
+
 
 You are just discovering the Force exists.  
 
@@ -233,29 +251,34 @@ Like Luke staring at the twin suns.
 
 #### Padawan Stage (Training with Obi-Wan)
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">if (lightsaber == 1) {
+```java
+if (lightsaber == 1) {
    System.out.println("Training begins under Kenobi.");
 }
-</pre>
+```
+
 
 You start learning discipline.
 
 #### Jedi Knight Stage (Council Approval)
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">class Jedi {
+```java
+class Jedi {
    String name;
 
    void train() {
        System.out.println(name + " trains under the Jedi Order.");
    }
 }
-</pre>
+```
+
 
 You begin building systems.
 
 #### Jedi Master Stage (Building Your Own Order)
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">import java.util.ArrayList;
+```java
+import java.util.ArrayList;
 
 class Jedi {
    String name;
@@ -279,7 +302,8 @@ public class Main {
        }
    }
 }
-</pre>
+```
+
 
 Now you are no longer a learner.
 

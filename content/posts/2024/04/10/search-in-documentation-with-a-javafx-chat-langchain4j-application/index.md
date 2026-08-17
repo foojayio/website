@@ -47,7 +47,8 @@ The JavaFX code is rather limited as it only needs to provide a text input box t
 
 When a question is asked, it gets stored in a `SearchAction`, which has JavaFX bindable properties to visualize the values in the JavaFX components in the user interface.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public class SearchAction {
+```
+public class SearchAction {
 
     private final StringProperty timestamp;
     private final StringProperty question;
@@ -82,11 +83,14 @@ When a question is asked, it gets stored in a `SearchAction`, which has JavaFX b
     public void appendAnswer(String token) {
         this.answer.set(this.answer.getValue() + token);
     }
-}</pre>
+}
+```
+
 
 The `CustomStreamingResponseHandler.java` appends the incoming answer by using `Platform.runLater` to prevent thread issues between the code interacting with OpenAI and the JavaFX User Interface thread.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public class CustomStreamingResponseHandler {
+```
+public class CustomStreamingResponseHandler {
 
     private final SearchAction action;
 
@@ -95,22 +99,24 @@ The `CustomStreamingResponseHandler.java` appends the incoming answer by using `
     }
 
     public void onNext(String token) {
-        Platform.runLater(() -&gt; action.appendAnswer(token));
+        Platform.runLater(() -> action.appendAnswer(token));
     }
 
-    public void onComplete(Response&lt;AiMessage&gt; response) {
-        Platform.runLater(() -&gt; {
+    public void onComplete(Response<AiMessage> response) {
+        Platform.runLater(() -> {
             action.setFinished();
         });
     }
 
     public void onError(Throwable error) {
-        Platform.runLater(() -&gt; {
+        Platform.runLater(() -> {
             action.appendAnswer("\nSomething went wrong: " + error.getMessage());
             action.setFinished();
         });
     }
-}</pre>
+}
+```
+
 
 <figure class="wp-block-gallery has-nested-images columns-default is-cropped wp-block-gallery-1 is-layout-flex wp-block-gallery-is-layout-flex">
  <figure class="wp-block-image size-large">
@@ -149,7 +155,8 @@ At Azul, our documentation is created from different AsciiDocs projects per prod
 
 As it contains a data block per HTML-header element, it's fine-grained with a link to a specific part on a documentation page. In total, at this moment, there are more than 1500 of these blocks for the full documentation website in this format:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">{
+```
+{
   "objectID" : "eb74e1cd-2f1d-4f32-9634-222492608070",
   "groupId" : "core",
   "groupLabel" : "Azul Platform Core",
@@ -158,12 +165,15 @@ As it contains a data block per HTML-header element, it's fine-grained with a li
   "section" : "Install using a DMG installer",
   "url" : "https://docs.azul.com/core/install/macos",
   "link" : "https://docs.azul.com/core/install/macos#install-using-a-dmg-installer",
-  "content" : "Install using a DMG installer Download a DMG installer for Azul Zulu from Azul Downloads. Double-click the file to start the installation and follow the wizard instructions. The default installation folder is:  /Library/Java/JavaVirtualMachines/&lt;zulu_folder&gt;/Contents/Home The &lt;zulu_folder&gt; placeholder represents the type of the Azul Zulu package (JDK or JRE) and its version: Package Azul Zulu folder name Example JDK zulu-&lt;major_version&gt;.jdk zulu-11.jdk JRE zulu-&lt;major_version&gt;.jre zulu-11.jre For example, the default installation folder for Azul Zulu JDK 11 is:  /Library/Java/JavaVirtualMachines/zulu-11.jdk/Contents/Home To verify your Azul Zulu installation, run the java command in a terminal window:  java -version You should see output similar to the following:  openjdk version \"11.0.11\" 2021-04-20 LTS\nOpenJDK Runtime Environment Zulu11.48+21-CA (build 11.0.11+9-LTS)\nOpenJDK 64-Bit Server VM Zulu11.48+21-CA (build 11.0.11+9-LTS, mixed mode)"
-}</pre>
+  "content" : "Install using a DMG installer Download a DMG installer for Azul Zulu from Azul Downloads. Double-click the file to start the installation and follow the wizard instructions. The default installation folder is:  /Library/Java/JavaVirtualMachines/<zulu_folder>/Contents/Home The <zulu_folder> placeholder represents the type of the Azul Zulu package (JDK or JRE) and its version: Package Azul Zulu folder name Example JDK zulu-<major_version>.jdk zulu-11.jdk JRE zulu-<major_version>.jre zulu-11.jre For example, the default installation folder for Azul Zulu JDK 11 is:  /Library/Java/JavaVirtualMachines/zulu-11.jdk/Contents/Home To verify your Azul Zulu installation, run the java command in a terminal window:  java -version You should see output similar to the following:  openjdk version \"11.0.11\" 2021-04-20 LTS\nOpenJDK Runtime Environment Zulu11.48+21-CA (build 11.0.11+9-LTS)\nOpenJDK 64-Bit Server VM Zulu11.48+21-CA (build 11.0.11+9-LTS, mixed mode)"
+}
+```
+
 
 By using FasterXML Jackson, a record, and an ObjectMapper, this JSON can easily be converted to a list of Java objects:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public record ContentSection(
+```
+public record ContentSection(
         @JsonProperty("objectID") UUID objectID,
         @JsonProperty("groupId") String groupId,
         @JsonProperty("groupLabel") String groupLabel,
@@ -177,7 +187,9 @@ By using FasterXML Jackson, a record, and an ObjectMapper, this JSON can easily 
 
 String json = Files.readString(Paths.get(fileUrl.toURI()));
 ObjectMapper objectMapper = new ObjectMapper();
-List&lt;ContentSection&gt; contentSections = objectMapper.readValue(json, new TypeReference&lt;&gt;() {});</pre>
+List<ContentSection> contentSections = objectMapper.readValue(json, new TypeReference<>() {});
+```
+
 
 ### Java Application {#h3-5-java-application}
 
@@ -191,10 +203,11 @@ After all the `ContentSection` blocks are read, they are used to initialize an e
 
 Also here, the chat model to interact with OpenAI gets initialized. This all takes some time depending on the number of items in the JSON. Once this is done, the application is ready to answer questions.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">private void initChat(SearchAction action, List&lt;ContentSection&gt; contentSections) {
-    List&lt;TextSegment&gt; textSegments = new ArrayList&lt;&gt;();
-    for (var contentSection : contentSections.stream().filter(c -&gt; !c.content().isEmpty()).toList()) {
-        Map&lt;String, String&gt; metadataMap = new HashMap&lt;&gt;();
+```
+private void initChat(SearchAction action, List<ContentSection> contentSections) {
+    List<TextSegment> textSegments = new ArrayList<>();
+    for (var contentSection : contentSections.stream().filter(c -> !c.content().isEmpty()).toList()) {
+        Map<String, String> metadataMap = new HashMap<>();
         metadataMap.put("OBJECT_ID", contentSection.objectID().toString());
         metadataMap.put("LINK", contentSection.link());
         metadataMap.put("GROUP_ID", contentSection.groupId());
@@ -203,10 +216,10 @@ Also here, the chat model to interact with OpenAI gets initialized. This all tak
     appendAnswer(action, "\nConverted to number of text segments: " + textSegments.size());
 
     embeddingModel = new AllMiniLmL6V2EmbeddingModel();
-    embeddingStore = new InMemoryEmbeddingStore&lt;&gt;();
+    embeddingStore = new InMemoryEmbeddingStore<>();
     appendAnswer(action, "\nEmbedding store is created: " + textSegments.size());
 
-    List&lt;Embedding&gt; embeddings = embeddingModel.embedAll(textSegments).content();
+    List<Embedding> embeddings = embeddingModel.embedAll(textSegments).content();
     appendAnswer(action, "\nNumber of embeddings: " + embeddings.size());
 
     embeddingStore.addAll(embeddings, textSegments);
@@ -217,7 +230,9 @@ Also here, the chat model to interact with OpenAI gets initialized. This all tak
             .modelName("gpt-4")
             .build();
     appendAnswer(action, "\nChat model is ready", true);
-}</pre>
+}
+```
+
 
 #### Handling a Question
 
@@ -225,18 +240,19 @@ Requesting an answer from the OpenAI API is handled in the `ask` method. Here, t
 
 By using a `PromptTemplate`, we can provide additional guidelines to the API to write the answer. By providing a `StreamingResponseHandler`, we can redirect the answer as it get streamed by the API into the JavaFX user interface.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">void ask(SearchAction action) {
+```
+void ask(SearchAction action) {
     LOGGER.info("Asking question '" + action.getQuestion() + "'");
 
     // Find relevant embeddings in embedding store by semantic similarity
     // You can play with parameters below to find a sweet spot for your specific use case
     int maxResults = 10;
     double minScore = 0.7;
-    List&lt;EmbeddingMatch&lt;TextSegment&gt;&gt; relevantEmbeddings = embeddingStore.findRelevant(embeddingModel.embed(action.getQuestion()).content(), maxResults, minScore);
+    List<EmbeddingMatch<TextSegment>> relevantEmbeddings = embeddingStore.findRelevant(embeddingModel.embed(action.getQuestion()).content(), maxResults, minScore);
     LOGGER.info("Number of relevant embeddings: " + relevantEmbeddings.size() + " for '" + action.getQuestion() + "'");
 
     relevantEmbeddings.stream().map(EmbeddingMatch::embedded).toList()
-            .forEach(ts -&gt; Platform.runLater(() -&gt; {
+            .forEach(ts -> Platform.runLater(() -> {
                 LOGGER.info("Adding link: " + ts.metadata("LINK"));
                 action.appendRelatedLink(ts.metadata("LINK"));
             }));
@@ -265,12 +281,12 @@ By using a `PromptTemplate`, we can provide additional guidelines to the API to 
                     """);
 
     String information = relevantEmbeddings.stream()
-            .map(match -&gt; match.embedded().text()
+            .map(match -> match.embedded().text()
                     + ". LINK: " + match.embedded().metadata("LINK")
                     + ". GROUP_ID: " + match.embedded().metadata("GROUP_ID"))
             .collect(Collectors.joining("\n\n"));
 
-    Map&lt;String, Object&gt; variables = new HashMap&lt;&gt;();
+    Map<String, Object> variables = new HashMap<>();
     variables.put("question", action.getQuestion());
     variables.put("information", information);
 
@@ -281,7 +297,9 @@ By using a `PromptTemplate`, we can provide additional guidelines to the API to 
     } else {
         action.appendAnswer("The chat model is not ready yet... Please try again later.", true);
     }
-}</pre>
+}
+```
+
 
 <figure class="wp-block-gallery has-nested-images columns-default is-cropped wp-block-gallery-2 is-layout-flex wp-block-gallery-is-layout-flex">
  <figure class="wp-block-image size-large">

@@ -49,19 +49,23 @@ Apache APISIX offers DRY configuration in two places.
 
 In an e-commerce context, your beginner journey to define a route on Apache APISIX probably starts like the following:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml">routes:
+```yaml
+routes:
   - id: 1
     name: Catalog
     uri: /products*
     upstream:
       nodes:
-        "catalog:8080": 1</pre>
+        "catalog:8080": 1
+```
+
 
 If you're familiar with APISIX, we defined a route to the catalogue under the `/products` URI. However, there's an issue: you probably want would-be customers to browse the catalogue but want to prevent people from creating, deleting, or updating products. Yet, the route matches every HTTP method by default.
 
 We should allow only authenticated users to manage the catalogue so everybody can freely browse it. To implement this approach, we need to split the route in two:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml">routes:
+```yaml
+routes:
   - id: 1
     name: Read the catalogue
     methods: [ "GET", "HEAD" ]                         #1
@@ -77,7 +81,9 @@ We should allow only authenticated users to manage the catalogue so everybody ca
       key-auth: ~                                      #4
     upstream:                                          #2
       nodes:
-        "catalog:8080": 1</pre>
+        "catalog:8080": 1
+```
+
 
 1. Match browsing
 2. Duplicated upstream!
@@ -90,7 +96,8 @@ In real-world scenarios, especially when they involve containers, you wouldn't i
 
 Along with the *Route* abstraction, APISIX offers an *Upstream* abstraction to implement DRY. We can rewrite the above snippet like this:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml">upstreams:
+```yaml
+upstreams:
   - id: 1                                              #1
     name: Catalog
     nodes:
@@ -108,7 +115,9 @@ routes:
     uri: /products*
     upstream_id: 1                                     #2
     plugins:
-      key-auth: ~</pre>
+      key-auth: ~
+```
+
 
 1. Define an upstream with ID `1`
 2. Reference it in the route
@@ -123,7 +132,8 @@ Another area where APISIX can help you DRY your configuration with the *Plugin* 
 
 Let's implement [path-based versioning](https://blog.frankel.ch/api-versioning/#path-based-versioning) on our API. We need to rewrite the URL before we forward it.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml">routes:
+```yaml
+routes:
   - id: 1
     name: Read the catalogue
     methods: [ "GET", "HEAD" ]
@@ -139,13 +149,16 @@ Let's implement [path-based versioning](https://blog.frankel.ch/api-versioning/#
     upstream_id: 1
     plugins:
       proxy-rewrite:
-        regex_uri: [ "/v1(.*)", "$1" ]                 #1</pre>
+        regex_uri: [ "/v1(.*)", "$1" ]                 #1
+```
+
 
 1. Remove the `/v1` prefix before forwarding
 
 Like with `upstream` above, the `plugins` section is duplicated. We can also factor the plugin configuration in a dedicated *Plugin Config* object. The following snippet has the same effect as the one above:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml">plugin_configs:
+```yaml
+plugin_configs:
   - id: 1                                              #1
     plugins:
       proxy-rewrite:
@@ -163,7 +176,9 @@ routes:
     methods: [ "PUT", "POST", "PATCH", "DELETE" ]
     uri: /v1/products*
     upstream_id: 1
-    plugin_config_id: 1                                #2</pre>
+    plugin_config_id: 1                                #2
+```
+
 
 1. Factor the plugin configuration in a dedicated object
 2. Reference it
@@ -172,7 +187,8 @@ Astute readers might have noticed that I'm missing part of the configuration: th
 
 Unlike `upstream` and `upstream_id`, `plugins` and `plugin_config_id` are **not mutually exclusive** . We can fix the issue by just adding the missing `plugin`:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml">routes:
+```yaml
+routes:
   - id: 1
     name: Read the catalogue
     methods: [ "GET", "HEAD" ]
@@ -186,7 +202,9 @@ Unlike `upstream` and `upstream_id`, `plugins` and `plugin_config_id` are **not 
     upstream_id: 1
     plugin_config_id: 1
     plugins:
-      key-auth: ~                                      #1</pre>
+      key-auth: ~                                      #1
+```
+
 
 1. Fix it!
 
@@ -209,7 +227,7 @@ Both mechanisms should help you toward DRYing your configuration and make it mor
 * [The Don't repeat yourself principle](https://en.wikipedia.org/wiki/Don%27t_repeat_yourself)
 * [Configuration merging precedence](https://apisix.apache.org/docs/apisix/terminology/plugin/#plugins-merging-precedence)
 
-*** ** * ** ***
+
 
 *Originally published at [A Java Geek](https://blog.frankel.ch/dry-apisix-config/) on September 1^st^, 2024*
 

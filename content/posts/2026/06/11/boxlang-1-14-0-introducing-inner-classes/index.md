@@ -55,15 +55,17 @@ Template Classes {#h2-1-template-classes}
 
 A template class is a named class declared inline inside a `.bxs` script or a `.bxm` template's \<bx:script\> block.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">class Greeter {
+```java
+class Greeter {
     function greet( name ) {
-        return "Hello, " &amp; name &amp; "!"
+        return "Hello, " & name & "!"
     }
 }
 
 result = new Greeter().greet( "World" )
 // → "Hello, World!"
-</pre>
+```
+
 
 1
 
@@ -73,21 +75,24 @@ That is a complete, fully functional BoxLang script. No imports, no file path, n
 
 Template classes are **hoisted** to the top of their compilation unit. You can instantiate a class before its textual definition appears - which keeps the "main logic first" narrative flow that makes scripts readable:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">// Use before definition - perfectly valid
+```java
+// Use before definition - perfectly valid
 result = new Greeter().greet( "BoxLang" )
 
 class Greeter {
     function greet( name ) {
-        return "Hello, " &amp; name &amp; "!"
+        return "Hello, " & name & "!"
     }
 }
-</pre>
+```
+
 
 ### Multiple Classes in One Script {#h3-3-multiple-classes-in-one-script}
 
 Multiple template classes coexist naturally. They can even reference each other:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">class Adder {
+```java
+class Adder {
     function add( a, b ) {
         return a + b
     }
@@ -103,13 +108,15 @@ adder      = new Adder()
 multiplier = new Multiplier()
 result     = multiplier.multiply( adder.add( 2, 3 ), 4 )
 // → 20
-</pre>
+```
+
 
 ### Properties, Constructors, and Static Members {#h3-4-properties-constructors-and-static-members}
 
 Template classes are full-featured BoxLang classes. Properties, `init()` constructors, and static blocks all work exactly as they do in file-based classes:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">class Counter {
+```java
+class Counter {
     property numeric count default=0
 
     function increment() {
@@ -126,11 +133,13 @@ c.increment()
 c.increment()
 c.increment()
 c.getCount()    // → 3
-</pre>
+```
+
 
 Static members work too - useful for shared constants and utility methods:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">class MathUtil {
+```java
+class MathUtil {
     static {
         PI = 3.14159265358979
     }
@@ -141,17 +150,19 @@ Static members work too - useful for shared constants and utility methods:
 }
 
 MathUtil::circleArea( 5 )    // → ~78.54
-</pre>
+```
+
 
 ### Inheritance {#h3-5-inheritance}
 
 Template classes can extend other template classes defined in the same script, including multi-level chains and `super` delegation:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">abstract class Shape {
+```java
+abstract class Shape {
     abstract function area()
 
     function describe() {
-        return "Area: " &amp; this.area()
+        return "Area: " & this.area()
     }
 }
 
@@ -167,13 +178,15 @@ class Circle extends="Shape" {
 }
 
 new Circle( 5 ).describe()    // → "Area: 78.53975"
-</pre>
+```
+
 
 ### Java Interoperability {#h3-6-java-interoperability}
 
 Template classes can implement Java interfaces and extend Java classes, making them a clean fit for interop patterns:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">class MyRunnable implements="java:java.lang.Runnable" {
+```java
+class MyRunnable implements="java:java.lang.Runnable" {
     property name="didRun" default=false
 
     void function run() {
@@ -186,13 +199,15 @@ thread = new java:Thread( r )
 thread.start()
 thread.join()
 r.getDidRun()    // → true
-</pre>
+```
+
 
 ### Imports Are Shared {#h3-7-imports-are-shared}
 
 Template classes inherit the enclosing script's imports. Java types are available directly without any extra ceremony:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">import java.util.Date
+```java
+import java.util.Date
 
 class Event {
     function init( name ) {
@@ -202,18 +217,20 @@ class Event {
     }
 
     function getInfo() {
-        return variables.name &amp; " at " &amp; variables.timestamp.toString()
+        return variables.name & " at " & variables.timestamp.toString()
     }
 }
 
 new Event( "Launch" ).getInfo()    // → "Launch at Wed Jun 03 ..."
-</pre>
+```
+
 
 ### Template Classes in `.bxm` Files {#h3-8-template-classes-in-bxm-files}
 
 Template classes work inside \<bx:script\> islands in markup templates, bringing the same capability to your view layer:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">&lt;bx:script&gt;
+```java
+<bx:script>
     class Point {
         function init( x, y ) {
             variables.x = x
@@ -222,22 +239,24 @@ Template classes work inside \<bx:script\> islands in markup templates, bringing
         }
 
         function toString() {
-            return "(" &amp; variables.x &amp; "," &amp; variables.y &amp; ")"
+            return "(" & variables.x & "," & variables.y & ")"
         }
     }
 
     result = new Point( 3, 4 ).toString()
-&lt;/bx:script&gt;
+</bx:script>
 
-&lt;bx:output&gt;#result#&lt;/bx:output&gt;
-</pre>
+<bx:output>#result#</bx:output>
+```
+
 
 Inner Classes {#h2-9-inner-classes}
 -----------------------------------
 
 An inner class is a named class declared **inside the body of another class** in a `.bx` file. Where template classes are scoped to a single compilation unit, inner classes are part of their enclosing class's compiled output and are accessible from outside via the `$` separator syntax.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">// models/Container.bx
+```java
+// models/Container.bx
 class Container {
 
     class Widget {
@@ -260,13 +279,15 @@ class Container {
 c = new Container()
 w = c.createWidget( "header-nav" )
 w.getLabel()    // → "header-nav"
-</pre>
+```
+
 
 ### Hoisting in Inner Classes {#h3-10-hoisting-in-inner-classes}
 
 Like template classes, inner classes are hoisted within the class body. You can instantiate an inner class in a function that appears before the inner class definition:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">class Outer {
+```java
+class Outer {
 
     function getWidget() {
         return new Widget()    // Works - Widget is hoisted
@@ -281,13 +302,15 @@ Like template classes, inner classes are hoisted within the class body. You can 
 }
 
 new Outer().getWidget().getName()    // → "widget"
-</pre>
+```
+
 
 ### Multiple and Nested Inner Classes {#h3-11-multiple-and-nested-inner-classes}
 
 A class can contain as many inner classes as it needs. Inner classes can themselves contain inner classes:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">class Outer {
+```java
+class Outer {
 
     class First {
 
@@ -315,13 +338,15 @@ outer = new Outer()
 first = outer.getFirst()
 first.getDepth()              // → "first"
 first.getSecond().getDepth()  // → "second"
-</pre>
+```
+
 
 ### Inheritance Between Inner Classes {#h3-12-inheritance-between-inner-classes}
 
 Inner classes can extend other inner classes in the same outer class, enabling polymorphic patterns without the overhead of separate files:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">class Zoo {
+```java
+class Zoo {
 
     class Animal {
         function speak() {
@@ -348,13 +373,15 @@ Inner classes can extend other inner classes in the same outer class, enabling p
 zoo = new Zoo()
 zoo.getDog().speak()    // → "Woof!"
 zoo.getCat().speak()    // → "Meow!"
-</pre>
+```
+
 
 ### Accessing Outer Class Statics {#h3-13-accessing-outer-class-statics}
 
 Inner classes can reach back into their enclosing class's static members via dot or double-colon notation:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">class Config {
+```java
+class Config {
 
     static {
         MAX_POOL_SIZE = 50
@@ -363,7 +390,7 @@ Inner classes can reach back into their enclosing class's static members via dot
 
     class Validator {
         function validate( size ) {
-            return size &lt;= Config::MAX_POOL_SIZE
+            return size <= Config::MAX_POOL_SIZE
         }
 
         function getAppName() {
@@ -376,26 +403,30 @@ v = new Config().getValidator()
 v.validate( 20 )       // → true
 v.validate( 100 )      // → false
 v.getAppName()         // → "MyApp"
-</pre>
+```
+
 
 ### External Access via `$` Syntax {#h3-14-external-access-via-syntax}
 
 Inner classes are compiled as sibling JVM classes with `$`-delimited names. This means they are accessible from anywhere - not just from within the outer class:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">// Fully qualified external instantiation
+```java
+// Fully qualified external instantiation
 widget = new models.Container$Widget( "my-widget" )
 widget.getLabel()    // → "my-widget"
 
 // Static access on a nested inner class
 second = new models.Outer$First$Second()
 second.getDepth()    // → "second"
-</pre>
+```
+
 
 ### Importing Inner Classes {#h3-15-importing-inner-classes}
 
 You can import inner classes directly, with or without an alias:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">// Direct import
+```java
+// Direct import
 import models.Container$Widget
 
 widget = new Widget( "imported" )
@@ -406,24 +437,28 @@ import models.Container$Widget as NavWidget
 
 nav = new NavWidget( "top-nav" )
 nav.getLabel()    // → "top-nav"
-</pre>
+```
+
 
 You can also reference inner classes via the outer class name after importing it:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">import models.Container
+```java
+import models.Container
 
 // Both of these work
 widgetClass = Container.Widget
 widgetClass = Container::Widget
 
 w = new widgetClass( "via-reference" )
-</pre>
+```
+
 
 ### Java Interoperability {#h3-16-java-interoperability}
 
 Inner classes are especially powerful for Java interop patterns like `Iterator` implementations, where the inner class is tightly coupled to its parent but needs to satisfy a Java interface contract:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">class BoxList implements="java:java.lang.Iterable" {
+```java
+class BoxList implements="java:java.lang.Iterable" {
 
     property Array items
 
@@ -448,7 +483,7 @@ Inner classes are especially powerful for Java interop patterns like `Iterator` 
         }
 
         boolean function hasNext() {
-            return variables.position &lt; variables.data.len()
+            return variables.position < variables.data.len()
         }
 
         function next() {
@@ -472,14 +507,16 @@ while ( iter.hasNext() ) {
 // → a
 // → b
 // → c
-</pre>
+```
+
 
 Introspection and Metadata {#h2-17-introspection-and-metadata}
 --------------------------------------------------------------
 
 Both template classes and inner classes expose full metadata through BoxLang's standard reflection API.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">// Template class metadata
+```java
+// Template class metadata
 meta = getMetadata( new Circle( 5 ) )
 meta.name          // → "Circle"
 meta.type          // → "Class"
@@ -493,13 +530,16 @@ meta.name           // → "models.Container$Widget"
 meta.simpleName     // → "Widget"
 meta.enclosingClass // → "models.Container"
 meta.innerClasses   // → {} (empty unless Widget itself has inner classes)
-</pre>
+```
+
 
 `isInstanceOf()` works naturally with both the simple name and the fully qualified `$` path:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">isInstanceOf( widget, "Widget" )                    // → true
+```java
+isInstanceOf( widget, "Widget" )                    // → true
 isInstanceOf( widget, "models.Container$Widget" )   // → true
-</pre>
+```
+
 
 When to Use Which {#h2-18-when-to-use-which}
 --------------------------------------------
@@ -531,8 +571,10 @@ Both features are available in **BoxLang 1.14.0** with no configuration required
 
 Update via CommandBox:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">box update boxlang
-</pre>
+```java
+box update boxlang
+```
+
 
 Or grab the latest from [boxlang.io](https://boxlang.io/?_gl=1*1d59xdz*_gcl_au*MzI0MjI3ODM0LjE3NzU1MDUwMDA.*_ga*MTQ4MjQzODA2Ny4xNzc1NTA1MDAw*_ga_663JFQ7YGX*czE3ODEwOTcyMjUkbzQ4JGcxJHQxNzgxMDk5NTg5JGo2MCRsMCRoMA..*_ga_D1P6P1YYT0*czE3ODEwOTcyMjUkbzUzJGcxJHQxNzgxMDk5NTg5JGo2MCRsMCRoMA.. "boxlang.io").
 

@@ -38,14 +38,18 @@ As the same SD card was used to test on two different boards, the problem has to
 
 On both boards, the Java version could be read without any issues:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ java -version
+```
+$ java -version
 openjdk version "24.0.1" 2025-04-15
 OpenJDK Runtime Environment Zulu24.30+13-CA (build 24.0.1+9)
-OpenJDK 64-Bit Server VM Zulu24.30+13-CA (build 24.0.1+9, mixed mode, sharing)</pre>
+OpenJDK 64-Bit Server VM Zulu24.30+13-CA (build 24.0.1+9, mixed mode, sharing)
+```
+
 
 But trying to execute or compile the simplest "Hello World" code resulted in errors on the Zero 2:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ java HelloWorld.java
+```
+$ java HelloWorld.java
 
 An exception has occurred in the compiler ((version info not available)). Please file a bug against the Java compiler via the Java bug reporting page (https://bugreport.java.com) after checking the Bug Database (https://bugs.java.com) for duplicates. Include your program, the following diagnostic, and the parameters passed to the Java compiler in your report. Thank you.
 
@@ -57,7 +61,9 @@ $ javac HelloWorld.java
 
 Exception in thread "main" java.lang.InternalError: Cannot find requested resource bundle for locale en_US
 	at jdk.compiler/com.sun.tools.javac.util.JavacMessages.getBundles(JavacMessages.java:145)
-	...</pre>
+	...
+```
+
 
 Let's try to find the difference between the two boards by executing a few commands...
 
@@ -94,8 +100,11 @@ Workaround {#h2-3-workaround}
 
 As described in [Running Java 21+ on Raspberry Pi Zero 2](/documentation/java-for-arm/#running-java-21-on-raspberry-pi-zero-2), a workaround is available to execute Java code until the fix is included in the next release:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ java -XX:+UnlockDiagnosticVMOptions -XX:-UseVectorizedHashCodeIntrinsic HelloWorld.java
-Hello World</pre>
+```
+$ java -XX:+UnlockDiagnosticVMOptions -XX:-UseVectorizedHashCodeIntrinsic HelloWorld.java
+Hello World
+```
+
 
 Compare Boards {#h2-4-compare-boards}
 -------------------------------------

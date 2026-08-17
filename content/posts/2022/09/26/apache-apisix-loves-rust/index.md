@@ -67,11 +67,17 @@ Now that we have explained how everything fits together, it's time to code.
 
 Before developing the first line of code, we need to give Rust compilation capabilities.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="shell">rustup target add wasm32-wasi</pre>
+```bash
+rustup target add wasm32-wasi
+```
+
 
 It allows the Rust compiler to output WASM code:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="shell">cargo build --target wasm32-wasi</pre>
+```bash
+cargo build --target wasm32-wasi
+```
+
 
 The WASM code is found in:
 
@@ -82,7 +88,10 @@ The WASM code is found in:
 
 The setup of the project is pretty straightforward:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="shell">cargo new sample --lib           #1</pre>
+```bash
+cargo new sample --lib           #1
+```
+
 
 1. Create a `lib` project with the expected structure
 
@@ -103,13 +112,14 @@ Rust's 'structure diagram'{#caption-attachment-60107}
 
 Here's the code for a **very** simple plugin that logs to prove that it's invoked:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="rust">use log::warn;
+```rust
+use log::warn;
 use proxy_wasm::traits::{Context, HttpContext};
 use proxy_wasm::types::{Action, LogLevel};
 
 proxy_wasm::main! {{
     proxy_wasm::set_log_level(LogLevel::Trace);                                          //1
-    proxy_wasm::set_http_context(|_, _| -&gt; Box&lt;dyn HttpContext&gt; { Box::new(HttpCall) }); //2
+    proxy_wasm::set_http_context(|_, _| -> Box<dyn HttpContext> { Box::new(HttpCall) }); //2
 }}
 
 struct HttpCall;
@@ -117,11 +127,13 @@ struct HttpCall;
 impl Context for HttpCall {}                                                             //3
 
 impl HttpContext for HttpCall {                                                          //4
-    fn on_http_request_headers(&amp;mut self, _: usize, _: bool) -&gt; Action {                 //5
+    fn on_http_request_headers(&mut self, _: usize, _: bool) -> Action {                 //5
         warn!("on_http_request_headers");                                                //6
         Action::Continue
     }
-}</pre>
+}
+```
+
 
 1. Set the log level to Apache APISIX's default
 2. Set the HTTP context to create for *each* request
@@ -139,15 +151,19 @@ Apache APISIX's [documentation](https://apisix.apache.org/docs/apisix/wasm/) is 
 
 We need to declare each WASM plugin:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml">wasm:
+```yaml
+wasm:
   plugins:
     - name: sample
       priority: 7999
-      file: /opt/apisix/wasm/sample.wasm</pre>
+      file: /opt/apisix/wasm/sample.wasm
+```
+
 
 Then, we can use the plugin like any other:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml">routes:
+```yaml
+routes:
   - uri: /*
     upstream:
       type: roundrobin
@@ -156,18 +172,26 @@ Then, we can use the plugin like any other:
     plugins:
       sample:                                #1
        conf: "dummy"                         #2
-#END</pre>
+#END
+```
+
 
 1. Plugin name
 2. At the moment, the `conf` attribute is mandatory and must be non-empty on the Apache APISIX validation side, even though we don't configure anything on the Rust side
 
 At this point, we can ping the endpoint:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="shell">curl localhost:9080</pre>
+```bash
+curl localhost:9080
+```
+
 
 The result is as expected:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">rust-wasm-plugin-apisix-1  | 2022/09/21 13:43:14 [warn] 44#44: *286 on_http_request_headers, client: 192.168.128.1, server: _, request: "GET / HTTP/1.1", host: "localhost:9080"</pre>
+```
+rust-wasm-plugin-apisix-1  | 2022/09/21 13:43:14 [warn] 44#44: *286 on_http_request_headers, client: 192.168.128.1, server: _, request: "GET / HTTP/1.1", host: "localhost:9080"
+```
+
 
 Conclusion {#h2-7-conclusion}
 -----------------------------

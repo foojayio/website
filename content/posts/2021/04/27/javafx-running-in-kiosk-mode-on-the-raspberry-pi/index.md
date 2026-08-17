@@ -58,30 +58,46 @@ You can manually install all of these, or follow the following steps to run this
 
 On the Raspberry Pi, open a terminal and run the following commands to install the Ansible tool:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ sudo apt update
-$ sudo apt install -y ansible sshpass</pre>
+```
+$ sudo apt update
+$ sudo apt install -y ansible sshpass
+```
+
 
 Now clone this project:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ git clone https://github.com/FDelporte/RaspberryPiAnsible.git
-$ cd RaspberryPiAnsible</pre>
+```
+$ git clone https://github.com/FDelporte/RaspberryPiAnsible.git
+$ cd RaspberryPiAnsible
+```
+
 
 Create the inventory file `hosts` for which the Ansible scripts will run, with 'localhost' as content:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ nano hosts</pre>
+```
+$ nano hosts
+```
+
 
 Check the content of this 'hosts' file:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ cat hosts
-localhost</pre>
+```
+$ cat hosts
+localhost
+```
+
 
 You can now execute the Ansible playbook with the following command (this will take some time...):
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ ansible-playbook -c local -i hosts all_for_java.yml</pre>
+```
+$ ansible-playbook -c local -i hosts all_for_java.yml
+```
+
 
 When finished, check the installed versions:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ java -version
+```
+$ java -version
 openjdk version "11.0.9.1" 2020-11-04
 OpenJDK Runtime Environment (build 11.0.9.1+1-post-Raspbian-1deb10u2)
 OpenJDK Server VM (build 11.0.9.1+1-post-Raspbian-1deb10u2, mixed mode)
@@ -91,20 +107,26 @@ Apache Maven 3.6.0
 Maven home: /usr/share/maven
 Java version: 11.0.9.1, vendor: Raspbian, runtime: /usr/lib/jvm/java-11-openjdk-armhf
 Default locale: en_GB, platform encoding: UTF-8
-OS name: "linux", version: "5.10.17-v7l+", arch: "arm", family: "unix"</pre>
+OS name: "linux", version: "5.10.17-v7l+", arch: "arm", family: "unix"
+```
+
 
 ### Get the Example Project {#h3-1-get-the-example-project}
 
 The Pi4J project and website provide multiple example projects. Let's use the "minimal JavaFX example". This application is fully documented on the [Pi4J website \> "Getting Started" \> "User interface with JavaFX"](https://pi4j.com/getting-started/user-interface-with-javafx/). We can get the sources from GitHub and build it with Maven.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ cd /home/pi
+```
+$ cd /home/pi
 $ git clone https://github.com/Pi4J/pi4j-example-javafx.git
 $ cd pi4j-example-javafx
-$ mvn package</pre>
+$ mvn package
+```
+
 
 When the build is finished, we will find all the required files to run the application in "/home/pi/pi4j-example-javafx/target/distribution".
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">pi4j-core-2.0-SNAPSHOT.jar
+```
+pi4j-core-2.0-SNAPSHOT.jar
 pi4j-example-javafx-0.0.1.jar
 pi4j-library-pigpio-2.0-SNAPSHOT.jar
 pi4j-plugin-pigpio-2.0-SNAPSHOT.jar
@@ -112,7 +134,9 @@ pi4j-plugin-raspberrypi-2.0-SNAPSHOT.jar
 run.sh
 run-kiosk.sh
 slf4j-api-2.0.0-alpha0.jar
-slf4j-simple-2.0.0-alpha0.jar</pre>
+slf4j-simple-2.0.0-alpha0.jar
+```
+
 
 ![](maven-build-finished-1024x675.png)
 
@@ -125,17 +149,23 @@ When we want to run our application as a "normal desktop application", we need t
 
 The example project has a file "run.sh" which contains the full java-command to start the application as a desktop application.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">java \
+```
+java \
   -Dglass.platform=gtk \
   -Djava.library.path=/opt/javafx-sdk-17/lib \
   --module-path .:/opt/javafx-sdk-17/lib \
   --add-modules javafx.controls \
-  --module com.pi4j.example/com.pi4j.example.JavaFxExample </pre>
+  --module com.pi4j.example/com.pi4j.example.JavaFxExample
+```
+
 
 To run the application, use the the provided script `run.sh`:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ cd /home/pi/pi4j-example-javafx/target/distribution
-$ sudo bash run.sh</pre>
+```
+$ cd /home/pi/pi4j-example-javafx/target/distribution
+$ sudo bash run.sh
+```
+
 
 <figure class="wp-block-embed is-type-video is-provider-vimeo wp-block-embed-vimeo wp-embed-aspect-16-9 wp-has-aspect-ratio">
  <div class="wp-block-embed__wrapper">
@@ -157,7 +187,8 @@ There is also a file 'run-kiosk.sh' provided to start the demo application in ki
 * The display id needs to be defined, if `card0` is not working and you get the error `[GluonDRM] Device /dev/dri/card0 could be opened, but has no drm capabilities.`, try `card1`. More info is provided on [Gluon docs: "JavaFX on Embedded" \> "Testing JavaFX"](https://docs.gluonhq.com/#_testing_javafx).
 * After the application is stopped, we call `/sbin/init 5` to restart the regular desktop environment.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">/sbin/init 3
+```
+/sbin/init 3
 export ENABLE_GLUON_COMMERCIAL_EXTENSIONS=true
 java \
   -Degl.displayid=/dev/dri/card0 \
@@ -167,12 +198,17 @@ java \
   --module-path .:/opt/javafx-sdk-17/lib \
   --add-modules javafx.controls \
   --module com.pi4j.example/com.pi4j.example.JavaFxExample 
-/sbin/init 5</pre>
+/sbin/init 5
+```
+
 
 By using the provided script, we can also start the kiosk approach with the following command. Do this via SSH so you can still interact with the terminal and see the application log in case something goes wrong. Press `CONTROL+C` to stop the application from the SSH terminal.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ cd /home/pi/pi4j-example-javafx/target/distribution
-$ sudo bash run-kiosk.sh</pre>
+```
+$ cd /home/pi/pi4j-example-javafx/target/distribution
+$ sudo bash run-kiosk.sh
+```
+
 
 <figure class="wp-block-embed is-type-video is-provider-vimeo wp-block-embed-vimeo wp-embed-aspect-16-9 wp-has-aspect-ratio">
  <div class="wp-block-embed__wrapper">
@@ -196,7 +232,10 @@ The matching JavaFX SDK is available at [gluonhq.com/download/javafx-17-ea-sdk-l
 
 Another great addition for a kiosk approach is [Unclutter](https://wiki.archlinux.org/index.php/Unclutter), a small tool which hides your mouse cursor when you do not need it. You only have to move the mouse for the cursor to reappear.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">sudo apt install unclutter</pre>
+```
+sudo apt install unclutter
+```
+
 
 ### Conclusion {#h3-6-conclusion}
 

@@ -45,12 +45,15 @@ Blink if you can hear me {#h2-1-blink-if-you-can-hear-me}
 
 A blinking LED example is a benchmark for code simplicity (*at least for me, just pretend* ). Here's how to blink with `Pi4J-Kotlin`:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="kotlin" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">fun blink() = digitalOutput(22).run {
+```kotlin
+fun blink() = digitalOutput(22).run {
     while (true) {
         toggle()
         sleep(500)
     }
-}</pre>
+}
+```
+
 
 We also have a [minimal example](https://pi4j.com/kotlin/minimal-kotlin-example/) to get you started with more components.
 
@@ -59,9 +62,12 @@ Declarative API {#h2-2-declarative-api}
 
 All you have to do to access everything-RaspberryPi is to use the `pi4j` block:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="kotlin" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">pi4j {
+```kotlin
+pi4j {
     // beautiful code goes here
-}</pre>
+}
+```
+
 
 Here, you created a Pi4J `Context` that will take care of loading the right `Platform` and `Provider`s. It will also automatically `shutdown` the `Context` after you finish the block. *That's right you no longer have to worry about opening or closing doors; you don't have time for that!*
 
@@ -69,15 +75,19 @@ Please never mind my bitter alter ego and let's discover some other exciting API
 
 Using the `digitalInput` function you can easily create and customise your "*pin*" using this intuitive DSL:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="kotlin" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">digitalInput(address = 24) {
+```kotlin
+digitalInput(address = 24) {
     name(“Button”)
     pull(PULL_DOWN)
     debounce(3000L)
-}</pre>
+}
+```
+
 
 In the same fashion, Analog and PWM get their fair share of sweetness:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="kotlin" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">analogOutput(24).run {
+```kotlin
+analogOutput(24).run {
     whenInRange(0..5) {
         // fires when value is in the supplied range
     }
@@ -90,7 +100,9 @@ In the same fashion, Analog and PWM get their fair share of sweetness:
     onMax(0..5) {
         // fires when value changes to the maximum of the range
     }
-}</pre>
+}
+```
+
 
 And of course we would take full advantage of the intuitive \& inlined lambdas of Kotlin to create APIs like these:
 

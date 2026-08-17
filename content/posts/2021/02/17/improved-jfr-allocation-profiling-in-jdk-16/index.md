@@ -90,6 +90,6 @@ The results of our preliminary tests of the setups previously completely unable 
 
 Also, let's ponder the fact that the event rate emission control (throttling) is not TLAB event specific and can be used for other event types as well if there is such demand. Although I am quite sure there will be no more throttled events in JDK 16 which is in its stabilisation phase as of writing of this blog it might be the good time to take a look at the potential candidates for JDK 17.
 
-*** ** * ** ***
+
 
 Originally published by the [author in his blog](https://withent.blogspot.com/2021/01/improved-jfr-allocation-profiling-in.html).

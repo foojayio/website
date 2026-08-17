@@ -31,19 +31,25 @@ Each "example" is structured as a before-and-after comparison. It's best to illu
 
 **Before:**
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">boolean isValid() {
-   if (missions &lt; 0 || name == null || name.trim().isEmpty()) {
+```java
+boolean isValid() {
+   if (missions < 0 || name == null || name.trim().isEmpty()) {
       return false;
    } else {
       return true;
    }
-}</pre>
+}
+```
+
 
 **After:**
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">boolean isValid() {
-   return missions &gt;= 0 &amp;&amp; name != null &amp;&amp; !name.trim().isEmpty();
-}</pre>
+```java
+boolean isValid() {
+   return missions >= 0 && name != null && !name.trim().isEmpty();
+}
+```
+
 
 If you, dear reader, are wondering why and how to transform the former into the latter, then this book is for you. The authors imagine their audience as someone who knows the basics of the Java language, perhaps from a university curriculum, and who can pass [Fizz Buzz](https://blog.codinghorror.com/why-cant-programmers-program/).
 
@@ -53,10 +59,13 @@ As an aside, I had the nagging question why the authors use `name.trim().isEmpty
 
 Here is another nice piece of advice, **Favor format over Concatenation**, which shows how to rewrite:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">String entry = author.toUpperCase() + ": [" + formattedMonth + "-" +
+```java
+String entry = author.toUpperCase() + ": [" + formattedMonth + "-" +
    today.getDayOfMonth() + "-" + today.getYear() + "](Day " +
-   (ChronoUnit.DAYS.between(start, today) + 1) + ")&gt; " +
-   message + System.lineSeparator();</pre>
+   (ChronoUnit.DAYS.between(start, today) + 1) + ")> " +
+   message + System.lineSeparator();
+```
+
 
 ...using `String.format`, or, as of Java 15, the `formatted` method of the `String` class.
 
@@ -82,7 +91,8 @@ I generally try to pick examples that revolve around tasks that most programmers
 
 **Before:**
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">class Hull {
+```java
+class Hull {
    int holes;
 }
 class HullRepairUnit {
@@ -96,7 +106,9 @@ class HullRepairUnit {
    boolean isIntact(Hull hull) {
       return hull.holes == 0;
    }
-}</pre>
+}
+```
+
 
 When I first saw this code snippet, it didn't remind me of anything I had seen before. In my experience, students don't commonly write code that puts the data in one class and the methods into another. Maybe some enterprise pattern???
 
@@ -104,7 +116,8 @@ The suggested refactoring is:
 
 **After:**
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">class Hull {
+```java
+class Hull {
    int holes;
    void repairHole() {
       if (isIntact()) {
@@ -115,7 +128,9 @@ The suggested refactoring is:
    boolean isIntact() {
        return holes == 0;
    }
-}</pre>
+}
+```
+
 
 Sure, that's better. The authors must have seen this in the wild, since they write with passion to **Combine State and Behavior** .
 
@@ -127,10 +142,13 @@ Those are just quibbles of the kind that every book review must have. I thought 
 
 I learned something new myself. In the item **Document Using Examples**, the authors point out that one can embed comments inside regular expressions. It looks even better with text blocks:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">var regex = """
+```java
+var regex = """
 (?x:(([1-9]|1[0-2]) #hours
 :([0-5][0-9])) #minutes
-[ap]m)""";</pre>
+[ap]m)""";
+```
+
 
 It had never occurred to me to do that, but it seems like a good idea. And of course, as the authors point out, with a complex regular expressions, a few examples do wonders: `11:59am`, `1:05pm`. Here is one more thing I like. It's a book! Carefully edited, cross-referenced, reviewed, and typeset. Not a bunch of blog articles.
 

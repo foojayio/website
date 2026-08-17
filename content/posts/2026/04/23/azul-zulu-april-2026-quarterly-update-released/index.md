@@ -81,9 +81,12 @@ Azul released Azul Zulu Builds of OpenJDK (Zulu) in versions 26, 25, 21, 17, 11,
 
 This is probably the biggest news in this release. After more than two years of work with the Docker team, Azul Zulu has officially joined Docker's Official Images program. The images are available on Docker Hub under the `azul-zulu` name:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">docker pull azul-zulu:21
+```
+docker pull azul-zulu:21
 docker pull azul-zulu:21-jre
-docker pull azul-zulu:25</pre>
+docker pull azul-zulu:25
+```
+
 
 What does "Official Image" mean in practice? It means the Docker team has reviewed and verified the images, they follow Docker's best practices, and they will show up in Docker Hub search results alongside other official images like `ubuntu` or `node`. For Java developers running containers, it is a stronger trust signal out of the box.
 

@@ -19,7 +19,8 @@ frozen: false
 
 Continuing from [part 1](https://foojay.io/today/using-java-flight-recorder-and-mission-control-part-1/) and [part 2](https://foojay.io/today/using-java-flight-recorder-and-mission-control-part-2/), while from JDK 14 events can be consumed on the fly, previous JDK versions (from JDK 11) offer a public API useful enough to control Flight Recorder programmatically or to read events from a JFR file.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">Configuration c = Configuration.getConfiguration("profile"); [1]
+```java
+Configuration c = Configuration.getConfiguration("profile"); [1]
 Recording r = new Recording(c);
 r.setName("monitor jvm");
 r.enable("jdk.*"); [2]
@@ -29,7 +30,9 @@ r.start(); [4]
 // to be profiled
 
 r.stop(); [5]
-r.dump(Files.createFile("/var/log/jfr/app-initiated.jfr")); [6]</pre>
+r.dump(Files.createFile("/var/log/jfr/app-initiated.jfr")); [6]
+```
+
 
 1. As shown above, choose the JFR configuration.
 2. Choose which events the recording should be interested in. Another signature accepts classes, it's unlikely to be helpful for JDK events, but it may get interesting for custom events, your classes.
@@ -42,13 +45,14 @@ The above snippet creates a continuous profiling session with a 4 minute window.
 
 Now the API allows reading emitted `.jfr` files. The API represents what's actually in a file, a schema of the events and the events themselves.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">try(RecordingFile rf = new RecordingFile(Paths.get("/var/log/jfr/app-initiated.jfr"))( { [1]
+```java
+try(RecordingFile rf = new RecordingFile(Paths.get("/var/log/jfr/app-initiated.jfr"))( { [1]
     // read the schema
-    rf.readEventTypes().forEach((EventType et) -&gt; { [2]
+    rf.readEventTypes().forEach((EventType et) -> { [2]
         System.out.println(et.getName());
         et.getFields()
           .stream()
-          .map((ValueDescriptor vd) -&gt; vd.getName())
+          .map((ValueDescriptor vd) -> vd.getName())
           .forEach(System.out::println);
     });
 
@@ -56,7 +60,9 @@ Now the API allows reading emitted `.jfr` files. The API represents what's actua
     for(jdk.jfr.consumer.RecordedEvent e = rf.readEvent(); rf.hasMoreEvents(); e = rf.readEvent()) { [3]
         System.out.println(e.getEventType().getName()); [4]
     }
-}</pre>
+}
+```
+
 
 1. Open the JFR file, it's a `Closeable` and it reads a file, so be sure to use it in a `try-with-resources` block.
 2. `readEventTypes()` gets you the schema of the events, fields name, labels, thresholds, etc.
@@ -65,10 +71,13 @@ Now the API allows reading emitted `.jfr` files. The API represents what's actua
 
 `RecordingFile` API is a bit awkward to work with, more specifically parsing each event requires looking at the event descriptor (via `getEventType()`, or getFields()), and interrogate the event as fields presence may evolve with each JDK revision. The javadoc advises defensive programming style when reading a JFR file:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">if (event.hasField("intValue")) {
+```java
+if (event.hasField("intValue")) {
    int intValue = event.getValue("intValue");
    System.out.println("Int value: " + intValue);
-}</pre>
+}
+```
+
 
 This API is now complemented by streaming live events [JEP-349](https://openjdk.java.net/jeps/349) in JDK 14 using an API `RecordingStream` that is mix of the above, that's out of scope for this article. But that's yet another reason to make the effort to upgrade our JDK.
 

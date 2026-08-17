@@ -85,21 +85,30 @@ For the ARM-based 5 Ultra, I wanted to test the full Java stack including JavaFX
 
 Run the `curl` command to install SDKMAN, and open a new shell, or use the `source` command to activate SDKMAN:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">curl -s "https://get.sdkman.io" | bash
+```
+curl -s "https://get.sdkman.io" | bash
 source "$HOME/.sdkman/bin/sdkman-init.sh"
-sdk version</pre>
+sdk version
+```
+
 
 SDKMAN provides easy access to multiple Java distributions and versions. For this board, I installed Azul Zulu 25 with JavaFX:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">sdk install java 25.0.1.fx-zulu
-sdk install jbang</pre>
+```
+sdk install java 25.0.1.fx-zulu
+sdk install jbang
+```
+
 
 #### Testing with Pi4J Examples
 
 I cloned my [JBang project from the Pi4J repositories](https://github.com/Pi4J/pi4j-jbang) to run some tests:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">git clone https://github.com/Pi4J/pi4j-jbang.git
-cd pi4j-jbang</pre>
+```
+git clone https://github.com/Pi4J/pi4j-jbang.git
+cd pi4j-jbang
+```
+
 
 The plain Java examples worked perfectly. The JavaFX example also ran smoothly, demonstrating that the RK3588 GPU is well-supported in Ubuntu. The board feels very responsive with these first, quick tests.
 
@@ -114,9 +123,12 @@ SDKMAN doesn't yet have RISC-V support to install Java. I made a [GitHub issue](
 
 For now, the Ubuntu repositories are the way to go:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">sudo apt update
+```
+sudo apt update
 sudo apt upgrade
-sudo apt install openjdk-25-jdk</pre>
+sudo apt install openjdk-25-jdk
+```
+
 
 This installed OpenJDK 25 for RISC-V (but without JavaFX dependencies).
 

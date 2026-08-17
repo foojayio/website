@@ -64,24 +64,30 @@ The Scoped Values API allows us to store and share immutable data for a bounded 
 
 A scoped value is a variable of type ScopedValue and is typically declared as a static final field like a thread-local variable so it can easily be reached from many components.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public class PaymentGateway
+```java
+public class PaymentGateway
 {
-    public static final ScopedValue&lt;PaymentRequest&gt; PAYMENT_REQUEST = ScopedValue.newInstance();
+    public static final ScopedValue<PaymentRequest> PAYMENT_REQUEST = ScopedValue.newInstance();
 
     //...
-}</pre>
+}
+```
+
 
 Once declared, a scoped value is used as shown below.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">import static org.jugistanbul.PaymentGateway.PAYMENT_REQUEST;
+```java
+import static org.jugistanbul.PaymentGateway.PAYMENT_REQUEST;
 
 public class PaymentProcessor
 {
    public static void createPaymentTask(final PaymentRequest request){
        ScopedValue.where(PAYMENT_REQUEST, request)
-                   .run(() -&gt; PaymentService.getPaidByCreditCard());
+                   .run(() -> PaymentService.getPaidByCreditCard());
    }
-}</pre>
+}
+```
+
 
 In the code snippet above, a scoped value and the object to which it is to be bound are passed to the where() method as a key and a value argument.
 
@@ -90,21 +96,30 @@ The run() call binds the scoped value to the current thread by providing a speci
 In this way, notice that the where() and run() methods together provide a one-way sharing of data from one component to another.
 > The where() is a method of the [Carrier](https://download.java.net/java/early_access/loom/docs/api/jdk.incubator.concurrent/jdk/incubator/concurrent/ScopedValue.Carrier.html "Carrier") class which is one of the inner classes of ScopedValues. It maps scoped values as keys, to values and returns a new Carrier hence the where() method can be chained.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic"></pre>
+```
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public class PaymentService
+```
+
+
+```java
+public class PaymentService
 {
    public static void getPaidByCreditCard(){
        ValidationService.checkValidity();
-}</pre>
+}
+```
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public class ValidationService
+
+```java
+public class ValidationService
 {
    public static void checkValidity(){
        PaymentRequest paymentRequest = PaymentGateway.PAYMENT_REQUEST.get();
        checkNumber(paymentRequest.cardNumber());
    }
-}</pre>
+}
+```
+
 
 The bound scoped value can be read via the value's get() method during the lifetime of the run() method, the lambda expression, or any method called directly or indirectly from that expression.
 
@@ -119,15 +134,18 @@ Let's say we have a service where we print the payment information after chargin
 
 We can use the current PaymentRequest instance bound to the current thread for the print process but we don't want to share sensitive information without masking it such as card number, cardholder name, etc, with the service and any method called directly or indirectly from it. This is where rebinding comes to our help.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public class PaymentService
+```java
+public class PaymentService
 {
    public static void getPaidByCreditCard(){
        ValidationService.checkValidity();
        getPaid();
        ScopedValue.where(PaymentGateway.PAYMENT_REQUEST, maskedPaymentRequest)
-       .run(() -&gt; PrintService.printPaymentInfo());
+       .run(() -> PrintService.printPaymentInfo());
    }
-}</pre>
+}
+```
+
 
 > The return type of the run() method is void. If the printPaymentInfo() method was returning a value, we can prefer the call() method which calls a value-returned operation to handle the returned value.
 
@@ -151,24 +169,27 @@ The principal class of the API is [StructuredTaskScope](https://download.java.ne
 
 ```
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public static void getPaidByCreditCard() throws InterruptedException, ExecutionException {
+```java
+public static void getPaidByCreditCard() throws InterruptedException, ExecutionException {
 
     PaymentRequest request = PaymentGateway.PAYMENT_REQUEST.get();
 
     try (var scope = new StructuredTaskScope.ShutdownOnFailure()) {
-        Future&lt;Boolean&gt; validation  = scope.fork(() -&gt; ValidationService.checkValidity());
-        Future&lt;Boolean&gt; account = scope.fork(() -&gt; UserService.accountChecker());
+        Future<Boolean> validation  = scope.fork(() -> ValidationService.checkValidity());
+        Future<Boolean> account = scope.fork(() -> UserService.accountChecker());
 
         scope.join();
         scope.throwIfFailed();
 
-        if(validation.resultNow() &amp;&amp; account.resultNow()){
+        if(validation.resultNow() && account.resultNow()){
             getPaid();
             ScopedValue.where(PaymentGateway.PAYMENT_REQUEST, request.copyOf())
-                       .run(() -&gt; PrintService.printPaymentInfo());
+                       .run(() -> PrintService.printPaymentInfo());
         }
     }
-}</pre>
+}
+```
+
 
 ```
 

@@ -46,16 +46,25 @@ You will find three script files
 
 ...which can be used to build native packages and installers on the platform of your choice. If you would like to build a native package on MacOS you need to perform the following steps:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">./gradlew clean build
-bash build_app_macos.sh</pre>
+```
+./gradlew clean build
+bash build_app_macos.sh
+```
+
 
 After the script has finished you will find the dmg, the pkg and the app file in the folder
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">fxmodules/build/installer</pre>
+```
+fxmodules/build/installer
+```
+
 
 In addition the project also comes with a github action in the folder
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">fxmodules/.github/workflows</pre>
+```
+fxmodules/.github/workflows
+```
+
 
 The `ci.yml` file will build the native packages for each platform on GitHub after each push to the project. The artifacts will be attached to the build so that you can download it from there.
 

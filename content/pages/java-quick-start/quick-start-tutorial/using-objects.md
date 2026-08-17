@@ -10,30 +10,22 @@ aliases:
 frozen: false
 ---
 
-*** ** * ** ***
+
 
 [\<\< Using Methods](https://foojay.io/java-quick-start/quick-start-tutorial/using-methods/)  
 [Reading a Text File \>\>](https://foojay.io/java-quick-start/quick-start-tutorial/reading-a-text-file/)
 
-
-
 {{< youtube vJf6_d0c56I >}}
-
-
 
 Java is an object-oriented programming language. This means we can turn any part of our code into an object with its own variables and methods. For instance, let's create a program containing a shopping cart list with items.
 
 Just like the previous example, this one also uses some methods which are not part of "base Java". That's why our code starts with the import lines to determine where ArrayList and List can be found.
-
-
 
 <div data-pym-src="https://www.jdoodle.com/plugin" data-language="java" data-version-index="6" data-libs="mavenlib1, mavenlib2">
  import java.util.ArrayList; import java.util.List; public class UsingObject { public static void main (String[] args) { List&lt;ShoppingCartItem&gt; items = new ArrayList&lt;&gt;(); items.add(new ShoppingCartItem("Raspberry Pi 4, 4Gb", 1, 59.95F)); items.add(new ShoppingCartItem("Micro-HDMI cable", 2, 5.9F)); items.add(new ShoppingCartItem("Raspberry Pi 4 power supply", 1, 9.95F)); double total = 0D; for (ShoppingCartItem item : items) { System.out.println(item.getName()); System.out.println(" " + item.getQuantity() + "\tx\t" + item.getPrice() + "\t= " + item.getTotal() + " Euro"); total += item.getTotal(); } System.out.println("\nTotal for shopping cart:\n " + total + " Euro"); } public static class ShoppingCartItem { // These values are final as they should not be changed private final String name; private final int quantity; private final float price; public ShoppingCartItem(String name, int quantity, float price) { this.name = name; this.quantity = quantity; this.price = price; } public String getName() { return name; } public int getQuantity() { return quantity; } public float getPrice() { return price; } public float getTotal() { return quantity * price; } } }
 </div>
 
 
-
-*** ** * ** ***
 
 The class `ShoppingCartItem` is an object that can hold the data for each item in the shopping list. The constructor `ShoppingCartItem(String name, int quantity, float price)` enables us to make an item that has a name, quantity, and price. The method `getTotal()` inside the item will return the total cost for the item based on quantity and price.
 
@@ -44,9 +36,8 @@ In the `System.out.println` two special characters are used for better readable 
 * `\n` to jump to a new line
 * `\t` to insert a tab
 
-
-
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="dracula" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ java UsingObject.java
+```
+$ java UsingObject.java
 Raspberry Pi 4, 4Gb
      1  x       59.95   = 59.95 Euro
 Micro-HDMI cable
@@ -55,21 +46,20 @@ Raspberry Pi 4 power supply
      1  x       9.95    = 9.95 Euro
 
 Total for shopping cart:
-     81.70000076293945 Euro</pre>
+     81.70000076293945 Euro
+```
 
 
 
-*** ** * ** ***
 
 Records got introduced in Java 16 and can be used to simplify this code a lot! The `ShoppingCartItem` as a record, removes a lot of the so-called "boilerplate" code. When applying all improvements up to Java 25, the code with the same functionality looks like this:
 
-
-
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">import java.util.ArrayList;
+```
+import java.util.ArrayList;
 import java.util.List;
 
 void main() {
-    List&lt;ShoppingCartItem&gt; items = new ArrayList&lt;&gt;();
+    List<ShoppingCartItem> items = new ArrayList<>();
     items.add(new ShoppingCartItem("Raspberry Pi 4, 4Gb", 1, 59.95F));
     items.add(new ShoppingCartItem("Micro-HDMI cable", 2, 5.9F));
     items.add(new ShoppingCartItem("Raspberry Pi 4 power supply", 1, 9.95F));
@@ -89,7 +79,9 @@ record ShoppingCartItem(String name, int quantity, float price) {
     float total() {
         return quantity * price;
     }
-}</pre>
+}
+```
+
 
   
 [\<\< Using Methods](https://foojay.io/java-quick-start/quick-start-tutorial/using-methods/)  

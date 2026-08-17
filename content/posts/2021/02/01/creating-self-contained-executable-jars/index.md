@@ -24,7 +24,10 @@ This article aims to describe ways to create self-contained executable JARs, als
 
 A JAR is just a collection of class files. To be executable, its `META-INF/MANIFEST.MF` file should point to the class that implements the `main()` method. You do this with the `Main-Class` attribute. Here's an example:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">Main-Class: path.to.MainClass    </pre>
+```
+Main-Class: path.to.MainClass
+```
+
 
 In the above, `MainClass` has a `static main(String...​ args)` method.
 
@@ -32,7 +35,10 @@ In the above, `MainClass` has a `static main(String...​ args)` method.
 
 Most applications depend on existing code. Java provides the concept of the **classpath** . The classpath is a list of path elements that the runtime will look into to find dependent code. When **running Java classes** , you define the classpath via the `-cp` command-line option:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">java -cp lib/one.jar;lib/two.jar;/var/lib/three.jar path.to.MainClass</pre>
+```
+java -cp lib/one.jar;lib/two.jar;/var/lib/three.jar path.to.MainClass
+```
+
 
 The Java runtime creates the classpath by aggregating all classes from all referenced JARs and adding the main class.
 
@@ -58,27 +64,30 @@ The Assembly plugin relies on a specific `assembly.xml` configuration file. It a
 
 The plugin manages common use-cases by providing pre-defined assemblies. The distribution of self-contained JARs is among them. The configuration looks like the following:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="xml" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&lt;plugin&gt;
-  &lt;artifactId&gt;maven-assembly-plugin&lt;/artifactId&gt;
-  &lt;configuration&gt;
-    &lt;descriptorRefs&gt;
-      &lt;descriptorRef&gt;jar-with-dependencies&lt;/descriptorRef&gt;                            
-    &lt;/descriptorRefs&gt;
-    &lt;archive&gt;
-      &lt;manifest&gt;
-        &lt;mainClass&gt;ch.frankel.blog.executablejar.ExecutableJarApplication&lt;/mainClass&gt; 
-      &lt;/manifest&gt;
-    &lt;/archive&gt;
-  &lt;/configuration&gt;
-  &lt;executions&gt;
-    &lt;execution&gt;
-      &lt;goals&gt;
-        &lt;goal&gt;single&lt;/goal&gt;                                                           
-      &lt;/goals&gt;
-      &lt;phase&gt;package&lt;/phase&gt;                                                          
-    &lt;/execution&gt;
-  &lt;/executions&gt;
-&lt;/plugin&gt;</pre>
+```xml
+<plugin>
+  <artifactId>maven-assembly-plugin</artifactId>
+  <configuration>
+    <descriptorRefs>
+      <descriptorRef>jar-with-dependencies</descriptorRef>                            
+    </descriptorRefs>
+    <archive>
+      <manifest>
+        <mainClass>ch.frankel.blog.executablejar.ExecutableJarApplication</mainClass> 
+      </manifest>
+    </archive>
+  </configuration>
+  <executions>
+    <execution>
+      <goals>
+        <goal>single</goal>                                                           
+      </goals>
+      <phase>package</phase>                                                          
+    </execution>
+  </executions>
+</plugin>
+```
+
 
 1. Reference the pre-defined self-contained JAR configuration
 2. Set the main class to execute
@@ -92,13 +101,19 @@ Running `mvn package` yields two artifacts:
 
 The first JAR has the same content as the one that would have been created without the plugin. The second is the self-contained JAR. You can execute it like this:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">java -jar target/executable-jar-0.0.1-SNAPSHOT.jar</pre>
+```
+java -jar target/executable-jar-0.0.1-SNAPSHOT.jar
+```
+
 
 Depending on the project, it may execute successfully...​ or not. For example, it fails in the sample Spring Boot project with the following message:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">%d [%thread] %-5level %logger - %msg%n java.lang.IllegalArgumentException:
+```
+%d [%thread] %-5level %logger - %msg%n java.lang.IllegalArgumentException:
   No auto configuration classes found in META-INF/spring.factories.
-  If you are using a custom packaging, make sure that file is correct.</pre>
+  If you are using a custom packaging, make sure that file is correct.
+```
+
 
 The reason is that different JARs provide **different resources under the same path** *e.g.* `META-INF/spring.factories`. The plugin follows a last write wins strategy. The order is based on the name of the JAR.
 
@@ -134,27 +149,30 @@ While you can develop a transformer, the plugin provides a set of out-of-the-box
 
 The Shade plugin configuration to the Assembly's above is the following:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="xml" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&lt;plugin&gt;
-  &lt;artifactId&gt;maven-shade-plugin&lt;/artifactId&gt;
-  &lt;executions&gt;
-    &lt;execution&gt;
-      &lt;id&gt;shade&lt;/id&gt;
-      &lt;goals&gt;
-        &lt;goal&gt;shade&lt;/goal&gt;                        
-      &lt;/goals&gt;
-      &lt;configuration&gt;
-        &lt;transformers&gt;
-          &lt;transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer"&gt; 
-            &lt;mainClass&gt;ch.frankel.blog.executablejar.ExecutableJarApplication&lt;/mainClass&gt; 
-            &lt;manifestEntries&gt;
-              &lt;Multi-Release&gt;true&lt;/Multi-Release&gt; 
-            &lt;/manifestEntries&gt;
-          &lt;/transformer&gt;
-        &lt;/transformers&gt;
-      &lt;/configuration&gt;
-    &lt;/execution&gt;
-  &lt;/executions&gt;
-&lt;/plugin&gt;</pre>
+```xml
+<plugin>
+  <artifactId>maven-shade-plugin</artifactId>
+  <executions>
+    <execution>
+      <id>shade</id>
+      <goals>
+        <goal>shade</goal>                        
+      </goals>
+      <configuration>
+        <transformers>
+          <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer"> 
+            <mainClass>ch.frankel.blog.executablejar.ExecutableJarApplication</mainClass> 
+            <manifestEntries>
+              <Multi-Release>true</Multi-Release> 
+            </manifestEntries>
+          </transformer>
+        </transformers>
+      </configuration>
+    </execution>
+  </executions>
+</plugin>
+```
+
 
 1. The `shade` goal is bound to the `package` phase by default
 2. This transformer is dedicated to generating manifest files
@@ -173,43 +191,46 @@ With the sample project, the final executable still doesn't work as expected. In
 
 To configure these transformers, we need to add the above libraries as dependencies to the Shade plugin:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="xml" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&lt;plugin&gt;
-  &lt;artifactId&gt;maven-shade-plugin&lt;/artifactId&gt;
-  &lt;version&gt;3.2.4&lt;/version&gt;
-  &lt;executions&gt;
-    &lt;execution&gt;
-      &lt;goals&gt;
-        &lt;goal&gt;shade&lt;/goal&gt;
-      &lt;/goals&gt;
-      &lt;configuration&gt;
-        &lt;transformers&gt;
-          &lt;transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer"&gt;
-            &lt;mainClass&gt;ch.frankel.blog.executablejar.ExecutableJarApplication&lt;/mainClass&gt;
-            &lt;manifestEntries&gt;
-              &lt;Multi-Release&gt;true&lt;/Multi-Release&gt;
-            &lt;/manifestEntries&gt;
-          &lt;/transformer&gt;
-          &lt;transformer implementation="com.github.edwgiz.maven_shade_plugin.log4j2_cache_transformer.PluginsCacheFileTransformer" /&gt; 
-          &lt;transformer implementation="org.springframework.boot.maven.PropertiesMergingResourceTransformer"&gt; 
-            &lt;resource&gt;META-INF/spring.factories&lt;/resource&gt;
-          &lt;/transformer&gt;
-        &lt;/transformers&gt;
-      &lt;/configuration&gt;
-    &lt;/execution&gt;
-  &lt;/executions&gt;
-  &lt;dependencies&gt;
-    &lt;dependency&gt;
-      &lt;groupId&gt;com.github.edwgiz&lt;/groupId&gt;
-      &lt;artifactId&gt;maven-shade-plugin.log4j2-cachefile-transformer&lt;/artifactId&gt; 
-      &lt;version&gt;2.14.0&lt;/version&gt;
-    &lt;/dependency&gt;
-    &lt;dependency&gt;
-      &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
-      &lt;artifactId&gt;spring-boot-maven-plugin&lt;/artifactId&gt;                        
-      &lt;version&gt;2.4.1&lt;/version&gt;
-    &lt;/dependency&gt;
-  &lt;/dependencies&gt;
-&lt;/plugin&gt;</pre>
+```xml
+<plugin>
+  <artifactId>maven-shade-plugin</artifactId>
+  <version>3.2.4</version>
+  <executions>
+    <execution>
+      <goals>
+        <goal>shade</goal>
+      </goals>
+      <configuration>
+        <transformers>
+          <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+            <mainClass>ch.frankel.blog.executablejar.ExecutableJarApplication</mainClass>
+            <manifestEntries>
+              <Multi-Release>true</Multi-Release>
+            </manifestEntries>
+          </transformer>
+          <transformer implementation="com.github.edwgiz.maven_shade_plugin.log4j2_cache_transformer.PluginsCacheFileTransformer" /> 
+          <transformer implementation="org.springframework.boot.maven.PropertiesMergingResourceTransformer"> 
+            <resource>META-INF/spring.factories</resource>
+          </transformer>
+        </transformers>
+      </configuration>
+    </execution>
+  </executions>
+  <dependencies>
+    <dependency>
+      <groupId>com.github.edwgiz</groupId>
+      <artifactId>maven-shade-plugin.log4j2-cachefile-transformer</artifactId> 
+      <version>2.14.0</version>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-maven-plugin</artifactId>                        
+      <version>2.4.1</version>
+    </dependency>
+  </dependencies>
+</plugin>
+```
+
 
 1. Merge Log4J2 `.dat` files
 2. Merge `/META-INF/spring.factories` files
@@ -232,18 +253,21 @@ The Spring Boot plugin adopts an entirely different approach. It doesn't merge r
 
 Configuring the Spring Boot plugin is straightforward:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="xml" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&lt;plugin&gt;
-  &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
-  &lt;artifactId&gt;spring-boot-maven-plugin&lt;/artifactId&gt;
-  &lt;version&gt;2.4.1&lt;/version&gt;
-  &lt;executions&gt;
-    &lt;execution&gt;
-      &lt;goals&gt;
-        &lt;goal&gt;repackage&lt;/goal&gt;
-      &lt;/goals&gt;
-    &lt;/execution&gt;
-  &lt;/executions&gt;
-&lt;/plugin&gt;</pre>
+```xml
+<plugin>
+  <groupId>org.springframework.boot</groupId>
+  <artifactId>spring-boot-maven-plugin</artifactId>
+  <version>2.4.1</version>
+  <executions>
+    <execution>
+      <goals>
+        <goal>repackage</goal>
+      </goals>
+    </execution>
+  </executions>
+</plugin>
+```
+
 
 <figure class="wp-block-image size-large is-resized">
  <img fetchpriority="high" decoding="async" src="image-12.png" alt="" class="wp-image-37601" width="269" height="233">
@@ -255,8 +279,11 @@ Configuring the Spring Boot plugin is straightforward:
 
 Here's an excerpt of the manifest for our sample project:MANIFEST.MF
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">Main-Class: org.springframework.boot.loader.JarLauncher
-Start-Class: ch.frankel.blog.executablejar.ExecutableJarApplication</pre>
+```
+Main-Class: org.springframework.boot.loader.JarLauncher
+Start-Class: ch.frankel.blog.executablejar.ExecutableJarApplication
+```
+
 
 As you can see, the main class is a Spring Boot specific class while the "real" main class is referenced under another entry.
 

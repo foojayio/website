@@ -87,19 +87,28 @@ Now that we've laid the groundwork for understanding what we're building, let's 
 
 Simply clone the repository:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">git clone https://github.com/matteoroxis/operations-assistant.git
+```
+git clone https://github.com/matteoroxis/operations-assistant.git
 
-cd operations-assistant</pre>
+cd operations-assistant
+```
+
 
 Then set the two environment variables required to configure the database and OpenAI API key.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">export MONGODB_URI="mongodb+srv://&lt;user&gt;:&lt;password&gt;@&lt;cluster&gt;.mongodb.net/ops_assistant?appName=devrel-tutorial-java-agentic-workflows-foojay"
+```
+export MONGODB_URI="mongodb+srv://<user>:<password>@<cluster>.mongodb.net/ops_assistant?appName=devrel-tutorial-java-agentic-workflows-foojay"
 
-export OPENAI_API_KEY="sk-..."</pre>
+export OPENAI_API_KEY="sk-..."
+```
+
 
 Everything is ready. Let's start the application:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">mvn spring-boot:run</pre>
+```
+mvn spring-boot:run
+```
+
 
 The configuration file specifies that the vector store should use a collection named *knowledge_chunks* with a search index named *knowledge_vector_index* . It also specifies the use of a *text-embedding-3-smal* l embedding model with 1536 dimensions and the*gpt-5.4-mini* model with a temperature of 0.2. What does the temperature indicate?
 
@@ -159,28 +168,34 @@ When the application starts, MongoDBAtlasVectorStore executes the createSearchIn
 
 If you want to create the index manually, you need to access the Atlas UI, navigate to the relevant cluster, open Atlas Search, and create a new index using the JSON Editor. Select the *ops_assistant* database and the *knowledge_chunks* collection, and use the following index definition, naming it *knowledge_vector_index*:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">{
-&nbsp;&nbsp;"fields": [
-&nbsp;&nbsp;&nbsp;&nbsp;{
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"type": "vector",
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"path": "embedding",
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"numDimensions": 1536,
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"similarity": "cosine"
-&nbsp;&nbsp;&nbsp;&nbsp;},
-&nbsp;&nbsp;&nbsp;&nbsp;{ "type": "filter", "path": "metadata.sourceType" },
-&nbsp;&nbsp;&nbsp;&nbsp;{ "type": "filter", "path": "metadata.system" },
-&nbsp;&nbsp;&nbsp;&nbsp;{ "type": "filter", "path": "metadata.environment" },
-&nbsp;&nbsp;&nbsp;&nbsp;{ "type": "filter", "path": "metadata.severity" },
-&nbsp;&nbsp;&nbsp;&nbsp;{ "type": "filter", "path": "metadata.team" }
-&nbsp;&nbsp;]
-}</pre>
+```
+{
+  "fields": [
+    {
+      "type": "vector",
+      "path": "embedding",
+      "numDimensions": 1536,
+      "similarity": "cosine"
+    },
+    { "type": "filter", "path": "metadata.sourceType" },
+    { "type": "filter", "path": "metadata.system" },
+    { "type": "filter", "path": "metadata.environment" },
+    { "type": "filter", "path": "metadata.severity" },
+    { "type": "filter", "path": "metadata.team" }
+  ]
+}
+```
+
 
 Trying It Out {#h2-8-trying-it-out}
 -----------------------------------
 
 We're finally ready to test. Open your browser to[http://localhost:8080](http://localhost:8080/) while the application is running, click "Load Sample Runbooks," and wait a few seconds for the sample runbooks to finish loading. Now, try typing the following in the chat panel:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&gt; My payment-service pod is at 90% CPU. What should I check first?</pre>
+```
+> My payment-service pod is at 90% CPU. What should I check first?
+```
+
 
 The result is not the same as what you would get by asking the same question to any LLM. The result includes a reference to the actual steps outlined in the "Abnormal CPU Usage" runbook, which is included within the sample runbooks. Use *kubectl top pods* to identify the pods affected by the issue, collect a JVM thread dump with *jstack* , and analyze the garbage collector with *jstat*.
 

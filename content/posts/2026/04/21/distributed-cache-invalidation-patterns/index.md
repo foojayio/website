@@ -75,32 +75,38 @@ With this strategy, the system allows cached values to expire after a predefined
 
 For example, a Redis-based cache in a Spring Boot application can be configured with a default expiration time.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@Configuration
+```
+@Configuration
 @EnableCaching
 
 public class CacheConfig {
-&nbsp;&nbsp;&nbsp;&nbsp;@Bean
-&nbsp;&nbsp;&nbsp;&nbsp;public RedisCacheManager cacheManager(RedisConnectionFactory connectionFactory) {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;RedisCacheConfiguration config = RedisCacheConfiguration.defaultCacheConfig()
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.entryTtl(Duration.ofMinutes(10));
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return RedisCacheManager.builder(connectionFactory)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.cacheDefaults(config)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.build();
-&nbsp;&nbsp;&nbsp;&nbsp;}
-}</pre>
+    @Bean
+    public RedisCacheManager cacheManager(RedisConnectionFactory connectionFactory) {
+        RedisCacheConfiguration config = RedisCacheConfiguration.defaultCacheConfig()
+                .entryTtl(Duration.ofMinutes(10));
+        return RedisCacheManager.builder(connectionFactory)
+                .cacheDefaults(config)
+                .build();
+    }
+}
+```
+
 
 Entries logically expire after ten minutes. Redis removes expired keys lazily when they are accessed, plus a background process periodically cleans them up. This means expired keys may still consume memory briefly after their TTL expires.
 
 We can indicate that the result of a method should be cached by using Spring's caching abstraction:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@Service
+```
+@Service
 
 public class ProductService {
-&nbsp;&nbsp;&nbsp;&nbsp;@Cacheable("products")
-&nbsp;&nbsp;&nbsp;&nbsp;public Product getProduct(String id) {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return productRepository.findById(id).orElseThrow();
-&nbsp;&nbsp;&nbsp;&nbsp;}
-}</pre>
+    @Cacheable("products")
+    public Product getProduct(String id) {
+        return productRepository.findById(id).orElseThrow();
+    }
+}
+```
+
 
 The main advantage of TTL-based caching is definitely its simplicity: it works well when the application can tolerate short periods of outdated data.
 
@@ -117,19 +123,25 @@ When reading data, the service first checks the cache. If the value is not there
 
 This model is exactly what Spring's @Cacheable annotation implements:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@Cacheable(value = "products", key = "#id")
+```
+@Cacheable(value = "products", key = "#id")
 
 public Product getProduct(String id) {
-&nbsp;&nbsp;&nbsp;&nbsp;return productRepository.findById(id).orElseThrow();
-}</pre>
+    return productRepository.findById(id).orElseThrow();
+}
+```
+
 
 When data changes, the application explicitly removes the corresponding cache entry.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@CacheEvict(value = "products", key = "#id")
+```
+@CacheEvict(value = "products", key = "#id")
 
 public void updateProduct(Product product) {
-&nbsp;&nbsp;&nbsp;&nbsp;productRepository.save(product);
-}</pre>
+    productRepository.save(product);
+}
+```
+
 
 The next request will trigger the process again: reading from the database and repopulating the cache.
 
@@ -153,32 +165,38 @@ For this purpose, messaging platforms such as Apache Kafka or RabbitMQ are typic
 
 Let's look at a small example that uses Redis to publish an invalidation message every time a product is updated.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@Service
+```
+@Service
 
 public class ProductService {
-&nbsp;&nbsp;&nbsp;&nbsp;private final RedisTemplate&lt;String, String&gt; redisTemplate;
-&nbsp;&nbsp;&nbsp;&nbsp;public void updateProduct(Product product) {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;productRepository.save(product);
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;redisTemplate.convertAndSend(
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"cache-invalidation",
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;product.getId()
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;);
-&nbsp;&nbsp;&nbsp;&nbsp;}
-}</pre>
+    private final RedisTemplate<String, String> redisTemplate;
+    public void updateProduct(Product product) {
+        productRepository.save(product);
+        redisTemplate.convertAndSend(
+                "cache-invalidation",
+                product.getId()
+        );
+    }
+}
+```
+
 
 Each service instance subscribes to the invalidation channel and clears the cache entry locally.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@Component
+```
+@Component
 
 public class CacheInvalidationListener implements MessageListener {
-&nbsp;&nbsp;&nbsp;&nbsp;private final CacheManager cacheManager;
-&nbsp;&nbsp;&nbsp;&nbsp;@Override
-&nbsp;&nbsp;&nbsp;&nbsp;public void onMessage(Message message, byte[] pattern) {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;String productId = new String(message.getBody());
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cacheManager.getCache("products")
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.evict(productId);
-&nbsp;&nbsp;&nbsp;&nbsp;}
-}</pre>
+    private final CacheManager cacheManager;
+    @Override
+    public void onMessage(Message message, byte[] pattern) {
+        String productId = new String(message.getBody());
+        cacheManager.getCache("products")
+                .evict(productId);
+    }
+}
+```
+
 
 This approach ensures that all nodes have the opportunity to respond to the same stream of events, keeping caches synchronized across the entire system.
 
@@ -191,17 +209,23 @@ Another effective strategy is using versioned cache keys. Instead of deleting ca
 
 For example:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">product:123:v1
+```
+product:123:v1
 
-product:123:v2</pre>
+product:123:v2
+```
+
 
 When the product changes, the application increments the version number and writes the updated value under the new key; at this point, users automatically retrieve the latest version.
 
 We can create a helper method to manage versioned keys:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public String buildCacheKey(String productId, int version) {
-&nbsp;&nbsp;&nbsp;&nbsp;return "product:" + productId + ":v" + version;
-}</pre>
+```
+public String buildCacheKey(String productId, int version) {
+    return "product:" + productId + ":v" + version;
+}
+```
+
 
 This technique eliminates race conditions in which one node invalidates a cache entry while another node is writing a new value to that entry.
 
@@ -221,17 +245,20 @@ Let's imagine a typical architecture:
 
 The local cache ensures extremely fast reads, while the distributed cache ensures that data is shared across nodes. For example, we can configure our application to use Caffeine for local caching and Redis for distributed in-memory storage.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@Bean
+```
+@Bean
 
 public CacheManager cacheManager() {
-&nbsp;&nbsp;&nbsp;&nbsp;CaffeineCacheManager caffeineManager = new CaffeineCacheManager("products");
-&nbsp;&nbsp;&nbsp;&nbsp;caffeineManager.setCaffeine(
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Caffeine.newBuilder()
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.expireAfterWrite(5, TimeUnit.MINUTES)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.maximumSize(10_000)
-&nbsp;&nbsp;&nbsp;&nbsp;);
-&nbsp;&nbsp;&nbsp;&nbsp;return caffeineManager;
-}</pre>
+    CaffeineCacheManager caffeineManager = new CaffeineCacheManager("products");
+    caffeineManager.setCaffeine(
+        Caffeine.newBuilder()
+            .expireAfterWrite(5, TimeUnit.MINUTES)
+            .maximumSize(10_000)
+    );
+    return caffeineManager;
+}
+```
+
 
 In a setup like this, invalidation events must clear both cache levels. While this adds complexity, it allows us to significantly reduce the number of remote cache calls and improve response times under heavy load. It's important to note that local cache size should be tuned relative to the number of instances. With 10 instances each caching 10,000 entries, total memory consumption across the fleet is 100,000 entries. Size it carefully!
 
@@ -252,12 +279,15 @@ Consumers subscribe to these events and update read-optimized data structures.
 
 A Kafka listener in a Spring Boot application might look like this:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@KafkaListener(topics = "product-events")
+```
+@KafkaListener(topics = "product-events")
 
 public void handleProductUpdate(ProductUpdatedEvent event) {
-&nbsp;&nbsp;&nbsp;&nbsp;cacheManager.getCache("products")
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.put(event.getProductId(), event.getProduct());
-}</pre>
+    cacheManager.getCache("products")
+            .put(event.getProductId(), event.getProduct());
+}
+```
+
 
 Applying this pattern transforms the cache into a projection of the event stream rather than a layer of temporary storage.
 

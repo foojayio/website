@@ -83,7 +83,8 @@ In C the compiler has an object linker step where symbols are organized in a mod
 
 Below is how to obtain the symbol (C function) `getpid()`. The call to `findOrThrow()` returns a `MemorySegment`.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">// 1. Obtain linker
+```java
+// 1. Obtain linker
 var linker = Linker.nativeLinker();
 
 // 2. Obtaining symbol lookup from two places.
@@ -91,7 +92,9 @@ SymbolLookup stdlibLookup = SymbolLookup.loaderLookup()
         .or(linker.defaultLookup());
 
 // 3. Obtain symbol
-MemorySegment getpidSymbol = stdlibLookup.findOrThrow("getpid");</pre>
+MemorySegment getpidSymbol = stdlibLookup.findOrThrow("getpid");
+```
+
 
 Now that we can obtain the symbol let's create a `MethodHandle` to access the system C function `getpid()` that typically is used to obtain a running application's process ID.
 
@@ -104,10 +107,13 @@ Getting the Pid via `getpid()` is a system level C function to obtain a **proces
 
 Let's examine the `getpid()` function's definition as shown below.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="c" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">#include &lt;sys/types.h&gt;
-#include &lt;unistd.h&gt;
+```c
+#include <sys/types.h>
+#include <unistd.h>
 
-pid_t getpid(void);</pre>
+pid_t getpid(void);
+```
+
 
 Notice the header `sys/types.h` and `unistd.h` which contains the system's data type `pid_t` and a function `getpid(void)` respectively. Let's look at what exactly is a `pid_t` data type and a `void` parameter.
 
@@ -123,15 +129,21 @@ Next lets look at what is a void parameter. In the definition you'll notice the 
 
 To invoke the function `getpid(void)` we first need to create a `MethodHandle` instance via `Linker`'s [downcallHandle()](https://download.java.net/java/early_access/panama/docs/api/jdk.incubator.foreign/jdk/incubator/foreign/CLinker.html#downcallHandle(jdk.incubator.foreign.Addressable,jdk.incubator.foreign.SegmentAllocator,java.lang.invoke.MethodType,jdk.incubator.foreign.FunctionDescriptor)) method as shown below:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">import java.lang.foreign.Linker;
+```java
+import java.lang.foreign.Linker;
 
 MethodHandle downcallHandle(MemorySegment symbolMemSeg,
                             FunctionDescriptor functionDescr,
-                            Option... options);</pre>
+                            Option... options);
+```
+
 
 <br />
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">MethodHandle getpidMethodHandle = linker.downcallHandle(getpidSymbol, funcDef);</pre>
+```
+MethodHandle getpidMethodHandle = linker.downcallHandle(getpidSymbol, funcDef);
+```
+
 
 **Note:** Because the `getpid(void)` function signature has no parameters to be passed in and there for there is no need to pass in `Linker.Option` objects to the downcallHandle() 's third argument.
 
@@ -150,10 +162,13 @@ Like we've seen in Part 1 all C datatypes can be of type [ValueLayout](https://d
 
 And when using jextract it will create the following: `C_INT`, `C_LONG`, `C_POINTER` etc. to represent layouts that map specific to the native C primitives. If you aren't using jextract you can use the value layouts mention above. To create a `FunctionDescriptor` you will call the static `of()` method as shown below:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">import java.lang.foreign.FunctionDescriptor;
+```java
+import java.lang.foreign.FunctionDescriptor;
 
 public static FunctionDescriptor of(MemoryLayout returnLayout, MemoryLayout... argLayouts) 
-public static FunctionDescriptor ofVoid(MemoryLayout... argLayouts) // void return function signature</pre>
+public static FunctionDescriptor ofVoid(MemoryLayout... argLayouts) // void return function signature
+```
+
 
 Now that you know how to lookup symbols and describe method signitures let's invoke the `getpid()` function using a `MethodHandle`.
 
@@ -161,7 +176,8 @@ Now that you know how to lookup symbols and describe method signitures let's inv
 
 The following code will invoke the native C function `getpid()` via a MethodHandle and a jextract generated
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">var cLinker = Linker.nativeLinker();
+```java
+var cLinker = Linker.nativeLinker();
 
 SymbolLookup stdlibLookup = SymbolLookup.loaderLookup()
         .or(cLinker.defaultLookup());
@@ -178,7 +194,8 @@ System.out.printf("MethodHandle calling getpid() (%d)\n", pid);
 // Using Jextract's getpid method.
 int jextractPid = foo_h.getpid();
 System.out.printf("Jextract's calling getpid()   (%d)\n", jextractPid);
-</pre>
+```
+
 
 In the above code listing it does the following:
 
@@ -193,13 +210,19 @@ In the above code listing it does the following:
 
 Outputs the following:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="raw" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">MethodHandle calling getpid() (16514)</pre>
+```
+MethodHandle calling getpid() (16514)
+```
+
 
 Of course if you use the `jextract` tool the `getpid() `method would only be a one liner like the following code snippet:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">// Using Jextract's getpid method.
+```java
+// Using Jextract's getpid method.
 int jextractPid = foolib.getpid();
-System.out.printf("Calling getpid()   (%d)\n", jextractPid);</pre>
+System.out.printf("Calling getpid()   (%d)\n", jextractPid);
+```
+
 
 Now that you know how to call functions in a low-level way using MethodHandles we will be switching gears a bit, by going back to using the `jextract` tool to generate C functions. This will be neccesary as we approach more complex C functions ahead.
 
@@ -212,7 +235,10 @@ Similar to Java's `java.util.Date` or `System.currentTimeMillis()`, the local ti
 
 Shown below is the C function signiture `localtime_r()` from `Time.h`.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="c" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">struct tm *localtime_r( const time_t * epochSeconds, struct tm * tmStruct );</pre>
+```c
+struct tm *localtime_r( const time_t * epochSeconds, struct tm * tmStruct );
+```
+
 
 As you can see, the function signature takes a pointer to a `time_t` and a pointer to a struct `tm`. It looks very complex to mimic by using a `MethodHandle`, so let's use jextract!
 
@@ -224,8 +250,11 @@ The architects and engineers on the Panama mailing list suggested a nice **worka
 
 An header file `foo.h` that contains multiple header includes as shown below:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="c" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">#include &lt;stdio.h&gt;
-#include &lt;time.h&gt;</pre>
+```c
+#include <stdio.h>
+#include <time.h>
+```
+
 
 Next, you'll run `jextract` against `foo.h` to generate source code and/or classes.
 
@@ -233,18 +262,24 @@ Next, you'll run `jextract` against `foo.h` to generate source code and/or class
 
 The following `jextract` command line statement will generate source code in the directory **generated/src** with a package namespace of `org.unix` with system includes on your preferred platform.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="raw" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ jextract --output src \
+```
+$ jextract --output src \
    -t org.unix \
    -I /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include \
-   foo.h</pre>
+   foo.h
+```
+
 
 The next step is the same as before but instead of generating source code `jextract` will generate class files. You can compile the generated/src directory but the statement below generates files automatically. Notice the absence of the source (`--source`) option and output destination option set to classes (`-d classes`).
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ jextract \
+```
+$ jextract \
    --output classes \
    -t org.unix \
    -I /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include \
-   foo.h</pre>
+   foo.h
+```
+
 
 <figure class="wp-block-image size-full is-resized is-style-default">
  <img decoding="async" width="397" height="243" src="Screen-Shot-2021-09-07-at-2.37.15-PM.png" alt="" class="wp-image-46625" style="width:425px;height:260px">
@@ -259,7 +294,8 @@ Now that you have generated the classes you can use the available convenience me
 
 After `jextract` the classes `foo_h`, `tm` and others contain all of the generated objects and methods that represent its C counter parts we can begin allocating objects and invoking native functions. Below is an excerpt of main a few objects and methods we are going to be using to invoke the C `localtime_r()` function:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">/* foo_h.class */
+```java
+/* foo_h.class */
 
 // time_t data type
 public static OfLong time_t = Constants$root.C_LONG_LONG$LAYOUT;
@@ -289,13 +325,16 @@ public static int tm_min$get(MemorySegment seg)
 public static int tm_hour$get(MemorySegment seg)
 
 // asctime function
-public static MemoryAddress asctime ( Addressable x0)</pre>
+public static MemoryAddress asctime ( Addressable x0)
+```
+
 
 ### Invoking localtime_r() function {#h3-12-invoking-localtime-r-function}
 
 The code listing (`PanamaTime.java`) below will demonstrate how to call the `localtime_r()` function by allocating variables (`MemorySegment`), invoking functions and populate objects(structs). To see the full source code listing visit [here](https://github.com/carldea/panama4newbies/blob/main/part03/src/PanamaTime.java).
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">/* PanamaTime.java */
+```java
+/* PanamaTime.java */
 
 // The variable now of type MemorySegment holds a C long type. The allocate method will create space.
 // time_t * (clong seconds since epoch) probable type is from a typedef long time_t; (64 bit)
@@ -315,7 +354,7 @@ long secondsSinceEpoch2 = time(now2);
 // Get contents of now2 (C's epoch seconds) return as a Java long.
 long secondsSinceEpoch3 = now2.get(C_LONG, 0);
 
-assert secondsSinceEpoch1 == secondsSinceEpoch2 &amp;&amp; secondsSinceEpoch2 == secondsSinceEpoch3;
+assert secondsSinceEpoch1 == secondsSinceEpoch2 && secondsSinceEpoch2 == secondsSinceEpoch3;
 
 // Grab epoch time in seconds, then convert to milliseconds.
 System.out.printf("1. Java DateTime from C time function: %s\n", new Date(secondsSinceEpoch2 * 1000));
@@ -335,7 +374,7 @@ var seconds = pTmStruct.get(C_INT, 0);
 var minutes = pTmStruct.get(C_INT, 4);
 var hours = pTmStruct.get(C_INT, 8);
 
-var cString = memorySession.allocateUtf8String("2. C's printf &amp; tm Struct of local time. %02d:%02d:%02d\n");
+var cString = memorySession.allocateUtf8String("2. C's printf & tm Struct of local time. %02d:%02d:%02d\n");
 printf(cString, hours, minutes, seconds);
 fflush(NULL());
 
@@ -345,7 +384,8 @@ System.out.printf("3. C's tm struct getters tm_hour, tm_min, tm_sec. %02d:%02d:%
 
 // Call time.h asctime() function to display date time.
 printf(memorySession.allocateUtf8String("4. C's asctime() function to display date time: %s\n"), asctime(pTmStruct));
-</pre>
+```
+
 
 ### How does it work? {#h3-13-how-does-it-work}
 
@@ -375,16 +415,22 @@ The code listing above performs the following steps:
 
 On the command line enter the following to run the `PanamaTime.java` program.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="raw" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ java -cp .:classes \
+```
+$ java -cp .:classes \
     --enable-native-access=ALL-UNNAMED \
     --enable-preview --source 19 \
-    src/PanamaTime.java</pre>
+    src/PanamaTime.java
+```
+
 
 Running `PanamaTime.java` outputs the following:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="raw" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">1. C's printf &amp; tm Struct of local time. 03:35:36
+```
+1. C's printf & tm Struct of local time. 03:35:36
 2. C's tm struct getters tm_hour, tm_min, tm_sec. 03:35:36
-3. C's asctime() function to display date time: Mon Aug 30 03:35:36 2021</pre>
+3. C's asctime() function to display date time: Mon Aug 30 03:35:36 2021
+```
+
 
 Now that you have some experience calling system level C functions it's time to look at a third party library. Popular among game developers are SDL and OpenGL API.
 
@@ -397,7 +443,10 @@ In this section I'll be relying on the C++ code of this [SDL and OpenGL tutorial
 
 The first thing needed is to install the libraries, on Linux `freeglut3-dev` and `libdl2-dev`, on macOs XCode and SDL2 library. On macOs let's assume SDL is installed with *[homebrew](https://brew.sh/)*.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="shell" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">brew install sdl2</pre>
+```bash
+brew install sdl2
+```
+
 
 This will install the latest version of the library and create the necessary symbolic links in strategic locations. Brew install these in `brew --prefix`, which on macOs usually resolves to `/usr/local` (unless it's Apple Silicon, LinuxBrew uses a different folder).
 
@@ -408,35 +457,45 @@ Once this is done, one should be able to compile a program that uses this librar
 
 Since this program will use a multiple API of the SDL library lets use `jextract` to generate the Panama mappings. This example will need two headers. At this time, `jextract` can only accept a single header file, so we'll use a trick by passing our own file containing these two includes.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="cpp" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">/* sdlfoo.h */
+```cpp
+/* sdlfoo.h */
 
-#include &lt;SDL.h&gt;
-#include &lt;SDL_opengl.h&gt;</pre>
+#include <SDL.h>
+#include <SDL_opengl.h>
+```
+
 
 Then let's run the `jextract` to generate bindings
 
-<pre class="EnlighterJSRAW" data-enlighter-language="shell" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">jextract --source -source src \
+```bash
+jextract --source -source src \
     -t sdl2 \
     -I /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include \
     -I /usr/local/include/SDL2 \
     -l SDL2 \
     --header-class-name LibSDL2 \
-    sdlfoo.h</pre>
+    sdlfoo.h
+```
+
 
 Notice the include locations (materialized by the `-I` option) with the *homebrew* path mentioned above. Also since this code will load a library, it is necessary to tell what is the name of the compiled library, on Linux (`libSDL2.so`), on macOs (`libSDL2.dylib`), In Jaa this library can be looked up by it's name **SDL2** (via `System.load` call), this is the value passed to the `-l` option. Finally `--header-class-name` simply tells the name of the generated Java class, otherwise the class will be named after the passed header file.
 
 Note that you'll see some warnings emitted for declarations with types not supported on the JVM, in this case the following methods won't be available because the `long double` type (12 bytes instead of double's 8 bytes) does not exists on the JVM. This can happen for other special types without equivalents on the JVM. Fortunately this example don't require those special types.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">...
+```
+...
 WARNING: skipping acosl because of unsupported type usage: long double
 WARNING: skipping asinl because of unsupported type usage: long double
 WARNING: skipping atanl because of unsupported type usage: long double
 WARNING: skipping atan2l because of unsupported type usage: long double
-...</pre>
+...
+```
+
 
 Now we can start with a familiar stub the `ResourceScope`. Then iterate to implement the relevant parts.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">import jdk.incubator.foreign.*;
+```java
+import jdk.incubator.foreign.*;
 
 import static sdl2.LibSDL2.*;
 
@@ -450,19 +509,23 @@ public class SDLFoo {
       //// Render some OpenGL
     }
   }
-}</pre>
+}
+```
+
 
 Let's initialize SDL in an `init` method.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">  private boolean init(MemorySession memorySession) {
-    if (SDL_Init(SDL_INIT_VIDEO()) &lt; 0) {
+```java
+  private boolean init(MemorySession memorySession) {
+    if (SDL_Init(SDL_INIT_VIDEO()) < 0) {
       String errMsg = SDL_GetError().getUtf8String(0);
       System.out.printf("SDL could not initialize! SDL Error: %s\n", errMsg);
       return false;
     }
     else {
       // Starts the intialization sequence of the window
-</pre>
+```
+
 
 Notice the first 2 lines
 
@@ -471,7 +534,8 @@ Notice the first 2 lines
 
 Now following the original tutorial, this code needs to check if it can open a window then it will try to enable OpenGL on this window and ask for specific parameters. The original tutorial makes the program use OpenGL 2.1, but later version can be used if they are available on the platform.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">      SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION(), 2);
+```java
+      SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION(), 2);
       SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION(), 1);
 
       MemorySegment gWindowMemSeg = SDL_CreateWindow(arena.allocateFrom("SDL for Panama"),
@@ -495,7 +559,7 @@ Now following the original tutorial, this code needs to check if it can open a w
           return false;
         } else {
           //Use Vsync
-          if (SDL_GL_SetSwapInterval(1) &lt; 0) {
+          if (SDL_GL_SetSwapInterval(1) < 0) {
             System.out.printf("Warning: Unable to set VSync! SDL Error: %s\n", SDL_GetError().getString(0));
           }
 
@@ -509,7 +573,9 @@ Now following the original tutorial, this code needs to check if it can open a w
 
       return true;
     }
-  }</pre>
+  }
+```
+
 
 The above snippet reuses what we learned until now:
 
@@ -520,7 +586,8 @@ The above snippet reuses what we learned until now:
 
 Now that the window is ready let's initialize OpenGL itself.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">  private boolean initGL() {
+```java
+  private boolean initGL() {
     boolean success = true;
     int error = GL_NO_ERROR();
 
@@ -554,13 +621,16 @@ Now that the window is ready let's initialize OpenGL itself.
     }
 
     return success;
-  }</pre>
+  }
+```
+
 
 Again no surprises, however we no notice in this snippet that the library drives the coding pattern to handle errors. Each native API may use different approach, I advise to follow the regular way to use such API as much as possible.
 
 Then invoke the `init` method.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">    try (var arena = Arena.ofConfined()) {
+```java
+    try (var arena = Arena.ofConfined()) {
       var sdlFoo = new SDLFoo();
 
       //// Initialize SDL
@@ -572,16 +642,22 @@ Then invoke the `init` method.
 
       //// Register cleanup actions
       //// Render some OpenGL
-    }</pre>
+    }
+```
+
 
 Then we need to make sure the code correctly cleans up upon exit. Since `ResourceScope` is destined to be used in a try-with-resources, it's close method will be invoked to clean allocated resources. Also `ResourceScope` has a nifty `ResourceScope::addCloseAction` that can be used to register actions to be performed when this scope closed.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">  private void close() {
+```java
+  private void close() {
     SDL_DestroyWindow(MemorySession.ofAddress(gWindow));
     SDL_Quit();
-  }</pre>
+  }
+```
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">    try (var arena = Arena.ofConfined()) {
+
+```java
+    try (var arena = Arena.ofConfined()) {
       var sdlFoo = new SDLFoo();
 
       //// Initialize SDL
@@ -595,7 +671,9 @@ Then we need to make sure the code correctly cleans up upon exit. Since `Resourc
       // scope.addCloseAction(sdlFoo::close); // no longer an addCloseAction() in final release of FFM API
 
       //// Render some OpenGL
-    }</pre>
+    }
+```
+
 
 Then we can try to render something on the window like what's on the original tutorial : a quadrilateral surface.
 
@@ -605,12 +683,16 @@ The [SDL_PollEvent](https://wiki.libsdl.org/SDL_PollEvent) accepts a pointer to 
 
 The following code adds two nested loops, the outer one that will continue as long as the `quit` boolean is `false`, the inner one that will handle actual events. In order to receive events and read events the code needs to allocate the necessary space. The maximum size of this union datatype is available via the generated `SDL_Event.sizeof()`, then we allocate this memory via `MemorySegment.allocateNative(SDL_Event.sizeof(), scope)`. In [part 2](https://foojay.io/today/project-panama-for-newbies-part-2/) you might remember that a `MemorySegment` implements `MemoryAddress`, consequently this variable can be used as a parameter of `SDL_PollEvent`. This is roughly equivalent to
 
-<pre class="EnlighterJSRAW" data-enlighter-language="c" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">SDL_Event event;
-SDL_PollEvent(&amp;event)</pre>
+```c
+SDL_Event event;
+SDL_PollEvent(&event)
+```
+
 
 Here's the modified code, this code awaits for the user to click the close button (on macOs the red button in the top bar).
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">    try (var arena = Arena.ofConfined()) {
+```java
+    try (var arena = Arena.ofConfined()) {
       var sdlFoo = new SDLFoo();
       if (!sdlFoo.init(arena)) {
         System.out.println("Failed to initialize!");
@@ -641,39 +723,51 @@ Here's the modified code, this code awaits for the user to click the close butto
         //// Invoke rendering code
       }
 
-    }</pre>
+    }
+```
+
 
 The above code defines a memory zone, the sdlEvent, that is reused for each loop iteration. In C++, one just have to declare `SDL_Event e`, but with panama it is necessary to reserve the memory for the whole data type. Which is done by this statement `allocateNative(SDL_Event.sizeof(), scope)`, it can be even simplified to `SDL_Event.allocate(scope)` or a an overload of this method using a `SegmentAllocator`.
 
 The `SDL_Event` is a union data type, it is defined in a way such as the field member `type` is always present and can be used to identify the kind of event (and the actual data structure of this even). The code checks the type via the generated method `SDL_Event.type$get(MemorySegment event)`. However there's some differences in how union types are accessed in C and Panama. In this tutorial, the code needs to read the [SDL_TextInputEvent](https://wiki.libsdl.org/SDL_TextInputEvent), in C this would be written like this
 
-<pre class="EnlighterJSRAW" data-enlighter-language="c" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">if(event.type == SDL_TEXTINPUT) {
+```c
+if(event.type == SDL_TEXTINPUT) {
   char c = event.text.text[0];
-}</pre>
+}
+```
+
 
 The code generated by `jextract` has the name `slice`: Typically this method SDL_Event.text$slice(sdlEvent) is somewhat equivalent to event.text, and simply restrict the range of the segment to the size of a SDL_TextInputEvent. Then from this reduced slice, it's possible to access SDL_TextInputEvent's members, in particular the text member (which happens to be a C string).
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">if (SDL_Event.type$get(sdlEvent) == SDL_TEXTINPUT()) {
+```java
+if (SDL_Event.type$get(sdlEvent) == SDL_TEXTINPUT()) {
   var textSeg = SDL_TextInputEvent.asSlice(sdlEvent, 0);
   char c = textSeg.getString(0).charAt(0);
   if (c == 'q') {
     quit = true;
   }
-}</pre>
+}
+```
+
 
 This is not quite as readable as the C code, but since it is a union datatype it's possible to directly use `SDL_TextInputEvent.asSlice()` to access the C string from the `SDL_Event` segment.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">if (SDL_Event.type$get(sdlEvent) == SDL_TEXTINPUT()) {
+```java
+if (SDL_Event.type$get(sdlEvent) == SDL_TEXTINPUT()) {
   var textSeg = SDL_TextInputEvent.asSlice(sdlEvent, 0);
   char c = textSeg.getString(0).charAt(0);
   if (c == 'q') {
     quit = true;
   }
-}</pre>
+}
+```
+
 
 Then the main method can finally perform the OpenGL rendering:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">    try (var arena = Arena.ofConfined()) {
+```java
+    try (var arena = Arena.ofConfined()) {
       var sdlFoo = new SDLFoo();
 
       // Start up SDL and create window
@@ -717,11 +811,13 @@ Then the main method can finally perform the OpenGL rendering:
       //Disable text input
       SDL_StopTextInput();
     }
-</pre>
+```
+
 
 The code of the render method is really simple for the purpose of this example, basically it clears the screen with some color, then the quadrilateral shape, with some rotations.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">  private void render(Arena arena) {
+```java
+  private void render(Arena arena) {
     //Clear color buffer
     glClear(GL_COLOR_BUFFER_BIT());
 
@@ -736,30 +832,41 @@ The code of the render method is really simple for the purpose of this example, 
       glVertex2f( 0.5f, 0.5f );
       glVertex2f( -0.5f, 0.5f );
     glEnd();
-  }</pre>
+  }
+```
+
 
 This code is not quite fancy, in order to go in to more OpenGL details go to other tutorials like this [one](https://lazyfoo.net/tutorials/OpenGL/index.php). The last thing to do is to call the `SDL_GL_SwapWindow` in order to tell SDL that the OpenGL rendering is done.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">  private void update(Arena arena) {
+```java
+  private void update(Arena arena) {
     // Update a window with OpenGL rendering
     SDL_GL_SwapWindow(MemorySegment.ofAddress(gWindow));
-  }</pre>
+  }
+```
+
 
 And we're done, now to run this code and see it in action we need the usual options add incubating module, but we also need to tell the JDK where to look for the SDL2 library. Indeed the default library lookup location does not include additional path like `/usr/local/lib`. It's possible to see the lookup location with the `java.library.path` system property.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">/Users/brice/Library/Java/Extensions:/Library/Java/Extensions:/Network/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java:.</pre>
+```
+/Users/brice/Library/Java/Extensions:/Library/Java/Extensions:/Network/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java:.
+```
+
 
 It's possible to make the JDK look for additional location via the `JAVA_LIBRARY_PATH` environment variable. As we need to add the location described above : `JAVA_LIBRARY_PATH=:/u`sr/local/lib
 
 Also on macOs, and only for a graphical applications, it is also required to have this option `-XstartOnFirstThread`. The command line should look like :
 
-<pre class="EnlighterJSRAW" data-enlighter-language="shell" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">env JAVA_LIBRARY_PATH=:/usr/local/lib java \
+```bash
+env JAVA_LIBRARY_PATH=:/usr/local/lib java \
   -cp .:classes \
   -XstartOnFirstThread \
   --enable-native-access=ALL-UNNAMED \
   --enable-preview \
   --source 19 \
-  src/SDLFoo.java</pre>
+  src/SDLFoo.java
+```
+
 
 This should display a window like this:
 

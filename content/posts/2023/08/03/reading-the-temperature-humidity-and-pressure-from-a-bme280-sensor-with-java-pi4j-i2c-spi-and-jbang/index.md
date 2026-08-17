@@ -98,7 +98,8 @@ Let's just look at some of the parts of the I2C example for JBang.
 
 The file starts with a special line to instruct the system to execute it with JBang. Then the dependencies are listed in a line starting with `//DEPS`, which will be downloaded by JBang. And finally we have the normal `import` statements.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">///usr/bin/env jbang "$0" "$@" ; exit $?
+```java
+///usr/bin/env jbang "$0" "$@" ; exit $?
 
 //DEPS org.slf4j:slf4j-api:1.7.35
 //DEPS org.slf4j:slf4j-simple:1.7.35
@@ -112,13 +113,16 @@ import com.pi4j.io.i2c.I2C;
 import com.pi4j.io.i2c.I2CConfig;
 import com.pi4j.io.i2c.I2CProvider;
 
-import java.text.DecimalFormat;</pre>
+import java.text.DecimalFormat;
+```
+
 
 #### Main Method
 
 The `main` method initializes the communication with the component and reads the values ten times. This approach allows to show the difference with the SPI code, which mainly only differs in regards of this communication.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public static void main(String[] args) throws Exception {
+```java
+public static void main(String[] args) throws Exception {
 
     var pi4j = Pi4J.newAutoContext();
 
@@ -132,7 +136,7 @@ The `main` method initializes the communication with the component and reads the
 
     // Read values 10 times
     try (I2C bme280 = i2CProvider.create(i2cConfig)) {
-        for (int counter = 0; counter &lt; 10; counter++) {
+        for (int counter = 0; counter < 10; counter++) {
             resetSensor(bme280);
 
             // The sensor needs some time to make the measurement
@@ -145,15 +149,18 @@ The `main` method initializes the communication with the component and reads the
     }
 
     pi4j.shutdown();
-}</pre>
+}
+```
+
 
 #### Reading the Temperature
 
 Reading the values of the sensor is a "Java translation" of the code provided by Bosch in the datasheet and GitHub example project.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">byte[] buff = new byte[6];
+```java
+byte[] buff = new byte[6];
 device.readRegister(BMP280Declares.press_msb, buff);
-long adc_T =  (long)  ((buff[3] &amp; 0xFF) &lt;&lt; 12) |  (long)  ((buff[4] &amp; 0xFF) &lt;&lt; 4) |  (long) ((buff[5] &amp; 0x0F) &gt;&gt; 4);
+long adc_T =  (long)  ((buff[3] & 0xFF) << 12) |  (long)  ((buff[4] & 0xFF) << 4) |  (long) ((buff[5] & 0x0F) >> 4);
 
 ...
 
@@ -175,13 +182,16 @@ double t_fine = (int) (var1 + var2);
 double temperature = (var1 + var2) / 5120.0;
 
 console.println("Temperature: " + df.format(temperature) + " °C");
-console.println("Temperature: " + df.format(temperature* 1.8 + 32) + " °F ");</pre>
+console.println("Temperature: " + df.format(temperature* 1.8 + 32) + " °F ");
+```
+
 
 ### Running the Application {#h3-8-running-the-application}
 
 Because JBang downloads the dependencies and compiles the code, we can execute all this with just one single Java file. This is the output of the I2C example:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="raw" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ jbang Pi4JTempHumPressI2C.java
+```
+$ jbang Pi4JTempHumPressI2C.java
 
 [jbang] Resolving dependencies...
 [jbang]    org.slf4j:slf4j-api:1.7.35
@@ -207,7 +217,9 @@ Because JBang downloads the dependencies and compiles the code, we can execute a
 [main] INFO com.pi4j.util.Console - Reading values, loop 2
 ...
 [main] INFO com.pi4j.util.Console - **************************************
-[main] INFO com.pi4j.util.Console - Finished</pre>
+[main] INFO com.pi4j.util.Console - Finished
+```
+
 
 Conclusion {#h2-9-conclusion}
 -----------------------------
@@ -222,7 +234,7 @@ JBang is here to help regarding the dependencies. In my opinion, this is a much 
 
 I have a bunch of other components in my drawer waiting for more experiments, so I hope to extend this JBang-series further!
 
-*** ** * ** ***
+
 
 Read More {#h2-10-read-more}
 ----------------------------

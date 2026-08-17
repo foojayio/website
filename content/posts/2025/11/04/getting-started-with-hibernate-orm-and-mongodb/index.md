@@ -38,20 +38,26 @@ While Hibernate ORM was originally designed for relational databases, its abstra
 
 Using the new MongoDB extension, Hibernate can now map your entities to MongoDB collections and translate familiar operations, such as persist, find, and even HQL queries, into MongoDB commands behind the scenes. For example, consider a simple HQL query like:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">from Contact where country = ?1 and age &gt; ?2</pre>
+```
+from Contact where country = ?1 and age > ?2
+```
+
 
 When executed, Hibernate replaces the parameters (?1 and ?2) with the actual values provided in your code---for example,*CANADA* and *18* . The MongoDB Dialect then translates the query into an equivalent **MongoDB aggregation pipeline**such as:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">{
-&nbsp;"aggregate": "contact",
-&nbsp;"pipeline": [
-&nbsp;&nbsp;&nbsp;{ "$match": { "$and": [
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{ "country": { "$eq": "CANADA" } },
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{ "age": { "$gt": 18 } }
-&nbsp;&nbsp;&nbsp;]}},
-&nbsp;&nbsp;&nbsp;{ "$project": { "_id": true, "age": true, "country": true, "name": true }}
-&nbsp;]
-}</pre>
+```
+{
+ "aggregate": "contact",
+ "pipeline": [
+   { "$match": { "$and": [
+     { "country": { "$eq": "CANADA" } },
+     { "age": { "$gt": 18 } }
+   ]}},
+   { "$project": { "_id": true, "age": true, "country": true, "name": true }}
+ ]
+}
+```
+
 
 This translation happens transparently; developers continue using Hibernate's familiar API while the framework builds the corresponding [**MongoDB Query Language (MQL)**](https://www.mongodb.com/docs/manual/reference/mql/?utm_campaign=devrel&%20utm_source=third-part-content&utm_medium=cta&utm_content=mongodb-hibernate-crud&utm_term=ricardo.mello) commands under the hood.
 
@@ -74,8 +80,11 @@ Tag your Atlas cluster {#h2-2-tag-your-atlas-cluster}
 
 If you're deploying this application on MongoDB Atlas, you can use [Resource Tags](https://www.mongodb.com/docs/atlas/tags/?utm_campaign=devrel&%20utm_source=third-part-content&utm_medium=cta&utm_content=mongodb-hibernate-crud&utm_term=ricardo.mello) to label your clusters or projects for tracking and cost visibility. For instance, I recommend tagging your cluster with values that describe this tutorial:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">Key: application
-Value: hibernate-crud</pre>
+```
+Key: application
+Value: hibernate-crud
+```
+
 
 Adding tags is a simple but powerful way to organize your MongoDB Atlas resources, especially if you manage multiple clusters, environments, or demos. Tags make it easier to:
 
@@ -130,27 +139,30 @@ If you prefer, you can create it manually using the command line---the structure
 
 Now, open your pom.xml and add the following dependencies:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
-&lt;project xmlns="http://maven.apache.org/POM/4.0.0"
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"&gt;
-&nbsp;&nbsp;&nbsp;&lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
-&nbsp;&nbsp;&nbsp;&lt;groupId&gt;com.mongodb&lt;/groupId&gt;
-&nbsp;&nbsp;&nbsp;&lt;artifactId&gt;mongodb-hibernate-crud&lt;/artifactId&gt;
-&nbsp;&nbsp;&nbsp;&lt;version&gt;1.0-SNAPSHOT&lt;/version&gt;
-&nbsp;&nbsp;&nbsp;&lt;properties&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;maven.compiler.source&gt;21&lt;/maven.compiler.source&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;maven.compiler.target&gt;21&lt;/maven.compiler.target&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;project.build.sourceEncoding&gt;UTF-8&lt;/project.build.sourceEncoding&gt;
-&nbsp;&nbsp;&nbsp;&lt;/properties&gt;
-&nbsp;&nbsp;&nbsp;&lt;dependencies&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;dependency&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;groupId&gt;org.mongodb&lt;/groupId&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;artifactId&gt;mongodb-hibernate&lt;/artifactId&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;version&gt;1.0.0.alpha.1&lt;/version&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/dependency&gt;
-&nbsp;&nbsp;&nbsp;&lt;/dependencies&gt;
-&lt;/project&gt;</pre>
+```
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+   <modelVersion>4.0.0</modelVersion>
+   <groupId>com.mongodb</groupId>
+   <artifactId>mongodb-hibernate-crud</artifactId>
+   <version>1.0-SNAPSHOT</version>
+   <properties>
+       <maven.compiler.source>21</maven.compiler.source>
+       <maven.compiler.target>21</maven.compiler.target>
+       <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+   </properties>
+   <dependencies>
+       <dependency>
+           <groupId>org.mongodb</groupId>
+           <artifactId>mongodb-hibernate</artifactId>
+           <version>1.0.0.alpha.1</version>
+       </dependency>
+   </dependencies>
+</project>
+```
+
 
 The **mongodb-hibernate** dependency provides the MongoDB Dialect, the piece that allows Hibernate to translate HQL queries and persistence operations into MongoDB commands.
 
@@ -158,28 +170,34 @@ The **mongodb-hibernate** dependency provides the MongoDB Dialect, the piece tha
 
 Next, create a hibernate.cfg.xml file under src/main/resources to define the connection and mapping settings:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
-&lt;!DOCTYPE hibernate-configuration PUBLIC
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd"&gt;
-&lt;hibernate-configuration&gt;
-&nbsp;&nbsp;&nbsp;&lt;session-factory&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;property name="hibernate.dialect"&gt;com.mongodb.hibernate.dialect.MongoDialect&lt;/property&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;property name="hibernate.connection.provider_class"&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;com.mongodb.hibernate.jdbc.MongoConnectionProvider
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/property&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;property name="jakarta.persistence.jdbc.url"&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;REPLACE_WITH_YOUR_CONNECTION_STRING&gt;/mydb?appName=devrel-mongodb-hibernate
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/property&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;property name="hibernate.show_sql"&gt;true&lt;/property&gt;
-&nbsp;&nbsp;&nbsp;&lt;/session-factory&gt;
-&lt;/hibernate-configuration&gt;</pre>
+```
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+       "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+       "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+   <session-factory>
+       <property name="hibernate.dialect">com.mongodb.hibernate.dialect.MongoDialect</property>
+       <property name="hibernate.connection.provider_class">
+           com.mongodb.hibernate.jdbc.MongoConnectionProvider
+       </property>
+       <property name="jakarta.persistence.jdbc.url">
+           <REPLACE_WITH_YOUR_CONNECTION_STRING>/mydb?appName=devrel-mongodb-hibernate
+       </property>       
+       <property name="hibernate.show_sql">true</property>
+   </session-factory>
+</hibernate-configuration>
+```
+
 
 **Important:**
 
 Make sure to replace \<REPLACE_WITH_YOUR_CONNECTION_STRING\> with your own MongoDB connection string, the one you get from your[MongoDB Atlas](https://www.mongodb.com/cloud/atlas/register/?utm_campaign=devrel&%20utm_source=third-part-content&utm_medium=cta&utm_content=mongodb-hibernate-crud&utm_term=ricardo.mello) cluster. It should look something like this:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">mongodb+srv://&lt;username&gt;:&lt;password&gt;@cluster0.mongodb.net</pre>
+```
+mongodb+srv://<username>:<password>@cluster0.mongodb.net
+```
+
 
 The configuration also defines the property com.mongodb.hibernate.dialect.MongoDialect,  
 
@@ -191,7 +209,8 @@ With this configuration in place, Hibernate now knows how to connect to MongoDB 
 
 This class will represent the document we'll store in MongoDB. Create a new package domain and add a class named Book.java.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">package com.mongodb.domain;
+```
+package com.mongodb.domain;
 
 import com.mongodb.hibernate.annotations.ObjectIdGenerator;
 import jakarta.persistence.Entity;
@@ -204,26 +223,28 @@ import org.bson.types.ObjectId;
 @Table(name = "books")
 
 public class Book {
-&nbsp;&nbsp;&nbsp;@Id
-&nbsp;&nbsp;&nbsp;@ObjectIdGenerator
-&nbsp;&nbsp;&nbsp;@GeneratedValue
-&nbsp;&nbsp;&nbsp;ObjectId id;
-&nbsp;&nbsp;&nbsp;String title;
-&nbsp;&nbsp;&nbsp;Integer pages;
-&nbsp;&nbsp;&nbsp;public Book() {}
+   @Id
+   @ObjectIdGenerator
+   @GeneratedValue
+   ObjectId id;
+   String title;
+   Integer pages;
+   public Book() {}
 
-&nbsp;&nbsp;&nbsp;public Book(String title, Integer pages) {
-&nbsp;&nbsp;&nbsp;this.title = title;
-&nbsp;&nbsp;&nbsp;this.pages = pages;
-&nbsp;}
+   public Book(String title, Integer pages) {
+   this.title = title;
+   this.pages = pages;
+ }
 
-&nbsp;public Book(ObjectId id, String title, Integer pages) {
-&nbsp;&nbsp;&nbsp;&nbsp;this.id = id;
-&nbsp;&nbsp;&nbsp;&nbsp;this.title = title;
-&nbsp;&nbsp;&nbsp;&nbsp;this.pages = pages;
-&nbsp;}
-&nbsp;&nbsp;&nbsp;// getters and setters
-}</pre>
+ public Book(ObjectId id, String title, Integer pages) {
+    this.id = id;
+    this.title = title;
+    this.pages = pages;
+ }
+   // getters and setters
+}
+```
+
 
 Let's break down what's happening here:
 
@@ -235,7 +256,8 @@ Let's break down what's happening here:
 
 To interact with the database, Hibernate needs a way to open sessions based on our configuration. For that, we define a small helper class that creates a SessionFactory from the hibernate.cfg.xml file and registers our entity. Create a new package called config and include the new class HibernateUtil.java:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">package com.mongodb.config;
+```
+package com.mongodb.config;
 
 import com.mongodb.domain.Book;
 import org.hibernate.SessionFactory;
@@ -243,14 +265,16 @@ import org.hibernate.cfg.Configuration;
 
 public final class HibernateUtil {
 
-&nbsp;&nbsp;private static final SessionFactory SESSION_FACTORY =
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;new Configuration().configure("hibernate.cfg.xml")
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.addAnnotatedClass(Book.class)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.buildSessionFactory();
+  private static final SessionFactory SESSION_FACTORY =
+        new Configuration().configure("hibernate.cfg.xml")
+              .addAnnotatedClass(Book.class)
+              .buildSessionFactory();
 
-&nbsp;&nbsp;private HibernateUtil() {}
-&nbsp;&nbsp;public static SessionFactory getSessionFactory() { return SESSION_FACTORY; }
-}</pre>
+  private HibernateUtil() {}
+  public static SessionFactory getSessionFactory() { return SESSION_FACTORY; }
+}
+```
+
 
 ### Implementing the Book service {#h3-8-implementing-the-book-service}
 
@@ -260,7 +284,8 @@ This class will contain methods for the standard CRUD operations and one additio
 
 Inside the src/main/java/com/mongodb folder, create a new package called **service** and add a class named **BookService.java**:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">package com.mongodb;
+```
+package com.mongodb;
 
 import com.mongodb.config.HibernateUtil;
 import com.mongodb.domain.Book;
@@ -270,64 +295,69 @@ import org.hibernate.Transaction;
 import java.util.List;
 
 public class BookService {
-&nbsp;&nbsp;&nbsp;public Book create(String title, Integer pages) {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Transaction tx = session.beginTransaction();
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Book book = new Book(title, pages);
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;session.persist(book);
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;tx.commit();
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return book;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
-&nbsp;&nbsp;&nbsp;}
+   public Book create(String title, Integer pages) {
+      try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+         Transaction tx = session.beginTransaction();
+         Book book = new Book(title, pages);
+         session.persist(book);
+         tx.commit();
+         return book;
+      }
+   }
 
-&nbsp;&nbsp;&nbsp;public List&lt;Book&gt; findAll() {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return session.createQuery("from Book", Book.class).list();
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
-&nbsp;&nbsp;&nbsp;}
+   public List<Book> findAll() {
+      try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+         return session.createQuery("from Book", Book.class).list();
+      }
+   }
 
-&nbsp;&nbsp;&nbsp;public boolean update(Book updatedBook) {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Transaction tx = session.beginTransaction();
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Book existing = session.find(Book.class, updatedBook.getId());
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (existing == null) return false;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;existing.setTitle(updatedBook.getTitle());
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;existing.setPages(updatedBook.getPages());
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;session.merge(existing);
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;tx.commit();
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return true;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
-&nbsp;&nbsp;&nbsp;}
+   public boolean update(Book updatedBook) {
+      try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+         Transaction tx = session.beginTransaction();
+         Book existing = session.find(Book.class, updatedBook.getId());
+         if (existing == null) return false;
+         existing.setTitle(updatedBook.getTitle());
+         existing.setPages(updatedBook.getPages());
+         session.merge(existing);
+         tx.commit();
+         return true;
+      }
+   }
 
-&nbsp;&nbsp;&nbsp;public boolean deleteById(ObjectId id) {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Transaction tx = session.beginTransaction();
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Book book = session.find(Book.class, id);
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (book == null) {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return false;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+   public boolean deleteById(ObjectId id) {
+      try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+         Transaction tx = session.beginTransaction();
+         Book book = session.find(Book.class, id);
+         if (book == null) {
+            return false;
+         }
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;session.remove(book);
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;tx.commit();
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return true;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
-&nbsp;&nbsp;&nbsp;}
+         session.remove(book);
+         tx.commit();
+         return true;
+      }
+   }
 
-&nbsp;&nbsp;&nbsp;public List&lt;Book&gt; findBooksWithPagesGreaterThanOrEqual(int minPages) {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return session.createQuery(
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"from Book b where b.pages &gt;= :minPages", Book.class)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.setParameter("minPages", minPages)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.list();
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
-&nbsp;&nbsp;&nbsp;}
-}</pre>
+   public List<Book> findBooksWithPagesGreaterThanOrEqual(int minPages) {
+      try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+         return session.createQuery(
+                     "from Book b where b.pages >= :minPages", Book.class)
+               .setParameter("minPages", minPages)
+               .list();
+      }
+   }
+}
+```
+
 
 #### Managing the SessionFactory
 
 In this example, each method opens its own session using:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&nbsp;try (Session session = HibernateUtil.getSessionFactory().openSession()) { }</pre>
+```
+ try (Session session = HibernateUtil.getSessionFactory().openSession()) { }
+```
+
 
 This is the **simplest approach** for demonstration purposes. It ensures that every operation runs independently and that sessions are properly closed after use. However, in a real-world application, you'd likely manage the SessionFactory more elegantly.
 
@@ -335,25 +365,37 @@ This is the **simplest approach** for demonstration purposes. It ensures that ev
 
 ##### create
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">session.persist(book);</pre>
+```
+session.persist(book);
+```
+
 
 This inserts a new document into the **books** collection. The MongoDB Dialect automatically generates the _id field and translates this into an insertOne command under the hood.
 
 ##### findAll
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">session.createQuery("from Book", Book.class).list();</pre>
+```
+session.createQuery("from Book", Book.class).list();
+```
+
 
 This HQL query retrieves all documents from the books collection---equivalent to db.books.find() in MongoDB.
 
 ##### update
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">session.merge(existing);</pre>
+```
+session.merge(existing);
+```
+
 
 Hibernate detects changes to the entity and issues an update operation in MongoDB using the document's _id as a filter.
 
 ##### deleteById
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">session.remove(book);</pre>
+```
+session.remove(book);
+```
+
 
 This method locates a document in the **books** collection by its _id and deletes it.
 
@@ -361,13 +403,19 @@ Hibernate translates the operation into a MongoDB deleteOne command, using the d
 
 ##### findBooksWithPagesGreaterThanOrEqual
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">from Book b where b.pages &gt;= :minPages</pre>
+```
+from Book b where b.pages >= :minPages
+```
+
 
 This demonstrates how **HQL comparison operators** map directly to **MongoDB operators**.
 
 In this case, \>= becomes $gte, generating a pipeline similar to:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">{ "$match": { "pages": { "$gte": 300 } } }</pre>
+```
+{ "$match": { "pages": { "$gte": 300 } } }
+```
+
 
 #### Building the main application
 
@@ -377,7 +425,8 @@ For simplicity, we'll use Java's Scanner class to read user input. Of course, in
 
 Create a new class called **MyApplication.java** in the com.mongodb package:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">package com.mongodb;
+```
+package com.mongodb;
 
 import com.mongodb.config.HibernateUtil;
 import com.mongodb.domain.Book;
@@ -387,81 +436,89 @@ import java.util.List;
 import java.util.Scanner;
 
 public class MyApplication {
-&nbsp;&nbsp;&nbsp;public static void main(String[] args) {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SessionFactory factory = HibernateUtil.getSessionFactory();
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Scanner sc = new Scanner(System.in);
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;BookService bookService = new BookService();
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;int option;
+   public static void main(String[] args) {
+      SessionFactory factory = HibernateUtil.getSessionFactory();
+      Scanner sc = new Scanner(System.in);
+      BookService bookService = new BookService();
+      int option;
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;do {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.println("\n=== BOOK MENU ===");
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.println("1 - Add Book");
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.println("2 - List Books");
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.println("3 - Update Book");
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.println("4 - Delete Book");
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.println("5 - Find Books by Minimum Pages");
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.println("0 - Exit");
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.print("Choose: ");
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;option = sc.nextInt();
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sc.nextLine();
+      do {
+         System.out.println("\n=== BOOK MENU ===");
+         System.out.println("1 - Add Book");
+         System.out.println("2 - List Books");
+         System.out.println("3 - Update Book");
+         System.out.println("4 - Delete Book");
+         System.out.println("5 - Find Books by Minimum Pages");
+         System.out.println("0 - Exit");
+         System.out.print("Choose: ");
+         option = sc.nextInt();
+         sc.nextLine();
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;switch (option) {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;case 1 -&gt; {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.print("Title: ");
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;String title = sc.nextLine();
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.print("Number of pages: ");
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;int pages = sc.nextInt();
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sc.nextLine();
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var book = bookService.create(title, pages);
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.println("Created: " + book);
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;case 2 -&gt; {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;List&lt;Book&gt; books = bookService.findAll();
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;books.forEach(System.out::println);
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;case 3 -&gt; {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.print("Book ID: ");
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;String id = sc.nextLine();
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.print("New Title: ");
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;String newTitle = sc.nextLine();
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.print("New Page Count: ");
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;int newPages = sc.nextInt();
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sc.nextLine();
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Book updated = new Book(new ObjectId(id), newTitle, newPages);
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;boolean ok = bookService.update(updated);
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.println(ok ? "Book updated successfully!" : "Book not found.");
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;case 4 -&gt; {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.print("Book ID to delete: ");
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;String id = sc.nextLine();
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;boolean deleted = bookService.deleteById(new ObjectId(id));
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.println(deleted ? "Book deleted successfully!" : "Book not found.");
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;case 5 -&gt; {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.print("Enter the minimum number of pages: ");
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;String pages = sc.nextLine();
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;List&lt;Book&gt; books = bookService.findBooksWithPagesGreaterThanOrEqual(Integer.parseInt(pages));
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;books.forEach(System.out::println);
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;case 0 -&gt; System.out.println("Bye!");
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;default -&gt; System.out.println("Invalid option, try again.");
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} while (option != 0);
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sc.close();
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;factory.close();
-&nbsp;&nbsp;&nbsp;}
-}</pre>
+         switch (option) {
+            case 1 -> {
+               System.out.print("Title: ");
+               String title = sc.nextLine();
+               System.out.print("Number of pages: ");
+               int pages = sc.nextInt();
+               sc.nextLine();
+               var book = bookService.create(title, pages);
+               System.out.println("Created: " + book);
+            }
+            case 2 -> {
+               List<Book> books = bookService.findAll();
+               books.forEach(System.out::println);
+            }
+            case 3 -> {
+               System.out.print("Book ID: ");
+               String id = sc.nextLine();
+               System.out.print("New Title: ");
+               String newTitle = sc.nextLine();
+               System.out.print("New Page Count: ");
+               int newPages = sc.nextInt();
+               sc.nextLine();
+               Book updated = new Book(new ObjectId(id), newTitle, newPages);
+               boolean ok = bookService.update(updated);
+               System.out.println(ok ? "Book updated successfully!" : "Book not found.");
+            }
+            case 4 -> {
+               System.out.print("Book ID to delete: ");
+               String id = sc.nextLine();
+               boolean deleted = bookService.deleteById(new ObjectId(id));
+               System.out.println(deleted ? "Book deleted successfully!" : "Book not found.");
+            }
+            case 5 -> {
+               System.out.print("Enter the minimum number of pages: ");
+               String pages = sc.nextLine();
+               List<Book> books = bookService.findBooksWithPagesGreaterThanOrEqual(Integer.parseInt(pages));
+               books.forEach(System.out::println);
+            }
+            case 0 -> System.out.println("Bye!");
+            default -> System.out.println("Invalid option, try again.");
+         }
+      } while (option != 0);
+      sc.close();
+      factory.close();
+   }
+}
+```
+
 
 Running the application {#h2-9-running-the-application}
 -------------------------------------------------------
 
 Once everything is configured, you can run the project directly from the command line using Maven. In the root of your project (where the pom.xml file is located), execute:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">mvn clean package</pre>
+```
+mvn clean package
+```
+
 
 And then:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">mvn compile exec:java -Dexec.mainClass="com.mongodb.MyApplication"</pre>
+```
+mvn compile exec:java -Dexec.mainClass="com.mongodb.MyApplication"
+```
+
 
 Maven will compile the code, download any missing dependencies, and execute the main() method in your MyApplication class.
 
@@ -469,7 +526,8 @@ Make sure your hibernate.cfg.xml file is inside src/main/resources and that your
 
 That's it: Your application should start and display the interactive menu in the terminal.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">=== BOOK MENU ===
+```
+=== BOOK MENU ===
 
 1 - Add Book
 
@@ -483,7 +541,9 @@ That's it: Your application should start and display the interactive menu in the
 
 0 - Exit
 
-Choose:</pre>
+Choose:
+```
+
 
 You can now test each option in the console menu to create, list, update, and delete books---and see Hibernate and MongoDB working together in action.
 

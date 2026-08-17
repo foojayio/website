@@ -32,9 +32,12 @@ This reference traces a single trade query through every internal boundary netwo
 
 At **09:30:45.123 UTC**, your Node.js driver pulls a TLS session from its pool and emits:{#739f}
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">db.trades.find({ symbol: "AAPL" })
+```
+db.trades.find({ symbol: "AAPL" })
          .sort({ timestamp: -1 })
-         .limit(10);</pre>
+         .limit(10);
+```
+
 
 The NIC DMA's the encrypted packet into kernel memory and, within microseconds, MongoDB's ASIO reactor (`mongo::transport::ServiceEntryPoint`) zero-copies it into a pre-allocated `SocketFrame`. That frame lands on the TaskExecutor's lock-free queue, waking a parked worker thread in under 10 µs. With network I/O complete, control transfers seamlessly to scheduling.{#0af9}
 
@@ -68,16 +71,22 @@ Meanwhile, per-CPU TCMalloc caches minimize fragmentation on your multi-socket s
 
 Your compound index `{ symbol: 1, timestamp: -1, price: 1 }` adheres to the ESR (Equality → Sort → Range) rule, allowing the SBE engine to satisfy the query with a single index scan. You pre-split hot key ranges---invoking:{#cbdb}
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">sh.splitAt("market.trades", { symbol: "H" });
+```
+sh.splitAt("market.trades", { symbol: "H" });
 sh.splitAt("market.trades", { symbol: "M" });
-// …and so forth through "Z"</pre>
+// …and so forth through "Z"
+```
+
 
 eliminating runtime page splits. A VIP partial index on high-price trades:{#96f5}
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">db.trades.createIndex(
+```
+db.trades.createIndex(
   { price: -1 },
   { partialFilterExpression: { price: { $gt: 1000 } } }
-);</pre>
+);
+```
+
 
 ensures premium fetches hit a covered-index probe, bypassing the document layer entirely. With index probes optimized, replication and transactional guarantees take over.{#7137}
 

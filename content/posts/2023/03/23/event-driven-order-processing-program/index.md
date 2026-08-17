@@ -46,7 +46,8 @@ Again, we model an input event in YAML. To start with, we will reject all new or
 
 We can test this service with the captured data earlier with a YAML configuration. We override the system clock to produce the same results every time.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">public static void runTest(String path) {
+```
+public static void runTest(String path) {
    try {
        SystemTimeProvider.CLOCK = new SetTimeProvider("2019-12-03T09:54:37.345678")
                .advanceMicros(1);
@@ -60,7 +61,9 @@ We can test this service with the captured data earlier with a YAML configuratio
 @Test
 public void newOrderSingle() {
    runTest("newOrderSingle");
-}</pre>
+}
+```
+
 
 As in previous examples, if the output is incorrect, we can quickly see this in the data.
 

@@ -101,7 +101,8 @@ Any help and pull requests are welcome on [the GitHub project](https://github.co
 
 By adding .yml-files to the directory ".github/workflows" in your project, these will be run as configured. A simple example is provided on ["Introduction to GitHub Actions"](https://docs.github.com/en/free-pro-team@latest/actions/learn-github-actions/introduction-to-github-actions) which checks out the pushed code, installs the software dependencies, and runs `bats -v`:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">name: learn-github-actions
+```
+name: learn-github-actions
 on: [push]
 jobs: 
    check-bats-version:
@@ -110,7 +111,9 @@ jobs:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
       - run: npm install -g bats
-      - run: bats -v</pre>
+      - run: bats -v
+```
+
 
 **Gluon** {#h2-4-gluon}
 -----------------------
@@ -172,20 +175,29 @@ Action file: [maven-ubuntu-linux.yml](https://github.com/FDelporte/ResistorCalcu
 
 For Linux, a list of extra libraries is required, which is done with an additional step after the download of GraalVM.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">- name: Install libraries
-  run: sudo apt install libasound2-dev libavcodec-dev libavformat-dev libavutil-dev libgl-dev libgtk-3-dev libpango1.0-dev libxtst-dev</pre>
+```
+- name: Install libraries
+  run: sudo apt install libasound2-dev libavcodec-dev libavformat-dev libavutil-dev libgl-dev libgtk-3-dev libpango1.0-dev libxtst-dev
+```
+
 
 This build process produces both a JAR and a Linux native application. For the first one we run a Maven package:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">- name: Build JAR with Maven
-  run: mvn -B package</pre>
+```
+- name: Build JAR with Maven
+  run: mvn -B package
+```
+
 
 Because the build process is running on a Linux machine, we can define the target as desktop to build a native Linux application with the Gluon Maven client plugin and need to provide the GraalVM location:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">- name: Gluon Build
+```
+- name: Gluon Build
   run: mvn -Pdesktop client:build client:package
   env:
-    GRAALVM_HOME: ${{ env.JAVA_HOME }}</pre>
+    GRAALVM_HOME: ${{ env.JAVA_HOME }}
+```
+
 
 #### **Windows Native Application**
 
@@ -196,10 +208,13 @@ To build the Windows version of the application, Visual Studio is required, whic
 * [microsoft/setup-msbuild](https://github.com/microsoft/setup-msbuild): GitHub Action to facilitate configuring MSBuild in the workflow PATH for building .NET Framework applications.
 * [egor-tensin/vs-shell](https://github.com/egor-tensin/vs-shell): GitHub action to setup the Visual Studio shell environment.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">- name: Add msbuild to PATH
-  uses: microsoft/<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="a5d6c0d1d0d588c8d6c7d0ccc9c1e5d3948b958b97">[email&nbsp;protected]</a>
+```
+- name: Add msbuild to PATH
+  uses: microsoft/<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="a5d6c0d1d0d588c8d6c7d0ccc9c1e5d3948b958b97">[email protected]</a>
 - name: Visual Studio shell
-  uses: egor-tensin/vs-shell@v1</pre>
+  uses: egor-tensin/vs-shell@v1
+```
+
 
 The rest of the script is similar to the Linux one and at the end, we only copy the exe-file to the package.
 
@@ -211,8 +226,11 @@ Xcode is required to build Apple applications. Again we can add this to our step
 
 * [maxim-lobanov/setup-xcode](https://github.com/maxim-lobanov/setup-xcode): GitHub Action to setup your workflow with a specific version of Xcode.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">- uses: maxim-lobanov/setup-xcode@v1
-  with: xcode-version: '11.7.0'</pre>
+```
+- uses: maxim-lobanov/setup-xcode@v1
+  with: xcode-version: '11.7.0'
+```
+
 
 And the resulting file "target/client/x86_64-darwin/Resistor Calculator" is copied to the package.
 
@@ -271,13 +289,16 @@ Again we can use existing GitHub Actions to extend our previous "MacOS native" b
 
 By using these with our secret keys, all the required steps can be run inside a single GitHub action. For instance, the final step to upload the application to TestFlight:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">- uses: Apple-Actions/upload-testflight-build@master
+```
+- uses: Apple-Actions/upload-testflight-build@master
   if: ${{ github.repository_owner == 'gluonhq' }}
   with:
     app-path: target/client/arm64-ios/Resistor Calculator.ipa
     issuer-id: ${{ secrets.APPSTORE_ISSUER_ID }}
     api-key-id: ${{ secrets.APPSTORE_KEY_ID }}
-    api-private-key: ${{ secrets.APPSTORE_PRIVATE_KEY }}</pre>
+    api-private-key: ${{ secrets.APPSTORE_PRIVATE_KEY }}
+```
+
 
 #### **Android App (Linux Build)**
 
@@ -290,24 +311,30 @@ Actions used in this file (which is based on the previous "Linux native" file):
 
 The additional steps for Google Play include initialization of the Android Keystore:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">- name: Setup Android Keystore
+```
+- name: Setup Android Keystore
   if: ${{ github.repository_owner == 'gluonhq' }}
   id: android_keystore_file
   uses: timheuer/base64-to-file@v1
   with:
     fileName: 'my.keystore'
-    encodedString: ${{ secrets.GLUON_ANDROID_KEYSTORE_BASE64 }}</pre>
+    encodedString: ${{ secrets.GLUON_ANDROID_KEYSTORE_BASE64 }}
+```
+
 
 And finally, the upload is done with:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">- name: Upoad to Google Play
+```
+- name: Upoad to Google Play
   if: ${{ github.repository_owner == 'gluonhq' }}
   uses: r0adkll/upload-google-play@v1
   with:
     serviceAccountJsonPlainText: ${{ secrets.ANDROID_SERVICE_ACCOUNT_JSON }}
     packageName: be.webtechie.resistorcalculatorapp
     releaseFiles: target/client/aarch64-android/gvm/Resistor Calculator.apk
-    track: beta</pre>
+    track: beta
+```
+
 
 **Conclusion** {#h2-12-conclusion}
 ----------------------------------
@@ -318,6 +345,6 @@ Really not a single code change is needed to run on different platforms. As you 
 
 Gluon is also working on a sample using this work-flow, which is available on [github.com/gluonhq/hello-gluon-ci](https://github.com/gluonhq/hello-gluon-ci).
 
-*** ** * ** ***
+
 
 **Note:** Used with permission and thanks --- originally published on [webtechie.be](https://webtechie.be/post/2020-11-24-javafx-gluon-mobile-github-actions/).

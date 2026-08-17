@@ -49,7 +49,10 @@ If you want to learn more, the article [Java Meets Queryable Encryption: Develop
 
 Express was introduced as a new execution stage that optimizes the query path for simple use cases. If you are running a simple query that uses a single _id index, for example...
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">db.customer.find({_id: ObjectId('670ec6b005b98857588f5b6a')}).explain()</pre>
+```
+db.customer.find({_id: ObjectId('670ec6b005b98857588f5b6a')}).explain()
+```
+
 
 ...you will see that this new EXPRESS_IXSCAN stage has been included.  
 ![](Screenshot-2025-12-30-at-10.17.14-PM.png)
@@ -73,37 +76,46 @@ One such behavior is the reject: true setting. When applied, MongoDB will automa
 
 **Use case:** Imagine you're managing a database receiving queries from third-party applications. One application starts sending heavy queries that perform a collection scan (COLLSCAN), significantly slowing down the system---for example, a query like:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">db.pizzaOrders.find({price: 10})
+```
+db.pizzaOrders.find({price: 10})
 
 // Explain Plan
 "winningPlan": {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"stage": "COLLSCAN",
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"filter": {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"price": {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"$eq": 20
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;},
-&nbsp;&nbsp;&nbsp;},</pre>
+     "stage": "COLLSCAN",
+     "filter": {
+       "price": {
+         "$eq": 20
+       }
+     },
+   },
+```
+
 
 We can set a querySettings to reject queries that match this structure (independent of the values):
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">db.adminCommand( {&nbsp;&nbsp;
-&nbsp;setQuerySettings: {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;find: "pizzaOrders",
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;filter: {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;price: 20
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;},
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$db: "my_database"
-&nbsp;&nbsp;&nbsp;},
-&nbsp;&nbsp;&nbsp;settings: {&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;comment: "Will be rejected",
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;reject: true
-&nbsp;&nbsp;&nbsp;}
-} )</pre>
+```
+db.adminCommand( {  
+ setQuerySettings: {
+      find: "pizzaOrders",
+      filter: {
+         price: 20
+      },
+      $db: "my_database"
+   },
+   settings: {          
+      comment: "Will be rejected",
+      reject: true
+   }
+} )
+```
+
 
 This command sets a query shape where any query looking for price in the pizzaOrders collection will be rejected, regardless of the actual price value provided in the query. (The focus is entirely on the query's structure.) Therefore, if we execute a query that matches this structure...
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">db.pizzaOrders.find({price: 10})</pre>
+```
+db.pizzaOrders.find({price: 10})
+```
+
 
 ...the query will be automatically rejected by MongoDB:  
 ![](Screenshot-2025-12-30-at-10.18.43-PM.png)
@@ -112,39 +124,48 @@ This command sets a query shape where any query looking for price in the pizzaOr
 
 To see all query settings, you can use the $querySettings stage in an aggregation pipeline:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">db.aggregate( [
-&nbsp;&nbsp;&nbsp;{ $querySettings: {} }
-] )</pre>
+```
+db.aggregate( [
+   { $querySettings: {} }
+] )
+```
+
 
 Result:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">[&nbsp;
+```
+[ 
 {
-&nbsp;&nbsp;&nbsp;"queryShapeHash": "4DD2DED8A25C787DFA41325883052FABB97DDEE567B2636A3B188DDF0CCFE6F0",
-&nbsp;&nbsp;&nbsp;"settings": {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"reject": true,
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"comment": "Will be rejected"
-&nbsp;&nbsp;&nbsp;},
-&nbsp;&nbsp;&nbsp;"representativeQuery": {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"find": "pizzaOrders",
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"filter": {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"price": 20
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;},
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"$db": "my_database"
-&nbsp;&nbsp;&nbsp;}
-&nbsp;}
-]</pre>
+   "queryShapeHash": "4DD2DED8A25C787DFA41325883052FABB97DDEE567B2636A3B188DDF0CCFE6F0",
+   "settings": {
+     "reject": true,
+     "comment": "Will be rejected"
+   },
+   "representativeQuery": {
+     "find": "pizzaOrders",
+     "filter": {
+       "price": 20
+     },
+     "$db": "my_database"
+   }
+ }
+]
+```
+
 
 However, if you want to inspect query shapes---i.e., the different types of queries that have been executed---you have two options:
 
 1. Use**$queryStats** .
    * This aggregation stage provides statistics on queries run **since the last server restart**.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">use('admin');
+```
+use('admin');
 
 db.aggregate( [
 { $queryStats: {} }
-])</pre>
+])
+```
+
 
 2. 
 
@@ -157,11 +178,14 @@ This helps analyze query patterns and optimize performance.
 
 To remove, we can use the query shape hash:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">db.adminCommand(
-&nbsp;&nbsp;&nbsp;{
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;removeQuerySettings: '4DD2DED8A25C787DFA41325883052FABB97DDEE567B2636A3B188DDF0CCFE6F0'
-&nbsp;&nbsp;&nbsp;}
-)</pre>
+```
+db.adminCommand(
+   {
+       removeQuerySettings: '4DD2DED8A25C787DFA41325883052FABB97DDEE567B2636A3B188DDF0CCFE6F0'
+   }
+)
+```
+
 
 This approach is valuable as it ensures the database won't be affected by third-party queries that could cause high resource consumption, all without the need to make changes to the application.
 
@@ -172,11 +196,12 @@ Compatibility and deprecations {#h2-5-compatibility-and-deprecations}
 
 Before version 8.0, if you searched for values equal to null, fields with the value undefined would also be returned. However, in this new version, data stored as undefined will no longer be returned in queries with null equality---for example:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">// People collection
+```
+// People collection
 
 [
-&nbsp;&nbsp;&nbsp;{ _id: 1, name: null },
-&nbsp;&nbsp;&nbsp;{ _id: 2, name: undefined }
+   { _id: 1, name: null },
+   { _id: 2, name: undefined }
 ]
 
 // Given this collection, if you run the following query…
@@ -186,8 +211,10 @@ db.people.find({name: null})
 // result is...
 
 [
-&nbsp;&nbsp;&nbsp;{ _id: 1, name: null }
-]</pre>
+   { _id: 1, name: null }
+]
+```
+
 
 Data with undefined will no longer be returned. If your application contains data with undefined, you can rewrite or migrate undefined data and queries to account for this behavior change.
 

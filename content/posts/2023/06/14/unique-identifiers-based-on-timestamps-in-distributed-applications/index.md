@@ -37,7 +37,10 @@ We can therefore produce identifiers that are guaranteed unique, across up to 10
 
 For a hostId of 28, the generated timestamp would look like this:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">2021-12-28T14:07:02.954100128</pre>
+```
+2021-12-28T14:07:02.954100128
+```
+
 
 The last two digits represent the hostId, and the remainder represents the timestamp on that hostId as date/time/microseconds.
 
@@ -45,7 +48,10 @@ With this change, the resolution of the timestamp is now one-tenth of a microsec
 
 The hostId can be set as a system property by default on the command line with `-DhostId=xx`, or programmatically using:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">DistributedUniqueTimeProvider.instance().hostId(hostId)</pre>
+```
+DistributedUniqueTimeProvider.instance().hostId(hostId)
+```
+
 
 ### Generating Unique IDs in a Distributed System {#h3-1-generating-unique-ids-in-a-distributed-system}
 

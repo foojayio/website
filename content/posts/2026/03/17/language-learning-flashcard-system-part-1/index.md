@@ -54,13 +54,19 @@ Generate the project. It will download a file named srsapp.zip. Uncompress it. O
 
 Run the app from the command line interface (in the case of Linux / macOS) with:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">./mvnw spring-boot:run</pre>
+```
+./mvnw spring-boot:run
+```
+
 
 You need to have a Java SDK installed and available in your PATH.
 
 It will fail! You'll see an error like:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">com.mongodb.MongoSocketOpenException: Exception opening socket</pre>
+```
+com.mongodb.MongoSocketOpenException: Exception opening socket
+```
+
 
 This happens because Spring Boot is already trying to connect to MongoDB, as MongoDB is part of the starter dependencies, and we don't have yet a database. Let's fix this by creating a free MongoDB Atlas cluster. You need to [register for a free Atlas account](https://account.mongodb.com/account/register/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=spring-boot-foojay&utm_term=hugh.murray) and then follow the instructions on how to [Deploy a Free Cluster](https://www.mongodb.com/docs/atlas/tutorial/deploy-free-tier-cluster/). Select the Atlas UI, to create the cluster using your browser (you can also create a cluster using the command line and Atlas CLI).
 
@@ -71,54 +77,63 @@ Once we have that cluster created, we can [copy the connection string](https://w
 
 A MongoDB Connection String should look like:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">mongodb+srv://&lt;user&gt;:&lt;password&gt;@&lt;your-cluster&gt;.mongodb.net/</pre>
+```
+mongodb+srv://<user>:<password>@<your-cluster>.mongodb.net/
+```
+
 
 Where you need to put in your user and password.
 
 To avoid hardcoding secrets in our code, let's put our connection string in an environment variable called MONGODB_URI. Then, we'll read it in our src/main/resources/application.yaml file. The name of our database will be srsapp.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">spring:
+```
+spring:
 
-&nbsp;&nbsp;application:
+  application:
 
-&nbsp;&nbsp;&nbsp;&nbsp;name: srsapp
+    name: srsapp
 
-&nbsp;&nbsp;mongodb:
+  mongodb:
 
-&nbsp;&nbsp;&nbsp;&nbsp;base-uri: ${MONGODB_URI}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    base-uri: ${MONGODB_URI}      
 
-&nbsp;&nbsp;&nbsp;&nbsp;uri: ${spring.mongodb.base-uri}?appName=devrel-tutorial-java-spring-foojay
+    uri: ${spring.mongodb.base-uri}?appName=devrel-tutorial-java-spring-foojay
 
-&nbsp;&nbsp;&nbsp;&nbsp;database: srsapp</pre>
+    database: srsapp
+```
+
 
 We want to add an error message at the start of our app to warn about the missing URI. For that, we'll edit the main method in src/main/java/com/mongodb/nimongo/srsapp/SrsappApplication.java
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">// SrsappApplication.java
+```
+// SrsappApplication.java
 @SpringBootApplication
 public class SrsappApplication implements CommandLineRunner {
-&nbsp;&nbsp;&nbsp;&nbsp;private static final Logger log = LoggerFactory.getLogger(SrsappApplication.class);
-&nbsp;&nbsp;&nbsp;&nbsp;public static void main(String[] args) {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;String envUri = System.getenv("MONGODB_URI");
+    private static final Logger log = LoggerFactory.getLogger(SrsappApplication.class);
+    public static void main(String[] args) {
+        String envUri = System.getenv("MONGODB_URI");
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;try {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (envUri == null || envUri.isBlank()) {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;throw new IllegalArgumentException("Missing MongoDB URI");
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+        try {
+            if (envUri == null || envUri.isBlank()) {
+                throw new IllegalArgumentException("Missing MongoDB URI");
+            }
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SpringApplication.run(SrsappApplication.class, args);
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} catch (IllegalArgumentException e) {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;log.error(ErrorMessage.noDB);
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.exit(1);
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
-&nbsp;&nbsp;&nbsp;&nbsp;}
+            SpringApplication.run(SrsappApplication.class, args);
+        } catch (IllegalArgumentException e) {
+            log.error(ErrorMessage.noDB);
+            System.exit(1);
+        }
+    }
 
-&nbsp;&nbsp;&nbsp;&nbsp;@Override
-&nbsp;&nbsp;&nbsp;&nbsp;public void run(String... args) throws Exception {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;log.info("🚀 App Started");
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;String envUri = System.getenv("MONGODB_URI");
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;log.info("MongoDB URI from environment variable: {}", envUri);
-&nbsp;&nbsp;&nbsp;&nbsp;}
-}</pre>
+    @Override
+    public void run(String... args) throws Exception {
+        log.info("🚀 App Started");
+        String envUri = System.getenv("MONGODB_URI");
+        log.info("MongoDB URI from environment variable: {}", envUri);
+    }
+}
+```
+
 
 Several changes here:
 
@@ -127,35 +142,44 @@ Several changes here:
 
 This way, if we start the app from the command line without the MONGODB_URI environment variable defined, we'll get an error:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">./mvnw spring-boot:run
+```
+./mvnw spring-boot:run
 
-11:56:24.373 [main] ERROR com.mongodb.nimongo.srsapp.SrsappApplication --&nbsp;
+11:56:24.373 [main] ERROR com.mongodb.nimongo.srsapp.SrsappApplication -- 
 
-&nbsp;&nbsp;&nbsp;&nbsp;####### ######&nbsp; ######&nbsp; ####### ######
+    ####### ######  ######  ####### ######
 
-&nbsp;&nbsp;&nbsp;&nbsp;# &nbsp; &nbsp; &nbsp; # &nbsp; &nbsp; # # &nbsp; &nbsp; # # &nbsp; &nbsp; # # &nbsp; &nbsp; #
+    #       #     # #     # #     # #     #
 
-&nbsp;&nbsp;&nbsp;&nbsp;# &nbsp; &nbsp; &nbsp; # &nbsp; &nbsp; # # &nbsp; &nbsp; # # &nbsp; &nbsp; # # &nbsp; &nbsp; #
+    #       #     # #     # #     # #     #
 
-&nbsp;&nbsp;&nbsp;&nbsp;##### &nbsp; ######&nbsp; ######&nbsp; # &nbsp; &nbsp; # ######
+    #####   ######  ######  #     # ######
 
-&nbsp;&nbsp;&nbsp;&nbsp;# &nbsp; &nbsp; &nbsp; # &nbsp; # &nbsp; # &nbsp; # &nbsp; # &nbsp; &nbsp; # # &nbsp; #
+    #       #   #   #   #   #     # #   #
 
-&nbsp;&nbsp;&nbsp;&nbsp;# &nbsp; &nbsp; &nbsp; #&nbsp; &nbsp; #&nbsp; #&nbsp; &nbsp; #&nbsp; # &nbsp; &nbsp; # #&nbsp; &nbsp; #
+    #       #    #  #    #  #     # #    #
 
-&nbsp;&nbsp;&nbsp;&nbsp;####### # &nbsp; &nbsp; # # &nbsp; &nbsp; # ####### # &nbsp; &nbsp; #
+    ####### #     # #     # ####### #     #
 
-&nbsp;&nbsp;&nbsp;&nbsp;Missing database connection string!</pre>
+    Missing database connection string!
+```
+
 
 To fix this, set the environment variable before starting the app:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&nbsp;&nbsp;&nbsp;&nbsp;export MONGODB_URI="&lt;YOUR_CONNECTION_STRING&gt;"</pre>
+```
+    export MONGODB_URI="<YOUR_CONNECTION_STRING>"
+```
+
 
 Then run your application again.
 
 Finally, if we provide a URI, the app starts:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">MONGODB_URI=mongodb+srv://user:<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="3a4a5b49494d55485e7a43554f481759564f494e5f48145755545d555e5814545f4e">[email&nbsp;protected]</a>/srsapp ./mvnw spring-boot:run</pre>
+```
+MONGODB_URI=mongodb+srv://user:<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="3a4a5b49494d55485e7a43554f481759564f494e5f48145755545d555e5814545f4e">[email protected]</a>/srsapp ./mvnw spring-boot:run
+```
+
 
 And you should see in the log messages from org.mongodb.driver.client
 
@@ -173,17 +197,20 @@ To model our entities, we have several options. Let's reason through them and fi
 
 Option 1: Everything in one Collection. We can put Decks in one collection and define Cards as an array inside each Deck. This is one way to model a 1-to-many relationship, recommended when we know the maximum size of the n part. Would look like:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">{
-&nbsp;&nbsp;&nbsp;&nbsp;_id: 1,
-&nbsp;&nbsp;&nbsp;&nbsp;title: "Spanish Deck",
-&nbsp;&nbsp;&nbsp;&nbsp;cards: [
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;frontText: "Hola",
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;backText: "Hello"
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;},
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...
-&nbsp;&nbsp;&nbsp;&nbsp;]
-}</pre>
+```
+{
+    _id: 1,
+    title: "Spanish Deck",
+    cards: [
+        {
+            frontText: "Hola",
+            backText: "Hello"
+        },
+        ...
+    ]
+}
+```
+
 
 The main problem here is that we can keep adding cards to the same deck. For instance, the [Jōyō Kanji (常用漢字)](https://www.kanshudo.com/collections/joyo_kanji) is the "basic" set of kanji you're expected to learn, all 2136. That means an array of at least 2136 elements. Every single time you add, delete, or edit a Card, MongoDB reads the whole Deck in memory and saves it in one implicit transaction. This will slow down the system if many people were accessing the same Deck (not in this case), but the main problem here is the lack of boundaries. That array can grow without boundaries and hit the 16MB limit for BSON objects, in what is called the [Unbounded Array Antipattern](https://www.mongodb.com/docs/manual/data-modeling/design-antipatterns/unbounded-arrays/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=spring-boot-foojay&utm_term=hugh.murray)
 
@@ -196,43 +223,53 @@ We'll maintain a link between the Card and its Deck using the parentDeckId. It's
 
 Our Decks will look like:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">{
-&nbsp;&nbsp;&nbsp;&nbsp;_id: 1,
-&nbsp;&nbsp;&nbsp;&nbsp;title: "Spanish Deck",
-&nbsp;&nbsp;&nbsp;&nbsp;description: "A Deck to learn the Spanish Language"
-}</pre>
+```
+{
+    _id: 1,
+    title: "Spanish Deck",
+    description: "A Deck to learn the Spanish Language"
+}
+```
+
 
 And our Cards:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">{
-&nbsp;&nbsp;&nbsp;&nbsp;_id: 78,
-&nbsp;&nbsp;&nbsp;&nbsp;parentDeckId: 1,
-&nbsp;&nbsp;&nbsp;&nbsp;frontText: "Hola",
-&nbsp;&nbsp;&nbsp;&nbsp;backText: "Hello"
-}</pre>
+```
+{
+    _id: 78,
+    parentDeckId: 1,
+    frontText: "Hola",
+    backText: "Hello"
+}
+```
+
 
 ****Java Model Classes: Deck and FlashCard (Spring Boot Records)**** {#h2-5-java-model-classes-deck-and-flashcard-spring-boot-records}
 --------------------------------------------------------------------------------------------------------------------------------------
 
 Based on the previous schema, we'll have these two model classes:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">// Deck.java
+```
+// Deck.java
 package com.mongodb.nimongo.srsapp.model;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import com.fasterxml.jackson.annotation.JsonProperty;
 @Document(collection = "decks")
 public record Deck(
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@Id @JsonProperty("_id") String id,
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;String name,
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;String description) {
-}</pre>
+        @Id @JsonProperty("_id") String id,
+        String name,
+        String description) {
+}
+```
+
 
 As you can see, the collection name is decks, we have a String id field in Java, that will map to the _id field in the database.
 
 Our flash card model class FlashCard will be quite similar:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">// FlashCard.java
+```
+// FlashCard.java
 package com.mongodb.nimongo.srsapp.model;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -240,15 +277,17 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Document(collection = "cards")
 public record FlashCard(
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@Id @JsonProperty("_id") String id,
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;String frontText,
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;String backText,
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;String parentDeckId
+        @Id @JsonProperty("_id") String id,
+        String frontText,
+        String backText,
+        String parentDeckId
 ) {
-&nbsp;&nbsp;&nbsp;&nbsp;public FlashCard(String frontText, String backText, String parentDeckId) {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this(null, frontText, backText, parentDeckId);
-&nbsp;&nbsp;&nbsp;&nbsp;}
-}</pre>
+    public FlashCard(String frontText, String backText, String parentDeckId) {
+        this(null, frontText, backText, parentDeckId);
+    }
+}
+```
+
 
 We'll store everything in a cards collection, and use a parentDeckId as a link to the Deck this Card belongs.
 
@@ -259,13 +298,16 @@ Every single time we change something in our code, we need to stop the applicati
 
 Open your pom.xml file and add this dependency:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&lt;!-- Development Tools --&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;dependency&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;artifactId&gt;spring-boot-devtools&lt;/artifactId&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;scope&gt;runtime&lt;/scope&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;optional&gt;true&lt;/optional&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/dependency&gt;</pre>
+```
+<!-- Development Tools -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-devtools</artifactId>
+            <scope>runtime</scope>
+            <optional>true</optional>
+        </dependency>
+```
+
 
 Now, stop and relaunch the app for the last time, and from now on, every time you change anything in your code, your app will recompile and relaunch automagically.
 
@@ -313,20 +355,24 @@ We need several endpoints for our app.
 
 To test that our Spring Data API points work, we'll start by adding an empty Deck controller. Create a BaseController.java and DeckController.java file in web/controller like:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">// BaseController.java
+```
+// BaseController.java
 package com.mongodb.nimongo.srsapp.web.controller;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import com.mongodb.nimongo.srsapp.SrsappApplication;
 public abstract class BaseController {
-&nbsp;&nbsp;&nbsp;&nbsp;static final Logger log = LoggerFactory.getLogger(SrsappApplication.class);
-}</pre>
+    static final Logger log = LoggerFactory.getLogger(SrsappApplication.class);
+}
+```
+
 
 BaseController adds a Logger to our controllers.
 
 Now, our DeckController:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">// DeckController.java
+```
+// DeckController.java
 package com.mongodb.nimongo.srsapp.web.controller;
 import java.util.List;
 import java.util.Optional;
@@ -346,55 +392,57 @@ import com.mongodb.nimongo.srsapp.model.FlashCard;
 @RequestMapping("/decks")
 
 public class DeckController extends BaseController{
-&nbsp;&nbsp;&nbsp;&nbsp;@GetMapping
-&nbsp;&nbsp;&nbsp;&nbsp;public ResponseEntity&lt;List&lt;Deck&gt;&gt; getAllDecks(@RequestParam Optional&lt;Integer&gt; pageSize, @RequestParam Optional&lt;Integer&gt; pageNumber) {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;log.info("💻 Getting all decks with pageSize {} and pageNumber {}", pageSize, pageNumber);
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;List&lt;Deck&gt; emptyList = List.of();
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return new ResponseEntity&lt;&gt;(emptyList, HttpStatus.OK);
-&nbsp;&nbsp;&nbsp;&nbsp;}
+    @GetMapping
+    public ResponseEntity<List<Deck>> getAllDecks(@RequestParam Optional<Integer> pageSize, @RequestParam Optional<Integer> pageNumber) {
+        log.info("💻 Getting all decks with pageSize {} and pageNumber {}", pageSize, pageNumber);
+        List<Deck> emptyList = List.of();
+        return new ResponseEntity<>(emptyList, HttpStatus.OK);
+    }
 
-&nbsp;&nbsp;&nbsp;&nbsp;@GetMapping("/{id}")
-&nbsp;&nbsp;&nbsp;&nbsp;public ResponseEntity&lt;Optional&lt;Deck&gt;&gt; getDeck(@PathVariable String id) {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;log.info("💻 Getting deck with id {}", id);
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Optional&lt;Deck&gt; emptyDeck = Optional.empty();
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return new ResponseEntity&lt;&gt;(emptyDeck, HttpStatus.OK);
-&nbsp;&nbsp;&nbsp;&nbsp;}
+    @GetMapping("/{id}")
+    public ResponseEntity<Optional<Deck>> getDeck(@PathVariable String id) {
+        log.info("💻 Getting deck with id {}", id);
+        Optional<Deck> emptyDeck = Optional.empty();
+        return new ResponseEntity<>(emptyDeck, HttpStatus.OK);
+    }
 
-&nbsp;&nbsp;&nbsp;&nbsp;@GetMapping("/{id}/cards")
-&nbsp;&nbsp;&nbsp;&nbsp;public ResponseEntity&lt;List&lt;FlashCard&gt;&gt; getAllCardsInDeck(@RequestParam Optional&lt;Integer&gt; pageSize, @RequestParam Optional&lt;Integer&gt; pageNumber, @PathVariable String id) {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;int thePageSize = pageSize.orElse(10);
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;int thePageNumber = pageNumber.orElse(0);
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;log.info("💻 Getting all cards in deck with pageSize {} and pageNumber {} and deckId {}", thePageSize, thePageNumber, id);
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;List&lt;FlashCard&gt; emptyList = List.of();
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return new ResponseEntity&lt;&gt;(emptyList, HttpStatus.OK);
-&nbsp;&nbsp;&nbsp;&nbsp;}
+    @GetMapping("/{id}/cards")
+    public ResponseEntity<List<FlashCard>> getAllCardsInDeck(@RequestParam Optional<Integer> pageSize, @RequestParam Optional<Integer> pageNumber, @PathVariable String id) {
+        int thePageSize = pageSize.orElse(10);
+        int thePageNumber = pageNumber.orElse(0);
+        log.info("💻 Getting all cards in deck with pageSize {} and pageNumber {} and deckId {}", thePageSize, thePageNumber, id);
+        List<FlashCard> emptyList = List.of();
+        return new ResponseEntity<>(emptyList, HttpStatus.OK);
+    }
 
-&nbsp;&nbsp;&nbsp;&nbsp;@PostMapping
-&nbsp;&nbsp;&nbsp;&nbsp;public ResponseEntity&lt;Deck&gt; createDeck(@RequestBody Deck deck) {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;log.info("💻 Creating deck with name {}", deck.description());
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Deck emptyDeck = new Deck(null, deck.name(), deck.description());
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return new ResponseEntity&lt;&gt;(emptyDeck, HttpStatus.CREATED);
-&nbsp;&nbsp;&nbsp;&nbsp;}
+    @PostMapping
+    public ResponseEntity<Deck> createDeck(@RequestBody Deck deck) {
+        log.info("💻 Creating deck with name {}", deck.description());
+        Deck emptyDeck = new Deck(null, deck.name(), deck.description());
+        return new ResponseEntity<>(emptyDeck, HttpStatus.CREATED);
+    }
 
-&nbsp;&nbsp;&nbsp;&nbsp;@GetMapping("/search")
-&nbsp;&nbsp;&nbsp;&nbsp;public ResponseEntity&lt;List&lt;Deck&gt;&gt; searchDecks(@RequestParam Optional&lt;String&gt; term) {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;log.info("💻 Searching decks with term {}", term);
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;List&lt;Deck&gt; emptyList = List.of();
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return new ResponseEntity&lt;&gt;(emptyList, HttpStatus.OK);
-&nbsp;&nbsp;&nbsp;&nbsp;}
+    @GetMapping("/search")
+    public ResponseEntity<List<Deck>> searchDecks(@RequestParam Optional<String> term) {
+        log.info("💻 Searching decks with term {}", term);
+        List<Deck> emptyList = List.of();
+        return new ResponseEntity<>(emptyList, HttpStatus.OK);
+    }
 
-&nbsp;&nbsp;&nbsp;@DeleteMapping("/{id}")
-&nbsp;&nbsp;&nbsp;public ResponseEntity&lt;Void&gt; deleteDeck(@PathVariable String id) {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;log.info("💻 Deleting deck with id {}", id);
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return new ResponseEntity&lt;&gt;(HttpStatus.NO_CONTENT);
-&nbsp;&nbsp;&nbsp;}
+   @DeleteMapping("/{id}")
+   public ResponseEntity<Void> deleteDeck(@PathVariable String id) {
+        log.info("💻 Deleting deck with id {}", id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+   }
 
-&nbsp;&nbsp;&nbsp;@DeleteMapping("/{id}/cards")
-&nbsp;&nbsp;&nbsp;public ResponseEntity&lt;Void&gt; deleteCardsInDeck(@PathVariable String id) {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;log.info("💻 Deleting all cards in deck with id {}", id);
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return new ResponseEntity&lt;&gt;(HttpStatus.NO_CONTENT);
-&nbsp;&nbsp;&nbsp;}
-}</pre>
+   @DeleteMapping("/{id}/cards")
+   public ResponseEntity<Void> deleteCardsInDeck(@PathVariable String id) {
+        log.info("💻 Deleting all cards in deck with id {}", id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+   }
+}
+```
+
 
 If you look at the code, you'll see that we are just returning empty responses. We want to call these endpoints and make sure the web part is working properly.
 
@@ -403,23 +451,26 @@ If you look at the code, you'll see that we are just returning empty responses. 
 
 Then, we'll change the default port (8080) to 5400 and add some options to improve the debugging logs. Open application.yml and change it to:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">spring:
-&nbsp;&nbsp;application:
-&nbsp;&nbsp;&nbsp;&nbsp;name: srsapp
-&nbsp;&nbsp;mongodb:
-&nbsp;&nbsp;&nbsp;&nbsp;uri: ${MONGODB_URI}
-&nbsp;&nbsp;&nbsp;&nbsp;database: srsapp
-&nbsp;&nbsp;mvc:
-&nbsp;&nbsp;&nbsp;&nbsp;log-request-details: true
+```
+spring:
+  application:
+    name: srsapp
+  mongodb:
+    uri: ${MONGODB_URI}
+    database: srsapp
+  mvc:
+    log-request-details: true
 server:
-&nbsp;&nbsp;port: 5400
+  port: 5400
 logging:
-&nbsp;&nbsp;level:
-&nbsp;&nbsp;&nbsp;&nbsp;org:
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;springframework:
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;web: DEBUG
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;data:
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;mongodb: DEBUG</pre>
+  level:
+    org:
+      springframework:
+        web: DEBUG
+        data:
+          mongodb: DEBUG
+```
+
 
 ****Test Spring Boot REST APIs with cURL Commands**** {#h2-12-test-spring-boot-rest-apis-with-curl-commands}
 ------------------------------------------------------------------------------------------------------------
@@ -428,34 +479,43 @@ To test our endpoints, we will use cURL, available in Linux/macOS and Windows.
 
 If you copy and paste these in a terminal, you'll be able to query for all Decks:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">## GET decks
+```
+## GET decks
 
 curl "http://localhost:5400/decks"
 
 ## GET decks paginated
 
-curl "http://localhost:5400/decks?pageSize=2&amp;pageNumber=0"</pre>
+curl "http://localhost:5400/decks?pageSize=2&pageNumber=0"
+```
+
 
 To insert a new Deck:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">## POST deck
+```
+## POST deck
 
 curl -X "POST" "http://localhost:5400/decks" \
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-H 'Content-Type: application/json; charset=utf-8' \
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-d $'{
-&nbsp;&nbsp;"name": "Test new Deck",
-&nbsp;&nbsp;"description": "Test new Deck description"
-}'</pre>
+     -H 'Content-Type: application/json; charset=utf-8' \
+     -d $'{
+  "name": "Test new Deck",
+  "description": "Test new Deck description"
+}'
+```
+
 
 For search and delete:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">## DELETE deck
+```
+## DELETE deck
 
-curl -X "DELETE" "http://localhost:5400/decks/&lt;deck id&gt;"
+curl -X "DELETE" "http://localhost:5400/decks/<deck id>"
 
 ## Search decks
 
-curl "http://localhost:5400/decks/search?term=lang"</pre>
+curl "http://localhost:5400/decks/search?term=lang"
+```
+
 
 But wait! All this is just working with the placeholder DeckController that is not storing or retrieving anything from a database! Let's fix this by adding our MongoDB code for Decks!
 
@@ -466,7 +526,8 @@ To access MongoDB, we will create an interface DeckRepository that extends Mongo
 
 Create DeckRepository inside the repository folder:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">// DeckRepository
+```
+// DeckRepository
 
 package com.mongodb.nimongo.srsapp.repository;
 import java.util.List;
@@ -478,30 +539,33 @@ import org.springframework.stereotype.Repository;
 import com.mongodb.nimongo.srsapp.model.Deck;
 
 /**
-&nbsp;* Repository interface for Deck persistence operations.
-&nbsp;* Extends Spring Data's {@link MongoRepository} to provide CRUD and
-&nbsp;* paging support and declares additional query methods used by the service
-&nbsp;* layer.
-&nbsp;*/
+ * Repository interface for Deck persistence operations.
+ * Extends Spring Data's {@link MongoRepository} to provide CRUD and
+ * paging support and declares additional query methods used by the service
+ * layer.
+ */
 
 @Repository
-public interface DeckRepository extends MongoRepository&lt;Deck, String&gt; {
-&nbsp;&nbsp;&nbsp;&nbsp;/**
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* Search decks by name or description, using a RegExp
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* @param searchText - text to search, case insensitive
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* @param pageable &nbsp; - to paginate responses
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* @return a List of {@link Deck} that matches the searchText
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/
-&nbsp;&nbsp;&nbsp;&nbsp;@Query("{$or:[ {name: {$regex: ?0, $options: 'i'}}, {description: {$regex: ?0, $options: 'i'}} ] }")
-&nbsp;&nbsp;&nbsp;&nbsp;List&lt;Deck&gt; searchByText(String searchText, Pageable pageable);
-}</pre>
+public interface DeckRepository extends MongoRepository<Deck, String> {
+    /**
+     * Search decks by name or description, using a RegExp
+     * 
+     * @param searchText - text to search, case insensitive
+     * @param pageable   - to paginate responses
+     * @return a List of {@link Deck} that matches the searchText
+     */
+    @Query("{$or:[ {name: {$regex: ?0, $options: 'i'}}, {description: {$regex: ?0, $options: 'i'}} ] }")
+    List<Deck> searchByText(String searchText, Pageable pageable);
+}
+```
+
 
 As you can see, we have added one new method: searchByText that it's using a regular expression to search for some text (denoted by ?0 inside name or description. We pass in the i option to perform a case-insensitive comparison. Using regular expressions is not the best way to search for text in MongoDB; generally is better to use [Full Text Search](https://www.mongodb.com/resources/basics/full-text-search), defining a Search Index and using $search.
 
 While we're at it we'll also create CardRepository
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">// CardRepository
+```
+// CardRepository
 
 package com.mongodb.nimongo.srsapp.repository;
 import java.util.List;
@@ -516,84 +580,99 @@ import org.springframework.stereotype.Repository;
 import com.mongodb.nimongo.srsapp.model.FlashCard;
 
 /**
-&nbsp;* Repository interface for FlashCard persistence operations.
-&nbsp;* Extends Spring Data's {@link MongoRepository} to provide CRUD and
-&nbsp;* paging support and declares additional query methods used by the service
-&nbsp;* layer.
-&nbsp;*/
+ * Repository interface for FlashCard persistence operations.
+ * Extends Spring Data's {@link MongoRepository} to provide CRUD and
+ * paging support and declares additional query methods used by the service
+ * layer.
+ */
 
 @Repository
-public interface CardRepository extends MongoRepository&lt;FlashCard, String&gt; {
-&nbsp;&nbsp;&nbsp;&nbsp;/**
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* Search cards by frontText or backText, using a RegExp
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* @param searchText - text to search, case insensitive
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* @param pageable &nbsp; - to paginate responses
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* @return a List of {@link FlashCard} that matches the searchText
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/
+public interface CardRepository extends MongoRepository<FlashCard, String> {
+    /**
+     * Search cards by frontText or backText, using a RegExp
+     * 
+     * @param searchText - text to search, case insensitive
+     * @param pageable   - to paginate responses
+     * @return a List of {@link FlashCard} that matches the searchText
+     */
 
-&nbsp;&nbsp;&nbsp;&nbsp;@Query("{$or:[ {frontText: {$regex: ?0, $options: 'i'}}, {backText: {$regex: ?0, $options: 'i'}} ] }")
-&nbsp;&nbsp;&nbsp;&nbsp;List&lt;FlashCard&gt; searchByText(String searchText, Pageable pageable);
-&nbsp;&nbsp;&nbsp;&nbsp;/**
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* Return a page of flash cards that belong to the given parent deck id.
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* @param deckId&nbsp; the parent deck identifier
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* @param request the PageRequest containing paging parameters
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* @return a Page of FlashCard objects
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/
+    @Query("{$or:[ {frontText: {$regex: ?0, $options: 'i'}}, {backText: {$regex: ?0, $options: 'i'}} ] }")
+    List<FlashCard> searchByText(String searchText, Pageable pageable);
+    /**
+     * Return a page of flash cards that belong to the given parent deck id.
+     *
+     * @param deckId  the parent deck identifier
+     * @param request the PageRequest containing paging parameters
+     * @return a Page of FlashCard objects
+     */
 
-&nbsp;&nbsp;&nbsp;&nbsp;Page&lt;FlashCard&gt; findAllByParentDeckId(String deckId, PageRequest request);
-&nbsp;&nbsp;&nbsp;&nbsp;/**
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* Delete all flash cards that belong to the given parent deck id.
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* @param deckId the parent deck identifier whose cards should be removed
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/
-&nbsp;&nbsp;&nbsp;&nbsp;@DeleteQuery("{parentDeckId: ?0}")
-&nbsp;&nbsp;&nbsp;&nbsp;void deleteAllByParentDeckId(String deckId);
-}</pre>
+    Page<FlashCard> findAllByParentDeckId(String deckId, PageRequest request);
+    /**
+     * Delete all flash cards that belong to the given parent deck id.
+     *
+     * @param deckId the parent deck identifier whose cards should be removed
+     */
+    @DeleteQuery("{parentDeckId: ?0}")
+    void deleteAllByParentDeckId(String deckId);
+}
+```
+
 
 ****Implementing Business Logic with Spring Boot Services**** {#h2-14-implementing-business-logic-with-spring-boot-services}
 ----------------------------------------------------------------------------------------------------------------------------
 
 Services is where we actually use the database code. Our services will interact with the database, sending the queries, inserts, updates, etc., and will expose a set of business-level operations consumed by our web controllers. Go ahead and create DeckService.java in the new folder service. Here, we will use DeckRepository and CardRepository to access the database. For instance, to get a Deck by its identifier, we'll use findById, which is part of CrudRepository and in this case will be implemented by our MongoDB driver.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@Service
+```
+@Service
 
 public class DeckService {
-&nbsp;&nbsp;&nbsp;&nbsp;private final DeckRepository deckRepository;
-&nbsp;&nbsp;&nbsp;&nbsp;private final CardRepository cardRepository;
-&nbsp;&nbsp;&nbsp;&nbsp;DeckService(DeckRepository deckRepository, CardRepository cardRepository) {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this.deckRepository = deckRepository;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this.cardRepository = cardRepository;
-&nbsp;&nbsp;&nbsp;&nbsp;}
+    private final DeckRepository deckRepository;
+    private final CardRepository cardRepository;
+    DeckService(DeckRepository deckRepository, CardRepository cardRepository) {
+        this.deckRepository = deckRepository;
+        this.cardRepository = cardRepository;
+    }
 
-&nbsp;&nbsp;&nbsp;&nbsp;public Optional&lt;Deck&gt; deckById(String id) {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return deckRepository.findById(id);
-&nbsp;&nbsp;&nbsp;&nbsp;}
-&nbsp;&nbsp;&nbsp;&nbsp;// more code for other methods.
-}</pre>
+    public Optional<Deck> deckById(String id) {
+        return deckRepository.findById(id);
+    }
+    // more code for other methods.
+}
+```
+
 
 To add a Deck, we'll use save:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public Deck createDeck(Deck deck) {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return deckRepository.save(deck);
-&nbsp;&nbsp;&nbsp;&nbsp;}</pre>
+```
+public Deck createDeck(Deck deck) {
+        return deckRepository.save(deck);
+    }
+```
+
 
 Then, to delete:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public void deleteDeck(String id) {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;deckRepository.deleteById(id);
-&nbsp;&nbsp;&nbsp;&nbsp;}</pre>
+```
+public void deleteDeck(String id) {
+        deckRepository.deleteById(id);
+    }
+```
+
 
 If we need to delete all the cards in a Deck, we'll use deleteAllByParentDeckId from CardRepository:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public void deleteCardsInDeck(String id) {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cardRepository.deleteAllByParentDeckId(id);
-&nbsp;&nbsp;&nbsp;&nbsp;}</pre>
+```
+public void deleteCardsInDeck(String id) {
+        cardRepository.deleteAllByParentDeckId(id);
+    }
+```
+
 
 The final DeckService will look like:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">// DeckService.java
+```
+// DeckService.java
 
 package com.mongodb.nimongo.srsapp.service;
 import java.util.List;
@@ -608,100 +687,103 @@ import com.mongodb.nimongo.srsapp.repository.CardRepository;
 import com.mongodb.nimongo.srsapp.repository.DeckRepository;
 
 /**
-&nbsp;* Service class to handle business logic related to Decks and their associated
-&nbsp;* FlashCards.
-&nbsp;* This class interacts with the DeckRepository and CardRepository to perform
-&nbsp;* operations such as creating, retrieving, searching, and deleting decks and
-&nbsp;* their cards.
-&nbsp;*/
+ * Service class to handle business logic related to Decks and their associated
+ * FlashCards.
+ * This class interacts with the DeckRepository and CardRepository to perform
+ * operations such as creating, retrieving, searching, and deleting decks and
+ * their cards.
+ */
 
 @Service
 public class DeckService {
-&nbsp;&nbsp;&nbsp;&nbsp;private final DeckRepository deckRepository;
-&nbsp;&nbsp;&nbsp;&nbsp;private final CardRepository cardRepository;
-&nbsp;&nbsp;&nbsp;&nbsp;DeckService(DeckRepository deckRepository, CardRepository cardRepository) {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this.deckRepository = deckRepository;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this.cardRepository = cardRepository;
-&nbsp;&nbsp;&nbsp;&nbsp;}
+    private final DeckRepository deckRepository;
+    private final CardRepository cardRepository;
+    DeckService(DeckRepository deckRepository, CardRepository cardRepository) {
+        this.deckRepository = deckRepository;
+        this.cardRepository = cardRepository;
+    }
 
-&nbsp;&nbsp;&nbsp;&nbsp;/**
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* Retrieve a deck by its identifier.
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* @param id the deck identifier
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* @return an Optional containing the Deck if found, otherwise empty
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/
-&nbsp;&nbsp;&nbsp;&nbsp;public Optional&lt;Deck&gt; deckById(String id) {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return deckRepository.findById(id);
-&nbsp;&nbsp;&nbsp;&nbsp;}
+    /**
+     * Retrieve a deck by its identifier.
+     *
+     * @param id the deck identifier
+     * @return an Optional containing the Deck if found, otherwise empty
+     */
+    public Optional<Deck> deckById(String id) {
+        return deckRepository.findById(id);
+    }
 
-&nbsp;&nbsp;&nbsp;&nbsp;/**
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* Return a page of decks.
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* @param limit maximum number of decks per page
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* @param skip&nbsp; zero-based page index
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* @return a Page containing Deck objects for the requested page
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/
-&nbsp;&nbsp;&nbsp;&nbsp;public Page&lt;Deck&gt; findAllDecks(Integer limit, Integer skip) {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PageRequest request = PageRequest.of(skip, limit, Sort.unsorted());
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return deckRepository.findAll(request);
-&nbsp;&nbsp;&nbsp;&nbsp;}
+    /**
+     * Return a page of decks.
+     *
+     * @param limit maximum number of decks per page
+     * @param skip  zero-based page index
+     * @return a Page containing Deck objects for the requested page
+     */
+    public Page<Deck> findAllDecks(Integer limit, Integer skip) {
+        PageRequest request = PageRequest.of(skip, limit, Sort.unsorted());
+        return deckRepository.findAll(request);
+    }
 
-&nbsp;&nbsp;&nbsp;&nbsp;/**
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* Return a page of flash cards that belong to a given deck.
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* @param deckId the parent deck identifier
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* @param limit&nbsp; maximum number of cards per page
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* @param skip &nbsp; zero-based page index
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* @return a Page containing FlashCard objects for the requested page
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/
-&nbsp;&nbsp;&nbsp;&nbsp;public Page&lt;FlashCard&gt; allCardsInDeck(String deckId, Integer limit, Integer skip) {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PageRequest request = PageRequest.of(skip, limit, Sort.unsorted());
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return cardRepository.findAllByParentDeckId(deckId, request);
-&nbsp;&nbsp;&nbsp;&nbsp;}
+    /**
+     * Return a page of flash cards that belong to a given deck.
+     *
+     * @param deckId the parent deck identifier
+     * @param limit  maximum number of cards per page
+     * @param skip   zero-based page index
+     * @return a Page containing FlashCard objects for the requested page
+     */
+    public Page<FlashCard> allCardsInDeck(String deckId, Integer limit, Integer skip) {
+        PageRequest request = PageRequest.of(skip, limit, Sort.unsorted());
+        return cardRepository.findAllByParentDeckId(deckId, request);
+    }
 
-&nbsp;&nbsp;&nbsp;&nbsp;/**
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* Search decks using a free-text term.
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* @param theTerm the search term to match against deck text fields
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* @return a list of Decks matching the search term (limited to first page)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/
-&nbsp;&nbsp;&nbsp;&nbsp;public List&lt;Deck&gt; searchDecks(String theTerm) {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PageRequest request = PageRequest.of(0, 10, Sort.unsorted());
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return deckRepository.searchByText(theTerm, request);
-&nbsp;&nbsp;&nbsp;&nbsp;}
+    /**
+     * Search decks using a free-text term.
+     *
+     * @param theTerm the search term to match against deck text fields
+     * @return a list of Decks matching the search term (limited to first page)
+     */
+    public List<Deck> searchDecks(String theTerm) {
+        PageRequest request = PageRequest.of(0, 10, Sort.unsorted());
+        return deckRepository.searchByText(theTerm, request);
+    }
 
-&nbsp;&nbsp;&nbsp;&nbsp;/**
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* Create or update a deck.
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* @param deck the Deck to persist
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* @return the saved Deck instance
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/
-&nbsp;&nbsp;&nbsp;&nbsp;public Deck createDeck(Deck deck) {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return deckRepository.save(deck);
-&nbsp;&nbsp;&nbsp;&nbsp;}
+    /**
+     * Create or update a deck.
+     *
+     * @param deck the Deck to persist
+     * @return the saved Deck instance
+     */
+    public Deck createDeck(Deck deck) {
+        return deckRepository.save(deck);
+    }
 
-&nbsp;&nbsp;&nbsp;&nbsp;/**
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* Delete a deck by its identifier.
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* @param id the deck identifier to delete
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/
-&nbsp;&nbsp;&nbsp;&nbsp;public void deleteDeck(String id) {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;deckRepository.deleteById(id);
-&nbsp;&nbsp;&nbsp;&nbsp;}
+    /**
+     * Delete a deck by its identifier.
+     *
+     * @param id the deck identifier to delete
+     */
+    public void deleteDeck(String id) {
+        deckRepository.deleteById(id);
+    }
 
-&nbsp;&nbsp;&nbsp;&nbsp;/**
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* Delete all flash cards associated with a given deck.
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* @param id the parent deck identifier whose cards should be removed
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/
-&nbsp;&nbsp;&nbsp;&nbsp;public void deleteCardsInDeck(String id) {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cardRepository.deleteAllByParentDeckId(id);
-&nbsp;&nbsp;&nbsp;&nbsp;}
-}</pre>
+    /**
+     * Delete all flash cards associated with a given deck.
+     *
+     * @param id the parent deck identifier whose cards should be removed
+     */
+    public void deleteCardsInDeck(String id) {
+        cardRepository.deleteAllByParentDeckId(id);
+    }
+}
+```
+
 
 For Cards, we'll use CardRepository in a similar way:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">// CardService.java
+```
+// CardService.java
 
 package com.mongodb.nimongo.srsapp.service;
 import java.util.List;
@@ -715,63 +797,65 @@ import com.mongodb.nimongo.srsapp.repository.CardRepository;
 
 @Service
 public class CardService {
-&nbsp;&nbsp;&nbsp;&nbsp;private final CardRepository cardRepository;
-&nbsp;&nbsp;&nbsp;&nbsp;CardService(CardRepository cardRepository) {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this.cardRepository = cardRepository;
-&nbsp;&nbsp;&nbsp;&nbsp;}
+    private final CardRepository cardRepository;
+    CardService(CardRepository cardRepository) {
+        this.cardRepository = cardRepository;
+    }
 
-&nbsp;&nbsp;&nbsp;&nbsp;/**
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* Retrieve a flash card by its identifier.
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* @param id the flash card identifier
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* @return an Optional containing the FlashCard if found, otherwise empty
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/
-&nbsp;&nbsp;&nbsp;&nbsp;public Optional&lt;FlashCard&gt; cardById(String id) {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return cardRepository.findById(id);
-&nbsp;&nbsp;&nbsp;&nbsp;}
+    /**
+     * Retrieve a flash card by its identifier.
+     *
+     * @param id the flash card identifier
+     * @return an Optional containing the FlashCard if found, otherwise empty
+     */
+    public Optional<FlashCard> cardById(String id) {
+        return cardRepository.findById(id);
+    }
 
-&nbsp;&nbsp;&nbsp;&nbsp;/**
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* Return a page of flash cards.
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* @param limit maximum number of cards per page
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* @param skip&nbsp; zero-based page index
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* @return a Page containing FlashCard objects for the requested page
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/
-&nbsp;&nbsp;&nbsp;&nbsp;public Page&lt;FlashCard&gt; findAllCards(Integer limit, Integer skip) {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PageRequest request = PageRequest.of(skip, limit, Sort.unsorted());
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return cardRepository.findAll(request);
-&nbsp;&nbsp;&nbsp;&nbsp;}
+    /**
+     * Return a page of flash cards.
+     *
+     * @param limit maximum number of cards per page
+     * @param skip  zero-based page index
+     * @return a Page containing FlashCard objects for the requested page
+     */
+    public Page<FlashCard> findAllCards(Integer limit, Integer skip) {
+        PageRequest request = PageRequest.of(skip, limit, Sort.unsorted());
+        return cardRepository.findAll(request);
+    }
 
-&nbsp;&nbsp;&nbsp;&nbsp;/**
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* Search flash cards using a free-text term.
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* @param theTerm the search term to match against card text fields
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* @return a list of FlashCards matching the search term (limited to first page)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/
-&nbsp;&nbsp;&nbsp;&nbsp;public List&lt;FlashCard&gt; searchCards(String theTerm) {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PageRequest request = PageRequest.of(0, 10, Sort.unsorted());
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return cardRepository.searchByText(theTerm, request);
-&nbsp;&nbsp;&nbsp;&nbsp;}
+    /**
+     * Search flash cards using a free-text term.
+     *
+     * @param theTerm the search term to match against card text fields
+     * @return a list of FlashCards matching the search term (limited to first page)
+     */
+    public List<FlashCard> searchCards(String theTerm) {
+        PageRequest request = PageRequest.of(0, 10, Sort.unsorted());
+        return cardRepository.searchByText(theTerm, request);
+    }
 
-&nbsp;&nbsp;&nbsp;&nbsp;/**
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* Create or update a flash card.
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* @param card the FlashCard to persist
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* @return the saved FlashCard instance
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/
-&nbsp;&nbsp;&nbsp;&nbsp;public FlashCard createCard(FlashCard card) {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return cardRepository.save(card);
-&nbsp;&nbsp;&nbsp;&nbsp;}
+    /**
+     * Create or update a flash card.
+     *
+     * @param card the FlashCard to persist
+     * @return the saved FlashCard instance
+     */
+    public FlashCard createCard(FlashCard card) {
+        return cardRepository.save(card);
+    }
 
-&nbsp;&nbsp;&nbsp;&nbsp;/**
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* Delete a flash card by its identifier.
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* @param id the flash card identifier to delete
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/
-&nbsp;&nbsp;&nbsp;&nbsp;public void deleteCard(String id) {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cardRepository.deleteById(id);
-&nbsp;&nbsp;&nbsp;&nbsp;}
-}</pre>
+    /**
+     * Delete a flash card by its identifier.
+     *
+     * @param id the flash card identifier to delete
+     */
+    public void deleteCard(String id) {
+        cardRepository.deleteById(id);
+    }
+}
+```
+
 
 ****Connecting Controllers to Database: DeckController Implementation**** {#h2-15-connecting-controllers-to-database-deckcontroller-implementation}
 ---------------------------------------------------------------------------------------------------------------------------------------------------
@@ -782,15 +866,19 @@ To do that, we'll add a DeckService in DeckController and will call the methods 
 
 For instance, to get one Deck, we'll use deckById from deckService:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@GetMapping("/{id}")
-&nbsp;&nbsp;&nbsp;&nbsp;public ResponseEntity&lt;Optional&lt;Deck&gt;&gt; getDeck(@PathVariable String id) {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;log.info("💻 Getting deck with id {}", id);
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return new ResponseEntity&lt;&gt;(deckService.deckById(id), HttpStatus.OK);
-&nbsp;&nbsp;&nbsp;&nbsp;}</pre>
+```
+@GetMapping("/{id}")
+    public ResponseEntity<Optional<Deck>> getDeck(@PathVariable String id) {
+        log.info("💻 Getting deck with id {}", id);
+        return new ResponseEntity<>(deckService.deckById(id), HttpStatus.OK);
+    }
+```
+
 
 The complete, updated listing for DeckController:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">package com.mongodb.nimongo.srsapp.web.controller; 
+```
+package com.mongodb.nimongo.srsapp.web.controller; 
 
 import static com.mongodb.nimongo.srsapp.web.controller.Constants.DEFAULT_PAGE_NUMBER;
 import static com.mongodb.nimongo.srsapp.web.controller.Constants.DEFAULT_PAGE_SIZE;
@@ -814,67 +902,70 @@ import com.mongodb.nimongo.srsapp.service.DeckService;
 @RestController
 @RequestMapping("/decks")
 public class DeckController extends BaseController{
-&nbsp;&nbsp;&nbsp;&nbsp;private final DeckService deckService;
-&nbsp;&nbsp;&nbsp;&nbsp;DeckController(DeckService deckService) {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this.deckService = deckService;
-&nbsp;&nbsp;&nbsp;&nbsp;}
+    private final DeckService deckService;
+    DeckController(DeckService deckService) {
+        this.deckService = deckService;
+    }
 
-&nbsp;&nbsp;&nbsp;&nbsp;@GetMapping
-&nbsp;&nbsp;&nbsp;&nbsp;public ResponseEntity&lt;List&lt;Deck&gt;&gt; getAllDecks(@RequestParam Optional&lt;Integer&gt; pageSize, @RequestParam Optional&lt;Integer&gt; pageNumber) {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Integer thePageSize = pageSize.orElse(DEFAULT_PAGE_SIZE);
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Integer thePageNumber = pageNumber.orElse(DEFAULT_PAGE_NUMBER);
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;log.info("💻 Getting all decks with pageSize {} and pageNumber {}", thePageSize, thePageNumber);
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Page&lt;Deck&gt; deckPage = deckService.findAllDecks(thePageSize, thePageNumber);
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return new ResponseEntity&lt;&gt;(deckPage.getContent(), HttpStatus.OK);
-&nbsp;&nbsp;&nbsp;&nbsp;}
+    @GetMapping
+    public ResponseEntity<List<Deck>> getAllDecks(@RequestParam Optional<Integer> pageSize, @RequestParam Optional<Integer> pageNumber) {
+        Integer thePageSize = pageSize.orElse(DEFAULT_PAGE_SIZE);
+        Integer thePageNumber = pageNumber.orElse(DEFAULT_PAGE_NUMBER);
+        log.info("💻 Getting all decks with pageSize {} and pageNumber {}", thePageSize, thePageNumber);
+        Page<Deck> deckPage = deckService.findAllDecks(thePageSize, thePageNumber);
+        return new ResponseEntity<>(deckPage.getContent(), HttpStatus.OK);
+    }
 
-&nbsp;&nbsp;&nbsp;&nbsp;@GetMapping("/{id}")
-&nbsp;&nbsp;&nbsp;&nbsp;public ResponseEntity&lt;Optional&lt;Deck&gt;&gt; getDeck(@PathVariable String id) {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;log.info("💻 Getting deck with id {}", id);
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return new ResponseEntity&lt;&gt;(deckService.deckById(id), HttpStatus.OK);
-&nbsp;&nbsp;&nbsp;&nbsp;}
+    @GetMapping("/{id}")
+    public ResponseEntity<Optional<Deck>> getDeck(@PathVariable String id) {
+        log.info("💻 Getting deck with id {}", id);
+        return new ResponseEntity<>(deckService.deckById(id), HttpStatus.OK);
+    }
 
-&nbsp;&nbsp;&nbsp;&nbsp;@GetMapping("/{id}/cards")
-&nbsp;&nbsp;&nbsp;&nbsp;public ResponseEntity&lt;List&lt;FlashCard&gt;&gt; getAllCardsInDeck(@RequestParam Optional&lt;Integer&gt; pageSize, @RequestParam Optional&lt;Integer&gt; pageNumber, @PathVariable String id) {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Integer thePageSize = pageSize.orElse(DEFAULT_PAGE_SIZE);
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Integer thePageNumber = pageNumber.orElse(DEFAULT_PAGE_NUMBER);
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;log.info("💻 Getting all cards in deck with pageSize {} and pageNumber {} and deckId {}", thePageSize, thePageNumber, id);
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Page&lt;FlashCard&gt; cardPage = deckService.allCardsInDeck(id, thePageSize, thePageNumber);
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return new ResponseEntity&lt;&gt;(cardPage.getContent(), HttpStatus.OK);
-&nbsp;&nbsp;&nbsp;&nbsp;}
+    @GetMapping("/{id}/cards")
+    public ResponseEntity<List<FlashCard>> getAllCardsInDeck(@RequestParam Optional<Integer> pageSize, @RequestParam Optional<Integer> pageNumber, @PathVariable String id) {
+        Integer thePageSize = pageSize.orElse(DEFAULT_PAGE_SIZE);
+        Integer thePageNumber = pageNumber.orElse(DEFAULT_PAGE_NUMBER);
+        log.info("💻 Getting all cards in deck with pageSize {} and pageNumber {} and deckId {}", thePageSize, thePageNumber, id);
+        Page<FlashCard> cardPage = deckService.allCardsInDeck(id, thePageSize, thePageNumber);
+        return new ResponseEntity<>(cardPage.getContent(), HttpStatus.OK);
+    }
 
-&nbsp;&nbsp;&nbsp;&nbsp;@PostMapping
-&nbsp;&nbsp;&nbsp;&nbsp;public ResponseEntity&lt;Deck&gt; createDeck(@RequestBody Deck deck) {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;log.info("💻 Creating deck with name {}", deck.description());
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Deck createdDeck = deckService.createDeck(deck);
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return new ResponseEntity&lt;&gt;(createdDeck, HttpStatus.CREATED);
-&nbsp;&nbsp;&nbsp;&nbsp;}
+    @PostMapping
+    public ResponseEntity<Deck> createDeck(@RequestBody Deck deck) {
+        log.info("💻 Creating deck with name {}", deck.description());
+        Deck createdDeck = deckService.createDeck(deck);
+        return new ResponseEntity<>(createdDeck, HttpStatus.CREATED);
+    }
 
-&nbsp;&nbsp;&nbsp;&nbsp;@GetMapping("/search")
-&nbsp;&nbsp;&nbsp;&nbsp;public ResponseEntity&lt;List&lt;Deck&gt;&gt; searchDecks(@RequestParam Optional&lt;String&gt; term) {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;log.info("💻 Searching decks with term {}", term);
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;String theTerm = term.orElse("");
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return new ResponseEntity&lt;&gt;(deckService.searchDecks(theTerm), HttpStatus.OK);
-&nbsp;&nbsp;&nbsp;&nbsp;}
+    @GetMapping("/search")
+    public ResponseEntity<List<Deck>> searchDecks(@RequestParam Optional<String> term) {
+        log.info("💻 Searching decks with term {}", term);
+        String theTerm = term.orElse("");
+        return new ResponseEntity<>(deckService.searchDecks(theTerm), HttpStatus.OK);
+    }
 
-&nbsp;&nbsp;&nbsp;@DeleteMapping("/{id}")
-&nbsp;&nbsp;&nbsp;public ResponseEntity&lt;Void&gt; deleteDeck(@PathVariable String id) {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;deckService.deleteDeck(id);
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;log.info("💻 Deleting deck with id {}", id);
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return new ResponseEntity&lt;&gt;(HttpStatus.NO_CONTENT);
-&nbsp;&nbsp;&nbsp;}
+   @DeleteMapping("/{id}")
+   public ResponseEntity<Void> deleteDeck(@PathVariable String id) {
+        deckService.deleteDeck(id);
+        log.info("💻 Deleting deck with id {}", id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+   }
 
-&nbsp;&nbsp;&nbsp;@DeleteMapping("/{id}/cards")
-&nbsp;&nbsp;&nbsp;public ResponseEntity&lt;Void&gt; deleteCardsInDeck(@PathVariable String id) {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;deckService.deleteCardsInDeck(id);
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;log.info("💻 Deleting all cards in deck with id {}", id);
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return new ResponseEntity&lt;&gt;(HttpStatus.NO_CONTENT);
-&nbsp;&nbsp;&nbsp;}
-}</pre>
+   @DeleteMapping("/{id}/cards")
+   public ResponseEntity<Void> deleteCardsInDeck(@PathVariable String id) {
+        deckService.deleteCardsInDeck(id);
+        log.info("💻 Deleting all cards in deck with id {}", id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+   }
+}
+```
+
 
 And for Cards:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">package com.mongodb.nimongo.srsapp.web.controller;
+```
+package com.mongodb.nimongo.srsapp.web.controller;
 
 import static com.mongodb.nimongo.srsapp.web.controller.Constants.DEFAULT_PAGE_NUMBER;
 import static com.mongodb.nimongo.srsapp.web.controller.Constants.DEFAULT_PAGE_SIZE;
@@ -898,56 +989,61 @@ import java.util.Map;
 @RestController
 @RequestMapping("/cards")
 public class CardController extends BaseController{
-&nbsp;&nbsp;&nbsp;&nbsp;private final CardService cardService;
-&nbsp;&nbsp;&nbsp;&nbsp;CardController(CardService cardService) {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this.cardService = cardService;
-&nbsp;&nbsp;&nbsp;&nbsp;}
+    private final CardService cardService;
+    CardController(CardService cardService) {
+        this.cardService = cardService;
+    }
 
-&nbsp;&nbsp;&nbsp;&nbsp;@GetMapping
-&nbsp;&nbsp;&nbsp;&nbsp;public ResponseEntity&lt;List&lt;FlashCard&gt;&gt; getAllCards(@RequestParam Optional&lt;Integer&gt; pageSize, @RequestParam Optional&lt;Integer&gt; pageNumber) {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Integer thePageSize = pageSize.orElse(DEFAULT_PAGE_SIZE);
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Integer thePageNumber = pageNumber.orElse(DEFAULT_PAGE_NUMBER);
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;log.info("Getting all cards with pageSize {} and pageNumber {}", thePageSize, thePageNumber);
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Page&lt;FlashCard&gt; cardPage = cardService.findAllCards(thePageSize, thePageNumber);
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return new ResponseEntity&lt;&gt;(cardPage.getContent(), HttpStatus.OK);
-&nbsp;&nbsp;&nbsp;&nbsp;}
+    @GetMapping
+    public ResponseEntity<List<FlashCard>> getAllCards(@RequestParam Optional<Integer> pageSize, @RequestParam Optional<Integer> pageNumber) {
+        Integer thePageSize = pageSize.orElse(DEFAULT_PAGE_SIZE);
+        Integer thePageNumber = pageNumber.orElse(DEFAULT_PAGE_NUMBER);
+        log.info("Getting all cards with pageSize {} and pageNumber {}", thePageSize, thePageNumber);
+        Page<FlashCard> cardPage = cardService.findAllCards(thePageSize, thePageNumber);
+        return new ResponseEntity<>(cardPage.getContent(), HttpStatus.OK);
+    }
 
-&nbsp;&nbsp;&nbsp;&nbsp;@GetMapping("/{id}")
-&nbsp;&nbsp;&nbsp;&nbsp;public ResponseEntity&lt;Optional&lt;FlashCard&gt;&gt; getCard(@PathVariable String id) {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;log.info("Getting card with id {}", id);
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return new ResponseEntity&lt;&gt;(cardService.cardById(id), HttpStatus.OK);
-&nbsp;&nbsp;&nbsp;&nbsp;}
+    @GetMapping("/{id}")
+    public ResponseEntity<Optional<FlashCard>> getCard(@PathVariable String id) {
+        log.info("Getting card with id {}", id);
+        return new ResponseEntity<>(cardService.cardById(id), HttpStatus.OK);
+    }
 
-&nbsp;&nbsp;&nbsp;&nbsp;@PostMapping
-&nbsp;&nbsp;&nbsp;&nbsp;public ResponseEntity&lt;FlashCard&gt; createCard(@RequestBody FlashCard card) {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;FlashCard newCard = new FlashCard(card.frontText(), card.backText(), card.parentDeckId());
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;log.info("Creating card with name {}", card.frontText());
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return new ResponseEntity&lt;&gt;(cardService.createCard(newCard), HttpStatus.CREATED);
-&nbsp;&nbsp;&nbsp;&nbsp;}
+    @PostMapping
+    public ResponseEntity<FlashCard> createCard(@RequestBody FlashCard card) {
+        FlashCard newCard = new FlashCard(card.frontText(), card.backText(), card.parentDeckId());
+        log.info("Creating card with name {}", card.frontText());
+        return new ResponseEntity<>(cardService.createCard(newCard), HttpStatus.CREATED);
+    }
 
-&nbsp;&nbsp;&nbsp;&nbsp;@GetMapping("/search")
-&nbsp;&nbsp;&nbsp;&nbsp;public ResponseEntity&lt;List&lt;FlashCard&gt;&gt; searchCards(@RequestParam Optional&lt;String&gt; term) {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;log.info("Searching cards with term {}", term);
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;String theTerm = term.orElse("");
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return new ResponseEntity&lt;&gt;(cardService.searchCards(theTerm), HttpStatus.OK);
-&nbsp;&nbsp;&nbsp;&nbsp;}
+    @GetMapping("/search")
+    public ResponseEntity<List<FlashCard>> searchCards(@RequestParam Optional<String> term) {
+        log.info("Searching cards with term {}", term);
+        String theTerm = term.orElse("");
+        return new ResponseEntity<>(cardService.searchCards(theTerm), HttpStatus.OK);
+    }
 
-&nbsp;&nbsp;&nbsp;@DeleteMapping("/{id}")
-&nbsp;&nbsp;&nbsp;public ResponseEntity&lt;Void&gt; deleteCard(@PathVariable String id) {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;log.info("Deleting card with id {}", id);
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cardService.deleteCard(id);
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return new ResponseEntity&lt;&gt;(HttpStatus.NO_CONTENT);
-&nbsp;&nbsp;&nbsp;}
-}</pre>
+   @DeleteMapping("/{id}")
+   public ResponseEntity<Void> deleteCard(@PathVariable String id) {
+        log.info("Deleting card with id {}", id);
+        cardService.deleteCard(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+   }
+}
+```
+
 
 Finally, our constants:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">package com.mongodb.nimongo.srsapp.web.controller;
+```
+package com.mongodb.nimongo.srsapp.web.controller;
 
 public class Constants {
-&nbsp;&nbsp;&nbsp;&nbsp;public static final int DEFAULT_PAGE_SIZE = 10;
-&nbsp;&nbsp;&nbsp;&nbsp;public static final int DEFAULT_PAGE_NUMBER = 0;
-}</pre>
+    public static final int DEFAULT_PAGE_SIZE = 10;
+    public static final int DEFAULT_PAGE_NUMBER = 0;
+}
+```
+
 
 **Next steps** {#h2-16-next-steps}
 ----------------------------------

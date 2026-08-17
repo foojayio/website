@@ -19,7 +19,7 @@ frozen: false
 
 SKP's Agile Cheatsheet is a three part series of articles focused on daily agile terminology, ideal to be printed out and pinned up near your workstation. Part 1 is available [here](https://foojay.io/today/skps-agile-cheatsheet-part-01 "Here") and part 2 [here](https://foojay.io/today/skps-agile-cheatsheet-part-02 "Here")while the PDF cheatsheet is [here](https://rebrand.ly/skp-agile-cheat-sheet-all "Here").
 
-*** ** * ** ***
+
 
 ![](https://imgur.com/LGzevOM.jpg)  
 
@@ -88,7 +88,7 @@ It can be succinctly described by the following set of rules:
 
 **XP (Extreme Programming)** . Extreme Programming (XP) is an agile software development framework that aims to produce higher quality software, and higher quality of life for the development team. XP is the most specific of the agile frameworks regarding appropriate engineering practices for software development. \[Type -- Agile Development\]
 
-*** ** * ** ***
+
 
 **Asana** . Asana helps you plan, organize, and manage Agile projects and Scrum sprints in a tool that's as flexible and collaborative as your team. From Boards to Timelines and custom fields to dependencies, Asana has the features your team needs to build fast and ship often. \[Type -- Agile Project/Product Management\]
 
@@ -104,7 +104,7 @@ It can be succinctly described by the following set of rules:
 
 **Rally** . Rally is one of the most comprehensive agile project management tools, and it helps you track your projects' progress Iteratively, assign stories to iterations, split stories to tasks, tag defects to stories etc. The tool also helps you monitor your teams' progress. \[Type -- Agile Project/Product Management\]  
 
-*** ** * ** ***
+
 
 Reference Link 01 : <https://www.agilealliance.org/agile101/agile-glossary/>
 

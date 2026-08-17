@@ -34,7 +34,8 @@ When you [add the library](https://wimdeblauwe.github.io/error-handling-spring-b
 
 This is for example what is returned for a validation error on a `@RestController` method:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="json">{
+```json
+{
   "code": "VALIDATION_FAILED",
   "message": "Validation failed for object='exampleRequestBody'. Error count: 2",
   "fieldErrors": [
@@ -51,16 +52,21 @@ This is for example what is returned for a validation error on a `@RestControlle
       "rejectedValue": null
     }
   ]
-}</pre>
+}
+```
+
 
 Another example is when an `ObjectOptimisticLockingFailureException` happens:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="json">{
+```json
+{
   "code": "OPTIMISTIC_LOCKING_ERROR",
   "message": "Object of class [com.example.user.User] with identifier [87518c6b-1ba7-4757-a5d9-46e84c539f43]: optimistic locking failed",
   "identifier": "87518c6b-1ba7-4757-a5d9-46e84c539f43",
   "persistentClassName": "com.example.user.User"
-}</pre>
+}
+```
+
 
 Custom Application Exceptions {#_custom_application_exceptions}
 ---------------------------------------------------------------
@@ -69,19 +75,25 @@ For the Exception classes that you create in your own application, the library w
 
 In code, for an exception class like this:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">@ResponseStatus(HttpStatus.NOT_FOUND)
+```java
+@ResponseStatus(HttpStatus.NOT_FOUND)
 public class UserNotFoundException extends RuntimeException {
     public UserNotFoundException(UserId userId) {
         super("Could not find user with id " + userId);
     }
-}</pre>
+}
+```
+
 
 The following JSON would be returned:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="json">{
+```json
+{
   "code": "USER_NOT_FOUND",
   "message": "Could not find user with id 123"
-}</pre>
+}
+```
+
 
 The library also honors the `@ResponseStatus` annotation to determine the HTTP response code that is used.
 
@@ -95,14 +107,20 @@ This basic behaviour can be customized in a few ways:
 
 Using the `error.handling.codes` key and the full qualified name of the exception class, the error code can be changed. For example:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="properties">error.handling.codes.com.company.app.user.UserNotFoundException=COULD_NOT_FIND_USER</pre>
+```properties
+error.handling.codes.com.company.app.user.UserNotFoundException=COULD_NOT_FIND_USER
+```
+
 
 Applying this will change the response body to something like this:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="json">{
+```json
+{
   "code": "COULD_NOT_FIND_USER",
   "message": "Could not find user with id 123"
-}</pre>
+}
+```
+
 
 If you don't own the Exception type, this might be the only way to influence the error code. If you *do* own the Exception type, then using the `@ResponseErrorCode` annotation is probably easier.
 
@@ -112,20 +130,26 @@ By adding the `@ResponseErrorCode` annotation on the class level, we can overrid
 
 For example:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">@ResponseStatus(HttpStatus.NOT_FOUND)
+```java
+@ResponseStatus(HttpStatus.NOT_FOUND)
 @ResponseErrorCode("NO_SUCH_USER")
 public class UserNotFoundException extends RuntimeException {
     public UserNotFoundException(UserId userId) {
         super("Could not find user with id " + userId);
     }
-}</pre>
+}
+```
+
 
 Will generate the following response:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="json">{
+```json
+{
   "code": "NO_SUCH_USER",
   "message": "Could not find user with id 123"
-}</pre>
+}
+```
+
 
 ### Additional fields in response {#_additional_fields_in_response}
 
@@ -133,7 +157,8 @@ If you want to add additional fields in the error response, then this can be don
 
 For example:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">@ResponseStatus(HttpStatus.NOT_FOUND)
+```java
+@ResponseStatus(HttpStatus.NOT_FOUND)
 public class UserNotFoundException extends RuntimeException {
 
     private final UserId userId;
@@ -147,15 +172,20 @@ public class UserNotFoundException extends RuntimeException {
     public String getUserId() {
         return userId.getValue();
     }
-}</pre>
+}
+```
+
 
 Will generate the following response:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="json">{
+```json
+{
   "code": "USER_NOT_FOUND",
   "message": "Could not find user with id UserId{id=8c7fb13c-0924-47d4-821a-36f73558c898}",
   "userId": "8c7fb13c-0924-47d4-821a-36f73558c898"
-}</pre>
+}
+```
+
 
 Note the extra `userId` field in the response.
 

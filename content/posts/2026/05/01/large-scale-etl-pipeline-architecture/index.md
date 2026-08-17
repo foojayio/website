@@ -65,18 +65,24 @@ One of the most effective ways to build high-throughput pipelines is to adopt re
 
 Let's look at an example, starting with the basics. A simplified extraction and loading pipeline:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">Flux&lt;DataRecord&gt; pipeline =
-&nbsp;&nbsp;&nbsp;&nbsp;extract()
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.flatMap(this::transform)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.flatMap(this::load)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.doOnError(error -&gt; log.error("Pipeline error", error));</pre>
+```
+Flux<DataRecord> pipeline =
+    extract()
+        .flatMap(this::transform)
+        .flatMap(this::load)
+        .doOnError(error -> log.error("Pipeline error", error));
+```
+
 
 To the casual observer, this flow might appear to be a sequential process. The secret lies in using \`flatMap\`, which enablesthe simultaneous processing of multiple records. Each stage can process the elements independently, and the pipeline naturally adapts to the available resources.
 
 First point to note: concurrency. Concurrency must be controlled. Unrestricted parallelism can overload downstream systems, causing a cascade of problems.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">.flatMap(this::transform, 10) // limit concurrency
-.flatMap(this::load, 5)</pre>
+```
+.flatMap(this::transform, 10) // limit concurrency
+.flatMap(this::load, 5)
+```
+
 
 We always balance system throughput and stability by appropriately adjusting the levels of concurrency that are both possible and necessary for each layer.
 
@@ -87,10 +93,13 @@ In this type of system, producers often overwhelm consumers with the speed at wh
 
 A new hero is in town: reactive streams introduce the concept of backpressure, allowing downstream components to signal how much data they can handle. With Project Reactor, this mechanism is built into the model. For example:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">extract()
-&nbsp;&nbsp;&nbsp;&nbsp;.onBackpressureBuffer(1000)
-&nbsp;&nbsp;&nbsp;&nbsp;.flatMap(this::transform, 10)
-&nbsp;&nbsp;&nbsp;&nbsp;.flatMap(this::load, 5);</pre>
+```
+extract()
+    .onBackpressureBuffer(1000)
+    .flatMap(this::transform, 10)
+    .flatMap(this::load, 5);
+```
+
 
 In this case, when the downstream system is slower, we try to accumulate up to 1,000 elements in the buffer. Alternatively, instead of accumulating, we can discard or limit the elements, depending on the use case.
 
@@ -103,21 +112,27 @@ Let's start with a basic premise: failures in this type of pipeline are inevitab
 
 A simple pipeline like the one below fails immediately:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">.flatMap(this::transform)
-.flatMap(this::load)</pre>
+```
+.flatMap(this::transform)
+.flatMap(this::load)
+```
+
 
 If a single record fails, the entire flow could be interrupted and leave the system in an undefined state: generally speaking, that's not the outcome we'd like.
 
 Instead, let's try to isolate failures at the individual record level:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">.flatMap(record -&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;transform(record)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.flatMap(this::load)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.onErrorResume(error -&gt; {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;log.warn("Failed processing record {}", record.getId(), error);
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return Mono.empty();
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;})
-)</pre>
+```
+.flatMap(record ->
+    transform(record)
+        .flatMap(this::load)
+        .onErrorResume(error -> {
+            log.warn("Failed processing record {}", record.getId(), error);
+            return Mono.empty();
+        })
+)
+```
+
 
 This ensures that one bad record does not stop the entire pipeline.
 
@@ -128,19 +143,25 @@ Some types of failures are temporary, and the operation can be safely retried on
 
 Here is a simple example of a retry:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">.flatMap(record -&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;transform(record)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.flatMap(this::load)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.retryWhen(Retry.backoff(3, Duration.ofMillis(200)))
-)</pre>
+```
+.flatMap(record ->
+    transform(record)
+        .flatMap(this::load)
+        .retryWhen(Retry.backoff(3, Duration.ofMillis(200)))
+)
+```
+
 
 The system makes a total of three attempts, applying an exponential backoff between each attempt. However, these attempts must be used with great caution and care to avoid cascading errors.
 
 To ensure more reliable recovery, we can also use a dead letter queue (DLQ). Failed records are retained to allow for subsequent analysis:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">.onErrorResume(error -&gt;&nbsp;
-&nbsp;&nbsp;&nbsp;&nbsp;sendToDeadLetterQueue(record, error)
-)</pre>
+```
+.onErrorResume(error -> 
+    sendToDeadLetterQueue(record, error)
+)
+```
+
 
 This allows the pipeline to continue processing while preserving problematic data.
 
@@ -159,15 +180,18 @@ When MongoDB is used as the [sink](https://www.mongodb.com/docs/kafka-connector/
 
 A simple example using an upsert with MongoDB:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public Mono&lt;UpdateResult&gt; load(DataRecord record) {
+```
+public Mono<UpdateResult> load(DataRecord record) {
 return Mono.from(
-&nbsp;&nbsp;&nbsp;&nbsp; mongoCollection.replaceOne(
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Filters.eq("_id", record.getId()),
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; toDocument(record),
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; new ReplaceOptions().upsert(true)
+     mongoCollection.replaceOne(
+         Filters.eq("_id", record.getId()),
+         toDocument(record),
+         new ReplaceOptions().upsert(true)
 )
 );
-}</pre>
+}
+```
+
 
 This ensures that reprocessing the same record does not corrupt data.
 
@@ -178,40 +202,49 @@ Another key decision in designing this type of pipeline is the processing model.
 
 Batch processing improves efficiency by reducing the I/O workload:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">.buffer(100)
-.flatMap(this::bulkLoad)</pre>
+```
+.buffer(100)
+.flatMap(this::bulkLoad)
+```
+
 
 Streaming, on the other hand, reduces latency and improves overall responsiveness.
 
 In practice, hybrid approaches work best: this means, for example, processing small batches continuously:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">.bufferTimeout(100, Duration.ofSeconds(1))
-.flatMap(this::bulkLoad)</pre>
+```
+.bufferTimeout(100, Duration.ofSeconds(1))
+.flatMap(this::bulkLoad)
+```
+
 
 This balances throughput and latency effectively.
 
 When MongoDB is the sink, batching can be implemented through bulk write operations:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public Mono&lt;BulkWriteResult&gt; bulkLoadToMongo(List&lt;DataRecord&gt; records) {
-&nbsp;&nbsp;&nbsp;&nbsp; if (records == null || records.isEmpty()) {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return Mono.empty();
-&nbsp;&nbsp;&nbsp;&nbsp; }
+```
+public Mono<BulkWriteResult> bulkLoadToMongo(List<DataRecord> records) {
+     if (records == null || records.isEmpty()) {
+         return Mono.empty();
+     }
 
-&nbsp;&nbsp;&nbsp;&nbsp; List&lt;WriteModel&lt;Document&gt;&gt; writes = records.stream()
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; .map(record -&gt; new ReplaceOneModel&lt;Document&gt;(
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Filters.eq("_id", record.getId()),
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; toDocument(record),
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; new ReplaceOptions().upsert(true)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ))
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; .toList();
+     List<WriteModel<Document>> writes = records.stream()
+         .map(record -> new ReplaceOneModel<Document>(
+             Filters.eq("_id", record.getId()),
+             toDocument(record),
+             new ReplaceOptions().upsert(true)
+         ))
+         .toList();
 
-&nbsp;&nbsp;&nbsp;&nbsp; return Mono.from(
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mongoCollection.bulkWrite(
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; writes,
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; new BulkWriteOptions().ordered(false)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; )
-&nbsp;&nbsp;&nbsp;&nbsp; );
-}</pre>
+     return Mono.from(
+         mongoCollection.bulkWrite(
+             writes,
+             new BulkWriteOptions().ordered(false)
+         )
+     );
+}
+```
+
 
 Using unordered bulk operations improves throughput because individual write failures do not necessarily block the rest of the batch.
 
@@ -220,18 +253,24 @@ Parallelizing transformations {#h2-8-parallelizing-transformations}
 
 Processing operations often place a heavy load on the CPU; we can try to maximize performance by parallelizing them wherever possible:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">extract()
-&nbsp;&nbsp;&nbsp;&nbsp;.parallel()
-&nbsp;&nbsp;&nbsp;&nbsp;.runOn(Schedulers.parallel())
-&nbsp;&nbsp;&nbsp;&nbsp;.flatMap(this::transform)
-&nbsp;&nbsp;&nbsp;&nbsp;.sequential()
-&nbsp;&nbsp;&nbsp;&nbsp;.flatMap(this::load);</pre>
+```
+extract()
+    .parallel()
+    .runOn(Schedulers.parallel())
+    .flatMap(this::transform)
+    .sequential()
+    .flatMap(this::load);
+```
+
 
 This allows you to distribute the work across multiple CPU cores: the more processors I have available, the sooner my work will be completed. However, parallelization introduces a certain level of complexity that must be understood and managed, especially when order matters.
 
 If order matters, the first thing to do is preserve it:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">.flatMapSequential(this::transform, 10)</pre>
+```
+.flatMapSequential(this::transform, 10)
+```
+
 
 This maintains order while still allowing some concurrency.
 
@@ -240,12 +279,15 @@ Integrating with messaging systems {#h2-9-integrating-with-messaging-systems}
 
 High-throughput ETL architectures often rely on messaging systems such as Apache Kafka. Instead of retrieving data in batches, the pipelines process events as they occur. This produces a continuous stream of data, and in the case of Kafka, a consumer can be implemented as follows:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">receiver.receive()
-&nbsp;&nbsp;&nbsp;&nbsp;.flatMap(record -&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;transform(record.value())
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.flatMap(this::load)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.doOnSuccess(v -&gt; record.receiverOffset().acknowledge())
-&nbsp;&nbsp;&nbsp;&nbsp;)</pre>
+```
+receiver.receive()
+    .flatMap(record ->
+        transform(record.value())
+            .flatMap(this::load)
+            .doOnSuccess(v -> record.receiverOffset().acknowledge())
+    )
+```
+
 
 This approach enables real-time processing and horizontal scalability, allowing the system to handle the incoming data flow.
 
@@ -265,8 +307,11 @@ A good ETL pipeline should provide:
 
 How can we achieve all this? Tools like Micrometer integrate seamlessly with reactive pipelines and enable the collection of system observability metrics:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">.doOnNext(record -&gt; metrics.incrementProcessed())
-.doOnError(error -&gt; metrics.incrementErrors())</pre>
+```
+.doOnNext(record -> metrics.incrementProcessed())
+.doOnError(error -> metrics.incrementErrors())
+```
+
 
 When we talk about observability, it's essential to also discuss logging and tracing. Every record should include a correlation ID to track its path through the pipeline and make troubleshooting easier.
 
@@ -275,23 +320,26 @@ Putting it all together {#h2-11-putting-it-all-together}
 
 Let's combine the concepts into a more complete pipeline:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public Flux&lt;Void&gt; buildPipeline() {
+```
+public Flux<Void> buildPipeline() {
 
-&nbsp;&nbsp;&nbsp;&nbsp;return extract()
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.onBackpressureBuffer(1000)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.flatMap(record -&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;transform(record)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.flatMap(this::load)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.retryWhen(Retry.backoff(3, Duration.ofMillis(200)))
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.onErrorResume(error -&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sendToDeadLetterQueue(record, error)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;),
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;10
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.bufferTimeout(100, Duration.ofSeconds(1))
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.flatMap(this::bulkLoadToMongo)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.doOnError(error -&gt; log.error("Pipeline failure", error));
-}</pre>
+    return extract()
+        .onBackpressureBuffer(1000)
+        .flatMap(record ->
+            transform(record)
+                .flatMap(this::load)
+                .retryWhen(Retry.backoff(3, Duration.ofMillis(200)))
+                .onErrorResume(error ->
+                    sendToDeadLetterQueue(record, error)
+                ),
+            10
+        )
+        .bufferTimeout(100, Duration.ofSeconds(1))
+        .flatMap(this::bulkLoadToMongo)
+        .doOnError(error -> log.error("Pipeline failure", error));
+}
+```
+
 
 This pipeline:
 

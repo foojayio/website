@@ -32,9 +32,12 @@ Declaring a multidimensional array {#h-declaring-a-multidimensional-array}
 
 Firstly, you can declare an array variable, for example:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">int[][] ai;
+```
+int[][] ai;
 
-int aai[][];</pre>
+int aai[][];
+```
+
 
 As you can see, the position of the square brackets (used to indicate an array) can be placed after the array type or after the variable name. My preference is to put the brackets after the array type so that all the type information is in one place.
 
@@ -43,19 +46,28 @@ Mixing Bracket Positions {#h-mixing-bracket-positions}
 
 It is also possible to mix the positioning of these:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">int[] ai[];</pre>
+```
+int[] ai[];
+```
+
 
 This is not recommended, as it makes the structure of the array harder to understand at first glance. This example makes that painfully obvious:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">int[][] x[][], y[][][], z[];</pre>
+```
+int[][] x[][], y[][][], z[];
+```
+
 
 This is equivalent (but not obviously) to the separate definitions:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">int[][][][] x;
+```
+int[][][][] x;
 
 int[][][][][] y;
 
-int[][][] z;</pre>
+int[][][] z;
+```
+
 
 In these examples, we are simply declaring variables that can be used to reference an array, but no arrays are being created. Local variables are subject to definite assignment; if you declare a local variable, you must set its value to something. If you use these local variables without assigning them to an array, the compiler will report that x, y and z may not have been initialized.
 
@@ -66,13 +78,19 @@ There are two ways we can create a multidimensional array (as there are for sing
 
 Firstly, we can use an array initializer. For example:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">int[][] aiv = {{1, 2}, {3, 4}, };</pre>
+```
+int[][] aiv = {{1, 2}, {3, 4}, };
+```
+
 
 Here, we define a two-dimensional array and give the first array the values 1 and 2 and the second array the values 3 and 4. I deliberately included the comma after the second set of braces as this is valid syntax, even though there is no third set of values (this comma is optional). The array's dimensions are determined by the compiler from the values specified. In this example, a 2×2 array will be created.
 
 The second way is to instantiate an array with explicit dimensions:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">int[][] aie = new int[2][2];</pre>
+```
+int[][] aie = new int[2][2];
+```
+
 
 Again, we have a 2×2 array, but without putting specific values in it.
 
@@ -90,7 +108,10 @@ Let's look at what this means to you as a developer.
 
 We'll reuse one of our earlier examples:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">int[][] aiv = {{1, 2}, {3, 4}};</pre>
+```
+int[][] aiv = {{1, 2}, {3, 4}};
+```
+
 
 This array is implemented as an array of references to arrays, as shown in the diagram.
 ![](jagged-array-1.jpg)
@@ -99,14 +120,20 @@ In effect, there are three arrays: one to hold the values 1 and 2, one to hold t
 
 We can change the second array to hold three values:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">int[][] aiv = {{1, 2}, {3, 4, 5}};</pre>
+```
+int[][] aiv = {{1, 2}, {3, 4, 5}};
+```
+
 
 The array storage now looks like this:
 ![](jagged-array-2.jpg)
 
 If we had a three-dimensional array, each element in the second dimension would become an array reference. For example:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">int aiv[][][] = {{{1},{2,3}},{{4,5},{6,7},{8,9}}};</pre>
+```
+int aiv[][][] = {{{1},{2,3}},{{4,5},{6,7},{8,9}}};
+```
+
 
 The array storage will look like this:
 
@@ -137,15 +164,18 @@ Performance considerations with multidimensional arrays {#h-performance-consider
 
 Be careful how you use multidimensional arrays, as simple changes can significantly impact performance. For example, looping through a two-dimensional array:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">int[][] aiv = {{1,2,3,4,5},{6,7,8,9,10},{11,12,13,14,15}};
+```
+int[][] aiv = {{1,2,3,4,5},{6,7,8,9,10},{11,12,13,14,15}};
 
-for (int x = 0; x &lt; 3; x++)
-   for (int y = 0; y &lt; 5; y++)
+for (int x = 0; x < 3; x++)
+   for (int y = 0; y < 5; y++)
       aiv[x][y] = aiv[x][y] + 1;
 
-for (int y = 0; y &lt; 5; y++)
-   for (int x = 0; x &lt; 3; x++)
-      aiv[x][y] = aiv[x][y] + 1;</pre>
+for (int y = 0; y < 5; y++)
+   for (int x = 0; x < 3; x++)
+      aiv[x][y] = aiv[x][y] + 1;
+```
+
 
 The first version of the loop will be much more efficient than the second. The reason for this is the structure of a multidimensional array that we saw earlier. The second version keeps switching between array references to access the individual elements, with associated overhead. The first version maintains a reference to an array and loops through all the objects stored in it.
 
@@ -159,6 +189,6 @@ Concluding thoughts {#h-concluding-thoughts}
 
 Multidimensional arrays are a fundamental feature in the Java language and are very useful where the size of dimensions is known at compile time. Hopefully, you now have a better understanding of how they work and how to use them effectively in your code.
 
-*** ** * ** ***
+
 
 This article originally appeared in [The New Stack](https://thenewstack.io/multi-dimensional-array-java/).

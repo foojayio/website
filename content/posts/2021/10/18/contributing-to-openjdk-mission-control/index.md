@@ -33,18 +33,27 @@ The project is on GitHub:
 
 The first step to contribute to JDK Mission Control is to simply [fork the repository](https://docs.github.com/en/get-started/quickstart/fork-a-repo) on GitHub. This establishes a copy of the repository where you can freely make changes as you please. Whilst it is technically possible to make the changes in the master branch, it will save time and effort if you later want to contribute the effort to [make the changes in a branch](https://docs.github.com/en/get-started/quickstart/github-flow):  
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">git checkout -b my-jmc-test</pre>
+```
+git checkout -b my-jmc-test
+```
+
 
 Building JMC {#h2-1-building-jmc}
 ---------------------------------
 
 First of all, ensure that you have [jdk11 active](https://sdkman.io/) in your shell, and verify that this is the case using:  
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">java -version</pre>
+```
+java -version
+```
+
 
 There are multiple ways to build JMC. The easiest way is to simply use the build script (don't do this just yet):  
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">./build.sh –packageJmc</pre>
+```
+./build.sh –packageJmc
+```
+
 
 There is also a way to build JMC using Docker (don't do this just yet either):  
 
@@ -54,25 +63,37 @@ These are however not the best ways when you're developing JMC using an IDE. The
 
 So, to set things properly up for development, it is better to first install the core libraries:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">cd $JMC_ROOT/core
-mvn install</pre>
+```
+cd $JMC_ROOT/core
+mvn install
+```
+
 
 Next, build the p2 site and start jetty to expose it on a well known port:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">cd $JMC_ROOT/releng/third-party
+```
+cd $JMC_ROOT/releng/third-party
 mvn p2:site
-mvn jetty:run</pre>
+mvn jetty:run
+```
+
 
 Then leave jetty running for as long as you are developing JMC. You will need it up and running so that it can be found both when building from the command line, as well as when compiling JMC from within the Eclipse development environment.
 
 To build the JMC application, next do the following in a separate shell (since you have jetty with the p2 site for the third-party dependencies up and running in the previous one):
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">cd $JMC_ROOT
-mvn package</pre>
+```
+cd $JMC_ROOT
+mvn package
+```
+
 
 After this, you can use the build script to run the built JMC product:  
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">./build.sh –run</pre>
+```
+./build.sh –run
+```
+
 
 For alternative ways of launching JMC, see the platform specific documentation in the [README.md](https://github.com/openjdk/jmc/blob/master/README.md#running-the-locally-built-jmc).
 
@@ -121,26 +142,41 @@ To set things up, do the following:
 
 Clone Skara:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">git clone&nbsp;&lt;a href="https://github.com/openjdk/skara"&gt;https://github.com/openjdk/skara&lt;/a&gt;</pre>
+```
+git clone <a href="https://github.com/openjdk/skara">https://github.com/openjdk/skara</a>
+```
+
 
 Build it:  
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">gradlew&nbsp;(win) or&nbsp;sh gradlew&nbsp;(mac/linux)</pre>
+```
+gradlew (win) or sh gradlew (mac/linux)
+```
+
 
 Install it:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">git config –global include.path “%CD%/skara.gitconfig”&nbsp;(win), or&nbsp;
-git config –global include.path “$PWD/skara.gitconfig”&nbsp;(mac/linux)</pre>
+```
+git config –global include.path “%CD%/skara.gitconfig” (win), or 
+git config –global include.path “$PWD/skara.gitconfig” (mac/linux)
+```
+
 
 Set where to sync your forks from:  
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">git config –global sync.from upstream</pre>
+```
+git config –global sync.from upstream
+```
+
 
 Here are some examples:
 
 To sync your fork with upstream and pull the changes:  
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">git sync –pull</pre>
+```
+git sync –pull
+```
+
 
 > **Note:** if the sync fails with the error message "No remote provided to fetch from, please set the --from flag", remember to set the remote for your repo, e.g.
 >
@@ -148,15 +184,24 @@ To sync your fork with upstream and pull the changes:
 
 To list the open PRs:  
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">git pr list</pre>
+```
+git pr list
+```
+
 
 To create a PR:  
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">git pr create</pre>
+```
+git pr create
+```
+
 
 To push your committed changes in your branch to your fork, creating the remote branch:  
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">git publish</pre>
+```
+git publish
+```
+
 
 So, the normal workflow when working with OpenJDK JMC using the Skara tooling becomes:
 > Note: First ensure that you have a fork of JMC, and that your current directory is the root of that fork. You typically just create that one fork and stick with it.

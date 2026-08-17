@@ -26,7 +26,7 @@ frozen: false
 
 <br />
 
-*** ** * ** ***
+
 
 #### 🔵⚪⚪⚪⚪⚪⚪⚪
 
@@ -46,7 +46,7 @@ It lowers support questions and helps new developers onboard faster.
 
 It turns your OpenAPI file into a user-friendly website. **Best of all**, no coding is needed to build the site.
 
-*** ** * ** ***
+
 
 #### 🔵🔵⚪⚪⚪⚪⚪⚪
 
@@ -64,7 +64,7 @@ It shows OpenAPI specs using ReDoc, a popular documentation tool.
 
 **Therefore**, Redocusaurus is great for Spring Boot teams who want simple, up-to-date docs without writing frontend code.
 
-*** ** * ** ***
+
 
 #### 🔵🔵🔵⚪⚪⚪⚪⚪
 
@@ -80,7 +80,7 @@ It shows OpenAPI specs using ReDoc, a popular documentation tool.
 
 **Finally**, it is perfect for both private and public API documentation portals.
 
-*** ** * ** ***
+
 
 #### 🔵🔵🔵🔵⚪⚪⚪⚪
 
@@ -90,11 +90,14 @@ It shows OpenAPI specs using ReDoc, a popular documentation tool.
 
 **First of all** , add the SpringDoc dependency to your project's `pom.xml`:
 
-<pre class="EnlighterJSRAW" style="position: relative" data-enlighter-language="xml">&lt;dependency&gt;
-    &lt;groupId&gt;org.springdoc&lt;/groupId&gt;
-    &lt;artifactId&gt;springdoc-openapi-starter-webmvc-ui&lt;/artifactId&gt;
-    &lt;version&gt;2.8.9&lt;/version&gt;
-&lt;/dependency&gt;</pre>
+```xml
+<dependency>
+    <groupId>org.springdoc</groupId>
+    <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+    <version>2.8.9</version>
+</dependency>
+```
+
 
 **Then**, start your Spring Boot app.
 
@@ -104,7 +107,7 @@ It shows OpenAPI specs using ReDoc, a popular documentation tool.
 
 **Finally** , convert the JSON to YAML using [Swagger Editor](https://editor.swagger.io): paste the JSON, click **Convert to YAML** , and save the file as `openapi.yaml`.
 
-*** ** * ** ***
+
 
 #### 🔵🔵🔵🔵🔵⚪⚪⚪
 
@@ -116,22 +119,32 @@ It shows OpenAPI specs using ReDoc, a popular documentation tool.
 
 **Then**, create a new Docusaurus project by running:
 
-<pre class="EnlighterJSRAW" style="position: relative" data-enlighter-language="shell">npx create-docusaurus@latest foojay-doc-site classic --typescript
-cd foojay-doc-site</pre>
+```bash
+npx create-docusaurus@latest foojay-doc-site classic --typescript
+cd foojay-doc-site
+```
+
 
 **After that**, install Redocusaurus:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="shell">npm install redocusaurus@latest</pre>
+```bash
+npm install redocusaurus@latest
+```
+
 
 **Next** , add your OpenAPI YAML file(s) you saved at the root folder to the `/foojay-doc-site/static/openapi` folder *(location of the yaml file(s) is important)*:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="shell">mkdir -p ./static/openapi 
+```bash
+mkdir -p ./static/openapi 
 mv ../calculator-api.openapi.yaml ./static/openapi/calculator-api.openapi.yaml 
-mv ../word-api.openapi.yaml ./static/openapi/word-api.openapi.yaml</pre>
+mv ../word-api.openapi.yaml ./static/openapi/word-api.openapi.yaml
+```
+
 
 **Then** , open `docusaurus.config.js` and add this to `presets`:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="js">[
+```javascript
+[
     "redocusaurus",
     {
         specs: [{
@@ -149,11 +162,14 @@ mv ../word-api.openapi.yaml ./static/openapi/word-api.openapi.yaml</pre>
             primaryColor: "#1890ff",
         },
     },
-],</pre>
+],
+```
+
 
 **Also**, add this to the navbar items in the same file:
 
-<pre class="EnlighterJSRAW" style="position: relative" data-enlighter-language="js">{
+```javascript
+{
   to: "/api/word",
   label: "Word API",
   position: "left",
@@ -162,15 +178,20 @@ mv ../word-api.openapi.yaml ./static/openapi/word-api.openapi.yaml</pre>
   to: "/api/calculator",
   label: "Calculator API",
   position: "left",
-},</pre>
+},
+```
+
 
 **Finally**, start your documentation site:
 
-<pre class="EnlighterJSRAW" style="position: relative" data-enlighter-language="shell">npm run start</pre>
+```bash
+npm run start
+```
+
 
 **Then** , visit <http://localhost:3000/api-docs> to see your API documentation.
 
-*** ** * ** ***
+
 
 #### 🔵🔵🔵🔵🔵🔵⚪⚪
 
@@ -197,7 +218,7 @@ Since it's static, it's also `SEO`-friendly and easy to cache.
 
 You can deploy updates anytime by rebuilding and pushing the new files.
 
-*** ** * ** ***
+
 
 #### 🔵🔵🔵🔵🔵🔵🔵⚪
 
@@ -213,7 +234,7 @@ You can deploy updates anytime by rebuilding and pushing the new files.
 
 **Above all**, you don't need to write frontend code to get beautiful docs.
 
-*** ** * ** ***
+
 
 #### 🔵🔵🔵🔵🔵🔵🔵🔵
 

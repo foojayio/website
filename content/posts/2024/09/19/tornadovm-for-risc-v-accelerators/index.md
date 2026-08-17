@@ -52,9 +52,11 @@ OCK is in active development, and it is built based on the LLVM compiler. This p
 
 If you use Fedora or Red Hat-based distributions, you will need to install the following dependencies.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bat">sudo dnf install dtc ninja doxygen python3-pip git cmake spirv-tools 
-sudo pip3 install lit cmakelint 
-</pre>
+```batch
+sudo dnf install dtc ninja doxygen python3-pip git cmake spirv-tools 
+sudo pip3 install lit cmakelint
+```
+
 
 ### Installation of OCK for TornadoVM {#h3-4-installation-of-ock-for-tornadovm}
 
@@ -66,16 +68,20 @@ To do so, OCK comes with a simulator, called [Codeplay Reference Silicon](https:
 
 Configure LLVM for RISC-V as follows:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash">mkdir ock 
+```bash
+mkdir ock 
 cd ock 
 baseDIR=$PWD 
 git clone https://github.com/llvm/llvm-project.git llvm
 cd llvm-project
-llvmDIR=$PWD</pre>
+llvmDIR=$PWD
+```
+
 
 At the time of writing this post, the supported LLVM version for OCK is 18. Thus, we need to configure LLVM using the 18.x branch:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">git checkout release/18.x 
+```
+git checkout release/18.x 
 
 export LLVMINSTALL=$llvmDIR/build-riscv/install
 
@@ -86,12 +92,14 @@ cmake llvm -GNinja \
 -DLLVM_ENABLE_PROJECTS="clang;lld" \
 -DLLVM_TARGETS_TO_BUILD='X86;RISCV'
 
-ninja -C build-riscv install 
-</pre>
+ninja -C build-riscv install
+```
+
 
 #### Configuring oneAPI Construction Kit for RISC-V
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">cd $baseDIR/oneapi-construction-kit  
+```
+cd $baseDIR/oneapi-construction-kit  
 
 cmake -GNinja -Bbuild-riscv \
 -DCA_RISCV_ENABLED=ON \
@@ -102,7 +110,9 @@ cmake -GNinja -Bbuild-riscv \
 -DCA_CL_ENABLE_ICD_LOADER=ON \
 -DCMAKE_INSTALL_PREFIX=$PWD/build-riscv/install 
 
-ninja -C build-riscv install</pre>
+ninja -C build-riscv install
+```
+
 
 ```
 
@@ -110,27 +120,40 @@ ninja -C build-riscv install</pre>
 
 Next, we need to configure the Linux system to use the new OpenCL installation. There are various ways to get this. One of them is updating the folder `/etc/OpenCL/vendors/` with a new file that contains the path to the `libCL.so` installation.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash">sudo vim /etc/OpenCL/vendors/ock.icd</pre>
+```bash
+sudo vim /etc/OpenCL/vendors/ock.icd
+```
+
 
 And we add the following line to the file: use your absolute path to the `libCL.so` file.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash">/home/juan/repos/ock/oneapi-construction-kit/build-x86_64/install/lib/libCL.so</pre>
+```bash
+/home/juan/repos/ock/oneapi-construction-kit/build-x86_64/install/lib/libCL.so
+```
+
 
 #### Installing TornadoVM
 
 We are now ready to install TornadoVM. Note that, if you have TornadoVM already installed, there is no need to reconfigure it. TornadoVM will detect the new device automatically.  The following line installs TornadoVM to use the OpenCL backend.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash">cd TORNADOVM_ROOT 
+```bash
+cd TORNADOVM_ROOT 
 ./bin/tornadovm-installer --jdk jdk21 --backend=opencl
-source setvars.sh</pre>
+source setvars.sh
+```
+
 
 Let's explore all devices available:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash">tornado --devices</pre>
+```bash
+tornado --devices
+```
+
 
 And we will get the following output. Note that the number of devices and the ordering depends on your local configuration. In my case, I have two GPUs that can be used with the OpenCL backend, namely an NVIDIA RTX 3070 and an Intel Integrated GPU (UHD 770). Additionally, we get a new device called **RefSi G1 RV64**. This is our RISC-V device we have just configured with OCK.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bat">Number of Tornado drivers: 1
+```batch
+Number of Tornado drivers: 1
 Driver: OpenCL
   Total number of OpenCL devices  : 3
   Tornado device=0:0  (DEFAULT)
@@ -152,21 +175,23 @@ Driver: OpenCL
         Device OpenCL C version: OpenCL C 1.2
 
   Tornado device=0:2
-    OPENCL --  [ComputeAorta] -- RefSi G1 RV64      &lt;&lt; RISC-V OpenCL Device 
+    OPENCL --  [ComputeAorta] -- RefSi G1 RV64      << RISC-V OpenCL Device 
         Global Memory Size: 2.0 GB
         Local Memory Size: 256.0 KB
         Workgroup Dimensions: 3
         Total Number of Block Threads: [1024]
         Max WorkGroup Configuration: [1024, 1024, 1024]
         Device OpenCL C version: OpenCL C 1.2 Clang 18.1.8
-</pre>
+```
+
 
 The **RefSi G1 RV64** device runs on a simulator. Let's run an example, a simple vector addition to illustrate the usage of TornadoVM on RISC-V with some debug information tell us which device was used.
 
 The Java example used is available on [GitHub](https://github.com/beehive-lab/TornadoVM/blob/ab82a851d7201eef2cbec1d7cb77ed2e72f415e8/tornado-examples/src/main/java/uk/ac/manchester/tornado/examples/arrays/ArrayAddInt.java#L39-L72 "GitHub") and it is described as follows:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public static void add(IntArray a, IntArray b, IntArray c) {
-   for (@Parallel int i = 0; i &lt; c.getSize(); i++) {
+```java
+public static void add(IntArray a, IntArray b, IntArray c) {
+   for (@Parallel int i = 0; i < c.getSize(); i++) {
        c.set(i, a.get(i) + b.get(i));
    }
 }
@@ -195,17 +220,23 @@ public static void main(String[] args) throws TornadoExecutionPlanException {
    System.out.println("a: " + Arrays.toString(a.toHeapArray()));
    System.out.println("b: " + Arrays.toString(b.toHeapArray()));
    System.out.println("c: " + Arrays.toString(c.toHeapArray()));
-}</pre>
+}
+```
+
 
 The **add** method is the actual method to be accelerated on the RISC-V device. Note that, in the Java code, there is no information about which device to use, how to offload or which backend to use. TornadoVM will perform compilation, data handling and runtime scheduling automatically.
 
 To run the application:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bat">tornado --jvm="-Ds0.t0.device=0:2" --threadInfo -m tornado.examples/uk.ac.manchester.tornado.examples.arrays.ArrayAddInt</pre>
+```batch
+tornado --jvm="-Ds0.t0.device=0:2" --threadInfo -m tornado.examples/uk.ac.manchester.tornado.examples.arrays.ArrayAddInt
+```
+
 
 And the output:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="raw">Task info: s0.t0
+```
+Task info: s0.t0
     Backend           : OPENCL
     Device            : RefSi G1 RV64 CL_DEVICE_TYPE_ACCELERATOR (available)
     Dims              : 1
@@ -216,13 +247,19 @@ And the output:
 
 a: [1, 1, 1, 1, 1, 1, 1, 1]
 b: [2, 2, 2, 2, 2, 2, 2, 2]
-c: [3, 3, 3, 3, 3, 3, 3, 3]</pre>
+c: [3, 3, 3, 3, 3, 3, 3, 3]
+```
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bat"></pre>
+
+```batch
+
+```
+
 
 **We just offloaded a Java method to a RISC-V accelerator!** This example is a simple vector addition, and, as we can see from the task-info, the device selected was a RISC-V with RVV vector extensions. We can go a step further and emit the RISC-V assembly code for our generated OpenCL kernel. Todo do so, we need to reconfigure OCK with debug information enabled using `-DCA_ENABLE_DEBUG_SUPPORT=ON -DCA_DEBUG_SUPPORT=ON` as follows:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash">cmake -GNinja -Bbuild-riscv-debug \
+```bash
+cmake -GNinja -Bbuild-riscv-debug \
 -DCA_ENABLE_DEBUG_SUPPORT=ON \
 -DCA_DEBUG_SUPPORT=ON \
 -DCA_RISCV_ENABLED=ON \
@@ -233,20 +270,28 @@ c: [3, 3, 3, 3, 3, 3, 3, 3]</pre>
 -DCA_CL_ENABLE_ICD_LOADER=ON \
 -DCMAKE_INSTALL_PREFIX=$PWD/build-riscv-debug/install
 
-ninja -C build-riscv-debug install 
-</pre>
+ninja -C build-riscv-debug install
+```
+
 
 Then, before we run TornadoVM, we need to export the following env variable:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash">export CA_RISCV_DUMP_ASM=1    ## Print Assembly code</pre>
+```bash
+export CA_RISCV_DUMP_ASM=1    ## Print Assembly code
+```
+
 
 We run the same application:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash">tornado --jvm="-Ds0.t0.device=0:2" --threadInfo -m tornado.examples/uk.ac.manchester.tornado.examples.arrays.ArrayAddInt</pre>
+```bash
+tornado --jvm="-Ds0.t0.device=0:2" --threadInfo -m tornado.examples/uk.ac.manchester.tornado.examples.arrays.ArrayAddInt
+```
+
 
 And we will obtain the following output:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="asm">.text
+```asm
+.text
     .attribute	4, 16
     .attribute	5, "rv64i2p1_m2p0_a2p1_f2p2_d2p2_c2p0_v1p0_zicsr2p0_zve32f1p0_zve32x1p0_zve64d1p0_zve64f1p0_zve64x1p0_zvl128b1p0_zvl32b1p0_zvl64b1p0"
     .file	"kernel.opencl"
@@ -358,15 +403,21 @@ Task info: s0.t0
     Global work offset: [0]
     Global work size  : [8]
     Local  work size  : [8, 1, 1]
-    Number of workgroups  : [1]</pre>
+    Number of workgroups  : [1]
+```
+
 
 **This is the RISC-V code for our example**, that was executed with the RefSi RISC-V Simulator from Codeplay. However, if we pay attention, there are no RISC-V Vector (RVV) instructions being generated. This is because we need to export the following variable with the vector width:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash">export CA_RISCV_VF=4</pre>
+```bash
+export CA_RISCV_VF=4
+```
+
 
 If we run TornadoVM again with the OCK debug information on, we obtain the following:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="asm">tornado --jvm="-Ds0.t0.device=0:2" --threadInfo -m tornado.examples/uk.ac.manchester.tornado.examples.arrays.ArrayAddInt 
+```asm
+tornado --jvm="-Ds0.t0.device=0:2" --threadInfo -m tornado.examples/uk.ac.manchester.tornado.examples.arrays.ArrayAddInt 
 
 [ ASSEMBLY code … ]
 .LBB0_18:
@@ -426,11 +477,15 @@ Task info: s0.t0
     Global work size  : [8]
     Local  work size  : [8, 1, 1]
     Number of workgroups  : [1]
-</pre>
+```
+
 
 And, if we export the following variable:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">export SPIKE_SIM_DEBUG=1</pre>
+```
+export SPIKE_SIM_DEBUG=1
+```
+
 
 We can even run step by step with a debugger that is included within the RefSi Simulator. How cool is this?
 
@@ -438,17 +493,23 @@ We can even run step by step with a debugger that is included within the RefSi S
 
 TornadoVM, as in version 1.0.7, supports three different backends: OpenCL, NVIDIA PTX and SPIR-V. When using OCK, we can program devices in OpenCL C, and SPIR-V. So far, we have only used the SPIR-V backend, so how do we also enable the SPIR-V backend? What we need to do is to reconfigure TornadoVM to also use SPIR-V devices.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash">./bin/tornadovm-installer --jdk jdk21 --backend=opencl,spirv
-source setvars.sh 
-</pre>
+```bash
+./bin/tornadovm-installer --jdk jdk21 --backend=opencl,spirv
+source setvars.sh
+```
+
 
 Then, we can query all accelerators that TornadoVM can run with the following command:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash">tornado --devices</pre>
+```bash
+tornado --devices
+```
+
 
 And we get the following output:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">Number of Tornado drivers: 2
+```
+Number of Tornado drivers: 2
 Driver: SPIR-V
   Total number of SPIR-V devices  : 2
   Tornado device=0:0  (DEFAULT)
@@ -497,7 +558,8 @@ Driver: OpenCL
         Total Number of Block Threads: [1024]
         Max WorkGroup Configuration: [1024, 1024, 1024]
         Device OpenCL C version: OpenCL C 1.2 Clang 18.1.8
-</pre>
+```
+
 
 ```
 
@@ -507,11 +569,15 @@ The first two devices correspond to devices that can be used to run SPIR-V code.
 
 RefSi supports SPIR-V 1.0, but TornadoVM requires, at least, SPIR-V 1.2. We can force this by invoking TornadoVM with the following JVM flag:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash">tornado --jvm="-Dtornado.spirv.version=1.0" --devices</pre>
+```bash
+tornado --jvm="-Dtornado.spirv.version=1.0" --devices
+```
+
 
 And we will get the following output:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">Number of Tornado drivers: 2
+```
+Number of Tornado drivers: 2
 Driver: SPIR-V
   Total number of SPIR-V devices  : 3
   Tornado device=0:0  (DEFAULT)
@@ -568,7 +634,9 @@ Driver: OpenCL
         Workgroup Dimensions: 3
         Total Number of Block Threads: [1024]
         Max WorkGroup Configuration: [1024, 1024, 1024]
-        Device OpenCL C version: OpenCL C 1.2 Clang 18.1.8</pre>
+        Device OpenCL C version: OpenCL C 1.2 Clang 18.1.8
+```
+
 
 ```
 
@@ -576,9 +644,13 @@ Driver: OpenCL
 
 And we can use this SPIR-V backend and device to run our Java programs with TornadoVM:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash">tornado --jvm="-Dtornado.spirv.version=1.0 -Ds0.t0.device=0:1" --threadInfo -m tornado.examples/uk.ac.manchester.tornado.examples.arrays.ArrayAddInt</pre>
+```bash
+tornado --jvm="-Dtornado.spirv.version=1.0 -Ds0.t0.device=0:1" --threadInfo -m tornado.examples/uk.ac.manchester.tornado.examples.arrays.ArrayAddInt
+```
 
-<pre class="EnlighterJSRAW" data-enlighter-language="asm">[ ASSEMBLY CODE  … ]
+
+```asm
+[ ASSEMBLY CODE  … ]
 .LBB0_20:
     slli	s1, a5, 2
     add	a2, s5, s1
@@ -607,7 +679,8 @@ Task info: s0.t0
     Global work size  : [8]
     Local  work size  : [8, 1, 1]
     Number of workgroups  : [1]
-</pre>
+```
+
 
 Conclusions {#h2-6-conclusions}
 -------------------------------

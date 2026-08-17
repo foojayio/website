@@ -54,23 +54,27 @@ What we'll need:
 The source code {#h2-0-the-source-code}
 ---------------------------------------
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">import java.util.Random;
+```java
+import java.util.Random;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class PlayWithNumbers implements Supplier&lt;String&gt; {
+public class PlayWithNumbers implements Supplier<String> {
     @Override
     public String get() {
         IntStream numbers = new Random().ints(20, 0, 100);
         return numbers.sorted().mapToObj(Integer::toString).collect(Collectors.joining(", "));
     }
-}</pre>
+}
+```
+
 
 The Reloader {#h2-1-the-reloader}
 ---------------------------------
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">import java.io.File;
+```java
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
@@ -102,7 +106,7 @@ public class Reloader {
         Path file = Path.of(fileName);
         if (Files.notExists(file)) throw new FileNotFoundException(file + " not found");
         if (!file.toString().endsWith(".java")) throw new IllegalArgumentException(file + " is not a .java file");
-        Runnable compileAndRun = () -&gt; { // statement executed each time the file is saved
+        Runnable compileAndRun = () -> { // statement executed each time the file is saved
             try {
                 boolean compiled = compile(file);
                 if (compiled) execute(file);
@@ -131,17 +135,17 @@ public class Reloader {
         URLClassLoader loader = new URLClassLoader(new URL[] { classpath }, ClassLoader.getPlatformClassLoader());
         String supplierClassName = file.toString().substring(file.toString().lastIndexOf(File.separator) + 1, file.toString().lastIndexOf("."));
         // Create a new instance of the supplier with the class loader and call the get method
-        Class&lt;?&gt; stringSupplierClass = Class.forName(supplierClassName, true, loader);
+        Class<?> stringSupplierClass = Class.forName(supplierClassName, true, loader);
         Object stringSupplier = stringSupplierClass.getDeclaredConstructor().newInstance();
         if (stringSupplier instanceof Supplier) {
             Object newResult = ((Supplier) stringSupplier).get();
-            System.out.println("&gt; " + newResult);
+            System.out.println("> " + newResult);
         }
     }
 
     public static void monitorFile(Path file, Runnable onFileChanged) throws IOException {
         // Using WatchService was more code and less reliable
-        Runnable monitor = () -&gt; {
+        Runnable monitor = () -> {
             try {
                 long lastModified = Files.getLastModifiedTime(file).to(TimeUnit.SECONDS);
                 while (Files.exists(file)) {
@@ -167,7 +171,9 @@ public class Reloader {
         }
         new Reloader(args[0]);
     }
-}</pre>
+}
+```
+
 
 Now start it with ***java Reloader.java PlayWithNumbers.java*** and edit the *PlayWithNumbers.java* file as you wish.  
 [![](hot-reload-code-netbeans2-1024x576.png)](hot-reload-code-netbeans2.png) Playing with numbers and stream.

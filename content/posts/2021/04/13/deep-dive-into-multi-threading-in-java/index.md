@@ -21,7 +21,7 @@ frozen: false
 **\[About SKP's Core Java/Java EE Roots\]**  
 Series of Articles on Rooted Concepts in Core Java and J2EE. They Revolve Around Memory Architecture, Connection \& Memory Leaks, Core Java Syntax \& Semantics, Java Object Layout/Anatomy, Multi-Threading, Asynchronous Task Execution, Design Patterns, Java Agents, Class Loading, API Design, OOPs \& SOLID.  
 
-*** ** * ** ***
+
 
 Multi-threading represents a very intriguing topic, even after years of research and development for high quality, robust, and efficient software. With equal emphasis on hardware improvements and the software that runs on it -- we have newer paradigms for parallelism. The most important yet basic concepts are the ones which I present here. I then explain the intricacies of multi-threading in the Java programming language. Some of these are newer features and supported only from the Java Platform Standard Edition 5.0. Let us start with a quick overview and understanding of the core concepts.
 
@@ -89,7 +89,8 @@ The Object class in Java inherently contains the methods that can control access
 
 **Solution:** It is a simplified version of the Producer-Consumer problem.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">package org.csi_india.programming.workbench.multithreading;
+```java
+package org.csi_india.programming.workbench.multithreading;
 
 public class CSIDecrementer implements Runnable {
 
@@ -103,10 +104,11 @@ public class CSIDecrementer implements Runnable {
         while(true) csiSharedObject.decrementerAccess();
     }
 }
+```
 
-</pre>
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">package org.csi_india.programming.workbench.multithreading;
+```java
+package org.csi_india.programming.workbench.multithreading;
 
 public class CSIIncrementer implements Runnable {
 
@@ -120,10 +122,11 @@ public class CSIIncrementer implements Runnable {
         while(true) csiSharedObject.incrementerAccess();
     }   
 }
+```
 
-</pre>
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">package org.csi_india.programming.workbench.multithreading;
+```java
+package org.csi_india.programming.workbench.multithreading;
 
 public class CSIWorkbench extends Thread {
     public static void main(String[] args) {
@@ -134,9 +137,11 @@ public class CSIWorkbench extends Thread {
         csiThread02.start();
     }
 }
-</pre>
+```
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">package org.csi_india.programming.workbench.multithreading;
+
+```java
+package org.csi_india.programming.workbench.multithreading;
 
 public class CSISharedObject {
     // access from within this class only
@@ -166,7 +171,8 @@ public class CSISharedObject {
         }
     }
 }
-</pre>
+```
+
 
 You may refer to the following section, as these tools were introduced only since JDK 5 and 6. They provide a more granular or controlled access for asynchronous task execution in Java.
 

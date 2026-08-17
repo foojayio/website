@@ -25,7 +25,7 @@ frozen: false
 
 This blog aims to explain how Java programmers can build TornadoVM with IntelliJ IDEA, and how they can run TornadoVM unit-tests or other Java programs.
 
-*** ** * ** ***
+
 
 *Prerequisites* {#h2-0-prerequisites}
 -------------------------------------
@@ -49,19 +49,28 @@ Additionally, the following commands must be installed in your system and should
 
 {#aolr5166025}
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ which make</pre>
+```
+$ which make
+```
+
 
 * In Windows OS, open your shell configuration (e.g. x64 Native Tools Command Prompt for VS 2022) and initialize the environment:
 
 {#7mg78166105}
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ cd &lt;path-to-TornadoVM-directory&gt;
-$ .\bin\windowsMicrosoftStudioTools2022.cmd</pre>
+```
+$ cd <path-to-TornadoVM-directory>
+$ .\bin\windowsMicrosoftStudioTools2022.cmd
+```
+
 
 You can verify that your system recognizes cmake, by running:{#oe9dj102289}
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ where cmake
-$ where pyInstaller</pre>
+```
+$ where cmake
+$ where pyInstaller
+```
+
 
 If the commands are recognized, skip the next step (Step b).
 
@@ -73,26 +82,38 @@ Assuming that you have downloaded and installed cmake in a custom directory, you
 
 ##### Open your shell configuration file (e.g. .bashrc, .zshrc) {#30eyr88135}
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ vim ~/.zshrc  		# or ~/.bashrc depending on your shell</pre>
+```
+$ vim ~/.zshrc  		# or ~/.bashrc depending on your shell
+```
+
 
 ##### Add the following line and replace the \<custom-path\> with the path to your installation {#3r0fb92748}
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ export PATH=&lt;custom-path&gt;/cmake-3.25.2-macos-universal/CMake.app/Contents/bin:$PATH</pre>
+```
+$ export PATH=<custom-path>/cmake-3.25.2-macos-universal/CMake.app/Contents/bin:$PATH
+```
+
 
 ##### Save and apply the changes {#r900z99923}
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ source ~/.zshrc  	# or source ~/.bashrc</pre>
+```
+$ source ~/.zshrc  	# or source ~/.bashrc
+```
+
 
 #### ii) Add cmake and pyInstaller in your PATH (Windows) {#krq20102352}
 
 You can add the variables to your PATH by searching **Edit the system environment variables** , clicking **Environment Variables...** , and editing the **PATH** with your cmake directory. The commands should have been selected to be installed as native tools when you installed Microsoft VS 2022. An example of the directories where the commands have been installed is as follows:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\
-$ &lt;path-to-TornadoVM-directory&gt;\.venv\Scripts</pre>
+```
+$ C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\
+$ <path-to-TornadoVM-directory>\.venv\Scripts
+```
+
 
 **Note:** It is recommended to use the python interpreter under the virtual environment (.venv) as the Python SDK for your TornadoVM project, since it contains all dependent modules (i.e., PyInstaller, psutil) to build TornadoVM and run the tests from IntelliJ.
 
-*** ** * ** ***
+
 
 1. Clone \& Install TornadoVM from Shell {#h2-3-1-clone-install-tornadovm-from-shell}
 -------------------------------------------------------------------------------------
@@ -101,7 +122,10 @@ To initialize IDE project files for building and running TornadoVM from IntelliJ
 
 First you need to clone the source code from GitHub:{#srq4j260067}
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ git clone https://github.com/beehive-lab/TornadoVM.git</pre>
+```
+$ git clone https://github.com/beehive-lab/TornadoVM.git
+```
+
 
 Then, you can invoke the tornadovm-installer script which will download the dependencies and will install TornadoVM with the defined JDK and backends (e.g., opencl, ptx, spirv):{#bnas8236281}
 
@@ -109,37 +133,46 @@ Then, you can invoke the tornadovm-installer script which will download the depe
 
 {#sziwp3780}
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ cd TornadoVM
+```
+$ cd TornadoVM
 $ ./bin/tornadovm-installer --jdk graal-jdk-21 --backend opencl
-$ source setvars.sh</pre>
+$ source setvars.sh
+```
+
 
 * In Windows OS:
 
 {#amxxo4451}
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ cd TornadoVM
+```
+$ cd TornadoVM
 $ python -m venv .venv
 $ .venv\Scripts\activate.bat
 $ .\bin\windowsMicrosoftStudioTools2022.cmd
 $ .\bin\tornadovm-installer --jdk graal-jdk-21 --backend opencl
-$ setvars.cmd</pre>
+$ setvars.cmd
+```
 
-*** ** * ** ***
+
+
 
 2. Generate the IntelliJ Project Files {#h2-4-2-generate-the-intellij-project-files}
 ------------------------------------------------------------------------------------
 
 Then you can generate the IDE project files based on your built TornadoVM instance (i.e., with the JAVA_HOME and the backends), by running:{#y050h259785}
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ tornado --intellijinit
-Generating &lt;path-to-tornadovm&gt;/.build/_internal_TornadoVM_Maven-cleanAndinstall.run.xml
-Generating &lt;path-to-tornadovm&gt;/.build/TornadoVM-Build.run.xml
-Generating &lt;path-to-tornadovm&gt;/.build/TornadoVM-Tests.run.xml
-IntelIj Files Generated ............... [ok]</pre>
+```
+$ tornado --intellijinit
+Generating <path-to-tornadovm>/.build/_internal_TornadoVM_Maven-cleanAndinstall.run.xml
+Generating <path-to-tornadovm>/.build/TornadoVM-Build.run.xml
+Generating <path-to-tornadovm>/.build/TornadoVM-Tests.run.xml
+IntelIj Files Generated ............... [ok]
+```
+
 
 This command will generate three files. The first two files are used to build TornadoVM from IntelliJ, while the latter is used to run the TornadoVM unit-tests. You will be able to configure those files from IntelliJ in the next step.
 
-*** ** * ** ***
+
 
 3. Configure the generated IDE project files {#h2-5-3-configure-the-generated-ide-project-files}
 ------------------------------------------------------------------------------------------------
@@ -166,14 +199,14 @@ Similarly you can update the selected interpreter for the Python configuration f
  <img decoding="async" width="1024" height="784" src="Configure-Tests-1024x784.png" alt="" class="wp-image-114762" style="width:566px;height:auto">
 </figure>
 
-*** ** * ** ***
+
 
 4. Build TornadoVM from IntelliJ {#h2-6-4-build-tornadovm-from-intellij}
 ------------------------------------------------------------------------
 
 You can select the TornadoVM-Build configuration file and run. This should build TornadoVM with the JAVA_HOME and the backends that you selected in Step 1. If you run in Windows OS, this process will also invoke the pyInstaller package to create the TornadoVM executables.
 
-*** ** * ** ***
+
 
 5. Run TornadoVM Unit-tests from IntelliJ {#h2-7-5-run-tornadovm-unit-tests-from-intellij}
 ------------------------------------------------------------------------------------------
@@ -186,7 +219,7 @@ The outcome of running the unit-tests should be similar to this image:
  <img loading="lazy" decoding="async" width="1024" height="943" src="Run-Tests-1024x943.png" alt="" class="wp-image-114763" style="width:604px;height:auto">
 </figure>
 
-*** ** * ** ***
+
 
 6. Run TornadoVM Examples/Applications from IntelliJ {#h2-8-6-run-tornadovm-examples-applications-from-intellij}
 ----------------------------------------------------------------------------------------------------------------
@@ -209,29 +242,38 @@ You need to click Modify options and Add VM options. Once you have enabled the V
 
 {#lmy7i618609}
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ cd &lt;path-to-TornadoVM-directory&gt;
+```
+$ cd <path-to-TornadoVM-directory>
 $ source setvars.sh
-$ tornado --printJavaFlags</pre>
+$ tornado --printJavaFlags
+```
+
 
 * In Windows OS:
 
 {#per2e618615}
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ cd &lt;path-to-TornadoVM-directory&gt;
+```
+$ cd <path-to-TornadoVM-directory>
 $ .\bin\windowsMicrosoftStudioTools2022.cmd
 $ setvars.cmd
-$ tornado --printJavaFlags</pre>
+$ tornado --printJavaFlags
+```
+
 
 The output of the command depends on the TornadoVM backends you've built. For example, if you build with all backends, it should be similar to this:{#mjihz571845}
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&lt;path-to-TornadoVM-directory&gt;/etc/dependencies/TornadoVM-graal-jdk-21/graalvm-community-openjdk-21.0.1+12.1/bin/java
--server -XX:-UseCompressedOops -XX:+UnlockExperimentalVMOptions -XX:+EnableJVMCI -XX:-UseCompressedClassPointers --enable-preview -Djava.library.path=&lt;path-to-TornadoVM-directory&gt;/bin/sdk/lib  --module-path .:&lt;path-to-TornadoVM-directory&gt;/bin/sdk/share/java/tornado
+```
+<path-to-TornadoVM-directory>/etc/dependencies/TornadoVM-graal-jdk-21/graalvm-community-openjdk-21.0.1+12.1/bin/java
+-server -XX:-UseCompressedOops -XX:+UnlockExperimentalVMOptions -XX:+EnableJVMCI -XX:-UseCompressedClassPointers --enable-preview -Djava.library.path=<path-to-TornadoVM-directory>/bin/sdk/lib  --module-path .:<path-to-TornadoVM-directory>/bin/sdk/share/java/tornado
 -Dtornado.load.api.implementation=uk.ac.manchester.tornado.runtime.tasks.TornadoTaskGraph -Dtornado.load.runtime.implementation=uk.ac.manchester.tornado.runtime.TornadoCoreRuntime -Dtornado.load.tornado.implementation=uk.ac.manchester.tornado.runtime.common.Tornado
 -Dtornado.load.annotation.implementation=uk.ac.manchester.tornado.annotation.ASMClassVisitor -Dtornado.load.annotation.parallel=uk.ac.manchester.tornado.api.annotations.Parallel  -XX:+UseParallelGC
-@&lt;path-to-TornadoVM-directory&gt;/bin/sdk/etc/exportLists/common-exports
-@&lt;path-to-TornadoVM-directory&gt;/bin/sdk/etc/exportLists/opencl-exports
-@&lt;path-to-TornadoVM-directory&gt;/bin/sdk/etc/exportLists/spirv-exports
-@&lt;path-to-TornadoVM-directory&gt;/bin/sdk/etc/exportLists/ptx-exports --add-modules ALL-SYSTEM,tornado.runtime,tornado.annotation,tornado.drivers.common,tornado.drivers.opencl,tornado.drivers.opencl,tornado.drivers.ptx</pre>
+@<path-to-TornadoVM-directory>/bin/sdk/etc/exportLists/common-exports
+@<path-to-TornadoVM-directory>/bin/sdk/etc/exportLists/opencl-exports
+@<path-to-TornadoVM-directory>/bin/sdk/etc/exportLists/spirv-exports
+@<path-to-TornadoVM-directory>/bin/sdk/etc/exportLists/ptx-exports --add-modules ALL-SYSTEM,tornado.runtime,tornado.annotation,tornado.drivers.common,tornado.drivers.opencl,tornado.drivers.opencl,tornado.drivers.ptx
+```
+
 
 Copy the flags starting from -server to the end, and add them in the VM options field.{#t8glk631723}
 
@@ -269,7 +311,7 @@ The output should be similar to the following image, which is executed on Apple 
  <img loading="lazy" decoding="async" width="1024" height="502" src="Run-Application-1024x502.png" alt="" class="wp-image-114765" style="width:628px;height:auto">
 </figure>
 
-*** ** * ** ***
+
 
 *Summary* {#h2-11-summary}
 --------------------------

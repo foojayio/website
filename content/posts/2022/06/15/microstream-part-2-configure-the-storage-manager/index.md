@@ -38,11 +38,14 @@ The Storage Manager {#h2-0-the-storage-manager}
 
 You as a developer will interact with the class *StorageManager* to persist your data. When supplying the configuration, a StorageManager is ready to write the Java Instances in a binary format to the persistent medium. But more on the format later on, let us jump directly into some pieces of code to show you the gist of the *StorageManager*.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">try (StorageManager storageManager = EmbeddedStorage.start(root, Paths.get("target/data"))) {
+```java
+try (StorageManager storageManager = EmbeddedStorage.start(root, Paths.get("target/data"))) {
    root.setContent("Hello World! @ " + new Date()); 
    // Store the modified root and its content. 
    storageManager.storeRoot();
-}</pre>
+}
+```
+
 
 We start an embedded storage, an alternate name for referring to the Java instances in memory as database, by providing it a root object of the Object Graph that denotes our database and a path on the file system where data is persisted to survive a process restart.
 
@@ -52,10 +55,13 @@ But after each store operation on the manager, like the `storeRoot()` method in 
 
 What is that root object? In this example, it is just an Object holding a String reference.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public class DataRoot { 
+```java
+public class DataRoot { 
    private String content; 
    // getter and setter
-}</pre>
+}
+```
+
 
 As indicated earlier, no need for a mapping, annotation, or interface, just plain Java POJOs.
 
@@ -64,11 +70,14 @@ Configuration {#h2-1-configuration}
 
 What dependencies do you need to add to your project? You just need a single dependency to have access to the *StorageManager* class that writes to the file system.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="xml">&lt;dependency&gt;
-   &lt;groupId&gt;one.microstream&lt;/groupId&gt;
-   &lt;artifactId&gt;microstream-storage-embedded&lt;/artifactId&gt;
-   &lt;version&gt;${microstream.version}&lt;/version&gt;
-&lt;/dependency&gt;</pre>
+```xml
+<dependency>
+   <groupId>one.microstream</groupId>
+   <artifactId>microstream-storage-embedded</artifactId>
+   <version>${microstream.version}</version>
+</dependency>
+```
+
 
 It brings in a few other MicroStream artifacts, the persistence to binary format and the Abstract File System, more on that later, but there are no other external dependencies included through the artifact. With the latest release v7.0, we have added the SLF4J API dependency to be able to give some feedback on the internal actions through logging statements.
 
@@ -83,7 +92,8 @@ The first 2 are already used in the first section of this article. The Backup di
 
 The easiest way to define all these 4 configuration aspects can be done using the `StorageConfiguration` object.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">NioFileSystem fileSystem = NioFileSystem.New();
+```java
+NioFileSystem fileSystem = NioFileSystem.New();
 Path backup = Paths.get("backup");
 StorageConfiguration storageConfiguration = StorageConfiguration.Builder()
        .setStorageFileProvider(
@@ -94,7 +104,8 @@ StorageConfiguration storageConfiguration = StorageConfiguration.Builder()
         .setChannelCountProvider(StorageChannelCountProvider.New(2))
         .createConfiguration();
 StorageManager storageManager = EmbeddedStorage.start(root, storageConfiguration);
-</pre>
+```
+
 
 Abstract File System (AFS) {#h2-2-abstract-file-system-afs}
 -----------------------------------------------------------
@@ -107,17 +118,21 @@ The database storage stores the binary format into a table of the database, so i
 
 How can you make use of it? Add the AFS SQL artifact to your project to have support for PostgreSQL, MariaDB, and SQLLite.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="xml">&lt;dependency&gt;
-   &lt;groupId&gt;one.microstream&lt;/groupId&gt;
-   &lt;artifactId&gt;microstream-afs-sql&lt;/artifactId&gt;
-   &lt;version&gt;${microstream.version}&lt;/version&gt;
-&lt;/dependency&gt;</pre>
+```xml
+<dependency>
+   <groupId>one.microstream</groupId>
+   <artifactId>microstream-afs-sql</artifactId>
+   <version>${microstream.version}</version>
+</dependency>
+```
+
 
 Other databases are supported for our Enterprise customers through additional artifacts. But also No-SQL solutions, like Redis, Kafka, and Hazelcast and Cloud storage like Amazon S3 and Microsoft Azure Blob Storage.
 
 Instead of the `NioFileSystem` class, we used earlier to write to disk, we use this time SqlFileSystem as this provides the implementation for the AFS. We need to supply a data source to the database and the following example uses the table *data* to store the Type Dictionary, more on this in article number 4 about the serialisation of Java instances of MicroStream, and tables _data_channel*0* and _data_channel*1* to store the binary data for the Java instances.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">PGSimpleDataSource dataSource = new PGSimpleDataSource();
+```java
+PGSimpleDataSource dataSource = new PGSimpleDataSource();
 dataSource.setUrl("jdbc:postgresql://localhost:5432/mydb");
 dataSource.setUser("postgres");
 dataSource.setPassword("mysecretpassword");
@@ -135,7 +150,9 @@ StorageConfiguration storageConfiguration = StorageConfiguration.Builder()
                        .createFileProvider())
 
         .setChannelCountProvider(StorageChannelCountProvider.New(2))
-        .createConfiguration();</pre>
+        .createConfiguration();
+```
+
 
 Configuration through Configuration Files {#h2-3-configuration-through-configuration-files}
 -------------------------------------------------------------------------------------------
@@ -144,17 +161,21 @@ Until now, we have always used the programmatic configuration of the *StorageMan
 
 You can of course read configuration values yourself from an external source, but all code is already available within the Embedded Storage Configuration artifact.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="xml">&lt;dependency&gt;
-   &lt;groupId&gt;one.microstream&lt;/groupId&gt;
-   &lt;artifactId&gt;microstream-storage-embedded-configuration&lt;/artifactId&gt;
-   &lt;version&gt;${microstream.version}&lt;/version&gt;
-&lt;/dependency&gt;</pre>
+```xml
+<dependency>
+   <groupId>one.microstream</groupId>
+   <artifactId>microstream-storage-embedded-configuration</artifactId>
+   <version>${microstream.version}</version>
+</dependency>
+```
+
 
 With this dependency in place, we can just refer to the location of the configuration file and the Storage Manager can be configured based on the key-value pairs that are found. The supported formats are properties and ini files and XML files. The format is based on the extension the configuration file has.
 
 The next snippet shows how you can read it from a classpath file.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">try (EmbeddedStorageManager storageManager = EmbeddedStorageConfiguration.load(
+```java
+try (EmbeddedStorageManager storageManager = EmbeddedStorageConfiguration.load(
          "META-INF/microstream/storage.properties" ) 
       .createEmbeddedStorageFoundation()
       .createEmbeddedStorageManager()
@@ -163,7 +184,8 @@ The next snippet shows how you can read it from a classpath file.
 
  // Use storageManager
 }
-</pre>
+```
+
 
 The *EmbeddedStorageFoundation* class is actually the configuration class that gives you the possibility to configure every little detail of MicroStream. The StorageConfiguration we have used in the previous section is a convenient helper method to configure the most important aspects while leaving all the other configuration aspects to their defaults.
 

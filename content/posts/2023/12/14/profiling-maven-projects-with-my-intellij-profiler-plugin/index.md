@@ -47,7 +47,8 @@ Only [Quarku's `quarkusDev`](https://quarkus.io/guides/gradle-tooling) task has 
 
 You can configure the options that the plugin uses for specific task prefixes yourself in the `.profileconfig.json` file:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="json" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">{
+```json
+{
     "additionalGradleTargets": [
         {
             // example for Quarkus
@@ -63,7 +64,9 @@ You can configure the options that the plugin uses for specific task prefixes yo
             "description": "Example quarkus config, adding profiling arguments via -Djvm.args option to the Maven goal run"
         }
     ]
-}</pre>
+}
+```
+
 
 This update has been the first one with new features since April. The new features should make life easier for profiling both real-world and toy applications. If you have any other feature requests, feel free to create an [issue](https://github.com/parttimenerd/intellij-profiler-plugin/issues) on GitHub and, ideally, try to create a [pull request](https://github.com/parttimenerd/intellij-profiler-plugin/pulls). I'm happy to help you get started.
 

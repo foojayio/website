@@ -50,15 +50,19 @@ We put a break-point on line 4 using the IntelliJ debugger and run this debuggin
 
 The debugging session starts with the JVM informing the debugger of the start and the debugger then requesting the sizes of the different IDs used in this session (e.g., that a method ID is 8 bytes wide, ...):
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="dracula" data-enlighter-highlight="" data-enlighter-linenumbers="false" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">((= cause (events Event Composite ("suspendPolicy")=(wrap "byte" 2) ("events" 0 "kind")=(wrap "string" "VMStart") ("events" 0 "requestID")=(wrap "int" 0) ("events" 0 "thread")=(wrap "thread" 1)))
+```
+((= cause (events Event Composite ("suspendPolicy")=(wrap "byte" 2) ("events" 0 "kind")=(wrap "string" "VMStart") ("events" 0 "requestID")=(wrap "int" 0) ("events" 0 "thread")=(wrap "thread" 1)))
   (= var0 (request VirtualMachine IDSizes)))
 
 // the reply to the IDSizes request is
-IDSizesReply(fieldIDSize=IntValue(8), methodIDSize=IntValue(8), objectIDSize=IntValue(8), referenceTypeIDSize=IntValue(8), frameIDSize=IntValue(8))</pre>
+IDSizesReply(fieldIDSize=IntValue(8), methodIDSize=IntValue(8), objectIDSize=IntValue(8), referenceTypeIDSize=IntValue(8), frameIDSize=IntValue(8))
+```
+
 
 Typically one starts the debugging session with `suspend=y`, so that the JVM stops its execution till the debugger is ready. The debugger starts by requesting to get events for every class preparation and thread starts, some information on the debugging capabilities of the JVM and information on the loaded classes, the `sun.instrument.InstrumentationImpl` class in particular:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="dracula" data-enlighter-highlight="" data-enlighter-linenumbers="true" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">((= cause (request EventRequest Set ("eventKind")=(wrap "byte" 8) ("suspendPolicy")=(wrap "byte" 0)))
+```
+((= cause (request EventRequest Set ("eventKind")=(wrap "byte" 8) ("suspendPolicy")=(wrap "byte" 0)))
   (= var0 (request EventRequest Set ("eventKind")=(wrap "byte" 8) ("suspendPolicy")=(wrap "byte" 0)))
   (= var1 (request VirtualMachine Version))
   (= var2 (request VirtualMachine Capabilities))
@@ -72,7 +76,8 @@ Typically one starts the debugging session with `suspend=y`, so that the JVM sto
   (= var2 (request ReferenceType MethodsWithGeneric ("refType")=(wrap "klass" 456)))
   (for iter0 (get var2 "declared") 
     (= var3 (request Method LineTable ("methodID")=(get iter0 "methodID") ("refType")=(wrap "klass" 456)))))
-</pre>
+```
+
 
 `InstrumentationImpl` implements the `Instrumentation` interface:
 > This class provides services needed to instrument Java programming language code. Instrumentation is the addition of byte-codes to methods for the purpose of gathering data to be utilized by tools. Since the changes are purely additive, these tools do not modify application state or behavior. Examples of such benign tools include monitoring agents, profilers, coverage analyzers, and event loggers.
@@ -82,10 +87,13 @@ The debugger uses the `AllClassesWithGeneric` request (line 6) to obtain a mappi
 
 The JVM then sends two `ThreadStart` events for the main and the JVM internal notification thread:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="dracula" data-enlighter-highlight="" data-enlighter-linenumbers="false" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">((= cause (events Event Composite ("suspendPolicy")=(wrap "byte" 0) ("events" 0 "kind")=(wrap "string" "ThreadStart") ("events" 0 "requestID")=(wrap "int" 4) ("events" 0 "thread")=(wrap "thread" 1097)))
+```
+((= cause (events Event Composite ("suspendPolicy")=(wrap "byte" 0) ("events" 0 "kind")=(wrap "string" "ThreadStart") ("events" 0 "requestID")=(wrap "int" 4) ("events" 0 "thread")=(wrap "thread" 1097)))
 )
 ((= cause (events Event Composite ("suspendPolicy")=(wrap "byte" 0) ("events" 0 "kind")=(wrap "string" "ThreadStart") ("events" 0 "requestID")=(wrap "int" 4) ("events" 0 "thread")=(wrap "thread" 1)))
-)</pre>
+)
+```
+
 
 The notification thread is:
 >
@@ -97,28 +105,38 @@ The notification thread is:
 
 The JVM also sends the `ClassPrepare` event for the `URLCLassPath.FileLoader` class:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="dracula" data-enlighter-highlight="" data-enlighter-linenumbers="false" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">((= cause (events Event Composite ("suspendPolicy")=(wrap "byte" 0) ("events" 0 "kind")=(wrap "string" "ClassPrepare") ("events" 0 "refTypeTag")=(wrap "byte" 1) ("events" 0 "requestID")=(wrap "int" 2) ("events" 0 "signature")=(wrap "string" "Ljdk/internal/loader/URLClassPath$FileLoader$1;") ("events" 0 "status")=(wrap "int" 7) ("events" 0 "thread")=(wrap "thread" 1) ("events" 0 "typeID")=(wrap "klass" 1099)))
-)</pre>
+```
+((= cause (events Event Composite ("suspendPolicy")=(wrap "byte" 0) ("events" 0 "kind")=(wrap "string" "ClassPrepare") ("events" 0 "refTypeTag")=(wrap "byte" 1) ("events" 0 "requestID")=(wrap "int" 2) ("events" 0 "signature")=(wrap "string" "Ljdk/internal/loader/URLClassPath$FileLoader$1;") ("events" 0 "status")=(wrap "int" 7) ("events" 0 "thread")=(wrap "thread" 1) ("events" 0 "typeID")=(wrap "klass" 1099)))
+)
+```
+
 
 Which is a "Nested class used to represent a loader of classes and resources from a file URL that refers to a directory." used internally during the loading of classes from files.
 
 But then, finally, the JVM loaded the `SmallProgram` class and sends a `ClassPrepare` event. This causes the debugger to obtain information on the class:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="dracula" data-enlighter-highlight="" data-enlighter-linenumbers="false" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">((= cause (events Event Composite ("suspendPolicy")=(wrap "byte" 1) ("events" 0 "kind")=(wrap "string" "ClassPrepare") ("events" 0 "refTypeTag")=(wrap "byte" 1) ("events" 0 "requestID")=(wrap "int" 34) ("events" 0 "signature")=(wrap "string" "LSmallProgram;") ("events" 0 "status")=(wrap "int" 3) ("events" 0 "thread")=(wrap "thread" 1) ("events" 0 "typeID")=(wrap "klass" 1100) ("events" 1 "kind")=(wrap "string" "ClassPrepare") ("events" 1 "refTypeTag")=(wrap "byte" 1) ("events" 1 "requestID")=(wrap "int" 2) ("events" 1 "signature")=(wrap "string" "LSmallProgram;") ("events" 1 "status")=(wrap "int" 3) ("events" 1 "thread")=(wrap "thread" 1) ("events" 1 "typeID")=(wrap "klass" 1100)))
+```
+((= cause (events Event Composite ("suspendPolicy")=(wrap "byte" 1) ("events" 0 "kind")=(wrap "string" "ClassPrepare") ("events" 0 "refTypeTag")=(wrap "byte" 1) ("events" 0 "requestID")=(wrap "int" 34) ("events" 0 "signature")=(wrap "string" "LSmallProgram;") ("events" 0 "status")=(wrap "int" 3) ("events" 0 "thread")=(wrap "thread" 1) ("events" 0 "typeID")=(wrap "klass" 1100) ("events" 1 "kind")=(wrap "string" "ClassPrepare") ("events" 1 "refTypeTag")=(wrap "byte" 1) ("events" 1 "requestID")=(wrap "int" 2) ("events" 1 "signature")=(wrap "string" "LSmallProgram;") ("events" 1 "status")=(wrap "int" 3) ("events" 1 "thread")=(wrap "thread" 1) ("events" 1 "typeID")=(wrap "klass" 1100)))
   (= var0 (request ReferenceType SourceFile ("refType")=(get cause "events" 0 "typeID")))
   (= var1 (request ReferenceType SourceDebugExtension ("refType")=(get cause "events" 0 "typeID")))
   (= var2 (request ReferenceType MethodsWithGeneric ("refType")=(get cause "events" 0 "typeID")))
   (for iter0 (get var2 "declared") 
-    (= var3 (request Method LineTable ("methodID")=(get iter0 "methodID") ("refType")=(get cause "events" 0 "typeID")))))</pre>
+    (= var3 (request Method LineTable ("methodID")=(get iter0 "methodID") ("refType")=(get cause "events" 0 "typeID")))))
+```
+
 
 The debugger then sets the break-point using the mappings obtained before...
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="dracula" data-enlighter-highlight="" data-enlighter-linenumbers="false" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">((= cause (request EventRequest Set ("eventKind")=(wrap "byte" 2) ("suspendPolicy")=(wrap "byte" 2) ("modifiers" 0 "kind")=(wrap "string" "LocationOnly") ("modifiers" 0 "loc" "codeIndex")=(wrap "long" 4) ("modifiers" 0 "loc" "declaringType")=(wrap "class-type" 1100) ("modifiers" 0 "loc" "methodRef")=(wrap "method" 105553134992648)))
-  (= var0 (request EventRequest Set ("eventKind")=(wrap "byte" 2) ("suspendPolicy")=(wrap "byte" 2) ("modifiers" 0 "kind")=(wrap "string" "LocationOnly") ("modifiers" 0 "loc" "codeIndex")=(wrap "long" 4) ("modifiers" 0 "loc" "declaringType")=(wrap "class-type" 1100) ("modifiers" 0 "loc" "methodRef")=(wrap "method" 105553134992648))))</pre>
+```
+((= cause (request EventRequest Set ("eventKind")=(wrap "byte" 2) ("suspendPolicy")=(wrap "byte" 2) ("modifiers" 0 "kind")=(wrap "string" "LocationOnly") ("modifiers" 0 "loc" "codeIndex")=(wrap "long" 4) ("modifiers" 0 "loc" "declaringType")=(wrap "class-type" 1100) ("modifiers" 0 "loc" "methodRef")=(wrap "method" 105553134992648)))
+  (= var0 (request EventRequest Set ("eventKind")=(wrap "byte" 2) ("suspendPolicy")=(wrap "byte" 2) ("modifiers" 0 "kind")=(wrap "string" "LocationOnly") ("modifiers" 0 "loc" "codeIndex")=(wrap "long" 4) ("modifiers" 0 "loc" "declaringType")=(wrap "class-type" 1100) ("modifiers" 0 "loc" "methodRef")=(wrap "method" 105553134992648))))
+```
+
 
 ... and requests the resuming of the program execution. The JVM then hits the break-point and requests lots of information: Information on the transitive superclasses, the current thread, the current stack trace, and every local variable in the currently executed method:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="dracula" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">((= cause (events Event Composite ("suspendPolicy")=(wrap "byte" 2) ("events" 0 "kind")=(wrap "string" "Breakpoint") ("events" 0 "requestID")=(wrap "int" 35) ("events" 0 "thread")=(wrap "thread" 1) ("events" 0 "location" "codeIndex")=(wrap "long" 4) ("events" 0 "location" "declaringType")=(wrap "class-type" 1100) ("events" 0 "location" "methodRef")=(wrap "method" 105553134992648)))
+```
+((= cause (events Event Composite ("suspendPolicy")=(wrap "byte" 2) ("events" 0 "kind")=(wrap "string" "Breakpoint") ("events" 0 "requestID")=(wrap "int" 35) ("events" 0 "thread")=(wrap "thread" 1) ("events" 0 "location" "codeIndex")=(wrap "long" 4) ("events" 0 "location" "declaringType")=(wrap "class-type" 1100) ("events" 0 "location" "methodRef")=(wrap "method" 105553134992648)))
   (rec recursion0 1000 var3 (request ClassType Superclass ("clazz")=(get cause "events" 0 "location" "declaringType"))
     (reccall var6 recursion0 ("clazz")=(get var3 "superclass"))
     (= var4 (request ReferenceType Interfaces ("refType")=(get var3 "superclass")))
@@ -148,7 +166,8 @@ The debugger then sets the break-point using the mappings obtained before...
   (for iter1 (get var21 "interfaces") 
     (= var22 (request ReferenceType Interfaces ("refType")=iter1)))
   (= var25 (request StringReference Value ("stringObject")=(get var24 "values" 0))))
-</pre>
+```
+
 
 This allows the debugger to show us the following:
 ![](image-1-1024x189.png)

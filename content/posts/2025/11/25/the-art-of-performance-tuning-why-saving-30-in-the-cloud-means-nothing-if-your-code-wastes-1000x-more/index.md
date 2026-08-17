@@ -64,17 +64,20 @@ Let's see how good am I with performance analysis {#h2-2-let-s-see-how-good-am-i
 
 The naive baseline looked like this:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public static boolean checkIntegerOrg(String testInteger) {
+```
+public static boolean checkIntegerOrg(String testInteger) {
     try {
         Integer theInteger = new Integer(testInteger);
-        return (theInteger.toString() != "") &amp;&amp;
-               (theInteger.intValue() &gt; 10) &amp;&amp;
-               ((theInteger.intValue() &gt;= 2) &amp;&amp; (theInteger.intValue() &lt;= 100000)) &amp;&amp;
+        return (theInteger.toString() != "") &&
+               (theInteger.intValue() > 10) &&
+               ((theInteger.intValue() >= 2) && (theInteger.intValue() <= 100000)) &&
                (theInteger.toString().charAt(0) == '3');
     } catch (NumberFormatException err) {
         return false;
     }
-}</pre>
+}
+```
+
 
 Looks reasonable, right? If the string isn't a number, we catch the exception and move on. Simple.
 
@@ -95,17 +98,20 @@ This is where the journey begins --- three datasets, each one messier than the l
 
 Determined to fix this, I thought: Let's just validate inputs before parsing them. Naturally, I reached for regular expressions:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public static boolean checkIntegerRegExp(String testInteger) {
+```
+public static boolean checkIntegerRegExp(String testInteger) {
     try {
-        if (testInteger.length() &gt; 6) return false;
+        if (testInteger.length() > 6) return false;
         if (!testInteger.matches("^\\d{1,6}$")) return false;
         Integer theInteger = Integer.valueOf(testInteger);
         int val = theInteger.intValue();
-        return (val &gt; 10) &amp;&amp; (val &lt;= 100000) &amp;&amp; (testInteger.charAt(0) == '3');
+        return (val > 10) && (val <= 100000) && (testInteger.charAt(0) == '3');
     } catch (NumberFormatException err) {
         return false;
     }
-}</pre>
+}
+```
+
 
 It looked elegant and safe. And it was slower. Much slower.
 ![](fj_art1_results_2-700x273.png)
@@ -126,18 +132,21 @@ In one of my own projects, a regex intended to filter invalid IDs became a CPU f
 
 Next, I tried something simpler. What if we just used what Java already offers --- without regex magic or exception traps?
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public static boolean checkIntegerIsDigit(String testInteger) {
-    if (testInteger.length() &gt; 6)
+```
+public static boolean checkIntegerIsDigit(String testInteger) {
+    if (testInteger.length() > 6)
         return false;
     if (testInteger.charAt(0) != '3')
         return false;
-    for (int i = 1; i &lt; testInteger.length(); i++) {
+    for (int i = 1; i < testInteger.length(); i++) {
         if (!Character.isDigit(testInteger.charAt(i))) 
             return false;
     }
     int val = Integer.parseInt(testInteger);
-    return (val &gt; 10) &amp;&amp; (val &lt;= 100000);
-}</pre>
+    return (val > 10) && (val <= 100000);
+}
+```
+
 
 Performance immediately improved --- **by an order of magnitude.**
 ![](fj_art1_results_3-700x345.png)
@@ -161,26 +170,29 @@ As a senior engineer once told me:
 
 But I wanted to know how far I could go. So I stripped away even the built-ins and wrote my own version:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public static boolean checkIntegerCustomIsDigit(String testInteger) {
-    if (testInteger.length() &gt; 6)
+```
+public static boolean checkIntegerCustomIsDigit(String testInteger) {
+    if (testInteger.length() > 6)
         return false;
     if (testInteger.charAt(0) != '3')
         return false;
-    for (int i = 1; i &lt; testInteger.length(); i++) {
+    for (int i = 1; i < testInteger.length(); i++) {
         char c = testInteger.charAt(i);
-        if (c &lt; '0' || c &gt; '9') 
+        if (c < '0' || c > '9') 
             return false;
     }
     int val = fastParseInt(testInteger);
-    return (val &gt; 10) &amp;&amp; (val &lt;= 100000);
+    return (val > 10) && (val <= 100000);
 }
 
 public static int fastParseInt(String s) {
     int num = 0;
-    for (int i = 0; i &lt; s.length(); i++)
+    for (int i = 0; i < s.length(); i++)
         num = num * 10 + (s.charAt(i) - '0');
     return num;
-}</pre>
+}
+```
+
 
 This handcrafted version was roughly 2× faster than Character.isDigit(). Why? No method calls, no Unicode overhead, no irrelevant checks.
 ![](fj_art1_results_4-700x368.png)
@@ -203,18 +215,21 @@ When Does This Level of Optimization Make Sense?
 
 Finally, I built a version that failed fast, checked the simplest conditions first, and skipped unnecessary work.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public static boolean checkIntegerFinal(String testInteger) {
-    if (testInteger.length() &gt; 5 || testInteger.length() &lt; 2)
+```
+public static boolean checkIntegerFinal(String testInteger) {
+    if (testInteger.length() > 5 || testInteger.length() < 2)
         return false;
     if (testInteger.charAt(0) != '3')
         return false;
-    for (int i = 1; i &lt; testInteger.length(); i++) {
+    for (int i = 1; i < testInteger.length(); i++) {
         char c = testInteger.charAt(i);
-        if (c &lt; '0' || c &gt; '9') 
+        if (c < '0' || c > '9') 
             return false;
     }
     return true;
-}</pre>
+}
+```
+
 
 This version delivered 10× to 50× better performance than the original --- nearly matching Kirk's own unrolled switch-case variant (labeled as Best on a chart below).
 ![](fj_art1_results_5-700x411.png)

@@ -32,7 +32,8 @@ Daemon Thread Challenge {#h2-0-daemon-thread-challenge}
 
 What will happen when running the following main method?
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public class DaemonThreadChallenge implements Runnable {
+```java
+public class DaemonThreadChallenge implements Runnable {
 
         public static void main(String... doYourBest) {
             Thread thread = new Thread(new DaemonThreadChallenge());
@@ -46,7 +47,9 @@ What will happen when running the following main method?
                 System.out.println("For ever");
             }
         }
-}</pre>
+}
+```
+
 
 A) It will print "Forever" for an indeterminate time and the program will finish normally.  
 

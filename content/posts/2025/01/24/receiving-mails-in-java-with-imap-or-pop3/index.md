@@ -29,7 +29,8 @@ Receiving mails {#h2-0-receiving-mails}
 
 You need to use to the following import statement `import javax.mail.*;` to be able to connect mail servers. The constructor of the client is straightforward. It is simply used to pass and store some values into fields, which are then used later on. We are interested in the protocol, host, port user and password. Valid values for the protocol are `imap`, `imaps`, `pop3` and `pop3s`.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public final class MailReceiveClient {
+```java
+public final class MailReceiveClient {
     private final String protocol;
     private final String host;
     private final String port;
@@ -38,7 +39,9 @@ You need to use to the following import statement `import javax.mail.*;` to be a
 
 // ... constructor
 
-}</pre>
+}
+```
+
 
 ### Connecting to the Server {#h3-1-connecting-to-the-server}
 
@@ -48,7 +51,8 @@ Afterwards we get the inbox folder and open it in read write mode. Inbox usually
 
 There is some wrapping of exceptions into runtime exceptions in the end. Folder and Store also have to be disconnected before returning.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public List&lt;Mail&gt; receive() {
+```java
+public List<Mail> receive() {
     Store emailStore = null;
     Folder emailFolder = null;
 
@@ -71,17 +75,19 @@ There is some wrapping of exceptions into runtime exceptions in the end. Folder 
         throw new RuntimeException(e);
     } finally {
         try {
-            if (emailFolder != null &amp;&amp; emailFolder.isOpen()) {
+            if (emailFolder != null && emailFolder.isOpen()) {
                 emailFolder.close(false);
             }
-            if (emailStore != null &amp;&amp; emailStore.isConnected()) {
+            if (emailStore != null && emailStore.isConnected()) {
                 emailStore.close();
             }
         } catch (MessagingException e) {
             throw new RuntimeException(e);
         }
     }
-}</pre>
+}
+```
+
 
 ### Processing Mails {#h3-2-processing-mails}
 
@@ -93,8 +99,9 @@ The code uses a for loop to avoid race conditions. In case there are multiple ma
 
 A mapping to an internal class is needed, because an exception is thrown as soon as you try to access a message who's session has been closed. Another reason is the sanitizing of user inputs. You can read more about this in the next chapter.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">private List&lt;Mail&gt; getNewMails(Folder emailFolder) throws MessagingException {
-    List&lt;Mail&gt; mails = new ArrayList&lt;&gt;();
+```java
+private List<Mail> getNewMails(Folder emailFolder) throws MessagingException {
+    List<Mail> mails = new ArrayList<>();
     for (Message message : emailFolder.getMessages()) {
         if (!message.getFlags().contains(Flags.Flag.SEEN)) {
             message.setFlags(new Flags(Flags.Flag.SEEN), true);
@@ -103,7 +110,9 @@ A mapping to an internal class is needed, because an exception is thrown as soon
         }
     }
     return mails;
-}</pre>
+}
+```
+
 
 The class can also be found on [GitHub](https://github.com/JensKnipper/greenmail-example/blob/main/src/main/java/de/jensknipper/greenmailexample/control/mail/receive/MailReceiveClient.java).
 
@@ -111,7 +120,8 @@ The error handling is just an example how it could be done. Depending on your ne
 
 In the end a List of mails is returned. The mail class is just a simple data class containing information we extract from the messages on the mail server. For my minimal example I was only interested in the subject, the content, the sender and the recipient (even though there can be more than one recipient). You can extract even more informations from the messages. The documentation of the class can be found [here](https://javaee.github.io/javamail/docs/api/javax/mail/Message.html).
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public final class Mail {
+```java
+public final class Mail {
     private final String subject;
     private final String content;
     private final String from;
@@ -121,7 +131,9 @@ In the end a List of mails is returned. The mail class is just a simple data cla
 
 // ... getters
 
-}</pre>
+}
+```
+
 
 You can read more about the mapping in the next chapter.
 
@@ -136,7 +148,8 @@ I use a simple helper class with static methods to do the mapping. All the attri
 
 We simply extract the things we are interested in from the message and sanitize the input using the encoder before creating a new mail object with the attributes.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">import org.owasp.encoder.Encode;
+```java
+import org.owasp.encoder.Encode;
 
 public final class MailMapper {
 
@@ -150,9 +163,11 @@ public final class MailMapper {
         return new Mail(subject, content, from, recipient);
     }
 
-&nbsp; &nbsp; // ... methods
+    // ... methods
 
-}</pre>
+}
+```
+
 
 The class can also be found on [GitHub](https://github.com/JensKnipper/greenmail-example/blob/main/src/main/java/de/jensknipper/greenmailexample/control/mail/mapper/MailMapper.java).
 
@@ -163,11 +178,17 @@ To get started simply fill in the constructor's parameters to connect to your ma
 
 An example for IMAP might look something like this:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">new MailReceiveClient("imap", "localhost", "143", "user", "password");</pre>
+```
+new MailReceiveClient("imap", "localhost", "143", "user", "password");
+```
+
 
 And for POP3 like this:  
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">new MailReceiveClient("pop3", "localhost", "110", "user", "password");</pre>
+```
+new MailReceiveClient("pop3", "localhost", "110", "user", "password");
+```
+
 
 You could also use Spring to create a bean using the `@Component` annotation and set the constructor's parameters via properties using the `@Value` annotation. This is the way I am doing it in my [demo project](https://github.com/JensKnipper/greenmail-example).
 

@@ -116,6 +116,6 @@ It was my first edition of KCDC, and I loved it. KCDC is a community-organized e
 
 I'd recommend that you attend, either as an attendee or a speaker.
 
-*** ** * ** ***
+
 
 *Originally published at [A Java Geek](https://blog.frankel.ch/kcdc-2025/) on August 17^th^, 2025*

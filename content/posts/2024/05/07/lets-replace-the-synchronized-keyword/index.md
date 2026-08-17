@@ -44,15 +44,18 @@ The solution of synchronized block is to replace them with re-entrant locks. Thi
 
 Using `java.util.concurrent.locks.`[ReentrantLock](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/concurrent/locks/ReentrantLock.html) is the official replacement for `synchronized` (from [JEP-425](https://openjdk.org/jeps/425)).
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">ReentrantLock lock = new ReentrantLock();
-public List&lt;LocalDateTime&gt; getReservedDates(String userId) {
+```java
+ReentrantLock lock = new ReentrantLock();
+public List<LocalDateTime> getReservedDates(String userId) {
     lock.lock();
     try {
         return databaseRepo.getDatesForUser(userId);
     } finally {
         lock.unlock();
     }
-}</pre>
+}
+```
+
 
 Now let's see how to get this code simplified.
 
@@ -63,12 +66,15 @@ Now let's see how to get this code simplified.
 
 `com.japplis.virtually.sync.`[BlockLock](https://github.com/japplis/Virtually/blob/main/src/main/java/com/japplis/virtually/sync/BlockLock.java) is an [AutoCloseable](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/AutoCloseable.html) `ReentrantLock`. This means that you can get rid of the finally block.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">BlockLock lock = new BlockLock();
-public List&lt;LocalDateTime&gt; getReservedDates(String userId) {
+```java
+BlockLock lock = new BlockLock();
+public List<LocalDateTime> getReservedDates(String userId) {
     try (lock.lock()) {
         return databaseRepo.getDatesForUser(userId);
     }
-}</pre>
+}
+```
+
 
 3️⃣ SyncUtils {#h2-3-3-syncutils}
 ---------------------------------
@@ -77,25 +83,34 @@ public List&lt;LocalDateTime&gt; getReservedDates(String userId) {
 
 You don't need to create a lock object or add a try block.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">import static com.japplis.virtually.sync.SyncUtils.*;
+```java
+import static com.japplis.virtually.sync.SyncUtils.*;
 
-public List&lt;LocalDateTime&gt; getReservedDates(String userId) {
-    return runSynchronized(() -&gt; databaseRepo.getDatesForUser(userId));
-}</pre>
+public List<LocalDateTime> getReservedDates(String userId) {
+    return runSynchronized(() -> databaseRepo.getDatesForUser(userId));
+}
+```
+
 
 This call will synchronized on the class (like `synchronized` on methods). You can also synchronize based for example on the user id.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public List&lt;LocalDateTime&gt; getReservedDates(String userId) {
-    return runSynchronized(userId, () -&gt; databaseRepo.getDatesForUser(userId));
-}</pre>
+```java
+public List<LocalDateTime> getReservedDates(String userId) {
+    return runSynchronized(userId, () -> databaseRepo.getDatesForUser(userId));
+}
+```
+
 
 User id will be mapped to a `ReentrantLock`. You can also pass a `ReentrantLock` object if you prefer.
 
 When you're calling a network method, it may also throw exceptions, so you would like to propagate them.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public List&lt;LocalDateTime&gt; getReservedDates(String userId) throws Exception {
-    return callSynchronized(userId, () -&gt; databaseRepo.getDatesForUser(userId));
-}</pre>
+```java
+public List<LocalDateTime> getReservedDates(String userId) throws Exception {
+    return callSynchronized(userId, () -> databaseRepo.getDatesForUser(userId));
+}
+```
+
 
 In this `callSynchronized` the lambda is a `Callable` instead of a `Supplier`.
 
@@ -108,12 +123,15 @@ Virtually is providing [@Synchronized](https://github.com/japplis/Virtually/blob
 
 `@Synchronized` will synchronized at the class level and `@SynchronizedMethod` at the method level.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">import com.japplis.virtually.sync.Synchronized;
+```java
+import com.japplis.virtually.sync.Synchronized;
 
 @Synchronized
-public List&lt;LocalDateTime&gt; getReservedDates(String userId) {
+public List<LocalDateTime> getReservedDates(String userId) {
     return databaseRepo.getDatesForUser(userId);
-}</pre>
+}
+```
+
 
 Note that you will need to add [AspectJ](https://en.wikipedia.org/wiki/AspectJ) to the build and decide when to do the the bytecode transformation.
 

@@ -75,17 +75,21 @@ Let's understand above mentioned description with a pragmatic approach.
 
 Consider the following simple example
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">package com.bsmlabs;
+```java
+package com.bsmlabs;
 
 public class HelloOpenRewrite {
    public String welcome() {
       return "Welcome to OpenRewrite!";
    }
-}</pre>
+}
+```
+
 
 When generating the LST for this class, we will get the following output:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">#root
+```
+#root
 \---J.ClassDeclaration
     |---J.Modifier | "public"
     |---J.Identifier | "HelloOpenRewrite"
@@ -101,11 +105,14 @@ When generating the LST for this class, we will get the following output:
                 \---J.Block
                     \---#JRightPadded
                         \---J.Return | "return "Welcome to OpenRewrite!""
-                            \---J.Literal</pre>
+                            \---J.Literal
+```
+
 
 In the following example, the JavaVisitor defines the relevant visitor methods in a general class.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">class JavaVisitor&lt;P&gt; extends TreeVisitor&lt;J, P&gt; {
+```java
+class JavaVisitor<P> extends TreeVisitor<J, P> {
 
     ...
     public J visitClassDeclaration(J.ClassDeclaration classDecl, P p) {...}
@@ -115,7 +122,9 @@ In the following example, the JavaVisitor defines the relevant visitor methods i
     public J visitReturn(J.Return retrn, P p) {...}
     ...
 
-}</pre>
+}
+```
+
 
 Each of the methods available allows accessing and, crucially, modifying metadata information pertaining to the respective LST element to effect transformations in the source code. However, note that not all LST elements possess a corresponding visitor method. For instance, the `J.Modifier` element can solely be accessed via its parent element, namely `J.ClassDeclaration or J.MethodDeclaration`.
 
@@ -128,22 +137,25 @@ You can accomplish the integration of OpenRewrite into the build process with ea
 
 For **Maven** , add the below *OpenRewrite Maven Plugin* in `pom.xml`
 
-<pre class="EnlighterJSRAW" data-enlighter-language="xml" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&lt;plugin&gt;
-    &lt;groupId&gt;org.openrewrite.maven&lt;/groupId&gt;
-    &lt;artifactId&gt;rewrite-maven-plugin&lt;/artifactId&gt;
-    &lt;version&gt;5.4.2&lt;/version&gt;
-    &lt;configuration&gt;
-        &lt;activeRecipes&gt;
-            &lt;!-- Define the recipes available in the catalogure or to the name custom defined in rewrite.yml --&gt;
-            &lt;recipe&gt;...&lt;/recipe&gt; 
+```xml
+<plugin>
+    <groupId>org.openrewrite.maven</groupId>
+    <artifactId>rewrite-maven-plugin</artifactId>
+    <version>5.4.2</version>
+    <configuration>
+        <activeRecipes>
+            <!-- Define the recipes available in the catalogure or to the name custom defined in rewrite.yml -->
+            <recipe>...</recipe> 
             ...
-        &lt;/activeRecipes&gt;
-    &lt;/configuration&gt;
-    &lt;dependencies&gt;
-        &lt;!-- It is necessary to declare dependencies for recipes that are not included in the OpenRewrite bundle. --&gt;
+        </activeRecipes>
+    </configuration>
+    <dependencies>
+        <!-- It is necessary to declare dependencies for recipes that are not included in the OpenRewrite bundle. -->
         ...
-    &lt;/dependencies&gt;
-&lt;/plugin&gt;</pre>
+    </dependencies>
+</plugin>
+```
+
 
 It is recommended to take a precautionary measure by executing the command `mvn rewrite:dryrun`. This command will generate a set of differences solely for the modifications made within the `/target/rewrite` directory, which will be saved in the `rewrite.patch`.
 
@@ -153,7 +165,8 @@ For **Gradle** , add the below *OpenRewrite Gradle Plugin* in `build.gradle`
 
 <br />
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">plugins {
+```yaml
+plugins {
     id 'java'
     id 'maven-publish'
     id 'org.openrewrite.rewrite' version '6.2.4'
@@ -170,11 +183,14 @@ dependencies {
     rewrite('org.openrewrite.recipe:rewrite-spring')
 
     // Other project dependencies
-}</pre>
+}
+```
+
 
 And also if you want to add custom related changes you can add it `rewrite.yml` and place it under the root of the project (or in `/META-INF/rewrite`). In this file, you can add as many number of recipes as you desired, For instance, if you wanted to run the [ChangePackage recipe](https://docs.openrewrite.org/reference/recipes/java/changepackage) to change `org.old.package.name` to `org.new.package.name`, you can add a `rewrite.yml` file that looks like this:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">---
+```yaml
+---
 type: specs.openrewrite.org/v1beta/recipe
 name: com.bsmlabs.ChangePackageExample
 displayName: Rename package name example
@@ -182,32 +198,38 @@ recipeList:
   - org.openrewrite.java.ChangePackage:
       oldPackageName: com.bsmlabs.openaccount
       newPackageName: com.bsmlabs.account
-      recursive: null</pre>
+      recursive: null
+```
+
 
 Having defined `com.bsmlabs.ChangePackageExample`, it is now imperative to activate it in your build file.
 
 For **Maven**,
 
-<pre class="EnlighterJSRAW" data-enlighter-language="xml" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&lt;project&gt;
-  &lt;build&gt;
-    &lt;plugins&gt;
-      &lt;plugin&gt;
-        &lt;groupId&gt;org.openrewrite.maven&lt;/groupId&gt;
-        &lt;artifactId&gt;rewrite-maven-plugin&lt;/artifactId&gt;
-        &lt;version&gt;5.4.2&lt;/version&gt;
-        &lt;configuration&gt;
-          &lt;activeRecipes&gt;
-            &lt;recipe&gt;com.bsmlabs.ChangePackageExample&lt;/recipe&gt;
-          &lt;/activeRecipes&gt;
-        &lt;/configuration&gt;
-      &lt;/plugin&gt;
-    &lt;/plugins&gt;
-  &lt;/build&gt;
-&lt;/project&gt;</pre>
+```xml
+<project>
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.openrewrite.maven</groupId>
+        <artifactId>rewrite-maven-plugin</artifactId>
+        <version>5.4.2</version>
+        <configuration>
+          <activeRecipes>
+            <recipe>com.bsmlabs.ChangePackageExample</recipe>
+          </activeRecipes>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+</project>
+```
+
 
 For **Gradle**,
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">plugins {
+```yaml
+plugins {
     id("org.openrewrite.rewrite") version("6.2.4")
 }
 
@@ -217,7 +239,9 @@ rewrite {
 
 repositories {
     mavenCentral()
-}</pre>
+}
+```
+
 
 Conclusion {#h2-2-conclusion}
 -----------------------------

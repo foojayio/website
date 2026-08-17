@@ -34,12 +34,18 @@ Programmatic access {#h2-0-programmatic-access}
 
 The programmatic access of the `Config` object allows you to get the configuration values from the sources that are available for your application.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="dracula">Config config = ConfigProvider.getConfig();</pre>
+```java
+Config config = ConfigProvider.getConfig();
+```
+
 
 This *Config* object has methods to retrieve and convert a value from the environment.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="dracula">String value = config.getValue("key", Integer.class);
-Boolean flag = config.getOptionalValue("otherKey", Boolean.class);</pre>
+```java
+String value = config.getValue("key", Integer.class);
+Boolean flag = config.getOptionalValue("otherKey", Boolean.class);
+```
+
 
 The class type on the method determines the *Converter* that is used to transform the String value obtained from the *ConfigSource* to the desired type.
 
@@ -49,10 +55,12 @@ You can also define converters yourself and define the order in which they are t
 
 Converters are picked up through the ServiceLoader mechanism or can also be defined programmatically when using the ConfigBuilder. Have a look at the [specification](https://github.com/eclipse/microprofile-config/blob/master/spec/src/main/asciidoc/converters.asciidoc) if you want to learn more about this.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="dracula">@Priority
+```java
+@Priority
 public class MyConverter implements Converter {
 }
-</pre>
+```
+
 
 Supported features {#h2-1-supported-features}
 ---------------------------------------------
@@ -99,17 +107,20 @@ I cover two implementations that have an artifact available that cover the Micro
 
 The Configuration framework that is used within Quarkus and OpenLiberty can use on Java SE only. It is based on version 2.0 of the specification which is still using the javax namespace. You can make use of it in your application by adding the following dependencies to your project.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-linenumbers="false" data-enlighter-theme="dracula"> &lt;dependency&gt;
-    &lt;groupId&gt;io.smallrye.config&lt;/groupId&gt;
-    &lt;artifactId&gt;smallrye-config-core&lt;/artifactId&gt;
-    &lt;version&gt;2.12.0&lt;/version&gt;
-&lt;/dependency&gt;
+```java
+ <dependency>
+    <groupId>io.smallrye.config</groupId>
+    <artifactId>smallrye-config-core</artifactId>
+    <version>2.12.0</version>
+</dependency>
 
-&lt;dependency&gt;
-    &lt;groupId&gt;jakarta.annotation&lt;/groupId&gt;
-    &lt;artifactId&gt;jakarta.annotation-api&lt;/artifactId&gt;
-    &lt;version&gt;1.3.5&lt;/version&gt;
-&lt;/dependency&gt;</pre>
+<dependency>
+    <groupId>jakarta.annotation</groupId>
+    <artifactId>jakarta.annotation-api</artifactId>
+    <version>1.3.5</version>
+</dependency>
+```
+
 
 The jakarta annotation api one is needed since the order of the converters is defined through the `@Priority` annotation as mentioned above and is not included within the core SmallRye config dependency.
 
@@ -119,11 +130,14 @@ The [Atbash Runtime](https://www.atbash.be/2022/04/03/testing-the-jakarta-ee-cor
 
 You only need to add the following dependency to your Java SE project to have it available.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="xml" data-enlighter-theme="dracula">&lt;dependency&gt;
-    &lt;groupId&gt;be.atbash&lt;/groupId&gt;
-    &lt;artifactId&gt;mp-config-se&lt;/artifactId&gt;
-    &lt;version&gt;1.0.1&lt;/version&gt;
-&lt;/dependency&gt;</pre>
+```xml
+<dependency>
+    <groupId>be.atbash</groupId>
+    <artifactId>mp-config-se</artifactId>
+    <version>1.0.1</version>
+</dependency>
+```
+
 
 Conclusion {#h2-7-conclusion}
 -----------------------------

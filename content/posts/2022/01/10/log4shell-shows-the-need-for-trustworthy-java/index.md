@@ -216,6 +216,6 @@ Finally, select representatives should discuss this with mainstream media. Since
 
 **Summary:** I propose seven actions for the "Trustworthy Java" initiative. Making Java \& Java applications more secure and regularly auditing Java security will reduce the probability of another crisis like Log4Shell. Creating a Java Crisis Response Team \& a Java Security Website and improving Java application patching will lessen the impact of the next crisis. Communicating "Trustworthy Java" to Java developers and mainstream media will help this initiative to succeed.
 
-*** ** * ** ***
+
 
 *Originally published at [Better Projects Faster](https://betterprojectsfaster.com/guide/java-full-stack-report-2022-01-editorial) on January 5, 2022*

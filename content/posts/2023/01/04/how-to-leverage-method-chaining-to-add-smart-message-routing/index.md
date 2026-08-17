@@ -25,29 +25,38 @@ We are going to use the open-source serialisation library [Chronicle Wire](https
 
 Having a separation of routing and business messages is nothing new; after all, JMS has been doing it for years with their createObjectMessage (below):
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="dracula">MessageProducer producer = session.createProducer( destination );
+```java
+MessageProducer producer = session.createProducer( destination );
 ObjectMessage message = session.createObjectMessage( obj );
-producer.send( message );</pre>
+producer.send( message );
+```
+
 
 However, what is different here, is that the routing information is serialised alongside but separate to the business message and away from the messaging layer, where this data structure can later be read and dispatched.
 
 In this example, we will route a product to a country:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="dracula">final Routing routing = wire.methodWriter(Routing.class);
+```java
+final Routing routing = wire.methodWriter(Routing.class);
 routing.to("Italy").product(new Product("Coffee"));
 routing.to("France").product(new Product("Cheese"));
-routing.to("America").product(new Product("Popcorn"));</pre>
+routing.to("America").product(new Product("Popcorn"));
+```
+
 
 You can see the full code example here: [net.openhft.chronicle.wire.examples.MessageRoutingExample](https://github.com/OpenHFT/Chronicle-Wire/blob/develop/src/test/java/net/openhft/chronicle/wire/examples/MessageRoutingExample.java "net.openhft.chronicle.wire.examples.MessageRoutingExample")
 
 In the rest of this article, we'll go into this code in a bit more detail; We will start by defining our business message. This business message is a Data-Transfer-Object (DTO); in an Event-Driven-Architecture (EDA), this DTO would be our event; for our simple example, we are going to create an event called Product.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="dracula">class Product extends SelfDescribingMarshallable {
+```
+class Product extends SelfDescribingMarshallable {
         String name;
         public Product(String name) {
             this.name = name;
         }
- }</pre>
+ }
+```
+
 
 The Product class extends *net.openhft.chronicle.wire.SelfDescribingMarshallable;* this is the Chronicle-Wires standard base class used for all Data-Transfer-Objects. However, if you don't wish to extend SelfDescribingMarshallable, you could instead implement the [marker interface](https://en.wikipedia.org/wiki/Marker_interface_pattern "marker interface ") *net.openhft.chronicle.wire.Marshallable* , which almost does the same thing as *SelfDescribingMarshallable* apart from providing default *toString() equals()* and *hashCode()* implementations.
 
@@ -55,7 +64,8 @@ Now, let's define the *Routing* interface; this gives us the ability to add dest
 
 For example, if the destination required the message to get routed over the network, the *ProductHandler* could use TCP/IP to a target host.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="dracula">@FunctionalInterface
+```
+@FunctionalInterface
 interface Routing {
       ProductHandler to(String destination);
 }
@@ -63,39 +73,52 @@ interface Routing {
 @FunctionalInterface
 interface ProductHandler {
       void product(Product product);
-}</pre>
+}
+```
+
 
 To keep our example simple, we will build a *HashMap* , keyed on the destination, and we will then use a lambda expression that outputs a String for the *ProductHandler*.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="dracula">final Map&lt;String, ProductHandler&gt; destinationMap = new HashMap&lt;&gt;();
+```java
+final Map<String, ProductHandler> destinationMap = new HashMap<>();
 
 // add ProductHandler to handle messages routed to each destination
-destinationMap.put("Italy", product -&gt; System.out.println("Sends the product to Italy, product=" + product));  
+destinationMap.put("Italy", product -> System.out.println("Sends the product to Italy, product=" + product));  
 
-destinationMap.put("France", product -&gt; System.out.println("Sends the product to France, product=" + product));
+destinationMap.put("France", product -> System.out.println("Sends the product to France, product=" + product));
 
-destinationMap.put("America", product -&gt; System.out.println("Sends the product to America, product=" + product));
-</pre>
+destinationMap.put("America", product -> System.out.println("Sends the product to America, product=" + product));
+```
+
 
 Below, we use Chronicle Wire for our serialisation.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="dracula">private final Wire wire = new TextWire(Bytes.allocateElasticOnHeap());
-</pre>
+```java
+private final Wire wire = new TextWire(Bytes.allocateElasticOnHeap());
+```
+
 
 The code above will allow us to serialise our data structure into a human-readable text format. If we were to use Java to write the following:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="dracula">final Routing routing = wire.methodWriter(Routing.class);
+```java
+final Routing routing = wire.methodWriter(Routing.class);
 routing.to("Italy").product(new Product("Coffee"));
 routing.to("France").product(new Product("Cheese"));
-routing.to("America").product(new Product("Popcorn"));</pre>
+routing.to("America").product(new Product("Popcorn"));
+```
+
 
 and then dump the output of the wire, using:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="dracula">System.out.println(wire);</pre>
+```
+System.out.println(wire);
+```
+
 
 The following will get logged to the console:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="dracula">to: Italy
+```java
+to: Italy
 product: {
   name: Coffee
 }
@@ -109,27 +132,37 @@ to: America
 product: {
   name: Popcorn
 }
-...</pre>
+...
+```
+
 
 Above, you can see how easily the data structure can be read and debugged.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="dracula">CLASS_ALIASES.addAlias(Product.class, ProductHandler.class);</pre>
+```
+CLASS_ALIASES.addAlias(Product.class, ProductHandler.class);
+```
+
 
 Using aliases (above) allows Chronicle-Wire serialisation to use the short name of the class rather than the entire pathname. Taking this approach helps us reduce the number of bytes used in encoding these classes; it also has the advantage of producing a more concise, less verbose output when viewed as text.
 
 However, if performance was a concern, we can use a more efficient compact encoding such as:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="dracula">private final Wire wire = new BinaryWire(new HexDumpBytes());
-</pre>
+```
+private final Wire wire = new BinaryWire(new HexDumpBytes());
+```
+
 
 Below is a hex-dump of exactly the same data encoded using binary wire; it's more compact but nowhere near as easy to read. This can be done using:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="dracula">System.out.println(wire.bytes().toHexString())
-</pre>
+```
+System.out.println(wire.bytes().toHexString())
+```
+
 
 Chronicle Wire will automatically add in the #comment on the right-hand side.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="dracula">21 00 00 00                                     # msg-length
+```
+21 00 00 00                                     # msg-length
 b9 02 74 6f                                     # to: (event)
 e5 49 74 61 6c 79                               # Italy
 b9 07 70 72 6f 64 75 63 74                      # product: (event)
@@ -149,31 +182,42 @@ e7 41 6d 65 72 69 63 61                         # America
 b9 07 70 72 6f 64 75 63 74                      # product: (event)
 80 0d                                           # Product
    c4 6e 61 6d 65                                  # name:
-   e7 50 6f 70 63 6f 72 6e                         # Popcorn</pre>
+   e7 50 6f 70 63 6f 72 6e                         # Popcorn
+```
+
 
 Now that we have written data, this could be sent as a streaming event over an Event-Driven-Architecture, for example by using a Chronicle Queue. Then to read these streaming events, we can use a MethodReader.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="dracula">MethodReader reader = wire.methodReader((Routing) destinationMap::get);
-</pre>
+```
+MethodReader reader = wire.methodReader((Routing) destinationMap::get);
+```
+
 
 To continuously process messages using the current thread, the code would look like this:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="dracula">for (; ; ) {
+```
+for (; ; ) {
     // true if a message was read
     boolean success = reader.readOne();
-}</pre>
+}
+```
+
 
 or if we only want to run until there were no more messages to read, then the code would look like this:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="dracula">boolean success;
+```
+boolean success;
 do {
     // true if a message was read
     success = reader.readOne();
-} while (success);</pre>
+} while (success);
+```
+
 
 Running the code outputs:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="dracula">Sends the product to Italy, product=!Product {
+```
+Sends the product to Italy, product=!Product {
   name: Coffee
 }
 
@@ -183,7 +227,9 @@ Sends the product to France, product=!Product {
 
 Sends the product to America, product=!Product {
   name: Popcorn
-}</pre>
+}
+```
+
 
 ### Summary {#h3-0-summary}
 
@@ -201,6 +247,9 @@ Then, Dispatching events with associated metadata over an event-driven architect
 
 [Chronicle-Services](https://chronicle.software/products/services/ "Chronicle-Services") takes this concept to the next stage, offering an EDA framework; it also comes with a web gateway that uses a similar principle to provide routing of JSON messages (below) to web-based clients using REST and WebSockets:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="dracula">"to":"websocketClient1","product":{"name":"Coffee"}
+```
+"to":"websocketClient1","product":{"name":"Coffee"}
 "to":"websocketClient2","product":{"name":"Cheese"}
-"to":"websocketClient3","product":{"name":"Popcorn"}</pre>
+"to":"websocketClient3","product":{"name":"Popcorn"}
+```
+

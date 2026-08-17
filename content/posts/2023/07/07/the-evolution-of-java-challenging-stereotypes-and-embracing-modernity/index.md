@@ -44,17 +44,23 @@ In a departure from the traditional '***public static void main(String\[\] args)
 
 This new addition allows the classic "Hello, World!" program to be simplified to:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">class HelloWorld { 
+```java
+class HelloWorld { 
     void main() { 
         System.out.println("Hello, World!");
     }
-}</pre>
+}
+```
+
 
 We can further make the class declaration implicit. This further simplifies the "Hello, World!" program to:  
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">void main() {
-&nbsp;&nbsp;&nbsp;&nbsp;System.out.println("Hello, World!");
-}</pre>
+```java
+void main() {
+    System.out.println("Hello, World!");
+}
+```
+
 
 If you are interested in reading more, read my news item published on infoQ: [Breaking down Barriers: Introducing JDK 21's Approach to Beginner-Friendly Java Programming](https://www.infoq.com/news/2023/05/beginner-friendly-java/)
 
@@ -62,7 +68,8 @@ If you are interested in reading more, read my news item published on infoQ: [Br
 
 With Records, Java provides a compact syntax for declaring classes which are supposed to be dumb data holders. This reduces the boilerplate code developers have to write, making the language learner more efficient. Consider the following class:  
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">import java.util.Objects;
+```java
+import java.util.Objects;
 
 public final class User {
     private final Long id;
@@ -92,8 +99,8 @@ public final class User {
         if (obj == this) return true;
         if (obj == null || obj.getClass() != this.getClass()) return false;
         var that = (User) obj;
-        return Objects.equals(this.id, that.id) &amp;&amp;
-                Objects.equals(this.firstName, that.firstName) &amp;&amp;
+        return Objects.equals(this.id, that.id) &&
+                Objects.equals(this.firstName, that.firstName) &&
                 Objects.equals(this.lastName, that.lastName);
     }
 
@@ -111,13 +118,17 @@ public final class User {
     }
 
 }
-</pre>
+```
+
 
 <br />
 
 This whole code can be written in one line with Record.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public record User(Long id, String firstName, String lastName) {}</pre>
+```java
+public record User(Long id, String firstName, String lastName) {}
+```
+
 
 And that's it.
 
@@ -133,11 +144,14 @@ The inclusion of these features ushers in a new level of expressiveness in the l
 
 For example, Unnamed pattern variables can be beneficial in switch statements where the same action is executed for multiple cases, and the variables are not used. Consider the following code:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">switch (b) {
-&nbsp;&nbsp;&nbsp;&nbsp;case Box(RedBall _), Box(BlueBall _) -&gt; processBox(b);
-&nbsp;&nbsp;&nbsp;&nbsp;case Box(GreenBall _) -&gt; stopProcessing();
-&nbsp;&nbsp;&nbsp;&nbsp;case Box(_) -&gt; pickAnotherBox();
-}</pre>
+```java
+switch (b) {
+    case Box(RedBall _), Box(BlueBall _) -> processBox(b);
+    case Box(GreenBall _) -> stopProcessing();
+    case Box(_) -> pickAnotherBox();
+}
+```
+
 
 If you're interested in knowing more about it, read this article: [JEP 443: Unnamed Patterns and Variables Aims to Improve Java Code Readability](https://www.infoq.com/news/2023/06/streamlining-java-with-jep-443/)
 
@@ -147,27 +161,33 @@ Java developers can now enhance the language's string literals and text blocks w
 
 The aim of this new feature is to simplify the writing of Java programs, improve the readability of expressions that mix text and expressions, and enhance the security of Java programs that compose strings from user-provided values. Consider the following example:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">String name&nbsp; &nbsp; = "Joan Smith";
-String phone &nbsp; = "555-123-4567";
+```java
+String name    = "Joan Smith";
+String phone   = "555-123-4567";
 String address = "1 Maple Drive, Anytown";
 
 String json = STR."""
-&nbsp;&nbsp;&nbsp;&nbsp;{
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"name":&nbsp; &nbsp; "\{name}",
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"phone": &nbsp; "\{phone}",
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"address": "\{address}"
-&nbsp;&nbsp;&nbsp;&nbsp;}
-&nbsp;&nbsp;&nbsp;&nbsp;""";</pre>
+    {
+        "name":    "\{name}",
+        "phone":   "\{phone}",
+        "address": "\{address}"
+    }
+    """;
+```
+
 
 This produces the following output.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">| """
+```
+| """
 | {
-| &nbsp; &nbsp; "name":&nbsp; &nbsp; "Joan Smith",
-| &nbsp; &nbsp; "phone": &nbsp; "555-123-4567",
-| &nbsp; &nbsp; "address": "1 Maple Drive, Anytown"
+|     "name":    "Joan Smith",
+|     "phone":   "555-123-4567",
+|     "address": "1 Maple Drive, Anytown"
 | }
-| """</pre>
+| """
+```
+
 
 Read the following infoQ item to know more about it: [Java Gets a Boost with String Templates: Simplifying Code and Improving Security](https://www.infoq.com/news/2023/04/java-gets-a-boost-with-string/)
 

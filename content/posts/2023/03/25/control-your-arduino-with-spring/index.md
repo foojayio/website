@@ -91,7 +91,8 @@ That's all you need to do on the Arduino side.
 
 Let's create a simple code that reminds us of an Arduino code.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public static void main(String[] args) throws IOException, InterruptedException {
+```
+public static void main(String[] args) throws IOException, InterruptedException {
     try {
         setup();
         loop();
@@ -110,14 +111,16 @@ private static final void loop() throws IOException, InterruptedException {
     while (true) {
         Pin pin = device.getPin(13);
         pin.setMode(OUTPUT);
-        for (int i = 0; i &lt; 10; i++) {
+        for (int i = 0; i < 10; i++) {
             pin.setValue(1);
             Thread.sleep(500);
             pin.setValue(0);
             Thread.sleep(500);
         }
     }
-}</pre>
+}
+```
+
 
 Here is a simple code that just blinks the Arduino LED.
 
@@ -125,7 +128,8 @@ Here is a simple code that just blinks the Arduino LED.
 
 Now let's create a simple Spring application where it can make available a REST interface to control one of the Arduino GPIO. Therefore we can turn on and turn off the LED just by calling the REST interface.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@EventListener
+```
+@EventListener
 public void onApplicationEvent(final ContextRefreshedEvent event) {
     try {
         // You can check your USB port name on the Arduino IDE, on the OS you are using
@@ -138,7 +142,9 @@ public void onApplicationEvent(final ContextRefreshedEvent event) {
         e.fillInStackTrace();
     }
     return;
-}</pre>
+}
+```
+
 
 I use the @EventListener annotation to run logic after the Spring context has been initialised and I do the device connection.
 

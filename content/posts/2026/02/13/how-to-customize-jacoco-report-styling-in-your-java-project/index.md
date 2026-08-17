@@ -31,7 +31,10 @@ The Problem {#h2-0-the-problem}
 
 JaCoCo generates standalone HTML reports that reference their own `jacoco-resources/report.css` via a \`\` tag. There's no plugin configuration, no skin system, no hook to inject your own CSS. The generated HTML looks like this:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="html" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&lt;link rel="stylesheet" href="jacoco-resources/report.css" type="text/css"/&gt;</pre>
+```html
+<link rel="stylesheet" href="jacoco-resources/report.css" type="text/css"/>
+```
+
 
 That `report.css` controls everything: table styling, source code highlighting, coverage bar colors, breadcrumbs, typography. If you want to change the look, you need to replace that file after JaCoCo generates it.
 
@@ -54,11 +57,15 @@ Start by grabbing JaCoCo's default `report.css`. You can find it in `target/site
 
 Place your customized version at:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="raw" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">src/site/jacoco-resources/report.css</pre>
+```
+src/site/jacoco-resources/report.css
+```
+
 
 Here's what ours looks like --- a light theme with rounded cards, GitHub-style colors, and a system font stack:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="css" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">/* ===== Custom JaCoCo Report Theme ===== */
+```css
+/* ===== Custom JaCoCo Report Theme ===== */
 
 body, td {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
@@ -114,7 +121,9 @@ table.coverage tbody tr:hover {
 /* Source code coverage highlights */
 pre.source span.fc  { background-color: #dafbe1; }  /* fully covered - green */
 pre.source span.nc  { background-color: #ffeef0; }  /* not covered - red */
-pre.source span.pc  { background-color: #fff8c5; }  /* partially covered - yellow */</pre>
+pre.source span.pc  { background-color: #fff8c5; }  /* partially covered - yellow */
+```
+
 
 You can see the full file in our repo: [`src/site/jacoco-resources/report.css`](https://github.com/copilot-community-sdk/copilot-sdk-java/blob/5b61dfc0f9878245098f2d84eea63943b14944f5/src/site/jacoco-resources/report.css).
 > **Important:** You must include the element icon classes (`.el_package`, `.el_class`, `.el_method`, etc.) and the sortable header classes (`.sortable`, `.up`, `.down`) in your custom CSS --- they reference GIF images that JaCoCo generates alongside the report. Omitting them breaks navigation icons and column sorting.
@@ -123,31 +132,34 @@ You can see the full file in our repo: [`src/site/jacoco-resources/report.css`](
 
 Add a `copy-resources` execution to your `maven-resources-plugin` configuration in `pom.xml`. The key is using `phase: site` so it runs **after** the JaCoCo reporting plugin generates its default CSS:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="xml" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&lt;plugin&gt;
-    &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;
-    &lt;artifactId&gt;maven-resources-plugin&lt;/artifactId&gt;
-    &lt;executions&gt;
-        &lt;execution&gt;
-            &lt;id&gt;overlay-jacoco-css&lt;/id&gt;
-            &lt;phase&gt;site&lt;/phase&gt;
-            &lt;goals&gt;
-                &lt;goal&gt;copy-resources&lt;/goal&gt;
-            &lt;/goals&gt;
-            &lt;configuration&gt;
-                &lt;outputDirectory&gt;
+```xml
+<plugin>
+    <groupId>org.apache.maven.plugins</groupId>
+    <artifactId>maven-resources-plugin</artifactId>
+    <executions>
+        <execution>
+            <id>overlay-jacoco-css</id>
+            <phase>site</phase>
+            <goals>
+                <goal>copy-resources</goal>
+            </goals>
+            <configuration>
+                <outputDirectory>
                     ${project.reporting.outputDirectory}/jacoco/jacoco-resources
-                &lt;/outputDirectory&gt;
-                &lt;resources&gt;
-                    &lt;resource&gt;
-                        &lt;directory&gt;src/site/jacoco-resources&lt;/directory&gt;
-                        &lt;filtering&gt;false&lt;/filtering&gt;
-                    &lt;/resource&gt;
-                &lt;/resources&gt;
-                &lt;overwrite&gt;true&lt;/overwrite&gt;
-            &lt;/configuration&gt;
-        &lt;/execution&gt;
-    &lt;/executions&gt;
-&lt;/plugin&gt;</pre>
+                </outputDirectory>
+                <resources>
+                    <resource>
+                        <directory>src/site/jacoco-resources</directory>
+                        <filtering>false</filtering>
+                    </resource>
+                </resources>
+                <overwrite>true</overwrite>
+            </configuration>
+        </execution>
+    </executions>
+</plugin>
+```
+
 
 See this in context: [`pom.xml` (lines 371--387)](https://github.com/copilot-community-sdk/copilot-sdk-java/blob/main/pom.xml#L371-L387).
 
@@ -159,7 +171,8 @@ If you deploy versioned documentation (like we do --- `snapshot/`, `latest/`, `1
 
 In our GitHub Actions deploy workflow, we add a step after all version builds complete:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">- name: Overlay custom JaCoCo CSS
+```
+- name: Overlay custom JaCoCo CSS
   run: |
     cd site
     for dir in */jacoco/jacoco-resources; do
@@ -167,7 +180,9 @@ In our GitHub Actions deploy workflow, we add a step after all version builds co
         cp ../src/site/jacoco-resources/report.css "$dir/report.css"
         echo "Overlaid JaCoCo CSS in $dir"
       fi
-    done</pre>
+    done
+```
+
 
 See the full workflow: [`deploy-site.yml`](https://github.com/copilot-community-sdk/copilot-sdk-java/blob/5b61dfc0f9878245098f2d84eea63943b14944f5/.github/workflows/deploy-site.yml).
 
@@ -214,6 +229,6 @@ The complete implementation is in the [Copilot SDK for Java](https://github.com/
 * [Deploy workflow](https://github.com/copilot-community-sdk/copilot-sdk-java/blob/5b61dfc0f9878245098f2d84eea63943b14944f5/.github/workflows/deploy-site.yml) --- CI overlay step for versioned docs
 * [Live report](https://copilot-community-sdk.github.io/copilot-sdk-java/snapshot/jacoco/) --- the themed output on GitHub Pages
 
-*** ** * ** ***
+
 
 *Built with ❤️ by [Bruno Borges](https://github.com/brunoborges) and [GitHub Copilot](https://github.com/features/copilot).*

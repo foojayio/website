@@ -80,7 +80,7 @@ If you're a true newbie, *i.e.*, you know nothing about HTTP, requests and respo
 
 If you have more than a passing familiarity with any of the above, I'm afraid it will be a loss of your money and time.
 
-*** ** * ** ***
+
 
 *Originally published at [A Java Geek](https://blog.frankel.ch/designing-apis-swagger-openapi/) on July 16th, 2023*
 

@@ -86,7 +86,10 @@ This repository contains scripts to set up boards for Java development, making i
 
 Using the second option, `curl` downloads and executes the script for non-Raspberry Pi boards with the following command:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">curl -sL https://raw.githubusercontent.com/Pi4J/pi4j-os/main/script/prepare-for-java-non-rpi.sh | bash</pre>
+```
+curl -sL https://raw.githubusercontent.com/Pi4J/pi4j-os/main/script/prepare-for-java-non-rpi.sh | bash
+```
+
 
 This performs:
 

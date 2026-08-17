@@ -116,50 +116,80 @@ After downloading the binaries you'll want to decompress the files to a local di
 
 To keep things together let's create a ${HOME}/**sdks** directory where Zulu Prime and Zulu Core will live. Below let's create an *sdks* directory under your home directory.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic"># Create a SDKs directory for both Prime and Core Java Distributions
-$ mkdir ~/sdks</pre>
+```
+# Create a SDKs directory for both Prime and Core Java Distributions
+$ mkdir ~/sdks
+```
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic"># Move downloaded JDKs into the SDKs directory and change into it.
+
+```
+# Move downloaded JDKs into the SDKs directory and change into it.
 $ mv ~/Downloads/zing22.01.0.0-3-jdk17.0.2-linux_x64.tar.gz ~/sdks
 $ mv ~/Downloads/zulu17.32.13-ca-jdk17.0.2-linux_x64.tar.gz ~/sdks
-$ cd ~/sdks</pre>
+$ cd ~/sdks
+```
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic"># *NOTE: Replace &lt;…&gt; with correct version information. Shown below is
+
+```
+# *NOTE: Replace <…> with correct version information. Shown below is
 generalized format of the naming convention.
 # Decompress tar files
-$ tar xzvf zing&lt;prime_version&gt;-&lt;jdk_version&gt;.tar.gz
-$ tar xzvf zulu&lt;core_version&gt;-&lt;jdk_version&gt;.tar.gz</pre>
+$ tar xzvf zing<prime_version>-<jdk_version>.tar.gz
+$ tar xzvf zulu<core_version>-<jdk_version>.tar.gz
+```
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic"># Remove tar files to save space
-$ rm zing&lt;prime_version&gt;-&lt;jdk_version&gt;.tar.gz
-$ rm zulu&lt;core_version&gt;-&lt;jdk_version&gt;.tar.gz</pre>
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic"># Create a symbolic link named current_java
-$ ln -sfn ~/sdks/zulu&lt;core_version&gt;-&lt;jdk_version&gt; ~/sdks/current_jdk</pre>
+```
+# Remove tar files to save space
+$ rm zing<prime_version>-<jdk_version>.tar.gz
+$ rm zulu<core_version>-<jdk_version>.tar.gz
+```
+
+
+```
+# Create a symbolic link named current_java
+$ ln -sfn ~/sdks/zulu<core_version>-<jdk_version> ~/sdks/current_jdk
+```
+
 
 ### Setting Environment Variables {#h3-8-setting-environment-variables}
 
 Now that Azul Prime and Core are installed, we want to switch between the two by setting our *JAVA_HOME* and *PATH* environment variables. Open a terminal window and enter the following commands:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic"># Copy (preserve) the current PATH variable
+```
+# Copy (preserve) the current PATH variable
 $ export TEMP_PATH=$PATH
-</pre>
+```
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic"># Export AZUL_CORE variable to the prime jdk under sdks
-$ export AZUL_CORE=~/sdks/zulu&lt;core_version&gt;-&lt;jdk_version&gt;</pre>
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic"># Set AZUL_PRIME variable to the prime jdk under sdks
-$ export AZUL_PRIME=~/sdks/zing&lt;zing_version&gt;-&lt;jdk_version&gt;</pre>
+```
+# Export AZUL_CORE variable to the prime jdk under sdks
+$ export AZUL_CORE=~/sdks/zulu<core_version>-<jdk_version>
+```
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic"># Set JAVA_HOME to a symbolic link current_jdk
-$ export JAVA_HOME=~/sdks/current_jdk</pre>
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic"># Set PATH by adding JAVA_HOME/bin to PATH
-$ export PATH=$JAVA_HOME/bin:$TEMP_PATH</pre>
+```
+# Set AZUL_PRIME variable to the prime jdk under sdks
+$ export AZUL_PRIME=~/sdks/zing<zing_version>-<jdk_version>
+```
+
+
+```
+# Set JAVA_HOME to a symbolic link current_jdk
+$ export JAVA_HOME=~/sdks/current_jdk
+```
+
+
+```
+# Set PATH by adding JAVA_HOME/bin to PATH
+$ export PATH=$JAVA_HOME/bin:$TEMP_PATH
+```
+
 
 The following is using Zulu Prime JDK 17:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic"># Copy (preserve) the current PATH variable
+```
+# Copy (preserve) the current PATH variable
 export TEMP_PATH=$PATH
 
 # Export AZUL_CORE variable to the prime jdk under sdks
@@ -172,29 +202,43 @@ export AZUL_PRIME=~/sdks/zing22.01.0.0-3-jdk17.0.2-linux_x64
 export JAVA_HOME=~/sdks/current_jdk
 
 # Set PATH by adding JAVA_HOME/bin to PATH
-export PATH=$JAVA_HOME/bin:$TEMP_PATH</pre>
+export PATH=$JAVA_HOME/bin:$TEMP_PATH
+```
+
 
 In your current terminal window's session, the above environment variables will be set, however if you want them to persist them when you create new sessions, you'll need to add them to your ***.bashrc*** or **.*bash_profile*** in your home directory.
 
 Once added to your *.bashrc* file, you'll need to **source** it as shown below:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">$ source ~/.bashrc
+```
+$ source ~/.bashrc
 # Or
-$ . ~/.bashrc</pre>
+$ . ~/.bashrc
+```
+
 
 If you do not want to change (disturb) your ***.bashrc*** file, you can easily create a local shell file to be sourced such as the following:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic"># Add Environment variables to a shell file using the vi editor
+```
+# Add Environment variables to a shell file using the vi editor
 $ vi setup.sh
-.. copy and paste the above exports</pre>
+.. copy and paste the above exports
+```
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic"># Save and exit vi (esc, colon, wq)
+
+```
+# Save and exit vi (esc, colon, wq)
 # For every new session (terminal window) source the file setup.sh.
-$ source setup.sh</pre>
+$ source setup.sh
+```
+
 
 If you are on an Ubuntu system, you may want to install *vim* instead of *vi* using the following command:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">$ sudo apt-get install vim</pre>
+```
+$ sudo apt-get install vim
+```
+
 
 Not sure if you noticed earlier when setting the *JAVA_HOME* environment to a symbolic link named *current_jdk* inside the *sdks* directory. Because we already created environment variables *AZUL_CORE* and *AZUL_PRIME* it's super easy to switch the symbolic link to point to those paths.
 
@@ -207,26 +251,38 @@ Essentially, symbolic links are files that can alias or point to another file or
 
 So, when we want to run the Kafka examples on Platform Prime or Core it's easy to change the link to point to the proper directory.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic"># Create a symbolic link named current_java
+```
+# Create a symbolic link named current_java
 # Set link to point to AZUL_CORE
-$ ln -sfn $AZUL_CORE ~/sdks/current_jdk</pre>
+$ ln -sfn $AZUL_CORE ~/sdks/current_jdk
+```
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic"># Verify Platform Core is set as the current JDK
+
+```
+# Verify Platform Core is set as the current JDK
 $ java –version
 openjdk version "17.0.2" 2022-01-18 LTS
 OpenJDK Runtime Environment Zulu17.32+13-CA (build 17.0.2+8-LTS)
 OpenJDK 64-Bit Server VM Zulu17.32+13-CA (build 17.0.2+8-LTS, mixed mode,
-sharing)</pre>
+sharing)
+```
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic"># Set link to point to AZUL_PRIME
-$ ln -sfn $AZUL_PRIME ~/sdks/current_jdk</pre>
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic"># Verify Platform Prime is set as the current JDK
+```
+# Set link to point to AZUL_PRIME
+$ ln -sfn $AZUL_PRIME ~/sdks/current_jdk
+```
+
+
+```
+# Verify Platform Prime is set as the current JDK
 $ java -version
 java version "17.0.2" 2022-01-25 LTS
 Java Runtime Environment Zing22.01.0.0+2 (build 17.0.2+8-LTS)
 Zing 64-Bit Tiered VM Zing22.01.0.0+2 (build 17.0.2-zing_22.01.0.0-b3-
-product-linux-X86_64, mixed mode)</pre>
+product-linux-X86_64, mixed mode)
+```
+
 
 Installing and running Kafka {#h-installing-and-running-kafka}
 --------------------------------------------------------------
@@ -235,12 +291,18 @@ The next set of instructions is a simplified version of the Getting started from
 
 ### Step 1: Switch to Azul Platform Core (Open a terminal window) {#h-step-1-switch-to-azul-platform-core-open-a-terminal-window}
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic"># (Optional) If this session has not set environment variables yet.
+```
+# (Optional) If this session has not set environment variables yet.
 $ cd ~/sdks
-$ source setup.sh</pre>
+$ source setup.sh
+```
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic"># Switch to standard build of OpenJDK
-$ ln -sfn $AZUL_CORE ~/sdks/current_jdk</pre>
+
+```
+# Switch to standard build of OpenJDK
+$ ln -sfn $AZUL_CORE ~/sdks/current_jdk
+```
+
 
 You only need to source *setup.sh* once per new terminal session. For convenience you can add them and source your *.bashrc* file for later terminal sessions.
 
@@ -250,10 +312,13 @@ You only need to source *setup.sh* once per new terminal session. For convenienc
 
 The following commands will decompress the Kafka **tar (tgz)** file as a directory with the same name as the file (excluding the file extension).
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic"># Start the ZooKeeper service
+```
+# Start the ZooKeeper service
 # Note: Soon, ZooKeeper will no longer be required by Apache Kafka.
 $ tar -xzf kafka_2.13-3.0.0.tgz
-$ cd kafka_2.13-3.0.0</pre>
+$ cd kafka_2.13-3.0.0
+```
+
 
 After the file is decompressed you may remove the tar file to save space.
 
@@ -261,14 +326,20 @@ After the file is decompressed you may remove the tar file to save space.
 
 Run the following commands to start all services in the correct order:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic"># Start the ZooKeeper service
+```
+# Start the ZooKeeper service
 # Note: Soon, ZooKeeper will no longer be required by Apache Kafka.
-$ bin/zookeeper-server-start.sh config/zookeeper.properties</pre>
+$ bin/zookeeper-server-start.sh config/zookeeper.properties
+```
+
 
 Open another terminal session and run (be sure the new terminal has environment variables set):
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic"># Start the Kafka broker service
-$ bin/kafka-server-start.sh config/server.properties</pre>
+```
+# Start the Kafka broker service
+$ bin/kafka-server-start.sh config/server.properties
+```
+
 
 Once all services have successfully launched, you will have a basic Kafka environment running and ready to use.
 
@@ -278,30 +349,39 @@ Kafka is a distributed event streaming platform that lets you read, write, store
 
 Before you can write your first events, you must create a topic. Open another terminal session and run:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">$ bin/kafka-topics.sh --create \
+```
+$ bin/kafka-topics.sh --create \
 --partitions 1 \
 --replication-factor 1 \
 --topic quickstart-events \
---bootstrap-server localhost:9092</pre>
+--bootstrap-server localhost:9092
+```
+
 
 Since we are creating a simple Kafka instance, we will just create one topic with one partition and a replication factor of one. The single instance will be listening on localhost and port 9092.
 
 To display the newly created topic specify the *--describe* switch.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">$ bin/kafka-topics.sh --describe \
+```
+$ bin/kafka-topics.sh --describe \
 --topic quickstart-events \
 --bootstrap-server localhost:9092
 $ bin/kafka-topics.sh --describe --topic quickstart-events --bootstrap-server
-localhost:9092</pre>
+localhost:9092
+```
+
 
 All of Kafka's command line tools have added options: run the *kafka-topics.sh* command without any arguments to display usage information. For example, it can also show you details such as the partition count of the new topic:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">$ bin/kafka-console-producer.sh \
+```
+$ bin/kafka-console-producer.sh \
 --topic quickstart-events \
 --bootstrap-server localhost:9092
 Topic:quickstart-events PartitionCount:1 ReplicationFactor:1 Configs:
 Topic: quickstart-events Partition: 0 Leader: 0 Replicas: 0 Isr:
-0</pre>
+0
+```
+
 
 You can stop the producer's client with Ctrl-C at any time.
 
@@ -309,12 +389,15 @@ You can stop the producer's client with Ctrl-C at any time.
 
 Open another terminal session and run the console consumer client to read the events you just created:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">$ bin/kafka-console-consumer.sh \
+```
+$ bin/kafka-console-consumer.sh \
 --topic quickstart-events \
 --from-beginning \
 --bootstrap-server localhost:9092
 This is my first event
-This is my second event</pre>
+This is my second event
+```
+
 
 Here you enter text and hit the enter key to publish the message onto the topic. You can stop the consumer client with Ctrl-C at any time.
 
@@ -328,7 +411,10 @@ Now that you reached the end of the quickstart, feel free to tear down the Kafka
 
 If you also want to remove any data of your local Kafka environment including any events you have created along the way, run the command:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">$ rm -rf /tmp/kafka-logs /tmp/zookeeper</pre>
+```
+$ rm -rf /tmp/kafka-logs /tmp/zookeeper
+```
+
 
 Running Kafka on Azul Platform Prime {#h-running-kafka-on-azul-platform-prime}
 ------------------------------------------------------------------------------
@@ -337,7 +423,10 @@ Now, that you've run the examples using Platform Core (Standard builds of the Op
 
 With one of the open terminals switch Java runtimes to use the environment variable *AZUL_PRIME* like the following (assuming environment variables have been set):
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">$ ln -sfn $AZUL_PRIME ~/sdks/current_jdk</pre>
+```
+$ ln -sfn $AZUL_PRIME ~/sdks/current_jdk
+```
+
 
 Repeat steps 2-6 to confirm that Kafka runs on Azul Platform Prime.
 

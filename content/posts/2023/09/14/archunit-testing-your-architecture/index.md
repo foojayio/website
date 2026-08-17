@@ -31,7 +31,7 @@ One of the advantages of ArchUnit is also that it is "just" another test, and do
 
 Please feel free to clone [this repository](https://github.com/SimonVerhoeven/archunit-demo), so you can easily follow along.
 
-*** ** * ** ***
+
 
 Defining what is analyzed {#h2-0-defining-what-is-analyzed}
 -----------------------------------------------------------
@@ -45,7 +45,7 @@ There are a couple of ways to determine what should be analyzed:
 
 Examples can be found in the `analysismanagement` package
 
-*** ** * ** ***
+
 
 Areas {#h2-1-areas}
 -------------------
@@ -60,13 +60,14 @@ As seen you can also add `ImportOptions` to further narrow what's imported. Ther
 
 A sample of a rule to verify that classes under service do not access anything in the controller package:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">final var importedClasses = new ClassFileImporter().importPackages("dev.simonverhoeven.archunitdemo.layerviolationmodule");
+```java
+final var importedClasses = new ClassFileImporter().importPackages("dev.simonverhoeven.archunitdemo.layerviolationmodule");
 final var services = importedClasses.stream()
-        .filter(clazz -&gt; clazz.isAnnotatedWith(Service.class) || clazz.getName().contains(".service."))
+        .filter(clazz -> clazz.isAnnotatedWith(Service.class) || clazz.getName().contains(".service."))
         .collect(Collectors.toSet());
 
-services.forEach(service -&gt; {
-    service.getAccessesFromSelf().forEach(access -&gt; {
+services.forEach(service -> {
+    service.getAccessesFromSelf().forEach(access -> {
         final var targetName = access.getTargetOwner().getName();
 
         if (targetName.contains(".controller.")) {
@@ -75,7 +76,9 @@ services.forEach(service -&gt; {
             fail(message);
         }
     });
-});</pre>
+});
+```
+
 
 As you can see this is a tad cumbersome, and this is where the higher-level Lang API comes into play
 
@@ -85,12 +88,15 @@ The lang API offers us some nice functionalities to be more expressive about our
 
 We can rewrite the Core sample to something pretty similar using:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">final var importedClasses = new ClassFileImporter().importPackages("dev.simonverhoeven.archunitdemo.layerviolationmodule");
+```java
+final var importedClasses = new ClassFileImporter().importPackages("dev.simonverhoeven.archunitdemo.layerviolationmodule");
 final var rule = ArchRuleDefinition.noClasses()
         .that().resideInAPackage("..service..")
         .should().accessClassesThat().resideInAPackage("..controller..");
 
-rule.check(importedClasses);</pre>
+rule.check(importedClasses);
+```
+
 
 ### Library {#h3-4-library}
 
@@ -106,7 +112,8 @@ The library API offers us some nice convenience functions to easily check some c
 
 Thanks to `LayeredArchitecture` we can easily define our layers, and verify the way they are accessed.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">final var architectureRule = layeredArchitecture()
+```java
+final var architectureRule = layeredArchitecture()
         .consideringAllDependencies()
         .layer("Controller").definedBy("..controller..")
         .layer("Service").definedBy("..service..")
@@ -116,17 +123,20 @@ Thanks to `LayeredArchitecture` we can easily define our layers, and verify the 
         .whereLayer("Persistence").mayOnlyBeAccessedByLayers("Service");
 
 final var importedClasses = new ClassFileImporter().importPackages("dev.simonverhoeven.archunitdemo.layeredmodule");
-        architectureRule.check(importedClasses);</pre>
+        architectureRule.check(importedClasses);
+```
+
 
 An example can be found in the [LayerTest](https://github.com/SimonVerhoeven/archunit-demo/blob/main/src/test/java/dev/simonverhoeven/archunitdemo/LayerTest.java)
 
-*** ** * ** ***
+
 
 #### Onion architecture
 
 Using `OnionArchitecture` we define our domain, application services, and adapter and verify whether our classes adhere to these (with optionally some exclusions).
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">@Test
+```java
+@Test
 void onion() {
     final var rule = onionArchitecture()
         .domainModels("..domain.model..")
@@ -138,7 +148,9 @@ void onion() {
 
     final var importedClasses = new ClassFileImporter().importPackages("dev.simonverhoeven.archunitdemo.onionmodule");
     rule.check(importedClasses);
-}</pre>
+}
+```
+
 
 An example can be found in the [OnionTest](https://github.com/SimonVerhoeven/archunit-demo/blob/main/src/test/java/dev/simonverhoeven/archunitdemo/OnionTest.java) which uses the slicingmodule as a verification source. The onion package contains a setup with some violations to demonstrate the validation
 
@@ -146,7 +158,8 @@ An example can be found in the [OnionTest](https://github.com/SimonVerhoeven/arc
 
 Using `SlicesRuleDefinition` we can verify whether our slices are free of cycles/dependencies on each other.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">@Test
+```java
+@Test
 void noCycles() {
     final var rule = slices().matching("dev.simonverhoeven.archunitdemo.slicingmodule.(*)..").should().beFreeOfCycles();
     final var importedClasses = new ClassFileImporter().importPackages("dev.simonverhoeven.archunitdemo.slicingmodule");
@@ -158,11 +171,13 @@ void noDependencies() {
     final var rule = slices().matching("dev.simonverhoeven.archunitdemo.slicingmodule.(*)..").should().notDependOnEachOther();
     final var importedClasses = new ClassFileImporter().importPackages("dev.simonverhoeven.archunitdemo.slicingmodule");
     rule.check(importedClasses);
-}</pre>
+}
+```
+
 
 An example can be found in the [SliceTest](https://github.com/SimonVerhoeven/archunit-demo/blob/main/src/test/java/dev/simonverhoeven/archunitdemo/SliceTest.java) which uses the slicingmodule as a verification source.
 
-*** ** * ** ***
+
 
 Customization {#h2-5-customization}
 -----------------------------------
@@ -171,19 +186,20 @@ Customization {#h2-5-customization}
 
 We can also define our own rules that adhere to the general architectural rule of `classes that {PREDICATE} should {CONDITION}` by creating our own implementation of `DescribedPredicate` and `ArchCondition` respectively in case the predefined rules do not quite fit our needs.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">@Test
+```
+@Test
 void controllerCheck() {
-    var resembleControllerPredicate = new DescribedPredicate&lt;JavaClass&gt;("resemble a controller") {
+    var resembleControllerPredicate = new DescribedPredicate<JavaClass>("resemble a controller") {
         @Override
         public boolean test(JavaClass input) {
             return input.isAnnotatedWith(RestController.class) || input.getName().endsWith("Controller") || "controller".equalsIgnoreCase(input.getPackage().getRelativeName());
         }
     };
 
-    var beDefinedAsControllerCondition = new ArchCondition&lt;JavaClass&gt;("should be defined as a controller") {
+    var beDefinedAsControllerCondition = new ArchCondition<JavaClass>("should be defined as a controller") {
         @Override
         public void check(JavaClass input, ConditionEvents conditionEvents) {
-            if (!(input.isAnnotatedWith(RestController.class) &amp;&amp; input.getName().endsWith("Controller") &amp;&amp; "controller".equalsIgnoreCase(input.getPackage().getRelativeName()))) {
+            if (!(input.isAnnotatedWith(RestController.class) && input.getName().endsWith("Controller") && "controller".equalsIgnoreCase(input.getPackage().getRelativeName()))) {
                 final var message = String.format("Class %s does not adhere to the controller conditions", input.getName());
                 conditionEvents.add(SimpleConditionEvent.violated(input, message));
             }
@@ -193,7 +209,9 @@ void controllerCheck() {
     final var importedClasses = new ClassFileImporter().importPackages("dev.simonverhoeven.archunitdemo.custommodule");
     final var rule = classes().that(resembleControllerPredicate).should(beDefinedAsControllerCondition);
     rule.check(importedClasses);
-}</pre>
+}
+```
+
 
 An example can be found in the [CustomPredicateAndConditionTest](https://github.com/SimonVerhoeven/archunit-demo/blob/main/src/test/java/dev/simonverhoeven/archunitdemo/customization/CustomPredicateAndConditionTest.java) where we define a predicate for what we think a controller looks like, and our condition with the rules we agreed it should adhere to.
 
@@ -201,10 +219,11 @@ An example can be found in the [CustomPredicateAndConditionTest](https://github.
 
 ArchUnit also allows us to control the type of objects that our different concepts (business modules/modules/slices/...) target using `AbstractClassesTransformer`.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">ClassesTransformer&lt;JavaField&gt; constantClassFields = new AbstractClassesTransformer&lt;&gt;("Utility fields") {
+```java
+ClassesTransformer<JavaField> constantClassFields = new AbstractClassesTransformer<>("Utility fields") {
     @Override
-    public Iterable&lt;JavaField&gt; doTransform(JavaClasses classes) {
-        Set&lt;JavaField&gt; fields = new HashSet&lt;&gt;();
+    public Iterable<JavaField> doTransform(JavaClasses classes) {
+        Set<JavaField> fields = new HashSet<>();
         for (JavaClass javaClass : classes) {
             if (javaClass.getSimpleName().endsWith("Constants")) {
                 fields.addAll(javaClass.getFields());
@@ -212,7 +231,9 @@ ArchUnit also allows us to control the type of objects that our different concep
         }
         return fields;
     }
-};</pre>
+};
+```
+
 
 An example can be found in the [CustomConceptsTest](https://github.com/SimonVerhoeven/archunit-demo/blob/main/src/test/java/dev/simonverhoeven/archunitdemo/customization/CustomConceptsTest.java) where we check all our fields in our constants are defined as `Static` and `Final`. You can transform to other concepts such as a BookModule for example.
 
@@ -222,7 +243,8 @@ It is possible to customize the format of the generated messages by creating an 
 
 `failureDisplayFormat=dev.simonverhoeven.archunitdemo.customization.UppercasingFailureFormat`
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public class UppercasingFailureFormat implements FailureDisplayFormat {
+```java
+public class UppercasingFailureFormat implements FailureDisplayFormat {
     @Override
     public String formatFailure(HasDescription rule, FailureMessages failureMessages, Priority priority) {
         String failureDetails = failureMessages.stream()
@@ -235,11 +257,13 @@ It is possible to customize the format of the generated messages by creating an 
                 failureMessages.getInformationAboutNumberOfViolations(),
                 failureDetails);
     }
-}</pre>
+}
+```
+
 
 An example implementation can be found in the [UppercasingFailureFormat](https://github.com/SimonVerhoeven/archunit-demo/blob/main/src/test/java/dev/simonverhoeven/archunitdemo/customization/UppercasingFailureFormat.java)
 
-*** ** * ** ***
+
 
 Predefined predicates and conditions {#h2-9-predefined-predicates-and-conditions}
 ---------------------------------------------------------------------------------
@@ -254,16 +278,19 @@ For some properties there are interfaces with `Predicates` such as `HasAnnotatio
 
 Keep in mind when chaining that `or` expects `DescribedPredicate`
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">// This Will not work given here .and will expect ? super HasAnnotations
-final ArchCondition&lt;JavaClass&gt; wrongCondition = ArchConditions.beAnnotatedWith(Controller.class).and(ArchConditions.beEnums());
+```java
+// This Will not work given here .and will expect ? super HasAnnotations
+final ArchCondition<JavaClass> wrongCondition = ArchConditions.beAnnotatedWith(Controller.class).and(ArchConditions.beEnums());
 
 // This will work since when we apply the enums condition the compiled will see the condition as being for JavaClass
-ArchCondition&lt;JavaClass&gt; condition = ArchConditions.beAnnotatedWith(RestController.class);
-condition = condition.and(ArchConditions.notBeEnums());</pre>
+ArchCondition<JavaClass> condition = ArchConditions.beAnnotatedWith(RestController.class);
+condition = condition.and(ArchConditions.notBeEnums());
+```
+
 
 An example implementation can be found in the [PredefinedPredicatesAndConditionsTest](https://github.com/SimonVerhoeven/archunit-demo/blob/main/src/test/java/dev/simonverhoeven/archunitdemo/PredefinedPredicatesAndConditionsTest.java)
 
-*** ** * ** ***
+
 
 PlantUML {#h2-10-plantuml}
 --------------------------
@@ -274,27 +301,33 @@ One has to use component diagrams, where the classes are associated with compone
 
 [![](diagram.svg)](diagram.svg)
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">@startuml
+```
+@startuml
 
-[Book] &lt;&lt;..book..&gt;&gt;
-[Author] &lt;&lt;..author..&gt;&gt;
-[Reader] &lt;&lt;..reader..&gt;&gt;
+[Book] <<..book..>>
+[Author] <<..author..>>
+[Reader] <<..reader..>>
 
-Author --&gt; Book
-Reader --&gt; Book
+Author --> Book
+Reader --> Book
 
-@enduml</pre>
+@enduml
+```
+
 
 Which we can then use within our test:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">final var diagram = getClass().getClassLoader().getResource("diagram.puml");
-classes().should(adhereToPlantUmlDiagram(diagram, consideringOnlyDependenciesInAnyPackage("..plantmodule.."))).check(importedClasses);</pre>
+```java
+final var diagram = getClass().getClassLoader().getResource("diagram.puml");
+classes().should(adhereToPlantUmlDiagram(diagram, consideringOnlyDependenciesInAnyPackage("..plantmodule.."))).check(importedClasses);
+```
+
 
 An example implementation can be found in the [PlantUMLTest](src%5Ctest%5Cjava%5Cdev%5Csimonverhoeven%5Carchunitdemo%5CPlantUMLTest.java)
 
 **note** : There are certain rules to keep in mind for your diagram which you can find in the [ArchUnit configuration documentation](https://www.archunit.org/userguide/html/000_Index.html#_configurations_2)
 
-*** ** * ** ***
+
 
 Architecture metrics {#h2-11-architecture-metrics}
 --------------------------------------------------
@@ -305,7 +338,8 @@ ArchUnit also allows us to calculate metrics using some well-known software arch
 * Component Dependency Metrics (Robert C. Martin): coupling, instability, abstractness, distance from the main sequence
 * Visibility metrics (Herbert Dowalil) - relation of visible to hidden elements within a component
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">@Test
+```java
+@Test
 void cumulativeDependencyMetrics() {
     final var components = MetricsComponents.fromPackages(packages);
     final var metrics = ArchitectureMetrics.lakosMetrics(components);
@@ -338,13 +372,15 @@ void visibilityMetrics() {
     System.out.println("Relative Visibility : " + metrics.getRelativeVisibility(componentIdentifier));
     System.out.println("Average Relative Visibility: " + metrics.getAverageRelativeVisibility());
     System.out.println("Global Relative Visibility: " + metrics.getGlobalRelativeVisibility());
-}</pre>
+}
+```
+
 
 examples can be found in the [DependencyMetricsTest](https://github.com/SimonVerhoeven/archunit-demo/blob/main/src/test/java/dev/simonverhoeven/archunitdemo/DependencyMetricsTest.java)  
 
 For more information on these metrics, you check out the references at the end of this article.
 
-*** ** * ** ***
+
 
 Resolution behaviour {#h2-12-resolution-behaviour}
 --------------------------------------------------
@@ -372,18 +408,21 @@ Say we have `A => B => C = D`. On the first iteration `A has B` would be resolve
 
 Now we can configure this maximum iteration depth for the 6 different types in `archunit.properties`, they are:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">import.dependencyResolutionProcess.maxIterationsForMemberTypes = 1
+```
+import.dependencyResolutionProcess.maxIterationsForMemberTypes = 1
 import.dependencyResolutionProcess.maxIterationsForAccessesToTypes = 1
 import.dependencyResolutionProcess.maxIterationsForSupertypes = -1
 import.dependencyResolutionProcess.maxIterationsForEnclosingTypes = -1
 import.dependencyResolutionProcess.maxIterationsForAnnotationTypes = -1
-import.dependencyResolutionProcess.maxIterationsForGenericSignatureTypes = -1</pre>
+import.dependencyResolutionProcess.maxIterationsForGenericSignatureTypes = -1
+```
+
 
 Where a negative value means full resolution, and 0 disables automatic resolution.  
 
 Keep in mind that these should be set to a reasonable default, as the depth can have a performance impact on bigger projects.
 
-*** ** * ** ***
+
 
 Adding ArchUnit to an existing application {#h2-13-adding-archunit-to-an-existing-application}
 ----------------------------------------------------------------------------------------------
@@ -402,14 +441,17 @@ The default configuration is done in `src\test\resources\archunit.properties`
 
 And there are a couple of different options:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic"># configure the location of the violation store
+```
+# configure the location of the violation store
 freeze.store.default.path=src/test/resources/frozen
 # whether a new store should be created, for a CI build you'll likely want to keep this on the default value of false
 freeze.store.default.allowStoreCreation=true
 # whether the stored violations of frozen rules can be updated, the default is true
 freeze.store.default.allowStoreUpdate=true
 # whether to allow all violations to be refrozen (i.e. update the store with the current state to mark the current violations as accepted, and report success)
-freeze.refreeze=false</pre>
+freeze.refreeze=false
+```
+
 
 It is also possible to configure these using system properties  
 `-Darchunit.freeze.store.default.allowStoreCreation=true`
@@ -423,7 +465,7 @@ Furthermore one can also define an `archunit_ignore_patterns.txt` file in the ro
 
 One can also just tailor their `.that()` to ignore these legacy classes, but that can quickly become quite cumbersome.
 
-*** ** * ** ***
+
 
 Notes {#h2-14-notes}
 --------------------
@@ -432,8 +474,11 @@ Notes {#h2-14-notes}
 
 It is possible to define easy tests using:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">@ArchTest 
-private final ArchRule no_field_injection = NO_CLASSES_SHOULD_USE_FIELD_INJECTION;</pre>
+```java
+@ArchTest 
+private final ArchRule no_field_injection = NO_CLASSES_SHOULD_USE_FIELD_INJECTION;
+```
+
 
 2)  
 
@@ -477,7 +522,7 @@ This cache can be managed by configuring the `cacheMode`
 
 It is possible to run ArchUnit rules directly from Maven using the Maven plugin by [Société Générale](https://github.com/societe-generale/arch-unit-maven-plugin)
 
-*** ** * ** ***
+
 
 References {#h2-15-references}
 ------------------------------

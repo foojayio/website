@@ -64,7 +64,8 @@ The Pi4J project provides a **friendly object-oriented I/O API and implementatio
 
 Thanks to some clever methods provided by FXGL, it's possible to handle the GPIO (General-Purpose Input/Output) changes as key-presses. This way the game behaves exactly the same with both keyboard-presses and joystick-events, which makes it easy to test and play on your development PC and on the Raspberry Pi with the Arcade joystick and buttons.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">import static com.almasb.fxgl.dsl.FXGLForKtKt.getExecutor;
+```java
+import static com.almasb.fxgl.dsl.FXGLForKtKt.getExecutor;
 
 var input = pi4j.create(DigitalInput.newConfigBuilder(pi4j)
    .id(id)
@@ -72,14 +73,16 @@ var input = pi4j.create(DigitalInput.newConfigBuilder(pi4j)
    .pull(PullResistance.PULL_UP)
    .debounce(3000L)
    .provider("pigpio-digital-input"));
-input.addListener(e -&gt; {
+input.addListener(e -> {
    if (e.state() == DigitalState.LOW) {
       console.println("Input change for " + id);
-      getExecutor().startAsyncFX(() -&gt; getInput().mockKeyPress(keyCode));
+      getExecutor().startAsyncFX(() -> getInput().mockKeyPress(keyCode));
    } else {
-      getExecutor().startAsyncFX(() -&gt; getInput().mockKeyRelease(keyCode));
+      getExecutor().startAsyncFX(() -> getInput().mockKeyRelease(keyCode));
    }
-});</pre>
+});
+```
+
 
 {{< youtube pvs5hMABXoU >}}
 

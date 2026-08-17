@@ -130,17 +130,23 @@ Let us make sure your environment is setup before we begin. The following are th
 
 **Step 3** : Set `PATH`
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group=""> # Mac/Linux
- $ export JAVA_HOME=&lt;path to JDK&gt;
- $ export JEXTRACT_HOME=&lt;path to jextract&gt;
- $ export PATH=$JAVA_HOME/bin:JEXTRACT_HOME/bin:$PATH</pre>
+```
+ # Mac/Linux
+ $ export JAVA_HOME=<path to JDK>
+ $ export JEXTRACT_HOME=<path to jextract>
+ $ export PATH=$JAVA_HOME/bin:JEXTRACT_HOME/bin:$PATH
+```
+
 
 **Note:** To make environment variables permanent you can set these in your `.bashrc` or `.bash_profile` files on Linux or MacOS respectively. On newer Macs you can set them in your `.zshrc` or `.zprofile`
 
 **Step 4:** Test Java runtime and the `jextract` tool are available
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group=""> $ java -version
- $ jextract -h</pre>
+```
+ $ java -version
+ $ jextract -h
+```
+
 
 **Windows instructions:**   
 
@@ -148,9 +154,12 @@ Step 1: Download JDK and jextract [here](https://jdk.java.net/jextract/). Next, 
 
 Step 2: Set `JAVA_HOME`, `JEXTRACT_HOME` and `PATH` environment variables
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group=""> c:\&gt; set JAVA_HOME=&lt;path to JDK&gt;
- c:\&gt; set JEXTRACT_HOME=&lt;path to jextract&gt;
- c:\&gt; set PATH=%JAVA_HOME%\bin;%JEXTRACT_HOME/bin%;%PATH%</pre>
+```
+ c:\> set JAVA_HOME=<path to JDK>
+ c:\> set JEXTRACT_HOME=<path to jextract>
+ c:\> set PATH=%JAVA_HOME%\bin;%JEXTRACT_HOME/bin%;%PATH%
+```
+
 
 **Note:** To make environment variables permanent on the Windows platform do the following:
 
@@ -160,32 +169,36 @@ Step 2: Set `JAVA_HOME`, `JEXTRACT_HOME` and `PATH` environment variables
 
 **Step 3:** Test runtime and jextract is available
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group=""> c:\&gt; java -version
- c:\&gt; jextract -h</pre>
+```
+ c:\> java -version
+ c:\> jextract -h
+```
+
 
 After running jextract -h to display the switch options you'll know you are ready to go. You should see something like the following:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">Usage: jextract &lt;options&gt; &lt;header file&gt; [&lt;header file&gt;] [...]                                   
+```
+Usage: jextract <options> <header file> [<header file>] [...]                                   
 
 Option                             Description                                                  
 ------                             -----------                                                  
 -?, -h, --help                     print help                                                   
--D --define-macro &lt;macro&gt;=&lt;value&gt;  define &lt;macro&gt; to &lt;value&gt; (or 1 if &lt;value&gt; omitted)          
--I, --include-dir &lt;dir&gt;            add directory to the end of the list of include search paths 
---dump-includes &lt;file&gt;             dump included symbols into specified file                    
---header-class-name &lt;name&gt;         name of the generated header class. If this option is not    
+-D --define-macro <macro>=<value>  define <macro> to <value> (or 1 if <value> omitted)          
+-I, --include-dir <dir>            add directory to the end of the list of include search paths 
+--dump-includes <file>             dump included symbols into specified file                    
+--header-class-name <name>         name of the generated header class. If this option is not    
                                    specified, then header class name is derived from the header
                                    file name. For example, class "foo_h" for header "foo.h".   
---include-function &lt;name&gt;          name of function to include                                  
---include-constant &lt;name&gt;          name of macro or enum constant to include                    
---include-struct &lt;name&gt;            name of struct definition to include                         
---include-typedef &lt;name&gt;           name of type definition to include                           
---include-union &lt;name&gt;             name of union definition to include                          
---include-var &lt;name&gt;               name of global variable to include                           
--l, --library &lt;libspec&gt;            specify a shared library that should be loaded by the        
-                                   generated header class. If &lt;libspec&gt; starts with :, then  
+--include-function <name>          name of function to include                                  
+--include-constant <name>          name of macro or enum constant to include                    
+--include-struct <name>            name of struct definition to include                         
+--include-typedef <name>           name of type definition to include                           
+--include-union <name>             name of union definition to include                          
+--include-var <name>               name of global variable to include                           
+-l, --library <libspec>            specify a shared library that should be loaded by the        
+                                   generated header class. If <libspec> starts with :, then  
                                    what follows is interpreted as a library path. Otherwise,   
-                                   &lt;libspec&gt; denotes a library name. Examples:                 
+                                   <libspec> denotes a library name. Examples:                 
                                       -l GL                                                    
                                       -l :libGL.so.1                                           
                                       -l :/usr/lib/libGL.so.1                                  
@@ -193,18 +206,19 @@ Option                             Description
                                    lookup (using either System::loadLibrary, or System::load). 
                                    Useful if the libraries must be loaded from one of the paths
                                    in java.library.path.                                     
---output &lt;path&gt;                    specify the directory to place generated files. If this      
+--output <path>                    specify the directory to place generated files. If this      
                                    option is not specified, then current directory is used.    
--t, --target-package &lt;package&gt;     target package name for the generated classes. If this option
+-t, --target-package <package>     target package name for the generated classes. If this option
                                    is not specified, then unnamed package is used.             
---symbols-class-name &lt;name&gt;        override the name of the root header class                   
+--symbols-class-name <name>        override the name of the root header class                   
 --version                          print version information and exit                           
 
 macOS platform options for running jextract (available only when running on macOS):             
--F &lt;dir&gt;            specify the framework directory                                     
---framework &lt;framework&gt;                     specify framework library. --framework libGL is equivalent to         
+-F <dir>            specify the framework directory                                     
+--framework <framework>                     specify framework library. --framework libGL is equivalent to         
                                       -l :/System/Library/Frameworks/libGL.framework/libGL
- </pre>
+```
+
 
 If you are seeing the `jextract` options then you are ready to go to the next section.
 
@@ -229,25 +243,37 @@ Anatomy of a Hello World in C {#h2-5-anatomy-of-a-hello-world-in-c}
 
 **Listing 1:** `helloworld.c`
 
-<pre class="EnlighterJSRAW" data-enlighter-language="c" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">#include &lt;stdio.h&gt;
+```c
+#include <stdio.h>
 int main() {
    printf("Hello, World! \n");
    return 0;
-}</pre>
+}
+```
+
 
 **Step 2:** Compile the code
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ gcc helloworld.c</pre>
+```
+$ gcc helloworld.c
+```
+
 
 **Step 3:** List the executable file
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ ls -l a.out
--rwxr-xr-x  1 jdoe  staff  49424 Jul 29 21:06 a.out</pre>
+```
+$ ls -l a.out
+-rwxr-xr-x  1 jdoe  staff  49424 Jul 29 21:06 a.out
+```
+
 
 **Step 4:** Run or execute the program
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ ./a.out
-Hello, World!</pre>
+```
+$ ./a.out
+Hello, World!
+```
+
 
 Well that was pretty straight forward! Let's unpack what is actually going on. Below is a high-level look at what the C program is doing.
 
@@ -262,8 +288,11 @@ In **Step 1** the `stdio` is C's standard input output library. In the C program
 
 In **Step 2** the C programming language it has two overloaded functions of `main()`. One takes an empty parameter signiture, and the other will take number of args (type int) and an array of type `char *` (C string).
 
-<pre class="EnlighterJSRAW" data-enlighter-language="c" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">int main() {}
-int main(int argc, char *argv[]) {}</pre>
+```c
+int main() {}
+int main(int argc, char *argv[]) {}
+```
+
 
 In **Step 3** the `main()` function will return an integer of zero to denote **success** , and any other value is an **error status code**.
 
@@ -290,7 +319,10 @@ Let's jextract STDIO please! {#h2-7-let-s-jextract-stdio-please}
 
 The `jextract` tool has been updated to make it easier for standard C libraries by specifying header files in double quotes as follows:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">jextract --output generatedsrc -t org.unix "&lt;stdio.h&gt;"</pre>
+```
+jextract --output generatedsrc -t org.unix "<stdio.h>"
+```
+
 
 * `--output <destination directory of generated java code>`
 * `-t` \<package namespace\>
@@ -300,7 +332,10 @@ The generated Java (Panama) code will be placed in the directory `generatedsrc/o
 
 It should look like the following:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bat" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ ls -l generatedsrc/org/unix</pre>
+```batch
+$ ls -l generatedsrc/org/unix
+```
+
 
     __darwin_pthread_rwlock_t.java
     __darwin_pthread_rwlockattr_t.java
@@ -319,27 +354,42 @@ To use `jextract` let's locate where your `stdio.h` file is located on your loca
 
 **Step 1:** (Optional Step) Find header file stdio.h
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ gcc -H -fsyntax-only helloworld.c</pre>
+```
+$ gcc -H -fsyntax-only helloworld.c
+```
+
 
 On MacOS (Big Sur, Monterey) the output looks something to the following:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">. /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/stdio.h
+```
+. /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/stdio.h
 .. /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/_stdio.h
-...</pre>
+...
+```
+
 
 Now that you know where the file is located, we can target the file when using the `jextract` tool.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ jextract [options] &lt;path_to_file/stdio.h&gt;</pre>
+```
+$ jextract [options] <path_to_file/stdio.h>
+```
+
 
 **Step 2:** (**Optional step** ) Use `jextract` to generate Java code from a specific `stdio.h` header file location using `-I` \<include files directory\>.  
 
 On MacOS do the following:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ jextract --output generatedsrc -t org.unix -I /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/stdio.h</pre>
+```bash
+$ jextract --output generatedsrc -t org.unix -I /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/stdio.h
+```
+
 
 **On Linux:**
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ jextract --output generatedsrc -t org.unix -I /usr/include /usr/include/stdio.h</pre>
+```bash
+$ jextract --output generatedsrc -t org.unix -I /usr/include /usr/include/stdio.h
+```
+
 
 Now we can use the generated code to be used in our Panama Java Hello World program.
 
@@ -347,7 +397,8 @@ Now we can use the generated code to be used in our Panama Java Hello World prog
 
 Copy and paste the following into a file `HelloWorld.java`.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">import static org.unix.stdio_h.*;
+```java
+import static org.unix.stdio_h.*;
 
 void main() {
    // Use a confined arena for deterministic memory management
@@ -356,25 +407,36 @@ void main() {
        MemorySegment cString = arena.allocateFrom("Hello World! Panama style\n");
        int charCount = printf.makeInvoker().apply(cString);
    }
-}</pre>
+}
+```
+
 
 **Step 4:** Compiling **generated files** along with `HelloWorld.java`
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group=""># Compile Jextract generated Java code in generatedsrc
+```bash
+# Compile Jextract generated Java code in generatedsrc
 javac generatedsrc/org/**/*.java -d classes
 
 # Compile Example Java code in src
-javac -cp .:classes src/*.java -d classes</pre>
+javac -cp .:classes src/*.java -d classes
+```
+
 
 **Step 5:** Running the Panama Java `HelloWorld.java`
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ java -cp .:classes \
+```bash
+$ java -cp .:classes \
  --enable-native-access=ALL-UNNAMED \
- HelloWorld</pre>
+ HelloWorld
+```
+
 
 The output is the following:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">Hello World! Panama style</pre>
+```
+Hello World! Panama style
+```
+
 
 How does it work? {#h2-8-how-does-it-work}
 ------------------------------------------
@@ -415,25 +477,31 @@ On the Mac OS the file would be named `libtensorflow.dylib` and on Linux should 
 
 To specify `-l` (option L) you can specify the name of the library or the absolute path of the library file. For example, to jextract Tensorflow it will look like the following:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ jextract \
+```bash
+$ jextract \
   -I /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/ \
   -t org.tensorflow \
   -I ${LIBTENSORFLOW_HOME}/include \
   -l ${LIBTENSORFLOW_HOME}/lib/libtensorflow.dylib \
-  ${LIBTENSORFLOW_HOME}/include/tensorflow/c/c_api.h</pre>
+  ${LIBTENSORFLOW_HOME}/include/tensorflow/c/c_api.h
+```
+
 
 You will notice on MacOS I specified the fully qualified library file `${LIBTENSORFLOW_HOME}/lib/libtensorflow.dylib` instead of the name (tensorflow). Usually, if libraries are installed in /usr/lib or /usr/local/lib you can just specify the name.
 
 **Step 3:** Java code talks to C.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group=""> void main() {
+```java
+ void main() {
     // Use a confined arena for deterministic memory management
     try (Arena arena = Arena.ofConfined()) {                 // (A)
         // MemorySegment C's printf using a C string
         MemorySegment cString = arena.allocateFrom("Hello World! Panama style\n"); // (B)
         int charCount = printf.makeInvoker().apply(cString); // (C)
     }
- }</pre>
+ }
+```
+
 
 In line **(A)** the statement is where the code uses a try with resources to create an `Arena`. An Arena is type of scope [confined](https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/foreign/Arena.html#ofConfined()) will auto close when it's finished after the try-block. This will deallocate native memory safely. Please see the javadoc documentation for additional types of [Arenas](https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/foreign/Arena.html).
 
@@ -443,26 +511,38 @@ In statement **(C)** the makeInvoker() method
 
 In statement **(C)** the call to the native function `printf()` with the object `cString` of type `MemorySegement` is passed in and invoked. Another important note to understand is `stdout` (Standard output) in C, when used in combination with Java's System.out.printlin() you may need to **flush** the native side first for instance:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">var cString = arena.allocateFrom("Hello World (Native C Called)\n");
+```java
+var cString = arena.allocateFrom("Hello World (Native C Called)\n");
 printf.makeInvoker().apply(cString);
-System.out.println("Java System.out\n");</pre>
+System.out.println("Java System.out\n");
+```
+
 
 On some systems, (on MacOS) the following output occurs because of the C's output hasn't been flushed:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">Java System.out
-Hello World (Native C Called)</pre>
+```
+Java System.out
+Hello World (Native C Called)
+```
+
 
 So, what do you do? You need to call `fflush()`to flush C's buffer to `stdout`.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">var cString = arena.allocateFrom("Hello World (Native C Called)\n");
+```java
+var cString = arena.allocateFrom("Hello World (Native C Called)\n");
 printf.makeInvoker().apply(cString);
 fflush(NULL()); // jextract generated functions in org.unix.stdio_h.*
-System.out.println("Java System.out\n");</pre>
+System.out.println("Java System.out\n");
+```
+
 
 Now, the output will be in the correct order shown below:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">Hello World (Native C Called)
-Java System.out</pre>
+```
+Hello World (Native C Called)
+Java System.out
+```
+
 
 So, now that you know how to output a newly created C string using the printf() function let's learn how to substitute values into a **format string** or string template. Java's `System.out.printf()` also has the same calling convention as C's `stdio.h` `printf()` function. Let's examine a format string passed into the printf() function.
 
@@ -487,12 +567,15 @@ Let's get back to where we left off regarding MemoryLayouts specified prior to i
 
 Below shows the static method on the printf class called `makeInvoker(ValueLayout... (variable arguments))`. We specify the first variadic argument to be of type C_POINTER.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">MemorySegment formatCStr = arena.allocateFrom("Hello %s!\n");
+```java
+MemorySegment formatCStr = arena.allocateFrom("Hello %s!\n");
 printf printfAlpha = printf.makeInvoker(stdio_h.C_POINTER);
 
 MemorySegment nameStr = arena.allocateFrom("Fred");
 
-printfAlpha.apply(formatCStr, nameStr); // Hello Fred!</pre>
+printfAlpha.apply(formatCStr, nameStr); // Hello Fred!
+```
+
 
 The following shows commonly used format specifiers (not an exhaustive list).
 
@@ -505,11 +588,15 @@ The following shows commonly used format specifiers (not an exhaustive list).
 
 Let's look at a more advanced format string using different format specifiers. To begin we will examine the following C code to be translated to Panama (FFI \& FFM) code.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="c" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">int charCount = printf("%s is %d years old and is %.1f feet tall.\n", "Fred", 60, 5.9d);</pre>
+```c
+int charCount = printf("%s is %d years old and is %.1f feet tall.\n", "Fred", 60, 5.9d);
+```
+
 
 Above you'll notice `%s`, `%d` and `%.1f` which tells you there are **three** format specifiers: C string, int, and double(floating point number). Now we can call the `makeInvoker()` method with the appropriate data types generated from jextract. The types would be the following: `C_POINTER`, `C_INT`, and `C_DOUBLE`.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">    void main() {
+```java
+    void main() {
        try (Arena arena = Arena.ofConfined()) { 
          // *******************************************************************************
          // * How to call printf() with format string such as
@@ -530,13 +617,18 @@ Above you'll notice `%s`, `%d` and `%.1f` which tells you there are **three** fo
                                         60,
                                         5.9f);
        }
-    }</pre>
+    }
+```
+
 
 This time I separated the calls `makeInvoker()` and `apply()` instead of the earlier example of method chaining. By separating the calls you can see `makeInvoker()` returns an instance of a `printf` object capable of receiving 3 variadic arguments (`"Fred", 60, 5.9d`). The first parameter will be the **format string** `"%s is %d years old and is %.1f feet tall.\n"`.
 
 The output is:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">Fred is 60 years old and is 5.9 feet tall.</pre>
+```
+Fred is 60 years old and is 5.9 feet tall.
+```
+
 
 Congratulations for getting this far! While it's nice to create and output C strings. Let's look at how to create primitive data types off of the Java's memory heap.
 
@@ -585,7 +677,8 @@ Note: there are other overloaded methods to create custom memory layouts
 * `long - set(ValueLayout.OfLong, long offset``, long value``)`
 * `short - set(ValueLayout.OfShort, long offset``, short value``)`
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">MemorySegment formatCStr = arena.allocateFrom("A slice of %f \n");
+```java
+MemorySegment formatCStr = arena.allocateFrom("A slice of %f \n");
 
 // Create an off heap double containing the value of Pi.
 MemorySegment cDouble = arena.allocateFrom(C_DOUBLE, Math.PI);
@@ -594,7 +687,9 @@ MemorySegment cDouble = arena.allocateFrom(C_DOUBLE, Math.PI);
 printf printfFun = printf.makeInvoker(C_DOUBLE); 
 
 // Invoke printf function such as printf("A slice of %f \n", 3.141593d); 
-printfFun.apply(formatCStr, cDouble.get(C_DOUBLE, 0)); // A slice of 3.141593</pre>
+printfFun.apply(formatCStr, cDouble.get(C_DOUBLE, 0)); // A slice of 3.141593
+```
+
 
     Output:
     A slice of 3.141593
@@ -605,14 +700,18 @@ Of course you can also call by passing in Java's `Math.PI` (primitive double) in
 
 **Note:** It's better to use the `jextract` generated `stdio_h.C_DOUBLE` (as opposed to `ValueLayout.JAVA_DOUBLE`) because it takes on the underlying OS' bit width. It might not occupy the same number of bits if you are assuming it's 64 bits (8 bytes). The following is the `C_DOUBLE` variable of type `OfDouble` that gets generated by `jextract` as follows.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">// jextract generated C_DOUBLE
-public static final ValueLayout.OfDouble C_DOUBLE = (ValueLayout.OfDouble) Linker.nativeLinker().canonicalLayouts().get("double");</pre>
+```java
+// jextract generated C_DOUBLE
+public static final ValueLayout.OfDouble C_DOUBLE = (ValueLayout.OfDouble) Linker.nativeLinker().canonicalLayouts().get("double");
+```
+
 
 ### Creating C primitive arrays {#h3-11-creating-c-primitive-arrays}
 
 Now that you know how to create primitive data types let's create C primitive arrays. Shown below is allocating space to hold a single dimensional array off of the Java heap. Then we just re-access the C array using `getAtIndex(ValueLayout, index)` and then displaying the contents.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">out.println("An array of data");
+```
+out.println("An array of data");
 MemorySegment cDoubleArray = arena.allocateFrom(C_DOUBLE, 
        1.0, 2.0, 3.0, 4.0,
        1.0, 1.0, 1.0, 1.0,
@@ -620,36 +719,47 @@ MemorySegment cDoubleArray = arena.allocateFrom(C_DOUBLE,
        5.0, 6.0, 7.0, 8.0
 );
 
-for (long i = 0; i &lt; (4*4); i++) {
-   if (i&gt;0 &amp;&amp; i % 4 == 0) {
+for (long i = 0; i < (4*4); i++) {
+   if (i>0 && i % 4 == 0) {
        System.out.println();
    }
    out.printf(" %f ", cDoubleArray.getAtIndex(C_DOUBLE, i));
-}</pre>
+}
+```
+
 
 The output:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">An array of data
+```
+An array of data
  1.000000  2.000000  3.000000  4.000000 
  1.000000  1.000000  1.000000  1.000000 
  3.000000  4.000000  5.000000  6.000000 
- 5.000000  6.000000  7.000000  8.000000 </pre>
+ 5.000000  6.000000  7.000000  8.000000
+```
+
 
 As demonstrated above, you can use the `MemorySegment.getAtIndex(ValueLayout, index)` method to extract and display a specific value from the array.
 
 To change the array's values, you'll need to call the `MemorySegment.setAtIndex()` method. The provided example below shows how to fetch each value and multiply it by 3.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">for (long i = 0; i &lt; 16; i++) {
+```java
+for (long i = 0; i < 16; i++) {
    double newVal = cDoubleArray.getAtIndex(C_DOUBLE, i) * 3;
    cDoubleArray.setAtIndex(C_DOUBLE, i, newVal);
-}</pre>
+}
+```
+
 
 Output is shown below:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group=""> 3.000000  6.000000  9.000000  12.000000 
+```
+ 3.000000  6.000000  9.000000  12.000000 
  3.000000  3.000000  3.000000  3.000000 
  9.000000  12.000000  15.000000  18.000000 
- 15.000000  18.000000  21.000000  24.000000 </pre>
+ 15.000000  18.000000  21.000000  24.000000
+```
+
 
 In Part 1, we learned about the what, where, and whys regarding project Panama. Next, we examined the anotomy of a typical Hello World C program. After learning how to use `jextract` to generate Java code from `stdio.h`, we were able to create a Java Hello World to access the C function `printf()`. Lastly, we learned how to create C primitive data types including arrays.
 

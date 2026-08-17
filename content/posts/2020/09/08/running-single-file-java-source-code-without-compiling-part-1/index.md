@@ -22,20 +22,29 @@ frozen: false
 
 If you recall the old days, before OpenJDK 11, say you have a `HelloUniverse.java` source file that contains a class definition and a static main method, which prints out as a single line of text to the terminal, like the following:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public class HelloUniverse{
+```java
+public class HelloUniverse{
       public static void main(String[] args) { 
             System.out.println("Hello foojay!");
       }
-}</pre>
+}
+```
+
 
 Normally to run this class, first, you would need to compile it, using a Java compiler (`javac`), which would result in a `HelloUniverse.class` file:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="md" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&gt; javac HelloUniverse.java</pre>
+```markdown
+> javac HelloUniverse.java
+```
+
 
 Then you would use a `java` virtual machine (interpreter) command to run the resulting class file:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="md" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&gt; java HelloUniverse
-Hello foojay!</pre>
+```markdown
+> java HelloUniverse
+Hello foojay!
+```
+
 
 This starts up the JVM, loads the class, and executes the code.
 

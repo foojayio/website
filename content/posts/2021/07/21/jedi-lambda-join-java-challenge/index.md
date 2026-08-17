@@ -30,7 +30,8 @@ Join Jedi Lambda Java Challenge {#_join_jedi_lambda_java_challenge}
 
 By analyzing the following code, what do you think will happen when running it?
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">import java.util.function.Function;
+```java
+import java.util.function.Function;
 
 public class JediLambdaJoinChallenge {
 
@@ -38,11 +39,11 @@ public class JediLambdaJoinChallenge {
         String MASTER = "Yoda";
 
         default String attack() {
-            return jump(jedi -&gt;
+            return jump(jedi ->
                     String.join(jedi, useSaber(), useForce()));
         }
 
-        private String jump(Function&lt;String, String&gt; function) {
+        private String jump(Function<String, String> function) {
             return function.apply("Luke");
         }
 
@@ -64,7 +65,9 @@ public class JediLambdaJoinChallenge {
         }.attack() + Jedi.useSaber() + Jedi.MASTER);
     }
 
-}</pre>
+}
+```
+
 
 A) SLukeFSYoda  
 
@@ -78,23 +81,32 @@ D) LukeSFSYoda
 
 Let's analyse this code:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">System.out.println(new Jedi() {
+```java
+System.out.println(new Jedi() {
 		public String useForce() {
 			return "X";
 		}
-	}.attack() + Jedi.useSaber() + Jedi.MASTER);</pre>
+	}.attack() + Jedi.useSaber() + Jedi.MASTER);
+```
+
 
 Note that the useForce method is being overridden inside an anonymous inner class. An anonymous inner class is basically a class that doesn't have a name implementing in our case the Jedi interface. Then we are invoking the attack method.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">default String attack() {
-	return jump(jedi -&gt; String.join(jedi, useSaber(), useForce()));
-}</pre>
+```java
+default String attack() {
+	return jump(jedi -> String.join(jedi, useSaber(), useForce()));
+}
+```
+
 
 There is a trick here in the join method. The first argument of the join method is a delimiter. As we are returning Luke in this code:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">private String jump(Function function) {
+```java
+private String jump(Function function) {
 	return function.apply("Luke");
-}</pre>
+}
+```
+
 
 Luke will be the delimiter, and the useSaber, useForce methods are going to simply return a String. So the first part of the String will be: `SLukeF`. Then the `Jedi.useSaber()` method will be invoked, and note that this method is being invoked in a static way. So the method we overrode won't be invoked, this method will return `S`. Finally, the constant `Jedi.MASTER` will be printed with the final input: `SLukeFSYoda`
 

@@ -44,13 +44,17 @@ That's why it's crucial to have a good look into those objects, so that you can 
 
 You can use respectively `debugModels`, `debugOpenAPI` and /or `debugSupportingFiles`. and you set them by running the desired `generate` command with the correct flag. For example:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">$ java -cp modules/openapi-generator-cli/target/openapi-generator-cli.jar \
+```
+$ java -cp modules/openapi-generator-cli/target/openapi-generator-cli.jar \
 org.openapitools.codegen.OpenAPIGenerator generate -g java -o out -i petstore.yaml \
---global-property debugModels=true</pre>
+--global-property debugModels=true
+```
+
 
 I won't print the entire output here because it's huge, but as part of the output it will basically spit a giant json representation of all the models available inside that specified yaml file. Here's a tiny part of the beginning:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">[ {
+```
+[ {
   "importPath" : "org.openapitools.client.model.Category",
   "model" : {
     "anyOf" : [ ],
@@ -82,7 +86,9 @@ I won't print the entire output here because it's huge, but as part of the outpu
     "isPrimitiveType" : false,
     "isBoolean" : false,
     "additionalPropertiesIsAnyType" : false,
-    .........</pre>
+    .........
+```
+
 
 Running and Debugging a Generator {#h2-1-running-and-debugging-a-generator}
 ---------------------------------------------------------------------------
@@ -93,21 +99,27 @@ The first one will compile the source, while the second one will use the created
 
 For example, the config file `spring-boot.yaml`:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">generatorName: spring
+```
+generatorName: spring
 outputDir: samples/server/petstore/springboot
 inputSpec: modules/openapi-generator/src/test/resources/2_0/petstore.yaml
 templateDir: modules/openapi-generator/src/main/resources/JavaSpring
 additionalProperties:
-  artifactId: springboot</pre>
+  artifactId: springboot
+```
+
 
 will run the command
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">$./modules/openapi-generator-cli/target/openapi-generator-cli.jar org.openapitools.codegen.OpenAPIGenerator generate \
+```
+$./modules/openapi-generator-cli/target/openapi-generator-cli.jar org.openapitools.codegen.OpenAPIGenerator generate \
 -g spring \
 -i modules/openapi-generator/src/test/resources/2_0/petstore.yaml \
 -o samples/server/petstore/springboot \
 -t modules/openapi-generator/src/main/resources/JavaSpring \
---additional-properties=artifactId=springboot</pre>
+--additional-properties=artifactId=springboot
+```
+
 
 Useful, but quite cumbersome. On top of this, you typically want to be able to run / debug code as you go directly in your IDE.
 
@@ -138,10 +150,13 @@ The most interesting part of this class is located in the `generate` method.
 
 You will also be able to find the lines that are being used to print the debugging flags by searching for the `Json.prettyPrint` calls. Here's an example for the models (as of now, line 566 of `DefaultCodeGen`):
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">if (GlobalSettings.getProperty("debugModels") != null) {
+```
+if (GlobalSettings.getProperty("debugModels") != null) {
     LOGGER.info("############ Model info ############");
     Json.prettyPrint(allModels);
-}</pre>
+}
+```
+
 
 <img decoding="async" class="size-medium wp-image-65427" src="debugshow-700x411.png" alt="A screenshot of a debug of the model, showing the content of the &quot;allModels&quot; variable" width="700" height="411">
 
@@ -162,18 +177,24 @@ Luckily for us, the smart developers of OpenAPI have created locations to do jus
 
 Here is what a completely useless generator could do:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">@Override
-public Map&lt;String, Object&gt; postProcessSupportingFileData(Map&lt;String, Object&gt; bundle) {
+```
+@Override
+public Map<String, Object> postProcessSupportingFileData(Map<String, Object> bundle) {
     bundle.put("bloggingAt1AM", "isFun");
 
     return bundle;
-}</pre>
+}
+```
+
 
 Which you could then use inside a `README.mustache` template, for example:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic"># Important announcement
+```
+# Important announcement
 
-{{bloggingAt1AM}} // Will print "isFun" once ran</pre>
+{{bloggingAt1AM}} // Will print "isFun" once ran
+```
+
 
 Generating Custom Lambdas {#h2-4-generating-custom-lambdas}
 -----------------------------------------------------------
@@ -200,10 +221,11 @@ Instead of having to play around a lot with the templating, I decided to create 
 
 This is how it looks:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">public class JetbrainsHttpClientClientCodegen extends DefaultCodegen implements CodegenConfig {
+```
+public class JetbrainsHttpClientClientCodegen extends DefaultCodegen implements CodegenConfig {
 
     @Override
-    protected ImmutableMap.Builder&lt;String, Mustache.Lambda&gt; addMustacheLambdas() {
+    protected ImmutableMap.Builder<String, Mustache.Lambda> addMustacheLambdas() {
        return super.addMustacheLambdas()
                 .put("doubleMustache", new DoubleMustacheLambda());
     }
@@ -218,7 +240,9 @@ This is how it looks:
             );
         }
     }
-}</pre>
+}
+```
+
 
 Two things happen here:
 

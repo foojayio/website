@@ -40,7 +40,7 @@ In most Java applications, the TLS layer is just part of the stack. It encrypts 
 
 The root issue I found with `SSLEngine` was not that it is slow in the abstract, old, or even mainly that it allocates. The deeper problem is that `SSLEngine` keeps the TLS boundary expressed in terms of JVM-managed buffer objects and heap-visible control flow, while the rest of the runtime is trying very hard to stop doing exactly that.
 
-*** ** * ** ***
+
 
 The Impedance Mismatch in Memory Ownership {#h2-1-the-impedance-mismatch-in-memory-ownership}
 ---------------------------------------------------------------------------------------------
@@ -56,7 +56,7 @@ What `SSLEngine` gives you is different. It relies on buffer exchange through a 
 In a conventional stack, delayed cleanup is usually acceptable because the whole system already tolerates a lot of deferred work. In an off-heap-first runtime, "cleanup later" is not neutral. It means native TLS state can survive beyond the point where the runtime is logically done with it. Once I noticed this mismatch in ownership semantics clearly, I stopped thinking of `SSLEngine` as a component to tune and started seeing it as a boundary that belonged to the wrong architecture.
 ![SSLEngine memory contract vs. Exeris Arena ownership model.](https://blog.arkstack.dev/blog/your-tls-stack-is-lying-about-zero-copy/fig1_tls_boundary.png) Figure 1: SSLEngine memory contract vs. Exeris Arena ownership model.
 
-*** ** * ** ***
+
 
 The Netty Question {#h2-2-the-netty-question}
 ---------------------------------------------
@@ -67,7 +67,7 @@ Netty solves the off-heap problem through pooled buffers and manual reference co
 
 With Panama FFM in Exeris, I don't need reference counting. I get deterministic, strict ownership. Memory boundaries are tied to scopes (like `Arena`), meaning the lifecycle of the TLS buffer is statically guaranteed by the runtime, not dynamically managed by developers counting references. The boundary is cleaner, and the cost of maintaining it drops.
 
-*** ** * ** ***
+
 
 Explicit State and FFM {#h2-3-explicit-state-and-ffm}
 -----------------------------------------------------
@@ -76,21 +76,25 @@ To see why this changes the architecture, look at the actual implementation in t
 
 First, I stopped letting the TLS engine silently manage its own lifecycle. In `TlsStateMachine`, the transitions are deterministic and tied to the kernel's execution context, not left to the garbage collector.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">// Snippet from TlsStateMachine.java (Exeris Kernel)
+```
+// Snippet from TlsStateMachine.java (Exeris Kernel)
 // State transitions are explicitly modeled and bound to the off-heap lifecycle.
 
 public void advanceState(TlsEvent event) {
     // I enforce strict state progression before any native call is made.
     // There is no ambiguous "maybe it's closed" state lingering on the heap.
-    if (currentState == TlsState.HANDSHAKE &amp;&amp; event == TlsEvent.APP_DATA) {
+    if (currentState == TlsState.HANDSHAKE && event == TlsEvent.APP_DATA) {
         throw new IllegalStateException("Cannot process application data during handshake");
     }
     // ... explicit state handling
-}</pre>
+}
+```
+
 
 Second, I mapped the actual cryptographic operation directly via Panama's FFM in `OffHeapTlsEngine`. Notice that I am not wrapping heap arrays. I am passing raw memory segments or delegating file descriptors directly to native OpenSSL functions.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">// Snippet from OffHeapTlsEngine.java (Exeris Kernel)
+```
+// Snippet from OffHeapTlsEngine.java (Exeris Kernel)
 // Zero-allocation FFM call: the raw off-heap address is passed directly —
 // no MemorySegment wrapper object is created on the hot path.
 
@@ -103,11 +107,13 @@ public int writeRaw(MemorySegment sourceSegment) {
     } catch (Throwable t) {
         throw new TlsNativeException("FFM downcall to SSL_write failed", t);
     }
-}</pre>
+}
+```
+
 
 The trade-off here is explicit: I lose the safety net of `ByteBuffer` bounds checking and GC cleanup. In return, I gain absolute control over the data path.
 
-*** ** * ** ***
+
 
 What the Exploratory Benchmarks Prove {#h2-4-what-the-exploratory-benchmarks-prove}
 -----------------------------------------------------------------------------------
@@ -139,7 +145,7 @@ But the most important architectural metric is the last row: **Exeris FD Owner**
 
 A naive reading would ask why the throughput dropped to \~367,000 ops/s. The answer is that the FD Owner benchmark leaves the synthetic in-process memory arena entirely. It writes directly to the OS loopback interface via socket file descriptors. At this stage, I am no longer benchmarking memory copy operations; I am hitting the limits of the OS network stack and syscalls.
 
-*** ** * ** ***
+
 
 The GC Layer and the True Cost of Abstractions {#h2-5-the-gc-layer-and-the-true-cost-of-abstractions}
 -----------------------------------------------------------------------------------------------------
@@ -153,7 +159,7 @@ By contrast, the Exeris FFM paths drop the normalized allocation rate to **stric
 This is the core definition of "No Waste Compute." By eliminating the intermediate buffer tier completely, the kernel fundamentally changes the garbage collector's job. It stops doing TLS cleanup entirely. ZGC is no longer forced to clean up after the cryptography layer.
 ![Allocation rate (garbage generated) per 1KB payload across different TLS architectures.](https://blog.arkstack.dev/blog/your-tls-stack-is-lying-about-zero-copy/fig3_gc_allocation_rate.png) Figure 3: Allocation rate (garbage generated) per 1KB payload across different TLS architectures.
 
-*** ** * ** ***
+
 
 Where SSLEngine Still Wins {#h2-6-where-sslengine-still-wins}
 -------------------------------------------------------------
@@ -166,7 +172,7 @@ Second, direct buffers and pooling still matter. This is not an article pretendi
 
 Finally, Panama FFM and native TLS do not remove complexity---they relocate it. You get absolute control, but you also inherit absolute responsibility for lifecycle, correctness, and failure modes. This is an architectural decision for a highly specialized kernel, not a generic industry recommendation.
 
-*** ** * ** ***
+
 
 What I Changed, and What I Gave Up {#h2-7-what-i-changed-and-what-i-gave-up}
 ----------------------------------------------------------------------------
@@ -177,7 +183,7 @@ Once the runtime moved toward explicit off-heap ownership, `SSLEngine` stopped l
 
 I dropped it because for this specific runtime, it speaks the wrong language. If the hot path is supposed to be off-heap and deterministic by design, then TLS has to speak that language too.
 
-*** ** * ** ***
+
 
 *The FFM native TLS implementation and the explicit ownership model are built entirely off-heap in the Exeris Kernel. If you want to verify the numbers, run the code, or explore zero-allocation architecture:*
 

@@ -53,11 +53,17 @@ If you prefer it, the connector is also available via the [Confluent Hub](https:
 
 Once downloaded you need to unzip it and move it into your Kafka libs directory. For example:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="shell">unzip kafka-questdb-connector-*-bin.zip 
+```bash
+unzip kafka-questdb-connector-*-bin.zip 
 cd kafka-questdb-connector 
-cp ./*.jar /path/to/kafka_2.13-2.6.0/libs</pre>
+cp ./*.jar /path/to/kafka_2.13-2.6.0/libs
+```
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic"></pre>
+
+```
+
+```
+
 
 Configuration {#h2-2-configuration}
 -----------------------------------
@@ -68,7 +74,8 @@ There are some [extra options](https://questdb.io/docs/third-party-tools/kafka/q
 
 A configuration file `/path/to/kafka/config/questdb-connector.properties` must be created for Kafka Connect in the standalone mode. A basic config file could look like this:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">name=questdb-sink 
+```
+name=questdb-sink 
 connector.class=io.questdb.kafka.QuestDBSinkConnector 
 host=localhost:9009 
 topics=example-topic 
@@ -76,29 +83,43 @@ table=example_table
 include.key=false 
 value.converter=org.apache.kafka.connect.json.JsonConverter 
 value.converter.schemas.enable=false 
-key.converter=org.apache.kafka.connect.storage.StringConverter</pre>
+key.converter=org.apache.kafka.connect.storage.StringConverter
+```
+
 
 Start Kafka {#h2-3-start-kafka}
 -------------------------------
 
 Go to the Kafka home directory and start Zookeeper
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash">bin/zookeeper-server-start.sh config/zookeeper.properties</pre>
+```bash
+bin/zookeeper-server-start.sh config/zookeeper.properties
+```
+
 
 Then start Kafka itself
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash">bin/kafka-server-start.sh config/server.properties</pre>
+```bash
+bin/kafka-server-start.sh config/server.properties
+```
+
 
 And let's start the QuestDB connector, pointing to the config file we just created
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash">bin/connect-standalone.sh config/connect-standalone.properties config/questdb-connector.properties</pre>
+```bash
+bin/connect-standalone.sh config/connect-standalone.properties config/questdb-connector.properties
+```
+
 
 Publish some events {#h2-4-publish-some-events}
 -----------------------------------------------
 
 We are going to start and interactive Kafka console producer, so you can post some messages into a topic. Just make sure the topic name is the one we have in the configuration file.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash">bin/kafka-console-producer.sh --topic example-topic --bootstrap-server localhost:9092</pre>
+```bash
+bin/kafka-console-producer.sh --topic example-topic --bootstrap-server localhost:9092
+```
+
 
 When the shell starts, you are ready to send JSON messages. You might have noticed that we didn't define a table structure for our output.
 
@@ -108,7 +129,10 @@ In any case, even though QuestDB offers some flexibility with automatic schemas,
 
 As an example, paste this JSON as a single line into the Kafka producer shell and hit enter:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="json">{"firstname": "Arthur", "lastname": "Dent", "age": 42}</pre>
+```json
+{"firstname": "Arthur", "lastname": "Dent", "age": 42}
+```
+
 
 ```
 
@@ -129,7 +153,10 @@ Run the following SQL query and you should see as many rows as messages you sent
 
 Make sure the table name matches the one you used in the configuration file.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="sql">SELECT * FROM example_table</pre>
+```sql
+SELECT * FROM example_table
+```
+
 
 That's a wrap {#h2-6-that-s-a-wrap}
 -----------------------------------

@@ -26,7 +26,8 @@ frozen: false
 
 The experiment utilized the following Java program, which continuously creates threads and counts them using an [AtomicInteger](https://download.java.net/java/early_access/jdk21/docs/api/java.base/java/util/concurrent/atomic/AtomicInteger.html).  
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">import java.util.concurrent.atomic.AtomicInteger;
+```java
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.locks.LockSupport;
 
 public class ThreadCounter {
@@ -34,7 +35,7 @@ public class ThreadCounter {
        AtomicInteger counter = new AtomicInteger();
 
        while (true) {
-           Thread thread = new Thread(() -&gt; {
+           Thread thread = new Thread(() -> {
                counter.incrementAndGet();
                if (counter.get() % 100 == 0) {
                    System.out.printf("Number of threads created so far: %d%n", counter.get());
@@ -45,7 +46,8 @@ public class ThreadCounter {
        }
    }
 }
-</pre>
+```
+
 
 <br />
 
@@ -68,10 +70,13 @@ The initial test was conducted using the default stack size of 2048 KB. Approxim
 
 Number of threads created so far: 16300
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">Number of threads created so far: 16300
+```java
+Number of threads created so far: 16300
 [3.566s][warning][os,thread] Failed to start thread "Unknown thread" - pthread_create failed (EAGAIN) for attributes: stacksize: 2048k, guardsize: 16k, detached.
 [3.566s][warning][os,thread] Failed to start the native thread for java.lang.Thread "Thread-16354"
-Exception in thread "main" java.lang.OutOfMemoryError: unable to create native thread: possibly out of memory or process/resource limits reached</pre>
+Exception in thread "main" java.lang.OutOfMemoryError: unable to create native thread: possibly out of memory or process/resource limits reached
+```
+
 
 Calculations indicate that the memory required for these 16,300 threads was around 31.875 GB, well below the total memory of 64 GB.
 
@@ -85,12 +90,14 @@ The program yielded a similar result---16,300 threads---before the OutOfMemoryEr
 
 Number of threads created so far: 16300
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">Number of threads created so far: 16300
+```java
+Number of threads created so far: 16300
 [3.995s][warning][os,thread] Failed to start thread "Unknown thread" - pthread_create failed (EAGAIN) for attributes: stacksize: 10240k, guardsize: 16k, detached.
 [3.995s][warning][os,thread] Failed to start the native thread for java.lang.Thread "Thread-16354"
 Exception in thread "main" java.lang.OutOfMemoryError: unable to create native thread: possibly out of memory or process/resource limits reached
 	at java.base/java.lang.Thread.start0(Native Method)
-</pre>
+```
+
 
 In case you want to use IntelliJ IDEA, you can configure the stack size, check the following image:   
 ![](Screenshot-2023-09-10-at-10.48.08-PM-1-1024x700.png)
@@ -105,12 +112,14 @@ Remarkably, the program again maxed out at approximately 16,300 threads, reinfor
 
 Number of threads created so far: 16300
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">Number of threads created so far: 16200
+```java
+Number of threads created so far: 16200
 Number of threads created so far: 16300
 [3.497s][warning][os,thread] Failed to start thread "Unknown thread" - pthread_create failed (EAGAIN) for attributes: stacksize: 1048576k, guardsize: 16k, detached.
 [3.497s][warning][os,thread] Failed to start the native thread for java.lang.Thread "Thread-16354"
 Exception in thread "main" java.lang.OutOfMemoryError: unable to create native thread: possibly out of memory or process/resource limits reached
-</pre>
+```
+
 
 **Insights from the Data** {#h2-6-insights-from-the-data}
 ---------------------------------------------------------
@@ -126,6 +135,6 @@ Contrary to the commonly held belief, this experiment proves that stack size doe
 
 The constraint is primarily set by the operating system. This investigation effectively dispels the myth that stack size is the determining factor in native thread limitations.
 
-*** ** * ** ***
+
 
 ***Thank you for reading this. If you have a different perspective on this topic or if your experiments yield different results, I would be very interested to hear about it. Please feel free to share your findings with me.***

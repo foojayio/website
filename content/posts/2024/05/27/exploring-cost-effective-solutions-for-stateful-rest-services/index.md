@@ -88,32 +88,41 @@ To get started quickly we create a Spring Boot project through the start.spring.
 
 We need to add the two dependencies for [Eclipse-Store-Spring-Integration](https://docs.eclipsestore.io/manual/misc/integrations/spring-boot.html "Eclipse-Store-Spring-Integration") and the [IBM COS Connector](https://github.com/xdev-software/eclipse-store-afs-ibm-cos "IBM COS Connector"):
 
-<pre class="EnlighterJSRAW" data-enlighter-language="xml">&lt;dependency&gt;
-    &lt;groupId&gt;org.eclipse.store&lt;/groupId&gt;
-    &lt;artifactId&gt;integrations-spring-boot3&lt;/artifactId&gt;
-    &lt;version&gt;1.1.0&lt;/version&gt;
-&lt;/dependency&gt;
-&lt;dependency&gt;
-    &lt;groupId&gt;software.xdev&lt;/groupId&gt;
-    &lt;artifactId&gt;eclipse-store-afs-ibm-cos&lt;/artifactId&gt;
-    &lt;version&gt;1.0.2&lt;/version&gt;
-&lt;/dependency&gt;</pre>
+```xml
+<dependency>
+    <groupId>org.eclipse.store</groupId>
+    <artifactId>integrations-spring-boot3</artifactId>
+    <version>1.1.0</version>
+</dependency>
+<dependency>
+    <groupId>software.xdev</groupId>
+    <artifactId>eclipse-store-afs-ibm-cos</artifactId>
+    <version>1.0.2</version>
+</dependency>
+```
+
 
 To add minimal data, we create a `Product` and `Root` class:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-title="Product.java">public class Product {
+```java
+public class Product {
     private final String id;
     private String name;
     private double price;
 …
-}</pre>
+}
+```
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-title="Root.java">public class Root {
-    private final LazyHashMap&lt;String, Product&gt; products = new LazyHashMap&lt;&gt;();
-    public LazyHashMap&lt;String, Product&gt; getProducts() {
+
+```java
+public class Root {
+    private final LazyHashMap<String, Product> products = new LazyHashMap<>();
+    public LazyHashMap<String, Product> getProducts() {
        return this.products;
     }
-}</pre>
+}
+```
+
 
 The root object is simply the entry-point into our complete data model. Every object must be reachable through the root object. For further information see the [EclipseStore Documentation](https://docs.eclipsestore.io/manual/storage/root-instances.html "EclipseStore Documentation").
 
@@ -121,7 +130,8 @@ Right now it only contains a LazyHashMap of Products. We use a LazyHashMap to op
 
 If we start the app now, the root object of the data storage will be null. To initialize an empty root object, we add `@PostConstruct` to the `DemoApplication.class`:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">@Import(EclipseStoreSpringBoot.class)
+```java
+@Import(EclipseStoreSpringBoot.class)
 @SpringBootApplication
 public class DemoApplication {
     @Autowired
@@ -137,7 +147,9 @@ public class DemoApplication {
            storageManager.storeRoot();
         }
     }
-}</pre>
+}
+```
+
 
 * `@Autowired` EmbeddedStorageManager provides an injected interface to read and write data into the datastore.
 * `@Qualifier(...)` is necessary to direct Spring to the correct Bean  
@@ -149,31 +161,40 @@ To ensure an easy-to-understand structure of the code, we use simple layering of
 
 We want to make the data available through a REST API, so we first create a service-class to handle communication with the EclipseStore library and therefore store and load the data.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">@Service
+```java
+@Service
 public class ProductService {
     @Autowired
     @Qualifier("COS-StorageManager")
     protected EmbeddedStorageManager storageManager;
 …
-}</pre>
+}
+```
+
 
 * `@Service` provides a single instance of ProductService for CDI
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">private Root getRoot(){
+```java
+private Root getRoot(){
     return (Root)this.storageManager.root();
-}</pre>
+}
+```
+
 
 * `getRoot` is just a shorthand to get the root object from the data store.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public void add(Product product) {
-        Map&lt;String, Product&gt; products = getRoot().getProducts();
+```java
+public void add(Product product) {
+        Map<String, Product> products = getRoot().getProducts();
         products.put(product.getId(), product);
         this.storageManager.store(products); 
 }
 
-public Collection&lt;Product&gt; getAll() {
+public Collection<Product> getAll() {
        return getRoot().getProducts().values();
-}</pre>
+}
+```
+
 
 These two methods simply add a Product or read all Products. Since the add method also writes data, it must call the `store` method of the storage to update the persisted `products` map.
 
@@ -181,29 +202,35 @@ In [the demo repository](https://github.com/xdev-software/eclipse-store-code-eng
 
 Now we create the actual endpoint with the `ProductResource`:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">@RestController
+```java
+@RestController
 @RequestMapping("/products")
 public class ProductResource{
     @Autowired
     ProductService productService;
 …
-}</pre>
+}
+```
+
 
 * `@RequestMapping` defines the path of the endpoint.
 * `@Autowired` provides the injected service.
 
 We add two methods to add a new product and get all products.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">@PostMapping
+```java
+@PostMapping
 public Product create(@RequestBody Product product) {
     this.productService.add(product);
     return product;
 }
 
 @GetMapping
-public Collection&lt;Product&gt; list() {
+public Collection<Product> list() {
     return this.productService.getAll();
-}</pre>
+}
+```
+
 
 And now we already have a fully working Spring Application with local EclipseStore data. Run `mvn spring-boot:run` your app. To test your endpoints you can execute these commands:
 
@@ -236,62 +263,92 @@ Login to the CLI, for example through the one time passcode that's created after
 
 From there you can paste the similar line to your command line:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash">ibmcloud login -a https://cloud.ibm.com -u passcode -p XXX</pre>
+```bash
+ibmcloud login -a https://cloud.ibm.com -u passcode -p XXX
+```
+
 
 To be able to interact with COS and Code Engine, install two plugins:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash">ibmcloud plugin install cloud-object-storage 
-ibmcloud plugin install code-engine</pre>
+```bash
+ibmcloud plugin install cloud-object-storage 
+ibmcloud plugin install code-engine
+```
+
 
 Then we create our resource group and set it as a target for the rest of the calls. Make sure that you have the necessary rights to create and edit resource groups, COS and Code Engine instances.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash">ibmcloud resource group-create spring-eclipsestore
-ibmcloud target -g spring-eclipsestore</pre>
+```bash
+ibmcloud resource group-create spring-eclipsestore
+ibmcloud target -g spring-eclipsestore
+```
+
 
 To be able to store data, we need a COS instance. This is how we create the service:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash">ibmcloud resource service-instance-create spring-eclipsestore-cos cloud-object-storage standard global -g spring-eclipsestore -d premium-global-deployment-iam</pre>
+```bash
+ibmcloud resource service-instance-create spring-eclipsestore-cos cloud-object-storage standard global -g spring-eclipsestore -d premium-global-deployment-iam
+```
+
 
 To create the actual bucket to use, we first read the service instance as JSON and must copy the UID to the following command:  
 
 (The name of the bucket must be unique across all IBM Cloud customers. Make sure you use your own random suffix.)
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash">ibmcloud resource service-instance spring-eclipsestore-cos 
-ibmcloud cos bucket-create --bucket spring-eclipsestore-bucket-02082019 --class smart --ibm-service-instance-id $GUID$ --region eu-de</pre>
+```bash
+ibmcloud resource service-instance spring-eclipsestore-cos 
+ibmcloud cos bucket-create --bucket spring-eclipsestore-bucket-02082019 --class smart --ibm-service-instance-id $GUID$ --region eu-de
+```
+
 
 We are already finished with our COS bucket, now all that's left to do is create a Code Engine project and deploy our code on it.
 
 Now we start building. Make sure your working directory of the console is your project directory.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash">ibmcloud ce project create --name spring-eclipsestore-ce 
-ibmcloud ce app create --name spring-eclipsestore --build-source . --env CLOUD_OBJECT_STORAGE_BUCKET_LOCATION=eu-de --env CLOUD_OBJECT_STORAGE_BUCKET_NAME=spring-eclipsestore-bucket-02082019 --min-scale 0 --max-scale 1</pre>
+```bash
+ibmcloud ce project create --name spring-eclipsestore-ce 
+ibmcloud ce app create --name spring-eclipsestore --build-source . --env CLOUD_OBJECT_STORAGE_BUCKET_LOCATION=eu-de --env CLOUD_OBJECT_STORAGE_BUCKET_NAME=spring-eclipsestore-bucket-02082019 --min-scale 0 --max-scale 1
+```
+
 
 The last command pushes the code into the cloud and takes a few minutes. Under the covers, the Paketo buildpacks detect your Maven project, build the Spring Boot JAR and package it together with a Java Runtime Environment into a container image. For this image, an application is created.
 
 The final step is to bind our COS instance to the application:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash">ibmcloud resource service-instance spring-eclipsestore-cos
-ibmcloud ce app bind --name spring-eclipsestore --service-instance-id $GUID$</pre>
+```bash
+ibmcloud resource service-instance spring-eclipsestore-cos
+ibmcloud ce app bind --name spring-eclipsestore --service-instance-id $GUID$
+```
+
 
 Now we are done!
 
 To get our application's url we can call the following command, and curl our urls again:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash">ibmcloud ce application get -n spring-eclipsestore -o url 
-curl https://spring-eclipsestore.xxx.eu-de.codeengine.appdomain.cloud/products</pre>
+```bash
+ibmcloud ce application get -n spring-eclipsestore -o url 
+curl https://spring-eclipsestore.xxx.eu-de.codeengine.appdomain.cloud/products
+```
+
 
 Note: Eventually, your session in the IBM Cloud will run out and you will re-login and reselect the resource group and Code Engine project with these commands:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash">ibmcloud login -a https://cloud.ibm.com -u passcode -p XXX
+```bash
+ibmcloud login -a https://cloud.ibm.com -u passcode -p XXX
 ibmcloud target -g spring-eclipsestore -r eu-de
-ibmcloud ce project select -n spring-eclipsestore-ce</pre>
+ibmcloud ce project select -n spring-eclipsestore-ce
+```
+
 
 Postproduction {#h2-9-postproduction}
 -------------------------------------
 
 The default configuration is optimized for costs and allows the application to scale down (to zero) to avoid idling CPU when no workload is running. This comes with the additional latency of about 30s when the application is scaling up from zero. In a real production environment where we are talking about truly lightning-fast responses times, we want to keep the application active and pick the best suitable number of CPUs.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash">ibmcloud ce app update --name spring-eclipsestore --memory 1G --cpu 0.5 --min-scale 1 --max-scale 1</pre>
+```bash
+ibmcloud ce app update --name spring-eclipsestore --memory 1G --cpu 0.5 --min-scale 1 --max-scale 1
+```
+
 
 Our instance response now under a few milliseconds and has native java persistency.
 

@@ -33,7 +33,10 @@ We decided to start a 'Getting Started with Jakarta EE 9' a blog and video serie
 
 You can use the Maven build tools to compile and package your Jakarta EE 9 application. With the Maven Archetypes, you can bootstrap many types of applications. For the moment, there is no specific archetype for Jakarta EE 9 available. You can start from any other maven project and adopt the *pom.xml* file or you can use the quickstart archetype as follows:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">mvn archetype:generate -DarchetypeGroupId=org.apache.maven.archetypes -DarchetypeArtifactId=maven-archetype-quickstart</pre>
+```
+mvn archetype:generate -DarchetypeGroupId=org.apache.maven.archetypes -DarchetypeArtifactId=maven-archetype-quickstart
+```
+
 
 These are the important parts of the maven configuration for your Jakarta EE 9 project:
 
@@ -45,35 +48,38 @@ These are the important parts of the maven configuration for your Jakarta EE 9 p
 
 Your *pom.xml* could like look this for the Jakarta EE 9 Hello World example:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="xml" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&lt;project xmlns="http://maven.apache.org/POM/4.0.0"
+```xml
+<project xmlns="http://maven.apache.org/POM/4.0.0"
 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"&gt;
-   &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
-   &lt;groupId&gt;fish.payara.jakarta.ee9.start&lt;/groupId&gt;
-   &lt;artifactId&gt;hello&lt;/artifactId&gt;
-   &lt;version&gt;1.0&lt;/version&gt;
-   &lt;packaging&gt;war&lt;/packaging&gt;
+xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+   <modelVersion>4.0.0</modelVersion>
+   <groupId>fish.payara.jakarta.ee9.start</groupId>
+   <artifactId>hello</artifactId>
+   <version>1.0</version>
+   <packaging>war</packaging>
 
-   &lt;dependencies&gt;
-      &lt;dependency&gt;
-         &lt;groupId&gt;jakarta.platform&lt;/groupId&gt;
-         &lt;artifactId&gt;jakarta.jakartaee-web-api&lt;/artifactId&gt;
-         &lt;version&gt;9.0.0&lt;/version&gt;
-         &lt;scope&gt;provided&lt;/scope&gt;
-      &lt;/dependency&gt;
-   &lt;/dependencies&gt;
+   <dependencies>
+      <dependency>
+         <groupId>jakarta.platform</groupId>
+         <artifactId>jakarta.jakartaee-web-api</artifactId>
+         <version>9.0.0</version>
+         <scope>provided</scope>
+      </dependency>
+   </dependencies>
 
-   &lt;build&gt;
-      &lt;finalName&gt;hello&lt;/finalName&gt;
-   &lt;/build&gt;
+   <build>
+      <finalName>hello</finalName>
+   </build>
 
-   &lt;properties&gt;
-      &lt;maven.compiler.source&gt;11&lt;/maven.compiler.source&gt;
-      &lt;maven.compiler.target&gt;11&lt;/maven.compiler.target&gt;
-      &lt;failOnMissingWebXml&gt;false&lt;/failOnMissingWebXml&gt;
-      &lt;project.build.sourceEncoding&gt;UTF-8&lt;/project.build.sourceEncoding&gt;
-   &lt;/properties&gt;
-&lt;/project&gt;</pre>
+   <properties>
+      <maven.compiler.source>11</maven.compiler.source>
+      <maven.compiler.target>11</maven.compiler.target>
+      <failOnMissingWebXml>false</failOnMissingWebXml>
+      <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+   </properties>
+</project>
+```
+
 
 You are now ready to open the Maven Project in your favorite IDE and start coding your application.
 
@@ -81,7 +87,10 @@ You are now ready to open the Maven Project in your favorite IDE and start codin
 
 You can also use Gradle as an alternative for Maven as your build tool. It doesn't have many templates available, but you can use the following command to generate a basic Gradle project.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">gradle init --type basic</pre>
+```
+gradle init --type basic
+```
+
 
 It generates the basic files, like a *build.gradle* file containing the main configuration for your Gradle project, and the required wrapper files for Gradle.
 
@@ -95,7 +104,8 @@ This are the most important parts of the configuration that you should define wi
 
 Your *build.gradle* could like look this for the Jakarta EE 9 Hello World example:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="json" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">plugins {
+```json
+plugins {
    id 'java'
    id 'war'
 }
@@ -118,7 +128,9 @@ compileJava {
 
 war {
    archiveName 'hello.war'
-}</pre>
+}
+```
+
 
 You are now ready to open the Gradle Project in your favoriite IDE and start coding your application.
 
@@ -128,7 +140,8 @@ Now that we have a project created, we can develop the Hello World Servlet. Serv
 
 In one of the next Jakarta EE 9 blogs, we will go deeper into the Servlet usage for implementing a File download, but today we will use the typical Hello World demo.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">import jakarta.servlet.ServletException;
+```java
+import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -146,7 +159,9 @@ public class HelloServlet extends HttpServlet {
 
     }
 
-}</pre>
+}
+```
+
 
 Some background information on the example:
 

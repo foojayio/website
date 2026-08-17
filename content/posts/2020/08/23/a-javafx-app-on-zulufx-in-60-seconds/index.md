@@ -65,13 +65,14 @@ After downloading the bundle you should have a file named similar to the followi
 
 These install instructions are on a MacOS, so I trust you will know how to translate the steps to your target platform (Windows and/or Linux).
 
-<pre class="EnlighterJSRAW" data-enlighter-language="shell" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group=""># Make an sdks directory in your home directory
+```bash
+# Make an sdks directory in your home directory
 $ mkdir ~/sdks
 
 # Move tar file into the sdks directory
 $ mv ~/Downloads/zulu14.29.23-ca-fx-jdk14.0.2-macosx_x64.tar ~/sdks
 
-# Change directory into &lt;home directory&gt;/sdks directory
+# Change directory into <home directory>/sdks directory
 $ cd ~/sdks
 
 # Uncompress file
@@ -95,14 +96,16 @@ OpenJDK 64-Bit Server VM Zulu14.29+23-CA (build 14.0.2+12, mixed mode, sharing)
 # Verify JavaFX Modules are included in Zulu's Open JDK
 $ java --list-modules
 ...
-<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="e48e859285829cca86859781a4d5d0cad4cad6">[email&nbsp;protected]</a>
-<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="274d465146415f094448495355484b5467161309170915">[email&nbsp;protected]</a>
-<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="1f757e697e796731796772735f2e2b312f312d">[email&nbsp;protected]</a>
-<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="2b414a5d4a4d53054c594a5b434248586b1a1f051b0519">[email&nbsp;protected]</a>
-<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="4329223522253b6d2e26272a220372776d736d71">[email&nbsp;protected]</a>
-<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="b0dad1c6d1d6c89ec3c7d9ded7f081849e809e82">[email&nbsp;protected]</a>
-<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="3a505b4c5b5c42144d5f587a0b0e140a1408">[email&nbsp;protected]</a>
-...</pre>
+<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="e48e859285829cca86859781a4d5d0cad4cad6">[email protected]</a>
+<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="274d465146415f094448495355484b5467161309170915">[email protected]</a>
+<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="1f757e697e796731796772735f2e2b312f312d">[email protected]</a>
+<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="2b414a5d4a4d53054c594a5b434248586b1a1f051b0519">[email protected]</a>
+<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="4329223522253b6d2e26272a220372776d736d71">[email protected]</a>
+<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="b0dad1c6d1d6c89ec3c7d9ded7f081849e809e82">[email protected]</a>
+<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="3a505b4c5b5c42144d5f587a0b0e140a1408">[email protected]</a>
+...
+```
+
 
 <br />
 
@@ -122,30 +125,39 @@ On your mark, get set, **GO!**
 
 The following commands create the project and src directories.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="shell" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group=""># Windows
-C:\Users\myusername&gt;md helloworld
-C:\Users\myusername&gt;md helloworld\src
+```bash
+# Windows
+C:\Users\myusername>md helloworld
+C:\Users\myusername>md helloworld\src
 
 # Linux
 /user/home/myusername$ mkdir -p helloworld/src
 
 # Mac
-/Users/myusername$ mkdir -p helloworld/src</pre>
+/Users/myusername$ mkdir -p helloworld/src
+```
+
 
 **\*Note:** After creating the project folder *helloworld/src* be sure to change your directory to reside inside the ***helloworld*** directory prior to the next steps. This is needed in order to **compile** and **run** the code such that the **module path** is recognized properly. This tutorial assumes your project (helloworld) is in the user's home directory.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="shell" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group=""># Windows
-C:\Users\myusername&gt;cd helloworld
+```bash
+# Windows
+C:\Users\myusername>cd helloworld
 
-# Linux &amp; MacOSX
-$ cd ~/helloworld</pre>
+# Linux & MacOSX
+$ cd ~/helloworld
+```
+
 
 ***Step 2:*** Create a module directory that will later contain the **module-info.java** file.
 ![](initial-proj-directory2.png) The module directory named using the reverse domain convention.
 
 Create a directory using a preferred *naming convention* based on Java Module System's new way to organize source code and modules ([reverse domain name scheme](https://blog.joda.org/2017/04/java-se-9-jpms-module-naming.html)).
 
-<pre class="EnlighterJSRAW" data-enlighter-language="shell" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="false" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">mkdir src/com.mycompany.helloworld</pre>
+```bash
+mkdir src/com.mycompany.helloworld
+```
+
 
 <br />
 
@@ -154,7 +166,10 @@ Create a directory using a preferred *naming convention* based on Java Module Sy
 
 Under the directory **com.mycompany.helloworld** you will create the following directory structure **com/mycompany/helloworld**. This directory will later contain the **Helloworld.java** file created in Step 5.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="shell" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">mkdir -p src/com.mycompany.helloworld/com/mycompany/helloworld</pre>
+```bash
+mkdir -p src/com.mycompany.helloworld/com/mycompany/helloworld
+```
+
 
 <br />
 
@@ -165,14 +180,20 @@ Create a file named ***module-info.java*** under the directory ***src/com.mycomp
 
 Copy and paste the code from Listing 1 into the **module-info.java** file. Use vi, nano or notepad. For example:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="shell" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="false" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">vim src/com.mycompany.helloworld/module-info.java</pre>
+```bash
+vim src/com.mycompany.helloworld/module-info.java
+```
+
 
 Listing 1. The module definition file module-info.java
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="Module definition file module-info.java" data-enlighter-group="">module com.mycompany.helloworld {
+```java
+module com.mycompany.helloworld {
    requires javafx.controls;
    exports com.mycompany.helloworld;
-}</pre>
+}
+```
+
 
 This lets the compiler know which core module dependencies the application needs to compile and run such as JavaFX modules.
 
@@ -195,7 +216,10 @@ The file will be created in the directory **src/com.mycompany.helloworld/com/myc
 
 Use **[vim](https://www.vim.org/)** for those who despise those other wimpy editors 😉
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="false" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">vim src/com.mycompany.helloworld/com/mycompany/helloworld/HelloWorld.java</pre>
+```
+vim src/com.mycompany.helloworld/com/mycompany/helloworld/HelloWorld.java
+```
+
 
 Copy and paste the code below (Listing 2) into the a file called **HelloWorld.java**.
 
@@ -203,7 +227,8 @@ Copy and paste the code below (Listing 2) into the a file called **HelloWorld.ja
 
 Listing 2. JavaFX HelloWorld application code for **HelloWorld.java**
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">package com.mycompany.helloworld;
+```java
+package com.mycompany.helloworld;
 
 import javafx.application.Application;
 import javafx.event.ActionEvent;
@@ -234,13 +259,15 @@ public class HelloWorld extends Application {
        btn.setLayoutX(100);
        btn.setLayoutY(80);
        btn.setText("Hello World");
-       btn.setOnAction( actionEvent -&gt;
+       btn.setOnAction( actionEvent ->
                  System.out.println("Hello World"));
        root.getChildren().add(btn);
        stage.setScene(scene);
        stage.show();
     }
-}</pre>
+}
+```
+
 
 <br />
 
@@ -248,7 +275,10 @@ public class HelloWorld extends Application {
 
 Compile the source code with the **-d** option with the location of compiled module. The directory for the new helloworld module is ***mods/com.mycompany.helloworld*** .
 
-<pre class="EnlighterJSRAW" data-enlighter-language="shell" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="false" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">javac -d mods/com.mycompany.helloworld src/com.mycompany.helloworld/module-info.java src/com.mycompany.helloworld/com/mycompany/helloworld/HelloWorld.java</pre>
+```bash
+javac -d mods/com.mycompany.helloworld src/com.mycompany.helloworld/module-info.java src/com.mycompany.helloworld/com/mycompany/helloworld/HelloWorld.java
+```
+
 
 After compiling your code the class files the mods directory should look like the following:
 
@@ -265,7 +295,10 @@ After compiling your code the class files the mods directory should look like th
 
 Execute the Hello World application as a module. After compiling the module into the **mods** directory you will now use Java 9 or above's new ***--module-path***` `option to specify a compiled module's directory. Also, you will specify the***-m*** option to execute the module and its main class **HelloWorld**. Use the following command:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="shell" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="false" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">java --module-path mods -m com.mycompany.helloworld/com.mycompany.helloworld.HelloWorld</pre>
+```bash
+java --module-path mods -m com.mycompany.helloworld/com.mycompany.helloworld.HelloWorld
+```
+
 
 The following is the output of the previous command:
 

@@ -47,7 +47,8 @@ Containers contain objects. Some containers offer index-based access, *e.g.* , `
 
 Let's create a simple hash-map-like container for illustration purposes:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="python">class Container:
+```python
+class Container:
 
   def __init__(self):
       self.items = {}
@@ -90,7 +91,9 @@ del container['foo']
 for x in container:                                    #8
     print(f'{x}: {container[x]}')
 print('---')
-print('foo' in container)                              #9</pre>
+print('foo' in container)                              #9
+```
+
 
 1. Delegate on the `items` dictionary
 2. Check if the key belongs to `items`
@@ -165,7 +168,8 @@ Arithmetic methods abound; it's easier to summarize them in a table:
 
 Imagine an e-commerce site with products and stocks of them dispatched in warehouses. We need to subtract stock levels when someone orders and add stock levels when the stock is replenished. Let's implement the latter with some of the methods we've seen so far:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="python">class Warehouse:                                       #1
+```python
+class Warehouse:                                       #1
 
   def __init__(self, id):
     self.id = id
@@ -222,7 +226,9 @@ stocklevel121 = StockLevel(product1, warehouse2, 1)    #7
 
 print(stocklevel111 + stocklevel112)                   #8
 
-stocklevel111 + stocklevel121                          #9</pre>
+stocklevel111 + stocklevel121                          #9
+```
+
 
 1. Define necessary classes
 2. Override equality to compare ids
@@ -248,7 +254,8 @@ If no such method is implemented, Python falls back to the `object.__index__(sel
 
 The following sample, however irrelevant it is, highlights the above:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="python">class Foo:
+```python
+class Foo:
 
   def __init__(self, id):
     self.id = id
@@ -259,7 +266,9 @@ The following sample, however irrelevant it is, highlights the above:
 foo = Foo(1)
 array = ['a', 'b', 'c']
 what = array[foo]                                      #2
-print(what)                                            #3</pre>
+print(what)                                            #3
+```
+
 
 1. Define the fallback method
 2. Coerce `foo` into an `int`. We didn't implement any conversion method; Python falls back to `index()`
@@ -281,26 +290,33 @@ Context managers' methods {#h2-7-context-managers-methods}
 
 Python's context managers allow fine-grained control over resources that must be acquired and released. It works with the `with` keyword. For example, here's how you open a file to write to:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="python">with open('file', 'w') as f:                           #1
+```python
+with open('file', 'w') as f:                           #1
     f.write('Hello world!')
-                                                       #2</pre>
+                                                       #2
+```
+
 
 1. Open the file
 2. At this point, Python has closed the file
 
 A context manager is syntactic sugar. The following code is equivalent to the one from above:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="python">f = open('file', 'w')
+```python
+f = open('file', 'w')
 try:
   f.write('Hello world!')
 finally:
-  f.close()</pre>
+  f.close()
+```
+
 
 To write your context manager requires to implement two methods: one for opening the context and one for closing it, respectively, `object.__enter__(self)` and `object.__exit__(self, exc_type, exc_value, traceback)`.
 
 Let's write a context manager to manage a pseudo-connection.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="python">import traceback
+```python
+import traceback
 
 class Connection:
 
@@ -319,22 +335,30 @@ class Connection:
     pass
 
 with Connection() as connection:
-  connection.do_something()</pre>
+  connection.do_something()
+```
+
 
 Callable objects {#h2-8-callable-objects}
 -----------------------------------------
 
 I was first exposed to callable objects in Kotlin. A callable object looks like a function but is an object:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="python">hello = Hello()
-hello('world')</pre>
+```python
+hello = Hello()
+hello('world')
+```
+
 
 The method to implement to make the above code run is `object.__call__(self[, args...])`.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="python">class Hello:
+```python
+class Hello:
 
   def __call__(self, who):
-    print(f'Hello {who}!')</pre>
+    print(f'Hello {who}!')
+```
+
 
 Conclusion {#h2-9-conclusion}
 -----------------------------
@@ -348,6 +372,6 @@ Happy Python!
 * [Special method names](https://docs.python.org/3/reference/datamodel.html#special-method-names)
 * [PEP 560 -- Core support for typing module and generic types](https://peps.python.org/pep-0560/)
 
-*** ** * ** ***
+
 
 *Originally published at [A Java Geek](https://blog.frankel.ch/python-magic-methods/2/) on October 22^nd^, 2023*

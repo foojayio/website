@@ -56,23 +56,29 @@ The Stream API has been enhanced with the following gatherers:
 
 Here's an example of using a gatherer provided in the JDK:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">var numbers = List.of(1, 2, 3, 4, 5);
+```
+var numbers = List.of(1, 2, 3, 4, 5);
 
 var slidingWindows = numbers.stream()
     .gather(Gatherers.windowSliding(3))
     .toList();
 
 System.out.println(slidingWindows);
-// [[1, 2, 3], [2, 3, 4], [3, 4, 5]]</pre>
+// [[1, 2, 3], [2, 3, 4], [3, 4, 5]]
+```
+
 
 The JavaDoc gives the following example of a gatherer that reproduces the `Stream.map()` operation:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">public &lt;T, R&gt; Gatherer&lt;T, ?, R&gt; map(Function&lt;? super T, ? extends R&gt; mapper) {
+```
+public <T, R> Gatherer<T, ?, R> map(Function<? super T, ? extends R> mapper) {
     return Gatherer.of(
-        (unused, element, downstream) -&gt; // integrator
+        (unused, element, downstream) -> // integrator
             downstream.push(mapper.apply(element))
     );
-}</pre>
+}
+```
+
 
 More information in the [JEP 461](https://openjdk.org/jeps/461 "JEP")
 
@@ -96,27 +102,33 @@ JEP 447 is a preview feature that allows instructions **before** calling the par
 
 Here's an example of parameter validation prior to JEP 447:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">public class PositiveBigInteger extends BigInteger {
+```
+public class PositiveBigInteger extends BigInteger {
 
     public PositiveBigInteger(long value) {
         super(value);               // Potentially unnecessary work
-        if (value &lt;= 0)
+        if (value <= 0)
             throw new IllegalArgumentException(non-positive value);
     }
 
-}</pre>
+}
+```
+
 
 And with the JEP 447:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">public class PositiveBigInteger extends BigInteger {
+```
+public class PositiveBigInteger extends BigInteger {
 
     public PositiveBigInteger(long value) {
-        if (value &lt;= 0)
+        if (value <= 0)
             throw new IllegalArgumentException(non-positive value);
         super(value);
     }
 
-}</pre>
+}
+```
+
 
 The code is more readable and potentially avoids the effects of the parent constructor.
 
@@ -142,10 +154,13 @@ ListFormat {#h2-4-listformat}
 
 `ListFormat` is a new formatter that allows you to format a list of strings regarding a locale based on the Unicode standard. Example:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">var list = List.of(Black, White, Red);
+```
+var list = List.of(Black, White, Red);
 var formatter = ListFormat.getInstance();
 System.out.println(formatter.format(list));
-// [Black, White, Red]</pre>
+// [Black, White, Red]
+```
+
 
 When creating the formatter we can pass it:
 

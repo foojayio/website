@@ -40,17 +40,23 @@ As the underlying platform is not able to create an unlimited number of the plat
 
 The limiting factor is mainly caused by the available resources (CPUs, memory etc.) although Java itself may give a feeling otherwise.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">try(ExecutorService executor = Executors.newSingleThreadExecutor(THREAD_FACTORY)){
-   executor.execute(() -&gt; … );
-}</pre>
+```
+try(ExecutorService executor = Executors.newSingleThreadExecutor(THREAD_FACTORY)){
+   executor.execute(() -> … );
+}
+```
+
 
 Example 1. Single thread executor executing a *Runnable* task
 
 Over the past decades a concurrent program written in Java was capable of executing those *Runnable* tasks in parallel, meaning at once. Nowadays Java already provides the concepts of *Executors* (Example 1.) or *Thread Pools* (Example 2.) that help developers to administrate available platform resources and avoid unwanted system resources usage, eg. *new Thread()* and *start()*calls.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">try( ExecutorService executor = Executors.newFixedThreadPool(10, THREAD_FACTORY)){
-   executor.submit(() -&gt; … );   
-}</pre>
+```
+try( ExecutorService executor = Executors.newFixedThreadPool(10, THREAD_FACTORY)){
+   executor.submit(() -> … );   
+}
+```
+
 
 Example 2. Pool of fixed initiated thread submitting a *Callable* task
 
@@ -58,7 +64,8 @@ Since the Java SE 8 release Java also contains the *ComputableFeature* concept (
 
 The ForkJoin framework was another big improvement back in the Java SE 7 release. Its goal was facilitating the ability to properly utilize all available processor cores, but it could have some drawbacks caused, for example, by unwilling executors usage (Example 3.)
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">record ComputableTask(AtomicInteger counter, int failedCycle) implements Runnable {
+```
+record ComputableTask(AtomicInteger counter, int failedCycle) implements Runnable {
    @Override
    public void run() {
       // May thrown an exception
@@ -74,7 +81,9 @@ completableFuture.thenRun(new ComputableTask(counter, failedCycle));
 Example output:
 DONE: thread: 'main', cycle: '1', failedCycle:'2'
 DONE: thread: 'ForkJoinPool.commonPool-worker-1', cycle: '2', failedCycle:'2'
-FINISHED: cycles:'100'</pre>
+FINISHED: cycles:'100'
+```
+
 
 Example 3. Using *ComputableFuture* may come with drawbacks such as not terminable execution, debugging or meaningful StackTrace
 
@@ -87,7 +96,8 @@ Okay, that's what we currently have. Something exciting is going to happen. The 
 
 The idea of "***thread-sharing*** ", introduced by a thread pool (*ForJoinPool* , pool etc), across tasks may help to improve throughput, but compared to "***thread-per-request*** " style it may have significant drawbacks. The idea of "***thread-per-request***" allows code to be maintainable, understandable and debuggable. This style allows one to perform and observe the task from the beginning till the end (root cause easy to identify). Thread-sharing complicates all this.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">...
+```
+...
 var threadFactory = new ThreadFactory() {
   ... 
   @Override
@@ -99,10 +109,12 @@ var threadFactory = new ThreadFactory() {
 };
 ...
 var executor = Executors.newFixedThreadPool(THREADS_NUMBER, threadFactory);
-for (int i = 0; i &lt; EXECUTION_CYCLES; i++) {
+for (int i = 0; i < EXECUTION_CYCLES; i++) {
   executor.submit(new ThreadWorker(i, MAX_CYCLES, ALLOCATION_SIZE));
 }
-...</pre>
+...
+```
+
 
 Example 4. Current thread-per-request approach with fixed pool size and factory
 
@@ -118,16 +130,19 @@ Both create a new Virtual Thread per task.
 
 A virtual thread is shared (not CPU bound, Image 1) and carried across a platform thread (bound to the CPU). The user must therefore not make any assumption about its assignment to the platform thread. These virtual threads are cheap and should be created per short living task and they should never be pooled due to the design (Image 3.).
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">var threadFactory = Thread.ofVirtual()
+```
+var threadFactory = Thread.ofVirtual()
                .name("ForkJoin-custom-factory-", 0)
                .factory();
 var counter = new AtomicInteger(0);
 var failedCycle = new Random().nextInt(CYCLE_MAX - 1) + 1;
 try (var executor = Executors.newThreadPerTaskExecutor(threadFactory)) {
-  for (int i = 0; i &lt; EXECUTION_CYCLES; i++) {
+  for (int i = 0; i < EXECUTION_CYCLES; i++) {
     executor.submit(new ComputableTask(counter, failedCycle));
   }
-}</pre>
+}
+```
+
 
 Example 5. The Java SE 19 proposed "newThreadPerTaskExecutor" method that runs a thread per executed task and thread factory that serves a virtual thread
 

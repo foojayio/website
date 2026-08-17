@@ -52,7 +52,8 @@ As per JEP 395:
 Another quote from the JEP clearly explains developers' frustration while writing typical data carrier classes.
 > Properly writing such a data-carrier class involves a lot of low-value, repetitive, error-prone code: constructors, accessors, equals, hashCode, toString, etc. For example, a class to carry x and y coordinates inevitably ends up like this:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">class Point {
+```java
+class Point {
     private final int x;
     private final int y;
 
@@ -67,7 +68,7 @@ Another quote from the JEP clearly explains developers' frustration while writin
     public boolean equals(Object o) {
         if (!(o instanceof Point)) return false;
         Point other = (Point) o;
-        return other.x == x &amp;&amp; other.y == y;
+        return other.x == x && other.y == y;
     }
 
     public int hashCode() {
@@ -77,7 +78,9 @@ Another quote from the JEP clearly explains developers' frustration while writin
     public String toString() {
         return String.format("Point[x=%d, y=%d]", x, y);
     }
-}</pre>
+}
+```
+
 
 Another option that we developers use most often is to leave the handling of the boilerplate to the IDE. For example, with Intellij, you can generate constructors, getters, setters, equals, hashCode, and toString, etc., by simply pressing Command + N shortcut key. But the boilerplate code is still there.
 
@@ -85,7 +88,10 @@ Another option that we developers use most often is to leave the handling of the
 
 With Java 16 Records, it's just one line of code. Cool, isn't it:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">record Point(int x, int y) { }</pre>
+```java
+record Point(int x, int y) { }
+```
+
 
 Here a record class declaration consists of a name, optional type parameters, a header, and a body.
 
@@ -93,15 +99,22 @@ Here a record class declaration consists of a name, optional type parameters, a 
 
 The internals of the Java Record class can be checked using a decompiler that comes with IntelliJ IDE, for example, or you can use the `javap` command-line utility. To understand the internals, I've created the following Record class:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public record State(String name, String capital) {}</pre>
+```java
+public record State(String name, String capital) {}
+```
+
 
 Following is the decompiled Java Record class. I have used the `javap` command-line utility to check class file internals.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">$ javap State.class</pre>
+```
+$ javap State.class
+```
+
 
 Following is the output:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">Compiled from "State.java"
+```java
+Compiled from "State.java"
 public final class com.example.indianstates.State extends java.lang.Record {
   public com.example.indianstates.State(java.lang.String, java.lang.String);
   public final java.lang.String toString();
@@ -109,7 +122,9 @@ public final class com.example.indianstates.State extends java.lang.Record {
   public final boolean equals(java.lang.Object);
   public java.lang.String name();
   public java.lang.String capital();
-}</pre>
+}
+```
+
 
 You can conclude the following from the above output.
 
@@ -121,7 +136,8 @@ You can conclude the following from the above output.
 
 You can further validate these points by writing tests as well:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">@Test
+```java
+@Test
  public void testRecordAccessors() {
      String name = "Maharashtra" ;
      String capital = "Mumbai" ;
@@ -149,7 +165,9 @@ You can further validate these points by writing tests as well:
      State state1 = new State("Maharashtra", "Mumbai");
      State state2 = new State("Maharashtra", "Mumbai");
      Assert.assertEquals(state1.hashCode(), state2.hashCode());
- }</pre>
+ }
+```
+
 
 ```
 
@@ -173,7 +191,8 @@ As always, you can use start.spring.io to generate stubs for your Spring Boot ap
 
 Here is what the REST controller class looks like:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">import org.springframework.web.bind.annotation.GetMapping;
+```java
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -188,7 +207,7 @@ public class Controller {
     }
 
     @GetMapping("/states")
-    private List&lt;State&gt; getAllStates() {
+    private List<State> getAllStates() {
         return stateService.findAll();
     }
 
@@ -196,21 +215,26 @@ public class Controller {
     private String getSpecificState(@RequestParam(required = false, name = "name", defaultValue = "Maharashtra") String name) {
         return stateService.findByName(name);
     }
-}</pre>
+}
+```
+
 
 We can focus on the getAllStates() method, which returns a list of State record class objects.
 
 We have already seen the State record class. There is no change in that.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public record State(String name, String capital) {}
-</pre>
+```java
+public record State(String name, String capital) {}
+```
+
 
 Following is the `StateRepository` interface implemented by the `StateService` class:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">import java.util.List;
+```java
+import java.util.List;
 
 public interface StateRepository {
-    List&lt;State&gt; findAll();
+    List<State> findAll();
 
     String findByName(String name);
 }
@@ -221,10 +245,10 @@ public class StateService implements StateRepository{
     public StateService(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
-    private final RowMapper&lt;State&gt;  rowMapper = (rs, rowNum) -&gt; new State(rs.getString("name"),rs.getString("capital"));
+    private final RowMapper<State>  rowMapper = (rs, rowNum) -> new State(rs.getString("name"),rs.getString("capital"));
 
     @Override
-    public List&lt;State&gt; findAll() {
+    public List<State> findAll() {
         String findAllStates = """
                 select * from States
                 """;
@@ -238,14 +262,18 @@ public class StateService implements StateRepository{
                 """;
         return jdbcTemplate.queryForObject(findByName, String.class, name);
     }
-}</pre>
+}
+```
+
 
 `StateService` is autowired using the constructor of the `Controller` class. It has a method named findAll() that uses Spring JdbcTemplate to query and returns a `State` record class list from the in-memory H2 database. As you can see, we have used the `RowMapper` functional interface, which JdbcTemplate uses for mapping rows of a ResultSet on a per-row basis, and it returns the Row object for the current row. We have also used the `new` keyword to initialize the record class, which means we can initialize the record class like normal classes in Java. I have also used the Java 15 [Text Blocks](https://openjdk.java.net/jeps/378) feature, which helps in the readability of SQL queries and JSON string values.
 
 However, there were some issues when I started using records with this application. Earlier I was using `BeanPropertyRowMapper,` which resulted in the following exception when I disabled Lombok and used Records instead for the `State` class.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">2021-03-19 02:01:55.434 ERROR 66059 --- [nio-8080-exec-1] o.a.c.c.C.[.[.[/].[dispatcherServlet]    : Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed; nested exception is org.springframework.beans.BeanInstantiationException: Failed to instantiate [com.example.indianstates.State]: No default constructor found; nested exception is java.lang.NoSuchMethodException: com.example.indianstates.State.&lt;init&gt;()] with root cause
-</pre>
+```
+2021-03-19 02:01:55.434 ERROR 66059 --- [nio-8080-exec-1] o.a.c.c.C.[.[.[/].[dispatcherServlet]    : Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed; nested exception is org.springframework.beans.BeanInstantiationException: Failed to instantiate [com.example.indianstates.State]: No default constructor found; nested exception is java.lang.NoSuchMethodException: com.example.indianstates.State.<init>()] with root cause
+```
+
 
 ```
 
@@ -255,21 +283,27 @@ From the exception and `BeanPropertyRowMapper` [documentation](https://docs.spri
 
 To solve this error, I naively added a no-arg constructor to the `State` record class.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public record State(String name, String capital) {
+```java
+public record State(String name, String capital) {
     public State() {
     }
-}</pre>
+}
+```
+
 
 But, that resulted in the following compilation error.
 > Non-canonical record constructor must delegate to another constructor
 
 To solve this compilation, I added the following constructor, but this will make the values `null` in the response:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public record State(String name, String capital) {
+```java
+public record State(String name, String capital) {
     public State() {
         this(null,null);
     }
-}</pre>
+}
+```
+
 
 Then I took the help of the IntelliJ feature to generate the constructor for this record class. It provided me with the following options.
 

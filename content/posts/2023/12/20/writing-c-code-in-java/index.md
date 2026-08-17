@@ -35,7 +35,8 @@ Example {#h2-0-example}
 
 Now to my main example: Assume you're tired of all the abstraction of the Java I/O API and just want to read a file using the traditional I/O functions of the C standard lib (like [read_line.c](https://github.com/parttimenerd/panama-examples/blob/main/misc/read_line.c)): we're trying to read the first line of the passed file, opening the file via [`fopen`](https://www.man7.org/linux/man-pages/man3/fopen.3.html), reading the first line via [`gets`](https://www.man7.org/linux/man-pages/man3/fgets.3.html), and closing the file via [`fclose`](https://www.man7.org/linux/man-pages/man3/fclose.3.html).
 
-<pre class="EnlighterJSRAW" data-enlighter-language="c" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">#include "stdio.h"
+```c
+#include "stdio.h"
 #include "stdlib.h"
 
 int main(int argc, char *argv[]) {
@@ -45,32 +46,43 @@ int main(int argc, char *argv[]) {
   printf("%s", line);
   fclose(file);
   free(line);
-}</pre>
+}
+```
+
 
 This would have involved writing C code in the old JNI days, but we can access the required C functions directly with Panama, wrapping the C functions and writing the C program as follows in Java:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public static void main(String[] args) {
+```java
+public static void main(String[] args) {
     var file = fopen(args[0], "r");
     var line = gets(file, 1024);
     System.out.println(line);
     fclose(file);
-}</pre>
+}
+```
+
 
 But do we implement the wrapper methods? We start with the `FILE* fopen(char* file, char* mode)` function which opens a file. Before we can call it, we have to get hold of its `MethodHandle`:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">private static MethodHandle fopen = Linker.nativeLinker().downcallHandle(
+```java
+private static MethodHandle fopen = Linker.nativeLinker().downcallHandle(
         lookup("fopen"),
         FunctionDescriptor.of(/* return */ ValueLayout.ADDRESS, 
             /* char* file */ ValueLayout.ADDRESS, 
-            /* char* mode */ ValueLayout.ADDRESS));</pre>
+            /* char* mode */ ValueLayout.ADDRESS));
+```
+
 
 This looks up the `fopen` symbol in all the libraries that the current process has loaded, asking both the `NativeLinker` and the `SymbolLookup`. This code is used in many examples, so we move it into the function `lookup`:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public static MemorySegment lookup(String symbol) {
+```
+public static MemorySegment lookup(String symbol) {
     return Linker.nativeLinker().defaultLookup().find(symbol)
-                 .or(() -&gt; SymbolLookup.loaderLookup().find(symbol))
+                 .or(() -> SymbolLookup.loaderLookup().find(symbol))
                  .orElseThrow();
-}</pre>
+}
+```
+
 
 The look-up returns the memory address at which the looked-up function is located.
 
@@ -78,7 +90,8 @@ We can proceed with the address of `fopen` and use it to create a [MethodHandle]
 
 But how do we use this handle? Every handle has an [invokeExact](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/invoke/MethodHandle.html#invokeExact(java.lang.Object...)) function (and an [invoke](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/invoke/MethodHandle.html#invoke(java.lang.Object...)) function that allows the JVM to convert data) that we can use. The only problem is that we want to pass strings to the `fopen` call. We cannot pass the strings directly but instead have to allocate them onto the C heap, copying the chars into a C string:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public static MemorySegment fopen(String filename, String mode) {
+```java
+public static MemorySegment fopen(String filename, String mode) {
     try (var arena = Arena.ofConfined()) {
         return (MemorySegment) fopen.invokeExact(
                 arena.allocateUtf8String(filename),
@@ -86,7 +99,9 @@ But how do we use this handle? Every handle has an [invokeExact](https://docs.or
     } catch (Throwable t) {
         throw new RuntimeException(t);
     }
-}</pre>
+}
+```
+
 
 We use a confined arena for allocations, which is cleaned after exiting the try-catch. The newly allocated strings are then used to invoke `fopen`, letting us return the `FILE*`.
 
@@ -96,16 +111,20 @@ After opening the file, we can focus on the `char* fgets(char* buffer, int size,
 
 Getting a MethodHandle is similar to `fopen`:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">private static MethodHandle fgets = Linker.nativeLinker().downcallHandle(
+```java
+private static MethodHandle fgets = Linker.nativeLinker().downcallHandle(
         PanamaUtil.lookup("fgets"),
         FunctionDescriptor.of(ValueLayout.ADDRESS, 
                               ValueLayout.ADDRESS, 
                               ValueLayout.JAVA_INT, 
-                              ValueLayout.ADDRESS));</pre>
+                              ValueLayout.ADDRESS));
+```
+
 
 Only the wrapper method differs because we have to allocate the buffer in the arena:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public static String gets(MemorySegment file, int size) {
+```java
+public static String gets(MemorySegment file, int size) {
     try (var arena = Arena.ofConfined()) {
         var buffer = arena.allocateArray(ValueLayout.JAVA_BYTE, size);
         var ret = (MemorySegment) fgets.invokeExact(buffer, size, file);
@@ -116,11 +135,14 @@ Only the wrapper method differs because we have to allocate the buffer in the ar
     } catch (Throwable t) {
         throw new RuntimeException(t);
     }
-}</pre>
+}
+```
+
 
 Finally, we can implement the `int fclose(FILE* file)` function to close the file:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">private static MethodHandle fclose = Linker.nativeLinker().downcallHandle(
+```java
+private static MethodHandle fclose = Linker.nativeLinker().downcallHandle(
         PanamaUtil.lookup("fclose"),
         FunctionDescriptor.of(ValueLayout.JAVA_INT, ValueLayout.ADDRESS));
 
@@ -130,13 +152,17 @@ public static int fclose(MemorySegment file) {
     } catch (Throwable e) {
         throw new RuntimeException(e);
     }
-}</pre>
+}
+```
+
 
 You can find the source code in my [panama-examples](https://github.com/parttimenerd/panama-examples) repository on GitHub (file [HelloWorld.java](https://github.com/parttimenerd/panama-examples/blob/main/src/main/java/me/bechberger/panama/HelloWorld.java)) and run it on a Linux x86_64 machine via
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&gt; ./run.sh HelloWorld LICENSE # build and run
+```bash
+> ./run.sh HelloWorld LICENSE # build and run
                                  Apache License
-</pre>
+```
+
 
 which prints the first line of the license file.
 
@@ -151,7 +177,8 @@ On error, `fopen` returns a null pointer and sets `errno`. You can find informat
 
 We only have to have a way to obtain the `errno` directly after a call, we have to capture the call state and declare the capture-call-state option in the creation of the MethodHandle for `fopen`:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">try (var arena = Arena.ofConfined()) {
+```java
+try (var arena = Arena.ofConfined()) {
     // declare the errno as state to be captured, 
     // directly after the downcall without any interence of the
     // JVM runtime
@@ -181,11 +208,14 @@ We only have to have a way to obtain the `errno` directly after a call, we have 
     } catch (Throwable e) {
         throw new RuntimeException(e);
     }
-}</pre>
+}
+```
+
 
 To convert this error number into a string, we can use the [char* strerror(int errno)](https://www.man7.org/linux/man-pages/man3/strerror.3.html) function:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">// returned char* require this specific type
+```java
+// returned char* require this specific type
 static AddressLayout POINTER = 
     ValueLayout.ADDRESS.withTargetLayout(
         MemoryLayout.sequenceLayout(JAVA_BYTE));
@@ -202,11 +232,16 @@ static String errnoString(int errno){
     } catch (Throwable t) {
         throw new RuntimeException(t);
     }
-}</pre>
+}
+```
+
 
 When we then print the error string in our example after the `fopen` call, we get:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">No such file or directory </pre>
+```
+No such file or directory
+```
+
 
 This is as expected, as we hard-coded a non-existent file in the `fopen` call.
 
@@ -217,14 +252,18 @@ Creating all the MethodHandles manually can be pretty tedious and error-prone. J
 
 For our example, I wrote a small wrapper around jextract that automatically downloads the latest version and calls it on the [misc/headers.h](https://github.com/parttimenerd/panama-examples/blob/main/misc/headers.h) file to create MethodHandles in the class `Lib`. The headers file includes all the necessary headers to run examples:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="c" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">#include &lt;errno.h&gt;
-#include &lt;string.h&gt;
-#include &lt;unistd.h&gt;
-#include &lt;stdio.h&gt;</pre>
+```c
+#include <errno.h>
+#include <string.h>
+#include <unistd.h>
+#include <stdio.h>
+```
+
 
 For example the `fgets` function, jextract generates as an entry point the following:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public static MethodHandle fopen$MH() {
+```java
+public static MethodHandle fopen$MH() {
     return RuntimeHelper.requireNonNull(constants$48.const$0,"fopen");
 }
 /**
@@ -239,11 +278,14 @@ public static MemorySegment fopen(MemorySegment __filename, MemorySegment __mode
     } catch (Throwable ex$) {
         throw new AssertionError("should not reach here", ex$);
     }
-}</pre>
+}
+```
+
 
 Of course, we still have to take care of the string allocation in our wrapper, but this wrapper gets significantly smaller:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public static MemorySegment fopen(String filename, String mode) {
+```java
+public static MemorySegment fopen(String filename, String mode) {
     try (var arena = Arena.ofConfined()) {
         // using the MethodHandle that has been generated 
         // by jextract
@@ -251,7 +293,9 @@ Of course, we still have to take care of the string allocation in our wrapper, b
                 arena.allocateUtf8String(filename),
                 arena.allocateUtf8String(mode));
     }
-} </pre>
+}
+```
+
 
 You can find the example code in the GitHub repository in the file [HelloWorldJExtract.java](https://github.com/parttimenerd/panama-examples/blob/main/src/main/java/me/bechberger/panama/HelloWorldJExtract.java). I integrated jextract via a wrapper directly into the Maven build process, so just `mvn package` to run the tool.
 

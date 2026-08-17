@@ -45,28 +45,37 @@ Usage {#_usage}
 
 We start out by creating our rest client:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public JokeController(RestClient.Builder restClientBuilder, @Value("${jokeserviceUrl}") String jokeserviceUrl) {
+```java
+public JokeController(RestClient.Builder restClientBuilder, @Value("${jokeserviceUrl}") String jokeserviceUrl) {
     this.restClient = restClientBuilder.baseUrl(jokeserviceUrl).build();
-}</pre>
+}
+```
+
 
 And then we can fetch a joke using:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">return this.restClient
+```java
+return this.restClient
     .get()
     .uri("/j/{jokeId}", "R7UfaahVfFd")
     .accept(MediaType.APPLICATION_JSON)
     .retrieve()
-    .body(Joke.class);</pre>
+    .body(Joke.class);
+```
+
 
 Which as you can see is well, a lot more fluid.
 
 When doing this call we'll be rewarded with:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="json">{
+```json
+{
     "id": "R7UfaahVfFd",
     "joke": "My dog used to chase people on a bike a lot. It got so bad I had to take his bike away.",
     "status": 200
-}</pre>
+}
+```
+
 
 Now in case we're interested in the whole response including the status code, we can replace `.body(Joke.class)` with `.toEntity(Joke.class)`.  
 
@@ -78,40 +87,53 @@ Now as mentioned at the start, one of the upsides of the new RestClient is that 
 
 Let's declare an interface to fetch a joke:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">interface JokeClient {
+```java
+interface JokeClient {
     @GetExchange(url = "/j/{jokeId}", accept = "application/json")
     Joke getJoke(@PathVariable String jokeId);
-}</pre>
+}
+```
+
 
 Then we can create our client using:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">var factory = HttpServiceProxyFactory.builderFor(RestClientAdapter.create(restClient)).build();
-jokeClient = factory.createClient(JokeClient.class);</pre>
+```java
+var factory = HttpServiceProxyFactory.builderFor(RestClientAdapter.create(restClient)).build();
+jokeClient = factory.createClient(JokeClient.class);
+```
+
 
 After that, we can easily consume it using
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">@GetMapping("/joke-using-interface")
+```java
+@GetMapping("/joke-using-interface")
 Joke getJokeUsingInterface() {
     return this.jokeClient.getJoke("M7wPC5wPKBd");
-}</pre>
+}
+```
+
 
 And we'll receive:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="json">{
+```json
+{
     "id": "M7wPC5wPKBd",
     "joke": "Did you hear the one about the guy with the broken hearing aid? Neither did he.",
     "status": 200
 }
+```
 
-</pre>
 
 ### Error handling {#h3-3-error-handling}
 
 By default, RestClient will throw a subclass of RestClientException upon a `4**` or `5**` status code, but we can override this using `onStatus` so that we can define our own status handlers:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">.onStatus(HttpStatusCode::is4xxClientError, ((request, response) -&gt; {
+```java
+.onStatus(HttpStatusCode::is4xxClientError, ((request, response) -> {
     throw new PunException();
-}))</pre>
+}))
+```
+
 
 ### More granular control {#h3-4-more-granular-control}
 
@@ -119,14 +141,17 @@ In some cases, we might want to do some more advanced things for which we need a
 
 **note**: Status handlers are not applied when using exchange as you already have full access to the response, so you can perform any needed error handling.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">return this.restClient
+```java
+return this.restClient
     .get()
     .uri("/j/{jokeId}", "UNKNOWN")
     .accept(MediaType.APPLICATION_JSON)
-    .exchange((clientRequest, clientResponse) -&gt;  {
+    .exchange((clientRequest, clientResponse) ->  {
         // some criteria to determine our joke's too punny
         return "Singing in the shower is fun until you get soap in your mouth. Then it's a soap opera";
-    });</pre>
+    });
+```
+
 
 Wrap-up {#_wrap_up}
 -------------------

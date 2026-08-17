@@ -54,7 +54,7 @@ Core Java is intended for professional programmers who already know how to progr
 
 I am currently developing software for teaching beginning computer science concepts that provide interactive practice with program tracing, data structures, and algorithms. Sadly, in JavaScript, applets are no longer a viable delivery mechanism.
 
-*** ** * ** ***
+
 
 **Bazlur: Writing is indeed a rewarding endeavour. As an author, could you shed some light on your writing process? Writing technical books seems to present unique challenges and requirements. How do you navigate these complexities? How do you go about conceptualizing, planning, and eventually putting pen to paper?**   
 
@@ -75,7 +75,7 @@ Of course, I don't put pen to paper. I don't know how anyone got any writing don
 
 That is a fantastic opportunity for a writer. I get much more control over the learning experience, but it also makes authoring pretty complex. The key is still to work backwards. What do you want to achieve? What should the reader experience along the way? In which order can you take the reader from the base to the top?
 
-*** ** * ** ***
+
 
 **Bazlur: Let me ask you a slightly different question since you have been in academia, and major parts, I assume, include teaching students. As an experienced educator, could you share your thoughts on effective ways to teach Java, especially to newcomers? Also, how do you see Java's role in education evolving, and what steps can be taken to promote its adoption?**
 
@@ -96,17 +96,23 @@ Java has gotten a bad rap for a verbose "Hello World" program with a gratuitous 
 
 JEP 445 helps by allowing a non-static main:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">class HelloWorld {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;void main() {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.println("Hello, World!");
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
-}</pre>
+```java
+class HelloWorld {
+     void main() {
+         System.out.println("Hello, World!");
+     }
+}
+```
+
 
 You don't even need a class:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">void main() {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.println("Hello, World!");
-}</pre>
+```java
+void main() {
+     System.out.println("Hello, World!");
+}
+```
+
 
 Personally, I teach classes from day 1. This is called "objects early" in the ed biz. I do it for a trivial reason. That way, any students who have prior programming knowledge are just as confused as the newbies, and there is less intimidation.
 
@@ -128,7 +134,7 @@ Today's exciting projects are all about data science and machine learning. And t
 
 The Python libraries are not actually wonderful--just take Matplotlib. Please. If Oracle, Red Hat, or anyone else in the Java ecosystem wants to help make Java more popular in education, work on the cool libraries! And make it so that they can be explored on the web, just like Google Colab does with Python. This is a solvable problem.  
 
-*** ** * ** ***
+
 
 ***Bazlur: You emphasized the need for more accessible libraries in Java to promote its use in data science and machine learning education, where Python currently dominates. Given that this is a significant undertaking, do you believe a collaborative open-source approach can make significant strides in this direction? And how do you envision educators and the larger Java community getting involved in this process?***   
 **Cay:**That is a really good question. In my mind, there are three parts:
@@ -155,7 +161,7 @@ Java, unlike other open-source communities, has deep pockets behind it that ough
 
 I know---not a very satisfactory answer. As always, when paying for resources is involved, I brought this up with [Chad Arimura](https://www.linkedin.com/in/chadarimura/) from Oracle yesterday, and he was frustrated himself how hard it is. If you want to ask me about something else where I have a strong opinion, ask me about learning by practice with immediate feedback.  
 
-*** ** * ** ***
+
 
 **Bazlur: Let's shift gears and talk about the current state of software development. In your opinion, what are some of the biggest challenges that the software industry and its developers face today?**
 
@@ -164,7 +170,7 @@ I know---not a very satisfactory answer. As always, when paying for resources is
 Software development is hard, and the reasons for it being hard haven't changed in decades: shifting and hard-to-capture user requirements, poor team dynamics, byzantine architectures, premature optimization, fragile ecosystems, and chasing fads.  
 > *Software development is hard, and the reasons for it being hard haven't changed in decades: shifting and hard-to-capture user requirements, poor team dynamics, byzantine architectures, premature optimization, fragile ecosystems, and chasing fads.*   
 
-*** ** * ** ***
+
 
 ***Bazlur: Do you have any advice on how the developer can overcome these challenges?***
 
@@ -175,7 +181,7 @@ Which presumably indicated insane scalability. Now maybe you were working on a N
 And a total pain in the rear if you serve up corporate data and await user feedback. Which many developers do for a living. Ruby and Java developers have been laughing all the way to the bank. Keep it simple and testable.
 > *Keep it simple and testable.*
 
-*** ** * ** ***
+
 
 **Bazlur: I must ask this question: As AI continues to evolve and becomes more integrated into various sectors, how do you foresee developers adapting to this change? Given the widespread concern that AI may replace many job roles, what is your perspective?**
 
@@ -184,7 +190,7 @@ Cay: The one thing that I found was truly different and potentially a breath of 
 Economists (or at least, the podcasting variety), proposed that the current wave of generative AI gives a leg up to low-skilled employees, such as entry-level programmers. At some level, that is bound to be true. When in an unfamiliar situation, we all have a much easier time selecting and editing a solution instead of generating it from first principles. Will this lift the wages of entry-level programmers or depress the wages of experienced ones? Perhaps a bit of both. Disclaimer: I am NOT an economist.  
 > *Economists (or at least, the podcasting variety), proposed that the current wave of generative AI gives a leg up to low-skilled employees, such as entry-level programmers.*   
 
-*** ** * ** ***
+
 
 **Bazlur: Would you be willing to share some of your memorable experiences from your time in academia and entrepreneurial ventures in the software industry with us? We would love to hear your stories.**
 
@@ -194,14 +200,14 @@ Each such, as we would call it now, function was punched into tape and put into 
 
 **Bazlur: You've hinted at the importance of 'learning by practice with immediate feedback' as an effective method for skill acquisition. Could you please expand on that? How could this concept be implemented more effectively within coding and data science education, particularly in the context of Java programming?**   
 
-*** ** * ** ***
+
 
 Cay: In my article, I discuss the importance of '[learning by practice with immediate feedback](https://horstmann.com/unblog/2023-06-08/index.html)' in coding and data science education. I argue that traditional lecture-based learning isn't as effective as hands-on, interactive practice. I believe learning should come from concrete experiences, and watching a lecture isn't enough.
 
 I propose interactive practice, where learners actively participate, and instant feedback, which allows immediate correction of mistakes. I also highlight the concept of scaffolding, providing structure and support to students as they learn. However, I conclude by emphasizing that while these tools are effective, they aren't a one-size-fits-all solution for teaching and learning.
 > *I propose interactive practice, where learners actively participate, and instant feedback, which allows immediate correction of mistakes* .  
 
-*** ** * ** ***
+
 
 **Bazlur: Thank you so much for sharing your insights with us. We appreciate your time. Before we end, is there any parting advice or resources you would like to share with our readers, such as a list of recommended books or any other helpful information?**
 
@@ -210,7 +216,7 @@ I propose interactive practice, where learners actively participate, and instant
 
 You might think, what if everyone did that? Would my contribution get lost? But for that, we now have decades of experience. Those who contribute fluff can't expect permanence, but as long as you transcend the threshold of mediocrity. Go for it!
 
-*** ** * ** ***
+
 
 **Conclusion:**   
 

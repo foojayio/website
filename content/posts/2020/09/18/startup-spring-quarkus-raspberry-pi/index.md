@@ -123,15 +123,19 @@ To run the application, two new fresh SD cards where prepared with the [Imager t
 
 As both applications are packaged as a JAR, they can be started in the same way:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ java -jar target/java-spring-rest-db-0.0.1-SNAPSHOT.jar
-$ java -jar target/javaquarkusrestdb-1.0-SNAPSHOT-runner.jar</pre>
+```java
+$ java -jar target/java-spring-rest-db-0.0.1-SNAPSHOT.jar
+$ java -jar target/javaquarkusrestdb-1.0-SNAPSHOT-runner.jar
+```
+
 
 Results {#h2-3-results}
 -----------------------
 
 Each JAR was started a few times to get an average value from the startup time reported in their logging.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ java -jar target/java-spring-rest-db-0.0.1-SNAPSHOT.jar
+```java
+$ java -jar target/java-spring-rest-db-0.0.1-SNAPSHOT.jar
 
   .   ____          _            __ _ _
  /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
@@ -141,16 +145,20 @@ Each JAR was started a few times to get an average value from the startup time r
  =========|_|==============|___/=/_/_/_/
  :: Spring Boot ::        (v2.1.8.RELEASE)
 ...
-Started JavaSpringRestDbApplication in 36.606 seconds (JVM running for 39.212)</pre>
+Started JavaSpringRestDbApplication in 36.606 seconds (JVM running for 39.212)
+```
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ java -jar target/javaquarkusrestdb-1.0-SNAPSHOT-runner.jar
+
+```java
+$ java -jar target/javaquarkusrestdb-1.0-SNAPSHOT-runner.jar
 __  ____  __  _____   ___  __ ____  ______ 
  --/ __ \/ / / / _ | / _ \/ //_/ / / / __/ 
- -/ /_/ / /_/ / __ |/ , _/ ,&lt; / /_/ /\ \   
+ -/ /_/ / /_/ / __ |/ , _/ ,< / /_/ /\ \   
 --\___\_\____/_/ |_/_/|_/_/|_|\____/___/   
 ...
 (main) javaquarkusrestdb 1.0-SNAPSHOT on JVM (powered by Quarkus 1.6.0.Final) started in 9.259s. Listening on: http://0.0.0.0:8080
-</pre>
+```
+
 
 |   Framework    |    PC     |   Pi3   |   Pi3   |   Pi4   |   Pi4   |
 |----------------|:---------:|:-------:|:-------:|:-------:|:-------:|
@@ -161,7 +169,7 @@ __  ____  __  _____   ___  __ ____  ______
 
 The average startup speed of Quarkus JAR is 3 to 4 times faster compared to Spring JAR. The native one is extremely fast but I only got it working on my PC. It will be really fun to repeat this experiment when there is a GraalVM version for ARM.
 
-*** ** * ** ***
+
 
 * (1): Dell i7, 16 Gb RAM, Ubuntu 20.04 64-bit
 * (2): Raspberry Pi 3B+ 1GB RAM, Broadcom BCM2837B0, Cortex-A53 (ARMv8) 64-bit SoC @ 1.4GHz
@@ -169,6 +177,6 @@ The average startup speed of Quarkus JAR is 3 to 4 times faster compared to Spri
 * (32b): Raspbian OS 32-bit
 * (64b): Ubuntu server OS 20.04 LTS 64-bit
 
-*** ** * ** ***
+
 
 **Note:** Used with permission and thanks --- originally written by Frank Delporte and published on [webtechie.be](https://webtechie.be) in the posts "[A Spring REST and H2 database application on the Raspberry Pi](https://webtechie.be/post/2020-07-13-spring-rest-h2-raspberry-pi/)" and "[Comparing a REST H2 Spring versus Quarkus application on Raspberry Pi](https://webtechie.be/post/2020-07-28-spring-versus-quarkus-rest-h2-db-on-raspberry-pi/)".

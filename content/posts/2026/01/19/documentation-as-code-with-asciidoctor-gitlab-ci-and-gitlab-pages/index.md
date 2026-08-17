@@ -40,7 +40,8 @@ As mentioned earlier, you need to set the `pages` attribute. To generate HTML pa
 
 We use it in the `scripts` section int the following code block.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml">stages:
+```yaml
+stages:
   - deploy
 
 deploy_pages:
@@ -61,10 +62,12 @@ deploy_pages:
       --destination-dir public \
       --source-dir src 'doc/**/*.adoc'
   rules:
-    - if: $CI_COMMIT_REF_NAME == $CI_DEFAULT_BRANCH &amp;&amp; $CI_PIPELINE_SOURCE != "merge_request_event"
+    - if: $CI_COMMIT_REF_NAME == $CI_DEFAULT_BRANCH && $CI_PIPELINE_SOURCE != "merge_request_event"
       changes:
         - doc/**/*
-        - .gitlab-ci.yml</pre>
+        - .gitlab-ci.yml
+```
+
 
 An explanation of the [attributes](https://docs.asciidoctor.org/asciidoc/latest/attributes/document-attributes-ref/) used can be found below:
 
@@ -90,7 +93,8 @@ Generating pages {#h2-2-generating-pages}
 
 The process is defined to take all `.adoc` files and generate pages from them. So, let's create a file named `index.adoc` in the `doc` folder. We name it index, so that an `index.html` page is generated, which will automatically be displayed when you visit the URL of your pages. An example might look like this:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">= Your documentation
+```
+= Your documentation
 
 This is your documentation
 
@@ -105,9 +109,9 @@ skin rose
 state Open
 state Closed
 
-[*] --&gt; Open
-Open --&gt; Closed
-Closed --&gt; [*]
+[*] --> Open
+Open --> Closed
+Closed --> [*]
 @enduml
 ----
 
@@ -116,7 +120,9 @@ Closed --&gt; [*]
 void main() {
   println("Hello World");
 }
-----</pre>
+----
+```
+
 
 Results {#h2-3-results}
 -----------------------

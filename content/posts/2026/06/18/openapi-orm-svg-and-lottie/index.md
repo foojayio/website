@@ -42,7 +42,8 @@ A new `cn1:generate-openapi-client` Mojo reads an OpenAPI 3.x JSON spec (a URL o
 
 Wire it into the project's `pom.xml`:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">    com.codenameone
+```
+    com.codenameone
     codenameone-maven-plugin
 
             petstore-client
@@ -50,21 +51,23 @@ Wire it into the project's `pom.xml`:
 
                 https://petstore3.swagger.io/api/v3/openapi.json
                 com.example.petstore
-</pre>
+```
+
 
 `mvn generate-sources` picks the spec up, downloads it, and writes one file per schema and one per tag under `target/generated-sources/`. The Petstore reference spec exercised end-to-end produces six model classes (`Pet`, `Order`, `Customer`, `Tag`, `Category`, `User`) and three Api classes (`PetApi`, `StoreApi`, `UserApi`), and the nine generated `.class` files compile cleanly against `codenameone-core`. Documented at [the OpenAPI codegen Maven goal](https://www.codenameone.com/developer-guide/#_appendix_goal_generate_openapi_client).
 
 In application code you call the generated `Api` class the same way you would call any other Java method:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">PetApi pets = new PetApi();
+```
+PetApi pets = new PetApi();
 
 // Returns AsyncResource; resolves with the deserialised object.
-pets.getPetById(42).onResult((pet, err) -&gt; {
+pets.getPetById(42).onResult((pet, err) -> {
     if (err == null) Log.p("Got " + pet.getName());
 });
 
-// Returns AsyncResource&lt;List&gt;.
-pets.findPetsByStatus("available").onResult((list, err) -&gt; {
+// Returns AsyncResource<List>.
+pets.findPetsByStatus("available").onResult((list, err) -> {
     if (err == null) {
         for (Pet p : list) Log.p(p.getName());
     }
@@ -74,7 +77,9 @@ pets.findPetsByStatus("available").onResult((list, err) -&gt; {
 Pet candidate = new Pet();
 candidate.setName("Mittens");
 candidate.setStatus("available");
-pets.addPet(candidate).onResult((created, err) -&gt; { /* ... */ });</pre>
+pets.addPet(candidate).onResult((created, err) -> { /* ... */ });
+```
+
 
 There is no hand-rolled `ConnectionRequest` setup, no manual JSON parsing, no string-typed request bodies. The generated client takes a typed `Pet`, serializes it with `Mappers.toJson(...)`, fires the right HTTP verb, deserializes the response with `Mappers.fromJson(...)`, and surfaces the result through the framework's `AsyncResource` so your callback fires on the EDT.
 
@@ -87,7 +92,8 @@ SQLite ORM {#h2-1-sqlite-orm}
 
 `@Entity` marks the class; `@Id` and `@Column` shape the schema; `@DbTransient` opts a field out:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@Entity
+```
+@Entity
 public class TodoItem {
     @Id @Column                  long id;
     @Column                      String title;
@@ -102,7 +108,9 @@ dao.insert(new TodoItem(0, "Read the post", null));
 
 List open = dao.find("completed_at IS NULL", new Object[] {});
 TodoItem byId = dao.findById(42);
-dao.delete(byId);</pre>
+dao.delete(byId);
+```
+
 
 The generated DAO does the typed work underneath. No reflection in `insert`; the generated code calls `setString(1, e.title)` and `setLong(2, e.id)` directly against the SQLite `PreparedStatement`. Validation at build time catches missing `@Id`, fields that look like relationships but are not yet supported, and abstract entity classes; the build fails with a class name and a reason.
 
@@ -113,7 +121,8 @@ JSON / XML mapping {#h2-2-json-xml-mapping}
 
 `@Mapped` marks a class as a transferable POJO. `@JsonProperty` and `@XmlElement` (plus `@XmlRoot`, `@XmlAttribute`, `@JsonIgnore`, `@XmlTransient`) shape the wire format. The runtime entry points are `Mappers.toJson(...)`, `Mappers.fromJson(...)`, `Mappers.toXml(...)`, `Mappers.fromXml(...)`:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@Mapped
+```
+@Mapped
 public class User {
     @JsonProperty("user_id") long   id;
     @JsonProperty            String name;
@@ -123,17 +132,22 @@ public class User {
 }
 
 String json = Mappers.toJson(user);
-User   back = Mappers.fromJson(json, User.class);</pre>
+User   back = Mappers.fromJson(json, User.class);
+```
+
 
 The same `@Mapped` POJO is the type the typed `Rest` helpers accept:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">Rest.get("https://api.example.com/users/42")
+```
+Rest.get("https://api.example.com/users/42")
     .fetchAsMapped(User.class)
-    .onResult((user, err) -&gt; { /* ... */ });
+    .onResult((user, err) -> { /* ... */ });
 
 Rest.get("https://api.example.com/users")
     .fetchAsMappedList(User.class)
-    .onResult((users, err) -&gt; { /* ... */ });</pre>
+    .onResult((users, err) -> { /* ... */ });
+```
+
 
 `Rest.fetchAsJsonList` (top-level JSON arrays, no `{"root":[...]}` envelope trick), `JSONWriter` (the complement of `JSONParser`, with fluent builders and streaming variants for `Writer` and `OutputStream`), and `URLImage.setDefaultBearerToken` (auth headers on image fetches) all ship alongside.
 
@@ -144,7 +158,8 @@ Component binding with validation {#h2-3-component-binding-with-validation}
 
 The fourth annotation processor on the same pipeline is the component binder. `@Bindable` marks a model class; `@Bind(name = "userField")` ties a field to a component on a form by the component's `name`. Field-level validation annotations compose with `@Bind` on the same field:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@Bindable
+```
+@Bindable
 public class SignupModel {
     @Bind(name = "userField")  @Required @Length(min = 3)
     private String user;
@@ -157,11 +172,14 @@ public class SignupModel {
 
     @Bind(name = "roleField")  @ExistIn({ "admin", "editor", "viewer" })
     private String role;
-}</pre>
+}
+```
+
 
 The matching form sets a `name` on each component so the binder can find them:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">TextField user = new TextField();    user.setName("userField");
+```
+TextField user = new TextField();    user.setName("userField");
 TextField email = new TextField();   email.setName("emailField");
 TextField age = new TextField();     age.setName("ageField");
 ComboBox role = new ComboBox("admin", "editor", "viewer");
@@ -175,7 +193,9 @@ form.show();
 
 SignupModel model = new SignupModel();
 Binding binding = Binders.bind(model, form);
-binding.getValidator().addSubmitButtons(submit);</pre>
+binding.getValidator().addSubmitButtons(submit);
+```
+
 
 `Binding` is the handle: `refresh()` re-reads the model into the components, `commit()` writes the components back, `disconnect()` tears the listeners down. Multiple validation annotations on a single field compose via `Validator.addConstraint(Component, Constraint...)` and `GroupConstraint` (first failure wins). `@Validate(MyClass.class)` is the escape hatch for hand-written `Constraint` implementations. The validation set: `@Required`, `@Length`, `@Regex`, `@Email`, `@Url`, `@Numeric`, `@ExistIn`, `@Validate`.
 
@@ -186,7 +206,8 @@ SVG at build time {#h2-4-svg-at-build-time}
 
 Drop an SVG into `src/main/css/`, alongside `theme.css`:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">src/main/css/
+```
+src/main/css/
     theme.css
     star.svg
     gradient_circle.svg
@@ -194,7 +215,9 @@ Drop an SVG into `src/main/css/`, alongside `theme.css`:
     rounded_button.svg
     wave.svg
     pro_badge.svg
-    clipped_badge.svg</pre>
+    clipped_badge.svg
+```
+
 
 After the next build, every SVG is a regular Codename One `Image`. **An SVG handled by the transcoder is a vector image, but it is still an `Image`.** Everywhere a raster `Image` works (`Label.setIcon`, `Button.setIcon`, `BorderLayout.NORTH`, the toolbar, a `MultiButton`'s leading icon, a CSS `background: url(...)` rule), the SVG works too. The difference is that it stays crisp at any size: the same source file is sharp at a 16-point list-row icon, a 64-point hero header, and a 256-point launch screen, on every DPI bucket.
 
@@ -207,7 +230,8 @@ A grid of the static SVGs from the hellocodenameone fixture, rendered through th
 
 The SVG transcoder's most useful feature is also the one most easily missed: **size every SVG in millimeters from CSS** . SVGs in the wild routinely declare odd `width` / `height` attributes (a 1024×1024 export of a 24×24 icon, no dimensions at all, design-pixel values from one specific framework). Pinning the rendered size in millimeters sidesteps all of that.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">HomeIcon {
+```
+HomeIcon {
     background: url(home.svg);
     cn1-svg-width:  6mm;
     cn1-svg-height: 6mm;
@@ -218,7 +242,9 @@ LogoBanner {
     background: url(logo.svg);
     cn1-svg-width:  32mm;
     cn1-svg-height: 12mm;
-}</pre>
+}
+```
+
 
 A 6 mm icon is 6 mm tall on a 1× desktop, 6 mm on a high-DPI handset, and 6 mm on a 4K tablet. The transcoder routes both values through `Display.convertToPixels()` at install time, the same way `font-size: 3mm` already behaves elsewhere in Codename One CSS. No design-pixel guesswork, no DPI bucket to choose, no scaling surprise when the artist re-exports the source SVG at a different resolution.
 
@@ -245,16 +271,22 @@ Lottie at build time {#h2-7-lottie-at-build-time}
 
 The same pipeline carries Lottie. Drop a Bodymovin export into the same `src/main/css/`:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">src/main/css/
+```
+src/main/css/
     theme.css
     pulse.json
-    spinner.json</pre>
+    spinner.json
+```
+
 
 After the next build, both are real `Image` instances on every platform that exposes the shape API. The same vector-everywhere story as SVG: a Lottie animation renders crisply at any size and slots into any `Image` slot in the framework.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">Image pulse   = Resources.getGlobalResources().getImage("pulse");
+```
+Image pulse   = Resources.getGlobalResources().getImage("pulse");
 Image spinner = Resources.getGlobalResources().getImage("spinner");
-form.add(pulse).add(spinner);</pre>
+form.add(pulse).add(spinner);
+```
+
 
 Animation runs against wall-clock time on every paint, with no `Timer` and no allocation in the hot path. A capture of the hellocodenameone Lottie fixture in motion:
 ![Animated Lottie playback: a red bar that pulses and rotates next to a blue ellipse that scales up and down](https://www.codenameone.com/blog/build-time-codegen/lottie-pulse-spinner.gif)
@@ -280,15 +312,18 @@ Codename One has had deep-link support for a long time through `Display.setPrope
 
 This release introduces a typed `DeepLink` and a single handler that fires for both cold and warm launches:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">Display.getInstance().setDeepLinkHandler(link -&gt; {
+```
+Display.getInstance().setDeepLinkHandler(link -> {
     // link is a normalised DeepLink: scheme, host, path,
     // segments, query map, fragment. Same shape cold or warm.
-    if ("/users".equals(link.path()) &amp;&amp; link.segments().size() == 2) {
+    if ("/users".equals(link.path()) && link.segments().size() == 2) {
         showUserDetailForm(link.segments().get(1));
         return true;
     }
     return false;
-});</pre>
+});
+```
+
 
 `AppArg` still works for projects that depend on it, but the new handler is what we recommend going forward. The handler runs on a consistent lifecycle path on both cold and warm starts, and the parsed `DeepLink` value carries the scheme, host, path segments, query map, and fragment so app code does not need to roll its own URL parser.
 
@@ -298,7 +333,8 @@ For projects that handle more than a handful of URL patterns, the second piece i
 
 Each form declares its own path with a `@Route` annotation:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@Route("/")
+```
+@Route("/")
 public class HomeForm extends Form { /* ... */ }
 
 @Route("/users/:id")
@@ -310,11 +346,16 @@ public class UserDetailForm extends Form {
 }
 
 @Route("/about")
-public class AboutForm extends Form { /* ... */ }</pre>
+public class AboutForm extends Form { /* ... */ }
+```
+
 
 `Router.navigate("/users/42")` resolves the path, instantiates `UserDetailForm`, and shows it. The deep-link handler now collapses to:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">Display.getInstance().setDeepLinkHandler(link -&gt; Router.navigate(link.toString()));</pre>
+```
+Display.getInstance().setDeepLinkHandler(link -> Router.navigate(link.toString()));
+```
+
 
 Each form owns its own routing rule. Adding or moving a screen is a one-class change. The "what screens does this app have, and at what paths?" question is answered by an IDE search for `@Route`, not by reading every form constructor in the project.
 

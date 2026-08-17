@@ -56,7 +56,8 @@ With Quarkus and LangChain4j, you can define custom guardrails directly in your 
 
 In the example below, I created a small AI Service with both input and output guardrails.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@RegisterAiService(tools = LibraryService.class)
+```
+@RegisterAiService(tools = LibraryService.class)
 @SessionScoped
 public interface MyAiService {
 
@@ -68,7 +69,9 @@ public interface MyAiService {
    @InputGuardrails({IGuard1.class, IGuard2.class})
    @OutputGuardrails(OGuard.class)
    public String question(@UserMessage String topic);
-}</pre>
+}
+```
+
 
 ### Input guardrails {#input-guardrails}
 
@@ -78,7 +81,8 @@ In this situation, two input guardrails are implemented. The first guardrail pro
 
 Employing multiple guardrails on a single service allows for flexible customization of the control scope.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@ApplicationScoped
+```
+@ApplicationScoped
 public class IGuard1 implements InputGuardrail {
 
    @Override
@@ -90,9 +94,12 @@ public class IGuard1 implements InputGuardrail {
 
        return success();
    }
-}</pre>
+}
+```
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@ApplicationScoped
+
+```
+@ApplicationScoped
 public class IGuard2 implements InputGuardrail {
 
    @Inject
@@ -106,9 +113,12 @@ public class IGuard2 implements InputGuardrail {
        }
        return failure("UNSAFE INPUT DETECTED!!!");
    }
-}</pre>
+}
+```
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@RegisterAiService
+
+```
+@RegisterAiService
 @ApplicationScoped
 public interface InputCheckService {
 
@@ -119,7 +129,9 @@ public interface InputCheckService {
    Think of yourself as a guardian of privacy. Only allow the input if it considered safe.
    """)
    public boolean isSafe(String prompt);
-}</pre>
+}
+```
+
 
 ### Output guardrails {#output-guardrails}
 

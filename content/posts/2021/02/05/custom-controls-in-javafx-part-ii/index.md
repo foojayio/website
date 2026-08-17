@@ -27,7 +27,8 @@ To realize this, we simply create a class that extends `HBox` and add a `TextFie
 
 The code of that control looks as follows:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public class CombinedControl extends HBox {
+```java
+public class CombinedControl extends HBox {
     private TextField textField;
     private Button    button;
 
@@ -44,7 +45,7 @@ The code of that control looks as follows:
 
         textField = new TextField();
         textField.setFocusTraversable(false);
-        textField.setTextFormatter(new TextFormatter&lt;&gt;(change -&gt; change.getText().matches("[0-9]*(\\.[0-9]*)?") ? change : null));
+        textField.setTextFormatter(new TextFormatter<>(change -> change.getText().matches("[0-9]*(\\.[0-9]*)?") ? change : null));
 
         button = new Button("°C");
         button.setFocusTraversable(false);
@@ -58,7 +59,7 @@ The code of that control looks as follows:
     }
 
     private void registerListeners() {
-        button.setOnMousePressed(e -&gt; handleControlPropertyChanged("BUTTON_PRESSED"));
+        button.setOnMousePressed(e -> handleControlPropertyChanged("BUTTON_PRESSED"));
     }
 
     // ******************** Methods *******************************************
@@ -96,7 +97,9 @@ The code of that control looks as follows:
             return text;
         }
     }
-}</pre>
+}
+```
+
 
 If we would use this control without applying a CSS file it would look as follows:
 
@@ -112,28 +115,34 @@ For that reason, we have to define a CSS style that is the same for the normal a
 
 The CSS style for the TextField looks as follows:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">.combined-control &gt; .text-input,
-.combined-control &gt; .text-input:focused {
+```java
+.combined-control > .text-input,
+.combined-control > .text-input:focused {
     -fx-background-color: linear-gradient(to bottom, derive(-fx-text-box-border, -10%), -fx-text-box-border),
                              linear-gradient(from 0px 0px to 0px 5px, derive(-fx-control-inner-background, -9%), -fx-control-inner-background);
     -fx-background-insets: 0, 1 0 1 1;
     -fx-background-radius: 3 0 0 3, 2 0 0 2;
     -fx-pref-width: 120px;
-}</pre>
+}
+```
+
 
 As you can see, we set the background radius for the right two corners of the `TextField` to 0.
 
 For the `Button`, the CSS styles now look as follows:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">.combined-control &gt; .button {
+```java
+.combined-control > .button {
     -fx-background-radius: 0 3 3 0, 0 3 3 0, 0 2 2 0, 0 1 1 0;
     -fx-pref-width: 36px;
     -fx-min-width: 36px;
 }
-.combined-control &gt; .button:focused {
+.combined-control > .button:focused {
     -fx-background-color: -fx-outer-border, -fx-inner-border, -fx-body-color, -fx-body-color;
     -fx-background-insets: 0, 1, 2, 2;
-}</pre>
+}
+```
+
 
 With these CSS styles in place, our control looks as follows:
 
@@ -143,7 +152,8 @@ Now we have the effect that we have been looking for, it looks like one control 
 
 Now the hard part is to style the focus correctly, to be honest I was lazy and just tweaked it as long as it nearly looks the way I wanted it to look by using the following CSS styles:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">.combined-control:focused {
+```java
+.combined-control:focused {
     -fx-highlight-fill: -fx-accent;
     -fx-background-color: -fx-focus-color, -fx-control-inner-background, -fx-faint-focus-color;
     -fx-background-insets: -1.2, 1, -2.4;
@@ -151,11 +161,13 @@ Now the hard part is to style the focus correctly, to be honest I was lazy and j
     -fx-border-color: -fx-faint-focus-color;
     -fx-border-insets: -1;
 }
-.combined-control:focused &gt; .button {
+.combined-control:focused > .button {
     -fx-background-color: -fx-focus-color, -fx-outer-border, -fx-inner-border, -fx-body-color, -fx-faint-focus-color, -fx-body-color;
     -fx-background-insets: -0.2 -0.2 -0.2 1, 1 1 1 0, 1 1 1 1, 2, -1.4 -1.4 -1.4 1, 2.6;
     -fx-background-radius: 0 3 3 0, 0 2 2 0, 0 1 1 0, 0 4 4 0, 0 1 1 0;
-}</pre>
+}
+```
+
 
 If we focus now on our new control it will look as follows:
 

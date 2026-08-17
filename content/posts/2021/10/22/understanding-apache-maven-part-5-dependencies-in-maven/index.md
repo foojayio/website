@@ -40,30 +40,33 @@ A future article will be dedicated to a walkthrough of the POM file, while this 
 
 An sample of a dependency block in an XML format POM file is listed below:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="xml" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&lt;project&gt;
+```xml
+<project>
   ...
-  &lt;dependencies&gt;
-    &lt;dependency&gt;
-      &lt;groupId&gt;a.group-id&lt;/groupId&gt;
-      &lt;artifactId&gt;an-artifact&lt;/artifactId&gt;
-      &lt;version&gt;1.0&lt;/version&gt;
-      &lt;exclusions&gt;
-        &lt;exclusion&gt;
-          &lt;groupId&gt;transitive.group-id&lt;/groupId&gt;
-          &lt;artifactId&gt;excluded-artifact&lt;/artifactId&gt;
-        &lt;/exclusion&gt;
-      &lt;/exclusions&gt;
-      &lt;optional&gt;true&lt;/optional&gt;
-    &lt;/dependency&gt;
-    &lt;dependency&gt;
-      &lt;groupId&gt;another.group.id&lt;/groupId&gt;
-      &lt;artifactId&gt;another-artifact&lt;/artifactId&gt;
-      &lt;version&gt;1.0.0-SNAPSHOT&lt;/version&gt;
-      &lt;type&gt;zip&lt;/type&gt;
-      &lt;scope&gt;runtime&lt;/scope&gt;
-    &lt;/dependency&gt;
-  &lt;/dependencies&gt;
-&lt;/project&gt;</pre>
+  <dependencies>
+    <dependency>
+      <groupId>a.group-id</groupId>
+      <artifactId>an-artifact</artifactId>
+      <version>1.0</version>
+      <exclusions>
+        <exclusion>
+          <groupId>transitive.group-id</groupId>
+          <artifactId>excluded-artifact</artifactId>
+        </exclusion>
+      </exclusions>
+      <optional>true</optional>
+    </dependency>
+    <dependency>
+      <groupId>another.group.id</groupId>
+      <artifactId>another-artifact</artifactId>
+      <version>1.0.0-SNAPSHOT</version>
+      <type>zip</type>
+      <scope>runtime</scope>
+    </dependency>
+  </dependencies>
+</project>
+```
+
 
 This excerpt is **not exhaustive** in how a dependency excerpt can look. Time to dig in!
 

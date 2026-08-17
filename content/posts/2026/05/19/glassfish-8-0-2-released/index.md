@@ -63,13 +63,13 @@ Meanwhile, work is already in progress on GlassFish 8.0.3, which will bring addi
 
 If you are evaluating Jakarta EE platforms for a new project, or looking for a reliable home for existing applications, Eclipse GlassFish backed by OmniFish is worth a serious look. [Download 8.0.2](https://glassfish.org/download_gf8.html#eclipse-glassfish-802) and see for yourself, or reach out to us if you want to talk through your specific setup.
 
-*** ** * ** ***
+
 
 More information:
 
 * [Download GlassFish 8.0.2](https://glassfish.org/download_gf8.html#eclipse-glassfish-802)
 
-*** ** * ** ***
+
 
 <figure class="alignleft size-full is-resized">
  <img decoding="async" width="400" height="400" src="omnifish-logo-transparent-400px-margin.png" alt="" class="wp-image-60966" style="width:200px;height:200px">

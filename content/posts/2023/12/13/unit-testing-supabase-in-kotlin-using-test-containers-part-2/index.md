@@ -39,7 +39,8 @@ A few notable things:
 * I have to run a database statement to populate and flush my database in between tests. The Docker Compose setup from Supabase comes with persistent volumes, which needs to be accounted for.
 * I don't have test for those here, but all services (auth, functions, storage), ... should actually be supported, given that we're running a full local instance.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">import io.github.cdimascio.dotenv.dotenv
+```
+import io.github.cdimascio.dotenv.dotenv
 import io.github.jan.supabase.SupabaseClient
 import io.github.jan.supabase.createSupabaseClient
 import io.github.jan.supabase.postgrest.Postgrest
@@ -157,7 +158,9 @@ class MainKtTest {
             }
         }
     }
-}</pre>
+}
+```
+
 
 To achieve those results, a few manual steps are required. The Docker Compose file provided by Supabase uses `container_name` parameters, [which aren't supported by Test Containers](https://github.com/testcontainers/testcontainers-java/pull/2741?ref=lengrand.fr).
 
@@ -183,10 +186,13 @@ My original complete intent was to build a small layer on top of the Docker Comp
 
 Here is how they describe it for NGinx for example. I would have loved to have something similar:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">@Rule
-public NginxContainer&lt;?&gt; nginx = new NginxContainer&lt;&gt;(NGINX_IMAGE)
+```
+@Rule
+public NginxContainer<?> nginx = new NginxContainer<>(NGINX_IMAGE)
     .withCopyFileToContainer(MountableFile.forHostPath(tmpDirectory), "/usr/share/nginx/html")
-    .waitingFor(new HttpWaitStrategy());</pre>
+    .waitingFor(new HttpWaitStrategy());
+```
+
 
 All of the implementation I've seen extend from `GenericContainer` though, not `ComposeContainer` so I've decided to hold that off and keep it simple for now.
 

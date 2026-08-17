@@ -72,13 +72,19 @@ Depending on what we're looking for, we may not want to uncover commit by commit
 
 On `main`, this error message is not present anymore as somebody refactored the code already. To dig into this, we'll have to find out when this error message got introduced. One way to pick through the whole history in the search for the holy grail..err..the error message is to use git pickaxe. Pickaxe is part of git log can be used as follows:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">git log -S'errorMessage'</pre>
+```
+git log -S'errorMessage'
+```
+
 
 By default, it will spit out all commits that introduced or removed the string `errorMessage` in any way. Especially with error messages, you may be looking for an error message template that has variables in there. Luckily, git has us covered: you can use `--pickaxe-regex` and use `-S` to find matching commits.
 
 Be aware that using -S will only find commits that change the number of times a string is found (addition/deletion). If you're also looking for a commit that changed the position of a string (e.g. a refactoring that moved the keyword around), you are better of using the `-G`:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">git log -G"error.*"</pre>
+```
+git log -G"error.*"
+```
+
 
 Skipping History {#h2-2-skipping-history}
 -----------------------------------------
@@ -89,34 +95,43 @@ So these changes are usually never interesting in the context of wading through 
 
 Given this history for a file, consisting of the important change as well as a commit that just refactored the file:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">❯ git log
-commit 301b7eca0eb57737e160f5d2d16208f65c4156d6 (HEAD -&gt; master)
-Author: Benjamin Muskalla &lt;<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="7c1e11090f171d10101d3c1b0e1d181019521f1311">[email&nbsp;protected]</a>&gt;
+```
+❯ git log
+commit 301b7eca0eb57737e160f5d2d16208f65c4156d6 (HEAD -> master)
+Author: Benjamin Muskalla <<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="7c1e11090f171d10101d3c1b0e1d181019521f1311">[email protected]</a>>
 Date:   Tue Jan 12 11:38:40 2021 +0100
 
     Reformat all source files
 
 commit bd3fca50ee1659e740e2f6744d95e737418f1f40
-Author: Benjamin Muskalla &lt;<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="cdafa0b8bea6aca1a1ac8daabfaca9a1a8e3aea2a0">[email&nbsp;protected]</a>&gt;
+Author: Benjamin Muskalla <<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="cdafa0b8bea6aca1a1ac8daabfaca9a1a8e3aea2a0">[email protected]</a>>
 Date:   Tue Jan 12 11:38:12 2021 +0100
 
-    Important change</pre>
+    Important change
+```
+
 
 As expected, regular git blame shows the most recent changes on the file. This is the commit reformatting the file which is irrelevant for us. We want to see an important change.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">❯ git blame sourcefile.py
+```
+❯ git blame sourcefile.py
 301b7eca 1) import random
 301b7eca 2)
 301b7eca 3) print(random.randint(0,9))
-301b7eca 4)</pre>
+301b7eca 4)
+```
+
 
 So, using the "ignore revisions" feature allows us to explicitly ignore specific commits, thus showing us the commit we're interested in:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">git blame --ignore-rev 301b7ec sourcefile.py
+```
+git blame --ignore-rev 301b7ec sourcefile.py
 ^bd3fca5 1) import random
 301b7eca 2)
 ^bd3fca5 3) print(random.randint(0,9))
-301b7eca 4)</pre>
+301b7eca 4)
+```
+
 
 Throughout the lifetime of a project, this approach certainly doesn't scale. There will always be commits that should be ignored in those  
 
@@ -126,18 +141,25 @@ This is not only handy as you can check it in with all your other files, but it'
 
 In our example, let's call it `.git-blame-ignored-revs` and specify which commits should be ignored using their commit hash. You can use `#` to add comments to the file as well.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic"># ignore pure formatting commits
-301b7eca0eb57737e160f5d2d16208f65c4156d6</pre>
+```
+# ignore pure formatting commits
+301b7eca0eb57737e160f5d2d16208f65c4156d6
+```
+
 
 You can now manually use this file as your source of filters using `--ignore-revs-file`.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">❯ git blame -s --ignore-revs-file=.git-blame-ignored-revs sourcefile.py
-</pre>
+```
+❯ git blame -s --ignore-revs-file=.git-blame-ignored-revs sourcefile.py
+```
+
 
 If you want this to be the default behavior, you can either create a git alias for this or even configure git to always use this file. With this configuration, git blame will always ignore the commits in `.git-blame-ignored-revs`:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">❯ git config blame.ignoreRevsFile .git-blame-ignored-revs
-</pre>
+```
+❯ git config blame.ignoreRevsFile .git-blame-ignored-revs
+```
+
 
 A nice side-effect of using `git config` is that other tools and editors that rely on the command line tools behaviour just fall in line with these settings.
 

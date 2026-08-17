@@ -82,7 +82,7 @@ Added ARIA label APIs needed by screen readers as well as a number of other acce
 
 [Vaadin WCAG compatibility matrix →](https://docs.google.com/spreadsheets/d/1VJuzr1H2BWxPAGdtLxTe7yj12_vn0RcTu-UO79WOp8w/edit#gid=1281315720 "Read more -&gt;")
 
-*** ** * ** ***
+
 
 Have I missed anything important that you were anticipating to hear from us?
 

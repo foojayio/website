@@ -49,43 +49,62 @@ We're building an application where we ingest data from Apache Pulsar into Hazel
 
 If you have macOS \& Homebrew, you can install Hazelcast using the following command:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">brew tap hazelcast/hz
+```
+brew tap hazelcast/hz
 
-brew install <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="90f8f1eaf5fcf3f1e3e4d0a5bea2bea1">[email&nbsp;protected]</a></pre>
+brew install <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="90f8f1eaf5fcf3f1e3e4d0a5bea2bea1">[email protected]</a>
+```
+
 
 Check if Hazelcast is installed:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">hz -V</pre>
+```
+hz -V
+```
+
 
 Then start a local cluster:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">hz start</pre>
+```
+hz start
+```
+
 
 You should see the following in the console:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">INFO: [192.168.1.164]:5701 [dev] [5.2.1]
+```
+INFO: [192.168.1.164]:5701 [dev] [5.2.1]
 Members {size:1, ver:1} [
   Member [192.168.1.164]:5701 - 4221d540-e34e-4ff2-8ad3-41e060b895ce this
-]</pre>
+]
+```
+
 
 You can start Pulsar in Docker using the following command:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">docker run -it -p 6650:6650 -p 8080:8080 \
+```
+docker run -it -p 6650:6650 -p 8080:8080 \
     --mount source=pulsardata,target=/pulsar/data \
     --mount source=pulsarconf,target=/pulsar/conf \
-    apachepulsar/pulsar:2.11.0 bin/pulsar standalone</pre>
+    apachepulsar/pulsar:2.11.0 bin/pulsar standalone
+```
+
 
 To install Management Center, use one of the following methods, depending on your operating system:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">brew tap hazelcast/hz
+```
+brew tap hazelcast/hz
 
-brew install <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="cea6afb4aba2adafbdbae3a3afa0afa9aba3aba0bae3adaba0baabbc8efbe0fce0ff">[email&nbsp;protected]</a></pre>
+brew install <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="cea6afb4aba2adafbdbae3a3afa0afa9aba3aba0bae3adaba0baabbc8efbe0fce0ff">[email protected]</a>
+```
+
 
 Check that Management Center is installed:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">hz-mc -V
+```
+hz-mc -V
+```
 
-</pre>
 
 Data collection {#h2-2-data-collection}
 ---------------------------------------
@@ -108,19 +127,31 @@ We also have a Java Pulsar function receiving each event from the "airquality" t
 
 Example AirQuality Data
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">{"dateObserved":"2023-01-19 ","hourObserved":12,"localTimeZone":"EST","reportingArea":"Philadelphia","stateCode":"PA","latitude":39.95,"longitude":-75.151,"parameterName":"PM10","aqi":19,"category":{"number":1,"name":"Good","additionalProperties":{}},"additionalProperties":{}}</pre>
+```java
+{"dateObserved":"2023-01-19 ","hourObserved":12,"localTimeZone":"EST","reportingArea":"Philadelphia","stateCode":"PA","latitude":39.95,"longitude":-75.151,"parameterName":"PM10","aqi":19,"category":{"number":1,"name":"Good","additionalProperties":{}},"additionalProperties":{}}
+```
+
 
 Example Ozone Data
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">{"dateObserved":"2023-01-19 ","hourObserved":12,"localTimeZone":"EST","reportingArea":"Philadelphia","stateCode":"PA","parameterName":"O3","latitude":39.95,"longitude":-75.151,"aqi":8}</pre>
+```
+{"dateObserved":"2023-01-19 ","hourObserved":12,"localTimeZone":"EST","reportingArea":"Philadelphia","stateCode":"PA","parameterName":"O3","latitude":39.95,"longitude":-75.151,"aqi":8}
+```
+
 
 Example PM10 Data
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">{"dateObserved":"2023-01-19 ","hourObserved":12,"localTimeZone":"EST","reportingArea":"Philadelphia","stateCode":"PA","parameterName":"PM10","latitude":39.95,"longitude":-75.151,"aqi":19}</pre>
+```
+{"dateObserved":"2023-01-19 ","hourObserved":12,"localTimeZone":"EST","reportingArea":"Philadelphia","stateCode":"PA","parameterName":"PM10","latitude":39.95,"longitude":-75.151,"aqi":19}
+```
+
 
 Example PM2.5 Data
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">{"dateObserved":"2023-01-19 ","hourObserved":12,"localTimeZone":"EST","reportingArea":"Philadelphia","stateCode":"PA","parameterName":"PM2.5","latitude":39.95,"longitude":-75.151,"aqi":54}</pre>
+```
+{"dateObserved":"2023-01-19 ","hourObserved":12,"localTimeZone":"EST","reportingArea":"Philadelphia","stateCode":"PA","parameterName":"PM2.5","latitude":39.95,"longitude":-75.151,"aqi":54}
+```
+
 
 ![](https://hazelcast.com/wp-content/uploads/2023/01/Screenshot-2023-01-27-at-14.01.42.png)
 
@@ -135,41 +166,48 @@ The Pulsar connector uses the Pulsar client library, which has two different way
 
 In your pom file, import the following dependencies.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="xml">&lt;dependency&gt;
-    &lt;groupId&gt;com.hazelcast&lt;/groupId&gt;
-    &lt;artifactId&gt;hazelcast&lt;/artifactId&gt;
-    &lt;version&gt;5.1.4&lt;/version&gt;
-&lt;/dependency&gt;
+```xml
+<dependency>
+    <groupId>com.hazelcast</groupId>
+    <artifactId>hazelcast</artifactId>
+    <version>5.1.4</version>
+</dependency>
 
-&lt;dependency&gt;
-    &lt;groupId&gt;com.hazelcast.jet.contrib&lt;/groupId&gt;
-    &lt;artifactId&gt;pulsar&lt;/artifactId&gt;
-    &lt;version&gt;0.1&lt;/version&gt;
-&lt;/dependency&gt;
+<dependency>
+    <groupId>com.hazelcast.jet.contrib</groupId>
+    <artifactId>pulsar</artifactId>
+    <version>0.1</version>
+</dependency>
 
-&lt;dependency&gt;
-    &lt;groupId&gt;org.apache.pulsar&lt;/groupId&gt;
-    &lt;artifactId&gt;pulsar-client&lt;/artifactId&gt;
-    &lt;version&gt;2.10.1&lt;/version&gt;
-&lt;/dependency&gt;</pre>
+<dependency>
+    <groupId>org.apache.pulsar</groupId>
+    <artifactId>pulsar-client</artifactId>
+    <version>2.10.1</version>
+</dependency>
+```
+
 
 We create a PulsarSources.pulsarReaderBuilder instance to connect to the previously started pulsar cluster located at pulsar://localhost:6650.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">StreamSource&lt;Event&gt;source = PulsarSources.pulsarReaderBuilder(
+```java
+StreamSource<Event>source = PulsarSources.pulsarReaderBuilder(
      topicName,
-     () -&gt; PulsarClient.builder().serviceUrl("pulsar://localhost:6650").build(),
-     () -&gt; Schema.JSON(Event.class),
-     Message::getValue).build();</pre>
+     () -> PulsarClient.builder().serviceUrl("pulsar://localhost:6650").build(),
+     () -> Schema.JSON(Event.class),
+     Message::getValue).build();
+```
+
 
 We then create a pipeline to read from the source with a sliding window and aggregate count, before we write to logger:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">Pipeline p = Pipeline.create();
+```java
+Pipeline p = Pipeline.create();
 p.readFrom(source)
  .withNativeTimestamps(0)
  .groupingKey(Event::getUser)
  .window(sliding(SECONDS.toMillis(60), SECONDS.toMillis(30)))
  .aggregate(counting())
- .writeTo(Sinks.logger(wr -&gt; String.format(
+ .writeTo(Sinks.logger(wr -> String.format(
       "At %s Pulsar got %,d messages in the previous minute from %s.",
       TIME_FORMATTER.format(LocalDateTime.ofInstant(
               Instant.ofEpochMilli(wr.end()), ZoneId.systemDefault())),
@@ -181,19 +219,27 @@ JobConfig cfg = new JobConfig()
      .setName("pulsar-airquality-counter");
 
 HazelcastInstance hz = Hazelcast.bootstrappedInstance();
-hz.getJet().newJob(p, cfg);</pre>
+hz.getJet().newJob(p, cfg);
+```
+
 
 You can run the previous code from your IDE (in this case, it will create its own Hazelcast member and run the job on it), or you can run this on the previously started Hazelcast member (in this case, you need to create a runnable JAR including all dependencies required to run it):
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">mvn package
+```
+mvn package
 
-bin/hz-cli submit target/pulsar-example-1.0-SNAPSHOT.jar</pre>
+bin/hz-cli submit target/pulsar-example-1.0-SNAPSHOT.jar
+```
+
 
 To cancel the job and shut down the Hazelcast cluster:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">bin/hz-cli cancel pulsar-message-counter
+```
+bin/hz-cli cancel pulsar-message-counter
 
-hz-stop</pre>
+hz-stop
+```
+
 
 Conclusion {#h2-4-conclusion}
 -----------------------------

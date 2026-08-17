@@ -74,7 +74,8 @@ Using Quarkus, Qute and Pi4J an example application is built to show a 7-segment
 
 The full [code is shared on GitHub](https://github.com/igfasouza/qute-example-pi4j) but the main class is pretty small and easy to understand:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">package com.igor;
+```java
+package com.igor;
 
 import io.quarkus.qute.Template;
 import io.quarkus.qute.TemplateInstance;
@@ -115,10 +116,10 @@ public class HelloResource {
     @Transactional
     @Path("/segment")
     public TemplateInstance segmentDisplay(@MultipartForm MessageForm messageForm) {       
-        if(messageForm.segment1 == null &amp;&amp; messageForm.segment2 == null &amp;&amp;
-                messageForm.segment3 == null &amp;&amp; messageForm.segment4 == null &amp;&amp;
-                messageForm.segment5 == null &amp;&amp; messageForm.segment6 == null &amp;&amp;
-                messageForm.segment7 == null &amp;&amp; messageForm.segment8 == null) {
+        if(messageForm.segment1 == null && messageForm.segment2 == null &&
+                messageForm.segment3 == null && messageForm.segment4 == null &&
+                messageForm.segment5 == null && messageForm.segment6 == null &&
+                messageForm.segment7 == null && messageForm.segment8 == null) {
             pin01.setShutdownOptions(true, PinState.HIGH);
             pin02.setShutdownOptions(true, PinState.HIGH);
             // ... repeat for all pins
@@ -137,21 +138,23 @@ public class HelloResource {
 
     public void display(MessageForm messageForm) {
 
-        if (messageForm.segment1 != null &amp;&amp; messageForm.segment1.equals("on")) {
+        if (messageForm.segment1 != null && messageForm.segment1.equals("on")) {
             pin01.low();
         } else {
             pin01.high();
         }
-        if (messageForm.segment2 != null &amp;&amp; messageForm.segment2.equals("on")) {
+        if (messageForm.segment2 != null && messageForm.segment2.equals("on")) {
             pin02.low();
         } else {
             pin02.high();
         }
         // ... repeat for all pins
     }
-}</pre>
+}
+```
 
-*** ** * ** ***
+
+
 
 {{< youtube i576hpXrglQ >}}
 
@@ -180,6 +183,6 @@ Conclusion {#h2-3-conclusion}
 
 Once again, the Raspberry Pi proves to be a real workhorse which can run Java and Quarkus to bring business-power applications to inexpensive but powerfull hardware.
 
-*** ** * ** ***
+
 
 **Note:** Used with permission and thanks --- originally written and published on the blog of [Igor De Souza](http://www.igfasouza.com/blog/quarkus-qute-with-raspberry-pi/) and [Frank Delporte](https://webtechie.be/post/2019-12-18-controlling-a-led-number-display-with-javafx-and-python-on-raspberry-pi/).

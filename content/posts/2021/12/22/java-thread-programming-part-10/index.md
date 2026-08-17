@@ -29,38 +29,47 @@ In that implementation, we used a buffer, and when Buffer is full, we put the pr
 
 The `BlockingQueue` is an interface, and it has my implementation. They are:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">java.util.concurrent.ArrayBlockingQueue
+```java
+java.util.concurrent.ArrayBlockingQueue
 java.util.concurrent.DelayQueue
 java.util.concurrent.LinkedBlockingQueue
 java.util.concurrent.LinkedBlockingDeque
 java.util.concurrent.PriorityBlockingQueue
-java.util.concurrent.SynchronousQueue</pre>
+java.util.concurrent.SynchronousQueue
+```
+
 
 Etc.
 
 `BlockingQueue` can be bounded and unbounded:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">BlockingQueue&lt;Integer&gt; queue = new LinkedBlockingDeque&lt;&gt;();</pre>
+```java
+BlockingQueue<Integer> queue = new LinkedBlockingDeque<>();
+```
+
 
 The above Queue is unbounded. Therefore, it usually will not block any thread if we keep putting items. The reason is, it can hold `Integer.MAX_VALUE` items. This is enough for our typical use cases.
 
 We can, however, create a bounded queue using one of its constructors:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">BlockingQueue&lt;Integer&gt; queue = new LinkedBlockingDeque&lt;&gt;(10);
-</pre>
+```java
+BlockingQueue<Integer> queue = new LinkedBlockingDeque<>(10);
+```
+
 
 Now it will only be able to hold ten items at a time. If a thread wants to put more items, it will put the thread into a waiting state.
 
 Let's use this `BlockingQueue` and implement our producer/consumer pattern. Previously we wrote a class named Buffer. We will do the same here except using BlockingQueue:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">package ca.bazlur.playground;
+```java
+package ca.bazlur.playground;
 
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingDeque;
 
 public class Buffer {
     private static final int MAX_SIZE = 10;
-    private final BlockingQueue&lt;Integer&gt; queue = new LinkedBlockingDeque&lt;&gt;(MAX_SIZE);
+    private final BlockingQueue<Integer> queue = new LinkedBlockingDeque<>(MAX_SIZE);
 
     public void addItem(int item) {
         try {
@@ -81,13 +90,16 @@ public class Buffer {
             throw new AssertionError(e);
         }
     }
-}</pre>
+}
+```
+
 
 This class is now pretty simple, with no locking, no low-level thread constructs.
 
 Let's use it now:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">package ca.bazlur.playground;
+```java
+package ca.bazlur.playground;
 
 import java.util.Random;
 
@@ -97,28 +109,28 @@ public class ProducerConsumerExample {
     public static void main(String[] args) throws InterruptedException {
         var buffer = new Buffer();
 
-        var producer1 = new Thread(() -&gt; {
+        var producer1 = new Thread(() -> {
             while (true) {
                 buffer.addItem(getRandomItem());
             }
         });
         producer1.setName("Producer # 1");
 
-        var producer2 = new Thread(() -&gt; {
+        var producer2 = new Thread(() -> {
             while (true) {
                 buffer.addItem(getRandomItem());
             }
         });
         producer2.setName("Producer # 2");
 
-        var consumer1 = new Thread(() -&gt; {
+        var consumer1 = new Thread(() -> {
             while (true) {
                 buffer.getItem();
             }
         });
         consumer1.setName("Consumer # 1");
 
-        var consumer2 = new Thread(() -&gt; {
+        var consumer2 = new Thread(() -> {
             while (true) {
                 buffer.getItem();
             }
@@ -136,6 +148,8 @@ public class ProducerConsumerExample {
     private static int getRandomItem() {
         return random.nextInt();
     }
-}</pre>
+}
+```
+
 
 That's it for today!

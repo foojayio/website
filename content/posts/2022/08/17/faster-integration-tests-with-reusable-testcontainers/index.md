@@ -36,7 +36,8 @@ The simple test {#_the_simple_test}
 
 Have a look at the following simple test:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">package foojay;
+```java
+package foojay;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -62,7 +63,7 @@ class SimpleTest {
   static final long startTime = System.nanoTime();
 
   @Container
-  static final Neo4jContainer&lt;?&gt; neo4j = new Neo4jContainer&lt;&gt;("neo4j:4.4");
+  static final Neo4jContainer<?> neo4j = new Neo4jContainer<>("neo4j:4.4");
 
   static Driver driver;
 
@@ -85,10 +86,10 @@ class SimpleTest {
   void shouldCreateNode() {
     try (var session = driver.session()) {
       long internalId = session.run("""
-        CREATE (n:Foojay) &lt;-[:WRITES_FOR]-(a:Author {name: 'Michael'})
+        CREATE (n:Foojay) <-[:WRITES_FOR]-(a:Author {name: 'Michael'})
         RETURN id(a)"""
       ).single().get(0).asLong();
-      assertTrue(internalId &gt;= 0);
+      assertTrue(internalId >= 0);
     }
   }
 
@@ -98,7 +99,9 @@ class SimpleTest {
     LoggerFactory.getLogger(SimpleTest.class)
       .info("Test took {}", duration);
   }
-}</pre>
+}
+```
+
 
 It uses `@Testcontainers` from the Testcontainers JUnit extension `org.testcontainers:junit-jupiter:jar:1.17.3` to mark this test as test depending on Docker and the `@Container` annotation from the same library to mark a final class field as container. The annotation ensures that the container is started before all tests (so that it can be used in a `@BeforeAll` method to retrieve URLs or credentials) and that it gets shutdown after all tests have run.
 
@@ -117,12 +120,13 @@ The Optimized test {#_optimized_test}
 
 I left out the imports in the following listing. They are the same as the above.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">@Testcontainers(disabledWithoutDocker = true)
+```java
+@Testcontainers(disabledWithoutDocker = true)
 class OptimizedTest {
 
   static final long startTime = System.nanoTime();
 
-  static final Neo4jContainer&lt;?&gt; neo4j = new Neo4jContainer&lt;&gt;("neo4j:4.4")
+  static final Neo4jContainer<?> neo4j = new Neo4jContainer<>("neo4j:4.4")
     .withReuse(true);
 
   static Driver driver;
@@ -144,10 +148,10 @@ class OptimizedTest {
   void shouldCreateNode() {
     try (var session = driver.session()) {
       long internalId = session.run("""
-        CREATE (n:Foojay) &lt;-[:WRITES_FOR]-(a:Author {name: 'Michael'})
+        CREATE (n:Foojay) <-[:WRITES_FOR]-(a:Author {name: 'Michael'})
         RETURN id(a)"""
       ).single().get(0).asLong();
-      assertTrue(internalId &gt;= 0);
+      assertTrue(internalId >= 0);
     }
   }
 
@@ -157,7 +161,9 @@ class OptimizedTest {
     LoggerFactory.getLogger(SimpleTest.class)
       .info("Test took {}", duration);
   }
-}</pre>
+}
+```
+
 
 The important differences are:
 
@@ -168,7 +174,10 @@ The important differences are:
 
 For the latter to work, you will need to prepare your environmenet for Testcontainers. This is done in `~/.testcontainers.properties` (A properties file in your home directory). Mine looks like this:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="properties">testcontainers.reuse.enable=true</pre>
+```properties
+testcontainers.reuse.enable=true
+```
+
 
 That is all. The above test will run the same 10 seconds on the first run and after that, it takes roughly 200ms per run. Testcontainers monitor will keep the Neo4j container around and reuse it for all containers based on the same image and the configuration. There is nothing more todo.
 
@@ -176,79 +185,82 @@ In case you need several containers based on the same image and configuration in
 
 The Maven build descriptor for the above classes looks like this:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
-&lt;project xmlns="http://maven.apache.org/POM/4.0.0"
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"&gt;
-  &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
+     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
 
-  &lt;groupId&gt;org.example&lt;/groupId&gt;
-  &lt;artifactId&gt;foojay_fastertests&lt;/artifactId&gt;
-  &lt;version&gt;1.0-SNAPSHOT&lt;/version&gt;
+  <groupId>org.example</groupId>
+  <artifactId>foojay_fastertests</artifactId>
+  <version>1.0-SNAPSHOT</version>
 
-  &lt;properties&gt;
-    &lt;maven.compiler.release&gt;17&lt;/maven.compiler.release&gt;
-  &lt;/properties&gt;
+  <properties>
+    <maven.compiler.release>17</maven.compiler.release>
+  </properties>
 
-  &lt;dependencyManagement&gt;
-    &lt;dependencies&gt;
-      &lt;dependency&gt;
-        &lt;groupId&gt;org.junit&lt;/groupId&gt;
-        &lt;artifactId&gt;junit-bom&lt;/artifactId&gt;
-        &lt;version&gt;5.9.0&lt;/version&gt;
-        &lt;type&gt;pom&lt;/type&gt;
-        &lt;scope&gt;import&lt;/scope&gt;
-      &lt;/dependency&gt;
-    &lt;/dependencies&gt;
-  &lt;/dependencyManagement&gt;
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>org.junit</groupId>
+        <artifactId>junit-bom</artifactId>
+        <version>5.9.0</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
 
-  &lt;dependencies&gt;
-    &lt;dependency&gt;
-      &lt;groupId&gt;org.neo4j.driver&lt;/groupId&gt;
-      &lt;artifactId&gt;neo4j-java-driver&lt;/artifactId&gt;
-      &lt;version&gt;4.4.9&lt;/version&gt;
-    &lt;/dependency&gt;
+  <dependencies>
+    <dependency>
+      <groupId>org.neo4j.driver</groupId>
+      <artifactId>neo4j-java-driver</artifactId>
+      <version>4.4.9</version>
+    </dependency>
 
-    &lt;dependency&gt;
-      &lt;groupId&gt;org.junit.jupiter&lt;/groupId&gt;
-      &lt;artifactId&gt;junit-jupiter&lt;/artifactId&gt;
-      &lt;scope&gt;test&lt;/scope&gt;
-    &lt;/dependency&gt;
-    &lt;dependency&gt;
-      &lt;groupId&gt;org.testcontainers&lt;/groupId&gt;
-      &lt;artifactId&gt;junit-jupiter&lt;/artifactId&gt;
-      &lt;version&gt;1.17.3&lt;/version&gt;
-      &lt;scope&gt;test&lt;/scope&gt;
-    &lt;/dependency&gt;
-    &lt;dependency&gt;
-      &lt;groupId&gt;org.testcontainers&lt;/groupId&gt;
-      &lt;artifactId&gt;neo4j&lt;/artifactId&gt;
-      &lt;version&gt;1.17.3&lt;/version&gt;
-      &lt;scope&gt;test&lt;/scope&gt;
-    &lt;/dependency&gt;
-    &lt;dependency&gt;
-      &lt;groupId&gt;org.slf4j&lt;/groupId&gt;
-      &lt;artifactId&gt;slf4j-simple&lt;/artifactId&gt;
-      &lt;version&gt;1.7.36&lt;/version&gt;
-      &lt;scope&gt;test&lt;/scope&gt;
-    &lt;/dependency&gt;
-  &lt;/dependencies&gt;
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.testcontainers</groupId>
+      <artifactId>junit-jupiter</artifactId>
+      <version>1.17.3</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.testcontainers</groupId>
+      <artifactId>neo4j</artifactId>
+      <version>1.17.3</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-simple</artifactId>
+      <version>1.7.36</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
 
-  &lt;build&gt;
-    &lt;plugins&gt;
-      &lt;plugin&gt;
-        &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;
-        &lt;artifactId&gt;maven-compiler-plugin&lt;/artifactId&gt;
-        &lt;version&gt;3.10.1&lt;/version&gt;
-      &lt;/plugin&gt;
-      &lt;plugin&gt;
-        &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;
-        &lt;artifactId&gt;maven-surefire-plugin&lt;/artifactId&gt;
-        &lt;version&gt;3.0.0-M7&lt;/version&gt;
-      &lt;/plugin&gt;
-    &lt;/plugins&gt;
-  &lt;/build&gt;
-&lt;/project&gt;</pre>
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.10.1</version>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>3.0.0-M7</version>
+      </plugin>
+    </plugins>
+  </build>
+</project>
+```
+
 
 Again, this works of course will all the Testcontainers modules. You do need to make sure however that your test data accross your testsuite does not have interdependencies or if so, make sure you tag the containers with dedicated labels.
 

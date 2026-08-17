@@ -74,37 +74,46 @@ The easiest way to implement Arong2id in your Java application is to use the `sp
 
 The `spring-security-crypto` library has a `Argon2PasswordEncoder` that you can use. I personally believe the naming is a bit off, as this is technically not an encoder but a hasher. The Spring library uses `bouncycastle` as a dependency that holds a full Java-based implementation of the Argon2 algorithm. The `spring-security-crypto` library can be considered an intuitive interface on top of `bouncycastle`, making it easier to use. Next to `bouncycastle`, you also need a dependency to `common-logging` for, you might have guessed it, logging.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="xml" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&lt;dependency&gt;
-   &lt;groupId&gt;org.springframework.security&lt;/groupId&gt;
-   &lt;artifactId&gt;spring-security-crypto&lt;/artifactId&gt;
-   &lt;version&gt;5.6.2&lt;/version&gt;
-&lt;/dependency&gt;
-&lt;dependency&gt;
-   &lt;groupId&gt;commons-logging&lt;/groupId&gt;
-   &lt;artifactId&gt;commons-logging&lt;/artifactId&gt;
-   &lt;version&gt;1.2&lt;/version&gt;
-&lt;/dependency&gt;
-&lt;dependency&gt;
-   &lt;groupId&gt;org.bouncycastle&lt;/groupId&gt;
-   &lt;artifactId&gt;bcpkix-jdk15on&lt;/artifactId&gt;
-   &lt;version&gt;1.70&lt;/version&gt;
-&lt;/dependency&gt;</pre>
+```xml
+<dependency>
+   <groupId>org.springframework.security</groupId>
+   <artifactId>spring-security-crypto</artifactId>
+   <version>5.6.2</version>
+</dependency>
+<dependency>
+   <groupId>commons-logging</groupId>
+   <artifactId>commons-logging</artifactId>
+   <version>1.2</version>
+</dependency>
+<dependency>
+   <groupId>org.bouncycastle</groupId>
+   <artifactId>bcpkix-jdk15on</artifactId>
+   <version>1.70</version>
+</dependency>
+```
+
 
 The `Argon2PasswordEncoder` uses the Argon2id version by default with m=4MiB, t=3, and p=1. Although the number of iterations is higher than the minimum, you probably still want to consider higher memory consumption. In the Java example below, I use the minimum requirements of m=15Mib, t=2, and p=1. I use the same values as the defaults for the salt and hash length.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">Argon2PasswordEncoder encoder = new Argon2PasswordEncoder(32,64,1,15*1024,2);
+```java
+Argon2PasswordEncoder encoder = new Argon2PasswordEncoder(32,64,1,15*1024,2);
 var myPassword = "ThisIsMyPassword";
 
 var encodedPassword = encoder.encode(myPassword);
 System.out.println(encodedPassword);
 
 var validPassword = encoder.matches(myPassword, encodedPassword);
-System.out.println(validPassword);</pre>
+System.out.println(validPassword);
+```
+
 
 The output from this code will be similar to this:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="raw" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$argon2id$v=19$m=15360,t=2,p=1$YpRuuQhW1dHOimAnWD5TRU6Sebitu+fIrmIrenr+YOM$hkEXhhHpu2NUcPwhV4IUQelQdf4I8V+iyFsFiC8BYEisE3oWFv96zYeNA1i/awhaDo1XHz6Pp/1r55SS/I4AIA
-True</pre>
+```
+$argon2id$v=19$m=15360,t=2,p=1$YpRuuQhW1dHOimAnWD5TRU6Sebitu+fIrmIrenr+YOM$hkEXhhHpu2NUcPwhV4IUQelQdf4I8V+iyFsFiC8BYEisE3oWFv96zYeNA1i/awhaDo1XHz6Pp/1r55SS/I4AIA
+True
+```
+
 
 This hash contains all the information it needs, including the settings I supplied to the encoder and the salt information. This way you can easily check if the original password matches using `encoder.matches()`. This also works with another instance of the `Argon2PasswordEncoder` with different settings.
 
@@ -116,30 +125,39 @@ You can choose to install this C library yourself using your package manager or 
 
 **Without precompiled libraries:**
 
-<pre class="EnlighterJSRAW" data-enlighter-language="xml" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&lt;dependency&gt;
-    &lt;groupId&gt;de.mkammerer&lt;/groupId&gt;
-    &lt;artifactId&gt;argon2-jvm-nolibs&lt;/artifactId&gt;
-    &lt;version&gt;2.11&lt;/version&gt;
-&lt;/dependency&gt;</pre>
+```xml
+<dependency>
+    <groupId>de.mkammerer</groupId>
+    <artifactId>argon2-jvm-nolibs</artifactId>
+    <version>2.11</version>
+</dependency>
+```
+
 
 **With precompiled libraries:**
 
-<pre class="EnlighterJSRAW" data-enlighter-language="xml" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&lt;dependency&gt;
-    &lt;groupId&gt;de.mkammerer&lt;/groupId&gt;
-    &lt;artifactId&gt;argon2-jvm&lt;/artifactId&gt;
-    &lt;version&gt;2.11&lt;/version&gt;
-&lt;/dependency&gt;</pre>
+```xml
+<dependency>
+    <groupId>de.mkammerer</groupId>
+    <artifactId>argon2-jvm</artifactId>
+    <version>2.11</version>
+</dependency>
+```
+
 
 The usage of this library is quite straightforward. In the code example below, you can see an example equivalent to the Spring example using the same minimum parameters.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">Argon2 argon2 = Argon2Factory.create(Argon2Factory.Argon2Types.ARGON2id, 32, 64);
+```java
+Argon2 argon2 = Argon2Factory.create(Argon2Factory.Argon2Types.ARGON2id, 32, 64);
 var myPassword = "ThisIsMyPassword";
 
 var hash = argon2.hash(2,15*1024,1, myPassword.toCharArray());
 System.out.println(hash);
 
 var validPassword = argon2.verify(hash, myPassword.toCharArray());
-System.out.println(validPassword);</pre>
+System.out.println(validPassword);
+```
+
 
 ### SCRYPT {#h3-5-scrypt}
 
@@ -157,19 +175,25 @@ Please note that the above list of scrypt parameters will all result in equally 
 
 The `spring-security-crypto` library supports many algorithms including SCrypt. You can use the `SCryptEncoder` in the same way as we did with the `Argon2Encoder`.In the example below I used the middle suggestion to provide a good balance between CPU and memory allocation.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">SCryptPasswordEncoder encoder = new SCryptPasswordEncoder(16384, 8, 4, 32, 64);
+```java
+SCryptPasswordEncoder encoder = new SCryptPasswordEncoder(16384, 8, 4, 32, 64);
 var myPassword = "ThisIsMyPassword";
 
 var encodedPassword = encoder.encode(myPassword);
 System.out.println(encodedPassword);
 
 var validPassword = encoder.matches(myPassword, encodedPassword);
-System.out.println(validPassword);</pre>
+System.out.println(validPassword);
+```
+
 
 **Output:**
 
-<pre class="EnlighterJSRAW" data-enlighter-language="raw" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">e0804$8FQ4x/ntwEz2ZNu8QRyIQJlAXR+gQkiG3WulLMEq/kioVtaFiKE7sZDGgtmqUmwB8OE+f7Eagux9QXG478unLw==$RS1Bz5Uf30dWGxc+vtlkjj7tPnPdgq8YD1V8odhPW4A=
-true</pre>
+```
+e0804$8FQ4x/ntwEz2ZNu8QRyIQJlAXR+gQkiG3WulLMEq/kioVtaFiKE7sZDGgtmqUmwB8OE+f7Eagux9QXG478unLw==$RS1Bz5Uf30dWGxc+vtlkjj7tPnPdgq8YD1V8odhPW4A=
+true
+```
+
 
 ### USING BCRYPT {#h3-6-using-bcrypt}
 
@@ -177,7 +201,10 @@ If Argon2id and scrypt are not available, another strong choice is [BCrypt](http
 
 You can use the `spring-security-crypto` library in a similar way as before. The default workload is set to 10, but we set it to 14 in the following example (a reasonable number in 2022).
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(14);</pre>
+```java
+BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(14);
+```
+
 
 The higher you set the work factor, the stronger the hash will be, but it will also take more CPU resources (and time!) to finish running. On my local machine, setting running BCrypt with a workload of 10 costs me about 89ms on average. For a workload of 14, it is 1033ms on average. That is almost 12x as long. This is by no means an accurate benchmark, but it does show the impact of an increased work factor.
 

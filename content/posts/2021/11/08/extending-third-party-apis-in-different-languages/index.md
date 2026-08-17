@@ -36,7 +36,8 @@ JavaScript is an interpreted dynamically- and weakly-typed language, which runs 
 
 You can easily add properties, either state or behavior, to a prototype.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="js">Object.defineProperty(String.prototype, "toTitleCase", {
+```javascript
+Object.defineProperty(String.prototype, "toTitleCase", {
     value: function toTitleCase() {
         return this.replace(/\w\S*/g, function(word) {
             return word.charAt(0).toUpperCase() + word.substr(1).toLowerCase();
@@ -44,7 +45,9 @@ You can easily add properties, either state or behavior, to a prototype.
     }
 });
 
-console.debug("OncE upOn a tImE in thE WEst".toTitleCase());</pre>
+console.debug("OncE upOn a tImE in thE WEst".toTitleCase());
+```
+
 
 Note that objects created from this prototype *after* the call to `defineProperty` will offer the new property; objects created *before* won't.
 
@@ -60,13 +63,16 @@ Adding methods or attributes to an existing class is pretty standard in the Ruby
 
 Here's the code for the second approach:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="ruby">class String
+```ruby
+class String
   def to_camel_case()
     return self.gsub(/\w\S*/) {|word| word.capitalize()}
   end
 end
 
-puts "OncE upOn a tImE in thE WEst".to_camel_case()</pre>
+puts "OncE upOn a tImE in thE WEst".to_camel_case()
+```
+
 
 Python {#h2-2-python}
 ---------------------
@@ -75,7 +81,8 @@ Python is an interpreted dynamically- and strongly-typed language. I guess every
 
 Python allows you to add functions to existing types - with limitations. [Let's try](https://www.online-python.com/yv52IK4Mux) with the `str` built-in type:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="python">import re
+```python
+import re
 
 def to_title_case(string):
     return re.sub(
@@ -85,18 +92,23 @@ def to_title_case(string):
 
 setattr(str, 'to_title_case', to_title_case)
 
-print("OncE upOn a tImE in thE WEst".to_title_case())</pre>
+print("OncE upOn a tImE in thE WEst".to_title_case())
+```
+
 
 Unfortunately, the above code fails during execution:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">Traceback (most recent call last):
-  File "&lt;string&gt;", line 9, in &lt;module&gt;
+```
+Traceback (most recent call last):
+  File "<string>", line 9, in <module>
 TypeError: can't set attributes of built-in/extension type 'str'
-</pre>
+```
+
 
 Because `str` is a *built-in* type, we cannot dynamically add behavior. We can update [the code](https://www.online-python.com/w4G0We7EYh) to cope with this limitation:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="python">import re
+```python
+import re
 
 def to_title_case(string):
     return re.sub(
@@ -109,7 +121,9 @@ class String(str):
 
 setattr(String, 'to_title_case', to_title_case)
 
-print(String("OncE upOn a tImE in thE WEst").to_title_case())</pre>
+print(String("OncE upOn a tImE in thE WEst").to_title_case())
+```
+
 
 It now becomes possible to extend `String`, because it's a class we have created. Of course, it defeats the initial purpose: we had to extend `str` in the first place. Hence, it works with third-party libraries.
 
@@ -122,18 +136,24 @@ Java is a compiled-statically and strongly-typed language that runs on the JVM. 
 
 The workaround is to use `static` methods. If you've been a Java developer for a long time, I believe you probably have seen custom `StringUtils` and `DateUtils` classes early in your career. These classes look something like this:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public class StringUtils {
+```java
+public class StringUtils {
 
     public static String toCamelCase(String string) {
         // The implementation is not relevant
     }
 
     // Other string transformations here
-}</pre>
+}
+```
+
 
 I hope that by now, using Apache Commons and Guava have replaced all those classes:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">System.out.println(WordUtils.capitalize("OncE upOn a tImE in thE WEst"));</pre>
+```java
+System.out.println(WordUtils.capitalize("OncE upOn a tImE in thE WEst"));
+```
+
 
 In both cases, *the usage of static methods prevents fluent API usage* and thus impairs developer experience. But other JVM languages do offer exciting alternatives.
 
@@ -142,26 +162,32 @@ Scala {#h2-4-scala}
 
 Like Java, Scala is a compiled, statically- and strongly-typed language that runs on the JVM. It was initially designed to bridge between Object-Oriented Programming and Functional Programming. Scala provides many powerful features. Among them, *implicit* classes allow adding behavior and state to an existing class. [Here](https://scastie.scala-lang.org/razUhHKRRcqamn9qlA0mhw) is how to add the `toCamelCase()` function to `String`:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="scala">import Utils.StringExtensions
+```scala
+import Utils.StringExtensions
 
 object Utils {
   implicit class StringExtensions(thiz: String) {
     def toCamelCase() = "\\w\\S*".r.replaceAllIn(
       thiz,
-      { it =&gt; it.group(0).toLowerCase().capitalize }
+      { it => it.group(0).toLowerCase().capitalize }
     )
   }
 }
 
-println("OncE upOn a tImE in thE WEst".toCamelCase())</pre>
+println("OncE upOn a tImE in thE WEst".toCamelCase())
+```
+
 
 Though I dabbled a bit in Scala, I was never a fan. As a developer, I've always stated that a big part of my job was to make *implicit* requirements *explicit* . Thus, I frowned upon the on-purpose usage of the `implicit` keyword. Interestingly enough, it seems that I was not alone. Scala 3 keeps the [same capability](https://scastie.scala-lang.org/18abIFMKSvWiz8gpbVx2gg) using a more appropriate syntax:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="scala">extension(thiz: String)
+```scala
+extension(thiz: String)
   def toCamelCase() = "\\w\\S*".r.replaceAllIn(
     thiz,
-    { it =&gt; it.group(0).toLowerCase().capitalize }
-  )</pre>
+    { it => it.group(0).toLowerCase().capitalize }
+  )
+```
+
 
 Note that the *bytecode* is somewhat similar to Java's *static* method approach in both cases. Yet, API usage is fluent, as you can chain method calls one after another.
 
@@ -172,17 +198,20 @@ Like Java and Scala, Kotlin is a compiled, statically- and strongly-typed langua
 
 My opinion is that Scala is more powerful than Kotlin, but the trade-off is an additional cognitive load. On the opposite, Kotlin has a lightweight approach, more pragmatic. Here's the [Kotlin version](https://pl.kotl.in/b67HIw06t):
 
-<pre class="EnlighterJSRAW" data-enlighter-language="kotlin">fun String.toCamelCase() = "\\w\\S*"
+```kotlin
+fun String.toCamelCase() = "\\w\\S*"
     .toRegex()
     .replace(this) {
         it.groups[0]
             ?.value
             ?.lowercase()
-            ?.replaceFirstChar { char -&gt; char.titlecase(Locale.getDefault()) }
+            ?.replaceFirstChar { char -> char.titlecase(Locale.getDefault()) }
             ?: this
     }
 
-println("OncE upOn a tImE in thE WEst".toCamelCase())</pre>
+println("OncE upOn a tImE in thE WEst".toCamelCase())
+```
+
 
 If you wonder why the Kotlin code is more verbose than the Scala one despite my earlier claim, here are two reasons:
 
@@ -196,26 +225,29 @@ Last but not least in our list, Rust is a compiled language, statically and stro
 
 Interestingly enough, though statically-typed, Rust also allows extending third-party APIs as [the following code shows](https://play.rust-lang.org/?version=stable&amp;mode=debug&amp;edition=2021&amp;gist=8d1daecd7bd46d6352c131cbf8186839):
 
-<pre class="EnlighterJSRAW" data-enlighter-language="rust">trait StringExt {                                                  // 1
-    fn to_camel_case(&amp;self) -&gt; String;
+```rust
+trait StringExt {                                                  // 1
+    fn to_camel_case(&self) -> String;
 }
 
 impl StringExt for str {                                           // 2
-    fn to_camel_case(&amp;self) -&gt; String {
+    fn to_camel_case(&self) -> String {
         let re = Regex::new("\\w\\S*").unwrap();
         re.captures_iter(self)
             .map(|capture| {
                 let word = capture.get(0).unwrap().as_str();
-                let first = &amp;word[0..1].to_uppercase();
-                let rest = &amp;word[1..].to_lowercase();
+                let first = &word[0..1].to_uppercase();
+                let rest = &word[1..].to_lowercase();
                 first.to_owned() + rest
             })
-            .collect::&lt;Vec&lt;String&gt;&gt;()
+            .collect::<Vec<String>>()
             .join(" ")
     }
 }
 
-println!("{}", "OncE upOn a tImE in thE WEst".to_camel_case());</pre>
+println!("{}", "OncE upOn a tImE in thE WEst".to_camel_case());
+```
+
 
 1. Create the abstraction to hold the function reference. It's known as a *trait* in Rust.
 2. Implement the trait for an existing structure.

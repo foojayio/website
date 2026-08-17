@@ -37,7 +37,8 @@ What's the risk? {#h2-0-what-s-the-risk}
 
 For example, consider an organization with a security policy requiring 256-bit encryption only. Let's say they configure a Spring Boot application as follows:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml">spring:
+```yaml
+spring:
   ssl:
     bundle:
       jks:
@@ -48,19 +49,25 @@ For example, consider an organization with a security policy requiring 256-bit e
               - TLS_AES_256_GCM_SHA384
               - TLS_CHACHA20_POLY1305_SHA256
             enabled-protocols:
-              - TLSv1.3</pre>
+              - TLSv1.3
+```
+
 
 Before the Tomcat change, the server only offered the two ciphers listed above and clients had to negotiate 256-bit encryption or the handshake failed.
 
 After upgrading to an affected Tomcat version, both ciphers are removed from the *explicit* configuration set by the administrator. The only indication of this behavior is in the Tomcat log messages.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash">2026-02-22 09:05:06.426 WARN 58919 --- [ main] o.apache.tomcat.util.net.SSLHostConfig : The TLS 1.3 cipher suite [TLS_AES_256_GCM_SHA384] included in the TLS 1.2 and below ciphers list will be ignored<br>2026-02-22 09:05:06.426 WARN 58919 --- [ main] o.apache.tomcat.util.net.SSLHostConfig : The TLS 1.3 cipher suite [TLS_CHACHA20_POLY1305_SHA256] included in the TLS 1.2 and below ciphers list will be ignored</pre>
+```bash
+2026-02-22 09:05:06.426 WARN 58919 --- [ main] o.apache.tomcat.util.net.SSLHostConfig : The TLS 1.3 cipher suite [TLS_AES_256_GCM_SHA384] included in the TLS 1.2 and below ciphers list will be ignored<br>2026-02-22 09:05:06.426 WARN 58919 --- [ main] o.apache.tomcat.util.net.SSLHostConfig : The TLS 1.3 cipher suite [TLS_CHACHA20_POLY1305_SHA256] included in the TLS 1.2 and below ciphers list will be ignored
+```
+
 
 In this scenario, this does not mean those ciphers are no longer offered. It does mean that the intended cipher restriction is now gone. As a result, Tomcat reverts to offering all default TLSv1.3 ciphers, which includes the 128-bit cipher that was intentionally left out.
 
 An nmap scan of the broken server reveals the problem:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash">$ nmap --script ssl-enum-ciphers -p 8443 localhost
+```bash
+$ nmap --script ssl-enum-ciphers -p 8443 localhost
 Starting Nmap 7.98 ( https://nmap.org ) at 2026-02-22 09:07 -0500
 Nmap scan report for localhost (127.0.0.1)
 Host is up (0.00011s latency).
@@ -78,7 +85,8 @@ PORT     STATE SERVICE
 |_  least strength: A
 
 Nmap done: 1 IP address (1 host up) scanned in 0.08 seconds
-</pre>
+```
+
 
 Despite the explicit exclusion of the `TLS_AES_128_GCM_SHA256` (128-bit) cipher to align with our fictitious organization's security policy, all three default TLSv1.3 ciphers appear as active.
 
@@ -102,11 +110,14 @@ Spring Boot's OSS releases `v3.5.11` and `v4.0.3` introduced a patch that correc
 
 After upgrading, you can verify the fix is working by checking which ciphers your server offers.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash"># Check TLSv1.3 negotiation
-openssl s_client -connect localhost:8443 -tls1_3 &lt;/dev/null 2&gt;&amp;1 | grep "Cipher is"
+```bash
+# Check TLSv1.3 negotiation
+openssl s_client -connect localhost:8443 -tls1_3 </dev/null 2>&1 | grep "Cipher is"
 
 # Get a full list of Ciphers offered by the server
-nmap --script ssl-enum-ciphers -p 8443 localhost</pre>
+nmap --script ssl-enum-ciphers -p 8443 localhost
+```
+
 
 Once the fix is applied, only the explicitly configured ciphers should be offered by the server.
 

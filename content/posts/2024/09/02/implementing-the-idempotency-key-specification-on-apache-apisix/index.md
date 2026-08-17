@@ -45,7 +45,8 @@ I arbitrarily chose Redis, as it's pretty widespread **and** the client is alrea
 
 The local infrastructure is the following:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml">services:
+```yaml
+services:
   apisix:
     image: apache/apisix:3.9.0-debian
     volumes:
@@ -57,7 +58,9 @@ The local infrastructure is the following:
   redis:
     image: redis/redis-stack:7.2.0-v9
     ports:
-      - "8001:8001"                                          #3</pre>
+      - "8001:8001"                                          #3
+```
+
 
 1. Static route configuration
 2. Path to our future plugin
@@ -65,7 +68,8 @@ The local infrastructure is the following:
 
 The APISIX configuration is the following:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml">deployment:
+```yaml
+deployment:
   role: data_plane
   role_data_plane:
     config_provider: yaml                                    #1
@@ -78,7 +82,9 @@ plugins:
 
 plugin_attr:                                                 #4
   idempotency:
-    host: redis                                              #5</pre>
+    host: redis                                              #5
+```
+
 
 1. Configure APISIX for static routes configuration
 2. Configure the location of our plugin
@@ -88,14 +94,17 @@ plugin_attr:                                                 #4
 
 Finally, we declare our single route:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml">routes:
+```yaml
+routes:
   - uri: /*
     plugins:
       idempotency: ~                                         #1
     upstream:
       nodes:
         "httpbin.org:80": 1                                  #2
-#END                                                         #3</pre>
+#END                                                         #3
+```
+
 
 1. Declare the plugin that we are going to create
 2. httpbin is a useful upstream as we can try different URIs and methods
@@ -108,7 +117,8 @@ Laying out the plugin {#h2-1-laying-out-the-plugin}
 
 The foundations of an Apache APISIX plugin are pretty basic:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml">local plugin_name = "idempotency"
+```yaml
+local plugin_name = "idempotency"
 
 local _M = {
     version = 1.0,
@@ -117,11 +127,14 @@ local _M = {
     name = plugin_name,
 }
 
-return _M</pre>
+return _M
+```
+
 
 The next step is configuration, *e.g.* Redis host and port. For starters, we shall offer a single Redis configuration across all routes. That's the idea behind the `plugin_attr` section in the `config.yaml` file: common configuration. Let's flesh out our plugin:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="lua">local core = require("apisix.core")
+```lua
+local core = require("apisix.core")
 local plugin = require("apisix.plugin")
 
 local attr_schema = {                                       --1
@@ -147,7 +160,9 @@ function _M.init()
         core.log.error("Failed to check the plugin_attr[", plugin_name, "]", ": ", err)
         return false, err
     end
-end</pre>
+end
+```
+
 
 1. Define the shape of the configuration
 2. Check the configuration is valid
@@ -156,7 +171,8 @@ Because I defined default values in the plugin, I can override only the `host` t
 
 Next, I need to create the Redis client. Note that the platform prevents me from connecting in any phase after the rewrite/access section. Hence, I'll create it in the `init()` method and keep it until the end.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="lua">local redis_new = require("resty.redis").new                --1
+```lua
+local redis_new = require("resty.redis").new                --1
 
 function _M.init()
 
@@ -169,7 +185,9 @@ function _M.init()
         core.log.error("Failed to connect to Redis: ", err)
         return false, err
     end
-end</pre>
+end
+```
+
 
 1. Reference the `new` function of the OpenResty Redis module
 2. Call it to get an instance
@@ -183,7 +201,8 @@ In my previous software engineer life, I usually implemented the nominal path fi
 
 The pseudo-algorithm on the nominal path looks like the following:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">DO extract idempotency key from request
+```
+DO extract idempotency key from request
 DO look up value from Redis
 IF value doesn't exist
   DO set key in Redis with empty value
@@ -191,13 +210,16 @@ ELSE
   RETURN cached response
 DO forward to upstream
 DO store response in Redis
-RETURN response</pre>
+RETURN response
+```
+
 
 We need to map the logic to the phase I mentioned above. Two phases are available before the upstream, *rewrite* and *access* ; three after, *header_filter* , *body_filter* and *log* . The *access* phase seemed obvious for work before, but I needed to figure out between the three others. I randomly chose the *body_filter*, but I'm more than willing to listen to sensible arguments for other phases.
 
 Note that I removed logs to make the code more readable. Error and informational logs are necessary to ease debugging production issues.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="lua">function _M.access(conf, ctx)
+```lua
+function _M.access(conf, ctx)
     local idempotency_key = core.request.header(ctx, "Idempotency-Key") --1
     local redis_key = "idempotency#" .. idempotency_key     --2
     local resp, err = redis:hgetall(redis_key)              --3
@@ -220,7 +242,9 @@ Note that I removed logs to make the code more readable. Error and informational
         end
         return core.response.exit(status_code, body)        --8
     end
-end</pre>
+end
+```
+
 
 1. Extract the idempotency key from the request
 2. Prefix the key so we avoid potential collisions
@@ -231,7 +255,8 @@ end</pre>
 7. Reconstruct the response
 8. Return the reconstructed response to the client. Note the `return` statement: APISIX skips the later lifecycle phases
 
-<pre class="EnlighterJSRAW" data-enlighter-language="lua">function _M.body_filter(conf, ctx)
+```lua
+function _M.body_filter(conf, ctx)
     local idempotency_key = core.request.header(ctx, "Idempotency-Key") --1
     local redis_key = "idempotency#" .. idempotency_key
     if core.response then
@@ -246,7 +271,9 @@ end</pre>
             return
         end
     end
-end</pre>
+end
+```
+
 
 1. xtract the idempotency key from the request
 2. Arrange the different elements of a response in a Lua table
@@ -256,9 +283,12 @@ Tests reveal that it works as expected.
 
 Try:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="shell">curl -i -X POST -H 'Idempotency-Key: A' localhost:9080/response-headers\?freeform=hello
+```bash
+curl -i -X POST -H 'Idempotency-Key: A' localhost:9080/response-headers\?freeform=hello
 curl -i -H 'Idempotency-Key: B' localhost:9080/status/250
-curl -i -H 'Idempotency-Key: C' -H 'foo: bar'  localhost:9080/status/250</pre>
+curl -i -H 'Idempotency-Key: C' -H 'foo: bar'  localhost:9080/status/250
+```
+
 
 Also, try to reuse a mismatched idempotency key, *e.g.* , `A`, for the third request. As we haven't implemented any error management yet, you'll get the cached response for another request. It's time to up our game.
 
@@ -273,12 +303,15 @@ The specification defines several error paths:
 
 Let's implement them one by one. First, let's check that the request has an idempotency key. Note that we can configure the plugin on a per-route basis, so if the route includes the plugin, we can conclude that it's mandatory.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="lua">function _M.access(conf, ctx)
+```lua
+function _M.access(conf, ctx)
     local idempotency_key = core.request.header(ctx, "Idempotency-Key")
     if not idempotency_key then
         return core.response.exit(400, "This operation is idempotent and it requires correct usage of Idempotency Key")
     end
-    -- ...</pre>
+    -- ...
+```
+
 
 Just return the appropriate 400 if the key is missing. That one was easy.
 
@@ -286,7 +319,8 @@ Checking the reuse of an existing key for a different request is slightly more i
 
 There are several problems to solve. First, I didn't find an existing API to hash the `core.request` object like there is in other languages I'm more familiar with, *e.g.* , Java's `Object.hash()`. I decided to encode the object in JSON and hash the string. However, the existing `core.request` has sub-elements that cannot be converted to JSON. I had to extract the parts mentioned above and convert the table.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="lua">local function hash_request(request, ctx)
+```lua
+local function hash_request(request, ctx)
     local request = {                                       --1
         method = core.request.get_method(),
         uri = ctx.var.request_uri,
@@ -295,7 +329,9 @@ There are several problems to solve. First, I didn't find an existing API to has
     }
     local json = core.json.stably_encode(request)           --2
     return ngx.encode_base64(json)                          --3
-end</pre>
+end
+```
+
 
 1. Create a table with only the relevant parts
 2. The `cjson` library produces JSON whose members might be sorted differently across several calls. Hence, it results in different hashes. The `core.json.stably_encode` fixes that issue.
@@ -303,7 +339,8 @@ end</pre>
 
 Then, instead of storing a boolean when receiving the request, we store the resulting hash instead.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="lua">local hash = hash_request(core.request, ctx)
+```lua
+local hash = hash_request(core.request, ctx)
 if next(resp) == nil then
     core.log.warn("No key found in Redis for Idempotency-Key, set it: ", redis_key)
     local resp, err = redis:hset(redis_key, "request", hash)
@@ -311,15 +348,20 @@ if next(resp) == nil then
         core.log.error("Failed to set data in Redis: ", err)
         return
     end
-then -- ...</pre>
+then -- ...
+```
+
 
 We read the hash stored under the idempotency key on the other branch. If they don't match, we exit with the relevant error code:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="lua">local data = normalize_hgetall_result(resp)
+```lua
+local data = normalize_hgetall_result(resp)
 local stored_hash = data["request"]
 if hash ~= stored_hash then
     return core.response.exit(422, "This operation is idempotent and it requires correct usage of Idempotency Key. Idempotency Key MUST not be reused across different payloads of this operation.")
-end</pre>
+end
+```
+
 
 The final error management happens just afterward. Imagine the following scenario:
 
@@ -333,9 +375,12 @@ The upstream didn't finish processing the request; hence, the first request hasn
 
 We append the following code to the above snippet:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="lua">if not data["response"] then
+```lua
+if not data["response"] then
     return core.response.exit(409, " request with the same Idempotency-Key for the same operation is being processed or is outstanding.")
-end</pre>
+end
+```
+
 
 That's it.
 
@@ -357,6 +402,6 @@ The complete source code for this post can be found on [GitHub](https://github.c
 * [Plugin Develop - APISIX website](https://apisix.apache.org/docs/apisix/plugin-develop/)
 * [How to Build an Apache APISIX Plugin From 0 to 1](https://api7.ai/blog/how-to-build-an-apache-apisix-plugin-from-0-to-1)
 
-*** ** * ** ***
+
 
 *Originally published at [A Java Geek](https://blog.frankel.ch/implement-idempotency-key-apisix/) on April 7^th^, 2024*

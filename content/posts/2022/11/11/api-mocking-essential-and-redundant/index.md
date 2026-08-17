@@ -46,17 +46,23 @@ This limits the scope of the test to a very narrow, hard-coded set.
 
 It relies on internal implementation details such as the dependencies to implement the test, that means the test will probably fail if the implementation changes even though the contract doesn't change e.g. let's look at an example:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public int countUserCities() {
+```java
+public int countUserCities() {
     return db.executeInt(“select count(“city”) from users”);
-}</pre>
+}
+```
+
 
 We can mock the db function executeInt since the returned result will be bad.
 
 But this will break if we change the original API call to something like this:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public int countUserCities() {
+```java
+public int countUserCities() {
     return db.count(“city”,”users”);
-}</pre>
+}
+```
+
 
 This covers nothing. A far better approach is to add fake data to a temporary database which is exceedingly easy to do thanks to projects such as [Testcontainers](https://www.testcontainers.org/).
 

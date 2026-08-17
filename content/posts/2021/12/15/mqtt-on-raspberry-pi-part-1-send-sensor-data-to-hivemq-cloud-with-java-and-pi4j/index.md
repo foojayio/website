@@ -64,10 +64,13 @@ When you start with a new Raspberry Pi, you will need to "burn" an Operating Sys
 
 And what's even more important for us, Java is also pre-installed! When you open the terminal and check the version with `java -versions` you will get this result (depending on the build of Raspberry Pi OS):
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ java -version
+```
+$ java -version
 openjdk version "11.0.12" 2021-07-20
 OpenJDK Runtime Environment (build 11.0.12+7-post-Raspbian-2deb10u1)
-OpenJDK Server VM (build 11.0.12+7-post-Raspbian-2deb10u1, mixed mode)</pre>
+OpenJDK Server VM (build 11.0.12+7-post-Raspbian-2deb10u1, mixed mode)
+```
+
 
 This means we are fully prepared to develop and run Java applications on our Raspberry Pi!
 
@@ -128,7 +131,8 @@ By using multiple plugins the following steps are taken:
 
 To make the code easy to understand, each functionality has been separated into its own class. `HiveMqSender.java` is the main class where everything is initialized and the application started.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public class HiveMqSender {
+```
+public class HiveMqSender {
 
     // Logger helper provided by Pi4J
     private static Console console;
@@ -150,7 +154,9 @@ To make the code easy to understand, each functionality has been separated into 
             }
         }
     }
-}</pre>
+}
+```
+
 
 #### Publishing to HiveMQ topics
 
@@ -160,7 +166,8 @@ We use an MQTT version 5 client which provides multiple improvements compared to
 
 Thanks to the builder-method we can very easily configure the client and connect. As HiveMQ Cloud requires a secure connection we need to use `sslWithDefaulftConfig()` and apply the authentication in the connection.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public class HiveMqManager {
+```
+public class HiveMqManager {
 
     private static final String HIVEMQ_SERVER = "ID_OF_YOUR_INSTANCE.s1.eu.hivemq.cloud";
     private static final String HIVEMQ_USER = "YOUR_USERNAME";
@@ -186,7 +193,7 @@ Thanks to the builder-method we can very easily configure the client and connect
                 .password(HIVEMQ_PASSWORD.getBytes())
                 .applySimpleAuth()
                 .send()
-                .whenComplete((connAck, throwable) -&gt; {
+                .whenComplete((connAck, throwable) -> {
                     if (throwable != null) {
                         console.println("Could not connect to HiveMQ: " + throwable.getMessage());
                     } else {
@@ -194,30 +201,36 @@ Thanks to the builder-method we can very easily configure the client and connect
                     }
                 });
     }
-}</pre>
+}
+```
+
 
 To make it easy for our sensors to send data, we extend this class with a `sendMessage` method. To see if our messages published successfully, or what went wrong, we use the `whenComplete` method.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public void sendMessage(String topic, String message) {
+```
+public void sendMessage(String topic, String message) {
     client.publishWith()
             .topic(topic)
             .payload(message.getBytes())
             .qos(MqttQos.EXACTLY_ONCE)
             .send()
-            .whenComplete((mqtt5Publish, throwable) -&gt; {
+            .whenComplete((mqtt5Publish, throwable) -> {
                 if (throwable != null) {
                     console.println("Error while sending message: " + throwable.getMessage());
                 } else {
                     console.println("Message sent to '" + topic + "': " + message);
                 }
             });
-}</pre>
+}
+```
+
 
 #### Reading data from the sensors
 
 All sensors are initialized in the `SensorsManager.java` class. Each sensor is implemented as a `Component`. Some of them are read with an interval with the `SendMeasurements` started by a `TimerTask`. Others send changes through listeners, for instance `onNoise` of the `SoundSensor`.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">import be.webtechie.hivemqsender.hivemq.HiveMqManager;
+```
+import be.webtechie.hivemqsender.hivemq.HiveMqManager;
 import be.webtechie.hivemqsender.model.Sensor;
 import be.webtechie.hivemqsender.pi4j.components.*;
 import com.pi4j.context.Context;
@@ -241,21 +254,21 @@ public class SensorManager {
         Context pi4j = CrowPiPlatform.buildNewContext();
 
         PirMotionSensorComponent motionSensor = new PirMotionSensorComponent(console, pi4j);
-        motionSensor.onMovement(() -&gt; hiveMqManager.sendMessage(TOPIC_MOTION, VALUE_TRUE));
-        motionSensor.onStillstand(() -&gt; hiveMqManager.sendMessage(TOPIC_MOTION, VALUE_FALSE));
+        motionSensor.onMovement(() -> hiveMqManager.sendMessage(TOPIC_MOTION, VALUE_TRUE));
+        motionSensor.onStillstand(() -> hiveMqManager.sendMessage(TOPIC_MOTION, VALUE_FALSE));
 
         SoundSensorComponent soundSensor = new SoundSensorComponent(console, pi4j);
-        soundSensor.onNoise(() -&gt; hiveMqManager.sendMessage(TOPIC_NOISE, VALUE_TRUE));
-        soundSensor.onSilence(() -&gt; hiveMqManager.sendMessage(TOPIC_NOISE, VALUE_FALSE));
+        soundSensor.onNoise(() -> hiveMqManager.sendMessage(TOPIC_NOISE, VALUE_TRUE));
+        soundSensor.onSilence(() -> hiveMqManager.sendMessage(TOPIC_NOISE, VALUE_FALSE));
 
         TouchSensorComponent touchSensor = new TouchSensorComponent(console, pi4j);
-        touchSensor.onTouch(() -&gt; hiveMqManager.sendMessage(TOPIC_TOUCH, VALUE_TRUE));
-        touchSensor.onRelease(() -&gt; hiveMqManager.sendMessage(TOPIC_TOUCH, VALUE_FALSE));
+        touchSensor.onTouch(() -> hiveMqManager.sendMessage(TOPIC_TOUCH, VALUE_TRUE));
+        touchSensor.onRelease(() -> hiveMqManager.sendMessage(TOPIC_TOUCH, VALUE_FALSE));
 
         TiltSensorComponent tiltSensor = new TiltSensorComponent(console, pi4j);
-        tiltSensor.onTiltLeft(() -&gt; hiveMqManager.sendMessage(TOPIC_TILT, "{\"value\":\"left\"}"));
-        tiltSensor.onTiltRight(() -&gt; hiveMqManager.sendMessage(TOPIC_TILT, "{\"value\":\"right\"}"));
-        tiltSensor.onShake(() -&gt; hiveMqManager.sendMessage(TOPIC_TILT, "{\"value\":\"shaking\"}"));
+        tiltSensor.onTiltLeft(() -> hiveMqManager.sendMessage(TOPIC_TILT, "{\"value\":\"left\"}"));
+        tiltSensor.onTiltRight(() -> hiveMqManager.sendMessage(TOPIC_TILT, "{\"value\":\"right\"}"));
+        tiltSensor.onShake(() -> hiveMqManager.sendMessage(TOPIC_TILT, "{\"value\":\"shaking\"}"));
 
         HumiTempComponent dht11 = new HumiTempComponent(console, pi4j);
         LightSensorComponent lightSensor = new LightSensorComponent(console, pi4j);
@@ -289,13 +302,16 @@ public class SensorManager {
             hiveMqManager.sendMessage(TOPIC_SENSORS, sensor.toJson());
         }
     }
-}</pre>
+}
+```
+
 
 #### Configuration of Pi4J
 
 As you can see in the previous class, the Pi4J Context is initialized with `CrowPiPlatform.buildNewContext()`. Pi4J uses a plugin structure so it is easy to maintain and extend with additional functionality. In most cases, we can rely on `Pi4J.newAutoContext()` for the initialization, but because we explicitly need the functionality of the PiGpio plugin, we use a helper class to make sure Pi4J loads the correct plugins. PiGpio is the native library (written in C) which is used under-the-hood by Pi4J to handle the GPIOs.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public static Context buildNewContext() {
+```
+public static Context buildNewContext() {
     // Initialize PiGPIO
     var piGpio = PiGpio.newNativeInstance();
 
@@ -312,7 +328,9 @@ As you can see in the previous class, the Pi4J Context is initialized with `Crow
                     PiGpioSpiProvider.newInstance(piGpio)
             )
             .build();
-}</pre>
+}
+```
+
 
 #### Sensor code
 
@@ -322,7 +340,8 @@ In this post we take a look at one of the components: the sound sensor. This is 
 
 The pin is initialized with the following part of the code:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">protected DigitalInputConfig buildDigitalInputConfig(Context pi4j, int address, long debounce) {
+```
+protected DigitalInputConfig buildDigitalInputConfig(Context pi4j, int address, long debounce) {
     return DigitalInput.newConfigBuilder(pi4j)
             .address(address)
             .id("BCM" + address)
@@ -330,7 +349,9 @@ The pin is initialized with the following part of the code:
             .pull(PullResistance.PULL_UP)
             .debounce(debounce)
             .build();
-}</pre>
+}
+```
+
 
 Pi4J also provides a builder-pattern to configure the GPIOs. For this sensor which is a `DigitalInput`, we need to configure:
 
@@ -358,23 +379,29 @@ You can develop a Java project on your PC and copy the jar-files to the Raspberr
 
 If you just want to run this example application, the easiest approach is probably to install Maven, download the sources and build and run on the Raspberry Pi itself. If you want to take this quick-start, you can clone the code and run it in a few lines:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ sudo apt install maven
+```
+$ sudo apt install maven
 $ git clone https://github.com/FDelporte/HiveMQ-examples.git
 $ cd HiveMQ-examples/java-to-hivemq
 $ mvn package
 $ cd target/distribution
-$ sudo bash run.sh</pre>
+$ sudo bash run.sh
+```
+
 
 After some startup logging, you will see the scheduled messages and events of different sensors, e.g. below the motion and noise sensors events.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">[RxComputationThreadPool-1] INFO com.pi4j.util.Console - Message sent to 'crowpi/sensors': {"temperature":12.0,"humidity":154.0,"light":170.0,"distance":159.57}
+```
+[RxComputationThreadPool-1] INFO com.pi4j.util.Console - Message sent to 'crowpi/sensors': {"temperature":12.0,"humidity":154.0,"light":170.0,"distance":159.57}
 [RxComputationThreadPool-2] INFO com.pi4j.util.Console - Message sent to 'crowpi/sensors': {"temperature":12.0,"humidity":154.0,"light":169.16666666666669,"distance":168.88}
 [RxComputationThreadPool-3] INFO com.pi4j.util.Console - Message sent to 'crowpi/motion': {"value":true}
 [RxComputationThreadPool-4] INFO com.pi4j.util.Console - Message sent to 'crowpi/sensors': {"temperature":12.0,"humidity":154.0,"light":169.16666666666669,"distance":167.44}
 [RxComputationThreadPool-1] INFO com.pi4j.util.Console - Message sent to 'crowpi/motion': {"value":false}
 [RxComputationThreadPool-2] INFO com.pi4j.util.Console - Message sent to 'crowpi/sensors': {"temperature":12.0,"humidity":154.0,"light":163.33333333333334,"distance":167.77}
 [RxComputationThreadPool-3] INFO com.pi4j.util.Console - Message sent to 'crowpi/noise': {"value":false}
-[RxComputationThreadPool-4] INFO com.pi4j.util.Console - Message sent to 'crowpi/noise': {"value":true}</pre>
+[RxComputationThreadPool-4] INFO com.pi4j.util.Console - Message sent to 'crowpi/noise': {"value":true}
+```
+
 
 ### WebSocket test page {#h3-10-websocket-test-page}
 
@@ -395,6 +422,6 @@ Thanks to the HiveMQ Cloud service, we can publish the data of up to 100 devices
 
 In the next article in this series, we are going to visualize the data of our sensors in a dashboard. And of course, again with Java (and JavaFX) on a Raspberry Pi!
 
-*** ** * ** ***
+
 
 *This series has been written on request of HiveMQ and was originally published on the [HiveMQ Blog](https://www.hivemq.com/blog/mqtt-raspberrypi-part01-sensor-data-hivemqcloud-java-pi4j/).*

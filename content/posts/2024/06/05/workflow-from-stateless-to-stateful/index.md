@@ -101,7 +101,7 @@ Code needs to account for different versions of existing process instances for r
 * [Camunda](https://camunda.com/)
 * [My evaluation of the Scaleway Cloud provider](https://blog.frankel.ch/evaluation-scaleway/)
 
-*** ** * ** ***
+
 
 *Originally published at [A Java Geek](https://blog.frankel.ch/worfklow-stateless-stateful/) on May 20^th^, 2024*
 

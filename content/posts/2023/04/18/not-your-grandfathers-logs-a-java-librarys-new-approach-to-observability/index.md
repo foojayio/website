@@ -47,7 +47,8 @@ Let's take a look at a few examples! Here is how I originally imagined the futur
 
 While not quite in the same direction, here is how one might define observability in code using Micrometer:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">@PostMapping("/pets/new")
+```java
+@PostMapping("/pets/new")
 public String processCreationForm(Owner owner, @Valid Pet pet, BindingResult result, ModelMap model) {
 
   Observation observation = Observation.createNotStarted("create_pet", registry).start();
@@ -73,7 +74,9 @@ public String processCreationForm(Owner owner, @Valid Pet pet, BindingResult res
     observation.stop();
   }
 
-}</pre>
+}
+```
+
 
 Let's dissect, what we see in the example above:
 
@@ -92,10 +95,11 @@ Below you can see the trace results captured via [Jaeger](https://www.jaegertrac
 
 As a developer, it shifts the focus to intent, artifacts, and events rather than worrying about the underlying technologies and boilerplate. And if the above example is too verbose to your liking (I like the explicitness), there is also a slicker DSL-like interface for accomplishing the same result:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">@PostMapping("/pets/{petId}/edit")
+```java
+@PostMapping("/pets/{petId}/edit")
 public String processUpdateForm(@Valid Pet pet, BindingResult result, Owner owner, ModelMap model) {
 
-  return Observation.createNotStarted("update ", registry).observe(()-&gt;{
+  return Observation.createNotStarted("update ", registry).observe(()->{
 
     if (result.hasErrors()) {
       model.put("pet", pet);
@@ -108,7 +112,9 @@ public String processUpdateForm(@Valid Pet pet, BindingResult result, Owner owne
 
   });
 
-}</pre>
+}
+```
+
 
 #### A facade for observability
 
@@ -118,7 +124,8 @@ As such, its focus is more on defining the vocabulary, conventions, and interfac
 
 Here is an example of how I've set Micrometer to work with OTEL (you can find the complete code here):
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">@Bean
+```
+@Bean
 public OpenTelemetry getOpenTelemetry() {
     Resource serviceNameResource = Resource.create(Attributes.of(ResourceAttributes.SERVICE_NAME, applicationName));
     // [OTel component] SpanExporter is a component that gets called when a span is finished.
@@ -140,7 +147,9 @@ public OpenTelemetry getOpenTelemetry() {
             .setPropagators(ContextPropagators.create(B3Propagator.injectingSingleHeader()))
             .build();
     return openTelemetrySdk;
-}</pre>
+}
+```
+
 
 In addition, I've learned that since it doesn't use reflection or 'magic' at all.
 

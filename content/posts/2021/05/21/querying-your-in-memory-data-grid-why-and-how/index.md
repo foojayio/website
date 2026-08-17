@@ -59,24 +59,33 @@ The Predicate API is the one that predates all other ways presented in this post
 
 That being said, it's time to query! Here's the code to select all values that match a component's name:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">var entry = Predicates.newPredicateBuilder().getEntryObject();
+```java
+var entry = Predicates.newPredicateBuilder().getEntryObject();
 var predicate = entry.get("component").equal(name);       // 1
-Collection&lt;String&gt; values = map.values(predicate);        // 2</pre>
+Collection<String> values = map.values(predicate);        // 2
+```
+
 
 1. `name` is the component's ID
 2. `values` contains all values that match the component's name
 
 The above is Java code, but [all of our clients](https://docs.hazelcast.com/imdg/latest/clients/hazelcast-clients.html) do offer the Criteria API. Unfortunately, if you run the code as-is, values will be empty even though some values match. The reason is that by default, Hazelcast stores values as bytes arrays. Thus, it has no understanding of the underlying format. The fastest way to fix the issue is to wrap the JSON value into a `HazelcastJsonValue` object. On the "put" side, we need to replace the first line with the second one:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="python">analytics.set(uuid.uuid4(), json.dumps(data)).result()          # 1
-analytics.set(uuid.uuid4(), HazelcastJsonValue(data)).result()</pre>
+```python
+analytics.set(uuid.uuid4(), json.dumps(data)).result()          # 1
+analytics.set(uuid.uuid4(), HazelcastJsonValue(data)).result()
+```
+
 
 1. `data` is a Python `dic`
 
 On the query side, the only change is to update the generic type of the collection:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">Collection&lt;String&gt; values = map.values(predicate);
-Collection&lt;HazelcastJsonValue&gt; values = map.values(predicate);</pre>
+```java
+Collection<String> values = map.values(predicate);
+Collection<HazelcastJsonValue> values = map.values(predicate);
+```
+
 
 ### The Shape of
 ~~Water~~ Stored Data {#h3-2-the-shape-of-water-stored-data}
@@ -88,7 +97,8 @@ Using HazelcastJsonValue means we are still storing data as JSON-formatted Strin
 
 Let's keep the storage part in Python and the query part in Java. Here's the Python code:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="python">from hazelcast.serialization.api import Portable
+```python
+from hazelcast.serialization.api import Portable
 
 class Analytics(Portable):
     def __init__(self, dic=None):
@@ -136,18 +146,26 @@ class Analytics(Portable):
 
 factory = {
     1: Analytics
-}</pre>
+}
+```
+
 
 On the Java side, we can avoid creating the class by using GenericRecord. As its name implies, it's generic. Hence, we can query the data without having the definition of a Java `Analytics` class on the classpath! Again, the change is straightforward:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">Collection&lt;HazelcastJsonValue&gt; values = map.values(predicate); 
-Collection&lt;GenericRecord&gt; values = map.values(predicate);</pre>
+```java
+Collection<HazelcastJsonValue> values = map.values(predicate); 
+Collection<GenericRecord> values = map.values(predicate);
+```
+
 
 In both cases, you can access a field by its name:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">values.stream()
-        .map(value -&gt; value.getString("component"))
-        .forEach(System.out::println);</pre>
+```java
+values.stream()
+        .map(value -> value.getString("component"))
+        .forEach(System.out::println);
+```
+
 
 ### Indexing Data {#h3-3-indexing-data}
 
@@ -172,14 +190,17 @@ Here, you'd be able to set an index on the "comp" attribute or the "t" attribute
 
 The above explanation caters to exact matches. Imagine that we want now every entry whose "t" is above a certain threshold, *e.g.* , `entry.get("t").lessThan(2)`. For this usage, we need a **sorted** index. A sorted index keeps its keys, well, sorted. The engine will go through the keys in order, and once it has reached a key that doesn't match the predicate, it will return the results. Finally, for queries that involve multiple attributes, we need a compound index that contains all attributes. Here's such a query:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">var map = client.getMap("analytics");
+```java
+var map = client.getMap("analytics");
 var entry = Predicates.newPredicateBuilder().getEntryObject();
 var predicate = entry.get("component").equal(name).and(entry.get("instant").lessThan(instant));
-</pre>
+```
+
 
 The relevant index configuration would be:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml">hazelcast:
+```yaml
+hazelcast:
   map:
     analytics:
       indexes:
@@ -188,7 +209,9 @@ The relevant index configuration would be:
             - "component"
         - type: SORTED
           attributes:
-            - "instant"</pre>
+            - "instant"
+```
+
 
 At this point, we know how to query an `IMap` with the Criteria API and make it fast with the proper index configuration.
 
@@ -198,17 +221,20 @@ As a Java developer, you might already be familiar with SQL and JDBC. Learning a
 
 1. Add the driver to your classpath (here with Maven) 
 
-<pre class="EnlighterJSRAW" data-enlighter-language="xml">&lt;dependency&gt;
-    &lt;groupId&gt;com.hazelcast&lt;/groupId&gt;
-    &lt;artifactId&gt;hazelcast-jdbc&lt;/artifactId&gt;
-    &lt;version&gt;4.2&lt;/version&gt;
-&lt;/dependency&gt;
-</pre>
+```xml
+<dependency>
+    <groupId>com.hazelcast</groupId>
+    <artifactId>hazelcast-jdbc</artifactId>
+    <version>4.2</version>
+</dependency>
+```
+
 
 2. Use the standard JDBC API: 
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">try (var connection = DriverManager.getConnection("jdbc:hazelcast://localhost:5701/");
-    var statement = connection.prepareStatement("SELECT * FROM analytics where component = ? and instant &lt; ?")) {
+```java
+try (var connection = DriverManager.getConnection("jdbc:hazelcast://localhost:5701/");
+    var statement = connection.prepareStatement("SELECT * FROM analytics where component = ? and instant < ?")) {
     statement.setString(1, name);
     statement.setLong(2, instant);
     var resultSet = statement.executeQuery();
@@ -217,15 +243,20 @@ As a Java developer, you might already be familiar with SQL and JDBC. Learning a
          var component = resultSet.getString("component");
          System.out.println(component);
     }
-}</pre>
+}
+```
+
 
 That's all! The icing on the cake, you can use SQL in other language stacks (without JDBC, obviously). At the time of this writing, it still uses part of the Criteria API, but we intend to move it outside. The above code can be rewritten in Python like the following:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="python">analytics = client.get_map('analytics')
-select = 'component = {component} AND instant &lt; {instant}'.format(component = component, instant = instant)
+```python
+analytics = client.get_map('analytics')
+select = 'component = {component} AND instant < {instant}'.format(component = component, instant = instant)
 results = analytics.values(sql(select)).result()
 for result in results:
-    print(result.component)</pre>
+    print(result.component)
+```
+
 
 ### Conclusion {#h3-5-conclusion}
 

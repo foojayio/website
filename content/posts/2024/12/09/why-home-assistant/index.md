@@ -66,6 +66,6 @@ This was an introductory article. In the following articles in this series, I'll
 
 * [Home Assistant](https://www.home-assistant.io/)
 
-*** ** * ** ***
+
 
 *Originally published on [A Java Geek](https://blog.frankel.ch/home-assistant/1/) on November 25^th^, 2024*

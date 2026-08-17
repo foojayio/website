@@ -35,12 +35,13 @@ What is a POJO, Java Bean, and Value Object {#h2-0-what-is-a-pojo-java-bean-and-
 
 As the name already suggested, a Plain Old Java Object (POJO) is an ordinary Java Object. It can be any class and isn't bound to any specific restrictions other than the ones prescribed by the Java language. They are created for re-usability and increased readability.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="dracula">public class CoffeePOJO {
+```java
+public class CoffeePOJO {
 
    public String name;
-   private List&lt;String&gt; ingredients;
+   private List<String> ingredients;
 
-   public CoffeePOJO(String name, List&lt;String&gt; ingredients) {
+   public CoffeePOJO(String name, List<String> ingredients) {
        this.name = name;
        this.ingredients = ingredients;
    }
@@ -48,16 +49,19 @@ As the name already suggested, a Plain Old Java Object (POJO) is an ordinary Jav
    void addIngredient(String ingredient) {
        ingredients.add(ingredient);
    }
-}</pre>
+}
+```
+
 
 A Java Bean is a POJO according to the [JavaBean standard](https://www.oracle.com/java/technologies/javase/javabeans-spec.html). According to this standard, all properties are private, and will be accessed with getter and setter methods. Additionally a no-arg constructor should be present, along with a few more things.
 
 So, this means that while all Java Beans are POJOs, not all POJOs are Java Beans.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="dracula">public class CoffeeBEAN implements Serializable {
+```java
+public class CoffeeBEAN implements Serializable {
 
    private String name;
-   private List&lt;String&gt; ingredients;
+   private List<String> ingredients;
 
    public CoffeeBEAN() {
    }
@@ -70,14 +74,16 @@ So, this means that while all Java Beans are POJOs, not all POJOs are Java Beans
        this.name = name;
    }
 
-   public List&lt;String&gt; getIngredients() {
+   public List<String> getIngredients() {
        return ingredients;
    }
 
-   public void setIngredients(List&lt;String&gt; ingredients) {
+   public void setIngredients(List<String> ingredients) {
        this.ingredients = ingredients;
    }
-}</pre>
+}
+```
+
 
 A Value Object is a small object that represents a simple data entity.
 
@@ -98,11 +104,12 @@ Let's take a small rest service to explain this. Say we have a coffee store with
 
 The code looks something like this:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="dracula">public class Coffee {
+```java
+public class Coffee {
 
    private Long id;
    private String name;
-   private List&lt;String&gt; ingredients;
+   private List<String> ingredients;
    private String preparation;
 
 }
@@ -112,16 +119,18 @@ public class Customer {
    private Long id;
    private String firstName;
    private String lastName;
-   private List&lt;Coffee&gt; coffees;
+   private List<Coffee> coffees;
 
 }
 
 public class FavoriteCoffeeDTO {
 
    private String name;
-   private List&lt;String&gt; coffees;
+   private List<String> coffees;
 
-}</pre>
+}
+```
+
 
 I separated the domain layer from the presentation layer in the implementation above, allowing my controller to now handle mapping the two domain entities to the DTO.
 
@@ -129,22 +138,28 @@ In this example, I made the fields private, meaning I have to create getter and 
 
 This isn't mandatory of course, you're free to choose whatever method suits your needs. Other options include making all fields public and accessing them directly (like the example below), or making the object immutable with an all-args constructor and some getter methods.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="dracula">public class FavoriteCoffeeDTO {
+```java
+public class FavoriteCoffeeDTO {
 
    public String name;
-   public List&lt;String&gt; coffees;
+   public List<String> coffees;
 
 }
 
-String name = favCoffeeDTO.name;</pre>
+String name = favCoffeeDTO.name;
+```
+
 
 Lastly, if you updated to a more recent version of Java, you might want to use Java records for your DTO's. Java Records are simple immutable classes that automatically provide you with an all-args constructor, access methods, toString(), and hashCode() without defining them.
 
 This makes your code less verbose and more readable. Notice that records do not follow the Java Bean specification, since the access methods do not have a `get` or `set` prefix.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="dracula">public record FavoriteCoffeeDTO(String name, List&lt;String&gt; coffees) {}
+```java
+public record FavoriteCoffeeDTO(String name, List<String> coffees) {}
 
-String name = favoriteCoffeeDTO.name();</pre>
+String name = favoriteCoffeeDTO.name();
+```
+
 
 What makes a good DTO? {#h2-2-what-makes-a-good-dto}
 ----------------------------------------------------
@@ -164,23 +179,29 @@ What we see in many proofs of concepts is that domain entries are fully outputte
 
 Say our API has a function to find all customers, but does not use a DTO:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="dracula">@GetMapping("/customers")
-public List&lt;Customer&gt; getAllCustomers(){
+```
+@GetMapping("/customers")
+public List<Customer> getAllCustomers(){
    return repository.findAll();       
-}</pre>
+}
+```
+
 
 If our customer object is the same as in our previous example, we are already displaying too much information. Do we actually need the `id` or the list of favorite `coffees`?
 
 It gets worse if we decide to attach more information to the customer, like a home address.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="dracula">public class Customer {
+```java
+public class Customer {
    private Long id;
    private String firstName;
    private String lastName;
-   private List&lt;Coffee&gt; coffees;
+   private List<Coffee> coffees;
    Private String homeAddress;
 
-}</pre>
+}
+```
+
 
 If we don't filter in our endpoint, we suddenly create a data breach, since providing a full name and home address is considered a privacy breach in many countries.
 
@@ -188,10 +209,13 @@ Decoupling the API from the data model with a DTO would have prevented this beca
 
 Even when we decide to add something to our domain model afterwards, using a DTO prevents us from essentially leaking personally identifiable information.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="dracula">public class CustomerDTO {
+```java
+public class CustomerDTO {
    private String firstName;
    private String lastName;
-}</pre>
+}
+```
+
 
 Recommendations {#h2-4-recommendations}
 ---------------------------------------

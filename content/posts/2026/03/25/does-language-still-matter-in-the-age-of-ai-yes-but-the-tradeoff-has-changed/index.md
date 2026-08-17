@@ -134,21 +134,25 @@ Code Examples: Same Intent, Different Review Experience {#h2-15-code-examples-sa
 
 ### Python: concise but ambiguous {#h3-16-python-concise-but-ambiguous}
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">def total_completed_orders(orders):
-    return sum(order["total"] for order in orders if order["status"] == "COMPLETED")</pre>
+```
+def total_completed_orders(orders):
+    return sum(order["total"] for order in orders if order["status"] == "COMPLETED")
+```
+
 
 Concise. But what's in `orders`? What type is `"total"` --- float, int, Decimal? What if the key is missing? A reviewer has to hold all of that in their head.
 
 ### Java: verbose but verifiable {#h3-17-java-verbose-but-verifiable}
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">import java.math.BigDecimal;
+```
+import java.math.BigDecimal;
 import java.util.List;
 
 public class OrderService {
 
-    public BigDecimal totalCompletedOrders(List&lt;Order&gt; orders) {
+    public BigDecimal totalCompletedOrders(List<Order> orders) {
         return orders.stream()
-                .filter(order -&gt; order.status() == OrderStatus.COMPLETED)
+                .filter(order -> order.status() == OrderStatus.COMPLETED)
                 .map(Order::total)
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
     }
@@ -160,13 +164,16 @@ enum OrderStatus {
     COMPLETED,
     PENDING,
     CANCELLED
-}</pre>
+}
+```
+
 
 More code, yes. But a reviewer knows immediately: the input is a `List`, the total is `BigDecimal` (not a floating point footgun), and status is a closed enum. The AI can't sneak in a string comparison or rounding error.
 
 ### Rust: maximum guarantees, steeper curve {#h3-18-rust-maximum-guarantees-steeper-curve}
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">#[derive(PartialEq)]
+```
+#[derive(PartialEq)]
 enum OrderStatus {
     Completed,
     Pending,
@@ -178,13 +185,15 @@ struct Order {
     total: f64,
 }
 
-fn total_completed_orders(orders: &amp;[Order]) -&gt; f64 {
+fn total_completed_orders(orders: &[Order]) -> f64 {
     orders
         .iter()
         .filter(|order| order.status == OrderStatus::Completed)
         .map(|order| order.total)
         .sum()
-}</pre>
+}
+```
+
 
 Strong structural guarantees. Best runtime performance of the three. The tradeoff? A steeper learning curve and ownership semantics that slow down both AI generation and human review.
 

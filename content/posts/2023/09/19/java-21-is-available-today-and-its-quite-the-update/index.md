@@ -50,7 +50,8 @@ The feature 'Pattern Matching for switch' (first introduced in Java 17) has reac
 Since Java 16 we've been able to avoid casting after `instanceof` checks by using 'Pattern Matching for instanceof'. Let's refresh our memory with a code example.
 > All code examples about Project Amber features were taken from my conference talk ["Pattern Matching: Small Enhancement or Major Feature?"](https://hanno.codes/talks/#pattern-matching-small-enhancement-or-major-feature).
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">static String apply(Effect effect) {
+```java
+static String apply(Effect effect) {
     String formatted = "";
     if (effect instanceof Delay de) {
         formatted = String.format("Delay active of %d ms.", de.timeInMs());
@@ -66,36 +67,44 @@ Since Java 16 we've been able to avoid casting after `instanceof` checks by usin
         formatted = String.format("Unknown effect active: %s.", effect);
     }
     return formatted;
-}</pre>
+}
+```
+
 
 This code is still riddled with ceremony, though. On top of that it leaves room for subtle bugs --- what if you added an else-if branch that didn't assign anything to `formatted`? Let's see what pattern matching in a switch statement (or even better: in a switch *expression*) would look like:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">static String apply(Effect effect) {
+```java
+static String apply(Effect effect) {
     return switch(effect) {
-        case Delay de      -&gt; String.format("Delay active of %d ms.", de.timeInMs());
-        case Reverb re     -&gt; String.format("Reverb active of type %s and roomSize %d.", re.name(), re.roomSize());
-        case Overdrive ov  -&gt; String.format("Overdrive active with gain %d.", ov.gain());
-        case Tremolo tr    -&gt; String.format("Tremolo active with depth %d and rate %d.", tr.depth(), tr.rate());
-        case Tuner tu      -&gt; String.format("Tuner active with pitch %d. Muting all signal!", tu.pitchInHz());
-        case null, default -&gt; String.format("Unknown or empty effect active: %s.", effect);
+        case Delay de      -> String.format("Delay active of %d ms.", de.timeInMs());
+        case Reverb re     -> String.format("Reverb active of type %s and roomSize %d.", re.name(), re.roomSize());
+        case Overdrive ov  -> String.format("Overdrive active with gain %d.", ov.gain());
+        case Tremolo tr    -> String.format("Tremolo active with depth %d and rate %d.", tr.depth(), tr.rate());
+        case Tuner tu      -> String.format("Tuner active with pitch %d. Muting all signal!", tu.pitchInHz());
+        case null, default -> String.format("Unknown or empty effect active: %s.", effect);
     };
-}</pre>
+}
+```
+
 
 Pattern matching for switch made our code far more elegant here. We're even able to address possible `null`s by defining a specific case for them or combining it with the default case (which is what we've done here).
 
 Checking an additional condition after the pattern match is easily done with a *guard* (the part after the `when` keyword in the code below):
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">static String apply(Effect effect, Guitar guitar) {
+```java
+static String apply(Effect effect, Guitar guitar) {
     return switch(effect) {
-        case Delay de      -&gt; String.format("Delay active of %d ms.", de.timeInMs());
-        case Reverb re     -&gt; String.format("Reverb active of type %s and roomSize %d.", re.name(), re.roomSize());
-        case Overdrive ov  -&gt; String.format("Overdrive active with gain %d.", ov.gain());
-        case Tremolo tr    -&gt; String.format("Tremolo active with depth %d and rate %d.", tr.depth(), tr.rate());
-        case Tuner tu when !guitar.isInTune() -&gt; String.format("Tuner active with pitch %d. Muting all signal!", tu.pitchInHz());
-        case Tuner tu      -&gt; "Guitar is already in tune.";
-        case null, default -&gt; String.format("Unknown or empty effect active: %s.", effect);
+        case Delay de      -> String.format("Delay active of %d ms.", de.timeInMs());
+        case Reverb re     -> String.format("Reverb active of type %s and roomSize %d.", re.name(), re.roomSize());
+        case Overdrive ov  -> String.format("Overdrive active with gain %d.", ov.gain());
+        case Tremolo tr    -> String.format("Tremolo active with depth %d and rate %d.", tr.depth(), tr.rate());
+        case Tuner tu when !guitar.isInTune() -> String.format("Tuner active with pitch %d. Muting all signal!", tu.pitchInHz());
+        case Tuner tu      -> "Guitar is already in tune.";
+        case null, default -> String.format("Unknown or empty effect active: %s.", effect);
     };
-}</pre>
+}
+```
+
 
 Here, the guard makes sure that intricate boolean logic can still be expressed in a concise way. Having to nest `if` statements to test this logic within a case branch would not only be more verbose, but also potentially introduce subtle bugs that we set out to avoid in the first place.
 
@@ -116,41 +125,50 @@ With the introduction of *record patterns*, deconstructing records is now possib
 
 [Records](https://openjdk.org/jeps/395) are transparent carriers for data. Code that receives an instance of a record will typically extract the data, known as the components. This was also the case in our 'Pattern Matching for switch' code example, if we assume that all implementations of the `Effect` interface were in fact records there. In that piece of code it is clear that the pattern variables only serve to access the record fields. Using record patterns we can avoid having to create pattern variables altogether:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">static String apply(Effect effect) {
+```java
+static String apply(Effect effect) {
     return switch(effect) {
-        case Delay(int timeInMs) -&gt; String.format("Delay active of %d ms.", timeInMs);
-        case Reverb(String name, int roomSize) -&gt; String.format("Reverb active of type %s and roomSize %d.", name, roomSize);
-        case Overdrive(int gain) -&gt; String.format("Overdrive active with gain %d.", gain);
-        case Tremolo(int depth, int rate) -&gt; String.format("Tremolo active with depth %d and rate %d.", depth, rate);
-        case Tuner(int pitchInHz) -&gt; String.format("Tuner active with pitch %d. Muting all signal!", pitchInHz);
-        case null, default -&gt; String.format("Unknown or empty effect active: %s.", effect);
+        case Delay(int timeInMs) -> String.format("Delay active of %d ms.", timeInMs);
+        case Reverb(String name, int roomSize) -> String.format("Reverb active of type %s and roomSize %d.", name, roomSize);
+        case Overdrive(int gain) -> String.format("Overdrive active with gain %d.", gain);
+        case Tremolo(int depth, int rate) -> String.format("Tremolo active with depth %d and rate %d.", depth, rate);
+        case Tuner(int pitchInHz) -> String.format("Tuner active with pitch %d. Muting all signal!", pitchInHz);
+        case null, default -> String.format("Unknown or empty effect active: %s.", effect);
     };
-}</pre>
+}
+```
+
 
 `Delay(int timeInMs)` is a record pattern here, deconstructing the `Delay` instance into its components. And this mechanism can become even more powerful when we apply it to a more complicated object graph by using *nested* record patterns:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">record Tuner(int pitchInHz, Note note) implements Effect {}
+```java
+record Tuner(int pitchInHz, Note note) implements Effect {}
 record Note(String note) {}
 
 class TunerApplier {
     static String apply(Effect effect, Guitar guitar) {
         return switch(effect) {
-            case Tuner(int pitch, Note(String note)) -&gt; String.format("Tuner active with pitch %d on note %s", pitch, note);
+            case Tuner(int pitch, Note(String note)) -> String.format("Tuner active with pitch %d on note %s", pitch, note);
         };
     }
-}</pre>
+}
+```
+
 
 #### Inference of type arguments
 
 Nested record patterns also benefit from *inference of type arguments*. For example:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">class TunerApplier {
+```java
+class TunerApplier {
     static String apply(Effect effect, Guitar guitar) {
         return switch(effect) {
-            case Tuner(var pitch, Note(var note)) -&gt; String.format("Tuner active with pitch %d on note %s", pitch, note);
+            case Tuner(var pitch, Note(var note)) -> String.format("Tuner active with pitch %d on note %s", pitch, note);
         };
     }
-}</pre>
+}
+```
+
 
 Here the type arguments for the nested pattern `Tuner(var pitch, Note(var note))` are inferred. This only works with nested patterns for now; type patterns do not yet support implicit inference of type arguments. So the type pattern `Tuner tu` is always treated as a raw type pattern.
 
@@ -166,12 +184,15 @@ For more information on this feature, see [JEP 440](https://openjdk.org/jeps/440
 
 Data processing in Java has become increasingly streamlined since the introduction of [records](https://openjdk.org/jeps/395) and [record patterns](#jep-440-record-patterns). But in some cases writing out an entire record pattern when some record components aren't even used in the logic that follows can be both cumbersome and confusing. Let's consider the following code example:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">static boolean isDelayTimeEqualToReverbRoomSize(EffectLoop effectLoop) {
+```java
+static boolean isDelayTimeEqualToReverbRoomSize(EffectLoop effectLoop) {
     if (effectLoop instanceof EffectLoop(Delay(int timeInMs), Reverb(String name, int roomSize))) {
         return timeInMs == roomSize;
     }
     return false;
-}</pre>
+}
+```
+
 
 Here, the logic doesn't reference the reverb name whatsoever, but Java currently doesn't have a way to indicate this omission might be intentional. And so the entire record pattern has been written out, leading future readers of this code to doubt the correctness of the implementation.
 
@@ -179,12 +200,15 @@ Here, the logic doesn't reference the reverb name whatsoever, but Java currently
 
 JEP 443 proposes *unnamed patterns*, which could improve the situation here:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">static boolean isDelayTimeEqualToReverbRoomSize(EffectLoop effectLoop) {
+```java
+static boolean isDelayTimeEqualToReverbRoomSize(EffectLoop effectLoop) {
     if (effectLoop instanceof EffectLoop(Delay(int timeInMs), Reverb(_, int roomSize))) {
         return timeInMs == roomSize;
     }
     return false;
-}</pre>
+}
+```
+
 
 The underscore denotes the unnamed pattern here: it is an unconditional pattern which binds nothing. You can use it to indicate that it doesn't matter to what first value the pattern matches the `Reverb`, as long as the second parameter can be matched to an `int`.
 
@@ -192,13 +216,16 @@ The underscore denotes the unnamed pattern here: it is an unconditional pattern 
 
 *Unnamed pattern variables* are also proposed by this JEP. You can use them whenever you care about the type your record pattern will match, but when you don't need any value bound to the pattern variable. Imagine we want our tuner code to also support tuning piano keys in the future, then we could use unnamed pattern variables like this:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">static void apply(Effect effect, Piano piano) {
+```java
+static void apply(Effect effect, Piano piano) {
     System.out.println(switch(effect) {
-        case Tuner(FlatNote _), Tuner(SharpNote _) -&gt; "Tuning one of the black keys...";
-        case Tuner(RegularNote _) -&gt; "Tuning one of the white keys...";
-        default -&gt; "An unknown effect is active...";
+        case Tuner(FlatNote _), Tuner(SharpNote _) -> "Tuning one of the black keys...";
+        case Tuner(RegularNote _) -> "Tuning one of the white keys...";
+        default -> "An unknown effect is active...";
     });
-}</pre>
+}
+```
+
 
 Here, we execute specific logic when we encounter a tuner that tunes a flat (♭) or sharp (♯) note. We use an unnamed pattern variable, because the logic acts on the matched type only - the value can be safely ignored.
 
@@ -206,30 +233,39 @@ Here, we execute specific logic when we encounter a tuner that tunes a flat (♭
 
 *Unnamed variables* are useful in situations where variables are unused and their names are irrelevant, for example when keeping a counter variable within the body of a for-each loop:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">int guitarCount = 0;
+```java
+int guitarCount = 0;
 for (Guitar guitar : guitars) {
-    if (guitarCount &lt; LIMIT) { 
+    if (guitarCount < LIMIT) { 
         guitarCount++;
     }
-}</pre>
+}
+```
+
 
 The `guitar` variable is declared and populated here, but it is never used. Unfortunately, its intentional non-use doesn't come across as such to the reader. Moreover, static code analysis tools like Sonar will probably complain about the unused variable, raising suspicions even more. Introducing an unnamed variable can better convey the intent of the code:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">int guitarCount = 0;
+```java
+int guitarCount = 0;
 for (Guitar _ : guitars) {
-    if (guitarCount &lt; LIMIT) { 
+    if (guitarCount < LIMIT) { 
         guitarCount++;
     }
-}</pre>
+}
+```
+
 
 Another good example could be handling exceptions in a generic way:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">var lesPaul = new Guitar("Les Paul");
+```java
+var lesPaul = new Guitar("Les Paul");
 try { 
     cart.add(stock.get(lesPaul, guitarCount));
 } catch (OutOfStockException _) { 
     System.out.println("Sorry, out of stock!");
-}</pre>
+}
+```
+
 
 Keep in mind that unnamed variables only make sense when they're not visible outside a method, so they currently only work with local variables, exception parameters and lambda parameters. The theoretical concept of *unnamed method parameters* is briefly touched upon in the JEP, but supporting that comes with enough challenges to at least warrant postponing it to a future JEP.
 
@@ -245,11 +281,14 @@ For more information on this feature, see [JEP 443](https://openjdk.org/jeps/443
 
 Java's take on the classic [Hello, World!](https://en.wikipedia.org/wiki/%22Hello,_World!%22_program) program is notoriously verbose:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public class HelloWorld { 
+```java
+public class HelloWorld { 
     public static void main(String[] args) { 
         System.out.println("Hello, World!");
     }
-}</pre>
+}
+```
+
 
 On top of that, it forces newcomers to Java to grasp a few concepts that they certainly don't need on their first day of Java programming:
 
@@ -265,17 +304,23 @@ To achieve this, the JEP proposes the following changes to the launch protocol:
 
 * allow *instance main methods* , which are not `static` and don't need a `public` modifier, nor a `String[]` parameter;
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">class HelloWorld { 
+```java
+class HelloWorld { 
     void main() { // this is an instance main method
         System.out.println("Hello, World!");
     }
-}</pre>
+}
+```
+
 
 * introduce *unnamed classes* to make the `class` declaration implicit;
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">void main() { // this is an instance main method inside of an unnamed class
+```java
+void main() { // this is an instance main method inside of an unnamed class
     System.out.println("Hello, World!");
-}</pre>
+}
+```
+
 
 #### Selecting a Main Method
 
@@ -315,9 +360,12 @@ However, these mechanisms come with drawbacks. They involve hard-to-read code (`
 
 This JEP proposes the 'String Templates' feature: a template-based mechanism for composing strings that offers the benefits of interpolation, but would be less prone to introducing security vulnerabilities. A *template expression* is a new kind of expression in Java, that can perform string interpolation but is also programmable in a way that helps developers compose strings safely and efficiently.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">String guitarType = "Les Paul";
+```java
+String guitarType = "Les Paul";
 System.out.println(STR."I bought a \{guitarType} yesterday.");
-// outputs "I bought a Les Paul yesterday."</pre>
+// outputs "I bought a Les Paul yesterday."
+```
+
 
 The template expression `STR."I bought a \{guitarType} yesterday."` consists of:
 
@@ -327,33 +375,42 @@ The template expression `STR."I bought a \{guitarType} yesterday."` consists of:
 
 When a template expression is evaluated at run time, its template processor combines the literal text in the template with the values of the embedded expressions in order to produce a result. The embedded expressions can perform arithmetic, invoke methods and access fields:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">int price = 12;
+```java
+int price = 12;
 System.out.println(STR."A set of strings costs \{price} dollars; so each string costs \{price / 6} dollars.");
-// outputs "A set of strings costs 12 dollars; so each string costs 2 dollars."</pre>
+// outputs "A set of strings costs 12 dollars; so each string costs 2 dollars."
+```
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">record Guitar(String name, boolean inTune) {}
+
+```java
+record Guitar(String name, boolean inTune) {}
 class GuitarTuner {
     public static void main(String... args) {
         var guitar = new Guitar("Gibson Les Paul Standard '50s Heritage Cherry Sunburst", false);
         System.out.println(STR."This guitar is \{guitar.inTune() ? "" : "not"} in tune.");
         // outputs "This guitar is not in tune.
     }
-}</pre>
+}
+```
+
 
 As you can see, double-quote characters can be used inside embedded expressions without escaping them as `\"`, making the switch from concatenation (using `+`) to template expressions easier. Multi-line template expressions are also possible; they use a syntax similar to that of [text blocks](https://docs.oracle.com/javase/specs/jls/se20/html/jls-3.html#jls-3.10.6):
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">String title = "My Online Guitar Store";
+```java
+String title = "My Online Guitar Store";
 String text = "Buy your next Les Paul here!";
 String html = STR."""
-        &lt;html&gt;
-          &lt;head&gt;
-            &lt;title&gt;\{title}&lt;/title&gt;
-          &lt;/head&gt;
-          &lt;body&gt;
-            &lt;p&gt;\{text}&lt;/p&gt;
-          &lt;/body&gt;
-        &lt;/html&gt;
-        """;</pre>
+        <html>
+          <head>
+            <title>\{title}</title>
+          </head>
+          <body>
+            <p>\{text}</p>
+          </body>
+        </html>
+        """;
+```
+
 
 #### Template Processors
 
@@ -368,20 +425,29 @@ More template processors exist:
 
 The construct `STR."..."` we've used so far is actually a short way to define a template and call its `process` method. That means that our first code example:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">String guitarType = "Les Paul";
-System.out.println(STR."I bought a \{guitarType} yesterday.");</pre>
+```java
+String guitarType = "Les Paul";
+System.out.println(STR."I bought a \{guitarType} yesterday.");
+```
+
 
 is equivalent to:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">String guitarType = "Les Paul";
+```java
+String guitarType = "Les Paul";
 StringTemplate template = RAW."I bought a \{guitarType} yesterday.");
-System.out.println(STR.process(template));</pre>
+System.out.println(STR.process(template));
+```
+
 
 Template expressions are designed to prevent the direct conversion of strings with embedded expressions to interpolated strings. This makes it impossible for potentially incorrect strings to spread. A template processor securely handles this interpolation, and if you forget to use one, the compiler will report an error.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">String guitarType = "Les Paul";
+```java
+String guitarType = "Les Paul";
 System.out.println("I bought a \{guitarType} yesterday."); // doesn't compile!
-// outputs: "error: processor missing from template expression"</pre>
+// outputs: "error: processor missing from template expression"
+```
+
 
 #### Custom Template Processors
 
@@ -389,8 +455,9 @@ Each template processor is an object that implements the functional interface `S
 
 Custom template processors can be useful for various use cases. Let's illustrate two of them with a few code examples:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">var JSON = StringTemplate.Processor.of(
-    (StringTemplate st) -&gt; new JSONObject(st.interpolate())
+```java
+var JSON = StringTemplate.Processor.of(
+    (StringTemplate st) -> new JSONObject(st.interpolate())
 );
 
 String name = "Gibson Les Paul Standard '50s Heritage Cherry Sunburst";
@@ -400,13 +467,16 @@ JSONObject doc = JSON."""
         "name": "\{name}",
         "type": "\{type}"
     };
-    """;</pre>
+    """;
+```
+
 
 So the `JSON` template processor returns instances of `JSONObject` instead of `String`.  
 
 If we wanted, we could simply add more validation logic to the implementation of `JSON` to make the template processor handles its parameters a bit more safely.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">record QueryBuilder(Connection conn) implements StringTemplate.Processor&lt;PreparedStatement, SQLException&gt; {
+```java
+record QueryBuilder(Connection conn) implements StringTemplate.Processor<PreparedStatement, SQLException> {
     public PreparedStatement process(StringTemplate st) throws SQLException {
         // 1. Replace StringTemplate placeholders with PreparedStatement placeholders
         String query = String.join("?", st.fragments());
@@ -418,22 +488,27 @@ If we wanted, we could simply add more validation logic to the implementation of
         int index = 1;
         for (Object value : st.values()) {
             switch (value) {
-                case Integer i -&gt; ps.setInt(index++, i);
-                case Float f   -&gt; ps.setFloat(index++, f);
-                case Double d  -&gt; ps.setDouble(index++, d);
-                case Boolean b -&gt; ps.setBoolean(index++, b);
-                default        -&gt; ps.setString(index++, String.valueOf(value));
+                case Integer i -> ps.setInt(index++, i);
+                case Float f   -> ps.setFloat(index++, f);
+                case Double d  -> ps.setDouble(index++, d);
+                case Boolean b -> ps.setBoolean(index++, b);
+                default        -> ps.setString(index++, String.valueOf(value));
             }
         }
 
         return ps;
     }
-}</pre>
+}
+```
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">var DB = new QueryBuilder(conn);
+
+```java
+var DB = new QueryBuilder(conn);
 String type = "Les Paul"; 
 PreparedStatement ps = DB."SELECT * FROM Guitar g WHERE g.guitar_type = \{type}";
-ResultSet rs = ps.executeQuery();</pre>
+ResultSet rs = ps.executeQuery();
+```
+
 
 The `DB` custom template processor is capable of constructing `PreparedStatements` that have their parameters injected in a safe way.
 
@@ -474,29 +549,35 @@ Just like a platform thread, a virtual thread is an instance of `java.lang.Threa
 
 Creating a virtual thread is a bit different from creating a platform thread, but just as easy:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">var platformThread = new Thread(() -&gt; {
+```java
+var platformThread = new Thread(() -> {
     // do some work in a platform thread
 });
 platformThread.start();
 
-var virtualThread = Thread.startVirtualThread(() -&gt; {
+var virtualThread = Thread.startVirtualThread(() -> {
     // do some work in a virtual thread
 });
-virtualThread.start();</pre>
+virtualThread.start();
+```
+
 
 When your code uses the `ExecutorService` interface already, switching to virtual threads will take even less effort:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">var platformThreadsExecutor = Executors.newCachedThreadPool();
-platformThreadsExecutor.submit(() -&gt; {
+```java
+var platformThreadsExecutor = Executors.newCachedThreadPool();
+platformThreadsExecutor.submit(() -> {
     // do some work in a platform thread
 });
 platformThreadsExecutor.close();
 
 try (var virtualThreadsExecutor = Executors.newVirtualThreadPerTaskExecutor()) {
-    virtualThreadsExecutor.submit(() -&gt; {
+    virtualThreadsExecutor.submit(() -> {
         // do some work in a virtual thread
     });
-} // close() is called implicitly</pre>
+} // close() is called implicitly
+```
+
 
 Note that the `ExecutorService` interface was adjusted in Java 19 to extend `AutoCloseable`, so it can now be used in a try-with-resources construct.
 
@@ -522,7 +603,8 @@ Java's current implementation of concurrency is *unstructured* , meaning that ta
 To illustrate this, let's look at a code example that takes place in a restaurant:
 > All code examples that illustrate Structured Concurrency were taken from my conference talk ["Java's Concurrency Journey Continues! Exploring Structured Concurrency and Scoped Values"](https://hanno.codes/talks/#javas-concurrency-journey-continues-exploring-structured-concurrency-and-scoped-values).
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public class MultiWaiterRestaurant implements Restaurant {
+```java
+public class MultiWaiterRestaurant implements Restaurant {
     @Override
     public MultiCourseMeal announceMenu() throws ExecutionException, InterruptedException {
         Waiter grover = new Waiter("Grover");
@@ -530,14 +612,16 @@ To illustrate this, let's look at a code example that takes place in a restauran
         Waiter rosita = new Waiter("Rosita");
 
         try (var executor = Executors.newVirtualThreadPerTaskExecutor()) {
-            Future&lt;Course&gt; starter = executor.submit(() -&gt; grover.announceCourse(CourseType.STARTER));
-            Future&lt;Course&gt; main = executor.submit(() -&gt; zoe.announceCourse(CourseType.MAIN));
-            Future&lt;Course&gt; dessert = executor.submit(() -&gt; rosita.announceCourse(CourseType.DESSERT));
+            Future<Course> starter = executor.submit(() -> grover.announceCourse(CourseType.STARTER));
+            Future<Course> main = executor.submit(() -> zoe.announceCourse(CourseType.MAIN));
+            Future<Course> dessert = executor.submit(() -> rosita.announceCourse(CourseType.DESSERT));
 
             return new MultiCourseMeal(starter.get(), main.get(), dessert.get());
         }
     }
-}</pre>
+}
+```
+
 
 Now, consider the fact that the `announceCourse(..)` method in the `Waiter` class sometimes fails with an `OutOfStockException`, because one of the ingredients for the course might not be in stock. This can lead to some problems:
 
@@ -549,7 +633,8 @@ Ultimately the problem here is that our program is logically structured with tas
 
 In contrast, the execution of single-threaded code *always* enforces a hierarchy of tasks and subtasks. Consider the following single-threaded version of our restaurant example:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public class SingleWaiterRestaurant implements Restaurant {
+```java
+public class SingleWaiterRestaurant implements Restaurant {
     @Override
     public MultiCourseMeal announceMenu() throws OutOfStockException {
         Waiter elmo = new Waiter("Elmo");
@@ -560,7 +645,9 @@ In contrast, the execution of single-threaded code *always* enforces a hierarchy
 
         return new MultiCourseMeal(starter, main, dessert);
     }
-}</pre>
+}
+```
+
 
 Here, we don't have *any* of the problems we had before.  
 
@@ -578,7 +665,8 @@ In a structured concurrency approach, threads have a clear hierarchy, their own 
 
 Let's now take a look at a structured, concurrent version of our example:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public class StructuredConcurrencyRestaurant implements Restaurant {
+```java
+public class StructuredConcurrencyRestaurant implements Restaurant {
     @Override
     public MultiCourseMeal announceMenu() throws ExecutionException, InterruptedException {
         Waiter grover = new Waiter("Grover");
@@ -586,9 +674,9 @@ Let's now take a look at a structured, concurrent version of our example:
         Waiter rosita = new Waiter("Rosita");
 
         try (var scope = new StructuredTaskScope.ShutdownOnFailure()) {
-            Supplier&lt;Course&gt; starter = scope.fork(() -&gt; grover.announceCourse(CourseType.STARTER));
-            Supplier&lt;Course&gt; main = scope.fork(() -&gt; zoe.announceCourse(CourseType.MAIN));
-            Supplier&lt;Course&gt; dessert = scope.fork(() -&gt; rosita.announceCourse(CourseType.DESSERT));
+            Supplier<Course> starter = scope.fork(() -> grover.announceCourse(CourseType.STARTER));
+            Supplier<Course> main = scope.fork(() -> zoe.announceCourse(CourseType.MAIN));
+            Supplier<Course> dessert = scope.fork(() -> rosita.announceCourse(CourseType.DESSERT));
 
             scope.join(); // 1
             scope.throwIfFailed(); // 2
@@ -596,7 +684,9 @@ Let's now take a look at a structured, concurrent version of our example:
             return new MultiCourseMeal(starter.get(), main.get(), dessert.get()); // 3
         }
     }
-}</pre>
+}
+```
+
 
 The scope's purpose is to keep the threads together.  
 
@@ -628,7 +718,8 @@ A shutdown-on-failure policy cancels tasks if one of them fails, while a *shutdo
 
 Let's see what a shutdown-on-success implementation would look like:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public record DrinkOrder(Guest guest, Drink drink) {}
+```java
+public record DrinkOrder(Guest guest, Drink drink) {}
 
 public class StructuredConcurrencyBar implements Bar {
     @Override
@@ -636,14 +727,16 @@ public class StructuredConcurrencyBar implements Bar {
         Waiter zoe = new Waiter("Zoe");
         Waiter elmo = new Waiter("Elmo");
 
-        try (var scope = new StructuredTaskScope.ShutdownOnSuccess&lt;DrinkOrder&gt;()) {
-            scope.fork(() -&gt; zoe.getDrinkOrder(guest, BEER, WINE, JUICE));
-            scope.fork(() -&gt; elmo.getDrinkOrder(guest, COFFEE, TEA, COCKTAIL, DISTILLED));
+        try (var scope = new StructuredTaskScope.ShutdownOnSuccess<DrinkOrder>()) {
+            scope.fork(() -> zoe.getDrinkOrder(guest, BEER, WINE, JUICE));
+            scope.fork(() -> elmo.getDrinkOrder(guest, COFFEE, TEA, COCKTAIL, DISTILLED));
 
             return scope.join().result(); // 1
         }
     }
-}</pre>
+}
+```
+
 
 In this example the waiter is responsible for getting a valid `DrinkOrder` object based on the preferences of the guest and the current supply of drinks at the bar.  
 
@@ -694,14 +787,17 @@ Like a thread-local variable, a scoped value has multiple incarnations, one per 
 
 The JEP illustrates the use of scoped values with the pseudo code example below:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">final static ScopedValue&lt;...&gt; V = ScopedValue.newInstance();
+```java
+final static ScopedValue<...> V = ScopedValue.newInstance();
 
 // In some method
-ScopedValue.where(V, &lt;value&gt;)
-           .run(() -&gt; { ... V.get() ... call methods ... });
+ScopedValue.where(V, <value>)
+           .run(() -> { ... V.get() ... call methods ... });
 
 // In a method called directly or indirectly from the lambda expression
-... V.get() ...</pre>
+... V.get() ...
+```
+
 
 We see that `ScopedValue.where(...)` is called, presenting a scoped value and the object to which it is to be bound. The call to `run(...)` binds the scoped value, providing an incarnation that is specific to the current thread, and then executes the lambda expression passed as argument. During the lifetime of the `run(...)` call, the lambda expression, or any method called directly or indirectly from that expression, can read the scoped value via the value's `get()` method. After the `run(...)` method finishes, the binding is destroyed.
 
@@ -740,7 +836,8 @@ However, all these mechanisms have downsides, which is why a more modern API is 
 
 In order to demonstrate the new API, [JEP 442](https://openjdk.org/jeps/442) lists a code example that obtains a method handle for a C library function `radixsort` and then uses it to sort four strings that start out as Java array elements:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">// 1. Find foreign function on the C library path
+```java
+// 1. Find foreign function on the C library path
 Linker linker          = Linker.nativeLinker();
 SymbolLookup stdlib    = linker.defaultLookup();
 MethodHandle radixsort = linker.downcallHandle(stdlib.find("radixsort"), ...);
@@ -751,19 +848,21 @@ try (Arena offHeap = Arena.ofConfined()) {
     // 4. Allocate a region of off-heap memory to store four pointers
     MemorySegment pointers = offHeap.allocateArray(ValueLayout.ADDRESS, javaStrings.length);
     // 5. Copy the strings from on-heap to off-heap
-    for (int i = 0; i &lt; javaStrings.length; i++) {
+    for (int i = 0; i < javaStrings.length; i++) {
         MemorySegment cString = offHeap.allocateUtf8String(javaStrings[i]);
         pointers.setAtIndex(ValueLayout.ADDRESS, i, cString);
     }
     // 6. Sort the off-heap data by calling the foreign function
     radixsort.invoke(pointers, javaStrings.length, MemorySegment.NULL, '\0');
     // 7. Copy the (reordered) strings from off-heap to on-heap
-    for (int i = 0; i &lt; javaStrings.length; i++) {
+    for (int i = 0; i < javaStrings.length; i++) {
         MemorySegment cString = pointers.getAtIndex(ValueLayout.ADDRESS, i);
         javaStrings[i] = cString.getUtf8String(0);
     }
 } // 8. All off-heap memory is deallocated here
-assert Arrays.equals(javaStrings, new String[] {"car", "cat", "dog", "mouse"});  // true</pre>
+assert Arrays.equals(javaStrings, new String[] {"car", "cat", "dog", "mouse"});  // true
+```
+
 
 Let's look at some of the types this code uses in more detail to get a rough idea of their function and purpose within the Foreign Function \& Memory API:
 
@@ -817,18 +916,19 @@ In the past, Java programmers could only program such computations at the assemb
 
 Here is a code example (taken from the JEP) that compares a simple scalar computation over elements of arrays with its equivalent using the Vector API:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">void scalarComputation(float[] a, float[] b, float[] c) {
-   for (int i = 0; i &lt; a.length; i++) {
+```java
+void scalarComputation(float[] a, float[] b, float[] c) {
+   for (int i = 0; i < a.length; i++) {
         c[i] = (a[i] * a[i] + b[i] * b[i]) * -1.0f;
    }
 }
 
-static final VectorSpecies&lt;Float&gt; SPECIES = FloatVector.SPECIES_PREFERRED;
+static final VectorSpecies<Float> SPECIES = FloatVector.SPECIES_PREFERRED;
 
 void vectorComputation(float[] a, float[] b, float[] c) {
     int i = 0;
     int upperBound = SPECIES.loopBound(a.length);
-    for (; i &lt; upperBound; i += SPECIES.length()) {
+    for (; i < upperBound; i += SPECIES.length()) {
         // FloatVector va, vb, vc;
         var va = FloatVector.fromArray(SPECIES, a, i);
         var vb = FloatVector.fromArray(SPECIES, b, i);
@@ -837,10 +937,12 @@ void vectorComputation(float[] a, float[] b, float[] c) {
                    .neg();
         vc.intoArray(c, i);
     }
-    for (; i &lt; a.length; i++) {
+    for (; i < a.length; i++) {
         c[i] = (a[i] * a[i] + b[i] * b[i]) * -1.0f;
     }
-}</pre>
+}
+```
+
 
 From the perspective of the Java developer, this is just another way of expressing scalar computations. It might come across as being more verbose, but on the other hand it can bring spectacular performance gains.
 
@@ -955,9 +1057,10 @@ The JEP will introduce new interfaces for *sequenced collections* , *sequenced s
 
 A sequenced collection has first and last elements, allowing support for common operations at either end:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">interface SequencedCollection&lt;E&gt; extends Collection&lt;E&gt; {
+```java
+interface SequencedCollection<E> extends Collection<E> {
     // new method
-    SequencedCollection&lt;E&gt; reversed();
+    SequencedCollection<E> reversed();
     // methods promoted from Deque
     void addFirst(E);
     void addLast(E);
@@ -965,30 +1068,38 @@ A sequenced collection has first and last elements, allowing support for common 
     E getLast();
     E removeFirst();
     E removeLast();
-}</pre>
+}
+```
+
 
 A sequenced set is a `Set` that is a `SequencedCollection` that contains no duplicate elements:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">interface SequencedSet&lt;E&gt; extends Set&lt;E&gt;, SequencedCollection&lt;E&gt; {
-    SequencedSet&lt;E&gt; reversed();    // covariant override
-}</pre>
+```java
+interface SequencedSet<E> extends Set<E>, SequencedCollection<E> {
+    SequencedSet<E> reversed();    // covariant override
+}
+```
+
 
 A sequenced map is a `Map` whose entries have a defined encounter order:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">interface SequencedMap&lt;K,V&gt; extends Map&lt;K,V&gt; {
+```java
+interface SequencedMap<K,V> extends Map<K,V> {
     // new methods
-    SequencedMap&lt;K,V&gt; reversed();
-    SequencedSet&lt;K&gt; sequencedKeySet();
-    SequencedCollection&lt;V&gt; sequencedValues();
-    SequencedSet&lt;Entry&lt;K,V&gt;&gt; sequencedEntrySet();
+    SequencedMap<K,V> reversed();
+    SequencedSet<K> sequencedKeySet();
+    SequencedCollection<V> sequencedValues();
+    SequencedSet<Entry<K,V>> sequencedEntrySet();
     V putFirst(K, V);
     V putLast(K, V);
     // methods promoted from NavigableMap
-    Entry&lt;K, V&gt; firstEntry();
-    Entry&lt;K, V&gt; lastEntry();
-    Entry&lt;K, V&gt; pollFirstEntry();
-    Entry&lt;K, V&gt; pollLastEntry();
-}</pre>
+    Entry<K, V> firstEntry();
+    Entry<K, V> lastEntry();
+    Entry<K, V> pollFirstEntry();
+    Entry<K, V> pollLastEntry();
+}
+```
+
 
 The `Collections` utility class has also been extended to create unmodifiable wrappers for the three new types:
 
@@ -1030,7 +1141,8 @@ A KEM needs the following components:
 
 For illustration purposes, the `KEM` class that is mentioned in the JEP is listed below:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">package javax.crypto;
+```java
+package javax.crypto;
 
 public class DecapsulateException extends GeneralSecurityException;
 
@@ -1079,13 +1191,16 @@ public final class KEM {
             throws InvalidKeyException;
     public Decapsulator newDecapsulator(PrivateKey sk, AlgorithmParameterSpec spec)
             throws InvalidAlgorithmParameterException, InvalidKeyException;
-}</pre>
+}
+```
+
 
 > The `getInstance` methods create a new `KEM` object that implements the specified algorithm.
 
 And here is an example of how to use this class (again, taken from the JEP):
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">// Receiver side
+```java
+// Receiver side
 KeyPairGenerator g = KeyPairGenerator.getInstance("ABC");
 KeyPair kp = g.generateKeyPair();
 publishKey(kp.getPublic());
@@ -1110,7 +1225,9 @@ ABCKEMParameterSpec specR = algParams.getParameterSpec(ABCKEMParameterSpec.class
 KEM.Decapsulator d = kemR.newDecapsulator(kp.getPrivate(), specR);
 SecretKey secR = d.decapsulate(em);
 
-// secS and secR will be identical</pre>
+// secS and secR will be identical
+```
+
 
 #### What's Different From Java 20?
 

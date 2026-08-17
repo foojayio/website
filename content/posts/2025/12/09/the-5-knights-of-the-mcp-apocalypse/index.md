@@ -30,7 +30,7 @@ This "black box" is now a central hub with the keys to your entire kingdom (or p
 
 Let's look at the five big risks and how to *analyze* and mitigate them.
 
-*** ** * ** ***
+
 
 ### **1. The "My Prompt is Leaking Secrets" Problem 🔑** {#h3-0-1-the-my-prompt-is-leaking-secrets-problem}
 
@@ -48,7 +48,7 @@ This prompt goes *straight* to the Agent, and it could be associated with an MCP
 * Create a proxy for your Agent-MCP calls using PII/PHI redaction libraries like [Philleas from Philterd](https://www.philterd.ai/)
 * Use guardrails tools like [Lakera Guard](https://www.lakera.ai/lakera-guard) that can help prevent (reducting) data leakage.
 
-*** ** * ** ***
+
 
 ### **2. The "Is My Server a Double Agent?" Problem 🕵️** {#h3-1-2-the-is-my-server-a-double-agent-problem}
 
@@ -75,38 +75,44 @@ This prompt goes *straight* to the Agent, and it could be associated with an MCP
   * Isolate or airgap the MCP server using different approaches :
     * [Docker](https://docs.docker.com/engine/network/firewall-iptables/?utm_source=chatgpt.com#restrict-external-connections-to-containers) : private network , and IP tables filters  
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ docker network create restricted_net
+```bash
+$ docker network create restricted_net
 $ docker run -d --network restricted_net --name mycontainer myimage
 container_ip=$(docker inspect -f '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' mycontainer)
-$ iptables -A DOCKER-USER -s &lt;container_ip&gt; -d &lt;allowed_ip&gt; -j ACCEPT
-$ iptables -A DOCKER-USER -s &lt;container_ip&gt; -j DROP</pre>
+$ iptables -A DOCKER-USER -s <container_ip> -d <allowed_ip> -j ACCEPT
+$ iptables -A DOCKER-USER -s <container_ip> -j DROP
+```
+
 
 * Kubernetes: deploy the MCP server container with network policies on the Egress side  
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">apiVersion: networking.k8s.io/v1
+```yaml
+apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
-&nbsp;&nbsp;name: allow-only-google-ip
-&nbsp;&nbsp;namespace: default
+  name: allow-only-google-ip
+  namespace: default
 spec:
-&nbsp;&nbsp;podSelector:
-&nbsp;&nbsp;&nbsp;&nbsp;matchLabels:
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;app: myapp
-&nbsp;&nbsp;policyTypes:
-&nbsp;&nbsp;&nbsp;&nbsp;- Egress
-&nbsp;&nbsp;egress:
-&nbsp;&nbsp;&nbsp;&nbsp;- to:
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- ipBlock:
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cidr: 142.250.0.0/15 &nbsp; # example Google IP block
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ports:
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- protocol: TCP
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;port: 443</pre>
+  podSelector:
+    matchLabels:
+      app: myapp
+  policyTypes:
+    - Egress
+  egress:
+    - to:
+        - ipBlock:
+            cidr: 142.250.0.0/15   # example Google IP block
+      ports:
+        - protocol: TCP
+          port: 443
+```
+
 
 * Use tools like [ToolHive](https://toolhive.dev/): they add proxies and egress containers routing the network and allowing us to configure the allowed network destinations for each container (MCP server)  
 
 ![](Screenshot-2025-12-09-at-16.58.56.png)
 
-*** ** * ** ***
+
 
 ### **3. The "Black Box of Vulnerabilities" Problem 🐛** {#h3-2-3-the-black-box-of-vulnerabilities-problem}
 
@@ -132,37 +138,40 @@ spec:
 
 * **Use subagent context MCP servers** : With Claude Code you can configure certain agents for specific tasks, and associate the MCP servers list only to certain agents and not to the entire conversation Agent. This will reduce the pollution.  
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">{
-&nbsp;&nbsp;"team": {
-&nbsp;&nbsp;&nbsp;&nbsp;"agents": [
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"name": "researcher",
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"model": "claude-3.7-sonnet",
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"mcpServers": [
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"id": "arxiv",
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"type": "http",
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"url": "http://localhost:3000"
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;],
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"systemPrompt": "You are a research assistant..."
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;},
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"name": "coder",
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"model": "claude-3.7-sonnet",
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"mcpServers": [
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"id": "filesystem",
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"type": "node",
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"command": "npx",
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"args": ["@mcp/fs", "--root", "."]
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;],
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"systemPrompt": "You write code only..."
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
-&nbsp;&nbsp;&nbsp;&nbsp;]
-&nbsp;&nbsp;}
-}</pre>
+```yaml
+{
+  "team": {
+    "agents": [
+      {
+        "name": "researcher",
+        "model": "claude-3.7-sonnet",
+        "mcpServers": [
+          {
+            "id": "arxiv",
+            "type": "http",
+            "url": "http://localhost:3000"
+          }
+        ],
+        "systemPrompt": "You are a research assistant..."
+      },
+      {
+        "name": "coder",
+        "model": "claude-3.7-sonnet",
+        "mcpServers": [
+          {
+            "id": "filesystem",
+            "type": "node",
+            "command": "npx",
+            "args": ["@mcp/fs", "--root", "."]
+          }
+        ],
+        "systemPrompt": "You write code only..."
+      }
+    ]
+  }
+}
+```
+
 
 * **Explicit mention of the tool:** If we rely on the assistant to decide the tool, sometimes it can decide to use the one that retrieves a long list and then filter the right row, instead of using the tool that retrieves only the row we are interested in. We can explicitly mention the tool to be used to reduce pollution.  
 
@@ -188,7 +197,7 @@ with the sonarqube mcp server using analyze_code_snippet tool
 * **Centralized Tool Registry/Gateway:** Implement a single, organization-wide **AI Gateway** or **Tool Orchestrator** (like ToolHive, as mentioned before). This central service acts as the *only* official point of connection between Agents and tools. All individual MCPs are consolidated or replaced by a single, hardened gateway that manages all credentials and applies uniform security policies (e.g., rate limiting, logging, egress control).
 * **Service Catalog and Governance:** Create a mandatory internal **Service Catalog** for all AI-enabled tools. Before a team can deploy a new MCP, they must check the catalog to see if an existing, approved, and audited MCP/Gateway already provides the necessary function.
 
-*** ** * ** ***
+
 
 ### **Final Check: You're an Auditor** {#h3-5-final-check-you-re-an-auditor}
 

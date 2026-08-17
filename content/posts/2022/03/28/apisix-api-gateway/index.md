@@ -90,13 +90,17 @@ APISIX provides several core objects:
 
 Objects are stored in [etcd](https://etcd.io/), a distributed key-value store also used by Kubernetes. Apache APISIX exposes a REST API so that you can access the configuration in a technical-agnostic way. Here, we request all existing routes:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="shell">curl http://apisix:9080/apisix/admin/routes -H 'X-API-KEY: xyz' # 1</pre>
+```bash
+curl http://apisix:9080/apisix/admin/routes -H 'X-API-KEY: xyz' # 1
+```
+
 
 1. Configuration access is protected by default. One needs to pass the API key.
 
 Objects that use other objects can define them or point to an existing reference. For example, one can define a standalone `Route` as:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="shell">curl http://apisix:9080/apisix/admin/routes/1 -H 'X-API-KEY: xyz' -X PUT -d '
+```bash
+curl http://apisix:9080/apisix/admin/routes/1 -H 'X-API-KEY: xyz' -X PUT -d '
 {
   "uri": "/foo",
   "upstream": {
@@ -105,37 +109,46 @@ Objects that use other objects can define them or point to an existing reference
       "127.0.0.1:8080": 1
     }
   }
-}'</pre>
+}'
+```
+
 
 Or, first, define an `Upstream`:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="shell">curl http://apisix:9080/apisix/admin/upstreams/1 -H 'X-API-KEY: xyz' -X PUT -d '
+```bash
+curl http://apisix:9080/apisix/admin/upstreams/1 -H 'X-API-KEY: xyz' -X PUT -d '
 {
   "type": "roundrobin",
   "nodes": {
     "127.0.0.1:8080": 1
   }
-}'</pre>
+}'
+```
+
 
 We can now reference the newly created `Upstream` in a new `Route`:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="shell">curl http://apisix:9080/apisix/admin/routes/2 -H 'X-API-KEY: xyz' -X PUT -d '
+```bash
+curl http://apisix:9080/apisix/admin/routes/2 -H 'X-API-KEY: xyz' -X PUT -d '
 {
   "uri": "/bar",
   "upstream_id": 1
-}'</pre>
+}'
+```
+
 
 Getting your feet wet {#h2-4-getting-your-feet-wet}
 ---------------------------------------------------
 
 The quickest way to try Apache APISIX is via Docker. Apache APISIX relies on etcd for its configuration, so let's use Docker Compose:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml">version: "3"
+```yaml
+version: "3"
 
 services:
   apisix:
     image: apache/apisix:2.12.1-alpine                                      # 1
-    command: sh -c "/opt/util/wait-for etcd:2397 -- /usr/bin/apisix init &amp;&amp; /usr/bin/apisix init_etcd &amp;&amp; /usr/local/openresty/bin/openresty -p /usr/local/apisix -g 'daemon off;'" # 2
+    command: sh -c "/opt/util/wait-for etcd:2397 -- /usr/bin/apisix init && /usr/bin/apisix init_etcd && /usr/local/openresty/bin/openresty -p /usr/local/apisix -g 'daemon off;'" # 2
     volumes:
       - ./apisix_log:/usr/local/apisix/logs
       - ./apisix_conf/config.yaml:/usr/local/apisix/conf/config.yaml:ro
@@ -154,7 +167,9 @@ services:
       ETCD_ADVERTISE_CLIENT_URLS: "http://0.0.0.0:2397"                     # 4
       ETCD_LISTEN_CLIENT_URLS: "http://0.0.0.0:2397"                        # 4
     ports:
-      - "2397:2397"</pre>
+      - "2397:2397"
+```
+
 
 1. Apache APISIX image
 2. Trick to wait until etcd is fully initialized, and not only started. The `depends_on` attribute is not enough
@@ -163,7 +178,8 @@ services:
 
 We configure Apache APISIX in the `config.yaml` file. A minimal configuration file looks like this:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml">apisix:
+```yaml
+apisix:
   node_listen: 9080                           
   allow_admin:
     - 0.0.0.0/0
@@ -175,11 +191,14 @@ etcd:
   host:
     - "http://etcd:2397"
   prefix: "/apisix"
-  timeout: 30</pre>
+  timeout: 30
+```
+
 
 We can now create a simple route. We will proxy the httpbin.org service:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="shell">#!/bin/sh
+```bash
+#!/bin/sh
 curl http://localhost:9080/apisix/admin/routes -H 'X-API-KEY: edd1c9f034335f136f87ad84b625c8f1' -X POST -d '
 {
   "name": "Route to httpbin",
@@ -190,15 +209,21 @@ curl http://localhost:9080/apisix/admin/routes -H 'X-API-KEY: edd1c9f034335f136f
       "httpbin.org": 1
     }
   }
-}'</pre>
+}'
+```
+
 
 We can now test the route. `httpbin` offers a couple of endpoints. The aptly-named `/anything` endpoint returns anything passed in the request data. We can use this endpoint to check everything works as expected:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="shell">curl 'localhost:9080/anything?foo=bar&amp;baz' -X POST -d '{ "hello": "world" }' -H 'Content-Type: application/json'</pre>
+```bash
+curl 'localhost:9080/anything?foo=bar&baz' -X POST -d '{ "hello": "world" }' -H 'Content-Type: application/json'
+```
+
 
 The output should closely resemble the following:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="json">{
+```json
+{
   "args": {
     "baz": "", 
     "foo": "bar"
@@ -220,8 +245,10 @@ The output should closely resemble the following:
   }, 
   "method": "POST", 
   "origin": "172.21.0.1, 176.153.7.175", 
-  "url": "http://localhost/anything?foo=bar&amp;baz"
-}</pre>
+  "url": "http://localhost/anything?foo=bar&baz"
+}
+```
+
 
 Conclusion {#h2-5-conclusion}
 -----------------------------

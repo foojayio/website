@@ -67,7 +67,8 @@ Your BoxLang code doesn't change between any of these. Switch providers with a s
 
 The architecture is built around three layers:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">IAiService (interface — identity + capabilities)
+```
+IAiService (interface — identity + capabilities)
   └── BaseService (abstract — HTTP transport, logging, lifecycle hooks)
         ├── OpenAIService (OpenAI API format — most providers extend this)
         │     ├── ClaudeService
@@ -86,7 +87,9 @@ The architecture is built around three layers:
               ├── DockerModelRunnerService
               ├── GeminiService
               ├── OllamaService
-              └── VoyageService</pre>
+              └── VoyageService
+```
+
 
 The split between `BaseService` and `OpenAIService` is one of the most important refactors in 3.0. Before, the "base" class was OpenAI-specific code that every other provider either inherited awkwardly or had to override entirely. Now `BaseService` is a true provider-agnostic foundation, and `OpenAIService` is where the OpenAI-format-specific logic lives.
 
@@ -95,7 +98,8 @@ The split between `BaseService` and `OpenAIService` is one of the most important
 
 The base interface now declares only what's universal across *all* providers:
 
-<pre class="EnlighterJSRAW EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">// From IAiService.bx
+```java
+// From IAiService.bx
 interface {
 
     // Identity
@@ -109,7 +113,8 @@ interface {
     boolean function hasCapability( required string capability );
 
 }
-</pre>
+```
+
 
 That's it. No `chat()`. No `embeddings()`. No operation methods at all. Those live in capability interfaces --- because not every provider supports every operation.
 
@@ -120,7 +125,8 @@ The capability system is the architectural anchor of 3.0's multi-provider story.
 
 Two capability interfaces define the available operations:
 
-<pre class="EnlighterJSRAW EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">// From IAiChatService.bx
+```java
+// From IAiChatService.bx
 interface extends="IAiService" {
     function chat( required AiChatRequest chatRequest, numeric interactionCount = 0 );
     function chatStream( required AiChatRequest chatRequest, required function callback, numeric interactionCount = 0 );
@@ -130,27 +136,33 @@ interface extends="IAiService" {
 interface extends="IAiService" {
     function embeddings( required AiEmbeddingRequest embeddingRequest );
 }
-</pre>
+```
+
 
 A provider that supports both chat and embeddings implements both:
 
-<pre class="EnlighterJSRAW EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">class extends="OpenAIService" implements="IAiChatService,IAiEmbeddingsService" {
+```java
+class extends="OpenAIService" implements="IAiChatService,IAiEmbeddingsService" {
     // implements chat(), chatStream(), embeddings()
 }
-</pre>
+```
+
 
 A provider that only supports embeddings (like Voyage AI) implements only one:
 
-<pre class="EnlighterJSRAW EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">class extends="BaseService" implements="IAiEmbeddingsService" {
+```java
+class extends="BaseService" implements="IAiEmbeddingsService" {
     // implements embeddings() only — no chat, no stream
 }
-</pre>
+```
+
 
 ### Runtime Capability Detection {#h3-4-runtime-capability-detection}
 
 `BaseService` uses `isInstanceOf()` to detect implemented interfaces --- which means capability detection is always in sync with the `implements` declarations with nothing to maintain manually:
 
-<pre class="EnlighterJSRAW EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">// From BaseService.bx — getCapabilities()
+```java
+// From BaseService.bx — getCapabilities()
 public array function getCapabilities() {
     var caps = []
     if ( isInstanceOf( this, "IAiChatService" ) ) {
@@ -166,11 +178,13 @@ public array function getCapabilities() {
     }
     return caps
 }
-</pre>
+```
+
 
 ### Querying Capabilities {#h3-5-querying-capabilities}
 
-<pre class="EnlighterJSRAW EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">// Runtime introspection
+```java
+// Runtime introspection
 service = aiService( "voyage" )
 println( service.getCapabilities() )          // [ "embeddings" ]
 println( service.hasCapability( "chat" ) )    // false
@@ -179,20 +193,23 @@ println( service.hasCapability( "embeddings" ) ) // true
 service = aiService( "openai" )
 println( service.getCapabilities() )          // [ "chat", "stream", "embeddings" ]
 println( service.hasCapability( "chat" ) )    // true
-</pre>
+```
+
 
 ### Enforced at the BIF Level {#h3-6-enforced-at-the-bif-level}
 
 `aiChat()`, `aiChatStream()`, and `aiEmbed()` all check provider capabilities before calling and throw a clear `UnsupportedCapability` exception if the requirement isn't met:
 
-<pre class="EnlighterJSRAW EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">// This throws immediately — Voyage has no chat capability
+```java
+// This throws immediately — Voyage has no chat capability
 aiChat( "Hello?", provider: "voyage" )
 // UnsupportedCapability: Provider 'voyage' does not support 'chat'. Supported: ["embeddings"]
 
 // This throws immediately — Claude has no embeddings capability
 aiEmbed( "some text", provider: "claude" )
 // UnsupportedCapability: Provider 'claude' does not support 'embeddings'. Supported: ["chat", "stream"]
-</pre>
+```
+
 
 No more cryptic 404s or malformed response errors when you call the wrong operation on the wrong provider.
 
@@ -208,14 +225,16 @@ No more cryptic 404s or malformed response errors when you call the wrong operat
 * **Pre/post hooks** --- `preRequest()` and `postResponse()` for provider-specific normalization  
   The pre/post hook pattern is worth understanding. Instead of overriding the entire `sendChatRequest()` method to add a custom header or normalize a response, providers override two lightweight hooks:
 
-<pre class="EnlighterJSRAW EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">// This throws immediately — Voyage has no chat capability
+```java
+// This throws immediately — Voyage has no chat capability
 aiChat( "Hello?", provider: "voyage" )
 // UnsupportedCapability: Provider 'voyage' does not support 'chat'. Supported: ["embeddings"]
 
 // This throws immediately — Claude has no embeddings capability
 aiEmbed( "some text", provider: "claude" )
 // UnsupportedCapability: Provider 'claude' does not support 'embeddings'. Supported: ["chat", "stream"]
-</pre>
+```
+
 
 This keeps the HTTP transport code in `BaseService` and isolates provider-specific behavior in tiny, focused overrides.
 
@@ -226,7 +245,8 @@ Every provider auto-detects its API key from environment variables using a conve
 
 Full provider configuration in `boxlang.json`:
 
-<pre class="EnlighterJSRAW EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">{
+```java
+{
     "modules": {
         "bxai": {
             "settings": {
@@ -253,7 +273,8 @@ Full provider configuration in `boxlang.json`:
         }
     }
 }
-</pre>
+```
+
 
 Provider-specific params override the global `defaultParams`. Per-request params override provider params. The merge order is predictable and deterministic.
 
@@ -262,7 +283,8 @@ Provider-specific params override the global `defaultParams`. Per-request params
 
 All senders in `BaseService` now accept a `baseUrl` override --- making it trivial to use proxies, self-hosted endpoints, and OpenAI-compatible APIs:
 
-<pre class="EnlighterJSRAW EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">// Via config
+```java
+// Via config
 model = aiModel( provider: "openai", options: { baseUrl: "http://my-proxy/v1" } )
 
 // Via module settings
@@ -274,7 +296,8 @@ model = aiModel( provider: "openai", options: { baseUrl: "http://my-proxy/v1" } 
 
 // Local Ollama
 model = aiModel( provider: "ollama", options: { baseUrl: "http://my-ollama-server:11434" } )
-</pre>
+```
+
 
 This is how you use any OpenAI-compatible API --- LM Studio, vLLM, LocalAI, Amazon Bedrock with proxy, etc. --- without writing a custom provider class.
 
@@ -283,14 +306,17 @@ This is how you use any OpenAI-compatible API --- LM Studio, vLLM, LocalAI, Amaz
 
 Ollama deserves a special mention. With BoxLang AI, running fully local AI is as simple as:
 
-<pre class="EnlighterJSRAW EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group=""># Install Ollama
+```java
+# Install Ollama
 # Pull a model
 ollama pull llama3.2
 
 # Configure BoxLang AI
-</pre>
+```
 
-<pre class="EnlighterJSRAW EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">{
+
+```java
+{
     "modules": {
         "bxai": {
             "settings": {
@@ -300,11 +326,14 @@ ollama pull llama3.2
         }
     }
 }
-</pre>
+```
 
-<pre class="EnlighterJSRAW EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">// Your code doesn't change at all
+
+```java
+// Your code doesn't change at all
 answer = aiChat( "What is BoxLang?" )
-</pre>
+```
+
 
 The same code that runs against OpenAI runs against your local Ollama instance. Switch back by changing the provider in config. This is the zero-vendor-lock-in promise in practice.
 
@@ -315,12 +344,14 @@ Docker Compose setup for development teams that want a shared Ollama instance is
 
 `HuggingFaceService` now supports embeddings via the HuggingFace Inference API --- useful for semantic search, RAG pipelines, and clustering workflows where you want to use community-hosted models:
 
-<pre class="EnlighterJSRAW EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">embeddings = aiEmbed(
+```java
+embeddings = aiEmbed(
     [ "BoxLang is a modern JVM language", "AI is transforming software development" ],
     provider : "huggingface",
     options  : { apiKey: "${Setting: HUGGINGFACE_API_KEY not found}" }
 )
-</pre>
+```
+
 
 The service uses the OpenAI-compatible router endpoint at `router.huggingface.co/v1`, so any HuggingFace model exposed through their inference API works out of the box.
 
@@ -329,7 +360,8 @@ The service uses the OpenAI-compatible router endpoint at `router.huggingface.co
 
 If you need a provider that BoxLang AI doesn't support yet, extending the framework is straightforward. For any provider that uses the OpenAI API format (most do), extend `OpenAIService` and override just what's different:
 
-<pre class="EnlighterJSRAW EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">// MyCustomProvider.bx
+```java
+// MyCustomProvider.bx
 import bxModules.bxai.models.providers.OpenAIService;
 import bxModules.bxai.models.providers.capabilities.IAiChatService;
 import bxModules.bxai.models.providers.capabilities.IAiEmbeddingsService;
@@ -353,19 +385,22 @@ class extends="OpenAIService" implements="IAiChatService,IAiEmbeddingsService" {
     }
 
 }
-</pre>
+```
+
 
 For providers with fully custom API formats (like Claude's or Gemini's native APIs), extend `BaseService` directly and implement the capability interfaces you need --- you own the full `chat()`, `chatStream()`, and `embeddings()` implementations.
 
 Register your custom provider via the `onMissingAiProvider` event:
 
-<pre class="EnlighterJSRAW EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">// In Application.bx or a module's onLoad
-bxEvents.listen( "onMissingAiProvider", ( data ) =&gt; {
+```java
+// In Application.bx or a module's onLoad
+bxEvents.listen( "onMissingAiProvider", ( data ) => {
     if ( data.provider == "my-provider" ) {
         data.service = new MyCustomProvider().configure( data.options )
     }
 } )
-</pre>
+```
+
 
 📢 The Event System {#h2-13-the-event-system}
 ---------------------------------------------
@@ -386,7 +421,8 @@ Every operation through `BaseService` fires BoxLang global events you can interc
 
 The `onAITokenCount` event includes `tenantId` and `usageMetadata` for multi-tenant billing --- you can attribute every token to a specific customer, project, or cost center:
 
-<pre class="EnlighterJSRAW EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">bxEvents.listen( "onAITokenCount", ( data ) =&gt; {
+```java
+bxEvents.listen( "onAITokenCount", ( data ) => {
     billing.record(
         tenantId       : data.tenantId,
         provider       : data.provider,
@@ -396,7 +432,8 @@ The `onAITokenCount` event includes `tenantId` and `usageMetadata` for multi-ten
         usageMetadata  : data.usageMetadata
     )
 } )
-</pre>
+```
+
 
 🔄 Switching Providers in Practice {#h2-14-switching-providers-in-practice}
 ---------------------------------------------------------------------------
@@ -405,16 +442,21 @@ To drive the point home --- here's what switching from OpenAI to Claude looks li
 
 **Config change:**
 
-<pre class="EnlighterJSRAW EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">// Before
+```java
+// Before
 { "provider": "openai" }
 
 // After
 { "provider": "claude" }
-</pre>
+```
+
 
 **Code change:**
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">(none)</pre>
+```
+(none)
+```
+
 
 Your `aiChat()`, `aiEmbed()`, `aiAgent()`, and `aiModel()` calls are all identical. The provider-specific formatting, authentication, and response normalization live entirely inside the provider classes --- your application code never sees it.
 
@@ -433,12 +475,14 @@ Over these five posts, we've covered the full depth of BoxLang AI 3.0:
 Get Started {#h2-16-get-started}
 --------------------------------
 
-<pre class="EnlighterJSRAW EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group=""># Install via CommandBox
-install <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="1e7c66337f775e2d302e302e">[email&nbsp;protected]</a>
+```
+# Install via CommandBox
+install <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="1e7c66337f775e2d302e302e">[email protected]</a>
 
 # Or for OS/CLI applications
 install-bx-module bx-ai
-</pre>
+```
+
 
 📖 [Full Documentation](https://boxlang.ortusbooks.com/ai) 📦 [ForgeBox Package](https://forgebox.io/view/bx-ai) 🎓 [AI BootCamp](https://github.com/ortus-boxlang/bx-ai-bootcamp) 🐛 [Report Issues](https://github.com/ortus-boxlang/bx-ai/issues) 💬 [Community Slack](https://boxteam.ortussolutions.com/) 💼 [BoxLang+ Plans](https://www.boxlang.io/plans)
 

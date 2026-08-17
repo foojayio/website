@@ -48,16 +48,19 @@ Wikipedia provides changes through [Server-Sent Events](https://fr.wikipedia.org
 
 Here's an excerpt from the POM:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="xml">&lt;dependency&gt;
-    &lt;groupId&gt;com.hazelcast&lt;/groupId&gt;
-    &lt;artifactId&gt;hazelcast&lt;/artifactId&gt;
-    &lt;version&gt;${hazelcast.version}&lt;/version&gt;
-&lt;/dependency&gt;
-&lt;dependency&gt;
-    &lt;groupId&gt;com.launchdarkly&lt;/groupId&gt;
-    &lt;artifactId&gt;okhttp-eventsource&lt;/artifactId&gt;
-    &lt;version&gt;2.3.2&lt;/version&gt;
-&lt;/dependency&gt;</pre>
+```xml
+<dependency>
+    <groupId>com.hazelcast</groupId>
+    <artifactId>hazelcast</artifactId>
+    <version>${hazelcast.version}</version>
+</dependency>
+<dependency>
+    <groupId>com.launchdarkly</groupId>
+    <artifactId>okhttp-eventsource</artifactId>
+    <version>2.3.2</version>
+</dependency>
+```
+
 
 Hazelcast data pipelines work by regularly polling the source. With an HTTP endpoint, that's straightforward, but with SSE, not so much as SSE relies on subscription. Hence, we need to implement a custom `Source` and design it around an internal queue to store the changes as they arrive, while polling will dequeue and send them further down the pipeline.
 
@@ -75,24 +78,27 @@ From a dynamic point of view, the system can be modeled as:
 
 Running the code outputs something like this:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="json">{"server_script_path":"/w","server_name":"en.wikipedia.org","$schema":"/mediawiki/recentchange/1.0.0","bot":false,"wiki":"enwiki","type":"categorize","title":"Category:Biography articles without listas parameter","meta":{"dt":"2021-07-28T04:07:40Z","partition":0,"offset":363427323,"stream":"mediawiki.recentchange","domain":"en.wikipedia.org","topic":"codfw.mediawiki.recentchange","id":"01592c7a-03f1-46cd-9472-3bbe63aff0ec","uri":"https://en.wikipedia.org/wiki/Category:Biography_articles_without_listas_parameter","request_id":"b49c3b98-2064-44da-aab4-ab7b3bf65bdd"},"namespace":14,"comment":"[[:Talk:Jeff S. Klotz]] removed from category","id":1406951122,"server_url":"https://en.wikipedia.org","user":"Lepricavark","parsedcomment":"&lt;a href=\"/wiki/Talk:Jeff_S._Klotz\" title=\"Talk:Jeff S. Klotz\"&gt;Talk:Jeff S. Klotz&lt;\/a&gt; removed from category","timestamp":1627445260}
-{"server_script_path":"/w","server_name":"commons.wikimedia.org","$schema":"/mediawiki/recentchange/1.0.0","bot":true,"wiki":"commonswiki","type":"categorize","title":"Category:Flickr images reviewed by FlickreviewR 2","meta":{"dt":"2021-07-28T04:07:42Z","partition":0,"offset":363427324,"stream":"mediawiki.recentchange","domain":"commons.wikimedia.org","topic":"codfw.mediawiki.recentchange","id":"68f3a372-112d-4dae-af8f-25d88984f1d8","uri":"https://commons.wikimedia.org/wiki/Category:Flickr_images_reviewed_by_FlickreviewR_2","request_id":"1a132610-85e0-4954-9329-9e44691970aa"},"namespace":14,"comment":"[[:File:Red squirrel (51205279267).jpg]] added to category","id":1729953358,"server_url":"https://commons.wikimedia.org","user":"FlickreviewR 2","parsedcomment":"&lt;a href=\"/wiki/File:Red_squirrel_(51205279267).jpg\" title=\"File:Red squirrel (51205279267).jpg\"&gt;File:Red squirrel (51205279267).jpg&lt;\/a&gt; added to category","timestamp":1627445262}
-{"server_script_path":"/w","server_name":"commons.wikimedia.org","$schema":"/mediawiki/recentchange/1.0.0","bot":true,"wiki":"commonswiki","type":"categorize","title":"Category:Flickr review needed","meta":{"dt":"2021-07-28T04:07:42Z","partition":0,"offset":363427325,"stream":"mediawiki.recentchange","domain":"commons.wikimedia.org","topic":"codfw.mediawiki.recentchange","id":"b4563ed9-a6f2-40de-9e71-c053f5352846","uri":"https://commons.wikimedia.org/wiki/Category:Flickr_review_needed","request_id":"1a132610-85e0-4954-9329-9e44691970aa"},"namespace":14,"comment":"[[:File:Red squirrel (51205279267).jpg]] removed from category","id":1729953359,"server_url":"https://commons.wikimedia.org","user":"FlickreviewR 2","parsedcomment":"&lt;a href=\"/wiki/File:Red_squirrel_(51205279267).jpg\" title=\"File:Red squirrel (51205279267).jpg\"&gt;File:Red squirrel (51205279267).jpg&lt;\/a&gt; removed from category","timestamp":1627445262}
-{"server_script_path":"/w","server_name":"www.wikidata.org","$schema":"/mediawiki/recentchange/1.0.0","minor":false,"bot":true,"wiki":"wikidatawiki","length":{"new":31968,"old":31909},"type":"edit","title":"Q40652","revision":{"new":1468164253,"old":1446892882},"patrolled":true,"meta":{"dt":"2021-07-28T04:07:43Z","partition":0,"offset":363427326,"stream":"mediawiki.recentchange","domain":"www.wikidata.org","topic":"codfw.mediawiki.recentchange","id":"70784dde-0360-4292-9f62-81323ced9aa7","uri":"https://www.wikidata.org/wiki/Q40652","request_id":"f9686303-ffed-4c62-8532-bf870288ff55"},"namespace":0,"comment":"/* wbsetaliases-add:1|zh */ 蒂托, [[User:Cewbot#Import labels/aliases|import label/alias]] from [[zh:巴西國家足球隊]], [[zh:何塞·保罗·贝塞拉·马希尔·儒尼奥尔]], [[zh:2018年國際足協世界盃參賽球員名單]], [[zh:埃德爾·米利唐]], [[zh:加布里埃爾·馬丁內利]], [[zh:2019年南美超级德比杯]], [[zh:2019年美洲杯决赛]], [[zh:2019年美洲杯参赛名单]], [[zh:2021年美洲杯B组]], [[zh:2021年美洲國家盃決賽]]","id":1514670479,"server_url":"https://www.wikidata.org","user":"Cewbot","parsedcomment":"\u200e&lt;span dir=\"auto\"&gt;&lt;span class=\"autocomment\"&gt;Added Chinese alias: &lt;\/span&gt;&lt;\/span&gt; 蒂托, &lt;a href=\"/wiki/User:Cewbot#Import_labels/aliases\" title=\"User:Cewbot\"&gt;import label/alias&lt;\/a&gt; from &lt;a href=\"https://zh.wikipedia.org/wiki/%E5%B7%B4%E8%A5%BF%E5%9C%8B%E5%AE%B6%E8%B6%B3%E7%90%83%E9%9A%8A\" class=\"extiw\" title=\"zh:巴西國家足球隊\"&gt;zh:巴西國家足球隊&lt;\/a&gt;, &lt;a href=\"https://zh.wikipedia.org/wiki/%E4%BD%95%E5%A1%9E%C2%B7%E4%BF%9D%E7%BD%97%C2%B7%E8%B4%9D%E5%A1%9E%E6%8B%89%C2%B7%E9%A9%AC%E5%B8%8C%E5%B0%94%C2%B7%E5%84%92%E5%B0%BC%E5%A5%A5%E5%B0%94\" class=\"extiw\" title=\"zh:何塞·保罗·贝塞拉·马希尔·儒尼奥尔\"&gt;zh:何塞·保罗·贝塞拉·马希尔·儒尼奥尔&lt;\/a&gt;, &lt;a href=\"https://zh.wikipedia.org/wiki/2018%E5%B9%B4%E5%9C%8B%E9%9A%9B%E8%B6%B3%E5%8D%94%E4%B8%96%E7%95%8C%E7%9B%83%E5%8F%83%E8%B3%BD%E7%90%83%E5%93%A1%E5%90%8D%E5%96%AE\" class=\"extiw\" title=\"zh:2018年國際足協世界盃參賽球員名單\"&gt;zh:2018年國際足協世界盃參賽球員名單&lt;\/a&gt;, &lt;a href=\"https://zh.wikipedia.org/wiki/%E5%9F%83%E5%BE%B7%E7%88%BE%C2%B7%E7%B1%B3%E5%88%A9%E5%94%90\" class=\"extiw\" title=\"zh:埃德爾·米利唐\"&gt;zh:埃德爾·米利唐&lt;\/a&gt;, &lt;a href=\"https://zh.wikipedia.org/wiki/%E5%8A%A0%E5%B8%83%E9%87%8C%E5%9F%83%E7%88%BE%C2%B7%E9%A6%AC%E4%B8%81%E5%85%A7%E5%88%A9\" class=\"extiw\" title=\"zh:加布里埃爾·馬丁內利\"&gt;zh:加布里埃爾·馬丁內利&lt;\/a&gt;, &lt;a href=\"https://zh.wikipedia.org/wiki/2019%E5%B9%B4%E5%8D%97%E7%BE%8E%E8%B6%85%E7%BA%A7%E5%BE%B7%E6%AF%94%E6%9D%AF\" class=\"extiw\" title=\"zh:2019年南美超级德比杯\"&gt;zh:2019年南美超级德比杯&lt;\/a&gt;, &lt;a href=\"https://zh.wikipedia.org/wiki/2019%E5%B9%B4%E7%BE%8E%E6%B4%B2%E6%9D%AF%E5%86%B3%E8%B5%9B\" class=\"extiw\" title=\"zh:2019年美洲杯决赛\"&gt;zh:2019年美洲杯决赛&lt;\/a&gt;, &lt;a href=\"https://zh.wikipedia.org/wiki/2019%E5%B9%B4%E7%BE%8E%E6%B4%B2%E6%9D%AF%E5%8F%82%E8%B5%9B%E5%90%8D%E5%8D%95\" class=\"extiw\" title=\"zh:2019年美洲杯参赛名单\"&gt;zh:2019年美洲杯参赛名单&lt;\/a&gt;, &lt;a href=\"https://zh.wikipedia.org/wiki/2021%E5%B9%B4%E7%BE%8E%E6%B4%B2%E6%9D%AFB%E7%BB%84\" class=\"extiw\" title=\"zh:2021年美洲杯B组\"&gt;zh:2021年美洲杯B组&lt;\/a&gt;, &lt;a href=\"https://zh.wikipedia.org/wiki/2021%E5%B9%B4%E7%BE%8E%E6%B4%B2%E5%9C%8B%E5%AE%B6%E7%9B%83%E6%B1%BA%E8%B3%BD\" class=\"extiw\" title=\"zh:2021年美洲國家盃決賽\"&gt;zh:2021年美洲國家盃決賽&lt;\/a&gt;","timestamp":1627445263}
-{"server_script_path":"/w","server_name":"www.wikidata.org","$schema":"/mediawiki/recentchange/1.0.0","minor":false,"bot":true,"wiki":"wikidatawiki","length":{"new":239,"old":161},"type":"edit","title":"Q107674623","revision":{"new":1468164250,"old":1468164243},"patrolled":true,"meta":{"dt":"2021-07-28T04:07:43Z","partition":0,"offset":363427327,"stream":"mediawiki.recentchange","domain":"www.wikidata.org","topic":"codfw.mediawiki.recentchange","id":"40260137-ee52-4a67-b024-22d3cf86907a","uri":"https://www.wikidata.org/wiki/Q107674623","request_id":"db6e073a-19f6-4658-9425-7992b34b4208"},"namespace":0,"comment":"/* wbsetlabel-add:1|de */ Favolaschia filopes","id":1514670480,"server_url":"https://www.wikidata.org","user":"SuccuBot","parsedcomment":"\u200e&lt;span dir=\"auto\"&gt;&lt;span class=\"autocomment\"&gt;Bezeichnung für [de] hinzugefügt: &lt;\/span&gt;&lt;\/span&gt; Favolaschia filopes","timestamp":1627445263}
-{"server_script_path":"/w","server_name":"ko.wikipedia.org","$schema":"/mediawiki/recentchange/1.0.0","minor":true,"bot":true,"wiki":"kowiki","length":{"new":1158,"old":1161},"type":"edit","title":"이시다테 야스키","revision":{"new":29895993,"old":26098259},"meta":{"dt":"2021-07-28T04:07:43Z","partition":0,"offset":363427328,"stream":"mediawiki.recentchange","domain":"ko.wikipedia.org","topic":"codfw.mediawiki.recentchange","id":"c23bdb77-e88c-48d3-9d24-3c4dd8ef1dbf","uri":"https://ko.wikipedia.org/wiki/%EC%9D%B4%EC%8B%9C%EB%8B%A4%ED%85%8C_%EC%95%BC%EC%8A%A4%ED%82%A4","request_id":"0010e77b-fbcd-4de8-a5ad-4616adbbd6d4"},"namespace":0,"comment":"봇: 분류 이름 변경 (분류:1984년 태어남 → [[분류:1984년 출생]])","id":56333828,"server_url":"https://ko.wikipedia.org","user":"TedBot","parsedcomment":"봇: 분류 이름 변경 (분류:1984년 태어남 → &lt;a href=\"/wiki/%EB%B6%84%EB%A5%98:1984%EB%85%84_%EC%B6%9C%EC%83%9D\" title=\"분류:1984년 출생\"&gt;분류:1984년 출생&lt;\/a&gt;)","timestamp":1627445263}
-{"server_script_path":"/w","server_name":"commons.wikimedia.org","$schema":"/mediawiki/recentchange/1.0.0","minor":false,"bot":true,"wiki":"commonswiki","length":{"new":3864,"old":527},"type":"edit","title":"File:Albizia kalkora 06.jpg","revision":{"new":577195372,"old":577193453},"patrolled":true,"meta":{"dt":"2021-07-28T04:07:44Z","partition":0,"offset":363427329,"stream":"mediawiki.recentchange","domain":"commons.wikimedia.org","topic":"codfw.mediawiki.recentchange","id":"1a7fcb55-dec7-4303-b757-19f6a6a4dcdd","uri":"https://commons.wikimedia.org/wiki/File:Albizia_kalkora_06.jpg","request_id":"7f841b4a-ac70-4c2b-a148-bc07696ccf7a"},"namespace":6,"comment":"/* wbeditentity-update:0| */ Adding structured data: date, camera, author, copyright &amp; source","id":1729953360,"server_url":"https://commons.wikimedia.org","user":"BotMultichillT","parsedcomment":"\u200e&lt;span dir=\"auto\"&gt;&lt;span class=\"autocomment\"&gt;Changed an entity: &lt;\/span&gt;&lt;\/span&gt; Adding structured data: date, camera, author, copyright &amp; source","timestamp":1627445264}
-{"server_script_path":"/w","server_name":"id.wikipedia.org","$schema":"/mediawiki/recentchange/1.0.0","minor":true,"bot":true,"wiki":"idwiki","length":{"new":977,"old":962},"type":"edit","title":"Euporus linearis","revision":{"new":18801346,"old":16068468},"patrolled":true,"meta":{"dt":"2021-07-28T04:07:43Z","partition":0,"offset":363427330,"stream":"mediawiki.recentchange","domain":"id.wikipedia.org","topic":"codfw.mediawiki.recentchange","id":"6c3882f9-9fd0-4f43-ab69-e538762c7981","uri":"https://id.wikipedia.org/wiki/Euporus_linearis","request_id":"dea59b42-7c97-4cbc-9384-5d8836a981ec"},"namespace":0,"comment":"[[Wikipedia:Bot|Bot]]: fixed → [[Kategori:Taxonbar tanpa parameter from|taxonbar tanpa parameter from]]","id":42309169,"server_url":"https://id.wikipedia.org","user":"HsfBot","parsedcomment":"&lt;a href=\"/wiki/Wikipedia:Bot\" title=\"Wikipedia:Bot\"&gt;Bot&lt;\/a&gt;: fixed → &lt;a href=\"/wiki/Kategori:Taxonbar_tanpa_parameter_from\" title=\"Kategori:Taxonbar tanpa parameter from\"&gt;taxonbar tanpa parameter from&lt;\/a&gt;","timestamp":1627445263}
-{"server_script_path":"/w","server_name":"www.wikidata.org","$schema":"/mediawiki/recentchange/1.0.0","minor":false,"bot":false,"wiki":"wikidatawiki","length":{"new":25025,"old":24908},"type":"edit","title":"Q80075231","revision":{"new":1468164255,"old":1467697536},"patrolled":true,"meta":{"dt":"2021-07-28T04:07:44Z","partition":0,"offset":363427331,"stream":"mediawiki.recentchange","domain":"www.wikidata.org","topic":"codfw.mediawiki.recentchange","id":"720f6507-1ea1-4665-b1b9-1665c97450a9","uri":"https://www.wikidata.org/wiki/Q80075231","request_id":"43b7d511-007f-4005-a562-5002c7e0aff4"},"namespace":0,"comment":"/* wbsetdescription-add:1|dv */ އަކުއިލާ ނަކަތުގައިވާ ތަރިއެއް, [[:toollabs:quickstatements/#/batch/60416|batch #60416]]","id":1514670481,"server_url":"https://www.wikidata.org","user":"EN-Jungwon","parsedcomment":"\u200e&lt;span dir=\"auto\"&gt;&lt;span class=\"autocomment\"&gt;Added [dv] description: &lt;\/span&gt;&lt;\/span&gt; އަކުއިލާ ނަކަތުގައިވާ ތަރިއެއް, &lt;a href=\"https://iw.toolforge.org/quickstatements/#.2Fbatch.2F60416\" class=\"extiw\" title=\"toollabs:quickstatements/\"&gt;batch #60416&lt;\/a&gt;","timestamp":1627445264}
-{"server_script_path":"/w","server_name":"www.wikidata.org","$schema":"/mediawiki/recentchange/1.0.0","minor":false,"bot":false,"wiki":"wikidatawiki","length":{"new":5312,"old":4884},"type":"edit","title":"Q85766437","revision":{"new":1468164246,"old":1342535335},"patrolled":true,"meta":{"dt":"2021-07-28T04:07:42Z","partition":0,"offset":363427332,"stream":"mediawiki.recentchange","domain":"www.wikidata.org","topic":"codfw.mediawiki.recentchange","id":"ad173600-09b7-4ccd-9490-4a60f6a432ea","uri":"https://www.wikidata.org/wiki/Q85766437","request_id":"1228a17e-2baa-46cc-a3bc-2049a62982c9"},"namespace":0,"comment":"/* wbcreateclaim-create:1| */ [[Property:P7937]]: [[Q7366]], [[:toollabs:quickstatements/#/batch/60404|batch #60404]]","id":1514670483,"server_url":"https://www.wikidata.org","user":"Moebeus","parsedcomment":"\u200e&lt;span dir=\"auto\"&gt;&lt;span class=\"autocomment\"&gt;Created claim: &lt;\/span&gt;&lt;\/span&gt; &lt;a href=\"/wiki/Property:P7937\" title=\"Property:P7937\"&gt;Property:P7937&lt;\/a&gt;: &lt;a href=\"/wiki/Q7366\" title=\"Q7366\"&gt;Q7366&lt;\/a&gt;, &lt;a href=\"https://iw.toolforge.org/quickstatements/#.2Fbatch.2F60404\" class=\"extiw\" title=\"toollabs:quickstatements/\"&gt;batch #60404&lt;\/a&gt;","timestamp":1627445262}
-{"server_script_path":"/w","server_name":"www.wikidata.org","$schema":"/mediawiki/recentchange/1.0.0","minor":false,"bot":false,"wiki":"wikidatawiki","length":{"new":5134,"old":5126},"type":"edit","title":"Q12444793","revision":{"new":1468164254,"old":1413396080},"patrolled":false,"meta":{"dt":"2021-07-28T04:07:43Z","partition":0,"offset":363427333,"stream":"mediawiki.recentchange","domain":"www.wikidata.org","topic":"codfw.mediawiki.recentchange","id":"c01d52c5-c476-4554-814d-513342e04686","uri":"https://www.wikidata.org/wiki/Q12444793","request_id":"6d0a32b9-1234-4c8e-a02a-d92608f06d33"},"namespace":0,"comment":"/* wbsetdescription-set:1|hi */ भारत के उत्तराखण्ड राज्य का एक गाँव bikash","id":1514670482,"server_url":"https://www.wikidata.org","user":"2409:4061:219C:613E:DFD9:6BD4:F234:E7E0","parsedcomment":"\u200e&lt;span dir=\"auto\"&gt;&lt;span class=\"autocomment\"&gt;बदला [hi] विवरण: &lt;\/span&gt;&lt;\/span&gt; भारत के उत्तराखण्ड राज्य का एक गाँव bikash","timestamp":1627445263}
-{"server_script_path":"/w","server_name":"www.wikidata.org","$schema":"/mediawiki/recentchange/1.0.0","minor":false,"bot":false,"wiki":"wikidatawiki","length":{"new":22936,"old":22819},"type":"edit","title":"Q80075234","revision":{"new":1468164258,"old":1467697544},"patrolled":true,"meta":{"dt":"2021-07-28T04:07:44Z","partition":0,"offset":363427334,"stream":"mediawiki.recentchange","domain":"www.wikidata.org","topic":"codfw.mediawiki.recentchange","id":"7016afae-6691-4dca-bfaf-a5a3363edf31","uri":"https://www.wikidata.org/wiki/Q80075234","request_id":"aa4f6828-149d-4feb-a3cf-cd39902773fe"},"namespace":0,"comment":"/* wbsetdescription-add:1|dv */ އަކުއިލާ ނަކަތުގައިވާ ތަރިއެއް, [[:toollabs:quickstatements/#/batch/60416|batch #60416]]","id":1514670484,"server_url":"https://www.wikidata.org","user":"EN-Jungwon","parsedcomment":"\u200e&lt;span dir=\"auto\"&gt;&lt;span class=\"autocomment\"&gt;Added [dv] description: &lt;\/span&gt;&lt;\/span&gt; އަކުއިލާ ނަކަތުގައިވާ ތަރިއެއް, &lt;a href=\"https://iw.toolforge.org/quickstatements/#.2Fbatch.2F60416\" class=\"extiw\" title=\"toollabs:quickstatements/\"&gt;batch #60416&lt;\/a&gt;","timestamp":1627445264}
-{"server_script_path":"/w","server_name":"de.wikipedia.org","$schema":"/mediawiki/recentchange/1.0.0","minor":false,"bot":true,"wiki":"dewiki","length":{"new":17069,"old":17075},"type":"edit","title":"Liste der Biografien/Caro","revision":{"new":214271460,"old":213857611},"meta":{"dt":"2021-07-28T04:07:43Z","partition":0,"offset":363427335,"stream":"mediawiki.recentchange","domain":"de.wikipedia.org","topic":"codfw.mediawiki.recentchange","id":"6618b0ab-eadf-405a-a474-ec2ad9fef8bb","uri":"https://de.wikipedia.org/wiki/Liste_der_Biografien/Caro","request_id":"23181b86-03de-4153-ad99-e7e20e611ed6"},"namespace":0,"comment":"Bot: Automatische Aktualisierung, siehe [[Benutzer:APPERbot/LdB]]","id":309672385,"server_url":"https://de.wikipedia.org","user":"APPERbot","parsedcomment":"Bot: Automatische Aktualisierung, siehe &lt;a href=\"/wiki/Benutzer:APPERbot/LdB\" title=\"Benutzer:APPERbot/LdB\"&gt;Benutzer:APPERbot/LdB&lt;\/a&gt;","timestamp":1627445263}
-</pre>
+```json
+{"server_script_path":"/w","server_name":"en.wikipedia.org","$schema":"/mediawiki/recentchange/1.0.0","bot":false,"wiki":"enwiki","type":"categorize","title":"Category:Biography articles without listas parameter","meta":{"dt":"2021-07-28T04:07:40Z","partition":0,"offset":363427323,"stream":"mediawiki.recentchange","domain":"en.wikipedia.org","topic":"codfw.mediawiki.recentchange","id":"01592c7a-03f1-46cd-9472-3bbe63aff0ec","uri":"https://en.wikipedia.org/wiki/Category:Biography_articles_without_listas_parameter","request_id":"b49c3b98-2064-44da-aab4-ab7b3bf65bdd"},"namespace":14,"comment":"[[:Talk:Jeff S. Klotz]] removed from category","id":1406951122,"server_url":"https://en.wikipedia.org","user":"Lepricavark","parsedcomment":"<a href=\"/wiki/Talk:Jeff_S._Klotz\" title=\"Talk:Jeff S. Klotz\">Talk:Jeff S. Klotz<\/a> removed from category","timestamp":1627445260}
+{"server_script_path":"/w","server_name":"commons.wikimedia.org","$schema":"/mediawiki/recentchange/1.0.0","bot":true,"wiki":"commonswiki","type":"categorize","title":"Category:Flickr images reviewed by FlickreviewR 2","meta":{"dt":"2021-07-28T04:07:42Z","partition":0,"offset":363427324,"stream":"mediawiki.recentchange","domain":"commons.wikimedia.org","topic":"codfw.mediawiki.recentchange","id":"68f3a372-112d-4dae-af8f-25d88984f1d8","uri":"https://commons.wikimedia.org/wiki/Category:Flickr_images_reviewed_by_FlickreviewR_2","request_id":"1a132610-85e0-4954-9329-9e44691970aa"},"namespace":14,"comment":"[[:File:Red squirrel (51205279267).jpg]] added to category","id":1729953358,"server_url":"https://commons.wikimedia.org","user":"FlickreviewR 2","parsedcomment":"<a href=\"/wiki/File:Red_squirrel_(51205279267).jpg\" title=\"File:Red squirrel (51205279267).jpg\">File:Red squirrel (51205279267).jpg<\/a> added to category","timestamp":1627445262}
+{"server_script_path":"/w","server_name":"commons.wikimedia.org","$schema":"/mediawiki/recentchange/1.0.0","bot":true,"wiki":"commonswiki","type":"categorize","title":"Category:Flickr review needed","meta":{"dt":"2021-07-28T04:07:42Z","partition":0,"offset":363427325,"stream":"mediawiki.recentchange","domain":"commons.wikimedia.org","topic":"codfw.mediawiki.recentchange","id":"b4563ed9-a6f2-40de-9e71-c053f5352846","uri":"https://commons.wikimedia.org/wiki/Category:Flickr_review_needed","request_id":"1a132610-85e0-4954-9329-9e44691970aa"},"namespace":14,"comment":"[[:File:Red squirrel (51205279267).jpg]] removed from category","id":1729953359,"server_url":"https://commons.wikimedia.org","user":"FlickreviewR 2","parsedcomment":"<a href=\"/wiki/File:Red_squirrel_(51205279267).jpg\" title=\"File:Red squirrel (51205279267).jpg\">File:Red squirrel (51205279267).jpg<\/a> removed from category","timestamp":1627445262}
+{"server_script_path":"/w","server_name":"www.wikidata.org","$schema":"/mediawiki/recentchange/1.0.0","minor":false,"bot":true,"wiki":"wikidatawiki","length":{"new":31968,"old":31909},"type":"edit","title":"Q40652","revision":{"new":1468164253,"old":1446892882},"patrolled":true,"meta":{"dt":"2021-07-28T04:07:43Z","partition":0,"offset":363427326,"stream":"mediawiki.recentchange","domain":"www.wikidata.org","topic":"codfw.mediawiki.recentchange","id":"70784dde-0360-4292-9f62-81323ced9aa7","uri":"https://www.wikidata.org/wiki/Q40652","request_id":"f9686303-ffed-4c62-8532-bf870288ff55"},"namespace":0,"comment":"/* wbsetaliases-add:1|zh */ 蒂托, [[User:Cewbot#Import labels/aliases|import label/alias]] from [[zh:巴西國家足球隊]], [[zh:何塞·保罗·贝塞拉·马希尔·儒尼奥尔]], [[zh:2018年國際足協世界盃參賽球員名單]], [[zh:埃德爾·米利唐]], [[zh:加布里埃爾·馬丁內利]], [[zh:2019年南美超级德比杯]], [[zh:2019年美洲杯决赛]], [[zh:2019年美洲杯参赛名单]], [[zh:2021年美洲杯B组]], [[zh:2021年美洲國家盃決賽]]","id":1514670479,"server_url":"https://www.wikidata.org","user":"Cewbot","parsedcomment":"\u200e<span dir=\"auto\"><span class=\"autocomment\">Added Chinese alias: <\/span><\/span> 蒂托, <a href=\"/wiki/User:Cewbot#Import_labels/aliases\" title=\"User:Cewbot\">import label/alias<\/a> from <a href=\"https://zh.wikipedia.org/wiki/%E5%B7%B4%E8%A5%BF%E5%9C%8B%E5%AE%B6%E8%B6%B3%E7%90%83%E9%9A%8A\" class=\"extiw\" title=\"zh:巴西國家足球隊\">zh:巴西國家足球隊<\/a>, <a href=\"https://zh.wikipedia.org/wiki/%E4%BD%95%E5%A1%9E%C2%B7%E4%BF%9D%E7%BD%97%C2%B7%E8%B4%9D%E5%A1%9E%E6%8B%89%C2%B7%E9%A9%AC%E5%B8%8C%E5%B0%94%C2%B7%E5%84%92%E5%B0%BC%E5%A5%A5%E5%B0%94\" class=\"extiw\" title=\"zh:何塞·保罗·贝塞拉·马希尔·儒尼奥尔\">zh:何塞·保罗·贝塞拉·马希尔·儒尼奥尔<\/a>, <a href=\"https://zh.wikipedia.org/wiki/2018%E5%B9%B4%E5%9C%8B%E9%9A%9B%E8%B6%B3%E5%8D%94%E4%B8%96%E7%95%8C%E7%9B%83%E5%8F%83%E8%B3%BD%E7%90%83%E5%93%A1%E5%90%8D%E5%96%AE\" class=\"extiw\" title=\"zh:2018年國際足協世界盃參賽球員名單\">zh:2018年國際足協世界盃參賽球員名單<\/a>, <a href=\"https://zh.wikipedia.org/wiki/%E5%9F%83%E5%BE%B7%E7%88%BE%C2%B7%E7%B1%B3%E5%88%A9%E5%94%90\" class=\"extiw\" title=\"zh:埃德爾·米利唐\">zh:埃德爾·米利唐<\/a>, <a href=\"https://zh.wikipedia.org/wiki/%E5%8A%A0%E5%B8%83%E9%87%8C%E5%9F%83%E7%88%BE%C2%B7%E9%A6%AC%E4%B8%81%E5%85%A7%E5%88%A9\" class=\"extiw\" title=\"zh:加布里埃爾·馬丁內利\">zh:加布里埃爾·馬丁內利<\/a>, <a href=\"https://zh.wikipedia.org/wiki/2019%E5%B9%B4%E5%8D%97%E7%BE%8E%E8%B6%85%E7%BA%A7%E5%BE%B7%E6%AF%94%E6%9D%AF\" class=\"extiw\" title=\"zh:2019年南美超级德比杯\">zh:2019年南美超级德比杯<\/a>, <a href=\"https://zh.wikipedia.org/wiki/2019%E5%B9%B4%E7%BE%8E%E6%B4%B2%E6%9D%AF%E5%86%B3%E8%B5%9B\" class=\"extiw\" title=\"zh:2019年美洲杯决赛\">zh:2019年美洲杯决赛<\/a>, <a href=\"https://zh.wikipedia.org/wiki/2019%E5%B9%B4%E7%BE%8E%E6%B4%B2%E6%9D%AF%E5%8F%82%E8%B5%9B%E5%90%8D%E5%8D%95\" class=\"extiw\" title=\"zh:2019年美洲杯参赛名单\">zh:2019年美洲杯参赛名单<\/a>, <a href=\"https://zh.wikipedia.org/wiki/2021%E5%B9%B4%E7%BE%8E%E6%B4%B2%E6%9D%AFB%E7%BB%84\" class=\"extiw\" title=\"zh:2021年美洲杯B组\">zh:2021年美洲杯B组<\/a>, <a href=\"https://zh.wikipedia.org/wiki/2021%E5%B9%B4%E7%BE%8E%E6%B4%B2%E5%9C%8B%E5%AE%B6%E7%9B%83%E6%B1%BA%E8%B3%BD\" class=\"extiw\" title=\"zh:2021年美洲國家盃決賽\">zh:2021年美洲國家盃決賽<\/a>","timestamp":1627445263}
+{"server_script_path":"/w","server_name":"www.wikidata.org","$schema":"/mediawiki/recentchange/1.0.0","minor":false,"bot":true,"wiki":"wikidatawiki","length":{"new":239,"old":161},"type":"edit","title":"Q107674623","revision":{"new":1468164250,"old":1468164243},"patrolled":true,"meta":{"dt":"2021-07-28T04:07:43Z","partition":0,"offset":363427327,"stream":"mediawiki.recentchange","domain":"www.wikidata.org","topic":"codfw.mediawiki.recentchange","id":"40260137-ee52-4a67-b024-22d3cf86907a","uri":"https://www.wikidata.org/wiki/Q107674623","request_id":"db6e073a-19f6-4658-9425-7992b34b4208"},"namespace":0,"comment":"/* wbsetlabel-add:1|de */ Favolaschia filopes","id":1514670480,"server_url":"https://www.wikidata.org","user":"SuccuBot","parsedcomment":"\u200e<span dir=\"auto\"><span class=\"autocomment\">Bezeichnung für [de] hinzugefügt: <\/span><\/span> Favolaschia filopes","timestamp":1627445263}
+{"server_script_path":"/w","server_name":"ko.wikipedia.org","$schema":"/mediawiki/recentchange/1.0.0","minor":true,"bot":true,"wiki":"kowiki","length":{"new":1158,"old":1161},"type":"edit","title":"이시다테 야스키","revision":{"new":29895993,"old":26098259},"meta":{"dt":"2021-07-28T04:07:43Z","partition":0,"offset":363427328,"stream":"mediawiki.recentchange","domain":"ko.wikipedia.org","topic":"codfw.mediawiki.recentchange","id":"c23bdb77-e88c-48d3-9d24-3c4dd8ef1dbf","uri":"https://ko.wikipedia.org/wiki/%EC%9D%B4%EC%8B%9C%EB%8B%A4%ED%85%8C_%EC%95%BC%EC%8A%A4%ED%82%A4","request_id":"0010e77b-fbcd-4de8-a5ad-4616adbbd6d4"},"namespace":0,"comment":"봇: 분류 이름 변경 (분류:1984년 태어남 → [[분류:1984년 출생]])","id":56333828,"server_url":"https://ko.wikipedia.org","user":"TedBot","parsedcomment":"봇: 분류 이름 변경 (분류:1984년 태어남 → <a href=\"/wiki/%EB%B6%84%EB%A5%98:1984%EB%85%84_%EC%B6%9C%EC%83%9D\" title=\"분류:1984년 출생\">분류:1984년 출생<\/a>)","timestamp":1627445263}
+{"server_script_path":"/w","server_name":"commons.wikimedia.org","$schema":"/mediawiki/recentchange/1.0.0","minor":false,"bot":true,"wiki":"commonswiki","length":{"new":3864,"old":527},"type":"edit","title":"File:Albizia kalkora 06.jpg","revision":{"new":577195372,"old":577193453},"patrolled":true,"meta":{"dt":"2021-07-28T04:07:44Z","partition":0,"offset":363427329,"stream":"mediawiki.recentchange","domain":"commons.wikimedia.org","topic":"codfw.mediawiki.recentchange","id":"1a7fcb55-dec7-4303-b757-19f6a6a4dcdd","uri":"https://commons.wikimedia.org/wiki/File:Albizia_kalkora_06.jpg","request_id":"7f841b4a-ac70-4c2b-a148-bc07696ccf7a"},"namespace":6,"comment":"/* wbeditentity-update:0| */ Adding structured data: date, camera, author, copyright & source","id":1729953360,"server_url":"https://commons.wikimedia.org","user":"BotMultichillT","parsedcomment":"\u200e<span dir=\"auto\"><span class=\"autocomment\">Changed an entity: <\/span><\/span> Adding structured data: date, camera, author, copyright & source","timestamp":1627445264}
+{"server_script_path":"/w","server_name":"id.wikipedia.org","$schema":"/mediawiki/recentchange/1.0.0","minor":true,"bot":true,"wiki":"idwiki","length":{"new":977,"old":962},"type":"edit","title":"Euporus linearis","revision":{"new":18801346,"old":16068468},"patrolled":true,"meta":{"dt":"2021-07-28T04:07:43Z","partition":0,"offset":363427330,"stream":"mediawiki.recentchange","domain":"id.wikipedia.org","topic":"codfw.mediawiki.recentchange","id":"6c3882f9-9fd0-4f43-ab69-e538762c7981","uri":"https://id.wikipedia.org/wiki/Euporus_linearis","request_id":"dea59b42-7c97-4cbc-9384-5d8836a981ec"},"namespace":0,"comment":"[[Wikipedia:Bot|Bot]]: fixed → [[Kategori:Taxonbar tanpa parameter from|taxonbar tanpa parameter from]]","id":42309169,"server_url":"https://id.wikipedia.org","user":"HsfBot","parsedcomment":"<a href=\"/wiki/Wikipedia:Bot\" title=\"Wikipedia:Bot\">Bot<\/a>: fixed → <a href=\"/wiki/Kategori:Taxonbar_tanpa_parameter_from\" title=\"Kategori:Taxonbar tanpa parameter from\">taxonbar tanpa parameter from<\/a>","timestamp":1627445263}
+{"server_script_path":"/w","server_name":"www.wikidata.org","$schema":"/mediawiki/recentchange/1.0.0","minor":false,"bot":false,"wiki":"wikidatawiki","length":{"new":25025,"old":24908},"type":"edit","title":"Q80075231","revision":{"new":1468164255,"old":1467697536},"patrolled":true,"meta":{"dt":"2021-07-28T04:07:44Z","partition":0,"offset":363427331,"stream":"mediawiki.recentchange","domain":"www.wikidata.org","topic":"codfw.mediawiki.recentchange","id":"720f6507-1ea1-4665-b1b9-1665c97450a9","uri":"https://www.wikidata.org/wiki/Q80075231","request_id":"43b7d511-007f-4005-a562-5002c7e0aff4"},"namespace":0,"comment":"/* wbsetdescription-add:1|dv */ އަކުއިލާ ނަކަތުގައިވާ ތަރިއެއް, [[:toollabs:quickstatements/#/batch/60416|batch #60416]]","id":1514670481,"server_url":"https://www.wikidata.org","user":"EN-Jungwon","parsedcomment":"\u200e<span dir=\"auto\"><span class=\"autocomment\">Added [dv] description: <\/span><\/span> އަކުއިލާ ނަކަތުގައިވާ ތަރިއެއް, <a href=\"https://iw.toolforge.org/quickstatements/#.2Fbatch.2F60416\" class=\"extiw\" title=\"toollabs:quickstatements/\">batch #60416<\/a>","timestamp":1627445264}
+{"server_script_path":"/w","server_name":"www.wikidata.org","$schema":"/mediawiki/recentchange/1.0.0","minor":false,"bot":false,"wiki":"wikidatawiki","length":{"new":5312,"old":4884},"type":"edit","title":"Q85766437","revision":{"new":1468164246,"old":1342535335},"patrolled":true,"meta":{"dt":"2021-07-28T04:07:42Z","partition":0,"offset":363427332,"stream":"mediawiki.recentchange","domain":"www.wikidata.org","topic":"codfw.mediawiki.recentchange","id":"ad173600-09b7-4ccd-9490-4a60f6a432ea","uri":"https://www.wikidata.org/wiki/Q85766437","request_id":"1228a17e-2baa-46cc-a3bc-2049a62982c9"},"namespace":0,"comment":"/* wbcreateclaim-create:1| */ [[Property:P7937]]: [[Q7366]], [[:toollabs:quickstatements/#/batch/60404|batch #60404]]","id":1514670483,"server_url":"https://www.wikidata.org","user":"Moebeus","parsedcomment":"\u200e<span dir=\"auto\"><span class=\"autocomment\">Created claim: <\/span><\/span> <a href=\"/wiki/Property:P7937\" title=\"Property:P7937\">Property:P7937<\/a>: <a href=\"/wiki/Q7366\" title=\"Q7366\">Q7366<\/a>, <a href=\"https://iw.toolforge.org/quickstatements/#.2Fbatch.2F60404\" class=\"extiw\" title=\"toollabs:quickstatements/\">batch #60404<\/a>","timestamp":1627445262}
+{"server_script_path":"/w","server_name":"www.wikidata.org","$schema":"/mediawiki/recentchange/1.0.0","minor":false,"bot":false,"wiki":"wikidatawiki","length":{"new":5134,"old":5126},"type":"edit","title":"Q12444793","revision":{"new":1468164254,"old":1413396080},"patrolled":false,"meta":{"dt":"2021-07-28T04:07:43Z","partition":0,"offset":363427333,"stream":"mediawiki.recentchange","domain":"www.wikidata.org","topic":"codfw.mediawiki.recentchange","id":"c01d52c5-c476-4554-814d-513342e04686","uri":"https://www.wikidata.org/wiki/Q12444793","request_id":"6d0a32b9-1234-4c8e-a02a-d92608f06d33"},"namespace":0,"comment":"/* wbsetdescription-set:1|hi */ भारत के उत्तराखण्ड राज्य का एक गाँव bikash","id":1514670482,"server_url":"https://www.wikidata.org","user":"2409:4061:219C:613E:DFD9:6BD4:F234:E7E0","parsedcomment":"\u200e<span dir=\"auto\"><span class=\"autocomment\">बदला [hi] विवरण: <\/span><\/span> भारत के उत्तराखण्ड राज्य का एक गाँव bikash","timestamp":1627445263}
+{"server_script_path":"/w","server_name":"www.wikidata.org","$schema":"/mediawiki/recentchange/1.0.0","minor":false,"bot":false,"wiki":"wikidatawiki","length":{"new":22936,"old":22819},"type":"edit","title":"Q80075234","revision":{"new":1468164258,"old":1467697544},"patrolled":true,"meta":{"dt":"2021-07-28T04:07:44Z","partition":0,"offset":363427334,"stream":"mediawiki.recentchange","domain":"www.wikidata.org","topic":"codfw.mediawiki.recentchange","id":"7016afae-6691-4dca-bfaf-a5a3363edf31","uri":"https://www.wikidata.org/wiki/Q80075234","request_id":"aa4f6828-149d-4feb-a3cf-cd39902773fe"},"namespace":0,"comment":"/* wbsetdescription-add:1|dv */ އަކުއިލާ ނަކަތުގައިވާ ތަރިއެއް, [[:toollabs:quickstatements/#/batch/60416|batch #60416]]","id":1514670484,"server_url":"https://www.wikidata.org","user":"EN-Jungwon","parsedcomment":"\u200e<span dir=\"auto\"><span class=\"autocomment\">Added [dv] description: <\/span><\/span> އަކުއިލާ ނަކަތުގައިވާ ތަރިއެއް, <a href=\"https://iw.toolforge.org/quickstatements/#.2Fbatch.2F60416\" class=\"extiw\" title=\"toollabs:quickstatements/\">batch #60416<\/a>","timestamp":1627445264}
+{"server_script_path":"/w","server_name":"de.wikipedia.org","$schema":"/mediawiki/recentchange/1.0.0","minor":false,"bot":true,"wiki":"dewiki","length":{"new":17069,"old":17075},"type":"edit","title":"Liste der Biografien/Caro","revision":{"new":214271460,"old":213857611},"meta":{"dt":"2021-07-28T04:07:43Z","partition":0,"offset":363427335,"stream":"mediawiki.recentchange","domain":"de.wikipedia.org","topic":"codfw.mediawiki.recentchange","id":"6618b0ab-eadf-405a-a474-ec2ad9fef8bb","uri":"https://de.wikipedia.org/wiki/Liste_der_Biografien/Caro","request_id":"23181b86-03de-4153-ad99-e7e20e611ed6"},"namespace":0,"comment":"Bot: Automatische Aktualisierung, siehe [[Benutzer:APPERbot/LdB]]","id":309672385,"server_url":"https://de.wikipedia.org","user":"APPERbot","parsedcomment":"Bot: Automatische Aktualisierung, siehe <a href=\"/wiki/Benutzer:APPERbot/LdB\" title=\"Benutzer:APPERbot/LdB\">Benutzer:APPERbot/LdB<\/a>","timestamp":1627445263}
+```
+
 
 Here's the last entry, but formatted for better understanding:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="json">{
+```json
+{
   "$schema": "/mediawiki/recentchange/1.0.0",
   "bot": true,
   "comment": "Bot: Automatische Aktualisierung, siehe [[Benutzer:APPERbot/LdB]]",
@@ -127,7 +133,9 @@ Here's the last entry, but formatted for better understanding:
   "type": "edit",
   "user": "APPERbot",
   "wiki": "dewiki"
-}</pre>
+}
+```
+
 
 As I mentioned in the introduction, we have a fantastic tool at our disposal for data visualization that doesn't require writing code, and that tool is Kibana. Kibana is part of the so-called ELK stack:
 
@@ -138,7 +146,8 @@ As I mentioned in the introduction, we have a fantastic tool at our disposal for
 
 Instead of writing to the standard output, we are going to write to an Elasticsearch instance. For that, we need to create the `Sink`. While you can use the Elasticsearch API directly, Hazelcast provides an extension to ease your job. Just add the `com.hazelcast.jet:hazelcast-jet-elasticsearch-7` JAR to the classpath, and you can write the following:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">private val clientBuilder = {
+```java
+private val clientBuilder = {
   val env = System.getenv()
   val user = env.getOrDefault("ELASTICSEARCH_USERNAME", "elastic")      // 1
   val password = env.getOrDefault("ELASTICSEARCH_PASSWORD", "changeme") // 1
@@ -149,7 +158,9 @@ Instead of writing to the standard output, we are going to write to an Elasticse
 
 val elasticsearch = ElasticSinks.elastic(clientBuilder) {
   IndexRequest("wikipedia").source(it.toString(), XContentType.JSON)    // 3
-}</pre>
+}
+```
+
 
 1. Provide some parameterization to allow to run in different environments
 2. Connect to the configured Elasticsearch instance
@@ -157,12 +168,15 @@ val elasticsearch = ElasticSinks.elastic(clientBuilder) {
 
 Now, the pipeline can be improved:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">val pipeline = Pipeline.create().apply {
+```java
+val pipeline = Pipeline.create().apply {
   readFrom(wikipedia)
     .withTimestamps({ it.getLong("timestamp") }, 100)
     .writeTo(elasticsearch)
 }
-Hazelcast.bootstrappedInstance().jet.newJob(pipeline)</pre>
+Hazelcast.bootstrappedInstance().jet.newJob(pipeline)
+```
+
 
 The icing on the cake, with good naming, the Hazelcast API allows people who are not developers to follow the logic along.
 
@@ -185,7 +199,8 @@ Within this view, you can see all ingested documents. To explore further, you ca
 
 If you tried executing the job with the code at this step, you might have noticed that after some time, Elasticsearch stops ingesting data. Looking at the Hazelcast logs, you may notice a similar stack trace:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">15:02:34.898 [ WARN] [c.h.j.i.e.TaskletExecutionService] [192.168.1.62]:5701 [dev] [5.0-BETA-1] Exception in ProcessorTasklet{068f-8bfa-4080-0001/elasticSink#0}
+```
+15:02:34.898 [ WARN] [c.h.j.i.e.TaskletExecutionService] [192.168.1.62]:5701 [dev] [5.0-BETA-1] Exception in ProcessorTasklet{068f-8bfa-4080-0001/elasticSink#0}
 com.hazelcast.jet.JetException: failure in bulk execution:
 [0]: index [wikipedia], type [_doc], id [PD017XoBfeUJ26i8qT-H], message [ElasticsearchException[Elasticsearch exception [type=mapper_parsing_exception, reason=object mapping for [log_params] tried to parse field [null] as object, but found a concrete value]]]
   at com.hazelcast.jet.elastic.ElasticSinkBuilder$BulkContext.lambda$flush$0(ElasticSinkBuilder.java:248)
@@ -208,21 +223,27 @@ com.hazelcast.jet.JetException: failure in bulk execution:
   at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
   at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
   at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
-  at java.base/java.lang.Thread.run(Thread.java:829)</pre>
+  at java.base/java.lang.Thread.run(Thread.java:829)
+```
+
 
 It happens because of the way Elasticsearch works. As we didn't provide any explicit index schema, Elasticsearch inferred one for us from the first data payload it received. In this case, the `log_params` attribute has mostly the following structure:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">"log_params": {
+```
+"log_params": {
   "userid": 108038
-}</pre>
+}
+```
+
 
 Hence, Elasticsearch recognizes it as a JSON object with the `userid` property. Yet, sometimes, the stream contains `"log_params":[]`, which is JSON array. Elasticsearch cannot reconcile between the two and throws the above exception.
 
 To fix this, we can either filter out such data or transform the empty array property in an empty object property. As we would like to keep as much data as possible, let's choose the second option. As of now, we don't know if we will need to do it for another field, so it might be a good idea to make it generic:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">class MakeFieldObjectIfArray(private val fieldName: String) : FunctionEx&lt;JSONObject, JSONObject&gt; { // 1
+```java
+class MakeFieldObjectIfArray(private val fieldName: String) : FunctionEx<JSONObject, JSONObject> { // 1
   override fun applyEx(json: JSONObject) = json.apply {           // 2
-    if (json.has(fieldName) &amp;&amp; json.get(fieldName) is JSONArray)  // 3
+    if (json.has(fieldName) && json.get(fieldName) is JSONArray)  // 3
       put(fieldName, JSONObject())                                // 4
   }
 }
@@ -232,7 +253,9 @@ val pipeline = Pipeline.create().apply {
     .withTimestamps({ it.getLong("timestamp") }, 100)
     .map(MakeFieldObjectIfArray("log_params"))                    // 5
     .writeTo(elasticsearch)
-}</pre>
+}
+```
+
 
 1. Define a `FunctionEx` that takes a `JSONObject` as a parameter and returns a `JSONObject`
 2. Return the same `JSONObject` with the following changes applied
@@ -249,87 +272,108 @@ Because the pipeline is stable, it's time to refactor to build upon solid founda
 
 On the developer side, we can improve the experience by leveraging Hazelcast's API. `GeneralStage` offers the usual pipeline primitives: `map()`, `flatMap()`, `filter()` and a couple of more specialized ones. However, at this granularity level, we'd rather focus on the *what* instead of the *how* . For this reason, `StreamStage` also provides an `apply()` function that transforms a `StreamStage` into another `StreamStage`. Let's use it:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">class MakeFieldObjectIfArray(private val fieldName: String) : FunctionEx&lt;StreamStage, StreamStage&gt; {
-  override fun applyEx(stage: StreamStage) = stage.map { json -&gt;
+```java
+class MakeFieldObjectIfArray(private val fieldName: String) : FunctionEx<StreamStage, StreamStage> {
+  override fun applyEx(stage: StreamStage) = stage.map { json ->
     json.apply {
-      if (json.has(fieldName) &amp;&amp; json.get(fieldName) is JSONArray)
+      if (json.has(fieldName) && json.get(fieldName) is JSONArray)
         put(fieldName, JSONObject())
     }
   }
-}</pre>
+}
+```
+
 
 To use it:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">val pipeline = Pipeline.create().apply {
+```java
+val pipeline = Pipeline.create().apply {
   readFrom(wikipedia)
     .withTimestamps({ it.getLong("timestamp") }, 100)
     .apply(MakeFieldObjectIfArray("log_params"))       // 1
     .writeTo(elasticsearch)
-}</pre>
+}
+```
+
 
 1. Focus on the what
 
 The next step is to improve the "operability". The only way to check what happens is to check Elasticsearch. If something happens in between (like above), it's hard to pinpoint exactly what the problem is. For that reason, we should add logging:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">val pipeline = Pipeline.create().apply {
+```java
+val pipeline = Pipeline.create().apply {
   readFrom(wikipedia)
     .withTimestamps({ it.getLong("timestamp") }, 100)
     .apply(MakeFieldObjectIfArray("log_params"))
     .peek()                                           // 1
     .writeTo(elasticsearch)
-}</pre>
+}
+```
+
 
 1. We log every item to the standard output
 
 With a lot of data, this can be too much noise. A sample is enough:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">fun sampleEvery(frequency: Int) = PredicateEx {
+```java
+fun sampleEvery(frequency: Int) = PredicateEx {
   Random.nextInt(frequency) == 0                      // 1
 }
 
-val toStringFn = FunctionEx&lt;Any?, String&gt; {
+val toStringFn = FunctionEx<Any?, String> {
   it?.toString()                                      // 2
-}</pre>
+}
+```
+
 
 1. Return `true` if the random value between `0` and `frequency` is `0`
 2. Null-safe `toString()`
 
 We can now put this code to good use:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">val pipeline = Pipeline.create().apply {
+```java
+val pipeline = Pipeline.create().apply {
   readFrom(wikipedia)
     .withTimestamps({ it.getLong("timestamp") }, 100)
     .apply(MakeFieldObjectIfArray("log_params"))
     .peek(sampleEvery(50), toStringFn)                // 1
     .writeTo(elasticsearch)
-}</pre>
+}
+```
+
 
 1. Sample one item per 50 **on average**
 
 Also, Hazelcast provides an API to name each pipeline step.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">class MakeFieldObjectIfArray(private val fieldName: String) : FunctionEx {
+```java
+class MakeFieldObjectIfArray(private val fieldName: String) : FunctionEx {
   override fun applyEx(stage: StreamStage) = stage
     .setName("remove-log-params-if-array")            // 1
-    .map { json -&gt;
+    .map { json ->
       json.apply {
-        if (json.has(fieldName) &amp;&amp; json.get(fieldName) is JSONArray)
+        if (json.has(fieldName) && json.get(fieldName) is JSONArray)
           put(fieldName, JSONObject())
       }
     }
-}</pre>
+}
+```
+
 
 With this, launching the pipeline outputs the following log:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">digraph DAG {
+```
+digraph DAG {
   "replace-log-params-if-array" [localParallelism=1];
   "replace-log-params-if-array-add-timestamps" [localParallelism=1];
   "map" [localParallelism=16];
   "elasticSink" [localParallelism=2];
-  "replace-log-params-if-array" -&gt; "replace-log-params-if-array-add-timestamps" [label="isolated", queueSize=1024];
-  "replace-log-params-if-array-add-timestamps" -&gt; "map" [queueSize=1024];
-  "map" -&gt; "elasticSink" [queueSize=1024];
-}</pre>
+  "replace-log-params-if-array" -> "replace-log-params-if-array-add-timestamps" [label="isolated", queueSize=1024];
+  "replace-log-params-if-array-add-timestamps" -> "map" [queueSize=1024];
+  "map" -> "elasticSink" [queueSize=1024];
+}
+```
+
 
 Looking at the existing data, we can notice two types of contributions:
 
@@ -342,24 +386,28 @@ There's no easy way to geo-locate using the former, but libraries and online API
 
 Let's add the necessary dependencies:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="xml">&lt;dependency&gt;
-    &lt;groupId&gt;commons-validator&lt;/groupId&gt;
-    &lt;artifactId&gt;commons-validator&lt;/artifactId&gt;
-    &lt;version&gt;1.7&lt;/version&gt;
-&lt;/dependency&gt;
-&lt;dependency&gt;
-    &lt;groupId&gt;com.maxmind.geoip2&lt;/groupId&gt;
-    &lt;artifactId&gt;geoip2&lt;/artifactId&gt;
-    &lt;version&gt;2.15.0&lt;/version&gt;
-&lt;/dependency&gt;</pre>
+```xml
+<dependency>
+    <groupId>commons-validator</groupId>
+    <artifactId>commons-validator</artifactId>
+    <version>1.7</version>
+</dependency>
+<dependency>
+    <groupId>com.maxmind.geoip2</groupId>
+    <artifactId>geoip2</artifactId>
+    <version>2.15.0</version>
+</dependency>
+```
+
 
 Then, we can add an additional step in the processing pipeline to check whether the user is an IP and add the info if it is:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="kotlin">val enrichWithLocation = { stage: StreamStage -&gt;
+```kotlin
+val enrichWithLocation = { stage: StreamStage ->
   stage.setName("enrich-with-location")                             // 1
-    .mapUsingService(ServiceFactories.sharedService(databaseReaderSupplier)) { reader: DatabaseReader, json: JSONObject -&gt;
+    .mapUsingService(ServiceFactories.sharedService(databaseReaderSupplier)) { reader: DatabaseReader, json: JSONObject ->
        json.apply {
-         if (!json.optBoolean("bot") &amp;&amp; json.has("user")) {         // 2
+         if (!json.optBoolean("bot") && json.has("user")) {         // 2
            val user = json.getString("user")
            if (InetAddressValidator.getInstance().isValid(user)) {  // 3
              reader.tryCity(InetAddress.getByName(user))            // 4
@@ -377,7 +425,9 @@ val pipeline = Pipeline.create().apply {
     .apply(enrichWithLocation)                                      // 6
     .peek(sampleEvery(50), toStringFn)
     .writeTo(elasticsearch)
-}</pre>
+}
+```
+
 
 1. Set a descriptive name
 2. If the bot property is false and if the user property exists
@@ -416,7 +466,8 @@ We are now ready to map the field.
 8. Add a new field named `location.coordinates` and with type Geo-point
 9. Click again on Next until the last step. The preview tab should display the following JSON: 
 
-<pre class="EnlighterJSRAW" data-enlighter-language="json">{
+```json
+{
   "template": {
     "settings": {},
     "mappings": {
@@ -433,7 +484,8 @@ We are now ready to map the field.
     "aliases": {}
   }
 }
-</pre>
+```
+
 
 10. Click on the Create template button
 
@@ -441,7 +493,8 @@ In the `wikipedia` index, Elasticsearch will map every field named `coordinates`
 
 Let's create such a dedicated mapping function:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="json">private fun JSONObject.withLocationFrom(response: CityResponse) {
+```json
+private fun JSONObject.withLocationFrom(response: CityResponse) {
     val country = JSONObject()
         .put("iso", response.country.isoCode)
         .put("name", response.country.name)
@@ -455,12 +508,17 @@ Let's create such a dedicated mapping function:
         .put("timezone", response.location.timeZone)
         .put("accuracy-radius", response.location.accuracyRadius)
     put("location", location)
-}</pre>
+}
+```
+
 
 We can now use it in the pipeline:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="json">reader.tryCity(InetAddress.getByName(user))
-    .ifPresent { json.withLocationFrom(it) }</pre>
+```json
+reader.tryCity(InetAddress.getByName(user))
+    .ifPresent { json.withLocationFrom(it) }
+```
+
 
 Let's start the pipeline again. Now, we can try to repeat the steps to create a Map. This time, it recognizes the field we mapped as a Geo-point and lets us go further.
 
@@ -494,15 +552,16 @@ A linguist can infer the language of the field. It's also possible to use an aut
 
 We need to create an additional stage transforming function:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="json">val languageDetectorSupplier = { _: ProcessorSupplier.Context -&gt;
+```json
+val languageDetectorSupplier = { _: ProcessorSupplier.Context ->
     LanguageDetectorBuilder
         .fromAllSpokenLanguages()
         .build()
 }                                                                        // 1
 
-val enrichWithLanguage = { stage: StreamStage&lt;JSONObject&gt; -&gt;
+val enrichWithLanguage = { stage: StreamStage<JSONObject> ->
     stage.setName("enrich-with-language")
-        .mapUsingService(ServiceFactories.sharedService(languageDetectorSupplier)) { detector: LanguageDetector, json: JSONObject -&gt;
+        .mapUsingService(ServiceFactories.sharedService(languageDetectorSupplier)) { detector: LanguageDetector, json: JSONObject ->
             json.apply {
                 val comment = json.optString("comment")
                 if (comment.isNotEmpty()) {
@@ -518,7 +577,9 @@ val enrichWithLanguage = { stage: StreamStage&lt;JSONObject&gt; -&gt;
                 }
             }
         }
-}</pre>
+}
+```
+
 
 1. Create the function that provides the language detector
 2. The magic happens here
@@ -526,7 +587,8 @@ val enrichWithLanguage = { stage: StreamStage&lt;JSONObject&gt; -&gt;
 
 We can now use the newly-defined function in the pipeline:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="kotlin">val pipeline = Pipeline.create().apply {
+```kotlin
+val pipeline = Pipeline.create().apply {
         readFrom(wikipedia)
             .withTimestamps({ it.getLong("timestamp") }, 100)
             .apply(MakeFieldObjectIfArray("log_params"))
@@ -534,7 +596,9 @@ We can now use the newly-defined function in the pipeline:
             .apply(enrichWithLanguage)
             .peek(sampleEvery(50), toStringFn)
             .writeTo(elasticsearch)
-    }</pre>
+    }
+```
+
 
 On the Kibana map, you can now add any language related fields, *e.g.* , `language.name` to display it along the rest of the data points. Yet, some of them have an empty `comment` field so that the language is not shown. One option would be to update the data pipeline accordingly, but it's also possible to filter out unwanted data points on the Kibana interface. In general, that's the way to go: push data anyway and leave what data they want to display to the final user.
 
@@ -560,7 +624,8 @@ For example, comment "Nufüs" returns the following map:
 
 Hence, the closest the confidence rating of the second language is to 1, the lower the confidence in the first language. To reflect that, we can add to the data point the difference between the 1.0 and the second language's confidence rating. The above code is updated as:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="kotlin">val languagesWithConfidence = detector.computeLanguageConfidenceValues(comment)             // 1
+```kotlin
+val languagesWithConfidence = detector.computeLanguageConfidenceValues(comment)             // 1
 if (languagesWithConfidence.isNotEmpty()) {
     val mostLikelyLanguage = languagesWithConfidence.firstKey()
     val secondMostLikelyConfidence = languagesWithConfidence.filterNot { it.key == mostLikelyLanguage }.maxBy { it.value }?.value ?: 0.0 // 2
@@ -571,7 +636,9 @@ if (languagesWithConfidence.isNotEmpty()) {
             .put("name", mostLikelyLanguage.name)
             .put("confidence", 1.0 - secondMostLikelyConfidence)                                 // 3
     )
-}</pre>
+}
+```
+
 
 1. Get the sorted map of languages
 2. Get the confidence rating of the second language, or 0 if the map has a single element

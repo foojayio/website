@@ -44,9 +44,12 @@ As per official [documentation](https://docs.docker.com/docker-for-mac/kubernete
 
 `kubectl` is a Kubernetes CLI tool for running commands against your cluster. Know more about kubectl [here](https://kubernetes.io/docs/reference/kubectl/overview/). Now we can verify the setup using the below kubectl command. The output should be something similar to the below.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">kubectl get nodes
+```
+kubectl get nodes
 NAME             STATUS   ROLES    AGE   VERSION
-docker-desktop   Ready    master   19d   v1.19.3</pre>
+docker-desktop   Ready    master   19d   v1.19.3
+```
+
 
 ### How to Create a Pod {#h3-3-how-to-create-a-pod}
 
@@ -54,7 +57,8 @@ A Pod in Kubernetes is the smallest possible execution unit. It can have one mor
 
 1. Create a pod using the below YAML file: 
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">apiVersion: v1
+```
+apiVersion: v1
 kind: Pod
 metadata:
 name: nginx
@@ -65,46 +69,57 @@ containers:
 - name: mycontainer
 image: docker.io/nginx
 ports:
-- containerPort: 80</pre>
+- containerPort: 80
+```
+
 
    Use `kubectl create` and the name of the YAML file to create a pod:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">kubectl create -f pod.yaml
-pod/nginx created</pre>
+```
+kubectl create -f pod.yaml
+pod/nginx created
+```
+
 
 2. Check the status of the pod we just created: 
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">kubectl get pods
+```
+kubectl get pods
 NAME    READY   STATUS    RESTARTS   AGE
-nginx   1/1     Running   0          2m38s</pre>
+nginx   1/1     Running   0          2m38s
+```
+
 
 3. To debug the pod further and it's working we can get a shell to a running container using `kubectl exec` command. Once inside the container, we will just use curl to verify Nginx setup. Let's do that now:  
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">kubectl exec -it nginx -- /bin/sh
+```
+kubectl exec -it nginx -- /bin/sh
 # curl 10.1.0.65
-&lt;!DOCTYPE html&gt;
-&lt;html&gt;
-&lt;head&gt;
-&lt;title&gt;Welcome to nginx!&lt;/title&gt;
-&lt;style&gt;
+<!DOCTYPE html>
+<html>
+<head>
+<title>Welcome to nginx!</title>
+<style>
 body {
 width: 35em;
 margin: 0 auto;
 font-family: Tahoma, Verdana, Arial, sans-serif;
 }
-&lt;/style&gt;
-&lt;/head&gt;
-&lt;body&gt;
-&lt;h1&gt;Welcome to nginx!&lt;/h1&gt;
-&lt;p&gt;If you see this page, the nginx web server is successfully installed and
-working. Further configuration is required.&lt;/p&gt;
-&lt;p&gt;For online documentation and support please refer to
-&lt;a href="http://nginx.org/"&gt;nginx.org&lt;/a&gt;.&lt;br/&gt;
+</style>
+</head>
+<body>
+<h1>Welcome to nginx!</h1>
+<p>If you see this page, the nginx web server is successfully installed and
+working. Further configuration is required.</p>
+<p>For online documentation and support please refer to
+<a href="http://nginx.org/">nginx.org</a>.<br/>
 Commercial support is available at
-&lt;a href="http://nginx.com/"&gt;nginx.com&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;&lt;em&gt;Thank you for using nginx.&lt;/em&gt;&lt;/p&gt;
-&lt;/body&gt;
-&lt;/html&gt;</pre>
+<a href="http://nginx.com/">nginx.com</a>.</p>
+<p><em>Thank you for using nginx.</em></p>
+</body>
+</html>
+```
+
 
 ### How to Deploy a Working Spring Boot Application on Kubernetes {#h3-4-how-to-deploy-a-working-spring-boot-application-on-kubernetes}
 
@@ -114,7 +129,8 @@ In my previous [article](https://ashishtechmill.com/cicd-workflow-for-spring-boo
 
 Now we will just clone this repository and create Kubernetes manifests using the below command:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">git clone https://github.com/yrashish/indian-states
+```
+git clone https://github.com/yrashish/indian-states
 cd indian-states/k8s
 kubectl create -f myservice.yaml
 service/states created
@@ -124,18 +140,22 @@ kubectl get all
 NAME                          READY   STATUS    RESTARTS   AGE
 pod/states-6664b9dbf6-l2tgj   1/1     Running   0          8s
 NAME                 TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)          AGE
-service/kubernetes   ClusterIP   10.96.0.1      &lt;none&gt;        443/TCP          55s
-service/states       NodePort    10.96.78.225   &lt;none&gt;        8080:31238/TCP   15s
+service/kubernetes   ClusterIP   10.96.0.1      <none>        443/TCP          55s
+service/states       NodePort    10.96.78.225   <none>        8080:31238/TCP   15s
 NAME                     READY   UP-TO-DATE   AVAILABLE   AGE
 deployment.apps/states   1/1     1            1           8s
 NAME                                DESIRED   CURRENT   READY   AGE
-replicaset.apps/states-6664b9dbf6   1         1         1       8s</pre>
+replicaset.apps/states-6664b9dbf6   1         1         1       8s
+```
+
 
 Now just do curl and access the /states REST endpoint and see what happens.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">curl localhost:31238/states
+```
+curl localhost:31238/states
 [{“name”:”Andra Pradesh”,”capital”:”Hyderabad”},{“name”:”Arunachal Pradesh”,”capital”:”Itangar”},{“name”:”Assam”,”capital”:”Dispur”},{“name”:”Bihar”,”capital”:”Patna”},{“name”:”Chhattisgarh”,”capital”:”Raipur”},{“name”:”Goa”,”capital”:”Panaji”},{“name”:”Gujarat”,”capital”:”Gandhinagar”},{“name”:”Haryana”,”capital”:”Chandigarh”},{“name”:”Himachal Pradesh”,”capital”:”Shimla”},{“name”:”Jharkhand”,”capital”:”Ranchi”},{“name”:”Karnataka”,”capital”:”Bangalore”},{“name”:”Kerala”,”capital”:”Thiruvananthapuram”},{“name”:”Madhya Pradesh”,”capital”:”Bhopal”},{“name”:”Maharashtra”,”capital”:”Mumbai”},{“name”:”Manipur”,”capital”:”Imphal”},{“name”:”Meghalaya”,”capital”:”Shillong”},{“name”:”Mizoram”,”capital”:”Aizawi”},{“name”:”Nagaland”,”capital”:”Kohima”},{“name”:”Orissa”,”capital”:”Bhubaneshwar”},{“name”:”Rajasthan”,”capital”:”Jaipur”},{“name”:”Sikkim”,”capital”:”Gangtok”},{“name”:”Tamil Nadu”,”capital”:”Chennai”},{“name”:”Telangana”,”capital”:”Hyderabad”},{“name”:”Tripura”,”capital”:”Agartala”},{“name”:”Uttaranchal”,”capital”:”Dehradun”},{“name”:”Uttar Pradesh”,”capital”:”Lucknow”},{“name”:”West Bengal”,”capital”:”Kolkata”},{“name”:”Punjab”,”capital”:”Chandigarh”}]
-</pre>
+```
+
 
 ### How to Monitor and Manage Kubernetes Cluster with Lens IDE {#h3-5-how-to-monitor-and-manage-kubernetes-cluster-with-lens-ide}
 

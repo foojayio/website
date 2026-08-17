@@ -59,19 +59,22 @@ This post is Part 1 of a two-part series and presents our findings for the two s
 
 For the streaming benchmarks, we used the code available [here](https://github.com/mtopolnik/jet-gc-benchmark/blob/master/src/main/java/org/example/StreamingBenchmark.java), with some minor variations between the tests. Here is the main part, the Jet pipeline:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">StreamStage&lt;Long&gt; source = p.readFrom(longSource(ITEMS_PER_SECOND))
+```java
+StreamStage<Long> source = p.readFrom(longSource(ITEMS_PER_SECOND))
                             .withNativeTimestamps(0)
                             .rebalance(); // Introduced in Jet 4.2
-source.groupingKey(n -&gt; n % NUM_KEYS)
+source.groupingKey(n -> n % NUM_KEYS)
       .window(sliding(SECONDS.toMillis(WIN_SIZE_SECONDS), SLIDING_STEP_MILLIS))
       .aggregate(counting())
-      .filter(kwr -&gt; kwr.getKey() % DIAGNOSTIC_KEYSET_DOWNSAMPLING_FACTOR == 0)
+      .filter(kwr -> kwr.getKey() % DIAGNOSTIC_KEYSET_DOWNSAMPLING_FACTOR == 0)
       .window(tumbling(SLIDING_STEP_MILLIS))
       .aggregate(counting())
-      .writeTo(Sinks.logger(wr -&gt; String.format("time %,d: latency %,d ms, cca. %,d keys",
+      .writeTo(Sinks.logger(wr -> String.format("time %,d: latency %,d ms, cca. %,d keys",
               simpleTime(wr.end()),
               NANOSECONDS.toMillis(System.nanoTime()) - wr.end(),
-              wr.result() * DIAGNOSTIC_KEYSET_DOWNSAMPLING_FACTOR)));</pre>
+              wr.result() * DIAGNOSTIC_KEYSET_DOWNSAMPLING_FACTOR)));
+```
+
 
 This pipeline represents use cases with an unbounded event stream where the engine is asked to perform sliding window aggregation. You need this kind of aggregation, for example, to obtain the time derivative of a changing quantity, remove high-frequency noise from the data (smoothing) or measure the intensity of the occurrence of some event (events per second). The engine can first split the stream by some category (for example, each distinct IoT device or smartphone) into substreams and then independently track the aggregated value in each of them. In Hazelcast Jet the sliding window moves in fixed-size steps that you configure. For example, with a sliding step of 1 second you get a complete set of results every second, and if the window size is 1 minute, the results reflect the events that occurred within the last minute.
 

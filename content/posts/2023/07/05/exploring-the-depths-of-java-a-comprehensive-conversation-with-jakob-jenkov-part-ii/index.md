@@ -35,7 +35,7 @@ I find the performance or hardware-near features to be the most interesting thes
 
 I also like the API updates that bring new functionality we did not have in the platform before. However, we have to be careful here not to bloat the platform with tons of new APIs that are only rarely used.   
 
-*** ** * ** ***
+
 
 **Bazlur:** **From your perspective, how can a programming language evolve to meet new software design challenges without excessively bloating its feature set or creating too much complexity?**
 
@@ -48,13 +48,13 @@ The trade-off in programming language design seems to be between "control" and "
 
 I tend to prefer languages that prioritize control first and convenience second. Not languages that prioritize convenience first and control second.
 
-*** ** * ** ***
+
 
 **Bazlur: How would you advise a junior developer or recent graduate who wishes to navigate the expansive Java ecosystem effectively? What fundamental knowledge or skills should they acquire to become a productive member of a software engineering team?**
 
 **Jakob:** There is a core set of Java language features and Java APIs that every Java developer should probably know. Focus on those first. After that, I would primarily learn the features and APIs I need for work or that I am myself interested in learning. Outside of that, I might scan over other features quickly, just to get an idea about what they can do - so I know in case I may need them one day.
 
-*** ** * ** ***
+
 
 **Bazlur: Let's shift gears and talk about the current state of software development. In your opinion, what are some of the biggest challenges that the software industry and its developers face today?**
 
@@ -65,20 +65,20 @@ Consequently, learning and keeping up with all the developments in this fragment
 
 Another consequence is an overly high reliance on "best practices" within different tool spaces rather than having a deep enough knowledge yourself to determine which practices are right for your situation.
 
-*** ** * ** ***
+
 
 **Bazlur: Do you have any advice on how the developer can overcome these challenges?**
 
 **Jakob:** Not really. Patience, perhaps. Patience, when trying to keep up with developments, and patience waiting until that new, shiny feature in a new tech shows up in the tech stack you are currently using - thus resisting a bit of the fragmentation.
 
-*** ** * ** ***
+
 
 **Bazlur: I must ask this question: As AI continues to evolve and becomes more integrated into various sectors, how do you foresee developers adapting to this change? Given the widespread concern that AI may replace many job roles, what is your perspective?**
 
 I don't really know what will happen with AI. I am sure it will change the developer's jobs, but exactly how, I don't know. Python also made programming easier but seems to have resulted in more developer jobs, not less. AI might have a similar effect. If we are lucky, we get to focus on more high-level designs and leave the low-level nitty-gritty details to the AI.
 > *If we are lucky, we get to focus on more high-level designs and leave the low-level nitty-gritty details to the AI.*
 
-*** ** * ** ***
+
 
 **Bazlur: Thank you so much for sharing your insights with us. We appreciate your time. Before we end, is there any parting advice or resources you would like to share with our readers, such as a list of recommended books or any other helpful information?**
 
@@ -93,7 +93,7 @@ I don't have any specific books to recommend. There are many good books, but a g
 
 <br />
 
-*** ** * ** ***
+
 
 Conclusion: {#h2-0-conclusion}
 ------------------------------

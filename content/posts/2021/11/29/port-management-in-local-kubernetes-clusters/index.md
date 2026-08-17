@@ -31,35 +31,50 @@ My latest attempt was [MetalLB](https://metallb.universe.tf/). Even though I did
 
 Last week, I decided to take another approach: a regular proxy in front of my local cluster. OSX comes with an existing Apache Web Server installation. You can check it with `ls /etc/apache2`:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">extra                 httpd.conf.pre-update mime.types            other
-httpd.conf            magic                 original              users</pre>
+```
+extra                 httpd.conf.pre-update mime.types            other
+httpd.conf            magic                 original              users
+```
+
 
 The following modules are necessary:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="apache">#httpd.conf
+```apache
+#httpd.conf
 LoadModule proxy_module libexec/apache2/mod_proxy.so
 LoadModule proxy_http_module libexec/apache2/mod_proxy_http.so
-LoadModule proxy_balancer_module libexec/apache2/mod_proxy_balancer.so</pre>
+LoadModule proxy_balancer_module libexec/apache2/mod_proxy_balancer.so
+```
+
 
 The requirement is straightforward: proxy calls from to . For this, we need to configure a virtual host:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="apache">#httpd-vhosts.conf
-&lt;VirtualHost *:80&gt;
+```apache
+#httpd-vhosts.conf
+<VirtualHost *:80>
     ServerName zerodowntime.hz
     ProxyRequests off
     ProxyPass / http://localhost:30002/
     ProxyPassReverse / http://zerodowntime.hz
-&lt;/VirtualHost&gt;</pre>
+</VirtualHost>
+```
+
 
 To make sure everything works fine, we can use `apachectl -S`:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">VirtualHost configuration:
-*:80           zerodowntime.hz (/private/etc/apache2/extra/httpd-vhosts.conf:40)</pre>
+```
+VirtualHost configuration:
+*:80           zerodowntime.hz (/private/etc/apache2/extra/httpd-vhosts.conf:40)
+```
+
 
 Last but not least, let's configure the host file:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">#./etc/hosts
-127.0.0.1        zerodowntime.hz</pre>
+```
+#./etc/hosts
+127.0.0.1        zerodowntime.hz
+```
+
 
 At this point, we can access the application using the `zerodowntime.hz` URL:
 
@@ -69,9 +84,12 @@ Depending on the deployed application, this step might be the last one. It's unf
 
 I'm using Spring Boot, so that is just a matter of configuration:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml">#application.yml
+```yaml
+#application.yml
 server:
-  forward-headers-strategy: native</pre>
+  forward-headers-strategy: native
+```
+
 
 At this point, everything works as expected!
 

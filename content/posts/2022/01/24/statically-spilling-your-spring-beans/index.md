@@ -34,7 +34,8 @@ Getting instances of beans in Spring is pretty simple.
 
 You add @Autowired on your constructor and assuming your class is a bean as well, an instance will be injected in your constructor.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@Component
+```java
+@Component
 public class UserServiceImpl implements UserService {
 
     UserRepository repo;
@@ -44,7 +45,9 @@ public class UserServiceImpl implements UserService {
         this.repo = repo; //JEEJ! an instance!
     }
 
-}</pre>
+}
+```
+
 
 Some notes about the above code example before we continue:
 
@@ -58,7 +61,7 @@ Some notes about the above code example before we continue:
  </figcaption>
 </figure>
 
-*** ** * ** ***
+
 
 The problem {#h2-1-the-problem}
 -------------------------------
@@ -74,15 +77,19 @@ The Application Context is at the heart of the Spring Framework. It provides a c
 
 That last one is what we are interested in. We want to use the Application Context to get another bean. The ApplicationContext interface provides a nice convenient method to access beans it knows about: *getBean(Class)*?
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">// Our static method
-public static &lt;T&gt; T getBean(Class&lt;T&gt; clazz) {
+```java
+// Our static method
+public static <T> T getBean(Class<T> clazz) {
     ApplicationContext context = //excluded
     return context.getBean(clazz);
-}</pre>
+}
+```
+
 
 **So all we need now is to get an ApplicationContext and we are done!** How do we get one? Well, you could @Autowire one... but we want to use it in a static context. Here is how we can do it!
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@Component
+```
+@Component
 public class StaticContextAccessor {
 
     private static ApplicationContext context;
@@ -92,10 +99,12 @@ public class StaticContextAccessor {
         context = applicationContext;
     }
 
-    public static &lt;T&gt; T getBean(Class&lt;T&gt; clazz) {
+    public static <T> T getBean(Class<T> clazz) {
         return context.getBean(clazz);
     }
-}</pre>
+}
+```
+
 
 * *Create a class marked with @Component. This way, Spring will initialize it on startup by default.*
 * *@Autowire the ApplicationContext.*
@@ -104,7 +113,10 @@ public class StaticContextAccessor {
 
 Doing this, we can now use the **getBean()** method on the StaticContextAccessor to get any bean in a static context.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">UserRepository userRepo = StaticContextAccessor.getBean(UserRespository.class)</pre>
+```
+UserRepository userRepo = StaticContextAccessor.getBean(UserRespository.class)
+```
+
 
 ![Diagram: Initialization Order](https://www.tomcools.be/post/apr-2020-static-spring-bean/visual-wait.png) Invoking method on a bean from a static method.
 
@@ -131,29 +143,33 @@ Source: https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/r
 
 So we need a couple of things now. Let's start by creating the Proxy object.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public static &lt;T&gt; T getBean(Class&lt;T&gt; clazz) {
+```java
+public static <T> T getBean(Class<T> clazz) {
     if (context == null) {
         return getProxy(clazz);
     }
     return context.getBean(clazz);
 }
 
-private static &lt;T&gt; T getProxy(Class&lt;T&gt; clazz) {
+private static <T> T getProxy(Class<T> clazz) {
     // Our custom invocation handler, will be explained below!
-    DynamicInvocationhandler&lt;T&gt; invocationhandler = new DynamicInvocationhandler&lt;&gt;();
+    DynamicInvocationhandler<T> invocationhandler = new DynamicInvocationhandler<>();
     return (T) Proxy.newProxyInstance(
             clazz.getClassLoader(),
             new Class[]{clazz},
             invocationhandler
     );
-}</pre>
+}
+```
+
 
 The Proxy.newProxyInstance() method will return a dynamic object of the given **interface** . It creates a new Object, at runtime, which **extends Proxy** and **implements the given interface**. Since this object implements the given interface, we can return it in our getBean() method. Thanks Polymorphism!
 > Note: This method will only work when requesting a interface. If you want to be able to create a proxy-object for non-interfaces, you could use ByteBuddy. ByteBuddy is out of the scope of this post.
 
 Next up is the InvocationHandler. **Whenever a method is invoked on our proxy object, the invoke method of this handler will be called.** If your handler has the actual bean set, it will invoke the correct method on our bean instance. If the actual bean isn't set yet, it will throw a RuntimeException().
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">class DynamicInvocationhandler&lt;T&gt; implements InvocationHandler {
+```
+class DynamicInvocationhandler<T> implements InvocationHandler {
 
     private T actualBean;
 
@@ -168,20 +184,23 @@ Next up is the InvocationHandler. **Whenever a method is invoked on our proxy ob
         }
         return method.invoke(actualBean, args);
     }
-}</pre>
+}
+```
+
 
 Now all that is left is to set the actual bean on the handler as soon as it becomes available and we are done!  
 ![Sequence Diagram: Proxy](https://www.tomcools.be/post/apr-2020-static-spring-bean/visual-proxy.png)
 
-*** ** * ** ***
+
 
 Full Code Solution {#h2-4-full-code-solution}
 ---------------------------------------------
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@Component
+```
+@Component
 public class StaticContextAccessor {
 
-    private static final Map&lt;Class, DynamicInvocationhandler&gt; classHandlers = new HashMap&lt;&gt;();
+    private static final Map<Class, DynamicInvocationhandler> classHandlers = new HashMap<>();
     private static ApplicationContext context;
 
     @Autowired
@@ -189,15 +208,15 @@ public class StaticContextAccessor {
         context = applicationContext;
     }
 
-    public static &lt;T&gt; T getBean(Class&lt;T&gt; clazz) {
+    public static <T> T getBean(Class<T> clazz) {
         if (context == null) {
             return getProxy(clazz);
         }
         return context.getBean(clazz);
     }
 
-    private static &lt;T&gt; T getProxy(Class&lt;T&gt; clazz) {
-        DynamicInvocationhandler&lt;T&gt; invocationhandler = new DynamicInvocationhandler&lt;&gt;();
+    private static <T> T getProxy(Class<T> clazz) {
+        DynamicInvocationhandler<T> invocationhandler = new DynamicInvocationhandler<>();
         classHandlers.put(clazz, invocationhandler);
         return (T) Proxy.newProxyInstance(
                 clazz.getClassLoader(),
@@ -209,13 +228,13 @@ public class StaticContextAccessor {
     //Use the context to get the actual beans and feed them to the invocationhandlers
     @PostConstruct
     private void init() {
-        classHandlers.forEach((class, invocationHandler) -&gt; {
+        classHandlers.forEach((class, invocationHandler) -> {
             Object bean = context.getBean(class);
             invocationHandler.setActualBean(bean);
         });
     }
 
-    static class DynamicInvocationhandler&lt;T&gt; implements InvocationHandler {
+    static class DynamicInvocationhandler<T> implements InvocationHandler {
 
         private T actualBean;
 
@@ -231,15 +250,20 @@ public class StaticContextAccessor {
             return method.invoke(actual, args);
         }
     }
-}</pre>
+}
+```
+
 
 There we go! We can now get Spring components from a static context!  
 
 All we need to do is call the static *getBean* method.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">UserRepository userRepo = StaticContextAccessor.getBean(UserRespository.class)</pre>
+```
+UserRepository userRepo = StaticContextAccessor.getBean(UserRespository.class)
+```
 
-*** ** * ** ***
+
+
 
 About that RuntimeException {#h2-5-about-that-runtimeexception}
 ---------------------------------------------------------------
@@ -248,7 +272,10 @@ Even with this proxying setup, there is still a case which will not work.
 
 As you can see in the handler code above, if the actualBean isn't set yet, we throw a RuntimeException.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">UserRepository userRepo = StaticContextAccessor.getBean(UserRespository.class)
-userRepo.getAll() //this will break if called before ApplicationContext is ready.</pre>
+```
+UserRepository userRepo = StaticContextAccessor.getBean(UserRespository.class)
+userRepo.getAll() //this will break if called before ApplicationContext is ready.
+```
+
 
 There is no way around this. If the bean isn't created and known in the ApplicationContext, we can't call a method on it. **The proxy solves the issue with the time between requesting the Bean and the ApplicationContext being created.** However, if the real bean isn't loaded into the proxy and a method is invoked, the only option is to throw an exception.

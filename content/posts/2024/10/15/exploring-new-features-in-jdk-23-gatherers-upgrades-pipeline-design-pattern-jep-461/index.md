@@ -25,11 +25,14 @@ Source-code flexibility goes hand in hand with maintainability and testability. 
 
 Since the introduction of the Stream API in Java 8, developers have benefited from the ability to create complex transformations inside pipelines. The Stream API allows a lazily evaluated definition of how a pipeline (Example 1.- 1) should be transformed through one or multiple intermediate functions (Example 1.- 2). The sequence of intermediate functions must be terminated by a terminal function that materializes the output (Example 1.- 3).
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">var totalNumberOfWords =
+```
+var totalNumberOfWords =
     Stream
     .of("one", "", "two", "three", "four", "five", "", "six")     // 1
           .filter(Predicate.not(String::isEmpty))                 // 2
-          .collect(Collectors.counting());                           // 3</pre>
+          .collect(Collectors.counting());                           // 3
+```
+
 
 **Example 1**.: Standard stream usage is expressive and very efficient
 
@@ -44,13 +47,16 @@ JEP-461\[1\] comes with the salvage option named Gatherers. The Gatherer is an i
 
 The ability of referring to the Internal state comes very handy when any kind of internal data lookup is required. The gatherer internal state *A* is hidden from the rest of the code as an implementation detail.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">@PreviewFeature(feature = PreviewFeature.Feature.STREAM_GATHERERS)
-public interface Gatherer&lt;T, A, R&gt; {
-    default Supplier&lt;A&gt; initializer() {return ...};
-    default Integrator&lt;A, T, R&gt; integrator();
-    default BinaryOperator&lt;A&gt; combiner() {return ...}
-    default BiConsumer&lt;A, Downstream&lt;? super R&gt;&gt; finisher() {...}
-}</pre>
+```
+@PreviewFeature(feature = PreviewFeature.Feature.STREAM_GATHERERS)
+public interface Gatherer<T, A, R> {
+    default Supplier<A> initializer() {return ...};
+    default Integrator<A, T, R> integrator();
+    default BinaryOperator<A> combiner() {return ...}
+    default BiConsumer<A, Downstream<? super R>> finisher() {...}
+}
+```
+
 
 **Example 2.**: Gather is a functional interface that defines a stages, where type A represent an internal state
 
@@ -60,31 +66,32 @@ Importantly, when the initial stream supports parallel execution the *combiner()
 
 Anytime the gatherer is invoked it creates a *Downstream* object. The *Downstream* instance represents an output of type *R* passed into the next evaluation stage. The gatherer initiates its internal state by *initializer()* method and invokes an *integrator()* method. Invoking the *finisher()* method passes downstream objects into the output (Example 3.)
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">record WindowFixed&lt;T&gt;(int windowSize) implements Gatherer&lt;T, ArrayList&lt;T&gt;, List&lt;T&gt;&gt; {
+```
+record WindowFixed<T>(int windowSize) implements Gatherer<T, ArrayList<T>, List<T>> {
    public WindowFixed {
-       if (windowSize &lt; 1)
+       if (windowSize < 1)
            throw new IllegalArgumentException("window size must be positive");
    }
    @Override
-   public Supplier&lt;ArrayList&lt;T&gt;&gt; initializer() {
-       return () -&gt; new ArrayList&lt;&gt;(windowSize);
+   public Supplier<ArrayList<T>> initializer() {
+       return () -> new ArrayList<>(windowSize);
    }
    @Override
-   public Integrator&lt;ArrayList&lt;T&gt;, T, List&lt;T&gt;&gt; integrator() {
-       return Gatherer.Integrator.ofGreedy((window, element, downstream) -&gt; {
+   public Integrator<ArrayList<T>, T, List<T>> integrator() {
+       return Gatherer.Integrator.ofGreedy((window, element, downstream) -> {
            window.add(element);
-           if (window.size() &lt; windowSize)
+           if (window.size() < windowSize)
                return true;
-           var result = new ArrayList&lt;T&gt;(window);
+           var result = new ArrayList<T>(window);
            window.clear();
            return downstream.push(result);
        });
    }
    @Override
-   public BiConsumer&lt;ArrayList&lt;T&gt;, Downstream&lt;? super List&lt;T&gt;&gt;&gt; finisher() {
-       return (window, downstream) -&gt; {
-           if (!downstream.isRejecting() &amp;&amp; !window.isEmpty()) {
-               downstream.push(new ArrayList&lt;T&gt;(window));
+   public BiConsumer<ArrayList<T>, Downstream<? super List<T>>> finisher() {
+       return (window, downstream) -> {
+           if (!downstream.isRejecting() && !window.isEmpty()) {
+               downstream.push(new ArrayList<T>(window));
                window.clear();
            }
        };
@@ -95,9 +102,14 @@ var list  = Stream.of(1,2,3,4,5,6,7,8)
        .gather(new WindowFixed(3))
        .gather(new WindowFixed(2))
        .collect(Collectors.toList());
-System.out.println("Result:" + list);</pre>
+System.out.println("Result:" + list);
+```
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">Output: Result:[[[1, 2, 3], [4, 5, 6]], [[7, 8]]]</pre>
+
+```
+Output: Result:[[[1, 2, 3], [4, 5, 6]], [[7, 8]]]
+```
+
 
 **Example 3** .: The *FixedWindow* gatherer operates on a stream of types *T* with internal state of type *A* as *ArrayList* and output type *List* . *Collectors.toList()* is the terminal operation and the moment the stream materializes
 
@@ -112,26 +124,31 @@ JEP-461 comes with collection of build-in gatherers which may serve main of purp
 4. ***windowFixed(...)***: performs many-to-many stateful transformation where elements are separated into windows
 5. ***windowSliding(...)***: performs many-to-many stateful order transformation where each output window contains the previous state and adds one new element from the stream.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">var fold1 = Stream.of(1,2,3,4,5,6,7,8,9)
+```
+var fold1 = Stream.of(1,2,3,4,5,6,7,8,9)
        .gather(
-               Gatherers.fold(() -&gt; "", (string, number) -&gt; string + number)
+               Gatherers.fold(() -> "", (string, number) -> string + number)
        )
        .collect(Collectors.toSet());
 
 var scan1 = Stream.of(1,2,3,4)
        .gather(
-               Gatherers.scan(() -&gt; "", (string, number) -&gt; string + number)
+               Gatherers.scan(() -> "", (string, number) -> string + number)
        )
        .toList();
 
 var slidingWindow2 =
        Stream.of(1,2,3,4).gather(Gatherers.windowSliding(2)).toList();
-</pre>
+```
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">Output:
+
+```
+Output:
 Result fold1:[123456789]
 Result scan1:[1, 12, 123, 1234]
-Result slidingWindow2:[[1, 2], [2, 3], [3, 4]]</pre>
+Result slidingWindow2:[[1, 2], [2, 3], [3, 4]]
+```
+
 
 **Example 4**.: Some of build-in gatherers and their outputs
 

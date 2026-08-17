@@ -152,7 +152,8 @@ You can use the following link to quickly create the project with the required c
 
 This link preconfigures a Spring Boot project with the necessary setup, allowing you to get started quickly.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">simple-spring-boot-agent/
+```
+simple-spring-boot-agent/
 ├── src/
 │   └── main/
 │       ├── java/com/bsmlabs/springai/
@@ -165,139 +166,150 @@ This link preconfigures a Spring Boot project with the necessary setup, allowing
 │       └── resources/
 │           └── application.properties          # AWS Bedrock config
 ├── test-sample-request.http                    # Ready-to-run HTTP test requests
-└── pom.xml</pre>
+└── pom.xml
+```
+
 
 **1. Add the below Bill of Materials(BOM) SDK Dependencies and then include `runtime starter` to pom.xml**
 
-<pre class="EnlighterJSRAW" data-enlighter-language="xml" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&lt;dependencyManagement&gt;
-        &lt;dependencies&gt;
-            &lt;dependency&gt;
-                &lt;groupId&gt;org.springframework.ai&lt;/groupId&gt;
-                &lt;artifactId&gt;spring-ai-bom&lt;/artifactId&gt;
-                &lt;version&gt;${spring-ai.version}&lt;/version&gt;
-                &lt;type&gt;pom&lt;/type&gt;
-                &lt;scope&gt;import&lt;/scope&gt;
-            &lt;/dependency&gt;
-            &lt;dependency&gt;
-                &lt;groupId&gt;org.springaicommunity&lt;/groupId&gt;
-                &lt;artifactId&gt;spring-ai-agentcore-bom&lt;/artifactId&gt;
-                &lt;version&gt;${spring-ai-agentcore.version}&lt;/version&gt;
-                &lt;type&gt;pom&lt;/type&gt;
-                &lt;scope&gt;import&lt;/scope&gt;
-            &lt;/dependency&gt;
-        &lt;/dependencies&gt;
-    &lt;/dependencyManagement&gt;
+```xml
+<dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.ai</groupId>
+                <artifactId>spring-ai-bom</artifactId>
+                <version>${spring-ai.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.springaicommunity</groupId>
+                <artifactId>spring-ai-agentcore-bom</artifactId>
+                <version>${spring-ai-agentcore.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
-     &lt;dependencies&gt;
-        &lt;dependency&gt;
-         &lt;groupId&gt;org.springaicommunity&lt;/groupId&gt;
-         &lt;artifactId&gt;spring-ai-agentcore-runtime-starter&lt;/artifactId&gt;
-         &lt;/dependency&gt;
-     &lt;/dependencies&gt;</pre>
+     <dependencies>
+        <dependency>
+         <groupId>org.springaicommunity</groupId>
+         <artifactId>spring-ai-agentcore-runtime-starter</artifactId>
+         </dependency>
+     </dependencies>
+```
+
 
 complete `pom.xml`
 
-<pre class="EnlighterJSRAW" data-enlighter-language="xml" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
-&lt;project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd"&gt;
-    &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
-    &lt;parent&gt;
-        &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
-        &lt;artifactId&gt;spring-boot-starter-parent&lt;/artifactId&gt;
-        &lt;version&gt;3.5.8&lt;/version&gt;
-        &lt;relativePath/&gt; &lt;!-- lookup parent from repository --&gt;
-    &lt;/parent&gt;
-    &lt;groupId&gt;com.bsmlabs&lt;/groupId&gt;
-    &lt;artifactId&gt;simple-spring-boot-agent&lt;/artifactId&gt;
-    &lt;version&gt;0.0.1-SNAPSHOT&lt;/version&gt;
-    &lt;name/&gt;
-    &lt;description/&gt;
-    &lt;url/&gt;
-    &lt;licenses&gt;
-        &lt;license/&gt;
-    &lt;/licenses&gt;
-    &lt;developers&gt;
-        &lt;developer&gt;
-            &lt;name&gt;Mahendra Rao B&lt;/name&gt;
-        &lt;/developer&gt;
-    &lt;/developers&gt;
-    &lt;scm&gt;
-        &lt;connection/&gt;
-        &lt;developerConnection/&gt;
-        &lt;tag/&gt;
-        &lt;url&gt;https://github.com/bsmahi/simple-spring-boot-agent&lt;/url&gt;
-    &lt;/scm&gt;
-    &lt;/scm&gt;
-    &lt;properties&gt;
-        &lt;java.version&gt;21&lt;/java.version&gt;
-        &lt;spring-ai.version&gt;1.1.4&lt;/spring-ai.version&gt;
-        &lt;spring-ai-agentcore.version&gt;1.0.0&lt;/spring-ai-agentcore.version&gt;
-    &lt;/properties&gt;
-    &lt;dependencies&gt;
-        &lt;dependency&gt;
-            &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
-            &lt;artifactId&gt;spring-boot-starter-actuator&lt;/artifactId&gt;
-        &lt;/dependency&gt;
-        &lt;dependency&gt;
-            &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
-            &lt;artifactId&gt;spring-boot-starter-web&lt;/artifactId&gt;
-        &lt;/dependency&gt;
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>3.5.8</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
+    <groupId>com.bsmlabs</groupId>
+    <artifactId>simple-spring-boot-agent</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <name/>
+    <description/>
+    <url/>
+    <licenses>
+        <license/>
+    </licenses>
+    <developers>
+        <developer>
+            <name>Mahendra Rao B</name>
+        </developer>
+    </developers>
+    <scm>
+        <connection/>
+        <developerConnection/>
+        <tag/>
+        <url>https://github.com/bsmahi/simple-spring-boot-agent</url>
+    </scm>
+    </scm>
+    <properties>
+        <java.version>21</java.version>
+        <spring-ai.version>1.1.4</spring-ai.version>
+        <spring-ai-agentcore.version>1.0.0</spring-ai-agentcore.version>
+    </properties>
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
 
-        &lt;dependency&gt;
-            &lt;groupId&gt;org.springframework.ai&lt;/groupId&gt;
-            &lt;artifactId&gt;spring-ai-starter-model-bedrock-converse&lt;/artifactId&gt;
-        &lt;/dependency&gt;
-        &lt;!-- AgentCore Capabilities Dependencies, add one by one or as needed --&gt;
-        &lt;dependency&gt;
-            &lt;groupId&gt;org.springaicommunity&lt;/groupId&gt;
-            &lt;artifactId&gt;spring-ai-agentcore-runtime-starter&lt;/artifactId&gt;
-        &lt;/dependency&gt;
+        <dependency>
+            <groupId>org.springframework.ai</groupId>
+            <artifactId>spring-ai-starter-model-bedrock-converse</artifactId>
+        </dependency>
+        <!-- AgentCore Capabilities Dependencies, add one by one or as needed -->
+        <dependency>
+            <groupId>org.springaicommunity</groupId>
+            <artifactId>spring-ai-agentcore-runtime-starter</artifactId>
+        </dependency>
 
-        &lt;dependency&gt;
-            &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
-            &lt;artifactId&gt;spring-boot-starter-test&lt;/artifactId&gt;
-            &lt;scope&gt;test&lt;/scope&gt;
-        &lt;/dependency&gt;
-    &lt;/dependencies&gt;
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
 
-    &lt;dependencyManagement&gt;
-        &lt;dependencies&gt;
-            &lt;dependency&gt;
-                &lt;groupId&gt;org.springframework.ai&lt;/groupId&gt;
-                &lt;artifactId&gt;spring-ai-bom&lt;/artifactId&gt;
-                &lt;version&gt;${spring-ai.version}&lt;/version&gt;
-                &lt;type&gt;pom&lt;/type&gt;
-                &lt;scope&gt;import&lt;/scope&gt;
-            &lt;/dependency&gt;
-            &lt;dependency&gt;
-                &lt;groupId&gt;org.springaicommunity&lt;/groupId&gt;
-                &lt;artifactId&gt;spring-ai-agentcore-bom&lt;/artifactId&gt;
-                &lt;version&gt;${spring-ai-agentcore.version}&lt;/version&gt;
-                &lt;type&gt;pom&lt;/type&gt;
-                &lt;scope&gt;import&lt;/scope&gt;
-            &lt;/dependency&gt;
-        &lt;/dependencies&gt;
-    &lt;/dependencyManagement&gt;
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.ai</groupId>
+                <artifactId>spring-ai-bom</artifactId>
+                <version>${spring-ai.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.springaicommunity</groupId>
+                <artifactId>spring-ai-agentcore-bom</artifactId>
+                <version>${spring-ai-agentcore.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
-    &lt;build&gt;
-        &lt;plugins&gt;
-            &lt;plugin&gt;
-                &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
-                &lt;artifactId&gt;spring-boot-maven-plugin&lt;/artifactId&gt;
-            &lt;/plugin&gt;
-        &lt;/plugins&gt;
-    &lt;/build&gt;
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
 
-&lt;/project&gt;
-</pre>
+</project>
+```
+
 
 ### 2. Add the below class {#h3-17-2-add-the-below-class}
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public record PromptRequest(String prompt){};</pre>
+```java
+public record PromptRequest(String prompt){};
+```
+
 
 ### 3. Add the below Mathematical Tool class {#h3-18-3-add-the-below-mathematical-tool-class}
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">package com.bsmlabs.springai.tools;
+```java
+package com.bsmlabs.springai.tools;
 
 import org.springframework.ai.tool.annotation.Tool;
 import org.springframework.ai.tool.annotation.ToolParam;
@@ -351,7 +363,7 @@ public class MathematicalTools {
     @Tool(description = "Returns the square root of a number. Returns an error for negative input.")
     String squareRoot(
             @ToolParam(description = "The number to find the square root of") double number) {
-        if (number &lt; 0) return "Error: cannot take square root of a negative number.";
+        if (number < 0) return "Error: cannot take square root of a negative number.";
         return String.valueOf(Math.sqrt(number));
     }
 
@@ -389,11 +401,14 @@ public class MathematicalTools {
             @ToolParam(description = "The total value") double total) {
         return (percent / 100.0) * total;
     }
-}</pre>
+}
+```
+
 
 ### 4. Create a Sample Agent {#h3-19-4-create-a-sample-agent}
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">package com.bsmlabs.springai.agents;
+```java
+package com.bsmlabs.springai.agents;
 
 import com.bsmlabs.springai.models.PromptRequest;
 import com.bsmlabs.springai.tools.MathematicalTools;
@@ -419,7 +434,7 @@ public class SampleChatAgent {
     }
 
     /**
-     * &lt;code&gt;@AgentCoreInvocation&lt;/code&gt; marks a method as the agent invocation handler for the AgentCore runtime.
+     * <code>@AgentCoreInvocation</code> marks a method as the agent invocation handler for the AgentCore runtime.
      * You can annotate only one method per application with this annotation.
      * Multiple @AgentCoreInvocation methods found. Only one is allowed in MVP.
      */
@@ -436,7 +451,9 @@ public class SampleChatAgent {
                 .content();
     }
 
-}</pre>
+}
+```
+
 
 * **`PromptRequest`** --- a custom model (likely a Java record) that wraps the user's input prompt.
 * **`MathematicalTools`** --- a custom tool class that exposes functions (like addition, square root, etc.) that the AI can invoke during reasoning.
@@ -450,10 +467,13 @@ public class SampleChatAgent {
   * **.call()** --- Sends the request to the configured LLM
   * **.content()** --- Extracts the plain text response
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">return chatClient.prompt()
+```java
+return chatClient.prompt()
                 .user(promptRequest.prompt())
                 .call()
-                .content();</pre>
+                .content();
+```
+
 
 If the LLM determines it needs a tool (e.g., to compute something), Spring AI handles the **tool-call loop automatically** behind .call() --- invoking `MathematicalTools`, feeding the result back to the model, and returning the final answer.
 
@@ -461,11 +481,15 @@ If the LLM determines it needs a tool (e.g., to compute something), Spring AI ha
 
 Configure both region and model in application.properties/application.yml
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">spring.application.name=sample-spring-boot-agent
+```
+spring.application.name=sample-spring-boot-agent
 spring.ai.bedrock.aws.region=ap-south-1                                
-spring.ai.bedrock.converse.chat.options.model=global.amazon.nova-2-lite-v1:0</pre>
+spring.ai.bedrock.converse.chat.options.model=global.amazon.nova-2-lite-v1:0
+```
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">spring:
+
+```yaml
+spring:
   application:
     name: simple-spring-boot-agent
   ai:
@@ -475,7 +499,9 @@ spring.ai.bedrock.converse.chat.options.model=global.amazon.nova-2-lite-v1:0</pr
       converse:
         chat:
           options:
-             model: global.amazon.nova-2-lite-v1:0</pre>
+             model: global.amazon.nova-2-lite-v1:0
+```
+
 
 ### 6. Verify {#h3-21-6-verify}
 
@@ -484,12 +510,15 @@ Since we have enabled Swagger OpenAPI, we can easily validate the APIs.
 
 or using `curl` command
 
-<pre class="EnlighterJSRAW" data-enlighter-language="powershell" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">// Run the application
+```powershell
+// Run the application
 mvn spring-boot:run
 // In terminal run the below command
 curl -X POST http://localhost:8080/invocations \ -H "Content-Type: application/json" \ -d '{"prompt": "What is Spring AI?"}'
 // Verify Mathematical Tool
-curl -X POST http://localhost:8080/invocations \ -H "Content-Type: application/json" \ -d '{"prompt": "What is 14+13?"}'</pre>
+curl -X POST http://localhost:8080/invocations \ -H "Content-Type: application/json" \ -d '{"prompt": "What is 14+13?"}'
+```
+
 
 *This is an AgentCore-compatible AI agent. It requires no custom controllers, no protocol handling, and no health check implementation.*
 
@@ -497,28 +526,35 @@ curl -X POST http://localhost:8080/invocations \ -H "Content-Type: application/j
 
 Add the *`spring-boot-starter-webflux`* dependency and comment *spring-boot-starter-web* dependency
 
-<pre class="EnlighterJSRAW" data-enlighter-language="xml" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&lt;dependency&gt;
-    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
-    &lt;artifactId&gt;spring-boot-starter-webflux&lt;/artifactId&gt;
-&lt;/dependency&gt;</pre>
+```xml
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-webflux</artifactId>
+</dependency>
+```
+
 
 <br />
 
 To stream responses as they are generated, change the return type to `Flux<String>`. The SDK then automatically switches to Server-Sent Events (SSE) output.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@AgentCoreInvocation
-public Flux&lt;String&gt; streamingChat(PromptRequest request) {
+```java
+@AgentCoreInvocation
+public Flux<String> streamingChat(PromptRequest request) {
    return chatClient.prompt()
                 .user(request.prompt())
                 .stream()
                 .content();
-}</pre>
+}
+```
+
 
 ![Streaming](Screenshot-2026-04-19-at-4.18.34-PM-1024x513.png) Streaming
 
 ### End-to-end flow {#h3-23-end-to-end-flow}
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">User Request
+```
+User Request
      │
      ▼
 @AgentCoreInvocation ──► AgentCoreContext (session, headers)
@@ -531,7 +567,9 @@ ChatClient.prompt()
      │         └──► Needs math? ──► MathematicalTools ──► result fed back
      │
      ▼
-Final LLM response returned as String</pre>
+Final LLM response returned as String
+```
+
 
 ***In the next part, I will discuss the inclusion of the remaining AgentCore services like memory, adding built-in tools like browser, code interpreter, and deployment to Amazon Bedrock AgentCore runtime.***
 

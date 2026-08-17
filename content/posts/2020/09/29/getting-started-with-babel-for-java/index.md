@@ -56,31 +56,34 @@ How to use frgaal {#f48b}
 
 The only thing you need to use it in a Maven build is to configure the maven-compiler-plugin.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="xml" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&lt;build&gt;
-    &lt;plugins&gt;
-        &lt;plugin&gt;
-            &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;
-            &lt;artifactId&gt;maven-compiler-plugin&lt;/artifactId&gt;
-            &lt;version&gt;3.8.1&lt;/version&gt;
-            &lt;dependencies&gt;
-                &lt;dependency&gt;
-                    &lt;groupId&gt;org.frgaal&lt;/groupId&gt;
-                    &lt;artifactId&gt;compiler-maven-plugin&lt;/artifactId&gt;
-                    &lt;version&gt;14.0.2&lt;/version&gt;
-                &lt;/dependency&gt;
-            &lt;/dependencies&gt;
-            &lt;configuration&gt;
-                &lt;compilerId&gt;frgaal&lt;/compilerId&gt;
-                &lt;source&gt;14&lt;/source&gt;
-                &lt;target&gt;1.8&lt;/target&gt;
-                &lt;compilerArgs&gt;
-                    &lt;arg&gt;-Xlint:deprecation&lt;/arg&gt;
-                    &lt;arg&gt;--enable-safe-preview&lt;/arg&gt;
-                &lt;/compilerArgs&gt;
-            &lt;/configuration&gt;
-        &lt;/plugin&gt;
-    &lt;/plugins&gt;
-&lt;/build&gt;</pre>
+```xml
+<build>
+    <plugins>
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-compiler-plugin</artifactId>
+            <version>3.8.1</version>
+            <dependencies>
+                <dependency>
+                    <groupId>org.frgaal</groupId>
+                    <artifactId>compiler-maven-plugin</artifactId>
+                    <version>14.0.2</version>
+                </dependency>
+            </dependencies>
+            <configuration>
+                <compilerId>frgaal</compilerId>
+                <source>14</source>
+                <target>1.8</target>
+                <compilerArgs>
+                    <arg>-Xlint:deprecation</arg>
+                    <arg>--enable-safe-preview</arg>
+                </compilerArgs>
+            </configuration>
+        </plugin>
+    </plugins>
+</build>
+```
+
 
 If you would like to try it out right now, the only thing you need to do is clone this Github repository with a demo:
 
@@ -88,7 +91,8 @@ $ *git clone* [*https://github.com/eppleton/frgaal-demo.git*](https://github.com
 
 Have a look at the demo code, it uses some new features like text blocks and enhanced "instanceof"-Syntax :
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">package example;
+```java
+package example;
 
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
@@ -100,10 +104,10 @@ import com.google.gson.GsonBuilder;
 import java.util.Map;
 
 // Handler value: example.Handler
-public class Handler implements RequestHandler&lt;Map&lt;String,String&gt;, String&gt;{
+public class Handler implements RequestHandler<Map<String,String>, String>{
   Gson gson = new GsonBuilder().setPrettyPrinting().create();
   @Override
-  public String handleRequest(Map&lt;String,String&gt; event, Context context)
+  public String handleRequest(Map<String,String> event, Context context)
   {
     LambdaLogger logger = context.getLogger();
         String response = """
@@ -118,7 +122,9 @@ public class Handler implements RequestHandler&lt;Map&lt;String,String&gt;, Stri
     logger.log("EVENT TYPE: " + event.getClass().toString());
     return response;
   }
-}</pre>
+}
+```
+
 
 Building and running the project is no different from a regular Maven project. Assuming you have JDK 8 or newer just run:
 
@@ -126,10 +132,13 @@ Building and running the project is no different from a regular Maven project. A
 
 *$ java -jar target/demo-simple-1.0-SNAPSHOT.jar*
 
-<pre class="EnlighterJSRAW" data-enlighter-language="raw" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">initial list content
+```
+initial list content
 is…[6, 1, 3, 5]
 after sorting: [1, 3, 5, 6]
-ok</pre>
+ok
+```
+
 
 That's it, three lines of code to try out new and experimental Java features without installing a preview JDK.
 

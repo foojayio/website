@@ -66,7 +66,8 @@ The structure of this file is:
 2. Tell JBang which dependencies are needed with the `//DEPS ...` comment lines
 3. And the rest is just a normal Java class
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">///usr/bin/env jbang "$0" "$@" ; exit $?
+```java
+///usr/bin/env jbang "$0" "$@" ; exit $?
 
 //DEPS org.slf4j:slf4j-api:2.0.3
 //DEPS org.slf4j:slf4j-simple:2.0.3
@@ -141,11 +142,11 @@ class LedStrip {
             int red = 0;
             int blue = 0;
             while(true) {
-                if (red &lt; 254) {
+                if (red < 254) {
                     red++;
-                } else if (green &lt; 254) {
+                } else if (green < 254) {
                     green++;
-                } else if (blue &lt; 254) {
+                } else if (blue < 254) {
                     blue++;
                 } else {
                     break;
@@ -159,7 +160,9 @@ class LedStrip {
             ledStrip.writeRegister(CMD_PATTERN, PATTERN_OFF);
         }
     }
-}</pre>
+}
+```
+
 
 Conclusion {#h2-2-conclusion}
 -----------------------------

@@ -53,16 +53,19 @@ To create a container with MongoDB running in it, we will need to create that re
 
 All of the code for our Docker container is available in the related folder of the [Github project](https://github.com/JMHReif/microservices-level3/tree/main/docker-mongodb).
 
-<pre class="EnlighterJSRAW" data-enlighter-language="text">#Pull base image
+```
+#Pull base image
 #-----------------
 FROM mongo
 
 #Author
 #-------
-LABEL org.opencontainers.image.authors="Jennifer Reif,<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="b5dfd0dbdbdcd3d0c7f5c1ddd0ddd0d6ded9d0c7c69bdac7d2">[email&nbsp;protected]</a>,@JMHReif"
+LABEL org.opencontainers.image.authors="Jennifer Reif,<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="b5dfd0dbdbdcd3d0c7f5c1ddd0ddd0d6ded9d0c7c69bdac7d2">[email protected]</a>,@JMHReif"
 
 #expose the default port
-EXPOSE 27017</pre>
+EXPOSE 27017
+```
+
 
 In the first code block, we are pulling that base image (`mongo`) for MongoDB. The next section tells anyone who might use this Dockerfile who maintains it (me). The last couple of lines expose a port in order to connect to the container using MongoDB's default port is 27017.
 
@@ -92,20 +95,26 @@ Our application code doesn't change much to go from an embedded to a separate in
 
 The largest amount of work was setting up the database itself, and if you have gotten this far, then the hardest part is already complete! Most of what we change, then, is going to be the connection details to plug in to the datatbase instance. Changes start in our `pom.xml` file, where we need to update our dependency from the embedded test version to the production-style independent instance.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="xml">&lt;dependency&gt;
-  &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
-  &lt;artifactId&gt;spring-boot-starter-data-mongodb-reactive&lt;/artifactId&gt;
-&lt;/dependency&gt;</pre>
+```xml
+<dependency>
+  <groupId>org.springframework.boot</groupId>
+  <artifactId>spring-boot-starter-data-mongodb-reactive</artifactId>
+</dependency>
+```
+
 
 We are using the official Spring Data MongoDB dependency, which means we get all the goodness of Spring's functionality interacting with a production-grade database. You may have also noticed the reactive suffix of the artifactId. Spring Data MongoDB provides a separate library for imperative-style code. Since we want to move data and events between applications for microservices as asynchronously as possible, we will use the reactive library.
 
 We will also need to make a couple of changes to the `application.properties` file to connect to the database instance and remove the test instance properties. Our updated property file looks like the one below.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="text">server.port=8081
+```
+server.port=8081
 
 #database connection
 spring.data.mongodb.uri=mongodb://mongoadmin:Testing123@localhost:27017
-spring.data.mongodb.database=books</pre>
+spring.data.mongodb.database=books
+```
+
 
 We removed the MongoDB port and embedded versioning in favor of a full URI property (includes the MongoDB port of `27017`) along with a database name on the instance. This is because a single MongoDB instance can hold multiple separate data stores with different data sets. I could have a database of books and a database of customers that exist in the same installation, but are organized in separate storage compartments of that installation.
 
@@ -119,7 +128,8 @@ First, some of the fields in our spreadsheet that we loaded had slightly differe
 
 We can do this in a couple of different ways. 1) keep our variable names in the application and add the `@Property` annotation to specify what that field equals in the database, 2) change our variable names. The database fields are sensible and understandable, so in this case, I will just change the variable names in the application to match the database.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">@Data
+```java
+@Data
 @Document
 class Book {
 	@Id
@@ -128,19 +138,24 @@ class Book {
 	private String title;
 	@NonNull
 	private String authors;
-}</pre>
+}
+```
+
 
 You might ask what changed? The id field went from `bookId` to `bookID`, and the author field went from `author` to `authors`. These are very minor differences, but ones that wouldn't allow the values to be mapped properly if we didn't match exactly.
 
 The `BookRepository` interface just above the domain class does not change at all and neither does the `BookController` class above that. However, the `Service1Application` class does. We actually revert back to what we had in the [Level1](https://github.com/JMHReif/microservices-level1/blob/main/service1/src/main/java/com/jmhreif/service1/Service1Application.java) rendition of the code with only the `main` method.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">@SpringBootApplication
+```java
+@SpringBootApplication
 public class Service1Application {
 
 	public static void main(String[] args) {
 		SpringApplication.run(Service1Application.class, args);
 	}
-}</pre>
+}
+```
+
 
 The CommandLineRunner bean is no longer needed because we are not populating an embedded database with dummy data, but rather using a separate database with a real data set loaded. Once we remove the bean, that is all for `service1`! Time to move over to `service2`.
 
@@ -155,30 +170,36 @@ Let's see about the class code.
 
 Since we changed the domain class in service1, that means we need to align the domain class in service2, as well.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">@Data
+```java
+@Data
 class Book {
 	private String bookID;
 	private String title;
 	private String authors;
-}</pre>
+}
+```
+
 
 Just as in service1, we updated the first and last properties to `bookID` and `authors`. This maps our data coming from service1 to the correct fields in service2.
 
 We do not need to change the way the request is pulling/retrieving the information. However, we did change our data domain, so I will make one minor change to the client url from `/hello` to `/goodreads` so that it aligns with our domain better.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">@RestController
+```
+@RestController
 @AllArgsConstructor
 @RequestMapping("/goodreads")
 class BookController {
     private final WebClient client;
     @GetMapping
-    Flux&lt;Book&gt; getBooks() {
+    Flux<Book> getBooks() {
         return client.get()
                 .uri("/db/books")
                 .retrieve()
                 .bodyToFlux(Book.class);
     }
-}</pre>
+}
+```
+
 
 The `@RequestMapping` annotation is the only line that has changed, so we will need to go to `localhost:8080/gooodreads` now.
 

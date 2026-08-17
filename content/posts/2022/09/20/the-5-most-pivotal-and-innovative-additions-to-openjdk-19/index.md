@@ -29,15 +29,18 @@ Many features intrigue my interest, but there are five in particular that I can'
 
 Under the umbrella of Project Loom, JEP 425 introduces virtual threads, which aim to dramatically reduce the effort of writing, maintaining, and observing high-throughput concurrent applications on the Java platform. This is a [preview feature](https://openjdk.java.net/jeps/12). Consider the following example:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public class Main {
+```java
+public class Main {
     public static void main(String[] args) throws InterruptedException {
-        var vThread = Thread.startVirtualThread(() -&gt; {
+        var vThread = Thread.startVirtualThread(() -> {
             System.out.println("Hello from the virtual thread");
         });
 
         vThread.join();
     }
-}</pre>
+}
+```
+
 
 Since this is a preview feature, a developer will need to provide the **--enable-preview** flag to compile this code, as shown in the following command:
 
@@ -64,10 +67,11 @@ If you want to know more about it, please, head over the my GitHub repository: <
 
 Structured Concurrency allows you to treat multiple tasks running on different threads as an atomic operation, making multithreaded programming easier. As a result, error handling and cancellation will be simplified, reliability will increase, and observability will be boosted. Let's see an example:  
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">Response handle() throws ExecutionException, InterruptedException {
+```java
+Response handle() throws ExecutionException, InterruptedException {
    try (var scope = new StructuredTaskScope.ShutdownOnFailure()) {
-       Future&lt;String&gt; user = scope.fork(() -&gt; findUser());
-       Future&lt;Integer&gt; order = scope.fork(() -&gt; fetchOrder());
+       Future<String> user = scope.fork(() -> findUser());
+       Future<Integer> order = scope.fork(() -> fetchOrder());
 
        scope.join();          // Join both forks
        scope.throwIfFailed(); // ... and propagate errors
@@ -75,7 +79,9 @@ Structured Concurrency allows you to treat multiple tasks running on different t
        // Here, both forks have succeeded, so compose their results
        return new Response(user.resultNow(), order.resultNow());
    }
-}</pre>
+}
+```
+
 
 This API runs on top of JEP 425, [Virtual Threads (Preview)](https://openjdk.java.net/jeps/425), also targeted for JDK 19
 
@@ -101,18 +107,19 @@ The [jshell](https://docs.oracle.com/javase/9/jshell/introduction-jshell.htm#JSH
 
 Pattern Machining (Third Preview) is to add a pattern for switch expressions and statements to the Java programming language. For concise and safe expression of complex data-oriented queries, it allows testing against multiple patterns, each with a distinct action. Consider the following example-
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">package ca.bazlur;
+```java
+package ca.bazlur;
 
 public class PatternMatching {
 
   public static String transform(Integer status) {
     return switch (status) {
-      case 200 -&gt; "Ok";
-      case 301 -&gt; "Moved Permanently";
-      case 404 -&gt; "Not found";
-      case 500 -&gt; "Internal Server Error";
-      case Number n when n.intValue() &gt;= 600 -&gt; "Invalid";
-      default -&gt; "Valid";
+      case 200 -> "Ok";
+      case 301 -> "Moved Permanently";
+      case 404 -> "Not found";
+      case 500 -> "Internal Server Error";
+      case Number n when n.intValue() >= 600 -> "Invalid";
+      default -> "Valid";
     };
   }
 
@@ -122,7 +129,8 @@ public class PatternMatching {
     System.out.println(transform(404));
   }
 }
-</pre>
+```
+
 
 This is also a preview feature, requiring developers to add `--enable-preview`.
 
@@ -130,11 +138,13 @@ This is also a preview feature, requiring developers to add `--enable-preview`.
 
 By utilizing the Foreign Function and Memory API, Java applications can talk to and use data that is not built into the JRE. Without the hassle and security concerns of the JNI, Java programs can now access native memory, invoke native functions, and process native data. Example-
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">Linker linker = Linker.nativeLinker();
+```java
+Linker linker = Linker.nativeLinker();
 SymbolLookup stdlib = linker.defaultLookup();
 MethodHandle radixSort = linker.downcallHandle(
                              stdlib.lookup("radixsort"), ...);
-</pre>
+```
+
 
 Developers who want to learn more about this JEP can leverage this series on Foojay: <https://foojay.io/today/project-panama-for-newbies-part-1/>  
 
@@ -144,7 +154,8 @@ The purpose of Record Patterns is to enrich the language with record patterns th
 
 Let's consider the following example-
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">package ca.bazlur;
+```java
+package ca.bazlur;
 
 import java.util.stream.Stream;
 
@@ -155,13 +166,13 @@ public class Main {
     var s2 = new Rectangle(2, 4);
     var s3 = new Triangle(3, 5);
 
-    Stream.of(s1, s2, s3, 42).forEach(e -&gt; {
+    Stream.of(s1, s2, s3, 42).forEach(e -> {
       var area = switch (e) {
-        case Circle c -&gt; "Radius of the circle: " + c.radius + " and area: "+ c.area();
-        case Rectangle r -&gt; "Height "+ r.height + ", width: "+ r.width +" and the area of Rectangle: " + r.area();
-        case Shape s -&gt; "Area of the Shape: " + s.area();
-        case Integer n -&gt; "It is: " + n;
-        default -&gt; "not supported";
+        case Circle c -> "Radius of the circle: " + c.radius + " and area: "+ c.area();
+        case Rectangle r -> "Height "+ r.height + ", width: "+ r.width +" and the area of Rectangle: " + r.area();
+        case Shape s -> "Area of the Shape: " + s.area();
+        case Integer n -> "It is: " + n;
+        default -> "not supported";
       };
       System.out.println(area);
     });
@@ -196,7 +207,8 @@ public class Main {
     }
   }
 }
-</pre>
+```
+
 
 Since this is also a [preview feature](https://openjdk.java.net/jeps/12), developers require adding `--enable-preview` while compiling the above example.   
 

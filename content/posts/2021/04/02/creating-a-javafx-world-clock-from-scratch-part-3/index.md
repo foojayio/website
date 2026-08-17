@@ -56,7 +56,8 @@ In this scenario, you wouldn't want the 3rd party APIs exposed to the users of y
 
 The JavaFX World Clock project is implemented using Java modules. Because of this you will have to create a `module-info.java` file that will describe dependencies and visibility (scope) of modules and packages. Here I defined the world clock's `module-info.java` shown below:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">module worldclock {
+```java
+module worldclock {
     requires javafx.controls;
     requires javafx.fxml;
     requires javafx.web;
@@ -67,7 +68,8 @@ The JavaFX World Clock project is implemented using Java modules. Because of thi
     exports com.carlfx.worldclock;
 }
 // Listing 3.1
-</pre>
+```
+
 
 You'll notice all the `requires` such as `javafx.controls` and `javafx.fxml` that enables us to import classes in code. For those who didn't catch it, but the `javafx.*` modules also depend on the module `javafx.base`. So, you may ask "Should we specify a `requires javafx.base`?" The answer is "no".
 
@@ -80,7 +82,10 @@ Whenever 3rd party libraries modules are using dependency injection or reflectio
 
 The following is how to open the world clock's package namespace to the `javafx.fxml` module.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">opens com.carlfx.worldclock to javafx.fxml;</pre>
+```java
+opens com.carlfx.worldclock to javafx.fxml;
+```
+
 
 In the module-info above, you'll also notice the `opens com.carlfx.worldclock` to the Jackson Serialization library module also. Jackson will need to have access to POJOs in the world clock's package namespace. I use Jackson's module to save clock configuration info as a JSON file in the home directory under `$home/worldclock`.
 
@@ -90,7 +95,10 @@ Exports are used to open access to your package namespace to others who will pot
 
 The basic syntax to export world clock's package namespace:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">exports com.carlfx.worldclock;</pre>
+```java
+exports com.carlfx.worldclock;
+```
+
 
 Now that you know a little more about the basics of Java modules let's look at a high-level view on how to go about creating a JavaFX UI Form.
 
@@ -104,10 +112,13 @@ When the application begins, the application thread will invoke the `start()` me
 
 Listing 3.2, below, shows how to load an FXML as a node (Parent) object using the FXMLLoader utility class. The FXML's top level node is an AnchorPane. All Panes (layout type nodes) extend from the `javafx.scene.Parent` class.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">FXMLLoader configLocationLoader = new FXMLLoader(App.class.getResource("config-locations.fxml"));
+```java
+FXMLLoader configLocationLoader = new FXMLLoader(App.class.getResource("config-locations.fxml"));
 Parent configPane = configLocationLoader.load();
 ConfigLocationsController configController = configLocationLoader.getController();
-// Listing 3.2</pre>
+// Listing 3.2
+```
+
 
 Another nice feature of the `FXMLLoader` class is to get the **controller** instance by calling the `FXMLLoader.getController()` method.
 
@@ -200,7 +211,8 @@ A good reference on how to custom style UI controls check out the JavaFX CSS Ref
 
 In the Scene Builder tool the `gmtErrorOverlayIcon` Button is styled with `.error-overlay` CSS class. To make the JavaFX Button `gmtErrorOverlayIcon` into an overlay icon used in validation the following JavaFX CSS was used. (located in the config-locations.css file):
 
-<pre class="EnlighterJSRAW" data-enlighter-language="css">.error-overlay {
+```css
+.error-overlay {
     -fx-shape: "M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm0 448c-110.5 0-200-89.5-200-200S145.5 56 256 56s200 89.5 200 200-89.5 200-200 200zm101.8-262.2L295.6 256l62.2 62.2c4.7 4.7 4.7 12.3 0 17l-22.6 22.6c-4.7 4.7-12.3 4.7-17 0L256 295.6l-62.2 62.2c-4.7 4.7-12.3 4.7-17 0l-22.6-22.6c-4.7-4.7-4.7-12.3 0-17l62.2-62.2-62.2-62.2c-4.7-4.7-4.7-12.3 0-17l22.6-22.6c4.7-4.7 12.3-4.7 17 0l62.2 62.2 62.2-62.2c4.7-4.7 12.3-4.7 17 0l22.6 22.6c4.7 4.7 4.7 12.3 0 17z";
     -fx-background-color: "#de752fce";
     -fx-fill: "#000000";
@@ -210,7 +222,9 @@ In the Scene Builder tool the `gmtErrorOverlayIcon` Button is styled with `.erro
     -fx-min-width: 12;
     -fx-max-height: 12;
     -fx-max-width: 12;
-}</pre>
+}
+```
+
 
 Here you'll notice the vector shape specified for the `-fx-shape` attribute to appear as an 'x' inside of a circle shape:
 
@@ -222,11 +236,14 @@ In Scene Builder, I added a tooltip to the button with `fx:id` of `gmtErrorOverl
 
 The FXML or the view will contain the XML markup generated from the Scene Builder tool. Below is the button that represents the overlay icon `gmtErrorOverlayIcon` for the GMT Offset TextField control.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="css">&lt;Button fx:id="gmtErrorOverlayIcon" alignment="CENTER" contentDisplay="CENTER" focusTraversable="false" layoutX="86.0" layoutY="6.0" mnemonicParsing="false" styleClass="error-overlay" text="Button"&gt;
-   &lt;tooltip&gt;
-     &lt;Tooltip text="Must be from -12 through 0 (GMT) to +12" /&gt;
-   &lt;/tooltip&gt;
-&lt;/Button&gt;</pre>
+```css
+<Button fx:id="gmtErrorOverlayIcon" alignment="CENTER" contentDisplay="CENTER" focusTraversable="false" layoutX="86.0" layoutY="6.0" mnemonicParsing="false" styleClass="error-overlay" text="Button">
+   <tooltip>
+     <Tooltip text="Must be from -12 through 0 (GMT) to +12" />
+   </tooltip>
+</Button>
+```
+
 
 ### Validation Overlay Icons: Behavior {#h3-8-validation-overlay-icons-behavior}
 
@@ -238,21 +255,27 @@ The example of the GMT Error Overlay Icon button uses the `@FXML` annotation to 
 
 Excerpts from the controller class com.carlfx.worldclock.ConfigLocationsController.java [\[3\]](https://github.com/carldea/worldclock/blob/main/src/main/java/com/carlfx/worldclock/ConfigLocationsController.java "ConfigLocationsController.java").
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">@FXML
+```java
+@FXML
 public Button gmtErrorOverlayIcon;
 
 @FXML
-public TextField gmtOffset;</pre>
+public TextField gmtOffset;
+```
+
 
 #### The initialize() method
 
 When the form is loaded and instance variables are associated (injected) with UI elements, the `initialize()` method will be called as shown below:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">@FXML
+```java
+@FXML
 public void intitialize() {
     addValidationRangeCheckInt(-12, 12, gmtOffset, gmtErrorOverlayIcon);
     // The rest of the code ...
-}</pre>
+}
+```
+
 
 Above you'll notice the method `addValidationRangeCheckInt()` that will attach a listener onto the `gmtOffset` (TextField) control with the ability to show and hide the `gmtErrorOverlayIcon` (Button) during input validation.
 
@@ -260,21 +283,24 @@ Above you'll notice the method `addValidationRangeCheckInt()` that will attach a
 
 I created a `addValidationRangeCheckInt()` method to attach a listener for text fields (TextField) to validate against an integer value within a range. The code will show or hide a validation overlay icon when the user enters invalid or valid data respectively. In this scenario the GMT Offset TextField will only allows values between -12 to 12 (inclusive).
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">private void addValidationRangeCheckInt(int min, int max, TextField field, Button errorOverlayIcon) {
+```java
+private void addValidationRangeCheckInt(int min, int max, TextField field, Button errorOverlayIcon) {
     errorOverlayIcon.setVisible(false);
-    field.textProperty().addListener((observable, oldValue, newValue) -&gt; {
+    field.textProperty().addListener((observable, oldValue, newValue) -> {
         try {
             String str = "0";
             if (!"".equals(newValue.trim())) {
                 str = newValue;
             }
             Integer value = Integer.parseInt(str.trim());
-            errorOverlayIcon.setVisible((value &lt; min || value &gt; max));
+            errorOverlayIcon.setVisible((value < min || value > max));
         } catch (Exception e) {
             errorOverlayIcon.setVisible(true);
         }
     });
-}</pre>
+}
+```
+
 
 #### Output
 

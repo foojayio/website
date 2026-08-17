@@ -31,7 +31,7 @@ No reproducibility.
 
 That's the problem [**APM**](https://github.com/microsoft/apm), the Agent Package Manager fixes. And it pairs with [**AgentRC**](https://github.com/microsoft/agentrc) to close the loop on *generating* and *evaluating* that context in the first place.
 
-*** ** * ** ***
+
 
 1. The problem: agent context drifts {#h2-0-1-the-problem-agent-context-drifts}
 -------------------------------------------------------------------------------
@@ -53,14 +53,15 @@ The results:
 
 If we treat prompts as text, we'll keep ignoring them in supply-chain reviews. If we treat them as code versioned, hashed, audited --- we get a real perimeter around what agents do.
 
-*** ** * ** ***
+
 
 2. The idea: what if agent context had a `package.json`? {#h2-1-2-the-idea-what-if-agent-context-had-a-package-json}
 --------------------------------------------------------------------------------------------------------------------
 
 One manifest. One install. Every agent, configured. That's it.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group=""># apm.yml — ships with your repo
+```
+# apm.yml — ships with your repo
 name: your-project
 version: 1.0.0
 dependencies:
@@ -72,15 +73,20 @@ dependencies:
   mcp:
     # MCP servers governed by the same manifest
     - name: io.github.github/github-mcp-server
-      transport: http</pre>
+      transport: http
+```
+
 
 Then:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ git clone &lt;repo&gt; &amp;&amp; cd &lt;repo&gt;
+```
+$ git clone <repo> && cd <repo>
 $ apm install
 → resolving 14 packages…
 → deploying primitives to .github/, .vscode/
-✓ every agent is configured</pre>
+✓ every agent is configured
+```
+
 
 Three details worth highlighting:
 
@@ -92,7 +98,7 @@ Three details worth highlighting:
    Bitbucket, internal Gitea or Gogs. No central marketplace required (though  
    curated marketplaces do exist).
 
-*** ** * ** ***
+
 
 3. The 3 strong guarantees {#h2-2-3-the-3-strong-guarantees}
 ------------------------------------------------------------
@@ -122,7 +128,7 @@ and gates transitive MCP servers behind trust prompts.
 
 and transitive MCP servers. Tighten-only inheritance flows enterprise → org → repo.
 
-*** ** * ** ***
+
 
 4. What an APM package can contain {#h2-6-4-what-an-apm-package-can-contain}
 ----------------------------------------------------------------------------
@@ -142,32 +148,38 @@ This is the part most people underrate. APM isn't only about instructions. It's 
 
 single manifest for *all* the moving parts an agent needs.
 
-*** ** * ** ***
+
 
 5. The five commands you'll actually use {#h2-7-5-the-five-commands-you-ll-actually-use}
 ----------------------------------------------------------------------------------------
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">apm install                  # resolve manifest, scan, deploy primitives, write lockfile
-apm install &lt;pkg&gt;            # add a package to apm.yml and install it
+```
+apm install                  # resolve manifest, scan, deploy primitives, write lockfile
+apm install <pkg>            # add a package to apm.yml and install it
 apm compile -t copilot       # render root context files (AGENTS.md / copilot-instructions.md)
 apm audit                    # security + policy checks; SARIF output for CI
-apm pack                     # bundle your package for distribution</pre>
+apm pack                     # bundle your package for distribution
+```
 
-*** ** * ** ***
+
+
 
 6. One manifest, every harness {#h2-8-6-one-manifest-every-harness}
 -------------------------------------------------------------------
 
 The same packages render to whatever your team uses:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">apm.yml  →  apm compile  →  GitHub Copilot · Claude Code · Cursor
-                            OpenCode · Codex · Gemini · Windsurf</pre>
+```
+apm.yml  →  apm compile  →  GitHub Copilot · Claude Code · Cursor
+                            OpenCode · Codex · Gemini · Windsurf
+```
+
 
 For Copilot specifically, `apm install` is **zero-config** : it writes the files that VS Code and GitHub Copilot already expect (`.github/instructions/`, `.github/prompts/`, `.vscode/mcp.json`), and `apm compile -t copilot` adds the `.github/copilot-instructions.md` rollup. APM itself dogfoods this on its own repo.
 
 For other harnesses, `apm compile` emits `AGENTS.md` in the repo root (the open [agents.md](https://agents.md) standard) plus the harness-specific rules trees. So if a teammate uses Claude Code, Cursor, Codex, Gemini, OpenCode, or Windsurf, their agent is configured from the same manifest. It's your edge against agent vendor lock-in: **context survives the harness.**
 
-*** ** * ** ***
+
 
 7. Plugins and marketplaces: bundle a workflow, not a file {#h2-9-7-plugins-and-marketplaces-bundle-a-workflow-not-a-file}
 --------------------------------------------------------------------------------------------------------------------------
@@ -183,13 +195,16 @@ Take a Code Review plugin:
 
 Without a plugin, every developer wires four artefacts by hand and hopes the versions match. With an APM plugin:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ apm install acme/code-review</pre>
+```
+$ apm install acme/code-review
+```
+
 
 One command drops all four primitives into the right places under `.github/` and `.vscode/` and pins them in `apm.lock.yaml`. Plugins can depend on other APM packages (transitive deps, just like npm). And `apm pack` exports a standard `plugin.json` bundle that Copilot, Claude, and Cursor can all consume.
 
 Marketplaces are the curated layer on top: install from a registry in one command, deployed across all targets, pinned in the lockfile. `apm pack` emits a `marketplace.json` alongside the bundle when declared.
 
-*** ** * ** ***
+
 
 8. Security: treat prompts like the programs they are {#h2-10-8-security-treat-prompts-like-the-programs-they-are}
 ------------------------------------------------------------------------------------------------------------------
@@ -205,14 +220,15 @@ The honest pitch on security is this: agent context *is* executable in effect, a
 
 One caveat until today(5 June 2026): **package signing is not yet implemented**. The integrity story today is content-hash + lockfile + source allow-listing. But this is already much better than what most teams have.
 
-*** ** * ** ***
+
 
 9. Governance: one policy file, tighten-only inheritance {#h2-11-9-governance-one-policy-file-tighten-only-inheritance}
 -----------------------------------------------------------------------------------------------------------------------
 
 `apm-policy.yml` lets enterprises set the ceiling, orgs tighten further, and repos tighten further still. Each layer can only *tighten* , never *loosen* . The math: allow lists intersect, deny lists union, `max_depth` takes the minimum, and enforcement escalates `off < warn < block`.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group=""># apm-policy.yml
+```
+# apm-policy.yml
 allow:
   sources:
     - github.com/microsoft/*
@@ -228,7 +244,9 @@ deny:
 
 require:
   signed: true
-  lockfile: present</pre>
+  lockfile: present
+```
+
 
 Drop the file at `/.github/apm-policy.yml` and every repo in the org picks it up, no per-repo wiring. The CI gate is `apm audit --ci --policy org`, which runs all checks and renders findings on the PR.
 
@@ -236,7 +254,7 @@ For incident response there are two documented bypass surfaces --- `apm install 
 
 The architects' takeaway: **you can roll APM out org-wide without losing control over what agents load.**
 
-*** ** * ** ***
+
 
 10. AgentRC: context engineering, automated {#h2-12-10-agentrc-context-engineering-automated}
 ---------------------------------------------------------------------------------------------
@@ -246,10 +264,11 @@ So APM *distributes* agent context. But where does the content come from in the 
 
 AgentRC is a CLI + VS Code extension that reads your codebase and generates the files an agent needs to be useful: instructions, MCP config, VS Code settings, and *evals*. The three commands map cleanly to a lifecycle:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ npx github:microsoft/agentrc readiness
+```
+$ npx github:microsoft/agentrc readiness
 Scoring 9 pillars · 5-level maturity model
 
-  Build &amp; test          L4  ████████░░
+  Build & test          L4  ████████░░
   Linting               L2  ████░░░░░░
   Architecture docs     L1  ██░░░░░░░░
   MCP configuration     L0  ░░░░░░░░░░
@@ -262,21 +281,26 @@ $ npx github:microsoft/agentrc instructions
 
 $ npx github:microsoft/agentrc eval
 → running 12 evals against generated instructions
-✓ 11 passed, 1 regressed</pre>
+✓ 11 passed, 1 regressed
+```
+
 
 Three things in one: **measure** (`readiness`), **generate** (`instructions`), **maintain** (`eval`).
 
 The eval angle is the one most people miss. Instructions only matter if they actually improve agent responses. AgentRC measures that and can fail CI if context regresses. It's the missing feedback loop in most teams' agent setup.
 
-*** ** * ** ***
+
 
 11. How AgentRC + APM compose {#h2-13-11-how-agentrc-apm-compose}
 -----------------------------------------------------------------
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">Your repo → agentrc (measure · generate · eval)
+```
+Your repo → agentrc (measure · generate · eval)
          → .instructions.md · mcp.json · eval.json
          → apm.yml (pack · publish)
-         → org-wide apm install</pre>
+         → org-wide apm install
+```
+
 
 The crucial compatibility point: **the `.instructions.md` format is shared by both tools.** No conversion when moving content from AgentRC into an APM package.
 
@@ -286,7 +310,7 @@ Three personas, three flows:
 * **For your team (team lead).** Package your best instructions and skills as an APM package; teammates get them with one `apm install`.
 * **At scale (platform engineer).** `apm audit` + `apm-policy.yml` enforce standards; `agentrc eval` in CI catches context drift.
 
-*** ** * ** ***
+
 
 12. How to start on Monday {#h2-14-12-how-to-start-on-monday}
 -------------------------------------------------------------
@@ -300,7 +324,7 @@ Six steps. Most teams should do steps 1--3 this week, 4--6 over the next quarter
 5. **Gate in CI.** Add `apm-action` + `agentrc readiness --fail-level 3` to PR checks. This is the step that prevents backsliding --- don't skip it.
 6. **Govern.** Roll out an `apm-policy.yml` at the org level. Tighten as you learn.
 
-*** ** * ** ***
+
 
 13. Three things to take away {#h2-15-13-three-things-to-take-away}
 -------------------------------------------------------------------
@@ -312,7 +336,7 @@ Six steps. Most teams should do steps 1--3 this week, 4--6 over the next quarter
 If you remember one line, make it this one:
 > *Stop hand-rolling agent setup. Pin it like a dependency, scan it like a binary, govern it like infrastructure.*
 
-*** ** * ** ***
+
 
 Links {#h2-16-links}
 --------------------

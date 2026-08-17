@@ -30,7 +30,8 @@ Let's imagine an e-commerce platform that implements a shopping cart. The cart i
 
 This diagram might translate into the following (abridged) code:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-highlight="3-5, 14, 17">public class Product {
+```java
+public class Product {
 
     private final Long id;                           // 1
     private final String label;                      // 1
@@ -47,14 +48,17 @@ This diagram might translate into the following (abridged) code:
 
     @Override
     public int hashCode() { ... }                    // 2
-}</pre>
+}
+```
+
 
 1. Getters
 2. Only depend on `id`
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public class Cart {
+```java
+public class Cart {
 
-    private final Map&lt;Product, Integer&gt; products = new HashMap&lt;&gt;(); // 1
+    private final Map<Product, Integer> products = new HashMap<>(); // 1
 
     public void add(Product product) {
         add(product, 1);
@@ -72,10 +76,12 @@ This diagram might translate into the following (abridged) code:
         products.put(product, quantity);
     }
 
-    public Map&lt;Product, Integer&gt; getProducts() {
+    public Map<Product, Integer> getProducts() {
         return Collections.unmodifiableMap(products);               // 2
     }
-}</pre>
+}
+```
+
 
 1. Organize products into a map. The key is the `Product`; the value is the quantity.
 2. Remember to return a read-only copy of the collection to maintain encapsulation.
@@ -87,21 +93,25 @@ Once we have defined how we store data in memory, we need to design how to displ
 
 Here's the corresponding code:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public record CartRow(Product product, int quantity) {                // 1
+```java
+public record CartRow(Product product, int quantity) {                // 1
 
-    public CartRow(Map.Entry&lt;Product, Integer&gt; entry) {
+    public CartRow(Map.Entry<Product, Integer> entry) {
         this(entry.getKey(), entry.getValue());
     }
 
     public BigDecimal getRowPrice() {
         return product.getPrice().multiply(new BigDecimal(quantity));
     }
-}</pre>
+}
+```
+
 
 1. `CartRow` is a value object.  
    We can model it as a Java 16 `record`.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">var rows = cart.getProducts()
+```java
+var rows = cart.getProducts()
     .entrySet()
     .stream()
     .map(CartRow::new)
@@ -112,7 +122,9 @@ var price = cart.getProducts()
     .stream()
     .map(CartRow::new)
     .map(CartRow::getRowPrice)                                        // 2
-    .reduce(BigDecimal.ZERO, BigDecimal::add);                        // 3</pre>
+    .reduce(BigDecimal.ZERO, BigDecimal::add);                        // 3
+```
+
 
 1. Collect the list of rows.
 2. Compute the price for each row.
@@ -126,20 +138,23 @@ This is not the way.
 
 We want to collect both rows and the price from a single stream. We need a custom `Collector` that returns both in one pass as a single object.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public class PriceAndRows {
+```java
+public class PriceAndRows {
 
     private BigDecimal price;                              // 1
-    private final List&lt;CartRow&gt; rows = new ArrayList&lt;&gt;();  // 2
+    private final List<CartRow> rows = new ArrayList<>();  // 2
 
-    PriceAndRows(BigDecimal price, List&lt;CartRow&gt; rows) {
+    PriceAndRows(BigDecimal price, List<CartRow> rows) {
         this.price = price;
         this.rows.addAll(rows);
     }
 
     PriceAndRows() {
-        this(BigDecimal.ZERO, new ArrayList&lt;&gt;());
+        this(BigDecimal.ZERO, new ArrayList<>());
     }
-}</pre>
+}
+```
+
 
 1. Total cart price.
 2. List of cart rows that can display the product's label, the product's price, and the row price.
@@ -160,17 +175,18 @@ Here's a summary of the `Collector` interface. For more details, please check [t
 
 Given this, we can implement the `Collector` accordingly:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">private static class PriceAndRowsCollector
-    implements Collector&lt;Map.Entry&lt;Product, Integer&gt;, PriceAndRows, PriceAndRows&gt; {
+```java
+private static class PriceAndRowsCollector
+    implements Collector<Map.Entry<Product, Integer>, PriceAndRows, PriceAndRows> {
 
     @Override
-    public Supplier&lt;PriceAndRows&gt; supplier() {
+    public Supplier<PriceAndRows> supplier() {
         return PriceAndRows::new;                                                // 1
     }
 
     @Override
-    public BiConsumer&lt;PriceAndRows, Map.Entry&lt;Product, Integer&gt;&gt; accumulator() {
-        return (priceAndRows, entry) -&gt; {                                        // 2
+    public BiConsumer<PriceAndRows, Map.Entry<Product, Integer>> accumulator() {
+        return (priceAndRows, entry) -> {                                        // 2
             var row = new CartRow(entry);
             priceAndRows.price = priceAndRows.price.add(row.getRowPrice());
             priceAndRows.rows.add(row);
@@ -178,25 +194,27 @@ Given this, we can implement the `Collector` accordingly:
     }
 
     @Override
-    public BinaryOperator&lt;PriceAndRows&gt; combiner() {
-        return (c1, c2) -&gt; {                                                     // 3
+    public BinaryOperator<PriceAndRows> combiner() {
+        return (c1, c2) -> {                                                     // 3
             c1.price = c1.price.add(c2.price);
-            var rows = new ArrayList&lt;&gt;(c1.rows);
+            var rows = new ArrayList<>(c1.rows);
             rows.addAll(c2.rows);
             return new PriceAndRows(c1.price, rows);
         };
     }
 
     @Override
-    public Function&lt;PriceAndRows, PriceAndRows&gt; finisher() {
+    public Function<PriceAndRows, PriceAndRows> finisher() {
         return Function.identity();                                              // 4
     }
 
     @Override
-    public Set&lt;Characteristics&gt; characteristics() {
+    public Set<Characteristics> characteristics() {
         return Set.of(Characteristics.IDENTITY_FINISH);                          // 4
     }
-}</pre>
+}
+```
+
 
 1. The mutable container is an instance of `PriceAndRows`.
 2. For each map entry containing the product and the quantity, accumulate both into the `PriceAndRows`.
@@ -205,10 +223,13 @@ Given this, we can implement the `Collector` accordingly:
 
 Designing the `Collector` is a bit involved, but using the custom collector is as easy as:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">var priceAndRows = cart.getProducts()
+```java
+var priceAndRows = cart.getProducts()
                        .entrySet()
                        .stream()
-                       .collect(new PriceAndRowsCollector());</pre>
+                       .collect(new PriceAndRowsCollector());
+```
+
 
 Conclusion {#h2-0-conclusion}
 -----------------------------

@@ -78,9 +78,10 @@ Users of this API will instantiate a Rectangle instance using a constructor and 
 
 Let's create a simple C++ library with the following code (`MyRectangle.cpp`):
 
-<pre class="EnlighterJSRAW" data-enlighter-language="cpp" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">// MyRectangle.cpp
-#include &lt;iostream&gt;
-#include &lt;cstring&gt;
+```cpp
+// MyRectangle.cpp
+#include <iostream>
+#include <cstring>
 
 class Rectangle {
     int width, height;
@@ -90,29 +91,33 @@ class Rectangle {
 };
 
 Rectangle::Rectangle(int w, int h) {
-  this-&gt;width = w;
-  this-&gt;height = h;
+  this->width = w;
+  this->height = h;
 }
 
 // Expose C ABI for Panama to call into.
 extern "C" int rectArea(int, int);
 int rectArea(int w, int h) {
-    std::cout &lt;&lt; "Inside C++ Code " &lt;&lt; std::endl;
+    std::cout << "Inside C++ Code " << std::endl;
     Rectangle rect(w,h);
     return rect.area();
-}</pre>
+}
+```
+
 
 Let's create a native library using `g++`. Enter the following to compile the C++ code above:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="shell" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">// MacOS
-g++ -dynamiclib -current_version 1.0 -I &lt;include directory&gt; -o libmyrectangle.dylib MyRectangle.cpp
+```bash
+// MacOS
+g++ -dynamiclib -current_version 1.0 -I <include directory> -o libmyrectangle.dylib MyRectangle.cpp
 
 // Linux
-g++ -dynamiclib -current_version 1.0 -I &lt;include directory&gt; -o myrectangle.so MyRectangle.cpp
+g++ -dynamiclib -current_version 1.0 -I <include directory> -o myrectangle.so MyRectangle.cpp
 
 // Windows
-g++ -dynamiclib -current_version 1.0 -I &lt;include directory&gt; -o myrectangle.dll MyRectangle.cpp
-</pre>
+g++ -dynamiclib -current_version 1.0 -I <include directory> -o myrectangle.dll MyRectangle.cpp
+```
+
 
 Above you'll notice switches being used. The following are the switches and their descriptions:
 
@@ -125,7 +130,8 @@ Now that you've created a native library let's see how to load and use Java's Pa
 
 Create a file Java application named `RectangleMain.java` and enter the following into your `main()` method:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">System.loadLibrary("myrectangle");
+```java
+System.loadLibrary("myrectangle");
 
 var cLinker = CLinker.systemCLinker();
 
@@ -138,20 +144,27 @@ int w = 8;
 int h = 2;
 int area = (int) rectAreaMH.invokeExact(w, h);
 
-System.out.printf("MethodHandle calling rectArea(%d, %d) = (%d)\n", w, h, area);</pre>
+System.out.printf("MethodHandle calling rectArea(%d, %d) = (%d)\n", w, h, area);
+```
+
 
 To execute the code do the following:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="shell" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">java --enable-native-access=ALL-UNNAMED \
+```bash
+java --enable-native-access=ALL-UNNAMED \
      --add-modules jdk.incubator.foreign \
      -Djava.library.path=.:/usr/local/lib \
-     RectangleMain.java</pre>
+     RectangleMain.java
+```
+
 
 Below is the output:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="shell" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">Inside C++ Code 
+```bash
+Inside C++ Code 
 MethodHandle calling rectArea(8, 2) = (16)
-</pre>
+```
+
 
 How it Works {#h2-4-how-it-works}
 ---------------------------------
@@ -166,12 +179,15 @@ When creating and exporting a C function `areaRect()` in C++ the code uses the `
 
 Shown below is another example of using the `extern "C"` to export C functions.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="cpp" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">extern "C" int doWork(int);
+```cpp
+extern "C" int doWork(int);
 int doWork(int num) {
-    std::cout &lt;&lt; "Inside C++ Code " &lt;&lt; std::endl;
+    std::cout << "Inside C++ Code " << std::endl;
     // do cool stuff here!
     return num;
-}</pre>
+}
+```
+
 
 ### Compiling and Building a Native library {#h3-5-compiling-and-building-a-native-library}
 
@@ -185,14 +201,20 @@ The following are the naming conventions for the respective operating systems:
 
 **Note:** When running the Java application specify the `java.library.path` property to the location of the library. If not set correctly you can get the following runtime exception:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">java.lang.UnsatisfiedLinkError</pre>
+```
+java.lang.UnsatisfiedLinkError
+```
+
 
 ### Java talking to C++ (C functions) {#h3-6-java-talking-to-c-c-functions}
 
 The code example using Java 18's Panama (FFI) APIs you don't need to use the `jextract` tool. Here you'll notice the code creating a method handle (`MethodHandle`) instance by obtaining the native symbol (C function) to be invoked. Shown below is the `FunctionDescriptor` of the signature for the `areaRect()` C function.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">// (return type int area, int width, int height)
-FunctionDescriptor.of(C_INT, C_INT, C_INT)</pre>
+```java
+// (return type int area, int width, int height)
+FunctionDescriptor.of(C_INT, C_INT, C_INT)
+```
+
 
 Conclusion {#h2-7-conclusion}
 -----------------------------

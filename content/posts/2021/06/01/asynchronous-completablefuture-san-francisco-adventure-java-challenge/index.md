@@ -34,7 +34,8 @@ In the following code, we are using a `CompletableFuture` invoking the `complete
 
 Can you guess what will happen when running the following code?
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">import java.util.List;
+```java
+import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -45,18 +46,18 @@ public class CompletableFutureChallenge {
   static ExecutorService executor = Executors.newCachedThreadPool();
 
   public static void main(String... oracleCodeOneAdventure) {
-    CompletableFuture&lt;List&lt;String&gt;&gt; adventureStart = new CompletableFuture&lt;&gt;();
+    CompletableFuture<List<String>> adventureStart = new CompletableFuture<>();
 
-    Supplier&lt;List&lt;String&gt;&gt; sanFranSightSupplier = () -&gt;
+    Supplier<List<String>> sanFranSightSupplier = () ->
         List.of("Alcatraz", "Cable Car", "Golden Gate", "Lombard Street");
 
     adventureStart.completeAsync(sanFranSightSupplier, executor)
-        .thenCompose(sights -&gt; CompletableFuture.supplyAsync(() -&gt; sights.stream()
+        .thenCompose(sights -> CompletableFuture.supplyAsync(() -> sights.stream()
                 .map(String::length)
                 .collect(Collectors.toList())))
-        .thenAccept(ratings -&gt; {
+        .thenAccept(ratings -> {
             var rating = ratings.stream()
-                    .dropWhile(sightRating -&gt; sightRating &lt;= 12)
+                    .dropWhile(sightRating -> sightRating <= 12)
                     .findFirst()
                     .orElse(0);
             System.out.print("Rating: " + rating + " ");
@@ -65,7 +66,9 @@ public class CompletableFutureChallenge {
     System.out.print("time to go home :( ");
   } 
 
-}</pre>
+}
+```
+
 
 A) Rating: 14 time to go home 🙁  
 
@@ -81,27 +84,36 @@ D) time to go home 🙁 Rating: 14
 
 Let's analyze the code: At first, we are populating a Supplier instance with a list:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">Supplier sanFranSightSupplier = () -&gt;
-List.of("Alcatraz", "Cable Car", "Golden Gate", "Lombard Street");</pre>
+```java
+Supplier sanFranSightSupplier = () ->
+List.of("Alcatraz", "Cable Car", "Golden Gate", "Lombard Street");
+```
+
 
 Then the whole process will be made asynchronously. Basically what will happen in this piece of code is that the stream of String from sanFranSightSupplier will be transformed into the length of each String.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">adventureStart.completeAsync(sanFranSightSupplier, executor)
-.thenCompose(sights -&gt; {
-return CompletableFuture.supplyAsync(() -&gt; sights.stream()
+```java
+adventureStart.completeAsync(sanFranSightSupplier, executor)
+.thenCompose(sights -> {
+return CompletableFuture.supplyAsync(() -> sights.stream()
 .map(String::length)
 .collect(Collectors.toList()));
-})</pre>
+})
+```
+
 
 Then all Strings that are lower or equal to 12 will be dropped. In the end, the length of Lombard Street will remain on the list.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">.thenAccept(ratings -&gt; {
+```java
+.thenAccept(ratings -> {
 var rating = ratings.stream()
-.dropWhile(sightRating -&gt; sightRating &lt;= 12)
+.dropWhile(sightRating -> sightRating <= 12)
 .findFirst()
 .orElse(0);
 System.out.print("Rating: " + rating + " ");
-});</pre>
+});
+```
+
 
 Therefore, the right alternative will be... what do you think? 🙂
 

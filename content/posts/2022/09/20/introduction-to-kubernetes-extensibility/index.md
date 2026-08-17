@@ -50,7 +50,8 @@ In this case, we need a fully-featured Kubernetes manifest that describes the ar
 
 Therefore, Kubernetes allows designing a new `Kafka` object. This kind of custom object is known as a . Here's a sample for a simplistic arbitrary `Foo` object:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml" data-enlighter-theme="dracula">apiVersion: apiextensions.k8s.io/v1       #1
+```yaml
+apiVersion: apiextensions.k8s.io/v1       #1
 kind: CustomResourceDefinition
 metadata:
  name: foos.frankel.ch                    #2
@@ -75,7 +76,9 @@ spec:
                bar:
                  type: string
              required: ["bar"]
-         required: ["spec"]</pre>
+         required: ["spec"]
+```
+
 
 1. Required header
 2. Match the following `.`
@@ -89,15 +92,21 @@ spec:
 
 Once you've applied this manifest, you can manage your `Foo`. Let's create a manifest to create a new `Foo` object.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml" data-enlighter-theme="dracula">apiVersion: foos.frankel.ch/v1alpha1
+```yaml
+apiVersion: foos.frankel.ch/v1alpha1
 kind: Foo
 metadata:
   name: myfoo
 spec:
-  bar: "whatever"</pre>
+  bar: "whatever"
+```
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="dracula">kubectl apply -f foo.yml
-kubectl get foo</pre>
+
+```java
+kubectl apply -f foo.yml
+kubectl get foo
+```
+
 
 The above commands have updated the data model with a new `Foo` type and created a `Foo` object. But under the cover, we've only stored data in `etcd` via the Kubernetes API. Nothing will happen until we start a controller that watches for new objects and acts upon them. Note that the name for a controller that manages CRDs is *operator*.
 
@@ -136,10 +145,13 @@ Extensible client capabilities {#h2-3-extensible-client-capabilities}
 
 At its most basic level, the `kubectl` command line is a high-level abstraction over a REST client. You can verify it by setting the verbose option:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="dracula">kubectl get pods --v=8
-</pre>
+```java
+kubectl get pods --v=8
+```
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="dracula">loader.go:372] Config loaded from file:  /Users/nico/.kube/config
+
+```
+loader.go:372] Config loaded from file:  /Users/nico/.kube/config
 round_trippers.go:463] GET https://127.0.0.1:61378/api/v1/namespaces/default/pods?limit=500
 round_trippers.go:469] Request Headers:
 round_trippers.go:473]     Accept: application/json;as=Table;v=v1;g=meta.k8s.io,application/json;as=Table;v=v1beta1;g=meta.k8s.io,application/json
@@ -152,7 +164,9 @@ round_trippers.go:580]     X-Kubernetes-Pf-Flowschema-Uid: 479e2d49-7b9f-4e4c-8f
 round_trippers.go:580]     X-Kubernetes-Pf-Prioritylevel-Uid: 4787583d-e7d4-4679-a474-ebb66919a43c
 round_trippers.go:580]     Date: Sun, 04 Sep 2022 09:32:39 GMT
 round_trippers.go:580]     Audit-Id: 2f2f163d-fb6d-4149-ba44-ecf4395028aa
-request.go:1073] Response Body: {"kind":"Table","apiVersion":"meta.k8s.io/v1","metadata":{"resourceVersion":"263411"},"columnDefinitions":[{"name":"Name","type":"string","format":"name","description":"Name must be unique within a namespace. Is required when creating resources, although some resources may allow a client to request the generation of an appropriate name automatically. Name is primarily intended for creation idempotence and configuration definition. Cannot be updated. More info: http://kubernetes.io/docs/user-guide/identifiers#names","priority":0},{"name":"Ready","type":"string","format":"","description":"The aggregate readiness state of this pod for accepting traffic.","priority":0},{"name":"Status","type":"string","format":"","description":"The aggregate status of the containers in this pod.","priority":0},{"name":"Restarts","type":"string","format":"","description":"The number of times the containers in this pod have been restarted and when the last container in this pod has restarted.","priority":0},{"name":"Age","type":"st [truncated 6465 chars]</pre>
+request.go:1073] Response Body: {"kind":"Table","apiVersion":"meta.k8s.io/v1","metadata":{"resourceVersion":"263411"},"columnDefinitions":[{"name":"Name","type":"string","format":"name","description":"Name must be unique within a namespace. Is required when creating resources, although some resources may allow a client to request the generation of an appropriate name automatically. Name is primarily intended for creation idempotence and configuration definition. Cannot be updated. More info: http://kubernetes.io/docs/user-guide/identifiers#names","priority":0},{"name":"Ready","type":"string","format":"","description":"The aggregate readiness state of this pod for accepting traffic.","priority":0},{"name":"Status","type":"string","format":"","description":"The aggregate status of the containers in this pod.","priority":0},{"name":"Restarts","type":"string","format":"","description":"The number of times the containers in this pod have been restarted and when the last container in this pod has restarted.","priority":0},{"name":"Age","type":"st [truncated 6465 chars]
+```
+
 
 Kubernetes' REST API is (mostly?) based on operations. Sometimes, you need to run several commands to achieve the desired results. For example, we would like to query which subjects can execute an action.
 
@@ -176,12 +190,15 @@ You can manage your plugins on your machine, but this approach is not scalable t
 
 Regarding which subjects can execute an action, here's how to do it:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash" data-enlighter-theme="dracula">brew install krew                              #1 
+```bash
+brew install krew                              #1 
 kubectl krew completion                        #2
 # follow instructions to update your shell
 kubectl krew update                            #3
 kubectl krew install who-can                   #4
-k who-can watch pod                            #5</pre>
+k who-can watch pod                            #5
+```
+
 
 1. Install `brew` on Mac
 2. Display the auto-completion instructions
@@ -189,7 +206,8 @@ k who-can watch pod                            #5</pre>
 4. Install the `who-can` Krew plugin
 5. Enjoy!
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="dracula">No subjects found with permissions to watch pod assigned through RoleBindings
+```
+No subjects found with permissions to watch pod assigned through RoleBindings
 
 CLUSTERROLEBINDING                             SUBJECT                                 TYPE            SA-NAMESPACE
 apisix-clusterrolebinding                      apisix-ingress-controller               ServiceAccount  ingress-apisix
@@ -212,7 +230,9 @@ system:controller:resourcequota-controller     resourcequota-controller         
 system:controller:statefulset-controller       statefulset-controller                  ServiceAccount  kube-system
 system:coredns                                 coredns                                 ServiceAccount  kube-system
 system:kube-controller-manager                 system:kube-controller-manager          User
-system:kube-scheduler                          system:kube-scheduler                   User</pre>
+system:kube-scheduler                          system:kube-scheduler                   User
+```
+
 
 Conclusion {#h2-4-conclusion}
 -----------------------------

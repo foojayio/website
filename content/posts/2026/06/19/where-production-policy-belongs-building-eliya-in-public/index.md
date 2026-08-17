@@ -52,7 +52,10 @@ The flag {#h2-1-the-flag}
 
 The whole argument comes down to one flag, which activates a policy group:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">java -XX:EliyaProfile=Production -jar app.jar</pre>
+```bash
+java -XX:EliyaProfile=Production -jar app.jar
+```
+
 
 That flag ships in [Eliya](https://asymm.systems/product/eliya) - an OpenJDK 25 LTS distribution from Asymm Systems, first GA earlier this month, built for compliance-conscious production in regulated industries: telecom, banking and financial services, healthcare, government. `EliyaProfile` is the policy point the thesis calls for: a `ccstr` enum. `Production` - the general set of production-readiness defaults - is the value that ships today (Phase 1); further values are reserved, some on the roadmap, the rest demand-gated.
 
@@ -117,7 +120,8 @@ Let's run Eliya and see:
 
 ### 1. Pin the bytes {#h3-6-1-pin-the-bytes}
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group=""># Download the artefact + signed checksums:
+```bash
+# Download the artefact + signed checksums:
 curl -fsSLO https://github.com/asymmsystems/eliya-jdk/releases/download/eliya-jdk-25.0.3/eliya-jdk-25.0.3-linux-x64.tar.gz
 curl -fsSLO https://github.com/asymmsystems/eliya-jdk/releases/download/eliya-jdk-25.0.3/SHA256SUMS.txt
 curl -fsSLO https://github.com/asymmsystems/eliya-jdk/releases/download/eliya-jdk-25.0.3/SHA256SUMS.txt.asc
@@ -125,42 +129,53 @@ curl -fsSLO https://github.com/asymmsystems/eliya-jdk/releases/download/eliya-jd
 # Fetch the signing key, then cross-check its fingerprint 
 # against at least one independent channel before trusting it
 gpg --keyserver keys.openpgp.org --recv-keys 076DE547397A5D27EECEE0B307A90689B71A158F
-gpg --fingerprint <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="9afff6f3e3fbdafbe9e3f7f7b4e9e3e9eefff7e9">[email&nbsp;protected]</a>
+gpg --fingerprint <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="9afff6f3e3fbdafbe9e3f7f7b4e9e3e9eefff7e9">[email protected]</a>
 # Expected: 076D E547 397A 5D27 EECE  E0B3 07A9 0689 B71A 158F
 
 # Verify the signature on the checksums file, 
 # then verify the checksum on the tarball:
 gpg --verify SHA256SUMS.txt.asc SHA256SUMS.txt
 sha256sum -c SHA256SUMS.txt --ignore-missing
-# Expected: "Good signature from "Eliya Releases (Asymm Systems) &lt;<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="c6a3aaafbfa786a7b5bfababe8b5bfb5b2a3abb5">[email&nbsp;protected]</a>&gt;"" + "OK" on the tarball checksum.</pre>
+# Expected: "Good signature from "Eliya Releases (Asymm Systems) <<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="c6a3aaafbfa786a7b5bfababe8b5bfb5b2a3abb5">[email protected]</a>>"" + "OK" on the tarball checksum.
+```
+
 
 The full multi-channel verification ceremony is documented at [verify download](https://asymm.systems/product/eliya/user-guide/verify-download) page.
 
 For Docker users the equivalent is pinning by digest:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group=""># Get hold of the multi-arch manifest's digest
+```bash
+# Get hold of the multi-arch manifest's digest
 docker buildx imagetools inspect ghcr.io/asymmsystems/eliya-jdk:25.0.3
-# Replace &lt;digest&gt; with the value above
-docker pull ghcr.io/asymmsystems/eliya-jdk@sha256:&lt;digest&gt;</pre>
+# Replace <digest> with the value above
+docker pull ghcr.io/asymmsystems/eliya-jdk@sha256:<digest>
+```
+
 
 ### 2. Read the build identity {#h3-7-2-read-the-build-identity}
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group=""># Extract and confirm the vendor string:
+```bash
+# Extract and confirm the vendor string:
 tar xzf eliya-jdk-25.0.3-linux-x64.tar.gz
-./eliya-jdk-25.0.3/bin/java -version</pre>
+./eliya-jdk-25.0.3/bin/java -version
+```
+
 
 ### 3. Confirm the profile activated {#h3-8-3-confirm-the-profile-activated}
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">./eliya-jdk-25.0.3/bin/java -XX:EliyaProfile=Production -XX:+PrintFlagsFinal -version 2&gt;&amp;1 \
+```bash
+./eliya-jdk-25.0.3/bin/java -XX:EliyaProfile=Production -XX:+PrintFlagsFinal -version 2>&1 \
     | grep -E '(HeapDumpOnOutOfMemoryError|ExitOnOutOfMemoryError|NativeMemoryTracking|ErrorFile|UnlockDiagnosticVMOptions) +='
 
 # Each of these shows "{ergonomic}" at the end of the line
 # i.e. HotSpot's own origin marker. 
-# Re-run with -XX:EliyaProfile=None and see the difference.</pre>
+# Re-run with -XX:EliyaProfile=None and see the difference.
+```
+
 
 Pinning Eliya in CI is the next step after verifying the bytes. Learn about the four pinning patterns in the [Eliya Versioning](https://asymm.systems/product/eliya/user-guide/versioning) guide.
 
-*** ** * ** ***
+
 
 References:
 

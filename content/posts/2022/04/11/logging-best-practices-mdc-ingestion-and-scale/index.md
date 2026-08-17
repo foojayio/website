@@ -68,15 +68,21 @@ Assuming you want to log something at a level that wouldn't be visible by defaul
 
 Don't do this:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">logger.info("Reached X and value of method is {}", method());</pre>
+```
+logger.info("Reached X and value of method is {}", method());
+```
+
 
 Even if the method is cheap. You're effectively running the method regardless of the respective logging levels!
 
 If you MUST do that for a case of a different log level, use an if statement to prevent the code from executing every time:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">if(LOGGER.getLevel() == Level.DEBUG) {
+```java
+if(LOGGER.getLevel() == Level.DEBUG) {
        ...
-}</pre>
+}
+```
+
 
 The right things to log are the things you already have as variables.
 
@@ -90,11 +96,17 @@ Writing the content of the list to the log can balloon it up and slow processing
 
 Never use string concatenation for logging, e.g.:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">LOGGER.info("This is the variable: " + var);</pre>
+```java
+LOGGER.info("This is the variable: " + var);
+```
+
 
 Instead, use this or the equivalent provided by various popular logging frameworks:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">LOGGER.info("This is the variable: {}", var);</pre>
+```java
+LOGGER.info("This is the variable: {}", var);
+```
+
 
 If the log is swallowed due to log levels, the former must still perform the string concatenation and will produce garbage. The latter will vanish.
 
@@ -131,7 +143,8 @@ Errors will typically map to error handling code which should be logged in gener
 
 This creates situations where we sometimes need to change the flow/behavior of the code, so logging will be more elegant. E.g. don't do this:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">if(x) {
+```java
+if(x) {
     LOGGER.info(...);
     return value;
 }
@@ -142,13 +155,18 @@ if(y) {
 } else {
     LOGGER.info(...);
     return thirdOption;
-}</pre>
+}
+```
+
 
 Instead, change the code to lead to one return value:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">Object value = computeValue();
+```java
+Object value = computeValue();
 LOGGER.info(...);
-return value;</pre>
+return value;
+```
+
 
 We can easily achieve this by refactoring the code in the method to another method.
 

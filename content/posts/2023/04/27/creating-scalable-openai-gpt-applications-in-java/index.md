@@ -54,16 +54,22 @@ The open-source [OpenAI Java library](https://github.com/TheoKanning/openai-java
 
 * Add the latest OpenAI Java artifact to your **pom.xml** file.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="xml">&lt;dependency&gt;
-    &lt;groupId&gt;com.theokanning.openai-gpt3-java&lt;/groupId&gt;
-    &lt;artifactId&gt;service&lt;/artifactId&gt;
-    &lt;version&gt;${version}&lt;/version&gt;
-&lt;/dependency&gt;</pre>
+```xml
+<dependency>
+    <groupId>com.theokanning.openai-gpt3-java</groupId>
+    <artifactId>service</artifactId>
+    <version>${version}</version>
+</dependency>
+```
+
 
 * Create an instance of the `OpenAiService` class by providing your token and a timeout for requests between the app and OpenAI engine.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">OpenAiService openAiService = new OpenAiService(
-    apiKey, Duration.ofSeconds(apiTimeout));</pre>
+```java
+OpenAiService openAiService = new OpenAiService(
+    apiKey, Duration.ofSeconds(apiTimeout));
+```
+
 
   Easy! Next, let's see how you can work with the GPT-3.5 model via the `OpenAiService` instance.
 
@@ -71,7 +77,8 @@ You communicate with the OpenAI models by sending text [prompts](https://platfor
 
 To build a prompt for the GPT-3.5 model, you use the `ChatCompletionRequest` API of the OpenAI Java library:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">ChatCompletionRequest chatCompletionRequest = ChatCompletionRequest
+```java
+ChatCompletionRequest chatCompletionRequest = ChatCompletionRequest
     .builder()
     .model(“gpt-3.5-turbo”)
     .temperature(0.8)
@@ -79,7 +86,9 @@ To build a prompt for the GPT-3.5 model, you use the `ChatCompletionRequest` API
         List.of(
             new ChatMessage("system", SYSTEM_TASK_MESSAGE),
             new ChatMessage("user", String.format("I want to visit %s and have a budget of %d dollars", city, budget))))
-    .build();</pre>
+    .build();
+```
+
 
 * `model("gpt-3.5-turbo")` is an optimized version of the GPT-3.5 model.
 * `temperature(...)` controls how much randomness and creativity to expect in a model's response. For instance, higher values like 0.8 will make the output more random, while lower values like 0.2 will make it more deterministic.
@@ -101,20 +110,24 @@ Although wordy and in need of optimization, this system message conveys the desi
 
 Once you created the prompt (`ChatCompletionRequest`) providing both the system and user messages as well as other parameters, you can send it via the `OpenAiService` instance:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">OpenAiService openAiService = … //created earlier
+```java
+OpenAiService openAiService = … //created earlier
 
 StringBuilder builder = new StringBuilder();
 
 openAiService.createChatCompletion(chatCompletionRequest)
-    .getChoices().forEach(choice -&gt; {
+    .getChoices().forEach(choice -> {
         builder.append(choice.getMessage().getContent());
-});</pre>
+});
+```
+
 
 The `jsonResponse` object is then further processed by the rest of the application logic which prepares a list of points of interest and displays them with the help of Vaadin.
 
 For example, suppose a user is visiting Tokyo and wants to spend up to $900 in the city. The model will strictly follow our instructions from the system message and respond with the following JSON:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="json">{
+```json
+{
   "places": [
     {
       "place_name": "Tsukiji Fish Market",
@@ -142,7 +155,9 @@ For example, suppose a user is visiting Tokyo and wants to spend up to $900 in t
       "place_visit_cost": 80
     },
    // More places
-]}</pre>
+]}
+```
+
 
 This JSON is then converted into a list of different points of interest. It is then shown to the user:  
 ![](image3-700x352.png)
@@ -167,15 +182,19 @@ A custom geo-partitioning column (the `"region"` column in the picture above) le
 
 The BudgetJourney app uses the following JPA repository to get recommendations from the YugabyteDB cluster:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">@Repository
-public interface CityTripRepository extends JpaRepository&lt;CityTrip, Integer&gt; {
+```java
+@Repository
+public interface CityTripRepository extends JpaRepository<CityTrip, Integer> {
     @Query("SELECT pointsOfInterest FROM CityTrip WHERE cityName=?1 and budget=?2 and region=?3")
     String findPointsOfInterest(String cityName, Integer budget, String region);
-}</pre>
+}
+```
+
 
 With an `Entity` class looking as follows:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">@Entity
+```java
+@Entity
 public class CityTrip {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "landmark_generator")
@@ -196,7 +215,9 @@ public class CityTrip {
     String region;
 
     //The rest of the logic
-}</pre>
+}
+```
+
 
 So, all you need to do is to make a call to the database first, then revert to the OpenAI API if relevant suggestions are not yet available in the database. As your application increases in popularity, more and more local recommendations will be available, making this approach even more cost-effective over time.
 

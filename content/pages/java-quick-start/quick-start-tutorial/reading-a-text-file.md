@@ -10,34 +10,27 @@ aliases:
 frozen: false
 ---
 
-*** ** * ** ***
+
 
 [\<\< Using Objects](https://foojay.io/java-quick-start/quick-start-tutorial/using-objects/)  
 [Using Streams \>\>](https://foojay.io/java-quick-start/quick-start-tutorial/using-streams)
 
-
-
 {{< youtube cUmrGaGkTkU >}}
-
-
 
 Let's read some data from an external source to combine all we learned before... With a [free online tool](http://www.convertcsv.com/generate-test-data.htm), we create a test CSV file with random data. This file is stored in a subdirectory `resources` as `testdata.csv`.
 
 The file in the source code contains comma-separated values for counter, firstname, lastname, age, Street, City, State, ZIP:
 
-
-
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="dracula" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">1,Ada,Gomez,40,Mabvob Pike,Radafso,LA,60500
+```
+1,Ada,Gomez,40,Mabvob Pike,Radafso,LA,60500
 2,Bernard,Jordan,28,Dotcu Court,Cewbufbim,MS,17422
 3,Mittie,Vaughn,64,Nandac Mill,Patunif,RI,81182
 4,Miguel,Clarke,39,Liac Boulevard,Deguci,NH,32207
-...</pre>
-
+...
+```
 
 
 We can read this CSV-file line by line and convert each line to an object which is added to a list of persons:
-
-
 
 <div data-pym-src="https://www.jdoodle.com/plugin" data-version-index="6" data-language="java" data-client-id="34d6e81ae45d88cdb9fb98fed1415b81" data-has-files="true">
  <div data-type="file" data-file-name="testdata.csv">
@@ -51,8 +44,6 @@ We can read this CSV-file line by line and convert each line to an object which 
 </div>
 
 
-
-*** ** * ** ***
 
 Just like in the UsingObjects-example, we use an object to store the data of each line in the CSV file, in this case, the object `Person`.
 
@@ -69,25 +60,23 @@ Within the main-method, the resulting list is used:
 * to count the number of persons on the list
 * to print each person's full name and age
 
-
-
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="dracula" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ java ReadTextFile.java
+```
+$ java ReadTextFile.java
 Number of persons loaded from CSV file: 100
 Ada Gomez, age: 40
 Bernard Jordan, age: 28
 Mittie Vaughn, age: 64
 Miguel Clarke, age: 39
-...</pre>
+...
+```
 
 
 
-*** ** * ** ***
 
 Also in this example a `Record` can be used for the `Person` object:
 
-
-
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">import java.io.File;
+```
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
@@ -95,7 +84,7 @@ import java.util.Scanner;
 
 public class ReadTextFile {
     public static void main(String[] args) {
-        List&lt;Person&gt; persons = loadPersons();
+        List<Person> persons = loadPersons();
         System.out.println("Number of persons loaded from CSV file: "
                 + persons.size());
         for (Person person : persons) {
@@ -103,8 +92,8 @@ public class ReadTextFile {
         }
     }
 
-    public static List&lt;Person&gt; loadPersons() {
-        List&lt;Person&gt; list = new ArrayList&lt;&gt;();
+    public static List<Person> loadPersons() {
+        List<Person> list = new ArrayList<>();
         File file = new File("/uploads/testdata.csv");
         try (Scanner scanner = new Scanner(file)) {
             while (scanner.hasNextLine()) {
@@ -143,7 +132,9 @@ public class ReadTextFile {
             return firstName + " " + lastName;
         }
     }
-}</pre>
+}
+```
+
 
   
 [\<\< Using Objects](https://foojay.io/java-quick-start/quick-start-tutorial/using-objects/)  

@@ -51,17 +51,21 @@ This example also uses the argument to generate garbage collector logs to compar
 
 ***This is just an example use. In an ideal case, you would use your production application with the actual load it needs to handle. You would also need to let it run longer to ensure that you end up with a profile log with all the required information based on the application's real-world use from startup to the best performing point.***
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ /usr/lib/jvm/zing-jdk21/bin/java \
+```
+$ /usr/lib/jvm/zing-jdk21/bin/java \
    -XX:ProfileLogOut=readynow.log \
    -Xlog:gc:gc.log \
-   -jar dacapo-23.11-chopin.jar h2</pre>
+   -jar dacapo-23.11-chopin.jar h2
+```
+
 
 What's in the file {#What’s-in-the-File}
 ----------------------------------------
 
 The generated profile log-out file contains log lines useful for you as a developer or DevOps by checking the content in the file itself or with [GC Log Analyzer](https://docs.azul.com/gc-log-analyzer/). For instance, you can check this file for the Java version, arguments, and other runtime information. There are also records in the file for loaded classes and compiled methods related to how the application behaves during warmup, so ReadyNow can proactively help the JVM finish the warmup sooner when this file is used as the input profile log.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group=""># ZVM version:
+```
+# ZVM version:
 # 21.0.5.0.101-zing_25.01.0.0-b5-release-linux-X86_64
 # VM Arguments:
 # jvm_args: -XX:ProfileLogOut=readynow.log -Xlog:gc:gc.log 
@@ -81,7 +85,9 @@ The generated profile log-out file contains log lines useful for you as a develo
 1740141511794777793 | FirstCall 8512 5 0
 Class 877 1260777173 org.dacapo.harness.TestHarness 9 { } 272310769 Class 901 file:/dacapo-23.11-chopin.jar
 1740141511795023287 | ClassLoad 877
-ImplementorLoad 877 1 877 </pre>
+ImplementorLoad 877 1 877
+```
+
 
 In some cases, Azul support engineers also use this file to assist customers in debugging specific performance, compilation, and warmup issues. Application performance graphs (response time, throughput) can be combined with these profile logs to compare the results with and without ReadyNow. Based on the metrics that are important for the customer, it can help decide if the same system performance can be achieved with fewer nodes in a cluster, for example.
 
@@ -90,10 +96,13 @@ Startup with file {#Startup-with-File}
 
 In the second step, we start the same application, but we use the profile generated in the first step and use it this time with the `-XX:ProfileLogIn=<file>` argument (**input**). This instructs Zing to start compiling the Java class files into native code immediately based on the decisions made by the compiler in the first run.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ /usr/lib/jvm/zing-jdk21/bin/java \
+```
+$ /usr/lib/jvm/zing-jdk21/bin/java \
    -XX:ProfileLogIn=readynow.log \
    -Xlog:gc:gc-with-profile.log \
-   -jar dacapo-23.11-chopin.jar h2</pre>
+   -jar dacapo-23.11-chopin.jar h2
+```
+
 
 Comparing the different runs {#Comparing-the-Different-Runs}
 ------------------------------------------------------------

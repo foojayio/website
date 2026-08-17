@@ -40,7 +40,8 @@ The target machine has an AMD Ryzen 9 5950X 16-Core Processor running at 3.4 GHz
 
 Below, parts of the inner loop of the producer is shown:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">// Pin the producer thread to CPU 2
+```
+// Pin the producer thread to CPU 2
 Affinity.setAffinity(2);
 
 try (ChronicleQueue cq = SingleChronicleQueueBuilder.binary(tmp)
@@ -51,7 +52,7 @@ try (ChronicleQueue cq = SingleChronicleQueueBuilder.binary(tmp)
     ExcerptAppender appender = cq.acquireAppender();
     final long nano_delay = 1_000_000_000L/MSGS_PER_SECOND;
 
-    for (int i = -WARMUP; i &lt; COUNT; ++i) {
+    for (int i = -WARMUP; i < COUNT; ++i) {
 
         long startTime = System.nanoTime();
         try (DocumentContext dc = appender.writingDocument()) {
@@ -64,11 +65,14 @@ try (ChronicleQueue cq = SingleChronicleQueueBuilder.binary(tmp)
         long delay = nano_delay - (System.nanoTime() - startTime);
         spin_wait(delay);
     }
-}</pre>
+}
+```
+
 
 In another thread, the consumer thread is running this code in its inner loop (shortened code):
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">// Pin the consumer thread to CPU 4
+```
+// Pin the consumer thread to CPU 4
 Affinity.setAffinity(4);
 
 try (ChronicleQueue cq = SingleChronicleQueueBuilder.binary(tmp)
@@ -79,7 +83,7 @@ try (ChronicleQueue cq = SingleChronicleQueueBuilder.binary(tmp)
     ExcerptTailer tailer = cq.createTailer();
 
     int idx = -APPENDERS * WARMUP;
-    while(idx &lt; APPENDERS * COUNT) {
+    while(idx < APPENDERS * COUNT) {
         try (DocumentContext dc = tailer.readingDocument()) {
             if(!dc.isPresent())
                 continue;
@@ -90,13 +94,15 @@ try (ChronicleQueue cq = SingleChronicleQueueBuilder.binary(tmp)
             bytes.read(data, (int)MSGSIZE);
 
             long startTime = data.readLong(0);
-            if(idx &gt;= 0)
+            if(idx >= 0)
                 deltas[idx] = System.nanoTime() - startTime;
 
             ++idx;
         }
     }
-}</pre>
+}
+```
+
 
 As can be seen, the consumer thread will read each nano timestamp and record the corresponding latency in an array. These timestamps are later put in a histogram which is printed when the benchmark completes. Measurements will start only after the JVM has warmed up properly and the C2 compiler has JIT:ed the hot execution path.
 
@@ -122,16 +128,22 @@ Assuming a relatively small variance of the measurement values, the confidence i
 
 For each Java variant, the benchmarks are run like this:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">mvn exec:java@QueuePerformance</pre>
+```
+mvn exec:java@QueuePerformance
+```
+
 
 Remember that our producer and consumer threads will be locked down to run on the isolated CPU cores 2 and 4, respectively.
 
 Here is what a typical process looks like after it has run for a while:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">$ top
+```
+$ top
 
     PID USER      PR  NI    VIRT    RES    SHR S  %CPU  %MEM     TIME+ COMMAND                                                    
-3216555 per.min+  20   0   92.3g   1.5g   1.1g S 200.0   2.3   0:50.15</pre>
+3216555 per.min+  20   0   92.3g   1.5g   1.1g S 200.0   2.3   0:50.15
+```
+
 
 As can be seen, the producer and consumer thread spin-waits between each message and therefore consumes an entire CPU core each. If CPU consumption is a concern, latency and determinism can be traded against lowered power consumption by parking threads for a short period (e.g. LockSupport.parkNanos(1000)) when no messages are available.
 

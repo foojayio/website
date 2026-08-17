@@ -33,7 +33,10 @@ In this tutorial, you'll:
 
 You can find all the code presented in this tutorial in the GitHub repository:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group=""><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="0e69677a4e69677a667b6c206d6163">[email&nbsp;protected]</a>:soujava/mongodb-rag.git</pre>
+```
+<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="0e69677a4e69677a667b6c206d6163">[email protected]</a>:soujava/mongodb-rag.git
+```
+
 
 Prerequisites {#h2-0-prerequisites}
 -----------------------------------
@@ -59,46 +62,49 @@ In this tutorial, we will build a JAX-RS application designed to answer question
 
 After downloading the project, we will add the required dependencies, including langchain4j. As in previous articles, this project serves as an AI orchestrator, simplifying communication with APIs through a unified interface. We will also add several langchain4j extensions to support CDI, Eclipse MicroProfile, RAG, OpenAPI, and MongoDB Atlas as the communication driver. We will include it in the pom.xml file.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">    &lt;properties&gt;
-        &lt;project.build.sourceEncoding&gt;UTF-8&lt;/project.build.sourceEncoding&gt;
-        &lt;maven.compiler.source&gt;21&lt;/maven.compiler.source&gt;
-        &lt;maven.compiler.target&gt;21&lt;/maven.compiler.target&gt;
-        &lt;langchain4j-cdi.version&gt;1.3.4&lt;/langchain4j-cdi.version&gt;
-    &lt;/properties&gt;
+```
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>21</maven.compiler.source>
+        <maven.compiler.target>21</maven.compiler.target>
+        <langchain4j-cdi.version>1.3.4</langchain4j-cdi.version>
+    </properties>
 
- &lt;dependencies&gt;
-        &lt;dependency&gt;
-            &lt;groupId&gt;org.mongodb&lt;/groupId&gt;
-            &lt;artifactId&gt;mongodb-driver-sync&lt;/artifactId&gt;
-            &lt;version&gt;5.9.0&lt;/version&gt;
-        &lt;/dependency&gt;
-        &lt;dependency&gt;
-            &lt;groupId&gt;dev.langchain4j.cdi&lt;/groupId&gt;
-            &lt;artifactId&gt;langchain4j-cdi-portable-ext&lt;/artifactId&gt;
-            &lt;version&gt;${langchain4j-cdi.version}&lt;/version&gt;
-        &lt;/dependency&gt;
-        &lt;dependency&gt;
-            &lt;groupId&gt;dev.langchain4j.cdi.mp&lt;/groupId&gt;
-            &lt;artifactId&gt;langchain4j-cdi-config&lt;/artifactId&gt;
-            &lt;version&gt;${langchain4j-cdi.version}&lt;/version&gt;
-        &lt;/dependency&gt;
-        &lt;dependency&gt;
-            &lt;groupId&gt;dev.langchain4j&lt;/groupId&gt;
-            &lt;artifactId&gt;langchain4j-open-ai&lt;/artifactId&gt;
-            &lt;version&gt;1.16.0&lt;/version&gt;
-        &lt;/dependency&gt;
-        &lt;dependency&gt;
-            &lt;groupId&gt;dev.langchain4j&lt;/groupId&gt;
-            &lt;artifactId&gt;langchain4j-embeddings-all-minilm-l6-v2&lt;/artifactId&gt;
-            &lt;version&gt;1.18.0-beta28&lt;/version&gt;
-        &lt;/dependency&gt;
-        &lt;dependency&gt;
-            &lt;groupId&gt;dev.langchain4j&lt;/groupId&gt;
-            &lt;artifactId&gt;langchain4j-mongodb-atlas&lt;/artifactId&gt;
-            &lt;version&gt;1.18.0-beta28&lt;/version&gt;
-        &lt;/dependency&gt;
+ <dependencies>
+        <dependency>
+            <groupId>org.mongodb</groupId>
+            <artifactId>mongodb-driver-sync</artifactId>
+            <version>5.9.0</version>
+        </dependency>
+        <dependency>
+            <groupId>dev.langchain4j.cdi</groupId>
+            <artifactId>langchain4j-cdi-portable-ext</artifactId>
+            <version>${langchain4j-cdi.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>dev.langchain4j.cdi.mp</groupId>
+            <artifactId>langchain4j-cdi-config</artifactId>
+            <version>${langchain4j-cdi.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>dev.langchain4j</groupId>
+            <artifactId>langchain4j-open-ai</artifactId>
+            <version>1.16.0</version>
+        </dependency>
+        <dependency>
+            <groupId>dev.langchain4j</groupId>
+            <artifactId>langchain4j-embeddings-all-minilm-l6-v2</artifactId>
+            <version>1.18.0-beta28</version>
+        </dependency>
+        <dependency>
+            <groupId>dev.langchain4j</groupId>
+            <artifactId>langchain4j-mongodb-atlas</artifactId>
+            <version>1.18.0-beta28</version>
+        </dependency>
 
-        &lt;/dependencies&gt;</pre>
+        </dependencies>
+```
+
 
 The next step is to add credentials, including the LLM provider and API key, to src/main/resources/META-INF/microprofile-config.properties. Please ensure you update the Open API key or MongoDB Atlas configuration as needed.
 
@@ -107,7 +113,8 @@ Step 2: Create the Service {#h2-2-step-2-create-the-service}
 
 With the project and credentials set up, we can begin by creating the agent that will serve as the bridge between Java and the LLM. Using Langchain4J with CDI, this can be achieved through a single interface. Our implementation will include one method to handle questions, utilizing SystemMessage for the prompt and UserMessage for user input.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">import dev.langchain4j.cdi.spi.RegisterAIService;
+```
+import dev.langchain4j.cdi.spi.RegisterAIService;
 import dev.langchain4j.service.SystemMessage;
 import dev.langchain4j.service.UserMessage;
 import jakarta.enterprise.context.ApplicationScoped;
@@ -129,43 +136,58 @@ public interface HRPolicyAgent {
             Keep the answer concise and clear.
             """)
     String ask(@UserMessage String question);
-}</pre>
+}
+```
+
 
 With the Agent set up, we can now define the Data Transfer Objects (**DTOs**) that will carry request and response messages within our REST API. In this context, we will use Java records.
 
 The first DTO represents a request containing an HR question. This question is a String text field that must not be blank, enforced by a single Bean Validation annotation.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">import jakarta.validation.constraints.NotBlank;
+```
+import jakarta.validation.constraints.NotBlank;
 
 public record HRPolicyQuestion(
        @NotBlank
        String question
 ) {
-}</pre>
+}
+```
+
 
 The response DTO includes both the original question and its corresponding answer.  
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public record HRPolicyAnswer(
+```
+public record HRPolicyAnswer(
        String question,
        String answer
 ) {
-}</pre>
+}
+```
+
 
 For the context category, we use a similar request/response structure. The request contains a text field that will be inserted into the MongoDB Atlas Vector Database. This information is essential for enhancing our LLM's knowledge and is central to the application's functionality.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">import jakarta.validation.constraints.NotBlank;
+```
+import jakarta.validation.constraints.NotBlank;
 
 public record HRPolicyContextRequest(@NotBlank String context) {
-}</pre>
+}
+```
+
 
 The response indicates whether the information was successfully inserted and provides a relevant message to the user.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public record HRPolicyContextResponse(boolean inserted, String message) {
-}</pre>
+```
+public record HRPolicyContextResponse(boolean inserted, String message) {
+}
+```
+
 
 To begin implementing the services, start with HRPolicyService, which manages project-related questions. This class injects the agent and submits questions to the LLM.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">import jakarta.enterprise.context.ApplicationScoped;
+```
+import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import org.soujava.demos.rag.dto.HRPolicyAnswer;
 import org.soujava.demos.rag.dto.HRPolicyQuestion;
@@ -186,11 +208,14 @@ public class HRPolicyService {
        LOGGER.info("Generated response: " + response);
        return response;
    }
-}</pre>
+}
+```
+
 
 The Context service includes additional logic. It inserts information into the database, prevents duplicate entries, and returns the relevant data from the database.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">import dev.langchain4j.data.document.Document;
+```
+import dev.langchain4j.data.document.Document;
 import dev.langchain4j.data.document.splitter.DocumentSplitters;
 import dev.langchain4j.data.segment.TextSegment;
 import dev.langchain4j.model.embedding.EmbeddingModel;
@@ -212,7 +237,7 @@ public class HRPolicyContextService {
    private EmbeddingModel embeddingModel;
 
    @Inject
-   private EmbeddingStore&lt;TextSegment&gt; vectorDb;
+   private EmbeddingStore<TextSegment> vectorDb;
 
    public HRPolicyContextResponse add(HRPolicyContextRequest request) {
        LOGGER.info("Adding HR policy context to the knowledge base: " + request.context());
@@ -248,11 +273,14 @@ public class HRPolicyContextService {
        LOGGER.info("HR policy context was added to the knowledge base: " + request.context());
        return new HRPolicyContextResponse(   true,"The HR policy context was added to the knowledge base.");
    }
-}</pre>
+}
+```
+
 
 The final service in this tutorial ensures the database contains the minimum required information. It checks if the database is empty and, if so, inserts an initial HR policy context.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">import dev.langchain4j.data.document.Document;
+```
+import dev.langchain4j.data.document.Document;
 import dev.langchain4j.data.document.splitter.DocumentSplitters;
 import dev.langchain4j.data.segment.TextSegment;
 import dev.langchain4j.model.embedding.EmbeddingModel;
@@ -275,7 +303,7 @@ public class HRPolicyLoader {
    EmbeddingModel embeddingModel;
 
    @Inject
-   EmbeddingStore&lt;TextSegment&gt; vectorDb;
+   EmbeddingStore<TextSegment> vectorDb;
 
    public void onStart(@Observes @Initialized(ApplicationScoped.class) Object init) {
        LOGGER.info("Checking HR policy data in Vector DB...");
@@ -314,7 +342,9 @@ public class HRPolicyLoader {
            LOGGER.info("Document already ingested. Skipping ingestion step.");
        }
    }
-}</pre>
+}
+```
+
 
 Step 3: Create the producers {#h2-3-step-3-create-the-producers}
 ----------------------------------------------------------------
@@ -323,7 +353,8 @@ The purpose of these producers is to demonstrate how to create and inject instan
 
 The VectorStoreProducer creates the vector database that generates context for the LLM. In this example, we use MongoDB Atlas. Configuration values are injected using Eclipse MicroProfile Configuration, which allows for easy configuration management and overrides through system environment variables in production. This approach supports the Twelve Factor Application methodology.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">import com.mongodb.client.MongoClient;
+```
+import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
 import com.mongodb.client.model.CreateCollectionOptions;
 import dev.langchain4j.data.segment.TextSegment;
@@ -371,11 +402,11 @@ class VectorStoreProducer {
 
    @Produces
    @ApplicationScoped
-   EmbeddingStore&lt;TextSegment&gt; createVectorStore() {
+   EmbeddingStore<TextSegment> createVectorStore() {
        MongoClient client = MongoClients.create(mongodbURL);
        CreateCollectionOptions createCollectionOptions = new CreateCollectionOptions();
        Bson filter = null;
-       Set&lt;String&gt; metadataFields = new HashSet&lt;&gt;();
+       Set<String> metadataFields = new HashSet<>();
        IndexMapping indexMapping = new IndexMapping(embeddingDimension, metadataFields);
        Boolean createIndex = true;
        return new MongoDbEmbeddingStore(
@@ -390,11 +421,14 @@ class VectorStoreProducer {
                createIndex
        );
    }
-}</pre>
+}
+```
+
 
 The EmbeddingModelProducer class defines the model used for vector operations. Configuration values can be overridden, and default values are provided.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">import dev.langchain4j.model.embedding.EmbeddingModel;
+```
+import dev.langchain4j.model.embedding.EmbeddingModel;
 import dev.langchain4j.model.openai.OpenAiEmbeddingModel;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.enterprise.inject.Produces;
@@ -423,11 +457,14 @@ class EmbeddingModelProducer {
                .modelName(modelName)
                .build();
    }
-}</pre>
+}
+```
+
 
 Finally, the ContentRetrieverProducer configures the retriever with minimum score and maximum result parameters.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">import dev.langchain4j.data.segment.TextSegment;
+```
+import dev.langchain4j.data.segment.TextSegment;
 import dev.langchain4j.model.embedding.EmbeddingModel;
 import dev.langchain4j.rag.content.retriever.ContentRetriever;
 import dev.langchain4j.rag.content.retriever.EmbeddingStoreContentRetriever;
@@ -453,7 +490,7 @@ class ContentRetrieverProducer {
 
    @Produces
    @ApplicationScoped
-   ContentRetriever createRetriever(EmbeddingStore&lt;TextSegment&gt; store, EmbeddingModel model) {
+   ContentRetriever createRetriever(EmbeddingStore<TextSegment> store, EmbeddingModel model) {
        // The architectural bridge that searches the DB based on the query vector
        return EmbeddingStoreContentRetriever.builder()
                .embeddingStore(store)
@@ -462,14 +499,17 @@ class ContentRetrieverProducer {
                .minScore(minScore) // Strict boundary: Ignore low-confidence matches
                .build();
    }
-}</pre>
+}
+```
+
 
 Step 4: Define Resources {#h2-4-step-4-define-resources}
 --------------------------------------------------------
 
 The configuration, credentials, services, and producers are ready. The remaining step is to expose this service to users. We will use a REST API by creating a resource class with JAX-RS. This resource class will expose both question and context endpoints using the POST method. JAX-RS provides a straightforward API for our REST application, allowing us to easily identify operations through annotations such as POST for the HTTP verb and Path to define the URL.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">import jakarta.inject.Inject;
+```
+import jakarta.inject.Inject;
 import jakarta.validation.Valid;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.POST;
@@ -518,7 +558,9 @@ public class HRPolicyResource {
        LOGGER.info("Similar HR policy context already exists; skipping ingestion: " + request.context());
        return Response.ok(response).build();
    }
-}</pre>
+}
+```
+
 
 Once the application is running, you can test it locally or deploy it to a cloud environment. If testing locally, ensure your IP address is included to allow access to the MongoDB Atlas database.
 

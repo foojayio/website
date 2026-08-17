@@ -23,7 +23,8 @@ Welcome back to my article series on eBPF.
 
 Last week, I introduced [eBPF, the series, and the project](https://mostlynerdless.de/blog/2023/12/31/hello-ebpf-developing-ebpf-apps-in-java-1/) and showed how you can write a [simple eBPF application](https://github.com/parttimenerd/hello-ebpf/blob/spotless/bcc/src/main/java/me/bechberger/ebpf/samples/chapter2/HelloWorld.java) with Java that prints "Hello World!" whenever a process calls `execve`:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public class HelloWorld {
+```java
+public class HelloWorld {
   public static void main(String[] args) {
     try (BPF b = BPF.builder("""
             int hello(void *ctx) {
@@ -36,19 +37,24 @@ Last week, I introduced [eBPF, the series, and the project](https://mostlynerdle
       b.trace_print();
     }
   }
-}</pre>
+}
+```
+
 
 But what if we want to send more information from our eBPF program to our userland application than just some logs?
 
 For example, to share the accumulated number of `execve` calls, the processes of a specific user called and transmits information akin to:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">record Data(
+```java
+record Data(
      /** user id */
      @Unsigned long uid,
      /** group id */
      @Unsigned long gid, 
      /** count of execve calls */
-     @Unsigned int counter) {}</pre>
+     @Unsigned int counter) {}
+```
+
 
 This is what this week's article is all about.
 
@@ -82,7 +88,8 @@ Using basic eBPF maps {#h2-2-using-basic-ebpf-maps}
 
 Using these maps, we can implement our execve-call-counter eBPF program. We start with the simple version that just stores the counter in a simple user-id-to-counter hash map:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="cpp" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">// macro to create a uint64_t to uin64_t hash map
+```cpp
+// macro to create a uint64_t to uin64_t hash map
 BPF_HASH(counter_table);
 
 // u64 (also known as uint64_t) is an unsigned
@@ -95,16 +102,18 @@ int hello(void *ctx) {
    u64 counter = 0;
    u64 *p;
 
-   uid = bpf_get_current_uid_gid() &amp; 0xFFFFFFFF;
-   p = counter_table.lookup(&amp;uid);
+   uid = bpf_get_current_uid_gid() & 0xFFFFFFFF;
+   p = counter_table.lookup(&uid);
    // p is null if the element is not in the map
    if (p != 0) {
       counter = *p;
    }
    counter++;
-   counter_table.update(&amp;uid, &amp;counter);
+   counter_table.update(&uid, &counter);
    return 0;
-}</pre>
+}
+```
+
 
 *This example is from the [Learning eBPF book](https://cilium.isovalent.com/hubfs/Learning-eBPF%20-%20Full%20book.pdf) by Liz Rice, pages 21 to 23, where you can find a different take. And if you're wondering why we're using `u64` instead of the more standard `uint64_t`, this is because the Linux kernel predates the definition of `u64` (and other such types) in `stdint.h` (see [StackOverflow](https://stackoverflow.com/a/30896945)), although today it's possible to use both.*
 
@@ -120,7 +129,8 @@ In this example, we first create a hash called counter_table using the bcc macro
 
 Now to the userland program: The [hello-ebpf](https://github.com/parttimenerd/hello-ebpf) Java API offers methods to access these maps and can be used to write a userland program, [HelloMap](https://github.com/parttimenerd/hello-ebpf/blob/de6d87babd85aa4e2313cbd45f4c6e417cb7fc6c/bcc/src/main/java/me/bechberger/ebpf/samples/chapter2/HelloMap.java), that prints the contents of the maps every few seconds:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public class HelloMap {
+```java
+public class HelloMap {
     public static void main(String[] args) 
       throws InterruptedException {
         try (var b = BPF.builder("""
@@ -130,7 +140,7 @@ Now to the userland program: The [hello-ebpf](https://github.com/parttimenerd/he
             // attach the eBPF program to execve
             b.attach_kprobe(syscall, "hello");
             // create a mirror for the hash table eBPF map
-            BPFTable.HashTable&lt;Long, Long&gt; counterTable = 
+            BPFTable.HashTable<Long, Long> counterTable = 
                b.get_table("counter_table", 
                            UINT64T_MAP_PROVIDER);
             while (true) {
@@ -147,13 +157,16 @@ Now to the userland program: The [hello-ebpf](https://github.com/parttimenerd/he
             }
         }
     }
-}</pre>
+}
+```
+
 
 This program attaches the eBPF program to the `execve` system call and uses the HashTable map mirror to access the map `counter_table`.
 
 You can run the [example](https://github.com/parttimenerd/hello-ebpf/blob/de6d87babd85aa4e2313cbd45f4c6e417cb7fc6c/bcc/src/main/java/me/bechberger/ebpf/samples/chapter2/HelloMap.java) using the `run.sh` script (after you built the project via the `build.sh` script) as root on an x86 Linux:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&gt; ./run.sh chapter2.HelloMap
+```bash
+> ./run.sh chapter2.HelloMap
 ID 0: 1 ID 1000: 3
 ID 0: 1 ID 1000: 3
 ID 0: 1 ID 1000: 4
@@ -161,13 +174,16 @@ ID 0: 1 ID 1000: 11
 ID 0: 1 ID 1000: 11
 ID 0: 1 ID 1000: 12
 ...
-ID 0: 22 ID 1000: 176</pre>
+ID 0: 22 ID 1000: 176
+```
+
 
 Here, user 0 is the root user, and user 1000 is my non-root user, I called `ls` in the shell with both users a few times to gather some data.
 
 But maybe my map mirror is broken, and this data is just a fluke? It's always good to have a way to check the content of the maps. This is where [bpftool-map](https://man.archlinux.org/man/bpftool-map.8.en) comes into play: We can use
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&gt; bpftool map list
+```bash
+> bpftool map list
 2: prog_array  name hid_jmp_table  flags 0x0
         key 4B  value 4B  max_entries 1024  memlock 8512B
         owner_prog_type tracing  owner jited
@@ -175,7 +191,7 @@ But maybe my map mirror is broken, and this data is just a fluke? It's always go
         key 8B  value 8B  max_entries 10240  memlock 931648B
         btf_id 142
 
-&gt; bpftool map dump name counter_table
+> bpftool map dump name counter_table
 [{
         "key": 1000,
         "value": 163
@@ -183,7 +199,9 @@ But maybe my map mirror is broken, and this data is just a fluke? It's always go
         "key": 0,
         "value": 22
     }
-]</pre>
+]
+```
+
 
 We can see that our examples are in the correct ballpark.
 
@@ -198,7 +216,8 @@ Storing more complex structs in maps {#h2-3-storing-more-complex-structs-in-maps
 
 The eBPF code for this [example](https://github.com/parttimenerd/hello-ebpf/blob/a5e7f979b0560d9603b6736b9beb8874618d93fb/bcc/src/main/java/me/bechberger/ebpf/samples/own/HelloStructMap.java) is a slight extension of the previous example:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="cpp" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">// record Data(
+```cpp
+// record Data(
 //    @Unsigned long uid, 
 //    @Unsigned long gid, 
 //    @Unsigned int  counter
@@ -214,36 +233,42 @@ BPF_HASH(counter_table, u64, struct data_t);
 
 int hello(void *ctx) {
    // get user id
-   u64 uid = bpf_get_current_uid_gid() &amp; 0xFFFFFFFF;
+   u64 uid = bpf_get_current_uid_gid() & 0xFFFFFFFF;
    // get group id
-   u64 gid = bpf_get_current_uid_gid() &gt;&gt; 32;
+   u64 gid = bpf_get_current_uid_gid() >> 32;
    // create data object 
    // with uid, gid and counter=0
    struct data_t info = {uid, gid, 0};
-   struct data_t *p = counter_table.lookup(&amp;uid);
+   struct data_t *p = counter_table.lookup(&uid);
    if (p != 0) {
       info = *p;
    }
    info.counter++;
-   counter_table.update(&amp;uid, &amp;info);
+   counter_table.update(&uid, &info);
    return 0;
-}</pre>
+}
+```
+
 
 The Java application is slightly more complex, as we have to model the `data_t` struct in Java. We start by defining the record Data as before:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">record Data(
+```java
+record Data(
      /** user id */
      @Unsigned long uid,
      /** group id */
      @Unsigned long gid, 
      /** count of execve calls */
-     @Unsigned int counter) {}</pre>
+     @Unsigned int counter) {}
+```
+
 
 *The @Unsigned annotation is part of the [ebpf-annotations](https://github.com/parttimenerd/hello-ebpf/tree/main/annotations) module and allows you to document type properties that aren't present in Java.*
 
 The mirror `BPFType` for structs in hello-ebpf [BPFType.BPFStructType](https://github.com/parttimenerd/hello-ebpf/blob/a5e7f979b0560d9603b6736b9beb8874618d93fb/bcc/src/main/java/me/bechberger/ebpf/bcc/BPFType.java#L172):
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">/**
+```java
+/**
  * Struct
  *
  * @param bpfName     name of the struct in BPF
@@ -256,14 +281,17 @@ The mirror `BPFType` for structs in hello-ebpf [BPFType.BPFStructType](https://g
  *                    in the constructor
  */
 record BPFStructType(String bpfName, 
-                    List&lt;BPFStructMember&gt; members, 
+                    List<BPFStructMember> members, 
                     AnnotatedClass javaClass,
-                    Function&lt;List&lt;Object&gt;, ?&gt; constructor) 
-    implements BPFType</pre>
+                    Function<List<Object>, ?> constructor) 
+    implements BPFType
+```
+
 
 Which model struct members as follows:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">/**
+```
+/**
  * Struct member
  *
  * @param name   name of the member
@@ -274,51 +302,59 @@ Which model struct members as follows:
 record BPFStructMember(String name, 
                        BPFType type, 
                        int offset, 
-                       Function&lt;?, Object&gt; getter)</pre>
+                       Function<?, Object> getter)
+```
+
 
 With these classes, we can model our `data_t` struct as follows:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">BPFType.BPFStructType DATA_TYPE = 
+```java
+BPFType.BPFStructType DATA_TYPE = 
     new BPFType.BPFStructType("data_t",
         List.of(
           new BPFType.BPFStructMember(
             "uid", 
             BPFType.BPFIntType.UINT64, 
-            /* offset */ 0, (Data d) -&gt; d.uid()),
+            /* offset */ 0, (Data d) -> d.uid()),
           new BPFType.BPFStructMember(
             "gid", 
             BPFType.BPFIntType.UINT64, 
-            8, (Data d) -&gt; d.gid()),
+            8, (Data d) -> d.gid()),
           new BPFType.BPFStructMember(
             "counter", 
             BPFType.BPFIntType.UINT32, 
-            16, (Data d) -&gt; d.counter())),
+            16, (Data d) -> d.counter())),
         new BPFType.AnnotatedClass(Data.class, List.of()),
-            objects -&gt; 
+            objects -> 
               new Data((long) objects.get(0), 
                        (long) objects.get(1), 
                        (int) objects.get(2)));
-</pre>
+```
+
 
 *This is cumbersome, I know, but it will get easier soon, I promise.*
 
 The `DATA_TYPE` type can then be passed to the `BPFTable.HashTable` to create the `UINT64T_DATA_MAP_PROVIDER`:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">BPFTable.TableProvider&lt;BPFTable.HashTable&lt;@Unsigned Long, Data&gt;&gt; 
+```java
+BPFTable.TableProvider<BPFTable.HashTable<@Unsigned Long, Data>> 
     UINT64T_DATA_MAP_PROVIDER =
         (/* BPF object */ bpf, 
          /* map id in eBPF */ mapId, 
          /* file descriptor of the map */ mapFd, 
-         /* name of the map */ name) -&gt;
-                new BPFTable.HashTable&lt;&gt;(
+         /* name of the map */ name) ->
+                new BPFTable.HashTable<>(
                      bpf, mapId, mapFd, 
                      /* key type */   BPFType.BPFIntType.UINT64, 
                      /* value type */ DATA_TYPE, 
-                     name);</pre>
+                     name);
+```
+
 
 We use this provider to access the map with `BPF#get_table`:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public class HelloStructMap {
+```java
+public class HelloStructMap {
 
     // ...
 
@@ -344,18 +380,21 @@ We use this provider to access the map with `BPF#get_table`:
             }
         }
     }
-}</pre>
+}
+```
+
 
 We can run the example and get the additional information:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&gt; ./run.sh own.HelloStructMap
+```bash
+> ./run.sh own.HelloStructMap
 ID 0 (GID 0): 1 ID 1000 (GID 1000): 3
 ID 0 (GID 0): 1 ID 1000 (GID 1000): 9
 ...
 ID 0 (GID 0): 1 ID 1000 (GID 1000): 13
 ID 0 (GID 0): 5 ID 1000 (GID 1000): 14
 
-&gt; bpftool map dump name counter_table
+> bpftool map dump name counter_table
 [{
         "key": 0,
         "value": {
@@ -371,7 +410,9 @@ ID 0 (GID 0): 5 ID 1000 (GID 1000): 14
             "counter": 13
         }
     }
-]</pre>
+]
+```
+
 
 Granted, it doesn't give you more insights into the observed system, but it is a showcase of the current state of the map support in hello-ebpf.
 

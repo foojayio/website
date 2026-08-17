@@ -79,15 +79,16 @@ Let's say we want to initialise an array of floating point numbers (in fp32) and
 
 Thus, let's code two methods for 1) initialization of an array; and b) perform a computation (e.g., compute the SQRT function from the `Math` library):
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public class MySample { 
+```java
+public class MySample { 
     public static void init(FloatArray array) {
-        for (int i = 0; i &lt; data.getSize(); i++) {
+        for (int i = 0; i < data.getSize(); i++) {
             array.set(i, i * 2);
         }
     }
 
     public static void computeSqrt(FloatArray array) {
-        for (int i = 0; i &lt; data.getSize(); i++) {
+        for (int i = 0; i < data.getSize(); i++) {
             float value = array.get(i);
             array.set(i, Math.sqrt(value));
         }
@@ -100,7 +101,9 @@ Thus, let's code two methods for 1) initialization of an array; and b) perform a
         // ...  
         return array;
     }
-}</pre>
+}
+```
+
 
 A few things to highlight regarding this code snippet:
 
@@ -117,17 +120,18 @@ This annotation will indicate the TornadoVM compiler that we want to run the who
 
 Going back to our example, let's add the annotations for the two methods we potentially want to offload: the `init` and the `computeSqrt` methods.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public class HelloTornado { 
+```java
+public class HelloTornado { 
     public static void init(FloatArray array) {
-        for (@Parallel int i = 0; i &lt; data.getSize(); i++) {
+        for (@Parallel int i = 0; i < data.getSize(); i++) {
             array.set(i, i * 2);
         }
     }
 
     public static void computeSqrt(FloatArray array) {
-        for (@Parallel int i = 0; i &lt; data.getSize(); i++) {
+        for (@Parallel int i = 0; i < data.getSize(); i++) {
             float value = array.get(i);
-            array.set(i, TornadoMath.sqrt(value));   // &lt;&lt; Use TornadoMath class instead
+            array.set(i, TornadoMath.sqrt(value));   // << Use TornadoMath class instead
         }
     }
 
@@ -138,7 +142,9 @@ Going back to our example, let's add the annotations for the two methods we pote
         // ...  
         return array;
     }
-}</pre>
+}
+```
+
 
 Furthermore, for this step, we transform the `Math.sqrt` into `TornadoMath.sqrt`. TornadoVM offers a math library, similar to Java. The reason for having this library is that, for some GPU/FPGA devices, `double` (fp64) types are not supported for all GPUS/accelerators. For example on Intel ARC GPUs, or the latest Intel HD graphics.
 
@@ -159,7 +165,8 @@ Besides, we add the data inputs and outputs of our computation to the graph. Thi
 
 To continue with our example, we build the Task-Graph as follows:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public class HelloTornado { 
+```java
+public class HelloTornado { 
     public static void init(FloatArray array) {...}
 
     public static void computeSqrt(FloatArray array) {...}
@@ -172,7 +179,9 @@ To continue with our example, we build the Task-Graph as follows:
           .transferToHost(DataTransferMode.EVERY_EXECUTION, array);
         return array;
     }
-}</pre>
+}
+```
+
 
 We see that, for creating and defining all data and tasks of our computation, we use mainly three methods from the Task-Graph API:
 
@@ -197,11 +206,17 @@ This is by design to avoid changing the task graph (meaning appending more tasks
 
 Let's go back to our example and create an execution plan from the `graph` object:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">TornadoExecutionPlan plan = new TornadoExecutionPlan(graph.snapshot());</pre>
+```java
+TornadoExecutionPlan plan = new TornadoExecutionPlan(graph.snapshot());
+```
+
 
 And now, we can call the execute method:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">plan.execute();</pre>
+```java
+plan.execute();
+```
+
 
 Done! If we do not specify anything else, the execute method in a blocking call, and it will optimise, compile and run the whole task graph on the default device.
 
@@ -211,15 +226,16 @@ For reference, this is the entire code of our example:
 
 ```
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public class HelloTornado { 
+```java
+public class HelloTornado { 
     public static void init(FloatArray array) {
-        for (@Parallel int i = 0; i &lt; data.getSize(); i++) {
+        for (@Parallel int i = 0; i < data.getSize(); i++) {
             array.set(i, i * 2);
         }
     }
 
     public static void computeSqrt(FloatArray array) {
-        for (@Parallel int i = 0; i &lt; data.getSize(); i++) {
+        for (@Parallel int i = 0; i < data.getSize(); i++) {
             float value = array.get(i);
             array.set(i, TornadoMath.sqrt(value));   
         }
@@ -235,7 +251,9 @@ For reference, this is the entire code of our example:
         plan.execute())
         return array;
     }
-}</pre>
+}
+```
+
 
 ### Interacting with the Dispatcher {#h3-6-interacting-with-the-dispatcher}
 
@@ -245,18 +263,24 @@ The TornadoVM Execution Plan follows a builder pattern to specify all these acti
 
 For example, to change a device:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">int driverIndex = 0;
+```java
+int driverIndex = 0;
 int deviceIndex = 1;
 TornadoDevice device = TornadoExecutionPlan.getDevice(driverIndex, deviceIndex);
 plan.withDevice(device)
-    .execute();</pre>
+    .execute();
+```
+
 
 And we can execute again, without the need to build a new task-graph.
 
 If we want to enable dynamic reconfiguration (a feature of TornadoVM to discover the best device depending on a policy), we can enable it as follows:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">plan.withDynamicReconfiguration(Policy.PERFORMANCE, DRMode.PARALLEL)
-    .execute();</pre>
+```java
+plan.withDynamicReconfiguration(Policy.PERFORMANCE, DRMode.PARALLEL)
+    .execute();
+```
+
 
 In this call, we specify that we want to select the best device in terms of performance, and the TornadoVM should evaluate all permutations in parallel.
 

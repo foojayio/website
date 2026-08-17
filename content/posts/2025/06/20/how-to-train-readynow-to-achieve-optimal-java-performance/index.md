@@ -60,11 +60,14 @@ Follow this approach to produce a profile that minimizes or eliminates learning 
 
 Train the profile across two separate runs in the pre-production environment. Perform a first run of the application until it reaches its optimal performance. Restart the JVM for a second run using the profile you just generated, and again run the application until it reaches optimal performance.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group=""># First run
+```
+# First run
 -XX:ProfileLogOut=first-run.log
 
 # Second run
--XX:ProfileLogIn=first-run.log -XX:ProfileLogOut=profile.log</pre>
+-XX:ProfileLogIn=first-run.log -XX:ProfileLogOut=profile.log
+```
+
 
 The resulting profile log (`profile.log`) is the one you need to use in your production system.
 
@@ -72,7 +75,10 @@ The resulting profile log (`profile.log`) is the one you need to use in your pro
 
 If the time for training ReadyNow is limited, perform one run of your application in the pre-production environment with the following command line option:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">-XX:ProfileLogOut=profile.log</pre>
+```
+-XX:ProfileLogOut=profile.log
+```
+
 
 This will capture a very good profile but may feature a possible odd outlier on the first day of the production run. But this will improve with subsequent runs.
 
@@ -80,7 +86,10 @@ This will capture a very good profile but may feature a possible odd outlier on 
 
 If you cannot create a profile in a pre-production environment, allow it to learn in production with the following command-line options:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">-XX:ProfileLogIn=profile.log -XX:ProfileLogOut=profile.log</pre>
+```
+-XX:ProfileLogIn=profile.log -XX:ProfileLogOut=profile.log
+```
+
 
 This results in a poor warm-up for the first run in production but gets better performance on subsequent runs as it reuses the same file as input.
 

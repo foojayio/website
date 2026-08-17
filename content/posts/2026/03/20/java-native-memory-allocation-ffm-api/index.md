@@ -47,22 +47,28 @@ Below is an overview of the different properties each arena has.
 
 Using an arena is quite straightforward. You can use the `Arena` interface to create each of the four arena types. The first one is the global arena. The memory you allocate with it won't be deallocated till the application exits.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">Arena arena = Arena.global();
+```java
+Arena arena = Arena.global();
 MemorySegment segment = arena.allocate(42);
-</pre>
+```
+
 
 In the example, we allocate 42 bytes and create a `MemorySegment` that you can use. Next up is the `Arena.ofAuto()` that uses the garbage collector to decide when to free memory.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">Arena arena = Arena.ofAuto();
+```java
+Arena arena = Arena.ofAuto();
 MemorySegment segment = arena.allocate(42);
-</pre>
+```
+
 
 The previous two examples showed Arenas that are not explicitly closed. You can see that we didn't call any close method. The next Arena is closeable, it also implements the `Closeable` interface. As you can see in the next example with the try-with-resources statement:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">try (Arena arena = Arena.ofShared()) {
+```java
+try (Arena arena = Arena.ofShared()) {
     MemorySegment segment = arena.allocate(42);
 } // The segment is deallocated here
-</pre>
+```
+
 
 Here we explicitly opened and closed the `Arena`. The `MemorySegment` is only valid inside that scope, because when we exit the `try` the arena is closed and the memory freed. `ofShared` and `ofConfined` work mostly the same. The only difference is that the `MemorySegment` created with a `Confined` arena can't be shared by different threads. You can only use it in the thread that created the arena.
 
@@ -70,7 +76,8 @@ Here we explicitly opened and closed the `Arena`. The `MemorySegment` is only va
 
 If the provided arenas are not working out for you, you can create your own by implementing the `Arena` interface. This could be useful for when you want to have a different allocation strategy, or need to do something else on allocation. Below is a LoggingArena, that implements the basics and logs when an allocation happens.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">import java.lang.foreign.Arena;
+```java
+import java.lang.foreign.Arena;
 import java.lang.foreign.MemorySegment;
 
 public class LoggingArena implements Arena {
@@ -93,7 +100,8 @@ public class LoggingArena implements Arena {
         backingArena.close();
     }
 }
-</pre>
+```
+
 
 Yeah... it's not a true allocator because it doesn't manage memory itself. That is something you can't really do because the actual allocation of memory is closed off to the outside. When you create your own arena you are always wrapping an existing Arena like `ofConfined`. With that being said, let's see how we can break free from these limitations and manage the memory ourselves.
 
@@ -106,7 +114,8 @@ When you need more control, you can opt to use the allocation methods provided b
 
 To use `malloc` and `free` you basically do the same thing as with any other downcall you want to make. You use the `Linker` and create the `downcallHandle` for each C method.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">Linker linker = Linker.nativeLinker();
+```java
+Linker linker = Linker.nativeLinker();
 
 malloc = linker.downcallHandle(
     linker.defaultLookup().find("malloc").orElseThrow(),
@@ -117,13 +126,16 @@ MethodHandle free = linker.downcallHandle(
     linker.defaultLookup().find("free").orElseThrow(),
     FunctionDescriptor.ofVoid(JAVA_LONG)
 );
-</pre>
+```
+
 
 Now all you need to do is call these methods to allocate and free memory. In the following example you can see how these downcalls are used.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">MemorySegment segment =  ((MemorySegment) malloc.invokeExact(size)).reinterpret(size);
+```java
+MemorySegment segment =  ((MemorySegment) malloc.invokeExact(size)).reinterpret(size);
 free.invokeExact(segment.address());
-</pre>
+```
+
 
 The return value of malloc is cast to a `MemorySegment`. This segment now has the correct address but a size of zero... it is basically a pointer. So we have to call the reinterpret method to set the correct size and make it usable. The second line in the example frees the memory that was just allocated.
 
@@ -145,7 +157,8 @@ Native allocation (malloc or system-level calls behind Arena creation) is relati
 
 The implementation depends on your needs, but a basic fixed-size pool could look like this.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">import java.lang.foreign.Arena;
+```java
+import java.lang.foreign.Arena;
 import java.lang.foreign.MemorySegment;
 import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;
@@ -157,7 +170,7 @@ public class SegmentPool implements AutoCloseable {
     public SegmentPool(int poolSize, long segmentSize) {
         this.arena = Arena.ofShared();
         this.availableSegments = new ConcurrentLinkedQueue();
-        for (int i = 0; i &lt; poolSize; i++) {
+        for (int i = 0; i < poolSize; i++) {
             availableSegments.offer(arena.allocate(segmentSize));
         }
     }
@@ -181,7 +194,8 @@ public class SegmentPool implements AutoCloseable {
         arena.close();
     }
 }
-</pre>
+```
+
 
 We are trading complexity and memory usage for performance. This pool is holding onto memory even when you aren't actively using it, and you have to trust your application logic to actually return the segments to the pool to avoid running out of memory. The example uses a `ConcurrentLinkedQueue`. This isn't necessarily the most performant way, but can work. The most performant way totally depends on your use case.
 
@@ -200,17 +214,20 @@ Slicing is useful when you have a block of memory and you want to pass a specifi
 
 Using `asSlice` creates a new `MemorySegment` instance that acts as a view into the original memory. It shares the same lifetime scope as the parent, but operates within smaller, strictly defined spatial bounds.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">try (Arena arena = Arena.ofConfined()) {
+```java
+try (Arena arena = Arena.ofConfined()) {
     MemorySegment parent = arena.allocate(100);
 
     // Create a slice starting at byte 10, with a length of 20 bytes
     MemorySegment child = parent.asSlice(10, 20);
 }
-</pre>
+```
+
 
 You could also use a slicing allocator to hand out segments sequentially:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">try (Arena arena = Arena.ofConfined()) {
+```java
+try (Arena arena = Arena.ofConfined()) {
     MemorySegment block = arena.allocate(1024);
     SegmentAllocator allocator = SegmentAllocator.slicingAllocator(block);
 
@@ -220,7 +237,8 @@ You could also use a slicing allocator to hand out segments sequentially:
     // Allocates the next 4 bytes
     MemorySegment nextInt = allocator.allocate(ValueLayout.JAVA_INT);
 }
-</pre>
+```
+
 
 The trade off with `asSlice` and `slicingAllocator` is that they still instantiate Java `MemorySegment` objects, causing GC pressure. If you want zero allocation overhead, just calculate and pass the `long` offsets manually, in essence it is just adding up two `long` values. At that point you are doing [pointer arithmetic in Java](https://davidvlijmincx.com/posts/pointer-arithmetic-in-java/).
 

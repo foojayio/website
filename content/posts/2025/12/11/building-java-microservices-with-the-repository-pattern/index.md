@@ -39,59 +39,74 @@ The Spring standard repository {#h2-1-the-spring-standard-repository}
 
 The standard repo items can extend the base MongoRepositry class. This greatly reduces the amount of code needed for standard CRUD operations. Note the use of the @Query annotation to allow for shorthanding the various functions---for example:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public interface ItemRepository extends MongoRepository&lt;GroceryItem, String&gt; {
-&nbsp;&nbsp;&nbsp;@Query("{name:'?0'}")
-&nbsp;&nbsp;&nbsp;GroceryItem findItemByName(String name);
-&nbsp;&nbsp;&nbsp;@Query(value="{category:'?0'}", fields="{'name' : 1, 'quantity' : 1}")
-&nbsp;&nbsp;&nbsp;List&lt;GroceryItem&gt; findAll(String category);
-&nbsp;&nbsp;&nbsp;public long count();
-}</pre>
+```
+public interface ItemRepository extends MongoRepository<GroceryItem, String> {
+   @Query("{name:'?0'}")
+   GroceryItem findItemByName(String name);
+   @Query(value="{category:'?0'}", fields="{'name' : 1, 'quantity' : 1}")
+   List<GroceryItem> findAll(String category);
+   public long count();
+}
+```
+
 
 Here, we define two different query functions:
 
 * **findItemByName** : This passes the query {name: '\<value\>'} to the find function in MongoRepository. As seen by the declaration, it returns a single GroceryItem. This maps to the MongoDB *findOne* function and translates to the MongoDB query:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&nbsp;&nbsp;&nbsp;db.groceryitem.findOne({"name" : "&lt;value passed in&gt;"})</pre>
+```
+   db.groceryitem.findOne({"name" : "<value passed in>"})
+```
+
 
 * **findAll** : This returns a list of GoceryItems by category. Since this function returns a list, the MongoDB *find* function is called in order to return all items that meet the criteria. In this example, we add a projection using the 'fields' parameter to only return the 'name' and 'quantity' fields. The MongoDB find method is called under the covers:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">db.groceryitem.find({"category" : "&lt;value passed in&gt;"}).
+```
+db.groceryitem.find({"category" : "<value passed in>"}).
 
-project({"name" : 1, "quantity" : 1})</pre>
+project({"name" : 1, "quantity" : 1})
+```
+
 
 Custom repository functions {#h2-2-custom-repository-functions}
 ---------------------------------------------------------------
 
 Next, we need a repository model for our specific entity/collection CRUD handling in MongoDB. This is done using the 'CustomItemRepository' class to define any functions we want to provide:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">package com.example.mdbspringboot.repository;
+```
+package com.example.mdbspringboot.repository;
 
 public interface CustomItemRepository {
-&nbsp;&nbsp;&nbsp;void updateItemQuantity(String itemName, float newQuantity);
-}</pre>
+   void updateItemQuantity(String itemName, float newQuantity);
+}
+```
+
 
 Note in this case, we're only providing a single function to update the item quantity.
 
 Next, we need to implement the updateItemQuantity function using the CustomItemRepositoryImpl class:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">package com.example.mdbspringboot.repository;
+```
+package com.example.mdbspringboot.repository;
 import …
 @Component
 public class CustomItemRepositoryImpl implements CustomItemRepository {
 
-&nbsp;&nbsp;&nbsp;@Autowired
-&nbsp;&nbsp;&nbsp;MongoTemplate mongoTemplate;
-&nbsp;&nbsp;&nbsp;public void updateItemQuantity(String name, float newQuantity) {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Query query = new Query(Criteria.where("name").is(name));
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Update update = new Update();
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;update.set("quantity", newQuantity);
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;UpdateResult result = mongoTemplate.updateFirst(query, update, GroceryItem.class);
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if(result == null)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.println("No documents updated");
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;else
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.println(result.getModifiedCount() + " document(s) updated..");
-&nbsp;&nbsp;&nbsp;}
-}</pre>
+   @Autowired
+   MongoTemplate mongoTemplate;
+   public void updateItemQuantity(String name, float newQuantity) {
+      Query query = new Query(Criteria.where("name").is(name));
+      Update update = new Update();
+      update.set("quantity", newQuantity);
+      UpdateResult result = mongoTemplate.updateFirst(query, update, GroceryItem.class);
+      if(result == null)
+         System.out.println("No documents updated");
+      else
+         System.out.println(result.getModifiedCount() + " document(s) updated..");
+   }
+}
+```
+
 
 In this case, we're sending an update to the database to do the actual update. We'll see why that's a good idea in the next section.
 
@@ -100,22 +115,25 @@ When requirements change {#h2-3-when-requirements-change}
 
 At some point, the requirement to change the item category was added. A developer added the function 'updateCategoryName' to the MdbSpringBootApplication app. This also moves data operations out of the repository functions and directly into the application code. In general, this is not a good idea as it breaks the abstraction between the application and the repository model:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public void updateCategoryName(String category) {
+```
+public void updateCategoryName(String category) {
 // Change to this new value
 String newCategory = "munchies";
 
 // Find all the items with the category
-List&lt;GroceryItem&gt; list = groceryItemRepo.findAll(category);
-list.forEach(item -&gt; {
-&nbsp;&nbsp;&nbsp;&nbsp;// Update the category in each document
-&nbsp;&nbsp;&nbsp;&nbsp;item.setCategory(newCategory);
+List<GroceryItem> list = groceryItemRepo.findAll(category);
+list.forEach(item -> {
+    // Update the category in each document
+    item.setCategory(newCategory);
 });
 
 // Save all the items in database
-List&lt;GroceryItem&gt; itemsUpdated = groceryItemRepo.saveAll(list);
+List<GroceryItem> itemsUpdated = groceryItemRepo.saveAll(list);
 if(itemsUpdated != null)
-&nbsp;&nbsp;&nbsp;&nbsp;System.out.println("Successfully updated " + itemsUpdated.size() + " items.");&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-}</pre>
+    System.out.println("Successfully updated " + itemsUpdated.size() + " items.");       
+}
+```
+
 
 Although this uses the base repository function saveAll() to do the update, it's likely to result in poor performance for a few reasons:
 
@@ -131,25 +149,31 @@ void bulkUpdateItemCategories(String category, String newCategory);
 
 We'll also need to write the implementation in CustomItemRepositoryImpl using the updateMulti repo function:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public void bulkUpdateItemCategories(String category, String newCategory)&nbsp;
+```
+public void bulkUpdateItemCategories(String category, String newCategory) 
 {
-&nbsp;&nbsp;&nbsp;Query query = new Query(Criteria.where("category").is(category));
-&nbsp;&nbsp;&nbsp;Update update = new Update();
-&nbsp;&nbsp;&nbsp;update.set("category", newCategory);
-&nbsp;&nbsp;&nbsp;UpdateResult result = mongoTemplate.updateMulti(query, update, GroceryItem.class);
-&nbsp;&nbsp;&nbsp;if(result == null)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.println("No documents updated");
-&nbsp;&nbsp;&nbsp;else
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.println(result.getModifiedCount() + " document(s) updated..");
-}</pre>
+   Query query = new Query(Criteria.where("category").is(category));
+   Update update = new Update();
+   update.set("category", newCategory);
+   UpdateResult result = mongoTemplate.updateMulti(query, update, GroceryItem.class);
+   if(result == null)
+      System.out.println("No documents updated");
+   else
+      System.out.println(result.getModifiedCount() + " document(s) updated..");
+}
+```
+
 
 This makes the update in the main application much simpler as well as moving the data interface out of the main application:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public void updateCategoryName(String category) {
+```
+public void updateCategoryName(String category) {
 // Change to this new value
 String newCategory = "munchies";
 customRepo.bulkUpdateItemCategories(category, newCategory);
-}</pre>
+}
+```
+
 
 The double-edged sword of Spring updates in MongoDB {#h2-4-the-double-edged-sword-of-spring-updates-in-mongodb}
 ---------------------------------------------------------------------------------------------------------------
@@ -174,27 +198,33 @@ The MongoDB operation log (or oplog) is how MongoDB replicates writes from the p
 
 Let's see an example. The standard save() method will replace the entire document based on the existing _id. The resulting oplog entry would look something like this (some fields are eliminated for brevity):
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">{
-&nbsp;&nbsp;"op": "u", // for Update
-&nbsp;&nbsp;"ns": "mygrocerylist.GroceryItem",
-&nbsp;&nbsp;"o2": {"_id": "Whole Wheat Biscuit"},
-&nbsp;&nbsp;"o": {
-&nbsp;&nbsp;&nbsp;&nbsp;"_id": "Whole Wheat Biscuit",
-&nbsp;&nbsp;&nbsp;&nbsp;"name": "Whole Wheat Biscuit",
-&nbsp;&nbsp;&nbsp;&nbsp;"quantity": 5,
-&nbsp;&nbsp;&nbsp;&nbsp;"category": "munchies",
-&nbsp;&nbsp;&nbsp;&nbsp;"_class": "com.example.mdbspringboot.model.GroceryItem"
-&nbsp;&nbsp;}
-}</pre>
+```
+{
+  "op": "u", // for Update
+  "ns": "mygrocerylist.GroceryItem",
+  "o2": {"_id": "Whole Wheat Biscuit"},
+  "o": {
+    "_id": "Whole Wheat Biscuit",
+    "name": "Whole Wheat Biscuit",
+    "quantity": 5,
+    "category": "munchies",
+    "_class": "com.example.mdbspringboot.model.GroceryItem"
+  }
+}
+```
+
 
 Using the 'updateMulti' function in our bulkUpdateItemCategories function, this translates to an update of a single field using the MongoDB $set operator. The oplog entry would be smaller, in this case:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">{
-&nbsp;&nbsp;"op" : "u", //&nbsp; for update
-&nbsp;&nbsp;"ns": "mygrocerylist.GroceryItem",
-&nbsp;&nbsp;"o2": {"_id": "Whole Wheat Biscuit"},
-&nbsp;&nbsp;"o" : { "$set" : { "category" : "munchies" } }&nbsp;
-}</pre>
+```
+{
+  "op" : "u", //  for update
+  "ns": "mygrocerylist.GroceryItem",
+  "o2": {"_id": "Whole Wheat Biscuit"},
+  "o" : { "$set" : { "category" : "munchies" } } 
+}
+```
+
 
 In the case of the first example, all of the highlighted fields have not changed and are simply bloating the oplog. Imagine if this document had 200 fields---we would be including *all* of the fields in the oplog for a single field update! When updating documents, it's best to write your own repo functions to avoid sending all of the document's fields to the DB for replacement. Use the updateXXX repo functions to provide an update that uses the $set MongoDB function under the covers.
 

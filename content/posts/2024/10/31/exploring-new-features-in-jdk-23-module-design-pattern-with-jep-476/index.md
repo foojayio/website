@@ -31,9 +31,13 @@ Modular code base design can take many forms \[3\]. One possible approach is to 
 
 Even this idea, due to the previous internal architecture of the java platform, brought many challenges not only to proper maintainability (**Example 1.**).
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">File: SecureModule.java</pre>
+```
+File: SecureModule.java
+```
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">public class SecureModule {
+
+```
+public class SecureModule {
    private static SecureModule INSTANCE;
    public static SecureModule getInstance(String name) {
        if (INSTANCE == null) {
@@ -48,7 +52,9 @@ Even this idea, due to the previous internal architecture of the java platform, 
    public void executeLogic() {
        System.out.println("SecureModule, executeLogic name:" + name);
    }
-}</pre>
+}
+```
+
 
 **Example 1.**: Possible gateway class SecureModule to the "secure" module providing couple of secret logic before Java 9 release
 
@@ -56,16 +62,22 @@ The code above already provides a brief insight into the challenge of securing a
 
 The given example of a SecureModule gateway already blindly exposes its inner fields regardless of proper visibility inside the package. Such state may lead to the following access to the module internals (**Example 2.**)
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">System.out.println("Before Java 9: no modules");
+```
+System.out.println("Before Java 9: no modules");
 var secureModule = SecureModule.getInstance("security in important");
 secureModule.executeLogic();
 secureModule.name = "maybe not wanted";
-secureModule.executeLogic();</pre>
+secureModule.executeLogic();
+```
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">Output:
+
+```
+Output:
 Before Java 9: no modules
 SecureModule, executeLogic name:security in important
-SecureModule, executeLogic name:maybe not wanted</pre>
+SecureModule, executeLogic name:maybe not wanted
+```
+
 
 **Example 2.**: Compromising of access to internal module logic due to incorrect visibility of internal fields
 
@@ -79,7 +91,8 @@ Modules can take full advantage not only of internal package visibility restrict
 
 JEP-476\[1\]\[4\] makes a neat enhancement on the current state by simplifying the use of module design while providing an almost "look-alike" approach used in the classpath era (**Example 3.**). Although the state may feel similar, the code-base is more restricted and secure against malicious abuse.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">File: Jep476BaseMain
+```
+File: Jep476BaseMain
 import module java.base;
 
 public class Jep476BaseMain {
@@ -87,11 +100,16 @@ public class Jep476BaseMain {
        var list = Arrays.asList("ONE", "TWO");
        System.out.println("list:" + list);
    }
-}</pre>
+}
+```
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">Command: $ java --enable-preview Jep476BaseMain.java
+
+```
+Command: $ java --enable-preview Jep476BaseMain.java
 Output:
-list:[ONE, TWO]</pre>
+list:[ONE, TWO]
+```
+
 
 **Example 3.**: Importing a module provides access to all classes and interfaces without having to specify them
 
@@ -124,19 +142,25 @@ The ability to import an entire module (exposed APIs) can have a positive effect
 
 **Example 4.**: Modularized code-based enforces more control about exposed APIs while improving security
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">import module jep476mod2;
+```
+import module jep476mod2;
 public class Jep476ModuleMain {
    public static void main(String[] args) {
        System.out.println("JEP 476: Module Import Declarations (Preview)");
        System.out.println("FactoryOne element:" + Jep476FactoryOne.produce());
        System.out.println("FactoryTwo element:" + Jep476FactoryTwo.produce());
    }
-}</pre>
+}
+```
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">Output:
+
+```
+Output:
 JEP 476: Module Import Declarations (Preview)
 FactoryOne element:FactoryElement[name=factory1, value=22]
-FactoryTwo element:FactoryElement[name=factory2, value=42]</pre>
+FactoryTwo element:FactoryElement[name=factory2, value=42]
+```
+
 
 **Example 5.**: Each factory is automatically available and can hide different implementations that remain hidden for the jep476mod1 module
 

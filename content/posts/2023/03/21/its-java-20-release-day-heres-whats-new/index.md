@@ -50,7 +50,8 @@ The feature 'Pattern Matching for switch' that was first introduced in Java 17 h
 Since Java 16 we are able to avoid casting after `instanceof` checks by using 'Pattern Matching for instanceof'. Let's see how that works in a code example.
 > Code examples that illustrate this JEP were taken from my conference talk ["Pattern Matching: Small Enhancement or Major Feature?"](https://hanno.codes/talks/#pattern-matching-small-enhancement-or-major-feature).
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">static String apply(Effect effect) {
+```java
+static String apply(Effect effect) {
     String formatted = "";
     if (effect instanceof Delay de) {
         formatted = String.format("Delay active of %d ms.", de.timeInMs());
@@ -66,36 +67,44 @@ Since Java 16 we are able to avoid casting after `instanceof` checks by using 'P
         formatted = String.format("Unknown effect active: %s.", effect);
     }
     return formatted;
-}</pre>
+}
+```
+
 
 This code is still riddled with ceremony, though. On top of that it leaves room for subtle bugs --- what if you added an else-if branch that didn't assign anything to `formatted`? So in the spirit of this JEP (and its predecessors), let's see what pattern matching in a switch statement (or even better: in a switch *expression*) would look like:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">static String apply(Effect effect) {
+```java
+static String apply(Effect effect) {
     return switch(effect) {
-        case Delay de      -&gt; String.format("Delay active of %d ms.", de.timeInMs());
-        case Reverb re     -&gt; String.format("Reverb active of type %s and roomSize %d.", re.name(), re.roomSize());
-        case Overdrive ov  -&gt; String.format("Overdrive active with gain %d.", ov.gain());
-        case Tremolo tr    -&gt; String.format("Tremolo active with depth %d and rate %d.", tr.depth(), tr.rate());
-        case Tuner tu      -&gt; String.format("Tuner active with pitch %d. Muting all signal!", tu.pitchInHz());
-        case null, default -&gt; String.format("Unknown or empty effect active: %s.", effect);
+        case Delay de      -> String.format("Delay active of %d ms.", de.timeInMs());
+        case Reverb re     -> String.format("Reverb active of type %s and roomSize %d.", re.name(), re.roomSize());
+        case Overdrive ov  -> String.format("Overdrive active with gain %d.", ov.gain());
+        case Tremolo tr    -> String.format("Tremolo active with depth %d and rate %d.", tr.depth(), tr.rate());
+        case Tuner tu      -> String.format("Tuner active with pitch %d. Muting all signal!", tu.pitchInHz());
+        case null, default -> String.format("Unknown or empty effect active: %s.", effect);
     };
-}</pre>
+}
+```
+
 
 Pattern matching for switch made our code far more elegant here. We're even able to address possible `null`s by defining a specific case for them or combining it with the default case (which is what we've done here).
 
 Checking an additional condition on top of the pattern match is easily done with a *guard* (the part after the `when` keyword in the code below):
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">static String apply(Effect effect, Guitar guitar) {
+```java
+static String apply(Effect effect, Guitar guitar) {
     return switch(effect) {
-        case Delay de      -&gt; String.format("Delay active of %d ms.", de.timeInMs());
-        case Reverb re     -&gt; String.format("Reverb active of type %s and roomSize %d.", re.name(), re.roomSize());
-        case Overdrive ov  -&gt; String.format("Overdrive active with gain %d.", ov.gain());
-        case Tremolo tr    -&gt; String.format("Tremolo active with depth %d and rate %d.", tr.depth(), tr.rate());
-        case Tuner tu when !guitar.isInTune() -&gt; String.format("Tuner active with pitch %d. Muting all signal!", tu.pitchInHz());
-        case Tuner tu      -&gt; "Guitar is already in tune.";
-        case null, default -&gt; String.format("Unknown or empty effect active: %s.", effect);
+        case Delay de      -> String.format("Delay active of %d ms.", de.timeInMs());
+        case Reverb re     -> String.format("Reverb active of type %s and roomSize %d.", re.name(), re.roomSize());
+        case Overdrive ov  -> String.format("Overdrive active with gain %d.", ov.gain());
+        case Tremolo tr    -> String.format("Tremolo active with depth %d and rate %d.", tr.depth(), tr.rate());
+        case Tuner tu when !guitar.isInTune() -> String.format("Tuner active with pitch %d. Muting all signal!", tu.pitchInHz());
+        case Tuner tu      -> "Guitar is already in tune.";
+        case null, default -> String.format("Unknown or empty effect active: %s.", effect);
     };
-}</pre>
+}
+```
+
 
 Here, the guard makes sure that intricate boolean logic can still be expressed in a concise way. Having to nest `if` statements to test this logic within a case branch would not only be more verbose, but also potentially introduce subtle bugs that we set out to avoid in the first place.
 
@@ -116,41 +125,50 @@ Pattern matching is a feature in Java that is being rolled out gradually over mu
 
 [Records](https://openjdk.org/jeps/395) are transparent carriers for data. Code that receives an instance of a record will typically extract the data, known as the components. This was also the case in our 'Pattern Matching for switch' code example, if we assume that all implementations of the `Effect` interface were in fact records there. In that piece of code it is clear that the pattern variables only serve to access the record fields. Using record patterns we can avoid having to create pattern variables altogether:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">static String apply(Effect effect) {
+```java
+static String apply(Effect effect) {
     return switch(effect) {
-        case Delay(int timeInMs) -&gt; String.format("Delay active of %d ms.", timeInMs);
-        case Reverb(String name, int roomSize) -&gt; String.format("Reverb active of type %s and roomSize %d.", name, roomSize);
-        case Overdrive(int gain) -&gt; String.format("Overdrive active with gain %d.", gain);
-        case Tremolo(int depth, int rate) -&gt; String.format("Tremolo active with depth %d and rate %d.", depth, rate);
-        case Tuner(int pitchInHz) -&gt; String.format("Tuner active with pitch %d. Muting all signal!", pitchInHz);
-        case null, default -&gt; String.format("Unknown or empty effect active: %s.", effect);
+        case Delay(int timeInMs) -> String.format("Delay active of %d ms.", timeInMs);
+        case Reverb(String name, int roomSize) -> String.format("Reverb active of type %s and roomSize %d.", name, roomSize);
+        case Overdrive(int gain) -> String.format("Overdrive active with gain %d.", gain);
+        case Tremolo(int depth, int rate) -> String.format("Tremolo active with depth %d and rate %d.", depth, rate);
+        case Tuner(int pitchInHz) -> String.format("Tuner active with pitch %d. Muting all signal!", pitchInHz);
+        case null, default -> String.format("Unknown or empty effect active: %s.", effect);
     };
-}</pre>
+}
+```
+
 
 `Delay(int timeInMs)` is a record pattern here, deconstructing the `Delay` instance into its components. And this mechanism can become even more powerful when we apply it to a more complicated object graph by using *nested* record patterns:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">record Tuner(int pitchInHz, Note note) implements Effect {}
+```java
+record Tuner(int pitchInHz, Note note) implements Effect {}
 record Note(String note) {}
 
 class TunerApplier {
     static String apply(Effect effect, Guitar guitar) {
         return switch(effect) {
-            case Tuner(int pitch, Note(String note)) -&gt; String.format("Tuner active with pitch %d on note %s", pitch, note);
+            case Tuner(int pitch, Note(String note)) -> String.format("Tuner active with pitch %d on note %s", pitch, note);
         };
     }
-}</pre>
+}
+```
+
 
 #### Inference of type arguments
 
 Nested record patterns also benefit from *inference of type arguments*. For example:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">class TunerApplier {
+```java
+class TunerApplier {
     static String apply(Effect effect, Guitar guitar) {
         return switch(effect) {
-            case Tuner(var pitch, Note(var note)) -&gt; String.format("Tuner active with pitch %d on note %s", pitch, note);
+            case Tuner(var pitch, Note(var note)) -> String.format("Tuner active with pitch %d on note %s", pitch, note);
         };
     }
-}</pre>
+}
+```
+
 
 Here the type arguments for the nested pattern `Tuner(var pitch, Note(var note))` are inferred. This only works with nested patterns for now; type patterns do not yet support implicit inference of type arguments. So the type pattern `Tuner tu` is always treated as a raw type pattern.
 
@@ -158,15 +176,18 @@ Here the type arguments for the nested pattern `Tuner(var pitch, Note(var note))
 
 Record patterns are now also allowed in enhanced `for` statements, making it easy to loop over a collection of record values and swiftly extract the components of each record:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">record Delay(int timeInMs) implements Effect {}
+```java
+record Delay(int timeInMs) implements Effect {}
 
 class DelayPrinter {
-    static void printDelays(List&lt;Delay&gt; delays) {
+    static void printDelays(List<Delay> delays) {
         for (Delay(var timeInMs) : delays) {
             System.out.println("Delay found with timeInMs=" + timeInMs);
         }
     }
-}</pre>
+}
+```
+
 
 #### What's Different From Java 19?
 
@@ -208,29 +229,35 @@ Just like a platform thread, a virtual thread is an instance of `java.lang.Threa
 
 Creating a virtual thread is a bit different, but just as easy as creating a platform thread:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">var platformThread = new Thread(() -&gt; {
+```java
+var platformThread = new Thread(() -> {
     // do some work in a platform thread
 });
 platformThread.start();
 
-var virtualThread = Thread.startVirtualThread(() -&gt; {
+var virtualThread = Thread.startVirtualThread(() -> {
     // do some work in a virtual thread
 });
-virtualThread.start();</pre>
+virtualThread.start();
+```
+
 
 When your code uses the `ExecutorService` interface already, switching to virtual threads will take even less effort:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">var platformThreadsExecutor = Executors.newCachedThreadPool();
-platformThreadsExecutor.submit(() -&gt; {
+```java
+var platformThreadsExecutor = Executors.newCachedThreadPool();
+platformThreadsExecutor.submit(() -> {
     // do some work in a platform thread
 });
 platformThreadsExecutor.close();
 
 try (var virtualThreadsExecutor = Executors.newVirtualThreadPerTaskExecutor()) {
-    virtualThreadsExecutor.submit(() -&gt; {
+    virtualThreadsExecutor.submit(() -> {
         // do some work in a virtual thread
     });
-} // close() is called implicitly</pre>
+} // close() is called implicitly
+```
+
 
 Note that the `ExecutorService` interface was adjusted in Java 19 to extend `AutoCloseable`, so it can now be used in a try-with-resources construct.
 
@@ -271,14 +298,17 @@ Like a thread-local variable, a scoped value has multiple incarnations, one per 
 
 The JEP illustrates the use of scoped values with the pseudo code example below:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">final static ScopedValue&lt;...&gt; V = ScopedValue.newInstance();
+```java
+final static ScopedValue<...> V = ScopedValue.newInstance();
 
 // In some method
-ScopedValue.where(V, &lt;value&gt;)
-           .run(() -&gt; { ... V.get() ... call methods ... });
+ScopedValue.where(V, <value>)
+           .run(() -> { ... V.get() ... call methods ... });
 
 // In a method called directly or indirectly from the lambda expression
-... V.get() ...</pre>
+... V.get() ...
+```
+
 
 We see that `ScopedValue.where(...)` is called, presenting a scoped value and the object to which it is to be bound. The call to `run(...)` binds the scoped value, providing an incarnation that is specific to the current thread, and then executes the lambda expression passed as argument. During the lifetime of the `run(...)` call, the lambda expression, or any method called directly or indirectly from that expression, can read the scoped value via the value's `get()` method. After the `run(...)` method finishes, the binding is destroyed.
 
@@ -300,23 +330,29 @@ Java's current implementation of concurrency is *unstructured*, which can make e
 
 Let's illustrate this point with a code example from the JEP:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">Response handle() throws ExecutionException, InterruptedException {
-    Future&lt;String&gt;  user = executor.submit(() -&gt; findUser());
-    Future&lt;Integer&gt; order = executor.submit(() -&gt; fetchOrder());
+```java
+Response handle() throws ExecutionException, InterruptedException {
+    Future<String>  user = executor.submit(() -> findUser());
+    Future<Integer> order = executor.submit(() -> fetchOrder());
     String theUser = user.get();   // Join findUser
     int theOrder = order.get();  // Join fetchOrder
     return new Response(theUser, theOrder);
-}</pre>
+}
+```
+
 
 When the `user.get()` call results in an error, there is no way for us to cancel the second task when we want to prevent getting a result that won't be used anyway.  
 
 Though when we would rewrite this code to use just a single thread, the situation would become a lot simpler:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">Response handle() throws IOException {
+```java
+Response handle() throws IOException {
     String theUser = findUser();
     int theOrder = fetchOrder();
     return new Response(theUser, theOrder);
-}</pre>
+}
+```
+
 
 See? Here we would be able to prevent the second call once the first one has failed.
 
@@ -324,10 +360,11 @@ In general, multithreaded programming in Java would be easier, more reliable, an
 
 Enter *structured concurrency* . We've now rewritten the code example to make use of the new `StructuredTaskScope` API:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">Response handle() throws ExecutionException, InterruptedException {
+```java
+Response handle() throws ExecutionException, InterruptedException {
   try (var scope = new StructuredTaskScope.ShutdownOnFailure()) {
-      Future&lt;String&gt;  user  = scope.fork(() -&gt; findUser());
-      Future&lt;Integer&gt; order = scope.fork(() -&gt; fetchOrder());
+      Future<String>  user  = scope.fork(() -> findUser());
+      Future<Integer> order = scope.fork(() -> fetchOrder());
 
       scope.join();           // Join both forks
       scope.throwIfFailed();  // ... and propagate errors
@@ -335,7 +372,9 @@ Enter *structured concurrency* . We've now rewritten the code example to make us
       // Here, both forks have succeeded, so compose their results
       return new Response(user.resultNow(), order.resultNow());
   }
-}</pre>
+}
+```
+
 
 In structured concurrency, subtasks work on behalf of a task. The task awaits the subtasks' results and monitors them for failures. The `StructuredTaskScope` class allows developers to structure a task as a family of concurrent subtasks, and to coordinate them as a unit. Subtasks are executed in their own threads by forking them individually and then joining them as a unit and, possibly, cancelling them as a unit. The subtasks' successful results or exceptions are aggregated and handled by the parent task.
 
@@ -382,7 +421,8 @@ However, these three mechanisms all come with their own drawbacks, which is why 
 
 In order to demonstrate the new API, [JEP 434](https://openjdk.org/jeps/434) lists a code example that obtains a method handle for a C library function `radixsort` and then uses it to sort four strings that start out as Java array elements:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">// 1. Find foreign function on the C library path
+```java
+// 1. Find foreign function on the C library path
 Linker linker          = Linker.nativeLinker();
 SymbolLookup stdlib    = linker.defaultLookup();
 MethodHandle radixsort = linker.downcallHandle(stdlib.find("radixsort"), ...);
@@ -393,19 +433,21 @@ try (Arena offHeap = Arena.openConfined()) {
     // 4. Allocate a region of off-heap memory to store four pointers
     MemorySegment pointers = offHeap.allocateArray(ValueLayout.ADDRESS, javaStrings.length);
     // 5. Copy the strings from on-heap to off-heap
-    for (int i = 0; i &lt; javaStrings.length; i++) {
+    for (int i = 0; i < javaStrings.length; i++) {
         MemorySegment cString = offHeap.allocateUtf8String(javaStrings[i]);
         pointers.setAtIndex(ValueLayout.ADDRESS, i, cString);
     }
     // 6. Sort the off-heap data by calling the foreign function
     radixsort.invoke(pointers, javaStrings.length, MemorySegment.NULL, '\0');
     // 7. Copy the (reordered) strings from off-heap to on-heap
-    for (int i = 0; i &lt; javaStrings.length; i++) {
+    for (int i = 0; i < javaStrings.length; i++) {
         MemorySegment cString = pointers.getAtIndex(ValueLayout.ADDRESS, i);
         javaStrings[i] = cString.getUtf8String(0);
     }
 } // 8. All off-heap memory is deallocated here
-assert Arrays.equals(javaStrings, new String[] {"car", "cat", "dog", "mouse"});  // true</pre>
+assert Arrays.equals(javaStrings, new String[] {"car", "cat", "dog", "mouse"});  // true
+```
+
 
 Let's look at some of the types this code uses in more detail to get a rough idea of their function and purpose within the Foreign Function \& Memory API:
 
@@ -447,18 +489,19 @@ In the past, Java programmers could only program such computations at the assemb
 
 Here is a code example (taken from the JEP) that compares a simple scalar computation over elements of arrays with its equivalent using the Vector API:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">void scalarComputation(float[] a, float[] b, float[] c) {
-   for (int i = 0; i &lt; a.length; i++) {
+```java
+void scalarComputation(float[] a, float[] b, float[] c) {
+   for (int i = 0; i < a.length; i++) {
         c[i] = (a[i] * a[i] + b[i] * b[i]) * -1.0f;
    }
 }
 
-static final VectorSpecies&lt;Float&gt; SPECIES = FloatVector.SPECIES_PREFERRED;
+static final VectorSpecies<Float> SPECIES = FloatVector.SPECIES_PREFERRED;
 
 void vectorComputation(float[] a, float[] b, float[] c) {
     int i = 0;
     int upperBound = SPECIES.loopBound(a.length);
-    for (; i &lt; upperBound; i += SPECIES.length()) {
+    for (; i < upperBound; i += SPECIES.length()) {
         // FloatVector va, vb, vc;
         var va = FloatVector.fromArray(SPECIES, a, i);
         var vb = FloatVector.fromArray(SPECIES, b, i);
@@ -467,10 +510,12 @@ void vectorComputation(float[] a, float[] b, float[] c) {
                    .neg();
         vc.intoArray(c, i);
     }
-    for (; i &lt; a.length; i++) {
+    for (; i < a.length; i++) {
         c[i] = (a[i] * a[i] + b[i] * b[i]) * -1.0f;
     }
-}</pre>
+}
+```
+
 
 From the perspective of the Java developer, this is just another way of expressing scalar computations. It might come across as being slightly more verbose, but on the other hand it can bring spectacular performance gains.
 

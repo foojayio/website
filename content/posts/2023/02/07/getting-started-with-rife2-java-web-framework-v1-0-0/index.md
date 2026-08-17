@@ -73,15 +73,18 @@ RIFE2 is designed with that development approach in mind.
 
 Let's take a look at a quick introductory *HelloWorld.java* example.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public class HelloWorld extends Site {
+```java
+public class HelloWorld extends Site {
     public void setup() {
-        get("/hello", c -&gt; c.print("Hello World"));
+        get("/hello", c -> c.print("Hello World"));
     }
 
     public static void main(String[] args) {
         new Server().start(new HelloWorld());
     }
-}</pre>
+}
+```
+
 
 This is a fully functional application that you can launch from your build tool, [step by step instructions](https://github.com/gbevin/rife2/wiki/Getting-Started) are available in the RIFE2 manual. Deployment is trivial also, since this class name simply needs to be set as an attribute in your [web.xml file](https://github.com/gbevin/rife2/wiki/Deployment).
 
@@ -92,12 +95,15 @@ RIFE2 comes with an API to perform out-of-container tests, directly interacting 
 
 For example, using JUnit 5:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">class HelloTest {
+```java
+class HelloTest {
     @Test void verifyHelloWorld() {
         var m = new MockConversation(new HelloWorld());
         assertEquals("Hello World", m.doRequest("/hello").getText());
     }
-}</pre>
+}
+```
+
 
 This entire example is obviously trivial, it registers the `/hello` route and simply prints text as the response. The main method start up the embedded Jetty server with the `Site` that contains this route.
 
@@ -114,25 +120,31 @@ Let's add a new route that contains an HTML link towards the previous Hello Worl
 
 You can see that routes don't have to be created inside the `setup()` method, but can also be created as part of your `Site`'s construction, allowing the routes to be stored in fields. These fields can then be used with the `c.urlFor(route)` method to generate a link that will always remain correct, no matter which path the `hello` route uses or which web application context your application is deployed into.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public class HelloLink extends Site {
-    Route hello = get("/hello", c -&gt; c.print("Hello World"));
-    Route link = get("/link", c-&gt; c.print("&lt;a href='" + c.urlFor(hello) + "'&gt;Hello&lt;/a&gt;"));
+```java
+public class HelloLink extends Site {
+    Route hello = get("/hello", c -> c.print("Hello World"));
+    Route link = get("/link", c-> c.print("<a href='" + c.urlFor(hello) + "'>Hello</a>"));
 
     public static void main(String[] args) {
         new Server().start(new HelloLink());
     }
-}</pre>
+}
+```
+
 
 We can now test this as such:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">class HelloTest {
+```java
+class HelloTest {
     @Test void verifyHelloLink() {
         var m = new MockConversation(new HelloLink());
         assertEquals("Hello World", m.doRequest("/link")
             .getParsedHtml().getLinkWithText("Hello")
             .follow().getText());
     }
-}</pre>
+}
+```
+
 
 Wrapping up {#h2-4-wrapping-up}
 -------------------------------

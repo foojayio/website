@@ -20,28 +20,35 @@ You might have already used the [strategy pattern](https://en.wikipedia.org/wiki
 
 You simply define an interface for example (I use the prefixing `I` only in these examples for clarity):
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public interface IOneStrategy {
+```java
+public interface IOneStrategy {
   void executeTheThing();
-}</pre>
+}
+```
+
 
 Define some implementations like this:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@Service("FIRST")
+```java
+@Service("FIRST")
 public class OneStrategyFirst implements IOneStrategy {
 
   @Override
   public void executeTheThing() {
     System.out.println("OneStrategyFirst.executeTheThing");
   }
-}</pre>
+}
+```
+
 
 Now you can simply implement a service which will execute the appropriate strategy based on the given name which looks similar like this:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@Service
+```java
+@Service
 public class ExecuteStrategyOne {
-  private Map&lt;String, IOneStrategy&gt; strategies;
+  private Map<String, IOneStrategy> strategies;
 
-  public ExecuteStrategyOne(Map&lt;String, IOneStrategy&gt; strategies) {
+  public ExecuteStrategyOne(Map<String, IOneStrategy> strategies) {
     this.strategies = strategies;
   }
 
@@ -52,7 +59,9 @@ public class ExecuteStrategyOne {
     strategies.get(name).executeTheThing();
   }
 
-}</pre>
+}
+```
+
 
 In real world you make several implementations of the strategy interface like `OneStrategyFirst`, `OneStrategySecond` and `OneStrategyThird`. Sometimes the usage is to use the parameter of `executeStrategyOne` which is provided by a REST API or some other domain specific code which needs different implementations.
 
@@ -62,29 +71,36 @@ Really convenient.
 
 In real life it happens that you need to have a different strategy which use the same keys as `FIRST`, `SECOND` and `THIRD` in the examples? Let us define the following:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@Service("FIRST")
+```java
+@Service("FIRST")
 public class TwoStrategyFirst implements ITwoStrategy {
 
   @Override
   public void executeTheThing() {
     System.out.println("TwoStrategyFirst.executeTheThing");
   }
-}</pre>
+}
+```
+
 
 If you try to start that Spring Boot application you will see an exception like this:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">Caused by: org.springframework.context.annotation.ConflictingBeanDefinitionException:
+```java
+Caused by: org.springframework.context.annotation.ConflictingBeanDefinitionException:
 Annotation-specified bean name 'FIRST' for bean class [com.soebes.examples.strategies.functions.two.TwoStrategyFirst]
 conflicts with existing, non-compatible bean definition of same name and class
 [com.soebes.examples.strategies.functions.one.OneStrategyFirst]
   at org.springframework.context.annotation.ClassPathBeanDefinitionScanner.checkCandidate(ClassPathBeanDefinitionScanner.java:349) ~[spring-context-5.2.9.RELEASE.jar:5.2.9.RELEASE]
-  at org.springframework.context.annotation.ClassPathB</pre>
+  at org.springframework.context.annotation.ClassPathB
+```
+
 
 So what can we do to solve the problem without losing much of the convenience which Spring Boot provides us here?
 
 First we have to define in each of the strategy implementation class the annotations like this:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@Service
+```java
+@Service
 @Qualifier("FIRST")
 public class TwoStrategyFirst implements ITwoStrategy {
 
@@ -92,33 +108,41 @@ public class TwoStrategyFirst implements ITwoStrategy {
   public void executeTheThing() {
     System.out.println("TwoStrategyFirst.executeTheThing");
   }
-}</pre>
+}
+```
+
 
 By using the key in a different annotation we prevent the duplication of the bean names in contradiction to use `@Service("FIRST")` instead. The usage of `@Qualifier("FIRST")` gives us a criteria to handle that different.
 
 Now we have to change the `ExecuteStrategyOne` class like the following:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@Service
+```java
+@Service
 public class ExecuteStrategyOne {
 
-  private Map&lt;String, IOneStrategy&gt; strategies;
+  private Map<String, IOneStrategy> strategies;
 
-  public ExecuteStrategyOne(List&lt;IOneStrategy&gt; strategies) {
+  public ExecuteStrategyOne(List<IOneStrategy> strategies) {
     this.strategies = strategies.stream()
         .collect(
-            toMap(k -&gt; k.getClass().getDeclaredAnnotation(Qualifier.class).value(),
+            toMap(k -> k.getClass().getDeclaredAnnotation(Qualifier.class).value(),
                   Function.identity()));
   }
   ...
-}</pre>
+}
+```
+
 
 I would like to emphasis the usage of the constructor parameter `List<IOneStrategy> strategies` instead of the previously used `Map<String, IOneStrategy> strategies` which is a convenience to get a list of all implementations off the given interface into that list by Spring Boot. Now we need to translate that into a map with the key we have defined by using `@Qualifier` annotation. The whole thing can be solved by a stream like this:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">this.strategies = strategies
+```java
+this.strategies = strategies
   .stream()
   .collect(
-    Collectors.toMap(k -&gt; k.getClass().getDeclaredAnnotation(Qualifier.class).value(),
-                     Function.identity()));</pre>
+    Collectors.toMap(k -> k.getClass().getDeclaredAnnotation(Qualifier.class).value(),
+                     Function.identity()));
+```
+
 
 We go through the implementations and extract the annotation `@Qualifier` and read out the `value()` which is the key we want to have. We collect the result by using the `Collectors.toMap` into a Map and assign the result to the instance variable `private Map<String, IOneStrategy> strategies;`. Depending on your need it is of course possible to define the instance variable as `final` and you can create an unmodifiable map by using the appropriate `Collectors.toUnmodifiableMap` instead of the `toMap(..)` if needed.
 

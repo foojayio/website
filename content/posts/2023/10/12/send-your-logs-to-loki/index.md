@@ -39,7 +39,8 @@ Loki provides a [RESTful API](https://grafana.com/docs/loki/latest/api/) to stor
 
 I'll use Java, but you can achieve the same result with a different stack. The most straightforward code is the following:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public static void main(String[] args) throws URISyntaxException, IOException, InterruptedException {
+```java
+public static void main(String[] args) throws URISyntaxException, IOException, InterruptedException {
     var template = "'{' \"streams\": ['{' \"stream\": '{' \"app\": \"{0}\" '}', \"values\": [[ \"{1}\", \"{2}\" ]]'}']'}'"; //1
     var now = LocalDateTime.now().atZone(ZoneId.systemDefault()).toInstant();
     var nowInEpochNanos = NANOSECONDS.convert(now.getEpochSecond(), SECONDS) + now.getNano();
@@ -50,7 +51,9 @@ I'll use Java, but you can achieve the same result with a different stack. The m
             .POST(HttpRequest.BodyPublishers.ofString(payload))
             .build();
     HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());                                         //3
-}</pre>
+}
+```
+
 
 1. This is how we did String interpolation in the old days
 2. Create the request
@@ -82,23 +85,26 @@ To use the above statement, we need to choose a logging implementation. Because 
 
 We need to add relevant dependencies:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="xml">&lt;dependency&gt;
-    &lt;groupId&gt;org.slf4j&lt;/groupId&gt;
-    &lt;artifactId&gt;slf4j-api&lt;/artifactId&gt;             &lt;!--1--&gt;
-    &lt;version&gt;2.0.7&lt;/version&gt;
-&lt;/dependency&gt;
-&lt;dependency&gt;
-    &lt;groupId&gt;ch.qos.logback&lt;/groupId&gt;
-    &lt;artifactId&gt;logback-classic&lt;/artifactId&gt;       &lt;!--2--&gt;
-    &lt;version&gt;1.4.8&lt;/version&gt;
-    &lt;scope&gt;runtime&lt;/scope&gt;
-&lt;/dependency&gt;
-&lt;dependency&gt;
-    &lt;groupId&gt;com.github.loki4j&lt;/groupId&gt;
-    &lt;artifactId&gt;loki-logback-appender&lt;/artifactId&gt; &lt;!--3--&gt;
-    &lt;version&gt;1.4.0&lt;/version&gt;
-    &lt;scope&gt;runtime&lt;/scope&gt;
-&lt;/dependency&gt;</pre>
+```xml
+<dependency>
+    <groupId>org.slf4j</groupId>
+    <artifactId>slf4j-api</artifactId>             <!--1-->
+    <version>2.0.7</version>
+</dependency>
+<dependency>
+    <groupId>ch.qos.logback</groupId>
+    <artifactId>logback-classic</artifactId>       <!--2-->
+    <version>1.4.8</version>
+    <scope>runtime</scope>
+</dependency>
+<dependency>
+    <groupId>com.github.loki4j</groupId>
+    <artifactId>loki-logback-appender</artifactId> <!--3-->
+    <version>1.4.0</version>
+    <scope>runtime</scope>
+</dependency>
+```
+
 
 1. SLF4J is the interface
 2. Logback is the implementation
@@ -106,24 +112,26 @@ We need to add relevant dependencies:
 
 Now, we add a specific Loki appender:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="xml">&lt;appender name="LOKI" class="com.github.loki4j.logback.Loki4jAppender"&gt;                   &lt;!--1--&gt;
-    &lt;http&gt;
-        &lt;url&gt;http://localhost:3100/loki/api/v1/push&lt;/url&gt;                                 &lt;!--2--&gt;
-    &lt;/http&gt;
-    &lt;format&gt;
-        &lt;label&gt;
-            &lt;pattern&gt;app=demo,host=${HOSTNAME},level=%level&lt;/pattern&gt;                     &lt;!--3--&gt;
-        &lt;/label&gt;
-        &lt;message&gt;
-            &lt;pattern&gt;l=%level h=${HOSTNAME} c=%logger{20} t=%thread | %msg %ex&lt;/pattern&gt;  &lt;!--4--&gt;
-        &lt;/message&gt;
-        &lt;sortByTime&gt;true&lt;/sortByTime&gt;
-    &lt;/format&gt;
-&lt;/appender&gt;
-&lt;root level="DEBUG"&gt;
-    &lt;appender-ref ref="STDOUT" /&gt;
-&lt;/root&gt;
-</pre>
+```xml
+<appender name="LOKI" class="com.github.loki4j.logback.Loki4jAppender">                   <!--1-->
+    <http>
+        <url>http://localhost:3100/loki/api/v1/push</url>                                 <!--2-->
+    </http>
+    <format>
+        <label>
+            <pattern>app=demo,host=${HOSTNAME},level=%level</pattern>                     <!--3-->
+        </label>
+        <message>
+            <pattern>l=%level h=${HOSTNAME} c=%logger{20} t=%thread | %msg %ex</pattern>  <!--4-->
+        </message>
+        <sortByTime>true</sortByTime>
+    </format>
+</appender>
+<root level="DEBUG">
+    <appender-ref ref="STDOUT" />
+</root>
+```
+
 
 1. The loki appender
 2. Loki URL
@@ -132,9 +140,12 @@ Now, we add a specific Loki appender:
 
 Our program has become much more straightforward:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">var who = //...
+```java
+var who = //...
 var logger = LoggerFactory.getLogger(Main.class.toString());
-logger.info("Hello from {}!", who);</pre>
+logger.info("Hello from {}!", who);
+```
+
 
 Grafana displays the following:
 
@@ -155,14 +166,17 @@ docker plugin install grafana/loki-docker-driver:latest --alias loki --grant-all
 
 At this point, we can use it on our container app:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml">services:
+```yaml
+services:
   app:
     build: .
     logging:
       driver: loki                                                    #1
       options:
         loki-url: http://localhost:3100/loki/api/v1/push              #2
-        loki-external-labels: container_name={{.Name}},app=demo       #3</pre>
+        loki-external-labels: container_name={{.Name}},app=demo       #3
+```
+
 
 1. Loki logging driver
 2. URL to push to
@@ -192,6 +206,6 @@ Options are virtually unlimited. Be careful to choose the one that fits your con
 * [Push log entries to Loki via API](https://grafana.com/docs/loki/latest/api/#push-log-entries-to-loki)
 * [Loki Clients](https://grafana.com/docs/loki/latest/clients/)
 
-*** ** * ** ***
+
 
 *Originally published at [A Java Geek](https://blog.frankel.ch/logs-loki/) on August 27^th^, 2023*

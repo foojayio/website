@@ -73,7 +73,8 @@ That means we only have to move the particle with a given speed in x and y and c
 
 So here is the code for our ImageParticle:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic"> class ImageParticle {
+```
+ class ImageParticle {
     private final Random rnd = new Random();
     private final double velocityFactorX = 1.0;
     private final double velocityFactorY = 1.0;
@@ -126,7 +127,7 @@ So here is the code for our ImageParticle:
         y += vy;
 
         // Respawn particle if needed
-        if(y &lt; -image.getHeight()) {
+        if(y < -image.getHeight()) {
             if (active) { respawn(); }
         }
     }
@@ -136,7 +137,9 @@ So here is the code for our ImageParticle:
         y = height + image.getHeight();
         opacity = (rnd.nextDouble() * 0.6) + 0.4;
     }
-}</pre>
+}
+```
+
 
 As you can see it's not really complex. The most complex thing we have to do when creating this control is to convert the top hightlight of the button from our vector drawing code to Java code.
 
@@ -146,11 +149,14 @@ Here is a workflow that I use to transfer a path from a drawing program into cod
 
 It's just a simple triangle, 200px wide and 150px tall. Now I export this path to an SVG file that looks as follows:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">&lt;?xml version="1.0" encoding="UTF-8" standalone="no"?&gt;
-&lt;!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"&gt;
-&lt;svg width="100%" height="100%" viewBox="0 0 200 150" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;"&gt;
-    &lt;path d="M100,0L200,150L0,150L100,0Z" style="fill:#bd003d;"/&gt;
-&lt;/svg&gt;</pre>
+```
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="100%" height="100%" viewBox="0 0 200 150" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
+    <path d="M100,0L200,150L0,150L100,0Z" style="fill:#bd003d;"/>
+</svg>
+```
+
 
 The shape is defined in the element. Now I cope the string into a spreadsheet program like Excel or Numbers where I split the path string by comma and put each command in a separate line.  
 
@@ -174,7 +180,8 @@ So it makes sense to read more about the SVG standard and it's Path element [her
 
 So after the conversion is done our code for the triangle will look like follows:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">Canvas canvas = new Canvas(200, 150);
+```java
+Canvas canvas = new Canvas(200, 150);
 GraphicsContext ctx = canvas.getGrapicsContext2D();
 ...
 ctx.clearRect(0, 0, width, height);
@@ -185,20 +192,25 @@ ctx.lineTo(0 * width, 1 * height);)
 ctx.lineTo(0.5 * width, 0 * height);)
 ctx.closePath();
 ctx.setFill(Color.web("#BD003D"));
-ctx.fill();</pre>
+ctx.fill();
+```
+
 
 So with this code you can now draw our triangle dependent on the width and the height. Keep in mind that we did not take care about the aspect ratio here.
 
 Using this procedure to convert the top hightlight of our button will give us the following code:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">ctx.beginPath();
+```java
+ctx.beginPath();
          ctx.moveTo(width * 0.825886194029851, height * 0.0588235294117647);
          ctx.bezierCurveTo(width * 0.892958955223881, height * 0.0585176470588235, width * 0.92440671641791, height * 0.277141176470588, width * 0.887195895522388, height * 0.278105882352941);
          ctx.bezierCurveTo(width * 0.886925373134328, height * 0.278117647058824, width * 0.887389925373134, height * 0.276729411764706, width * 0.500067164179104, height * 0.282352941176471);
          ctx.bezierCurveTo(width * 0.500009328358209, height * 0.282352941176471, width * 0.113149253731343, height * 0.278117647058824, width * 0.112880597014925, height * 0.278105882352941);
          ctx.bezierCurveTo(width * 0.075669776119403, height * 0.277141176470588, width * 0.107117537313433, height * 0.0585176470588235, width * 0.174190298507463, height * 0.0588235294117647);
          ctx.lineTo(width * 0.825886194029851, height * 0.0588235294117647);
-         ctx.closePath();</pre>
+         ctx.closePath();
+```
+
 
 Now you might understand why I said this is the most complex thing we need to do when creating this control.
 
@@ -233,7 +245,10 @@ To use this we create a JavaFX Rectangle which is a Shape and give it the name c
 
 With the following line of code we can set this rectangle as a clip for the Canvas node:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">Java canvas.setClip(clip);</pre>
+```java
+Java canvas.setClip(clip);
+```
+
 
 Now we only have to make sure that the clipping rectangle always has the exact same shape as the rounded rectangle that represents our button. To achieve this we resize the clip shape every time the control will be resized.
 
@@ -249,9 +264,12 @@ So here is a screenshot of the Canvas based control that you will find in the gi
 
 Because the Control is based on a Region it doesn't have method to register a consumer for ActionEvents. So I simply added the following method to get the same behavior as a standard JavaFX button:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public void setOnAction(final Consumer&lt;ActionEvent&gt; actionConsumer)   { 
+```java
+public void setOnAction(final Consumer<ActionEvent> actionConsumer)   { 
     this.actionConsumer  = actionConsumer; 
-}</pre>
+}
+```
+
 
 ```
 
@@ -259,12 +277,15 @@ Because the Control is based on a Region it doesn't have method to register a co
 
 Now we just have to make sure that when our Control received an event of type MouseEvent.MOUSE_PRESSED we pass an ActionEvent to the actionConsumer. For this we register an EventFilter for the MouseEvent.MOUSE_PRESSED as follows:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">canvas.addEventFilter(MouseEvent.MOUSE_PRESSED, e -&gt; {
+```java
+canvas.addEventFilter(MouseEvent.MOUSE_PRESSED, e -> {
     pressed = true;
     redraw();
     if (null == actionConsumer) { return; }
     actionConsumer.accept(new ActionEvent());
-});</pre>
+});
+```
+
 
 ```
 

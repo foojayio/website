@@ -59,19 +59,25 @@ Migrating the project {#h2-2-migrating-the-project}
 
 The term migrating is a bit misleading here since we will start from scratch to fit Maturin's usage. However, we will achieve the same end state. I won't paraphrase [the tutorial](https://pyo3.rs/v0.20.0/#using-rust-from-python) since it works seamlessly. Ultimately, we have a fully functional Rust project with a single `sum_as_string()` function, which we can call in a Python shell. Note the dependency to `pyo3`:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="shell">pyo3 = "0.20.0"</pre>
+```bash
+pyo3 = "0.20.0"
+```
+
 
 The second step is to re-use the material from the previous project. First, we add our `compute()` function at the end of the `lib.rs` file:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="rust">#[pyfunction]                                                                            //1
-fn compute(command: &amp;str, a: Complex&lt;f64&gt;, b: Complex&lt;f64&gt;) -&gt; PyResult&lt;Complex&lt;f64&gt;&gt; {  //2-3
+```rust
+#[pyfunction]                                                                            //1
+fn compute(command: &str, a: Complex<f64>, b: Complex<f64>) -> PyResult<Complex<f64>> {  //2-3
     match command {
-        "add" =&gt; Ok(a + b),
-        "sub" =&gt; Ok(a - b),
-        "mul" =&gt; Ok(a * b),
-        _ =&gt; Err(PyValueError::new_err("Unknown command")),                              //4
+        "add" => Ok(a + b),
+        "sub" => Ok(a - b),
+        "mul" => Ok(a * b),
+        _ => Err(PyValueError::new_err("Unknown command")),                              //4
     }
-}</pre>
+}
+```
+
 
 1. The `pyfunction` macro allows the use of the function in Python
 2. Use regular Rust types for parameters; `pyo3` can convert them
@@ -80,58 +86,77 @@ fn compute(command: &amp;str, a: Complex&lt;f64&gt;, b: Complex&lt;f64&gt;) -&gt
 
 `pyo3` automatically handles conversion for most types. However, complex numbers require an additional feature. We also need to migrate from the `num` crate to the `num-complex`:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="ini">pyo3 = { version = "0.20.0" , features = ["num-complex"]}
-num-complex = "0.4.4"</pre>
+```ini
+pyo3 = { version = "0.20.0" , features = ["num-complex"]}
+num-complex = "0.4.4"
+```
+
 
 To convert custom types, you must implement traits `FromPyObject` for parameters and `ToPyObject` for return values.
 
 Finally, we only need to add the function to the module:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="rust">#[pymodule]
-fn rust_over_pyo3(_py: Python, m: &amp;PyModule) -&gt; PyResult&lt;()&gt; {
+```rust
+#[pymodule]
+fn rust_over_pyo3(_py: Python, m: &PyModule) -> PyResult<()> {
     m.add_function(wrap_pyfunction!(sum_as_string, m)?)?;
     m.add_function(wrap_pyfunction!(compute, m)?)?;              //1
     Ok(())
-}</pre>
+}
+```
+
 
 1. Add the function to the module
 
 At this point, we can use Maturin to test the project:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="shell">maturin develop</pre>
+```bash
+maturin develop
+```
+
 
 After the compilation finishes, we can start a Python shell in the virtual environment:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="shell">python
+```bash
+python
 
-&gt;&gt;&gt; from rust_over_pyo3 import compute
-&gt;&gt;&gt; compute('add',1+3j,-5j)
+>>> from rust_over_pyo3 import compute
+>>> compute('add',1+3j,-5j)
 (1-2j)
-&gt;&gt;&gt; compute('sub',1+3j,-5j)
-(1+8j)</pre>
+>>> compute('sub',1+3j,-5j)
+(1+8j)
+```
+
 
 Finishing touch {#h2-3-finishing-touch}
 ---------------------------------------
 
 The above setup allows us to use Rust from a Python shell but not in a Python file. To leverage the default, we must create a Python project inside the Rust project, whose name matches the Rust module name. Since I named my lib `rust_over_pyo3`, here's the overall structure:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="shell">my-project
+```bash
+my-project
 ├── Cargo.toml
 ├── rust_over_pyo3
 │   └── main.py
 ├── pyproject.toml
 └── src
-    └── lib.rs</pre>
+    └── lib.rs
+```
+
 
 To use the Rust library in Python, we need first to build the library.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="shell">maturin build --release</pre>
+```bash
+maturin build --release
+```
+
 
 We manually move the artifact from `/target/release/maturin/librust_over_pyo3.dylib` to `rust_over_pyo3.so` under the Python package. We can also run `cargo build --release` instead; in this case, the source file is directly under `/target/release`.
 
 At this point, we can use the library as any other Python module:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="python">from typing import Optional
+```python
+from typing import Optional
 from click import command, option
 
 from rust_over_pyo3 import compute                                                #1
@@ -142,14 +167,16 @@ from rust_over_pyo3 import compute                                              
 @option('--mul', 'command', flag_value='mul')
 @option('--arg1', help='First complex number in the form x+yj')
 @option('--arg2', help='Second complex number in the form x\'+y\'j')
-def cli(command: Optional[str], arg1: Optional[str], arg2: Optional[str]) -&gt; None:
+def cli(command: Optional[str], arg1: Optional[str], arg2: Optional[str]) -> None:
     n1: complex = complex(arg1)
     n2: complex = complex(arg2)
     result: complex = compute(command, n1, n2)                                    #2
     print(result)
 
 if __name__ == '__main__':
-    cli()</pre>
+    cli()
+```
+
 
 1. Regular Python import
 2. Look, ma, it works!
@@ -168,6 +195,6 @@ The complete source code for this post can be found on [GitHub](https://github.c
 * [PyO3 user guide](https://pyo3.rs/v0.20.0/)
 * [maturin](https://github.com/PyO3/maturin)
 
-*** ** * ** ***
+
 
 *Originally published at [A Java Geek](https://blog.frankel.ch/feedback-rust-from-python/) on October 29^th^, 2023*

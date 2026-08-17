@@ -142,7 +142,8 @@ Click **Generate** to download the project, then extract the archive and open it
 
 Once imported, your project structure should resemble the following:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">explore-exposed
+```yaml
+explore-exposed
 ├── src
 │   ├── main
 │   │   ├── kotlin
@@ -150,13 +151,18 @@ Once imported, your project structure should resemble the following:
 │   └── test
 ├── build.gradle.kts
 ├── settings.gradle.kts
-└── gradlew</pre>
+└── gradlew
+```
+
 
 ### **Step 4: Verify the Application** {#h3-11-step-4-verify-the-application}
 
 Run the application using Gradle:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">./gradlew bootRun</pre>
+```
+./gradlew bootRun
+```
+
 
 Or simply run the `ExploreExposedApplication.kt` class directly from your IDE.
 
@@ -168,13 +174,17 @@ Add the below exposed Spring Boot starter artifact to `build.gradle.kts` the scr
 
 <br />
 
-<pre class="EnlighterJSRAW" data-enlighter-language="json" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">dependencies {
+```json
+dependencies {
     implementation("org.jetbrains.exposed:exposed-spring-boot4-starter:1.3.1")
-}</pre>
+}
+```
+
 
 So final `build.gradle.kts` looks like this:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="json" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">plugins {
+```json
+plugins {
 	kotlin("jvm") version "2.3.21"
 	kotlin("plugin.spring") version "2.3.21"
 	id("org.springframework.boot") version "4.1.0"
@@ -220,16 +230,18 @@ kotlin {
 	}
 }
 
-tasks.withType&lt;Test&gt; {
+tasks.withType<Test> {
 	useJUnitPlatform()
 }
-</pre>
+```
+
 
 The **Exposed Spring Boot Starter** bundles the latest version of Exposed, the custom SpringTransactionManager from the **spring7-transaction** module, and the **Spring Boot Starter JDBC** dependency. This starter simplifies Exposed integration by providing the essential components out of the box.
 
 The **Exposed Spring Boot Starter** builds on top of `spring-boot-starter-jdbc`, so Spring Boot requires a configured data source. To establish a connection to the database, add the following properties to your `application.properties` file:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="powershell" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">spring.application.name=explore-exposed
+```powershell
+spring.application.name=explore-exposed
 spring.datasource.url=jdbc:h2:mem:testdb
 spring.datasource.driverClassName=org.h2.Driver
 spring.datasource.username=sa
@@ -240,7 +252,9 @@ spring.datasource.password=password
 spring.exposed.generate-ddl=true
 # To log the SQL statements generated and executed by Exposed, 
 # enable the `spring.exposed.show-sql` property in the `application.properties` file:
-spring.exposed.show-sql=true</pre>
+spring.exposed.show-sql=true
+```
+
 
 To enable Exposed's auto-configuration, import the Exposed auto-configuration class into your Spring Boot application. You can do this in one of the following ways:
 
@@ -253,14 +267,18 @@ I have followed Option 2, which is more modular.
 
 Since Exposed provides its own SpringTransactionManager, you need to explicitly enable Exposed's auto-configuration and disable Spring Boot's DataSourceTransactionManager auto-configuration. Otherwise, both transaction managers may be registered, leading to bean conflicts or unexpected transaction behavior.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@ImportAutoConfiguration(
+```java
+@ImportAutoConfiguration(
     value = [ExposedAutoConfiguration::class],
     exclude = [DataSourceTransactionManagerAutoConfiguration::class]
-)</pre>
+)
+```
+
 
 This configuration imports Exposed AutoConfiguration, which registers Exposed's infrastructure beans, including the custom ***SpringTransactionManager*** . At the same time, it excludes Spring Boot's default ***DataSourceTransactionManagerAutoConfiguration*** to ensure that Exposed exclusively manages database transactions.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">package com.courses.explore_exposed.config
+```java
+package com.courses.explore_exposed.config
 
 import org.jetbrains.exposed.v1.core.DatabaseConfig
 import org.jetbrains.exposed.v1.spring.boot4.autoconfigure.ExposedAutoConfiguration
@@ -279,13 +297,16 @@ class ExposedConfig {
     fun databaseConfig() = DatabaseConfig {
         useNestedTransactions = true
     }
-}</pre>
+}
+```
+
 
 ### Step 6: Create Course Table Entity {#h3-13-step-6-create-course-table-entity}
 
 We can create different datatypes with primary keys; we will use [LongIdTable](https://jetbrains.github.io/Exposed/api/exposed-core/org.jetbrains.exposed.v1.core.dao.id/-long-id-table/index.html){#https://jetbrains.github.io/Exposed/api/exposed-core/org.jetbrains.exposed.v1.core.dao.id/-long-id-table/index.html}. For more details, <https://jetbrains.github.io/Exposed/api/exposed-core/org.jetbrains.exposed.v1.core.dao.id/index.html>{#https://jetbrains.github.io/Exposed/api/exposed-core/org.jetbrains.exposed.v1.core.dao.id/index.html}
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">package com.courses.explore_exposed.model
+```java
+package com.courses.explore_exposed.model
 
 import org.jetbrains.exposed.v1.core.dao.id.LongIdTable
 
@@ -296,7 +317,9 @@ object CourseEntity : LongIdTable("courses") {
     val description = text("description")
 
     val published = bool("published")
-}</pre>
+}
+```
+
 
 ### Step 7: Understanding the Service Layer {#h3-14-step-7-understanding-the-service-layer}
 
@@ -304,13 +327,16 @@ The *CourseService* class holds all the business logic for CRUD operations on co
 
 Transactions, handled automatically
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">import org.springframework.stereotype.Service
+```java
+import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 
 @Service
 @Transactional
 class CourseService {
-}</pre>
+}
+```
+
 
 Putting ***@Transactional*** on the class means every public method automatically runs inside a database transaction. In practice:
 
@@ -348,9 +374,12 @@ Each of these reads almost like plain SQL but with full Kotlin type-checking---s
 
 The *CourseController* is where HTTP requests meet business logic. It's a bit unusual in that it does double duty---serving server-rendered HTML views (**Thymeleaf** ) *and* exposing JSON REST endpoints, all from the same class.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@Controller
+```java
+@Controller
 @RequestMapping("/courses")
-class CourseController(private val courseService: CourseService) {</pre>
+class CourseController(private val courseService: CourseService) {
+```
+
 
 Note this uses *@Controller* , not *@RestController.* That's intentional---most methods here return a **view name** (a string like *"index"* or *"redirect:/courses"*), which Spring resolves to an HTML template. A few methods explicitly wrap their response in ResponseEntity to return raw JSON instead. This lets one controller power both a traditional web UI and a small API.
 
@@ -371,9 +400,12 @@ These all follow the classic **Post/Redirect/Get** pattern: after a form submiss
 
 Since this project uses **Thymeleaf** as the templating engine, every string returned from a view-based method (like **"index", "add-course", "edit-course"**) maps directly to an HTML template---typically found at:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="powershell" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">src/main/resources/templates/index.html
+```powershell
+src/main/resources/templates/index.html
 src/main/resources/templates/add-course.html
-src/main/resources/templates/edit-course.html</pre>
+src/main/resources/templates/edit-course.html
+```
+
 
 Spring Boot's Thymeleaf auto-configuration takes care of resolving these automatically---no extra ViewResolver setup needed, as long as spring-boot-starter-thymeleaf is on the classpath.
 
@@ -381,9 +413,13 @@ Spring Boot's Thymeleaf auto-configuration takes care of resolving these automat
 
 Run the application using Gradle:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">./gradlew bootRun</pre>
+```
+./gradlew bootRun
+```
 
-<pre class="EnlighterJSRAW" data-enlighter-language="shell" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">  .   ____          _            __ _ _
+
+```bash
+  .   ____          _            __ _ _
  /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
 ( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
  \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
@@ -407,7 +443,8 @@ Run the application using Gradle:
 2026-07-05T14:08:50.708+05:30  INFO 7888 --- [explore-exposed] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
 2026-07-05T14:08:50.796+05:30  INFO 7888 --- [explore-exposed] [           main] o.j.e.v.s.boot4.DatabaseInitializer      : ddl [CREATE TABLE IF NOT EXISTS COURSES (ID BIGINT AUTO_INCREMENT PRIMARY KEY, TITLE VARCHAR(255) NOT NULL, DESCRIPTION TEXT NOT NULL, PUBLISHED BOOLEAN NOT NULL)]
 SQL: CREATE TABLE IF NOT EXISTS COURSES (ID BIGINT AUTO_INCREMENT PRIMARY KEY, TITLE VARCHAR(255) NOT NULL, DESCRIPTION TEXT NOT NULL, PUBLISHED BOOLEAN NOT NULL)
-</pre>
+```
+
 
 Run the following:
 
@@ -415,9 +452,12 @@ Run the following:
 
 To create a course, click on the **+AddCourse** button, and then the Add Course form will appear. fill the details and save it and observe the logs:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">SQL: SELECT COURSES.ID, COURSES.TITLE, COURSES.DESCRIPTION, COURSES.PUBLISHED FROM COURSES
+```
+SQL: SELECT COURSES.ID, COURSES.TITLE, COURSES.DESCRIPTION, COURSES.PUBLISHED FROM COURSES
 SQL: INSERT INTO COURSES (TITLE, DESCRIPTION, PUBLISHED) VALUES ('Learn Exposed', 'Exposed Kotlin SQL Library', TRUE)
-SQL: SELECT COURSES.ID, COURSES.TITLE, COURSES.DESCRIPTION, COURSES.PUBLISHED FROM COURSES</pre>
+SQL: SELECT COURSES.ID, COURSES.TITLE, COURSES.DESCRIPTION, COURSES.PUBLISHED FROM COURSES
+```
+
 
 ![Course management](Screenshot-2026-07-05-at-2.14.45-PM-1024x510.png) Course management
 

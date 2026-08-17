@@ -28,7 +28,8 @@ This architecture allows for managing load balancing and failover over similar n
 
 For example, here's how you can create a route balanced over two nodes in Apache APISIX:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash">curl http://localhost:9080/apisix/admin/routes/1 -H 'X-API-KEY: edd1c9f034335f136f87ad84b625c8f1' -X PUT -i -d '{
+```bash
+curl http://localhost:9080/apisix/admin/routes/1 -H 'X-API-KEY: edd1c9f034335f136f87ad84b625c8f1' -X PUT -i -d '{
   "uri": "/*",
   "upstream": {
     "type": "roundrobin",
@@ -37,7 +38,9 @@ For example, here's how you can create a route balanced over two nodes in Apache
       "192.168.0.2:80": 1            # 1
     }
   }
-}'</pre>
+}'
+```
+
 
 1. Every request has a 50/50 chance of being sent to either node
 
@@ -66,7 +69,8 @@ Setting up the environment {#h2-1-setting-up-the-environment}
 
 To ease my life and make it easier to reproduce the steps, I chose to use Docker and Docker Compose. Here's the sample that you're welcome to reuse **for development purposes**:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml">version: "3"
+```yaml
+version: "3"
 
 services:
   apisix:
@@ -89,7 +93,9 @@ services:
       ETCD_ADVERTISE_CLIENT_URLS: "http://0.0.0.0:2397"
       ETCD_LISTEN_CLIENT_URLS: "http://0.0.0.0:2397"
     ports:
-      - "2397:2397"                                                     # 6</pre>
+      - "2397:2397"                                                     # 6
+```
+
 
 1. Use the latest image at the time of this writing  
 
@@ -110,18 +116,24 @@ Let's imagine a YAML file that references the available nodes. An *ad hoc* proce
 
 Here's the proposed structure:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml">nodes:
+```yaml
+nodes:
   "192.168.1.62:81": 1
-#END</pre>
+#END
+```
+
 
 Developing the discovery service client {#h2-3-developing-the-discovery-service-client}
 ---------------------------------------------------------------------------------------
 
 To create a discovery client, the following structure is required:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">yaml                             # 1
+```
+yaml                             # 1
   |_ schema.lua                  # 2
-  |_ init.lua                    # 3</pre>
+  |_ init.lua                    # 3
+```
+
 
 1. Give it a name; `yaml` is as good as any other  
 
@@ -133,7 +145,8 @@ For Apache APISIX to use the client, you need to set the `yaml` folder as a chil
 
 The client needs to follow a specific structure.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="lua">local _M = {}
+```lua
+local _M = {}
 
 -- Initialize the client
 function _M.init_worker()
@@ -151,15 +164,20 @@ end
 --
 -- @return Debugging information
 function dump_data()
-end</pre>
+end
+```
+
 
 Let's start with the easy part:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="lua">local nodes
+```lua
+local nodes
 
 function _M.nodes(service_name)
   return nodes                         -- 1
-end</pre>
+end
+```
+
 
 1. Return the `nodes` table. We fill the nodes in the `_M.init()` function
 
@@ -168,13 +186,16 @@ We want the client to read the YAML file regularly. For this, we can leverage th
 * [`ngx.timer.at`](https://github.com/openresty/lua-nginx-module#ngxtimerat) to call a function after an initial delay
 * [`ngx.timer.every`](https://github.com/openresty/lua-nginx-module#ngxtimerevery) to call a function repeatedly at regular intervals
 
-<pre class="EnlighterJSRAW" data-enlighter-language="lua">local ngx_timer_at    = ngx.timer.at
+```lua
+local ngx_timer_at    = ngx.timer.at
 local ngx_timer_every = ngx.timer.every
 
 function _M.init_worker()
     ngx_timer_at(0, read_file)                 -- 1
     ngx_timer_every(20, read_file)             -- 2
-end</pre>
+end
+```
+
 
 1. Call the `read_file` function immediately  
 
@@ -182,7 +203,8 @@ end</pre>
 
 Now is time to write the `read_file` function.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="lua">local util = require("apisix.cli.util")                                   -- 1
+```lua
+local util = require("apisix.cli.util")                                   -- 1
 local yaml = require("tinyyaml")                                          -- 2
 
 local function read_file()
@@ -209,7 +231,9 @@ local function read_file()
         }                                                                 -- 7
         table.insert(nodes, node)                                         -- 8
     end
-end</pre>
+end
+```
+
 
 1. Import the library to read file  
 
@@ -237,22 +261,28 @@ I used the default Apache web server available on my Mac to test the code.
 * I noted the IP of my machine, which is available from Docker containers
 * I updated the configuration file: 
 
-<pre class="EnlighterJSRAW" data-enlighter-language="lua">nodes:
+```lua
+nodes:
   "192.168.1.62:81": 1
-#END</pre>
+#END
+```
+
 
 * I started the Docker Compose containers - `docker compose up`
 
 At this point, I used the admin API to create a route with the new YAML service discovery client:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash">curl http://127.0.0.1:9080/apisix/admin/routes/1 -H 'X-API-KEY: edd1c9f034335f136f87ad84b625c8f1' -X PUT -i -d '{
+```bash
+curl http://127.0.0.1:9080/apisix/admin/routes/1 -H 'X-API-KEY: edd1c9f034335f136f87ad84b625c8f1' -X PUT -i -d '{
   "uri": "/",
   "upstream": {
     "service_name": "MY-YAML",              # 1
     "type": "roundrobin",
     "discovery_type": "yaml"                # 2-3
   }
-}'</pre>
+}'
+```
+
 
 1. Matches the `service_name` parameter in the `_M.nodes(service_name)` function. It potentially allows returning different nodes based on it. We didn't use it here, so anything works.  
 
@@ -262,11 +292,17 @@ At this point, I used the admin API to create a route with the new YAML service 
 
 Let's test it:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">curl localhost:9080</pre>
+```
+curl localhost:9080
+```
+
 
 It returns the root page served by the Apache Server as expected:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">&lt;html&gt;&lt;body&gt;&lt;h1&gt;It works!&lt;/h1&gt;&lt;/body&gt;&lt;/html&gt;</pre>
+```
+<html><body><h1>It works!</h1></body></html>
+```
+
 
 Nitpicking {#h2-5-nitpicking}
 -----------------------------
@@ -277,14 +313,17 @@ While the above code works as expected, we can improve it.
 
 Relevant logging can help your future self solve nasty bugs in production.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="lua">local core = require("apisix.core")
+```lua
+local core = require("apisix.core")
 
 local function read_file(premature)
     local content, err = util.read_file("/var/apisix/nodes.yaml")
     if not content then
         log.error("Unable to open YAML discovery configuration file: ", err)    -- 1
         return
-    end</pre>
+    end
+```
+
 
 1. Trace the error
 
@@ -292,26 +331,32 @@ local function read_file(premature)
 
 So far, we didn't use any parameters. The configuration file path and the fetch interval are hard-coded. We can do better by making them configurable.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="lua">return {
+```lua
+return {
     type = "object",
     properties = {
         path = { type = "string", default = "/var/apisix/nodes.yaml" },    -- 1
         fetch_interval = { type = "integer", minimum = 1, default = 30 },  -- 1
     },
-}</pre>
+}
+```
+
 
 1. Parameters with their type and default value. None of them are mandatory.
 
 On the code side, we can use them accordingly.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="lua">local core       = require("apisix.core")
+```lua
+local core       = require("apisix.core")
 local local_conf = require("apisix.core.config_local").local_conf()
 
 function _M.init_worker()
     local fetch_interval = local_conf.discovery and
                            local_conf.discovery.yaml and
                            local_conf.discovery.yaml.fetch_interval
-    ngx_timer_every(fetch_interval, read_file)</pre>
+    ngx_timer_every(fetch_interval, read_file)
+```
+
 
 ### Premature {#h3-8-premature}
 
@@ -320,11 +365,14 @@ Finally, the `ngx.timer.every` API calls our function with a dedicated `prematur
 
 Let's be a good citizen-developer and handle the parameter accordingly:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="lua">local function read_file(premature)
+```lua
+local function read_file(premature)
     if premature then
         return
     end
-end</pre>
+end
+```
+
 
 Conclusion {#h2-9-conclusion}
 -----------------------------

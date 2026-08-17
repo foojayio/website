@@ -123,19 +123,29 @@ It is important to note that there are some difficulties with using Paketo build
 
 **Step 3:** Our example uses the Open Liberty getting started application as the application source, which, you'll need to download.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">git clone https://github.com/openliberty/guide-getting-started.git</pre>
+```
+git clone https://github.com/openliberty/guide-getting-started.git
+```
+
 
 Then, change directories to the finish directory.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">cd guide-getting-started/finish</pre>
+```
+cd guide-getting-started/finish
+```
+
 
 **Step 4:** Now, you'll need to set a builder. In this case, we're using the Ubuntu jammy-based builder.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">pack config default-builder paketobuildpacks/builder-jammy-base</pre>
+```
+pack config default-builder paketobuildpacks/builder-jammy-base
+```
+
 
 **Step 5:** Next, you need to create a *project.toml* file in the *finish* directory with the following content.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">[[build.env]]
+```
+[[build.env]]
     name = "BP_JAVA_APP_SERVER"
     value = "liberty"
 [[build.env]]
@@ -144,22 +154,33 @@ Then, change directories to the finish directory.
 [[build.buildpacks]]
   uri = "docker://gcr.io/paketo-buildpacks/eclipse-openj9"
 [[build.buildpacks]]
-  uri = "docker://gcr.io/paketo-buildpacks/java"</pre>
+  uri = "docker://gcr.io/paketo-buildpacks/java"
+```
+
 
 **Step 6:** Finally, we're going to build the application on Liberty with IBM Semeru OpenJ9 and required Liberty features.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">pack build myapp</pre>
+```
+pack build myapp
+```
+
 
 Your application is now transformed into an OCI image! With your OCI image, you can run your application locally with the following docker run command.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">docker run --rm -p 9080:9080 myapp</pre>
+```
+docker run --rm -p 9080:9080 myapp
+```
+
 
 Or, you can deploy your application to any Kubernetes-based platform, such as [Red Hat OpenShift](https://www.redhat.com/en/technologies/cloud-computing/openshift "Red Hat OpenShift"), by using an [Open Liberty operator](https://github.com/OpenLiberty/open-liberty-operator "Open Liberty operator").
 
 If you'd like to be able to view the SBOM information, which is one of the advantages of using buildpacks, use the following commands and open the file in an IDE of your choosing.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">pack sbom download myapp --output-dir /tmp/demo-app-sbom
-find /tmp/demo-app-sbom/layers/sbom -name "*.json"</pre>
+```
+pack sbom download myapp --output-dir /tmp/demo-app-sbom
+find /tmp/demo-app-sbom/layers/sbom -name "*.json"
+```
+
 
 Summary and next steps {#h2-7-summary-and-next-steps}
 -----------------------------------------------------

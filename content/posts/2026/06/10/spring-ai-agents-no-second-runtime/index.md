@@ -41,7 +41,7 @@ For most Spring teams, the challenge is not infrastructure. They already have se
 
 What is missing is not a new platform. It is a runtime that connects agent execution directly to the operational capabilities Spring teams already use every day.
 
-*** ** * ** ***
+
 
 What agents actually need in production {#h2-0-what-agents-actually-need-in-production}
 ---------------------------------------------------------------------------------------
@@ -59,7 +59,7 @@ Most agent runtimes introduce their own operational model for these concerns. A 
 
 What is missing is a runtime that connects those existing capabilities directly to agent execution.
 
-*** ** * ** ***
+
 
 What Spring already gives you {#h2-1-what-spring-already-gives-you}
 -------------------------------------------------------------------
@@ -82,7 +82,7 @@ What Spring already gives you {#h2-1-what-spring-already-gives-you}
 
 None of this requires a second operational stack. What it requires is a runtime that can build, govern and operate agents using the capabilities Spring teams already have.
 
-*** ** * ** ***
+
 
 BUILD: Create agent teams {#h2-2-build-create-agent-teams}
 ----------------------------------------------------------
@@ -91,7 +91,8 @@ BUILD: Create agent teams {#h2-2-build-create-agent-teams}
 
 An `ExecutorAgent` is a Spring bean backed by a `ChatClient`. A `CoordinatorAgent` routes tasks to the right specialist. A `ParallelAgent` fans out to multiple agents and aggregates results. An `AgentGraph` wires them together with explicit nodes and edges.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">// Three specialized agents
+```
+// Three specialized agents
 Agent triage     = ExecutorAgent.builder()
     .chatClient(chatClient)
     .systemPrompt("Classify this support request: billing, technical, or other.")
@@ -118,18 +119,21 @@ AgentGraph graph = AgentGraph.builder()
     .addNode("triage",      triage)
     .addNode("coordinator", coordinator)
     .addEdge("triage",      "coordinator")
-    .build();</pre>
+    .build();
+```
+
 
 Three agents, dynamic routing, typed state shared across nodes. Each agent is a standard Spring bean.
 
-*** ** * ** ***
+
 
 GOVERN: Budget, approvals, permissions, checkpoints {#h2-3-govern-budget-approvals-permissions-checkpoints}
 -----------------------------------------------------------------------------------------------------------
 
 Agents are not implicitly trusted. AgentFlow4J lets you define exactly what each agent can call, what it can spend, when a human must approve, and how execution state is preserved across restarts.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">AgentGraph graph = AgentGraph.builder()
+```
+AgentGraph graph = AgentGraph.builder()
     .addNode("analyse",  analyst)
     .addNode("process",  processor)
     .addEdge("analyse",  "process")
@@ -141,11 +145,13 @@ Agents are not implicitly trusted. AgentFlow4J lets you define exactly what each
     .approvalGate(ApprovalGate.requireFor("process"))
     // checkpoint after every node on the existing datasource
     .checkpointStore(new JdbcCheckpointStore(dataSource))
-    .build();</pre>
+    .build();
+```
+
 
 The `processor` agent cannot run until a human approves. The graph cannot spend more than $0.50 per run. If the server restarts mid-execution, the next run picks up from the last completed node. No Python. No YAML DSL. No new infrastructure. The datasource is the one your Spring Boot application already configures.
 
-*** ** * ** ***
+
 
 OPERATE: Observe, recover and run safely {#h2-4-operate-observe-recover-and-run-safely}
 ---------------------------------------------------------------------------------------
@@ -156,11 +162,14 @@ One common failure mode: a retry policy that cannot tell the difference between 
 
 AgentFlow4J's `FailureClassifier` solves this with three outcomes:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">RetryPolicy policy = RetryPolicy.exponential(3, Duration.ofSeconds(2))
+```
+RetryPolicy policy = RetryPolicy.exponential(3, Duration.ofSeconds(2))
     .withClassifier(FailureClassifier.defaults()
-        .orElse((ex, ctx) -&gt; ex instanceof BudgetExceededException
+        .orElse((ex, ctx) -> ex instanceof BudgetExceededException
             ? FailureClassification.OVER_BUDGET
-            : FailureClassification.TRANSIENT));</pre>
+            : FailureClassification.TRANSIENT));
+```
+
 
 `TRANSIENT` means retry. `PERMANENT` means fail fast. `OVER_BUDGET` means route to a cheaper fallback agent instead of retrying. The retry policy is no longer blind to cost.
 
@@ -172,7 +181,7 @@ Operational sovereignty is not only about where models run. It is also about how
 
 A JVM-native agent runtime lets organizations build governed agent systems without introducing a second execution platform. Spring AI supports Ollama for local inference, so the agent layer does not need to reach outside the perimeter. The security controls, observability stack, and deployment model already in place stay as the single source of operational truth.
 
-*** ** * ** ***
+
 
 One stack, one runtime {#h2-7-one-stack-one-runtime}
 ----------------------------------------------------
@@ -191,25 +200,28 @@ If your organization already runs on Spring, the goal is not to introduce anothe
 
 If you are an architect or open-source contributor interested in what a production-grade JVM agent runtime looks like at the language level, the governance model, the checkpoint contract, the failure classification API, that conversation lives on [GitHub](https://github.com/datallmhub/agentflow4j).
 
-*** ** * ** ***
+
 
 Getting started {#h2-8-getting-started}
 ---------------------------------------
 
 AgentFlow4J is available on JitPack, built on Java 17+ and Spring AI 1.0:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&lt;repositories&gt;
-    &lt;repository&gt;
-        &lt;id&gt;jitpack.io&lt;/id&gt;
-        &lt;url&gt;https://jitpack.io&lt;/url&gt;
-    &lt;/repository&gt;
-&lt;/repositories&gt;
+```
+<repositories>
+    <repository>
+        <id>jitpack.io</id>
+        <url>https://jitpack.io</url>
+    </repository>
+</repositories>
 
-&lt;dependency&gt;
-    &lt;groupId&gt;com.github.datallmhub.agentflow4j&lt;/groupId&gt;
-    &lt;artifactId&gt;agentflow4j-starter&lt;/artifactId&gt;
-    &lt;version&gt;v0.7.0&lt;/version&gt;
-&lt;/dependency&gt;</pre>
+<dependency>
+    <groupId>com.github.datallmhub.agentflow4j</groupId>
+    <artifactId>agentflow4j-starter</artifactId>
+    <version>v0.7.0</version>
+</dependency>
+```
+
 
 * **[GitHub](https://github.com/datallmhub/agentflow4j)**: source, docs, samples
 * **[Cookbook](https://github.com/datallmhub/agentflow4j-cookbook)**: six self-contained Maven recipes: RAG, ticket triage, web research, Slack bot, batch processing, cost-aware routing

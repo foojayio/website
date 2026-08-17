@@ -43,7 +43,8 @@ A GC root is a pointer that is external to the memory pool being collected and p
 
 For completeness, an internal pointer is one that exists completely internal to a memory pool. Figure 1 visualizes an external and internal pointer.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">         ┌─────┐
+```
+         ┌─────┐
          │ foo │
          └─────┘
             │           pool A
@@ -56,11 +57,14 @@ For completeness, an internal pointer is one that exists completely internal to 
          │ bar │──────────────▶│ baz │
          └─────┘               └─────┘
 
-            Figure 1. External vs internal pointer</pre>
+            Figure 1. External vs internal pointer
+```
+
 
 While GC roots are found in a number of JVM data structures, the data structure of interest in this instance is the Java stack. Let's take a deeper dive into how Java stacks function to understand their role in object liveness. Here is some code to consider.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public class StackExample {
+```
+public class StackExample {
     static void main(String[] args) {
         var stackExample = new StackExample();
         stackExample.runit(args);
@@ -79,13 +83,15 @@ While GC roots are found in a number of JVM data structures, the data structure 
 }
 
             Listing 1. Sample code used to explore the Stack for the main thread.
-</pre>
+```
+
 
 In the JVM, stacks are per-thread and private. In contrast, data in Java heap is shared by every thread. As the JVM's main thread executes the code above, it will push a stackframe onto the stack for each method call.
 
 The stackframe will hold the parameters passed to the method, all of the local variables and the return value. Only Java primitive values or references are pushed onto the stack
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">Thread - main stack — main() is the only frame (bottom of the stack)
+```
+Thread - main stack — main() is the only frame (bottom of the stack)
 
 ┌─ main() ────────────────────────────┐
 │ return address:  JVM launcher       │   ← where main() resumes; the launcher is native
@@ -96,7 +102,9 @@ The stackframe will hold the parameters passed to the method, all of the local v
 │ (empty)      │           │          │   ← working stack space
 └──────────────┴───────────┴──────────┘
 
-            Figure 2. Stack with initial Stack Frame</pre>
+            Figure 2. Stack with initial Stack Frame
+```
+
 
 The stack above contains a single stack frame. Within the frame are a local variables array and an operand stack; each slot, in either one, holds a Java primitive value or a reference.
 
@@ -104,7 +112,8 @@ A reference is a pointer to an array or object on the Java heap that can be pass
 
 As the code is executed, new StackExample() will get executed. Prior to the assignment to stackExample, the reference to the new instance will live on the operands stack. It is imperative to not lose references by keeping them in the stack at all times, even if the reference is duplicated.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">Thread - main stack — call1() return value is pushed to the operands stack 
+```
+Thread - main stack — call1() return value is pushed to the operands stack 
 
 ┌─ call1() ───────────────────────────────┐
 │ return address:  runit()                │
@@ -133,7 +142,9 @@ As the code is executed, new StackExample() will get executed. Prior to the assi
 ├─ operands ───┼───────────┼──────────────┤
 │ (empty)      │           │              │
 └──────────────┴───────────┴──────────────┘
-            Figure 3. Stack with Stack Frame for each call</pre>
+            Figure 3. Stack with Stack Frame for each call
+```
+
 
 In Figure 3 we can see the state of the stack for the call chain main() -\> runit() -\> call1(). All of the code has been executed in call1 and the return value, reference to output, has been pushed onto the operand stack.
 
@@ -169,7 +180,8 @@ Consequently, the garbage collector will reach all of the zombie nodes in the nu
 
 One last point, the nodes are all pointing to another object and it is generally that object that consumes a great deal of memory issues as the node it's self is a thin wrapper that doesn't consume much memory.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">  ┌─ LinkedList ─┐
+```
+  ┌─ LinkedList ─┐
   │ first        ┤────────────────────────────────────┐
   │ size = 3     │                                    │
   └──────────────┘                                    │
@@ -180,7 +192,9 @@ One last point, the nodes are all pointing to another object and it is generally
   └──────┘    └──────┘ ┆  └──────┘    └──────┘    └──────┘    └──────┘    └──────┘
     dead        dead   ┆   zombie      zombie       live        live        live
 
-            Figure 4. LinkedList Nepotism</pre>
+            Figure 4. LinkedList Nepotism
+```
+
 
 ### Conclusion {#h3-4-conclusion}
 

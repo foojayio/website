@@ -54,7 +54,8 @@ The AsyncGetCallTrace API, used by async-profiler and others, has just one test 
 
 This test case can be boiled down to the following:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">import java.lang.reflect.InvocationTargetException;
+```java
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 public class Main {
@@ -62,7 +63,7 @@ public class Main {
     static { /** load native library */ }
 
     public static void main(String[] args) throws Exception {
-        Class&lt;?&gt; klass = Main.class;
+        Class<?> klass = Main.class;
         Method mainMethod = klass.getMethod("main");
         mainMethod.invoke(null);
     }
@@ -74,7 +75,9 @@ public class Main {
     }
 
     public static native boolean checkAsyncGetCallTraceCall();
-}</pre>
+}
+```
+
 
 This is the simplest test case that can be written in the OpenJDK JTREG test framework for OpenJDK. The problem with this test case? The implementation of checkAsyncGetCallTraceCall only checks for the topmost frame.
 
@@ -82,7 +85,8 @@ To test AsyncGetCallTrace correctly here, one should compare the trace returned 
 
 GetStackTrace returns something like the following:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">Frame 0: Main.checkAsyncGetStackTraceCall
+```java
+Frame 0: Main.checkAsyncGetStackTraceCall
 Frame 1: Main.test
 Frame 2: java.lang.invoke.LambdaForm$DMH.[...].invokeStatic
 Frame 3: java.lang.invoke.LambdaForm$MH.[...].invoke
@@ -91,20 +95,26 @@ Frame 5: jdk.internal.reflect.DirectMethodHandleAccessor
                              .invokeImpl
 Frame 6: jdk.internal.reflect.DirectMethodHandleAccessor.invoke
 Frame 7: java.lang.reflect.Method.invoke
-Frame 8: Main.main</pre>
+Frame 8: Main.main
+```
+
 
 AsyncGetCallTrace, on the other hand, had problems walking over some of the reflection internals and returned:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">Frame 0: Main.checkAsyncGetStackTraceCall
+```java
+Frame 0: Main.checkAsyncGetStackTraceCall
 Frame 1: Main.test
-Frame 2: java.lang.invoke.LambdaForm$DMH.[...].invokeStatic</pre>
+Frame 2: java.lang.invoke.LambdaForm$DMH.[...].invokeStatic
+```
+
 
 This problem can be observed with a [modified test case](https://gist.github.com/parttimenerd/502251b67d3e42baad17419442a72c39) with JFR and async-profiler too:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public class Main {
+```java
+public class Main {
 
     public static void main(String[] args) throws Exception {
-        Class&lt;?&gt; klass = Main.class;
+        Class<?> klass = Main.class;
         Method mainMethod = klass.getMethod("test");
         mainMethod.invoke(null);
     }
@@ -115,9 +125,11 @@ This problem can be observed with a [modified test case](https://gist.github.com
 
     public static void javaLoop() {
         long start = System.currentTimeMillis();
-        while (start + 3000 &gt; System.currentTimeMillis());
+        while (start + 3000 > System.currentTimeMillis());
     }
-}</pre>
+}
+```
+
 
 ![](https://mostlynerdless.de/wp-content/uploads/2023/02/frame_problem.png) The expected flame graph is on the left (obtained after fixing the bug), and the actual flame graph is on the right.
 

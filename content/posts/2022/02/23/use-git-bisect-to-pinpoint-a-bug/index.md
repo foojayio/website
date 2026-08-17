@@ -53,15 +53,21 @@ And so on, so forth...
 
 You start the "game" by telling the tool the "good" and the "bad" point that you know:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">git bisect start
+```
+git bisect start
 git bisect bad           # no argument, so current revision
-git bisect good cecedd34 # could also be a tag</pre>
+git bisect good cecedd34 # could also be a tag
+```
+
 
 Every time you answer that question, `git bisect` can cross out either half of the history between the last two points that you've checked:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">git bisect good          # this commit is fine, it doesn't have the bug
+```
+git bisect good          # this commit is fine, it doesn't have the bug
 git bisect bad           # this commit is bad, it does have the bug
-git bisect skip          # this commit cannot be tested for the bug</pre>
+git bisect skip          # this commit cannot be tested for the bug
+```
+
 
 After each question that you answer, git checks out another revision, somewhere halfway between the last "good" and the last "bad" commit. With every iteration, this reduces the search space (the number of commits to consider) with 50%.
 
@@ -96,7 +102,8 @@ I've made a script that first builds the selected Git revision of Maven. Since t
 
 The script looks like this:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic"># This is the Maven source clone that I
+```
+# This is the Maven source clone that I
 # use to run bisect.
 export MAVENCODEBASE="/Users/maarten/Code/open-source/maven/maven"
 
@@ -135,12 +142,17 @@ rm -Rf $tmp_dir
 
 # Tell git bisect about the quality of this build.
 echo "Exiting with status '$status'"
-exit $status</pre>
+exit $status
+```
+
 
 Since the bug was not present in the last release of Maven, the last "good" commit is the **maven-3.6.3** tag. And because I don't know when it started failing, I use **HEAD** for the first "bad" commit.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">git bisect start HEAD maven-3.6.3 --
-git bisect run ../can-build-master.sh</pre>
+```
+git bisect start HEAD maven-3.6.3 --
+git bisect run ../can-build-master.sh
+```
+
 
 After a couple of minutes and a lot of noise from my computer, I get the same output:
 > 9f88494b6064ad45ea2e2e1e3478afc7af0bc065 is the first bad commit

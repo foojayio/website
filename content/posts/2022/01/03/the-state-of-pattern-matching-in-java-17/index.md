@@ -88,7 +88,8 @@ From Java 16 onwards, we can do pattern matching using the `instanceof` operator
 
 Here we can see pattern matching using the `instanceof` operator in action. A type and a variable name follow the operator, and we can access the variable without further casting.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">// Before
+```java
+// Before
 
 if (obj instanceof String) {
    String s = (String) obj;
@@ -100,29 +101,35 @@ if (obj instanceof String) {
 if (obj instanceof String s) {
    // Let pattern matching do the work!
    System.out.println(s.length());
-}</pre>
+}
+```
+
 
 We can also use pattern matching as a type guard in returns and variable assignments. See how concise the code is when we do the return using a type guard instead of casting the type.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">// Before
+```java
+// Before
 public boolean equals(Object o) {
    if (!(o instanceof Point))
        return false;
    Point other = (Point) o;
    return x == other.x
-       &amp;&amp; y == other.y;
+       && y == other.y;
 }
 
 // After
 public boolean equals(Object o) {
    return (o instanceof Point other)
-       &amp;&amp; x == other.x
-       &amp;&amp; y == other.y;
-}</pre>
+       && x == other.x
+       && y == other.y;
+}
+```
+
 
 Here is a variable assignment using a type guard. Again the code is much nicer with pattern matching.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">// Before
+```java
+// Before
 
 var x = o instanceof Point ? ((Point)o).x : 0;
 System.out.println(x);
@@ -130,11 +137,14 @@ System.out.println(x);
 // After
 
 var x = o instanceof Point p ? p.x : 0;
-System.out.println(x);</pre>
+System.out.println(x);
+```
+
 
 For a realistic use case, we could do something like below, when we want to do different logic based on the type, using the `instanceof` operator. But that's a lot of if-else and cognitive load.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">static String formatter(Object o) {
+```java
+static String formatter(Object o) {
    String formatted = "unknown";
    if (o instanceof Integer i) {
        formatted = String.format("int %d", i);
@@ -146,7 +156,9 @@ For a realistic use case, we could do something like below, when we want to do d
        formatted = String.format("String %s", s);
    }
    return formatted;
-}</pre>
+}
+```
+
 
 ### Pattern Matching for switch {#h3-4-pattern-matching-for-switch}
 
@@ -154,15 +166,18 @@ But with the new preview feature in Java 17, we can do pattern matching for data
 
 This will let us rewrite the previous code using a switch expression like below. As you can see, this is also a new syntax. And it's similar to the one added to the `instanceof` operator.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">static String formatter(Object o) {
+```java
+static String formatter(Object o) {
    return switch (o) {
-       case Integer i -&gt; String.format("int %d", i);
-       case Long l    -&gt; String.format("long %d", l);
-       case Double d  -&gt; String.format("double %f", d);
-       case String s  -&gt; String.format("String %s", s);
-       default        -&gt; o.toString();
+       case Integer i -> String.format("int %d", i);
+       case Long l    -> String.format("long %d", l);
+       case Double d  -> String.format("double %f", d);
+       case String s  -> String.format("String %s", s);
+       default        -> o.toString();
    };
-}</pre>
+}
+```
+
 
 This has Reduced cognitive complexity, and the syntax is closer to most other languages with pattern matching. With this, the compiler can warn us when pattern dominance occurs, as generic types should always come after specific types.
 
@@ -170,12 +185,13 @@ Since this is a preview feature, the syntax might change in future versions. I h
 
 We can also do null checks in these switch cases, which makes pattern matching more useful in the case of Java.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">static String formatter(Object o) {
+```java
+static String formatter(Object o) {
    return switch (o) {
-       case null      -&gt; "Oops";
+       case null      -> "Oops";
        ...
-       case String s  -&gt; String.format("String %s", s);
-       default        -&gt; o.toString();
+       case String s  -> String.format("String %s", s);
+       default        -> o.toString();
    };
 }
 
@@ -184,17 +200,20 @@ We can also do null checks in these switch cases, which makes pattern matching m
 static String formatter(Object o) {
    return switch (o) {
        ...
-       case String s       -&gt; String.format("String %s", s);
-       case null, default  -&gt; "Oops";
+       case String s       -> String.format("String %s", s);
+       case null, default  -> "Oops";
    };
-}</pre>
+}
+```
+
 
 ### Type Guards \& pattern refinement {#h3-5-type-guards-pattern-refinement}
 
 As we saw earlier, Type guards are already supported for `instanceof` operator from Java 16 onwards, and Java 17 preview adds that for switch cases as well. This means we can rely on the type guards to refine the patterns further to have conditions, relations, and value checks.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">static void test(Object o) {
-   if ((o instanceof String s) &amp;&amp; s.length() &gt; 3) {
+```java
+static void test(Object o) {
+   if ((o instanceof String s) && s.length() > 3) {
        System.out.println(s);
    } else {
        System.out.println("Not a string");
@@ -205,11 +224,13 @@ As we saw earlier, Type guards are already supported for `instanceof` operator f
 
 static void test(Object o) {
    switch (o) {
-       case String s &amp;&amp; (s.length() &gt; 3)  -&gt; System.out.println(s);
-       case String s                      -&gt; System.out.println("Invalid string");
-       default                            -&gt; System.out.println("Not a string");
+       case String s && (s.length() > 3)  -> System.out.println(s);
+       case String s                      -> System.out.println("Invalid string");
+       default                            -> System.out.println("Not a string");
    }
-}</pre>
+}
+```
+
 
 While it's not as flexible as in Rust or OCaml, it's a good start, in my opinion.
 
@@ -223,7 +244,8 @@ A sealed class lets you control which class can extend it. The same applies to s
 
 Permitted classes can be defined either as simple inner classes or in separate class files using the new `permits` keyword.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public abstract sealed class Shape
+```java
+public abstract sealed class Shape
   permits Circle, Rectangle, Square { ... }
 
 // Or
@@ -232,7 +254,9 @@ public abstract sealed class Shape {
   final class Circle extends Shape { ... }
   final class Square extends Shape { ... }
   final class Rectangle extends Shape { ... }
-}</pre>
+}
+```
+
 
 A sealed class imposes three constraints on its permitted sub-classes.
 
@@ -253,7 +277,8 @@ Here is how it would look in practice. Sealed classes can also be used with Reco
 
 `WeirdShape` is declared as non-sealed and hence can be extended by any other class or record. Here the class hierarchy is wide open, and subclasses of a `WeirdClass` do not have to follow the rules of a sealed class. All instances of subclasses of `WeirdShape` will also be an instance of `WeirdShape,` and hence any code that checks for exhaustiveness of subtypes of `Shape` will still be valid.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public sealed interface Shape
+```java
+public sealed interface Shape
    permits Circle, Rectangle, Square, WeirdShape { ... }
 
 public record Circle(int r) implements Shape { ... }
@@ -263,7 +288,8 @@ public sealed class Rectangle implements Shape
    permits TransparentRectangle, FilledRectangle { ... }
 
 public non-sealed class WeirdShape implements Shape { ... }
-</pre>
+```
+
 
 A sealed class can be abstract and can have abstract members, and similarly, sealed interfaces can have default implementations and so on. But abstract subclasses should be sealed or non-sealed and not final.
 
@@ -278,22 +304,25 @@ But with sealed classes, the compiler knows exactly what the expected variants a
 
 See this example; if we use the same sealed classes we saw earlier in the first sample, we will get a compile-time error as we are not checking all variants of `Shape`, and there is no default case. In the second example, however, there is no error even without a default case as the compiler knows all possible variants of `Shape` have been accounted for. If we remove the `sealed` keyword for `Shape`, then the second sample will have the same error as there is no default case, and the compiler doesn't know about all variants of `Shape`.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">Shape rotate(Shape shape, double angle) {
+```java
+Shape rotate(Shape shape, double angle) {
    return switch (shape) {   // this will be 'switch' expression does not cover all possible input values error
-       case Circle c    -&gt; c;
-       case Square s    -&gt; shape.rotate(angle);
+       case Circle c    -> c;
+       case Square s    -> shape.rotate(angle);
    };
 }
 
 Shape rotate(Shape shape, double angle) {
    return switch (shape) {
-       case Circle c     -&gt; c;
-       case Rectangle r  -&gt; shape.rotate(angle);
-       case Square s     -&gt; shape.rotate(angle);
-       case WeirdShape w -&gt; shape.rotate(angle); // still exhaustive
+       case Circle c     -> c;
+       case Rectangle r  -> shape.rotate(angle);
+       case Square s     -> shape.rotate(angle);
+       case WeirdShape w -> shape.rotate(angle); // still exhaustive
        // no default needed!
    };
-}</pre>
+}
+```
+
 
 ### Partial patterns and destructing {#h3-7-partial-patterns-and-destructing}
 
@@ -305,17 +334,21 @@ So far, the only solid thing is the [candidate for deconstruction in instanceof 
 
 With this proposal, we should be able to deconstruct Records and Arrays. This is closer to how it works in Rust, for example. Look at how `Point` is deconstructed to its members, and we can directly use the members with type guard.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">record Point(int x, int y) {}
+```java
+record Point(int x, int y) {}
 
 void printSum(Object o) {
    if (o instanceof Point(int x, int y)) {
        System.out.println(x+y);
    }
-}</pre>
+}
+```
+
 
 Deconstruction can be nested as well but doesn't have any facility for ignoring members like in other languages yet.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">record Point(int x, int y) {}
+```java
+record Point(int x, int y) {}
 enum Color { RED, GREEN, BLUE }
 record ColoredPoint(Point p, Color c) {}
 
@@ -323,25 +356,33 @@ void printSum(Object o) {
    if (o instanceof ColoredPoint(Point(int x, int y), Color c) {
        System.out.println(x+y);
    }
-}</pre>
+}
+```
+
 
 Array deconstruction is also proposed, and syntax is a bit similar to array deconstruction in JavaScript. Thankfully at least elements at the end can be ignored in this case; it would be pretty useless otherwise 😉
 
 See how the string array is deconstructed to the first two elements with the rest ignored. The syntax is closer to the new array syntax as well.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">static void printFirstTwoStrings(Object o) {
+```java
+static void printFirstTwoStrings(Object o) {
    if (o instanceof String[] { String s1, String s2, ... }){
        System.out.println(s1 + s2);
    }
-}</pre>
+}
+```
+
 
 Nested deconstruction is also possible for a mix of arrays and records. See how an array of `Points` are deconstructed here. And yes, `var` should work instead of type as well.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">static void printSumOfFirstTwoXCoords(Object o) {
+```java
+static void printSumOfFirstTwoXCoords(Object o) {
    if (o instanceof Point[] { Point(var x1, var y1), Point(var x2, var y2), ... }) {
        System.out.println(x1 + x2);
    }
-}</pre>
+}
+```
+
 
 Of course, it's a baby step and not as powerful as deconstruction in Rust or JS, but I hope we get there, and even this baby step would make pattern matching much more powerful.
 
@@ -385,7 +426,7 @@ In a future version of Java, some of these limitations might be removed, at leas
 
 We probably would still have to wait a few years before we can actually start using full-fledged pattern matching in production. I'll update this post when more features are released.
 
-*** ** * ** ***
+
 
 If you like this article, please leave a like or a comment. Originally published at [deepu.tech](https://deepu.tech/state-of-pattern-matching-java/).
 

@@ -61,7 +61,8 @@ The other nice thing about this control is that there is no need to resize it be
 
 Now let's take a look at the code, first the variables we need...
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public class RegionControl extends Region {
+```java
+public class RegionControl extends Region {
     public enum Type { CLOSE, MINIMIZE, ZOOM }
 
     private static final double PREFERRED_WIDTH = 12;
@@ -77,14 +78,16 @@ Now let's take a look at the code, first the variables we need...
     private static final PseudoClass PRESSED_PSEUDO_CLASS = PseudoClass.getPseudoClass("pressed");
     private BooleanProperty hovered;
     private static String userAgentStyleSheet;
-    private ObjectProperty&lt;Type&gt; type;
+    private ObjectProperty<Type> type;
     private double size;
     private double width;
     private double height;
     private Circle circle;
     private Region symbol;
-    private Consumer&lt;MouseEvent&gt; mousePressedConsumer;
-    private Consumer&lt;MouseEvent&gt; mouseReleasedConsumer;</pre>
+    private Consumer<MouseEvent> mousePressedConsumer;
+    private Consumer<MouseEvent> mouseReleasedConsumer;
+```
+
 
 We have defined an enum for the three different states and for each state we also created a PseudoClass. In addition to these, we also created PseudoClasses for the hovered and pressed state.
 
@@ -94,24 +97,25 @@ Because this control is a button, we added consumers for mouse pressed and mouse
 
 In the constructor, we add a parameter for the type and if no type will be provided we default the type to close. The code for the constructor looks like this:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public RegionControl() {
+```java
+public RegionControl() {
         this(Type.CLOSE);
     }
     public RegionControl(final Type type) {
-        this.type = new ObjectPropertyBase&lt;&gt;(type) {
+        this.type = new ObjectPropertyBase<>(type) {
             @Override protected void invalidated() {
                 switch(get()) {
-                    case CLOSE -&gt; {
+                    case CLOSE -> {
                         pseudoClassStateChanged(CLOSE_PSEUDO_CLASS, true);
                         pseudoClassStateChanged(MINIMIZE_PSEUDO_CLASS, false);
                         pseudoClassStateChanged(ZOOM_PSEUDO_CLASS, false);
                     }
-                    case MINIMIZE -&gt; {
+                    case MINIMIZE -> {
                         pseudoClassStateChanged(CLOSE_PSEUDO_CLASS, false);
                         pseudoClassStateChanged(MINIMIZE_PSEUDO_CLASS, true);
                         pseudoClassStateChanged(ZOOM_PSEUDO_CLASS, false);
                     }
-                    case ZOOM -&gt; {
+                    case ZOOM -> {
                         pseudoClassStateChanged(CLOSE_PSEUDO_CLASS, false);
                         pseudoClassStateChanged(MINIMIZE_PSEUDO_CLASS, false);
                         pseudoClassStateChanged(ZOOM_PSEUDO_CLASS, true);
@@ -133,7 +137,9 @@ In the constructor, we add a parameter for the type and if no type will be provi
 
         initGraphics();
         registerListeners();
-    }</pre>
+    }
+```
+
 
 In the constructor, you can see that we set the pseudo class for the type in the invalidated() method of the type property. With this you can also change the type at runtime and it will apply the correct style (even if this is not really needed here).
 
@@ -141,10 +147,11 @@ To make sure the initial type will be set correctly, we call the pseudoClassStat
 
 After that the initGraphics() and registerListeners() method will be called which looks like follows:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">private void initGraphics() {
-        if (Double.compare(getPrefWidth(), 0.0) &lt;= 0 || Double.compare(getPrefHeight(), 0.0) &lt;= 0 || Double.compare(getWidth(), 0.0) &lt;= 0 ||
-            Double.compare(getHeight(), 0.0) &lt;= 0) {
-            if (getPrefWidth() &gt; 0 &amp;&amp; getPrefHeight() &gt; 0) {
+```java
+private void initGraphics() {
+        if (Double.compare(getPrefWidth(), 0.0) <= 0 || Double.compare(getPrefHeight(), 0.0) <= 0 || Double.compare(getWidth(), 0.0) <= 0 ||
+            Double.compare(getHeight(), 0.0) <= 0) {
+            if (getPrefWidth() > 0 && getPrefHeight() > 0) {
                 setPrefSize(getPrefWidth(), getPrefHeight());
             } else {
                 setPrefSize(PREFERRED_WIDTH, PREFERRED_HEIGHT);
@@ -164,19 +171,21 @@ After that the initGraphics() and registerListeners() method will be called whic
     }
 
     private void registerListeners() {
-        widthProperty().addListener(o -&gt; resize());
-        heightProperty().addListener(o -&gt; resize());
-        addEventFilter(MouseEvent.MOUSE_PRESSED, e -&gt; {
+        widthProperty().addListener(o -> resize());
+        heightProperty().addListener(o -> resize());
+        addEventFilter(MouseEvent.MOUSE_PRESSED, e -> {
             pseudoClassStateChanged(PRESSED_PSEUDO_CLASS, true);
             if (null == mousePressedConsumer) { return; }
             mousePressedConsumer.accept(e);
         });
-        addEventFilter(MouseEvent.MOUSE_RELEASED, e -&gt; {
+        addEventFilter(MouseEvent.MOUSE_RELEASED, e -> {
             pseudoClassStateChanged(PRESSED_PSEUDO_CLASS, false);
             if (null == mouseReleasedConsumer) { return; }
             mouseReleasedConsumer.accept(e);
         });
-    }</pre>
+    }
+```
+
 
 As already mentioned you can see in the initGraphics() method that we set up a Circle and a Region which we add to our control. To make sure the styles in our CSS file will be used we add the "region-based" style class to our control, the "circle" class to the Circle and the "symbol" class to the Region which should show the symbol.
 
@@ -186,7 +195,8 @@ The rest of the control code is nothing really special and I won't go into detai
 
 More interesting is the CSS file that we need to create because it contains all the "magic" of the UI. So here it is:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="css">.region-based {
+```css
+.region-based {
     -RED: #ff6058;
     -YELLOW: #ffbc35;
     -GREEN: #00c844;
@@ -256,7 +266,9 @@ More interesting is the CSS file that we need to create because it contains all 
     -fx-background-color: -DARK_GRAY;
     -fx-scale-shape: false;
     -fx-shape: "M2.696,2.582l4.545,0.656l-3.889,3.889l-0.656,-4.545ZM9.533,9.418l-0.656,-4.545l-3.889,3.889l4.545,0.656Z";
-}</pre>
+}
+```
+
 
 As mentioned earlier we know all colors that we need and for this reason we can directly define them in our CSS file. We have colors for the different states (-RED, -YELLOW, -GREEN), for the disabled state (-GRAY) and for the symbol (-DARK_GRAY).
 
@@ -264,7 +276,10 @@ The original MacOS button looks like it either has an inner shadow or a border t
 
 This can easily be done in JavaFX CSS by using the derive method. If we would like to create a border that has a darker red color we can achieve it as follows:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="css">-fx-stroke: derive(-RED, -10%);</pre>
+```css
+-fx-stroke: derive(-RED, -10%);
+```
+
 
 This code will create a color based on the color defined for -RED which is 10% darker than the given color.
 

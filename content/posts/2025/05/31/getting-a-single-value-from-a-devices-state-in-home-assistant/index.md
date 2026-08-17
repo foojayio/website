@@ -41,13 +41,16 @@ By default, the Netatmo valve displays a multi-valued state. To check, go to the
 
 The problem is that the above attributes are not readily usable. We must first extract them individually. For this, we need to create a *sensor* ; head to File Editor and select `configuration.yaml`. Then, append the following snippet:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml">template:
+```yaml
+template:
   - sensor:
     - unique_id: sensor.spare_bedroom_temperature
       name: "Spare Bedroom Temperature"
       state: "{{ state_attr('climate.spare_bedroom', 'current_temperature') }}" #1
       unit_of_measurement: "°C"
-      device_class: temperature                                                 #2</pre>
+      device_class: temperature                                                 #2
+```
+
 
 1. Match the pair entity-attribute above
 2. Must be `temperature` to be used as a temperature sensor afterward
@@ -76,6 +79,6 @@ You can use this approach for every State. Check them, and I'm sure you'll get n
 * [Netatmo integration](https://www.home-assistant.io/integrations/netatmo/)
 * [Sensor entity](https://developers.home-assistant.io/docs/core/entity/sensor/)
 
-*** ** * ** ***
+
 
 *Originally published at [A Java Geek](https://blog.frankel.ch/home-assistant/7/) on May 18^th^, 2025*

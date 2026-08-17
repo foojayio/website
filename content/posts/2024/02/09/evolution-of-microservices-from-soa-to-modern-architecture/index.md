@@ -108,7 +108,7 @@ These examples showcase the benefits of microservices in different industries an
 
 In the next article (Part 2), to be published soon, we will explore the principles for designing and implementing microservices and the challenges and best practices for development, testing strategies, and security considerations. 🤓
 
-*** ** * ** ***
+
 
 <br />
 

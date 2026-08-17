@@ -64,7 +64,8 @@ The Deep Netts library is a lightweight native Java library that has a very good
 
 The solution is implemented using the Deep Netts community edition, an open source version of the library. The example code below shows how to create and train Feed Forward Neural Network using Deep Netts.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">// create instance of multi layer perceptron using builder
+```java
+// create instance of multi layer perceptron using builder
 FeedForwardNetwork neuralNet = FeedForwardNetwork.builder()
         .addInputLayer(numInputs)
         .addFullyConnectedLayer(5, ActivationType.TANH)
@@ -78,7 +79,9 @@ trainer.setMaxError(0.03f);
 trainer.setLearningRate(0.01f);
 
 // train neural network
-neuralNet.train(trainingSet);</pre>
+neuralNet.train(trainingSet);
+```
+
 
 Our Experience {#h2-2-our-experience}
 -------------------------------------

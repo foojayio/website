@@ -132,20 +132,26 @@ Going from top to bottom, the first application method we see is `recolor()`, wh
 
 Clicking at the frame takes us to the source code of the corresponding method:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public void updateParrot() { 
+```java
+public void updateParrot() { 
     currentParrotIndex = (currentParrotIndex + 1) % parrots.size();
     BufferedImage baseImage = parrots.get(currentParrotIndex);
     State state = new State(baseImage, getHue());
-    BufferedImage coloredImage = cache.computeIfAbsent(state, (s) -&gt; Recolor.recolor(baseImage, hue));
+    BufferedImage coloredImage = cache.computeIfAbsent(state, (s) -> Recolor.recolor(baseImage, hue));
     parrot.setIcon(new ImageIcon(coloredImage)); 
-}</pre>
+}
+```
+
 
 It seems that `updateParrot()` takes some base image and then recolors it. In order to avoid extra work, the implementation first tries to retrieve the image from some cache. The key for retrieval is a `State` object, whose constructor takes a base image and a hue:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public State(BufferedImage baseImage, int hue) {
+```java
+public State(BufferedImage baseImage, int hue) {
     this.baseImage = baseImage;
     this.hue = hue;
-}</pre>
+}
+```
+
 
 Analyze data flow {#h2-4-analyze-data-flow}
 -------------------------------------------
@@ -158,7 +164,10 @@ Using the built-in static analyzer, we can trace the range of input values for t
 
 Expand the nodes and pay attention to `ImageIO.read(path.toFile())`. It shows us that the base images come from a set of files. If we double-click this line and look at the `PARROTS_PATH` constant that is nearby, we discover the files' location:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public static final String PARROTS_PATH = "src/main/resources";</pre>
+```java
+public static final String PARROTS_PATH = "src/main/resources";
+```
+
 
 By navigating to this directory, we can see the following:
 
@@ -202,11 +211,15 @@ Inspect the code {#h2-6-inspect-the-code}
 
 [Cmd + B](https://www.jetbrains.com/help/idea/navigating-through-the-source-code.html#go_to_declaration) on `cache` takes us to its declaration site:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">private static final Map&lt;State, BufferedImage&gt; cache = new HashMap&lt;&gt;();</pre>
+```java
+private static final Map<State, BufferedImage> cache = new HashMap<>();
+```
+
 
 If we check the documentation for `HashMap`, we'll find that its implementation relies on the `equals()` and `hashcode()` methods, and the type that is used as the key has to correctly override them. Let's check it. [Cmd + B](https://www.jetbrains.com/help/idea/navigating-through-the-source-code.html#go_to_declaration) on `State` takes us to the class definition.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">class State {
+```java
+class State {
     private final BufferedImage baseImage;
     private final int hue;
 
@@ -218,7 +231,9 @@ If we check the documentation for `HashMap`, we'll find that its implementation 
     public BufferedImage getBaseImage() { return baseImage; }
 
     public int getHue() { return hue; }
-}</pre>
+}
+```
+
 
 Seems like we have found the culprit: the implementation of `equals()` and `hashcode()` isn't just incorrect. It's completely missing!
 
@@ -229,18 +244,21 @@ Writing implementations for `equals()` and `hashcode()` is a mundane task. Lucki
 
 While in the `State` class, press [Cmd + N](https://www.jetbrains.com/help/idea/generating-code.html) and select **equals() and hashcode()** . Accept the suggestions and click **Next** until the methods appear at the caret.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@Override
+```java
+@Override
 public boolean equals(Object o) {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
     State state = (State) o;
-    return hue == state.hue &amp;&amp; Objects.equals(baseImage, state.baseImage);
+    return hue == state.hue && Objects.equals(baseImage, state.baseImage);
 }
 
 @Override
 public int hashCode() {
     return Objects.hash(baseImage, hue);
-}</pre>
+}
+```
+
 
 Check the fix {#h2-8-check-the-fix}
 -----------------------------------

@@ -85,15 +85,18 @@ For the creation of the prototype of this article, we assume we will use:
 
 The Netflix DGS starter contains all the dependencies needed to use GraphQL on Spring Boot. We will also use Spring Data to interact with MongoDB.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&lt;dependency&gt;
-&nbsp;&nbsp;&lt;groupId&gt;com.netflix.graphql.dgs&lt;/groupId&gt;
-&nbsp;&nbsp;&lt;artifactId&gt;graphql-dgs-spring-boot-starter&lt;/artifactId&gt;
-&lt;/dependency&gt;
+```
+<dependency>
+  <groupId>com.netflix.graphql.dgs</groupId>
+  <artifactId>graphql-dgs-spring-boot-starter</artifactId>
+</dependency>
 
-&lt;dependency&gt;
-&nbsp;&nbsp;&lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
-&nbsp;&nbsp;&lt;artifactId&gt;spring-boot-starter-data-mongodb&lt;/artifactId&gt;
-&lt;/dependency&gt;</pre>
+<dependency>
+  <groupId>org.springframework.boot</groupId>
+  <artifactId>spring-boot-starter-data-mongodb</artifactId>
+</dependency>
+```
+
 
 At this point, the application is ready to load GraphQL schemas and perform queries and mutations on them.
 
@@ -113,38 +116,41 @@ Defining the GraphQL schema {#h2-6-defining-the-graphql-schema}
 
 Within Netflix DGS, the scheme is the starting point.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">type Query {
-&nbsp;&nbsp;users: [User!]!
-&nbsp;&nbsp;userById(id: ID!): User
+```
+type Query {
+  users: [User!]!
+  userById(id: ID!): User
 }
 
 type Mutation {
-&nbsp;&nbsp;createUser(input: CreateUserInput!): User!
+  createUser(input: CreateUserInput!): User!
 }
 
 type User {
-&nbsp;&nbsp;id: ID!
-&nbsp;&nbsp;email: String!
-&nbsp;&nbsp;name: String!
-&nbsp;&nbsp;orders: [Order!]!
+  id: ID!
+  email: String!
+  name: String!
+  orders: [Order!]!
 }
 
 type Order {
-&nbsp;&nbsp;id: ID!
-&nbsp;&nbsp;totalAmount: Float!
-&nbsp;&nbsp;products: [Product!]!
+  id: ID!
+  totalAmount: Float!
+  products: [Product!]!
 }
 
 type Product {
-&nbsp;&nbsp;id: ID!
-&nbsp;&nbsp;name: String!
-&nbsp;&nbsp;price: Float!
+  id: ID!
+  name: String!
+  price: Float!
 }
 
 input CreateUserInput {
-&nbsp;&nbsp;email: String!
-&nbsp;&nbsp;name: String!
-}</pre>
+  email: String!
+  name: String!
+}
+```
+
 
 It is important to highlight a few design choices:
 
@@ -159,13 +165,16 @@ Persistence with MongoDB {#h2-7-persistence-with-mongodb}
 
 Persistence with Spring Data MongoDB is handled traditionally.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@Document("users")
+```
+@Document("users")
 public class UserDocument {
-&nbsp;&nbsp;&nbsp;&nbsp;@Id
-&nbsp;&nbsp;&nbsp;&nbsp;private String id;
-&nbsp;&nbsp;&nbsp;&nbsp;private String email;
-&nbsp;&nbsp;&nbsp;&nbsp;private String name;
-}</pre>
+    @Id
+    private String id;
+    private String email;
+    private String name;
+}
+```
+
 
 It is good practice to avoid using persistence models directly as GraphQL types. MongoDB documents tend to evolve rapidly and often contain internal fields or denormalised data that should not be exposed publicly.
 
@@ -176,22 +185,25 @@ Query resolvers with Netflix DGS {#h2-8-query-resolvers-with-netflix-dgs}
 
 To translate a GraphQL query into a backend operation, you need to use a query resolver. Its responsibility is to orchestrate, not to apply business logic.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@DgsComponent
+```
+@DgsComponent
 
 public class UserQueryResolver {
-&nbsp;&nbsp;&nbsp;&nbsp;private final UserRepository repository;
-&nbsp;&nbsp;&nbsp;&nbsp;public UserQueryResolver(UserRepository repository) {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this.repository = repository;
-&nbsp;&nbsp;&nbsp;&nbsp;}
+    private final UserRepository repository;
+    public UserQueryResolver(UserRepository repository) {
+        this.repository = repository;
+    }
 
-&nbsp;&nbsp;&nbsp;&nbsp;@DgsQuery
-&nbsp;&nbsp;&nbsp;&nbsp;public List&lt;User&gt; users() {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return repository.findAll()
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.stream()
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.map(UserMapper::toGraphQL)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.toList();
-&nbsp;&nbsp;&nbsp;&nbsp;}
-}</pre>
+    @DgsQuery
+    public List<User> users() {
+        return repository.findAll()
+                .stream()
+                .map(UserMapper::toGraphQL)
+                .toList();
+    }
+}
+```
+
 
 From this snippet, we note that:
 
@@ -206,23 +218,26 @@ Mutations and input validation {#h2-9-mutations-and-input-validation}
 
 Mutations represent write operations and should be treated with the same care as REST POST and PUT endpoints.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@DgsComponent
+```
+@DgsComponent
 
 public class UserMutationResolver {
-&nbsp;&nbsp;&nbsp;&nbsp;private final UserRepository repository;
-&nbsp;&nbsp;&nbsp;&nbsp;public UserMutationResolver(UserRepository repository) {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this.repository = repository;
-&nbsp;&nbsp;&nbsp;&nbsp;}
+    private final UserRepository repository;
+    public UserMutationResolver(UserRepository repository) {
+        this.repository = repository;
+    }
 
-&nbsp;&nbsp;&nbsp;&nbsp;@DgsMutation
-&nbsp;&nbsp;&nbsp;&nbsp;public User createUser(@InputArgument CreateUserInput input) {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;UserDocument doc = new UserDocument(
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;input.getEmail(),
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;input.getName()
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;);
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return UserMapper.toGraphQL(repository.save(doc));
-&nbsp;&nbsp;&nbsp;&nbsp;}
-}</pre>
+    @DgsMutation
+    public User createUser(@InputArgument CreateUserInput input) {
+        UserDocument doc = new UserDocument(
+            input.getEmail(),
+            input.getName()
+        );
+        return UserMapper.toGraphQL(repository.save(doc));
+    }
+}
+```
+
 
 Input validation and validation can be handled using:
 
@@ -237,23 +252,26 @@ Resolving relationships in MongoDB {#h2-10-resolving-relationships-in-mongodb}
 
 Unlike relational databases, MongoDB does not support join operations. In GraphQL, relationships are resolved lazily, field by field.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@DgsComponent
+```
+@DgsComponent
 
 public class UserFieldResolver {
-&nbsp;&nbsp;&nbsp;&nbsp;private final OrderRepository orderRepository;
-&nbsp;&nbsp;&nbsp;&nbsp;public UserFieldResolver(OrderRepository orderRepository) {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this.orderRepository = orderRepository;
-&nbsp;&nbsp;&nbsp;&nbsp;}
+    private final OrderRepository orderRepository;
+    public UserFieldResolver(OrderRepository orderRepository) {
+        this.orderRepository = orderRepository;
+    }
 
-&nbsp;&nbsp;&nbsp;&nbsp;@DgsData(parentType = "User", field = "orders")
-&nbsp;&nbsp;&nbsp;&nbsp;public List&lt;Order&gt; orders(DgsDataFetchingEnvironment env) {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;User user = env.getSource();
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return orderRepository.findByUserId(user.getId())
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.stream()
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.map(OrderMapper::toGraphQL)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.toList();
-&nbsp;&nbsp;&nbsp;&nbsp;}
-}</pre>
+    @DgsData(parentType = "User", field = "orders")
+    public List<Order> orders(DgsDataFetchingEnvironment env) {
+        User user = env.getSource();
+        return orderRepository.findByUserId(user.getId())
+                .stream()
+                .map(OrderMapper::toGraphQL)
+                .toList();
+    }
+}
+```
+
 
 This approach is powerful, but it carries a significant downside.
 
@@ -264,14 +282,17 @@ This is one of those cases where GraphQL seems simple in demos, but can cause si
 
 A query such as...
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">{
-&nbsp;&nbsp;users {
-&nbsp;&nbsp;&nbsp;&nbsp;id
-&nbsp;&nbsp;&nbsp;&nbsp;orders {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;id
-&nbsp;&nbsp;&nbsp;&nbsp;}
-&nbsp;&nbsp;}
-}</pre>
+```
+{
+  users {
+    id
+    orders {
+      id
+    }
+  }
+}
+```
+
 
 ...can easily lead to:
 
@@ -285,26 +306,32 @@ Using DataLoader in Netflix DGS {#h2-12-using-dataloader-in-netflix-dgs}
 
 DataLoader enables GraphQL to group and cache related data retrieved within a single request.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@DgsComponent
+```
+@DgsComponent
 
 public class OrderDataLoader {
-&nbsp;&nbsp;&nbsp;&nbsp;@DgsDataLoader(name = "ordersByUser")
-&nbsp;&nbsp;&nbsp;&nbsp;public BatchLoader&lt;String, List&lt;Order&gt;&gt; ordersByUser(OrderRepository repo) {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return userIds -&gt; CompletableFuture.supplyAsync(() -&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;repo.findByUserIds(userIds)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;);
-&nbsp;&nbsp;&nbsp;&nbsp;}
-}</pre>
+    @DgsDataLoader(name = "ordersByUser")
+    public BatchLoader<String, List<Order>> ordersByUser(OrderRepository repo) {
+        return userIds -> CompletableFuture.supplyAsync(() ->
+            repo.findByUserIds(userIds)
+        );
+    }
+}
+```
+
 
 The field resolver then becomes asynchronous:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@DgsData(parentType = "User", field = "orders")
+```
+@DgsData(parentType = "User", field = "orders")
 
-public CompletableFuture&lt;List&lt;Order&gt;&gt; orders(DgsDataFetchingEnvironment env) {
-&nbsp;&nbsp;&nbsp;&nbsp;DataLoader&lt;String, List&lt;Order&gt;&gt; loader =
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;env.getDataLoader("ordersByUser");
-&nbsp;&nbsp;&nbsp;&nbsp;return loader.load(env.&lt;User&gt;getSource().getId());
-}</pre>
+public CompletableFuture<List<Order>> orders(DgsDataFetchingEnvironment env) {
+    DataLoader<String, List<Order>> loader =
+        env.getDataLoader("ordersByUser");
+    return loader.load(env.<User>getSource().getId());
+}
+```
+
 
 This transforms N database calls into a single grouped query and should be considered mandatory for non-trivial schemas.
 

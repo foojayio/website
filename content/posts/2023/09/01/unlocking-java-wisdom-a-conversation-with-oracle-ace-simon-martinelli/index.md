@@ -37,13 +37,13 @@ Fun Fact: {#h2-1-fun-fact}
 
 > Before starting my IT career, I was working as a traffic controller at Swiss Railways.  
 
-*** ** * ** ***
+
 
 ***Bazlur: First of all, congratulations, Simon, on your recent achievement of becoming the Oracle ACE associate. How are you feeling?***
 
 Thank you. I feel great. It's an honour to be part of this group of experts.
 
-*** ** * ** ***
+
 
 ***Bazlur: Tell us a bit about this program and what are the perks of becoming one. How is this different from the Java Champion program?***
 
@@ -61,7 +61,7 @@ Oracle ACE program covers a broader range of Oracle technologies, including data
 
 The Oracle ACE program is associated with Oracle Corporation, while the Java Champion program is more community-driven and not tied to any specific company.
 
-*** ** * ** ***
+
 
 ***Bazlur: Can you walk us through your career path and what led you to focus on Java? What are the key philosophies or principles that guide your approach to software development?***   
 
@@ -72,14 +72,14 @@ I always try to create the simplest possible solution to suit the customer's nee
 
 It is also very important for me to constantly expand my know-how and to learn from others in order to then pass this know-how on to others.
 
-*** ** * ** ***
+
 
 ***Bazlur: Your emphasis on simplicity in solutions resonates with many in the software industry. Can you share some specific examples where this philosophy has guided your work in Java development? How do you strike a balance between simplicity and the demands of modern, complex systems?***   
 
 Simon: A modern complex system does not require a complicated, over-designed architecture. It's important always to choose the right tools that match the requirements. Most often, these are old boring technologies like SQL databases, message brokers and in the frontend Vaadin or any server-side-rendering web framework: this reduced operations overhead and costs for my customers.  
 > ***A modern complex system does not require a complicated, over-designed architecture. It's important always to choose the right tools that match the requirements.***
 
-*** ** * ** ***
+
 
 **Bazlur: With the ever-changing landscape of technologies and frameworks, how do you decide which ones to incorporate into your Java projects? Can you describe any recent projects where you had to adapt to new technologies or methodologies?**
 
@@ -88,7 +88,7 @@ Simon: In my opinion, experience and knowing concepts are key. With the help of 
 
 In a recent project, we had to decide which front-end technology to use. As a Vaadin fan, I wanted to go with Vaadin, but there were some requirements, like the avoidance of any server state, that made me rethink this choice. Finally, we evaluated Angular, React and Hilla with Lit, and we decided to use Hilla because, for Java developers, this was the front-end technology with the lowest entry barrier. Very often, an architectural decision is also driven by the team. So, check the knowledge and the experience of the team to find a matching solution.
 
-*** ** * ** ***
+
 
 **Bazlur: Collaboration and teamwork are essential in software development. How have you approached working with diverse teams, especially in a freelance consultant role? What challenges have you faced, and how have you overcome them?**
 
@@ -96,20 +96,20 @@ Simon: I am very open-minded and enjoy working with and learning from people wit
 
 On the other hand, it takes time to get to know the people in a new team and gain their trust.
 
-*** ** * ** ***
+
 
 **Bazlur: You've been involved in Java development for many years, witnessing its evolution. What do you think are the most significant changes in Java and its ecosystem over the years? How have these changes influenced your work and the industry at large?**
 
 Simon: In my opinion, Java 5 and 8 had the biggest impact on how we use Java today. In Java 5, annotations were introduced that removed the need for XML configuration in Java EE and Spring Framework and allowed to have configuration close to the code (which, in fact, could also be a disadvantage). A more dramatic change was in Java 8 with lambdas and the Stream API. Especially the Stream API allows the program to be in a declarative way that leads to cleaner and more readable code.
 
-*** ** * ** ***
+
 
 **Bazlur: Mentoring and teaching seem to be important aspects of your career. How do you approach mentoring younger developers or students? Can you share any success stories or lessons learned from your time as a lecturer and mentor?**
 
 Simon: Someone once said that you don't understand a thing until you can explain it to someone. That's my motivation behind mentoring and teaching. I have been teaching for 16 years, and my students always liked my courses. The most positive point is that they find my lessons very practical. For me, it's very important always to combine theory and practice. What I value even more is constructive feedback. This helps me to improve and not to stop becoming an even better teacher.
 > ***Someone once said that you don't understand a thing until you can explain it to someone. That's my motivation behind mentoring and teaching.***
 
-*** ** * ** ***
+
 
 **Bazlur: They say that Swiss watches and Swiss trains are the epitomes of precision. As someone who started at Swiss Railways, do you apply the same level of Swiss precision to your Java code? Have you ever been late to a meeting and wished you could debug the train schedule like a piece of code?**   
 
@@ -117,7 +117,7 @@ Simon: I think it's in the nature of the Swiss to be very precise and thorough. 
 
 The Swiss train schedule is way simpler than program code as we invented the "Taktfahrplan" (synchronized timetables), which means that the trains in a station always run at the same time every hour or every half an hour. You can just go to the train station and take the next train. Compared to a lot of program code, if seen in the last 27 years, this feels like a breeze.
 
-*** ** * ** ***
+
 
 **Bazlur: With your extensive experience in Java development and education, many aspiring developers would value your recommendations. Could you share a list of essential resources, books, or online platforms that have been instrumental in your career or that you often suggest to your students**?
 
@@ -127,7 +127,7 @@ When I started, there was no internet available, and I learned a lot from books.
 
 Nowadays, the sheer number of blogs and YouTube channels is overwhelming, and on the one hand, it's easy to find information, but on the other hand, it's very difficult to find the right information. This became even harder with AI. Therefore, it is very important to develop the skill to choose the right information from a large number of possibilities.
 
-*** ** * ** ***
+
 
 **Bazlur: Thank you for sharing your wisdom with us today. As we conclude, what parting advice would you offer to Java developers at different stages of their careers? How can they stay inspired and continue to grow in this ever-evolving field?**
 
@@ -141,7 +141,7 @@ Another great way to grow your knowledge is a side project. Look for something t
 
 And finally - stay curious!
 
-*** ** * ** ***
+
 
 ### Conclusion {#h3-2-conclusion}
 

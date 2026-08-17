@@ -51,34 +51,35 @@ We create a simple file server via [Javalin](https://javalin.io), which allows a
 
 The URLs are simple to use, and we don't bother about error handling, user authentication, or large files, as this would complicate our example. I leave it as an exercise for the inclined reader. The following is the most essential part of the application: the [server declaration](https://github.com/parttimenerd/jfr-context-example/blob/main/src/main/java/me/bechberger/server/Main.java):
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">FileStorage storage = new FileStorage();                                                               
-try (Javalin lin = Javalin.create(conf -&gt; {                                                            
-            conf.jetty.server(() -&gt;                                                                    
+```java
+FileStorage storage = new FileStorage();                                                               
+try (Javalin lin = Javalin.create(conf -> {                                                            
+            conf.jetty.server(() ->                                                                    
                     new Server(new QueuedThreadPool(4))                                                
             );                                                                                         
         })                                                                                             
-        .exception(Exception.class, (e, ctx) -&gt; {                                                      
+        .exception(Exception.class, (e, ctx) -> {                                                      
             ctx.status(500);                                                                           
             ctx.result("Error: " + e.getMessage());                                                    
             e.printStackTrace();                                                                       
         })                                                                                             
-        .get("/register/{user}", ctx -&gt; {                                                              
+        .get("/register/{user}", ctx -> {                                                              
             String user = ctx.pathParam("user");                                                       
             storage.register(user);                                                                    
             ctx.result("registered");                                                                  
         })                                                                                             
-        .get("/store/{user}/{file}/{content}", ctx -&gt; {                                                
+        .get("/store/{user}/{file}/{content}", ctx -> {                                                
             String user = ctx.pathParam("user");                                                       
             String file = ctx.pathParam("file");                                                       
             storage.store(user, file, ctx.pathParam("content"));                                       
             ctx.result("stored");                                                                      
         })                                                                                             
-        .get("/load/{user}/{file}", ctx -&gt; {                                                           
+        .get("/load/{user}/{file}", ctx -> {                                                           
             String user = ctx.pathParam("user");                                                       
             String file = ctx.pathParam("file");                                                       
             ctx.result(storage.load(user, file));                                                      
         })                                                                                             
-        .get("/delete/{user}/{file}", ctx -&gt; {                                                         
+        .get("/delete/{user}/{file}", ctx -> {                                                         
             String user = ctx.pathParam("user");                                                       
             String file = ctx.pathParam("file");                                                       
             storage.delete(user, file);                                                                
@@ -87,7 +88,9 @@ try (Javalin lin = Javalin.create(conf -&gt; {
     lin.start(port);                                                                                   
     Thread.sleep(100000000);                                                                           
 } catch (InterruptedException ignored) {                                                               
-}                                                                                                      </pre>
+}
+```
+
 
 This example runs on Jaroslav's OpenJDK fork (commit 6ea2b4f), so if you want to run it in its complete form, please build the fork and make sure that you're `PATH` and `JAVA_HOME` environment variables are set accordingly.
 
@@ -95,13 +98,17 @@ You can build the server using `mvn package` and
 
 start it, listening on the port `1000`, via:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">java -jar target/jfr-context-example.jar 1000</pre>
+```bash
+java -jar target/jfr-context-example.jar 1000
+```
+
 
 You can then use it via your browser or `curl`:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group=""># start the server
+```bash
+# start the server
 java -XX:StartFlightRecording=filename=flight.jfr,settings=config.jfc \
--jar target/jfr-context-example.jar 1000 &amp;
+-jar target/jfr-context-example.jar 1000 &
 pid=$!
 
 # register a user
@@ -112,41 +119,50 @@ curl http://localhost:1000/store/moe/hello_file/Hello
 
 # load the file
 curl http://localhost:1000/load/moe/hello_file
--&gt; Hello
+-> Hello
 
 # delete the file
 curl http://localhost:1000/delete/moe/hello_file
 
 kill $pid
 
-# this results in the flight.jfr file</pre>
+# this results in the flight.jfr file
+```
+
 
 To make testing easier, I created the `test.sh script`, which starts the server, registers a few users and stores, loads, and deletes a few files, creating a JFR file along the way. We're using a custom JFR configuration to enable the IO events without any threshold. This is not recommended for production, but is required in our toy example to get any such event:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="xml" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
 
-&lt;configuration version="2.0" label="Custom" description="Custom config for the example"
-  provider="Johannes Bechberger"&gt;
-    &lt;event name="jdk.FileRead" withContext="true"&gt;
-        &lt;setting name="enabled"&gt;true&lt;/setting&gt;
-        &lt;setting name="stackTrace"&gt;true&lt;/setting&gt;
-        &lt;setting name="threshold" control="file-threshold"&gt;0 ms&lt;/setting&gt;
-    &lt;/event&gt;
+<configuration version="2.0" label="Custom" description="Custom config for the example"
+  provider="Johannes Bechberger">
+    <event name="jdk.FileRead" withContext="true">
+        <setting name="enabled">true</setting>
+        <setting name="stackTrace">true</setting>
+        <setting name="threshold" control="file-threshold">0 ms</setting>
+    </event>
 
-    &lt;event name="jdk.FileWrite" withContext="true"&gt;
-        &lt;setting name="enabled"&gt;true&lt;/setting&gt;
-        &lt;setting name="stackTrace"&gt;true&lt;/setting&gt;
-        &lt;setting name="threshold" control="file-threshold"&gt;0 ms&lt;/setting&gt;
-    &lt;/event&gt;
-&lt;/configuration&gt;</pre>
+    <event name="jdk.FileWrite" withContext="true">
+        <setting name="enabled">true</setting>
+        <setting name="stackTrace">true</setting>
+        <setting name="threshold" control="file-threshold">0 ms</setting>
+    </event>
+</configuration>
+```
+
 
 We can use the [jfr tool](https://docs.oracle.com/en/java/javase/17/docs/specs/man/jfr.html) to easily print all the [jdk.FileRead](https://sap.github.io/SapMachine/jfrevents/#fileread) events from the created `flight.jfr` file in JSON format.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">jfr print --events jdk.FileRead --json flight.jfr</pre>
+```bash
+jfr print --events jdk.FileRead --json flight.jfr
+```
+
 
 This prints a list of events like:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="json" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">{
+```json
+{
   "type": "jdk.FileRead", 
   "values": {
     "startTime": "2023-10-18T14:31:56.369071625+02:00", 
@@ -163,7 +179,9 @@ This prints a list of events like:
     "bytesRead": 8, 
     "endOfFile": false
   }
-}</pre>
+}
+```
+
 
 You can find more information on this and other events in my [JFR Event Collection](https://sap.github.io/SapMachine/jfrevents):  
 [![](https://mostlynerdless.de/wp-content/uploads/2023/10/Screenshot-2023-10-19-at-12.28.35-2000x1509.png)](https://sap.github.io/SapMachine/jfrevents/#fileread)
@@ -177,7 +195,8 @@ Adding Custom Context {#h2-1-adding-custom-context}
 
 Before we can add the context, we have to define it, as described in [Jaroslav's blog post](https://jbachorik.github.io/posts/seeing-in-context_2). We [create a context](https://github.com/parttimenerd/jfr-context-example/blob/e055b39a38fa7ee9dc4cf903d5d2b4fce9e2ac8d/src/main/java/me/bechberger/server/TracerContextType.java) that stores the current user, action, trace ID, and optional file:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@Name("tracer-context")
+```java
+@Name("tracer-context")
 @Description("Tracer context type tuple")
 public class TracerContextType extends ContextType implements AutoCloseable {
 
@@ -216,35 +235,46 @@ public class TracerContextType extends ContextType implements AutoCloseable {
     public void close() throws Exception {
         unset();
     }
-}</pre>
+}
+```
+
 
 A context has to be set and then later unset, which can be cumbersome in the face of exceptions. Implementing the `AutoClosable` interface solves this by allowing us to wrap code in a try-with-resources statement:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">try (var t = new TracerContextType(/* ... */)) {
+```
+try (var t = new TracerContextType(/* ... */)) {
     // ...
-}</pre>
+}
+```
+
 
 All JFR events with enabled context that happen in the body of the statement are associated with the `TracerContextType` instance. We can use the code of all request handlers in our server with such a construct, e.g.:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">.get("/store/{user}/{file}/{content}", ctx -&gt; {                 
+```java
+.get("/store/{user}/{file}/{content}", ctx -> {                 
     String user = ctx.pathParam("user");                        
     String file = ctx.pathParam("file");                        
     try (var t = new TracerContextType(user, "store", file)) {  
         storage.store(user, file, ctx.pathParam("content"));    
         ctx.result("stored");                                   
     }                                                           
-})                                                              </pre>
+})
+```
+
 
 One last thing before we can analyze the annotated events: JFR has to know about your context before the recording starts. We do this by creating a registration class registered as a service.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@AutoService(ContextType.Registration.class)
+```java
+@AutoService(ContextType.Registration.class)
 public class TraceContextTypeRegistration implements ContextType.Registration {
 
     @Override
-    public Stream&lt;Class&lt;? extends ContextType&gt;&gt; types() {
+    public Stream<Class<? extends ContextType>> types() {
         return Stream.of(TracerContextType.class);
     }
-}</pre>
+}
+```
+
 
 We use the [auto-service](https://github.com/google/auto/tree/main/service) project by Google to automatically create the required build files (read more in this [blog post](https://pedrorijo.com/blog/java-service-loader/) by Pedro Rijo.
 
@@ -253,7 +283,8 @@ Using the Custom Context {#h2-2-using-the-custom-context}
 
 After adding the context, we can see it in the `jdk.FileRead` events:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="json" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">{
+```json
+{
   "type": "jdk.FileRead", 
   "values": {
     "startTime": "2023-10-18T14:31:56.369071625+02:00", 
@@ -274,13 +305,16 @@ After adding the context, we can see it in the `jdk.FileRead` events:
     "bytesRead": 8, 
     "endOfFile": false
   }
-}</pre>
+}
+```
+
 
 We clearly see the stored context information (`tracer-context_*`).
 
 Using the [`jq`](https://jqlang.github.io/jq/) tool, we can analyze the events, like calculating how many bytes the server has read for each user:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">➜ jfr print --events jdk.FileRead --json flight.jfr |
+```
+➜ jfr print --events jdk.FileRead --json flight.jfr |
   jq -r '
     .recording.events
     | group_by(.values."tracer-context_user")
@@ -304,7 +338,9 @@ larry   100
 mary    90
 moe     80
 sally   100
-sue     80</pre>
+sue     80
+```
+
 
 The empty user is for all the bytes read unrelated to any specific user (like class files), which is quite helpful.
 

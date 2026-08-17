@@ -38,19 +38,25 @@ The idea behind Compose is to move away from OOP to Functional Programming princ
 
 Here's a Compose snippet displaying a value in a text field:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="kotlin">fun main() = Window {
+```kotlin
+fun main() = Window {
   TextField("Hello world!")   // 1
-}</pre>
+}
+```
+
 
 1. `TextField` is not a call to a constructor but the invocation of a function
 
 The source code does indeed dispel any potential misunderstanding:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="kotlin">@Composable
+```kotlin
+@Composable
 fun TextField(
     value: String,
     ...
-)</pre>
+)
+```
+
 
 State hoisting {#_state_hoisting}
 ---------------------------------
@@ -63,7 +69,8 @@ Most applications do not stop at displaying state but offer a way to update it. 
 
 Here's how it's done in Compose:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="kotlin">fun main() = Window {                                               // 1
+```kotlin
+fun main() = Window {                                               // 1
   val state = remember { mutableStateOf("Hello world!") }           // 2
   Row {                                                             // 3
     TextField(
@@ -72,7 +79,9 @@ Here's how it's done in Compose:
     )
     Text(state.value)
   }
-}</pre>
+}
+```
+
 
 This deserves some explanation:
 
@@ -92,7 +101,8 @@ In itself, the state isn't interesting, just as mirroring the value of a text fi
 
 We need a state object to hold the sum. Compose offers the concept of *derived state*:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="kotlin">fun main() = Window {
+```kotlin
+fun main() = Window {
   val first = remember { mutableStateOf(0) }                    // 1
   val second = remember { mutableStateOf(0) }                   // 2
   val sum = derivedStateOf { first.value + second.value }       // 3
@@ -101,7 +111,9 @@ We need a state object to hold the sum. Compose offers the concept of *derived s
     TextField(second.value.toString(), { second.value = it.toInt() })
     Text(sum.value.toString())
   }
-}</pre>
+}
+```
+
 
 1. First value field
 2. Second value field
@@ -116,7 +128,8 @@ Composable JavaDocs,
 
 The "calculator" snippet above can be rewritten like this:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="kotlin">@Composable
+```kotlin
+@Composable
 fun IntField(state: MutableState) = TextField(     // 1
   state.value.toString(),
   { state.value = it.toInt() }
@@ -131,7 +144,9 @@ fun main() = Window {
     IntField(second)
     Text(sum.value.toString())
   }
-}</pre>
+}
+```
+
 
 1. Look, ma, a new custom component!
 
@@ -139,10 +154,13 @@ Annotating a component with `@Composable` has an important consequence: it chang
 
 This is the de-compiled version of the `IntField` function:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public static final void IntField(
+```java
+public static final void IntField(
     androidx.compose.runtime.MutableState,
     androidx.compose.runtime.Composer, int
-);</pre>
+);
+```
+
 
 Note the additional `Composer` parameter. This is where the magic of Compose lies.
 
@@ -188,11 +206,14 @@ Other considerations {#_other_considerations}
   The task uses `jpackage` under the hood, so be sure to use a JDK 14 or more. Also, be aware that you will still require a JRE to execute the installed application.
 * Labels:To label fields, avoid placing `Text` components on the UI as in the previous frameworks. Instead, set them on the fields themselves.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="kotlin">TextField(
+```kotlin
+TextField(
     value = "Hello world!",
     onValueChange = {},
     label = { Text("Say hello!") },
-)</pre>
+)
+```
+
 
   With no value, Compose display text labels as placeholders. With a value or when they receive focus, it will move them just above.
 

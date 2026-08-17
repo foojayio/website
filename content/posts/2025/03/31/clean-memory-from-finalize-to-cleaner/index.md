@@ -59,7 +59,8 @@ We must also consider that in the case of a Phantom Reference, once the Referent
 
 Here's an example of `PhantomReference`:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">import java.lang.ref.PhantomReference;
+```java
+import java.lang.ref.PhantomReference;
 import java.lang.ref.Reference;
 import java.lang.ref.ReferenceQueue;
 import java.util.HashMap;
@@ -94,13 +95,16 @@ public class UsingPhantomRef {
         System.out.println("GCollected!");
         lookup.remove(element).cleaning();
     }
-}</pre>
+}
+```
+
 
 `Cleaner` shares similarities with Java's reference classes, but it is more efficient for managing external resources. While PhantomReference enables cleanup logic, `Cleaner` adds an abstraction layer, making it easier to implement and manage. Internally, `Cleaner` uses a phantom reference behind the scenes to detect when an object becomes unreachable.
 
 Here's an example of `Cleaner`:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">import java.lang.ref.Cleaner;
+```java
+import java.lang.ref.Cleaner;
 
 public class BasicCleanerExample {
 
@@ -126,7 +130,9 @@ public class BasicCleanerExample {
         System.gc();
         pause();
     }
-}</pre>
+}
+```
+
 
 Behind the scenes of Cleaner {#_behind_the_scenes_of_cleaner}
 -------------------------------------------------------------
@@ -143,7 +149,8 @@ The implementation behind Cleaner is not trivial. It leverages a combination of 
 
 The following snippet uses a `Cleaner` to manage files.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">import java.io.File;
+```java
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.lang.ref.Cleaner;
@@ -186,7 +193,9 @@ public class FileCleanerExample {
         pause();
     }
     // ...
-}</pre>
+}
+```
+
 
 Cleaner vs. try-with-resources {#_cleaner_vs_try_with_resources}
 ----------------------------------------------------------------
@@ -195,7 +204,8 @@ The example with a file might suggest a more idiomatic solution using the `try-w
 
 Here's a dedicated example.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">import java.lang.ref.Cleaner;
+```java
+import java.lang.ref.Cleaner;
 
 public class CleanerWithCloseExample {
 
@@ -228,7 +238,9 @@ public class CleanerWithCloseExample {
             System.out.printf("using: %s%n",object);
         }
     }
-}</pre>
+}
+```
+
 
 The following table allows us to summarize the tools presented and choose the one that best suits our purposes.
 

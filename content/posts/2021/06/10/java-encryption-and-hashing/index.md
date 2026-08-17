@@ -24,15 +24,19 @@ If you need to store sensitive data in your system, you have to be sure that you
 
 If, for instance, we want to encrypt something like credit card details, we probably need a two-way encryption algorithm, because we need to be able to retrieve the original number. Say we use the Advanced Encryption Standard (AES), which is currently the standard symmetric encryption algorithm for US federal organizations. To encrypt and decrypt, there is no reason to deep-dive into low-level Java crypto. We recommend that you use a library that does the heavy lifting for you. For example, [Google Tink](https://github.com/google/tink).
 
-<pre class="EnlighterJSRAW" data-enlighter-language="xml" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&lt;dependency&gt;
-   &lt;groupId&gt;com.google.crypto.tink&lt;/groupId&gt;
-   &lt;artifactId&gt;tink&lt;/artifactId&gt;
-   &lt;version&gt;1.6.0&lt;/version&gt;
-&lt;/dependency&gt;</pre>
+```xml
+<dependency>
+   <groupId>com.google.crypto.tink</groupId>
+   <artifactId>tink</artifactId>
+   <version>1.6.0</version>
+</dependency>
+```
+
 
 Below, there's a short example of how to use Authenticated Encryption with Associated Data (AEAD) with AES. This allows us to encrypt plaintext and provide associated data that should be authenticated but not encrypted.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">AeadConfig.register();
+```java
+AeadConfig.register();
 KeysetHandle keysetHandle = KeysetHandle.generateNew(KeyTemplates.get("AES256_GCM"));
 
 String plaintext = "I want to break free!";
@@ -45,26 +49,34 @@ System.out.println(encr);
 
 byte[] decrypted = aead.decrypt(Base64.getDecoder().decode(encr), aad.getBytes());
 String decr = new String(decrypted);
-System.out.println(decr);</pre>
+System.out.println(decr);
+```
+
 
 For passwords, it is safer to use a strong cryptographic hashing algorithm as we don't need to retrieve the original passwords but just match the hashes. Argon2id, BCrypt, and SCrypt are the most suitable for this job according to the [OWASP password storage cheat sheet](https://cheatsheetseries.owasp.org/cheatsheets/Password_Storage_Cheat_Sheet.html). All are cryptographic hashes (one-way functions) and computationally difficult algorithms that consume a lot of time. This is exactly what you want, because brute force attacks take ages this way.
 
 Spring security provides excellent support for a wide variety of algorithms. Try using for instance the `BCryptPasswordEncoder` that Spring Security tool 5 provides for the purpose of password hashing.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="xml" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&lt;dependency&gt;
-   &lt;groupId&gt;org.springframework.security&lt;/groupId&gt;
-   &lt;artifactId&gt;spring-security-crypto&lt;/artifactId&gt;
-   &lt;version&gt;5.5.0&lt;/version&gt;
-&lt;/dependency&gt;</pre>
+```xml
+<dependency>
+   <groupId>org.springframework.security</groupId>
+   <artifactId>spring-security-crypto</artifactId>
+   <version>5.5.0</version>
+</dependency>
+```
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(); //default strength is 10
+
+```java
+BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(); //default strength is 10
 String password = "ThisIsMyPassword";
 
 //encode
 String hash = encoder.encode(password);
 
 //matching
-Boolean match = encoder.matches(password, hash));</pre>
+Boolean match = encoder.matches(password, hash));
+```
+
 
 What is a strong encryption algorithm today, might be a weak algorithm a year from now. Therefore, encryption needs to be reviewed regularly to make sure you use the right algorithm for the job. Use vetted security libraries for these tasks and keep your libraries up to date. Furthermore, make sure to scan your open source libraries for security vulnerabilities often with a tool like [Snyk Open Source](https://snyk.io/product/open-source-security-management/) to prevent unpleasant surprises.
 

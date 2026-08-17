@@ -35,7 +35,10 @@ The job is in Python, so I want to stay in the same tech stack. After a quick re
 
 I'm using Poetry to manage dependencies. Installing Playwright is as easy as:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash">poetry add playwright</pre>
+```bash
+poetry add playwright
+```
+
 
 At this point, Playwright is ready to use. It offers two distinct APIs, one *synchronous* and one *asynchronous*. Because of my use-case, the first flavour is more than enough.
 
@@ -50,7 +53,8 @@ Here's an excerpt of the API:
 
 It translates into the following code:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="python">from playwright.sync_api import Browser, Locator, Page, sync_playwright
+```python
+from playwright.sync_api import Browser, Locator, Page, sync_playwright
 
 with (sync_playwright() as pw):                                                        #1
     browser: Browser = pw.chromium.launch()                                            #2
@@ -64,7 +68,9 @@ with (sync_playwright() as pw):                                                 
     metrics: List[Locator] = metrics_container.locator('p.text-body-large-bold').all() #7
     impressions = atoi(metrics[0].inner_text())                                        #8
     # Get other metrics
-    browser.close()                                                                    #9</pre>
+    browser.close()                                                                    #9
+```
+
 
 1. Get a `playwright` object
 2. Launch a browser instance. Multiple browser types are available; I chose Chromium on a whim. Note that you should have installed the specific browser previously, *i.e.* , `playwright install --with-deps chromium`.By default, the browser opens *headless* ; it doesn't show up. I'd advise running it visibly at the beginning for easier debugging: `headless = True`.
@@ -88,7 +94,8 @@ I also met [Fabien Vauchelles](https://github.com/fabienvauchelles) at the [Java
 
 We can replace the above `launch` with the following:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="python">with sync_playwright() as pw:
+```python
+with sync_playwright() as pw:
     playwright_profile_dir = f'{Path.home()}/.social-metrics/playwright-profile'
     context: BrowserContext = pw.chromium.launch_persistent_context(playwright_profile_dir) #1
     try:                                                                               #2
@@ -104,7 +111,9 @@ We can replace the above `launch` with the following:
     except Exception as e:                                                             #2
         logger.error(f'Could not fetch metrics: {e}')
     finally:                                                                           #5
-        context.close()</pre>
+        context.close()
+```
+
 
 1. Playwright will store the profile in the specified folder and reuse it across runs
 2. Improve exception handling
@@ -119,10 +128,13 @@ Adapting to reality {#h2-3-adapting-to-reality}
 
 I was surprised to see that the code above didn't work reliably. It worked on the first run and sometimes on subsequent ones. Because I'm storing the browser profile across runs, when I need to authenticate, LinkedIn only asks for the password, not the login! Because the code tries to enter the login, it fails in this case. The fix is pretty straightforward:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="python">username_field = page.locator('#username')
+```python
+username_field = page.locator('#username')
 if username_field.is_visible():
     username_field.press_sequentially(getenv('LINKEDIN_USERNAME'))
-page.locator('#password').press_sequentially(getenv('LINKEDIN_PASSWORD'))</pre>
+page.locator('#password').press_sequentially(getenv('LINKEDIN_PASSWORD'))
+```
+
 
 Conclusion {#h2-4-conclusion}
 -----------------------------
@@ -138,6 +150,6 @@ Playwright allows recording videos in the context of tests, which is very useful
 * [Playwright](https://playwright.dev/)
 * [Video recording](https://playwright.dev/python/docs/videos)
 
-*** ** * ** ***
+
 
 *Originally published on [A Java Geek](https://blog.frankel.ch/first-steps-playwright/) on January 19^th^, 2024*

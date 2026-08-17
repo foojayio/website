@@ -34,19 +34,25 @@ Imagine a library that offers a component with an open/close lifecycle. The comp
 
 Before Java 7, you had actually to close the component explicitly:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="kotlin">Component component;
+```kotlin
+Component component;
 try {
     component = new Component();
     // Use component
 } finally {
     component.close();
-}</pre>
+}
+```
+
 
 Java 7 introduced the *try-with-resource* statement so that you can write something like this:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="kotlin">try (Component component = new Component()) {
+```kotlin
+try (Component component = new Component()) {
     // Use component
-}                                                // 1</pre>
+}                                                // 1
+```
+
 
 1. `Component` is closed here in a generated `finally` block
 
@@ -60,9 +66,12 @@ Kotlin provides the `use()` extension function on `Closeable`.
 
 Hence, one can replace the try-with-resource statement with a simple function call:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="kotlin">Component().use {
+```kotlin
+Component().use {
   // Use component as it
-}                                                // 1</pre>
+}                                                // 1
+```
+
 
 1. `Component` is closed here in a `finally` block
 
@@ -75,7 +84,8 @@ The Delegation pattern is widespread in Object-Oriented languages:
 
 Implementing the Delegation pattern in Java requires writing a lot of boilerplate code. The more methods the original class has, the more boring it is:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="kotlin">interface class Component {
+```kotlin
+interface class Component {
     void a();
     void b();
     void c();
@@ -93,11 +103,14 @@ public class CloseableComponent extends Component implements Closeable {
     void b() { component.b(); }
     void c() { component.c(); }
     public void close() {}
-}</pre>
+}
+```
+
 
 Kotlin supports the Delegation pattern out-of-the-box via the `by` keyword. One can rewrite the above code as:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="kotlin">interface Component {
+```kotlin
+interface Component {
     fun a() {}
     fun b() {}
     fun c() {}
@@ -106,23 +119,31 @@ Kotlin supports the Delegation pattern out-of-the-box via the `by` keyword. One 
 class CloseableComponent(component: Component) : Component by component,
                                                  Closeable {                  // 1
     override fun close() {}
-}</pre>
+}
+```
+
 
 1. Delegate all calls of `a()`, `b()`, and `c()` to the underlying `component`
 
 We can finally write the desired code:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="kotlin">CloseableComponent(RealComponent()).use {
+```kotlin
+CloseableComponent(RealComponent()).use {
     // Use component as it
-}</pre>
+}
+```
+
 
 Even better, it works with third-party code to improve an external library with this approach.
 
 The icing on the cake, one can also call the code from a *try-with-resource* Java statement:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="kotlin">try (CloseableComponent component = new CloseableComponent(new RealComponent())) {
+```kotlin
+try (CloseableComponent component = new CloseableComponent(new RealComponent())) {
     // Use component
-}</pre>
+}
+```
+
 
 As I wrote above, one can do it in Java also. In general, however, the sheer amount of boilerplate code that one needs to write to implement delegation is a significant impediment. Kotlin makes it a breeze.
 
@@ -134,9 +155,12 @@ fun Component.toCloseable() = CloseableComponent(this)
 
 And now, usage is fluent:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="kotlin">RealComponent().toCloseable().use {
+```kotlin
+RealComponent().toCloseable().use {
     // Use component
-}</pre>
+}
+```
+
 
 In this post, we have seen how to improve the API provided by third-party libraries. We achieved it by combining Kotlin extension functions and delegation.
 

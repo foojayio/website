@@ -35,11 +35,12 @@ Let's explore a practical example demonstrating how JEP 455 can be applied. We'l
 
 What I did here was create a file named OrderService.java and then put the following code.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">void main() {
+```java
+void main() {
     var user = new User(12345L, true);  //loggedIn user
     startProcessing(OrderStatus.NEW, switch (user.loggedIn()) {
-        case true -&gt; user.id();
-        case false -&gt; {
+        case true -> user.id();
+        case false -> {
             log("Unrecognized user");
             yield -1;
         }
@@ -47,8 +48,8 @@ What I did here was create a file named OrderService.java and then put the follo
 
     user = new User(0L, false); //not loggedIn user
     startProcessing(OrderStatus.NEW, switch (user.loggedIn()) {
-        case true -&gt; user.id();
-        case false -&gt; {
+        case true -> user.id();
+        case false -> {
             log("Unrecognized user");
             yield -1;
         }
@@ -57,12 +58,12 @@ What I did here was create a file named OrderService.java and then put the follo
 
 void startProcessing(OrderStatus orderStatus, long userId) {
     switch (userId) {
-        case -1L -&gt; System.out.println("Unrecognized User. Unable to process order.");
-        default -&gt; {
+        case -1L -> System.out.println("Unrecognized User. Unable to process order.");
+        default -> {
             var message = switch (orderStatus) {
-                case NEW -&gt; "Order for User %s is received and will start processing";
-                case PROCESSING -&gt; "Order for User %s is being processed.";
-                case DISPATCHED, DELIVERED -&gt; "Order for User %s has already been processed";
+                case NEW -> "Order for User %s is received and will start processing";
+                case PROCESSING -> "Order for User %s is being processed.";
+                case DISPATCHED, DELIVERED -> "Order for User %s has already been processed";
             };
             log(String.format(message, userId));
         }
@@ -81,7 +82,9 @@ public enum OrderStatus {
 }
 
 record User(long id, boolean loggedIn) {
-}</pre>
+}
+```
+
 
 In this example, we create a User object with an ID and a `loggedIn` status. The switch expression inside the `startProcessing` method evaluates whether the user is logged in.
 

@@ -166,7 +166,8 @@ If you take a look at the Java code in the folder for this demo in [GitHub](http
 
 The Flight class is designed to be a producer. It produces messages on the object-location topic each time the run() method is invoked. The constructor of the Flight class takes care of creating the PulsarClient connection and then the Pulsar topic producer. The most important thing to note here is the use of a `JSONSchema` based on the `ObjectLocation `class. This tells Pulsar the exact schema of the object that is being sent. Pulsar will expect the message to match the specified JSON Schema. If the message does not match the schema exactly, you will receive an error message.{#0916}
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public Flight(String flightID, String aircraftType) {
+```
+public Flight(String flightID, String aircraftType) {
      try {
           // Initialize our location
           Date now = new Date();
@@ -187,11 +188,14 @@ now.getTime());
      } catch(Exception ex) {
           System.out.println(ex.getMessage());
      }
-   }</pre>
+   }
+```
+
 
 No messages are sent to the topic until the run() method is invoked. Here is the run() method implementation:{#2f7b}
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public void run() {
+```
+public void run() {
      // Send a message to the topic
      try {
           producer.send(objLoc);
@@ -202,7 +206,9 @@ No messages are sent to the topic until the run() method is invoked. Here is the
      } catch(PulsarClientException pcex) {
           pcex.printStackTrace();
      }
-}</pre>
+}
+```
+
 
 The `producer.send(objLoc)` takes a native Java POJO that watches the schema expected and sends it over the topic. Note that you don't have to serialize your object. The Pulsar libraries are smart enough to take care of that for you! Also, the very first time you run this code (which we will do next), [Astra Streaming](https://astra.dev/3SZLxE1) will record the schema for the message type. You can view that schema by navigating to your topic and clicking on the ***Schema*** tab, as shown next.{#2cbe}
 ![](0_9gll9LTr_rtwEtyl.png) Figure 17: Viewing a topic schema.

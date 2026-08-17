@@ -110,7 +110,7 @@ Each server stores only **part of the dataset**.
 
 This is exactly what **sharding** does.
 
-*** ** * ** ***
+
 
 Sharding is the process of **splitting large datasets across multiple database servers**.
 
@@ -206,17 +206,23 @@ Let's look at a simple example.
 
 First, enable sharding for a database.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">sh.enableSharding("companyDB")</pre>
+```
+sh.enableSharding("companyDB")
+```
+
 
 Next, shard a collection.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">sh.shardCollection(
+```
+sh.shardCollection(
 
-&nbsp;"companyDB.employees",
+ "companyDB.employees",
 
-&nbsp;{ employeeId: 1 }
+ { employeeId: 1 }
 
-)</pre>
+)
+```
+
 
 MongoDB will now automatically distribute documents across shards.
 
@@ -224,13 +230,16 @@ One of the nice things about sharding in **MongoDB** is that application queries
 
 For example:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">db.employees.find(
+```
+db.employees.find(
 
-&nbsp;{ department: "Engineering" },
+ { department: "Engineering" },
 
-&nbsp;{ name: 1, managerName: 1, departmentName: 1 }
+ { name: 1, managerName: 1, departmentName: 1 }
 
-)</pre>
+)
+```
+
 
 The **mongos router** determines which shard contains the relevant documents and routes the query to that shard.From the application's perspective, it still feels like **one database**.
 

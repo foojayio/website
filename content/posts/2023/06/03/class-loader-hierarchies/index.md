@@ -72,13 +72,17 @@ I wanted to know the class loader hierarchy for my own projects, so of course, I
 
 Its usage is quite simple. Just attach it to a JVM or add it at startup:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">Usage: java -javaagent:classloader-hierarchy-agent.jar[=maxPackages=10,everyNSeconds=0] &lt;main class&gt;
+```
+Usage: java -javaagent:classloader-hierarchy-agent.jar[=maxPackages=10,everyNSeconds=0] <main class>
   maxPackages: maximum number of packages to print per classloader
-  every: print the hierarchy every N seconds (0 to disable)</pre>
+  every: print the hierarchy every N seconds (0 to disable)
+```
+
 
 For the `finagle-http` [renaissance](https://renaissance.dev/) benchmark, the agent, for example, prints the following when the benchmark is in full swing:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">[root]
+```
+[root]
   platform
        java.sql
        sun.util.resources.provider
@@ -95,13 +99,15 @@ For the `finagle-http` [renaissance](https://renaissance.dev/) benchmark, the ag
            scala.jdk
            scala.io
            scala.runtime
-</pre>
+```
+
 
 The root node is the bootstrap class loader. For every class loader, it gives us a thread that uses it as its primary class loader, a short list of packages associated with the class loader, and its child class loaders.
 
 Class loaders can have names, but sadly not many class loader creators use this feature, which turns understanding the individual class loader hierarchies into a guessing game. This is especially the case for Spring based applications like the [Spring PetClinic](https://github.com/spring-projects/spring-petclinic):
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">[root]  
+```
+[root]  
   platform
        java.sql
        javax.sql
@@ -121,7 +127,9 @@ Class loaders can have names, but sadly not many class loader creators use this 
            jakarta.validation
            org.postgresql
            jakarta.transaction
-           jakarta.el</pre>
+           jakarta.el
+```
+
 
 Feel free to try this agent on your applications; maybe you gain some new insights.
 

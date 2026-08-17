@@ -56,7 +56,8 @@ Also, let's define more requirements:
 
 Here's an initial definition for our `Notification` class:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public class Notification {
+```java
+public class Notification {
 
     private String title; // mandatory
     private String message; // mandatory
@@ -70,11 +71,14 @@ Here's an initial definition for our `Notification` class:
     }
 
     // omitted getters
-}</pre>
+}
+```
+
 
 Some developers would argue: "We can use the default constructor and setters to set the optional attributes". Let's try to follow this argument:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">import java.util.Optional;
+```java
+import java.util.Optional;
 
 import static java.util.Optional.ofNullable;
 import static java.util.Objects.requireNonNull;
@@ -128,7 +132,7 @@ public class Notification {
         this.type = type;
     }
 
-    public Optional&lt;Type&gt; getType() {
+    public Optional<Type> getType() {
         return ofNullable(type);
     }
 
@@ -136,27 +140,32 @@ public class Notification {
         this.attachment = attachment;
     }
 
-    public  Optional&lt;String&gt; getAttachment() {
+    public  Optional<String> getAttachment() {
         return attachment;
     }
 
     // omitted hash and equals methods
-}</pre>
+}
+```
+
 
 Analyzing the code above, we can see that the developer must call the setters to set the attributes. The code to create a `Notification` object would be like this:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public class NotificationProgram {
+```java
+public class NotificationProgram {
 
     public static void main(String[] args) {
         Notification notification = new Notification();
         notification.setTitle("New message");
         notification.setMessage("Hello, world!");
-        notification.setRecipient("<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="e58f8a8d8b818a80a5969c96918088cb868a88">[email&nbsp;protected]</a>");
+        notification.setRecipient("<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="e58f8a8d8b818a80a5969c96918088cb868a88">[email protected]</a>");
         notification.setHighPriority(true);
         notification.setType(Notification.Type.INFO);
         notification.setAttachment("/path/to/attachment.txt");
     }
-}</pre>
+}
+```
+
 
 Let's analyze the code above, we can highlight some drawbacks and issues with this approach:
 
@@ -173,7 +182,8 @@ Let's try to address the issues above.
 
 Okay, you would say: "*It's not a big deal! We can use the constructor to set the mandatory attributes and the setters to set the optional attributes*". Let's try to follow this argument:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">import static java.util.Optional.ofNullable;
+```java
+import static java.util.Optional.ofNullable;
 import static java.util.Objects.requireNonNull;
 
 public class Notification {
@@ -231,7 +241,7 @@ public class Notification {
         this.type = type;
     }
 
-    public Optional&lt;Type&gt; getType() {
+    public Optional<Type> getType() {
         return ofNullable(type);
     }
 
@@ -239,24 +249,29 @@ public class Notification {
         this.attachment = attachment;
     }
 
-    public  Optional&lt;String&gt; getAttachment() {
+    public  Optional<String> getAttachment() {
         return attachment;
     }
 
     // omitted hash and equals methods
-}</pre>
+}
+```
+
 
 Let's update the `NotificationProgram` that creates a `Notification` object:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public class NotificationProgram {
+```java
+public class NotificationProgram {
 
     public static void main(String[] args) {
-        Notification notification = new Notification("New message", "Hello, world!", "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="a2c8cdcaccc6cdc7e2d1dbd1d6c7cf8cc1cdcf">[email&nbsp;protected]</a>");
+        Notification notification = new Notification("New message", "Hello, world!", "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="a2c8cdcaccc6cdc7e2d1dbd1d6c7cf8cc1cdcf">[email protected]</a>");
         notification.setHighPriority(true);
         notification.setType(Notification.Type.INFO);
         notification.setAttachment("/path/to/attachment.txt");
     }
-}</pre>
+}
+```
+
 
 It looks like we solved the first issue, right? Well, let's analyze the code again:
 
@@ -283,7 +298,8 @@ Immutable objects are thread-safe by nature because they cannot be modified afte
 
 We could use specific constructors to make the `Notification` object immutable. See below:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">import static java.util.Optional.ofNullable;
+```java
+import static java.util.Optional.ofNullable;
 import static java.util.Objects.requireNonNull;
 
 public class Notification {
@@ -329,37 +345,43 @@ public class Notification {
         return highPriority;
     }
 
-    public Optional&lt;Type&gt; getType() {
+    public Optional<Type> getType() {
         return ofNullable(type);
     }
 
-    public  Optional&lt;String&gt; getAttachment() {
+    public  Optional<String> getAttachment() {
         return attachment;
     }
 
     // omitted hash and equals methods
-}</pre>
+}
+```
+
 
 Now, let's update the `NotificationProgram` that creates a `Notification` object:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public class NotificationProgram {
+```java
+public class NotificationProgram {
 
     public static void main(String[] args) {
         Notification notification = new Notification(
                 "New message",
                 "Hello, world!",
-                "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="12787d7a7c767d7752616b6166777f3c717d7f">[email&nbsp;protected]</a>",
+                "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="12787d7a7c767d7752616b6166777f3c717d7f">[email protected]</a>",
                 true,
                 Notification.Type.INFO,
                 "/path/to/attachment.txt");
     }
-}</pre>
+}
+```
+
 
 Now, the `Notification` objects are immutable and thread-safe. The developer can instantiate the object with all mandatory and optional attributes in a single line of code. The object will be created in a valid state, and the developer cannot change its state after creation.
 
 Since Java 16, we can use the `record` keyword to create immutable objects. If you're using Java 16 or above, I highly recommend you to use Java Records to create immutable objects. Let's see how we can refactor the `Notification` class to become a Java Record:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">import static java.util.Objects.requireNonNull;
+```java
+import static java.util.Objects.requireNonNull;
 import static java.util.Optional.ofNullable;
 
 public record Notification(
@@ -380,7 +402,9 @@ public record Notification(
         requireNonNull(recipient, "recipient is required");
         type = ofNullable(type).orElse(Type.GENERAL);
     }
-}</pre>
+}
+```
+
 
 Less code, more readability, and more maintainability. That's the power of Java Records.
 
@@ -394,7 +418,8 @@ A common approach to object creation is to provide multiple constructors with di
 
 Let's try to follow this approach. Let's see them.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">import static java.util.Objects.requireNonNull;
+```java
+import static java.util.Objects.requireNonNull;
 import static java.util.Optional.ofNullable;
 
 public record Notification(
@@ -419,31 +444,36 @@ public record Notification(
         requireNonNull(recipient, "recipient is required");
         type = ofNullable(type).orElse(Type.GENERAL);
     }
-}</pre>
+}
+```
+
 
 Now developers will be able to create `Notification` objects with only the mandatory attributes. The optional attributes will be set to default values. The `Notification` objects are immutable and thread-safe.
 
 Let's update the `NotificationProgram` that creates a `Notification` object:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public class NotificationProgram {
+```java
+public class NotificationProgram {
 
     public static void main(String[] args) {
         var notificationWithDefaultOptionalValues =
                 new Notification(
                         "New message",
                         "Hello, world!",
-                        "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="8ae0e5e2e4eee5efcaf9f3f9feefe7a4e9e5e7">[email&nbsp;protected]</a>");
+                        "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="8ae0e5e2e4eee5efcaf9f3f9feefe7a4e9e5e7">[email protected]</a>");
 
         var notificationWithCustomOptionalValues =
                 new Notification(
                         "Another message",
                         "Oh no! Something wrong happened",
-                        "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="dab0b5b2b4beb5bf9aa9a3a9aebfb7f4b9b5b7">[email&nbsp;protected]</a>",
+                        "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="dab0b5b2b4beb5bf9aa9a3a9aebfb7f4b9b5b7">[email protected]</a>",
                         true,
                         Notification.Type.ERROR,
                         "/path/to/attachment.txt");
     }
-}</pre>
+}
+```
+
 
 Great! Let's review the issues we had and how we solved them:
 
@@ -471,7 +501,8 @@ Before to put our finger in the code, let's think about how to apply the static 
 
 In fact, for our challenge, if we concentrate to provide static factory methods for all possible combinations, it would be resulting in a big class with many static factory methods. It's about 16 variations of static factory methods! Maybe it would be not a good idea to have many static factories methods in a class. Maybe it makes the class harder to maintain and understand. Let's change our point of view: instead of cover statically all possible combinations, we can provide static factory methods with the attributes that would be composing possible combinations. Let's see them.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">import static java.util.Objects.requireNonNull;
+```java
+import static java.util.Objects.requireNonNull;
 import static java.util.Optional.ofNullable;
 
 @lombok.Builder
@@ -510,13 +541,16 @@ public record Notification(
         type = ofNullable(type).orElse(Type.GENERAL);
     }
 
-}</pre>
+}
+```
+
 
 Now, developers can create `Notification` objects using static factory methods. The static factory methods have names that describe the object being returned, making it easier for developers to know which constructor should be used. The `Notification` objects are immutable and thread-safe.
 
 Let's update the `NotificationProgram` that creates a `Notification` object:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public class NotificationProgram {
+```java
+public class NotificationProgram {
 
     public static void main(String[] args) {
         var generalNotificationWithoutAttachment = Notification
@@ -524,16 +558,18 @@ Let's update the `NotificationProgram` that creates a `Notification` object:
                         Notification.Type.GENERAL,
                         "General Notification",
                         "This is a general notification",
-                        "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="8fe5e0e7e1ebe0eacffcf6fcfbeae2a1ece0e2">[email&nbsp;protected]</a>");
+                        "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="8fe5e0e7e1ebe0eacffcf6fcfbeae2a1ece0e2">[email protected]</a>");
 
         var highPrioryInfoNotification = Notification
                 .createHighPriorityNotification(
                         Notification.Type.INFO,
                         "High Priority Info Notification",
                         "This is a high priority info notification",
-                        "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="ef858087818b808aaf9c969c9b8a82c18c8082">[email&nbsp;protected]</a>");
+                        "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="ef858087818b808aaf9c969c9b8a82c18c8082">[email protected]</a>");
     }
-}</pre>
+}
+```
+
 
 Great! We're improving our code step by step. Maybe it's even good shape for some cases already, but I'm sure that we can do better!
 
@@ -547,7 +583,8 @@ Some libraries like Lombok, or plugins of IDEs like IntelliJ IDEA, can generate 
 
 Let's see how we can implement the Builder pattern for our `Notification` class using Lombok for example:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">import lombok.Builder;
+```java
+import lombok.Builder;
 import static java.util.Objects.requireNonNull;
 import static java.util.Optional.ofNullable;
 
@@ -570,11 +607,14 @@ public record Notification(
         requireNonNull(recipient, "recipient is required");
         type = ofNullable(type).orElse(Type.GENERAL);
     }
-}</pre>
+}
+```
+
 
 Behind of scenes, Lombok will generate to you all the builder class for the `Notification` class. At the end, we will have a similar result like below:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">import static java.util.Objects.requireNonNull;
+```java
+import static java.util.Objects.requireNonNull;
 import static java.util.Optional.ofNullable;
 
 public record Notification(
@@ -645,7 +685,9 @@ public record Notification(
             return new Notification(title, message, recipient, highPriority, type, attachment);
         }
     }
-}</pre>
+}
+```
+
 
 Lombok provides many annotations to generate boilerplate code for you. The `@Builder` annotation generates a builder class for the annotated class. The generated builder class by Lombok has a fluent interface where developers can call in chaining way the methods to set the attributes of the annotated class and a `build()` method to create an instance of the annotated class.
 
@@ -657,12 +699,13 @@ Particularly I prefer to have these classes explicitly in my code. It helps me t
 
 Let's see the flexibility that the Builder pattern provides to developers:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public class NotificationProgram {
+```java
+public class NotificationProgram {
     public static void main(String[] args) {
         var generalNotification = Notification.builder()
                 .title("Hello")
                 .message("Hello World")
-                .recipient("<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="2f454047414b404a6f5c565c5b4a42014c4042">[email&nbsp;protected]</a>")
+                .recipient("<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="2f454047414b404a6f5c565c5b4a42014c4042">[email protected]</a>")
                 .build();
 
         // do something with generalNotification
@@ -670,7 +713,7 @@ Let's see the flexibility that the Builder pattern provides to developers:
         var highPriorityInfoNotificationWithAttachment = Notification.builder()
                 .title("Hello")
                 .message("Hello World")
-                .recipient("<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="22484d4a4c464d4762515b5156474f0c414d4f">[email&nbsp;protected]</a>")
+                .recipient("<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="22484d4a4c464d4762515b5156474f0c414d4f">[email protected]</a>")
                 .type(Type.INFO)
                 .highPriority(true)
                 .attachment("attachment.pdf")
@@ -678,7 +721,9 @@ Let's see the flexibility that the Builder pattern provides to developers:
 
         // do something with highPriorityInfoNotificationWithAttachment;
     }
-}</pre>
+}
+```
+
 
 Now, developers can create `Notification` objects using the Builder pattern. The Builder pattern allows developers to construct complex objects step by step, making the object creation more readable and maintainable.
 
@@ -688,13 +733,16 @@ What do you mean with that? - you may get to ask. It's a great question!
 
 Before to add the builder solution in the `Notification` class, developers whose are using our class must pass the required arguments to the static factories methods to create `Notification` objects. The Java compiler will enforce the developer to pass the mandatory and required arguments to the static factory methods to create `Notification` objects with valid state. Our builder solution doesn't provide this capability. Look the code below:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public class NotificationProgram {
+```java
+public class NotificationProgram {
     public static void main(String[] args) {
         var anotherNotification = Notification.builder()
-                .recipient("<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="a7cdc8cfc9c3c8c2e7d4ded4d3c2ca89c4c8ca">[email&nbsp;protected]</a>")
+                .recipient("<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="a7cdc8cfc9c3c8c2e7d4ded4d3c2ca89c4c8ca">[email protected]</a>")
                 .build();
     }
-}</pre>
+}
+```
+
 
 You may say: "*It is not a big problem! The class will respect their constraints and no invalid instance will be created! It will throw exceptions to the caller!*". Well, it's true but such exceptions will be thrown in runtime only. It's not a good for anyone!
 
@@ -715,7 +763,8 @@ First, let's break down the `NotificationBuilder` in multiple steps. Each step w
 
 Let's see them:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">import static java.util.Objects.requireNonNull;
+```java
+import static java.util.Objects.requireNonNull;
 import static java.util.Optional.ofNullable;
 
 public record Notification(
@@ -806,7 +855,9 @@ public record Notification(
             return new Notification(title, message, recipient);
         }
     }
-}</pre>
+}
+```
+
 
 Now, developers must follow the order of method calls to create a `Notification` object. The `NotificationBuilderWithTitle` class is responsible for setting the `title` attribute. The `NotificationBuilderWithTitleMessage` class is responsible for setting the `message` attribute. The `NotificationBuilderWithTitleMessageRecipient` class is responsible for setting the `recipient` attribute. The `NotificationBuilderWithTitleMessageRecipient` class has a `build()` method to create a `Notification` object. Let's highlight some points:
 
@@ -817,7 +868,8 @@ Now, developers must follow the order of method calls to create a `Notification`
 
 Great! Let's continue to implement the optional attributes. Let's see them:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">import static java.util.Objects.requireNonNull;
+```java
+import static java.util.Objects.requireNonNull;
 import static java.util.Optional.ofNullable;
 
 public record Notification(
@@ -973,7 +1025,9 @@ public record Notification(
         }
     }
 
-}</pre>
+}
+```
+
 
 Now, developer can create `Notification` objects defining the optional attributes in any order. The `NotificationBuilderWithTitleMessageRecipientAndMore` class is responsible for setting the optional attributes. Also, at this point, developers can set the optional attributes or call the `build()` method to create a `Notification` object arbitrarily. Let's highlight some points:
 
@@ -982,7 +1036,8 @@ Now, developer can create `Notification` objects defining the optional attribute
 
 Let's update the `NotificationProgram` that creates a `Notification` object using the Builder pattern:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">import notification.Notification;
+```java
+import notification.Notification;
 
 public class NotificationProgram {
 
@@ -990,7 +1045,7 @@ public class NotificationProgram {
         var generalNotification = Notification.builder()
                 .title("Another title")
                 .message("Another message")
-                .recipient("<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="cea4a1a6a0aaa1ab8ebdb7bdbaaba3e0ada1a3">[email&nbsp;protected]</a>")
+                .recipient("<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="cea4a1a6a0aaa1ab8ebdb7bdbaaba3e0ada1a3">[email protected]</a>")
                 .build();
 
         // do something with generalNotification
@@ -998,7 +1053,7 @@ public class NotificationProgram {
         var highPriorityWarningNotification = Notification.builder()
                 .title("Warning title")
                 .message("Attention people!")
-                .recipient("<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="7d171215131912183d0e04091810531e1210">[email&nbsp;protected]</a>")
+                .recipient("<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="7d171215131912183d0e04091810531e1210">[email protected]</a>")
                 .addMore()
                 .highPriority(true)
                 .type(Notification.Type.WARNING)
@@ -1009,7 +1064,7 @@ public class NotificationProgram {
         var highPriorityErrorNotificationWithAttachment = Notification.builder()
                 .title("Warning title")
                 .message("Attention people!")
-                .recipient("<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="7d171215131912183d0e04091810531e1210">[email&nbsp;protected]</a>")
+                .recipient("<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="7d171215131912183d0e04091810531e1210">[email protected]</a>")
                 .addMore()
                 .type(Notification.Type.ERROR)
                 .attachment("error.log")
@@ -1019,7 +1074,9 @@ public class NotificationProgram {
         // do something with highPriorityErrorNotificationWithAttachment
     }
 
-}</pre>
+}
+```
+
 
 This builder implementation go beyond the traditional Builder pattern.  
 

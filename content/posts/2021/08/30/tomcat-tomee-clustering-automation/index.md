@@ -69,7 +69,10 @@ Here are some Tomcat-specific changes and optimizations based on the cluster ins
 
 * After enabling the Auto-Clustering for Tomcat, the [Cluster](https://tomcat.apache.org/tomcat-10.0-doc/config/cluster.html) element is added to the "Engine" section of the **/opt/tomcat/conf/server.xml** configuration file:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&lt;Cluster className="org.apache.catalina.ha.tcp.SimpleTcpCluster" channelSendOptions="6"&gt;</pre>
+```
+<Cluster className="org.apache.catalina.ha.tcp.SimpleTcpCluster" channelSendOptions="6">
+```
+
 
 where:
 

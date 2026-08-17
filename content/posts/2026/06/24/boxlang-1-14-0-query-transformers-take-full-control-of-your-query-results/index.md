@@ -66,20 +66,24 @@ Every transformer receives exactly two arguments:
 
 `query` -- the raw Query object. Everything you need is here:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">query.recordCount          // number of rows
+```java
+query.recordCount          // number of rows
 query.getColumnNames()     // Array of column name strings
 query.getColumnMeta()      // Struct of column JDBC metadata (new in 1.14.0)
 query.toArrayOfStructs()   // Array of row structs
 query.getData()            // Raw 2D array of row data
-</pre>
+```
+
 
 `metadata` -- a struct with execution context:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">metadata.sql               // the SQL string that was executed
+```java
+metadata.sql               // the SQL string that was executed
 metadata.parameters        // bound parameter values
 metadata.executionTime     // milliseconds
 metadata.columnMetadata    // JDBC column descriptors
-</pre>
+```
+
 
 Both arguments arrive after the result set has been closed, so you have access to every property without worrying about cursor state.
 
@@ -90,9 +94,10 @@ Live Examples: Inline Closures {#h2-3-live-examples-inline-closures}
 
 The most common pattern in REST APIs -- wrap the rows in a response envelope that includes pagination info and the originating SQL for debugging.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">var result = queryExecute( "SELECT * FROM users WHERE active = 1", [], {
+```java
+var result = queryExecute( "SELECT * FROM users WHERE active = 1", [], {
     datasource: "app",
-    transformer: ( query, meta ) =&gt; {
+    transformer: ( query, meta ) => {
         return {
             data       : query.toArrayOfStructs(),
             total      : query.recordCount,
@@ -102,10 +107,11 @@ The most common pattern in REST APIs -- wrap the rows in a response envelope tha
     }
 } )
 
-// result.data     =&gt; [ { id:1, name:"Alice", ... }, ... ]
-// result.total    =&gt; 42
-// result.sql      =&gt; "SELECT * FROM users WHERE active = 1"
-</pre>
+// result.data     => [ { id:1, name:"Alice", ... }, ... ]
+// result.total    => 42
+// result.sql      => "SELECT * FROM users WHERE active = 1"
+```
+
 
 No second pass. No separate wrapper function. The envelope is the result.
 
@@ -113,53 +119,62 @@ No second pass. No separate wrapper function. The envelope is the result.
 
 Map each row directly into a domain object in a single expression. This pairs cleanly with the new class-reference-as-constructor feature also introduced in 1.14.0.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">var users = queryExecute( "SELECT * FROM users", [], {
+```java
+var users = queryExecute( "SELECT * FROM users", [], {
     datasource: "app",
-    transformer: ( query, meta ) -&gt; query.toArrayOfStructs().map( row -&gt; new User( row ) )
+    transformer: ( query, meta ) -> query.toArrayOfStructs().map( row -> new User( row ) )
 } )
 
-// users =&gt; [ User{...}, User{...}, ... ]
-</pre>
+// users => [ User{...}, User{...}, ... ]
+```
+
 
 Because `map()` accepts a class reference as a functional constructor, you can compress this even further using our BoxLang 1.14 [Functional Constructors](https://boxlang.ortusbooks.com/boxlang-language/classes#constructors "Functional Constructors") feature.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">transformer: ( query, meta ) =&gt; query.toArrayOfStructs().map( User )
-</pre>
+```java
+transformer: ( query, meta ) => query.toArrayOfStructs().map( User )
+```
+
 
 ### 3. Tabular Format (Near Zero-Copy) {#h3-6-3-tabular-format-near-zero-copy}
 
 Some consumers -- charting libraries, data grids, analytics pipelines -- prefer a columnar representation: a list of column names and a 2D array of row values. This avoids allocating a struct per row.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">var tabular = queryExecute( "SELECT id, name, price FROM products", [], {
+```java
+var tabular = queryExecute( "SELECT id, name, price FROM products", [], {
     datasource: "app",
-    transformer: ( query, meta ) =&gt; {
+    transformer: ( query, meta ) => {
         return {
             columns : query.getColumnNames(),
-            data    : query.getData().map( row =&gt; arrayNew( row ) )
+            data    : query.getData().map( row => arrayNew( row ) )
         }
     }
 } )
 
-// tabular.columns =&gt; [ "id", "name", "price" ]
-// tabular.data    =&gt; [ [1,"Widget",9.99], [2,"Gadget",19.99], ... ]
-</pre>
+// tabular.columns => [ "id", "name", "price" ]
+// tabular.data    => [ [1,"Widget",9.99], [2,"Gadget",19.99], ... ]
+```
+
 
 This is the format libraries like Apache Arrow or columnar JSON APIs expect. Previously you would need a custom loop to build it. Now it is a single expression. You can even compress this using BoxLang's Functional BIF expressions `::arrayNew`
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">data    : query.getData().map( ::arrayNew )
-</pre>
+```java
+data    : query.getData().map( ::arrayNew )
+```
+
 
 ### 4. Rich Column Descriptors {#h3-7-4-rich-column-descriptors}
 
 The new `getColumnMeta()` method (a prerequisite enhancement shipped alongside transformers) captures JDBC `ResultSetMetaData` that was previously discarded after the cursor closed. Use it to produce schema-aware result sets.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">var rich = queryExecute( "SELECT id, name, price, status FROM products", [], {
+```java
+var rich = queryExecute( "SELECT id, name, price, status FROM products", [], {
     datasource: "app",
-    transformer: ( query, meta ) =&gt; {
+    transformer: ( query, meta ) => {
         var colMeta = query.getColumnMeta()
         return {
             count   : query.recordCount,
-            columns : query.getColumnNames().map( name =&gt; {
+            columns : query.getColumnNames().map( name => {
                 var info = colMeta[ name ]
                 return {
                     name      : name,
@@ -170,19 +185,20 @@ The new `getColumnMeta()` method (a prerequisite enhancement shipped alongside t
                     maxLength : info.maxLength
                 }
             } ),
-            data : query.getData().map( row =&gt; arrayNew( row ) )
+            data : query.getData().map( row => arrayNew( row ) )
         }
     }
 } )
 
-// rich.columns =&gt; [
+// rich.columns => [
 //   { name: "id",     type: "INTEGER", nullable: false, readOnly: true,  decimals: 0,  maxLength: 10 },
 //   { name: "name",   type: "VARCHAR", nullable: false, readOnly: false, decimals: 0,  maxLength: 100 },
 //   { name: "price",  type: "DECIMAL", nullable: true,  readOnly: false, decimals: 2,  maxLength: 10 },
 //   { name: "status", type: "VARCHAR", nullable: true,  readOnly: false, decimals: 0,  maxLength: 20 }
 // ]
-// rich.data =&gt; [ [1, "Widget", 9.99, "active"], ... ]
-</pre>
+// rich.data => [ [1, "Widget", 9.99, "active"], ... ]
+```
+
 
 This format is ideal for dynamic data grids, code generators, and API documentation tools that need to understand the shape of data, not just its values.
 
@@ -193,14 +209,15 @@ When the same transformation logic needs to be shared across multiple queries --
 
 Any class with a `transform( query, metadata )` method qualifies.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">// models/transformers/RichTransformer.bx
+```java
+// models/transformers/RichTransformer.bx
 class RichTransformer {
 
     function transform( query, metadata ) {
         var colMeta = query.getColumnMeta()
         return {
             count   : query.recordCount,
-            columns : query.getColumnNames().map( name =&gt; {
+            columns : query.getColumnNames().map( name => {
                 var info = colMeta[ name ]
                 return {
                     name      : name,
@@ -211,20 +228,23 @@ class RichTransformer {
                     maxLength : info.maxLength
                 }
             } ),
-            data : query.getData().map( row =&gt; arrayNew( row ) )
+            data : query.getData().map( row => arrayNew( row ) )
         }
     }
 
 }
-</pre>
+```
+
 
 Usage is identical -- just pass an instance:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">var transformer = new RichTransformer()
+```java
+var transformer = new RichTransformer()
 
 var products = queryExecute( sql, params, { transformer: transformer } )
 var orders   = queryExecute( orderSql, orderParams, { transformer: transformer } )
-</pre>
+```
+
 
 The same transformer instance can be reused across any number of queries with no side effects -- the `query` and `metadata` arguments are always fresh per execution.
 
@@ -233,21 +253,22 @@ Registered App-Level Transformers {#h2-9-registered-app-level-transformers}
 
 For application-wide reuse, register your transformers once in `Application.bx` and reference them anywhere by name.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">// Application.bx
+```java
+// Application.bx
 this.queryTransformers = {
 
     "rich" : new models.transformers.RichTransformer(),
 
-    "tabular" : ( query, meta ) =&gt; {
+    "tabular" : ( query, meta ) => {
         return {
             columns : query.getColumnNames(),
-            data    : query.getData().map( row =&gt; arrayNew( row ) )
+            data    : query.getData().map( row => arrayNew( row ) )
         }
     },
 
-    "json" : ( query, meta ) =&gt; serializeJson( query.toArrayOfStructs() ),
+    "json" : ( query, meta ) => serializeJson( query.toArrayOfStructs() ),
 
-    "envelope" : ( query, meta ) =&gt; {
+    "envelope" : ( query, meta ) => {
         return {
             data       : query.toArrayOfStructs(),
             total      : query.recordCount,
@@ -259,15 +280,18 @@ this.queryTransformers = {
     "domainUsers" : "models.transformers.UserTransformer"
 
 }
-</pre>
+```
+
 
 Now any `queryExecute()` call anywhere in your application can reference these by name:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">var rich    = queryExecute( sql, params, { transformer: "rich" } )
+```java
+var rich    = queryExecute( sql, params, { transformer: "rich" } )
 var tabular = queryExecute( sql, params, { transformer: "tabular" } )
 var json    = queryExecute( sql, params, { transformer: "json" } )
 var users   = queryExecute( sql, params, { transformer: "domainUsers" } )
-</pre>
+```
+
 
 The `"domainUsers"` entry is a dotted class path string -- BoxLang resolves it lazily on first use, so you can register class paths for transformers that may not always be loaded.
 
@@ -291,20 +315,24 @@ bx:query Component Support {#h2-11-bx-query-component-support}
 
 Transformers are not limited to `queryExecute()`. The `bx:query` component accepts a `transformer` attribute as well.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">&lt;bx:query
+```java
+<bx:query
     name="result"
     datasource="app"
-    transformer=(( q, m ) =&gt; serializeJson( q.toArrayOfStructs() ))&gt;
+    transformer=(( q, m ) => serializeJson( q.toArrayOfStructs() ))>
     SELECT * FROM users WHERE active = 1
-&lt;/bx:query&gt;
-</pre>
+</bx:query>
+```
+
 
 Or using a registered name:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">&lt;bx:query name="result" datasource="app" transformer="json"&gt;
+```java
+<bx:query name="result" datasource="app" transformer="json">
     SELECT * FROM users WHERE active = 1
-&lt;/bx:query&gt;
-</pre>
+</bx:query>
+```
+
 
 The `result` variable will contain whatever your transformer returned -- in the JSON example above, a serialized JSON string.
 
@@ -321,7 +349,8 @@ As part of the transformer work, BoxLang now preserves JDBC `ResultSetMetaData` 
 | `decimals`  | `getScale()`                       | Decimal places for numeric types                  |
 | `maxLength` | `getColumnDisplaySize()`           | Max display width for string types                |
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">var q       = queryExecute( "SELECT id, email, score FROM users" )
+```java
+var q       = queryExecute( "SELECT id, email, score FROM users" )
 var colMeta = q.getColumnMeta()
 
 for ( var name in q.getColumnNames() ) {
@@ -331,7 +360,8 @@ for ( var name in q.getColumnNames() ) {
 // id    -- type: INTEGER, nullable: false, decimals: 0
 // email -- type: VARCHAR, nullable: false, decimals: 0
 // score -- type: DECIMAL, nullable: true,  decimals: 2
-</pre>
+```
+
 
 Global Query Options {#h2-13-global-query-options}
 --------------------------------------------------
@@ -340,25 +370,29 @@ Along with transformers, 1.14.0 also ships application-level and runtime-level q
 
 ### Application.bx {#h3-14-application-bx}
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">this.queryOptions = {
+```java
+this.queryOptions = {
     timeout      : 30,
     returnType   : "array",
     fetchSize    : 500,
     maxRows      : 0,
     cacheProvider: "default"
 }
-</pre>
+```
+
 
 ### boxlang.json {#h3-15-boxlang-json}
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">"queries": {
+```java
+"queries": {
     "timeout"      : 0,
     "returnType"   : "query",
     "fetchSize"    : 0,
     "maxRows"      : 0,
     "cacheProvider": "default"
 }
-</pre>
+```
+
 
 Priority order is: **per-query option \>** `this.queryOptions` \> `boxlang.json`. Set your application-wide defaults once and override only where needed.
 
@@ -367,19 +401,23 @@ Upgrade Notes {#h2-16-upgrade-notes}
 
 Query Transformers require no migration. Existing queries are unaffected -- the `transformer` option is purely additive. If you are on 1.13.x, update to 1.14.0 via CommandBox:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">"queries": {
+```java
+"queries": {
     "timeout"      : 0,
     "returnType"   : "query",
     "fetchSize"    : 0,
     "maxRows"      : 0,
     "cacheProvider": "default"
 }
-</pre>
+```
+
 
 Or pull the latest Docker image:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">docker pull ortussolutions/boxlang:1.14.0
-</pre>
+```java
+docker pull ortussolutions/boxlang:1.14.0
+```
+
 
 Resources {#h2-17-resources}
 ----------------------------

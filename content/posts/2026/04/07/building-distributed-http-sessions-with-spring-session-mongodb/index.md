@@ -50,11 +50,17 @@ Before starting, ensure you have the following installed:
 
 The application expects a MongoDB connection string through the environment variable:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">MONGODB_URI</pre>
+```
+MONGODB_URI
+```
+
 
 For example:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">export MONGODB_URI="mongodb+srv://&lt;username&gt;:&lt;password&gt;@cluster.mongodb.net/"</pre>
+```
+export MONGODB_URI="mongodb+srv://<username>:<password>@cluster.mongodb.net/"
+```
+
 
 The application configuration will append the database name automatically.
 
@@ -63,26 +69,29 @@ Project Dependencies {#h2-1-project-dependencies}
 
 We're going to start with a new Spring application. You can use [Spring Initializr](https://start.spring.io/) and make sure you are using Spring Boot 4.0+ to ensure compatibility with [Spring Session 4.0](https://docs.spring.io/spring-session/reference/whats-new.html) or higher. The Maven configuration for this project is shown below.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&lt;dependencies&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&lt;dependency&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;artifactId&gt;spring-boot-starter-web&lt;/artifactId&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&lt;/dependency&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&lt;dependency&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;artifactId&gt;spring-boot-starter-data-mongodb&lt;/artifactId&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&lt;/dependency&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&lt;dependency&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;groupId&gt;org.mongodb&lt;/groupId&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;artifactId&gt;mongodb-spring-session&lt;/artifactId&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;version&gt;4.0.0-rc0&lt;/version&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&lt;/dependency&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&lt;dependency&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;artifactId&gt;spring-boot-starter-test&lt;/artifactId&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;scope&gt;test&lt;/scope&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&lt;/dependency&gt;
-&lt;/dependencies&gt;</pre>
+```
+<dependencies>
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-web</artifactId>
+    </dependency>
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-data-mongodb</artifactId>
+    </dependency>
+    <dependency>
+        <groupId>org.mongodb</groupId>
+        <artifactId>mongodb-spring-session</artifactId>
+        <version>4.0.0-rc0</version>
+    </dependency>
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-test</artifactId>
+        <scope>test</scope>
+    </dependency>
+</dependencies>
+```
+
 
 ### Spring Web {#h3-2-spring-web}
 
@@ -105,7 +114,10 @@ Even though our controller code never directly interacts with MongoDB, Spring Se
 
 The most important dependency is:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">mongodb-spring-session</pre>
+```
+mongodb-spring-session
+```
+
 
 This library replaces the default HTTP session implementation with a MongoDB-backed version.
 
@@ -118,11 +130,14 @@ Application Configuration {#h2-5-application-configuration}
 
 Next, we configure the MongoDB connection.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">spring.application.name=devrel-tutorial-java-spring-session-mongodb
+```
+spring.application.name=devrel-tutorial-java-spring-session-mongodb
 
 spring.mongodb.database=springSessions
 
-spring.mongodb.uri=${MONGODB_URI}&amp;appName=${spring.application.name}</pre>
+spring.mongodb.uri=${MONGODB_URI}&appName=${spring.application.name}
+```
+
 
 Three properties are defined here.
 
@@ -134,15 +149,24 @@ Three properties are defined here.
 
 The example above appends appName using \&. This assumes that your MONGODB_URI already includes query parameters, which is common for MongoDB Atlas connection strings, such as:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">mongodb+srv://&lt;username&gt;:&lt;password&gt;@cluster.mongodb.net/?retryWrites=true&amp;w=majority</pre>
+```
+mongodb+srv://<username>:<password>@cluster.mongodb.net/?retryWrites=true&w=majority
+```
+
 
 If your URI already contains options like ?retryWrites=true, you can keep the configuration exactly as written:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">spring.mongodb.uri=${MONGODB_URI}&amp;appName=${spring.application.name}</pre>
+```
+spring.mongodb.uri=${MONGODB_URI}&appName=${spring.application.name}
+```
+
 
 However, if your URI does **not** contain a query section, appending \&appName will produce an invalid connection string. In that case, you should append the parameter using ? instead:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">spring.mongodb.uri=${MONGODB_URI}?appName=${spring.application.name}</pre>
+```
+spring.mongodb.uri=${MONGODB_URI}?appName=${spring.application.name}
+```
+
 
 In short:
 
@@ -154,12 +178,15 @@ Bootstrapping the Application {#h2-6-bootstrapping-the-application}
 
 The entry point for the application is a standard Spring Boot class.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@SpringBootApplication
+```
+@SpringBootApplication
 public class SpringSessionsMongodbAppApplication {
-&nbsp;&nbsp;&nbsp;&nbsp;public static void main(String[] args) {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SpringApplication.run(SpringSessionsMongodbAppApplication.class, args);
-&nbsp;&nbsp;&nbsp;&nbsp;}
-}</pre>
+    public static void main(String[] args) {
+        SpringApplication.run(SpringSessionsMongodbAppApplication.class, args);
+    }
+}
+```
+
 
 Nothing special happens here. The important detail is that we are not manually configuring session storage. Spring Boot will automatically wire everything together once the session configuration is enabled.
 
@@ -168,10 +195,13 @@ Enabling MongoDB HTTP Sessions {#h2-7-enabling-mongodb-http-sessions}
 
 To activate MongoDB-backed sessions, we add a configuration class.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@Configuration
+```
+@Configuration
 @EnableMongoHttpSession
 public class SessionConfig {
-}</pre>
+}
+```
+
 
 The @EnableMongoHttpSession annotation instructs Spring to replace the default session management mechanism with the MongoDB-backed implementation provided by Spring Session. This annotation changes the underlying session storage model for the entire application.
 
@@ -188,36 +218,42 @@ GET /theme
 
 The controller implementation is shown below.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@RestController
+```
+@RestController
 @RequestMapping("/theme")
 public class ThemeController {
-&nbsp;&nbsp;&nbsp;&nbsp;@PostMapping
-&nbsp;&nbsp;&nbsp;&nbsp;public Map&lt;String, Object&gt; setTheme(
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@RequestParam String theme,
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;HttpSession session) {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;session.setAttribute("theme", theme);
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return Map.of(
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"message", "Theme set",
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"theme", theme,
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"sessionId", session.getId()
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;);
-&nbsp;&nbsp;&nbsp;&nbsp;}
+    @PostMapping
+    public Map<String, Object> setTheme(
+            @RequestParam String theme,
+            HttpSession session) {
+        session.setAttribute("theme", theme);
+        return Map.of(
+                "message", "Theme set",
+                "theme", theme,
+                "sessionId", session.getId()
+        );
+    }
 
-&nbsp;&nbsp;&nbsp;&nbsp;@GetMapping
-&nbsp;&nbsp;&nbsp;&nbsp;public Map&lt;String, Object&gt; getTheme(HttpSession session) {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;String theme = (String) session.getAttribute("theme");
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return Map.of(
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"theme", theme,
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"sessionId", session.getId()
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;);
-&nbsp;&nbsp;&nbsp;&nbsp;}
-}</pre>
+    @GetMapping
+    public Map<String, Object> getTheme(HttpSession session) {
+        String theme = (String) session.getAttribute("theme");
+        return Map.of(
+                "theme", theme,
+                "sessionId", session.getId()
+        );
+    }
+}
+```
+
 
 Two important things are happening here. First, the controller accepts an HttpSession object as a method parameter. Spring automatically provides this object for each request.
 
 Second, the controller interacts with the session using the standard API.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">session.setAttribute("theme", theme);</pre>
+```
+session.setAttribute("theme", theme);
+```
+
 
 From the controller's perspective, this behaves exactly like a normal session. However, because Spring Session MongoDB is enabled, the session data is not stored in memory. Instead, it is persisted as a document in MongoDB. The controller does not need to know anything about that implementation detail.
 
@@ -226,11 +262,17 @@ Running the Application {#h2-9-running-the-application}
 
 Start the application with:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">mvn spring-boot:run</pre>
+```
+mvn spring-boot:run
+```
+
 
 The API will be available at:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">http://localhost:8080</pre>
+```
+http://localhost:8080
+```
+
 
 Now we can test the session behavior.
 
@@ -239,19 +281,25 @@ Testing Session Behavior with curl {#h2-10-testing-session-behavior-with-curl}
 
 Using curl allows us to inspect HTTP headers and cookies directly. First, we create a session and store a theme preference.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">curl -i -c cookies.txt -X POST "http://localhost:8080/theme?theme=light"</pre>
+```
+curl -i -c cookies.txt -X POST "http://localhost:8080/theme?theme=light"
+```
+
 
 The response should look similar to this:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">HTTP/1.1 200
+```
+HTTP/1.1 200
 Set-Cookie: SESSION=YjI0MGU5NjctYjJlYS00ZGY1LWFlNjgtOTBhNmE1MWQzMTBj
 Content-Type: application/json
 
 {
-&nbsp;"sessionId":"b240e967-b2ea-4df5-ae68-90a6a51d310c",
-&nbsp;"theme":"light",
-&nbsp;"message":"Theme set"
-}</pre>
+ "sessionId":"b240e967-b2ea-4df5-ae68-90a6a51d310c",
+ "theme":"light",
+ "message":"Theme set"
+}
+```
+
 
 Several things happened here. Because the request did not include a session cookie, Spring created a new session. The theme value was stored as a session attribute, and Spring Session persisted the session in MongoDB. The server then returned a cookie called SESSION. The -c cookies.txt option instructs curl to save that cookie so it can be reused later.
 
@@ -260,14 +308,20 @@ Reusing the Session {#h2-11-reusing-the-session}
 
 Next we send another request using the stored cookie.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">curl -i -b cookies.txt http://localhost:8080/theme</pre>
+```
+curl -i -b cookies.txt http://localhost:8080/theme
+```
+
 
 Example response:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">{
-&nbsp;"theme":"light",
-&nbsp;"sessionId":"b240e967-b2ea-4df5-ae68-90a6a51d310c"
-}</pre>
+```
+{
+ "theme":"light",
+ "sessionId":"b240e967-b2ea-4df5-ae68-90a6a51d310c"
+}
+```
+
 
 The session ID is the same as the previous request. This confirms that the session was successfully resolved using the cookie.
 
@@ -288,15 +342,18 @@ If you connect to MongoDB and inspect the springSessions database, you will see 
 
 A session document might look similar to this:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">{
-&nbsp;&nbsp;"_id": "4321d619-8526-4ca2-8163-32d09b12ee98",
-&nbsp;&nbsp;"created": { "$date": "2026-03-12T14:24:11.341Z" },
-&nbsp;&nbsp;"accessed": { "$date": "2026-03-12T14:24:15.733Z" },
-&nbsp;&nbsp;"interval": "PT30M",
-&nbsp;&nbsp;"principal": null,
-&nbsp;&nbsp;"expireAt": { "$date": "2026-03-12T14:54:15.733Z" },
-&nbsp;&nbsp;"attr": { "$binary": "..."}
-}</pre>
+```
+{
+  "_id": "4321d619-8526-4ca2-8163-32d09b12ee98",
+  "created": { "$date": "2026-03-12T14:24:11.341Z" },
+  "accessed": { "$date": "2026-03-12T14:24:15.733Z" },
+  "interval": "PT30M",
+  "principal": null,
+  "expireAt": { "$date": "2026-03-12T14:54:15.733Z" },
+  "attr": { "$binary": "..."}
+}
+```
+
 
 Each field captures a different aspect of the session lifecycle.
 
@@ -312,7 +369,10 @@ The expireAt field stores the exact moment when the session should expire. Mongo
 
 The attr field stores the session attributes themselves. In our example, the controller stored the theme preference in the session using:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">session.setAttribute("theme", theme);</pre>
+```
+session.setAttribute("theme", theme);
+```
+
 
 Spring serializes the session attributes and stores them in this field. When the session is loaded again, Spring deserializes the data and restores the attributes into the HttpSession object that your controller interacts with.
 

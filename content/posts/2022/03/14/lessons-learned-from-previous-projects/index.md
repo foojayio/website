@@ -25,7 +25,8 @@ Packaging by layers {#h2-0-packaging-by-layers}
 
 When I started my developer career in Java, every project organized their classes by layers - controllers, services and s (repositories). A typical project's structure would look like this:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">ch.frankel
+```
+ch.frankel
   ├─ controller
   │  ├─ FirstController
   │  └─ SecondController
@@ -34,7 +35,9 @@ When I started my developer career in Java, every project organized their classe
   │  └─ SecondService
   └─ dao
      ├─ FirstDao
-     └─ SecondDao</pre>
+     └─ SecondDao
+```
+
 
 This approach has two main disadvantages:
 
@@ -43,7 +46,8 @@ This approach has two main disadvantages:
 
 To fix these issues, I found that packaging by feature is a much more natural fit:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">ch.frankel
+```
+ch.frankel
   ├─ first
   │  ├─ FirstController
   │  ├─ FirstService
@@ -51,7 +55,9 @@ To fix these issues, I found that packaging by feature is a much more natural fi
   └─  second
      ├─ SecondController
      ├─ SecondService
-     └─ SecondDao</pre>
+     └─ SecondDao
+```
+
 
 This way, the controller is `public` and represents the entry point in the feature. Services and DAOs are an "implementation detail": they have the `package` visibility and can only be accessed from inside their package.
 
@@ -64,23 +70,26 @@ I found myself using a quality tool named Hammurapi a long time ago. For the rec
 
 It was easy to automate adding JavaDocs via a program:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">/**
- Get the &lt;code&gt;foo&lt;/code&gt;.
+```java
+/**
+ Get the <code>foo</code>.
 
- @return Current value of &lt;code&gt;foo&lt;/code&gt;
+ @return Current value of <code>foo</code>
 */
 public Foo getFoo() {
   return foo;
 }
 
 /**
- Set the &lt;code&gt;foo&lt;/code&gt;.
+ Set the <code>foo</code>.
 
- @param foo New value of &lt;code&gt;foo&lt;/code&gt;
+ @param foo New value of <code>foo</code>
 */
 public void setFoo(Foo foo) {
     this.foo = foo;
-}</pre>
+}
+```
+
 
 It satisfied the side of me that loves green checks. However, there was no added value.
 
@@ -93,7 +102,8 @@ Setters {#h2-2-setters}
 
 After creating a class, Java developers always generate accessors for it, *i.e.*, getters, and setters.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public class Money {
+```java
+public class Money {
 
     private final Currency currency;
     private BigDecimal amount;
@@ -126,7 +136,9 @@ public class Account {
     public void setBalance(BigDecimal balance) {
         this.balance = balance;
     }
-}</pre>
+}
+```
+
 
 It's like a Pavlovian reflex. Worse, it's part of the [JavaBean](https://stackoverflow.com/questions/3295496/what-is-a-javabean-exactly#answer-3295517) conventions, so that a lot of tools rely on them: frameworks, serialization libraries, *e.g.* Jackson, mapping tools, *e.g.* MapStruct, etc.
 
@@ -134,7 +146,8 @@ Hence, if you rely on any of those tools, you have no choice. If you don't, then
 
 Here's an alternative (and simplified) design to the above class:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">class Account {
+```java
+class Account {
 
     // Field and getter
     // NO SETTER!
@@ -148,7 +161,9 @@ Here's an alternative (and simplified) design to the above class:
         // Check that currencies are compatible
         // Do the debit
     }
-}</pre>
+}
+```
+
 
 Note that getter alternatives make for a more complex design without many added benefits. I'm willing to keep them if they don't expose private data - either immutable objects or copies.
 

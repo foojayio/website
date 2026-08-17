@@ -83,7 +83,8 @@ Setting up OpenID Connect with Apache APISIX {#h2-1-setting-up-openid-connect-wi
 
 Imagine we have a web app behind Apache APISIX that we want to secure with OpenID Connect. Here's the corresponding Docker Compose file:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml">version: "3"
+```yaml
+version: "3"
 
 services:
   apisix:
@@ -96,7 +97,9 @@ services:
     env_file:
       - .env
   httpbin:
-    image: kennethreitz/httpbin                                    #4</pre>
+    image: kennethreitz/httpbin                                    #4
+```
+
 
 1. Apache APISIX API Gateway
 2. APISIX configuration - used to configure it statically in the following line
@@ -107,7 +110,8 @@ Apache APISIX offers a plugin-based architecture. One such plugin is the [openid
 
 Let's configure it:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml">routes:
+```yaml
+routes:
   - uri: /*                                                                    #1
     upstream:
       nodes:
@@ -121,7 +125,9 @@ Let's configure it:
         scope: openid                                                          #5
         session:
           secret: ${{SESSION_SECRET}}                                          #6
-#END</pre>
+#END
+```
+
 
 1. Catch-all route to the underlying web app
 2. Plugin configuration parameters. Values depend on the exact provider (see below)

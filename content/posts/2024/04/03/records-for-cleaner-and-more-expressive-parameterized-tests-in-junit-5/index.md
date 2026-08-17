@@ -33,7 +33,8 @@ Consider a simple expression evaluator capable of handling the following:
 
 Here's a possible implementation using records:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public sealed interface Expression {
+```java
+public sealed interface Expression {
 
    record Constant(int value) implements Expression { }
 
@@ -45,18 +46,20 @@ Here's a possible implementation using records:
 
    record Division(Expression left, Expression right) implements Expression { }
 }
-</pre>
+```
+
 
 And the expression evaluator:  
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public class ExpressionEvaluator {
+```java
+public class ExpressionEvaluator {
    public int evaluate(Expression expression) {
        return switch (expression) {
-           case Constant(int value) -&gt; value;
-           case Addition(var left, var right) -&gt; evaluate(left) + evaluate(right);
-           case Subtraction(var left, var right) -&gt; evaluate(left) - evaluate(right);
-           case Multiplication(var left, var right) -&gt; evaluate(left) * evaluate(right);
-           case Division(var left, var right) -&gt; {
+           case Constant(int value) -> value;
+           case Addition(var left, var right) -> evaluate(left) + evaluate(right);
+           case Subtraction(var left, var right) -> evaluate(left) - evaluate(right);
+           case Multiplication(var left, var right) -> evaluate(left) * evaluate(right);
+           case Division(var left, var right) -> {
                if (evaluate(right) == 0) {
                    throw new ArithmeticException("Division by zero");
                }
@@ -64,13 +67,16 @@ And the expression evaluator:
            }
        };
    }
-}</pre>
+}
+```
+
 
 ### **Traditional Parameterized Test (with ArgumentsSource)** {#h3-2-traditional-parameterized-test-with-argumentssource}
 
 Let's first look at how a parameterized test for this evaluator might be structured using the traditional [**ArgumentsSource**](https://junit.org/junit5/docs/5.10.2/api/org.junit.jupiter.params/org/junit/jupiter/params/provider/ArgumentsSource.html) method. This will give us a baseline to understand how records can streamline our tests.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">import org.junit.jupiter.api.Assertions;
+```java
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -85,7 +91,7 @@ import static bazlur.ca.ExpressionEvaluatorTest.TestOutcome.Success;
 class ExpressionEvaluatorTest {
     private final ExpressionEvaluator evaluator = new ExpressionEvaluator();
 
-    static Stream&lt;Arguments&gt; testCasesForEvaluate() {
+    static Stream<Arguments> testCasesForEvaluate() {
         return Stream.of(
                 Arguments.of("Evaluating a constant", new Constant(5), 5),
                 Arguments.of("Adding two constants", new Addition(new Constant(3), new Constant(2)), 5),
@@ -99,15 +105,17 @@ class ExpressionEvaluatorTest {
     @ParameterizedTest(name = "[{index}] {0}")
     @MethodSource("testCasesForEvaluate")
     void testEvaluate(String description, Expression expression, Object expectedOutcome) { // Changes here
-        if (expectedOutcome instanceof Class&lt;?&gt;) {
-            Class&lt;? extends Exception&gt; expectedException = (Class&lt;? extends Exception&gt;) expectedOutcome;
-            Assertions.assertThrows(expectedException, () -&gt; evaluator.evaluate(expression));
+        if (expectedOutcome instanceof Class<?>) {
+            Class<? extends Exception> expectedException = (Class<? extends Exception>) expectedOutcome;
+            Assertions.assertThrows(expectedException, () -> evaluator.evaluate(expression));
         } else {
             int expectedResult = (int) expectedOutcome;
             Assertions.assertEquals(expectedResult, evaluator.evaluate(expression));
         }
     }
-}</pre>
+}
+```
+
 
 ### **Refactoring with Records** {#h3-3-refactoring-with-records}
 
@@ -115,20 +123,27 @@ Now, let's see how we can improve the clarity and maintainability of our tests b
 
 **The TestCase Record:**
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">record TestCase(String description, Expression expression, TestOutcome expectedOutcome) {}</pre>
+```java
+record TestCase(String description, Expression expression, TestOutcome expectedOutcome) {}
+```
+
 
 **Sealed TestOutcome:**
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">sealed interface TestOutcome {
+```java
+sealed interface TestOutcome {
     record Success(int value) implements TestOutcome {}
-    record Failure(Supplier&lt;? extends RuntimeException&gt; exceptionSupplier) implements TestOutcome {}
-}</pre>
+    record Failure(Supplier<? extends RuntimeException> exceptionSupplier) implements TestOutcome {}
+}
+```
+
 
 <br />
 
 **Refactored Tests**   
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">private static Stream&lt;TestCase&gt; provideExpressionsForEvaluate() {
+```java
+private static Stream<TestCase> provideExpressionsForEvaluate() {
     return Stream.of(
             new TestCase("Valid constant", new Constant(5), new Success(5)),
             new TestCase("Valid addition", new Addition(new Constant(2), new Constant(3)), new Success(5)),
@@ -152,15 +167,17 @@ void testEvaluateExpression(TestCase testCase) {
     ExpressionEvaluator evaluator = new ExpressionEvaluator();
 
     switch (testCase.expectedOutcome()) {
-        case Success(int expectedResult) -&gt;
+        case Success(int expectedResult) ->
                 Assertions.assertEquals(expectedResult, evaluator.evaluate(testCase.expression()),
                         "Incorrect evaluation for: " + testCase.description());
-        case Failure(Supplier&lt;? extends RuntimeException&gt; exceptionSupplier) -&gt;
+        case Failure(Supplier<? extends RuntimeException> exceptionSupplier) ->
                 Assertions.assertThrows(exceptionSupplier.get().getClass(),
-                        () -&gt; evaluator.evaluate(testCase.expression()),
+                        () -> evaluator.evaluate(testCase.expression()),
                         "Incorrect error handling for: " + testCase.description());
     }
-}</pre>
+}
+```
+
 
 ### Benefits of the Record-Based Approach {#h3-4-benefits-of-the-record-based-approach}
 

@@ -44,7 +44,8 @@ In this abstract class, there are layout-specific implementations that are the s
 
 In the first version, I show a solution that I have often seen in projects. As a basis for a custom component, a base component from the framework is used as a parent. The direct inheritance from a layout is often used to structure all other internally child components on the screen. Inside the constructor, the internally required elements are generated and added to the inherited layout structure.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public class InputComponent 
+```java
+public class InputComponent 
   extends Horizontal Layout // Layout is abstract 
   implements HasLogger { 
   private button button = new Button (); 
@@ -62,7 +63,9 @@ In the first version, I show a solution that I have often seen in projects. As a
   public String getText () { 
     return textField.getText (); 
   } 
-}</pre>
+}
+```
+
 
 If you now look at how the component will behave during later use, it becomes visible that a derivation from a fundamental component brings its pitfalls with it.
 
@@ -72,7 +75,8 @@ On the other hand, you want a component that externally delegates only the metho
 
 In practical words, general methods from the implementation of the HorizontalLayout are made visible to the outside. If somebody uses exactly these methods, and later on the parent becomes a VerticalLayout, the source code can not compile without further corrections.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public class MainM01 
+```java
+public class MainM01 
   implements HasLogger { 
   public static void main (String [] args) { 
     var inputComponent = new InputComponent (); 
@@ -83,7 +87,9 @@ In practical words, general methods from the implementation of the HorizontalLay
     inputComponent.horizontalSpecific (); 
     inputComponent.doFrameworkSpecificThings (); 
   } 
-}</pre>
+}
+```
+
 
 ### Inheritance --- Second Version {#h3-3-inheritance-second-version}
 
@@ -93,7 +99,8 @@ Please assume that the class AbstractComponent is what we are looking for as a s
 
 If you derive your class from it, so you certainly have the essential features that you would like to have as a user of the framework. However, this abstraction mostly associated with the fact that also framework-specific things are to be considered. This abstract class is an internally used, fundamental element. Starting with this internal abstract class very likely leads to the need to implement internal and technical related methods. As an example, the method signature with the name doFrameworkSpecificThings() has been created and implemented with just a log message.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public class InputComponent 
+```java
+public class InputComponent 
   extends AbstractComponent 
   implements HasLogger { 
   private button button = new Button(); 
@@ -118,11 +125,14 @@ If you derive your class from it, so you certainly have the essential features t
     logger().info ("doFrameworkSpecificThings -" 
                    + this.getClass ().getSimpleName ()); 
   } 
-}</pre>
+}
+```
+
 
 In use, such a component is already a little less dangerous. Only the internal methods that are visible on other components are accessible on this component.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public class MainM02 
+```java
+public class MainM02 
   implements HasLogger { 
   public static void main (String [] args) { 
     var inputComponent = new InputComponent (); 
@@ -131,7 +141,9 @@ In use, such a component is already a little less dangerous. Only the internal m
     // critical things 
     inputComponent.doFrameworkSpecificThings (); 
   } 
-}</pre>
+}
+```
+
 
 But I am not happy with this solution yet. Very often, there is no requirement for new components on the technical side. Instead, they are compositions of already existing essential elements, composed in a professional, domain-specific context.
 
@@ -143,8 +155,9 @@ One solution may be to create a composite of type T. `Composite<T extends Abstra
 
 In our case, it is the horizontal layout. With the method getComponent(), you can access this instance if necessary.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public final class InputComponent     
-  extends Composite&lt;HorizontalLayout&gt;     
+```java
+public final class InputComponent     
+  extends Composite<HorizontalLayout>     
   implements HasLogger {   
   private button button = new Button ();   
   private TextField textField = new TextField ();   
@@ -162,17 +175,22 @@ In our case, it is the horizontal layout. With the method getComponent(), you ca
   public String getText () {     
     return textField.getText ();   
   } 
-}</pre>
+}
+```
+
 
 Seen in this way, it is a neutral shell, but it will behave towards the outside as a minimal component since the minimum contract via the Component interface. Again, only the methods by delegation to the outside are made visible, which explicitly provided. Use is, therefore, harmless.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public class MainSolution { 
+```java
+public class MainSolution { 
   public static void main (String [] args) { 
     var inputComponent = new InputComponent (); 
     inputComponent.setText ("Hello Text M03"); 
     inputComponent.click (); 
   } 
-}</pre>
+}
+```
+
 
 ### Targeted Inheritance {#h3-5-targeted-inheritance}
 

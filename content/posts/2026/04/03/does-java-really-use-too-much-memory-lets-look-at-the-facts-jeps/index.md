@@ -190,18 +190,20 @@ Let's move from theory to something concrete.
 
 ❌ A Classic Memory Problem (Unbounded Cache)
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public class BadCache {
+```java
+public class BadCache {
     private static final Map cache = new HashMap();
 
     public static String get(String key) {
-        return cache.computeIfAbsent(key, k -&gt; loadValue(k));
+        return cache.computeIfAbsent(key, k -> loadValue(k));
     }
 
     private static String loadValue(String key) {
         return "value-" + key;
     }
 }
-</pre>
+```
+
 
 Problem:
 
@@ -213,7 +215,8 @@ Problem:
 
 ✅ Fix: Use a Bounded Cache
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">import com.github.benmanes.caffeine.cache.Cache;
+```java
+import com.github.benmanes.caffeine.cache.Cache;
 import com.github.benmanes.caffeine.cache.Caffeine;
 
 public class GoodCache {
@@ -223,10 +226,11 @@ public class GoodCache {
                 .build();
 
     public static String get(String key) {
-        return cache.get(key, k -&gt; "value-" + k);
+        return cache.get(key, k -> "value-" + k);
     }
 }
-</pre>
+```
+
 
 Result:
 
@@ -239,13 +243,15 @@ Same language. Same JVM. Completely different outcome.
 
 ❌ Traditional Threads
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">for (int i = 0; i  {
+```java
+for (int i = 0; i  {
         try {
             Thread.sleep(1000);
         } catch (InterruptedException ignored) {}
     }).start();
 }
-</pre>
+```
+
 
 Problem:
 
@@ -254,13 +260,15 @@ Problem:
 
 ✅ Virtual Threads (JEP 444)
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">for (int i = 0; i  {
+```java
+for (int i = 0; i  {
         try {
             Thread.sleep(1000);
         } catch (InterruptedException ignored) {}
     });
 }
-</pre>
+```
+
 
 Result:
 
@@ -273,7 +281,8 @@ This is one of the biggest silent memory wins in modern Java.
 
 Let's simulate a lot of small objects:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">class Point {
+```java
+class Point {
     int x, y;
 }
 
@@ -281,14 +290,15 @@ public class MemoryTest {
     public static void main(String[] args) {
         List points = new ArrayList();
 
-        for (int i = 0; i &lt; 10_000_000; i++) {
+        for (int i = 0; i < 10_000_000; i++) {
             points.add(new Point());
         }
 
         System.out.println("Created " + points.size() + " objects");
     }
 }
-</pre>
+```
+
 
 What's happening?
 

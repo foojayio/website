@@ -85,7 +85,7 @@ Although mature organizations limit how many technology stacks they support, it 
 
 ***Alternately***, we can safely adopt a new language if the runtime remains the same. For example, JVM can run code written in multiple languages within the same running process. E.g. Groovy, Scala, Kotlin, Java, Clojure, JRuby, etc.
 
-*** ** * ** ***
+
 
 Now that we have understood the goal of having Microservices, let's discuss when this isn't really a good fit.
 

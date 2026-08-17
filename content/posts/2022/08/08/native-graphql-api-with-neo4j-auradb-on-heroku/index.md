@@ -50,29 +50,38 @@ Any [GraphQL](https://graphql.org) API requires a schema. If you look at the off
 
 "Schema-First" vs "Object-First" is the question that arises in the first step, a book as described in the use case can be represented either as shown in the following GraphQL listing:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="graphql">type Book {
+```graphql
+type Book {
     id: ID
     state: State
     title: String
     authors: [Person]
-}</pre>
+}
+```
+
 
 or - when using an appropriate tool - as the following Java record:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public record Book(
+```java
+public record Book(
 	Long id,
 	String title,
 	State state,
-	List&lt;Person&gt; authors
-) {}</pre>
+	List<Person> authors
+) {}
+```
+
 
 On the first look, there's hardly a difference. I personally prefer the Java version as I am familiar in that ecosystem and can find my way around - even without the amazing IDE support we have these days.
 
 Things get a bit more interesting when defining queries:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="graphql">type Query {
+```graphql
+type Query {
   books(authorFilter: String, titleFilter: String, unreadOnly: Boolean = false): [Book]
-}</pre>
+}
+```
+
 
 This has not per-se a direction pendant in the model world.
 
@@ -87,17 +96,23 @@ I personally don't know about historical reasons, I can only guess. And I would 
 
 The querying model however fits GraphQL nicely. A book, including it's authors, can be described in Cypher like this:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="cypher">MATCH (b:Book {title: 'Sleeping Beauties'})&lt;-[w:WROTE]-(a)
-RETURN b, w, a</pre>
+```cypher
+MATCH (b:Book {title: 'Sleeping Beauties'})<-[w:WROTE]-(a)
+RETURN b, w, a
+```
+
 
 or created like this:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="cypher">MERGE (k1:Person {name: 'Stephen King'})
+```cypher
+MERGE (k1:Person {name: 'Stephen King'})
 MERGE (k2:Person {name: 'Owen King'})
 MERGE (b:Book {title: 'Sleeping Beauties'})
-MERGE (k1) -[:WROTE] -&gt;(b)
-MERGE (k2) -[:WROTE] -&gt;(b)
-RETURN *</pre>
+MERGE (k1) -[:WROTE] ->(b)
+MERGE (k2) -[:WROTE] ->(b)
+RETURN *
+```
+
 
 In case you are interested, Neo4j offers an official solution rooted in the JavaScript ecosystem, called \` @neo4j/graphql\` and documented [here](https://neo4j.com/docs/graphql-manual/current/), OGM included. There's also [neo4j-graphql-java](https://github.com/neo4j-graphql/neo4j-graphql-java), which does the translation from GraphQL models to Cypher on the JVM. Both these tools are "schema first" approaches, hence, I don't want to use either. Those are great tools, but they wouldn't fit my personal interest, so - as said in the beginning - I would rather use something else than working against a solution.
 
@@ -117,43 +132,47 @@ You would want to go to [code.quarkus.io](https://code.quarkus.io) or use the Ma
 
 Eventually, your dependencies should look like this, test-dependencies omitted. You'll find in there the dependencies to Cypher-DSL and another project, [Neo4j-Migrations](https://github.com/michael-simons/neo4j-migrations): Think Flyway, but for Neo4j.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="xml">&lt;dependencies&gt;
-    &lt;dependency&gt;
-      &lt;groupId&gt;org.neo4j&lt;/groupId&gt;
-      &lt;artifactId&gt;neo4j-cypher-dsl&lt;/artifactId&gt;
-      &lt;version&gt;2022.6.1&lt;/version&gt;
-    &lt;/dependency&gt;
-    &lt;dependency&gt;
-      &lt;groupId&gt;io.quarkus&lt;/groupId&gt;
-      &lt;artifactId&gt;quarkus-jackson&lt;/artifactId&gt;
-    &lt;/dependency&gt;
-    &lt;dependency&gt;
-      &lt;groupId&gt;io.quarkiverse.neo4j&lt;/groupId&gt;
-      &lt;artifactId&gt;quarkus-neo4j&lt;/artifactId&gt;
-      &lt;version&gt;1.4.0&lt;/version&gt;
-    &lt;/dependency&gt;
-    &lt;dependency&gt;
-      &lt;groupId&gt;eu.michael-simons.neo4j&lt;/groupId&gt;
-      &lt;artifactId&gt;neo4j-migrations-quarkus&lt;/artifactId&gt;
-      &lt;version&gt;1.9.0&lt;/version&gt;
-    &lt;/dependency&gt;
-    &lt;dependency&gt;
-      &lt;groupId&gt;io.quarkus&lt;/groupId&gt;
-      &lt;artifactId&gt;quarkus-smallrye-graphql&lt;/artifactId&gt;
-    &lt;/dependency&gt;
-    &lt;dependency&gt;
-      &lt;groupId&gt;io.quarkus&lt;/groupId&gt;
-      &lt;artifactId&gt;quarkus-arc&lt;/artifactId&gt;
-    &lt;/dependency&gt;
-    &lt;dependency&gt;
-      &lt;groupId&gt;io.quarkus&lt;/groupId&gt;
-      &lt;artifactId&gt;quarkus-container-image-docker&lt;/artifactId&gt;
-    &lt;/dependency&gt;
-&lt;/dependencies&gt;</pre>
+```xml
+<dependencies>
+    <dependency>
+      <groupId>org.neo4j</groupId>
+      <artifactId>neo4j-cypher-dsl</artifactId>
+      <version>2022.6.1</version>
+    </dependency>
+    <dependency>
+      <groupId>io.quarkus</groupId>
+      <artifactId>quarkus-jackson</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>io.quarkiverse.neo4j</groupId>
+      <artifactId>quarkus-neo4j</artifactId>
+      <version>1.4.0</version>
+    </dependency>
+    <dependency>
+      <groupId>eu.michael-simons.neo4j</groupId>
+      <artifactId>neo4j-migrations-quarkus</artifactId>
+      <version>1.9.0</version>
+    </dependency>
+    <dependency>
+      <groupId>io.quarkus</groupId>
+      <artifactId>quarkus-smallrye-graphql</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>io.quarkus</groupId>
+      <artifactId>quarkus-arc</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>io.quarkus</groupId>
+      <artifactId>quarkus-container-image-docker</artifactId>
+    </dependency>
+</dependencies>
+```
+
 
 I have some static configuration in the project, looking like this:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="properties"># Always enables the UI for GraphQL
+```properties
+# Always enables the UI for GraphQL
 quarkus.smallrye-graphql.ui.always-include=true
 # Allows filtering on query complexity later on
 quarkus.smallrye-graphql.events.enabled=true
@@ -167,17 +186,22 @@ quarkus.http.port=${PORT:8080}
 
 # Populate database during dev and test
 %dev.org.neo4j.migrations.locations-to-scan=classpath:neo4j/migrations,classpath:neo4j/example-data
-%test.org.neo4j.migrations.locations-to-scan=classpath:neo4j/migrations,classpath:neo4j/example-data</pre>
+%test.org.neo4j.migrations.locations-to-scan=classpath:neo4j/migrations,classpath:neo4j/example-data
+```
+
 
 Before we highlight some things in the project, let's have a look what is included with those dependencies and the bit of configuration. With **Git** , **JDK 17** and a working **Docker** environment on your machine, you can execute the following commands:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="console"># Should print something like java version "17.0.2" 2022-01-18 LTS
+```bash
+# Should print something like java version "17.0.2" 2022-01-18 LTS
 java -version
 # Clone the project
-git clone <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="583f312c183f312c302d3a763b3735">[email&nbsp;protected]</a>:michael-simons/neo4j-aura-quarkus-graphql.git
+git clone <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="583f312c183f312c302d3a763b3735">[email protected]</a>:michael-simons/neo4j-aura-quarkus-graphql.git
 cd neo4j-aura-quarkus-graphql
 # Start Quarkus in development mode
-./mvnw compile quarkus:dev</pre>
+./mvnw compile quarkus:dev
+```
+
 
 In case you never developed with Quarkus before, Maven will download a chunk of the internet for you and after a while, starting up a Neo4j instance in a Docker container, setup the connection, populate the database for you and greet you like this:
 
@@ -206,7 +230,8 @@ Implementation {#_implementation}
 
 The whole API my application offers is in a class called `BooksAndMovies`. From a domain perspective, I always wanted to add more content of Neo4j's movie graph but haven't done yet. That class is declared as application scoped `GraphQLApi`:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">import graphql.schema.DataFetchingEnvironment;
+```java
+import graphql.schema.DataFetchingEnvironment;
 import io.smallrye.graphql.api.Context;
 
 import java.util.List;
@@ -238,7 +263,7 @@ public class BooksAndMovies {
     }
 
     @Query("books")
-    public CompletableFuture&lt;List&lt;Book&gt;&gt; getBooks(
+    public CompletableFuture<List<Book>> getBooks(
         @Name("titleFilter") String titleFilter,
         @Name("authorFilter") String authorFilter,
         @Name("unreadOnly") @DefaultValue("false") boolean unreadOnly
@@ -250,7 +275,9 @@ public class BooksAndMovies {
             unreadOnly, env.getSelectionSet()
         );
     }
-}</pre>
+}
+```
+
 
 Every method on that class annotated with `@Query` will be a query in the GraphQL schema. There is a similar annotation for mutations. As you see the method returns a `CompletableFuture<>`, making it asynchronous. This is important under several aspects: On the API side of things it won't block a thread and it allows for an easy combination of methods, domain objects and fields.
 
@@ -258,7 +285,8 @@ But first, back to the `getBooks` method: It takes in a couple of filters and us
 
 The service method `BookService#findBooks` now uses the Neo4j database connectivity and the Cypher-DSL. The Cypher-DSL is used to build an optimized query that will be eventually executed against the connection:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public CompletableFuture&lt;List&lt;Book&gt;&gt; findBooks(
+```java
+public CompletableFuture<List<Book>> findBooks(
     String titleFilter,
     Person authorFilter,
     boolean unreadOnly,
@@ -282,18 +310,18 @@ The service method `BookService#findBooks` now uses the Neo4j database connectiv
 
     var match = match(patternToMatch);
 
-    var returnedExpressions = new ArrayList&lt;Expression&gt;();
+    var returnedExpressions = new ArrayList<Expression>();
     returnedExpressions.add(Functions.id(book).as("id"));
     if (selectionSet.contains("authors") || authorFilter != null) {
         match = match.match(book.relationshipFrom(author, "WROTE"));
         returnedExpressions.add(collect(author).as("authors"));
     }
 
-    Predicate&lt;String&gt; isRequiredField = (String n) -&gt;  "authors".equals(n) || "id".equals(n);
+    Predicate<String> isRequiredField = (String n) ->  "authors".equals(n) || "id".equals(n);
     selectionSet.getImmediateFields().stream().map(SelectedField::getName)
         .distinct()
         .filter(isRequiredField.negate())
-        .map(n -&gt; book.property(n).as(n))
+        .map(n -> book.property(n).as(n))
         .forEach(returnedExpressions::add);
 
     var statement = makeExecutable(
@@ -303,7 +331,9 @@ The service method `BookService#findBooks` now uses the Neo4j database connectiv
     );
 
     return executeReadStatement(statement, Book::of);
-}</pre>
+}
+```
+
 
 There are two scenarios in which we must traverse the `WROTE` relationship: In case of filtering on the authors name and when the author is in the selection set. A builder like the Cypher-DSL makes this possible in a type safe fashion. Fun fact: If you don't insist on doing this manually like me here, the neo4j-graphql-java implementation uses the Cypher-DSL under the hood for the exact same purpose.
 
@@ -313,30 +343,39 @@ Eventually, the asynchronous session of the Neo4j-Java driver is used to execute
 
 Having a look at the definition of a `Person`, you'll find this:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public record Person(
+```java
+public record Person(
     String name,
     Integer born,
-    List&lt;Movie&gt; actedIn,
-    List&lt;Book&gt; wrote
-) {}</pre>
+    List<Movie> actedIn,
+    List<Book> wrote
+) {}
+```
+
 
 The GraphQL schema however has this:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="graphql">type Person {
+```graphql
+type Person {
   actedIn: [Movie]
   born: Int
   name: ID
   "A short biographie of the person, maybe empty if there is none to be found."
   shortBio: String
   wrote: [Book]
-}</pre>
+}
+```
+
 
 Where does that `shortBio` come from? It is another asynchronous method on the `BooksAndMovies` class:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">@Description("A short biographie of the person, maybe empty if there is none to be found.")
-public CompletionStage&lt;String&gt; shortBio(@Source Person person) {
+```java
+@Description("A short biographie of the person, maybe empty if there is none to be found.")
+public CompletionStage<String> shortBio(@Source Person person) {
     return peopleService.getShortBio(person);
-}</pre>
+}
+```
+
 
 It takes in a source argument - the person - and asynchronously gets their biography and adds it to the result. It won't work with the example data yet, since I don't have a Wikipedia entry and that's where the `PeopleService` is looking at right now. I am not recommending doing such things without proper circuit breaker in production, but it is rather simple to build a federated GraphQL API based on the given stack.
 
@@ -347,7 +386,8 @@ We have seen how to run the project in developer mode in which the [dev services
 
 The application itself is hosted on Heroku deployed by following the official guide: <https://quarkus.io/guides/deploying-to-heroku>. However, I don't deploy the default container but a container with a native image, build with [GraalVM](https://graalvm.org):
 
-<pre class="EnlighterJSRAW" data-enlighter-language="console">./mvnw clean package\
+```bash
+./mvnw clean package\
   -Pnative\
   -Dquarkus.native.container-build=true\
   -Dquarkus.native.builder-image=quay.io/quarkus/ubi-quarkus-native-image:22.2-java17\
@@ -355,7 +395,9 @@ The application itself is hosted on Heroku deployed by following the official gu
   -Dquarkus.container-image.build=true\
   -Dquarkus.container-image.group=registry.heroku.com/neo4j-aura-quarkus-graphql\
   -Dquarkus.container-image.name=web\
-  -Dquarkus.container-image.tag=latest</pre>
+  -Dquarkus.container-image.tag=latest
+```
+
 
 By using a container build, I can delegate the compute intensive task to another machine and also don't need to have all the Graal tooling installed.
 

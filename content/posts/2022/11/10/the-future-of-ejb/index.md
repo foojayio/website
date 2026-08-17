@@ -63,7 +63,8 @@ The first step to get to this future would be to create an EJB implementation, p
 
 The [OmniBeans](https://github.com/omnifaces/omnibeans) project is one example of an attempt to do exactly that. This project tries to implement EJB Lite with as little of its own code as possible, delegating as much as possible to the aforementioned APIs. For instance, the following EJB bean can be used with the current version of OmniBeans:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">import jakarta.ejb.AsyncResult;
+```java
+import jakarta.ejb.AsyncResult;
 import jakarta.ejb.Asynchronous;
 import jakarta.ejb.Stateless;
 
@@ -72,7 +73,7 @@ public class AsyncBean {
     private static final Logger LOGGER = Logger.getLogger(AsyncBean.class.getName());
 
     @Asynchronous
-    public Future&lt;Integer&gt; multiply(int number1, int number2) {
+    public Future<Integer> multiply(int number1, int number2) {
         try {
             Thread.sleep(2000);
         } catch (InterruptedException ex) {
@@ -80,10 +81,11 @@ public class AsyncBean {
             LOGGER.log(SEVERE, null, ex);
         }
 
-        return new AsyncResult&lt;&gt;(number1 * number2);
+        return new AsyncResult<>(number1 * number2);
     }
 }
-</pre>
+```
+
 
 Using OmniBeans, the above bean would become a regular CDI bean, with `@Stateless` translated to a custom scope that emulates some of the semantics of the real `@Stateless` in EJB, and the `@Asyncronous` annotation translated to a CDI based interceptor.
 

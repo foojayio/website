@@ -54,46 +54,54 @@ I'm aware of the irony where the boilerplate reduction for JSON starts with a gr
 
 This line needs to go into the properties section:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">&lt;manifold.version&gt;2023.1.5&lt;/manifold.version&gt;
-</pre>
+```
+<manifold.version>2023.1.5</manifold.version>
+```
+
 
 The dependencies we use are these:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">&lt;dependency&gt;
-    &lt;groupId&gt;systems.manifold&lt;/groupId&gt;
-    &lt;artifactId&gt;manifold-json-rt&lt;/artifactId&gt;
-    &lt;version&gt;${manifold.version}&lt;/version&gt;
-&lt;/dependency&gt;</pre>
+```
+<dependency>
+    <groupId>systems.manifold</groupId>
+    <artifactId>manifold-json-rt</artifactId>
+    <version>${manifold.version}</version>
+</dependency>
+```
+
 
 The compilation plugin is the boilerplate that weaves Manifold into the bytecode and makes it seamless for us. It's the last part of the pom setup:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">&lt;build&gt;
-   &lt;plugins&gt;
-       &lt;plugin&gt;
-           &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;
-           &lt;artifactId&gt;maven-compiler-plugin&lt;/artifactId&gt;
-           &lt;version&gt;3.8.0&lt;/version&gt;
-           &lt;configuration&gt;
-               &lt;source&gt;19&lt;/source&gt;
-               &lt;target&gt;19&lt;/target&gt;
-               &lt;encoding&gt;UTF-8&lt;/encoding&gt;
-               &lt;compilerArgs&gt;
-                   &lt;!-- Configure manifold plugin--&gt;
-                   &lt;arg&gt;-Xplugin:Manifold&lt;/arg&gt;
-               &lt;/compilerArgs&gt;
+```
+<build>
+   <plugins>
+       <plugin>
+           <groupId>org.apache.maven.plugins</groupId>
+           <artifactId>maven-compiler-plugin</artifactId>
+           <version>3.8.0</version>
+           <configuration>
+               <source>19</source>
+               <target>19</target>
+               <encoding>UTF-8</encoding>
+               <compilerArgs>
+                   <!-- Configure manifold plugin-->
+                   <arg>-Xplugin:Manifold</arg>
+               </compilerArgs>
 
-               &lt;!-- Add the processor path for the plugin --&gt;
-               &lt;annotationProcessorPaths&gt;
-                   &lt;path&gt;
-                       &lt;groupId&gt;systems.manifold&lt;/groupId&gt;
-                       &lt;artifactId&gt;manifold-json&lt;/artifactId&gt;
-                       &lt;version&gt;${manifold.version}&lt;/version&gt;
-                   &lt;/path&gt;
-               &lt;/annotationProcessorPaths&gt;
-           &lt;/configuration&gt;
-       &lt;/plugin&gt;
-   &lt;/plugins&gt;
-&lt;/build&gt;</pre>
+               <!-- Add the processor path for the plugin -->
+               <annotationProcessorPaths>
+                   <path>
+                       <groupId>systems.manifold</groupId>
+                       <artifactId>manifold-json</artifactId>
+                       <version>${manifold.version}</version>
+                   </path>
+               </annotationProcessorPaths>
+           </configuration>
+       </plugin>
+   </plugins>
+</build>
+```
+
 
 With the setup complete, let's dive into the code.
 
@@ -102,7 +110,8 @@ Parsing JSON with Manifold {#h2-2-parsing-json-with-manifold}
 
 We place a sample JSON file in the project directory under the resources hierarchy. I placed this file under `src/main/resources/com/debugagent/json/Test.json`:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">{
+```
+{
   "firstName": "Shai",
   "surname": "Almog",
   "website": "https://debugagent.com/",
@@ -110,7 +119,9 @@ We place a sample JSON file in the project directory under the resources hierarc
   "details":[
     {"key": "value"}
   ]
-}</pre>
+}
+```
+
 
 In the main class, we refresh the Maven project, and you'll notice a new Test class appears. This class is dynamically created by Manifold based on the JSON file. If you change the JSON and refresh Maven, everything updates seamlessly. It's important to understand that Manifold isn't a code generator. It compiles the JSON we just wrote into bytecode.
 
@@ -118,18 +129,22 @@ The Test class comes with several built-in capabilities, such as a type-safe bui
 
 It means we can now write:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">Test test = Test.builder().withFirstName("Someone")
+```
+Test test = Test.builder().withFirstName("Someone")
         .withSurname("Surname")
         .withActive(true)
         .withDetails(List.of(
                 Test.details.detailsItem.builder().
                         withKey("Value 1").build()
         ))
-        .build();</pre>
+        .build();
+```
+
 
 Which will print out the following JSON:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">{
+```
+{
   "firstName": "Someone",
   "surname": "Surname",
   "active": true,
@@ -138,11 +153,14 @@ Which will print out the following JSON:
       "key": "Value 1"
     }
   ]
-}</pre>
+}
+```
+
 
 We can similarly read a JSON file using code such as this:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">Test readObject = Test.load().fromJson("""
+```
+Test readObject = Test.load().fromJson("""
         {
           "firstName": "Someone",
           "surname": "Surname",
@@ -153,49 +171,62 @@ We can similarly read a JSON file using code such as this:
             }
           ]
         }
-        """);</pre>
+        """);
+```
+
 
 Note the use of Java 15 `TextBlock` syntax for writing a long string. The `load()` method returns an object that includes various APIs for reading the JSON. In this case, it is read from a `String` but there are APIs for reading it from a URL, file, etc.
 
 Manifold supports various formats, including CSV, XML, and YAML, allowing you to generate and parse any of these formats without writing any boilerplate code or sacrificing type safety. In order to add that support we will need to add additional dependencies to the pom.xml file:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">&lt;dependency&gt;
-    &lt;groupId&gt;systems.manifold&lt;/groupId&gt;
-    &lt;artifactId&gt;manifold-csv-rt&lt;/artifactId&gt;
-    &lt;version&gt;${manifold.version}&lt;/version&gt;
-&lt;/dependency&gt;
-&lt;dependency&gt;
-    &lt;groupId&gt;systems.manifold&lt;/groupId&gt;
-    &lt;artifactId&gt;manifold-xml-rt&lt;/artifactId&gt;
-    &lt;version&gt;${manifold.version}&lt;/version&gt;
-&lt;/dependency&gt;
-&lt;dependency&gt;
-    &lt;groupId&gt;systems.manifold&lt;/groupId&gt;
-    &lt;artifactId&gt;manifold-yaml-rt&lt;/artifactId&gt;
-    &lt;version&gt;${manifold.version}&lt;/version&gt;
-&lt;/dependency&gt;
-</pre>
+```
+<dependency>
+    <groupId>systems.manifold</groupId>
+    <artifactId>manifold-csv-rt</artifactId>
+    <version>${manifold.version}</version>
+</dependency>
+<dependency>
+    <groupId>systems.manifold</groupId>
+    <artifactId>manifold-xml-rt</artifactId>
+    <version>${manifold.version}</version>
+</dependency>
+<dependency>
+    <groupId>systems.manifold</groupId>
+    <artifactId>manifold-yaml-rt</artifactId>
+    <version>${manifold.version}</version>
+</dependency>
+```
+
 
 With these additional dependencies, this code will print out the same data as the JSON file... With `test.write().toCsv()` the output would be:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">"firstName","surname","active","details"
-"Someone","Surname","true","[manifold.json.rt.api.DataBindings@71070b9c]"</pre>
+```
+"firstName","surname","active","details"
+"Someone","Surname","true","[manifold.json.rt.api.DataBindings@71070b9c]"
+```
+
 
 Notice that the Comma Separated Values (CSV) output doesn't include hierarchy information. That's a limitation of the CSV format and not the fault of Manifold.
 
 With `test.write().toXml()` the output is familiar and surprisingly concise:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">&lt;root_object firstName="Someone" surname="Surname" active="true"&gt;
-  &lt;details key="Value 1"/&gt;
-&lt;/root_object&gt;</pre>
+```
+<root_object firstName="Someone" surname="Surname" active="true">
+  <details key="Value 1"/>
+</root_object>
+```
+
 
 With `test.write().toYaml()` we again get a familiar printout:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">firstName: Someone
+```
+firstName: Someone
 surname: Surname
 active: true
 details:
-- key: Value 1</pre>
+- key: Value 1
+```
+
 
 Working with JSON Schema {#h2-3-working-with-json-schema}
 ---------------------------------------------------------
@@ -204,7 +235,8 @@ Manifold also works seamlessly with JSON schema, allowing you to enforce strict 
 
 This schema is copied and pasted from the [Manifold github project](https://github.com/manifold-systems/manifold/tree/master/manifold-deps-parent/manifold-json):
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">{
+```
+{
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "http://example.com/schemas/User.json",
   "type": "object",
@@ -235,7 +267,9 @@ This schema is copied and pasted from the [Manifold github project](https://gith
     }
   },
   "required": ["name", "email"]
-}</pre>
+}
+```
+
 
 It's a relatively simple schema but I'd like to turn your attention to several things here. It defines name and email as required. This is why when we try to create a `User` object using a builder in Manifold, the `build()` method requires both parameters:
 
@@ -245,10 +279,13 @@ User.builder("Name", "/cdn-cgi/l/email-protection")
 
 That is just the start... The schema includes a date. Dates are a painful prospect in JSON, the standardization is poor and fraught with issues. The schema also includes a gender field which is effectively an enum. This is all converted to type-safe semantics using common Java classes such as LocalDate:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">User u = User.builder("Name", "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="c2a7afa3abae82a6adafa3abaceca1adaf">[email&nbsp;protected]</a>")
+```
+User u = User.builder("Name", "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="c2a7afa3abae82a6adafa3abaceca1adaf">[email protected]</a>")
        .withDate_of_birth(LocalDate.of(1999, 10, 11))
        .withGender(User.Gender.male)
-       .build();</pre>
+       .build();
+```
+
 
 That can be made even shorter with static imports but the gist of the idea is clear. JSON is effectively native to Java in Manifold.
 

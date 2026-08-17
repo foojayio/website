@@ -18,12 +18,15 @@ frozen: false
 
 Spring Batch jobs usually follow the same pattern: an `ItemReader` streams rows, an `ItemProcessor` transforms each one, and an `ItemWriter` writes them out, chunk by chunk. A chunk-oriented step wires those three pieces together:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">new StepBuilder("transform", jobRepository)
-        .&lt;Order, Summary&gt;chunk(1_000, transactionManager)
+```
+new StepBuilder("transform", jobRepository)
+        .<Order, Summary>chunk(1_000, transactionManager)
         .reader(reader)       // stream rows
         .processor(processor) // transform each row
         .writer(writer)       // write the chunk
-        .build();</pre>
+        .build();
+```
+
 
 *The chunk-oriented processing model ([Spring Batch reference](https://docs.spring.io/spring-batch/reference/step/chunk-oriented-processing.html)).*
 
@@ -40,21 +43,25 @@ Both apps generate a deterministic `orders.csv` (`id, customer_id, category, qua
 
 The traditional application uses a `Tasklet` that loops over the rows and folds them into an in-memory `HashMap`:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">Map&lt;Long, Acc&gt; groups = new HashMap&lt;&gt;();
+```
+Map<Long, Acc> groups = new HashMap<>();
 while ((line = reader.readLine()) != null) {
     // parse id,customer_id,category,quantity,amount
     long key = customerId * 8 + category;
-    Acc acc = groups.computeIfAbsent(key, k -&gt; new Acc());
+    Acc acc = groups.computeIfAbsent(key, k -> new Acc());
     acc.count++;
     acc.totalRevenue += amount * quantity;
     // ...
-}</pre>
+}
+```
+
 
 *Source: [`JavaTransformTasklet.java`](https://github.com/geertjanw/duckdb-samples/blob/02dcc32275ee1602d9592ed0384b63a11936c8f4/batch-scenarios/spring-batch-java-demo/src/main/java/com/example/batchjava/JavaTransformTasklet.java#L54-L83)*
 
 The DuckDB application runs the same transformation as a single SQL statement, inside an equally small `Tasklet`:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">try (Connection c = DriverManager.getConnection("jdbc:duckdb:");
+```
+try (Connection c = DriverManager.getConnection("jdbc:duckdb:");
      Statement st = c.createStatement()) {
     st.execute("""
         COPY (
@@ -69,7 +76,9 @@ The DuckDB application runs the same transformation as a single SQL statement, i
           ORDER BY customer_id, category
         ) TO 'summary.csv' (FORMAT CSV, HEADER true)
         """);
-}</pre>
+}
+```
+
 
 *Source: [`DuckDbTransformTasklet.java`](https://github.com/geertjanw/duckdb-samples/blob/02dcc32275ee1602d9592ed0384b63a11936c8f4/batch-scenarios/spring-batch-duckdb-demo/src/main/java/com/example/batchduckdb/DuckDbTransformTasklet.java#L46-L73)*
 

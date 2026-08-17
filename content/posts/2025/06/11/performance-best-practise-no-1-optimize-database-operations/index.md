@@ -56,27 +56,36 @@ You can configure connection pools in the Admin Console as follows:
 
 Or set the following properties (using the `set` admin command or as Embedded GlassFish properties):
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">resources.jdbc-connection-pool.{CONNECTION_POOL_NAME}.max-pool-size=32
+```
+resources.jdbc-connection-pool.{CONNECTION_POOL_NAME}.max-pool-size=32
 resources.jdbc-connection-pool.{CONNECTION_POOL_NAME}.idle-timeout-in-seconds=300
-resources.jdbc-connection-pool.{CONNECTION_POOL_NAME}.statement-cache-size=10</pre>
+resources.jdbc-connection-pool.{CONNECTION_POOL_NAME}.statement-cache-size=10
+```
+
 
 If you define the datasource in an application in web.xml:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&lt;data-source&gt;
-  &lt;name&gt;java:app/jdbc/MyDatasource&lt;/name&gt;
-  &lt;max-pool-size&gt;32&lt;/max-pool-size&gt;
-  &lt;max-idle-time&gt;300&lt;/max-idle-time&gt;
-  &lt;max-statements&gt;10&lt;/max-statements&gt;
-&lt;/data-source&gt;</pre>
+```
+<data-source>
+  <name>java:app/jdbc/MyDatasource</name>
+  <max-pool-size>32</max-pool-size>
+  <max-idle-time>300</max-idle-time>
+  <max-statements>10</max-statements>
+</data-source>
+```
+
 
 Or using in an application using an annotation:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@DataSourceDefinition(
+```
+@DataSourceDefinition(
     name = "java:app/jdbc/MyDatasource",
     maxPoolSize = 32,
     maxIdleTime = 300,
     maxStatements = 10
-)</pre>
+)
+```
+
 
 ### JDBC batching {#jdbc-batching}
 
@@ -84,12 +93,15 @@ JDBC batching is a feature in Java Database Connectivity (JDBC) that allows you 
 
 Here's an example, how to execute multiple JDBC statements in a batch:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">Statement statement = connection.createStatement();
+```
+Statement statement = connection.createStatement();
 statement.addBatch("INSERT INTO CITIES(ID, NAME, COUNTRY) "
  + "VALUES ('1','Zagreb','Croatia')");
 statement.addBatch("INSERT INTO CITIES(ID, NAME, COUNTRY) "
  + "VALUES ('2','Dublin', 'Ireland')");
-statement.executeBatch();</pre>
+statement.executeBatch();
+```
+
 
 ### Jakarta Persistence (JPA) batching {#jakarta-persistence-jpa-batching}
 
@@ -102,21 +114,30 @@ To enable the batching behavior, configure the following JPA properties (for exa
 
 For example, in `persistence.xml`:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&lt;property name="eclipselink.jdbc.batch-writing" value="jdbc"/&gt;
-&lt;property name="eclipselink.jdbc.batch-writing.size" value="150"/&gt;</pre>
+```
+<property name="eclipselink.jdbc.batch-writing" value="jdbc"/>
+<property name="eclipselink.jdbc.batch-writing.size" value="150"/>
+```
+
 
 This will enable batching for all data-writing JPA operations. If you want to invoke a certain statement in a JPA query without the batching behavior, you can then disable batching with the [jdbc.batch-writing](https://eclipse.dev/eclipselink/documentation/4.0/jpa/extensions/jpa-extensions.html#jdbc-batch-writing) query hint.
 
 For example:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">query.setHint("jdbc.batch-writing", false);</pre>
+```
+query.setHint("jdbc.batch-writing", false);
+```
+
 
 Or, if you compile your application against EclipseLink API:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">import org.eclipse.persistence.config.HintValues;
+```
+import org.eclipse.persistence.config.HintValues;
 import org.eclipse.persistence.config.QueryHints;
 ...
-query.setHint(QueryHints.BATCH_WRITING, HintValues.FALSE);</pre>
+query.setHint(QueryHints.BATCH_WRITING, HintValues.FALSE);
+```
+
 
 ### Next Steps {#statement-caching-with-glassfish}
 

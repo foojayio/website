@@ -41,7 +41,8 @@ We can indeed replace our custom `Collector` with two simple `Collector` impleme
 
 Let's look at the final code and explain it line by line.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public PriceAndRows getPriceAndRows(Cart cart) {
+```java
+public PriceAndRows getPriceAndRows(Cart cart) {
   return cart.getProducts()
       .entrySet()
       .stream()
@@ -55,7 +56,8 @@ Let's look at the final code and explain it line by line.
           PriceAndRows::new                        // 5
       ));
 }
-</pre>
+```
+
 
 1. Map each `Entry` to a `CartRow`
 2. Call the `teeing()` method

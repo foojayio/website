@@ -48,22 +48,29 @@ There are two types of data providers: InMemoryDataProvider and CallbackDataProv
 
 We want to create a grid to display the revenue of customers for that we use a Java Record:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public record CustomerInfo(Integer id, String lastname, String firstname, double revenue) {
-}</pre>
+```java
+public record CustomerInfo(Integer id, String lastname, String firstname, double revenue) {
+}
+```
+
 
 This Java Record can then be used to define the type of the grid and add the columms. The `addColumn` is an overloaded method and we use pass a method reference that returns the value that must be displayed in the grid cell.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">Grid&lt;CustomerInfo&gt; grid = new Grid&lt;&gt;();
+```java
+Grid<CustomerInfo> grid = new Grid<>();
 grid.addColumn(CustomerInfo::id).setHeader("ID");
 grid.addColumn(CustomerInfo::firstname).setHeader("First Name");
 grid.addColumn(CustomerInfo::lastname).setHeader("Last Name");
-grid.addColumn(CustomerInfo::revenue).setHeader("Revenue");</pre>
+grid.addColumn(CustomerInfo::revenue).setHeader("Revenue");
+```
+
 
 ### Fetching the Data {#h3-4-fetching-the-data}
 
 As we have many customers we want to use paging. The `Grid` has an overloaded method `setItems` where we only have to pass a callback that is used to fetch the data. Internaly a CallbackDataProvider is created.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">grid.setItems(query -&gt; dsl
+```java
+grid.setItems(query -> dsl
 	.select(CUSTOMER.ID, CUSTOMER.LASTNAME, CUSTOMER.FIRSTNAME, DSL.sum(PRODUCT.PRICE))
 	.from(CUSTOMER)
 	.join(PURCHASE_ORDER).on(PURCHASE_ORDER.CUSTOMER_ID.eq(CUSTOMER.ID))
@@ -73,7 +80,9 @@ As we have many customers we want to use paging. The `Grid` has an overloaded me
 	.orderBy(CUSTOMER.LASTNAME, CUSTOMER.FIRSTNAME)
 	.offset(query.getOffset())
 	.limit(query.getLimit())
-	.fetchStreamInto(CustomerInfo.class)</pre>
+	.fetchStreamInto(CustomerInfo.class)
+```
+
 
 To fetch the data we use the jOOQ DSL with the generated Java code. There are Java classes for the tables (CUSTOMER, PURCHASE_ORDER, ORDER_ITEM and PRODUCT) that contain the columms (CUSTOMER.ID, CUSTOMER.LASTNAME etc). Finally we fetch the result into the `CustomerInfo` record.
 

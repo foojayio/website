@@ -59,14 +59,19 @@ Simplicity {#h2-1-simplicity}
 
 The rule of simplicity is common and obvious but people use it to argue both sides. Simple is subjective. Is this block of code simple?
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">return obj.method(val).compare(otherObj.method(otherVal));
-</pre>
+```
+return obj.method(val).compare(otherObj.method(otherVal));
+```
+
 
 Or is this block simple?
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">var resultA = obj.method(val);
+```
+var resultA = obj.method(val);
 var resultB = otherObj.method(otherVal);
-return resultA.compare(resultB);</pre>
+return resultA.compare(resultB);
+```
+
 
 In terms of lines of code, the first example seems simpler and indeed many developers will prefer that. This would probably be a mistake. Notice that the first example includes multiple points of failure in a single line. The objects might be invalid. There are three methods that can fail. If a failure occurs it might be unclear what part failed.
 
@@ -78,16 +83,22 @@ With the second example, this is instantly visible and hard to miss. Furthermore
 
 Let's inspect a common example:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">var result = list.stream()
+```
+var result = list.stream()
                  .map(MyClass::convert)
-                 .collect(Collectors.toList());</pre>
+                 .collect(Collectors.toList());
+```
+
 
 That's a pretty common code that is similar to this code:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">var result = new ArrayList&lt;OtherType&gt;();
+```
+var result = new ArrayList<OtherType>();
 for(MyClass c: list) {
     result.add(c.convert());
-}</pre>
+}
+```
+
 
 There are advantages to both approaches in terms of debuggability and our decision can have a significant impact on the long-term quality. A subtle change in the first example is the fact that the returned list is unmodifiable. This is a boon and a problem. Unmodifiable lists fail at runtime when we try to change them, that's a potential risk of failure. However, the failure is clear. We know what failed.
 

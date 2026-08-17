@@ -33,45 +33,51 @@ To illustrate our approach, we'll use the Spring Boot Petclinic project, a Sprin
 
 You can get the complete project, including a lot of configurations for various use cases, from GitHub:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ git clone https://github.com/spring-projects/spring-petclinic
-$ cd spring-petclinic</pre>
+```
+$ git clone https://github.com/spring-projects/spring-petclinic
+$ cd spring-petclinic
+```
+
 
 Modify and extend the default settings {#h2-2-modify-and-extend-the-default-settings}
 -------------------------------------------------------------------------------------
 
 We just need a few additional configurations in the `spring-boot-maven-plugin` section in the `pom.xml` file of the project to modify the OpenJDK distribution in the generated Docker image and add additional debug settings. Don't change the executions; just insert the configuration section. The goal of this Docker image is to use the Azulu Zulu Build of OpenJDK as the runtime and to include all possible debug and test tools, so it has all the following options. Of course, which ones you use will depend on your use case.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">    &lt;plugin&gt;
-        &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
-        &lt;artifactId&gt;spring-boot-maven-plugin&lt;/artifactId&gt;
-        &lt;configuration&gt;
-            &lt;image&gt;
-                &lt;buildpacks&gt;
-                    &lt;buildpack&gt;paketobuildpacks/azul-zulu&lt;/buildpack&gt;
-                    &lt;buildpack&gt;paketobuildpacks/java&lt;/buildpack&gt;
-                &lt;/buildpacks&gt;
+```
+    <plugin>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-maven-plugin</artifactId>
+        <configuration>
+            <image>
+                <buildpacks>
+                    <buildpack>paketobuildpacks/azul-zulu</buildpack>
+                    <buildpack>paketobuildpacks/java</buildpack>
+                </buildpacks>
 
-                &lt;env&gt;
-                    &lt;BP_JVM_VERSION&gt;17&lt;/BP_JVM_VERSION&gt;
-                    &lt;BP_JVM_TYPE&gt;JDK&lt;/BP_JVM_TYPE&gt;
+                <env>
+                    <BP_JVM_VERSION>17</BP_JVM_VERSION>
+                    <BP_JVM_TYPE>JDK</BP_JVM_TYPE>
 
-                    &lt;BPE_DELIM_JAVA_TOOL_OPTIONS xml:space="preserve"&gt; &lt;/BPE_DELIM_JAVA_TOOL_OPTIONS&gt;
-                    &lt;BPE_APPEND_JAVA_TOOL_OPTIONS&gt;-Xlog:gc:/tmp/gc.log&lt;/BPE_APPEND_JAVA_TOOL_OPTIONS&gt;
+                    <BPE_DELIM_JAVA_TOOL_OPTIONS xml:space="preserve"> </BPE_DELIM_JAVA_TOOL_OPTIONS>
+                    <BPE_APPEND_JAVA_TOOL_OPTIONS>-Xlog:gc:/tmp/gc.log</BPE_APPEND_JAVA_TOOL_OPTIONS>
 
-                    &lt;BPE_DEFAULT_BPL_DEBUG_ENABLED&gt;true&lt;/BPL_DEBUG_ENABLED&gt;
-                    &lt;BPE_DEFAULT_BPL_DEBUG_PORT&gt;8000&lt;/BPL_DEBUG_PORT&gt; &lt;!-- This is the default value --&gt;
-                    &lt;BPE_DEFAULT_BPL_JMX_ENABLED&gt;true&lt;/BPL_JMX_ENABLED&gt;
-                    &lt;BPE_DEFAULT_BPL_JMX_PORT&gt;5000&lt;/BPL_JMX_PORT&gt; &lt;!-- This is the default value --&gt;
-                    &lt;BPE_DEFAULT_BPL_JAVA_NMT_ENABLED&gt;true&lt;/BPL_JAVA_NMT_ENABLED&gt; &lt;!-- This is the default value --&gt;
-                    &lt;BPE_DEFAULT_BPL_JFR_ENABLED&gt;true&lt;/BPL_JFR_ENABLED&gt; 
-                    &lt;BPE_DEFAULT_BPL_JFR_ARGS&gt;dumponexit=true,filename=/tmp/rec.jfr,duration=600s&lt;/BPL_JFR_ARGS&gt;
-                &lt;/env&gt;
-            &lt;/image&gt;
-        &lt;/configuration&gt;
-        &lt;executions&gt;
+                    <BPE_DEFAULT_BPL_DEBUG_ENABLED>true</BPL_DEBUG_ENABLED>
+                    <BPE_DEFAULT_BPL_DEBUG_PORT>8000</BPL_DEBUG_PORT> <!-- This is the default value -->
+                    <BPE_DEFAULT_BPL_JMX_ENABLED>true</BPL_JMX_ENABLED>
+                    <BPE_DEFAULT_BPL_JMX_PORT>5000</BPL_JMX_PORT> <!-- This is the default value -->
+                    <BPE_DEFAULT_BPL_JAVA_NMT_ENABLED>true</BPL_JAVA_NMT_ENABLED> <!-- This is the default value -->
+                    <BPE_DEFAULT_BPL_JFR_ENABLED>true</BPL_JFR_ENABLED> 
+                    <BPE_DEFAULT_BPL_JFR_ARGS>dumponexit=true,filename=/tmp/rec.jfr,duration=600s</BPL_JFR_ARGS>
+                </env>
+            </image>
+        </configuration>
+        <executions>
             ...
-        &lt;/executions&gt;
-    &lt;/plugin&gt;</pre>
+        </executions>
+    </plugin>
+```
+
 
 To better understand this section, we need to look at all the different options separately:
 
@@ -86,11 +92,12 @@ To better understand this section, we need to look at all the different options 
 
 At this point, building the Docker image is a single-line command, and the output will show a few references to the Azul JDK and our settings after the various test cycles:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ ./mvnw spring-boot:build-image
+```
+$ ./mvnw spring-boot:build-image
 
 [INFO] Scanning for projects...
 [INFO] 
-[INFO] ------------&lt; org.springframework.samples:spring-petclinic &gt;------------
+[INFO] ------------< org.springframework.samples:spring-petclinic >------------
 [INFO] Building petclinic 3.1.0-SNAPSHOT
 [INFO]   from pom.xml
 [INFO] --------------------------------[ jar ]---------------------------------
@@ -101,25 +108,25 @@ At this point, building the Docker image is a single-line command, and the outpu
 [INFO] --- spring-boot:3.1.1:build-image (default-cli) @ spring-petclinic ---
 [INFO] Building image 'docker.io/library/spring-petclinic:3.1.0-SNAPSHOT'
 [INFO] 
-[INFO]  &gt; Pulling builder image 'docker.io/paketobuildpacks/builder:base' 100%
+[INFO]  > Pulling builder image 'docker.io/paketobuildpacks/builder:base' 100%
 
 ...
 
-[INFO]  &gt; Pulling buildpack image 'docker.io/paketobuildpacks/azul-zulu:latest' 100%
-[INFO]  &gt; Pulled buildpack image 'paketobuildpacks/azul-zulu@sha256:79419af00c95f85c088e68808f61b2486c39a7e12a0033995970c97e95408069'
+[INFO]  > Pulling buildpack image 'docker.io/paketobuildpacks/azul-zulu:latest' 100%
+[INFO]  > Pulled buildpack image 'paketobuildpacks/azul-zulu@sha256:79419af00c95f85c088e68808f61b2486c39a7e12a0033995970c97e95408069'
 
 ...
 
-[INFO]  &gt; Running creator
-[INFO]     [creator]     ===&gt; ANALYZING
+[INFO]  > Running creator
+[INFO]     [creator]     ===> ANALYZING
 [INFO]     [creator]     Image with name "docker.io/library/spring-petclinic:3.1.0-SNAPSHOT" not found
-[INFO]     [creator]     ===&gt; DETECTING
+[INFO]     [creator]     ===> DETECTING
 [INFO]     [creator]     8 of 27 buildpacks participating
 [INFO]     [creator]     paketo-buildpacks/azul-zulu             10.1.5
 
 ...
 
-[INFO]     [creator]     ===&gt; BUILDING
+[INFO]     [creator]     ===> BUILDING
 [INFO]     [creator]     
 [INFO]     [creator]     Paketo Buildpack for Azul Zulu 10.1.5
 [INFO]     [creator]       https://github.com/paketo-buildpacks/azul-zulu
@@ -156,14 +163,17 @@ At this point, building the Docker image is a single-line command, and the outpu
 [INFO] ------------------------------------------------------------------------
 [INFO] Total time:  01:29 min
 [INFO] Finished at: 2023-07-03T11:26:39+02:00
-[INFO] ------------------------------------------------------------------------</pre>
+[INFO] ------------------------------------------------------------------------
+```
+
 
 Checking the created Docker images {#h2-4-checking-the-created-docker-images}
 -----------------------------------------------------------------------------
 
 During the build process, various images were downloaded and created. As you can see, there are more than we may expect, but a few of these are used during the unit tests.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ docker images
+```
+$ docker images
 
 REPOSITORY                   TAG              IMAGE ID       CREATED        SIZE
 paketobuildpacks/run         base-cnb         f2e5000af0cb   3 days ago     87.1MB
@@ -173,7 +183,9 @@ testcontainers/ryuk          0.5.1            ec913eeff75a   6 weeks ago    12.7
 paketobuildpacks/builder     base             99ec7fb86b9d   43 years ago   1.34GB
 paketobuildpacks/azul-zulu   latest           276db25e20db   43 years ago   10.4MB
 paketobuildpacks/java        latest           2ddc6cc7d346   43 years ago   207MB
-spring-petclinic             3.1.0-SNAPSHOT   c05d70c78109   43 years ago   496MB</pre>
+spring-petclinic             3.1.0-SNAPSHOT   c05d70c78109   43 years ago   496MB
+```
+
 
 Running the Docker image {#h2-5-running-the-docker-image}
 ---------------------------------------------------------
@@ -186,7 +198,8 @@ You can now start the Docker image. Three ports are configured for various use c
 
 Via the terminal, start the Docker image.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ docker run -p 8080:8080 -p 8000:8000 -p 5000:5000 --name petclinic spring-petclinic:3.1.0-SNAPSHOT
+```
+$ docker run -p 8080:8080 -p 8000:8000 -p 5000:5000 --name petclinic spring-petclinic:3.1.0-SNAPSHOT
 
 Setting Active Processor Count to 16
 Debugging enabled on port *:8000
@@ -211,7 +224,9 @@ JMX enabled on port 5000
 :: Built with Spring Boot :: 3.1.1
 
 2023-07-06T10:55:23.329Z  INFO 1 --- [           main] o.s.s.petclinic.PetClinicApplication     : Starting PetClinicApplication v3.1.0-SNAPSHOT using Java 17.0.7 with PID 1 (/workspace/BOOT-INF/classes started by cnb in /workspace)
-...</pre>
+...
+```
+
 
 Validating the Docker image {#h2-6-validating-the-docker-image}
 ---------------------------------------------------------------
@@ -221,7 +236,8 @@ At this point, you can perform various steps to validate the Docker image we cre
 * Open a browser and point it to `localhost:8080`. The Petclinic web interface allows you to browse pet owners and veterinarians.
 * Open a second terminal and perform the following checks inside the running Docker:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ docker exec -it petclinic sh
+```
+$ docker exec -it petclinic sh
 
 # Check the Java version
 $ /layers/paketo-buildpacks_azul-zulu/jdk/bin/java -version
@@ -267,7 +283,9 @@ VM Arguments:
 jvm_args: -Djava.security.properties=/layers/paketo-buildpacks_azul-zulu/java-security-properties/java-security.properties -XX:+ExitOnOutOfMemoryError -Xlog:gc:/tmp/gc.log -XX:ActiveProcessorCount=16 -agentlib:jdwp=transport=dt_socket,server=y,address=*:8000,suspend=n -XX:StartFlightRecording=dumponexit=true,filename=/tmp/rec.jfr,duration=600s -Djava.rmi.server.hostname=127.0.0.1 -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false -Dcom.sun.management.jmxremote.port=5000 -Dcom.sun.management.jmxremote.rmi.port=5000 -XX:MaxDirectMemorySize=10M -Xmx23297904K -XX:MaxMetaspaceSize=130595K -XX:ReservedCodeCacheSize=240M -Xss1M -XX:+UnlockDiagnosticVMOptions -XX:NativeMemoryTracking=summary -XX:+PrintNMTStatistics -Dorg.springframework.cloud.bindings.boot.enable=true 
 java_command: org.springframework.boot.loader.JarLauncher
 java_class_path (initial): /workspace
-Launcher Type: SUN_STANDARD</pre>
+Launcher Type: SUN_STANDARD
+```
+
 
 Making use of the logging and debug configurations {#h2-7-making-use-of-the-logging-and-debug-configurations}
 -------------------------------------------------------------------------------------------------------------
@@ -278,14 +296,20 @@ Analyzing and debugging the application inside Docker with the various tools and
 
 You can copy both the JFR recording and the Garbage Collector files inside the Docker image to your PC.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ docker cp petclinic:/tmp/rec.jfr rec.jfr
-$ docker cp petclinic:/tmp/gc.log gc.log</pre>
+```
+$ docker cp petclinic:/tmp/rec.jfr rec.jfr
+$ docker cp petclinic:/tmp/gc.log gc.log
+```
+
 
 ### Connecting to debug {#h3-9-connecting-to-debug}
 
 From within your IDE, for instance, IntelliJ IDEA, you can start a debug connection to the running application inside the Docker via port 8000 and set breakpoints in your code.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">Connected to the target VM, address: 'localhost:8000', transport: 'socket'</pre>
+```
+Connected to the target VM, address: 'localhost:8000', transport: 'socket'
+```
+
 
 <figure class="wp-block-gallery has-nested-images columns-default is-cropped wp-block-gallery-1 is-layout-flex wp-block-gallery-is-layout-flex">
  <figure class="wp-block-image size-large">
@@ -325,7 +349,7 @@ And... mission accomplished!
 
 <br />
 
-*** ** * ** ***
+
 
 <br />
 

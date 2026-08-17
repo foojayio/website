@@ -23,7 +23,7 @@ The **Jakarta EE 11 Web Profile** has [officially been released](https://www.agi
 
 Although it comes later than planned, due to unexpected challenges in refactoring the Jakarta EE TCK (compatibility kit), this release marks a key shift toward a more cloud-native, developer-focused platform --- and we're proud to say that **Eclipse GlassFish** was the **first implementation to pass the Jakarta EE 11 Web Profile TCK** and enable the specification's final approval.
 
-*** ** * ** ***
+
 
 ### Key Technical Changes in Jakarta EE 11 Web Profile {#key-technical-changes-in-jakarta-ee-11-web-profile}
 
@@ -42,7 +42,7 @@ Jakarta EE 11 Web Profile delivers an updated and streamlined set of specificati
 
 ![](jakarta-ee-11-web.png) [Full specification list for Jakarta EE 11 Web Profile](https://jakarta.ee/specifications/webprofile/11/jakarta-webprofile-spec-11.0#web-profile-definition)
 
-*** ** * ** ***
+
 
 ### GlassFish: The first compatible implementation for Jakarta EE 11 Web Profile {#glassfish-the-first-compatible-implementation-for-jakarta-ee-11-web-profile}
 
@@ -54,7 +54,7 @@ As the **first runtime to pass the full TCK**, GlassFish played a critical role 
 * ![🧪](https://s.w.org/images/core/emoji/15.0.3/svg/1f9ea.svg) Used to **ratify and validate** the Jakarta EE 11 Web Profile specifications on both [Java 17](https://repo1.maven.org/maven2/org/glassfish/main/distributions/web/8.0.0-JDK17-M10/web-8.0.0-JDK17-M10.zip) and [Java 21](https://repo1.maven.org/maven2/org/glassfish/main/distributions/web/8.0.0-M10/web-8.0.0-M10.zip)
 * ![🚀](https://s.w.org/images/core/emoji/15.0.3/svg/1f680.svg) Delivered support for updated APIs across multiple layers of the runtime, even [beyond the scenarios](https://github.com/eclipse-ee4j/glassfish/issues?q=is%3Aissue%20state%3Aclosed%20label%3A8.0) covered by the TCK
 
-*** ** * ** ***
+
 
 ### OmniFish Engineering Contributions {#omnifish-engineering-contributions}
 
@@ -67,7 +67,7 @@ The **OmniFish engineering team** was deeply involved in this release cycle --- 
 
 OmniFish remains committed to improving GlassFish and Jakarta EE and to delivering high-quality, open-source runtimes and tools for Jakarta EE developers.
 
-*** ** * ** ***
+
 
 ### What's Coming: GlassFish 8 {#what-s-coming-glassfish-8}
 
@@ -84,7 +84,7 @@ The team at OmniFish is now working on the **final release of GlassFish 8**, whi
 
 You can follow the Eclipse GlassFish project via the channels listed at our [GlassFish Community page](https://omnifish.ee/glassfish-community/), join discussions in the [GlassFish project discussion forum](https://github.com/eclipse-ee4j/glassfish/discussions) or in the [Jakarta EE channels](https://jakarta.ee/connect/) (e.g. Slack or the Community mailing list).
 
-*** ** * ** ***
+
 
 More information:
 

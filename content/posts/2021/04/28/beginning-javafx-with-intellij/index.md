@@ -101,11 +101,13 @@ After selecting the '**Add JDK** ' option locate the previously installed (ZuluF
 
 **Step 11:** Enter (copy \& paste) the following module definition into the file.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="true" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">module com.mycompany.helloworld {
+```java
+module com.mycompany.helloworld {
    requires javafx.controls;
    exports com.mycompany.helloworld;
 }
-</pre>
+```
+
 
 After hitting Ctrl + S to save the file you will encounter errors in the editor window where the module is referencing (exports) the **com.mycompany.helloworld** package which doesn't exist yet. So in the next step let's create the package namespace.
 
@@ -132,18 +134,21 @@ Here you'll notice two things, a generated JavaFX class and no errors from missi
 
 **Step 14:** Enter or cut \& paste the following JavaFX code into the body of the **start()** method.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="true" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">        primaryStage.setTitle("Hello World");
+```java
+        primaryStage.setTitle("Hello World");
         Group root = new Group();
         Scene scene = new Scene(root, 300, 250);
         Button btn = new Button();
         btn.setLayoutX(100);
         btn.setLayoutY(80);
         btn.setText("Hello World");
-        btn.setOnAction( actionEvent -&gt;
+        btn.setOnAction( actionEvent ->
                 System.out.println("Hello World"));
         root.getChildren().add(btn);
         primaryStage.setScene(scene);
-        primaryStage.show();</pre>
+        primaryStage.show();
+```
+
 
 The final project in IntelliJ should look like the following:
 
@@ -196,52 +201,55 @@ Step 4: Add Plugins and dependencies into **pom.xml**file
 
 Copy \& Paste to replace the following **pom.xml** into the editor and Save.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="xml" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&lt;project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd"&gt;
-    &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
-    &lt;groupId&gt;com.mycompany.helloworld&lt;/groupId&gt;
-    &lt;artifactId&gt;helloworldfx&lt;/artifactId&gt;
-    &lt;version&gt;1.0-SNAPSHOT&lt;/version&gt;
+```xml
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.mycompany.helloworld</groupId>
+    <artifactId>helloworldfx</artifactId>
+    <version>1.0-SNAPSHOT</version>
 
-    &lt;properties&gt;
-        &lt;project.build.sourceEncoding&gt;UTF-8&lt;/project.build.sourceEncoding&gt;
-        &lt;maven.compiler.release&gt;14&lt;/maven.compiler.release&gt;
-        &lt;javafx.version&gt;14&lt;/javafx.version&gt;
-    &lt;/properties&gt;
-    &lt;dependencies&gt;
-        &lt;dependency&gt;
-            &lt;groupId&gt;org.openjfx&lt;/groupId&gt;
-            &lt;artifactId&gt;javafx-controls&lt;/artifactId&gt;
-            &lt;version&gt;${javafx.version}&lt;/version&gt;
-        &lt;/dependency&gt;
-    &lt;/dependencies&gt;
-    &lt;build&gt;
-        &lt;plugins&gt;
-            &lt;plugin&gt;
-                &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;
-                &lt;artifactId&gt;maven-compiler-plugin&lt;/artifactId&gt;
-                &lt;version&gt;3.8.1&lt;/version&gt;
-                &lt;executions&gt;
-                    &lt;execution&gt;
-                        &lt;id&gt;default-compile&lt;/id&gt;
-                        &lt;configuration&gt;
-                            &lt;release&gt;${maven.compiler.release}&lt;/release&gt;
-                        &lt;/configuration&gt;
-                    &lt;/execution&gt;
-                &lt;/executions&gt;
-            &lt;/plugin&gt;
-            &lt;plugin&gt;
-                &lt;groupId&gt;org.openjfx&lt;/groupId&gt;
-                &lt;artifactId&gt;javafx-maven-plugin&lt;/artifactId&gt;
-                &lt;version&gt;0.0.5&lt;/version&gt;
-                &lt;configuration&gt;
-                   &lt;release&gt;${maven.compiler.release}&lt;/release&gt;
-                   &lt;mainClass&gt;com.mycompany.helloworld.HelloWorld&lt;/mainClass&gt;
-                &lt;/configuration&gt;
-            &lt;/plugin&gt;
-        &lt;/plugins&gt;
-    &lt;/build&gt;
-&lt;/project&gt;</pre>
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.release>14</maven.compiler.release>
+        <javafx.version>14</javafx.version>
+    </properties>
+    <dependencies>
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-controls</artifactId>
+            <version>${javafx.version}</version>
+        </dependency>
+    </dependencies>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.1</version>
+                <executions>
+                    <execution>
+                        <id>default-compile</id>
+                        <configuration>
+                            <release>${maven.compiler.release}</release>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.openjfx</groupId>
+                <artifactId>javafx-maven-plugin</artifactId>
+                <version>0.0.5</version>
+                <configuration>
+                   <release>${maven.compiler.release}</release>
+                   <mainClass>com.mycompany.helloworld.HelloWorld</mainClass>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>
+```
+
 
 **Step 5:**Project Settings -\> Project - Set Language Level
 
@@ -263,10 +271,13 @@ After the file is created you will want to use the definition in step 6.
 
 **Step 6:** Copy and paste the following module definition to replace the generated one. Then hit **Save**.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">module com.mycompany.helloworld {
+```java
+module com.mycompany.helloworld {
     requires javafx.controls;
     exports com.mycompany.helloworld;
-}</pre>
+}
+```
+
 
 **Step 6:** Create a Java package name space **com.mycompany.helloworld**.
 ![](04-Package-namespace.png) Figure 27. New Package name space folder ![](05-New-Package-name.png) Figure 28. Entering the package name
@@ -281,7 +292,8 @@ Right Mouse click the folder **com.mycompany.helloworld** (Project pane) to sele
 
 Next, **copy \& paste** or type the following code to replace the code in the recently created **HelloWorld.java** file and **Save**.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">package com.mycompany.helloworld;
+```java
+package com.mycompany.helloworld;
 
 import javafx.application.Application;
 import javafx.scene.Group;
@@ -304,14 +316,15 @@ public class HelloWorld extends Application {
         btn.setLayoutX(100);
         btn.setLayoutY(80);
         btn.setText("Hello World");
-        btn.setOnAction( actionEvent -&gt;
+        btn.setOnAction( actionEvent ->
                 System.out.println("Hello World"));
         root.getChildren().add(btn);
         primaryStage.setScene(scene);
         primaryStage.show();
     }
 }
-</pre>
+```
+
 
 **Step 8:** Reload Maven Project
 
@@ -327,20 +340,27 @@ If you want to run the application using the IDE's Run configuration you'll need
 
 When using ZuluFX:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="shell" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">--add-modules javafx.controls</pre>
+```bash
+--add-modules javafx.controls
+```
+
 
 ![](11-VMoptions.png) Figure 33. VM Options
 
 When using JavaFX as separate libraries such as from GluonHQ (`$PATH_TO_FX`) and a **mods** directory (modules output directory):
 
-<pre class="EnlighterJSRAW" data-enlighter-language="shell" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">--module-path $PATH_TO_FX:mods --add-modules javafx.controls</pre>
+```bash
+--module-path $PATH_TO_FX:mods --add-modules javafx.controls
+```
+
 
 Gradle JavaFX Project {#h2-3-gradle-javafx-project}
 ---------------------------------------------------
 
 Because this article is getting way too long, I am only going to post the **build.gradle** file below. Because the file and directory structure of a gradle project is the same as a Maven project I trust you can simply go through creating the project in a similar manner and near the end click on the **Gradle** tab and the **reload** button to see the **run** task.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="groovy" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">plugins {
+```groovy
+plugins {
   id 'application'
   id 'org.openjfx.javafxplugin' version '0.0.8'
 }
@@ -355,7 +375,8 @@ javafx {
 }
 
 mainClassName = "com.mycompany.helloworldfx/com.mycompany.helloworldfx.HelloWorld"
-</pre>
+```
+
 
 Conclusion {#h2-4-conclusion}
 -----------------------------

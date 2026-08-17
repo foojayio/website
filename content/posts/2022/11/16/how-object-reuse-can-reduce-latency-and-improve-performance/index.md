@@ -91,7 +91,8 @@ In a [previous article](https://chronicle.software/creating-terabyte-sized-queue
 
 As in the previous article, the same simple data object is used:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public class MarketData extends SelfDescribingMarshallable {
+```java
+public class MarketData extends SelfDescribingMarshallable {
     int securityId;
     long time;
     float last;
@@ -100,17 +101,20 @@ As in the previous article, the same simple data object is used:
 
     // Getters and setters not shown for brevity
 
-}</pre>
+}
+```
+
 
 The idea is to create a top-level object that is reused when appending a large number of messages to a queue and then analyse internal object usage for the entire stack when running this code:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public static void main(String[] args) {
+```java
+public static void main(String[] args) {
     final MarketData marketData = new MarketData();
     final ChronicleQueue q = ChronicleQueue
             .single("market-data");
     final ExcerptAppender appender = q.acquireAppender();
 
-    for (long i = 0; i &lt; 1e9; i++) {
+    for (long i = 0; i < 1e9; i++) {
         try (final DocumentContext document =
                      appender.acquireWritingDocument(false)) {
              document
@@ -120,7 +124,9 @@ The idea is to create a top-level object that is reused when appending a large n
                             MarketDataUtil.recycle(marketData));
         }
     }
-}</pre>
+}
+```
+
 
 Since Chronicle Queue is serializing the objects to memory-mapped files, it is important that it does not create other unnecessary objects for the performance reasons stated above.
 
@@ -128,7 +134,8 @@ Since Chronicle Queue is serializing the objects to memory-mapped files, it is i
 
 The application is started with the VM option "-verbose:gc" so that any potential GCs are clearly detectable by observing the standard output. Once the application starts, a histogram of the most used objects are dumped after inserting an initial 100 million messages:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">pemi@Pers-MBP-2 queue-demo % jmap -histo 8536
+```
+pemi@Pers-MBP-2 queue-demo % jmap -histo 8536
 
  num     #instances         #bytes  class name
 ----------------------------------------------
@@ -140,11 +147,14 @@ The application is started with the VM option "-verbose:gc" so that any potentia
 …
 2138:             1             16  
 sun.util.resources.LocaleData$LocaleDataResourceBundleControl
-Total        472015      123487536</pre>
+Total        472015      123487536
+```
+
 
 After the application appended about 100 million additional messages some seconds later, a new dump was made:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">pemi@Pers-MBP-2 queue-demo % jmap -histo 8536
+```
+pemi@Pers-MBP-2 queue-demo % jmap -histo 8536
 
  num     #instances         #bytes  class name
 ----------------------------------------------
@@ -156,7 +166,9 @@ After the application appended about 100 million additional messages some second
 …
 2138:             1             16  
 sun.util.resources.LocaleData$LocaleDataResourceBundleControl
-Total        473485      123487536</pre>
+Total        473485      123487536
+```
+
 
 As can be seen, there was only a slight increase in the number of objects allocated (around 1500 objects) indicating n**o object allocation was made per message sent**. No GC was reported by the JVM so no objects were collected during the sampling interval.
 

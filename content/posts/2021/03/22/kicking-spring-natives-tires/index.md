@@ -65,47 +65,50 @@ At the moment of this writing, GraalVM offers two versions of Java, 8 and 11. Si
 
 The second step is to add a dependency and a plugin to the POM. I put both into a dedicated profile so that the application can run "normally". These are hosted outside of Maven Central in dedicated Spring repositories.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="xml">&lt;profiles&gt;
-  &lt;profile&gt;
-    &lt;id&gt;native&lt;/id&gt;
-    &lt;build&gt;
-      &lt;plugins&gt;
-        &lt;plugin&gt;
-          &lt;groupId&gt;org.springframework.experimental&lt;/groupId&gt;
-          &lt;artifactId&gt;spring-aot-maven-plugin&lt;/artifactId&gt;
-          &lt;version&gt;0.9.0&lt;/version&gt;
-          &lt;executions&gt;
-            &lt;execution&gt;
-              &lt;id&gt;generate&lt;/id&gt;
-              &lt;goals&gt;
-                &lt;goal&gt;generate&lt;/goal&gt;
-              &lt;/goals&gt;
-            &lt;/execution&gt;
-          &lt;/executions&gt;
-        &lt;/plugin&gt;
-      &lt;/plugins&gt;
-    &lt;/build&gt;
-    &lt;dependencies&gt;
-      &lt;dependency&gt;
-        &lt;groupId&gt;org.springframework.experimental&lt;/groupId&gt;
-        &lt;artifactId&gt;spring-native&lt;/artifactId&gt;
-        &lt;version&gt;0.9.0&lt;/version&gt;
-      &lt;/dependency&gt;
-    &lt;/dependencies&gt;
-  &lt;/profile&gt;
-&lt;/profiles&gt;
-&lt;repositories&gt;
-  &lt;repository&gt;
-    &lt;id&gt;spring-release&lt;/id&gt;
-    &lt;url&gt;https://repo.spring.io/release&lt;/url&gt;
-  &lt;/repository&gt;
-&lt;/repositories&gt;
-&lt;pluginRepositories&gt;
-  &lt;pluginRepository&gt;
-    &lt;id&gt;spring-release&lt;/id&gt;
-    &lt;url&gt;https://repo.spring.io/release&lt;/url&gt;
-  &lt;/pluginRepository&gt;
-&lt;/pluginRepositories&gt;</pre>
+```xml
+<profiles>
+  <profile>
+    <id>native</id>
+    <build>
+      <plugins>
+        <plugin>
+          <groupId>org.springframework.experimental</groupId>
+          <artifactId>spring-aot-maven-plugin</artifactId>
+          <version>0.9.0</version>
+          <executions>
+            <execution>
+              <id>generate</id>
+              <goals>
+                <goal>generate</goal>
+              </goals>
+            </execution>
+          </executions>
+        </plugin>
+      </plugins>
+    </build>
+    <dependencies>
+      <dependency>
+        <groupId>org.springframework.experimental</groupId>
+        <artifactId>spring-native</artifactId>
+        <version>0.9.0</version>
+      </dependency>
+    </dependencies>
+  </profile>
+</profiles>
+<repositories>
+  <repository>
+    <id>spring-release</id>
+    <url>https://repo.spring.io/release</url>
+  </repository>
+</repositories>
+<pluginRepositories>
+  <pluginRepository>
+    <id>spring-release</id>
+    <url>https://repo.spring.io/release</url>
+  </pluginRepository>
+</pluginRepositories>
+```
+
 
 With this configuration snippet, one can create a native image with the `native` profile:
 
@@ -117,19 +120,24 @@ mvn spring-boot:build-image -Pnative
 
 The AOT compilation process takes a long time. It should succeed (though it displays some stack traces), and in the end, it produces a Docker image. You can run the image with:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">docker run -it --rm -p8080:8080 docker.io/library/imperative-to-reactive:1.0-SNAPSHOT     #1
-</pre>
+```
+docker run -it --rm -p8080:8080 docker.io/library/imperative-to-reactive:1.0-SNAPSHOT     #1
+```
+
 
 1. I use `--rm` so it removes the container after it has run and doesn't waste disk space
 
 Unfortunately, this fails with the following exception:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">Caused by: java.lang.ClassNotFoundException: org.springframework.boot.autoconfigure.r2dbc.ConnectionFactoryConfigurations$PooledConnectionFactoryCondition
+```
+Caused by: java.lang.ClassNotFoundException: org.springframework.boot.autoconfigure.r2dbc.ConnectionFactoryConfigurations$PooledConnectionFactoryCondition
     at com.oracle.svm.core.hub.ClassForNameSupport.forName(ClassForNameSupport.java:60) ~[na:na]
     at java.lang.Class.forName(DynamicHub.java:1260) ~[na:na]
     at org.springframework.util.ClassUtils.forName(ClassUtils.java:284) ~[na:na]
     at org.springframework.util.ClassUtils.resolveClassName(ClassUtils.java:324) ~[na:na]
-    ... 28 common frames omitted</pre>
+    ... 28 common frames omitted
+```
+
 
 It seems that Spring Native missed this one. We need to add it ourselves. There are two ways to do that:
 
@@ -138,40 +146,52 @@ It seems that Spring Native missed this one. We need to add it ourselves. There 
 
 In the above section, I chose to set Spring Native in a dedicated Maven profile. For that reason, let's use regular configuration files.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="json">[
+```json
+[
 {
   "name":"org.springframework.boot.autoconfigure.r2dbc.ConnectionFactoryConfigurations$PooledConnectionFactoryCondition",
-  "methods":[{"name":"&lt;init&gt;","parameterTypes":[] }]
+  "methods":[{"name":"<init>","parameterTypes":[] }]
 }
-]</pre>
+]
+```
+
 
 Building and running again yields the following:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">Caused by: java.lang.NoSuchFieldException: VERSION
+```
+Caused by: java.lang.NoSuchFieldException: VERSION
     at java.lang.Class.getField(DynamicHub.java:1078) ~[na:na]
     at com.hazelcast.instance.BuildInfoProvider.readStaticStringField(BuildInfoProvider.java:139) ~[na:na]
-    ... 79 common frames omitted</pre>
+    ... 79 common frames omitted
+```
+
 
 This time, a Hazelcast-related static field is missing. We need to configure the missing field, re-build and re-run again. It still fails. Rinse and repeat: I'll spare you the details; please check the [repo](https://github.com/hazelcast-demos/imperative-to-reactive/tree/native) if you're interested.
 
 Because I configure Hazelcast with XML, the whole XML initialization process is needed. At some point, we also need to keep a resource bundle in the native image:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="json">{
+```json
+{
 "bundles":[
   {"name":"com.sun.org.apache.xml.internal.serializer.XMLEntities"}
 ]
-}</pre>
+}
+```
+
 
 Unfortunately, the build continues to fail. It's still an XML-related exception **though we configured the class correctly**!
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">Caused by: java.lang.RuntimeException: internal error
+```
+Caused by: java.lang.RuntimeException: internal error
     at com.sun.org.apache.xerces.internal.impl.dv.xs.XSSimpleTypeDecl.applyFacets1(XSSimpleTypeDecl.java:754) ~[na:na]
     at com.sun.org.apache.xerces.internal.impl.dv.xs.BaseSchemaDVFactory.createBuiltInTypes(BaseSchemaDVFactory.java:207) ~[na:na]
     at com.sun.org.apache.xerces.internal.impl.dv.xs.SchemaDVFactoryImpl.createBuiltInTypes(SchemaDVFactoryImpl.java:47) ~[org.hazelcast.cache.ImperativeToReactiveApplicationKt:na]
-    at com.sun.org.apache.xerces.internal.impl.dv.xs.SchemaDVFactoryImpl.&lt;clinit&gt;(SchemaDVFactoryImpl.java:42) ~[org.hazelcast.cache.ImperativeToReactiveApplicationKt:na]
+    at com.sun.org.apache.xerces.internal.impl.dv.xs.SchemaDVFactoryImpl.<clinit>(SchemaDVFactoryImpl.java:42) ~[org.hazelcast.cache.ImperativeToReactiveApplicationKt:na]
     at com.oracle.svm.core.classinitialization.ClassInitializationInfo.invokeClassInitializer(ClassInitializationInfo.java:375) ~[na:na]
     at com.oracle.svm.core.classinitialization.ClassInitializationInfo.initialize(ClassInitializationInfo.java:295) ~[na:na]
-    ... 82 common frames omitted</pre>
+    ... 82 common frames omitted
+```
+
 
 ### Switching to YAML {#h3-3-switching-to-yaml}
 
@@ -184,12 +204,15 @@ hazelcast:
 
 We shouldn't forget to add the above resource into the resource configuration file:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">{
+```
+{
 "resources":{
   "includes":[
     {"pattern":"hazelcast.yaml"}
   ]}
-}</pre>
+}
+```
+
 
 Because of missing charsets at runtime, we also need to initialize the YAML reader at build time:
 
@@ -201,7 +224,8 @@ We need to continue adding a couple of reflectively-accesses classes, all relate
 
 At this point, we hit a brand new exception at runtime!
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">Caused by: com.oracle.svm.core.jdk.UnsupportedFeatureError: Proxy class defined by interfaces [interface org.hazelcast.cache.PersonRepository, interface org.springframework.data.repository.Repository, interface org.springframework.transaction.interceptor.TransactionalProxy, interface org.springframework.aop.framework.Advised, interface org.springframework.core.DecoratingProxy] not found. Generating proxy classes at runtime is not supported. Proxy classes need to be defined at image build time by specifying the list of interfaces that they implement. To define proxy classes use -H:DynamicProxyConfigurationFiles=&lt;comma-separated-config-files&gt; and -H:DynamicProxyConfigurationResources=&lt;comma-separated-config-resources&gt; options.
+```
+Caused by: com.oracle.svm.core.jdk.UnsupportedFeatureError: Proxy class defined by interfaces [interface org.hazelcast.cache.PersonRepository, interface org.springframework.data.repository.Repository, interface org.springframework.transaction.interceptor.TransactionalProxy, interface org.springframework.aop.framework.Advised, interface org.springframework.core.DecoratingProxy] not found. Generating proxy classes at runtime is not supported. Proxy classes need to be defined at image build time by specifying the list of interfaces that they implement. To define proxy classes use -H:DynamicProxyConfigurationFiles=<comma-separated-config-files> and -H:DynamicProxyConfigurationResources=<comma-separated-config-resources> options.
     at com.oracle.svm.core.util.VMError.unsupportedFeature(VMError.java:87) ~[na:na]
     at com.oracle.svm.reflect.proxy.DynamicProxySupport.getProxyClass(DynamicProxySupport.java:113) ~[na:na]
     at java.lang.reflect.Proxy.getProxyConstructor(Proxy.java:66) ~[na:na]
@@ -216,23 +240,29 @@ At this point, we hit a brand new exception at runtime!
     at org.springframework.data.r2dbc.repository.support.R2dbcRepositoryFactoryBean.afterPropertiesSet(R2dbcRepositoryFactoryBean.java:167) ~[org.hazelcast.cache.ImperativeToReactiveApplicationKt:1.2.5]
     at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1845) ~[na:na]
     at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1782) ~[na:na]
-    ... 46 common frames omitted</pre>
+    ... 46 common frames omitted
+```
+
 
 This one is about proxies and is pretty straightforward. In this context, Spring Data proxies the `PersonRepository` interface through a couple of other components. Those are all listed in the stack trace. [GraalVM can handle proxies](https://www.graalvm.org/reference-manual/native-image/DynamicProxy/) but requires you to configure them.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">[
+```
+[
   ["org.hazelcast.cache.PersonRepository",
    "org.springframework.data.repository.Repository",
    "org.springframework.transaction.interceptor.TransactionalProxy",
    "org.springframework.aop.framework.Advised",
    "org.springframework.core.DecoratingProxy"]
-]</pre>
+]
+```
+
 
 ### And Now For Serialization {#h3-5-and-now-for-serialization}
 
 With the above configuration, the image should start successfully, which makes me feel all warm inside:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">2021-03-18 20:22:28.305  INFO 1 --- [           main] o.s.nativex.NativeListener               : This application is bootstrapped with code generated with Spring AOT
+```
+2021-03-18 20:22:28.305  INFO 1 --- [           main] o.s.nativex.NativeListener               : This application is bootstrapped with code generated with Spring AOT
 
   .   ____          _            __ _ _
  /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
@@ -245,12 +275,17 @@ With the above configuration, the image should start successfully, which makes m
 ...blah blah blah...
 
 2021-03-18 20:22:30.654  INFO 1 --- [           main] o.s.b.web.embedded.netty.NettyWebServer  : Netty started on port 8080
-2021-03-18 20:22:30.655  INFO 1 --- [           main] o.s.boot.SpringApplication               : Started application in 2.355 seconds (JVM running for 2.358)</pre>
+2021-03-18 20:22:30.655  INFO 1 --- [           main] o.s.boot.SpringApplication               : Started application in 2.355 seconds (JVM running for 2.358)
+```
+
 
 If we access the endpoint at this point, the app throws a runtime exception:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">java.lang.IllegalStateException: Required identifier property not found for class org.hazelcast.cache.Person!
-    at org.springframework.data.mapping.PersistentEntity.getRequiredIdProperty(PersistentEntity.java:105) ~[na:na]</pre>
+```
+java.lang.IllegalStateException: Required identifier property not found for class org.hazelcast.cache.Person!
+    at org.springframework.data.mapping.PersistentEntity.getRequiredIdProperty(PersistentEntity.java:105) ~[na:na]
+```
+
 
 ```
 
@@ -258,25 +293,34 @@ If we access the endpoint at this point, the app throws a runtime exception:
 
 AOT left out serialized classes, and we need to manage them. As for proxies, GraalVM knows what to do, but it requires an explicit configuration. Let's configure the `Person` class as well as the classes of its properties:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="json">[
+```json
+[
 {"name":"org.hazelcast.cache.Person"},
 {"name":"java.time.LocalDate"},
 {"name":"java.lang.String"},
 {"name":"java.time.Ser"}
-]</pre>
+]
+```
+
 
 ### Success! {#h3-6-success}
 
 Now, we can (finally!) `curl` the running image:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">curl http://localhost:8080/person/1
-curl http://localhost:8080/person/1</pre>
+```
+curl http://localhost:8080/person/1
+curl http://localhost:8080/person/1
+```
+
 
 The output returns the expected result:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">2021-03-15 09:54:18.994  INFO 1 --- [onPool-worker-3] o.h.c.CachingService : Person with id 1 not found in cache
+```
+2021-03-15 09:54:18.994  INFO 1 --- [onPool-worker-3] o.h.c.CachingService : Person with id 1 not found in cache
 2021-03-15 09:54:19.108  INFO 1 --- [onPool-worker-3] o.h.c.CachingService : Person with id 1 put in cache
-2021-03-15 09:54:46.694  INFO 1 --- [onPool-worker-3] o.h.c.CachingService : Person with id 1 found in cache</pre>
+2021-03-15 09:54:46.694  INFO 1 --- [onPool-worker-3] o.h.c.CachingService : Person with id 1 found in cache
+```
+
 
 We need to configure the `Sort` class to work with the root '/' endpoint, which retrieves all entities at once.
 

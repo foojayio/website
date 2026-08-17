@@ -67,7 +67,8 @@ In the Spring Boot project, navigate to \`src/main/java/com/example/airport/doma
 
 1. Flight
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public class Flight {
+```
+public class Flight {
 
     private String flightNumber;
 
@@ -79,7 +80,7 @@ In the Spring Boot project, navigate to \`src/main/java/com/example/airport/doma
 
     private LocalDateTime scheduledArrival;
 
-    private List&lt;Passenger&gt; passengers = new ArrayList&lt;&gt;();
+    private List<Passenger> passengers = new ArrayList<>();
 
     // Constructors, getters, setters
 
@@ -87,7 +88,7 @@ In the Spring Boot project, navigate to \`src/main/java/com/example/airport/doma
 
 @DomainEvents
 
-Collection&lt;Object&gt; domainEvents() {
+Collection<Object> domainEvents() {
 
     return events;
 
@@ -111,11 +112,14 @@ void clearDomainEvents() {
 
     }
 
-}</pre>
+}
+```
+
 
 2. Passenger
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public class Passenger {
+```
+public class Passenger {
 
     private Long id;
 
@@ -125,11 +129,14 @@ void clearDomainEvents() {
 
     // Constructors, getters, setters
 
-}</pre>
+}
+```
+
 
 3. SeatAssignment
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public class SeatAssignment {
+```
+public class SeatAssignment {
 
     private String seatNumber;
 
@@ -137,7 +144,9 @@ void clearDomainEvents() {
 
     // Constructors, equals and hashCode for value semantics
 
-}</pre>
+}
+```
+
 
 The separation of entities and value objects helps maintain clarity. Entities have identity (Flight, Passenger), while value objects describe or detail entities without unique identities (SeatAssignment).
 
@@ -152,9 +161,12 @@ Next, we divide our application into bounded contexts reflecting airport departm
 
 In the Java project we created, we will map these contexts to separate packages/modules in our main base package. For example:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">com.example.airport.flightops
+```
+com.example.airport.flightops
 
-com.example.airport.passengerservices</pre>
+com.example.airport.passengerservices
+```
+
 
 Each context will own its models and business logic to avoid overlap and conflicts.
 
@@ -167,7 +179,8 @@ Repositories abstract data persistence and retrieval, bridging your domain model
 
 Example interfaces:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public interface FlightRepository {
+```
+public interface FlightRepository {
 
     Flight findByFlightNumber(String flightNumber);
 
@@ -181,7 +194,9 @@ public interface PassengerRepository {
 
     void save(Passenger passenger);
 
-}</pre>
+}
+```
+
 
 Repositories expose aggregate roots and entities for retrieval and persistence, without exposing database details to domain logic.
 
@@ -191,7 +206,8 @@ Domain services encapsulate business logic that involves multiple domain objects
 
 Example: \`FlightService\` that manages passenger assignments to flights ensuring no double seat bookings
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@Service
+```
+@Service
 
 public class FlightService {
 
@@ -211,7 +227,7 @@ public class FlightService {
 
         boolean seatTaken = flight.getPassengers().stream()
 
-            .anyMatch(p -&gt; p.getSeatAssignment().equals(passenger.getSeatAssignment()));
+            .anyMatch(p -> p.getSeatAssignment().equals(passenger.getSeatAssignment()));
 
         if (seatTaken) {
 
@@ -225,13 +241,16 @@ public class FlightService {
 
     }
 
-}</pre>
+}
+```
+
 
 ### Factories {#h3-8-factories}
 
 Factories create complex aggregate instances while encapsulating creation logic. Example:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@Component
+```
+@Component
 
 public class FlightFactory {
 
@@ -253,7 +272,9 @@ public class FlightFactory {
 
     }
 
-}</pre>
+}
+```
+
 
 <br />
 
@@ -262,7 +283,8 @@ Application layer and integration {#h2-9-application-layer-and-integration}
 
 Set up a simple REST controller integrated with your services, exposing the core functionality to clients.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@RestController
+```
+@RestController
 
 @RequestMapping("/api")
 
@@ -286,7 +308,7 @@ public class FlightController {
 
     @PostMapping("/flights")
 
-    public ResponseEntity&lt;Flight&gt; createFlight(@RequestBody FlightRequest flightRequest) {
+    public ResponseEntity<Flight> createFlight(@RequestBody FlightRequest flightRequest) {
 
         Flight flight = flightFactory.createFlight(
 
@@ -310,7 +332,7 @@ public class FlightController {
 
     @PostMapping("/flights/{flightNumber}/passengers")
 
-    public ResponseEntity&lt;String&gt; addPassenger(@PathVariable String flightNumber, @RequestBody Passenger passenger) {
+    public ResponseEntity<String> addPassenger(@PathVariable String flightNumber, @RequestBody Passenger passenger) {
 
         try {
 
@@ -326,13 +348,16 @@ public class FlightController {
 
     }
 
-}</pre>
+}
+```
+
 
 <br />
 
 FlightRequestDTO
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public class FlightRequest {
+```
+public class FlightRequest {
 
     private String flightNumber;
 
@@ -346,7 +371,9 @@ FlightRequestDTO
 
     // getters and setters
 
-}</pre>
+}
+```
+
 
 The API exposes aggregate-root operations and domain behavior aligned with business processes.
 
@@ -355,7 +382,8 @@ Testing and evolving the model {#h2-10-testing-and-evolving-the-model}
 
 The next step is to write Junit tests for core scenarios, like flight creation, adding passengers, etc.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@SpringBootTest
+```
+@SpringBootTest
 
 public class AirportApplicationTests {
 
@@ -385,7 +413,9 @@ public class AirportApplicationTests {
 
     }
 
-}</pre>
+}
+```
+
 
 <br />
 

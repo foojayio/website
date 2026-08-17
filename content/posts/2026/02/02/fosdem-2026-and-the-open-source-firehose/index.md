@@ -46,7 +46,7 @@ No one pitches here. You get progress, blockers, failed experiments, and difficu
 
 FOSDEM is the heartbeat of open source. It is a reliable way to distinguish what's real from what's hype. Ideas that survive here tend to matter. Ideas that don't... don't.
 
-*** ** * ** ***
+
 
 Trends and Tensions in 2026 {#h2-4-trends-and-tensions-in-2026}
 ---------------------------------------------------------------
@@ -91,7 +91,7 @@ Organisations are becoming more selective about what they use. Pay-to-download m
 
 AI accelerates this pressure; legislation compounds it. Together, they are distorting the economics of open source consumption in ways we are only beginning to understand.
 
-*** ** * ** ***
+
 
 A Practical Call to Action {#h2-11-a-practical-call-to-action}
 --------------------------------------------------------------
@@ -118,7 +118,7 @@ If upgrading is too risky or too slow, more commercial support is appearing to h
 
 Whatever path you choose: planning for frequent upgrades, yearly modernisation, the draconian withdrawal of applications, or simply buying a support contract, you must be able to deliver. Auditors will not accept hand-waving or "we'll figure it out when it happens" type of answers.
 
-*** ** * ** ***
+
 
 Silver Linings {#h2-16-silver-linings}
 --------------------------------------

@@ -89,13 +89,16 @@ For now, we will return a bit of text because I don't want to add complexity wit
 
 All of our added code is shown below ([full code on Github](https://github.com/JMHReif/microservices-level1/blob/main/service1/src/main/java/com/jmhreif/service1/Service1Application.java)):
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">@RestController
+```java
+@RestController
 @AllArgsConstructor
 @RequestMapping("/text")
 class TextController {
    @GetMapping
    String sayHello() { return "Hello, World!"; }
-}</pre>
+}
+```
+
 
 So short and sweet, right? Let's charge on to Service 2!
 
@@ -118,7 +121,8 @@ Thankfully, we can answer both questions with the same solution - the [WebClient
 
 First, we will need to create a bean for our WebClient object, so that we can inject and use its object. In our `Service2Application` class, we can create the bean (outside the `main` method) with the `@Bean` annotation. Code will look like the following:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">@SpringBootApplication
+```java
+@SpringBootApplication
 public class Service2Application {
     public static void main(String[] args) {
         SpringApplication.run(Service2Application.class, args);
@@ -127,7 +131,9 @@ public class Service2Application {
     WebClient client() {
         return WebClient.create("http://localhost:8081");
     }
-}</pre>
+}
+```
+
 
 Next, we need to create another controller for us (as the user) to interact with and call our backing service. For more on what the controller is/does, see the explanation of [MVC design pattern](https://www.geeksforgeeks.org/mvc-design-pattern/) (design pattern Spring follows). Similar to our `service1`, I added the class below the application class, but in the same file.
 
@@ -141,20 +147,23 @@ We can name the method anything we want to. Here, it is just called `getText()`.
 
 Final code is shown below ([full code on Github](https://github.com/JMHReif/microservices-level1/blob/main/service2/src/main/java/com/jmhreif/service2/Service2Application.java)).
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">@RestController
+```
+@RestController
 @AllArgsConstructor
 @RequestMapping("/hello")
 class TextController {
     private final WebClient client;
 
     @GetMapping
-    Mono&lt;String&gt; getText() {
+    Mono<String> getText() {
         return client.get()
                 .uri("/text")
                 .retrieve()
                 .bodyToMono(String.class);
     }
-}</pre>
+}
+```
+
 
 Time to test it out and see if it works!
 

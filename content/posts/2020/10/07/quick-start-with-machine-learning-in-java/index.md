@@ -34,7 +34,8 @@ Since it is an official Java technology standard, multiple implementations are p
 
 Here is an example of Java code based on the VisRec API to build and use a classifier. Without any explanations, it should be clear to you what is happening:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">ImageClassifier&lt;BufferedImage&gt; classifier = 
+```java
+ImageClassifier<BufferedImage> classifier = 
 NeuralNetImageClassifier.builder()
    .inputClass(BufferedImage.class)
    .imageHeight(28)
@@ -49,7 +50,8 @@ NeuralNetImageClassifier.builder()
    .build();
 
 BufferedImage image = ImageIO.read(new File(input.getFile()));
-Map&lt;String, Float&gt; results = classifier.classify(image);
-</pre>
+Map<String, Float> results = classifier.classify(image);
+```
+
 
 For detailed step-by-step instructions and examples, see the [getting started guide](https://github.com/JavaVisRec/visrec-api/wiki/Getting-Started-Guide).

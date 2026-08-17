@@ -23,7 +23,8 @@ The term thread safety is a frequently and commonly pronounced word among Java d
 
 The idea is, when writing a piece of code, it usually contains method and data. If we write a class, it may hold some data in terms of state. For example, if we want to write a Counter class, we will have a variable inside the counter class that holds the current count.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">package ca.bazlur.playground;
+```java
+package ca.bazlur.playground;
 
 public class Counter {
   private int count;
@@ -39,7 +40,9 @@ public class Counter {
   public int getCount() {
     return count;
   }
-}</pre>
+}
+```
+
 
 Let's assume the above code is the most straightforward implementation of our counter. It can increment and decrement a value. Now the question is, is the above code is thread-safe?
 
@@ -47,20 +50,21 @@ The answer can be tricky. First of all, we have to define what we mean by thread
 
 So what is the answer to the question? Is it thread-safe? Let's figure it out.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">package ca.bazlur.playground;
+```java
+package ca.bazlur.playground;
 
 public class CounterDemo {
   public static void main(String[] args) throws InterruptedException {
     var counter = new Counter();
 
-    var t1 = new Thread(() -&gt; {
-      for (int i = 0; i &lt; 1000; i++) {
+    var t1 = new Thread(() -> {
+      for (int i = 0; i < 1000; i++) {
         counter.incrementAndGet();
       }
     });
 
-    var t2 = new Thread(() -&gt; {
-      for (int i = 0; i &lt; 1000; i++) {
+    var t2 = new Thread(() -> {
+      for (int i = 0; i < 1000; i++) {
         counter.incrementAndGet();
       }
     });
@@ -74,7 +78,9 @@ public class CounterDemo {
     int count = counter.getCount();
     System.out.println("count = " + count);
   }
-}</pre>
+}
+```
+
 
 In the above code, we have created two threads, and each of them calls the incrementAndGet() method 1000 times. So the expected correctness of this program would be, the count variable will be 2000 when it finishes.
 
@@ -98,7 +104,8 @@ Let's do the synchronization in the counter class.
 
 I use locking around the shared variable count while it's accessed or written, then the problem goes away.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">package ca.bazlur.playground;
+```java
+package ca.bazlur.playground;
 
 public class Counter {
   private int count;
@@ -121,7 +128,9 @@ public class Counter {
       return count;
     }
   }
-}</pre>
+}
+```
+
 
 So we fixed our problem using a locking mechanism. I have discussed different synchronization mechanisms and thread-related problems in previous articles of the series. You will get to know more if you read them.
 
@@ -135,7 +144,8 @@ Today, since we have used counterexample in the above, let's discuss a similar c
 
 We can use this class if we ever need a counter that will run in a multithreaded environment. This is class thread-safe and performant as well. It has many methods that can serve our most needs. Example:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">package ca.bazlur.playground;
+```java
+package ca.bazlur.playground;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -143,14 +153,14 @@ public class AtomicIntegerDemo {
   public static void main(String[] args) throws InterruptedException {
     var counter = new AtomicInteger();
 
-    var t1 = new Thread(() -&gt; {
-      for (int i = 0; i &lt; 1000; i++) {
+    var t1 = new Thread(() -> {
+      for (int i = 0; i < 1000; i++) {
         counter.incrementAndGet();
       }
     });
 
-    var t2 = new Thread(() -&gt; {
-      for (int i = 0; i &lt; 1000; i++) {
+    var t2 = new Thread(() -> {
+      for (int i = 0; i < 1000; i++) {
         counter.incrementAndGet();
       }
     });
@@ -164,7 +174,9 @@ public class AtomicIntegerDemo {
     int count = counter.get();
     System.out.println("count = " + count);
   }
-}</pre>
+}
+```
+
 
 Similarly, if we need a large counter, we can use AtomicLong.
 

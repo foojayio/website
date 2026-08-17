@@ -47,20 +47,24 @@ In this section, we provide a brief overview of these techniques. In the next se
 
 The [Canvas](https://openjfx.io/javadoc/15/javafx.graphics/javafx/scene/canvas/Canvas.html) API has been available since the early versions of JavaFX and is the most commonly used API. It is both intuitive and simple to use as it provides command-style methods to manipulate the associated [GraphicsContext](https://openjfx.io/javadoc/15/javafx.graphics/javafx/scene/canvas/GraphicsContext.html), simulating [immediate rendering mode](https://docs.microsoft.com/en-us/windows/win32/direct3d11/overviews-direct3d-11-render-multi-thread-render). One considerable limitation of Canvas is that only one thread can use its graphics context at a time. Given this limitation, we expect Canvas to be slowest in our evaluation. Sample code:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">var canvas = new Canvas(width, height);
+```java
+var canvas = new Canvas(width, height);
 var g = canvas.getGraphicsContext2D();
 
 g.setFill(color);
-g.fillRect(x, y, 1, 1);</pre>
+g.fillRect(x, y, 1, 1);
+```
+
 
 ### PixelBuffer CPU {#h3-2-pixelbuffer-cpu}
 
 The [PixelBuffer](https://openjfx.io/javadoc/15/javafx.graphics/javafx/scene/image/PixelBuffer.html) API has been introduced in JavaFX 13 and allows drawing into a [WritableImage](https://openjfx.io/javadoc/15/javafx.graphics/javafx/scene/image/WritableImage.html) without copying the pixel data. Unlike the Canvas API, this buffer does not provide any means of [rasterization](https://www.scratchapixel.com/lessons/3d-basic-rendering/rasterization-practical-implementation/rasterization-stage). In other words, the developer is responsible for converting shapes into pixels, which is a significant limitation of this approach. In the following sample code, there are two major differences, when compared to the Canvas API. First, colors are represented as a single [ARGB](https://docs.microsoft.com/en-us/previous-versions/windows/silverlight/dotnet-windows-silverlight/ms653055(v=vs.95)?redirectedfrom=MSDN) `int` and second, we need to manually update the buffer once rendering is done. Sample code:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">// set up pixel buffer
+```java
+// set up pixel buffer
 IntBuffer buffer = IntBuffer.allocate(width * height);
 int[] pixels = buffer.array();
-PixelBuffer&lt;IntBuffer&gt; pixelBuffer = new PixelBuffer&lt;&gt;(width, height, buffer, PixelFormat.getIntArgbPreInstance());
+PixelBuffer<IntBuffer> pixelBuffer = new PixelBuffer<>(width, height, buffer, PixelFormat.getIntArgbPreInstance());
 
 WritableImage image = new WritableImage(pixelBuffer);
 
@@ -70,26 +74,30 @@ int red = 255;
 int green = 0;
 int blue = 0;
 
-int colorARGB = alpha &lt;&lt; 24 | red &lt;&lt; 16 | green &lt;&lt; 8 | blue;
+int colorARGB = alpha << 24 | red << 16 | green << 8 | blue;
 
 pixels[(x % width) + (y * width)] = colorARGB;
 
 // tell the buffer that the entire area needs redrawing
-pixelBuffer.updateBuffer(b -&gt; null);
-</pre>
+pixelBuffer.updateBuffer(b -> null);
+```
+
 
 ### PixelBuffer AWT {#h3-3-pixelbuffer-awt}
 
 As can be seen from above, in PixelBuffer, there is no high-level API to draw arbitrary shapes. Clearly, this is not ideal since the developer would need to reimplement many of the rasterization methods. To avoid this, we can make use of AWT [BufferedImage](https://docs.oracle.com/en/java/javase/15/docs/api/java.desktop/java/awt/image/BufferedImage.html) and its [Graphics2D](https://docs.oracle.com/en/java/javase/15/docs/api/java.desktop/java/awt/Graphics2D.html) API, since both BufferedImage and PixelBuffer can share the same pixel data. An [example implementation](https://github.com/mipastgt/JFXToolsAndDemos/blob/master/jfxtools-awtimage/src/main/java/de/mpmediasoft/jfxtools/awtimage/AWTImage.java) has been provided by [Michael Paus](https://github.com/mipastgt). The same implementation is used in our evaluation with negligble changes, which were required to incorporate the code into our framework. Sample code:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">var image = new AWTImage(width, height);
+```java
+var image = new AWTImage(width, height);
 var g = image.getGraphicsContext();
 
 g.setColor(color);
 g.fillRect(x, y, 1, 1);
 
 // tell the buffer that the entire area needs redrawing
-image.getPixelBuffer().updateBuffer(b -&gt; null);</pre>
+image.getPixelBuffer().updateBuffer(b -> null);
+```
+
 
 ### PixelBuffer GPU {#h3-4-pixelbuffer-gpu}
 
@@ -105,7 +113,8 @@ We can see that if we had direct access to GPU video memory, for example via [Dr
 
 However, for completeness, we also consider the GPU-accelerated version of PixelBuffer in our evaluation. This version uses the [aparapi](https://github.com/Syncleus/aparapi) framework to dynamically convert and run Java bytecode on the GPU using [OpenCL](https://www.khronos.org/opencl/). Whilst the drawing code, using the ARGB color format to set pixels, remained the same, the architecture required significant changes to allow running on the GPU. We note that to correctly run this approach, the graphics card needs to support OpenCL and have the appropriate drivers installed. Sample code:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public class ParticleKernel extends Kernel {
+```java
+public class ParticleKernel extends Kernel {
     int[] pixels = ...;
 
     @Override
@@ -121,13 +130,16 @@ var gpuKernel = new ParticleKernel();
 gpuKernel.execute(NUM_PARTICLES);
 
 // get pixel information from GPU so we can update PixelBuffer
-int[] pixels = gpuKernel.get(gpuKernel.pixels);</pre>
+int[] pixels = gpuKernel.get(gpuKernel.pixels);
+```
+
 
 ### Evaluation {#h3-5-evaluation}
 
 The model used for the evaluation is a particle system with 1M (`1_000_000`) particles. Conceptually, each particle is defined as follows:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">class Particle {
+```java
+class Particle {
     Vec2 position = new Vec2();
     Vec2 velocity = new Vec2();
     Vec2 acceleration = new Vec2();
@@ -138,7 +150,9 @@ The model used for the evaluation is a particle system with 1M (`1_000_000`) par
 
         acceleration = (mousePosition - position) * XXXX;
     }
-}</pre>
+}
+```
+
 
 The acceleration computation takes into account the mouse position in order to incorporate user interaction, as is common in many real-world applications. This model represents an [embarrassingly parallel problem](https://www.cs.iusb.edu/~danav/teach/b424/b424_23_embpar.html) and can, therefore, be computed in parallel. In our evaluation, all approaches, except for Canvas (for which the reason was outlined earlier), can be run in parallel. In total, each approach computed 1100 frames of this model, during which using `System.nanoTime()` we recorded the time the approaches took to compute each frame. The first 100 frames were discarded to account for the [JIT compiler](http://cr.openjdk.java.net/~vlivanov/talks/2015_JIT_Overview.pdf) on the JVM. Hence, the time measurements were recorded only for the last 1000 frames. In addition, we included a 10M (`10_000_000`) particle test on GPU, given that there was likely to be a sufficient performance margin.
 

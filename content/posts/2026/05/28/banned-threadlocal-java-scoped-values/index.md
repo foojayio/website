@@ -24,7 +24,7 @@ frozen: false
 
 #### In a zero-copy runtime designed for 1-VT-per-Stream density, ThreadLocal is a performance serial killer. Here is the forensic analysis and how JEP 506 Scoped Values changed everything.
 
-*** ** * ** ***
+
 
 When I started designing the **Exeris Kernel** --- a next-generation, zero-copy runtime built for Java 26+ --- I established one non-negotiable architectural law: **"No Waste Compute."**
 
@@ -36,7 +36,7 @@ In the standard Enterprise Java ecosystem, when you need to pass a `SecurityCont
 
 Here is why I enforced a strict, kernel-wide ban on `ThreadLocal` in Exeris, and how adopting [**JEP 506 (Scoped Values)**](https://openjdk.org/jeps/506 "**JEP 506 (Scoped Values)**") completely changed the game for high-performance architecture.
 
-*** ** * ** ***
+
 
 The Forensic Analysis: The 3 Sins of ThreadLocal {#h2-0-the-forensic-analysis-the-3-sins-of-threadlocal}
 --------------------------------------------------------------------------------------------------------
@@ -59,7 +59,7 @@ This is the fatal blow. To share context with child threads, frameworks use `Inh
 Now, imagine a single HTTP request where your logic forks **50 concurrent sub-tasks** (Virtual Threads) to fetch data. You just triggered **50 expensive map allocations** . Multiply that by 10,000 concurrent requests, and your Garbage Collector stalls your application just to clean up useless context clones. This becomes a **pure GC tax with no business value**.
 ![Figure 2: The O(N) memory copy penalty of InheritableThreadLocal compared to the O(1) constant-time pointer inheritance introduced in JEP 506.](https://blog.arkstack.dev/blog/scopedvalue/fig2_inheritance_tax.png)  
 
-*** ** * ** ***
+
 
 The Missing Link: Structured Concurrency Incompatibility {#h2-4-the-missing-link-structured-concurrency-incompatibility}
 ------------------------------------------------------------------------------------------------------------------------
@@ -67,7 +67,7 @@ The Missing Link: Structured Concurrency Incompatibility {#h2-4-the-missing-link
 Beyond performance, `ThreadLocal` is fundamentally incompatible with Structured Concurrency. `StructuredTaskScope` relies on deterministic, tree-like execution where child tasks are strictly bound to the lifetime of their parent. `ThreadLocal`, being non-deterministic and fully mutable at any level of the tree, completely breaks this model.
 > You cannot build a reliable, fail-fast concurrent tree if any leaf node can secretly mutate the global state of the branch.
 
-*** ** * ** ***
+
 
 Exhibit A: The Zero-Waste Solution (JEP 506) {#h2-5-exhibit-a-the-zero-waste-solution-jep-506}
 ----------------------------------------------------------------------------------------------
@@ -84,7 +84,7 @@ Instead of a globally mutable variable, a `ScopedValue` defines a **Dynamic Scop
 | **Lifetime**         | Unbounded (Requires manual cleanup) | Lexically bounded (tied to the `.run()` block)                 |
 | **Inheritance Cost** | O(N) memory copy                    | O(1) constant-time inheritance with negligible allocation cost |
 
-*** ** * ** ***
+
 
 Exhibit B: "Show, Don't Tell" --- The Exeris Implementation {#h2-7-exhibit-b-show-don-t-tell-the-exeris-implementation}
 -----------------------------------------------------------------------------------------------------------------------
@@ -94,7 +94,8 @@ In the Exeris Kernel, context propagation is strictly separated. The Security mo
 
 Here is how identity is injected at the gateway. Notice the complete absence of `.set()` methods:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">// 1. Decode token directly from off-heap memory (Zero-Alloc)
+```
+// 1. Decode token directly from off-heap memory (Zero-Alloc)
 AuthenticationResult result = securityProvider.authenticate(tokenBuffer);
 
 // 2. Open a lexically bounded, immutable Dynamic Scope
@@ -102,17 +103,20 @@ AuthenticationResult result = securityProvider.authenticate(tokenBuffer);
 ScopedValue
     .where(KernelProviders.PRINCIPAL_CONTEXT, result.principal())
     .where(KernelProviders.STORAGE_CONTEXT,   result.storage())
-    .run(() -&gt; {
+    .run(() -> {
         // Inside this block, the context is safe.
         // It will be inherited by any Virtual Thread spawned via StructuredTaskScope.
         dispatchRequest(request);
     });
 
-// 3. Scope closes automatically. No .remove() needed. Zero leaks.</pre>
+// 3. Scope closes automatically. No .remove() needed. Zero leaks.
+```
+
 
 Later, deep in the Persistence module, the `TransactionOrchestrator` needs to know the Tenant ID to append it to the SQL query. It simply queries the active scope:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public class TransactionOrchestrator {
+```
+public class TransactionOrchestrator {
 
     private static StorageContext resolveStorageContext() {
         // Zero ThreadLocal, fully Virtual-Thread safe (JEP 506)
@@ -125,11 +129,13 @@ Later, deep in the Persistence module, the `TransactionOrchestrator` needs to kn
     }
 
     // ... transaction execution logic
-}</pre>
+}
+```
+
 
 Because `ScopedValue` is immutable, the `TransactionOrchestrator` is **guaranteed by lexical scoping and immutability** that the `StorageContext` it reads is exactly the one set by the gateway, untampered by any interceptor along the way.
 
-*** ** * ** ***
+
 
 The Paradigm Shift {#h2-8-the-paradigm-shift}
 ---------------------------------------------
@@ -140,7 +146,7 @@ Java 26 is not just *"Java 8 with `var`"* . Features like Project Loom, Panama (
 
 **Would you be willing to refactor your application to drop `ThreadLocal` and embrace `ScopedValue`?** Let me know in the comments.
 
-*** ** * ** ***
+
 
 Explore the Exeris Kernel {#h2-9-explore-the-exeris-kernel}
 -----------------------------------------------------------

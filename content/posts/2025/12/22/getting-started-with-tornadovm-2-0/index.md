@@ -29,7 +29,7 @@ This guide walks you through:{#viewer-aq221189}
 * Verifying your setup
 * Integrating TornadoVM into Java projects using Maven
 
-*** ** * ** ***
+
 
 Prerequisites {#viewer-f868f305-69f0-46b4-bbc6-baaa3d02051b}
 ------------------------------------------------------------
@@ -40,11 +40,14 @@ Before installing TornadoVM, ensure that your system has the following:{#viewer-
 
 - **JAVA_HOME** correctly set to your JDK 21 installation{#viewer-v7w992863}
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">sdk install java 21.0.2-open</pre>
+```bash
+sdk install java 21.0.2-open
+```
+
 
 SDKMAN! will automatically set **JAVA_HOME** and make the JDK available to TornadoVM.
 
-*** ** * ** ***
+
 
 Downloading and Installing the TornadoVM SDK {#viewer-71800d5d-9ec2-4119-b8cc-36e88d6c117f}
 -------------------------------------------------------------------------------------------
@@ -70,7 +73,10 @@ You can choose a backend-specific build:{#ib4ew13010}
 
 Open a terminal and run:{#viewer-942675ef-8b3d-44f9-ba30-0b5847ce2896}
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">sdk install tornadovm 2.2.0-opencl</pre>
+```bash
+sdk install tornadovm 2.2.0-opencl
+```
+
 
 ```bash
 
@@ -83,15 +89,18 @@ After installation, SDKMAN! automatically sets the **TORNADOVM_HOME** environmen
 
 Using Command Prompt or PowerShell:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="powershell" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">curl -L -o tornadovm-2.2.0-opencl-windows-amd64.zip https://github.com/beehive-lab/TornadoVM/releases/download/v2.2.0/tornadovm-2.2.0-opencl-windows-amd64.zip
+```powershell
+curl -L -o tornadovm-2.2.0-opencl-windows-amd64.zip https://github.com/beehive-lab/TornadoVM/releases/download/v2.2.0/tornadovm-2.2.0-opencl-windows-amd64.zip
 
 tar -xf tornadovm-2.2.0-opencl-windows-amd64.zip
 
 set TORNADO_SDK=%cd%\tornadovm-2.2.0-opencl
 
-set PATH=%TORNADO_SDK%\bin;%PATH%</pre>
+set PATH=%TORNADO_SDK%\bin;%PATH%
+```
 
-*** ** * ** ***
+
+
 
 Verify Available Devices {#h2-3-verify-available-devices}
 ---------------------------------------------------------
@@ -102,11 +111,14 @@ Once TornadoVM is installed, verify that your system detects the available hardw
 
 Run the following command:{#sm644474}
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">tornado --devices</pre>
+```bash
+tornado --devices
+```
+
 
 This command lists all devices recognized by TornadoVM, including CPUs and GPUs. If your accelerator appears in the output, your system is ready.{#9q1el478}
 
-*** ** * ** ***
+
 
 Run Your First TornadoVM Program {#h2-4-run-your-first-tornadovm-program}
 -------------------------------------------------------------------------
@@ -117,33 +129,42 @@ A simple starting point is a **Matrix-Vector multiplication** example.{#ta49l934
 
 #### Linux / macOS {#w6a3l486}
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">java @$TORNADOVM_HOME/tornado-argfile -cp $TORNADOVM_HOME/share/java/tornado/tornado-examples-2.2.0.jar uk.ac.manchester.tornado.examples.compute.MatrixVectorRowMajor</pre>
+```bash
+java @$TORNADOVM_HOME/tornado-argfile -cp $TORNADOVM_HOME/share/java/tornado/tornado-examples-2.2.0.jar uk.ac.manchester.tornado.examples.compute.MatrixVectorRowMajor
+```
+
 
 #### Windows (10+)
 
-<pre class="EnlighterJSRAW" data-enlighter-language="powershell" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">java @%TORNADOVM_HOME%\tornado-argfile -cp %TORNADOVM_HOME%\share\java\tornado\tornado-examples-2.2.0.jar uk.ac.manchester.tornado.examples.compute.MatrixVectorRowMajoruk.ac.manchester.tornado.examples.compute.MatrixVectorRowMajor</pre>
+```powershell
+java @%TORNADOVM_HOME%\tornado-argfile -cp %TORNADOVM_HOME%\share\java\tornado\tornado-examples-2.2.0.jar uk.ac.manchester.tornado.examples.compute.MatrixVectorRowMajoruk.ac.manchester.tornado.examples.compute.MatrixVectorRowMajor
+```
+
 
 This program runs a Java application that TornadoVM automatically offloads to available accelerators.{#3rprp494}
 
-*** ** * ** ***
+
 
 Integrating TornadoVM into Java Projects Using Maven {#3ca69bda-e774-4774-9cb1-9c7004841816}
 --------------------------------------------------------------------------------------------
 
 Since **TornadoVM v2.0.0** , TornadoVM has been available via [Maven Central](https://central.sonatype.com/namespace/io.github.beehive-lab), which simplifies adding it to your Java projects. To integrate TornadoVM, add the following dependency to your ***pom.xml***:{#fa986f36-2454-46d2-bd91-c14f8b4dbb96}
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&lt;dependencies&gt;
-  &lt;dependency&gt;
-    &lt;groupId&gt;io.github.beehive-lab&lt;/groupId&gt;
-    &lt;artifactId&gt;tornado-api&lt;/artifactId&gt;
-    &lt;version&gt;2.1.0&lt;/version&gt;
-  &lt;/dependency&gt;
-  &lt;dependency&gt;
-    &lt;groupId&gt;io.github.beehive-lab&lt;/groupId&gt;
-    &lt;artifactId&gt;tornado-runtime&lt;/artifactId&gt;
-    &lt;version&gt;2.1.0&lt;/version&gt;
-  &lt;/dependency&gt;
-&lt;/dependencies&gt;</pre>
+```bash
+<dependencies>
+  <dependency>
+    <groupId>io.github.beehive-lab</groupId>
+    <artifactId>tornado-api</artifactId>
+    <version>2.1.0</version>
+  </dependency>
+  <dependency>
+    <groupId>io.github.beehive-lab</groupId>
+    <artifactId>tornado-runtime</artifactId>
+    <version>2.1.0</version>
+  </dependency>
+</dependencies>
+```
+
 
 This setup allows your project to compile and run with TornadoVM support without manual SDK management.{#e7129922-9c05-4948-959a-58ed0571ed45}
 
@@ -151,7 +172,8 @@ This setup allows your project to compile and run with TornadoVM support without
 
 Here is a basic example class of how to use TornadoVM to accelerate a Java method (vectorAdd):{#0491a289-1514-4666-b9fd-9da119c8abce}
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">import uk.ac.manchester.tornado.api.ImmutableTaskGraph;
+```java
+import uk.ac.manchester.tornado.api.ImmutableTaskGraph;
 import uk.ac.manchester.tornado.api.TaskGraph;
 import uk.ac.manchester.tornado.api.TornadoExecutionPlan;
 import uk.ac.manchester.tornado.api.annotations.Parallel;
@@ -163,7 +185,7 @@ import uk.ac.manchester.tornado.api.types.arrays.IntArray;
 public class VectorAdd {
 
     private static void vectorAdd(IntArray a, IntArray b, IntArray c) {
-        for (@Parallel int i = 0; i &lt; c.getSize(); i++) {
+        for (@Parallel int i = 0; i < c.getSize(); i++) {
             c.set(i, a.get(i) + b.get(i));
         }
     }
@@ -196,27 +218,33 @@ public class VectorAdd {
         System.out.println("Computation completed on device: " + firstDevice.getDescription());
 
         System.out.print("c[0.." + (size - 1) + "] = ");
-        for (int i = 0; i &lt; size; i++) {
+        for (int i = 0; i < size; i++) {
             System.out.print(c.get(i));
-            if (i &lt; size - 1) System.out.print(", ");
+            if (i < size - 1) System.out.print(", ");
         }
         System.out.println();
 
         // Optional: quick check
         System.out.println("Expected each element = 30");
     }
-}</pre>
+}
+```
+
 
 This example shows how to offload a simple vector addition to the accelerator device detected by TornadoVM.{#288785fa-3464-48f8-a256-c3be764f8756}
 
 You can compile and run this class in a new project, as follows:{#vhodb68880}
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">mvn clean compile
-tornado --threadInfo -cp target/classes VectorAdd 256</pre>
+```bash
+mvn clean compile
+tornado --threadInfo -cp target/classes VectorAdd 256
+```
+
 
 The output will be something like this:{#7hpnd75899}
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">WARNING: Using incubator modules: jdk.incubator.vector
+```bash
+WARNING: Using incubator modules: jdk.incubator.vector
 Task info: s0.t0
 	Backend           : OPENCL
 	Device            : Apple M4 Pro CL_DEVICE_TYPE_GPU (available)
@@ -228,9 +256,11 @@ Task info: s0.t0
 
 Computation completed on device: Apple M4 Pro CL_DEVICE_TYPE_GPU (available)
 c[0..255] = 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30
-Expected each element = 30</pre>
+Expected each element = 30
+```
 
-*** ** * ** ***
+
+
 
 What's Next? {#d8l4z496}
 ------------------------
@@ -245,7 +275,7 @@ After running your first program, you can:{#oicl4498}
 
 Full documentation is available here:[++https://tornadovm.readthedocs.io/en/latest/++](https://tornadovm.readthedocs.io/en/latest/){#ln5i2502}
 
-*** ** * ** ***
+
 
 Final Thoughts {#wuvt7505}
 --------------------------

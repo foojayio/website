@@ -66,11 +66,14 @@ Depending on the LLM model you chose, you will also need an API key. For OpenAI,
 
 Once you have a Neo4j database and an API key, you can set up the config in the `application.properties` file. Here's an example of what that might look like:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="properties">spring.ai.openai.api-key=&lt;YOUR API KEY HERE&gt;
-spring.neo4j.uri=&lt;NEO4J URI HERE&gt;
-spring.neo4j.authentication.username=&lt;NEO4J USERNAME HERE&gt;
-spring.neo4j.authentication.password=&lt;NEO4J PASSWORD HERE&gt;
-spring.data.neo4j.database=&lt;NEO4J DATABASE NAME HERE&gt;</pre>
+```properties
+spring.ai.openai.api-key=<YOUR API KEY HERE>
+spring.neo4j.uri=<NEO4J URI HERE>
+spring.neo4j.authentication.username=<NEO4J USERNAME HERE>
+spring.neo4j.authentication.password=<NEO4J PASSWORD HERE>
+spring.data.neo4j.database=<NEO4J DATABASE NAME HERE>
+```
+
 
 Note: It's a good idea to keep sensitive information like API keys and passwords in environment variables or other location external to the application. To create environment variables, you can use the `export` command in the terminal or set them in your IDE.
 
@@ -78,7 +81,8 @@ We can set up [Spring Beans](https://www.baeldung.com/spring-bean) for the Neo4j
 
 We can put these in our `SpringAiApplication` class by adding the following code to the class:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">@Bean
+```java
+@Bean
 public Driver driver() {
 	return GraphDatabase.driver(System.getenv("SPRING_NEO4J_URI"),
 		AuthTokens.basic(System.getenv("SPRING_NEO4J_AUTHENTICATION_USERNAME"),
@@ -97,7 +101,9 @@ public Neo4jVectorStore vectorStore(Driver driver, EmbeddingClient embeddingClie
 			.withLabel("Review")
 			.withIndexName("review-embedding-index")
 			.build());
-}</pre>
+}
+```
+
 
 The `Driver` bean creates a connection to the Neo4j database by passing in the credentials for our instance (in this case, from environment variables). The `EmbeddingClient` bean creates a client for the OpenAI API and passes in our API key environment variable. Lastly, the `Neo4jVectorStore` bean configures Neo4j as the store for embeddings (vectors).
 
@@ -119,8 +125,11 @@ These entities are standard Spring Data Neo4j code, so I won't show the code her
 
 We also need a repository interface defined so that we can interact with the database. While we will need to define a custom query, we'll come back and add that in a bit later.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public interface BookRepository extends Neo4jRepository&lt;Book, String&gt; {
-}</pre>
+```java
+public interface BookRepository extends Neo4jRepository<Book, String> {
+}
+```
+
 
 Next, the core of this application where all the magic happens is the controller class. This class will contain the logic for taking a search phrase provided by the user and calling the `Neo4jVectorStore` to calculate and return the most similar ones.
 
@@ -133,7 +142,8 @@ Our controller class contains a couple of common annotations, to start. We'll al
 
 The next thing is to define a string for our prompt. This is the text that we will pass to the LLM to generate the response. We'll use the search phrase provided by the user and the similar reviews we find in the database to populate our prompt parameters in a few minutes. Next, we define the constructor for the controller class, which will inject the necessary beans.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">@RestController
+```java
+@RestController
 @RequestMapping("/")
 public class BookController {
     private final OpenAiChatClient client;
@@ -162,25 +172,28 @@ public class BookController {
     //Retrieval Augmented Generation with Neo4j - vector search + retrieval query for related context
     @GetMapping("/rag")
     public String generateResponseWithContext(@RequestParam String searchPhrase) {
-        List&lt;Document&gt; results = vectorStore.similaritySearch(SearchRequest.query(searchPhrase).withTopK(5).withSimilarityThreshold(0.8));
+        List<Document> results = vectorStore.similaritySearch(SearchRequest.query(searchPhrase).withTopK(5).withSimilarityThreshold(0.8));
 
         //more code shortly!
     }
-}</pre>
+}
+```
+
 
 Finally, we define a method that will be called when a user makes a GET request to the `/rag` endpoint. This method will first take a search phrase as a query parameter and pass that to the vector store's `similaritySearch()` method to find similar reviews. I have also added a couple of customization filters to the query by limiting to the top five results (`.withTopK(5)`) and only pull the most similar results (`withSimilarityThreshold(0.8)`).
 
 The actual implementation of Spring AI's `similaritySearch()` method is below.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">@Override
-public List&lt;Document&gt; similaritySearch(SearchRequest request) {
-	Assert.isTrue(request.getTopK() &gt; 0, "The number of documents to returned must be greater than zero");
-	Assert.isTrue(request.getSimilarityThreshold() &gt;= 0 &amp;&amp; request.getSimilarityThreshold() &lt;= 1,
+```java
+@Override
+public List<Document> similaritySearch(SearchRequest request) {
+	Assert.isTrue(request.getTopK() > 0, "The number of documents to returned must be greater than zero");
+	Assert.isTrue(request.getSimilarityThreshold() >= 0 && request.getSimilarityThreshold() <= 1,
 			"The similarity score is bounded between 0 and 1; least to most similar respectively.");
 
 	var embedding = Values.value(toFloatArray(this.embeddingClient.embed(request.getQuery())));
 	try (var session = this.driver.session(this.config.sessionConfig)) {
-		StringBuilder condition = new StringBuilder("score &gt;= $threshold");
+		StringBuilder condition = new StringBuilder("score >= $threshold");
 		if (request.hasFilterExpression()) {
 			condition.append(" AND ")
 				.append(this.filterExpressionConverter.convertExpression(request.getFilterExpression()));
@@ -197,22 +210,25 @@ public List&lt;Document&gt; similaritySearch(SearchRequest request) {
 							"embeddingValue", embedding, "threshold", request.getSimilarityThreshold()))
 			.list(Neo4jVectorStore::recordToDocument);
 	}
-}</pre>
+}
+```
+
 
 Then, we map the similar `Review` nodes back to `Document` entities because Spring AI expects a general document type. The `Neo4jVectorStore` class contains methods to convert `Document` to a custom record, as well as the reverse for record to `Document` conversion. The actual implementation for those methods is shown next.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">private Map&lt;String, Object&gt; documentToRecord(Document document) {
+```java
+private Map<String, Object> documentToRecord(Document document) {
 	var embedding = this.embeddingClient.embed(document);
 	document.setEmbedding(embedding);
 
-	var row = new HashMap&lt;String, Object&gt;();
+	var row = new HashMap<String, Object>();
 
 	row.put("id", document.getId());
 
-	var properties = new HashMap&lt;String, Object&gt;();
+	var properties = new HashMap<String, Object>();
 	properties.put("text", document.getContent());
 
-	document.getMetadata().forEach((k, v) -&gt; properties.put("metadata." + k, Values.value(v)));
+	document.getMetadata().forEach((k, v) -> properties.put("metadata." + k, Values.value(v)));
 	row.put("properties", properties);
 
 	row.put(this.config.embeddingProperty, Values.value(toFloatArray(embedding)));
@@ -222,47 +238,55 @@ Then, we map the similar `Review` nodes back to `Document` entities because Spri
 private static Document recordToDocument(org.neo4j.driver.Record neoRecord) {
 	var node = neoRecord.get("node").asNode();
 	var score = neoRecord.get("score").asFloat();
-	var metaData = new HashMap&lt;String, Object&gt;();
+	var metaData = new HashMap<String, Object>();
 	metaData.put("distance", 1 - score);
-	node.keys().forEach(key -&gt; {
+	node.keys().forEach(key -> {
 		if (key.startsWith("metadata.")) {
 			metaData.put(key.substring(key.indexOf(".") + 1), node.get(key).asObject());
 		}
 	});
 
 	return new Document(node.get("id").asString(), node.get("text").asString(), Map.copyOf(metaData));
-}</pre>
+}
+```
+
 
 Back in our controller method for book recommendations, we now have similar reviews for the user's searched phrase. But reviews (and their accompanying text) aren't really helpful in giving us book recommendations. So now we need to run a query in Neo4j to retrieve the related books for those reviews. This is the retrieval augmented generation (RAG) piece of the application.
 
 Let's write the query in the `BookRepository` interface to find the books associated with those reviews.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public interface BookRepository extends Neo4jRepository&lt;Book, String&gt; {
-    @Query("MATCH (b:Book)&lt;-[rel:WRITTEN_FOR]-(r:Review) " +
+```java
+public interface BookRepository extends Neo4jRepository<Book, String> {
+    @Query("MATCH (b:Book)<-[rel:WRITTEN_FOR]-(r:Review) " +
             "WHERE r.id IN $reviewIds " +
-            "AND r.text &lt;&gt; 'RTC' " +
+            "AND r.text <> 'RTC' " +
             "RETURN b, collect(rel), collect(r);")
-    List&lt;Book&gt; findBooks(List&lt;String&gt; reviewIds);
-}</pre>
+    List<Book> findBooks(List<String> reviewIds);
+}
+```
+
 
 In the query, we pass in the ids of the reviews from the similarity search (`$reviewIds`) and pull the `Review → Book` pattern for those reviews. We also filter out any reviews that have the text 'RTC' (which is a placeholder for reviews that don't have text). We then return the `Book` nodes, the relationships, and the `Review` nodes.
 
 Now we need to call that method in our controller and pass the results to a prompt template. We will pass that to the LLM to generate a response with a book recommendation list based on the user's search phrase (we hope!). 🙂
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">//Retrieval Augmented Generation with Neo4j - vector search + retrieval query for related context
+```java
+//Retrieval Augmented Generation with Neo4j - vector search + retrieval query for related context
 @GetMapping("/rag")
 public String generateResponseWithContext(@RequestParam String searchPhrase) {
-    List&lt;Document&gt; results = vectorStore.similaritySearch(SearchRequest.query(searchPhrase).withTopK(5).withSimilarityThreshold(0.8));
+    List<Document> results = vectorStore.similaritySearch(SearchRequest.query(searchPhrase).withTopK(5).withSimilarityThreshold(0.8));
 
-    List&lt;Book&gt; bookList = repo.findBooks(results.stream().map(Document::getId).collect(Collectors.toList()));
+    List<Book> bookList = repo.findBooks(results.stream().map(Document::getId).collect(Collectors.toList()));
 
-    var template = new PromptTemplate(prompt, Map.of("context", bookList.stream().map(b -&gt; b.toString()).collect(Collectors.joining("\n")), "searchPhrase", searchPhrase));
+    var template = new PromptTemplate(prompt, Map.of("context", bookList.stream().map(b -> b.toString()).collect(Collectors.joining("\n")), "searchPhrase", searchPhrase));
     System.out.println("----- PROMPT -----");
     System.out.println(template.render());
 
     return client.call(template.create().getContents());
 
-}</pre>
+}
+```
+
 
 Starting right after the similarity search, we call our new `findBooks()` method and pass in the list of review ids from the similarity search. The retrieval query returns to a list of books called `bookList`.
 
@@ -279,25 +303,32 @@ Running the application {#_running_the_application}
 
 To run our Goodreads AI application, you can use the `./mvnw spring-boot:run` command in the terminal. Once the application is running, you can make a GET request to the `/rag` endpoint with a search phrase as a query parameter. Some examples are included next.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash">http ":8080/rag?searchPhrase=happy%20ending"
+```bash
+http ":8080/rag?searchPhrase=happy%20ending"
 http ":8080/rag?searchPhrase=encouragement"
-http ":8080/rag?searchPhrase=high%tech"</pre>
+http ":8080/rag?searchPhrase=high%tech"
+```
+
 
 ### Sample call and output + full prompt {#_sample_call_and_output_full_prompt}
 
 Call and returned book recommendations:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash">jenniferreif@elf-lord springai-goodreads % http ":8080/rag?searchPhrase=encouragement"
+```bash
+jenniferreif@elf-lord springai-goodreads % http ":8080/rag?searchPhrase=encouragement"
 
 The Cross and the Switchblade
 The Art of Recklessness: Poetry as Assertive Force and Contradiction
 I am unsure about 90 Minutes in Heaven: A True Story of Death and Life
 The Greatest Gift: The Original Story That Inspired the Christmas Classic It's a Wonderful Life
-I am unsure about Aligned: Volume 1 (Aligned, #1)</pre>
+I am unsure about Aligned: Volume 1 (Aligned, #1)
+```
+
 
 Application log output:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash">----- PROMPT -----
+```bash
+----- PROMPT -----
 You are a book expert with high-quality book information in the CONTEXT section.
 Answer with every book title provided in the CONTEXT.
 Do not add extra information from any outside sources.
@@ -305,13 +336,15 @@ If you are unsure about a book, list the book and add that you are unsure.
 
 CONTEXT:
 Book[book_id=772852, title=The Cross and the Switchblade, isbn=0515090255, isbn13=9780515090253, reviewList=[Review[id=f70c68721a0654462bcc6cd68e3259bd, text=encouraging, rating=4]]]
-Book[book_id=89375, title=90 Minutes in Heaven: A True Story of Death and Life, isbn=0800759494, isbn13=9780800759490, reviewList=[Review[id=85ef80e09c64ebd013aeebdb7292eda9, text=inspiring &amp; hope filled, rating=5]]]
+Book[book_id=89375, title=90 Minutes in Heaven: A True Story of Death and Life, isbn=0800759494, isbn13=9780800759490, reviewList=[Review[id=85ef80e09c64ebd013aeebdb7292eda9, text=inspiring & hope filled, rating=5]]]
 Book[book_id=1488663, title=The Greatest Gift: The Original Story That Inspired the Christmas Classic It's a Wonderful Life, isbn=0670862045, isbn13=9780670862047, reviewList=[Review[id=b74851666f2ec1841ca5876d977da872, text=Inspiring, rating=4]]]
 Book[book_id=7517330, title=The Art of Recklessness: Poetry as Assertive Force and Contradiction, isbn=1555975623, isbn13=9781555975623, reviewList=[Review[id=2df3600d488e182a3ef06bff7fc82eb8, text=Great insight, great encouragement, and great company., rating=4]]]
 Book[book_id=27802572, title=Aligned: Volume 1 (Aligned, #1), isbn=1519114796, isbn13=9781519114792, reviewList=[Review[id=60b9aa083733e751ddd471fa1a77535b, text=healing, rating=3]]]
 
 PHRASE:
-encouragement</pre>
+encouragement
+```
+
 
 We can see that the LLM generated a response with a list of book recommendations based on the books found in the database (CONTEXT section of prompt). The results of the similarity search + graph retrieval query for the user's search phrase are in the prompt, and the LLM's answer uses that data for a reponse.
 

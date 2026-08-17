@@ -37,7 +37,8 @@ Piranha Cloud uses the standalone and pluggable Jakarta Transactions implementat
 
 The development of OmniBeans is still in its early days, but it's already able to pass a test taken from the EJB Lite TCK, which is the [stateless-tx test](https://github.com/javaee-samples/jakartaee-samples/tree/main/ee9-tck/ejblite/stateless-tx). This contains beans such as the following:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@Stateless
+```java
+@Stateless
 public class TxBean {
 
     @PersistenceContext(unitName = "ejblite-pu")
@@ -64,11 +65,14 @@ public class TxBean {
         }
     }
 
-}</pre>
+}
+```
+
 
 and
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@Stateless
+```java
+@Stateless
 @TransactionManagement(BEAN)
 public class TestBean {
 
@@ -92,7 +96,8 @@ public class TestBean {
         txBean = b;
     }
 }
-</pre>
+```
+
 
 As can be seen, those beans are far from trivial from a technical perspective. The fact that OmniBeans is already able to pass such a test bodes well for the future.
 

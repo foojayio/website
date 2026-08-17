@@ -42,7 +42,8 @@ Our use-case is a `Logger` interface with a dedicated console implementation:
 
 We can implement it in Java like this:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public interface Logger {
+```java
+public interface Logger {
     void log(String message);
 }
 
@@ -51,11 +52,14 @@ public class ConsoleLogger implements Logger {
     public void log(String message) {
         System.out.println(message);
     }
-}</pre>
+}
+```
+
 
 Here's a simple, configurable decorator implementation:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public class RepeatingDecorator implements Logger {        //1
+```java
+public class RepeatingDecorator implements Logger {        //1
 
     private final Logger logger;                           //2
     private final int times;                               //3
@@ -67,11 +71,13 @@ Here's a simple, configurable decorator implementation:
 
     @Override
     public void log(String message) {
-        for (int i = 0; i &lt; times; i++) {                  //4
+        for (int i = 0; i < times; i++) {                  //4
             logger.log(message);
         }
     }
-}</pre>
+}
+```
+
 
 1. **Must** implement the interface
 2. Underlying logger
@@ -80,9 +86,12 @@ Here's a simple, configurable decorator implementation:
 
 Using the decorator is straightforward:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">var logger = new ConsoleLogger();
+```java
+var logger = new ConsoleLogger();
 var threeTimesLogger = new RepeatingDecorator(logger, 3);
-threeTimesLogger.log("Hello world!");</pre>
+threeTimesLogger.log("Hello world!");
+```
+
 
 The Java Proxy {#h2-1-the-java-proxy}
 -------------------------------------
@@ -100,7 +109,8 @@ The API is simple:
 
 We can write the following handler:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public class RepeatingInvocationHandler implements InvocationHandler {
+```java
+public class RepeatingInvocationHandler implements InvocationHandler {
 
     private final Logger logger;                                       //1
     private final int times;                                           //2
@@ -112,14 +122,16 @@ We can write the following handler:
 
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Exception {
-        if (method.getName().equals("log") &amp;&amp; args.length ## 1 &amp;&amp; args[0] instanceof String) { //3
-            for (int i = 0; i &lt; times; i++) {
+        if (method.getName().equals("log") && args.length ## 1 && args[0] instanceof String) { //3
+            for (int i = 0; i < times; i++) {
                 method.invoke(logger, args[0]);                        //4
             }
         }
         return null;
     }
-}</pre>
+}
+```
+
 
 1. Underlying logger
 2. Loop configuration
@@ -128,12 +140,15 @@ We can write the following handler:
 
 Here's how to create the proxy:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">var logger = new ConsoleLogger();
+```java
+var logger = new ConsoleLogger();
 var proxy = (Logger) Proxy.newProxyInstance(           //1-2
         Main.class.getClassLoader(),
         new Class[]{Logger.class},                     //3
         new RepeatingInvocationHandler(logger, 3));    //4
-proxy.log("Hello world!");</pre>
+proxy.log("Hello world!");
+```
+
 
 1. Create the `Proxy` object
 2. We must cast to `Logger` as the API was created before generics, and it returns an `Object`
@@ -156,13 +171,14 @@ As seen above, the API exposes the user to low-level bytecode manipulation via b
 
 The Byte Buddy API is outside the scope of this blog post, so let's dive directly into the code:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public class Repeater {
+```java
+public class Repeater {
 
   public static void premain(String arguments, Instrumentation instrumentation) {      //1
     var withRepeatAnnotation = isAnnotatedWith(named("ch.frankel.blog.instrumentation.Repeat")); //2
     new AgentBuilder.Default()                                                         //3
       .type(declaresMethod(withRepeatAnnotation))                                      //4
-      .transform((builder, typeDescription, classLoader, module, domain) -&gt; builder    //5
+      .transform((builder, typeDescription, classLoader, module, domain) -> builder    //5
         .method(withRepeatAnnotation)                                                  //6
         .intercept(                                                                    //7
            SuperMethodCall.INSTANCE                                                    //8
@@ -170,7 +186,9 @@ The Byte Buddy API is outside the scope of this blog post, so let's dive directl
             .andThen(SuperMethodCall.INSTANCE))
       ).installOn(instrumentation);                                                    //3
   }
-}</pre>
+}
+```
+
 
 1. Required signature; it's similar to the `main` method, with the added `Instrumentation` argument
 2. Match that is annotated with the `@Repeat` annotation. The reads fluently even if you don't know it (I don't).
@@ -183,39 +201,48 @@ The Byte Buddy API is outside the scope of this blog post, so let's dive directl
 
 The next step is to create the Java agent package. A Java agent is a regular JAR with specific manifest attributes. Let's configure Maven to build the agent:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="xml">&lt;plugin&gt;
-    &lt;artifactId&gt;maven-assembly-plugin&lt;/artifactId&gt;                                      &lt;!--1--&gt;
-    &lt;configuration&gt;
-        &lt;descriptorRefs&gt;
-            &lt;descriptorRef&gt;jar-with-dependencies&lt;/descriptorRef&gt;                        &lt;!--2--&gt;
-        &lt;/descriptorRefs&gt;
-        &lt;archive&gt;
-            &lt;manifestEntries&gt;
-                &lt;Premain-Class&gt;ch.frankel.blog.instrumentation.Repeater&lt;/Premain-Class&gt; &lt;!--3--&gt;
-            &lt;/manifestEntries&gt;
-        &lt;/archive&gt;
-    &lt;/configuration&gt;
-    &lt;executions&gt;
-        &lt;execution&gt;
-            &lt;goals&gt;
-                &lt;goal&gt;single&lt;/goal&gt;
-            &lt;/goals&gt;
-            &lt;phase&gt;package&lt;/phase&gt;                                                      &lt;!--4--&gt;
-        &lt;/execution&gt;
-    &lt;/executions&gt;
-&lt;/plugin&gt;</pre>
+```xml
+<plugin>
+    <artifactId>maven-assembly-plugin</artifactId>                                      <!--1-->
+    <configuration>
+        <descriptorRefs>
+            <descriptorRef>jar-with-dependencies</descriptorRef>                        <!--2-->
+        </descriptorRefs>
+        <archive>
+            <manifestEntries>
+                <Premain-Class>ch.frankel.blog.instrumentation.Repeater</Premain-Class> <!--3-->
+            </manifestEntries>
+        </archive>
+    </configuration>
+    <executions>
+        <execution>
+            <goals>
+                <goal>single</goal>
+            </goals>
+            <phase>package</phase>                                                      <!--4-->
+        </execution>
+    </executions>
+</plugin>
+```
+
 
 1. Create a JAR containing all dependencies ()
 
 Testing is more involved, as we need two different codebases, one for the agent and one for the regular code with the annotation. Let's create the agent first:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash">mvn install</pre>
+```bash
+mvn install
+```
+
 
 We can then run the app with the agent:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash">java -javaagent:/Users/nico/.m2/repository/ch/frankel/blog/agent/1.0-SNAPSHOT/agent-1.0-SNAPSHOT-jar-with-dependencies.jar \ #1
+```bash
+java -javaagent:/Users/nico/.m2/repository/ch/frankel/blog/agent/1.0-SNAPSHOT/agent-1.0-SNAPSHOT-jar-with-dependencies.jar \ #1
      -cp ./target/classes                                                                                                    #2
-     ch.frankel.blog.instrumentation.Main                                                                                    #3</pre>
+     ch.frankel.blog.instrumentation.Main                                                                                    #3
+```
+
 
 1. Run java with the agent created in the previous step. The JVM will run the `premain` method of the class configured in the agent
 2. Configure the classpath
@@ -230,30 +257,36 @@ In Java, AOP's historical implementation is the excellent [AspectJ](https://ecli
 
 We need an AspectJ dependency:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="xml">&lt;dependency&gt;
-    &lt;groupId&gt;org.aspectj&lt;/groupId&gt;
-    &lt;artifactId&gt;aspectjrt&lt;/artifactId&gt;
-    &lt;version&gt;1.9.19&lt;/version&gt;
-&lt;/dependency&gt;</pre>
+```xml
+<dependency>
+    <groupId>org.aspectj</groupId>
+    <artifactId>aspectjrt</artifactId>
+    <version>1.9.19</version>
+</dependency>
+```
+
 
 As Byte Buddy, AspectJ also uses ASM underneath.
 
 Here's the code:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">@Aspect                                                                              //1
+```java
+@Aspect                                                                              //1
 public class RepeatingAspect {
 
-    @Pointcut("@annotation(repeat) &amp;&amp; call(* *(..))")                                //2
+    @Pointcut("@annotation(repeat) && call(* *(..))")                                //2
     public void callAt(Repeat repeat) {}                                             //3
 
     @Around("callAt(repeat)")                                                        //4
     public Object around(ProceedingJoinPoint pjp, Repeat repeat) throws Throwable {  //5
-        for (int i = 0; i &lt; repeat.times(); i++) {                                   //6
+        for (int i = 0; i < repeat.times(); i++) {                                   //6
             pjp.proceed();                                                           //7
         }
         return null;
     }
-}</pre>
+}
+```
+
 
 1. Mark this class as an aspect
 2. Define the pointcut; every call to a method annotated with `@Repeat`
@@ -265,23 +298,29 @@ public class RepeatingAspect {
 
 At this point, we need to weave the aspect. Let's do it at build-time. For this, we can add the AspectJ build plugin:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="xml">&lt;plugin&gt;
-    &lt;groupId&gt;org.codehaus.mojo&lt;/groupId&gt;
-    &lt;artifactId&gt;aspectj-maven-plugin&lt;/artifactId&gt;
-    &lt;executions&gt;
-        &lt;execution&gt;
-            &lt;goals&gt;
-                &lt;goal&gt;compile&lt;/goal&gt;                  &lt;!--1--&gt;
-            &lt;/goals&gt;
-        &lt;/execution&gt;
-    &lt;/executions&gt;
-&lt;/plugin&gt;</pre>
+```xml
+<plugin>
+    <groupId>org.codehaus.mojo</groupId>
+    <artifactId>aspectj-maven-plugin</artifactId>
+    <executions>
+        <execution>
+            <goals>
+                <goal>compile</goal>                  <!--1-->
+            </goals>
+        </execution>
+    </executions>
+</plugin>
+```
+
 
 1. Bind execution of the plugin to the `compile` phase
 
 To see the demo in effect:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash">mvnd compile exec:java -Dexec.mainClass=ch.frankel.blog.aop.Main</pre>
+```bash
+mvnd compile exec:java -Dexec.mainClass=ch.frankel.blog.aop.Main
+```
+
 
 Java compiler plugin {#h2-4-java-compiler-plugin}
 -------------------------------------------------
@@ -310,7 +349,7 @@ To choose one over the other, consider the following criteria: build-time vs. ru
 * [Awesome Java Annotation Processing](https://github.com/gunnarmorling/awesome-annotation-processing)
 * [Maven AspectJ plugin](https://www.mojohaus.org/aspectj-maven-plugin/)
 
-*** ** * ** ***
+
 
 *Originally published at [A Java Geek](https://blog.frankel.ch/monkeypatching-java/) on September 17^th^, 2023*
 

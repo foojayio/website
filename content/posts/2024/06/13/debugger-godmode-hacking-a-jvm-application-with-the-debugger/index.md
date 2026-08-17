@@ -97,7 +97,7 @@ We should see the following message in the console confirming that the debugger 
 
     Connected to the target VM, address: 'localhost:5005', transport: 'socket'
 
-*** ** * ** ***
+
 
 We're getting to the interesting part: how do we suspend the application?
 

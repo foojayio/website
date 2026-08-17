@@ -31,7 +31,7 @@ This is where a rewrite tool like OpenRewrite can come in handy, and I would lik
 
 OpenRewrite allows us to do major refactorings on our source code using (prewritten) recipes. It works by making changes to the [Lossless Semantic Trees](https://docs.openrewrite.org/concepts-explanations/lossless-semantic-trees) representing our source code and printing the modifications back to the source code/diffs which we can then compare and commit if we deem them ok.
 
-*** ** * ** ***
+
 
 Use cases {#h2-0-use-cases}
 ---------------------------
@@ -61,17 +61,21 @@ Both for Maven and Gradle we can run the migrations either by modifying our buil
 
 If we add the plugin to our pom.xml file
 
-<pre class="EnlighterJSRAW" data-enlighter-language="xml">&lt;plugin&gt;
-  &lt;groupId&gt;org.openrewrite.maven&lt;/groupId&gt;
-  &lt;artifactId&gt;rewrite-maven-plugin&lt;/artifactId&gt;
-  &lt;version&gt;5.4.0&lt;/version&gt;
-&lt;/plugin&gt;</pre>
+```xml
+<plugin>
+  <groupId>org.openrewrite.maven</groupId>
+  <artifactId>rewrite-maven-plugin</artifactId>
+  <version>5.4.0</version>
+</plugin>
+```
+
 
 ### Gradle {#h3-4-gradle}
 
 For Gradle, we need to be certain that `mavenCentral()` is present in our repositories section, then we need to add the following to our build file:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="groovy">plugins {
+```groovy
+plugins {
     id 'org.openrewrite.rewrite' version '6.1.16'
 }
 
@@ -82,11 +86,16 @@ repositories {
 
 rewrite {
     // here we'll place the recipes we wish to use
-}</pre>
+}
+```
+
 
 **Note** : With Gradle, you can either add each dependency with the version number specified or add `rewrite-recipe-bom` as a bill of materials dependency:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">rewrite(platform("org.openrewrite.recipe:rewrite-recipe-bom:2.1.0"))</pre>
+```
+rewrite(platform("org.openrewrite.recipe:rewrite-recipe-bom:2.1.0"))
+```
+
 
 After which we can try `./mvnw rewrite:discover` or `./gradlew rewriteDiscover` to discover which recipes we can run from OpenRewrite using this setup. (we can add other sources/write our own).
 
@@ -111,7 +120,8 @@ Add `activeRecipe("org.openrewrite.java.RemoveUnusedImports")` and perform `./gr
 
 If we were to run this one on the current project, and then execute a `git diff` we would see:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">diff --git a/src/main/java/dev/simonverhoeven/openrewritedemo/OpenrewritedemoApplication.java b/src/main/java/dev/simonverhoeven/openrewritedemo/OpenrewritedemoApplication.java
+```
+diff --git a/src/main/java/dev/simonverhoeven/openrewritedemo/OpenrewritedemoApplication.java b/src/main/java/dev/simonverhoeven/openrewritedemo/OpenrewritedemoApplication.java
 index d97b878..8e85aaf 100644
 --- a/src/main/java/dev/simonverhoeven/openrewritedemo/OpenrewritedemoApplication.java
 +++ b/src/main/java/dev/simonverhoeven/openrewritedemo/OpenrewritedemoApplication.java
@@ -122,7 +132,9 @@ index d97b878..8e85aaf 100644
 -import java.math.BigDecimal;
 -
  @SpringBootApplication
- public class OpenrewritedemoApplication {</pre>
+ public class OpenrewritedemoApplication {
+```
+
 
 ### Adding a recipe with a configuration {#h3-7-adding-a-recipe-with-a-configuration}
 
@@ -134,7 +146,8 @@ To set it up we will need to create a `rewrite.yml` in which we'll define a reci
 `dev.simonverhoeven.openrewritedemo.oldorgname` to  
 `dev.simonverhoeven.openrewritedemo.neworgname`
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml">---
+```yaml
+---
 type: specs.openrewrite.org/v1beta/recipe
 name: dev.simonverhoeven.sampleRecipe
 displayName: A simple recipe
@@ -142,7 +155,9 @@ recipeList:
   - org.openrewrite.java.ChangePackage:
       oldPackageName: dev.simonverhoeven.openrewritedemo.oldorgname
       newPackageName: dev.simonverhoeven.openrewritedemo.neworgname
-      recursive: null                                             |</pre>
+      recursive: null                                             |
+```
+
 
 Then we will add `dev.simonverhoeven.sampleRecipe` to our active recipes.
 
@@ -167,9 +182,12 @@ OpenRewrite has a lot of individual recipes for this, but we can also use `org.o
 
 So we can just add this one to our `pom.xml or build.gradle`, or execute it directly from the mvn command line.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">mvn -U org.openrewrite.maven:rewrite-maven-plugin:run  
+```
+mvn -U org.openrewrite.maven:rewrite-maven-plugin:run  
 -Drewrite.recipeArtifactCoordinates=org.openrewrite.recipe:rewrite-testing-frameworks:RELEASE  
--Drewrite.activeRecipes=org.openrewrite.java.testing.hamcrest.MigrateHamcrestToAssertJ</pre>
+-Drewrite.activeRecipes=org.openrewrite.java.testing.hamcrest.MigrateHamcrestToAssertJ
+```
+
 
 After running this command you can see that this recipe has managed to fully replace all usages of Hamcrest. So if desired one can remove the library.
 
@@ -199,7 +217,8 @@ for which we will need a dependency on `org.openrewrite.recipe:rewrite-testing-f
 
 When we execute this recipe we will get
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">[WARNING] Changes have been made to pom.xml by:
+```
+[WARNING] Changes have been made to pom.xml by:
 [WARNING]     org.openrewrite.java.testing.junit5.JUnit4to5Migration
 [WARNING]         org.openrewrite.java.dependencies.RemoveDependency: {groupId=junit, artifactId=junit}
 [WARNING]             org.openrewrite.maven.RemoveDependency: {groupId=junit, artifactId=junit}
@@ -214,7 +233,9 @@ When we execute this recipe we will get
 [WARNING]         org.openrewrite.java.testing.junit5.TemporaryFolderToTempDir
 [WARNING]         org.openrewrite.java.testing.junit5.UpdateBeforeAfterAnnotations
 [WARNING]         org.openrewrite.java.testing.junit5.UpdateTestAnnotation
-[WARNING]         org.openrewrite.java.testing.junit5.ExpectedExceptionToAssertThrows</pre>
+[WARNING]         org.openrewrite.java.testing.junit5.ExpectedExceptionToAssertThrows
+```
+
 
 If we then run a `git diff` to see the changes that were made we will notice that our `pom.xml` has been upgraded, our imports are now from the `jupiter` hierarchy, `@Ignore` ⇒ `@Disabled`, `Assert.*` ⇒ `Assertions.*`, ...
 
@@ -228,27 +249,31 @@ Let us take the next step, and try a migration to Java 17 and spring boot.
 
 In our pom.xml:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="xml">&lt;plugin&gt;
-    &lt;groupId&gt;org.openrewrite.maven&lt;/groupId&gt;
-    &lt;artifactId&gt;rewrite-maven-plugin&lt;/artifactId&gt;
-    &lt;version&gt;5.4.0&lt;/version&gt;
-    &lt;configuration&gt;
-        &lt;activeRecipes&gt;
-            &lt;recipe&gt;org.openrewrite.java.spring.boot3.UpgradeSpringBoot_3_1&lt;/recipe&gt;
-        &lt;/activeRecipes&gt;
-    &lt;/configuration&gt;
-    &lt;dependencies&gt;
-        &lt;dependency&gt;
-            &lt;groupId&gt;org.openrewrite.recipe&lt;/groupId&gt;
-            &lt;artifactId&gt;rewrite-spring&lt;/artifactId&gt;
-            &lt;version&gt;5.0.6&lt;/version&gt;
-        &lt;/dependency&gt;
-    &lt;/dependencies&gt;
-&lt;/plugin&gt;</pre>
+```xml
+<plugin>
+    <groupId>org.openrewrite.maven</groupId>
+    <artifactId>rewrite-maven-plugin</artifactId>
+    <version>5.4.0</version>
+    <configuration>
+        <activeRecipes>
+            <recipe>org.openrewrite.java.spring.boot3.UpgradeSpringBoot_3_1</recipe>
+        </activeRecipes>
+    </configuration>
+    <dependencies>
+        <dependency>
+            <groupId>org.openrewrite.recipe</groupId>
+            <artifactId>rewrite-spring</artifactId>
+            <version>5.0.6</version>
+        </dependency>
+    </dependencies>
+</plugin>
+```
+
 
 or build.gradle:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="groovy">plugins {
+```groovy
+plugins {
     id("org.openrewrite.rewrite") version("6.1.18")
 }
 
@@ -262,7 +287,9 @@ repositories {
 
 dependencies {
     rewrite("org.openrewrite.recipe:rewrite-spring:5.0.5")
-}</pre>
+}
+```
+
 
 After running `./mvnw rewrite:run` or `./gradlew rewriteRun` we can use `git diff` to take a look at the results.
 
@@ -291,9 +318,12 @@ OpenRewrite has a lot of individual recipes for this, but we can also use `org.o
 
 So we can just add this one to our `pom.xml or build.gradle`, or execute it directly from the mvn command line.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">mvn -U org.openrewrite.maven:rewrite-maven-plugin:run  
+```
+mvn -U org.openrewrite.maven:rewrite-maven-plugin:run  
 -Drewrite.recipeArtifactCoordinates=org.openrewrite.recipe:rewrite-migrate-java:RELEASE  
--Drewrite.activeRecipes=org.openrewrite.java.migrate.guava.NoGuava —-</pre>
+-Drewrite.activeRecipes=org.openrewrite.java.migrate.guava.NoGuava —-
+```
+
 
 After running this command you can see that this recipe has managed to fully replace all usages of Guava. So if desired one can remove the library.
 
@@ -311,9 +341,12 @@ which is part of `org.openrewrite.recipe:rewrite-static-analysis:1.0.3` and has 
 
 So we can just do:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">mvn -U org.openrewrite.maven:rewrite-maven-plugin:run  
+```
+mvn -U org.openrewrite.maven:rewrite-maven-plugin:run  
 -Drewrite.recipeArtifactCoordinates=org.openrewrite.recipe:rewrite-static-analysis:RELEASE  
--Drewrite.activeRecipes=org.openrewrite.staticanalysis.CommonStaticAnalysis</pre>
+-Drewrite.activeRecipes=org.openrewrite.staticanalysis.CommonStaticAnalysis
+```
+
 
 And we will notice that a lot of complaints such as:
 
@@ -331,7 +364,8 @@ are resolved for us
 
 In our console we will see:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">[WARNING]     org.openrewrite.staticanalysis.CommonStaticAnalysis
+```
+[WARNING]     org.openrewrite.staticanalysis.CommonStaticAnalysis
 [WARNING]         org.openrewrite.staticanalysis.BigDecimalRoundingConstantsToEnums
 [WARNING] Changes have been made to src\main\java\dev\simonverhoeven\openrewritedemo\oldorgname\SampleController.java by:
 [WARNING]     org.openrewrite.staticanalysis.CommonStaticAnalysis
@@ -349,7 +383,9 @@ In our console we will see:
 [WARNING]         org.openrewrite.staticanalysis.RemoveExtraSemicolons
 [WARNING]         org.openrewrite.staticanalysis.RenamePrivateFieldsToCamelCase
 [WARNING]         org.openrewrite.staticanalysis.UseDiamondOperator
-[WARNING]         org.openrewrite.staticanalysis.InlineVariable</pre>
+[WARNING]         org.openrewrite.staticanalysis.InlineVariable
+```
+
 
 And looking at [SampleController](https://github.com/SimonVerhoeven/openrewrite-demo/blob/main/src/main/java/dev/simonverhoeven/openrewritedemo/oldorgname/SampleController.java) will reveal a lot of changes
 
@@ -365,9 +401,12 @@ For example, there is [setup-java](https://docs.openrewrite.org/recipes/github/s
 
 which updates your setup-java action if needed (and is part of the upgrade to Spring Boot 3.1 recipe for example)
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">mvn -U org.openrewrite.maven:rewrite-maven-plugin:run \
+```
+mvn -U org.openrewrite.maven:rewrite-maven-plugin:run \
   -Drewrite.recipeArtifactCoordinates=org.openrewrite.recipe:rewrite-github-actions:RELEASE \
-  -Drewrite.activeRecipes=org.openrewrite.github.SetupJavaUpgradeJavaVersion</pre>
+  -Drewrite.activeRecipes=org.openrewrite.github.SetupJavaUpgradeJavaVersion
+```
+
 
 Or say if one wants to bulk update the used runners there is the [replacerunners](https://docs.openrewrite.org/recipes/github/replacerunners) recipe.
 
@@ -392,17 +431,26 @@ Hopefully one will never need these, but there are [recipes](https://docs.openre
 
 For example one can spot that in our [SampleController](https://github.com/SimonVerhoeven/openrewrite-demo/blob/main/src/main/java/dev/simonverhoeven/openrewritedemo/oldorgname/SampleController.java) we have:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">private static final String ACCOUNT_KEY = “lJzRc1YdHaAA2KCNJJ1tkYwF/+mKK6Ygw0NGe170Xu592euJv2wYUtBlV8z+qnlcNQSnIYVTkLWntUO1F8j8rQ==”;</pre>
+```java
+private static final String ACCOUNT_KEY = “lJzRc1YdHaAA2KCNJJ1tkYwF/+mKK6Ygw0NGe170Xu592euJv2wYUtBlV8z+qnlcNQSnIYVTkLWntUO1F8j8rQ==”;
+```
+
 
 After running:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">mvn -U org.openrewrite.maven:rewrite-maven-plugin:run  
+```
+mvn -U org.openrewrite.maven:rewrite-maven-plugin:run  
 -Drewrite.recipeArtifactCoordinates=org.openrewrite.recipe:rewrite-java-security:RELEASE  
--Drewrite.activeRecipes=org.openrewrite.java.security.secrets.FindAzureSecrets</pre>
+-Drewrite.activeRecipes=org.openrewrite.java.security.secrets.FindAzureSecrets
+```
+
 
 We will see that it has been transformed to:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">private static final String ACCOUNT_KEY = /*\[line-through\]**(Azure access key)**\&gt;*/“lJzRc1YdHaAA2KCNJJ1tkYwF/+mKK6Ygw0NGe170Xu592euJv2wYUtBlV8z+qnlcNQSnIYVTkLWntUO1F8j8rQ==”;</pre>
+```java
+private static final String ACCOUNT_KEY = /*\[line-through\]**(Azure access key)**\>*/“lJzRc1YdHaAA2KCNJJ1tkYwF/+mKK6Ygw0NGe170Xu592euJv2wYUtBlV8z+qnlcNQSnIYVTkLWntUO1F8j8rQ==”;
+```
+
 
 Which makes it a lot easier for us to find these kind of issues.
 
@@ -416,7 +464,8 @@ A last one I wanted to point out which showcases a way in which OpenRewrite can 
 
 Which automatically transforms this:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">class Test {
+```java
+class Test {
     String query = """
             SELECT b.book_id, b.title, COUNT(r.review_id) AS num_reviews,AVG(r.rating) AS median_rating FROM books b
             JOIN reads rd ON b.book_id = rd.book_id JOIN readers
@@ -425,11 +474,14 @@ Which automatically transforms this:
             GROUP BY b.book_id, b.title ORDER
             BY num_reviews DESC;\
             """;
-}</pre>
+}
+```
+
 
 to
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">class Test {
+```java
+class Test {
     String query = """
             SELECT
               b.book_id,
@@ -447,7 +499,9 @@ to
             ORDER BY
               num_reviews DESC;\
             """;
-}</pre>
+}
+```
+
 
 ### Summary {#h3-14-summary}
 

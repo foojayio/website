@@ -48,22 +48,29 @@ In your application.properties or application.yml file, specify the properties w
 
 For application.properties:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">app.bootstrap-servers=localhost:3000
+```
+app.bootstrap-servers=localhost:3000
 app.client-id=digma-id
-app.group-id=dgma-group</pre>
+app.group-id=dgma-group
+```
+
 
 For application.yml:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">app:
+```
+app:
   bootstrap-servers: localhost:3000
   client-id: digma-id
-  group-id: dgma-group</pre>
+  group-id: dgma-group
+```
+
 
 -- Create a Configuration Properties Class:
 
 Create a class to hold your configuration properties. Annotate it with @ConfigurationProperties to specify the prefix for your properties:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">import org.springframework.boot.context.properties.ConfigurationProperties;
+```
+import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 import lombok.Data
 @Data
@@ -73,13 +80,16 @@ public class AppProperties {
     private String bootstrapServer;
     private String clientId;
     private String groupId;
-}</pre>
+}
+```
+
 
 -- Inject the Configuration:
 
 Inject the configuration properties into your components or services:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">import org.slf4j.Logger;
+```
+import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -95,7 +105,9 @@ public class DemoService {
         logger.info("Version: {}", appProperties.getClientId());
         logger.info("Version: {}", appProperties.getGroupId());
     }
-}</pre>
+}
+```
+
 
 2. You need to keep your controllers lean {#h2-2-2-you-need-to-keep-your-controllers-lean}
 ------------------------------------------------------------------------------------------
@@ -130,39 +142,48 @@ To use Spring Boot to the fullest, you'll need to learn how to handle exceptions
 
 **@ControllerAdvice** is designed for Spring Boot MVC applications, it is an annotation that when applied to a class, transforms it into a global controller advisor, in turn, influences the behavior of multiple controllers. Below is what **@ControllerAdvice** looks like.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">@ControllerAdvice
+```
+@ControllerAdvice
 public class GlobalControllerAdvice {
     // Exception handling, model attributes, and other configurations
-}</pre>
+}
+```
+
 
 **@RestControllerAdvice** this annotation extends the **@ControllerAdvice.** It is specifically designed for RESTful web services. You use this with an application where the response is in the form of JSON or XML. Below is what it looks like.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">@RestControllerAdvice
+```
+@RestControllerAdvice
 public class ControllerAdvice {
     @ResponseBody
     @ResponseStatus(HttpStatus.NOT_FOUND)
     @ExceptionHandler(ResourceNotFoundException.class)
-    public ServiceResponse&lt;String&gt;  
+    public ServiceResponse<String>  
        handleResourceNotFoundException(ResourceNotFoundException ex) {
-           return new ServiceResponse&lt;&gt;(ex.getMessage(), false);
+           return new ServiceResponse<>(ex.getMessage(), false);
     }
-}</pre>
+}
+```
+
 
 **@ExceptionHandler** this annotation is used to handle specific exceptions thrown by controllers. This annotation is used to declare methods within a controller or a class annotated with**@ControllerAdvice.** This annotation allows you to customize the behavior of your applications. Below is what it looks like.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">@Service
+```
+@Service
 @RequiredArgsConstructor
 public class UserService {
 
     private final UserRepository userRepository;
-    var response = new ServiceResponse&lt;UserDto&gt;();
+    var response = new ServiceResponse<UserDto>();
         var user = userRepository.findById(id)
-                .orElseThrow(() -&gt; new ResourceNotFoundException("User", "id", id));
+                .orElseThrow(() -> new ResourceNotFoundException("User", "id", id));
         UserDto userDto = mapper.toDto(user);
         response.setData(userDto, true);
-        log.info("Fetched user =&gt; {}", userDto);
+        log.info("Fetched user => {}", userDto);
         return response;
-}</pre>
+}
+```
+
 
 Using @ControllerAdvice or @RestControllerAdvice in your Spring Boot application allows you to centralize exception handling and other configurations across multiple controllers in a Spring Boot application.
 
@@ -236,16 +257,22 @@ Add the spring-boot-actuator dependency to your package manager to enable the [s
 
 For Maven:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">&lt;dependency&gt;
-    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
-    &lt;artifactId&gt;spring-boot-starter-actuator&lt;/artifactId&gt;
-&lt;/dependency&gt;</pre>
+```
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-actuator</artifactId>
+</dependency>
+```
+
 
 For Gradle:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">dependencies {
+```
+dependencies {
    implementation 'org.springframework.boot:spring-boot-starter-actuator'
-}</pre>
+}
+```
+
 
 One thing you need to know is that, Actuator comes with most of its endpoints disabled, leaving just two endpoints enabled /health and /info
 
@@ -253,15 +280,21 @@ To enable all endpoints, go to your application.properties or application.yml fi
 
 For application.properties:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">management.endpoints.web.exposure.include=*</pre>
+```
+management.endpoints.web.exposure.include=*
+```
+
 
 For application.yml:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">management:
+```
+management:
   endpoints:
     web:
       exposure:
-        include: "*"</pre>
+        include: "*"
+```
+
 
 ### Some interesting Actuator Endpoints {#h3-9-some-interesting-actuator-endpoints}
 

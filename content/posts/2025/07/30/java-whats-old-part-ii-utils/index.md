@@ -69,7 +69,8 @@ The [Collator](https://docs.oracle.com/javase/8/docs/api/java/text/Collator.html
 
 Depending on the strength, it will take care of sorting upper case / lower case and letters with diacritics correctly:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">Collator collator = Collator.getInstance(Locale.US);
+```java
+Collator collator = Collator.getInstance(Locale.US);
 collator.setStrength(Collator.PRIMARY);
 collator.compare("test", "tést"); // 0
 collator.compare("test", "tEst"); // 0
@@ -78,7 +79,9 @@ collator.compare("test", "tést"); // -1
 collator.compare("test", "tEst"); // 0
 collator.setStrength(Collator.TERTIARY);
 collator.compare("test", "tést"); // -1
-collator.compare("test", "tEst"); // -1</pre>
+collator.compare("test", "tEst"); // -1
+```
+
 
 For more details, you can read my Foojay article about [Sorting text in Java, how complicated can it be?](https://foojay.io/today/sorting-text-in-java-how-complicated-can-it-be/)
 

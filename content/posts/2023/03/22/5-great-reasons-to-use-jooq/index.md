@@ -35,20 +35,26 @@ This provides compile-time type safety to your query and enables a lot of other 
 
 In short, if your SQL query looks like this:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="sql" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">SELECT author.first_name, author.last_name
+```sql
+SELECT author.first_name, author.last_name
 FROM author
 WHERE author.last_name = 'Shakespeare'
 ORDER BY author.first_name, author.last_name
-LIMIT 10</pre>
+LIMIT 10
+```
+
 
 ...then your equivalent jOOQ query looks like this:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">ctx.select(AUTHOR.FIRST_NAME, AUTHOR.LAST_NAME)
+```java
+ctx.select(AUTHOR.FIRST_NAME, AUTHOR.LAST_NAME)
    .from(AUTHOR)
    .where(AUTHOR.LAST_NAME.eq("Shakespeare"))
    .orderBy(AUTHOR.FIRST_NAME, AUTHOR.LAST_NAME)
    .limit(10)
-   .fetch();</pre>
+   .fetch();
+```
+
 
 So, there's (almost always) a 1:1 equivalence between SQL syntax and the jOOQ API, irrespective of whether you're coding in Java, Kotlin, or Scala.
 
@@ -73,17 +79,21 @@ In the above intro, we've seen objects like `AUTHOR` or `AUTHOR.LAST_NAME`. Thes
 
 For example, the `AUTHOR.LAST_NAME` member is of type [Field<String>](https://www.jooq.org/javadoc/latest/org.jooq/org/jooq/Field.html) meaning that the resulting record will be aware of its contents being a `String`. Not just that, but the predicate from the query is type-safe as well!
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">// This compiles:
+```java
+// This compiles:
 AUTHOR.LAST_NAME.eq("Shakespeare")
 
 // This does not:
-AUTHOR.LAST_NAME.eq(1)</pre>
+AUTHOR.LAST_NAME.eq(1)
+```
+
 
 SQL is a type-safe language itself. When you write a view or procedure in your database, the database's compiler will type-check those objects, as well. But this luxury goes away as soon as Java developers write their SQL in String form using JDBC or other libraries that work with SQL strings.
 
 And not just SQL queries are affected. [jOOQ's code generator also generates stubs for your stored procedures](https://blog.jooq.org/the-best-way-to-call-stored-procedures-from-java-with-jooq/ "jOOQ's code generator also generates stubs for your stored procedures"). If you have a procedure like this:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="sql" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">CREATE OR REPLACE PROCEDURE my_proc (
+```sql
+CREATE OR REPLACE PROCEDURE my_proc (
   i1 NUMBER,
   io1 IN OUT NUMBER,
   o1 OUT NUMBER,
@@ -97,16 +107,21 @@ BEGIN
 
   o2 := io2;
   io2 := i2;
-END my_proc;</pre>
+END my_proc;
+```
+
 
 You can call it conveniently like this:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">MyProc result = Routines.myProc(configuration, 1, 2, 5, 6);
+```java
+MyProc result = Routines.myProc(configuration, 1, 2, 5, 6);
 
 System.out.println("io1 = " + result.getIo1());
 System.out.println("o1 = " + result.getO1());
 System.out.println("o2 = " + result.getO2());
-System.out.println("io2 = " + result.getIo2());</pre>
+System.out.println("io2 = " + result.getIo2());
+```
+
 
 Using code generation and the type-safe API, it feels as if the database is a part of your Java application, which helps speed up development, just as much as it helps prevent errors as your Java code stops compiling as soon as you modify objects in your database.
 > **Note** you don't have to use the DSL API to get access to many of the remaining benefits. For example, jOOQ also has a [parser](https://www.jooq.org/doc/latest/manual/sql-building/sql-parser/ "parser") that can work as a JDBC proxy, e.g. to [lint](https://www.jooq.org/doc/latest/manual/sql-execution/diagnostics/ "lint") or [translate](https://www.jooq.org/translate/ "translate") SQL between dialects, or otherwise [transform your SQL](https://www.jooq.org/doc/latest/manual/sql-building/queryparts/sql-transformation/ "transform your SQL").
@@ -117,13 +132,17 @@ Using code generation and the type-safe API, it feels as if the database is a pa
 
 A big (and very boring) part of working with SQL is mapping the result set to some representation in application code, be it Java, JSON, XML, etc. jOOQ helps with those things again in a type-safe way. Let's say you're using Java records to represent your data:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">record Book (int id, String title) {}
+```java
+record Book (int id, String title) {}
 record Name (String firstName, String lastName) {}
-record Author (int id, Name name, List&lt;Book&gt; books) {}</pre>
+record Author (int id, Name name, List<Book> books) {}
+```
+
 
 With jOOQ, you can easily map any level of nested data structures to your Java representation directly in the query, in a type-safe way, like so:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">List&lt;Author&gt; authors =
+```java
+List<Author> authors =
 ctx.select(
      AUTHOR.ID,
      row(AUTHOR.FIRST_NAME, AUTHOR.LAST_NAME).mapping(Name::new),
@@ -131,11 +150,13 @@ ctx.select(
        select(BOOK.ID, BOOK.TITLE)
        .from(BOOK)
        .where(BOOK.AUTHOR_ID.eq(AUTHOR.ID))
-     ).convertFrom(r -&gt; r.map(mapping(Book::new)))
+     ).convertFrom(r -> r.map(mapping(Book::new)))
    )
    .from(AUTHOR)
    .orderBy(AUTHOR.ID)
-   .fetch(mapping(Author::new))</pre>
+   .fetch(mapping(Author::new))
+```
+
 
 That's it! The above example uses a few features:
 
@@ -158,7 +179,8 @@ Plus, both the `ROW()` and `MULTISET()` operators are standard SQL operators, so
 
 When you write `position("hello", "e")` in jOOQ, then you're getting:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="sql" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">-- ASE, SQLDATAWAREHOUSE, SQLSERVER
+```sql
+-- ASE, SQLDATAWAREHOUSE, SQLSERVER
 charindex('e', 'hello')
 
 -- AURORA_MYSQL, AURORA_POSTGRES, COCKROACHDB, EXASOL, FIREBIRD, H2, HSQLDB,
@@ -173,7 +195,9 @@ instr('hello', 'e')
 locate('e', 'hello')
 
 -- HANA, SYBASE
-locate('hello', 'e')</pre>
+locate('hello', 'e')
+```
+
 
 This goes much further when more complex SQL features are involved, such as the `LIMIT` or `FETCH` clause, which may have to be emulated using filters on `ROW_NUMBER()`, `RANK()`, `DENSE_RANK()` or `PERCENT_RANK()` window functions, depending on the specific clause usage. Or, if you want to use SQL/JSON, which is an [ISO/IEC TR 19075:6 standard](https://www.iso.org/standard/78937.html "ISO/IEC TR 19075:6 standard"), yet [hardly anyone implements the standard](https://blog.jooq.org/standard-sql-json-the-sobering-parts/ "hardly anyone implements the standard"). But with jOOQ, you get access to the standard syntax (via Java APIs), and jOOQ handles the translation to the relevant SQL dialect.
 
@@ -184,18 +208,22 @@ Even if you're not supporting multiple RDBMS, this approach will save you having
 
 Probably the biggest benefit that you get out of the box with jOOQ is that all of your SQL queries are automatically [dynamic SQL queries](https://www.jooq.org/doc/latest/manual/sql-building/dynamic-sql/ "dynamic SQL queries"), even if they don't look like it. The previous query example looks static:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">ctx.select(AUTHOR.FIRST_NAME, AUTHOR.LAST_NAME)
+```java
+ctx.select(AUTHOR.FIRST_NAME, AUTHOR.LAST_NAME)
    .from(AUTHOR)
    .where(AUTHOR.LAST_NAME.eq("Shakespeare"))
    .orderBy(AUTHOR.FIRST_NAME, AUTHOR.LAST_NAME)
    .limit(10)
-   .fetch();</pre>
+   .fetch();
+```
+
 
 But you're really building an expression tree behind the scenes that can be constructed dynamically. For example, what if the `WHERE` clause should be dynamic?
 
 You can extract it into a local variable, and conditionally append to it:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">Condition condition = AUTHOR.LAST_NAME.eq("Shakespeare");
+```java
+Condition condition = AUTHOR.LAST_NAME.eq("Shakespeare");
 
 if (something)
     condition = condition.and(somethingElse);
@@ -205,7 +233,9 @@ ctx.select(AUTHOR.FIRST_NAME, AUTHOR.LAST_NAME)
    .where(condition)
    .orderBy(AUTHOR.FIRST_NAME, AUTHOR.LAST_NAME)
    .limit(10)
-   .fetch();</pre>
+   .fetch();
+```
+
 
 jOOQ doesn't know or care how you constructed your query. But it will still type-check and prevent SQL injection, etc. (The value `"Shakespeare"` is automatically turned into a bind value.)
 

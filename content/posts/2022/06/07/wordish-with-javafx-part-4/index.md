@@ -65,7 +65,10 @@ Our word list comes from **/usr/share/dict/words**, a linux text file (also avai
 
 The following shell command uses the search command `grep` to find all five-letter alpha characters from **/usr/share/dict/words** , converts these results to uppercase characters with `tr`, and sends the output to file **wordlist.txt**.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="shell" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="false" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ grep -E '^[a-z]{5}$' /usr/share/dict/words | tr [:lower:] [:upper:] &gt; wordlist.txt</pre>
+```bash
+$ grep -E '^[a-z]{5}$' /usr/share/dict/words | tr [:lower:] [:upper:] > wordlist.txt
+```
+
 
 The resulting file contains 8,497 words and we add **wordlist.txt** to our maven project under subdirectory **resource**.
 
@@ -75,12 +78,13 @@ The singleton class WordData generates words and checks word validity. This clas
 
 In the constructor, we read our dictionary text file using `.lines()` to read each line and collect the resulting lines into a list. The static `getInstance()` method returns a WordData object with the list of words initialized from our text file.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="false" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public class WordData {
+```java
+public class WordData {
 
     private static WordData instance = null;
     private String theWord = "";
-    private Set&lt;Integer&gt; usedIndices = new HashSet&lt;&gt;();
-    private List&lt;String&gt; words;
+    private Set<Integer> usedIndices = new HashSet<>();
+    private List<String> words;
     private Random rand = new Random();
 
     private WordData() {
@@ -101,17 +105,20 @@ In the constructor, we read our dictionary text file using `.lines()` to read ea
           return instance;
     }
     . . .
-}</pre>
+}
+```
+
 
 Once the WordData object is created, we set a new target word (the word to be guessed) with method `setNewWord()`, shown below. Instance variable `usedIndices` is a Set. The `do-while` loop terminates when a unique index is added to the Set. (The Set `add()` method rejects elements already in the Set, returning false.) We then use this index to set the next target word from our list of words. This lets users play multiple games of Wordish without getting duplicate words for the target.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="false" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">    private String theWord = "";
+```java
+    private String theWord = "";
 
     public String getTheWord() {
         return theWord;
     } 
 
-    private Set&lt;Integer&gt; usedIndices = new HashSet&lt;&gt;();
+    private Set<Integer> usedIndices = new HashSet<>();
     int index;
 
     public void setNewWord() {   
@@ -120,7 +127,9 @@ Once the WordData object is created, we set a new target word (the word to be gu
           } while (!usedIndices.add(index));
 
           theWord = words.get(index);
-    }</pre>
+    }
+```
+
 
 We call method `setNewWord()` when we start a new game. And we call method `getTheWord()` any time we need to access our current target word.
 
@@ -130,9 +139,12 @@ One of the baseline rules of Wordish (and Wordle) is that any submitted word mus
 
 Here's boolean method `isAWord()` which returns true if the provided guess word is in our word list.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="false" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public boolean isAWord(String guess) {
-    return words.stream().anyMatch(w -&gt; w.equals(guess));
-}</pre>
+```java
+public boolean isAWord(String guess) {
+    return words.stream().anyMatch(w -> w.equals(guess));
+}
+```
+
 
 We use `stream()` and `anyMatch()` which returns true if any stream element matches the provided guess word. Since this is a short-circuiting terminal operation, processing ends as soon as a match is found.
 

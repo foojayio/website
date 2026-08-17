@@ -81,43 +81,59 @@ As I mentioned, Kotlin does allow `null` values. However, they are baked into th
 
 If Kotlin allows `null` values, why do its proponents tout its null safety? The compiler refuses to call members on *possible* null values, *i.e.*, nullable types.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="kotlin">val str: String? = getNullableString()
-val int: Int? = str.toIntOrNull()           //1</pre>
+```kotlin
+val str: String? = getNullableString()
+val int: Int? = str.toIntOrNull()           //1
+```
+
 
 1. Doesn't compile
 
 The way to fix the above code is to check whether the variable is `null` before calling its members:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="kotlin">val str: String? = getNullableString()
+```kotlin
+val str: String? = getNullableString()
 val int: Int? = if (str == null) null
-          else str.toIntOrNull()</pre>
+          else str.toIntOrNull()
+```
+
 
 The above approach is pretty boilerplate-y, so Kotlin offers the null-safe operator to achieve the same:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="kotlin">val str: String? = getNullableString()
-val int: Int? = str?.toIntOrNull()</pre>
+```kotlin
+val str: String? = getNullableString()
+val int: Int? = str?.toIntOrNull()
+```
+
 
 Null-safety in Java {#h2-2-null-safety-in-java}
 -----------------------------------------------
 
 Now that we have described how Kotlin manages `null` values, it's time to check how Java does it. First, there are neither non-nullable types nor null-safe operators in Java. Thus, every variable can potentially be `null` and should be considered so.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">var MyString str = getMyString();           //1
+```java
+var MyString str = getMyString();           //1
 var Integer anInt = null;                   //2
 if (str != null) {
     anInt = str.toIntOrNull();
-}</pre>
+}
+```
+
 
 1. `String` has no `toIntOrNull()` method, so let's pretend `MyString` is a wrapper type and delegates to `String`
 2. A mutable reference is necessary
 
 If you chain multiple calls, it's even worse as every return value can potentially be `null`. To be on the safe side, we need to check whether the result of each method call is `null`. The following snippet may throw a `NullPointerException`:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">var baz = getFoo().getBar().getBaz();</pre>
+```java
+var baz = getFoo().getBar().getBaz();
+```
+
 
 Here's the fixed but much more verbose version:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">var foo = getFoo();
+```java
+var foo = getFoo();
 var bar = null;
 var baz = null;
 if (foo != null) {
@@ -125,7 +141,9 @@ if (foo != null) {
     if (bar != null) {
         baz = bar.getBaz();
     }
-}</pre>
+}
+```
+
 
 For this reason, Java 8 introduced the [Optional](https://docs.oracle.com/javase/8/docs/api/java/util/Optional.html) type. `Optional` is a wrapper around a possibly null value. Other languages call it `Maybe`, `Option`, etc.
 
@@ -136,9 +154,12 @@ Java language's designers advise that a method returns:
 
 If we change the return type of all the above methods to `Optional`, we can rewrite the code in a null-safe way - and get immutability on top:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">final var baz = getFoo().flatMap(Foo::getBar)
+```java
+final var baz = getFoo().flatMap(Foo::getBar)
                         .flatMap(Bar::getBaz)
-                        .orElse(null);</pre>
+                        .orElse(null);
+```
+
 
 My main argument regarding this approach is that the `Optional` itself could be `null`. The language doesn't guarantee that it's not. Also, it's not advised to use `Optional` for method input parameters.
 

@@ -67,25 +67,35 @@ I used these coordinates, but pick your own:
 
 Download, unzip, and step into the directory:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash">cd hello-wowlrd</pre>
+```bash
+cd hello-wowlrd
+```
+
 
 Run Docker Init {#_run_docker_init}
 -----------------------------------
 
 As my British friend say, "It's Docker, innit?"
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash">docker init</pre>
+```bash
+docker init
+```
+
 
 The interactive wizard detects your Java project automatically. Accept "Java", confirm the source directory and Java version, and enter the port:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="text">? What application platform does your project use? Java
+```
+? What application platform does your project use? Java
 ? What's the relative directory (with a leading .) for your app? ./src
 ? What version of Java do you want to use? 26
-? What port does your server listen on? 8080</pre>
+? What port does your server listen on? 8080
+```
+
 
 Docker Init generates four files. The one that matters most is the `Dockerfile`:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="dockerfile"># syntax=docker/dockerfile:1
+```dockerfile
+# syntax=docker/dockerfile:1
 
 ################################################################################
 # Stage 1: resolve and download dependencies
@@ -108,7 +118,7 @@ WORKDIR /build
 COPY ./src src/
 RUN --mount=type=bind,source=pom.xml,target=pom.xml \
     --mount=type=cache,target=/root/.m2 \
-    ./mvnw package -DskipTests &amp;&amp; \
+    ./mvnw package -DskipTests && \
     mv target/$(./mvnw help:evaluate -Dexpression=project.artifactId -q -DforceStdout)-$(./mvnw help:evaluate -Dexpression=project.version -q -DforceStdout).jar target/app.jar
 
 ################################################################################
@@ -141,7 +151,9 @@ COPY --from=extract build/target/extracted/application/ ./
 
 EXPOSE 8080
 
-ENTRYPOINT [ "java", "org.springframework.boot.loader.launch.JarLauncher" ]</pre>
+ENTRYPOINT [ "java", "org.springframework.boot.loader.launch.JarLauncher" ]
+```
+
 
 This is already a proper multi-stage build: separate stages for dependency resolution, compilation, layer extraction, and a minimal runtime image with a non-root user. Gord would approve.
 
@@ -161,16 +173,22 @@ Find them on Docker Hub: <https://hub.docker.com/_/sapmachine>. Just replace `ec
 Build and Run {#_build_and_run}
 -------------------------------
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash">docker compose up --build</pre>
+```bash
+docker compose up --build
+```
+
 
 The generated `compose.yaml` is minimal:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml">services:
+```yaml
+services:
   server:
     build:
       context: .
     ports:
-      - 8080:8080</pre>
+      - 8080:8080
+```
+
 
 The application starts, and immediately stops with exit code 0. That's expected: there's no HTTP endpoint to keep it alive.
 
@@ -179,7 +197,8 @@ Add a Controller {#_add_a_controller}
 
 Create `src/main/java/io/dockersecurity/hellowowlrd/HelloController.java`:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">package io.dockersecurity.hellowowlrd;
+```java
+package io.dockersecurity.hellowowlrd;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -191,23 +210,34 @@ public class HelloController {
     public String hello() {
         return "Hello, Docker Security!";
     }
-}</pre>
+}
+```
+
 
 Add the Spring Web dependency to `pom.xml`:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="xml">&lt;dependency&gt;
-    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
-    &lt;artifactId&gt;spring-boot-starter-web&lt;/artifactId&gt;
-&lt;/dependency&gt;</pre>
+```xml
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-web</artifactId>
+</dependency>
+```
+
 
 Build and run again:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash">docker compose up --build</pre>
+```bash
+docker compose up --build
+```
+
 
 Verify:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash">curl http://localhost:8080
-# Hello, Docker Security!</pre>
+```bash
+curl http://localhost:8080
+# Hello, Docker Security!
+```
+
 
 More Links {#_more_links}
 -------------------------

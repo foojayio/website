@@ -39,7 +39,7 @@ He loves to share his experience by speaking at conferences, writing for the Dut
 
 **Fun Fact**🌟: if you know me, you know 😉
 
-*** ** * ** ***
+
 
 **Bazlur: Please tell us about your professional background and how you became involved in the Java community. What motivates you to remain committed to it?**
 
@@ -51,7 +51,7 @@ In the meantime, I started speaking internationally, meeting lots of amazing peo
 
 In 2017, I was awarded the title of Java Champion in recognition of my contributions to the Java community. Since then, I've continued my work for the NLJUG board, organizing events and speaking at conferences around the world. In 2017, I founded OpenValue, a Java and full-stack consulting company, together with Roy Wasse -- who I knew from the NLJUG community. So, I think it's safe to say that the Java community has had a major positive impact on my career.
 
-*** ** * ** ***
+
 
 **Bazlur: That's a fantastic journey. Given your extensive experience in the Java community, could you share some insights on how the Java landscape has evolved over the years? And what do you think are the key factors contributing to the continued success and growth of Java as a language and the Java community?**
 
@@ -64,7 +64,7 @@ About the Java community: it's certainly one of the most welcoming and passionat
 
 Obviously, community events like J-Fall, Devoxx and JavaZone play a big part there, and Java User Groups as well. The people behind these conferences and JUGs are doing amazing work in making knowledge about Java and the Java ecosystem accessible to everyone who's interested.
 
-*** ** * ** ***
+
 
 **Bazlur: With the constantly evolving tech industry, how can developers stay updated? Also, what is your opinion on the role of JUGs and conferences in helping developers keep up with emerging technology trends?**
 
@@ -75,7 +75,7 @@ At conferences, I try to focus on visiting talks about new things I'd like to le
 That's why I love talks about projects leveraging a piece of technology to fulfill business goals. Everyone can get to a "hello world" stage with a new piece of tech, but when someone is sharing a year or more of experience with using a piece of tech in production, that's where I really find value in those types of talks.
 > *Do whatever works for you, but be prepared to spend time regularly catching up with the latest new developments.*
 
-*** ** * ** ***
+
 
 <br />
 
@@ -86,7 +86,7 @@ That's why I love talks about projects leveraging a piece of technology to fulfi
 Travelling to events and throwing yourself in front of an audience takes quite some effort and energy, so you should only do it if you feel it brings you something. There are countless other ways of knowledge sharing! Think about writing, blogging, Tweeting, coaching others, giving training, etc. I think sharing knowledge is vital for any developer, but you should find a way of sharing that works for you.
 > *I think sharing knowledge is vital for any developer, but you should find a way of sharing that works for you.*
 
-*** ** * ** ***
+
 
 **Bazlur: Having been a speaker at many conferences, what advice would you give to someone who is about to give their first conference talk?**
 
@@ -97,7 +97,7 @@ Often, I find that someone only needs a little bit of help with choosing topics,
 
 <br />
 
-*** ** * ** ***
+
 
 **Bazlur: The financial aspect of travelling and speaking at conferences can be challenging, particularly for independent speakers without some sort of sponsorship. Could you share some effective strategies you've discovered for managing these costs? Are there ways for speakers to offset or subsidize these expenses, and how can they be accessed?**
 
@@ -109,7 +109,7 @@ Another source can be to ask a company or employer to support you. When you're i
 
 Finally, there may be community programs that you can apply to. I remember that JavaZone used to have diversity grants for supporting people from underrepresented groups even to visit the conference. Also, some community programs exist where the company sponsoring the program has a budget for members to travel to events. I remember getting sponsorship from an Oracle program a while ago to get me to speak at JavaOne.
 
-*** ** * ** ***
+
 
 **Bazlur: A substantial number of conferences host talks from developer relations individuals who represent specific companies. This could potentially influence perceptions about technology trends and best practices. In your view, does this company-led representation risk skewing the reality of technology discussions? How can we ensure a balanced, unbiased perspective in such a commercially influenced environment?**
 
@@ -117,7 +117,7 @@ Finally, there may be community programs that you can apply to. I remember that 
 
 And for attendees to give feedback to the speaker or the organization when this balance is off. Obviously, developer relations roles are sponsored by a company to travel the world to do.. well, developer relations stuff 😉 But in my experience, the best way to sell something is to not focus on selling it. Just share your knowledge and experience, and people will become interested in your product or service anyway.
 
-*** ** * ** ***
+
 
 **Bazlur: Can you tell us about a memorable talk or conference you have been part of? What made it stand out?**
 
@@ -136,7 +136,7 @@ As a demo, he used the audience's smartphones as an orchestra by having everyone
 
 I was fortunate to be able to record part of that demo so that you can watch it here: <https://x.com/bjschrijver/status/1588207786885873670?s=20>
 
-*** ** * ** ***
+
 
 **Bazlur: Thank you so much for sharing your insights with us. We appreciate your time. Before we end, is there any parting advice or resources you would like to share with our readers, such as a list of recommended books or any other helpful information?**   
 
@@ -148,7 +148,7 @@ I was fortunate to be able to record part of that demo so that you can watch it 
 
 And in general my advice for any developer is: stay curious - and build simple things 😉
 
-*** ** * ** ***
+
 
 In summary, Bert Jan Schrijver's interview sheds light on the significant role of community involvement and continuous learning in the Java and software development realms.
 

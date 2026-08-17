@@ -65,12 +65,15 @@ Both APIs use sessions under the hood and offer full ACID semantics. The differe
 
 The callback API is ideal when our transaction logic is simple and self-contained. We write our operations in a lambda, and the driver handles the rest---from including starting the transaction to committing it, and even retrying if needed. Below is a little code snippet to show what this might look like:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">try (ClientSession session = client.startSession()) {
-    session.withTransaction(() -&gt; {
+```
+try (ClientSession session = client.startSession()) {
+    session.withTransaction(() -> {
         // Your transactional logic here
         return null;     
     }); 
-}</pre>
+}
+```
+
 
 This is the recommended approach for most applications. It keeps our code clean and simple, and avoids the subtle edge cases of manual session and transaction management.
 
@@ -84,7 +87,8 @@ It's recommended when:
 
 The core API gives us more control over how a transaction starts, commits, and aborts. We'll manage everything manually, which means more flexibility. But as always, with great power comes great responsibility.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">ClientSession session = client.startSession();
+```
+ClientSession session = client.startSession();
 try {
     session.startTransaction();
 
@@ -95,7 +99,9 @@ try {
     session.abortTransaction();
 } finally {
     session.close();
-}</pre>
+}
+```
+
 
 Not a lot more complicated than the callback API, just a more hands-on approach. The core API can be the right choice for you when:
 
@@ -123,13 +129,16 @@ All of the code below is available on [GitHub](https://github.com/timotheekelly/
 
 In our Maven project, we need to add our MongoDB driver dependency. Open the `pom.xml` and add the following dependency for the Java sync driver:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">&lt;dependencies&gt;
-    &lt;dependency&gt;
-        &lt;groupId&gt;org.mongodb&lt;/groupId&gt;
-        &lt;artifactId&gt;mongodb-driver-sync&lt;/artifactId&gt;
-        &lt;version&gt;5.4.0&lt;/version&gt;
-    &lt;/dependency&gt;
-&lt;/dependencies&gt;</pre>
+```
+<dependencies>
+    <dependency>
+        <groupId>org.mongodb</groupId>
+        <artifactId>mongodb-driver-sync</artifactId>
+        <version>5.4.0</version>
+    </dependency>
+</dependencies>
+```
+
 
 Connecting and seeding data {#h2-7-connecting-and-seeding-data}
 ---------------------------------------------------------------
@@ -138,13 +147,14 @@ Before we can demonstrate transactions, we need some data to work with. In this 
 
 In our application, we are going to add all our code to the one class. First, let's start with the setup:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">public class TransactionExample {
+```
+public class TransactionExample {
     public static void main(String[] args) {
         String uri ="YOUR-CONNECTION-STRING";
 
         try (MongoClient client = MongoClients.create(uri)) {
             MongoDatabase db = client.getDatabase("bank");
-            MongoCollection&lt;Document&gt; accounts = db.getCollection("accounts");
+            MongoCollection<Document> accounts = db.getCollection("accounts");
 
             // Drop and re-create the collection with two example users
             accounts.drop();
@@ -157,7 +167,9 @@ In our application, we are going to add all our code to the one class. First, le
             transferFunds(client, 1, 2, 200);
         }
     }
-}</pre>
+}
+```
+
 
 All we are doing here is reading the MongoDB connection URI from an environment variable. Always good practice to keep secrets out of our code!
 
@@ -172,14 +184,15 @@ MongoDB requires that all transactions happen inside a session. When using the c
 
 Here's how the fund transfer logic works:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">public static void transferFunds(MongoClient client, int fromId, int toId, int amount) {
+```
+public static void transferFunds(MongoClient client, int fromId, int toId, int amount) {
     try (ClientSession session = client.startSession()) {
-        session.withTransaction(() -&gt; {
-            MongoCollection&lt;Document&gt; accounts = client.getDatabase("bank").getCollection("accounts");
+        session.withTransaction(() -> {
+            MongoCollection<Document> accounts = client.getDatabase("bank").getCollection("accounts");
 
             // Step 1: Read the sender’s account
             Document sender = accounts.find(session, eq("_id", fromId)).first();
-            if (sender == null || sender.getInteger("balance") &lt; amount) {
+            if (sender == null || sender.getInteger("balance") < amount) {
                 throw new RuntimeException("Insufficient funds or invalid sender.");
             }
 
@@ -197,7 +210,9 @@ Here's how the fund transfer logic works:
     } catch (Exception e) {
         System.err.println("Transaction failed: " + e.getMessage());
     }
-}</pre>
+}
+```
+
 
 We start with a `startSession()` to begin a client session. We must use the same session in all read and write operations inside the transaction.
 

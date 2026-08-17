@@ -157,7 +157,8 @@ I'll use [Apache APISIX](https://apisix.apache.org/). APISIX sits on the shoulde
 
 We only need to add the `Cache-Control` response header. We achieve it with the `response-rewrite` plugin:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml" data-enlighter-theme="dracula">upstreams:
+```yaml
+upstreams:
   - id: 1
     type: roundrobin
     nodes:
@@ -169,13 +170,19 @@ routes:
       response-rewrite:
         headers:
           set:
-            Cache-Control: "max-age=10"</pre>
+            Cache-Control: "max-age=10"
+```
+
 
 Let's do it *without a browser* first.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash">curl -v localhost:9080</pre>
+```bash
+curl -v localhost:9080
+```
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="dracula">HTTP/1.1 200 OK
+
+```
+HTTP/1.1 200 OK
 Content-Type: text/html; charset=utf-8
 Content-Length: 147
 Connection: keep-alive
@@ -184,15 +191,21 @@ Accept-Ranges: bytes
 Last-Modified: Wed, 23 Nov 2022 13:58:55 GMT
 ETag: "637e271f-93"
 Server: APISIX/3.0.0
-Cache-Control: max-age=10</pre>
+Cache-Control: max-age=10
+```
+
 
 To prevent the server from sending the same resource, we can use the `ETag` value in an `If-None-Match` request header:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash" data-enlighter-theme="dracula">curl -H 'If-None-Match: "637e271f-93"' -v localhost:9080</pre>
+```bash
+curl -H 'If-None-Match: "637e271f-93"' -v localhost:9080
+```
+
 
 The result is a `304 Not Modified` as expected:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="dracula">HTTP/1.1 304 Not Modified
+```
+HTTP/1.1 304 Not Modified
 Content-Type: text/html; charset=utf-8
 Content-Length: 147
 Connection: keep-alive
@@ -201,7 +214,9 @@ Accept-Ranges: bytes
 Last-Modified: Wed, 23 Nov 2022 13:58:55 GMT
 ETag: "637e271f-93"
 Server: APISIX/3.0.0
-Cache-Control: max-age=10</pre>
+Cache-Control: max-age=10
+```
+
 
 Now, we can do the same inside a browser. If we use the *resend* feature a second time before 10 seconds have passed, the browser returns the resource from the cache without sending the request to the server.
 

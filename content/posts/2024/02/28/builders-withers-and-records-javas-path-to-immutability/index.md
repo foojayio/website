@@ -33,7 +33,8 @@ JavaBean pattern {#h2-0-javabean-pattern}
 
 The usual way of defining classes in Java follows the [JavaBean pattern](https://en.wikipedia.org/wiki/JavaBeans "JavaBean pattern"). This involves using a default constructor with no arguments, and accessors and mutators for properties.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">public class Person {
+```
+public class Person {
   private int age;
   private String name;
 
@@ -55,7 +56,9 @@ The usual way of defining classes in Java follows the [JavaBean pattern](https:/
 
 Person person = new Person();
 person.setAge(15);
-person.setName("Antonio");</pre>
+person.setName("Antonio");
+```
+
 
 This approach implies that the state of the object can be "unsafe" as we could create an instance of Person without specifying any mandatory and key values. It even allows mutating the object during its lifetime, potentially making the system [less safe](https://blogs.oracle.com/javamagazine/post/java-immutable-objects-strings-date-time-records "less safe"), especially with multithreaded approaches. [Immutability brings a lot of benefits](https://dzone.com/articles/java-and-immutability-avoid "Immutability brings a lot of benefits").
 
@@ -64,7 +67,8 @@ The path to immutability and a safe state {#h2-1-the-path-to-immutability-and-a-
 
 So, the next step in order to fix this issue would be to create a constructor with the mandatory and key properties, and not expose mutators (setters) for them.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">public class Person {
+```
+public class Person {
   private int socialNumber;
   private String name;
   private String address;
@@ -93,24 +97,30 @@ So, the next step in order to fix this issue would be to create a constructor wi
 }
 
 Person person = new Person("Antonio", 1566778890);
-person.setAddress("Barcelona");</pre>
+person.setAddress("Barcelona");
+```
+
 
 With this approach though, we face potential issues in terms of readability and adaptability when the class grows into a more complex definition.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">public Person(String name, int age, String id, String phoneNumber, String email, Person parent1, Person parent2) { ... }
+```
+public Person(String name, int age, String id, String phoneNumber, String email, Person parent1, Person parent2) { ... }
 
-Person person = new Person("Antonio", 15, 1445678, "+34 666 77 88 99", "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="14757a607b7a7d7b54716c75796478713a777b79">[email&nbsp;protected]</a>", juan, carla);
-</pre>
+Person person = new Person("Antonio", 15, 1445678, "+34 666 77 88 99", "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="14757a607b7a7d7b54716c75796478713a777b79">[email protected]</a>", juan, carla);
+```
+
 
 In case we add more mandatory properties, as we see above, we need to add more parameters to the constructor and this will impact the existing code making us modify it on every call to the constructor.
 
 Considering mandatory and optional arguments, for immutable objects, we can run into the ["telescoping constructors"](https://medium.com/nerd-for-tech/avoid-telescoping-constructors-with-the-builder-pattern-2114b75360b7 "“telescoping constructors”") problem where we need to create several constructors considering the different nullability combinations.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">public Person(String name, int age, String id, String phoneNumber, String email, Person parent1, Person parent2) {...}
+```
+public Person(String name, int age, String id, String phoneNumber, String email, Person parent1, Person parent2) {...}
 public Person(String name, int age, String id, String phoneNumber, String email, Person parent1,) {...}
 public Person(String name, int age, String id, String phoneNumber, String email) {...}
 public Person(String name, int age, String id, String phoneNumber) {...}
-</pre>
+```
+
 
 The Builder approach {#h2-2-the-builder-approach}
 -------------------------------------------------
@@ -119,7 +129,8 @@ To fix this we can use Builders, which will help with readability and also on fu
 
 First let's remove any mutator, leave the accessors, and make it "impossible" to create a new instance with a constructor.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">public class Person {
+```
+public class Person {
   private String name;
   private int socialNumber;
 
@@ -138,11 +149,14 @@ First let's remove any mutator, leave the accessors, and make it "impossible" to
   public String toString() {
     return "Person [name=" + name + ", socialNumber=" + socialNumber + "]";
   }
-}</pre>
+}
+```
+
 
 Now we will add the inner class in charge of building the new instance and a new method that invokes the Builder.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">// inside Person class
+```
+// inside Person class
 
 // Fluent Builder API
 public static PersonBuilder builder() {
@@ -177,24 +191,32 @@ public static class PersonBuilder {
     person.socialNumber = socialNumber;
     return person;
   }
-}</pre>
+}
+```
+
 
 And with this approach now we are able to create a new immutable instance with a validated state.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">Person person = Person.builder()
+```
+Person person = Person.builder()
                         .name("Antonio")
                         .socialNumber(15546464564)
-.build();</pre>
+.build();
+```
+
 
 The above approach includes a lot of boilerplate code that can discourage us from using it. To make things easier we can use libraries with annotations that will generate the code for us: [Immutables](https://immutables.github.io/immutable.html#:~:text=.build()%3B-,Builder,-By%20default%2C%20builders), [Lombok](https://projectlombok.org/features/Builder "Lombok"), [Auto](https://github.com/google/auto/blob/main/value/userguide/autobuilder.md "Auto"), [FreeBuilder](https://freebuilder.inferred.org/ "FreeBuilder"), etc.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">@lombok.Builder
+```
+@lombok.Builder
 public class Person {
   private String name;
   private int socialNumber;
 }
 
-Person person = Person.builder().name("Antonio").socialNumber(2023452).build();</pre>
+Person person = Person.builder().name("Antonio").socialNumber(2023452).build();
+```
+
 
 The Wither approach {#h2-3-the-wither-approach}
 -----------------------------------------------
@@ -203,7 +225,8 @@ Another approach to having a fluent API and immutability is the usage of "wither
 
 The idea behind it is that every mutator creates a new object instance, and we can chain those calls in order to produce complete instances.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">// inside Person class
+```
+// inside Person class
 // remove setters
 
 public Person(String name, int age) {
@@ -219,20 +242,26 @@ public Person withName(String name) {
 }
 
 public Person withAge(int age) {
-  if (age &lt; 0) throw new IllegalArgumentException("age");
+  if (age < 0) throw new IllegalArgumentException("age");
 
   return (this.age == age) ? this : new Person(name, age);
-}</pre>
+}
+```
+
 
 We can consume this approach like this, making it very easy to apply small changes to an existing object by obtaining a new object. We are "cloning" the object and changing one property at a time.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">Person person = new Person("Luis", 45);
+```
+Person person = new Person("Luis", 45);
 Person person2 = person.withName("Jose");
-// here we have person2 = Jose, 45</pre>
+// here we have person2 = Jose, 45
+```
+
 
 Again in order to reduce boilerplate code, and be less error-prone, we can leverage existing libraries with annotation processors that will make the process smoother and cleaner.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">public class Person {
+```
+public class Person {
   @lombok.With @NonNull private final String name;
   @lombok.With private final int age;
 
@@ -240,11 +269,16 @@ Again in order to reduce boilerplate code, and be less error-prone, we can lever
     this.name = name;
     this.age = age;
   }
-}</pre>
+}
+```
+
 
 The main drawback to the Withers approach is that we rely a lot on the garbage collector in order to remove intermediary objects, especially when we chain Withers:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">person.withName(“John”).withAge(50)</pre>
+```
+person.withName(“John”).withAge(50)
+```
+
 
 Those objects are not used in the end and we will need to wait for the garbage collector to remove them. This can impact performance in systems with high object creation rates.
 
@@ -255,16 +289,20 @@ Finally, the language itself, since Java 16, provides a struct definition called
 
 So in our case, our Person class could be defined as:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">record Person(String name, int age) {}
+```
+record Person(String name, int age) {}
 
 ...
-Person person = new Person("Pedro", 66);</pre>
+Person person = new Person("Pedro", 66);
+```
+
 
 This would end up in the same code for Person as we had at the beginning of this article, removing the setters and making all fields final.
 
 Some creational issues are not solved out of the box with Records, like the mandatory/optional fields and the constructor, and it's not easy to create new objects based on existing ones, but we can rely on libraries like [RecordBuilder](https://github.com/randgalt/record-builder "RecordBuilder") to help us with that.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">// Builder
+```
+// Builder
 @RecordBuilder
 public record Person(String name, int age){}
 
@@ -276,7 +314,8 @@ public record Car(String brand, String model, int year) implements CarBuilder.Wi
 
 Car car = new Car("Seat", "Ibiza", 2015);
 Car car2 = car.withModel("Cordoba");
-</pre>
+```
+
 
 Despite these issues, Records are a great solution for representing data with immutable state, while also reducing the boilerplate code in order to define the structures.
 

@@ -83,11 +83,14 @@ JobRunr aims to be **developer friendly** by providing a simple, flexible and st
 
 Here's a simple example of how to schedule a job using JobRunr:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">// Schedule a one-off job to run in 1 hour
+```java
+// Schedule a one-off job to run in 1 hour
 jobScheduler.schedule(
     Instant.now().plus(1, ChronoUnit.HOURS),
-    () -&gt; sendEmail("<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="6114120413210419000c110d044f020e0c">[email&nbsp;protected]</a>")
-);</pre>
+    () -> sendEmail("<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="6114120413210419000c110d044f020e0c">[email protected]</a>")
+);
+```
+
 
 JobRunr integrates very well with the whole Java ecosystem like Spring Boot, Quarkus and Micronaut and supports all major SQL databases and even some popular NoSQL databases.
 
@@ -112,12 +115,14 @@ Spring Boot applications often utilize the `@Scheduled` annotation for basic sch
 
 To address this limitation, developers can integrate [ShedLock](https://github.com/lukas-krecan/ShedLock), a lightweight Java library that prevents duplicate task execution across multiple instances. Here's a simple example:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">@Scheduled(cron = "0 */15 * * * *")
+```java
+@Scheduled(cron = "0 */15 * * * *")
 @SchedulerLock(name = "scheduledTask")
 public void scheduledTask() {
     // Your task logic here
 }
-</pre>
+```
+
 
 While `@Scheduled` with ShedLock provides a straightforward solution for distributed scheduling, it lacks some crucial features found in dedicated job scheduling solutions:
 

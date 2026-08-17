@@ -23,11 +23,14 @@ frozen: false
 
 As a web architect, one of the many issues is asset management. And the most significant issue in assets is images. A naive approach would be to set an image and let the browser resize the image via CSS:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="css">img {
+```css
+img {
     height: 100%;
     width: 100%;
     object-fit: contain;
-}</pre>
+}
+```
+
 
 However, it means that you download the original image. It entails two problems: the size of the original image and the suboptimal browser-based resizing.
 
@@ -53,14 +56,17 @@ Yet, the traditional approach is to take advantage of the HTML `picture` tag:
 
 In turn, one can use it like the following:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="html">&lt;picture&gt;
-    &lt;source media="(max-width: 199px)" srcset="ai-generated-200.jpg" /&gt;
-    &lt;source media="(max-width: 399px)" srcset="ai-generated-400.jpg" /&gt;
-    &lt;source media="(max-width: 599px)" srcset="ai-generated-600.jpg" /&gt;
-    &lt;source media="(max-width: 799px)" srcset="ai-generated-800.jpg" /&gt;
-    &lt;source media="(max-width: 999px)" srcset="ai-generated-1000.jpg" /&gt;
-    &lt;img src="ai-generated.jpg" /&gt;
-&lt;/picture&gt;</pre>
+```html
+<picture>
+    <source media="(max-width: 199px)" srcset="ai-generated-200.jpg" />
+    <source media="(max-width: 399px)" srcset="ai-generated-400.jpg" />
+    <source media="(max-width: 599px)" srcset="ai-generated-600.jpg" />
+    <source media="(max-width: 799px)" srcset="ai-generated-800.jpg" />
+    <source media="(max-width: 999px)" srcset="ai-generated-1000.jpg" />
+    <img src="ai-generated.jpg" />
+</picture>
+```
+
 
 This way has worked for ages, but it has two issues. First, providing multiple resolutions for each image takes a long time. One could automate the process and get good results with AI.
 
@@ -85,33 +91,40 @@ imgproxy offers both an Open Source free version and a paid version; everything 
 
 One solution would be for the web developer to code each imgproxy URL in the HTML:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="html">&lt;picture&gt;
-    &lt;source media="(max-width: 199px)" srcset="http://imgproxy:8080//rs:fill/w:200/plain/http://server:3000/ai-generated.jpg@webp" /&gt;
-    &lt;source media="(max-width: 399px)" srcset="http://imgproxy:8080//rs:fill/w:400/plain/http://server:3000/ai-generated.jpg@webp" /&gt;
-    &lt;source media="(max-width: 599px)" srcset="http://imgproxy:8080//rs:fill/w:600/plain/http://server:3000/ai-generated.jpg@webp" /&gt;
-    &lt;source media="(max-width: 799px)" srcset="http://imgproxy:8080//rs:fill/w:800/plain/http://server:3000/ai-generated.jpg@webp" /&gt;
-    &lt;source media="(max-width: 999px)" srcset="http://imgproxy:8080//rs:fill/w:1000/plain/http://server:3000/ai-generated.jpg@webp" /&gt;
-    &lt;img src="ai-generated.jpg" /&gt;
-&lt;/picture&gt;</pre>
+```html
+<picture>
+    <source media="(max-width: 199px)" srcset="http://imgproxy:8080//rs:fill/w:200/plain/http://server:3000/ai-generated.jpg@webp" />
+    <source media="(max-width: 399px)" srcset="http://imgproxy:8080//rs:fill/w:400/plain/http://server:3000/ai-generated.jpg@webp" />
+    <source media="(max-width: 599px)" srcset="http://imgproxy:8080//rs:fill/w:600/plain/http://server:3000/ai-generated.jpg@webp" />
+    <source media="(max-width: 799px)" srcset="http://imgproxy:8080//rs:fill/w:800/plain/http://server:3000/ai-generated.jpg@webp" />
+    <source media="(max-width: 999px)" srcset="http://imgproxy:8080//rs:fill/w:1000/plain/http://server:3000/ai-generated.jpg@webp" />
+    <img src="ai-generated.jpg" />
+</picture>
+```
+
 
 It leaks topology-related details on the web page. It's not a maintainable solution. We can solve the issue with a reverse proxy or an API Gateway. I'll use Apache APISIX for obvious reasons.
 
 With this approach, the above HTML becomes much more straightforward:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="html">&lt;picture&gt;
-    &lt;source media="(max-width: 199px)" srcset="/resize/200/ai-generated.jpg" /&gt;
-    &lt;source media="(max-width: 399px)" srcset="/resize/400/ai-generated.jpg" /&gt;
-    &lt;source media="(max-width: 599px)" srcset="/resize/600/ai-generated.jpg" /&gt;
-    &lt;source media="(max-width: 799px)" srcset="/resize/800/ai-generated.jpg" /&gt;
-    &lt;source media="(max-width: 999px)" srcset="/resize/1000/ai-generated.jpg" /&gt;
-    &lt;img src="ai-generated.jpg" /&gt;
-&lt;/picture&gt;</pre>
+```html
+<picture>
+    <source media="(max-width: 199px)" srcset="/resize/200/ai-generated.jpg" />
+    <source media="(max-width: 399px)" srcset="/resize/400/ai-generated.jpg" />
+    <source media="(max-width: 599px)" srcset="/resize/600/ai-generated.jpg" />
+    <source media="(max-width: 799px)" srcset="/resize/800/ai-generated.jpg" />
+    <source media="(max-width: 999px)" srcset="/resize/1000/ai-generated.jpg" />
+    <img src="ai-generated.jpg" />
+</picture>
+```
+
 
 Apache APISIX intercepts requests starting with `/resize`, rewrites the URL for `imgproxy`, and forwards the rewritten URL to `imgproxy`. Here's the overall flow:
 
 [![](imgproxy-flow-1024x479.png)](imgproxy-flow.png)The corresponding Apache APISIX configuration looks like the following:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml">routes:
+```yaml
+routes:
   - uri: /resize/*                                          #1
     plugins:
       proxy-rewrite:                                        #2
@@ -120,7 +133,9 @@ Apache APISIX intercepts requests starting with `/resize`, rewrites the URL for 
           - /rs:fill/w:$1/plain/http://server:3000/$2@webp  #4
     upstream:
       nodes:
-        "imgproxy:8080": 1</pre>
+        "imgproxy:8080": 1
+```
+
 
 1. Match requests prefixed with `/resize`
 2. Rewrite the URL
@@ -133,7 +148,8 @@ With the above, `/resize/200/ai-generated.jpg` to Apache APISIX is rewritten as 
 
 We can set up a small testing sample with Docker Compose:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml">services:
+```yaml
+services:
   apisix:
     image: apache/apisix:3.5.0-debian
     volumes:
@@ -144,7 +160,9 @@ We can set up a small testing sample with Docker Compose:
   imgproxy:
     image: darthsim/imgproxy:v3.19
   server:                                                         #1
-    build: content</pre>
+    build: content
+```
+
 
 1. Simple web server hosting the HTML and the main image
 
@@ -174,7 +192,7 @@ The complete source code for this post can be found on [GitHub](https://github.c
 * [imgproxy documentation](https://docs.imgproxy.net/)
 * [imgproxy interactive demo](https://imgproxy.net/)
 
-*** ** * ** ***
+
 
 *Originally published at [A Java Geek](https://blog.frankel.ch/resize-images-on-the-fly/) on October 1^st^, 2023*
 

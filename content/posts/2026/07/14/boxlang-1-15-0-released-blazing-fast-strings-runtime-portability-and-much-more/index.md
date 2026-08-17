@@ -65,7 +65,8 @@ You get the fast path automatically. No opt-in. No new syntax.
 
 Three equivalent creation forms:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">// BIF: optional initial value and initial buffer capacity
+```java
+// BIF: optional initial value and initial buffer capacity
 sbA = stringBuilderNew( "Hello", 128 )
 
 // Long literal form
@@ -75,15 +76,18 @@ sbB = stringbuilder{ "Hello" }
 sbC = sb{ "Hello" }
 sbC.append( " World" )
 writeOutput( sbC.toString() )  // "Hello World"
-</pre>
+```
+
 
 The `sb{ ... }` literal accepts **any expression**, not just quoted text:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">sb{ "Hello #name#" }
+```java
+sb{ "Hello #name#" }
 sb{ myVar }
 sb{ getGreeting() }
 sb{ foo.bar() }
-</pre>
+```
+
 
 And identifiers named `sb` or `stringbuilder` still work as normal variables. The parser only treats them as literals when followed by braces.
 
@@ -109,33 +113,39 @@ And identifiers named `sb` or `stringbuilder` still work as normal variables. Th
 
 Building an HTML fragment in a loop, the way it should be done:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">sb = sb{}
-sb.append( "&lt;ul&gt;" )
+```java
+sb = sb{}
+sb.append( "<ul>" )
 for ( item in items ) {
-    sb.append( "&lt;li&gt;" ).append( item ).append( "&lt;/li&gt;" )
+    sb.append( "<li>" ).append( item ).append( "</li>" )
 }
-sb.append( "&lt;/ul&gt;" )
+sb.append( "</ul>" )
 writeOutput( sb.toString() )
-</pre>
+```
+
 
 **Silent string coercion.** Pass a `BoxStringBuilder` anywhere a `String` is required and it converts automatically:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">sb = sb{ "Hello " }
-writeOutput( sb &amp; "World" )   // "Hello World"
+```java
+sb = sb{ "Hello " }
+writeOutput( sb & "World" )   // "Hello World"
 len( sb )                     // works, sb is coerced
-</pre>
+```
+
 
 ### Optimization 1: `&=` Does In-Place Append {#h3-3-optimization-1-does-in-place-append}
 
 Compound concat now uses in-place append semantics for `BoxStringBuilder` values. No new allocation. Reference stays stable.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">sb = sb{ "Hello" }
+```java
+sb = sb{ "Hello" }
 
-// &amp;= desugars to sb.append( " World" )
-sb &amp;= " World"
+// &= desugars to sb.append( " World" )
+sb &= " World"
 
 writeOutput( sb )  // "Hello World"
-</pre>
+```
+
 
 The same in-place append also applies to raw `java.lang.StringBuilder` instances, not just `BoxStringBuilder`.
 
@@ -143,12 +153,14 @@ The same in-place append also applies to raw `java.lang.StringBuilder` instances
 
 The compiler recognizes explicit self-concat patterns and rewrites them to the compound form automatically:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">// Source:
-data = data &amp; chunk
+```java
+// Source:
+data = data & chunk
 
 // Compiled as:
-data &amp;= chunk
-</pre>
+data &= chunk
+```
+
 
 Applies to identifier, dot-access, and array-access targets: `variables.data, arr[ 1 ]`, and friends. Legacy code that never learned the `&=` habit still gets the fast path.
 
@@ -156,21 +168,25 @@ Applies to identifier, dot-access, and array-access targets: `variables.data, ar
 
 Contiguous string literals are combined **at compile time**, before your code ever runs:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">// Source:
-result = "foo" &amp; "bar" &amp; "baz" &amp; "qux"
+```java
+// Source:
+result = "foo" & "bar" & "baz" & "qux"
 
 // Compiled as:
 result = "foobarbazqux"
-</pre>
+```
+
 
 Mixed expressions are partially folded, collapsing runs of adjacent literals:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">// Source:
-result = "foo" &amp; "bar" &amp; name &amp; "baz" &amp; "qux"
+```java
+// Source:
+result = "foo" & "bar" & name & "baz" & "qux"
 
 // Compiled as:
-result = "foobar" &amp; name &amp; "bazqux"
-</pre>
+result = "foobar" & name & "bazqux"
+```
+
 
 ### Optimization 4: Auto-Switching Runtime Concat Strategy {#h3-6-optimization-4-auto-switching-runtime-concat-strategy}
 
@@ -184,10 +200,12 @@ At runtime, concat behavior is tiered by segment count:
 
 This means expression chains like `"foo" & bar & "baz" & bum` and interpolation strings like `"foo#bar#baz#bum#" `are lowered automatically to:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">sb = new StringBuilder( precomputedCapacity )
+```java
+sb = new StringBuilder( precomputedCapacity )
 sb.append( "foo" ).append( bar ).append( "baz" ).append( bum )
 result = sb.toString()
-</pre>
+```
+
 
 You write idiomatic BoxLang. The compiler and runtime cooperate to make it fast.
 
@@ -195,12 +213,14 @@ You write idiomatic BoxLang. The compiler and runtime cooperate to make it fast.
 
 `BoxStringBuilder` member methods are **not** injected onto a raw `java.lang.StringBuilder`. Mixing 1-based (BoxLang) and 0-based (Java) positional semantics on the same instance would be a source of quiet bugs. Wrap the Java instance first if you want BoxLang semantics:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">javaSB = createObject( "java", "java.lang.StringBuilder" ).init( "Hello" )
+```java
+javaSB = createObject( "java", "java.lang.StringBuilder" ).init( "Hello" )
 boxSB  = stringBuilderNew( javaSB )
 boxSB.delete( 1, 1 )   // BoxStringBuilder semantics (1-based)
 
 javaSB.delete( 2, 2 )  // Java semantics (0-based, no-op for equal start/end)
-</pre>
+```
+
 
 #### 📖 Deep dive resources:
 
@@ -223,7 +243,8 @@ In 1.15.0, **every class-loader creation point in the runtime has been extracted
 * The **generated class loader** , which receives compiled BoxLang bytecode and resolves it for execution.  
   Swap one factory before the runtime boots. All three change together.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">// Standard JVM (the default, no changes for existing deployments)
+```java
+// Standard JVM (the default, no changes for existing deployments)
 BoxRuntime.setClassLoaderFactory( new DynamicClassLoaderFactory() );
 
 // Android: use the app ClassLoader as the runtime loader,
@@ -233,7 +254,8 @@ BoxRuntime.setClassLoaderFactory( new AndroidClassLoaderFactory() );
 // GraalVM Native Image (closed-world AOT):
 // all classes pre-registered at build time, no defineClass() at runtime
 BoxRuntime.setClassLoaderFactory( new NativeImageClassLoaderFactory() );
-</pre>
+```
+
 
 The default `DynamicClassLoaderFactory` is installed automatically and reproduces the exact behavior of every previous BoxLang release. **Zero breaking changes for existing deployments.**
 
@@ -256,7 +278,8 @@ This investment does not add a single new BIF or language construct. What it doe
 
 A dedicated type check to identify BoxLang `BoxSet` instances, rounding out the `isArray()` / `isStruct()` / `isQuery()` family.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">s = setOf( 1, 2, 3 )
+```java
+s = setOf( 1, 2, 3 )
 
 isBoxSet( s )         // true
 isBoxSet( [ 1, 2, 3 ] )  // false, arrays are not sets
@@ -271,13 +294,15 @@ function processCollection( data ) {
     }
     throw( "Unsupported collection type" )
 }
-</pre>
+```
+
 
 ### `isRange() `BIF (BL-2507) {#h3-11-isrange-bif-bl-2507}
 
 Test whether a value is a BoxLang `Range` instance.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">r = 1..10
+```java
+r = 1..10
 
 isRange( r )         // true
 isRange( [ 1, 2, 3 ] )  // false
@@ -287,20 +312,23 @@ function sumRange( val ) {
     if ( !isRange( val ) ) {
         throw( "Expected a Range, got #val.getClass().getSimpleName()#" )
     }
-    return val.reduce( ( acc, item ) =&gt; acc + item, 0 )
+    return val.reduce( ( acc, item ) => acc + item, 0 )
 }
-</pre>
+```
+
 
 ### `threadCurrent()` BIF (BL-2513) {#h3-12-threadcurrent-bif-bl-2513}
 
 Direct access to the current native Java thread from BoxLang.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">javaThread = threadCurrent()
+```java
+javaThread = threadCurrent()
 writeOutput( javaThread.getName() )    // java.lang.Thread getName()
 writeOutput( javaThread.getState() )   // RUNNABLE, WAITING, etc.
 writeOutput( javaThread.isVirtual() )  // true for virtual threads (Java 21+)
 writeOutput( javaThread.threadId() )   // JVM thread identifier
-</pre>
+```
+
 
 Useful for telemetry, profiling integrations, and anywhere direct Thread API access is required.
 
@@ -308,7 +336,8 @@ Useful for telemetry, profiling integrations, and anywhere direct Thread API acc
 
 Class instances now produce a more useful string representation. If the class defines a `toString()` method or property, that value is used. Otherwise the representation now includes the class name and a summary of public properties.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">class Product {
+```java
+class Product {
     property string name
     property numeric price
 
@@ -320,30 +349,35 @@ Class instances now produce a more useful string representation. If the class de
 p = new Product( name="Widget", price=9.99 )
 writeOutput( p )       // Product(Widget, $9.99)
 writeOutput( "#p#" )   // Product(Widget, $9.99)
-</pre>
+```
+
 
 ### Compile Validation for Inner Classes Inside Functions (BL-2490) {#h3-14-compile-validation-for-inner-classes-inside-functions-bl-2490}
 
 The compiler now emits a clear validation error when an inner class is declared inside a function body, instead of failing confusingly at runtime.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="html">function doSomething() {
+```html
+function doSomething() {
     // Now produces a clear compile-time error:
     class Helper { }
     // "Inner classes cannot be declared inside a function body."
 }
-</pre>
+```
+
 
 ### Auto-Deserialize JSON Args in Remote Methods (BL-2505) {#h3-15-auto-deserialize-json-args-in-remote-methods-bl-2505}
 
 Remote methods (marked` access="remote"`) now automatically deserialize JSON string arguments into `Struct` or `Array` values when the argument type is declared as such.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">remote function saveUser( required struct userData ) {
-    // Called via HTTP with userData={"name":"Alice","email":"<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="fb9a9792989ebb9e839a968b979ed5989496">[email&nbsp;protected]</a>"}
+```java
+remote function saveUser( required struct userData ) {
+    // Called via HTTP with userData={"name":"Alice","email":"<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="fb9a9792989ebb9e839a968b979ed5989496">[email protected]</a>"}
     // userData is automatically deserialized to a BoxLang Struct:
     writeOutput( userData.name )   // Alice
-    writeOutput( userData.email )  // <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="33525f5a505673564b525e435f561d505c5e">[email&nbsp;protected]</a>
+    writeOutput( userData.email )  // <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="33525f5a505673564b525e435f561d505c5e">[email protected]</a>
 }
-</pre>
+```
+
 
 ### `application/json` Whitespace Compression (BL-2547) {#h3-16-application-json-whitespace-compression-bl-2547}
 
@@ -353,26 +387,30 @@ The web runtime's whitespace compression, previously only active for HTML respon
 
 The default HTML error page now includes an HTML comment at the very top of the response with essential error information. Makes it possible to programmatically extract error details during testing and debugging even when full error display is suppressed.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">&lt;!-- BoxLang Error
+```java
+<!-- BoxLang Error
    Type    : application.MyException
    Message : Something went wrong
    Template: /path/to/template.bxm
    Line    : 42
---&gt;
-</pre>
+-->
+```
+
 
 ### Synchronized Set Support (BL-2494) {#h3-18-synchronized-set-support-bl-2494}
 
 `setNew()` gains an `isSynchronized` boolean argument. When `true`, the set is wrapped in a thread-safe synchronized wrapper for safe concurrent access.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">sharedSet = setNew( type="linked", isSynchronized=true )
+```java
+sharedSet = setNew( type="linked", isSynchronized=true )
 
 thread name="t1" { sharedSet.add( "alpha" ) }
 thread name="t2" { sharedSet.add( "beta" )  }
 threadJoin( "t1,t2" )
 
 writeOutput( sharedSet.size() )  // 2
-</pre>
+```
+
 
 🔧 Improvements {#h2-19-improvements}
 -------------------------------------
@@ -382,22 +420,28 @@ writeOutput( sharedSet.size() )  // 2
 * [BL-2538](https://ortussolutions.atlassian.net/browse/BL-2538 "BL-2538") **QoQ Performance** Query of Queries executes significantly faster on large datasets, thanks to internal optimizations across the filter, sort, and aggregation pipeline.
 * [BL-2539](https://ortussolutions.atlassian.net/browse/BL-2539 " BL-2539") **Safe navigation in the expression interpreter** The expression interpreter no longer throws when a safe navigation expression fails to resolve a key. It returns null instead.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">data = { name: "alice" }
+```java
+data = { name: "alice" }
 val = data?.age?.years   // null, no exception thrown
-</pre>
+```
+
 
 * [BL-2543](https://ortussolutions.atlassian.net/browse/BL-2543 "BL-2543") `null` **is falsey but not boolean** `isBoolean( null )` now correctly returns `false`. `null` is falsey but that does not make it a boolean value.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">isBoolean( null )    // false (was: true in some earlier builds)
+```java
+isBoolean( null )    // false (was: true in some earlier builds)
 if ( !null ) { }     // still works, null IS falsey
-</pre>
+```
+
 
 * [BL-2500](https://ortussolutions.atlassian.net/browse/BL-2500 "BL-2500") **Struct keys capped in error messages** `KeyNotFoundException` messages now show a capped list of available keys to avoid flooding logs on large structs.
 * [BL-2501](https://ortussolutions.atlassian.net/browse/BL-2501 "BL-2501") **Range empty-set semantics** Paradoxical ranges (`5..3` with a positive step) now produce zero elements instead of throwing.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">r = ( 5..3 ).step( 1 )
+```java
+r = ( 5..3 ).step( 1 )
 r.toArray()   // []
-</pre>
+```
+
 
 * [BL-2512](https://ortussolutions.atlassian.net/browse/BL-2512 "BL-2512") **Formatter** `arguments.separator` **config** Configurable spacing around named argument separators (default `" = "`).
 * [BL-2514](https://ortussolutions.atlassian.net/browse/BL-2514 "BL-2514") **Session cookie gated on session management** The web runtime no longer emits a `BXSESSIONID` cookie for apps with session management disabled.
@@ -417,12 +461,14 @@ Upgrade Today {#h2-22-upgrade-today}
 
 BoxLang 1.15.0 is available now.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java"># Install or upgrade via CommandBox
+```java
+# Install or upgrade via CommandBox
 box install boxlang
 box upgrade boxlang
 
 # Or grab it directly from the download page
-</pre>
+```
+
 
 #### Key resources:
 

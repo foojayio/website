@@ -25,7 +25,7 @@ At **Omnifish**, we're proud supporters of the open-source enterprise Java ecosy
 
 Let's dive in.
 
-*** ** * ** ***
+
 
 ![🚀](https://s.w.org/images/core/emoji/15.0.3/svg/1f680.svg) Getting Started with Jakarta EE {#getting-started-with-jakarta-ee}
 --------------------------------------------------------------------------------------------------------------------------------
@@ -48,7 +48,7 @@ You'll eventually need to persist data --- and this guide has you covered. Learn
 
 Security is never an afterthought. This guide walks you through adding authentication and authorization to your REST endpoints using Jakarta Security --- including how to protect resources and validate user credentials.
 
-*** ** * ** ***
+
 
 ![🧠](https://s.w.org/images/core/emoji/15.0.3/svg/1f9e0.svg) Understand the Specs Behind the Scenes {#understand-the-specs-behind-the-scenes}
 ----------------------------------------------------------------------------------------------------------------------------------------------
@@ -83,7 +83,7 @@ Want to scale your apps? You need to understand concurrency. This guide covers m
 
 Finally, this high-level overview ties everything together --- showing how all the specs in Jakarta EE fit into a cohesive platform for building robust, cloud-ready enterprise applications.
 
-*** ** * ** ***
+
 
 ![📚](https://s.w.org/images/core/emoji/15.0.3/svg/1f4da.svg) Wrap-Up: Learn. Build. Grow. {#wrap-up-learn-build-grow}
 ----------------------------------------------------------------------------------------------------------------------

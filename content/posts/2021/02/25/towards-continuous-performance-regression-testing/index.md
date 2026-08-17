@@ -44,7 +44,8 @@ JfrUnit is an extension for [JUnit 5](https://junit.org/junit5/docs/current/user
 
 Here is a basic example of a JfrUnit test:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">@JfrEventTest // 1
+```java
+@JfrEventTest // 1
 public class JfrUnitTest {
 
   public JfrEvents jfrEvents = new JfrEvents();
@@ -71,7 +72,9 @@ public class JfrUnitTest {
 
     assertThat(jfrEvents.ofType("jdk.GarbageCollection")).hasSize(1); // 5 
   }
-}</pre>
+}
+```
+
 
 |-----|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | *1* | `@JfrEventTest` marks this as a JfrUnit test, activating its extension                                                                                                                                               |
@@ -108,7 +111,8 @@ In that sense, `jdk.ObjectAllocationInNewTLAB` represents a sampling of object a
 
 So let's start and work on a test for spotting regressions in terms of object allocations of one of the Todo Manager app's API methods, `GET /todo/{id}`. To identify a baseline of the allocation to be expected, we first invoke that method in a loop and print out the actual allocation values. This should happen in intervals, e.g. every 10,000 invocations, so to average out numbers from individual API calls.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">@Test
+```java
+@Test
 @EnableEvent("jdk.ObjectAllocationInNewTLAB") // 1
 @EnableEvent("jdk.ObjectAllocationOutsideTLAB")
 public void retrieveTodoBaseline() throws Exception {
@@ -117,7 +121,7 @@ public void retrieveTodoBaseline() throws Exception {
   HttpClient client = HttpClient.newBuilder()
       .build();
 
-  for (int i = 1; i&lt;= 100_000; i++) {
+  for (int i = 1; i<= 100_000; i++) {
     executeRequest(r, client);
 
     if (i % 10_000 == 0) {
@@ -170,7 +174,9 @@ public void retrieveTodoBaseline() throws Exception {
     return re.getThread().getJavaName().startsWith("vert.x-eventloop") ||
         re.getThread().getJavaName().startsWith("executor-thread");
   }
-}</pre>
+}
+```
+
 
 |-----|-------------------------------------------------------------------------------------------------------------------------------------------|
 | *1* | Enable the `jdk.ObjectAllocationInNewTLAB` and `jdk.ObjectAllocationOutsideTLAB` JFR events                                               |
@@ -185,7 +191,8 @@ Note that unlike in the initial example showing the usage of JfrUnit, here we're
 
 Here are the numbers I got from running 100,000 invocations:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">Requests executed: 10000, memory allocated: 34096 bytes/request
+```
+Requests executed: 10000, memory allocated: 34096 bytes/request
 Requests executed: 20000, memory allocated: 31768 bytes/request
 Requests executed: 30000, memory allocated: 31473 bytes/request
 Requests executed: 40000, memory allocated: 31462 bytes/request
@@ -194,7 +201,9 @@ Requests executed: 60000, memory allocated: 31545 bytes/request
 Requests executed: 70000, memory allocated: 31537 bytes/request
 Requests executed: 80000, memory allocated: 31624 bytes/request
 Requests executed: 90000, memory allocated: 31703 bytes/request
-Requests executed: 100000, memory allocated: 31682 bytes/request</pre>
+Requests executed: 100000, memory allocated: 31682 bytes/request
+```
+
 
 As we see, there's some warm-up phase during which allocation rates still go down, but after \~20 K requests, the allocation per request is fairly stable, with a volatility of \~1% when averaged out over 10K requests. This means that this initial phase should be excluded during the actual test.
 
@@ -207,21 +216,22 @@ To emphasize the key part again, this allocation is per *request*, it is indepen
 
 Based on that, the actual test could look like so:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">@Test
+```java
+@Test
 @EnableEvent("jdk.ObjectAllocationInNewTLAB")
 @EnableEvent("jdk.ObjectAllocationOutsideTLAB")
 public void retrieveTodo() throws Exception {
   Random r = new Random();
   HttpClient client = HttpClient.newBuilder().build();
 
-  for (int i = 1; i&lt;= 20_000; i++) { // 1
+  for (int i = 1; i<= 20_000; i++) { // 1
     executeRequest(r, client);
   }
 
   jfrEvents.awaitEvents();
   jfrEvents.reset();
 
-  for (int i = 1; i&lt;= 10_000; i++) { // 2
+  for (int i = 1; i<= 10_000; i++) { // 2
     executeRequest(r, client);
   }
 
@@ -233,7 +243,9 @@ public void retrieveTodo() throws Exception {
       .sum();
 
   assertThat(sum / 10_000).isLessThan(33_000); // 3
-}</pre>
+}
+```
+
 
 |-----|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | *1* | Warm-up phase                                                                                                                                                                                                                                                                               |
@@ -242,18 +254,24 @@ public void retrieveTodo() throws Exception {
 
 Now let's assume we've wrapped up the initial round of work on this application, and its tests have been passing on CI for a while. One day, the `retrieveTodo()` performance test method fails though:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">java.lang.AssertionError:
+```
+java.lang.AssertionError:
 Expecting:
- &lt;388370L&gt;
+ <388370L>
 to be less than:
- &lt;33000L&gt;</pre>
+ <33000L>
+```
+
 
 Ugh, it's suddenly allocating about ten times more memory per request than before! What has happened? To find the answer, we can take a look at the test's JFR recording, which JfrUnit persists under *target/jfrunit*:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">ls target/jfrunit
+```
+ls target/jfrunit
 
 dev.morling.demos.quarkus.TodoResourcePerformanceTest-createTodo.jfr
-dev.morling.demos.quarkus.TodoResourcePerformanceTest-retrieveTodo.jfr</pre>
+dev.morling.demos.quarkus.TodoResourcePerformanceTest-retrieveTodo.jfr
+```
+
 
 Let's open the \*.jfr file for the failing test in JDK Mission Control (JMC) in order to analyse all the recorded events (note that the recording will always contain some JfrUnit-internal events which are needed for synchronizing the recording stream and the events exposed to the test).
 
@@ -265,7 +283,8 @@ Interesting, REST Assured loading a Jackson object mapper, what's going on there
 
 So it seems a REST call to another service is made from within the `TodoResource#get(long)` method! At this point we know where to look into the source code of the application:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">@GET
+```java
+@GET
 @Transactional
 @Produces(MediaType.APPLICATION_JSON)
 @Path("/{id}")
@@ -282,7 +301,9 @@ public Response get(@PathParam("id") long id) throws Exception {
   return Response.ok()
       .entity(res)
       .build();
-}</pre>
+}
+```
+
 
 Gasp, it looks like a developer on the team has been taking the microservices mantra a bit too far, and has changed the code so it invokes another service in order to obtain some additional data associated to the user who created the retrieved todo.
 
@@ -294,11 +315,14 @@ Increasing the allocation per request by a factor of ten in the described way qu
 
 It's also worth examining the application's garbage collection behavior. In order to so, you can run the performance test method again, either enabling all the GC-related JFR event types, or by enabling a pre-existing JFR configuration (the JDK comes with two built-in JFR configurations, *default* and *profile*, but you can also create and export them via JMC):
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">@Test
+```java
+@Test
 @EnableConfiguration("profile")
 public void retrieveTodo() throws Exception {
   // ...
-}</pre>
+}
+```
+
 
 Note that the pre-defined configurations imply minimum durations for certain event types; e.g. the I/O events discussed in the next section will only be recorded if they have a duration of 20 ms or longer. Depending on your testing requirements, you may have to adjust and tweak the configuration to be used.
 
@@ -324,7 +348,8 @@ Now let's take a look at assertions on database I/O, as the amount of data fetch
 
 So how could such test look like for our `GET /todo/{id}` API call? The general approach is the same as before with memory allocations: first define a baseline of the bytes read and written by invoking the API under test for a given number of executions. Once that's done, you can implement the actual test, including an assertion on the expected number of bytes read or written:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">@Test
+```java
+@Test
 @EnableEvent(value="jdk.SocketRead", stackTrace=INCLUDED) // 1
 @EnableEvent(value="jdk.SocketWrite", stackTrace=INCLUDED)
 public void retrieveTodo() throws Exception {
@@ -332,7 +357,7 @@ public void retrieveTodo() throws Exception {
   HttpClient client = HttpClient.newBuilder()
       .build();
 
-  for (int i = 1; i&lt;= ITERATIONS; i++) {
+  for (int i = 1; i<= ITERATIONS; i++) {
     executeRequest(r, client);
   }
 
@@ -351,7 +376,7 @@ public void retrieveTodo() throws Exception {
 
 private boolean isDatabaseIoEvent(RecordedEvent re) { // 4
   return ((re.getEventType().getName().equals("jdk.SocketRead") ||
-      re.getEventType().getName().equals("jdk.SocketWrite")) &amp;&amp;
+      re.getEventType().getName().equals("jdk.SocketWrite")) &&
       re.getInt("port") == databasePort);
 }
 
@@ -359,7 +384,9 @@ private long getBytesReadOrWritten(RecordedEvent re) { // 5
   return re.getEventType().getName().equals("jdk.SocketRead") ?
       re.getLong("bytesRead") :
       re.getLong("bytesWritten");
-}</pre>
+}
+```
+
 
 |-----|----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | *1* | Enable the `jdk.SocketRead` and `jdk.SocketWrite` event types; by default, those don't contain the stacktrace for the events, so that needs to be enabled explicitly |
@@ -370,20 +397,26 @@ private long getBytesReadOrWritten(RecordedEvent re) { // 5
 
 Now let's again assume that after some time the test begins to fail. This time it's the assertion on the number of executed reads and writes:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">AssertionFailedError:
+```
+AssertionFailedError:
 Expecting:
- &lt;18L&gt;
+ <18L>
 to be equal to:
- &lt;4L&gt;
-but was not.</pre>
+ <4L>
+but was not.
+```
+
 
 Also the number of bytes read and written has substantially increased:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">java.lang.AssertionError:
+```
+java.lang.AssertionError:
 Expecting:
- &lt;1117L&gt;
+ <1117L>
 to be less than:
- &lt;250L&gt;</pre>
+ <250L>
+```
+
 
 That's definitely something to look into. So let's open the recording of the failed test in Flight Recorder and take a look at the socket read and write events. Thanks to enabling stacktraces for the two JFR event types we can quite quickly identify the events asssociated to an invocation of the `GET /todo/{id}` API:  
 [![Socket read and write events after the performance regression](https://www.morling.dev/images/continuous_perf_testing_socket_regression.png "Socket read and write events after the performance regression")](https://www.morling.dev/images/continuous_perf_testing_socket_regression.png)
@@ -392,7 +425,8 @@ At this point, some familiarity with the application in question will come in ha
 
 In reality, comparing with the latest version and a look into the git history of that class could confirm that there's a new attribute storing an image (perhaps not a best practice to do so ;):
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">@Entity
+```java
+@Entity
 public class Todo extends PanacheEntity {
 
   public String title;
@@ -401,7 +435,9 @@ public class Todo extends PanacheEntity {
 
   @Lob // 1
   public byte[] image;
-}</pre>
+}
+```
+
 
 |-----|------------------------|
 | *1* | This looks suspicious! |

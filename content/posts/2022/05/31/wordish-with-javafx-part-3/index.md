@@ -95,13 +95,14 @@ Class WordStats stores data such as games played, total wins, current streak, ma
 
 The GameStatus singleton class has a private constructor and a public static `getInstance()` method. Multiple calls to `getInstance()` return the same object each time. This ensures multiple controller objects access the same data.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="false" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public class GameStatus {
+```java
+public class GameStatus {
 
     private static GameStatus instance = null;
 
-    private List&lt;LetterState&gt;letterState = new ArrayList&lt;&gt;();
-    private Map&lt;String, LetterStyle.DisplayType&gt; keyBoardState = 
-               new HashMap&lt;&gt;();
+    private List<LetterState>letterState = new ArrayList<>();
+    private Map<String, LetterStyle.DisplayType> keyBoardState = 
+               new HashMap<>();
     private final WordStats wordStats = new WordStats();
 
     private GameStatus() {}
@@ -114,11 +115,16 @@ The GameStatus singleton class has a private constructor and a public static `ge
     }
     // setters and getters
       . . .
-}</pre>
+}
+```
+
 
 In both **WordishController.java** and **StatsController.java**, we access the shared GameStatus instance with the following.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="false" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">private static final GameStatus gameStatus = GameStatus.getInstance();</pre>
+```java
+private static final GameStatus gameStatus = GameStatus.getInstance();
+```
+
 
 **Note** : See **[GameStatus.java](https://github.com/gailasgteach/Wordish/blob/master/src/main/java/com/asgteach/model/GameStatus.java)** , **[WordStats.java](https://github.com/gailasgteach/Wordish/blob/master/src/main/java/com/asgteach/model/WordStats.java)** , and **[LetterState.java](https://github.com/gailasgteach/Wordish/blob/master/src/main/java/com/asgteach/model/LetterState.java)** for the above described code. ***Bonus***: LetterState uses the Java 17 record feature.
 
@@ -138,21 +144,27 @@ Even better, you can maintain the state of a JavaFX property based on one or mor
 
 The WordishController uses property binding to maintain the disabled state of its buttons. For example, the top-level Information and Bar Chart buttons' disable property depends on the `gameReset` property: if the `gameReset` property is false, we disable these buttons, as follows.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="false" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">statsButton.disableProperty().bind(gameReset.not());
-infoButton.disableProperty().bind(gameReset.not());</pre>
+```java
+statsButton.disableProperty().bind(gameReset.not());
+infoButton.disableProperty().bind(gameReset.not());
+```
+
 
 Likewise, we bind the `disable` property of the Enter and Delete buttons and each of the KeyButtons. That is, if either the row is not filled with letters or if the game is over, we disable the Enter button. Similarly, we disable the Delete button if there are no letters to delete or the game is over. And finally, if we're processing the word, the row is filled, or the game is over, we disable the buttons in the virtual keyboard.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="false" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">enterButton.disableProperty().bind(squarenum.lessThan(ROW_FILLED)
+```java
+enterButton.disableProperty().bind(squarenum.lessThan(ROW_FILLED)
             .or(gameOver));
 deleteButton.disableProperty().bind(squarenum.isEqualTo(0)
             .or(gameOver));
 keyLetters.values()
             .stream()
-            .forEach(button -&gt; button.disableProperty()
+            .forEach(button -> button.disableProperty()
             .bind(processingWord
                     .or(squarenum.isEqualTo(ROW_FILLED))
-                    .or(gameOver)));</pre>
+                    .or(gameOver)));
+```
+
 
 **Note** : See **[WordishController.java](https://github.com/gailasgteach/Wordish/blob/master/src/main/java/com/asgteach/WordishController.java)**.
 
@@ -169,10 +181,11 @@ Wordish processes a guess in the `processWord()` method. Its argument is a list 
 
 Here's method `processWord()`, which we discuss below.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="false" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">private void processWord(List&lt;LetterLabel&gt; list) {
+```java
+private void processWord(List<LetterLabel> list) {
       // Grab the letters and build a String
         String guess = list.stream()
-          .map(e -&gt; e.getText())
+          .map(e -> e.getText())
           .reduce("", String::concat);
         wordTally.setGuess(guess);
         wordTally.setTarget(wordData.getTheWord());
@@ -189,7 +202,9 @@ Here's method `processWord()`, which we discuss below.
         doProcessPartial(list);
         doProcessNoMatch(list);
         animateLabelGroup(list);
-}</pre>
+}
+```
+
 
 First, we first collect the individual letters from `list` into a String using `stream()`, `map()`, and `reduce()`.
 
@@ -215,12 +230,13 @@ The third matching method marks any remaining letters as non-matching.
 
 Here's the `doProcessMatching()` method. Note that we configure the class variable `wordTally` *before* calling this method: we set string `guess` to the user's guess word and `target` to the correct answer.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="false" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">private void doProcessMatching(List&lt;LetterLabel&gt; list) {
+```java
+private void doProcessMatching(List<LetterLabel> list) {
         list.stream()
-            .filter(ll -&gt; 
+            .filter(ll -> 
                       wordTally.getGuess().charAt(list.indexOf(ll)) ==  
                         wordTally.getTarget().charAt(list.indexOf(ll)))
-            .forEach(ll -&gt; {
+            .forEach(ll -> {
                       ll.setMatchResult(MATCHING);
                       int index = list.indexOf(ll);                   
                       wordTally.setGuess(
@@ -230,7 +246,9 @@ Here's the `doProcessMatching()` method. Note that we configure the class variab
                        wordTally.getTarget().substring(0, index) +
                         "-" + wordTally.getTarget().substring(index + 1));
                 });
-}</pre>
+}
+```
+
 
 First, we use `stream()` to filter the LetterLabel objects that correspond to matching characters. For the characters that match, we set the LetterLabel property `matchResult` enum to `MATCHING` and replace the corresponding character in both the guess and target words with a hyphen.
 
@@ -240,11 +258,12 @@ Here's the `doProcessPartial()` method. Note that here we start with the updated
 
 To process partial matches, we replace the partial match character in *both* the target and guess words. Notably, these will necessarily have different index values. As before, we update the LetterLabel property `matchResult`, this time to `PARTIALMATCH`.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="false" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">private void doProcessPartial(List&lt;LetterLabel&gt; list) {
+```java
+private void doProcessPartial(List<LetterLabel> list) {
         list.stream()
-         .filter(ll -&gt; wordTally.getGuess().charAt(
+         .filter(ll -> wordTally.getGuess().charAt(
                  list.indexOf(ll)) != '-')
-          .forEach(ll -&gt; {
+          .forEach(ll -> {
               char c = wordTally.getGuess().charAt(list.indexOf(ll));
               if (wordTally.getTarget().contains(Character.toString(c))) {    
                  ll.setMatchResult(PARTIALMATCH);
@@ -258,7 +277,9 @@ To process partial matches, we replace the partial match character in *both* the
                           wordTally.getGuess().substring(index2 + 1));
                }
           });
-}</pre>
+}
+```
+
 
 #### Method `doProcessNoMatch()`
 
@@ -266,11 +287,14 @@ And lastly, here is method `doProcessNoMatch()`. Each LetterLabel corresponding 
 
 At this point, each LetterLabel in the row will have its `matchResult` property to set to one of `MATCHING`, `PARTIALMATCH`, or `NOMATCH`.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="false" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">private void doProcessNoMatch(List&lt;LetterLabel&gt; list) {
+```java
+private void doProcessNoMatch(List<LetterLabel> list) {
         list.stream()
-        .filter(ll -&gt; wordTally.getGuess().charAt(list.indexOf(ll)) != '-')
-        .forEach(ll -&gt; ll.setMatchResult(NOMATCH));
-}</pre>
+        .filter(ll -> wordTally.getGuess().charAt(list.indexOf(ll)) != '-')
+        .forEach(ll -> ll.setMatchResult(NOMATCH));
+}
+```
+
 
 The row is now ready for animation and for displaying the color-coded result maintained by property `letterDisplay`, which we explain in the next section.
 
@@ -292,10 +316,11 @@ With `autoReverse`, the rotation returns to the starting point. Setting the coun
 
 The SequentialTransition performs the animation for each LetterLabel tile, one after the other.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="false" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">private void animateSuccessGroup(List&lt;LetterLabel&gt; list) {
+```java
+private void animateSuccessGroup(List<LetterLabel> list) {
         SequentialTransition seq = new SequentialTransition();
         list.stream()
-          .forEach(ll -&gt; {
+          .forEach(ll -> {
               RotateTransition rotate = new RotateTransition(
                             Duration.millis(100), ll);
               rotate.setAxis(Rotate.Z_AXIS);
@@ -306,7 +331,9 @@ The SequentialTransition performs the animation for each LetterLabel tile, one a
            });
         seq.setDelay(Duration.millis(100));
         seq.play();
-}</pre>
+}
+```
+
 
 #### Method `animateBadWord()`
 
@@ -314,10 +341,11 @@ Next, let's show you `animateBadWord()`. This code animates a row of LetterLabel
 
 The ParallelTransition performs the TranslateTransition on each LetterLabel tile at the same time. This has the effect of moving the entire row back and forth.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="false" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">private void animateBadWord(List&lt;LetterLabel&gt; list) {
+```java
+private void animateBadWord(List<LetterLabel> list) {
    ParallelTransition para = new ParallelTransition();
    list.stream()
-      .forEach(ll -&gt; {
+      .forEach(ll -> {
           TranslateTransition translate1 = new TranslateTransition(
                             Duration.millis(100), ll);
           translate1.setByX(20);
@@ -326,7 +354,9 @@ The ParallelTransition performs the TranslateTransition on each LetterLabel tile
           para.getChildren().add(translate1);
         });
    para.play();
-}</pre>
+}
+```
+
 
 #### Method `animateLabelGroup()`
 
@@ -340,10 +370,11 @@ To do all this, we use a parallel transition to combine the LetterLabel rotation
 
 Of great help in this animation sequence are the calls to `setOnFinished()`, an event handler invoked when a transition completes.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="false" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">private void animateLabelGroup(List&lt;LetterLabel&gt; list) {
+```java
+private void animateLabelGroup(List<LetterLabel> list) {
         SequentialTransition seq = new SequentialTransition();
         list.stream()
-                .forEach(ll -&gt; {
+                .forEach(ll -> {
                     String letterText = ll.getText();
                     FadeTransition fade = new FadeTransition(
                             Duration.millis(100), ll);
@@ -352,7 +383,7 @@ Of great help in this animation sequence are the calls to `setOnFinished()`, an 
                     fade.setToValue(0);
 
                     fade.setDelay(Duration.millis(20));
-                    fade.setOnFinished(x -&gt; {
+                    fade.setOnFinished(x -> {
                         ll.setText("");
                         ll.setLetterDisplay(ll.getMatchResult());
                     });
@@ -361,7 +392,7 @@ Of great help in this animation sequence are the calls to `setOnFinished()`, an 
                             Duration.millis(400), ll);
                     rotate.setAxis(Rotate.X_AXIS);
                     rotate.setByAngle(180);
-                    rotate.setOnFinished(x -&gt; {
+                    rotate.setOnFinished(x -> {
                         ll.setRotate(0);
                         ll.setText(letterText);
                     });
@@ -370,9 +401,11 @@ Of great help in this animation sequence are the calls to `setOnFinished()`, an 
                     para.getChildren().addAll(fade, rotate);
                     seq.getChildren().add(para);
                 });
-        seq.setOnFinished(x -&gt; gameHouseKeeping(list));
+        seq.setOnFinished(x -> gameHouseKeeping(list));
         seq.play();
-}</pre>
+}
+```
+
 
 In the fade transition's `setOnFinished()`, the event handler sets the text to the empty string and sets the `letterDisplay` property. This `letterDisplay` property automatically updates the style (our CSS pseudo-class scaffolding code), so the result of the matching process is now revealed.
 

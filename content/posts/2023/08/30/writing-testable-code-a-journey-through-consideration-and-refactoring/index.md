@@ -29,10 +29,11 @@ The initial implementation might include a method that builds the S3 client, cho
 
 Let's see an example:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public AmazonS3 getAmazonS3Client(
+```java
+public AmazonS3 getAmazonS3Client(
         final String s3AccessKeyId, final String secretAccessKey, final Regions region) {
     final AWSCredentialsProvider credentialsProvider;
-    if (StringUtils.isNotEmpty(s3AccessKeyId) &amp;&amp; StringUtils.isNotEmpty(secretAccessKey)) {
+    if (StringUtils.isNotEmpty(s3AccessKeyId) && StringUtils.isNotEmpty(secretAccessKey)) {
         credentialsProvider =
                 new AWSStaticCredentialsProvider(new BasicAWSCredentials(s3AccessKeyId, secretAccessKey));
     } else {
@@ -43,7 +44,9 @@ Let's see an example:
             .withCredentials(credentialsProvider)
             .withRegion(region)
             .build();
-}</pre>
+}
+```
+
 
 The Process of Refactoring {#h2-1-the-process-of-refactoring}
 -------------------------------------------------------------
@@ -63,7 +66,8 @@ This refactoring process involved several steps:
 
 Here's the refactored code:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">interface AmazonS3ClientFactory {
+```java
+interface AmazonS3ClientFactory {
     AmazonS3 getAmazonS3Client(String s3AccessKeyId, String secretAccessKey, Regions region);
 }
 
@@ -89,13 +93,14 @@ static class DefaultAWSCredentialsProviderChainS3ClientFactory implements Amazon
 
 AmazonS3 getAmazonS3Client(
         final String s3AccessKeyId, final String secretAccessKey, final Regions region) {
-    if (StringUtils.isNotEmpty(s3AccessKeyId) &amp;&amp; StringUtils.isNotEmpty(secretAccessKey)) {
+    if (StringUtils.isNotEmpty(s3AccessKeyId) && StringUtils.isNotEmpty(secretAccessKey)) {
         return new AWSStaticCredentialsProviderS3ClientFactory().getAmazonS3Client(s3AccessKeyId, secretAccessKey, region);
     } else {
         return new DefaultAWSCredentialsProviderChainS3ClientFactory().getAmazonS3Client(s3AccessKeyId, secretAccessKey, region);
     }
 }
-</pre>
+```
+
 
 This refactoring allowed the behaviour to be tested in isolation without having to know the internal details of the Amazon S3 client.
 
@@ -108,20 +113,23 @@ With the code refactored, we can now write unit tests that cover all code paths 
 
 This test ensures that the factory for creating an S3 client with static credentials works correctly.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@Test
+```java
+@Test
 public void shouldUseAWSStaticCredentialsProvider_whenKeysProvided() {
   var factory = new AgentAttackEventS3Operations.AWSStaticCredentialsProviderS3ClientFactory();
   AmazonS3 s3Client = factory.getAmazonS3Client(S3_ACCESS_KEY_ID, S3_SECRET_ACCESS_KEY, REGION);
   assertThat(s3Client).isNotNull();
   assertEquals(REGION.getName(), s3Client.getRegionName());
 }
-</pre>
+```
+
 
 ### Test the Default AWS Credentials Provider Factory {#h3-4-test-the-default-aws-credentials-provider-factory}
 
 This test ensures that the factory for creating an S3 client with the default credentials provider works correctly.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@Test
+```java
+@Test
 public void shouldUseDefaultAWSCredentialsProvider_whenKeysNotProvided() {
   var factory =
       new AgentAttackEventS3Operations.DefaultAWSCredentialsProviderChainS3ClientFactory();
@@ -129,13 +137,15 @@ public void shouldUseDefaultAWSCredentialsProvider_whenKeysNotProvided() {
   assertThat(s3Client).isNotNull();
   assertEquals(REGION.getName(), s3Client.getRegionName());
 }
-</pre>
+```
+
 
 ### Test the Choice of Credentials Provider Based on Input {#h3-5-test-the-choice-of-credentials-provider-based-on-input}
 
 These tests ensure that the correct factory is used based on the presence or absence of access keys.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@Test
+```java
+@Test
 public void shouldUseAWSStaticCredentials_whenKeysNotEmpty() {
   s3Operations.getAmazonS3Client(S3_ACCESS_KEY_ID, S3_SECRET_ACCESS_KEY, REGION);
 
@@ -154,7 +164,8 @@ public void shouldUseDefaultAWSCredentials_whenKeysEmpty() {
   verify(defaultAWSCredentialsProviderChainS3ClientFactory, times(1))
       .getAmazonS3Client(anyString(), anyString(), any(Regions.class));
 }
-</pre>
+```
+
 
 These examples illustrate how refactoring the code to use an interface and separate implementations allows for thorough testing of the logic, including the choice of credentials provider based on the input parameters.
 

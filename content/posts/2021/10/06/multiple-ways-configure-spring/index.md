@@ -53,11 +53,14 @@ Yes, you read that well: you can actually configure beans via a property file. I
 
 We first need to create the relevant property file:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="raw">john.(class)=ch.frankel.blog.Person       # 1
+```
+john.(class)=ch.frankel.blog.Person       # 1
 john.$0=John Doe                          # 2
 jane.(class)=ch.frankel.blog.Person       # 3
 jane.$0=Jane Doe                          # 4
-jane.$1(ref)=john                         # 5</pre>
+jane.$1(ref)=john                         # 5
+```
+
 
 1. Define a new bean with name `john` and of class `Person`
 2. Set the single constructor argument to pass
@@ -67,12 +70,15 @@ jane.$1(ref)=john                         # 5</pre>
 
 Here's the related code snippet:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">var context = new GenericApplicationContext();                // 1
+```java
+var context = new GenericApplicationContext();                // 1
 var factory = context.getDefaultListableBeanFactory();        // 2
 var reader = new PropertiesBeanDefinitionReader(factory);     // 3
 var properties = new ClassPathResource("beans.properties");   // 4
 reader.loadBeanDefinitions(properties);                       // 5
-context.refresh();                                            // 6</pre>
+context.refresh();                                            // 6
+```
+
 
 1. Create a new empty context
 2. Get its underlying bean factory
@@ -86,22 +92,28 @@ XML {#h2-2-xml}
 
 XML is the way most developers think about when they configure a Spring application. It has been available for ages and still is today. To use it, we only have to transform the previous property file to XML format:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="xml">&lt;beans xmlns="http://www.springframework.org/schema/beans"
+```xml
+<beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
-           http://www.springframework.org/schema/beans/spring-beans.xsd"&gt;
-    &lt;bean id="john" class="ch.frankel.blog.Person"&gt;
-        &lt;constructor-arg value="John Doe" /&gt;
-    &lt;/bean&gt;
-    &lt;bean id="jane" class="ch.frankel.blog.Person"&gt;
-        &lt;constructor-arg value="Jane Doe" /&gt;
-        &lt;constructor-arg ref="john" /&gt;
-    &lt;/bean&gt;
-&lt;/beans&gt;</pre>
+           http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <bean id="john" class="ch.frankel.blog.Person">
+        <constructor-arg value="John Doe" />
+    </bean>
+    <bean id="jane" class="ch.frankel.blog.Person">
+        <constructor-arg value="Jane Doe" />
+        <constructor-arg ref="john" />
+    </bean>
+</beans>
+```
+
 
 Because of its widespread usage, configuring a context and populating it with beans can be implemented in a one-liner:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">var context = new ClassPathXmlApplicationContext("beans.xml");   // 1</pre>
+```java
+var context = new ClassPathXmlApplicationContext("beans.xml");   // 1
+```
+
 
 1. Create the application context, parse the XML file, create the bean definitions, and refresh the context!
 
@@ -110,16 +122,22 @@ Groovy DSL {#h2-3-groovy-dsl}
 
 One can alternatively also use Groovy. For that, Spring provides a dedicated .
 
-<pre class="EnlighterJSRAW" data-enlighter-language="groovy">import ch.frankel.blog.Person
+```groovy
+import ch.frankel.blog.Person
 
 beans {
     john Person, 'John Doe'
     jane Person, 'Jane Doe', john
-}</pre>
+}
+```
+
 
 To use it for configuration is also a one-liner:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">var context = new GenericGroovyApplicationContext("beans.groovy");</pre>
+```java
+var context = new GenericGroovyApplicationContext("beans.groovy");
+```
+
 
 Just remember that Groovy is not a first-class citizen in the Spring ecosystem anymore.
 
@@ -130,7 +148,8 @@ When Spring introduced self-annotated classes not long after Java 5, people cons
 
 Anyway, here's how we can configure Spring for the above model:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">@Component                                              // 1
+```java
+@Component                                              // 1
 class John extends Person {
     public John() {
         super("John Doe");
@@ -142,7 +161,9 @@ class Jane extends Person {
     public Jane(John john) {                            // 2
         super("Jane Doe", john);
     }
-}</pre>
+}
+```
+
 
 1. Mark the class for registration. Spring will instantiate a bean named after the class name, unqualified and uncapitalized
 2. Inject the bean of class `John`. Alternatively, we could inject *by name* by having the parameter `@Qualifier("john") person`. Note that since it's auto-wiring, we need to reduce the number of candidates to *one* , and there are two `Person` beans.
@@ -151,7 +172,10 @@ It is the most complex code of all, as we want to create two instances of the sa
 
 To create the context with self-annotated classes is straightforward:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">var context = new AnnotationConfigApplicationContext(John.class, Jane.class);</pre>
+```java
+var context = new AnnotationConfigApplicationContext(John.class, Jane.class);
+```
+
 
 Note that you need to explicitly list all the necessary classes you want to be part of the context. Spring Boot makes it easier for you by implementing *classpath scanning*, so you don't need explicit listing.
 
@@ -165,7 +189,8 @@ As mentioned above, self-annotated classes have a couple of downsides:
 
 To fix those issues, we can keep using annotations but move them to a dedicated class. This class plays the same role as the former `beans.xml`.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">@Configuration                                                 // 1
+```java
+@Configuration                                                 // 1
 public class AppConfiguration {
 
     @Bean                                                      // 2
@@ -177,7 +202,9 @@ public class AppConfiguration {
     public Person jane(@Qualifier("john") Person person) {     // 3
         return new Person("Jane Doe", person);
     }
-}</pre>
+}
+```
+
 
 1. Mark the class as a configuration class
 2. The container will register the return value of this method as a bean
@@ -185,14 +212,18 @@ public class AppConfiguration {
 
 As usual, it's straightforward to create a context from the above configuration class:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">var context = new AnnotationConfigApplicationContext(ClassConfigurator.class);</pre>
+```java
+var context = new AnnotationConfigApplicationContext(ClassConfigurator.class);
+```
+
 
 Kotlin DSL {#h2-6-kotlin-dsl}
 -----------------------------
 
 The Kotlin DSL is the latest newcomer to the available alternatives. It avoids the usage of annotations.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="kotlin">GenericApplicationContext().apply {             // 1
+```kotlin
+GenericApplicationContext().apply {             // 1
     beans {                                     // 2
         bean("john") {                          // 3
             Person("John Doe")
@@ -202,7 +233,9 @@ The Kotlin DSL is the latest newcomer to the available alternatives. It avoids t
         }
     }.initialize(this)                          // 5
     refresh()                                   // 6
-}</pre>
+}
+```
+
 
 1. Instantiate a new context
 2. Create the bean definition DSL
@@ -222,7 +255,8 @@ All the previous configuration alternatives provide an abstraction layer over be
 
 Let's first define a specialized bean definition:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public class PersonBeanD extends GenericBeanDefinition {
+```java
+public class PersonBeanD extends GenericBeanDefinition {
 
     public PersonBeanDefinition(String name) {
         this(name, null);
@@ -237,7 +271,9 @@ Let's first define a specialized bean definition:
         }
         setConstructorArgumentValues(arguments);                                  // 3
     }
-}</pre>
+}
+```
+
 
 1. Set the bean class
 2. Set the argument and its type
@@ -245,10 +281,13 @@ Let's first define a specialized bean definition:
 
 We can now create the context:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">var context = new GenericApplicationContext();                               // 1
+```java
+var context = new GenericApplicationContext();                               // 1
 context.registerBeanDefinition("john", new PersonBeanD("John Doe"));         // 2
 context.registerBeanDefinition("jane", new PersonBeanD("Jane Doe", "john")); // 2
-context.refresh();                                                           // 3</pre>
+context.refresh();                                                           // 3
+```
+
 
 1. Create the context
 2. Register the bean definition
@@ -265,10 +304,13 @@ Spring provides a simple API for simple bean definitions, so we don't need to cr
 
 Here's the code to create the sample configuration:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">var context = new GenericApplicationContext();
+```java
+var context = new GenericApplicationContext();
 context.registerBean("john", Person.class, "John Doe");
 context.registerBean("jane", Person.class, "Jane Doe", "john");
-context.refresh();</pre>
+context.refresh();
+```
+
 
 Conclusion {#h2-9-conclusion}
 -----------------------------

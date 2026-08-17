@@ -91,7 +91,8 @@ The `ExecutorRecord` has evolved into a full-fledged `BoxExecutor` **class** wit
 
 ### Comprehensive Health Reporting: {#h3-8-comprehensive-health-reporting}
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">// Get executor and check its comprehensive stats including health
+```java
+// Get executor and check its comprehensive stats including health
 executor = asyncService.getExecutor( "myExecutor" )
 stats = executor.getStats()
 
@@ -110,7 +111,8 @@ isHealthy = executor.isHealthy()  // returns true/false
 // Detailed health analysis
 healthReport = stats.healthReport
 // Includes: status, summary, issues, recommendations, alerts, insights
-</pre>
+```
+
 
 The new Executor Health Report provides:
 
@@ -135,14 +137,16 @@ A new `MiniConsole` **framework** brings sophisticated terminal interaction capa
 * **Command history** with shortcuts (`!!`, `!n`)
 * **Color printing utilities** for rich terminal output
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">// REPL now includes smart syntax highlighting
-📦 BoxLang&gt; arrayMap( [ 1, 2, 3 ], ( x ) =&gt; x * 2 )
+```java
+// REPL now includes smart syntax highlighting
+📦 BoxLang> arrayMap( [ 1, 2, 3 ], ( x ) => x * 2 )
 // BIFs in bright green, functions in purple
 
 // Tab completion for components and BIFs
-📦 BoxLang&gt; array&lt;TAB&gt;
+📦 BoxLang> array<TAB>
 // Shows: arrayMap, arrayFilter, arrayEach, arrayReduce...
-</pre>
+```
+
 
 The REPL is now a joy to use, making interactive BoxLang development feel modern and productive.
 
@@ -151,7 +155,8 @@ The REPL is now a joy to use, making interactive BoxLang development feel modern
 
 Modules now support a `publicMapping` convention for exposing module assets publicly, in addition to the existing internal `mapping` property.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">// In ModuleConfig.bx
+```java
+// In ModuleConfig.bx
 component {
     // Simple string - creates /bxModules/{moduleName}/public mapping
     this.publicMapping = "public"
@@ -171,7 +176,8 @@ component {
         usePrefix : false
     }
 }
-</pre>
+```
+
 
 This makes it easier to organize and serve module assets like CSS, JavaScript, and images while keeping internal paths separate.
 
@@ -197,7 +203,8 @@ This makes it easier to organize and serve module assets like CSS, JavaScript, a
 
 Built-in functions and components now include **runtime descriptions** via the `description` attribute in `@BoxBIF` and `@BoxComponent` annotations:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">@BoxBIF(
+```java
+@BoxBIF(
     description = "Returns the length of a string, array, struct, or query"
 )
 public class Len extends BIF {
@@ -211,7 +218,8 @@ public class Len extends BIF {
 public class Http extends Component {
     // ...
 }
-</pre>
+```
+
 
 This improves introspection and makes auto-generated documentation more informative.
 

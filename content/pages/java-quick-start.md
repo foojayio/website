@@ -27,7 +27,7 @@ d. [Install Java (Linux)](https://foojay.io/java-quick-start/install-java/instal
 
 e. [Find Another Java Version](https://foojay.io/java-quick-start/install-java/find-another-java-version/)
 
-*** ** * ** ***
+
 
 2. Get Started {#2-get-started}
 -------------------------------
@@ -56,7 +56,7 @@ j. [Using Streams](https://foojay.io/java-quick-start/quick-start-tutorial/using
 
 k. [What's Next?](https://foojay.io/java-quick-start/quick-start-tutorial/whats-next/) (00:00:035)
 
-*** ** * ** ***
+
 
 3. Next Steps {#3-next-steps}
 -----------------------------

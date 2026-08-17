@@ -31,7 +31,8 @@ The usage of instanceOf {#h2-0-the-usage-of-instanceof}
 
 In Java, we've been using `instanceOf` conditional statements, type casting, and temporary assignments for that purpose.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">public String processElement(Object element) {
+```
+public String processElement(Object element) {
   String result;
 
   if (element instanceOf String) { 
@@ -43,7 +44,9 @@ In Java, we've been using `instanceOf` conditional statements, type casting, and
   }
 
   return result + " value";
-}</pre>
+}
+```
+
 
 This involves a lot of boilerplate code which is not very readable. But even more important, it allows coding errors to remain hidden. In this structure, nothing is ensuring we are assigning a value to the intermediate variable `result` and that could mean having an empty value at the end.
 
@@ -54,7 +57,8 @@ Pattern Matching {#h2-1-pattern-matching}
 
 In Java 16 an improvement was added in order to reduce code repetition and boilerplate: [Pattern Matching](https://openjdk.org/projects/amber/design-notes/patterns/pattern-matching-for-java "Pattern Matching") for `instanceOf` cases. With this approach, the cast is included in the condition which is easier to read, reducing the boilerplate code.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">public String processElement(Object element) {
+```
+public String processElement(Object element) {
   String result;
 
   if (element instanceOf String s) { 
@@ -66,7 +70,9 @@ In Java 16 an improvement was added in order to reduce code repetition and boile
   }
 
   return result + " value";
-}</pre>
+}
+```
+
 
 With this change, we avoid the need for an extra type-cast, that is making the code harder to read, and even can involve more errors.
 
@@ -77,7 +83,8 @@ Pattern matching in switch cases {#h2-2-pattern-matching-in-switch-cases}
 
 In order to improve the readability a bit and reduce complexity we can use a switch/case statement. With this approach, we get rid of the "else if" clauses, making it clear that cases are exclusive and have different branches.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">public String processElement(Object element) {
+```
+public String processElement(Object element) {
   String result;
 
   switch (element) {
@@ -90,7 +97,9 @@ In order to improve the readability a bit and reduce complexity we can use a swi
   }
 
   return result + " value";
-}</pre>
+}
+```
+
 
 But this code is still hard to read, I know. And it's still weak in terms of errors that can happen by missing one break or by not assigning the value to the intermediate variable.
 
@@ -101,23 +110,29 @@ In order to fix this situation we can use a very interesting feature included in
 
 Also, we reduce the [cognitive complexity](https://www.baeldung.com/java-cognitive-complexity "cognitive complexity") of the resulting code by half and this positively impacts the readability and maintainability of the code. We need to keep in mind that [too high complexity](https://rules.sonarsource.com/java/RSPEC-3776/ "too high complexity") is one of the [most common issues detected by Sonar tools](https://www.sonarsource.com/blog/top-issues-in-java-projects "most common issues detected by Sonar tools") in all the thousands of projects analyzed.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">return switch (obj) {
-    case Person person-&gt; String.format("Person %s", person.getName());
-    case String s -&gt; String.format("Str %s", s);
-    default -&gt; obj.toString();
-  } + " value";</pre>
+```
+return switch (obj) {
+    case Person person-> String.format("Person %s", person.getName());
+    case String s -> String.format("Str %s", s);
+    default -> obj.toString();
+  } + " value";
+```
+
 
 With this approach, we have a very clear idea of what the code is doing and also reduce the risk of errors.
 
 If you want to calculate the cognitive complexity of your code, you can use the ["Code complexity" plugin](https://plugins.jetbrains.com/plugin/21667-code-complexity "Code complexity plugin") (in IntelliJ) that will give you a hint of your method's complexity.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">private void getStringsUsingInstanceOfIfs(Object user) { @ simple(25%)
+```
+private void getStringsUsingInstanceOfIfs(Object user) { @ simple(25%)
     ...
 }
 
 private void getStringsUsingSwitchExpressionPattern(Object user) { @ simple(0%)
     ...
-}</pre>
+}
+```
+
 
 The Sonar Java analyzer will warn you if your code has too [high complexity](https://rules.sonarsource.com/java/RSPEC-3776 "high complexity"), and also will suggest using the [switch pattern matching approach](https://rules.sonarsource.com/java/RSPEC-6201 "switch pattern matching approach") and the [switch expression](https://rules.sonarsource.com/java/RSPEC-5194 "switch expression") in order to improve readability.
 

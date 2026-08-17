@@ -51,9 +51,10 @@ With my software architect hat on, I'll search for a JVM library that does it. B
 
 It's just a matter of integrating the library into my code:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="kotlin">val beans = beans {
+```kotlin
+val beans = beans {
     bean {
-        val props = ref&lt;BucketProperties&gt;()                  //1
+        val props = ref<BucketProperties>()                  //1
         BucketFactory().create(                              //2
             props.size,
             props.refresh.tokens,
@@ -73,7 +74,7 @@ class HelloHandler(private val bucket: Bucket) {             //3
 
     private suspend fun rateLimit(                           //4
         req: ServerRequest,
-        f: suspend (ServerRequest) -&gt; ServerResponse
+        f: suspend (ServerRequest) -> ServerResponse
     ) = if (bucket.tryConsume(1))
             f.invoke(req)
         else
@@ -82,7 +83,9 @@ class HelloHandler(private val bucket: Bucket) {             //3
     suspend fun hello(req: ServerRequest) = rateLimit(req) { //5
         ServerResponse.ok().bodyValueAndAwait("Hello World!")
     }
-}</pre>
+}
+```
+
 
 1. Get configuration properties from a `@ConfigurationProperties`-annotated class
 2. Create a properly-configured bucket
@@ -113,7 +116,8 @@ We can simplify the code by removing Bucket4J and configuring an API Gateway in 
 
 Here's how to do it with [Apache APISIX](https://apisix.apache.org/).
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml">consumers:
+```yaml
+consumers:
   - username: joe
     plugins:
       key-auth:                               #1
@@ -134,7 +138,9 @@ routes:
         burst: 0
         key: consumer_name                    #3
         rejected_code: 429
-      key-auth: ~                             #1</pre>
+      key-auth: ~                             #1
+```
+
 
 1. We use a simple HTTP header for authentication for demo purposes. Real-world apps would use OAuth2.0 or OpenID Connect, but the principle is the same
 2. Rate limiting plugin

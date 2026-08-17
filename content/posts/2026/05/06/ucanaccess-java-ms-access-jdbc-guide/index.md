@@ -32,7 +32,7 @@ Microsoft Access databases are everywhere. Decades of `.mdb` and `.accdb` files 
 
 **UCanAccess** puts an end to that. It is an open-source, pure-Java JDBC driver that lets you read and write Microsoft Access databases (`.mdb` and `.accdb`) just like any other SQL database --- no native drivers, no Windows dependency, no friction.
 
-*** ** * ** ***
+
 
 A Brief History {#h2-0-a-brief-history}
 ---------------------------------------
@@ -41,7 +41,7 @@ UCanAccess was originally created by Marco Amadei and Gord Thompson and quickly 
 
 The current fork is not just a maintenance release. It is an active effort to modernize the codebase: adopting JUnit 5, enforcing strict clean code standards with Checkstyle and PMD, keeping dependencies minimal and CVE-free, and continuously improving test coverage.
 
-*** ** * ** ***
+
 
 What Problems Does It Solve? {#h2-1-what-problems-does-it-solve}
 ----------------------------------------------------------------
@@ -58,7 +58,7 @@ Because UCanAccess is 100% Java with zero native code, it runs on Linux, macOS, 
 
 UCanAccess is not just for bespoke Java applications. Software environments that speak JDBC --- such as **LibreOffice Base** , **OpenOffice** , **DbVisualizer** , **SQuirreL SQL** , **DBeaver** , and **MATLAB** --- can connect to Access files through UCanAccess without any extra configuration.
 
-*** ** * ** ***
+
 
 Tech Stack \& Requirements {#h2-5-tech-stack-requirements}
 ----------------------------------------------------------
@@ -70,7 +70,7 @@ Tech Stack \& Requirements {#h2-5-tech-stack-requirements}
   * [HSQLDB](http://hsqldb.org/): provides the in-memory SQL engine for query translation
 * **License**: Apache License 2.0
 
-*** ** * ** ***
+
 
 Getting Started {#h2-6-getting-started}
 ---------------------------------------
@@ -79,21 +79,28 @@ Getting Started {#h2-6-getting-started}
 
 **Maven (`pom.xml`):**
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&lt;dependency&gt;
-    &lt;groupId&gt;io.github.spannm&lt;/groupId&gt;
-    &lt;artifactId&gt;ucanaccess&lt;/artifactId&gt;
-    &lt;version&gt;5.1.5&lt;/version&gt;
-&lt;/dependency&gt;</pre>
+```
+<dependency>
+    <groupId>io.github.spannm</groupId>
+    <artifactId>ucanaccess</artifactId>
+    <version>5.1.5</version>
+</dependency>
+```
+
 
 **Gradle (Kotlin DSL):**
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">implementation("io.github.spannm:ucanaccess:5.1.5")</pre>
+```
+implementation("io.github.spannm:ucanaccess:5.1.5")
+```
+
 
 ### Connect and Query {#h3-8-connect-and-query}
 
 Connecting is as simple as using any standard JDBC driver. No class registration or native driver setup is required:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">import java.sql.*;
+```
+import java.sql.*;
 
 // path to that legacy file someone "forgot" to migrate in 2010
 String url = "jdbc:ucanaccess:///data/legacy_system_final_v2_REAL.accdb";
@@ -108,7 +115,9 @@ try (Connection conn = DriverManager.getConnection(url);
     }
 } catch (SQLException ex) {
     System.err.println("Database access failed: " + ex);
-}</pre>
+}
+```
+
 
 No class registration, no native driver setup.  
 
@@ -118,7 +127,8 @@ Standard `DriverManager.getConnection()` is all you'll need.
 
 UCanAccess supports full **DML** (Data Manipulation Language) --- both reads and writes. Even some **DDL** operations like `ALTER TABLE` are supported:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">String insert = "INSERT INTO passwd (Id, UserName, Password) VALUES (?, ?, ?)";
+```
+String insert = "INSERT INTO passwd (Id, UserName, Password) VALUES (?, ?, ?)";
 
 try (Connection conn = DriverManager.getConnection(url);
      PreparedStatement ps = conn.prepareStatement(insert)) {
@@ -133,7 +143,9 @@ try (Connection conn = DriverManager.getConnection(url);
     System.out.println(String.format("Successfully updated %d row", rowsAffected));
 } catch (SQLException ex) {
     System.err.println("Failed to update credentials: " + ex);
-}</pre>
+}
+```
+
 
 ### Access-Specific Functions {#h3-10-access-specific-functions}
 
@@ -143,7 +155,7 @@ One common pain point when working with Access queries is the use of Access-spec
 
 If you are integrating UCanAccess into a tool that does not use Maven --- such as LibreOffice Base or SQuirreL SQL --- the project ships a so-called **Uber JAR** : a single self-contained archive with all dependencies bundled in. You can download it directly from [Maven Central](https://central.sonatype.com/artifact/io.github.spannm/ucanaccess) and drop it onto the classpath without any further setup.
 
-*** ** * ** ***
+
 
 Quality \& Maintenance {#h2-12-quality-maintenance}
 ---------------------------------------------------
@@ -155,7 +167,7 @@ The active fork maintains a high bar for code quality:
 * **Security**: Regular dependency updates keep the library free of known CVEs.
 * **Distribution**: Every release is published to Maven Central for straightforward integration.
 
-*** ** * ** ***
+
 
 Get Involved {#h2-13-get-involved}
 ----------------------------------
@@ -164,6 +176,6 @@ UCanAccess lives at [github.com/spannm/ucanaccess](https://github.com/spannm/uca
 
 If UCanAccess has helped you keep a legacy system running or simplified a migration, consider dropping a ⭐ on GitHub --- it helps the project stay visible and signals to the community that this bridge is alive and well-maintained.
 
-*** ** * ** ***
+
 
 *UCanAccess is licensed under the Apache License 2.0 and available on [Maven Central](https://central.sonatype.com/artifact/io.github.spannm/ucanaccess).*

@@ -63,17 +63,23 @@ We used a YAML file for our Neo4j microservice, so we will stick with this same 
 
 A sample of the new MongoDB file is in the `microservices-java-config` folder of the [Github project](https://github.com/JMHReif/microservices-level8).
 
-<pre class="EnlighterJSRAW" data-enlighter-language="text">spring:
+```
+spring:
   data:
     mongodb:
       uri:
-      database:</pre>
+      database:
+```
+
 
 We need to fill in the values for our MongoDB instance in place of the dummy URL and database shown above. Then, we need to save the file and check it into [git](https://git-scm.com/) by running the next statements from the command line.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="shell">microservices-java-config % git init
+```bash
+microservices-java-config % git init
 microservices-java-config % git add
-microservices-java-config % git commit -am "Create mongodb yaml"</pre>
+microservices-java-config % git commit -am "Create mongodb yaml"
+```
+
 
 Let's test our config server application with the new configuration file!
 
@@ -97,37 +103,43 @@ Service1 - modifications {#_service1_modifications}
 
 Following what we did with our Neo4j app, we need to add a dependency for the Spring Cloud Config client. Open service1's `pom.xml` file and add the following items:
 
-<pre class="EnlighterJSRAW">&lt;properties&gt;
+```
+<properties>
 	//java version property
-	&lt;spring-cloud.version&gt;2021.0.3&lt;/spring-cloud.version&gt;
-&lt;/properties&gt;
-&lt;dependencies&gt;
+	<spring-cloud.version>2021.0.3</spring-cloud.version>
+</properties>
+<dependencies>
 	//other dependencies
-	&lt;dependency&gt;
-		&lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;
-		&lt;artifactId&gt;spring-cloud-starter-config&lt;/artifactId&gt;
-	&lt;/dependency&gt;
-&lt;/dependencies&gt;
-&lt;dependencyManagement&gt;
-	&lt;dependencies&gt;
-		&lt;dependency&gt;
-			&lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;
-			&lt;artifactId&gt;spring-cloud-dependencies&lt;/artifactId&gt;
-			&lt;version&gt;${spring-cloud.version}&lt;/version&gt;
-			&lt;type&gt;pom&lt;/type&gt;
-			&lt;scope&gt;import&lt;/scope&gt;
-		&lt;/dependency&gt;
-	&lt;/dependencies&gt;
-&lt;/dependencyManagement&gt;</pre>
+	<dependency>
+		<groupId>org.springframework.cloud</groupId>
+		<artifactId>spring-cloud-starter-config</artifactId>
+	</dependency>
+</dependencies>
+<dependencyManagement>
+	<dependencies>
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-dependencies</artifactId>
+			<version>${spring-cloud.version}</version>
+			<type>pom</type>
+			<scope>import</scope>
+		</dependency>
+	</dependencies>
+</dependencyManagement>
+```
+
 
 On the [third line of the above code](https://github.com/JMHReif/microservices-level8/blob/main/service1/pom.xml#L18), we add a property for the Spring Cloud Version, which gives a single location for the pom to source this value. In the dependencies section, we need to add the config client dependency ([seventh line](https://github.com/JMHReif/microservices-level8/blob/main/service1/pom.xml#L34)). Lastly, we add a dependency management section ([line twelve](https://github.com/JMHReif/microservices-level8/blob/main/service1/pom.xml#L50)) to handle versioning of Spring Cloud.
 
 Let's move to the application properties in the `src/main/resources` folder.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="text">server.port=8081
+```
+server.port=8081
 
 spring.application.name=mongo-client
-spring.config.import=configserver:http://localhost:8888/</pre>
+spring.config.import=configserver:http://localhost:8888/
+```
+
 
 The port property stays the same, but we remove the database credential properties because those are now hosted by the config server. The next two properties specify the application name and location of the config server. Our application name and the name of our config file MUST match, so the `spring.application.name` needs to be `mongo-client` (because config file name is `mongo-client.yaml`). Our config server is running locally and on the default config server port, so we use the `localhost:8888` for the last property's value.
 

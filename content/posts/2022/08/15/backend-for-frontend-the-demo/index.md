@@ -52,13 +52,16 @@ In the demo, I'm using Python and Flask, but the underlying technology is irrele
 
 The initial situation is a monolith. The monolith offers an endpoint for each data source, and a single aggregating endpoint for all of them:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="python">@app.route("/")
+```python
+@app.route("/")
 def home():
     return {
       'products': products,       #1
       'news': news,               #1
       'info': debug               #1
-  }</pre>
+  }
+```
+
 
 1. Somehow get the data internally, *e.g.*, from the database
 
@@ -76,24 +79,30 @@ At one point, the organization decides to migrate to a microservices architectur
 
 Here's the code for each microservice:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="python">@app.route("/info")
+```python
+@app.route("/info")
 def info():
     return debug                 #1
 
 @app.route("/products")
 def get_products():
-    return jsonify(products)     #2</pre>
+    return jsonify(products)     #2
+```
+
 
 1. Each microservice has its own `debug` endpoint
 2. The payload is not an object anymore but an array
 
-<pre class="EnlighterJSRAW" data-enlighter-language="python">@app.route("/info")
+```python
+@app.route("/info")
 def info():
     return debug                 #1
 
 @app.route("/news")
 def get_news():
-    return jsonify(news)         #1</pre>
+    return jsonify(news)         #1
+```
+
 
 1. As above
 
@@ -104,7 +113,8 @@ Dedicated backend-for-frontend {#h2-3-dedicated-backend-for-frontend}
 
 Because of the issues highlighted above, a solution is to develop one application that does the aggregation and filtering. There should be one for each client type, and it should be cared for by the same team as the client. Again, for this demo, it's enough to have a single one that only does aggregation.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="python">@app.route("/")
+```python
+@app.route("/")
 def home():
     products = requests.get(products_uri).json()            #1
     catalog_info = requests.get(catalog_info_uri).json()    #2
@@ -117,7 +127,9 @@ def home():
           'catalog': catalog_info,
           'news': news_info
       }
-    }</pre>
+    }
+```
+
 
 1. Get data
 2. Get debug info
@@ -134,18 +146,22 @@ First things first, there's no generic way to achieve the result we want. For th
 
 First, we need to expose a dedicated endpoint, *e.g.* , `/bff/desktop` or `/bff/phone`. APISIX allows such *virtual* endpoints via the [public-api](https://apisix.apache.org/docs/apisix/plugins/public-api/) plugin. Next, we need to develop our plugin, `bff`. Here's the configuration snippet:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml">routes:
+```yaml
+routes:
   - uri: /                     #1
     plugins:
       bff: ~                   #2
-      public-api: ~            #2</pre>
+      public-api: ~            #2
+```
+
 
 1. For demo purposes, I preferred to set it at the root instead of `/bff/*`
 2. Declare the two plugins. Note that I'm using the [stand-alone mode](https://apisix.apache.org/docs/apisix/stand-alone/).
 
 First, we need to describe the plugin and not forget to return it at the end of the file:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="lua">local plugin_name = 'bff-plugin'
+```lua
+local plugin_name = 'bff-plugin'
 
 local _M = {                           --1
     version = 1.0,
@@ -154,7 +170,9 @@ local _M = {                           --1
     schema = {},                       --3
 }
 
-return _M                              --4</pre>
+return _M                              --4
+```
+
 
 1. The table needs to be named `_M`
 2. In this scenario, `priority` is irrelevant as no other plugins are involved (but `public_api`)
@@ -163,7 +181,8 @@ return _M                              --4</pre>
 
 A plugin that has a public API needs to define an `api()` function returning an object describing matching HTTP methods, the matching URI, and the handler function.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="lua">function _M.api()
+```lua
+function _M.api()
     return {
         {
             methods = { 'GET' },
@@ -171,7 +190,9 @@ A plugin that has a public API needs to define an `api()` function returning an 
             handler = fetch_all_data,
         }
     }
-end</pre>
+end
+```
+
 
 Now, we have to define the `fetch_all_data` function. It's only a matter of making HTTP calls to the catalog and newsfeed microservices. Have a look at [the code](https://github.com/ajavageek/backend-for-frontend/blob/master/bff_plugin/init.lua#L24-L52) if you're interested in the exact details.
 
@@ -196,7 +217,8 @@ The BFF pattern allows to fix both of them, at the cost of custom development, r
 
 In essence, the client would need to send the following payload to a previously configured endpoint:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="json">{
+```json
+{
     "timeout": 502,
     "pipeline": [
         {
@@ -216,11 +238,14 @@ In essence, the client would need to send the following payload to a previously 
             "path": "/news/info"
         }
     ]
-}</pre>
+}
+```
+
 
 The response will in turn look like:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="json">[
+```json
+[
   {
     "status": 200,
     "reason": "OK",
@@ -269,7 +294,9 @@ The response will in turn look like:
       "Server": "APISIX web server"
     }
   }
-]</pre>
+]
+```
+
 
 It's up to the client to filter out unnecessary data. It's not as good as true BFF, but we still managed to make a single call out of 4.
 

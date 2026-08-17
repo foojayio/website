@@ -72,7 +72,8 @@ The first step is to read the contents of the services.yaml file. The example be
 
 Chronicle Services communicate with each other using Chronicle Queues. So the file defines the queues as well as services. In this case we have only one service, called "simple" that reads input messages from the queue "input" and writes output messages on the queue "output".
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">!ChronicleServicesCfg {
+```
+!ChronicleServicesCfg {
   queues: {
     input: { path: input, sourceId: 1 },
     output: { path: output, sourceId: 2 },
@@ -84,7 +85,9 @@ Chronicle Services communicate with each other using Chronicle Queues. So the fi
       implClass: !type software.chronicle.services.demo.example1.ServiceImpl,
     },
   },
-}</pre>
+}
+```
+
 
 #### 2. Chronicle Services Configuration File to DOT format
 
@@ -94,7 +97,8 @@ It starts off with 'digraph' to declare that we want a directed graph, and withi
 
 Of note, services are represented by graph nodes, and queues are represented by edges that connect them.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">digraph G {
+```
+digraph G {
     # General
     label="services.yaml\l ";
     labeljust="l";
@@ -107,9 +111,11 @@ Of note, services are represented by graph nodes, and queues are represented by 
     pad="0.5";
 
     # Service simple
-    "queue__input" -&gt; "service__simple" [penwidth=2, color="white", style="dashed", fontcolor="white", fontname="Helvetica", label=&lt;&lt;FONT&gt; &lt;/FONT&gt;&gt;] ;
-    "service__simple" -&gt; "queue__output" [penwidth=2, color="white", style="dashed", fontcolor="white", fontname="Helvetica", label=&lt;&lt;FONT&gt;  OutputData &lt;/FONT&gt;&gt;] ;
-}</pre>
+    "queue__input" -> "service__simple" [penwidth=2, color="white", style="dashed", fontcolor="white", fontname="Helvetica", label=<<FONT> </FONT>>] ;
+    "service__simple" -> "queue__output" [penwidth=2, color="white", style="dashed", fontcolor="white", fontname="Helvetica", label=<<FONT>  OutputData </FONT>>] ;
+}
+```
+
 
 #### 3. DOT to PNG
 

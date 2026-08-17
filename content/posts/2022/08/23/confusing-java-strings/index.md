@@ -99,25 +99,37 @@ So if you have **one** supplementary character that consists of **two** *Code Un
 
 If we go back to our quiz, we can explain some of the anomalies:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="raw" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="false" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">Java -&gt; U+004A U+0061 U+0076 U+0061    // 4 Code Points
-Java -&gt; \u004A \u0061 \u0076 \u0061    // 4 Code Units, length: 4</pre>
+```
+Java -> U+004A U+0061 U+0076 U+0061    // 4 Code Points
+Java -> \u004A \u0061 \u0076 \u0061    // 4 Code Units, length: 4
+```
+
 
 Likewise:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="raw" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="false" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">我喜欢茶 -&gt; U+6211 U+559C U+6B22 U+8336    // 4 Code Points
-我喜欢茶 -&gt; \u6211 \u559C \u6B22 \u8336    // 4 Code Units, length: 4</pre>
+```
+我喜欢茶 -> U+6211 U+559C U+6B22 U+8336    // 4 Code Points
+我喜欢茶 -> \u6211 \u559C \u6B22 \u8336    // 4 Code Units, length: 4
+```
+
 
 But 𝕒, 𝕓, and 𝕔 are supplementary characters:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="raw" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="false" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">𝕒𝕓𝕔 -&gt; U+1D552      U+1D553      U+1D554       // 3 Code Points
-𝕒𝕓𝕔 -&gt; \uD835\uDD52 \uD835\uDD53 \uD835\uDD54  // 6 Code Units, length: 6</pre>
+```
+𝕒𝕓𝕔 -> U+1D552      U+1D553      U+1D554       // 3 Code Points
+𝕒𝕓𝕔 -> \uD835\uDD52 \uD835\uDD53 \uD835\uDD54  // 6 Code Units, length: 6
+```
+
 
 ### \~Solution {#h3-9-solution}
 
 If you really need to, you can count the *Code Points* to get the number of characters, not the number of *Code Units*:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="false" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">String str = "𝕒𝕓𝕔";
-str.codePointCount(0, str.length()) // evaluates to 3</pre>
+```java
+String str = "𝕒𝕓𝕔";
+str.codePointCount(0, str.length()) // evaluates to 3
+```
+
 
 Consequences {#h2-10-consequences}
 ----------------------------------
@@ -136,19 +148,25 @@ Java String::reverse {#h2-11-java-string-reverse}
 
 In Java, the `String` class does not have a `reverse` method so sometimes you can bump into methods like this:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">String reverse(String original) {
+```java
+String reverse(String original) {
     String reversed = "";
-    for (int i = original.length() - 1;  0 &lt;= i; i--) {
+    for (int i = original.length() - 1;  0 <= i; i--) {
         reversed += original.charAt(i);
     }
 
     return reversed;
-}</pre>
+}
+```
+
 
 By now, I think you might have a good idea what's wrong with this method; let's see it in action:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="false" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">String str = "𝔸BC"; // Three characters, but four chars
-System.out.println(reverse(str)); // prints CB??</pre>
+```java
+String str = "𝔸BC"; // Three characters, but four chars
+System.out.println(reverse(str)); // prints CB??
+```
+
 
 The tricky part of the `"𝔸BC"` String is the `𝔸` character that consists of two Code Units: `\uD835\uDD38`.  
 
@@ -157,7 +175,10 @@ If you execute the `reverse` method, it will produce a `String` like this: `"CB\
 
 You can also get other, quite unexpected results:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="false" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">System.out.println(reverse("𝕒𝕓𝕔")); // prints ?𝕓𝕒?</pre>
+```java
+System.out.println(reverse("𝕒𝕓𝕔")); // prints ?𝕓𝕒?
+```
+
 
 Can you tell why we got this result?  
 
@@ -173,28 +194,40 @@ Emojis {#emojis}
 
 The first emoji sequence (👩❤☕) in the quiz does not have anything tricky that you haven't known by now: the first emoji in it consists of two *Code Units* the other two consist of 1-1:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="raw" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="false" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">👩              ❤        ☕
+```
+👩              ❤        ☕
 U+1F469        U+2764   U+2615  // 3 Code Points
-\uD83D\uDC69   \u2764   \u2615  // 4 Code Units, length: 4</pre>
+\uD83D\uDC69   \u2764   \u2615  // 4 Code Units, length: 4
+```
+
 
 The second sequence (👩‍💻❤️🍵) has two tricks:  
 
 👩‍💻 is actually two emojis joined together with a special Zero Width Joiner ([ZWJ](https://emojipedia.org/emoji-zwj-sequence/)) character.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="raw" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="false" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">👩              ZWJ       💻              // 3 characters
+```
+👩              ZWJ       💻              // 3 characters
 U+1F469        U+200D    U+1F4BB        // 3 Code Points
-\D83D\uDC69    \u200D    \uD83D\uDCBB   // 5 Code Units, length: 5</pre>
+\D83D\uDC69    \u200D    \uD83D\uDCBB   // 5 Code Units, length: 5
+```
+
 
 ❤️ is actually a ❤ plus a [variation selector](https://emojipedia.org/variation-selector-16/) that makes it red.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="raw" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="false" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">❤         mod      // 2 characters
+```
+❤         mod      // 2 characters
 U+2764    U+FE0F   // 2 Code Points
-\u2764    \uFE0F   // 2 Code Units, length: 2</pre>
+\u2764    \uFE0F   // 2 Code Units, length: 2
+```
+
 
 🍵 is *"just"* a supplementary character:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="raw" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="false" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">U+1F375       // 1 Code Point
-\uD83C\uDF75  // 2 Code Units, length: 2</pre>
+```
+U+1F375       // 1 Code Point
+\uD83C\uDF75  // 2 Code Units, length: 2
+```
+
 
 So the `length` of 👩‍💻❤️🍵 is 👩‍💻(5) + ❤️(2) + 🍵(2) = 9.
 
@@ -203,9 +236,12 @@ Java String::substring {#h2-14-java-string-substring}
 
 If `substring` cuts into the "wrong" place, we might get an invalid character or a new (different) character or both:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="false" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">System.out.println("𝕒𝕓𝕔".substring(0, 5)); // prints 𝕒𝕓? (invalid character)
+```java
+System.out.println("𝕒𝕓𝕔".substring(0, 5)); // prints 𝕒𝕓? (invalid character)
 System.out.println("abc👩‍💻".substring(0, 5)); // prints abc👩 (new character)
-System.out.println("a👩‍💻".substring(0, 5)); // prints a👩‍? (both)</pre>
+System.out.println("a👩‍💻".substring(0, 5)); // prints a👩‍? (both)
+```
+
 
 Can you tell why this happened?  
 

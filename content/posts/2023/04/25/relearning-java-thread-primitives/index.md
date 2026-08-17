@@ -51,7 +51,8 @@ A reluctance I had with leaving synchronized is that the alternatives aren't muc
 
 The direct replacement for synchronized is ReentrantLock. Unfortunately, ReentrantLock has very few advantages over synchronized so the benefit of migrating is dubious at best. In fact, it has one major disadvantage to get a sense of that let's look at an example, this is how we would use synchronized:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">synchronized(LOCK) {
+```
+synchronized(LOCK) {
     // safe code
 }
 
@@ -60,13 +61,16 @@ try {
     // safe code
 } finally {
     LOCK.unlock();
-}</pre>
+}
+```
+
 
 The first disadvantage of `ReentrantLock` is the verbosity. We need the try block since if an exception occurs within the block the lock will remain. Synchronized handles that seamlessly for us.
 
 There's a trick some people pull of wrapping the lock with `AutoClosable` which looks roughly like this:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">public class ClosableLock implements AutoCloseable {
+```
+public class ClosableLock implements AutoCloseable {
    private final ReentrantLock lock;
 
    public ClosableLock() {
@@ -95,15 +99,20 @@ There's a trick some people pull of wrapping the lock with `AutoClosable` which 
    public void unlock() {
        lock.unlock();
    }
-}</pre>
+}
+```
+
 
 Notice I don't implement the Lock interface which would have been ideal. That's because the lock method returns the auto-closable implementation instead of `void`.
 
 Once we do that, we can write more concise code such as this:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">try(LOCK.lock()) {
+```
+try(LOCK.lock()) {
     // safe code
-}</pre>
+}
+```
+
 
 I like the reduced verbosity but this is a problematic concept since try-with-resource is designed for the purpose of cleanup and we reuse locks. It is invoking close but we will invoke that method again on the same object. I think it might be nice to extend the try with resource syntax to support the lock interface. But until that happens, this might not be a worthwhile trick.
 
@@ -141,8 +150,9 @@ This is a powerful pattern that we can leverage to make collections much faster.
 
 Assuming you can avoid returning iterators from your methods you can encapsulate list operations and use this API. E.g. in the following code we expose the list of names as read-only but then when we need to add a name we use the write lock. This can outperform `synchronized` lists easily:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">private final ReadWriteLock LOCK = new ReentrantReadWriteLock();
-private Collection&lt;String&gt; listOfNames = new ArrayList&lt;&gt;();
+```
+private final ReadWriteLock LOCK = new ReentrantReadWriteLock();
+private Collection<String> listOfNames = new ArrayList<>();
 
 public void addName(String name) {
    LOCK.writeLock().lock();
@@ -160,14 +170,17 @@ public boolean isInList(String name) {
    } finally {
        LOCK.readLock().unlock();
    }
-}</pre>
+}
+```
+
 
 StampedLock {#h2-3-stampedlock}
 -------------------------------
 
 The first thing we need to understand about `StampedLock` is that it isn't reentrant. Say we have this block:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">synchronized void methodA() {
+```
+synchronized void methodA() {
      // …
      methodB();
     // …
@@ -175,7 +188,9 @@ The first thing we need to understand about `StampedLock` is that it isn't reent
 
 synchronized void methodB() {
      // …
-}</pre>
+}
+```
+
 
 This will work. Since synchronized is reentrant. We already hold the lock so going into `methodB()` from `methodA()` won't block. This works with ReentrantLock too assuming we use the same lock or the same synchronized object.
 
@@ -185,7 +200,8 @@ Look at the `addName()` method from before... What if I invoke it twice with "Sh
 
 Yes, I could use a Set... But for the point of this exercise let's say that we need a list... I could write that logic with the `ReadWriteReentrantLock`:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">public void addName(String name) {
+```
+public void addName(String name) {
    LOCK.writeLock().lock();
    try {
        if(!listOfNames.contains(name)) {
@@ -194,7 +210,9 @@ Yes, I could use a Set... But for the point of this exercise let's say that we n
    } finally {
        LOCK.writeLock().unlock();
    }
-}</pre>
+}
+```
+
 
 This sucks. I "paid" for a write lock only to check `contains()` in some cases (assuming there are many duplicates). We can call `isInList(name)` before obtaining the write lock. Then we would:
 
@@ -207,7 +225,8 @@ In both cases of grabbing we might be queued and it might not be worth the extra
 
 With a `StampedLock`, we can update the read lock to a write lock and do the change on the spot if necessary as such:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">public void addName(String name) {
+```
+public void addName(String name) {
    long stamp = LOCK.readLock();
    try {
        if(!listOfNames.contains(name)) {
@@ -220,7 +239,9 @@ With a `StampedLock`, we can update the read lock to a write lock and do the cha
    } finally {
        LOCK.unlock(stamp);
    }
-}</pre>
+}
+```
+
 
 It is a powerful optimization for these cases.
 

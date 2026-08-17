@@ -53,7 +53,7 @@ Consider the following example:
 
 <br />
 
-```EnlighterJSRAW
+```
 try (var executor = Executors.newVirtualThreadPerTaskExecutor()) 
     IntStream.range(0, 10_000).forEach(i -> {
         executor.submit(() -> {
@@ -85,7 +85,7 @@ To manage your JDK installations, we recommend using SDKMAN, a versatile tool th
 
 Once you have SDKMAN installed, you can list available JDK versions, including early access builds, and install the desired version:
 
-```EnlighterJSRAW
+```
 sdk list java
 sdk install java <version>
 
@@ -95,13 +95,11 @@ Replace \<version\> with the specific version you'd like to install, such as the
 
 Once you have downloaded JDK 21, you can create virtual threads in three ways:
 
-*** ** * ** ***
-
 ### Using the Thread Factory method {#h3-4-using-the-thread-factory-method}
 
 <br />
 
-```EnlighterJSRAW
+```
 Thread.startVirtualThread(() -> 
    System.out.println("Hello world!");
 });
@@ -114,7 +112,7 @@ Note that virtual threads are always daemon threads. So make sure you wait on th
 
 <br />
 
-```EnlighterJSRAW
+```
 var thread = Thread.startVirtualThread(() -> 
    System.out.println("Hello world!");
 });
@@ -123,15 +121,13 @@ thread.join();
 
 ```
 
-*** ** * ** ***
-
 ### Using the builder method {#h3-5-using-the-builder-method}
 
 Like the factory method, you can use the builder method, which is much more convenient as you can create **started** or **unstarted** threads.
 
 <br />
 
-```EnlighterJSRAW
+```
 var started =Thread.ofVirtual().start(() -> 
    System.out.println("Hello world!");
 });
@@ -142,14 +138,12 @@ To create an **unstarted** thread, you can use the following:
 
 <br />
 
-```EnlighterJSRAW
+```
 var unstarted = Thread.ofVirtual().unstarted(() -> 
    System.out.println("Hello world!");
 });
 
 ```
-
-*** ** * ** ***
 
 ### Using the Executors {#h3-6-using-the-executors}
 
@@ -157,7 +151,7 @@ If we want to move away from our existing code, which is heavily dependent on ex
 
 <br />
 
-```EnlighterJSRAW
+```
 var executorService = Executors.newVirtualThreadPerTaskExecutor()
 
 executorService.submit(() -> {
@@ -166,8 +160,6 @@ executorService.submit(() -> {
 });
 
 ```
-
-*** ** * ** ***
 
 Conclusion {#h2-7-conclusion}
 -----------------------------

@@ -38,22 +38,31 @@ The main class of libphonenumber is, no surprise, the class `Phonenumber`. You'l
 
 First, from country code and national number:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">Phonenumber.PhoneNumber swissPhoneNumber = new Phonenumber.PhoneNumber();
+```java
+Phonenumber.PhoneNumber swissPhoneNumber = new Phonenumber.PhoneNumber();
 swissPhoneNumber.setCountryCode(41);
-swissPhoneNumber.setNationalNumber(324556677L);</pre>
+swissPhoneNumber.setNationalNumber(324556677L);
+```
+
 
 This will print:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">+41 32 455 66 77
-032 455 66 77</pre>
+```
++41 32 455 66 77
+032 455 66 77
+```
+
 
 Parsing Phone Numbers {#h2-2-parsing-phone-numbers}
 ---------------------------------------------------
 
 But what if we get the phone number as a string? No worries, the `PhoneNumberUtil` cannot only format but also parse phone numbers:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">Phonenumber.PhoneNumber parsedSwissPhoneNumber = 
-    phoneNumberUtil.parse("032 455 66 77", "CH");</pre>
+```java
+Phonenumber.PhoneNumber parsedSwissPhoneNumber = 
+    phoneNumberUtil.parse("032 455 66 77", "CH");
+```
+
 
 The first argument is the phone number as a string, and the second parameter is the region we expect the number to be from; this is only used if the number string is not an international number.
 
@@ -64,10 +73,13 @@ Now that we can parse strings to phone numbers, how can we check if the phone nu
 
 Also, here, PhoneNumberUtil, has you covered it as it has metadata of the phone numbers of many regions?
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">Phonenumber.PhoneNumber invalidSwissPhoneNumber = 
+```java
+Phonenumber.PhoneNumber invalidSwissPhoneNumber = 
     phoneNumberUtil.parse("032 631 11 2", "CH");
 
-System.out.println(phoneNumberUtil.isValidNumber(invalidSwissPhoneNumber));</pre>
+System.out.println(phoneNumberUtil.isValidNumber(invalidSwissPhoneNumber));
+```
+
 
 The code above will print false as the phone number is too short.
 

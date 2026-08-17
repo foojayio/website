@@ -35,7 +35,8 @@ Let's imagine your team is working on a new feature that queries movie data with
 
 To represent this scenario, we built an aggregation query that joins the movies collection with embedded_movies to fetch embeddings, filters for records where the full plot mentions the word "snow," and returns a projection with selected fields like title, year, fullplot, and the retrieved plot_embedding:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">db.movies.aggregate([
+```
+db.movies.aggregate([
  {
    $lookup: {
      from: "embedded_movies",
@@ -66,7 +67,8 @@ To represent this scenario, we built an aggregation query that joins the movies 
    }
  }
 ])
-</pre>
+```
+
 
 While this query works correctly, it's intentionally inefficient, designed to simulate a pattern that seems harmless in small datasets but can quickly become problematic as data grows. It includes multiple stages that increase resource usage and complexity, helping us observe how different environments respond under pressure.
 
@@ -77,21 +79,24 @@ The application behind the test {#h2-1-the-application-behind-the-test}
 
 To turn this into a more practical scenario, we created a small Java application with an HTTP endpoint /enriched-details that triggers a method called getMovies. This endpoint executes the same aggregation we discussed earlier, allowing us to simulate how a real application would interact with the database and measure how long the query takes to run.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@GetMapping("/enriched-details")
-public ResponseEntity&lt;List&lt;Document&gt;&gt; search(
+```
+@GetMapping("/enriched-details")
+public ResponseEntity<List<Document>> search(
       @RequestParam String plot
 ) {
    return ResponseEntity.ok(movieService.getMovies(plot));
 }
-</pre>
+```
+
 
 The controller delegates to a service method where the aggregation is executed. The execution time is logged to help evaluate the impact of this query under different environments:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public List&lt;Document&gt; getMovies(String plot) {
+```
+public List<Document> getMovies(String plot) {
    var start = System.currentTimeMillis();
-   MongoCollection&lt;Document&gt; collection = mongoDatabase.getCollection("movies");
+   MongoCollection<Document> collection = mongoDatabase.getCollection("movies");
 
-   ArrayList&lt;Document&gt; result = collection.aggregate(List.of(
+   ArrayList<Document> result = collection.aggregate(List.of(
          new Document("$lookup", new Document("from", "embedded_movies")
                .append("localField", "title")
                .append("foreignField", "title")
@@ -102,31 +107,38 @@ The controller delegates to a service method where the aggregation is executed. 
                .append("fullplot", 1)
                .append("plot_embedding", "$result.plot_embedding")),
          new Document("$sort", new Document("year", -1))
-   )).into(new ArrayList&lt;&gt;());
+   )).into(new ArrayList<>());
 
    long duration = System.currentTimeMillis() - start;
    logger.info("Duration: {} ms", duration);
    return result;
 }
-</pre>
+```
+
 
 Additionally, we implemented another endpoint that performs a simpler query by title and year. It helps us later demonstrate how even basic queries can benefit from proper indexing, especially in larger datasets:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@GetMapping("/by-title-year")
-public ResponseEntity&lt;List&lt;Document&gt;&gt; findByTitleAndYear(
+```
+@GetMapping("/by-title-year")
+public ResponseEntity<List<Document>> findByTitleAndYear(
       @RequestParam String title,
       @RequestParam int year
 ) {
    return ResponseEntity.ok(movieService.findByTitleAndYear(title, year));
-}</pre>
+}
+```
+
 
 And then, the service code that performs the search:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public List&lt;Document&gt; findByTitleAndYear(String title, int year) {
+```
+public List<Document> findByTitleAndYear(String title, int year) {
    return getMoviesCollection()
          .find(new Document("title", title).append("year", year))
-         .into(new ArrayList&lt;&gt;());
-}</pre>
+         .into(new ArrayList<>());
+}
+```
+
 
 This simple setup makes it easy to test different queries in a controlled way, including both the aggregation with $lookup and the direct find by title and year.
 
@@ -139,11 +151,14 @@ When tested against an M0 cluster, the application behaves normally. The respons
 
 To try it yourself, first make sure to run the application and ensure your database contains the sample_mflix dataset (available in MongoDB Atlas as a preloaded sample dataset you can import with one click). Then, point the application to an M0 cluster using your connection string and call the following endpoints:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">### Enriched movie details
+```
+### Enriched movie details
 GET http://localhost:8080/movies/enriched-details?plot=love
 
 ### Find movie by title and year
-GET http://localhost:8080/movies/by-title-year?title=Titanic&amp;year=1903</pre>
+GET http://localhost:8080/movies/by-title-year?title=Titanic&year=1903
+```
+
 
 Technically speaking, both queries execute relatively fast,mainly because the dataset is still small. But, here's the catch:
 
@@ -242,7 +257,8 @@ The idea behind this feature is to force the current primary node to step down, 
 
 To ensure the application can handle a primary switch without interruptions, all we need is a simple method that performs both write and read operations to the database. These operations should continue running seamlessly, even during a primary failover. Here is the code:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">int counter = 0;
+```
+int counter = 0;
 while (true) {
    long startTime = System.currentTimeMillis();
    try {
@@ -252,9 +268,9 @@ while (true) {
        collection.find().sort(new Document("counter", -1)).first();
        long duration = System.currentTimeMillis() - startTime;
       logger.info("{}", String.format(
-       "Attempt #%d → Write &amp; Read completed in %dms%s",
+       "Attempt #%d → Write & Read completed in %dms%s",
        counter, duration,
-       duration &gt; 5000 ? " (This is slower than expected)" : ""
+       duration > 5000 ? " (This is slower than expected)" : ""
 ));
        counter++;
    } catch (Exception e) {
@@ -263,7 +279,8 @@ while (true) {
    }
    Thread.sleep(1000);
 }
-</pre>
+```
+
 
 This loop runs continuously, inserting and reading documents until the application is manually stopped. It's just a temporary setup designed for experimentation, to confirm that the application continues writing and reading data during the failover process, not production-ready, but enough to validate behavior during failover.
 

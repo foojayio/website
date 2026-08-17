@@ -67,7 +67,8 @@ Let's look at an example where Chronicle Wire encodes data to simple human-reada
 
 See [WireExamples1.java](https://github.com/OpenHFT/Chronicle-Wire/blob/ea/src/test/java/net/openhft/chronicle/wire/examples/WireExamples1.java "WireExamples1.java")
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="dracula">package net.openhft.chronicle.wire;
+```java
+package net.openhft.chronicle.wire;
 
 import net.openhft.chronicle.core.pool.ClassAliasPool;
 import static net.openhft.chronicle.bytes.Bytes.allocateElasticOnHeap;
@@ -91,39 +92,54 @@ public class WireExamples {
        wire.getValueOut().object(new Car("Lewis Hamilton", 44));
        System.out.println(wire);
    }
-}</pre>
+}
+```
+
 
 If we run this code, it will output the following YAML:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml" data-enlighter-theme="dracula">!Car {
+```yaml
+!Car {
   number: 44,
   driver: Lewis Hamilton
-}</pre>
+}
+```
+
 
 However, if all we did was to change the YanmlWire from:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="dracula">Wire wire = new YamlWire(allocateElasticOnHeap());
-</pre>
+```java
+Wire wire = new YamlWire(allocateElasticOnHeap());
+```
+
 
 To JSON Wire:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="dracula">Wire wire = new JSONWire(allocateElasticOnHeap());
-</pre>
+```java
+Wire wire = new JSONWire(allocateElasticOnHeap());
+```
+
 
 Then it would output the following JSON:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="json" data-enlighter-theme="dracula">{"number":44,"driver":"Lewis Hamilton"}
-</pre>
+```json
+{"number":44,"driver":"Lewis Hamilton"}
+```
+
 
 If we wanted the JSON to also include the Java types, then we can also add the setting, useTypes(true):
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="dracula">Wire wire = new JSONWire(allocateElasticOnHeap()).useTypes(true);
+```java
+Wire wire = new JSONWire(allocateElasticOnHeap()).useTypes(true);
+```
 
-</pre>
 
 This will now also encode the java type, Car:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="json" data-enlighter-theme="dracula">{"@Car":{"number":44,"driver":"Lewis Hamilton"}}</pre>
+```json
+{"@Car":{"number":44,"driver":"Lewis Hamilton"}}
+```
+
 
 #### Example Compact Binary Format
 
@@ -131,7 +147,8 @@ Let's continue with an example where we use a compact binary format instead:
 
 See [WireExamples1.java](https://github.com/OpenHFT/Chronicle-Wire/blob/ea/src/test/java/net/openhft/chronicle/wire/examples/WireExamples1.java "WireExamples1.java") for details.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="dracula">package net.openhft.chronicle.wire;
+```java
+package net.openhft.chronicle.wire;
 
 import net.openhft.chronicle.bytes.Bytes;
 import net.openhft.chronicle.core.pool.ClassAliasPool;
@@ -154,22 +171,30 @@ public class WireExamples {
        wire.getValueOut().object(new Car("Lewis Hamilton", 44));
        System.out.println(wire.bytes().toHexString());
    }
-}</pre>
+}
+```
+
 
 It outputs the following:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="dracula">00000000 b6 03 43 61 72 82 10 00 00 00 2c ee 4c 65 77 69 ··Car··· ··,·Lewi 00000010 73 20 48 61 6d 69 6c 74 6f 6e s Hamilt on</pre>
+```
+00000000 b6 03 43 61 72 82 10 00 00 00 2c ee 4c 65 77 69 ··Car··· ··,·Lewi 00000010 73 20 48 61 6d 69 6c 74 6f 6e s Hamilt on
+```
+
 
 #### Example Deserialisation
 
 So far, all the examples have covered serialisation, so when it comes to deserialising, we can start with the data, for example:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="json" data-enlighter-theme="dracula">{"@Car":{"number":44,"driver":"Lewis Hamilton"}}
-</pre>
+```json
+{"@Car":{"number":44,"driver":"Lewis Hamilton"}}
+```
+
 
 and we can then Deserialise this JSON back into a Java object:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="dracula">package net.openhft.chronicle.wire;
+```java
+package net.openhft.chronicle.wire;
 
 import static net.openhft.chronicle.core.pool.ClassAliasPool.CLASS_ALIASES;
 
@@ -190,13 +215,16 @@ public class WireExamples {
        wire.bytes().append("{\"@Car\":{\"number\":44,\"driver\":\"Lewis Hamilton\"}}");
        final Object object = wire.getValueIn().object();
    }
-}</pre>
+}
+```
+
 
 #### Example Forwards and Backwards Compatibility
 
 If the field name is encoded, if we change the DTO, to include the "int numberOfPitStops" ( see example below ), these numeric values will just default to zero, when the deserialization occurs and the fields that it knows about will be loaded as usual.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="dracula">package net.openhft.chronicle.wire;
+```java
+package net.openhft.chronicle.wire;
 
 import static net.openhft.chronicle.core.pool.ClassAliasPool.CLASS_ALIASES;
 
@@ -218,7 +246,9 @@ public class WireExamples {
        wire.bytes().append("{\"@Car\":{\"number\":44,\"driver\":\"Lewis Hamilton\"}}");
        final Object object = wire.getValueIn().object();
    }
-}</pre>
+}
+```
+
 
 #### Example Encoding Strings
 
@@ -232,7 +262,8 @@ Below is an example of how Chronicle Wire can store small Strings in longs, the 
 
 See [WireExamples2.java](https://github.com/OpenHFT/Chronicle-Wire/blob/ea/src/test/java/net/openhft/chronicle/wire/examples/WireExamples2.java "WireExamples2.java") for details.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="dracula">package net.openhft.chronicle.wire;
+```java
+package net.openhft.chronicle.wire;
 
 import net.openhft.chronicle.bytes.Bytes;
 import static net.openhft.chronicle.core.pool.ClassAliasPool.CLASS_ALIASES;
@@ -267,7 +298,9 @@ public class WireExamples2 {
        // deserialise
        System.out.println("deserialized=" + wire.getValueIn().object());
    }
-}</pre>
+}
+```
+
 
 ### Conclusion {#h3-4-conclusion}
 

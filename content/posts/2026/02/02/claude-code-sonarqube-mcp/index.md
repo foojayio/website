@@ -30,7 +30,7 @@ But what if you didn't have to leave? What if your AI assistant in the terminal 
 
 Today, I want to show you a powerful integration: **Claude Code** combined with the **SonarQube MCP Server** . It is the "pure integration" we have been waiting for to keep **Code Quality** high without ever touching the mouse.
 
-*** ** * ** ***
+
 
 **First things first: What is Claude Code? 🤖** {#h2-0-first-things-first-what-is-claude-code}
 ----------------------------------------------------------------------------------------------
@@ -50,7 +50,7 @@ Typically, a developer's workflow looks like this: Code in your IDE, commit the 
 
 Interacting with those issues---analyzing the details, setting statuses, or just reviewing the documentation---requires navigating the web UI. You then come back to the IDE to apply the fixes. This back-and-forth context switching happens multiple times, constantly breaking your coding flow, increasing frustration, and adding unnecessary friction to the development phase. You lose focus, and productivity drops.
 
-*** ** * ** ***
+
 
 **The Missing Piece: SonarQube MCP Server 🧩** {#h2-2-the-missing-piece-sonarqube-mcp-server}
 ---------------------------------------------------------------------------------------------
@@ -69,7 +69,7 @@ Because now, the workflow is seamless. You stay in the CLI. Claude Code generate
 
 ![](Screenshot-2026-02-02-at-15.18.03-539x510.png)
 
-*** ** * ** ***
+
 
 **Close the AI trust gap with a "vibe, then verify" approach 🔄** {#h2-3-close-the-ai-trust-gap-with-a-vibe-then-verify-approach}
 ---------------------------------------------------------------------------------------------------------------------------------
@@ -101,7 +101,7 @@ Once this is running, Claude will have [25 SonarQube tools](https://github.com/S
 
 ![](https://foojay.io/wp-content/uploads/2026/02/Screenshot-2026-02-02-at-15.46.22-700x470.png)
 
-*** ** * ** ***
+
 
 ### **Step 2: The Action (Java Example) ☕** {#h3-5-step-2-the-action-java-example}
 
@@ -171,7 +171,7 @@ public class SecurityUtil {
 
 Do you see what happened? You didn't leave the terminal. You didn't have to be a security expert. The **SonarQube MCP server** caught the weak algorithm and the encoding issue, and Claude Code applied the fix immediately.
 
-*** ** * ** ***
+
 
 **Interacting with your Project 🏗️** {#h2-6-interacting-with-your-project}
 ---------------------------------------------------------------------------
@@ -188,7 +188,7 @@ Claude Code queries the SonarQube Cloud/Server via MCP and prints the answer rig
 
 ![](Screenshot-2026-02-02-at-15.50.31-700x470.png)
 
-*** ** * ** ***
+
 
 **Why this matters** {#h2-7-why-this-matters}
 ---------------------------------------------

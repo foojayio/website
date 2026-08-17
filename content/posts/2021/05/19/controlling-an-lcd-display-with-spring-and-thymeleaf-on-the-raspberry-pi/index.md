@@ -72,7 +72,8 @@ A few examples of the code in the project.
 
 This part configures the control of the LCD display with the BCM pin numbers listed above in the table.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">config = GlcdConfigBuilder
+```java
+config = GlcdConfigBuilder
        //Use ST7920 - 128 x 64 display, SPI 4-wire Hardware
        .create(Glcd.ST7920.D_128x64, GlcdCommProtocol.SPI_SW_4WIRE_ST7920)
        //Set to 180 rotation
@@ -81,17 +82,22 @@ This part configures the control of the LCD display with the BCM pin numbers lis
        .mapPin(GlcdPin.SPI_MOSI, 19)
        .mapPin(GlcdPin.SPI_CLOCK, 13)
        .mapPin(GlcdPin.CS, 26)
-       .build();</pre>
+       .build();
+```
+
 
 Converting the bits array to a byte array for the XBM format:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">private static byte[] encodeToByteArray(int[] bits) {
+```java
+private static byte[] encodeToByteArray(int[] bits) {
     BitSet bitSet = new BitSet(bits.length);
     for (int index = 0; index  0);
-        bitSet.set(index, bits[index] &gt; 0);
+        bitSet.set(index, bits[index] > 0);
     }
     return bitSet.toByteArray();
-}</pre>
+}
+```
+
 
 You can get the full code from [this GitHub repository](https://github.com/igfasouza/Spring-Thymeleaf-Raspberry-PI-LCD).
 
@@ -129,6 +135,6 @@ Links {#h2-5-links}
 * <https://www.thymeleaf.org/>
 * <https://github.com/ribasco/ucgdisplay>
 
-*** ** * ** ***
+
 
 Originally shared by [Igor De Souza on his blog](http://www.igfasouza.com/blog/spring-thymeleaf-raspberry-pi-lcd/).

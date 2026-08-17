@@ -30,7 +30,8 @@ While running only 4 at a time, the rest of them will be waiting. Thus, even tho
 
 Let's do an experiment and see how many threads we can create:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">package com.bazlur.threads;
+```java
+package com.bazlur.threads;
 
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.locks.LockSupport;
@@ -39,14 +40,16 @@ public class ThreadCreationDemo {
   public static void main(String[] args) {
     var counter = new AtomicInteger();
     while (true) {
-      new Thread(() -&gt; {
+      new Thread(() -> {
         int count = counter.incrementAndGet();
         System.out.println("count = " + count);
         LockSupport.park();
       }).start();
     }
   }
-}</pre>
+}
+```
+
 
 The above program creates a thread in a while loop, prints the current thread count, and disables it to not get scheduled. The purpose of the demo is just to count how many threads we can create. I ran this program with only 4 GB heap, and I was able to create 4065 threads before it ran out of memory and threw error.
 
@@ -64,19 +67,23 @@ Let's do an exercise about creating a thread pool-
 
 In this exercise, we will use all of the knowledge that we have learned from the previous article so far.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">package com.bazlur.threads;
+```java
+package com.bazlur.threads;
 
 public interface ThreadPool {
   void submit(Runnable unitOfWork);
 
   void shutdown();
-}</pre>
+}
+```
+
 
 So the idea is for there to be a ThreadPool class that we would instantiate with a pool size. And then we keep submitting our work to it. The ThreadPool will create a number of threads and keep it running inside the number. As soon as we put a task in it, they will start executing them. If they finish executing all tasks, they will wait for more tasks. When we call the shutdown method, only then the pool will stop working. Sounds simple, isn't it?
 
 So let's implement the above interface.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">package com.bazlur.threads;
+```java
+package com.bazlur.threads;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -84,10 +91,10 @@ import java.util.List;
 public class MyThreadPool implements ThreadPool {
   private volatile boolean running = true;
 
-  private final List&lt;Runnable&gt; tasks = new LinkedList&lt;&gt;();
+  private final List<Runnable> tasks = new LinkedList<>();
 
   public MyThreadPool(int poolSize) {
-    for (int i = 0; i &lt; poolSize; i++) {
+    for (int i = 0; i < poolSize; i++) {
       var workerThread = new WorkerThread("worker-" + i);
       workerThread.start();
     }
@@ -133,7 +140,9 @@ public class MyThreadPool implements ThreadPool {
       }
     }
   }
-}</pre>
+}
+```
+
 
 Glance over the above code. In the constructor, we take a pool size and then create threads with it. We have an internal data structure called tasks. When we submit the task, it is stored in this list so that threads can take them from it.
 
@@ -147,13 +156,14 @@ That's it. We have got a ThreadPool of our own. One thing to keep in mind is tha
 
 Let's now use our own ThreadPool:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">package com.bazlur.threads;
+```java
+package com.bazlur.threads;
 
 public class Playground {
   public static void main(String[] args) throws InterruptedException {
 
     var pool = new MyThreadPool(10);
-    for (int i = 0; i &lt; 100; i++) {
+    for (int i = 0; i < 100; i++) {
       pool.submit(new Runnable() {
         @Override
         public void run() {
@@ -162,6 +172,8 @@ public class Playground {
       });
     }
   }
-}</pre>
+}
+```
+
 
 That's all for today!

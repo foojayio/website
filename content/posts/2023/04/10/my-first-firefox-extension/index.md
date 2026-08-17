@@ -73,7 +73,8 @@ I had no clue about writing a Firefox extension, as this was the first time I di
 
 A Firefox extension starts with a [manifest](https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/manifest.json). Here's the one from the first tutorial, simplified:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="json">{
+```json
+{
   "manifest_version": 2,
   "name": "Borderify",
   "version": "1.0",
@@ -82,9 +83,14 @@ A Firefox extension starts with a [manifest](https://developer.mozilla.org/en-US
       "js": ["borderify.js"]
     }
   ]
-}</pre>
+}
+```
 
-<pre class="EnlighterJSRAW" data-enlighter-language="js">document.body.style.border = '5px solid red';</pre>
+
+```javascript
+document.body.style.border = '5px solid red';
+```
+
 
 I found the development feedback loop good. Imagine that you have followed the tutorial and created all the necessary files above. You can go to and click on the "Load Temporary Add-on" button.
 
@@ -109,10 +115,13 @@ Firefox allows multiple places to add buttons: the browser's toolbar, a sidebar,
 
 Adding the button takes place in the manifest:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="json">"browser_action": {
+```json
+"browser_action": {
   "default_area": "navbar",                            #1
   "default_icon": "icons/trello-tile.svg"              #2
-}</pre>
+}
+```
+
 
 1. Set the button on the navigation bar. For more details on the button location, please check the [documentation](https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/manifest.json/browser_action)
 2. Configure the icon. One can use bitmaps in different formats, but it's so much easier to set an SVG
@@ -135,17 +144,23 @@ However, we need another kind of script: one to trigger when we click on the but
 
 Let's create such a script. It starts with the `manifest` - as usual:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="json">"background": {
+```json
+"background": {
   "scripts": [ "background.js" ]
-}</pre>
+}
+```
+
 
 We can now create the script itself:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="js">function foo() {
+```javascript
+function foo() {
     console.log('Hello from background')
 }
 
-browser.browserAction.onClicked.addListener(foo)    //1</pre>
+browser.browserAction.onClicked.addListener(foo)    //1
+```
+
 
 1. Register the `foo` function as an event listener to the button. When one clicks the extension button, it calls the `foo` function
 
@@ -169,24 +184,30 @@ Now that we know how to log, it's possible to go further and describe communicat
 
 Let's change the code a bit so that `background.js` sends a message:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="js">function sendMessage(tab) {
+```javascript
+function sendMessage(tab) {
     browser.tabs
            .sendMessage(tab.id, 'message in from background')
-           .then(response =&gt; {
+           .then(response => {
                console.log(response)
            })
-           .catch(error =&gt; {
+           .catch(error => {
                console.error(`Error: ${error}`)
            })
 }
 
-browser.browserAction.onClicked.addListener(sendMessage)</pre>
+browser.browserAction.onClicked.addListener(sendMessage)
+```
+
 
 Now, we change the code of `content.js`:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="js">browser.runtime.onMessage.addListener((message, sender) =&gt; {
+```javascript
+browser.runtime.onMessage.addListener((message, sender) => {
     return Promise.resolve('message back from content')
-});</pre>
+});
+```
+
 
 Getting the content {#h2-7-getting-the-content}
 -----------------------------------------------
@@ -195,7 +216,8 @@ So far, we have implemented a back-and-forth flow between the `background` and t
 
 The next issue is that the structure of Sessionize and Papercall are different. Hence, we need different scraping codes for each site. We could develop a single script that checks the URL, but the extensions can take care of it for us. Let's change the manifest:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="json">"content_scripts" : [{
+```json
+"content_scripts" : [{
   "matches": [ "https://sessionize.com/*" ],            #1
   "js": [                                               #2
     "content/common.js",                                #4
@@ -208,7 +230,9 @@ The next issue is that the structure of Sessionize and Papercall are different. 
     "content/common.js",                                #4
     "content/papercall.js"
   ]
-}]</pre>
+}]
+```
+
 
 1. Match different sites
 2. Scripts for Sessionize
@@ -224,9 +248,12 @@ Using Trello's REST requires authentication credentials. I want to share the cod
 
 We can configure a Firefox extension via a dedicated *options* page. To do so, the *manifest* offers a dedicated `options_ui` section where we can provide the path to the HTML page:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="json">"options_ui": {
+```json
+"options_ui": {
   "page": "settings/options.html"
-}</pre>
+}
+```
+
 
 The page can directly reference the scripts and stylesheet it needs. The script needs to:
 
@@ -237,7 +264,8 @@ It's pretty straightforward with the [provided example](https://github.com/mdn/w
 
 My code is quite similar; it just needs three fields instead of one:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="js">function saveOptions(e) {
+```javascript
+function saveOptions(e) {
     browser.storage.sync.set({                                               //1
         listId: document.querySelector('#list-id').value,
         key: document.querySelector('#key').value,
@@ -247,17 +275,19 @@ My code is quite similar; it just needs three fields instead of one:
 
 function restoreOptions() {
     browser.storage.sync.get()                                               //1
-           .then(data =&gt; {
+           .then(data => {
                document.querySelector('#list-id').value = data.listId || ''
                document.querySelector('#key').value = data.key || ''
                document.querySelector('#token').value = data.token || ''
-           }, error =&gt; {
+           }, error => {
                console.error(`Error: ${error}`)
            })
 }
 
 document.addEventListener('DOMContentLoaded', restoreOptions)                //2
-document.querySelector('form').addEventListener('submit', saveOptions)       //3</pre>
+document.querySelector('form').addEventListener('submit', saveOptions)       //3
+```
+
 
 1. Uses the Firefox `storage` API
 2. Read from the storage when the page loads
@@ -265,7 +295,10 @@ document.querySelector('form').addEventListener('submit', saveOptions)       //3
 
 We also need to ask the `storage` permission in the manifest:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="json">"permissions": [ "storage" ]</pre>
+```json
+"permissions": [ "storage" ]
+```
+
 
 We can now store the Trello credentials (as well as the required Trello list id) on the settings page:
 

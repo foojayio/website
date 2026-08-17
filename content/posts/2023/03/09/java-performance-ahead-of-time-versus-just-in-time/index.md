@@ -90,7 +90,7 @@ Conclusion {#h2-4-conclusion}
 
 Both AOT and JIT provide good ways to execute Java code. But although AOT offers a set of advantages regarding startup, the impact of the JIT compiler should not be underestimated to achieve the best performing code during runtime.
 
-*** ** * ** ***
+
 
 More learning resources {#h2-5-more-learning-resources}
 -------------------------------------------------------

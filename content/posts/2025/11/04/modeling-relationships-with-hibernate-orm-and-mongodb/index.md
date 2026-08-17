@@ -42,11 +42,14 @@ That project includes the initial configuration, the Book entity, and all CRUD o
 
 If you don't have it yet, you can clone the repository from GitHub and check out the [**v1.0**](https://github.com/mongodb-developer/mongodb-hibernate-crud/tree/v1.0) tag, which represents the state of the project at the end of the first article:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">git clone https://github.com/mongodb-developer/mongodb-hibernate-crud.git
+```
+git clone https://github.com/mongodb-developer/mongodb-hibernate-crud.git
 
 cd mongodb-hibernate-crud/
 
-git checkout v1.0</pre>
+git checkout v1.0
+```
+
 
 Make sure your environment still meets the same requirements: Java 17+, Maven, and MongoDB 6.0+ (replica set enabled).
 
@@ -55,11 +58,14 @@ One-to-many relationship {#h2-1-one-to-many-relationship}
 
 In the current version of our project, we have a single entity---**Book**---that represents the documents stored in the MongoDB books collection. Each book contains basic information like title and number of pages:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">{
-&nbsp;&nbsp;"_id": ObjectId('68f2af48650f2f612e319c61'),
-&nbsp;&nbsp;"pages": 405,
-&nbsp;&nbsp;"title": "Mastering MongoDB"
-}</pre>
+```
+{
+  "_id": ObjectId('68f2af48650f2f612e319c61'),
+  "pages": 405,
+  "title": "Mastering MongoDB"
+}
+```
+
 
 Now, we'll extend this model to make it more realistic. A book can have multiple reviews, and each review belongs to a specific book, forming a classic one-to-many relationship.
 
@@ -73,7 +79,8 @@ This means each book will contain an array of reviews within the same collection
 
 To represent this, we'll define a new class called Review, annotated with @Embeddable and @Struct, inside the domain package:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">package com.mongodb.domain;
+```
+package com.mongodb.domain;
 
 import jakarta.persistence.Embeddable;
 import org.hibernate.annotations.Struct;
@@ -82,12 +89,14 @@ import org.hibernate.annotations.Struct;
 @Struct(name = "Review")
 
 public class Review {
-&nbsp;&nbsp;&nbsp;private String author;
-&nbsp;&nbsp;&nbsp;private String title;
-&nbsp;&nbsp;&nbsp;private String comment;
-&nbsp;&nbsp;&nbsp;private double rating;
-&nbsp;&nbsp;&nbsp;//getters and setters
-}</pre>
+   private String author;
+   private String title;
+   private String comment;
+   private double rating;
+   //getters and setters
+}
+```
+
 
 <br />
 
@@ -95,104 +104,116 @@ This tells Hibernate that the class ***does not*** represent a separate collecti
 
 In the Book class, we can now add a list of reviews:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@Entity
+```
+@Entity
 @Table(name = "books")
 
 public class Book {
-&nbsp;&nbsp;// other fields
-&nbsp;&nbsp;&nbsp;List&lt;Review&gt; reviews;
-&nbsp;&nbsp;&nbsp;public void addReview(Review review) {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (this.reviews == null) {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this.reviews = new ArrayList&lt;&gt;();
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this.reviews.add(review);
-&nbsp;&nbsp;&nbsp;}
-&nbsp;// getters and setters
-}</pre>
+  // other fields
+   List<Review> reviews;
+   public void addReview(Review review) {
+      if (this.reviews == null) {
+         this.reviews = new ArrayList<>();
+      }
+      this.reviews.add(review);
+   }
+ // getters and setters
+}
+```
+
 
 To add a review to a book, we can use a simple method that loads the Book by ID, appends the review to the list, and merges the updated document back into MongoDB. In the BookService:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public boolean addReview(ObjectId bookId, Review review) {
+```
+public boolean addReview(ObjectId bookId, Review review) {
 
-&nbsp;&nbsp;&nbsp;try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+   try (Session session = HibernateUtil.getSessionFactory().openSession()) {
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Transaction tx = session.beginTransaction();
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Book book = session.find(Book.class, bookId);
+      Transaction tx = session.beginTransaction();
+      Book book = session.find(Book.class, bookId);
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (book == null) return false;
+      if (book == null) return false;
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;book.addReview(review);
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;session.merge(book);
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;tx.commit();
+      book.addReview(review);
+      session.merge(book);
+      tx.commit();
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return true;
-&nbsp;&nbsp;&nbsp;}
-}</pre>
+      return true;
+   }
+}
+```
+
 
 Finally, in the MyApplication class, add a new menu option for inserting reviews:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">do {
-&nbsp;&nbsp;&nbsp;System.out.println("\n=== BOOK MENU ===");
+```
+do {
+   System.out.println("\n=== BOOK MENU ===");
 
-&nbsp;&nbsp;&nbsp;// Other options
-&nbsp;&nbsp;&nbsp;System.out.println("6 - Add Review");
+   // Other options
+   System.out.println("6 - Add Review");
 
-&nbsp;&nbsp;&nbsp;option = sc.nextInt();
+   option = sc.nextInt();
 
-&nbsp;&nbsp;&nbsp;sc.nextLine();
+   sc.nextLine();
 
-&nbsp;&nbsp;&nbsp;switch (option) {
-&nbsp;&nbsp;&nbsp;//other options
+   switch (option) {
+   //other options
 
-case 6 -&gt; {
-&nbsp;&nbsp;&nbsp;System.out.print("Book ID: ");
+case 6 -> {
+   System.out.print("Book ID: ");
 
-&nbsp;&nbsp;&nbsp;String id = sc.nextLine();
+   String id = sc.nextLine();
 
-&nbsp;&nbsp;&nbsp;System.out.print("Author: ");
+   System.out.print("Author: ");
 
-&nbsp;&nbsp;&nbsp;String author = sc.nextLine();
+   String author = sc.nextLine();
 
-&nbsp;&nbsp;&nbsp;System.out.print("Title: ");
+   System.out.print("Title: ");
 
-&nbsp;&nbsp;&nbsp;String title = sc.nextLine();
+   String title = sc.nextLine();
 
-&nbsp;&nbsp;&nbsp;System.out.print("Comment: ");
+   System.out.print("Comment: ");
 
-&nbsp;&nbsp;&nbsp;String comment = sc.nextLine();
+   String comment = sc.nextLine();
 
-&nbsp;&nbsp;&nbsp;System.out.print("Rating: ");
+   System.out.print("Rating: ");
 
-&nbsp;&nbsp;&nbsp;double rating = sc.nextDouble();
-&nbsp;&nbsp;&nbsp;sc.nextLine();
+   double rating = sc.nextDouble();
+   sc.nextLine();
 
-&nbsp;&nbsp;&nbsp;Review review = new Review(author, title, comment, rating);
-&nbsp;&nbsp;&nbsp;boolean ok = bookService.addReview(new ObjectId(id), review);
-&nbsp;&nbsp;&nbsp;System.out.println(ok ? "Review added successfully!" : "Book not found.");
+   Review review = new Review(author, title, comment, rating);
+   boolean ok = bookService.addReview(new ObjectId(id), review);
+   System.out.println(ok ? "Review added successfully!" : "Book not found.");
 }
-}</pre>
+}
+```
+
 
 When this code runs, Hibernate updates the document directly in the books collection. A Book document now looks like this:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">{
-&nbsp;&nbsp;"_id": ObjectId('68f2af48650f2f612e319c61'),
-&nbsp;&nbsp;"pages": 405,
-&nbsp;&nbsp;"title": "Mastering MongoDB",
-&nbsp;&nbsp;"reviews": [
-&nbsp;&nbsp;&nbsp;{
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"author": "Ricardo",
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"comment": "This is my favorite book",
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"rating": 10,
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"title": "I love this book"
-&nbsp;&nbsp;&nbsp;},
-&nbsp;&nbsp;&nbsp;{
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"author": "Maria",
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"comment": "This book seems interesting",
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"rating": 8.2,
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"title": "Just started .."
-&nbsp;&nbsp;&nbsp;}
-&nbsp;]
-}</pre>
+```
+{
+  "_id": ObjectId('68f2af48650f2f612e319c61'),
+  "pages": 405,
+  "title": "Mastering MongoDB",
+  "reviews": [
+   {
+     "author": "Ricardo",
+     "comment": "This is my favorite book",
+     "rating": 10,
+     "title": "I love this book"
+   },
+   {
+     "author": "Maria",
+     "comment": "This book seems interesting",
+     "rating": 8.2,
+     "title": "Just started .."
+   }
+ ]
+}
+```
+
 
 #### Evaluating the embedded model
 
@@ -217,23 +238,27 @@ To make the data model more flexible and avoid the *unbounded array*, we'll now 
 
 We'll start by simplifying the Book entity, **removing** the list of embedded reviews and keeping only the core fields:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@Entity
+```
+@Entity
 @Table(name = "books")
 
 public class Book {
-&nbsp;&nbsp;&nbsp;@Id
-&nbsp;&nbsp;&nbsp;@ObjectIdGenerator
-&nbsp;&nbsp;&nbsp;@GeneratedValue
+   @Id
+   @ObjectIdGenerator
+   @GeneratedValue
 
-&nbsp;&nbsp;&nbsp;ObjectId id;
-&nbsp;&nbsp;&nbsp;String title;
-&nbsp;&nbsp;&nbsp;Integer pages;
-&nbsp;// getters and setters
-}</pre>
+   ObjectId id;
+   String title;
+   Integer pages;
+ // getters and setters
+}
+```
+
 
 Next, we'll turn Review into a **full entity** mapped to its own collection:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">import com.mongodb.hibernate.annotations.ObjectIdGenerator;
+```
+import com.mongodb.hibernate.annotations.ObjectIdGenerator;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
@@ -244,32 +269,34 @@ import org.bson.types.ObjectId;
 @Table(name = "reviews")
 
 public class Review {
-&nbsp;&nbsp;@Id
-&nbsp;&nbsp;@ObjectIdGenerator
-&nbsp;&nbsp;@GeneratedValue
+  @Id
+  @ObjectIdGenerator
+  @GeneratedValue
 
-&nbsp;&nbsp;ObjectId id;
-&nbsp;&nbsp;private ObjectId bookId;
-&nbsp;&nbsp;private String author;
-&nbsp;&nbsp;private String title;
-&nbsp;&nbsp;private String comment;
-&nbsp;&nbsp;private double rating;
+  ObjectId id;
+  private ObjectId bookId;
+  private String author;
+  private String title;
+  private String comment;
+  private double rating;
 
-&nbsp;&nbsp;public Review() {}
-&nbsp;&nbsp;public Review(String author, ObjectId bookId, String title, String &nbsp; comment, double rating) {
-&nbsp;&nbsp;&nbsp;&nbsp;this.author = author;
-&nbsp;&nbsp;&nbsp;&nbsp;this.bookId = bookId;
-&nbsp;&nbsp;&nbsp;&nbsp;this.title = title;
-&nbsp;&nbsp;&nbsp;&nbsp;this.comment = comment;
-&nbsp;&nbsp;&nbsp;&nbsp;this.rating = rating;
-&nbsp;&nbsp;}
+  public Review() {}
+  public Review(String author, ObjectId bookId, String title, String   comment, double rating) {
+    this.author = author;
+    this.bookId = bookId;
+    this.title = title;
+    this.comment = comment;
+    this.rating = rating;
+  }
 
-&nbsp;&nbsp;@Override
-&nbsp;&nbsp;public String toString() {
-&nbsp;&nbsp;&nbsp;&nbsp;return "Review{author='%s', title='%s', comment='%s', rating=%.1f}"
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.formatted(author, title, comment, rating);
-&nbsp;&nbsp;}
-}</pre>
+  @Override
+  public String toString() {
+    return "Review{author='%s', title='%s', comment='%s', rating=%.1f}"
+          .formatted(author, title, comment, rating);
+  }
+}
+```
+
 
 By annotating the class with @Entity and @Table("reviews"), Hibernate now treats it as a top-level document collection instead of an embedded structure. Each review references its book using the bookId field, similar to a foreign key, but in MongoDB terms, it's just an ObjectId stored inside the document.
 
@@ -277,7 +304,8 @@ By annotating the class with @Entity and @Table("reviews"), Hibernate now treats
 
 Since we now have two entities, we must register both in our Hibernate configuration. Open the HibernateUtil class and include the Review.class:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">package com.mongodb.config;
+```
+package com.mongodb.config;
 
 import com.mongodb.domain.Book;
 import com.mongodb.domain.Review;
@@ -285,21 +313,24 @@ import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
 public final class HibernateUtil {
-&nbsp;&nbsp;&nbsp;private static final SessionFactory SESSION_FACTORY =
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;new Configuration().configure("hibernate.cfg.xml")
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.addAnnotatedClass(Book.class)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.addAnnotatedClass(Review.class)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.buildSessionFactory();
+   private static final SessionFactory SESSION_FACTORY =
+         new Configuration().configure("hibernate.cfg.xml")
+               .addAnnotatedClass(Book.class)
+               .addAnnotatedClass(Review.class)
+               .buildSessionFactory();
 
-&nbsp;&nbsp;&nbsp;private HibernateUtil() {}
-&nbsp;&nbsp;&nbsp;public static SessionFactory getSessionFactory() { return SESSION_FACTORY; }
-}</pre>
+   private HibernateUtil() {}
+   public static SessionFactory getSessionFactory() { return SESSION_FACTORY; }
+}
+```
+
 
 #### Adding a review service
 
 To handle review operations, we'll add a new service class:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">package com.mongodb.service;
+```
+package com.mongodb.service;
 
 import com.mongodb.config.HibernateUtil;
 import com.mongodb.domain.Review;
@@ -307,15 +338,17 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 public class ReviewService {
-&nbsp;&nbsp;&nbsp;public void insert(Review review) {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Transaction tx = session.beginTransaction();
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;session.persist(review);
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;tx.commit();
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.println("Review inserted: " + review);
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
-&nbsp;&nbsp;&nbsp;}
-}</pre>
+   public void insert(Review review) {
+      try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+         Transaction tx = session.beginTransaction();
+         session.persist(review);
+         tx.commit();
+         System.out.println("Review inserted: " + review);
+      }
+   }
+}
+```
+
 
 #### Linking books and reviews
 
@@ -327,25 +360,28 @@ Instead, we'll add a helper method in the BookService to retrieve a single book 
 
 **Note:** The @OneToMany annotation is not yet supported in the Public Preview of the MongoDB Hibernate ORM extension. For now, relationships between entities can be handled programmatically as shown below, and native support for annotations such as @OneToMany is planned for the GA release.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public BookWithReviews findAllBooksWithReviewsById(ObjectId id) {
-&nbsp;&nbsp;&nbsp;try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+```
+public BookWithReviews findAllBooksWithReviewsById(ObjectId id) {
+   try (Session session = HibernateUtil.getSessionFactory().openSession()) {
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Book book = session.find(Book.class, id);
+      Book book = session.find(Book.class, id);
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (book == null) {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return null;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+      if (book == null) {
+         return null;
+      }
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;List&lt;Review&gt; reviews = session.createQuery(
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"from Review r where r.bookId = :bookId", Review.class)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.setParameter("bookId", book.getId())
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.list();
+      List<Review> reviews = session.createQuery(
+                  "from Review r where r.bookId = :bookId", Review.class)
+            .setParameter("bookId", book.getId())
+            .list();
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return new BookWithReviews(book, reviews);
-&nbsp;&nbsp;&nbsp;}
+      return new BookWithReviews(book, reviews);
+   }
 }
 
-public record BookWithReviews(Book book, List&lt;Review&gt; reviews) {}</pre>
+public record BookWithReviews(Book book, List<Review> reviews) {}
+```
+
 
 #### Updating the console menu
 
@@ -355,55 +391,58 @@ To fix this, we'll replace that option with a new implementation that uses the *
 
 Here's how the updated section of your MyApplication class should look:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">// other fields
+```
+// other fields
 ReviewService reviewService = new ReviewService();
 int option;
 
 do {
-&nbsp;&nbsp;&nbsp;System.out.println("\n=== BOOK MENU ===");
-&nbsp;&nbsp;&nbsp;//other options
-&nbsp;&nbsp;&nbsp;System.out.println("7 - List Books and Reviews by Id");
-&nbsp;&nbsp;&nbsp;option = sc.nextInt();
-&nbsp;&nbsp;&nbsp;sc.nextLine();
+   System.out.println("\n=== BOOK MENU ===");
+   //other options
+   System.out.println("7 - List Books and Reviews by Id");
+   option = sc.nextInt();
+   sc.nextLine();
 
-&nbsp;&nbsp;&nbsp;switch (option) {
-case 6 -&gt; {
-&nbsp;&nbsp;&nbsp;System.out.print("Book ID: ");
+   switch (option) {
+case 6 -> {
+   System.out.print("Book ID: ");
 
-&nbsp;&nbsp;&nbsp;String bookId = sc.nextLine();
+   String bookId = sc.nextLine();
 
-&nbsp;&nbsp;&nbsp;System.out.print("Author: ");
+   System.out.print("Author: ");
 
-&nbsp;&nbsp;&nbsp;String author = sc.nextLine();
+   String author = sc.nextLine();
 
-&nbsp;&nbsp;&nbsp;System.out.print("Review Title: ");
+   System.out.print("Review Title: ");
 
-&nbsp;&nbsp;&nbsp;String rTitle = sc.nextLine();
+   String rTitle = sc.nextLine();
 
-&nbsp;&nbsp;&nbsp;System.out.print("Comment: ");
+   System.out.print("Comment: ");
 
-&nbsp;&nbsp;&nbsp;String comment = sc.nextLine();
+   String comment = sc.nextLine();
 
-&nbsp;&nbsp;&nbsp;System.out.print("Rating: ");
+   System.out.print("Rating: ");
 
-&nbsp;&nbsp;&nbsp;double rating = sc.nextDouble();
-&nbsp;&nbsp;&nbsp;sc.nextLine();
-&nbsp;&nbsp;&nbsp;reviewService.insert(new Review(author, new ObjectId(bookId), rTitle, comment, rating));
-&nbsp;&nbsp;&nbsp;System.out.println("Review added!");
+   double rating = sc.nextDouble();
+   sc.nextLine();
+   reviewService.insert(new Review(author, new ObjectId(bookId), rTitle, comment, rating));
+   System.out.println("Review added!");
 
 }
 
-case 7 -&gt; {
-&nbsp;&nbsp;&nbsp;System.out.print("Book ID: ");
+case 7 -> {
+   System.out.print("Book ID: ");
 
-&nbsp;&nbsp;&nbsp;String bookId = sc.nextLine();
+   String bookId = sc.nextLine();
 
-&nbsp;&nbsp;&nbsp;BookService.BookWithReviews br = bookService.findAllBooksWithReviewsById(new ObjectId(bookId));
+   BookService.BookWithReviews br = bookService.findAllBooksWithReviewsById(new ObjectId(bookId));
 
-&nbsp;&nbsp;&nbsp;System.out.printf("\n%s - %s (%d reviews)\n",
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;br.book().getId(), br.book().getTitle(), br.reviews().size());
-&nbsp;&nbsp;&nbsp;br.reviews().forEach(System.out::println);
-}</pre>
+   System.out.printf("\n%s - %s (%d reviews)\n",
+         br.book().getId(), br.book().getTitle(), br.reviews().size());
+   br.reviews().forEach(System.out::println);
+}
+```
+
 
 Now, each time you insert a review, it's stored in a separate **reviews** collection while keeping a reference to the corresponding **bookId**. This approach eliminates the growth issue of embedded arrays and allows each collection to scale independently.
 
@@ -415,22 +454,28 @@ Here's what the new structure looks like in MongoDB:
 
 **books collection:**
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">{
-&nbsp;"_id": ObjectId("68f2be11aa80073def51e555"),
-&nbsp;"pages": 549,
-&nbsp;"title": "Learning Java"
-}</pre>
+```
+{
+ "_id": ObjectId("68f2be11aa80073def51e555"),
+ "pages": 549,
+ "title": "Learning Java"
+}
+```
+
 
 **reviews collection:**
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">{
-&nbsp;"_id": ObjectId("68f2be3caa80073def51e556"),
-&nbsp;"author": "Ricardo Mello",
-&nbsp;"bookId": ObjectId("68f2be11aa80073def51e555"),
-&nbsp;"comment": "I like how this book ..",
-&nbsp;"rating": 8.5,
-&nbsp;"title": "An excellent book"
-}</pre>
+```
+{
+ "_id": ObjectId("68f2be3caa80073def51e556"),
+ "author": "Ricardo Mello",
+ "bookId": ObjectId("68f2be11aa80073def51e555"),
+ "comment": "I like how this book ..",
+ "rating": 8.5,
+ "title": "An excellent book"
+}
+```
+
 
 While this new structure solves the size and scalability issues of the embedded model, it also introduces a trade-off. Since Book and Review are now stored in separate collections, retrieving all reviews for a specific book requires two queries, one to load the book and another to fetch its reviews using the bookId.
 
@@ -448,29 +493,35 @@ The [**Subset Pattern**](https://www.mongodb.com/company/blog/building-with-patt
 
 In our case, we can apply the Subset Pattern by keeping only the **three most recent reviews** embedded inside each Book document.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">{
-&nbsp;"_id": ObjectId("68f67da69114e74455c989ce"),&nbsp;
-&nbsp;"pages": 406,
-&nbsp;"title": "High Performance with MongoDB"
-&nbsp;"recentReview": [
-   {"author": "Martha", "comment": "A very practical guide that balances theory &nbsp; with hands-on .." },
+```
+{
+ "_id": ObjectId("68f67da69114e74455c989ce"), 
+ "pages": 406,
+ "title": "High Performance with MongoDB"
+ "recentReview": [
+   {"author": "Martha", "comment": "A very practical guide that balances theory   with hands-on .." },
    {"author": "Ricardo", "comment": "The structure is well organized and the examples" },
-   {"author": "Pietro",&nbsp; &nbsp; "comment": "I found this book to be both informative and inspiring.." } 
+   {"author": "Pietro",    "comment": "I found this book to be both informative and inspiring.." } 
  ]
-}</pre>
+}
+```
+
 
 This way, whenever we load a book, we immediately get its latest feedback, without the need to query another collection or perform a join.
 
 At the same time, we'll still store **all reviews** in a separate reviews collection. That means if we ever need to display the complete review history for a book (for example, on a "See all reviews" page), we can simply query that collection directly.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">{
-&nbsp;"_id": ObjectId("68f67dd79114e74455c989d1"),&nbsp;
-&nbsp;"author": "Martha",
-&nbsp;"bookId": ObjectId("68f67da69114e74455c989ce"),
-&nbsp;"comment": "A very practical guide that balances theory with hands-on ..",
-&nbsp;"rating": 8.2,
-&nbsp;"title": "Practical and Insightful"
-}</pre>
+```
+{
+ "_id": ObjectId("68f67dd79114e74455c989d1"), 
+ "author": "Martha",
+ "bookId": ObjectId("68f67da69114e74455c989ce"),
+ "comment": "A very practical guide that balances theory with hands-on ..",
+ "rating": 8.2,
+ "title": "Practical and Insightful"
+}
+```
+
 
 This approach offers a great balance:
 
@@ -485,7 +536,8 @@ To keep our documents lightweight and still show the latest feedback, we'll embe
 
 #### Create the embeddable type for recent reviews
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">package com.mongodb.domain;
+```
+package com.mongodb.domain;
 
 import jakarta.persistence.Embeddable;
 import org.hibernate.annotations.Struct;
@@ -494,26 +546,32 @@ import org.hibernate.annotations.Struct;
 @Struct(name = "RecentReview")
 
 public record RecentReview (
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;String author,
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;String comment)
-{}</pre>
+      String author,
+      String comment)
+{}
+```
+
 
 #### Add the recentReview field to the Book class
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@Entity
+```
+@Entity
 @Table(name = "books")
 
 public class Book {
-&nbsp;&nbsp;&nbsp;// other fields
-&nbsp;&nbsp;&nbsp;List&lt;RecentReview&gt; recentReview = new ArrayList&lt;&gt;();
-&nbsp;&nbsp;&nbsp;// getters and setters
-}</pre>
+   // other fields
+   List<RecentReview> recentReview = new ArrayList<>();
+   // getters and setters
+}
+```
+
 
 #### Update the ReviewService
 
 After persisting a new review, we'll run a native MongoDB update to push the latest review into the recentReview array and keep only the last three entries.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">package com.mongodb.service;
+```
+package com.mongodb.service;
 
 import com.mongodb.config.HibernateUtil;
 import com.mongodb.domain.Book;
@@ -523,57 +581,59 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 public class ReviewService {
-&nbsp;&nbsp;&nbsp;public void insert(Review review) {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Transaction tx = session.beginTransaction();
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;session.persist(review);
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;addRecentReview(review.getBookId(), review, session);
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.println("Review inserted: " + review);
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;tx.commit();
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
-&nbsp;&nbsp;&nbsp;}
+   public void insert(Review review) {
+      try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+         Transaction tx = session.beginTransaction();
+         session.persist(review);
+         addRecentReview(review.getBookId(), review, session);
+         System.out.println("Review inserted: " + review);
+         tx.commit();
+      }
+   }
 
-&nbsp;&nbsp;&nbsp;private void addRecentReview(ObjectId bookId, Review review, Session session) {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var mql = """
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"update": "books",
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"updates": [{
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"q": { "_id": { "$oid": "%s" } },
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"u": {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"$push": {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"recentReview": {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"$each": [{
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"author": "%s",
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"comment": "%s"
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}],
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"$slice": -3
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}]
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+   private void addRecentReview(ObjectId bookId, Review review, Session session) {
+         var mql = """
+           {
+               "update": "books",
+               "updates": [{
+                   "q": { "_id": { "$oid": "%s" } },
+                   "u": {
+                       "$push": {
+                           "recentReview": {
+                               "$each": [{
+                                   "author": "%s",
+                                   "comment": "%s"
+                               }],
+                               "$slice": -3
+                           }
+                       }
+                   }
+               }]
+           }
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;""".formatted(
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;bookId.toString(),
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;escapeJson(review.getAuthor()),
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;escapeJson(review.getComment())
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;);
+           """.formatted(
+               bookId.toString(),
+               escapeJson(review.getAuthor()),
+               escapeJson(review.getComment())
+         );
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;int updated = session.createNativeQuery(mql, Book.class).executeUpdate();
+         int updated = session.createNativeQuery(mql, Book.class).executeUpdate();
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.println(updated + " document updated.");
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+         System.out.println(updated + " document updated.");
+      }
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;private String escapeJson(String input) {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (input == null) return "";
+      private String escapeJson(String input) {
+         if (input == null) return "";
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return input.replace("\\", "\\\\")
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.replace("\"", "\\\"")
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.replace("\n", "\\n")
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.replace("\r", "\\r")
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.replace("\t", "\\t");
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
-&nbsp;&nbsp;&nbsp;}</pre>
+         return input.replace("\\", "\\\\")
+               .replace("\"", "\\\"")
+               .replace("\n", "\\n")
+               .replace("\r", "\\r")
+               .replace("\t", "\\t");
+      }
+   }
+```
+
 
 Notice that we're using createNativeQuery() to execute a raw MongoDB command (MQL) directly through Hibernate.  
 

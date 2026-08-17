@@ -30,7 +30,8 @@ Hidden Dracula Polymorphism Challenge {#h2-0-hidden-dracula-polymorphism-challen
 
 What will happen after running the following code?
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public class DraculaPolymorphism {
+```java
+public class DraculaPolymorphism {
     public static void main(String... doYourBest) {
         Dracula dracula = new Alucard();
 
@@ -54,7 +55,9 @@ What will happen after running the following code?
             return this.name;
         }
     }
-}</pre>
+}
+```
+
 
 A) AlucardAlucardbat  
 
@@ -70,17 +73,26 @@ Let's analyze the code:
 
 The very first thing to notice is that we are using polymorphism in the line of the code where we declare the parent class but instantiate it with the child class, which enables us to use polymorphic methods:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">Dracula dracula = new Alucard();</pre>
+```java
+Dracula dracula = new Alucard();
+```
+
 
 Then we will be using the `name` attribute but remember that attributes will never be overridden and there is no polymorphism with attributes, only with instance methods. Therefore the name that will be printed will be from the Dracula class since we declared the `dracula` variable with the type of `Dracula`. And the `getName` method will be from the `Alucard` class, since we are using polymorphism and `getName` is an instance method:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">System.out.print(dracula.name + dracula.getName());</pre>
+```java
+System.out.print(dracula.name + dracula.getName());
+```
+
 
 Therefore it will print... what do you think?
 
 Finally, we invoke the static method, keeping in mind that a static method is not an instance method, it's a class method and it doesn't depend on an instance to work. For that reason, polymorphism won't happen even though we are using the same method name with the child class. The invoked method will be from the class we declared the `dracula` instance, therefore it will be the `Dracula` class:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">System.out.print(dracula.metamorphosis());</pre>
+```java
+System.out.print(dracula.metamorphosis());
+```
+
 
 The information from the `Dracula` class will be printed then... and that information is... what do you think?
 

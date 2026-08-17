@@ -67,7 +67,10 @@ Before you change a single line, you need to know what you're dealing with.
 
 Run a dependency audit. Every library has a maximum supported JDK version. Find the ones that will break first.
 
-<pre class="EnlighterJSRAW EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">mvn versions:display-dependency-updates</pre>
+```
+mvn versions:display-dependency-updates
+```
+
 
 Look for:
 
@@ -87,7 +90,8 @@ This is the real one. OpenRewrite is an automated refactoring tool that handles 
 
 There's a recipe for each LTS hop. For Java 21 specifically:
 
-<pre class="EnlighterJSRAW EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="dracula" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">// build.gradle
+```
+// build.gradle
 plugins { 
 id("org.openrewrite.rewrite")
 version("latest.release")
@@ -99,12 +103,17 @@ setExportDatatables(true)
  } 
 dependencies { 
 rewrite("org.openrewrite.recipe:rewrite-migrate-java:latest.release")
- }</pre>
+ }
+```
+
 
 Then run:
 
-<pre class="EnlighterJSRAW EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">./gradlew rewriteRun # Gradle 
-mvn rewrite:run # Maven</pre>
+```
+./gradlew rewriteRun # Gradle 
+mvn rewrite:run # Maven
+```
+
 
 Then `git diff`. Review every change. Commit. Move on.
 > **One important thing OpenRewrite won't touch:** your ` in ``pom.xml`` or ``targetCompatibility`` in ``build.gradle`. You need to update those manually before running compiler checks. Don't forget. 🚩
@@ -115,7 +124,10 @@ Run it. Review the diff. Don't blindly commit. Some of it you'll want, some of i
 
 Built into the JDK itself. Scans your code for deprecated API usage before they blow up in your face.
 
-<pre class="EnlighterJSRAW EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">jdeprscan --class-path your-app.jar your-app.jar</pre>
+```
+jdeprscan --class-path your-app.jar your-app.jar
+```
+
 
 Run this before every hop. Not after. Before.
 
@@ -123,17 +135,20 @@ Run this before every hop. Not after. Before.
 
 Lock your minimum JDK version so nobody on the team accidentally compiles against the wrong one.
 
-<pre class="EnlighterJSRAW EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&lt;plugin&gt; 
-  &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;
-  &lt;artifactId&gt;maven-enforcer-plugin&lt;/artifactId&gt; 
-  &lt;configuration&gt;
-    &lt;rules&gt;
-      &lt;requireJavaVersion&gt;
-         &lt;version&gt;[21,)&lt;/version&gt; 
-       &lt;/requireJavaVersion&gt; 
-    &lt;/rules&gt; 
-  &lt;/configuration&gt;
- &lt;/plugin&gt;</pre>
+```
+<plugin> 
+  <groupId>org.apache.maven.plugins</groupId>
+  <artifactId>maven-enforcer-plugin</artifactId> 
+  <configuration>
+    <rules>
+      <requireJavaVersion>
+         <version>[21,)</version> 
+       </requireJavaVersion> 
+    </rules> 
+  </configuration>
+ </plugin>
+```
+
 
 ### What Gaslights You ❌ {#h3-7-what-gaslights-you}
 
@@ -152,17 +167,20 @@ This is where people first cry. 😭
 
 The Java EE modules got removed from the JDK. `javax.xml.bind`, `javax.activation`, all of it. Gone. You need to add them back as explicit dependencies.
 
-<pre class="EnlighterJSRAW EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&lt;dependency&gt;
- &lt;groupId&gt;javax.xml.bind&lt;/groupId&gt;
- &lt;artifactId&gt;jaxb-api&lt;/artifactId&gt;
- &lt;version&gt;2.3.1&lt;/version&gt;
-&lt;/dependency&gt;
+```
+<dependency>
+ <groupId>javax.xml.bind</groupId>
+ <artifactId>jaxb-api</artifactId>
+ <version>2.3.1</version>
+</dependency>
 
-&lt;dependency&gt;
- &lt;groupId&gt;com.sun.xml.bind&lt;/groupId&gt;
- &lt;artifactId&gt;jaxb-impl&lt;/artifactId&gt;
- &lt;version&gt;2.3.1&lt;/version&gt;
-&lt;/dependency&gt;</pre>
+<dependency>
+ <groupId>com.sun.xml.bind</groupId>
+ <artifactId>jaxb-impl</artifactId>
+ <version>2.3.1</version>
+</dependency>
+```
+
 
 > **Note:** this gets you back to compiling. If you're also targeting Spring Boot 3 eventually, you'll need to migrate to the `jakarta.*` namespace too, but that's a separate decision and a separate hop. Don't mix them.
 
@@ -214,7 +232,8 @@ Your code won't compile. And if you have custom generators spread across 15 proj
 
 The fix is migrating to the new `@IdGeneratorType` annotation introduced in Hibernate 6. It's cleaner and type-safe. But it's a rewrite, not a find-and-replace.
 
-<pre class="EnlighterJSRAW EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">// Before - using the now-deleted IdGeneratorStrategyInterpreter 
+```
+// Before - using the now-deleted IdGeneratorStrategyInterpreter 
 public class CustomIdGenerator implements IdentifierGenerator 
 { 
 @Override
@@ -233,7 +252,9 @@ public class CustomIdGenerator implements BeforeExecutionGenerator {
   public Object generate(SharedSessionContractImplementor session, Object owner, Object currentValue, EventType eventType) {
  // your logic
  } 
-}</pre>
+}
+```
+
 
 Also: from Hibernate 6.4, if you have `@GeneratedValue` on a non-identifier field, Hibernate now throws an `AnnotationException` at startup. Previous versions silently ignored it. Code that booted fine for years will suddenly refuse to start. Grep your whole codebase for `@GeneratedValue` before this hop. 🚩
 
@@ -278,7 +299,8 @@ After 15+ migrations this is the part that still gets me every time.
 
 The first time a developer on the team writes a `record` instead of a 40-line POJO and looks up with that face. You know the face. "Wait, that's it?"
 
-<pre class="EnlighterJSRAW EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">// Before 
+```
+// Before 
 public class RaceResult {
  private final int round;
  private final String gp;
@@ -293,7 +315,9 @@ public class RaceResult {
 }
 
  // After 🎉 
-record RaceResult(int round, String gp, int points) {}</pre>
+record RaceResult(int round, String gp, int points) {}
+```
+
 
 Virtual threads that let your app handle way more load with far less overhead. Pattern matching that makes your switch statements actually readable. Stream Gatherers that let you batch, slide, and group data without collector headaches.
 

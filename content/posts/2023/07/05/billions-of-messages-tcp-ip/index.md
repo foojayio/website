@@ -58,14 +58,17 @@ Chronicle Wire exists as a layer between an application and a byte stream, actin
 
 Let's look at a simple example. We will simulate the persisting of a Java object by serialising its state to the Wire, and reading it back into a separate object. We'll use a class called Person.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">public class Person extends SelfDescribingMarshallable {
+```
+public class Person extends SelfDescribingMarshallable {
    private String name;
    @NanoTime
    private long timestampNS;
    @Base85
    private long userName;
    …
-}</pre>
+}
+```
+
 
 The full code for the class can be found in the [Chronicle Wire Github repo.](https://github.com/OpenHFT/Chronicle-Wire/blob/ea/src/test/java/net/openhft/chronicle/wire/examples/Person.java "Chronicle Wire Github repo.")
 
@@ -75,39 +78,55 @@ The annotation `@NanoTime` is used by Chronicle Wire to encode the property valu
 
 Let's set up an instance of Chronicle Wire that will marshall and unmarshall to/from YAML, using an area of memory allocated on the Java heap.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">Wire yWire = Wire.newYamlWireOnHeap();</pre>
+```
+Wire yWire = Wire.newYamlWireOnHeap();
+```
+
 
 To create and initialise an instance of the Person class we would write:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">Person p1 = new Person()
+```
+Person p1 = new Person()
        .name("George Ball")
        .timestampNS(CLOCK.currentTimeNanos())
        .userName(Base85.INSTANCE.parse("georgeb"));
-System.out.println("p1: " + p1);</pre>
+System.out.println("p1: " + p1);
+```
+
 
 We use overloaded methods and a flow style, rather than `get...()` and `set...()` methods, for accessing and mutating properties. Output from the code shows the initialised state of the `Person` object, demonstrating the `toString()` method from the `SelfDescribingMarshallable` parent type:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">p1: !Person {
+```
+p1: !Person {
   name: George Ball,
   timestampNS: 2022-11-11T10:11:26.1922124,
   userName: georgeb
-}</pre>
+}
+```
+
 
 Now we serialise the object to the Wire. As the Wire has been created to use text/YAML, its contents can easily be displayed:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">Wire yWire = Wire.newYamlWireOnHeap();
+```
+Wire yWire = Wire.newYamlWireOnHeap();
 p1.writeMarshallable(yWire);
-System.out.println(yWire);</pre>
+System.out.println(yWire);
+```
+
 
 We can see the properties serialised appropriately:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">name: George Ball
+```
+name: George Ball
 timestampNS: 2022-11-11T10:11:54.7071341
-userName: georgeb</pre>
+userName: georgeb
+```
+
 
 We can now create an empty instance of the Person class, populate it by reading back from the Wire, and print it out:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">Person p2 = new Person();
+```
+Person p2 = new Person();
 p2.readMarshallable(yWire);
 System.out.println("p2: " + p2);
 The output shows that the new object has the correct state:
@@ -116,7 +135,9 @@ p2: !Person {
   name: George Ball,
   timestampNS: 2022-11-11T10:13:29.388,
   userName: georgeb
-}</pre>
+}
+```
+
 
 The code that demonstrates this can be found in the [Chronicle Wire Github repo](https://github.com/OpenHFT/Chronicle-Wire/blob/ea/src/test/java/net/openhft/chronicle/wire/examples/Person.java "Chronicle Wire Github repo").
 
@@ -126,50 +147,69 @@ Normally we would imagine objects that are serialised and deserialised using Wir
 
 However it is possible to look at this functionality from a different perspective. The serialised form of the `Person` object contained the properties of the object in YAML form:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">name: George Ball
+```
+name: George Ball
 timestampNS: 2022-11-11T10:11:54.7071341
-userName: georgeb</pre>
+userName: georgeb
+```
+
 
 If we generalise this further, we have a means of encoding and sending, using Wire, a request to invoke a method with a supplied argument. Due to the unidirectional nature of our message transport, these methods have to be void, i.e. they cannot return a value. To illustrate this, consider an Interface that contains definitions of operations to be performed on `Person` objects. The implementation(s) of the method(s) is not provided at this time:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">public interface PersonOps {
+```
+public interface PersonOps {
    void addPerson(Person p);
-}</pre>
+}
+```
+
 
 Only one method is specified here, for simplicity. It's intended to take a single argument which is of type `Person`, and add it to some collection. Based on the previous example, we can expect an instance of this type to be encoded to a Wire as
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">addPerson: {
+```
+addPerson: {
   name: George Ball,
   timestampNS: 2022-11-11T10:11:54.7071341,
   userName: georgeb
-}</pre>
+}
+```
+
 
 and decoded to a form that can be considered a method invocation:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">personOps.addPerson(
+```
+personOps.addPerson(
        Marshallable.fromString(Person.class, "" +
                "name: Alice Smithl\n" +
                "timestampNS: 2022-11-11T10:11:54.7071341\n" +
-               "userName: alices\n"));</pre>
+               "userName: alices\n"));
+```
+
 
 Chronicle Wire offers the capability to encode and decode method invocations just like this. The sender uses a type called `MethodWriter`, and the receiver uses a type called `MethodReader`.
 
 As an example, for the `PersonOps` type shown above, we can create a method writer:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">final PersonOps personOps = yWire.methodWriter(PersonOps.class);</pre>
+```
+final PersonOps personOps = yWire.methodWriter(PersonOps.class);
+```
+
 
 The result of this method call is an instance of the interface type that has a stub implementation of the method `addPerson()`, which encodes the request to the Wire. We can invoke this method as
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">personOps.addPerson(p1);
+```
+personOps.addPerson(p1);
 
 personOps.addPerson(new Person()
        .name("Bob Singh")
        .timestampNS(CLOCK.currentTimeNanos())
-       .userName(Base85.INSTANCE.parse("bobs")));</pre>
+       .userName(Base85.INSTANCE.parse("bobs")));
+```
+
 
 and if we look at the Wire, we will see the invocation request encoded as a message:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">addPerson: {
+```
+addPerson: {
   name: Alice Smith,
   timestampNS: 2022-11-11T10:11:54.7071341,
   userName: alices
@@ -186,21 +226,30 @@ addPerson: {
   timestampNS: 2022-11-11T10:28:48.3001121,
   userName: bobs
 }
-...</pre>
+...
+```
+
 
 At the receiving side, we can create a `MethodReader` object, providing an implementation of the method that is to be invoked upon decoding:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">MethodReader reader = yWire.methodReader(
-       (PersonOps) p -&gt; System.out.println("added " + p));</pre>
+```
+MethodReader reader = yWire.methodReader(
+       (PersonOps) p -> System.out.println("added " + p));
+```
+
 
 When the message is read and decoded, the method will be called:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">for (int i = 0; i &lt; 3; i++)
-   reader.readOne();</pre>
+```
+for (int i = 0; i < 3; i++)
+   reader.readOne();
+```
+
 
 As the method is invoked, we will see the output from the call to `System.out.println()`:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">added !Person {
+```
+added !Person {
   name: Alice Smith,
   timestampNS: 2022-11-11T10:11:54.7071341,
   userName: alices
@@ -216,7 +265,9 @@ added !Person {
   name: Bob Jones,
   timestampNS: 2022-11-11T10:28:48.3001121,
   userName: bobj
-}</pre>
+}
+```
+
 
 This is potentially very powerful, as it gives us a highly flexible and efficient means of encoding events or messages, and associating them with handlers. All of the flexibility of Wire encoding is available -- text formats, or highly efficient binary formats -- as are the many different types of underlying transports with which Wire operates.
 
@@ -250,27 +301,30 @@ Let's look at some examples of these features in action.
 
 Following standard practice, the first example is one that simply echoes a "Hello" message. The numbered comments indicate points of interest in the code and correspond to the list below:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">public class Channel1ReadWrite {
+```
+public class Channel1ReadWrite {
 
-   private static final String URL = System.getProperty("url", "tcp://:3334");     // ===&gt; (1)
+   private static final String URL = System.getProperty("url", "tcp://:3334");     // ===> (1)
 
    public static void main(String[] args) {
 
-       try (ChronicleContext context = ChronicleContext.newContext(URL).name("Channel1");     // ===&gt; (2)
+       try (ChronicleContext context = ChronicleContext.newContext(URL).name("Channel1");     // ===> (2)
            ChronicleChannel channel = context.newChannelSupplier(new EchoHandler()).get()) {
 
            Jvm.startup().on(Channel1.class, "Channel set up on port: " + channel.channelCfg().port());
 
-           Says says = channel.methodWriter(Says.class);                       // ===&gt; (3)
+           Says says = channel.methodWriter(Says.class);                       // ===> (3)
            says.say("Well hello there");
 
-           StringBuilder eventType = new StringBuilder();                      // ===&gt; (4)
+           StringBuilder eventType = new StringBuilder();                      // ===> (4)
            String text = channel.readOne(eventType, String.class);
-           Jvm.startup().on(Channel1.class, "&gt;&gt;&gt;&gt; " + eventType + ": " + text);
+           Jvm.startup().on(Channel1.class, ">>>> " + eventType + ": " + text);
 
        }
    }
-}</pre>
+}
+```
+
 
 1. Critical to the setup of the channel is a URL string. Currently  
    only TCP/IP is available as a transport but more can and will be supported in due course. The semantics of this string as understood by Chronicle Channel setup is summarised in the following table:
@@ -285,7 +339,8 @@ All of the necessary work to set up a server-side socket for this connection is 
 
 3. Remember TCP/IP is a full duplex protocol, so the channel we have is bi-directional. So we can send an event through the channel, using a `MethodWriter` generated from the following type:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">public interface Says extends Syncable {
+```
+public interface Says extends Syncable {
    void say(String say);
 }
 
@@ -293,52 +348,63 @@ All of the necessary work to set up a server-side socket for this connection is 
 
 Says says = channel.methodWriter(Says.class);
 says.say("Well hello there");
-…</pre>
+…
+```
+
 
 4. We can then use Chronicle Wire to read the echoed event back from the channel and display its details.
 
 When this simple example is run, we can see the output:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">[main] INFO run.chronicle.wire.channel.demo1.Channel1 - Channel set up on port: 3334
-[main] INFO run.chronicle.wire.channel.demo1.Channel1 - &gt;&gt;&gt;&gt; say: Well hello there</pre>
+```
+[main] INFO run.chronicle.wire.channel.demo1.Channel1 - Channel set up on port: 3334
+[main] INFO run.chronicle.wire.channel.demo1.Channel1 - >>>> say: Well hello there
+```
+
 
 #### Example 2: Separate Client and Server
 
 The first example is a little artificial since it combines the client side and server side functionality into a single process. While this may be ideal for testing or debugging purposes, in reality, we want to separate both sides into their own process. Let's have a look at the server following this division:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">public class ChannelService {
+```
+public class ChannelService {
    static final int PORT = Integer.getInteger("port", 4441);
 
    public static void main(String[] args) throws IOException {
        System.setProperty("port", "" + PORT); // set if not set.
        ChronicleGatewayMain.main(args);
    }
-}</pre>
+}
+```
+
 
 Notice that this is now very short, thanks to our having used the utility class `ChronicleGatewayMain`, which encapsulates the functionality of setting up the server-side (a channel acceptor), removing boilerplate code and using default settings as much as possible.
 
 Code for the client side is shown below, and the numbered comments again illustrate points of interest:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">public class ChannelClient {
+```
+public class ChannelClient {
 
-   private static final String URL = System.getProperty("url", "tcp://localhost:" + ChannelService.PORT);  // ===&gt; (1)
+   private static final String URL = System.getProperty("url", "tcp://localhost:" + ChannelService.PORT);  // ===> (1)
 
    public static void main(String[] args) {
 
-       try (ChronicleContext context = ChronicleContext.newContext(URL).name("ChannelClient");    // ===&gt; (2)
+       try (ChronicleContext context = ChronicleContext.newContext(URL).name("ChannelClient");    // ===> (2)
             ChronicleChannel channel = context.newChannelSupplier(new EchoHandler()).get()) {
 
            Jvm.startup().on(ChannelClient.class, "Channel set up on port: " + channel.channelCfg().port());
-           Says says = channel.methodWriter(Says.class);                            // ===&gt; (3)
+           Says says = channel.methodWriter(Says.class);                            // ===> (3)
            says.say("Well hello there");
 
            StringBuilder eventType = new StringBuilder();
            String text = channel.readOne(eventType, String.class);
 
-           Jvm.startup().on(ChannelClient.class, "&gt;&gt;&gt;&gt; " + eventType + ": " + text);
+           Jvm.startup().on(ChannelClient.class, ">>>> " + eventType + ": " + text);
        }
    }
-}</pre>
+}
+```
+
 
 1. The URL string contains a hostname and port number, which informs the channel creation logic that we are initiating the setup of the channel from the client side, providing the full address of the acceptor for the service.
 2. The Context is set up as an initiator/client, because of the URL string format. When creating a channel from an initiator/client context, we specify which handler to be used at the receiving end. This forms part of the requested channel specification, which is sent to the service during the setup of the channel.
@@ -349,8 +415,11 @@ It is necessary for the service to have the necessary code for the handler -- fo
 
 When both client and server applications are run the output is the same as above:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">[main] INFO run.chronicle.wire.channel.demo2.ChannelClient - Channel set up on port: 4441
-[main] INFO run.chronicle.wire.channel.demo2.ChannelClient - &gt;&gt;&gt;&gt; say: Well hello there</pre>
+```
+[main] INFO run.chronicle.wire.channel.demo2.ChannelClient - Channel set up on port: 4441
+[main] INFO run.chronicle.wire.channel.demo2.ChannelClient - >>>> say: Well hello there
+```
+
 
 #### Example 3: Simple Request/Response Interaction
 
@@ -369,42 +438,53 @@ There are four parts to this example:
 
 The service is defined using an interface that contains method signatures representing the supported requests. We define the service interface as
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">public interface PersonOps {
+```
+public interface PersonOps {
    void addPerson ( Person p );
-}</pre>
+}
+```
+
 
 The `Person` type is as defined earlier.
 
 Messaging in Chronicle is unidirectional, so service API methods are void. We therefore need to define a second interface that defines the message for used for the response:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">public interface ResponseSender {
+```
+public interface ResponseSender {
    void respond(ReqStatus status);
-}</pre>
+}
+```
+
 
 The `ReqStatus` type indicates the success or otherwise of the method, and is defined as:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">public enum ReqStatus {
+```
+public enum ReqStatus {
    OK,
    ERROR
-}</pre>
+}
+```
+
 
 The two interfaces are wired together to form a "handler" for incoming requests:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">public class PersonOpsProcessor implements PersonOpsHandler {
+```
+public class PersonOpsProcessor implements PersonOpsHandler {
 
-   private transient ResponseSender responder;                     // ===&gt; (1)
+   private transient ResponseSender responder;                     // ===> (1)
 
-   public PersonOpsProcessor responder(ResponseSender responseSender) {     // ===&gt; (2)
+   public PersonOpsProcessor responder(ResponseSender responseSender) {     // ===> (2)
        this.responder = responseSender;
        return this;
    }
 
    @Override
-   public void addPerson(Person p) {                                   // ===&gt; (3)
+   public void addPerson(Person p) {                                   // ===> (3)
        responder.respond(ReqStatus.OK);
    }
 }
-</pre>
+```
+
 
 1. This field will hold a reference to the output for this service to which response messages are posted.
 2. In this example, the ResponseSender is injected using a setter method, this could also be done through a constructor.
@@ -416,28 +496,30 @@ Recall from the discussion of concepts that the Channel Handler is responsible f
 
 For this example we need to define a class that will dispatch incoming messages on the Channel to the appropriate handler method in the service, and connect the service output to the Channel:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">public class PersonSvcHandler extends AbstractHandler&lt;PersonSvcHandler&gt; {   // ===&gt; (1)
+```
+public class PersonSvcHandler extends AbstractHandler<PersonSvcHandler> {   // ===> (1)
 
-   private final PersonOpsHandler personOpsHandler;                         // ===&gt; (2)
+   private final PersonOpsHandler personOpsHandler;                         // ===> (2)
 
-   public PersonSvcHandler(PersonOpsHandler personOpsHandler) {            // ===&gt; (3)
+   public PersonSvcHandler(PersonOpsHandler personOpsHandler) {            // ===> (3)
        this.personOpsHandler = personOpsHandler;
    }
 
-   public void run(ChronicleContext context, ChronicleChannel channel) {   // ===&gt; (4)
+   public void run(ChronicleContext context, ChronicleChannel channel) {   // ===> (4)
        channel.eventHandlerAsRunnable(
            personOpsHandler.responder(channel.methodWriter(ResponseSender.class))
        ).run();
    }
 
    @Override
-   public ChronicleChannel asInternalChannel(ChronicleContext context,     // ===&gt; (5)
+   public ChronicleChannel asInternalChannel(ChronicleContext context,     // ===> (5)
                                                                           ChronicleChannelCfg channelCfg) {
        throw new UnsupportedOperationException("Internal Channel not supported");
    }
 
 }
-</pre>
+```
+
 
 1. The base class is where generic platform functionality is implemented. Our class will supply the necessary specifics for our service.
 2. A reference to the implementation of the handler methods.
@@ -449,7 +531,8 @@ For this example we need to define a class that will dispatch incoming messages 
 
 Having completed these steps, the driver class for the service is straightforward, and is more or less identical to the previous example, using the utility class `ChronicleGatewayMain` to create the configure the Channel:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">public class PersonSvcMain {
+```
+public class PersonSvcMain {
 
    static final int PORT = Integer.getInteger("port", 7771);
 
@@ -457,24 +540,27 @@ Having completed these steps, the driver class for the service is straightforwar
        System.setProperty("port", "" + PORT);
        ChronicleGatewayMain.main(args);
    }
-}</pre>
+}
+```
+
 
 **The Client**   
 
 We can implement a simple client for our Person service by setting up a Channel and then issuing requests to our service.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">public class PersonClient {
+```
+public class PersonClient {
 
-   private static final String URL = System.getProperty("url", "tcp://localhost:" + PersonSvcMain.PORT);      // ===&gt; (1)
+   private static final String URL = System.getProperty("url", "tcp://localhost:" + PersonSvcMain.PORT);      // ===> (1)
 
    public static void main(String[] args) {
 
        try (ChronicleContext context = ChronicleContext.newContext(URL)) {
 
-           ChronicleChannel channel = context.newChannelSupplier(new PersonSvcHandler(new PersonOpsProcessor()))    // ===&gt; (2)
+           ChronicleChannel channel = context.newChannelSupplier(new PersonSvcHandler(new PersonOpsProcessor()))    // ===> (2)
                                                                .get();
 
-           final PersonOps personOps = channel.methodWriter(PersonOps.class);           // ===&gt; (3)
+           final PersonOps personOps = channel.methodWriter(PersonOps.class);           // ===> (3)
 
            Person thePerson = new Person()
                                                    .name("George")
@@ -487,10 +573,12 @@ We can implement a simple client for our Person service by setting up a Channel 
            StringBuilder evtType = new StringBuilder();
            ReqStatus response = channel.readOne(evtType, ReqStatus.class);
 
-           Jvm.startup().on(PersonClient.class, " &gt;&gt;&gt; " + evtType + ": " + response);
+           Jvm.startup().on(PersonClient.class, " >>> " + evtType + ": " + response);
        }
    }
-}</pre>
+}
+```
+
 
 1. The URL is by default configured with the port number that was configured in the server.
 2. The channel is created and an instance of our custom handler injected.

@@ -25,13 +25,15 @@ Let's think about an example:
 
 We all know how to compute the Fibonacci series. The simple code is given below-
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">public static long fib(int n) {
-  if (n &lt; 2) {
+```
+public static long fib(int n) {
+  if (n < 2) {
     return n;
   } else {
     return fib(n - 2) + fib(n - 2);
   }
-}</pre>
+}
+```
 
 Over here, we have used recursion to solve the Fibonacci series. To find the Fibonacci number of n, we must know the previous two. Each of them again will require to calculate the previous two. The process will continue until it reaches to the bases case and then we have a result.
 
@@ -39,7 +41,8 @@ The above code is single-threaded and sequential, which is fine for our usual us
 
 Let's do that.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">package ca.bazlur;
+```java
+package ca.bazlur;
 
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
@@ -50,7 +53,7 @@ public class Playground6 {
 
   public static void main(String[] args) throws ExecutionException, InterruptedException {
     var threadPool = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());
-    Future&lt;Long&gt; fifthFibonacciNumber = threadPool.submit(() -&gt; fib(10, threadPool));
+    Future<Long> fifthFibonacciNumber = threadPool.submit(() -> fib(10, threadPool));
 
     System.out.println("fifthFibonacciNumber = " + fifthFibonacciNumber.get());
 
@@ -59,15 +62,16 @@ public class Playground6 {
 
   public static long fib(int n, ExecutorService threadPool)
       throws ExecutionException, InterruptedException {
-    if (n &lt; 2) {
+    if (n < 2) {
       return n;
     } else {
-      var prev = threadPool.submit(() -&gt; fib(n - 1, threadPool));
-      var prevPrev = threadPool.submit(() -&gt; fib(n - 2, threadPool));
+      var prev = threadPool.submit(() -> fib(n - 1, threadPool));
+      var prevPrev = threadPool.submit(() -> fib(n - 2, threadPool));
       return prev.get() + prevPrev.get();
     }
   }
-}</pre>
+}
+```
 
 *Note that this code is just an experiment. Please don't use this in a production environment.*
 
@@ -77,7 +81,9 @@ First, we created a thread pool with the number of available processors in my ma
 
 To find how many processors are available on a computer, we can use the following method -
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">Runtime.getRuntime().availableProcessors()</pre>
+```java
+Runtime.getRuntime().availableProcessors()
+```
 
 Then we created a **Callable** with a lambda expression and passed it to the thread pool. The lambda expression calls the fib() method.
 
@@ -121,7 +127,7 @@ We could have solved this problem if we had more thread in the pool.
 
 Interestingly if we use CachedThreadPool, the problem goes away,
 
-```EnlighterJSRAW
+```
 var threadPool = Executors.newCachedThreadPool();
 ```
 

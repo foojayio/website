@@ -38,7 +38,7 @@ If you've been building AI-powered apps with BoxLang, this release changes every
 
 Let's dig in. 🎉
 
-*** ** * ** ***
+
 
 🎯 The Headline: AI Skills System {#h2-0-the-headline-ai-skills-system}
 -----------------------------------------------------------------------
@@ -84,7 +84,7 @@ aiGlobalSkills().add( aiSkill( ".ai/skills/security-policy/SKILL.md" ) )
 
 Skills live in plain Markdown files --- which means your team can review them in pull requests, diff them, and keep them in sync with the rest of your codebase. This is the end of prompt drift.
 
-*** ** * ** ***
+
 
 📚 Brand New Docs {#h2-1-brand-new-docs}
 ----------------------------------------
@@ -116,7 +116,7 @@ agent = aiAgent( "analyst" )
 
 The agent's system prompt is automatically updated so the LLM knows which tools came from which server. MCP servers are also surfaced in `getConfig()` output for full observability.
 
-*** ** * ** ***
+
 
 🗄️ Global AI Tool Registry {#h2-3-global-ai-tool-registry}
 -----------------------------------------------------------
@@ -137,7 +137,7 @@ result = aiChat(
 
 Module namespacing (e.g. `now@bxai`) keeps registrations collision-free across modules. Two new interception points --- `onAIToolRegistryRegister` and `onAIToolRegistryUnregister` --- give you hooks for auditing and lifecycle management.
 
-*** ** * ** ***
+
 
 🔧 Tool System Overhaul {#h2-4-tool-system-overhaul}
 ----------------------------------------------------
@@ -163,7 +163,7 @@ Two **built-in core tools** ship with the module:
 
 `now@bxai` being auto-registered is worth calling out. No major AI framework ships built-in tools out of the box. This is a genuine differentiator --- your agents just *know what time it is* without any wiring on your part.
 
-*** ** * ** ***
+
 
 🛡️ Provider Capability System {#h2-5-provider-capability-system}
 -----------------------------------------------------------------
@@ -178,7 +178,7 @@ println( service.hasCapability( "chat" ) )    // false
 
 `aiChat()`, `aiChatStream()`, and `aiEmbed()` now check provider capabilities before calling and throw a clean `UnsupportedCapability` exception if the requirement isn't met. No more debugging mysterious provider errors.
 
-*** ** * ** ***
+
 
 🌲 Parent-Child Agent Hierarchy {#h2-6-parent-child-agent-hierarchy}
 --------------------------------------------------------------------
@@ -198,7 +198,7 @@ println( researcherAgent.getAncestors() )    // [ coordinator ]
 
 `addSubAgent()` automatically wires the parent relationship. `getConfig()` exposes `parentAgent`, `agentDepth`, and `agentPath` for full observability.
 
-*** ** * ** ***
+
 
 🧵 Middleware Support {#h2-7-middleware-support}
 ------------------------------------------------
@@ -234,7 +234,7 @@ agent = aiAgent(
 )
 ```
 
-*** ** * ** ***
+
 
 🏢 Stateless Agents + Per-Call Identity Routing {#h2-8-stateless-agents-per-call-identity-routing}
 --------------------------------------------------------------------------------------------------
@@ -251,7 +251,7 @@ sharedMemory.add( message, userId: "bob",   conversationId: "conv-2" )
 sharedMemory.getAll( userId: "alice", conversationId: "conv-1" )
 ```
 
-*** ** * ** ***
+
 
 What Else Is New {#h2-9-what-else-is-new}
 -----------------------------------------
@@ -262,14 +262,14 @@ What Else Is New {#h2-9-what-else-is-new}
 * 🐛 **Streaming event fixes** --- `beforeAIModelInvoke`/`afterAIModelInvoke` events were not firing for streaming; fixed
 * 🐛 **MCP `requestId` null crash** --- fixed a crash on JSON-RPC notifications that intentionally omit `id`
 
-*** ** * ** ***
+
 
 No Breaking Changes {#h2-10-no-breaking-changes}
 ------------------------------------------------
 
 3.0 is a major release but your existing code keeps working. `aiChat()`, `aiEmbed()`, and `aiAgent()` BIF signatures are unchanged. Upgrade, run your tests, and start exploring the new APIs.
 
-*** ** * ** ***
+
 
 Get Started {#h2-11-get-started}
 --------------------------------

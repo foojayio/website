@@ -40,11 +40,14 @@ The following code snippet defines the TaskGraph of our example and shows how th
  <img decoding="async" src="taskgraph-snapshot-1-1024x79.png" alt="" class="wp-image-62620" width="531" height="40">
 </figure>
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">TaskGraph taskGraph = new TaskGraph(“name”);
+```java
+TaskGraph taskGraph = new TaskGraph(“name”);
 taskGraph.transferToDevice(DataTransferMode.EVERY_EXECUTION, input);
 taskGraph.task(“sample”, Class::methodA, input, output);
 taskGraph.transferToHost(DataTransferMode.EVERY_EXECUTION, output);
-ImmutableTaskGraph itg = taskGraph.snapshot();</pre>
+ImmutableTaskGraph itg = taskGraph.snapshot();
+```
+
 
 2. Build, Optimize and Execute an Execution Plan {#h2-1-2-build-optimize-and-execute-an-execution-plan}
 -------------------------------------------------------------------------------------------------------
@@ -59,13 +62,19 @@ Some examples are: configuring the targeted device, enabling/disabling the profi
 
 A **TornadoExecutionPlan** object accepts one or multiple immutable task graphs, as follows:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">TornadoExecutionPlan executionPlan = new TornadoExecutionPlan(itg);</pre>
+```java
+TornadoExecutionPlan executionPlan = new TornadoExecutionPlan(itg);
+```
+
 
 ### 2.1. **What can be done with an execution plan?** {#h3-2-2-1-what-can-be-done-with-an-execution-plan}
 
 An execution plan can be executed directly, in which case TornadoVM will apply a list of default optimizations (e.g., it will run on the default device, using the default thread scheduler).
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">executionPlan.execute();</pre>
+```java
+executionPlan.execute();
+```
+
 
 **Note:** The **default device** is the first device that is identified by the TornadoVM runtime. This device is identified with the \`0:0\` identifier if a programmer runs the command: tornado --devices.
 
@@ -81,18 +90,24 @@ Beneath is an example of an execution plan that contains three additional config
 
 The configuration part is expressed as follows:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">// Select a particular device using the driver and device ids 
+```java
+// Select a particular device using the driver and device ids 
 // (from driver with id 1, the device 0).
 // These identifiers are obtained by running `tornado --devices`
 TornadoDevice device = getTornadoRuntime().getDriver(1).getDevice(0);
 
 executionPlan.withProfiler(ProfilerMode.SILENT) // Enable the TornadoVM Profiler
        .withWarmUp() //  Perform a warm-up
-       .withDevice(device); // Select a specific device</pre>
+       .withDevice(device); // Select a specific device
+```
+
 
 And the execution is launched as follows:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">executionPlan.execute();</pre>
+```java
+executionPlan.execute();
+```
+
 
 **Note for migration:** The **execute()** method that was exposed in the **TaskSchedule** object of TornadoVM API (prior to v0.15) needs to be replaced with: i) the creation of a **TornadoExecutionPlan** object that accepts the corresponding **ImmutableTaskGraph** object as input; and ii) the invocation of the **execute** method of the generated execution plan.
 
@@ -108,8 +123,11 @@ This object can be used to:
 
 An execution result can be used, as follows:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">TornadoExecutionResult executionResult = executionPlan.execute();
-TornadoProfilerResult profilerResult = executionResult.getProfilerResult();</pre>
+```java
+TornadoExecutionResult executionResult = executionPlan.execute();
+TornadoProfilerResult profilerResult = executionResult.getProfilerResult();
+```
+
 
 4. Further reading and examples {#h2-5-4-further-reading-and-examples}
 ----------------------------------------------------------------------

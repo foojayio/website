@@ -33,7 +33,8 @@ Let's start with an example:
 
 Assume a thread is waiting to count the vote in a Polling station (Ideally, it's a service, just assume a real one for the sake of example). This thread will start counting votes when all votes are completed. The code could look like this:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">while (true) {
+```java
+while (true) {
   synchronized (lock) {
     if (votingComplete) {
       countVotes();
@@ -42,7 +43,9 @@ Assume a thread is waiting to count the vote in a Polling station (Ideally, it's
       // do nothing...simply wait here.
     }
   }
-}</pre>
+}
+```
+
 
 The above code looks just fine; it doesn't seem to have any problem; it will produce the correct result. When the `Boolean` variable `votingComplete` becomes `true`, the voting count will start; otherwise, the thread that runs this piece of code will stay there and do nothing. The only problem is, we are running it under a while loop. This is essentially doing nothing but eating up the CPU cycle. This sort of situation is sometimes called busy waiting.
 
@@ -69,46 +72,59 @@ Now that we know the lifecycle of a thread, we can put a thread into a waiting s
 
 In a synchronized block, if we call this wait method, the thread executing the code will go into a waiting state. The head will remain in this state until a signal is passed to it.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">synchronized (lock) {
+```java
+synchronized (lock) {
   while (!votingComplete) {
     lock.wait();
   }
   countVotes();
-}</pre>
+}
+```
+
 
 We can send a signal to a thread using two methods of the lock object:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">notify()
-notifyAll();</pre>
+```java
+notify()
+notifyAll();
+```
+
 
 If we have only one thread in a waiting state, then we can call notify() method, and if we have multiple threads waiting, then we call notifyAll();
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">synchronized (lock) {
+```java
+synchronized (lock) {
   votingComplete = true;
   lock.notify();
-}</pre>
+}
+```
+
 
 We have to keep two things in mind while using `wait()` \& `notify()`:
 
 * This `wait()`, `notify()`, `notifyAll()` method can be called only inside a synchronized block. If we call them outside synchronized block, then Weill gets IllagalMontorStateException.
 * When we call the wait() motioned based on a condition, we must call it inside a loop. The reason is that the thread does not necessarily wake up due to notify signals. There might be some other reasons, and the condition is not yet met. This is called spurious wakeups. If the condition is not met yet, we should put the thread again in the waiting state.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">while (!conditionMet){
+```java
+while (!conditionMet){
   lock.wait();
-}</pre>
+}
+```
+
 
 Let's see a class example called producer-consumer.
 
 The idea is one thread will produce data from input. We call it Producer. It can only produce a limited amount of data, and then it puts into a buffer. The buffer is a shared data structure between threads. The other threads can consume the data from the buffer. They are called consumers. Initially, the buffer is empty, and the Producer can only produce as long as the buffer isn't full. On the other hand, the Consumer can take data as long the buffer isn't empty.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">package com.bazlur;
+```java
+package com.bazlur;
 
 import java.util.LinkedList;
 import java.util.Queue;
 
 public class Buffer {
     private static final int MAX_SIZE = 10;
-    private final Queue&lt;Integer&gt; queue = new LinkedList&lt;&gt;();
+    private final Queue<Integer> queue = new LinkedList<>();
     private final Object lock = new Object();
 
     public void addItem(int item) {
@@ -153,7 +169,9 @@ public class Buffer {
             return item;
         }
     }
-}</pre>
+}
+```
+
 
 In the above program, we have used a `queue` for integers. For simplicity, let's assume this queue can hold 10 sizes. In the `addItem()` method, when the queue size becomes 10, we call the `wait()` from the lock; as a result, the thread that is executing this `addItem()` method will go into a waiting state.
 
@@ -163,7 +181,8 @@ Similarly, when the queue is empty, the consumer thread must be waiting until we
 
 Let's use it in code:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">package com.bazlur;
+```java
+package com.bazlur;
 
 import java.util.Random;
 
@@ -173,28 +192,28 @@ public class ProducerConsumerExample {
     public static void main(String[] args) throws InterruptedException {
         var buffer = new Buffer();
 
-        var producer1 = new Thread(() -&gt; {
+        var producer1 = new Thread(() -> {
             while (true) {
                 buffer.addItem(getRandomItem());
             }
         });
         producer1.setName("Producer # 1");
 
-        var producer2 = new Thread(() -&gt; {
+        var producer2 = new Thread(() -> {
             while (true) {
                 buffer.addItem(getRandomItem());
             }
         });
         producer2.setName("Producer # 2");
 
-        var consumer1 = new Thread(() -&gt; {
+        var consumer1 = new Thread(() -> {
             while (true) {
                 buffer.getItem();
             }
         });
         consumer1.setName("Consumer # 1");
 
-        var consumer2 = new Thread(() -&gt; {
+        var consumer2 = new Thread(() -> {
             while (true) {
                 buffer.getItem();
             }
@@ -212,11 +231,14 @@ public class ProducerConsumerExample {
     private static int getRandomItem() {
         return random.nextInt();
     }
-}</pre>
+}
+```
+
 
 Sample output:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">Thread[Producer # 2,5,main]: Adding item: 547252719
+```java
+Thread[Producer # 2,5,main]: Adding item: 547252719
 Thread[Producer # 2,5,main]: Item has been added, let's notify all consumers
 Thread[Producer # 2,5,main]: Resumed!
 Thread[Producer # 2,5,main]: Adding item: 951373866
@@ -268,7 +290,9 @@ Thread[Consumer # 2,5,main]: Let's consume an item
 Thread[Consumer # 2,5,main]: Resumed.
 .....
 .....
-......</pre>
+......
+```
+
 
 ```text
 

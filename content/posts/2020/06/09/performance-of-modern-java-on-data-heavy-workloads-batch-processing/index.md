@@ -35,12 +35,15 @@ On the flip side, we did not consider the experimental low-latency collectors in
 
 For the single-node batch benchmark we used this simple pipeline, full code on [GitHub](https://github.com/mtopolnik/jet-gc-benchmark/blob/master/src/main/java/org/example/BatchBenchmark.java):
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">p.readFrom(longSource)
+```java
+p.readFrom(longSource)
  .rebalance() // Introduced in Jet 4.2
- .groupingKey(n -&gt; n % NUM_KEYS)
- .aggregate(summingLong(n -&gt; n))
- .filter(e -&gt; (e.getKey() &amp; 0xFF_FFFFL) == 0)
- .writeTo(Sinks.logger())</pre>
+ .groupingKey(n -> n % NUM_KEYS)
+ .aggregate(summingLong(n -> n))
+ .filter(e -> (e.getKey() & 0xFF_FFFFL) == 0)
+ .writeTo(Sinks.logger())
+```
+
 
 The source is again a self-contained mock source that just emits a sequence of `long` numbers and the key function is defined so that the grouping key cycles through the key space: 0, 1, 2, ..., `NUM_KEYS`, 0, 1, 2, ... This means that, over the first cycle, the pipeline observes all the keys and builds up a fixed data structure to hold the aggregation results. Over the following cycles it just updates the existing data. This aligns perfectly with the Generational Garbage Hypothesis: the objects either last through the entire computation or are short-lived temporary objects that become garbage very soon after creation.
 
@@ -76,19 +79,22 @@ With 10 GB of heap it failed completely, stuck in back-to-back Full GC operation
 
 To properly benchmark in the cluster, we had to use a bit more complex [pipeline](https://github.com/mtopolnik/jet-gc-benchmark/blob/master/src/main/java/org/example/ClusterBatchBenchmark.java):
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">p.readFrom(longSource())
+```java
+p.readFrom(longSource())
  .rebalance()
- .flatMap(n -&gt; {
+ .flatMap(n -> {
      Long[] items = new Long[SOURCE_STEP];
-     Arrays.setAll(items, i -&gt; n + i);
+     Arrays.setAll(items, i -> n + i);
      return traverseArray(items);
  })
  .rebalance()
- .groupingKey(n -&gt; n % NUM_KEYS)
- .aggregate(AggregateOperations.summingLong(n -&gt; n))
- .filter(e -&gt; e.getKey() % 1_000_000 == 0)
+ .groupingKey(n -> n % NUM_KEYS)
+ .aggregate(AggregateOperations.summingLong(n -> n))
+ .filter(e -> e.getKey() % 1_000_000 == 0)
  .writeTo(Sinks.logger())
-;</pre>
+;
+```
+
 
 Since the source is non-parallel, we applied some optimizations so it doesn't become a bottleneck. We let the source emit the numbers 0, 10, 20, ... and then applied a parallelized `flatMap` stage that interpolates the missing numbers. We also used `rebalance()` between the source and `flatMap`, spreading the data across the cluster. We applied rebalancing again before entering the main stage, keyed aggregation. After the aggregation stage we first reduce the output to every millionth key-value pair and then send it to the logger. We used one billion data items and a keyset of half a billion.
 

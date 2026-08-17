@@ -95,9 +95,12 @@ Now, in this same scenario, imagine that a new collection is created and it is *
 
 By default, this collection is assigned to the database's primary shard. You can verify which shard is acting as the primary for a database by running:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&gt; use config
+```
+> use config
 
-&gt; db.databases.find({_id: "&lt;DATABASE_NAME&gt;"}, {primary: 1})</pre>
+> db.databases.find({_id: "<DATABASE_NAME>"}, {primary: 1})
+```
+
 
 Since this primary shard may host multiple unsharded collections, they all end up sharing the same resources. As these collections grow, this can lead to resource contention.
 
@@ -147,10 +150,13 @@ In simple terms, a shard key is the field, or set of fields, that MongoDB uses t
 
 In practice, choosing a shard key also means defining an index. Once the shard key is in place, the collection is sharded using the shardCollection operation, and MongoDB starts distributing data across shards based on that key.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">sh.shardCollection(
-&nbsp;"library.books",
-&nbsp;{ publishedYear: 1 }
-)</pre>
+```
+sh.shardCollection(
+ "library.books",
+ { publishedYear: 1 }
+)
+```
+
 
 In this example, the publishedYear field is used as the shard key. If the collection is empty, MongoDB can create this index as part of the sharding operation. If the collection already contains data, you must create the index first, and only then shard the collection.
 
@@ -190,14 +196,17 @@ It depends on the data, on access patterns, and on how the application is used. 
 
 Let's use a books collection as an example:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">{
-&nbsp;"title": "Essential Artificial Intelligence - 3th Edition",
-&nbsp;"author": "Thomas Williams",
-&nbsp;"isbn": "978-0492974866",
-&nbsp;"publishedYear": 2014,
-&nbsp;"createdAt": "2026-01-01T00:00:00.000Z",
-&nbsp;"price": 41.81
-}</pre>
+```
+{
+ "title": "Essential Artificial Intelligence - 3th Edition",
+ "author": "Thomas Williams",
+ "isbn": "978-0492974866",
+ "publishedYear": 2014,
+ "createdAt": "2026-01-01T00:00:00.000Z",
+ "price": 41.81
+}
+```
+
 
 #### Cardinality
 
@@ -261,37 +270,43 @@ In the middle of the cluster sits mongos, which acts as the router. The Java app
 
 The first step is to populate the cluster with data. To do that, we will insert 10 million book documents into the collection using a Java application with bulk writes.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">private void insertBooksBulk(MongoCollection&lt;Document&gt; col) {
-&nbsp;&nbsp;&nbsp;List&lt;Document&gt; batch = new ArrayList&lt;&gt;(BATCH_SIZE);
-&nbsp;&nbsp;&nbsp;InsertManyOptions opts = new InsertManyOptions().ordered(false);
+```
+private void insertBooksBulk(MongoCollection<Document> col) {
+   List<Document> batch = new ArrayList<>(BATCH_SIZE);
+   InsertManyOptions opts = new InsertManyOptions().ordered(false);
 
-&nbsp;&nbsp;&nbsp;for (int i = 0; i &lt; TOTAL_BOOKS; i++) {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;batch.add(makeDoc(i));
+   for (int i = 0; i < TOTAL_BOOKS; i++) {
+       batch.add(makeDoc(i));
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (batch.size() == BATCH_SIZE) {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;col.insertMany(batch, opts);
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;logProgress(i + 1, TOTAL_BOOKS);
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;batch.clear();
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
-&nbsp;&nbsp;&nbsp;}
+       if (batch.size() == BATCH_SIZE) {
+           col.insertMany(batch, opts);
+           logProgress(i + 1, TOTAL_BOOKS);
+           batch.clear();
+       }
+   }
 
-&nbsp;&nbsp;&nbsp;if (!batch.isEmpty()) {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;col.insertMany(batch, opts);
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;logProgress(TOTAL_BOOKS, TOTAL_BOOKS);
-&nbsp;&nbsp;&nbsp;}
-}</pre>
+   if (!batch.isEmpty()) {
+       col.insertMany(batch, opts);
+       logProgress(TOTAL_BOOKS, TOTAL_BOOKS);
+   }
+}
+```
+
 
 This is simply a way to simulate a cluster that already contains a large amount of data. You can check the entire code [here](https://github.com/ricardohsmello/mongodb-java-sample/blob/de430e9ebb734dc3eef9f9d9faad276570b796ec/src/main/java/com/example/mongodb/DataInitializer.java#L68).
 
 After this step, we connect to mongos and inspect the *books* collection:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">Enterprise [direct: mongos] test&gt; use bookstore
+```
+Enterprise [direct: mongos] test> use bookstore
 
 switched to db bookstore
 
-Enterprise [direct: mongos] bookstore&gt; db.books.countDocuments()
+Enterprise [direct: mongos] bookstore> db.books.countDocuments()
 
-10000000</pre>
+10000000
+```
+
 
 At this point, we have a collection with 10 million documents. The data is in place, but the collection is still not sharded.
 
@@ -303,26 +318,32 @@ In this first experiment, we'll use the publishedYear field as the shard key. Th
 
 Since the books collection already contains data, MongoDB requires an index on the shard key before sharding the collection:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">Enterprise [direct: mongos] bookstore&gt; db.books.createIndex({ publishedYear: 1 })
+```
+Enterprise [direct: mongos] bookstore> db.books.createIndex({ publishedYear: 1 })
 
-publishedYear_1</pre>
+publishedYear_1
+```
+
 
 With the index in place, we can shard the collection:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">Enterprise [direct: mongos] bookstore&gt; sh.shardCollection("bookstore.books", { publishedYear: 1 })
+```
+Enterprise [direct: mongos] bookstore> sh.shardCollection("bookstore.books", { publishedYear: 1 })
 
 {
-&nbsp;collectionsharded: 'bookstore.books',
-&nbsp;ok: 1,
-&nbsp;'$clusterTime': {
-&nbsp;&nbsp;&nbsp;clusterTime: Timestamp({ t: 1768281083, i: 44 }),
-&nbsp;&nbsp;&nbsp;signature: {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;hash: Binary.createFromBase64('AAAAAAAAAAAAAAAAAAAAAAAAAAA=', 0),
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;keyId: Long('0')
-&nbsp;&nbsp;&nbsp;}
-&nbsp;},
-&nbsp;operationTime: Timestamp({ t: 1768281083, i: 44 })
-}</pre>
+ collectionsharded: 'bookstore.books',
+ ok: 1,
+ '$clusterTime': {
+   clusterTime: Timestamp({ t: 1768281083, i: 44 }),
+   signature: {
+     hash: Binary.createFromBase64('AAAAAAAAAAAAAAAAAAAAAAAAAAA=', 0),
+     keyId: Long('0')
+   }
+ },
+ operationTime: Timestamp({ t: 1768281083, i: 44 })
+}
+```
+
 
 At this point, MongoDB starts splitting the collection into chunks based on ranges of publishedYear values and distributing those chunks across the shards.
 
@@ -334,27 +355,30 @@ Enterprise \[direct: mongos\] bookstore\> sh.getShardedDataDistribution()
 
 One of the first things worth checking is the **sharded data distribution**, which shows how documents are currently spread across shards:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">[&nbsp;
-&nbsp;{
-&nbsp;&nbsp;ns: 'bookstore.books',
-&nbsp;&nbsp;shards: [
-&nbsp;&nbsp;&nbsp;&nbsp;{
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;shardName: 'shardRS2',
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;numOrphanedDocs: 0,
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;numOwnedDocuments: 4247390,
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ownedSizeBytes: 671087620,
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;orphanedSizeBytes: 0
-&nbsp;&nbsp;&nbsp;&nbsp;},
-&nbsp;&nbsp;&nbsp;&nbsp;{
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;shardName: 'shardRS1',
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;numOrphanedDocs: 4247390,
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;numOwnedDocuments: 5752610,
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ownedSizeBytes: 908912380,
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;orphanedSizeBytes: 671087620
-&nbsp;&nbsp;&nbsp;&nbsp;}
-&nbsp;&nbsp;]
+```
+[ 
+ {
+  ns: 'bookstore.books',
+  shards: [
+    {
+      shardName: 'shardRS2',
+      numOrphanedDocs: 0,
+      numOwnedDocuments: 4247390,
+      ownedSizeBytes: 671087620,
+      orphanedSizeBytes: 0
+    },
+    {
+      shardName: 'shardRS1',
+      numOrphanedDocs: 4247390,
+      numOwnedDocuments: 5752610,
+      ownedSizeBytes: 908912380,
+      orphanedSizeBytes: 671087620
+    }
+  ]
 },
-]</pre>
+]
+```
+
 
 Here, the numOrphanedDocs field stands out. **Orphaned documents** are temporary leftovers created during chunk migrations. They appear when ownership of a chunk has moved to another shard, but the old copy hasn't been cleaned up yet.
 
@@ -364,26 +388,29 @@ This is normal behavior while the balancer is working and resolves automatically
 
 Next, let's look at the chunk metadata for the collection:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">collections: {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'bookstore.books': {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;shardKey: { publishedYear: 1 },
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;unique: false,
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;balancing: true,
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;chunkMetadata: [
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{ shard: 'shardRS1', nChunks: 4 },
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{ shard: 'shardRS2', nChunks: 1 }
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;],
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;chunks: [
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{ min: { publishedYear: MinKey() }, max: { publishedYear: 1993 }, 'on shard': 'shardRS1', 'last modified': Timestamp({ t: 2, i: 0 }) },
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{ min: { publishedYear: 1993 }, max: { publishedYear: 1996 }, 'on shard': 'shardRS1', 'last modified': Timestamp({ t: 3, i: 0 }) },
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{ min: { publishedYear: 1996 }, max: { publishedYear: 1999 }, 'on shard': 'shardRS1', 'last modified': Timestamp({ t: 4, i: 0 }) },
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{ min: { publishedYear: 1999 }, max: { publishedYear: 2002 }, 'on shard': 'shardRS1', 'last modified': Timestamp({ t: 5, i: 0 }) },
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{ min: { publishedYear: 2002 }, max: { publishedYear: 2005 }, 'on shard': 'shardRS1', 'last modified': Timestamp({ t: 6, i: 0 }) },
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{ min: { publishedYear: 2005 }, max: { publishedYear: MaxKey() }, 'on shard': 'shardRS2', 'last modified': Timestamp({ t: 6, i: 1 }) }
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;],
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;tags: []
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
-&nbsp;&nbsp;&nbsp;}</pre>
+```
+collections: {
+     'bookstore.books': {
+       shardKey: { publishedYear: 1 },
+       unique: false,
+       balancing: true,
+       chunkMetadata: [
+         { shard: 'shardRS1', nChunks: 4 },
+         { shard: 'shardRS2', nChunks: 1 }
+       ],
+          chunks: [
+         { min: { publishedYear: MinKey() }, max: { publishedYear: 1993 }, 'on shard': 'shardRS1', 'last modified': Timestamp({ t: 2, i: 0 }) },
+         { min: { publishedYear: 1993 }, max: { publishedYear: 1996 }, 'on shard': 'shardRS1', 'last modified': Timestamp({ t: 3, i: 0 }) },
+         { min: { publishedYear: 1996 }, max: { publishedYear: 1999 }, 'on shard': 'shardRS1', 'last modified': Timestamp({ t: 4, i: 0 }) },
+         { min: { publishedYear: 1999 }, max: { publishedYear: 2002 }, 'on shard': 'shardRS1', 'last modified': Timestamp({ t: 5, i: 0 }) },
+         { min: { publishedYear: 2002 }, max: { publishedYear: 2005 }, 'on shard': 'shardRS1', 'last modified': Timestamp({ t: 6, i: 0 }) },
+         { min: { publishedYear: 2005 }, max: { publishedYear: MaxKey() }, 'on shard': 'shardRS2', 'last modified': Timestamp({ t: 6, i: 1 }) }
+       ],
+       tags: []
+     }
+   }
+```
+
 
 At this stage:
 
@@ -396,34 +423,43 @@ Each chunk represents a slice of the publishedYear range.
 
 As the balancer runs, MongoDB starts reorganizing chunks to reach a more stable distribution. We can observe this by running:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">Enterprise [direct: mongos] bookstore&gt; db.books.getShardDistribution();</pre>
+```
+Enterprise [direct: mongos] bookstore> db.books.getShardDistribution();
+```
+
 
 The output shows the percentage of documents and data size per shard. As these percentages change, it indicates chunks being moved between shards.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">Totals
+```
+Totals
 
 {
-&nbsp;data: '1.48GiB',
-&nbsp;docs: 14163496,
-&nbsp;chunks: 6,
-&nbsp;'Shard shardRS1': [
-&nbsp;&nbsp;&nbsp;'41.54 % data',
-&nbsp;&nbsp;&nbsp;'29.39 % docs in cluster',
-&nbsp;&nbsp;&nbsp;'158B avg obj size on shard'
-&nbsp;],
-&nbsp;'Shard shardRS2': [
-&nbsp;&nbsp;&nbsp;'58.45 % data',
-&nbsp;&nbsp;&nbsp;'70.6 % docs in cluster',
-&nbsp;&nbsp;&nbsp;'158B avg obj size on shard'
-&nbsp;]
-}</pre>
+ data: '1.48GiB',
+ docs: 14163496,
+ chunks: 6,
+ 'Shard shardRS1': [
+   '41.54 % data',
+   '29.39 % docs in cluster',
+   '158B avg obj size on shard'
+ ],
+ 'Shard shardRS2': [
+   '58.45 % data',
+   '70.6 % docs in cluster',
+   '158B avg obj size on shard'
+ ]
+}
+```
+
 
 After the balancer settles, the chunk layout simplifies to:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">chunks: [
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{ min: { publishedYear: MinKey() }, max: { publishedYear: 2005 }, 'on shard': 'shardRS1', 'last modified': Timestamp({ t: 6, i: 2 }) },
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{ min: { publishedYear: 2005 }, max: { publishedYear: MaxKey() }, 'on shard': 'shardRS2', 'last modified': Timestamp({ t: 6, i: 1 }) }
-&nbsp;]</pre>
+```
+chunks: [
+         { min: { publishedYear: MinKey() }, max: { publishedYear: 2005 }, 'on shard': 'shardRS1', 'last modified': Timestamp({ t: 6, i: 2 }) },
+         { min: { publishedYear: 2005 }, max: { publishedYear: MaxKey() }, 'on shard': 'shardRS2', 'last modified': Timestamp({ t: 6, i: 1 }) }
+ ]
+```
+
 
 **Note**: When a collection is sharded, MongoDB relies on the balancer to distribute chunks over time, which can be slow for large datasets.
 
@@ -452,50 +488,56 @@ This is a classic write hotspot scenario with range-based sharding on time-like 
 
 To make this visible, we insert another 10 million documents, all with publishedYear = 2026. The [code](https://github.com/ricardohsmello/mongodb-java-sample/blob/de430e9ebb734dc3eef9f9d9faad276570b796ec/src/main/java/com/example/mongodb/DataInitializer.java#L98C2-L98C13) is slightly modified for this purpose, as shown below:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">private Document makeDoc(long i) {
-&nbsp;&nbsp;&nbsp;Random r = rnd;
-&nbsp;&nbsp;&nbsp;String title = generateRandomTitle(r);
-&nbsp;&nbsp;&nbsp;String author = generateRandomAuthor(r);
-&nbsp;&nbsp;&nbsp;String isbn = generateUniqueIsbn(i);
-&nbsp;&nbsp;&nbsp;int year = 2026;&nbsp;
-&nbsp;&nbsp;&nbsp;double price = Math.round((19.99 + r.nextDouble() * 80.0) * 100.0) / 100.0;
+```
+private Document makeDoc(long i) {
+   Random r = rnd;
+   String title = generateRandomTitle(r);
+   String author = generateRandomAuthor(r);
+   String isbn = generateUniqueIsbn(i);
+   int year = 2026; 
+   double price = Math.round((19.99 + r.nextDouble() * 80.0) * 100.0) / 100.0;
 
-&nbsp;&nbsp;&nbsp;return new Document("title", title)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.append("author", author)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.append("isbn", isbn)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.append("publishedYear", year)
+   return new Document("title", title)
+           .append("author", author)
+           .append("isbn", isbn)
+           .append("publishedYear", year)
 .append("createdAt", LocalDateTime.now())
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.append("price", price);
-}</pre>
+           .append("price", price);
+}
+```
+
 
 After the insert, checking the sh.status() again shows:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">collections: {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'bookstore.books': {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;shardKey: { publishedYear: 1 },
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;unique: false,
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;balancing: true,
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;chunkMetadata: [
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{ shard: 'shardRS1', nChunks: 11 },
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{ shard: 'shardRS2', nChunks: 1 }
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;],
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;chunks: [
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{ min: { publishedYear: MinKey() }, max: { publishedYear: 2005 }, 'on shard': 'shardRS1', 'last modified': Timestamp({ t: 6, i: 2 }) },
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{ min: { publishedYear: 2005 }, max: { publishedYear: 2008 }, 'on shard': 'shardRS1', 'last modified': Timestamp({ t: 7, i: 0 }) },
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{ min: { publishedYear: 2008 }, max: { publishedYear: 2011 }, 'on shard': 'shardRS1', 'last modified': Timestamp({ t: 8, i: 0 }) },
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{ min: { publishedYear: 2011 }, max: { publishedYear: 2013 }, 'on shard': 'shardRS1', 'last modified': Timestamp({ t: 9, i: 0 }) },
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{ min: { publishedYear: 2013 }, max: { publishedYear: 2015 }, 'on shard': 'shardRS1', 'last modified': Timestamp({ t: 10, i: 0 }) },
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{ min: { publishedYear: 2015 }, max: { publishedYear: 2017 }, 'on shard': 'shardRS1', 'last modified': Timestamp({ t: 11, i: 0 }) },
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{ min: { publishedYear: 2017 }, max: { publishedYear: 2019 }, 'on shard': 'shardRS1', 'last modified': Timestamp({ t: 12, i: 0 }) },
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{ min: { publishedYear: 2019 }, max: { publishedYear: 2021 }, 'on shard': 'shardRS1', 'last modified': Timestamp({ t: 13, i: 0 }) },
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{ min: { publishedYear: 2021 }, max: { publishedYear: 2023 }, 'on shard': 'shardRS1', 'last modified': Timestamp({ t: 14, i: 0 }) },
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{ min: { publishedYear: 2023 }, max: { publishedYear: 2025 }, 'on shard': 'shardRS1', 'last modified': Timestamp({ t: 15, i: 0 }) },
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{ min: { publishedYear: 2025 }, max: { publishedYear: 2026 }, 'on shard': 'shardRS1', 'last modified': Timestamp({ t: 16, i: 0 }) },
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{ min: { publishedYear: 2026 }, max: { publishedYear: MaxKey() }, 'on shard': 'shardRS2', 'last modified': Timestamp({ t: 16, i: 1 }), jumbo: 'yes' }
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;],
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;tags: []
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
-&nbsp;&nbsp;&nbsp;}</pre>
+```
+collections: {
+     'bookstore.books': {
+       shardKey: { publishedYear: 1 },
+       unique: false,
+       balancing: true,
+       chunkMetadata: [
+         { shard: 'shardRS1', nChunks: 11 },
+         { shard: 'shardRS2', nChunks: 1 }
+       ],
+       chunks: [
+         { min: { publishedYear: MinKey() }, max: { publishedYear: 2005 }, 'on shard': 'shardRS1', 'last modified': Timestamp({ t: 6, i: 2 }) },
+         { min: { publishedYear: 2005 }, max: { publishedYear: 2008 }, 'on shard': 'shardRS1', 'last modified': Timestamp({ t: 7, i: 0 }) },
+         { min: { publishedYear: 2008 }, max: { publishedYear: 2011 }, 'on shard': 'shardRS1', 'last modified': Timestamp({ t: 8, i: 0 }) },
+         { min: { publishedYear: 2011 }, max: { publishedYear: 2013 }, 'on shard': 'shardRS1', 'last modified': Timestamp({ t: 9, i: 0 }) },
+         { min: { publishedYear: 2013 }, max: { publishedYear: 2015 }, 'on shard': 'shardRS1', 'last modified': Timestamp({ t: 10, i: 0 }) },
+         { min: { publishedYear: 2015 }, max: { publishedYear: 2017 }, 'on shard': 'shardRS1', 'last modified': Timestamp({ t: 11, i: 0 }) },
+         { min: { publishedYear: 2017 }, max: { publishedYear: 2019 }, 'on shard': 'shardRS1', 'last modified': Timestamp({ t: 12, i: 0 }) },
+         { min: { publishedYear: 2019 }, max: { publishedYear: 2021 }, 'on shard': 'shardRS1', 'last modified': Timestamp({ t: 13, i: 0 }) },
+         { min: { publishedYear: 2021 }, max: { publishedYear: 2023 }, 'on shard': 'shardRS1', 'last modified': Timestamp({ t: 14, i: 0 }) },
+         { min: { publishedYear: 2023 }, max: { publishedYear: 2025 }, 'on shard': 'shardRS1', 'last modified': Timestamp({ t: 15, i: 0 }) },
+         { min: { publishedYear: 2025 }, max: { publishedYear: 2026 }, 'on shard': 'shardRS1', 'last modified': Timestamp({ t: 16, i: 0 }) },
+         { min: { publishedYear: 2026 }, max: { publishedYear: MaxKey() }, 'on shard': 'shardRS2', 'last modified': Timestamp({ t: 16, i: 1 }), jumbo: 'yes' }
+       ],
+       tags: []
+     }
+   }
+```
+
 
 Two important observations:
 
@@ -519,11 +561,17 @@ To illustrate this, let's consider the createdAt field in our books collection. 
 
 Before sharding the collection, MongoDB requires an index on the shard key. Since we're using a hashed shard key, we first create the hashed index on createdAt:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">Enterprise [direct: mongos] bookstore&gt; db.books.createIndex({ createdAt: "hashed" })</pre>
+```
+Enterprise [direct: mongos] bookstore> db.books.createIndex({ createdAt: "hashed" })
+```
+
 
 With the index in place, we can shard the collection:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">Enterprise [direct: mongos] bookstore&gt; sh.shardCollection("bookstore.books", { createdAt: "hashed" } )</pre>
+```
+Enterprise [direct: mongos] bookstore> sh.shardCollection("bookstore.books", { createdAt: "hashed" } )
+```
+
 
 Because the shard key is hashed, MongoDB doesn't use the natural ordering of the timestamps. Instead, it hashes each createdAt value and distributes documents based on the resulting hash ranges.
 
@@ -566,27 +614,39 @@ What really matters for the application is how it queries the data.
 
 Imagine our books collection is sharded by:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">{ publishedYear: 1 }</pre>
+```
+{ publishedYear: 1 }
+```
+
 
 So the data is split between *shardRS1* and *shardRS2*.
 
 Now, from the application side, a query like this looks innocent:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@Repository
+```
+@Repository
 
-public interface BookRepository extends MongoRepository&lt;Book, String&gt; {
-&nbsp;&nbsp;&nbsp;List&lt;Book&gt; findByTitle(String title);
-}</pre>
+public interface BookRepository extends MongoRepository<Book, String> {
+   List<Book> findByTitle(String title);
+}
+```
+
 
 But notice: Title is **not** the shard key. So when the app sends a query like...
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">Enterprise [direct: mongos] bookstore&gt; db.books.find({ title: "Learning MongoDB" })</pre>
+```
+Enterprise [direct: mongos] bookstore> db.books.find({ title: "Learning MongoDB" })
+```
+
 
 ...mongos can't know which shard owns that document. It has no way to "target" a shard based on title. The result: The query becomes a **broadcast query**.
 
 If you run...
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">Enterprise [direct: mongos] bookstore&gt; db.books.find({ title: "Learning MongoDB" }).explain("executionStats")</pre>
+```
+Enterprise [direct: mongos] bookstore> db.books.find({ title: "Learning MongoDB" }).explain("executionStats")
+```
+
 
 ...you'll typically see a winning plan with something like:
 
@@ -616,20 +676,29 @@ So the cluster still has to ask both shards.
 
 Given what we've just seen, the real issue isn't the lack of an index, but the lack of shard key information in the query. In our case, the collection is sharded by:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">{ publishedYear: 1}</pre>
+```
+{ publishedYear: 1}
+```
+
 
 So a query like this...
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">Enterprise [direct: mongos] bookstore&gt; db.books.find({ publishedYear: 2020 })</pre>
+```
+Enterprise [direct: mongos] bookstore> db.books.find({ publishedYear: 2020 })
+```
+
 
 ...can be routed directly to the shard that owns the range for 2020. This turns the operation into a **targeted query**, typically showing up in the execution plan as:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">"winningPlan": {
-&nbsp;"stage": "SINGLE_SHARD",
-&nbsp;"shards": [
-&nbsp;&nbsp;&nbsp;… // just one shard
-&nbsp;]
-}</pre>
+```
+"winningPlan": {
+ "stage": "SINGLE_SHARD",
+ "shards": [
+   … // just one shard
+ ]
+}
+```
+
 
 ### When does refining the shard key make sense? {#h3-29-when-does-refining-the-shard-key-make-sense}
 
@@ -639,30 +708,45 @@ In the case of publishedYear, the main risk is data concentration. If a large nu
 
 In these situations, [refining the shard key](https://www.mongodb.com/docs/manual/core/sharding-refine-a-shard-key/?utm_campaign=devrel&%20utm_source=third-part-content&utm_medium=cta&utm_content=sharding_mongodb_foojay&utm_term=ricardo.mello) by extending it with an additional field can help MongoDB split the data more evenly and avoid operational issues:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">{ publishedYear: 1, title: 1 }</pre>
+```
+{ publishedYear: 1, title: 1 }
+```
+
 
 To refine a shard key, you first need to create an index that matches the new shard key:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">Enterprise [direct: mongos] bookstore&gt; db.books.createIndex({ publishedYear: 1, title: 1 })</pre>
+```
+Enterprise [direct: mongos] bookstore> db.books.createIndex({ publishedYear: 1, title: 1 })
+```
+
 
 Once the index is in place, you can refine the shard key using the refineCollectionShardKey command:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">Enterprise [direct: mongos] bookstore&gt; db.adminCommand({
-&nbsp;refineCollectionShardKey: "bookstore.books",
-&nbsp;key: { publishedYear: 1, title: 1 }
-})</pre>
+```
+Enterprise [direct: mongos] bookstore> db.adminCommand({
+ refineCollectionShardKey: "bookstore.books",
+ key: { publishedYear: 1, title: 1 }
+})
+```
+
 
 After the operation completes, you can verify that the shard key was updated by inspecting the collection metadata:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">Enterprise [direct: mongos] bookstore&gt; db.getSiblingDB("config") .collections.find({ _id: "bookstore.books" }, { key: 1 })</pre>
+```
+Enterprise [direct: mongos] bookstore> db.getSiblingDB("config") .collections.find({ _id: "bookstore.books" }, { key: 1 })
+```
+
 
 Expected output:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">[
-&nbsp;&nbsp;&nbsp;{ _id: 'bookstore.books',
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;key: { publishedYear: 1, title: 1 }
-&nbsp;&nbsp;&nbsp;}
-]</pre>
+```
+[
+   { _id: 'bookstore.books',
+     key: { publishedYear: 1, title: 1 }
+   }
+]
+```
+
 
 ### Application takeaway {#h3-30-application-takeaway}
 
@@ -671,11 +755,17 @@ From the application side, the key takeaway is simple:
 
 That means repository methods should reflect that decision. For example, instead of...
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">List&lt;Book&gt; findByTitle(String title);</pre>
+```
+List<Book> findByTitle(String title);
+```
+
 
 ...you might prefer something like:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">List&lt;Book&gt; findByPublishedYearAndTitle(int publishedYear, String title);</pre>
+```
+List<Book> findByPublishedYearAndTitle(int publishedYear, String title);
+```
+
 
 This approach allows MongoDB to continue routing queries efficiently using publishedYear, while also supporting more specific filters like title, without changing the shard key entirely.
 
@@ -688,7 +778,10 @@ In our earlier examples, sharding by fields like publishedYear or createdAt work
 
 Resharding is a powerful, online operation, but it comes with important requirements and trade-offs. In particular, it requires additional temporary storage on each shard to hold both the collection data and its indexes while the data is being redistributed. A common way to estimate the required space is:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">( ( collection_storage_size + index_size ) * 2 ) / shard_count = storage_req</pre>
+```
+( ( collection_storage_size + index_size ) * 2 ) / shard_count = storage_req
+```
+
 
 Keep in mind that resharding is an online operation, but it [requires extra disk](https://www.mongodb.com/docs/manual/core/sharding-reshard-a-collection/#before-you-begin/?utm_campaign=devrel&%20utm_source=third-part-content&utm_medium=cta&utm_content=sharding_mongodb_foojay&utm_term=ricardo.mello) space on the shards and a short write pause during the final step.
 
@@ -696,7 +789,10 @@ Keep in mind that resharding is an online operation, but it [requires extra disk
 
 Once you've decided that a new shard key is required, you can reshard the collection using the reshardCollection command:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">Enterprise [direct: mongos] bookstore&gt; sh.reshardCollection("bookstore.books", { isbn: 1 } )</pre>
+```
+Enterprise [direct: mongos] bookstore> sh.reshardCollection("bookstore.books", { isbn: 1 } )
+```
+
 
 After running the reshardCollection command, MongoDB goes through a series of internal steps to complete the operation:
 
@@ -707,23 +803,32 @@ After running the reshardCollection command, MongoDB goes through a series of in
 
 You can [monitor the progress](https://www.mongodb.com/docs/manual/tutorial/resharding-back-to-same-key/?utm_campaign=devrel&%20utm_source=third-part-content&utm_medium=cta&utm_content=sharding_mongodb_foojay&utm_term=ricardo.mello#monitor-the-resharding-operation.) of an ongoing resharding operation using $currentOp:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">Enterprise [direct: mongos] bookstore&gt; db.getSiblingDB("admin").aggregate([
-&nbsp;&nbsp;&nbsp;{ $currentOp: { allUsers: true, localOps: false } },
-&nbsp;&nbsp;&nbsp;{
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$match: {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;type: "op",
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"originatingCommand.reshardCollection": "bookstore.books"
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
-&nbsp;&nbsp;&nbsp;}
-])</pre>
+```
+Enterprise [direct: mongos] bookstore> db.getSiblingDB("admin").aggregate([
+   { $currentOp: { allUsers: true, localOps: false } },
+   {
+     $match: {
+       type: "op",
+       "originatingCommand.reshardCollection": "bookstore.books"
+     }
+   }
+])
+```
+
 
 Once the operation completes, you can verify the new shard key by inspecting the collection metadata:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">Enterprise [direct: mongos] bookstore&gt; db.getSiblingDB("config") .collections.find({ _id: "bookstore.books" }, { key: 1 })</pre>
+```
+Enterprise [direct: mongos] bookstore> db.getSiblingDB("config") .collections.find({ _id: "bookstore.books" }, { key: 1 })
+```
+
 
 Expected output:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">[ { _id: "bookstore.books", key: { isbn: 1 } } ]</pre>
+```
+[ { _id: "bookstore.books", key: { isbn: 1 } } ]
+```
+
 
 Conclusion {#h2-33-conclusion}
 ------------------------------

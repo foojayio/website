@@ -41,9 +41,10 @@ The simplest way to get a REST API deployed is to call the start() method on the
 
 For example:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="dracula">SeBootstrap.Instance instance = SeBootstrap.start(new Application() { 
+```
+SeBootstrap.Instance instance = SeBootstrap.start(new Application() { 
  @Override 
- public Set&lt;Class&lt;?&gt;&gt; getClasses() { 
+ public Set<Class<?>> getClasses() { 
  return Collections.singleton(HelloResourceSeBootstrap.class); 
  } 
 }).toCompletableFuture().get(); 
@@ -57,10 +58,12 @@ var httpRequest = HttpRequest.newBuilder()
  .header("Content-Type", "application/json") 
  .GET().build(); 
 
-HttpResponse&lt;String&gt; response = httpClient.send(httpRequest, HttpResponse.BodyHandlers.ofString()); 
+HttpResponse<String> response = httpClient.send(httpRequest, HttpResponse.BodyHandlers.ofString()); 
 assertNotNull(response); 
 var body = response.body(); 
-assertNotNull(body);</pre>
+assertNotNull(body);
+```
+
 
 Using the SeBoostrap class, we call the static start method, which takes a jakarta.ws.rs.core.Application instance and a default, implicit SeBootstrap#Configuration. We then call the baseUriBuilder() method on the returned Instance to build a URL that we pass to the java.net.http HttpRequest builder. This is the Java SE HTTP client introduced in Java 11. The HTTP client then makes a call to the configured resource and makes some assertions on it.
 
@@ -68,23 +71,29 @@ The start method of the SeBootstrap class has an overloaded version that can be 
 
 This configuration can then be passed to the start method of SeBootstrap as follows:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="dracula">final SeBootstrap.Configuration config = SeBootstrap.Configuration 
+```java
+final SeBootstrap.Configuration config = SeBootstrap.Configuration 
  .builder() 
  .protocol(protocol) 
  .host(host) 
  .port(port) 
  .rootPath(rootPath) 
  .sslClientAuthentication(clientAuth) 
- .build();</pre>
+ .build();
+```
+
 
 This configuration can then be passed to the start method of SeBootstrap, as follows:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="dracula">SeBootstrap.Instance instance = SeBootstrap.start(new Application() { 
+```java
+SeBootstrap.Instance instance = SeBootstrap.start(new Application() { 
  @Override 
- public Set&lt;Class&lt;?&gt;&gt; getClasses() { 
+ public Set<Class<?>> getClasses() { 
  return Collections.singleton(HelloResourceSeBootstrap.class); 
  } 
-}, config).toCompletableFuture().get();</pre>
+}, config).toCompletableFuture().get();
+```
+
 
 Jakarta EE with Jakarta REST 3.1 has a number of ways you can now configure and deploy REST resources outside of a typical runtime container. You can take a look at these examples from the Jakarta REST GitHub repo for inspiration for your own projects.
 
@@ -93,7 +102,8 @@ Multipart Support {#h2-1-multipart-support}
 
 Jakarta REST 3.1 in Jakarta EE 10 finally has standard, portable support for multipart as defined in RFC 7578. You can inject multipart EntityPart into a resource method through @FormParameter or as a list. The example below shows the injection of an EntityPart the represents a user's picture into a resource method.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="dracula">@POST 
+```java
+@POST 
 @Path("submit/picture") 
 @Consumes(MediaType.MULTIPART_FORM_DATA) 
 public Response postForm(@FormParam("userId") String userId, 
@@ -105,21 +115,26 @@ public Response postForm(@FormParam("userId") String userId,
  //Do something with the content... 
  } 
  return Response.ok("Picture uploaded successfully").build(); 
-}</pre>
+}
+```
+
 
 The pic parameter in the resource method is a jakarta.ws.rs.core.EntityPart type annotated @FormParam. This will be extracted from the request body and automatically injected into the annoated field. The EntityPart has methods to get the headers, file name, name, file content as input stream among others.
 
 The specification has small caveat about being careful with using Strings and EntityParts because parts of a multipart entity can be quite large, so care should be taken when using String parameter types as that will load the entire content of the part into the Java heap. We can make client requests to the above endpoint using the Jakarta REST client as follows.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="dracula">var client = ClientBuilder.newBuilder().build(); 
+```java
+var client = ClientBuilder.newBuilder().build(); 
 WebTarget target = client.target(URI.create(contextPath.toExternalForm() + "/api/hello-world")); 
 EntityPart entityPart = 
  EntityPart.withName("passport-picture").content(pictureInputStream).fileName("passport-pic.jpg").build(); 
-Entity&lt;EntityPart&gt; entity = Entity.entity(entityPart, MediaType.MULTIPART_FORM_DATA); 
+Entity<EntityPart> entity = Entity.entity(entityPart, MediaType.MULTIPART_FORM_DATA); 
 Response response = target 
  .path("submit/picture") 
  .request() 
- .post(entity);</pre>
+ .post(entity);
+```
+
 
 We construct the request using the EntityPart, then pass it as the body of the jakarta.ws.rs.client. Entity instance passed to the resource method. Another nice addition in Jakarta REST release is the ability to register a jakarta.ws.rs.core.Feature declaratively by placing an instance in META-INF/services/.
 

@@ -80,7 +80,8 @@ To understand Manifold's property support, let's examine its equivalent code to 
 
 Those are standard Java properties, powerful but heavy on the boilerplate:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">public class HelloPojo {
+```
+public class HelloPojo {
     private int number;
     private String str;
 
@@ -99,20 +100,28 @@ Those are standard Java properties, powerful but heavy on the boilerplate:
     public void setStr(String str) {
         this.str = str;
     }
-}</pre>
+}
+```
+
 
 We can write the same code using Lombok as such:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">@Getter
+```
+@Getter
 @Setter
 public class HelloLombok {
     private int number;
     private String str;
-}</pre>
+}
+```
+
 
 The usage is identical:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">obj.setNumber(5);</pre>
+```
+obj.setNumber(5);
+```
+
 
 This is problematic. You will notice we define the fields as private, yet suddenly a `setNumber()` method appears out of thin air. It feels weird. I get the logic though.
 
@@ -120,10 +129,13 @@ The creators of Lombok wanted it to be a drop-in replacement. You could write th
 
 The Manifold equivalent is similar but has some nuances:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">public class HelloProperties {
+```
+public class HelloProperties {
     @var int number;
     @var String str;
-}</pre>
+}
+```
+
 
 One notable distinction is that Manifold's properties are defined at the individual field level, rather than applying to an entire class. Although Manifold may introduce a similar feature to Lombok's Data annotation in the future, it does not currently exist. We need to explicitly define each property.
 
@@ -133,7 +145,8 @@ The big difference is in the usage. Unlike Lombol, Manifold enables accessing th
 
 For example, accessing `Calendar.getInstance()` as `Calendar.instance` or retrieving the time from an instance using `timeInMillis` instead of `getTimeInMillis()` showcases the syntactic clarity and conciseness offered by Manifold:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">// In Manifold a property acts like field access
+```
+// In Manifold a property acts like field access
 var properties = new HelloProperties();
 properties.number = 5;
 
@@ -142,7 +155,9 @@ var pojo = new HelloPojo();
 pojo.number = 5;
 
 // This is equivalent to Calendar.getInstance().getTimeInMillis()
-var time = Calendar.instance.timeInMillis;</pre>
+var time = Calendar.instance.timeInMillis;
+```
+
 
 Customizing Manifold Properties {#h2-5-customizing-manifold-properties}
 -----------------------------------------------------------------------
@@ -151,14 +166,18 @@ Similar to Lombok, Manifold offers customization options for individual properti
 
 This is an example class that customizes such scoping:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">public class HelloScoping {
+```
+public class HelloScoping {
     @val(PropOption.Package) int number = 5;
     final @set String str;
-}</pre>
+}
+```
+
 
 Which we can use as such:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">var scoping = new HelloScoping();
+```
+var scoping = new HelloScoping();
 scoping.str = "";
 System.out.println(scoping.number);
 
@@ -166,7 +185,9 @@ System.out.println(scoping.number);
 scoping.number = 4;
 
 // This line won’t compile due to “write only” property
-System.out.println(scoping.str);</pre>
+System.out.println(scoping.str);
+```
+
 
 Encapsulation and Method Implementation {#h2-6-encapsulation-and-method-implementation}
 ---------------------------------------------------------------------------------------
@@ -175,19 +196,25 @@ Despite the accessibility of properties in Manifold, encapsulation is not compro
 
 For instance, implementing `setNumber()` allows the code to treat access to the `number` field accordingly, maintaining consistent behavior throughout the codebase as such:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">public class HelloComputed {
+```
+public class HelloComputed {
     @var int number;
     @var String str;
 
     public void setNumber(int number) {
         this.number = number - 1;
     }
-}</pre>
+}
+```
+
 
 The following code will print `4`:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">computed.number = 5;
-System.out.println(computed.number);</pre>
+```
+computed.number = 5;
+System.out.println(computed.number);
+```
+
 
 Other Considerations {#h2-7-other-considerations}
 -------------------------------------------------

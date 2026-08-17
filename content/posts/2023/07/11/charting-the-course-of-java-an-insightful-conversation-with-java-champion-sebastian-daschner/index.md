@@ -51,7 +51,7 @@ Profiles: {#h2-0-profiles}
 
 > Fun Fact: I've travelled to over 50 countries.
 
-*** ** * ** ***
+
 
 **Bazlur: Can you share with us your journey into Java enterprise software development and how you became a Java Champion, Oracle Developer Champion, and JavaOne Rockstar​?**
 
@@ -63,7 +63,7 @@ Another dream of mine was to one day speak at JavaOne in San Francisco, at that 
 
 In the following years, Oracle set up the Dev Champions program to enable external speakers to travel to conferences and talk about Oracle-related technologies, which I was a part of.
 
-*** ** * ** ***
+
 
 **Bazlur: As a prominent figure in the Java community, how do you see the future of Java evolving, particularly in enterprise software development?**
 
@@ -72,7 +72,7 @@ In the following years, Oracle set up the Dev Champions program to enable extern
 Every single enterprise Java developer is delighted when they try out the dev mode and see how short of a turnaround time Quarkus enables. Besides that, I'm very happy with the development state of Java. The previous versions have brought interesting additions, such as Records or Text Blocks, and with the modern JVMs, we have a competitive platform that powers pretty much the whole enterprise world. I think these are very exciting times to be an Enterprise Java developer!
 > *In the Java space, Quarkus is one of the most interesting technologies right now, especially its outstanding developer experience. Every single enterprise Java developer is delighted when they try out the dev mode and see how short of a turnaround time Quarkus enables.*
 
-*** ** * ** ***
+
 
 **Bazlur: As a consultant, trainer, and developer, how do you manage to balance these roles, and what do you enjoy most about each of them​?**   
 
@@ -82,7 +82,7 @@ That's also the reason why I still love participating in my clients' projects. I
 
 In my consultant role, I like that there is always a new challenge to solve and new situations to assess since there is almost never a single clear answer, but as we know, "it always depends." As for balance, my regular weeks usually contain a good mixture of all of these different roles.
 
-*** ** * ** ***
+
 
 **Bazlur: On your** [**website**](https://www.sebastian-daschner.com/about)**, you mentioned that a correct understanding of IT and the technologies in use could significantly improve productivity and quality in software development. Can you share some tips for developers striving to deepen their understanding of their craft?**
 
@@ -102,7 +102,7 @@ When you teach something, -- and teaching can mean writing blog posts, writing d
 
 All of these points combined will make you a better, more effective developer.
 
-*** ** * ** ***
+
 
 **Bazlur: You mentioned that you started giving presentations at conferences about 6-7 years ago. Can you share some tips for developers who might be interested in speaking at conferences but don't know where to start?**
 
@@ -113,7 +113,7 @@ What also helped me a lot is to think that it's not "about me" when I'm standing
 
 For example, I'm doing a lot of live coding, and a lot of developers would be afraid to put themselves in a stressful situation. But instead, you should see this as a fun opportunity to share knowledge and demo how to use technology -- even if you create a lot of compilation errors along the way. Focus on things that are helpful, that you need in your job, and try to dig deeper into understanding what's going on while you're preparing some presentation - then you will do great.
 
-*** ** * ** ***
+
 
 **Bazlur: Let's shift gears and talk about the current state of software development. In your opinion, what are some of the biggest challenges that developers face today? Additionally, do you have any advice on how to overcome these challenges?**
 
@@ -124,19 +124,19 @@ Our phones, email clients, Slack, and social media are often just a hand movemen
 This is something that seems to get harder and harder. So put your phone on flight mode, close all communication channels, and allow yourself to get into the zone -- at least for some time every day.
 > *The biggest challenge for any knowledge worker in these times is distractions. Our phones, email clients, Slack ....The best knowledge workers know how to focus, how to manage distractions, and how to create an environment in which they can fully be "in the zone"*
 
-*** ** * ** ***
+
 
 **Bazlur: What advice would you give someone new to the software industry who is unsure about which career path to take? Could you also provide insights into the various roles within the industry, such as developer, quality assurance, manager, and developer advocacy, and the specific skills and interests needed for each of these roles?**
 
 **Sebastian:**Just try it out and see what you like. Coding and, in general, any technology job can be very interesting and fulfilling, but this also depends on the person and character. I think you only know once you try, and this is also true for various roles.
 
-*** ** * ** ***
+
 
 **Bazlur: You emphasized the importance of continuous learning for developers. Can you recommend any resources or strategies that you've found particularly effective for staying up-to-date with new technologies and trends in the field?**
 
 **Sebastian:**It certainly helps to follow a carefully selected group of people or information sources online. But also, over time, you will get a better judgment over which technologies are helpful and move the industry forward and which are mostly "hype." Nevertheless, it's always worth trying out something new - e.g. in a side project - and learning from what you see and whether it's worth applying. But instead of learning new technologies for the sake of new technologies, focus on how to solve problems and be pragmatic.
 
-*** ** * ** ***
+
 
 Conclusion {#h2-1-conclusion}
 -----------------------------

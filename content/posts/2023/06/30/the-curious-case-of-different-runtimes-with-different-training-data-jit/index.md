@@ -61,7 +61,8 @@ When we caught a process in the act of being slow, we connected Async Profiler a
 
 #### Good {#_good}
 
-<pre class="EnlighterJSRAW">         ns  percent  samples  top
+```
+         ns  percent  samples  top
   ----------  -------  -------  ---
  45612243950    9.55%     4559  com.xceptance.common.util.CsvUtilsDecode.parse
  31634884015    6.62%     3162  itable stub
@@ -70,11 +71,14 @@ When we caught a process in the act of being slow, we connected Async Profiler a
  21140760305    4.42%     2113  vtable stub
  20569614899    4.30%     2056  java.util.regex.Pattern$BmpCharProperty.match
  19321839309    4.04%     1931  jdk.internal.util.ArraysSupport.mismatch
- 18011700149    3.77%     1800  com.xceptance.xlt.api.util.XltCharBuffer.hashCode</pre>
+ 18011700149    3.77%     1800  com.xceptance.xlt.api.util.XltCharBuffer.hashCode
+```
+
 
 #### Bad {#_bad}
 
-<pre class="EnlighterJSRAW">       ns  percent  samples  top
+```
+       ns  percent  samples  top
   ----------  -------  -------  ---
 384925806756   79.68%    38490  com.xceptance.common.util.CsvUtilsDecode.parse
   5582345351    1.16%      558  com.xceptance.xlt.api.util.XltCharBuffer.hashCode
@@ -83,7 +87,9 @@ When we caught a process in the act of being slow, we connected Async Profiler a
   4932415970    1.02%      493  java.util.regex.Pattern$Slice.match
   4400943650    0.91%      440  com.xceptance.xlt.api.util.XltCharBuffer.viewFromTo
   4381854811    0.91%      438  java.util.regex.Pattern$BmpCharProperty.match
-  3881428022    0.80%      388  vtable stub</pre>
+  3881428022    0.80%      388  vtable stub
+```
+
 
 ### PrintCompilation {#_printcompilation}
 

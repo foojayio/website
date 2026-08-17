@@ -51,20 +51,26 @@ Several elements influence query execution speed:
 
 When a query runs, MongoDB's query planner evaluates available indexes, estimates costs, and selects the most efficient execution path. Without a suitable index, MongoDB performs a collection scan, reading every document to find matches. Developers can inspect these decisions using the \`explain()\` method:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">db.orders.find({ status: "shipped" }).explain("executionStats");</pre>
+```
+db.orders.find({ status: "shipped" }).explain("executionStats");
+```
+
 
 The output shows whether MongoDB used an index (\`IXSCAN\`) or a collection scan (\`COLLSCAN\`). Key metrics include execution time, documents examined versus returned, and the execution stage. A low examined-to-returned ratio indicates efficient index usage.
 
 Common bottlenecks include missing indexes, large projections, inefficient filters like \`$regex\` or \`$nin\`, and unbounded queries. When using Spring Data MongoDB, ensure repository queries map to indexed fields:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@Document(collection = "users")
+```
+@Document(collection = "users")
 
 public class User {
-&nbsp;&nbsp;&nbsp;&nbsp;@Indexed
-&nbsp;&nbsp;&nbsp;&nbsp;private String email;
-&nbsp;&nbsp;&nbsp;&nbsp;private String name;
-&nbsp;&nbsp;&nbsp;&nbsp;private Date createdAt;
-}</pre>
+    @Indexed
+    private String email;
+    private String name;
+    private Date createdAt;
+}
+```
+
 
 This annotation creates an index automatically, ensuring queries like \`findByEmail(String email)\` execute efficiently. Comparing a collection scan versus an indexed query shows dramatic performance differences. Without an index, \`explain()\` output shows \`COLLSCAN\` and high document counts. After adding an index, the same query shows \`IXSCAN\` and far fewer documents examined, reducing query time from hundreds of milliseconds to just a few.
 
@@ -76,42 +82,54 @@ Profiling begins with understanding how queries move through the database. Mongo
 
 The profiler works at three levels. At level 0, profiling is disabled. At level 1, the profiler captures operations slower than a configurable threshold. At level 2, the profiler captures all operations. Most production environments use level 1 because collecting every operation can add unnecessary overhead. You can enable level 1 temporarily to investigate specific performance issues.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">db.setProfilingLevel(1, { slowms: 50 });
+```
+db.setProfilingLevel(1, { slowms: 50 });
 
-db.system.profile.find().sort({ ts: -1 }).limit(5);</pre>
+db.system.profile.find().sort({ ts: -1 }).limit(5);
+```
+
 
 Here, \`slowms\` controls which operations qualify as slow. Keeping this value conservative helps maintain a clean view of problematic queries without overwhelming the profiler log. This is a simple but essential part of diagnosing inefficient query shapes like unindexed filters, expensive \`$lookup\` stages, or wide projection fields.
 
 Monitoring extends beyond slow logs. In Java applications, the driver provides hooks for observing how the application communicates with MongoDB. Spring Data MongoDB integrates naturally with these features. One of the more useful tools in this space is the \`MongoCommandListener\` interface, which lets you listen to commands and flag slow operations before they become issues. A command listener is ideal for teams that want visibility without enabling broad, database-level profiling.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">import com.mongodb.event.CommandListener;
+```
+import com.mongodb.event.CommandListener;
 import com.mongodb.event.CommandSucceededEvent;
 import java.util.concurrent.TimeUnit;
 
 public class QueryLoggingListener implements CommandListener {
-&nbsp;&nbsp;&nbsp;&nbsp;@Override
-&nbsp;&nbsp;&nbsp;&nbsp;public void commandSucceeded(CommandSucceededEvent event) {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;long took = event.getElapsedTime(TimeUnit.MILLISECONDS);
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (took &gt; 50) {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.println("Slow query: " + event.getCommandName() + " took " + took + " ms");
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
-&nbsp;&nbsp;&nbsp;&nbsp;}
-}</pre>
+    @Override
+    public void commandSucceeded(CommandSucceededEvent event) {
+        long took = event.getElapsedTime(TimeUnit.MILLISECONDS);
+        if (took > 50) {
+            System.out.println("Slow query: " + event.getCommandName() + " took " + took + " ms");
+        }
+    }
+}
+```
+
 
 To register this listener, add it when building your MongoClient:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">MongoClientSettings settings = MongoClientSettings.builder()
-&nbsp;&nbsp;&nbsp;&nbsp;.applyConnectionString(new ConnectionString(connectionString))
-&nbsp;&nbsp;&nbsp;&nbsp;.addCommandListener(new QueryLoggingListener())
-&nbsp;&nbsp;&nbsp;&nbsp;.build();
+```
+MongoClientSettings settings = MongoClientSettings.builder()
+    .applyConnectionString(new ConnectionString(connectionString))
+    .addCommandListener(new QueryLoggingListener())
+    .build();
 
-MongoClient client = MongoClients.create(settings);</pre>
+MongoClient client = MongoClients.create(settings);
+```
+
 
 This pattern stays consistent with standard Java configuration approaches. You create a listener, register it in the Mongo client builder, and let Spring handle the remainder of the lifecycle. This gives you application-level telemetry that complements MongoDB's profiler. You can track latency, correlate slow commands with business events, and capture metadata that the profiler does not record by default.
 
 Many teams also rely on the explain plan built into MongoDB. Unlike relational databases where explain plans often feel abstract, MongoDB's explain output presents actionable information about index usage, examined documents, and winning plans. The two most important metrics are \`nReturned\` and \`totalDocsExamined\`. If the latter is significantly larger than the former, your query is scanning more documents than necessary. This indicates a missing or misaligned index. The explain plan is also helpful when confirming that compound indexes match your query pattern correctly.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">db.users.find({ email: "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="b9d8d5d0dadcf9dcc1d8d4c9d5dc97dad6d4">[email&nbsp;protected]</a>" }).explain("executionStats");</pre>
+```
+db.users.find({ email: "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="b9d8d5d0dadcf9dcc1d8d4c9d5dc97dad6d4">[email protected]</a>" }).explain("executionStats");
+```
+
 
 The \`executionStats\` mode gives the most practical insights because it includes execution time and the number of index keys scanned. Use this mode when validating a new index or comparing similar queries side by side.
 
@@ -121,11 +139,14 @@ For teams using [MongoDB Atlas](https://www.mongodb.com/lp/cloud/atlas/try4-reg/
 
 In Java applications, query metrics should extend beyond the database layer. A complete monitoring setup involves tracking latency at the application boundary as well. Micrometer is a popular choice for this because it integrates with Spring Boot and exports metrics to systems like Prometheus and Grafana. With Micrometer timers, you can capture how long specific repository methods take to execute. This allows you to compare driver-level latency against application-level latency and identify whether bottlenecks come from the database itself or the surrounding code.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">Timer timer = Timer.builder("mongo.query.time")
-&nbsp;&nbsp;&nbsp;&nbsp;.tag("collection", "users")
-&nbsp;&nbsp;&nbsp;&nbsp;.register(meterRegistry);
+```
+Timer timer = Timer.builder("mongo.query.time")
+    .tag("collection", "users")
+    .register(meterRegistry);
 
-return timer.record(() -&gt; mongoTemplate.find(query, User.class));</pre>
+return timer.record(() -> mongoTemplate.find(query, User.class));
+```
+
 
 This example wraps a repository call with a timer. The recorded duration helps track average query times and outliers. You can chart these metrics over time to understand baseline performance. Having baselines is important because performance tuning is not a one-time task. Changes in user behavior, data size, or indexing patterns all affect how queries behave, so historical comparisons are essential.
 
@@ -143,11 +164,14 @@ The most important rule is to write queries that match your indexes, not the oth
 
 Projections reduce network overhead and memory usage by returning only required fields. Instead of fetching entire documents, specify which fields your application actually needs:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">Query query = new Query()
-&nbsp;&nbsp;&nbsp;&nbsp;.addCriteria(Criteria.where("status").is("active"))
-&nbsp;&nbsp;&nbsp;&nbsp;.fields().include("name").include("email");
+```
+Query query = new Query()
+    .addCriteria(Criteria.where("status").is("active"))
+    .fields().include("name").include("email");
 
-List&lt;User&gt; users = mongoTemplate.find(query, User.class);</pre>
+List<User> users = mongoTemplate.find(query, User.class);
+```
+
 
 This pattern keeps payloads small and improves response times, especially when documents contain large arrays or embedded objects.
 
@@ -155,11 +179,14 @@ Avoid using \`$or\` and \`$in\` on unindexed fields. These operators can prevent
 
 Aggregation pipelines move computation to the server, reducing the amount of data transferred to your application. Always place \`$match\` and \`$sort\` stages early in the pipeline to filter documents before expensive operations like \`$group\` or \`$lookup\`. Here is an example of a well structured pipeline:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">Aggregation pipeline = Aggregation.newAggregation(
-&nbsp;&nbsp;&nbsp;&nbsp;match(Criteria.where("status").is("completed")),
-&nbsp;&nbsp;&nbsp;&nbsp;sort(Sort.by(Sort.Direction.DESC, "total")),
-&nbsp;&nbsp;&nbsp;&nbsp;group("category").sum("total").as("revenue")
-);</pre>
+```
+Aggregation pipeline = Aggregation.newAggregation(
+    match(Criteria.where("status").is("completed")),
+    sort(Sort.by(Sort.Direction.DESC, "total")),
+    group("category").sum("total").as("revenue")
+);
+```
+
 
 This approach filters and sorts before grouping, minimizing the data MongoDB processes in later stages. Opt for range queries over regex prefix searches. Regex patterns with leading wildcards like \`/.\*term/\` or \`/.\*term$/\` cannot use indexes effectively. If you need pattern matching, structure queries to use prefix patterns like \`/\^pattern/\`, which anchor to the beginning of the string and can leverage indexes.
 
@@ -219,10 +246,13 @@ A covered query is one where MongoDB satisfies the request using only the index 
 
 For example:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">db.orders.find(
-&nbsp;&nbsp;{ status: 'completed' },
-&nbsp;&nbsp;{ _id: 0, status: 1, total: 1 }
-)</pre>
+```
+db.orders.find(
+  { status: 'completed' },
+  { _id: 0, status: 1, total: 1 }
+)
+```
+
 
 If the index is \`{ status: 1, total: 1 }\`, this query can be fully covered. MongoDB does not need to fetch documents because all requested fields are already in the index.
 
@@ -254,23 +284,29 @@ Java applications can define indexes either through annotations or programmatic 
 
 Here is a simple example using annotations:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@Document(collection = "orders")
+```
+@Document(collection = "orders")
 
 public class Order {
-&nbsp;&nbsp;&nbsp;&nbsp;@Indexed
-&nbsp;&nbsp;&nbsp;&nbsp;private String status;
-&nbsp;&nbsp;&nbsp;&nbsp;@Indexed
-&nbsp;&nbsp;&nbsp;&nbsp;private Date createdAt;
-&nbsp;&nbsp;&nbsp;&nbsp;private double total;
-}</pre>
+    @Indexed
+    private String status;
+    @Indexed
+    private Date createdAt;
+    private double total;
+}
+```
+
 
 And an example of programmatic creation:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">Index index = new Index()
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.on("status", Sort.Direction.ASC)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.on("createdAt", Sort.Direction.DESC);
+```
+Index index = new Index()
+        .on("status", Sort.Direction.ASC)
+        .on("createdAt", Sort.Direction.DESC);
 
-mongoTemplate.indexOps("orders").ensureIndex(index);</pre>
+mongoTemplate.indexOps("orders").ensureIndex(index);
+```
+
 
 This approach helps you keep index creation inside the application's lifecycle instead of relying on manual operations.
 
@@ -280,26 +316,38 @@ Below are two simplified examples. The first shows a collection scan, while the 
 
 Collection scan example
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">db.orders.find({ status: 'completed' }).explain('executionStats')</pre>
+```
+db.orders.find({ status: 'completed' }).explain('executionStats')
+```
+
 
 If the explain output shows...
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">"stage": "COLLSCAN",
-"docsExamined": 150000</pre>
+```
+"stage": "COLLSCAN",
+"docsExamined": 150000
+```
+
 
 ...it means MongoDB scanned the entire collection. This is slow and grows linearly.
 
 **Indexed query example**
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">db.orders.createIndex({ status: 1 })
+```
+db.orders.createIndex({ status: 1 })
 
-db.orders.find({ status: 'completed' }).explain('executionStats')</pre>
+db.orders.find({ status: 'completed' }).explain('executionStats')
+```
+
 
 Now, the output might show:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">"stage": "IXSCAN",
+```
+"stage": "IXSCAN",
 "keysExamined": 5000,
-"docsExamined": 5000</pre>
+"docsExamined": 5000
+```
+
 
 The difference is immediate and predictable. Indexes reduce the amount of data MongoDB needs to scan and improve response time significantly.
 
@@ -313,11 +361,14 @@ One of the easiest mistakes to make is returning full documents even when an app
 
 Projections help you avoid this:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">Query query = new Query()
-&nbsp;&nbsp;&nbsp;&nbsp;.addCriteria(Criteria.where("status").is("ACTIVE"))
-&nbsp;&nbsp;&nbsp;&nbsp;.fields().include("name").include("email");
+```
+Query query = new Query()
+    .addCriteria(Criteria.where("status").is("ACTIVE"))
+    .fields().include("name").include("email");
 
-List&lt;User&gt; results = mongoTemplate.find(query, User.class);</pre>
+List<User> results = mongoTemplate.find(query, User.class);
+```
+
 
 This pattern reduces payload size, keeps your memory footprint predictable, and makes high-traffic endpoints more stable.
 
@@ -327,22 +378,25 @@ Offset-based pagination using \`skip()\` looks elegant but performs poorly for l
 
 Range-based pagination is much faster. Instead of skipping documents, you filter using the last seen ID from the previous page:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">// First page
+```
+// First page
 Query query = new Query()
-&nbsp;&nbsp;&nbsp;&nbsp;.limit(20)
-&nbsp;&nbsp;&nbsp;&nbsp;.with(Sort.by(Sort.Direction.ASC, "_id"));
+    .limit(20)
+    .with(Sort.by(Sort.Direction.ASC, "_id"));
 
-List&lt;Order&gt; firstPage = mongoTemplate.find(query, Order.class);
+List<Order> firstPage = mongoTemplate.find(query, Order.class);
 
 // Next page - use the last ID from the previous page
 ObjectId lastSeenId = firstPage.get(firstPage.size() - 1).getId();
 
 Query nextQuery = new Query()
-&nbsp;&nbsp;&nbsp;&nbsp;.addCriteria(Criteria.where("_id").gt(lastSeenId))
-&nbsp;&nbsp;&nbsp;&nbsp;.limit(20)
-&nbsp;&nbsp;&nbsp;&nbsp;.with(Sort.by(Sort.Direction.ASC, "_id"));
+    .addCriteria(Criteria.where("_id").gt(lastSeenId))
+    .limit(20)
+    .with(Sort.by(Sort.Direction.ASC, "_id"));
 
-List&lt;Order&gt; nextPage = mongoTemplate.find(nextQuery, Order.class);</pre>
+List<Order> nextPage = mongoTemplate.find(nextQuery, Order.class);
+```
+
 
 This approach uses index boundaries instead of walking the entire result set. Since \`_id\` is always indexed, this query remains fast regardless of page depth.
 
@@ -358,9 +412,12 @@ Large, unbounded arrays become performance bottlenecks. Returning large arrays f
 
 Use array slicing to limit how much data is returned:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">Query query = new Query()
-&nbsp;&nbsp;&nbsp;&nbsp;.addCriteria(Criteria.where("category").is("TECH"))
-&nbsp;&nbsp;&nbsp;&nbsp;.fields().slice("tags", 10);</pre>
+```
+Query query = new Query()
+    .addCriteria(Criteria.where("category").is("TECH"))
+    .fields().slice("tags", 10);
+```
+
 
 Keeping arrays bounded or storing them in separate collections helps maintain predictable performance.
 
@@ -376,8 +433,11 @@ High-level frameworks often generate convenience methods like \`findAll()\`. Cal
 
 Define specific query methods instead:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">List&lt;Order&gt; results = orderRepository
-&nbsp;&nbsp;&nbsp;&nbsp;.findByStatus("PENDING", PageRequest.of(0, 50));</pre>
+```
+List<Order> results = orderRepository
+    .findByStatus("PENDING", PageRequest.of(0, 50));
+```
+
 
 This aligns your code with actual business needs and avoids scanning large collections unnecessarily.
 
@@ -405,17 +465,20 @@ Some commonly used read preferences are:
 
 Here is an example of configuring a custom \`MongoClient\` in Java with a read preference:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">import com.mongodb.ReadPreference;
+```
+import com.mongodb.ReadPreference;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
 import com.mongodb.MongoClientSettings;
 
 MongoClientSettings settings = MongoClientSettings.builder()
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.applyConnectionString(new ConnectionString(connectionString))
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.readPreference(ReadPreference.secondaryPreferred())
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.build();
+        .applyConnectionString(new ConnectionString(connectionString))
+        .readPreference(ReadPreference.secondaryPreferred())
+        .build();
 
-MongoClient client = MongoClients.create(settings);</pre>
+MongoClient client = MongoClients.create(settings);
+```
+
 
 This pattern is useful when your application has mixed traffic where certain requests require strong consistency and others only need reasonably fresh data. If your application runs in multiple regions, read preferences combined with geo aware deployment can also improve latency for end users.
 
@@ -427,16 +490,19 @@ The safest approach is to cache only the final result that your controller or se
 
 A simple Caffeine cache example looks like this:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">Cache&lt;String, List&lt;Product&gt;&gt; productCache = Caffeine.newBuilder()
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.expireAfterWrite(Duration.ofMinutes(5))
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.maximumSize(10_000)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.build();
+```
+Cache<String, List<Product>> productCache = Caffeine.newBuilder()
+        .expireAfterWrite(Duration.ofMinutes(5))
+        .maximumSize(10_000)
+        .build();
 
-public List&lt;Product&gt; getFeaturedProducts() {
-&nbsp;&nbsp;&nbsp;&nbsp;return productCache.get("featured", key -&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;mongoTemplate.find(query(where("featured").is(true)), Product.class)
-&nbsp;&nbsp;&nbsp;&nbsp;);
-}</pre>
+public List<Product> getFeaturedProducts() {
+    return productCache.get("featured", key ->
+        mongoTemplate.find(query(where("featured").is(true)), Product.class)
+    );
+}
+```
+
 
 Caching works best when used alongside efficient indexes. If you notice that many identical queries are executed per second, it is a strong signal that a cache layer will benefit your workload.
 
@@ -446,13 +512,16 @@ One of the most common read inefficiencies is fetching entire documents when onl
 
 Using projections is a simple fix:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">Query query = new Query();
+```
+Query query = new Query();
 
 query.addCriteria(Criteria.where("status").is("active"));
 
 query.fields().include("name").include("email");
 
-List&lt;User&gt; users = mongoTemplate.find(query, User.class);</pre>
+List<User> users = mongoTemplate.find(query, User.class);
+```
+
 
 Smaller payloads help both the database and your JVM. They reduce memory churn, garbage collection pressure, and serialization time. This pattern also forms a nice habit for developers: treat MongoDB as a document store, but never assume you always need the entire document.
 
@@ -466,16 +535,19 @@ Inserting or updating documents one by one increases network round trips and slo
 
 Here is a typical example:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">BulkOperations ops = mongoTemplate.bulkOps(BulkOperations.BulkMode.UNORDERED, Order.class);
+```
+BulkOperations ops = mongoTemplate.bulkOps(BulkOperations.BulkMode.UNORDERED, Order.class);
 
 for (OrderUpdate update : updates) {
-&nbsp;&nbsp;&nbsp;&nbsp;ops.updateOne(
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Query.query(Criteria.where("_id").is(update.getId())),
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Update.update("status", update.getStatus())
-&nbsp;&nbsp;&nbsp;&nbsp;);
+    ops.updateOne(
+        Query.query(Criteria.where("_id").is(update.getId())),
+        Update.update("status", update.getStatus())
+    );
 }
 
-ops.execute();</pre>
+ops.execute();
+```
+
 
 Unordered mode is usually faster since MongoDB does not stop the batch at the first failure. This makes it ideal for high-volume update processes such as syncing external systems, ingesting logs, or running nightly maintenance tasks.
 
@@ -497,20 +569,26 @@ Here is a quick summary you can apply:
 
 You can configure write concerns globally:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">MongoClientSettings settings = MongoClientSettings.builder()
-&nbsp;&nbsp;&nbsp;&nbsp;.applyConnectionString(new ConnectionString(connectionString))
-&nbsp;&nbsp;&nbsp;&nbsp;.writeConcern(WriteConcern.MAJORITY)
-&nbsp;&nbsp;&nbsp;&nbsp;.build();
+```
+MongoClientSettings settings = MongoClientSettings.builder()
+    .applyConnectionString(new ConnectionString(connectionString))
+    .writeConcern(WriteConcern.MAJORITY)
+    .build();
 
 MongoClient client = MongoClients.create(settings);
 
-MongoTemplate template = new MongoTemplate(client, "mydb");</pre>
+MongoTemplate template = new MongoTemplate(client, "mydb");
+```
+
 
 Or per operation:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">UpdateResult result = mongoTemplate
-&nbsp;&nbsp;&nbsp;&nbsp;.withWriteConcern(WriteConcern.W1)
-&nbsp;&nbsp;&nbsp;&nbsp;.updateFirst(query, update, Product.class);</pre>
+```
+UpdateResult result = mongoTemplate
+    .withWriteConcern(WriteConcern.W1)
+    .updateFirst(query, update, Product.class);
+```
+
 
 Ingesting data continuously without batching can overwhelm your cluster. Instead of writing each record as soon as it arrives, many high-throughput systems group writes into batches that flush at intervals. This approach reduces the number of network operations while keeping latency predictable.
 
@@ -522,13 +600,16 @@ Connection pooling settings heavily influence performance under concurrent load.
 
 Spring Data lets you configure pool sizes in your application properties:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">spring.data.mongodb.uri: mongodb+srv://...
+```
+spring.data.mongodb.uri: mongodb+srv://...
 
 spring.data.mongodb.connection-pool.max-size: 100
 
 spring.data.mongodb.connection-pool.min-size: 10
 
-spring.data.mongodb.connection-pool.max-wait-time: 2000ms</pre>
+spring.data.mongodb.connection-pool.max-wait-time: 2000ms
+```
+
 
 Here is a good starting point:
 
@@ -554,35 +635,41 @@ At its core, the aggregation framework works like a sequence of stages. Each sta
 
 When working inside Java applications, the Spring Data aggregation builder offers a fluent API that mirrors the logical structure of pipelines. This prevents manually creating nested documents and keeps query intent readable. For example, the following snippet shows how to build a simple pipeline that filters published articles and groups them by category:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">import org.springframework.data.mongodb.core.aggregation.Aggregation;
+```
+import org.springframework.data.mongodb.core.aggregation.Aggregation;
 import org.springframework.data.mongodb.core.aggregation.AggregationResults;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.bson.Document;
 import static org.springframework.data.mongodb.core.aggregation.Aggregation.*;
 
 Aggregation pipeline = Aggregation.newAggregation(
-&nbsp;&nbsp;&nbsp;&nbsp;match(Criteria.where("status").is("published")),
-&nbsp;&nbsp;&nbsp;&nbsp;group("category").count().as("count"),
-&nbsp;&nbsp;&nbsp;&nbsp;sort(Sort.by(Sort.Direction.DESC, "count"))
+    match(Criteria.where("status").is("published")),
+    group("category").count().as("count"),
+    sort(Sort.by(Sort.Direction.DESC, "count"))
 );
 
-AggregationResults&lt;Document&gt; results = mongoTemplate.aggregate(
-&nbsp;&nbsp;&nbsp;&nbsp;pipeline,
-&nbsp;&nbsp;&nbsp;&nbsp;"articles",
-&nbsp;&nbsp;&nbsp;&nbsp;Document.class
-);</pre>
+AggregationResults<Document> results = mongoTemplate.aggregate(
+    pipeline,
+    "articles",
+    Document.class
+);
+```
+
 
 The \`match\` stage limits work early. The \`group\` stage calculates counts. The \`sort\` stage orders results. This approach performs all calculations inside MongoDB and returns only the final documents to your Java code. The \`AggregationResults\` object contains the resulting documents, which you can access using \`getMappedResults()\`.
 
 More advanced use cases include analytics dashboards, event stream summaries, content feeds, and pipelines that combine multiple collections through \`$lookup\`. For example, joining user details into an activity feed becomes a single pipeline rather than multiple queries:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">Aggregation pipeline = Aggregation.newAggregation(
-&nbsp;&nbsp;&nbsp;&nbsp;match(Criteria.where("type").is("activity")),
-&nbsp;&nbsp;&nbsp;&nbsp;lookup("users", "userId", "_id", "user"),
-&nbsp;&nbsp;&nbsp;&nbsp;unwind("user"),
-&nbsp;&nbsp;&nbsp;&nbsp;project("timestamp", "action")
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.and("user.name").as("userName")
-);</pre>
+```
+Aggregation pipeline = Aggregation.newAggregation(
+    match(Criteria.where("type").is("activity")),
+    lookup("users", "userId", "_id", "user"),
+    unwind("user"),
+    project("timestamp", "action")
+        .and("user.name").as("userName")
+);
+```
+
 
 Practical performance improvements often appear once you replace chained \`find\` queries or repeated post processing with a single pipeline. A real-world case that illustrates this well is turning a multi-query analytics workflow into a single server-side pipeline. This reduces network overhead, frees JVM memory, and cuts latency, sometimes by an order of magnitude. Pipelines benefit even more when combined with indexes that support the initial \`$match\` and \`$sort\` stages.
 
@@ -594,37 +681,43 @@ Tuning queries without measuring them is guesswork. Once you start changing quer
 
 In a typical Spring Boot application, you already have Micrometer on the classpath. You can wrap critical MongoDB calls in timers and start building a latency baseline before touching any query. For example, timing a MongoTemplate call looks like this:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@Autowired
+```
+@Autowired
 private MongoTemplate mongoTemplate;
 @Autowired
 private MeterRegistry meterRegistry;
 
-public List&lt;Order&gt; findRecentPaidOrders() {
-&nbsp;&nbsp;&nbsp;&nbsp;Timer timer = meterRegistry.timer("mongo.orders.recentPaid");
-&nbsp;&nbsp;&nbsp;&nbsp;return timer.record(() -&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;mongoTemplate.find(
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Query.query(Criteria.where("status").is("PAID"))
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.limit(50)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.with(Sort.by(Sort.Direction.DESC, "createdAt")),
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Order.class,
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"orders"
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)
-&nbsp;&nbsp;&nbsp;&nbsp;);
-}</pre>
+public List<Order> findRecentPaidOrders() {
+    Timer timer = meterRegistry.timer("mongo.orders.recentPaid");
+    return timer.record(() ->
+        mongoTemplate.find(
+            Query.query(Criteria.where("status").is("PAID"))
+                 .limit(50)
+                 .with(Sort.by(Sort.Direction.DESC, "createdAt")),
+            Order.class,
+            "orders"
+        )
+    );
+}
+```
+
 
 After a few deployments, you can compare average and p95 values for \`mongo.orders.recentPaid\` before and after a change. When you also log \`explain("executionStats")\` during profiling, you can track scanned versus returned ratios along with latency, which gives a clearer picture than timing alone.
 
 For reactive stacks, the pattern is similar but you keep the reactive flow intact. A simple approach uses \`Timer.Sample\` inside the handler:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public Flux&lt;Order&gt; streamRecentPaidOrders() {
-&nbsp;&nbsp;&nbsp;&nbsp;Timer.Sample sample = Timer.start(meterRegistry);
-&nbsp;&nbsp;&nbsp;&nbsp;return reactiveMongoTemplate
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.find(Query.query(Criteria.where("status").is("PAID")), Order.class)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.doOnComplete(() -&gt; sample.stop(
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Timer.builder("mongo.orders.recentPaid.reactive")
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.register(meterRegistry)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;));
-}</pre>
+```
+public Flux<Order> streamRecentPaidOrders() {
+    Timer.Sample sample = Timer.start(meterRegistry);
+    return reactiveMongoTemplate
+        .find(Query.query(Criteria.where("status").is("PAID")), Order.class)
+        .doOnComplete(() -> sample.stop(
+            Timer.builder("mongo.orders.recentPaid.reactive")
+                 .register(meterRegistry)
+        ));
+}
+```
+
 
 This keeps the measurement at the boundary and prevents corrupting the reactive pipeline with blocking code.
 
@@ -644,7 +737,10 @@ It is also helpful to use **capped collections** for logs, metrics, or ephemeral
 
 You can create a capped collection from the MongoDB shell:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">db.createCollection("queryLogs", { capped: true, size: 10485760, max: 5000 });</pre>
+```
+db.createCollection("queryLogs", { capped: true, size: 10485760, max: 5000 });
+```
+
 
 This creates a capped collection limited to 10MB or 5,000 documents, whichever limit is reached first.
 
@@ -661,7 +757,10 @@ Many teams benefit from using a query performance checklist that developers can 
 
 Finally, make it a habit to inspect db.currentOp() during incidents or when monitoring degraded performance. This command shows active operations, blocking queries, and execution times:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">db.currentOp({ "active": true, "secs_running": { "$gt": 5 } })</pre>
+```
+db.currentOp({ "active": true, "secs_running": { "$gt": 5 } })
+```
+
 
 This query returns operations that have been running for more than five seconds. The output includes the operation type, namespace, query details, and how long it has been running. It provides valuable insight into problems that are not visible at the driver layer.
 

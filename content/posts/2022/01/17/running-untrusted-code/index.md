@@ -91,11 +91,15 @@ However, to counter [supply-chain attacks](https://en.wikipedia.org/wiki/Supply_
 
 One can verify the signature with Maven:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="shell">mvn org.simplify4u.plugins:pgpverify-maven-plugin:show -Dartifact=com.zaxxer:HikariCP:5.0.0</pre>
+```bash
+mvn org.simplify4u.plugins:pgpverify-maven-plugin:show -Dartifact=com.zaxxer:HikariCP:5.0.0
+```
+
 
 It outputs the following:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">Artifact:
+```
+Artifact:
         groupId:     com.zaxxer
         artifactId:  HikariCP
         type:        jar
@@ -114,7 +118,9 @@ PGP key:
         bits:        2048
         fingerprint: 0xF3A90E6B10E809F851AB4FC54CC08E7F47C3EC76
         create date: Wed Sep 18 02:51:23 CEST 2013
-        uids:        [Brett Wooldridge (Sonatype) &lt;<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="4f2d3d2a3b3b61382020232b3d262b282a0f28222e2623612c2022">[email&nbsp;protected]</a>&gt;]</pre>
+        uids:        [Brett Wooldridge (Sonatype) <<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="4f2d3d2a3b3b61382020232b3d262b282a0f28222e2623612c2022">[email protected]</a>>]
+```
+
 
 However, none of this amounts to much. Signing doesn't assert the identity of the provider. It tells that a private key with the referenced email signed it with a private key with the referenced email. Nothing prevents a malicious actor from creating another private key with the same email or a similar one.
 

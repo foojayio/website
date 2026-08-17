@@ -26,9 +26,12 @@ A sealed class or interface restricts the set of classes that can implement or e
 
 Suppose you're building an e-commerce application that supports different payment methods, such as credit cards, PayPal, and Bitcoin. You could define a sealed class called PaymentMethod that permits various subclasses for each payment method:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public sealed class PaymentMethod permits CreditCard, PayPal, Bitcoin {
+```java
+public sealed class PaymentMethod permits CreditCard, PayPal, Bitcoin {
     // Class members
-}</pre>
+}
+```
+
 
 In this example, PaymentMethod is a sealed class that permits CreditCard, PayPal, and Bitcoin to extend it. A sealed class can permit any number of classes to extend it by specifying them in a comma-separated list after the permits keyword.
 
@@ -42,7 +45,8 @@ Sealed classes can create a closed-type hierarchy, a limited set of classes that
 
 This ensures that only a specified set of classes can be used and prevents unwanted extensions or implementations.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">package ca.bazlur
+```java
+package ca.bazlur
 
 public sealed class Animal permits Cat, Dog {
     // Class definition
@@ -54,7 +58,9 @@ public final class Cat extends Animal {
 
 public final class Dog extends Animal {
     // Class definition
-}</pre>
+}
+```
+
 
 In this example, Animal is a sealed class that only permits Cat and Dog to extend it.
 
@@ -64,7 +70,8 @@ Any other attempt to extend Animal will result in a compilation error.
 
 Sealed classes can also create a limited set of implementations for a specific interface or abstract class. This ensures that the interface or abstract class owners can control and change the set of implementations.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public sealed interface Shape permits Circle, Square {
+```java
+public sealed interface Shape permits Circle, Square {
     double getArea();
 }
 
@@ -74,7 +81,9 @@ public final class Circle implements Shape {
 
 public final class Square implements Shape {
     // Class definition
-}</pre>
+}
+```
+
 
 In this example, Shape is a sealed interface that only permits Circle and Square to implement it.
 
@@ -86,27 +95,29 @@ Sealed classes can also be used to enhance pattern matching in switch statements
 
 By limiting the set of subtypes that can extend a sealed class, developers can use pattern matching with exhaustive checks, ensuring that all possible subtypes are covered.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public sealed abstract class PaymentMethod permits CreditCard, DebitCard, PayPal {
+```java
+public sealed abstract class PaymentMethod permits CreditCard, DebitCard, PayPal {
     // Class definition
 }
 
 public class PaymentProcessor {
     public void processPayment(PaymentMethod paymentMethod, double amount) {
         switch (paymentMethod) {
-            case CreditCard cc -&gt; {
+            case CreditCard cc -> {
                 // Process credit card payment
             }
-            case DebitCard dc -&gt; {
+            case DebitCard dc -> {
                 // Process debit card payment
             }
-            case PayPal pp -&gt; {
+            case PayPal pp -> {
                 // Process PayPal payment
             }
 
         }
     }
 }
-</pre>
+```
+
 
 In this example, PaymentMethod is a sealed class that permits CreditCard, DebitCard, and PayPal to extend it.
 
@@ -118,7 +129,8 @@ Using a sealed class ensures that all possible subtypes are covered in the switc
 
 Sealed classes can be used to implement a state machine, a computational model that defines the behaviour of a system in response to a series of inputs. In a state machine, each state is represented by a sealed class, and the transitions between states are modelled by methods that return a new state.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public sealed class State permits IdleState, ActiveState, ErrorState {
+```java
+public sealed class State permits IdleState, ActiveState, ErrorState {
     public State transition(Input input) {
         // Transition logic
     }
@@ -135,7 +147,8 @@ public final class ActiveState extends State {
 public final class ErrorState extends State {
     // Class definition
 }
-</pre>
+```
+
 
 In this example, State is a sealed class that permits the extend of IdleState, ActiveState, and ErrorState.
 
@@ -147,7 +160,8 @@ The use of sealed classes ensures that the state machine is well-defined and can
 
 Sealed classes can also create a limited set of exceptions that can be thrown by a method. This can help enforce a consistent set of error conditions and prevent the creation of arbitrary exception types.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public sealed class DatabaseException extends Exception permits ConnectionException, QueryException {
+```java
+public sealed class DatabaseException extends Exception permits ConnectionException, QueryException {
     // Class definition
 }
 
@@ -158,7 +172,8 @@ public final class ConnectionException extends DatabaseException {
 public final class QueryException extends DatabaseException {
     // Class definition
 }
-</pre>
+```
+
 
 In this example, DatabaseException is a sealed class that permits ConnectionException and QueryException to extend it.
 
@@ -168,7 +183,8 @@ This ensures that any exception thrown by a method related to a database operati
 
 Sealed classes can also control access to constructors, which can help enforce a specific set of invariants for the class.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public sealed class Person {
+```java
+public sealed class Person {
     private final String name;
     private final int age;
 
@@ -180,7 +196,7 @@ Sealed classes can also control access to constructors, which can help enforce a
     public static final class Child extends Person {
         public Child(String name, int age) {
             super(name, age);
-            if (age &gt;= 18) {
+            if (age >= 18) {
                 throw new IllegalArgumentException("Children must be under 18 years old.");
             }
         }
@@ -189,13 +205,14 @@ Sealed classes can also control access to constructors, which can help enforce a
     public static final class Adult extends Person {
         public Adult(String name, int age) {
             super(name, age);
-            if (age &lt; 18) {
+            if (age < 18) {
                 throw new IllegalArgumentException("Adults must be 18 years old or older.");
             }
         }
     }
 }
-</pre>
+```
+
 
 In this example, a Person is a sealed class with two subclasses: Child and Adult.
 
@@ -207,7 +224,8 @@ This enables the Person to enforce the invariant that children must be under 18 
 
 Sealed classes can also improve code security by ensuring that only trusted code can extend or implement them. This can help prevent unauthorized access to sensitive parts of the codebase.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public sealed class SecureCode permits TrustedCode {
+```java
+public sealed class SecureCode permits TrustedCode {
     // Class definition
 }
 
@@ -220,7 +238,8 @@ public final class TrustedCode extends SecureCode {
 public final class UntrustedCode extends SecureCode {
     // Class definition
 }
-</pre>
+```
+
 
 In this example, SecureCode is a sealed class that only permits TrustedCode to extend it.
 
@@ -232,7 +251,8 @@ Sealed classes can also be used to enable polymorphism with exhaustive pattern m
 
 By using sealed classes, developers can ensure that all possible subtypes are covered in a pattern-matching statement, enabling safer and more efficient code.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public sealed class Shape permits Circle, Square {
+```java
+public sealed class Shape permits Circle, Square {
     // Class definition
 }
 
@@ -246,11 +266,12 @@ public final class Square extends Shape {
 
 public void drawShape(Shape shape) {
     switch (shape) {
-        case Circle c -&gt; c.drawCircle();
-        case Square s -&gt; s.drawSquare();
+        case Circle c -> c.drawCircle();
+        case Square s -> s.drawSquare();
     }
 }
-</pre>
+```
+
 
 In this example, Shape is a sealed class that permits Circle and Square to extend it.
 
@@ -262,7 +283,8 @@ Sealed classes can also be used to enhance code readability by clearly defining 
 
 By limiting the set of possible subtypes, developers can more easily reason about the code and understand its behaviour.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public sealed class Fruit permits Apple, Banana, Orange {
+```java
+public sealed class Fruit permits Apple, Banana, Orange {
     // Class definition
 }
 
@@ -277,7 +299,8 @@ public final class Banana extends Fruit {
 public final class Orange extends Fruit {
     // Class definition
 }
-</pre>
+```
+
 
 In this example, Fruit is a sealed class that permits Apple, Banana, and Orange to extend it.
 
@@ -289,7 +312,8 @@ Sealed classes can also be used to enforce API contracts, which are the set of e
 
 By using sealed classes, API providers can ensure that the set of possible subtypes is well-defined and documented, improving the API's usability and maintainability.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public sealed class Vehicle permits Car, Truck, Motorcycle {
+```java
+public sealed class Vehicle permits Car, Truck, Motorcycle {
     // Class definition
 }
 
@@ -303,7 +327,9 @@ public final class Truck extends Vehicle {
 
 public final class Motorcycle extends Vehicle {
     // Class definition
-}</pre>
+}
+```
+
 
 In this example, Vehicle is a sealed class that permits Car, Truck, and Motorcycle to extend it.
 
@@ -315,12 +341,15 @@ Finally, sealed classes can also be used to prevent unwanted subtype extensions.
 
 By limiting the set of possible subtypes, developers can prevent the creation of arbitrary subclasses that do not conform to the class's intended behavior.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public sealed class PaymentMethod {
+```java
+public sealed class PaymentMethod {
     // Class definition
 }
-</pre>
+```
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">final class CreditCard extends PaymentMethod {
+
+```java
+final class CreditCard extends PaymentMethod {
     // Class definition in the same file
 }
 
@@ -330,7 +359,9 @@ final class DebitCard extends PaymentMethod {
 
 public class StolenCard extends PaymentMethod {
     // Class definition in another file
-}</pre>
+}
+```
+
 
 The `PaymentMethod` class is defined as `sealed`, which means that it cannot be extended beyond the classes defined within the file.
 
@@ -344,7 +375,8 @@ Sealed classes can also enhance the type safety of collections, which are a fund
 
 By using sealed classes to define the set of possible elements in a collection, developers can ensure that the collection is type-safe and can enforce certain invariants.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public sealed interface Animal permits Dog, Cat, Bird {
+```java
+public sealed interface Animal permits Dog, Cat, Bird {
     // Interface definition
 }
 
@@ -358,14 +390,18 @@ public final class Cat implements Animal {
 
 public final class Bird implements Animal {
     // Class definition
-}</pre>
+}
+```
+
 
 In this example, Animal is a sealed interface that permits Dog, Cat, and Bird to implement it.
 
 By using sealed classes to define the set of possible animals, developers can ensure that a collection of animals is type-safe and can enforce certain invariants.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">List<!--? extends Animal--> animals = List.of(new Dog(), new Cat(), new Bird());
-</pre>
+```java
+List<!--? extends Animal--> animals = List.of(new Dog(), new Cat(), new Bird());
+```
+
 
 In this example, animal is a List of elements that extend the Animal interface.
 
@@ -377,7 +413,8 @@ Sealed classes can also facilitate API evolution, which is updating an API to ad
 
 By using sealed classes to define the set of possible classes that can extend or implement a specific class or interface, developers can ensure that API changes are compatible with existing code.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public sealed class Animal permits Dog, Cat {
+```java
+public sealed class Animal permits Dog, Cat {
     // Class definition
 }
 
@@ -392,7 +429,8 @@ public final class Cat extends Animal {
 public final class Bird extends Animal {
     // Class definition
 }
-</pre>
+```
+
 
 In this example, Animal is a sealed class that permits Dog and Cat to extend it.
 
@@ -400,7 +438,7 @@ Because Animal is a sealed class, adding a new subtype, Bird would be a breaking
 
 This ensures that API changes are compatible with existing code and can help maintain the stability of the codebase.
 
-*** ** * ** ***
+
 
 Here are a few more concrete and real-life examples of how sealed classes can be used in Java development:
 
@@ -410,7 +448,8 @@ In many distributed systems, messages pass data between different components or 
 
 Sealed classes can represent different types of messages and ensure that each type is well-defined and type-safe.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public sealed interface Message permits RequestMessage, ResponseMessage {
+```java
+public sealed interface Message permits RequestMessage, ResponseMessage {
     // Interface definition
 }
 
@@ -420,7 +459,9 @@ public final class RequestMessage implements Message {
 
 public final class ResponseMessage implements Message {
     // Class definition
-}</pre>
+}
+```
+
 
 In this example, Message is a sealed interface that permits RequestMessage and ResponseMessage to implement it.
 
@@ -432,7 +473,8 @@ In domain-driven design, domain objects represent the concepts and entities in a
 
 Sealed classes can define a set of domain objects and ensure that each object type is well-defined and has a limited set of possible subtypes.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public sealed interface OrderItem permits ProductItem, ServiceItem {
+```java
+public sealed interface OrderItem permits ProductItem, ServiceItem {
     // Interface definition
 }
 
@@ -442,7 +484,9 @@ public final class ProductItem implements OrderItem {
 
 public final class ServiceItem implements OrderItem {
     // Class definition
-}</pre>
+}
+```
+
 
 In this example, OrderItem is a sealed interface that permits ProductItem and ServiceItem to implement it.
 
@@ -452,7 +496,8 @@ By using sealed classes, developers can ensure that each domain object is well-d
 
 In many systems, users represent individuals who interact with the system somehow. Sealed classes can represent different types of users and ensure that each type is well-defined and type-safe.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public sealed class User permits Customer, Employee, Admin {
+```java
+public sealed class User permits Customer, Employee, Admin {
     // Class definition
 }
 
@@ -466,7 +511,9 @@ public final class Employee extends User {
 
 public final class Admin extends User {
     // Class definition
-}</pre>
+}
+```
+
 
 In this example, User is a sealed class that permits Customer, Employee, and Admin to extend it.
 
@@ -478,7 +525,8 @@ In many systems, errors signal that something has gone wrong during the executio
 
 Sealed classes can define a limited set of error types and ensure that each type is well-defined and has a limited set of possible subtypes.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public sealed class Error permits NetworkError, DatabaseError, SecurityError {
+```java
+public sealed class Error permits NetworkError, DatabaseError, SecurityError {
     // Class definition
 }
 
@@ -492,7 +540,9 @@ public final class DatabaseError extends Error {
 
 public final class SecurityError extends Error {
     // Class definition
-}</pre>
+}
+```
+
 
 In this example, Error is a sealed class that permits NetworkError, DatabaseError, and SecurityError to extend it.
 
@@ -504,7 +554,8 @@ In many web applications, HTTP methods interact with web resources such as URLs.
 
 Sealed classes can define a limited set of HTTP methods and ensure that each method is well-defined and has a limited set of possible subtypes.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public sealed class HttpMethod permits GetMethod, PostMethod, PutMethod {
+```java
+public sealed class HttpMethod permits GetMethod, PostMethod, PutMethod {
     // Class definition
 }
 
@@ -518,7 +569,9 @@ public final class PostMethod extends HttpMethod {
 
 public final class PutMethod extends HttpMethod {
     // Class definition
-}</pre>
+}
+```
+
 
 In this example, HttpMethod is a sealed class that permits GetMethod, PostMethod, and PutMethod to extend it.
 
@@ -532,7 +585,8 @@ In many systems, configuration parameters are used to control the behaviour of a
 
 Sealed classes can define a limited set of configuration parameters and ensure that each parameter is well-defined and has a limited set of possible subtypes.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public sealed class ConfigurationParameter permits DebugMode, LoggingLevel {
+```java
+public sealed class ConfigurationParameter permits DebugMode, LoggingLevel {
     // Class definition
 }
 
@@ -542,7 +596,9 @@ public final class DebugMode extends ConfigurationParameter {
 
 public final class LoggingLevel extends ConfigurationParameter {
     // Class definition
-}</pre>
+}
+```
+
 
 In this example, ConfigurationParameter is a sealed class that permits DebugMode and LoggingLevel to extend it.
 
@@ -556,7 +612,8 @@ In many systems, databases are used to store and retrieve data.
 
 Sealed classes can define a limited set of database access strategies and ensure that each strategy is well-defined and has a limited set of possible subtypes.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public sealed class DatabaseAccessStrategy permits JdbcStrategy, JpaStrategy, HibernateStrategy {
+```java
+public sealed class DatabaseAccessStrategy permits JdbcStrategy, JpaStrategy, HibernateStrategy {
     // Class definition
 }
 
@@ -570,7 +627,9 @@ public final class JpaStrategy extends DatabaseAccessStrategy {
 
 public final class HibernateStrategy extends DatabaseAccessStrategy {
     // Class definition
-}</pre>
+}
+```
+
 
 In this example, DatabaseAccessStrategy is a sealed class that permits JdbcStrategy, JpaStrategy, and HibernateStrategy to extend it.
 
@@ -582,7 +641,8 @@ In many systems, authentication is used to verify the identity of users.
 
 Sealed classes can define a limited set of authentication methods and ensure that each method is well-defined and has a limited set of possible subtypes.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public sealed class AuthenticationMethod permits PasswordMethod, TokenMethod, BiometricMethod {
+```java
+public sealed class AuthenticationMethod permits PasswordMethod, TokenMethod, BiometricMethod {
     // Class definition
 }
 
@@ -596,7 +656,9 @@ public final class TokenMethod extends AuthenticationMethod {
 
 public final class BiometricMethod extends AuthenticationMethod {
     // Class definition
-}</pre>
+}
+```
+
 
 In this example, AuthenticationMethod is a sealed class that permits PasswordMethod, TokenMethod, and BiometricMethod to extend it.
 

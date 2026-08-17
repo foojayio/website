@@ -53,9 +53,12 @@ Do take note, however, that in real world applications, the user is probably bet
 
 To get started, first clone the WireQuery repository and start the server:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash">git clone <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="adcac4d9edcac4d9c5d8cf83cec2c0">[email&nbsp;protected]</a>:wirequery/wirequery.git
+```bash
+git clone <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="adcac4d9edcac4d9c5d8cf83cec2c0">[email protected]</a>:wirequery/wirequery.git
 cd wirequery
-docker-compose up</pre>
+docker-compose up
+```
+
 
 Open a browser and log in at `localhost:8090` using `admin` / `admin`.
 
@@ -121,14 +124,18 @@ Backend {#h2-0-backend}
 
 In the `application.yml`, a few properties were added, such as the Api Key, the name of the application and the location of the WireQuery server. Similarly, the following dependencies were added to the `build.gradle.kts` file that are relevant for using WireQuery:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="kotlin">implementation("com.wirequery:wirequery-spring-boot-3-starter:${project.version}")
-implementation("io.micrometer:micrometer-tracing-bridge-brave")</pre>
+```kotlin
+implementation("com.wirequery:wirequery-spring-boot-3-starter:${project.version}")
+implementation("io.micrometer:micrometer-tracing-bridge-brave")
+```
+
 
 The former dependency is the WireQuery Spring Boot Starter and the latter is used for making sure that each request is traced, which is required for using WireQuery effectively.
 
 Furthermore, there is a `WireQueryConfig` file that will set up the "TraceProvider" (which makes sure the trace id is sent correctly to WireQuery):
 
-<pre class="EnlighterJSRAW" data-enlighter-language="kotlin">package com.example.basket.config
+```kotlin
+package com.example.basket.config
 
 import com.wirequery.spring6.TraceProvider
 import io.micrometer.tracing.Tracer
@@ -142,29 +149,43 @@ class WireQueryConfig {
         TraceProvider {
             tracer.currentSpan()?.context()?.traceId()
         }
-}</pre>
+}
+```
+
 
 Frontend {#h2-1-frontend}
 -------------------------
 
 On the frontend, the following dependencies were added:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="json">"@wirequery/wirequery-js-core": "0.0.5",
+```json
+"@wirequery/wirequery-js-core": "0.0.5",
 @rrweb/types": "^2.0.0-alpha.11",
 "rrweb": "^2.0.0-alpha.11",
-"rrweb-snapshot": "^2.0.0-alpha.11",</pre>
+"rrweb-snapshot": "^2.0.0-alpha.11",
+```
+
 
 The recorder is initiatialized using the following code:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="js">const recorder = new RecorderClass(&lt;wireQueryBackendPath&gt;, &lt;templateId&gt;, '&lt;apiKey&gt;')</pre>
+```javascript
+const recorder = new RecorderClass(<wireQueryBackendPath>, <templateId>, '<apiKey>')
+```
+
 
 When the "Start Recording" button is clicked, the following logic is executed:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="js">recorder.startRecording({ accountId: '123' })</pre>
+```javascript
+recorder.startRecording({ accountId: '123' })
+```
+
 
 And when the recording ends, the following logic is executed:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="js">recorder.stopRecording()</pre>
+```javascript
+recorder.stopRecording()
+```
+
 
 In this article, we covered the main use case of WireQuery: debugging user-reported incidents in distributed systems. However, there is a lot more to cover.
 

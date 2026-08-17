@@ -37,29 +37,35 @@ Source of JFR timestamps {#h2-0-source-of-jfr-timestamps}
 
 The JFR event time stamps are set in the JFR event constructor, which is defined in `jfrEvent.hpp` (and not in the Java code, as one might expect):
 
-<pre class="EnlighterJSRAW" data-enlighter-language="cpp" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">  JfrEvent(EventStartTime timing=TIMED) : _start_time(0), _end_time(0),
+```cpp
+  JfrEvent(EventStartTime timing=TIMED) : _start_time(0), _end_time(0),
                                           _untimed(timing == UNTIMED),
                                           _should_commit(false), _evaluated(false)
 #ifdef ASSERT
   , _verifier()
 #endif
   {
-    if (!T::isInstant &amp;&amp; !_untimed &amp;&amp; is_enabled()) {
+    if (!T::isInstant && !_untimed && is_enabled()) {
       set_starttime(JfrTicks::now());
     }
-  }</pre>
+  }
+```
+
 
 Looking further reveals that `JFRTicks` calls [`FastUnorderedElapsedCounterSource`](https://github.com/openjdk/jdk/blob/05ea083b0563ddacf3e38dc329ba00dc4bac9b29/src/hotspot/share/utilities/ticks.cpp#L75) which uses two different time sources:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="cpp" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">FastUnorderedElapsedCounterSource::Type FastUnorderedElapsedCounterSource::now() {
-#if defined(X86) &amp;&amp; !defined(ZERO)
+```cpp
+FastUnorderedElapsedCounterSource::Type FastUnorderedElapsedCounterSource::now() {
+#if defined(X86) && !defined(ZERO)
   static bool valid_rdtsc = Rdtsc::initialize();
   if (valid_rdtsc) {
     return Rdtsc::elapsed_counter();
   }
 #endif
   return os::elapsed_counter();
-}</pre>
+}
+```
+
 
 The RDTSC instruction reads the time stamp counter on x86 processors:
 > The time stamp counter (TSC) is a hardware counter found in all contemporary x86 processors. The counter is implemented as a 64-bit model-specific register (MSR) that is incremented at every clock cycle. The RDTSC ("read time stamp counter") register has been present since the original Pentium.
@@ -71,18 +77,24 @@ This instruction allows the OS to implement a monotonic real-time clock.
 
 On non-x86 systems `os::elapsed_counter` is used, which, surprise, calls `os::javaTimeNanos`:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">jlong os::elapsed_counter() {
+```
+jlong os::elapsed_counter() {
   return os::javaTimeNanos() - initial_time_count;
-}</pre>
+}
+```
+
 
 Source of `System.nanoTime` {#h2-1-source-of-system-nanotime}
 -------------------------------------------------------------
 
 Now the remaining question is: Does `System.nanoTime` also call `os::javaTimeNanos`? The method is defined in the [jvm.cpp](https://github.com/openjdk/jdk/blob/05ea083b0563ddacf3e38dc329ba00dc4bac9b29/src/hotspot/share/prims/jvm.cpp#L243):
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">JVM_LEAF(jlong, JVM_NanoTime(JNIEnv *env, jclass ignored))
+```
+JVM_LEAF(jlong, JVM_NanoTime(JNIEnv *env, jclass ignored))
   return os::javaTimeNanos();
-JVM_END</pre>
+JVM_END
+```
+
 
 So `System.nanoTime` is just a tiny wrapper around `os::javaTimeNanos`. So this solves the original question on non-x86 CPUs. But what about x86 CPUs?
 

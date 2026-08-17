@@ -49,13 +49,16 @@ Single Responsibility Principle: Why Should Your Microservices Focus on a Single
 * **Pitfalls**: Violating this principle leads to complex services where responsibilities are unclear and difficult to manage.
 * **Example**: An e-commerce platform has separate microservices for user authentication, product catalog, shopping cart, and payment processing. Here's a simplified example of the AuthenticationService:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">public class AuthenticationService {
+```
+public class AuthenticationService {
  public void authenticateUser(User user) {
  // Authenticate user
  // This could involve checking the user's credentials,
  // comparing them with stored data, and returning a response that indicates whether the authentication was successful.
  }
-}</pre>
+}
+```
+
 
 * **Real-World**: Amazon and Netflix decompose their platforms into focused microservices, achieving a high level of specialization, much like a team of specialists.
 
@@ -85,7 +88,8 @@ Low cohesion results in unclear responsibilities.
 
 **Example**: In a User Management service profiles can work independently from an Order History service.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">// didcated service for user management.
+```
+// didcated service for user management.
 
 public class User {
 
@@ -99,7 +103,9 @@ public class Order {
   private Long quantity;
   private Date orderDate;
 
-}</pre>
+}
+```
+
 
 * **Real World**: Uber adopted loose coupling and high cohesion for services like Payment, Trip History, and Driver Profile, enabling each service to evolve independently.
 

@@ -39,9 +39,12 @@ Records already prohibit the modification of final fields.
 
 JEP 500 will issue a warning in the JVM logs the first time a final field is modified via deep reflection.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">WARNING: Final field f in p.C has been [mutated/unreflected for mutation] by class com.foo.Bar.caller in module N (file:/path/to/foo.jar)
+```
+WARNING: Final field f in p.C has been [mutated/unreflected for mutation] by class com.foo.Bar.caller in module N (file:/path/to/foo.jar)
 WARNING: Use --enable-final-field-mutation=N to avoid a warning
-WARNING: Mutating final fields will be blocked in a future release unless final field mutation is enabled</pre>
+WARNING: Mutating final fields will be blocked in a future release unless final field mutation is enabled
+```
+
 
 This can be controlled via the JVM option `--illegal-final-field-mutation`, which can take the following values:
 
@@ -85,9 +88,12 @@ The JDK HTTP client still uses HTTP/2 by default.
 
 To use HTTP/3, you must select this version when creating the HTTP client:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">var client = HttpClient.newBuilder()
+```
+var client = HttpClient.newBuilder()
                .version(HttpClient.Version.HTTP_3)
-               .build();</pre>
+               .build();
+```
+
 
 More information in [JEP 517](https://openjdk.org/jeps/517).
 

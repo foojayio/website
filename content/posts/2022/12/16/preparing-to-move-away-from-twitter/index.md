@@ -66,7 +66,8 @@ The [Docker image](https://hub.docker.com/r/klausi/mastodon-twitter-sync/tags) h
 
 Let's start with the following:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml">name: Sync Twitter to and from Mastodon
+```yaml
+name: Sync Twitter to and from Mastodon
 on:
   schedule:
     - cron: "24 */2 * * *"                               #1
@@ -88,7 +89,9 @@ jobs:
         uses: actions-rs/cargo@v1
         with:
           command: run
-          args: --release</pre>
+          args: --release
+```
+
 
 1. Schedule every two hours, 24 minutes after the hour
 2. Checkout the sync project's code
@@ -106,20 +109,24 @@ My advice is to run the project interactively locally once. If the TOML file doe
 2. Add and commit the encrypted file
 3. During workflow run, decrypt the file using a GitHub Action secret
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml">jobs:
+```yaml
+jobs:
   sync:
     runs-on: ubuntu-latest
     steps:
       - name: Install GPG to decrypt the configuration file
-        run: sudo apt-get update &amp;&amp; sudo apt-get install -y gnupg
+        run: sudo apt-get update && sudo apt-get install -y gnupg
       - name: Decrypt the configuration file
-        run: gpg --quiet --batch --yes --decrypt --passphrase="$GPG_PASSPHRASE" --decrypt mastodon-twitter-sync.toml.gpg &gt; mastodon-twitter-sync.toml 
+        run: gpg --quiet --batch --yes --decrypt --passphrase="$GPG_PASSPHRASE" --decrypt mastodon-twitter-sync.toml.gpg > mastodon-twitter-sync.toml 
         env:
-          GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}</pre>
+          GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
+```
+
 
 At this point, we have mixed the Rust source code with our configuration file in the same Git repository. Handling such a project involves a lot of `git rebase`, which I want to avoid. Let's keep the code separate with its dedicated lifecycle locally.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">mastodon-twitter-sync-job               #1
+```
+mastodon-twitter-sync-job               #1
 |_ .github
 |  |_ workflows
 |    |_ sync.yml                        #2
@@ -127,7 +134,9 @@ At this point, we have mixed the Rust source code with our configuration file in
 
 mastodon-twitter-sync                   #4
 |_ src
-|_ ...</pre>
+|_ ...
+```
+
 
 1. My project
 2. GitHub action
@@ -136,7 +145,8 @@ mastodon-twitter-sync                   #4
 
 We need to change how we check out the code:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml">jobs:
+```yaml
+jobs:
   sync:
     runs-on: ubuntu-latest
     steps:
@@ -148,11 +158,14 @@ We need to change how we check out the code:
         uses: actions/checkout@v3
         with:
           repository: klausi/mastodon-twitter-sync
-          path: code</pre>
+          path: code
+```
+
 
 When we run the workflow, the layout is the following:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">|_ job
+```
+|_ job
 |  |_ .github
 |  |  |_ workflows
 |  |    |_ sync.yml
@@ -160,18 +173,21 @@ When we run the workflow, the layout is the following:
 |
 |_ code
 |  |_ src
-|  |_ ...</pre>
+|  |_ ...
+```
+
 
 Henceforth, we should update the decrypting and run the steps accordingly:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml">jobs:
+```yaml
+jobs:
   sync:
     runs-on: ubuntu-latest
     steps:
       - name: Decrypt the configuration file
         run: |
           gpg --quiet --batch --yes --decrypt --passphrase="$GPG_PASSPHRASE"
-              --decrypt job/mastodon-twitter-sync.toml.gpg &gt; mastodon-twitter-sync.toml #1
+              --decrypt job/mastodon-twitter-sync.toml.gpg > mastodon-twitter-sync.toml #1
         env:
           GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
       - name: Execute synchronization
@@ -179,7 +195,8 @@ Henceforth, we should update the decrypting and run the steps accordingly:
         with:
           command: run
           args: --manifest-path=./code/Cargo.toml --release                             #2
-</pre>
+```
+
 
 1. Decrypt from the `job` subfolder in the current root folder
 2. Run in the current folder using the `code` subfolder
@@ -188,19 +205,22 @@ Henceforth, we should update the decrypting and run the steps accordingly:
 
 The project creates a `post_cache.json` file that contains all previously synced content to avoid duplicating the same content during each execution. We need to take it into account:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml">jobs:
+```yaml
+jobs:
   sync:
     runs-on: ubuntu-latest
       - name: Update post cache
-        run: &gt;
-          cp ./post_cache.json ./job/ 2&gt;/dev/null || :    #1
+        run: >
+          cp ./post_cache.json ./job/ 2>/dev/null || :    #1
       - name: Commit and push post cache
         uses: EndBug/add-and-commit@v7                    #2
         with:
           cwd: './job'
           add: post_cache.json
           default_author: github_actions
-          message: Update post cache</pre>
+          message: Update post cache
+```
+
 
 1. Copy the `post_cache.json` in the `job` subfolder. Only succeed the step if the job synchronizes no content, and the file is generated.
 2. Commit back the file if it has changed
@@ -211,7 +231,8 @@ In the current state, each run downloads the dependencies and compiles the proje
 
 The platform provides a generic [caching GitHub Action](https://github.com/marketplace/actions/cache). However, I found [rust-cache](https://github.com/Swatinem/rust-cache), a Rust-specific one that provides appropriate defaults for Rust. Let's use it to cache the dependencies and the executable across workflow executions (provided some parameters stay the same):
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml">jobs:
+```yaml
+jobs:
   sync:
     runs-on: ubuntu-latest
     steps:
@@ -223,7 +244,9 @@ The platform provides a generic [caching GitHub Action](https://github.com/marke
       - name: Cache executable             #1
         uses: Swatinem/rust-cache@v2
         with:
-          workspaces: code                 #2</pre>
+          workspaces: code                 #2
+```
+
 
 1. Must be installed after Rust install, as the cache key contains Rust-specific data
 2. Cache artifacts located in the `code` subfolder
@@ -234,7 +257,8 @@ With this setup, I need to update the repo with the new JSON cache file before I
 
 The connection to Mastodon is fickle; a lot of actions fail with the following message:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">Error connecting to Mastodon: Http(
+```
+Error connecting to Mastodon: Http(
     reqwest::Error {
         kind: Request,
         url: Url {
@@ -254,7 +278,9 @@ The connection to Mastodon is fickle; a lot of actions fail with the following m
         },
         source: TimedOut,
     },
-)</pre>
+)
+```
+
 
 It's not an issue *per se*; it just means that synchronization lags. Should I move to a more reliable instance or even host my own?
 

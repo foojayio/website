@@ -73,7 +73,8 @@ As mentioned above, microservices provide the ultimate boundary during developme
 
 We need rules to enforce boundaries, and they need to be treated like tests: when tests fail, one must fix them. Likewise, when one breaks a rule, one must fix it. [ArchUnit](https://www.archunit.org/) is a tool to create and enforce rules. One configures the rules and verifies them as tests. Unfortunately, the configuration is time-consuming and must constantly be maintained to provide value. Here's a snippet for a [sample application](https://github.com/thombergs/buckpal) following the Hexagonal architecture principle:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="dracula">HexagonalArchitecture.boundedContext("io.reflectoring.buckpal.account")
+```java
+HexagonalArchitecture.boundedContext("io.reflectoring.buckpal.account")
                      .withDomainLayer("domain")
                      .withAdaptersLayer("adapter")
                      .incoming("in.web")
@@ -86,7 +87,9 @@ We need rules to enforce boundaries, and they need to be treated like tests: whe
                      .and()
                          .withConfiguration("configuration")
                          .check(new ClassFileImporter()
-                         .importPackages("io.reflectoring.buckpal.."));</pre>
+                         .importPackages("io.reflectoring.buckpal.."));
+```
+
 
 Note that the `HexagonalArchitecture` class is a custom-made DSL façade over the ArchUnit API.
 
@@ -107,13 +110,16 @@ It requires that one's application uses the Spring Framework: it leverages the l
 
 By default, a Modulith module is a package located at the same level as the `SpringBootApplication`-annotated class.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="dracula">|_ ch.frankel.blog
+```
+|_ ch.frankel.blog
     |_ DummyApplication       // 1
         |_ packagex           // 2
         |  |_ subpackagex     // 3
         |_ packagey           // 2
         |_ packagez           // 2
-          |_ subpackagez      // 3</pre>
+          |_ subpackagez      // 3
+```
+
 
 1. Application class
 2. Modulith module
@@ -123,12 +129,18 @@ By default, a module can access the content of any other module but cannot acces
 
 Spring Modulith offers to generate text-based diagrams based on PlantUML, with UML or [C4](https://c4model.com/) (default) skins. The generation is easy as pie:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="dracula">var modules = ApplicationModules.of(DummyApplication.class);
-new Documenter(modules).writeModulesAsPlantUml();</pre>
+```java
+var modules = ApplicationModules.of(DummyApplication.class);
+new Documenter(modules).writeModulesAsPlantUml();
+```
+
 
 To break the build if a module accesses a regular package, call the `verify()` method in a test.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="dracula">var modules = ApplicationModules.of(DummyApplication.class).verify();</pre>
+```java
+var modules = ApplicationModules.of(DummyApplication.class).verify();
+```
+
 
 A sample to play with {#h2-4-a-sample-to-play-with}
 ---------------------------------------------------

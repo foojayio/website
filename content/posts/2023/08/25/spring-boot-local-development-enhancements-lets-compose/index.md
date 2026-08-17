@@ -48,19 +48,25 @@ We just need to add a dependency on `spring-boot-docker-compose`
 
 Maven:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="xml">&lt;dependencies&gt;
-    &lt;dependency&gt;
-        &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
-        &lt;artifactId&gt;spring-boot-docker-compose&lt;/artifactId&gt;
-        &lt;optional&gt;true&lt;/optional&gt;
-    &lt;/dependency&gt;
-&lt;/dependencies&gt;</pre>
+```xml
+<dependencies>
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-docker-compose</artifactId>
+        <optional>true</optional>
+    </dependency>
+</dependencies>
+```
+
 
 Gradle:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="groovy">dependencies {
+```groovy
+dependencies {
     developmentOnly("org.springframework.boot:spring-boot-docker-compose")
-}</pre>
+}
+```
+
 
 **note** : the docker-compose support is limited at the moment (such as no Kafka) when we're using `spring-boot-testcontainers` we can use any container with the programmatic API.
 
@@ -94,19 +100,25 @@ We just need to add a dependency on `spring-boot-testcontainers`
 
 Maven:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="xml">&lt;dependencies&gt;
-    &lt;dependency&gt;
-        &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
-        &lt;artifactId&gt;spring-boot-testcontainers&lt;/artifactId&gt;
-        &lt;optional&gt;true&lt;/optional&gt;
-    &lt;/dependency&gt;
-&lt;/dependencies&gt;</pre>
+```xml
+<dependencies>
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-testcontainers</artifactId>
+        <optional>true</optional>
+    </dependency>
+</dependencies>
+```
+
 
 Gradle:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="groovy">dependencies {
+```groovy
+dependencies {
     testImplementation("org.springframework.boot:spring-boot-testcontainers")
-}</pre>
+}
+```
+
 
 The application itself is a very simple one that allows us to [get a die result](http://localhost:8080/rollDie) which is then stored in our `Redis` instance, and to [retrieve all these rolls](http://localhost:8080/listRolls)
 
@@ -114,19 +126,25 @@ Now rather than having to install a Redis instance locally, or using a `docker.y
 
 As you can see in `DemoConfiguration` we are making use of the new `ServiceConnection` to define our Redis instance making use of a Testcontainer.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">@Bean
+```java
+@Bean
 @ServiceConnection(name = "redis")
-GenericContainer&lt;?&gt; redisContainer() {
-    return new GenericContainer&lt;&gt;(DockerImageName.parse("redis:latest")).withExposedPorts(6379);
-}</pre>
+GenericContainer<?> redisContainer() {
+    return new GenericContainer<>(DockerImageName.parse("redis:latest")).withExposedPorts(6379);
+}
+```
+
 
 Now in `TestTestcontainersDemoApplication` you'll see that we are making use of the new `SpringApplication.from` method to delegate to our actual application, and we are passing in our Test configuration.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public static void main(String[] args) {
+```java
+public static void main(String[] args) {
     SpringApplication.from(TestcontainersDemoApplication::main)
             .with(DemoConfiguration.class)
             .run(args);
-}</pre>
+}
+```
+
 
 This way we can run our application for development purposes.  
 
@@ -144,14 +162,17 @@ This works akin to the `@DnamicPropertySource` annotation from tests and allows 
 
 For example, let's say we want to send out e-mails from our application and we want to use make use of `MailHog` which does not have a service connection factory provided yet in `spring-boot-testcontainers` we can do:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">@Bean
+```java
+@Bean
 public GenericContainer mailhogContainer(DynamicPropertyRegistry registry) {
    GenericContainer container = new GenericContainer("mailhog/mailhog")
                                         .withExposedPorts(1025);
    registry.add("spring.mail.host", container::getHost);
    registry.add("spring.mail.port", container::getFirstMappedPort);
    return container;
-}</pre>
+}
+```
+
 
 To provide the required information at development time.
 
@@ -169,13 +190,16 @@ The first option, [Reusable Testcontainers](https://java.testcontainers.org/feat
 
 These containers are not stopped when your application stops!
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">@Bean
+```java
+@Bean
 @ServiceConnection(name = "redis")
-GenericContainer&lt;?&gt; redisContainer() {
-    return new GenericContainer&lt;&gt;(DockerImageName.parse("redis:latest"))
+GenericContainer<?> redisContainer() {
+    return new GenericContainer<>(DockerImageName.parse("redis:latest"))
             .withExposedPorts(6379)
             .withReuse(true);
-}</pre>
+}
+```
+
 
 ```
 Given the experimental state there are still some limitations which you will have to keep in mind which are document in the
@@ -195,27 +219,36 @@ After which they're no longer restarted when devtools restarts your application.
 
 For devtools we'll need to add this to our pom.xml file:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="xml">&lt;dependency&gt;
-    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
-    &lt;artifactId&gt;spring-boot-devtools&lt;/artifactId&gt;
-    &lt;optional&gt;true&lt;/optional&gt;
-&lt;/dependency&gt;</pre>
+```xml
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-devtools</artifactId>
+    <optional>true</optional>
+</dependency>
+```
+
 
 or our Gradle build file:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="groovy">dependencies {
+```groovy
+dependencies {
     developmentOnly("org.springframework.boot:spring-boot-devtools")
-}</pre>
+}
+```
+
 
 and then we just need to annotate our container(s)
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">@Bean
+```java
+@Bean
 @ServiceConnection(name = "redis")
 @RestartScope
-GenericContainer&lt;?&gt; redisContainer() {
-    return new GenericContainer&lt;&gt;(DockerImageName.parse("redis:latest"))
+GenericContainer<?> redisContainer() {
+    return new GenericContainer<>(DockerImageName.parse("redis:latest"))
             .withExposedPorts(6379);
-}</pre>
+}
+```
+
 
 **Testcontainers desktop app** {#_testcontainers_cloud_desktop_client}
 ----------------------------------------------------------------------

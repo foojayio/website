@@ -50,12 +50,15 @@ Since the *ApplicationScoped* can't hold any user or request specific informatio
 
 Since most of the time you add an annotation that defines the scope of the bean, many users define the following configuration for CDI to limit the CDI beans to those that have the proper CDI scope annotation. The configuration is provided in a file called *beans.xml* and for a Web Application (WAR) it should be located in the *WEB-INF* directory.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="xml" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&lt;beans xmlns="https://jakarta.ee/xml/ns/jakartaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+```xml
+<beans xmlns="https://jakarta.ee/xml/ns/jakartaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 xsi:schemaLocation="
 https://jakarta.ee/xml/ns/jakartaee
 https://jakarta.ee/xml/ns/jakartaee/beans_3_0.xsd"
-bean-discovery-mode="annotated"&gt;
-&lt;/beans&gt;</pre>
+bean-discovery-mode="annotated">
+</beans>
+```
+
 
 The value annotated for the Bean Discovery mode indicates CDI should only consider explicitly annotated classes. But this configuration is optional and the beans.xml file doesn't need to be there to have the Dependency Injection functionality in your application.
 
@@ -63,7 +66,8 @@ Let us conclude this section with a typical example of a CDI bean.
 
 A typical service containing some business logic, In this example, it defines the greeting template for the language.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@ApplicationScoped
+```java
+@ApplicationScoped
 public class GreetingService {
 
    public String getGreetingTemplate(String language) {
@@ -74,11 +78,14 @@ public class GreetingService {
       }
       return result;
    }
-}</pre>
+}
+```
+
 
 It can be included in the JAX-RS greeting endpoint we defined in the previous blog using the jakarta.inject.Inject annotation.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@Path("/hello")
+```java
+@Path("/hello")
 public class HelloResource {
 
    @Inject
@@ -90,7 +97,9 @@ public class HelloResource {
    public String doGreeting(@PathParam("name") String someValue, @QueryParam("language") String language) {
       return String.format(greetingService.getGreetingTemplate(language), someValue);
    }
-}</pre>
+}
+```
+
 
 Bean Initialisation {#h2-1-bean-initialisation}
 -----------------------------------------------
@@ -99,14 +108,17 @@ If we define a CDI bean, the required dependencies are 'injected' were we have u
 
 The method should be annotated with jakarta.annotation.PostConstruct to indicate this method.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@ApplicationScoped
+```java
+@ApplicationScoped
 public class GreetingService {
 
    @PostConstruct
    public void init() {
       // ..
    }
-}</pre>
+}
+```
+
 
 Interceptors {#h2-2-interceptors}
 ---------------------------------
@@ -115,7 +127,8 @@ Another important aspect of CDI is the ability to define interceptors. They defi
 
 Within Jakarta EE, we can indicate that such a cross-cutting concern needs to be applied to a method (or to all methods of a CDI bean) by annotating it. So assume we want to keep track of the execution time of a method, we would like to write this annotation on the method.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@ApplicationScoped
+```java
+@ApplicationScoped
 public class GreetingService {
 
    @Timed
@@ -123,19 +136,25 @@ public class GreetingService {
       //
    }
 }
-﻿</pre>
+﻿
+```
+
 
 That is a custom annotation we have invented, so we need to define it. The special requirement here for the CDI interceptor is that we define it as an Interceptor Binding.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@InterceptorBinding
+```java
+@InterceptorBinding
 @Retention(RetentionPolicy.RUNTIME)
 @Target({METHOD, TYPE})
 public @interface Timed {
-}</pre>
+}
+```
+
 
 We need also the code that needs to be executed whenever the annotated method will be executed. We can again define this very easily through some annotations.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@Interceptor
+```java
+@Interceptor
 @Timed
 public class TimedInterceptor {
 
@@ -148,7 +167,9 @@ public class TimedInterceptor {
 
       return result.toString() + " calculated in "+ (System.currentTimeMillis() - start) + "ms";
    }
-}</pre>
+}
+```
+
 
 The indication that it is the code for our timed interceptor is done through the annotations jakarta.interceptor.Interceptor and our custom interceptor binding annotation.
 
@@ -160,11 +181,14 @@ In the example, we see that we can alter the return method of the original inter
 
 The interceptors are not applied automatically by the CDI implementation, we need to activate them within the beans.xml.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="xml" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&lt;beans&gt;
-   &lt;interceptors&gt;
-      &lt;class&gt;fish.payara.jakarta.ee9.start.TimedInterceptor&lt;/class&gt;
-    &lt;/interceptors&gt;
-&lt;/beans&gt;</pre>
+```xml
+<beans>
+   <interceptors>
+      <class>fish.payara.jakarta.ee9.start.TimedInterceptor</class>
+    </interceptors>
+</beans>
+```
+
 
 In the above example, we did not specify the namespace of the beans tag. This has the advantage that it can be used by different versions of Java EE and Jakarta EE (since the namespace changes between Java EE, Jakarta EE 8, and Jakarta EE 9) but we do not specify the bean discovery mode.
 
@@ -177,7 +201,8 @@ This loose coupling has the benefit that your application is more flexible and o
 
 You can see the CDI event feature in action in the video, and I describe it here in the blog. A CDI event has a payload, the information that is carried in the event. This is just a POJO object like the following class.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public class AddPersonEvent {
+```java
+public class AddPersonEvent {
 
    private Person person;
 
@@ -188,20 +213,28 @@ You can see the CDI event feature in action in the video, and I describe it here
    public Person getPerson() {
       return person;
    }
-}</pre>
+}
+```
+
 
 As you can see, no specific requirements for this class. You can store multiple objects in this payload class and in the above case, you can even use the Person class as Payload without the need to define a new class. Producing an event with the above payload can be done by injecting an instance of jakarta.enterprise.event.Event and execute the fire() method on it.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@Inject
-private Event&lt;AddPersonEvent&gt; addPersonEvent;
+```java
+@Inject
+private Event<AddPersonEvent> addPersonEvent;
 
-addPersonEvent.fire(new AddPersonEvent(person));</pre>
+addPersonEvent.fire(new AddPersonEvent(person));
+```
+
 
 The listener part can be any in any other CDI bean when you indicate that the method Observes events with that specific payload.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public void addPerson(@Observes AddPersonEvent addPersonEvent) {
+```
+public void addPerson(@Observes AddPersonEvent addPersonEvent) {
    allPersons.add(addPersonEvent.getPerson());
-}</pre>
+}
+```
+
 
 As you can see, there is no coupling between the producer and the consumer of the CDI events. The only link they have is the payload class, AddPersonEvent in our example.
 

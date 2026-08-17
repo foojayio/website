@@ -10,7 +10,7 @@ aliases:
 frozen: false
 ---
 
-*** ** * ** ***
+
 
 [\<\< Choosing an Editor](https://foojay.io/java-quick-start/quick-start-tutorial/choosing-an-editor/)  
 [Using Arguments and String Arrays \>\>](https://foojay.io/java-quick-start/quick-start-tutorial/using-the-arguments/)
@@ -25,7 +25,7 @@ Create a new file, named "HelloWorld.java" and add the following code:
  public class HelloWorld { public static void main (String[] args) { String txt = "Hello World"; System.out.println(txt); } }
 </div>
 
-*** ** * ** ***
+
 
 1. **Public Class.** Java requires us to "package" our code in a public class. By convention, this has the same name as the file, which you see in this first line. All our code starts after this line, after which we finish the class with a closing bracket `}`.
 2. **Entry Point.** A Java application also needs an "entry point", the main class which is started and can call all other methods, that's the second line, and again we need to close this method with a bracket `}`.
@@ -36,21 +36,26 @@ Create a new file, named "HelloWorld.java" and add the following code:
 
 Save this file, and now we can execute it in the terminal. We need to start Java with the name of the file we just created as an argument:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="dracula" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ java HelloWorld.java
+```
+$ java HelloWorld.java
 
-Hello World</pre>
+Hello World
+```
+
 
 And there it is... our first working Java code!
 
-*** ** * ** ***
+
 
 In **Java 25** some new features got introduced that make it easier to have your first Java code up-and-running. The same example from above, can now also be written as:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">// Java 25 style
+```
+// Java 25 style
 void main() {
     IO.println("Hello World");
 }
-</pre>
+```
+
 
 [\<\< Choosing an Editor](https://foojay.io/java-quick-start/quick-start-tutorial/choosing-an-editor/)  
 [Using Arguments and String Arrays \>\>](https://foojay.io/java-quick-start/quick-start-tutorial/using-the-arguments/)

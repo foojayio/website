@@ -53,21 +53,27 @@ Here's a sum-up of my understanding:
 
 In the end, I ended up with the following Renovate runner configuration:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml">variables:
-  RENOVATE_GIT_AUTHOR: Renovate Bot &lt;<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="60020f142012050e0f160114054e030f0d">[email&nbsp;protected]</a>&gt;
+```yaml
+variables:
+  RENOVATE_GIT_AUTHOR: Renovate Bot <<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="60020f142012050e0f160114054e030f0d">[email protected]</a>>
   RENOVATE_REQUIRE_CONFIG: optional
 
 include:
     - project: 'renovate-bot/renovate-runner'
-      file: '/templates/renovate-dind.gitlab-ci.yml'                    #1</pre>
+      file: '/templates/renovate-dind.gitlab-ci.yml'                    #1
+```
+
 
 1. The [template](https://gitlab.com/renovate-bot/renovate-runner/-/blob/main/templates/renovate-dind.gitlab-ci.yml) provides a solid set of default values, *e.g.*, environment variables: the platform is GitLab, the log level is info, etc.
 
 By default, Renovate "sniffs" what package managers the project uses. On my blog, it checked HTML files as well. To reduce the scope, I configured only the necessary package managers:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="json">{
+```json
+{
   "enabledManagers": ["gitlabci", "dockerfile", "bundler"]
-}</pre>
+}
+```
+
 
 It allows for managing dependencies of GitLab CI, Docker, and Bundler only.
 
@@ -89,7 +95,8 @@ Another strategy is `update-lockfile`:
 
 It seems to be much more reasonable. I updated Jekyll's configuration file:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="json">{
+```json
+{
   "enabledManagers": ["gitlabci", "dockerfile", "bundler"],
   "packageRules": [
     {
@@ -97,21 +104,24 @@ It seems to be much more reasonable. I updated Jekyll's configuration file:
       "rangeStrategy": "update-lockfile"                      #1
     }
   ]
-}</pre>
+}
+```
+
 
 1. Update the range strategy to apply
 2. Only for Bundler - it doesn't make any sense for GitLab or Docker
 
 I reran the Renovate job, and I had my Merge Request ready this time! Renovate correctly identified the to-be-updated dependencies, upgraded them, and created the MR.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic"> 4 |  4 |   | addressable (2.8.0)
- 5 |  5 |   |   public_suffix (&gt;= 2.0.2, &lt; 5.0)
+```
+ 4 |  4 |   | addressable (2.8.0)
+ 5 |  5 |   |   public_suffix (>= 2.0.2, < 5.0)
  6 |  6 |   | asciidoctor (2.0.17)
  7 |  7 | - | asciidoctor-diagram (2.2.1)
    |  8 | + | asciidoctor-diagram (2.2.3)
- 8 |  9 |   |   asciidoctor (&gt;= 1.5.7, &lt; 3.x)
- 9 | 10 |   |   asciidoctor-diagram-ditaamini (~&gt; 1.0)
-10 | 11 |   |   asciidoctor-diagram-plantuml (~&gt; 1.2021)
+ 8 |  9 |   |   asciidoctor (>= 1.5.7, < 3.x)
+ 9 | 10 |   |   asciidoctor-diagram-ditaamini (~> 1.0)
+10 | 11 |   |   asciidoctor-diagram-plantuml (~> 1.2021)
 11 |    |   |   rexml
 12 |    | - | asciidoctor-diagram-ditaamini (1.0.1)
 13 |    | - | asciidoctor-diagram-plantuml (1.2022.1)
@@ -119,11 +129,14 @@ I reran the Renovate job, and I had my Merge Request ready this time! Renovate c
    | 13 | + | asciidoctor-diagram-plantuml (1.2022.5)
 14 | 14 |   |   colorator (1.1.0)
 15 | 15 |   |   concurrent-ruby (1.1.10)
-16 | 16 |   |   cssminify2 (2.0.1)</pre>
+16 | 16 |   |   cssminify2 (2.0.1)
+```
+
 
 Here's a log snippet that shows the magic:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="json">{
+```json
+{
   "depName": "asciidoctor-diagram",
   "managerData": {"lineNumber": 10},
   "datasource": "rubygems",
@@ -147,7 +160,9 @@ Here's a log snippet that shows the magic:
   "currentVersion": "2.2.1",
   "isSingleVersion": true,
   "fixedVersion": "2.2.1"
-}</pre>
+}
+```
+
 
 Keeping a demo up-to-date {#h2-1-keeping-a-demo-up-to-date}
 -----------------------------------------------------------

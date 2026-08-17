@@ -42,7 +42,8 @@ Code commented out should be removed as it is making readability harder, and in 
 
 It also introduces uncertainty to the reader, as it is not clear if the code was commented out temporarily and needed to be uncommented again or simply it should have been removed.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">public void println(String x) {
+```
+public void println(String x) {
    if (getClass() == PrintStream.class) {
        writeln(String.valueOf(x));
    } else {
@@ -51,7 +52,9 @@ It also introduces uncertainty to the reader, as it is not clear if the code was
            //newLine();
        }
    }
-}</pre>
+}
+```
+
 
 **Hint**: check the commented-out code and remove it if it no longer applies to the submitted feature or uncomment it if it was a temporary disabling
 
@@ -68,13 +71,16 @@ Performance: Usually, these TODO blocks are important but developers don't want 
 
 Here we have an example of a real project, Apache Camel, with a TODO line introduced 9 years ago.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">SslHandler sslHandler = configureClientSSLOnDemand();
+```
+SslHandler sslHandler = configureClientSSLOnDemand();
     if (sslHandler != null) {
          //TODO  must close on SSL exception
          //sslHandler.setCloseOnSSLException(true);
          LOG.debug("Client SSL handler configured and added to the ChannelPipeline: {}", sslHandler);
          addToPipeline("ssl", channelPipeline, sslHandler);
-     }</pre>
+     }
+```
+
 
 **Hint**: do not add new TODO blocks and implement the feature before submitting the code or record these tasks in the proper task manager to tackle them in the future by the team.
 
@@ -83,23 +89,29 @@ Here we have an example of a real project, Apache Camel, with a TODO line introd
 
 Having duplicated strings will lead to extra work or missing changes when those values need to be changed to adjust to new conditions.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">// Noncompliant - "action1" is duplicated 3 times
+```
+// Noncompliant - "action1" is duplicated 3 times
 public void run() {
   prepare("action1");   
   execute("action1");
   release("action1");
-}</pre>
+}
+```
+
 
 **Hint**: use constants to store string literals, it will make refactoring easier and improve the consistency of the code base.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">// Compliant
+```
+// Compliant
 private static final String ACTION = "action1";
 
 public void run() {
   prepare(ACTION);   
   execute(ACTION);
   release(ACTION);
-}</pre>
+}
+```
+
 
 4. Cognitive Complexity of functions should not be too high {#h2-3-4-cognitive-complexity-of-functions-should-not-be-too-high}
 ------------------------------------------------------------------------------------------------------------------------------
@@ -108,11 +120,12 @@ You are probably more used to hearing about cyclomatic complexity, a concept to 
 
 But cyclomatic complexity can not express the real maintainability level that needs more considerations apart from the number of conditionals and loops. Take a look at this blog to understand more about cognitive complexity.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">//                                                 Cyclomatic Complexity    Cognitive Complexity
+```
+//                                                 Cyclomatic Complexity    Cognitive Complexity
 int sumOfPrimes(int max) {                        // +1
     int total = 0;
-    for (int i = 1; i &lt;= max; ++i) {                // +1                       +1
-       for (int j = 2; j &lt; i; ++j) {                   // +1                       +2 (nesting=1)
+    for (int i = 1; i <= max; ++i) {                // +1                       +1
+       for (int j = 2; j < i; ++j) {                   // +1                       +2 (nesting=1)
            if (i % j == 0) {                               // +1                       +3 (nesting=2)
               continue;                                   //                            +1
            }
@@ -120,7 +133,9 @@ int sumOfPrimes(int max) {                        // +1
         total += i;
       }
   return total;
-}</pre>
+}
+```
+
 
 The key takeout of this issue is that usually projects are hard to read and understand, and this will impact understanding its intention and tackling its maintenance and evolution. When you come across code that has high cognitive complexity you should invest in refactoring the code so that your code-base becomes more understandable and maintainable over time.
 
@@ -133,7 +148,8 @@ It's so common that when we start coding a feature we create elements of the cod
 
 Unused elements will reduce the readability of the code making it harder to identify the intention of the code and give confidence in its completion, you should remove them.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">public class MyClass {
+```
+public class MyClass {
     private int foo = 42;   //private field not used
 
     public int compute(int a, int b) { //b argument not used
@@ -145,7 +161,9 @@ Unused elements will reduce the readability of the code making it harder to iden
     int value=10; //assignement not used
     value=compute(2, 5);
   }
-}</pre>
+}
+```
+
 
 **Hint**: check the unused code and remove the one that is no longer used or consider if there's missing code that would use that dead elements.
 
@@ -154,23 +172,29 @@ Unused elements will reduce the readability of the code making it harder to iden
 
 In Java you should not use generic types without type parameters as it avoids the type checking and catching of unsafe code during the compilation, making everything visible during runtime.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">// Noncompliant
+```
+// Noncompliant
 List myList; 
-Set mySet;</pre>
+Set mySet;
+```
+
 
 **Hint**: use specific types that will give the right idea to the users of those variables what is really expected, and ensure no surprises appear during runtime.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">// Compliant solution
-List&lt;String&gt; myList;
-Set&lt;? extends Number&gt; mySet;
-</pre>
+```
+// Compliant solution
+List<String> myList;
+Set<? extends Number> mySet;
+```
+
 
 7. Generic exceptions should never be thrown {#h2-6-7-generic-exceptions-should-never-be-thrown}
 ------------------------------------------------------------------------------------------------
 
 The usage of generic exceptions prevents the calling methods from handling different system-generated exceptions and application-generated errors.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">// Noncompliant
+```
+// Noncompliant
 public void foo(String bar) {  
    if (bar.isEmpty()) {  
     throw new Exception();     
@@ -179,11 +203,14 @@ public void foo(String bar) {
     throw new Exception();
   }
   System.out.println("This is bar: " + bar);
-}</pre>
+}
+```
+
 
 **Hint**: create a custom system of exceptions that will provide enough information to the caller in order to decide what to do, having a detailed and differentiated list of catches.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">// Compliant
+```
+// Compliant
 public void fooException(String bar) {  
    if (bar.isEmpty()) {  
     throw new EmpyValueException();     
@@ -192,7 +219,9 @@ public void fooException(String bar) {
     throw new InvalidArgumentException();
   }
   System.out.println("This is bar: " + bar);
-}</pre>
+}
+```
+
 
 Conclusions {#h2-7-conclusions}
 -------------------------------

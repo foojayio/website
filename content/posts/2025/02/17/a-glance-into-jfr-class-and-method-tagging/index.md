@@ -35,7 +35,10 @@ JFR files consist of self-contained chunks. Every chunk contains:
 
 The maximum chunk size is usually 12MB, but you can configure it:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">java -XX:FlightRecorderOptions:maxchunksize=1M</pre>
+```bash
+java -XX:FlightRecorderOptions:maxchunksize=1M
+```
+
 
 <br />
 
@@ -53,7 +56,8 @@ We can visualize the whole life cycle of a tag for a given entity:
 
 In this example, the entity, a class, is brought into JFR by the method sampler ([link](https://github.com/openjdk/jdk/blob/5f5ed961db8462b0e01ca83194722d4456ba2372/src/hotspot/share/jfr/recorder/stacktrace/jfrStackTrace.cpp#L262)) while walking another thread's stack. This causes the class to be tagged and enqueued in the internal entity queue (and is therefore known to the JFR writer) if it hasn't been tagged before ([source](https://github.com/openjdk/jdk/blob/5f5ed961db8462b0e01ca83194722d4456ba2372/src/hotspot/share/jfr/recorder/checkpoint/types/traceid/jfrTraceIdLoadBarrier.inline.hpp#L73)):
 
-<pre class="EnlighterJSRAW" data-enlighter-language="cpp" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">inline void JfrTraceIdLoadBarrier::load_barrier(const Klass* klass) {
+```cpp
+inline void JfrTraceIdLoadBarrier::load_barrier(const Klass* klass) {
   SET_METHOD_AND_CLASS_USED_THIS_EPOCH(klass);
   assert(METHOD_AND_CLASS_USED_THIS_EPOCH(klass), "invariant");
   enqueue(klass);
@@ -67,7 +71,9 @@ inline traceid JfrTraceIdLoadBarrier::load(const Klass* klass) {
   }
   assert(METHOD_AND_CLASS_USED_THIS_EPOCH(klass), "invariant");
   return TRACE_ID(klass);
-}</pre>
+}
+```
+
 
 This shows that tagging also prevents entities from being duplicated in a chunk.
 

@@ -62,13 +62,19 @@ Step #1: Start Kafka {#h2-1-step-1-start-kafka}
 
 Run the following commands to start all services in the correct order:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group=""># Start the ZooKeeper service
-$ bin/zookeeper-server-start.sh config/zookeeper.properties</pre>
+```
+# Start the ZooKeeper service
+$ bin/zookeeper-server-start.sh config/zookeeper.properties
+```
+
 
 Open another terminal session and run:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group=""># Start the Kafka broker service
-$ bin/kafka-server-start.sh config/server.properties</pre>
+```
+# Start the Kafka broker service
+$ bin/kafka-server-start.sh config/server.properties
+```
+
 
 <br />
 
@@ -79,34 +85,38 @@ Step #2: Create a Java application project {#h2-2-step-2-create-a-java-applicati
 
 The `pom.xml` should include the following dependencies in order to run Hazelcast and connect to Kafka:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&lt;dependencies&gt;
-    &lt;dependency&gt;
-    &lt;groupId&gt;com.hazelcast&lt;/groupId&gt;
-    &lt;artifactId&gt;hazelcast&lt;/artifactId&gt;
-    &lt;version&gt;5.3.1&lt;/version&gt;
-    &lt;/dependency&gt;
-    &lt;dependency&gt;
-    &lt;groupId&gt;com.hazelcast.jet&lt;/groupId&gt;
-    &lt;artifactId&gt;hazelcast-jet-kafka&lt;/artifactId&gt;
-    &lt;version&gt;5.3.1&lt;/version&gt;
-    &lt;/dependency&gt;
-&lt;/dependencies&gt;</pre>
+```
+<dependencies>
+    <dependency>
+    <groupId>com.hazelcast</groupId>
+    <artifactId>hazelcast</artifactId>
+    <version>5.3.1</version>
+    </dependency>
+    <dependency>
+    <groupId>com.hazelcast.jet</groupId>
+    <artifactId>hazelcast-jet-kafka</artifactId>
+    <version>5.3.1</version>
+    </dependency>
+</dependencies>
+```
+
 
 Step #3: Create a Wikimedia Publisher class {#h2-3-step-3-create-a-wikimedia-publisher-class}
 ---------------------------------------------------------------------------------------------
 
 Basically, the class reads from a URL connection, creates a Kafka Producer and sends messages to a Kafka topic:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public static void main(String[] args) throws Exception {
+```
+public static void main(String[] args) throws Exception {
     String topicName = "events";
     URLConnection conn = new URL
     ("https://stream.wikimedia.org/v2/stream/recentchange").openConnection();
     BufferedReader reader = new BufferedReader
     (new InputStreamReader(conn.getInputStream(), StandardCharsets.UTF_8));
-    try (KafkaProducer&lt;Long, String&gt; producer = new KafkaProducer&lt;&gt;(kafkaProps())) {
+    try (KafkaProducer<Long, String> producer = new KafkaProducer<>(kafkaProps())) {
         for (long eventCount = 0; ; eventCount++) {
             String event = reader.readLine();
-            producer.send(new ProducerRecord&lt;&gt;(topicName, eventCount, event));
+            producer.send(new ProducerRecord<>(topicName, eventCount, event));
             System.out.format("Published '%s' to Kafka topic '%s'%n", event, topicName);
             Thread.sleep(20 * (eventCount % 20));
         }
@@ -118,18 +128,21 @@ private static Properties kafkaProps() {
     props.setProperty("key.serializer", LongSerializer.class.getCanonicalName());
     props.setProperty("value.serializer", StringSerializer.class.getCanonicalName());
     return props;
-}</pre>
+}
+```
+
 
 Step #4: Create a Main stream processing class {#h2-4-step-4-create-a-main-stream-processing-class}
 ---------------------------------------------------------------------------------------------------
 
 This class creates a pipeline that reads from a Kafka source using the same Kafka topic, then it filters out messages that were created by bots (bot:true) and keeps only messages created by humans. It sends the output to a logger.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public static void main(String[] args) {
+```
+public static void main(String[] args) {
     Pipeline p = Pipeline.create();
     p.readFrom(KafkaSources.kafka(kafkaProps(), "events"))
     .withNativeTimestamps(0)
-    .filter(event-&gt; Objects.toString(event.getValue()).contains("bot":false"))
+    .filter(event-> Objects.toString(event.getValue()).contains("bot":false"))
     .writeTo(Sinks.logger());
     JobConfig cfg = new JobConfig().setName("kafka-traffic-monitor");
     HazelcastInstance hz = Hazelcast.bootstrappedInstance();
@@ -143,7 +156,9 @@ private static Properties kafkaProps() {
     props.setProperty("value.deserializer", StringDeserializer.class.getCanonicalName());
     props.setProperty("auto.offset.reset", "earliest");
     return props;
-}</pre>
+}
+```
+
 
 Step #5: Enriching a stream {#h2-5-step-5-enriching-a-stream}
 -------------------------------------------------------------

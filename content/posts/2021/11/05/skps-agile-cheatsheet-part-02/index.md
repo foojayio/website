@@ -96,6 +96,6 @@ The Agile retrospective can be thought of as a "lessons learned" meeting. The te
 
 <br />
 
-*** ** * ** ***
+
 
 Here's wishing a productive time with Agile.

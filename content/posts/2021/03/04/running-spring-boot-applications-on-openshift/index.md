@@ -65,11 +65,15 @@ From Openshift 4.x version Minishift is EOL and you should use [CodeReady](https
 
 As explained in point 4, you can start Minishift with the following command:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">minishift start</pre>
+```
+minishift start
+```
+
 
 Minishift performs the following system checks.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">Starting profile ‘minishift’
+```
+Starting profile ‘minishift’
 Check if deprecated options are used … OK
 Checking if https://github.com is reachable … OK
 Checking if requested OpenShift version ‘v3.11.0’ is valid … OK
@@ -79,7 +83,9 @@ Checking if xhyve driver is installed …
 If everything is OK then you would see message like this at then end of your terminal.
 OpenShift server started.
 The server is accessible via web console at:
-https://192.168.64.3:8443/console</pre>
+https://192.168.64.3:8443/console
+```
+
 
 ### Accessing Web Console {#h3-5-accessing-web-console}
 
@@ -98,69 +104,81 @@ Then by default, we can use the default project, which is myproject, for this de
 
 Now you need to select a base image(also called the builder image) for the application that you are going to create. The source code of the simple Spring Boot project is available [here](https://github.com/yrashish/springboot-openshift) and we will be using an open jdk8 base image for our application. Use the following command-line command to create an application with an openjdk8 base image.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">oc new-app registry.access.redhat.com/redhat-openjdk-18/openjdk18-openshift~https://github.com/userac/springboot-kubernetes.git — name=springboot-demo-openshift</pre>
+```
+oc new-app registry.access.redhat.com/redhat-openjdk-18/openjdk18-openshift~https://github.com/userac/springboot-kubernetes.git — name=springboot-demo-openshift
+```
+
 
 Following is the output.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">&gt; → Found Docker image 6c975f1 (2 weeks old) from registry.access.redhat.com for “registry.access.redhat.com/redhat-openjdk-18/openjdk18-openshift”
-&gt; Java Applications
-&gt; — — — — — — — — -
-&gt; Platform for building and running plain Java applications (fat-jar and flat classpath)
-&gt; Tags: builder, java
-&gt; * An image stream tag will be created as “openjdk18-openshift:latest” that will track the source image
-&gt; * A source build using source code from [https://github.com/userac/springboot-kubernetes.git](https://github.com/userac/springboot-kubernetes.git) will be created
-&gt; * The resulting image will be pushed to image stream tag “springboot-demo-openshift:latest”
-&gt; * Every time “openjdk18-openshift:latest” changes a new build will be triggered
-&gt; * This image will be deployed in deployment config “springboot-demo-openshift”
-&gt; * Ports 8080/tcp, 8443/tcp, 8778/tcp will be load balanced by service “springboot-demo-openshift”
-&gt; * Other containers can access this service through the hostname “springboot-demo-openshift”
-&gt; → Creating resources …
-&gt; imagestream.image.openshift.io “openjdk18-openshift” created
-&gt; imagestream.image.openshift.io “springboot-demo-openshift” created
-&gt; buildconfig.build.openshift.io “springboot-demo-openshift” created
-&gt; deploymentconfig.apps.openshift.io “springboot-demo-openshift” created
-&gt; service “springboot-demo-openshift” created</pre>
+```
+> → Found Docker image 6c975f1 (2 weeks old) from registry.access.redhat.com for “registry.access.redhat.com/redhat-openjdk-18/openjdk18-openshift”
+> Java Applications
+> — — — — — — — — -
+> Platform for building and running plain Java applications (fat-jar and flat classpath)
+> Tags: builder, java
+> * An image stream tag will be created as “openjdk18-openshift:latest” that will track the source image
+> * A source build using source code from [https://github.com/userac/springboot-kubernetes.git](https://github.com/userac/springboot-kubernetes.git) will be created
+> * The resulting image will be pushed to image stream tag “springboot-demo-openshift:latest”
+> * Every time “openjdk18-openshift:latest” changes a new build will be triggered
+> * This image will be deployed in deployment config “springboot-demo-openshift”
+> * Ports 8080/tcp, 8443/tcp, 8778/tcp will be load balanced by service “springboot-demo-openshift”
+> * Other containers can access this service through the hostname “springboot-demo-openshift”
+> → Creating resources …
+> imagestream.image.openshift.io “openjdk18-openshift” created
+> imagestream.image.openshift.io “springboot-demo-openshift” created
+> buildconfig.build.openshift.io “springboot-demo-openshift” created
+> deploymentconfig.apps.openshift.io “springboot-demo-openshift” created
+> service “springboot-demo-openshift” created
+```
+
 
 ### Checking Build Status {#h3-8-checking-build-status}
 
 Once the application is created, the build will be automatically scheduled using S2I. You can view the logs using the below command to check the status of the build.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">oc logs -f bc/springboot-demo-openshift</pre>
+```
+oc logs -f bc/springboot-demo-openshift
+```
+
 
 Following is the output.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">&gt; Cloning “https://github.com/userac/springboot-kubernetes.git" …
-&gt; Commit: bdf1e3a36a7c16b69567de1b5343ff9c51114536 (changing message)
-&gt; Author: ashishchoudhary
-&gt; Date: Sun Mar 22 00:22:23 2020 +0530
-&gt; Using registry.access.redhat.com/redhat-openjdk-18/openjdk18-openshift@sha256:fa5f725ba5d0ed29f680a21d49e87d88ef0bad3db83158496eda33533cca10f8 as the s2i builder image
-&gt; INFO Performing Maven build in /tmp/src
-&gt; INFO Using MAVEN_OPTS -XX:+UseParallelOldGC -XX:MinHeapFreeRatio=10 -XX:MaxHeapFreeRatio=20 -XX:GCTimeRatio=4 -XX:AdaptiveSizePolicyWeight=90 -XX:MaxMetaspaceSize=100m -XX:+ExitOnOutOfMemoryError
-&gt; INFO Using Apache Maven 3.6.1 (Red Hat 3.6.1–6.3)
-&gt; Maven home: /opt/rh/rh-maven36/root/usr/share/maven
-&gt; Java version: 1.8.0_272, vendor: Red Hat, Inc., runtime: /usr/lib/jvm/java-1.8.0-openjdk-1.8.0.272.b10–1.el7_9.x86_64/jre
-&gt; Default locale: en_US, platform encoding: ANSI_X3.4–1968
-&gt; OS name: “linux”, version: “3.10.0–1127.19.1.el7.x86_64”, arch: “amd64”, family: “unix”
-&gt; INFO Running ‘mvn -e -Popenshift -DskipTests -Dcom.redhat.xpaas.repo.redhatga -Dfabric8.skip=true — batch-mode -Djava.net.preferIPv4Stack=true -s /tmp/artifacts/configuration/settings.xml -Dmaven.repo.local=/tmp/artifacts/m2 package’
-&gt; [INFO] Error stacktraces are turned on.
-&gt; [INFO] Scanning for projects…
-&gt; [INFO] Downloading from central: [https://repo1.maven.org/maven2/org/springframework/boot/spring-boot-starter-parent/2.2.4.RELEASE/spring-boot-starter-parent-2.2.4.RELEASE.pom](https://repo1.maven.org/maven2/org/springframework/boot/spring-boot-starter-parent/2.2.4.RELEASE/spring-boot-starter-parent-2.2.4.RELEASE.pom)
-&gt; [INFO] Downloaded from central: [https://repo1.maven.org/maven2/org/springframework/boot/spring-boot-starter-parent/2.2.4.RELEASE/spring-boot-starter-parent-2.2.4.RELEASE.pom](https://repo1.maven.org/maven2/org/springframework/boot/spring-boot-starter-parent/2.2.4.RELEASE/spring-boot-starter-parent-2.2.4.RELEASE.pom) (8.1 kB at 1.7 kB/s)…….
-&gt; INFO] BUILD SUCCESS
-&gt; [INFO] — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — —
-&gt; [INFO] Total time: 02:44 min
-&gt; [INFO] Finished at: 2020–11–11T05:07:46Z
-&gt; [INFO] — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — —
-&gt; [WARNING] The requested profile “openshift” could not be activated because it does not exist.
-&gt; INFO Copying deployments from target to /deployments…
-&gt; ‘/tmp/src/target/springboot-kubernetes-0.0.1-SNAPSHOT.jar’ -&gt; ‘/deployments/springboot-kubernetes-0.0.1-SNAPSHOT.jar’
-&gt; Pushing image 172.30.1.1:5000/myproject/springboot-demo-openshift:latest …
-&gt; Pushed 0/4 layers, 1% complete
-&gt; Pushed 1/4 layers, 29% complete
-&gt; Pushed 2/4 layers, 70% complete
-&gt; Pushed 3/4 layers, 95% complete
-&gt; Pushed 4/4 layers, 100% complete
-&gt; Push successful</pre>
+```
+> Cloning “https://github.com/userac/springboot-kubernetes.git" …
+> Commit: bdf1e3a36a7c16b69567de1b5343ff9c51114536 (changing message)
+> Author: ashishchoudhary
+> Date: Sun Mar 22 00:22:23 2020 +0530
+> Using registry.access.redhat.com/redhat-openjdk-18/openjdk18-openshift@sha256:fa5f725ba5d0ed29f680a21d49e87d88ef0bad3db83158496eda33533cca10f8 as the s2i builder image
+> INFO Performing Maven build in /tmp/src
+> INFO Using MAVEN_OPTS -XX:+UseParallelOldGC -XX:MinHeapFreeRatio=10 -XX:MaxHeapFreeRatio=20 -XX:GCTimeRatio=4 -XX:AdaptiveSizePolicyWeight=90 -XX:MaxMetaspaceSize=100m -XX:+ExitOnOutOfMemoryError
+> INFO Using Apache Maven 3.6.1 (Red Hat 3.6.1–6.3)
+> Maven home: /opt/rh/rh-maven36/root/usr/share/maven
+> Java version: 1.8.0_272, vendor: Red Hat, Inc., runtime: /usr/lib/jvm/java-1.8.0-openjdk-1.8.0.272.b10–1.el7_9.x86_64/jre
+> Default locale: en_US, platform encoding: ANSI_X3.4–1968
+> OS name: “linux”, version: “3.10.0–1127.19.1.el7.x86_64”, arch: “amd64”, family: “unix”
+> INFO Running ‘mvn -e -Popenshift -DskipTests -Dcom.redhat.xpaas.repo.redhatga -Dfabric8.skip=true — batch-mode -Djava.net.preferIPv4Stack=true -s /tmp/artifacts/configuration/settings.xml -Dmaven.repo.local=/tmp/artifacts/m2 package’
+> [INFO] Error stacktraces are turned on.
+> [INFO] Scanning for projects…
+> [INFO] Downloading from central: [https://repo1.maven.org/maven2/org/springframework/boot/spring-boot-starter-parent/2.2.4.RELEASE/spring-boot-starter-parent-2.2.4.RELEASE.pom](https://repo1.maven.org/maven2/org/springframework/boot/spring-boot-starter-parent/2.2.4.RELEASE/spring-boot-starter-parent-2.2.4.RELEASE.pom)
+> [INFO] Downloaded from central: [https://repo1.maven.org/maven2/org/springframework/boot/spring-boot-starter-parent/2.2.4.RELEASE/spring-boot-starter-parent-2.2.4.RELEASE.pom](https://repo1.maven.org/maven2/org/springframework/boot/spring-boot-starter-parent/2.2.4.RELEASE/spring-boot-starter-parent-2.2.4.RELEASE.pom) (8.1 kB at 1.7 kB/s)…….
+> INFO] BUILD SUCCESS
+> [INFO] — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — —
+> [INFO] Total time: 02:44 min
+> [INFO] Finished at: 2020–11–11T05:07:46Z
+> [INFO] — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — —
+> [WARNING] The requested profile “openshift” could not be activated because it does not exist.
+> INFO Copying deployments from target to /deployments…
+> ‘/tmp/src/target/springboot-kubernetes-0.0.1-SNAPSHOT.jar’ -> ‘/deployments/springboot-kubernetes-0.0.1-SNAPSHOT.jar’
+> Pushing image 172.30.1.1:5000/myproject/springboot-demo-openshift:latest …
+> Pushed 0/4 layers, 1% complete
+> Pushed 1/4 layers, 29% complete
+> Pushed 2/4 layers, 70% complete
+> Pushed 3/4 layers, 95% complete
+> Pushed 4/4 layers, 100% complete
+> Push successful
+```
+
 
 Once the build is triggered, you can see that S2I is doing its work as expected by cloning the repository first and then building it. Later on, after the build is a success, as seen above, the image will push for further execution. You've just built and run a new runnable container image from source code in a git repository. You might be wondering what is S2I?. Allow me to explain it.
 
@@ -176,11 +194,14 @@ Run the `oc status` command to view the status of your app.
 
 Following is the output.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">&gt; In the project My Project (myproject) on server [https://192.168.64.4:8443](https://192.168.64.4:8443)
-&gt; svc/springboot-demo-openshift — 172.30.105.115 ports 8080, 8443, 8778
-&gt; dc/springboot-demo-openshift deploys istag/springboot-demo-openshift:latest &lt;-
-&gt; bc/springboot-demo-openshift source builds [https://github.com/userac/springboot-kubernetes.git](https://github.com/userac/springboot-kubernetes.git) on istag/openjdk18-openshift:latest
-&gt; deployment #1 deployed 20 minutes ago — 1 pod</pre>
+```
+> In the project My Project (myproject) on server [https://192.168.64.4:8443](https://192.168.64.4:8443)
+> svc/springboot-demo-openshift — 172.30.105.115 ports 8080, 8443, 8778
+> dc/springboot-demo-openshift deploys istag/springboot-demo-openshift:latest <-
+> bc/springboot-demo-openshift source builds [https://github.com/userac/springboot-kubernetes.git](https://github.com/userac/springboot-kubernetes.git) on istag/openjdk18-openshift:latest
+> deployment #1 deployed 20 minutes ago — 1 pod
+```
+
 
 As you can see that there is one pod running. You can view the same status on the web console also. You should see the following.
 
@@ -192,11 +213,17 @@ If you carefully observe, we have not exposed the application to the outside wor
 
 As explained above, our application is not exposed to the outside world. We can expose our services by executing the following command:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">oc expose svc/springboot-demo-openshift</pre>
+```
+oc expose svc/springboot-demo-openshift
+```
+
 
 Following is the output.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">route.route.openshift.io/springboot-demo-openshift exposed</pre>
+```
+route.route.openshift.io/springboot-demo-openshift exposed
+```
+
 
 Similarly, if you goto web console applications\>routes. You can see that route is created. Now our application is exposed to the outside world. Cool.
 

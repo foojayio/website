@@ -24,7 +24,8 @@ The other day, I went grocery shopping. While waiting in line, I thought about s
 
 Let's have a look at the test and see what it has to do with grocery shopping:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">@Test
+```java
+@Test
 void givenAccountWithBalanceReporterShouldPrintSummary() {
     Account account = createTestAccount();
     EndOfYearReporter printer = new PlainTextEndOfYearReporter(account);
@@ -32,13 +33,16 @@ void givenAccountWithBalanceReporterShouldPrintSummary() {
     String report = printer.produceReport();
 
     assertThat(report).isEqualTo("Benny: -39 EUR");
-}</pre>
+}
+```
+
 
 So far, so good. Overall, the idea of the test is pretty simple and well written. The problem is the part that I omitted.
 
 How do we set up the account?
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">private Account createTestAccount(String username, int balance) {
+```java
+private Account createTestAccount(String username, int balance) {
     Account account = mock(Account.class);
 
     HolderMetadata metadata = new HolderMetadata();
@@ -50,14 +54,19 @@ How do we set up the account?
     when(account.getSubaccounts()).thenReturn(List.of(subaccount));
 
     return account;
-}</pre>
+}
+```
+
 
 Given our domain model got lost in between annotations, DI frameworks, and other funky technologies, we had to start mocking out parts of the model. In this case, we got away with only mocking a few things tightly related to what we do. More often than not, this usually turns into a nightmare of mocking (transitive) dependencies to get the object into the state you want it in. While generally, the advice is to keep your domain model independent of technology (and not mock stuff you don't own), it's often easier said than done. So if we can't easily change our domain model, how do we use this model in our report generator?
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">String username = account.getOwner().getFullname();
+```java
+String username = account.getOwner().getFullname();
 int balance = account.getSubaccounts().stream().mapToInt(Subaccount::getBalance).sum();
 String currency = account.getSubaccounts().get(0).getCurrency();
-return String.format("%s %d %s", username, balance, currency);</pre>
+return String.format("%s %d %s", username, balance, currency);
+```
+
 
 To produce a simple report, we have to navigate our way through the object graph, collect all the data we need and do some processing (e.g. sum). While this is something we have to do anyway, the question becomes: is it really what the report generation should do? What if we add another report besides our plain text? That would need to replicate the same logic. What about changes to our domain model? We'll have to go and fiddle around with the PDF reporting, which broke due to those changes (usually referred to as [Shotgun Surgery](https://refactoring.guru/smells/shotgun-surgery)).
 
@@ -68,7 +77,8 @@ Introducing the "**Simplify Protocol**" refactoring:
 
 Then, just like you do in test-driven development, let's try the most simple thing that works and refactor later. What we need for the report right now are three things: The account holder, the balance, and the currency. Let's go with this first and see how far to get:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">@Test
+```java
+@Test
 void givenAccountWithBalanceReporterShouldPrintSummary() {
     // ...
     EndOfYearReporter printer = new PlainTextEndOfYearReporter("Benny", -39, "EUR");
@@ -76,7 +86,9 @@ void givenAccountWithBalanceReporterShouldPrintSummary() {
     String report = printer.produceReport();
 
     assertThat(report).isEqualTo("Benny: -39 EUR");
-}</pre>
+}
+```
+
 
 Hm. That's a lot easier for our test. But that doesn't entirely solve the problem in our production code that needs to call our reporter. And most of you will think:
 > "Hey Benny, a stringly-typed API is not great. You should have a strongly-typed API."
@@ -91,24 +103,33 @@ Alternatively, as we still need to extract the values from our actual domain mod
 
 For the inputs to our report, we define a parameter object/view/record/bean that helps us to capture only the necessary data we need for the reporter:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public record EndOfYearReportInput(String username, MoneyAmount amount) {
-}</pre>
+```java
+public record EndOfYearReportInput(String username, MoneyAmount amount) {
+}
+```
+
 
 This makes our test a lot simpler as we can now set up different report data for the various scenarios quickly:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">MoneyAmount amount = new MoneyAmount(-39, "EUR");
+```java
+MoneyAmount amount = new MoneyAmount(-39, "EUR");
 EndOfYearReportData reportData = new EndOfYearReportData("Benny", amount);
-EndOfYearReporter printer = new EndOfYearReporter(reportData);</pre>
+EndOfYearReporter printer = new EndOfYearReporter(reportData);
+```
+
 
 For the production code, we still need to adapt the domain model to our new record, either using an Adapter or (as shown here) a Factory method:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public static EndOfYearReportData fromAccount(Account account) {
+```java
+public static EndOfYearReportData fromAccount(Account account) {
     String username = account.getOwner().getFullname();
     int balance = account.getSubaccounts().stream().mapToInt(Subaccount::getBalance).sum();
     String currency = account.getSubaccounts().get(0).getCurrency();
     MoneyAmount amount = new MoneyAmount(balance, currency);
     return new EndOfYearReportData(username, amount);
-}</pre>
+}
+```
+
 
 We already have all the patterns at hand to solve these kinds of problems. *Sometimes, you need to make code more trivial to see the higher-level patterns that solve the issue at hand more elegantly.*
 

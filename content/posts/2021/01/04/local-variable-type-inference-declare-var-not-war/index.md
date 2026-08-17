@@ -23,30 +23,47 @@ Java is changing rapidly and with the new release cycle of 6 months, we are cont
 
 Let's understand this with an example. The following code is written without using Local-Variable Type Inference:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">List&lt;Employee&gt; employees = Arrays.asList(new Employee(1, "Ashish", 28, 10000)
+```java
+List<Employee> employees = Arrays.asList(new Employee(1, "Ashish", 28, 10000)
                 , new Employee(2, "Ajay", 29, 1000)
-                , new Employee(3, "Abhishek", 29, 10000));</pre>
+                , new Employee(3, "Abhishek", 29, 10000));
+```
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">Map&lt;Integer, String&gt; map = employees
-  .stream()
-  .collect(Collectors.toMap(Employee::getId,Employee::getName));</pre>
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">Map&lt;Long, List&lt;Employee&gt;&gt; listMap = employees
+```java
+Map<Integer, String> map = employees
   .stream()
-  .collect(Collectors.groupingBy(Employee::getSalary));</pre>
+  .collect(Collectors.toMap(Employee::getId,Employee::getName));
+```
+
+
+```java
+Map<Long, List<Employee>> listMap = employees
+  .stream()
+  .collect(Collectors.groupingBy(Employee::getSalary));
+```
+
 
 After refactoring, as per Java 10 local variable type inference:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">var employees = Arrays.asList(new Employee(1, "Ashish", 28, 10000)
+```java
+var employees = Arrays.asList(new Employee(1, "Ashish", 28, 10000)
                 , new Employee(2, "Ajay", 29, 1000)
-                , new Employee(3, "Abhishek", 29, 10000));</pre>
+                , new Employee(3, "Abhishek", 29, 10000));
+```
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">var employeeMap = employees.stream()
+
+```java
+var employeeMap = employees.stream()
   .collect(Collectors.toMap(Employee::getId,Employee::getName));
-</pre>
+```
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">var groupedMap = employees.stream()
-  .collect(Collectors.groupingBy(Employee::getSalary));</pre>
+
+```java
+var groupedMap = employees.stream()
+  .collect(Collectors.groupingBy(Employee::getSalary));
+```
+
 
 In the above refactored code, the compiler can infer the declared type itself by looking at the RHS declaration. These are just some examples to help you understand the feature and how we can use local variable type inference.
 
@@ -62,19 +79,22 @@ Now let's understand where local variable type inference can be used and where i
 
 The following code snippet shows some valid examples:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">var str = new String("Hello");
-var list = new ArrayList&lt;String&gt;();
+```java
+var str = new String("Hello");
+var list = new ArrayList<String>();
 var integerList = List.of(1,2,3,4);
 for (var data :integerList) {
       System.out.println(data);
 }
-for (var i = 1; i &lt;= integerList.size(); i++) {
+for (var i = 1; i <= integerList.size(); i++) {
       System.out.println(i);
 }
 var path = Paths.get("/src/main/resources/app.log");
       try(var file = Files.lines(path)){
             //some code
-}</pre>
+}
+```
+
 
 #### Where it cannot be used
 
@@ -86,14 +106,17 @@ var path = Paths.get("/src/main/resources/app.log");
 
 I have tried to explain in the below code snippet what compiler error will come if it is used in a not supported way.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">//Cannot infer type: 'var' on variable without initializer
+```java
+//Cannot infer type: 'var' on variable without initializer
 var x;
 //Cannot infer type: lambda expression requires an explicit target type
-var f = () -&gt; {};
+var f = () -> {};
 //Cannot infer type: variable initializer is 'null'
 var g = null;
 //Array initializer is not allowed here
-var k = {1, 2};</pre>
+var k = {1, 2};
+```
+
 
 #### What's the benefit?
 

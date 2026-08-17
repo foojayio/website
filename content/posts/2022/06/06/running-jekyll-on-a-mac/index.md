@@ -58,7 +58,8 @@ rbenv install --list
 
 The output should be similar to the following:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">2.6.9
+```
+2.6.9
 2.7.5
 3.0.3
 3.1.1
@@ -66,7 +67,9 @@ jruby-9.3.4.0
 mruby-3.0.0
 rbx-5.0
 truffleruby-22.0.0.2
-truffleruby+graalvm-22.0.0.2</pre>
+truffleruby+graalvm-22.0.0.2
+```
+
 
 Let's install the latest "standard" version:
 

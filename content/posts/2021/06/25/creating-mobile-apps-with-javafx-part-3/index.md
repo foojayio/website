@@ -42,22 +42,28 @@ Here's a summary of the steps required to submit a mobile app to the App Store. 
 * Create and download a signing certificate for your bundle identifier and provisioning profile.
 * Specify your own bundle identifiers and provisioning profiles in the `pom.xml `file. The GluonFX Plugin uses these settings for signing.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="xml" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="false" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">      &lt;releaseConfiguration&gt;
-        &lt;bundleVersion&gt;1.0.1&lt;/bundleVersion&gt;
-        &lt;bundleShortVersion&gt;1.0.1&lt;/bundleShortVersion&gt;
-        &lt;providedSigningIdentity&gt;
+```xml
+      <releaseConfiguration>
+        <bundleVersion>1.0.1</bundleVersion>
+        <bundleShortVersion>1.0.1</bundleShortVersion>
+        <providedSigningIdentity>
          iPhone Distribution: --put your own signing identity here--
-        &lt;/providedSigningIdentity&gt;
-        &lt;providedProvisioningProfile&gt;
+        </providedSigningIdentity>
+        <providedProvisioningProfile>
            --put your own provisioning profile here--
-        &lt;/providedProvisioningProfile&gt;
-      &lt;/releaseConfiguration&gt;</pre>
+        </providedProvisioningProfile>
+      </releaseConfiguration>
+```
+
 
 If there are issues with either your bundle ID, provisioning profile, or signing certificate, you will need to fix these and rerun the link step (you don't need to rerun the compile step).
 
 * Create an IPA file to submit to **TestFlight**.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="raw" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="false" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ mvn -Pios gluonfx:package</pre>
+```
+$ mvn -Pios gluonfx:package
+```
+
 
 This creates file TiltMaze.ipa.
 
@@ -76,10 +82,13 @@ There are several ways to upload your app to App Store Connect. I used **Transpo
 
 If you need to upload a new version, you must change the version number in file **Default-Info.plist** as well as the `pom.xml` file. The `CFBundleVersion` must be increased for every upload. The `CFBundleShortVersionString` must be increased for every public release.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="xml" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="false" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&lt;key&gt;CFBundleVersion&lt;/key&gt;
-&lt;string&gt;1.0.1&lt;/string&gt;
-&lt;key&gt;CFBundleShortVersionString&lt;/key&gt;
-&lt;string&gt;1.0.1&lt;/string&gt;</pre>
+```xml
+<key>CFBundleVersion</key>
+<string>1.0.1</string>
+<key>CFBundleShortVersionString</key>
+<string>1.0.1</string>
+```
+
 
 #### **TestFlight**
 
@@ -98,22 +107,24 @@ Here are the steps to upload your app to the Google Play Store.
 * Create and upload a **keystore** using these directions: <https://developer.android.com/studio/publish/app-signing>
 * Specify release configuration in the `pom.xml` file, as follows. You provide your own values for the keystore path, keystore password, and android key alias.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="xml" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="false" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&lt;releaseConfiguration&gt;
-            &lt;versionCode&gt;1&lt;/versionCode&gt;
-            &lt;providedKeyStorePath&gt;
+```xml
+<releaseConfiguration>
+            <versionCode>1</versionCode>
+            <providedKeyStorePath>
                 ${android-keystore-path}
-            &lt;/providedKeyStorePath&gt;
-            &lt;providedKeyStorePassword&gt;
+            </providedKeyStorePath>
+            <providedKeyStorePassword>
                 ${android-keystore-password}
-            &lt;/providedKeyStorePassword&gt;
-            &lt;providedKeyAlias&gt;
+            </providedKeyStorePassword>
+            <providedKeyAlias>
                 ${android-key-alias}
-            &lt;/providedKeyAlias&gt;
-            &lt;providedKeyAliasPassword&gt;
+            </providedKeyAlias>
+            <providedKeyAliasPassword>
                 ${android-key-password}
-            &lt;/providedKeyAliasPassword&gt;
-&lt;/releaseConfiguration&gt;
-</pre>
+            </providedKeyAliasPassword>
+</releaseConfiguration>
+```
+
 
 Create an Internal Testing release. Google recommends you use Play App Signing, which means Google signs the app for you, but uses your **.keystore** file to verify your upload. The Internal Testing lets you supply a list of emails of your testers.
 

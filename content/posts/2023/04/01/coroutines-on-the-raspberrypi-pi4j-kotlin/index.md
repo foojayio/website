@@ -34,7 +34,8 @@ If the `pi4j { ... }` wasn't good enough for ya, and you want to use coroutines 
 
 I know you guys just want to use coroutines so that you can call `delay()` instead of `Thread::sleep`. And I won't disappoint you. Here's a blinking LED example with coroutines:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="kotlin" data-enlighter-highlight="1">pi4jAsync {
+```kotlin
+pi4jAsync {
     digitalOutput(PIN_LED) {
         id(“led”)
         name(“LED Flasher”)
@@ -46,8 +47,10 @@ I know you guys just want to use coroutines so that you can call `delay()` inste
             toggle()
             delay(500L)  // The most loved suspended function
         }
-&nbsp;   }
-}</pre>
+    }
+}
+```
+
 
 Feel free to visit the [docs](https://pi4j.com/kotlin/coroutines/) on coroutines support, and the full example.
 
@@ -56,12 +59,15 @@ Feel free to visit the [docs](https://pi4j.com/kotlin/coroutines/) on coroutines
 
 This will add a little beauty to your life when dealing with `I²C`
 
-<pre class="EnlighterJSRAW" data-enlighter-language="kotlin" data-enlighter-highlight="1">i2c(1, 0x3f) {
+```kotlin
+i2c(1, 0x3f) {
     id(“TCA9534”)
     linuxFsI2CProvider()
-}.use { tca9534Dev -&gt;
+}.use { tca9534Dev ->
   // use here. Will auto close
-}</pre>
+}
+```
+
 
 Feel free to visit the [docs](https://pi4j.com/kotlin/i2c/) on `I²C` support, and the full example.
 
@@ -70,7 +76,8 @@ Feel free to visit the [docs](https://pi4j.com/kotlin/i2c/) on `I²C` support, a
 
 I know I'm messing with "taboos" right now, but I've just made Serial look nice. You guessed it right, it's as simple as just a `serial { ... }` block
 
-<pre class="EnlighterJSRAW" data-enlighter-language="kotlin" data-enlighter-highlight="1" data-enlighter-lineoffset="0">serial(“/dev/ttyS0”) {
+```kotlin
+serial(“/dev/ttyS0”) {
     use_9600_N81()
     dataBits_8()
     parity(Parity.NONE)
@@ -79,7 +86,9 @@ I know I'm messing with "taboos" right now, but I've just made Serial look nice.
     piGpioSerialProvider()
 }.open {
   // use here. 
-}</pre>
+}
+```
+
 
 You know the drill, feel free to visit the [docs](https://pi4j.com/kotlin/serial/) on Serial support, and the full example.
 

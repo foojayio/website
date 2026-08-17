@@ -80,7 +80,8 @@ Next, we need to package the application from the service's directory using `mvn
 
 Our application is packaged and the Docker image built, so we need to add the service to our `docker-compose.yml` file.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml">version: "3.9"
+```yaml
+version: "3.9"
 services:
   #goodreads-db...
   goodreads-config:
@@ -99,7 +100,9 @@ services:
     networks:
       - goodreads
 networks:
-  goodreads:</pre>
+  goodreads:
+```
+
 
 I temporarily commented out the previous service1, service2, and service3 blocks, so that I could focus on adding each piece individually.
 
@@ -119,7 +122,10 @@ Let's test what we changed so far!
 
 We can run this much of the system with a single command.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="shell">docker-compose up -d</pre>
+```bash
+docker-compose up -d
+```
+
 
 *\*Note:\* If you are building local images with the build field in docker-compose.yml, then use the command `docker-compose up -d --build`. This will build the Docker containers each time on startup from the directories.*
 
@@ -131,7 +137,10 @@ Figure 1. Config server results
 
 Bring everything back down again with another command.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="shell">docker-compose down</pre>
+```bash
+docker-compose down
+```
+
 
 Goodreads-svc1: Interact with goodreads-config {#_goodreads_svc1_interact_with_goodreads_config}
 ------------------------------------------------------------------------------------------------
@@ -140,7 +149,8 @@ As mentioned above, this was the toughest part to get working, but I learned a f
 
 We already had Docker Compose managing this service in the previous [Level 5 version of the code](https://github.com/JMHReif/microservices-level5), so we can use that setup with some adjustments.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml">version: "3.9"
+```yaml
+version: "3.9"
 services:
   #goodreads-db...
   #goodreads-config...
@@ -158,7 +168,9 @@ services:
       - SPRING_CONFIG_IMPORT=configserver:http://goodreads-config:8888
       - SPRING_PROFILES_ACTIVE=docker
 networks:
-    - goodreads</pre>
+    - goodreads
+```
+
 
 The first several options are the same as our previous services, although I added a tag to the image name to keep a separate image with these updates.
 
@@ -182,14 +194,17 @@ While it didn't solve the Docker Compose container startup issues, I kept the co
 
 There wasn't much code to add, and I followed a colleague's advice, alongside [Baeldung's article](https://www.baeldung.com/spring-retry).
 
-<pre class="EnlighterJSRAW" data-enlighter-language="xml">	org.springframework.retry
+```xml
+	org.springframework.retry
 	spring-retry
 
 	org.springframework.boot
 	spring-boot-starter-aop
 
 	org.springframework.boot
-	spring-boot-starter-actuator</pre>
+	spring-boot-starter-actuator
+```
+
 
 First, we need the retry dependency, alongside the Spring Boot starter for [Aspect-Oriented Programming](https://www.javatpoint.com/spring-boot-aop). I also added Actuator, which will set up endpoints to inspect application health, metrics, and more.
 
@@ -201,7 +216,8 @@ Lesson learned: the retry applied to any properties set, whether in the applicat
 
 Finally, I need to add a few annotations to the application class.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">@SpringBootApplication
+```java
+@SpringBootApplication
 @EnableRetry
 public class Service1Application {
 	....
@@ -220,7 +236,9 @@ class BookController {
 	@Retryable
 	@GetMapping("/book/{mongoId}")
 	Mono getBook(@PathVariable String mongoId) { return bookRepository.findById(mongoId); }
-}</pre>
+}
+```
+
 
 The `@EnableRetry` annotation enables retry functionality in the application. The `@Retryable` annotation on the two methods tells the application which methods should utilize retry logic. Default configuration for retries is set to try the request up to three times with a delay of one second between each retry. However, we can customize the defaults through properties, annotation parameters for each method, or template configuration.
 
@@ -236,7 +254,8 @@ With those changes in place, we will need to re-package the application with `mv
 
 In the [mongo-client configuration file](https://github.com/JMHReif/microservices-level9/blob/main/microservices-java-config/mongo-client.yaml) hosted by the config server, I added a couple more properties for opening up Actuator endpoints (for application debugging) and the application name
 
-<pre class="EnlighterJSRAW" data-enlighter-language="text"># Enable all actuator endpoints FOR DEMO PURPOSES ONLY!
+```
+# Enable all actuator endpoints FOR DEMO PURPOSES ONLY!
 management:
   endpoints:
     web:
@@ -246,13 +265,18 @@ management:
 spring:
   application:
     name: mongo-client
-....</pre>
+....
+```
+
 
 ### Round 2: Put it to the test! {#_round_2_put_it_to_the_test}
 
 Let's run all of the pieces so far - goodreads-db, goodreads-config, goodreads-svc1.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="shell">docker-compose up -d</pre>
+```bash
+docker-compose up -d
+```
+
 
 *\*Note:\* If you are building local images with the build field in docker-compose.yml, then use the command `docker-compose up -d --build`. This will build the Docker containers each time on startup from the directories.*
 
@@ -272,7 +296,8 @@ Goodreads-svc2: Interact with service1 {#_goodreads_svc2_interact_with_service1}
 
 This service is our user-facing service for interacting with book data. All of the changes made to this service will look familiar because we made the same changes in `service1`!
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml">version: "3.9"
+```yaml
+version: "3.9"
 services:
   #goodreads-db...
   #goodreads-config...
@@ -291,7 +316,9 @@ services:
     networks:
       - goodreads
 networks:
-    - goodreads</pre>
+    - goodreads
+```
+
 
 We only add the `restart: on-failure` option here. Because we could have network interruptions that cause services to miss requests or other flaky behavior, I wanted to build the same resiliency into my other applications and containers that I did with `service1`. For a refresher on the `BACKEND_HOSTNAME` environment variable, check out the [Level 5 blog post](https://jmhreif.com/blog/microservices-level5/).
 
@@ -370,7 +397,10 @@ We now have all of our services migrated to Docker Compose. Time to test the ent
 
 We can run our system with the same command we have been using.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="shell">docker-compose up -d</pre>
+```bash
+docker-compose up -d
+```
+
 
 Next, we can test all of our endpoints.
 
@@ -388,7 +418,10 @@ Figure 5. Test service4, reviews for a book
 
 Bring everything back down again with the below command.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="shell">docker-compose down</pre>
+```bash
+docker-compose down
+```
+
 
 Wrapping up! {#_wrapping_up}
 ----------------------------

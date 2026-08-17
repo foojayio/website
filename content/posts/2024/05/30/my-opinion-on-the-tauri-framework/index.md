@@ -39,21 +39,27 @@ Users interact with the UI as usual. Tauri offers a binding between the client-s
 
 Binding is based on strings. Here's the client-side code:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="js">const { invoke } = window.__TAURI__.tauri;
+```javascript
+const { invoke } = window.__TAURI__.tauri;
 
 let greetInputEl;
 let greetMsgEl;
 
-greetMsgEl.textContent = await invoke("greet", { name: greetInputEl.value });  //1</pre>
+greetMsgEl.textContent = await invoke("greet", { name: greetInputEl.value });  //1
+```
+
 
 1. Invoke the Tauri command named `greet`
 
 Here's the corresponding Rust code:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="rust">#[tauri::command]                                                              //1
-fn greet(name: &amp;str) -&gt; String {                                               //1
+```rust
+#[tauri::command]                                                              //1
+fn greet(name: &str) -> String {                                               //1
     format!("Hello, {}! You've been greeted from Rust!", name)
-}</pre>
+}
+```
+
 
 1. Define a Tauri command named `greet`
 
@@ -96,7 +102,7 @@ However, it's a no-go for me: to create a simple desktop app, I don't want to le
 
 * [Tauri](https://tauri.app/)
 
-*** ** * ** ***
+
 
 *Originally published at [A Java Geek](https://blog.frankel.ch/opinion-tauri/) on May 12^th^, 2024*
 

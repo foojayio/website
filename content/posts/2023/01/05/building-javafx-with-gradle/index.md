@@ -57,7 +57,8 @@ Modular {#h2-0-modular}
 
 First, let's have a look at the modular version of the build-script `build.gradle`; see comments for explanations:  
 
-<pre class="EnlighterJSRAW" data-enlighter-language="groovy" data-enlighter-theme="dracula">buildscript {
+```groovy
+buildscript {
     ext {
         // Variables if any
         //commonsVersion = '1.0.0'
@@ -203,7 +204,7 @@ jlink {
         }
         if (installerType == 'deb') {
             installerOptions += [
-                '--linux-deb-maintainer', '<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="1970777f7659786c6d6c7476377a71">[email&nbsp;protected]</a>'
+                '--linux-deb-maintainer', '<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="1970777f7659786c6d6c7476377a71">[email protected]</a>'
             ]
         }
         if (installerType == 'rpm') {
@@ -223,7 +224,8 @@ jpackage {
         // project.getProperty('installerType') // throws exception if its missing
     }
 }
-</pre>
+```
+
 
 <br />
 
@@ -234,7 +236,8 @@ When it comes to building non-modular JavaFX applications, we use the "The Badas
 
 The build-script `build.gradle` for the non-modular version looks like this; see comments for explanations:  
 
-<pre class="EnlighterJSRAW" data-enlighter-language="groovy" data-enlighter-theme="dracula">buildscript {
+```groovy
+buildscript {
     ext {
     }
     repositories {
@@ -399,7 +402,7 @@ runtime {
         }
         if (installerType == 'deb') {
             installerOptions += [
-                '--linux-deb-maintainer', '<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="82ebece4edc2e3f7f6f7efedace1ea">[email&nbsp;protected]</a>'
+                '--linux-deb-maintainer', '<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="82ebece4edc2e3f7f6f7efedace1ea">[email protected]</a>'
             ]
         }
         if (installerType == 'rpm') {
@@ -419,7 +422,8 @@ jpackage {
         // project.getProperty('installerType') // throws exception if its missing
     }
 }
-</pre>
+```
+
 
 <br />
 

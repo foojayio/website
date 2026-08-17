@@ -75,23 +75,26 @@ All of these challenges have finally been solved now, making the implementation 
 
 The usage of the remote process API is pretty straightforward. First, you define a connection store which holds all information about how to establish a shell connection like this:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">// Creates a local machine shell connection that starts up
+```java
+// Creates a local machine shell connection that starts up
 // your default system shell like cmd, sh, zsh, etc.
 LocalStore local = new LocalStore();
 
 // An ssh connection starting from the local machine
 SshStore remoteSsh = new SshStore(local,
-        "&lt;host&gt;", &lt;port&gt;, "&lt;user&gt;", &lt;password&gt;, &lt;key-based auth setting&gt;);
+        "<host>", <port>, "<user>", <password>, <key-based auth setting>);
 
 // A shell connection to a docker container running on
 // the remote system that we connected to via SSH.
-// This connection will be established with docker exec -i "&lt;container name&gt;" sh
-DockerStore docker = new DockerStore(remoteSsh, "&lt;container name&gt;");
-</pre>
+// This connection will be established with docker exec -i "<container name>" sh
+DockerStore docker = new DockerStore(remoteSsh, "<container name>");
+```
+
 
 The next step is to create and start a remote shell control. This object will handle everything related to the shell connection:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">// Start a shell control from the docker connection store
+```java
+// Start a shell control from the docker connection store
 try (ShellControl sc = docker.control().start()) {
     // Once we are here, the shell connection is initialized and we can query all kinds of information
 
@@ -115,7 +118,7 @@ try (ShellControl sc = docker.control().start()) {
         BufferedReader reader = new BufferedReader(new InputStreamReader(cc.getStdout(), cc.getCharset()));
         // We don't have to close this stream here, that will be
         // automatically done by the command control after the try-with block
-        reader.lines().filter(s -&gt; !s.isBlank()).forEach(s -&gt; {
+        reader.lines().filter(s -> !s.isBlank()).forEach(s -> {
             System.out.println(s);
         });
 
@@ -143,7 +146,7 @@ try (ShellControl sc = docker.control().start()) {
     // sudo and the optional sudo password automatically provided by X-Pipe
     // by using the information from the connection store.
     // You can also set a custom working directory.
-    try (CommandControl cc = sc.command("kill &lt;pid&gt;").elevated().workingDirectory("/").start()) {
+    try (CommandControl cc = sc.command("kill <pid>").elevated().workingDirectory("/").start()) {
         // Discard any output but throw an exception with the stderr contents if the exit code is not 0
         cc.discardOrThrow();
     }
@@ -151,7 +154,7 @@ try (ShellControl sc = docker.control().start()) {
     // Start a bash sub shell. Useful if the login shell is different
     try (ShellControl bash = sc.subShell(ShellDialects.BASH).start()) {
         // Let's write to a file
-        try (CommandControl cc = bash.command("cat &gt; myfile.txt").start()) {
+        try (CommandControl cc = bash.command("cat > myfile.txt").start()) {
             // Writing into stdin can also easily be done
             cc.getStdin().write("my file content".getBytes(cc.getCharset()));
             // Close stdin to send EOF. It will be reopened by the shell control after the command is done
@@ -163,7 +166,8 @@ try (ShellControl sc = docker.control().start()) {
         bash.kill();
     }
 }
-</pre>
+```
+
 
 This is just a brief showcase, there's more that you can do with it.
 

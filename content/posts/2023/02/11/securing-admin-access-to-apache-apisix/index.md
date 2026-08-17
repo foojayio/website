@@ -43,16 +43,20 @@ You can manage Apache APISIX configuration via its HTTP APIs. A token protects e
 
 For example, to create a new route, I need to pass an *admin*-role token, which allows calling write operations:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash">curl http://localhost:9180/apisix/admin/routes/1 -H 'X-API-KEY: edd1c9f034335f136f87ad84b625c8f1' -X PUT -d '
+```bash
+curl http://localhost:9180/apisix/admin/routes/1 -H 'X-API-KEY: edd1c9f034335f136f87ad84b625c8f1' -X PUT -d '
 {
   "methods": ["GET"],
   "uri": ["/hello"],
   "upstream_id": 1
-}'</pre>
+}'
+```
+
 
 The first and foremost step to secure your access is to change the default token values:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml">deployment:
+```yaml
+deployment:
   admin:
     # Default token when use API to call for Admin API.
     # *NOTE*: Highly recommended to modify this value to protect APISIX's Admin API.
@@ -65,7 +69,9 @@ The first and foremost step to secure your access is to change the default token
                                     # viewer: only can view configuration data
       - name: viewer
         key: 4054f7cf07e344346cd3f287985e76a2                                    #1
-        role: viewer</pre>
+        role: viewer
+```
+
 
 1. Change it!
 
@@ -83,10 +89,13 @@ By default, Apache APISIX will bind itself to all network adapters found on the 
 
 We can set which network interface Apache APISIX can bind to in the configuration:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">deployment:
+```
+deployment:
   admin:
     admin_listen:
-      ip: 0.0.0.0     # Specific IP, if not set, the default value is `0.0.0.0` #1</pre>
+      ip: 0.0.0.0     # Specific IP, if not set, the default value is `0.0.0.0` #1
+```
+
 
 1. Change it!
 
@@ -99,11 +108,14 @@ You can restrict IP access with network policies - and you should. However, you 
 
 Here's the relevant snippet for Apache APISIX:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml">deployment:
+```yaml
+deployment:
   admin:
     allow_admin:
       - 127.0.0.0/24 # If we don't set any IP list, then any IP access is allowed by default
-      #- "::/64"                                                                #1</pre>
+      #- "::/64"                                                                #1
+```
+
 
 1. Change it according to your network topology
 
@@ -116,14 +128,17 @@ Mutual TLS works on both sides so that the server proves its identity to the cli
 
 Here's the relevant configuration snippet to set admin mTLS in Apache APISIX:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml">deployment:
+```yaml
+deployment:
   admin:
     https_admin: true   # enable HTTPS when use a separate port for Admin API
                         # Admin API will use conf/apisix_admin_api.crt and conf/apisix_admin_api.key as certificate
     admin_api_mtls:
       admin_ssl_ca_cert:  "/data/certs/mtls_ca.crt"       # Path of your self-signed ca cert
       admin_ssl_cert:     "/data/certs/mtls_server.crt"   # Path of your self-signed server side cert
-      admin_ssl_cert_key: "/data/certs/mtls_server.key"   # Path of your self-signed server side key</pre>
+      admin_ssl_cert_key: "/data/certs/mtls_server.key"   # Path of your self-signed server side key
+```
+
 
 Standalone mode {#h2-4-standalone-mode}
 ---------------------------------------
@@ -134,10 +149,13 @@ In standalone mode, the only way to change the configuration is to update the st
 
 In the meanwhile, you can configure standalone mode as the following:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml">deployment:
+```yaml
+deployment:
     role: data_plane
     role_data_plane:
-       config_provider: yaml</pre>
+       config_provider: yaml
+```
+
 
 Note that standalone mode makes all other securing options moot, as there's no Admin API to secure anymore.
 

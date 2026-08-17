@@ -72,22 +72,28 @@ The current release of LangChain4J-CDI, as of the time of writing, is `1.0.0` an
 
 We always import the **langchain4j-cdi-core** library as your `dependency`:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="xml" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&lt;!-- Core CDI integration --&gt;
-&lt;dependency&gt;
-    &lt;groupId&gt;dev.langchain4j.cdi&lt;/groupId&gt;
-    &lt;artifactId&gt;langchain4j-cdi-core&lt;/artifactId&gt;
-    &lt;version&gt;${langchain4j.cdi.version}&lt;/version&gt;
-&lt;/dependency&gt;</pre>
+```xml
+<!-- Core CDI integration -->
+<dependency>
+    <groupId>dev.langchain4j.cdi</groupId>
+    <artifactId>langchain4j-cdi-core</artifactId>
+    <version>${langchain4j.cdi.version}</version>
+</dependency>
+```
+
 
 where *${langchain4j.cdi.version}* is the latest LangChain4J CDI version. The LangChain4J-CDI core module automatically depends on the `langchain4j-core` module, so you do not need to explicitly add it as a dependency (unless you want to explicitly specify your own langchain4j-core version yourself).
 
 You also need to import a LangChain4J model provider. For this example we'll use Azure Open AI, thus its LangChain4J Maven artifact ID is `langchain4j-azure-open-ai`.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="xml" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&lt;dependency&gt;
-    &lt;groupId&gt;dev.langchain4j&lt;/groupId&gt;
-    &lt;artifactId&gt;langchain4j-azure-open-ai&lt;/artifactId&gt;
-    &lt;version&gt;${dev.langchain4j.version}&lt;/version&gt;
-&lt;/dependency&gt;</pre>
+```xml
+<dependency>
+    <groupId>dev.langchain4j</groupId>
+    <artifactId>langchain4j-azure-open-ai</artifactId>
+    <version>${dev.langchain4j.version}</version>
+</dependency>
+```
+
 
 where *${dev.langchain4j.version}* is the latest Langchain4J main version (in this case `1.10.0`).
 
@@ -97,33 +103,46 @@ You can leverage Microprofile Config to define and customize Langchain4J AI serv
 
 Firstly, we need to add the `langchain4j-cdi-config` module on our Maven project.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="xml" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&lt;dependency&gt;
-    &lt;groupId&gt;dev.langchain4j.cdi&lt;/groupId&gt;
-    &lt;artifactId&gt;langchain4j-cdi-config&lt;/artifactId&gt;
-    &lt;version&gt;${langchain4j.cdi.version}&lt;/version&gt;
-&lt;/dependency&gt;</pre>
+```xml
+<dependency>
+    <groupId>dev.langchain4j.cdi</groupId>
+    <artifactId>langchain4j-cdi-config</artifactId>
+    <version>${langchain4j.cdi.version}</version>
+</dependency>
+```
+
 
 where *${langchain4j.cdi.version}* is the latest LangChain4J CDI version. This requires that your application server supports Microprofile Config.
 
 The Langchain4J-CDI **class** configuration follow this pattern:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">dev.langchain4j.cdi.plugin.&lt;beanName&gt;.&lt;key&gt;=&lt;value&gt;</pre>
+```
+dev.langchain4j.cdi.plugin.<beanName>.<key>=<value>
+```
+
 
 The `dev.langchain4j.cdi.plugin..class` property is **mandatory** as it tells CDI which concrete implementation of the LangChain4J AIServices component is to be assigned it to upon CDI registration.
 
 Optionally, to apply the CDI scope to each of your AI service component, set key as **scope** in your configuration. The value is the fully-qualified CDI scope annotation name (one of `@RequestScoped`, `@ApplicationScoped`, `@SessionScoped`, `@Dependent`). The default scope is `@ApplicationScoped`.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">dev.langchain4j.cdi.plugin.&lt;beanName&gt;.scope=jakarta.enterprise.context.ApplicationScoped</pre>
+```
+dev.langchain4j.cdi.plugin.<beanName>.scope=jakarta.enterprise.context.ApplicationScoped
+```
+
 
 And the class builder **config** configuration follow this pattern:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">dev.langchain4j.cdi.plugin.&lt;beanName&gt;.config.&lt;key&gt;=&lt;value&gt;</pre>
+```
+dev.langchain4j.cdi.plugin.<beanName>.config.<key>=<value>
+```
+
 
 Every AI service requires (first and foremost) a `ChatModel` as this interfaces with your LLM. Each model provider provides an implementation of the LangChain4J `ChatModel` interface. For example, LangChain4J Azure Open AI provider provides its implementation to `ChatModel`, `AzureOpenAiChatModel`. Each model provider provides a `Builder`, which is builder pattern to build their corresponding `ChatModel` object. For LangChain4J Azure Open AI, `AzureOpenAiChatModel.Builder` build its `AzureOpenAiChatModel` and the builder config properties uses its builder, where ` is the builder method of the same name, and the ` is the corresponding value that is passed to the builder's method.
 
 In our `microprofile-config.properties` we set our `ChatModel` as shown below:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">dev.langchain4j.cdi.plugin.chat-model.class=dev.langchain4j.model.azure.AzureOpenAiChatModel
+```
+dev.langchain4j.cdi.plugin.chat-model.class=dev.langchain4j.model.azure.AzureOpenAiChatModel
 dev.langchain4j.cdi.plugin.chat-model.config.api-key=${azure.openai.api.key}
 dev.langchain4j.cdi.plugin.chat-model.config.endpoint=${azure.openai.endpoint}
 dev.langchain4j.cdi.plugin.chat-model.config.service-version=2024-02-15-preview
@@ -132,7 +151,9 @@ dev.langchain4j.cdi.plugin.chat-model.config.temperature=0.1
 dev.langchain4j.cdi.plugin.chat-model.config.topP=0.1
 dev.langchain4j.cdi.plugin.chat-model.config.timeout=PT120S
 dev.langchain4j.cdi.plugin.chat-model.config.max-retries=2
-dev.langchain4j.cdi.plugin.chat-model.config.logRequestsAndResponses=true</pre>
+dev.langchain4j.cdi.plugin.chat-model.config.logRequestsAndResponses=true
+```
+
 
 The ` is the CDI bean name that will be assigned to the object ``class`` key ``dev.langchain4j.cdi.plugin..``. In this example, the bean name for our chat model is ``chat-model`` and it's assigned to the chat model class ``dev.langchain4j.model.azure.AzureOpenAiChatModel`.
 
@@ -142,11 +163,17 @@ The \`\` builder property can follow the lowercase dashed property value that ma
 
 For example, should you want to log all chat request you will need to set the `logRequests` to `true` on the Builder. In the config, all uppercase letters can be lowered and prepended with a dash `-`.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">dev.langchain4j.cdi.plugin.chat-model.config.log-requests=true</pre>
+```
+dev.langchain4j.cdi.plugin.chat-model.config.log-requests=true
+```
+
 
 Is equivalent to the config property:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">dev.langchain4j.cdi.plugin.chat-model.config.logRequests=true</pre>
+```
+dev.langchain4j.cdi.plugin.chat-model.config.logRequests=true
+```
+
 
 The config creator (internally) will identify config values that contains dashes and rework it to its camel-case property and match it to the Builder and then assign the value accordingly.
 
@@ -160,7 +187,8 @@ The `@RegisterAIService` annotation is the glue that automatically applies LangC
 
 #### 3.2) Your AI Service agent
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">import dev.langchain4j.service.UserMessage;
+```java
+import dev.langchain4j.service.UserMessage;
 import dev.langchain4j.service.SystemMessage;
 import dev.langchain4j.cdi.RegisterAiService;
 
@@ -173,7 +201,9 @@ public interface Assistant {
     @SystemMessage("You are a concise enterprise assistant.")
     @UserMessage("Answer clearly: {{question}}")
     String answer(String question);
-}</pre>
+}
+```
+
 
 The interface describes what we want: a `Assistant` object with one method: `answer(String)`. We specify a `SystemMessage` (this is optional).
 
@@ -194,20 +224,29 @@ Please note that adding memory eats tokens, so please monitor your usage cost.
 
 You can configure `ChatMemory` with Microprofile Config, as follows:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">dev.langchain4j.cdi.plugin.chat-memory.class=dev.langchain4j.memory.chat.MessageWindowChatMemory
+```
+dev.langchain4j.cdi.plugin.chat-memory.class=dev.langchain4j.memory.chat.MessageWindowChatMemory
 dev.langchain4j.cdi.plugin.chat-memory.scope=jakarta.enterprise.context.ApplicationScoped
-dev.langchain4j.cdi.plugin.chat-memory.config.maxMessages=10</pre>
+dev.langchain4j.cdi.plugin.chat-memory.config.maxMessages=10
+```
+
 
 which is equivalent to physically write the code as:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">ChatMemory chatMemory = MessageWindowChatMemory.withMaxMessages(10);</pre>
+```
+ChatMemory chatMemory = MessageWindowChatMemory.withMaxMessages(10);
+```
+
 
 Now, we update our existing `Assistant` `@RegisterAIService` to include `ChatMemory` with `chatMemoryName` property to bean `chat-memory`:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@RegisterAIService(
+```java
+@RegisterAIService(
     chatLanguageModelName = "chat-model",
     chatMemoryName = "chat-memory"
-)</pre>
+)
+```
+
 
 #### 3.4) Adding Tools
 
@@ -229,17 +268,21 @@ LangChain4J provides the interfaces `ContentRetriever` that you can implement. I
 
 The scope for building easy RAG and advance RAG using LangChain4J is beyond the scope of this article, but for this example we'll include a simple easy RAG using the configurable approach:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">dev.langchain4j.cdi.plugin.docRagRetriever.class=dev.langchain4j.rag.content.retriever.EmbeddingStoreContentRetriever
+```
+dev.langchain4j.cdi.plugin.docRagRetriever.class=dev.langchain4j.rag.content.retriever.EmbeddingStoreContentRetriever
 dev.langchain4j.cdi.plugin.docRagRetriever.config.embeddingStore=lookup:default
 dev.langchain4j.cdi.plugin.docRagRetriever.config.embeddingModel=lookup:default
 dev.langchain4j.cdi.plugin.docRagRetriever.config.maxResults=3
-dev.langchain4j.cdi.plugin.docRagRetriever.config.minScore=0.6</pre>
+dev.langchain4j.cdi.plugin.docRagRetriever.config.minScore=0.6
+```
+
 
 The `lookup:default` value will cause CDI to lookup the default `EmbeddingStore` or `EmbeddingModel` registered in the CDI container. Otherwise, provide a fully-qualified class name of the specified interface class type.
 
 Our `EmbeddingModel` and `EmbeddingStore` are CDI produced using CDI producer fields.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@ApplicationScoped
+```java
+@ApplicationScoped
 public class DocRagIngestor {
 
     // Used by ContentRetriever
@@ -248,18 +291,23 @@ public class DocRagIngestor {
 
     // Used by ContentRetriever
     @Produces
-    private EmbeddingStore&lt;TextSegment&gt; embeddingStore = new InMemoryEmbeddingStore&lt;&gt;();
+    private EmbeddingStore<TextSegment> embeddingStore = new InMemoryEmbeddingStore<>();
 
     //Code made short for brevity   
-}</pre>
+}
+```
+
 
 Then we register it to `@RegisterAIService` by providing the CDI name of the `ContentRetriever` as follows:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@RegisterAIService(
+```java
+@RegisterAIService(
     chatLanguageModelName = "chat-model",
     chatMemoryName = "chat-memory",
     contentRetrieverName = "docRagRetriever"
-)</pre>
+)
+```
+
 
 ### 4) Inject and use it {#h3-5-4-inject-and-use-it}
 
@@ -267,7 +315,8 @@ Now, you can simply `@Inject` your AI `Assistant`.
 
 In this example, our `ChatResource` RESTful Service (using Jakarta RESTful Web Service) we just inject our `Assistant` just we normally do with any Jakarta EE CDI services:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">import jakarta.inject.Inject;
+```java
+import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import org.eclipse.microprofile.openapi.annotation.Operation;
@@ -284,11 +333,14 @@ public class AssistantResource {
     public AnswerDto ask(QuestionDto q) {
         return new AnswerDto(assistant.answer(q.getQuestion()));
     }
-}</pre>
+}
+```
+
 
 Your `AnswerDto` and `QuestionDto` are standard POJO.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public class QuestionDto implements Serializable {
+```java
+public class QuestionDto implements Serializable {
 
     @JsonbProperty
     private String question;
@@ -326,7 +378,9 @@ public class AnswerDto implements Serializable {
     public void setAnswer(String answer) { 
         this.answer = answer; 
     }
-}</pre>
+}
+```
+
 
 Now, you can run your application by deploying it to your application server and do an HTTP POST to your RESTful endpoint.
 
@@ -346,7 +400,8 @@ Fault Tolerance capability was added to ensure system stability and resilience t
 
 This example (found on `examples/liberty-car-booking`) utilizes Microprofile Fault Tolerance to ensure resiliency.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@RegisterAIService(scope = ApplicationScoped.class, tools = BookingService.class, chatMemoryName = "chat-ai-service-memory")
+```java
+@RegisterAIService(scope = ApplicationScoped.class, tools = BookingService.class, chatMemoryName = "chat-ai-service-memory")
 public interface ChatAiService {
 
     @SystemMessage("""
@@ -373,17 +428,22 @@ public interface ChatAiService {
                 "Sorry, I am not able to answer your request %s at the moment. Please try again later.",
                 question);
     }
-}</pre>
+}
+```
+
 
 Please note that LangChain4J `ChatModel` has a retry policy built inside the `ChatModel.chat()` method. Thus, adding a `@Retry` to your AI Service will add additional retry `maxRetries` to its existing LangChain4J ChatModel `maxRetries`. Some LangChain4J AI providers do provide the ability to configure the `maxRetries` so we suggest to set the `ChatModel.maxRetries = 0` in order to fully rely on Microprofile's Fault Tolerance retry mechanism.
 
 To apply fault tolerance to our AI services, we need to add the `langchain4j-cdi-fault-tolerance` module on our Maven project.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="xml" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&lt;dependency&gt;
-    &lt;groupId&gt;dev.langchain4j.cdi.mp&lt;/groupId&gt;
-    &lt;artifactId&gt;langchain4j-cdi-fault-tolerance&lt;/artifactId&gt;
-    &lt;version&gt;${langchain4j.cdi.version}&lt;/version&gt;
-&lt;/dependency&gt;</pre>
+```xml
+<dependency>
+    <groupId>dev.langchain4j.cdi.mp</groupId>
+    <artifactId>langchain4j-cdi-fault-tolerance</artifactId>
+    <version>${langchain4j.cdi.version}</version>
+</dependency>
+```
+
 
 where *${langchain4j.cdi.version}* is the latest LangChain4J CDI version. This requires that your application server supports Microprofile Fault Tolerance.
 
@@ -393,11 +453,14 @@ LangChain4J-CDI Telemetry builds upon the observability features in the Micropro
 
 To apply Generative AI telemetry to our AI services, we need to add the `langchain4j-cdi-telemetry` module on our Maven project.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="xml" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&lt;dependency&gt;
-    &lt;groupId&gt;dev.langchain4j.cdi.mp&lt;/groupId&gt;
-    &lt;artifactId&gt;langchain4j-cdi-telemetry&lt;/artifactId&gt;
-    &lt;version&gt;${langchain4j.cdi.version}&lt;/version&gt;
-&lt;/dependency&gt;</pre>
+```xml
+<dependency>
+    <groupId>dev.langchain4j.cdi.mp</groupId>
+    <artifactId>langchain4j-cdi-telemetry</artifactId>
+    <version>${langchain4j.cdi.version}</version>
+</dependency>
+```
+
 
 where *${langchain4j.cdi.version}* is the latest LangChain4J CDI version. This requires that your application server supports Microprofile Telemetry.
 
@@ -408,13 +471,19 @@ The LangChain4J-CDI Telemetry provides 2 implementation of the `ChatModelListene
 
 Using the configurable properties method, we can apply the following `ChatModelListener` to our `ChatModel` as follows:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">dev.langchain4j.cdi.plugin.&lt;beanName&gt;.config.listeners=@all</pre>
+```
+dev.langchain4j.cdi.plugin.<beanName>.config.listeners=@all
+```
+
 
 The value set to `@all` tells CDI to inject all CDI discoverable `ChatModelListener` to the `ChatModel` that supports listeners.
 
 Alternatively, you can specify your `ChatModel` individually as follows:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">dev.langchain4j.cdi.plugin.&lt;beanName&gt;.config.listeners=dev.langchain4j.cdi.telemetry.SpanChatModelListener,dev.langchain4j.cdi.telemetry.MetricsChatModelListener</pre>
+```
+dev.langchain4j.cdi.plugin.<beanName>.config.listeners=dev.langchain4j.cdi.telemetry.SpanChatModelListener,dev.langchain4j.cdi.telemetry.MetricsChatModelListener
+```
+
 
 The value are comma separated, fully qualified class name. The class must implement the `ChatModelListener` interface.
 

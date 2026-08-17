@@ -41,7 +41,10 @@ The ability to increase or decrease the number of instances in a Deployment Grou
 
 When an instance is added to a Deployment Group, the required configuration and applications is transferred to that instance automatically. That functionality is already present (since the first version of Payara 5 and the initial Deployment Group implementation). With the introduction of the AutoScale feature in the June 2021 release, you can now give a command that also spins up additional instances, regardless of whether you are running your environment within Virtual Machines or in a Cloud environment. Implement the following command:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">./asadmin scale-up dg-apps</pre>
+```
+./asadmin scale-up dg-apps
+```
+
 
 (where dg-apps is the name of the Deployment Group.)
 
@@ -54,7 +57,10 @@ Scale Groups {#h2-1-scale-groups}
 
 The request to add or remove an instance from a Deployment Group is delegated to the Scale Group associated with it. With the June 2021 Community Edition release (5.2021.4), we have implemented a Scale Group that operates on SSH nodes. The command to create such a Scale Group is the `create-nodes-scaling-group` asadmin command.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">./asadmin create-nodes-scaling-group --deploymentgroup dg-apps --config dg-config --nodes "payara-node1,payara-node2" my-scaler</pre>
+```
+./asadmin create-nodes-scaling-group --deploymentgroup dg-apps --config dg-config --nodes "payara-node1,payara-node2" my-scaler
+```
+
 
 It requires 4 parameters:
 

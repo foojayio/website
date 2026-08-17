@@ -40,7 +40,7 @@ In this conversation, we delve into Chris's journey, his motivations, and his th
 * 💼 LinkedIn:<https://www.linkedin.com/in/chriswhocodes/>
 * 📂 Github:<https://github.com/chriswhocodes>
 
-*** ** * ** ***
+
 
 #### **Bazlur: Can you tell us about your background and your journey to becoming a JVM performance specialist? What motivated you to focus on this specific area of computing?**
 
@@ -51,7 +51,7 @@ In 2004 I started working in the financial markets, and software performance bec
 
 I decided it was time to level up my knowledge of the JVM and bought a copy of "[The Well-Grounded Java Developer](https://www.manning.com/books/the-well-grounded-java-developer-second-edition)" by Ben Evans and Martijn Verburg. I was fascinated by how the Just-in-Time (JIT) compilation system optimizes your Java program at runtime. After spending many hours poking around in **LogCompilation** XML files, I had the idea to create a tool to understand the JVM's JIT decisions better. That tool became [JITWatch](https://github.com/AdoptOpenJDK/jitwatch), which was the start of my journey into building open-source JVM tools and writing about the JVM in books and articles.
 
-*** ** * ** ***
+
 
 #### **Bazlur: Your tool, JITWatch, has gained a lot of recognition in the JVM community. Can you give us a brief overview of JITWatch? What problem did you see that it could solve?**
 
@@ -68,7 +68,7 @@ JITWatch understands the **LogCompilation** and **PrintAssembly** file formats a
 
 JITWatch is now ten years old and is still being cloned over 1,000 times per month at GitHub. I've heard that it's still used by the JVM team inside Oracle.  
 
-*** ** * ** ***
+
 
 #### **Bazlur: Can you give us a brief overview of the suite of tools you've created, including JaCoLine, VMOptionsExplorer, and Byte-Me? How have these tools and projects evolved over time, and what future developments do you have in mind for them?**
 
@@ -83,7 +83,7 @@ After **VMOptionsExplorer,** I had the idea to use these JVM options dictionarie
 
 Byte-Me is my next Java tooling project. I'm putting the finishing touches on it and hope to demo it at this year's JCrete conference! I won't spoil the surprise but think of it like **javap** with rocket boosters 🙂  
 
-*** ** * ** ***
+
 
 #### **Bazlur: As a seasoned professional in JVM performance, what advice would you give to someone aspiring to build a career in this area? What foundational knowledge should they have, what resources can they use to learn, and what kind of experience should they seek to gain? Are there any particular challenges or opportunities in this field that they should be aware of?**
 
@@ -99,13 +99,13 @@ If you want to specialize in Java performance, then I have two pieces of advice:
 2. Learn how and what to measure. Refresh your knowledge of the key concepts of statistics. Download [Java Microbenchmark Harness (JMH)](https://github.com/openjdk/jmh), run the samples and try to understand what they are teaching.  
 3. Accept that your intuition for improvements will often be wrong! There is a lot happening between your source code and what is executing on the CPU, so use the tools available to try and understand it.
 
-*** ** * ** ***
+
 
 #### **Bazlur: You've developed a number of open-source JVM tools that have been widely used and contributed to. For individuals interested in joining and contributing to these projects, could you provide a brief guide on how they can get started?**
 
 **Chris:** Please talk to me first 🙂 Drop me an email at [\[email protected\]](/cdn-cgi/l/email-protection#56353e243f2516353e243f253833213a3738327835393b) with your idea before submitting a PR because I might already be working on something similar or taking the tools in a different direction.
 
-*** ** * ** ***
+
 
 #### **Bazlur: Java has evolved significantly over the years, with new features and functionalities being introduced in each release. Out of these numerous updates, is there a specific feature that you find particularly exciting or innovative? Can you share why this feature stands out to you?**
 
@@ -115,7 +115,7 @@ At the language level, I've appreciated generics, lambdas, and streams, and I am
 
 These are the changes that bring free performance boosts to the same code you wrote and compiled months or years ago.
 
-*** ** * ** ***
+
 
 #### **Bazlur: With AI becoming more prevalent in various sectors, including software development, how do you see developers adapting to this change? As a JVM performance specialist, do you see the possibility of AI replacing or augmenting the work you do in JVM optimization? Are there any aspects of JVM performance tuning that AI cannot handle well? What are these areas, and why do you think they are resistant to automation?**
 
@@ -124,7 +124,7 @@ These are the changes that bring free performance boosts to the same code you wr
 
 The Java language and JVM have been designed hand in hand so that readable, idiomatic source code leads to good runtime performance through Profile Guided Optimization. I don't currently see "AI" as beneficial to the Java performance ecosystem.
 
-*** ** * ** ***
+
 
 #### **Bazlur: Let's shift gears and talk about the current state of software development. In your opinion, what are some of the biggest challenges that developers face today? Additionally, do you have any advice on how to overcome these challenges?**
 
@@ -132,13 +132,13 @@ The Java language and JVM have been designed hand in hand so that readable, idio
 
 The steady progress of the Java ecosystem through the OpenJDK project, Java Community Process, JEPs, and the combination of efforts from the language steward Oracle and other industry participants makes for a stable environment where developers can safely invest their careers.
 
-*** ** * ** ***
+
 
 #### **Bazlur: Would you be willing to share some of your memorable experiences from your time in the software industry with us? We would love to hear your stories.**
 
 **Chris:** One of my favourites was an issue someone raised on JITWatch, where they reported that the PrintAssembly native code for a Java method was missing. After some investigation, it turned out that the method in question (a series of mathematical operations on its inputs) was being tested with parameters such that the HotSpot C2 JIT compiler was able to reduce the entire method down to **mov $0xe, eax** (return 14).  
 
-*** ** * ** ***
+
 
 **Bazlur: That's fascinating! Speaking of JIT optimizations, could you tell us how these optimizations actually work? And what are some of the most common optimizations that the JIT compiler performs?
 Chris:** You can learn all about how the JVM achieves excellent runtime performance in the book Optimizing Java ([https://optimizingjava.com](https://optimizingjava.com/)) by Ben Evans, James Gough, and Chris Newland ![:wink:](https://lh5.googleusercontent.com/rb3I4_IQDF4B9jr_Wez3Sll7XFgn7IK957K3LGkOiffPcciWWmhuKdBvE7JM8PFIb0wns2JIpyyua5X2X1DE9VX6s161r2dcyZIDrhQOvwa7CGpN6_upbpDiGsa8Hq29oK8lHJaLuNWTzLBt4Kepd7w) but in a nutshell, the JVM builds a profile of the running bytecode and looks for frequently executed "hot spots" (hence the name of the HotSpot JVM) by counting method invocations and loop back-edges. When these counters cross a threshold, the method (or loop) is queued for compilation.
@@ -147,13 +147,13 @@ The JIT compilers (HotSpot contains two compilers; one simple, one advanced) tak
 
 The JIT is able to make speculative optimizations (assuming the behaviour it has observed will continue to be true) by inserting checks into the native code called "uncommon traps". If a trap is triggered, the speculative assumption is invalidated and the JVM can "deoptimize" and revert to executing the interpreted bytecode, where it will begin building a new profile to allow it to try and optimize again later.
 
-*** ** * ** ***
+
 
 #### **Bazlur: Thank you so much for sharing your insights with us. We appreciate your time. Before we end, is there any parting advice or resources you would like to share with our readers, such as a list of recommended books or any other helpful information?**
 
 **Chris:** I recommend that anyone looking to understand the history and future development of the Java language should read the JDK Enhancement Proposals (JEPs). They are written to a template that captures all of the key information and offers great insight into the careful consideration applied to each change in the language. I have created some tools on top of the JEPs which allow for easier searching at <https://chriswhocodes.com/jepsearch.html>
 
-*** ** * ** ***
+
 
 #### **Conclusion**
 

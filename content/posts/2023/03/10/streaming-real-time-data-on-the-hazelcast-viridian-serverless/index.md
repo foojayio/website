@@ -64,7 +64,10 @@ Next, you need to add the credentials that allow the Hazelcast CLI to connect to
 5. Extract the ZIP file and copy all the files into the root directory where Hazelcast Enterprise is installed.
 6. From a command prompt, still in the root directory, execute one of the following commands to connect to your cluster.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">bin/hz-cli -f hazelcast-client-with-ssl.yml sql</pre>
+```
+bin/hz-cli -f hazelcast-client-with-ssl.yml sql
+```
+
 
 Step 2. Create a Free Confluent Cloud Kafka Cluster {#h2-2-step-2-create-a-free-confluent-cloud-kafka-cluster}
 --------------------------------------------------------------------------------------------------------------
@@ -90,7 +93,8 @@ To allow Hazelcast to access the trades topic that you created in your Confluent
 2. Go to **SQL** in the left navigation to open the SQL browser.
 3. Create the mapping. Paste the connection configurations that you copied from Confluent Cloud below the valueFormat option. Make sure to format the configuration as necessary. For example:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">-- Create a mapping to a Kafka topic called 'trades'.
+```
+-- Create a mapping to a Kafka topic called 'trades'.
 CREATE OR REPLACE MAPPING trades (
   id BIGINT,
   ticker VARCHAR,
@@ -101,64 +105,11 @@ OPTIONS (
   -- Serialization format
   'valueFormat' = 'json-flat',
   -- Required connection configs for Kafka producer, consumer, and admin
-  'bootstrap.servers'='&lt;YOUR BOOTSTRAP SERVER&gt;',
+  'bootstrap.servers'='<YOUR BOOTSTRAP SERVER>',
   'security.protocol'='SASL_SSL',
   'sasl.jaas.config'='org.apache.kafka.common.security.plain.PlainLoginModule
-  required username="&lt;YOUR API KEY&gt;"
-  password="&lt;YOUR API SECRET&gt;";',
-  'sasl.mechanism'='PLAIN',
-  --Required for correctness in Apache Kafka clients prior to 2.6
-  'client.dns.lookup'='use_all_dns_ips',
-  -- Best practice for higher availability in Apache Kafka clients prior to 3.0
-  'session.timeout.ms'='45000',
-  'auto.offset.reset'='earliest'
-);</pre>
-
-The trades topic accepts trades in JSON format, using the following schema:  
-
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">{
-  "id": ,
-  "ticker": ,
-  "price_usd": ,
-  "amount": ,
-}
-</pre>
-
-* Publish some new trades to the topic.
-
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">INSERT INTO trades VALUES
-  (1, 'SORG', 5.5, 10),
-  (2, 'EORG', 14, 20);</pre>
-
-* If you haven't started the SQL prompt on your Viridian cluster, do it now:
-
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">hz-cli -f hazelcast-client-with-ssl.yml sql</pre>
-
-* In the SQL prompt, write a streaming query that filters trade messages, where the total trade order is more than $100.
-
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">SELECT ticker, price_usd, amount
-  FROM trades
-  WHERE price_usd * amount &gt; 100;</pre>
-
-* Stop the streaming query by pressing Ctrl+C to close the connection to the SQL prompt.
-* Back in the SQL browser, create the mapping to the topic again, but this time add the 'auto.offset.reset'='earliest' configuration. This configuration tells the Kafka consumer to read all data in the topic from the beginning, not just from the latest offset.
-
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">-- Create a mapping to a Kafka topic called 'trades'.
-CREATE OR REPLACE MAPPING trades (
-  id BIGINT,
-  ticker VARCHAR,
-  price_usd DECIMAL,
-  amount BIGINT)
-TYPE Kafka
-OPTIONS (
-  -- Serialization format
-  'valueFormat' = 'json-flat',
-  -- Required connection configs for Kafka producer, consumer, and admin
-  'bootstrap.servers'='&lt;YOUR BOOTSTRAP SERVER&gt;',
-  'security.protocol'='SASL_SSL',
-  'sasl.jaas.config'='org.apache.kafka.common.security.plain.PlainLoginModule
-  required username="&lt;YOUR API KEY&gt;"
-  password="&lt;YOUR API SECRET&gt;";',
+  required username="<YOUR API KEY>"
+  password="<YOUR API SECRET>";',
   'sasl.mechanism'='PLAIN',
   --Required for correctness in Apache Kafka clients prior to 2.6
   'client.dns.lookup'='use_all_dns_ips',
@@ -166,13 +117,84 @@ OPTIONS (
   'session.timeout.ms'='45000',
   'auto.offset.reset'='earliest'
 );
-</pre>
+```
+
+
+The trades topic accepts trades in JSON format, using the following schema:  
+
+```
+{
+  "id": ,
+  "ticker": ,
+  "price_usd": ,
+  "amount": ,
+}
+```
+
+
+* Publish some new trades to the topic.
+
+```
+INSERT INTO trades VALUES
+  (1, 'SORG', 5.5, 10),
+  (2, 'EORG', 14, 20);
+```
+
+
+* If you haven't started the SQL prompt on your Viridian cluster, do it now:
+
+```
+hz-cli -f hazelcast-client-with-ssl.yml sql
+```
+
+
+* In the SQL prompt, write a streaming query that filters trade messages, where the total trade order is more than $100.
+
+```
+SELECT ticker, price_usd, amount
+  FROM trades
+  WHERE price_usd * amount > 100;
+```
+
+
+* Stop the streaming query by pressing Ctrl+C to close the connection to the SQL prompt.
+* Back in the SQL browser, create the mapping to the topic again, but this time add the 'auto.offset.reset'='earliest' configuration. This configuration tells the Kafka consumer to read all data in the topic from the beginning, not just from the latest offset.
+
+```
+-- Create a mapping to a Kafka topic called 'trades'.
+CREATE OR REPLACE MAPPING trades (
+  id BIGINT,
+  ticker VARCHAR,
+  price_usd DECIMAL,
+  amount BIGINT)
+TYPE Kafka
+OPTIONS (
+  -- Serialization format
+  'valueFormat' = 'json-flat',
+  -- Required connection configs for Kafka producer, consumer, and admin
+  'bootstrap.servers'='<YOUR BOOTSTRAP SERVER>',
+  'security.protocol'='SASL_SSL',
+  'sasl.jaas.config'='org.apache.kafka.common.security.plain.PlainLoginModule
+  required username="<YOUR API KEY>"
+  password="<YOUR API SECRET>";',
+  'sasl.mechanism'='PLAIN',
+  --Required for correctness in Apache Kafka clients prior to 2.6
+  'client.dns.lookup'='use_all_dns_ips',
+  -- Best practice for higher availability in Apache Kafka clients prior to 3.0
+  'session.timeout.ms'='45000',
+  'auto.offset.reset'='earliest'
+);
+```
+
 
 * In the SQL prompt, enter the same streaming query that gave no results the last time you ran it.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">SELECT ticker, price_usd, amount
+```
+SELECT ticker, price_usd, amount
     FROM trades
-  WHERE price_usd * amount &gt; 100;</pre>
+  WHERE price_usd * amount > 100;
+```
+
 
 Step 4. Enrich the Data in the Kafka Messages {#h2-4-step-4-enrich-the-data-in-the-kafka-messages}
 --------------------------------------------------------------------------------------------------
@@ -186,7 +208,8 @@ To get deeper insights from data in Kafka topics, you can join query results wit
 * Open the SQL browser.
 * Create a mapping to a new map called companies in Hazelcast. The new map is for storing the company information that you'll use to enrich results from the trades topic.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">CREATE MAPPING companies (
+```
+CREATE MAPPING companies (
 __key BIGINT,
 ticker VARCHAR,
 company VARCHAR,
@@ -194,20 +217,28 @@ marketcap BIGINT)
 TYPE IMap
 OPTIONS (
 'keyFormat'='bigint',
-'valueFormat'='json-flat');</pre>
+'valueFormat'='json-flat');
+```
+
 
 * Add some entries to the companies map.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">INSERT INTO companies VALUES
+```
+INSERT INTO companies VALUES
 (1, 'SORG', 'Example Startup Organization', 100000),
-(2, 'EORG', 'Example Enterprise Organization', 5000000);</pre>
+(2, 'EORG', 'Example Enterprise Organization', 5000000);
+```
+
 
 * Merge results from the companies map and trades topic so you can see the company name that's associated with each ticker.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">SELECT trades.ticker, companies.company, trades.amount
+```
+SELECT trades.ticker, companies.company, trades.amount
 FROM trades
 JOIN companies
-ON companies.ticker = trades.ticker;</pre>
+ON companies.ticker = trades.ticker;
+```
+
 
 Step 5. Create a Materialized View {#h2-5-step-5-create-a-materialized-view}
 ----------------------------------------------------------------------------
@@ -217,7 +248,8 @@ You can set up an automated job to continuously run the streaming query and cach
 * Open the SQL browser.
 * Create a mapping to a new map called trade_map. This map is your materialized view, which caches the enriched results of the streaming query.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">CREATE MAPPING trade_map (
+```
+CREATE MAPPING trade_map (
 __key BIGINT,
 ticker VARCHAR,
 company VARCHAR,
@@ -226,11 +258,13 @@ TYPE IMap
 OPTIONS (
 'keyFormat'='bigint',
 'valueFormat'='json-flat');
-</pre>
+```
+
 
 * Submit a job to your cluster that will monitor your trade topic for changes and store them in a map. The processing guarantee tells Hazelcast to save the current offsets so that the cluster can resume the job even if the cluster restarts.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">CREATE JOB ingest_trades
+```
+CREATE JOB ingest_trades
 OPTIONS (
   'processingGuarantee' = 'exactlyOnce'
 ) AS
@@ -238,25 +272,39 @@ SINK INTO trade_map
 SELECT trades.id, trades.ticker, companies.company, trades.amount
 FROM trades
 JOIN companies
-ON companies.ticker = trades.ticker;</pre>
+ON companies.ticker = trades.ticker;
+```
+
 
 * List your job to make sure that it was successfully submitted.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">SHOW JOBS;</pre>
+```
+SHOW JOBS;
+```
+
 
 * Query your materialized view to see that results have been added to it.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">SELECT * FROM trade_map;</pre>
+```
+SELECT * FROM trade_map;
+```
+
 
 * Publish some more trades to the topic.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">INSERT INTO trades VALUES
+```
+INSERT INTO trades VALUES
   (3, 'SORG', 5.7, 23),
-  (4, 'EORG', 12, 54);</pre>
+  (4, 'EORG', 12, 54);
+```
+
 
 * Query your materialized view to see that results have been added to it.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">SELECT * FROM trade_map;</pre>
+```
+SELECT * FROM trade_map;
+```
+
 
 Summary {#h2-6-summary}
 -----------------------

@@ -25,7 +25,10 @@ Maybe some of us are already familiar with the neat python util "*SimpleHTTPServ
 
 Although such a server is very simple and even without the ability to define a directory, it is very helpful in many cases. For example, exposing a simple end-point that serves a JSON response:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ python -m SimpleHTTPServer 9999&nbsp;</pre>
+```
+$ python -m SimpleHTTPServer 9999
+```
+
 
 ***Example 1.**: Executing simple python web-server in the current directory to serve a content*
 
@@ -46,51 +49,69 @@ Compared to the Python version (Example 1.) "*jwebserver*" provides a couple of 
 
 The most obvious option is that the server allows you to specify a served directory (Example 2.) and a couple of other options as seen in Example 3. The directory contains the file *"index.html*" which is used as the default entry point (Image 1.)
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">├── get_simple_1.json
+```
+├── get_simple_1.json
 ├── get_simple_2.json
 ├── images
-│ &nbsp; └── OpenJDK_logo.png
-└── index.html</pre>
+│   └── OpenJDK_logo.png
+└── index.html
+```
+
 
 ***Example 2.**: Directory structure for the command-line usage*
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ jwebserver -b 0.0.0.0 -p 8880 -d &lt;PROJECT_PATH&gt;/http-static -o info 
+```
+$ jwebserver -b 0.0.0.0 -p 8880 -d <PROJECT_PATH>/http-static -o info 
 
 Output: 
-&lt;PROJECT_PATH&gt;/http-static and subdirectories on 0.0.0.0 (all interfaces) port 8880 URL http://&lt;IP_ADDRESS&gt;:8880/ </pre>
+<PROJECT_PATH>/http-static and subdirectories on 0.0.0.0 (all interfaces) port 8880 URL http://<IP_ADDRESS>:8880/
+```
+
 
 ***Example 3.**: Command to start the server with options "-b" for binding interfaces, "-p" specified port, "-d" served directory or "-o" logging level none,info,verbose*
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ curl -X GET http://localhost:8880
-&lt;!DOCTYPE html&gt;
-&lt;html&gt;
-&lt;body&gt;</pre>
+```
+$ curl -X GET http://localhost:8880
+<!DOCTYPE html>
+<html>
+<body>
+```
+
 
 ***Example 4.**: http GET method request*
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ curl --head http://localhost:8880
+```
+$ curl --head http://localhost:8880
 HTTP/1.1 200 OK
 Date: Fri, 08 Apr 2022 17:29:37 GMT
 Last-modified: Thu, 7 Apr 2022 21:31:11 GMT
 Content-type: text/html
-Content-length: 465</pre>
+Content-length: 465
+```
+
 
 ***Example 5.**: http head request*
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ curl -X GET -I http://localhost:8880/get_simple_1.json
+```
+$ curl -X GET -I http://localhost:8880/get_simple_1.json
 HTTP/1.1 200 OK
 Date: Fri, 08 Apr 2022 17:43:08 GMT
 Last-modified: Fri, 8 Apr 2022 14:08:42 GMT
 Content-type: application/json
-Content-length: 50</pre>
+Content-length: 50
+```
+
 
 ***Example 6**.: http method GET* *with JSON response*
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ curl -X POST -I http://localhost:8880
+```
+$ curl -X POST -I http://localhost:8880
 HTTP/1.1 405 Method Not Allowed
 Date: Fri, 08 Apr 2022 17:39:21 GMT
 Allow: HEAD, GET
-Content-length: 0</pre>
+Content-length: 0
+```
+
 
 ***Example 7.**: Not supported command line methods POST, PUT, DELETE etc.*
 
@@ -109,7 +130,10 @@ There are some limitations to command-line usage, let us highlight some of them:
 
 It may be useful to point out that the "*jwebserver* " command is the wrapper to the Java executable "*main()* " method of the class "*sun.net.httpserver.simpleserver.Main* ". The Java class is resides in the module "*jdk.httpserver*".
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ java -m jdk.httpserver&nbsp; -b 0.0.0.0 -p 8880 -d &lt;PROJECT_PATH&gt;/http-static -o verbose</pre>
+```
+$ java -m jdk.httpserver  -b 0.0.0.0 -p 8880 -d <PROJECT_PATH>/http-static -o verbose
+```
+
 
 ***Example 8.**: Using Java to execute the "jdk.httpserver" default module method "main" with options similar to Example 3.*
 
@@ -130,18 +154,24 @@ The example shows how to create a server with an absolute folder path (Example 8
 
 It means that the started server has access to the all available content inside the initiated server context. The folder does not contain the "*index.html*" file which implies that the content is printed out (Image 2.)
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">├── get
-│ &nbsp; └── get_request.json
+```
+├── get
+│   └── get_request.json
 ├── get_simple.json
 └── post
- &nbsp;&nbsp;&nbsp;└── post_request.json</pre>
+    └── post_request.json
+```
+
 
 ***Example 9.**: "http-static" folder structure*
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">var servedPath = Paths.get("http-static").toAbsolutePath();
+```
+var servedPath = Paths.get("http-static").toAbsolutePath();
 var server = SimpleFileServer.createFileServer(
- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;new InetSocketAddress(SIMPLE_SERVER_PORT), servedPath, OutputLevel.VERBOSE);
-server.start();</pre>
+       new InetSocketAddress(SIMPLE_SERVER_PORT), servedPath, OutputLevel.VERBOSE);
+server.start();
+```
+
 
 ***Example 10.**: Programmatic simple file server initiation and start*
 
@@ -157,12 +187,13 @@ Let us consider an example where we want to create a web-server. Such a web-serv
 
 In this case, we need to extend the previously mentioned three components. For each request type we also define its own file that holds the response (Example 8.).
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">...
+```java
+...
 //GET, POST Handlers with the content and predicates
 var getHandler = HttpHandlers.of(200, jsonHeaders, Files.readString(getResponsePath));
 var postHandler = HttpHandlers.of(200, jsonHeaders, Files.readString(postResponsePath));
-Predicate&lt;Request&gt; IS_GET = r -&gt; r.getRequestMethod().equals("GET");
-Predicate&lt;Request&gt; IS_POST = r -&gt; r.getRequestMethod().equals("POST");
+Predicate<Request> IS_GET = r -> r.getRequestMethod().equals("GET");
+Predicate<Request> IS_POST = r -> r.getRequestMethod().equals("POST");
 var notAllowedHandler = HttpHandlers.of(405, 
      Headers.of("Access-Control-Allow-Methods", "GET,POST"), 
     "Sorry, not allowed method");
@@ -170,9 +201,11 @@ var notAllowedHandler = HttpHandlers.of(405,
 var h1 = HttpHandlers.handleOrElse(IS_GET, getHandler, notAllowedHandler);
 var h2 = HttpHandlers.handleOrElse(IS_POST, postHandler, h1);
 var server = HttpServer.create(new InetSocketAddress(HANDLER_SERVER_PORT), 2,
- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"/", h2, SimpleFileServer.createOutputFilter(System.out, OutputLevel.INFO));
+       "/", h2, SimpleFileServer.createOutputFilter(System.out, OutputLevel.INFO));
 server.start();
-...</pre>
+...
+```
+
 
 ***Example 11.**: Starting HttpServer with custom Handlers and output Filters*
 
@@ -185,33 +218,42 @@ The "*jwebserver* " can be pretty handy as it allows to execute it just as a com
 
 The mounted directory content can be continually updated based on your needs (adding, updating, removing static files).
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ docker run&nbsp; -p 8000:8000 -t -i -v &lt;PROJECT_PATH&gt;/http-static:/http-static -w /http-static openjdk:18-jdk-slim jwebserver -b 0.0.0.0</pre>
+```
+$ docker run  -p 8000:8000 -t -i -v <PROJECT_PATH>/http-static:/http-static -w /http-static openjdk:18-jdk-slim jwebserver -b 0.0.0.0
+```
+
 
 ***Example 12.**: running command line "jwebserver" version from the docker image with mounted directory*
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">...
+```
+...
 jserver_one:
- &nbsp;&nbsp;image: jdk18-slim-jwebserver:latest
- &nbsp;&nbsp;restart: always
- &nbsp;&nbsp;ports:
- &nbsp;&nbsp;&nbsp;&nbsp;- "8000:8000"
+   image: jdk18-slim-jwebserver:latest
+   restart: always
+   ports:
+     - "8000:8000"
  jserver_two:
- &nbsp;&nbsp;image: openjdk:18-jdk-slim
- &nbsp;&nbsp;restart: always
- &nbsp;&nbsp;volumes:
- &nbsp;&nbsp;&nbsp;&nbsp;- ./http-static:/http-static
- &nbsp;&nbsp;ports:
- &nbsp;&nbsp;&nbsp;&nbsp;- "8001:8001"
-...</pre>
+   image: openjdk:18-jdk-slim
+   restart: always
+   volumes:
+     - ./http-static:/http-static
+   ports:
+     - "8001:8001"
+...
+```
+
 
 ***Example 13.**: docker-compose file snipped, created image by Dockerfile(Example 12.) and mounting directory*
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">FROM openjdk:18-jdk-slim
+```
+FROM openjdk:18-jdk-slim
 RUN mkdir /http-static
 RUN mkdir /http-static/images
 COPY http-static/ /http-static/
 WORKDIR /http-static
-CMD ["sh", "-c", "jwebserver -b 0.0.0.0"]</pre>
+CMD ["sh", "-c", "jwebserver -b 0.0.0.0"]
+```
+
 
 ***Example 14.**: Dockerfile snippet*
 

@@ -59,8 +59,11 @@ The short answer is that the OS and hardware are introducing the delays because 
 
 But, a straightforward way to mitigate this -- if you have [Chronicle Queue Enterprise](https://chronicle.software/services/ "Chronicle Queue Enterprise") -- is to set a few parameters when creating your queue:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">builder.readBufferMode(BufferMode.Asynchronous); 
-builder.writeBufferMode(BufferMode.Asynchronous);</pre>
+```java
+builder.readBufferMode(BufferMode.Asynchronous); 
+builder.writeBufferMode(BufferMode.Asynchronous);
+```
+
 
 which configures Chronicle Queue Enterprise in asynchronous mode to absorb any latencies from the OS/hardware.
 

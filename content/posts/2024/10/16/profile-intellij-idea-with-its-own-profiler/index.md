@@ -54,11 +54,14 @@ As I couldn't reproduce the slowdown on my working setup, I found myself dusting
 
 Let's also make sure we have an empty project with the following class in it:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public class A { 
+```java
+public class A { 
     public static void main(String[] args) { 
         System.out.println("I like tests"); 
     }
-}</pre>
+}
+```
+
 
 IntelliJ Profiler {#h2-2-intellij-profiler}
 -------------------------------------------
@@ -114,16 +117,19 @@ Why such huge difference? {#h2-4-why-such-huge-difference}
 
 Setting a breakpoint in `findTestsForClass()` and a little bit of stepping through the code bring us to the following point:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">MinusculeMatcher matcher = NameUtil.buildMatcher("*" + klassName, NameUtil.MatchingCaseSensitivity.NONE);
+```java
+MinusculeMatcher matcher = NameUtil.buildMatcher("*" + klassName, NameUtil.MatchingCaseSensitivity.NONE);
 for (String eachName : ContainerUtil.newHashSet(cache.getAllClassNames())) {
   if (matcher.matches(eachName)) {
     for (PsiClass eachClass : cache.getClassesByName(eachName, scope)) {
-      if (isTestClass(eachClass, klass) &amp;&amp; !processor.process(Pair.create(eachClass, TestFinderHelper.calcTestNameProximity(klassName, eachName)))) {
+      if (isTestClass(eachClass, klass) && !processor.process(Pair.create(eachClass, TestFinderHelper.calcTestNameProximity(klassName, eachName)))) {
         return;
       }
     }
   }
-}</pre>
+}
+```
+
 
 The code is filtering the short names that are currently in the cache using a regular expression. For each of the resulting strings, it searches the corresponding classes.
 

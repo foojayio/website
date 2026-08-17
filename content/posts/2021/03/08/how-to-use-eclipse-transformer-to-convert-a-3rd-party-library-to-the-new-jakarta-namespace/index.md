@@ -33,19 +33,25 @@ The [Eclipse Transformer project](https://github.com/eclipse/transformer) conver
 
 Using this transformer project, you can create an updated version of the JAR file that you use as a dependency in your application. And when making use of the Maven Classifier feature, you can convert a JAR file in your local maven repository and the Jakarta transformed version can easily be picked up.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">JakartaTransformer 
-&lt;path_to_local_mvn_repo&gt;/⁨org⁩/eclipse⁩/microprofile/config⁩/microprofile-config-api⁩/1.1⁩/microprofile-config-api-1.1.jar 
-&lt;path_to_local_mvn_repo&gt;/⁨org⁩/eclipse⁩/microprofile/config⁩/microprofile-config-api⁩/1.1⁩/microprofile-config-api-1.1-jakarta.jar</pre>
+```
+JakartaTransformer 
+<path_to_local_mvn_repo>/⁨org⁩/eclipse⁩/microprofile/config⁩/microprofile-config-api⁩/1.1⁩/microprofile-config-api-1.1.jar 
+<path_to_local_mvn_repo>/⁨org⁩/eclipse⁩/microprofile/config⁩/microprofile-config-api⁩/1.1⁩/microprofile-config-api-1.1-jakarta.jar
+```
+
 
 Using the above command, you create a converted JAR file that can be picked up by Maven very easily by just adding the classifier element to the dependency:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="xml" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&lt;dependency&gt;
-    &lt;groupId&gt;org.eclipse.microprofile.config&lt;/groupId&gt;
-    &lt;artifactId&gt;microprofile-config-api&lt;/artifactId&gt;
-    &lt;version&gt;1.4&lt;/version&gt;
-    &lt;scope&gt;provided&lt;/scope&gt;
-    &lt;classifier&gt;jakarta&lt;/classifier&gt;
-&lt;/dependency&gt;</pre>
+```xml
+<dependency>
+    <groupId>org.eclipse.microprofile.config</groupId>
+    <artifactId>microprofile-config-api</artifactId>
+    <version>1.4</version>
+    <scope>provided</scope>
+    <classifier>jakarta</classifier>
+</dependency>
+```
+
 
 But in most cases, a bit of extra work is required. So in the next paragraph we explain in more detail what is needed for a few frameworks and libraries.
 
@@ -53,13 +59,16 @@ But in most cases, a bit of extra work is required. So in the next paragraph we 
 
 When you need some MicroProfile functionality in your application, you typically add the following dependency to your project and run it on a compatible runtime like [Payara Server](https://www.payara.fish/products/payara-server/)or [Payara Micro](https://www.payara.fish/products/payara-micro/):
 
-<pre class="EnlighterJSRAW" data-enlighter-language="xml" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&lt;dependency&gt;
-    &lt;groupId&gt;org.eclipse.microprofile&lt;/groupId&gt;
-    &lt;artifactId&gt;microprofile&lt;/artifactId&gt;
-    &lt;version&gt;3.3&lt;/version&gt;
-    &lt;type&gt;pom&lt;/type&gt;
-    &lt;scope&gt;provided&lt;/scope&gt;
-&lt;/dependency&gt;</pre>
+```xml
+<dependency>
+    <groupId>org.eclipse.microprofile</groupId>
+    <artifactId>microprofile</artifactId>
+    <version>3.3</version>
+    <type>pom</type>
+    <scope>provided</scope>
+</dependency>
+```
+
 
 When you look at the POM file itself, you see that it makes references to some of the Java EE specifications like CDI, JAX-RS, and JSON. The other dependencies are related to the MicroProfile specification itself.
 
@@ -89,19 +98,22 @@ When you want to try it out, use the following dependency block in Maven and ref
 
 <br />
 
-<pre class="EnlighterJSRAW" data-enlighter-language="xml" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&lt;dependency&gt;     
-     &lt;groupId&gt;com.github.primefaces&lt;/groupId&gt;     
-     &lt;artifactId&gt;primefaces&lt;/artifactId&gt;     
-     &lt;version&gt;master-SNAPSHOT&lt;/version&gt;     
-     &lt;classifier&gt;jakarta&lt;/classifier&gt; 
-&lt;/dependency&gt;  
+```xml
+<dependency>     
+     <groupId>com.github.primefaces</groupId>     
+     <artifactId>primefaces</artifactId>     
+     <version>master-SNAPSHOT</version>     
+     <classifier>jakarta</classifier> 
+</dependency>  
 
-&lt;repositories&gt;     
-    &lt;repository&gt;       	    
-       &lt;id&gt;jitpack.io&lt;/id&gt;         
-       &lt;url&gt;https://jitpack.io&lt;/url&gt;       	
-    &lt;/repository&gt;  
-&lt;/repositories&gt;</pre>
+<repositories>     
+    <repository>       	    
+       <id>jitpack.io</id>         
+       <url>https://jitpack.io</url>       	
+    </repository>  
+</repositories>
+```
+
 
 ### Start Experimenting with the Eclipse Transformer Project on the Payara Platform {#h3-5-start-experimenting-with-the-eclipse-transformer-project-on-the-payara-platform}
 

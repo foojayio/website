@@ -104,7 +104,8 @@ The easiest way to get started with a BeagleBoard and burn the latest OS on an S
 
 This board delivered the smoothest experience of all four BeagleBoards. Using BeagleBoard's excellent Imaging Utility, I created an SD card with the latest OS, providing the username and password I want to use via the settings. With the SD card installed, I connected it via micro HDMI and USB, and booted into a desktop environment within minutes. After the standard `update` and \`upgrade, I installed [SDKMAN](https://sdkman.io/), Java (Azul Zulu 25.0.2 with JavaFX support), and [JBang](https://www.jbang.dev/). The JavaFX test application from the [Pi4J JBang repository](https://github.com/Pi4J/pi4j-jbang) ran flawlessly, confirming that both Java and JavaFX work perfectly on this ARM-based board. It's very comparable to the Raspberry Pi 5, even sharing similar connector placement, making it an excellent choice for Java development.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">sudo apt update
+```
+sudo apt update
 sudo apt upgrade
 sudo apt install zip
 curl -s "https://get.sdkman.io" | bash
@@ -117,7 +118,9 @@ sdk install jbang
 git clone https://github.com/Pi4J/pi4j-jbang.git
 cd pi4j-jbang
 cd javafx
-jbang HelloJavaFXWorld.java</pre>
+jbang HelloJavaFXWorld.java
+```
+
 
 ### BeagleV-Fire (RISC-V Processor) {#h3-5-beaglev-fire-risc-v-processor}
 
@@ -125,12 +128,15 @@ This board proved challenging due to my Raspberry Pi habits. I initially created
 
 Default username and password are `beagle:temppwd`.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">% ssh <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="71131410161d143140415f4043415f40415f4040">[email&nbsp;protected]</a>
+```
+% ssh <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="71131410161d143140415f4043415f40415f4040">[email protected]</a>
 Ubuntu 23.04
 
 BeagleBoard.org Ubuntu 23.04 Console Image 2023-10-19
 Support: https://bbb.io/debian
-default username:password is [beagle:temppwd]</pre>
+default username:password is [beagle:temppwd]
+```
+
 
 ### BeagleV-Ahead (RISC-V Processor) {#h3-6-beaglev-ahead-risc-v-processor}
 
@@ -138,7 +144,8 @@ This larger RISC-V board presents its own unique challenges. Unlike modern board
 
 Default username is `root` without a password.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group=""># cat /etc/*-release
+```
+# cat /etc/*-release
 commit-id:52fbe8443ea11d7e0abf958a8e2a202d67ef40c1
 ID=thead-c910
 NAME="THEAD C910 Release Distro"
@@ -155,7 +162,9 @@ Full Text Search... Done
 # apt install java
 Reading package lists... Done
 Building dependency tree... Done
-E: Unable to locate package java</pre>
+E: Unable to locate package java
+```
+
 
 ### PocketBeagle 2 2 (ARM Processor) {#h3-7-pocketbeagle-2-2-arm-processor}
 

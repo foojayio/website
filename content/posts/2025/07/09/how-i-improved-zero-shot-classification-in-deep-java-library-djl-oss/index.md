@@ -45,17 +45,23 @@ One example of a zero-shot classification model is `MoritzLaurer/DeBERTa-v3-larg
 
 For example, we can compare "Java is a great programming language", the premise, to "Software Engineering, Software Programming, and Politics", the hypotheses. In this case, the model will return:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">Software Programming: 0.984
+```
+Software Programming: 0.984
 Software Engineering: 0.015
-Politics: 0.001</pre>
+Politics: 0.001
+```
+
 
 Meaning that "Software Programming" is the hypothesis that best classifies the premise.
 
 In this example, we're comparing the premise to all hypotheses, but we could also compare them individually. We can do it by enabling the "multi_label" option. In this case, it will return:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">Software Programming: 0.998
+```
+Software Programming: 0.998
 Software Engineering: 0.668
-Politics: 0.000</pre>
+Politics: 0.000
+```
+
 
 With a higher score for "Software Engineering" and an even lower score for "Politics."
 
@@ -80,9 +86,12 @@ Let's see how we can easily load it into our Java application and use it to clas
 
 The dependencies we're gonna be using are:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">implementation("ai.djl.huggingface:tokenizers:0.32.0")
+```
+implementation("ai.djl.huggingface:tokenizers:0.32.0")
 implementation("ai.djl.pytorch:pytorch-engine:0.32.0")
-implementation("ai.djl:model-zoo:0.32.0")</pre>
+implementation("ai.djl:model-zoo:0.32.0")
+```
+
 
 ### The Criteria Class {#h3-4-the-criteria-class}
 
@@ -94,14 +103,17 @@ The Criteria class in DJL is a builder-style utility that tells DJL **how to loa
 * **Extra arguments** (like tokenizer ID, batch size, device)
 * **Custom logic** , like a translator to convert between raw inputs/outputs and tensors
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">String modelUrl = "djl://ai.djl.huggingface.pytorch/facebook/bart-large-mnli";
+```
+String modelUrl = "djl://ai.djl.huggingface.pytorch/facebook/bart-large-mnli";
 
 Criteria criteria = Criteria.builder()
             .optModelUrls(modelUrl)
             .optEngine("PyTorch")
             .setTypes(ZeroShotClassificationInput.class, ZeroShotClassificationOutput.class)
             .optTranslatorFactory(new ZeroShotClassificationTranslatorFactory())
-            .build();</pre>
+            .build();
+```
+
 
 When building a Criteria in DJL, we need to pick an engine that matches what the model was trained with. Most Hugging Face models use PyTorch. We also have to define the input and output types the model expects. **For zero-shot classification, DJL gives us ready-to-use classes:**
 
@@ -121,7 +133,8 @@ Then, we run the prediction and check the result that contains the labels and th
 
 Finally, we loop over the results and print each label with its score. Once we're done, we clean up by closing the predictor and model, which is always a good practice to free up resources.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">// Load the model
+```
+// Load the model
 Model model = ModelZoo.loadModel(criteria);
 Predictor predictor = model.newPredictor();
 
@@ -138,20 +151,25 @@ ZeroShotClassificationOutput result = predictor.predict(input);
 System.out.println("\nClassification results:");
 String[] labels = result.getLabels();
 double[] scores = result.getScores();
-for (int i = 0; i &lt; labels.length; i++) {
+for (int i = 0; i < labels.length; i++) {
     System.out.println(labels[i] + ": " + scores[i]);
 }
 
 // Clean up resources
 predictor.close();
-model.close();</pre>
+model.close();
+```
+
 
 By running the code above, we should see the following output:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">Classification results:
+```
+Classification results:
 Software Programming: 0.82975172996521
 Software Engineering: 0.15263372659683228
-Politics: 0.017614541575312614</pre>
+Politics: 0.017614541575312614
+```
+
 
 This has been easy so far. But what if you want to use a different model?
 
@@ -160,7 +178,8 @@ Using different models {#h2-6-using-different-models}
 
 If you want to use a different model, you have two options: pick one that's hosted by DJL or load one directly from Hugging Face. To see all the models that DJL hosts, just run the code below , it'll all available models.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">// Create an empty criteria to fetch all available models
+```
+// Create an empty criteria to fetch all available models
 Criteria criteria = Criteria.builder().build();
 
 // List available model names
@@ -168,7 +187,9 @@ Set modelNames = ModelZoo.listModels(criteria);
 System.out.println("Available models from DJL:");
 for (String name : modelNames) {
     System.out.println("- " + name);
-}</pre>
+}
+```
+
 
 This will output multiple models for you with their respective URIs that you can simply replace on the criteria we implemented previously in this tutorial. It should just work.
 
@@ -183,7 +204,8 @@ The model I want to use is the one I introduced in the beginning of this article
 
 To install djl-convert, you can run the following commands in your terminal:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic"># install release version of djl-converter
+```
+# install release version of djl-converter
 pip install https://publish.djl.ai/djl_converter/djl_converter-0.30.0-py3-none-any.whl
 # install from djl master branch
 pip install "git+https://github.com/deepjavalibrary/djl.git#subdirectory=extensions/tokenizers/src/main/python"
@@ -198,11 +220,16 @@ pip install optimum
 # convert a single model to TorchScript, Onnxruntime or Rust
 djl-convert --help
 # import models as DJL Model Zoo
-djl-import --help</pre>
+djl-import --help
+```
+
 
 After that, you can run the following command to convert the model to a format DJL can understand:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">djl-convert -m MoritzLaurer/DeBERTa-v3-large-mnli-fever-anli-ling-wanli</pre>
+```
+djl-convert -m MoritzLaurer/DeBERTa-v3-large-mnli-fever-anli-ling-wanli
+```
+
 
 This will store the converted model under folder model/DeBERTa-v3-large-mnli-fever-anli-ling-wanli in the working directory.
 
@@ -212,16 +239,20 @@ Now we're ready to go back to our Java application.
 
 Loading a local model is also straightforward. Instead of loading it from the DJL URL, you're going to load it from the directory that was created during the conversion:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">Criteria criteria = Criteria.builder()
+```
+Criteria criteria = Criteria.builder()
                 .optModelPath(Paths.get("model/DeBERTa-v3-large-mnli-fever-anli-ling-wanli"))
                 .optEngine("PyTorch")
                 .setTypes(ZeroShotClassificationInput.class, ZeroShotClassificationOutput.class)
                 .optTranslatorFactory(new ZeroShotClassificationTranslatorFactory())
-                .build();</pre>
+                .build();
+```
+
 
 Running it should be as straightforward as before:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">// Load the model
+```
+// Load the model
 Model model = ModelZoo.loadModel(criteria);
 Predictor predictor = model.newPredictor();
 
@@ -239,7 +270,8 @@ System.out.println("\nClassification results:");
 String[] labels = result.getLabels();
 double[] scores = result.getScores();
 for (int i = 0; i  Dict(str, Tensor)
-</pre>
+```
+
 
 Problem #1: No support for token_input_ids {#h2-9-problem-1-no-support-for-token-input-ids}
 -------------------------------------------------------------------------------------------
@@ -254,30 +286,42 @@ And well, DJL's ZeroShotClassificationTranslator had been implemented and tested
 
 By digging into the implementation of ZeroShotClassificationTranslator, I was able to see that token_type_ids were actually supported by DJL, it was simply hardcoded in the Translator, not allowing us to set it even if we initialized the Translator with its Builder:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">// Line 85 of ZeroShotClassificationTranslator: https://github.com/deepjavalibrary/djl/blob/fe8103c7498f23e209adc435410d9f3731f8dd65/extensions/tokenizers/src/main/java/ai/djl/huggingface/translator/ZeroShotClassificationTranslator.java
+```
+// Line 85 of ZeroShotClassificationTranslator: https://github.com/deepjavalibrary/djl/blob/fe8103c7498f23e209adc435410d9f3731f8dd65/extensions/tokenizers/src/main/java/ai/djl/huggingface/translator/ZeroShotClassificationTranslator.java
 // Token Type Ids is hardcoded to false
-NDList in = encoding.toNDList(manager, false, int32);</pre>
+NDList in = encoding.toNDList(manager, false, int32);
+```
+
 
 I fixed this by adding a method to the Translator Builder. This method sets the token_type_id property during initialization. I also refactored the class to make it work.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">public ZeroShotClassificationTranslator.Builder optTokenTypeId(boolean withTokenType) {
+```
+public ZeroShotClassificationTranslator.Builder optTokenTypeId(boolean withTokenType) {
     this.tokenTypeId = withTokenType;
     return this;
-}</pre>
+}
+```
+
 
 And even though it worked as I expected, I was surprised to find out that the scores that were output way off from scores I expected.
 
 While Python's Transformers library would output the following, correct, results:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">Software Programming: 0.9982864856719971
+```
+Software Programming: 0.9982864856719971
 Software Engineering: 0.7510316371917725
-Politics: 0.00020543287973850965</pre>
+Politics: 0.00020543287973850965
+```
+
 
 The Deep Java Library was outputting completely wrong scores:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">Politics: 0.9988358616828918
+```
+Politics: 0.9988358616828918
 Software Engineering: 0.0009450475918129086
-Software Programming: 0.00021904722962062806</pre>
+Software Programming: 0.00021904722962062806
+```
+
 
 You can see that the scores were so wrong that it actually output that Politics was the label that best fit our premise: "Java is the best programming language."
 

@@ -33,7 +33,8 @@ Java is an object-oriented language; you create classes to hold data and use enc
 
 The downside (until now) is that creating a data type has been verbose, requiring a lot of code even for the most straightforward cases. Let's look at the code needed for a basic two-dimensional point:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="beyond" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public class Point {
+```java
+public class Point {
   private final double x;
   private final double y;
 
@@ -50,7 +51,8 @@ The downside (until now) is that creating a data type has been verbose, requirin
     return y;
   }
 }
-</pre>
+```
+
 
 That's 14 lines of code just to represent a two-value tuple.
 
@@ -58,7 +60,10 @@ JDK 14 introduces records as a [preview feature](https://openjdk.java.net/jeps/1
 
 A record is a much simpler way of representing a data class. If we take our Point example the code can be reduced to a single line:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="beyond" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public record Point(double x, double y) { }</pre>
+```java
+public record Point(double x, double y) { }
+```
+
 
 This takes nothing away from the readability of the code; we're immediately aware that we now have a class that contains two double values called x and y that we can access using the standard accessor method names of getX and getY.
 
@@ -70,12 +75,15 @@ Records do have flexibility, though.
 
 Often, the constructor needs to provide additional behaviour beyond just assigning values. If this is the case, we can provide an alternative implementation of the constructor:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="beyond" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">record Range(int min, int max) {
-&nbsp; public Range {
-&nbsp;&nbsp;&nbsp; if (min &gt; max)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; throw new IllegalArgumentException(“Max must be &gt;= min”);
-&nbsp; }
-}</pre>
+```java
+record Range(int min, int max) {
+  public Range {
+    if (min > max)
+      throw new IllegalArgumentException(“Max must be >= min”);
+  }
+}
+```
+
 
 Note that the constructor definition is still abbreviated, as specifying the parameters is redundant. Any of the members that are automatically derived from the state description can also be declared so, for example, you can provide an alternative `toString()`or `hashCode()`implementation.
 
@@ -84,39 +92,57 @@ Pattern Matching instanceof {#h2-1-pattern-matching-instanceof}
 
 In some situations, you do not know the exact type of an object. To handle this, Java has the instanceof operator that can be used to test against different types. The drawback to this is that, having determined the type of an object; you must use an explicit cast if you want to use it as that type:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="beyond" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">if (o instanceof String) {
-&nbsp; String s = (String)o;
-&nbsp; System.out.println(s.length);
-}</pre>
+```java
+if (o instanceof String) {
+  String s = (String)o;
+  System.out.println(s.length);
+}
+```
+
 
 In JDK 14, the instanceof operator has been extended to allow a variable name to be specified in addition to the type. That variable can then be used without the explicit cast:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="beyond" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">if (o instanceof String s)
-&nbsp; System.out.println(s.length);</pre>
+```java
+if (o instanceof String s)
+  System.out.println(s.length);
+```
+
 
 The scope of the variable is limited to where its use is logically correct so:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="beyond" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">if (o instanceof String s)
-&nbsp; System.out.println(s.length);
+```java
+if (o instanceof String s)
+  System.out.println(s.length);
 else
-&nbsp; // s is out of scope here</pre>
+  // s is out of scope here
+```
+
 
 The scope can also apply within the conditional statement so we can do something like this:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="beyond" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">if (o instanceof String s &amp;&amp; s.length() &gt; 4) ...</pre>
+```java
+if (o instanceof String s && s.length() > 4) ...
+```
+
 
 This makes sense since the length() method will only be called *if* o is a String. The same does not work with a logical or operation:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="beyond" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">if (o instanceof String s || s.length() &gt; 4) ...</pre>
+```java
+if (o instanceof String s || s.length() > 4) ...
+```
+
 
 In this case, s.length() needs to be evaluated regardless of the result of whether o is a String. Logically, this does not work and so will result in a compilation error.
 
 Using the logical not operator can produce some interesting scoping effects:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="beyond" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">if (!(o instanceof String s &amp;&amp; s.length() &gt; 3)
-&nbsp; return;
+```java
+if (!(o instanceof String s && s.length() > 3)
+  return;
 
-System.out.println(s.length());&nbsp; // s is in scope here</pre>
+System.out.println(s.length());  // s is in scope here
+```
+
 
 I have seen some negative feedback on the way variables are scoped but, given that all scoping is entirely logical, I think it works very well.
 
@@ -129,38 +155,53 @@ Anyone who's written more than a few lines of Java code will have experienced a 
 
 In simple cases, finding the cause of the problem is straightforward. If we try and run code like this:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="beyond" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public class NullTest {
-&nbsp; List&lt;String&gt; list;
+```java
+public class NullTest {
+  List<String> list;
 
-&nbsp; public NullTest() {
-&nbsp;&nbsp;&nbsp; list.add("foo");
-&nbsp; }
-}</pre>
+  public NullTest() {
+    list.add("foo");
+  }
+}
+```
+
 
 The error generated is:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="beyond" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">Exception in thread "main" java.lang.NullPointerException
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; at jdk14.NullTest.&lt;init&gt;(NullTest.java:16)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; at jdk14.Main.main(Main.java:15)</pre>
+```java
+Exception in thread "main" java.lang.NullPointerException
+            at jdk14.NullTest.<init>(NullTest.java:16)
+            at jdk14.Main.main(Main.java:15)
+```
+
 
 Since we're referencing *list* on line 16, it's evident that *list* is the culprit and we can quickly resolve the problem.
 
 However, if we use chained references in a line like this:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="beyond" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">a.b.c.d = 12;</pre>
+```java
+a.b.c.d = 12;
+```
+
 
 When we run this, we might see an error like this:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="beyond" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">Exception in thread "main" java.lang.NullPointerException
-&nbsp;&nbsp;&nbsp; at Prog.main(Prog.java:5)</pre>
+```java
+Exception in thread "main" java.lang.NullPointerException
+    at Prog.main(Prog.java:5)
+```
+
 
 The problem is that we are unable to determine from this whether the exception is as a result of *a* being null, *b* being null or *c* being null. We either need to use a debugger from our IDE or change the code to separate the references onto different lines; neither of which is ideal.
 
 In JDK 14, if we run the same code, we will see something like this:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="beyond" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">Exception in thread "main" java.lang.NullPointerException:
-&nbsp;&nbsp;&nbsp;&nbsp;Cannot read field "c" because "a.b" is null
-    at Prog.main(Prog.java:5)</pre>
+```java
+Exception in thread "main" java.lang.NullPointerException:
+    Cannot read field "c" because "a.b" is null
+    at Prog.main(Prog.java:5)
+```
+
 
 Immediately, we can see that a.b is the problem and set about correcting it. I'm sure that this will make many Java developers lives easier.
 

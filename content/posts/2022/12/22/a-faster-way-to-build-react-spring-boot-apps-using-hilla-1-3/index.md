@@ -42,7 +42,8 @@ Here's how it works. In your Spring Boot app, create an endpoint:
 
 **`ContactsEndpoint.java`**
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="dracula">// Make public methods callable from TypeScript.
+```java
+// Make public methods callable from TypeScript.
 @Endpoint
 // Let anyone access them. Default = logged in only.
 @AnonymousAllowed
@@ -54,10 +55,12 @@ class ContactsEndpoint {
    this.repo = repo;
  }
 
- public List&lt;Contact&gt; findAll() {
+ public List<Contact> findAll() {
    return repo.findAll();
  }
-}</pre>
+}
+```
+
 
 Hilla generates corresponding TypeScript types and accessor methods automatically.
 
@@ -65,32 +68,35 @@ Any time somebody on your project changes the backend, they'll **catch breaking 
 
 **`ContactsList.tsx`**
 
-<pre class="EnlighterJSRAW" data-enlighter-language="typescript" data-enlighter-theme="dracula">import { useEffect, useState } from 'react';
+```typescript
+import { useEffect, useState } from 'react';
 // Hilla-generated TypeScript types and access methods, always in sync with backend
 import { ContactsEndpoint } from 'Frontend/generated/endpoints';
 import Contact from 'Frontend/generated/com/example/application/data/entity/Contact';
 
 export default function ContactsList() {
- const [contacts, setContacts] = useState&lt;Contact[]&gt;([]);
+ const [contacts, setContacts] = useState<Contact[]>([]);
 
  // Call the backend as an async method, update the state
- useEffect(() =&gt; {
+ useEffect(() => {
    ContactsEndpoint.findAll().then(setContacts);
  }, []);
 
  return (
-   &lt;div className="contact-list"&gt;
-     &lt;h2&gt;Contacts:&lt;/h2&gt;
-     &lt;ul&gt;
-       {contacts.map((contact) =&gt; (
-         &lt;li key={contact.id}&gt;
+   <div className="contact-list">
+     <h2>Contacts:</h2>
+     <ul>
+       {contacts.map((contact) => (
+         <li key={contact.id}>
            {contact.firstName} {contact.lastName}
-         &lt;/li&gt;
+         </li>
        ))}
-     &lt;/ul&gt;
-   &lt;/div&gt;
+     </ul>
+   </div>
  );
-}</pre>
+}
+```
+
 
 **There are no REST endpoint URLs, no Swagger docs you need to read.** Your IDE helps you explore APIs through auto-complete, and ensure correct use with type checking.
 
@@ -115,7 +121,10 @@ Get started {#h2-3-get-started}
 
 Learn the basics of Hilla with React through the [basics tutorial](https://hilla.dev/docs/react/start/basics "basics tutorial"). Or jump right in and create a project with the CLI:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="dracula">npx @hilla/cli init --react hello-react</pre>
+```
+npx @hilla/cli init --react hello-react
+```
+
 
 Read the [Hilla React documentation](https://hilla.dev/docs/react "Hilla React documentation") to dig deeper.
 

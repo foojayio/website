@@ -54,7 +54,10 @@ To start with, I looked a bit under the cover:
 
 The paragraph above made me switch from VSCode to VSCodium. Installing it is just a command-line away:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">brew install vscodium</pre>
+```
+brew install vscodium
+```
+
 
 VSCodium is built around a plugin architecture. The application is very lightweight, but tons of extensions contain all the possible features you can wish for.
 

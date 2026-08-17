@@ -35,7 +35,7 @@ We're thrilled to have acquired several new customers this year, providing them 
 
 On the home front, OmniFish grew stronger by expanding our team with a junior developer, a sales representative, and a marketing specialist. We also revamped our website to include more informative articles and resources and increased our social media presence, becoming active on BlueSky while maintaining engagement on X (formerly Twitter) and LinkedIn. We also followed our mantra of joyful development and added a whole new [section for developers](https://omnifish.ee/developers/), with useful guides, tips \& tricks to make developers more productive.
 
-*** ** * ** ***
+
 
 **GlassFish: Building for Today and Tomorrow**
 
@@ -66,7 +66,7 @@ As the most active contributor to the GlassFish project, we've continued to lead
 
 These efforts have not only improved GlassFish but also helped many of our customers seamlessly upgrade to GlassFish 7, ensuring their applications continue to thrive with modern Java and Jakarta EE versions. We helped some of our customers migrate easily to GlassFish 7 even from other application servers like Payara or JBoss in order to benefit from the quality of GlassFish server and our dedicated support service and additional tools. And we're preparing new tooling and guides to help WebLogic users with straightforward migration to GlassFish so that they can enjoy the same benefits much more easily.
 
-*** ** * ** ***
+
 
 **Piranha: Innovating Java Runtimes**
 
@@ -80,13 +80,13 @@ Our contributions to [Piranha](https://piranha.cloud/) have further solidified i
 
 These advancements have made Piranha more feature-rich and user-friendly, offering developers a compelling alternative as a lightweight and flexible Java runtimes with high support for Jakarta EE.
 
-*** ** * ** ***
+
 
 **Jakarta EE: Driving the Future of Enterprise Java**
 
 Our involvement with Jakarta EE continues to be a cornerstone of our work. This year, we actively contributed to the Jakarta EE 11 release, leading community-driven initiatives and adding new features that address real-world needs. Arjan Tijms, one of our own, played a pivotal role in steering the Jakarta EE 11 release. In 2024, all the individual specifications for Jakarta EE 11 have been released. The complicated refactoring effort in the Jakarta TCK (testing kit) has delayed the final release of Jakarta EE 11. However, we're working hard together with experts from Oracle, Red Hat, IBM, and Microsoft to resolve all remaining issues and release Jakarta EE 11 in early 2025.
 
-*** ** * ** ***
+
 
 **Looking Ahead to 2025**
 

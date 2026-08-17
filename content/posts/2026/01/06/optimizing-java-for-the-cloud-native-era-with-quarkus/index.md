@@ -63,7 +63,8 @@ Quarkus's reactive model makes it ideal for event-driven architectures and micro
 
 A basic example of reactive messaging in Quarkus:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">@ApplicationScoped
+```java
+@ApplicationScoped
 public class PriceConverter {
 
     @Incoming("prices")
@@ -71,20 +72,25 @@ public class PriceConverter {
     public double convert(double priceInEuro) {
         return priceInEuro * 1.1;
     }
-}</pre>
+}
+```
+
 
 In this example, prices are received from one channel (`prices`), converted, and sent to another channel (`converted-prices`). This pattern supports high-throughput, event-driven processing with clean and efficient logic.
 
 An example of a reactive HTTP endpoint using reactive routes in Quarkus:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">@ApplicationScoped
+```java
+@ApplicationScoped
 public class GreetingRoute {
 
     @Route(path = "/hello", methods = HttpMethod.GET)
     public Uni hello() {
         return Uni.createFrom().item("Hello from reactive route!");
     }
-}</pre>
+}
+```
+
 
 This route handles HTTP GET requests reactively using `Uni` from Mutiny, making it easy to build non-blocking, low-latency APIs.
 

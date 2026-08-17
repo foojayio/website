@@ -37,12 +37,15 @@ The rules are the following:
 * All dependencies and plugins are already downloaded
 * I report the time that Maven displays in the console log: 
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">[INFO] -------------------------------------------------------
+```
+[INFO] -------------------------------------------------------
 [INFO] BUILD SUCCESS
 [INFO] -------------------------------------------------------
 [INFO] Total time:  22.456 s (Wall Clock)
 [INFO] Finished at: 2021-09-24T23:20:41+02:00
-[INFO] -------------------------------------------------------</pre>
+[INFO] -------------------------------------------------------
+```
+
 
 Let's start with our baseline, `mvn test`. The results are:
 
@@ -63,7 +66,10 @@ We are going to use as many threads as there are available cores. The relevant c
 
 When the command starts, you should see the following message in the console:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">Using the MultiThreadedBuilder implementation with a thread count of X</pre>
+```
+Using the MultiThreadedBuilder implementation with a thread count of X
+```
+
 
 * 51.487 s (Wall Clock)
 * 40.322 s (Wall Clock)
@@ -82,7 +88,10 @@ This approach is excellent if you've got a large number of units in each module.
 
 We will manually set the number of threads:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="shell">mvn test -Dparallel=all -DperCoreThreadCount=false -DthreadCount=16 #1 #2</pre>
+```bash
+mvn test -Dparallel=all -DperCoreThreadCount=false -DthreadCount=16 #1 #2
+```
+
 
 1. Configure Surefire to run both classes and methods in parallel
 2. Manual override the thread count to 16
@@ -121,7 +130,10 @@ Maven itself is a Java-based application. It means each run starts a new . A JVM
 
 We will likely not reach the peak performance point in the context of builds since they are relatively short-lived, but we are still paying for the analysis cost. We can configure Maven to forego it by configuring the adequate JVM parameters. Several ways of configuring the JVM are available. The most straightforward way is to create a dedicated `jvm.config` configuration file in a `.mvn` subfolder in the project's folder.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">-XX:-TieredCompilation -XX:TieredStopAtLevel=1</pre>
+```
+-XX:-TieredCompilation -XX:TieredStopAtLevel=1
+```
+
 
 Let's now simply run `mvn test`:
 
@@ -158,7 +170,10 @@ We've seen several ways to speed up the build. What if we used them in conjuncti
 
 Let's first try with every technique we've seen so far in the same run:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="shell">mvnd test -Dparallel=all -DperCoreThreadCount=false -DthreadCount=16 -o #1 #2 #3 #4</pre>
+```bash
+mvnd test -Dparallel=all -DperCoreThreadCount=false -DthreadCount=16 -o #1 #2 #3 #4
+```
+
 
 1. Use the Maven daemon
 2. Run the tests in parallel

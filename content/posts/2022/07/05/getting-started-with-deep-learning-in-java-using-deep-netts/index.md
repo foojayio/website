@@ -30,11 +30,14 @@ It supports commonly used neural network architectures (feed forward networks, c
 
 To be able to use Deep Netts in Maven based Java project, add the following dependency into dependencies section of your pom.xml file:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="xml">&lt;dependency&gt;
-    &lt;groupId&gt;com.deepnetts&lt;/groupId&gt;
-    &lt;artifactId&gt;deepnetts-core&lt;/artifactId&gt;
-    &lt;version&gt;1.13.2&lt;/version&gt;
-&lt;/dependency&gt;</pre>
+```xml
+<dependency>
+    <groupId>com.deepnetts</groupId>
+    <artifactId>deepnetts-core</artifactId>
+    <version>1.13.2</version>
+</dependency>
+```
+
 
 You can also clone the entire library and examples from the GitHub: <https://github.com/deepnetts/deepnetts-communityedition>
 
@@ -46,7 +49,8 @@ Briefly, we have a CSV file that contains data about 4 atributes which describe 
 
 For more details, see <https://en.wikipedia.org/wiki/Iris_flower_data_set>.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">package deepnetts.examples;
+```java
+package deepnetts.examples;
 
 import deepnetts.data.DataSets;
 import deepnetts.data.preprocessing.scale.MaxScaler;
@@ -111,13 +115,16 @@ public class IrisFlowersClassifier {
         ConfusionMatrix cm = evaluator.getConfusionMatrix();
         System.out.println(cm);
     }
-}</pre>
+}
+```
+
 
 Full source code of the example is available on the [GitHub](http://https://github.com/deepnetts/deepnetts-communityedition/blob/community-visrec/deepnetts-examples/src/main/java/deepnetts/examples/IrisFlowersClassifier.java "GitHub").
 
 After running this you'll get something like this:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">-------------------------------------------------------------------------------------
+```
+-------------------------------------------------------------------------------------
 TRAINING NEURAL NETWORK
 -------------------------------------------------------------------------------------
 Epoch:1, Time:4ms, TrainError:0.947609, TrainErrorChange:0.947609, TrainAccuracy: 0.62857145
@@ -140,7 +147,9 @@ CONFUSION MATRIX
       none         0         0         0         0
     setosa         0        21         0         0
 versicolor         0         0        20         2
- virginica         0         0         0        17</pre>
+ virginica         0         0         0        17
+```
+
 
 More examples like this that you can use as starter templates for your own AI/machine learning projects in Java are available at:
 

@@ -69,13 +69,14 @@ Shared Libraries {#h2-4-shared-libraries}
 
 This is where native code for any shared libraries used is stored. This is loaded only once per process by the OS.
 
-*** ** * ** ***
+
 
 Now that we are clear about how memory is organized let's see how the most important parts of it are used when a program is executed.
 
 Let's use the below Java program, the code is not optimized for correctness hence ignore issues like unnecessary intermediatory variables, improper modifiers, and such, the focus is to visualize stack and heap memory usage.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">class Employee {
+```java
+class Employee {
     String name;
     Integer salary;
     Integer sales;
@@ -107,7 +108,9 @@ public class Test {
         john.bonus = findEmployeeBonus(john.salary, john.sales);
         System.out.println(john.bonus);
     }
-}</pre>
+}
+```
+
 
 Click on the slides and move forward/backward using arrow keys to see how the above program is executed and how the stack and heap memory is used:
 
@@ -130,7 +133,7 @@ As you can see:
 
 The Stack as you can see is automatically managed and is done so by the operating system rather than JVM itself. Hence we do not have to worry much about the Stack. The Heap, on the other hand, is not automatically managed by the OS and since it's the biggest memory space and holds dynamic data, it could grow exponentially causing our program to run out of memory over time. It also becomes fragmented over time slowing down applications. This is where the JVM helps. It manages the Heap automatically using the garbage collection process.
 
-*** ** * ** ***
+
 
 Now that we know how JVM allocates memory, let us see how it automatically manages the Heap memory which is very important for the performance of an application. When a program tries to allocate more memory on the Heap than that is freely available(depending on the `Xmx` config) we encounter **out of memory errors**.
 
@@ -230,7 +233,7 @@ Let us look at the major GC process, it's not as complex as minor GC:
 3. The GC now removed all orphan objects and reclaims the memory
 4. During a major GC event, if there are no more objects in the Heap, the JVM reclaims memory from the meta-space as well by removing loaded classes from it this is also referred to as full GC
 
-*** ** * ** ***
+
 
 This post should give you an overview of the JVM memory structure and memory management. This is not exhaustive, there are a lot more advanced concepts and tuning options available for specific use cases and you can learn about them from [https://docs.oracle.com](https://docs.oracle.com/en/java/javase/13/gctuning/).
 
@@ -238,7 +241,7 @@ But for most JVM (Java, Kotlin, Scala, Clojure, JRuby, Jython) developers this l
 
 I hope you had fun learning about the JVM internals, stay tuned for the next post in the series.
 
-*** ** * ** ***
+
 
 * [docs.oracle.com](https://docs.oracle.com/en/java/javase/13/gctuning/)
 * [pythontutor.com/java.html](http://pythontutor.com/java.html)
@@ -247,7 +250,7 @@ I hope you had fun learning about the JVM internals, stay tuned for the next pos
 * [dzone.com](https://dzone.com/articles/understanding-the-java-memory-model-and-the-garbag/)
 * [www.infoq.com](https://www.infoq.com/articles/Visualizing-Java-Garbage-Collection/)
 
-*** ** * ** ***
+
 
 If you like this article, please leave a like or a comment.
 

@@ -70,14 +70,17 @@ The `matched_route` row is a complex data tree that deserves a detailed descript
 * `clean_handlers`: list of functions scheduled to be called after a plugin has been created
 * `value` has keys related to how the route was created, as well as a couple of others:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash">curl http://apisix:9180/apisix/admin/routes/2 -H 'X-API-KEY: edd1c9f034335f136f87ad84b625c8f1' -X PUT -d '
+```bash
+curl http://apisix:9180/apisix/admin/routes/2 -H 'X-API-KEY: edd1c9f034335f136f87ad84b625c8f1' -X PUT -d '
 {
   "name": "Versioned Route to Old API",
   "methods": ["GET"],
   "uris": ["/v1/hello", "/v1/hello/", "/v1/hello/*"],
   "upstream_id": 1,
   "plugin_config_id": 1
-}'</pre>
+}'
+```
+
 
 * `priority`: since we didn't set it, it has a default value 0. [Priority](https://apisix.apache.org/docs/apisix/admin-api/#request-body-parameters) is essential when multiple routes match to determine which one to apply.
 * `create_time`: self-explanatory
@@ -103,13 +106,16 @@ I initially had issues printing the `ctx` table because of the nginx buffer limi
 
 Here's the function, courtesy of my colleague [Zeping Bai](https://github.com/bzp2010):
 
-<pre class="EnlighterJSRAW" data-enlighter-language="lua">local file, err = io.open("conf/ctx.json", "w+")
+```lua
+local file, err = io.open("conf/ctx.json", "w+")
 if not file then
     ngx.log(ngx.ERR, "failed to open file: ", err)
     return
 end
 file.write(core.json.encode(ctx, true) .. "\n")
-file.close()</pre>
+file.close()
+```
+
 
 Here's the whole data representation, in case you have good eyes:
 
@@ -128,6 +134,6 @@ It's also a good reminder that even if you're not fluent in a language or a code
 
 * [ctx parameter](https://apisix.apache.org/docs/apisix/plugin-develop/#ctx-parameter)
 
-*** ** * ** ***
+
 
 *Originally published at [A Java Geek](https://blog.frankel.ch/rabbit-hole-apisix-plugin/) on September 24^th^, 2023*

@@ -67,7 +67,8 @@ Let's deploy a single-node YugabyteDB instance in Docker:
 
 * Start the database in a container: 
 
-<pre class="EnlighterJSRAW" data-enlighter-language="powershell">rm -r ~/yb_docker_data
+```powershell
+rm -r ~/yb_docker_data
 mkdir ~/yb_docker_data
 
 docker network create yugabytedb_network
@@ -77,30 +78,45 @@ docker run -d --name yugabytedb_node1 --net yugabytedb_network \
 -v ~/yb_docker_data/node1:/home/yugabyte/yb_data --restart unless-stopped \
 yugabytedb/yugabyte:2.14.4.0-b26 \
 bin/yugabyted start --listen=yugabytedb_node1 \
---base_dir=/home/yugabyte/yb_data --daemon=false</pre>
+--base_dir=/home/yugabyte/yb_data --daemon=false
+```
+
 
 * Connect to the container: 
 
-<pre class="EnlighterJSRAW" data-enlighter-language="powershell">docker exec -it yugabytedb_node1 /bin/bash</pre>
+```powershell
+docker exec -it yugabytedb_node1 /bin/bash
+```
+
 
 * Connect to the database using the `ysqlsh` tool:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="powershell">bin/ysqlsh -h yugabytedb_node1</pre>
+```powershell
+bin/ysqlsh -h yugabytedb_node1
+```
+
 
 * Make sure the database is empty (no tables yet): 
 
-<pre class="EnlighterJSRAW" data-enlighter-language="sql">yugabyte=# \d
-Did not find any relations.</pre>
+```sql
+yugabyte=# \d
+Did not find any relations.
+```
+
 
 Next, start the application:
 
 * Clone the app:  
 
-<pre class="EnlighterJSRAW" data-enlighter-language="powershell">git clone https://github.com/dmagda/java-litters-everywhere.git &amp;&amp; cd java-litters-everywher</pre>
+```powershell
+git clone https://github.com/dmagda/java-litters-everywhere.git && cd java-litters-everywher
+```
+
 
 * Open the `src\main\resources\application.properties` file and enable YugabyteDB connection properties:  
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml">#Uncomment the YugabyteDB-specific connectivity settings:
+```yaml
+#Uncomment the YugabyteDB-specific connectivity settings:
 spring.datasource.url = jdbc:postgresql://127.0.0.1:5433/yugabyte
 spring.datasource.username = yugabyte
 spring.datasource.password = yugabyte
@@ -108,21 +124,30 @@ spring.datasource.password = yugabyte
 #And disable to Postgres-specific settings
 # spring.datasource.url = jdbc:postgresql://localhost:5432/postgres
 # spring.datasource.username = postgres
-# spring.datasource.password = password</pre>
+# spring.datasource.password = password
+```
+
 
 * Launch the app:  
 
-<pre class="EnlighterJSRAW" data-enlighter-language="powershell">mvn spring-boot:run</pre>
+```powershell
+mvn spring-boot:run
+```
+
 
 Once the application starts, it will be listening on port `8080` for user requests:  
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">INFO 58081 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+```java
+INFO 58081 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
 INFO 58081 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-INFO 58081 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path</pre>
+INFO 58081 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path
+```
+
 
 Finally, go back to your `ysqlsh` session within the Docker container to make sure the application created the `pizza_order` table:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="sql">yugabyte=# \d
+```sql
+yugabyte=# \d
 
             List of relations
  Schema |    Name     | Type  |  Owner   
@@ -133,7 +158,9 @@ Finally, go back to your `ysqlsh` session within the Docker container to make su
 yugabyte=# select * from pizza_order;
  id | status | order_time 
 ----+--------+------------
-(0 rows)</pre>
+(0 rows)
+```
+
 
 Generating Garbage in the Database {#h2-2-generating-garbage-in-the-database}
 -----------------------------------------------------------------------------
@@ -142,52 +169,69 @@ Now, go ahead and put the first pizza order in the queue.
 
 * Call the API endpoint below with curl or in the browser:  
 
-<pre class="EnlighterJSRAW" data-enlighter-language="powershell">curl -i -X POST \
+```powershell
+curl -i -X POST \
     http://localhost:8080/putNewOrder \
-    --data 'id=1' 
-</pre>
+    --data 'id=1'
+```
+
 
 * The application persists the order to the database (check the application logs):  
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">Hibernate: 
+```java
+Hibernate: 
     insert 
     into
         pizza_order
         (order_time, status, id) 
     values
-        (?, ?, ?)</pre>
+        (?, ?, ?)
+```
+
 
 * Use the `ysqlsh` session to ensure the order made it to the database:  
 
-<pre class="EnlighterJSRAW" data-enlighter-language="sql">yugabyte=# select * from pizza_order;
+```sql
+yugabyte=# select * from pizza_order;
  id | status  |       order_time       
 ----+---------+------------------------
   1 | Ordered | 2022-12-13 14:56:32.13
-(1 row)</pre>
+(1 row)
+```
+
 
 As the next step, update the order status two times:
 
 * Change the status to `Baking` using the following API call:  
 
-<pre class="EnlighterJSRAW" data-enlighter-language="powershell">curl -i -X PUT \
+```powershell
+curl -i -X PUT \
     http://localhost:8080/changeStatus \
     --data 'id=1' \
-    --data 'status=Baking'</pre>
+    --data 'status=Baking'
+```
+
 
 * And then to `Delivering`:  
 
-<pre class="EnlighterJSRAW" data-enlighter-language="powershell">curl -i -X PUT \
+```powershell
+curl -i -X PUT \
    http://localhost:8080/changeStatus \
    --data 'id=1' \
-   --data 'status=Delivering'</pre>
+   --data 'status=Delivering'
+```
+
 
 If you select the data from the `pizza_order` table, it's not surprising that you'll see the status column is set to `Delivering`:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="sql">yugabyte=# select * from pizza_order;
+```sql
+yugabyte=# select * from pizza_order;
  id |   status   |       order_time       
 ----+------------+------------------------
   1 | Delivering | 2022-12-13 14:56:32.13
-(1 row)</pre>
+(1 row)
+```
+
 
 Does that mean that the previous status values (`Ordered` and `Baking`) are gone from the database? Nope! They are still there, sitting in the memtable.
 
@@ -202,27 +246,39 @@ But, we can see the multiple versions of the `status` column by forcefully flush
 
 * Exit the `ysqlsh` session with the YugabyteDB node container:  
 
-<pre class="EnlighterJSRAW" data-enlighter-language="powershell">\q</pre>
+```powershell
+\q
+```
+
 
 * Use `yb_admin` command to find the `pizza_order` table ID:  
 
-<pre class="EnlighterJSRAW" data-enlighter-language="powershell">yb-admin -master_addresses yugabytedb_node1:7100 list_tables include_table_id | grep pizza_order</pre>
+```powershell
+yb-admin -master_addresses yugabytedb_node1:7100 list_tables include_table_id | grep pizza_order
+```
+
 
 * Flush the memtable to disk:  
 
-<pre class="EnlighterJSRAW" data-enlighter-language="powershell">yb-admin -master_addresses yugabytedb_node1:7100 flush_table ysql.yugabyte pizza_order</pre>
+```powershell
+yb-admin -master_addresses yugabytedb_node1:7100 flush_table ysql.yugabyte pizza_order
+```
+
 
 * Open the SSTable file with multiple versions of the `status` column:  
 
-<pre class="EnlighterJSRAW" data-enlighter-language="powershell">./bin/sst_dump --command=scan --file=/home/yugabyte/yb_data/data/yb-data/tserver/data/rocksdb/table-{PIZZA_ORDER_TABLE_ID}/tablet-{TABLET_ID}/000010.sst --output_format=decoded_regulardb
+```powershell
+./bin/sst_dump --command=scan --file=/home/yugabyte/yb_data/data/yb-data/tserver/data/rocksdb/table-{PIZZA_ORDER_TABLE_ID}/tablet-{TABLET_ID}/000010.sst --output_format=decoded_regulardb
 
 #The output might be as follows
 Sst file format: block-based
-SubDocKey(DocKey(0x1210, [1], []), [SystemColumnId(0); HT{ physical: 1670964617951372 }]) -&gt; null; intent doc ht: HT{ physical: 1670964617927460 }
-SubDocKey(DocKey(0x1210, [1], []), [ColumnId(1); HT{ physical: 1670964638701253 }]) -&gt; 4629700416936886278; intent doc ht: HT{ physical: 1670964638692844 }
-SubDocKey(DocKey(0x1210, [1], []), [ColumnId(1); HT{ physical: 1670964624310711 }]) -&gt; 4611686018427404292; intent doc ht: HT{ physical: 1670964624295329 }
-SubDocKey(DocKey(0x1210, [1], []), [ColumnId(1); HT{ physical: 1670964617951372 w: 1 }]) -&gt; 4575657221408440322; intent doc ht: HT{ physical: 1670964617927460 w: 1 }
-SubDocKey(DocKey(0x1210, [1], []), [ColumnId(2); HT{ physical: 1670964638701253 w: 1 }]) -&gt; 724261817884000; intent doc ht: HT{ physical: 1670964638692844 w: 1 }</pre>
+SubDocKey(DocKey(0x1210, [1], []), [SystemColumnId(0); HT{ physical: 1670964617951372 }]) -> null; intent doc ht: HT{ physical: 1670964617927460 }
+SubDocKey(DocKey(0x1210, [1], []), [ColumnId(1); HT{ physical: 1670964638701253 }]) -> 4629700416936886278; intent doc ht: HT{ physical: 1670964638692844 }
+SubDocKey(DocKey(0x1210, [1], []), [ColumnId(1); HT{ physical: 1670964624310711 }]) -> 4611686018427404292; intent doc ht: HT{ physical: 1670964624295329 }
+SubDocKey(DocKey(0x1210, [1], []), [ColumnId(1); HT{ physical: 1670964617951372 w: 1 }]) -> 4575657221408440322; intent doc ht: HT{ physical: 1670964617927460 w: 1 }
+SubDocKey(DocKey(0x1210, [1], []), [ColumnId(2); HT{ physical: 1670964638701253 w: 1 }]) -> 724261817884000; intent doc ht: HT{ physical: 1670964638692844 w: 1 }
+```
+
 
 There are three versions of `ColumnId(1)`, which is the `status` column.
 

@@ -42,17 +42,20 @@ Behind the scenes, the operator provisions replica sets or sharded clusters, ens
 
 Here's a minimal example of what that might look like:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">apiVersion: mongodb.com/v1
+```
+apiVersion: mongodb.com/v1
 kind: MongoDB
 metadata:
-&nbsp;&nbsp;name: orders-db
-&nbsp;&nbsp;namespace: mongodb
+  name: orders-db
+  namespace: mongodb
 
 spec:
-&nbsp;&nbsp;members: 3
-&nbsp;&nbsp;version: 8.0.0
-&nbsp;&nbsp;service: orders-db-service
-&nbsp;&nbsp;persistent: true</pre>
+  members: 3
+  version: 8.0.0
+  service: orders-db-service
+  persistent: true
+```
+
 
 In just a few lines of YAML, this tells the Operator to deploy a three-member MongoDB replica set, version 8.0.0, in the mongodb namespace, with persistence enabled and a dedicated Kubernetes Service for internal communication.
 
@@ -75,16 +78,19 @@ You can configure this persistence behavior in your CRD under spec.persistent, w
 
 ### Example: Recommended multiple volume configuration {#h3-2-example-recommended-multiple-volume-configuration}
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">spec:
-&nbsp;&nbsp;persistent: true
-&nbsp;&nbsp;sharedPodSpec:
-&nbsp;&nbsp;&nbsp;&nbsp;persistence:
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;multiple:
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;data:
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;storage: "20Gi"
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;logs:
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;storage: "4Gi"
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;storageClass: standard</pre>
+```
+spec:
+  persistent: true
+  sharedPodSpec:
+    persistence:
+      multiple:
+        data:
+          storage: "20Gi"
+        logs:
+          storage: "4Gi"
+          storageClass: standard
+```
+
 
 This configuration allocates 20Gi for MongoDB's database files and 4Gi for logs, using the standard storage class. Having logs on a separate volume helps reduce I/O contention and can make debugging easier during performance issues.
 
@@ -107,28 +113,34 @@ By default, the number of reconciliation threads is controlled by the [MDB_MAX_C
 
 For production environments, especially if you're deploying up to 50 MongoDB clusters, you should explicitly set CPU and memory resource requests and limits for the Operator Pod. These values ensure Kubernetes reserves sufficient resources and prevents overcommitment:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">resources:
-&nbsp;&nbsp;requests:
-&nbsp;&nbsp;&nbsp;&nbsp;cpu: 500m
-&nbsp;&nbsp;&nbsp;&nbsp;memory: 200Mi
-&nbsp;&nbsp;limits:
-&nbsp;&nbsp;&nbsp;&nbsp;cpu: 1100m
-&nbsp;&nbsp;&nbsp;&nbsp;memory: 1Gi</pre>
+```
+resources:
+  requests:
+    cpu: 500m
+    memory: 200Mi
+  limits:
+    cpu: 1100m
+    memory: 1Gi
+```
+
 
 These settings should be applied inside your Operator Deployment manifest. If you're using Helm to deploy the Operator, you can configure the same values inside your values.yaml file.
 
 **Example snippet from the Operator deployment:**
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">containers:
+```
+containers:
 - name: mongodb-kubernetes-operator
-&nbsp;&nbsp;image: quay.io/mongodb/mongodb-kubernetes-operator:1.9.2
-&nbsp;&nbsp;resources:
-&nbsp;&nbsp;&nbsp;&nbsp;requests:
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cpu: 500m
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;memory: 200Mi
-&nbsp;&nbsp;&nbsp;&nbsp;limits:
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cpu: 1100m
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;memory: 1Gi</pre>
+  image: quay.io/mongodb/mongodb-kubernetes-operator:1.9.2
+  resources:
+    requests:
+      cpu: 500m
+      memory: 200Mi
+    limits:
+      cpu: 1100m
+      memory: 1Gi
+```
+
 
 This ensures the Operator has enough headroom to spin up large numbers of clusters while remaining responsive.
 
@@ -140,17 +152,23 @@ The Operator also allows you to define resource requests and limits for each Mon
 
 For most production workloads, a good starting point per MongoDB pod is:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">requests:
-&nbsp;&nbsp;cpu: "0.25"
-&nbsp;&nbsp;memory: 512Mi
+```
+requests:
+  cpu: "0.25"
+  memory: 512Mi
 limits:
-&nbsp;&nbsp;cpu: "0.25"
-&nbsp;&nbsp;memory: 512Mi</pre>
+  cpu: "0.25"
+  memory: 512Mi
+```
+
 
 These values keep usage predictable and ensure WiredTiger (MongoDB's storage engine) has enough memory to operate efficiently. However, it is important to note that performing some operations, like index builds, large aggregations, or initial syncs, can cause temporary CPU spikes. In those cases, the pod may benefit from a higher CPU limit, such as:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">limits:
-&nbsp;&nbsp;cpu: "1"</pre>
+```
+limits:
+  cpu: "1"
+```
+
 
 Raising the CPU limit allows MongoDB to accommodate short bursts of activity without being throttled, especially during intensive workloads. Requests can remain low to maintain efficient bin-packing, but limits should reflect peak usage patterns based on your deployment profile.
 
@@ -158,23 +176,26 @@ For environments with varying workloads, consider integrating the [Vertical Pod 
 
 **Example inside your MongoDB CRD:**
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">spec:
-&nbsp;&nbsp;members: 3
-&nbsp;&nbsp;version: 8.0.0
-&nbsp;&nbsp;service: my-service
-&nbsp;&nbsp;persistent: true
-&nbsp;&nbsp;podSpec:
-&nbsp;&nbsp;&nbsp;&nbsp;podTemplate:
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;spec:
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;containers:
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- name: mongodb-enterprise-database
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;resources:
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;requests:
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cpu: "0.25"
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;memory: 512Mi
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;limits:
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cpu: "0.25"
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;memory: 512Mi</pre>
+```
+spec:
+  members: 3
+  version: 8.0.0
+  service: my-service
+  persistent: true
+  podSpec:
+    podTemplate:
+      spec:
+        containers:
+        - name: mongodb-enterprise-database
+          resources:
+            requests:
+              cpu: "0.25"
+              memory: 512Mi
+            limits:
+              cpu: "0.25"
+              memory: 512Mi
+```
+
 
 Again, if you use Helm to deploy resources, define these values in the [values.yaml file.](https://www.mongodb.com/docs/kubernetes/current/reference/helm-operator-settings/#std-label-k8s-op-resources-setting?utm_campaign=devrel&utm_source=third-part-content&utm_medium=cta&utm_content=kubernetes+best+practices&utm_term=tim.kelly)
 
@@ -197,21 +218,24 @@ MongoDB replica sets [rely on quorum](https://www.mongodb.com/docs/manual/core/r
 
 The goal is simple: Spread MongoDB pods across multiple nodes and, ideally, across multiple availability zones. Here's how you can define that in your MongoDB Custom Resource:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">spec:
-&nbsp;&nbsp;podSpec:
-&nbsp;&nbsp;&nbsp;&nbsp;nodeAffinity:
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;requiredDuringSchedulingIgnoredDuringExecution:
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;nodeSelectorTerms:
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- matchExpressions:
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- key: topology.kubernetes.io/zone
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;operator: In
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;values: ["zone-a", "zone-b"]
-&nbsp;&nbsp;&nbsp;&nbsp;podAntiAffinity:
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;requiredDuringSchedulingIgnoredDuringExecution:
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- labelSelector:
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;matchLabels:
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;app.kubernetes.io/name: mongodb-enterprise-database
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;topologyKey: "kubernetes.io/hostname"</pre>
+```
+spec:
+  podSpec:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+        - matchExpressions:
+          - key: topology.kubernetes.io/zone
+            operator: In
+            values: ["zone-a", "zone-b"]
+    podAntiAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+      - labelSelector:
+          matchLabels:
+            app.kubernetes.io/name: mongodb-enterprise-database
+        topologyKey: "kubernetes.io/hostname"
+```
+
 
 * The \[nodeAffinity\](- [Node affinity](https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#node-affinity)) ensures pods only land on nodes within the allowed availability zones (zone-a, zone-b, etc.).
 * The podAntiAffinity makes sure that no two MongoDB pods land on the same node, using hostname as the topology key.
@@ -222,27 +246,30 @@ This combination helps guarantee that a failure in one node or zone won't impact
 
 In some environments, you may want to use custom labels (e.g., for internal node groups or simulated zones). Here's a sample configuration with more specific label matching:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">spec:
-&nbsp;&nbsp;podSpec:
-&nbsp;&nbsp;&nbsp;&nbsp;podAntiAffinityTopologyKey: nodeId
-&nbsp;&nbsp;&nbsp;&nbsp;podAffinity:
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;requiredDuringSchedulingIgnoredDuringExecution:
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- labelSelector:
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;matchExpressions:
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- key: security
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;operator: In
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;values:
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- S1
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;topologyKey: failure-domain.beta.kubernetes.io/zone
-&nbsp;&nbsp;&nbsp;&nbsp;nodeAffinity:
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;requiredDuringSchedulingIgnoredDuringExecution:
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;nodeSelectorTerms:
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- matchExpressions:
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- key: kubernetes.io/e2e-az-name
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;operator: In
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;values:
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- e2e-az1
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- e2e-az2</pre>
+```
+spec:
+  podSpec:
+    podAntiAffinityTopologyKey: nodeId
+    podAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+      - labelSelector:
+          matchExpressions:
+          - key: security
+            operator: In
+            values:
+            - S1
+        topologyKey: failure-domain.beta.kubernetes.io/zone
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+        - matchExpressions:
+          - key: kubernetes.io/e2e-az-name
+            operator: In
+            values:
+              - e2e-az1
+              - e2e-az2
+```
+
 
 This instructs Kubernetes to only place MongoDB pods in nodes labeled with those specific zones, and to avoid overlapping placements on the same physical host.
 
@@ -261,14 +288,20 @@ Increasing the thread count of the Kubernetes Operator allows you to vertically 
 
 ### Example: Helm values.yaml configuration {#h3-11-example-helm-values-yaml-configuration}
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">operator:
-&nbsp;&nbsp;maxConcurrentReconciles: 20</pre>
+```
+operator:
+  maxConcurrentReconciles: 20
+```
+
 
 Or, if deploying manually, you can set this environment variable in the Operator deployment:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">env:
+```
+env:
 - name: MDB_MAX_CONCURRENT_RECONCILES
-&nbsp;&nbsp;value: "20"</pre>
+  value: "20"
+```
+
 
 This setting should be adjusted based on your operational needs and the available compute resources in your Kubernetes cluster. The more concurrent threads the Operator runs, the more CPU and memory it will require---and the more load it will place on the Kubernetes API server.
 

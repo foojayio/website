@@ -43,7 +43,8 @@ First, let's create a reusable component that handles the Google Analytics integ
 
 Here's the complete implementation:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@Tag("google-analytics")
+```java
+@Tag("google-analytics")
 public class GoogleAnalytics extends Component implements HasSize {
 
     public GoogleAnalytics(String measurementId) {
@@ -66,7 +67,7 @@ public class GoogleAnalytics extends Component implements HasSize {
                 var analyticsScript = htmlDocument.createElement(scriptTagName);
 
                 // Set custom layer name if not using default 'dataLayer'
-                var customLayerParam = analyticsLayerName != 'dataLayer' ? '&amp;l=' + analyticsLayerName : '';
+                var customLayerParam = analyticsLayerName != 'dataLayer' ? '&l=' + analyticsLayerName : '';
 
                 // Configure script loading
                 analyticsScript.async = true;
@@ -110,7 +111,9 @@ public class GoogleAnalytics extends Component implements HasSize {
             eventName, eventParams
         );
     }
-}</pre>
+}
+```
+
 
 Using the Component {#h2-2-using-the-component}
 -----------------------------------------------
@@ -119,30 +122,34 @@ Using the Component {#h2-2-using-the-component}
 
 Add the Google Analytics component to your main layout to initialize tracking:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public class MainLayout extends AppLayout {
+```java
+public class MainLayout extends AppLayout {
     public MainLayout() {
         GoogleAnalytics analytics = new GoogleAnalytics("G-XXXXXXXXXX"); // Your measurement ID
         addToDrawer(analytics);
 
         // Track page views when route changes
-        UI.getCurrent().addBeforeEnterListener(event -&gt; {
+        UI.getCurrent().addBeforeEnterListener(event -> {
             analytics.sendPageView(event.getLocation().getPath());
         });
     }
-}</pre>
+}
+```
+
 
 ### Step 2: Track Custom Events {#h3-4-step-2-track-custom-events}
 
 You can track custom events anywhere in your application:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@Route("user-profile")
+```java
+@Route("user-profile")
 public class UserProfileView extends VerticalLayout {
     private final GoogleAnalytics analytics;
 
     public UserProfileView(GoogleAnalytics analytics) {
         this.analytics = analytics;
 
-        Button saveButton = new Button("Save Profile", event -&gt; {
+        Button saveButton = new Button("Save Profile", event -> {
             // Save profile logic here
 
             // Track the save event
@@ -152,7 +159,9 @@ public class UserProfileView extends VerticalLayout {
             analytics.sendEvent("profile_update", params);
         });
     }
-}</pre>
+}
+```
+
 
 How It Works {#h2-5-how-it-works}
 ---------------------------------

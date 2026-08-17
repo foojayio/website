@@ -30,22 +30,23 @@ Parallel Stream Java Challenge {#h2-0-parallel-stream-java-challenge}
 
 What will happen in the following code when running the main method?
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">import java.util.List;
+```java
+import java.util.List;
 
 public class ParallelChallenge {
     public static void main(String... doYourBest) {
-        List&lt;Simpson&gt; simpsons = List.of(new Simpson(10),
+        List<Simpson> simpsons = List.of(new Simpson(10),
                 new Simpson(15), new Simpson(11), new Simpson(20),
                 new Simpson(22));
 
         simpsons.stream().parallel()
-                .filter(s -&gt; s.age &gt; 10)
-                .map(s -&gt; s + ",")
+                .filter(s -> s.age > 10)
+                .map(s -> s + ",")
                 .forEachOrdered(System.out::print);
 
         simpsons.stream().parallel()
-                .filter(s -&gt; s.age &gt; 10)
-                .map(s -&gt; s + ",")
+                .filter(s -> s.age > 10)
+                .map(s -> s + ",")
                 .forEach(System.out::print);
     }
 
@@ -58,7 +59,9 @@ public class ParallelChallenge {
             return ""+ this.age;
         }
     }
-}</pre>
+}
+```
+
 
 A) 11,15,20,22, 15,11,20,22,
 
@@ -72,12 +75,18 @@ D) 15,11,20,22, Random values will be printed in the second Stream
 
 Let's analyze both Streams.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">simpsons.stream().parallel()
-                 .filter(s -&gt; s.age &gt; 10)
-                 .map(s -&gt; s + ",")
-                 .forEachOrdered(System.out::print);</pre>
+```java
+simpsons.stream().parallel()
+                 .filter(s -> s.age > 10)
+                 .map(s -> s + ",")
+                 .forEachOrdered(System.out::print);
+```
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java"></pre>
+
+```java
+
+```
+
 
 The parallel method means that the Stream will iterate the elements concurrently for improved performance.
 
@@ -87,10 +96,13 @@ The output from the first Stream will therefore be... what do you think?
 
 And here is the second Stream:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">simpsons.stream().parallel()
-                 .filter(s -&gt; s.age &gt; 10)
-                 .map(s -&gt; s + ",")
-                 .forEach(System.out::print);</pre>
+```java
+simpsons.stream().parallel()
+                 .filter(s -> s.age > 10)
+                 .map(s -> s + ",")
+                 .forEach(System.out::print);
+```
+
 
 The only difference here is that we are printing the elements without any order. When we use the parallel method, the order of the elements will be changed, because it's a parallel process by means of which elements are processed at the same time, for better performance.
 

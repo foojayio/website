@@ -42,7 +42,8 @@ The JavaFX native libraries are not linked against all runtime dependencies as s
 
 Inspired by the package manager repositories, we can compile the following dependency list for debian-based systems:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">// Java
+```
+// Java
 libc6
 zlib1g
 xdg-utils
@@ -60,11 +61,14 @@ libglib2.0-0
 libgtk-3-0
 libpango-1.0-0
 libpangoft2-1.0-0
-libx11-6<code></code></pre>
+libx11-6<code></code>
+```
+
 
 And the following dependency list for RPM-based systems (And yes, that is the proper notation. For simplicity, you can ignore the suffixes when reading the list, but you must specify them for it to be a proper notation.):
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">// Java
+```
+// Java
 libc.so.6()(64bit)
 libz.so.1()(64bit)
 xdg-utils
@@ -88,7 +92,9 @@ libpangocairo-1.0.so.0()(64bit)
 libpangoft2-1.0.so.0()(64bit)
 libX11.so.6()(64bit)
 libXtst.so.6()(64bit)
-libXxf86vm.so.1()(64bit)</pre>
+libXxf86vm.so.1()(64bit)
+```
+
 
 Note that this list is only compiled for basic purposes. If you are looking into full media support with video and sound, you might have to augment these lists with all other dependencies listed in the links. Also, note that these lists are designed for JavaFX 21+ as there is no GTK2 included anymore. When running older versions, you might have to depend on GTK2 as well.
 
@@ -103,7 +109,8 @@ An easy solution is to always bundle fonts with your applications so that you al
 
 In other words, there's no easy way to implement a fixed font loading priority order. You can work around this issue by checking whether the system has any fonts installed and only supply fallback fonts if needed. This can be accomplished by the following implementation:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">public static void setupFontsIfNeeded() {
+```
+public static void setupFontsIfNeeded() {
     if (OsType.getLocal() != OsType.LINUX) {
         return;
     }
@@ -112,7 +119,7 @@ In other words, there's no easy way to implement a fixed font loading priority o
         return;
     }
 
-    System.setProperty("prism.fontdir", &lt;path to your bundled fonts, ideally absolute in your installation data&gt;);
+    System.setProperty("prism.fontdir", <path to your bundled fonts, ideally absolute in your installation data>);
     System.setProperty("prism.embeddedfonts", "true");
 }
 
@@ -123,11 +130,13 @@ private static boolean hasFonts() {
         var proc = fc.start();
         var out = new String(proc.getInputStream().readAllBytes());
         proc.waitFor(1, TimeUnit.SECONDS);
-        return proc.exitValue() == 0 &amp;&amp; !out.isBlank();
+        return proc.exitValue() == 0 && !out.isBlank();
     } catch (Exception e) {
         return false;
     }
-}</pre>
+}
+```
+
 
 If you make sure that this method is called before the JavaFX platform, or more specifically the font loader, is initialized, your application will always have fonts ready to load, regardless of whether the system has fontconfig or any fonts installed.
 
@@ -137,15 +146,20 @@ The bundled font directory that you supply should look like this:
 
 *allfonts.properties:*
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">family.0=Roboto
+```
+family.0=Roboto
 font.0=Roboto Regular
-file.0=Roboto-Regular.ttf</pre>
+file.0=Roboto-Regular.ttf
+```
+
 
 *logicalfonts.properties:*
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">sans.regular.0.font=Roboto Regular
+```
+sans.regular.0.font=Roboto Regular
 sans.regular.0.file=Roboto-Regular.ttf
-</pre>
+```
+
 
 And of course, the .ttf font file itself. You can switch this up any way you like with different fonts or multiple ones, even for different styles. You can take a look at the [documentation](https://wiki.openjdk.org/display/OpenJFX/Font+Setup#FontSetup-JavaFXonanEmbeddedLinuxdevicewithoutthefontconfiglibrary) for a full reference. Keep in mind that it is a little bit outdated and not 100% accurate.
 

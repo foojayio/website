@@ -82,7 +82,8 @@ You can learn the in-depth steps to set up a Vector Search index in [Atlas Vecto
 2. Select -\> Atlas Search -\> Create Search Index + Vector Search.
 3. Use the following JSON:  
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">{
+```
+{
   "fields": [
     {
       "type": "vector",
@@ -92,7 +93,8 @@ You can learn the in-depth steps to set up a Vector Search index in [Atlas Vecto
     }
   ]
 }
-</pre>
+```
+
 
 4. Click create index.
 
@@ -114,13 +116,16 @@ We will need a couple of packages too.
 
 Download and unzip your Spring application. Open the application in the IDE of your choosing. Open the pom.xml file and add the necessary Jackson dependency.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&lt;dependency&gt;  
+```
+<dependency>  
 
-    &lt;groupId&gt;com.fasterxml.jackson.core&lt;/groupId&gt;  
+    <groupId>com.fasterxml.jackson.core</groupId>  
 
-    &lt;artifactId&gt;jackson-databind&lt;/artifactId&gt;  
+    <artifactId>jackson-databind</artifactId>  
 
-&lt;/dependency&gt;</pre>
+</dependency>
+```
+
 
 Setting up configuration {#h2-5-setting-up-configuration}
 ---------------------------------------------------------
@@ -131,11 +136,14 @@ Now, open up the application and go to the application.properties. Here, we'll a
 
 Spring Boot will automatically configure MongoDB, so we don't have to manually create a MongoClient.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">spring.application.name=frauddetector
+```
+spring.application.name=frauddetector
 
-spring.data.mongodb.uri=&lt;YOUR_CONNECTION_STRING&gt;
+spring.data.mongodb.uri=<YOUR_CONNECTION_STRING>
 
-spring.data.mongodb.database=fraud</pre>
+spring.data.mongodb.database=fraud
+```
+
 
 Just add your connection string and the database name and we're ready to go.
 
@@ -143,15 +151,19 @@ Just add your connection string and the database name and we're ready to go.
 
 We use Spring AI with OpenAI's API to generate text embeddings for transaction similarity detection. We will use these embeddings for vector search, allowing us to compare transactions based on their semantic meaning and patterns (overall vibe), rather than raw data.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">spring.ai.openai.api-key=&lt;YOUR_OPEN_AI_API_KEY&gt;
+```
+spring.ai.openai.api-key=<YOUR_OPEN_AI_API_KEY>
 
-spring.ai.openai.embedding.options.model=text-embedding-3-small</pre>
+spring.ai.openai.embedding.options.model=text-embedding-3-small
+```
+
 
 text-embedding-3-small is a lightweight embedding model optimized for low-latency vector generation. Alternatively, you could use "text-embedding-3-large" for higher accuracy but at increased cost and latency.
 
 We will also create a Config package and add a MongoDBConfig class.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">package com.mongodb.frauddetector.config;
+```
+package com.mongodb.frauddetector.config;
 
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoCollection;
@@ -172,11 +184,12 @@ public class MongoDBConfig {
     }
 
     @Bean
-    public MongoCollection&lt;Document&gt; transactionsCollection(MongoDatabase fraudDatabase) {
+    public MongoCollection<Document> transactionsCollection(MongoDatabase fraudDatabase) {
         return fraudDatabase.getCollection(TRANSACTIONS_COLLECTION);
     }
 }
-</pre>
+```
+
 
 Here, we will add some methods to connect to our MongoDB database that we can reuse through our application.
 
@@ -186,7 +199,8 @@ Kafka is a distributed messaging system that allows producers to send messages a
 
 Spring Boot provides built-in Kafka support via spring-kafka, allowing us to configure Kafka producers and consumers using application properties.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">spring.kafka.bootstrap-servers=localhost:9092
+```
+spring.kafka.bootstrap-servers=localhost:9092
 spring.kafka.producer.key-serializer=org.apache.kafka.common.serialization.StringSerializer
 spring.kafka.producer.value-serializer=org.springframework.kafka.support.serializer.JsonSerializer
 spring.kafka.consumer.bootstrap-servers=localhost:9092
@@ -195,7 +209,8 @@ spring.kafka.consumer.auto-offset-reset=earliest
 spring.kafka.consumer.key-deserializer=org.apache.kafka.common.serialization.StringDeserializer
 spring.kafka.consumer.value-deserializer=org.springframework.kafka.support.serializer.JsonDeserializer
 spring.kafka.consumer.properties.spring.json.trusted.packages=com.mongodb.frauddetector.model
-</pre>
+```
+
 
 If you are unfamiliar with Apache Kafka, this might look like a wall of gibberish, so let's break down what each property does
 
@@ -253,25 +268,30 @@ To make our life simple, we're going to start by adding a few enums. We'll be us
 
 First, we'll create a Category enum.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">package com.mongodb.frauddetector.enums;  
+```
+package com.mongodb.frauddetector.enums;  
 
 public enum Category {  
     RETAIL, TECH, GROCERY;  
 }
-</pre>
+```
+
 
 Next, a Currency enum.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">package com.mongodb.frauddetector.enums;  
+```
+package com.mongodb.frauddetector.enums;  
 
 public enum Currency {  
     EUR, USD, GBP;  
 }
-</pre>
+```
+
 
 And finally, a slightly more exciting Merchant enum.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">package com.mongodb.frauddetector.enums;  
+```
+package com.mongodb.frauddetector.enums;  
 
 import java.util.List;  
 import java.util.Map;  
@@ -289,18 +309,19 @@ public enum Merchant {
 
     private static final Random RANDOM = new Random();  
 
-    private static final Map&lt;Category, List&lt;Merchant&gt;&gt; CATEGORY_MERCHANTS = Map.of(  
+    private static final Map<Category, List<Merchant>> CATEGORY_MERCHANTS = Map.of(  
             Category.RETAIL, List.of(AMAZON, WALMART, BEST_BUY, TARGET, COSTCO, ETSY, EBAY, IKEA),  
             Category.TECH, List.of(APPLE, MICROSOFT, GOOGLE),  
             Category.GROCERY, List.of(DUNNES_STORES, LIDL, TESCO)  
     );  
 
     public static Merchant getRandomMerchant(Category category) {  
-        List&lt;Merchant&gt; merchants = CATEGORY_MERCHANTS.get(category);  
+        List<Merchant> merchants = CATEGORY_MERCHANTS.get(category);  
         return merchants.get(RANDOM.nextInt(merchants.size()));  
     }  
 }
-</pre>
+```
+
 
 Here, we have a bit of logic to map our merchants to different categories, and a function to get a random merchant, to help with our transaction generation later (for testing and demo purposes).
 
@@ -308,7 +329,8 @@ Here, we have a bit of logic to map our merchants to different categories, and a
 
 Our customer model is going to outline some information about our sample customers that will help us to define their spending habits. Since we're building a fraud detection system, we need a way to recognize when a user makes a purchase that doesn't align with their usual behavior. Create a model package and add a Customer class.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">package com.mongodb.frauddetector.model;  
+```
+package com.mongodb.frauddetector.model;  
 
 import com.mongodb.frauddetector.enums.Category;  
 import com.mongodb.frauddetector.enums.Currency;  
@@ -324,13 +346,13 @@ public class Customer {
     @Id  
     private String id;  
     private final String userId;  
-    private final List&lt;Merchant&gt; merchants; // Trusted merchants  
-    private final List&lt;Category&gt; categories; // Trusted categories  
+    private final List<Merchant> merchants; // Trusted merchants  
+    private final List<Category> categories; // Trusted categories  
     private final Double meanSpending;  
     private final Double spendingStdDev;  
     private final Currency preferredCurrency;  
 
-    public Customer(String userId, List&lt;Merchant&gt; merchants, List&lt;Category&gt; categories,  
+    public Customer(String userId, List<Merchant> merchants, List<Category> categories,  
                     Double meanSpending, Double spendingStdDev, Currency preferredCurrency) {  
         this.userId = userId;  
         this.merchants = merchants;  
@@ -342,14 +364,15 @@ public class Customer {
 
     public String getId() { return id; }  
     public String getUserId() { return userId; }  
-    public List&lt;Merchant&gt; getMerchants() { return merchants; }  
-    public List&lt;Category&gt; getCategories() { return categories; }  
+    public List<Merchant> getMerchants() { return merchants; }  
+    public List<Category> getCategories() { return categories; }  
     public Double getMeanSpending() { return meanSpending; }  
     public Double getSpendingStdDev() { return spendingStdDev; }  
     public Currency getPreferredCurrency() { return preferredCurrency; }  
 
 }
-</pre>
+```
+
 
 Each customer in our system has:
 
@@ -361,25 +384,28 @@ Each customer in our system has:
 
 This allows us to establish a baseline for their spending behavior. If a new transaction deviates too much, we can flag it as potentially fraudulent. We need to add a couple of helper functions to help us in our data generation. We'll create the getFrequentCategory() method, to randomly select one of the user's preferred categories. Open the Customer class and add the following method:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">    public Category getFrequentCategory() {  
+```
+    public Category getFrequentCategory() {  
         Random random = new Random();  
         return categories.get(random.nextInt(categories.size()));  
     }
-</pre>
+```
+
 
 We'll also add the getUnfrequentCategory() method, to pick a category they don't usually spend money on---which could be a red flag.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">   public Category getUnfrequentCategory() {  
+```
+   public Category getUnfrequentCategory() {  
 
         // Get all categories from the enum  
 
-        List&lt;Category&gt; allCategories = List.of(Category.values());  
+        List<Category> allCategories = List.of(Category.values());  
 
         // Filter out frequent categories  
 
-        List&lt;Category&gt; infrequentCategories = allCategories.stream()  
+        List<Category> infrequentCategories = allCategories.stream()  
 
-                .filter(category -&gt; !categories.contains(category)) 
+                .filter(category -> !categories.contains(category)) 
 
                 .toList();  
 
@@ -389,23 +415,26 @@ We'll also add the getUnfrequentCategory() method, to pick a category they don't
 
         return infrequentCategories.get(random.nextInt(infrequentCategories.size()));  
 
-    }</pre>
+    }
+```
+
 
 If a user who only shops at grocery stores suddenly makes a high-ticket tech purchase, we might need to flag that as fraud.
 
 Currency changes can be another strong indicator of fraud. If a user always transacts in USD, but suddenly makes a purchase in EUR, that could signal fraudulent activity.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">   public Currency getRandomSuspiciousCurrency() {  
+```
+   public Currency getRandomSuspiciousCurrency() {  
 
         // Get all categories from the enum  
 
-        List&lt;Currency&gt; allCurrency = List.of(Currency.values());  
+        List<Currency> allCurrency = List.of(Currency.values());  
 
         // Filter out frequent categories  
 
-        List&lt;Currency&gt; infrequentCurrency = allCurrency.stream()  
+        List<Currency> infrequentCurrency = allCurrency.stream()  
 
-                .filter(currency -&gt; !(preferredCurrency == currency)) 
+                .filter(currency -> !(preferredCurrency == currency)) 
 
                 .toList();  
 
@@ -415,7 +444,9 @@ Currency changes can be another strong indicator of fraud. If a user always tran
 
         return infrequentCurrency.get(random.nextInt(infrequentCurrency.size()));  
 
-    }</pre>
+    }
+```
+
 
 This method helps simulate a realistic fraud scenario, where someone might steal a card and use it overseas.
 
@@ -423,7 +454,8 @@ This method helps simulate a realistic fraud scenario, where someone might steal
 
 Before we can generate transactions, we need some customers in our database. These aren't just random users---we're giving them specific spending habits, preferred merchants, and common transaction patterns. This will help us create realistic data for fraud detection. Create a service package and add a CustomerSeeder class. Copy the following code into it, then we'll break down what is happening.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">package com.mongodb.frauddetector.service;  
+```
+package com.mongodb.frauddetector.service;  
 
 import com.mongodb.frauddetector.enums.Category;  
 
@@ -463,7 +495,7 @@ public class CustomerSeeder {
 
     public void seedCustomers() {  
 
-        if (mongoTemplate.getCollection("customers").countDocuments() &gt; 0) {  
+        if (mongoTemplate.getCollection("customers").countDocuments() > 0) {  
 
             logger.info("Customers already exist. Skipping seed.");  
 
@@ -471,7 +503,7 @@ public class CustomerSeeder {
 
         }  
 
-        List&lt;Customer&gt; customers = List.of(  
+        List<Customer> customers = List.of(  
 
                 new Customer("user_1", List.of(Merchant.AMAZON, Merchant.BEST_BUY), List.of(Category.TECH, Category.RETAIL), 150.0, 30.0, Currency.USD),  
 
@@ -501,7 +533,9 @@ public class CustomerSeeder {
 
     }  
 
-}</pre>
+}
+```
+
 
 Now, let's walk through the implementation.
 
@@ -511,8 +545,11 @@ Using MongoTemplate, we can directly check if data exists before inserting (so w
 
 We use Spring's @PostConstruct annotation to run the seedCustomers() method automatically when the application starts. This ensures our database is populated before transactions start flowing.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@PostConstruct
-public void seedCustomers() {  </pre>
+```
+@PostConstruct
+public void seedCustomers() {
+```
+
 
 * If customer data already exists in the MongoDB collection, we skip seeding.
 * Otherwise, we generate 10 customers, each with:
@@ -524,7 +561,10 @@ public void seedCustomers() {  </pre>
 
 Once the data is created, we use:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">mongoTemplate.insertAll(customers);</pre>
+```
+mongoTemplate.insertAll(customers);
+```
+
 
 Thanks to the magic of Spring and our @PostContruct annotation, mongoTemplate will bulk insert everything into our MongoDB database just by running the application.
 
@@ -550,7 +590,8 @@ The Transaction model represents individual financial transactions in our system
 
 Create a Transaction class inside the model package:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">package com.mongodb.frauddetector.model;
+```
+package com.mongodb.frauddetector.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -667,7 +708,8 @@ public class Transaction {
     }
 
 }
-</pre>
+```
+
 
 Each transaction has:
 
@@ -685,19 +727,23 @@ At the top of our class, we specify which collection we want our financial trans
 
 To detect fraudulent transactions, we'll use vector search to compare transactions based on their overall context rather than exact matching. The generateEmbeddingText() method creates a string representation of the transaction, which we'll later convert into an embedding.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public String generateEmbeddingText() {
+```
+public String generateEmbeddingText() {
     return userId + " " + amount + " " + currency + " " + merchant + " " + category;
-}</pre>
+}
+```
+
 
 ### Generating random transactions {#h3-14-generating-random-transactions}
 
 We need to simulate realistic transaction data for our customers. The generateRandom() method creates our synthetic transactions that either align with or deviate from a user's normal spending patterns.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public static Transaction generateRandom(Customer customer) {
+```
+public static Transaction generateRandom(Customer customer) {
     Random random = new Random();
 
     // Generate a normal or suspicious transaction
-    boolean isSuspicious = random.nextDouble() &lt; 0.1; // 10% chance of fraud
+    boolean isSuspicious = random.nextDouble() < 0.1; // 10% chance of fraud
 
     double amount = isSuspicious ? customer.getMeanSpending() * (2 + random.nextDouble()) // Unusually large
             : customer.getMeanSpending() * (0.5 + random.nextDouble());
@@ -721,7 +767,8 @@ We need to simulate realistic transaction data for our customers. The generateRa
             false
     );
 }
-</pre>
+```
+
 
 This method randomly decides whether the transaction is suspicious (10% chance). Feel free to adjust this to suit your use case you want to test for. It then sets the amount to either a normal range or an unusually high value. Next, we choose a category and merchant based on the user's normal spending behavior (or select a category they don't usually shop in if the transaction is suspicious). Lastly, we select a currency, potentially choosing an unusual one for suspicious transactions.
 
@@ -735,7 +782,8 @@ With our API key and embedding model configured in the application.properties fr
 
 Here, we just need to create a configuration class that takes in the API key, and sets up the OpenAI embedding model using Spring AI.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">package com.mongodb.frauddetector.config;  
+```
+package com.mongodb.frauddetector.config;  
 import org.springframework.ai.embedding.EmbeddingModel;  
 import org.springframework.ai.openai.OpenAiEmbeddingModel;  
 import org.springframework.ai.openai.api.OpenAiApi;  
@@ -754,13 +802,15 @@ public class OpenAIConfig {
         return new OpenAiEmbeddingModel(new OpenAiApi(apiKey));  
     }  
 }
-</pre>
+```
+
 
 Now, our embedding model is ready to be called upon for generating our vectors to store alongside our transactions in MongoDB.
 
 With our embedding model set up, in our Service package, we can add our new class, EmbeddingGenerator.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">package com.mongodb.frauddetector.service;
+```
+package com.mongodb.frauddetector.service;
 
 import org.springframework.ai.embedding.EmbeddingModel;
 import org.springframework.stereotype.Component;
@@ -778,7 +828,8 @@ public class EmbeddingGenerator {
         return embeddingResponse;
     }
 }
-</pre>
+```
+
 
 This will take the information we want to include in our embedding for each transaction, and generate this embedding using our embedding model.
 
@@ -790,25 +841,29 @@ For our simple CRUD operations for our customers and transactions, finds, and in
 
 First, we'll create a CustomerRepository interface.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">package com.mongodb.frauddetector.repository;  
+```
+package com.mongodb.frauddetector.repository;  
 
 import com.mongodb.frauddetector.model.Customer;  
 import org.springframework.data.mongodb.repository.MongoRepository;  
 
-public interface CustomerRepository extends MongoRepository&lt;Customer, String&gt; {  
+public interface CustomerRepository extends MongoRepository<Customer, String> {  
 }
-</pre>
+```
+
 
 Next, we'll create a TransactionRepository interface.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">package com.mongodb.frauddetector.repository;  
+```
+package com.mongodb.frauddetector.repository;  
 
 import com.mongodb.frauddetector.model.Transaction;  
 import org.springframework.data.mongodb.repository.MongoRepository;  
 
-public interface TransactionRepository extends MongoRepository&lt;Transaction, String&gt; {  
+public interface TransactionRepository extends MongoRepository<Transaction, String> {  
 }
-</pre>
+```
+
 
 We don't need to do anything else. MongoRepository provides us with all the CRUD operations we need. We don't need to create any custom query implementations. If you want to see more about what MongoRepository provides, and the differences between MongoRepository and MongoTemplate, check out our article about [getting started with Spring Data MongoDB](https://www.mongodb.com/developer/products/mongodb/springdata-getting-started-with-java-mongodb/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=Tim-foojay&utm_term=megan.grant).
 
@@ -818,7 +873,8 @@ Now that we have customers in our database, we need to generate some transaction
 
 Create a TransactionSeeder class inside the service package and copy the following code.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">package com.mongodb.frauddetector.service;
+```
+package com.mongodb.frauddetector.service;
 
 import com.mongodb.client.MongoCollection;
 import com.mongodb.frauddetector.model.Customer;
@@ -841,11 +897,11 @@ public class TransactionSeeder {
     private final EmbeddingGenerator embeddingGenerator;
     private final TransactionRepository transactionRepository;
     private final TransactionChangeStreamListener transactionChangeStreamListener;
-    private final MongoCollection&lt;Document&gt; transactionsCollection;
+    private final MongoCollection<Document> transactionsCollection;
 
     public TransactionSeeder(CustomerRepository customerRepository,
                              EmbeddingGenerator embeddingGenerator, TransactionRepository transactionRepository,
-                             TransactionChangeStreamListener transactionChangeStreamListener, MongoCollection&lt;Document&gt; transactionsCollection) {
+                             TransactionChangeStreamListener transactionChangeStreamListener, MongoCollection<Document> transactionsCollection) {
         this.transactionsCollection = transactionsCollection;
         this.transactionRepository = transactionRepository;
         this.customerRepository = customerRepository;
@@ -854,7 +910,8 @@ public class TransactionSeeder {
     }
 
 }
-</pre>
+```
+
 
 This service is responsible for generating sample transactions for each customer and creating the embeddings, then storing them in MongoDB.
 
@@ -862,18 +919,19 @@ It is also responsible for starting the Change Stream listener to detect real-ti
 
 Next, we need a post construct method, seedTransactions().
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group=""> @PostConstruct
+```
+ @PostConstruct
     public void seedTransactions() {
-        if (transactionsCollection.countDocuments() &gt; 0) {
+        if (transactionsCollection.countDocuments() > 0) {
             logger.info("Transactions already seeded.");
             return;
         }
 
-        List&lt;Customer&gt; customers = customerRepository.findAll();
-        List&lt;Transaction&gt; transactions = new ArrayList&lt;&gt;();
+        List<Customer> customers = customerRepository.findAll();
+        List<Transaction> transactions = new ArrayList<>();
 
         for (Customer customer : customers) {
-            for (int i = 0; i &lt; 10; i++) {
+            for (int i = 0; i < 10; i++) {
                 Transaction transaction = Transaction.generateRandom(customer);
                 String embeddingText = transaction.generateEmbeddingText();
                 float[] embedding = embeddingGenerator.getEmbedding(embeddingText);
@@ -887,7 +945,9 @@ Next, we need a post construct method, seedTransactions().
 
         transactionChangeStreamListener.startListening();
         logger.info("Change Stream Listener Started.");
-    }</pre>
+    }
+```
+
 
 Once the service is initialized, the @PostConstruct method runs, ensuring that our transactions are created before the system starts processing new ones. We check if the transactions collection already contains data. If it does, we skip the seeding process. Otherwise, we generate 10 transactions per customer.
 
@@ -907,7 +967,8 @@ Kafka follows a publish-subscribe model:
 
 Create a TransactionProducer class inside the service package and copy the following code.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">package com.mongodb.frauddetector.service;  
+```
+package com.mongodb.frauddetector.service;  
 
 import com.mongodb.frauddetector.model.Customer;  
 import com.mongodb.frauddetector.model.Transaction;  
@@ -927,22 +988,24 @@ public class TransactionProducer {
 
     private static final String TOPIC = "transactions";  
     private final EmbeddingGenerator embeddingGenerator;  
-    private final KafkaTemplate&lt;String, Transaction&gt; kafkaTemplate;  
-    private List&lt;Customer&gt; customers;  
+    private final KafkaTemplate<String, Transaction> kafkaTemplate;  
+    private List<Customer> customers;  
     private final Random random = new Random();  
     private final CustomerRepository customerRepository;  
 
-    public TransactionProducer(KafkaTemplate&lt;String, Transaction&gt; kafkaTemplate, EmbeddingGenerator embeddingGenerator, CustomerRepository customerRepository) {  
+    public TransactionProducer(KafkaTemplate<String, Transaction> kafkaTemplate, EmbeddingGenerator embeddingGenerator, CustomerRepository customerRepository) {  
         this.kafkaTemplate = kafkaTemplate;  
         this.embeddingGenerator = embeddingGenerator;  
         this.customerRepository = customerRepository;  
     }
 }
-</pre>
+```
+
 
 Spring's Kafka template is used to send messages to a Kafka topic. Next, we need a method to fetch customer data to create transactions. Create a @PostConstruct method.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">   @PostConstruct  
+```
+   @PostConstruct  
     public void loadCustomers() {  
         customers = customerRepository.findAll();  
         if (customers.isEmpty()) {  
@@ -951,11 +1014,13 @@ Spring's Kafka template is used to send messages to a Kafka topic. Next, we need
             logger.info("Cached {} customers for transaction generation.", customers.size());  
         }  
     }
-</pre>
+```
+
 
 We cache customer data in memory when the application starts. This avoids repeated database lookups and speeds up transaction generation. Now, we need a method to generate our synthetic transactions. We will use the @Scheduled annotation to create a generateAndSendTransaction() method to run every 100ms.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group=""> @Scheduled(fixedRate = 100)  
+```
+ @Scheduled(fixedRate = 100)  
     public void generateAndSendTransaction() {  
         if (customers == null || customers.isEmpty()) {  
             logger.error("No customers available. Skipping transaction generation.");  
@@ -966,14 +1031,16 @@ We cache customer data in memory when the application starts. This avoids repeat
         transaction.setEmbedding(embeddingGenerator.getEmbedding(embeddingText));  
         kafkaTemplate.send(TOPIC, transaction.getTransactionId(), transaction);  
         logger.info("Transaction sent to topic {}", TOPIC);  
-    }  
-</pre>
+    }
+```
+
 
 This randomly selects a customer, creates a transaction, and generates an embedding. It then sends the transaction to Kafka.
 
 We also need to add @EnableScheduling to our FrauddetectorApplication class to allow us to schedule these transactions for our demo.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">package com.mongodb.frauddetector;  
+```
+package com.mongodb.frauddetector;  
 
 import org.springframework.boot.SpringApplication;  
 import org.springframework.boot.autoconfigure.SpringBootApplication;  
@@ -988,7 +1055,8 @@ public class FrauddetectorApplication {
     }  
 
 }
-</pre>
+```
+
 
 Now that our Kafka Producer is generating transactions and sending them to a Kafka topic, we need a way to consume them and store them in MongoDB. This is where the Kafka Consumer comes in.
 
@@ -997,7 +1065,8 @@ Ingest our transactions {#h2-19-ingest-our-transactions}
 
 This step is fairly simple using spring-kafka. In the service package, add a TransactionConsumer class. We'll set up a simple Kafka listener to automatically process incoming transaction messages.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">package com.mongodb.frauddetector.service;  
+```
+package com.mongodb.frauddetector.service;  
 
 import com.mongodb.frauddetector.model.Transaction;  
 import com.mongodb.frauddetector.repository.TransactionRepository;  
@@ -1018,7 +1087,8 @@ public class TransactionConsumer {
         transactionRepository.save(transaction);  
     }  
 }
-</pre>
+```
+
 
 ### How Kafka Consumers work {#h3-20-how-kafka-consumers-work}
 
@@ -1056,7 +1126,8 @@ So why use Change Streams?
 
 To monitor transactions, we create a TransactionChangeStreamListener service in our service package.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">package com.mongodb.frauddetector.service;  
+```
+package com.mongodb.frauddetector.service;  
 
 import com.mongodb.client.*;  
 import com.mongodb.client.model.Aggregates;  
@@ -1078,31 +1149,33 @@ public class TransactionChangeStreamListener {
 
    private final TransactionVectorSearchService vectorSearchService;
     private final ExecutorService executorService = Executors.newSingleThreadExecutor(); // Keeps it synchronous
-    private final MongoCollection&lt;Document&gt; transactionsCollection;
+    private final MongoCollection<Document> transactionsCollection;
 
-    public TransactionChangeStreamListener(TransactionVectorSearchService vectorSearchService, MongoCollection&lt;Document&gt; transactionsCollection) {
+    public TransactionChangeStreamListener(TransactionVectorSearchService vectorSearchService, MongoCollection<Document> transactionsCollection) {
         this.transactionsCollection = transactionsCollection;
         this.vectorSearchService = vectorSearchService;
     }
 }
-</pre>
+```
+
 
 We need to create a method startListening() to begin monitoring our database.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">   public void startListening() {
-        executorService.submit(() -&gt; {
+```
+   public void startListening() {
+        executorService.submit(() -> {
             // Filter to only listen for INSERT operations
-            List&lt;Bson&gt; pipeline = List.of(Aggregates.match(Filters.eq("operationType", "insert")));
+            List<Bson> pipeline = List.of(Aggregates.match(Filters.eq("operationType", "insert")));
 
-            try (MongoCursor&lt;ChangeStreamDocument&lt;Document&gt;&gt; cursor = transactionsCollection.watch(pipeline).iterator()) {
+            try (MongoCursor<ChangeStreamDocument<Document>> cursor = transactionsCollection.watch(pipeline).iterator()) {
                 while (cursor.hasNext()) {
-                    ChangeStreamDocument&lt;Document&gt; change = cursor.next();
+                    ChangeStreamDocument<Document> change = cursor.next();
                     Document transactionDoc = change.getFullDocument();
 
                     if (transactionDoc != null) {
                         logger.info("New transaction detected: {}", transactionDoc.getString("transactionId"));
 
-                        List&lt;Double&gt; embedding = transactionDoc.getList("embedding", Double.class);
+                        List<Double> embedding = transactionDoc.getList("embedding", Double.class);
                         if (embedding != null) {
                             logger.info("Performing vector search");
                             vectorSearchService.evaluateTransactionFraud(transactionDoc);
@@ -1114,11 +1187,15 @@ We need to create a method startListening() to begin monitoring our database.
             }
         });
     }
-</pre>
+```
+
 
 Now, the change stream monitors all operations on our collection. We don't care about the updates or deletes for our use case, so we use the aggregation pipeline to filter for only inserts.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">List&lt;Bson&gt; pipeline = List.of(Aggregates.match(Filters.eq("operationType", "insert"))); </pre>
+```
+List<Bson> pipeline = List.of(Aggregates.match(Filters.eq("operationType", "insert")));
+```
+
 
 With each incoming transaction, we extract the embedding and use it to run a vector search (we are going to implement this next). If this returns similar transactions marked fraud, we are going to mark this new transaction as fraud. If we don't find any similar transactions for that customer, we are also going to mark it as fraud. We will go more into the implementation of this logic in the next section.
 
@@ -1127,7 +1204,8 @@ Fraud detection with vector search {#h2-23-fraud-detection-with-vector-search}
 
 Fraud detection in this system relies on MongoDB Atlas Vector Search, which allows us to compare transaction embeddings against historical transactions to determine if a new transaction is suspicious. Create a class TransactionVectorSearchService in the service package.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">package com.mongodb.frauddetector.service;
+```
+package com.mongodb.frauddetector.service;
 
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.model.Aggregates;
@@ -1150,16 +1228,17 @@ import static com.mongodb.client.model.search.SearchPath.fieldPath;
 public class TransactionVectorSearchService {  
     private static final Logger logger = LoggerFactory.getLogger(TransactionVectorSearchService.class);  
 
-    private final MongoCollection&lt;Document&gt; transactionCollection;  
+    private final MongoCollection<Document> transactionCollection;  
     private static final String VECTOR_INDEX_NAME = "vector_index"; // Ensure this matches your Atlas index name  
     private static final int SEARCH_LIMIT = 5; // Number of similar transactions to retrieve  
     private static final int NUM_CANDIDATES = 50; // Number of approximate neighbors to consider  
 
-   public TransactionVectorSearchService(MongoCollection&lt;Document&gt; transactionCollection) {
+   public TransactionVectorSearchService(MongoCollection<Document> transactionCollection) {
         this.transactionCollection = transactionCollection;
     }
 }
-</pre>
+```
+
 
 The TransactionVectorSearchService is responsible for:
 
@@ -1169,27 +1248,30 @@ The TransactionVectorSearchService is responsible for:
 
 Now, this first method we will create is the method we are calling in our Change Stream listener. Create the evaluateTransactionFraud() method that will take in our transaction document as a parameter.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">   public void evaluateTransactionFraud(Document transactionDoc) {  
+```
+   public void evaluateTransactionFraud(Document transactionDoc) {  
         String transactionId = transactionDoc.getString("transactionId");  
         String userId = transactionDoc.getString("userId");  
-        List&lt;Double&gt; embedding = transactionDoc.getList("embedding", Double.class);  
+        List<Double> embedding = transactionDoc.getList("embedding", Double.class);  
 
         // Run vector search to find similar transactions  
-        List&lt;Document&gt; similarTransactions = findSimilarTransactions(embedding, userId);  
+        List<Document> similarTransactions = findSimilarTransactions(embedding, userId);  
 
-        // If no similar transactions exist for this user OR any of them are fraud -&gt; Mark as fraud  
+        // If no similar transactions exist for this user OR any of them are fraud -> Mark as fraud  
         boolean isFraud = similarTransactions.isEmpty() ||  
-                similarTransactions.stream().anyMatch(doc -&gt; doc.getBoolean("isFraud", false));  
+                similarTransactions.stream().anyMatch(doc -> doc.getBoolean("isFraud", false));  
 
         if (isFraud) {  
             markTransactionAsFraud(transactionId);  
         }  
-    }  
-</pre>
+    }
+```
+
 
 First, we're going to extract our transactionId, our UserId, and our Embedding. Next, we'll call a helper function findSimilarTransactions(), and pass in our embeddings and the user.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">    List&lt;Document&gt; findSimilarTransactions(List&lt;Double&gt; embedding, String userId) {  
+```
+    List<Document> findSimilarTransactions(List<Double> embedding, String userId) {  
         Bson vectorSearch = Aggregates.vectorSearch(  
                 fieldPath("embedding"),  
                 embedding,  
@@ -1201,26 +1283,31 @@ First, we're going to extract our transactionId, our UserId, and our Embedding. 
         Bson matchUser = Aggregates.match(Filters.eq("userId", userId));  
 
         return transactionCollection.aggregate(Arrays.asList(vectorSearch, matchUser))  
-                .into(new ArrayList&lt;&gt;());  
-    } 
-</pre>
+                .into(new ArrayList<>());  
+    }
+```
+
 
 In findSimilarTransactions(), we create an aggregation pipeline. Here, we set up our vector search to return the top five similar transactions, and filter by the user. We return this to our evaluateTransactionFraud() method, where we run some fraud detection logic.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group=""> boolean isFraud = similarTransactions.isEmpty() ||  
-                similarTransactions.stream().anyMatch(doc -&gt; doc.getBoolean("isFraud", false));
-</pre>
+```
+ boolean isFraud = similarTransactions.isEmpty() ||  
+                similarTransactions.stream().anyMatch(doc -> doc.getBoolean("isFraud", false));
+```
+
 
 This will return isFraud = True if we can't find any similar transactions for that user, or if any of the returned transactions are marked as fraud. If this is the case, we call the method, markTransactionAsFraud(), and pass in the transactionId.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">   private void markTransactionAsFraud(String transactionId) {  
+```
+   private void markTransactionAsFraud(String transactionId) {  
         transactionCollection.updateOne(  
                 Filters.eq("transactionId", transactionId),  
                 Updates.set("isFraud", true)  
         );  
         logger.info("Transaction marked as fraud: {}", transactionId);  
-    } 
-</pre>
+    }
+```
+
 
 This will update the document in our MongoDB collection.
 
@@ -1301,22 +1388,31 @@ So with our fraud detection pipeline set up, it's time to run our application. F
 
 Before starting Kafka for the first time, we need to format its metadata log directory. This only needs to be done once.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">export KAFKA_CLUSTER_ID="$(bin/kafka-storage.sh random-uuid)"
-bin/kafka-storage.sh format --standalone -t $KAFKA_CLUSTER_ID -c config/server.properties</pre>
+```
+export KAFKA_CLUSTER_ID="$(bin/kafka-storage.sh random-uuid)"
+bin/kafka-storage.sh format --standalone -t $KAFKA_CLUSTER_ID -c config/server.properties
+```
+
 
 This initializes the internal metadata quorum and sets up Kafka's KRaft storage directory. Now, we start the Kafka broker, using our config.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">bin/kafka-server-start.sh config/server.properties</pre>
+```
+bin/kafka-server-start.sh config/server.properties
+```
+
 
 The broker handles all messaging: storing, forwarding, and distributing messages between producers and consumers. Since we're running Kafka in standalone mode, this single broker is responsible for everything. If everything starts successfully, you should see Kafka logs indicating that the broker is up and running.
 
 Lastly, we need to open up a terminal and create our transactions topic.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">bin/kafka-topics.sh --create \
+```
+bin/kafka-topics.sh --create \
   --topic transactions \
   --bootstrap-server localhost:9092 \
   --partitions 1 \
-  --replication-factor 1</pre>
+  --replication-factor 1
+```
+
 
 This command creates a topic named transactions. It uses one partition for simplicity, but in production, you would likely want more for scalability. It also sets the replication factor to 1, since we're running only a single broker.
 
@@ -1324,7 +1420,10 @@ This command creates a topic named transactions. It uses one partition for simpl
 
 Now that we have our Kafka up and running, time to run our app.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">mvn clean spring-boot:run</pre>
+```
+mvn clean spring-boot:run
+```
+
 
 There will be some start-up time, about 100 seconds, to generate the sample data and populate the database. If everything is working, you should see logs indicating:
 
@@ -1334,7 +1433,8 @@ There will be some start-up time, about 100 seconds, to generate the sample data
 * Change Stream is monitoring new transactions.
 * Vector Search is detecting fraud in real-time.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">hangeStreamListener  : Performing vector search
+```
+hangeStreamListener  : Performing vector search
 2025-02-24T15:29:56.479Z  INFO 81047 --- [frauddetector] [   scheduling-1] c.m.f.service.TransactionProducer        : Transaction sent to topic transactions
 2025-02-24T15:29:56.520Z  INFO 81047 --- [frauddetector] [pool-2-thread-1] c.m.f.s.TransactionChangeStreamListener  : New transaction detected: 3ddc2181-5bb3-42b8-8b7b-953aaf098429
 2025-02-24T15:29:56.520Z  INFO 81047 --- [frauddetector] [pool-2-thread-1] c.m.f.s.TransactionChangeStreamListener  : Performing vector search
@@ -1342,7 +1442,9 @@ There will be some start-up time, about 100 seconds, to generate the sample data
 2025-02-24T15:29:56.839Z  INFO 81047 --- [frauddetector] [   scheduling-1] c.m.f.service.TransactionProducer        : Transaction sent to topic transactions
 2025-02-24T15:29:56.881Z  INFO 81047 --- [frauddetector] [pool-2-thread-1] c.m.f.s.TransactionChangeStreamListener  : New transaction detected: 7354568d-7a39-4708-904b-b14c913ce2d0
 2025-02-24T15:29:56.881Z  INFO 81047 --- [frauddetector] [pool-2-thread-1] c.m.f.s.TransactionChangeStreamListener  : Performing vector search
-2025-02-24T15:29:57.050Z  INFO 81047 --- [frauddetector] [   scheduling-1] c.m.f.service.TransactionProducer        : Transaction sent to topic transactions</pre>
+2025-02-24T15:29:57.050Z  INFO 81047 --- [frauddetector] [   scheduling-1] c.m.f.service.TransactionProducer        : Transaction sent to topic transactions
+```
+
 
 Conclusion {#h2-30-conclusion}
 ------------------------------

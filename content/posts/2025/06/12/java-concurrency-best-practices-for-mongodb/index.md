@@ -34,7 +34,8 @@ Writes to a single document in MongoDB are [atomic](https://www.mongodb.com/docs
 
 The [example](https://gist.github.com/couragecowardlydog/34e8026bd74b69031b198f5e25b4adfe) below demonstrates this issue. Two threads read the same inventory document and update the quantity field independently. The reads and writes are not coordinated, meaning one thread's update may overwrite the other's, resulting in an inconsistent state.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java"><code class="language-java">package io.gitrebase;
+```java
+<code class="language-java">package io.gitrebase;
 
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
@@ -55,7 +56,7 @@ public class InventoryUpdate {
     public static void main(String[] args) {
         MongoClient mongoClient = MongoClients.create("mongodb://localhost:27017,localhost:27018,localhost:27019/?replicaSet=rs0");
         MongoDatabase database = mongoClient.getDatabase(DATABASE_NAME);
-        MongoCollection&lt;Document&gt; collection = database.getCollection(COLLECTION_NAME);
+        MongoCollection<Document> collection = database.getCollection(COLLECTION_NAME);
 
         Document product = new Document("productCode", "PROD_001")
                 .append("name", "Laptop")
@@ -65,13 +66,13 @@ public class InventoryUpdate {
 
         ExecutorService executorService = Executors.newFixedThreadPool(2);
 
-        executorService.submit(() -&gt; updateProductQuantity(collection, "PROD_001", -5));  // decrease by 5
-        executorService.submit(() -&gt; updateProductQuantity(collection, "PROD_001", 10));  // increase by 10
+        executorService.submit(() -> updateProductQuantity(collection, "PROD_001", -5));  // decrease by 5
+        executorService.submit(() -> updateProductQuantity(collection, "PROD_001", 10));  // increase by 10
 
         executorService.shutdown();
     }
 
-    public static void updateProductQuantity(MongoCollection&lt;Document&gt; collection, String productCode, int quantityChange) {
+    public static void updateProductQuantity(MongoCollection<Document> collection, String productCode, int quantityChange) {
         try {
             // Find product by productCode
             Document productDoc = collection.find(Filters.eq("productCode", productCode)).first();
@@ -96,7 +97,9 @@ public class InventoryUpdate {
             System.out.println("Error during update: " + e.getMessage());
         }
     }
-}</code></pre>
+}</code>
+```
+
 
 To avoid lost updates, it's best to shift the responsibility for concurrency control to the database itself, where possible. For example, using atomic update operators like [`$inc`](https://www.mongodb.com/docs/manual/reference/operator/update/inc/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=Java+Concurrency+Best+Practices&utm_term=tim.kelly#mongodb-update-up.-inc) allows MongoDB to apply changes directly without requiring a read-modify-write cycle in the application. This reduces the chance of conflicting updates and helps maintain data integrity even under concurrent access.
 
@@ -114,7 +117,8 @@ A non-repeatable read occurs when a client reads the same document multiple time
 
 For the [example](https://gist.github.com/couragecowardlydog/6457af17307f2f3f9acb8e4b1dcda4ab#file-nonrepeatableread-java) below, Client A reads a document before processing another query. Meanwhile, Client B modifies this document. Later, when Client A reads the same document again, it sees the modified version of the document, resulting in a non-repeatable read.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java"><code class="language-java">package io.gitrebase;
+```java
+<code class="language-java">package io.gitrebase;
 
 import com.mongodb.client.*;
 import com.mongodb.client.model.Filters;
@@ -130,8 +134,8 @@ public class NonRepeatableRead {
     public static void main(String[] args) throws InterruptedException {
         MongoClient mongoClient = MongoClients.create("mongodb://localhost:27017,localhost:27018,localhost:27019/?replicaSet=rs0");
         MongoDatabase database = mongoClient.getDatabase(DATABASE_NAME);
-        MongoCollection&lt;Document&gt; products = database.getCollection(COLLECTION_PRODUCTS);
-        MongoCollection&lt;Document&gt; orders = database.getCollection(COLLECTION_ORDERS);
+        MongoCollection<Document> products = database.getCollection(COLLECTION_PRODUCTS);
+        MongoCollection<Document> orders = database.getCollection(COLLECTION_ORDERS);
 
         products.deleteMany(Filters.eq("category", "PIZZA"));
         Document pizza = new Document("_id", "PIZZA_001")
@@ -142,7 +146,7 @@ public class NonRepeatableRead {
         System.out.println("Inserted product: " + pizza.toJson());
 
         // Client A 
-        Thread clientAThread = new Thread(() -&gt; {
+        Thread clientAThread = new Thread(() -> {
             try {
                 // t1: Fetch product price
                 System.out.println("Client A: Fetching product ...");
@@ -172,7 +176,7 @@ public class NonRepeatableRead {
             }
         });
 
-        Thread clientBThread = new Thread(() -&gt; {
+        Thread clientBThread = new Thread(() -> {
             try {
                 // Increment pizza price by 10%
                 Thread.sleep(1000);  // ensure it happens after t1
@@ -190,7 +194,9 @@ public class NonRepeatableRead {
         clientAThread.join();
         clientBThread.join();
     }
-}</code></pre>
+}</code>
+```
+
 
 * At time t1, Client A issues `findOne({ \_id: 'PIZZA\_001' })` on the products collection to retrieve product details.
 * At time t2, Client B updates all documents in the products collection where `category = 'PIZZA'` by incrementing their price by 10% using `{ $mul: { price: 1.10 } }`.
@@ -316,7 +322,8 @@ If a multi-document transaction uses \\`readConcern: "majority"\`, different rea
 
 In the previous example of a non-repeatable read, the entire sequence of operation can be isolated from the write operation using the MongoDB transaction API with an appropriate read concern.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java"><code class="language-java">package io.gitrebase;
+```java
+<code class="language-java">package io.gitrebase;
 
 import com.mongodb.ReadConcern;
 import com.mongodb.ReadPreference;
@@ -337,8 +344,8 @@ public class InventoryUpdateWithTransaction {
     public static void main(String[] args) throws InterruptedException {
         MongoClient client = MongoClients.create(MONGO_URI);
         MongoDatabase database = client.getDatabase(DATABASE_NAME);
-        MongoCollection&lt;Document&gt; products = database.getCollection(COLLECTION_PRODUCTS);
-        MongoCollection&lt;Document&gt; orders = database.getCollection(COLLECTION_ORDERS);
+        MongoCollection<Document> products = database.getCollection(COLLECTION_PRODUCTS);
+        MongoCollection<Document> orders = database.getCollection(COLLECTION_ORDERS);
 
         products.deleteMany(Filters.eq("category", "PIZZA"));
         Document pizza = new Document("_id", "PIZZA_001")
@@ -349,7 +356,7 @@ public class InventoryUpdateWithTransaction {
         System.out.println("Inserted product: " + pizza.toJson());
 
         // Write to the same collection from another thread
-        Thread clientAThread = new Thread(() -&gt; {
+        Thread clientAThread = new Thread(() -> {
 
             final ClientSession clientSession = client.startSession();
             TransactionOptions txnOptions = TransactionOptions.builder()
@@ -357,7 +364,7 @@ public class InventoryUpdateWithTransaction {
                     .readConcern(ReadConcern.SNAPSHOT)
                     .writeConcern(WriteConcern.MAJORITY)
                     .build();
-            TransactionBody txnBody = (TransactionBody&lt;String&gt;) () -&gt; {
+            TransactionBody txnBody = (TransactionBody<String>) () -> {
                 try {
                     System.out.println("Client A: Fetching product ...");
                     Document firstRead = products.find(clientSession, Filters.eq("_id", "PIZZA_001")).first();
@@ -386,7 +393,7 @@ public class InventoryUpdateWithTransaction {
         });
 
         // Write to the same collection from another thread
-        Thread clientBThread = new Thread(() -&gt; {
+        Thread clientBThread = new Thread(() -> {
             try {
                 Thread.sleep(1000);
                 // Increment pizza price by 10%
@@ -404,7 +411,9 @@ public class InventoryUpdateWithTransaction {
         clientAThread.join();
         clientBThread.join();
     }
-}</code></pre>
+}</code>
+```
+
 
 Using SNAPSHOT isolation ensures the client observes a consistent view throughout the transaction, even if a concurrent write operation happens outside. The second read shows the same price as the first, despite Client B's concurrent update.
 

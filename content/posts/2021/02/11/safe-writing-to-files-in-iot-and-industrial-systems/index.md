@@ -59,7 +59,10 @@ Note that we skipped the file close(). We can safely write a portion of a file (
 
 Our application may be asked to shutdown before our naturally reaches a sync() point. As it is impractical to add shutdown related logic in each I/O related code, shutdown hooks run on regular(!) JVM shutdown an allow us to clean up and flush/sync databases and files.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">Runtime.getRuntime().addShutdownHook()</pre>
+```java
+Runtime.getRuntime().addShutdownHook()
+```
+
 
 Note that Shutdown hooks run during a "soft kill" but do NOT run during a "hard kill" of the JVM.
 

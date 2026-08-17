@@ -53,17 +53,20 @@ DPoP requires the client to send a **DPoP Proof** JWT with every request. This p
 
 The flow works as follows:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">1. Client generates an asymmetric key pair.
+```
+1. Client generates an asymmetric key pair.
 2. During the token request, the client sends a DPoP proof JWT whose header contains the public key (JWK).
 3. The authorization server issues a DPoP-bound access token containing the JWK thumbprint (cnf.jkt).
 4. When calling a protected resource, the client sends:
-   - Authorization: DPoP &lt;access_token&gt;
-   - DPoP: &lt;signed proof JWT&gt;
+   - Authorization: DPoP <access_token>
+   - DPoP: <signed proof JWT>
 5. The resource server:
    - Verifies the proof signature
    - Checks that the proof's public key matches the token's cnf.jkt
    - Validates htm, htu, iat, jti
-   - Verifies the ath claim binding the proof to the access token</pre>
+   - Verifies the ath claim binding the proof to the access token
+```
+
 
 With this model, stealing the token alone is not enough. The attacker cannot generate valid proofs without the private key, limiting any potential misuse to an already captured, unused proof within its narrow validity window. Compare this to the Bearer model, where a stolen token grants unrestricted access until it expires. DPoP does not eliminate token theft, but it makes stolen tokens fundamentally harder to exploit.
 
@@ -97,17 +100,23 @@ To see DPoP in practice, I built a Quarkus application with protected REST endpo
 
 The application uses Quarkus 3.32.2 with the following key extension: **OpenId Connect**. Quarkus provides extensions for OpenID Connect and OAuth 2.0 access token management, focusing on acquiring, refreshing, and propagating tokens.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="xml">&lt;dependency&gt;
-    &lt;groupId&gt;io.quarkus&lt;/groupId&gt;
-    &lt;artifactId&gt;quarkus-oidc&lt;/artifactId&gt;
-&lt;/dependency&gt;</pre>
+```xml
+<dependency>
+    <groupId>io.quarkus</groupId>
+    <artifactId>quarkus-oidc</artifactId>
+</dependency>
+```
+
 
 The `quarkus.oidc.auth-server-url` property specifies the base URL of the OpenID Connect (OIDC) server, which points to the Keycloak instance in this case:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="ini">quarkus.http.port=8180
+```ini
+quarkus.http.port=8180
 quarkus.oidc.auth-server-url=http://localhost:8080/realms/master
 quarkus.oidc.client-id=dpop-demo
-quarkus.oidc.token.authorization-scheme=dpop</pre>
+quarkus.oidc.token.authorization-scheme=dpop
+```
+
 
 The key line here is `quarkus.oidc.token.authorization-scheme=dpop`. This property tells Quarkus OIDC extension to expect the `Authorization: DPoP ` scheme and to perform the full DPoP proof verification process as defined by [RFC 9449](https://datatracker.ietf.org/doc/html/rfc9449). This includes validating the proof's signature, `htm`, `htu`, `ath`, and the `cnf` thumbprint binding between the token and the proof's public key.
 
@@ -115,7 +124,8 @@ The key line here is `quarkus.oidc.token.authorization-scheme=dpop`. This proper
 
 The application exposes three endpoints under the `/api` path, all requiring authentication. Each endpoint returns the caller's name and the token type (Bearer or DPoP) by checking the presence of the `cnf` claim in the JWT:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">@Path("/api")
+```java
+@Path("/api")
 @Authenticated
 public class ProtectedResource {
 
@@ -152,7 +162,9 @@ public class ProtectedResource {
                 jwt.containsClaim("cnf") ? "DPoP" : "Bearer"
         );
     }
-}</pre>
+}
+```
+
 
 Having both GET and POST on `/user-info` plus a separate `/list-users` endpoint is intentional. These allow us to demonstrate how DPoP proof claims (`htm` and `htu`) restrict token usage to a specific HTTP method and URL.
 
@@ -162,13 +174,14 @@ As mentioned above, Quarkus OIDC extension handles the core DPoP verification. H
 
 I added a minimal `@ServerRequestFilter` that records each proof's `jti` and rejects any reuse:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">@Singleton
+```java
+@Singleton
 public class DpopJtiFilter {
 
-    private final Set&lt;String&gt; usedJtis = ConcurrentHashMap.newKeySet();
+    private final Set<String> usedJtis = ConcurrentHashMap.newKeySet();
 
     @ServerRequestFilter
-    public Optional&lt;Response&gt; checkJti(ContainerRequestContext ctx) {
+    public Optional<Response> checkJti(ContainerRequestContext ctx) {
         String dpopHeader = ctx.getHeaderString("DPoP");
         if (dpopHeader == null || dpopHeader.isBlank()) {
             return Optional.empty();
@@ -183,7 +196,7 @@ public class DpopJtiFilter {
             String payloadJson = new String(
                     Base64.getUrlDecoder().decode(parts[1]));
             String jti = extractJti(payloadJson);
-            if (jti != null &amp;&amp; !usedJtis.add(jti)) {
+            if (jti != null && !usedJtis.add(jti)) {
                 return Optional.of(Response.status(Response.Status.UNAUTHORIZED)
                         .type(MediaType.TEXT_PLAIN)
                         .entity("DPoP proof replay detected: jti '%s' has already been used"
@@ -198,7 +211,9 @@ public class DpopJtiFilter {
     }
 
     // ...
-}</pre>
+}
+```
+
 
 In this example, I use an in-memory `ConcurrentHashMap` to keep the demo simple. In a production environment, you would use a distributed store such as Redis or Infinispan to track used `jti` values across multiple application instances and to apply TTL-based eviction aligned with the proof's validity window.
 
@@ -210,7 +225,10 @@ However, this protection only covers requests made to Keycloak itself. Once a DP
 
 The repository includes a k6 test script (`k6/dpop-test.js`) that exercises the full DPoP flow. Run it with:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash">k6 run k6/dpop-test.js</pre>
+```bash
+k6 run k6/dpop-test.js
+```
+
 
 The script performs seven HTTP calls in sequence. The first request obtains a DPoP-bound token from Keycloak, the next three are happy-path requests (one per endpoint), and the final three test failure scenarios. Let's take a closer look at what happens behind the scenes at both the Keycloak and Quarkus layers:
 
@@ -223,7 +241,8 @@ Before any resource access, the script requests a DPoP-bound access token:
 3. It sends a `POST` to the token endpoint with the `DPoP` header and user credentials (`grant_type=password`).
 4. **Keycloak** validates the DPoP proof (signature, structure, claims), then issues an access token containing a `cnf` (confirmation) claim with the SHA-256 thumbprint of the client's public key. This binds the token to that specific key pair. Notice the `typ: DPoP` and the `cnf.jkt` field in the issued token:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="json">{
+```json
+{
   "typ": "DPoP",
   "azp": "dpop-demo",
   "sub": "830783f9-ab1b-4c41-9c23-fa6a335de1bc",
@@ -232,26 +251,34 @@ Before any resource access, the script requests a DPoP-bound access token:
   },
   "scope": "email profile",
   "preferred_username": "hakdogan"
-}</pre>
+}
+```
+
 
 #### 2. GET /user-info (Happy Path)
 
 1. The script creates a **fresh DPoP proof** for `GET /api/user-info` with a new `jti`, current `iat`, and an `ath` computed from the access token's SHA-256 hash. The proof payload looks like this:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="json">{
+```json
+{
   "jti": "6f0bf628-309d-489b-9243-38ed169e1d8c",
   "htm": "GET",
   "htu": "http://localhost:8180/api/user-info",
   "iat": 1772897361,
   "ath": "3yFPVhSab16gaSgMAFtZCgm7GXpBMx5t3ZYCeuWqT0w"
-}</pre>
+}
+```
+
 
 2. It sends `GET /api/user-info` with `Authorization: DPoP ` and `DPoP: `.
 3. **Quarkus jti filter** checks the proof's `jti` against the used-jti store. This is a new `jti`, so the request passes through.
 4. **Quarkus OIDC** **extension** validates the DPoP proof as required by [RFC 9449 (Section 7.1)](https://datatracker.ietf.org/doc/html/rfc9449#section-7.1), which assigns this responsibility to the resource server. It verifies the proof's signature, confirms `htm` matches `GET`, `htu` matches the request URL, `ath` matches the token hash, and the `cnf` thumbprint in the token matches the proof's public key. All checks pass.
 5. The endpoint reads the `cnf` claim from the token, identifies it as a DPoP token, and responds:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="raw">HTTP 200: Hello, hakdogan! Token type: DPoP</pre>
+```
+HTTP 200: Hello, hakdogan! Token type: DPoP
+```
+
 
 The script repeats this same flow for `POST /user-info` and `POST /list-users`, each with a fresh proof matching the target method and URL. Both return `200` with the same response.
 
@@ -260,9 +287,10 @@ The script repeats this same flow for `POST /user-info` and `POST /list-users`, 
 1. The script sends the **exact same proof** that was used in the happy path request.
 2. **Quarkus jti filter** checks the `jti` and finds it already in the used-jti store. The request is rejected before reaching OIDC validation:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="raw">HTTP 401: DPoP proof replay detected: jti '...' has already been used
+```
+HTTP 401: DPoP proof replay detected: jti '...' has already been used
+```
 
-</pre>
 
 > **Note:** The error message above includes the `jti` value for demonstration purposes, making it easy to observe what the filter caught. In a production environment, avoid exposing internal claim values in error responses. A generic `401 Unauthorized` with no body, or a minimal message like `"invalid DPoP proof"`, is sufficient and prevents information leakage.
 
@@ -272,7 +300,10 @@ The script repeats this same flow for `POST /user-info` and `POST /list-users`, 
 2. **Quarkus jti filter** passes the request (new `jti`).
 3. **Quarkus OIDC** **extension** compares the proof's `htm` (`GET`) with the actual request method (`POST`). They do not match. The request is rejected:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="raw">HTTP 401</pre>
+```
+HTTP 401
+```
+
 
 #### 5. POST /list-users (URL Mismatch - htu)
 
@@ -281,19 +312,25 @@ The script repeats this same flow for `POST /user-info` and `POST /list-users`, 
 3. **Quarkus jti filter** passes the request (new `jti`).
 4. **Quarkus OIDC** **extension** compares the proof's `htu` with the actual request URL. They do not match. The request is rejected:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="raw">HTTP 401</pre>
+```
+HTTP 401
+```
+
 
 ```
 All seven checks pass:
 ```
 
-<pre class="EnlighterJSRAW" data-enlighter-language="raw">✓ Token request succeeds
+```
+✓ Token request succeeds
 ✓ GET /user-info returns 200
 ✓ POST /user-info returns 200
 ✓ POST /list-users returns 200
 ✓ Replay attack returns 401
 ✓ htm mismatch returns 401
-✓ htu mismatch returns 401</pre>
+✓ htu mismatch returns 401
+```
+
 
 In contrast, if the same requests were sent as plain Bearer tokens without DPoP proofs, all of them would succeed with `200`. The replay, method mismatch, and URL mismatch scenarios would go undetected because there is no proof to validate. **This is exactly the gap that DPoP closes.**
 

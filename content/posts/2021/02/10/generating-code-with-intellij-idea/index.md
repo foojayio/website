@@ -40,18 +40,22 @@ Before we move on, a closely related shortcut is the one we use for a new Scratc
 
 Now that you've got your class, you may want to generate a constructor or two. However, before we do that, let's add a couple of variables to our class:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public class GenerateCode {
+```java
+public class GenerateCode {
    private final String name = "Helen";
    private int age;
    private String mood;
-}</pre>
+}
+```
+
 
 We can use the same shortcut to make ourselves a constructor. We get some options here because we've got some fields in our class:  
 ![Choose fields to initialize by construtor](generate-constructor-700x407.png)  
 
 IntelliJ IDEA is asking us if we want to pass our fields into our Constructor. If we select both and click **OK** we have our Constructor with the parameters passed in.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public class GenerateCode {
+```java
+public class GenerateCode {
    private final String name = "Helen";
    private int age;
    private String mood;
@@ -60,7 +64,9 @@ IntelliJ IDEA is asking us if we want to pass our fields into our Constructor. I
        this.age = age;
        this.mood = mood;
    }
-}</pre>
+}
+```
+
 
 Other Class-Based Generate Options {#h2-2-other-class-based-generate-options}
 -----------------------------------------------------------------------------
@@ -83,11 +89,14 @@ Implement Methods {#h2-3-implement-methods}
 
 When our Java class implements an interface, we need to ensure that we implement that interface's methods. The Generate menu helps us here too. Let's say that our code looks like this, and we're implementing `NewInterface`:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public class GenerateCode implements NewInterface {
+```java
+public class GenerateCode implements NewInterface {
    private final String name = "Helen";
    private int age;
    private String mood;
-}</pre>
+}
+```
+
 
 When we use **⌘N** on macOS, or **Alt+Insert** on Windows and Linux this time, we see select a new option call Implement Methods:  
 ![Select methods to implement](implement-methods-700x343.png)
@@ -96,7 +105,8 @@ The keyboard shortcut is **⌃I** on macOS, or **Ctrl+I** on Windows/Linux. This
 
 Now IntelliJ IDEA has generated that code for us:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public class GenerateCode implements NewInterface {
+```java
+public class GenerateCode implements NewInterface {
    private final String name = "Helen";
    private int age;
    private String mood;
@@ -108,7 +118,9 @@ Now IntelliJ IDEA has generated that code for us:
    @Override
    public void goSomewhere() {
    }
-}</pre>
+}
+```
+
 
 This also works for overriding methods from superclasses/super abstract classes.
 
@@ -117,14 +129,17 @@ Add Parameters / Arguments {#h2-4-add-parameters-arguments}
 
 Another useful trick you so is to use **⌘N** on macOS, or **Alt+Insert** on Windows and Linux when you're in a dialogue, and you need to add more rows or data. For example, we added a default constructor to our class, but we now want to refactor it to change the signature. Our code currently reflects the default constructor:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public class GenerateCode{
+```java
+public class GenerateCode{
    private final String name = "Helen";
    private int age;
    private String mood;
 
    public GenerateCode() {
    }
-}</pre>
+}
+```
+
 
 Let's refactor the Constructor with **⌘F6** on macOS, or **Ctrl+F6** on Windows/Linux. In the Change Signature dialogue, you can use **⌘N** on macOS, or **Alt+Insert** on Windows/Linux to add a new parameter. This saves you using your mouse to click the little **+** icon.
 

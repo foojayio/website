@@ -151,28 +151,35 @@ The developer programs *idServer's* system specification within the *idServer* d
 
 As can be seen below, the source code is in the *src* subdirectory. It contains the module information *module-info.java* , the system declaration *IdServer.java* , and the activity specification *IdService.java*.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="raw" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">idServer/
+```
+idServer/
 └── src
     ├── idSever
-    │&nbsp;&nbsp; ├── IdServer.java
-    │&nbsp;&nbsp; └── IdService.java
+    │   ├── IdServer.java
+    │   └── IdService.java
     └── module-info.java
 
-3 directories, 3 files</pre>
+3 directories, 3 files
+```
+
 
 #### Module descriptor *module-info.java*
 
 The module descriptor describes the *idServer* module. As can be seen below, it requires the *fepcos.j.annotation* module for compile time.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="module-info.java" data-enlighter-group="g1">module idServer {
+```java
+module idServer {
     requires static fepcos.j.annotation;
-}</pre>
+}
+```
+
 
 #### System declaration *IdServer.java*
 
 The *IdServer* class is the server's system declaration. As can be seen below, it is implemented in the *idServer* package.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="IdServer.java" data-enlighter-group="g2">package idServer;
+```java
+package idServer;
 
 import fepcos.j.annotation.*;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -194,7 +201,9 @@ class IdServer {
     void stop() {
         System.out.println("--- next ID: " + counter.get());
     }
-}</pre>
+}
+```
+
 
 The class imports ***fepcos.j.annotation.\**** . In particular, this package contains *@SYDec* , *@Cap* , *@Start* , and *@Stop*.
 
@@ -212,7 +221,8 @@ Further, the *IdServer* class imports `java.util.concurrent.atomic.AtomicInteger
 
 The *IdService* class is the activity specification of the service. It is also implemented in the *idServer* package.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="IdService.java" data-enlighter-group="g3">package idServer;
+```java
+package idServer;
 
 import fepcos.j.annotation.*;
 
@@ -224,7 +234,9 @@ class IdService {
     void go(IdServer srv) {
         id=srv.counter.getAndIncrement();
     }
-}</pre>
+}
+```
+
 
 The class imports ***fepcos.j.annotation.\**** . In particular, this package contains *@AYSpec* , *@Out* , and *@Behavior*.
 
@@ -278,19 +290,26 @@ Below is the complete source code of a client that blockingly accesses the serve
 
 It is important to realize that `idServer.imp.S` implements the AutoCloseable interface. Thus, it is declared in a `try`-with-resources statement [\[17\]](#resources).
 
-<pre class="EnlighterJSRAW" data-enlighter-language="raw" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="idServer/src" data-enlighter-group="client">idClient/
+```
+idClient/
 └── src
     ├── idClient
-    │&nbsp;&nbsp; └── App.java
+    │   └── App.java
     └── module-info.java
 
-3 directories, 2 files</pre>
+3 directories, 2 files
+```
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="module-info.java" data-enlighter-group="client">module idClient {
+
+```java
+module idClient {
     requires idServer.imp;
-}</pre>
+}
+```
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="App.java" data-enlighter-group="client">package idClient;
+
+```java
+package idClient;
 
 public class App {
     public static void main(String[] args) {
@@ -300,7 +319,9 @@ public class App {
         }
         catch(Exception e) { System.out.println(e); }
     }
-}</pre>
+}
+```
+
 
 Conclusion {#conclusion}
 ------------------------

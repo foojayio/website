@@ -36,7 +36,8 @@ Sample Java test class
 
 Let's start with the simple test from my first article:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">// begin file: simple.java
+```
+// begin file: simple.java
 import java.sql.*;
 import java.util.Properties;
 //
@@ -69,7 +70,9 @@ class Simple
         // --
     }
 }
-// end of file: simple.java</pre>
+// end of file: simple.java
+```
+
 
 To build this java executable on the CLI:
 
@@ -95,19 +98,25 @@ sudo yum install wireshark-cli
 
 To list the network traffic with a PostgreSQL summary, use:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">sudo tshark -i any  -f 'tcp port 5432' -d tcp.port==5432,pgsql
-</pre>
+```
+sudo tshark -i any  -f 'tcp port 5432' -d tcp.port==5432,pgsql
+```
+
 
 To list the network traffic with the PostgreSQL traffic fully decoded, use:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">sudo tshark -i any -f 'tcp port 5432' -d tcp.port==5432,pgsql -O pgsql</pre>
+```
+sudo tshark -i any -f 'tcp port 5432' -d tcp.port==5432,pgsql -O pgsql
+```
+
 
 Standard Statement Batching {#h2-0-standard-statement-batching}
 ---------------------------------------------------------------
 
 Let's use the following code snippet to create or truncate a table, then execute three insert statements in the batched mode:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">// --
+```
+// --
 try
 (
     Connection connection = DriverManager.getConnection(url, properties);
@@ -130,7 +139,9 @@ catch (SQLException e)
 {
     e.printStackTrace();
 }
-// --</pre>
+// --
+```
+
 
 (replace this snippet with the code in between the `// --` remarks in the sample)
 
@@ -138,8 +149,11 @@ To look at the actual execution details, use the Wireshark summary from the capt
 
 This is how the relevant capture lines look like for the executed batch. The below network round trip is the result of `statement.executeBatch`. The `statement.addBatch` command adds the requests to the java `Statement` object:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">20 0.124569812    127.0.0.1 → 127.0.0.1    PGSQL 313 &gt;P/B/D/E/P/B/D/E/P/B/D/E/S
-21 0.127215541    127.0.0.1 → 127.0.0.1    PGSQL 167 &lt;1/2/n/C/1/2/n/C/1/2/n/C/Z</pre>
+```
+20 0.124569812    127.0.0.1 → 127.0.0.1    PGSQL 313 >P/B/D/E/P/B/D/E/P/B/D/E/S
+21 0.127215541    127.0.0.1 → 127.0.0.1    PGSQL 167 <1/2/n/C/1/2/n/C/1/2/n/C/Z
+```
+
 
 Frame 20 contains the batch, and it's not hard to spot a repetition of `P/B/D/E` occurring three times and an `S` following it.
 
@@ -154,7 +168,8 @@ PreparedStatement Batching {#h2-1-preparedstatement-batching}
 
 Now, let's run the same test using a PreparedStatement object:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">// --
+```
+// --
 try
 (
     Connection connection = DriverManager.getConnection(url, properties);
@@ -188,14 +203,19 @@ catch (SQLException e)
 {
     e.printStackTrace();
 }
-// --</pre>
+// --
+```
+
 
 This is the relevant part of the Wireshark capture of the protocol summaries, which shows the frames from the batch executed:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">20 0.110607534    127.0.0.1 ? 127.0.0.1    PGSQL 144 &gt;P/D/S
-21 0.110961186    127.0.0.1 ? 127.0.0.1    PGSQL 99 &lt;1/t/n/Z
-22 0.111643980    127.0.0.1 ? 127.0.0.1    PGSQL 223 &gt;B/D/E/B/D/E/B/D/E/S
-23 0.113696151    127.0.0.1 ? 127.0.0.1    PGSQL 152 &lt;2/n/C/2/n/C/2/n/C/Z</pre>
+```
+20 0.110607534    127.0.0.1 ? 127.0.0.1    PGSQL 144 >P/D/S
+21 0.110961186    127.0.0.1 ? 127.0.0.1    PGSQL 99 <1/t/n/Z
+22 0.111643980    127.0.0.1 ? 127.0.0.1    PGSQL 223 >B/D/E/B/D/E/B/D/E/S
+23 0.113696151    127.0.0.1 ? 127.0.0.1    PGSQL 152 <2/n/C/2/n/C/2/n/C/Z
+```
+
 
 Using the combination of batching and prepared statements results in a new pattern.
 
@@ -207,7 +227,8 @@ The response, frame 23, is a sequence of 2/bind completion, n/no data, C/command
 
 Now, let's take a deeper look at frame 20, to see if it produces a prepared statement request:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">Frame 20: 144 bytes on wire (1152 bits), 144 bytes captured (1152 bits) on interface 0
+```
+Frame 20: 144 bytes on wire (1152 bits), 144 bytes captured (1152 bits) on interface 0
 Linux cooked capture
 Internet Protocol Version 4, Src: 127.0.0.1, Dst: 127.0.0.1
 Transmission Control Protocol, Src Port: 44482, Dst Port: 5432, Seq: 433, Ack: 671, Len: 76
@@ -225,7 +246,9 @@ PostgreSQL
     Statement: S_1
 PostgreSQL
     Type: Sync
-    Length: 4</pre>
+    Length: 4
+```
+
 
 Yes, the Statement: property of the Parse message has a name (`S_1`), indicating it's a named statement, and thus a request that generates a database side prepared statement. This means that despite the fact the JDBC drivers sets the `prepareThreshold` to five by default (see the [first article](https://foojay.io/today/a-dissection-of-java-jdbc-to-postgresql-connections/ "first article") for details), once a `PreparedStatement` object is batching with at least two statements, it will create a prepared statement in the database immediately.
 
@@ -236,19 +259,27 @@ Another noteworthy PostgreSQL JDBC driver feature is the `reWriteBatchedInserts`
 
 This feature automatically rewrites multiple inserts in the same batch, such as:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">insert into mytable (f1, f2) values (?, ?);
-insert into mytable (f1, f2) values (?, ?);</pre>
+```
+insert into mytable (f1, f2) values (?, ?);
+insert into mytable (f1, f2) values (?, ?);
+```
+
 
 To a "multi-value insert" like this one:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">insert into mytable (f1, f2) values (?, ?), (?, ?);</pre>
+```
+insert into mytable (f1, f2) values (?, ?), (?, ?);
+```
+
 
 The reason for performing this rewrite is that when multiple values are specified with a single insert statement, the insert statement is executed once, and only during the part of the insert where the values are inserted into the rows, it is repeating the work of inserting the values, and therefore removing a lot of the overhead of repeatedly executing a statement.
 
 To use the `reWriteBatchedInserts` feature, set this property to "true" during the Connection configuration:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">properties.setProperty("reWriteBatchedInserts", true);
-</pre>
+```
+properties.setProperty("reWriteBatchedInserts", true);
+```
+
 
 Standard Statement Batching and reWriteBatchedInserts {#h2-3-standard-statement-batching-and-rewritebatchedinserts}
 -------------------------------------------------------------------------------------------------------------------
@@ -279,27 +310,32 @@ Prepared statement batching with reWriteBatchedInserts {#h2-5-prepared-statement
 
 When using prepared statements for inserts using bind variables without `reWriteBatchedInserts` set to true, such as the code snippet with "PreparedStatement Batching" is showing above, it will show the following JDBC call sequence:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">22 0.127353682    127.0.0.1 → 127.0.0.1    PGSQL 144 &gt;P/D/S
-23 0.130447227    127.0.0.1 → 127.0.0.1    PGSQL 99 &lt;1/t/n/Z
-24 0.131129439    127.0.0.1 → 127.0.0.1    PGSQL 223 &gt;B/D/E/B/D/E/B/D/E/S
-25 0.132860774    127.0.0.1 → 127.0.0.1    PGSQL 152 &lt;2/n/C/2/n/C/2/n/C/Z
-</pre>
+```
+22 0.127353682    127.0.0.1 → 127.0.0.1    PGSQL 144 >P/D/S
+23 0.130447227    127.0.0.1 → 127.0.0.1    PGSQL 99 <1/t/n/Z
+24 0.131129439    127.0.0.1 → 127.0.0.1    PGSQL 223 >B/D/E/B/D/E/B/D/E/S
+25 0.132860774    127.0.0.1 → 127.0.0.1    PGSQL 152 <2/n/C/2/n/C/2/n/C/Z
+```
+
 
 As we saw with 'PreparedStatement Batching' earlier: the three inserts are combined in a single frame, making it as optimal as possible.
 
 Simply by switching `reWriteBatchedInserts` to true, this changes to:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">18 0.111941067    127.0.0.1 → 127.0.0.1    PGSQL 131 &gt;P/B/D/E/S
-19 0.119648309    127.0.0.1 → 127.0.0.1    PGSQL 109 &lt;1/2/n/C/Z
-20 0.122509169    127.0.0.1 → 127.0.0.1    PGSQL 317 &gt;P/B/D/E/P/B/D/E/S
-21 0.125357236    127.0.0.1 → 127.0.0.1    PGSQL 136 &lt;1/2/n/C/1/2/n/C/Z
-</pre>
+```
+18 0.111941067    127.0.0.1 → 127.0.0.1    PGSQL 131 >P/B/D/E/S
+19 0.119648309    127.0.0.1 → 127.0.0.1    PGSQL 109 <1/2/n/C/Z
+20 0.122509169    127.0.0.1 → 127.0.0.1    PGSQL 317 >P/B/D/E/P/B/D/E/S
+21 0.125357236    127.0.0.1 → 127.0.0.1    PGSQL 136 <1/2/n/C/1/2/n/C/Z
+```
+
 
 This shows that the three executions are now combined into two executions, which means a sequence of P/Parse, B/Bind, D/Describe, E/Execute.
 
 The optimization of single values inserts changed to multi-value inserts can be best seen by looking at the PostgreSQL packet details:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">Frame 20: 317 bytes on wire (2536 bits), 317 bytes captured (2536 bits) on interface 0
+```
+Frame 20: 317 bytes on wire (2536 bits), 317 bytes captured (2536 bits) on interface 0
 Linux cooked capture
 Internet Protocol Version 4, Src: 127.0.0.1, Dst: 127.0.0.1
 Transmission Control Protocol, Src Port: 43710, Dst Port: 5432, Seq: 433, Ack: 671, Len: 249
@@ -375,7 +411,9 @@ PostgreSQL
     Returns: 1 rows
 PostgreSQL
     Type: Sync
-    Length: 4</pre>
+    Length: 4
+```
+
 
 These are the messages sent by JDBC with `reWriteBatchedInserts` set to true for a `PreparedStatement` batched object with single value insert statements. The batched insert statements have been rewritten to multi-values inserts, however, in this case it creates two of them: one with two values, and one with one.
 
@@ -385,7 +423,8 @@ This means that the optimization we saw with 'Prepared Statement Batching', whic
 
 Maybe the rewritten insert statements needs to be executed prepareThreshold times? Let's test this:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">// -- the property reWriteBatchedInserts is set to true
+```
+// -- the property reWriteBatchedInserts is set to true
 try
 (
     Connection connection = DriverManager.getConnection(url, properties);
@@ -397,7 +436,7 @@ try
     statement.execute("create table if not exists test(id int primary key, f1 text)");
     statement.execute("truncate table test");
 
-    for (int counter = 0; counter &lt;= 100; counter+=5)
+    for (int counter = 0; counter <= 100; counter+=5)
     {
         prepared_statement.setInt(1, counter);
         prepared_statement.setString(2, "A");
@@ -425,58 +464,64 @@ catch (SQLException e)
 {
     e.printStackTrace();
 }
-// --</pre>
+// --
+```
+
 
 Using the for loop, the resulting insert statements should be executed 100/5=20 times. By looking at the PostgreSQL protocol summaries we can spot if the P/parse messages are going away or not:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">22 0.138047126    127.0.0.1 ? 127.0.0.1    PGSQL 385 &gt;P/B/D/E/P/B/D/E/S     -- 1
-23 0.145342080    127.0.0.1 ? 127.0.0.1    PGSQL 136 &lt;1/2/n/C/1/2/n/C/Z
-24 0.146053779    127.0.0.1 ? 127.0.0.1    PGSQL 385 &gt;P/B/D/E/P/B/D/E/S     -- 2
-25 0.147729746    127.0.0.1 ? 127.0.0.1    PGSQL 136 &lt;1/2/n/C/1/2/n/C/Z
-26 0.148182343    127.0.0.1 ? 127.0.0.1    PGSQL 385 &gt;P/B/D/E/P/B/D/E/S     -- 3
-27 0.149013626    127.0.0.1 ? 127.0.0.1    PGSQL 136 &lt;1/2/n/C/1/2/n/C/Z
-28 0.149394022    127.0.0.1 ? 127.0.0.1    PGSQL 385 &gt;P/B/D/E/P/B/D/E/S     -- 4
-29 0.150775388    127.0.0.1 ? 127.0.0.1    PGSQL 136 &lt;1/2/n/C/1/2/n/C/Z
-30 0.151175151    127.0.0.1 ? 127.0.0.1    PGSQL 385 &gt;P/B/D/E/P/B/D/E/S     -- 5
-31 0.152029325    127.0.0.1 ? 127.0.0.1    PGSQL 136 &lt;1/2/n/C/1/2/n/C/Z
-32 0.152393780    127.0.0.1 ? 127.0.0.1    PGSQL 385 &gt;P/B/D/E/P/B/D/E/S     -- 6; still parsing
-33 0.153580601    127.0.0.1 ? 127.0.0.1    PGSQL 136 &lt;1/2/n/C/1/2/n/C/Z
-34 0.153829366    127.0.0.1 ? 127.0.0.1    PGSQL 385 &gt;P/B/D/E/P/B/D/E/S
-35 0.154634968    127.0.0.1 ? 127.0.0.1    PGSQL 136 &lt;1/2/n/C/1/2/n/C/Z
-36 0.155031501    127.0.0.1 ? 127.0.0.1    PGSQL 385 &gt;P/B/D/E/P/B/D/E/S
-37 0.156085295    127.0.0.1 ? 127.0.0.1    PGSQL 136 &lt;1/2/n/C/1/2/n/C/Z
-38 0.156429765    127.0.0.1 ? 127.0.0.1    PGSQL 385 &gt;P/B/D/E/P/B/D/E/S
-39 0.157449408    127.0.0.1 ? 127.0.0.1    PGSQL 136 &lt;1/2/n/C/1/2/n/C/Z
-40 0.157846656    127.0.0.1 ? 127.0.0.1    PGSQL 385 &gt;P/B/D/E/P/B/D/E/S
-41 0.158572821    127.0.0.1 ? 127.0.0.1    PGSQL 136 &lt;1/2/n/C/1/2/n/C/Z
-42 0.158861134    127.0.0.1 ? 127.0.0.1    PGSQL 385 &gt;P/B/D/E/P/B/D/E/S
-43 0.159548895    127.0.0.1 ? 127.0.0.1    PGSQL 136 &lt;1/2/n/C/1/2/n/C/Z
-44 0.159835261    127.0.0.1 ? 127.0.0.1    PGSQL 385 &gt;P/B/D/E/P/B/D/E/S
-45 0.160708669    127.0.0.1 ? 127.0.0.1    PGSQL 136 &lt;1/2/n/C/1/2/n/C/Z
-46 0.160995488    127.0.0.1 ? 127.0.0.1    PGSQL 385 &gt;P/B/D/E/P/B/D/E/S
-47 0.162157006    127.0.0.1 ? 127.0.0.1    PGSQL 136 &lt;1/2/n/C/1/2/n/C/Z
-48 0.162560641    127.0.0.1 ? 127.0.0.1    PGSQL 385 &gt;P/B/D/E/P/B/D/E/S
-49 0.163716994    127.0.0.1 ? 127.0.0.1    PGSQL 136 &lt;1/2/n/C/1/2/n/C/Z
-50 0.164075144    127.0.0.1 ? 127.0.0.1    PGSQL 385 &gt;P/B/D/E/P/B/D/E/S
-51 0.165051354    127.0.0.1 ? 127.0.0.1    PGSQL 136 &lt;1/2/n/C/1/2/n/C/Z
-52 0.165514797    127.0.0.1 ? 127.0.0.1    PGSQL 385 &gt;P/B/D/E/P/B/D/E/S
-53 0.166490175    127.0.0.1 ? 127.0.0.1    PGSQL 136 &lt;1/2/n/C/1/2/n/C/Z
-54 0.166781469    127.0.0.1 ? 127.0.0.1    PGSQL 385 &gt;P/B/D/E/P/B/D/E/S
-55 0.167680294    127.0.0.1 ? 127.0.0.1    PGSQL 136 &lt;1/2/n/C/1/2/n/C/Z
-56 0.167922817    127.0.0.1 ? 127.0.0.1    PGSQL 385 &gt;P/B/D/E/P/B/D/E/S
-57 0.168632798    127.0.0.1 ? 127.0.0.1    PGSQL 136 &lt;1/2/n/C/1/2/n/C/Z
-58 0.168962029    127.0.0.1 ? 127.0.0.1    PGSQL 385 &gt;P/B/D/E/P/B/D/E/S
-59 0.169910512    127.0.0.1 ? 127.0.0.1    PGSQL 136 &lt;1/2/n/C/1/2/n/C/Z
-60 0.170243927    127.0.0.1 ? 127.0.0.1    PGSQL 385 &gt;P/B/D/E/P/B/D/E/S
-61 0.171165850    127.0.0.1 ? 127.0.0.1    PGSQL 136 &lt;1/2/n/C/1/2/n/C/Z
-62 0.171576649    127.0.0.1 ? 127.0.0.1    PGSQL 385 &gt;P/B/D/E/P/B/D/E/S
-63 0.172570445    127.0.0.1 ? 127.0.0.1    PGSQL 136 &lt;1/2/n/C/1/2/n/C/Z</pre>
+```
+22 0.138047126    127.0.0.1 ? 127.0.0.1    PGSQL 385 >P/B/D/E/P/B/D/E/S     -- 1
+23 0.145342080    127.0.0.1 ? 127.0.0.1    PGSQL 136 <1/2/n/C/1/2/n/C/Z
+24 0.146053779    127.0.0.1 ? 127.0.0.1    PGSQL 385 >P/B/D/E/P/B/D/E/S     -- 2
+25 0.147729746    127.0.0.1 ? 127.0.0.1    PGSQL 136 <1/2/n/C/1/2/n/C/Z
+26 0.148182343    127.0.0.1 ? 127.0.0.1    PGSQL 385 >P/B/D/E/P/B/D/E/S     -- 3
+27 0.149013626    127.0.0.1 ? 127.0.0.1    PGSQL 136 <1/2/n/C/1/2/n/C/Z
+28 0.149394022    127.0.0.1 ? 127.0.0.1    PGSQL 385 >P/B/D/E/P/B/D/E/S     -- 4
+29 0.150775388    127.0.0.1 ? 127.0.0.1    PGSQL 136 <1/2/n/C/1/2/n/C/Z
+30 0.151175151    127.0.0.1 ? 127.0.0.1    PGSQL 385 >P/B/D/E/P/B/D/E/S     -- 5
+31 0.152029325    127.0.0.1 ? 127.0.0.1    PGSQL 136 <1/2/n/C/1/2/n/C/Z
+32 0.152393780    127.0.0.1 ? 127.0.0.1    PGSQL 385 >P/B/D/E/P/B/D/E/S     -- 6; still parsing
+33 0.153580601    127.0.0.1 ? 127.0.0.1    PGSQL 136 <1/2/n/C/1/2/n/C/Z
+34 0.153829366    127.0.0.1 ? 127.0.0.1    PGSQL 385 >P/B/D/E/P/B/D/E/S
+35 0.154634968    127.0.0.1 ? 127.0.0.1    PGSQL 136 <1/2/n/C/1/2/n/C/Z
+36 0.155031501    127.0.0.1 ? 127.0.0.1    PGSQL 385 >P/B/D/E/P/B/D/E/S
+37 0.156085295    127.0.0.1 ? 127.0.0.1    PGSQL 136 <1/2/n/C/1/2/n/C/Z
+38 0.156429765    127.0.0.1 ? 127.0.0.1    PGSQL 385 >P/B/D/E/P/B/D/E/S
+39 0.157449408    127.0.0.1 ? 127.0.0.1    PGSQL 136 <1/2/n/C/1/2/n/C/Z
+40 0.157846656    127.0.0.1 ? 127.0.0.1    PGSQL 385 >P/B/D/E/P/B/D/E/S
+41 0.158572821    127.0.0.1 ? 127.0.0.1    PGSQL 136 <1/2/n/C/1/2/n/C/Z
+42 0.158861134    127.0.0.1 ? 127.0.0.1    PGSQL 385 >P/B/D/E/P/B/D/E/S
+43 0.159548895    127.0.0.1 ? 127.0.0.1    PGSQL 136 <1/2/n/C/1/2/n/C/Z
+44 0.159835261    127.0.0.1 ? 127.0.0.1    PGSQL 385 >P/B/D/E/P/B/D/E/S
+45 0.160708669    127.0.0.1 ? 127.0.0.1    PGSQL 136 <1/2/n/C/1/2/n/C/Z
+46 0.160995488    127.0.0.1 ? 127.0.0.1    PGSQL 385 >P/B/D/E/P/B/D/E/S
+47 0.162157006    127.0.0.1 ? 127.0.0.1    PGSQL 136 <1/2/n/C/1/2/n/C/Z
+48 0.162560641    127.0.0.1 ? 127.0.0.1    PGSQL 385 >P/B/D/E/P/B/D/E/S
+49 0.163716994    127.0.0.1 ? 127.0.0.1    PGSQL 136 <1/2/n/C/1/2/n/C/Z
+50 0.164075144    127.0.0.1 ? 127.0.0.1    PGSQL 385 >P/B/D/E/P/B/D/E/S
+51 0.165051354    127.0.0.1 ? 127.0.0.1    PGSQL 136 <1/2/n/C/1/2/n/C/Z
+52 0.165514797    127.0.0.1 ? 127.0.0.1    PGSQL 385 >P/B/D/E/P/B/D/E/S
+53 0.166490175    127.0.0.1 ? 127.0.0.1    PGSQL 136 <1/2/n/C/1/2/n/C/Z
+54 0.166781469    127.0.0.1 ? 127.0.0.1    PGSQL 385 >P/B/D/E/P/B/D/E/S
+55 0.167680294    127.0.0.1 ? 127.0.0.1    PGSQL 136 <1/2/n/C/1/2/n/C/Z
+56 0.167922817    127.0.0.1 ? 127.0.0.1    PGSQL 385 >P/B/D/E/P/B/D/E/S
+57 0.168632798    127.0.0.1 ? 127.0.0.1    PGSQL 136 <1/2/n/C/1/2/n/C/Z
+58 0.168962029    127.0.0.1 ? 127.0.0.1    PGSQL 385 >P/B/D/E/P/B/D/E/S
+59 0.169910512    127.0.0.1 ? 127.0.0.1    PGSQL 136 <1/2/n/C/1/2/n/C/Z
+60 0.170243927    127.0.0.1 ? 127.0.0.1    PGSQL 385 >P/B/D/E/P/B/D/E/S
+61 0.171165850    127.0.0.1 ? 127.0.0.1    PGSQL 136 <1/2/n/C/1/2/n/C/Z
+62 0.171576649    127.0.0.1 ? 127.0.0.1    PGSQL 385 >P/B/D/E/P/B/D/E/S
+63 0.172570445    127.0.0.1 ? 127.0.0.1    PGSQL 136 <1/2/n/C/1/2/n/C/Z
+```
+
 
 This makes it clear. A repeated, consistent sequence of `P/B/D/E/P/B/D/E/S` means the execution of the rewritten statements generates two insert statements, each of which causes the messages P/parse, B/bind, D/describe and E/execute.
 
 This means that adding the values yourself to the insert statement is a more efficient way to perform the above inserts:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">// -- the property reWriteBatchedInserts is set to false (!!)
+```
+// -- the property reWriteBatchedInserts is set to false (!!)
 try
 (
      Connection connection = DriverManager.getConnection(url, properties);
@@ -489,7 +534,7 @@ try
      String insert_statement = "insert into test (id, f1) values (?,?),(?,?),(?,?),(?,?),(?,?)";
      PreparedStatement prepared_statement = connection.prepareStatement(insert_statement);
 
-     for (int counter = 0; counter &lt;= 100; counter+=10)
+     for (int counter = 0; counter <= 100; counter+=10)
      {
          prepared_statement.setInt(1, counter);
          prepared_statement.setString(2, "A");
@@ -525,35 +570,39 @@ catch (SQLException e)
 {
     e.printStackTrace();
 }
-// --</pre>
+// --
+```
+
 
 The above snippet uses manually created "multi values" insert statements. It adds two batches to the batched statement to make the JDBC driver immediately create a prepared statement, and only perform the steps of B/Bind, D/Describe and E/Execute:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">20 0.128336147    127.0.0.1 → 127.0.0.1    PGSQL 208 &gt;P/D/S           -- direct prepared statement creation
-21 0.128845378    127.0.0.1 → 127.0.0.1    PGSQL 131 &lt;1/t/n/Z
-22 0.130242832    127.0.0.1 → 127.0.0.1    PGSQL 309 &gt;B/D/E/B/D/E/S   -- bind calls right away, no parse
-23 0.133396918    127.0.0.1 → 127.0.0.1    PGSQL 126 &lt;2/n/C/2/n/C/Z
-24 0.133650801    127.0.0.1 → 127.0.0.1    PGSQL 309 &gt;B/D/E/B/D/E/S
-25 0.134417572    127.0.0.1 → 127.0.0.1    PGSQL 126 &lt;2/n/C/2/n/C/Z
-26 0.134960251    127.0.0.1 → 127.0.0.1    PGSQL 309 &gt;B/D/E/B/D/E/S
-27 0.135632306    127.0.0.1 → 127.0.0.1    PGSQL 126 &lt;2/n/C/2/n/C/Z
-28 0.136034911    127.0.0.1 → 127.0.0.1    PGSQL 309 &gt;B/D/E/B/D/E/S
-29 0.136675155    127.0.0.1 → 127.0.0.1    PGSQL 126 &lt;2/n/C/2/n/C/Z
-30 0.137021860    127.0.0.1 → 127.0.0.1    PGSQL 309 &gt;B/D/E/B/D/E/S
-31 0.137622521    127.0.0.1 → 127.0.0.1    PGSQL 126 &lt;2/n/C/2/n/C/Z
-32 0.137801845    127.0.0.1 → 127.0.0.1    PGSQL 309 &gt;B/D/E/B/D/E/S
-33 0.138988278    127.0.0.1 → 127.0.0.1    PGSQL 126 &lt;2/n/C/2/n/C/Z
-34 0.139290217    127.0.0.1 → 127.0.0.1    PGSQL 309 &gt;B/D/E/B/D/E/S
-35 0.140075855    127.0.0.1 → 127.0.0.1    PGSQL 126 &lt;2/n/C/2/n/C/Z
-36 0.140438517    127.0.0.1 → 127.0.0.1    PGSQL 309 &gt;B/D/E/B/D/E/S
-37 0.141113223    127.0.0.1 → 127.0.0.1    PGSQL 126 &lt;2/n/C/2/n/C/Z
-38 0.141392636    127.0.0.1 → 127.0.0.1    PGSQL 309 &gt;B/D/E/B/D/E/S
-39 0.142077846    127.0.0.1 → 127.0.0.1    PGSQL 126 &lt;2/n/C/2/n/C/Z
-40 0.142364684    127.0.0.1 → 127.0.0.1    PGSQL 309 &gt;B/D/E/B/D/E/S
-41 0.143081280    127.0.0.1 → 127.0.0.1    PGSQL 126 &lt;2/n/C/2/n/C/Z
-42 0.143309572    127.0.0.1 → 127.0.0.1    PGSQL 309 &gt;B/D/E/B/D/E/S
-43 0.143911660    127.0.0.1 → 127.0.0.1    PGSQL 126 &lt;2/n/C/2/n/C/Z
-</pre>
+```
+20 0.128336147    127.0.0.1 → 127.0.0.1    PGSQL 208 >P/D/S           -- direct prepared statement creation
+21 0.128845378    127.0.0.1 → 127.0.0.1    PGSQL 131 <1/t/n/Z
+22 0.130242832    127.0.0.1 → 127.0.0.1    PGSQL 309 >B/D/E/B/D/E/S   -- bind calls right away, no parse
+23 0.133396918    127.0.0.1 → 127.0.0.1    PGSQL 126 <2/n/C/2/n/C/Z
+24 0.133650801    127.0.0.1 → 127.0.0.1    PGSQL 309 >B/D/E/B/D/E/S
+25 0.134417572    127.0.0.1 → 127.0.0.1    PGSQL 126 <2/n/C/2/n/C/Z
+26 0.134960251    127.0.0.1 → 127.0.0.1    PGSQL 309 >B/D/E/B/D/E/S
+27 0.135632306    127.0.0.1 → 127.0.0.1    PGSQL 126 <2/n/C/2/n/C/Z
+28 0.136034911    127.0.0.1 → 127.0.0.1    PGSQL 309 >B/D/E/B/D/E/S
+29 0.136675155    127.0.0.1 → 127.0.0.1    PGSQL 126 <2/n/C/2/n/C/Z
+30 0.137021860    127.0.0.1 → 127.0.0.1    PGSQL 309 >B/D/E/B/D/E/S
+31 0.137622521    127.0.0.1 → 127.0.0.1    PGSQL 126 <2/n/C/2/n/C/Z
+32 0.137801845    127.0.0.1 → 127.0.0.1    PGSQL 309 >B/D/E/B/D/E/S
+33 0.138988278    127.0.0.1 → 127.0.0.1    PGSQL 126 <2/n/C/2/n/C/Z
+34 0.139290217    127.0.0.1 → 127.0.0.1    PGSQL 309 >B/D/E/B/D/E/S
+35 0.140075855    127.0.0.1 → 127.0.0.1    PGSQL 126 <2/n/C/2/n/C/Z
+36 0.140438517    127.0.0.1 → 127.0.0.1    PGSQL 309 >B/D/E/B/D/E/S
+37 0.141113223    127.0.0.1 → 127.0.0.1    PGSQL 126 <2/n/C/2/n/C/Z
+38 0.141392636    127.0.0.1 → 127.0.0.1    PGSQL 309 >B/D/E/B/D/E/S
+39 0.142077846    127.0.0.1 → 127.0.0.1    PGSQL 126 <2/n/C/2/n/C/Z
+40 0.142364684    127.0.0.1 → 127.0.0.1    PGSQL 309 >B/D/E/B/D/E/S
+41 0.143081280    127.0.0.1 → 127.0.0.1    PGSQL 126 <2/n/C/2/n/C/Z
+42 0.143309572    127.0.0.1 → 127.0.0.1    PGSQL 309 >B/D/E/B/D/E/S
+43 0.143911660    127.0.0.1 → 127.0.0.1    PGSQL 126 <2/n/C/2/n/C/Z
+```
+
 
 Generic plan {#h2-6-generic-plan}
 ---------------------------------

@@ -38,7 +38,8 @@ Let's say the pattern is `/watermark/*`.
 
 We can define two routes:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml">routes:
+```yaml
+routes:
   - uri: "*"                                                                     #1
     upstream:
       nodes:
@@ -51,7 +52,9 @@ We can define two routes:
           - /dummy_sig/watermark:0.8:nowe:20:20:0.2/plain/http://server:3000/$1  #4
     upstream:
       nodes:
-        "imgproxy:8080": 1                                                       #5</pre>
+        "imgproxy:8080": 1                                                       #5
+```
+
 
 1. Catch-all route that forwards to the web server
 2. Watermark images route
@@ -71,7 +74,7 @@ The complete source code for this post can be found on [GitHub](https://github.c
 * [imgproxy documentation](https://docs.imgproxy.net/)
 * [imgproxy interactive demo](https://imgproxy.net/)
 
-*** ** * ** ***
+
 
 *Originally published at [A Java Geek](https://blog.frankel.ch/dynamic-watermarking/2/) on July 7^th^, 2024*
 

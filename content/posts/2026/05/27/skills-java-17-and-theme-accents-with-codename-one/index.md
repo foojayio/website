@@ -62,7 +62,8 @@ Native theme accents {#h2-2-native-theme-accents}
 
 Override the constants inside the `#Constants` block of your own `theme.css`:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">#Constants {
+```
+#Constants {
     includeNativeBool: true;
     darkModeBool: true;
 
@@ -70,7 +71,9 @@ Override the constants inside the `#Constants` block of your own `theme.css`:
     --accent-color-dark: #ff2d95;
     --accent-pressed-color: #c71a75;
     --accent-on-color: #ffffff;
-}</pre>
+}
+```
+
 
 That is it. Every accent-bearing UIID picks up the new colour. Light and dark are independent (`--accent-color` vs `--accent-color-dark`), and partial overrides are fine; anything you do not redeclare stays at the framework default. Material 3 has a couple of additional container-tier constants for the elevated-surface tone; iOS ignores those.
 
@@ -105,7 +108,10 @@ The expected outcome is a 30-degree-tilted red fill that overlaps the navy outli
 
 Accepted values are `sRGB` (default), `displayP3`, `deviceRGB`, `linearSRGB`, `extendedSRGB`, `extendedLinearSRGB`, and `none`. Set it in `codenameone_settings.properties`:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">codename1.arg.ios.metal.colorSpace=displayP3</pre>
+```
+codename1.arg.ios.metal.colorSpace=displayP3
+```
+
 
 The hint is dormant when `ios.metal=false`, so existing GL builds are unchanged. Unrecognised values produce a warning log and fall back to sRGB. Documented under [Working-With-iOS.asciidoc](https://github.com/codenameone/CodenameOne/blob/master/docs/developer-guide/Working-With-iOS.asciidoc).
 
@@ -117,13 +123,16 @@ The Inscribed-Triangle-Grid test in #4939 also surfaced a quiet papercut in `Gra
 
 The new `Graphics.translateMatrix(float, float)` composes the translation directly onto the impl matrix, in the same way `scale` and `rotateRadians` already do. The result is uniform "post-multiply translate onto the current transform" semantics across iOS (both GL and Metal), JavaSE, Android, and the JavaScript port. Same code, same on-screen position, whether you are drawing into a `Form`'s `Graphics` or a mutable `Image`'s `Graphics`.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">// Matrix-correct composition. Use this when you want translate to
+```
+// Matrix-correct composition. Use this when you want translate to
 // behave like scale and rotate (composed into the affine transform).
 g.translateMatrix(centerX, centerY);
 g.rotateRadians(angle);
 g.scale(sx, sy);
 g.translateMatrix(-centerX, -centerY);
-g.fillShape(path);</pre>
+g.fillShape(path);
+```
+
 
 For app code writing affine-transform pipelines (the "translate to pivot, rotate, scale, translate back" idiom from Java2D and AWT), this is the API you want. `isTranslateMatrixSupported()` returns true on every modern port. The old `translate(int, int)` is not deprecated and is not going anywhere; half the framework's internal scrolling code is built on it. The new method is the one to reach for in new drawing code, particularly anything that combines translate with scale or rotate.
 
@@ -145,7 +154,10 @@ The fix moves the prompt to the natural points. `Push.register()` triggers the s
 
 If you have an app that needs the legacy launch-time behaviour, a backwards-compatibility build hint restores it:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">codename1.arg.ios.notificationPermissionAtLaunch=true</pre>
+```
+codename1.arg.ios.notificationPermissionAtLaunch=true
+```
+
 
 The default is `false`, so existing apps that did not opt in pick up the new behaviour on next rebuild. Documented in [Push-Notifications.asciidoc](https://github.com/codenameone/CodenameOne/blob/master/docs/developer-guide/Push-Notifications.asciidoc). The cloud-side build server change shipped as [BuildDaemon #71](https://github.com/codenameone/BuildDaemon/pull/71), so local and cloud builds match.
 

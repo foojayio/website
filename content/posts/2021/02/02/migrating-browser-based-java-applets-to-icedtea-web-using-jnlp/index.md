@@ -61,77 +61,89 @@ That page might be visible only after logging in with username and password into
 
 This is the original method to include Applets.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="xml" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&lt;applet
+```xml
+<applet
     code="MyJavaClass.class" archive="myapp.jar" 
-    width="600" height="400" &gt; 
-  &lt;param name="param1" value="value1"&gt;
-  &lt;param name="param2" value="value2"&gt;
-  &lt;param name="param3" value="somedir/otherdir"&gt; 
+    width="600" height="400" > 
+  <param name="param1" value="value1">
+  <param name="param2" value="value2">
+  <param name="param3" value="somedir/otherdir"> 
   Alternative text.
-&lt;/applet&gt;</pre>
+</applet>
+```
+
 
 **Object-Tag**
 
 This was added later as an alternative to the Applet tag.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="xml" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&lt;object codetype="application/java" 
+```xml
+<object codetype="application/java" 
     classid="java:MyJavaClass.class" archive="myapp.jar" 
     width="600" height="400" 
-    codebase="plugin/1.3/jinstall-13-win32.cab" &gt;
-  &lt;param name="code" value="MyJavaClass.class"&gt; 
-  &lt;param name="archive" value="myapp.jar"&gt; 
-  &lt;param name="codebase" value="."&gt;
-  &lt;param name="type"
-     value="application/x-java-applet;version=1.1"&gt; 
-  &lt;param name="scriptable" value="true"&gt;
-  &lt;param name="param1" value="value1"&gt;
-  &lt;param name="param2" value="value2"&gt;
-  &lt;param name="param3" value="somedir/otherdir"&gt;
+    codebase="plugin/1.3/jinstall-13-win32.cab" >
+  <param name="code" value="MyJavaClass.class"> 
+  <param name="archive" value="myapp.jar"> 
+  <param name="codebase" value=".">
+  <param name="type"
+     value="application/x-java-applet;version=1.1"> 
+  <param name="scriptable" value="true">
+  <param name="param1" value="value1">
+  <param name="param2" value="value2">
+  <param name="param3" value="somedir/otherdir">
   Alternative text.
-&lt;/object&gt;</pre>
+</object>
+```
+
 
 **Embed-Tag**
 
 This was used by the Netscape Browser.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="xml" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&lt;embed type="application/x-java-applet;version=1.1" 
+```xml
+<embed type="application/x-java-applet;version=1.1" 
    code="MyAppClass.class" archive="myapp.jar"
    width="600" height="400"
    codebase="."
-   pluginspage="plugin/1.3/plugin-install.html" &gt; 
+   pluginspage="plugin/1.3/plugin-install.html" > 
    param1="value1" param2="value2" param3="somedir/otherdir"
-  &lt;noembed&gt;Alternative text.&lt;/noembed&gt; 
-&lt;/embed&gt;</pre>
+  <noembed>Alternative text.</noembed> 
+</embed>
+```
+
 
 ### **Creating a JNLP file** {#h3-3-creating-a-jnlp-file}
 
 Based on the copied \<applet\>, \<object\> or \<embed\> section, create a JNLP file named myapp.jnlp here in this example. The content should look similar to the following, with all attributes, parameters and URLs replaced by the actual values from your application:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="xml" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&lt;?xml version="1.0" standalone="yes"?&gt;
-&lt;jnlp spec="1.5+" xmlns="http://www.w3.org/1999/xhtml" codebase="" href="myapp.jnlp"&gt;
-    &lt;information&gt;
-       &lt;title&gt;MyApplet-Title&lt;/title&gt;
-       &lt;vendor&gt;vendorname&lt;/vendor&gt; 
-       &lt;description&gt;text&lt;/description&gt;
-       &lt;homepage href="https://mywebsite.domain"&gt;&lt;/homepage&gt; 
-       &lt;offline-allowed /&gt;
-    &lt;/information&gt;
-    &lt;resources&gt;
-       &lt;j2se version="1.2+"&gt;&lt;/j2se&gt;
-       &lt;jar href="http://mywebsite.domain/somepath/myapp.jar" main="true"&gt;&lt;/jar&gt;
-       &lt;jar href="http://mywebsite.domain/somepath/mylib.jar"/&gt;
-    &lt;/resources&gt;
-    &lt;security&gt;
-       &lt;sandbox/&gt; 
-    &lt;/security&gt; 
-    &lt;applet-desc
+```xml
+<?xml version="1.0" standalone="yes"?>
+<jnlp spec="1.5+" xmlns="http://www.w3.org/1999/xhtml" codebase="" href="myapp.jnlp">
+    <information>
+       <title>MyApplet-Title</title>
+       <vendor>vendorname</vendor> 
+       <description>text</description>
+       <homepage href="https://mywebsite.domain"></homepage> 
+       <offline-allowed />
+    </information>
+    <resources>
+       <j2se version="1.2+"></j2se>
+       <jar href="http://mywebsite.domain/somepath/myapp.jar" main="true"></jar>
+       <jar href="http://mywebsite.domain/somepath/mylib.jar"/>
+    </resources>
+    <security>
+       <sandbox/> 
+    </security> 
+    <applet-desc
       name="MyMainClass" main-class="MyMainClass"
-      width="600" height="400"&gt;
-     &lt;param name="param1" value="value1"/&gt;
-     &lt;param name="param2" value="value2"/&gt;
-     &lt;param name="param3" value="somedir/otherdir"/&gt;
-    &lt;/applet-desc&gt;
-&lt;/jnlp&gt;</pre>
+      width="600" height="400">
+     <param name="param1" value="value1"/>
+     <param name="param2" value="value2"/>
+     <param name="param3" value="somedir/otherdir"/>
+    </applet-desc>
+</jnlp>
+```
+
 
 I'm using an empty "codebase" attribute as for the first step the file will only be used locally. Because of the empty codebase, we then have to add the complete absolute URLs in the jar href attributes. Without this, IcedTea-Web would try to update the local JNLP file from the codebase URL, which will fail. We'll now try to run the newly created file on IcedTea-Web.
 
@@ -141,11 +153,17 @@ To run the Applet now on IcedTea-Web, enter the following commands depending on 
 
 Linux / macOS:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">javaws.sh myapp.jnlp</pre>
+```
+javaws.sh myapp.jnlp
+```
+
 
 Windows (open a command window / Powershell first):
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">javaws myapp.jnlp</pre>
+```
+javaws myapp.jnlp
+```
+
 
 I'm not using the javaws -Xoffline parameter as then IcedTea-Web won't download the application JARs. If you see a JAR no found error on this first start, try again as then IcedTea-Web will have filled the local JAR cache. Depending on the further outcome of these first tries, you might need to adjust the JNLP file, like fixing jar href URLs, changing application parameters or others. For some applications you might also need to add the -nosecurity parameter (javaws -nosecurity myapp.jnlp).
 
@@ -153,11 +171,17 @@ To see more detailed error messages and warnings, run the IcedTea-Web configurat
 
 Linux / macOS:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">itweb-settings.sh</pre>
+```
+itweb-settings.sh
+```
+
 
 Windows:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">itweb-settings</pre>
+```
+itweb-settings
+```
+
 
 Then enable logging to the terminal at Debugging -\> Enable debugging. Writing the logs to a file can also enabled there. The configuration tool also allows to wipe the local JAR cache which is helpful during implementing the solution: Cache -\> View Files -\> Purge
 
@@ -171,10 +195,16 @@ Now, users can start the application with the following command. If the JNLP fil
 
 Linux / macOS:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">javaws.sh http://mywebsite.domain/somepath/myapp.jnlp</pre>
+```
+javaws.sh http://mywebsite.domain/somepath/myapp.jnlp
+```
+
 
 Windows:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">javaws http://mywebsite.domain/somepath/myapp.jnlp</pre>
+```
+javaws http://mywebsite.domain/somepath/myapp.jnlp
+```
+
 
 For security reasons I would refrain from registering the JNLP file type with the javaws application on the Operating System as it can be mis-used by malicious web sites and unaware users can be lured to click and download JNLP files and then get it executed locally on their system. Instead, storing a script or start menu entry with the complete javaws command as used above including the JNLP file or URL is often a good solution.

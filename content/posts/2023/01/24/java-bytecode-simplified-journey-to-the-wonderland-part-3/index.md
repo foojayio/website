@@ -27,18 +27,22 @@ Changing Java bytecode is often done to add new features to a Java program that 
 
 **[Javaassist](https://www.javassist.org/)** is one of the tools that can be leveraged to inject bytecode. Look at the following class.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">package ca.bazlur;
+```java
+package ca.bazlur;
 
 public class Greetings {
 
   public void sayHello(String name) {
     System.out.println("Hello " + name + "!");
   }
-}</pre>
+}
+```
+
 
 Let's say we have this class and would like to add a method to it but through bytecode manipulation.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">package ca.bazlur;
+```java
+package ca.bazlur;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
@@ -72,7 +76,7 @@ public class BytecodeInjector {
 
       // Load the modified class bytes into the JVM
       MyClassLoader classLoader = new MyClassLoader();
-      Class&lt;?&gt; modifiedClass = classLoader.defineClass("ca.bazlur.Greetings", modifiedClassBytes);
+      Class<?> modifiedClass = classLoader.defineClass("ca.bazlur.Greetings", modifiedClassBytes);
 
       // Invoke the new method on an instance of the modified class
       Object obj = modifiedClass.newInstance();
@@ -83,21 +87,29 @@ public class BytecodeInjector {
       throw new RuntimeException(e);
     }
   }
-}</pre>
+}
+```
+
 
 In this code, we had a class called `Greetings`. We wanted to add a new method. To do that, we had to read the original class into a byte array, import it into a `ClassPool`, and then modify it by adding a new method. Then, the modified class is written back to a byte array and loaded into the JVM using a custom `ClassLoader`. Finally, the new method is invoked on an instance of the modified class.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">package ca.bazlur;
+```java
+package ca.bazlur;
 
 public class MyClassLoader extends ClassLoader {
-  public Class&lt;?&gt; defineClass(String name, byte[] bytes) {
+  public Class<?> defineClass(String name, byte[] bytes) {
     return super.defineClass(name, bytes, 0, bytes.length);
   }
-}</pre>
+}
+```
+
 
 If we run the above class, we will see that the functionality has been added to the Greetings class and also executed. It will print:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">Hello, world!</pre>
+```java
+Hello, world!
+```
+
 
 There is also a program known as "[Byte Buddy](https://bytebuddy.net/)" and we can make use of it to do a similar thing.
 
@@ -105,7 +117,8 @@ Let's assume we want to know how much time a method takes to execute. We can mak
 
 Let's use bytebuddy to build a simple agent that will instrument every class and calculate the time it takes for each method to execute.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">package ca.bazlur;
+```java
+package ca.bazlur;
 
 import java.lang.instrument.Instrumentation;
 import net.bytebuddy.agent.builder.AgentBuilder;
@@ -117,16 +130,19 @@ public class MyAgent {
   public static void premain(String agentArgs, Instrumentation inst) {
     new AgentBuilder.Default()
         .type(ElementMatchers.any())
-        .transform((builder, typeDescription, classLoader, module) -&gt; builder
+        .transform((builder, typeDescription, classLoader, module) -> builder
             .method(ElementMatchers.any())
             .intercept(Advice.to(TimerAdvice.class)))
         .installOn(inst);
   }
-}</pre>
+}
+```
+
 
 And the `TimerAdvice`class is here:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">package ca.bazlur;
+```java
+package ca.bazlur;
 
 import net.bytebuddy.asm.Advice;
 
@@ -145,37 +161,48 @@ public class TimerAdvice {
     System.out.println(
         "Method " + method + " took " + (System.currentTimeMillis() - startTime) + "ms");
   }
-}</pre>
+}
+```
+
 
 The full source code is available here: <https://github.com/rokon12/bytecode-tutorials>
 
 Once we've built it and generated a jar, we can use it in the CLI by issuing the following command:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">java -javaagent:myagent-1.0-SNAPSHOT.jar MyAwesomeJavaProgram</pre>
+```
+java -javaagent:myagent-1.0-SNAPSHOT.jar MyAwesomeJavaProgram
+```
+
 
 The `MyAwesomeJavaProgram` looks like this:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public class MyAwesomeJavaProgram {
+```java
+public class MyAwesomeJavaProgram {
   public static void main(String[] args) {
     System.out.println(doCalculation());
   }
 
   public static int doCalculation() {
     int result = 0;
-    for (int i = 0; i &lt; 100000000; i++) {
+    for (int i = 0; i < 100000000; i++) {
       result += i;
     }
     return result;
   }
-}</pre>
+}
+```
+
 
 Once we run it in the CLI, we will get the output as follows:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="raw">Entering to invoke : public static void MyAwesomeJavaProgram.main(java.lang.String[])
+```
+Entering to invoke : public static void MyAwesomeJavaProgram.main(java.lang.String[])
 Entering to invoke : public static int MyAwesomeJavaProgram.doCalculation()
 Method public static int MyAwesomeJavaProgram.doCalculation() took 41ms
 887459712
-Method public static void MyAwesomeJavaProgram.main(java.lang.String[]) took 45ms</pre>
+Method public static void MyAwesomeJavaProgram.main(java.lang.String[]) took 45ms
+```
+
 
 Here are some libraries for manipulating Java bytecode:
 

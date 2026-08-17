@@ -53,12 +53,15 @@ Let's start by explaining the standards used in this project.
 
 In my test setup, I have two RGB LED fixtures who have five values for red, green, blue, dimmer, and effect. If I give them address 1 and 6, and want to first one to be full red, and the second one blue half dimmed (`127 = 0x7f`), both without effect, I would need to create this byte array in Java:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">//                    Address 1                     
+```
+//                    Address 1                     
 //                    Red   Green Blue  Dim   Effect 
 var data = new byte[]{0xff, 0x00, 0x00, 0xff, 0x00, 
 //                    Address 6
 //                    Red   Green Blue  Dim   Effect 
-                      0x00, 0x00, 0xff, 0x7f, 0x00};</pre>
+                      0x00, 0x00, 0xff, 0x7f, 0x00};
+```
+
 
 #### DMX512 Control from PC
 
@@ -103,11 +106,14 @@ DMX512 Java Library {#h2-4-dmx512-java-library}
 
 The library I created is open-source with its [sources on GitHub](https://github.com/codewriterbv/DMX512/) and [releases on Maven Central](https://central.sonatype.com/artifact/be.codewriter/dmx512).
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&lt;dependency&gt;
-    &lt;groupId&gt;be.codewriter&lt;/groupId&gt;
-    &lt;artifactId&gt;dmx512&lt;/artifactId&gt;
-    &lt;version&gt;${dmx512.version}&lt;/version&gt;
-&lt;/dependency&gt;</pre>
+```
+<dependency>
+    <groupId>be.codewriter</groupId>
+    <artifactId>dmx512</artifactId>
+    <version>${dmx512.version}</version>
+</dependency>
+```
+
 
 ### My Test Setup {#h3-5-my-test-setup}
 
@@ -126,7 +132,8 @@ You can send a byte array directly via the controller. Create an array with the 
 
 This is an example for a PicoSpot on channel 1 = the data starts at index 0 of the byte array.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">var controller = new DMXIPController(InetAddress.getByName("172.16.1.144"));
+```
+var controller = new DMXIPController(InetAddress.getByName("172.16.1.144"));
 
 // The PicoSpot on DMX channel 1 expects 11 values
 /*
@@ -149,7 +156,9 @@ sleep(2_000);
 controller.render(new byte[]{(byte) 127, (byte) 127, 0, 0, 0, 0, 0, 0, 0, 0, 0});
 sleep(2_000);
 // Set color wheel to 44 and dimmer full op
-controller.render(new byte[]{0, 0, 0, 0, 0, (byte) 44, 0, (byte) 255, 0, 0, 0});</pre>
+controller.render(new byte[]{0, 0, 0, 0, 0, (byte) 44, 0, (byte) 255, 0, 0, 0});
+```
+
 
 ### Using Fixtures and Modes {#h3-7-using-fixtures-and-modes}
 
@@ -157,7 +166,8 @@ By using a fixture loaded from an OFL JSON file, it becomes significantly easier
 
 This is a minimal example:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">var address = InetAddress.getByName("172.16.1.144");
+```
+var address = InetAddress.getByName("172.16.1.144");
 var controller = new DMXIPController(address);
 
 // Load a fixture
@@ -186,7 +196,7 @@ client.setValue("dimmer", (byte) 255);
 controller.render(client);
 
 // Color change effect
-for (int i = 0; i &lt;= 100; i++) {
+for (int i = 0; i <= 100; i++) {
     float ratio = i / 100.0f;
     client.setValue("red", (byte) (255 * (1 - ratio)));
     client.setValue("blue", (byte) (255 * ratio));
@@ -194,7 +204,9 @@ for (int i = 0; i &lt;= 100; i++) {
     sleep(50);
 }
 
-controller.close();</pre>
+controller.close();
+```
+
 
 ### Detecting USB-to-DMX and IP-to-DMX interfaces {#h3-8-detecting-usb-to-dmx-and-ip-to-dmx-interfaces}
 
@@ -203,8 +215,11 @@ Two tools in the library can be used to detect these interfaces:
 * USB-to-DMX: Returns a list of all serial devices connected to the PC. This list can also contain Bluetooth, test, or other ports that are not related to the DMX interface.
 * IP-to-DMX: Returns a list of devices that reply to an ArtNet detect packet. Only DMX interfaces should appear in this list.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">List&lt;SerialConnection&gt; serialDevices = DMXSerialDiscoverTool.getAvailablePorts();
-List&lt;DMXIPDevice&gt; ipDevices = DMXIPDiscoverTool.discoverDevices();</pre>
+```
+List<SerialConnection> serialDevices = DMXSerialDiscoverTool.getAvailablePorts();
+List<DMXIPDevice> ipDevices = DMXIPDiscoverTool.discoverDevices();
+```
+
 
 DMX512 JavaFX Demo Project {#h2-9-dmx512-javafx-demo-project}
 -------------------------------------------------------------

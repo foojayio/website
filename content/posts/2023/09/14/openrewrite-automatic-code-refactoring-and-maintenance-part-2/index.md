@@ -62,57 +62,61 @@ Consequently, our objective is to construct a Spring Boot 2.X application on Jav
 
 Let's start by creating Spring Boot 2.X application using the [Spring Initializr](https://start.spring.io/) select Java 11 and add `spring-boot-starter-web` and `spring-boot-starter-data-jpa` dependency. Here go with the `pom.xml` for our Spring Boot Project.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="xml" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
-&lt;project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd"&gt;
-  &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
-  &lt;parent&gt;
-    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
-    &lt;artifactId&gt;spring-boot-starter-parent&lt;/artifactId&gt;
-    &lt;version&gt;2.7.15&lt;/version&gt;
-    &lt;relativePath/&gt; &lt;!-- lookup parent from repository --&gt;
-  &lt;/parent&gt;
-  &lt;groupId&gt;com.bsmlabs&lt;/groupId&gt;
-  &lt;artifactId&gt;migrate-spring-boot-demo&lt;/artifactId&gt;
-  &lt;version&gt;0.0.1-SNAPSHOT&lt;/version&gt;
-  &lt;name&gt;migrate-spring-boot-demo&lt;/name&gt;
-  &lt;description&gt;Demo project for Spring Boot&lt;/description&gt;
-  &lt;properties&gt;
-    &lt;java.version&gt;11&lt;/java.version&gt;
-  &lt;/properties&gt;
-  &lt;dependencies&gt;
-    &lt;dependency&gt;
-      &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
-      &lt;artifactId&gt;spring-boot-starter-data-jpa&lt;/artifactId&gt;
-    &lt;/dependency&gt;
-    &lt;dependency&gt;
-      &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
-      &lt;artifactId&gt;spring-boot-starter-web&lt;/artifactId&gt;
-    &lt;/dependency&gt;
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-parent</artifactId>
+    <version>2.7.15</version>
+    <relativePath/> <!-- lookup parent from repository -->
+  </parent>
+  <groupId>com.bsmlabs</groupId>
+  <artifactId>migrate-spring-boot-demo</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <name>migrate-spring-boot-demo</name>
+  <description>Demo project for Spring Boot</description>
+  <properties>
+    <java.version>11</java.version>
+  </properties>
+  <dependencies>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-data-jpa</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-web</artifactId>
+    </dependency>
 
-    &lt;dependency&gt;
-      &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
-      &lt;artifactId&gt;spring-boot-starter-test&lt;/artifactId&gt;
-      &lt;scope&gt;test&lt;/scope&gt;
-    &lt;/dependency&gt;
-  &lt;/dependencies&gt;
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-test</artifactId>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
 
-  &lt;build&gt;
-    &lt;plugins&gt;
-      &lt;plugin&gt;
-        &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
-        &lt;artifactId&gt;spring-boot-maven-plugin&lt;/artifactId&gt;
-      &lt;/plugin&gt;
-    &lt;/plugins&gt;
-  &lt;/build&gt;
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-maven-plugin</artifactId>
+      </plugin>
+    </plugins>
+  </build>
 
-&lt;/project&gt;</pre>
+</project>
+```
+
 
 Now let's create a simple controller with a `/message` endpoint.
 
 The controller method should a return a message while accessing, we have annotated with `@RequestMapping(value="/message", method = RequestMethod.`*GET*`)` annotation, it should change to the simplified version i.e., `@GetMapping("/message")` and we intentionally declared static string code badly so that recipes will identify and migrate it.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">package com.bsmlabs.migratespringbootdemo;
+```java
+package com.bsmlabs.migratespringbootdemo;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -127,7 +131,9 @@ public class SampleController {
     public String getMessage() {
         return base_message;
     }
-}</pre>
+}
+```
+
 
 <br />
 
@@ -140,69 +146,72 @@ Add the OpenRewrite Maven Plugin {#h2-0-add-the-openrewrite-maven-plugin}
 
 Below is the configuration of OpenRewrite Maven Plugin for the Spring Boot Project
 
-<pre class="EnlighterJSRAW" data-enlighter-language="xml" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&lt;plugin&gt;
-    &lt;groupId&gt;org.openrewrite.maven&lt;/groupId&gt;
-    &lt;artifactId&gt;rewrite-maven-plugin&lt;/artifactId&gt;
-    &lt;version&gt;5.5.2&lt;/version&gt;
-    &lt;configuration&gt;
-       &lt;activeRecipes&gt;
-        &lt;recipe&gt;org.openrewrite.java.OrderImports&lt;/recipe&gt;
-        &lt;recipe&gt;org.openrewrite.staticanalysis.CommonStaticAnalysis&lt;/recipe&gt;
-        &lt;recipe&gt;org.openrewrite.staticanalysis.JavaApiBestPractices&lt;/recipe&gt;
-        &lt;recipe&gt;org.openrewrite.java.spring.boot3.UpgradeSpringBoot_3_0&lt;/recipe&gt;
-      &lt;/activeRecipes&gt;
-    &lt;/configuration&gt;
-    &lt;dependencies&gt;
-       &lt;dependency&gt;
-             &lt;groupId&gt;org.openrewrite.recipe&lt;/groupId&gt;
-         &lt;artifactId&gt;rewrite-spring&lt;/artifactId&gt;
-         &lt;version&gt;5.0.10&lt;/version&gt;
-       &lt;/dependency&gt;
-       &lt;dependency&gt;
-         &lt;groupId&gt;org.openrewrite.recipe&lt;/groupId&gt;
-         &lt;artifactId&gt;rewrite-static-analysis&lt;/artifactId&gt;
-         &lt;version&gt;1.0.7&lt;/version&gt;
-        &lt;/dependency&gt;
-    &lt;/dependencies&gt;
-&lt;/plugin&gt;
-</pre>
+```xml
+<plugin>
+    <groupId>org.openrewrite.maven</groupId>
+    <artifactId>rewrite-maven-plugin</artifactId>
+    <version>5.5.2</version>
+    <configuration>
+       <activeRecipes>
+        <recipe>org.openrewrite.java.OrderImports</recipe>
+        <recipe>org.openrewrite.staticanalysis.CommonStaticAnalysis</recipe>
+        <recipe>org.openrewrite.staticanalysis.JavaApiBestPractices</recipe>
+        <recipe>org.openrewrite.java.spring.boot3.UpgradeSpringBoot_3_0</recipe>
+      </activeRecipes>
+    </configuration>
+    <dependencies>
+       <dependency>
+             <groupId>org.openrewrite.recipe</groupId>
+         <artifactId>rewrite-spring</artifactId>
+         <version>5.0.10</version>
+       </dependency>
+       <dependency>
+         <groupId>org.openrewrite.recipe</groupId>
+         <artifactId>rewrite-static-analysis</artifactId>
+         <version>1.0.7</version>
+        </dependency>
+    </dependencies>
+</plugin>
+```
+
 
 As mentioned in the previous blog post, as precautionary, we must always execute the `mvn rewrite:dryRun` command and OpenRewrite will generate patch file under `target/rewrite/rewrite.patch`. In this patch file, we can review the changes.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">diff --git a/springworkspace/migrate-spring-boot-demo/pom.xml b/springworkspace/migrate-spring-boot-demo/pom.xml
+```
+diff --git a/springworkspace/migrate-spring-boot-demo/pom.xml b/springworkspace/migrate-spring-boot-demo/pom.xml
 index 9668ce6..fd3017f 100644
 --- a/springworkspace/migrate-spring-boot-demo/pom.xml
 +++ b/springworkspace/migrate-spring-boot-demo/pom.xml
 @@ -5,7 +5,7 @@ org.openrewrite.config.CompositeRecipe
-    &lt;parent&gt;
-        &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
-        &lt;artifactId&gt;spring-boot-starter-parent&lt;/artifactId&gt;
--       &lt;version&gt;2.7.15&lt;/version&gt;
-+       &lt;version&gt;3.0.10&lt;/version&gt;
-        &lt;relativePath/&gt; &lt;!-- lookup parent from repository --&gt;
-    &lt;/parent&gt;
-    &lt;groupId&gt;com.bsmlabs&lt;/groupId&gt;
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+-       <version>2.7.15</version>
++       <version>3.0.10</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
+    <groupId>com.bsmlabs</groupId>
 @@ -14,7 +14,7 @@
-    &lt;name&gt;migrate-spring-boot-demo&lt;/name&gt;
-    &lt;description&gt;Demo project for Spring Boot&lt;/description&gt;
-    &lt;properties&gt;
--       &lt;java.version&gt;11&lt;/java.version&gt;
-+       &lt;java.version&gt;17&lt;/java.version&gt;
-    &lt;/properties&gt;
-    &lt;dependencies&gt;
-        &lt;dependency&gt;
+    <name>migrate-spring-boot-demo</name>
+    <description>Demo project for Spring Boot</description>
+    <properties>
+-       <java.version>11</java.version>
++       <java.version>17</java.version>
+    </properties>
+    <dependencies>
+        <dependency>
 @@ -25,6 +25,11 @@
-            &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
-            &lt;artifactId&gt;spring-boot-starter-web&lt;/artifactId&gt;
-        &lt;/dependency&gt;
-+       &lt;dependency&gt;
-+           &lt;groupId&gt;org.glassfish.jaxb&lt;/groupId&gt;
-+           &lt;artifactId&gt;jaxb-runtime&lt;/artifactId&gt;
-+           &lt;scope&gt;provided&lt;/scope&gt;
-+       &lt;/dependency&gt;
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
++       <dependency>
++           <groupId>org.glassfish.jaxb</groupId>
++           <artifactId>jaxb-runtime</artifactId>
++           <scope>provided</scope>
++       </dependency>
 
-        &lt;dependency&gt;
-            &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
 
 diff --git a/springworkspace/migrate-spring-boot-demo/src/main/java/com/bsmlabs/migratespringbootdemo/SampleController.java b/springworkspace/migrate-spring-boot-demo/src/main/java/com/bsmlabs/migratespringbootdemo/SampleController.java
 index b7c6d44..2d593da 100644
@@ -259,10 +268,10 @@ index 68f3220..482e848 100644
 +            return false;
 +        }
          Person person = (Person) o;
-         return Objects.equals(id, person.id) &amp;&amp; Objects.equals(name, person.name);
+         return Objects.equals(id, person.id) && Objects.equals(name, person.name);
      }
+```
 
-</pre>
 
 For the Maven **pom.xml**, you can observe the following changes and In the diff file itself, OpenRewrite also creates comments for each recipe that was used to modify the file
 

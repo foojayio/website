@@ -91,12 +91,15 @@ Update the `nonStopMapExample()` function in your failover client to trap the ex
 
 1. Add the following try-catch block to the `while` loop in the `nonStopMapExample()` function. This code replaces the original `map.put()` function.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">try {
+```
+try {
     map.put("key-" + randomKey, "value-" + randomKey);
 } catch (Exception e) {
     // Captures exception from disconnected client
     e.printStackTrace();
-}</pre>
+}
+```
+
 
 2. Verify your code again (repeat Step 3.). This time the client continues to write map entries after it connects to the secondary cluster.
 

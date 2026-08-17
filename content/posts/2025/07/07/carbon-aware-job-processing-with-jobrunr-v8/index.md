@@ -33,11 +33,14 @@ What is JobRunr? {#h2-0-what-is-jobrunr}
 
 JobRunr is an modern background job scheduling library that runs on the Java Virtual Machine. With JobRunr, firing off jobs becomes trivial:
 
-<pre class="EnlighterJSRAW EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">BackgroundJob.enqueue(() -&gt; service.process()) 
+```java
+BackgroundJob.enqueue(() -> service.process()) 
 // that's it! 
 
-BackgroundJob.schedule(now().plusHours(1), () -&gt; service.process()); 
-// will process in an hour</pre>
+BackgroundJob.schedule(now().plusHours(1), () -> service.process()); 
+// will process in an hour
+```
+
 
 The following Foojay articles explore the basics of JobRunr:
 
@@ -57,40 +60,51 @@ That is usually a little sooner or a little later than the preferred instant. Fo
 
 Without making use of Carbon Aware Job Processing , a simple recurring job could be scheduled triggering the above:
 
-<pre class="EnlighterJSRAW EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">BackgroundJob.scheduleRecurrently("0 18 * * *", 
-   () -&gt; surveyController.calculateAndSend());</pre>
+```java
+BackgroundJob.scheduleRecurrently("0 18 * * *", 
+   () -> surveyController.calculateAndSend());
+```
+
 
 We do not know when this job ends (it could be a small survey or a big one), but we do know when `calculateAndSend()` starts: at 18h. But is that really needed at exactly 18h? Maybe it could trigger a few hours earlier or later, when less CO2 is being generated (e.g. when solar panels start generating more energy as the sun comes up).
 
 With Carbon Aware Job Processing, we can add a margin to this precise moment. Sending out the survey an hour earlier and four hours later is still perfectly fine, as long as the job is started after our shop closes at 17h, we're all good. Adding a margin is just a matter of altering the cron string to add the slack in [ISO 8601 duration standard format](https://en.wikipedia.org/wiki/ISO_8601):
 
-<pre class="EnlighterJSRAW EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">BackgroundJob.scheduleRecurrently("0 18 * * * [PT1H/PT4H]", 
-   () -&gt; surveyController.calculateAndSend());</pre>
+```java
+BackgroundJob.scheduleRecurrently("0 18 * * * [PT1H/PT4H]", 
+   () -> surveyController.calculateAndSend());
+```
+
 
 We can specify the flexibility of the schedule as an interval between square brackets, but we obviously have to stay within the 24h duration.
 
 Note that this functionality is not part of the cron standard but a JobRunr-specific flavour on top of it. In case that is not readable to you, no worries: you can also make use of the `CarbonAware` and `CarbonAwarePeriod` APIs to express the schedule in code instead of in a string:
 
-<pre class="EnlighterJSRAW EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">// option 2 
+```
+// option 2 
 BackgroundJob.scheduleRecurrently(CarbonAware.dailyBetween(17, 22), 
-   () -&gt; surveyController.calculateAndSend()); 
+   () -> surveyController.calculateAndSend()); 
 
 // option 3 
 BackgroundJob.scheduleRecurrently(CarbonAware.cron("0 18 * * *", Duration.of(1, HOURS), Duration.of(4, HOURS)), 
-   () -&gt; surveyController.calculateAndSend());</pre>
+   () -> surveyController.calculateAndSend());
+```
+
 
 In case that survey generation was a one-time thing instead of a recurring thing, simply replace `scheduleRecurrently()` with `schedule()` and pass in a `CarbonAwarePeriod`:
 
-<pre class="EnlighterJSRAW EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">// do stuff at most three hours later
+```java
+// do stuff at most three hours later
 BackgroundJob.schedule(CarbonAwarePeriod.before(Instant.now().plus(3, HOURS)), 
-   () -&gt; myController.doStuff());
+   () -> myController.doStuff());
 
 // do stuff between one hour from now and five hours from now
 BackgroundJob.schedule(CarbonAwarePeriod.between(Instant.now().plus(1, HOURS), Instant.now().plus(5, HOURS)), 
-   () -&gt; myController.doStuff());
+   () -> myController.doStuff());
 
 // ...
-</pre>
+```
+
 
 More examples and the exact API usage can be found in [the JobRunr documentation](https://www.jobrunr.io/en/documentation/background-methods/carbon-aware-jobs/).
 
@@ -100,7 +114,8 @@ Before you can make use of Carbon Aware jobs, you will have to enable the new fe
 
 Configuring that area code in the [ISO 3166-2 standard format](https://en.wikipedia.org/wiki/ISO_3166-2) (e.g. "BE" or "IT-NO") is very straightforward:
 
-<pre class="EnlighterJSRAW EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">JobRunr
+```java
+JobRunr
     .configure()
     // ...
     .useBackgroundJobServer(usingStandardBackgroundJobServerConfiguration()
@@ -110,13 +125,16 @@ Configuring that area code in the [ISO 3166-2 standard format](https://en.wikipe
                     // ....
             ))
     // ...
-</pre>
+```
+
 
 Is your application bootstrapped with Spring Boot, Quarkus, or Micronaut? Great, JobRunr supports these as well! In that case, just add two new entries in your trusty `application.properties`:
 
-<pre class="EnlighterJSRAW EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">jobrunr.background-job-server.carbon-aware-job-processing.enabled=true
+```
+jobrunr.background-job-server.carbon-aware-job-processing.enabled=true
 jobrunr.background-job-server.carbon-aware-job-processing.area-code=BE
-</pre>
+```
+
 
 See the [Carbon Aware Configuration documentation](https://www.jobrunr.io/en/documentation/configuration/carbon-aware/) for all possible configuration properties and their default values.
 

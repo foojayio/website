@@ -30,29 +30,36 @@ Currently, there is no [Testcontainers Java](https://java.testcontainers.org%24/
 
 There is [GenericContainer](https://java.testcontainers.org/features/creating_container/) that can be used for any container image:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@Container
-static GenericContainer&lt;?&gt; artemis = new GenericContainer&lt;&gt;(
+```java
+@Container
+static GenericContainer<?> artemis = new GenericContainer<>(
               DockerImageName.parse("apache/activemq-artemis:latest-alpine"))
         .withEnv("ANONYMOUS_LOGIN", "true")
-        .withExposedPorts(61616);</pre>
+        .withExposedPorts(61616);
+```
+
 
 As you can see, we need some configuration. First, we use the official ActiveMQ Artemis image, which is available in [Docker Hub](https://hub.docker.com/). Then, we set ANONYMOUS_LOGIN to true. Otherwise, we must provide username and password, which is not needed just for testing. And finally, we must expose the default port to which we want to send our message.
 
 Now, the Artemis JMS client needs to know the URL for the connection. We can use @DynamicPropertySource for that purpose and use the information from the Testcontainers container:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@DynamicPropertySource
+```java
+@DynamicPropertySource
 static void artemisProperties(DynamicPropertyRegistry registry) {
     registry.add("spring.artemis.broker-url", 
-        () -&gt; "tcp://%s:%d".formatted(
+        () -> "tcp://%s:%d".formatted(
               artemis.getHost(), artemis.getMappedPort(61616)));
-}</pre>
+}
+```
+
 
 Writing the Test {#h2-1-writing-the-test}
 -----------------------------------------
 
 Finally, everything is prepared, and we can write a test that sends and receives a message:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@Autowired
+```
+@Autowired
 private JmsTemplate jmsTemplate;
 
 @Test
@@ -64,7 +71,9 @@ void sendMessage() throws JMSException {
     assertThat(message).isInstanceOf(TextMessage.class);
     TextMessage textMessage = (TextMessage) message;
     assertThat(textMessage.getText()).isEqualTo("Hello, JMS");
- }</pre>
+ }
+```
+
 
 Conclusion {#h2-2-conclusion}
 -----------------------------

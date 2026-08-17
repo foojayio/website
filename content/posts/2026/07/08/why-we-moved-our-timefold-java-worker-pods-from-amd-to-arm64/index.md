@@ -26,7 +26,7 @@ Originally written by Timefold engineers Lars Beckmann, Jenne De Bleser and Luk√
 
 Adapted for foojay by Tom Cools
 
-*** ** * ** ***
+
 
 Something felt off.
 

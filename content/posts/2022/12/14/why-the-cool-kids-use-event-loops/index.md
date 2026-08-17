@@ -77,7 +77,8 @@ This approach can be applied to a wide range of use cases -- for example, the [C
 
 To illustrate how you can use the Chronicle Event loop in your code we have put together a code example called [SingleAndMultiThreadedExample](https://github.com/OpenHFT/Chronicle-Threads/blob/develop/src/test/java/net/openhft/chronicle/threads/example/SingleAndMultiThreadedExample.java "SingleAndMultiThreadedExample"):
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="dracula">package net.openhft.chronicle.threads.example;
+```java
+package net.openhft.chronicle.threads.example;
 
 import net.openhft.chronicle.core.threads.EventLoop;
 import net.openhft.chronicle.core.threads.InvalidEventHandlerException;
@@ -118,7 +119,7 @@ public class SingleAndMultiThreadedExample {
     }
 
     private Void addOneHundred() {
-        for (int i = 0; i &lt; 100; i++) {
+        for (int i = 0; i < 100; i++) {
             multiThreadedValue.incrementAndGet();
         }
         return null;
@@ -128,11 +129,11 @@ public class SingleAndMultiThreadedExample {
 
         // example using Java Threads
         final ExecutorService executorService = newCachedThreadPool();
-        Future&lt;?&gt; f1 = executorService.submit(this::addOneHundred);
-        Future&lt;?&gt; f2 = executorService.submit(this::addOneHundred);
-        Future&lt;?&gt; f3 = executorService.submit(this::addOneHundred);
-        Future&lt;?&gt; f4 = executorService.submit(this::addOneHundred);
-        Future&lt;?&gt; f5 = executorService.submit(this::addOneHundred);
+        Future<?> f1 = executorService.submit(this::addOneHundred);
+        Future<?> f2 = executorService.submit(this::addOneHundred);
+        Future<?> f3 = executorService.submit(this::addOneHundred);
+        Future<?> f4 = executorService.submit(this::addOneHundred);
+        Future<?> f5 = executorService.submit(this::addOneHundred);
 
         f1.get();
         f2.get();
@@ -146,7 +147,7 @@ public class SingleAndMultiThreadedExample {
         final EventLoop eventLoop = new MediumEventLoop(null, "test", Pauser.balanced(), false, "none");
         eventLoop.start();
         CountDownLatch finished = new CountDownLatch(1);
-        eventLoop.addHandler(() -&gt; {
+        eventLoop.addHandler(() -> {
 
             singleThreadedValue++;
             // we throw this to un-register the event loop
@@ -164,7 +165,9 @@ public class SingleAndMultiThreadedExample {
         System.out.println("eventLoopExample=" + singleThreadedValue);
     }
 
-}</pre>
+}
+```
+
 
 ### Conclusion {#h3-2-conclusion}
 

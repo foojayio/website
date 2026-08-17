@@ -36,7 +36,7 @@ In this mode, you can write an expression with your virtual keyboard as if you w
 
 More info in [this blog post](https://webtechie.be/post/2024-09-17-jfxinaction-maciej-gorywoda/).
 
-*** ** * ** ***
+
 
 Ramiro Domínguez Ayub about the Televic Generic Update Tool {#h2-1-ramiro-dom-nguez-ayub-about-the-televic-generic-update-tool}
 -------------------------------------------------------------------------------------------------------------------------------
@@ -53,7 +53,7 @@ Thanks to the thread handling in the Java backend of the application, it's possi
 
 More info in [this blog post](https://webtechie.be/post/2024-09-24-jfxinaction-ramiro-dominguez-ayubat/).
 
-*** ** * ** ***
+
 
 Christoph Schwentker about JabRef {#h2-2-christoph-schwentker-about-jabref}
 ---------------------------------------------------------------------------
@@ -68,7 +68,7 @@ JabRef is developed as free, open-source software and saves your data in a simpl
 
 More info in [this blog post](https://webtechie.be/post/2024-10-01-jfxinaction-christoph-schwentker/).
 
-*** ** * ** ***
+
 
 Ulas Ergin: How JavaFX helps to migrate from Swing to React UIs, all combined in one Java app {#h2-3-ulas-ergin-how-javafx-helps-to-migrate-from-swing-to-react-uis-all-combined-in-one-java-app}
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

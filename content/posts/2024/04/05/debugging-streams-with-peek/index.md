@@ -55,20 +55,26 @@ This not only makes the code more readable but also more concise compared to tra
 
 To illustrate, consider the task of filtering a list of names to only include those that start with the letter "J" and then transforming each name into uppercase. Using the traditional approach, this might involve a loop and some if statements. However, with streams, this can be accomplished in a few lines:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">List&lt;String&gt; names = Arrays.asList("John", "Jacob", "Edward", "Emily");
+```
+List<String> names = Arrays.asList("John", "Jacob", "Edward", "Emily");
 // Convert list to stream
-List&lt;String&gt; filteredNames = names.stream()       
+List<String> filteredNames = names.stream()       
                   // Filter names that start with "J"
-                  .filter(name -&gt; name.startsWith("J"))  
+                  .filter(name -> name.startsWith("J"))  
                   // Convert each name to uppercase
                   .map(String::toUpperCase)              
                   // Collect results into a new list
                   .collect(Collectors.toList());         
-System.out.println(filteredNames);</pre>
+System.out.println(filteredNames);
+```
+
 
 Output:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">[JOHN, JACOB]</pre>
+```
+[JOHN, JACOB]
+```
+
 
 This example demonstrates the power of Java streams: by chaining operations together, we can achieve complex data transformations and filtering with minimal, readable code.
 
@@ -81,17 +87,22 @@ At its core, `peek()` is a method provided by the `Stream` interface, allowing d
 
 The signature of `peek()` is as follows:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">Stream&lt;T&gt; peek(Consumer&lt;? super T&gt; action)
-</pre>
+```
+Stream<T> peek(Consumer<? super T> action)
+```
+
 
 It accepts a `Consumer` functional interface, which means it performs an action on each element of the stream without altering them. The most common use case for `peek()` is logging the elements of a stream to understand the state of data at various points in the stream pipeline.
 
 To understand peek lets look at a sample similar to the previous one:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">List&lt;String&gt; collected = Stream.of("apple", "banana", "cherry")
-                               .filter(s -&gt; s.startsWith("a"))
+```
+List<String> collected = Stream.of("apple", "banana", "cherry")
+                               .filter(s -> s.startsWith("a"))
                                .collect(Collectors.toList());
-System.out.println(collected);</pre>
+System.out.println(collected);
+```
+
 
 This code filters a list of strings, keeping only the ones that start with "a".
 
@@ -101,12 +112,15 @@ While it's straightforward, understanding what happens during the filter operati
 
 Now, let's incorporate `peek()` to gain visibility into the stream:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">List&lt;String&gt; collected = Stream.of("apple", "banana", "cherry")
+```
+List<String> collected = Stream.of("apple", "banana", "cherry")
                                .peek(System.out::println) // Logs all elements
-                               .filter(s -&gt; s.startsWith("a"))
+                               .filter(s -> s.startsWith("a"))
                                .peek(System.out::println) // Logs filtered elements
                                .collect(Collectors.toList());
-System.out.println(collected);</pre>
+System.out.println(collected);
+```
+
 
 By adding `peek()` both before and after the `filter` operation, we can see which elements are processed and how the filter impacts the stream. This visibility is invaluable for debugging, especially when the logic within the stream operations becomes complex.
 
@@ -119,21 +133,27 @@ Uncovering Common Bugs with `peek()` {#h2-4-uncovering-common-bugs-with-peek}
 
 Consider a scenario where a filter condition is not working as expected:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">List&lt;String&gt; collected = Stream.of("apple", "banana", "cherry", "Avocado")
-                               .filter(s -&gt; s.startsWith("a"))
+```
+List<String> collected = Stream.of("apple", "banana", "cherry", "Avocado")
+                               .filter(s -> s.startsWith("a"))
                                .collect(Collectors.toList());
-System.out.println(collected);</pre>
+System.out.println(collected);
+```
+
 
 Expected output might be `["apple"]`, but let's say we also wanted "Avocado" due to a misunderstanding of the `startsWith` method's behavior. Since "Avocado" is spelled with an upper case "A" this code will return false: `Avocado".startsWith("a")`.
 
 Using `peek()`, we can observe the elements that pass the filter:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">List&lt;String&gt; debugged = Stream.of("apple", "banana", "cherry", "Avocado")
+```
+List<String> debugged = Stream.of("apple", "banana", "cherry", "Avocado")
                               .peek(System.out::println)
-                              .filter(s -&gt; s.startsWith("a"))
+                              .filter(s -> s.startsWith("a"))
                               .peek(System.out::println)
                               .collect(Collectors.toList());
-System.out.println(debugged);</pre>
+System.out.println(debugged);
+```
+
 
 ### Large Data Sets {#h3-6-large-data-sets}
 
@@ -143,23 +163,24 @@ It can clutter the console and make it hard to spot the relevant information. In
 
 Consider a scenario where we're processing a large dataset of transactions, and we want to debug issues related to transactions exceeding a certain threshold:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">class Transaction {
+```
+class Transaction {
     private String id;
     private double amount;
 
     // Constructor, getters, and setters omitted for brevity
 }
 
-List&lt;Transaction&gt; transactions = // Imagine a large list of transactions
+List<Transaction> transactions = // Imagine a large list of transactions
 
 // A placeholder for debugging information
-List&lt;Transaction&gt; highValueTransactions = new ArrayList&lt;&gt;();
+List<Transaction> highValueTransactions = new ArrayList<>();
 
-List&lt;Transaction&gt; processedTransactions = transactions.stream()
+List<Transaction> processedTransactions = transactions.stream()
     // Filter transactions above a threshold
-    .filter(t -&gt; t.getAmount() &gt; 5000) 
-    .peek(t -&gt; {
-        if (t.getAmount() &gt; 10000) {
+    .filter(t -> t.getAmount() > 5000) 
+    .peek(t -> {
+        if (t.getAmount() > 10000) {
             // Collect only high-value transactions for debugging
             highValueTransactions.add(t);
         }
@@ -168,7 +189,9 @@ List&lt;Transaction&gt; processedTransactions = transactions.stream()
 
 // Now, we can analyze high-value transactions separately, without overloading the console
 System.out.println("High-value transactions count: " + 
-       highValueTransactions.size());</pre>
+       highValueTransactions.size());
+```
+
 
 In this approach, `peek()` is used to inspect elements within the stream conditionally. High-value transactions that meet a specific criterion (e.g., amount \> 10,000) are collected into a separate list for further analysis.
 

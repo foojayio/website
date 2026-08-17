@@ -40,7 +40,8 @@ We already know that Java deserialization does not use the constructor to create
 
 Let's look at the following example of Java deserialize vulnerability where we serialize an object from a serializable class `ValueObject`:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public class ValueObject implements Serializable {
+```java
+public class ValueObject implements Serializable {
 
    private String value;
    private String sideEffect;
@@ -60,7 +61,9 @@ FileOutputStream fileOut = new FileOutputStream("ValueObject.ser");
 ObjectOutputStream out = new ObjectOutputStream(fileOut);
 out.writeObject(vo1);
 out.close();
-fileOut.close();</pre>
+fileOut.close();
+```
+
 
 When reading the file `ValueObject.ser` containing the serialized object with a hex-editor the output is this:
 ![](image-7-1024x433.png)
@@ -68,9 +71,12 @@ When reading the file `ValueObject.ser` containing the serialized object with a 
 Now I can easily manipulate the string value. Below I change it from `Hi` to `Hallo`:
 ![](image-8-1024x411.png)
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">FileInputStream fileIn = new FileInputStream("ValueObject2.ser");
+```java
+FileInputStream fileIn = new FileInputStream("ValueObject2.ser");
 ObjectInputStream in = new ObjectInputStream(fileIn);
-ValueObject vo2 = (ValueObject) in.readObject();</pre>
+ValueObject vo2 = (ValueObject) in.readObject();
+```
+
 
 When deserializing the adjusted binary file, we find out that the object's `value` changed. We also see that the timestamp didn't change, proving that the constructor is never called.
 

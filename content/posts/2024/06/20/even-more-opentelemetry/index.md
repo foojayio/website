@@ -57,7 +57,8 @@ OpenTelemetry did work on the JVM version but didn't when I compiled it to *byte
 
 In my case, the guilty class was `OtlpTracingConfigurations.ConnectionDetails`. It relies on the `management.otlp.tracing.endpoint` property:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">class OtlpTracingConfigurations {
+```java
+class OtlpTracingConfigurations {
 
   @Configuration(proxyBeanMethods = false)
   static class ConnectionDetails {
@@ -68,7 +69,9 @@ In my case, the guilty class was `OtlpTracingConfigurations.ConnectionDetails`. 
     OtlpTracingConnectionDetails otlpTracingConnectionDetails(OtlpProperties properties) {
       return new PropertiesOtlpTracingConnectionDetails(properties);
     }
-}</pre>
+}
+```
+
 
 If the property is not present **at compile-time** , the Spring Framework doesn't create a bean of type `OtlpTracingConnectionDetails`. Through a chain of missing beans, the final binary doesn't contain OpenTelemetry-related code. The solution is easy: set the property to an empty string in the `application.properties` file, and override it to its regular value in the Docker Compose file.
 
@@ -81,25 +84,34 @@ I used JavaScript in my first draft of a subscriber to the MQTT queue. Soon afte
 
 However, when I tried to fix the code to "true" TypeScript, I couldn't see any OpenTelemetry trace. As for GraalVM, I went back and forth several times, but this time, I decided to solve it once and for all. I migrated code line by line until I isolated the issue in the following snippet:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="js">const userProperties = {}
+```javascript
+const userProperties = {}
 
-if (packet.properties &amp;&amp; packet.properties['userProperties']) {
+if (packet.properties && packet.properties['userProperties']) {
     const props = packet.properties['userProperties']
     console.error('Props', props)
     for (const key of Object.keys(props)) {
         userProperties[key] = props[key]                         //1
     }
-}</pre>
+}
+```
+
 
 1. The TypeScript compiler complains with the following error message: `TS7053: Element implicitly has an any type because expression of type string can't be used to index type {}`
 
 I earlier tried to fix it with the following:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="typescript">const userProperties = new Map&lt;string, any&gt;()</pre>
+```typescript
+const userProperties = new Map<string, any>()
+```
+
 
 It compiled, but my limited understanding of JavaScript prevented me from realizing that a `Map` is not the same structure as an object. I understood the issue only when I isolated the exact line that went wrong. I just had to find the correct syntax to declare the type of an object:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="typescript">const userProperties: Record&lt;string, any&gt; = {}</pre>
+```typescript
+const userProperties: Record<string, any> = {}
+```
+
 
 Adding a Redis cache {#h2-4-adding-a-redis-cache}
 -------------------------------------------------
@@ -140,7 +152,7 @@ In this post, I've described several changes I made in my OpenTelemetry tracing 
 
 The complete source code for this post can be found on GitHub.
 
-*** ** * ** ***
+
 
 *Originally published at [A Java Geek](https://blog.frankel.ch/even-more-opentelemetry/) on June 2^nd^, 2024*
 

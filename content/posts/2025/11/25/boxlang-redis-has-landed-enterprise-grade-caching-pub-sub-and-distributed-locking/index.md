@@ -45,18 +45,22 @@ The BoxLang Redis Module provides native Redis functionality, enabling you to co
 
 Installing the Redis module is straightforward. It's available to [BoxLang +/++ subscribers](https://www.boxlang.io/plans "BoxLang +/++ subscribers") and includes a 60-day trial so you can explore all features risk-free!
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java"># For Operating Systems using our Quick Installer
+```java
+# For Operating Systems using our Quick Installer
 install-bx-module bx-redis
 
 # Using CommandBox for web servers
-box install bx-redis</pre>
+box install bx-redis
+```
+
 
 🔧 Quick Configuration {#h2-3-quick-configuration}
 --------------------------------------------------
 
 Configure your Redis cache in `Application.bx`:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">component {
+```java
+component {
     this.name = "MyApp";
 
     // Configure Redis cache
@@ -75,7 +79,9 @@ Configure your Redis cache in `Application.bx`:
 
     // Use Redis for sessions (optional)
     this.sessionStorage = "redis";
-}</pre>
+}
+```
+
 
 That's it! Your BoxLang application is now Redis-enabled and all sessions will be distributed to Redis.
 
@@ -84,11 +90,12 @@ That's it! Your BoxLang application is now Redis-enabled and all sessions will b
 
 The Redis module works seamlessly with BoxLang's standard caching approaches:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">// Cache user data for 30 minutes
+```java
+// Cache user data for 30 minutes
 userData = {
     userID: 123,
     name: "John Doe",
-    email: "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="711b1e191f311409101c011d145f121e1c">[email&nbsp;protected]</a>",
+    email: "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="711b1e191f311409101c011d145f121e1c">[email protected]</a>",
     preferences: { theme: "dark", language: "en" }
 };
 
@@ -105,15 +112,18 @@ if ( userAttempt.isPresent() ) {
 // Or use getOrSet for automatic fallback
 user = cache( "redis" ).getOrSet(
     "user:123",
-    () =&gt; loadUserFromDatabase( 123 ),
+    () => loadUserFromDatabase( 123 ),
     1800
-);</pre>
+);
+```
+
 
 #### Query Caching
 
 Speed up your database operations with transparent query caching:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">// Automatic query caching
+```java
+// Automatic query caching
 qry = queryExecute(
     "SELECT * FROM products WHERE category = :category",
     { category: "electronics" },
@@ -126,14 +136,16 @@ qry = queryExecute(
 
 // Or use manual caching for more control
 function getCachedQuery( sql, params = {}, timeout = 1800 ) {
-    var cacheKey = "query:" &amp; hash( sql &amp; serializeJSON( params ) );
+    var cacheKey = "query:" & hash( sql & serializeJSON( params ) );
 
     return cache( "redis" ).getOrSet(
         cacheKey,
-        () =&gt; queryExecute( sql, params ),
+        () => queryExecute( sql, params ),
         timeout
     );
-}</pre>
+}
+```
+
 
 📢 Publish/Subscribe: Real-Time Messaging {#h2-5-publish-subscribe-real-time-messaging}
 ---------------------------------------------------------------------------------------
@@ -142,7 +154,8 @@ One of the most exciting features is Redis Pub/Sub support, enabling real-time e
 
 #### Publishing Messages
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">// Publish a notification
+```java
+// Publish a notification
 redisPublish( 
     "notifications", 
     {
@@ -160,15 +173,18 @@ redisPublish(
         userId: 12345,
         timestamp: now()
     }
-);</pre>
+);
+```
+
 
 #### Subscribing to Channels
 
 Create a subscriber using a closure:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">// Subscribe with a lambda function
+```java
+// Subscribe with a lambda function
 redisSubscribe(
-    ( channel, message ) =&gt; {
+    ( channel, message ) => {
         var data = deserializeJSON( message );
         println( "Received on [#channel#]: #data.message#" );
 
@@ -178,11 +194,14 @@ redisSubscribe(
         }
     },
     [ "notifications", "alerts", "user-events" ]
-);</pre>
+);
+```
+
 
 Or use a listener class for complex scenarios:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">// NotificationListener.bx
+```java
+// NotificationListener.bx
 class {
 
     public void function onMessage( string channel, string message ) {
@@ -223,11 +242,14 @@ var subscription = redisSubscribe(
     listener,
     [ "user-events", "notifications", "system-alerts" ],
     "redis"
-);</pre>
+);
+```
+
 
 Real-World Pub/Sub Example: Cache Invalidation
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">// When data changes, notify all servers
+```java
+// When data changes, notify all servers
 function updateUser( required numeric userId, required struct data ) {
     // Update database
     userDAO.update( userId, data );
@@ -241,30 +263,36 @@ function updateUser( required numeric userId, required struct data ) {
 
 // All servers listen and invalidate their caches
 redisSubscribe(
-    ( channel, message ) =&gt; {
+    ( channel, message ) => {
         cacheRemove( "user:#message#" );
         println( "Cache invalidated for user: #message#" );
     },
     "cache:invalidate:  user"
-);</pre>
+);
+```
+
 
 🔒 Distributed Locking: Coordinate Across Servers {#h2-6-distributed-locking-coordinate-across-servers}
 -------------------------------------------------------------------------------------------------------
 
 In clustered environments, you need to prevent multiple servers from executing the same code simultaneously. The `bx:RedisLock` component makes this trivial:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">// Ensure only one server processes orders at a time
+```java
+// Ensure only one server processes orders at a time
 redisLock name="processOrders" cache="redis" timeout=5 expires=30 {
     // Only one server executes this block
     var orders = orderService.getPendingOrders();
     for ( var order in orders ) {
         orderService.processOrder( order );
     }
-}</pre>
+}
+```
+
 
 #### Scheduled Task Coordination
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">// Prevent duplicate scheduled task execution
+```java
+// Prevent duplicate scheduled task execution
 component {
 
     function runDailyCleanup() {
@@ -280,11 +308,14 @@ component {
         }
     }
 
-}</pre>
+}
+```
+
 
 #### Cache Warming Without Race Conditions
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">// Prevent multiple servers from warming cache simultaneously
+```java
+// Prevent multiple servers from warming cache simultaneously
 redisLock 
     name="warmProductCache" 
     cache="redis" 
@@ -303,11 +334,14 @@ redisLock
 
         println( "Cache warmed successfully" );
     }
-}</pre>
+}
+```
+
 
 #### Database Migration Coordination
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">// Ensure migrations run only once across the cluster
+```java
+// Ensure migrations run only once across the cluster
 redisLock name="dbMigration" cache="redis" timeout=30 expires=600 {
     var pendingMigrations = migrationService.getPendingMigrations();
 
@@ -317,22 +351,27 @@ redisLock name="dbMigration" cache="redis" timeout=30 expires=600 {
     }
 
     println( "All migrations completed" );
-}</pre>
+}
+```
+
 
 #### Templating Syntax Support
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">&lt;bx:RedisLock
+```java
+<bx:RedisLock
     name="processQueue"
     cache="redis"
     timeout="10"
     expires="60"
-&gt;
-    &lt;bx:set var="item" value="#queue.getNextItem()#" /&gt;
-    &lt;bx:if condition="#!isNull( item )#"&gt;
-        &lt;bx:set var="result" value="#processItem( item )#" /&gt;
-        &lt;bx:set var="marked" value="#queue.markComplete( item )#" /&gt;
-    &lt;/bx:if&gt;
-&lt;/bx:RedisLock&gt;</pre>
+>
+    <bx:set var="item" value="#queue.getNextItem()#" />
+    <bx:if condition="#!isNull( item )#">
+        <bx:set var="result" value="#processItem( item )#" />
+        <bx:set var="marked" value="#queue.markComplete( item )#" />
+    </bx:if>
+</bx:RedisLock>
+```
+
 
 🎯 Deployment Modes {#h2-7-deployment-modes}
 --------------------------------------------
@@ -343,20 +382,24 @@ The Redis module supports three deployment modes to match your infrastructure:
 
 Perfect for development and single-server applications:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">this.caches[ "redis" ] = {
+```java
+this.caches[ "redis" ] = {
     provider: "Redis",
     properties: {
         host: "127.0.0.1",
         port: 6379,
         database: 0
     }
-};</pre>
+};
+```
+
 
 #### Redis Cluster
 
 For high-availability production environments with automatic sharding:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">this.caches[ "redis" ] = {
+```java
+this.caches[ "redis" ] = {
     provider: "RedisCluster",
     properties: {
         hosts: "node1.redis.local,node2.redis.local,node3.redis.local",
@@ -366,13 +409,16 @@ For high-availability production environments with automatic sharding:
         useSSL: true,
         maxConnections: 1000
     }
-};</pre>
+};
+```
+
 
 #### Redis Sentinel
 
 For automatic failover with master-slave replication:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">this.caches[ "redis" ] = {
+```java
+this.caches[ "redis" ] = {
     provider: "RedisSentinel",
     properties: {
         sentinels: "sentinel1.myhost.com:26379,sentinel2.myhost.com:26379",
@@ -380,7 +426,9 @@ For automatic failover with master-slave replication:
         password: getSystemSetting( "REDIS_PASSWORD" ),
         useSSL: true
     }
-};</pre>
+};
+```
+
 
 📚 Comprehensive Documentation {#h2-8-comprehensive-documentation}
 ------------------------------------------------------------------

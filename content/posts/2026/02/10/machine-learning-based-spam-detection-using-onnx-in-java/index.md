@@ -45,7 +45,8 @@ The Controller {#h2-1-the-controller}
 
 The controller isn't much but here it is for reference, as you can see we have defined our API endpoint at the path: `/api/spam/check` which is intended to be called via a POST request. We rely on Spring's internal content negotiation for the request and responses meaning we can expect to be able to send and receive JSON.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">@RequestMapping("/api/spam/check")
+```
+@RequestMapping("/api/spam/check")
 @RestController
 public class SpamCheckerController {
     private final SpamDetectionService spamDetectionService;
@@ -55,10 +56,12 @@ public class SpamCheckerController {
     }
 
     @PostMapping
-    public ResponseEntity&lt;SpamCheckResponse&gt; checkSpam(@RequestBody SpamCheckRequest request) throws Exception {
+    public ResponseEntity<SpamCheckResponse> checkSpam(@RequestBody SpamCheckRequest request) throws Exception {
         return ok(spamDetectionService.detectSpam(request));
     }
-}</pre>
+}
+```
+
 
 The Spam Detection Service {#h2-2-the-spam-detection-service}
 -------------------------------------------------------------
@@ -67,7 +70,8 @@ The end goal is to have an API that can be called from HTTP client. But In order
 
 Inside this class we leverage the ONNX runtime for Java, passing the paths to the model and tokenizer files to initiate a [HuggingFaceTokenizer](https://djl.ai/extensions/tokenizers/) . Here is the full code of the service:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">@Service
+```
+@Service
 public class SpamDetectionService implements AutoCloseable {
 
     private final HuggingFaceTokenizer tokenizer;
@@ -112,7 +116,7 @@ public class SpamDetectionService implements AutoCloseable {
         try (OnnxTensor inputTensor = OnnxTensor.createTensor(env, LongBuffer.wrap(inputIds), shape);
              OnnxTensor maskTensor = OnnxTensor.createTensor(env, LongBuffer.wrap(attentionMask), shape)) {
 
-            Map&lt;String, OnnxTensor&gt; inputs = new HashMap&lt;&gt;();
+            Map<String, OnnxTensor> inputs = new HashMap<>();
             inputs.put("input_ids", inputTensor);
             inputs.put("attention_mask", maskTensor);
             String tokenTypeIdsName = "token_type_ids";
@@ -141,7 +145,7 @@ public class SpamDetectionService implements AutoCloseable {
             float cleanProb = probs[0] * 100;
             float scamProb = probs[1] * 100;
 
-            int prediction = (probs[1] &gt; probs[0]) ? 1 : 0;
+            int prediction = (probs[1] > probs[0]) ? 1 : 0;
 
             String label = (prediction == 1) ? "SCAM" : "CLEAN";
 
@@ -155,14 +159,14 @@ public class SpamDetectionService implements AutoCloseable {
         float[] probabilities = new float[logits.length];
         float maxLogit = Float.NEGATIVE_INFINITY;
         for (float v : logits) {
-            if (v &gt; maxLogit) maxLogit = v;
+            if (v > maxLogit) maxLogit = v;
         }
         float sum = 0.0f;
-        for (int i = 0; i &lt; logits.length; i++) {
+        for (int i = 0; i < logits.length; i++) {
             probabilities[i] = (float) Math.exp(logits[i] - maxLogit);
             sum += probabilities[i];
         }
-        for (int i = 0; i &lt; logits.length; i++) {
+        for (int i = 0; i < logits.length; i++) {
             probabilities[i] /= sum;
         }
 
@@ -175,24 +179,32 @@ public class SpamDetectionService implements AutoCloseable {
         env.close();
         tokenizer.close();
     }
-}</pre>
+}
+```
+
 
 You may note that the paths have default values which point to a directory starting with `/models` that's because we intend to run this by default from a Docker container.
 
 However, you can customize the paths to these models using the following configuration in a Spring Boot configuration file, e.g. in application.yaml:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic"># application.yaml
+```
+# application.yaml
 model:
   path: "/path/to/models/model.onnx"
 tokenizer:
-  path: "/path/to/models/tokenizer.json"</pre>
+  path: "/path/to/models/tokenizer.json"
+```
+
 
 Running the service via Docker {#h2-3-running-the-service-via-docker}
 ---------------------------------------------------------------------
 
 The project in the repository uses Jib to build docker image from the Java source code. Run the following command to build the container, by default the created image will be named **zikani03/spam-detection-with-onnx**
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">$ ./mvnw clean jib:dockerBuild</pre>
+```
+$ ./mvnw clean jib:dockerBuild
+```
+
 
 Once the build completes successfully you can run a docker container using the following, binding on port 8080 which the API runs at inside the container.
 
@@ -202,12 +214,17 @@ $ docker run -p "8080:8080"  zikani03/spam-detection-with-onnx
 
 Once that's running, you can then test the SPAM Detection service using your favourite HTTP Client e.g. Postman, Insomnia or even just cURL:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">$ curl -X POST -H "Content-Type: application/json" -d '{"requestId":"test","content":"Cһeck out our amazinɡ bооѕting serviсe ѡhere you can get to Leveӏ 3 for 3 montһs for just 20 USD.","token":"abc"}' "http://localhost:8080/api/spam/check"
-</pre>
+```
+$ curl -X POST -H "Content-Type: application/json" -d '{"requestId":"test","content":"Cһeck out our amazinɡ bооѕting serviсe ѡhere you can get to Leveӏ 3 for 3 montһs for just 20 USD.","token":"abc"}' "http://localhost:8080/api/spam/check"
+```
+
 
 You should get a result similar to this:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">{"result":"SCAM","confidence":99.99815368652344,"id":"test","checkDurationMillis":149}</pre>
+```
+{"result":"SCAM","confidence":99.99815368652344,"id":"test","checkDurationMillis":149}
+```
+
 
 I like to load test things with [hey](https://github.com/rakyll/hey), not bad.
 

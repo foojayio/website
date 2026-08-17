@@ -40,7 +40,8 @@ Thankfully, Manifold comes to the rescue by mitigating these challenges and maki
 
 E.g., for this graphql file taken from the Manifold repository:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">query MovieQuery($genre: Genre!, $title: String, $releaseDate: Date) {
+```
+query MovieQuery($genre: Genre!, $title: String, $releaseDate: Date) {
     movies(genre: $genre, title: $title, releaseDate: $releaseDate) {
         id
         title
@@ -71,11 +72,14 @@ mutation ReviewMutation($movie: ID!, $review: ReviewInput!) {
 
 extend type Query {
     reviewsByStars(stars: Int) : [Review!]!
-}</pre>
+}
+```
+
 
 We can write this sort of fluent code:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">var query = MovieQuery.builder(Action).build();
+```
+var query = MovieQuery.builder(Action).build();
 var result = query.request(ENDPOINT).post();
 var actionMovies = result.getMovies();
 for (var movie : actionMovies) {
@@ -83,7 +87,9 @@ for (var movie : actionMovies) {
     "Title: " + movie.getTitle() + "\n" +
     "Genre: " + movie.getGenre() + "\n" +
     "Year: " + movie.getReleaseDate().getYear() + "\n");
-}</pre>
+}
+```
+
 
 None of these objects need to be declared in advance, all we need are the GraphQL files.
 
@@ -96,15 +102,21 @@ However, this can be particularly challenging when the client-side implementatio
 
 E.g., this JavaScript snippet:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">function calculateValue(total, year, rate) {
+```
+function calculateValue(total, year, rate) {
   var interest = rate / 100 + 1;
   return parseFloat((total * Math.pow(interest, year)).toFixed(4));
-}</pre>
+}
+```
+
 
 Can be invoked from Java as if it was a static method:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">var interest = Calc.calculateValue(4,1999, 5);
-System.out.println(interest);</pre>
+```
+var interest = Calc.calculateValue(4,1999, 5);
+System.out.println(interest);
+```
+
 
 Preprocessor for Java {#h2-2-preprocessor-for-java}
 ---------------------------------------------------
@@ -117,13 +129,16 @@ Manifold addresses this need by offering a preprocessor-like capability. By defi
 
 With Manifold, we can write preprocessor code such as:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">#if SERVER_ON_PREM
+```
+#if SERVER_ON_PREM
     onPremCode();
 #elif SERVER_CLOUD
     cloudCode();
 #else
     #error “Missing definition: SERVER_ON_PREM or SERVER_CLOUD”
-#endif</pre>
+#endif
+```
+
 
 Reflecting on Manifold's Power {#h2-3-reflecting-on-manifold-s-power}
 ---------------------------------------------------------------------

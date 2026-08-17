@@ -36,7 +36,8 @@ A Quick Refresher: What is the DataNavigator? {#h2-0-a-quick-refresher-what-is-t
 
 The `DataNavigator` is BoxLang's fluent helper for safely moving through nested data structures: Structs, Arrays, parsed JSON, configuration documents, runtime metadata. The key feature is that it never throws when a path doesn't exist -- it returns a null, a default, or an empty navigator depending on how you call it.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">// The old way -- three levels of structKeyExists
+```java
+// The old way -- three levels of structKeyExists
 if ( structKeyExists( config, "database" ) ) {
     if ( structKeyExists( config.database, "connection" ) ) {
         maxSize = config.database.connection.pool?.maxSize ?: 10
@@ -45,7 +46,8 @@ if ( structKeyExists( config, "database" ) ) {
 
 // With DataNavigator
 maxSize = dataNavigate( config ).get( ["database", "connection", "pool", "maxSize"], 10 )
-</pre>
+```
+
 
 You create a navigator with the `dataNavigate()` BIF, which accepts a Struct, a JSON string, a file path to a JSON file, or a Java Map. From there, you use `.from()` to scope, `.has()` to check, `.get()` / `.getOrThrow()` to extract.
 
@@ -115,7 +117,8 @@ Real-World Scenarios {#h2-4-real-world-scenarios}
 
 You are consuming a third-party REST API. The payload looks like this:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">{
+```java
+{
   "status": "ok",
   "data": {
     "store": {
@@ -128,40 +131,45 @@ You are consuming a third-party REST API. The payload looks like this:
     }
   }
 }
-</pre>
+```
+
 
 Before 1.14.0, pulling in-stock product names required navigating to the array and then looping:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">// Pre-1.14.0
+```java
+// Pre-1.14.0
 products = dataNavigate( apiResponse )
     .from( ["data", "store", "products"] )
     .get( [] )
 
 inStockNames = products
-    .filter( p -&gt; p.inStock )
-    .map( p -&gt; p.name )
-</pre>
+    .filter( p -> p.inStock )
+    .map( p -> p.name )
+```
+
 
 With JSONPath expressions in 1.14.0, the navigator handles the traversal and filter in a single call:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">nav = dataNavigate( apiResponse )
+```java
+nav = dataNavigate( apiResponse )
 
 // All in-stock product names in one expression
 names = nav.query( "data.store.products[?(@.inStock == true)].name" )
-// =&gt; [ "Keyboard", "License", "Cable" ]
+// => [ "Keyboard", "License", "Cable" ]
 
 // Only hardware items over $50
-expensive = nav.query( "data.store.products[?(@.category == 'hardware' &amp;&amp; @.price &gt; 50)]" )
-// =&gt; [ { id:1, name:"Keyboard", price:149.99, ... } ]
+expensive = nav.query( "data.store.products[?(@.category == 'hardware' && @.price > 50)]" )
+// => [ { id:1, name:"Keyboard", price:149.99, ... } ]
 
 // First in-stock product (single result)
 first = nav.get( "data.store.products[?(@.inStock == true)]" )
-// =&gt; { id:1, name:"Keyboard", ... }
+// => { id:1, name:"Keyboard", ... }
 
 // Total product count (safe, with default)
 count = nav.getOrDefault( "data.store.meta.count", 0 )
-// =&gt; 0 (field doesn't exist, default returned cleanly)
-</pre>
+// => 0 (field doesn't exist, default returned cleanly)
+```
+
 
 Note the distinction: `get()` returns the **first match** . `query()` returns **all matches** as an Array.
 
@@ -169,7 +177,8 @@ Note the distinction: `get()` returns the **first match** . `query()` returns **
 
 You are writing a module that needs to inspect the runtime's `boxlang.json` and extract settings across nested paths. Some keys may or may not be present depending on the deployment environment.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">config = dataNavigate( server.system.config )
+```java
+config = dataNavigate( server.system.config )
 
 // Dot-path reads -- no chained .from() calls needed
 logLevel   = config.getOrDefault( "logging.level", "WARN" )
@@ -183,14 +192,15 @@ timeout = config.get( "..timeout", 30 )
 // Existence check before consuming an optional section
 if ( config.has( "modules.bx-ai.providers[*]" ) ) {
     providers = config.query( "modules.bx-ai.providers[*].name" )
-    // =&gt; [ "openai", "anthropic", "bedrock" ]
+    // => [ "openai", "anthropic", "bedrock" ]
 }
 
 // Keys that literally contain dots (common in Java-style property files)
 // Use getByKey() to skip path parsing entirely
 jdbcUrl = config.getByKey( "datasources.main.db.url" )
 //                          ^ treated as ONE literal key, not a path
-</pre>
+```
+
 
 The `getByKey()` / `hasByKey()` distinction matters whenever your data was shaped by a Java properties system, a dotted-key config library, or any payload where a key name contains` .` or `[` as real characters.
 
@@ -198,7 +208,8 @@ The `getByKey()` / `hasByKey()` distinction matters whenever your data was shape
 
 You have a module's metadata struct and want to extract specific slices for a dashboard or diagnostic tool.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">moduleData = {
+```java
+moduleData = {
     "name": "bx-ai",
     "version": "3.2.0",
     "providers": [
@@ -217,24 +228,25 @@ nav = dataNavigate( moduleData )
 
 // All provider names
 nav.query( "providers[*].name" )
-// =&gt; [ "openai", "anthropic", "bedrock" ]
+// => [ "openai", "anthropic", "bedrock" ]
 
 // First two providers only (slice)
 nav.query( "providers[1:2]" )
-// =&gt; [ { name:"openai", ... }, { name:"anthropic", ... } ]
+// => [ { name:"openai", ... }, { name:"anthropic", ... } ]
 
 // All model names across all providers -- wildcard + wildcard
 nav.query( "providers[*].models[*]" )
-// =&gt; [ "gpt-4o", "gpt-4-turbo", "gpt-3.5-turbo", "claude-opus-4-5", ... ]
+// => [ "gpt-4o", "gpt-4-turbo", "gpt-3.5-turbo", "claude-opus-4-5", ... ]
 
 // All settings values (wildcard on struct)
 nav.query( "settings.*" )
-// =&gt; [ 30, 3, false ]
+// => [ 30, 3, false ]
 
 // Providers that have more than 2 models
 nav.query( "providers[?(@.models)]" )
-// =&gt; all providers that have a models field (existence check)
-</pre>
+// => all providers that have a models field (existence check)
+```
+
 
 Choosing the Right Method {#h2-8-choosing-the-right-method}
 -----------------------------------------------------------
@@ -258,7 +270,8 @@ Putting It All Together {#h2-9-putting-it-all-together}
 
 Here is a complete, realistic example: loading and validating a multi-environment application config, then extracting just what you need from each section.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">class AppConfigLoader {
+```java
+class AppConfigLoader {
 
     function load( required string environment ) {
         var nav = dataNavigate( expandPath( "/config/app.json" ) )
@@ -302,7 +315,8 @@ Here is a complete, realistic example: loading and validating a multi-environmen
     }
 
 }
-</pre>
+```
+
 
 No loops. No null guard towers. No nested `structKeyExists()` chains. The path expressions describe the shape of the data you want, and the navigator handles the traversal.
 

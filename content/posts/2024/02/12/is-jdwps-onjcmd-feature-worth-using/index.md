@@ -54,22 +54,25 @@ Results {#h2-1-results}
 
 Now to the results. For a current JDK 21 on my Ubuntu 23.10 machine with a ThreadRipper 3995WX CPU, hyperfine obtains the following benchmarks:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">Benchmark 1: without JDWP
-&nbsp;&nbsp;Time (mean ± σ):&nbsp;&nbsp;&nbsp;&nbsp; 211.075 s ±&nbsp; 1.307 s&nbsp;&nbsp;&nbsp; [User: 4413.810 s, System: 1438.235 s]
-&nbsp;&nbsp;Range (min … max):&nbsp;&nbsp; 209.667 s … 213.361 s&nbsp;&nbsp;&nbsp; 10 runs
+```
+Benchmark 1: without JDWP
+  Time (mean ± σ):     211.075 s ±  1.307 s    [User: 4413.810 s, System: 1438.235 s]
+  Range (min … max):   209.667 s … 213.361 s    10 runs
 
 Benchmark 2: with JDWP
-&nbsp;&nbsp;Time (mean ± σ):&nbsp;&nbsp;&nbsp;&nbsp; 218.985 s ±&nbsp; 1.924 s&nbsp;&nbsp;&nbsp; [User: 4533.024 s, System: 1133.126 s]
-&nbsp;&nbsp;Range (min … max):&nbsp;&nbsp; 216.673 s … 222.249 s&nbsp;&nbsp;&nbsp; 10 runs
+  Time (mean ± σ):     218.985 s ±  1.924 s    [User: 4533.024 s, System: 1133.126 s]
+  Range (min … max):   216.673 s … 222.249 s    10 runs
 
 Benchmark 3: with onjcmd
-&nbsp;&nbsp;Time (mean ± σ):&nbsp;&nbsp;&nbsp;&nbsp; 219.469 s ±&nbsp; 1.185 s&nbsp;&nbsp;&nbsp; [User: 4537.213 s, System: 1181.856 s]
-&nbsp;&nbsp;Range (min … max):&nbsp;&nbsp; 217.824 s … 221.316 s&nbsp;&nbsp;&nbsp; 10 runs
+  Time (mean ± σ):     219.469 s ±  1.185 s    [User: 4537.213 s, System: 1181.856 s]
+  Range (min … max):   217.824 s … 221.316 s    10 runs
 
 Summary
   "without JDWP" ran
     1.04 ± 0.01 times faster than "with JDWP"
-    1.04 ± 0.01 times faster than "with onjcmd"</pre>
+    1.04 ± 0.01 times faster than "with onjcmd"
+```
+
 
 You can see that the run-time difference between "with JDWP" and "with onjcmd" is 0.5s, way below the standard deviations of both benchmarks. Plotting the benchmark results using box plots visualizes this fact:
 ![](https://mostlynerdless.de/wp-content/uploads/2024/02/Figure_1-1.png)
@@ -83,7 +86,8 @@ Results on JDK 11.0.3 {#h2-2-results-on-jdk-11-0-3}
 
 Here, using onjcmd results in a significant performance improvement of a factor of 1.5 (from 354 to 248 seconds) compared to running the JDWP agent without it:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">Benchmark 1: without JDWP
+```
+Benchmark 1: without JDWP
   Time (mean ± σ):     234.011 s ±  2.182 s    [User: 5336.885 s, System: 706.926 s]
   Range (min … max):   229.605 s … 237.845 s    10 runs
 
@@ -97,7 +101,9 @@ Benchmark 3: with onjcmd
 Summary
   "without JDWP" ran
     1.06 ± 0.01 times faster than "with onjcmd"
-    1.51 ± 0.09 times faster than "with JDWP"</pre>
+    1.51 ± 0.09 times faster than "with JDWP"
+```
+
 
 ![](https://mostlynerdless.de/wp-content/uploads/2024/02/Figure_1-2-2000x1500.png)
 
@@ -120,7 +126,8 @@ Between JDK 11.0.3 and JDK 21, there have been improvements to the OpenJDK, some
 
 This change came into the JDK with 11.0.9. We see the 11.0.3 results with 11.0.8, but with 11.0.9, we see the results of the current JDK 11:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">Benchmark 1: without JDWP
+```
+Benchmark 1: without JDWP
   Time (mean ± σ):     234.647 s ±  2.731 s    [User: 5331.145 s, System: 701.760 s]
   Range (min … max):   228.510 s … 238.323 s    10 runs
 
@@ -135,7 +142,9 @@ Benchmark 3: with onjcmd
 Summary
   "without JDWP" ran
     1.06 ± 0.01 times faster than "with onjcmd"
-    1.07 ± 0.02 times faster than "with JDWP"</pre>
+    1.07 ± 0.02 times faster than "with JDWP"
+```
+
 
 ![](https://mostlynerdless.de/wp-content/uploads/2024/02/Figure_1-3-2000x1500.png)
 

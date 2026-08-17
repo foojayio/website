@@ -55,7 +55,8 @@ The values listed below are used in the code and configuration examples througho
 
 We'll need a private key and client certificate that we can use in our OIDC client for the mutual TLS authentication. For this tutorial, we'll use a self-signed certificate. We will store the certificate and its private key in a Java keystore. Run this command from a terminal to create one:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">keytool -genkeypair \
+```
+keytool -genkeypair \
      -alias demo-client \
      -keyalg RSA \
      -keysize 4096 \
@@ -63,7 +64,9 @@ We'll need a private key and client certificate that we can use in our OIDC clie
      -storepass Secr3t \
      -storetype pkcs12 \
      -validity 10 \
-     -dname "CN=demo-client, OU=Example, O=MyCompany, C=SE"</pre>
+     -dname "CN=demo-client, OU=Example, O=MyCompany, C=SE"
+```
+
 
 Let's take a brief look at the command. Firstly, note that we created a Java keystore file (i.e., a PKCS#12 file) called demo-client.p12 that is protected with the password Secr3t. The keystore contains an RSA key used to create a self-signed certificate with a validity of 10 days and the subject distinguished name of "CN=demo-client, OU=Example, O=MyCompany, C=SE". The certificate and the key are grouped by the alias demo-client.
 
@@ -71,11 +74,14 @@ Once you have the project in place, you will place the keystore file in your app
 
 Now export the certificate. You will need the exported certificate to register it with your Authorization Server.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">keytool -export \
+```
+keytool -export \
     -alias demo-client \
     -keystore demo-client.p12 \
     -storepass Secr3t \
-    -file demo-client.cer</pre>
+    -file demo-client.cer
+```
+
 
 **Prepare Your Project** {#h2-4-prepare-your-project}
 -----------------------------------------------------
@@ -98,7 +104,8 @@ It is a good practice to secure web applications with HTTPS. Below is a quick ex
 
 Run the following command to create a self-signed certificate for localhost:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">keytool -genkeypair
+```
+keytool -genkeypair
      -alias https
      -keyalg RSA
      -keysize 4096
@@ -106,17 +113,22 @@ Run the following command to create a self-signed certificate for localhost:
      -storepass Secr3t
      -storetype pkcs12
      -validity 10
-     -dname "CN=localhost, OU=Example, O=MyCompany, C=SE"</pre>
+     -dname "CN=localhost, OU=Example, O=MyCompany, C=SE"
+```
+
 
 Copy the file server.p12 into src/main/resources. Rename application.properties in the same folder to application.yml and configure HTTPS for the application by adding the following fragment to the file:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">server:
+```
+server:
   port: 9443
   ssl:
     key-store: classpath: server.p12
     key-store-password: Secr3t
     key-store-type: pkcs12
-    key-store-alias: https</pre>
+    key-store-alias: https
+```
+
 
 The application will now run on https://localhost:9443.
 > Insecure Certificate
@@ -129,7 +141,8 @@ We will add a controller to demonstrate how to obtain tokens by returning some a
 
 The controller updates the model and returns the index template.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@Controller
+```java
+@Controller
 public class OidcLoginController {
     @GetMapping("/")
     public String index(Model model,
@@ -145,14 +158,17 @@ public class OidcLoginController {
                             authorizedClient.getAccessToken().getScopes());
         return "index";
     }
-}</pre>
+}
+```
+
 
 **Configure the OAuth Client** {#h2-7-configure-the-oauth-client}
 -----------------------------------------------------------------
 
 Register the following client in the application configuration file src/main/resources/application.yml:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">spring:
+```
+spring:
   security:
     oauth2:
       client:
@@ -178,7 +194,9 @@ custom:
       key-store-type: pkcs12
       trust-store: idsvr.p12
       trust-store-password: changeit
-      trust-store-type: pkcs12</pre>
+      trust-store-type: pkcs12
+```
+
 
 This triggers String Boot to register a client with an id idsvr. This id is also used in the redirect-uri through the placeholder {registrationId}.
 
@@ -202,7 +220,8 @@ Let's configure mutual TLS for the OAuth 2.0 client authentication. We want Spri
 * Load the key material.
 * Prepare SSL/TLS context that can be used by the web clients when sending requests to the Authorization Server.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@Configuration
+```java
+@Configuration
 public class TrustStoreConfig {
 
     private SslContextBuilder mutualTLSContextBuilder;
@@ -253,7 +272,9 @@ public class TrustStoreConfig {
             }
             return keyManagerFactory;
     }
-}</pre>
+}
+```
+
 
 > Trust Store
 > **The trust store can be loaded accordingly but was not outlined here for readability. You can see a complete example on [GitHub](https://github.com/curityio/spring-boot-openid-client-mtls/blob/bc39f9324e3ab481e7740d4c145b9546445353ee/src/main/java/io/curity/example/oidcspringbootmutualtls/TrustStoreConfig.java#L41).**
@@ -262,7 +283,8 @@ public class TrustStoreConfig {
 
 * Create a configuration-class and call it SecurityConfig.java. This class makes use of the TrustStoreConfig to get the SslContext for the web clients used in the different parts of the OAuth 2.0 flow. It will also enable OAuth 2.0 login.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@Configuration
+```java
+@Configuration
 @Import(TrustStoreConfig.class)
 public class SecurityConfig {
 
@@ -282,14 +304,15 @@ public class SecurityConfig {
     @Bean
     SecurityWebFilterChain springSecurityFilterChain(ServerHttpSecurity http) {
         http
-                .authorizeExchange(exchanges -&gt;
+                .authorizeExchange(exchanges ->
                         exchanges
                                 .anyExchange().authenticated()
                 )
                 .oauth2Login(Customizer.withDefaults());
         return http.build();
     }
-</pre>
+```
+
 
 Spring reactive WebClient abstracts the reactive HTTP client it uses for the requests. By default, it uses Reactor Netty HttpClient internally (see[](https://docs.spring.io/spring-framework/docs/current/spring-framework-reference/web-reactive.html#webflux-client)[Spring Docs](https://docs.spring.io/spring-framework/docs/current/spring-framework-reference/web-reactive.html#webflux-client)). Therefore, we also build our solution on the same.
 
@@ -297,12 +320,13 @@ Spring reactive WebClient abstracts the reactive HTTP client it uses for the req
 * Use the Reactor Netty implementation of ClientHttpConnector with the preconfigured HttpClient
 * Build a WebClient with the ReactorClientHttpConnector as shown here:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">private WebClient createWebClient(SslContext sslContext) {
+```java
+private WebClient createWebClient(SslContext sslContext) {
 
     HttpClient nettyClient = HttpClient
             .create(ConnectionProvider.create("small-test-pool", 3))
             .wiretap(true)
-            .secure(sslContextSpec -&gt; sslContextSpec.sslContext(sslContext)
+            .secure(sslContextSpec -> sslContextSpec.sslContext(sslContext)
                     .handshakeTimeout(Duration.of(2, ChronoUnit.SECONDS)));
 
     ClientHttpConnector clientConnector = new ReactorClientHttpConnector(nettyClient);
@@ -312,12 +336,14 @@ Spring reactive WebClient abstracts the reactive HTTP client it uses for the req
             .clientConnector(clientConnector)
             .build();
 }
-</pre>
+```
+
 
 We are now ready to create a token response client that can handle the code flow of our application with mutual TLS client authentication.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@Bean
-ReactiveOAuth2AccessTokenResponseClient&lt;OAuth2AuthorizationCodeGrantRequest&gt; reactiveOAuth2AccessTokenResponseClientWithMtls() throws SSLException {
+```java
+@Bean
+ReactiveOAuth2AccessTokenResponseClient<OAuth2AuthorizationCodeGrantRequest> reactiveOAuth2AccessTokenResponseClientWithMtls() throws SSLException {
     SslContext sslContext = customTrustStoreConfig.createMutualTlsContext();
 
     WebClientReactiveAuthorizationCodeTokenResponseClient mtlsClient = new
@@ -327,7 +353,9 @@ ReactiveOAuth2AccessTokenResponseClient&lt;OAuth2AuthorizationCodeGrantRequest&g
     mtlsClient.setWebClient(mtlsWebClient);
 
     return mtlsClient;
-}</pre>
+}
+```
+
 
 Take into account that there is another implementation for when refresh tokens are used to obtain a new access token. Update ReactiveOAuth2AccessTokenResponseClient\<OAuth2RefreshTokenGrantRequest\> accordingly, like in the example above. Also, Spring Security will fetch the public key from the Authorization Server to verify the tokens using the value from the jwkSetUri setting. The web client retrieving those keys must trust the server certificate.
 

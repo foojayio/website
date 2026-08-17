@@ -65,7 +65,10 @@ In today's interconnected web, RSS and Atom feeds remain crucial for content dis
 
 Getting started is as simple as running one command:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">box install bx-rss</pre>
+```java
+box install bx-rss
+```
+
 
 The module automatically registers as `bxrss` in your BoxLang applications. That's it!
 
@@ -76,37 +79,44 @@ Reading a Feed (The Easy Way)
 
 The simplest way to read an RSS feed is with the `rss()` BIF:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">// Read any RSS/Atom feed with one line
+```java
+// Read any RSS/Atom feed with one line
 feedData = rss( "https://news.ycombinator.com/rss" );
 
 println( "Found #feedData.items.size()# items" );
 println( "Feed: #feedData.channel.title#" );
 
 // Loop through items
-feedData.items.each( ( item ) =&gt; {
+feedData.items.each( ( item ) => {
     println( "→ #item.title#" );
     println( "  #item.link#" );
     println();
-} );</pre>
+} );
+```
+
 
 #### Using the Component for More Control
 
 For advanced scenarios, use the `, ``bx:feed` component:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">bx:feed 
+```java
+bx:feed 
     action="read"
     source="https://example.com/feed.xml"
     result="feedData"
     maxItems="10";
 
-println( "Latest 10 items from #feedData.channel.title#" );</pre>
+println( "Latest 10 items from #feedData.channel.title#" );
+```
+
 
 🎙️ Podcast Power: iTunes Extension Support {#h2-5-podcast-power-itunes-extension-support}
 ------------------------------------------------------------------------------------------
 
 One of the most powerful features of bx-rss is its automatic iTunes podcast extension detection. When you read a podcast feed, the module automatically includes all iTunes-specific fields without any configuration:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">// Read a podcast feed
+```java
+// Read a podcast feed
 bx:feed 
     action="read"
     source="https://feeds.simplecast.com/54nAGcIl"
@@ -117,13 +127,15 @@ println( "Author: #podcast.channel.itunesAuthor#" );
 println( "Categories: #podcast.channel.itunesCategories.toList()#" );
 
 // Access rich episode metadata
-podcast.items.each( ( episode ) =&gt; {
+podcast.items.each( ( episode ) => {
     println( "🎧 #episode.itunesTitle#" );
     println( "   Duration: #episode.itunesDuration#" );
     println( "   Season #episode.itunesSeason# Episode #episode.itunesEpisode#" );
     println( "   Type: #episode.itunesEpisodeType#" );
     println();
-} );</pre>
+} );
+```
+
 
 #### Available iTunes Fields
 
@@ -148,12 +160,13 @@ podcast.items.each( ( episode ) =&gt; {
 
 Media RSS extensions are also automatically detected, making it perfect for video platforms and image galleries:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">bx:feed 
+```java
+bx:feed 
     action="read"
     source="https://vimeo.com/channels/staffpicks/videos/rss"
     result="videos";
 
-videos.items.each( ( video ) =&gt; {
+videos.items.each( ( video ) => {
     println( "📺 #video.title#" );
 
     if ( !isNull( video.mediaThumbnail ) ) {
@@ -161,14 +174,17 @@ videos.items.each( ( video ) =&gt; {
         println( "   Size: #video.mediaThumbnail.width#x#video.mediaThumbnail.height#" );
     }
     println();
-} );</pre>
+} );
+```
+
 
 🔄 Feed Aggregation: Read Multiple Sources {#h2-7-feed-aggregation-read-multiple-sources}
 -----------------------------------------------------------------------------------------
 
 Build a feed aggregator by reading multiple sources simultaneously:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">sources = [
+```java
+sources = [
     "https://blog.ortussolutions.com/feed",
     "https://www.forgebox.io/blog/rss", 
     "https://news.boxlang.io/feed.xml"
@@ -183,16 +199,19 @@ bx:feed
 println( "Aggregated #aggregated.items.size()# items from #sources.size()# feeds" );
 
 // Items are automatically sorted by date across all feeds
-aggregated.items.each( ( item ) =&gt; {
+aggregated.items.each( ( item ) => {
     println( "[#item.feed#] #item.title#" );
-} );</pre>
+} );
+```
+
 
 ✍️ Creating Feeds: Share Your Content {#h2-8-creating-feeds-share-your-content}
 -------------------------------------------------------------------------------
 
 Generate professional RSS feeds from your data with ease:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">// Define your feed metadata
+```java
+// Define your feed metadata
 feedProps = {
     "version" : "rss_2.0",
     "title" : "My Tech Blog",
@@ -208,14 +227,14 @@ feedItems = [
         "link" : "https://myblog.com/getting-started-boxlang",
         "description" : "Learn the basics of BoxLang in this comprehensive guide",
         "publishedDate" : now(),
-        "author" : "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="37535241525b58475245775a4e555b58501954585a">[email&nbsp;protected]</a>"
+        "author" : "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="37535241525b58475245775a4e555b58501954585a">[email protected]</a>"
     },
     {
         "title" : "Building REST APIs with BoxLang",
         "link" : "https://myblog.com/rest-apis-boxlang",
         "description" : "Create powerful REST APIs using BoxLang",
         "publishedDate" : dateAdd( "d", -1, now() ),
-        "author" : "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="7511100310191a05100735180c17191a125b161a18">[email&nbsp;protected]</a>"
+        "author" : "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="7511100310191a05100735180c17191a125b161a18">[email protected]</a>"
     }
 ];
 
@@ -228,14 +247,17 @@ bx:feed
     overwrite="true"
     xmlVar="feedXml";
 
-println( "✅ Feed created with #feedItems.size()# items" );</pre>
+println( "✅ Feed created with #feedItems.size()# items" );
+```
+
 
 🎙️ Create Your Own Podcast Feed {#h2-9-create-your-own-podcast-feed}
 ---------------------------------------------------------------------
 
 Launch your podcast with full iTunes support:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">podcastProps = {
+```java
+podcastProps = {
     "version" : "rss_2.0",
     "title" : "BoxLang Bytes",
     "link" : "https://podcast.boxlang.io",
@@ -256,7 +278,7 @@ episodes = [
         "link" : "https://podcast.boxlang.io/episode-1",
         "description" : "Introduction to BoxLang and what makes it special",
         "publishedDate" : now(),
-        "author" : "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="b2c2ddd6d1d3c1c6f2d0ddcaded3dcd59cdbdd">[email&nbsp;protected]</a>",
+        "author" : "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="b2c2ddd6d1d3c1c6f2d0ddcaded3dcd59cdbdd">[email protected]</a>",
         // iTunes episode metadata
         "itunesTitle" : "Welcome to BoxLang",
         "itunesDuration" : "00:42: 15",
@@ -279,14 +301,17 @@ bx:feed
     outputFile="/var/www/feeds/podcast.xml"
     overwrite="true";
 
-println( "🎙️ Podcast feed created!" );</pre>
+println( "🎙️ Podcast feed created!" );
+```
+
 
 📊 Create Feeds from Database Queries {#h2-10-create-feeds-from-database-queries}
 ---------------------------------------------------------------------------------
 
 Generate feeds directly from your database:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">// Query your content
+```java
+// Query your content
 posts = queryExecute( 
     "SELECT title, url, content, published_date, author_email
      FROM blog_posts  
@@ -318,17 +343,20 @@ bx:feed
     data=posts
     columnMap=columnMap
     outputFile="/var/www/public/feed.xml"
-    overwrite="true";</pre>
+    overwrite="true";
+```
+
 
 🎯 Flexible Output Options {#h2-11-flexible-output-options}
 -----------------------------------------------------------
 
 The module gives you multiple ways to access feed data:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">bx:feed 
+```java
+bx:feed 
     action="read"
     source="https://example.com/feed.xml"
-    result="fullFeed"          // Complete struct with items &amp; channel
+    result="fullFeed"          // Complete struct with items & channel
     properties="metadata"       // Channel metadata only
     query="itemsQuery"         // Items as a query object
     xmlVar="rawXml"            // Original XML string
@@ -339,7 +367,9 @@ The module gives you multiple ways to access feed data:
 println( "Full structure: #fullFeed.items.size()# items" );
 println( "Feed title: #metadata.title#" );
 println( "Query rows: #itemsQuery.recordCount#" );
-println( "XML length: #rawXml.len()# chars" );</pre>
+println( "XML length: #rawXml.len()# chars" );
+```
+
 
 🔌 MCP Server Integration {#h2-12-mcp-server-integration}
 ---------------------------------------------------------
@@ -412,12 +442,15 @@ Built on BoxLang's modern architecture with continued support and feature update
 🚀 Get Started Today {#h2-16-get-started-today}
 -----------------------------------------------
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java"># Install the module
+```java
+# Install the module
 box install bx-rss
 
 # Start using it immediately
 feedData = rss( "https://example.com/feed.xml" );
-println( feedData.items.size() );</pre>
+println( feedData.items.size() );
+```
+
 
 📞 Support \& Community {#h2-17-support-community}
 --------------------------------------------------

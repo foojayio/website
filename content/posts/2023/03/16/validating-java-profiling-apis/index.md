@@ -77,21 +77,27 @@ We start with the most basic assumption as our ground layer: An approximation of
 
 The idea is to push at every entry of a method the method and its class (the frame) onto a stack and to pop it at every exit:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">class A {
+```java
+class A {
  void methodB() {
    // ...
  }
-}</pre>
+}
+```
+
 
 ... is transformed into ...
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">class A {
+```java
+class A {
  void methodB() {
    trace.push("A", "methodB");
    // ...
    trace.pop();
  }
-}</pre>
+}
+```
+
 
 The instrumentation agent modifies the bytecode at runtime, so every exit of the method is recorded. *I used the great [Javassist](https://www.javassist.org/) library for the heavy lifting.* We record all of this information in thread-local stacks.
 

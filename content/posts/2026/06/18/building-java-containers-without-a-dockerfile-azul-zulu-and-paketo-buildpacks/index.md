@@ -47,7 +47,8 @@ The code examples in this post are available in [FDelporte/azul-paketo-demo](htt
 
 The application has a single REST endpoint:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">package be.webtechie;
+```
+package be.webtechie;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -76,69 +77,89 @@ public class PaketoApplication {
             + System.getProperty("java.vendor.version") 
             + ")";
    }
-}</pre>
+}
+```
+
 
 The `pom.xml` adds Spring Boot's web starter and the Maven plugin:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&lt;dependencies&gt;
-   &lt;dependency&gt;
-      &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
-      &lt;artifactId&gt;spring-boot-starter-web&lt;/artifactId&gt;
-   &lt;/dependency&gt;
-&lt;/dependencies&gt;
+```
+<dependencies>
+   <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-web</artifactId>
+   </dependency>
+</dependencies>
 
-&lt;build&gt;
-   &lt;plugins&gt;
-      &lt;plugin&gt;
-         &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
-         &lt;artifactId&gt;spring-boot-maven-plugin&lt;/artifactId&gt;
-         &lt;configuration&gt;    
-            &lt;mainClass&gt;${your.mainClass}&lt;/mainClass&gt;
-            &lt;image&gt;
-               &lt;buildpacks&gt;          
-                  &lt;buildpack&gt;paketobuildpacks/azul-zulu&lt;/buildpack&gt;
-                  &lt;buildpack&gt;paketobuildpacks/java&lt;/buildpack&gt;
-               &lt;/buildpacks&gt;
-            &lt;/image&gt;
-         &lt;/configuration&gt;
-      &lt;/plugin&gt;
-   &lt;/plugins&gt;
-&lt;/build&gt;</pre>
+<build>
+   <plugins>
+      <plugin>
+         <groupId>org.springframework.boot</groupId>
+         <artifactId>spring-boot-maven-plugin</artifactId>
+         <configuration>    
+            <mainClass>${your.mainClass}</mainClass>
+            <image>
+               <buildpacks>          
+                  <buildpack>paketobuildpacks/azul-zulu</buildpack>
+                  <buildpack>paketobuildpacks/java</buildpack>
+               </buildpacks>
+            </image>
+         </configuration>
+      </plugin>
+   </plugins>
+</build>
+```
+
 
 Build the container image with a single command:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ mvn spring-boot:build-image</pre>
+```
+$ mvn spring-boot:build-image
+```
+
 
 The output shows the Azul Zulu buildpack downloading and configuring the JVM:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">[INFO]  &gt; Pulling buildpack image 'docker.io/paketobuildpacks/azul-zulu:latest' 100%
+```
+[INFO]  > Pulling buildpack image 'docker.io/paketobuildpacks/azul-zulu:latest' 100%
 ...
 [INFO]     [creator]     Paketo Buildpack for Azul Zulu 11.6.1
 [INFO]     [creator]       https://github.com/paketo-buildpacks/azul-zulu
 ...
 [INFO]     [creator]       Azul Zulu JRE 25.0.3: Contributing to layer
 ...
-[INFO] Successfully built image 'docker.io/library/paketo-demo:latest'</pre>
+[INFO] Successfully built image 'docker.io/library/paketo-demo:latest'
+```
+
 
 The created image has the following size:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ docker images
+```
+$ docker images
 REPOSITORY       TAG       IMAGE ID       SIZE
-paketo-demo      latest    0144b7c77181   272MB</pre>
+paketo-demo      latest    0144b7c77181   272MB
+```
+
 
 Run it to check the [Java version](https://www.azul.com/glossary/java-versions/) through the REST endpoint:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ docker run --rm -p 8080:8080 paketo-demo:latest
+```
+$ docker run --rm -p 8080:8080 paketo-demo:latest
 
 $ curl http://localhost:8080/
 Hello from Azul Zulu via Paketo!
 
 $ curl http://localhost:8080/version
-Java 25.0.3 (Vendor: Azul Systems, Inc., version: Zulu25.34+17-CA)</pre>
+Java 25.0.3 (Vendor: Azul Systems, Inc., version: Zulu25.34+17-CA)
+```
+
 
 Or check the Spring log in the Docker output:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">Starting PaketoApplication v1.0-SNAPSHOT using Java 25.0.3 with PID 1</pre>
+```
+Starting PaketoApplication v1.0-SNAPSHOT using Java 25.0.3 with PID 1
+```
+
 
 Configuring the Azul Zulu Buildpack {#h-configuring-the-azul-zulu-buildpack}
 ----------------------------------------------------------------------------
@@ -149,37 +170,43 @@ The Paketo buildpack accepts environment variables in two categories: build-time
 
 You can specifiy the Java version and type of runtime. Setting `BP_JVM_TYPE` to `JDK` keeps the full JDK in the runtime image. That is useful when your application needs JDK-only tools like `jmap` or `jstack`, but it increases image size and adds unnecessary tooling to a production container. Use `JRE` unless you have a specific reason not to.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&lt;plugin&gt;
-   &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
-   &lt;artifactId&gt;spring-boot-maven-plugin&lt;/artifactId&gt;
-   &lt;configuration&gt;  
-      &lt;mainClass&gt;be.webtechie.PaketoApplication&lt;/mainClass&gt;
-      &lt;image&gt;
-         &lt;buildpacks&gt;
-            &lt;buildpack&gt;paketobuildpacks/azul-zulu&lt;/buildpack&gt;
-            &lt;buildpack&gt;paketobuildpacks/java&lt;/buildpack&gt;
-         &lt;/buildpacks&gt;
-         &lt;env&gt;
-            &lt;!-- Java version: 8, 11, 17, 21, 25 --&gt;
-            &lt;BP_JVM_VERSION&gt;25&lt;/BP_JVM_VERSION&gt;
-            &lt;!-- Runtime type: JRE (default, smaller) or JDK --&gt;
-            &lt;BP_JVM_TYPE&gt;JRE&lt;/BP_JVM_TYPE&gt;
-         &lt;/env&gt;
-      &lt;/image&gt;
-   &lt;/configuration&gt;
-&lt;/plugin&gt;</pre>
+```
+<plugin>
+   <groupId>org.springframework.boot</groupId>
+   <artifactId>spring-boot-maven-plugin</artifactId>
+   <configuration>  
+      <mainClass>be.webtechie.PaketoApplication</mainClass>
+      <image>
+         <buildpacks>
+            <buildpack>paketobuildpacks/azul-zulu</buildpack>
+            <buildpack>paketobuildpacks/java</buildpack>
+         </buildpacks>
+         <env>
+            <!-- Java version: 8, 11, 17, 21, 25 -->
+            <BP_JVM_VERSION>25</BP_JVM_VERSION>
+            <!-- Runtime type: JRE (default, smaller) or JDK -->
+            <BP_JVM_TYPE>JRE</BP_JVM_TYPE>
+         </env>
+      </image>
+   </configuration>
+</plugin>
+```
+
 
 ### Using jlink to Generate a Custom JRE {#h-using-jlink-to-generate-a-custom-jre}
 
 The Azul Zulu buildpack supports `jlink` at build time via the `BP_JVM_JLINK_ENABLED` variable. When enabled, the buildpack runs `jlink` to produce a minimal JRE containing only the Java modules your application uses:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&lt;env&gt;
-   &lt;BP_JVM_VERSION&gt;25&lt;/BP_JVM_VERSION&gt;
-   &lt;BP_JVM_JLINK_ENABLED&gt;true&lt;/BP_JVM_JLINK_ENABLED&gt;
-   &lt;!-- Optional: override the default jlink arguments --&gt;
-   &lt;!-- Default: --no-man-pages --no-header-files --strip-debug --compress=1 --&gt;
-   &lt;BP_JVM_JLINK_ARGS&gt;--no-man-pages --no-header-files --strip-debug --compress zip-6&lt;/BP_JVM_JLINK_ARGS&gt;
-&lt;/env&gt;</pre>
+```
+<env>
+   <BP_JVM_VERSION>25</BP_JVM_VERSION>
+   <BP_JVM_JLINK_ENABLED>true</BP_JVM_JLINK_ENABLED>
+   <!-- Optional: override the default jlink arguments -->
+   <!-- Default: --no-man-pages --no-header-files --strip-debug --compress=1 -->
+   <BP_JVM_JLINK_ARGS>--no-man-pages --no-header-files --strip-debug --compress zip-6</BP_JVM_JLINK_ARGS>
+</env>
+```
+
 
 As shown in the [previous post in this series](https://www.azul.com/blog/using-the-azul-zulu-docker-official-images-from-simple-pull-to-lean-container/), jlink reduces a typical container image from \~370 MB (JRE) down to \~140 MB (custom runtime). The buildpack handles the `jdeps` and `jlink` steps for you automatically.
 
@@ -187,7 +214,8 @@ As shown in the [previous post in this series](https://www.azul.com/blog/using-t
 
 The container created from the example project in the repository has a size of 136 MB:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ mvn spring-boot:build-image -f pom-jlink.xml
+```
+$ mvn spring-boot:build-image -f pom-jlink.xml
 
 $ docker images
 REPOSITORY           TAG       IMAGE ID       SIZE
@@ -196,7 +224,9 @@ paketo-demo-jlink    latest    02a8be0879d9   136MB
 $ docker run --rm -p 8080:8080 paketo-demo-jlink:latest
 
 $ curl http://localhost:8080/version
-Java 25.0.3 (Vendor: Azul Systems, Inc., version: Zulu25.34+17-CA) </pre>
+Java 25.0.3 (Vendor: Azul Systems, Inc., version: Zulu25.34+17-CA)
+```
+
 
 ### Enabling Observability and Debugging Features {#h-enabling-observability-and-debugging-features}
 
@@ -204,32 +234,36 @@ The buildpack can bake observability configuration into the image using `BPE_DEF
 
 The example below enables Java Flight Recording, remote debugging, and JMX, a configuration useful for staging environments:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&lt;env&gt;
-   &lt;BP_JVM_VERSION&gt;25&lt;/BP_JVM_VERSION&gt;
-   &lt;BP_JVM_TYPE&gt;JDK&lt;/BP_JVM_TYPE&gt;
+```
+<env>
+   <BP_JVM_VERSION>25</BP_JVM_VERSION>
+   <BP_JVM_TYPE>JDK</BP_JVM_TYPE>
 
-   &lt;!-- Remote debugging on port 8000 --&gt;
-   &lt;BPE_DEFAULT_BPL_DEBUG_ENABLED&gt;true&lt;/BPE_DEFAULT_BPL_DEBUG_ENABLED
-   &lt;BPE_DEFAULT_BPL_DEBUG_PORT&gt;8000&lt;/BPE_DEFAULT_BPL_DEBUG_PORT&gt;
+   <!-- Remote debugging on port 8000 -->
+   <BPE_DEFAULT_BPL_DEBUG_ENABLED>true</BPE_DEFAULT_BPL_DEBUG_ENABLED
+   <BPE_DEFAULT_BPL_DEBUG_PORT>8000</BPE_DEFAULT_BPL_DEBUG_PORT>
 
-   &lt;!-- JMX on port 5000 --&gt;
-   &lt;BPE_DEFAULT_BPL_JMX_ENABLED&gt;true&lt;/BPE_DEFAULT_BPL_JMX_ENABLED&gt;
-   &lt;BPE_DEFAULT_BPL_JMX_PORT&gt;5000&lt;/BPE_DEFAULT_BPL_JMX_PORT&gt;
+   <!-- JMX on port 5000 -->
+   <BPE_DEFAULT_BPL_JMX_ENABLED>true</BPE_DEFAULT_BPL_JMX_ENABLED>
+   <BPE_DEFAULT_BPL_JMX_PORT>5000</BPE_DEFAULT_BPL_JMX_PORT>
 
-   &lt;!-- Java Flight Recorder --&gt;
-   &lt;BPE_DEFAULT_BPL_JFR_ENABLED&gt;true&lt;/BPE_DEFAULT_BPL_JFR_ENABLED&gt;
-   &lt;BPE_DEFAULT_BPL_JFR_ARGS&gt;dumponexit=true,filename=/tmp/rec.jfr,duration=600s&lt;/BPE_DEFAULT_BPL_JFR_ARGS&gt;
+   <!-- Java Flight Recorder -->
+   <BPE_DEFAULT_BPL_JFR_ENABLED>true</BPE_DEFAULT_BPL_JFR_ENABLED>
+   <BPE_DEFAULT_BPL_JFR_ARGS>dumponexit=true,filename=/tmp/rec.jfr,duration=600s</BPE_DEFAULT_BPL_JFR_ARGS>
 
-   &lt;!-- GC logging --&gt;
-   &lt;BPE_DELIM_JAVA_TOOL_OPTIONS xml:space="preserve"&gt; &lt;/BPE_DELIM_JAVA_TOOL_OPTIONS&gt;
-   &lt;BPE_APPEND_JAVA_TOOL_OPTIONS&gt;-Xlog:gc:/tmp/gc.log&lt;/BPE_APPEND_JAVA_TOOL_OPTIONS&gt;
-&lt;/env&gt;</pre>
+   <!-- GC logging -->
+   <BPE_DELIM_JAVA_TOOL_OPTIONS xml:space="preserve"> </BPE_DELIM_JAVA_TOOL_OPTIONS>
+   <BPE_APPEND_JAVA_TOOL_OPTIONS>-Xlog:gc:/tmp/gc.log</BPE_APPEND_JAVA_TOOL_OPTIONS>
+</env>
+```
+
 
 For a complete walkthrough of these debug options and how to validate them inside a running container, see the earlier post [Configuring Spring Boot to Build a Docker Image with Azul Zulu and Debug Options](https://www.azul.com/blog/configuring-spring-boot-to-build-a-docker-image-with-azul-zulu-and-debug-options/).
 
 As expected, including the full JDK increases the size of the container. In this case, we also need to add additional ports to expose the debug features:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ mvn spring-boot:build-image -f pom-debug.xml
+```
+$ mvn spring-boot:build-image -f pom-debug.xml
 
 $ docker images
 REPOSITORY           TAG       IMAGE ID       SIZE
@@ -240,7 +274,9 @@ Debugging enabled on port *:8000
 JMX enabled on port 5000
 
 $ curl http://localhost:8080/version
-Java 25.0.3 (Vendor: Azul Systems, Inc., version: Zulu25.34+17-CA) </pre>
+Java 25.0.3 (Vendor: Azul Systems, Inc., version: Zulu25.34+17-CA)
+```
+
 
 Complete Configuration Reference {#h-complete-configuration-reference}
 ----------------------------------------------------------------------
@@ -254,7 +290,8 @@ Paketo is not Spring Boot-specific. You can build any JVM application with the `
 
 Install `pack` from [buildpacks.io](https://buildpacks.io/docs/tools/pack/) and run the following command. In this example we are reusing the already compile `jar`-file from the Spring Boot demo:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ pack build paketo-demo-container \
+```
+$ pack build paketo-demo-container \
     --path target/azul-paketo-demo-1.0-SNAPSHOT.jar \
     --buildpack docker://paketobuildpacks/azul-zulu \
     --buildpack docker://paketobuildpacks/java \
@@ -267,13 +304,16 @@ paketo-demo-container  latest    22886b80ea2b   260MB
 $ docker run --rm -p 8080:8080 paketo-demo-container:latest
 
 $ curl http://localhost:8080/version
-Java 26.0.1 (Vendor: Azul Systems, Inc., version: Zulu26.30+11-CA) </pre>
+Java 26.0.1 (Vendor: Azul Systems, Inc., version: Zulu26.30+11-CA)
+```
+
 
 This produces an OCI image using the latest Azul Zulu as the JVM (currently version 26), with the same memory calculator, NMT, and launch helpers that the Spring Boot plugin uses.
 
 If we want to stick to JVM 25 and use `jlink`, we can pass build-time environment variables with `--env`:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ pack build paketo-demo-container-jlink \
+```
+$ pack build paketo-demo-container-jlink \
     --path target/azul-paketo-demo-1.0-SNAPSHOT.jar \
     --buildpack docker://paketobuildpacks/azul-zulu \
     --buildpack docker://paketobuildpacks/java \
@@ -288,7 +328,9 @@ paketo-demo-container-jlink  latest    f1bcab88c325   137MB
 $ docker run --rm -p 8080:8080 paketo-demo-container-jlink:latest
 
 $ curl http://localhost:8080/version
-Java 25.0.3 (Vendor: Azul Systems, Inc., version: Zulu25.34+17-CA)</pre>
+Java 25.0.3 (Vendor: Azul Systems, Inc., version: Zulu25.34+17-CA)
+```
+
 
 Container Size {#h-container-size}
 ----------------------------------
@@ -319,7 +361,7 @@ For Spring Boot teams, a few minimal configuration changes give you Azul Zulu as
 
 The example code is in [FDelporte/azul-paketo-demo](https://github.com/FDelporte/azul-paketo-demo). Try the minimal examples, compare image sizes, and see which approach fits your pipeline best.
 
-*** ** * ** ***
+
 
 *Previously in this series:*
 

@@ -46,7 +46,8 @@ JCmd triggered debugging {#h2-1-jcmd-triggered-debugging}
 
 There are often cases where the code that you want to debug is executed later in your program's run or after a specific issue appears. So don't waste time running the debugging session from the start of your program, but use the `onjcmd=y` option to tell the JDWP agent to wait with the debugging session till it is triggered via `jcmd`:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group=""> ➜ java "-agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=*:5005,onjcmd=y" src/test/java/OnThrowAndJCmd.java &amp;
+```bash
+ ➜ java "-agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=*:5005,onjcmd=y" src/test/java/OnThrowAndJCmd.java &
  ➜ echo $! # get pid
  # wait some time and then start debugging on demand
  ➜ jcmd $! VM.start_java_debugging
@@ -55,7 +56,8 @@ jcmd 97145 VM.start_java_debugging
 Debugging has been started.
 Transport : dt_socket
 Address : *:5005
-</pre>
+```
+
 
 [jps](https://docs.oracle.com/en/java/javase/21/docs/specs/man/jps.html) is your friend if you want to find the process id of an already running JVM.
 
@@ -78,20 +80,29 @@ Due to historical reasons, you also have to supply a command that is executed wh
 
 Using both trigger types is similar to the JCmd triggered debugging:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group=""> ➜ java "-agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=*:5005,onthrow=Ex,launch=exit" src/test/java/OnThrowAndJCmd.java
+```bash
+ ➜ java "-agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=*:5005,onthrow=Ex,launch=exit" src/test/java/OnThrowAndJCmd.java
 # or
- ➜ java "-agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=*:5005,onuncaught=y,launch=exit" src/test/java/OnThrowAndJCmd.java</pre>
+ ➜ java "-agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=*:5005,onuncaught=y,launch=exit" src/test/java/OnThrowAndJCmd.java
+```
+
 
 If you're okay with using [jdb](https://docs.oracle.com/en/java/javase/21/docs/specs/man/jdb.html), you can also use the `launch` option to call a script that starts `jdb` in a new [tmux](https://github.com/tmux/tmux/wiki) session, in our case, [tmux_jdb.sh](https://github.com/parttimenerd/java-dbg/blob/main/tmux_jdb.sh):
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">#!/bin/sh
-tmux new-session -d -s jdb -- jdb -attach $2</pre>
+```bash
+#!/bin/sh
+tmux new-session -d -s jdb -- jdb -attach $2
+```
+
 
 We run our application using the JDWP agent with the `onthrow=Ex,launch=sh tmux_jdb.sh` option to start the `jdb` the first time the `Ex` exception is thrown and attach to the `tmux` session:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">➜ java "-agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=*:5005,onthrow=Ex,launch=sh tmux_jdb.sh" src/test/java/OnThrowAndJCmd.java
+```bash
+➜ java "-agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=*:5005,onthrow=Ex,launch=sh tmux_jdb.sh" src/test/java/OnThrowAndJCmd.java
 # in another console after the exception is thrown
-➜ tmux attach -t jdb</pre>
+➜ tmux attach -t jdb
+```
+
 
 ![](https://mostlynerdless.de/wp-content/uploads/2023/10/image-3.png)
 
@@ -107,26 +118,27 @@ How to discover these features {#h2-3-how-to-discover-these-features}
 
 You can either be like me and just drop into the JDK source and look into the [debugInit.c file](https://github.com/openjdk/jdk/blob/287b24322135b54641f013970c4545ce069c4350/src/jdk.jdwp.agent/share/native/libjdwp/debugInit.c#L1249), the [official documentation](https://docs.oracle.com/en/java/javase/21/docs/specs/jpda/conninv.html), or you use `help` option, which prints the following with JDK 21:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">➜ java "-agentlib:jdwp=help"
+```bash
+➜ java "-agentlib:jdwp=help"
                Java Debugger JDWP Agent Library
                --------------------------------
 
   (See the "VM Invocation Options" section of the JPDA
    "Connection and Invocation Details" document for more information.)
 
-jdwp usage: java -agentlib:jdwp=[help]|[&lt;option&gt;=&lt;value&gt;, ...]
+jdwp usage: java -agentlib:jdwp=[help]|[<option>=<value>, ...]
 
 Option Name and Value            Description                       Default
 ---------------------            -----------                       -------
 suspend=y|n                      wait on startup?                  y
-transport=&lt;name&gt;                 transport spec                    none
-address=&lt;listen/attach address&gt;  transport spec                    ""
+transport=<name>                 transport spec                    none
+address=<listen/attach address>  transport spec                    ""
 server=y|n                       listen for debugger?              n
-launch=&lt;command line&gt;            run debugger on event             none
-onthrow=&lt;exception name&gt;         debug on throw                    none
+launch=<command line>            run debugger on event             none
+onthrow=<exception name>         debug on throw                    none
 onuncaught=y|n                   debug on any uncaught?            n
 onjcmd=y|n                       start debug via jcmd?             n
-timeout=&lt;timeout value&gt;          for listen/attach in milliseconds n
+timeout=<timeout value>          for listen/attach in milliseconds n
 includevirtualthreads=y|n        List of all threads includes virtual threads as well as platform threads.
                                                                    n
 mutf8=y|n                        output modified utf-8             n
@@ -152,7 +164,9 @@ Warnings
 --------
   - The older -Xrunjdwp interface can still be used, but will be removed in
     a future release, for example:
-        java -Xrunjdwp:[help]|[&lt;option&gt;=&lt;value&gt;, ...]</pre>
+        java -Xrunjdwp:[help]|[<option>=<value>, ...]
+```
+
 
 Of course, this only gives you a glance at the options, so reading the source code still revealed much of what I had before.
 

@@ -14,6 +14,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -49,7 +50,7 @@ public final class HtmlToMarkdown {
 
     // Block-level elements kept as raw HTML instead of being flattened to
     // Markdown, because Markdown can't represent what makes them special:
-    //   - pre.EnlighterJSRAW / [data-pym-src] / iframe / .wp-block-embed
+    //   - [data-pym-src] / iframe / .wp-block-embed
     //       widgets & embeds whose tag/class/attributes are load-bearing
     //   - floated images (align left/right), resized / smaller images
     //     (is-resized, size-medium/thumbnail) and galleries -- Markdown's
@@ -58,7 +59,7 @@ public final class HtmlToMarkdown {
     // (The image src inside them is still localized first, in localizeImages.)
     // Kept as raw HTML: code widgets, embeds and galleries (multi-image, complex).
     private static final String SELECTOR_PRESERVE = String.join(", ",
-            "pre.EnlighterJSRAW", "[data-pym-src]", "iframe",
+            "[data-pym-src]", "iframe",
             "figure.wp-block-embed", ".wp-block-embed",
             ".wp-block-gallery", "figure.gallery", ".gallery");
     // Single formatted images (float / resized / captioned). These become a
@@ -157,6 +158,22 @@ public final class HtmlToMarkdown {
             el.replaceWith(new Element("p").text(token));
         }
 
+        // EnlighterJS code blocks -> fenced Markdown. Authors write ```java, not
+        // a <pre class="EnlighterJSRAW" data-enlighter-language="java" ...> tag
+        // with seven more attributes, so the fence is what lands in content/.
+        // The EnlighterJS markup is put back at RENDER time by
+        // layouts/_default/_markup/render-codeblock.html, so the site looks
+        // identical -- the raw HTML simply stops being the storage format.
+        //
+        // Emitted through the preserve/restore token like everything else, so the
+        // fence body never passes through the Markdown converter (which would
+        // escape its punctuation).
+        for (Element el : outermostMatches(content, SELECTOR_ENLIGHTERJS)) {
+            String token = PRESERVE_TOKEN + preserved.size() + PRESERVE_TOKEN_END;
+            preserved.add(codeFence(el.wholeText(), el.attr("data-enlighter-language")));
+            el.replaceWith(new Element("p").text(token));
+        }
+
         // Code widgets, embeds and galleries -> raw HTML (done before the image
         // pass so a gallery's inner images aren't turned into standalone shortcodes).
         for (Element el : outermostMatches(content, SELECTOR_PRESERVE)) {
@@ -185,6 +202,62 @@ public final class HtmlToMarkdown {
         // blank, but leaves a content line's trailing spaces (Markdown hard breaks).
         md = md.replaceAll("\\n(?:[ \\t]*\\n)+", "\n\n");
         return md.trim();
+    }
+
+    /**
+     * Wraps code in a Markdown fence tagged with the language.
+     *
+     * The fence is made one backtick longer than the longest backtick run in the
+     * code, so a snippet that itself contains ``` (Markdown examples, shell
+     * heredocs) can't terminate its own block early.
+     *
+     * Trailing whitespace on the last line is trimmed but leading indentation is
+     * untouched -- it's significant in Python, YAML and anything wrapped.
+     */
+    public static String codeFence(String code, String enlighterLanguage) {
+        String body = code == null ? "" : code.replace("\r\n", "\n").replaceAll("\\s+$", "");
+        int longestRun = 0, run = 0;
+        for (char c : body.toCharArray()) {
+            run = (c == '`') ? run + 1 : 0;
+            longestRun = Math.max(longestRun, run);
+        }
+        String fence = "`".repeat(Math.max(3, longestRun + 1));
+        return fence + fenceLanguage(enlighterLanguage) + "\n" + body + "\n" + fence;
+    }
+
+    /**
+     * Maps a WordPress `data-enlighter-language` value to the Markdown fence tag
+     * an author would naturally type.
+     *
+     * The stored values are NOT all real EnlighterJS languages -- the plugin
+     * accepts free text, so content carries "bash", "yaml", "xml" and "html"
+     * (870 blocks between them) which EnlighterJS has never supported and has
+     * always rendered as plain `generic`. Those become proper fence tags here,
+     * which is strictly more information than the site had before.
+     *
+     * "generic"/"raw"/"text" mean "no highlighting" and become a bare fence.
+     */
+    public static String fenceLanguage(String enlighterLanguage) {
+        String l = enlighterLanguage == null ? "" : enlighterLanguage.trim().toLowerCase(Locale.ROOT);
+        return switch (l) {
+            case "", "generic", "raw", "text", "plain", "plaintext" -> "";
+            case "shell", "console", "sh", "zsh" -> "bash";
+            case "js" -> "javascript";
+            case "ts" -> "typescript";
+            case "yml" -> "yaml";
+            case "c++", "cc" -> "cpp";
+            case "py" -> "python";
+            case "kt" -> "kotlin";
+            case "rb" -> "ruby";
+            case "cs" -> "csharp";
+            case "golang" -> "go";
+            case "md" -> "markdown";
+            case "bat", "cmd" -> "batch";
+            case "gradle" -> "groovy";
+            case "visualbasic", "vb" -> "vb";
+            case "assembly" -> "asm";
+            default -> l.replaceAll("[^a-z0-9+#._-]", "");
+        };
     }
 
     /** Builds a {{< img >}} shortcode call from a formatted image element (an

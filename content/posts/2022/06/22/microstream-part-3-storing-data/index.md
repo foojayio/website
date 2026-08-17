@@ -38,12 +38,14 @@ In many cases, there is no real start and end to the graph. In the above example
 
 But the MicroStream storage mechanism needs to start from somewhere. So we need to provide it a single starting point, the root object. In many cases, it contains one or more collections where the object graph of this root object represents your entire dataset.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public class StorageRoot {
+```java
+public class StorageRoot {
 
    private List products;
    private List users;
 }
-</pre>
+```
+
 
 In this example, the root object has 2 lists to access the data in a certain fashion. This creates some circular references but MicroStream can handle this without any problem as it also uses references in the binary representation.
 
@@ -54,12 +56,16 @@ When you start your application for the first time, the *StorageManager* points 
 
 When you provide an instance of the root object when you start the *EmbeddedStorage*, it will be saved to disk when the directory was empty. But if there was already content from a previous run of the application, the stored data will be used to reconstruct the root object as it was the last time that you ran the application.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">try (StorageManager storageManager = EmbeddedStorage.start(root, Paths.get("target/data"))) {
-}</pre>
+```java
+try (StorageManager storageManager = EmbeddedStorage.start(root, Paths.get("target/data"))) {
+}
+```
+
 
 This might be confusing and is dependent on the state of the external storage (empty or already containing data). An alternative is to explicitly define the root and store it when no data is present yet.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">try (StorageManager storageManager = EmbeddedStorage.start(Paths.get("target/data"))) {
+```java
+try (StorageManager storageManager = EmbeddedStorage.start(Paths.get("target/data"))) {
    DataStorage root = (DataStorage) storageManager.root();
    if (storageManager.root() == null) {
       root = initRoot();
@@ -67,7 +73,9 @@ This might be confusing and is dependent on the state of the external storage (e
       storageManager.storeRoot();
    } 
    // Use root and storageManager
-}</pre>
+}
+```
+
 
 Store what is Changed {#h2-2-store-what-is-changed}
 ---------------------------------------------------
@@ -80,16 +88,22 @@ Storing the entire object graph will also not be very efficient. If we have seve
 
 You should always use the `store()` method when you have some changes that need to be persisted.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">User user = findUser(someCriteria);
+```java
+User user = findUser(someCriteria);
 user.setEmail(newEmailAddress);
-storageManage.store(user);</pre>
+storageManage.store(user);
+```
+
 
 Since the *User* object was already persisted previously, as part of the *ArrayList* variable of *DataStorage* for example, storing it will make sure that we have the updated information for that user when the *StorageManager* reads the data again.
 
 If we have a new user that is added to the *ArrayList*, make sure that you store the List variable.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">users.add(newUser);
-storageManage.store(users);</pre>
+```java
+users.add(newUser);
+storageManage.store(users);
+```
+
 
 The rule is rather simple, store what is changed, the *User* instance where we have to change the email address or the *List* where we have added an entry. If we do not store the correct object, or forget to store the changes, we will no longer have the data available when we restart the application.
 
@@ -113,11 +127,17 @@ MicroStream provides for this purpose the class *Lazy*. The decision was made to
 
 When your Object Graph contains the following definition
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">private Lazy&lt;List&gt; stringData = Lazy.Reference(new ArrayList());</pre>
+```java
+private Lazy<List> stringData = Lazy.Reference(new ArrayList());
+```
+
 
 The data, the list of strings in this example, is not loaded when the *StorageManager* is started. Only when we explicitly access the object within a *Lazy* reference, the data is retrieved.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">stringData.get().size();</pre>
+```java
+stringData.get().size();
+```
+
 
 It is like the Schrödinger's cat thought experiment, as long as you don't open the box and explicitly ask for the status, like the size of the *ArrayList*, the status of that list is not known by the JVM.
 
@@ -125,8 +145,11 @@ Once you no longer need the Lazy loaded data, you can remove them from memory ag
 
 Coming back to the example of the Customers and the orders, by carefully designing your object graph, you can make sure that you can load only those orders that you need.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">private Map&lt;String, Lazy&lt;List&gt;&gt; ordersByCustomer;
-private Map&lt;YearMonth, Lazy&lt;List&gt;&gt; ordersByMonth;</pre>
+```java
+private Map<String, Lazy<List>> ordersByCustomer;
+private Map<YearMonth, Lazy<List>> ordersByMonth;
+```
+
 
 If you assign an Order once to the Customer identification and once based on the Month the order was placed, you can retrieve it efficiently either by the customer reference or the month to create a summary for example.
 

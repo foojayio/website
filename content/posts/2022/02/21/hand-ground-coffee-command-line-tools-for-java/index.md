@@ -122,7 +122,8 @@ Each class, method and variable name can be contextually completed by pressing k
 
 Here is an example to run Game of Life (Rest in Peace - John Conway) in `jshell`.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">// GOL Rules: Cell is alive, if it was alive and has 2 or 3 living neighbours or always with 3 living neighbours
+```java
+// GOL Rules: Cell is alive, if it was alive and has 2 or 3 living neighbours or always with 3 living neighbours
 import static java.util.stream.IntStream.range;
 import static java.util.stream.Collectors.*;
 import static java.util.function.Predicate.*;
@@ -130,19 +131,19 @@ import static java.util.function.Predicate.*;
 record Cell(int x, int y) {
    Stream nb() {
        return range(x()-1,x()+2)
-         .mapToObj(i -&amp;gt; i)
-         .flatMap(x -&amp;gt; range(y()-1,y()+2)
-         .mapToObj(y -&amp;gt; new Cell(x,y)))
-         .filter(c -&amp;gt; !this.equals(c));
+         .mapToObj(i -&gt; i)
+         .flatMap(x -&gt; range(y()-1,y()+2)
+         .mapToObj(y -&gt; new Cell(x,y)))
+         .filter(c -&gt; !this.equals(c));
    }
    boolean alive(Set cells) {
        var count = nb().filter(cells::contains).count();
-       return (cells.contains(this) &amp;amp;&amp;amp; count == 2) || count == 3;
+       return (cells.contains(this) &amp;&amp; count == 2) || count == 3;
    }
 }
 Set evolve(Set cells) {
-    return cells.stream().flatMap(c -&amp;gt; c.nb()).distinct()
-    .filter(c -&amp;gt; c.alive(cells))
+    return cells.stream().flatMap(c -&gt; c.nb()).distinct()
+    .filter(c -&gt; c.alive(cells))
     .collect(toSet());
 }
 void print(Set cells) {
@@ -152,8 +153,8 @@ void print(Set cells) {
                      cells.stream().mapToInt(Cell::y).max().getAsInt());
 
     range(min.y(), max.y()+1)
-    .mapToObj(y -&amp;gt; range(min.x(), max.x()+1)
-    .mapToObj(x -&amp;gt; cells.contains(new Cell(x,y)) ? "X" : " ")
+    .mapToObj(y -&gt; range(min.x(), max.x()+1)
+    .mapToObj(x -&gt; cells.contains(new Cell(x,y)) ? "X" : " ")
     .collect(joining(""))).forEach(System.out::println);
 }
 """
@@ -165,13 +166,15 @@ var cells = Set.of(new Cell(1,0), new Cell(2,1), new Cell(0,2),new Cell(1,2),new
 
 void gen(Set cells, int steps) {
     print(cells);
-    if (steps&amp;gt;0) gen(evolve(cells),steps-1);
+    if (steps&gt;0) gen(evolve(cells),steps-1);
 }
 
 Set parse(String s) {
-    Arrays.stream(s.split("\n")).mapIndexed((x,l) -&amp;gt;
-    Arrays.stream(l.split("")).mapIndexed(y,c) -&amp;gt; )
-}</pre>
+    Arrays.stream(s.split("\n")).mapIndexed((x,l) -&gt;
+    Arrays.stream(l.split("")).mapIndexed(y,c) -&gt; )
+}
+```
+
 
 jar {#_jar}
 -----------
@@ -199,16 +202,19 @@ With `java -jar file.jar` the main class is determined from the meta information
 
 Since Java 11, [JEP 330](https://openjdk.java.net/jeps/330) is available, so source files can be executed directly.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">cat &amp;gt; Hello.java &amp;lt; hello &amp;lt;&amp;lt;EOF
+```java
+cat &gt; Hello.java &lt; hello &lt;&lt;EOF
 #!/usr/bin/java --source 10
 public class Hello {
     public static void main(String...args) {
-        System.out.println(&amp;quot;Hello &amp;quot;+String.join(&amp;quot; &amp;quot;,args)+&amp;quot;!&amp;quot;);
+        System.out.println(&quot;Hello &quot;+String.join(&quot; &quot;,args)+&quot;!&quot;);
     }
 }
 EOF
 chmod +x hello
-./hello JEP 330</pre>
+./hello JEP 330
+```
+
 
 The JVM can be controlled with [hundreds of flags](https://foojay.io/command-line-arguments/), from memory allocation with `-Xmx` and `-Xms` to garbage collector selection with `-XG1GC` and log settings.  
 
@@ -244,14 +250,15 @@ As parameter it gets the fully qualified class name, file name or jar URL.
 
 Here is an example of our `Hello.java` class, where you can see for example that Java 14 now uses an "invokedynamic" operation for string concatenation.
 
-<pre class="EnlighterJSRAW">javap -c Hello
+```
+javap -c Hello
 
-Compiled from &amp;quot;Hello.java&amp;quot;
+Compiled from &quot;Hello.java&quot;
 public class Hello {
   // Constructor with Super-Constructor call
   public Hello();
     Code:
-       // load &amp;quot;this&amp;quot; on stack
+       // load &quot;this&quot; on stack
        0: aload_0
        4: return
 
@@ -259,14 +266,16 @@ public class Hello {
     Code:
        0: getstatic     #7                  // Field java/lang/System.out:Ljava/io/PrintStream;
        3: ldc           #13                 // String
-       // load first parameter on stack, i.e. &amp;quot;args&amp;quot;
+       // load first parameter on stack, i.e. &quot;args&quot;
        5: aload_0
        6: invokestatic  #15                 // Method java/lang/String.join:(Ljava/lang/CharSequence;[Ljava/lang/CharSequence;)Ljava/lang/String;
        // string concatenation
        9: invokedynamic #21,  0             // InvokeDynamic #0:makeConcatWithConstants:(Ljava/lang/String;)Ljava/lang/String;
       14: invokevirtual #25                 // Method java/io/PrintStream.println:(Ljava/lang/String;)V
       17: return
-}</pre>
+}
+```
+
 
 ### JMAP {#_jmap}
 
@@ -287,7 +296,10 @@ Using ``jcmd ` the specific actions can be triggered, multiple commands are sepa
 ``
 Thereby `jcmd help`` gives information about which commands are possible.
 
-<pre class="EnlighterJSRAW">jcmd 14358</pre>
+```
+jcmd 14358
+```
+
 
 Here are a few examples:
 
@@ -309,14 +321,18 @@ Here are a few examples:
 | `VM.class_hierarchy`                              | visual output of the class hierarchy     |
 | `VM.log`                                          | Control JVM logging                      |
 
-<pre class="EnlighterJSRAW">jcmd 15254 GC.heap_info
+```
+jcmd 15254 GC.heap_info
 15254:
  garbage-first heap   total 1048576K, used 214334K [0x00000007c0000000, 0x0000000800000000)
   region size 1024K, 135 young (138240K), 0 survivors (0K)
  Metaspace       used 136764K, capacity 142605K, committed 142896K, reserved 1169408K
-  class space    used 19855K, capacity 22505K, committed 22576K, reserved 1048576K</pre>
+  class space    used 19855K, capacity 22505K, committed 22576K, reserved 1048576K
+```
 
-<pre class="EnlighterJSRAW">jcmd GradleDaemon GC.class_histogram | head
+
+```
+jcmd GradleDaemon GC.class_histogram | head
 14358:
 
  num     #instances         #bytes  class name
@@ -326,7 +342,9 @@ Here are a few examples:
    3:         42595        1022280  java.lang.String
    4:         27743         887776  java.util.concurrent.ConcurrentHashMap$Node
    5:         10598         599128  [Ljava.lang.Object;
-   6:         26119         417904  java.lang.Object</pre>
+   6:         26119         417904  java.lang.Object
+```
+
 
 JDK Flight Recorder (jfr) {#_jdk_flight_recorder_jfr}
 -----------------------------------------------------
@@ -343,7 +361,8 @@ This can be done in a readable text format or JSON/XML (`--json, --xml`).
 * `metadata` shows which events were recorded (event classes)
 * `summary` shows in a histogram which events have been recorded how often
 
-<pre class="EnlighterJSRAW">jfr summary /tmp/test.jfr
+```
+jfr summary /tmp/test.jfr
 
  Version: 2.0
  Chunks: 1
@@ -364,7 +383,9 @@ This can be done in a readable text format or JSON/XML (`--json, --xml`).
  jdk.ThreadPark                           53          2012
  jdk.InitialEnvironmentVariable           40          2432
  jdk.InitialSystemProperty                20         16392
- jdk.ThreadCPULoad                        17           357</pre>
+ jdk.ThreadCPULoad                        17           357
+```
+
 
 To limit the amount of information categories can be filtered via `--categories "GC,JVM,Java*"` and events via `--events CPULoad,GarbageCollection` or `--events "jdk.*"`.  
 
@@ -381,18 +402,22 @@ Since some components of the JDK have been discontinued in recent years, `jdeprs
 
 Example:
 
-<pre class="EnlighterJSRAW">jdeprscan --release 11 testcontainers/testcontainers/1.9.1/testcontainers-1.9.1.jar 2&amp;gt;&amp;amp;1 | grep -v 'error: cannot '
+```
+jdeprscan --release 11 testcontainers/testcontainers/1.9.1/testcontainers-1.9.1.jar 2&gt;&amp;1 | grep -v 'error: cannot '
 Jar file testcontainers/testcontainers/1.9.1/testcontainers-1.9.1.jar:
 class org/testcontainers/shaded/org/apache/commons/lang/reflect/FieldUtils uses
   deprecated method java/lang/reflect/AccessibleObject::isAccessible()Z
 class org/testcontainers/shaded/org/apache/commons/lang/reflect/MemberUtils uses
   deprecated method java/lang/reflect/AccessibleObject::isAccessible()Z
 class org/testcontainers/shaded/org/apache/commons/io/input/ClassLoaderObjectInputStream
-  uses deprecated method java/lang/reflect/Proxy::getProxyClass(Ljava/lang/Class</pre>
+  uses deprecated method java/lang/reflect/Proxy::getProxyClass(Ljava/lang/Class
+```
+
 
 With `jdeprscan --list --release 11` you can list the APIS that were deprecated in that release.
 
-<pre class="EnlighterJSRAW">jdeprscan --release 11 --list | cut -d' ' -f 3- | cut -d. -f1-3 | sort | uniq -c | sort -nr | head -10
+```
+jdeprscan --release 11 --list | cut -d' ' -f 3- | cut -d. -f1-3 | sort | uniq -c | sort -nr | head -10
  132
   40 java.rmi.server
   34 java.awt.Component
@@ -402,7 +427,9 @@ With `jdeprscan --list --release 11` you can list the APIS that were deprecated 
   18 java.util.Date
   13 java.awt.List
    9 javax.swing.JComponent
-   8 java.util.concurrent</pre>
+   8 java.util.concurrent
+```
+
 
 Other tools {#_other_tools}
 ---------------------------
@@ -418,4 +445,7 @@ The helpers that come with the JDK can make your life easier if you know about t
 
 It is definitely worth trying them out and learning more about them.
 
-<pre class="EnlighterJSRAW"></pre>
+```
+
+```
+

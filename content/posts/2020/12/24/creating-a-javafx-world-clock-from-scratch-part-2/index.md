@@ -91,16 +91,19 @@ In the second equation you'll notice the 90 degrees added, this simulates the ho
 
 The equation is translated to Java code as a lambda of type `Function<Integer, Integer>`. The Function interface accepts a value and returns a value respectively. In this case the **hour** is passed in and the **start angle** is calculated and returned.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">/**
+```java
+/**
  * Start Angle of arc to draw the hour hand (start).
  */
-private Function&lt;Integer, Integer&gt; startAngleHour = ( hours ) -&gt; {
+private Function<Integer, Integer> startAngleHour = ( hours ) -> {
     // 360 ÷ 12 = 30 degrees for each hours tick on the clock
     int degrees = (12 - hours) * 30;
     // add 90 degress to position start at the 12'o clock position.
     // JavaFX arc goes counter clockwise starting zero degrees at the 3 o'clock
     return (degrees + 90) % 360;
-};</pre>
+};
+```
+
 
 The following code snippet is how to call the lambda function to calculate the startAngle:
 
@@ -121,15 +124,18 @@ As before the first formula is to determine degrees from the 12 o'clock position
 
 The equation is translated to Java code as a lambda of type `Function<Integer, Integer>` shown in the listing below:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">/**
+```java
+/**
  * Extent angle of the arc to draw the hour hand (end)
  */
-private Function&lt;Integer, Integer&gt; extentAngleHour = ( hours ) -&gt; {
+private Function<Integer, Integer> extentAngleHour = ( hours ) -> {
     // 360 ÷ 12 = 30 degrees for each hours tick on the clock
     int degrees = (12 - hours) * 30;
     // make the extent angle counter clockwise to the 12'o clock position
     return (360 - degrees) % 360;
-};</pre>
+};
+```
+
 
 With the lambda function (**extentAngleHour**) ready to be used, the following code statement illustrates how to invoke the function to calculate the extentAngle.
 
@@ -146,20 +152,26 @@ Now that you know how to calculate and draw the arc now we need to get a referen
 
 If you remember in Scene Builder the nodes have their fx:id set with a name such as `hourHandArc` and `hourHandTip`. In the controller java file these variables will be defined using the FXML annotation as shown below:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">@FXML
+```java
+@FXML
 private Arc hourHandArc;
 @FXML
-private Circle hourHandTip;</pre>
+private Circle hourHandTip;
+```
+
 
 Using the above annotation (@FXML) is JavaFX's dependency injection mechanism to reference nodes in the scene graph. This allows the application to obtain instance objects such as the **Arc** and **Circle** nodes to be injected (assigned) during runtime. This makes the nodes available to methods in the controller (WorldClockController.java) class.
 
 After referencing the Arc the controller code can now update the positions on every clock tick as shown below.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">// draw orange glowing hour hand arc
+```
+// draw orange glowing hour hand arc
 int hourStartAngle = startAngleHour.apply(hour);
 int hourExtentAngle = extentAngleHour.apply(hour);
 hourHandArc.setStartAngle(hourStartAngle);
-hourHandArc.setLength(hourExtentAngle);<code class="language-java"></code></pre>
+hourHandArc.setLength(hourExtentAngle);<code class="language-java"></code>
+```
+
 
 Similar to a time lapse an animation of the hour hand is shown below. It doesn't show the hour hand tip, more on that next.  
 ![Hour Hand Animation without the tip](hourhand-animation-without-tip.gif)
@@ -185,23 +197,29 @@ To move the hour hand tip (circle) in a clockwise direction I will be using Math
 
 Calculating the position of the tip:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">/**
+```java
+/**
  * Positions the ball or tip at the start of the arc
  * The angle in degrees creating a point on the unit circle multiplied by the radius.
  */
-private BiFunction&lt;Integer, Double, double[]&gt; tipPointXY = ( angDegrees, radius ) -&gt; {
+private BiFunction<Integer, Double, double[]> tipPointXY = ( angDegrees, radius ) -> {
     double [] pointXY = new double[2];
     pointXY[0] = Math.cos(Math.toRadians(angDegrees)) * radius;
     pointXY[1] = Math.sin(Math.toRadians(angDegrees)) * radius;
     return pointXY;
-};</pre>
+};
+```
+
 
 To use the function tipPointXY() it will return an array of type double containing two values where `hourTipPoint[0]` is the X coordinate and `hourTipPoint[1]` is the Y coordinate respectively.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">// draw orange glowing hour hand tip
+```java
+// draw orange glowing hour hand tip
  double [] hourTipPoint = tipPointXY.apply(hourStartAngle , 35.0);
  hourHandTip.setTranslateX(hourTipPoint[0]);
- hourHandTip.setTranslateY(hourTipPoint[1] * -1);</pre>
+ hourHandTip.setTranslateY(hourTipPoint[1] * -1);
+```
+
 
 You should notice the method call to `setTranslateY(hourTipPoint[1] * -1)` where its value is multiplied by **-1**. This is to convert to the screen coordinate system where the Y coordinate going in a southerly direction are positive values.
 

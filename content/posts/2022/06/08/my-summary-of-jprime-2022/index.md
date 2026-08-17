@@ -83,11 +83,14 @@ Testcontainers also allows for the most "integrated" form of testing, end-to-end
 
 Here's a sample of setting up the PostgreSQL database in a container via Testcontainers.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">@Container
-public static GenericContainer&lt;?&gt; postgres = new GenericContainer&lt;&gt;("postgres")
+```java
+@Container
+public static GenericContainer<?> postgres = new GenericContainer<>("postgres")
     .withNetwork(network)
     .withExposedPorts(5432)
-    .withNetworkAliases(postgresNetwork)</pre>
+    .withNetworkAliases(postgresNetwork)
+```
+
 
 [MicroShed testing](https://microshed.org/microshed-testing/) integrates with the Jakarta EE ecosystem to make use of Testcontainers.  
 

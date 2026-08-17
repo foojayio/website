@@ -59,13 +59,16 @@ A port tells the application what to do, not how to do it. It represents a domai
 
 Let's consider a simplified order processing domain. Instead of starting with a CRUD-style design by writing the repository layer, let's start with a hexagonal design. First, the use cases:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public interface LoadOrder {
-&nbsp;&nbsp;&nbsp;&nbsp;Optional&lt;Order&gt; byId(OrderId id);
+```
+public interface LoadOrder {
+    Optional<Order> byId(OrderId id);
 }
 
 public interface SaveOrder {
-&nbsp;&nbsp;&nbsp;&nbsp;void save(Order order);
-}</pre>
+    void save(Order order);
+}
+```
+
 
 These interfaces are in the core module. They do not connect to MongoDB, Spring Data, or other technologies or frameworks related to persistence. This organization has two immediate advantages:
 
@@ -99,48 +102,57 @@ Hexagonal architecture is often criticized for its duplication of patterns. In p
 
 A MongoDB adapter introduces a specific persistence pattern:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@Document("orders")
+```
+@Document("orders")
 
 class OrderDocument {
-&nbsp;&nbsp;&nbsp;&nbsp;@Id
-&nbsp;&nbsp;&nbsp;&nbsp;private String id;
-&nbsp;&nbsp;&nbsp;&nbsp;private String status;
-&nbsp;&nbsp;&nbsp;&nbsp;private BigDecimal totalAmount;
-}</pre>
+    @Id
+    private String id;
+    private String status;
+    private BigDecimal totalAmount;
+}
+```
+
 
 The corresponding domain model remains detached from annotations and framework dependencies:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public class Order {
-&nbsp;&nbsp;&nbsp;&nbsp;private final OrderId id;
-&nbsp;&nbsp;&nbsp;&nbsp;private OrderStatus status;
-&nbsp;&nbsp;&nbsp;&nbsp;private Money totalAmount;
-&nbsp;&nbsp;&nbsp;&nbsp;public void markAsShipped() {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (status != OrderStatus.PAID) {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;throw new IllegalStateException("Only paid orders can be shipped");
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this.status = OrderStatus.SHIPPED;
-&nbsp;&nbsp;&nbsp;&nbsp;}
-}</pre>
+```
+public class Order {
+    private final OrderId id;
+    private OrderStatus status;
+    private Money totalAmount;
+    public void markAsShipped() {
+        if (status != OrderStatus.PAID) {
+            throw new IllegalStateException("Only paid orders can be shipped");
+        }
+        this.status = OrderStatus.SHIPPED;
+    }
+}
+```
+
 
 The mapping between these two representations takes place within the adapter:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public class OrderMapper {
-&nbsp;&nbsp;&nbsp;public static Order toDomain(OrderDocument doc) {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return new Order(
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;new OrderId(doc.getId()),
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;OrderStatus.valueOf(doc.getStatus()),
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;new Money(doc.getTotalAmount())
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;);
-&nbsp;&nbsp;&nbsp;}
+```
+public class OrderMapper {
+   public static Order toDomain(OrderDocument doc) {
+       return new Order(
+               new OrderId(doc.getId()),
+               OrderStatus.valueOf(doc.getStatus()),
+               new Money(doc.getTotalAmount())
+       );
+   }
 
-&nbsp;&nbsp;&nbsp;public static OrderDocument toDocument(Order order) {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return new OrderDocument(
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;order.id().value(),
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;order.status().name(),
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;order.totalAmount().amount()
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;);
-&nbsp;&nbsp;&nbsp;}
-}</pre>
+   public static OrderDocument toDocument(Order order) {
+       return new OrderDocument(
+               order.id().value(),
+               order.status().name(),
+               order.totalAmount().amount()
+       );
+   }
+}
+```
+
 
 This type of mapping is an ad hoc demarcation line, as it allows changes to be localized and prevents the core from getting involved in the details of persistence.
 
@@ -164,18 +176,21 @@ Following on from what has just been said, Spring only becomes a problem when it
 
 Let's try to create a well-organized configuration, where Spring Boot is used as an adapter that coordinates all activities:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@Configuration
+```
+@Configuration
 class OrderAdapterConfiguration {
-&nbsp;&nbsp;&nbsp;&nbsp;@Bean
-&nbsp;&nbsp;&nbsp;&nbsp;LoadOrder loadOrder(MongoOrderRepository repository) {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return new MongoLoadOrderAdapter(repository);
-&nbsp;&nbsp;&nbsp;&nbsp;}
+    @Bean
+    LoadOrder loadOrder(MongoOrderRepository repository) {
+        return new MongoLoadOrderAdapter(repository);
+    }
 
-&nbsp;&nbsp;&nbsp;&nbsp;@Bean
-&nbsp;&nbsp;&nbsp;&nbsp;SaveOrder saveOrder(MongoOrderRepository repository) {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return new MongoSaveOrderAdapter(repository);
-&nbsp;&nbsp;&nbsp;&nbsp;}
-}</pre>
+    @Bean
+    SaveOrder saveOrder(MongoOrderRepository repository) {
+        return new MongoSaveOrderAdapter(repository);
+    }
+}
+```
+
 
 The core module has no Spring dependencies. Component scanning stops at the boundary, and dependency injection allows ports to be connected to adapters. That's all.
 

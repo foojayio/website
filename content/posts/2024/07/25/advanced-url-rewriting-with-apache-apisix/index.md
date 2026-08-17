@@ -24,7 +24,10 @@ frozen: false
 
 PostgREST offers a powerful `SELECT` mechanism. To list all entities with a column equal to a value, you need the following command:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="shell">curl /products?id=eq.1</pre>
+```bash
+curl /products?id=eq.1
+```
+
 
 1. `id` is the column
 2. `eq.1` corresponds to the `WHERE` clause
@@ -37,15 +40,19 @@ One of APISIX's best features is to rewrite requests, *i.e.* , exposing `/produc
 
 First, we need to capture the ID of the path parameter. For this, we need to replace the regular radix tree router with the radix tree with a parameter router.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml">apisix:
+```yaml
+apisix:
     router:
-        http: radixtree_uri_with_parameter</pre>
+        http: radixtree_uri_with_parameter
+```
+
 
 The next step is to rewrite the URL. We use the [proxy-rewrite](https://apisix.apache.org/docs/apisix/plugins/proxy-rewrite/) plugin for this on a `/products/:id` route. Unfortunately, using the `:id` parameter above in the regular expression is impossible. We need to copy it to a place that is accessible. To do that, before the rewriting, we can leverage the [serverless-pre-function](https://apisix.apache.org/docs/apisix/plugins/serverless/). With the plugin, you can write Lua code directly. It's an excellent alternative to a full-fledged plugin for short, straightforward snippets.
 
 Here's the configuration:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="shell">curl -i http://localhost:9180/apisix/admin/plugin_configs/1 -X PUT -d '
+```bash
+curl -i http://localhost:9180/apisix/admin/plugin_configs/1 -X PUT -d '
 {
   "plugins": {
     "serverless-pre-function": {
@@ -60,7 +67,9 @@ Here's the configuration:
       "uri": "/products?id=eq.$product_id"                      #2
     }
   }
-}'</pre>
+}'
+```
+
 
 1. Copy the captured `id` variable to a place accessible to other plugins later on
 2. Use it!
@@ -80,6 +89,6 @@ I've described using the proxy-rewrite plugin with a path variable in this post.
 * [PostgREST tables and views](https://postgrest.org/en/v12/references/api/tables_views.html)
 * [APISIX serverless plugin](https://apisix.apache.org/docs/apisix/plugins/serverless/)
 
-*** ** * ** ***
+
 
 *Originally published at [A Java Geek](https://blog.frankel.ch/advanced-url-rewrite-apisix/) on July 14^th^, 2024*

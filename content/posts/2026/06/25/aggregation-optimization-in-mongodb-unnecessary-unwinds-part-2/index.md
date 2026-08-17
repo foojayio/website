@@ -30,7 +30,7 @@ And why MongoDB might be a better relational database than you ever realized. {#
 
 [*Design reviews*](https://www.mongodb.com/events/mongodb-schema-design-reviews/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=agg-part2-foojay&utm_term=tony.kim)*are one-on-one meetings where MongoDB experts deliver advice on data modeling best practices and application design challenges. In this series, we are going to explore common real-life scenarios where design reviews helped developers achieve meaningful success with MongoDB.*
 
-*** ** * ** ***
+
 
 *This article was written by Graeme Robinson. Find him on* [*LinkedIn*](https://www.linkedin.com/in/graemecrobinson)*.*
 
@@ -76,7 +76,8 @@ To understand why this is, remember that performing a join with `$lookup` adds e
 
 As an example, after running the `$lookup` stage to join a profile document with corresponding documents in the mapping collection, the resulting document might look like this (note the two entries in the mappingData array):
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">{
+```
+{
   "_id": {...},
   "DOB": "1987-06-17T00:00:00Z",
   "SSN": "592-55-1484",
@@ -98,11 +99,14 @@ As an example, after running the `$lookup` stage to join a profile document with
       "profileID": "VMV4AMDTCZ-1"
     }
   ]
-}</pre>
+}
+```
+
 
 After running a subsequent `$unwind` stage on the mappingData field, the example document above would be transformed into two separate output documents: one for each element in the mappingData array:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">{
+```
+{
   "_id": {...},
   "DOB": "1987-06-17T00:00:00Z",
   "SSN": "592-55-1484",
@@ -134,13 +138,16 @@ After running a subsequent `$unwind` stage on the mappingData field, the example
     "deviceSN": "b2f255ea-6951-4ed5-bd6f-052dc2ac9880",
     "profileID": "VMV4AMDTCZ-1"
   }
-}</pre>
+}
+```
+
 
 The customer team had included this `$unwind` stage to ensure the subsequent `$lookup` stage, joining to devices on the value of `mappingData.deviceSN`, was carried out for each matched mapping. As this data was originally contained within elements of an array, they believed it was necessary to first unwind the array to ensure the $lookup was performed for each element.
 
 As a reminder, the format of the second `$lookup` stage to join to the devices collection was this:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">  {
+```
+  {
     $lookup: {
       from: "Devices",
       localField: "mappingData.deviceSN",
@@ -159,7 +166,9 @@ As a reminder, the format of the second `$lookup` stage to join to the devices c
       ],
       as: "deviceData"
     }
-  }</pre>
+  }
+```
+
 
 The key element here is the localField value, and there is an important aspect the customer team was unaware of: If the field pointed to by localField is a field within elements of an array, **the `$lookup` will automatically be run for the corresponding value of each element** **of the array** . This meant the proceeding `$unwind` was unnecessary.  
 
@@ -169,7 +178,8 @@ This significant increase in the number of documents and the amount of memory re
 
 The second `$unwind` stage in the original pipeline was being used to filter out profiles who had no associated devices of the target type. Where this was the case, the second `$lookup`---from the mapping data to the devices collection---would have resulted in an empty deviceData array being created:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">{
+```
+{
   "_id": {...},
   "DOB": "1987-06-17T00:00:00Z",
   "SSN": "592-55-1484",
@@ -181,21 +191,27 @@ The second `$unwind` stage in the original pipeline was being used to filter out
   "profileID": "VMV4AMDTCZ-1",
   "mappingData": [...],
   "deviceData": []
-}</pre>
+}
+```
+
 
 When an `$unwind` stage is carried out on an empty array, the default behavior is for the parent document to be removed from the result set. Although this was working as logically intended, the same outcome could be achieved with a simple [$match](https://www.mongodb.com/docs/manual/reference/operator/aggregation/match/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=agg-part2-foojay&utm_term=tony.kim) operation that was easier to understand:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">{
+```
+{
   $match: {
     deviceData: {
       $ne: []
     }
   }
-}</pre>
+}
+```
+
 
 With these changes in place, the complete pipeline now looked as follows:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">[
+```
+[
   {
     $match: {
       "contact.address.city": "Austin"
@@ -256,11 +272,14 @@ With these changes in place, the complete pipeline now looked as follows:
   {
     $limit: 10
   }
-]</pre>
+]
+```
+
 
 One final thing to note in the refactored pipeline was that because we were no longer using any `$unwind` stages, there was no need for the subsequent [$group](https://www.mongodb.com/docs/manual/reference/operator/aggregation/group/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=agg-part2-foojay&utm_term=tony.kim#-group--aggregation-) stage to regroup the documents by the original profileID, and so it too had been removed from the pipeline. In fact, any time you see a MongoDB pipeline which includes an `$unwind` stage followed by a `$group` stage that regroups the documents by the original ID, you should be wary. There's usually a more efficient way to do the same operation---often with a [$set](https://www.mongodb.com/docs/manual/reference/operator/aggregation/set/#-set--aggregation-?utm_campaign=devrel&utm_source=third-party&utm_medium=cta&utm_content=Aggregation%20Optimization2&utm_term=graeme.robinson) stage that uses the [$map](https://www.mongodb.com/docs/manual/reference/operator/aggregation/map/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=agg-part2-foojay&utm_term=tony.kim#-map--aggregation-), [$reduce](https://www.mongodb.com/docs/manual/reference/operator/aggregation/reduce/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=agg-part2-foojay&utm_term=tony.kim#-reduce--aggregation-), or [$filter](https://www.mongodb.com/docs/manual/reference/operator/aggregation/filter/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=agg-part2-foojay&utm_term=tony.kim#-filter--aggregation-) operators to manipulate the array entries as needed. In our case, without the `$unwind` stages, all that was needed was a `$set` stage to remove unwanted fields (a [$project](https://www.mongodb.com/docs/manual/reference/operator/aggregation/project/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=agg-part2-foojay&utm_term=tony.kim#-project--aggregation-) stage would also have worked here):
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">{
+```
+{
   $set: {
     accountNum: "$$REMOVE",
     mappingData: "$$REMOVE",
@@ -268,7 +287,9 @@ One final thing to note in the refactored pipeline was that because we were no l
     DOB: "$$REMOVE",
     _id: "$$REMOVE"
   }
-}</pre>
+}
+```
+
 
 With these changes in place, retesting the performance of the pipeline showed a 60% improvement in both the performance of individual queries and the total time to complete 300 query iterations.
 

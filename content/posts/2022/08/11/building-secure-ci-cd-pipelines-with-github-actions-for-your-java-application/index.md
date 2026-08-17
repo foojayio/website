@@ -40,7 +40,8 @@ GitHub Actions workflows are YAML files in the `.github/workflows` folder. If yo
 
 For this Java Spring-Boot project, I created a CI pipeline using maven as follows:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">name: Java CI with Maven
+```
+name: Java CI with Maven
 
 on:
  push:
@@ -61,7 +62,9 @@ jobs:
      with:
        java-version: 17
    - name: Build with Maven
-     run: mvn -B package --file pom.xml</pre>
+     run: mvn -B package --file pom.xml
+```
+
 
 This action will run on every push or pull request on the master branch. It is based on ubuntu and checks out the repository, while using the [setup-java](https://github.com/actions/setup-java) GitHub Action --- with Java 17 and Maven --- to build the Java jar file.
 
@@ -80,7 +83,8 @@ You can use the Snyk CLI to automatically run security scans inside your current
 
 Follow the steps described below --- including the few extra steps after`Build with Maven` --- to get started.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group=""> - name: Set up Node 14
+```
+ - name: Set up Node 14
    uses: actions/setup-node@v3
    with:
      node-version: 14
@@ -89,14 +93,19 @@ Follow the steps described below --- including the few extra steps after`Build w
  - name: run Snyk Open Source Test
    run: snyk test
  - name: run Snyk Code Test
-   run: snyk code test</pre>
+   run: snyk code test
+```
+
 
 Set up NodeJS version 14 and download the Snyk CLI using npm. Next, analyze your dependencies with Snyk Open Source, and use Snyk Code to scan your custom code for vulnerabilities.
 
 Then, declare `SNYK_TOKEN` as the environment variable containing your API key. You can refer to the secret `SNYK_TOKEN` you set up earlier, or feel free to reuse the full code example of the GitHub Action.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">env:
- SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}</pre>
+```
+env:
+ SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+```
+
 
 The benefit of this approach is that you only have to compile and build your application once, which can save a lot of time when building large applications. The downside is the steps are used in series, and might not be efficient if one of the later steps fails.
 
@@ -108,21 +117,25 @@ The predefined actions ensure you have the correct prerequisites to build your a
 
 Let's start with scanning our dependencies. We already have a Snyk account, and our API key is stored as a secret called `SNYK_TOKEN`. So, instead of creating an extra step in the build job, create a new job called `opensource-security`.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">opensource-security:
+```
+opensource-security:
    runs-on: ubuntu-latest
    steps:
      - uses: actions/checkout@master
      - name: Run Snyk to check for vulnerabilities
        uses: snyk/actions/maven@master
        env:
-         SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}</pre>
+         SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+```
+
 
 According to the documentation, the default command is `test`. Without any additional configuration, it will scan your application for known vulnerabilities in your dependencies. If you want to set a specific CLI argument like `--all-projects` to accommodate nested projects, use the `with` keyword and set the property to `args`.
 ![](https://snyk.io/wp-content/uploads/blog-github-actions-properties-1240x278.jpg)
 
 While Snyk scans our dependencies, let's check the Java code for vulnerabilities in our GitHub Action. To do this, repeat the previous process by setting up a third job specifically for that, and set the `command` property to `code test`.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group=""> code-security:
+```
+ code-security:
    runs-on: ubuntu-latest
    steps:
      - uses: actions/checkout@master
@@ -131,7 +144,9 @@ While Snyk scans our dependencies, let's check the Java code for vulnerabilities
        env:
          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
        with:
-         command: code test</pre>
+         command: code test
+```
+
 
 Notice that all three jobs will run in parallel, which is, in many cases, more efficient.
 
@@ -142,7 +157,8 @@ Now, let's discuss the deployment --- or delivery --- part of your GitHub CI/CD.
 
 Since we only want to release the package when the build job and both security jobs are successfully finished, we'll add a `needs` property with a list of prerequisite jobs for release. This way we can ensure that our package isn't deployed before it's fully built and secure.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">release:
+```
+release:
    needs: [opensource-security, code-security, build]
    runs-on: ubuntu-latest
    steps:
@@ -153,32 +169,38 @@ Since we only want to release the package when the build job and both security j
          java-version: 17
      - name: Set Git user
        run: |
-         git config user.email "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="214649404255484e4f5261435348404f5744534c4444530f4f4d">[email&nbsp;protected]</a>"
+         git config user.email "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="214649404255484e4f5261435348404f5744534c4444530f4f4d">[email protected]</a>"
          git config user.name "GitHub Actions"
      - name: Publish JAR
        run: mvn -B release:prepare release:perform -DskipTests
        env:
-         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}</pre>
+         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+```
+
 
 The maven commands [release:prepare](https://maven.apache.org/maven-release/maven-release-plugin/examples/prepare-release.html) and [release:perform](https://maven.apache.org/maven-release/maven-release-plugin/examples/perform-release.html) verify that the release has the right version number and actually gets published to our GitHub repository. Since we're counting on Maven to handle this, make the following configurations to your pom.xml file.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">  &lt;scm&gt;
-       &lt;developerConnection&gt;scm:git:https://github.com/bmvermeer/ghaction-example.git&lt;/developerConnection&gt;
-       &lt;tag&gt;HEAD&lt;/tag&gt;
-   &lt;/scm&gt;
-   &lt;distributionManagement&gt;
-       &lt;repository&gt;
-           &lt;id&gt;github&lt;/id&gt;
-           &lt;name&gt;GitHub&lt;/name&gt;
-           &lt;url&gt;https://maven.pkg.github.com/bmvermeer/ghaction-example&lt;/url&gt;
-       &lt;/repository&gt;
-   &lt;/distributionManagement&gt;</pre>
+```
+  <scm>
+       <developerConnection>scm:git:https://github.com/bmvermeer/ghaction-example.git</developerConnection>
+       <tag>HEAD</tag>
+   </scm>
+   <distributionManagement>
+       <repository>
+           <id>github</id>
+           <name>GitHub</name>
+           <url>https://maven.pkg.github.com/bmvermeer/ghaction-example</url>
+       </repository>
+   </distributionManagement>
+```
+
 
 Though our newly released application is currently free from vulnerabilities, that doesn't mean it'll remain secure forever. New vulnerabilities can show up in a variety of places, making it vital to continually monitor your code and dependencies after an application is deployed.
 
 In addition to scanning during development, we can use Snyk to monitor dependencies post deployment as well. When the release is complete, use the predefined Snyk action once again, but this time set the `command` property to `monitor`.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group=""> opensource-monitor:
+```
+ opensource-monitor:
    needs: [release]
    runs-on: ubuntu-latest
    steps:
@@ -188,7 +210,9 @@ In addition to scanning during development, we can use Snyk to monitor dependenc
        env:
          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
        with:
-         command: monitor</pre>
+         command: monitor
+```
+
 
 This will send the dependency tree, which is static after release, over to Snyk for monitoring. We can now view our project in the Snyk UI, and get automatic notifications if a new vulnerability is found for any of the dependencies we're using --- and ensure that our published Java project remains vulnerability free.
 ![](https://snyk.io/wp-content/uploads/blog-github-actions-snyk-ui-1240x149.jpg)

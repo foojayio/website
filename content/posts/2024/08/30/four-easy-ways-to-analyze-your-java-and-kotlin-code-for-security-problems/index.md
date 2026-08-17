@@ -47,19 +47,25 @@ The Snyk CLI is a command line interface for the Snyk platform. By using Snyk CL
 
 To conduct Static Application Security Testing (SAST) with the Snyk CLI, you need to install the CLI and authenticate it with your Snyk account. Here is how you can do this:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group=""># Install the Snyk CLI using NPM
+```
+# Install the Snyk CLI using NPM
 npm install -g snyk
 
 # Authenticate the CLI with your Snyk account
-5snyk auth</pre>
+5snyk auth
+```
+
 
 Once installed and authenticated, you can use the \`snyk code test\` command to analyze your Java source code:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group=""># Navigate to your project directory
+```
+# Navigate to your project directory
 cd /path/to/your/java/project
 
 # Scan your source code with Snyk Code
-snyk code test</pre>
+snyk code test
+```
+
 
 This command will analyze your source code for vulnerabilities and provide a detailed report of any issues it finds.
 
@@ -121,7 +127,8 @@ Snyk also provides GitHub actions for SAST scanning. By using these actions, you
 
 Here's an example of how you can use a GitHub action provided by Snyk to scan your Java code:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">name: Snyk
+```yaml
+name: Snyk
 on:
   push:
     branches: [ master ]
@@ -136,7 +143,9 @@ jobs:
     - name: Run Snyk to find vulnerabilities
       uses: snyk/actions/java@master
       env:
-        SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}</pre>
+        SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+```
+
 
 In this example, the Snyk action for Java is used to scan the Java code whenever a push or pull request is made to the master branch.
 
@@ -146,9 +155,12 @@ You can also create a custom integration for Snyk Code using the CLI and the JSO
 
 Here's an example of how you can do this:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">#!/bin/bash
+```bash
+#!/bin/bash
 # Run Snyk test and output the results as JSON
-snyk test --all-projects --json &gt; snyk_output.json</pre>
+snyk test --all-projects --json > snyk_output.json
+```
+
 
 In this example, the Snyk CLI is used to run Snyk test, and the results are outputted as JSON. This JSON output can then be used for further processing or analysis.
 

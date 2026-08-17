@@ -31,18 +31,22 @@ Disclaimer: **this article is only valid for Raspberry Pi's with an ARMv7 or ARM
 
 In the [release notes of Raspbian](http://downloads.raspberrypi.org/raspbian/release_notes.txt) you can see that the version of 2019-06-20 includes OpenJDK 11:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">2019-06-20:
+```
+2019-06-20:
 * Based on Debian Buster
 * Oracle Java 7 and 8 replaced with OpenJDK 11
-</pre>
+```
+
 
 So, if we start with a fresh new Raspbian OS, we indeed get this Java version result:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ java -version
+```
+$ java -version
 openjdk version "11.0.3" 2019-04-16
 OpenJDK Runtime Environment (build 11.0.3+7-post-Raspbian-5)
 OpenJDK Server VM (build 11.0.3+7-post-Raspbian-5, mixed mode)
-</pre>
+```
+
 
 This means we are already good to start any Java 11 based program!
 
@@ -55,20 +59,24 @@ Installing Liberica JDK {#installing-libericajdk}
 
 We only need the download link from their site to install an alternative Java JDK like this:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ cd /home/pi
+```
+$ cd /home/pi
 $ wget https://download.bell-sw.com/java/13/bellsoft-jdk13-linux-arm32-vfp-hflt.deb
 $ sudo apt-get install ./bellsoft-jdk13-linux-arm32-vfp-hflt.deb
 $ sudo update-alternatives --config javac
 $ sudo update-alternatives --config java
-</pre>
+```
+
 
 When this is done, we can check the version again and it should look like this:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ java --version
+```
+$ java --version
 openjdk version "13-BellSoft" 2019-09-17
 OpenJDK Runtime Environment (build 13-BellSoft+33)
 OpenJDK Server VM (build 13-BellSoft+33, mixed mode)
-</pre>
+```
+
 
 On my test-Pi I even keeping different versions of LibericaJDK and switching is very easy with "update-alternatives".
 ![](https://webtechie.be/images/2020-04-08/java-versions-on-pi.png)

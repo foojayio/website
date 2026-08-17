@@ -49,33 +49,36 @@ Install Liberica NIK. You can set $JAVA_HOME or create a \&NIK_HOME environmenta
 
 If you want to build native images using Maven, you need to add the plugin to your pom.xml file. It would be more convenient to add it to profiles:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">   &lt;profiles&gt;
-        &lt;profile&gt;
-            &lt;id&gt;native&lt;/id&gt;
-            &lt;build&gt;
-                &lt;plugins&gt;
-                    &lt;plugin&gt;
-                        &lt;groupId&gt;org.graalvm.buildtools&lt;/groupId&gt;
-                        &lt;artifactId&gt;native-maven-plugin&lt;/artifactId&gt;
-                        &lt;version&gt;0.10.5&lt;/version&gt;
-                        &lt;extensions&gt;true&lt;/extensions&gt;
-                        &lt;executions&gt;
-                            &lt;execution&gt;
-                                &lt;id&gt;build-native&lt;/id&gt;
-                                &lt;goals&gt;
-                                    &lt;goal&gt;compile-no-fork&lt;/goal&gt;
-                                &lt;/goals&gt;
-                                &lt;phase&gt;package&lt;/phase&gt;
-                            &lt;/execution&gt;
-                        &lt;/executions&gt;
-                        &lt;configuration&gt;
-                            &lt;mainClass&gt;com.java.MyApp&lt;/mainClass&gt;
-                        &lt;/configuration&gt;
-                    &lt;/plugin&gt;
-                &lt;/plugins&gt;
-            &lt;/build&gt;
-        &lt;/profile&gt;
-    &lt;/profiles&gt;</pre>
+```
+   <profiles>
+        <profile>
+            <id>native</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.graalvm.buildtools</groupId>
+                        <artifactId>native-maven-plugin</artifactId>
+                        <version>0.10.5</version>
+                        <extensions>true</extensions>
+                        <executions>
+                            <execution>
+                                <id>build-native</id>
+                                <goals>
+                                    <goal>compile-no-fork</goal>
+                                </goals>
+                                <phase>package</phase>
+                            </execution>
+                        </executions>
+                        <configuration>
+                            <mainClass>com.java.MyApp</mainClass>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+```
+
 
 We're all set up, let's move on!
 
@@ -96,13 +99,19 @@ Let's run the application with the agent to collect metadata.
 
 Enable the Tracing Agent on the command line with the `-agentlib:native-image-agent` flag, specifying the output directory for JSON files with metadata:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$NIK_HOME/bin/java -agentlib:native-image-agent=config-output-dir=./agent-data -jar app.jar</pre>
+```
+$NIK_HOME/bin/java -agentlib:native-image-agent=config-output-dir=./agent-data -jar app.jar
+```
+
 
 The application will start, and you will need to run it through all execution paths so that the agent collects all required data. When the application exits, the JSON files will be automatically generated in the specified directory.
 
 You can also use the `config-merge-dir` option instead of `config-output-dir` if you need to run the application several times to gather metadata. This option is also useful if you don't want to collect metadata from scratch every time you update the project.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$NIK_HOME/bin/java -agentlib:native-image-agent=config-merge-dir=./agent-data -jar app.jar</pre>
+```
+$NIK_HOME/bin/java -agentlib:native-image-agent=config-merge-dir=./agent-data -jar app.jar
+```
+
 
 It is possible to enable the agent in the pom.xml. Follow the instructions described [here](https://graalvm.github.io/native-build-tools/latest/maven-plugin.html#agent-support-running-application).
 
@@ -113,34 +122,49 @@ Now that we have all necessary metadata on our hands, it's time to generate a na
 
 If you do it manually, run the following command with a `-H:ConfigurationFileDirectories` flag specifying the path to the directory with metadata:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$NIK_HOME/bin/native-image -H:ConfigurationFileDirectories=./tracing-agent-data -jar target/lottery-1.0-SNAPSHOT.jar</pre>
+```
+$NIK_HOME/bin/native-image -H:ConfigurationFileDirectories=./tracing-agent-data -jar target/lottery-1.0-SNAPSHOT.jar
+```
+
 
 After the compilation has finished, you will find the native executable in the /target directory. You can run it with
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">./target/myApp</pre>
+```
+./target/myApp
+```
+
 
 If you use the plugin, add the ` block to the plugin configuration and specify the ``-H:ConfigurationFileDirectories` flag with the path to metadata:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&lt;configuration&gt;
-    &lt;imageName&gt;myApp&lt;/imageName&gt;
-    &lt;outputDirectory&gt;target/native&lt;/outputDirectory&gt;
-    &lt;mainClass&gt;com.java.MyApp&lt;/mainClass&gt;
-    &lt;buildArgs&gt;
-         &lt;buildArg&gt;-H:ConfigurationFileDirectories=./agent-data&lt;/buildArg&gt;
-    &lt;/buildArgs&gt;
-&lt;/configuration&gt;</pre>
+```
+<configuration>
+    <imageName>myApp</imageName>
+    <outputDirectory>target/native</outputDirectory>
+    <mainClass>com.java.MyApp</mainClass>
+    <buildArgs>
+         <buildArg>-H:ConfigurationFileDirectories=./agent-data</buildArg>
+    </buildArgs>
+</configuration>
+```
+
 
 By default, Maven places the native executable into the /target directory. But you can specify another directory under \`\`.
 
 After that, run
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">./mvn -Pnative package</pre>
+```
+./mvn -Pnative package
+```
+
 
 The native executable will be created in the /target/native directory.
 
 You can now run your executable with:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">./target/native/myApp</pre>
+```
+./target/native/myApp
+```
+
 
 Note that the native executable doesn't need JVM to run because it already contains all necessary Java classes.
 
@@ -159,7 +183,8 @@ When writing a workflow file for building JavaFX native images, there are severa
 
 Let's look at the workflow file that takes all these factors into consideration (you can find this file under [native-image.yml](https://github.com/des-felins/lottery-fx/blob/main/.github/workflows/native-image.yml) in the repository):
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">name: Native Image
+```
+name: Native Image
 
 on:
   workflow_dispatch:
@@ -207,7 +232,7 @@ jobs:
           ./mvnw -Pnative package
 
       - name: Archive Release
-        uses: thedoctor0/<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="85ffecf5a8f7e0e9e0e4f6e0c5b5abb2abb0">[email&nbsp;protected]</a>
+        uses: thedoctor0/<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="85ffecf5a8f7e0e9e0e4f6e0c5b5abb2abb0">[email protected]</a>
         with:
           type: 'zip'
           filename: "raffle-${{ matrix.platform }}.zip"
@@ -221,7 +246,9 @@ jobs:
           release_name: native-image
           file: "target/native/raffle-${{ matrix. platform }}.zip"
           overwrite: true
-          make_latest: true</pre>
+          make_latest: true
+```
+
 
 What do we have here?
 

@@ -35,26 +35,29 @@ I explained WebJars and Thymeleaf in the last article. Here's the setup, server-
 
 Here is how I integrate both in the POM:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="xml">&lt;dependencies&gt;
-    &lt;dependency&gt;
-        &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
-        &lt;artifactId&gt;spring-boot-starter-web&lt;/artifactId&gt;       &lt;!--1--&gt;
-    &lt;/dependency&gt;
-    &lt;dependency&gt;
-        &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
-        &lt;artifactId&gt;spring-boot-starter-thymeleaf&lt;/artifactId&gt; &lt;!--2--&gt;
-    &lt;/dependency&gt;
-    &lt;dependency&gt;
-        &lt;groupId&gt;org.webjars&lt;/groupId&gt;
-        &lt;artifactId&gt;webjars-locator&lt;/artifactId&gt;               &lt;!--3--&gt;
-        &lt;version&gt;0.52&lt;/version&gt;
-    &lt;/dependency&gt;
-    &lt;dependency&gt;
-        &lt;groupId&gt;org.webjars.npm&lt;/groupId&gt;
-        &lt;artifactId&gt;vue&lt;/artifactId&gt;                           &lt;!--4--&gt;
-        &lt;version&gt;3.4.34&lt;/version&gt;
-    &lt;/dependency&gt;
-&lt;/dependencies&gt;</pre>
+```xml
+<dependencies>
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-web</artifactId>       <!--1-->
+    </dependency>
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-thymeleaf</artifactId> <!--2-->
+    </dependency>
+    <dependency>
+        <groupId>org.webjars</groupId>
+        <artifactId>webjars-locator</artifactId>               <!--3-->
+        <version>0.52</version>
+    </dependency>
+    <dependency>
+        <groupId>org.webjars.npm</groupId>
+        <artifactId>vue</artifactId>                           <!--4-->
+        <version>3.4.34</version>
+    </dependency>
+</dependencies>
+```
+
 
 1. Spring Boot itself; I decided on the regular, non-reactive approach
 2. Spring Boot Thymeleaf integration
@@ -63,11 +66,14 @@ Here is how I integrate both in the POM:
 
 I'm using the Kotlin Router and Bean DSLs on the Spring Boot side:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="kotlin">fun vue(todos: List&lt;Todo&gt;) = router {                                    //1
+```kotlin
+fun vue(todos: List<Todo>) = router {                                    //1
     GET("/vue") {
         ok().render("vue", mapOf("title" to "Vue.js", "todos" to todos)) //2-3
     }
-}</pre>
+}
+```
+
 
 1. Pass a static list of `Todo` objects
 2. See below
@@ -82,17 +88,20 @@ If you're used to developing APIs, you're familiar with the `body()` function; i
 
 Here's the code on the HTML side:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="html">&lt;script th:src="@{/webjars/axios/dist/axios.js}" src="https://cdn.jsdelivr.net/npm/<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="513029383e2211607f66">[email&nbsp;protected]</a>/dist/axios.min.js"&gt;&lt;/script&gt; &lt;!--1--&gt;
-&lt;script th:src="@{/webjars/vue/dist/vue.global.js}" src="https://cdn.jsdelivr.net/npm/vue@3/dist/vue.global.js"&gt;&lt;/script&gt; &lt;!--2--&gt;
-&lt;script th:src="@{/vue.js}" src="../static/vue.js"&gt;&lt;/script&gt;             &lt;!--3--&gt;
-&lt;script th:inline="javascript"&gt;
-/*&lt;![CDATA[*/
-    window.vueData = {                                                   &lt;!--4--&gt;
+```html
+<script th:src="@{/webjars/axios/dist/axios.js}" src="https://cdn.jsdelivr.net/npm/<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="513029383e2211607f66">[email protected]</a>/dist/axios.min.js"></script> <!--1-->
+<script th:src="@{/webjars/vue/dist/vue.global.js}" src="https://cdn.jsdelivr.net/npm/vue@3/dist/vue.global.js"></script> <!--2-->
+<script th:src="@{/vue.js}" src="../static/vue.js"></script>             <!--3-->
+<script th:inline="javascript">
+/*<![CDATA[*/
+    window.vueData = {                                                   <!--4-->
         title: /*[[${ title }]]*/ 'A Title',
         todos: /*[[${ todos }]]*/ [{ 'id': 1, 'label': 'Take out the trash', 'completed': false }]
     };
-/*]]&gt;*/
-&lt;/script&gt;</pre>
+/*]]>*/
+</script>
+```
+
 
 1. [Axios](https://axios-http.com/) helps making HTTP requests
 2. Vue itself
@@ -122,20 +131,29 @@ We want to implement several features:
 
 The first step is to bootstrap the framework. We have already set up the reference for our custom `vue.js` file above.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="js">document.addEventListener('DOMContentLoaded', () =&gt; {                    //1
+```javascript
+document.addEventListener('DOMContentLoaded', () => {                    //1
   // The next JavaScript code snippets will be inside the block
-}</pre>
+}
+```
+
 
 1. Run the block when the DOM has finished loading
 
 The next step is to let Vue manage part of the page. On the HTML side, we must decide which top-level part Vue manages. We can choose an arbitrary `<div>` and change it later if need be.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="html">&lt;div id="app"&gt;
-&lt;/div&gt;</pre>
+```html
+<div id="app">
+</div>
+```
+
 
 On the JavaScript side, we create an *app* , passing the CSS selector of the previous HTML `<div>`.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="js">Vue.createApp({}).mount('#app');</pre>
+```javascript
+Vue.createApp({}).mount('#app');
+```
+
 
 At this point, we launch Vue when the page loads, but nothing visible happens.
 
@@ -143,32 +161,41 @@ The next step is to create a Vue *template*. A Vue template is a regular HTML \`
 
 Let's start with a root template that can display the title.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="html">&lt;template id="todos-app"&gt;                                                &lt;!--1--&gt;
-  &lt;h1&gt;{{ title }}&lt;/h1&gt;                                                   &lt;!--2--&gt;
-&lt;/template&gt;</pre>
+```html
+<template id="todos-app">                                                <!--1-->
+  <h1>{{ title }}</h1>                                                   <!--2-->
+</template>
+```
+
 
 1. Set the ID for easy binding
 2. Use the `title` property; it remains to be set up
 
 On the JavaScript side, we must create the managing code.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="js">const TodosApp = {
+```javascript
+const TodosApp = {
     props: ['title'],                                                    //1
     template: document.getElementById('todos-app').innerHTML,
-}</pre>
+}
+```
+
 
 1. Declare the `title` property, the one used in the HTML template
 
 Finally, we must pass this object when we create the app:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="js">Vue.createApp({
+```javascript
+Vue.createApp({
     components: { TodosApp },                                            //1
     render() {                                                           //2
         return Vue.h(TodosApp, {                                         //3
             title: window.vueData.title,                                 //4
         })
     }
-}).mount('#app');</pre>
+}).mount('#app');
+```
+
 
 1. Configure the component
 2. Vue expects the `render()` function
@@ -185,22 +212,28 @@ First, I added a new nested Vue template for the table that displays the `Todo`.
 
 Here's the starting line template's code, respectively JavaScript and HTML:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="js">const TodoLine = {
+```javascript
+const TodoLine = {
     props: ['todo'],
     template: document.getElementById('todo-line').innerHTML
-}</pre>
+}
+```
 
-<pre class="EnlighterJSRAW" data-enlighter-language="html">&lt;template id="todo-line"&gt;
-    &lt;tr&gt;
-        &lt;td&gt;{{ todo.id }}&lt;/td&gt;                                           &lt;!--1--&gt;
-        &lt;td&gt;{{ todo.label }}&lt;/td&gt;                                        &lt;!--2--&gt;
-        &lt;td&gt;
-            &lt;label&gt;
-                &lt;input type="checkbox" :checked="todo.completed" /&gt;
-            &lt;/label&gt;
-        &lt;/td&gt;
-    &lt;/tr&gt;
-&lt;/template&gt;</pre>
+
+```html
+<template id="todo-line">
+    <tr>
+        <td>{{ todo.id }}</td>                                           <!--1-->
+        <td>{{ todo.label }}</td>                                        <!--2-->
+        <td>
+            <label>
+                <input type="checkbox" :checked="todo.completed" />
+            </label>
+        </td>
+    </tr>
+</template>
+```
+
 
 1. Display the `Todo` id
 2. Display the `Todo` label
@@ -208,11 +241,15 @@ Here's the starting line template's code, respectively JavaScript and HTML:
 
 Vue allows event handling via the `@` syntax.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="html">&lt;input type="checkbox" :checked="todo.completed" @click="check" /&gt;</pre>
+```html
+<input type="checkbox" :checked="todo.completed" @click="check" />
+```
+
 
 Vue calls the template's `check()` function when the user clicks on the line. We define this function in a `setup()` parameter:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="js">const TodoLine = {
+```javascript
+const TodoLine = {
     props: ['todo'],
     template: document.getElementById('todo-line').innerHTML,
     setup(props) {                                                                 //1
@@ -225,7 +262,9 @@ Vue calls the template's `check()` function when the user clicks on the line. We
         }
         return { check }                                                           //6
     }
-}</pre>
+}
+```
+
 
 1. Accept the `props` array, so we can later access it
 2. Vue passes the `event` that triggered the call
@@ -245,23 +284,29 @@ We will do that by implementing the next feature, which is the cleanup of comple
 
 We now know how to handle events via Vue:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="html">&lt;button class="btn btn-warning" @click="cleanup"&gt;Cleanup&lt;/button&gt;</pre>
+```html
+<button class="btn btn-warning" @click="cleanup">Cleanup</button>
+```
+
 
 On the `TodosApp` object, we add a function of the same name:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="js">const TodosApp = {
+```javascript
+const TodosApp = {
     props: ['title', 'todos'],
     components: { TodoLine },
     template: document.getElementById('todos-app').innerHTML,
     setup() {
         const cleanup = function() {                                               //1
-            axios.delete('/api/todo:cleanup').then(response =&gt; {                   //1
+            axios.delete('/api/todo:cleanup').then(response => {                   //1
                 state.value.todos = response.data                                  //2-3
             })
         }
         return { cleanup }                                                         //1
     }
-}</pre>
+}
+```
+
 
 1. As above
 2. Axios offers automated JSON conversion of the HTTP call
@@ -278,7 +323,8 @@ In Vue's semantics, the Vue model is a wrapper around data that we want to be *r
 
 Let's do it:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="js">const state = ref({
+```javascript
+const state = ref({
     title: window.vueData.title,                                         //1-2
     todos: window.vueData.todos,                                         //1
 })
@@ -294,7 +340,9 @@ createApp({
             title: state.value.title,                                    //5
         })
     }
-}).mount('#app');</pre>
+}).mount('#app');
+```
+
 
 1. Get the data set in the HTML page, via Thymeleaf, as explained above
 2. We change the way we set the `title`. It's not necessary since there's no two-way binding - we don't update the title client-side, but I prefer to keep the handling coherent across all values
@@ -306,9 +354,12 @@ At this point, we have a *reactive* client-side model.
 
 On the HTML side, we use the relevant Vue attributes:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="html">&lt;tbody&gt;
-  &lt;tr is="vue:todo-line" v-for="todo in todos" :key="todo.id" :todo="todo"&gt;&lt;/tr&gt; &lt;!--1-2--&gt;
-&lt;/tbody&gt;</pre>
+```html
+<tbody>
+  <tr is="vue:todo-line" v-for="todo in todos" :key="todo.id" :todo="todo"></tr> <!--1-2-->
+</tbody>
+```
+
 
 1. Loop over the list of `Todo` objects
 2. The `is` attribute is crucial to cope with the way the browser parses HTML. See [Vue documentation](https://vuejs.org/api/built-in-special-attributes#is) for more details
@@ -321,27 +372,30 @@ We can now implement a new feature: add a new `Todo` from the client. When click
 
 Here's the updated code:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="js">const TodosApp = {
+```javascript
+const TodosApp = {
     props: ['title', 'todos'],
     components: { TodoLine },
     template: document.getElementById('todos-app').innerHTML,
     setup() {
         const label = ref('')                                            //1
         const create = function() {                                      //2
-            axios.post('/api/todo', { label: label.value }).then(response =&gt; {
+            axios.post('/api/todo', { label: label.value }).then(response => {
                 state.value.todos.push(response.data)                    //3
-            }).then(() =&gt; {
+            }).then(() => {
                 label.value = ''                                         //4
             })
         }
         const cleanup = function() {
-            axios.delete('/api/todo:cleanup').then(response =&gt; {
+            axios.delete('/api/todo:cleanup').then(response => {
                 state.value.todos = response.data                        //5
             })
         }
         return { label, create, cleanup }
     }
-}</pre>
+}
+```
+
 
 1. Create a reactive wrapper around the title whose scope is limited to the function
 2. The `create()` function proper
@@ -351,17 +405,20 @@ Here's the updated code:
 
 On the HTML side, we add a button and bind to the `create()` function. Likewise, we add the *Label* field and bind it to the model.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="html">&lt;form&gt;
-    &lt;div class="form-group row"&gt;
-        &lt;label for="new-todo-label" class="col-auto col-form-label"&gt;New task&lt;/label&gt;
-        &lt;div class="col-10"&gt;
-            &lt;input type="text" id="new-todo-label" placeholder="Label" class="form-control" v-model="label" /&gt; &lt;!--1-2--&gt;
-        &lt;/div&gt;
-        &lt;div class="col-auto"&gt;
-            &lt;button type="button" class="btn btn-success" @click="create"&gt;Add&lt;/button&gt; &lt;!--3--&gt;
-        &lt;/div&gt;
-    &lt;/div&gt;
-&lt;/form&gt;</pre>
+```html
+<form>
+    <div class="form-group row">
+        <label for="new-todo-label" class="col-auto col-form-label">New task</label>
+        <div class="col-10">
+            <input type="text" id="new-todo-label" placeholder="Label" class="form-control" v-model="label" /> <!--1-2-->
+        </div>
+        <div class="col-auto">
+            <button type="button" class="btn btn-success" @click="create">Add</button> <!--3-->
+        </div>
+    </div>
+</form>
+```
+
 
 Vue binds the `create()` function to the HTML button. It does call it asynchronously and refreshes the reactive `Todo` list with the new item returned by the call. We do the same for the *Cleanup* button, to remove checked `Todo` objects.
 
@@ -382,6 +439,6 @@ The complete source code for this article can be found on [GitHub](https://githu
 
 * [Vue.js](https://vuejs.org/)
 
-*** ** * ** ***
+
 
 *Originally published at [A Java Geek](https://blog.frankel.ch/ajax-ssr/3/) on September 22^nd^, 2024*

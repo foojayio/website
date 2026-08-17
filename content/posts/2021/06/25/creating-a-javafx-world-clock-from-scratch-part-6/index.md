@@ -61,8 +61,10 @@ The appid (API key) file is private (local) and will be ignored by GitHub (not c
 Testing the application {#h2-3-testing-the-application}
 -------------------------------------------------------
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">$ mvn javafx:run
-</pre>
+```
+$ mvn javafx:run
+```
+
 
 Assuming you have valid locations having geo coordinates (lat/lon) for a given clock face row you should see a weather icon and it's associated temperature displayed as shown below.  
 ![OpenWeatherMap Icons](OpenWeatherMap-Icons.png)
@@ -74,8 +76,10 @@ OpenWeatherMap's API for the Daily Weather forecast {#h2-4-openweathermap-s-api-
 
 In order to make REST API calls to fetch for weather information the API key will need to be applied to the http url request parameter like the following.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">https://api.openweathermap.org/data/2.5/weather?units=metric&amp;lat={lat}&amp;lon={lon}&amp;appid={API key}
-</pre>
+```
+https://api.openweathermap.org/data/2.5/weather?units=metric&lat={lat}&lon={lon}&appid={API key}
+```
+
 
 For more info on OpenWeatherMap APIs visit the link below:
 
@@ -86,7 +90,8 @@ Using Java 11's HttpClient {#h2-5-using-java-11-s-httpclient}
 
 In the listing below I created a utility method to use Java 11's standard HttpClient API to fetch JSON data from the weather service. Because it returns a `CompletableFuture` this call will defer its results (JSON String) at a later time. As you'll see later, the caller of this function will be able to apply or chain additional functions to the future to do further processing such as when fetching is complete.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public CompletableFuture&lt;String&gt; fetch(String uri) {
+```java
+public CompletableFuture<String> fetch(String uri) {
     HttpClient client = HttpClient.newHttpClient();
     HttpRequest request = HttpRequest.newBuilder()
             .uri(URI.create(uri))
@@ -94,15 +99,20 @@ In the listing below I created a utility method to use Java 11's standard HttpCl
             .build();
     return client.sendAsync(request, HttpResponse.BodyHandlers.ofString())
             .thenApply(HttpResponse::body);
-}</pre>
+}
+```
+
 
 Fetching the Current Weather forecast {#h2-6-fetching-the-current-weather-forecast}
 -----------------------------------------------------------------------------------
 
 For convenience I've created a `getWeatherOutlook()` method that will prepare the `URL` to be passed to the `fetch()` function described above. As you can see in the listing below having a final step of using the function `.whenComplete()`. It is responsible for parsing and populating the UI (`updateWeatherUI`).
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">CompletableFuture&lt;String&gt; fetchWeather = getWeatherOutlook(location);
-firstWeatherJsonFetch.whenComplete(updateWeatherUI);</pre>
+```java
+CompletableFuture<String> fetchWeather = getWeatherOutlook(location);
+firstWeatherJsonFetch.whenComplete(updateWeatherUI);
+```
+
 
 You'll notice the lambda `updateWeatherUI` is passed into the `.whenComplete()`. The signature takes a `BiConsumer<String, Throwable>`. What's nice about this function is that you can handle both a success and failure of the call from the HTTP request. Later, I will show you the `updateWeatherUI` lambda function, where it parses JSON using the Jackson library and subsequently populating the UI.
 
@@ -111,13 +121,14 @@ The function `getWeatherOutlook()` {#h2-7-the-function-getweatheroutlook}
 
 I created a *business-y* function `getWeatherOutlook()` that takes a `Location` object's GPS coordinates, obtains the API key(appid) and prepares a GET request call to OpenWeatherMap.org.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">/**
+```java
+/**
  * An async fetch to get current weather as a JSON string.
  * @param location Location containing the latitude and longitude.
- * @return CompletableFuture&lt;String&gt; a future with a JSON response.
+ * @return CompletableFuture<String> a future with a JSON response.
  */
-private CompletableFuture&lt;String&gt; getWeatherOutlook(Location location) {
-    if (location.getLatLong() == null || (location.getLongitude() == 0f) &amp;&amp; location.getLatitude() == 0f) {
+private CompletableFuture<String> getWeatherOutlook(Location location) {
+    if (location.getLatLong() == null || (location.getLongitude() == 0f) && location.getLatitude() == 0f) {
         return CompletableFuture.failedFuture(new Throwable("No lat long defined"));
     }
 
@@ -129,27 +140,30 @@ private CompletableFuture&lt;String&gt; getWeatherOutlook(Location location) {
         if (appId == null) {
             return CompletableFuture.failedFuture(new Throwable("Error. No API token (appid) set a file called openweathermap-appid.txt."));
         }
-        return fetch("https://api.openweathermap.org/data/2.5/weather?units=metric&amp;lat=%s&amp;lon=%s&amp;appid=%s".formatted(df.format(lat), df.format(lon), appId));
+        return fetch("https://api.openweathermap.org/data/2.5/weather?units=metric&lat=%s&lon=%s&appid=%s".formatted(df.format(lat), df.format(lon), appId));
     } catch (IOException | URISyntaxException e) {
         return CompletableFuture.failedFuture(new Throwable("Error. No API token (appid) set a file called openweathermap-appid.txt."));
     }
-}</pre>
+}
+```
+
 
 Updating the UI after fetch is complete {#h2-8-updating-the-ui-after-fetch-is-complete}
 ---------------------------------------------------------------------------------------
 
 After fetching the JSON response from the webservice it's time to update the UI. In the listing below is a `BiConsumer<String, Throwable>` lambda function `updateWeatherUI` that is passed into the `.whenComplete()` function of the `CompletableFuture` (async call). The following will parse JSON and begin to update the UI elements.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">BiConsumer&lt;String, Throwable&gt; updateWeatherUI =  (dayForecastJson, err) -&gt; {
+```java
+BiConsumer<String, Throwable> updateWeatherUI =  (dayForecastJson, err) -> {
     try {
         // Parse weather JSON to obtain icon and weather temp info.
         ObjectMapper mapper = new ObjectMapper();
-        Map&lt;String, Object&gt; dayForecast = mapper.readValue(dayForecastJson, Map.class);
-        List&lt;Map&lt;String, Object&gt;&gt; weatherInfo = (List&lt;Map&lt;String, Object&gt;&gt;) dayForecast.get("weather");
-        Map&lt;String, Object&gt; weatherIconInfo = weatherInfo.size() &gt; 0 ? weatherInfo.get(0) : null;
-        Map&lt;String, Object&gt; tempInfo = (Map&lt;String, Object&gt;) dayForecast.get("main");
+        Map<String, Object> dayForecast = mapper.readValue(dayForecastJson, Map.class);
+        List<Map<String, Object>> weatherInfo = (List<Map<String, Object>>) dayForecast.get("weather");
+        Map<String, Object> weatherIconInfo = weatherInfo.size() > 0 ? weatherInfo.get(0) : null;
+        Map<String, Object> tempInfo = (Map<String, Object>) dayForecast.get("main");
         // Load weather icon asynchronously
-        Image weatherIcon = new Image("https://openweathermap.org/img/wn/%<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="255665175d0b554b42">[email&nbsp;protected]</a>".formatted(weatherIconInfo.get("icon")), true);
+        Image weatherIcon = new Image("https://openweathermap.org/img/wn/%<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="255665175d0b554b42">[email protected]</a>".formatted(weatherIconInfo.get("icon")), true);
         weatherIconImageView.setImage(weatherIcon);
 
         // Apply Tooltip
@@ -164,7 +178,9 @@ After fetching the JSON response from the webservice it's time to update the UI.
         temperatureText.setText(tempText);
     } catch (JsonProcessingException e) {
         e.printStackTrace();
-    }</pre>
+    }
+```
+
 
 How it works? {#h2-9-how-it-works}
 ----------------------------------
@@ -181,8 +197,10 @@ In step 1, it will parse the json string using Jackson into a `Map` of `Map`s in
 
 In step 4, ImageView will get a Tooltip applied using the function
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">Tooltip.install(weatherIconImageView, weatherToolTip);
-</pre>
+```java
+Tooltip.install(weatherIconImageView, weatherToolTip);
+```
+
 
 Some JavaFX UI components don't have a `setTooltip()` function such as ImageView, so this function is used to apply tooltips to non form input type controls.
 

@@ -61,7 +61,8 @@ Before diving in, you should be comfortable with:
 
 Download and install BoxLang from [boxlang.io](https://boxlang.io/ "boxlang.io"), or use BVM (BoxLang Version Manager) to manage multiple versions:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java"># Install BVM
+```java
+# Install BVM
 /bin/bash -c "$(curl -fsSL https://downloads.ortussolutions.com/ortussolutions/bvm/install.sh)"
 
 # Install the latest BoxLang
@@ -70,19 +71,23 @@ bvm use latest
 
 # Verify
 boxlang --version
-</pre>
+```
+
 
 ### Step 2 --- Install the `bx-ai` Module {#h3-3-step-2-install-the-bx-ai-module}
 
 Install `bx-ai` locally into your project using the built-in module installer:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java"># Creates a boxlang_modules/ folder in your project
+```java
+# Creates a boxlang_modules/ folder in your project
 install-bx-module bx-ai --local
-</pre>
+```
+
 
 Your project structure will look like this:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="html">my-project/
+```html
+my-project/
 ├── boxlang_modules/
 │   └── bxai/               ← installed here
 ├── config/
@@ -90,7 +95,9 @@ Your project structure will look like this:
 ├── .env                    ← your API keys (never commit this)
 ├── .env.example            ← template to share with your team
 ├── .gitignore
-└── agent.bxs               ← your BoxLang scripts</pre>
+└── agent.bxs               ← your BoxLang scripts
+```
+
 
 ### Step 3 --- Set Up Your `.env` File {#h3-4-step-3-set-up-your-env-file}
 
@@ -98,7 +105,8 @@ Copy `.env.example` to `.env` and fill in at least one provider API key. Never c
 
 `.env.example` --- commit this template so your team knows what keys are needed:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java"># BoxLang Custom Configuration — points BoxLang at your config file
+```java
+# BoxLang Custom Configuration — points BoxLang at your config file
 BOXLANG_CONFIG=./config/boxlang.json
 
 # AI Provider API Keys — fill in at least one
@@ -117,18 +125,24 @@ COHERE_API_KEY=your-api-key
 AWS_ACCESS_KEY_ID=your-key
 AWS_SECRET_ACCESS_KEY=your-secret
 AWS_REGION=us-east-1
-</pre>
+```
+
 
 `.env` --- your actual keys, never committed:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">BOXLANG_CONFIG=./config/boxlang.json
+```java
+BOXLANG_CONFIG=./config/boxlang.json
 OPENAI_API_KEY=sk-proj-...
-</pre>
+```
+
 
 Add `.env` to your `.gitignore`:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="html">.env
-boxlang_modules/</pre>
+```html
+.env
+boxlang_modules/
+```
+
 
 ### Step 4 --- `Configure config/boxlang.json` {#h3-5-step-4-configure-config-boxlang-json}
 
@@ -136,7 +150,8 @@ BoxLang reads its configuration from the file pointed to by `BOXLANG_CONFIG`. Th
 
 `config/boxlang.json`:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">{
+```java
+{
     "modules": {
         "bxai": {
             "settings": {
@@ -150,19 +165,24 @@ BoxLang reads its configuration from the file pointed to by `BOXLANG_CONFIG`. Th
         }
     }
 }
-</pre>
+```
+
 
 ### Step 5 --- Run Your First Script {#h3-6-step-5-run-your-first-script}
 
 Create `agent.bxs` and run it:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">// agent.bxs
+```java
+// agent.bxs
 answer = aiChat( "What is BoxLang AI in one sentence?" )
 println( answer )
-</pre>
+```
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">boxlang agent.bxs
-</pre>
+
+```java
+boxlang agent.bxs
+```
+
 
 That's it --- no build step, no compile, no server. BoxLang reads `.env` automatically, loads the `bxai` module from `boxlang_modules/`, and runs.
 
@@ -170,7 +190,8 @@ That's it --- no build step, no compile, no server. BoxLang reads `.env` automat
 
 To switch from OpenAI to Claude, change two lines in `config/boxlang.json` and add the key to `.env`:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">{
+```java
+{
     "modules": {
         "bxai": {
             "settings": {
@@ -183,7 +204,8 @@ To switch from OpenAI to Claude, change two lines in `config/boxlang.json` and a
         }
     }
 }
-</pre>
+```
+
 
 Your `agent.bxs` code doesn't change at all. This is the zero-vendor-lock-in promise in practice.
 
@@ -194,7 +216,8 @@ What Are AI Agents? {#h2-7-what-are-ai-agents}
 
 Think of an AI agent as a chatbot that can act, not just respond. A traditional chatbot answers questions from what it knows. An agent can reach out and do things --- query databases, call APIs, read files, send emails --- and chain those actions together to solve multi-step problems.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="html">┌─────────────────────────────────────────────────────────────┐
+```html
+┌─────────────────────────────────────────────────────────────┐
 │                                                             │
 │   TRADITIONAL CHATBOT           AI AGENT                    │
 │   ──────────────────            ────────                    │
@@ -207,11 +230,14 @@ Think of an AI agent as a chatbot that can act, not just respond. A traditional 
 │                                           └──► Answer       │
 │                                                             │
 │                                 Reasons. Acts. Remembers.   │
-└─────────────────────────────────────────────────────────────┘</pre>
+└─────────────────────────────────────────────────────────────┘
+```
+
 
 Here's a conversation with the SupportBot we'll build:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="html">User:  "Where is order #ORD-78291? It was supposed to arrive yesterday."
+```html
+User:  "Where is order #ORD-78291? It was supposed to arrive yesterday."
 
 Agent: [Thinks: I need to look up that order]
 Agent: [Calls get_order( orderId: "ORD-78291" )]
@@ -221,7 +247,9 @@ Agent: [Gets back: { status: "In Transit", carrier: "FedEx",
 
 Agent: "Your order #ORD-78291 is in transit with FedEx
         (tracking: 794644792798). It was delayed by one day
-        and is now estimated to arrive tomorrow, April 4th."</pre>
+        and is now estimated to arrive tomorrow, April 4th."
+```
+
 
 The agent broke the problem down, picked the right tool, and synthesized the answer. This matters when:
 
@@ -234,7 +262,8 @@ What Is BoxLang AI? {#h2-8-what-is-boxlang-ai}
 
 BoxLang AI (`bx-ai`) is the official AI framework for BoxLang --- a modern, dynamic JVM language. It provides a unified, fluent API for building AI agents, multi-model workflows, RAG pipelines, and AI-powered applications.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="html">┌────────────────────────────────────────────────────────────────┐
+```html
+┌────────────────────────────────────────────────────────────────┐
 │                     BoxLang AI Stack                           │
 ├────────────────────────────────────────────────────────────────┤
 │                                                                │
@@ -248,7 +277,9 @@ BoxLang AI (`bx-ai`) is the official AI framework for BoxLang --- a modern, dyna
 │   ─────────────────────────────────────────────────────────    │
 │   OpenAI │ Claude │ Gemini │ Ollama │ Groq │ + 12 more         │
 │                                                                │
-└────────────────────────────────────────────────────────────────┘</pre>
+└────────────────────────────────────────────────────────────────┘
+```
+
 
 Key properties that make it great for building agents:
 
@@ -263,7 +294,8 @@ Core Concept 1: Tools {#h2-9-core-concept-1-tools}
 
 Tools are functions your AI agent can call. The framework passes the tool's name, description, and parameter schema to the LLM, which decides when and how to call them. When the LLM decides to use a tool, BoxLang AI executes it and feeds the result back.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="html">┌──────────────────────────────────────────────────────────────┐
+```html
+┌──────────────────────────────────────────────────────────────┐
 │                    How Tools Work                            │
 │                                                              │
 │  ┌─────────┐    "I need order data"    ┌──────────────────┐  │
@@ -275,21 +307,25 @@ Tools are functions your AI agent can call. The framework passes the tool's name
 │                                                              │
 │  The LLM reads the description to decide WHEN to call.       │
 │  BoxLang AI handles the execution and result passing.        │
-└──────────────────────────────────────────────────────────────┘</pre>
+└──────────────────────────────────────────────────────────────┘
+```
+
 
 #### Defining a Tool with `aiTool()`
 
 The simplest way to create a tool is with the `aiTool()` BIF and a closure:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">getWeatherTool = aiTool(
+```java
+getWeatherTool = aiTool(
     "get_weather",
     "Get the current weather for a city. Use when the user asks about weather conditions.",
-    ( required city ) =&gt; {
+    ( required city ) => {
         // In a real app you'd call a weather API here
         return { temp: 72, condition: "sunny", city: arguments.city }
     }
 )
-</pre>
+```
+
 
 The three arguments are: name, description, and callable. The description is what the LLM reads to decide whether this is the right tool --- write it like you're telling a colleague when to use it.
 
@@ -297,7 +333,8 @@ The three arguments are: name, description, and callable. The description is wha
 
 Here's the first tool for our SupportBot. It looks up an order by ID:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">// OrderTools.bx
+```java
+// OrderTools.bx
 class {
 
     property name="orderService";
@@ -326,7 +363,7 @@ class {
             carrier          : order.getCarrier(),
             trackingNumber   : order.getTrackingNumber(),
             estimatedDelivery: order.getEstimatedDelivery().dateFormat( "long" ),
-            items            : order.getItems().map( item =&gt; {
+            items            : order.getItems().map( item => {
                 return { name: item.getName(), qty: item.getQty(), price: item.getPrice() }
             } ),
             total            : order.getTotal(),
@@ -335,7 +372,8 @@ class {
     }
 
 }
-</pre>
+```
+
 
 A few things to notice:
 
@@ -347,7 +385,8 @@ A few things to notice:
 
 #### The Full `OrderTools` Class
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">class {
+```java
+class {
 
     property name="orderService";
 
@@ -387,7 +426,7 @@ A few things to notice:
         )
         return {
             count  : orders.len(),
-            orders : orders.map( o =&gt; { id: o.getId(), status: o.getStatus(), total: o.getTotal(), date: o.getCreatedAt().dateFormat( "short" ) } ),
+            orders : orders.map( o => { id: o.getId(), status: o.getStatus(), total: o.getTotal(), date: o.getCreatedAt().dateFormat( "short" ) } ),
             summary: "Found #orders.len()# orders for #arguments.customerEmail#"
         }
     }
@@ -413,11 +452,13 @@ A few things to notice:
     }
 
 }
-</pre>
+```
+
 
 #### Tool Design Principles
 
-<pre class="EnlighterJSRAW" data-enlighter-language="html">┌─────────────────────────────────────────────────────────────────┐
+```html
+┌─────────────────────────────────────────────────────────────────┐
 │                  The 4 Tool Design Rules                        │
 │                                                                 │
 │  1. DESCRIPTION ── Tell the LLM exactly when (and when NOT)     │
@@ -431,24 +472,29 @@ A few things to notice:
 │                                                                 │
 │  4. CAP RESULTS ── Always use a limit param. Never return       │
 │                    unbounded arrays to the LLM.                 │
-└─────────────────────────────────────────────────────────────────┘</pre>
+└─────────────────────────────────────────────────────────────────┘
+```
+
 
 **Write the description like you're training a new colleague:**
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">// ❌ Vague — LLM won't know when to call this
+```java
+// ❌ Vague — LLM won't know when to call this
 @AITool( "Gets order information" )
 
 // ✅ Clear — tells the LLM exactly when and what
 @AITool( "Retrieve a single order by order ID. Use first when a customer mentions
           a specific order number. Do not call without an explicit order ID." )
-</pre>
+```
+
 
 Core Concept 2: Memory {#h2-10-core-concept-2-memory}
 -----------------------------------------------------
 
 Memory is what separates a stateful agent from a stateless API call. Without memory, every message is processed in isolation. With memory, the agent carries the full conversation thread.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="html">┌────────────────────────────────────────────────────────────────┐
+```html
+┌────────────────────────────────────────────────────────────────┐
 │               Without Memory  vs  With Memory                  │
 │                                                                │
 │  WITHOUT                       WITH                            │
@@ -463,7 +509,9 @@ Memory is what separates a stateful agent from a stateless API call. Without mem
 │  Agent: "Which order?" ❌       Agent: [looks up ORD-78291] ✅ │
 │                                                                │
 │  Each call is isolated.        Full context is preserved.      │
-└────────────────────────────────────────────────────────────────┘</pre>
+└────────────────────────────────────────────────────────────────┘
+```
+
 
 BoxLang AI ships 20+ memory types. Here are the three you'll use most.
 
@@ -471,12 +519,15 @@ BoxLang AI ships 20+ memory types. Here are the three you'll use most.
 
 Window memory keeps the last N messages. It's the minimum you need for a coherent conversation:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">memory = aiMemory( "window", config: { maxMessages: 20 } )
-</pre>
+```java
+memory = aiMemory( "window", config: { maxMessages: 20 } )
+```
+
 
 What the memory stores as a conversation builds:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="html">After Turn 1:
+```html
+After Turn 1:
 ┌─────────────────────────────────────────────────────┐
 │  user      │ "Where is order #ORD-78291?"           │
 │  assistant │ "Your order is in transit..."          │
@@ -488,7 +539,9 @@ After Turn 2:
 │  assistant │ "Your order is in transit..."          │
 │  user      │ "When exactly will it arrive?"         │
 │  assistant │ "It's estimated to arrive April 4th."  │
-└─────────────────────────────────────────────────────┘</pre>
+└─────────────────────────────────────────────────────┘
+```
+
 
 Without memory, "When exactly will it arrive?" has no context --- "it" refers to nothing. With memory, the agent knows what "it" means.
 
@@ -496,12 +549,15 @@ Without memory, "When exactly will it arrive?" has no context --- "it" refers to
 
 For web applications serving multiple users, you need one agent instance that's safe across concurrent requests:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">memory = aiMemory( "cache" )
-</pre>
+```java
+memory = aiMemory( "cache" )
+```
+
 
 Every memory operation accepts `userId` and `conversationId` to route each read/write to the right isolated conversation:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="html">┌──────────────────────────────────────────────────────────────┐
+```html
+┌──────────────────────────────────────────────────────────────┐
 │              One Memory Instance, Many Users                 │
 │                                                              │
 │  ┌──────────┐                                                │
@@ -518,14 +574,18 @@ Every memory operation accepts `userId` and `conversationId` to route each read/
 │                                  │                           │
 │  getAll( userId:"alice" ) ───────┘  Returns ONLY Alice's     │
 │                                     messages. Bob isolated.  │
-└──────────────────────────────────────────────────────────────┘</pre>
+└──────────────────────────────────────────────────────────────┘
+```
+
 
 When you pass `userId` and `conversationId` through `agent.run()` options, they flow automatically to all memory operations --- no explicit wiring needed:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">// Same agent instance, fully isolated per user
-agent.run( "My order is late.", {}, { userId: "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="8eefe2e7edebceebf6efe3fee2eba0ede1e3">[email&nbsp;protected]</a>", conversationId: "ticket-101" } )
-agent.run( "I need a refund.",  {}, { userId: "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="54363b3614312c35392438317a373b39">[email&nbsp;protected]</a>",   conversationId: "ticket-102" } )
-</pre>
+```java
+// Same agent instance, fully isolated per user
+agent.run( "My order is late.", {}, { userId: "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="8eefe2e7edebceebf6efe3fee2eba0ede1e3">[email protected]</a>", conversationId: "ticket-101" } )
+agent.run( "I need a refund.",  {}, { userId: "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="54363b3614312c35392438317a373b39">[email protected]</a>",   conversationId: "ticket-102" } )
+```
+
 
 No per-user agent factories. No thread-local hacks. One instance handles thousands of concurrent users safely.
 
@@ -533,14 +593,17 @@ No per-user agent factories. No thread-local hacks. One instance handles thousan
 
 For long support sessions, `summary` memory auto-compresses old messages to preserve context without token bloat:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">memory = aiMemory( "summary", config: {
+```java
+memory = aiMemory( "summary", config: {
     maxMessages      : 40,
     summaryThreshold : 20,
     summaryModel     : "gpt-4o-mini"   // use a cheap model for summarization
 } )
-</pre>
+```
 
-<pre class="EnlighterJSRAW" data-enlighter-language="html">              How Summary Memory Works
+
+```html
+              How Summary Memory Works
 
 Messages 1-20 accumulate normally...
 
@@ -555,14 +618,17 @@ At message 21:
 ┌──────────────────────────────────────────────────┐
 │  [SUMMARY]  +  Messages 21–40                    │
 │  Full context preserved, fraction of the tokens  │
-└──────────────────────────────────────────────────┘</pre>
+└──────────────────────────────────────────────────┘
+```
+
 
 Core Concept 3: The Agent {#h2-11-core-concept-3-the-agent}
 -----------------------------------------------------------
 
 With tools and memory defined, the agent is the piece that ties them together. In BoxLang AI, `aiAgent()` is a single BIF call that gives you a fully autonomous agent.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="html">┌──────────────────────────────────────────────────────────────┐
+```html
+┌──────────────────────────────────────────────────────────────┐
 │                    The Agent is the Glue                     │
 │                                                              │
 │   ┌──────────┐   ┌──────────┐   ┌──────────┐                 │
@@ -579,11 +645,14 @@ With tools and memory defined, the agent is the piece that ties them together. I
 │                  ┌────▼─────┐                                │
 │                  │   LLM    │  (any of 17 providers)         │
 │                  └──────────┘                                │
-└──────────────────────────────────────────────────────────────┘</pre>
+└──────────────────────────────────────────────────────────────┘
+```
+
 
 #### The Simplest Possible Agent
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">// Window memory by default with 20 messages
+```java
+// Window memory by default with 20 messages
 agent = aiAgent(
     name   : "SupportBot",
     tools  : [ getOrderTool, searchOrdersTool, issueRefundTool ]
@@ -591,7 +660,8 @@ agent = aiAgent(
 
 response = agent.run( "Where is order #ORD-78291?" )
 println( response )
-</pre>
+```
+
 
 That's it. The agent handles the full reasoning loop: deciding when to call tools, passing results back to the LLM, and producing a final response.
 
@@ -599,7 +669,8 @@ That's it. The agent handles the full reasoning loop: deciding when to call tool
 
 A well-defined `description` and `instructions` dramatically improve agent behavior:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">agent = aiAgent(
+```java
+agent = aiAgent(
     name         : "SupportBot",
     description  : "Customer support specialist for Acme Store. Expert in orders, shipping, returns, and product questions.",
     instructions : "
@@ -612,11 +683,13 @@ A well-defined `description` and `instructions` dramatically improve agent behav
     tools        : [ getOrderTool, searchOrdersTool, issueRefundTool ],
     memory       : aiMemory( "cache" )
 )
-</pre>
+```
+
 
 #### The Agent Run Lifecycle
 
-<pre class="EnlighterJSRAW" data-enlighter-language="html">┌──────────────────────────────────────────────────────────────┐
+```html
+┌──────────────────────────────────────────────────────────────┐
 │                  Agent Run Lifecycle                         │
 │                                                              │
 │  agent.run( "My order is late" )                             │
@@ -647,7 +720,9 @@ A well-defined `description` and `instructions` dramatically improve agent behav
 │             │                                                │
 │             └──► back to LLM Call (loop)                     │
 │                                                              │
-└──────────────────────────────────────────────────────────────┘</pre>
+└──────────────────────────────────────────────────────────────┘
+```
+
 
 This loop is what makes the agent autonomous --- it keeps calling tools until it has everything it needs to produce a final answer.
 
@@ -656,7 +731,8 @@ How to Put It All Together {#h2-12-how-to-put-it-all-together}
 
 Here's the complete SupportBot:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">// SupportBot.bx
+```java
+// SupportBot.bx
 import bxModules.bxai.models.middleware.core.LoggingMiddleware;
 import bxModules.bxai.models.middleware.core.GuardrailMiddleware;
 import bxModules.bxai.models.middleware.core.MaxToolCallsMiddleware;
@@ -722,11 +798,13 @@ class {
     }
 
 }
-</pre>
+```
+
 
 ### What the Middleware Does {#h3-13-what-the-middleware-does}
 
-<pre class="EnlighterJSRAW" data-enlighter-language="html">┌────────────────────────────────────────────────────────────────┐
+```html
+┌────────────────────────────────────────────────────────────────┐
 │                  Middleware Stack                              │
 │                                                                │
 │  Every agent.run() call passes through:                        │
@@ -740,7 +818,9 @@ class {
 │           ▼             ▼                ▼                     │
 │       ai.log      reject call       cancel run                 │
 │                   with error        gracefully                 │
-└────────────────────────────────────────────────────────────────┘</pre>
+└────────────────────────────────────────────────────────────────┘
+```
+
 
 `LoggingMiddleware` logs every agent run, LLM call, and tool invocation to BoxLang's `ai` log file. In development you'll see exactly what the agent is doing. In production, disable `logToConsole` and write to the log for observability.
 
@@ -757,7 +837,8 @@ BoxLang AI supports streaming at every level: direct model calls, agent runs, an
 
 ### How Streaming Works {#h3-15-how-streaming-works}
 
-<pre class="EnlighterJSRAW" data-enlighter-language="html">┌──────────────────────────────────────────────────────────────┐
+```html
+┌──────────────────────────────────────────────────────────────┐
 │                   Streaming vs Blocking                      │
 │                                                              │
 │  BLOCKING (default)                                          │
@@ -771,16 +852,19 @@ BoxLang AI supports streaming at every level: direct model calls, agent runs, an
 │  User sends message                                          │
 │  "Your" ► " order" ► " #ORD" ► "-78291" ► " is" ► ...        │
 │  Response appears immediately, token by token                │
-└──────────────────────────────────────────────────────────────┘</pre>
+└──────────────────────────────────────────────────────────────┘
+```
+
 
 ### Simple Streaming with `aiChatStream()` {#h3-16-simple-streaming-with-aichatstream}
 
 For basic streaming without an agent:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">// Stream a response token by token
+```java
+// Stream a response token by token
 aiChatStream(
     messages : "Explain how BoxLang AI handles tool calling",
-    callback : chunk =&gt; {
+    callback : chunk => {
         // Each chunk contains a delta with partial content
         var token = chunk.choices?.first()?.delta?.content ?: ""
         if ( token.len() ) {
@@ -790,13 +874,15 @@ aiChatStream(
     },
     params   : { model: "gpt-4o" }
 )
-</pre>
+```
+
 
 ### Agent Streaming with `agent.stream()` {#h3-17-agent-streaming-with-agent-stream}
 
 The `stream()` method on `AiAgent` works exactly like `run()` but delivers the response token by token. Tool calls still execute synchronously under the hood --- the streaming applies to the final text response:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">// SupportBot.bx — add this alongside the handle() method
+```java
+// SupportBot.bx — add this alongside the handle() method
 void function handleStream(
     required string   message,
     required string   userId,
@@ -812,13 +898,15 @@ void function handleStream(
         }
     )
 }
-</pre>
+```
+
 
 ### Streaming to a Web Browser (BoxLang Web) {#h3-18-streaming-to-a-web-browser-boxlang-web}
 
 Here's how to wire streaming to a real HTTP response --- tokens pushed to the browser as they arrive:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">// handlers/SupportStreamHandler.bx
+```java
+// handlers/SupportStreamHandler.bx
 class {
 
     property name="supportBot" inject="SupportBot";
@@ -829,12 +917,12 @@ class {
 
         // Use BoxLang's Native SSE Streamer
         SSE(
-            callback          : ( emitter ) =&gt; {
+            callback          : ( emitter ) => {
                 supportBot.handleStream(
                     message        : rc.message,
                     userId         : userId,
                     conversationId : conversationId,
-                    onChunk        : chunk =&gt; {
+                    onChunk        : chunk => {
                         if ( emitter.isClosed() ) {
                             return
                         }
@@ -853,20 +941,22 @@ class {
     }
 
 }
-</pre>
+```
+
 
 ### Consuming the Stream on the Frontend {#h3-19-consuming-the-stream-on-the-frontend}
 
 On the client side, use the standard EventSource API or fetch with a readable stream:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">// JavaScript — connect to the SSE stream
+```java
+// JavaScript — connect to the SSE stream
 const eventSource = new EventSource(
-    `/support/stream?ticketId=${Setting: ticketId not found}&amp;message=${Setting: encodeURIComponent(message) not found}`
+    `/support/stream?ticketId=${Setting: ticketId not found}&message=${Setting: encodeURIComponent(message) not found}`
 );
 
 const responseEl = document.getElementById( "agent-response" );
 
-eventSource.onmessage = ( event ) =&gt; {
+eventSource.onmessage = ( event ) => {
     if ( event.data === "[DONE]" ) {
         eventSource.close();
         return;
@@ -875,35 +965,39 @@ eventSource.onmessage = ( event ) =&gt; {
     responseEl.textContent += event.data;
 };
 
-eventSource.onerror = () =&gt; eventSource.close();
-</pre>
+eventSource.onerror = () => eventSource.close();
+```
+
 
 ### Streaming with Accumulated Memory {#h3-20-streaming-with-accumulated-memory}
 
 One important detail: even in streaming mode, the full response is stored in memory after the stream completes. The `AiAgent.stream()` method accumulates tokens internally and saves them when done:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">// From AiAgent.bx — the wrapped callback pattern
+```java
+// From AiAgent.bx — the wrapped callback pattern
 var accumulated = ""
-var wrappedCallback = ( chunk ) =&gt; {
+var wrappedCallback = ( chunk ) => {
     var content = chunk.choices?.first()?.delta?.content ?: ""
-    accumulated &amp;= content        // accumulate for memory
+    accumulated &= content        // accumulate for memory
     userOnChunk( chunk )          // forward to your callback
 }
 
 // After streaming completes, store the full response
 storeInMemory( userMessage, { role: "assistant", content: accumulated }, userId, conversationId )
-</pre>
+```
+
 
 This means streaming and memory work seamlessly together --- the user sees tokens as they arrive, and the next turn has the full conversation history.
 
 ### When to Use Streaming {#h3-21-when-to-use-streaming}
 
-<pre class="EnlighterJSRAW" data-enlighter-language="html">┌──────────────────────────────────────────────────────────────┐
+```html
+┌──────────────────────────────────────────────────────────────┐
 │               Streaming Decision Guide                       │
 │                                                              │
 │  USE streaming when:                                         │
 │  • Building a chat UI where responsiveness matters           │
-│  • Responses are long (&gt; 2-3 sentences)                      │
+│  • Responses are long (> 2-3 sentences)                      │
 │  • You want a "typing" feel for the user                     │
 │  • Delivering to a browser over HTTP                         │
 │                                                              │
@@ -912,14 +1006,17 @@ This means streaming and memory work seamlessly together --- the user sees token
 │  • The caller needs the complete response before proceeding  │
 │  • Building an API that returns JSON                         │
 │  • Writing tests (deterministic, easier to assert)           │
-└──────────────────────────────────────────────────────────────┘</pre>
+└──────────────────────────────────────────────────────────────┘
+```
+
 
 How the Agent Thinks {#h2-22-how-the-agent-thinks}
 --------------------------------------------------
 
 Let's trace exactly what happens for a real multi-step request: "*My order #ORD-78291 arrived damaged. I want a refund.*"
 
-<pre class="EnlighterJSRAW" data-enlighter-language="html">┌──────────────────────────────────────────────────────────────┐
+```html
+┌──────────────────────────────────────────────────────────────┐
 │              Full Agent Execution Trace                      │
 │                                                              │
 │  USER: "My order #ORD-78291 arrived damaged. I want          │
@@ -977,13 +1074,16 @@ Let's trace exactly what happens for a real multi-step request: "*My order #ORD-
 │  │  STORE in memory (scoped to this user + ticket)     │     │
 │  │  RETURN to caller                                   │     │
 │  └─────────────────────────────────────────────────────┘     │
-└──────────────────────────────────────────────────────────────┘</pre>
+└──────────────────────────────────────────────────────────────┘
+```
+
 
 The agent confirms before acting (because the instructions say to), executes the tool only after explicit confirmation, and builds the full response from the tool result. This is the multi-step reasoning that makes agents genuinely useful.
 
 **What the conversation history looks like at the end:**
 
-<pre class="EnlighterJSRAW" data-enlighter-language="html">┌────────────────────────────────────────────────────────────┐
+```html
+┌────────────────────────────────────────────────────────────┐
 │  Role        │  Content                                    │
 ├──────────────┼─────────────────────────────────────────────┤
 │  system      │  "You are SupportBot..."                    │
@@ -995,7 +1095,9 @@ The agent confirms before acting (because the instructions say to), executes the
 │  assistant   │  [tool_call: issue_refund]                  │
 │  tool        │  { success:true, refundId:"REF-44821"... }  │
 │  assistant   │  "Your refund of $89.99 has been issued..." │
-└────────────────────────────────────────────────────────────┘</pre>
+└────────────────────────────────────────────────────────────┘
+```
+
 
 Going Further {#h2-23-going-further}
 ------------------------------------
@@ -1006,7 +1108,8 @@ The SupportBot above covers the essentials. Here's what to add for production.
 
 Ingest your documentation into vector memory and the agent retrieves relevant content automatically before answering:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">// One-time ingestion (run when docs change)
+```java
+// One-time ingestion (run when docs change)
 vectorMemory = aiMemory( "chroma", config: {
     collection       : "support_kb",
     embeddingProvider: "openai",
@@ -1021,9 +1124,11 @@ result = aiDocuments(
     options : { chunkSize: 800, overlap: 150 }
 )
 println( "Loaded #result.documentsIn# docs → #result.chunksOut# chunks" )
-</pre>
+```
 
-<pre class="EnlighterJSRAW" data-enlighter-language="html">┌──────────────────────────────────────────────────────────────┐
+
+```html
+┌──────────────────────────────────────────────────────────────┐
 │                    RAG Pipeline                              │
 │                                                              │
 │  INGESTION (run once)                                        │
@@ -1045,13 +1150,16 @@ println( "Loaded #result.documentsIn# docs → #result.chunksOut# chunks" )
 │        │                                                     │
 │        ▼                                                     │
 │  LLM answers from YOUR actual docs, not hallucinations       │
-└──────────────────────────────────────────────────────────────┘</pre>
+└──────────────────────────────────────────────────────────────┘
+```
+
 
 ### Human-in-the-Loop Approvals {#h3-25-human-in-the-loop-approvals}
 
 For refunds above a threshold, require a supervisor to approve before the refund executes:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">import bxModules.bxai.models.middleware.core.HumanInTheLoopMiddleware;
+```java
+import bxModules.bxai.models.middleware.core.HumanInTheLoopMiddleware;
 
 agent = aiAgent(
     name       : "SupportBot",
@@ -1066,9 +1174,11 @@ agent = aiAgent(
     ],
     checkpointer: aiMemory( "cache" )
 )
-</pre>
+```
 
-<pre class="EnlighterJSRAW" data-enlighter-language="html">┌──────────────────────────────────────────────────────────────┐
+
+```html
+┌──────────────────────────────────────────────────────────────┐
 │            Human-in-the-Loop Flow                            │
 │                                                              │
 │  Agent reaches issue_refund tool call                        │
@@ -1090,13 +1200,16 @@ agent = aiAgent(
 │        ├── reject  ──► agent.resume( "reject",  threadId )   │
 │        └── edit    ──► agent.resume( "edit", threadId,       │
 │                             { correctedArgs: { amount:100 }} │
-└──────────────────────────────────────────────────────────────┘</pre>
+└──────────────────────────────────────────────────────────────┘
+```
+
 
 ### Multi-Agent Escalation {#h3-26-multi-agent-escalation}
 
 For complex issues, automatically delegate to a specialist:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">billingAgent = aiAgent(
+```java
+billingAgent = aiAgent(
     name        : "BillingSpecialist",
     description : "Expert in billing disputes, chargebacks, and payment issues",
     tools       : [ "get_payment_history@billing", "dispute_charge@billing" ]
@@ -1107,9 +1220,11 @@ supportBot = aiAgent(
     name      : "SupportBot",
     subAgents : [ billingAgent ]
 )
-</pre>
+```
 
-<pre class="EnlighterJSRAW" data-enlighter-language="html">┌──────────────────────────────────────────────────────────────┐
+
+```html
+┌──────────────────────────────────────────────────────────────┐
 │               Multi-Agent Hierarchy                          │
 │                                                              │
 │            ┌─────────────────┐                               │
@@ -1120,20 +1235,23 @@ supportBot = aiAgent(
 │          ┌──────────┴───────────┐                            │
 │          │                      │                            │
 │  ┌───────┴───────┐    ┌─────────┴──────────┐                 │
-│  │   Billing     │    │     Returns &amp;      │                 │
+│  │   Billing     │    │     Returns &      │                 │
 │  │  Specialist   │    │     Shipping       │                 │
 │  └───────────────┘    └────────────────────┘                 │
 │                                                              │
 │  Each sub-agent appears as a "delegate_to_*" tool.           │
 │  The LLM decides when to delegate — no routing code needed.  │
-└──────────────────────────────────────────────────────────────┘</pre>
+└──────────────────────────────────────────────────────────────┘
+```
+
 
 Conclusion {#h2-27-conclusion}
 ------------------------------
 
 Building an AI agent with BoxLang AI comes down to three concepts:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="html">┌──────────────────────────────────────────────────────────────┐
+```html
+┌──────────────────────────────────────────────────────────────┐
 │                  The Three Core Concepts                     │
 │                                                              │
 │  1. TOOLS    ──  Functions your agent can call               │
@@ -1147,7 +1265,9 @@ Building an AI agent with BoxLang AI comes down to three concepts:
 │  3. AGENT    ──  The reasoning loop that ties it together    │
 │                  aiAgent() with instructions + middleware    │
 │                  Handles the tool-call loop automatically    │
-└──────────────────────────────────────────────────────────────┘</pre>
+└──────────────────────────────────────────────────────────────┘
+```
+
 
 The framework handles the hard parts: the tool-calling loop, memory isolation, provider differences, lifecycle events, and cross-cutting concerns like logging and rate limiting. You focus on your domain logic --- the tools that do the actual work.
 
@@ -1166,7 +1286,9 @@ Resources {#h2-28-resources}
 
 📦 [ForgeBox Package](https://forgebox.io/view/bx-ai "ForgeBox Package")
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java"># Start building
+```java
+# Start building
 install-bx-module bx-ai
 boxlang my-agent.bxs
-</pre>
+```
+

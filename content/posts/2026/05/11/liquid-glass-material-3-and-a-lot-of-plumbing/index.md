@@ -52,14 +52,15 @@ The shipping CSS sources sit in the repo at [native-themes/ios-modern/theme.css]
 
 This is the `ShowcaseTheme` capture from the new screenshot suite, run on iOS in light and dark. Same Form, same components, swap `Display.setDarkMode(...)` and re-resolve. The form is built like this:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">Container row = new Container(BoxLayout.x());
+```
+Container row = new Container(BoxLayout.x());
 row.add(new Button("Default"));
 Button raised = new Button("Raised");
 raised.setUIID("RaisedButton");
 row.add(raised);
 form.add(row);
 
-TextField tf = new TextField("<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="29414c454546694c51484459454c074a4644">[email&nbsp;protected]</a>");
+TextField tf = new TextField("<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="29414c454546694c51484459454c074a4644">[email protected]</a>");
 form.add(tf);
 
 Container toggles = new Container(BoxLayout.x());
@@ -72,7 +73,9 @@ toggles.add(rb);
 form.add(toggles);
 
 SpanLabel body = new SpanLabel("Body copy …");
-form.add(body);</pre>
+form.add(body);
+```
+
 
 That gives you the full picture in one screen:
 
@@ -131,18 +134,21 @@ Above is a six-frame sweep from the screenshot test --- the user scrolls through
 
 The API is small. Build the container, register sections with `addSection(header, content)`, configure the transition style and duration, and add it to a Form:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">StickyHeaderContainer sticky = new StickyHeaderContainer();
+```
+StickyHeaderContainer sticky = new StickyHeaderContainer();
 sticky.setTransitionStyle(StickyHeaderContainer.TRANSITION_SLIDE);
 sticky.setTransitionDurationMillis(250);
-for (char c = 'A'; c &lt;= &amp;#039;Z&amp;#039;; c++) {
+for (char c = 'A'; c <= &#039;Z&#039;; c++) {
     Label header = new Label("" + c, "StickyHeader");
     Container items = new Container(BoxLayout.y());
-    for (int i = 0; i &lt; 5; i++) {
+    for (int i = 0; i < 5; i++) {
         items.add(new Label(c + " entry " + i));
     }
     sticky.addSection(header, items);
 }
-form.add(BorderLayout.CENTER, sticky);</pre>
+form.add(BorderLayout.CENTER, sticky);
+```
+
 
 `TRANSITION_SLIDE` is the default. `TRANSITION_FADE` cross-fades the outgoing header on top of the incoming one. `TRANSITION_NONE` keeps the prior instantaneous swap if you want it. Issue [#4807](https://github.com/codenameone/CodenameOne/issues/4807) for the original request.
 

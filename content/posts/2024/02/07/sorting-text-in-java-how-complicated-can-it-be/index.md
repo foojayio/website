@@ -29,8 +29,11 @@ Level 1: Comparable {#h2-0-level-1-comparable}
 
 The class String implements *Comparable* so sorting a list of String is as simple as
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">List&lt;String&gt; textList = new ArrayList&lt;&gt;(List.of("test","test11","test2","Test4","test3","test5","tést2","test2","3test","testa","test2a","test4a","test2b"));
-Collections.sort(textList);</pre>
+```java
+List<String> textList = new ArrayList<>(List.of("test","test11","test2","Test4","test3","test5","tést2","test2","3test","testa","test2a","test4a","test2b"));
+Collections.sort(textList);
+```
+
 
 =\> **\[3test, Test4, test, test11, test2, test2, test2a, test2b, test3, test4a, test5, testa, tést2\]**
 
@@ -47,7 +50,10 @@ Collections.sort(textList);</pre>
 
 Another variant of this is
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">Collections.sort(textList, String.CASE_INSENSITIVE_ORDER);</pre>
+```java
+Collections.sort(textList, String.CASE_INSENSITIVE_ORDER);
+```
+
 
 which fixes the case sensitivity problem.  
 
@@ -58,8 +64,11 @@ Level 2: Collator {#h2-1-level-2-collator}
 
 To sort text in a more accurate way, Java includes the class *java.text.[Collator](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/text/Collator.html)* (and its direct sub-class *java.text.[RuleBasedCollator](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/text/RuleBasedCollator.html)*)
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">Collator collator = Collator.getInstance();
-Collections.sort(textList, collator);</pre>
+```java
+Collator collator = Collator.getInstance();
+Collections.sort(textList, collator);
+```
+
 
 Beware that sorting could be locale sensitive so if you want a consistent result you may prefer using `Collator.getInstance(Locale);`.
 
@@ -76,23 +85,29 @@ Beware that sorting could be locale sensitive so if you want a consistent result
 
 It's possible with Collator to specify the strength of the comparison. Let's show you with examples:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">Collator collator = Collator.getInstance(Locale.US);
+```java
+Collator collator = Collator.getInstance(Locale.US);
 collator.setStrength(Collator.TERTIARY);
-Collections.sort(textList, collator);</pre>
+Collections.sort(textList, collator);
+```
+
 
 =\> **\[3test, test, test11, test2, test2, tést2, test2a, test2b, test3, Test4, test4a, test5, testa\]**
 
 Here is some code to better understand the different collator strengths:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">collator.setStrength(Collator.PRIMARY);
-collator.compare("test", "tést"); =&gt; 0
-collator.compare("test", "tEst"); =&gt; 0
+```java
+collator.setStrength(Collator.PRIMARY);
+collator.compare("test", "tést"); => 0
+collator.compare("test", "tEst"); => 0
 collator.setStrength(Collator.SECONDARY);
-collator.compare("test", "tést"); =&gt; -1
-collator.compare("test", "tEst"); =&gt; 0
+collator.compare("test", "tést"); => -1
+collator.compare("test", "tEst"); => 0
 collator.setStrength(Collator.TERTIARY);
-collator.compare("test", "tést"); =&gt; -1
-collator.compare("test", "tEst"); =&gt; -1</pre>
+collator.compare("test", "tést"); => -1
+collator.compare("test", "tEst"); => -1
+```
+
 
 Level 3: External library {#h2-2-level-3-external-library}
 ----------------------------------------------------------
@@ -131,38 +146,45 @@ What you'll need:
 
 Let's start with the comparator, that is the easiest part:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public static Comparator&lt;String&gt; stringComparator() {
-    return (s1, s2) -&gt; compareStrings(s1, s2);
-}</pre>
+```java
+public static Comparator<String> stringComparator() {
+    return (s1, s2) -> compareStrings(s1, s2);
+}
+```
+
 
 For the compare, I like to be on the safe side and if you use a list of String or a String\[\] it may have many values that could be empty or null. So adding a method to take care of empty and null values first.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public static int compareStrings(String s1, String s2) {
-    if (s1 == null &amp;&amp; s2 == null) return 0;
+```java
+public static int compareStrings(String s1, String s2) {
+    if (s1 == null && s2 == null) return 0;
     if (s1 == null) return 1;
     if (s2 == null) return -1;
-    if (s1.isEmpty() &amp;&amp; s2.isEmpty()) return 0;
+    if (s1.isEmpty() && s2.isEmpty()) return 0;
     if (s1.isEmpty()) return 1;
     if (s2.isEmpty()) return -1;
     int compare = compareWithNumbers(s1, s2);
     return compare;
-}</pre>
+}
+```
+
 
 Now, we need a method to compare characters.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">private static int compareCharacters(char car1, char car2) {
+```
+private static int compareCharacters(char car1, char car2) {
     // For performance reason
     if (car1 == car2) return 0;
-    if (car1 == '.') return -1; // file.txt &lt; file 2.txt
+    if (car1 == '.') return -1; // file.txt < file 2.txt
     if (car2 == '.') return 1;
-    if (car1 &lt; 128 &amp;&amp; car2 &lt; 128) {
-        if (car1 &gt;= 65 &amp;&amp; car1 &lt;=90) car1 += 32; // uppercase to lowercase
-        if (car2 &gt;= 65 &amp;&amp; car2 &lt;=90) car2 += 32;
+    if (car1 < 128 && car2 < 128) {
+        if (car1 >= 65 && car1 <=90) car1 += 32; // uppercase to lowercase
+        if (car2 >= 65 && car2 <=90) car2 += 32;
         if (car1 == car2) return 0;
-        if ((car1 &gt;= 'a' &amp;&amp; car1 &lt;= 'z' &amp;&amp; car2 &gt;= 'a' &amp;&amp; car2 &lt;= 'z') ||
-                (car1 &gt;= '0' &amp;&amp; car1 &lt;= '9' &amp;&amp; car2 &gt;= '0' &amp;&amp; car2 &lt;= '9') ||
-                (car1 &gt;= '0' &amp;&amp; car1 &lt;= '9' &amp;&amp; car2 &gt;= 'a' &amp;&amp; car2 &lt;= 'z') ||
-                (car1 &gt;= 'a' &amp;&amp; car1 &lt;= 'z' &amp;&amp; car2 &gt;= '0' &amp;&amp; car2 &lt;= '9')) {
+        if ((car1 >= 'a' && car1 <= 'z' && car2 >= 'a' && car2 <= 'z') ||
+                (car1 >= '0' && car1 <= '9' && car2 >= '0' && car2 <= '9') ||
+                (car1 >= '0' && car1 <= '9' && car2 >= 'a' && car2 <= 'z') ||
+                (car1 >= 'a' && car1 <= 'z' && car2 >= '0' && car2 <= '9')) {
             return car1 - car2;
         }
     }
@@ -188,34 +210,37 @@ private static Collator getCollactor(int strenght) {
         return TERTIARY_COLLATOR;
     }
     return Collator.getInstance();
-}</pre>
+}
+```
+
 
 And now, the main compare method that will handle numbers:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">private static final long MAX_COMPARE = 100_000_000_000_000_000L;
+```
+private static final long MAX_COMPARE = 100_000_000_000_000_000L;
 
 public static int compareWithNumbers(String s1, String s2) {
     int length = Math.min(s1.length(), s2.length());
     int i = 0;
     long number1 = 0;
     long number2 = 0;
-    for (; i &lt; length; i++) {
+    for (; i < length; i++) {
         char car1 = s1.charAt(i);
         char car2 = s2.charAt(i);
-        boolean isDigit1 = (number1 &gt; 0 &amp;&amp; car1 == '0') || (car1 &gt;= '1' &amp;&amp; car1 &lt;= '9');
-        boolean isDigit2 = (number2 &gt; 0 &amp;&amp; car2 == '0') || (car2 &gt;= '1' &amp;&amp; car2 &lt;= '9');
+        boolean isDigit1 = (number1 > 0 && car1 == '0') || (car1 >= '1' && car1 <= '9');
+        boolean isDigit2 = (number2 > 0 && car2 == '0') || (car2 >= '1' && car2 <= '9');
         int compare = compareCharacters(car1, car2);
         // Compute on going numbers
         if (isDigit1) number1 = number1 * 10 + car1 - '0';
         if (isDigit2) number2 = number2 * 10 + car2 - '0';
-        if (number1 &gt;= MAX_COMPARE || number2 &gt;= MAX_COMPARE) {
+        if (number1 >= MAX_COMPARE || number2 >= MAX_COMPARE) {
             if (isDigit1) number1 = car1 - '0';
             if (isDigit2) number2 = car2 - '0';
         }
         if (!isDigit1 || !isDigit2) {
             if (number1 != number2) {
                 if (number1 == 0 || number2 == 0) return compareCharacters(car1, car2); // compare number to letter
-                return number1 &lt; number2 ? -1 : 1; // compare numbers
+                return number1 < number2 ? -1 : 1; // compare numbers
             }
             if (compare != 0) return compare; // compare letters
             number1 = 0;
@@ -223,18 +248,23 @@ public static int compareWithNumbers(String s1, String s2) {
         }
     }
     int lengthDiff = s1.length() - s2.length();
-    if (lengthDiff == 0 &amp;&amp; number1 == number2) return getCollactor(3).compare(s1, s2); // same primary text
-    if (number1 &gt; 0 || number2 &gt; 0) {
+    if (lengthDiff == 0 && number1 == number2) return getCollactor(3).compare(s1, s2); // same primary text
+    if (number1 > 0 || number2 > 0) {
         if (lengthDiff == 0) return (int) (number1 - number2);
-        char nextCar = lengthDiff &gt; 0 ? s1.charAt(i) : s2.charAt(i);
-        boolean isDigit = nextCar &gt;= '0' &amp;&amp; nextCar &lt;= '9';
-        if (isDigit || number1 == number2) return lengthDiff &gt; 0 ? 1 : -1; // the longest number or text loses
+        char nextCar = lengthDiff > 0 ? s1.charAt(i) : s2.charAt(i);
+        boolean isDigit = nextCar >= '0' && nextCar <= '9';
+        if (isDigit || number1 == number2) return lengthDiff > 0 ? 1 : -1; // the longest number or text loses
         else return (int) (number1 - number2);
     }
     return lengthDiff; // the longest text loses
-}</pre>
+}
+```
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">Collections.sort(textList, stringComparator());</pre>
+
+```java
+Collections.sort(textList, stringComparator());
+```
+
 
 =\> **\[3test, test, test2, test2, tést2, test2a, test2b, test3, Test4, test4a, test5, test11, testa\]**
 

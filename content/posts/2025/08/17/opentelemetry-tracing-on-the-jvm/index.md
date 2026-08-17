@@ -40,7 +40,8 @@ I keep the architecture pretty simple:
 
 I'm using Reactive data access on both the remote service and the database to spice up things a bit, more specifically, Kotlin coroutines. Here's the general structure:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="kotlin">val products = coroutineScope {
+```kotlin
+val products = coroutineScope {
     val ping = async {
         // Call the ping service
     }
@@ -49,7 +50,9 @@ I'm using Reactive data access on both the remote service and the database to sp
     }
     println("Received ping response: ${ping.await()}")
     products.await()
-}</pre>
+}
+```
+
 
 Here are the features for each stack:
 
@@ -67,20 +70,26 @@ The OpenTelemetry Java Agent is the first approach I used regarding OpenTelemetr
 
 The only necessary configuration is to set the agent when running the JVM:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="shell">java -javaagent:opentelemetry-javaagent.jar -jar otel-boot-agent.jar</pre>
+```bash
+java -javaagent:opentelemetry-javaagent.jar -jar otel-boot-agent.jar
+```
+
 
 The agent supports [lots of frameworks and libraries](https://github.com/open-telemetry/opentelemetry-java-instrumentation/blob/main/docs/supported-libraries.md), including Spring Boot, Quarkus, Ktor, Spark, and many others. When the application flow finds a supported framework/library, it logs a span.
 
 The Agent upholds the standard OpenTelemetry environment variables.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml">services:
+```yaml
+services:
   otel-boot-agent:
     build: otel-boot-agent
     environment:
       OTEL_SERVICE_NAME: OTEL Boot Agent                             #1
       OTEL_EXPORTER_OTLP_ENDPOINT: http://jaeger:4318                #2
       OTEL_METRICS_EXPORTER: none                                    #3
-      OTEL_LOGS_EXPORTER: none                                       #3</pre>
+      OTEL_LOGS_EXPORTER: none                                       #3
+```
+
 
 1. OpenTelemetry service name
 2. OpenTelemetry endpoint; Spring Boot uses HTTP
@@ -112,11 +121,14 @@ Besides the Micrometer Tracing dependency itself, you need additional ones:
 
 Configuration doesn't follow the OpenTelemetry standard:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml">services:
+```yaml
+services:
   otel-boot-micrometer:
     environment:
       SPRING_APPLICATION_NAME: OTEL Micrometer                       #1-2
-      MANAGEMENT_OTLP_TRACING_ENDPOINT: http://jaeger:4318/v1/traces #1-3</pre>
+      MANAGEMENT_OTLP_TRACING_ENDPOINT: http://jaeger:4318/v1/traces #1-3
+```
+
 
 1. Different values from the OpenTelemetry specification
 2. The Spring application name serves as the OpenTelemetry service name
@@ -135,10 +147,13 @@ OpenTelemetry Spring Boot Starter {#h2-3-opentelemetry-spring-boot-starter}
 
 The OpenTelemetry project provides a [Spring Boot starter](https://opentelemetry.io/docs/zero-code/java/spring-boot-starter/). You need only a single dependency, and like other starters, Spring Boot magic takes care of configuration:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="xml">&lt;dependency&gt;
-    &lt;groupId&gt;io.opentelemetry.instrumentation&lt;/groupId&gt;
-    &lt;artifactId&gt;opentelemetry-spring-boot-starter&lt;/artifactId&gt;
-&lt;/dependency&gt;</pre>
+```xml
+<dependency>
+    <groupId>io.opentelemetry.instrumentation</groupId>
+    <artifactId>opentelemetry-spring-boot-starter</artifactId>
+</dependency>
+```
+
 
 ![](boot-starter-1024x143.png)
 
@@ -149,18 +164,24 @@ Quarkus {#h2-4-quarkus}
 
 We saw the results of using the OpenTelemetry Agent in the first section. It's quite straightforward to use OpenTelemetry without the Agent; you need a single dependency:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="xml">&lt;dependency&gt;
-    &lt;groupId&gt;io.quarkus&lt;/groupId&gt;
-    &lt;artifactId&gt;quarkus-opentelemetry&lt;/artifactId&gt;
-&lt;/dependency&gt;</pre>
+```xml
+<dependency>
+    <groupId>io.quarkus</groupId>
+    <artifactId>quarkus-opentelemetry</artifactId>
+</dependency>
+```
+
 
 Quarkus prefixes regular OpenTelemetry environment variable names with `QUARKUS_`:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml">services:
+```yaml
+services:
   otel-quarkus:
     environment:
       QUARKUS_OTEL_SERVICE_NAME: OTEL Quarkus                        #1
-      QUARKUS_OTEL_EXPORTER_OTLP_TRACES_ENDPOINT: http://jaeger:4317 #2</pre>
+      QUARKUS_OTEL_EXPORTER_OTLP_TRACES_ENDPOINT: http://jaeger:4317 #2
+```
+
 
 1. OpenTelemetry service name
 2. OpenTelemetry endpoint; Quarkus uses gRPC
@@ -182,6 +203,6 @@ The complete source code for this post can be found on [GitHub](https://github.c
 * [Kotlin Coroutines and OpenTelemetry tracing](https://blog.frankel.ch/kotlin-coroutines-otel-tracing/)
 * [Add support for Micrometer context propagation in Kotlin coroutines](https://github.com/spring-projects/spring-framework/issues/35185)
 
-*** ** * ** ***
+
 
 *Originally published at [A Java Geek](https://blog.frankel.ch/opentelemetry-tracing-jvm/) on August 3^rd^, 2025*

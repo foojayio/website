@@ -89,7 +89,8 @@ But what if you could combine a data API gateway, serverless database and levera
 
 Let's make the API experience a bit more concrete. While SDKs can simplify this further for language-idiomatic usage, the developer experience is as simple as described in [this article](https://blog.ippon.tech/use-stargate-by-datastax-to-effortlessly-store-and-query-your-data/):
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">REST
+```
+REST
 
 curl -L -X GET 'http://localhost:8082/v2/keyspaces/blog/vehicle?where=\{"manufacturer":\{"$eq":"Tesla"\}\}' \
 
@@ -129,7 +130,9 @@ query vehicles {
 
   }
 
-}</pre>
+}
+```
+
 
 So what business problems can such a system solve? With the storage engines [supported](https://stargate.io/docs/stargate/1.0/concepts/concepts.html#_project_architecture) today, it plays to Apache Cassandra's strengths of writing fast, reading fast on primary key and secondary index in "fast data" business use cases like:
 

@@ -50,102 +50,112 @@ Code Samples: Bringing Data to Life {#h2-3-code-samples-bringing-data-to-life}
 1. Multi-Series Performance Analysis with Per-Series Border Styling  
    ![](bx-charts-1-700x324.png)
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">&lt;bx:chart title="Quarterly Performance Analysis"
+```java
+<bx:chart title="Quarterly Performance Analysis"
           chartwidth="700" chartheight="400"
           xaxistitle="Quarter" yaxistitle="Amount ($K)"
           showlegend="true"
           showygridlines="true"
-          backgroundcolor="##ffffff"&gt;
-    &lt;bx:chartseries type="bar"
+          backgroundcolor="##ffffff">
+    <bx:chartseries type="bar"
                     colorlist="3498db"
                     serieslabel="Revenue"
                     bordercolor="##2980b9"
                     borderwidth="3"
-                    borderradius="8"&gt;
-        &lt;bx:chartdata item="Q1" value="125" /&gt;
-        &lt;bx:chartdata item="Q2" value="158" /&gt;
-        &lt;bx:chartdata item="Q3" value="142" /&gt;
-        &lt;bx:chartdata item="Q4" value="189" /&gt;
-    &lt;/bx:chartseries&gt;
-    &lt;bx:chartseries type="bar"
+                    borderradius="8">
+        <bx:chartdata item="Q1" value="125" />
+        <bx:chartdata item="Q2" value="158" />
+        <bx:chartdata item="Q3" value="142" />
+        <bx:chartdata item="Q4" value="189" />
+    </bx:chartseries>
+    <bx:chartseries type="bar"
                     colorlist="e74c3c"
                     serieslabel="Expenses"
                     bordercolor="##c0392b"
                     borderwidth="2"
-                    borderradius="4"&gt;
-        &lt;bx:chartdata item="Q1" value="95" /&gt;
-        &lt;bx:chartdata item="Q2" value="102" /&gt;
-        &lt;bx:chartdata item="Q3" value="98" /&gt;
-        &lt;bx:chartdata item="Q4" value="115" /&gt;
-    &lt;/bx:chartseries&gt;
-&lt;/bx:chart&gt;</pre>
+                    borderradius="4">
+        <bx:chartdata item="Q1" value="95" />
+        <bx:chartdata item="Q2" value="102" />
+        <bx:chartdata item="Q3" value="98" />
+        <bx:chartdata item="Q4" value="115" />
+    </bx:chartseries>
+</bx:chart>
+```
+
 
 2. Line Chart with Variable Border Widths  
    ![](bx-charts-2-700x316.png)
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">&lt;bx:chart title="Website Traffic Trends"
+```java
+<bx:chart title="Website Traffic Trends"
           chartwidth="700" chartheight="400"
           xaxistitle="Month" yaxistitle="Visits (K)"
           showlegend="true"
           showygridlines="true"
           showmarkers="true"
-          backgroundcolor="##ffffff"&gt;
-    &lt;bx:chartseries type="line"
+          backgroundcolor="##ffffff">
+    <bx:chartseries type="line"
                     colorlist="e74c3c"
                     serieslabel="Total Visitors (Primary)"
                     bordercolor="##c0392b"
-                    borderwidth="5"&gt;
-        &lt;bx:chartdata item="Jan" value="125" /&gt;
-        &lt;bx:chartdata item="Feb" value="142" /&gt;
-        &lt;bx:chartdata item="Mar" value="158" /&gt;
-        &lt;bx:chartdata item="Apr" value="171" /&gt;
-    &lt;/bx:chartseries&gt;
-    &lt;bx:chartseries type="line"
+                    borderwidth="5">
+        <bx:chartdata item="Jan" value="125" />
+        <bx:chartdata item="Feb" value="142" />
+        <bx:chartdata item="Mar" value="158" />
+        <bx:chartdata item="Apr" value="171" />
+    </bx:chartseries>
+    <bx:chartseries type="line"
                     colorlist="3498db"
                     serieslabel="Returning Visitors"
                     bordercolor="##2980b9"
-                    borderwidth="2"&gt;
-        &lt;bx:chartdata item="Jan" value="45" /&gt;
-        &lt;bx:chartdata item="Feb" value="52" /&gt;
-        &lt;bx:chartdata item="Mar" value="61" /&gt;
-        &lt;bx:chartdata item="Apr" value="68" /&gt;
-    &lt;/bx:chartseries&gt;
-&lt;/bx:chart&gt;</pre>
+                    borderwidth="2">
+        <bx:chartdata item="Jan" value="45" />
+        <bx:chartdata item="Feb" value="52" />
+        <bx:chartdata item="Mar" value="61" />
+        <bx:chartdata item="Apr" value="68" />
+    </bx:chartseries>
+</bx:chart>
+```
+
 
 3. Responsive Dashboard Layout  
    ![](bx-charts-3-700x449.png)
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">&lt;div class="row g-3"&gt;
-    &lt;div class="col-lg-6"&gt;
-        &lt;bx:chart title="Sales"
+```java
+<div class="row g-3">
+    <div class="col-lg-6">
+        <bx:chart title="Sales"
                   chartwidth="400" chartheight="250"
                   responsive="true"
-                  maintainAspectRatio="true"&gt;
-            &lt;bx:chartseries type="pie" colorlist="FF6384,36A2EB" serieslabel="Sales"&gt;
-                &lt;bx:chartdata item="Online" value="65" /&gt;
-                &lt;bx:chartdata item="Retail" value="35" /&gt;
-            &lt;/bx:chartseries&gt;
-        &lt;/bx:chart&gt;
-    &lt;/div&gt;
-    &lt;div class="col-lg-6"&gt;
-        &lt;bx:chart title="Traffic"
+                  maintainAspectRatio="true">
+            <bx:chartseries type="pie" colorlist="FF6384,36A2EB" serieslabel="Sales">
+                <bx:chartdata item="Online" value="65" />
+                <bx:chartdata item="Retail" value="35" />
+            </bx:chartseries>
+        </bx:chart>
+    </div>
+    <div class="col-lg-6">
+        <bx:chart title="Traffic"
                   chartwidth="400" chartheight="250"
                   responsive="true"
                   maintainAspectRatio="true"
-                  showygridlines="true"&gt;
-            &lt;bx:chartseries type="bar" colorlist="4BC0C0" serieslabel="Visitors"&gt;
-                &lt;bx:chartdata item="Mon" value="120" /&gt;
-                &lt;bx:chartdata item="Tue" value="150" /&gt;
-                &lt;bx:chartdata item="Wed" value="135" /&gt;
-            &lt;/bx:chartseries&gt;
-        &lt;/bx:chart&gt;
-    &lt;/div&gt;
-&lt;/div&gt;</pre>
+                  showygridlines="true">
+            <bx:chartseries type="bar" colorlist="4BC0C0" serieslabel="Visitors">
+                <bx:chartdata item="Mon" value="120" />
+                <bx:chartdata item="Tue" value="150" />
+                <bx:chartdata item="Wed" value="135" />
+            </bx:chartseries>
+        </bx:chart>
+    </div>
+</div>
+```
+
 
 4. Background and Font Styling  
    ![](bx-charts-4-700x296.png)
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">&lt;bx:chart format="canvas" title="Font Styling Demo" 
+```java
+<bx:chart format="canvas" title="Font Styling Demo" 
           backgroundcolor="##ffffff"
           chartheight="300" chartwidth="600" 
           showlegend="true"
@@ -154,34 +164,39 @@ Code Samples: Bringing Data to Life {#h2-3-code-samples-bringing-data-to-life}
           fontsize="14"
           foregroundcolor="##2E4057" 
           xaxistitle="Categories" 
-          yaxistitle="Values"&gt;
-    &lt;bx:chartseries type="bar" 
+          yaxistitle="Values">
+    <bx:chartseries type="bar" 
                     colorlist="FF6B6B,4ECDC4,45B7D1" 
-                    serieslabel="Styled Data"&gt;
-        &lt;bx:chartdata item="Item A" value="45" /&gt;
-        &lt;bx:chartdata item="Item B" value="32" /&gt;
-        &lt;bx:chartdata item="Item C" value="23" /&gt;
-    &lt;/bx:chartseries&gt;
-&lt;/bx:chart&gt;</pre>
+                    serieslabel="Styled Data">
+        <bx:chartdata item="Item A" value="45" />
+        <bx:chartdata item="Item B" value="32" />
+        <bx:chartdata item="Item C" value="23" />
+    </bx:chartseries>
+</bx:chart>
+```
+
 
 5. Bubble Chart for Multi-Dimensional Analysis  
    ![](bx-charts-5-700x349.png)
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">&lt;bx:chart title="Product Portfolio Analysis"
+```java
+<bx:chart title="Product Portfolio Analysis"
           chartwidth="600" chartheight="350"
           xaxistitle="Market Share (%)" 
           yaxistitle="Revenue (millions)"
           showxgridlines="true" 
-          showygridlines="true"&gt;
-    &lt;bx:chartseries type="bubble" 
+          showygridlines="true">
+    <bx:chartseries type="bubble" 
                     colorlist="9966FF,36A2EB,FF6384,FFCE56"
-                    serieslabel="Products"&gt;
-        &lt;bx:chartdata item="Product A" x="20" y="85" r="15" /&gt;
-        &lt;bx:chartdata item="Product B" x="35" y="120" r="20" /&gt;
-        &lt;bx:chartdata item="Product C" x="15" y="65" r="10" /&gt;
-        &lt;bx:chartdata item="Product D" x="25" y="95" r="12" /&gt;
-    &lt;/bx:chartseries&gt;
-&lt;/bx:chart&gt;</pre>
+                    serieslabel="Products">
+        <bx:chartdata item="Product A" x="20" y="85" r="15" />
+        <bx:chartdata item="Product B" x="35" y="120" r="20" />
+        <bx:chartdata item="Product C" x="15" y="65" r="10" />
+        <bx:chartdata item="Product D" x="25" y="95" r="12" />
+    </bx:chartseries>
+</bx:chart>
+```
+
 
 Exploring the Possibilities 🔍 {#h2-4-exploring-the-possibilities}
 ------------------------------------------------------------------
@@ -199,11 +214,14 @@ We've built an interactive Chart Explorer at **[charts.boxlang.io](https://chart
 
 Get started with BX-Charts
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java"># CommandBox Web Apps
+```java
+# CommandBox Web Apps
 box install bx-charts
 
 # Core OS or Other Runtimes
-install-bx-module bx-charts</pre>
+install-bx-module bx-charts
+```
+
 
 ### Key Features {#h3-6-key-features}
 

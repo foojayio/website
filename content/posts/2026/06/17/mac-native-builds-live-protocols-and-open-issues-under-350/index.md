@@ -54,11 +54,14 @@ The full tutorial, including the new desktop menu and shortcut APIs and the Mac 
 
 `com.codename1.io.WebSocket` is now part of the framework with no `cn1lib` required, implemented natively on every port. A live connection is a fluent one-liner:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">WebSocket ws = WebSocket.build("wss://chat.example.com/room/general")
-    .onConnect(() -&gt; Log.p("connected"))
-    .onTextMessage(text -&gt; Display.getInstance()
-        .callSerially(() -&gt; addBubble(text, false)))
-    .connect();</pre>
+```
+WebSocket ws = WebSocket.build("wss://chat.example.com/room/general")
+    .onConnect(() -> Log.p("connected"))
+    .onTextMessage(text -> Display.getInstance()
+        .callSerially(() -> addBubble(text, false)))
+    .connect();
+```
+
 
 This is the foundation the GraphQL subscriptions below ride on, and it is trusted enough that our own screenshot CI uses it as the transport for device renders. The hands-on tutorial that builds a live chat with it is [WebSockets, gRPC, And GraphQL In The Core](https://www.codenameone.com/blog/websockets-grpc-and-graphql/).
 
@@ -66,16 +69,19 @@ This is the foundation the GraphQL subscriptions below ride on, and it is truste
 
 `cn1:generate-graphql` turns a GraphQL schema into a typed client: you declare an interface against your operations and the build emits the implementation, with zero HTTP plumbing on your side. A `@Subscription` gets you live server-pushed updates over the new core WebSocket:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@GraphQLClient("https://swapi.example.com/graphql")
+```
+@GraphQLClient("https://swapi.example.com/graphql")
 public interface StarWarsApi {
     @Query("query HeroName($episode: Episode) { hero(episode: $episode) { name } }")
     void hero(@Var("episode") Episode episode,
-              OnComplete&lt;GraphQLResponse&gt; callback);
+              OnComplete<GraphQLResponse> callback);
 
     @Subscription("subscription OnReview($ep: Episode!) { reviewAdded(episode: $ep) { stars } }")
     GraphQLSubscription onReview(@Var("ep") Episode ep,
                                  GraphQLSubscription.Handler handler);
-}</pre>
+}
+```
+
 
 Note that `Episode` is a real enum: enum binding landed in the JSON/XML mapper alongside this work, fixing a long-standing gap for `@Mapped` users too. The full tutorial is in [WebSockets, gRPC, And GraphQL In The Core](https://www.codenameone.com/blog/websockets-grpc-and-graphql/).
 
@@ -83,14 +89,17 @@ Note that `Episode` is a real enum: enum binding landed in the JSON/XML mapper a
 
 `cn1:generate-grpc` does the same for proto3. Point it at your `.proto` files and it generates the messages, the binary protobuf codecs, and the client, speaking the standard gRPC-Web wire protocol that works with Envoy and modern gRPC servers. There is no `protoc` to install and no native dependency; calling a service looks like this:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">GreeterGrpc g = GreeterGrpc.of("https://api.example.com");
+```
+GreeterGrpc g = GreeterGrpc.of("https://api.example.com");
 HelloRequest req = new HelloRequest();
 req.name = "world";
-g.sayHello(req, "Bearer " + token, response -&gt; {
+g.sayHello(req, "Bearer " + token, response -> {
     if (response.isOk()) {
         renderGreeting(response.getResponseData().message);
     }
-});</pre>
+});
+```
+
 
 Together with `cn1:generate-openapi` and `cn1:generate-graphql`, this means a typed client for practically any backend is one Maven goal away. The walkthrough from proto file to running call is in [WebSockets, gRPC, And GraphQL In The Core](https://www.codenameone.com/blog/websockets-grpc-and-graphql/).
 
@@ -98,14 +107,17 @@ Together with `cn1:generate-openapi` and `cn1:generate-graphql`, this means a ty
 
 Advertising support had quietly rotted across three dead-end legacy mechanisms. A pluggable, format-complete `com.codename1.ads` subsystem replaces all of them, with a modern AdMob reference provider, GDPR consent and iOS App Tracking Transparency built in, and a simulator placeholder provider so you can exercise every format without a device. A rewarded ad, the format people most often ask about, is now this short:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">RewardedAd ad = new RewardedAd("your-rewarded-ad-unit-id");
+```
+RewardedAd ad = new RewardedAd("your-rewarded-ad-unit-id");
 ad.setAdListener(new AdListener() {
     public void onLoaded() {
-        ad.show(reward -&gt;
+        ad.show(reward ->
             grantCoins(reward.getType(), reward.getAmount()));
     }
 });
-ad.load();</pre>
+ad.load();
+```
+
 
 The full story, including banners, native ads, app-open ads, and the provider SPI, is in [A New Advertising API, Built From The Ground Up](https://www.codenameone.com/blog/modern-advertising-api/).
 
@@ -113,12 +125,15 @@ The full story, including banners, native ads, app-open ads, and the provider SP
 
 Constraint-based background work, foreground services, push topics, shared-content handling, and a much richer local notification API, all of it usable in the simulator so you can debug these flows on your desktop. You describe what the work needs, not when to poll:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">WorkRequest req = WorkRequest.builder("daily-sync", SyncWorker.class)
+```
+WorkRequest req = WorkRequest.builder("daily-sync", SyncWorker.class)
     .setRequiresNetwork(true)
     .setRequiresCharging(true)
     .setPeriodic(6 * 60 * 60 * 1000L)
     .build();
-BackgroundWork.schedule(req);</pre>
+BackgroundWork.schedule(req);
+```
+
 
 The walkthrough, from progress notifications and inline replies to push topics and shared content, is [Background Work, Push Topics, And Richer Notifications](https://www.codenameone.com/blog/background-execution-and-push/).
 

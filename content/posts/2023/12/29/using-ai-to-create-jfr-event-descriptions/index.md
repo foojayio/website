@@ -77,7 +77,8 @@ For example, I asked ChatGPT the following for the ReservedStackActivation event
 >
 > 
 
-<pre class="EnlighterJSRAW" data-enlighter-language="cpp" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">// ... for brevity
+```cpp
+// ... for brevity
 
 frame SharedRuntime::look_for_reserved_stack_annotated_method(JavaThread* current, frame fr) {
   ResourceMark rm(current);
@@ -86,7 +87,7 @@ frame SharedRuntime::look_for_reserved_stack_annotated_method(JavaThread* curren
       activation = fr;
       warning("Potentially dangerous stack overflow in "
               "ReservedStackAccess annotated method %s [%d]",
-              method-&gt;name_and_sig_as_C_string(), count++);
+              method->name_and_sig_as_C_string(), count++);
       EventReservedStackActivation event;
       if (event.should_commit()) {
         event.set_method(method);
@@ -97,7 +98,9 @@ frame SharedRuntime::look_for_reserved_stack_annotated_method(JavaThread* curren
   return activation;
 }
 
-// ...</pre>
+// ...
+```
+
 
 > *The code context is from the [JDK repository on GitHub](https://github.com/openjdk/jdk).*
 

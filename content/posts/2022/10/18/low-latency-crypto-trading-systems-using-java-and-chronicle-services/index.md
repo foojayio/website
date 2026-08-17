@@ -46,7 +46,8 @@ Exchange updates are provided by a [websocket connection](https://binance-docs.g
 * **[Live Trades](https://binance-docs.github.io/apidocs/spot/en/#trade-streams "Live Trades"):** self-contained messages giving the most accurate information on the market price.  
   Binance sends trade and order book updates as distinct JSON messages. Here is an example message for a book update:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="json" data-enlighter-theme="dracula">{
+```json
+{
   "e": "depthUpdate", // Event type
   "E": 123456789,     // Event time
   "s": "BNBBTC",      // Symbol
@@ -64,7 +65,9 @@ Exchange updates are provided by a [websocket connection](https://binance-docs.g
       "100"           // Quantity
     ]
   ]
-}</pre>
+}
+```
+
 
 The data flow between the Binance endpoint and the trading logic follows below:  
 ![](Screen-Shot-2022-10-10-at-2.21.44-PM-1024x321.png)
@@ -91,7 +94,8 @@ Arrays can be handled with a sequence call: instead of accumulating elements int
 
 Below follows a code sample that parses the aforementioned JSON:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="dracula">public class BookUpdateParser implements ReadMarshallable {
+```java
+public class BookUpdateParser implements ReadMarshallable {
     private final StringBuilder eventType = new StringBuilder();
     private final StringBuilder symbol = new StringBuilder();
     private final StringBuilder doubleText = new StringBuilder();
@@ -133,7 +137,9 @@ Below follows a code sample that parses the aforementioned JSON:
         // StringUtils from Chronicle-Services allows to avoid allocating a String
         return StringUtils.parseDouble(doubleText);
     }
-}</pre>
+}
+```
+
 
 #### Determinism and Reproducibility
 

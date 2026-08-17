@@ -57,10 +57,13 @@ What was so confusing about this is that Pinecone uses generated text for each b
 
 Then I had to map those pieces to the Spring AI config shown below:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="properties">spring.ai.vectorstore.pinecone.index-name=example-index
+```properties
+spring.ai.vectorstore.pinecone.index-name=example-index
 spring.ai.vectorstore.pinecone.project-id=ljwer
 spring.ai.vectorstore.pinecone.environment=nre-4520-jknw
-spring.ai.vectorstore.pinecone.api-key=&lt;VALUE_HERE&gt;</pre>
+spring.ai.vectorstore.pinecone.api-key=<VALUE_HERE>
+```
+
 
 Now that I was connected, I tackled the next challenge: loading data into Pinecone.
 
@@ -71,9 +74,12 @@ Another confusion was understanding how to work with data in a valid, but unusua
 
 Here is a sample:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="json">{"rating":5,"book_id":"676924","id":"853d3b4f5c9e8aa57a65c2ccc2e7328c","text":"LOVED IT!"}
+```json
+{"rating":5,"book_id":"676924","id":"853d3b4f5c9e8aa57a65c2ccc2e7328c","text":"LOVED IT!"}
 {"rating":5,"book_id":"29780253","id":"8a3aaef2c2a7b3c5202046d4ce0f633d","text":"Trevor Noah is basically the best person ever. So touching and motivating; and always funny."}
-{"rating":3,"book_id":"20613518","id":"3ab7d51c2e977169b0bc1deeeb7e7db7","text":"Great premise; poor execution."}</pre>
+{"rating":3,"book_id":"20613518","id":"3ab7d51c2e977169b0bc1deeeb7e7db7","text":"Great premise; poor execution."}
+```
+
 
 I ended up with this because I exported a portion of the data from a Neo4j database, and that's the format it streams. I had to use some regex magic to strip out escape characters using this command: `sed 's/\\"/"/g'` and get the data shown above.
 
@@ -83,7 +89,8 @@ You can follow some of the debugging steps I took by looking at my [`/json-limit
 
 Here is how I ended up reading the JSON lines in Java ([`/load` endpoint](https://github.com/JMHReif/vectordb-data-load/blob/main/src/main/java/com/jmhreif/vectordb_data_load/ReviewController.java#L50)):
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">@GetMapping("/load")
+```java
+@GetMapping("/load")
 public String load() throws IOException {
     BufferedReader br = new BufferedReader(
         new InputStreamReader(
@@ -91,7 +98,7 @@ public String load() throws IOException {
                 .getInputStream()));
 
     String currentLine;
-    List&lt;Document&gt; documents = new ArrayList&lt;&gt;();
+    List<Document> documents = new ArrayList<>();
 
     while ((currentLine = br.readLine()) != null) {
         Review review = objectMapper
@@ -105,7 +112,9 @@ public String load() throws IOException {
     br.close();
     //upsert to Pinecone
     return "Documents read";
-}</pre>
+}
+```
+
 
 With the JSON format understood and readable in the Spring Boot app, I could move on to manipulating the data into the format I needed to upsert to Pinecone!
 
@@ -124,10 +133,11 @@ Because I want embeddings for the review text, I need the text value. Any other 
 
 I ended up with the following data mapping as a list of documents:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">@GetMapping("/load")
+```java
+@GetMapping("/load")
 public String load() throws IOException {
     //reader code
-    List&lt;Document&gt; documents = new ArrayList&lt;&gt;();
+    List<Document> documents = new ArrayList<>();
 
     while ((currentLine = br.readLine()) != null) {
         Review review = objectMapper.readValue(currentLine, Review.class);
@@ -141,31 +151,36 @@ public String load() throws IOException {
     br.close();
     //upsert to Pinecone
     return "Documents read";
-}</pre>
+}
+```
+
 
 Next, I needed to upsert the documents to Pinecone. I started by just trying to upload as-is, but quickly figured out that some of the reviews were too long and needed to be split up (text larger than context window of embedding model).
 
 Thankfully, there were several examples of this, though I had add batching because I have so many reviews being loaded (almost 70k)!
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">@GetMapping("/load")
+```java
+@GetMapping("/load")
 public String load() throws IOException {
     //code to read and format documents
     br.close();
 
     TokenTextSplitter tokenTextSplitter = new TokenTextSplitter();
-    List&lt;Document&gt; splitDocuments = tokenTextSplitter.apply(documents);
+    List<Document> splitDocuments = tokenTextSplitter.apply(documents);
 
     int batchSize = 100;
-    List&lt;List&lt;Document&gt;&gt; batches = Lists.partition(
+    List<List<Document>> batches = Lists.partition(
             splitDocuments, batchSize);
     int i = 1;
-    for (List&lt;Document&gt; batch : batches) {
+    for (List<Document> batch : batches) {
         vectorStore.add(batch);
         System.out.println("Batch " + i + " of " + batches.size());
         i++;
     }
     return "Documents loaded";
-}</pre>
+}
+```
+
 
 I fired up the application, and it started processing, but errored out close to the end. \*sigh\* After some digging, I found that the default timeout for Pinecone is 30 seconds, and I probably exceeded that. I modified a [property in the `application.properties` file](https://github.com/JMHReif/vectordb-data-load/blob/main/src/main/resources/application.properties#L10) to increase the timeout to 60 seconds, and that did the trick.
 
@@ -178,16 +193,19 @@ I also toyed with loading the book descriptions as a separate index (see [`BookC
 
 Here is the code I used to map the book JSON to Spring AI documents:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">Map metadata = Maps.newHashMap();
+```java
+Map metadata = Maps.newHashMap();
 
 if (book.text() != null) {
     metadata.put("title", book.title());
     metadata.put("rating", book.average_rating());
-    metadata.computeIfAbsent("isbn", k -&gt; book.isbn());
-    metadata.computeIfAbsent("isbn13", k -&gt; book.isbn13());
+    metadata.computeIfAbsent("isbn", k -> book.isbn());
+    metadata.computeIfAbsent("isbn13", k -> book.isbn13());
 
     documents.add(new Document(book.title()+book.text(), metadata));
-}</pre>
+}
+```
+
 
 The [`computeIfAbsent` method](https://www.baeldung.com/java-map-putifabsent-computeifabsent) is a nice way to only add the key when the value is not null (when it exists).
 

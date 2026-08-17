@@ -40,7 +40,8 @@ One way to change such a system is to identify "seams": "a place where you can a
 
 This screams "cross-cutting concern": something that is scattered throughout the code base, with one unique action applying to many methods. And cross-cutting concerns is just the use case for aspect-oriented programming. Think of the Spring Framework's caching support. It has a single caching logic, but it can vary its cache names, be applied throughout the code base, and deal with nested types:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public record MyPojo(Nested nested) {
+```java
+public record MyPojo(Nested nested) {
 }
 
 public record Nested(String value) {
@@ -50,15 +51,18 @@ public record Nested(String value) {
 public Entity fetchEntity(MyPojo argument) {
   return client.fetchEntity(argument);
 }
-</pre>
+```
+
 
 That's pretty similar to what we want. And the good thing is, Spring exposes all the required tooling to build a similar API for ad-hoc use cases, not just for framework-related logic. Here is the declarative auditing API we are going to build in this article.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@Audit(action = AuditAction.DISABLE_USER, expression = "#requests.![clientId]")
-public void disableUsers(List&lt;DisableRequest&gt; requests) {
+```java
+@Audit(action = AuditAction.DISABLE_USER, expression = "#requests.![clientId]")
+public void disableUsers(List<DisableRequest> requests) {
   // ...
 }
-</pre>
+```
+
 
 This annotation declares that the `DISABLE_USER` action will be audited with the client ids that are in the `clientId` property of every `UserDisableRequest` in the argument list. All in a single line that's expressive, concise, and non-invasive. In the rest of this article, we'll see how to implement this (spoiler: it's fairly straightforward)...
 
@@ -71,12 +75,15 @@ The `#` in `#requests.![clientId]` tells SpEL that the following identifier is a
 
 that can be set on an `EvaluationContext`. More on that later. The rest of the expression, `.![clientId]`, is a [collection projection](https://docs.spring.io/spring-framework/reference/core/expressions/language-ref/collection-projection.html). It tells SpEL to extract the `clientId` property from each collection element, just like if we were to do:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">requests.stream().map(UserDisableRequest::getClientId).toList()
-</pre>
+```java
+requests.stream().map(UserDisableRequest::getClientId).toList()
+```
+
 
 Evaluating a SpEL expression is simple. First, parse the expression. Second, optionally, construct an `EvaluationContext` so that the interpreter can access variables.[(2)](#ref2) Third, evaluate the expression:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@Test
+```java
+@Test
 void basicSpelExpression() {
   String expression = "#mylist.size";
 
@@ -88,11 +95,13 @@ void basicSpelExpression() {
 
   assertThat(parsedExpression.getValue(context)).isEqualTo(3);
 }
-</pre>
+```
+
 
 Already, this simple example can almost support our auditing use case. We just need to bind the method's parameters to SpEL variables. Luckily, Spring exposes `MethodBasedEvaluationContext`, a subclass of `EvaluationContext` that does just that.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">private void doSomething(String myArg) {
+```java
+private void doSomething(String myArg) {
 }
 
 @Test
@@ -111,7 +120,8 @@ void methodParamBinding() throws NoSuchMethodException {
   assertThat(parsedExpression.getValue(context))
     .isEqualTo(12);
 }
-</pre>
+```
+
 
 This is all we need to bind the arguments of a method invocation to a SpEL evaluation context, parse the expression, and evaluate it. You might wonder what the `new Object()` is. It's the context's root object, but we don't need it for this, so we just pass in a dummy value. One small note, the classes have to be compiled with the [`-parameters` javac argument](https://docs.oracle.com/en/java/javase/23/docs/specs/man/javac.html), so that the parameter names aren't stripped away by the compiler. If you are using Spring Boot and the [Maven plugin](https://docs.spring.io/spring-boot/docs/3.1.3/maven-plugin/reference/htmlsingle/#using) or the [Gradle plugin](https://docs.spring.io/spring-boot/docs/3.2.5/gradle-plugin/reference/htmlsingle/#reacting-to-other-plugins.java), `-parameters` is on by default. Now let's put this into practice by wiring it into an aspect, so that our auditing logic runs after each annotated method.
 
@@ -122,7 +132,8 @@ If you've never worked with Spring AOP (Aspect-Oriented Programming), let me cat
 
 Implementing an advice is simple. First, we declare the `@Audit` annotation, and annotate it with `@Retention(RetentionPolicy.RUNTIME)` so that it's available at runtime. Second, we enable the relevant machinery by adding `@EnableAspectJAutoProxy` on one of your configuration classes. This is optional if you're using Spring Boot, because the built-in `AopAutoConfiguration` will automatically take care of it. Third, we declare an advice by annotating a class with `@Advice` and adding it to the application context (in our case, using `@Component`). Fourth, we define our aspect with `@Around`, `@Before`, `@After`, `@AfterReturning`, or `@AfterThrowing`. And fifth, we define a pointcut using the AspectJ language.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">// 1. declare the annotation
+```java
+// 1. declare the annotation
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Audit {
   AuditAction action();
@@ -146,7 +157,8 @@ class AuditAspect {
   void audit(JoinPoint joinPoint, Audit auditAnnotation) {
   }
 }
-</pre>
+```
+
 
 The pointcut uses the `@annotation` designator to select all methods annotated with `Audit`. Notice that the advice (the `audit()` method) accepts two parameters. The first one is the `JoinPoint`, that will contain information about the advised method. The second one is the `@Audit` annotation that is on the advised method. With these two arguments, we will be able to access the SpEL expression in the `expression` element of the annotation.[(3)](#ref3)
 
@@ -154,7 +166,8 @@ With just these few lines of code, Spring will run our `audit()` method after ev
 
 The `audit()` method will look almost like what we saw before: parsing the expression, using a `MethodBasedEvaluationContext` to make parameters accessible to the SpEL runtime, and finally evaluating the expression and publishing the audit:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">// reuse what we can, for performance
+```java
+// reuse what we can, for performance
 private final SpelExpressionParser parser = new SpelExpressionParser();
 private final DefaultParameterNameDiscoverer parameterNameDiscoverer
   = new DefaultParameterNameDiscoverer();
@@ -172,29 +185,32 @@ void audit(JoinPoint joinPoint, Audit auditAnnotation) {
     joinPoint.getArgs(),
     parameterNameDiscoverer);
 
-  Collection&lt;String&gt; auditableIds = asStringCollection(expression.getValue(context));
-  auditableIds.forEach(id -&gt; auditService.audit(auditAnnotation.action(), id));
+  Collection<String> auditableIds = asStringCollection(expression.getValue(context));
+  auditableIds.forEach(id -> auditService.audit(auditAnnotation.action(), id));
 }
-</pre>
+```
+
 
 There's one finicky part to this: SpEL is a dynamically typed language, so we can't be sure that the return value will be of the correct type. In our case, we want to allow `String`, for a single client id, and `Collection<String>`, in case multiple client ids need to be audited. This is what the `asStringCollection(Object)` method does:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">private Collection&lt;String&gt; asStringCollection(Object result) {
+```java
+private Collection<String> asStringCollection(Object result) {
   Objects.requireNonNull(result, "expression of @Audit evaluated to null");
 
   return switch (result) {
-    case String string -&gt; List.of(string);
-    case Collection&lt;?&gt; collection -&gt; {
-      collection.forEach(element -&gt; Assert.isInstanceOf(String.class, element,
-        () -&gt; "@Audit expression evaluated to collection with non-string element"));
-      yield (Collection&lt;String&gt;) collection;
+    case String string -> List.of(string);
+    case Collection<?> collection -> {
+      collection.forEach(element -> Assert.isInstanceOf(String.class, element,
+        () -> "@Audit expression evaluated to collection with non-string element"));
+      yield (Collection<String>) collection;
     }
-    default -&gt; throw new RuntimeException(
+    default -> throw new RuntimeException(
       "@Audit expression evaluated to non-string type %s"
         .formatted(result.getClass().getName()));
   };
 }
-</pre>
+```
+
 
 And voilà! We now have a working declarative auditing API that can handle multiple audit events, as well as one or many client ids coming from arbitrary properties of the audited methods' arguments. This code works, but you shouldn't take my word for it. Instead, I want to show how we can test this with a lightweight test that will run almost as fast as a unit test.
 
@@ -205,7 +221,8 @@ Testing aspects involves starting up a Spring context, as well as the aspect-rel
 
 There's a few ways of testing aspects, but one way I like is to define a new test bean that will be advised. That way, we can more flexibly test the aspect, since it's easy to define more methods and test arbitrary expressions if the annotated class belongs to the test. Here is a minimal setup for such a test:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@ExtendWith(SpringExtension.class) // boot a very minimal Spring context
+```java
+@ExtendWith(SpringExtension.class) // boot a very minimal Spring context
 @Import({
   AuditAspect.class, // make our aspect a bean
   AuditConfig.class, // we check that our config class 
@@ -238,7 +255,8 @@ class AuditAspectTest implements WithAssertions {
     }
   }
 }
-</pre>
+```
+
 
 I'm not showing the full thing here, but such a test should verify that:
 

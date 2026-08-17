@@ -31,12 +31,16 @@ Here we present a hybrid approach by taking the strengths of vector databases an
 
 ### Step 1: run Hazelcast and install the client {#h3-0-step-1-run-hazelcast-and-install-the-client}
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">!docker run -p 5701:5701 hazelcast/hazelcast:5.2
-!pip install hazelcast-python-client</pre>
+```
+!docker run -p 5701:5701 hazelcast/hazelcast:5.2
+!pip install hazelcast-python-client
+```
+
 
 ### Step 2: run Qdrant and install the client {#h3-1-step-2-run-qdrant-and-install-the-client}
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">!docker run -p 6333:6333 -v $(pwd)/qdrant_storage:/qdrant/storage qdrant/qdrant
+```
+!docker run -p 6333:6333 -v $(pwd)/qdrant_storage:/qdrant/storage qdrant/qdrant
 !pip install qdrant-client
 # Install SentenceTransformers for embeddings
 !pip install -U sentence-transformers
@@ -46,11 +50,13 @@ from sentence_transformers import SentenceTransformer
 encoder = SentenceTransformer('all-MiniLM-L6-v2') 
 # Let's make a semantic search for some movies
 movies = [{"id":"1","title":"Zack Snyder''s Justice League","description":"Determined to ensure Superman''s ultimate sacrifice was not in vain, Bruce Wayne aligns forces with Diana Prince with plans to recruit a team of metahumans to protect the world from an approaching threat of catastrophic proportions.","vote_count":8805},{"id":"2","title":"Requiem for a Dream","description":"The hopes and dreams of four ambitious people are shattered when their drug addictions begin spiraling out of control. A look into addiction and how it overcomes the mind and body.","vote_count":8835},{"id":"3","title":"The Shawshank Redemption","description":"Framed in the 1940s for the double murder of his wife and her lover, upstanding banker Andy Dufresne begins a new life at the Shawshank prison, where he puts his accounting skills to work for an amoral warden. During his long stretch in prison, Dufresne comes to be admired by the other inmates -- including an older prisoner named Red -- for his integrity and unquenchable sense of hope.","vote_count":23695},{"id":"4","title":"Totò, Peppino e la... malafemmina","description":"Antonio, Peppino and Lucia are three brothers who live in the country near Naples. Lucia''s son, Gianni, goes to Naples to study medicine, but there he knows a ballet dancer. They fall in love and, when she goes to Milan, Gianni follows her. Informed of this and afraid that their nephew will stop studying, the three Caponi brothers leave for Milan to persuade Gianni to come back and continue studying and abandon the Malafemmina (bad girl).","vote_count":305},{"id":"5","title":"Modern Times","description":"The Tramp struggles to live in modern industrial society with the help of a young homeless woman.","vote_count":3260},{"id":"16","title":"The Mitchells vs. the Machines","description":"A quirky, dysfunctional family''s road trip is upended when they find themselves in the middle of the robot apocalypse and suddenly become humanity''s unlikeliest last hope.","vote_count":2379},{"id":"15","title":"Miraculous World : New York, les héros unis","description":"Teen Parisian superheroes Ladybug and Chat Noir visit New York on a field trip and discover that superheroes exist in the United States too.","vote_count":980},{"id":"17","title":"The Apartment","description":"Bud Baxter is a minor clerk in a huge New York insurance company, until he discovers a quick way to climb the corporate ladder. He lends out his apartment to the executives as a place to take their mistresses. Although he often has to deal with the aftermath of their visits, one night he''s left with a major problem to solve.","vote_count":1923},{"id":"18","title":"Estômago","description":"In a dog-eat-dog world, Raimundo Nonato has found an alternative way to move ahead: he cooks. No matter what social strata this deceptively innocent young man inhabits, he hones his skills and sharpens his knives—and then he falls in love. Jorge''s nimble comic fable provides a smartly constructed gastronomic allegory for ambition and survival.","vote_count":218},{"id":"14","title":"Per qualche dollaro in più","description":"Two bounty hunters are in pursuit of El Indio, one of the most wanted fugitives in the western territories, and his gang.","vote_count":3412},{"id":"19","title":"The Breadwinner","description":"A headstrong young girl in Afghanistan, ruled by the Taliban, disguises herself as a boy in order to provide for her family.","vote_count":714},{"id":"20","title":"タンポポ","description":"In this humorous paean to the joys of food, a pair of truck drivers happen onto a decrepit roadside shop selling ramen noodles. The widowed owner, Tampopo, begs them to help her turn her establishment into a paragon of the art of noodle-soup making. Interspersed are satirical vignettes about the importance of food to different aspects of human life.","vote_count":277},{"id":"12","title":"Life in a Year","description":"A 17 year old finds out that his girlfriend is dying, so he sets out to give her an entire life, in the last year she has left.","vote_count":1406},{"id":"13","title":"Tropa de Elite","description":"In 1997, before the visit of the pope to Rio de Janeiro, Captain Nascimento from BOPE (Special Police Operations Battalion) is assigned to eliminate the risks of the drug dealers in a dangerous slum nearby where the pope intends to be lodged.","vote_count":2032},{"id":"11","title":"Pulp Fiction","description":"A burger-loving hit man, his philosophical partner, a drug-addled gangster''s moll and a washed-up boxer converge in this sprawling, comedic crime caper. Their adventures unfurl in three stories that ingeniously trip back and forth in time.","vote_count":25086},{"id":"10","title":"L''Armée des ombres","description":"Betrayed by an informant, Philippe Gerbier finds himself trapped in a torturous Nazi prison camp. Though Gerbier escapes to rejoin the Resistance in occupied Marseilles, France, and exacts his revenge on the informant, he must continue a quiet, seemingly endless battle against the Nazis in an atmosphere of tension, paranoia and distrust.","vote_count":535},{"id":"9","title":"Scooby-Doo! and KISS: Rock and Roll Mystery","description":"Get ready to Rock! Scooby-Doo and the Mystery Inc. Gang team up with the one and only KISS in this all-new, out-of-this-world adventure! We join the Gang at KISS World – the all-things-KISS theme park, as they investigate a series of strange hauntings. With help from KISS, they discover that the Crimson Witch has returned to summon The Destroyer from the alternate dimension of Kissteria! The evil duos ghastly plan, to destroy the earth! Can the Gang''s cunning and KISS''s power of rock save the day?!","vote_count":267},{"id":"8","title":"John Wick: Chapter 4","description":"With the price on his head ever increasing, John Wick uncovers a path to defeating The High Table. But before he can earn his freedom, Wick must face off against a new enemy with powerful alliances across the globe and forces that turn old friends into foes.","vote_count":1300},{"id":"7","title":"Ace in the Hole","description":"An arrogant reporter exploits a story about a man trapped in a cave to revitalize his career.","vote_count":554},{"id":"6","title":"Bo Burnham: Inside","description":"Stuck in COVID-19 lockdown, US comedian and musician Bo Burnham attempts to stay sane and happy by writing, shooting and performing a one-man comedy special.","vote_count":351}]
-</pre>
+```
+
 
 ### Step 3: use Qdrant to store movies, vectorize descriptions, and do similarity search {#h3-2-step-3-use-qdrant-to-store-movies-vectorize-descriptions-and-do-similarity-search}
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">qdrant = QdrantClient(":memory:") 
+```
+qdrant = QdrantClient(":memory:") 
 
 qdrant.recreate_collection(
     collection_name="movies",
@@ -95,7 +101,9 @@ hits = qdrant.search(
     limit=10
 )
 for hit in hits:
-  print(hit.payload, "score:", hit.score)</pre>
+  print(hit.payload, "score:", hit.score)
+```
+
 
 ### Step 4: use Hazelcast to store casts and actors, perform SQL on movies, casts and actors {#h3-3-step-4-use-hazelcast-to-store-casts-and-actors-perform-sql-on-movies-casts-and-actors}
 
@@ -109,7 +117,8 @@ Movies are stored and searched using Qdrant Casts and actors are stored and sear
 
 Example: **Case 1:** Have you ever forgotten the name of a movie but vaguely remember the story ("ramen noodles")? In this case, we use Qdrant. **Case 2:** Have you ever forgotten the name of a movie but vaguely remember the story ("ramen noodles") but you remember an actor has an "an" in their names? In this case, we use Qdrant and Hazelcast.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">import hazelcast
+```
+import hazelcast
 from hazelcast.core import HazelcastJsonValue
 from hazelcast.predicate import and_, greater, sql, equal
 
@@ -171,7 +180,9 @@ for hit in hits:
         for actors_name in actors_names:
             print(actors_name.to_string())
 
-client.shutdown()</pre>
+client.shutdown()
+```
+
 
 Summary {#h2-4-summary}
 -----------------------

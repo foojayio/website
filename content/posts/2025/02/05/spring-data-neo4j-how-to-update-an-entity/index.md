@@ -36,7 +36,8 @@ Here is an example of what this looks like with a popular movie data set as the 
 
 Movie domain class:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">@Node
+```java
+@Node
 public class Movie {
     @Id
     private String movieId;
@@ -50,11 +51,14 @@ public class Movie {
 
     @Relationship(value = "ACTED_IN", direction = Relationship.Direction.INCOMING)
     private List actors;
-}</pre>
+}
+```
+
 
 Movie controller class:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">@RestController
+```java
+@RestController
 @RequestMapping("/movies")
 public class MovieController {
     //inject repository + constructor
@@ -63,7 +67,9 @@ public class MovieController {
     Movie save(@RequestBody Movie movie) {
         return movieRepo.save(movie);
     }
-}</pre>
+}
+```
+
 
 This works well to save a new movie, as you can provide a subset of properties or all properties, as long as the `id` is present, and anything you don't provide will be set to `null`. However, the issue arises when you need to update an existing entity because it means any attributes you do not provide will be *overwritten* to `null`.
 
@@ -71,14 +77,18 @@ To better understand how this works, let's see it in action by saving a movie, a
 
 Movie request object:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="json">{
+```json
+{
   "movieId": "9876",
   "title": "MyMovie"
-}</pre>
+}
+```
+
 
 Save Movie object:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="shell">% http ":8080/movies/save" @src/main/resources/movie.json
+```bash
+% http ":8080/movies/save" @src/main/resources/movie.json
 {
     "actors": null,
     "imdbId": null,
@@ -89,20 +99,26 @@ Save Movie object:
     "title": "MyMovie",
     "url": null,
     "year": null
-}</pre>
+}
+```
+
 
 Now let's use the same method to try to update the movie with a `year` property.
 
 MovieUpdated object:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="json">{
+```json
+{
   "movieId": "9876",
   "year": 2018
-}</pre>
+}
+```
+
 
 Save updated Movie object:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="shell">% http ":8080/movies/save" @src/main/resources/movieUpdated.json
+```bash
+% http ":8080/movies/save" @src/main/resources/movieUpdated.json
 {
     "actors": null,
     "imdbId": null,
@@ -113,7 +129,9 @@ Save updated Movie object:
     "title": null,
     "url": null,
     "year": 2018
-}</pre>
+}
+```
+
 
 In the output above, you can see that the `title` property is `null`, and the `year` property is populated. This is because the title is not specified in the updated JSON object, so it is overwritten to `null`.
 
@@ -128,7 +146,8 @@ The first option is that you don't have to set all properties if you use a PATCH
 
 Movie controller class:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">@RestController
+```java
+@RestController
 @RequestMapping("/movies")
 public class MovieController {
     //inject repository + constructor
@@ -140,18 +159,24 @@ public class MovieController {
 
         return movieRepository.save(existingMovie);
     }
-}</pre>
+}
+```
+
 
 PatchYear object:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="json">{
+```json
+{
   "movieId": "9876",
   "year": 2024
-}</pre>
+}
+```
+
 
 Patch movie year:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="shell">% http PATCH ":8080/movies/patchYear" @src/main/resources/moviePatch.json
+```bash
+% http PATCH ":8080/movies/patchYear" @src/main/resources/moviePatch.json
 
 {
     "budget": null,
@@ -170,7 +195,9 @@ Patch movie year:
     "tmdbId": null,
     "url": null,
     "year": 2024
-}</pre>
+}
+```
+
 
 This allows you to set specific values without overwriting other property values to `null`. You also don't need to set all the values in the movie object programmatically. If you modified the initial `save()` method to just include the `setYear()` line, it would still overwrite other values. This approach prevents that, although you still have to call `setProperty()` for each field you want to update.
 
@@ -187,16 +214,20 @@ The example below uses the same movie domain but adds a Cypher statement and met
 
 Repository interface:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">interface MovieRepository extends Neo4jRepository {
+```java
+interface MovieRepository extends Neo4jRepository {
     @Query("MATCH (m:Movie {movieId: $movieId}) " +
             "SET m.year = toInteger($year) " +
             "RETURN m;")
     Movie updateYear(String movieId, Long year);
-}</pre>
+}
+```
+
 
 Movie controller class:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">@RestController
+```java
+@RestController
 @RequestMapping("/movies")
 public class MovieController {
     //inject repository + constructor
@@ -205,13 +236,16 @@ public class MovieController {
     Movie patchYear(@RequestParam String movieId, @RequestParam Long year) {
         return movieRepository.updateYear(movieId, year);
     }
-}</pre>
+}
+```
+
 
 Then, the following request calls the method and updates the movie's year property.
 
 Update movie year:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="shell">% http PATCH ":8080/movies/updateYear?movieId=9876&amp;amp;year=2018"
+```bash
+% http PATCH ":8080/movies/updateYear?movieId=9876&amp;year=2018"
 
 {
     "actors": [],
@@ -223,7 +257,9 @@ Update movie year:
     "title": "MyMovie",
     "url": null,
     "year": 2018
-}</pre>
+}
+```
+
 
 It worked! The movie's title remained the same (not overwritten to `null`), and a value was saved for the `year` property.
 
@@ -248,7 +284,8 @@ The first example sends a projection object (subset of the full domain object's 
 
 MovieDTOProjection class:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public class MovieDTOProjection {
+```java
+public class MovieDTOProjection {
     private String movieId;
     private String plot;
 
@@ -261,11 +298,14 @@ MovieDTOProjection class:
     public void setPlot(String plot) {
         this.plot = plot;
     }
-}</pre>
+}
+```
+
 
 MovieController class method:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">@RestController
+```java
+@RestController
 @RequestMapping("/movies")
 public class MovieController {
     //inject repository + constructor
@@ -275,32 +315,43 @@ public class MovieController {
     MovieDTOProjection saveProjectionAsMovie(@RequestBody MovieDTOProjection movieDTO) {
         return neo4jTemplate.save(Movie.class).one(movieDTO);
     }
-}</pre>
+}
+```
+
 
 ProjectionAsMovie object (request object):
 
-<pre class="EnlighterJSRAW" data-enlighter-language="json">{
+```json
+{
   "movieId": "9876",
   "plot": "Here is the plot."
-}</pre>
+}
+```
+
 
 Update Movie with a projection object:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="shell">% http PATCH ":8080/movies/projectionAsMovie" @src/main/resources/projectionAsMovie.json
+```bash
+% http PATCH ":8080/movies/projectionAsMovie" @src/main/resources/projectionAsMovie.json
 
 {
     "movieId": "9876",
     "plot": "Here is the plot."
-}</pre>
+}
+```
+
 
 Full database entity:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="json">{
+```json
+{
     "plot": "Here is the plot.",
     "year": 2024,
     "movieId": "9876",
     "title": "MyMovie"
-}</pre>
+}
+```
+
 
 The request successfully updated the entity with the new plot value ("Here is the plot.") without overwriting the title or year properties on the existing entity! The method in the controller class takes the projection object input and saves it as a `Movie` class entity.
 
@@ -314,7 +365,8 @@ The example below uses the same [`MovieDTOProjection` class](https://github.com/
 
 MovieController class method:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">@RestController
+```java
+@RestController
 @RequestMapping("/movies")
 public class MovieController {
     //inject repository + constructor
@@ -324,34 +376,45 @@ public class MovieController {
     MovieDTOProjection saveMovieAsProjection(@RequestBody Movie movie) {
         return neo4jTemplate.saveAs(movie, MovieDTOProjection.class);
     }
-}</pre>
+}
+```
+
 
 MovieAsProjection object:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="json">{
+```json
+{
   "movieId": "9876",
   "title": "TestTitle",
   "plot": "Some plot cliche here.",
   "year": 2025
-}</pre>
+}
+```
+
 
 Send Movie object (only save projection values):
 
-<pre class="EnlighterJSRAW" data-enlighter-language="shell">% http PATCH ":8080/movies/movieAsProjection" @src/main/resources/movieAsProjection.json
+```bash
+% http PATCH ":8080/movies/movieAsProjection" @src/main/resources/movieAsProjection.json
 
 {
     "movieId": "9876",
     "plot": "Some plot cliche here."
-}</pre>
+}
+```
+
 
 Full database entity:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="json">{
+```json
+{
     "plot": "Some plot cliche here.",
     "year": 2024,
     "movieId": "9876",
     "title": "MyMovie"
-}</pre>
+}
+```
+
 
 This also worked! The controller method accepts a `Movie` request object as input and saves it as the projection entity, which only retains the subset of values defined in the projection and ignores the rest.
 

@@ -81,16 +81,20 @@ The full application can be found on GitHub
 
 From a Spring Boot application, add the following dependencies to your Maven or Gradle file:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">implementation("org.springframework.ai:spring-ai-transformers:1.0.0")
+```
+implementation("org.springframework.ai:spring-ai-transformers:1.0.0")
 implementation("org.springframework.ai:spring-ai-starter-vector-store-redis")
-implementation("org.springframework.ai:spring-ai-starter-model-openai")</pre>
+implementation("org.springframework.ai:spring-ai-starter-model-openai")
+```
+
 
 2. Configure the Semantic Cache Vector Store {#h2-2-2-configure-the-semantic-cache-vector-store}
 ------------------------------------------------------------------------------------------------
 
 We'll use Spring AI's `RedisVectorStore` to store and search vector embeddings of cached queries and responses:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">@Configuration
+```
+@Configuration
 class SemanticCacheConfig {
     @Bean
     fun semanticCachingVectorStore(
@@ -109,7 +113,9 @@ class SemanticCacheConfig {
             .vectorAlgorithm(RedisVectorStore.Algorithm.HSNW)
             .build()
     }
-}</pre>
+}
+```
+
 
 Let's break this down:
 
@@ -126,7 +132,8 @@ Let's break this down:
 
 The SemanticCachingService handles storing and retrieving cached responses from Redis:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">@Service
+```
+@Service
 class SemanticCachingService(
     private val semanticCachingVectorStore: RedisVectorStore
 ) {
@@ -153,7 +160,7 @@ class SemanticCachingService(
         // Check if we found a semantically similar query above threshold
         if (results?.isNotEmpty() == true) {
             val score = results[0].score ?: 0.0
-            if (similarityThreshold &lt; score) {
+            if (similarityThreshold < score) {
                 logger.info("Cache hit! Similarity score: $score")
                 return results[0].metadata["answer"] as String
             } else {
@@ -163,7 +170,9 @@ class SemanticCachingService(
         logger.info("No cached response found for prompt")
         return null
     }
-}</pre>
+}
+```
+
 
 Key features of the semantic caching service:
 
@@ -177,7 +186,8 @@ Key features of the semantic caching service:
 
 The RagService orchestrates the semantic caching with the standard RAG pipeline:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">@Service
+```
+@Service
 class RagService(
     private val chatModel: ChatModel,
     private val vectorStore: RedisVectorStore,
@@ -248,7 +258,9 @@ class RagService(
 
         return Prompt(listOf(systemMessage, userMessage))
     }
-}</pre>
+}
+```
+
 
 Key features of the integrated RAG service:
 
@@ -262,20 +274,29 @@ The easiest way to run the demo is with Docker Compose, which sets up all requir
 Step 1: Clone the repository {#h2-5-step-1-clone-the-repository}
 ----------------------------------------------------------------
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">git clone https://github.com/redis-developer/redis-springboot-resources.git
-cd redis-springboot-resources/artificial-intelligence/semantic-caching-with-spring-ai</pre>
+```
+git clone https://github.com/redis-developer/redis-springboot-resources.git
+cd redis-springboot-resources/artificial-intelligence/semantic-caching-with-spring-ai
+```
+
 
 Step 2: Configure your environment {#h2-6-step-2-configure-your-environment}
 ----------------------------------------------------------------------------
 
 Create a `.env` file with your OpenAI API key:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">OPENAI_API_KEY=sk-your-api-key</pre>
+```
+OPENAI_API_KEY=sk-your-api-key
+```
+
 
 Step 3: Start the services {#h2-7-step-3-start-the-services}
 ------------------------------------------------------------
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">docker compose up --build</pre>
+```
+docker compose up --build
+```
+
 
 This will start:
 

@@ -50,28 +50,32 @@ Exceptions {#h2-1-exceptions}
 
 I don't know which language first implemented exceptions, but I'm pretty sure Java was the one to popularize them. Exceptions solve a common problem: simple error checking code intertwines the nominal path and the error-handling path:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="c">int foo;
+```c
+int foo;
 int bar;
 int slice;
 foo = get_foo();
-if (foo &lt; 0)
+if (foo < 0)
     {
         return foo;
     }
 bar = slice_the_bar(foo);
-if (bar &lt; 0)
+if (bar < 0)
     {
         return bar;
     }
 slice = check_bar_slice(bar);
-if (slice &lt; 0)
+if (slice < 0)
     {
         return slice;
-    }</pre>
+    }
+```
+
 
 The benefit of exceptions is to separate them cleanly in different blocks to ease reading:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">try {
+```java
+try {
     int foo = getFoo();             // 1   // 4
     int bar = sliceTheBar(foo);     // 2   // 4
     checkBarSlice(bar);             // 3   // 4
@@ -83,7 +87,9 @@ The benefit of exceptions is to separate them cleanly in different blocks to eas
     // Do something with e          // 3
 } finally {
     // Will be executed in all cases
-}</pre>
+}
+```
+
 
 1. If the call throws a `FooException`, short-circuit and directly execute the relevant `catch` block
 2. Same for `BarException`
@@ -101,10 +107,12 @@ Java provides two types of exceptions: *checked* and *unchecked*. Checked except
 * Either to be handled locally, in a `try`/`catch` block as above
 * Or to be propagated "upwards", by defining the exception in the method signature, *e.g.* :
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">Foo getFoo() throws FooException {
+```java
+Foo getFoo() throws FooException {
     // return a Foo or throw a new FooException
 }
-</pre>
+```
+
 
 The compiler enforces this requirement. Unchecked exceptions don't need to follow this rule but can.
 
@@ -119,14 +127,17 @@ As recent years saw the rise of *Functional Programming* , developers provided l
 
 In Java, the [Vavr](https://docs.vavr.io/) library bridged the gap between exceptions and FP with the [Try](https://docs.vavr.io/#_try) type. We can rewrite the above snippet with Vavr as:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">Try.of(() -&gt; getFoo())                      // 1
-   .mapTry(foo -&gt; sliceTheBar(foo))         // 1
-   .andThenTry(bar -&gt; checkBarSlice(bar))   // 1
-   .recover(FooException.class, e -&gt; 1)     // 2
-   .recover(BarException.class, e -&gt; 2)     // 2
-   .recover(SliceException.class, e -&gt; 3)   // 2
-   .andFinally(() -&gt; {})                    // 3
-   .getOrElse(() -&gt; 5);                     // 4</pre>
+```java
+Try.of(() -> getFoo())                      // 1
+   .mapTry(foo -> sliceTheBar(foo))         // 1
+   .andThenTry(bar -> checkBarSlice(bar))   // 1
+   .recover(FooException.class, e -> 1)     // 2
+   .recover(BarException.class, e -> 2)     // 2
+   .recover(SliceException.class, e -> 3)   // 2
+   .andFinally(() -> {})                    // 3
+   .getOrElse(() -> 5);                     // 4
+```
+
 
 1. Nominal path
 2. Set the return value in case the relevant exception is thrown
@@ -146,11 +157,14 @@ It would be better to have a dedicated structure to store either the regular res
 
 By convention, the left side holds the failure, and the right the success. We can rewrite the above snippet as:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">Try.of(() -&gt; getFoo())
-   .mapTry(foo -&gt; sliceTheBar(foo))
-   .andThenTry(bar -&gt; checkBarSlice(bar))
-   .andFinally(() -&gt; {})
-   .toEither()                             // 1</pre>
+```java
+Try.of(() -> getFoo())
+   .mapTry(foo -> sliceTheBar(foo))
+   .andThenTry(bar -> checkBarSlice(bar))
+   .andFinally(() -> {})
+   .toEither()                             // 1
+```
+
 
 1. Hold either a `Throwable` *or* an `Integer`
 
@@ -164,9 +178,12 @@ As I mentioned above, `Try` is excellent to bridge from an exception-throwing de
 
 The user code is now much simpler:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">var result = getFoo()
-    .flatMap(foo -&gt; sliceTheBar(foo))
-    .flatMap(bar -&gt; checkBarSlice(bar));</pre>
+```
+var result = getFoo()
+    .flatMap(foo -> sliceTheBar(foo))
+    .flatMap(bar -> checkBarSlice(bar));
+```
+
 
 Note that the previous `andFinally()` block doesn't require special treatment.
 
@@ -182,18 +199,21 @@ In both cases, however, it's "just" a type. Rust brings `Either` to another leve
 
 Here's a sample function from the Rust Programming Language online book:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="rust">fn read_username_from_file() -&gt; Result&lt;String, io::Error&gt; {
+```rust
+fn read_username_from_file() -> Result<String, io::Error> {
     let f = File::open("hello.txt");                         // 1
     let mut f = match f {                                    // 2
-        Ok(file) =&gt; file,                                    // 3
-        Err(e) =&gt; return Err(e),                             // 4
+        Ok(file) => file,                                    // 3
+        Err(e) => return Err(e),                             // 4
     };
     let mut s = String::new();
-    match f.read_to_string(&amp;mut s) {                         // 2 // 5
-        Ok(_) =&gt; Ok(s),                                      // 3
-        Err(e) =&gt; Err(e),                                    // 4
+    match f.read_to_string(&mut s) {                         // 2 // 5
+        Ok(_) => Ok(s),                                      // 3
+        Err(e) => Err(e),                                    // 4
     }
-}</pre>
+}
+```
+
 
 1. Read a file. `File::open` returns a `Result`, as it can fail.
 2. Evaluate the `Result`
@@ -208,12 +228,15 @@ Rust introduces the `?` shortcut for propagating error. `?` means the following:
 
 With it, we can rewrite the above snippet as:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="rust">fn read_username_from_file() -&gt; Result&lt;String, io::Error&gt; {
+```rust
+fn read_username_from_file() -> Result<String, io::Error> {
     let mut s = String::new();
     File::open("hello.txt")?                                 // 1
-         .read_to_string(&amp;mut s)?;                           // 1
+         .read_to_string(&mut s)?;                           // 1
     Ok(s)                                                    // 2
-}</pre>
+}
+```
+
 
 1. If `Ok`, unwrap the value, else return the `Err`
 2. Return the `Result`
@@ -223,7 +246,8 @@ The curious case of Go {#h2-5-the-curious-case-of-go}
 
 Throughout history, programming languages have provided more and more powerful constructs to handle errors: from simple return values to `Either` via exceptions. It brings us to the Go programming language. Incepted relatively recently, it forces developers to handle errors via... multiple return values:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="golang">varFoo, err := GetFoo()                   // 1
+```go
+varFoo, err := GetFoo()                   // 1
 if err != nil {                           // 2
     return err
 }
@@ -234,7 +258,9 @@ if err != nil {                           // 2
 err := CheckBarSlice(sliceBar)            // 1
 if err != nil {                           // 2
     return err
-}</pre>
+}
+```
+
 
 1. Return the error reference
 2. Check whether the reference points to an error

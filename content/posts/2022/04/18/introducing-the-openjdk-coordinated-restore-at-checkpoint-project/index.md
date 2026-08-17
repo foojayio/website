@@ -105,23 +105,26 @@ This interface provides two methods, "beforeCheckpoint()" and "afterRestore()".
 
 To make it work, you also need to register your Resource to a global context by calling "Core.getGlobalContext().register()":
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public class Main implements Resource {
+```java
+public class Main implements Resource {
 
   public Main() {
     Core.getGlobalContext().register(Main.this);
   }
 
   @Override
-  public void beforeCheckpoint(Context&lt;? extends Resource&gt; context) throws Exception {
+  public void beforeCheckpoint(Context<? extends Resource> context) throws Exception {
     // Free your resources here
   }
 
   @Override
-  public void afterRestore(Context&lt;? extends Restore&gt; context) throws Exception {
+  public void afterRestore(Context<? extends Restore> context) throws Exception {
     // Load your resources here
   }
 
-}</pre>
+}
+```
+
 
 To be able to check whether everything works as expected, the current implementation will throw exceptions when you have open resources, such as open sockets.
 

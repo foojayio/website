@@ -21,7 +21,7 @@ frozen: false
 **\[About SKP's Core Java/Java EE Roots\]**  
 Series of Articles on Rooted Concepts in Core Java and J2EE. They Revolve Around Memory Architecture, Connection \& Memory Leaks, Core Java Syntax \& Semantics, Java Object Layout/Anatomy, Multi-Threading, Asynchronous Task Execution, Design Patterns, Java Agents, Class Loading, API Design, OOPs \& SOLID.  
 
-*** ** * ** ***
+
 
 **Java Memory Architecture (Pre Java 8.0)** {#h2-0-java-memory-architecture-pre-java-8-0}
 -----------------------------------------------------------------------------------------
@@ -72,9 +72,9 @@ The most impactful change to Java has been the movement from PermGen to MetaSpac
 
 ![Image title](https://4.bp.blogspot.com/-03r1GS2jWlk/WPzruNno57I/AAAAAAAANQU/EghKET29INkXMH3Nrd_zNlOsF93T5xmdACLcB/s640/permgen_to_metaspace.jpg)  
 
-*** ** * ** ***
+
 
 **\[Note\]**  
 Many authors have erroneously stated that PermGen is part of the Java Heap. You have to note this fact that PermGen was/is never a part of the Java Heap. It was only allocated as part of **Contiguous Memory as the Java Heap**. In the case of Metaspace, such a Contiguous Allocation does not exist, Metaspace lies in or is allocated in the native memory of the operating system.
 
-*** ** * ** ***
+

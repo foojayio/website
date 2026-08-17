@@ -73,23 +73,32 @@ Optimizer Hub runs on any x86 Kubernetes-compliant system, so AWS EKS is a perfe
 
 You can either use an existing Kubernetes cluster or create a new one with the AWS \`eksctl\` tool and the provided configuration files which are documented on [Cluster Provisioning on EKS](https://docs.azul.com/optimizer-hub/installation/aws-eks#custer-provisioning):
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">eksctl create cluster -f opthub_eks.yaml&nbsp;</pre>
+```
+eksctl create cluster -f opthub_eks.yaml
+```
+
 
 Azul provides a detailed step-by-step instruction to install all of the Optimizer Hub components on this EKS cluster in [Installing Optimizer Hub](https://docs.azul.com/optimizer-hub/installation/kubernetes#installing-optimizer-hub). Next to modifying some configuration files, only a few commands need to be executed:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">helm repo add opthub-helm https://azulsystems.github.io/opthub-helm-charts/&nbsp;&nbsp;
-helm repo update&nbsp;&nbsp;
-kubectl create namespace my-opthub&nbsp;&nbsp;
-helm install opthub opthub-helm/azul-opthub \&nbsp;&nbsp;
-&nbsp; -n my-opthub \&nbsp;&nbsp;
-&nbsp; -f values-override.yaml&nbsp;&nbsp;</pre>
+```
+helm repo add opthub-helm https://azulsystems.github.io/opthub-helm-charts/  
+helm repo update  
+kubectl create namespace my-opthub  
+helm install opthub opthub-helm/azul-opthub \  
+  -n my-opthub \  
+  -f values-override.yaml
+```
+
 
 Connecting your applications to Optimizer Hub {#h-connecting-your-applications-to-optimizer-hub-nbsp-nbsp}
 ----------------------------------------------------------------------------------------------------------
 
 Once an Optimizer Hub instance is available within your environment, you can instruct any Java application to connect to it to store or get ReadyNow profiles, and offload its compilations:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">java -XX:OptHubHost=&lt;host&gt;[:&lt;port&gt;] &lt;other-options&gt; -jar yourapp.jar&nbsp;&nbsp;</pre>
+```
+java -XX:OptHubHost=<host>[:<port>] <other-options> -jar yourapp.jar
+```
+
 
 Java warmup improvement results {#h-java-warmup-improvement-results}
 --------------------------------------------------------------------
@@ -190,6 +199,6 @@ Java applications running on AWS face a fundamental challenge: they perform at t
 
 Azul Optimizer Hub solves this challenge by separating the compilation from execution. Through ReadyNow Orchestrator's shared optimization profiles and Cloud Native Compiler's dedicated JIT farm, your Java applications can be "ready for production" from the moment they need to start serving traffic.
 
-*** ** * ** ***
+
 
 *[Originally published on the Azul Blog](https://www.azul.com/blog/make-java-fleets-warm-up-faster-on-aws/)*

@@ -28,11 +28,14 @@ What's in our First Milestone {#h2-1-what-s-in-our-first-milestone}
 
 The draft specification - [see here -](https://github.com/jakartaee/agentic-ai/releases/download/1.0.0-M1/jakarta-agentic-ai-1.0.0-M1.pdf) lays out the core programming model, and `jakarta.agentic-ai-api:1.0.0-M1` is now available on Maven Central so implementers and early adopters can start working against real interfaces:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="xml" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&lt;dependency&gt;
-    &lt;groupId&gt;jakarta.agentic-ai&lt;/groupId&gt;
-    &lt;artifactId&gt;jakarta.agentic-ai-api&lt;/artifactId&gt;
-    &lt;version&gt;1.0.0-M1&lt;/version&gt;
-&lt;/dependency&gt;</pre>
+```xml
+<dependency>
+    <groupId>jakarta.agentic-ai</groupId>
+    <artifactId>jakarta.agentic-ai-api</artifactId>
+    <version>1.0.0-M1</version>
+</dependency>
+```
+
 
 A few of the key ideas the spec defines:
 

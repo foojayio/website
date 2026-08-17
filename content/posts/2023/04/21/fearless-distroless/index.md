@@ -102,32 +102,50 @@ At the latest JavaLand conference, I attended a talk by my good friend [Matthias
 
 Let's see how it works by running a Distroless container:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash">kubectl run node --image=gcr.io/distroless/nodejs18-debian11:latest --command -- /nodejs/bin/node -e "while(true) { console.log('hello') }"</pre>
+```bash
+kubectl run node --image=gcr.io/distroless/nodejs18-debian11:latest --command -- /nodejs/bin/node -e "while(true) { console.log('hello') }"
+```
+
 
 The container starts an infinite NodeJS loop. We can check the logs with the expected results:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash">kubectl logs node</pre>
+```bash
+kubectl logs node
+```
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">hello
+
+```
 hello
 hello
-hello</pre>
+hello
+hello
+```
+
 
 Imagine that we need to check what is happening inside the container.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash">kubectl exec -it node -- sh</pre>
+```bash
+kubectl exec -it node -- sh
+```
+
 
 Because the container has no shell, the following error happens:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">OCI runtime exec failed: exec failed: unable to start container process: exec: "sh": executable file not found in $PATH: unknown
-command terminated with exit code 126</pre>
+```
+OCI runtime exec failed: exec failed: unable to start container process: exec: "sh": executable file not found in $PATH: unknown
+command terminated with exit code 126
+```
+
 
 We can use use `kubectl debug` magic to achieve it anyway:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash">kubectl debug -it \
+```bash
+kubectl debug -it \
               --image=bash \      #1
               --target=node \     #2
-              node                #3</pre>
+              node                #3
+```
+
 
 1. Image to attach. As we want a shell, we are using `bash`
 2. Name of the container to attach to
@@ -135,25 +153,37 @@ We can use use `kubectl debug` magic to achieve it anyway:
 
 The result is precisely what we expect:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">Targeting container "node". If you don't see processes from this container it may be because the container runtime doesn't support this feature.
+```
+Targeting container "node". If you don't see processes from this container it may be because the container runtime doesn't support this feature.
 Defaulting debug container name to debugger-tkkdf.
 If you don't see a command prompt, try pressing enter.
-bash-5.2#</pre>
+bash-5.2#
+```
+
 
 We can now use the shell to type whatever command we want:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash">ps</pre>
+```bash
+ps
+```
+
 
 The result confirms that we "share" the same container:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">PID   USER     TIME  COMMAND
+```
+PID   USER     TIME  COMMAND
     1 root     12:18 /nodejs/bin/node -e while(true) { console.log('hello') }
    27 root      0:00 bash
-   33 root      0:00 ps</pre>
+   33 root      0:00 ps
+```
+
 
 After we finish the session, we can reattach it to the container by following the instructions:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">bash-5.2# Session ended, the ephemeral container will not be restarted but may be reattached using 'kubectl attach node -c debugger-tkkdf -i -t' if it is still running</pre>
+```
+bash-5.2# Session ended, the ephemeral container will not be restarted but may be reattached using 'kubectl attach node -c debugger-tkkdf -i -t' if it is still running
+```
+
 
 Conclusion {#h2-4-conclusion}
 -----------------------------

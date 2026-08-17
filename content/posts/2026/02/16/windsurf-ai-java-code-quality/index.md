@@ -25,7 +25,7 @@ Hola! 👋 As a Java developer, you probably spend a good chunk of your day maki
 
 It is an agentic IDE that understands what you are trying to do across your whole project. Let's see why this is a game-changer for our Java workflows. 🚀
 
-*** ** * ** ***
+
 
 **What is Windsurf AI?** {#h2-0-what-is-windsurf-ai}
 ----------------------------------------------------
@@ -34,7 +34,7 @@ It is an agentic IDE that understands what you are trying to do across your whol
 
 Unlike tools that just sit in a side panel, Windsurf is deeply integrated into the editor. Its core engine, called **Cascade**, has a deep understanding of your entire codebase. It doesn't just look at the file you are typing in; it understands the relationships between your Spring services, your DTOs, and your repository interfaces.
 
-*** ** * ** ***
+
 
 **Main characteristics that make Windsurf different** {#h2-1-main-characteristics-that-make-windsurf-different}
 ---------------------------------------------------------------------------------------------------------------
@@ -50,7 +50,7 @@ What makes this IDE stand out from other tools is how it handles "Flows":
 * **Named Checkpoints \& Reverts**: Create named snapshots of your project state and easily revert Cascade's changes to any previous step.
 * **Built-in Planning Agent** : A specialized planning agent continuously refines long-term plans while your selected model handles short-term actions.
 
-*** ** * ** ***
+
 
 **The Usual Flow and the "Verification" Problem** {#h2-2-the-usual-flow-and-the-verification-problem}
 -----------------------------------------------------------------------------------------------------
@@ -59,7 +59,7 @@ In a typical flow, you ask the agent: *"Create a REST controller for managing Bo
 
 Usually, you would have to manually run a scan, wait for the results, and then tell the agent: *"Hey, SonarQube says this method has a cognitive complexity issue, fix it."* This back-and-forth is slow and breaks your "flow state". This is exactly the problem **Agent Skills** aim to solve.
 
-*** ** * ** ***
+
 
 **What are Agent Skills?** {#h2-3-what-are-agent-skills}
 --------------------------------------------------------
@@ -72,7 +72,8 @@ You can create a skill that tells the agent how to run a local script to verify 
 
 **The Skill definition (** **SKILL.md** **):**
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group=""># sonar-verify-snippet
+```bash
+# sonar-verify-snippet
 
 Description: Use this skill to verify the quality of a Java code snippet.
 
@@ -82,12 +83,14 @@ Instructions:
 
 3. Read the output from the command line.
 
-4. If errors are reported, refactor the code and repeat until it passes.</pre>
+4. If errors are reported, refactor the code and repeat until it passes.
+```
+
 
 **How skills look like in Windsurf:**
 ![](Screenshot-2026-02-16-at-08.52.23.png)
 
-*** ** * ** ***
+
 
 **The Problem: Local Skills vs. The Cloud ☁️** {#h2-5-the-problem-local-skills-vs-the-cloud}
 --------------------------------------------------------------------------------------------
@@ -96,7 +99,7 @@ Skills are powerful, but they have a "spatial" limitation: they need to be store
 
 If you work across different machines or teams, managing these local files becomes a headache. Also, if the logic to connect to **SonarQube** is complex, you don't want a massive script sitting in every project folder. This is where we need something that can run anywhere---even remotely---without leaving a local trace. Enter **MCP servers**.
 
-*** ** * ** ***
+
 
 **What is MCP technology?** {#h2-6-what-is-mcp-technology}
 ----------------------------------------------------------
@@ -136,7 +139,7 @@ The SonarQube MCP server provides **25 distinct tools** for agent interaction at
 | show_rule                       | Allows the agent to query the SonarQube rule set to get all details for a given rule. | *Example:* The agent verifying full details on a given rule (e.g., maximum line length) and its properties.    |
 | change_sonar_issue_status       | Enables the agent to mark an issue as "False Positive" or "Accept" via the API.       | *Example:* The agent marking a known issue as "Accepted Debt" after discussion with the developer.             |
 
-*** ** * ** ***
+
 
 **How to install the SonarQube MCP server in Windsurf** {#h2-9-how-to-install-the-sonarqube-mcp-server-in-windsurf}
 -------------------------------------------------------------------------------------------------------------------
@@ -159,7 +162,7 @@ To bring **Code Quality** checks into Windsurf via MCP, you can use Docker:
 Or even easier, using the free extension [SonarQube for IDE](https://docs.sonarsource.com/sonarqube-for-intellij/), that you can install in major IDEs like VSCode or IntelliJ, you will have live analysis results on your IDE, plus a very convenient way to install SonarQube MCP server or even Windsurf Hooks to guarantee that all responses from the Agent go through a SonarQube analysis.
 ![](Screenshot-2026-02-16-at-08.54.42.png) ![](Screenshot-2026-02-16-at-09.05.28.png)
 
-*** ** * ** ***
+
 
 **Example: Analyzing a snippet with** **analyze_code_snippet** **tool** {#h2-10-example-analyzing-a-snippet-with-analyze-code-snippet-tool}
 -------------------------------------------------------------------------------------------------------------------------------------------
@@ -173,7 +176,8 @@ Once the SonarQube MCP server is active, Windsurf has a new "tool" called analyz
 2. The server checks the code and returns the issues (e.g., "Use a logger instead of System.out").
 3. Cascade will potentially fix the code in your editor automatically.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">// Before:
+```java
+// Before:
 public void logInfo(String msg) {
     System.out.println("LOG: " + msg); // Issue!
 }
@@ -182,9 +186,10 @@ public void logInfo(String msg) {
 public void logInfo(String msg) {
     logger.info("LOG: {}", msg); // Better!
 }
-</pre>
+```
 
-*** ** * ** ***
+
+
 
 **Conclusion: Agentic Superpowers 🦸‍♂️** {#h2-11-conclusion-agentic-superpowers}
 ---------------------------------------------------------------------------------

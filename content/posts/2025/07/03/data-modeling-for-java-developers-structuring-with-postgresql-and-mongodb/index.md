@@ -69,7 +69,8 @@ Now, let us try to understand how these entities will be represented using the J
 
 Let's first understand the Author representing the Author entity:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@Entity
+```
+@Entity
 public class Author {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -80,14 +81,15 @@ public class Author {
     private String nationality;
 
     @ManyToMany(mappedBy = "authors", cascade = CascadeType.ALL)
-    private Set&lt;Book&gt; books;
+    private Set<Book> books;
 }
+```
 
-</pre>
 
 Similarly, the Books entity would be represented as:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@Entity
+```
+@Entity
 public class Book {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -104,14 +106,15 @@ public class Book {
         joinColumns = @JoinColumn(name = "bookID"),
         inverseJoinColumns = @JoinColumn(name = "authorID")
     )
-    private Set&lt;Author&gt; authors;
+    private Set<Author> authors;
 
     @OneToMany(mappedBy = "book", cascade = CascadeType.ALL)
-    private Set&lt;IssueDetails&gt; issueDetails;
+    private Set<IssueDetails> issueDetails;
 
     //Getters and Setters
 }
-</pre>
+```
+
 
 Now, the Author_books table has been created using the join methods and hence, we do not need to define a separate entity class.  
 
@@ -119,7 +122,8 @@ The relationship between the entities has been established using the relationshi
 
 Similarly, to represent the one-to-many relationship between Books and the Issue Details using the @OneToMany annotation, we can write the entity class as:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@Entity
+```
+@Entity
 public class IssueDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -136,8 +140,8 @@ public class IssueDetails {
 
     // Getters and Setters
 }
+```
 
-</pre>
 
 The relationships implemented in the above code snippet could be very simple. If you are wondering how, the answer to this is in the next section where we will understand how simple it can be to use MongoDB as the database.
 
@@ -152,21 +156,24 @@ It is also important to note that if authors and books are frequently queried to
 
 Depending on the modelling technique chosen, the documents inside in the collection would change. For example:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">{
+```
+{
   _id: ObjectId("60d5ec9f4b1a8e2a1c8f7a1"), 
   name: "J.K. Rowling",
-  email: "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="a4cecfd6cbd3c8cdcac3e4c1dcc5c9d4c8c18ac7cbc9">[email&nbsp;protected]</a>",
+  email: "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="a4cecfd6cbd3c8cdcac3e4c1dcc5c9d4c8c18ac7cbc9">[email protected]</a>",
   nationality: "British",
   books: [
     ObjectId("60d5ec9f4b1a8e2a1c8f7a2"), 
     ObjectId("60d5ec9f4b1a8e2a1c8f7a3")
   ]
 }
-</pre>
+```
+
 
 The book collection would look like the below:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">{
+```
+{
   _id: ObjectId("60d5ec9f4b1a8e2a1c8f7a2"), 
   title: "Harry Potter and the Sorcerer's Stone",
   isbn: "9780590353427",
@@ -184,27 +191,31 @@ The book collection would look like the below:
     }
   ]
 }
-</pre>
+```
+
 
 As you can see from the above example, the document model of MongoDB is similar to the POJOs representation in Java. Therefore, the representation of the model class becomes simpler with Java.
 
 For example, the author class in Java would be written as:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@Document(collection = "authors")
+```
+@Document(collection = "authors")
 public class Author {
     @Id
     private ObjectId id;
     private String name;
     private String email;
     private String nationality;
-    private List&lt;Book&gt; bookIds; 
+    private List<Book> bookIds; 
     //Getters and Setters
 }
-</pre>
+```
+
 
 The book class can be written as:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@Document(collection = "books")
+```
+@Document(collection = "books")
 public class Book {
     @Id
     private ObjectId id;
@@ -212,10 +223,11 @@ public class Book {
     private String isbn;
     private String genre;
     private int publishedYear;
-    private List&lt;Author&gt; authorIds;
+    private List<Author> authorIds;
     //  Getters and Setters
 }
-</pre>
+```
+
 
 From the above code snippet, you can see cleaner and less complex code without any complicated annotations to represent the relationships.
 
@@ -239,29 +251,35 @@ When you migrate the data from Postgres to MongoDB, the process involves more th
 
 In a relational database like Postgres, data is often normalised across multiple tables---in our case, between Authors, Books, and Issue Details. In MongoDB, we need to combine the related data into embedded documents. For example, instead of storing authors and books in separate tables, you can embed author information directly within a book document.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@Document(collection = "books")
+```
+@Document(collection = "books")
 public class Book {
     private String title;
-    private List&lt;Author&gt; authors; // Embedded authors
-    private List&lt;IssueDetails&gt; issues; // Embedded issues
+    private List<Author> authors; // Embedded authors
+    private List<IssueDetails> issues; // Embedded issues
 }
-</pre>
+```
+
 
 ### Replacing joins with aggregations {#h3-10-replacing-joins-with-aggregations}
 
 Postgres makes use of joins to retrieve the related data. On the other hand, MongoDB relies mostly on writing aggregation pipelines to retrieve the related information. For example, a Postgres query might be:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">SELECT books.title, authors.name 
+```
+SELECT books.title, authors.name 
 FROM books 
 JOIN author_books ON books.book_id = author_books.book_id 
 JOIN authors ON author_books.author_id = authors.author_id;
-</pre>
+```
+
 
 This could simply be done using the Java code using the aggregation as:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">Document lookupStage = new Document("$lookup", new Document("from", "authors") .append("localField", "authors") .append("foreignField", "_id") .append("as", "authorDetails") ); 
-AggregateIterable&lt;Document&gt; result = booksCollection.aggregate(Arrays.asList(lookupStage)); 
-</pre>
+```
+Document lookupStage = new Document("$lookup", new Document("from", "authors") .append("localField", "authors") .append("foreignField", "_id") .append("as", "authorDetails") ); 
+AggregateIterable<Document> result = booksCollection.aggregate(Arrays.asList(lookupStage));
+```
+
 
 Conclusion {#h2-11-conclusion}
 ------------------------------

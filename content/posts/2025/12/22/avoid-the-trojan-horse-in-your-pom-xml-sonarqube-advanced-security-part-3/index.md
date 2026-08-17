@@ -35,7 +35,7 @@ Remember **Log4j** ? You didn't write that bug, but *you* had to fix it on a Sat
 
 This is **Part 3** . Today, we look at [**SonarQube Advanced Security**](https://docs.sonarsource.com/sonarqube-cloud/advanced-security) and how to stop the "Trojan Horses" in your dependencies.
 
-*** ** * ** ***
+
 
 **Problem #1: "I didn't write this bug, why is it my problem?"** {#h2-0-problem-1-i-didn-t-write-this-bug-why-is-it-my-problem}
 -------------------------------------------------------------------------------------------------------------------------------
@@ -54,7 +54,7 @@ If you are using version 2.4.0 of a library, and version 2.4.1 fixes a critical 
 
 ![](Screenshot-2025-12-22-at-11.07.33-1024x300.png)
 
-*** ** * ** ***
+
 
 **Problem #2: "The Dependency Hell" (Transitive Dependencies) 🔥** {#h2-1-problem-2-the-dependency-hell-transitive-dependencies}
 --------------------------------------------------------------------------------------------------------------------------------
@@ -67,20 +67,23 @@ This is the classic Java nightmare. You import **Library A** , which imports **L
 
 You never invited **Library C**, but it's living in your house. If you run mvn dependency:tree, you might see a horror story like this:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">[INFO] --- maven-dependency-plugin:3.3.0:tree (default-cli) @ my-payment-app ---
+```
+[INFO] --- maven-dependency-plugin:3.3.0:tree (default-cli) @ my-payment-app ---
 
 [INFO] com.company:my-payment-app:jar:1.0.0
 
 [INFO] +- com.thirdparty:legacy-reporting-tool:jar:4.2.0:compile
 
-[INFO] |&nbsp; \- com.legacy:xml-exporter:jar:1.5.0:compile
+[INFO] |  \- com.legacy:xml-exporter:jar:1.5.0:compile
 
-[INFO] | &nbsp; &nbsp; \- org.apache.logging.log4j:log4j-core:jar:2.14.1:compile&nbsp; &lt;-- 🚨 VULNERABLE!</pre>
+[INFO] |     \- org.apache.logging.log4j:log4j-core:jar:2.14.1:compile  <-- 🚨 VULNERABLE!
+```
+
 
 SonarQube Advanced Security visualizes this chain instantly. It shows you exactly *how* the vulnerability got in, so you know you need to upgrade legacy-reporting-tool to fix the root cause.
 ![](Screenshot-2025-12-22-at-11.07.42-1024x423.png)
 
-*** ** * ** ***
+
 
 **Problem #3: "Wait, I can't use this library? It's open source!" ⚖️** {#h2-2-problem-3-wait-i-can-t-use-this-library-it-s-open-source}
 ---------------------------------------------------------------------------------------------------------------------------------------
@@ -99,7 +102,7 @@ SonarQube Advanced Security scans your dependencies and allows you to define lic
 It saves you from a massive lawsuit (or a complete rewrite) later.
 ![](Screenshot-2025-12-22-at-11.07.52-1024x403.png)
 
-*** ** * ** ***
+
 
 **Problem #4: "The Sneaky Attack" (Advanced SAST \& Taint Analysis) 🕵️‍♂️** {#h2-3-problem-4-the-sneaky-attack-advanced-sast-taint-analysis}
 ---------------------------------------------------------------------------------------------------------------------------------------------
@@ -116,17 +119,18 @@ First, what is **Taint Analysis**? Imagine "User Input" is a bucket of red paint
 
 Java
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">// --- YOUR CODE (The Source) ---
+```java
+// --- YOUR CODE (The Source) ---
 
 @GetMapping("/cleanup")
 
 public void cleanTempFiles(@RequestParam("file") String fileName) {
 
-&nbsp;&nbsp;&nbsp;&nbsp;// 1. You receive "Red Paint" (Tainted Input)
+    // 1. You receive "Red Paint" (Tainted Input)
 
-&nbsp;&nbsp;&nbsp;&nbsp;// 2. You pass it to a library. You think: "It's just a utility."
+    // 2. You pass it to a library. You think: "It's just a utility."
 
-&nbsp;&nbsp;&nbsp;&nbsp;FileUtils.deleteSystemFile(fileName);&nbsp;
+    FileUtils.deleteSystemFile(fileName); 
 
 }
 
@@ -136,22 +140,24 @@ public void cleanTempFiles(@RequestParam("file") String fileName) {
 
 public class FileUtils {
 
-&nbsp;&nbsp;&nbsp;&nbsp;public static void deleteSystemFile(String path) {
+    public static void deleteSystemFile(String path) {
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// 3. The library takes your input and executes a command
+        // 3. The library takes your input and executes a command
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// VULNERABILITY: If I send "; rm -rf /", this executes it.
+        // VULNERABILITY: If I send "; rm -rf /", this executes it.
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Runtime.getRuntime().exec("rm -f " + path); // &lt;--- Taint reaches here! 🔴
+        Runtime.getRuntime().exec("rm -f " + path); // <--- Taint reaches here! 🔴
 
-&nbsp;&nbsp;&nbsp;&nbsp;}
+    }
 
-}</pre>
+}
+```
+
 
 Standard tools ignore this because they don't look *inside* the library's logic. SonarQube flags this immediately as **Command Injection**.
 ![](Screenshot-2025-12-22-at-11.08.08-1024x843.png)
 
-*** ** * ** ***
+
 
 **Problem #5: "The Government is knocking at the door (SBOMs \& Regulations)" 📜** {#h2-4-problem-5-the-government-is-knocking-at-the-door-sboms-regulations}
 -------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -164,95 +170,98 @@ They require software vendors to provide transparency. They want an **SBOM (Soft
 
 You don't want to write this list by hand in Excel. SonarQube creates this for you automatically during the build analysis. It generates a standard **CycloneDX** report (JSON or XML) that lists every single component in your application.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="json" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">{
+```json
+{
 
-&nbsp;&nbsp;"bomFormat" : "CycloneDX",
+  "bomFormat" : "CycloneDX",
 
-&nbsp;&nbsp;"specVersion" : "1.6",
+  "specVersion" : "1.6",
 
-&nbsp;&nbsp;"version" : 1,
+  "version" : 1,
 
-&nbsp;&nbsp;"metadata" : {
+  "metadata" : {
 
-&nbsp;&nbsp;&nbsp;&nbsp;"timestamp" : "2025-12-12T10:50:06Z",
+    "timestamp" : "2025-12-12T10:50:06Z",
 
-&nbsp;&nbsp;&nbsp;&nbsp;"component" : {
+    "component" : {
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"type" : "application",
+      "type" : "application",
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"bom-ref" : "security",
+      "bom-ref" : "security",
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"name" : "security",
+      "name" : "security",
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"version" : "main"
+      "version" : "main"
 
-&nbsp;&nbsp;&nbsp;&nbsp;},
+    },
 
-&nbsp;&nbsp;&nbsp;&nbsp;"supplier" : {
+    "supplier" : {
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"name" : "SonarSource SA",
+      "name" : "SonarSource SA",
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"url" : [ "https://sonarsource.com" ]
+      "url" : [ "https://sonarsource.com" ]
 
-&nbsp;&nbsp;&nbsp;&nbsp;}
+    }
 
-&nbsp;&nbsp;},
+  },
 
-&nbsp;&nbsp;"components" : [ {
+  "components" : [ {
 
-&nbsp;&nbsp;&nbsp;&nbsp;"type" : "library",
+    "type" : "library",
 
-&nbsp;&nbsp;&nbsp;&nbsp;"bom-ref" : "pkg:maven/com.fasterxml.jackson.core/<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="315b50525a425e5f1c505f5f5e455045585e5f4271031f081f0001">[email&nbsp;protected]</a>",
+    "bom-ref" : "pkg:maven/com.fasterxml.jackson.core/<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="315b50525a425e5f1c505f5f5e455045585e5f4271031f081f0001">[email protected]</a>",
 
-&nbsp;&nbsp;&nbsp;&nbsp;"supplier" : {
+    "supplier" : {
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"url" : [ "https://repo1.maven.org/maven2/com/fasterxml/jackson/core/jackson-annotations/2.9.10/jackson-annotations-2.9.10.jar" ]
+      "url" : [ "https://repo1.maven.org/maven2/com/fasterxml/jackson/core/jackson-annotations/2.9.10/jackson-annotations-2.9.10.jar" ]
 
-&nbsp;&nbsp;&nbsp;&nbsp;},
+    },
 
-&nbsp;&nbsp;&nbsp;&nbsp;"name" : "com.fasterxml.jackson.core:jackson-annotations",
+    "name" : "com.fasterxml.jackson.core:jackson-annotations",
 
-&nbsp;&nbsp;&nbsp;&nbsp;"version" : "2.9.10",
+    "version" : "2.9.10",
 
-&nbsp;&nbsp;&nbsp;&nbsp;"scope" : "required",
+    "scope" : "required",
 
-&nbsp;&nbsp;&nbsp;&nbsp;"licenses" : [ {
+    "licenses" : [ {
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"expression" : "Apache-2.0"
+      "expression" : "Apache-2.0"
 
-&nbsp;&nbsp;&nbsp;&nbsp;} ],
+    } ],
 
-&nbsp;&nbsp;&nbsp;&nbsp;"purl" : "pkg:maven/com.fasterxml.jackson.core/<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="2842494b435b474605494646475c495c4147465b681a0611061918">[email&nbsp;protected]</a>"
+    "purl" : "pkg:maven/com.fasterxml.jackson.core/<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="2842494b435b474605494646475c495c4147465b681a0611061918">[email protected]</a>"
 
-&nbsp;&nbsp;}, {
+  }, {
 
-&nbsp;&nbsp;&nbsp;&nbsp;"type" : "library",
+    "type" : "library",
 
-&nbsp;&nbsp;&nbsp;&nbsp;"bom-ref" : "pkg:maven/com.fasterxml.jackson.core/<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="2c464d4f475f4342014f435e496c1e0215021d1c">[email&nbsp;protected]</a>",
+    "bom-ref" : "pkg:maven/com.fasterxml.jackson.core/<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="2c464d4f475f4342014f435e496c1e0215021d1c">[email protected]</a>",
 
-&nbsp;&nbsp;&nbsp;&nbsp;"supplier" : {
+    "supplier" : {
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"url" : [ "https://repo1.maven.org/maven2/com/fasterxml/jackson/core/jackson-core/2.9.10/jackson-core-2.9.10.jar" ]
+      "url" : [ "https://repo1.maven.org/maven2/com/fasterxml/jackson/core/jackson-core/2.9.10/jackson-core-2.9.10.jar" ]
 
-&nbsp;&nbsp;&nbsp;&nbsp;},
+    },
 
-&nbsp;&nbsp;&nbsp;&nbsp;"name" : "com.fasterxml.jackson.core:jackson-core",
+    "name" : "com.fasterxml.jackson.core:jackson-core",
 
-&nbsp;&nbsp;&nbsp;&nbsp;"version" : "2.9.10",
+    "version" : "2.9.10",
 
-&nbsp;&nbsp;&nbsp;&nbsp;"scope" : "required",
+    "scope" : "required",
 
-&nbsp;&nbsp;&nbsp;&nbsp;"licenses" : [ {
+    "licenses" : [ {
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"expression" : "Apache-2.0"
+      "expression" : "Apache-2.0"
 
-&nbsp;&nbsp;&nbsp;&nbsp;} ],
+    } ],
 
-&nbsp;&nbsp;&nbsp;&nbsp;"purl" : "pkg:maven/com.fasterxml.jackson.core/<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="1d777c7e766e7273307e726f785d2f3324332c2d">[email&nbsp;protected]</a>"
+    "purl" : "pkg:maven/com.fasterxml.jackson.core/<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="1d777c7e766e7273307e726f785d2f3324332c2d">[email protected]</a>"
 
-&nbsp;&nbsp;}
+  }
 
-....</pre>
+....
+```
+
 
 You just click "Download," hand it to the auditor (or the automated compliance system), and go back to coding.
 
@@ -260,7 +269,7 @@ You just click "Download," hand it to the auditor (or the automated compliance s
  <img loading="lazy" decoding="async" width="710" height="590" src="Screenshot-2025-12-22-at-11.08.19.png" alt="" class="wp-image-122122" style="width:426px;height:auto">
 </figure>
 
-*** ** * ** ***
+
 
 **🎯 Summary** {#h2-5-summary}
 ------------------------------

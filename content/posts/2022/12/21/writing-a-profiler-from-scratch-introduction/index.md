@@ -50,20 +50,23 @@ The API was introduced in November 2002 for Sun Studio. However, Sun removed it 
 
 The AsyncGetCallTrace API is defined in the [forte.cpp](https://github.com/openjdk/jdk/blob/master/src/hotspot/share/prims/forte.cpp) file:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="cpp" data-enlighter-theme="dracula" data-enlighter-highlight="" data-enlighter-linenumbers="false" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">typedef struct {
-  jint lineno;         // BCI in the source file, or &lt; 0 for native methods
+```cpp
+typedef struct {
+  jint lineno;         // BCI in the source file, or < 0 for native methods
   jmethodID method_id; // method executed in this frame
 } ASGCT_CallFrame;
 
 typedef struct {
   JNIEnv *env_id;   // Env where trace was recorded
-  jint num_frames;  // number of frames in this trace, &lt; 0 gives us an error code
+  jint num_frames;  // number of frames in this trace, < 0 gives us an error code
   ASGCT_CallFrame *frames; // recorded frames 
 } ASGCT_CallTrace; 
 
 void AsyncGetCallTrace(ASGCT_CallTrace *trace, // pre-allocated trace to fill
                        jint depth,             // max number of frames to walk
-                       void* ucontext);        // signal context</pre>
+                       void* ucontext);        // signal context
+```
+
 
 One typically uses this API by pinging a thread using a signal, stopping the thread, and invoking the signal handler, which in turn calls AsyncGetCallTrace with the execution context of the stopped thread (the `ucontext`) so that AsyncGetCallTrace can walk the thread, skipping all C/C++ frames on the stack and only storing the native (from `native` methods) and Java frames in the `frames` array.
 
@@ -75,11 +78,12 @@ Be aware that we cannot allocate any memory outside the stack in a signal handle
 
 As an example of calling AsyncGetCallTrace, consider profiling the following Java code:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="dracula" data-enlighter-highlight="" data-enlighter-linenumbers="false" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public class BasicSample {
+```java
+public class BasicSample {
 
     public void waitForever() throws InterruptedException {
         System.out.print("Waiting forever...");
-        for (int i = 0; i &lt; 100; i++) {
+        for (int i = 0; i < 100; i++) {
             Thread.sleep(10);
             System.out.print(".");
         }
@@ -89,7 +93,9 @@ As an example of calling AsyncGetCallTrace, consider profiling the following Jav
     public static void main(String[] args) throws InterruptedException {
         new BasicSample().waitForever();
     }
-}</pre>
+}
+```
+
 
 During profiling, we call AsyncGetCallTrace often, but let's visualize a trace when the JVM runs one of the `println` lines.
 [![](asgct-1024x576.png)](https://github.com/parttimenerd/asgct2-demo) AsyncGetCallTrace on a small example, using [the demo code for JEP 435](https://github.com/parttimenerd/asgct2-demo)
@@ -98,8 +104,9 @@ During profiling, we call AsyncGetCallTrace often, but let's visualize a trace w
 
 The signal handler in our small example is the following:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="cpp" data-enlighter-theme="dracula" data-enlighter-highlight="" data-enlighter-linenumbers="true" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">std::atomic&lt;size_t&gt; failedTraces = 0;
-std::atomic&lt;size_t&gt; totalTraces = 0;
+```cpp
+std::atomic<size_t> failedTraces = 0;
+std::atomic<size_t> totalTraces = 0;
 
 static void signalHandler(int signo, siginfo_t* siginfo, void* ucontext) {
   const int MAX_DEPTH = 512; // max number of frames to capture
@@ -110,52 +117,63 @@ static void signalHandler(int signo, siginfo_t* siginfo, void* ucontext) {
   trace.env_id = env; // we obtained this via the OnVMInit hook
 
   // call AsyncGetCallTrace
-  asgct(&amp;trace, MAX_DEPTH, ucontext);
+  asgct(&trace, MAX_DEPTH, ucontext);
 
   // process the results
   totalTraces++;
-  if (trace.num_frames &lt; 0) {
+  if (trace.num_frames < 0) {
     failedTraces++;
   }
-}</pre>
+}
+```
+
 
 We use atomic variables here to increment the two counting variables in parallel. We cannot use any locks as creating locks is not signal-safe.
 
 You see in line 13 that we cannot call AsyncGetCallTrace directly, as it is not exported in any JVM header. So we have to obtain the pointer to this function via [dlsym](https://man7.org/linux/man-pages/man3/dlsym.3.html) at the beginning, which is a bit brittle:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="cpp" data-enlighter-theme="dracula" data-enlighter-highlight="" data-enlighter-linenumbers="false" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">static void initASGCT() {
-  asgct = reinterpret_cast&lt;ASGCTType&gt;(dlsym(RTLD_DEFAULT, "AsyncGetCallTrace"));
+```cpp
+static void initASGCT() {
+  asgct = reinterpret_cast<ASGCTType>(dlsym(RTLD_DEFAULT, "AsyncGetCallTrace"));
   if (asgct == NULL) {
     fprintf(stderr, "=== ASGCT not found ===\n");
     exit(1);
   }
-}</pre>
+}
+```
+
 
 Additionally, we have to copy the declarations for ASGCT_CallFrame, ASGCT_CallTrace, and AsyncGetCallTrace into our project.
 
 After writing a signal handler, we must use some mechanism to create signals. There are multiple ways, like perf or using a thread that signals all threads every few milliseconds, but we'll use the most straightforward option which is a timer:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="cpp" data-enlighter-theme="dracula" data-enlighter-highlight="" data-enlighter-linenumbers="false" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">static bool startITimerSampler() {
+```cpp
+static bool startITimerSampler() {
   time_t sec = interval_ns / 1000000000;
   suseconds_t usec = (interval_ns % 1000000000) / 1000;
   struct itimerval tv = {{sec, usec}, {sec, usec}};
 
   // ...
 
-  if (setitimer(ITIMER_PROF, &amp;tv, NULL) != 0) {
+  if (setitimer(ITIMER_PROF, &tv, NULL) != 0) {
     return false;
   }
   return true;
-}</pre>
+}
+```
+
 
 Our code uses the timers in `PROF` mode: "A profiling timer that counts both processor time used by the process, and processor time spent in system calls on behalf of the process. This timer sends a `SIGPROF` signal to the process when it expires." (see [gnu.org](https://www.gnu.org/software/libc/manual/html_node/Setting-an-Alarm.html)) The result is roughly similar to the CPU and itimer modes of the async-profiler. It is inaccurate, but we'll tackle this problem in another blog post.
 
 You can find the final code in the [GitHub](https://github.com/parttimenerd/writing-a-profiler) repo as [libSmallProfiler.cpp](https://github.com/parttimenerd/writing-a-profiler/blob/main/cpp/libSmallProfiler.cpp). It includes all the boiler-plate code for JVMTI agents that I omitted in this blog post for brevity. Feel free to file issues or PRs with improvements or suggestions there. When we finally run the tool with a JVM and the example Java program, we get the following output via `java -agentpath:cpp/libSmallProfiler.dylib=interval=0.001s -cp samples BasicSample`:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="raw" data-enlighter-theme="dracula" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">Waiting forever.......................................................................................................done
+```
+Waiting forever.......................................................................................................done
 Failed traces:          5
 Total traces:          15
-Failed ratio:       33.33%</pre>
+Failed ratio:       33.33%
+```
+
 
 This tool might seem to be rather useless, but one can adjust its sampling interval by specifying the `interval` option: This makes it quite helpful in testing the stack walking code of AsyncGetCallTrace.
 

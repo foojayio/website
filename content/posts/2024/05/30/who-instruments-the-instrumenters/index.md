@@ -38,7 +38,10 @@ This allows the agent to capture what every instrumenting agent does at run-time
 
 But how can you use it? You first have to [download the agent](https://github.com/parttimenerd/meta-agent/releases/download/0.0.1/meta-agent.jar) (or build it from scratch via `mvn package -DskipTests`), then you can just attach it to your JVM at the start:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">java -javaagent:target/meta-agent.jar -jar your-program.jar</pre>
+```bash
+java -javaagent:target/meta-agent.jar -jar your-program.jar
+```
+
 
 This will then create a web server at <http://localhost:7071> that allows you to inspect the bytecode modifications of each instrumenter dynamically. For the example from the README <http://localhost:7071/full-diff/class?pattern=java.lang.Iterable> shows you, for example, how Mockito modifies the Iterable class upon mocking:
 ![](https://mostlynerdless.de/wp-content/uploads/2024/05/image-2000x1144.png)
@@ -59,7 +62,8 @@ Spring instruments your application classes using proxies generated with [CGLIB]
 
 The first example that comes to mind is proxying classes, a technique frequently used to add arbitrary behavior to an existing object and used extensively by Spring. The JDK contains `java.lang.reflect.Proxy`, a class that lets you implement arbitrary interfaces to generate objects at run-time. For example, here is how you would implement a JDK proxy:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">interface Door {
+```java
+interface Door {
   @Secured
   void open();
   boolean isOpen();
@@ -69,9 +73,9 @@ Door makeSecure(Door door) {
   return (Door) Proxy.newProxyInstance(
     getClass().getClassLoader(), // classloader
     new Class[] { Door.class }, // interfaces
-    (Object proxy, Method method, Object[] args) -&gt; {
+    (Object proxy, Method method, Object[] args) -> {
       if (method.getAnnotation(Secured.class) != null 
-          &amp;&amp; !userIsAuthorized()) {
+          && !userIsAuthorized()) {
         throw new RuntimeException(
           "user is unauthorized to access method %s"
           .formatted(method.getName())
@@ -87,7 +91,9 @@ void testSecured() {
   Door securedDoor = makeSecure(new SimpleDoor());
   setUserIsAuthorized(false);
   assertThatException().isThrownBy(door::open);
-}</pre>
+}
+```
+
 
 These few lines of code are enough to implement an annotation that can be reused on arbitrary interfaces. In fact, a lot of what Spring does can be summed up by this code snippet.
 
@@ -95,18 +101,22 @@ But alas, the JDK only supports this for interfaces, not for classes, so you wou
 
 CGLIB is a bytecode generation library that is now abandoned but forked, repackaged, and used extensively by Spring [(1)](#ref1). It has an API that emulates `java.lang.reflect.Proxy`, but that also works with classes. This lets us generify our little security framework to also instrument classes:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&lt;T&gt; T makeSecure(T t) {
+```java
+<T> T makeSecure(T t) {
   return (T) Enhancer.create(
     t.getClass(), // we can now use classes!
-    (MethodInterceptor) (o, method, objects, methodProxy) -&gt; {
+    (MethodInterceptor) (o, method, objects, methodProxy) -> {
       // same intercepting behaviour
     }
   );
-}</pre>
+}
+```
+
 
 And everything you pass into `makeSecure()` will now have its `@Secured` methods intercepted. This is a powerful mechanism, but have you ever wondered what happens when you invoke [Proxy.newProxyInstance](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/reflect/Proxy.html#newProxyInstance(java.lang.ClassLoader,java.lang.Class%5B%5D,java.lang.reflect.InvocationHandler)), or [Enhancer.create](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/cglib/proxy/Enhancer.html#create())? What kind of trickery takes place? Well, meta-agent lets us see exactly what is happening. Here is part of the decompiled bytecode from the `$Proxy8` class that was dynamically created by the `Proxy` in the first example above:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">final class $Proxy8 extends Proxy implements Door {
+```java
+final class $Proxy8 extends Proxy implements Door {
   private static final Method m5;
 
   public final void open() {
@@ -124,7 +134,9 @@ And everything you pass into `makeSecure()` will now have its `@Secured` methods
     m5 = Class.forName("me.bechberger.meta.MockitoTest$Door", 
                        false, var0).getMethod("open");
   }
-}</pre>
+}
+```
+
 
 This is something you could very well write in any Java program. In fact, it's a pretty standard implementation of the decorator design pattern. In a static initializer, the relevant methods are first cached in static fields so that `getMethod()`, a non-trivial operation, only has to happen once. Then, every method is just a simple delegation to the InvocationHandler you provided, surrounded by some error handling. The only peculiar thing about this code is that it was generated at run-time directly in bytecode.
 
@@ -132,7 +144,8 @@ When I first read this, the first thing that struck me was that `Proxy` wraps un
 
 Now let's look at what CGLIB does. CGLIB generates a lot of code. The proxy for the `SimpleDoor` class that implements our `Door` interface is over 300 lines long. Here is just the `isOpen()` method. I've renamed the variables for better readability.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public class SimpleDoor$$EnhancerByCGLIB$$b71b2e45 {
+```java
+public class SimpleDoor$$EnhancerByCGLIB$$b71b2e45 {
   public final boolean isOpen() {
     MethodInterceptor interceptor = this.isOpenCallback;
     if (this.isOpenCallback == null) {
@@ -149,7 +162,9 @@ Now let's look at what CGLIB does. CGLIB generates a lot of code. The proxy for 
       return super.isOpen();
     }
   }
-}</pre>
+}
+```
+
 
 There are two surprising things here. First, this check for `isOpenCallback == null` seems redundant. It turns out that CGLIB allows setting or removing callbacks after the proxy is initialized, so proxies have to do this sanity check for every method call.
 
@@ -164,7 +179,8 @@ Another tool I use daily where bytecode generation is used extensively is [Mocki
 
 For example, in a `UserService` that saves a `User` and then sends a notification based on the results from the database, how would you test that no notification is sent if saving the user fails? The lightest way to do it is using mocks, and anyone who has handwritten mocks before knows how tedious it can be [(4)](#ref4). Mockito makes this easy:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@Test
+```java
+@Test
 void givenRepositoryThrowsException_whenSaveUser_thenDoesNotSendNotification() {
   UserRepository userRepository = mock(UserRepository.class);
   NotificationService notificationService = 
@@ -174,11 +190,13 @@ void givenRepositoryThrowsException_whenSaveUser_thenDoesNotSendNotification() {
 
   when(userRepository.save(any())).thenThrow(new RuntimeException("nope"));
 
-  assertThatThrownBy(() -&gt; userService.saveUser(new User("Mikaël")))
+  assertThatThrownBy(() -> userService.saveUser(new User("Mikaël")))
     .hasMessage("nope");
 
   verifyNoInteractions(notificationService);
-}</pre>
+}
+```
+
 
 Where Mockito shines is not only in its API ([mock()](https://javadoc.io/doc/org.mockito/mockito-core/latest/org/mockito/Mockito.html#mock(T...)), [when()](https://javadoc.io/doc/org.mockito/mockito-core/latest/org/mockito/Mockito.html#when(T))`.`[thenThrow()](https://javadoc.io/doc/org.mockito/mockito-core/latest/org/mockito/stubbing/OngoingStubbing.html#thenThrow(java.lang.Class)), [any()](https://javadoc.io/doc/org.mockito/mockito-core/latest/org/mockito/ArgumentMatchers.html#any(java.lang.Class)), and [`verifyNoInteractions()`](https://javadoc.io/doc/org.mockito/mockito-core/latest/org/mockito/Mockito.html#verifyNoInteractions(java.lang.Object...)) in this example), but also its ability to mock even final or static methods. The proxying techniques we've seen so far used subclassing to generate new objects that implemented or extended existing interfaces or classes. But final and static methods can't be overridden. Mockito gets around this by registering a JVM agent and transforming the existing classes [(5)](#ref5).
 
@@ -186,19 +204,20 @@ I originally planned on showing the decompiled code as an example. Unfortunately
 
 I had to switch meta-agent to `javap-verbose` mode to confirm with the bytecode, and I fixed and edited the code for readability. Here is the `UserRepository::save` method from the example above, as transformed by Mockito:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">class UserRepository {
+```java
+class UserRepository {
   // omitting constructor
 
   User save(User user) {
     MockMethodDispatcher dispatcher =
       MockMethodDispatcher.get("VCcM9ivB", this);
 
-    if (dispatcher != null &amp;&amp; dispatcher.isMocked(this)) {
+    if (dispatcher != null && dispatcher.isMocked(this)) {
       Method method = UserRepository.class.getDeclaredMethod(
         "save", User.class
       );
       if (!dispatcher.isOverridden(method)) {
-        Callable&lt;User&gt; mockCall = dispatcher.handle(
+        Callable<User> mockCall = dispatcher.handle(
           this, UserRepository.class.getDeclaredMethod(
             "save", User.class
           ), new Object[] { user }
@@ -209,7 +228,9 @@ I had to switch meta-agent to `javap-verbose` mode to confirm with the bytecode,
 
     return user;
   }
-}</pre>
+}
+```
+
 
 Notice that the name of the `UserRepository` class hasn't changed. Whereas `Proxy` and `CGLIB` generated new classes that are extended or inherited from our existing types, Mockito transforms the existing class, and every method of the transformed class first checks with a static registry (`MockMethodDispatcher`) to see if the current object is a mock.
 

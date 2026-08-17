@@ -62,7 +62,8 @@ Notably, methods like addFirst(E) and addLast(E) can reposition elements if they
 
 ### Examples {#h3-4-examples}
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">SequencedSet&lt;String&gt; sequencedSet = new LinkedHashSet&lt;&gt;();
+```
+SequencedSet<String> sequencedSet = new LinkedHashSet<>();
  sequencedSet.addFirst("Apple");
  sequencedSet.add("Banana");
  sequencedSet.addLast("Cherry");
@@ -70,13 +71,15 @@ Notably, methods like addFirst(E) and addLast(E) can reposition elements if they
 assertEquals("Apple", sequencedSet.getFirst());
 assertEquals("Cherry", sequencedSet.getLast());
 
-SequencedCollection&lt;String&gt; sequencedCollection = new ArrayList&lt;&gt;();
+SequencedCollection<String> sequencedCollection = new ArrayList<>();
  sequencedCollection.addFirst("Apple");
  sequencedCollection.add("Banana");
  sequencedCollection.addLast("Cherry");
 
 assertEquals("Apple", sequencedCollection.getFirst());
-assertEquals("Cherry", sequencedCollection.getLast());</pre>
+assertEquals("Cherry", sequencedCollection.getLast());
+```
+
 
 Sequenced Maps {#h2-5-sequenced-maps}
 -------------------------------------
@@ -87,16 +90,19 @@ It also introduces methods for getting a sequenced collection of the keys and va
 
 #### Example
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">SequencedMap&lt;String, Integer&gt; sequencedMap = new LinkedHashMap&lt;&gt;();
-&nbsp;sequencedMap.putFirst("Apple", 10);
-&nbsp;sequencedMap.put("Banana", 20);
-&nbsp;sequencedMap.putLast("Cherry", 30);
+```
+SequencedMap<String, Integer> sequencedMap = new LinkedHashMap<>();
+ sequencedMap.putFirst("Apple", 10);
+ sequencedMap.put("Banana", 20);
+ sequencedMap.putLast("Cherry", 30);
 
 assertEquals("Apple", sequencedMap.firstEntry().getKey());
 assertEquals(10, sequencedMap.firstEntry().getValue());
 
 assertEquals("Cherry", sequencedMap.lastEntry().getKey());
-assertEquals(30, sequencedMap.lastEntry().getValue());</pre>
+assertEquals(30, sequencedMap.lastEntry().getValue());
+```
+
 
 Retrofitting and Compatibility {#h2-6-retrofitting-and-compatibility}
 ---------------------------------------------------------------------

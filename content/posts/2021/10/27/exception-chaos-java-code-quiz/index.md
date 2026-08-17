@@ -19,7 +19,8 @@ Working correctly with exceptions is crucial to a high-quality application that 
 
 Therefore, what do you think will happen when running the following code?
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">import java.io.FileNotFoundException;
+```java
+import java.io.FileNotFoundException;
 
 public class ExceptionChaosChallenge {
     static String s = "-";
@@ -52,7 +53,9 @@ public class ExceptionChaosChallenge {
         System.out.println(s);
     }
 
-}</pre>
+}
+```
+
 
 A) -runfinoferror
 

@@ -51,13 +51,16 @@ How does compiler testing differ from backend or mobile app testing? If we abstr
 
 The difference from testing typical products is that there is no network interface (as in testing an API) and no graphical interface (as in testing web or mobile applications). If you have experience testing console applications, then you are ready to test a compiler from a technical point of view 🙂
 
-<pre class="EnlighterJSRAW" data-enlighter-language="shell">➜ workdir cat main.kt
+```bash
+➜ workdir cat main.kt
 fun main() {
     println("Hello, Foojay!")
 }
 ➜ workdir ~/Downloads/kotlin-native-prebuilt-macos-aarch64–2.0.20-dev-7391/bin/kotlinc-native main.kt -o main.kexe
 ➜ workdir ./main.kexe
-Hello, Foojay!</pre>
+Hello, Foojay!
+```
+
 
 From a product perspective, things are a bit more complex. The compiler has many different parts to work with, such as:
 
@@ -100,7 +103,8 @@ One of the first tasks was <https://youtrack.jetbrains.com/issue/KT-56464/K-N-Al
 
 I remember that at that time, for the sake of testing simplicity, I wanted to write a bash script that would compile all the necessary code, but I realized that I didn't know what options I needed to compile the project with and what the general compilation order should be --- after all, I had to first compile the Objective-C Framework and then compile the program itself in Objective-C or Swift, which I had never done before. As a result, after some digging, I wrote a script that looked something like this:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="shell">#/bin/zsh
+```bash
+#/bin/zsh
 #set -x
 
 ./clean.sh
@@ -130,36 +134,48 @@ echo
 
 echo "Launching Swift compiled Main:"
 ./swift.kexe
-echo</pre>
+echo
+```
+
 
 What's a test case for such a feature? We compile classes.kt and then use the result in Objective-C or Swift code --- so different contents of classes.kt are the test cases.
 
 The simple example of the new feature usage looks like this:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="kotlin">@file:OptIn(kotlin.experimental.ExperimentalObjCRefinement::class)
+```kotlin
+@file:OptIn(kotlin.experimental.ExperimentalObjCRefinement::class)
 
 @HiddenFromObjC
-class Hidden</pre>
+class Hidden
+```
+
 
 The simple regression case would look something like that:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="kotlin">@file:OptIn(kotlin.experimental.ExperimentalObjCRefinement::class)
+```kotlin
+@file:OptIn(kotlin.experimental.ExperimentalObjCRefinement::class)
 
 @HiddenFromObjC
-fun hidden() = 1 // just a random function</pre>
+fun hidden() = 1 // just a random function
+```
+
 
 It was necessary to test various use cases of the new feature, and in the process, I was able to find a [bug](https://youtrack.jetbrains.com/issue/KT-58839/K-N-Exception-during-HiddenFromObjC-marked-class-extension-function-compiling "bug") that could be reproduced with the following code:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="kotlin">@file:OptIn(kotlin.experimental.ExperimentalObjCRefinement::class)
+```kotlin
+@file:OptIn(kotlin.experimental.ExperimentalObjCRefinement::class)
 
 @HiddenFromObjC
 class Hidden
 
-fun Hidden.foo() = 5</pre>
+fun Hidden.foo() = 5
+```
+
 
 This is an example of a classic language feature task. There are also other types of feature tasks, such as a task for a [change in the klib utility](https://youtrack.jetbrains.com/issue/KT-59486/klib-Serialize-mangled-names-along-with-signatures "change in the klib utility") --- it was necessary to verify the correctness of the utility output. A simplified example showing the essence of the task looks something like this:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="shell">➜ workdir cat kt-59486.sh
+```bash
+➜ workdir cat kt-59486.sh
 #!/bin/bash
 
 echo Old output:
@@ -179,7 +195,9 @@ pkg.liba/abcd|abcd(kotlin.Int){}[0]
 pkg.liba/abcd|abcd(kotlin.Long){}[0]
 pkg.liba/abcd|abcd(kotlin.Int){}[0]
 pkg.liba/abcd|abcd(kotlin.Long){}[0]
-pkg.liba/|(kotlin.Int){}[0]</pre>
+pkg.liba/|(kotlin.Int){}[0]
+```
+
 
 There are also tasks for various compiler features --- for example, I once tested a task to improve error reporting during [partial linkage](https://kotlinconf.com/2023/talks/372287/ "partial linkage"). There were no interesting cases in this task, but the essence of the task itself might seem interesting to someone --- after all, we often don't think about how projects are assembled, in particular, how all the libraries needed for assembly are linked together. And here it was initially necessary to artificially create an error case during partial linkage. An example of a bug that can be found when testing such tasks is the [creation](https://youtrack.jetbrains.com/issue/KT-61097/PL-Dont-create-an-executable-if-there-were-errors-in-PL "creation") of an executable file in a situation where it should not be possible to create it.
 
@@ -191,7 +209,8 @@ What else can you encounter when testing a compiler? For example, an incorrect r
 
 Sometimes you have to write simple code generators: for example, to test the performance of one of the new features, I recently generated 500 [classes nested inside each other](https://kotlinlang.org/docs/nested-classes.html "classes nested inside each other") and found a nonlinear dependence of the performance of that feature on the nesting levels of these classes.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="shell">➜ head -15 nested500
+```bash
+➜ head -15 nested500
 // Level: 500
     class Nested1() {
         class Nested2() {
@@ -206,7 +225,9 @@ Sometimes you have to write simple code generators: for example, to test the per
                                             class Nested11() {
                                                 class Nested12() {
                                                     class Nested13() {
-                                                        class Nested14() {</pre>
+                                                        class Nested14() {
+```
+
 
 Sometimes I have to run an app compiled with Kotlin/Native for iOS on my iPhone. To do this, I had to learn how to run apps on the phone from Xcode and activate developer mode on my phone. But now I can download beta versions of iOS as soon as they are released! 🙂
 

@@ -43,7 +43,8 @@ Which attributes to add depends on your specific requirements; you should aim fo
 
 Here's a basic event class for monitoring our REST API calls:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@Name(JaxRsInvocationEvent.NAME) [1]
+```java
+@Name(JaxRsInvocationEvent.NAME) [1]
 @Label("JAX-RS Invocation")
 @Category("JAX-RS")
 @Description("Invocation of a JAX-RS resource method")
@@ -82,7 +83,9 @@ public class JaxRsInvocationEvent extends Event {
 
   @Label("Response Status")
   public int status;
-}</pre>
+}
+```
+
 
 1. The `@Name`, `@Category`, `@Description` and `@Label` annotations define some meta-data, e.g. used for controlling the appearance of these events in the JMC UI
 2. JAX-RS invocation events shouldn't contain a stacktrace by default, as that'd only increase the size of Flight Recordings without adding much value
@@ -95,7 +98,8 @@ You also might employ byte code instrumentation at build or runtime for this pur
 
 For monitoring a JAX-RS based REST API, the `ContainerRequestFilter` and `ContainerResponseFilter` contracts come in handy, as they allow to hook into the request handling logic *before* and *after* a REST request gets processed:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@Provider  [1]
+```java
+@Provider  [1]
 public class FlightRecorderFilter implements ContainerRequestFilter,
     ContainerResponseFilter {
 
@@ -149,7 +153,9 @@ public class FlightRecorderFilter implements ContainerRequestFilter,
         (ResourceMethodInvoker)requestContext.getProperty(propName);
     return invoker.getMethod().toString();
   }
-}</pre>
+}
+```
+
 
 1. Allows the filter to be picked up automatically by the JAX-RS implementation
 2. Will be invoked *before* the request is processed
@@ -163,13 +169,16 @@ public class FlightRecorderFilter implements ContainerRequestFilter,
 
 With that, our event class is pretty much ready to be used. There's only one more thing to do, and that is registering the new type with the Flight Recorder system. A Quarkus application start-up lifecycle method comes in handy for that:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@ApplicationScoped
+```java
+@ApplicationScoped
 public class Metrics {
 
   public void registerEvent(@Observes StartupEvent se) {
     FlightRecorder.register(JaxRsInvocationEvent.class);
   }
-}</pre>
+}
+```
+
 
 Note this step isn't strictly needed, the event type can also be used without explicit registration. But doing so will later on allow to apply specific settings for the event in Mission Control (see below), also if no event of this type has been emitted yet.
 
@@ -179,15 +188,20 @@ Now let's capture some JAX-RS API events using Flight Recorder and inspect them 
 
 To do so, make sure to have Mission Control installed. Just as with OpenJDK, there are different builds for Mission Control to choose from. If you're in the Fedora/RHEL universe, there's a repository package which you can install, e.g. like this for the [Fedora JMC package](https://fedoraproject.org/wiki/JMC_on_Fedora):
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">sudo dnf module install jmc:7/default
-</pre>
+```
+sudo dnf module install jmc:7/default
+```
+
 
 Alternatively, you can download [builds for different](https://jdk.java.net/jmc/) platforms from Oracle; some more info about these builds can be found in [this blog post](http://hirt.se/blog/?p=1208) by Marcus Hirt. There's also the [Liberica Mission Control](https://bell-sw.com/pages/lmc/) build by BellSoft and [Zulu Mission Control](https://www.azul.com/products/zulu-mission-control/) by Azul. The AdoptOpenJDK provides [snapshot builds](https://adoptopenjdk.net/jmc.html) of JMC 8 as well as an Eclipse update site for installing JMC into an existing Eclipse instance.
 
 If you'd like to follow along and run these steps yourself, check out the [source code](https://github.com/gunnarmorling/jfr-custom-events) from GitHub and then perform the following commands:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">cd example-service &amp;&amp; mvn clean package &amp;&amp; cd ..
-docker-compose up --build</pre>
+```
+cd example-service && mvn clean package && cd ..
+docker-compose up --build
+```
+
 
 This builds the project using Maven and spins up the following services using Docker Compose:
 
@@ -212,16 +226,20 @@ In a real-world use case, you could now use this information for instance to ide
 
 Amongst many other things, it allows you to start and stop Flight Recordings. On the environment with your running application, first run `jcmd -l`, which will show you the PIDs of all running Java processes. Having identified the PID of the process you'd like to examine, you can initiate a recording like so:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">jcmd &lt;PID&gt; JFR.start delay=5s duration=30s \
+```
+jcmd <PID> JFR.start delay=5s duration=30s \
     name=MyRecording filename=my-recording.jfr
-</pre>
+```
+
 
 This will start a recording of 30 seconds, beginning in 5 seconds from now. Once the recording is done, you could copy the file to your local machine and load it into Mission Control for further analysis. To learn more about creating Flight Recordings via *jcmd* , refer to this great [cheat sheet](https://medium.com/@chrishantha/java-flight-recorder-cheat-sheet-98f5143f5f88).
 
 Another useful tool in the belt is the [*jfr*](https://docs.oracle.com/en/java/javase/13/docs/specs/man/jfr.html) command, which [was introduced](https://bugs.openjdk.java.net/browse/JDK-8205517) in JDK 12. It allows you to filter and examine the binary Flight Recording files. You also can use it to extract parts of a recording and convert them to JSON, allowing them to be processed with other tools. E.g. you could convert all the JAX-RS events to JSON like so:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">jfr print --json --categories JAX-RS my-recording.jfr
-</pre>
+```
+jfr print --json --categories JAX-RS my-recording.jfr
+```
+
 
 ### Event Settings {#_event_settings}
 
@@ -229,7 +247,8 @@ Sometimes it's desirable to configure detailed behaviors of a given event type. 
 
 Inspired by the JavaDoc of [@SettingDefinition](https://docs.oracle.com/en/java/javase/11/docs/api/jdk.jfr/jdk/jfr/SettingDefinition.html) let's see what's needed to enhance `JaxRsInvocationEvent` with that capability. The first step is to define a subclass of `jdk.jfr.SettingControl`, which serves as the value holder for our setting:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public class PathFilterControl extends SettingControl {
+```java
+public class PathFilterControl extends SettingControl {
 
   private Pattern pattern = Pattern.compile(".*");  [1]
 
@@ -239,7 +258,7 @@ Inspired by the JavaDoc of [@SettingDefinition](https://docs.oracle.com/en/java/
   }
 
   @Override [3]
-  public String combine(Set&lt;String&gt; values) {
+  public String combine(Set<String> values) {
     return String.join("|", values);
   }
 
@@ -251,7 +270,9 @@ Inspired by the JavaDoc of [@SettingDefinition](https://docs.oracle.com/en/java/
   public boolean matches(String s) { 
     return pattern.matcher(s).matches(); [5]
   }
-}</pre>
+}
+```
+
 
 1. A regular expression pattern that'll be matched against the path of incoming events; by default all paths are included (`.*`)
 2. Invoked by the JFR runtime to set the value for this setting
@@ -261,7 +282,8 @@ Inspired by the JavaDoc of [@SettingDefinition](https://docs.oracle.com/en/java/
 
 On the event class itself a method with the following characteristics must be declared which will receive the setting by the JFR runtime:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">class JaxRsInvocationEvent extends Event {
+```java
+class JaxRsInvocationEvent extends Event {
 
   @Label("Path")
   public String path;
@@ -273,7 +295,9 @@ On the event class itself a method with the following characteristics must be de
   protected boolean pathFilter(PathFilterControl pathFilter) {  [2]
     return pathFilter.matches(path);
   }
-}</pre>
+}
+```
+
 
 1. Tags this as a setting
 2. The method must be public, take a `SettingControl` type as its single parameter and return `boolean`
@@ -319,7 +343,8 @@ The following shows a basic implementation of exposing these metrics for the JAX
 
 While the MicroProfile Metrics API is used in an annotation-driven fashion often-times, it also provides a programmatic API for registering metrics. This can be leveraged to expose metrics based on the JAX-RS Flight Recorder events:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@ApplicationScoped
+```java
+@ApplicationScoped
 public class Metrics {
 
   @Inject [1]
@@ -331,7 +356,7 @@ public class Metrics {
     recordingStream = new RecordingStream();  [3]
     recordingStream.enable(JaxRsInvocationEvent.NAME);
 
-    recordingStream.onEvent(JaxRsInvocationEvent.NAME, event -&gt; {  [4]
+    recordingStream.onEvent(JaxRsInvocationEvent.NAME, event -> {  [4]
 
       String path = event.getString("path")
           .replaceAll("(\\/)([0-9]+)(\\/?)", "$1{param}$3");  [5]
@@ -365,7 +390,9 @@ public class Metrics {
       throw new RuntimeException(e);
     }
   }
-}</pre>
+}
+```
+
 
 1. Inject the MicroProfile Metrics registry
 2. A stream providing push access to JFR events

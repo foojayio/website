@@ -30,7 +30,7 @@ What is it exactly, and how does it work?
 
 <br />
 
-*** ** * ** ***
+
 
 ### *Java is consistently in the top of most popular languages. The real reason for this is not the language itself but the JVM. And the power that it gives to the developer.* {#h3-0-java-is-consistently-in-the-top-of-most-popular-languages-the-real-reason-for-this-is-not-the-language-itself-but-the-jvm-and-the-power-that-it-gives-to-the-developer}
 
@@ -38,7 +38,7 @@ Simon Ritter, Deputy CTO, Azul
 
 <br />
 
-*** ** * ** ***
+
 
 Understanding JDK versus JRE versus JVM {#TheAnatomyofaJVM-UnderstandingJDKversusJREversusJVM}
 ----------------------------------------------------------------------------------------------

@@ -36,7 +36,8 @@ In this guide, you learn how to build a small but fully functional ToDo applicat
 
 Open `src/main/java/com/example/application/views/main/MainView.java`. Replace the code in `MainView.java` with the code below:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">package com.example.application.views.main;
+```java
+package com.example.application.views.main;
 
 import com.vaadin.flow.component.Key;
 import com.vaadin.flow.component.button.Button;
@@ -54,7 +55,7 @@ public class MainView extends VerticalLayout { // (2)
     VerticalLayout todosList = new VerticalLayout(); // (3)
     TextField taskField = new TextField(); // (4)
     Button addButton = new Button("Add"); // (5)
-    addButton.addClickListener(click -&gt; { // (6)
+    addButton.addClickListener(click -> { // (6)
       Checkbox checkbox = new Checkbox(taskField.getValue());
       todosList.add(checkbox);
     });
@@ -69,7 +70,9 @@ public class MainView extends VerticalLayout { // (2)
       )
     );
   }
-}</pre>
+}
+```
+
 
 (1) This `@Route` annotation makes the view accessible to the end user, in this case, using the empty \`\` route.  
 

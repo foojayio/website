@@ -34,13 +34,17 @@ I used the [work-in-progress 64-bit version of Raspberry Pi OS](https://www.rasp
 
 To be able to build, you need a recent (released) JDK. So we start with installing Java JDK 15 with SDKMAN:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ sudo apt install zip
+```
+$ sudo apt install zip
 $ curl -s "https://get.sdkman.io" | bash
-$ sdk install java 15.0.0.fx-librca</pre>
+$ sdk install java 15.0.0.fx-librca
+```
+
 
 Now we are ready to install all the required tools, get the sources from GitHub, and create the JDK build configuration.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ sudo apt-get install autoconf
+```
+$ sudo apt-get install autoconf
 $ sudo apt-get install libx11-dev libxext-dev libxrender-dev libxrandr-dev libxtst-dev libxt-dev
 $ sudo apt-get install libcups2-dev
 $ sudo apt-get install libfontconfig1-dev
@@ -70,11 +74,16 @@ Tools summary:
 
 Build performance summary:
 * Cores to use:   4
-* Memory limit:   7815 MB</pre>
+* Memory limit:   7815 MB
+```
+
 
 With all the required tools being available and configured, we can start the compile process with \`make images\`. This will run for a longer time, compiling all components of the JDK. The Raspberry Pi 4 has enough resources as memory usage fluctuates between 1 and 3GB.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ make images</pre>
+```
+$ make images
+```
+
 
 ![](compiling-java-1024x357.png)
 
@@ -82,10 +91,13 @@ In my case (Raspberry Pi 4 with 8 GB memory and 64-bit Raspbian OS) this took ju
 
 Now let's try-out our new JDK!
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ ./build/*/images/jdk/bin/java -version
+```
+$ ./build/*/images/jdk/bin/java -version
 openjdk version "16-internal" 2021-03-16
 OpenJDK Runtime Environment (build 16-internal+0-adhoc.pi.jdk)
-OpenJDK 64-Bit Server VM (build 16-internal+0-adhoc.pi.jdk, mixed mode, sharing)</pre>
+OpenJDK 64-Bit Server VM (build 16-internal+0-adhoc.pi.jdk, mixed mode, sharing)
+```
+
 
 Yep, there it is: **the cutting edge, not yet released, straight from the sources, freshly baked and served "**Java JDK 16-internal**" on a Raspberry Pi**! 🙂
 ![](java-16-internal-on-raspberrypi-1024x646.png)

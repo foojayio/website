@@ -75,22 +75,28 @@ But you can access the serialisation also outside the standard usage and access 
 
 To do that, you need the following artefact that exposes the required methods.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="xml">&lt;dependency&gt;
-    &lt;groupId&gt;one.microstream&lt;/groupId&gt;
-    &lt;artifactId&gt;microstream-persistence-binary&lt;/artifactId&gt;
-    &lt;version&gt;${microstream.version}&lt;/version&gt;
-&lt;/dependency&gt;</pre>
+```xml
+<dependency>
+    <groupId>one.microstream</groupId>
+    <artifactId>microstream-persistence-binary</artifactId>
+    <version>${microstream.version}</version>
+</dependency>
+```
+
 
 Suppose you have an Employee class where you model the company structure and hierarchy. The following snippets create a serialised and convert the objects, even with the circular reference, to a byte array.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">SerializerFoundation&lt;?&gt; foundation = SerializerFoundation.New()
+```java
+SerializerFoundation<?> foundation = SerializerFoundation.New()
         .registerEntityTypes(Employee.class);
-try (Serializer&lt;byte[]&gt; serializer = Serializer.Bytes(foundation)) {
+try (Serializer<byte[]> serializer = Serializer.Bytes(foundation)) {
 
     byte[] data = serializer.serialize(theBoss);
 } catch (Exception e) {
     throw new RuntimeException(e);
-}</pre>
+}
+```
+
 
 And you can deserialise the bytes to create the Object instances again.
 

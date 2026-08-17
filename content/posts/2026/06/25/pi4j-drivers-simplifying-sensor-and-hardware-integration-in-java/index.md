@@ -117,7 +117,8 @@ Without a dedicated driver, developers would need to manually implement I2C comm
 
 With Pi4J Drivers, the code becomes much simpler:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">Context pi4j = Pi4J.newAutoContext();
+```
+Context pi4j = Pi4J.newAutoContext();
 
 Bmx280 sensor = Drivers.bme280(pi4j, 1, 0x76);
 
@@ -126,7 +127,8 @@ System.out.printf("Humidity: %.1f %%RH%n", sensor.humidity());
 System.out.printf("Pressure: %.1f hPa%n", sensor.pressure());
 
 pi4j.shutdown();
-</pre>
+```
+
 
 Instead of dealing with low-level communication details, developers can immediately focus on using the sensor data within their applications. This approach reduces complexity, improves readability, and allows projects to move from prototype to production much faster.
 
@@ -138,7 +140,8 @@ The goal of Pi4J Drivers is to make hardware interaction feel natural for Java d
 
 For example, reading environmental data from a Sense HAT can be as simple as:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">
+```
+
 Context pi4j = Pi4J.newAutoContext();
 
 SenseHat senseHat = new SenseHat(pi4j);
@@ -151,7 +154,8 @@ System.out.println("Humidity: " + humiditySensor.readHumidity());
 System.out.println("Pressure: " + pressureSensor.readPressure());
 
 pi4j.shutdown();
-</pre>
+```
+
 
 Behind the scenes, the driver handles the communication with the hardware, allowing developers to focus on application logic instead of device-specific protocols and register management.
 

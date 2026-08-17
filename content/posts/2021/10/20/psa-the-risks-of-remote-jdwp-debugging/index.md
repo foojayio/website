@@ -54,11 +54,17 @@ I won't even get into the complexities of man in the middle attacks etc. That's 
 
 I think the best mitigation is to tunnel the connection over SSH. It doesn't solve all the problems but it's at least not a huge hole like we normally have. Instead of enabling remote debugging as you normally would in the past, just enable it to your servers localhost as such:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">java -agentlib:jdwp=transport=dt_socket,server=y,address=9000 ApplicationName</pre>
+```
+java -agentlib:jdwp=transport=dt_socket,server=y,address=9000 ApplicationName
+```
+
 
 To connect to this remotely you will need SSH access to the machine and execute the following command:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">ssh remoteUser@remoteHost -L 9000:127.0.0.1:9000 -N</pre>
+```
+ssh remoteUser@remoteHost -L 9000:127.0.0.1:9000 -N
+```
+
 
 If you need credentials for the command also add them there. This will open a tunnel between your local machine's port 9000 and the remote one. You will be able to debug on localhost but it would work as a standard remote debugger. The only difference is that it wouldn't be as bad in terms of security.
 

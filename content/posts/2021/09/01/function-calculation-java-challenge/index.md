@@ -31,21 +31,24 @@ It's time to improve your Java skills with this Function Calculation Challenge..
 
 What will be the output when the main method is executed as follows?
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">import java.util.function.Function;
+```java
+import java.util.function.Function;
 
 public class FunctionChallenge {
 
     public static void main(String... doYourBest) {
-        Function&lt;Integer,Integer&gt; add = x -&gt; x + 2;
-        Function&lt;Integer,Integer&gt; sub = x -&gt; x - 2;
-        Function&lt;Integer,Integer&gt; div = x -&gt; x / 2;
+        Function<Integer,Integer> add = x -> x + 2;
+        Function<Integer,Integer> sub = x -> x - 2;
+        Function<Integer,Integer> div = x -> x / 2;
 
-        Function&lt;Integer, Integer&gt; func = add.andThen(sub).andThen(div);
+        Function<Integer, Integer> func = add.andThen(sub).andThen(div);
 
         System.out.println(func.apply(2));
     }
 
-}</pre>
+}
+```
+
 
 A) 0  
 
@@ -59,29 +62,47 @@ The interface `Function` in Java specifies the logic of functions you want to be
 
 Lets first understand the lambda expression given below:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">x -&gt; x+1</pre>
+```java
+x -> x+1
+```
+
 
 The lambda expression above (an anonymous function) takes an argument and returns a result after incrementing by one if x is type of Integer value.
 
 We can give the type of input value and return value by using Function. In the Lambda expression, the x would be the type of the received parameter and there will be the logic we defined. It's basically adding 2 to the x variable:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">Function add = x -&gt; x + 2;</pre>
+```java
+Function add = x -> x + 2;
+```
+
 
 Here we are subtracting 2 from the x variable:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">Function sub = x -&gt; x - 2;</pre>
+```java
+Function sub = x -> x - 2;
+```
+
 
 Finally here we are dividing the x by 2:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">Function div = x -&gt; x / 2;</pre>
+```java
+Function div = x -> x / 2;
+```
+
 
 In the line of code below, we are joining all logic to be executed in a row. That means that we are going to add and then subtract and divide:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">Function func = add.andThen(sub).andThen(div);</pre>
+```java
+Function func = add.andThen(sub).andThen(div);
+```
+
 
 With all functions in the func variable, we are going to use the apply method, passing 2. In the add method, it will be `2 + 2 = 4`, in the subtract method = it will be `4 - 2 = 2` and in the divide method = it will be `2 / 2 = 1`.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">System.out.println(func.apply(2));</pre>
+```java
+System.out.println(func.apply(2));
+```
+
 
 Therefore, the final answer will be... what do you think?
 

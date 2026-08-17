@@ -58,9 +58,11 @@ Key highlights:
 **🚀 Multi-runtime** --- run it on OS, Servlet containers, AWS Lambda, and more  
 **🎨 Modern syntax** --- expressive, clean, and productive
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">// Access the BoxLang runtime directly from any Spring-managed bean
+```java
+// Access the BoxLang runtime directly from any Spring-managed bean
 BoxRuntime runtime = BoxRuntime.getInstance();
-</pre>
+```
+
 
 ✨ Zero-Config Spring Boot Integration {#h2-1-zero-config-spring-boot-integration}
 ---------------------------------------------------------------------------------
@@ -69,19 +71,23 @@ The starter follows Spring Boot's auto-configuration philosophy religiously. Add
 
 ### GradleGradle {#h3-2-gradlegradle}
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">dependencies {
+```java
+dependencies {
     implementation 'io.boxlang:boxlang-spring-boot-starter: 1.0.0'
 }
-</pre>
+```
+
 
 Maven
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">&lt;dependency&gt;
-    &lt;groupId&gt;io.boxlang&lt;/groupId&gt;
-    &lt;artifactId&gt;boxlang-spring-boot-starter&lt;/artifactId&gt;
-    &lt;version&gt;1.0.0&lt;/version&gt;
-&lt;/dependency&gt;
-</pre>
+```java
+<dependency>
+    <groupId>io.boxlang</groupId>
+    <artifactId>boxlang-spring-boot-starter</artifactId>
+    <version>1.0.0</version>
+</dependency>
+```
+
 
 Spring Boot's auto-configuration mechanism detects the starter on the classpath and wires `BoxLangViewResolver`, starts the `BoxRuntime` lifecycle, and registers all required beans automatically. Read more in our docs: <https://boxlang.ortusbooks.com/getting-started/running-boxlang/spring-boot>
 
@@ -90,7 +96,8 @@ Spring Boot's auto-configuration mechanism detects the starter on the classpath 
 
 Your Spring MVC controllers stay exactly as they are. Return a view name, add model attributes --- BoxLang handles the rest.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">@Controller
+```java
+@Controller
 public class HomeController {
 
     @GetMapping("/")
@@ -100,24 +107,27 @@ public class HomeController {
         return "home"; // resolves to classpath:/templates/home.bxm
     }
 }
-</pre>
+```
+
 
 Then write your template in `src/main/resources/templates/home.bxm`:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">&lt;bx:output&gt;
-&lt;!DOCTYPE html&gt;
-&lt;html lang="en"&gt;
-&lt;head&gt;
-    &lt;title&gt;#variables.title#&lt;/title&gt;
-&lt;/head&gt;
-&lt;body&gt;
-    &lt;h1&gt;#title#&lt;/h1&gt;
-    &lt;p&gt;Framework: #framework#&lt;/p&gt;
-    &lt;p&gt;Rendered at: #dateTimeFormat( now(), "full" )#&lt;/p&gt;
-&lt;/body&gt;
-&lt;/html&gt;
-&lt;/bx:output&gt;
-</pre>
+```java
+<bx:output>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>#variables.title#</title>
+</head>
+<body>
+    <h1>#title#</h1>
+    <p>Framework: #framework#</p>
+    <p>Rendered at: #dateTimeFormat( now(), "full" )#</p>
+</body>
+</html>
+</bx:output>
+```
+
 
 Every attribute you add via `model.addAttribute(...)` is automatically injected into the BoxLang `variables` scope. No extra mapping, no boilerplate.
 
@@ -135,17 +145,19 @@ Unlike most view engines that only expose model data, BoxLang templates have acc
 | `cookie`    | HTTP cookies                                         |
 | `request`   | Per-request scoped storage                           |
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">&lt;bx:output&gt;
-    &lt;!-- Spring model attribute --&gt;
-    &lt;p&gt;#variables.title#&lt;/p&gt;
+```java
+<bx:output>
+    <!-- Spring model attribute -->
+    <p>#variables.title#</p>
 
-    &lt;!-- URL query param with default --&gt;
-    &lt;p&gt;Page: #url.page ?: 1#&lt;/p&gt;
+    <!-- URL query param with default -->
+    <p>Page: #url.page ?: 1#</p>
 
-    &lt;!-- Cookie with fallback --&gt;
-    &lt;p&gt;Theme: #cookie.theme ?: "light"#&lt;/p&gt;
-&lt;/bx:output&gt;
-</pre>
+    <!-- Cookie with fallback -->
+    <p>Theme: #cookie.theme ?: "light"#</p>
+</bx:output>
+```
+
 
 🔥 Hot-Reload During Development {#h2-5-hot-reload-during-development}
 ----------------------------------------------------------------------
@@ -154,26 +166,32 @@ Switch to a `file`: prefix in a dev Spring profile and template edits take effec
 
 `src/main/resources/application-dev.properties `
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">boxlang.prefix=file:src/main/resources/templates/
+```java
+boxlang.prefix=file:src/main/resources/templates/
 boxlang.debug-mode=true
-</pre>
+```
+
 
 Activate it:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">./gradlew bootRun --args='--spring.profiles.active=dev'
-</pre>
+```java
+./gradlew bootRun --args='--spring.profiles.active=dev'
+```
+
 
 ⚙️ Configuration That Stays Out of Your Way {#h2-6-configuration-that-stays-out-of-your-way}
 --------------------------------------------------------------------------------------------
 
 All settings live under the `boxlang.*` namespace in `application.properties` or `application.yml`. Sensible defaults mean you only override what you need.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">boxlang:
+```java
+boxlang:
   prefix: classpath:/templates/
   suffix: .bxm
   debug-mode: false
   # runtime-home: /app/.boxlang  # great for containers
-</pre>
+```
+
 
 You can also supply a `boxlang.json` config file at `src/main/resources/boxlang.json` for advanced language-level settings like locale, timezone, and logging.
 
@@ -182,9 +200,11 @@ You can also supply a `boxlang.json` config file at `src/main/resources/boxlang.
 
 `BoxLangViewResolver` integrates cleanly into Spring MVC's resolver chain. If a `.bxm` template doesn't exist for a given view name, it returns `null` and Spring falls through to the next resolver --- meaning Thymeleaf, FreeMarker, and BoxLang can all live in the same application without conflict.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java"># Lower number = higher priority in the resolver chain
+```java
+# Lower number = higher priority in the resolver chain
 boxlang.view-resolver-order=1
-</pre>
+```
+
 
 📋 Requirements {#h2-8-requirements}
 ------------------------------------
@@ -210,10 +230,12 @@ Clean separation of concerns. No magic you can't trace.
 🎯 Get Started {#h2-10-get-started}
 -----------------------------------
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">git clone https://github.com/ortus-boxlang/boxlang-spring-boot-starter.git
+```java
+git clone https://github.com/ortus-boxlang/boxlang-spring-boot-starter.git
 cd boxlang-spring-boot-starter
 ./gradlew :test-app: bootRun
-</pre>
+```
+
 
 Open **<http://localhost:8080>** and see BoxLang rendering live in your Spring Boot app.
 

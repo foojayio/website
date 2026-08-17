@@ -57,7 +57,8 @@ Path-based versioning is so ubiquitous that it's the approach most people think 
 
 Path-based versioning seems easy to implement with Apache APISIX:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml">upstreams:
+```yaml
+upstreams:
   - id: 1
     nodes:
       "upstream_1:8080": 1
@@ -69,11 +70,14 @@ routes:
   - uri: /v1/*
     upstream_id: 1
   - uri: /v2/*
-    upstream_id: 2</pre>
+    upstream_id: 2
+```
+
 
 The above setup doesn't work unfortunately: as it stands, we forward `/v1/*` to the upstream, whereas it probably can handle only `*` - the path behind the version prefix. We need to remove the version prefix before forwarding to the upstream:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml">routes:
+```yaml
+routes:
   - uri: /v1/*
     upstream_id: 1
     plugins:
@@ -83,13 +87,16 @@ The above setup doesn't work unfortunately: as it stands, we forward `/v1/*` to 
     upstream_id: 2
     plugins:
       proxy-rewrite:
-        regex_uri: [ "/v2(.*)", "$1" ]        #1</pre>
+        regex_uri: [ "/v2(.*)", "$1" ]        #1
+```
+
 
 1. Remove the version path prefix before forwarding
 
 Beware if you use other plugins, which may forward the request before the prefix is removed, *e.g.* , `proxy-mirror`. In this case, we must apply `proxy-rewrite` *before* `proxy-mirror`. Apache APISIX orders plugins by their default priority, so we need to increase the priority of the former:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml">routes:
+```yaml
+routes:
   - uri: /v1/*
     upstream_id: 1
     plugins:
@@ -98,7 +105,9 @@ Beware if you use other plugins, which may forward the request before the prefix
       proxy-mirror:                           #2
         host: "http://api.v2:8080"
         _meta:
-          priority: 1000                      #3</pre>
+          priority: 1000                      #3
+```
+
 
 1. `proxy-rewrite` default priority is `1008`
 2. `proxy-mirror` default priority is `1010`
@@ -109,7 +118,8 @@ Query-based versioning {#h2-2-query-based-versioning}
 
 Another way to version is to use query parameters, *e.g.* , `?version=v1`. While I've never seen it in the wild, it deserves a mention nonetheless. We can leverage the following Apache APISIX configuration:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml">routes:
+```yaml
+routes:
   - uri: /*                                   #1
     upstream_id: 1
     vars: [[ "arg_version", "==", "v1" ]]     #2
@@ -120,7 +130,9 @@ Another way to version is to use query parameters, *e.g.* , `?version=v1`. While
     priority: 3                               #1
   - uri: /*                                   #1-3
     upstream_id: 1
-    priority: 1</pre>
+    priority: 1
+```
+
 
 1. Both routes match the same URI, so we must evaluate them in order. That's the role of `priority`: Apache APISIX evaluates the highest priority first
 2. Evaluate the query parameter named `version`
@@ -131,9 +143,12 @@ Header-based versioning {#h2-3-header-based-versioning}
 
 The last alternative for versioning is to use HTTP headers. Here's a custom header:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="visualbasic">GET / HTTP1.1
+```vb
+GET / HTTP1.1
 
-Version: 1</pre>
+Version: 1
+```
+
 
 From an HTTP point of view, asking for a version via a header is the definition of *content negotiation* between the client and the server:
 > Content negotiation refers to mechanisms defined as a part of HTTP that make it possible to serve different versions of a document (or more generally, representations of a resource) at the same URI, so that user agents can specify which version fits their capabilities the best.
@@ -148,21 +163,28 @@ The agreed-upon content type format follows the pattern `application/vnd.aaa.bbb
 
 Hence, here's a possible request:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="visualbasic">GET / HTTP1.1
+```vb
+GET / HTTP1.1
 
-Accept: application/vnd.ch.frankel.myservice.v1+json</pre>
+Accept: application/vnd.ch.frankel.myservice.v1+json
+```
+
 
 Theoretically, the client can leverage the *quality* of `Accept` headers to communicate that it can handle different versions. The following request tells that the client prefers version 2 but can handle version 1 if the need be:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="visualbasic">GET / HTTP1.1
+```vb
+GET / HTTP1.1
 
-Accept: application/vnd.ch.frankel.myservice.v2+json;q=0.8, application/vnd.ch.frankel.myservice.v1+json;q=0.2</pre>
+Accept: application/vnd.ch.frankel.myservice.v2+json;q=0.8, application/vnd.ch.frankel.myservice.v1+json;q=0.2
+```
+
 
 In practice, quality requires a high level of maturity, both on the server-side - handling qualities and on the client-side - handling two versions simultaneously.
 
 Here's the APISIX configuration for quality-less content negotiation. It's very similar to the one above, the only difference being the Nginx variable in play, `http_X` instead of `arg_Y`.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="visualbasic">routes:
+```vb
+routes:
   - uri: /*
     upstream_id: 1
     vars: [[ "http_accept", "==", "vnd.ch.frankel.myservice.v1+json" ]]
@@ -173,7 +195,9 @@ Here's the APISIX configuration for quality-less content negotiation. It's very 
     priority: 3
   - uri: /*
     upstream_id: 1
-    priority: 1</pre>
+    priority: 1
+```
+
 
 Conclusion {#h2-4-conclusion}
 -----------------------------
@@ -192,6 +216,6 @@ The complete source code for this article can be found on [GitHub](https://githu
 * [Content Negotiation in RFC 9110](https://www.rfc-editor.org/rfc/rfc9110.html#name-content-negotiation)
 * [Routing in Apache APISIX](https://apisix.apache.org/docs/apisix/router-radixtree/)
 
-*** ** * ** ***
+
 
 *Originally published at [A Java Geek](https://blog.frankel.ch/api-versioning/) on November 5^th^, 2023*

@@ -43,7 +43,8 @@ Java Records is an excellent construct for achieving these kinds of data flow in
 
 To show the use of Java Records as data transfer and projection objects, let us consider the following non-trivial Order Jakarta Persistence entity.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@Entity
+```
+@Entity
 @Table(name = "OrderTable")
 public class Order {
   @Id
@@ -59,7 +60,7 @@ public class Order {
   @Embedded
   private Address billingAddress;
   @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
-  private List&lt;OrderItem&gt; orderItems = new ArrayList&lt;&gt;();
+  private List<OrderItem> orderItems = new ArrayList<>();
   @OneToOne(mappedBy = "order", cascade = CascadeType.ALL)
   private Payment payment;
   private BigDecimal subtotal;
@@ -68,38 +69,47 @@ public class Order {
   private BigDecimal discount;
   private BigDecimal total;
   private String notes;
-}</pre>
+}
+```
+
 
 For a given case, we want to return just a tiny subset of this entity. For a given date, we want to return all orders that were created before or after the given date, depending on which endpoint is called.
 
 Using Java Records, let us create an OrderSummary record with just the fields we need.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public record OrderSummary(String orderId, OrderStatus orderStatus, BigDecimal total, LocalDate orderDate) {
+```
+public record OrderSummary(String orderId, OrderStatus orderStatus, BigDecimal total, LocalDate orderDate) {
 
-}</pre>
+}
+```
+
 
 The OrderSummary has just the orderId, OrderStatus, order total and order date. This is the order summary we wish to return, based on which the client can call for details of each order using the returned orderId.
 
 With the record in place, let's create a query using the Jakarta Criteria API to return a list of OrderSummary for all orders based on a given OrderStatus.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public List&lt;OrderSummary&gt; getOrderSummariesByStatus(final OrderStatus orderStatus) {
+```
+public List<OrderSummary> getOrderSummariesByStatus(final OrderStatus orderStatus) {
 
  CriteriaBuilder cb = em.getCriteriaBuilder();
- CriteriaQuery&lt;OrderSummary&gt; cq = cb.createQuery(OrderSummary.class);
+ CriteriaQuery<OrderSummary> cq = cb.createQuery(OrderSummary.class);
 
- Root&lt;Order&gt; rootEntity = cq.from(Order.class);
+ Root<Order> rootEntity = cq.from(Order.class);
 
  cq.select(cb.construct(OrderSummary.class,rootEntity.get("orderId"), rootEntity.get("orderStatus"), rootEntity.get("total"), rootEntity.get("orderDate"))).where(cb.equal(rootEntity.get("orderStatus"), orderStatus));
 
  return em.createQuery(cq).getResultList();
 
-}</pre>
+}
+```
+
 
 The above method shows the use of the typesafe Criteria API to construct a projection of order summaries based on the returned set of queried data.
 
 With the above in place, the following sample REST resource uses it to directly return the summaries to the calling client.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@Path("/order")
+```
+@Path("/order")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 public class OrderResource {
@@ -107,10 +117,12 @@ public class OrderResource {
     private PersistenceService persistenceService;
     @GET
     @Path("{orderStatus}")
-    public List&lt;OrderSummary&gt; getOrdersByStatus(@PathParam("orderStatus") @NotNull OrderStatus orderStatus) {
+    public List<OrderSummary> getOrdersByStatus(@PathParam("orderStatus") @NotNull OrderStatus orderStatus) {
         return persistenceService.getOrderSummariesByStatus(orderStatus);
     }
-}</pre>
+}
+```
+
 
 The REST resource method calls the getOrderSummariesByStatus method on the PersistenceService. The implementation of this method was shown earlier, using the Criteria API to return projected order summaries.
 

@@ -64,9 +64,12 @@ Below, we will explain the six techniques we used to optimize the MongoDB Java d
 
 In [BSON](https://bsonspec.org/spec.html), array indexes are not merely integers; they are encoded as null-terminated strings, or CStrings. For example, the index 0 becomes the UTF-8 byte sequence for '0' (U+0030) followed by the UTF-8 byte sequence for NULL (U+0000). Encoding an array involves converting each numeric index to a string, encoding it into UTF-8 bytes, and then appending a null terminator:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">for (int i = 0; i &lt; arraySize; i++) {
-&nbsp;&nbsp;&nbsp;&nbsp;encodeCString(Integer.toString(i));;
-&nbsp;&nbsp;&nbsp;}</pre>
+```
+for (int i = 0; i < arraySize; i++) {
+    encodeCString(Integer.toString(i));;
+   }
+```
+
 
 <br />
 
@@ -74,23 +77,32 @@ Calling toString() and encoding the result for every index was clearly suboptima
 
 Our first improvement was to precompute and cache these immutable byte arrays for reuse in tight loops.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">private static final byte[][] PRE_ENCODED_INDICES = new byte[1000][];
+```
+private static final byte[][] PRE_ENCODED_INDICES = new byte[1000][];
 
-for (int i = 0; i &lt; 1000; i++) {
-&nbsp;&nbsp;&nbsp;&nbsp;PRE_ENCODED_INDICES[i] = (Integer.toString(i) + '\u0000').getBytes("UTF-8");
-}</pre>
+for (int i = 0; i < 1000; i++) {
+    PRE_ENCODED_INDICES[i] = (Integer.toString(i) + '\u0000').getBytes("UTF-8");
+}
+```
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">for (int i = 0; i &lt; arraySize; i++) {
-&nbsp;&nbsp;&nbsp;&nbsp;if (i &lt; PRE_ENCODED_INDICES.length) {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;buffer.put(PRE_ENCODED_INDICES[i]);
-&nbsp;&nbsp;&nbsp;&nbsp;} else {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;encodeCString(Integer.toString(i));
-&nbsp;&nbsp;&nbsp;&nbsp;}
-}</pre>
+
+```
+for (int i = 0; i < arraySize; i++) {
+    if (i < PRE_ENCODED_INDICES.length) {
+        buffer.put(PRE_ENCODED_INDICES[i]);
+    } else {
+        encodeCString(Integer.toString(i));
+    }
+}
+```
+
 
 This caching step was already effective. We also changed the cache layout from a jagged byte\[\]\[\] (that is, many small byte\[\] objects) to a flat byte\[\] representation.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">private static final byte[] PRE_ENCODED_INDICES;</pre>
+```
+private static final byte[] PRE_ENCODED_INDICES;
+```
+
 
 The flat byte\[\] layout remains the preferred choice because it uses fewer heap objects and scales more efficiently as the cache grows due to spatial locality. Our benchmarks showed no significant throughput difference compared to jagged byte\[\]\[\] structures in smaller caches; this parity stems from the HotSpot's [Thread-Local Allocation Buffer (TLAB)](https://shipilev.net/jvm/anatomy-quarks/4-tlab-allocation/) allocator, which places small rows close together in memory. Even with [garbage collection](https://en.wikipedia.org/wiki/Garbage_collection_(computer_science)) (GC) settings that forced frequent promotion into the old generation, we often observed the same effect. Because that behaviour is JVM- and GC-specific rather than guaranteed, we use the flat array as the more robust solution. To quantify the impact of caching itself, we adapted the "**Small Doc** **insertOne"** workload from our performance specification for array-heavy documents. Instead of the original shape, each document now contained A arrays of B length (that is, 100×100, and 100×1000), so the total number of encoded array indexes per document was A × B. The larger the arrays we use per document, the more significant the difference is, as the array encoding fraction in the "**insertOne"** operation is larger for larger arrays.
 
@@ -104,13 +116,16 @@ As Java developers, we write code with many abstractions, which makes the code e
 
 For example, in BSON, numbers must be encoded with [little-endian order](https://www.geeksforgeeks.org/dsa/little-and-big-endian-mystery/). In our original code, when encoding an int to BSON, we wrote each byte to a ByteBuffer separately, doing manual shifting and masking to produce little-endian byte order.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">write(value &gt;&gt; 0);
+```
+write(value >> 0);
 
-write(value &gt;&gt; 8);
+write(value >> 8);
 
-write(value &gt;&gt; 16);
+write(value >> 16);
 
-write(value &gt;&gt; 24);</pre>
+write(value >> 24);
+```
+
 
 However, this approach wasn't efficient. It required individual bounds checks and manual byte shuffling for every byte written, which showed up as a hotspot in profiles. We chose to adopt ByteBuffer's methods---such as putInt, putLong, and putDouble. This method collapses four separate byte operations into a single call (putInt) that handles byte order automatically.
 
@@ -131,10 +146,13 @@ After implementing our changes and testing them, we realized thata simple change
 
 As mentioned earlier, size checks on **ByteBuffer** in the critical path are expensive. However, we also performed similar checks on invariants in many other places**.**When encoding BSON, we retrieved the current buffer from a list by index on every write:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">ByteBuffer currentBuffer = bufferList.get(currentBufferIndex);
+```
+ByteBuffer currentBuffer = bufferList.get(currentBufferIndex);
 
 //other code
-currentBuffer.put(value);</pre>
+currentBuffer.put(value);
+```
+
 
 This get() call is fast, but performing it many times adds up---especially since each call includes range checks and method indirection (as the path is too deep; the JVM might not always inline it).
 
@@ -153,76 +171,85 @@ Every BSON document is structured as a list of triplets: *a type byte, a field n
 
 Our original implementation processed the buffer byte-by-byte, searching for the terminating zero:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">boolean checkNext = true;
+```
+boolean checkNext = true;
 
 while (checkNext) {
-&nbsp;&nbsp;&nbsp;&nbsp;if (!buffer.hasRemaining()) {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;throw new BsonSerializationException("Found a BSON string that is not null-terminated");
-&nbsp;&nbsp;&nbsp;&nbsp;}
-&nbsp;&nbsp;&nbsp;&nbsp;checkNext = buffer.get() != 0;
-}</pre>
+    if (!buffer.hasRemaining()) {
+        throw new BsonSerializationException("Found a BSON string that is not null-terminated");
+    }
+    checkNext = buffer.get() != 0;
+}
+```
+
 
 The primary issue with this approach is that it requires more comparisons for the same amount of work. For large documents, the process calls **buffer.get()** billions of times. Processing each byte individually requires a load, check, and conditional jump each time, which rapidly increases the total instruction count.
 
 To improve performance, we used a classic optimization technique: [**SWAR**](https://en.wikipedia.org/wiki/SWAR) (SIMD Within A Register Vectorization). Instead of checking each byte separately, SWAR lets us examine eight bytes simultaneously with a single 64-bit load and some bitwise operations. Here's what that looks like:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">long chunk = buffer.getLong(pos);
+```
+long chunk = buffer.getLong(pos);
 long mask = chunk - 0x0101010101010101L;
-mask &amp;= ~chunk;
-mask &amp;= 0x8080808080808080L;
+mask &= ~chunk;
+mask &= 0x8080808080808080L;
 if (mask != 0) {
-&nbsp;&nbsp;&nbsp;&nbsp;int offset = Long.numberOfTrailingZeros(mask) &gt;&gt;&gt; 3;
-&nbsp;&nbsp;&nbsp;&nbsp;return (pos - prevPos) + offset + 1;
-}</pre>
+    int offset = Long.numberOfTrailingZeros(mask) >>> 3;
+    return (pos - prevPos) + offset + 1;
+}
+```
+
 
 These 'magic numbers' aren't arbitrary: 0x0101010101010101L repeats the byte 1, while 0x8080808080808080L repeats the byte 128. By subtracting 1 from each byte, ANDing with the inverted value, and applying the high-bit mask, you can instantly detect if a zero exists. Then, simply **counting the trailing zeros** allows you to calculate the precise byte offset. This method is highly effective with CPU pipelining.  
 
 Let's take a simple example. Suppose we use an int (4 bytes) for simplicity. The value: 0x7a000aFF contains a zero byte. We will demonstrate how the SWAR technique detects it:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">Step&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; | Value (Hex) &nbsp; | Value (Binary, per byte)
+```
+Step                    | Value (Hex)   | Value (Binary, per byte)
 
 ------------------------|---------------|-----------------------------
 
-chunk &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; | 0x7a000aFF&nbsp; &nbsp; | 01111010 00000000 00001010 11111111
+chunk                   | 0x7a000aFF    | 01111010 00000000 00001010 11111111
 
-ones&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; | 0x01010101&nbsp; &nbsp; | 00000001 00000001 00000001 00000001
+ones                    | 0x01010101    | 00000001 00000001 00000001 00000001
 
-mask (high bit mask)&nbsp; &nbsp; | 0x80808080&nbsp; &nbsp; | 10000000 10000000 10000000 10000000
+mask (high bit mask)    | 0x80808080    | 10000000 10000000 10000000 10000000
 
 Subtraction:
 
-chunk&nbsp; &nbsp; &nbsp; = 01111010 00000000 00001010 11111111
+chunk      = 01111010 00000000 00001010 11111111
 
-- ones &nbsp; &nbsp; = 00000001 00000001 00000001 00000001
+- ones     = 00000001 00000001 00000001 00000001
 
 ------------------------------------------------
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;01111000 11111111 00001001 11111110
+            01111000 11111111 00001001 11111110
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;↑
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;underflow
+                          ↑
+                      underflow
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(0-1=FF)
+                       (0-1=FF)
 
 Bitwise AND with inverted chunk:
 
 prevResult = 01111001 11111111 00001001 11111110
 
-&amp; ~chunk &nbsp; = 10000101 11111111 11110101 00000000
+& ~chunk   = 10000101 11111111 11110101 00000000
 
 ------------------------------------------------
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;00000001 11111111 00000001 00000000
+            00000001 11111111 00000001 00000000
 
 Bitwise AND with mask (high bits):
 
 prevResult = 00000001 11111111 00000001 00000000
 
-&amp; mask &nbsp; &nbsp; = 10000000 10000000 10000000 10000000
+& mask     = 10000000 10000000 10000000 10000000
 
 ------------------------------------------------
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;00000000 10000000 00000000 00000000</pre>
+             00000000 10000000 00000000 00000000
+```
+
 
 The final result:
 
@@ -244,11 +271,14 @@ Earlier versions of the driver wrapped the underlying ByteBuffer in a read-only 
 
 By verifying that the buffer contents remain immutable during decoding, we were able to safely remove the restrictive read-only wrapper. This allows us to access the underlying array directly and decode the string without intermediate copies.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">if (buffer.isBackedByArray()) {
-&nbsp;&nbsp;&nbsp;&nbsp;int position = buffer.position();
-&nbsp;&nbsp;&nbsp;&nbsp;int arrayOffset = buffer.arrayOffset();
-&nbsp;&nbsp;&nbsp;&nbsp;return new String(array, arrayOffset + position, bsonStringSize - 1, StandardCharsets.UTF_8);
-}</pre>
+```
+if (buffer.isBackedByArray()) {
+    int position = buffer.position();
+    int arrayOffset = buffer.arrayOffset();
+    return new String(array, arrayOffset + position, bsonStringSize - 1, StandardCharsets.UTF_8);
+}
+```
+
 
 For direct buffers (which are not backed by a Java heap array), we cannot hand a backing array to the \`String\` constructor. We still need to copy bytes from the buffer, but we can avoid allocating a new \`byte\[\]\` for every string.  
 
@@ -272,40 +302,46 @@ But inside the loop, every character involved several inner checks:
 
 If the buffer was full, we'd fetch another one from a buffer pool (we pool ByteBuffers to reduce garbage collection (GC) pressure:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">for (int i = 0; i &lt; len;) {
-&nbsp;&nbsp;&nbsp;&nbsp;int c = Character.codePointAt(str, i);
-&nbsp;&nbsp;&nbsp;&nbsp;if (checkForNullCharacters &amp;&amp; c == 0x0) {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;throw new BsonSerializationException(...);
-&nbsp;&nbsp;&nbsp;&nbsp;}
+```
+for (int i = 0; i < len;) {
+    int c = Character.codePointAt(str, i);
+    if (checkForNullCharacters && c == 0x0) {
+        throw new BsonSerializationException(...);
+    }
 
-&nbsp;&nbsp;&nbsp;&nbsp;if (c &lt; 0x80) {
-&nbsp; &nbsp; &nbsp; &nbsp; //check if ByteBuffer has capacity and write one byt
-&nbsp; &nbsp; } else if (c &lt; 0x800) {
-&nbsp; &nbsp; &nbsp; &nbsp; //check if ByteBuffer has capacity and write two bytes
-&nbsp;&nbsp;&nbsp;&nbsp;} else if (c &lt; 0x10000) {
-&nbsp; &nbsp; &nbsp; &nbsp;//check if ByteBuffer has capacity and write three bytes
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;total += 3;
-&nbsp;&nbsp;&nbsp;&nbsp;} else 
-&nbsp; &nbsp; &nbsp; //check if ByteBuffer has capacity and write fourfoure bytes
-&nbsp;&nbsp;}
-&nbsp;&nbsp;i += Character.charCount(c);
-}</pre>
+    if (c < 0x80) {
+        //check if ByteBuffer has capacity and write one byt
+    } else if (c < 0x800) {
+        //check if ByteBuffer has capacity and write two bytes
+    } else if (c < 0x10000) {
+       //check if ByteBuffer has capacity and write three bytes
+       total += 3;
+    } else 
+      //check if ByteBuffer has capacity and write fourfoure bytes
+  }
+  i += Character.charCount(c);
+}
+```
+
 
 In practice, modern JVMs can unroll tight, counted loops, reducing back branches and enhancing instruction pipeline efficiency under suitable conditions. However, when examining the assembly generated by the JIT for this method, we observed that loop unrolling did ***not*** occur in this instance. This underscores the importance of keeping the hot path as straight as possible, minimizing branches, checks, and method indirection, especially for large workloads.
 
 Our first optimization was based on the hypothesis that most workloads mainly use ASCII characters. Using this assumption, we developed a new loop that was much more JIT-friendly.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">for (; sp &lt; str.length(); sp++, pos++) {
-&nbsp;&nbsp;&nbsp;&nbsp;char c = str.charAt(sp);
-&nbsp;&nbsp;&nbsp;&nbsp;if (checkNullTermination &amp;&amp; c == 0) {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//throw exception
-&nbsp;&nbsp;&nbsp;&nbsp;}
+```
+for (; sp < str.length(); sp++, pos++) {
+    char c = str.charAt(sp);
+    if (checkNullTermination && c == 0) {
+        //throw exception
+    }
 
-&nbsp;&nbsp;&nbsp;&nbsp;if (c &gt;= 0x80) {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;break;
-&nbsp;&nbsp;&nbsp;&nbsp;}
-&nbsp;&nbsp;&nbsp;&nbsp;dst[pos] = (byte) c;
-}</pre>
+    if (c >= 0x80) {
+        break;
+    }
+    dst[pos] = (byte) c;
+}
+```
+
 
 Before entering the loop, we verified that String.length() \< ByteBuffer's capacity and got the underlying array from the ByteBuffer (*our* *ByteBuffer* *is a wrapper over the JDK or Netty buffers*)
 
@@ -317,33 +353,36 @@ With this setup, the JIT usually unrolls the loop body, replacing it with severa
 
 loop body:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">; ----- char 0: value[sp], dst[pos] -----
+```
+; ----- char 0: value[sp], dst[pos] -----
 
-&nbsp;&nbsp;&nbsp;&nbsp;ldrsb &nbsp; w5,&nbsp; [x12,#16]&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ; load value[sp]
+    ldrsb   w5,  [x12,#16]          ; load value[sp]
 
-&nbsp;&nbsp;&nbsp;&nbsp;and &nbsp; &nbsp; w11, w5, #0xff&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ; w11 = (unsigned) c0
+    and     w11, w5, #0xff          ; w11 = (unsigned) c0
 
-&nbsp;&nbsp;&nbsp;&nbsp;cbz &nbsp; &nbsp; w11, null_trap&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ; if (c0 == 0) -&gt; slow path (null terminator check)
+    cbz     w11, null_trap          ; if (c0 == 0) -> slow path (null terminator check)
 
-&nbsp;&nbsp;&nbsp;&nbsp;cmp &nbsp; &nbsp; w11, #0x80&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ; if (c0 &gt;= 0x80) -&gt; slow path (non-ASCII)
+    cmp     w11, #0x80              ; if (c0 >= 0x80) -> slow path (non-ASCII)
 
-&nbsp;&nbsp;&nbsp;&nbsp;b.ge&nbsp; &nbsp; non_ascii1_path
+    b.ge    non_ascii1_path
 
-&nbsp;&nbsp;&nbsp;&nbsp;strb&nbsp; &nbsp; w5,&nbsp; [x10,#16]&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ; dst[pos] = (byte)c0
+    strb    w5,  [x10,#16]          ; dst[pos] = (byte)c0
 
-&nbsp;&nbsp;&nbsp;&nbsp;; ----- char 1: value[sp+1], dst[pos+1] -----
+    ; ----- char 1: value[sp+1], dst[pos+1] -----
 
-&nbsp;&nbsp;&nbsp;&nbsp;ldrsb &nbsp; w4,&nbsp; [x12,#17]&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ; load value[sp+1]
+    ldrsb   w4,  [x12,#17]          ; load value[sp+1]
 
-&nbsp;&nbsp;&nbsp;&nbsp;and &nbsp; &nbsp; w11, w4, #0xff&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ; w11 = (unsigned) c1
+    and     w11, w4, #0xff          ; w11 = (unsigned) c1
 
-&nbsp;&nbsp;&nbsp;&nbsp;cbz &nbsp; &nbsp; w11, null_trap&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ; if (c1 == 0) -&gt; slow path (null terminator check)
+    cbz     w11, null_trap          ; if (c1 == 0) -> slow path (null terminator check)
 
-&nbsp;&nbsp;&nbsp;&nbsp;cmp &nbsp; &nbsp; w11, #0x80&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ; if (c1 &gt;= 0x80) -&gt; slow path (non-ASCII)
+    cmp     w11, #0x80              ; if (c1 >= 0x80) -> slow path (non-ASCII)
 
-&nbsp;&nbsp;&nbsp;&nbsp;b.ge&nbsp; &nbsp; non_ascii1_path
+    b.ge    non_ascii1_path
 
-&nbsp;&nbsp;&nbsp;&nbsp;strb&nbsp; &nbsp; w4,&nbsp; [x10,#17]&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ; dst[pos+1] = (byte)c1</pre>
+    strb    w4,  [x10,#17]          ; dst[pos+1] = (byte)c1
+```
+
 
 What we did:
 

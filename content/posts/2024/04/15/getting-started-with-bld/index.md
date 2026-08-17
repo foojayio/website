@@ -47,7 +47,10 @@ Installation {#h2-2-installation}
 
 The easiest way to install `bld` is to use [`SDKMAN!`](https://sdkman.io/).
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">sdk install bld</pre>
+```
+sdk install bld
+```
+
 
 Other installation methods including `brew`, `jbang` are [documented in the bld repo](Installation).
 
@@ -58,22 +61,30 @@ Make a Project {#h2-3-make-a-project}
 
 If you installed `bld` with your package manager, then you should run:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">bld create
-</pre>
+```
+bld create
+```
+
 
 After which you will be prompted for the kind of project you want to create.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">Please enter a number for the project type:
+```
+Please enter a number for the project type:
   1: base   (Java baseline project)
   2: app    (Java application project)
   3: lib    (Java library project)
-  4: rife2  (RIFE2 web application)</pre>
+  4: rife2  (RIFE2 web application)
+```
+
 
 For the purposes of following along, select an `app` project.
 
 If you downloaded `bld` as a jar from the releases page, then you should instead run:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">java -jar bld-1.9.0.jar create</pre>
+```
+java -jar bld-1.9.0.jar create
+```
+
 
 > **NOTE:** By the time you read this it is likely that the latest version is not `1.9.0`,  
 >
@@ -81,14 +92,17 @@ If you downloaded `bld` as a jar from the releases page, then you should instead
 
 After this you will be prompted to enter a package name.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">bld create
+```
+bld create
 Please enter a number for the project type:
   1: base   (Java baseline project)
   2: app    (Java application project)
   3: lib    (Java library project)
   4: rife2  (RIFE2 web application)
 2
-Please enter a package name (for instance: com.example):</pre>
+Please enter a package name (for instance: com.example):
+```
+
 
 If you aren't familiar with the Java ecosystem, generally projects put their code in a package hierarchy.
 
@@ -96,7 +110,8 @@ This serves an important social purpose, but if you don't know what to put you c
 
 Once you've entered that, you will be asked for a project name.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">Please enter a number for the project type:
+```
+Please enter a number for the project type:
   1: base   (Java baseline project)
   2: app    (Java application project)
   3: lib    (Java library project)
@@ -104,7 +119,9 @@ Once you've entered that, you will be asked for a project name.
 2
 Please enter a package name (for instance: com.example):
 com.example
-Please enter a project name (for instance: myapp):</pre>
+Please enter a project name (for instance: myapp):
+```
+
 
 Choose whatever you want for this. If you are just following along, use `myapp`.
 
@@ -113,7 +130,8 @@ Working with a `bld` Project {#h2-4-working-with-a-bld-project}
 
 Once you've run the commands above, a folder should be generated which is structured like the following.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">.
+```
+.
 ├── bld
 ├── bld.bat
 ├── lib
@@ -160,7 +178,9 @@ Once you've run the commands above, a folder should be generated which is struct
         │   └── com
         │       └── example
         │           └── MyappTest.java
-        └── resources</pre>
+        └── resources
+```
+
 
 > **NOTE:** Just like the version number of `bld` will evolve, so will the version  
 >
@@ -168,7 +188,8 @@ Once you've run the commands above, a folder should be generated which is struct
 
 In this case `src/main/java/com/example/MyappMain.java` should contain something like the following.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">package com.example;
+```
+package com.example;
 
 public class MyappMain {
     public String getMessage() {
@@ -178,11 +199,14 @@ public class MyappMain {
     public static void main(String[] args) {
         System.out.println(new MyappMain().getMessage());
     }
-}</pre>
+}
+```
+
 
 And `src/bld/java/com/example/MyappBuild.java` should look like this.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">package com.example;
+```
+package com.example;
 
 import rife.bld.Project;
 
@@ -208,7 +232,9 @@ public class MyappBuild extends Project {
     public static void main(String[] args) {
         new MyappBuild().start(args);
     }
-}</pre>
+}
+```
+
 
 > **NOTE:** `bld` supports different ways to describe dependencies, dependency("org.junit.jupiter", "junit-jupiter", version(5,10,2)) can for instance also be written as dependency("org.junit.jupiter:junit-jupiter:5.10.2"). Which format you use, is a matter of personal taste.
 
@@ -218,7 +244,8 @@ From this point on, you should use the generated `bld` and `bld.bat` (for Window
 
 Running `./bld` or `bld.bat` will show you the commands that are available to you.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">Welcome to bld 1.9.0.
+```
+Welcome to bld 1.9.0.
 
 The bld CLI provides its features through a series of commands that
 perform specific tasks. The help command provides more information about
@@ -248,21 +275,29 @@ The following commands are supported.
   version          Outputs the version of the build system
 
   -?, -h, --help    Shows this help message
-  -D&lt;name&gt;=&lt;value&gt;  Set a JVM system property
-  -s, --stacktrace  Print out the stacktrace for exceptions</pre>
+  -D<name>=<value>  Set a JVM system property
+  -s, --stacktrace  Print out the stacktrace for exceptions
+```
+
 
 The most immediately useful commands will be `./bld compile` and `./bld run`.
 
 You need to run `./bld compile` before `./bld run`.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">./bld compile
+```
+./bld compile
 Compilation finished successfully.
 ./bld run
-Hello World!</pre>
+Hello World!
+```
+
 
 Of course, commands can also be combined.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">./bld compile run</pre>
+```
+./bld compile run
+```
+
 
 Adding a Dependency {#h2-5-adding-a-dependency}
 -----------------------------------------------
@@ -272,12 +307,16 @@ To add a dependency to your project, you need to edit your build file. If you ha
 
 The line you need to add will look like:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">scope(compile)
-    .include(dependency("com.fasterxml.jackson.core", "jackson-databind", version(2,16,0)))</pre>
+```
+scope(compile)
+    .include(dependency("com.fasterxml.jackson.core", "jackson-databind", version(2,16,0)))
+```
+
 
 If you don't have a familiarity with the terminology of maven scopes, you can safely use `scope(compile)` for most things without issue.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">package com.example;
+```
+package com.example;
 
 import rife.bld.Project;
 
@@ -305,7 +344,9 @@ public class MyappBuild extends Project {
     public static void main(String[] args) {
         new MyappBuild().start(args);
     }
-}</pre>
+}
+```
+
 
 Then you need to run `./bld download` to get any new dependencies. This is similar to the JavaScript  
 
@@ -318,7 +359,8 @@ Writing a Test {#h2-6-writing-a-test}
 
 An example test should have been generated under `src/test/`:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">package com.example;
+```
+package com.example;
 
 import org.junit.jupiter.api.Test;
 
@@ -329,11 +371,14 @@ public class MyappTest {
     void verifyHello() {
         assertEquals("Hello World!", new MyappMain().getMessage());
     }
-}</pre>
+}
+```
+
 
 [`JUnit`](https://junit.org/junit5/) is included by default, and you can run any tests you write with `./bld test`.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">./bld test
+```
+./bld test
 Test plan execution started. Number of static tests: 1
 ╷
 ├─ JUnit Jupiter
@@ -361,14 +406,17 @@ Test run finished after 124 ms
 [         1 tests started         ]
 [         0 tests aborted         ]
 [         1 tests successful      ]
-[         0 tests failed          ]</pre>
+[         0 tests failed          ]
+```
+
 
 Writing Custom Commands {#h2-7-writing-custom-commands}
 -------------------------------------------------------
 
 If you have any custom logic you want to run, you need to add a method to the build class and annotate it with `@BuildCommand`.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">package com.example;
+```
+package com.example;
 
 import rife.bld.BuildCommand;
 import rife.bld.Project;
@@ -402,11 +450,14 @@ public class MyappBuild extends Project {
     public void hello() {
         System.out.println("Hello");
     }
-}</pre>
+}
+```
+
 
 Your new command should show up when you run `./bld`.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">./bld
+```
+./bld
 Welcome to bld 1.9.0.
 
 The bld CLI provides its features through a series of commands that
@@ -419,12 +470,17 @@ The following commands are supported.
 
   ...
   hello            Says Hello
-  ...</pre>
+  ...
+```
+
 
 And you can run it with `./bld methodName`:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">./bld hello
-Hello</pre>
+```
+./bld hello
+Hello
+```
+
 
 Spring Boot Integration {#h2-8-spring-boot-integration}
 -------------------------------------------------------
@@ -435,21 +491,29 @@ While you don't need to do anything special to use Spring with `bld`, there is a
 
 To use it, edit the `lib/bld/bld-wrapper.properties` file and add this line:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">bld.extensions=com.uwyn.rife2:bld-spring-boot:0.9.3
-</pre>
+```
+bld.extensions=com.uwyn.rife2:bld-spring-boot:0.9.3
+```
+
 
 Then add a task to your project like that uses the classes the extension gives you.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">@BuildCommand(summary = "Creates an executable JAR for the project")
+```
+@BuildCommand(summary = "Creates an executable JAR for the project")
 public void bootjar() throws Exception {
     new BootJarOperation()
             .fromProject(this)
             .execute();
-}</pre>
+}
+```
+
 
 And you can use it like so.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">./bld compile bootjar</pre>
+```
+./bld compile bootjar
+```
+
 
 The [repository for the extension](https://github.com/rife2/bld-spring-boot) has further code samples as well as links to example projects.
 

@@ -42,12 +42,13 @@ The bigger structural change this week is that three new APIs that used to live 
 
 Touch ID, Face ID, and Android `BiometricPrompt` are now in `com.codename1.security.Biometrics`. The API uses simpler semantics compared to the original fingerprint API (that predated face scanning but didn't rename the API). You can use `canAuthenticate()` to gate access, then an `authenticate(...)` call that returns an `AsyncResource`, typed `BiometricError` codes on the failure path.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">Biometrics b = Biometrics.getInstance();
+```
+Biometrics b = Biometrics.getInstance();
 if (!b.canAuthenticate()) {
   // No hardware, or no enrolled biometrics
   return;
 }
-b.authenticate("Unlock your account").onResult((success, err) -&gt; {
+b.authenticate("Unlock your account").onResult((success, err) -> {
   if (err != null) {
     BiometricError code = ((BiometricException) err).getError();
     switch (code) {
@@ -59,7 +60,9 @@ b.authenticate("Unlock your account").onResult((success, err) -&gt; {
   } else {
     unlock();
   }
-});</pre>
+});
+```
+
 
 On iOS this wraps `LocalAuthentication.framework`; on Android API 29+ it uses `BiometricPrompt` and on API 23-28 it keeps the legacy `FingerprintManager` path through a reflection adapter. The build servers and local build handle permissions and framework linking seamlessly so you don't need to do anything and don't need to add a build hint. It **just works**.
 
@@ -73,45 +76,60 @@ Routine cryptography (hashing, MAC, symmetric and asymmetric encryption, signing
 
 A typical AES-GCM round-trip:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">SecretKey key = KeyGenerator.aes(256);
+```
+SecretKey key = KeyGenerator.aes(256);
 byte[] nonce = SecureRandom.bytes(12);
 byte[] enc = Cipher.aesEncrypt(Cipher.AES_GCM, key, nonce, null,
 "secret".getBytes("UTF-8"));
-byte[] dec = Cipher.aesDecrypt(Cipher.AES_GCM, key, nonce, null, enc);</pre>
+byte[] dec = Cipher.aesDecrypt(Cipher.AES_GCM, key, nonce, null, enc);
+```
+
 
 A SHA-256 hash:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">byte[] digest = Hash.sha256("hello".getBytes("UTF-8"));
-String hex = Hash.toHex(digest);</pre>
+```
+byte[] digest = Hash.sha256("hello".getBytes("UTF-8"));
+String hex = Hash.toHex(digest);
+```
+
 
 A signed JWT:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">byte[] hsKey = KeyGenerator.hmac(256);
+```
+byte[] hsKey = KeyGenerator.hmac(256);
 String token = Jwt.signHs256(hsKey)
 .claim("sub", "user-42")
 .claim("exp", System.currentTimeMillis() / 1000 + 3600)
 .compact();
 
 Jwt parsed = Jwt.verifyHs256(token, hsKey); // throws on bad signature
-String sub = parsed.getClaim("sub").asString();</pre>
+String sub = parsed.getClaim("sub").asString();
+```
+
 
 And a TOTP that lines up with Google Authenticator / Authy:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">byte[] sharedSecret = Base32.decode("JBSWY3DPEHPK3PXP");
+```
+byte[] sharedSecret = Base32.decode("JBSWY3DPEHPK3PXP");
 String code = Otp.totp(sharedSecret); // current 30s window
-boolean ok = Otp.verifyTotp(code, sharedSecret, /* drift */ 1);</pre>
+boolean ok = Otp.verifyTotp(code, sharedSecret, /* drift */ 1);
+```
+
 
 The PR also ships a matching UI widget --- `com.codename1.components.OtpField` --- a segmented, auto-advancing OTP input with paste distribution and a completion listener, so the "enter your 6-digit code" screen is now half a dozen lines of glue:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">OtpField otp = new OtpField(6);
-otp.setCompleteListener(code -&gt; {
+```
+OtpField otp = new OtpField(6);
+otp.setCompleteListener(code -> {
   if (Otp.verifyTotp(code, sharedSecret, 1)) {
     proceed();
   } else {
     otp.setError("Wrong code");
   }
 });
-form.add(otp);</pre>
+form.add(otp);
+```
+
 
 We deliberately chose conservative defaults: `AES/GCM/NoPadding` for new authenticated AES, `RSA/ECB/OAEPWithSHA-256AndMGF1Padding` for new RSA, constant-time HMAC compare, a bias-free `intBelow(n)` on `SecureRandom`. The MD5 / SHA-1 / PKCS#1 / ECB transformations are still there because real apps still need to interoperate with legacy systems, but the documentation calls them out as interop-only.
 
@@ -121,48 +139,57 @@ We deliberately chose conservative defaults: `AES/GCM/NoPadding` for new authent
 
 Reading an NDEF URI tag --- the "tap a poster" pattern:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">Nfc nfc = Nfc.getInstance();
+```
+Nfc nfc = Nfc.getInstance();
 if (!nfc.canRead()) return; // no NFC hardware / NFC disabled
 
 nfc.readTag(new NfcReadOptions()
   .setNdefOnly(true)
   .setAlertMessage("Hold near the poster"))
-  .onResult((tag, err) -&gt; {
+  .onResult((tag, err) -> {
     if (err != null) return;
-    tag.readNdef().onResult((msg, e) -&gt; {
+    tag.readNdef().onResult((msg, e) -> {
       if (e == null) {
         String url = msg.getFirstRecord().getUriPayload();
         Display.getInstance().execute(url);
       }
     });
-  });</pre>
+  });
+```
+
 
 Exchanging APDUs with an EMV / transit card:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">nfc.readTag(new NfcReadOptions()
+```
+nfc.readTag(new NfcReadOptions()
   .setTechFilter(TagType.ISO_DEP)
   .setIsoSelectAids(myAid))
-  .onResult((tag, err) -&gt; {
+  .onResult((tag, err) -> {
     if (err != null) return;
     IsoDep iso = tag.getIsoDep();
     if (iso == null) return;
-    iso.transceive(myCommandApdu).onResult((resp, e) -&gt; {
+    iso.transceive(myCommandApdu).onResult((resp, e) -> {
       if (ApduResponse.isSuccess(resp)) {
         /* parse response */
       }
     });
-  });</pre>
+  });
+```
+
 
 Acting as a contactless card via Host Card Emulation:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">class LoyaltyCard extends HostCardEmulationService {
+```
+class LoyaltyCard extends HostCardEmulationService {
   public String[] getAids() { return new String[] { "F0010203040506" }; }
   public byte[] processCommand(byte[] apdu) {
     return ApduResponse.withStatus(loyaltyId.getBytes("UTF-8"),
       ApduResponse.swSuccess());
   }
 }
-Nfc.getInstance().registerHostCardEmulationService(new LoyaltyCard());</pre>
+Nfc.getInstance().registerHostCardEmulationService(new LoyaltyCard());
+```
+
 
 Android uses `NfcAdapter` foreground dispatch / reader-mode and `HostApduService`; both manifest entries are auto-injected by the Maven plugin and the build daemon when this class is referenced. iOS uses `Core NFC` (`NFCNDEFReaderSession`, `NFCTagReaderSession`) for reading and `CardSession` (iOS 17.4+, EU only) for HCE; the `NFCReaderUsageDescription` plist entry and entitlements are auto-injected by the build server and local builds (again seamless is the key). The Java SE simulator has a **Simulate -\> NFC** menu (I feel like I'm repeating myself), that lets you tap a virtual tag, edit its NDEF payload, and fire APDUs at any registered `HostCardEmulationService`, so you can sit at your desk and drive every code path without a card or a reader.
 
@@ -175,14 +202,17 @@ cn1libs can now own simulator menus --- and that changes Bluetooth {#h2-5-cn1lib
 
 A skeletal hook file:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">name=Bluetooth
+```
+name=Bluetooth
 namespace=bluetooth
 
 item1=com.example.bt.sim.Hooks#toggleAdapter
 label1=Toggle adapter on/off
 
 item2=com.example.bt.sim.Hooks#addDemoPeripheral
-label2=Add demo peripheral</pre>
+label2=Add demo peripheral
+```
+
 
 Drop that file inside a cn1lib's `javase/` module and the next time the simulator starts you get a **Bluetooth** menu with two items in it, each running on the CN1 EDT, with `Toggle adapter on/off` and `Add demo peripheral` doing exactly what their names say. Each entry is also callable cross-platform via `CN.execute("bluetooth:item1")`, which is what makes the same hook usable from a screenshot test or a scripted demo. Items without a `labelN` are API-only --- registered with the executor but hidden from the menu --- which is what test suites use to prime scripted state.
 
@@ -198,14 +228,17 @@ To be clear, the simulator now connects to the hardware bluetooth on your device
 
 The cn1lib's `simulator-hooks.properties` ships with seven hooks that put the simulator in the simulator's menu bar:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">Bluetooth
+```
+Bluetooth
 ├── Toggle adapter on/off
 ├── Add demo peripheral
 ├── Disconnect all peripherals
 ├── Push demo notification
 ├── Clear peripherals
 ├── Switch backend → native BLE (real hardware)
-└── Switch backend → simulator</pre>
+└── Switch backend → simulator
+```
+
 
 So a typical Bluetooth iteration loop looks like this:
 
@@ -276,7 +309,8 @@ The CSS compiler used to reject anything past two-stop linear gradients at the f
 
 This PR moves the full CSS gradient range and `filter: blur(...)` into native primitives end-to-end. You get multi-stop linear and radial gradients, conic gradients, repeating linear and repeating radial, the full shape and extent grammar, and Gaussian blur on both `filter` and `backdrop-filter`. Drawn on the GPU. Composable with everything else.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">.HeroCard {
+```
+.HeroCard {
   background: conic-gradient(from 30deg, #ff7a00, #ff2d95, #6750a4, #ff7a00);
   border-radius: 24px;
   filter: blur(0.5px);
@@ -286,7 +320,9 @@ This PR moves the full CSS gradient range and `filter: blur(...)` into native pr
   background: rgba(255, 255, 255, 0.18);
   backdrop-filter: blur(18px);
   border-radius: 28px;
-}</pre>
+}
+```
+
 
 The above is the kind of thing you would write today on a modern web stack. Codename One now compiles it down to the Metal / GL / Android `Canvas` / Swing path on the platform you are targeting, without an offscreen bitmap in the middle. Combined with the iOS Modern and Material 3 native themes we shipped three weeks ago and the accent palette overrides we shipped last week, you can put together a genuinely modern UI in pure CSS now.
 

@@ -86,16 +86,22 @@ To initiate a metric for the quarkus framework it's required to import the follo
 
 When the library is present on the class-path or the module-path it allows to instantiate a bean which holds the reference to the registry, "***PrometheusMeterRegistry***". Such a registry represents a singleton (Example 1.) in the running JVM process . It allows the creation of counters (Example 2.)
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public class PrometheusMeterRegistryProducer {
- &nbsp;&nbsp;@Produces
- &nbsp;&nbsp;@Singleton
- &nbsp;&nbsp;@AlternativePriority(Interceptor.Priority.APPLICATION + 100)
-&nbsp;&nbsp;&nbsp;public PrometheusMeterRegistry</pre>
+```java
+public class PrometheusMeterRegistryProducer {
+   @Produces
+   @Singleton
+   @AlternativePriority(Interceptor.Priority.APPLICATION + 100)
+   public PrometheusMeterRegistry
+```
+
 
 **Example** 1. Singleton bean instantiation
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">MainController(final PrometheusMeterRegistry registry, final HelloService helloService) {
-   this.registry = registry;</pre>
+```java
+MainController(final PrometheusMeterRegistry registry, final HelloService helloService) {
+   this.registry = registry;
+```
+
 
 **Example 2.** Injecting "PrometheusMeterRegistry" bean and creating counters
 
@@ -107,9 +113,12 @@ The application requires the following libraries: "***io.micrometer:micrometer-r
 
 Similar to the previous example the "***PrometheusMeterRegistry***" is instantiated as a singleton bean using the auto configuration functionality (Example 3.).
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@Autowired
+```java
+@Autowired
 public MainController(PrometheusMeterRegistry registry, HelloService helloService) {
-   this.registry = registry;</pre>
+   this.registry = registry;
+```
+
 
 **Example 3** . Injecting the "***PrometheusMeterRegistry"*** as a Bean
 
@@ -119,8 +128,11 @@ The last micronaut example follows a similar process as the quarkus example. The
 
 Next to that the Micronaut framework requires to have the following libraries on its class or module path: "***io.micronaut.micrometer:micronaut-micrometer-core"*** and "***io.micronaut.micrometer:micronaut-micrometer-registry-prometheus"***.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public MainController(PrometheusMeterRegistry registry, HelloService helloService) {
-   this.registry = registry;</pre>
+```java
+public MainController(PrometheusMeterRegistry registry, HelloService helloService) {
+   this.registry = registry;
+```
+
 
 **Example 4.** Injecting "***PrometheusMeterRegistry*** " to the "***MainController***"
 
@@ -141,7 +153,8 @@ To enable a metrics endpoint it is required to add following libraries into the 
 
 This should ensure there's only one instance presence in the KTor app context. The component "MetricsService" holds the reference to the "***PrometheusMeterRegistry***" (Example 6.)
 
-<pre class="EnlighterJSRAW" data-enlighter-language="kotlin" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">fun Application.module(testing: Boolean = false) {
+```kotlin
+fun Application.module(testing: Boolean = false) {
   install(Koin) {
    modules(
        listOf(
@@ -149,12 +162,17 @@ This should ensure there's only one instance presence in the KTor app context. T
                single { MetricsService() }
            }
        )
-   )</pre>
+   )
+```
+
 
 **Example 5** . installation and initiation the "***MetricService***" component
 
-<pre class="EnlighterJSRAW" data-enlighter-language="kotlin" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">val registry = PrometheusMeterRegistry(PrometheusConfig.DEFAULT)
-.apply{config().commonTags("application", APP_NAME)}</pre>
+```kotlin
+val registry = PrometheusMeterRegistry(PrometheusConfig.DEFAULT)
+.apply{config().commonTags("application", APP_NAME)}
+```
+
 
 **Example 6.** Initiation of the Prometheus registry and providing a reference
 
@@ -164,10 +182,13 @@ The Kotlin version of the Quarkus framework requires on the class/module path th
 
 After that it's possible, for example, to inject through the constructor the already instantiated "***PrometheusMeterRegistry***" bean (Example 7). Just as a side note, the prometheus bean is a singleton and refers to the Java implementation. This causes no issues as the compiled byte-code is compatible.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@Path("/")
+```java
+@Path("/")
 class MainController @Inject constructor(
        private val registry: PrometheusMeterRegistry,
-       private val halloService: HalloService)</pre>
+       private val halloService: HalloService)
+```
+
 
 **Example 7.** Prometheus registry constructor injection
 
@@ -175,8 +196,11 @@ class MainController @Inject constructor(
 
 Similar to the spring-boot java version it's required to import both libraries: **"io.micrometer:micrometer-core"** and **"io.micrometer:micrometer-registry-prometheus"**. By having the libraries imported the registry is automatically initiated through the AutoConfiguration internal process (Example 8.)
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@RestController("/")
-class MainController(private val helloService: HelloService, private val registry: PrometheusMeterRegistry) {</pre>
+```java
+@RestController("/")
+class MainController(private val helloService: HelloService, private val registry: PrometheusMeterRegistry) {
+```
+
 
 **Example 8.** Injecting "***PrometheusMeterRegistry"*** in the controller constructor
 
@@ -184,9 +208,11 @@ class MainController(private val helloService: HelloService, private val registr
 
 The initiation of the "***PrometheusMeterRegistry*** " does not differ too much from the previous example. Similarly as in the Java version it's required tomport the two libraries "**io.micronaut.micrometer:micronaut-micrometer-core** " and "**io.micronaut.micrometer:micronaut-micrometer-registry-prometheus** ". The "***PrometheusMeterRegistry***" bean is initiated at runtime as the singleton (see Example 9).
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@Controller
+```java
+@Controller
 class MainController(private val registry: PrometheusMeterRegistry, private val helloService: HelloService) {
-</pre>
+```
+
 
 **Example 9**. Injecting registry to the main controller
 
@@ -210,10 +236,13 @@ Each application exposes the following endpoint (Tab.1). Some of them provide a 
 
 Each newly created counter contains appropriate tags. Such tags help in identification during the creation of the Grafana dashboard, they also help to customize and aggregate results. Each application contains two counters with similar core tags (Tab 1) but there are additional tags added by the application to distinguish the belongingness (Example 10.)
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">hello_counter_total{application="quarkus-kt",} 1.0
+```
+hello_counter_total{application="quarkus-kt",} 1.0
 hello_counter_total{application="spring-boot-kt",} 1.0
 name_counter_total{application="spring-boot-kt",name="magic",} 1.0
-name_counter_total{application="micronaut",name="magic",} 1.0</pre>
+name_counter_total{application="micronaut",name="magic",} 1.0
+```
+
 
 **Example 10.** Example of the metrics output for the custom counters
 
@@ -221,15 +250,21 @@ name_counter_total{application="micronaut",name="magic",} 1.0</pre>
 
 All Java frameworks use almost similar implementations that differ only by the framework tag name. The name counter is partially provided by the builder pattern where the tag is added when the "name" variable is known (Example 11). It means when the request arrives the application (Example 12).
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">this.helloCounter = registry.counter("hello-counter", "application", "&lt;FRAMEWORK_NAME&gt;");
+```java
+this.helloCounter = registry.counter("hello-counter", "application", "<FRAMEWORK_NAME>");
 
-this.nameCounterBuilder = Counter.builder("name-counter").tag("application", "&lt;FRAMEWORK_NAME&gt;");</pre>
+this.nameCounterBuilder = Counter.builder("name-counter").tag("application", "<FRAMEWORK_NAME>");
+```
+
 
 **Example 11**. Counters initiation
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">private Counter getNameCounter(String name) {
-   return counters.computeIfAbsent(name, (k) -&gt; nameCounterBuilder.tag("name", k).register(registry));
-}</pre>
+```java
+private Counter getNameCounter(String name) {
+   return counters.computeIfAbsent(name, (k) -> nameCounterBuilder.tag("name", k).register(registry));
+}
+```
+
 
 **Example 12.** Initiate a name counter on demand
 
@@ -237,9 +272,12 @@ this.nameCounterBuilder = Counter.builder("name-counter").tag("application", "&l
 
 Kotlin counters follow exactly the similar structure as their Java brothers (see, Example 13).
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">private val helloCounter = registry.counter("hello-counter", "application", "spring-boot-kt")
+```java
+private val helloCounter = registry.counter("hello-counter", "application", "spring-boot-kt")
 counters.getOrPut(name) {
-   nameCounterBuilder.tag("name", name).register(registry)}.increment()</pre>
+   nameCounterBuilder.tag("name", name).register(registry)}.increment()
+```
+
 
 **Example 13.**Initiate and increment counters in Kotlin
 
@@ -252,12 +290,15 @@ The following section explores how to run all endpoints and describes how to con
 
 For these purposes, we build individual docker images (Example 14 and GitHub project) and configure a Docker Compose file.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">FROM eclipse-temurin:17-centos7
+```
+FROM eclipse-temurin:17-centos7
 RUN mkdir /app
 RUN mkdir /app/resources
 COPY --from=build /app_build/quarkus-java-monitoring/build/quarkus-app /app
 WORKDIR /app
-CMD ["sh", "-c", "java -jar quarkus-run.jar"]</pre>
+CMD ["sh", "-c", "java -jar quarkus-run.jar"]
+```
+
 
 **Example 14.** Docker file approach, with quarkus example
 
@@ -267,7 +308,8 @@ The reason is that Grafana takes the provided data from the prometheus as a data
 
 To do so we need to add a link to the "prometheus.yml" file and configure all desired jobs (Example 15.).
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">global:
+```
+global:
  scrape_interval: 5s
 scrape_configs:
  - job_name: 'ktor-monitoring'
@@ -277,18 +319,23 @@ scrape_configs:
  - job_name: 'micronaut-monitoring'
    metrics_path: /metrics
    static_configs:
-     - targets: [ 'app-micronaut:3802' </pre>
+     - targets: [ 'app-micronaut:3802'
+```
+
 
 **Example 15.** Prometheus jobs configuration refers to the docker-compose file
 
 As a careful reader may have noticed, the names of the targets are referring to the names and ports used inside the docker-file (Example 16.).
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">services:
+```
+services:
  app-ktor:
    image: ktor-monitoring:latest
    restart: always
    ports:
-     - "3800:3800"</pre>
+     - "3800:3800"
+```
+
 
 **Example 16.** Docker-file example of particular node definition (Example 15.)
 
@@ -299,7 +346,8 @@ Playing with Grafana {#h2-7-playing-with-grafana}
 
 All nodes are up and running (Example 17.)! Now let's generate some traffic in order to be able to observe some actions. Luckily there is one commonly used tool that allows us to generate a continual traffic without much effort.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ docker container ls --format '{{.Names}}'
+```
+$ docker container ls --format '{{.Names}}'
 fw-monitoring-examples_grafana_1
 fw-monitoring-examples_prometheus_1
 fw-monitoring-examples_app-spring-boot_1
@@ -308,7 +356,9 @@ fw-monitoring-examples_app-spring-boot-kt_1
 fw-monitoring-examples_app-micronaut-kt_1
 fw-monitoring-examples_app-micronaut_1
 fw-monitoring-examples_app-ktor_1
-fw-monitoring-examples_app-quarkus-kotlin_1 </pre>
+fw-monitoring-examples_app-quarkus-kotlin_1
+```
+
 
 **Example 17.** Considered containers are up
 

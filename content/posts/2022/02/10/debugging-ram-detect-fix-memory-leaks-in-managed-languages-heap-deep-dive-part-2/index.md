@@ -82,19 +82,22 @@ Leaks are pretty obvious when you see the memory grow and you don't see it shrin
 
 There are several strategies for this. In Java, you could in theory do an aggressive leak test like this:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">void leakUnitTest() {
+```java
+void leakUnitTest() {
     performRiskyOperation();
     System.gc();
     Thread.sleep(1000);
     Runtime r = Runtime.getRuntime();
     long free = r.freeMemory();
-    for(int iter = 0 ; iter &lt; 100 ; iter++) {
+    for(int iter = 0 ; iter < 100 ; iter++) {
         performRiskyOperation();
     }
     System.gc();
     Thread.sleep(1000);
-    assertThat(Math.abs(r.freeMemory() - free) &lt; validThreshold);
-}</pre>
+    assertThat(Math.abs(r.freeMemory() - free) < validThreshold);
+}
+```
+
 
 There are a lot of things going on here, so let's go over them individually:
 
@@ -155,7 +158,10 @@ Strings also take up a lot of space in NodeJS. Interning happens there too, but 
 
 A good example here is Swing code like this:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">new JTable(myModel);</pre>
+```java
+new JTable(myModel);
+```
+
 
 Developers often discard the `JTable` object and keep the model. But because of the way MVC works in some UI frameworks (like Swing, [Codename One](https://www.codenameone.com/) etc.) a view registers itself as a listener to the model. This means that if you keep a reference to the model, the `JTable` can't be removed.
 
@@ -171,7 +177,10 @@ I mentioned statics as an obvious source of a leak, but there are other places t
 
 E.g. this pseudo-code might look harmless:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">session.store(myUserData);</pre>
+```java
+session.store(myUserData);
+```
+
 
 But if `myUserData` includes a reference to global data or other users, then we might leak those users with every new session.
 

@@ -113,6 +113,6 @@ In the coming articles, I'll cover the technical challenges organised by severit
 
 The zombie transition is coming for Spring Boot 3.5. The only question is whether you'll be ready for it or surprised by it. If you're at JCON or Devoxx France this week, come find me at the HeroDevs booth. I'd love to swap migration war stories.
 
-*** ** * ** ***
+
 
 *Steve Poole is a Java Champion, Oracle ACE and IBM Champion. Also a developer advocate at [HeroDevs](https://www.herodevs.com/), and author of the [No Regressions](https://noregressions.substack.com/) newsletter. Find him at the HeroDevs booth at JCON or Devoxx France*

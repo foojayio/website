@@ -54,7 +54,8 @@ For the scope of this tutorial, we will [set up a Redpanda cluster with Docker C
 
 Create the `docker-compose.yml` file in a location of your choice and add the following content to it.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">version: "3.7"
+```
+version: "3.7"
 name: redpanda-quickstart
 networks:
 redpanda_network:
@@ -105,7 +106,7 @@ image: docker.redpanda.com/redpandadata/console:v2.2.4
 networks:
 - redpanda_network
 entrypoint: /bin/sh
-command: -c 'echo "$CONSOLE_CONFIG_FILE" &gt; /tmp/config.yml; /app/console'
+command: -c 'echo "$CONSOLE_CONFIG_FILE" > /tmp/config.yml; /app/console'
 environment:
 CONFIG_FILEPATH: /tmp/config.yml
 CONSOLE_CONFIG_FILE: |
@@ -121,7 +122,9 @@ urls: ["http://redpanda-0:9644"]
 ports:
 - 8080:8080
 depends_on:
-      - redpanda-0</pre>
+      - redpanda-0
+```
+
 
 The above file contains the configuration necessary to [spin up a Redpanda cluster](https://docs.redpanda.com/docs/get-started/quick-start/?num-brokers=three) with a single broker. If needed, you can use a three-broker cluster. But, a single broker would be more than enough for our use case.
 
@@ -129,7 +132,8 @@ Please note that using Redpanda on Docker is only recommended for development an
 
 To generate the data, we use a Python script:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">import asyncio
+```
+import asyncio
 import json
 import os
 import random
@@ -196,15 +200,20 @@ if __name__ == "__main__":
                 admin_client.create_topics(
                     [NewTopic(topic, num_partitions=1, replication_factor=1)]
                 )
-    asyncio.run(main())</pre>
+    asyncio.run(main())
+```
+
 
 ### Setting up Hazelcast {#h3-3-setting-up-hazelcast}
 
 Start a Hazelcast local cluster. This will run a Hazelcast cluster in client/server mode and an instance of Management Center running on your local network.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">brew tap hazelcast/hz
-brew install <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="a8c0c9d2cdc4cbc9dbdce89d869b8699">[email&nbsp;protected]</a>
-hz -V</pre>
+```
+brew tap hazelcast/hz
+brew install <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="a8c0c9d2cdc4cbc9dbdce89d869b8699">[email protected]</a>
+hz -V
+```
+
 
 Now that we understand what we are going to build, and have prerequisites set up, let's jump right into the solution.
 
@@ -212,21 +221,30 @@ Now that we understand what we are going to build, and have prerequisites set up
 
 Let's start the [Redpanda cluster](https://docs.redpanda.com/docs/21.11/deployment/guide-rpk-container/) by running the following command in a terminal. Make sure you are in the same location where you saved the `docker-compose.yml` file.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">docker compose up -d</pre>
+```
+docker compose up -d
+```
+
 
 An output similar to the following confirms that the Redpanda cluster is up and running.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">[+] Running 4/4
+```
+[+] Running 4/4
 ⠿ Network redpanda_network                 Created  0.0s
 ⠿ Volume "redpanda-quickstart_redpanda-0"  Created  0.0s
 ⠿ Container redpanda-0                     Started  0.3s
-⠿ Container redpanda-console               Started  0.6s</pre>
+⠿ Container redpanda-console               Started  0.6s
+```
+
 
 ### Step 2: Run Hazelcast {#h3-5-step-2-run-hazelcast}
 
 You can run the following command to start a Hazelcast cluster with one node.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">hz start</pre>
+```
+hz start
+```
+
 
 To add more members to your cluster, open another terminal window and rerun the start command.
 
@@ -234,13 +252,17 @@ To add more members to your cluster, open another terminal window and rerun the 
 
 We will use the SQL shell---the easiest way to run SQL queries on a cluster. You can use SQL to query data in maps and Kafka topics. The results can be sent directly to the client or inserted into maps or Kafka topics. You can also use Kafka [Connector](https://docs.hazelcast.com/hazelcast/latest/integrate/kafka-connector) which allows you to stream, filter, and transform events between Hazelcast clusters and Kafka. You can do so by running the following command:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">bin/hz-cli sql</pre>
+```
+bin/hz-cli sql
+```
+
 
 ### Step 4: Ingest into Hazelcast iMap (pizzastream) {#h3-7-step-4-ingest-into-hazelcast-imap-pizzastream}
 
 Using the SQL command, we create pizzastream Map:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">CREATE OR REPLACE MAPPING pizzastream(
+```
+CREATE OR REPLACE MAPPING pizzastream(
 timestamp_ TIMESTAMP,
 pizza VARCHAR,
 user_id VARCHAR,
@@ -251,13 +273,16 @@ OPTIONS (
 'keyFormat' = 'varchar',
 'valueFormat' = 'json-flat',
 'auto.offset.reset' = 'earliest',
-'bootstrap.servers' = 'localhost:19092');</pre>
+'bootstrap.servers' = 'localhost:19092');
+```
+
 
 ### Step 5: Enrich the stream with recommendations data (recommender) {#h3-8-step-5-enrich-the-stream-with-recommendations-data-recommender}
 
 For this step, we create another Map:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">CREATE or REPLACE MAPPING recommender (
+```
+CREATE or REPLACE MAPPING recommender (
 __key BIGINT,
 user_id VARCHAR,
 extra1 VARCHAR,
@@ -266,11 +291,14 @@ extra3 VARCHAR )
 TYPE IMap
 OPTIONS (
 'keyFormat'='bigint',
-'valueFormat'='json-flat');</pre>
+'valueFormat'='json-flat');
+```
+
 
 We add some values into the Map:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">INSERT INTO recommender VALUES
+```
+INSERT INTO recommender VALUES
 (1, 'user_1', 'Soup','Onion_rings','Coleslaw'),
 (2, 'user_2', 'Salad', 'Coleslaw', 'Soup'),
 (3, 'user_3', 'Zucchini_fries','Salad', 'Coleslaw'),
@@ -279,13 +307,16 @@ We add some values into the Map:
 (6, 'user_6', 'Soup', 'Zucchini_fries', 'Coleslaw'),
 (7, 'user_7', 'Onion_rings', 'Soup', 'Jalapeno_poppers'),
 (8, 'user_8', 'Jalapeno_poppers', 'Coleslaw', 'Zucchini_fries'),
-(9, 'user_9', 'Onion_rings','Jalapeno_poppers','Soup');</pre>
+(9, 'user_9', 'Onion_rings','Jalapeno_poppers','Soup');
+```
+
 
 ### Step 6: Combine both Maps using SQL {#h3-9-step-6-combine-both-maps-using-sql}
 
 Based on the above two Maps, we send the following SQL query:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">SELECT
+```
+SELECT
     pizzastream.user_id AS user_id,
     recommender.extra1 as extra1,
     recommender.extra2 as extra2,
@@ -294,13 +325,16 @@ Based on the above two Maps, we send the following SQL query:
 FROM pizzastream
 JOIN recommender
 ON recommender.user_id = recommender.user_id 
-AND recommender.extra2 = 'Soup';</pre>
+AND recommender.extra2 = 'Soup';
+```
+
 
 ### Step 7: Send the combined data stream to Redpanda {#h3-10-step-7-send-the-combined-data-stream-to-redpanda}
 
 To send the results back to Redpanda, we create a Jet job in Hazelcast that stores the SQL query results into a new Map, then into Redpanda:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">CREATE OR REPLACE MAPPING recommender_pizzastream(
+```
+CREATE OR REPLACE MAPPING recommender_pizzastream(
 timestamp_ TIMESTAMP,
 user_id VARCHAR,
 extra1 VARCHAR,
@@ -326,7 +360,9 @@ CREATE JOB recommender_job AS SINK INTO recommender_pizzastream SELECT
 FROM pizzastream
 JOIN recommender
 ON recommender.user_id = recommender.user_id 
-AND recommender.extra2 = 'Soup';</pre>
+AND recommender.extra2 = 'Soup';
+```
+
 
 Conclusion {#h2-11-conclusion}
 ------------------------------

@@ -49,32 +49,41 @@ Pattern matching has become more prominent in Java since Java 16, but its suppor
 
 [Pattern matching for switch](https://openjdk.org/jeps/441) currently doesn't support type patterns that specify a primitive type. This JEP proposes to add support for primitive type patterns in `switch`, allowing the following code example:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">switch (reverb.roomSize()) {
-    case 1 -&gt; "Toilet";
-    case 2 -&gt; "Bedroom";
-    case 30 -&gt; "Classroom";
-    default -&gt; "Unsupported value: " + reverb.roomSize();
-}</pre>
+```java
+switch (reverb.roomSize()) {
+    case 1 -> "Toilet";
+    case 2 -> "Bedroom";
+    case 30 -> "Classroom";
+    default -> "Unsupported value: " + reverb.roomSize();
+}
+```
+
 
 ...to be written as follows:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">switch (reverb.roomSize()) {
-    case 1 -&gt; "Toilet";
-    case 2 -&gt; "Bedroom";
-    case 30 -&gt; "Classroom";
-    case int i -&gt; "Unsupported int value: " + i;
-}</pre>
+```java
+switch (reverb.roomSize()) {
+    case 1 -> "Toilet";
+    case 2 -> "Bedroom";
+    case 30 -> "Classroom";
+    case int i -> "Unsupported int value: " + i;
+}
+```
+
 
 This also allows guards to inspect the matched value, like so:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">switch (reverb.roomSize()) {
-    case 1 -&gt; "Toilet";
-    case 2 -&gt; "Bedroom";
-    case 30 -&gt; "Classroom";
-    case int i when i &gt; 100 &amp;&amp; i &lt; 1000 -&gt; "Cinema";
-    case int i when i &gt; 5000 -&gt; "Stadium";
-    case int i -&gt; "Unsupported int value: " + i;
-}</pre>
+```java
+switch (reverb.roomSize()) {
+    case 1 -> "Toilet";
+    case 2 -> "Bedroom";
+    case 30 -> "Classroom";
+    case int i when i > 100 && i < 1000 -> "Cinema";
+    case int i when i > 5000 -> "Stadium";
+    case int i -> "Unsupported int value: " + i;
+}
+```
+
 
 #### Record Patterns
 
@@ -82,7 +91,8 @@ This also allows guards to inspect the matched value, like so:
 
 Recall that a record pattern decomposes a record into its individual components, but when one of them is a primitive type, the record pattern must be precise about its type. To illustrate this point, consider the following code example:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">record Tuner(double pitchInHz) implements Effect {}
+```java
+record Tuner(double pitchInHz) implements Effect {}
 
 var tuner = new Tuner(440); // int argument is widened to double
 
@@ -97,13 +107,16 @@ if (tuner instanceof Tuner(double p)) {
 // Attempt 3: record pattern match on double argument, cast to int
 if (tuner instanceof Tuner(double p)) {
     int pitch = (int) p;
-}</pre>
+}
+```
+
 
 To put it differently, the Java compiler widens the provided `int` to a double, but it doesn't narrow it back to an `int`. This limitation exists because narrowing could lead to data loss: the value of the `double` at runtime might exceed the range of an `int` or have more precision than an `int` can accommodate. However, one significant advantage of pattern matching is its ability to automatically reject invalid values by not matching them at all. If the `double` component of a `Tuner` is either too large or too precise to safely convert back to an `int`, then `instanceof Tuner(int p)` would simply return `false`, allowing the program to manage the large `double` component in a different code branch.
 
 This is analogous to how pattern matching currently behaves for reference type patterns. For example:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">record SingleEffect(Effect effect) {}
+```java
+record SingleEffect(Effect effect) {}
 var singleEffect = new SingleEffect(...);
 
 if (singleEffect instanceof SingleEffect(Delay d)) {
@@ -112,7 +125,9 @@ if (singleEffect instanceof SingleEffect(Delay d)) {
     // ...
 } else {
     // ...
-}</pre>
+}
+```
+
 
 `instanceof` can be used here to try to match a `SingleEffect` with a `Delay` or a `Reverb` component; it automatically narrows if the pattern matches.
 
@@ -122,20 +137,26 @@ To summarize, this JEP proposes to make primitive type patterns work as smoothly
 
 [Pattern matching for instanceof](https://openjdk.org/jeps/394) currently doesn't support primitive type patterns, but this capability would perfectly align with the purpose of `instanceof`: to test whether a value can be converted safely to a given type. To convert primitives safely, Java developers currently have to deal with lossy casts and range checks to prevent loss of information:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">int roomSize = reverb.roomSize();
+```java
+int roomSize = reverb.roomSize();
 
-if (roomSize &gt;= -128 &amp;&amp; roomSize &lt; 127) {
+if (roomSize >= -128 && roomSize < 127) {
     byte r = (byte) roomSize;
     // now it's safe to use r
-}</pre>
+}
+```
+
 
 This JEP proposes the possibility to replace these constructs with simple `instanceof` checks that operate on primitives. Let's rewrite the code example to make use of this feature:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">int roomSize = reverb.roomSize();
+```java
+int roomSize = reverb.roomSize();
 
 if (roomSize instanceof byte r) {
     // now it's safe to use r
-}</pre>
+}
+```
+
 
 The pattern `roomSize instanceof byte r` will match only if `roomSize` fits into a `byte`, eliminating the need for casts and range checks.
 
@@ -147,9 +168,12 @@ But it would make sense to have `instanceof` take a primitive type also.
 
 In that case `instanceof` would check if the conversion is safe but would not actually perform it:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">if (roomSize instanceof byte) { // check if value of roomSize fits in a byte
+```java
+if (roomSize instanceof byte) { // check if value of roomSize fits in a byte
     ... (byte) roomSize ... // yes, it fits! but cast is required
-}</pre>
+}
+```
+
 
 This JEP proposes to support this construct, which makes it easier to change the `instanceof` check to take a type pattern and vice versa.
 
@@ -161,13 +185,16 @@ This JEP proposes to also add support for the other primitive types: `boolean`, 
 
 A `switch` on a `boolean` value can be a good alternative for the ternary operator (`?:`), because its branches can also hold statements instead of just expressions.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">String guitaristResponse = switch (guitar.isInTune()) {
-    case true -&gt; "Ready to play a song.";
-    case false -&gt; {
+```java
+String guitaristResponse = switch (guitar.isInTune()) {
+    case true -> "Ready to play a song.";
+    case false -> {
         log.warn("Guitar is out of tune!");
         yield "Let's take five!";
     }
-}</pre>
+}
+```
+
 
 #### What's Different From Java 22?
 
@@ -183,15 +210,18 @@ Many essential classes in the Java Class Library require imports to be usable.
 
 In the following code, for example...
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">import java.util.Map;                   // or import java.util.*;
+```java
+import java.util.Map;                   // or import java.util.*;
 import java.util.function.Function;     // or import java.util.function.*;
 import java.util.stream.Collectors;     // or import java.util.stream.*;
 import java.util.stream.Stream;         // 
 
 String[] instruments = new String[] { "violin", "piano", "marimba" };
-Map&lt;String, String&gt; m =
+Map<String, String> m =
     Stream.of(instruments)
-          .collect(Collectors.toMap(s -&gt; s.toUpperCase().substring(0, 1), Function.identity()));</pre>
+          .collect(Collectors.toMap(s -> s.toUpperCase().substring(0, 1), Function.identity()));
+```
+
 
 ...the imports take up just as much space as the code itself.
 
@@ -215,23 +245,29 @@ When you import a module, it brings in several packages, which means you might e
 
 In this source file, the simple name `Date` is ambiguous:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">import module java.base;      // exports java.util, which has a public Date class
+```java
+import module java.base;      // exports java.util, which has a public Date class
 import module java.sql;       // exports java.sql, which has a public Date class
 
 ...
 Date d = ...                  // Error - Ambiguous name!
-...</pre>
+...
+```
+
 
 Resolving ambiguities is straightforward: use a single-type-import declaration. For example, to resolve the ambiguous `Date` of the previous example:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">import module java.base;      // exports java.util, which has a public Date class
+```java
+import module java.base;      // exports java.util, which has a public Date class
 import module java.sql;       // exports java.sql, which has a public Date class
 
 import java.sql.Date;         // resolve the ambiguity of the simple name Date
 
 ...
 Date d = ...                  // Ok! Date is resolved to java.sql.Date
-...</pre>
+...
+```
+
 
 #### What's Different From Java 22?
 
@@ -245,11 +281,14 @@ For more information on this feature, see [JEP 476](https://openjdk.org/jeps/476
 
 Java's take on the classic [Hello, World!](https://en.wikipedia.org/wiki/%22Hello,_World!%22_program) program is notoriously verbose:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public class HelloWorld { 
+```java
+public class HelloWorld { 
     public static void main(String[] args) { 
         System.out.println("Hello, World!");
     }
-}</pre>
+}
+```
+
 
 On top of that, it forces newcomers to grasp a few concepts that they certainly don't need on their first day of Java programming:
 
@@ -266,23 +305,32 @@ To achieve this, the JEP proposes the following changes:
 
 * change the launch protocol to allow *instance main methods* , which are not `static` and don't need a `public` modifier, nor a `String[]` parameter;
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">class HelloWorld { 
+```java
+class HelloWorld { 
     void main() { // this is an instance main method
         System.out.println("Hello, World!");
     }
-}</pre>
+}
+```
+
 
 * allow a compilation unit to implicitly declare a class:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">void main() { // this is an instance main method in an implicitly declared class
+```java
+void main() { // this is an instance main method in an implicitly declared class
     System.out.println("Hello, World!");
-}</pre>
+}
+```
+
 
 * in implicitly declared classes, automatically import useful methods for textual input and output, thereby avoiding the mysterious `System.out.println`:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">void main() {
+```java
+void main() {
     println("Hello, World!"); // this method is automatically imported
-}</pre>
+}
+```
+
 
 #### A Flexible Launch Protocol
 
@@ -304,7 +352,8 @@ Such a class always belongs to the unnamed package, is `final`, and can't implem
 
 Many beginner programs need to interact with the console, for example:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">import java.io.BufferedReader;
+```java
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
@@ -320,7 +369,9 @@ class Main {
         }
         System.out.println("Hello, " + name);
     }
-}</pre>
+}
+```
+
 
 The code may seem familiar to experienced developers, but beginners often find it confusing due to new concepts like `import`, `try`, `catch`, `BufferedReader`, `InputStreamReader` and `IOException`. While there are other approaches, none are significantly better for those just starting out.
 
@@ -332,11 +383,14 @@ To make interacting with the console easier for beginners, implicit classes now 
 
 Combined with the other features from this JEP, the code above can now be simplified to:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">void main() {
+```java
+void main() {
     String name = readln("Please enter your name:");
     print("Hello, ");
     println(name);
-}</pre>
+}
+```
+
 
 #### Automatic Import of the `java.base` Module
 
@@ -364,43 +418,52 @@ Suppose we have a superclass `Orchestra` and a subclass `StringQuartet`. The con
 
 This example illustrates that constructors should run from top to bottom. This also means that a superclass constructor must finish initializing its fields before a subclass constructor starts, ensuring proper object state initialization and preventing access to uninitialized fields. Java enforces this by requiring explicit constructor calls (like `super(...)` or `this(...)`) to be the first statement in a constructor body, and constructor arguments cannot access the current object. While these rules ensure that constructors behave predictably, they may restrict the use of common programming patterns in constructor methods. The following code example illustrates this point:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">class StringQuartet extends Orchestra {
-    public StringQuartet(List&lt;Instrument&gt; instruments) {
+```java
+class StringQuartet extends Orchestra {
+    public StringQuartet(List<Instrument> instruments) {
         super(instruments); // Potentially unnecessary work!
 
         if (instruments.size() != 4) {
             throw new IllegalArgumentException("Not a quartet!");
         }
     }
-}</pre>
+}
+```
+
 
 It would be better to let the constructor fail fast, by validating its arguments before the `super(...)` constructor is called.  
 
 Pre-Java 22, we could only achieve this by introducing a `static` method that acts upon the value passed to the super constructor.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public class StringQuartet extends Orchestra {
-    public StringQuartet(List&lt;Instrument&gt; instruments) {
+```java
+public class StringQuartet extends Orchestra {
+    public StringQuartet(List<Instrument> instruments) {
         super(validate(instruments));
     }
 
-    private static List&lt;Instrument&gt; validate(List&lt;Instrument&gt; instruments) {
+    private static List<Instrument> validate(List<Instrument> instruments) {
         if (instruments.size() != 4) {
             throw new IllegalArgumentException("Not a quartet!");
         }
     }
-}</pre>
+}
+```
+
 
 But a far more readable way to write the same would be:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public class StringQuartet extends Orchestra {
-    public StringQuartet(List&lt;Instrument&gt; instruments) {
+```java
+public class StringQuartet extends Orchestra {
+    public StringQuartet(List<Instrument> instruments) {
         if (instruments.size() != 4) {
             throw new IllegalArgumentException("Not a quartet!");
         }
 
         super(instruments);
     }
-}</pre>
+}
+```
+
 
 This approach will be possible in Java 23, due to the introduction of *early construction contexts* .  
 
@@ -470,7 +533,8 @@ Java's take on concurrency has always been *unstructured* , meaning that tasks r
 To illustrate this, let's look at a code example that takes place in a restaurant:
 > The code examples that illustrate Structured Concurrency were taken from my conference talk ["Java's Concurrency Journey Continues! Exploring Structured Concurrency and Scoped Values"](https://hanno.codes/talks/#javas-concurrency-journey-continues).
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public class MultiWaiterRestaurant implements Restaurant {
+```java
+public class MultiWaiterRestaurant implements Restaurant {
     @Override
     public MultiCourseMeal announceMenu() throws ExecutionException, InterruptedException {
         Waiter grover = new Waiter("Grover");
@@ -478,14 +542,16 @@ To illustrate this, let's look at a code example that takes place in a restauran
         Waiter rosita = new Waiter("Rosita");
 
         try (var executor = Executors.newVirtualThreadPerTaskExecutor()) {
-            Future&lt;Course&gt; starter = executor.submit(() -&gt; grover.announceCourse(CourseType.STARTER));
-            Future&lt;Course&gt; main = executor.submit(() -&gt; zoe.announceCourse(CourseType.MAIN));
-            Future&lt;Course&gt; dessert = executor.submit(() -&gt; rosita.announceCourse(CourseType.DESSERT));
+            Future<Course> starter = executor.submit(() -> grover.announceCourse(CourseType.STARTER));
+            Future<Course> main = executor.submit(() -> zoe.announceCourse(CourseType.MAIN));
+            Future<Course> dessert = executor.submit(() -> rosita.announceCourse(CourseType.DESSERT));
 
             return new MultiCourseMeal(starter.get(), main.get(), dessert.get());
         }
     }
-}</pre>
+}
+```
+
 
 Note that the `announceCourse(..)` method in the `Waiter` class sometimes fails with an `OutOfStockException`, because one of the ingredients for the course might not be in stock. This can lead to some problems:
 
@@ -497,7 +563,8 @@ Ultimately the problem here is that our program is logically structured with tas
 
 In contrast, the execution of single-threaded code *always* enforces a hierarchy of tasks and subtasks, as shown by the single-threaded version of our restaurant example:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public class SingleWaiterRestaurant implements Restaurant {
+```java
+public class SingleWaiterRestaurant implements Restaurant {
     @Override
     public MultiCourseMeal announceMenu() throws OutOfStockException {
         Waiter elmo = new Waiter("Elmo");
@@ -508,7 +575,9 @@ In contrast, the execution of single-threaded code *always* enforces a hierarchy
 
         return new MultiCourseMeal(starter, main, dessert);
     }
-}</pre>
+}
+```
+
 
 Here, we don't have *any* of the problems we had before.  
 
@@ -526,7 +595,8 @@ In a structured concurrency approach, threads have a clear hierarchy, their own 
 
 Let's now take a look at a structured, concurrent version of our example:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public class StructuredConcurrencyRestaurant implements Restaurant {
+```java
+public class StructuredConcurrencyRestaurant implements Restaurant {
     @Override
     public MultiCourseMeal announceMenu() throws ExecutionException, InterruptedException {
         Waiter grover = new Waiter("Grover");
@@ -534,9 +604,9 @@ Let's now take a look at a structured, concurrent version of our example:
         Waiter rosita = new Waiter("Rosita");
 
         try (var scope = new StructuredTaskScope.ShutdownOnFailure()) {
-            Supplier&lt;Course&gt; starter = scope.fork(() -&gt; grover.announceCourse(CourseType.STARTER));
-            Supplier&lt;Course&gt; main = scope.fork(() -&gt; zoe.announceCourse(CourseType.MAIN));
-            Supplier&lt;Course&gt; dessert = scope.fork(() -&gt; rosita.announceCourse(CourseType.DESSERT));
+            Supplier<Course> starter = scope.fork(() -> grover.announceCourse(CourseType.STARTER));
+            Supplier<Course> main = scope.fork(() -> zoe.announceCourse(CourseType.MAIN));
+            Supplier<Course> dessert = scope.fork(() -> rosita.announceCourse(CourseType.DESSERT));
 
             scope.join(); // 1
             scope.throwIfFailed(); // 2
@@ -544,7 +614,9 @@ Let's now take a look at a structured, concurrent version of our example:
             return new MultiCourseMeal(starter.get(), main.get(), dessert.get()); // 3
         }
     }
-}</pre>
+}
+```
+
 
 The scope's purpose is to keep the threads together.  
 
@@ -576,7 +648,8 @@ A shutdown-on-failure policy cancels tasks if one of them fails, while a *shutdo
 
 Let's see what a shutdown-on-success implementation would look like:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public record DrinkOrder(Guest guest, Drink drink) {}
+```java
+public record DrinkOrder(Guest guest, Drink drink) {}
 
 public class StructuredConcurrencyBar implements Bar {
     @Override
@@ -584,14 +657,16 @@ public class StructuredConcurrencyBar implements Bar {
         Waiter zoe = new Waiter("Zoe");
         Waiter elmo = new Waiter("Elmo");
 
-        try (var scope = new StructuredTaskScope.ShutdownOnSuccess&lt;DrinkOrder&gt;()) {
-            scope.fork(() -&gt; zoe.getDrinkOrder(guest, BEER, WINE, JUICE));
-            scope.fork(() -&gt; elmo.getDrinkOrder(guest, COFFEE, TEA, COCKTAIL, DISTILLED));
+        try (var scope = new StructuredTaskScope.ShutdownOnSuccess<DrinkOrder>()) {
+            scope.fork(() -> zoe.getDrinkOrder(guest, BEER, WINE, JUICE));
+            scope.fork(() -> elmo.getDrinkOrder(guest, COFFEE, TEA, COCKTAIL, DISTILLED));
 
             return scope.join().result(); // 1
         }
     }
-}</pre>
+}
+```
+
 
 In this example the waiter is responsible for getting a valid `DrinkOrder` object based on guest preference and the drinks supply at the bar.  
 
@@ -638,8 +713,9 @@ Like a thread-local variable, a scoped value has multiple incarnations, one per 
 
 To demonstrate this feature, we've added a scoped value to the `StructuredConcurrencyBar` class that you're already familiar with:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public class StructuredConcurrencyBar implements Bar {
-    private static final ScopedValue&lt;Integer&gt; drinkOrderId = ScopedValue.newInstance();
+```java
+public class StructuredConcurrencyBar implements Bar {
+    private static final ScopedValue<Integer> drinkOrderId = ScopedValue.newInstance();
 
     @Override
     public DrinkOrder determineDrinkOrder(Guest guest) throws Exception {
@@ -647,16 +723,18 @@ To demonstrate this feature, we've added a scoped value to the `StructuredConcur
         Waiter elmo = new Waiter("Elmo");
 
         return ScopedValue.where(drinkOrderId, 1)
-                .call(() -&gt; {
-                    try (var scope = new StructuredTaskScope.ShutdownOnSuccess&lt;DrinkOrder&gt;()) {
-                        scope.fork(() -&gt; zoe.getDrinkOrder(guest, BEER, WINE, JUICE));
-                        scope.fork(() -&gt; elmo.getDrinkOrder(guest, COFFEE, TEA, COCKTAIL, DISTILLED));
+                .call(() -> {
+                    try (var scope = new StructuredTaskScope.ShutdownOnSuccess<DrinkOrder>()) {
+                        scope.fork(() -> zoe.getDrinkOrder(guest, BEER, WINE, JUICE));
+                        scope.fork(() -> elmo.getDrinkOrder(guest, COFFEE, TEA, COCKTAIL, DISTILLED));
 
                         return scope.join().result();
                     }
                 });
     }
-}</pre>
+}
+```
+
 
 We see that `ScopedValue.where(...)` is called, presenting a scoped value and the object to which it is to be bound. The invocation of `call(...)` binds the scoped value, providing an incarnation that is specific to the current thread, and then executes the lambda expression passed as argument. During the lifetime of `call(...)`, the lambda expression - and any method called (in)directly from it - can read the scoped value via the value's `get()` method. After the `call(...)` method finishes, the binding is destroyed.
 
@@ -668,12 +746,15 @@ Scoped values will be useful in all places where currently thread-local variable
 
 The method `ScopedValue.callWhere(key, value, operation)` (which is a shorter way to write `ScopedValue.where(key, value).call(operation);`) can now throw a checked exception of a generic type. This means that you're now able to catch that exception like this:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">    try {
-        var result = ScopedValue.callWhere(X, "hello", () -&gt; bar());
+```java
+    try {
+        var result = ScopedValue.callWhere(X, "hello", () -> bar());
     } catch (Exception e) {
         handleFailure(e);
     }
-    // ...</pre>
+    // ...
+```
+
 
 Note that this JEP is in the [preview](https://openjdk.org/jeps/12) stage, so you'll need to add the `--enable-preview` flag to the command-line to take the feature for a spin.
 
@@ -702,17 +783,26 @@ In Java 21, a command-line option was required to enable generational mode. Java
 
 To run your workload with Generational ZGC in Java 22, the following configuration was needed:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ java -XX:+UseZGC -XX:+ZGenerational ...</pre>
+```bash
+$ java -XX:+UseZGC -XX:+ZGenerational ...
+```
+
 
 In Java 23, this command-line option is no longer needed, it will use generational mode by default:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ java -XX:+UseZGC ...</pre>
+```bash
+$ java -XX:+UseZGC ...
+```
+
 
 When you *do* still include it, a warning will be issued that the `ZGenerational` option is deprecated.
 
 To revert back to non-generational ZGC, you would need to run:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ java -XX:+UseZGC -XX:-ZGenerational ...</pre>
+```bash
+$ java -XX:+UseZGC -XX:-ZGenerational ...
+```
+
 
 And you would get two warnings:
 
@@ -759,16 +849,20 @@ The Class-File API, located in the `java.lang.classfile` package, consists of th
 
 Suppose we wish to generate the following method in a class file:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">void fooBar(boolean z, int x) {
+```java
+void fooBar(boolean z, int x) {
     if (z)
         foo(x);
     else
         bar(x);
-}</pre>
+}
+```
+
 
 With ASM we could generate the method like so:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">ClassWriter classWriter = ...;
+```java
+ClassWriter classWriter = ...;
 MethodVisitor mv = classWriter.visitMethod(0, "fooBar", "(ZI)V", null, null);
 mv.visitCode();
 mv.visitVarInsn(ILOAD, 1);
@@ -785,13 +879,16 @@ mv.visitVarInsn(ILOAD, 2);
 mv.visitMethodInsn(INVOKEVIRTUAL, "Foo", "bar", "(I)V", false);
 mv.visitLabel(label2);
 mv.visitInsn(RETURN);
-mv.visitEnd();</pre>
+mv.visitEnd();
+```
+
 
 Unlike in ASM, where clients directly create a `ClassWriter` and then request a `MethodVisitor`, the Class-File API adopts a different approach. Here, instead of clients initiating a builder through a constructor or factory, they supply a lambda function that takes a builder as its parameter:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">ClassBuilder classBuilder = ...;
+```java
+ClassBuilder classBuilder = ...;
 classBuilder.withMethod("fooBar", MethodTypeDesc.of(CD_void, CD_boolean, CD_int), flags,
-                        methodBuilder -&gt; methodBuilder.withCode(codeBuilder -&gt; {
+                        methodBuilder -> methodBuilder.withCode(codeBuilder -> {
     Label label1 = codeBuilder.newLabel();
     Label label2 = codeBuilder.newLabel();
     codeBuilder.iload(1)
@@ -806,7 +903,9 @@ classBuilder.withMethod("fooBar", MethodTypeDesc.of(CD_void, CD_boolean, CD_int)
         .invokevirtual(ClassDesc.of("Foo"), "bar", MethodTypeDesc.of(CD_void, CD_int))
         .labelBinding(label2);
         .return_();
-});</pre>
+});
+```
+
 
 #### What's Different From Java 22?
 
@@ -839,18 +938,19 @@ In the past, Java programmers could only program such computations at the assemb
 
 Here is a code example (taken from the JEP) that compares a simple scalar computation over elements of arrays with its equivalent using the Vector API:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">void scalarComputation(float[] a, float[] b, float[] c) {
-   for (int i = 0; i &lt; a.length; i++) {
+```java
+void scalarComputation(float[] a, float[] b, float[] c) {
+   for (int i = 0; i < a.length; i++) {
         c[i] = (a[i] * a[i] + b[i] * b[i]) * -1.0f;
    }
 }
 
-static final VectorSpecies&lt;Float&gt; SPECIES = FloatVector.SPECIES_PREFERRED;
+static final VectorSpecies<Float> SPECIES = FloatVector.SPECIES_PREFERRED;
 
 void vectorComputation(float[] a, float[] b, float[] c) {
     int i = 0;
     int upperBound = SPECIES.loopBound(a.length);
-    for (; i &lt; upperBound; i += SPECIES.length()) {
+    for (; i < upperBound; i += SPECIES.length()) {
         // FloatVector va, vb, vc;
         var va = FloatVector.fromArray(SPECIES, a, i);
         var vb = FloatVector.fromArray(SPECIES, b, i);
@@ -859,10 +959,12 @@ void vectorComputation(float[] a, float[] b, float[] c) {
                    .neg();
         vc.intoArray(c, i);
     }
-    for (; i &lt; a.length; i++) {
+    for (; i < a.length; i++) {
         c[i] = (a[i] * a[i] + b[i] * b[i]) * -1.0f;
     }
-}</pre>
+}
+```
+
 
 From the perspective of the Java developer, this is just another way of expressing scalar computations. It might come across as being more verbose, but on the other hand it can bring spectacular performance gains.
 
@@ -886,21 +988,27 @@ For more information on this feature, see [JEP 469](https://openjdk.org/jeps/469
 
 The Stream API has been around since Java 8 and it has definitely made its way into the heart of the typical Java developer. It enables a programming style that is both efficient and expressive. Recall that a stream pipeline consists of three parts: a source of elements, any number of intermediate operations, and a terminal operation. For example:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">List&lt;Guitar&gt; guitars = List.of(
+```java
+List<Guitar> guitars = List.of(
         new Guitar("Cordoba F7 Paco Flamenco", GuitarStyle.CLASSICAL),
         new Guitar("Taylor GS Mini-e Koa", GuitarStyle.WESTERN),
         new Guitar("Gibson Les Paul Standard '50s Heritage Cherry Sunburst", GuitarStyle.ELECTRIC),
         new Guitar("Fender Stratocaster", GuitarStyle.ELECTRIC));
 
 long numberOfNonClassicalGuitars = guitars.stream() // source of elements
-        .filter(g -&gt; GuitarStyle.CLASSICAL != g.guitarStyle()) // intermediate operation
-        .collect(Collectors.counting()); // terminal operation</pre>
+        .filter(g -> GuitarStyle.CLASSICAL != g.guitarStyle()) // intermediate operation
+        .collect(Collectors.counting()); // terminal operation
+```
+
 
 The Stream API offers a relatively diverse but predetermined range of intermediate and terminal operations, including mapping, filtering, reduction, sorting, and more. Over the years, many new intermediate operations have been suggested for the Stream API. For example, it could be useful to introduce a `distinctBy` intermediate operation. A `distinct` operation *does* exist, trakcing the elements it has already seen by using object equality. But what if we want distinct elements based on something else than object equality?
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">var singleGuitarPerStyle = guitars.stream()
+```java
+var singleGuitarPerStyle = guitars.stream()
                 .distinctBy(Guitar::guitarStyle) // hypothetical
-                .toList();</pre>
+                .toList();
+```
+
 
 Over the years, many new intermediate operations have been suggested for the Stream API.  
 
@@ -940,11 +1048,14 @@ When `Stream::gather` is called, it roughly performs the following steps:
 
 These steps are generic enough to allow every currently existing intermediate stream operation to be expressed in a custom gatherer. For example, the `Stream::map` operation turns each `T` element into a `U` element, so it is simply a stateless one-to-one gatherer. Likewise, the `Stream::filter` operation is a stateless one-to-many gatherer. This makes every stream pipeline conceptually equivalent to:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">stream
+```java
+stream
     .gather(...)
     .gather(...)
     .gather(...)
-    .collect(...);</pre>
+    .collect(...);
+```
+
 
 #### Built-in gatherers
 
@@ -975,29 +1086,38 @@ As part of this JEP a few built-in gatherers are introduced:
 Let's look at a custom gatherer that implements the `distinctBy` operation we referred to earlier.
 > This example is based on Karl Heinz Marbaise's [excellent blog post on stream gatherers](https://blog.soebes.io/posts/2024/01/2024-01-07-jdk-gatherer/) - do check it out if you wish to know more!
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">static &lt;T, A&gt; Gatherer&lt;T, ?, T&gt; distinctBy(Function&lt;? super T, ? extends A&gt; classifier) {
-    Supplier&lt;Map&lt;A, List&lt;T&gt;&gt;&gt; initializer = HashMap::new;
-    Gatherer.Integrator&lt;Map&lt;A, List&lt;T&gt;&gt;, T, T&gt; integrator = (state, element, _) -&gt; {
-        state.computeIfAbsent(classifier.apply(element), _ -&gt; new ArrayList&lt;&gt;()).add(element);
+```java
+static <T, A> Gatherer<T, ?, T> distinctBy(Function<? super T, ? extends A> classifier) {
+    Supplier<Map<A, List<T>>> initializer = HashMap::new;
+    Gatherer.Integrator<Map<A, List<T>>, T, T> integrator = (state, element, _) -> {
+        state.computeIfAbsent(classifier.apply(element), _ -> new ArrayList<>()).add(element);
         return true; // true, because more elements need to be consumed
     };
-    BiConsumer&lt;Map&lt;A, List&lt;T&gt;&gt;, Gatherer.Downstream&lt;? super T&gt;&gt; finisher = (state, downstream) -&gt; {
-        state.forEach((_, value) -&gt; downstream.push(value.getLast()));
+    BiConsumer<Map<A, List<T>>, Gatherer.Downstream<? super T>> finisher = (state, downstream) -> {
+        state.forEach((_, value) -> downstream.push(value.getLast()));
     };
     return Gatherer.ofSequential(initializer, integrator, finisher);
-}</pre>
+}
+```
+
 
 ...and this is how you could use it:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">guitars.stream()
+```java
+guitars.stream()
         .gather(distinctBy(Guitar::guitarStyle))
-        .forEach(System.out::println);</pre>
+        .forEach(System.out::println);
+```
+
 
 ...which would yield the following output:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">Guitar[name=Taylor GS Mini-e Koa, guitarStyle=WESTERN]
+```java
+Guitar[name=Taylor GS Mini-e Koa, guitarStyle=WESTERN]
 Guitar[name=Fender Stratocaster, guitarStyle=ELECTRIC]
-Guitar[name=Cordoba F7 Paco Flamenco, guitarStyle=CLASSICAL]</pre>
+Guitar[name=Cordoba F7 Paco Flamenco, guitarStyle=CLASSICAL]
+```
+
 
 #### No New Intermediate Operations
 
@@ -1067,11 +1187,14 @@ To illustrate how documentation comments can change now that Markdown is support
 
 Markdown documentation comments are written in the [CommonMark](https://spec.commonmark.org/0.30) variant of Markdown. Simple tables are supported, using the syntax of [GitHub Flavored Markdown](https://github.github.com/gfm/). For example:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">/// | Make     | Model      |
+```java
+/// | Make     | Model      |
 /// |----------|------------|
 /// | Fender   | Telecaster |
 /// | Gibson   | Les Paul   |
-/// | Epiphone | Casino     |</pre>
+/// | Epiphone | Casino     |
+```
+
 
 You can create a link to an element declared elsewhere in your API, by simply enclosing a reference to the element in square brackets.  
 
@@ -1081,15 +1204,21 @@ The link is equivalent to using the standard JavaDoc `{@link ...}` tag.
 
 You can link to any kind of program element:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">/// - a module [com.hannotify.guitarstore/]
+```java
+/// - a module [com.hannotify.guitarstore/]
 /// - a package [com.hannotify.guitarstore.products]
 /// - a class [Guitar]
 /// - a field [Guitar#name]
-/// - a method [Guitar#isInTune()]</pre>
+/// - a method [Guitar#isInTune()]
+```
+
 
 To create a link with alternative text, you can use the form \[text\]\[element\]. For example:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">/// Please feel free to use our [utility guitar tuning method][Guitar#isInTune()]!</pre>
+```java
+/// Please feel free to use our [utility guitar tuning method][Guitar#isInTune()]!
+```
+
 
 #### What's Different From Java 22?
 

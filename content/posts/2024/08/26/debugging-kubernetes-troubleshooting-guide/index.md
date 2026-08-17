@@ -49,10 +49,13 @@ Identifying Configuration Issues {#h2-0-identifying-configuration-issues}
 
 When you encounter configuration issues in Kubernetes, the first place to check is the status column using the `kubectl get pods` command. Common errors manifest here, requiring further inspection with `kubectl describe pod`.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">$ kubectl get pods
+```
+$ kubectl get pods
 NAME                     READY    STATUS     RESTARTS   AGE 
 my-first-pod-id-xxxx      1/1     Running    0          13s
-my-second-pod-id-xxxx     1/1     Running    0          13s</pre>
+my-second-pod-id-xxxx     1/1     Running    0          13s
+```
+
 
 ### Common Causes and Solutions {#h3-1-common-causes-and-solutions}
 
@@ -83,7 +86,10 @@ Errors like `ErrImagePull` or `ImagePullBackOff` indicate issues with fetching c
 
 The first step is checking the image name which we can do with the following command:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">docker pull &lt;image-name&gt;</pre>
+```
+docker pull <image-name>
+```
+
 
 We then need to verify the image name for typos or invalid characters. I pipe the command through grep to verify the name is 100% identical, some typos are just notoriously hard to spot.
 
@@ -104,7 +110,10 @@ Node-related errors often point to physical or virtual machine issues. These iss
 
 To check node status use the command:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">kubectl get nodes</pre>
+```
+kubectl get nodes
+```
+
 
 We can then identify problematic nodes in the resulting output.
 
@@ -112,7 +121,10 @@ It's a cliché but sometimes rebooting nodes is the best solution to some proble
 
 To investigate node conditions we can use the command:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">kubectl describe node &lt;node-name&gt;</pre>
+```
+kubectl describe node <node-name>
+```
+
 
 We should look for conditions such as `MemoryPressure`, `DiskPressure`, or `NetworkUnavailable`. These conditions provide clues about the underlying issue we should address in the node.
 
@@ -131,17 +143,26 @@ We need to use ConfigMaps and secrets. These let us store configuration values a
 
 Inspect pod descriptions using the command:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">kubectl describe pod &lt;pod-name&gt;</pre>
+```
+kubectl describe pod <pod-name>
+```
+
 
 Review the output and look for missing configuration details. Rectify any misconfigurations.
 
 ConfigMap and secret creation can be verified using the command:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">kubectl get configmaps</pre>
+```
+kubectl get configmaps
+```
+
 
 and:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">kubectl get secrets</pre>
+```
+kubectl get secrets
+```
+
 
 Ensure that the required ConfigMaps and Secrets exist in the namespace and contain the expected data.
 

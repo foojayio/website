@@ -94,7 +94,8 @@ The StructuredScope class includes a shutdown method that terminates a task scop
 
 Let's put all the above threotical concept into one example
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">package com.bsmlabs.java21examples;
+```
+package com.bsmlabs.java21examples;
 
 import java.time.Duration;
 import java.util.concurrent.ExecutionException;
@@ -119,12 +120,12 @@ public class StructuredConcurrencyDemo {
     }
 
     public void processShutdownOnSuccessTasks() throws InterruptedException, ExecutionException {
-        try (var scope = new StructuredTaskScope.ShutdownOnSuccess&lt;Integer&gt;()) {
+        try (var scope = new StructuredTaskScope.ShutdownOnSuccess<Integer>()) {
 
             // Fork multiple subtasks
-            StructuredTaskScope.Subtask&lt;Integer&gt; taskOne = scope.fork(() -&gt; performTask("Task One", 2));
-            StructuredTaskScope.Subtask&lt;Integer&gt; taskTwo = scope.fork(() -&gt; performTask("Task Two", 3));
-            StructuredTaskScope.Subtask&lt;Integer&gt; taskThree = scope.fork(() -&gt; performTask("Task Three", 1));
+            StructuredTaskScope.Subtask<Integer> taskOne = scope.fork(() -> performTask("Task One", 2));
+            StructuredTaskScope.Subtask<Integer> taskTwo = scope.fork(() -> performTask("Task Two", 3));
+            StructuredTaskScope.Subtask<Integer> taskThree = scope.fork(() -> performTask("Task Three", 1));
 
             // Wait for the first successful result
             int result = scope.join().result();
@@ -137,9 +138,9 @@ public class StructuredConcurrencyDemo {
     public void processShutdownOnFailureTasks() throws InterruptedException, ExecutionException {
           try (var scope = new StructuredTaskScope.ShutdownOnFailure()) {
             // Submit tasks within the scope
-            StructuredTaskScope.Subtask&lt;Integer&gt; taskOne = scope.fork(() -&gt; performTask("Task One", 2));
-            StructuredTaskScope.Subtask&lt;Integer&gt; taskTwo = scope.fork(() -&gt; performTask("Task Two", 3));
-            StructuredTaskScope.Subtask&lt;Integer&gt; taskThree = scope.fork(() -&gt; performTask("Task Three", 4));
+            StructuredTaskScope.Subtask<Integer> taskOne = scope.fork(() -> performTask("Task One", 2));
+            StructuredTaskScope.Subtask<Integer> taskTwo = scope.fork(() -> performTask("Task Two", 3));
+            StructuredTaskScope.Subtask<Integer> taskThree = scope.fork(() -> performTask("Task Three", 4));
 
             // Wait for all tasks to complete
             scope.join();  // Wait for both tasks
@@ -163,10 +164,11 @@ public class StructuredConcurrencyDemo {
         return durationInSeconds * 10; // Return some result
     }
 }
+```
 
-</pre>
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">Executing processShutdownOnSuccessTasks...
+```
+Executing processShutdownOnSuccessTasks...
 Task Three started.
 Task One started.
 Task Two started.
@@ -180,7 +182,9 @@ Task One completed.
 Task Two completed.
 Task Three completed.
 Results: Task 1 = 20, Task 2 = 30, Task 3 = 40
-All tasks completed successfully.</pre>
+All tasks completed successfully.
+```
+
 
 * `ShutdownOnSuccess` **focuses on the first successful result**.
 * `ShutdownOnFailure` ensures that **all tasks are complete unless one fails**.
@@ -194,8 +198,10 @@ We can debug StructuredTaskScope and its forked tasks using the `jcmd` command
 * A tool in the JDK that allows you to work with Java processes through the command line.
 * Can create a thread dump in JSON format, simplifying the analysis of program behavior.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">jcmd &lt;PID&gt; Thread.print -format=json
-</pre>
+```
+jcmd <PID> Thread.print -format=json
+```
+
 
 Steps to follow
 

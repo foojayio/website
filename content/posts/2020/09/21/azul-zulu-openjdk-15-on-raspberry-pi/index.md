@@ -23,11 +23,13 @@ For this post I did some experiments with Java 15, reusing the Ubuntu 64bit SD c
 
 That version of Ubuntu comes with OpenJDK 11 pre-installed.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ java -version
+```java
+$ java -version
 openjdk version "11.0.8" 2020-07-14
 OpenJDK Runtime Environment (build 11.0.8+10-post-Ubuntu-0ubuntu120.04)
 OpenJDK 64-Bit Server VM (build 11.0.8+10-post-Ubuntu-0ubuntu120.04, mixed mode)
-</pre>
+```
+
 
 ### Installing Azul Zulu OpenJDK 15 {#installing-azul-zulu-15}
 
@@ -38,7 +40,8 @@ Immediately after that, Azul released [Azul Zulu OpenJDK 15](https://www.azul.co
 
 With the [SDKMAN tool](https://sdkman.io/), you can get a list of available JDKs on your Raspberry Pi and switch to Java 15 with a single command: `sdk install java 15.0.0-zulu`.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ sdk list java
+```
+$ sdk list java
 
 ================================================================================
 Available Java Versions
@@ -69,19 +72,24 @@ $ java -version
 openjdk version "15" 2020-09-15
 OpenJDK Runtime Environment Zulu15.27+17-CA (build 15+36)
 OpenJDK 64-Bit Server VM Zulu15.27+17-CA (build 15+36, mixed mode)
-</pre>
+```
+
 
 ### Comparing Startup Speeds {#comparing-startup-speeds}
 
 To compare the startup speeds, I reused the Spring and Quarkus applications [of the previous article](https://foojay.io/blog/startup-spring-quarkus-raspberry-pi/).
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ cd JavaOnRaspberryPi/Chapter_10_Spring/java-spring-rest-db/target/
+```
+$ cd JavaOnRaspberryPi/Chapter_10_Spring/java-spring-rest-db/target/
 $ java -jar java-spring-rest-db-0.0.1-SNAPSHOT.jar
-</pre>
+```
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ cd JavaQuarkusRestDb/target/
+
+```
+$ cd JavaQuarkusRestDb/target/
 $ java -jar javaquarkusrestdb-1.0-SNAPSHOT-runner.jar
-</pre>
+```
+
 
 #### Startup Results {#startup-results}
 
@@ -102,13 +110,15 @@ Let's go a step deeper and use [VisualVM](https://visualvm.github.io/) to inspec
 
 I installed this on my Ubuntu PC with `sudo apt install visualvm` and extended the startup commands on the Raspberry Pi so a connection can be made from another PC.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ java -Dcom.sun.management.jmxremote \
+```
+$ java -Dcom.sun.management.jmxremote \
        -Dcom.sun.management.jmxremote.port=9010 \
        -Dcom.sun.management.jmxremote.local.only=false \
        -Dcom.sun.management.jmxremote.authenticate=false \
        -Dcom.sun.management.jmxremote.ssl=false \
        -jar javaquarkusrestdb-1.0-SNAPSHOT-runner.jar
-</pre>
+```
+
 
 I waited two minutes before taking each screenshot below.
 

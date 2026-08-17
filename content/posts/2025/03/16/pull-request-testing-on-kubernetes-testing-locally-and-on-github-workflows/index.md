@@ -117,7 +117,8 @@ The testing code counts the number of items in a table, inserts a new item, and 
 * There's one additional item compared to the initial count
 * That the new item is the one we inserted
 
-<pre class="EnlighterJSRAW" data-enlighter-language="kotlin">@SpringBootTest                                                              //1
+```kotlin
+@SpringBootTest                                                              //1
 class VClusterPipelineTest @Autowired constructor(private val repository: ProductRepository) { //2
 
     @Test
@@ -127,7 +128,9 @@ class VClusterPipelineTest @Autowired constructor(private val repository: Produc
             // The rest of the test
         }
     }
-}</pre>
+}
+```
+
 
 1. Initialize the Spring context
 2. Insert the repository
@@ -139,14 +142,15 @@ We now need a PostgreSQL database; Testcontainers can provide one for us. Howeve
 
 For this reason, we must write a bit of additional code:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="kotlin">@Profile("local")                                                              //1
+```kotlin
+@Profile("local")                                                              //1
 class TestContainerConfig {
 
     companion object {
         val name = "test"
         val userName = "test"
         val pass = "test"
-        val postgres = PostgreSQLContainer&lt;Nothing&gt;("postgres:17.2").apply {   //1
+        val postgres = PostgreSQLContainer<Nothing>("postgres:17.2").apply {   //1
             withDatabaseName(name)
             withUsername(userName)
             withPassword(pass)
@@ -155,7 +159,7 @@ class TestContainerConfig {
     }
 }
 
-class TestContainerInitializer : ApplicationContextInitializer&lt;ConfigurableApplicationContext&gt; {
+class TestContainerInitializer : ApplicationContextInitializer<ConfigurableApplicationContext> {
     override fun initialize(applicationContext: ConfigurableApplicationContext) {
         if (applicationContext.environment.activeProfiles.contains("local")) {
             TestPropertyValues.of(                                             //2
@@ -168,14 +172,17 @@ class TestContainerInitializer : ApplicationContextInitializer&lt;ConfigurableAp
             ).applyTo(applicationContext.environment)
         }
     }
-}</pre>
+}
+```
+
 
 1. Start the container, but only if the Spring Boot profile `local` is active
 2. Override the configuration values
 
 We need to specify neither the `spring.flyway.user` nor the `spring.flyway.password` if we hacked the `application.yaml` to reuse the R2BC parameters of the same name:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml">spring:
+```yaml
+spring:
   application:
     name: vcluster-pipeline
   r2dbc:
@@ -185,18 +192,23 @@ We need to specify neither the `spring.flyway.user` nor the `spring.flyway.passw
   flyway:
     user: ${SPRING_R2DBC_USERNAME}                                             #1
     password: ${SPRING_R2DBC_PASSWORD}                                         #1
-    url: jdbc:postgresql://localhost:8082/flyway-test-db</pre>
+    url: jdbc:postgresql://localhost:8082/flyway-test-db
+```
+
 
 1. Smart hack to DRY configuration further down
 
 We also annotate the previous test class to use the initializer:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="kotlin">@SpringBootTest
+```kotlin
+@SpringBootTest
 @ContextConfiguration(initializers = [TestContainerInitializer::class])
 class VClusterPipelineTest @Autowired constructor(private val repository: ProductRepository) {
 
     // No change
-}</pre>
+}
+```
+
 
 Spring Boot offers a couple of options to [activate profiles](https://docs.spring.io/spring-boot/reference/features/external-config.html). For local development, we can use a simple JVM property, *e.g.* , `mvn test -Dspring.profiles.active=local`; in the CI pipeline, we will use environment variables instead.
 
@@ -205,7 +217,8 @@ Spring Boot offers a couple of options to [activate profiles](https://docs.sprin
 
 I'll also use Flyway to create the database structure for integration testing. In the scope of this example, the System Under Test will be the entire app; hence, I'll test from the HTTP endpoints. It's end-to-end testing for APIs. The code will test the same behavior, albeit treating the as a black box.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="kotlin">class VClusterPipelineIT {
+```kotlin
+class VClusterPipelineIT {
 
     val logger = LoggerFactory.getLogger(this::class.java)
 
@@ -220,7 +233,7 @@ I'll also use Flyway to create the database structure for integration testing. I
             .baseUrl(baseUrl)
             .build()
 
-        val initialResponse: EntityExchangeResult&lt;List&lt;Product?&gt;?&gt; = client.get() //3
+        val initialResponse: EntityExchangeResult<List<Product?>?> = client.get() //3
             .uri("/products")
             .exchange()
             .expectStatus().isOk
@@ -252,7 +265,9 @@ I'll also use Flyway to create the database structure for integration testing. I
             .expectBodyList(Product::class.java)
             .hasSize((initialCount!! + 1).toInt())
     }
-}</pre>
+}
+```
+
 
 1. Get the deployed app URL
 2. Create a web client that uses the former
@@ -270,18 +285,22 @@ I'll assume you're familiar with [GitHub workflows](https://docs.github.com/en/a
 
 We want the workflow to run on each Pull Request to verify that tests run as expected.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml">name: Test on PR                                                               #1
+```yaml
+name: Test on PR                                                               #1
 
 on:
   pull_request:
-    branches: [ "master" ]                                                     #2</pre>
+    branches: [ "master" ]                                                     #2
+```
+
 
 1. Set a descriptive name
 2. Trigger on a PR to the master branch
 
 The first steps are pretty standard:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml">jobs:
+```yaml
+jobs:
   build:
     runs-on: ubuntu-latest
     steps:
@@ -292,29 +311,37 @@ The first steps are pretty standard:
         with:
           distribution: temurin
           java-version: 21
-          cache: maven                                                         #1</pre>
+          cache: maven                                                         #1
+```
+
 
 1. The `setup-java` action includes a caching option for build tools. Here, it will cache dependencies across runs, speeding up consecutive runs. Unless you have good reasons not to, I recommend using this option.
 
 For the same reason, we should cache our built artifacts. While researching for this post, I learned that GitHub discards them across runs \**and steps in the same run*. Hence, we can speed up the runs by caching them explicitly:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml">      - name: Cache build artifacts
-        uses: actions/cache@v4                                                 &lt;1&gt;
+```yaml
+      - name: Cache build artifacts
+        uses: actions/cache@v4                                                 <1>
         with:
           path: target
-          key: ${{ runner.os }}-build-${{ github.sha }}                        &lt;2&gt;
+          key: ${{ runner.os }}-build-${{ github.sha }}                        <2>
           restore-keys:
-            ${{ runner.os }}-build                                             &lt;3&gt;</pre>
+            ${{ runner.os }}-build                                             <3>
+```
+
 
 1.
    1. Use the same action that `actions/setup-java` uses under the hood
    2. Compute the cache key. In our case, the `runner.os` should be immutable, but this should be how you run matrices across different operating systems.
    3. Reuse the cache if it's the same OS
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml">      - name: Run "unit" tests
+```yaml
+      - name: Run "unit" tests
         run: ./mvnw -B test
         env:
-          SPRING_PROFILES_ACTIVE: local                                        &lt;1&gt;</pre>
+          SPRING_PROFILES_ACTIVE: local                                        <1>
+```
+
 
    1. Activate the local profile. The workflow's environment provides a Docker daemon. Hence, Testcontainer successfully downloads and runs the database container.
 
@@ -329,7 +356,8 @@ For the same reason, we should cache our built artifacts. While researching for 
 
    Using GitHub's service container requires an additional section in our workflow:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml">jobs:
+```yaml
+jobs:
   build:
     runs-on: ubuntu-latest
     env:
@@ -339,7 +367,7 @@ For the same reason, we should cache our built artifacts. While researching for 
     services:
       postgres:
         image: postgres:15
-        options: &gt;-                                                            #2
+        options: >-                                                            #2
           --health-cmd "pg_isready -U $POSTGRES_USER"
           --health-interval 10s
           --health-timeout 5s
@@ -349,7 +377,9 @@ For the same reason, we should cache our built artifacts. While researching for 
         env:
           POSTGRES_USER: ${{ env.GH_PG_USER }}                                 #4
           POSTGRES_PASSWORD: ${{ env.GH_PG_PASSWORD }}                         #4
-          POSTGRES_DB: ${{ env.GH_PG_DB }}                                     #4</pre>
+          POSTGRES_DB: ${{ env.GH_PG_DB }}                                     #4
+```
+
 
    1. Define environment variables at the job level to use them across steps. You can use secrets, but in this case, the database instance is not exposed outside the workflow and will be switched off when the latter finishes. Environment variables are good enough to avoid adding unnecessary secrets.
    2. Make sure that PostgreSQL works before going further
@@ -358,13 +388,16 @@ For the same reason, we should cache our built artifacts. While researching for 
 
    To run the tests using the above configuration is straightforward.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml">- name: Run "unit" tests
+```yaml
+- name: Run "unit" tests
   run: ./mvnw -B test
   env:
     SPRING_FLYWAY_URL: jdbc:postgresql://localhost:${{ job.services.postgres.ports['5432'] }}/${{ env.GH_PG_DB }} #1
     SPRING_R2DBC_URL: r2dbc:postgresql://localhost:${{ job.services.postgres.ports['5432'] }}/${{ env.GH_PG_DB }} #1
     SPRING_R2DBC_USERNAME: ${{ env.GH_PG_USER }}
-    SPRING_R2DBC_PASSWORD: ${{ env.GH_PG_PASSWORD }}</pre>
+    SPRING_R2DBC_PASSWORD: ${{ env.GH_PG_PASSWORD }}
+```
+
 
    1. GitHub runs PostgreSQL on a local Docker, so the host is `localhost`. We can get the random port with the `${{ job.services.postgres.ports['5432'] }}` syntax.
 
@@ -385,7 +418,7 @@ For the same reason, we should cache our built artifacts. While researching for 
    * [jobs..services](https://docs.github.com/en/actions/writing-workflows/workflow-syntax-for-github-actions#jobsjob_idservices)
    * [vCluster](https://vcluster.com)
 
-   *** ** * ** ***
+   
 
    *Originally published on [A Java Geek](https://blog.frankel.ch/pr-testing-kubernetes/1/) on February 9^th^, 2025*
 

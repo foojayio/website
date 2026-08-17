@@ -37,15 +37,21 @@ As I mentioned above, APISIX comes with a list of out-of-the-box plugins. A huge
 
 Custom plugins require you to configure APISIX with the path to the plugin(s) folder:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml">apisix:
-  extra_lua_path: /opt/?.lua</pre>
+```yaml
+apisix:
+  extra_lua_path: /opt/?.lua
+```
+
 
 Moreover, some plugins may require additional configuration. For example, in my previous version of [Evolving your APIs](https://www.youtube.com/watch?v=wNg__YYiybo&amp;t=1035s), I set a custom nginx snippet to add a Lua shared dictionary to use it in the code's plugin:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml">nginx_config:
+```yaml
+nginx_config:
   http:
     custom_lua_shared_dict:
-      plugin-unauth-limit: 100m</pre>
+      plugin-unauth-limit: 100m
+```
+
 
 Finally, writing a custom plugin requires a fairly advanced understanding of Apache APISIX and its inner workings. This knowledge is a good idea, but it's not great to make it a requirement.
 
@@ -56,10 +62,13 @@ In my earlier blog post [Free tier API with Apache APISIX](https://blog.frankel.
 
 In the mentioned post, I used `vars` to add a match on an HTTP header.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml">routes:
+```yaml
+routes:
   - uri: /get
     upstream_id: 1
-    vars: [[ "http_apikey", "~~", ".*"]]                      #1</pre>
+    vars: [[ "http_apikey", "~~", ".*"]]                      #1
+```
+
 
 1. Match only if the request has an HTTP header named `apikey`
 
@@ -101,14 +110,15 @@ With `serverless`, you configure two parameters:
 
 A widespread use case with `serverless` is to log input and output data.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml">routes:
+```yaml
+routes:
   - uri: /get
     upstream_id: 1
     plugins:
       serverless-pre-function:
         phase: rewrite                                             #1
         functions:
-          - &gt;
+          - >
             return function(conf, ctx)
               local core = require("apisix.core")
               core.log.warn("conf: ", core.json.encode(conf))      #2
@@ -117,11 +127,13 @@ A widespread use case with `serverless` is to log input and output data.
       serverless-post-function:
         phase: log                                                 #4
         functions:
-          - &gt;
+          - >
             return function(conf, ctx)
               local core = require("apisix.core")
               core.log.warn("ctx : ", core.json.encode(ctx, true)) #5
-            end</pre>
+            end
+```
+
 
 1. Execute at the start of the `rewrite` phase
 2. Serialize the configuration to JSON and write it in the log. We use the `warn` level because it's the default one
@@ -146,7 +158,8 @@ So far, our scope has been the `route` (or the `service` if you prefer the latte
 
 The `filter` syntax is the same as the `vars` syntax.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml">routes:
+```yaml
+routes:
   - uri: /get
     upstream_id: 1
     plugins:
@@ -155,7 +168,9 @@ The `filter` syntax is the same as the `vars` syntax.
         time_window: 60
         rejected_code: 429
         _meta:
-          filter: [["http_Secret-Header", "~=", "MySuperDuperSecretBypassKey"]] #2</pre>
+          filter: [["http_Secret-Header", "~=", "MySuperDuperSecretBypassKey"]] #2
+```
+
 
 1. Configure the `limit-count` plugin
 2. Execute it only if the HTTP header has a different value
@@ -181,6 +196,6 @@ Before writing a plugin, I suggest you design your feature using one of the abov
 * [lua-resty-expr](https://github.com/api7/lua-resty-expr)
 * [Plugin Common Configurations](https://docs.api7.ai/apisix/reference/plugin-common-configurations)
 
-*** ** * ** ***
+
 
 *Originally published at [A Java Geek](https://blog.frankel.ch/when-write-apisix-plugin/) on August 25^th^, 2024*

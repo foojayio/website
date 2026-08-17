@@ -99,31 +99,41 @@ The application uses Hugging Face. You need to get a Hugging Face API Key:
 
 To access the repository remotely, install [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git) if you haven't already. You can clone the `langchain4j-examples` GitHub repository to your local machine by running the following command:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">git clone https://github.com/langchain4j/langchain4j-examples.git
-</pre>
+```
+git clone https://github.com/langchain4j/langchain4j-examples.git
+```
+
 
 ### Environment setup {#h3-5-environment-setup}
 
 To run the application, navigate to the `jakartaee-microprofile-example` directory:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">cd langchain4j-examples/jakartaee-microprofile-example
-</pre>
+```
+cd langchain4j-examples/jakartaee-microprofile-example
+```
+
 
 Set the following environment variables:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">export JAVA_HOME=&lt;your Java 17 home path&gt;
-export&nbsp;HUGGING_FACE_API_KEY=&lt;your&nbsp;Hugging&nbsp;Face&nbsp;read&nbsp;token&gt;</pre>
+```
+export JAVA_HOME=<your Java 17 home path>
+export HUGGING_FACE_API_KEY=<your Hugging Face read token>
+```
+
 
 ### Start the application {#h3-6-start-the-application}
 
 To start the application, use the provided Maven wrapper to run Open Liberty in [dev mode](https://openliberty.io/docs/latest/development-mode.html):
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">./mvnw liberty:dev
-</pre>
+```
+./mvnw liberty:dev
+```
+
 
 After you see the following message, the application is ready:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">************************************************************************
+```
+************************************************************************
 *    Liberty is running in dev mode.
 *        Automatic generation of features: [ Off ]
 *        h - see the help menu for available actions, type 'h' and press Enter.
@@ -133,11 +143,14 @@ After you see the following message, the application is ready:
 *        Liberty server HTTP port: [ 9080 ]
 *        Liberty server HTTPS port: [ 9443 ]
 *        Liberty debug port: [ 7777 ]
-************************************************************************</pre>
+************************************************************************
+```
+
 
 To ensure that the application started successfully, you can run the tests by pressing the `enter/return` key from the command-line session. If the tests pass, you can see output similar to the following example:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">[INFO] -------------------------------------------------------
+```
+[INFO] -------------------------------------------------------
 [INFO]  T E S T S
 [INFO] -------------------------------------------------------
 [INFO] Running it.dev.langchan4j.example.ChatServiceIT
@@ -148,7 +161,9 @@ To ensure that the application started successfully, you can run the tests by pr
 [INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.733 s...
 [INFO]
 [INFO] Results:
-[INFO]</pre>
+[INFO]
+```
+
 
 ### Access the application {#h3-7-access-the-application}
 
@@ -175,7 +190,8 @@ The application uses the `HuggingFaceChatModel` class to provide the model for b
 
 See the [src/main/java/dev/langchain4j/example/chat/ChatAgent.java](https://github.com/langchain4j/langchain4j-examples/blob/17e4f94bc94604ce562878681cc5c676809c3ddc/jakartaee-microprofile-example/src/main/java/dev/langchain4j/example/chat/ChatAgent.java#L48-L65 "ChatAgent.java") file.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">public Assistant getAssistant() {
+```
+public Assistant getAssistant() {
     ...
         HuggingFaceChatModel model = HuggingFaceChatModel.builder()
             .accessToken(HUGGING_FACE_API_KEY)
@@ -188,16 +204,21 @@ See the [src/main/java/dev/langchain4j/example/chat/ChatAgent.java](https://gith
         assistant = AiServices.builder(Assistant.class)
             .chatLanguageModel(model)
             .chatMemoryProvider(
-                sessionId -&gt; MessageWindowChatMemory.withMaxMessages(MAX_MESSAGES))
+                sessionId -> MessageWindowChatMemory.withMaxMessages(MAX_MESSAGES))
             .build();
    ...
-}</pre>
+}
+```
+
 
 Through the customized `Assistant` interface, the application can send messages to the LLM by its `chat()` method.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">interface Assistant {
+```
+interface Assistant {
    String chat(@MemoryId String sessionId, @UserMessage String userMessage);
-}</pre>
+}
+```
+
 
 ### Externalizing the configuration {#h3-10-externalizing-the-configuration}
 
@@ -205,7 +226,8 @@ An API key is required to access the model. For security purposes, the key is no
 
 See the [src/main/java/dev/langchain4j/example/chat/ChatAgent.java](https://github.com/langchain4j/langchain4j-examples/blob/17e4f94bc94604ce562878681cc5c676809c3ddc/jakartaee-microprofile-example/src/main/java/dev/langchain4j/example/chat/ChatAgent.java#L18-L40 "ChatAgent.java") file.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">@Inject
+```
+@Inject
 @ConfigProperty(name = "hugging.face.api.key")
 private String HUGGING_FACE_API_KEY;
 
@@ -227,16 +249,21 @@ private Double TEMPERATURE;
 
 @Inject
 @ConfigProperty(name = "chat.memory.max.messages")
-private Integer MAX_MESSAGES;</pre>
+private Integer MAX_MESSAGES;
+```
+
 
 To fine tune the LangChain4j model or even try out another LLM, you simply update the values in the [src/main/resources/META-INF/microprofile-config.properties](https://github.com/langchain4j/langchain4j-examples/tree/main/jakartaee-microprofile-example/src/main/resources/META-INF/microprofile-config.properties "microprofile-config.properties") file or provide them through the environment variables.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">hugging.face.api.key=set it by env variable
+```
+hugging.face.api.key=set it by env variable
 chat.model.id=NousResearch/Nous-Hermes-2-Mixtral-8x7B-DPO
 chat.model.timeout=120
 chat.model.max.token=200
 chat.model.temperature=1.0
-chat.memory.max.messages=20</pre>
+chat.memory.max.messages=20
+```
+
 
 ### Communicating between the client and LLM {#h3-11-communicating-between-the-client-and-llm}
 
@@ -246,7 +273,8 @@ Each client makes an HTTP connection to the service and send out the messages by
 
 See the [src/main/webapp/chatroom.js](https://github.com/langchain4j/langchain4j-examples/tree/main/jakartaee-microprofile-example/src/main/webapp/chatroom.js "chatroom.js") file.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">const webSocket = new WebSocket('ws://localhost:9080/chat');
+```
+const webSocket = new WebSocket('ws://localhost:9080/chat');
 ...
 function sendMessage() {
     ...
@@ -254,13 +282,16 @@ function sendMessage() {
     ...
     webSocket.send(myMessage);
     ...
-}</pre>
+}
+```
+
 
 The service receives the user messages through the WebSocket `onMessage()` method, forwards them to the LLM by calling the `ChatAgent.chat()` method, and then broadcasts the LLM answers back to the client session through the `sendObect()` method.
 
 See the [src/main/java/dev/langchain4j/example/chat/ChatService.java](https://github.com/langchain4j/langchain4j-examples/blob/17e4f94bc94604ce562878681cc5c676809c3ddc/jakartaee-microprofile-example/src/main/java/dev/langchain4j/example/chat/ChatService.java#L31-L53 "ChatService.java") file.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">@OnMessage
+```
+@OnMessage
 public void onMessage(String message, Session session) {
     ...
     try {
@@ -276,7 +307,9 @@ public void onMessage(String message, Session session) {
         e.printStackTrace();
     }
 
-}</pre>
+}
+```
+
 
 ### Enabling metrics {#h3-12-enabling-metrics}
 
@@ -284,16 +317,20 @@ To determine the performance and health of the application, it uses the MicroPro
 
 See the [src/main/java/dev/langchain4j/example/chat/ChatService.java](https://github.com/langchain4j/langchain4j-examples/blob/17e4f94bc94604ce562878681cc5c676809c3ddc/jakartaee-microprofile-example/src/main/java/dev/langchain4j/example/chat/ChatService.java#L31-L35 "ChatService.java") file.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">@OnMessage
+```
+@OnMessage
 @Timed(name = "chatProcessingTime",
        absolute = true,
        description = "Time needed chatting to the agent.")
 public void onMessage(String message, Session session) {
-    ...</pre>
+    ...
+```
+
 
 Visit the <http://localhost:9080/metrics?scope=application> URL to check out the metrics.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic"># HELP chatProcessingTime_seconds Time needed chatting to the agent.
+```
+# HELP chatProcessingTime_seconds Time needed chatting to the agent.
 # TYPE chatProcessingTime_seconds summary
 chatProcessingTime_seconds{mp_scope="application",quantile="0.5",} 0.0
 chatProcessingTime_seconds{mp_scope="application",quantile="0.75",} 0.0
@@ -305,7 +342,9 @@ chatProcessingTime_seconds_count{mp_scope="application",} 6.0
 chatProcessingTime_seconds_sum{mp_scope="application",} 31.674357666
 # HELP chatProcessingTime_seconds_max Time needed chatting to the agent.
 # TYPE chatProcessingTime_seconds_max gauge
-chatProcessingTime_seconds_max{mp_scope="application",} 13.191547042</pre>
+chatProcessingTime_seconds_max{mp_scope="application",} 13.191547042
+```
+
 
 If you are interested in other ways to use the LangChain4j APIs, you can study the REST APIs that are provided by the [src/main/java/dev/langchain4j/example/rest/ModelResource.java](https://github.com/langchain4j/langchain4j-examples/tree/main/jakartaee-microprofile-example/src/main/java/dev/langchain4j/example/rest/ModelResource.java "ModelResource.java") file.
 

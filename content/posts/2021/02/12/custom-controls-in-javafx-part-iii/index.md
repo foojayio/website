@@ -50,19 +50,20 @@ Here are the things we need to do...
 
 First step is to extend the TextField...
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public class ExtendedControl extends TextField {
-    private static final StyleablePropertyFactory&lt;ExtendedControl&gt; FACTORY = new StyleablePropertyFactory&lt;&gt;(TextField.getClassCssMetaData());
+```java
+public class ExtendedControl extends TextField {
+    private static final StyleablePropertyFactory<ExtendedControl> FACTORY = new StyleablePropertyFactory<>(TextField.getClassCssMetaData());
     private static final Color DEFAULT_MATERIAL_DESIGN_COLOR = Color.web("#009688");
     private static final Color DEFAULT_PROMPT_TEXT_COLOR  = Color.web("#757575");
     private static final double STD_FONT_SIZE = 13;
     private static final double SMALL_FONT_SIZE = 10;
     private static final double TOP_OFFSET_Y = 4;
     private static final int ANIMATION_DURATION = 60;
-    private static final CssMetaData&lt;ExtendedControl, Color&gt; MATERIAL_DESIGN_COLOR = FACTORY.createColorCssMetaData("-material-design-color", s -&gt; s.materialDesignColor, DEFAULT_MATERIAL_DESIGN_COLOR, false);
-    private static final CssMetaData&lt;ExtendedControl, Color&gt; PROMPT_TEXT_COLOR = FACTORY.createColorCssMetaData("-prompt-text-color", s -&gt; s.promptTextColor, DEFAULT_PROMPT_TEXT_COLOR, false);
+    private static final CssMetaData<ExtendedControl, Color> MATERIAL_DESIGN_COLOR = FACTORY.createColorCssMetaData("-material-design-color", s -> s.materialDesignColor, DEFAULT_MATERIAL_DESIGN_COLOR, false);
+    private static final CssMetaData<ExtendedControl, Color> PROMPT_TEXT_COLOR = FACTORY.createColorCssMetaData("-prompt-text-color", s -> s.promptTextColor, DEFAULT_PROMPT_TEXT_COLOR, false);
     private static String userAgentStyleSheet;
-    private final StyleableProperty&lt;Color&gt; materialDesignColor;
-    private final StyleableProperty&lt;Color&gt; promptTextColor;
+    private final StyleableProperty<Color> materialDesignColor;
+    private final StyleableProperty<Color> promptTextColor;
     private Text promptText;
     private HBox promptTextBox;
     private DoubleProperty fontSize;
@@ -75,21 +76,24 @@ First step is to extend the TextField...
     public ExtendedControl(final String promptTextBox) {
         super(promptTextBox);
 
-        materialDesignColor = new SimpleStyleableObjectProperty&lt;&gt;(MATERIAL_DESIGN_COLOR, this, "materialDesignColor");
-        promptTextColor = new SimpleStyleableObjectProperty&lt;&gt;(PROMPT_TEXT_COLOR, this, "promptTextColor");
+        materialDesignColor = new SimpleStyleableObjectProperty<>(MATERIAL_DESIGN_COLOR, this, "materialDesignColor");
+        promptTextColor = new SimpleStyleableObjectProperty<>(PROMPT_TEXT_COLOR, this, "promptTextColor");
 
         fontSize = new SimpleDoubleProperty(ExtendedControl.this, "fontSize", getFont().getSize());
         timeline = new Timeline();
 
         initGraphics();
         registerListeners();
-    }</pre>
+    }
+```
+
 
 You can see in the code above that we also created some styleable properties for the materialDesignColor and the promptTextColor. I won't go into detail about how to use styleable properties in JavaFX. If you would like to know more about it you might want to check the interwebz for that.
 
 Now that we have defined the variables we need it's time to add them to the existing control (which I always do in a method called initGraphics()).
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">private void initGraphics() {
+```java
+private void initGraphics() {
     getStyleClass().addAll("material-field");
 
     final String fontFamily = getFont().getFamily();
@@ -101,7 +105,7 @@ Now that we have defined the variables we need it's time to add them to the exis
     promptTextBox = new HBox(promptText);
     promptTextBox.getStyleClass().add("material-field");
 
-    if (!isEditable() || isDisabled() || length &gt; 0) {
+    if (!isEditable() || isDisabled() || length > 0) {
         promptText.setFont(Font.font(fontFamily, SMALL_FONT_SIZE));
         promptTextBox.setTranslateY(-STD_FONT_SIZE - TOP_OFFSET_Y);
     } else {
@@ -109,7 +113,9 @@ Now that we have defined the variables we need it's time to add them to the exis
     }
 
     getChildren().addAll(promptTextBox);
-}</pre>
+}
+```
+
 
 In this method we set the style class "material-field" to th component itself, create the Text, put it in an HBox and add this HBox to the TextField component. The reason for not simply adding the Text only but putting it into an HBox is mainly for layout reasons. It might also come in handy if we want to add an icon to the Text.
 
@@ -117,20 +123,23 @@ The most important thing in our control is changing the state from not focused t
 
 For this reason, we need to attach some listeners to different properties that we are interested in. This happens in the registerListeners() method which looks as follows:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">private void registerListeners() {
-    textProperty().addListener(o -&gt; handleTextAndFocus(isFocused()));
-    promptTextProperty().addListener(o -&gt; promptText.setText(getPromptText()));
-    focusedProperty().addListener(o -&gt; handleTextAndFocus(isFocused()));
-    promptTextColorProperty().addListener(o -&gt; promptText.setFill(getPromptTextColor()));
-    fontSize.addListener(o -&gt; promptText.setFont(Font.font(fontSize.get())));
-    timeline.setOnFinished(evt -&gt; {
+```
+private void registerListeners() {
+    textProperty().addListener(o -> handleTextAndFocus(isFocused()));
+    promptTextProperty().addListener(o -> promptText.setText(getPromptText()));
+    focusedProperty().addListener(o -> handleTextAndFocus(isFocused()));
+    promptTextColorProperty().addListener(o -> promptText.setFill(getPromptTextColor()));
+    fontSize.addListener(o -> promptText.setFont(Font.font(fontSize.get())));
+    timeline.setOnFinished(evt -> {
         final int length = null == getText() ? 0 : getText().length();
-        if (length &gt; 0 &amp;&amp; promptTextBox.getTranslateY() &gt;= 0) {
+        if (length > 0 && promptTextBox.getTranslateY() >= 0) {
             promptTextBox.setTranslateY(-STD_FONT_SIZE - TOP_OFFSET_Y);
             fontSize.set(SMALL_FONT_SIZE);
         }
     });
-}</pre>
+}
+```
+
 
 We added listeners to textProperty, promptTextProperty, focusedProperty, promptTextColorProperty and fontSize.
 
@@ -142,7 +151,8 @@ You already saw in the code above that I call a method named handleTextAndFocus(
 
 So let's take a look at this method...
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">private void handleTextAndFocus(final boolean isFocused) {
+```java
+private void handleTextAndFocus(final boolean isFocused) {
     final int length = null == getText() ? 0 : getText().length();
 
     KeyFrame kf0;
@@ -155,7 +165,7 @@ So let's take a look at this method...
     KeyValue kvPromptTextFill0;
     KeyValue kvPromptTextFill1;
 
-    if (isFocused | length &gt; 0 || isDisabled() || !isEditable()) {
+    if (isFocused | length > 0 || isDisabled() || !isEditable()) {
         if (Double.compare(promptTextBox.getTranslateY(), -STD_FONT_SIZE - TOP_OFFSET_Y) != 0) {
             kvTextY0 = new KeyValue(promptTextBox.translateYProperty(), 0);
             kvTextY1 = new KeyValue(promptTextBox.translateYProperty(), -STD_FONT_SIZE - TOP_OFFSET_Y);
@@ -187,7 +197,9 @@ So let's take a look at this method...
             timeline.play();
         }
     }
-}</pre>
+}
+```
+
 
 This method is checking if the TextField is focused or contains text, is disabled or is not editable. In all of these cases it will create an animation where the Text component will move up. In all other cases where the Text is already at the upper position, the Text will move down. In the animation not only the position of the Text component will change but also the font size and the color.
 
@@ -201,7 +213,8 @@ In addition we also need to make sure that control has no complete border and no
 
 And here is the final piece...the CSS code...
 
-<pre class="EnlighterJSRAW" data-enlighter-language="css">.material-field {
+```css
+.material-field {
     -material-design-color: #3f51b5;
     -material-design-color-transparent: #3f51b51f;
     -prompt-text-color: #757575;
@@ -256,7 +269,9 @@ And here is the final piece...the CSS code...
     -fx-opacity: 0.46;
     -fx-border-style: segments(2, 3)  line-cap butt;
     -fx-border-color: transparent transparent black transparent;
-}</pre>
+}
+```
+
 
 Well that's a lot of CSS but unfortunately it is needed to get the final result. I won't go through all the lines because it is simply too much. The important parts should be easy to understand. We define the styles for the standard .text-input so that it has no full border, no background color, transparent prompt-text, no corner radii etc.
 

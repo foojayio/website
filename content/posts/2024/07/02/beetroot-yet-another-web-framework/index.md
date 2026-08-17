@@ -62,7 +62,8 @@ How to QuickStart? {#h2-2-how-to-quickstart}
 
 Enter the following statements into your UNIX terminal:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash" data-enlighter-theme="dracula">VERSION=3.2.0
+```bash
+VERSION=3.2.0
 PACKAGE=autumo-beetRoot-$VERSION
 
 curl -LO https://github.com/autumoswitzerland/autumo-beetroot/releases/download/v$VERSION/$PACKAGE.zip
@@ -70,13 +71,16 @@ curl -LO https://github.com/autumoswitzerland/autumo-beetroot/releases/download/
 unzip $PACKAGE.zip
 rm $PACKAGE.zip
 
-$PACKAGE/bin/beetroot.sh start</pre>
+$PACKAGE/bin/beetroot.sh start
+```
+
 
 **Windows**
 
 Enter the following statements into your Windows terminal or PowerShell:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="batch" data-enlighter-theme="dracula">SET VERSION=3.2.0
+```batch
+SET VERSION=3.2.0
 SET PACKAGE=autumo-beetRoot-%VERSION%
 
 curl -LO https://github.com/autumoswitzerland/autumo-beetroot/releases/download/v%VERSION%/%PACKAGE%.zip
@@ -84,7 +88,9 @@ curl -LO https://github.com/autumoswitzerland/autumo-beetroot/releases/download/
 tar -xf %PACKAGE%.zip
 del %PACKAGE%.zip
 
-%PACKAGE%\bin\beetroot.bat start</pre>
+%PACKAGE%\bin\beetroot.bat start
+```
+
 
 autumo beetRoot starting up:
 ![beetRoot starting on console](https://raw.githubusercontent.com/autumoswitzerland/autumo-beetroot/master/web/img/autumo-beetroot-console.webp)

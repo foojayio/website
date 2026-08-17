@@ -57,111 +57,114 @@ Setting Up the Data {#h2-1-setting-up-the-data}
 
 Here's a sample document in our recipe collection:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">{
+```
+{
 
-&nbsp;&nbsp;"_id": {
+  "_id": {
 
-&nbsp;&nbsp;&nbsp;&nbsp;"$oid": "636aa9817dd21c28fda493a4"
+    "$oid": "636aa9817dd21c28fda493a4"
 
-&nbsp;&nbsp;},
+  },
 
-&nbsp;&nbsp;"title": "Eggs Benedict",
+  "title": "Eggs Benedict",
 
-&nbsp;&nbsp;"calories_per_serving": 400,
+  "calories_per_serving": 400,
 
-&nbsp;&nbsp;"prep_time": 4,
+  "prep_time": 4,
 
-&nbsp;&nbsp;"cook_time": 6,
+  "cook_time": 6,
 
-&nbsp;&nbsp;"ingredients": [
+  "ingredients": [
 
-&nbsp;&nbsp;&nbsp;&nbsp;{
+    {
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"name": "eggs",
+      "name": "eggs",
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"quantity": {
+      "quantity": {
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"amount": 6
+        "amount": 6
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;},
+      },
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"vegetarian": true
+      "vegetarian": true
 
-&nbsp;&nbsp;&nbsp;&nbsp;},
+    },
 
-&nbsp;&nbsp;&nbsp;&nbsp;{
+    {
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"name": "Virginia ham",
+      "name": "Virginia ham",
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"quantity": {
+      "quantity": {
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"amount": 6,
+        "amount": 6,
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"unit": "rounds"
+        "unit": "rounds"
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;},
+      },
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"vegetarian": false
+      "vegetarian": false
 
-&nbsp;&nbsp;&nbsp;&nbsp;},
+    },
 
-&nbsp;&nbsp;&nbsp;&nbsp;{
+    {
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"name": "English muffins",
+      "name": "English muffins",
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"quantity": {
+      "quantity": {
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"amount": 3
+        "amount": 3
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;},
+      },
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"vegetarian": true
+      "vegetarian": true
 
-&nbsp;&nbsp;&nbsp;&nbsp;},
+    },
 
-&nbsp;&nbsp;&nbsp;&nbsp;{
+    {
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"name": "Hollandaise sauce",
+      "name": "Hollandaise sauce",
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"quantity": {
+      "quantity": {
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"amount": 3,
+        "amount": 3,
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"unit": "oz"
+        "unit": "oz"
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;},
+      },
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"vegetarian": true
+      "vegetarian": true
 
-&nbsp;&nbsp;&nbsp;&nbsp;}
+    }
 
-&nbsp;&nbsp;],
+  ],
 
-&nbsp;&nbsp;"directions": [
+  "directions": [
 
-&nbsp;&nbsp;&nbsp;&nbsp;"Cut the ham in rounds, split, toast and butter the english muffins, to fit the muffins.",
+    "Cut the ham in rounds, split, toast and butter the english muffins, to fit the muffins.",
 
-&nbsp;&nbsp;&nbsp;&nbsp;"Poach the eggs and place them on the ham and pour over the hollandaise sauce."
+    "Poach the eggs and place them on the ham and pour over the hollandaise sauce."
 
-&nbsp;&nbsp;],
+  ],
 
-&nbsp;&nbsp;"rating": [5,3,5],
+  "rating": [5,3,5],
 
-&nbsp;&nbsp;"rating_avg": 4.35,
+  "rating_avg": 4.35,
 
-&nbsp;&nbsp;"servings": 3,
+  "servings": 3,
 
-&nbsp;&nbsp;"tags": [
+  "tags": [
 
-&nbsp;&nbsp;&nbsp;&nbsp;"ham"
+    "ham"
 
-&nbsp;&nbsp;],
+  ],
 
-&nbsp;&nbsp;"type": "Breakfast",
+  "type": "Breakfast",
 
-&nbsp;&nbsp;"vegetarian_option": false
+  "vegetarian_option": false
 
-}</pre>
+}
+```
+
 
 Each recipe has a \`type\` field representing the meal type, such as "Dinner," "Lunch," or "Breakfast," and a tags field representing general recipe attributes (e.g., "vegetarian," "quick," or "soup").
 
@@ -176,27 +179,36 @@ To organize recipes, we'll set up an aggregation pipeline that groups documents 
 
 Here's how we can group all recipes by their type:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&gt; db.recipes.aggregate([{ $group: { _id: "$type", count: { $sum: 1 } } }]);
+```
+> db.recipes.aggregate([{ $group: { _id: "$type", count: { $sum: 1 } } }]);
 
-_id: "$type"</pre>
+_id: "$type"
+```
+
 
 We're grouping by the type field, so each unique type (e.g., "Dinner") will have its own group.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">count: { $sum: 1 }</pre>
+```
+count: { $sum: 1 }
+```
+
 
 For each group, we add a count field that totals the number of recipes in that group.
 
 Output example:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">[
+```
+[
 
-&nbsp;&nbsp;{ _id: "Dinner", count: 45 },
+  { _id: "Dinner", count: 45 },
 
-&nbsp;&nbsp;{ _id: "Breakfast", count: 20 },
+  { _id: "Breakfast", count: 20 },
 
-&nbsp;&nbsp;{ _id: "Lunch", count: 30 },
+  { _id: "Lunch", count: 30 },
 
-]</pre>
+]
+```
+
 
 This output shows the count of recipes for each type. Now, we can see how many "Dinner," "Breakfast," and "Lunch" recipes are available in the collection.
 
@@ -204,29 +216,35 @@ This output shows the count of recipes for each type. Now, we can see how many "
 
 If you want to store additional details (such as an array of recipe titles for each meal type), use \`[$push](https://www.mongodb.com/docs/manual/reference/operator/update/push/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=recipe-foojay&utm_term=tony.kim)\` to add the titles to each group:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&gt; db.recipes.aggregate([
+```
+> db.recipes.aggregate([
 
-&nbsp;&nbsp;{ $group: { _id: "$type", recipeTitles: { $push: "$title" } } },
+  { $group: { _id: "$type", recipeTitles: { $push: "$title" } } },
 
 ])
 
-recipeTitles: { $push: "$title" }</pre>
+recipeTitles: { $push: "$title" }
+```
+
 
 Adds an array of recipe titles to each meal type group.
 
 Output example:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">[
-&nbsp;&nbsp;{
+```
+[
+  {
 
-&nbsp;&nbsp;&nbsp;&nbsp;_id: "Dinner",
+    _id: "Dinner",
 
-&nbsp;&nbsp;&nbsp;&nbsp;recipeTitles: ["Split Pea Soup", "Spaghetti Bolognese", "Grilled Salmon"],
+    recipeTitles: ["Split Pea Soup", "Spaghetti Bolognese", "Grilled Salmon"],
 
-&nbsp;&nbsp;},
+  },
 
-&nbsp;&nbsp;{ _id: "Breakfast", recipeTitles: ["Pancakes", "Omelette", "Smoothie Bowl"] },
-]</pre>
+  { _id: "Breakfast", recipeTitles: ["Pancakes", "Omelette", "Smoothie Bowl"] },
+]
+```
+
 
 This output shows each meal type along with its recipe titles, which can make displaying the list in a frontend application easier.
 
@@ -241,13 +259,16 @@ We can use [$unwind](https://www.mongodb.com/docs/manual/reference/operator/aggr
 
 The tags field is an array, so we'll start by using $unwind to create a separate document for each tag.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&gt; db.recipes.aggregate([
+```
+> db.recipes.aggregate([
 
-&nbsp;&nbsp;{ $unwind: "$tags" },
+  { $unwind: "$tags" },
 
-&nbsp;&nbsp;{ $group: { _id: "$tags", count: { $sum: 1 } } },
+  { $group: { _id: "$tags", count: { $sum: 1 } } },
 
-])</pre>
+])
+```
+
 
 [$unwind](https://www.mongodb.com/docs/manual/reference/operator/aggregation/unwind/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=recipe-foojay&utm_term=tony.kim):
 
@@ -259,15 +280,18 @@ We then group by each tag, counting its occurrences across the collection.
 
 Output example:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">[
+```
+[
 
-&nbsp;&nbsp;{ _id: "vegetarian", count: 25 },
+  { _id: "vegetarian", count: 25 },
 
-&nbsp;&nbsp;{ _id: "quick", count: 18 },
+  { _id: "quick", count: 18 },
 
-&nbsp;&nbsp;{ _id: "soup", count: 12 },
+  { _id: "soup", count: 12 },
 
-]</pre>
+]
+```
+
 
 Now, we can see which tags are most common in the collection, giving insights into popular recipe attributes. This data could help users quickly find recipes based on popular tags or dietary preferences.
 
@@ -287,17 +311,20 @@ Advanced Tip: Using $match for Specific Filters {#h2-7-advanced-tip-using-match-
 
 You may want to group recipes of a specific type, such as only "Vegetarian" recipes. You can do this by adding a $match stage before $group to filter documents first.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&gt; db.recipes.aggregate([
+```
+> db.recipes.aggregate([
 
-&nbsp;&nbsp;{ $match: { vegetarian_option: true } },
+  { $match: { vegetarian_option: true } },
 
-&nbsp;&nbsp;{
+  {
 
-&nbsp;&nbsp;&nbsp;&nbsp;$group: { _id: "$type", count: { $sum: 1 }, recipes: { $push: "$title" } },
+    $group: { _id: "$type", count: { $sum: 1 }, recipes: { $push: "$title" } },
 
-&nbsp;&nbsp;},
+  },
 
-])</pre>
+])
+```
+
 
 In this example, only recipes with \`vegetarian_option: true\` are included in the grouping, allowing you to analyze vegetarian meal types specifically.
 

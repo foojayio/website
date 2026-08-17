@@ -51,167 +51,170 @@ Because I like Gradle more than Maven, I use Gradle for all my projects BUT as s
 
 Here is the Maven pom file for JArkanoid:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="xml">&lt;project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+```xml
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xmlns="http://maven.apache.org/POM/4.0.0"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"&gt;
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
-    &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
+    <modelVersion>4.0.0</modelVersion>
 
-    &lt;groupId&gt;eu.hansolo.fx&lt;/groupId&gt;
-    &lt;artifactId&gt;jarkanoid&lt;/artifactId&gt;
-    &lt;version&gt;17.0.7&lt;/version&gt;
-    &lt;packaging&gt;jar&lt;/packaging&gt;
+    <groupId>eu.hansolo.fx</groupId>
+    <artifactId>jarkanoid</artifactId>
+    <version>17.0.7</version>
+    <packaging>jar</packaging>
 
-    &lt;name&gt;JArkanoid&lt;/name&gt;
+    <name>JArkanoid</name>
 
-    &lt;properties&gt;
-        &lt;project.build.sourceEncoding&gt;UTF-8&lt;/project.build.sourceEncoding&gt;
-        &lt;maven.compiler.release&gt;11&lt;/maven.compiler.release&gt;
-        &lt;javafx.version&gt;17.0.6&lt;/javafx.version&gt;
-        &lt;javafx.plugin.version&gt;0.0.8&lt;/javafx.plugin.version&gt;
-        &lt;gluonfx.plugin.version&gt;1.0.16&lt;/gluonfx.plugin.version&gt;
-        &lt;charm.version&gt;6.2.2&lt;/charm.version&gt;
-        &lt;attach.version&gt;4.0.16&lt;/attach.version&gt;
-        &lt;main.class&gt;eu.hansolo.fx.jarkanoid.Main&lt;/main.class&gt;
-    &lt;/properties&gt;
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.release>11</maven.compiler.release>
+        <javafx.version>17.0.6</javafx.version>
+        <javafx.plugin.version>0.0.8</javafx.plugin.version>
+        <gluonfx.plugin.version>1.0.16</gluonfx.plugin.version>
+        <charm.version>6.2.2</charm.version>
+        <attach.version>4.0.16</attach.version>
+        <main.class>eu.hansolo.fx.jarkanoid.Main</main.class>
+    </properties>
 
-    &lt;dependencies&gt;
-        &lt;dependency&gt;
-            &lt;groupId&gt;org.openjfx&lt;/groupId&gt;
-            &lt;artifactId&gt;javafx-controls&lt;/artifactId&gt;
-            &lt;version&gt;${javafx.version}&lt;/version&gt;
-        &lt;/dependency&gt;
-        &lt;dependency&gt;
-            &lt;groupId&gt;org.openjfx&lt;/groupId&gt;
-            &lt;artifactId&gt;javafx-media&lt;/artifactId&gt;
-            &lt;version&gt;${javafx.version}&lt;/version&gt;
-        &lt;/dependency&gt;
-        &lt;dependency&gt;
-            &lt;groupId&gt;org.openjfx&lt;/groupId&gt;
-            &lt;artifactId&gt;javafx-swing&lt;/artifactId&gt;
-            &lt;version&gt;${javafx.version}&lt;/version&gt;
-        &lt;/dependency&gt;
+    <dependencies>
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-controls</artifactId>
+            <version>${javafx.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-media</artifactId>
+            <version>${javafx.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-swing</artifactId>
+            <version>${javafx.version}</version>
+        </dependency>
 
-        &lt;dependency&gt;
-            &lt;groupId&gt;com.gluonhq&lt;/groupId&gt;
-            &lt;artifactId&gt;charm-glisten&lt;/artifactId&gt;
-            &lt;version&gt;${charm.version}&lt;/version&gt;
-        &lt;/dependency&gt;
+        <dependency>
+            <groupId>com.gluonhq</groupId>
+            <artifactId>charm-glisten</artifactId>
+            <version>${charm.version}</version>
+        </dependency>
 
-        &lt;dependency&gt;
-            &lt;groupId&gt;com.gluonhq.attach&lt;/groupId&gt;
-            &lt;artifactId&gt;runtime-args&lt;/artifactId&gt;
-            &lt;version&gt;${attach.version}&lt;/version&gt;
-        &lt;/dependency&gt;
-        &lt;dependency&gt;
-            &lt;groupId&gt;com.gluonhq.attach&lt;/groupId&gt;
-            &lt;artifactId&gt;audio&lt;/artifactId&gt;
-            &lt;version&gt;${attach.version}&lt;/version&gt;
-        &lt;/dependency&gt;
-        &lt;dependency&gt;
-            &lt;groupId&gt;com.gluonhq.attach&lt;/groupId&gt;
-            &lt;artifactId&gt;storage&lt;/artifactId&gt;
-            &lt;version&gt;${attach.version}&lt;/version&gt;
-        &lt;/dependency&gt;
-        &lt;dependency&gt;
-            &lt;groupId&gt;com.gluonhq.attach&lt;/groupId&gt;
-            &lt;artifactId&gt;connectivity&lt;/artifactId&gt;
-            &lt;version&gt;${attach.version}&lt;/version&gt;
-        &lt;/dependency&gt;
-        &lt;dependency&gt;
-            &lt;groupId&gt;com.gluonhq.attach&lt;/groupId&gt;
-            &lt;artifactId&gt;display&lt;/artifactId&gt;
-            &lt;version&gt;${attach.version}&lt;/version&gt;
-        &lt;/dependency&gt;
-        &lt;dependency&gt;
-            &lt;groupId&gt;com.gluonhq.attach&lt;/groupId&gt;
-            &lt;artifactId&gt;lifecycle&lt;/artifactId&gt;
-            &lt;version&gt;${attach.version}&lt;/version&gt;
-        &lt;/dependency&gt;
-        &lt;dependency&gt;
-            &lt;groupId&gt;com.gluonhq.attach&lt;/groupId&gt;
-            &lt;artifactId&gt;local-notifications&lt;/artifactId&gt;
-            &lt;version&gt;${attach.version}&lt;/version&gt;
-        &lt;/dependency&gt;
-        &lt;dependency&gt;
-            &lt;groupId&gt;com.gluonhq.attach&lt;/groupId&gt;
-            &lt;artifactId&gt;settings&lt;/artifactId&gt;
-            &lt;version&gt;${attach.version}&lt;/version&gt;
-        &lt;/dependency&gt;
-        &lt;dependency&gt;
-            &lt;groupId&gt;com.gluonhq.attach&lt;/groupId&gt;
-            &lt;artifactId&gt;statusbar&lt;/artifactId&gt;
-            &lt;version&gt;${attach.version}&lt;/version&gt;
-        &lt;/dependency&gt;
-        &lt;dependency&gt;
-            &lt;groupId&gt;com.gluonhq.attach&lt;/groupId&gt;
-            &lt;artifactId&gt;util&lt;/artifactId&gt;
-            &lt;version&gt;${attach.version}&lt;/version&gt;
-        &lt;/dependency&gt;
-    &lt;/dependencies&gt;
+        <dependency>
+            <groupId>com.gluonhq.attach</groupId>
+            <artifactId>runtime-args</artifactId>
+            <version>${attach.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.gluonhq.attach</groupId>
+            <artifactId>audio</artifactId>
+            <version>${attach.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.gluonhq.attach</groupId>
+            <artifactId>storage</artifactId>
+            <version>${attach.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.gluonhq.attach</groupId>
+            <artifactId>connectivity</artifactId>
+            <version>${attach.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.gluonhq.attach</groupId>
+            <artifactId>display</artifactId>
+            <version>${attach.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.gluonhq.attach</groupId>
+            <artifactId>lifecycle</artifactId>
+            <version>${attach.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.gluonhq.attach</groupId>
+            <artifactId>local-notifications</artifactId>
+            <version>${attach.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.gluonhq.attach</groupId>
+            <artifactId>settings</artifactId>
+            <version>${attach.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.gluonhq.attach</groupId>
+            <artifactId>statusbar</artifactId>
+            <version>${attach.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.gluonhq.attach</groupId>
+            <artifactId>util</artifactId>
+            <version>${attach.version}</version>
+        </dependency>
+    </dependencies>
 
-    &lt;build&gt;
-        &lt;plugins&gt;
-            &lt;plugin&gt;
-                &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;
-                &lt;artifactId&gt;maven-compiler-plugin&lt;/artifactId&gt;
-                &lt;version&gt;3.8.1&lt;/version&gt;
-            &lt;/plugin&gt;
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.1</version>
+            </plugin>
 
-            &lt;plugin&gt;
-                &lt;groupId&gt;org.openjfx&lt;/groupId&gt;
-                &lt;artifactId&gt;javafx-maven-plugin&lt;/artifactId&gt;
-                &lt;version&gt;${javafx.plugin.version}&lt;/version&gt;
-                &lt;configuration&gt;
-                    &lt;mainClass&gt;${main.class}&lt;/mainClass&gt;
-                &lt;/configuration&gt;
-            &lt;/plugin&gt;
-            &lt;plugin&gt;
-                &lt;groupId&gt;com.gluonhq&lt;/groupId&gt;
-                &lt;artifactId&gt;gluonfx-maven-plugin&lt;/artifactId&gt;
-                &lt;version&gt;${gluonfx.plugin.version}&lt;/version&gt;
-                &lt;configuration&gt;
-                    &lt;target&gt;${gluonfx.target}&lt;/target&gt;
-                    &lt;mainClass&gt;${main.class}&lt;/mainClass&gt;
-                    &lt;attachList&gt;
-                        &lt;list&gt;runtime-args&lt;/list&gt;
-                        &lt;list&gt;audio&lt;/list&gt;
-                        &lt;list&gt;connectivity&lt;/list&gt;
-                        &lt;list&gt;display&lt;/list&gt;
-                        &lt;list&gt;lifecycle&lt;/list&gt;
-                        &lt;list&gt;local-notifications&lt;/list&gt;
-                        &lt;list&gt;settings&lt;/list&gt;
-                        &lt;list&gt;statusbar&lt;/list&gt;
-                        &lt;list&gt;storage&lt;/list&gt;
-                    &lt;/attachList&gt;
-                    &lt;graalvmHome&gt;/Library/Java/JavaVirtualMachines/gluon-graalvm/Contents/Home&lt;/graalvmHome&gt;
-                &lt;/configuration&gt;
-            &lt;/plugin&gt;
-        &lt;/plugins&gt;
-    &lt;/build&gt;
+            <plugin>
+                <groupId>org.openjfx</groupId>
+                <artifactId>javafx-maven-plugin</artifactId>
+                <version>${javafx.plugin.version}</version>
+                <configuration>
+                    <mainClass>${main.class}</mainClass>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>com.gluonhq</groupId>
+                <artifactId>gluonfx-maven-plugin</artifactId>
+                <version>${gluonfx.plugin.version}</version>
+                <configuration>
+                    <target>${gluonfx.target}</target>
+                    <mainClass>${main.class}</mainClass>
+                    <attachList>
+                        <list>runtime-args</list>
+                        <list>audio</list>
+                        <list>connectivity</list>
+                        <list>display</list>
+                        <list>lifecycle</list>
+                        <list>local-notifications</list>
+                        <list>settings</list>
+                        <list>statusbar</list>
+                        <list>storage</list>
+                    </attachList>
+                    <graalvmHome>/Library/Java/JavaVirtualMachines/gluon-graalvm/Contents/Home</graalvmHome>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 
-    &lt;profiles&gt;
-        &lt;profile&gt;
-            &lt;id&gt;android&lt;/id&gt;
-            &lt;properties&gt;
-                &lt;gluonfx.target&gt;android&lt;/gluonfx.target&gt;
-            &lt;/properties&gt;
-        &lt;/profile&gt;
-        &lt;profile&gt;
-            &lt;id&gt;ios&lt;/id&gt;
-            &lt;properties&gt;
-                &lt;gluonfx.target&gt;ios&lt;/gluonfx.target&gt;
-            &lt;/properties&gt;
-        &lt;/profile&gt;
-    &lt;/profiles&gt;
+    <profiles>
+        <profile>
+            <id>android</id>
+            <properties>
+                <gluonfx.target>android</gluonfx.target>
+            </properties>
+        </profile>
+        <profile>
+            <id>ios</id>
+            <properties>
+                <gluonfx.target>ios</gluonfx.target>
+            </properties>
+        </profile>
+    </profiles>
 
-    &lt;repositories&gt;
-        &lt;repository&gt;
-            &lt;id&gt;gluon-releases&lt;/id&gt;
-            &lt;url&gt;https://nexus.gluonhq.com/nexus/content/repositories/releases/&lt;/url&gt;
-        &lt;/repository&gt;
-    &lt;/repositories&gt;
-&lt;/project&gt;</pre>
+    <repositories>
+        <repository>
+            <id>gluon-releases</id>
+            <url>https://nexus.gluonhq.com/nexus/content/repositories/releases/</url>
+        </repository>
+    </repositories>
+</project>
+```
+
 
 #### iOS
 
@@ -247,17 +250,20 @@ Well that's the easy thing, a bit more work is needed to adjust the size from th
 
 Because Gluon does not support all the latest features available e.g. functional switch-case expressions, you need to change those as follows:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">// Desktop version
+```
+// Desktop version
 switch(enemySpawnPosition) {
-    case TOP_LEFT  -&gt; topLeftDoorAlpha  = 0.99;
-    case TOP_RIGHT -&gt; topRightDoorAlpha = 0.99;
+    case TOP_LEFT  -> topLeftDoorAlpha  = 0.99;
+    case TOP_RIGHT -> topRightDoorAlpha = 0.99;
 }
 
 // Gluon version
 switch(enemySpawnPosition) {
     case TOP_LEFT : topLeftDoorAlpha  = 0.99; break;
     case TOP_RIGHT: topRightDoorAlpha = 0.99; break;
-}</pre>
+}
+```
+
 
 So you have to make sure that you change all those switch-case statements.
 
@@ -277,13 +283,19 @@ Everywhere in our code where we define sizes (width, height) of elements (also f
 
 That means for example that the code
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">protected static final double INSET      = 22;
-protected static final Font   SCORE_FONT = Fonts.emulogic(20);</pre>
+```
+protected static final double INSET      = 22;
+protected static final Font   SCORE_FONT = Fonts.emulogic(20);
+```
+
 
 needs to be modified to this:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">protected static final double INSET      = 22 * SCALE_FACTOR;
-protected static final Font   SCORE_FONT = Fonts.emulogic(20 * SCALE_FACTOR);</pre>
+```
+protected static final double INSET      = 22 * SCALE_FACTOR;
+protected static final Font   SCORE_FONT = Fonts.emulogic(20 * SCALE_FACTOR);
+```
+
 
 I know that this does not look really nice...but it works and does the job 🙂
 

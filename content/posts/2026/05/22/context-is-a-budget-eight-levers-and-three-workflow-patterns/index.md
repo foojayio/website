@@ -67,7 +67,7 @@ These aren't in priority order --- they're in the order you'd naturally encounte
 
 ![Eight levers that mananges token budget](eight-levers-700x211.png)
 
-*** ** * ** ***
+
 
 ### A. Context engineering --- scope your asks {#h3-2-a-context-engineering-scope-your-asks}
 
@@ -86,7 +86,7 @@ Specificity is free. Every `#file:` (Copilot) or explicit path (Claude Code) you
 
 **Do this Monday:** make `#file:` your default. Use agent-mode-with-broad-retrieval only when you genuinely don't know what you don't know.
 
-*** ** * ** ***
+
 
 ### B. Prompt caching --- order matters {#h3-3-b-prompt-caching-order-matters}
 
@@ -106,7 +106,7 @@ The classic anti-pattern is innocent-looking and brutal is to have dynamic value
 
 **Do this Monday:** audit the *first* 200 tokens of your system prompts. Anything that changes per-request belongs further down.
 
-*** ** * ** ***
+
 
 ### C. Tool \& MCP hygiene --- every schema is a tax {#h3-4-c-tool-mcp-hygiene-every-schema-is-a-tax}
 
@@ -128,7 +128,7 @@ The same discipline applies to **the tools you build yourself** . A tool that re
 
 **Do this Monday:** open MCP server list, disable everything you didn't actively use this week. Re-enable on demand.
 
-*** ** * ** ***
+
 
 ### D. Custom instructions \& skills --- codify it once {#h3-5-d-custom-instructions-skills-codify-it-once}
 
@@ -155,7 +155,7 @@ This file is loaded *only* when a matching file is in scope. Repo-wide rules go 
 
 **Do this Monday:** check what you've typed into chat windows in the last week. Anything that reappeared more than twice is a candidate for an instructions file.
 
-*** ** * ** ***
+
 
 ### E. Model routing --- start cheap, escalate when stuck {#h3-6-e-model-routing-start-cheap-escalate-when-stuck}
 
@@ -176,7 +176,7 @@ The math compounds. A team of fifty doing twenty agent runs each per day at 10×
 
 **Do this Monday:** pin your default to the mid-tier. Make Opus a deliberate choice with a reason.
 
-*** ** * ** ***
+
 
 ### F. Output discipline --- diffs, not novels {#h3-7-f-output-discipline-diffs-not-novels}
 
@@ -200,7 +200,7 @@ The leverage is in the system prompt. Two lines in `copilot-instructions.md` mak
 
 **Do this Monday:** add those two lines.
 
-*** ** * ** ***
+
 
 ### G. Repo hygiene --- what the indexer sees {#h3-8-g-repo-hygiene-what-the-indexer-sees}
 
@@ -235,7 +235,7 @@ Three lines, \~50 tokens. Now "what does the template engine do?" can be answere
 
 **Do this Monday:** `git rm --cached` whatever shouldn't be indexed; add three-line summaries to your top-of-mind modules.
 
-*** ** * ** ***
+
 
 ### H. Observability --- latency is your token meter {#h3-9-h-observability-latency-is-your-token-meter}
 
@@ -275,7 +275,7 @@ The eight levers above shrink the cost of an individual turn. These three patter
 
 ![3 workflow patterns](workflow-patterns-700x194.png)
 
-*** ** * ** ***
+
 
 ### 1. The Ralph Wiggum loop {#h3-11-1-the-ralph-wiggum-loop}
 
@@ -298,7 +298,7 @@ After it runs, `git log --oneline` reads like a changelog: one commit per task, 
 
 ![TODO.md mid-loop on the left, the per-task git log on the right — disk is the memory](07-todo-gitlog-700x280.png)
 
-*** ** * ** ***
+
 
 ### 2. Auto-compact {#h3-12-2-auto-compact}
 
@@ -318,7 +318,7 @@ If you are interested in a sofisticated implementation of compaction, check this
 
 **Rule of thumb:** one task per chat. New task → new chat with summary attached.
 
-*** ** * ** ***
+
 
 ### 3. Planner → Implementer → Reviewer (agent handover) {#h3-13-3-planner-implementer-reviewer-agent-handover}
 

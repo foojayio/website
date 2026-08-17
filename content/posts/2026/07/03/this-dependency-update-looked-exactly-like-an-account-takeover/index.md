@@ -76,17 +76,23 @@ Try it on your own pom.xml {#h2-3-try-it-on-your-own-pom-xml}
 
 The whole thing is one jar. You need a JRE 21.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">curl -fsSL https://github.com/marshal-hq/marshal/releases/download/v0.2.0/marshal-cli-0.2.0.jar -o marshal.jar
+```
+curl -fsSL https://github.com/marshal-hq/marshal/releases/download/v0.2.0/marshal-cli-0.2.0.jar -o marshal.jar
 
-java -jar marshal.jar scan --build-file ./pom.xml</pre>
+java -jar marshal.jar scan --build-file ./pom.xml
+```
+
 
 Output looks like this (trimmed):
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">● ORANGE  javax.activation:activation  1.1-rev-1 → 1.1.1   55/100
+```
+● ORANGE  javax.activation:activation  1.1-rev-1 → 1.1.1   55/100
           SIG-DROPPED: prior releases signed, this one is not
           MISSING-SIG: no GPG signature for this release
 
-1 finding at or above threshold. Exit code 1.</pre>
+1 finding at or above threshold. Exit code 1.
+```
+
 
 Gradle projects work the same way, point --build-file at build.gradle or build.gradle.kts and Marshal resolves the full dependency graph through the Gradle tooling itself rather than trying to parse the build file as text. For CI there is JSON output (`--output json`, schema is stable at 1.0) and a threshold flag (`--threshold orange`) that controls the exit code, so wiring it into a pipeline is one line. Exit codes are boring on purpose: 0 clean, 1 findings at or above threshold, 2 usage error, 3 could not resolve. That last one can never be silenced by configuration. "I could not analyze your build" should never quietly pass.
 

@@ -82,7 +82,8 @@ Yeah, AI can generate code that uses @Test and compiles. It will save a lot of m
 
 Here's a quick example:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">// AI might generate something like this:
+```
+// AI might generate something like this:
 @Test
 void testProcessItem() {
     ItemProcessor processor = new ItemProcessor(/* dependencies */);
@@ -96,7 +97,9 @@ void testProcessItem() {
     processor.process(item);
 
     // Problem: No assertion! Does 'process' do anything? Is item saved?
-}</pre>
+}
+```
+
 
 Looks like a test, runs, but proves nothing. And it will be GREEN !! . *You gotta check.*
 
@@ -112,7 +115,8 @@ If your calculateTax method has a bug and returns negative tax for some inputs, 
 
 Here is a simple example of this buggy method and its AI generated test:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">public BigDecimal calculateTax(BigDecimal income) {
+```
+public BigDecimal calculateTax(BigDecimal income) {
    BigDecimal grossTax = income.multiply(TAX_RATE);
 
    // *** THE BUG IS HERE ***
@@ -133,7 +137,9 @@ void calculateTax_whenIncomeIsLow_shouldReturnNegativeTax_dueToBug() {
   // We are specifically asserting that the bug produces this negative result.
   assertEquals(expectedNegativeTax, actualTax,
                 "BUG CONFIRMATION: calculateTax should return -3500.00 for 10000.00 income");
-}</pre>
+}
+```
+
 
 Why?
 
@@ -150,7 +156,8 @@ Let's see which are the challenges with the validation trap and recommendations 
 
 Consider this buggy code:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">// Buggy Implementation
+```
+// Buggy Implementation
 public String formatUsername(String name) {
     if (name == null || name.trim().isEmpty()) {
         return "guest"; // Should maybe throw exception?
@@ -167,7 +174,9 @@ void whenNameHasSpace_shouldReturnLowerCase() { // Validates bug!
     // AI sees the code returns "test user", so it asserts that.
     // Requirement might be to remove spaces or throw error.
     assertEquals("test user", result);
-}</pre>
+}
+```
+
 
 This test passes but locks in the bad behavior of allowing spaces. You, the dev, need to check if the test matches the *requirement*, not just the buggy code.
 
@@ -185,7 +194,8 @@ One of these tools is SonarQube, which has 47 specific rules just for Java tests
 * **Purpose:** Ensure tests make meaningful checks. It can be easy to forget assertions and the test will pass making it difficult to spot.
 * **Example ([Rule S2699](https://rules.sonarsource.com/java/RSPEC-2699/)):**
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">// Noncompliant code
+```
+// Noncompliant code
 @Test
 void testAddItem() {
     Cart cart = new Cart();
@@ -201,7 +211,9 @@ void testAddItem() {
     Item item = new Item("Thing");
     cart.add(item);
     assertEquals(1, cart.getItemCount()); // Added assertion
-}</pre>
+}
+```
+
 
 * **AI Trap:** AI might just call the method and forget the assert.
 
@@ -210,7 +222,8 @@ void testAddItem() {
 * **Purpose:** Enforce standard test structure conventions needed by frameworks like JUnit.
 * **Example ([Rule S5786](https://rules.sonarsource.com/java/RSPEC-5786/)):**
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">// Noncompliant code (JUnit 5)
+```
+// Noncompliant code (JUnit 5)
 @Test
 private void myPrivateTest() { // Test methods shouldn't be private
     assertTrue(true);
@@ -220,7 +233,9 @@ private void myPrivateTest() { // Test methods shouldn't be private
 @Test
 void myVisibleTest() { // Default visibility is fine, or public
     assertTrue(true);
-}</pre>
+}
+```
+
 
 * **AI Trap:** Generating methods with wrong visibility (private, static) or return types.
 
@@ -229,7 +244,8 @@ void myVisibleTest() { // Default visibility is fine, or public
 * **Purpose:** Make tests readable and understandable from their names. The BDD convention is widely adopted, but there are [others](https://dzone.com/articles/7-popular-unit-test-naming).
 * **Example ([Rule S3577](https://rules.sonarsource.com/java/RSPEC-3577/)):**
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">// Noncompliant code
+```
+// Noncompliant code
 @Test
 void test1() {
     // ... complex setup and assert ...
@@ -239,7 +255,9 @@ void test1() {
 @Test
 void shouldThrowIllegalArgumentException_WhenInputIsNull() {
     // ... clear test logic for null input ...
-}</pre>
+}
+```
+
 
 * **AI Trap:** Using generic names like testMethod1 or test_feature_abc.
 
@@ -248,7 +266,8 @@ void shouldThrowIllegalArgumentException_WhenInputIsNull() {
 * **Purpose:** Ensure proper use of framework features and APIs. Test frameworks provide specific ways of handling different use cases. In this particular case, exceptions.
 * **Example ([Rule S5776](https://rules.sonarsource.com/java/RSPEC-5776/)):**
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">// Noncompliant code (JUnit 5) - Old way to check exceptions
+```
+// Noncompliant code (JUnit 5) - Old way to check exceptions
 @Test
 void testDivisionByZero_OldWay() {
     Calculator calc = new Calculator();
@@ -264,10 +283,12 @@ void testDivisionByZero_OldWay() {
 @Test
 void testDivisionByZero_NewWay() {
     Calculator calc = new Calculator();
-    assertThrows(ArithmeticException.class, () -&gt; {
+    assertThrows(ArithmeticException.class, () -> {
         calc.divide(1, 0);
     });
-}</pre>
+}
+```
+
 
 * **AI Trap:** Using outdated patterns (like the try/catch/fail for exceptions) or mixing framework versions.
 
@@ -276,7 +297,8 @@ void testDivisionByZero_NewWay() {
 * **Purpose:** Avoid bad practices like printing to console or leaking resources in tests. It is not easily configurable, can mess with build tools and it's a sync process that will slow down the build.
 * **Example ([Rule S106](https://rules.sonarsource.com/java/RSPEC-106/)):**
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">// Noncompliant code
+```
+// Noncompliant code
 @Test
 void testSomethingComplex() {
     // ... logic ...
@@ -290,7 +312,9 @@ void testSomethingComplex() {
     // ... logic ...
     log.debug("Debug: Intermediate value = " + value);
     // ... asserts ...
-}</pre>
+}
+```
+
 
 * **AI Trap:** Leaving System.out.println calls used during generation/debugging.
 
@@ -299,7 +323,8 @@ void testSomethingComplex() {
 * **Purpose:** Guide correct usage of mocking frameworks like Mockito, specially on the setup phase. If not done correctly can lead to unexpected issues.
 * **Example ([Rule S5979](https://rules.sonarsource.com/java/RSPEC-5979)):**
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">// Noncompliant code (Potential Issue: Forgetting to mock)@Testvoid testServiceUsingRepository() {
+```
+// Noncompliant code (Potential Issue: Forgetting to mock)@Testvoid testServiceUsingRepository() {
     // Missing mock setup for repository dependency
     MyRepository repo; // = mock(MyRepository.class);
     MyService service = new MyService(repo); // Might throw NPE if repo is null
@@ -316,7 +341,9 @@ void testServiceUsingRepository() {
     service.doWork();
     verify(repo).getData(); // Verify interaction
     // Add assertions based on service logic
-}</pre>
+}
+```
+
 
 * **AI Trap:** Generating incomplete mock setups or incorrect verification logic.
 
@@ -325,12 +352,13 @@ void testServiceUsingRepository() {
 * **Purpose:** Ensure tests checking for exceptions look for the *specific* expected exception. Generic exceptions can swallow several different use cases, and the code should catch those exceptions types that can handle.
 * **Example ([Rule S112](https://rules.sonarsource.com/java/RSPEC-112)):**
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">// Noncompliant code
+```
+// Noncompliant code
 @Test
 void testInvalidInput() {
     Processor processor = new Processor();
     // This is too broad, might catch unexpected runtime exceptions
-    assertThrows(Exception.class, () -&gt; {
+    assertThrows(Exception.class, () -> {
         processor.process(null);
     });
 }
@@ -340,10 +368,12 @@ void testInvalidInput() {
 void testInvalidInput() {
     Processor processor = new Processor();
     // Be specific about the expected exception
-    assertThrows(IllegalArgumentException.class, () -&gt; {
+    assertThrows(IllegalArgumentException.class, () -> {
         processor.process(null);
     });
-}</pre>
+}
+```
+
 
 * **AI Trap:** Using generic Exception when a more specific one is appropriate.
 

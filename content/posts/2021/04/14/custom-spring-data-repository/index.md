@@ -38,15 +38,16 @@ The starting architecture for my application is pretty standard:
 
 Because it's standard, Spring handles a lot of the plumbing, and we don't need to write a lot of code. With Kotlin, it's even more concise:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="kotlin">class Person(@Id val id: Long, var name: String, var birthdate: LocalDate?)
+```kotlin
+class Person(@Id val id: Long, var name: String, var birthdate: LocalDate?)
 
-interface PersonRepository : CrudRepository&lt;Person, Long&gt;
+interface PersonRepository : CrudRepository<Person, Long>
 
 @RestController
 class PersonController(private val repository: PersonRepository) {
 
     @GetMapping
-    fun getAll(): Iterable&lt;Person&gt; = repository.findAll()
+    fun getAll(): Iterable<Person> = repository.findAll()
 
     @GetMapping("/{id}")
     fun getOne(@PathVariable id: Long) = repository.findById(id)
@@ -55,15 +56,18 @@ class PersonController(private val repository: PersonRepository) {
 @SpringBootApplication
 class SpringDataArrowApplication
 
-fun main(args: Array&lt;String&gt;) {
-    runApplication&lt;SpringDataArrowApplication&gt;(*args)
-}</pre>
+fun main(args: Array<String>) {
+    runApplication<SpringDataArrowApplication>(*args)
+}
+```
+
 
 ### Toward a more functional approach {#h3-1-toward-a-more-functional-approach}
 
 This step has nothing to do with Spring Data and is not required, but it fits the functional approach better. As mentioned above, we can benefit from using the Routes and Beans DSL. Let's refactor the above code to remove annotations as much as possible.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="kotlin">class PersonHandler(private val repository: PersonRepository) {                   // 1
+```kotlin
+class PersonHandler(private val repository: PersonRepository) {                   // 1
 
   fun getAll(req: ServerRequest) = ServerResponse.ok().body(repository.findAll()) // 2
   fun getOne(req: ServerRequest): ServerResponse = repository
@@ -73,9 +77,9 @@ This step has nothing to do with Spring Data and is not required, but it fits th
 }
 
 fun beans() = beans {                                                             // 4
-  bean&lt;PersonHandler&gt;()
+  bean<PersonHandler>()
   bean {
-    val handler = ref&lt;PersonHandler&gt;()                                            // 5
+    val handler = ref<PersonHandler>()                                            // 5
     router {
       GET("/", handler::getAll)
       GET("/{id}", handler::getOne)
@@ -83,11 +87,13 @@ fun beans() = beans {                                                           
   }
 }
 
-fun main(args: Array&lt;String&gt;) {
-  runApplication&lt;SpringDataArrowApplication&gt;(*args) {
+fun main(args: Array<String>) {
+  runApplication<SpringDataArrowApplication>(*args) {
     addInitializers(beans())                                                      // 6
   }
-}</pre>
+}
+```
+
 
 1. Create a handler class to organize the routing functions
 2. All routing functions should accept a `ServerRequest` parameter and return a `ServerResponse`
@@ -117,15 +123,18 @@ How do we bridge the gap between `Optional` and `Either`?
 
 Here's a first attempt:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="kotlin">repository
+```kotlin
+repository
     .findById(req.pathVariable("id").toLong())      // 1
     .map { Either.fromNullable(it) }                // 2
-    .map { either -&gt;
+    .map { either ->
         either.fold(
             { ServerResponse.notFound().build() },  // 3
             { ServerResponse.ok().body(it) }        // 3
         )
-    }.get()                                         // 4</pre>
+    }.get()                                         // 4
+```
+
 
 1. `Optional`
 2. `Optional<Either>`
@@ -134,19 +143,25 @@ Here's a first attempt:
 
 I believe the usage of `Optional<Either>` is not great. However, Kotlin can help us in this regard with extension functions:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="kotlin">private fun &lt;T&gt; Optional&lt;T&gt;.toEither() =
+```kotlin
+private fun <T> Optional<T>.toEither() =
     if (isPresent) Either.right(get())
-    else Unit.left()</pre>
+    else Unit.left()
+```
+
 
 With this function, we can improve the existing code:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="kotlin">repository
+```kotlin
+repository
     .findById(req.pathVariable("id").toLong())    // 1
     .toEither()                                   // 2
     .fold(
         { ServerResponse.notFound().build() },    // 3
         { ServerResponse.ok().body(it) }          // 3
-    )<code class="language-kotlin"></code></pre>
+    )<code class="language-kotlin"></code>
+```
+
 
 1. `Optional`
 2. `Either`
@@ -173,8 +188,9 @@ The next extensibility level is to add any function with the desired signature v
 * An interface that declares the wanted function
 * A class that implements the interface
 
-<pre class="EnlighterJSRAW" data-enlighter-language="kotlin">interface CustomPersonRepository {                                         // 1
-    fun arrowFindById(id: Long): Either&lt;Unit, Person&gt;                      // 2
+```kotlin
+interface CustomPersonRepository {                                         // 1
+    fun arrowFindById(id: Long): Either<Unit, Person>                      // 2
 }
 
 class CustomPersonRepositoryImpl(private val ops: JdbcAggregateOperations) // 3
@@ -185,7 +201,9 @@ class CustomPersonRepositoryImpl(private val ops: JdbcAggregateOperations) // 3
 }
 
 interface PersonRepository
-    : CrudRepository&lt;Person, Long&gt;, CustomPersonRepository                 // 6</pre>
+    : CrudRepository<Person, Long>, CustomPersonRepository                 // 6
+```
+
 
 1. New custom interface
 2. Declare the wanted function
@@ -196,11 +214,14 @@ interface PersonRepository
 
 Now, we can call:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="kotlin">repository.arrowFindById(req.pathVariable("id").toLong())
+```kotlin
+repository.arrowFindById(req.pathVariable("id").toLong())
     .fold(
         { ServerResponse.notFound().build() },
         { ServerResponse.ok().body(it) }
-    )</pre>
+    )
+```
+
 
 This approach works but has one major flaw. To avoid a clash in the functions' signature, we have to invent an original name for our function that returns `Either` *i.e.* `arrowFindById()`.
 
@@ -218,23 +239,26 @@ The detailed flow is pretty complex: the important part is the `SimpleJdbcReposi
 
 Let's create a base repository that uses `Either`:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="kotlin">@NoRepositoryBean
-interface ArrowRepository&lt;T, ID&gt; : Repository&lt;T, ID&gt; {               // 1
-    fun findById(id: Long): Either&lt;Unit, T&gt;                          // 2
-    fun findAll(): Iterable&lt;T&gt;                                       // 3
+```kotlin
+@NoRepositoryBean
+interface ArrowRepository<T, ID> : Repository<T, ID> {               // 1
+    fun findById(id: Long): Either<Unit, T>                          // 2
+    fun findAll(): Iterable<T>                                       // 3
 }
 
-class SimpleArrowRepository&lt;T, ID&gt;(                                  // 4
+class SimpleArrowRepository<T, ID>(                                  // 4
     private val ops: JdbcAggregateOperations,
-    private val entity: PersistentEntity&lt;T, *&gt;
-) : ArrowRepository&lt;T, ID&gt; {
+    private val entity: PersistentEntity<T, *>
+) : ArrowRepository<T, ID> {
 
     override fun findById(id: Long) = Either.fromNullable(
         ops.findById(id, entity.type)                                // 5
     )
 
-    override fun findAll(): Iterable&lt;T&gt; = ops.findAll(entity.type)
-}</pre>
+    override fun findAll(): Iterable<T> = ops.findAll(entity.type)
+}
+```
+
 
 1. Our new interface repository...
 2. ...with the signature we choose without any collision risk.
@@ -244,20 +268,29 @@ class SimpleArrowRepository&lt;T, ID&gt;(                                  // 4
 
 We need to annotate the main application class with `@EnableJdbcRepositories` and configure the latter to switch to this base class.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="kotlin">@SpringBootApplication
+```kotlin
+@SpringBootApplication
 @EnableJdbcRepositories(repositoryBaseClass = SimpleArrowRepository::class)
-class SpringDataArrowApplication</pre>
+class SpringDataArrowApplication
+```
+
 
 To ease the usage from the client code, we can create an annotation that overrides the default value:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="kotlin">@EnableJdbcRepositories(repositoryBaseClass = SimpleArrowRepository::class)
-annotation class EnableArrowRepositories</pre>
+```kotlin
+@EnableJdbcRepositories(repositoryBaseClass = SimpleArrowRepository::class)
+annotation class EnableArrowRepositories
+```
+
 
 Now, the usage is straightforward:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="kotlin">@SpringBootApplication
+```kotlin
+@SpringBootApplication
 @EnableArrowRepositories
-class SpringDataArrowApplication</pre>
+class SpringDataArrowApplication
+```
+
 
 At this point, we can move the Arrow repository code into its project and distribute it for other "client" projects to use. No further extension is necessary, though Spring Data offers much more, *e.g.*, switching the factory bean.
 

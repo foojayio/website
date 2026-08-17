@@ -31,25 +31,28 @@ Take 5 minutes of your time and get this challenge done!
 
 What will happen in the following code?
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">import java.util.List;
+```java
+import java.util.List;
 import java.util.Optional;
 
 public class OptionalChallenge4 {
 
     public static void main(String... doYourBest) {
-        List&lt;Integer&gt; list = List.of(10, 1, 3, 5, 7, 9);
+        List<Integer> list = List.of(10, 1, 3, 5, 7, 9);
 
-        Optional&lt;Integer&gt; number =
+        Optional<Integer> number =
                 list.stream()
-                .takeWhile(i -&gt; i &gt; 5)
-                .dropWhile(i -&gt; i &gt; 9)
+                .takeWhile(i -> i > 5)
+                .dropWhile(i -> i > 9)
                 .findFirst()
-                .or(() -&gt; Optional.of(777));
+                .or(() -> Optional.of(777));
 
         System.out.println(number);
     }
 
-}</pre>
+}
+```
+
 
 A) Optional\[777\]  
 

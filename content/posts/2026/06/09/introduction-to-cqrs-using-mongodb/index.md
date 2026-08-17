@@ -34,7 +34,10 @@ In this tutorial, you'll:
 
 You can find all the code presented in this tutorial in the [GitHub repository](https://github.com/soujava/helidon-mongodb-cqrs):
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">git clone <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="73141a0733141a071b06115d101c1e">[email&nbsp;protected]</a>:soujava/helidon-mongodb-cqrs.git</pre>
+```bash
+git clone <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="73141a0733141a071b06115d101c1e">[email protected]</a>:soujava/helidon-mongodb-cqrs.git
+```
+
 
 Prerequisites {#h2-0-prerequisites}
 -----------------------------------
@@ -49,7 +52,10 @@ For this tutorial, you'll need:
 
 You can use the following Docker command to start a standalone MongoDB instance:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="dockerfile" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">docker run --rm -d --name mongodb-instance -p 27017:27017 mongo</pre>
+```dockerfile
+docker run --rm -d --name mongodb-instance -p 27017:27017 mongo
+```
+
 
 By decoupling read and write operations, CQRS assigns each its own responsibility. Instead of using one model to manage both state changes and data retrieval, CQRS separates these into commands and queries. Commands represent actions and enforce business rules, while queries retrieve information from purpose-built data models. This separation avoids conflicts and allows each side to evolve independently.
 
@@ -61,21 +67,27 @@ This tutorial focuses on a specific, instructional use case: authorizing card us
 
 To maintain consistency [with the previous post](https://dev.to/mongodb/introduction-to-events-using-mongodb-22b4), we will use [Helidon](https://helidon.io/starter/4.4.1) with MicroProfile. You may define the groupId, artifactId, version, and package name as you prefer. After downloading the project, include the MongoDB integration---Eclipse JNoSQL---in the pom.xml file at the project root:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="xml" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&lt;dependency&gt;
-   &lt;groupId&gt;org.eclipse.jnosql.databases&lt;/groupId&gt;
-   &lt;artifactId&gt;jnosql-mongodb&lt;/artifactId&gt;
-   &lt;version&gt;1.1.13&lt;/version&gt;
-&lt;/dependency&gt;</pre>
+```xml
+<dependency>
+   <groupId>org.eclipse.jnosql.databases</groupId>
+   <artifactId>jnosql-mongodb</artifactId>
+   <version>1.1.13</version>
+</dependency>
+```
+
 
 With the project defined, the next step is to set the database configuration. You can either use a local database or explore MongoDB Atlas; either is fine. We will use locally, thus, run this Docker command to start a MongoDB instance:
 
 Include those new properties:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group=""># configure the MongoDB client for a replica set of two nodes
-jnosql.mongodb.url=mongodb+srv://admin:&lt;db_password&gt;@cluster0.gblhb3d.mongodb.net/?appName=devrel-article-java-jnosql
+```
+# configure the MongoDB client for a replica set of two nodes
+jnosql.mongodb.url=mongodb+srv://admin:<db_password>@cluster0.gblhb3d.mongodb.net/?appName=devrel-article-java-jnosql
 # mandatory define the database name
 jnosql.document.database=cards
-jnosql.mongodb.application.name=devrel-article-java-jnosql</pre>
+jnosql.mongodb.application.name=devrel-article-java-jnosql
+```
+
 
 PRO TIP: MongoDB Atlas is a valuable Database-as-a-Service option. It simplifies operations by delegating database management to MongoDB experts.
 
@@ -84,7 +96,8 @@ Step 1: Create the entities {#h2-1-step-1-create-the-entities}
 
 The first step is to create the necessary entities. We need entities for managing status and a separate entity for queries, which can serve as an aggregator or summary. On the command side, we define two entities: Card, which holds the current status and available amount, and OperationResult, which records each card operation attempt. OperationResult is immutable and cannot be changed once it is stored in the database.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">package com.acme.cards.command;
+```java
+package com.acme.cards.command;
 
 import com.acme.cards.infraestructure.JsonFieldStrategy;
 import jakarta.json.bind.annotation.JsonbVisibility;
@@ -141,7 +154,7 @@ public class Card {
      */
     public boolean canAuthorize(BigDecimal amount) {
         return status == CardOperationStatus.ACTIVE
-                &amp;&amp; availableBalance.compareTo(amount) &gt;= 0;
+                && availableBalance.compareTo(amount) >= 0;
     }
 
     /**
@@ -174,9 +187,12 @@ public class Card {
                 ", cardOperationStatus=" + status +
                 '}';
     }
-}</pre>
+}
+```
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">package com.acme.cards.command;
+
+```java
+package com.acme.cards.command;
 
 import jakarta.nosql.Column;
 import jakarta.nosql.Entity;
@@ -191,23 +207,32 @@ public record OperationResult(@Id UUID id,
                               @Column OperationStatus status,
                               @Column String reason,
                               @Column Instant processedAt) {
-}</pre>
+}
+```
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">package com.acme.cards.command;
+
+```java
+package com.acme.cards.command;
 
 public enum CardOperationStatus {
     ACTIVE, BLOCKED
-}</pre>
+}
+```
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">package com.acme.cards.command;
+
+```java
+package com.acme.cards.command;
 
 public enum OperationStatus {
     APPROVED, DECLINED
-}</pre>
+}
+```
+
 
 After creating the command operations, the next step is to define the entity where we will store the transactions and operations. This entity will define where the user will read. This one is where we will process the data and make it available to the read operations.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">package com.acme.cards.query;
+```java
+package com.acme.cards.query;
 
 import jakarta.nosql.Column;
 import jakarta.nosql.Entity;
@@ -223,11 +248,14 @@ public record TransactionView(@Id UUID id,
                               @Column BigDecimal amount,
                               @Column String status,
                               @Column Instant createdAt) {
-}</pre>
+}
+```
+
 
 To simplify the structure, we will create a REST API to generate cards. Based on these cards, we will handle debit operations and check if a card has sufficient available balance.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">package com.acme.cards.command;
+```java
+package com.acme.cards.command;
 
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
@@ -265,11 +293,11 @@ public class CardResource {
     }
 
     @GET
-    public List&lt;Card&gt; findAll() {
+    public List<Card> findAll() {
 
         LOGGER.info("Fetching all cards");
 
-        List&lt;Card&gt; cards = template.select(Card.class).result();
+        List<Card> cards = template.select(Card.class).result();
         if (cards.isEmpty()) {
             LOGGER.warning("No cards found. Seeding initial dataset...");
             cards = generateCards();;
@@ -284,21 +312,21 @@ public class CardResource {
 
         LOGGER.info("Fetching card with id=" + id);
 
-        return template.find(Card.class, id).orElseThrow(() -&gt;
+        return template.find(Card.class, id).orElseThrow(() ->
                    new WebApplicationException("Card not found with the id: " + id, Response.Status.NOT_FOUND)
                 );
     }
 
-    private List&lt;Card&gt; generateCards() {
-        List&lt;Card&gt; cards = new ArrayList&lt;&gt;(); ;
+    private List<Card> generateCards() {
+        List<Card> cards = new ArrayList<>(); ;
 
         IntStream.range(0, 5)
-                .mapToObj(i -&gt; new Card(
+                .mapToObj(i -> new Card(
                         UUID.randomUUID(),
                         INITIAL_BALANCE,
                         CardOperationStatus.ACTIVE
                 ))
-                .forEach(card -&gt; {
+                .forEach(card -> {
                     cards.add(template.insert(card));
                     LOGGER.fine("Seeded card with id=" + card.getId()
                             + " and balance=" + card.getAvailableBalance());
@@ -307,7 +335,9 @@ public class CardResource {
         LOGGER.info("Finished seeding cards + " + cards.size() + " cards created");
         return cards;
     }
-}</pre>
+}
+```
+
 
 With this structure, we can now work with cards. In a real-world scenario, additional card statuses such as frozen or canceled would be included. Here, we focus on a small part of the problem to highlight the architectural pattern.
 
@@ -316,17 +346,21 @@ Step 2: Creating Command {#h2-2-step-2-creating-command}
 
 The next step is to create the command responsible for write operations. Here, we use the AuthorizeCardCommand, which encapsulates the attributes needed for card operations. This approach avoids handling numerous parameters by using a single class.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">package com.acme.cards.command;
+```java
+package com.acme.cards.command;
 
 import java.math.BigDecimal;
 import java.util.UUID;
 
 public record AuthorizeCardCommand(UUID cardId, BigDecimal amount, String reason) {
-}</pre>
+}
+```
+
 
 The next class is the handler responsible for processing authorizations. When a debit is requested, it checks if sufficient funds are available. If so, it processes the transaction and updates the TransactionView, as addressed in the query section.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">package com.acme.cards.command;
+```java
+package com.acme.cards.command;
 
 import com.acme.cards.query.TransactionView;
 import jakarta.enterprise.context.ApplicationScoped;
@@ -363,7 +397,7 @@ public class AuthorizeCardCommandHandler {
                 + " amount=" + command.amount());
 
         var card = template.find(Card.class, command.cardId())
-                .orElseThrow(() -&gt; new WebApplicationException("Card not found, cardid=" + command.cardId(), NOT_FOUND));
+                .orElseThrow(() -> new WebApplicationException("Card not found, cardid=" + command.cardId(), NOT_FOUND));
 
         var operationId = UUID.randomUUID();
 
@@ -416,11 +450,14 @@ public class AuthorizeCardCommandHandler {
 
         template.insert(view);
     }
-}</pre>
+}
+```
+
 
 Finally, we define the resource that initiates the command operation:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">package com.acme.cards.command;
+```java
+package com.acme.cards.command;
 
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
@@ -458,14 +495,17 @@ public class CardCommandResource {
         return handler.handle(command);
     }
 
-}</pre>
+}
+```
+
 
 Step 3: Create Query {#h2-3-step-3-create-query}
 ------------------------------------------------
 
 The final step is to create the query resource. While the command writes transactions, the query retrieves processed transactions for a given card.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">package com.acme.cards.query;
+```java
+package com.acme.cards.query;
 
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
@@ -497,7 +537,7 @@ public class CardQueryResource {
     }
 
     @GET
-    public List&lt;TransactionView&gt; findByCardId(@PathParam("id") UUID cardId) {
+    public List<TransactionView> findByCardId(@PathParam("id") UUID cardId) {
 
         LOGGER.info("Fetching transactions for cardId=" + cardId);
 
@@ -508,7 +548,9 @@ public class CardQueryResource {
                 .desc()
                 .result();
     }
-}</pre>
+}
+```
+
 
 Conclusion {#h2-4-conclusion}
 -----------------------------

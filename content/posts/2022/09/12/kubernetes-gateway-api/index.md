@@ -38,7 +38,8 @@ The biggest issue of `Ingress` is its dependency on "proprietary" objects.
 
 As a reminder, here's the snippet to create routing using Apache APISIX:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml" data-enlighter-theme="dracula" data-enlighter-highlight="1,2">apiVersion: apisix.apache.org/v2beta3            #1
+```yaml
+apiVersion: apisix.apache.org/v2beta3            #1
 kind: ApisixRoute                                #1
 metadata:
   name: apisix-route
@@ -57,7 +58,9 @@ spec:
         - "/right"
     backends:
       - serviceName: right
-        servicePort: 80</pre>
+        servicePort: 80
+```
+
 
 1. Proprietary objects
 
@@ -89,13 +92,17 @@ Let's replace the `Ingress` we previously configured with the Gateway API. Sever
 
 ### Install the new Gateway s {#h3-3-install-the-new-gateway-crds}
 
-<pre class="EnlighterJSRAW" data-enlighter-language="shell" data-enlighter-theme="dracula">k apply -f https://github.com/kubernetes-sigs/gateway-api/releases/download/v0.5.0/standard-install.yaml</pre>
+```bash
+k apply -f https://github.com/kubernetes-sigs/gateway-api/releases/download/v0.5.0/standard-install.yaml
+```
+
 
 ### Install an implementation {#h3-4-install-an-implementation}
 
 I'll be using Apache APISIX. Alternatively, the SIG website maintains [a list of implementations](https://gateway-api.sigs.k8s.io/implementations/).
 
-<pre class="EnlighterJSRAW" data-enlighter-language="shell" data-enlighter-theme="dracula">helm install apisix apisix/apisix \
+```bash
+helm install apisix apisix/apisix \
   --namespace ingress-apisix \
   --create-namespace \
   --devel \                                                                #1
@@ -103,7 +110,9 @@ I'll be using Apache APISIX. Alternatively, the SIG website maintains [a list of
   --set gateway.http.nodePort=30800 \                                      #2
   --set ingress-controller.enabled=true \                                  #2
   --set ingress-controller.config.kubernetes.enableApiGateway=true \       #3
-  --set ingressPublishService="ingress-apisix/apisix-gateway"              #4</pre>
+  --set ingressPublishService="ingress-apisix/apisix-gateway"              #4
+```
+
 
 1. Without the `--devel` option, Helm installs the *latest* release, which *doesn't* work with the Gateway API
 2. The Gateway needs to be accessible outside the cluster anyway
@@ -112,22 +121,26 @@ I'll be using Apache APISIX. Alternatively, the SIG website maintains [a list of
 
 Let's check that everything works:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="shell">k get all -n ingress-apisix
+```bash
+k get all -n ingress-apisix
+```
 
-</pre>
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="dracula">pod/apisix-5fc9b45c69-cf42m                      1/1     Running   0          14m         #1
+```
+pod/apisix-5fc9b45c69-cf42m                      1/1     Running   0          14m         #1
 pod/apisix-etcd-0                                1/1     Running   0          14m         #2
 pod/apisix-etcd-1                                1/1     Running   0          14m         #2
 pod/apisix-etcd-2                                1/1     Running   0          14m         #2
 pod/apisix-ingress-controller-6f8bd94d9d-wkzfn   1/1     Running   0          14m         #3
 
 NAME                                TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)
-service/apisix-admin                ClusterIP   10.96.69.19     &lt;none&gt;        9180/TCP
-service/apisix-etcd                 ClusterIP   10.96.226.79    &lt;none&gt;        2379/TCP,2380/TCP
-service/apisix-etcd-headless        ClusterIP   None            &lt;none&gt;        2379/TCP,2380/TCP
-service/apisix-gateway              NodePort    10.96.101.224   &lt;none&gt;        80:30800/TCP#4
-service/apisix-ingress-controller   ClusterIP   10.96.141.230   &lt;none&gt;        80/TCP</pre>
+service/apisix-admin                ClusterIP   10.96.69.19     <none>        9180/TCP
+service/apisix-etcd                 ClusterIP   10.96.226.79    <none>        2379/TCP,2380/TCP
+service/apisix-etcd-headless        ClusterIP   None            <none>        2379/TCP,2380/TCP
+service/apisix-gateway              NodePort    10.96.101.224   <none>        80:30800/TCP#4
+service/apisix-ingress-controller   ClusterIP   10.96.141.230   <none>        80/TCP
+```
+
 
 1. Apache APISIX itself
 2. Apache APISIX stores its configuration in `etcd`. The chart schedules three pods by default, a good practice to handle failures in distributed systems
@@ -140,12 +153,15 @@ At this point, the infrastructure is ready.
 
 As I mentioned above, the API makes a clean separation between the specification and the implementation. However, we need to bind it somehow. It's the responsibility of the `GatewayClass` object:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml" data-enlighter-theme="dracula">apiVersion: gateway.networking.k8s.io/v1alpha2          #1
+```yaml
+apiVersion: gateway.networking.k8s.io/v1alpha2          #1
 kind: GatewayClass                                      #2
 metadata:
   name: apisix-gateway-class                            #3
 spec:
-  controllerName: apisix.apache.org/gateway-controller  #4</pre>
+  controllerName: apisix.apache.org/gateway-controller  #4
+```
+
 
 1. We don't use the latest version on purpose, as Apache APISIX uses this version. Be aware that it will evolve in the (near) future
 2. `GatewayClass` object
@@ -158,7 +174,8 @@ Note that the `GatewayClass` has a cluster-wide scope. This model allows us to d
 
 With Apache APISIX, it's pretty straightforward:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml" data-enlighter-theme="dracula">apiVersion: gateway.networking.k8s.io/v1alpha2          #1
+```yaml
+apiVersion: gateway.networking.k8s.io/v1alpha2          #1
 kind: Gateway                                           #2
 metadata:
   name: apisix-gateway
@@ -167,7 +184,9 @@ spec:
   listeners:                                            #4
     - name: http
       protocol: HTTP
-      port: 80</pre>
+      port: 80
+```
+
 
 1. Same namespace as above
 2. `Gateway` object
@@ -184,7 +203,8 @@ Until now, everything was infrastructure; we can finally configure routing.
 
 I want the same routing as in the previous post; a `/left` branch and a `right` one. I'll skip the latter for brevity's sake.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="dracula">apiVersion: gateway.networking.k8s.io/v1alpha2          #1
+```
+apiVersion: gateway.networking.k8s.io/v1alpha2          #1
 kind: HTTPRoute                                         #2
 metadata:
   name: left
@@ -198,7 +218,9 @@ spec:
           value: /left
       backendRefs:                                      #5
         - name: left                                    #5
-          port: 80                                      #5</pre>
+          port: 80                                      #5
+```
+
 
 1. Same namespace as above
 2. `HTTPRoute` object
@@ -210,11 +232,17 @@ spec:
 
 Now that we have configured our routes, we can check it works.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="shell" data-enlighter-theme="dracula">curl localhost:30800/left</pre>
+```bash
+curl localhost:30800/left
+```
+
 
 When we installed the Helm chart, we told Apache APISIX to create a `NodePort` service on port `30800`. Hence, we can use the port to access the service outside the cluster.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="dracula">left</pre>
+```
+left
+```
+
 
 Conclusion {#h2-9-conclusion}
 -----------------------------

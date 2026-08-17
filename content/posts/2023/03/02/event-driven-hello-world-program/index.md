@@ -26,11 +26,17 @@ They are also highly responsive to new information in real time, with latencies 
 
 In this introductory article, we use an example [event-driven](https://chronicle.software/how-to-develop-event-driven-architectures/ "event-driven")[Hello World](https://en.wikipedia.org/wiki/%22Hello,_World!%22_program " Hello World") program (a programming paradigm where the program flow is determined by events) to step through [behaviour-driven development](https://chronicle.software/how-bdd-works-well-with-eda/ "behaviour-driven development"), where we describe the behaviour the business needs first as test data, and writing a very simple [microservice](https://en.wikipedia.org/wiki/Microservices "microservice") which turns input events like this:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">say: Hello World</pre>
+```
+say: Hello World
+```
+
 
 Into outputs like this, by adding an exclamation point:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">say: Hello World! # &lt;- adds an exclamation point</pre>
+```
+say: Hello World! # <- adds an exclamation point
+```
+
 
 All the code for this example is [available on GitHub](https://github.com/OpenHFT/Chronicle-Queue-Demo/tree/main/hello-world).
 
@@ -53,9 +59,12 @@ All examples are in the [Chronicle-Queue-Demo/hello-world module](https://github
 
 We model events as asynchronous method calls without arguments, or one-to-many arguments e.g.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">public interface Says {
+```
+public interface Says {
    void say(String words);
-}</pre>
+}
+```
+
 
 This is the simplest Hello World example to get started.
 
@@ -71,7 +80,8 @@ Often we need to integrate with the client's external systems.
 
 As this is a simple "Hello World" example, let's imagine that instead of external systems connected via gateways we have a simple program that reads input from the console to provide upstream events and another simple program to write to the console, acting as a downstream gateway.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">public class SaysInput {
+```
+public class SaysInput {
     public static void input(Says says) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         for (String line; ((line = br.readLine()) != null); )
@@ -83,38 +93,49 @@ public class SaysOutput implements Says {
     public void say(String words) {
         System.out.println(words);
     }
-}</pre>
+}
+```
+
 
 These can be integrated easily as the output of one is wired to the input of the other.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">public class RecordInputToConsoleMain {
+```
+public class RecordInputToConsoleMain {
     public static void main(String[] args) throws IOException {
         // Writes text in each call to say(line) to the console
         final Says says = new SaysOutput();
         // Takes each line input and calls say(line) each time
         SaysInput.input(says);
     }
-}</pre>
+}
+```
+
 
 We can also record everything the producer performs to YAML to build tests later.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">public class RecordInputAsYamlMain {
+```
+public class RecordInputAsYamlMain {
     public static void main(String[] args) throws IOException {
         // obtains a proxy that writes to the PrintStream the method calls and their  arguments
         final Says says = Wires.recordAsYaml(Says.class, System.out);
         // Takes each line input and calls say(theLine) each time
         SaysInput.input(says);
     }
-}</pre>
+}
+```
+
 
 Use the following to replay the output from a file.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">public class ReplayOutputMain {
+```
+public class ReplayOutputMain {
     public static void main(String[] args) throws IOException {
         // Reads the content of a Yaml file specified in args[0] and feeds it to SaysOutput.
         Wires.replay(args[0], new SaysOutput());
     }
-}</pre>
+}
+```
+
 
 ### Unit Tests for the RecordAsYaml and Replay Methods {#h3-2-unit-tests-for-the-recordasyaml-and-replay-methods}
 
@@ -122,7 +143,8 @@ To test the functionality of recordAsYaml and replay methods in isolation and ve
 
 Having lots of text in unit tests is cumbersome, and in the next section you can see how this text can be taken from files.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">public class WiresTest extends WireTestCommon {
+```
+public class WiresTest extends WireTestCommon {
     @Test
     public void recordAsYaml() {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -181,7 +203,8 @@ Having lots of text in unit tests is cumbersome, and in the next section you can
         void say(String word);
     }
 }
-</pre>
+```
+
 
 By recording and replaying using YAML, our microservices are written, tested and debugged easily without any involvement of the messaging layer.
 
@@ -189,7 +212,8 @@ Let's add a microservice as a data processor as a class that can have one or mor
 
 This microservice gets input events as text messages and adds an exclamation mark to them and relays them to the output gateway.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">public class AddsExclamation implements Says {
+```
+public class AddsExclamation implements Says {
     private final Says out;
 
     public AddsExclamation(Says out) {
@@ -199,7 +223,9 @@ This microservice gets input events as text messages and adds an exclamation mar
     public void say(String words) {
         this.out.say(words + "!");
     }
-}</pre>
+}
+```
+
 
 ![](Screen-Shot-2023-02-20-at-4.56.42-PM-1024x241.png)  
 *Figure 2- A microservice that adds exclamation marks to input messages.*
@@ -210,11 +236,14 @@ We can combine these all stages in one process, one thread.
 
 While this is unlikely to be useful in production, putting microservices into a single thread makes it easier to test and debug.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">public class DirectWithExclamationMain {
+```
+public class DirectWithExclamationMain {
     public static void main(String[] args) throws IOException {
         SaysInput.input(new AddsExclamation(new SaysOutput()));
     }
-}</pre>
+}
+```
+
 
 ### Testing a Single Event-Driven Service {#h3-4-testing-a-single-event-driven-service}
 
@@ -222,19 +251,23 @@ Instead of embedding large amounts of text in a test, we can read resource files
 
 This makes them easier to read and maintain.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">public class AddsExclamationTest {
+```
+public class AddsExclamationTest {
     @Test
     public void say() throws IOException {
         YamlTester yt = YamlTester.runTest(AddsExclamation.class, "says");
         assertEquals(yt.expected(), yt.actual());
     }
-}</pre>
+}
+```
+
 
 ![](Screen-Shot-2023-02-20-at-4.58.02-PM-1024x363.png)
 
 Let's update the input to see how easy it is to maintain this test. I will change the second input to Hello World and run the test again.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">src/test/resources/says/in.yaml
+```
+src/test/resources/says/in.yaml
 ---
 say: One
 ...
@@ -243,7 +276,9 @@ say: Hello World
 ...
 ---
 say: Three
-...</pre>
+...
+```
+
 
 ![](Screen-Shot-2023-02-20-at-4.58.42-PM-1024x370.png)
 

@@ -75,8 +75,10 @@ It communicates with your existing `runner.bxm` or `runner.cfm` endpoints and st
 
 Every setting is also overridable via URL query params, making CI integration clean:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">/tests/?directory=tests.specs.integration&amp;labels=slow&amp;runnerUrl=/tests/runner.bxm
-</pre>
+```java
+/tests/?directory=tests.specs.integration&labels=slow&runnerUrl=/tests/runner.bxm
+```
+
 
 ### Keyboard Shortcuts {#h3-0-keyboard-shortcuts}
 
@@ -93,8 +95,10 @@ Every setting is also overridable via URL query params, making CI integration cl
 
 TestBox RUN ships automatically with every TestBox 7 install under `bx/tests/`. ColdBox apps generated via the ColdBox CLI include it out of the box. For new projects:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">testbox generate harness --help
-</pre>
+```java
+testbox generate harness --help
+```
+
 
 > **Note:** TestBox RUN requires a running web server and a `runner.bxm`` endpoint with SSE support via BoxLang. For pure CLI apps, use the BoxLang runner with ``--stream` (see below).
 
@@ -108,7 +112,8 @@ TestBox 7 ships a brand-new `StreamingRunner` that pushes each spec result to th
 
 #### StreamingRunner (Programmatic)StreamingRunner (Programmatic)
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">component {
+```java
+component {
     function streamTests( event, rc, prc ) {
         event.setHTTPHeader( name="Content-Type", value="text/event-stream" );
         event.setHTTPHeader( name="Cache-Control", value="no-cache" );
@@ -120,15 +125,18 @@ TestBox 7 ships a brand-new `StreamingRunner` that pushes each spec result to th
         ).run();
     }
 }
-</pre>
+```
+
 
 #### BoxLang CLI `--stream` Flag
 
 The BoxLang CLI runner gets native streaming support:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">./testbox/run --stream
+```java
+./testbox/run --stream
 ./testbox/run --directory=tests.specs --stream
-</pre>
+```
+
 
 This is especially useful in CI pipelines where live progress matters more than waiting for a buffered final report.
 
@@ -143,14 +151,18 @@ If you call the `runner.bxm|cfm` with a `?dryRun=true` it will return back to yo
 
 #### Programmatic Dry Run
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">var tb      = new testbox.system.TestBox( bundles = "tests.specs" );
+```java
+var tb      = new testbox.system.TestBox( bundles = "tests.specs" );
 var results = tb.dryRun();
-</pre>
+```
+
 
 #### CLI Dry Run
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">./testbox/run --dry-run
-</pre>
+```java
+./testbox/run --dry-run
+```
+
 
 ![](888.gif)
 
@@ -160,9 +172,11 @@ Lists every suite and spec that would execute, with labels and skip reasons --- 
 
 Need to feed results into another tool?
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">./testbox/run --dry-run=json
+```java
+./testbox/run --dry-run=json
 ./testbox/run --dry-run=json --bundles=tests.specs.MySpec | jq .
-</pre>
+```
+
 
 Dry run respects all the same filters as a normal run: `--labels`, `--bundles`, `--directory`, `--testSuites`, `--testSpecs`.
 
@@ -172,18 +186,23 @@ The BoxLang runner gets a substantial set of new flags for fine-grained control 
 
 #### Focus on Failures
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">./testbox/run --show-failed-only
-</pre>
+```java
+./testbox/run --show-failed-only
+```
+
 
 #### Stack Trace Control
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">./testbox/run --stacktrace=short   # condensed (default)
+```java
+./testbox/run --stacktrace=short   # condensed (default)
 ./testbox/run --stacktrace=full    # complete Java/BoxLang trace
-</pre>
+```
+
 
 #### Output \& Performance Flags
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java"># Suppress passing or skipped specs
+```java
+# Suppress passing or skipped specs
 ./testbox/run --show-passed=false
 ./testbox/run --show-skipped=false
 
@@ -195,12 +214,15 @@ The BoxLang runner gets a substantial set of new flags for fine-grained control 
 
 # Report the N slowest specs at the end
 ./testbox/run --top-slowest=5
-</pre>
+```
+
 
 Combine them for a tight CI workflow:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">./testbox/run --show-failed-only --stacktrace=short --max-failures=5 --top-slowest=3
-</pre>
+```java
+./testbox/run --show-failed-only --stacktrace=short --max-failures=5 --top-slowest=3
+```
+
 
 #### Application Mappings Auto-Load (TESTBOX-440)
 
@@ -212,14 +234,16 @@ The BoxLang runner now automatically loads `Application.bx` mappings from your p
 
 Stop noisy skipped-spec output when you have many pending specs:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">var testbox = new testbox.system.TestBox(
+```java
+var testbox = new testbox.system.TestBox(
     bundles  = "tests.specs",
     reporter = {
         type    : "testbox.system.reports.ConsoleReporter",
         options : { hideSkipped : true }
     }
 );
-</pre>
+```
+
 
 Or from the CLI: `--show-skipped=false`
 
@@ -227,8 +251,10 @@ Or from the CLI: `--show-skipped=false`
 
 Direct suite name matching is now reliable at any nesting depth. If a suite's name exactly matches `testSuites`, it always runs --- no more surprises with nested suites getting skipped.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">./testbox/run --testSuites="My Integration Suite"
-</pre>
+```java
+./testbox/run --testSuites="My Integration Suite"
+```
+
 
 ### TestBox CLI Updates (v1.8.0) {#h3-5-testbox-cli-updates-v1-8-0}
 
@@ -236,18 +262,22 @@ Direct suite name matching is now reliable at any nesting depth. If a suite's na
 
 The `testbox-cli` CommandBox module hits 1.8.0 with two new commands:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java"># Show installed version, path, and project config
+```java
+# Show installed version, path, and project config
 testbox info
 
 # Force a clean reinstall of the CLI module
 testbox reinstall
-</pre>
+```
+
 
 Streaming is also available via the CLI:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">testbox run --streaming
+```java
+testbox run --streaming
 testbox run --streaming --verbose   # include passing specs in live output
-</pre>
+```
+
 
 #### Engine Support
 
@@ -267,12 +297,16 @@ Adobe 2021 is no longer supported. Upgrade to Adobe 2023+ or migrate to BoxLang.
 
 TestBox 7 is available today via CommandBox:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">box install testbox
-</pre>
+```java
+box install testbox
+```
+
 
 Or pin to 7.x:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">box install testbox@^7.0.0
-</pre>
+```java
+box install testbox@^7.0.0
+```
+
 
 Full release notes and issue links are in the [TestBox documentation](http://https://testbox.ortusbooks.com/ "TestBox documentation"). As always, file bugs and feature requests in [our JIRA](http://https://ortussolutions.atlassian.net/browse/TESTBOX "our JIRA"). You can also check out the what's new guide here: <https://testbox.ortusbooks.com/readme/release-history/whats-new-with-7.0.0>

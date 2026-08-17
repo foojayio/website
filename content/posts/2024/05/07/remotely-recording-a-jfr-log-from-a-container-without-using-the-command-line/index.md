@@ -44,14 +44,17 @@ Configure your Java application with the following VM parameters:
 
 For example:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">-Dcom.sun.management.jmxremote \
+```
+-Dcom.sun.management.jmxremote \
 -Dcom.sun.management.jmxremote.host=192.168.0.166 \
 -Dcom.sun.management.jmxremote.port=7091 \
 -Djava.rmi.server.hostname=192.168.0.166 \
 -Dcom.sun.management.jmxremote.rmi.port=7091 \
 -Dcom.sun.management.jmxremote.local.only=false \
 ‑Dcom.sun.management.jmxremote.authenticate=false \
--Dcom.sun.management.jmxremote.ssl=false \</pre>
+-Dcom.sun.management.jmxremote.ssl=false \
+```
+
 
 Connecting to a Remote JVM Using Azul Mission Control {#h2-0-connecting-to-a-remote-jvm-using-azul-mission-control}
 -------------------------------------------------------------------------------------------------------------------

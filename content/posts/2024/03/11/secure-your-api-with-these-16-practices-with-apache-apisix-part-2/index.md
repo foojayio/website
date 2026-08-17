@@ -56,24 +56,30 @@ It reveals the upstream's technology, version, and the guilty code.
 
 Apache APISIX can intercept such a response and rewrite it:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml">routes:
+```yaml
+routes:
   - upstream_id: 1
     plugins:
       response-rewrite:
         vars: [[ "status","==",500 ]]                        #1
-        body: { "error" : "An unknown exception happened"}   #2</pre>
+        body: { "error" : "An unknown exception happened"}   #2
+```
+
 
 1. Triggered only in case of HTTP status code 500 returned by the upstream. You can add additional status codes if necessary
 2. The body to return
 
 To make sure the above configuration is applied consistently, we can also make it a global rule:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml">global_rules:
+```yaml
+global_rules:
   - id: 1
     plugins:
       response-rewrite:
         vars: [[ "status","==",500 ]]
-        body: { "error" : "An unknown exception happened"}</pre>
+        body: { "error" : "An unknown exception happened"}
+```
+
 
 Security Headers {#h2-2-security-headers}
 -----------------------------------------
@@ -85,7 +91,8 @@ The OWASP lists plenty of [HTTP Headers](https://cheatsheetseries.owasp.org/chea
 
 For any other header, you can use the more generic [response-rewrite](https://apisix.apache.org/docs/apisix/plugins/response-rewrite/) plugin to add them. Finally, we can remove default HTTP response headers, such as `Server`, to make targeted attacks less likely.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml">global_rules:                               #1
+```yaml
+global_rules:                               #1
   - id: 1
     plugins:
       response-rewrite:
@@ -93,7 +100,9 @@ For any other header, you can use the more generic [response-rewrite](https://ap
           set:
             X-Content-Type-Options: nosniff #2
           remove:
-            - Server                        #3</pre>
+            - Server                        #3
+```
+
 
 1. Do on every route - security by default! It still can be overridden on a per-route basis, in case of need
 2. Tell the browser not to infer the content type if it's not explicitly set
@@ -133,6 +142,6 @@ While I don't claim the list is exhaustive, it's a solid basis to improve the se
 
 <br />
 
-*** ** * ** ***
+
 
 *Originally published at [A Java Geek](https://blog.frankel.ch/secure-api-practices-apisix/2/) on February 25^th^, 2024*

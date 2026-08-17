@@ -59,7 +59,10 @@ Imagine you're working on a project, and recent reports indicate a newly introdu
 
 To start, you'll enter bisect mode in your terminal within the project's Git repository:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">git bisect start</pre>
+```
+git bisect start
+```
+
 
 This command signals Git to prepare for the bisect process.
 
@@ -67,7 +70,10 @@ This command signals Git to prepare for the bisect process.
 
 Next, you identify a commit where the feature functioned correctly, often a commit tagged with a release number or dated before the issue was reported. Mark this commit as "good":
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">git bisect good a1b2c3d</pre>
+```
+git bisect good a1b2c3d
+```
+
 
 Here, `a1b2c3d` represents the hash of the known good commit.
 
@@ -75,7 +81,10 @@ Here, `a1b2c3d` represents the hash of the known good commit.
 
 Similarly, you mark the current version or a specific commit where the bug is present as "bad":
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">git bisect bad z9y8x7w</pre>
+```
+git bisect bad z9y8x7w
+```
+
 
 `z9y8x7w` is the hash of the bad commit, typically the latest commit in the repository where the issue is observed.
 
@@ -92,14 +101,20 @@ Git then continues to narrow down the range, selecting a new commit to test base
 
 After several iterations, Git will isolate the problematic commit, displaying a message similar to:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">Bisecting: 0 revisions left to test after this (roughly 3 steps)
-[abcdef1234567890] Commit message of the problematic commit</pre>
+```
+Bisecting: 0 revisions left to test after this (roughly 3 steps)
+[abcdef1234567890] Commit message of the problematic commit
+```
+
 
 ### Reset and Analysis {#h3-7-reset-and-analysis}
 
 Once the offending commit is identified, you conclude the bisect session to return your repository to its initial state:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">git bisect reset</pre>
+```
+git bisect reset
+```
+
 
 Notice that bisect isn't linear. Bisect doesn't scan through the revisions in a sequential manner. Based on the good and bad markers, Git automatically selects a commit approximately in the middle of the range for testing (e.g., commit #6 in the following diagram).
 
@@ -120,13 +135,16 @@ Automating the bisect process with a script is a game-changer, significantly red
 
 **Example**: Imagine you're debugging a regression where a web application's login feature breaks. You could write a script that attempts to log in using a test account and checks if the login succeeds. The script might look something like this in a simplified form:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">#!/bin/bash
+```
+#!/bin/bash
 # Attempt to log in and check for success
-if curl -s http://yourapplication/login -d "username=test&amp;password=test" | grep -q "Welcome"; then
+if curl -s http://yourapplication/login -d "username=test&password=test" | grep -q "Welcome"; then
   exit 0 # Login succeeded, mark this commit as good
 else
   exit 1 # Login failed, mark this commit as bad
-fi</pre>
+fi
+```
+
 
 By passing this script to `git bisect run`, Git automatically executes it at each step of the bisect process, effectively automating the regression hunt.
 
@@ -136,7 +154,8 @@ Flaky tests, which sometimes pass and sometimes fail under the same conditions, 
 
 **Example**: Suppose you have a test that's known to be flaky. You could adjust your script to run the test multiple times, considering the commit "bad" only if the test fails consistently:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">#!/bin/bash
+```
+#!/bin/bash
 # Run the flaky test three times
 success_count=0
 for i in {1..3}; do
@@ -150,7 +169,9 @@ if [ "$success_count" -ge 2 ]; then
   exit 0
 else
   exit 1
-fi</pre>
+fi
+```
+
 
 This approach reduces the chances that a flaky test will lead to incorrect bisect results.
 

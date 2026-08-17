@@ -10,33 +10,27 @@ aliases:
 frozen: false
 ---
 
-*** ** * ** ***
+
 
 [\<\< Reading a Text File](https://foojay.io/java-quick-start/quick-start-tutorial/reading-a-text-file/)  
 [What's Next? \>\>](https://foojay.io/java-quick-start/quick-start-tutorial/whats-next)
 
-
-
 {{< youtube v07_Z3ILyVU >}}
-
-
 
 Streams were introduced as a new feature in Java 8. These allow you to perform a series of steps or actions on an object. Let's extend the ReadTextFile example with some extra functions...
 
 First, we need to add extra imports:
 
-
-
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="dracula" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">import java.util.IntSummaryStatistics;
-import java.util.stream.Collectors;</pre>
-
+```java
+import java.util.IntSummaryStatistics;
+import java.util.stream.Collectors;
+```
 
 
 And we change the main method to this:
 
-
-
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="dracula" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public static void main (String[] args) {
+```java
+public static void main (String[] args) {
     List persons = loadPersons();
     System.out.println("Number of persons loaded from CSV file: " + persons.size());
 
@@ -52,25 +46,24 @@ And we change the main method to this:
     System.out.println("Minimum age: " + stats.getMin());
     System.out.println("Maximum age: " + stats.getMax());
     System.out.println("Average age: " + stats.getAverage());
-}</pre>
-
+}
+```
 
 
 Of course, we need to add the methods "countFirstName" and "getAgeStats" which are used in this extra code in the "main"-method:
 
-
-
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="dracula" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public static int countFirstName(List&lt;Person&gt; persons, String firstName) {
+```java
+public static int countFirstName(List<Person> persons, String firstName) {
     return (int) persons.stream()
-        .filter(p -&gt; p.getFirstName().equals(firstName))
+        .filter(p -> p.getFirstName().equals(firstName))
         .count();
 }
-public static IntSummaryStatistics getAgeStats(List&lt;Person&gt; persons) {
+public static IntSummaryStatistics getAgeStats(List<Person> persons) {
     return persons.stream()
         .mapToInt(Person::getAge)
         .summaryStatistics();
-}</pre>
-
+}
+```
 
 
 As you see, we start by converting the list into a stream, by adding ".stream()" behind the "persons"-list. We can further handle that stream step-by-step to obtain certain results.
@@ -82,8 +75,6 @@ As you see, we start by converting the list into a stream, by adding ".stream()"
 * getAgeStats
   * mapToInt is used to only use the ages from all the persons
   * summaryStatistics returns an IntSummaryStatistics-object from the list from which we can get different values
-
-
 
 <div data-pym-src="https://www.jdoodle.com/plugin" data-version-index="6" data-language="java" data-client-id="34d6e81ae45d88cdb9fb98fed1415b81" data-has-files="true">
  <div data-type="file" data-file-name="testdata.csv">
@@ -98,13 +89,10 @@ As you see, we start by converting the list into a stream, by adding ".stream()"
 
 
 
-*** ** * ** ***
-
 When we run this same application again now, we get this output:
 
-
-
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="dracula" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ java ReadTextFile.java
+```
+$ java ReadTextFile.java
 Number of persons loaded from CSV file: 100
 ------------------------------------------------
 Number of persons with first name
@@ -113,17 +101,16 @@ Number of persons with first name
 ------------------------------------------------
 Minimum age: 18
 Maximum age: 65
-Average age: 42.78</pre>
+Average age: 42.78
+```
 
 
 
-*** ** * ** ***
 
 Java 25 version:
 
-
-
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">import java.io.File;
+```
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
@@ -133,7 +120,7 @@ import java.util.IntSummaryStatistics;
 
 public class ReadTextFile {
     public static void main(String[] args) {
-        List&lt;Person&gt; persons = loadPersons();
+        List<Person> persons = loadPersons();
         System.out.println("Number of persons loaded from CSV file: "
                 + persons.size());
 
@@ -151,20 +138,20 @@ public class ReadTextFile {
         System.out.println("Average age: " + stats.getAverage());
     }
 
-    public static int countFirstName(List&lt;Person&gt; persons, String firstName) {
+    public static int countFirstName(List<Person> persons, String firstName) {
         return (int) persons.stream()
-                .filter(p -&gt; p.firstName().equals(firstName))
+                .filter(p -> p.firstName().equals(firstName))
                 .count();
     }
 
-    public static IntSummaryStatistics getAgeStats(List&lt;Person&gt; persons) {
+    public static IntSummaryStatistics getAgeStats(List<Person> persons) {
         return persons.stream()
                 .mapToInt(Person::age)
                 .summaryStatistics();
     }
 
-    public static List&lt;Person&gt; loadPersons() {
-        List&lt;Person&gt; list = new ArrayList&lt;&gt;();
+    public static List<Person> loadPersons() {
+        List<Person> list = new ArrayList<>();
         File file = new File("/uploads/testdata.csv");
         try (Scanner scanner = new Scanner(file)) {
             while (scanner.hasNextLine()) {
@@ -203,7 +190,9 @@ public class ReadTextFile {
             return firstName + " " + lastName;
         }
     }
-}</pre>
+}
+```
+
 
   
 [\<\< Reading a Text File](https://foojay.io/java-quick-start/quick-start-tutorial/reading-a-text-file/)  

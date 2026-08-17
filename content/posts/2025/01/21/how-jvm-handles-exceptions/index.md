@@ -29,7 +29,8 @@ Let me quickly show you!
 
 Here's a simple bit of Java code that includes all the important actors in the exception-throwing game (try-catch-finally):
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">int a = 0;
+```
+int a = 0;
 try {
     if (a == 0) { // to make it less boring, let's have some branching logic
         throw new Exception("Exception message!");
@@ -38,7 +39,9 @@ try {
     doSomethingOnException();
 } finally {
     doSomethingFinally();
-}</pre>
+}
+```
+
 
 ### Exception table {#h3-1-exception-table}
 
@@ -46,11 +49,14 @@ The resulting bytecode includes an interesting section in the Code attribute cal
 
 This is how the exception table looks like for our example:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">Exception table:
+```
+Exception table:
    from    to  target type
        2    16    22   Class java/lang/Exception
        2    16    32   any
-      22    26    32   any</pre>
+      22    26    32   any
+```
+
 
 The numbers point to the addresses of the bytecode instructions. Each line in this table shows a range of bytecode instructions (`from` and `to`) that is guarded by an exception handler. The handler itself is also just a set of bytecode instructions, and the `target` column points to the address where the handling code starts. `type` simply means the type of exception that can be handled by the specified handler.
 
@@ -58,14 +64,15 @@ The numbers point to the addresses of the bytecode instructions. Each line in th
 
 To see what exactly these addresses are pointing to, let's take a look also at the set of method's bytecode instructions (explanation below):
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic"> 0: iconst_0
+```
+ 0: iconst_0
  1: istore_0
  2: iload_0
  3: ifne          16
  6: new           #12          // class java/lang/Exception
  9: dup
 10: ldc           #14           // String Exception message!
-12: invokespecial #16     // Method java/lang/Exception."&lt;init&gt;":(Ljava/lang/String;)V
+12: invokespecial #16     // Method java/lang/Exception."<init>":(Ljava/lang/String;)V
 15: athrow
 16: invokestatic  #19      // Method doSomethingFinally:()V
 19: goto          38
@@ -77,7 +84,9 @@ To see what exactly these addresses are pointing to, let's take a look also at t
 33: invokestatic  #19      // Method doSomethingFinally:()V
 36: aload_2
 37: athrow
-38: return</pre>
+38: return
+```
+
 
 Let me walk you through.
 
@@ -95,11 +104,14 @@ When the JVM encounters `athrow` instruction, it checks the method's exception t
 
 Let's take another look at the exception table now that we have more context.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">Exception table:
+```
+Exception table:
    from    to  target type
        2    16    22   Class java/lang/Exception
        2    16    32   any
-      22    26    32   any</pre>
+      22    26    32   any
+```
+
 
 We encountered `athrow` at address `15`. This address is covered by the first two lines of the table, as it falls within the range \[`2`, `16`).
 

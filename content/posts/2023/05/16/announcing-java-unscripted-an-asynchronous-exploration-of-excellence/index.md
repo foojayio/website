@@ -22,7 +22,7 @@ frozen: false
 
 **Introducing "Java Unscripted," a series featuring interviews with Java industry experts. We aim to inspire and guide new developers with these insights. Interested in participating? Fill out our [Interview Participation Form](https://docs.google.com/forms/d/e/1FAIpQLSfyZEjdUaL_NTRKO-Gfk_Y9jIhuUszka3p1Kw6cWVdRBkOESQ/viewform). Let's share your story with our community!**
 
-*** ** * ** ***
+
 
 <br />
 

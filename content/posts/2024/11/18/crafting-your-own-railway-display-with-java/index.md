@@ -40,7 +40,8 @@ We used Jakarta WebTarget to connect to the Departures API from NS, which requir
 
 Sample code for connecting to the NS API using WebTarget
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">private Response getTrainsInfo(String stationUicCode) { 
+```java
+private Response getTrainsInfo(String stationUicCode) { 
   return webTargetProvider.getWebTarget(getUri(stationUicCode)).request() 
     .accept(MediaType.APPLICATION_JSON) 
     .header(HttpHeaders.CACHE_CONTROL, "no-cache") 
@@ -54,51 +55,65 @@ private URI getUri(String stationUicCode) {
     .fromUri(baseUrl).path(uriPath) 
     .queryParam("uicCode", stationUicCode) 
     .build();
-}</pre>
+}
+```
+
 
 The required data from the API response was captured as TrainInfo with the following fields.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public record TrainInfo(String direction,
+```java
+public record TrainInfo(String direction,
   String plannedDepartureTime, 
   String actualDepartureTime, 
   String actualTrack, 
   String trainCategory, 
   String routeStations, 
   String departureStatus, 
-  boolean isCancelled)</pre>
+  boolean isCancelled)
+```
+
 
 #### 2. Building the view
 
 We used the Grid component from Vaadin flow. Vaadin Grid is a simple component for displaying tabular data with different rendering options. Renderers like Component Renderer or Lit Renderer can then customize the content displayed in specific columns.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public MainView(TrainDepartureService trainDepartureService) { 
-  grid = new Grid&lt;&gt;(); 
+```java
+public MainView(TrainDepartureService trainDepartureService) { 
+  grid = new Grid<>(); 
   var trainDepartures = trainDepartureService.getDepartureInfo(); 
   grid.setItems(trainDepartures); 
   grid.addThemeVariants(GridVariant.LUMO_ROW_STRIPES); 
   grid.addColumn(createPlatformRenderer()).setHeader("PLATFORM"); 
   grid.addColumn(createStatusRenderer()).setHeader("STATUS"); 
   add(grid); 
-}</pre>
+}
+```
+
 
 We have experimented with both to show data in the columns. Lit Renderer offers quick rendering but requires writing HTML code. Components can be used in Lit Renderer through their custom HTML tags. Component Renderers are easy to build but slow to render, as they generate a component for each item in the dataset for a given column.
 
 Sample code for Lit Renderer
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">private static Renderer&lt;TrainDeparture&gt; createPlatformRenderer() { 
-  return LitRenderer.&lt;TrainDeparture&gt;of(
-    "&lt;vaadin-horizontal-layout style=\"align-items: center;\" theme=\"spacing\"&gt;" + 
-    "&lt;span part=\"platformStyle\"&gt; ${item.actualTrack} &lt;/span&gt;" + 
-    "&lt;/vaadin-horizontal-layout&gt;") 
+```java
+private static Renderer<TrainDeparture> createPlatformRenderer() { 
+  return LitRenderer.<TrainDeparture>of(
+    "<vaadin-horizontal-layout style=\"align-items: center;\" theme=\"spacing\">" + 
+    "<span part=\"platformStyle\"> ${item.actualTrack} </span>" + 
+    "</vaadin-horizontal-layout>") 
     .withProperty("actualTrack", TrainDeparture::actualTrack);
-}</pre>
+}
+```
+
 
 Sample code for Component Renderer
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">private static ComponentRenderer&lt;Span, TrainDeparture&gt; createStatusRenderer() { 
-  return new ComponentRenderer&lt;&gt;(Span::new, 
-    (span, trainDeparture) -&gt; { span.setText(trainDeparture.status().name()); }); 
-}</pre>
+```java
+private static ComponentRenderer<Span, TrainDeparture> createStatusRenderer() { 
+  return new ComponentRenderer<>(Span::new, 
+    (span, trainDeparture) -> { span.setText(trainDeparture.status().name()); }); 
+}
+```
+
 
 #### 3. Styling the View
 
@@ -110,25 +125,31 @@ There are also a few sites that can extract the different fonts used in your ima
 
 To show the updated information on screen with an interval of one minute, we used the combination of scheduler from Spring Boot and Push function from Vaadin
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">// executed at the start of every minute. 
+```java
+// executed at the start of every minute. 
 @Scheduled(cron = "0 * * * * ?") 
 public void updateGrid() { 
   var trainDepartures = trainDepartureService.getDepartureInfo(); 
-  getUI().ifPresent(ui -&gt; { 
+  getUI().ifPresent(ui -> { 
     if (ui.isAttached()) 
-      ui.access(() -&gt; grid.setItems(trainDepartures)); 
+      ui.access(() -> grid.setItems(trainDepartures)); 
   }); 
-}</pre>
+}
+```
+
 
 Vaadin Server push is based on a client-server connection established by the client. The server can then use the connection to send updates to the client. We have used the @Push annotation on the application class to enable server push.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">@Push 
+```java
+@Push 
 @EnableScheduling 
 @SpringBootApplication 
 public class Application implements AppShellConfigurator { 
   public static void main(String[] args) { 
     SpringApplication.run(Application.class, args); } 
-}</pre>
+}
+```
+
 
 #### 5. Setting up the Raspberry Pi 4
 

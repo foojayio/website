@@ -41,7 +41,8 @@ A long time ago, *observability* as we know it didn't exist; what we had instead
 
 We will use the OTEL Collector to scrape a Prometheus-compatible endpoint and print out the result in the console. Grafana Labs offers a [project](https://github.com/grafana/fake-metrics-generator) that generates random metrics to play with. For simplicity's sake, I'll use Docker Compose; the setup looks like the following:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml">version: "3"
+```yaml
+version: "3"
 
 services:
   fake-metrics:
@@ -52,7 +53,9 @@ services:
       - METRICS_HOST=fake-metrics
       - METRICS_PORT=5000
     volumes:
-      - ./config/collector/config.yml:/etc/otelcol/config.yaml:ro           #4</pre>
+      - ./config/collector/config.yml:/etc/otelcol/config.yaml:ro           #4
+```
+
 
 1. No Docker image is available for the fake metrics project; hence, we need to build it
 2. Latest version of the OTEL Collector at the time of this writing
@@ -61,7 +64,8 @@ services:
 
 As I mentioned above, the OTEL Collector can do a lot. Hence, configuration is everything.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml">receivers:                                                                  #1
+```yaml
+receivers:                                                                  #1
   prometheus:                                                               #2
     config:
       scrape_configs:                                                       #3
@@ -78,7 +82,9 @@ service:
   pipelines:                                                                #7
     metrics:                                                                #8
       receivers: [ "prometheus" ]                                           #9
-      exporters: [ "logging" ]                                              #9</pre>
+      exporters: [ "logging" ]                                              #9
+```
+
 
 1. List of receivers. A receiver reads data; it can be either push-based or pull-based.
 2. We use the `prometheus` pre-defined receiver
@@ -92,38 +98,41 @@ service:
 
 Here's a sample of the result:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">2023-11-11 08:28:54 otel-collector-collector-1     | StartTimestamp: 1970-01-01 00:00:00 +0000 UTC
+```
+2023-11-11 08:28:54 otel-collector-collector-1     | StartTimestamp: 1970-01-01 00:00:00 +0000 UTC
 2023-11-11 08:28:54 otel-collector-collector-1     | Timestamp: 2023-11-11 07:28:54.14 +0000 UTC
 2023-11-11 08:28:54 otel-collector-collector-1     | Value: 83.090000
 2023-11-11 08:28:54 otel-collector-collector-1     | NumberDataPoints #1
 2023-11-11 08:28:54 otel-collector-collector-1     | Data point attributes:
-2023-11-11 08:28:54 otel-collector-collector-1     |      -&gt; fake__embrace_world_class_systems: Str(concept)
-2023-11-11 08:28:54 otel-collector-collector-1     |      -&gt; fake__exploit_magnetic_applications: Str(concept)
-2023-11-11 08:28:54 otel-collector-collector-1     |      -&gt; fake__facilitate_wireless_architectures: Str(extranet)
-2023-11-11 08:28:54 otel-collector-collector-1     |      -&gt; fake__grow_magnetic_communities: Str(challenge)
-2023-11-11 08:28:54 otel-collector-collector-1     |      -&gt; fake__reinvent_revolutionary_applications: Str(support)
-2023-11-11 08:28:54 otel-collector-collector-1     |      -&gt; fake__strategize_strategic_initiatives: Str(internet_solution)
-2023-11-11 08:28:54 otel-collector-collector-1     |      -&gt; fake__target_customized_eyeballs: Str(concept)
-2023-11-11 08:28:54 otel-collector-collector-1     |      -&gt; fake__transform_turn_key_technologies: Str(framework)
-2023-11-11 08:28:54 otel-collector-collector-1     |      -&gt; fake__whiteboard_innovative_partnerships: Str(matrices)
+2023-11-11 08:28:54 otel-collector-collector-1     |      -> fake__embrace_world_class_systems: Str(concept)
+2023-11-11 08:28:54 otel-collector-collector-1     |      -> fake__exploit_magnetic_applications: Str(concept)
+2023-11-11 08:28:54 otel-collector-collector-1     |      -> fake__facilitate_wireless_architectures: Str(extranet)
+2023-11-11 08:28:54 otel-collector-collector-1     |      -> fake__grow_magnetic_communities: Str(challenge)
+2023-11-11 08:28:54 otel-collector-collector-1     |      -> fake__reinvent_revolutionary_applications: Str(support)
+2023-11-11 08:28:54 otel-collector-collector-1     |      -> fake__strategize_strategic_initiatives: Str(internet_solution)
+2023-11-11 08:28:54 otel-collector-collector-1     |      -> fake__target_customized_eyeballs: Str(concept)
+2023-11-11 08:28:54 otel-collector-collector-1     |      -> fake__transform_turn_key_technologies: Str(framework)
+2023-11-11 08:28:54 otel-collector-collector-1     |      -> fake__whiteboard_innovative_partnerships: Str(matrices)
 2023-11-11 08:28:54 otel-collector-collector-1     | StartTimestamp: 1970-01-01 00:00:00 +0000 UTC
 2023-11-11 08:28:54 otel-collector-collector-1     | Timestamp: 2023-11-11 07:28:54.14 +0000 UTC
 2023-11-11 08:28:54 otel-collector-collector-1     | Value: 53.090000
 2023-11-11 08:28:54 otel-collector-collector-1     | NumberDataPoints #2
 2023-11-11 08:28:54 otel-collector-collector-1     | Data point attributes:
-2023-11-11 08:28:54 otel-collector-collector-1     |      -&gt; fake__expedite_distributed_partnerships: Str(approach)
-2023-11-11 08:28:54 otel-collector-collector-1     |      -&gt; fake__facilitate_wireless_architectures: Str(graphical_user_interface)
-2023-11-11 08:28:54 otel-collector-collector-1     |      -&gt; fake__grow_magnetic_communities: Str(policy)
-2023-11-11 08:28:54 otel-collector-collector-1     |      -&gt; fake__reinvent_revolutionary_applications: Str(algorithm)
-2023-11-11 08:28:54 otel-collector-collector-1     |      -&gt; fake__transform_turn_key_technologies: Str(framework)
+2023-11-11 08:28:54 otel-collector-collector-1     |      -> fake__expedite_distributed_partnerships: Str(approach)
+2023-11-11 08:28:54 otel-collector-collector-1     |      -> fake__facilitate_wireless_architectures: Str(graphical_user_interface)
+2023-11-11 08:28:54 otel-collector-collector-1     |      -> fake__grow_magnetic_communities: Str(policy)
+2023-11-11 08:28:54 otel-collector-collector-1     |      -> fake__reinvent_revolutionary_applications: Str(algorithm)
+2023-11-11 08:28:54 otel-collector-collector-1     |      -> fake__transform_turn_key_technologies: Str(framework)
 2023-11-11 08:28:54 otel-collector-collector-1     | StartTimestamp: 1970-01-01 00:00:00 +0000 UTC
 2023-11-11 08:28:54 otel-collector-collector-1     | Timestamp: 2023-11-11 07:28:54.14 +0000 UTC
 2023-11-11 08:28:54 otel-collector-collector-1     | Value: 16.440000
 2023-11-11 08:28:54 otel-collector-collector-1     | NumberDataPoints #3
 2023-11-11 08:28:54 otel-collector-collector-1     | Data point attributes:
-2023-11-11 08:28:54 otel-collector-collector-1     |      -&gt; fake__exploit_magnetic_applications: Str(concept)
-2023-11-11 08:28:54 otel-collector-collector-1     |      -&gt; fake__grow_magnetic_communities: Str(graphical_user_interface)
-2023-11-11 08:28:54 otel-collector-collector-1     |      -&gt; fake__target_customized_eyeballs: Str(extranet)</pre>
+2023-11-11 08:28:54 otel-collector-collector-1     |      -> fake__exploit_magnetic_applications: Str(concept)
+2023-11-11 08:28:54 otel-collector-collector-1     |      -> fake__grow_magnetic_communities: Str(graphical_user_interface)
+2023-11-11 08:28:54 otel-collector-collector-1     |      -> fake__target_customized_eyeballs: Str(extranet)
+```
+
 
 Beyond printing {#h2-1-beyond-printing}
 ---------------------------------------
@@ -132,7 +141,8 @@ The above is an excellent first step, but there's more than printing to the cons
 
 To achieve the above, we only change the OTEL Collector configuration:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml">exporters:
+```yaml
+exporters:
   prometheus:                                                               #1
     endpoint: ":${env:PROMETHEUS_PORT}"                                     #2
 
@@ -140,7 +150,9 @@ service:
   pipelines:
     metrics:
       receivers: [ "prometheus" ]
-      exporters: [ "prometheus" ]                                           #3</pre>
+      exporters: [ "prometheus" ]                                           #3
+```
+
 
 1. Add a `prometheus` exporter
 2. Expose a Prometheus-compliant endpoint
@@ -150,7 +162,8 @@ That's it. The OTEL Collector is very flexible.
 
 Note that the Collector is multi-input, multi-output. To both print data and expose them via the endpoint, we add them to the pipeline:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml">exporters:
+```yaml
+exporters:
   prometheus:                                                               #1
     endpoint: ":${env:PROMETHEUS_PORT}"
   logging:                                                                  #2
@@ -160,7 +173,9 @@ service:
   pipelines:
     metrics:
       receivers: [ "prometheus" ]
-      exporters: [ "prometheus", "logging" ]                                #3</pre>
+      exporters: [ "prometheus", "logging" ]                                #3
+```
+
 
 1. Expose data
 2. Print data
@@ -179,21 +194,25 @@ You declare data processors in the `processors` section of the configuration fil
 
 The first step toward our goal is to understand that the collector has two flavours: a "bare" one and a contrib one that builds upon it. Processors included in the former are limited, both in number and in capabilities; hence, we need to switch the contrib version.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml">collector:
+```yaml
+collector:
   image: otel/opentelemetry-collector-contrib:0.87.0                        #1
   environment:
     - METRICS_HOST=fake-metrics
     - METRICS_PORT=5000
     - PROMETHEUS_PORT=8889
   volumes:
-    - ./config/collector/config.yml:/etc/otelcol-contrib/config.yaml:ro     #2</pre>
+    - ./config/collector/config.yml:/etc/otelcol-contrib/config.yaml:ro     #2
+```
+
 
 1. Use the `contrib` flavour
 2. For added fun, the configuration file is on another path
 
 At this point, we can add the processor itself:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml">processors:
+```yaml
+processors:
   metricstransform:                                                         #1
     transforms:                                                             #2
       - include: ^fake_(.*)$                                                #3
@@ -207,7 +226,9 @@ At this point, we can add the processor itself:
         match_type: regexp
         action: update                                                      #6
         new_name: ${1}                                                     #6-7
-# Do the same with metrics generated by NodeJS</pre>
+# Do the same with metrics generated by NodeJS
+```
+
 
 1. Invoke the metrics transform processor
 2. List of transforms applied in order
@@ -219,12 +240,15 @@ At this point, we can add the processor itself:
 
 Finally, we add the defined processor to the pipeline:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml">service:
+```yaml
+service:
   pipelines:
     metrics:
       receivers: [ "prometheus" ]
       processors: [ "metricstransform" ]
-      exporters: [ "prometheus" ]</pre>
+      exporters: [ "prometheus" ]
+```
+
 
 Here are the results:
 
@@ -238,27 +262,36 @@ A connector is both a receiver **and** an exporter and connects two pipelines. T
 
 Let's first add a log receiver:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml">receivers:
+```yaml
+receivers:
   filelog:
-    include: [ "/var/logs/generated.log" ]</pre>
+    include: [ "/var/logs/generated.log" ]
+```
+
 
 Then, we add a connector:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml">connectors:
+```yaml
+connectors:
   count:
     requests.errors:
       description: Number of 500 errors
-      condition: [ "status == 500 " ]</pre>
+      condition: [ "status == 500 " ]
+```
+
 
 Lastly, we connect the log receiver and the metrics exporter:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">service:
+```
+service:
    pipelines:
      logs:
        receivers: [ "filelog" ]
        exporters: [ "count" ]
      metrics:
-       receivers: [ "prometheus", "count" ]</pre>
+       receivers: [ "prometheus", "count" ]
+```
+
 
 The metric is named `log_record_count_total`, but its value stays at 1.
 
@@ -269,7 +302,8 @@ Processors allow data manipulation; operators are specialized processors that wo
 
 As of now, the log timestamp is the ingestion timestamp. We shall change it to the timestamp of its creation.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml">receivers:
+```yaml
+receivers:
   filelog:
     include: [ "/var/logs/generated.log" ]
     operators:
@@ -292,7 +326,9 @@ As of now, the log timestamp is the ingestion timestamp. We shall change it to t
         field: attributes.datetime
       - id: remove_status                                                   #7
         type: remove
-        field: attributes.status</pre>
+        field: attributes.status
+```
+
 
 1. The log is in JSON format; we can use the provided JSON parser
 2. Metadata attributes to set
@@ -307,23 +343,32 @@ Logs {#h2-6-logs}
 
 At this point, we can send the logs to any log aggregation component. We shall stay in the Grafana Labs sphere and use Loki.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml">exporters:
+```yaml
+exporters:
   loki:
-    endpoint: "http://loki:3100/loki/api/v1/push"</pre>
+    endpoint: "http://loki:3100/loki/api/v1/push"
+```
+
 
 We can also use logs from the collector itself:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml">service:
+```yaml
+service:
   telemetry:
-    logs:</pre>
+    logs:
+```
+
 
 Finally, let's add another pipeline:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">service:
+```
+service:
   pipelines:
     logs:
       receivers: [ "filelog" ]
-      exporters: [ "loki" ]</pre>
+      exporters: [ "loki" ]
+```
+
 
 Grafana can also visualize the logs. Choose Loki as a datasource.
 
@@ -343,7 +388,7 @@ The complete source code for this post can be found on [GitHub](https://github.c
 * [OpenTelemetry Collector](https://opentelemetry.io/docs/collector/)
 * [OpenTelemetry Operators](https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/pkg/stanza/docs/operators)
 
-*** ** * ** ***
+
 
 *Originally published at [A Java Geek](https://blog.frankel.ch/opentelemetry-collector/) on November 12^th^, 2023*
 

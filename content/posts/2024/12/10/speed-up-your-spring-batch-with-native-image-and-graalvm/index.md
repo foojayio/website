@@ -52,7 +52,7 @@ What is a Native Image? {#h2-0-what-is-a-native-image}
 
 When you compile a Spring Boot application into a native image, you remove the need for the JVM, which leads to instant start times and minimal resource usage.
 
-*** ** * ** ***
+
 
 🔵🔵⚪⚪⚪⚪⚪⚪
 
@@ -77,7 +77,7 @@ Speed up your Spring Batch with Native Image and GraalVM{#caption-attachment-114
 Run a PostgreSQL container with Docker  
 `docker run --name postgres -e POSTGRES_PASSWORD=mysecretpassword -d -p 5432:5432 postgres`
 
-*** ** * ** ***
+
 
 🔵🔵🔵⚪⚪⚪⚪⚪
 
@@ -102,7 +102,8 @@ Here, I defined a batch for a billing service.
 
 #### The business object
 
-<pre class="EnlighterJSRAW" style="position: relative" data-enlighter-language="java">@Entity
+```java
+@Entity
 public class Billing {
 
     private int year;
@@ -112,11 +113,14 @@ public class Billing {
     private String phoneNumber;
     private double amount;
     private int calls;
-    private int messages;</pre>
+    private int messages;
+```
+
 
 #### The batch job with its tasks: reading a CSV, logging it, and writing it to DB
 
-<pre class="EnlighterJSRAW" style="position: relative" data-enlighter-language="java">@Configuration
+```java
+@Configuration
 public class BillingJobConfig {
 
     private final EntityManagerFactory entityManagerFactory;
@@ -135,7 +139,7 @@ public class BillingJobConfig {
     @Bean
     public Step billingStep(JobRepository jobRepository, PlatformTransactionManager transactionManager) {
         return new StepBuilder("billingStep", jobRepository)
-                .&lt;Billing, Billing&gt;chunk(10, transactionManager)
+                .<Billing, Billing>chunk(10, transactionManager)
                 .reader(billingItemReader())
                 .processor(billingProcessor())
                 .writer(billingItemWriter())
@@ -143,8 +147,8 @@ public class BillingJobConfig {
     }
 
     @Bean
-    public FlatFileItemReader&lt;Billing&gt; billingItemReader() {
-        return new FlatFileItemReaderBuilder&lt;Billing&gt;()
+    public FlatFileItemReader<Billing> billingItemReader() {
+        return new FlatFileItemReaderBuilder<Billing>()
                 .name("billingItemReader")
                 //relative paths mess up with native images -- so put an absolute path
                 .resource(new FileSystemResource(
@@ -159,8 +163,8 @@ public class BillingJobConfig {
     }
 
     @Bean
-    public ItemProcessor&lt;Billing, Billing&gt; billingProcessor() {
-        return billing -&gt; {
+    public ItemProcessor<Billing, Billing> billingProcessor() {
+        return billing -> {
             System.out.println(billing);
 
             // Example processing logic (optional)
@@ -171,15 +175,15 @@ public class BillingJobConfig {
     }
 
     @Bean
-    public JpaItemWriter&lt;Billing&gt; billingItemWriter() {
-        JpaItemWriter&lt;Billing&gt; writer = new JpaItemWriter&lt;&gt;();
+    public JpaItemWriter<Billing> billingItemWriter() {
+        JpaItemWriter<Billing> writer = new JpaItemWriter<>();
         writer.setEntityManagerFactory(entityManagerFactory);
         return writer;
     }
 
     @Bean
     public CommandLineRunner runJob(JobLauncher jobLauncher, Job billingJob) {
-        return args -&gt; {
+        return args -> {
             var jobParameters = new JobParametersBuilder()
                     .addString("input.file", "src/main/resources/billing-2023-01.csv")
                     .addLong("time", System.currentTimeMillis())
@@ -189,11 +193,13 @@ public class BillingJobConfig {
         };
     }
 
-}</pre>
+}
+```
+
 
 Full complete code: <https://github.com/vinny59200/spring-batch-native-image>
 
-*** ** * ** ***
+
 
 🔵🔵🔵🔵⚪⚪⚪⚪
 
@@ -203,7 +209,7 @@ Commands to Compile
 2. Clear previous builds: `mvn clean package`
 3. Compile to Native Image: `./mvnw -Pnative native:compile -DskipTests`*(It is a bit long --1 or 2min)*
 
-*** ** * ** ***
+
 
 🔵🔵🔵🔵🔵⚪⚪⚪
 
@@ -237,7 +243,7 @@ Results Summary {#h2-9-results-summary}
 | Footprint    | Requires JVM + JAR          | Single Executable       |
 | Use Case     | Long-running Jobs           | Short, On-Demand Jobs   |
 
-*** ** * ** ***
+
 
 🔵🔵🔵🔵🔵🔵⚪⚪
 
@@ -252,7 +258,7 @@ By **using GraalVM Native Imag** e, you can build **batch jobs** that **are fast
 **If you're dealing with micro-batch jobs that run for seconds, Native Image is a must-have.** If your batch jobs are long-lived (running for hours), the benefit is less significant, but for fast, one-shot batch jobs, Native Image is unbeatable.
 > **🚀 Switch to Native Image for Spring Batch. Your jobs will love it. 🚀**
 
-*** ** * ** ***
+
 
 🔵🔵🔵🔵🔵🔵🔵⚪
 
@@ -260,7 +266,7 @@ By **using GraalVM Native Imag** e, you can build **batch jobs** that **are fast
 
 <br />
 
-*** ** * ** ***
+
 
 🔵🔵🔵🔵🔵🔵🔵🔵
 

@@ -34,13 +34,13 @@ frozen: false
 
 👨‍💻 GitHub: <https://github.com/vinny59200/dukeburger>
 
-*** ** * ** ***
+
 
 🔵⚪⚪⚪⚪⚪⚪⚪⚪⚪⚪⚪
 
 This guide shows how to use **Micrometer and Prometheus in Spring Boot** to track a custom metric for a Kafka-driven Burger Orders app. You'll post a burger order to a REST endpoint, publish it to Kafka, consume the topic, and increment a counter for all "DukeBurger" orders. Copy the snippets, run, and you'll see your metric on `/actuator/prometheus`.
 
-*** ** * ** ***
+
 
 🔵🔵⚪⚪⚪⚪⚪⚪⚪⚪⚪⚪
 
@@ -52,7 +52,7 @@ Micrometer is a vendor-neutral metrics facade. Your code records counters, timer
 * Spring Boot Actuator autoconfigures Micrometer and exposes metrics endpoints, including Prometheus format. [See](https://docs.spring.io/spring-boot/reference/actuator/metrics.html)
 * Prometheus "scrapes," so your app just exposes a text endpoint---no push needed. [docs.micrometer.io](https://docs.micrometer.io/micrometer/reference/implementations/prometheus.html)
 
-*** ** * ** ***
+
 
 🔵🔵🔵⚪⚪⚪⚪⚪⚪⚪⚪⚪
 
@@ -64,11 +64,12 @@ Micrometer is a vendor-neutral metrics facade. Your code records counters, timer
 
 This pattern is common: REST → Kafka → Consumer → Metric. Spring Kafka makes producing and consuming concise; Micrometer makes metrics easy. [See](https://docs.spring.io/spring-kafka/reference/kafka/receiving-messages/listener-annotation.html)
 
-*** ** * ** ***
+
 
 🔵🔵🔵🔵⚪⚪⚪⚪⚪⚪⚪⚪
 
-<pre class="EnlighterJSRAW" style="position: relative" data-enlighter-language="json">{
+```json
+{
   "type": "record",
   "name": "BurgerOrder",
   "namespace": "com.vv.burger",
@@ -76,11 +77,13 @@ This pattern is common: REST → Kafka → Consumer → Metric. Spring Kafka mak
     { "name": "burger", "type": "string" },
     { "name": "timestamp", "type": "string" }
   ]
-}</pre>
+}
+```
+
 
 **Why:** A tiny schema keeps the demo clear. Avro gives you compact messages and generated classes.
 
-*** ** * ** ***
+
 
 🔵🔵🔵🔵🔵⚪⚪⚪⚪⚪⚪⚪  
 
@@ -91,7 +94,8 @@ Spring initializer for Micrometer \& Prometheus in Spring Boot: Kafka Burger Ord
 1) Expose a Counter with Tags (Micrometer) {#h2-0-1-expose-a-counter-with-tags-micrometer}
 ------------------------------------------------------------------------------------------
 
-<pre class="EnlighterJSRAW" style="position: relative" data-enlighter-language="java">package com.vv.burger.config;
+```java
+package com.vv.burger.config;
 
 import io.micrometer.core.instrument.Counter;
 import io.micrometer.core.instrument.MeterRegistry;
@@ -117,18 +121,21 @@ public class MetricsConfig {
                       .tags(tags)
                       .register(registry);
     }
-}</pre>
+}
+```
+
 
 *Side note:* We add consistent tags now (app, topic) so you can filter and graph later. [See](https://docs.spring.io/spring-boot/reference/actuator/metrics.html)
 
-*** ** * ** ***
+
 
 🔵🔵🔵🔵🔵🔵⚪⚪⚪⚪⚪⚪
 
 2) REST Controller → Produce to Kafka {#h2-1-2-rest-controller-produce-to-kafka}
 --------------------------------------------------------------------------------
 
-<pre class="EnlighterJSRAW" style="position: relative" data-enlighter-language="java">package com.vv.burger.controller;
+```java
+package com.vv.burger.controller;
 
 import com.vv.burger.BurgerOrder;
 import org.apache.kafka.clients.producer.ProducerRecord;
@@ -147,10 +154,10 @@ import java.util.UUID;
 @RequestMapping( "/orders" )
 public class OrderController {
 
-    private final KafkaTemplate&lt;String, BurgerOrder&gt; kafkaTemplate;
+    private final KafkaTemplate<String, BurgerOrder> kafkaTemplate;
     private final String                             topic;
 
-    public OrderController( KafkaTemplate&lt;String, BurgerOrder&gt; kafkaTemplate,
+    public OrderController( KafkaTemplate<String, BurgerOrder> kafkaTemplate,
                             @Value( "${app.kafka.topic}" ) String topic ) {
         this.kafkaTemplate = kafkaTemplate;
         this.topic = topic;
@@ -170,7 +177,7 @@ public class OrderController {
                         .toString();
         OffsetDateTime now = OffsetDateTime.now();
 
-        ProducerRecord&lt;String, BurgerOrder&gt; record = new ProducerRecord&lt;&gt;( topic, order );
+        ProducerRecord<String, BurgerOrder> record = new ProducerRecord<>( topic, order );
         record.headers()
               .add( "ce_id", id.getBytes( StandardCharsets.UTF_8 ) );
         record.headers()
@@ -192,18 +199,21 @@ public class OrderController {
 
         return "✅ Order sent to Kafka: " + burger;
     }
-}</pre>
+}
+```
+
 
 *Side note:* The headers mimic **CloudEvents** so you can plug into event tooling later. This is optional for the metric. [Cloud Events](https://cloudevents.github.io/sdk-java/)
 
-*** ** * ** ***
+
 
 🔵🔵🔵🔵🔵🔵🔵⚪⚪⚪⚪⚪
 
 3) Kafka Consumer → Count "DukeBurger" {#h2-2-3-kafka-consumer-count-dukeburger}
 --------------------------------------------------------------------------------
 
-<pre class="EnlighterJSRAW" style="position: relative" data-enlighter-language="java">package com.vv.burger.consumer;
+```java
+package com.vv.burger.consumer;
 
 import com.vv.burger.BurgerOrder;
 import io.cloudevents.CloudEvent;
@@ -233,7 +243,7 @@ public class ConsumerApp {
 
     @KafkaListener( topics = "burger.orders",
                     groupId = "group1" )
-    public void receive( ConsumerRecord&lt;String, BurgerOrder&gt; record ) {
+    public void receive( ConsumerRecord<String, BurgerOrder> record ) {
         BurgerOrder order = record.value();
 
         // Optionally reconstruct CloudEvent from headers
@@ -261,22 +271,22 @@ public class ConsumerApp {
                                          .toString() );
     }
 
-    private String getHeader( ConsumerRecord&lt;?, ?&gt; record, String key ) {
+    private String getHeader( ConsumerRecord<?, ?> record, String key ) {
         return new String( record.headers()
                                  .lastHeader( key )
                                  .value() );
     }
 
     @Bean
-    public ConcurrentKafkaListenerContainerFactory&lt;String, BurgerOrder&gt; kafkaListenerContainerFactory() {
-        ConcurrentKafkaListenerContainerFactory&lt;String, BurgerOrder&gt; factory =
-                new ConcurrentKafkaListenerContainerFactory&lt;&gt;();
+    public ConcurrentKafkaListenerContainerFactory<String, BurgerOrder> kafkaListenerContainerFactory() {
+        ConcurrentKafkaListenerContainerFactory<String, BurgerOrder> factory =
+                new ConcurrentKafkaListenerContainerFactory<>();
         factory.setConsumerFactory( consumerFactory() );
         return factory;
     }
 
-    public ConsumerFactory&lt;String, BurgerOrder&gt; consumerFactory() {
-        Map&lt;String, Object&gt; props = Map.of(
+    public ConsumerFactory<String, BurgerOrder> consumerFactory() {
+        Map<String, Object> props = Map.of(
                 "bootstrap.servers", "kafka:9092",
                 "group.id", "group1",
                 "key.deserializer", StringDeserializer.class.getName(),
@@ -285,20 +295,23 @@ public class ConsumerApp {
                 "specific.avro.reader", true
                                           );
 
-        return new org.springframework.kafka.core.DefaultKafkaConsumerFactory&lt;&gt;( props );
+        return new org.springframework.kafka.core.DefaultKafkaConsumerFactory<>( props );
     }
-}</pre>
+}
+```
+
 
 *Side note:* `@KafkaListener` binds the method to the topic with minimal boilerplate. Keep consumer config small for a first run. [See](https://docs.spring.io/spring-kafka/reference/kafka/receiving-messages/listener-annotation.html)
 
-*** ** * ** ***
+
 
 🔵🔵🔵🔵🔵🔵🔵🔵⚪⚪⚪⚪
 
 4) Avro Bytes → Object (utility) {#h2-3-4-avro-bytes-object-utility}
 --------------------------------------------------------------------
 
-<pre class="EnlighterJSRAW" style="position: relative" data-enlighter-language="java">package com.vv.burger.consumer;
+```java
+package com.vv.burger.consumer;
 
 import com.vv.burger.BurgerOrder;
 import org.apache.avro.io.BinaryDecoder;
@@ -310,7 +323,7 @@ import java.io.ByteArrayInputStream;
 public class AvroUtils {
     public static BurgerOrder fromBytes( byte[] bytes ) {
         try ( ByteArrayInputStream in = new ByteArrayInputStream( bytes ) ) {
-            SpecificDatumReader&lt;BurgerOrder&gt; reader = new SpecificDatumReader&lt;&gt;( BurgerOrder.class );
+            SpecificDatumReader<BurgerOrder> reader = new SpecificDatumReader<>( BurgerOrder.class );
             BinaryDecoder decoder = DecoderFactory.get()
                                                   .binaryDecoder( in, null );
             return reader.read( null, decoder );
@@ -318,15 +331,18 @@ public class AvroUtils {
             throw new RuntimeException( "Failed to deserialize BurgerOrder Avro event", e );
         }
     }
-}</pre>
+}
+```
+
 
 *Side note:* Spring Kafka + Confluent deserializer already returns `BurgerOrder`, so you rarely need this. It's useful in tests or when you manually handle bytes.
 
-*** ** * ** ***
+
 
 🔵🔵🔵🔵🔵🔵🔵🔵🔵⚪⚪⚪
 
-<pre class="EnlighterJSRAW" style="position: relative" data-enlighter-language="yaml">spring:
+```yaml
+spring:
   application:
     name: burger-service
 
@@ -343,11 +359,13 @@ management:
         include: health,info,metrics,prometheus
   endpoint:
     health:
-      show-details: always</pre>
+      show-details: always
+```
+
 
 *Side note:* This exposes `/actuator/prometheus` so Prometheus can scrape. [See](https://docs.spring.io/spring-boot/reference/actuator/metrics.html)
 
-*** ** * ** ***
+
 
 🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵⚪⚪
 
@@ -365,7 +383,7 @@ management:
 
 JMC for Micrometer \& Prometheus in Spring Boot: Kafka Burger Orders{#caption-attachment-121487}
 
-*** ** * ** ***
+
 
 🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵⚪
 
@@ -375,20 +393,20 @@ JMC for Micrometer \& Prometheus in Spring Boot: Kafka Burger Orders{#caption-at
 * **Avro stays lean:** A tiny schema keeps payloads small and generated classes easy to use.
 * **CloudEvents optional:** The headers help interoperability but are not required for Micrometer. [Cloud Events](https://cloudevents.github.io/sdk-java/)
 
-*** ** * ** ***
+
 
 🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵
 
 You just wired **Micrometer and Prometheus in Spring Boot** around a Kafka flow and produced a clean, tagged counter you can graph and alert on. From here, extend the metric set (timers for latency, gauges for queue depth), add dashboards, and create an alert when `events_DukeBurger_total` stalls or spikes.
 
-*** ** * ** ***
+
 
 * Spring Boot + Kafka Streams testing \& routing:  
   <https://foojay.io/today/spring-boot-kafka-streams-event-routing-testing/>
 * Make Spring Batch fly with native image \& GraalVM:  
   <https://foojay.io/today/speed-up-your-spring-batch-with-native-image-and-graalvm/>
 
-*** ** * ** ***
+
 
 * **Java OCP prep (Udemy):**   
   <https://www.udemy.com/course/ocp-oracle-certified-professional-java-developer-prep/?referralCode=54114F9AD41F127CB99A>
@@ -397,7 +415,7 @@ You just wired **Micrometer and Prometheus in Spring Boot** around a Kafka flow 
 * **Spring Certification Book (Leanpub/ Kindle/ Paperback):**   
   <https://spring-book.mystrikingly.com/>
 
-*** ** * ** ***
+
 
 References {#h2-4-references}
 -----------------------------

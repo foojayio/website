@@ -70,17 +70,20 @@ I'll split this section into the LangChain4j app and the Ollama infrastructure.
 
 LangChain4j provides a Spring Boot integration starter. Here's our minimal dependencies:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="xml">&lt;dependencies&gt;
-    &lt;dependency&gt;
-        &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
-        &lt;artifactId&gt;spring-boot-starter-web&lt;/artifactId&gt;
-    &lt;/dependency&gt;
-    &lt;dependency&gt;
-        &lt;groupId&gt;dev.langchain4j&lt;/groupId&gt;
-        &lt;artifactId&gt;langchain4j-ollama-spring-boot-starter&lt;/artifactId&gt;
-        &lt;version&gt;0.35.0&lt;/version&gt;
-    &lt;/dependency&gt;
-&lt;/dependencies&gt;</pre>
+```xml
+<dependencies>
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-web</artifactId>
+    </dependency>
+    <dependency>
+        <groupId>dev.langchain4j</groupId>
+        <artifactId>langchain4j-ollama-spring-boot-starter</artifactId>
+        <version>0.35.0</version>
+    </dependency>
+</dependencies>
+```
+
 
 LangChain4j offers an abstraction API over the specifics of different LLMs. Here's a focus on what we will use in this section:
 
@@ -90,9 +93,12 @@ The fundamental API `model.generate(String)` passes the user's message to the Ol
 
 LangChain4J's Spring Boot starter automatically creates a `ChatLanguageModel` from the exact dependency set - here, Ollama. Furthermore, it offers lots of configuration options via Spring Boot.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml">langchain4j.ollama.chat-model:
+```yaml
+langchain4j.ollama.chat-model:
   base-url: http://localhost:11434                                       #1
-  model-name: llama3.2                                                   #2</pre>
+  model-name: llama3.2                                                   #2
+```
+
 
 1. Point to the running Ollama instance
 2. Model to use
@@ -103,7 +109,8 @@ When the app starts, LangChain4j creates a bean of type `ChatLanguageModel` and 
 
 For ease of use, I'll use Docker, and more specifically Docker Compose. Here's my Compose file:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml">services:
+```yaml
+services:
   langchain4j:
     build:
       context: .
@@ -116,7 +123,9 @@ For ease of use, I'll use Docker, and more specifically Docker Compose. Here's m
   ollama:
     image: ollama/ollama                                                 #2
     volumes:
-      - ./ollama:/root/.ollama                                           #3</pre>
+      - ./ollama:/root/.ollama                                           #3
+```
+
 
 1. Override the URL configured in the JAR to use the Docker container on Docker Compose
 2. Use the latest images; it's not production
@@ -124,7 +133,10 @@ For ease of use, I'll use Docker, and more specifically Docker Compose. Here's m
 
 As mentioned above, Ollama is a runtime with switchable models. There's no model by default. To download a model, `docker exec` into the container and run the following command:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="shell">ollama run llama3.2</pre>
+```bash
+ollama run llama3.2
+```
+
 
 Be careful, `llama3.2` is a whopping 20Gb; for this reason, you want to avoid downloading the model from each `docker compose up`. This is the reason for the volume mapping above.
 
@@ -132,7 +144,10 @@ Of course, you can substitute `llama3.2` with any other smaller model, *e.g* ., 
 
 At this point, we can `curl` our app and see the results:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="shell">curl localhost:8080 -d 'Hello I am Nicolas and I am a DevRel'</pre>
+```bash
+curl localhost:8080 -d 'Hello I am Nicolas and I am a DevRel'
+```
+
 
 Enhancing with streaming {#h2-5-enhancing-with-streaming}
 ---------------------------------------------------------
@@ -145,7 +160,8 @@ We can readily replace `ChatLanguageModel` with `StreamingChatLanguageModel` to 
 
 We need to change the app configuration accordingly:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml">services:
+```yaml
+services:
   langchain4j:
     build:
       context: .
@@ -154,13 +170,16 @@ We need to change the app configuration accordingly:
     ports:
       - "8080:8080"
     depends_on:
-      - ollama</pre>
+      - ollama
+```
+
 
 1. Was formerly `LANGCHAIN4J_OLLAMA_CHAT_MODEL_BASE_URL`
 
 In parallel, we must migrate from Spring Web MVC to Spring Webflux. Then, we pipe the LLM result stream to the app result stream like so:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="kotlin">class AppStreamingResponseHandler(private val sink: Sinks.Many&lt;String&gt;) : StreamingResponseHandler&lt;AiMessage&gt; {
+```kotlin
+class AppStreamingResponseHandler(private val sink: Sinks.Many<String>) : StreamingResponseHandler<AiMessage> {
 
     override fun onNext(token: String) {                                 //1
         sink.tryEmitNext(token)
@@ -170,7 +189,7 @@ In parallel, we must migrate from Spring Web MVC to Spring Webflux. Then, we pip
         sink.tryEmitError(error)
     }
 
-    override fun onComplete(response: Response&lt;AiMessage&gt;) {             //2
+    override fun onComplete(response: Response<AiMessage>) {             //2
         println(response.content()?.text())
         sink.tryEmitComplete()
     }
@@ -179,12 +198,14 @@ In parallel, we must migrate from Spring Web MVC to Spring Webflux. Then, we pip
 class PromptHandler(private val model: StreamingChatLanguageModel) {
 
     suspend fun handle(req: ServerRequest): ServerResponse {
-        val prompt = req.awaitBody&lt;String&gt;()                             //3
-        val sink = Sinks.many().unicast().onBackpressureBuffer&lt;String&gt;() //4
+        val prompt = req.awaitBody<String>()                             //3
+        val sink = Sinks.many().unicast().onBackpressureBuffer<String>() //4
         model.generate(prompt, AppStreamingResponseHandler(sink))        //5
         return ServerResponse.ok().bodyAndAwait(sink.asFlux().asFlow())  //6
     }
-}</pre>
+}
+```
+
 
 1. Pipe tokens and errors to the sink
 2. The function is **not** abstract and does nothing; hence, it won't close the stream. Remember to override it.
@@ -195,7 +216,10 @@ class PromptHandler(private val model: StreamingChatLanguageModel) {
 
 We can now use curl in stream mode with the `-N` flag:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="shell">curl -N localhost:8080 -d 'Hello I am Nicolas and I am a DevRel'</pre>
+```bash
+curl -N localhost:8080 -d 'Hello I am Nicolas and I am a DevRel'
+```
+
 
 The result is already better!
 
@@ -210,7 +234,8 @@ I started to store the history by myself in memory at first. If interested, chec
 
 Here's the relevant code:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="kotlin">data class StructuredMessage(val sessionId: String, val text: String)    //1
+```kotlin
+data class StructuredMessage(val sessionId: String, val text: String)    //1
 
 interface ChatBot {                                                      //2
     fun talk(@MemoryId sessionId: String, @UserMessage message: String): TokenStream //3-4-5
@@ -219,8 +244,8 @@ interface ChatBot {                                                      //2
 class PromptHandler(private val chatBot: ChatBot) {
 
     suspend fun handle(req: ServerRequest): ServerResponse {
-        val message = req.awaitBody&lt;StructuredMessage&gt;()
-        val sink = Sinks.many().unicast().onBackpressureBuffer&lt;String&gt;()
+        val message = req.awaitBody<StructuredMessage>()
+        val sink = Sinks.many().unicast().onBackpressureBuffer<String>()
         chatBot.talk(message.sessionId, message.text)                    //6
             .onNext(sink::tryEmitNext)                                   //7
             .onError(sink::tryEmitError)                                 //7
@@ -235,13 +260,15 @@ fun beans() = beans {
         coRouter {
             val chatBot = AiServices                                     //8
                 .builder(ChatBot::class.java)
-                .streamingChatLanguageModel(ref&lt;StreamingChatLanguageModel&gt;())
+                .streamingChatLanguageModel(ref<StreamingChatLanguageModel>())
                 .chatMemoryProvider { MessageWindowChatMemory.withMaxMessages(40) }
                 .build()
             POST("/")(PromptHandler(chatBot)::handle)
         }
     }
-}</pre>
+}
+```
+
 
 1. We need a way to pass a correlation ID to group messages with the same chat history. Given we are using curl and not a browser, we explicitly pass an ID along with the user message
 2. Define an interface with no hierarchy requirements. Functions are free-form, but you can set hints
@@ -254,8 +281,11 @@ fun beans() = beans {
 
 Here's how to use it:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="shell">curl -N -H 'Content-Type: application/json' localhost:8080 -d '{ "sessionId": "1", "message": "Hello I am Nicolas and I am a DevRel" }'
-curl -N -H 'Content-Type: application/json' localhost:8080 -d '{ "sessionId": "2", "message": "Hello I am Jane Doe and I am a test sample" }'</pre>
+```bash
+curl -N -H 'Content-Type: application/json' localhost:8080 -d '{ "sessionId": "1", "message": "Hello I am Nicolas and I am a DevRel" }'
+curl -N -H 'Content-Type: application/json' localhost:8080 -d '{ "sessionId": "2", "message": "Hello I am Jane Doe and I am a test sample" }'
+```
+
 
 Adding Retrieval-Augmented Generation {#h2-7-adding-retrieval-augmented-generation}
 -----------------------------------------------------------------------------------
@@ -266,7 +296,8 @@ In this section, we will add an embryo of RAG to our app using data from my blog
 
 LangChain4j offers a dependency literally called [Easy RAG](https://docs.langchain4j.dev/tutorials/rag#easy-rag). It provides two sources, files and URLs, and an in-memory embedding store. In a regular app, you would index offline and store embeddings in a regular database, but we will do it in memory at startup time. It's good enough for our prototyping purposes.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="kotlin">class BlogDataLoader(private val embeddingStore: EmbeddingStore&lt;TextSegment&gt;) {
+```kotlin
+class BlogDataLoader(private val embeddingStore: EmbeddingStore<TextSegment>) {
 
     private val urls = arrayOf(
         "https://blog.frankel.ch/speaking/",
@@ -282,23 +313,25 @@ LangChain4j offers a dependency literally called [Easy RAG](https://docs.langcha
 }
 
 fun beans() = beans {
-    bean&lt;EmbeddingStore&lt;TextSegment&gt;&gt; {
-        InMemoryEmbeddingStore&lt;TextSegment&gt;()                            //2
+    bean<EmbeddingStore<TextSegment>> {
+        InMemoryEmbeddingStore<TextSegment>()                            //2
     }
     bean {
-        BlogDataLoader(ref&lt;EmbeddingStore&lt;TextSegment&gt;&gt;())               //3
+        BlogDataLoader(ref<EmbeddingStore<TextSegment>>())               //3
     }
     bean {
         coRouter {
             val chatBot = AiServices
                 .builder(ChatBot::class.java)
-                .streamingChatLanguageModel(ref&lt;StreamingChatLanguageModel&gt;())
+                .streamingChatLanguageModel(ref<StreamingChatLanguageModel>())
                 .chatMemoryProvider { MessageWindowChatMemory.withMaxMessages(40) }
-                .contentRetriever(EmbeddingStoreContentRetriever.from(ref&lt;EmbeddingStore&lt;TextSegment&gt;&gt;())) //4
+                .contentRetriever(EmbeddingStoreContentRetriever.from(ref<EmbeddingStore<TextSegment>>())) //4
                 .build()
         }
     }
-}</pre>
+}
+```
+
 
 1. Run the code when the application starts
 2. Define the embedding store. Regular applications should use a persistent data store: LangChain4j supports [more than a few](https://docs.langchain4j.dev/tutorials/embedding-stores).
@@ -311,7 +344,10 @@ On OpenAI, I asked, "What books did Nicolas Fränkel write?". It answered: Learn
 
 Let's do the same on the RAG'ed app:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="shell">curl -N -H 'Content-Type: application/json' localhost:8080 -d '{ "sessionId": "1", "message": "What books did Nicolas Fränkel write?" }'</pre>
+```bash
+curl -N -H 'Content-Type: application/json' localhost:8080 -d '{ "sessionId": "1", "message": "What books did Nicolas Fränkel write?" }'
+```
+
 
 The answer is much better:
 > The provided information doesn't mention specific books written by Nicolas Fränkel. It only provides metadata for his blog, which has a section dedicated to his "Books". ...​
@@ -337,6 +373,6 @@ The complete source code for this post can be found on [GitHub](https://github.c
 * [Ollama](https://ollama.com/)
 * [Streaming with REST API for LangChain Applications](https://chalise-arun.medium.com/streaming-with-rest-api-for-langchain-applications-f3a164a207d7)
 
-*** ** * ** ***
+
 
 *Originally published at [A Java Geek](https://blog.frankel.ch/langchain4j-musings/) on November 10^th^, 2024*

@@ -23,7 +23,8 @@ frozen: false
 
 With my current libbcc-based approach, we essentially embed the executed eBPF program into our programs as a string into our applications and compile them on the fly for every run:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public class HelloWorld {
+```java
+public class HelloWorld {
     public static void main(String[] args) {
         try (BPF b = BPF.builder("""
                 int kprobe__sys_clone(void *ctx) {
@@ -34,7 +35,9 @@ With my current libbcc-based approach, we essentially embed the executed eBPF pr
             b.trace_print();
         }
     }
-}</pre>
+}
+```
+
 
 Problems with Libbcc {#h2-0-problems-with-libbcc}
 -------------------------------------------------
@@ -70,15 +73,16 @@ HelloWorld Example {#h2-2-helloworld-example}
 
 Writing programs with libbpf is not too dissimilar to using my libbcc wrapper:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@BPF // annotation to trigger the BPF annotation processor
+```java
+@BPF // annotation to trigger the BPF annotation processor
 public abstract class HelloWorld extends BPFProgram {
 
     // eBPF program code that is compiled at build
     // time using clang
     static final String EBPF_PROGRAM = """
             #include "vmlinux.h"
-            #include &lt;bpf/bpf_helpers.h&gt;
-            #include &lt;bpf/bpf_tracing.h&gt;
+            #include <bpf/bpf_helpers.h>
+            #include <bpf/bpf_tracing.h>
 
             SEC ("kprobe/do_sys_openat2")
             int kprobe__do_sys_openat2(struct pt_regs *ctx){                                                             
@@ -95,26 +99,32 @@ public abstract class HelloWorld extends BPFProgram {
             // attach to the kprobe
             program.autoAttachProgram(
                 program.getProgramByName("kprobe__do_sys_openat2"));
-            program.tracePrintLoop(f -&gt; 
+            program.tracePrintLoop(f -> 
                 String.format("%d: %s: %s", (int)f.ts(), f.task(), f.msg()));
         }
     }
-}</pre>
+}
+```
+
 
 Running this class via `./run_bpf.sh HelloWorld` will then print the following:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">3385: irqbalance: Hello, World from BPF and more!
+```
 3385: irqbalance: Hello, World from BPF and more!
 3385: irqbalance: Hello, World from BPF and more!
 3385: irqbalance: Hello, World from BPF and more!
 3385: irqbalance: Hello, World from BPF and more!
 3385: irqbalance: Hello, World from BPF and more!
 3385: irqbalance: Hello, World from BPF and more!
-3385: C2 CompilerThre: Hello, World from BPF and more!</pre>
+3385: irqbalance: Hello, World from BPF and more!
+3385: C2 CompilerThre: Hello, World from BPF and more!
+```
+
 
 The annotation processor created an implementation of the HelloWorld class, which overrides the `getByteCode` method:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public final class HelloWorldImpl extends HelloWorld {
+```java
+public final class HelloWorldImpl extends HelloWorld {
     /**
      * Base64 encoded gzipped eBPF byte-code
      */
@@ -124,21 +134,26 @@ The annotation processor created an implementation of the HelloWorld class, whic
     public byte[] getByteCode() {
         return Util.decodeGzippedBase64(BYTE_CODE);
     }
-}</pre>
+}
+```
+
 
 Compiler Errors {#h2-3-compiler-errors}
 ---------------------------------------
 
 But what happens when you make a mistake in your eBPF program, for example, not writing a semicolon after the `bpf_printk` call? Then, the annotation processor throws an error at build-time and prints the following error message when calling `mvn package`:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">Processing BPFProgram: me.bechberger.ebpf.samples.HelloWorld
+```
+Processing BPFProgram: me.bechberger.ebpf.samples.HelloWorld
 Obtaining vmlinux.h header file
 Could not compile eBPF program
 HelloWorld.java:[19,66]  error: expected ';' after expression
     bpf_printk("Hello, World from BPF and more!")
                                                  ^
                                                  ;
-1 error generated.</pre>
+1 error generated.
+```
+
 
 The annotation processor compiles the eBPF program using Clang and post-processes the error messages to show the location in the Java program. Using libbcc, we only get this error at run-time, which makes finding these issues far harder.
 

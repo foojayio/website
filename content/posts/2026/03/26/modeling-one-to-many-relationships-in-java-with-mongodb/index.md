@@ -52,41 +52,48 @@ The full source code for this tutorial is available on [GitHub](https://github.c
 
 Create a Maven project with the following dependencies in your pom.xml:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&lt;dependencies&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&lt;!-- MongoDB Java Sync Driver --&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&lt;dependency&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;groupId&gt;org.mongodb&lt;/groupId&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;artifactId&gt;mongodb-driver-sync&lt;/artifactId&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;version&gt;5.3.1&lt;/version&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&lt;/dependency&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&lt;!-- dotenv: loads MONGODB_URI from .env file --&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&lt;dependency&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;groupId&gt;io.github.cdimascio&lt;/groupId&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;artifactId&gt;dotenv-java&lt;/artifactId&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;version&gt;3.0.0&lt;/version&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&lt;/dependency&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&lt;!-- Logging --&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&lt;dependency&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;groupId&gt;org.slf4j&lt;/groupId&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;artifactId&gt;slf4j-api&lt;/artifactId&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;version&gt;2.0.13&lt;/version&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&lt;/dependency&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&lt;dependency&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;groupId&gt;ch.qos.logback&lt;/groupId&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;artifactId&gt;logback-classic&lt;/artifactId&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;version&gt;1.5.6&lt;/version&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&lt;/dependency&gt;
-&lt;/dependencies&gt;</pre>
+```
+<dependencies>
+    <!-- MongoDB Java Sync Driver -->
+    <dependency>
+        <groupId>org.mongodb</groupId>
+        <artifactId>mongodb-driver-sync</artifactId>
+        <version>5.3.1</version>
+    </dependency>
+    <!-- dotenv: loads MONGODB_URI from .env file -->
+    <dependency>
+        <groupId>io.github.cdimascio</groupId>
+        <artifactId>dotenv-java</artifactId>
+        <version>3.0.0</version>
+    </dependency>
+    <!-- Logging -->
+    <dependency>
+        <groupId>org.slf4j</groupId>
+        <artifactId>slf4j-api</artifactId>
+        <version>2.0.13</version>
+    </dependency>
+    <dependency>
+        <groupId>ch.qos.logback</groupId>
+        <artifactId>logback-classic</artifactId>
+        <version>1.5.6</version>
+    </dependency>
+</dependencies>
+```
+
 
 Create a .env file at the project root with your MongoDB connection string:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">MONGODB_URI=mongodb+srv://&lt;username&gt;:&lt;password&gt;@&lt;cluster&gt;.mongodb.net/?retryWrites=true&amp;w=majority</pre>
+```
+MONGODB_URI=mongodb+srv://<username>:<password>@<cluster>.mongodb.net/?retryWrites=true&w=majority
+```
+
 
 ### **Configuring the MongoClient with POJO Support** {#h3-3-configuring-the-mongoclient-with-pojo-support}
 
 Before we dive into the relationship patterns, we need a MongoClient configured with the PojoCodecProvider. This tells the driver how to automatically map Java objects to BSON documents and vice versa --- no manual serialization required.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">package com.example.mongodb.relationships.config;
+```
+package com.example.mongodb.relationships.config;
 import com.mongodb.ConnectionString;
 import com.mongodb.MongoClientSettings;
 import com.mongodb.client.MongoClient;
@@ -98,50 +105,52 @@ import static org.bson.codecs.configuration.CodecRegistries.fromProviders;
 import static org.bson.codecs.configuration.CodecRegistries.fromRegistries;
 
 public class MongoConfig {
-&nbsp;&nbsp;&nbsp;&nbsp;/**
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* DevRel tracking name — identifies traffic from this tutorial on foojay.io.
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* Format: devrel-{medium}-{primary}-{secondary}-{platform}
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/
+    /**
+     * DevRel tracking name — identifies traffic from this tutorial on foojay.io.
+     * Format: devrel-{medium}-{primary}-{secondary}-{platform}
+     */
 
-&nbsp;&nbsp;&nbsp;&nbsp;private static final String APP_NAME = "devrel-tutorial-java-driver-foojay";
-&nbsp;&nbsp;&nbsp;&nbsp;private MongoConfig() {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// utility class
-&nbsp;&nbsp;&nbsp;&nbsp;}
+    private static final String APP_NAME = "devrel-tutorial-java-driver-foojay";
+    private MongoConfig() {
+        // utility class
+    }
 
-&nbsp;&nbsp;&nbsp;&nbsp;public static MongoClient createClient() {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;String mongoUri = loadMongoUri();
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CodecRegistry pojoCodecRegistry = fromRegistries(
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MongoClientSettings.getDefaultCodecRegistry(),
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fromProviders(PojoCodecProvider.builder().automatic(true).build())
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;);
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MongoClientSettings settings = MongoClientSettings.builder()
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.applyConnectionString(new ConnectionString(mongoUri))
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.applicationName(APP_NAME)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.codecRegistry(pojoCodecRegistry)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.build();
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return MongoClients.create(settings);
-&nbsp;&nbsp;&nbsp;&nbsp;}
+    public static MongoClient createClient() {
+        String mongoUri = loadMongoUri();
+        CodecRegistry pojoCodecRegistry = fromRegistries(
+                MongoClientSettings.getDefaultCodecRegistry(),
+                fromProviders(PojoCodecProvider.builder().automatic(true).build())
+        );
+        MongoClientSettings settings = MongoClientSettings.builder()
+                .applyConnectionString(new ConnectionString(mongoUri))
+                .applicationName(APP_NAME)
+                .codecRegistry(pojoCodecRegistry)
+                .build();
+        return MongoClients.create(settings);
+    }
 
-&nbsp;&nbsp;&nbsp;&nbsp;private static String loadMongoUri() {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// Try system environment variable first (e.g., CI/CD pipelines)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;String uri = System.getenv("MONGODB_URI");
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (uri != null &amp;&amp; !uri.isBlank()) {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return uri;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+    private static String loadMongoUri() {
+        // Try system environment variable first (e.g., CI/CD pipelines)
+        String uri = System.getenv("MONGODB_URI");
+        if (uri != null && !uri.isBlank()) {
+            return uri;
+        }
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// Fall back to .env file for local development
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Dotenv dotenv = Dotenv.configure().ignoreIfMissing().load();
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;uri = dotenv.get("MONGODB_URI");
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (uri == null || uri.isBlank()) {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;throw new IllegalStateException(
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"MONGODB_URI is not set. Please define it as an environment variable " +
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"or in a .env file at the project root. " +
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"See .env.example for the expected format."
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;);
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return uri;
-&nbsp;&nbsp;&nbsp;&nbsp;}
-}</pre>
+        // Fall back to .env file for local development
+        Dotenv dotenv = Dotenv.configure().ignoreIfMissing().load();
+        uri = dotenv.get("MONGODB_URI");
+        if (uri == null || uri.isBlank()) {
+            throw new IllegalStateException(
+                    "MONGODB_URI is not set. Please define it as an environment variable " +
+                    "or in a .env file at the project root. " +
+                    "See .env.example for the expected format."
+            );
+        }
+        return uri;
+    }
+}
+```
+
 
 The key line here is PojoCodecProvider.builder().automatic(true).build(). Setting automatic(true) tells the driver to handle any POJO it encounters, not just ones you register explicitly. This is what makes the entire POJO-to-BSON mapping work seamlessly throughout the examples that follow.
 
@@ -150,10 +159,13 @@ The key line here is PojoCodecProvider.builder().automatic(true).build(). Settin
 
 In object-oriented terms, a one-to-many relationship means that one object contains or is associated with a collection of other objects. A BlogPost has many Comment objects. In Java, this is typically expressed as a List:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public class BlogPost {
-&nbsp;&nbsp;&nbsp;&nbsp;private String title;
-&nbsp;&nbsp;&nbsp;&nbsp;private List&lt;Comment&gt; comments;
-}</pre>
+```
+public class BlogPost {
+    private String title;
+    private List<Comment> comments;
+}
+```
+
 
 This is intuitive and familiar. But how does this translate to a document database? In MongoDB, a document is a rich, hierarchical data structure --- similar to a JSON object. Unlike relational tables, a single MongoDB document can hold nested objects and arrays. That flexibility gives you options that don't exist in the relational world.
 
@@ -198,53 +210,60 @@ Let's model our blogging scenario with embedding. The Comment and User (the post
 
 Here's the embedded Comment --- notice it has no _id field, because it doesn't exist as an independent document:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">package com.example.mongodb.relationships.embedded.model;
+```
+package com.example.mongodb.relationships.embedded.model;
 import org.bson.codecs.pojo.annotations.BsonProperty;
 import java.time.Instant;
 
 public class Comment {
-&nbsp;&nbsp;&nbsp;&nbsp;@BsonProperty("author")
-&nbsp;&nbsp;&nbsp;&nbsp;private String author;
-&nbsp;&nbsp;&nbsp;&nbsp;@BsonProperty("body")
-&nbsp;&nbsp;&nbsp;&nbsp;private String body;
-&nbsp;&nbsp;&nbsp;&nbsp;@BsonProperty("posted_at")
-&nbsp;&nbsp;&nbsp;&nbsp;private Instant postedAt;
-&nbsp;&nbsp;&nbsp;&nbsp;public Comment() {}
-&nbsp;&nbsp;&nbsp;&nbsp;public Comment(String author, String body) {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this.author = author;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this.body = body;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this.postedAt = Instant.now();
-&nbsp;&nbsp;&nbsp;&nbsp;}
-&nbsp;&nbsp;&nbsp;&nbsp;// Getters and setters omitted for brevity
-}</pre>
+    @BsonProperty("author")
+    private String author;
+    @BsonProperty("body")
+    private String body;
+    @BsonProperty("posted_at")
+    private Instant postedAt;
+    public Comment() {}
+    public Comment(String author, String body) {
+        this.author = author;
+        this.body = body;
+        this.postedAt = Instant.now();
+    }
+    // Getters and setters omitted for brevity
+}
+```
+
 
 And the embedded User, representing the post author:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">package com.example.mongodb.relationships.embedded.model;
+```
+package com.example.mongodb.relationships.embedded.model;
 import org.bson.codecs.pojo.annotations.BsonProperty;
 
 public class User {
-&nbsp;&nbsp;&nbsp;&nbsp;@BsonProperty("username")
-&nbsp;&nbsp;&nbsp;&nbsp;private String username;
-&nbsp;&nbsp;&nbsp;&nbsp;@BsonProperty("display_name")
-&nbsp;&nbsp;&nbsp;&nbsp;private String displayName;
-&nbsp;&nbsp;&nbsp;&nbsp;@BsonProperty("email")
-&nbsp;&nbsp;&nbsp;&nbsp;private String email;
-&nbsp;&nbsp;&nbsp;&nbsp;@BsonProperty("bio")
-&nbsp;&nbsp;&nbsp;&nbsp;private String bio;
-&nbsp;&nbsp;&nbsp;&nbsp;public User() {}
-&nbsp;&nbsp;&nbsp;&nbsp;public User(String username, String displayName, String email, String bio) {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this.username = username;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this.displayName = displayName;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this.email = email;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this.bio = bio;
-&nbsp;&nbsp;&nbsp;&nbsp;}
-&nbsp;&nbsp;&nbsp;&nbsp;// Getters and setters omitted for brevity
-}</pre>
+    @BsonProperty("username")
+    private String username;
+    @BsonProperty("display_name")
+    private String displayName;
+    @BsonProperty("email")
+    private String email;
+    @BsonProperty("bio")
+    private String bio;
+    public User() {}
+    public User(String username, String displayName, String email, String bio) {
+        this.username = username;
+        this.displayName = displayName;
+        this.email = email;
+        this.bio = bio;
+    }
+    // Getters and setters omitted for brevity
+}
+```
+
 
 Now, the BlogPost itself. It holds the author as an embedded User and the comments as an embedded List\<Comment\>:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">package com.example.mongodb.relationships.embedded.model;
+```
+package com.example.mongodb.relationships.embedded.model;
 import org.bson.codecs.pojo.annotations.BsonId;
 import org.bson.codecs.pojo.annotations.BsonProperty;
 import org.bson.types.ObjectId;
@@ -253,27 +272,29 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BlogPost {
-&nbsp;&nbsp;&nbsp;&nbsp;@BsonId
-&nbsp;&nbsp;&nbsp;&nbsp;private ObjectId id;
-&nbsp;&nbsp;&nbsp;&nbsp;@BsonProperty("title")
-&nbsp;&nbsp;&nbsp;&nbsp;private String title;
-&nbsp;&nbsp;&nbsp;&nbsp;@BsonProperty("content")
-&nbsp;&nbsp;&nbsp;&nbsp;private String content;
-&nbsp;&nbsp;&nbsp;&nbsp;@BsonProperty("author")
-&nbsp;&nbsp;&nbsp;&nbsp;private User author;
-&nbsp;&nbsp;&nbsp;&nbsp;@BsonProperty("published_at")
-&nbsp;&nbsp;&nbsp;&nbsp;private Instant publishedAt;
-&nbsp;&nbsp;&nbsp;&nbsp;@BsonProperty("comments")
-&nbsp;&nbsp;&nbsp;&nbsp;private List&lt;Comment&gt; comments = new ArrayList&lt;&gt;();
-&nbsp;&nbsp;&nbsp;&nbsp;public BlogPost() {}
-&nbsp;&nbsp;&nbsp;&nbsp;public BlogPost(String title, String content, User author) {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this.title = title;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this.content = content;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this.author = author;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this.publishedAt = Instant.now();
-&nbsp;&nbsp;&nbsp;&nbsp;}
-&nbsp;&nbsp;&nbsp;&nbsp;// Getters and setters omitted for brevity
-}</pre>
+    @BsonId
+    private ObjectId id;
+    @BsonProperty("title")
+    private String title;
+    @BsonProperty("content")
+    private String content;
+    @BsonProperty("author")
+    private User author;
+    @BsonProperty("published_at")
+    private Instant publishedAt;
+    @BsonProperty("comments")
+    private List<Comment> comments = new ArrayList<>();
+    public BlogPost() {}
+    public BlogPost(String title, String content, User author) {
+        this.title = title;
+        this.content = content;
+        this.author = author;
+        this.publishedAt = Instant.now();
+    }
+    // Getters and setters omitted for brevity
+}
+```
+
 
 The @BsonProperty annotation maps each Java field to its corresponding BSON field name. The @BsonId annotation marks the id field as the document's _id. Every POJO needs a no-argument constructor for the PojoCodecProvider to deserialize documents back into Java objects.
 
@@ -281,7 +302,8 @@ The @BsonProperty annotation maps each Java field to its corresponding BSON fiel
 
 With our POJOs defined, let's see how to insert a blog post with embedded comments and then read it back:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">package com.example.mongodb.relationships.embedded;
+```
+package com.example.mongodb.relationships.embedded;
 import com.example.mongodb.relationships.embedded.model.BlogPost;
 import com.example.mongodb.relationships.embedded.model.Comment;
 import com.example.mongodb.relationships.embedded.model.User;
@@ -293,79 +315,84 @@ import com.mongodb.client.model.Updates;
 import java.util.Arrays;
 
 public class EmbeddedExample {
-&nbsp;&nbsp;&nbsp;&nbsp;private static final String DATABASE_NAME = "relationships_demo";
-&nbsp;&nbsp;&nbsp;&nbsp;private static final String COLLECTION_NAME = "blog_posts_embedded";
-&nbsp;&nbsp;&nbsp;&nbsp;private final MongoCollection&lt;BlogPost&gt; collection;
-&nbsp;&nbsp;&nbsp;&nbsp;public EmbeddedExample(MongoClient client) {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MongoDatabase database = client.getDatabase(DATABASE_NAME);
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this.collection = database.getCollection(COLLECTION_NAME, BlogPost.class);
-&nbsp;&nbsp;&nbsp;&nbsp;}
+    private static final String DATABASE_NAME = "relationships_demo";
+    private static final String COLLECTION_NAME = "blog_posts_embedded";
+    private final MongoCollection<BlogPost> collection;
+    public EmbeddedExample(MongoClient client) {
+        MongoDatabase database = client.getDatabase(DATABASE_NAME);
+        this.collection = database.getCollection(COLLECTION_NAME, BlogPost.class);
+    }
 
-&nbsp;&nbsp;&nbsp;&nbsp;public void run() {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// 1. Build the author as an embedded User object
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;User alice = new User("alice", "Alice Johnson", "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="97f6fbfef4f2d7f2eff6fae7fbf2b9f4f8fa">[email&nbsp;protected]</a>",
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"Java developer and MongoDB enthusiast.");
+    public void run() {
+        // 1. Build the author as an embedded User object
+        User alice = new User("alice", "Alice Johnson", "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="97f6fbfef4f2d7f2eff6fae7fbf2b9f4f8fa">[email protected]</a>",
+                "Java developer and MongoDB enthusiast.");
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// 2. Build the post with the embedded author and comments
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;BlogPost post = new BlogPost(
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"Getting Started with MongoDB",
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"MongoDB is a document database that stores data in flexible, JSON-like documents.",
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;alice
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;);
+        // 2. Build the post with the embedded author and comments
+        BlogPost post = new BlogPost(
+                "Getting Started with MongoDB",
+                "MongoDB is a document database that stores data in flexible, JSON-like documents.",
+                alice
+        );
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;post.setComments(Arrays.asList(
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;new Comment("Bob", "Great introduction, very clear!"),
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;new Comment("Carol", "I never thought of it that way. Thanks!")
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;));
+        post.setComments(Arrays.asList(
+                new Comment("Bob", "Great introduction, very clear!"),
+                new Comment("Carol", "I never thought of it that way. Thanks!")
+        ));
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// 3. Insert — one document containing author, content, and comments
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;collection.insertOne(post);
+        // 3. Insert — one document containing author, content, and comments
+        collection.insertOne(post);
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// 4. Fetch the post — author and comments come back in the same read
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;BlogPost fetched = collection.find(Filters.eq("_id", post.getId())).first();
+        // 4. Fetch the post — author and comments come back in the same read
+        BlogPost fetched = collection.find(Filters.eq("_id", post.getId())).first();
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (fetched != null) {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.println("Title: " + fetched.getTitle());
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.println("Author: " + fetched.getAuthor().getDisplayName());
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fetched.getComments().forEach(c -&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.println("&nbsp; Comment by " + c.getAuthor() + ": " + c.getBody())
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;);
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+        if (fetched != null) {
+            System.out.println("Title: " + fetched.getTitle());
+            System.out.println("Author: " + fetched.getAuthor().getDisplayName());
+            fetched.getComments().forEach(c ->
+                    System.out.println("  Comment by " + c.getAuthor() + ": " + c.getBody())
+            );
+        }
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// 5. Add a new comment using $push — atomic update on the parent document
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;collection.updateOne(
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Filters.eq("_id", post.getId()),
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Updates.push("comments", new Comment("Dave", "Looking forward to the next post!"))
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;);
+        // 5. Add a new comment using $push — atomic update on the parent document
+        collection.updateOne(
+                Filters.eq("_id", post.getId()),
+                Updates.push("comments", new Comment("Dave", "Looking forward to the next post!"))
+        );
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// 6. Query: find all posts that have at least one comment from "Bob"
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;long count = collection.countDocuments(Filters.eq("comments.author", "Bob"));
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.println("Posts with a comment from Bob: " + count);
+        // 6. Query: find all posts that have at least one comment from "Bob"
+        long count = collection.countDocuments(Filters.eq("comments.author", "Bob"));
+        System.out.println("Posts with a comment from Bob: " + count);
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// 7. Query: find posts by the embedded author's username
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;long alicePosts = collection.countDocuments(Filters.eq("author.username", "alice"));
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.println("Posts authored by 'alice': " + alicePosts);
-&nbsp;&nbsp;&nbsp;&nbsp;}
-}</pre>
+        // 7. Query: find posts by the embedded author's username
+        long alicePosts = collection.countDocuments(Filters.eq("author.username", "alice"));
+        System.out.println("Posts authored by 'alice': " + alicePosts);
+    }
+}
+```
+
 
 The resulting MongoDB document looks like this:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">{
-&nbsp;&nbsp;"_id": ObjectId("..."),
-&nbsp;&nbsp;"title": "Getting Started with MongoDB",
-&nbsp;&nbsp;"content": "MongoDB is a document database...",
-&nbsp;&nbsp;"author": {
-&nbsp;&nbsp;&nbsp;&nbsp;"username": "alice",
-&nbsp;&nbsp;&nbsp;&nbsp;"display_name": "Alice Johnson",
-&nbsp;&nbsp;&nbsp;&nbsp;"email": "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="ee8f82878d8bae8b968f839e828bc08d8183">[email&nbsp;protected]</a>",
-&nbsp;&nbsp;&nbsp;&nbsp;"bio": "Java developer and MongoDB enthusiast."
-&nbsp;&nbsp;},
-&nbsp;&nbsp;"published_at": ISODate("2025-01-01T00:00:00Z"),
-&nbsp;&nbsp;"comments": [
-&nbsp;&nbsp;&nbsp;&nbsp;{ "author": "Bob", &nbsp; "body": "Great introduction, very clear!", &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "posted_at": ISODate("...") },
-&nbsp;&nbsp;&nbsp;&nbsp;{ "author": "Carol", "body": "I never thought of it that way. Thanks!", &nbsp; "posted_at": ISODate("...") }
-&nbsp;&nbsp;]
-}</pre>
+```
+{
+  "_id": ObjectId("..."),
+  "title": "Getting Started with MongoDB",
+  "content": "MongoDB is a document database...",
+  "author": {
+    "username": "alice",
+    "display_name": "Alice Johnson",
+    "email": "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="ee8f82878d8bae8b968f839e828bc08d8183">[email protected]</a>",
+    "bio": "Java developer and MongoDB enthusiast."
+  },
+  "published_at": ISODate("2025-01-01T00:00:00Z"),
+  "comments": [
+    { "author": "Bob",   "body": "Great introduction, very clear!",           "posted_at": ISODate("...") },
+    { "author": "Carol", "body": "I never thought of it that way. Thanks!",   "posted_at": ISODate("...") }
+  ]
+}
+```
+
 
 Everything --- the post content, the author profile, and all comments --- lives in a single document. One find() call returns it all. Adding a new comment is an atomic $push operation on the parent document, with no need to touch a second collection.
 
@@ -396,68 +423,75 @@ In the referenced approach, users, blog posts, and comments each live in their o
 
 Here's the User --- now an independent document with its own _id:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">package com.example.mongodb.relationships.referenced.model;
+```
+package com.example.mongodb.relationships.referenced.model;
 import org.bson.codecs.pojo.annotations.BsonId;
 import org.bson.codecs.pojo.annotations.BsonProperty;
 import org.bson.types.ObjectId;
 import java.time.Instant;
 
 public class User {
-&nbsp;&nbsp;&nbsp;&nbsp;@BsonId
-&nbsp;&nbsp;&nbsp;&nbsp;private ObjectId id;
-&nbsp;&nbsp;&nbsp;&nbsp;@BsonProperty("username")
-&nbsp;&nbsp;&nbsp;&nbsp;private String username;
-&nbsp;&nbsp;&nbsp;&nbsp;@BsonProperty("display_name")
-&nbsp;&nbsp;&nbsp;&nbsp;private String displayName;
-&nbsp;&nbsp;&nbsp;&nbsp;@BsonProperty("email")
-&nbsp;&nbsp;&nbsp;&nbsp;private String email;
-&nbsp;&nbsp;&nbsp;&nbsp;@BsonProperty("bio")
-&nbsp;&nbsp;&nbsp;&nbsp;private String bio;
-&nbsp;&nbsp;&nbsp;&nbsp;@BsonProperty("joined_at")
-&nbsp;&nbsp;&nbsp;&nbsp;private Instant joinedAt;
-&nbsp;&nbsp;&nbsp;&nbsp;public User() {}
-&nbsp;&nbsp;&nbsp;&nbsp;public User(String username, String displayName, String email, String bio) {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this.username = username;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this.displayName = displayName;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this.email = email;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this.bio = bio;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this.joinedAt = Instant.now();
-&nbsp;&nbsp;&nbsp;&nbsp;}
-&nbsp;&nbsp;&nbsp;&nbsp;// Getters and setters omitted for brevity
-}</pre>
+    @BsonId
+    private ObjectId id;
+    @BsonProperty("username")
+    private String username;
+    @BsonProperty("display_name")
+    private String displayName;
+    @BsonProperty("email")
+    private String email;
+    @BsonProperty("bio")
+    private String bio;
+    @BsonProperty("joined_at")
+    private Instant joinedAt;
+    public User() {}
+    public User(String username, String displayName, String email, String bio) {
+        this.username = username;
+        this.displayName = displayName;
+        this.email = email;
+        this.bio = bio;
+        this.joinedAt = Instant.now();
+    }
+    // Getters and setters omitted for brevity
+}
+```
+
 
 The Comment also becomes an independent document, referencing both the post and the author by ObjectId:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">package com.example.mongodb.relationships.referenced.model;
+```
+package com.example.mongodb.relationships.referenced.model;
 import org.bson.codecs.pojo.annotations.BsonId;
 import org.bson.codecs.pojo.annotations.BsonProperty;
 import org.bson.types.ObjectId;
 import java.time.Instant;
 
 public class Comment {
-&nbsp;&nbsp;&nbsp;&nbsp;@BsonId
-&nbsp;&nbsp;&nbsp;&nbsp;private ObjectId id;
-&nbsp;&nbsp;&nbsp;&nbsp;@BsonProperty("post_id")
-&nbsp;&nbsp;&nbsp;&nbsp;private ObjectId postId;
-&nbsp;&nbsp;&nbsp;&nbsp;@BsonProperty("author_id")
-&nbsp;&nbsp;&nbsp;&nbsp;private ObjectId authorId;
-&nbsp;&nbsp;&nbsp;&nbsp;@BsonProperty("body")
-&nbsp;&nbsp;&nbsp;&nbsp;private String body;
-&nbsp;&nbsp;&nbsp;&nbsp;@BsonProperty("posted_at")
-&nbsp;&nbsp;&nbsp;&nbsp;private Instant postedAt;
-&nbsp;&nbsp;&nbsp;&nbsp;public Comment() {}
-&nbsp;&nbsp;&nbsp;&nbsp;public Comment(ObjectId postId, ObjectId authorId, String body) {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this.postId = postId;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this.authorId = authorId;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this.body = body;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this.postedAt = Instant.now();
-&nbsp;&nbsp;&nbsp;&nbsp;}
-&nbsp;&nbsp;&nbsp;&nbsp;// Getters and setters omitted for brevity
-}</pre>
+    @BsonId
+    private ObjectId id;
+    @BsonProperty("post_id")
+    private ObjectId postId;
+    @BsonProperty("author_id")
+    private ObjectId authorId;
+    @BsonProperty("body")
+    private String body;
+    @BsonProperty("posted_at")
+    private Instant postedAt;
+    public Comment() {}
+    public Comment(ObjectId postId, ObjectId authorId, String body) {
+        this.postId = postId;
+        this.authorId = authorId;
+        this.body = body;
+        this.postedAt = Instant.now();
+    }
+    // Getters and setters omitted for brevity
+}
+```
+
 
 And the BlogPost holds references instead of embedded objects:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">package com.example.mongodb.relationships.referenced.model;
+```
+package com.example.mongodb.relationships.referenced.model;
 import org.bson.codecs.pojo.annotations.BsonId;
 import org.bson.codecs.pojo.annotations.BsonProperty;
 import org.bson.types.ObjectId;
@@ -466,27 +500,29 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BlogPost {
-&nbsp;&nbsp;&nbsp;&nbsp;@BsonId
-&nbsp;&nbsp;&nbsp;&nbsp;private ObjectId id;
-&nbsp;&nbsp;&nbsp;&nbsp;@BsonProperty("title")
-&nbsp;&nbsp;&nbsp;&nbsp;private String title;
-&nbsp;&nbsp;&nbsp;&nbsp;@BsonProperty("content")
-&nbsp;&nbsp;&nbsp;&nbsp;private String content;
-&nbsp;&nbsp;&nbsp;&nbsp;@BsonProperty("author_id")
-&nbsp;&nbsp;&nbsp;&nbsp;private ObjectId authorId;
-&nbsp;&nbsp;&nbsp;&nbsp;@BsonProperty("published_at")
-&nbsp;&nbsp;&nbsp;&nbsp;private Instant publishedAt;
-&nbsp;&nbsp;&nbsp;&nbsp;@BsonProperty("comment_ids")
-&nbsp;&nbsp;&nbsp;&nbsp;private List&lt;ObjectId&gt; commentIds = new ArrayList&lt;&gt;();
-&nbsp;&nbsp;&nbsp;&nbsp;public BlogPost() {}
-&nbsp;&nbsp;&nbsp;&nbsp;public BlogPost(String title, String content, ObjectId authorId) {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this.title = title;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this.content = content;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this.authorId = authorId;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this.publishedAt = Instant.now();
-&nbsp;&nbsp;&nbsp;&nbsp;}
-&nbsp;&nbsp;&nbsp;&nbsp;// Getters and setters omitted for brevity
-}</pre>
+    @BsonId
+    private ObjectId id;
+    @BsonProperty("title")
+    private String title;
+    @BsonProperty("content")
+    private String content;
+    @BsonProperty("author_id")
+    private ObjectId authorId;
+    @BsonProperty("published_at")
+    private Instant publishedAt;
+    @BsonProperty("comment_ids")
+    private List<ObjectId> commentIds = new ArrayList<>();
+    public BlogPost() {}
+    public BlogPost(String title, String content, ObjectId authorId) {
+        this.title = title;
+        this.content = content;
+        this.authorId = authorId;
+        this.publishedAt = Instant.now();
+    }
+    // Getters and setters omitted for brevity
+}
+```
+
 
 Notice the difference: instead of private User author and private List\<Comment\> comments, we now have private ObjectId authorId and private List\<ObjectId\> commentIds. The data itself lives elsewhere.
 
@@ -494,7 +530,8 @@ Notice the difference: instead of private User author and private List\<Comment\
 
 Working with references requires more steps. You insert documents into separate collections, maintain the reference list, and resolve references with additional queries:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">package com.example.mongodb.relationships.referenced;
+```
+package com.example.mongodb.relationships.referenced;
 import com.example.mongodb.relationships.referenced.model.BlogPost;
 import com.example.mongodb.relationships.referenced.model.Comment;
 import com.example.mongodb.relationships.referenced.model.User;
@@ -512,144 +549,149 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class ReferencedExample {
-&nbsp;&nbsp;&nbsp;&nbsp;private static final String DATABASE_NAME = "relationships_demo";
-&nbsp;&nbsp;&nbsp;&nbsp;private final MongoCollection&lt;User&gt; usersCollection;
-&nbsp;&nbsp;&nbsp;&nbsp;private final MongoCollection&lt;BlogPost&gt; postsCollection;
-&nbsp;&nbsp;&nbsp;&nbsp;private final MongoCollection&lt;Comment&gt; commentsCollection;
-&nbsp;&nbsp;&nbsp;&nbsp;public ReferencedExample(MongoClient client) {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MongoDatabase database = client.getDatabase(DATABASE_NAME);
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this.usersCollection = database.getCollection("users", User.class);
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this.postsCollection = database.getCollection("blog_posts_referenced", BlogPost.class);
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this.commentsCollection = database.getCollection("comments", Comment.class);
-&nbsp;&nbsp;&nbsp;&nbsp;}
+    private static final String DATABASE_NAME = "relationships_demo";
+    private final MongoCollection<User> usersCollection;
+    private final MongoCollection<BlogPost> postsCollection;
+    private final MongoCollection<Comment> commentsCollection;
+    public ReferencedExample(MongoClient client) {
+        MongoDatabase database = client.getDatabase(DATABASE_NAME);
+        this.usersCollection = database.getCollection("users", User.class);
+        this.postsCollection = database.getCollection("blog_posts_referenced", BlogPost.class);
+        this.commentsCollection = database.getCollection("comments", Comment.class);
+    }
 
-&nbsp;&nbsp;&nbsp;&nbsp;public void run() {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// 1. Insert users into the users collection
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;User alice = new User("alice", "Alice Johnson", "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="b7d6dbded4d2f7d2cfd6dac7dbd299d4d8da">[email&nbsp;protected]</a>",
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"Java developer and MongoDB enthusiast.");
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;User bob = new User("bob", "Bob Smith", "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="fb999499bb9e839a968b979ed5989496">[email&nbsp;protected]</a>",
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"Backend engineer who loves databases.");
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;User carol = new User("carol", "Carol Williams", "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="6d0e0c1f02012d08150c001d0108430e0200">[email&nbsp;protected]</a>",
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"Full-stack developer and tech blogger.");
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;usersCollection.insertMany(Arrays.asList(alice, bob, carol));
+    public void run() {
+        // 1. Insert users into the users collection
+        User alice = new User("alice", "Alice Johnson", "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="b7d6dbded4d2f7d2cfd6dac7dbd299d4d8da">[email protected]</a>",
+                "Java developer and MongoDB enthusiast.");
+        User bob = new User("bob", "Bob Smith", "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="fb999499bb9e839a968b979ed5989496">[email protected]</a>",
+                "Backend engineer who loves databases.");
+        User carol = new User("carol", "Carol Williams", "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="6d0e0c1f02012d08150c001d0108430e0200">[email protected]</a>",
+                "Full-stack developer and tech blogger.");
+        usersCollection.insertMany(Arrays.asList(alice, bob, carol));
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// 2. Insert the blog post, referencing Alice as the author by ObjectId
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;BlogPost post = new BlogPost(
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"Understanding MongoDB Indexes",
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"Indexes support efficient execution of queries in MongoDB.",
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;alice.getId()
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;);
+        // 2. Insert the blog post, referencing Alice as the author by ObjectId
+        BlogPost post = new BlogPost(
+                "Understanding MongoDB Indexes",
+                "Indexes support efficient execution of queries in MongoDB.",
+                alice.getId()
+        );
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;postsCollection.insertOne(post);
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ObjectId postId = post.getId();
+        postsCollection.insertOne(post);
+        ObjectId postId = post.getId();
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// 3. Insert comments referencing the post and their respective authors
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;List&lt;Comment&gt; comments = Arrays.asList(
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;new Comment(postId, bob.getId(), "The index on _id is automatic, right?"),
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;new Comment(postId, carol.getId(), "What about compound indexes? Any tips?")
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;);
+        // 3. Insert comments referencing the post and their respective authors
+        List<Comment> comments = Arrays.asList(
+                new Comment(postId, bob.getId(), "The index on _id is automatic, right?"),
+                new Comment(postId, carol.getId(), "What about compound indexes? Any tips?")
+        );
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;commentsCollection.insertMany(comments);
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// Collect the ObjectIds assigned by MongoDB during insert
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;List&lt;ObjectId&gt; commentIds = new ArrayList&lt;&gt;();
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;comments.forEach(c -&gt; commentIds.add(c.getId()));
+        commentsCollection.insertMany(comments);
+        // Collect the ObjectIds assigned by MongoDB during insert
+        List<ObjectId> commentIds = new ArrayList<>();
+        comments.forEach(c -> commentIds.add(c.getId()));
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// 4. Update the post to store the reference list
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;postsCollection.updateOne(
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Filters.eq("_id", postId),
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Updates.set("comment_ids", commentIds)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;);
+        // 4. Update the post to store the reference list
+        postsCollection.updateOne(
+                Filters.eq("_id", postId),
+                Updates.set("comment_ids", commentIds)
+        );
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// 5. Multi-step fetch: load post, then resolve author and comments
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;BlogPost fetchedPost = postsCollection.find(Filters.eq("_id", postId)).first();
+        // 5. Multi-step fetch: load post, then resolve author and comments
+        BlogPost fetchedPost = postsCollection.find(Filters.eq("_id", postId)).first();
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (fetchedPost != null) {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// Resolve the post author from the users collection
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;User postAuthor = usersCollection
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.find(Filters.eq("_id", fetchedPost.getAuthorId()))
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.first();
+        if (fetchedPost != null) {
+            // Resolve the post author from the users collection
+            User postAuthor = usersCollection
+                    .find(Filters.eq("_id", fetchedPost.getAuthorId()))
+                    .first();
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// Resolve comments by their ObjectIds
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;List&lt;Comment&gt; resolvedComments = commentsCollection
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.find(Filters.in("_id", fetchedPost.getCommentIds()))
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.into(new ArrayList&lt;&gt;());
+            // Resolve comments by their ObjectIds
+            List<Comment> resolvedComments = commentsCollection
+                    .find(Filters.in("_id", fetchedPost.getCommentIds()))
+                    .into(new ArrayList<>());
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// Batch-load all comment authors in a single query
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;List&lt;ObjectId&gt; commentAuthorIds = resolvedComments.stream()
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.map(Comment::getAuthorId)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.distinct()
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.collect(Collectors.toList());
+            // Batch-load all comment authors in a single query
+            List<ObjectId> commentAuthorIds = resolvedComments.stream()
+                    .map(Comment::getAuthorId)
+                    .distinct()
+                    .collect(Collectors.toList());
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Map&lt;ObjectId, User&gt; commentAuthors = usersCollection
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.find(Filters.in("_id", commentAuthorIds))
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.into(new ArrayList&lt;&gt;())
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.stream()
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.collect(Collectors.toMap(User::getId, Function.identity()));
+            Map<ObjectId, User> commentAuthors = usersCollection
+                    .find(Filters.in("_id", commentAuthorIds))
+                    .into(new ArrayList<>())
+                    .stream()
+                    .collect(Collectors.toMap(User::getId, Function.identity()));
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// Print the assembled object graph
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.println("Title: " + fetchedPost.getTitle());
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (postAuthor != null) {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.println("Author: " + postAuthor.getDisplayName());
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+            // Print the assembled object graph
+            System.out.println("Title: " + fetchedPost.getTitle());
+            if (postAuthor != null) {
+                System.out.println("Author: " + postAuthor.getDisplayName());
+            }
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;resolvedComments.forEach(c -&gt; {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;User commentAuthor = commentAuthors.get(c.getAuthorId());
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;String authorName = commentAuthor != null
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;? commentAuthor.getDisplayName() : "Unknown";
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.println("&nbsp; Comment by " + authorName + ": " + c.getBody());
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;});
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+            resolvedComments.forEach(c -> {
+                User commentAuthor = commentAuthors.get(c.getAuthorId());
+                String authorName = commentAuthor != null
+                        ? commentAuthor.getDisplayName() : "Unknown";
+                System.out.println("  Comment by " + authorName + ": " + c.getBody());
+            });
+        }
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// 6. Query comments independently — key advantage of references
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;commentsCollection
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.find(Filters.eq("author_id", bob.getId()))
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.forEach(c -&gt; System.out.println("Bob's comment: " + c.getBody()));
+        // 6. Query comments independently — key advantage of references
+        commentsCollection
+                .find(Filters.eq("author_id", bob.getId()))
+                .forEach(c -> System.out.println("Bob's comment: " + c.getBody()));
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// 7. Query all posts by a specific author
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;long alicePosts = postsCollection
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.countDocuments(Filters.eq("author_id", alice.getId()));
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.println("Posts authored by Alice: " + alicePosts);
-&nbsp;&nbsp;&nbsp;&nbsp;}
-}</pre>
+        // 7. Query all posts by a specific author
+        long alicePosts = postsCollection
+                .countDocuments(Filters.eq("author_id", alice.getId()));
+        System.out.println("Posts authored by Alice: " + alicePosts);
+    }
+}
+```
+
 
 The resulting MongoDB documents span three collections:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">// users collection
+```
+// users collection
 [{
-&nbsp;&nbsp;"_id": ObjectId("uuu"),
-&nbsp;&nbsp;"username": "alice",
-&nbsp;&nbsp;"display_name": "Alice Johnson",
-&nbsp;&nbsp;"email": "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="fe9f92979d9bbe9b869f938e929bd09d9193">[email&nbsp;protected]</a>",
-&nbsp;&nbsp;"bio": "Java developer and MongoDB enthusiast.",
-&nbsp;&nbsp;"joined_at": ISODate("...")
+  "_id": ObjectId("uuu"),
+  "username": "alice",
+  "display_name": "Alice Johnson",
+  "email": "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="fe9f92979d9bbe9b869f938e929bd09d9193">[email protected]</a>",
+  "bio": "Java developer and MongoDB enthusiast.",
+  "joined_at": ISODate("...")
 },
 {
-&nbsp;&nbsp;"_id": ObjectId("uuu2"),
-&nbsp;&nbsp;"username": "bob",
-&nbsp;&nbsp;"display_name": "Bob Smith",
-&nbsp;&nbsp;"email": "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="02606d6042677a636f726e672c616d6f">[email&nbsp;protected]</a>",
-&nbsp;&nbsp;"bio": "Java developer and MongoDB enthusiast.",
-&nbsp;&nbsp;"joined_at": ISODate("...")
+  "_id": ObjectId("uuu2"),
+  "username": "bob",
+  "display_name": "Bob Smith",
+  "email": "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="02606d6042677a636f726e672c616d6f">[email protected]</a>",
+  "bio": "Java developer and MongoDB enthusiast.",
+  "joined_at": ISODate("...")
 }]
 
 // blog_posts_referenced collection
 [{
-&nbsp;&nbsp;"_id": ObjectId("aaa"),
-&nbsp;&nbsp;"title": "Understanding MongoDB Indexes",
-&nbsp;&nbsp;"content": "Indexes support efficient execution of queries...",
-&nbsp;&nbsp;"author_id": ObjectId("uuu"),
-&nbsp;&nbsp;"published_at": ISODate("..."),
-&nbsp;&nbsp;"comment_ids": [ObjectId("bbb"), ObjectId("ccc")]
+  "_id": ObjectId("aaa"),
+  "title": "Understanding MongoDB Indexes",
+  "content": "Indexes support efficient execution of queries...",
+  "author_id": ObjectId("uuu"),
+  "published_at": ISODate("..."),
+  "comment_ids": [ObjectId("bbb"), ObjectId("ccc")]
 }]
 
 // comments collection
 [{
-&nbsp;&nbsp;"_id": ObjectId("bbb"),
-&nbsp;&nbsp;"post_id": ObjectId("aaa"),
-&nbsp;&nbsp;"author_id": ObjectId("uuu2"),
-&nbsp;&nbsp;"body": "The index on _id is automatic, right?",
-&nbsp;&nbsp;"posted_at": ISODate("...")
-}]</pre>
+  "_id": ObjectId("bbb"),
+  "post_id": ObjectId("aaa"),
+  "author_id": ObjectId("uuu2"),
+  "body": "The index on _id is automatic, right?",
+  "posted_at": ISODate("...")
+}]
+```
+
 
 The trade-off is visible in the code. Assembling the full object graph requires fetching the post, then the author, then the comments, and then the comment authors. That's multiple round-trips. However, the Filters.in() operator lets us batch-load related documents efficiently --- notice how we collect all unique commentAuthorIds and resolve them in a single query rather than one query per comment.
 
@@ -682,119 +724,131 @@ For our blogging example, you might embed only the three most recent comments in
 
 Here is a simplified view of how the Subset Pattern looks in Java. First, the snapshot classes --- lightweight copies of data optimized for display:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public class AuthorSnapshot {
-&nbsp;&nbsp;&nbsp;&nbsp;@BsonId
-&nbsp;&nbsp;&nbsp;&nbsp;private ObjectId id;
-&nbsp;&nbsp;&nbsp;&nbsp;@BsonProperty("username")
-&nbsp;&nbsp;&nbsp;&nbsp;private String username;
-&nbsp;&nbsp;&nbsp;&nbsp;@BsonProperty("display_name")
-&nbsp;&nbsp;&nbsp;&nbsp;private String displayName;
-&nbsp;&nbsp;&nbsp;&nbsp;@BsonProperty("profile_picture_url")
-&nbsp;&nbsp;&nbsp;&nbsp;private String profilePictureUrl;
-&nbsp;&nbsp;&nbsp;&nbsp;public AuthorSnapshot() {}
-&nbsp;&nbsp;&nbsp;&nbsp;public static AuthorSnapshot fromUser(User user) {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return new AuthorSnapshot(
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;user.getId(),
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;user.getUsername(),
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;user.getDisplayName(),
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;user.getProfilePictureUrl()
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;);
-&nbsp;&nbsp;&nbsp;&nbsp;}
-&nbsp;&nbsp;&nbsp;&nbsp;// Getters and setters omitted for brevity
+```
+public class AuthorSnapshot {
+    @BsonId
+    private ObjectId id;
+    @BsonProperty("username")
+    private String username;
+    @BsonProperty("display_name")
+    private String displayName;
+    @BsonProperty("profile_picture_url")
+    private String profilePictureUrl;
+    public AuthorSnapshot() {}
+    public static AuthorSnapshot fromUser(User user) {
+        return new AuthorSnapshot(
+                user.getId(),
+                user.getUsername(),
+                user.getDisplayName(),
+                user.getProfilePictureUrl()
+        );
+    }
+    // Getters and setters omitted for brevity
 }
 
 public class CommentSnapshot {
-&nbsp;&nbsp;&nbsp;&nbsp;@BsonId
-&nbsp;&nbsp;&nbsp;&nbsp;private ObjectId id;
-&nbsp;&nbsp;&nbsp;&nbsp;@BsonProperty("author")
-&nbsp;&nbsp;&nbsp;&nbsp;private String author;
-&nbsp;&nbsp;&nbsp;&nbsp;@BsonProperty("body")
-&nbsp;&nbsp;&nbsp;&nbsp;private String body;
-&nbsp;&nbsp;&nbsp;&nbsp;@BsonProperty("posted_at")
-&nbsp;&nbsp;&nbsp;&nbsp;private Instant postedAt;
-&nbsp;&nbsp;&nbsp;&nbsp;public CommentSnapshot() {}
-&nbsp;&nbsp;&nbsp;&nbsp;public static CommentSnapshot fromComment(Comment comment, String authorDisplayName) {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return new CommentSnapshot(
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;comment.getId(),
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;authorDisplayName,
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;comment.getBody(),
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;comment.getPostedAt()
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;);
-&nbsp;&nbsp;&nbsp;&nbsp;}
-&nbsp;&nbsp;&nbsp;&nbsp;// Getters and setters omitted for brevity
-}</pre>
+    @BsonId
+    private ObjectId id;
+    @BsonProperty("author")
+    private String author;
+    @BsonProperty("body")
+    private String body;
+    @BsonProperty("posted_at")
+    private Instant postedAt;
+    public CommentSnapshot() {}
+    public static CommentSnapshot fromComment(Comment comment, String authorDisplayName) {
+        return new CommentSnapshot(
+                comment.getId(),
+                authorDisplayName,
+                comment.getBody(),
+                comment.getPostedAt()
+        );
+    }
+    // Getters and setters omitted for brevity
+}
+```
+
 
 And the BlogPost that combines both:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public class BlogPost {
-&nbsp;&nbsp;&nbsp;&nbsp;public static final int LATEST_COMMENTS_LIMIT = 3;
-&nbsp;&nbsp;&nbsp;&nbsp;@BsonId
-&nbsp;&nbsp;&nbsp;&nbsp;private ObjectId id;
-&nbsp;&nbsp;&nbsp;&nbsp;@BsonProperty("title")
-&nbsp;&nbsp;&nbsp;&nbsp;private String title;
-&nbsp;&nbsp;&nbsp;&nbsp;@BsonProperty("content")
-&nbsp;&nbsp;&nbsp;&nbsp;private String content;
-&nbsp;&nbsp;&nbsp;&nbsp;@BsonProperty("author")
-&nbsp;&nbsp;&nbsp;&nbsp;private AuthorSnapshot author;
-&nbsp;&nbsp;&nbsp;&nbsp;@BsonProperty("published_at")
-&nbsp;&nbsp;&nbsp;&nbsp;private Instant publishedAt;
-&nbsp;&nbsp;&nbsp;&nbsp;@BsonProperty("latest_comments")
-&nbsp;&nbsp;&nbsp;&nbsp;private List&lt;CommentSnapshot&gt; latestComments = new ArrayList&lt;&gt;();
-&nbsp;&nbsp;&nbsp;&nbsp;@BsonProperty("comment_count")
-&nbsp;&nbsp;&nbsp;&nbsp;private int commentCount;
-&nbsp;&nbsp;&nbsp;&nbsp;// Constructor, getters, and setters omitted for brevity
-}</pre>
+```
+public class BlogPost {
+    public static final int LATEST_COMMENTS_LIMIT = 3;
+    @BsonId
+    private ObjectId id;
+    @BsonProperty("title")
+    private String title;
+    @BsonProperty("content")
+    private String content;
+    @BsonProperty("author")
+    private AuthorSnapshot author;
+    @BsonProperty("published_at")
+    private Instant publishedAt;
+    @BsonProperty("latest_comments")
+    private List<CommentSnapshot> latestComments = new ArrayList<>();
+    @BsonProperty("comment_count")
+    private int commentCount;
+    // Constructor, getters, and setters omitted for brevity
+}
+```
+
 
 The key maintenance operation occurs when a new comment is added. You insert the full Comment into the comments collection, then atomically update the post using $push with $slice to keep only the most recent entries:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">import com.mongodb.client.model.Filters;
+```
+import com.mongodb.client.model.Filters;
 import com.mongodb.client.model.PushOptions;
 import com.mongodb.client.model.Updates;
 
 private void addComment(ObjectId postId, User author, String body) {
-&nbsp;&nbsp;&nbsp;&nbsp;// 1. Insert the canonical comment into the comments collection
-&nbsp;&nbsp;&nbsp;&nbsp;Comment comment = new Comment(postId, author.getId(), body);
-&nbsp;&nbsp;&nbsp;&nbsp;commentsCollection.insertOne(comment);
-&nbsp;&nbsp;&nbsp;&nbsp;// 2. Build the lightweight snapshot for embedding
-&nbsp;&nbsp;&nbsp;&nbsp;CommentSnapshot snapshot = CommentSnapshot.fromComment(comment, author.getDisplayName());
-&nbsp;&nbsp;&nbsp;&nbsp;// 3. Update the post in a single round-trip: $push with $slice caps the
-&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp; &nbsp; embedded array, and $inc keeps the counter in sync — both field
-&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp; &nbsp; mutations are atomic within this updateOne call. Note that the
-&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp; &nbsp; insertOne in step 1 and this updateOne are two separate operations
-&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp; &nbsp; and are not atomic as a whole.
-&nbsp;&nbsp;&nbsp;&nbsp;postsCollection.updateOne(
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Filters.eq("_id", postId),
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Updates.combine(
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Updates.pushEach(
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"latest_comments",
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Arrays.asList(snapshot),
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;new PushOptions().slice(-BlogPost.LATEST_COMMENTS_LIMIT)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;),
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Updates.inc("comment_count", 1)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)
-&nbsp;&nbsp;&nbsp;&nbsp;);
-}</pre>
+    // 1. Insert the canonical comment into the comments collection
+    Comment comment = new Comment(postId, author.getId(), body);
+    commentsCollection.insertOne(comment);
+    // 2. Build the lightweight snapshot for embedding
+    CommentSnapshot snapshot = CommentSnapshot.fromComment(comment, author.getDisplayName());
+    // 3. Update the post in a single round-trip: $push with $slice caps the
+    //    embedded array, and $inc keeps the counter in sync — both field
+    //    mutations are atomic within this updateOne call. Note that the
+    //    insertOne in step 1 and this updateOne are two separate operations
+    //    and are not atomic as a whole.
+    postsCollection.updateOne(
+            Filters.eq("_id", postId),
+            Updates.combine(
+                    Updates.pushEach(
+                            "latest_comments",
+                            Arrays.asList(snapshot),
+                            new PushOptions().slice(-BlogPost.LATEST_COMMENTS_LIMIT)
+                    ),
+                    Updates.inc("comment_count", 1)
+            )
+    );
+}
+```
+
 
 The resulting document gives you the best of both worlds --- a single read for the most common view, with the full dataset available in a separate collection when needed:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">{
-&nbsp;&nbsp;"_id": ObjectId("ppp"),
-&nbsp;&nbsp;"title": "The Subset Pattern in Practice",
-&nbsp;&nbsp;"content": "The Subset Pattern is a schema design strategy...",
-&nbsp;&nbsp;"author": {
-&nbsp;&nbsp;&nbsp;&nbsp;"_id": ObjectId("uuu"),
-&nbsp;&nbsp;&nbsp;&nbsp;"username": "alice",
-&nbsp;&nbsp;&nbsp;&nbsp;"display_name": "Alice Johnson",
-&nbsp;&nbsp;&nbsp;&nbsp;"profile_picture_url": "https://cdn.example.com/avatars/alice.jpg"
-&nbsp;&nbsp;},
-&nbsp;&nbsp;"published_at": ISODate("..."),
-&nbsp;&nbsp;"latest_comments": [
-&nbsp;&nbsp;&nbsp;&nbsp;{ "_id": ObjectId("c3"), "author": "Dave Brown",&nbsp; &nbsp; &nbsp; "body": "This is exactly what I was looking for.", &nbsp; &nbsp; &nbsp; "posted_at": ISODate("...") },
-&nbsp;&nbsp;&nbsp;&nbsp;{ "_id": ObjectId("c4"), "author": "Eve Davis", &nbsp; &nbsp; &nbsp; "body": "Could you write a follow-up on the Bucket Pattern?", "posted_at": ISODate("...") },
-&nbsp;&nbsp;&nbsp;&nbsp;{ "_id": ObjectId("c5"), "author": "Bob Smith", &nbsp; &nbsp; &nbsp; "body": "I refactored my schema using this — works great!", &nbsp; "posted_at": ISODate("...") }
-&nbsp;&nbsp;],
-&nbsp;&nbsp;"comment_count": 5
-}</pre>
+```
+{
+  "_id": ObjectId("ppp"),
+  "title": "The Subset Pattern in Practice",
+  "content": "The Subset Pattern is a schema design strategy...",
+  "author": {
+    "_id": ObjectId("uuu"),
+    "username": "alice",
+    "display_name": "Alice Johnson",
+    "profile_picture_url": "https://cdn.example.com/avatars/alice.jpg"
+  },
+  "published_at": ISODate("..."),
+  "latest_comments": [
+    { "_id": ObjectId("c3"), "author": "Dave Brown",      "body": "This is exactly what I was looking for.",       "posted_at": ISODate("...") },
+    { "_id": ObjectId("c4"), "author": "Eve Davis",       "body": "Could you write a follow-up on the Bucket Pattern?", "posted_at": ISODate("...") },
+    { "_id": ObjectId("c5"), "author": "Bob Smith",       "body": "I refactored my schema using this — works great!",   "posted_at": ISODate("...") }
+  ],
+  "comment_count": 5
+}
+```
+
 
 The AuthorSnapshot carries the user's _id alongside the display fields, so it serves as both a reference and a read-optimized cache. When the reader navigates to the full author profile, you resolve that _id against the users collection. The comment_count field lets the UI display "View all 5 comments" without a count query.
 
@@ -819,7 +873,10 @@ The Java POJO model maps cleanly to all three patterns. The PojoCodecProvider ha
 
 The full working code for all three patterns is available on [GitHub](https://github.com/arthurmr96/mongodb-java-modeling-relationships). To experiment with your own data, sign up for a free [MongoDB Atlas](https://www.mongodb.com/cloud/atlas/register/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=many-mongodb-foojay&utm_term=hugh.murray) cluster, clone the repository, set your connection string in the .env file, and run:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">mvn compile exec:java</pre>
+```
+mvn compile exec:java
+```
+
 
 **FAQs** {#h2-21-faqs}
 ----------------------

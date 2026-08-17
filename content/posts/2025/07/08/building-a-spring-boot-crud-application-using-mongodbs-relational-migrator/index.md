@@ -71,10 +71,12 @@ For example, let's consider a scenario where we need to list all authors with th
 
 To do so, we would write the SQL query as:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">SELECT a.name, aa.alias
+```
+SELECT a.name, aa.alias
 FROM library.authors a
 LEFT JOIN library.author_alias aa ON a.id = aa.author_id;
-</pre>
+```
+
 
 This leads to the joining of two different tables using the foreign key constraint. In the next section, we will understand how this query would look in MongoDB.
 
@@ -87,7 +89,8 @@ After the mappings have been applied to the tables, the MongoDB schema would lik
 
 Let's try to convert the above SQL query into the equivalent MongoDB query:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">db.collection.aggregate([
+```
+db.collection.aggregate([
 {
 $project: {
 "name": 1,
@@ -97,7 +100,8 @@ $project: {
 }
 ]
 )
-</pre>
+```
+
 
 This is one such example where a huge ER diagram with nine different tables can be combined to form five different collections and make the query simpler.
 
@@ -152,7 +156,8 @@ At this point in the application development, we have all the entity and reposit
 
 Let us take an example where you need to find all books reviewed within a specific date range. To perform so in the Postgres query, you would have the query as:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">SELECT 
+```
+SELECT 
     r.timestamp,
     u.name AS reviewer_name,
     b.title AS book_title,
@@ -168,11 +173,13 @@ WHERE
     r.timestamp BETWEEN '2022-01-01' AND '2024-12-31'
 ORDER BY 
     r.timestamp ASC;
-</pre>
+```
+
 
 The equivalent MongoDB Java query in the schema can simply be written as:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public List&lt;ReviewsEntity&gt; getBookReviews() {
+```
+public List<ReviewsEntity> getBookReviews() {
         Aggregation aggregation = Aggregation.newAggregation(
                 Aggregation.match(Criteria.where("timestamp")
                         .gte(new java.util.Date(1640995200000L))
@@ -187,38 +194,43 @@ The equivalent MongoDB Java query in the schema can simply be written as:
                 Aggregation.sort(Sort.by(Sort.Direction.ASC, "timestamp"))
         );
 
-        AggregationResults&lt;ReviewsEntity&gt; result = mongoTemplate.aggregate(
+        AggregationResults<ReviewsEntity> result = mongoTemplate.aggregate(
                 aggregation,
                 "reviews",
                 ReviewsEntity.class
         );
         return result.getMappedResults();
     }
-</pre>
+```
+
 
 Similarly, a simple query can get an alias name for the author, for which the Postgres query can be written as below:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">SELECT a.name, aa.alias
+```
+SELECT a.name, aa.alias
 FROM library.authors a
 LEFT JOIN library.author_alias aa ON a.id = aa.author_id;
-</pre>
+```
+
 
 This Postgres query can be simply used in MongoDB using the $project stage as:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public List&lt;AuthorAlias&gt; getAuthorAliases() {
+```
+public List<AuthorAlias> getAuthorAliases() {
         Aggregation aggregation = Aggregation.newAggregation(
                 Aggregation.project()
                         .andInclude("name", "authorAliases")
                         .andExclude("_id")
         );
-        AggregationResults&lt;AuthorAlias&gt; result = mongoTemplate.aggregate(
+        AggregationResults<AuthorAlias> result = mongoTemplate.aggregate(
                 aggregation,
                 "authors",
                 AuthorAlias.class
         );
         return result.getMappedResults();
     }
-</pre>
+```
+
 
 More such examples are provided in the [GitHub repository](https://github.com/mongodb-developer/Spring-Boot-With-Relational-Migrator), which you can use and extend to perform more functionalities.
 

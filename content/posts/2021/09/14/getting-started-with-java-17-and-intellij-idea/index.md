@@ -85,13 +85,15 @@ This feature extends the `instanceof` operator with the possibility to use a typ
 
 Here's an example of code that can be commonly found in codebases (which doesn't use patterns matching for instanceof):
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">void outputValueInUppercase(Object obj) {
+```java
+void outputValueInUppercase(Object obj) {
    if (obj instanceof String) {              
        String s = (String) obj;             
        System.out.println(s.toUpperCase()); 
    }
 }
-</pre>
+```
+
 
 In IntelliJ IDEA, you can invoke context-sensitive actions on the variable s (by using Alt+Enter or by clicking the light bulb icon) and selecting *Replace 's' with pattern variable* to use pattern matching for instanceof:
 ![](https://blog.jetbrains.com/wp-content/uploads/2021/09/java17-1.gif)
@@ -111,7 +113,8 @@ Let's look at an example that demonstrates the advantages switch expressions can
 
 In the following code, the switch statement has repetitive break and assignment statements in case labels, which adds noise to the code. The default fall-through in switch branches can sneak in a logical error. For example, if we delete the break statement for case label `STRAW`, it results in an assignment of 300 instead of 200 to the variable `damage` when you call the method `getDamageToPlanet()`, passing it the value `SingleUsePlastic.STRAW`. Also, with switch statements there isn't any way to exhaustively iterate over the finite enum values:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public class Planet {
+```java
+public class Planet {
 
     enum SingleUsePlastic {
         CUP, STRAW, BOTTLE
@@ -133,7 +136,8 @@ In the following code, the switch statement has repetitive break and assignment 
         return damage;
     }
 }
-</pre>
+```
+
 
 Let's see how switch expressions can help. The following gif demonstrates some of the benefits of switch expressions such as concise code, improved code semantics, no redundant break statements, exhaustive iteration, and more:
 ![](https://blog.jetbrains.com/wp-content/uploads/2021/09/java17-3.gif)
@@ -157,7 +161,8 @@ You can work with switch constructs that can be passed a wide range of selector 
 
 Let's work with a set of unrelated classes -- `AirPollution`, `Discrimination`, and `Deforestation`. These classes represent things that harm our planet. To quantify the harm, each of these classes define methods that return an int value, like, `getAQI()`, `damagingGenerations()`, and `getTreeDamage()`. The classes define minimal code to keep it simple:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">class AirPollution {
+```java
+class AirPollution {
     public int getAQI() {
         return 100;
     }
@@ -173,11 +178,13 @@ public class Deforestation {
        return 300;
    }
 }
-</pre>
+```
+
 
 Imagine a class `MyEarth`, with a method, say, `getDamage()` that accepts a method parameter of type `Object`. Depending on the type of the object passed to this method, it calls the relevant method on the method parameter to get a quantifiable number for the amount of harm it is causing to our planet:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public class MyEarth {
+```java
+public class MyEarth {
    int getDamage(Object obj) {
        int damage = 0;
        if (obj instanceof AirPollution) {
@@ -196,24 +203,27 @@ Imagine a class `MyEarth`, with a method, say, `getDamage()` that accepts a meth
        return damage;
    }
 }
-</pre>
+```
+
 
 Let's look at how we can use switch expressions and IntelliJ IDEA to make this code more concise:
 ![](https://blog.jetbrains.com/wp-content/uploads/2021/09/java17-4.gif)
 
 Here's the final (concise) code for reference:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public class MyEarth {
+```java
+public class MyEarth {
     int getDamage(Object obj) {
         return switch (obj) {
-            case final AirPollution airPollution -&gt; airPollution.getDamage();
-            case Discrimination discrimination -&gt; discrimination.damagingGenerations();
-            case Deforestation deforestation -&gt; deforestation.getTreeDamage();
-            case null, default -&gt; -1;
+            case final AirPollution airPollution -> airPollution.getDamage();
+            case Discrimination discrimination -> discrimination.damagingGenerations();
+            case Deforestation deforestation -> deforestation.getTreeDamage();
+            case null, default -> -1;
         };
     }
 }
-</pre>
+```
+
 
 The power of this construct lies in how often it helps to reduce the cognitive complexity in the code, as I discuss in the following section.
 
@@ -264,13 +274,15 @@ As shown in the previous examples, the case labels are no longer limited to cons
 
 In the previous examples, case labels included a data type. This is a type pattern. A type compares the selector expression with a type. If the test passes, the value is cast and assigned to the pattern variable that is defined right after the type name. Let's pull the exact lines of code from these previous examples:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">case Discrimination discrimination -&gt; discrimination.damagingGenerations();
+```java
+case Discrimination discrimination -> discrimination.damagingGenerations();
 
-case Discrimination d -&gt; {
+case Discrimination d -> {
     Discrimination discrimination = ((Discrimination) obj);
     damage = discrimination.damagingGenerations();
 }
-</pre>
+```
+
 
 ### **Scope of pattern variables** {#h3-10-scope-of-pattern-variables}
 
@@ -287,16 +299,18 @@ Guarded patterns can help you to add conditions to your case labels, beyond test
 
 Let's revisit a switch construct from a previous section:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public class MyEarth {
+```java
+public class MyEarth {
     int getDamage(Object obj) {
         return switch (obj) {
-            case AirPollution airPol -&gt; airPol.getDamage();
-            case Deforestation deforestation -&gt; deforestation.getTreeDamage();
-            case null, default -&gt; -1;
+            case AirPollution airPol -> airPol.getDamage();
+            case Deforestation deforestation -> deforestation.getTreeDamage();
+            case null, default -> -1;
         };
     }
 }
-</pre>
+```
+
 
 Imagine you want to return the value 5000, if the `getAQI()` method on an `AirPollution` instance returns a value of more than 200. We are talking about two conditions here:
 
@@ -305,50 +319,56 @@ Imagine you want to return the value 5000, if the `getAQI()` method on an `AirPo
 
 With the guarded patterns, you can add this condition to the case label, as follows:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public class MyEarth {
+```java
+public class MyEarth {
     int getDamage(Object obj) {
         return switch (obj) {
-            case AirPollution airPol &amp;amp;&amp;amp; airPol.getAQI() &gt; 200 -&gt; 500;
-            case Deforestation deforestation -&gt; deforestation.getTreeDamage();
-            case null, default -&gt; -1;
+            case AirPollution airPol &amp;&amp; airPol.getAQI() > 200 -> 500;
+            case Deforestation deforestation -> deforestation.getTreeDamage();
+            case null, default -> -1;
         };
     }
 }
-</pre>
+```
+
 
 It is interesting to note that when you pass an `AirPollution` instance with `getAQI()` value \<= 200, `getDamage()` method will execute the default branch and return -1.
 
 Imagine adding multiple conditions to a switch label after the type patterns. While using operators like the conditions OR and AND, the order of execution can be unclear. In this case you can use parentheses to remove all ambiguities. Here's an example that would return 500 when `getDamage()` is called passing it an instance of `AirPollution`:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public class MyEarth {
+```java
+public class MyEarth {
     int getDamage(Object obj) {
         return switch (obj) {
             case AirPollution air
-                    &amp;&amp;
-                    air.getAQI() &gt; 99 || (air.getDamage() &lt; 101 &amp;&amp; air.getRate() &gt; 11) -&gt; 500;
-            case Discrimination discrimination -&gt; discrimination.damagingGenerations();
-            case Deforestation deforestation -&gt; deforestation.getTreeDamage();
-            case null, default -&gt; -1;
+                    &&
+                    air.getAQI() > 99 || (air.getDamage() < 101 && air.getRate() > 11) -> 500;
+            case Discrimination discrimination -> discrimination.damagingGenerations();
+            case Deforestation deforestation -> deforestation.getTreeDamage();
+            case null, default -> -1;
         };
     }
 }
-</pre>
+```
+
 
 If I modify the placement of the parentheses from the preceding code (as shown in the following code snippet), calling `getDamage()` passing it an instance of `AirPollution` would return -1:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public class MyEarth {
+```java
+public class MyEarth {
     int getDamage(Object obj) {
         return switch (obj) {
             case AirPollution air
-                    &amp;&amp;
-                    (air.getAQI() &gt; 99 || air.getDamage() &lt; 101) &amp;&amp; air.getRate() &gt; 11 -&gt; 500;
-            case Discrimination discrimination -&gt; discrimination.damagingGenerations();
-            case Deforestation deforestation -&gt; deforestation.getTreeDamage();
-            case null, default -&gt; -1;
+                    &&
+                    (air.getAQI() > 99 || air.getDamage() < 101) && air.getRate() > 11 -> 500;
+            case Discrimination discrimination -> discrimination.damagingGenerations();
+            case Deforestation deforestation -> deforestation.getTreeDamage();
+            case null, default -> -1;
         };
     }
 }
-</pre>
+```
+
 
 ### **Parenthesized patterns** {#h3-13-parenthesized-patterns}
 
@@ -372,40 +392,47 @@ Yes, you must have a branch to execute, regardless of the value that is passed t
 
 Imagine the following hierarchy of classes:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">abstract class Pollution {}
+```java
+abstract class Pollution {}
 class WaterPollution extends Pollution {}
 class AirPollution extends Pollution {}
-</pre>
+```
+
 
 Defining a case label which handles instances of type Pollution as the last case label might look obvious in the following code, since switch is returning a value. Since the switch is switching over a reference variable of type pollution, it can be assigned a value of type Pollution or one of its subclasses. In this case a default label is not required:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">class MyEarth {
+```java
+class MyEarth {
     static int getDamageForDifferentPollutionTypes(Pollution pollution) {
         return switch (pollution) {
-            case WaterPollution w -&gt; 100;
-            case AirPollution a -&gt; 200;
-            case Pollution p -&gt; 300;
+            case WaterPollution w -> 100;
+            case AirPollution a -> 200;
+            case Pollution p -> 300;
         };
     }
 }
-</pre>
+```
+
 
 Also, you would need to handle all the possible values for method parameter pollution, even when the switch-statement is not returning a value:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">class MyEarth {
+```java
+class MyEarth {
     static void getDamageForDifferentPollutionTypes(Pollution pollution) {
         switch (pollution) {
-            case WaterPollution w -&gt; System.out.println(100);
-            case AirPollution a -&gt; System.out.println(200);
-            case Pollution p -&gt; System.out.println(300);
+            case WaterPollution w -> System.out.println(100);
+            case AirPollution a -> System.out.println(200);
+            case Pollution p -> System.out.println(300);
         };
     }
 }
-</pre>
+```
+
 
 Or when using an old-style colon syntax:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">class MyEarth {
+```java
+class MyEarth {
     static void getDamageForDifferentPollutionTypes(Pollution pollution) {
         switch (pollution) {
             case WaterPollution w :
@@ -420,7 +447,8 @@ Or when using an old-style colon syntax:
         };
     }
 }
-</pre>
+```
+
 
 Adding a null case to switch is not mandatory to ensure that it handles all the possible values.
 
@@ -430,22 +458,27 @@ The short answer is yes they are. Please refer to the section 'Sealed classes' i
 
 Let's revisit the hierarchy of the Pollution classes from our previous example and modify it by sealing it:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">sealed abstract class Pollution {}
+```java
+sealed abstract class Pollution {}
 final class WaterPollution extends Pollution {}
-non-sealed class AirPollution extends Pollution {}</pre>
+non-sealed class AirPollution extends Pollution {}
+```
+
 
 Now the compiler is sure that the abstract class Pollution has exactly *two* subclasses. So you can handle values passed to method parameter pollution, as follows:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">class MyEarth {
+```java
+class MyEarth {
     static int getDamageForDifferentPollutionTypes(Pollution pollution) {
         return switch (pollution) {
-            case WaterPollution w -&gt; 100;
-            case AirPollution a -&gt; 200;
+            case WaterPollution w -> 100;
+            case AirPollution a -> 200;
             // case Pollution is no longer required
         };
     }
 }
-</pre>
+```
+
 
 This rule applies to the hierarchy of an interface too.
 
@@ -453,14 +486,17 @@ This rule applies to the hierarchy of an interface too.
 
 I know the title is confusing. To understand what it means, let's look at an example of a sealed interface and the classes that implement it:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">sealed interface Expandable {}
+```java
+sealed interface Expandable {}
 record Circle(int radius) implements Expandable {}
 record Square(int side) implements Expandable {}
-</pre>
+```
+
 
 Without pattern matching for switch, the if statement in the following code would require you to define an else part even though you have handled both the implementing classes of the interface `Expandable`, that is, `Circle` and `Square`:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public class Geometry {
+```java
+public class Geometry {
     double getArea(Expandable expandable) {
         if (expandable instanceof Circle c) {
             return 3.14 * c.radius() * c.radius();
@@ -473,19 +509,22 @@ Without pattern matching for switch, the if statement in the following code woul
         }
     }
 }
-</pre>
+```
+
 
 However, this changes when you use pattern matching for switch, as follows:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public class Geometry {
+```java
+public class Geometry {
     double getArea(Expandable expandable) {
         return switch (expandable) {
-            case Circle c -&gt; 3.14 * c.radius() * c.radius();
-            case Square s -&gt; s.side() * s.side();
+            case Circle c -> 3.14 * c.radius() * c.radius();
+            case Square s -> s.side() * s.side();
         };
     }
 }
-</pre>
+```
+
 
 ### **Running inspection** **'if' can be replaced with 'switch' on your code base** {#h3-18-running-inspection-if-can-be-replaced-with-switch-on-your-code-base}
 
@@ -505,18 +544,21 @@ The language syntax of Sealed types enables you to restrict the classes or inter
 
 Imagine you are creating an application that helps its users with gardening activities. Depending on the type of plant, a gardener might need to do different activities. Let's model the plant hierarchy as follows (I'm not detailing the classes on purpose):
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">class Plant {}
+```java
+class Plant {}
 
 class Herb extends Plant {}
 class Shrub extends Plant {}
 class Climber extends Plant {}
 
 class Cucumber extends Climber {}
-</pre>
+```
+
 
 The following code is an example of how the `Gardener` class might use this hierarchy:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public class Gardner {
+```java
+public class Gardner {
    int process(Plant plant) {
        if (plant instanceof Cucumber) {
            return harvestCucumber(plant);
@@ -537,7 +579,8 @@ The following code is an example of how the `Gardener` class might use this hier
    private int sowClimber(Plant plant) {...}
    private int harvestCucumber(Plant plant) {...}
 }
-</pre>
+```
+
 
 The problem code is the assumption that a developer has to deal with in the last else construct - defining actions even though the developer knows that all possible types of the method parameters plant have been addressed. Though it might look unreachable now, what happens if another developer adds a class to this hierarchy? Sealed classes can impose this restriction on the hierarchies at the language level.
 
@@ -551,14 +594,17 @@ The following gif shows how you can use IntelliJ IDEA to change the declaration 
 
 Here's the modified code for reference:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public sealed class Plant permits Herb, Shrub, Climber {
+```java
+public sealed class Plant permits Herb, Shrub, Climber {
 }
 
 public final class Shrub extends Plant {}
 public non-sealed class Herb extends Plant {}
 public sealed class Climber extends Plant permits Cucumber{}
 
-public final class Cucumber extends Climber {}</pre>
+public final class Cucumber extends Climber {}
+```
+
 
 By allowing a predefined set of classes to extend your class, you can **decouple accessibility from extensibility**. You can make your sealed class accessible to other packages and modules, and you can still control who can extend it.
 
@@ -578,15 +624,17 @@ After creating a sealed hierarchy, you will be able to process an instance from 
 
 *Type-test-patterns* , introduced with Pattern Matching for instanceof in Java 14, are added to the switch statements and expressions. This lets you eliminate the definition of code to execute for an unmatched `Plant` type passed to the method `process()`:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">int process(Plant plant) {
+```java
+int process(Plant plant) {
    return switch (plant) {
-       case Cucumber c -&gt; c.harvestCucumber();
-       case Climber cl -&gt; cl.sowClimber();
-       case Herb h -&gt; h.sellHerb();
-       case Shrub s -&gt; s.pruneShrub();
+       case Cucumber c -> c.harvestCucumber();
+       case Climber cl -> cl.sowClimber();
+       case Herb h -> h.sellHerb();
+       case Shrub s -> s.pruneShrub();
    }
 }
-</pre>
+```
+
 
 **Package and module restrictions** {#h2-22-package-and-module-restrictions}
 ----------------------------------------------------------------------------
@@ -607,7 +655,8 @@ The classes that extend a sealed class must either be final, non-sealed, or seal
 
 A sealed class can be abstract too. The extended classes could be defined as abstract or concrete classes. Here's the modified code which adds an abstract method `grow()` to the class `Plant`:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">sealed abstract public class Plant permits Herb, Shrub, Climber {
+```java
+sealed abstract public class Plant permits Herb, Shrub, Climber {
    abstract void grow();
 }
 
@@ -626,7 +675,8 @@ public sealed class Climber extends Plant permits Cucumber{
 }
 
 final class Cucumber extends Climber {}
-</pre>
+```
+
 
 **Implicit subclasses** {#h2-25-implicit-subclasses}
 ----------------------------------------------------
@@ -646,14 +696,17 @@ However, since you can't declare an interface using the modifier final -- becaus
 
 Here's the code for reference:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">sealed public interface Move permits Athlete, Jump, Kick {
+```java
+sealed public interface Move permits Athlete, Jump, Kick {
 }
 
 final class Athlete implements Move {}
 non-sealed interface Jump extends Move {}
 sealed interface Kick extends Move permits Karate {}
 
-final class Karate implements Kick {}</pre>
+final class Karate implements Kick {}
+```
+
 
 **Stronger code analysis with closed list of subclasses** {#h2-27-stronger-code-analysis-with-closed-list-of-subclasses}
 ------------------------------------------------------------------------------------------------------------------------
@@ -662,23 +715,28 @@ With sealed classes and interfaces, you can have an explicit list of inheritors 
 
 For example, consider the following completely sealed hierarchy of `WritingDevice` (which doesn't have non-sealed subtypes):
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">interface Erasable {}
+```java
+interface Erasable {}
 
 sealed class WritingDevice permits Pen, Pencil {}
 final class Pencil extends WritingDevice {}
 sealed class Pen extends WritingDevice permits Marker {}
-final class Marker extends Pen {}</pre>
+final class Marker extends Pen {}
+```
+
 
 Now, instanceof and casts can check the complete hierarchy statically. Code on line1 and line2 are compilation errors. The compiler checks all the inheritors from the permits list and finds that no one of them implements the `Erasable` or the `CharSequence` interface:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">class UseWritingDevice {
+```java
+class UseWritingDevice {
    static void write(WritingDevice pen) {
        if (pen instanceof Erasable) {                   // line1
        }
        CharSequence charSequence = ((CharSequence) pen);// line2
    }
 }
-</pre>
+```
+
 
 The following gif demonstrates it in IntelliJ IDEA:
 ![](https://lh6.googleusercontent.com/tHpt2ZISzzPS4hYpuSiXaWTrTiz7vUufr6xq7LOvuyrlOB4pSG_MrRll_IcFI_QbXIpKUpDcW15_1Ib0J4eFdtE87btbBakLOrPa2iYeyB96xe26QbMgf2pq0eBAbkje7bF-S887=s0)

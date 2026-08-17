@@ -8,7 +8,7 @@ aliases:
 frozen: false
 ---
 
-*** ** * ** ***
+
 
 Java is an open-source project, meaning it's totally free to use, and there is a big community to support you. Including tutorials by the best educators in the world. Here are a few of them:
 

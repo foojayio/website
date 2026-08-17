@@ -42,21 +42,27 @@ Creating a simple conversational chatbot {#_creating_a_simple_conversational_cha
 
 To start, we use the `AiServices` class from Langchain4j, a declarative approach to creating customizable AI interactions through an interface. This integration allows for interaction with prompts, models, memory, and tools, as we'll explore further.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">var assistant = AiServices.builder(Assistant.class)
+```java
+var assistant = AiServices.builder(Assistant.class)
                 .chatLanguageModel(chatLanguageModel)
                 .build();
 
-System.out.println(assistant.chat("Hello"));</pre>
+System.out.println(assistant.chat("Hello"));
+```
+
 
 LLMs are stateless by default and cannot remember previous prompts and responses. To address this, we introduce memory using the `MessageWindowChatMemory` class, with a maximum message retention of about 10 messages.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">var chatMemory = MessageWindowChatMemory.withMaxMessages(10);
+```java
+var chatMemory = MessageWindowChatMemory.withMaxMessages(10);
 var assistant = AiServices.builder(Assistant.class)
                 .chatLanguageModel(chatLanguageModel)
                 .chatMemory(chatMemory)
                 .build();
 
-System.out.println(assistant.chat("Hello"));</pre>
+System.out.println(assistant.chat("Hello"));
+```
+
 
 With these few lines of code, we're able to implement the user conversation feature.
 
@@ -67,7 +73,8 @@ A remarkable aspect of Langchain4j and LLMs is their ability to create agent-lik
 
 To access external APIs for news, we use the `@Tools` annotation. This annotation helps describe each method, allowing the framework to invoke these methods appropriately. In our code, methods have been implemented to retrieve the latest news from a news API. In this case, the method is implemented inside the `CurrentInformationRetrieverService` class.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public class CurrentInformationRetrieverService {
+```java
+public class CurrentInformationRetrieverService {
 
     @Tool("Retrieves the latest news. Summarize the highlights into 2 lines only.")
     public String retrieveNews() {
@@ -83,21 +90,26 @@ To access external APIs for news, we use the `@Tools` annotation. This annotatio
         collectedNews.append("Found ").append(retrievedNews.meta().limit()).append(" news.\n");
 
         retrievedNews.data().stream()
-            .map(news -&gt; String.format("%s. Details: %s. Source: %s. Published at: %s",
+            .map(news -> String.format("%s. Details: %s. Source: %s. Published at: %s",
                                        news.title(), news.description(), news.source(), news.publishedAt()))
             .forEach(collectedNews::append);
 
         return collectedNews.toString();
     }
-}</pre>
+}
+```
+
 
 These are then incorporated into our `AiServices` instance using the `.tools()` method.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">var assistant = AiServices.builder(ActionAIAssistant.class)
+```java
+var assistant = AiServices.builder(ActionAIAssistant.class)
                 .chatLanguageModel(chatLanguageModel)
                 .chatMemory(chatMemory)
                 .tools(new CurrentInformationRetrieverService())
-                .build();</pre>
+                .build();
+```
+
 
 Capturing and Analyzing an image {#_capturing_and_analyzing_an_image}
 ---------------------------------------------------------------------
@@ -106,7 +118,8 @@ To recognize and analyze an image, we first capture an image, in which the image
 
 In this code, I used [Google's Gemini Pro Vision model](https://ai.google.dev/gemini-api/docs/models/gemini), which can understand images, and a webcam, although a Pi camera module could also be utilized. In this case, the method is implemented inside the `EnvironmentRecognizerService` class.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public class EnvironmentRecognizerService {
+```java
+public class EnvironmentRecognizerService {
 
 @Tool("Captures an image of the environment and describes the image in the perspective of an agent.")
     public String recognizeEnvironmentByImage() {
@@ -120,13 +133,16 @@ In this code, I used [Google's Gemini Pro Vision model](https://ai.google.dev/ge
         }
 
     }
-}</pre>
+}
+```
+
 
 Once captured, the image is retrieved from the specified path and analyzed by the Gemini Pro Vision model with a prompt that adds context. In the `analyzeImage` method, the image is read and converted into a byte array. This is then passed directly to the `generateContent` method of an instance of `GenerativeModel`, where we can provide both the prompt and the data.
 
 This method can also accept URLs, such as those from Google Cloud Storage. In this case, we can simply set the model to act as a smart assistant and ask it what it sees in the image, simulating a robot observing its environment.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public static String analyzeImage(String filePath) throws Exception {
+```java
+public static String analyzeImage(String filePath) throws Exception {
         try (VertexAI vertexAI = new VertexAI(getProperty("assistant.api.googlecloud.projectid"),
                 getProperty("assistant.api.googlecloud.location"))) {
             byte[] imageBytes = Files.readAllBytes(Path.of(filePath));
@@ -141,16 +157,21 @@ This method can also accept URLs, such as those from Google Cloud Storage. In th
             return ResponseHandler.getText(response);
         }
     }
-}</pre>
+}
+```
+
 
 We can then add the `EnvironmentRecognizerService` class on our `AiServices` assistant by the same way we added the `CurrentInformationRetrieverService` class.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">var assistant = AiServices.builder(ActionAIAssistant.class)
+```java
+var assistant = AiServices.builder(ActionAIAssistant.class)
                 .chatLanguageModel(chatLanguageModel)
                 .chatMemory(chatMemory)
                 .tools(new CurrentInformationRetrieverService(),
                         new EnvironmentRecognizerService())
-                .build();</pre>
+                .build();
+```
+
 
 Controlling an External Smart Device {#_controlling_an_external_smart_device}
 -----------------------------------------------------------------------------
@@ -165,7 +186,8 @@ After starting the HomeAssistant Docker container, we integrate the smart device
 
 The methods to control the smart strip are described in their [REST API](https://developers.home-assistant.io/docs/api/rest/), which facilitates interaction through the `@Tools` annotation. In my implementation, I tracked which outlet should be activated using a HashMap, as my smart strip has three individual outlets. The values stored in the HashMap are the entity IDs of each outlet, which HomeAssistant uses to determine which outlet to turn on.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">private static final Map STRIP_ENTITY_MAP = Map.of("FIRST", getProperty("assistant.api.homeassistant.strip.entity-id.first"),
+```java
+private static final Map STRIP_ENTITY_MAP = Map.of("FIRST", getProperty("assistant.api.homeassistant.strip.entity-id.first"),
             "SECOND", getProperty("assistant.api.homeassistant.strip.entity-id.second"),
             "THIRD", getProperty("assistant.api.homeassistant.strip.entity-id.third"));
 
@@ -187,11 +209,14 @@ public String turnOnSpecificOutlet(String outletNumber) {
         Logger.info(e.getMessage());
         return "I'm having trouble turning on the outlet.";
     }
-}</pre>
+}
+```
+
 
 Behind the scenes, the `turn_on` method is simply sending a POST request to the HomeAssistant `switch/` API to turn on the outlet.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public static void turnOn(String entityId) throws IOException {
+```java
+public static void turnOn(String entityId) throws IOException {
     sendCommand("turn_on", new HomeAssistantCommand(entityId));
 }
 
@@ -204,18 +229,23 @@ private static void sendCommand(String service, HomeAssistantCommand command) th
     });
 
     System.out.println("Number of entities changed: " + changes.size());
-    changes.forEach(change -&amp;gt; System.out.println("Entity ID: " + change.entityId() + ", State: " + change.state()));
-}</pre>
+    changes.forEach(change -&gt; System.out.println("Entity ID: " + change.entityId() + ", State: " + change.state()));
+}
+```
+
 
 As noted before, we can add the class to our `AiServices` instance using the `tools()` method. Now, we have three distinct classes capable of observing the environment, retrieving information from external APIs, and even controlling a smart strip!
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">var assistant = AiServices.builder(ActionAIAssistant.class)
+```java
+var assistant = AiServices.builder(ActionAIAssistant.class)
                 .chatLanguageModel(chatLanguageModel)
                 .chatMemory(chatMemory)
                 .tools(new CurrentInformationRetrieverService(),
                         new SmartOutletManagerService(),
                         new EnvironmentRecognizerService())
-                .build();</pre>
+                .build();
+```
+
 
 Using our own data for Question-Answering {#_using_our_own_data_for_question_answering}
 ---------------------------------------------------------------------------------------
@@ -224,7 +254,8 @@ Currently, we can either engage in conversation with the LLM or direct it to per
 
 This method involves storing information in a vector database and retrieving relevant data when needed, using it to provide context for the LLM. Although I've used a text file for data retrieval in this instance using the `FileSystemDocumentLoader` class, Langchain4j also supports other storage options like Amazon S3 or direct retrieval from URLs. Additionally, it has utility classes that you can use to clean or transform your data.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">Document document = FileSystemDocumentLoader
+```java
+Document document = FileSystemDocumentLoader
                 .loadDocument("smart_assistant_article.txt");
 
 var embeddingModel = new BgeSmallEnV15QuantizedEmbeddingModel();
@@ -244,7 +275,9 @@ EmbeddingStoreIngestor ingestor = EmbeddingStoreIngestor.builder()
         .embeddingModel(embeddingModel)
         .embeddingStore(embeddingStore)
         .build();
-ingestor.ingest(transformedDocument);</pre>
+ingestor.ingest(transformedDocument);
+```
+
 
 In the above code, the `BgeSmallEnV15QuantizedEmbeddingModel` is designed to generate embeddings for text segments. These embeddings map text data to a vector representation that can be efficiently searched and compared. `DocumentSplitters.recursive` is used to recursively split the document into chunks of up to 300 tokens, which is crucial for managing large documents by breaking them into manageable pieces for processing and retrieval.
 
@@ -254,7 +287,8 @@ For retrieval, the `DocumentRetriever` class configures a `get` method that sets
 
 This configuration ensures that only the most relevant and high-quality document segments are retrieved to support the LLM's responses based on specific data queries.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public class DocumentRetriever {
+```java
+public class DocumentRetriever {
 
     public static ContentRetriever get() {
         return EmbeddingStoreContentRetriever.builder()
@@ -265,7 +299,9 @@ This configuration ensures that only the most relevant and high-quality document
                 .build();
     }
 
-}</pre>
+}
+```
+
 
 Revisiting the Current Architecture {#_revisiting_the_current_architecture}
 ---------------------------------------------------------------------------
@@ -274,7 +310,8 @@ Revisiting the Current Architecture {#_revisiting_the_current_architecture}
 
 Our model currently processes all queries, determining if a tool can be used while also querying our database. This isn't very efficient. To improve, we split the workload: one LLM handles conversational queries and another manages commands. This requires another LLM to classify the intent of each query as conversational or actionable. We define these intents with an enum and use the `@Description` annotation to inform the LLM.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public enum Intent {
+```java
+public enum Intent {
 
     @Description("An intent of conversing with someone as a chatbot.")
     CONVERSATIONAL_INTENT,
@@ -291,11 +328,14 @@ Our model currently processes all queries, determining if a tool can be used whi
     public boolean isConversational() {
         return CONVERSATIONAL_INTENT.equals(this);
     }
-}</pre>
+}
+```
+
 
 Furthermore, we employ Few-Shot prompting in our Intent Classifier Assistant to minimize errors and ensure the correct intent classification. In this case, I've explained to the LLM its role, the context and two examples of the expected input and output, each with their own explanations.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">@UserMessage("Your role is to specify the intent of a given query for a smart home assistant with camera: {{it}}. " +
+```java
+@UserMessage("Your role is to specify the intent of a given query for a smart home assistant with camera: {{it}}. " +
             "EXAMPLES: " +
             "Why is the sky blue? " +
             "CONVERSATIONAL_INTENT" +
@@ -304,11 +344,14 @@ Furthermore, we employ Few-Shot prompting in our Intent Classifier Assistant to 
             "Where are you located right now?" +
             "SEE_INTENT" +
             "Explanation: The intent was asking your location and thus where you are right now.")
-Intent specifyIntent(String text);</pre>
+Intent specifyIntent(String text);
+```
+
 
 The query method is the entry point of the user's message and it first goes through the Intent Assistant before deciding whether it's conversational or actionable.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public String query(String query) {
+```java
+public String query(String query) {
     Intent intent = intentControllerAssistant.specifyIntent(query);
 
     System.out.println("Intent: " + intent);
@@ -318,23 +361,29 @@ The query method is the entry point of the user's message and it first goes thro
     }
 
     return actionAIAssistantService.sendActionCommand(query);
-}</pre>
+}
+```
+
 
 Adding Moderation Models {#_adding_moderation_models}
 -----------------------------------------------------
 
 We include moderation models to monitor both user queries and LLM responses, ensuring content remains appropriate and free from harmful material. This is true for both the user query and the LLM responses. The `Moderator` interface defines a single method moderate, marked with the `@Moderate` annotation, which suggests it applies specific content moderation rules to the input string.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public interface Moderator {
+```java
+public interface Moderator {
     @Moderate
     String moderate(String query);
-}</pre>
+}
+```
+
 
 In the code below, we create an instance of the `Moderator` via `AiServices`, which integrates both a moderation model along with a chat language model. The query method uses this service to first moderate the user's input.
 
 If the input violates moderation rules, it throws an exception, where in this case, we can format the response to let the user know of content violations. Likewise, the LLM's response are also subjected to moderation, ensuring that all interactions remain within ethical boundaries.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">var moderationModel = OpenAiModerationModel.withApiKey(getProperty("assistant.openai.apikey"));
+```java
+var moderationModel = OpenAiModerationModel.withApiKey(getProperty("assistant.openai.apikey"));
 var moderator = AiServices.builder(Moderator.class)
                     .chatLanguageModel(chatLanguageModel)
                     .moderationModel(moderationModel).build();
@@ -366,7 +415,9 @@ public String query(String query) {
     }
 
     return response;
-    }</pre>
+    }
+```
+
 
 Final Thoughts {#_final_thoughts}
 ---------------------------------

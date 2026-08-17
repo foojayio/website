@@ -96,7 +96,8 @@ We can configure Apache APISIX with sane and secure defaults this way. Let's do 
 
 First things first: Coraza isn't part of the Apache APISIX distribution. Yet, it's straightforward to add it here with Docker:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="dockerfile">FROM apache/apisix:3.8.0-debian
+```dockerfile
+FROM apache/apisix:3.8.0-debian
 
 ENV VERSION 0.5.0                                                           #1
 ENV CORAZA_FILENAME coraza-proxy-wasm-${VERSION}.zip                        #1
@@ -105,7 +106,7 @@ ADD https://github.com/corazawaf/coraza-proxy-wasm/releases/download/$VERSION/$C
 
 USER root                                                                   #3
 
-RUN &lt;&lt;EOF
+RUN <<EOF
 
   apt-get install zip -y                                                    #4
   unzip $CORAZA_FILENAME -d /usr/local/apisix/proxywasm
@@ -115,7 +116,9 @@ RUN &lt;&lt;EOF
 
 EOF
 
-USER apisix                                                                 #5</pre>
+USER apisix                                                                 #5
+```
+
 
 1. Define variables for better maintainability
 2. Get the Coraza Wasm release
@@ -125,11 +128,14 @@ USER apisix                                                                 #5</
 
 The next step is configuring APISIX itself to use the Coraza Wasm plugin.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml">wasm:
+```yaml
+wasm:
   plugins:
     - name: coraza-filter                                                   #1
       priority: 7999                                                        #2
-      file: /usr/local/apisix/proxywasm/coraza-proxy-wasm.wasm              #3</pre>
+      file: /usr/local/apisix/proxywasm/coraza-proxy-wasm.wasm              #3
+```
+
 
 1. Filter's name set in Wasm code
 2. Set the highest priority so it runs before any other plugin
@@ -137,7 +143,8 @@ The next step is configuring APISIX itself to use the Coraza Wasm plugin.
 
 Finally, we can assign the plugin to routes or set it as a global rule to apply to every route. I'm using static configuration:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml">global_rules:
+```yaml
+global_rules:
   - id: 1
     plugins:
       coraza-filter:                                                        #1
@@ -148,7 +155,9 @@ Finally, we can assign the plugin to routes or set it as a global rule to apply 
               - SecRuleEngine On                                            #4
               - Include @crs-setup-conf                                     #5
               - Include @owasp_crs/*.conf                                   #6
-          default_directives: default                                       #7</pre>
+          default_directives: default                                       #7
+```
+
 
 1. Configure the `coraza-filter` plugin now that it's available
 2. Define configurations. Here, we define a single one, `default`, but we could define several and use different ones in different routes
@@ -160,11 +169,15 @@ Finally, we can assign the plugin to routes or set it as a global rule to apply 
 
 We proceed to define routes to to test our setup. Let's call the route to `/get`:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="shell">curl localhost:9080?user=foobar</pre>
+```bash
+curl localhost:9080?user=foobar
+```
+
 
 The response is as expected:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="json">{
+```json
+{
   "args": {
     "user": "foobar"
   }, 
@@ -177,18 +190,26 @@ The response is as expected:
   }, 
   "origin": "192.168.65.1, 176.153.7.175", 
   "url": "http://localhost/get?user=foobar"
-}</pre>
+}
+```
+
 
 Now, let's try to send JavaScript in the query string. There's no way this request is expected server-side, so our infrastructure should protect us from it.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="shell">curl 'localhost:9080?user=&lt;script&gt;alert(1)&lt;/script&gt;'</pre>
+```bash
+curl 'localhost:9080?user=<script>alert(1)</script>'
+```
+
 
 The response is a 403 HTTP status code. If we look at the log, we can see the following hints:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">Coraza: Warning. XSS Attack Detected via libinjection [file "@owasp_crs/REQUEST-941-APPLICATION-ATTACK-XSS.conf"]
+```
+Coraza: Warning. XSS Attack Detected via libinjection [file "@owasp_crs/REQUEST-941-APPLICATION-ATTACK-XSS.conf"]
 Coraza: Warning. NoScript XSS InjectionChecker: HTML Injection
 Coraza: Warning. Javascript method detected
-Coraza: Access denied (phase 1). Inbound Anomaly Score Exceeded in phase 1</pre>
+Coraza: Access denied (phase 1). Inbound Anomaly Score Exceeded in phase 1
+```
+
 
 Coraza did the job!
 
@@ -208,6 +229,6 @@ We can harden Apache APISIX against the OWASP Top 10 by using Coraza and the Cor
 
 The complete source code for this post can be found on [GitHub](https://github.com//ajavageek/apisix-coraza).
 
-*** ** * ** ***
+
 
 *Originally published at [A Java Geek](https://blog.frankel.ch/apisix-owasp-coraza-core-ruleset/) on February 4^th^, 2024*

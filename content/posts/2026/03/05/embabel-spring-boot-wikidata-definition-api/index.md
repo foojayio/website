@@ -40,7 +40,7 @@ It returns a compact JSON "definition" fetched from **Wikidata** (no authenticat
 
 The important part: I used **Embabel** to orchestrate the workflow, even though the workflow is deterministic and **does not need an LLM**.
 
-*** ** * ** ***
+
 
 Part I --- Concepts {#h2-1-part-i-concepts}
 -------------------------------------------
@@ -56,7 +56,7 @@ Embabel is an agent framework for the JVM. I like to think of it as a way to mod
 
 In practice, that means I don't call methods in a fixed chain. I provide an initial input (a domain object), tell Embabel what type I want as the result, and Embabel **plans** and runs the required actions.
 
-*** ** * ** ***
+
 
 ### I.2 Spring AI (even in a "no LLM" demo) {#h3-3-i-2-spring-ai-even-in-a-no-llm-demo}
 
@@ -70,7 +70,7 @@ This kept the demo:
 * focused on orchestration,
 * and easy to extend later with a real model.
 
-*** ** * ** ***
+
 
 ### I.3 Role of Embabel in this application {#h3-4-i-3-role-of-embabel-in-this-application}
 
@@ -85,7 +85,7 @@ The REST call is not the point. The point is to demonstrate a workflow that:
 
 Embabel makes these steps explicit, typed, and observable, and it can re-plan as the state evolves. That's a much better foundation than packing everything into one big service method---especially when the demo grows.
 
-*** ** * ** ***
+
 
 ### I.4 Wikidata: definition and why it's ideal for demos {#h3-5-i-4-wikidata-definition-and-why-it-s-ideal-for-demos}
 
@@ -102,7 +102,7 @@ I used two endpoints:
 
 This gives a nice "definition API" in a few lines of code, with zero setup for viewers.
 
-*** ** * ** ***
+
 
 Part II --- App building (code + explanations) {#h2-6-part-ii-app-building-code-explanations}
 ---------------------------------------------------------------------------------------------
@@ -115,77 +115,81 @@ Because this is Boot 4, I added `spring-boot-starter-restclient` so `RestClient.
 
 I also forced **Jackson 2** compatibility (`spring-boot-jackson2`) and excluded `spring-boot-starter-json`, because the Embabel starter wiring in this setup expects `Jackson2ObjectMapperBuilder`.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
-&lt;project xmlns="http://maven.apache.org/POM/4.0.0"
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd"&gt;
-    &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
 
-    &lt;parent&gt;
-        &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
-        &lt;artifactId&gt;spring-boot-starter-parent&lt;/artifactId&gt;
-        &lt;version&gt;4.0.3&lt;/version&gt;
-        &lt;relativePath/&gt;
-    &lt;/parent&gt;
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>4.0.3</version>
+        <relativePath/>
+    </parent>
 
-    &lt;groupId&gt;com.example&lt;/groupId&gt;
-    &lt;artifactId&gt;wikidemo&lt;/artifactId&gt;
-    &lt;version&gt;0.0.1-SNAPSHOT&lt;/version&gt;
-    &lt;name&gt;wikidemo&lt;/name&gt;
+    <groupId>com.example</groupId>
+    <artifactId>wikidemo</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <name>wikidemo</name>
 
-    &lt;properties&gt;
-        &lt;java.version&gt;25&lt;/java.version&gt;
-        &lt;embabel-agent.version&gt;0.3.4&lt;/embabel-agent.version&gt;
-    &lt;/properties&gt;
+    <properties>
+        <java.version>25</java.version>
+        <embabel-agent.version>0.3.4</embabel-agent.version>
+    </properties>
 
-    &lt;dependencies&gt;
-        &lt;!-- REST endpoint --&gt;
-        &lt;dependency&gt;
-            &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
-            &lt;artifactId&gt;spring-boot-starter-web&lt;/artifactId&gt;
-            &lt;exclusions&gt;
-                &lt;exclusion&gt;
-                    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
-                    &lt;artifactId&gt;spring-boot-starter-json&lt;/artifactId&gt;
-                &lt;/exclusion&gt;
-            &lt;/exclusions&gt;
-        &lt;/dependency&gt;
+    <dependencies>
+        <!-- REST endpoint -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter-json</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
 
-        &lt;dependency&gt;
-            &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
-            &lt;artifactId&gt;spring-boot-starter-restclient&lt;/artifactId&gt;
-        &lt;/dependency&gt;
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-restclient</artifactId>
+        </dependency>
 
-        &lt;dependency&gt;
-            &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
-            &lt;artifactId&gt;spring-boot-jackson2&lt;/artifactId&gt;
-        &lt;/dependency&gt;
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-jackson2</artifactId>
+        </dependency>
 
-        &lt;!-- Embabel agent platform --&gt;
-        &lt;dependency&gt;
-            &lt;groupId&gt;com.embabel.agent&lt;/groupId&gt;
-            &lt;artifactId&gt;embabel-agent-starter&lt;/artifactId&gt;
-            &lt;version&gt;${embabel-agent.version}&lt;/version&gt;
-        &lt;/dependency&gt;
-    &lt;/dependencies&gt;
+        <!-- Embabel agent platform -->
+        <dependency>
+            <groupId>com.embabel.agent</groupId>
+            <artifactId>embabel-agent-starter</artifactId>
+            <version>${embabel-agent.version}</version>
+        </dependency>
+    </dependencies>
 
-    &lt;build&gt;
-        &lt;plugins&gt;
-            &lt;plugin&gt;
-                &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
-                &lt;artifactId&gt;spring-boot-maven-plugin&lt;/artifactId&gt;
-            &lt;/plugin&gt;
-        &lt;/plugins&gt;
-    &lt;/build&gt;
-&lt;/project&gt;</pre>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+</project>
+```
 
-*** ** * ** ***
+
+
 
 ### II.2 Configuration (`application.yml`) {#h3-8-ii-2-configuration-application-yml}
 
 I set the server port and configured the default Embabel model name to `noop`.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml">spring:
+```yaml
+spring:
   application:
     name: wikidemo
 
@@ -195,15 +199,17 @@ server:
 embabel:
   models:
     default-llm: noop
-</pre>
+```
 
-*** ** * ** ***
+
+
 
 ### II.3 App launcher + Embabel enablement + NOOP LLM registration {#h3-9-ii-3-app-launcher-embabel-enablement-noop-llm-registration}
 
 The application entrypoint enables agent scanning using `@EnableAgents`, then registers a "noop" model so the platform boots without external dependencies.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">package com.vv.wikidemo;
+```java
+package com.vv.wikidemo;
 
 import com.embabel.agent.config.annotation.EnableAgents;
 import com.embabel.agent.spi.LlmService;
@@ -221,7 +227,7 @@ public class WikiDemoApplication {
     }
 
     @Bean
-    public LlmService&lt;?&gt; noopLlm() {
+    public LlmService<?> noopLlm() {
         return new SpringAiLlmService(
                 "noop",          // model name (must match embabel.models.default-llm)
                 "noop-provider", // provider label (any string)
@@ -229,16 +235,17 @@ public class WikiDemoApplication {
         );
     }
 }
+```
 
-</pre>
 
-*** ** * ** ***
+
 
 ### II.4 The NOOP ChatModel (Spring AI) {#h3-10-ii-4-the-noop-chatmodel-spring-ai}
 
 This is intentionally minimal. If Embabel ever calls it, it returns a predictable message.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">package com.vv.wikidemo.service;
+```java
+package com.vv.wikidemo.service;
 
 import org.springframework.ai.chat.messages.AssistantMessage;
 import org.springframework.ai.chat.model.ChatModel;
@@ -258,9 +265,10 @@ public class NoopChatModel implements ChatModel {
         return new ChatResponse( List.of( new Generation( msg ) ) );
     }
 }
-</pre>
+```
 
-*** ** * ** ***
+
+
 
 ### II.5 Domain model (Java records) {#h3-11-ii-5-domain-model-java-records}
 
@@ -270,7 +278,8 @@ I used records for the request, intermediate agent objects, and final result.
 
 ```
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">package com.vv.wikidemo.model;
+```java
+package com.vv.wikidemo.model;
 public record DefinitionRequest(String term) {
 }
 
@@ -292,7 +301,8 @@ public record WikidataEntityDetails(
 
 public record WikidataEntityId(String id) {
 }
-</pre>
+```
+
 
 ```java
 
@@ -304,7 +314,7 @@ public record WikidataEntityId(String id) {
 
 The key idea is that Embabel "stores" and "reuses" these typed objects during execution. They become the agent's working memory.
 
-*** ** * ** ***
+
 
 ### II.6 Repository: Wikidata calls with RestClient {#h3-12-ii-6-repository-wikidata-calls-with-restclient}
 
@@ -316,7 +326,8 @@ The repository is responsible for the data access logic only:
 
 I kept DTO mappings minimal and resilient with `@JsonIgnoreProperties(ignoreUnknown = true)`.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">package com.vv.wikidemo.repository;
+```java
+package com.vv.wikidemo.repository;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -346,9 +357,9 @@ public class WikidataRepository {
     /**
      * Step 1: find the first matching Q-id for a term
      */
-    public Optional&lt;SearchItem&gt; searchFirst( String term ) {
+    public Optional<SearchItem> searchFirst( String term ) {
         SearchResponse response = wikidata.get()
-                                          .uri( uriBuilder -&gt; uriBuilder
+                                          .uri( uriBuilder -> uriBuilder
                                                   .path( "/w/api.php" )
                                                   .queryParam( "action", "wbsearchentities" )
                                                   .queryParam( "search", term )
@@ -381,7 +392,7 @@ public class WikidataRepository {
         Entity entity = data.entities.get( entityId );
         String label = valueOf( entity.labels, "en" );
         String desc = valueOf( entity.descriptions, "en" );
-        String wikiTitle = (entity.sitelinks != null &amp;&amp; entity.sitelinks.containsKey( "enwiki" ))
+        String wikiTitle = (entity.sitelinks != null && entity.sitelinks.containsKey( "enwiki" ))
                 ? entity.sitelinks.get( "enwiki" ).title
                 : null;
 
@@ -400,7 +411,7 @@ public class WikidataRepository {
         return "https://en.wikipedia.org/wiki/" + URLEncoder.encode( normalized, StandardCharsets.UTF_8 );
     }
 
-    private static String valueOf( Map&lt;String, LangValue&gt; map, String lang ) {
+    private static String valueOf( Map<String, LangValue> map, String lang ) {
         if ( map == null ) {
             return null;
         }
@@ -413,7 +424,7 @@ public class WikidataRepository {
     @JsonIgnoreProperties( ignoreUnknown = true )
     static class SearchResponse {
         @JsonProperty( "search" )
-        public List&lt;SearchItem&gt; search;
+        public List<SearchItem> search;
     }
 
     @JsonIgnoreProperties( ignoreUnknown = true )
@@ -431,19 +442,19 @@ public class WikidataRepository {
     @JsonIgnoreProperties( ignoreUnknown = true )
     static class EntityDataResponse {
         @JsonProperty( "entities" )
-        public Map&lt;String, Entity&gt; entities;
+        public Map<String, Entity> entities;
     }
 
     @JsonIgnoreProperties( ignoreUnknown = true )
     static class Entity {
         @JsonProperty( "labels" )
-        public Map&lt;String, LangValue&gt; labels;
+        public Map<String, LangValue> labels;
 
         @JsonProperty( "descriptions" )
-        public Map&lt;String, LangValue&gt; descriptions;
+        public Map<String, LangValue> descriptions;
 
         @JsonProperty( "sitelinks" )
-        public Map&lt;String, Sitelink&gt; sitelinks;
+        public Map<String, Sitelink> sitelinks;
     }
 
     @JsonIgnoreProperties( ignoreUnknown = true )
@@ -457,9 +468,11 @@ public class WikidataRepository {
         @JsonProperty( "title" )
         public String title;
     }
-}</pre>
+}
+```
 
-*** ** * ** ***
+
+
 
 ### II.7 The Embabel agent (actions + goal) {#h3-13-ii-7-the-embabel-agent-actions-goal}
 
@@ -469,7 +482,8 @@ The agent defines the workflow. Each method is a step (`@Action`). The final ste
 
 ```
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">package com.vv.wikidemo.service;
+```java
+package com.vv.wikidemo.service;
 
 import com.embabel.agent.api.annotation.AchievesGoal;
 import com.embabel.agent.api.annotation.Action;
@@ -495,7 +509,7 @@ public class WikidataDefinitionAgent {
     @Action
     public WikidataEntityId findEntityId( DefinitionRequest request ) {
         var hit = repo.searchFirst( request.term() )
-                      .orElseThrow( () -&gt; new ResponseStatusException(
+                      .orElseThrow( () -> new ResponseStatusException(
                               NOT_FOUND, "No Wikidata entity found for term: " + request.term()
                       ) );
         return new WikidataEntityId( hit.id );
@@ -526,7 +540,8 @@ public class WikidataDefinitionAgent {
         );
     }
 }
-</pre>
+```
+
 
 ```java
 
@@ -543,13 +558,14 @@ I like this structure because it stays small and readable. More importantly, it 
 * add alternative paths,
 * add optional post-processing.
 
-*** ** * ** ***
+
 
 ### II.8 Service: running the agent via `AgentInvocation` {#h3-14-ii-8-service-running-the-agent-via-agentinvocation}
 
 The service is the bridge between the web layer and Embabel. It creates an `AgentInvocation` and calls it with a `DefinitionRequest`.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">package com.vv.wikidemo.service;
+```java
+package com.vv.wikidemo.service;
 
 import com.embabel.agent.api.invocation.AgentInvocation;
 import com.embabel.agent.core.AgentPlatform;
@@ -561,7 +577,7 @@ import org.springframework.stereotype.Service;
 public class WikiService {
 
     private final AgentPlatform                     agentPlatform;
-    private final AgentInvocation&lt;DefinitionResult&gt; invocation;
+    private final AgentInvocation<DefinitionResult> invocation;
 
     public WikiService( AgentPlatform agentPlatform ) {
         this.agentPlatform = agentPlatform;
@@ -573,9 +589,11 @@ public class WikiService {
     public DefinitionResult define( String term ) {
         return invocation.invoke( new DefinitionRequest( term ) );
     }
-}</pre>
+}
+```
 
-*** ** * ** ***
+
+
 
 ### II.9 Controller: a single endpoint {#h3-15-ii-9-controller-a-single-endpoint}
 
@@ -585,7 +603,8 @@ The controller stays boring on purpose. All the interesting logic is in the agen
 
 ```
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">package com.vv.wikidemo.controller;
+```java
+package com.vv.wikidemo.controller;
 
 import com.vv.wikidemo.model.DefinitionResult;
 import com.vv.wikidemo.service.WikiService;
@@ -608,7 +627,9 @@ public class WikiController {
     public DefinitionResult define( @RequestParam( "term" ) String term ) {
         return wikiService.define( term );
     }
-}</pre>
+}
+```
+
 
 ```java
 
@@ -618,25 +639,31 @@ public class WikiController {
 
 ```
 
-*** ** * ** ***
+
 
 Part III --- Demo {#h2-16-part-iii-demo}
 ----------------------------------------
 
 ### III.1 Curl request {#h3-17-iii-1-curl-request}
 
-<pre class="EnlighterJSRAW" data-enlighter-language="shell">curl --request get --url 'http://localhost:8080/api/wiki/define?term=kafka'</pre>
+```bash
+curl --request get --url 'http://localhost:8080/api/wiki/define?term=kafka'
+```
+
 
 ### III.2 Response {#h3-18-iii-2-response}
 
-<pre class="EnlighterJSRAW" data-enlighter-language="json">{
+```json
+{
   "term": "kafka",
   "entityId": "Q16235208",
   "label": "Apache Kafka",
   "description": "open source data stream processing platform",
   "wikidataUrl": "https://www.wikidata.org/wiki/Q16235208",
   "wikipediaUrl": "https://en.wikipedia.org/wiki/Apache_Kafka"
-}</pre>
+}
+```
+
 
 This is intentionally "small JSON": label + description + canonical links.
 
@@ -644,12 +671,13 @@ This is intentionally "small JSON": label + description + canonical links.
 
 These logs are the best part to show on screen, because they reveal Embabel's planning and execution.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="shell">21:35:05.039 [tomcat-handler-2] INFO  Embabel - [goofy_mcclintock] created
+```bash
+21:35:05.039 [tomcat-handler-2] INFO  Embabel - [goofy_mcclintock] created
 21:35:05.039 [tomcat-handler-2] INFO  Embabel - [goofy_mcclintock] object added: DefinitionRequest
 
 21:35:05.046 [task-1] INFO  Embabel - [goofy_mcclintock] formulated plan:
-  com.vv.wikidemo.service.WikidataDefinitionAgent.findEntityId -&gt;
-  com.vv.wikidemo.service.WikidataDefinitionAgent.fetchDetails -&gt;
+  com.vv.wikidemo.service.WikidataDefinitionAgent.findEntityId ->
+  com.vv.wikidemo.service.WikidataDefinitionAgent.fetchDetails ->
   com.vv.wikidemo.service.WikidataDefinitionAgent.build
 
 21:35:05.047 [task-1] INFO  Embabel - [goofy_mcclintock] executing action ... findEntityId
@@ -657,7 +685,7 @@ These logs are the best part to show on screen, because they reveal Embabel's pl
 21:35:05.743 [task-1] INFO  Embabel - [goofy_mcclintock] object bound it:WikidataEntityId
 
 21:35:05.749 [task-1] INFO  Embabel - [goofy_mcclintock] formulated plan:
-  com.vv.wikidemo.service.WikidataDefinitionAgent.fetchDetails -&gt;
+  com.vv.wikidemo.service.WikidataDefinitionAgent.fetchDetails ->
   com.vv.wikidemo.service.WikidataDefinitionAgent.build
 
 21:35:05.749 [task-1] INFO  Embabel - [goofy_mcclintock] executing action ... fetchDetails
@@ -669,7 +697,9 @@ These logs are the best part to show on screen, because they reveal Embabel's pl
 
 21:35:06.190 [task-1] INFO  Embabel - [goofy_mcclintock] executing action ... build
 21:35:06.191 [task-1] INFO  Embabel - [goofy_mcclintock] object bound it:DefinitionResult
-21:35:06.196 [task-1] INFO  Embabel - [goofy_mcclintock] goal ... achieved in PT1.164...</pre>
+21:35:06.196 [task-1] INFO  Embabel - [goofy_mcclintock] goal ... achieved in PT1.164...
+```
+
 
 What stands out:
 
@@ -681,7 +711,7 @@ What stands out:
 
 This is the "agentic" angle: Embabel is not just calling methods---it's planning against typed state.
 
-*** ** * ** ***
+
 
 Part IV --- Conclusion and extensions {#h2-20-part-iv-conclusion-and-extensions}
 --------------------------------------------------------------------------------
@@ -743,7 +773,7 @@ A good, minimal LLM use case is last-mile text rewriting:
 
 This keeps the retrieval deterministic and makes the LLM optional, which is often a safer architecture.
 
-*** ** * ** ***
+
 
 Repo: [https://github.com/vinny59200/embabel](https://github.com/vinny59200/embabel%20)
 

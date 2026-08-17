@@ -27,9 +27,12 @@ To summarize the core problem: the hashcode method is central to the Java Collec
 
 But the main problem is nuanced behavior. The example given in the article is that of the Java SE URL class. The API for that class specifies that the following comparison of these distinct objects would evaluate to true:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">new URL("http://127.0.0.1/").equals(new URL("http://localhost/")); 
+```java
+new URL("http://127.0.0.1/").equals(new URL("http://localhost/")); 
 
-new URL("http://127.0.0.1/").hashcode() == new URL("http://localhost/").hashcode();</pre>
+new URL("http://127.0.0.1/").hashcode() == new URL("http://localhost/").hashcode();
+```
+
 
 This is a bug in the specification. Notice this applies to all domains, so lookup is necessary to perform hashing or equals. That can be very expensive.
 
@@ -67,7 +70,8 @@ We can now use these tools to narrow down performance problems and find the root
 
 Adding this tictoc provides us with periodical printouts like this:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="json">INFO: 13 Feb 2022, 14:50:06 TicToc Stats:: 
+```json
+INFO: 13 Feb 2022, 14:50:06 TicToc Stats:: 
     { "VetListBlock" : 
         {"breakpointId" : "fc27d745-b394-400e-83ee-70d7644272f3",
          "count" : 33,"max" : 32,
@@ -75,7 +79,9 @@ Adding this tictoc provides us with periodical printouts like this:
          "min" : 1,
          "name" : "VetListBlock",
          "stddev" : 5.908043099655046,
-         "timestamp" : 1644756606939 } }</pre>
+         "timestamp" : 1644756606939 } }
+```
+
 
 You can review these printouts to get a sense of the overhead incurred by these lines. You can also use the counter to see the frequency at which we invoke a method.
 
@@ -100,7 +106,10 @@ The simplest way to do this is log the current thread using the condition Curren
 
 The problem is that a condition like this can trigger output that's hard to follow, you might see hundreds of printouts. So once we find out the name of the thread, we can add a condition:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">!Thread.currentThread().getName().equals("threadName")</pre>
+```java
+!Thread.currentThread().getName().equals("threadName")
+```
+
 
 This will only log access from different threads. This is something I discussed in my previous post [here](https://lightrun.com/tutorials/debug-race-condition-production/).
 

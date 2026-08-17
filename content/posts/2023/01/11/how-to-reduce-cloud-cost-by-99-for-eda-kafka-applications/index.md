@@ -85,21 +85,25 @@ Here is the code:
 
 #### Kafka
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="dracula">while (!shutDown.get()) {
-    ConsumerRecords&lt;Integer, Long&gt; records = 
+```java
+while (!shutDown.get()) {
+    ConsumerRecords<Integer, Long> records = 
             inQ.poll(Duration.ofNanos(INTER_MESSAGE_TIME_NS / 8));
-    for (ConsumerRecord&lt;Integer, Long&gt; record : records) {
+    for (ConsumerRecord<Integer, Long> record : records) {
         long beginTimeNs = record.value();
         int value = record.key();
-        outQ.send(new ProducerRecord&lt;&gt;(topic, value + 1, beginTimeNs));
+        outQ.send(new ProducerRecord<>(topic, value + 1, beginTimeNs));
     }
-}</pre>
+}
+```
+
 
 Using the record *key()* to carry an *int* value might be a bit unorthodox but allows us to improve performance and simplify the code.
 
 #### Chronicle Queue
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="dracula">while (!shutDown.get()) {
+```java
+while (!shutDown.get()) {
     try (final DocumentContext rdc = tailer.readingDocument()) {
         if (rdc.isPresent()) {
             ValueIn valueIn = rdc.wire().getValueIn();
@@ -115,7 +119,9 @@ Using the record *key()* to carry an *int* value might be a bit unorthodox but a
             LockSupport.parkNanos(INTER_MESSAGE_TIME_NS / 8);
         }
     }
-}</pre>
+}
+```
+
 
 ### Benchmarks {#h3-7-benchmarks}
 
@@ -141,9 +147,12 @@ As can be seen, only one instance of the EDA system could be run simultaneously.
 
 Here is a snapshot from the output from the "top" command when running two instance and a broker (pid 3132946):
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="dracula">3134979 per.min+  20   0   20.5g   1.6g  20508 S 319.6   2.6  60:27.40 java                                                                            
+```
+3134979 per.min+  20   0   20.5g   1.6g  20508 S 319.6   2.6  60:27.40 java                                                                            
 3142126 per.min+  20   0   20.5g   1.6g  20300 S 296.3   2.5  19:36.17 java                                                                            
-3132946 per.min+  20   0   11.3g   1.0g  22056 S  73.8   1.6   9:22.42 java</pre>
+3132946 per.min+  20   0   11.3g   1.0g  22056 S  73.8   1.6   9:22.42 java
+```
+
 
 ### Chronicle Queue {#h3-9-chronicle-queue}
 

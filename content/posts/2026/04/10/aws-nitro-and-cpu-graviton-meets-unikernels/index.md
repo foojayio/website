@@ -39,7 +39,7 @@ With **Nanos Unikernel** , Java applications run unchanged: the JVM is not modif
 
 This represents a major shift: unikernels are no longer a research topic or a niche experiment, but a **first-class deployment target** for enterprise Java workloads.
 
-*** ** * ** ***
+
 
 From Virtual Machines and Containers to Unikernels {#h2-2-from-virtual-machines-and-containers-to-unikernels}
 -------------------------------------------------------------------------------------------------------------
@@ -50,7 +50,7 @@ Unikernels remove these layers by compiling the application and its required run
 
 With Nanos Unikernel, this model becomes practical for Java and Jakarta EE workloads.
 
-*** ** * ** ***
+
 
 Proof of Concept Overview {#h2-3-proof-of-concept-overview}
 -----------------------------------------------------------
@@ -109,7 +109,7 @@ This article builds on the original Foojay article, where the application image 
 
 This demonstrates that Nanos unikernels are **hypervisor-agnostic** and cloud-independent.
 
-*** ** * ** ***
+
 
 Architectural Diagram of the PoC {#h2-8-architectural-diagram-of-the-poc}
 -------------------------------------------------------------------------
@@ -118,7 +118,7 @@ Architectural Diagram of the PoC {#h2-8-architectural-diagram-of-the-poc}
 
 The application runs as a single unikernel image directly on top of the AWS Nitro hypervisor, without a guest operating system, container runtime, or Kubernetes node.
 
-*** ** * ** ***
+
 
 Containers vs Unikernels: A Stack Comparison {#h2-9-containers-vs-unikernels-a-stack-comparison}
 ------------------------------------------------------------------------------------------------
@@ -143,7 +143,7 @@ Containers vs Unikernels: A Stack Comparison {#h2-9-containers-vs-unikernels-a-s
 
 By removing unnecessary layers, unikernels reduce boot time, memory footprint, and attack surface.
 
-*** ** * ** ***
+
 
 Quarkus, Semeru, and Nanos on AWS Nitro Graviton {#h2-12-quarkus-semeru-and-nanos-on-aws-nitro-graviton}
 --------------------------------------------------------------------------------------------------------
@@ -152,7 +152,7 @@ Quarkus, Semeru, and Nanos on AWS Nitro Graviton {#h2-12-quarkus-semeru-and-nano
 
 Quarkus is particularly well suited for this model thanks to its fast startup and low memory usage, while IBM Semeru provides a production-grade OpenJDK runtime. Combined with Nanos, the result is a highly efficient Java unikernel.
 
-*** ** * ** ***
+
 
 AWS Nitro: Cloud-Native Capabilities Without Kubernetes {#h2-13-aws-nitro-cloud-native-capabilities-without-kubernetes}
 -----------------------------------------------------------------------------------------------------------------------
@@ -174,7 +174,7 @@ Running Java applications as unikernels allows teams to:
 * Reduce operational complexity
 * Lower infrastructure and operational costs
 
-*** ** * ** ***
+
 
 Hypervisor Independence {#h2-14-hypervisor-independence}
 --------------------------------------------------------
@@ -183,7 +183,7 @@ In the original article, the application image runs on the Oracle OCI hypervisor
 
 This confirms that Nanos unikernels are **not tied to a specific cloud provider or hypervisor**. The same Java application can be deployed consistently across environments.
 
-*** ** * ** ***
+
 
 Why This Matters for Java and Jakarta EE {#h2-15-why-this-matters-for-java-and-jakarta-ee}
 ------------------------------------------------------------------------------------------
@@ -199,7 +199,7 @@ Most importantly, this comes **without changing existing applications or the JVM
 
 Unikernels with Nanos represent an evolutionary step, not a disruptive rewrite, for the Java ecosystem.
 
-*** ** * ** ***
+
 
 Conclusion {#h2-16-conclusion}
 ------------------------------

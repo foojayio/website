@@ -51,7 +51,8 @@ It's worth noting that our benchmarks are limited to a small set of data, such a
 The benchmarking code {#h2-3-the-benchmarking-code}
 ---------------------------------------------------
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">package ca.bazlur;
+```java
+package ca.bazlur;
 
 import org.openjdk.jmh.annotations.Benchmark;
 
@@ -72,8 +73,8 @@ import java.util.concurrent.TimeUnit;
 public class MapBenchmark {
     private static final int SIZE = 10;
 
-    private Map&lt;Integer, String&gt; mapOf;
-    private Map&lt;Integer, String&gt; hashMap;
+    private Map<Integer, String> mapOf;
+    private Map<Integer, String> hashMap;
 
     @Setup
     public void setup() {
@@ -90,7 +91,7 @@ public class MapBenchmark {
                 9, "value9"
         );
 
-        hashMap = new HashMap&lt;&gt;();
+        hashMap = new HashMap<>();
 
         hashMap.put(0, "value0");
         hashMap.put(1, "value1");
@@ -106,7 +107,7 @@ public class MapBenchmark {
 
     @Benchmark
     public void testMapOf(Blackhole blackhole) {
-        Map&lt;Integer, String&gt; map = Map.of(
+        Map<Integer, String> map = Map.of(
                 0, "value0",
                 1, "value1",
                 2, "value2",
@@ -123,7 +124,7 @@ public class MapBenchmark {
 
     @Benchmark
     public void testHashMap(Blackhole blackhole) {
-        Map&lt;Integer, String&gt; hashMap = new HashMap&lt;&gt;();
+        Map<Integer, String> hashMap = new HashMap<>();
         hashMap.put(0, "value0");
         hashMap.put(1, "value1");
         hashMap.put(2, "value2");
@@ -139,29 +140,32 @@ public class MapBenchmark {
 
     @Benchmark
     public void testGetMapOf() {
-        for (int i = 0; i &lt; 10; i++) {
+        for (int i = 0; i < 10; i++) {
             mapOf.get(i);
         }
     }
 
     @Benchmark
     public void testGetHashMap() {
-        for (int i = 0; i &lt; SIZE; i++) {
+        for (int i = 0; i < SIZE; i++) {
             hashMap.get(i);
         }
     }
 }
+```
 
-</pre>
 
 The results {#h2-4-the-results}
 -------------------------------
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">Benchmark                    Mode  Cnt   Score   Error  Units
+```
+Benchmark                    Mode  Cnt   Score   Error  Units
 MapBenchmark.testGetHashMap  avgt   20  14.999 ± 0.433  ns/op
 MapBenchmark.testGetMapOf    avgt   20  16.327 ± 0.119  ns/op
 MapBenchmark.testHashMap     avgt   20  84.920 ± 1.737  ns/op
-MapBenchmark.testMapOf       avgt   20  83.290 ± 0.471  ns/op</pre>
+MapBenchmark.testMapOf       avgt   20  83.290 ± 0.471  ns/op
+```
+
 
 These are the benchmark results for comparing the performance of using `new HashMap<>()` and `Map.of()` in Java. The benchmark was conducted with a limited and small data set (e.g. 10).
 

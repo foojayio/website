@@ -43,23 +43,29 @@ Deep Netts Pro is not on Maven Central, you need it for this scenario, and it is
 
 Download the Deep Netts Pro ZIP from [Deep Netts](https://www.deepnetts.com/) (click "Free download" in the top right) unzip it, then run the import script from the extracted directory:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">./importToLocalMaven.sh      # importToLocalMaven.bat on Windows
-</pre>
+```
+./importToLocalMaven.sh      # importToLocalMaven.bat on Windows
+```
+
 
 Verify it landed:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">ls ~/.m2/repository/com/deepnetts/
+```
+ls ~/.m2/repository/com/deepnetts/
 # expect: deepnetts-core-pro/  deepnetts-license/
-</pre>
+```
+
 
 ### 1.2 Clone and run the example {#h3-2-1-2-clone-and-run-the-example}
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">git clone https://github.com/deepnetts/CreditCardFraudDetection.git
+```
+git clone https://github.com/deepnetts/CreditCardFraudDetection.git
 cd CreditCardFraudDetection
 unzip creditcard.zip          # the full 284k-row dataset
 mvn clean package
 mvn exec:java
-</pre>
+```
+
 
 The project's `pom.xml` declares:
 
@@ -85,7 +91,7 @@ The imbalance is the whole problem. A model that predicts "not fraud" for every 
 
 Training on the balanced file is the standard starting move, but understand the trade: undersampling throws away \~99% of the legitimate examples, and the resulting model's raw output is calibrated to a 50/50 world that doesn't exist. Your decision threshold will need work (step 4).
 
-*** ** * ** ***
+
 
 Step 2 --- Make the split deterministic {#h2-4-step-2-make-the-split-deterministic}
 -----------------------------------------------------------------------------------
@@ -94,7 +100,8 @@ The example splits data at runtime with a random shuffle. For a service, you nee
 
 Create `src/main/java/com/example/fraud/training/SplitData.java`:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">package com.example.fraud.training;
+```
+package com.example.fraud.training;
 
 import java.io.*;
 import java.nio.file.*;
@@ -107,12 +114,12 @@ public class SplitData {
     private static final double TRAIN_FRACTION = 0.7;
 
     public static void main(String[] args) throws IOException {
-        Path source = Path.of(args.length &gt; 0 ? args[0] : "creditcard-balanced.csv");
-        List&lt;String&gt; lines = Files.readAllLines(source);
+        Path source = Path.of(args.length > 0 ? args[0] : "creditcard-balanced.csv");
+        List<String> lines = Files.readAllLines(source);
         String header = lines.get(0);
 
-        List&lt;String&gt; fraud = new ArrayList&lt;&gt;();
-        List&lt;String&gt; legit = new ArrayList&lt;&gt;();
+        List<String> fraud = new ArrayList<>();
+        List<String> legit = new ArrayList<>();
         for (String line : lines.subList(1, lines.size())) {
             if (line.isBlank()) continue;
             (line.trim().endsWith(",1") ? fraud : legit).add(line);
@@ -122,7 +129,7 @@ public class SplitData {
         Collections.shuffle(fraud, rnd);
         Collections.shuffle(legit, rnd);
 
-        List&lt;String&gt; train = new ArrayList&lt;&gt;(), test = new ArrayList&lt;&gt;();
+        List<String> train = new ArrayList<>(), test = new ArrayList<>();
         partition(fraud, train, test);
         partition(legit, train, test);
         Collections.shuffle(train, rnd);   // avoid class-ordered batches
@@ -133,13 +140,13 @@ public class SplitData {
         System.out.printf("train=%d test=%d%n", train.size(), test.size());
     }
 
-    private static void partition(List&lt;String&gt; rows, List&lt;String&gt; train, List&lt;String&gt; test) {
+    private static void partition(List<String> rows, List<String> train, List<String> test) {
         int cut = (int) Math.round(rows.size() * TRAIN_FRACTION);
         train.addAll(rows.subList(0, cut));
         test.addAll(rows.subList(cut, rows.size()));
     }
 
-    private static void write(Path path, String header, List&lt;String&gt; rows) throws IOException {
+    private static void write(Path path, String header, List<String> rows) throws IOException {
         Files.createDirectories(path.getParent());
         try (BufferedWriter w = Files.newBufferedWriter(path)) {
             w.write(header); w.newLine();
@@ -147,12 +154,13 @@ public class SplitData {
         }
     }
 }
-</pre>
+```
+
 
 Run it once. Commit the seed, not the CSVs.
 > The `endsWith(",1")` check assumes `Class` is the final column with no trailing whitespace. Verify against your header before trusting it.
 
-*** ** * ** ***
+
 
 Step 3 --- Train and export a deployable artifact {#h2-5-step-3-train-and-export-a-deployable-artifact}
 -------------------------------------------------------------------------------------------------------
@@ -161,7 +169,8 @@ Training produces **two** files. Everyone remembers the model. The forgotten one
 
 Create `TrainFraudModel.java`:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">package com.example.fraud.training;
+```
+package com.example.fraud.training;
 
 import deepnetts.data.DataSet;
 import deepnetts.data.DataSets;
@@ -223,15 +232,15 @@ public class TrainFraudModel {
     /** Max absolute value per input column, matching MaxNormalizer's scaling. */
     private static float[] columnMaxFrom(String csv, int numInputs) throws Exception {
         float[] max = new float[numInputs];
-        List&lt;String&gt; lines = Files.readAllLines(Path.of(csv));
+        List<String> lines = Files.readAllLines(Path.of(csv));
         for (String line : lines.subList(1, lines.size())) {
             if (line.isBlank()) continue;
             String[] parts = line.split(",");
-            for (int i = 0; i &lt; numInputs; i++) {
+            for (int i = 0; i < numInputs; i++) {
                 max[i] = Math.max(max[i], Math.abs(Float.parseFloat(parts[i].trim())));
             }
         }
-        for (int i = 0; i &lt; numInputs; i++) if (max[i] == 0f) max[i] = 1f;  // guard
+        for (int i = 0; i < numInputs; i++) if (max[i] == 0f) max[i] = 1f;  // guard
         return max;
     }
 
@@ -242,7 +251,8 @@ public class TrainFraudModel {
         Files.writeString(path, j.toString());
     }
 }
-</pre>
+```
+
 
 **Why the duplicated max computation?** The service needs the scaling constants at inference time, and how you retrieve them from `MaxNormalizer` varies by version. Computing them independently from the same file is version-proof and takes 10 lines. Add a test asserting the two agree if your version exposes them.
 
@@ -250,21 +260,22 @@ public class TrainFraudModel {
 
 Ship `fraud-model.dnet` and `scaler.json` as a pair, versioned together, always.
 
-*** ** * ** ***
+
 
 Step 4 --- Pick a threshold (do not use 0.5) {#h2-6-step-4-pick-a-threshold-do-not-use-0-5}
 -------------------------------------------------------------------------------------------
 
 Before writing any Spring code, decide what score means "fraud". Add this to the end of training:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">System.out.println("threshold\tTP\tFP\tFN\tprecision\trecall");
-for (float t = 0.05f; t &lt; 1.0f; t += 0.05f) {
+```
+System.out.println("threshold\tTP\tFP\tFN\tprecision\trecall");
+for (float t = 0.05f; t < 1.0f; t += 0.05f) {
     int tp = 0, fp = 0, fn = 0;
     for (var item : testSet) {
         net.setInput(item.getInput());
-        boolean predicted = net.getOutput()[0] &gt;= t;
-        boolean actual = item.getTargetOutput().get(0) &gt;= 0.5f;
-        if (predicted &amp;&amp; actual) tp++;
+        boolean predicted = net.getOutput()[0] >= t;
+        boolean actual = item.getTargetOutput().get(0) >= 0.5f;
+        if (predicted && actual) tp++;
         else if (predicted) fp++;
         else if (actual) fn++;
     }
@@ -273,48 +284,54 @@ for (float t = 0.05f; t &lt; 1.0f; t += 0.05f) {
             tp + fp == 0 ? 0 : (double) tp / (tp + fp),
             tp + fn == 0 ? 0 : (double) tp / (tp + fn));
 }
-</pre>
+```
+
 
 Now pick based on cost, not on a round number. A false negative is a chargeback plus fraud loss. A false positive is a declined card, an angry customer, and a support call. If a missed fraud costs 40× a false decline, you want a low threshold and you accept the noise. That's a business decision --- bring the table above to whoever owns it, and put the answer in config, not in code.
 
 Remember the calibration caveat from step 1.3: a model trained on a balanced set outputs numbers that look like probabilities but aren't. The threshold table is empirical and honest; the raw score is not a probability. Don't show it to users as one.
 
-*** ** * ** ***
+
 
 Step 5 --- Create the Spring Boot project {#h2-7-step-5-create-the-spring-boot-project}
 ---------------------------------------------------------------------------------------
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">curl https://start.spring.io/starter.zip \
+```
+curl https://start.spring.io/starter.zip \
   -d dependencies=web,actuator,validation \
   -d javaVersion=17 -d type=maven-project \
   -d groupId=com.example -d artifactId=fraud-service \
-  -o fraud-service.zip &amp;&amp; unzip fraud-service.zip -d fraud-service
-</pre>
+  -o fraud-service.zip && unzip fraud-service.zip -d fraud-service
+```
+
 
 Add to `pom.xml`:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&lt;dependency&gt;
-    &lt;groupId&gt;com.deepnetts&lt;/groupId&gt;
-    &lt;artifactId&gt;deepnetts-core-pro&lt;/artifactId&gt;
-    &lt;version&gt;3.2.0&lt;/version&gt;
-&lt;/dependency&gt;
-&lt;dependency&gt;
-    &lt;groupId&gt;com.deepnetts&lt;/groupId&gt;
-    &lt;artifactId&gt;deepnetts-license&lt;/artifactId&gt;
-    &lt;version&gt;1.0&lt;/version&gt;
-&lt;/dependency&gt;
-&lt;dependency&gt;
-    &lt;groupId&gt;org.apache.commons&lt;/groupId&gt;
-    &lt;artifactId&gt;commons-pool2&lt;/artifactId&gt;
-    &lt;version&gt;2.12.0&lt;/version&gt;
-&lt;/dependency&gt;
-</pre>
+```
+<dependency>
+    <groupId>com.deepnetts</groupId>
+    <artifactId>deepnetts-core-pro</artifactId>
+    <version>3.2.0</version>
+</dependency>
+<dependency>
+    <groupId>com.deepnetts</groupId>
+    <artifactId>deepnetts-license</artifactId>
+    <version>1.0</version>
+</dependency>
+<dependency>
+    <groupId>org.apache.commons</groupId>
+    <artifactId>commons-pool2</artifactId>
+    <version>2.12.0</version>
+</dependency>
+```
+
 
 > **CI will break here.** A local `.m2` install works on your laptop and nowhere else. Publish both Deep Netts jars to your internal Nexus/Artifactory once with `mvn deploy:deploy-file` and point CI at that repository. Do this now rather than on the day of your first build-server failure.
 
 `src/main/resources/application.yml`:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">fraud:
+```
+fraud:
   model-path: classpath:model/fraud-model.dnet
   scaler-path: classpath:model/scaler.json
   threshold: 0.35          # from step 4, not from a textbook
@@ -322,18 +339,20 @@ Add to `pom.xml`:
 management:
   endpoints.web.exposure.include: health,metrics,prometheus
   endpoint.health.show-details: always
-</pre>
+```
+
 
 Copy `fraud-model.dnet` and `scaler.json` into `src/main/resources/model/`.
 
-*** ** * ** ***
+
 
 Step 6 --- Load the model and scaler {#h2-8-step-6-load-the-model-and-scaler}
 -----------------------------------------------------------------------------
 
 `FraudProperties.java`:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">package com.example.fraud;
+```
+package com.example.fraud;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.core.io.Resource;
@@ -341,11 +360,13 @@ import org.springframework.core.io.Resource;
 @ConfigurationProperties(prefix = "fraud")
 public record FraudProperties(Resource modelPath, Resource scalerPath,
                               float threshold, int poolSize) {}
-</pre>
+```
+
 
 `ModelConfig.java`:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">package com.example.fraud;
+```
+package com.example.fraud;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import deepnetts.net.FeedForwardNetwork;
@@ -384,19 +405,19 @@ public class ModelConfig {
     }
 
     @Bean(destroyMethod = "close")
-    GenericObjectPool&lt;FeedForwardNetwork&gt; networkPool(File modelFile, FraudProperties props) {
-        var config = new GenericObjectPoolConfig&lt;FeedForwardNetwork&gt;();
+    GenericObjectPool<FeedForwardNetwork> networkPool(File modelFile, FraudProperties props) {
+        var config = new GenericObjectPoolConfig<FeedForwardNetwork>();
         config.setMaxTotal(props.poolSize());
         config.setMinIdle(props.poolSize());          // pre-warm: deserialization is slow
         config.setMaxWait(java.time.Duration.ofMillis(200));
         config.setBlockWhenExhausted(true);
 
-        var pool = new GenericObjectPool&lt;&gt;(new BasePooledObjectFactory&lt;FeedForwardNetwork&gt;() {
+        var pool = new GenericObjectPool<>(new BasePooledObjectFactory<FeedForwardNetwork>() {
             @Override public FeedForwardNetwork create() throws Exception {
                 return FileIO.createFromFile(modelFile, FeedForwardNetwork.class);
             }
-            @Override public PooledObject&lt;FeedForwardNetwork&gt; wrap(FeedForwardNetwork net) {
-                return new DefaultPooledObject&lt;&gt;(net);
+            @Override public PooledObject<FeedForwardNetwork> wrap(FeedForwardNetwork net) {
+                return new DefaultPooledObject<>(net);
             }
         }, config);
 
@@ -411,7 +432,8 @@ public class ModelConfig {
         DeepNetts.shutdown();   // Deep Netts runs its own thread pool
     }
 }
-</pre>
+```
+
 
 Two things that matter here:
 
@@ -419,14 +441,15 @@ Two things that matter here:
 
 **`DeepNetts.shutdown()` is not optional.** Without it your context close hangs and your pods take the full termination grace period to die.
 
-*** ** * ** ***
+
 
 Step 7 --- Scaler and scoring service {#h2-9-step-7-scaler-and-scoring-service}
 -------------------------------------------------------------------------------
 
 `Scaler.java`:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">package com.example.fraud;
+```
+package com.example.fraud;
 
 public record Scaler(float[] columnMax) {
 
@@ -436,15 +459,17 @@ public record Scaler(float[] columnMax) {
                 "Expected " + columnMax.length + " features, got " + raw.length);
         }
         float[] scaled = new float[raw.length];
-        for (int i = 0; i &lt; raw.length; i++) scaled[i] = raw[i] / columnMax[i];
+        for (int i = 0; i < raw.length; i++) scaled[i] = raw[i] / columnMax[i];
         return scaled;
     }
 }
-</pre>
+```
+
 
 `FraudScoringService.java`:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">package com.example.fraud;
+```
+package com.example.fraud;
 
 import deepnetts.net.FeedForwardNetwork;
 import deepnetts.tensor.Tensor;
@@ -455,11 +480,11 @@ import org.springframework.stereotype.Service;
 @Service
 public class FraudScoringService {
 
-    private final GenericObjectPool&lt;FeedForwardNetwork&gt; pool;
+    private final GenericObjectPool<FeedForwardNetwork> pool;
     private final Scaler scaler;
     private final float threshold;
 
-    public FraudScoringService(GenericObjectPool&lt;FeedForwardNetwork&gt; pool,
+    public FraudScoringService(GenericObjectPool<FeedForwardNetwork> pool,
                                Scaler scaler, FraudProperties props) {
         this.pool = pool;
         this.scaler = scaler;
@@ -474,7 +499,7 @@ public class FraudScoringService {
             net = pool.borrowObject();
             net.setInput(new Tensor(input));
             float score = net.getOutput()[0];
-            return new ScoreResult(score, score &gt;= threshold);
+            return new ScoreResult(score, score >= threshold);
         } catch (Exception e) {
             throw new ScoringUnavailableException(e);
         } finally {
@@ -484,13 +509,15 @@ public class FraudScoringService {
 
     public record ScoreResult(float score, boolean flagged) {}
 }
-</pre>
+```
+
 
 Note the `finally` block returns the instance even on failure. Miss that and the pool drains under error conditions, then every request blocks for 200ms and times out --- a slow, confusing outage.
 
 `ScoringUnavailableException.java`:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">package com.example.fraud;
+```
+package com.example.fraud;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -499,9 +526,10 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 public class ScoringUnavailableException extends RuntimeException {
     public ScoringUnavailableException(Throwable cause) { super("Scoring unavailable", cause); }
 }
-</pre>
+```
 
-*** ** * ** ***
+
+
 
 Step 8 --- The REST layer {#h2-10-step-8-the-rest-layer}
 --------------------------------------------------------
@@ -510,7 +538,8 @@ Thirty positional floats in a JSON array is a terrible public contract --- one s
 
 `TransactionRequest.java`:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">package com.example.fraud;
+```
+package com.example.fraud;
 
 import jakarta.validation.constraints.*;
 
@@ -529,11 +558,13 @@ public record TransactionRequest(
         return features;
     }
 }
-</pre>
+```
+
 
 `FraudController.java`:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">package com.example.fraud;
+```
+package com.example.fraud;
 
 import jakarta.validation.Valid;
 import org.slf4j.*;
@@ -562,29 +593,33 @@ public class FraudController {
     public record ScoreResponse(String transactionId, float score,
                                 boolean flagged, String modelVersion) {}
 }
-</pre>
+```
+
 
 The `modelVersion` field isn't decoration. When someone asks in six months why a specific transaction was declined, you need to know which model made the call. Log the score and the version for every decision --- in most jurisdictions an automated financial decision needs an audit trail, and reconstructing one retroactively is not possible.
 
 Try it:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">curl -X POST localhost:8080/api/v1/transactions/score \
+```
+curl -X POST localhost:8080/api/v1/transactions/score \
   -H 'Content-Type: application/json' \
   -d '{"transactionId":"t-1","time":406,
        "v":[-2.31,1.95,-1.61,3.99,-0.52,-1.43,-2.54,1.39,-2.77,-2.77,
             3.20,-2.90,-0.60,-4.29,0.39,-1.14,-2.83,-0.02,0.42,0.13,
             0.52,-0.03,-0.47,0.32,0.04,0.18,0.26,-0.14],
        "amount":0.0}'
-</pre>
+```
 
-*** ** * ** ***
+
+
 
 Step 9 --- Health check and tests {#h2-11-step-9-health-check-and-tests}
 ------------------------------------------------------------------------
 
 A health check that only reports "the bean exists" tells you nothing. Run a known vector through the model:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">package com.example.fraud;
+```
+package com.example.fraud;
 
 import org.springframework.boot.actuate.health.*;
 import org.springframework.stereotype.Component;
@@ -609,11 +644,13 @@ public class ModelHealthIndicator implements HealthIndicator {
         }
     }
 }
-</pre>
+```
+
 
 Then a golden-vector test --- the single most valuable test in an ML service, because it catches the model/scaler mismatch that nothing else catches:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@SpringBootTest
+```
+@SpringBootTest
 class ScoringRegressionTest {
 
     @Autowired FraudScoringService service;
@@ -630,13 +667,14 @@ class ScoringRegressionTest {
         assertThat(service.score(features).score()).isLessThan(0.3f);
     }
 }
-</pre>
+```
+
 
 Pull ten of each from `test.csv`, hard-code them, and let the test fail loudly whenever someone swaps the model without the matching scaler.
 
 Also worth adding: a concurrency test that fires the same vector from 50 threads and asserts every response is identical. If you skipped the pool, this is what catches it.
 
-*** ** * ** ***
+
 
 Step 10 --- Package and deploy {#h2-12-step-10-package-and-deploy}
 ------------------------------------------------------------------
@@ -645,7 +683,8 @@ Step 10 --- Package and deploy {#h2-12-step-10-package-and-deploy}
 
 **Dockerfile** --- the Deep Netts jars must be in the image, which means your build stage needs access to your internal repository:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">FROM maven:3.9-eclipse-temurin-17 AS build
+```
+FROM maven:3.9-eclipse-temurin-17 AS build
 WORKDIR /app
 COPY settings.xml /root/.m2/settings.xml    # points at your internal Nexus
 COPY pom.xml .
@@ -657,13 +696,14 @@ FROM eclipse-temurin:17-jre
 COPY --from=build /app/target/fraud-service-*.jar /app/app.jar
 ENV JAVA_OPTS="-Xmx1g -XX:MaxRAMPercentage=75"
 ENTRYPOINT ["sh","-c","java $JAVA_OPTS -jar /app/app.jar"]
-</pre>
+```
+
 
 Deep Netts is pure Java, so everything lives on the heap --- no off-heap surprises, but size `-Xmx` for `poolSize × model size` plus normal application overhead. Eight copies of a large network is eight times the memory.
 
 **Readiness vs liveness.** Deserializing eight model instances at startup takes real time. Point your readiness probe at `/actuator/health/readiness` and give it a generous `initialDelaySeconds`, or Kubernetes will kill pods mid-warmup and you'll never reach a stable state.
 
-*** ** * ** ***
+
 
 Step 11 --- Licensing, before you go live {#h2-13-step-11-licensing-before-you-go-live}
 ---------------------------------------------------------------------------------------
@@ -672,7 +712,7 @@ The free tier is genuinely restrictive for a service like this. It permits deplo
 
 An internal fraud-scoring service inside a single production environment at a small company may fit. Anything customer-facing, multi-region, or sold as a service does not. Read the [EULA](https://www.deepnetts.com/end-user-license-agreement/) and talk to Deep Netts before you build a roadmap on the free tier --- I'm not a lawyer and this is a summary, not advice.
 
-*** ** * ** ***
+
 
 Step 12 --- What you still need for production {#h2-14-step-12-what-you-still-need-for-production}
 --------------------------------------------------------------------------------------------------
@@ -685,12 +725,13 @@ The service works now. These are the things that separate it from a demo:
 * **A kill switch.** A config flag that bypasses the model and falls back to rules, flippable without a deploy.
 * **No PII in the feature vector.** The Kaggle data is anonymized for you. Your own features won't be --- decide deliberately what goes into the model and what gets logged.
 
-*** ** * ** ***
+
 
 Reference: project layout {#h2-15-reference-project-layout}
 -----------------------------------------------------------
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">fraud-service/
+```
+fraud-service/
 ├── pom.xml
 ├── data/
 │   ├── train.csv                    # generated, gitignored
@@ -717,7 +758,8 @@ Reference: project layout {#h2-15-reference-project-layout}
     │           └── scaler.json
     └── test/java/com/example/fraud/
         └── ScoringRegressionTest.java
-</pre>
+```
+
 
 Training classes living in the same module is fine to start. Split them into a separate `fraud-training` module once the training dependencies (tablesaw, plotting) start bloating your service image.
 

@@ -31,7 +31,10 @@ In this tutorial, you'll:
 
 You can find all the code presented in this tutorial in the GitHub repository:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group=""><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="8aede3fecaede3fee2ffe8a4e9e5e7">[email&nbsp;protected]</a>:soujava/mongodb-ai-planning-pattern.git</pre>
+```
+<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="8aede3fecaede3fee2ffe8a4e9e5e7">[email protected]</a>:soujava/mongodb-ai-planning-pattern.git
+```
+
 
 Prerequisites {#h2-0-prerequisites}
 -----------------------------------
@@ -46,7 +49,10 @@ For this tutorial, you'll need:
 
 You can use the following Docker command to start a standalone MongoDB instance:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">docker run --rm -d --name mongodb-instance -p 27017:27017 mongo</pre>
+```
+docker run --rm -d --name mongodb-instance -p 27017:27017 mongo
+```
+
 
 The [Planning Pattern](https://docs.cloud.google.com/architecture/choose-design-pattern-agentic-ai-system) enables an AI system to decompose high-level objectives into smaller, independent actions. Rather than relying solely on internal knowledge, the agent identifies required information and selects deterministic tools, such as databases or REST services. This approach improves reliability, observability, and accuracy by combining the reasoning capabilities of Large Language Models with the predictable behavior of traditional software components.
 
@@ -82,129 +88,141 @@ To simplify execution, we will include the Eclipse GlassFish plugin.
 
 The code below shows the updated dependency.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
-&lt;project xmlns="http://maven.apache.org/POM/4.0.0"
+```
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"&gt;
-    &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
 
-    &lt;groupId&gt;expert.os.demos&lt;/groupId&gt;
-    &lt;artifactId&gt;travel-assistance&lt;/artifactId&gt;
-    &lt;version&gt;1.0.0&lt;/version&gt;
-    &lt;packaging&gt;war&lt;/packaging&gt;
+    <groupId>expert.os.demos</groupId>
+    <artifactId>travel-assistance</artifactId>
+    <version>1.0.0</version>
+    <packaging>war</packaging>
 
-    &lt;name&gt;travel-assistance&lt;/name&gt;
+    <name>travel-assistance</name>
 
-    &lt;properties&gt;
-        &lt;project.build.sourceEncoding&gt;UTF-8&lt;/project.build.sourceEncoding&gt;
-        &lt;project.report.sourceEncoding&gt;UTF-8&lt;/project.report.sourceEncoding&gt;
-        &lt;maven.compiler.release&gt;21&lt;/maven.compiler.release&gt;
-        &lt;jakartaee-api.version&gt;11.0.0&lt;/jakartaee-api.version&gt;
-        &lt;compiler-plugin.version&gt;3.15.0&lt;/compiler-plugin.version&gt;
-        &lt;war-plugin.version&gt;3.5.1&lt;/war-plugin.version&gt;
-        &lt;jnosql.version&gt;1.1.14&lt;/jnosql.version&gt;
-        &lt;langchain4j-cdi.version&gt;1.3.3&lt;/langchain4j-cdi.version&gt;
-    &lt;/properties&gt;
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.report.sourceEncoding>UTF-8</project.report.sourceEncoding>
+        <maven.compiler.release>21</maven.compiler.release>
+        <jakartaee-api.version>11.0.0</jakartaee-api.version>
+        <compiler-plugin.version>3.15.0</compiler-plugin.version>
+        <war-plugin.version>3.5.1</war-plugin.version>
+        <jnosql.version>1.1.14</jnosql.version>
+        <langchain4j-cdi.version>1.3.3</langchain4j-cdi.version>
+    </properties>
 
-    &lt;dependencies&gt;
-        &lt;dependency&gt;
-            &lt;groupId&gt;dev.langchain4j.cdi&lt;/groupId&gt;
-            &lt;artifactId&gt;langchain4j-cdi-portable-ext&lt;/artifactId&gt;
-            &lt;version&gt;${langchain4j-cdi.version}&lt;/version&gt;
-        &lt;/dependency&gt;
-        &lt;dependency&gt;
-            &lt;groupId&gt;dev.langchain4j.cdi.mp&lt;/groupId&gt;
-            &lt;artifactId&gt;langchain4j-cdi-config&lt;/artifactId&gt;
-            &lt;version&gt;${langchain4j-cdi.version}&lt;/version&gt;
-        &lt;/dependency&gt;
-        &lt;dependency&gt;
-            &lt;groupId&gt;dev.langchain4j&lt;/groupId&gt;
-            &lt;artifactId&gt;langchain4j-open-ai&lt;/artifactId&gt;
-            &lt;version&gt;1.16.0&lt;/version&gt;
-        &lt;/dependency&gt;
-        &lt;dependency&gt;
-            &lt;groupId&gt;org.eclipse.jnosql.databases&lt;/groupId&gt;
-            &lt;artifactId&gt;jnosql-mongodb&lt;/artifactId&gt;
-            &lt;version&gt;${jnosql.version}&lt;/version&gt;
-        &lt;/dependency&gt;
-        &lt;dependency&gt;
-            &lt;groupId&gt;jakarta.platform&lt;/groupId&gt;
-            &lt;artifactId&gt;jakarta.jakartaee-api&lt;/artifactId&gt;
-            &lt;version&gt;${jakartaee-api.version}&lt;/version&gt;
-            &lt;scope&gt;provided&lt;/scope&gt;
-        &lt;/dependency&gt;
-        &lt;dependency&gt;
-            &lt;groupId&gt;org.primefaces&lt;/groupId&gt;
-            &lt;artifactId&gt;primefaces&lt;/artifactId&gt;
-            &lt;version&gt;15.0.16&lt;/version&gt;
-            &lt;classifier&gt;jakarta&lt;/classifier&gt;
-        &lt;/dependency&gt;
-    &lt;/dependencies&gt;
+    <dependencies>
+        <dependency>
+            <groupId>dev.langchain4j.cdi</groupId>
+            <artifactId>langchain4j-cdi-portable-ext</artifactId>
+            <version>${langchain4j-cdi.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>dev.langchain4j.cdi.mp</groupId>
+            <artifactId>langchain4j-cdi-config</artifactId>
+            <version>${langchain4j-cdi.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>dev.langchain4j</groupId>
+            <artifactId>langchain4j-open-ai</artifactId>
+            <version>1.16.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.jnosql.databases</groupId>
+            <artifactId>jnosql-mongodb</artifactId>
+            <version>${jnosql.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>jakarta.platform</groupId>
+            <artifactId>jakarta.jakartaee-api</artifactId>
+            <version>${jakartaee-api.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.primefaces</groupId>
+            <artifactId>primefaces</artifactId>
+            <version>15.0.16</version>
+            <classifier>jakarta</classifier>
+        </dependency>
+    </dependencies>
 
-    &lt;build&gt;
-        &lt;finalName&gt;travel-assistance&lt;/finalName&gt;
-        &lt;plugins&gt;
-            &lt;plugin&gt;
-                &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;
-                &lt;artifactId&gt;maven-compiler-plugin&lt;/artifactId&gt;
-                &lt;version&gt;${compiler-plugin.version}&lt;/version&gt;
-            &lt;/plugin&gt;
-            &lt;plugin&gt;
-                &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;
-                &lt;artifactId&gt;maven-war-plugin&lt;/artifactId&gt;
-                &lt;version&gt;${war-plugin.version}&lt;/version&gt;
-            &lt;/plugin&gt;
-            &lt;plugin&gt;
-                &lt;groupId&gt;org.glassfish.embedded&lt;/groupId&gt;
-                &lt;artifactId&gt;embedded-glassfish-maven-plugin&lt;/artifactId&gt;
-                &lt;version&gt;8.0&lt;/version&gt;
-                &lt;configuration&gt;
-                    &lt;app&gt;target/travel-assistance.war&lt;/app&gt;
-                    &lt;glassfish.version&gt;8.0.3&lt;/glassfish.version&gt;
-                    &lt;contextRoot&gt;/&lt;/contextRoot&gt;
-                    &lt;port&gt;8080&lt;/port&gt;
-                &lt;/configuration&gt;
-            &lt;/plugin&gt;
-        &lt;/plugins&gt;
-    &lt;/build&gt;
-&lt;/project&gt;</pre>
+    <build>
+        <finalName>travel-assistance</finalName>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>${compiler-plugin.version}</version>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>${war-plugin.version}</version>
+            </plugin>
+            <plugin>
+                <groupId>org.glassfish.embedded</groupId>
+                <artifactId>embedded-glassfish-maven-plugin</artifactId>
+                <version>8.0</version>
+                <configuration>
+                    <app>target/travel-assistance.war</app>
+                    <glassfish.version>8.0.3</glassfish.version>
+                    <contextRoot>/</contextRoot>
+                    <port>8080</port>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>
+```
+
 
 Add the following configuration to the web.xml file located at src/main/webapp/WEB-INF/ to enable JSF.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&lt;web-app version="6.1"
+```
+<web-app version="6.1"
         xmlns="https://jakarta.ee/xml/ns/jakartaee"
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_6_1.xsd"&gt;
-   &lt;welcome-file-list&gt;
-       &lt;welcome-file&gt;index.xhtml&lt;/welcome-file&gt;
-   &lt;/welcome-file-list&gt;
-   &lt;servlet&gt;
-       &lt;servlet-name&gt;Faces Servlet&lt;/servlet-name&gt;
-       &lt;servlet-class&gt;jakarta.faces.webapp.FacesServlet&lt;/servlet-class&gt;
-       &lt;load-on-startup&gt;1&lt;/load-on-startup&gt;
-   &lt;/servlet&gt;
+        xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_6_1.xsd">
+   <welcome-file-list>
+       <welcome-file>index.xhtml</welcome-file>
+   </welcome-file-list>
+   <servlet>
+       <servlet-name>Faces Servlet</servlet-name>
+       <servlet-class>jakarta.faces.webapp.FacesServlet</servlet-class>
+       <load-on-startup>1</load-on-startup>
+   </servlet>
 
-   &lt;servlet-mapping&gt;
-       &lt;servlet-name&gt;Faces Servlet&lt;/servlet-name&gt;
-       &lt;url-pattern&gt;*.xhtml&lt;/url-pattern&gt;
-   &lt;/servlet-mapping&gt;
-&lt;/web-app&gt;</pre>
+   <servlet-mapping>
+       <servlet-name>Faces Servlet</servlet-name>
+       <url-pattern>*.xhtml</url-pattern>
+   </servlet-mapping>
+</web-app>
+```
+
 
 In the same directory, add the beans.xml file to enable [CDI support](https://jakarta.ee/learn/docs/jakartaee-tutorial/current/cdi/cdi-basic/cdi-basic.html).
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
-&lt;beans xmlns="https://jakarta.ee/xml/ns/jakartaee"
-       bean-discovery-mode="annotated"&gt;
-&lt;/beans&gt;</pre>
+```
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="https://jakarta.ee/xml/ns/jakartaee"
+       bean-discovery-mode="annotated">
+</beans>
+```
+
 
 The next step is to configure credentials in the properties file. Set the AI model class, OpenAI API key, and MongoDB connection string. You can override these settings using system environment variables, following the Twelve Factor Application methodology. Ideally, these configurations should be transparent to software developers, and sensitive information should not be hard-coded for security reasons. So create the file: src/main/resources/META-INF/microprofile-config.properties
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">dev.langchain4j.cdi.plugin.chat-model.class=dev.langchain4j.model.openai.OpenAiChatModel
+```
+dev.langchain4j.cdi.plugin.chat-model.class=dev.langchain4j.model.openai.OpenAiChatModel
 dev.langchain4j.cdi.plugin.chat-model.config.api-key=${OPENAI_API_KEY}
 dev.langchain4j.cdi.plugin.chat-model.config.model-name=gpt-5
 jnosql.document.database=travels
-jnosql.mongodb.url=mongodb+srv://admin:&lt;db_password&gt;@cluster0.gblhb3d.mongodb.net/?appName=devrel-article-java-jnosql
-jnosql.mongodb.application.name=devrel-article-java-jnosql</pre>
+jnosql.mongodb.url=mongodb+srv://admin:<db_password>@cluster0.gblhb3d.mongodb.net/?appName=devrel-article-java-jnosql
+jnosql.mongodb.application.name=devrel-article-java-jnosql
+```
+
 
 Step 2: Generate the domain classes {#h2-2-step-2-generate-the-domain-classes}
 ------------------------------------------------------------------------------
@@ -213,7 +231,8 @@ Once the setup is complete, the next step is to create the entities: City and it
 
 The first class is an enum that will show the options of attraction type:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">package expert.os.demos.travel.assistance;
+```
+package expert.os.demos.travel.assistance;
 
 public enum AttractionType {
     HISTORICAL,
@@ -222,11 +241,14 @@ public enum AttractionType {
     ARCHITECTURE,
     FOOD,
     RELIGIOUS
-}</pre>
+}
+```
+
 
 The City class serves as the entity representing the City. Notably, this approach is similar to Jakarta Persistence, where the Entity annotation marks a class as persistable. The Id and Column annotations specify which attributes are persistable and whether they serve as identifiers or standard fields.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">package expert.os.demos.travel.assistance;
+```
+package expert.os.demos.travel.assistance;
 
 import jakarta.nosql.Column;
 import jakarta.nosql.Entity;
@@ -274,11 +296,14 @@ public class City {
     public String getDescription() {
         return description;
     }
-}</pre>
+}
+```
+
 
 The CityReference works as an embeddable defined by the annotation of the same name. Since it can be defined as a Value Type in DDD, we will define it as an immutable class with two attributes. This information will be grouped inside the Attraction as a reference to the city.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">package expert.os.demos.travel.assistance;
+```
+package expert.os.demos.travel.assistance;
 
 import jakarta.nosql.Column;
 import jakarta.nosql.Embeddable;
@@ -287,11 +312,14 @@ import java.util.UUID;
 
 @Embeddable(Embeddable.EmbeddableType.GROUPING)
 public record CityReference(@Column UUID id, @Column String name) {
-}</pre>
+}
+```
+
 
 The Attraction uses the same structure as the City. The main difference, aside from the attributes, is the inclusion of an embedded grouping that functions as a subdocument within the Attraction.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">package expert.os.demos.travel.assistance;
+```
+package expert.os.demos.travel.assistance;
 
 import jakarta.nosql.Column;
 import jakarta.nosql.Entity;
@@ -347,11 +375,14 @@ public class Attraction {
     public String getDescription() {
         return description;
     }
-}</pre>
+}
+```
+
 
 With the entities complete, the next step is to establish the connection between the Java and MongoDB classes. We will use Jakarta Data with Jakarta NoSQL to leverage interface-based capabilities within Jakarta EE.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">package expert.os.demos.travel.assistance;
+```
+package expert.os.demos.travel.assistance;
 
 import jakarta.data.repository.BasicRepository;
 import jakarta.data.repository.Repository;
@@ -360,14 +391,17 @@ import java.util.List;
 import java.util.UUID;
 
 @Repository
-public interface CityRepository extends BasicRepository&lt;City, UUID&gt; {
+public interface CityRepository extends BasicRepository<City, UUID> {
 
-    List&lt;City&gt; findByCountry(String country);
-}</pre>
+    List<City> findByCountry(String country);
+}
+```
+
 
 Jakarta Data offers several ways to explore data capabilities. In our scenario, we defined repositories using BasicRepository, which provides multiple database operations. You can query data by method name, such as "findByCountry," to search by specific fields. Additionally, Jakarta Queries functionalities can be accessed using the Query annotation.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">package expert.os.demos.travel.assistance;
+```
+package expert.os.demos.travel.assistance;
 
 import jakarta.data.repository.BasicRepository;
 import jakarta.data.repository.Param;
@@ -378,20 +412,23 @@ import java.util.List;
 import java.util.UUID;
 
 @Repository
-public interface AttractionRepository extends BasicRepository&lt;Attraction, UUID&gt; {
+public interface AttractionRepository extends BasicRepository<Attraction, UUID> {
 
     @Query("WHERE city.name = :name")
-    List&lt;Attraction&gt; findByCityName(@Param("name") String name);
+    List<Attraction> findByCityName(@Param("name") String name);
 
     @Query("WHERE city.name = :name AND type = :type")
-    List&lt;Attraction&gt; findByCityNameAndType(@Param("name") String city, @Param("type") AttractionType type);
-}</pre>
+    List<Attraction> findByCityNameAndType(@Param("name") String city, @Param("type") AttractionType type);
+}
+```
+
 
 The integration between Java and the data layer is complete, and the process was straightforward thanks to the Jakarta EE platform. Now, we will add functionality by implementing three services: an attraction service, a city service, and a setup service that will populate the database with initial data. While you may later consider adding user interface forms for data entry, this feature is not included in the scope of this tutorial.
 
 The service classes will act as orchestrators and manage the repositories. In the following example, CityService will handle operations related to CityRepository.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">package expert.os.demos.travel.assistance;
+```
+package expert.os.demos.travel.assistance;
 
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
@@ -412,11 +449,11 @@ public class CityService {
         this.cityRepository = null;
     }
 
-    public List&lt;City&gt; findByCountry(String country) {
+    public List<City> findByCountry(String country) {
         return cityRepository.findByCountry(country);
     }
 
-    public List&lt;City&gt; findAll() {
+    public List<City> findAll() {
         return cityRepository.findAll().toList();
     }
 
@@ -424,11 +461,14 @@ public class CityService {
         this.cityRepository.save(city);
         return city;
     }
-}</pre>
+}
+```
+
 
 The AttractionService will function similarly to the CityService and will manage all attraction-related operations.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">package expert.os.demos.travel.assistance;
+```
+package expert.os.demos.travel.assistance;
 
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
@@ -450,7 +490,7 @@ public class AttractionService {
             this.attractionRepository = null;
         }
 
-    public List&lt;Attraction&gt; findByCity(String name) {
+    public List<Attraction> findByCity(String name) {
         return attractionRepository.findByCityName(name);
     }
 
@@ -458,14 +498,17 @@ public class AttractionService {
         return attractionRepository.save(attraction);
     }
 
-    public List&lt;Attraction&gt; findByType(String city, AttractionType type) {
+    public List<Attraction> findByType(String city, AttractionType type) {
         return attractionRepository.findByCityNameAndType(city, type);
     }
-}</pre>
+}
+```
+
 
 The data loader class generates information for our travel agency. In a real-world scenario, this could be achieved through a form or by integrating with a third-party service, such as a REST API. In our example, for simplicity, the data loader checks if the database is empty and then creates data based on three cities and their respective attractions.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">package expert.os.demos.travel.assistance;
+```
+package expert.os.demos.travel.assistance;
 
 import jakarta.annotation.PostConstruct;
 import jakarta.enterprise.context.ApplicationScoped;
@@ -629,7 +672,9 @@ public class DataLoader {
                 "Art and history collections."
         ));
     }
-}</pre>
+}
+```
+
 
 Step 3: Defining the AI layer over MongoDB integration {#h2-3-step-3-defining-the-ai-layer-over-mongodb-integration}
 --------------------------------------------------------------------------------------------------------------------
@@ -638,7 +683,8 @@ Once all services are available, the next step is to expose them through tools u
 
 The purpose of the tools classes is to prevent the use of the Tool annotation within the service itself. These tools are designed solely to expose services to AI systems. The Tool annotation specifies input and output details, which lang4chain processes automatically by convention, such as converting the return value to JSON. AttractionTools will use the Tool annotation to expose and describe service availability. The ApplicationScoped annotation defines the class's lifecycle, ensuring it survives as long as the application exists.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">package expert.os.demos.travel.assistance.ai;
+```
+package expert.os.demos.travel.assistance.ai;
 
 import dev.langchain4j.agent.tool.Tool;
 import expert.os.demos.travel.assistance.Attraction;
@@ -661,13 +707,13 @@ public class AttractionTools {
             Find attractions available in a city.
             Use this tool when you need to discover places to visit in a destination.
             """)
-    public List&lt;Attraction&gt; attractionsByCity(String city) {
+    public List<Attraction> attractionsByCity(String city) {
 
-        LOGGER.info(() -&gt; "[TOOL] attractionsByCity(city=%s)".formatted(city));
+        LOGGER.info(() -> "[TOOL] attractionsByCity(city=%s)".formatted(city));
 
-        List&lt;Attraction&gt; attractions = service.findByCity(city);
+        List<Attraction> attractions = service.findByCity(city);
 
-        LOGGER.info(() -&gt; "[TOOL] attractionsByCity returned %d attraction(s)".formatted(attractions.size()));
+        LOGGER.info(() -> "[TOOL] attractionsByCity returned %d attraction(s)".formatted(attractions.size()));
 
         return attractions;
     }
@@ -677,16 +723,16 @@ public class AttractionTools {
             Categories include HISTORICAL, NATURE, MUSEUM, ARCHITECTURE, FOOD, and RELIGIOUS.
             Use this tool when the traveler has specific interests or preferences.
             """)
-    public List&lt;Attraction&gt; attractionsByType(
+    public List<Attraction> attractionsByType(
             String city,
             AttractionType type) {
 
-        LOGGER.info(() -&gt; "[TOOL] attractionsByType(city=%s, type=%s)".formatted(city, type));
+        LOGGER.info(() -> "[TOOL] attractionsByType(city=%s, type=%s)".formatted(city, type));
 
-        List&lt;Attraction&gt; attractions =
+        List<Attraction> attractions =
                 service.findByType(city, type);
 
-        LOGGER.info(() -&gt; "[TOOL] attractionsByType returned %d attraction(s)".formatted(attractions.size()));
+        LOGGER.info(() -> "[TOOL] attractionsByType returned %d attraction(s)".formatted(attractions.size()));
 
         return attractions;
     }
@@ -701,15 +747,18 @@ public class AttractionTools {
 
         AttractionType[] values = AttractionType.values();
 
-        LOGGER.info(() -&gt; "[TOOL] attractionTypes returned %d type(s)".formatted(values.length));
+        LOGGER.info(() -> "[TOOL] attractionTypes returned %d type(s)".formatted(values.length));
 
         return values;
     }
-}</pre>
+}
+```
+
 
 CityTools has a similar structure and function, but it exposes and describes services available to AI. This allows us to identify city services that AI can utilize.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">package expert.os.demos.travel.assistance.ai;
+```
+package expert.os.demos.travel.assistance.ai;
 
 import dev.langchain4j.agent.tool.Tool;
 import expert.os.demos.travel.assistance.City;
@@ -732,14 +781,14 @@ public class CityTools {
             Find cities available in a country.
             Use this tool when you need to discover destinations before creating a travel itinerary.
             """)
-    public List&lt;City&gt; citiesByCountry(String country) {
+    public List<City> citiesByCountry(String country) {
 
-        LOGGER.info(() -&gt; "[TOOL] citiesByCountry country=%s"
+        LOGGER.info(() -> "[TOOL] citiesByCountry country=%s"
                 .formatted(country));
 
-        List&lt;City&gt; cities = service.findByCountry(country);
+        List<City> cities = service.findByCountry(country);
 
-        LOGGER.info(() -&gt; "[TOOL] citiesByCountry resultCount=%d cities=%s"
+        LOGGER.info(() -> "[TOOL] citiesByCountry resultCount=%d cities=%s"
                 .formatted(
                         cities.size(),
                         cities.stream()
@@ -754,10 +803,10 @@ public class CityTools {
             List all available cities.
             Use this tool when you need to explore destinations without any country restriction.
             """)
-    public List&lt;City&gt; cities() {
+    public List<City> cities() {
 
-        List&lt;City&gt; cities = service.findAll();
-        LOGGER.info(() -&gt; "[TOOL] cities resultCount=%d cities=%s"
+        List<City> cities = service.findAll();
+        LOGGER.info(() -> "[TOOL] cities resultCount=%d cities=%s"
                 .formatted(
                         cities.size(),
                         cities.stream()
@@ -767,7 +816,9 @@ public class CityTools {
 
         return cities;
     }
-}</pre>
+}
+```
+
 
 With the available tools, the next step is to register all TravelService components that serve as the bridge between Java and AI. This process is similar to the approach used in Jakarta Data and Spring Data, where configuration is based on the interface and a few annotations.
 
@@ -775,7 +826,8 @@ We use the [RegisterAIService](https://github.com/langchain4j/langchain4j-cdi/bl
 
 The travel service provides an interface for communication with the AI. By using annotations, we specify that this interface will be implemented by Langchain, and its tools will be registered with the RegisterAIService annotation. Finally, we define a method operation, where the prompt is detailed in the SystemMessage annotation.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">package expert.os.demos.travel.assistance.ai;
+```
+package expert.os.demos.travel.assistance.ai;
 
 import dev.langchain4j.cdi.spi.RegisterAIService;
 import dev.langchain4j.service.SystemMessage;
@@ -808,31 +860,34 @@ public interface TravelService {
 
             Example:
 
-            &lt;h2&gt;Historical Tour in Portugal&lt;/h2&gt;
+            <h2>Historical Tour in Portugal</h2>
 
-            &lt;h3&gt;Cities&lt;/h3&gt;
-            &lt;ul&gt;
-              &lt;li&gt;Lisbon&lt;/li&gt;
-              &lt;li&gt;Porto&lt;/li&gt;
-            &lt;/ul&gt;
+            <h3>Cities</h3>
+            <ul>
+              <li>Lisbon</li>
+              <li>Porto</li>
+            </ul>
 
-            &lt;h3&gt;Attractions&lt;/h3&gt;
-            &lt;ul&gt;
-              &lt;li&gt;Belém Tower&lt;/li&gt;
-              &lt;li&gt;Jerónimos Monastery&lt;/li&gt;
-            &lt;/ul&gt;
+            <h3>Attractions</h3>
+            <ul>
+              <li>Belém Tower</li>
+              <li>Jerónimos Monastery</li>
+            </ul>
 
-            &lt;p&gt;Perfect for travelers interested in Portuguese history.&lt;/p&gt;
+            <p>Perfect for travelers interested in Portuguese history.</p>
             """)
     String chat(String userMessage);
-}</pre>
+}
+```
+
 
 Step 4: Showing the result with UI {#h2-4-step-4-showing-the-result-with-ui}
 ----------------------------------------------------------------------------
 
 With all services and tools in place, the next step is to present them and enable user interaction. We will use Jakarta Faces, which simplifies development for those without extensive front-end experience. The TravelBean class will display information in HTML. By combining its attributes with Jakarta Expression Language, we will expose getters and setters for use as inputs and outputs on the webpage. We will also define the scope here as View.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">package expert.os.demos.travel.assistance.web;
+```
+package expert.os.demos.travel.assistance.web;
 
 import expert.os.demos.travel.assistance.DataLoader;
 import expert.os.demos.travel.assistance.ai.TravelService;
@@ -898,11 +953,14 @@ public class TravelBean implements Serializable {
         this.userMessage = "Create a food and culture itinerary";
     }
 
-}</pre>
+}
+```
+
 
 If you are running the sample locally [without a certificate](https://thecybersandeep.medium.com/bypassing-ssl-validation-in-a-java-application-via-truststore-f1b9ea42accd), you will need to use an SSL bypass. Please note that this approach is not recommended for production environments.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">package expert.os.demos.travel.assistance.web;
+```
+package expert.os.demos.travel.assistance.web;
 
 import javax.net.ssl.*;
 import java.security.SecureRandom;
@@ -953,175 +1011,181 @@ public final class SSLBypass {
 
     private SSLBypass() {
     }
-}</pre>
+}
+```
+
 
 NOTE: Don't use this class in production; use it for local testing only.
 
 The XHTML page will render our information as HTML. With Jakarta Faces, front-end development becomes more efficient because components manage most operations through straightforward Java methods. We will include the index.html file at src/main/webapp/index.html and remove the existing index.html.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&lt;!DOCTYPE html&gt;
-&lt;html xmlns="http://www.w3.org/1999/xhtml"
+```
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="jakarta.faces.html"
       xmlns:f="jakarta.faces.core"
-      xmlns:p="primefaces"&gt;
+      xmlns:p="primefaces">
 
-&lt;h:head&gt;
-    &lt;title&gt;Travel Planner AI&lt;/title&gt;
-    &lt;h:outputStylesheet library="css" name="travel.css"/&gt;
-&lt;/h:head&gt;
+<h:head>
+    <title>Travel Planner AI</title>
+    <h:outputStylesheet library="css" name="travel.css"/>
+</h:head>
 
-&lt;h:body&gt;
+<h:body>
 
-    &lt;div class="hero"&gt;
-        &lt;div class="hero-title"&gt;
+    <div class="hero">
+        <div class="hero-title">
             ✈️ Travel Planner AI
-        &lt;/div&gt;
+        </div>
 
-        &lt;div class="hero-subtitle"&gt;
+        <div class="hero-subtitle">
             Explore cities, attractions, and build personalized travel itineraries
             using AI, MongoDB, Jakarta Data, and the Planning Pattern.
-        &lt;/div&gt;
-    &lt;/div&gt;
+        </div>
+    </div>
 
-    &lt;div class="main-container"&gt;
+    <div class="main-container">
 
-        &lt;h:form&gt;
+        <h:form>
 
-            &lt;p:card styleClass="chat-card"&gt;
+            <p:card styleClass="chat-card">
 
-                &lt;f:facet name="title"&gt;
+                <f:facet name="title">
                     AI Travel Assistant
-                &lt;/f:facet&gt;
+                </f:facet>
 
-                &lt;f:facet name="subtitle"&gt;
+                <f:facet name="subtitle">
                     Ask anything about destinations, attractions, or travel plans
-                &lt;/f:facet&gt;
+                </f:facet>
 
-                &lt;p:inputTextarea
+                <p:inputTextarea
                         id="prompt"
                         value="#{travelBean.userMessage}"
                         rows="6"
                         autoResize="false"
                         styleClass="prompt-box"
-                        placeholder="Example: Create a two-day historical itinerary in Portugal"/&gt;
+                        placeholder="Example: Create a two-day historical itinerary in Portugal"/>
 
-                &lt;p:spacer height="15"/&gt;
+                <p:spacer height="15"/>
 
-                &lt;p:commandButton
+                <p:commandButton
                         value="Generate Itinerary"
                         icon="pi pi-send"
                         action="#{travelBean.send}"
                         update="answer"
-                        styleClass="ui-button-success"/&gt;
+                        styleClass="ui-button-success"/>
 
-            &lt;/p:card&gt;
+            </p:card>
 
-            &lt;div class="examples"&gt;
+            <div class="examples">
 
-                &lt;p:panel header="Suggested Prompts"&gt;
+                <p:panel header="Suggested Prompts">
 
-                    &lt;div class="grid"&gt;
+                    <div class="grid">
 
-                        &lt;div class="col-12 md:col-3"&gt;
-                            &lt;p:card styleClass="example-card"&gt;
+                        <div class="col-12 md:col-3">
+                            <p:card styleClass="example-card">
 
-                                &lt;p:commandButton
+                                <p:commandButton
                                         value="🌍 Available Cities"
                                         action="#{travelBean.availableCities}"
                                         update="prompt"
                                         process="@this"
-                                        styleClass="ui-button-flat example-button"/&gt;
+                                        styleClass="ui-button-flat example-button"/>
 
-                            &lt;/p:card&gt;
-                        &lt;/div&gt;
+                            </p:card>
+                        </div>
 
-                        &lt;div class="col-12 md:col-3"&gt;
-                            &lt;p:card styleClass="example-card"&gt;
+                        <div class="col-12 md:col-3">
+                            <p:card styleClass="example-card">
 
-                                &lt;p:commandButton
+                                <p:commandButton
                                         value="🏛️ Historical Tour"
                                         action="#{travelBean.historicalTour}"
                                         update="prompt"
                                         process="@this"
-                                        styleClass="ui-button-flat example-button"/&gt;
+                                        styleClass="ui-button-flat example-button"/>
 
-                            &lt;/p:card&gt;
-                        &lt;/div&gt;
+                            </p:card>
+                        </div>
 
-                        &lt;div class="col-12 md:col-3"&gt;
-                            &lt;p:card styleClass="example-card"&gt;
+                        <div class="col-12 md:col-3">
+                            <p:card styleClass="example-card">
 
-                                &lt;p:commandButton
+                                <p:commandButton
                                         value="🎨 Museum Weekend"
                                         action="#{travelBean.museumWeekend}"
                                         update="prompt"
                                         process="@this"
-                                        styleClass="ui-button-flat example-button"/&gt;
+                                        styleClass="ui-button-flat example-button"/>
 
-                            &lt;/p:card&gt;
-                        &lt;/div&gt;
+                            </p:card>
+                        </div>
 
-                        &lt;div class="col-12 md:col-3"&gt;
-                            &lt;p:card styleClass="example-card"&gt;
+                        <div class="col-12 md:col-3">
+                            <p:card styleClass="example-card">
 
-                                &lt;p:commandButton
-                                        value="🍷 Food &amp;amp; Culture"
+                                <p:commandButton
+                                        value="🍷 Food &amp; Culture"
                                         action="#{travelBean.foodAndCulture}"
                                         update="prompt"
                                         process="@this"
-                                        styleClass="ui-button-flat example-button"/&gt;
+                                        styleClass="ui-button-flat example-button"/>
 
-                            &lt;/p:card&gt;
-                        &lt;/div&gt;
+                            </p:card>
+                        </div>
 
-                    &lt;/div&gt;
+                    </div>
 
-                &lt;/p:panel&gt;
+                </p:panel>
 
-            &lt;/div&gt;
+            </div>
 
-            &lt;h:panelGroup
+            <h:panelGroup
                     id="answer"
                     layout="block"
-                    styleClass="answer-container"&gt;
+                    styleClass="answer-container">
 
-                &lt;div class="answer-header"&gt;
-                    &lt;i class="pi pi-sparkles"&gt;&lt;/i&gt;
-                    &lt;span&gt;AI Travel Recommendation&lt;/span&gt;
-                &lt;/div&gt;
+                <div class="answer-header">
+                    <i class="pi pi-sparkles"></i>
+                    <span>AI Travel Recommendation</span>
+                </div>
 
-                &lt;div class="answer-content"&gt;
+                <div class="answer-content">
 
-                    &lt;h:panelGroup rendered="#{empty travelBean.answer}"&gt;
-                        &lt;div class="empty-answer"&gt;
+                    <h:panelGroup rendered="#{empty travelBean.answer}">
+                        <div class="empty-answer">
                             Ask a question or select one of the suggested prompts to generate an itinerary.
-                        &lt;/div&gt;
-                    &lt;/h:panelGroup&gt;
+                        </div>
+                    </h:panelGroup>
 
-                    &lt;h:panelGroup rendered="#{not empty travelBean.answer}"&gt;
-                        &lt;h:outputText
+                    <h:panelGroup rendered="#{not empty travelBean.answer}">
+                        <h:outputText
                                 value="#{travelBean.answer}"
-                                escape="false"/&gt;
-                    &lt;/h:panelGroup&gt;
+                                escape="false"/>
+                    </h:panelGroup>
 
-                &lt;/div&gt;
+                </div>
 
-            &lt;/h:panelGroup&gt;
+            </h:panelGroup>
 
-        &lt;/h:form&gt;
+        </h:form>
 
-        &lt;div class="footer"&gt;
+        <div class="footer">
             Powered by Jakarta EE, PrimeFaces, MongoDB, Jakarta NoSQL, Jakarta Data and AI Planning
-        &lt;/div&gt;
+        </div>
 
-    &lt;/div&gt;
+    </div>
 
-&lt;/h:body&gt;
-&lt;/html&gt;</pre>
+</h:body>
+</html>
+```
+
 
 Finally, the beauty with the CSS, where we will create at src/main/webapp/resources/css/travel.css:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">body {
+```
+body {
     margin: 0;
     background: #f5f7fa;
     font-family: Inter, Arial, sans-serif;
@@ -1229,18 +1293,26 @@ Finally, the beauty with the CSS, where we will create at src/main/webapp/resour
     text-align: center;
     padding: 40px;
     font-style: italic;
-}</pre>
+}
+```
+
 
 Step 5: Execute the application {#h2-5-step-5-execute-the-application}
 ----------------------------------------------------------------------
 
 To complete the process, package the application and start it using the embedded GlassFish plugin:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">mvn clean install &amp;&amp; mvn embedded-glassfish:run</pre>
+```
+mvn clean install && mvn embedded-glassfish:run
+```
+
 
 Next, open the application in your browser:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">http://localhost:8080/</pre>
+```
+http://localhost:8080/
+```
+
 
 Conclusion {#h2-6-conclusion}
 -----------------------------

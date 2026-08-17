@@ -43,8 +43,9 @@ Another common problem is dealing with cloud-synced directories which are gettin
 
 From experience, these issues are pretty common and affect around 1 out of 10 users at some point. To remedy them, you can call a method like this on application startup:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public static void checkDirectoryPermissions() {
-    var dataDirectory = Path.of("&lt;data dir&gt;"); // Usually ~/myapp or &lt;User Home&gt;\myapp
+```java
+public static void checkDirectoryPermissions() {
+    var dataDirectory = Path.of("<data dir>"); // Usually ~/myapp or <User Home>\myapp
     try {
         Files.createDirectories(dataDirectory);
         var testDirectory = dataDirectory.resolve("permissions_check");
@@ -58,7 +59,9 @@ From experience, these issues are pretty common and affect around 1 out of 10 us
                 + ". Please make sure that you have the appropriate permissions and no Antivirus program is blocking the access. "
                 + "In case you use cloud storage, verify that your cloud storage is working and you are logged in."), e);
     }
-}</pre>
+}
+```
+
 
 This check has drastically reduced reported issues of this kind for us as users now understand why the access is failing. Of course, you can also adapt it to fit your needs and targeted directories. You can make use of this approach in basically all desktop applications, it is not specific to Java. It is very simple but very effective.
 
@@ -73,14 +76,15 @@ It doesn't help the case that these longstanding issues have never been properly
 
 On Linux, any Java tray icon will have a completely white background and no title. Why? Because there is no proper implementation to determine the appropriate background color, and it is therefore not set. The same goes for the tray icon title, which is also not set properly. However, you can use reflection to manually set the background color to be at least transparent and fix the title. This is not publicly exposed because it is considered an implementation detail. The following code will make your tray icon look much better on all Linux systems:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">var trayIcon = new TrayIcon(&lt;image&gt;);
+```java
+var trayIcon = new TrayIcon(<image>);
 SystemTray.getSystemTray().add(trayIcon);
 
 // Use your own implementation here to check
 // for the OS, you probably have one for that
 if (isLinux()) {
     // invokeLater as we have to give the tray time to set up the peer
-    EventQueue.invokeLater(() -&gt; {
+    EventQueue.invokeLater(() -> {
         try {
             Field peerField;
             peerField = TrayIcon.class.getDeclaredField("peer");
@@ -106,24 +110,32 @@ if (isLinux()) {
             handleError(e);
         }
     });
-}</pre>
+}
+```
+
 
 To make this work, you also have to add this to your JVM args for Linux builds:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">--add-opens "java.desktop/sun.awt.X11=my.module"</pre>
+```
+--add-opens "java.desktop/sun.awt.X11=my.module"
+```
+
 
 ### Choosing the right resolution {#h3-5-choosing-the-right-resolution}
 
 Furthermore, to improve the image look, it can be pretty useful to use the proper image sizes for the tray icon to avoid any image scaling taking place. Of course, it doesn't tell you what sizes the implementation uses, so you would have to figure them out yourself. These are the used sizes:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">// Use your own OS check here
+```java
+// Use your own OS check here
 var image = switch (OsType.getLocal()) {
     // Switch expression with sealed class and
     // unnamed local variables (Java 21 preview feature)
-    case OsType.Windows _ -&gt; "img/logo/logo_16x16.png";
-    case OsType.Linux _ -&gt; "img/logo/logo_24x24.png";
-    case OsType.MacOs _ -&gt; "img/logo/logo_macos_tray_24x24.png";
-};</pre>
+    case OsType.Windows _ -> "img/logo/logo_16x16.png";
+    case OsType.Linux _ -> "img/logo/logo_24x24.png";
+    case OsType.MacOs _ -> "img/logo/logo_macos_tray_24x24.png";
+};
+```
+
 
 The images should also be adapted in terms of their padding. On Windows, the input image looks good without any padding, but on macOS you have to apply around 4px of padding to the tray icon image to make it look like other macOS icons. Furthermore, many tray icons are usually designed as black and white images, so you might have to convert your colorful logo to some form of grayscale image to integrate them better into the existing tray.
 
@@ -152,18 +164,22 @@ Furthermore, you don't have to replace any dependency artifacts. This is handled
 
 The implementation strategy is simple if you want to use it in your own project: For a better separation, create a separate file like `modules.gradle`, and add the following to your root `build.gradle` if you're dealing with multiple Gradle subprojects:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="groovy">plugins {
+```groovy
+plugins {
     id 'org.gradlex.extra-java-module-info' version '1.6' apply false
 }
 
-allprojects { p -&gt;
+allprojects { p ->
     apply plugin: 'org.gradlex.extra-java-module-info'
     apply from: "$rootDir/modules.gradle"
-}</pre>
+}
+```
+
 
 Then define the custom module information for non-modular dependencies in your `modules.gradle` like this:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">extraJavaModuleInfo {
+```java
+extraJavaModuleInfo {
     // groupId:artifactId, moduleName
     module("org.apache.commons:commons-lang3", "org.apache.commons.lang3") {
         exportAllPackages()
@@ -181,11 +197,16 @@ Then define the custom module information for non-modular dependencies in your `
     }
 
     ...
-}</pre>
+}
+```
+
 
 Whenever you now refer to any listed dependency, e.g. with
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">implementation 'org.apache.commons:commons-lang3:&lt;version&gt;'</pre>
+```
+implementation 'org.apache.commons:commons-lang3:<version>'
+```
+
 
 , it will automatically pick up the generated module. And with only that you're already good to go! With all dependencies now automatically modularized, you never have to worry about the classpath ever again. It took only 75 lines to fully modularize all 10 non-modular dependencies of [XPipe](https://github.com/xpipe-io/xpipe) as you can see in the [modules.gradle](https://github.com/xpipe-io/xpipe/blob/1.7.4/modules.gradle). I was even able to integrate [Flexmark](https://github.com/vsch/flexmark-java), which has split packages across like 15 dependency jars.
 

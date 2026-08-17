@@ -64,7 +64,7 @@ I started working with web development in 1998 and with Java in 1999, and I have
 
 Since around 2016, I started working more with architecture and performance optimizations and similar more specialized tasks. I am now working as an AWS solution architect at KeyCore - a Danish consulting company focused on AWS architecture and solutions.  
 
-*** ** * ** ***
+
 
 **Bazlur: Could you share your perspective on the current state of Java and its future?**
 
@@ -125,7 +125,7 @@ I don't feel Java is "perfect" in any of the areas it addresses. Within each of 
 
 I am not "religious" about Java, though. The .NET ecosystem is doing quite well too. I am also looking a bit into more native-style programming languages such as C, D and Rust - just to get a feel for what is happening within these ecosystems. The LLVM and Web Assembly technologies make many of this language easier to compile to different platforms, too - so cross-platform support is expanding in general. I am also using JavaScript, Python and TypeScript from time to time in my job as an AWS solution architect.  
 
-*** ** * ** ***
+
 
 Conclusion: {#h2-1-conclusion}
 ------------------------------

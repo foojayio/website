@@ -53,36 +53,46 @@ Quarkus relies on [JSR 330](http://javax-inject.github.io/javax-inject/). Howeve
 
 For example, with Quarkus, you can skip the `@Produces` annotation on a producer method if it's already annotated with one of the scope annotations, *e.g.* , `@Singleton`. Here's the code to create the message digest:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="kotlin">class MarvelFactory {
+```kotlin
+class MarvelFactory {
 
     @Singleton
     fun digest(): MessageDigest = MessageDigest.getInstance("MD5")
-}</pre>
+}
+```
+
 
 Controller configuration {#h2-2-controller-configuration}
 ---------------------------------------------------------
 
 A lot of Quarkus relies on Jakarta EE specifications. As such, the most straightforward path to creating controllers is JAX-RS. We can create a "controller" with the following code:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="kotlin">@Path("/")
+```kotlin
+@Path("/")
 class MarvelController {
 
     @GET
     fun characters() = Response.accepted()
-}</pre>
+}
+```
+
 
 Because the developers of Quarkus also worked on [Vert.x](https://vertx.io/), the former also offers a plugin that integrates the latter. Vert.x is full *reactive* and provides the concept of *routes*. With Quarkus, you can annotate methods to mark them as routes. One can migrate the above code to routes:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="kotlin">@Singleton
+```kotlin
+@Singleton
 class MarvelController {
 
      @Routes
      fun characters() = Response.accepted()
-}</pre>
+}
+```
+
 
 Alternatively, one can prefer programmatic route registration:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="kotlin">@Singleton
+```kotlin
+@Singleton
 class MarvelRoutes {
 
     fun get(@Observes router: Router) {       // 1
@@ -92,7 +102,9 @@ class MarvelRoutes {
                 .send()                       // 2
         }
     }
-}</pre>
+}
+```
+
 
 1. Observe the `Router` "event": it's fired once at startup time.
 2. Send the empty response; return a `Future`
@@ -123,13 +135,16 @@ Then, I realized the uniqueness of its approach. Reactive programming is pretty 
 
 I'm now convinced to leave it a chance. Let's use Mutiny to make a request:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="kotlin">val client = WebClient.create(vertx)                                  // 1
+```kotlin
+val client = WebClient.create(vertx)                                  // 1
 client.getAbs("https://gateway.marvel.com:443/v1/public/characters")  // 2
       .send()                                                         // 3
       .onItem()                                                       // 4
       .transform { it.bodyAsString() }                                // 5
       .await()                                                        // 6
-      .indefinitely()                                                 // 7</pre>
+      .indefinitely()                                                 // 7
+```
+
 
 1. Create the client by wrapping a `Vertx` instance. Quarkus provides one and can inject it for you
 2. Create a new instance of a `GET` HTTP request
@@ -141,7 +156,8 @@ client.getAbs("https://gateway.marvel.com:443/v1/public/characters")  // 2
 
 To get parameters from the coming request and forward them is straightforward with the routing context:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="kotlin">router.get("/").handler { rc -&gt;
+```kotlin
+router.get("/").handler { rc ->
     client.getAbs("https://gateway.marvel.com:443/v1/public/characters")
         .queryParamsWith(rc.request())
         .send()
@@ -150,14 +166,16 @@ To get parameters from the coming request and forward them is straightforward wi
         .await()
         .indefinitely()
 
-fun HttpRequest&lt;Buffer&gt;.queryParamsWith(request: HttpServerRequest) =
+fun HttpRequest<Buffer>.queryParamsWith(request: HttpServerRequest) =
     apply {
-        arrayOf("limit", "offset", "orderBy").forEach { param -&gt;
+        arrayOf("limit", "offset", "orderBy").forEach { param ->
             request.getParam(param)?.let {
                 addQueryParam(param, it)
             }
         }
-    }</pre>
+    }
+```
+
 
 Parameterization {#h2-4-parameterization}
 -----------------------------------------
@@ -175,13 +193,17 @@ Note that it's not possible to use command-line parameters for parameterization.
 
 Unlike its siblings, the web client requires you to split the URL into three components, host, port, and whether to use SSL.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="kotlin">app.marvel.server.ssl=true
+```kotlin
+app.marvel.server.ssl=true
 app.marvel.server.host=gateway.marvel.com
-app.marvel.server.port=443</pre>
+app.marvel.server.port=443
+```
+
 
 Because of this, we need to be a bit creative regarding the configuration classes:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="kotlin">@Singleton                                                                    // 1
+```kotlin
+@Singleton                                                                    // 1
 data class ServerProperties(
     @ConfigProperty(name = "app.marvel.server.ssl") val ssl: Boolean,         // 2
     @ConfigProperty(name = "app.marvel.server.host") val host: String,        // 2
@@ -193,7 +215,9 @@ data class MarvelProperties(
     val server: ServerProperties,                                             // 3
     @ConfigProperty(name = "app.marvel.apiKey") val apiKey: String,           // 2
     @ConfigProperty(name = "app.marvel.privateKey") val privateKey: String    // 2
-)</pre>
+)
+```
+
 
 1. Configuration classes are regular beans.
 2. Quarkus uses the Microprofile Configuration specification. `@ConfigProperty` sets the property key to read from. It's unwieldy to repeat the same prefix on all keys. Thus, Microprofile offers the `@ConfigProperties` to set the prefix on the class. However, such a class needs a zero-arg constructor, which doesn't work with Kotlin's data classes.
@@ -212,13 +236,14 @@ But IMHO, the added value of Quarkus in a testing context lies in how it defines
 
 With only one interface and one annotation, one can define a resource, *e.g.*, a mock server, start it before tests and stop it after. Let's do that:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="kotlin">class MockServerResource : QuarkusTestResourceLifecycleManager {
+```kotlin
+class MockServerResource : QuarkusTestResourceLifecycleManager {
 
     private val mockServer = MockServerContainer(
         DockerImageName.parse("mockserver/mockserver")
     )
 
-    override fun start(): Map&lt;String, String&gt; {
+    override fun start(): Map<String, String> {
         mockServer.start()
         val mockServerClient = MockServerClient(
             mockServer.containerIpAddress,
@@ -244,11 +269,14 @@ With only one interface and one annotation, one can define a resource, *e.g.*, a
     }
 
     override fun stop() = mockServer.stop()
-}</pre>
+}
+```
+
 
 Now, we can use this server inside our test:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="kotlin">@QuarkusTest
+```kotlin
+@QuarkusTest
 @QuarkusTestResource(MockServerResource::class)
 class QuarkusApplicationTest {
 
@@ -268,7 +296,9 @@ class QuarkusApplicationTest {
         assertEquals(1, model.data.count)
         assertEquals("Anita Blake", model.data.results.first().name)
     }
-}</pre>
+}
+```
+
 
 1. Quarkus integrates the RestAssured API. It uses some of Kotlin's keywords, so we need to escape them with back-ticks.
 
@@ -290,18 +320,27 @@ If you don't like this approach, Quarkus provides an [integration point](https:/
 
 To create a GraalVM native binary, one uses the following command:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="shell">./mvnw package -Pnative -Dquarkus.native.container-build=true</pre>
+```bash
+./mvnw package -Pnative -Dquarkus.native.container-build=true
+```
+
 
 You can find the resulting native executable in the `target` folder.
 
 To wrap it in a Docker container, use:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="shell">docker build -f src/main/docker/Dockerfile.native -t native-quarkus .</pre>
+```bash
+docker build -f src/main/docker/Dockerfile.native -t native-quarkus .
+```
+
 
 Note that the Docker container would fail to start if you ran the first command on a non-Linux platform. To fix this issue, one needs to add an option:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="shell">./mvnw package -Pnative -Dquarkus.native.container-build=true \
-                        -Dquarkus.container-image.build=true</pre>
+```bash
+./mvnw package -Pnative -Dquarkus.native.container-build=true \
+                        -Dquarkus.container-image.build=true
+```
+
 
 > `quarkus.container-image.build=true` instructs Quarkus to create a container-image using the final application artifact (which is the native executable in this case).
 >
@@ -311,19 +350,25 @@ For a smaller image, we can use the distroless distribution.
 
 The result is the following:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">REPOSITORY                 TAG       IMAGE ID         CREATED         SIZE
+```
+REPOSITORY                 TAG       IMAGE ID         CREATED         SIZE
 native-quarkus-distroless  latest    7a13aef3bcd2     2 hours ago     67.9MB
-native-quarkus             latest    6aba7346d987     2 hours ago     148MB</pre>
+native-quarkus             latest    6aba7346d987     2 hours ago     148MB
+```
+
 
 Let's dive:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">┃ ● Layers ┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+```
+┃ ● Layers ┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 Cmp   Size  Command
     2.4 MB  FROM 58f4b2390f4a511                                       // 1
      18 MB  bazel build ...                                            // 2
     2.3 MB  bazel build ...                                            // 2
     113 kB  #(nop) COPY file:b8552793e0627404932d516d478842f7f9d5d5926 // 3
-     45 MB  COPY target/*-runner /application # buildkit               // 4</pre>
+     45 MB  COPY target/*-runner /application # buildkit               // 4
+```
+
 
 1. Parent distroless image
 2. Add system libraries, obviously via the Bazel build system
@@ -332,13 +377,19 @@ Cmp   Size  Command
 
 We can now run the container:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="shell">docker run -it -p8080:8080 native-quarkus-distroless</pre>
+```bash
+docker run -it -p8080:8080 native-quarkus-distroless
+```
+
 
 And the following URLs work as expected:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="shell">curl localhost:8080
+```bash
+curl localhost:8080
 curl 'localhost:8080?limit=1'
-curl 'localhost:8080?limit=1&amp;offset=50'</pre>
+curl 'localhost:8080?limit=1&offset=50'
+```
+
 
 Conclusion {#h2-7-conclusion}
 -----------------------------

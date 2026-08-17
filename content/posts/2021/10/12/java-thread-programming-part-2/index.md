@@ -27,7 +27,8 @@ Let's assume we are going to build a web server. For the sake of the example, le
 
 OK, enough talk, let's see the code!
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">package com.bazlur;
+```java
+package com.bazlur;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -61,7 +62,7 @@ public class SingleThreadedServer {
         if (isValid(line)) {
           var wordCount = mostFrequentWordService.mostFrequentWord(line)
                   .stream()
-                  .map(counter -&gt; counter.word() + ": " + counter.count())
+                  .map(counter -> counter.word() + ": " + counter.count())
                   .collect(Collectors.joining("\n"));
           out.println(wordCount);
         } else if (line.contains("quit")) {
@@ -89,7 +90,9 @@ public class SingleThreadedServer {
   public static void main(String[] args) throws IOException {
     new SingleThreadedServer(2222);
   }
-}</pre>
+}
+```
+
 
 Let's walk through the code first. In the above code, a `ServerSocket` starts at a port and waits in a loop for the clients to connect. The `handle()` method is the most important one. It gets a Socket object and then talks to the client. If a client sends a valid URL, It calls a service, `MostFrequentWordService`, to get the most frequent words.
 
@@ -105,7 +108,8 @@ We can solve this problem quite quickly, if we turn this single-threaded program
 
 Yes, that's the trick. Let's do it:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public class MultiThreadedServer {
+```java
+public class MultiThreadedServer {
   private final MostFrequentWordService mostFrequentWordService = new MostFrequentWordService();
 
   public MultiThreadedServer(int port) throws IOException {
@@ -113,13 +117,15 @@ Yes, that's the trick. Let's do it:
     while (true) {
       var socket = serverSocket.accept();
 
-      var thread = new Thread(() -&gt; handle(socket));
+      var thread = new Thread(() -> handle(socket));
       thread.start();
     }
   }
 
   //rest of the code. 
-}</pre>
+}
+```
+
 
 Now, we can connect multiple clients at once, and serve them all simultaneously:
 
@@ -129,7 +135,8 @@ Now that we understand the benefits of using threads in Java, we will dig a bit 
 
 And in case you are interested in how I wrote the "MostFrequentWordService", here it is:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">package com.bazlur;
+```java
+package com.bazlur;
 
 import org.jsoup.Jsoup;
 
@@ -147,8 +154,8 @@ record WordCount(String word, long count) {
 public class MostFrequentWordService {
   public List mostFrequentWord(String url) throws IOException {
     var wordCount = Arrays.stream(getWords(url))
-            .filter(value -&gt; !value.isEmpty())
-            .filter(value -&gt; value.length() &gt; 3)
+            .filter(value -> !value.isEmpty())
+            .filter(value -> value.length() > 3)
             .map(String::toLowerCase)
             .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
 
@@ -156,7 +163,7 @@ public class MostFrequentWordService {
             .stream()
             .sorted(Map.Entry.comparingByValue(Comparator.reverseOrder()))
             .limit(5)
-            .map(entry -&gt; new WordCount(entry.getKey(), entry.getValue()))
+            .map(entry -> new WordCount(entry.getKey(), entry.getValue()))
             .collect(Collectors.toList());
   }
 
@@ -167,6 +174,8 @@ public class MostFrequentWordService {
 
     return content.split("[^a-zA-Z]");
   }
-}</pre>
+}
+```
+
 
 That's it for today!

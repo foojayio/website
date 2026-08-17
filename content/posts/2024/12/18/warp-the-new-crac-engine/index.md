@@ -32,9 +32,12 @@ Warp is a new engine available in **Azul Zulu** builds that can fully replace CR
 
 In the last release, CRIU is still the default, but all you need to do in order to switch to Warp is one VM option: `-XX:CRaCEngine=warp`. So your command line would look like
 
-<pre class="EnlighterJSRAW EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">java -XX:CRaCEngine=warp -XX:CRaCCheckpointTo=/path/to/image_dir -jar my-app.jar
+```
+java -XX:CRaCEngine=warp -XX:CRaCCheckpointTo=/path/to/image_dir -jar my-app.jar
 ...
-java -XX:CRaCEngine=warp -XX:CRaCRestoreFrom=/path/to/image_dir</pre>
+java -XX:CRaCEngine=warp -XX:CRaCRestoreFrom=/path/to/image_dir
+```
+
 
 and that's it. Of course you can check more options [in the documentation](https://docs.azul.com/core/crac/crac-vm-options).
 ![](lcars-1.png)
@@ -44,21 +47,22 @@ Warp enters Docker {#h2-0-warp-enters-docker}
 
 People sometimes want to perform the warmup and checkpoint as a part of their container build. While it is possible [with BuildKit and privileged build](https://github.com/CRaC/example-spring-boot?tab=readme-ov-file#checkpoint-as-dockerfile-build-step) with Warp it becomes much easier: let's see an example using [CRaCed Spring Boot application](https://github.com/CRaC/example-spring-boot) and two-stage Dockerfile:
 
-<pre class="EnlighterJSRAW EnlighterJSRAW" data-enlighter-language="dockerfile" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group=""># syntax=docker/dockerfile:1.7-labs
+```dockerfile
+# syntax=docker/dockerfile:1.7-labs
 ARG BASE_IMAGE=azul/zulu-openjdk:23-jdk-crac-latest
 
 FROM $BASE_IMAGE AS builder
 ENV ENDPOINT=http://localhost:8080
-RUN apt-get update &amp;&amp; apt-get install -y curl maven siege wget
+RUN apt-get update && apt-get install -y curl maven siege wget
 ADD . /example-spring-boot # Build the application
-RUN cd /example-spring-boot &amp;&amp; mvn -B install &amp;&amp; \
+RUN cd /example-spring-boot && mvn -B install && \
     mv target/example-spring-boot-0.0.1-SNAPSHOT.jar /example-spring-boot.jar
 # We use here-doc syntax to inline the script that will
 # start the application, warm it up and checkpoint
-RUN &lt;&lt;END_OF_SCRIPT
+RUN <<END_OF_SCRIPT
 #!/bin/bash
 $JAVA_HOME/bin/java -XX:CPUFeatures=generic -XX:CRaCEngine=warp \
-    -XX:CRaCCheckpointTo=/cr -jar /example-spring-boot.jar &amp;
+    -XX:CRaCCheckpointTo=/cr -jar /example-spring-boot.jar &
 PID=$!
 # Wait until the connection is opened
 until curl --output /dev/null --silent --head --fail $ENDPOINT; do
@@ -77,7 +81,9 @@ FROM $BASE_IMAGE
 ENV PATH="$PATH:$JAVA_HOME/bin"
 COPY --from=builder /cr /cr
 COPY --from=builder /example-spring-boot.jar /example-spring-boot.jar
-CMD [ "java", "-XX:CRaCEngine=warp", "-XX:CRaCRestoreFrom=/cr" ]</pre>
+CMD [ "java", "-XX:CRaCEngine=warp", "-XX:CRaCRestoreFrom=/cr" ]
+```
+
 
 To boldly hack what no one hacked before {#h2-1-to-boldly-hack-what-no-one-hacked-before}
 -----------------------------------------------------------------------------------------
@@ -113,11 +119,14 @@ In this concurrent memory loading mode, we don't fetch the missing pages lazily:
 
 When the restore completes the profile is analyzed and the checkpoint image is reordered to provide the data that was needed early sooner. You can control this with `-XX:CRaCOptimizeImage=N` where `N` is the number of these training runs. This is how your commands would look like:
 
-<pre class="EnlighterJSRAW EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">java -XX:CRaCEngine=warp -XX:CRaCCheckpointTo=/path/to/image_dir \
+```
+java -XX:CRaCEngine=warp -XX:CRaCCheckpointTo=/path/to/image_dir \
     -XX:+CRaCImageCompression -XX:CRaCOptimizeImage=3 -jar my-app.jar
 ...
 java -XX:CRaCEngine=warp -XX:CRaCRestoreFrom=/path/to/image_dir \
-    -XX:+CRaCConcurrentMemoryLoading</pre>
+    -XX:+CRaCConcurrentMemoryLoading
+```
+
 
 Currently, these extra features are available only to Azul customers.
 

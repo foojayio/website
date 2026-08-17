@@ -54,10 +54,16 @@ Code Cache stores the JITed code. This is an off-heap space, so GC does not recl
 
 When you reach the limit, a warning is emitted on the standard output:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">Java HotSpot(TM) Server VM warning: CodeCache is full. Compiler has been disabled"</pre>
+```
+Java HotSpot(TM) Server VM warning: CodeCache is full. Compiler has been disabled"
+```
+
 
 with -XX:+PrintCompilation you will also get:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">7383 COMPILE SKIPPED: code cache is full</pre>
+```
+7383 COMPILE SKIPPED: code cache is full
+```
+
 
 **Note:** Used with permission and thanks --- [originally written and published by Jean-Philippe Bempel](https://jpbempel.github.io/2012/11/15/the-useful-jvm-options.html).

@@ -41,7 +41,8 @@ Building and storing the image {#h2-0-building-and-storing-the-image}
 
 Regardless of your target infrastructure, you must build the app's image. I won't use anything fancy. For this reason, I'll only comment on the workflow steps:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml">jobs:
+```yaml
+jobs:
   build:
     runs-on: ubuntu-latest
     permissions:
@@ -77,7 +78,9 @@ Regardless of your target infrastructure, you must build the app's image. I won'
           labels: ${{ steps.meta.outputs.labels }}                           #10
           push: true
           cache-from: type=gha
-          cache-to: type=gha,mode=max</pre>
+          cache-to: type=gha,mode=max
+```
+
 
 1. For the demo, let's keep the image only for a short period
 2. BuildX is not necessary, but it makes the push step later more straightforward
@@ -101,20 +104,24 @@ The no-brainer road is to use an autoscaler. For example, the GKE offers a [buil
 
 In the context of this blog post, I chose the challenging road, and because I had no dev team but myself, I started low and upsized. Assuming you have enabled the Kubernetes Engine API, the following command creates a "minimal cluster" in my context of a single PR:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash">time gcloud container clusters create "minimal-cluster" \
+```bash
+time gcloud container clusters create "minimal-cluster" \
   --project "vcluster-pipeline" \
   --zone "europe-west9" --num-nodes "1" \
   --node-locations "europe-west9-a" --machine-type "e2-standard-4" \
   --network "projects/vcluster-pipeline/global/networks/default" \
   --subnetwork "projects/vcluster-pipeline/regions/europe-west9/subnetworks/default" \
   --cluster-ipv4-cidr "/17" --release-channel "regular" \
-  --enable-ip-alias --no-enable-basic-auth --no-enable-google-cloud-access</pre>
+  --enable-ip-alias --no-enable-basic-auth --no-enable-google-cloud-access
+```
+
 
 You'll probably need to change your zone---I'm in Europe. Note that I'm using a single node to reduce costs further: don't do this in real-world scenarios! Kubernetes clusters have multiple nodes for a reason.
 
 The above command produces the following output:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">Creating cluster minimal-cluster in europe-west9... Cluster is being health-checked (Kubernetes Control Plane is healthy)...done.
+```
+Creating cluster minimal-cluster in europe-west9... Cluster is being health-checked (Kubernetes Control Plane is healthy)...done.
 Created [https://container.googleapis.com/v1/projects/vcluster-pipeline/zones/europe-west9/clusters/minimal-cluster].
 To inspect the contents of your cluster, go to: https://console.cloud.google.com/kubernetes/workload_/gcloud/europe-west9/minimal-cluster?project=vcluster-pipeline
 kubeconfig entry generated for minimal-cluster.
@@ -129,7 +136,9 @@ STATUS: RUNNING
 
 real    5m21.822s
 user    0m3.434s
-sys     0m0.224s</pre>
+sys     0m0.224s
+```
+
 
 Astute readers may have noticed that I used the Linux `time` command to wrap the cluster instance creation. For experimentation purposes, I ran the command several times. The time it takes to create a cluster ranges from 5 to 7 minutes.
 
@@ -241,22 +250,28 @@ Working within the GitHub workflow {#h2-3-working-within-the-github-workflow}
 
 Using the authentication setup above within the GitHub workflow requires the following small step:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml">- name: Authenticate on Google Cloud
+```yaml
+- name: Authenticate on Google Cloud
   uses: google-github-actions/auth@v2
   with:
     workload_identity_provider: projects/49535911505/locations/global/workloadIdentityPools/github-actions/providers/github-provider #1
-    service_account: <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="37505e435f42551a5654435e5859447741545b42444352451a475e47525b5e5952195e565a1950445245415e5452565454584259431954585a">[email&nbsp;protected]</a> #2</pre>
+    service_account: <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="37505e435f42551a5654435e5859447741545b42444352451a475e47525b5e5952195e565a1950445245415e5452565454584259431954585a">[email protected]</a> #2
+```
+
 
 1. The full path to the WIPP we created above. For reference, the pattern is `projects/$PROJECT_ID/locations/global/workloadIdentityPools/$WORKLOAD_ID_POOL_NAME/providers/$WORKLOAD_ID_POOL_PROVIDER_NAME`
 2. The "email" of the SA we created
 
 The above step authenticates the GitHub workflow on Google Cloud. However, we must also interact with the GKE instance, which sits at another abstraction level. We can leverage the above to create a `kubeconfig`, which transparently can be used in all further GKE interactions.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml">- name: Set GKE credentials
+```yaml
+- name: Set GKE credentials
   uses: google-github-actions/get-gke-credentials@v2
   with:
     cluster_name: minimal-cluster                                       #1
-    location: europe-west9                                              #2</pre>
+    location: europe-west9                                              #2
+```
+
 
 1. Name of the cluster we want to use, *i.e.*, the one we created above
 2. Its location
@@ -279,7 +294,8 @@ Create a Kubernetes manifest {#h2-4-create-a-kubernetes-manifest}
 
 I'll keep the manifest pretty simple in the context of this blog post and limit myself to a single pod `Deployment` and a load-balancer `Service`.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml">apiVersion: apps/v1
+```yaml
+apiVersion: apps/v1
 kind: Deployment                                                              #1
 metadata:
   name: vcluster-pipeline
@@ -316,7 +332,9 @@ spec:
     - port: 8080
       targetPort: 8080                                                        #6
   selector:
-    app: vcluster-pipeline</pre>
+    app: vcluster-pipeline
+```
+
 
 1. Our boring single-pod `Deployment`
 2. First challenge: each PR stores a different image, with the tag being the GitHub run ID.
@@ -337,13 +355,16 @@ When building the image, we set the image name to a constant, `vcluster-pipeline
 
 In the same directory as the manifest, we set the customization file:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml">apiVersion: kustomize.config.k8s.io/v1beta1
+```yaml
+apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
   - vcluster-pipeline.yaml
 images:
   - name: ghcr.io/ajavageek/vcluster-pipeline                                 #1
-    newTag: github.run_id</pre>
+    newTag: github.run_id
+```
+
 
 1. Instruct Kustomize to replace the tag with the *static* value here.
 
@@ -351,10 +372,13 @@ The string `github.run_id` is only a placeholder. We need to change it to the ac
 
 In the workflow, we apply the manifest like this:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml">- name: Edit image tag with GitHub Run ID
-  run: (cd kubernetes &amp;&amp; kustomize edit set image ghcr.io/ajavageek/vcluster-pipeline=:${{github.run_id}}) #1
+```yaml
+- name: Edit image tag with GitHub Run ID
+  run: (cd kubernetes && kustomize edit set image ghcr.io/ajavageek/vcluster-pipeline=:${{github.run_id}}) #1
 - name: Deploy Kustomized manifest to Google Cloud
-  run: kubectl apply -k kubernetes                                      #2</pre>
+  run: kubectl apply -k kubernetes                                      #2
+```
+
 
 1. Change the image to the full registry + name + *dynamic* image tag in the Kustomization file
 2. Apply the manifest with Kustomize
@@ -368,14 +392,17 @@ Our next challenge is to access the private GitHub registry from the GKE instanc
 
 That being settled, we should follow the nominal path: create a Kubernetes secret that allows GKE to download the image.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml">- name: Create Docker Registry Secret
+```yaml
+- name: Create Docker Registry Secret
   run: |
     kubectl create secret docker-registry github-docker-registry \      #1
       --docker-server=${{ env.REGISTRY }} \                             #2
-      --docker-email="<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="5937362b3c293520193e302d312c3b773a3634">[email&nbsp;protected]</a>" \                             #3
+      --docker-email="<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="5937362b3c293520193e302d312c3b773a3634">[email protected]</a>" \                             #3
       --docker-username="${{ github.actor }}" \                         #4
       --docker-password="${{ secrets.GITHUB_TOKEN }}" \                 #5
-      --dry-run=client -o yaml | kubectl apply -f -                     #6</pre>
+      --dry-run=client -o yaml | kubectl apply -f -                     #6
+```
+
 
 1. `kubectl create secret docker-registry` is the command to create a Docker registry secret. `github-docker-registry` is the value we gave in the `Deployment` manifest to the `imagePullSecret`
 2. We set the registry again, a reason why it's a good idea to make it an environment variable, in case we migrate
@@ -389,31 +416,40 @@ Get the PostgreSQL connection parameters {#h2-7-get-the-postgresql-connection-pa
 
 We should first install PostgreSQL. To ease our lives, we can rely on a Helm Chart.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml">- name: Schedule PostgreSQL
-  run: helm install postgresql oci://registry-1.docker.io/bitnamicharts/postgresql --values kubernetes/values.yaml</pre>
+```yaml
+- name: Schedule PostgreSQL
+  run: helm install postgresql oci://registry-1.docker.io/bitnamicharts/postgresql --values kubernetes/values.yaml
+```
+
 
 The `values.yaml` file is tailored for simplicity.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml">fullnameOverride: postgres
+```yaml
+fullnameOverride: postgres
 auth:
   user: postgres
   password: root
   postgresPassword: roottoo
 primary:
   persistence:
-    enabled: false                                                            #1</pre>
+    enabled: false                                                            #1
+```
+
 
 1. In the context of testing a PR, keeping everything in the pod isn't a bad idea, but your mileage may vary
 
 At this point, we add a step to create the necessary `ConfigMap` from the data in the file:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">- name: Set config map from values.yaml
+```
+- name: Set config map from values.yaml
   run: |
     kubectl create configmap postgres-config \
       --from-literal="SPRING_FLYWAY_URL=jdbc:postgresql://$(yq .fullnameOverride kubernetes/values.yaml):5432/" \
       --from-literal="SPRING_R2DBC_URL=r2dbc:postgresql://$(yq .fullnameOverride kubernetes/values.yaml):5432/" \
       --from-literal="SPRING_R2DBC_USERNAME=$(yq .auth.user kubernetes/values.yaml)" \
-      --from-literal="SPRING_R2DBC_PASSWORD=$(yq .auth.password kubernetes/values.yaml)"</pre>
+      --from-literal="SPRING_R2DBC_PASSWORD=$(yq .auth.password kubernetes/values.yaml)"
+```
+
 
 Getting the external deployed app IP {#h2-8-getting-the-external-deployed-app-ip}
 ---------------------------------------------------------------------------------
@@ -422,15 +458,19 @@ We have installed the PostgreSQL Helm Chart at this stage and applied our app's 
 
 The naive approach is to query it and set an environment variable:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml">- name: Retrieve LoadBalancer external IP
+```yaml
+- name: Retrieve LoadBalancer external IP
   run: |
     APP_BASE_URL="$(kubectl get service vcluster-pipeline -o jsonpath='{.status.loadBalancer.ingress[0].ip}'):8080"
-    echo "APP_BASE_URL=$APP_BASE_URL" &gt;&gt; $GITHUB_ENV
-    echo "External IP is $APP_BASE_URL"</pre>
+    echo "APP_BASE_URL=$APP_BASE_URL" >> $GITHUB_ENV
+    echo "External IP is $APP_BASE_URL"
+```
+
 
 Unfortunately, there's a high chance that it doesn't work: when the step runs, Google Cloud hasn't assigned the IP yet. We must keep querying until we get the IP or until we run too many times.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml">- name: Retrieve LoadBalancer external IP
+```yaml
+- name: Retrieve LoadBalancer external IP
   run: |
     for i in {1..10}; do                                                #1
       EXTERNAL_IP=$(kubectl get service vcluster-pipeline -o jsonpath='{.status.loadBalancer.ingress[0].ip}')
@@ -441,12 +481,14 @@ Unfortunately, there's a high chance that it doesn't work: when the step runs, G
       sleep 10                                                          #3
     done
     if [ -z "$EXTERNAL_IP" ]; then                                      #4
-      echo "Error: External IP not assigned to the service" &gt;&amp;2
+      echo "Error: External IP not assigned to the service" >&2
       exit 1
     fi
     APP_BASE_URL="http://${EXTERNAL_IP}:8080"
-    echo "APP_BASE_URL=$APP_BASE_URL" &gt;&gt; $GITHUB_ENV                    #5
-    echo "External IP is $APP_BASE_URL"</pre>
+    echo "APP_BASE_URL=$APP_BASE_URL" >> $GITHUB_ENV                    #5
+    echo "External IP is $APP_BASE_URL"
+```
+
 
 1. Repeat at most ten times
 2. Exit the loop if we get the IP
@@ -459,12 +501,16 @@ Running the end-to-end test {#h2-9-running-the-end-to-end-test}
 
 Finally, we can run the end-to-end test. Because we ran the unit test in a previous step, it's unnecessary and a waste of time and resources. We could configure it to run a second time on Kubernetes, but it doesn't bring any value. We should run integration tests without running unit tests. Because it's not how Maven works, we must be creative:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml">- name: Run integration tests
-  run: ./mvnw -B verify -Dtest=SkipAll -Dsurefire.failIfNoSpecifiedTests=false</pre>
+```yaml
+- name: Run integration tests
+  run: ./mvnw -B verify -Dtest=SkipAll -Dsurefire.failIfNoSpecifiedTests=false
+```
+
 
 The output should look like the following:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">[INFO] -------------------------------------------------------
+```
+[INFO] -------------------------------------------------------
 [INFO]  T E S T S
 [INFO] -------------------------------------------------------
 [INFO] Running ch.frankel.blog.vclusterpipeline.VClusterPipelineIT
@@ -482,7 +528,9 @@ The output should look like the following:
 [INFO] ------------------------------------------------------------------------
 [INFO] Total time:  13.013 s
 [INFO] Finished at: 2025-01-06T12:47:16Z
-[INFO] ------------------------------------------------------------------------</pre>
+[INFO] ------------------------------------------------------------------------
+```
+
 
 Discussion {#h2-10-discussion}
 ------------------------------
@@ -505,7 +553,7 @@ The complete source code for this post can be found on [GitHub](https://github.c
 * [docker/metadata-action](https://github.com/docker/metadata-action)
 * [docker/build-push-action](https://github.com/docker/build-push-action)
 
-*** ** * ** ***
+
 
 *Originally published at [A Java Geek](https://blog.frankel.ch/pr-testing-kubernetes/2/) on February 16^th^, 2025*
 

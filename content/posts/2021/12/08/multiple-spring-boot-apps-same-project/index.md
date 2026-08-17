@@ -28,7 +28,10 @@ I frequently use the [Spring Boot](https://spring.io/projects/spring-boot) frame
 
 My use case is a banking application that offers a REST layer allowing clients to call any parts. Demoing the query part is easy enough with `curl` as the URL is not complex:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="shell">curl localhost:8080/balance/123          // 1</pre>
+```bash
+curl localhost:8080/balance/123          // 1
+```
+
 
 1. Query the balance of the account `123`
 
@@ -43,17 +46,18 @@ To me, both were too awkward.
 
 Another option was to create another `@SpringBootApplication` annotated class in the same project:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">@SpringBootApplication
+```java
+@SpringBootApplication
 public class GeneratorApplication {
 
     @Bean
     public CommandLineRunner run() {
         var template = new RestTemplate();
-        return args -&gt; {
+        return args -> {
             var operation = generateRandomOperation();            // 1
             LongStream.range(0, Long.parseLong(args[0]))          // 2
                 .forEach(
-                    operation -&gt; template.postForObject(          // 3
+                    operation -> template.postForObject(          // 3
                         "http://localhost:8080/operation",
                         operation,
                         Object.class));
@@ -64,7 +68,9 @@ public class GeneratorApplication {
         new SpringApplicationBuilder(GeneratorApplication.class)
                 .run(args);
     }
-}</pre>
+}
+```
+
 
 1. Generate a random `Operation`, somehow
 2. Get the number of calls from the argument
@@ -87,7 +93,8 @@ To create beans of specific classes, we need to rely on particular annotations d
 
 The final step is to prevent the generator application from launching the webserver. You can configure it when launching the application.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">@SpringBootApplication
+```java
+@SpringBootApplication
 @EnableJpaRepositories("org.hazelcast.cqrs")                      // 1
 @EntityScan("org.hazelcast.cqrs")                                 // 2
 public class GeneratorApplication {
@@ -99,7 +106,9 @@ public class GeneratorApplication {
     }
 
     // Command-line runner
-}</pre>
+}
+```
+
 
 1. Scan for JPA repositories
 2. Scan for JPA entities

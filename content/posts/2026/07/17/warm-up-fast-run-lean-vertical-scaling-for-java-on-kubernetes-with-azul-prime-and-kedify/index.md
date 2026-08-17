@@ -97,8 +97,11 @@ To resize resources correctly, we need a real signal that warm-up is complete.
 
 Azul Prime exposes compilation activity through JMX ([docs](https://docs.azul.com/prime/ZingMXBeans_javadoc/com/azul/zing/management/CompilationMXBean.html#getTotalOutstandingCompiles())):
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">Bean:&nbsp;com.azul.zing:type=Compilation&nbsp;
-Attribute:&nbsp;TotalOutstandingCompiles&nbsp;</pre>
+```
+Bean: com.azul.zing:type=Compilation 
+Attribute: TotalOutstandingCompiles
+```
+
 
 This metric represents the depth of the compilation queue, in other words how much work is left to be optimized. Early in startup it is high. As the JVM finishes optimizing, the compilation queue depth drops and keeps low.
 
@@ -108,21 +111,27 @@ We use this metric as a readiness gate.
 
 Below is the core logic of the readiness probe:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">bean&nbsp;=&nbsp;"com.azul.zing:type=Compilation"&nbsp;
-attribute&nbsp;=&nbsp;"TotalOutstandingCompiles"&nbsp;
+```
+bean = "com.azul.zing:type=Compilation" 
+attribute = "TotalOutstandingCompiles" 
 
-value&nbsp;=&nbsp;conn.query([JMXQuery(bean,&nbsp;attribute=attribute)])[0].value&nbsp;
+value = conn.query([JMXQuery(bean, attribute=attribute)])[0].value 
 
-if&nbsp;value&nbsp;&lt;&nbsp;threshold:&nbsp;
- conn.invoke_operation(bean,&nbsp;"finishWarm-up",&nbsp;[])&nbsp;
- sys.exit(0)&nbsp;
-else:&nbsp;
- sys.exit(2)&nbsp;</pre>
+if value < threshold: 
+ conn.invoke_operation(bean, "finishWarm-up", []) 
+ sys.exit(0) 
+else: 
+ sys.exit(2)
+```
+
 
 During warm-up, output looks like this:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">786&nbsp;
-TotalOutstandingCompiles&nbsp;still&nbsp;above&nbsp;threshold:&nbsp;786&nbsp;&gt;=&nbsp;500&nbsp;</pre>
+```
+786 
+TotalOutstandingCompiles still above threshold: 786 >= 500
+```
+
 
 Only when the queue depth falls (and stays) below the threshold Kubernetes considers the pod ready. This avoids routing traffic to a JVM that is technically running but not yet optimized.
 
@@ -142,11 +151,14 @@ This workload generates significant JIT activity by running many small HTTP requ
 
 We deploy the workload with a high initial CPU allocation:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">resources:&nbsp;
- requests:&nbsp;
- cpu:&nbsp;10&nbsp;
- limits:&nbsp;
- cpu:&nbsp;10&nbsp;</pre>
+```
+resources: 
+ requests: 
+ cpu: 10 
+ limits: 
+ cpu: 10
+```
+
 
 This ensures the JVM has enough compute to get through the compilations quickly.
 
@@ -166,30 +178,36 @@ With Azul Zing JVM's ReadyNow technology ([docs](https://docs.azul.com/prime/Use
 
 Once readiness succeeds, Kedify applies a PodResourceProfile:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">apiVersion:&nbsp;keda.kedify.io/v1alpha1
-kind:&nbsp;PodResourceProfile&nbsp;
-metadata:&nbsp;
- name:&nbsp;heavy-workload&nbsp;
-spec:&nbsp;
- target:&nbsp;
- kind:&nbsp;deployment&nbsp;
- name:&nbsp;heavy-workload&nbsp;
- containerName:&nbsp;main&nbsp;
- trigger:&nbsp;
- after:&nbsp;containerReady&nbsp;
- delay:&nbsp;0s&nbsp;
- newResources:&nbsp;
- requests:&nbsp;
- cpu:&nbsp;"4"&nbsp;
- limits:&nbsp;
- cpu:&nbsp;"4"&nbsp;</pre>
+```
+apiVersion: keda.kedify.io/v1alpha1
+kind: PodResourceProfile 
+metadata: 
+ name: heavy-workload 
+spec: 
+ target: 
+ kind: deployment 
+ name: heavy-workload 
+ containerName: main 
+ trigger: 
+ after: containerReady 
+ delay: 0s 
+ newResources: 
+ requests: 
+ cpu: "4" 
+ limits: 
+ cpu: "4"
+```
+
 
 This transitions the pod from warm-up sizing to steady state sizing, without restart.
 
 You can observe the change live:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">kubectl&nbsp;get&nbsp;po&nbsp;-lapp=heavy-workload&nbsp;\&nbsp;
- -ojsonpath="{.items[*].spec.containers[?(.name=='main')].resources}"&nbsp;|&nbsp;jq&nbsp;</pre>
+```
+kubectl get po -lapp=heavy-workload \ 
+ -ojsonpath="{.items[*].spec.containers[?(.name=='main')].resources}" | jq
+```
+
 
 ###### **Diagram #3: Resource transition timeline**
 

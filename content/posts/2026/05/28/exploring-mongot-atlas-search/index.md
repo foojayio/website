@@ -26,7 +26,10 @@ Let's explore this fascinating and awesome Java project from MongoDB - MongoT!
 
 You can check out the source code here:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">git clone https://github.com/mongodb/mongot</pre>
+```
+git clone https://github.com/mongodb/mongot
+```
+
 
 ![](Screenshot-2026-05-08-at-3.17.36-PM-1024x548.png)
 
@@ -54,27 +57,33 @@ Simple Example - Text Search {#h2-1-simple-example-text-search}
 
 Let's start with a real example. Here's an actual Atlas Search query:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">db.image.aggregate([
-&nbsp;&nbsp;{
-&nbsp;&nbsp;&nbsp;&nbsp;$search: {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;text: {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;query: "Pizza",
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;path: "caption"
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
-&nbsp;&nbsp;&nbsp;&nbsp;}
-&nbsp;&nbsp;}
-]);</pre>
+```
+db.image.aggregate([
+  {
+    $search: {
+      text: {
+        query: "Pizza",
+        path: "caption"
+      }
+    }
+  }
+]);
+```
+
 
 -\>
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">[{
-&nbsp;&nbsp;caption: 'Stacks of dominos pizza boxes with a pizza.',
-&nbsp;&nbsp;url: 'http://images.cocodataset.org/train2017/000000371822.jpg',
-&nbsp;&nbsp;hasPerson: false,
-&nbsp;&nbsp;food: [
-&nbsp;&nbsp;&nbsp;&nbsp;'pizza'
-&nbsp;&nbsp;]
-},...]</pre>
+```
+[{
+  caption: 'Stacks of dominos pizza boxes with a pizza.',
+  url: 'http://images.cocodataset.org/train2017/000000371822.jpg',
+  hasPerson: false,
+  food: [
+    'pizza'
+  ]
+},...]
+```
+
 
 The client application sends that as a MongoDB aggregate command through its driver to MongoD (the driver never connects to MongoT directly - it connects only to MongoD). When MongoD reaches the $search stage, it rewrites the public stage into an internal remote-search stage, builds a MongoT search command, and opens a remote cursor against MongoT.
 
@@ -110,26 +119,34 @@ Follow these steps:
 1. First up, you'll need the JetBrains IntelliJ Bazel plugin installed in order to work with the project: <https://plugins.jetbrains.com/plugin/22977-bazel>
 2. Clone the repo and open it in IntelliJ (IntelliJ will automatically recognize the Bazel project and configure an IntelliJ project mapped onto the Bazel configurations)
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">git clone https://github.com/mongodb/mongot
+```
+git clone https://github.com/mongodb/mongot
 cd mongot
-idea .</pre>
+idea .
+```
+
 
 3. Enable debugging by adding the following changes to the mongot-local container in community-quick-start/docker-compose.yml file:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">  mongot-local:
+```
+  mongot-local:
 ...
     command:
       - /mongot-community/mongot
       - --jvm-flags
       - "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005"
       - --config=/mongot-community/config.default.yml
-</pre>
+```
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">  mongot-local:
+
+```
+  mongot-local:
 ...
     ports:
 ...
-      - 5005:5005    # Debug port</pre>
+      - 5005:5005    # Debug port
+```
+
 
 ![](Screenshot-2026-05-27-at-12.43.57-PM.png)
 
@@ -137,7 +154,10 @@ This will allow us to connect and debug the locally built mongot code over the 5
 
 4. Run the local built mongot code from a shell on the root of the project:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">make docker.up MODE=local</pre>
+```
+make docker.up MODE=local
+```
+
 
 Once the build is finished, and the containers are running, we can attach a debugger on port 5005.
 
@@ -190,60 +210,63 @@ Here's an Atlas Search query matching an image with a caption 'frisbee' and an a
 
 Run the following from MongoDB Compass in the shell, and put a breakpoint in the code on TextQueryFactory.createQuery.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">db.image.aggregate([
-&nbsp;{
-&nbsp;&nbsp;&nbsp;$search: {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;facet: {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;operator: {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;compound: {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;filter: [
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;text: {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;path: "caption",
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;query: "frisbee"
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;},
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;equals: {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;path: "animal",
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;value: "dog"
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;]
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;},
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;facets: {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;animal: {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;type: "string",
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;path: "animal",
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;numBuckets: 10
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;},
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sports: {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;type: "string",
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;path: "sports",
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;numBuckets: 10
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;},
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;count: {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;type: "total"
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
-&nbsp;&nbsp;&nbsp;}
-&nbsp;},
-&nbsp;{
-&nbsp;&nbsp;&nbsp;$facet: {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;docs: [],
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;meta: [
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$replaceWith: "$$SEARCH_META"
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;},
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$limit: 1
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;]
-&nbsp;&nbsp;&nbsp;}
-&nbsp;}
-]);</pre>
+```
+db.image.aggregate([
+ {
+   $search: {
+     facet: {
+       operator: {
+         compound: {
+           filter: [
+             {
+               text: {
+                 path: "caption",
+                 query: "frisbee"
+               }
+             },
+             {
+               equals: {
+                 path: "animal",
+                 value: "dog"
+               }
+             }
+           ]
+         }
+       },
+       facets: {
+         animal: {
+           type: "string",
+           path: "animal",
+           numBuckets: 10
+         },
+         sports: {
+           type: "string",
+           path: "sports",
+           numBuckets: 10
+         }
+       }
+     },
+     count: {
+       type: "total"
+     }
+   }
+ },
+ {
+   $facet: {
+     docs: [],
+     meta: [
+       {
+         $replaceWith: "$$SEARCH_META"
+       },
+       {
+         $limit: 1
+       }
+     ]
+   }
+ }
+]);
+```
+
 
 ![](Screenshot-2026-05-08-at-3.35.37-PM-1-1024x966.png)
 
@@ -273,55 +296,58 @@ Eventually, MongoDB shows the results like this:
 
 -\>
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">{
-&nbsp;&nbsp;docs: [
-&nbsp;&nbsp;&nbsp;&nbsp;{
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_id: 27617, // in the Atlas Search Coco sample data I am using integer IDs
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;caption: 'A dog relaxes on the green grass as he holds a yellow frisbee.',
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;url:'http://images.cocodataset.org/train2017/000000027617.jpg',
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;hasPerson: false,
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;animal: [
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'dog'
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;],
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;kitchen: [
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'bowl'
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;]
-&nbsp;&nbsp;&nbsp;&nbsp;},
-&nbsp;&nbsp;&nbsp;&nbsp;... 365 more items
-&nbsp;&nbsp;],
-&nbsp;&nbsp;meta: [
-&nbsp;&nbsp;&nbsp;&nbsp;{
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;count: {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;total: 366
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;},
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;facet: {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sports: {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;buckets: [
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_id: 'frisbee',
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;count: 364
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;},
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_id: 'sports ball',
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;count: 4
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;},
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_id: 'baseball glove',
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;count: 1
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;]
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;},
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;animal: {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;buckets: [
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_id: 'dog',
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;count: 366
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;]
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
-&nbsp;&nbsp;&nbsp;&nbsp;}
-&nbsp;&nbsp;]</pre>
+```
+{
+  docs: [
+    {
+      _id: 27617, // in the Atlas Search Coco sample data I am using integer IDs
+      caption: 'A dog relaxes on the green grass as he holds a yellow frisbee.',
+      url:'http://images.cocodataset.org/train2017/000000027617.jpg',
+      hasPerson: false,
+      animal: [
+        'dog'
+      ],
+      kitchen: [
+        'bowl'
+      ]
+    },
+    ... 365 more items
+  ],
+  meta: [
+    {
+      count: {
+        total: 366
+      },
+      facet: {
+        sports: {
+          buckets: [
+            {
+              _id: 'frisbee',
+              count: 364
+            },
+            {
+              _id: 'sports ball',
+              count: 4
+            },
+            {
+              _id: 'baseball glove',
+              count: 1
+            }
+          ]
+        },
+        animal: {
+          buckets: [
+            {
+              _id: 'dog',
+              count: 366
+            }
+          ]
+        }
+      }
+    }
+  ]
+```
+
 
 Lucene Indexing Strategy + Benefits over MongoD Indexes {#h2-6-lucene-indexing-strategy-benefits-over-mongod-indexes}
 ---------------------------------------------------------------------------------------------------------------------
@@ -443,11 +469,14 @@ And restart MongoT.
 
 Then you'll need to update the MongoT config file (mongot-dev.yml) with a few new fields:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">embedding:
-&nbsp;&nbsp;queryKeyFile: "/Users/luketn/code/personal/mongot/voyage-api-key"
-&nbsp;&nbsp;indexingKeyFile: "/Users/luketn/code/personal/mongot/voyage-api-key"
-&nbsp;&nbsp;providerEndpoint: "https://api.voyageai.com/v1/embeddings"
-&nbsp;&nbsp;isAutoEmbeddingViewWriter: true</pre>
+```
+embedding:
+  queryKeyFile: "/Users/luketn/code/personal/mongot/voyage-api-key"
+  indexingKeyFile: "/Users/luketn/code/personal/mongot/voyage-api-key"
+  providerEndpoint: "https://api.voyageai.com/v1/embeddings"
+  isAutoEmbeddingViewWriter: true
+```
+
 
 And restart MongoT.
 
@@ -457,20 +486,23 @@ CommunityMongotBootstrapper...Initialized auto-embedding with 4 model(s)
 
 Once you have the Voyage API enabled, you can create a vector search index like this:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">db.image.createSearchIndex({
-&nbsp;&nbsp;name: "caption_auto_embed",
-&nbsp;&nbsp;type: "vectorSearch",
-&nbsp;&nbsp;definition: {
-&nbsp;&nbsp;&nbsp;&nbsp;fields: [
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;type: "autoEmbed",
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;path: "caption",
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;model: "voyage-4",
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;modality: "text"
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
-&nbsp;&nbsp;&nbsp;&nbsp;]
-&nbsp;&nbsp;}
-});</pre>
+```
+db.image.createSearchIndex({
+  name: "caption_auto_embed",
+  type: "vectorSearch",
+  definition: {
+    fields: [
+      {
+        type: "autoEmbed",
+        path: "caption",
+        model: "voyage-4",
+        modality: "text"
+      }
+    ]
+  }
+});
+```
+
 
 MongoT will automatically hit the API in batches, and compute embeddings for the caption field using the voyage-4 model, storing them separately in an internally managed embeddings collection, which is great since it doesn't pollute the MongoDB document with index data!
 
@@ -478,13 +510,16 @@ MongoT will automatically hit the API in batches, and compute embeddings for the
 
 Then you can perform searches with simple text query parameters
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">db.image.aggregate([{$vectorSearch: {
-&nbsp;&nbsp;index: "caption_auto_embed",
-&nbsp;&nbsp;query: "circular flying",
-&nbsp;&nbsp;path: "caption",
-&nbsp;&nbsp;numCandidates: 10,
-&nbsp;&nbsp;limit: 10
-}}]);</pre>
+```
+db.image.aggregate([{$vectorSearch: {
+  index: "caption_auto_embed",
+  query: "circular flying",
+  path: "caption",
+  numCandidates: 10,
+  limit: 10
+}}]);
+```
+
 
 Behind the scenes, MongoT computes the embedding for the query text 'circular flying', uses Voyage API to compute a semantic meaning as an array of floats, then uses Lucene to find the nearest matches semantically in the index.
 
@@ -534,19 +569,22 @@ As represented by the MongoT performance dashboard in Grafana:
 
 And as seen by the K6 client:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">k6 run -e K6_VUS=25 -e K6_DURATION=5m k6.js
+```
+k6 run -e K6_VUS=25 -e K6_DURATION=5m k6.js
 
 █ TOTAL RESULTS
-&nbsp;&nbsp;&nbsp;HTTP
-&nbsp;&nbsp;&nbsp;http_req_duration: avg=12.8ms, min=2.4ms, med=12.3ms, max=208.4ms p(90)=17.4ms p(95)=18.9ms
-&nbsp;&nbsp;&nbsp;http_reqs: 574,519&nbsp; 1,914.977657/s
-&nbsp;&nbsp;&nbsp;CUSTOM
-&nbsp;&nbsp;&nbsp;search_docs_returned: avg=4.4, min=0, med=5, max=5, p(90)=5, p(95)=5
-&nbsp;&nbsp;&nbsp;EXECUTION
-&nbsp;&nbsp;&nbsp;vus: 25
-&nbsp;&nbsp;&nbsp;NETWORK
-&nbsp;&nbsp;&nbsp;data_received: 2.7 GB&nbsp; 9.1 MB/s
-&nbsp;&nbsp;&nbsp;data_sent: 84 MB &nbsp; 281 kB/s</pre>
+   HTTP
+   http_req_duration: avg=12.8ms, min=2.4ms, med=12.3ms, max=208.4ms p(90)=17.4ms p(95)=18.9ms
+   http_reqs: 574,519  1,914.977657/s
+   CUSTOM
+   search_docs_returned: avg=4.4, min=0, med=5, max=5, p(90)=5, p(95)=5
+   EXECUTION
+   vus: 25
+   NETWORK
+   data_received: 2.7 GB  9.1 MB/s
+   data_sent: 84 MB   281 kB/s
+```
+
 
 (run on an M4 MacBook Pro)
 
@@ -555,13 +593,16 @@ What does this mean? Well, the full round-trip of a Java HTTP Atlas Search API c
 If I add some tracing to each request, I can see the overheads of Java vs the MongoT-\>MongoD end-to-end query command:  
 ![](Screenshot-2026-05-08-at-3.46.50-PM-1024x481.png)
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">k6 run -e K6_VUS=25 -e K6_DURATION=5m k6.js
-&nbsp;&nbsp;&nbsp;CUSTOM
-&nbsp;&nbsp;&nbsp;&nbsp;docs_returned: avg=4.42, min=0, med=5, max=5, p(90)=5, p(95)=5
-&nbsp;&nbsp;&nbsp;&nbsp;http_time_ms: avg=25.6, min=7.4, med=25.5, max=83.238, p(90)=31.5 &nbsp; p(95)=33.7
-&nbsp;&nbsp;&nbsp;&nbsp;java_time_ms: avg=2.9, min=0.2, med=3.1, max=46.8, p(90)=3.6, p(95)=3.9
-&nbsp;&nbsp;&nbsp;&nbsp;mongodb_time_ms: avg=7.2, min=2.0 med=6.8, max=48.7, p(90)=9.85 &nbsp; &nbsp; p(95)=11.0
-&nbsp;&nbsp;&nbsp;&nbsp;requests: 291719&nbsp; 972.301245/s</pre>
+```
+k6 run -e K6_VUS=25 -e K6_DURATION=5m k6.js
+   CUSTOM
+    docs_returned: avg=4.42, min=0, med=5, max=5, p(90)=5, p(95)=5
+    http_time_ms: avg=25.6, min=7.4, med=25.5, max=83.238, p(90)=31.5   p(95)=33.7
+    java_time_ms: avg=2.9, min=0.2, med=3.1, max=46.8, p(90)=3.6, p(95)=3.9
+    mongodb_time_ms: avg=7.2, min=2.0 med=6.8, max=48.7, p(90)=9.85     p(95)=11.0
+    requests: 291719  972.301245/s
+```
+
 
 I have to admit getting a bit deep down in the rabbit hole here, and spending more time further expanding the number of spans in the traces emitted by default. I created a branch of MongoT on my own fork and added a bunch of detailed tracing:
 

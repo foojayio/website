@@ -110,9 +110,12 @@ The following describes the Java-code in detail.
 
 The module *adder.spec* realizes the system specification and requires the annotations FEPCOS-J provides in the module *fepcos.annotations* for compile time. The two packages, *fepcos.sy* and *fepcos.ay* , belong to *fepcos.annotations*. These two packages contain all the annotations used for this example.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="module-info.java" data-enlighter-group="adder-module-info">module adder.spec {
+```java
+module adder.spec {
 	requires static fepcos.annotations;
-}</pre>
+}
+```
+
 
 #### System declaration Sy.java
 
@@ -120,14 +123,17 @@ The class *SY* belongs to the package *adder.spec* and imports *fepcos.sy* , whi
 
 *@SYDec* specifies that the annotated class *SY* is the system declaration. *fjp* uses the *String* of the annotation to generate the documentation. *@Cap* declares a capability *add* , which the class *Add* realizes.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="SY.java" data-enlighter-group="adder-sydec">package adder.spec;
+```java
+package adder.spec;
 
 import fepcos.sy.*;
 
 @SYDec("A system that adds numbers.")
 class SY {
 	@Cap Add add;
-}</pre>
+}
+```
+
 
 #### Activity specification Add.java
 
@@ -137,7 +143,8 @@ The class *Add* also belongs to the package *adder.spec* . Further, it imports *
 
 *fjp* uses all *Strings* in the annotations to generate the documentation.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="Add.java" data-enlighter-group="adder-ayspec">package adder.spec;
+```java
+package adder.spec;
 
 import fepcos.ay.*;
 
@@ -151,7 +158,9 @@ class Add {
 	void go() {
 		z = x + y;
 	}
-}</pre>
+}
+```
+
 
 ### *fjp* processes the system specification; *fjx* provides access to it via an IPv4-network. {#h3-7-fjp-processes-the-system-specification-fjx-provides-access-to-it-via-an-ipv4-network}
 
@@ -253,7 +262,7 @@ It would be great if we could establish a new, declarative way for programming n
 
 Thanks for reading!
 
-*** ** * ** ***
+
 
 References {#references}
 ------------------------

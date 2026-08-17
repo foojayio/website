@@ -30,13 +30,13 @@ Next to these six-month releases, OpenJDK distributor Azul, amongst others, prov
 
 So what's the difference between a Java upgrade and an update?
 
-*** ** * ** ***
+
 
 **Upgrades are new versions of OpenJDK**.
 
 **Updates are security fixes and improvements to existing Java versions**.
 
-*** ** * ** ***
+
 
 ![](LTS-versus-STS-1024x410.jpg)
 
@@ -59,11 +59,11 @@ In 2018 Oracle introduced a new strategy with a fixed six-months release cycle:
 * Twice a year, a new version is published, including all the finished and agreed fixes and improvements.
 * Some unfinished new features *can be* included. They are called experimental or incubator features, and they require additional actions to be usable, so most users don't even know they are available.
 
-*** ** * ** ***
+
 
 *Despite some skepticism in the Java community, new versions have been released **on schedule** since OpenJDK 10. In fact, the increased speed of new releases has led to **more improvements** , **new features** , and **fast feedback on experimental additions**.*
 
-*** ** * ** ***
+
 
 Java Updates are Fixes and Improvements in Existing Versions {#h2-2-java-updates-are-fixes-and-improvements-in-existing-versions}
 ---------------------------------------------------------------------------------------------------------------------------------
@@ -193,7 +193,7 @@ These upgrade paths and tests need to be entirely handled by your team.
 
 But once you have deployed a particular release, updating to newer versions becomes much more manageable when you follow the CPU/PSU cycle described above.
 
-*** ** * ** ***
+
 
 ***New versions of OpenJDK are released and maintained by Oracle in the first half year.***
 
@@ -205,7 +205,7 @@ But once you have deployed a particular release, updating to newer versions beco
 
 Andrew Brygin, Staff Software Engineer, Azul
 
-*** ** * ** ***
+
 
 Let's take a look at an example based on the [October 2022 Release Notes of Azul Zulu Builds of OpenJDK](https://docs.azul.com/core/zulu-openjdk/release-notes/october-2022).
 ![CHART: Quarterly release update for Azul Zulu Builds of OpenJDK version 19, 17, 15 13, 11, 8, 7, and 6.](https://www.azul.com/wp-content/uploads/FY23-Q4-Oracle-Compete-Educate-Java-Maintenance-pt2-table.png) *Versions info for Java 11 till 19 in the Azul Zulu Builds of OpenJDK Release Notes of October 2022*
@@ -229,7 +229,7 @@ The Shortest Path to Deploying CVE Fixes in Your Environment {#h2-9-the-shortest
 
 Following this approach, you will have the CVE fixes deployed in your environment within the shortest term possible to ensure its security.
 
-*** ** * ** ***
+
 
 ***As the name says, a CRITICAL Patch Update needs to be deployed as fast as possible as it adds security fixes. This is established by providing an easy-to-upgrade version with the minimal required set of changes, limited to several files.***
 
@@ -241,7 +241,7 @@ Following this approach, you will have the CVE fixes deployed in your environmen
 
 Sergey Grinev, QA Manager, Azul
 
-*** ** * ** ***
+
 
 A complete overview of the support duration of the different versions, also comparing the commercial support offered by Oracle, Eclipse Temurin, and Azul is available in [the support roadmap of Azul](https://www.azul.com/products/azul-support-roadmap/).
 

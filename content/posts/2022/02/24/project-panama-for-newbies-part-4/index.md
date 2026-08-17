@@ -70,21 +70,27 @@ According to [Wikipedia](https://en.wikipedia.org/wiki/Callback_(computer_progra
 
 In Java we can create callback behaviors by creating methods that can return or receive a lambda expression. Shown below is a **synchronous** callback where a method will do work **pre** and **post** invocation.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public static void myJavaCallback(Runnable codeBlock) {
+```java
+public static void myJavaCallback(Runnable codeBlock) {
    log.info("Begin calling codeBlock");
    codeBlock.run();
    log.info("Finished calling codeBlock");
 }
 
-Runnable codeBlock = () -&gt; System.out.println(" Inside codeBlock");
+Runnable codeBlock = () -> System.out.println(" Inside codeBlock");
 
-this.MyClass.myJavaCallback(codeBlock);</pre>
+this.MyClass.myJavaCallback(codeBlock);
+```
+
 
 The output of the code snippet above:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="raw" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">Begin calling codeBlock
+```
+Begin calling codeBlock
  Inside codeBlock
-Finished calling codeBlock</pre>
+Finished calling codeBlock
+```
+
 
 **Asynchronous** callbacks can be quite useful too especially when you want to defer code execution at a later time. To defer code execution you may explore Java's `CompletableFuture` API.
 
@@ -124,11 +130,14 @@ The following are three functions signatures are declared.
 
 Listing 1 `mylib.h` - Functions defined
 
-<pre class="EnlighterJSRAW" data-enlighter-language="c" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">#include &lt;stdio.h&gt;
+```c
+#include <stdio.h>
 
 void my_function();
 void my_callback_function(void (*ptrToFunction)());
-void my_callback_function2(void (*ptrToFunction)(int));</pre>
+void my_callback_function2(void (*ptrToFunction)(int));
+```
+
 
 * `my_function()` - A regular C function
 * `my_callback_function()` - Receives a pointer to a function named **ptrToFunction**
@@ -145,7 +154,8 @@ Next, is the implementation file `mylib.c`. The code will begin by including the
 
 Listing 2 [mylib.c](https://github.com/carldea/panama4newbies/blob/jdk19-ea/part04/mylib.c) - Implementation code
 
-<pre class="EnlighterJSRAW" data-enlighter-language="c" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">#include &lt;stdio.h&gt;
+```c
+#include <stdio.h>
 #include "mylib.h"
 
 void my_function() {
@@ -169,17 +179,21 @@ void my_callback_function2(void (*ptrToFunction)(int)) {
 
 int main() {
    printf("[C] Callbacks! \n");
-   void (*ptr)() = &amp;my_function;
+   void (*ptr)() = &my_function;
    my_callback_function(ptr);
    return 0;
 }
-</pre>
+```
+
 
 The first callback function `my_callback_function()` receives a pointer to a function. The `my_callback_function()` function will output two lines of text to the console and subsequently invoke the function that the function pointer `ptrToFunction` is referenced at.
 
 Above you'll notice the `main()` function code that tests the `my_callback_function()` function by assigning a **function pointer** named `ptr` referencing the function `my_function` as shown below:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="c" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">void (*ptr)() = &amp;my_function;</pre>
+```c
+void (*ptr)() = &my_function;
+```
+
 
 ![](part4_function_pointer-1.png) Declare a function pointer variable named ptr
 
@@ -194,11 +208,17 @@ Creating a Native Shared Library {#h2-5-creating-a-native-shared-library}
 
 Depending on the C compiler there are switches that will create a binary library. Most compilers will have the option `-o` to allow you to name the library suitable for your operating system. In this scenario to support MacOS the naming would be prefixed with `lib` and a file extension as `.dylib`.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">gcc -shared -o libmylib.dylib mylib.c</pre>
+```
+gcc -shared -o libmylib.dylib mylib.c
+```
+
 
 Afterwards the following is outputed as a native library local to the working path. Remember the name of the library is `mylib` and the file naming below is specific to the MacOS.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="shell" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">libmylib.dylib</pre>
+```bash
+libmylib.dylib
+```
+
 
 Later, you'll use the name `mylib` as the library name for `jextract` to be able to generate code that will load the library during runtime.
 
@@ -211,21 +231,26 @@ In Part 3 we mentioned that `jextract` only allows you to target one header file
 
 Listing 2 - `foo.h` Containing multiple includes
 
-<pre class="EnlighterJSRAW" data-enlighter-language="c" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">#include &lt;stdio.h&gt;
-#include "mylib.h"</pre>
+```c
+#include <stdio.h>
+#include "mylib.h"
+```
+
 
 Above you'll notice headers in **angle brackets** vs **double quotes**. In short, for C standard hearders the code will use angle brackets and for third party libraries such as mylib will use the double quotes.
 
 Let's go ahead and generate the Panama class files and source code using `jextract` as shown below.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="shell" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group=""># Generate java source files
+```bash
+# Generate java source files
 jextract --output src \
   -t org.unix \
   -I /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include \
   -I . \
   -l mylib \
   foo.h
-</pre>
+```
+
 
 Above you'll notice the `-I .` is to let `jextract` know about the `mylib.h` in the working directory. Also, you should notice `-l mylib` as we mentioned earlier when the `System.loadLibrary()` method is called to locate the library based on the `java.library.path` property.
 
@@ -236,25 +261,34 @@ Obtaining Native Symbols {#h2-7-obtaining-native-symbols}
 
 This has been discussed in Part 3, to obtain C native functions or symbols. In Part 4 we are using [](https://openjdk.java.net/jeps/454)[JEP-454](https://openjdk.java.net/jeps/454) updates to Panama's Foreign Function APIs.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">var linker = Linker.nativeLinker();
+```java
+var linker = Linker.nativeLinker();
 
 SymbolLookup foolibLookup = SymbolLookup.libraryLookup(System.mapLibraryName("mylib"),  Arena.ofAuto())
                     .or(SymbolLookup.loaderLookup())
                     .or(Linker.nativeLinker().defaultLookup());
 
-MemorySegment callback1 = foolibLookup.findOrThrow("my_callback_function");</pre>
+MemorySegment callback1 = foolibLookup.findOrThrow("my_callback_function");
+```
+
 
 After obtaining the symbol `MemorySegment` let's create a **method handle** like the following:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">var my_callback_functionMethodHandle = Linker
+```java
+var my_callback_functionMethodHandle = Linker
        .nativeLinker()
-       .downcallHandle(callback1, FunctionDescriptor.ofVoid(C_POINTER));</pre>
+       .downcallHandle(callback1, FunctionDescriptor.ofVoid(C_POINTER));
+```
+
 
 After obtaining the symbol from memory (`MemorySegment`) a `downcallHandle()` method creates a `MethodHandle` object for later invocation. Here, you have to describe the C function's call signature.
 
 If you recall the C function `my_callback_function()` call signature (In C) looks like the following:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="c" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">void my_callback_function(void (*ptrToFunction)())</pre>
+```c
+void my_callback_function(void (*ptrToFunction)())
+```
+
 
 Here you'll notice the C function `my_callback_function()` takes a **function pointer** as a parameter (`C_POINTER`). Next, let's see how to pass in a Java `static` method into the C native `my_callback_function()` function. To keep things simple the callback will be a function that returns **void** and has **void parameters** . The **void parameters** just means **empty arguments** or **no parameters**.
 
@@ -263,10 +297,13 @@ Creating a Function Pointer with Java Code {#h2-8-creating-a-function-pointer-wi
 
 To mimic a function pointer in Java as described above (returns void and no parameters) you can simply create a **static** method as shown below:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">    public static void callMePlease() {
+```java
+    public static void callMePlease() {
         MemorySegment cString = Arena.allocateFrom("[JAVA] Inside callMePlease() method - I'm being called from C.\n");
         foo_h.printf.makeInvoker().apply(cString);
-    }</pre>
+    }
+```
+
 
 Above, the code creates a C string using the `allocateFrom(String)` to create a `MemorySegment` that subsequently is passed into a C's `printf()` function for text output to the console. Of course the code could have used Java's `System.out.printf()`, however when mixing between C's `printf()` and Java's `printf()` can have unexpected results such as the order in which text lines appears. This is due to a buffered output stream that isn't flushed.
 
@@ -274,26 +311,38 @@ Because of C's standard input/output buffer is separate from Java's standard inp
 
 **What will be outputted from the example below?**
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">MemorySegment cString = ...// "1 - C stdout\n"
+```java
+MemorySegment cString = ...// "1 - C stdout\n"
 foo_h.printf(cString);
-System.out.printf("2 - Java Panama\n");</pre>
+System.out.printf("2 - Java Panama\n");
+```
+
 
 The output of the above code snippet is as follows:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="raw" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">2 - Java Panama
-1 - C stdout</pre>
+```
+2 - Java Panama
+1 - C stdout
+```
+
 
 Here, you'll notice the Java `printf()` text line is first. To ensure the C's buffer is flushed use C's `fflush()`or `fprintf()` function as shown below:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">MemorySegment cString = ...// "1 - C stdout\n"
+```java
+MemorySegment cString = ...// "1 - C stdout\n"
 foo_h.printf.makeInvoker().apply(cString);
 fflush(NULL());
-System.out.printf("2 - Java Panama\n");</pre>
+System.out.printf("2 - Java Panama\n");
+```
+
 
 The output should look like the following:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">1 - C stdout
-2 - Java Panama</pre>
+```java
+1 - C stdout
+2 - Java Panama
+```
+
 
 To get back on track with **callbacks** \& **function pointers** let's look at how to pass a Java **method** into a C callback function as a **function** **pointer**.
 
@@ -302,32 +351,44 @@ Pass Callback into a C Function {#h2-9-pass-callback-into-a-c-function}
 
 Before passing the above `callMePlease()` Java method you'll have to create a `MethodHandle` as shown below:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">// Create a method handle to the Java function as a callback
+```java
+// Create a method handle to the Java function as a callback
 MethodHandle onCallMePlease = MethodHandles
                  .lookup()
                  .findStatic(PanamaCallback.class,
                             "callMePlease",
-                            MethodType.methodType(void.class));</pre>
+                            MethodType.methodType(void.class));
+```
+
 
 Next, you need to create a `NativeSymbol` object using the `upcallStub()` method. The `NativeSymbol` objects are reference by the symbol's **address** in memory. This allows the code to pass Java static methods as **C function pointers**.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">// Create a stub as a native symbol to be passed into native function.
+```java
+// Create a stub as a native symbol to be passed into native function.
 // void (*ptr)()
 MemorySegment callMePleaseNativeSymbol = Linker.nativeLinker().upcallStub(
                     onCallMePlease,
                     FunctionDescriptor.ofVoid(),
-                    arena);</pre>
+                    arena);
+```
+
 
 To demonstrate a call to the `my_callback_functionMethodHandle()`**C function** the following code snippet calls the `invokeExact()` method by passing in the `callMePleaseNativeSymbol` (`MemorySegment`).
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">// Invoke C function receiving a callback
+```java
+// Invoke C function receiving a callback
 // void my_callback_function(void (*ptr)())
-my_callback_functionMethodHandle.invokeExact(callMePleaseNativeSymbol);</pre>
+my_callback_functionMethodHandle.invokeExact(callMePleaseNativeSymbol);
+```
+
 
 Above you'll notice a cast to `Addressable`, this is because the function accepts a `C_POINTER`. As defined earlier the code specifies the method signature as shown below:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">Linker.nativeLinker()
-     .downcallHandle(callback1, FunctionDescriptor.ofVoid(C_POINTER));</pre>
+```java
+Linker.nativeLinker()
+     .downcallHandle(callback1, FunctionDescriptor.ofVoid(C_POINTER));
+```
+
 
 Anytime you see a downcall method to create a method handle using a C_POINTER as a return or an argument the object passed in must be an `MemorySegment`.
 
@@ -340,24 +401,33 @@ Running the Example {#h2-10-running-the-example}
 
 To compile and run do the following:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group=""> javac -d classes \
+```java
+ javac -d classes \
    -cp classes:. \
-   src/PanamaCallback.java</pre>
+   src/PanamaCallback.java
+```
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">env JAVA_LIBRARY_PATH=:/usr/local/lib:. \
+
+```java
+env JAVA_LIBRARY_PATH=:/usr/local/lib:. \
   java -cp classes \
   --enable-native-access=ALL-UNNAMED  \
-  PanamaCallback</pre>
+  PanamaCallback
+```
+
 
 The output:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="raw" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">[Java] Callbacks! Panama style
+```
+[Java] Callbacks! Panama style
 [C] Inside mylib's C function my_callback_function().
 [C]   Now invoking Java's callMePlease() static method.
 [JAVA] Inside callMePlease() method - I'm being called from C.
 [C] Inside mylib's C function my_callback_function2().
 [C]   Now invoking Java's doubleMe(int) static method.
-[JAVA] Inside doubleMe() method, 123 times 2 = 246.</pre>
+[JAVA] Inside doubleMe() method, 123 times 2 = 246.
+```
+
 
 The output above shows the code execution path by displaying `[Java]`or `[C]` prefixed each line to denote code being run inside the Java world or in the native C world (library).
 

@@ -69,9 +69,12 @@ Connecting our database {#h2-3-connecting-our-database}
 
 To connect to MongoDB, we need to add our [connection string](https://www.mongodb.com/docs/manual/reference/connection-string/#find-your-mongodb-atlas-connection-string?utm_campaign=devrel&utm_source=third-part-content&utm_medium=cta&utm_content=spring+rest+simple&utm_term=tim.kelly) to our application.properties, and specify the name of the database we want to use:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">spring.data.mongodb.uri=YOUR_CONNECTION_STRING
+```
+spring.data.mongodb.uri=YOUR_CONNECTION_STRING
 
-spring.data.mongodb.database=library</pre>
+spring.data.mongodb.database=library
+```
+
 
 This tells Spring to connect to our MongoDB Atlas cluster and use the library database. If this doesn't exist yet, don't worry. The minute we start trying to add data to it, MongoDB will create it for us.
 
@@ -79,7 +82,8 @@ This tells Spring to connect to our MongoDB Atlas cluster and use the library da
 
 Let's define a model that represents the structure of our documents in MongoDB. Inside your project, create a new package called model and add a Book class like this:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">package com.mongodb.springrest.model;
+```
+package com.mongodb.springrest.model;
 
 import org.bson.types.ObjectId;
 
@@ -91,61 +95,63 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 public class Book {
 
-&nbsp;&nbsp;&nbsp;&nbsp;@Id
+    @Id
 
-&nbsp;&nbsp;&nbsp;&nbsp;private ObjectId id;
+    private ObjectId id;
 
-&nbsp;&nbsp;&nbsp;&nbsp;private String title;
+    private String title;
 
-&nbsp;&nbsp;&nbsp;&nbsp;private String author;
+    private String author;
 
-&nbsp;&nbsp;&nbsp;&nbsp;public Book() {}
+    public Book() {}
 
-&nbsp;&nbsp;&nbsp;&nbsp;public Book(String title, String author) {
+    public Book(String title, String author) {
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this.title = title;
+        this.title = title;
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this.author = author;
+        this.author = author;
 
-&nbsp;&nbsp;&nbsp;&nbsp;}
+    }
 
-&nbsp;&nbsp;&nbsp;&nbsp;public ObjectId getId() {
+    public ObjectId getId() {
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return id;
+        return id;
 
-&nbsp;&nbsp;&nbsp;&nbsp;}
+    }
 
-&nbsp;&nbsp;&nbsp;&nbsp;public void setId(ObjectId id) {
+    public void setId(ObjectId id) {
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this.id = id;
+        this.id = id;
 
-&nbsp;&nbsp;&nbsp;&nbsp;}
+    }
 
-&nbsp;&nbsp;&nbsp;&nbsp;public String getTitle() {
+    public String getTitle() {
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return title;
+        return title;
 
-&nbsp;&nbsp;&nbsp;&nbsp;}
+    }
 
-&nbsp;&nbsp;&nbsp;&nbsp;public void setTitle(String title) {
+    public void setTitle(String title) {
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this.title = title;
+        this.title = title;
 
-&nbsp;&nbsp;&nbsp;&nbsp;}
+    }
 
-&nbsp;&nbsp;&nbsp;&nbsp;public String getAuthor() {
+    public String getAuthor() {
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return author;
+        return author;
 
-&nbsp;&nbsp;&nbsp;&nbsp;}
+    }
 
-&nbsp;&nbsp;&nbsp;&nbsp;public void setAuthor(String author) {
+    public void setAuthor(String author) {
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this.author = author;
+        this.author = author;
 
-&nbsp;&nbsp;&nbsp;&nbsp;}
+    }
 
-}</pre>
+}
+```
+
 
 We use the @Document annotation to tell Spring that this class represents a MongoDB document, and we specify "books" as the name of the collection it should be stored in. If the books collection doesn't already exist, MongoDB will create it for us automatically.
 
@@ -155,7 +161,8 @@ The @Id annotation marks the id field as the primary key, and we use ObjectId fr
 
 Next, we'll define a repository interface that lets us interact with the database. Create a new package called repository, and inside it, add a BookRepository interface like this:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">package com.mongodb.springrest.repository;
+```
+package com.mongodb.springrest.repository;
 
 import com.mongodb.springrest.model.Book;
 
@@ -167,7 +174,9 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 
-public interface BookRepository extends MongoRepository&lt;Book, ObjectId&gt; {}</pre>
+public interface BookRepository extends MongoRepository<Book, ObjectId> {}
+```
+
 
 By extending [MongoRepository](https://docs.spring.io/spring-data/mongodb/docs/current/api/org/springframework/data/mongodb/repository/MongoRepository.html), we get a full set of CRUD operations. No need to write any implementation code. This includes methods like:
 
@@ -182,41 +191,44 @@ Spring Data handles everything under the hood, including converting between our 
 
 Now, we'll expose our REST endpoints so we can interact with the Book collection over HTTP. Create a new package called controller, and add a BookController class like this:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">package com.mongodb.springrest.controller;&nbsp;&nbsp;
+```
+package com.mongodb.springrest.controller;  
 
-import com.mongodb.springrest.model.Book;&nbsp;&nbsp;
+import com.mongodb.springrest.model.Book;  
 
-import com.mongodb.springrest.repository.BookRepository;&nbsp;&nbsp;
+import com.mongodb.springrest.repository.BookRepository;  
 
-import org.bson.types.ObjectId;&nbsp;&nbsp;
+import org.bson.types.ObjectId;  
 
-import org.springframework.http.HttpStatus;&nbsp;&nbsp;
+import org.springframework.http.HttpStatus;  
 
-import org.springframework.http.ResponseEntity;&nbsp;&nbsp;
+import org.springframework.http.ResponseEntity;  
 
-import org.springframework.web.bind.annotation.*;&nbsp;&nbsp;
+import org.springframework.web.bind.annotation.*;  
 
-import jakarta.validation.Valid;&nbsp;&nbsp;
+import jakarta.validation.Valid;  
 
-import java.util.List;&nbsp;&nbsp;
+import java.util.List;  
 
-import java.util.Optional;&nbsp;&nbsp;
+import java.util.Optional;  
 
-@RestController&nbsp;&nbsp;
+@RestController  
 
-@RequestMapping("/api/books")&nbsp;&nbsp;
+@RequestMapping("/api/books")  
 
-public class BookController {&nbsp;&nbsp;
+public class BookController {  
 
-&nbsp;&nbsp;&nbsp;&nbsp;private final BookRepository bookRepository;&nbsp;&nbsp;
+    private final BookRepository bookRepository;  
 
-&nbsp;&nbsp;&nbsp;&nbsp;public BookController(BookRepository bookRepository) {&nbsp;&nbsp;
+    public BookController(BookRepository bookRepository) {  
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this.bookRepository = bookRepository;&nbsp;&nbsp;
+        this.bookRepository = bookRepository;  
 
-&nbsp;&nbsp;&nbsp;&nbsp;}
+    }
 
-}</pre>
+}
+```
+
 
 @RestController tells Spring that this class will handle HTTP requests and that all return values should be serialized directly to the response body.
 
@@ -229,15 +241,18 @@ Create {#h2-7-create}
 
 To handle creating new books, we'll add a @PostMapping method inside our BookController. This endpoint will accept a Book object in the request body, save it to the database using our repository, and return the saved book along with a 201 Created response.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@PostMapping&nbsp;&nbsp;
+```
+@PostMapping  
 
-public ResponseEntity&lt;Book&gt; createBook(@RequestBody Book book) {&nbsp;&nbsp;
+public ResponseEntity<Book> createBook(@RequestBody Book book) {  
 
-&nbsp;&nbsp;&nbsp;&nbsp;Book savedBook = bookRepository.save(book);&nbsp;&nbsp;
+    Book savedBook = bookRepository.save(book);  
 
-&nbsp;&nbsp;&nbsp;&nbsp;return ResponseEntity.status(HttpStatus.CREATED).body(savedBook);&nbsp;&nbsp;
+    return ResponseEntity.status(HttpStatus.CREATED).body(savedBook);  
 
-}</pre>
+}
+```
+
 
 That's all we need. Spring will automatically deserialize the incoming JSON into a Book object, and bookRepository.save() will insert it into MongoDB. Once saved, the response includes the stored document (including the generated _id) so the client knows exactly what was created.
 
@@ -246,29 +261,35 @@ Read {#h2-8-read}
 
 Now that we can add books, let's make sure we can retrieve them. We'll start with a simple endpoint to return all books in the collection:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@GetMapping&nbsp;&nbsp;
+```
+@GetMapping  
 
-public ResponseEntity&lt;List&lt;Book&gt;&gt; getAllBooks() {&nbsp;&nbsp;
+public ResponseEntity<List<Book>> getAllBooks() {  
 
-&nbsp;&nbsp;&nbsp;&nbsp;List&lt;Book&gt; books = bookRepository.findAll();&nbsp;&nbsp;
+    List<Book> books = bookRepository.findAll();  
 
-&nbsp;&nbsp;&nbsp;&nbsp;return ResponseEntity.ok(books);&nbsp;&nbsp;
+    return ResponseEntity.ok(books);  
 
-}</pre>
+}
+```
+
 
 Next, we'll add the ability to fetch a single book by its ID. MongoDB uses ObjectId as the ID type, and Spring will automatically convert the incoming string to an ObjectId when the request hits this endpoint:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@GetMapping("/{id}")&nbsp;&nbsp;
+```
+@GetMapping("/{id}")  
 
-public ResponseEntity&lt;Book&gt; getBookById(@PathVariable ObjectId id) {&nbsp;&nbsp;
+public ResponseEntity<Book> getBookById(@PathVariable ObjectId id) {  
 
-&nbsp;&nbsp;&nbsp;&nbsp;Optional&lt;Book&gt; book = bookRepository.findById(id);&nbsp;&nbsp;
+    Optional<Book> book = bookRepository.findById(id);  
 
-&nbsp;&nbsp;&nbsp;&nbsp;return book.map(ResponseEntity::ok)&nbsp;&nbsp;
+    return book.map(ResponseEntity::ok)  
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.orElse(ResponseEntity.notFound().build());&nbsp;&nbsp;
+               .orElse(ResponseEntity.notFound().build());  
 
-}</pre>
+}
+```
+
 
 If the ID exists, we return the matching book with a 200 OK. If it doesn't, we return a 404 Not Found.
 
@@ -276,21 +297,27 @@ Now, let's go a step further and let users search for books by title. We want th
 
 Inside our BookRepository, we define the following method:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">List&lt;Book&gt; findByTitleContainingIgnoreCase(String title);</pre>
+```
+List<Book> findByTitleContainingIgnoreCase(String title);
+```
+
 
 That's it. Spring Data parses this method name and automatically builds a query that matches documents where the title field contains the provided string, ignoring case.
 
 Here's the controller method that uses it:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@GetMapping("/title/{title}")&nbsp;&nbsp;
+```
+@GetMapping("/title/{title}")  
 
-public ResponseEntity&lt;List&lt;Book&gt;&gt; getBooksByTitle(@PathVariable String title) {&nbsp;&nbsp;
+public ResponseEntity<List<Book>> getBooksByTitle(@PathVariable String title) {  
 
-&nbsp;&nbsp;&nbsp;&nbsp;List&lt;Book&gt; books = bookRepository.findByTitleContainingIgnoreCase(title);&nbsp;&nbsp;
+    List<Book> books = bookRepository.findByTitleContainingIgnoreCase(title);  
 
-&nbsp;&nbsp;&nbsp;&nbsp;return ResponseEntity.ok(books);&nbsp;&nbsp;
+    return ResponseEntity.ok(books);  
 
-}</pre>
+}
+```
+
 
 Spring Data gives us dynamic query generation. By simply naming a method according to a pattern, like findByFieldName or findByFieldOneAndFieldTwo, Spring can build the corresponding MongoDB query behind the scenes.
 
@@ -303,31 +330,34 @@ Update {#h2-9-update}
 
 To update an existing book, we'll use @PutMapping with the book's ID in the path. This method first checks if the book exists. If it does, we update the relevant fields and save the changes. If not, we return a 404 Not Found.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@PutMapping("/{id}")&nbsp;&nbsp;
+```
+@PutMapping("/{id}")  
 
-public ResponseEntity&lt;Book&gt; updateBook(@PathVariable ObjectId id, @RequestBody Book bookDetails) {&nbsp;&nbsp;
+public ResponseEntity<Book> updateBook(@PathVariable ObjectId id, @RequestBody Book bookDetails) {  
 
-&nbsp;&nbsp;&nbsp;&nbsp;Optional&lt;Book&gt; optionalBook = bookRepository.findById(id);&nbsp;&nbsp;
+    Optional<Book> optionalBook = bookRepository.findById(id);  
 
-&nbsp;&nbsp;&nbsp;&nbsp;if (optionalBook.isPresent()) {&nbsp;&nbsp;
+    if (optionalBook.isPresent()) {  
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Book book = optionalBook.get();&nbsp;&nbsp;
+        Book book = optionalBook.get();  
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;book.setTitle(bookDetails.getTitle());&nbsp;&nbsp;
+        book.setTitle(bookDetails.getTitle());  
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;book.setAuthor(bookDetails.getAuthor());&nbsp;&nbsp;
+        book.setAuthor(bookDetails.getAuthor());  
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Book updatedBook = bookRepository.save(book);&nbsp;&nbsp;
+        Book updatedBook = bookRepository.save(book);  
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return ResponseEntity.ok(updatedBook);&nbsp;&nbsp;
+        return ResponseEntity.ok(updatedBook);  
 
-&nbsp;&nbsp;&nbsp;&nbsp;} else {&nbsp;&nbsp;
+    } else {  
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return ResponseEntity.notFound().build();&nbsp;&nbsp;
+        return ResponseEntity.notFound().build();  
 
-&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;&nbsp;
+    }  
 
-}</pre>
+}
+```
+
 
 This pattern is basic. We only update if the book is already present, and we use the same repository method as we did to insert, save(...), to persist the changes. If the ID doesn't exist, the API gracefully handles it with a 404.
 
@@ -336,23 +366,26 @@ Delete {#h2-10-delete}
 
 To remove a book from the collection, we add a @DeleteMapping endpoint that takes the book's ID.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@DeleteMapping("/{id}")&nbsp;&nbsp;
+```
+@DeleteMapping("/{id}")  
 
-public ResponseEntity&lt;Void&gt; deleteBook(@PathVariable ObjectId id) {&nbsp;&nbsp;
+public ResponseEntity<Void> deleteBook(@PathVariable ObjectId id) {  
 
-&nbsp;&nbsp;&nbsp;&nbsp;if (bookRepository.existsById(id)) {&nbsp;&nbsp;
+    if (bookRepository.existsById(id)) {  
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;bookRepository.deleteById(id);&nbsp;&nbsp;
+        bookRepository.deleteById(id);  
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return ResponseEntity.noContent().build();&nbsp;&nbsp;
+        return ResponseEntity.noContent().build();  
 
-&nbsp;&nbsp;&nbsp;&nbsp;} else {&nbsp;&nbsp;
+    } else {  
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return ResponseEntity.notFound().build();&nbsp;&nbsp;
+        return ResponseEntity.notFound().build();  
 
-&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;&nbsp;
+    }  
 
-}</pre>
+}
+```
+
 
 Before deleting, we check if the book exists. If it does, we delete it and return a 204 No Content response. If not, we return a 404 Not Found.
 
@@ -376,7 +409,8 @@ This gives us a few nice benefits:
 
 Create a new package called dto, and add a BookRequest record:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">package com.mongodb.springrest.dto;
+```
+package com.mongodb.springrest.dto;
 
 import jakarta.validation.constraints.NotBlank;
 
@@ -384,17 +418,19 @@ import jakarta.validation.constraints.Size;
 
 public record BookRequest(
 
-&nbsp;&nbsp;&nbsp;&nbsp;@NotBlank(message = "Title is required")
+    @NotBlank(message = "Title is required")
 
-&nbsp;&nbsp;&nbsp;&nbsp;@Size(max = 200, message = "Title must not exceed 200 characters")
+    @Size(max = 200, message = "Title must not exceed 200 characters")
 
-&nbsp;&nbsp;&nbsp;&nbsp;String title,
+    String title,
 
-&nbsp;&nbsp;&nbsp;&nbsp;@NotBlank(message = "Author is required")
+    @NotBlank(message = "Author is required")
 
-&nbsp;&nbsp;&nbsp;&nbsp;String author
+    String author
 
-) {}</pre>
+) {}
+```
+
 
 This is what we'll use for POST and PUT requests. We've added some basic validation: Both fields are required, and the title can't exceed 200 characters.
 
@@ -408,35 +444,38 @@ This keeps our validation focused, keeps our models clean, and makes your API mu
 
 Next, we'll define what the API sends back when clients fetch data:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">package com.mongodb.springrest.dto;
+```
+package com.mongodb.springrest.dto;
 
 import com.mongodb.springrest.model.Book;
 
 public record BookResponse(
 
-&nbsp;&nbsp;&nbsp;&nbsp;String id,
+    String id,
 
-&nbsp;&nbsp;&nbsp;&nbsp;String title,
+    String title,
 
-&nbsp;&nbsp;&nbsp;&nbsp;String author
+    String author
 
 ) {
 
-&nbsp;&nbsp;&nbsp;&nbsp;public static BookResponse from(Book book) {
+    public static BookResponse from(Book book) {
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return new BookResponse(
+        return new BookResponse(
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;book.getId().toHexString(),
+            book.getId().toHexString(),
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;book.getTitle(),
+            book.getTitle(),
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;book.getAuthor()
+            book.getAuthor()
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;);
+        );
 
-&nbsp;&nbsp;&nbsp;&nbsp;}
+    }
 
-}</pre>
+}
+```
+
 
 This wraps our domain object in a clean, API-friendly shape. We're converting the MongoDB ObjectId into a string here so it works nicely in JSON responses.
 
@@ -450,23 +489,27 @@ Now, we'll update our BookController to use the DTOs instead of exposing the Boo
 
 **Create**
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@PostMapping
+```
+@PostMapping
 
-public ResponseEntity&lt;BookResponse&gt; createBook(@RequestBody @Valid BookRequest request) {
+public ResponseEntity<BookResponse> createBook(@RequestBody @Valid BookRequest request) {
 
-&nbsp;&nbsp;&nbsp;&nbsp;Book book = new Book(request.title(), request.author());
+    Book book = new Book(request.title(), request.author());
 
-&nbsp;&nbsp;&nbsp;&nbsp;Book saved = bookRepository.save(book);
+    Book saved = bookRepository.save(book);
 
-&nbsp;&nbsp;&nbsp;&nbsp;return ResponseEntity.status(HttpStatus.CREATED).body(BookResponse.from(saved));
+    return ResponseEntity.status(HttpStatus.CREATED).body(BookResponse.from(saved));
 
-}</pre>
+}
+```
+
 
 When we annotate a method argument with @Valid, Spring will automatically validate the request using our BookRequest annotations, and throw a MethodArgumentNotValidException if validation fails with a 400 Bad Request response. But the default error response isn't very nice. It's often verbose and not very readable for clients.
 
 [@RestControllerAdvice](https://spring.io/blog/2013/11/01/exception-handling-in-spring-mvc)is a nice way to customize the validation error response, and is recommended. Adding a package exception and a the class GlobalExceptionHandler, we can add the following code:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">package com.mongodb.springrest.exception;
+```
+package com.mongodb.springrest.exception;
 
 import jakarta.validation.ConstraintViolationException;
 
@@ -488,141 +531,161 @@ import java.util.stream.Collectors;
 
 public class GlobalExceptionHandler {
 
-&nbsp;&nbsp;&nbsp;&nbsp;@ExceptionHandler(MethodArgumentNotValidException.class)
+    @ExceptionHandler(MethodArgumentNotValidException.class)
 
-&nbsp;&nbsp;&nbsp;&nbsp;public ResponseEntity&lt;Map&lt;String, String&gt;&gt; handleValidation(MethodArgumentNotValidException ex) {
+    public ResponseEntity<Map<String, String>> handleValidation(MethodArgumentNotValidException ex) {
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Map&lt;String, String&gt; errors = ex.getBindingResult()
+        Map<String, String> errors = ex.getBindingResult()
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.getFieldErrors()
+            .getFieldErrors()
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.stream()
+            .stream()
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.collect(Collectors.toMap(
+            .collect(Collectors.toMap(
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;field -&gt; field.getField(),
+                field -> field.getField(),
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;field -&gt; field.getDefaultMessage(),
+                field -> field.getDefaultMessage(),
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(existing, replacement) -&gt; existing // in case of duplicate field names
+                (existing, replacement) -> existing // in case of duplicate field names
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;));
+            ));
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return ResponseEntity.badRequest().body(errors);
+        return ResponseEntity.badRequest().body(errors);
 
-&nbsp;&nbsp;&nbsp;&nbsp;}
+    }
 
-}</pre>
+}
+```
+
 
 This will mean instead of a wall of hard-to-parse error information, we get a nice and clean error like:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">{
+```
+{
 
-&nbsp;&nbsp;"title": "Title is required",
+  "title": "Title is required",
 
-&nbsp;&nbsp;"author": "Author is required"
+  "author": "Author is required"
 
-}</pre>
+}
+```
+
 
 **Read (all)**
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@GetMapping
+```
+@GetMapping
 
-public ResponseEntity&lt;List&lt;BookResponse&gt;&gt; getAllBooks() {
+public ResponseEntity<List<BookResponse>> getAllBooks() {
 
-&nbsp;&nbsp;&nbsp;&nbsp;List&lt;BookResponse&gt; books = bookRepository.findAll()
+    List<BookResponse> books = bookRepository.findAll()
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.stream()
+        .stream()
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.map(BookResponse::from)
+        .map(BookResponse::from)
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.toList();
+        .toList();
 
-&nbsp;&nbsp;&nbsp;&nbsp;return ResponseEntity.ok(books);
+    return ResponseEntity.ok(books);
 
-}</pre>
+}
+```
+
 
 **Read by ID**
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@GetMapping("/{id}")
+```
+@GetMapping("/{id}")
 
-public ResponseEntity&lt;BookResponse&gt; getBookById(@PathVariable ObjectId id) {
+public ResponseEntity<BookResponse> getBookById(@PathVariable ObjectId id) {
 
-&nbsp;&nbsp;&nbsp;&nbsp;return bookRepository.findById(id)
+    return bookRepository.findById(id)
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.map(BookResponse::from)
+        .map(BookResponse::from)
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.map(ResponseEntity::ok)
+        .map(ResponseEntity::ok)
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.orElse(ResponseEntity.notFound().build());
+        .orElse(ResponseEntity.notFound().build());
 
-}</pre>
+}
+```
+
 
 **Search by title**
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@GetMapping("/title/{title}")
+```
+@GetMapping("/title/{title}")
 
-public ResponseEntity&lt;List&lt;BookResponse&gt;&gt; getBooksByTitle(@PathVariable String title) {
+public ResponseEntity<List<BookResponse>> getBooksByTitle(@PathVariable String title) {
 
-&nbsp;&nbsp;&nbsp;&nbsp;List&lt;BookResponse&gt; books = bookRepository.findByTitleContainingIgnoreCase(title)
+    List<BookResponse> books = bookRepository.findByTitleContainingIgnoreCase(title)
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.stream()
+        .stream()
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.map(BookResponse::from)
+        .map(BookResponse::from)
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.toList();
+        .toList();
 
-&nbsp;&nbsp;&nbsp;&nbsp;return ResponseEntity.ok(books);
+    return ResponseEntity.ok(books);
 
-}</pre>
+}
+```
+
 
 **Update**
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@PutMapping("/{id}")
+```
+@PutMapping("/{id}")
 
-public ResponseEntity&lt;BookResponse&gt; updateBook(@PathVariable ObjectId id,
+public ResponseEntity<BookResponse> updateBook(@PathVariable ObjectId id,
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@RequestBody @Valid BookRequest request) {
+                                               @RequestBody @Valid BookRequest request) {
 
-&nbsp;&nbsp;&nbsp;&nbsp;return bookRepository.findById(id)
+    return bookRepository.findById(id)
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.map(book -&gt; {
+        .map(book -> {
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;book.setTitle(request.title());
+            book.setTitle(request.title());
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;book.setAuthor(request.author());
+            book.setAuthor(request.author());
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Book updated = bookRepository.save(book);
+            Book updated = bookRepository.save(book);
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return ResponseEntity.ok(BookResponse.from(updated));
+            return ResponseEntity.ok(BookResponse.from(updated));
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;})
+        })
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.orElse(ResponseEntity.notFound().build());
+        .orElse(ResponseEntity.notFound().build());
 
-}</pre>
+}
+```
+
 
 **Delete stays the same**
 
 We don't need a DTO for deletes, so this one stays just as it is:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@DeleteMapping("/{id}")
+```
+@DeleteMapping("/{id}")
 
-public ResponseEntity&lt;Void&gt; deleteBook(@PathVariable ObjectId id) {
+public ResponseEntity<Void> deleteBook(@PathVariable ObjectId id) {
 
-&nbsp;&nbsp;&nbsp;&nbsp;if (bookRepository.existsById(id)) {
+    if (bookRepository.existsById(id)) {
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;bookRepository.deleteById(id);
+        bookRepository.deleteById(id);
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return ResponseEntity.noContent().build();
+        return ResponseEntity.noContent().build();
 
-&nbsp;&nbsp;&nbsp;&nbsp;} else {
+    } else {
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return ResponseEntity.notFound().build();
+        return ResponseEntity.notFound().build();
 
-&nbsp;&nbsp;&nbsp;&nbsp;}
+    }
 
-}</pre>
+}
+```
+
 
 With this small update, our API is much more robust:
 
@@ -643,29 +706,38 @@ We'll walk through a full cycle: adding a book, reading it back, updating it, an
 
 To start our application, we open a terminal in our project directory and run:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">mvn spring-boot:run</pre>
+```
+mvn spring-boot:run
+```
+
 
 ### Create {#h3-17-create}
 
 Let's create a new book using a simple POST request.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">curl -X POST http://localhost:8080/api/books \
+```
+curl -X POST http://localhost:8080/api/books \
 
-&nbsp;&nbsp;-H "Content-Type: application/json" \
+  -H "Content-Type: application/json" \
 
-&nbsp;&nbsp;-d '{"title": "Dune", "author": "Frank Herbert"}'</pre>
+  -d '{"title": "Dune", "author": "Frank Herbert"}'
+```
+
 
 If everything is working, we should get back a JSON response with the saved book, including its automatically generated _id. It'll look something like:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">{
+```
+{
 
-&nbsp;&nbsp;"id": "64fc99b10f4e3a2f04262a8b",
+  "id": "64fc99b10f4e3a2f04262a8b",
 
-&nbsp;&nbsp;"title": "Dune",
+  "title": "Dune",
 
-&nbsp;&nbsp;"author": "Frank Herbert"
+  "author": "Frank Herbert"
 
-}</pre>
+}
+```
+
 
 We'll use the id in some of the next steps.
 
@@ -677,27 +749,36 @@ curl http://localhost:8080/api/books
 
 This should return an array of book objects. Since we've only added one, we'll get something like:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">[
+```
+[
 
-&nbsp;&nbsp;{
+  {
 
-&nbsp;&nbsp;&nbsp;&nbsp;"id": "64fc99b10f4e3a2f04262a8b",
+    "id": "64fc99b10f4e3a2f04262a8b",
 
-&nbsp;&nbsp;&nbsp;&nbsp;"title": "Dune",
+    "title": "Dune",
 
-&nbsp;&nbsp;&nbsp;&nbsp;"author": "Frank Herbert"
+    "author": "Frank Herbert"
 
-&nbsp;&nbsp;}
+  }
 
-]</pre>
+]
+```
+
 
 To search by title, we can use the following endpoint. It will return all books whose title contains the word "dune", case-insensitively.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">curl http://localhost:8080/api/books/title/dune</pre>
+```
+curl http://localhost:8080/api/books/title/dune
+```
+
 
 To fetch a specific book by ID, we replace \<id\> with the actual ID returned earlier:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">curl http://localhost:8080/api/books/64fc99b10f4e3a2f04262a8b</pre>
+```
+curl http://localhost:8080/api/books/64fc99b10f4e3a2f04262a8b
+```
+
 
 If the book exists, we'll get back the full object. If not, we'll see a 404 Not Found.
 
@@ -705,29 +786,38 @@ If the book exists, we'll get back the full object. If not, we'll see a 404 Not 
 
 Now, let's update the book we just created. We'll use the same ID and provide a new version of the title.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">curl -X PUT http://localhost:8080/api/books/64fc99b10f4e3a2f04262a8b \
+```
+curl -X PUT http://localhost:8080/api/books/64fc99b10f4e3a2f04262a8b \
 
-&nbsp;&nbsp;-H "Content-Type: application/json" \
+  -H "Content-Type: application/json" \
 
-&nbsp;&nbsp;-d '{"title": "Dune: Extended Edition", "author": "Frank Herbert"}'</pre>
+  -d '{"title": "Dune: Extended Edition", "author": "Frank Herbert"}'
+```
+
 
 This should return the updated book:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">{
+```
+{
 
-&nbsp;&nbsp;"id": "64fc99b10f4e3a2f04262a8b",
+  "id": "64fc99b10f4e3a2f04262a8b",
 
-&nbsp;&nbsp;"title": "Dune: Extended Edition",
+  "title": "Dune: Extended Edition",
 
-&nbsp;&nbsp;"author": "Frank Herbert"
+  "author": "Frank Herbert"
 
-}</pre>
+}
+```
+
 
 ### Delete {#h3-20-delete}
 
 To remove the book entirely, send a DELETE request with the same ID:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">curl -X DELETE http://localhost:8080/api/books/64fc99b10f4e3a2f04262a8b</pre>
+```
+curl -X DELETE http://localhost:8080/api/books/64fc99b10f4e3a2f04262a8b
+```
+
 
 If successful, we'll get back a 204 No Content response, meaning the deletion was successful, but there's nothing left to return.
 

@@ -11,14 +11,17 @@ The Foreign Function \& Memory (FFM) API, finalised in Java 22 (JEP 454), provid
 
 **Foreign function calls** allow Java programs to call native functions in shared libraries (`.so`, `.dll`, `.dylib`) without writing any C or JNI glue code. A `Linker` resolves native symbols and produces a `MethodHandle` that can be called from Java. The API handles ABI conventions, argument marshalling, and return type mapping automatically for all supported platforms.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">try (Arena arena = Arena.ofConfined()) {
+```java
+try (Arena arena = Arena.ofConfined()) {
     MethodHandle strlen = Linker.nativeLinker()
         .downcallHandle(
             Linker.nativeLinker().defaultLookup().find("strlen").orElseThrow(),
             FunctionDescriptor.of(JAVA_LONG, ADDRESS));
     MemorySegment str = arena.allocateFrom("Hello, FFM!");
     long len = (long) strlen.invoke(str); // 11
-}</pre>
+}
+```
+
 
 The FFM API supersedes both JNI (for calling native functions) and the older `sun.misc.Unsafe` (for off-heap memory). JNI remains available for backwards compatibility but is no longer the recommended approach for new code.
 

@@ -34,7 +34,7 @@ This is where **SonarQube for IDE** (formerly known as SonarLint) changes the ga
 
 This is **Part 1** of our series. Today, we focus on the **Standalone Mode** ---how to install the SonarQube IDE extension and use it to solve your daily coding headaches right inside [IntelliJ](https://www.jetbrains.com/idea/).
 
-*** ** * ** ***
+
 
 **Problem #1: "I don't have time for complex tool setups"** {#h2-0-problem-1-i-don-t-have-time-for-complex-tool-setups}
 -----------------------------------------------------------------------------------------------------------------------
@@ -53,7 +53,7 @@ We are busy. We don't want to spend 2 hours configuring a linter script or messi
 
 That's it. No servers. No heavy configuration. It just works.
 
-*** ** * ** ***
+
 
 **Problem #2: "I think my code is right, but is it?"** {#h2-1-problem-2-i-think-my-code-is-right-but-is-it}
 -----------------------------------------------------------------------------------------------------------
@@ -70,7 +70,7 @@ You don't need to run a command. As soon as you write a bad line, the SonarQube 
 It catches the things our eyes miss because we have been staring at the screen for too long.
 ![](Screenshot-2025-12-12-at-15.52.52.png)
 
-*** ** * ** ***
+
 
 **Problem #3: "Is this urgent, or can it wait?"** {#h2-2-problem-3-is-this-urgent-or-can-it-wait}
 -------------------------------------------------------------------------------------------------
@@ -87,7 +87,7 @@ If you look at the **SonarQube for IDE Tool Window** (usually at the bottom), it
 You can sort the list by severity and tackle the fires first.
 ![](Screenshot-2025-12-12-at-15.52.59.png)
 
-*** ** * ** ***
+
 
 **Problem #4: "I'm not just writing Java anymore..."** {#h2-3-problem-4-i-m-not-just-writing-java-anymore}
 ----------------------------------------------------------------------------------------------------------
@@ -107,7 +107,7 @@ SonarQube for IDE covers [**over 20 languages**](https://docs.sonarsource.com/so
 It ensures that your deployment scripts are just as secure as your Java classes. It is really satisfying to see the tool catching a security issue in a Dockerfile that you would have completely ignored otherwise.
 ![](Screenshot-2025-12-12-at-15.53.06.png)
 
-*** ** * ** ***
+
 
 **Problem #5: "I opened a legacy file and got 500 errors. I'm overwhelmed."** {#h2-4-problem-5-i-opened-a-legacy-file-and-got-500-errors-i-m-overwhelmed}
 ---------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -121,7 +121,7 @@ In the tool settings window, enable the setting **"Focus on New Code"**. This is
 Then in the analysis
 ![](Screenshot-2025-12-12-at-15.53.14.png)
 
-*** ** * ** ***
+
 
 **Problem #6: "I know it's bad, but how do I fix it?"** {#h2-5-problem-6-i-know-it-s-bad-but-how-do-i-fix-it}
 -------------------------------------------------------------------------------------------------------------
@@ -134,13 +134,16 @@ We use Optional to avoid nulls, but if we are lazy, we crash the app.
 
 **The Bad Code:**
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">Optional&lt;User&gt; user = findUser("juan");
+```java
+Optional<User> user = findUser("juan");
 
 // SonarQube for IDE Rule: "Optional.get()" should only be called after "isPresent()"
 
 // Risk: Throws NoSuchElementException if empty
 
-String name = user.get().getName();</pre>
+String name = user.get().getName();
+```
+
 
 **The Educational Fix:** When you select an issue, SonarQube for IDE opens a **Rule Description** tab. This is my favorite part. It doesn't just say "fix this." It gives you a mini-article explaining **why** this is an issue and provides clear "Non-Compliant" vs "Compliant" code examples. It effectively trains you to be a better developer while you work.
 ![](Screenshot-2025-12-12-at-15.53.22.png)
@@ -149,9 +152,12 @@ String name = user.get().getName();</pre>
 
 **The Good Code:**
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">String name = user.map(User::getName).orElse("Unknown");</pre>
+```java
+String name = user.map(User::getName).orElse("Unknown");
+```
 
-*** ** * ** ***
+
+
 
 **Problem #7: "The 'Oops' Moment (Hardcoded Secrets)" 🔓** {#h2-7-problem-7-the-oops-moment-hardcoded-secrets}
 --------------------------------------------------------------------------------------------------------------
@@ -164,19 +170,22 @@ SonarQube for IDE is very sensitive to strings that look like credentials. It de
 
 **The Bad Code**:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public Connection getDBConnection() {
+```java
+public Connection getDBConnection() {
 
-&nbsp;&nbsp;&nbsp;&nbsp;String url = "jdbc:mysql://localhost:3306/db";
+    String url = "jdbc:mysql://localhost:3306/db";
 
-&nbsp;&nbsp;&nbsp;&nbsp;// SonarQube for IDE triggers a Security Hotspot here
+    // SonarQube for IDE triggers a Security Hotspot here
 
-&nbsp;&nbsp;&nbsp;&nbsp;// "Review this potentially hardcoded secret"
+    // "Review this potentially hardcoded secret"
 
-&nbsp;&nbsp;&nbsp;&nbsp;String password = "superSecretPassword123";&nbsp;
+    String password = "superSecretPassword123"; 
 
-&nbsp;&nbsp;&nbsp;&nbsp;return DriverManager.getConnection(url, "root", password);
+    return DriverManager.getConnection(url, "root", password);
 
-}</pre>
+}
+```
+
 
 It acts as a safety net, reminding you to move that sensitive data to an environment variable or a properties file.
 
@@ -192,7 +201,7 @@ You can go to **Settings** -\> **Tools** -\> **SonarQube for IDE** -\> **Rules**
 
 ![](Screenshot-2025-12-12-at-15.53.31.png)
 
-*** ** * ** ***
+
 
 **Summary** {#h2-9-summary}
 ---------------------------

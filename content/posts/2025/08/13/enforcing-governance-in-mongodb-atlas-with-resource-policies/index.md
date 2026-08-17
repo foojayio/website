@@ -72,20 +72,23 @@ Here are three practical examples of commonly used policies:
 
 This policy blocks any cluster modifications outside AWS by using the unless clause. It's useful for organizations standardizing on a single cloud provider.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">resource "mongodbatlas_resource_policy" "only_aws_clusters" {
+```
+resource "mongodbatlas_resource_policy" "only_aws_clusters" {
   org_id = var.atlas_org_id
 
   name = "Allow Only AWS Clusters"
 
   policies = [
     {
-      body = &lt;&lt;EOT
+      body = <<EOT
 forbid(principal, action == ResourcePolicy::Action::"cluster.modify", resource)
 unless { context.cluster.cloudProviders == [ResourcePolicy::CloudProvider::"aws"] };
 EOT
     }
   ]
-}</pre>
+}
+```
+
 
 <br />
 
@@ -93,20 +96,23 @@ EOT
 
 This policy denies any modification to the access list that includes a wildcard public IP. It's critical to improve access control and avoid accidental exposure.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">resource "mongodbatlas_resource_policy" "block_public_ip" {
+```
+resource "mongodbatlas_resource_policy" "block_public_ip" {
   org_id = var.atlas_org_id
 
   name = "Restrict Wildcard IP"
 
   policies = [
     {
-      body = &lt;&lt;EOT
+      body = <<EOT
 forbid(principal, action == ResourcePolicy::Action::"project.ipAccessList.modify", resource)
 when { context.project.ipAccessList.contains(ip("0.0.0.0/0")) };
 EOT
     }
   ]
-}</pre>
+}
+```
+
 
 <br />
 
@@ -114,20 +120,23 @@ EOT
 
 This policy ensures that new or modified clusters support at least TLS 1.2, aligning with modern security standards.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">resource "mongodbatlas_resource_policy" "require_tls_12" {
+```
+resource "mongodbatlas_resource_policy" "require_tls_12" {
   org_id = var.atlas_org_id
 
   name = "Enforce Minimum TLS 1.2"
 
   policies = [
     {
-      body = &lt;&lt;EOT
+      body = <<EOT
 forbid(principal, action == ResourcePolicy::Action::"cluster.modify", resource)
 unless { context.cluster.minTLSVersion == ResourcePolicy::TLSVersion::"tls1_2" };
 EOT
     }
   ]
-}</pre>
+}
+```
+
 
 <br />
 
@@ -150,11 +159,14 @@ Resource Policies in Atlas UI
 
 To detect **non-compliant resources**, MongoDB Atlas provides the following API endpoint:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">curl --request GET \
-  --user "&lt;PUBLIC-KEY&gt;:&lt;PRIVATE-KEY&gt;" \
+```
+curl --request GET \
+  --user "<PUBLIC-KEY>:<PRIVATE-KEY>" \
   --digest \
   --header "Accept: application/vnd.atlas.2024-08-05+json" \
-  "https://cloud.mongodb.com/api/atlas/v2/orgs/&lt;ORG_ID&gt;/nonCompliantResources?pretty=true"</pre>
+  "https://cloud.mongodb.com/api/atlas/v2/orgs/<ORG_ID>/nonCompliantResources?pretty=true"
+```
+
 
 <br />
 

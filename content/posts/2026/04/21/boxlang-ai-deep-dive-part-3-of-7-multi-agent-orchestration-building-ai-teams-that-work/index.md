@@ -37,7 +37,8 @@ BoxLang AI 3.0 changes this. `AiAgent` now tracks its position in a full hierarc
 
 Every `AiAgent` carries a `parentAgent` property and a full set of hierarchy helpers. The relationship is bidirectional: `addSubAgent()` registers the sub-agent as a callable tool and sets the parent reference in one call.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">coordinator = aiAgent( name: "coordinator" )
+```java
+coordinator = aiAgent( name: "coordinator" )
     .addSubAgent( aiAgent( name: "researcher" ) )
     .addSubAgent( aiAgent( name: "writer" ) )
 
@@ -51,11 +52,13 @@ println( researcherAgent.getAgentPath() )      // /coordinator/researcher
 println( researcherAgent.getAncestors() )      // [ coordinator ]
 
 println( writerAgent.getRootAgent().getAgentName() ) // coordinator
-</pre>
+```
+
 
 The full hierarchy API from the source:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">// From AiAgent.bx
+```java
+// From AiAgent.bx
 setParentAgent( parent )   // assign parent — with self-reference and cycle guards
 clearParentAgent()         // detach from parent
 hasParentAgent()           // boolean
@@ -64,13 +67,15 @@ getRootAgent()             // walks up, returns the root
 getAgentDepth()            // 0 = root, 1 = child, 2 = grandchild, ...
 getAgentPath()             // "/coordinator/researcher"
 getAncestors()             // [immediateParent, grandparent, ..., root]
-</pre>
+```
+
 
 ### Cycle Detection Built-In {#h3-1-cycle-detection-built-in}
 
 Setting a parent that would create a cycle throws immediately --- no silent infinite loops:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">// From AiAgent.bx — setParentAgent()
+```java
+// From AiAgent.bx — setParentAgent()
 AiAgent function setParentAgent( required AiAgent parent ) {
     if ( arguments.parent == this ) {
         throw( type: "AiAgent.InvalidParent", message: "An agent cannot be its own parent." )
@@ -86,29 +91,32 @@ AiAgent function setParentAgent( required AiAgent parent ) {
     variables.parentAgent = arguments.parent
     return this
 }
-</pre>
+```
+
 
 🤖 Sub-Agents as Tools {#h2-2-sub-agents-as-tools}
 --------------------------------------------------
 
 The magic of `addSubAgent()` is that each sub-agent is automatically wrapped as a tool the parent can call --- no manual wiring, no custom callback code.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">// From AiAgent.bx — createSubAgentTool()
+```java
+// From AiAgent.bx — createSubAgentTool()
 private ITool function createSubAgentTool( required AiAgent subAgent ) {
     var agentName    = arguments.subAgent.getConfig().name
-    var toolName     = "delegate_to_" &amp; agentName.slugify()
+    var toolName     = "delegate_to_" & agentName.slugify()
     var toolDescription = "Delegate a task to the '#agentName#' sub-agent. "
-        &amp; "Use this tool when the task matches the sub-agent's specialty: #agentConfig.description#"
+        & "Use this tool when the task matches the sub-agent's specialty: #agentConfig.description#"
 
     return aiTool(
         name: toolName,
         description: toolDescription,
-        callable: ( required task ) =&gt; {
+        callable: ( required task ) => {
             return subAgent.run( task )
         }
     ).describeArg( "task", "The task or question to delegate to the sub-agent" )
 }
-</pre>
+```
+
 
 When `addSubAgent()` is called, the parent's `AiModel` gets a new tool named `delegate_to_researcher`, `delegate_to_writer`, etc. The LLM sees these tools in its context and decides when to use them --- exactly the same way it decides when to call any other tool.
 
@@ -119,7 +127,8 @@ When `addSubAgent()` is called, the parent's `AiModel` gets a new tool named `de
 
 One of the most important architectural changes in 3.0: `AiAgent` no longer holds `userId` or `conversationId` as instance state. They are resolved per-call.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">// From AiAgent.bx — run()
+```java
+// From AiAgent.bx — run()
 public any function run( any input = "", struct params = {}, struct options = {} ) {
     // Resolve per-call — no shared state
     var threadId       = arguments.options.threadId ?: variables.options.threadId ?: createUUID()
@@ -127,25 +136,29 @@ public any function run( any input = "", struct params = {}, struct options = {}
     var conversationId = arguments.options.conversationId ?: variables.options.conversationId ?: ""
     // ...
 }
-</pre>
+```
+
 
 This means **one agent instance can safely serve multiple concurrent users** --- no race conditions, no cross-user contamination, no per-user agent factory needed.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">// One shared agent — many concurrent users
+```java
+// One shared agent — many concurrent users
 sharedAgent = aiAgent( name: "support", memory: aiMemory( "cache" ) )
 
 // Each call is fully isolated
 sharedAgent.run( "Hello",           {}, { userId: "alice", conversationId: "sess-1" } )
 sharedAgent.run( "What did I say?", {}, { userId: "alice", conversationId: "sess-1" } ) // remembers alice
 sharedAgent.run( "Hello",           {}, { userId: "bob",   conversationId: "sess-2" } ) // isolated from alice
-</pre>
+```
+
 
 🧠 Per-Call Identity Routing on Memory {#h2-4-per-call-identity-routing-on-memory}
 ----------------------------------------------------------------------------------
 
 All memory types follow the same pattern --- `add()`, `getAll()`, `clear()`, and `trim()` all accept optional `userId` and `conversationId`:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">// One memory instance, many tenants
+```java
+// One memory instance, many tenants
 sharedMemory = aiMemory( "cache" )
 
 sharedMemory.add( message, userId: "alice", conversationId: "conv-1" )
@@ -154,7 +167,8 @@ sharedMemory.add( message, userId: "bob",   conversationId: "conv-2" )
 // Each retrieval is tenant-scoped
 aliceHistory = sharedMemory.getAll( userId: "alice", conversationId: "conv-1" )
 bobHistory   = sharedMemory.getAll( userId: "bob",   conversationId: "conv-2" )
-</pre>
+```
+
 
 When the agent calls `loadMemoryMessages()` internally, it passes the resolved per-call `userId` and `conversationId` down to all attached memories. Memory is naturally tenant-isolated without any extra wiring.
 
@@ -163,7 +177,8 @@ When the agent calls `loadMemoryMessages()` internally, it passes the resolved p
 
 Understanding what happens inside `run()` is useful when you're debugging or building middleware (more on that in Part 4). Here's the sequence:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="html">1. Resolve threadId / userId / conversationId (per-call, not instance state)
+```html
+1. Resolve threadId / userId / conversationId (per-call, not instance state)
 2. Build the user message struct
 3. Build the system message (description + instructions + skills + tools + MCP servers)
 4. Load memory messages for this userId/conversationId
@@ -175,7 +190,9 @@ Understanding what happens inside `run()` is useful when you're debugging or bui
 10. Store assistant response in all memories (userId/conversationId scoped)
 11. Fire afterAgentRun middleware (reverse pass)
 12. Fire BoxAnnounce "afterAIAgentRun" (global event)
-13. Return response</pre>
+13. Return response
+```
+
 
 The system message is also cached and fingerprinted --- if description, instructions, and skill pools haven't changed since the last call, the cached version is used instead of rebuilding. This matters for high-throughput scenarios where the same agent handles many requests.
 
@@ -186,17 +203,19 @@ Streaming works the same way in multi-agent setups --- each agent can stream ind
 
 coordinator = aiAgent( name: "coordinator" )
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">coordinator = aiAgent( name: "coordinator" )
+```java
+coordinator = aiAgent( name: "coordinator" )
     .addSubAgent( aiAgent( name: "researcher" ) )
     .addSubAgent( aiAgent( name: "writer" ) )
 
 // Stream the coordinator's output
 coordinator.stream(
-    onChunk : chunk =&gt; writeOutput( chunk.choices?.first()?.delta?.content ?: "" ),
+    onChunk : chunk => writeOutput( chunk.choices?.first()?.delta?.content ?: "" ),
     input   : "Research and write a 500-word article about BoxLang's JVM interop",
     options : { userId: "user-123", conversationId: "session-abc" }
 )
-</pre>
+```
+
 
 When the coordinator decides to delegate to the researcher, that sub-call happens synchronously inside the tool invocation --- the streaming coordinator gets back the researcher's result as a tool response, then continues streaming.
 
@@ -205,7 +224,8 @@ When the coordinator decides to delegate to the researcher, that sub-call happen
 
 When `HumanInTheLoopMiddleware` (covered in Part 4) suspends an agent, the state needs to be preserved. The `checkpointer` property handles this:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">agent = aiAgent(
+```java
+agent = aiAgent(
     name        : "finance-bot",
     middleware  : new HumanInTheLoopMiddleware(
         mode                  : "web",
@@ -228,11 +248,13 @@ agent.resume( "reject", threadId )
 
 // Or edit the arguments:
 agent.resume( "edit", threadId, { correctedArgs: { amount: 100, account: "#12345" } } )
-</pre>
+```
+
 
 The `resume()` implementation re-runs from the saved checkpoint, injecting the human's decision into the middleware context:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">// From AiAgent.bx — resume()
+```java
+// From AiAgent.bx — resume()
 any function resume( required string decision, required string threadId, struct editedData = {} ) {
     var savedState = variables.checkpointer.loadState( arguments.threadId )
     // Clear so it can't be resumed twice
@@ -248,14 +270,16 @@ any function resume( required string decision, required string threadId, struct 
         } } )
     )
 }
-</pre>
+```
+
 
 🔍 Introspection {#h2-8-introspection}
 --------------------------------------
 
 The `getConfig()` method gives you full visibility into an agent's state --- useful for debugging, monitoring dashboards, and logging:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">config = agent.getConfig()
+```java
+config = agent.getConfig()
 
 // Hierarchy
 println( config.agentDepth )    // 0, 1, 2, ...
@@ -279,14 +303,16 @@ println( config.skills )        // { activeSkills: [...], availableSkills: [...]
 // Middleware
 println( config.middlewareCount )
 println( config.middleware )    // [{ name, description }]
-</pre>
+```
+
 
 🚀 A Complete Multi-Agent Example {#h2-9-a-complete-multi-agent-example}
 ------------------------------------------------------------------------
 
 Here's a practical orchestration: a coordinator that delegates research to a specialized researcher and writing to a specialized writer, both with their own skills and tools.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">// Specialist agents
+```java
+// Specialist agents
 researchAgent = aiAgent(
     name        : "researcher",
     description : "Expert at finding, analyzing, and summarizing information from multiple sources",
@@ -322,7 +348,8 @@ response = coordinator.run(
     {},
     { userId: "luis", conversationId: "article-session-1" }
 )
-</pre>
+```
+
 
 The LLM driving the coordinator sees two tools: `delegate_to_researcher` and `delegate_to_writer`. It decides to call the researcher first, gets back a detailed summary, then calls the writer with that summary and the original request, and finally synthesizes the writer's output into a final response. You didn't write any of that logic --- the LLM figured it out from the tool descriptions.
 

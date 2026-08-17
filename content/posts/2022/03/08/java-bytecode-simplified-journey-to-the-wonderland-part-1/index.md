@@ -36,34 +36,43 @@ Each Bytecode is 1 byte long, and that's why it is called Bytecode. We know ther
 
 First, we will write a simple Java program and then compile it to see what Java compiler emits:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public class Calculator {
+```java
+public class Calculator {
 
   public int add(int a, int b) {
     return a + b;
   }
 }
-</pre>
+```
+
 
 That's the simplest Java program we could ever write. It's a class with a public method, "add", which takes two integer arguments and then returns, summing them. That's it.
 
 Let's compile it.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">javac Calculator.java</pre>
+```java
+javac Calculator.java
+```
+
 
 The above command will produce a class file named "Calculator. class". This file contains a series of bytes and it's not readable. You won't be able to open it with a text file or anything.
 
 However, an excellent Java command-line tool called "javap" allows us to read this bytecode from a class file. Let's read them, as follows:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">javap -c Calculator</pre>
+```
+javap -c Calculator
+```
+
 
 If we run the above command in our terminal, we will get the following output.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">Compiled from "Calculator.java"
+```
+Compiled from "Calculator.java"
 public class Calculator {
   public Calculator();
     Code:
        0: aload_0
-       1: invokespecial #1                  // Method java/lang/Object."&lt;init&gt;":()V
+       1: invokespecial #1                  // Method java/lang/Object."<init>":()V
        4: return
 
   public int add(int, int);
@@ -73,8 +82,8 @@ public class Calculator {
        2: iadd
        3: ireturn
 }
+```
 
-</pre>
 
 Look, we can see a constructor here. However, we haven't added that in our Java source code. Well, the Java compiler did that. That's our default constructor. The Java compiler added it.
 
@@ -112,9 +121,12 @@ Let's see another example -
 | java source code           | opcode                              | hex                | binary                                         |
 | 
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">int add(int a, int b) {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return a + b;
-&nbsp;}</pre>
+```java
+int add(int a, int b) {
+        return a + b;
+ }
+```
+
 
  | iload_1 <br /> iload_2 iadd ireturn | 1B <br /> 1C 60 AC | 0001 1011 <br /> 0001 1100 0110 0000 1010 1100 |
 
@@ -122,14 +134,20 @@ In the above table, we have a method which takes two integers arguments and then
 
 Now, look at the following method:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public int add() {
+```java
+public int add() {
     return 1 + 2;
-}</pre>
+}
+```
+
 
 However, here is a caveat. If you write the above method, then compile it and try **javap** to read it, you will find something like this -
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">0: iconst_3
-1: ireturn</pre>
+```
+0: iconst_3
+1: ireturn
+```
+
 
 The reason is that the Java compiler does a bit of optimization; when it sees we are just adding 1 and 2 and then returning their value, it can just load the 3 into the stack with one instruction rather than using 3 instructions. We will know much more about these sorts of optimization later.
 
@@ -139,7 +157,8 @@ That's a brief introduction to how Java bytecode and how it looks and works. We 
 
 But before closing the article, I can't resist sharing a simple piece of Java code that can read a class file and convert it into a series of bytes and print it out for you so you can see it the way the JVM sees it.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">package ca.bazlur;
+```java
+package ca.bazlur;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -152,12 +171,14 @@ public class BytecodeReader {
     byte[] bytes = Files.readAllBytes(classfile);
     for (byte aByte : bytes) {
       //ref https://stackoverflow.com/a/12310078/893197
-      String byteString = String.format("%8s", Integer.toBinaryString(aByte &amp; 0xFF))
+      String byteString = String.format("%8s", Integer.toBinaryString(aByte & 0xFF))
           .replace(' ', '0');
       System.out.println(byteString);
     }
   }
-}</pre>
+}
+```
+
 
 If you run this program, you will get a series of 1 and 0. Those are bits. Every 8 bits make a byte, and each byte represents an opcode. The list of all opcode can be found here:
 

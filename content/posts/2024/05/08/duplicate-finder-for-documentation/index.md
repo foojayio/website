@@ -30,37 +30,46 @@ Anyone who worked on technical documentation in a big team is certainly aware of
 
 As the project grows in size, duplicated content will start to occur. This is especially true for big projects including many similar products or features.
 
-*** ** * ** ***
+
 
 **Good:**{#duplication-good-bad}
 
 define once:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="html" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&lt;p&gt; 
+```html
+<p> 
     If you encounter any issues, refer to the troubleshooting guide
     or contact support. 
-&lt;/p&gt;</pre>
+</p>
+```
+
 
 reuse elsewhere:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="html" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&lt;TroubleshootingNote/&gt;</pre>
+```html
+<TroubleshootingNote/>
+```
 
-*** ** * ** ***
+
+
 
 **Bad**:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="html" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&lt;p&gt;
+```html
+<p>
     If you encounter any issues, refer to the troubleshooting
     guide or contact support.
-&lt;/p&gt;
+</p>
 
-&lt;!-- same meaning, slightly different wording--&gt;
-&lt;p&gt;
+<!-- same meaning, slightly different wording-->
+<p>
     In case of problems, consult the troubleshooting guide
     or contact support
-&lt;/p&gt;</pre>
+</p>
+```
 
-*** ** * ** ***
+
+
 
 The idea that advocates against duplication is commonly known as [DRY Principle](https://en.wikipedia.org/wiki/Don%27t_repeat_yourself). Though it is primarily associated with programming, the same property is highly favoured in documentation.
 

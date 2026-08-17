@@ -39,23 +39,29 @@ The book starts with an introduction to JavaFX and how it can be combined with K
 
 Immediately, a nice example is given of the reduced amount of code that can be achieved with Kotlin, with a minimal example of a button with a click handler. This is the typical Java code:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">Button btn = new Button();
+```
+Button btn = new Button();
 btn.setText("Say 'Hello World'");
-btn.setOnAction(new EventHandler&lt;ActionEvent&gt;() {
+btn.setOnAction(new EventHandler<ActionEvent>() {
     @Override
     public void handle(ActionEvent event) {
         System.out.println("Hello World!");
     }
-});</pre>
+});
+```
+
 
 In Kotlin, the same can be achieved with:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">val btn = Button().apply {
+```
+val btn = Button().apply {
     text = "Say 'Hello World'"
-    setOnAction { _ -&gt;
+    setOnAction { _ ->
         println("Hello World!")
     }
-}</pre>
+}
+```
+
 
 That's a reduction from 222 to 120 characters!
 

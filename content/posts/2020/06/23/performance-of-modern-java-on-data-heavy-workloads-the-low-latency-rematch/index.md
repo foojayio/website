@@ -64,22 +64,25 @@ What the keyset size does affect is allocation rate. The pipeline emits the full
 
 Here is the basic code of the pipeline, available on [GitHub](https://github.com/mtopolnik/jet-gc-benchmark/blob/round-2/src/main/java/org/example/StreamingRound2.java):
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">StreamStage&lt;Long&gt; source = p.readFrom(longSource(EVENTS_PER_SECOND))
+```java
+StreamStage<Long> source = p.readFrom(longSource(EVENTS_PER_SECOND))
                             .withNativeTimestamps(0)
                             .rebalance();
-StreamStage&lt;Tuple2&lt;Long, Long&gt;&gt; latencies = source
-        .groupingKey(n -&gt; n % NUM_KEYS)
+StreamStage<Tuple2<Long, Long>> latencies = source
+        .groupingKey(n -> n % NUM_KEYS)
         .window(sliding(WIN_SIZE_MILLIS, SLIDING_STEP_MILLIS))
         .aggregate(counting())
-        .filter(kwr -&gt; kwr.getKey() % DIAGNOSTIC_KEYSET_DOWNSAMPLING_FACTOR == 0)
+        .filter(kwr -> kwr.getKey() % DIAGNOSTIC_KEYSET_DOWNSAMPLING_FACTOR == 0)
         .mapStateful(DetermineLatency::new, DetermineLatency::map);
 
-latencies.filter(t2 -&gt; t2.f0() &lt; TOTAL_TIME_MILLIS)
-         .map(t2 -&gt; String.format("%d,%d", t2.f0(), t2.f1()))
+latencies.filter(t2 -> t2.f0() < TOTAL_TIME_MILLIS)
+         .map(t2 -> String.format("%d,%d", t2.f0(), t2.f1()))
          .writeTo(Sinks.files("/home/ec2-user/laten"));
 latencies
       .mapStateful(RecordLatencyHistogram::new, RecordLatencyHistogram::map)
-      .writeTo(Sinks.files("/home/ec2-user/bench"));</pre>
+      .writeTo(Sinks.files("/home/ec2-user/bench"));
+```
+
 
 The main part, sliding window aggregation, remains the same, but the following stages that process the results are new. We write the data to two files: `laten`, containing all the raw latency data points, and `bench`, containing an [HDR Histogram](https://hdrhistogram.github.io/HdrHistogram/plotFiles.html) of the latencies.
 

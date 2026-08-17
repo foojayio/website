@@ -52,7 +52,8 @@ BoxLang supports two complementary syntax modes, and our plugin provides complet
 
 Pure script syntax designed for classes, components, and business logic:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">/**
+```java
+/**
  * Modern BoxLang class with enterprise features
  */
 @Component
@@ -71,7 +72,7 @@ class UserService {
     /**
      * Arrow function for concise returns
      */
-    public function getProfile() =&gt; {
+    public function getProfile() => {
         return {
             username: this.username,
             roles: this.roles,
@@ -83,64 +84,67 @@ class UserService {
      * Lambda function for high-performance filtering
      */
     public function filterActive( required Array users ) {
-        return users.filter( ( user ) -&gt; user.active === true );
+        return users.filter( ( user ) -> user.active === true );
     }
 
     /**
      * Bitwise operations for permission flags
      */
     public function hasPermission( numeric userFlags, numeric requiredFlag ) {
-        return ( userFlags b&amp; requiredFlag ) === requiredFlag;
+        return ( userFlags b& requiredFlag ) === requiredFlag;
     }
 
     /**
      * Safe navigation with elvis operator
      */
     public function getEmail() {
-        return this.user?.email ?: "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="b3dddc9ed6ded2dadff3d6cbd2dec3dfd69dd0dcde">[email&nbsp;protected]</a>";
+        return this.user?.email ?: "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="b3dddc9ed6ded2dadff3d6cbd2dec3dfd69dd0dcde">[email protected]</a>";
     }
-}</pre>
+}
+```
+
 
 2. BoxLang Templates (`.bxm`) {#h2-3-2-boxlang-templates-bxm}
 -------------------------------------------------------------
 
 Markup-based syntax for views, layouts, and content generation:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">&lt;!--- User Dashboard Template ---&gt;
-&lt;bx:output&gt;
-    &lt;!DOCTYPE html&gt;
-    &lt;html lang="en"&gt;
-    &lt;head&gt;
-        &lt;title&gt;#variables.pageTitle#&lt;/title&gt;
-        &lt;meta charset="UTF-8"&gt;
-    &lt;/head&gt;
-    &lt;body&gt;
-        &lt;h1&gt;Welcome, #user.getName()#!&lt;/h1&gt;
+```java
+<!--- User Dashboard Template --->
+<bx:output>
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <title>#variables.pageTitle#</title>
+        <meta charset="UTF-8">
+    </head>
+    <body>
+        <h1>Welcome, #user.getName()#!</h1>
 
-        &lt;bx:if condition="user.isAdmin()"&gt;
-            &lt;div class="admin-panel"&gt;
-                &lt;h2&gt;Admin Controls&lt;/h2&gt;
-                &lt;p&gt;You have elevated privileges.&lt;/p&gt;
-            &lt;/div&gt;
-        &lt;bx:elseif condition="user.isPremium()"&gt;
-            &lt;div class="premium-badge"&gt;Premium Member&lt;/div&gt;
-        &lt;bx:else&gt;
-            &lt;div class="upgrade-prompt"&gt;
-                &lt;a href="/upgrade"&gt;Upgrade to Premium&lt;/a&gt;
-            &lt;/div&gt;
-        &lt;/bx:if&gt;
+        <bx:if condition="user.isAdmin()">
+            <div class="admin-panel">
+                <h2>Admin Controls</h2>
+                <p>You have elevated privileges.</p>
+            </div>
+        <bx:elseif condition="user.isPremium()">
+            <div class="premium-badge">Premium Member</div>
+        <bx:else>
+            <div class="upgrade-prompt">
+                <a href="/upgrade">Upgrade to Premium</a>
+            </div>
+        </bx:if>
 
-        &lt;bx:for array="#recentActivities#" index="i" item="activity"&gt;
-            &lt;div class="activity-##i##"&gt;
-                &lt;span class="timestamp"&gt;#activity.date#&lt;/span&gt;
-                &lt;p&gt;#activity.description#&lt;/p&gt;
-            &lt;/div&gt;
-        &lt;/bx:for&gt;
-    &lt;/body&gt;
-    &lt;/html&gt;
-&lt;/bx:output&gt;
+        <bx:for array="#recentActivities#" index="i" item="activity">
+            <div class="activity-##i##">
+                <span class="timestamp">#activity.date#</span>
+                <p>#activity.description#</p>
+            </div>
+        </bx:for>
+    </body>
+    </html>
+</bx:output>
 
-&lt;bx:script&gt;
+<bx:script>
     // Embedded script with full syntax highlighting
     function loadActivities() {
         return queryExecute( 
@@ -150,13 +154,15 @@ Markup-based syntax for views, layouts, and content generation:
     }
 
     // Lambda function for data transformation
-    var formatActivities = ( activities ) -&gt; {
-        return activities.map( ( a ) -&gt; {
+    var formatActivities = ( activities ) -> {
+        return activities.map( ( a ) -> {
             date: dateFormat( a.created, "medium" ),
             description: a.description
         } );
     };
-&lt;/bx:script&gt;</pre>
+</bx:script>
+```
+
 
 Feature Highlights {#h2-4-feature-highlights}
 ---------------------------------------------
@@ -190,15 +196,21 @@ Unlike generic XML syntax highlighting, our `.bxm` template support includes int
 
 BoxLang uses `#expression#` for string interpolation and dynamic output. The plugin correctly highlights:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">var message = "Hello, #user.name#!";
+```java
+var message = "Hello, #user.name#!";
 var calculation = "Result: #2 + 2#";
-var nested = "Status: #user.isActive() ? 'Active' : 'Inactive'#";</pre>
+var nested = "Status: #user.isActive() ? 'Active' : 'Inactive'#";
+```
+
 
 In templates:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">&lt;div class="user-##userId##" data-role="#user.role#"&gt;
+```java
+<div class="user-##userId##" data-role="#user.role#">
     #user.displayName#
-&lt;/div&gt;</pre>
+</div>
+```
+
 
 ### Code Folding Support {#h3-8-code-folding-support}
 
@@ -225,7 +237,8 @@ Installation {#h2-9-installation}
 
 Add to your plugin configuration (e.g., `lua/plugins/boxlang.lua`):
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">return {
+```java
+return {
   {
     "ortus-boxlang/vim-boxlang",
     ft = { "boxlang", "boxlangTemplate" }, -- Lazy load on filetype
@@ -233,13 +246,18 @@ Add to your plugin configuration (e.g., `lua/plugins/boxlang.lua`):
       -- Optional: Custom configuration
     end,
   }
-}</pre>
+}
+```
+
 
 ### vim-plug {#h3-11-vim-plug}
 
 Add to your `.vimrc` or `init.vim`:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">Plug 'ortus-boxlang/vim-boxlang'</pre>
+```java
+Plug 'ortus-boxlang/vim-boxlang'
+```
+
 
 Then run `:PlugInstall`
 
@@ -247,13 +265,17 @@ Then run `:PlugInstall`
 
 Add to your `.vimrc`:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">Plugin 'ortus-boxlang/vim-boxlang'</pre>
+```java
+Plugin 'ortus-boxlang/vim-boxlang'
+```
+
 
 Then run `:PluginInstall`
 
 ### Manual Installation {#h3-13-manual-installation}
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java"># Clone the repository
+```java
+# Clone the repository
 git clone https://github.com/ortus-boxlang/vim-boxlang.git
 
 # Copy to your vim runtime directory
@@ -268,7 +290,9 @@ cp -r vim-boxlang/ftdetect ~/.config/nvim/
 
 # Windows:
 cp -r vim-boxlang/syntax ~/AppData/Local/nvim/
-cp -r vim-boxlang/ftdetect ~/AppData/Local/nvim/</pre>
+cp -r vim-boxlang/ftdetect ~/AppData/Local/nvim/
+```
+
 
 File Extension Detection {#h2-14-file-extension-detection}
 ----------------------------------------------------------
@@ -281,24 +305,34 @@ The plugin automatically detects BoxLang files based on extensions:
 
 If automatic detection fails, manually set the filetype:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">" For script files
+```java
+" For script files
 :setfiletype boxlang
 
 " For template files
-:setfiletype boxlangTemplate</pre>
+:setfiletype boxlangTemplate
+```
+
 
 Or add a modeline to your file:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">// vim: set filetype=boxlang:</pre>
+```java
+// vim: set filetype=boxlang:
+```
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">&lt;!--- vim: set filetype=boxlangTemplate: ---&gt;</pre>
+
+```java
+<!--- vim: set filetype=boxlangTemplate: --->
+```
+
 
 Customization {#h2-15-customization}
 ------------------------------------
 
 Personalize syntax colors by adding to your `.vimrc` or `init.vim`:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">" BoxLang brand colors (#00FF78, #00DBFF)
+```java
+" BoxLang brand colors (#00FF78, #00DBFF)
 hi boxlangKeyword ctermfg=cyan guifg=#00DBFF
 hi boxlangOperator ctermfg=green guifg=#00FF78
 
@@ -313,33 +347,41 @@ hi boxlangBitwiseOp ctermfg=magenta guifg=#ff00ff gui=bold
 hi boxlangFunction ctermfg=yellow guifg=#FFF500
 
 " Comments
-hi boxlangComment ctermfg=darkgray guifg=#666666</pre>
+hi boxlangComment ctermfg=darkgray guifg=#666666
+```
+
 
 Advanced Configuration {#h2-16-advanced-configuration}
 ------------------------------------------------------
 
 ### Enable Folding {#h3-17-enable-folding}
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">" Add to .vimrc or init.vim
+```java
+" Add to .vimrc or init.vim
 set foldenable
 set foldmethod=syntax
-set foldlevelstart=10</pre>
+set foldlevelstart=10
+```
+
 
 ### BoxLang-Specific Keybindings {#h3-18-boxlang-specific-keybindings}
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">" Quick function navigation
-autocmd FileType boxlang,boxlangTemplate nnoremap &lt;buffer&gt; ]f /function&lt;CR&gt;
-autocmd FileType boxlang,boxlangTemplate nnoremap &lt;buffer&gt; [f ?function&lt;CR&gt;
+```java
+" Quick function navigation
+autocmd FileType boxlang,boxlangTemplate nnoremap <buffer> ]f /function<CR>
+autocmd FileType boxlang,boxlangTemplate nnoremap <buffer> [f ?function<CR>
 
 " Toggle between script and template
 function! ToggleBoxLangSyntax()
-    if &amp;filetype == 'boxlang'
+    if &filetype == 'boxlang'
         setfiletype boxlangTemplate
     else
         setfiletype boxlang
     endif
 endfunction
-nnoremap &lt;leader&gt;bt :call ToggleBoxLangSyntax()&lt;CR&gt;</pre>
+nnoremap <leader>bt :call ToggleBoxLangSyntax()<CR>
+```
+
 
 What's Next? {#h2-19-what-s-next}
 ---------------------------------

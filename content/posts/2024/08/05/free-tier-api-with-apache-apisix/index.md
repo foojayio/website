@@ -29,7 +29,8 @@ A naive approach {#h2-0-a-naive-approach}
 
 I implemented a free tier in my post [Evolving your RESTful APIs, a step-by-step approach](https://blog.frankel.ch/evolve-apis/#know-your-users), albeit in a very naive way. I copy-pasted the [limit-count](https://apisix.apache.org/docs/apisix/plugins/limit-count/) plugin and added my required logic.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="lua">function _M.access(conf, ctx)
+```lua
+function _M.access(conf, ctx)
     core.log.info("ver: ", ctx.conf_version)
 
     -- no limit if the request is authenticated
@@ -45,7 +46,9 @@ I implemented a free tier in my post [Evolving your RESTful APIs, a step-by-step
             end
         end
     end
--- rest of the logic</pre>
+-- rest of the logic
+```
+
 
 1. Get the configured request header value
 2. Get the consumer's `key-auth` configuration
@@ -71,26 +74,33 @@ Most users do match on the URI; a small minority use HTTP methods and the host. 
 
 Let's take a simple example, header-based API versioning. You'd need actually to match a specific HTTP request header. I've already described how to do it [previously](https://blog.frankel.ch/api-versioning/). In essence, `vars` is an additional matching criterion that allows the evaluation of APISIX and nginx variables.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml">routes:
+```yaml
+routes:
   - uri: /*
     upstream_id: 1
-    vars: [[ "http_accept", "==", "vnd.ch.frankel.myservice.v1+json" ]]</pre>
+    vars: [[ "http_accept", "==", "vnd.ch.frankel.myservice.v1+json" ]]
+```
+
 
 The above route will match if, and only if, the HTTP `Accept` header is equal to `vnd.ch.frankel.myservice.v1+json`. You can find the complete list of supported operators in the [lua-resty-expr](https://github.com/api7/lua-resty-expr) project.
 
 APISIX matches routes in a non-specified order by default. If URIs are *disjointed*, that's not an issue.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml">routes:
+```yaml
+routes:
   - uri: /*
     upstream_id: 1
     vars: [[ "http_accept", "==", "vnd.ch.frankel.myservice.v1+json" ]]
   - uri: /*
     upstream_id: 2
-    vars: [[ "http_accept", "==", "vnd.ch.frankel.myservice.v2+json" ]]</pre>
+    vars: [[ "http_accept", "==", "vnd.ch.frankel.myservice.v2+json" ]]
+```
+
 
 Problems arise when URIs are somehow not disjointed. For example, imagine I want to set a default route for unversioned calls.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml">routes:
+```yaml
+routes:
   - uri: /*
     upstream_id: 1
     vars: [[ "http_accept", "==", "vnd.ch.frankel.myservice.v1+json" ]]
@@ -98,11 +108,14 @@ Problems arise when URIs are somehow not disjointed. For example, imagine I want
     upstream_id: 2
     vars: [[ "http_accept", "==", "vnd.ch.frankel.myservice.v2+json" ]]
   - uri: /*
-    upstream_id: 1</pre>
+    upstream_id: 1
+```
+
 
 We need the third route to be evaluated last. If it's evaluated first, it will match all requests, regardless of their HTTP headers. APISIX offers the `priority` parameter to order route evaluation. By default, a route's priority is 0. Let's use `priority` to implement the versioning correctly:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml">routes:
+```yaml
+routes:
   - uri: /*
     upstream_id: 1
     vars: [[ "http_accept", "==", "vnd.ch.frankel.myservice.v1+json" ]]
@@ -112,7 +125,9 @@ We need the third route to be evaluated last. If it's evaluated first, it will m
     vars: [[ "http_accept", "==", "vnd.ch.frankel.myservice.v2+json" ]]
     priority: 10                                              #1
   - uri: /*
-    upstream_id: 1</pre>
+    upstream_id: 1
+```
+
 
 1. Evaluated first. The order is not relevant since the URIs are disjointed.
 
@@ -123,12 +138,15 @@ We are now ready to implement our free tier with matching rules.
 
 The first route to be evaluated should be the one with authentication and no rate limit:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml">routes:
+```yaml
+routes:
   - uri: /get
     upstream_id: 1
     vars: [[ "http_apikey", "~~", ".*"]]                      #1
     plugins:
-      key-auth: ~                                             #2</pre>
+      key-auth: ~                                             #2
+```
+
 
 1. Match if the request has an HTTP header named `apikey`
 2. Authenticate the request
@@ -136,13 +154,16 @@ The first route to be evaluated should be the one with authentication and no rat
 
 The other route is evaluated afterward.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml">- uri: /get
+```yaml
+- uri: /get
   upstream_id: 1
   plugins:
     limit-count:                                            #1
       count: 1
       time_window: 60
-      rejected_code: 429</pre>
+      rejected_code: 429
+```
+
 
 1. Rate limit this route
 
@@ -168,7 +189,7 @@ The complete source code for this post can be found on [GitHub](https://github.c
 * [router-radixtree](https://apisix.apache.org/docs/apisix/router-radixtree/)
 * [lua-resty-expr](https://github.com/api7/lua-resty-expr)
 
-*** ** * ** ***
+
 
 *Originally published at [A Java Geek](https://blog.frankel.ch/free-tier-api-apisix/) on July 28^th^, 2024*
 

@@ -58,21 +58,30 @@ Now it's finally time to talk about the "main" subject of this post, JEP 445.
 
 Until now, a minimal "Hello World" Java application, needs this code:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public class HelloWorld { 
+```
+public class HelloWorld { 
     public static void main(String[] args) { 
         System.out.println("Hello World");
     }
-}</pre>
+}
+```
+
 
 Although only one line produces the output, there is a lot of "clutter" around it that needs to be explained, or in most cases is taken "as is" and doesn't get explained to newbies. Thanks to JEP 445, that same code can now be simplified to:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">void main() {
+```
+void main() {
     System.out.println("Hello, World!");
-}</pre>
+}
+```
+
 
 Because this is a preview feature, additional flags are needed to execute this code. Thanks to JEP 330, we don't need to compile it. If you save the above code in a file `HelloWorld.java`, it can be executed directly, with a Java version 21, with `java` like this:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">java --source 21 --enable-preview HelloWorld.java</pre>
+```
+java --source 21 --enable-preview HelloWorld.java
+```
+
 
 ### Foojay Podcast: "Java 21 Has Arrived!" {#h3-4-foojay-podcast-java-21-has-arrived}
 

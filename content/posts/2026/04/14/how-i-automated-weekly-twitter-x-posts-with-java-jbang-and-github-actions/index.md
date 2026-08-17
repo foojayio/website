@@ -38,13 +38,16 @@ The Architecture {#h2-1-the-architecture}
 
 The system has three components:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">content/*.yaml → [Queue Generator] → social/queue.txt
+```
+content/*.yaml → [Queue Generator] → social/queue.txt
                                     → social/tweets.yaml
                                     → social/state.yaml
 
 social/* → [Post Script] → Twitter API v2 → updated state
 
-GitHub Actions cron → runs Post Script every Monday</pre>
+GitHub Actions cron → runs Post Script every Monday
+```
+
 
 Everything lives in the repository. State is tracked via committed files, not external databases.
 
@@ -61,7 +64,8 @@ A JBang script that scans all content YAML files, shuffles them randomly, and pr
 
 The tweet template looks like this:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">☕ {title}
+```
+☕ {title}
 
 {summary}
 
@@ -69,7 +73,9 @@ The tweet template looks like this:
 
 🔗 https://javaevolved.github.io/{category}/{slug}.html
 
-#Java #JavaEvolved</pre>
+#Java #JavaEvolved
+```
+
 
 The generator also validates that every tweet fits within Twitter's 280-character limit. If a summary is too long, it's automatically truncated with an ellipsis. Of the 113 patterns, 12 needed truncation.
 
@@ -98,24 +104,28 @@ I initially planned to use a shell script with `curl` and `openssl` for OAuth si
 
 Instead, the post script uses Java's built-in `java.net.http.HttpClient` and `javax.crypto.Mac` for HMAC-SHA1 signing. Here's the core of the OAuth signature:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">// Build signature base string
+```
+// Build signature base string
 var paramString = oauthParams.entrySet().stream()
-    .map(e -&gt; percentEncode(e.getKey()) + "=" + percentEncode(e.getValue()))
-    .collect(Collectors.joining("&amp;"));
+    .map(e -> percentEncode(e.getKey()) + "=" + percentEncode(e.getValue()))
+    .collect(Collectors.joining("&"));
 
-var baseString = method + "&amp;" + percentEncode(url) + "&amp;" + percentEncode(paramString);
-var signingKey = percentEncode(consumerSecret) + "&amp;" + percentEncode(tokenSecret);
+var baseString = method + "&" + percentEncode(url) + "&" + percentEncode(paramString);
+var signingKey = percentEncode(consumerSecret) + "&" + percentEncode(tokenSecret);
 
 // HMAC-SHA1
 var mac = javax.crypto.Mac.getInstance("HmacSHA1");
 mac.init(new javax.crypto.spec.SecretKeySpec(
     signingKey.getBytes(UTF_8), "HmacSHA1"));
 var signature = Base64.getEncoder().encodeToString(
-    mac.doFinal(baseString.getBytes(UTF_8)));</pre>
+    mac.doFinal(baseString.getBytes(UTF_8)));
+```
+
 
 The script also supports `--dry-run` to preview the next tweet without posting:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ jbang html-generators/socialpost.java --dry-run
+```
+$ jbang html-generators/socialpost.java --dry-run
 
 Queue has 113 entries, current index: 1
 Pattern: language/guarded-patterns
@@ -131,14 +141,17 @@ Nested if → when Clause (JDK 21+)
 
 #Java #JavaEvolved
 ---
-DRY RUN — not posting.</pre>
+DRY RUN — not posting.
+```
+
 
 Component 3: The GitHub Actions Workflow {#h2-6-component-3-the-github-actions-workflow}
 ----------------------------------------------------------------------------------------
 
 **File:** `.github/workflows/social-post.yml`
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">name: Weekly Social Post
+```
+name: Weekly Social Post
 
 on:
   schedule:
@@ -171,7 +184,9 @@ jobs:
           git add social/state.yaml
           git commit -m "chore: update social post state [skip ci]"
           git pull --rebase
-          git push</pre>
+          git push
+```
+
 
 A few details worth noting:
 
@@ -216,6 +231,6 @@ The entire implementation is open source at [github.com/javaevolved/javaevolved.
 
 Generate the queue, review the drafts, push, and let GitHub Actions handle the rest.
 
-*** ** * ** ***
+
 
 *Follow [@javaevolved](https://x.com/javaevolved) for a new modern Java pattern every Monday.*

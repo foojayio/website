@@ -44,8 +44,8 @@ You'll also get tips on how to select the right Java partner to assist with your
 
 <br />
 
-*** ** * ** ***
+
 
 <br />
 
-*** ** * ** ***
+

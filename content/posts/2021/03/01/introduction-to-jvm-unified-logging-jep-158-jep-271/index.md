@@ -37,7 +37,8 @@ Anyway, let's begin our exploration with a small recapitulation of [JEP-158](htt
 
 The JEP describes how the logging configuration works in the command line:
 
-<pre class="EnlighterJSRAW">-Xlog[:option]
+```
+-Xlog[:option]
     option         :=  [][:[][:[][:]]]
                        'help'
                        'disable'
@@ -69,7 +70,9 @@ The JEP describes how the logging configuration works in the command line:
     output-options :=  [,...]
     output-option  :=  filecount=
                        filesize=
-                       parameter=value</pre>
+                       parameter=value
+```
+
 
 This command-line option is the main entry point to unified logging. It allows configuring loggers that used to require multiple options into a single argument.
 
@@ -86,7 +89,8 @@ Now let's see what we can do with unified logging and profit from the insight it
 
 While the JEP explains things, it's usually not how we get the first contact: We use the command line help, which is describing just as well how to use from the `java` binary.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="shell">$ java -Xlog:help
+```bash
+$ java -Xlog:help
 -Xlog Usage: -Xlog[:[selections][:[output][:[decorators][:output-options]]]]
          where 'selections' are combinations of tags and levels of the form tag1[+tag2...][*][=level][,...]
          NOTE: Unless wildcard (*) is specified, only log messages tagged with exactly the tags specified will be matched.
@@ -145,13 +149,16 @@ Some examples:
 
  -Xlog:disable -Xlog:safepoint=trace:safepointtrace.txt
          Turn off all logging, including warnings and errors,
-         and then enable messages tagged with 'safepoint' up to 'trace' level to file 'safepointtrace.txt'.</pre>
+         and then enable messages tagged with 'safepoint' up to 'trace' level to file 'safepointtrace.txt'.
+```
+
 
 Also, you may have to enable logs on a running VM, well in this case the `jcmd`  
 
 sub-command `VM.log` is your tool of choice.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="shell">$ jcmd $(pidof java) help VM.log
+```bash
+$ jcmd $(pidof java) help VM.log
 6:
 VM.log
 Lists current log configuration, enables/disables/configures a log output, or rotates all logs.
@@ -169,7 +176,9 @@ Options: (options must be specified using the  or = syntax)
         decorators : [optional] Configures which decorators to use. Use 'none' or an empty value to remove all. (STRING, no default value)
         disable : [optional] Turns off all logging and clears the log configuration. (BOOLEAN, no default value)
         list : [optional] Lists current log configuration. (BOOLEAN, no default value)
-        rotate : [optional] Rotates all logs. (BOOLEAN, no default value)</pre>
+        rotate : [optional] Rotates all logs. (BOOLEAN, no default value)
+```
+
 
 ### Configuration {#_configuring_unified_logging}
 
@@ -212,9 +221,15 @@ Default settings
 
 In practice this will give for `java` and `jcmd` in that order:
 
-<pre class="EnlighterJSRAW">-Xlog:pagesize,os*,os+container=trace:file=/var/log/%t-os-container-pagesise.log:uptime,tags,level</pre>
+```
+-Xlog:pagesize,os*,os+container=trace:file=/var/log/%t-os-container-pagesise.log:uptime,tags,level
+```
 
-<pre class="EnlighterJSRAW" data-enlighter-language="shell">$ jcmd $(pidof java) VM.log output=/var/log/%t-os-container-pagesise.log what=pagesize,os*,os+container=trace decorators=uptime,tags,level</pre>
+
+```bash
+$ jcmd $(pidof java) VM.log output=/var/log/%t-os-container-pagesise.log what=pagesize,os*,os+container=trace decorators=uptime,tags,level
+```
+
 
 The above commands are equivalent, but note that depending on the specified tags and level, the log content may be less useful when enabled at a later time. In the above example in particular the `os+container=trace` will output some interesting logs only during JVM startup.
 
@@ -246,7 +261,8 @@ One of the best source came from [Poonam Bajaj Parhar](https://twitter.com/poona
 
 The basic translation of the following usual GC logging configuration:
 
-<pre class="EnlighterJSRAW">-XX:+PrintGCDetails                           \
+```
+-XX:+PrintGCDetails                           \
 -XX:+PrintGCApplicationStoppedTime            \
 -XX:+PrintGCApplicationConcurrentTime         \
 -XX:+PrintGCCause                             \
@@ -256,15 +272,21 @@ The basic translation of the following usual GC logging configuration:
 -XX:+UseGCLogFileRotation                     \
 -XX:NumberOfGCLogFiles=5                      \
 -XX:GCLogFileSize=10M                         \
--Xloggc:/var/log/`date +%FT%H-%M-%S`-gc.log   \</pre>
+-Xloggc:/var/log/`date +%FT%H-%M-%S`-gc.log   \
+```
+
 
 These flags could be translated to the following configuration:
 
-<pre class="EnlighterJSRAW">-Xlog:gc*,gc+heap=debug,gc+ref=debug,gc+ergo*=trace,gc+age*=trace,gc+phases*=debug,safepoint*:file=/var/log/%t-gc.log:uptime,tags,level:filecount=10,filesize=20M</pre>
+```
+-Xlog:gc*,gc+heap=debug,gc+ref=debug,gc+ergo*=trace,gc+age*=trace,gc+phases*=debug,safepoint*:file=/var/log/%t-gc.log:uptime,tags,level:filecount=10,filesize=20M
+```
+
 
 Let's break down this configuration
 
-<pre class="EnlighterJSRAW">-Xlog:
+```
+-Xlog:
   gc*,
   gc+heap=debug,
   gc+ref=debug,
@@ -274,7 +296,9 @@ Let's break down this configuration
   safepoint*
   :file=/var/log/%t-gc.log
   :time,tags,level
-  :filecount=5,filesize=10M</pre>
+  :filecount=5,filesize=10M
+```
+
 
 * Line 2: `PrintGCDetails` (remember that default level is `info`)
 * Line 3: `PrintHeapAtGC`

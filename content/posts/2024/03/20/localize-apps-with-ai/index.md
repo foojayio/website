@@ -54,15 +54,21 @@ Internationalization (also spelled i18n) is the process of adapting software to 
 
 Resource bundles hold the text values for different languages:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="json" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="en.json" data-enlighter-group="json-examples">{
+```json
+{
   "greeting": "Hello!",
   "farewell": "Goodbye!"
-}</pre>
+}
+```
 
-<pre class="EnlighterJSRAW" data-enlighter-language="json" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="es.json" data-enlighter-group="json-examples">{
+
+```json
+{
   "greeting": "¡Hola!",
   "farewell": "¡Adiós!"
-}</pre>
+}
+```
+
 
 For these values to make their way to the UI, the UI must be explicitly programmed to use these files.
 
@@ -79,23 +85,29 @@ Java uses files with the `.properties` extension to store localized strings for 
 
 Luckily, there are already a bunch of them in the project. For instance, here's what we have for English and Spanish:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="raw" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="messages.properties" data-enlighter-group="existing-properties">welcome=Welcome
+```
+welcome=Welcome
 required=is required
 notFound=has not been found
 duplicate=is already in use
 nonNumeric=must be all numeric
 duplicateFormSubmission=Duplicate form submission is not allowed
 typeMismatch.date=invalid date
-typeMismatch.birthDate=invalid date</pre>
+typeMismatch.birthDate=invalid date
+```
 
-<pre class="EnlighterJSRAW" data-enlighter-language="raw" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="messages_es.properties" data-enlighter-group="existing-properties">welcome=Bienvenido
+
+```
+welcome=Bienvenido
 required=Es requerido
 notFound=No ha sido encontrado
 duplicate=Ya se encuentra en uso
 nonNumeric=Sólo debe contener numeros
 duplicateFormSubmission=No se permite el envío de formularios duplicados
 typeMismatch.date=Fecha invalida
-typeMismatch.birthDate=Fecha invalida</pre>
+typeMismatch.birthDate=Fecha invalida
+```
+
 
 Externalizing UI strings is not something all projects universally do.  
 
@@ -110,7 +122,8 @@ Let's add a way to change the locale through URL parameters. This will allow us 
 
 To achieve this, we add the `WebConfig.java` file to manage the locale parameter:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="false" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">import java.util.Locale;
+```java
+import java.util.Locale;
 
 @Configuration
 public class WebConfig implements WebMvcConfigurer {
@@ -133,7 +146,9 @@ public class WebConfig implements WebMvcConfigurer {
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(localeChangeInterceptor());
     }
-}</pre>
+}
+```
+
 
 Now that we can test different locales, we run the server, and compare the home page for several locale parameters:
 
@@ -152,7 +167,10 @@ Prepare for localization {#h2-4-prepare-for-localization}
 
 The Petclinic project generates pages using [Thymeleaf templates](https://www.thymeleaf.org), so let's inspect the template files.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="html" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="true" data-enlighter-lineoffset="6" data-enlighter-title="findOwners.html" data-enlighter-group="inspect-templates">&lt;h2&gt;Find Owners&lt;/h2&gt;</pre>
+```html
+<h2>Find Owners</h2>
+```
+
 
 Indeed, some of the texts are hard-coded, so we need to modify the code to refer to the  
 
@@ -162,33 +180,51 @@ Luckily, Thymeleaf has good support for Java `.properties` files,
 
 so we can incorporate references to the corresponding resource bundle keys right in the template:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="html" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="true" data-enlighter-lineoffset="6" data-enlighter-title="findOwners.html – Before" data-enlighter-group="replacing-with-property">&lt;h2&gt;Find Owners&lt;/h2&gt;</pre>
+```html
+<h2>Find Owners</h2>
+```
 
-<pre class="EnlighterJSRAW" data-enlighter-language="html" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="true" data-enlighter-lineoffset="6" data-enlighter-title="findOwners.html – After" data-enlighter-group="replacing-with-property">&lt;h2 th:text='#{heading.find.owners}'&gt;Find Owners&lt;/h2&gt;</pre>
+
+```html
+<h2 th:text='#{heading.find.owners}'>Find Owners</h2>
+```
+
 
 Of course, for the change to work, it must be accompanied with the matching entry in the resource bundles:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="raw" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="false" data-enlighter-lineoffset="" data-enlighter-title="messages.properties" data-enlighter-group="resource-bundle-entry">heading.find.owners=Find Owners</pre>
+```
+heading.find.owners=Find Owners
+```
+
 
 The previously hard-coded text is still there, but now it serves as a fallback value, which will only be used if there is an error retrieving a proper localized message.
 
 The rest of the texts are externalized in a similar manner, however, there are several places that require special attention. For example, some of the warnings come from the validation engine and have to be specified using Java annotation parameters:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="31" data-enlighter-linenumbers="true" data-enlighter-lineoffset="30" data-enlighter-title="Person.java – Before" data-enlighter-group="adding-annotations">@Column(name = "first_name")
+```java
+@Column(name = "first_name")
 @NotBlank
-private String firstName;</pre>
+private String firstName;
+```
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="31" data-enlighter-linenumbers="true" data-enlighter-lineoffset="30" data-enlighter-title="Person.java – After" data-enlighter-group="adding-annotations">@Column(name = "first_name")
+
+```java
+@Column(name = "first_name")
 @NotBlank(message = "{field.validation.notblank}")
-private String firstName;</pre>
+private String firstName;
+```
 
-*** ** * ** ***
+
+
 
 In a couple of places, the logic has to be changed:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="html" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="true" data-enlighter-lineoffset="6" data-enlighter-title="createOrUpdatePetForm.html" data-enlighter-group="logic-refactoring-example-1">&lt;h2&gt;
-    &lt;th:block th:if="${pet['new']}"&gt;New &lt;/th:block&gt;Pet
-&lt;/h2&gt;</pre>
+```html
+<h2>
+    <th:block th:if="${pet['new']}">New </th:block>Pet
+</h2>
+```
+
 
 In the example above, the template uses a condition. If the `new` attribute is present,  
 **New** is added to the UI text. Consequently, the resulting text is either **New Pet** or **Pet** depending on the presence of the attribute.
@@ -199,42 +235,60 @@ depending on the gender of the noun, and the existing logic doesn't account for 
 
 One possible solution to this situation is to make the logic even more sophisticated. It is generally a good idea to shy away from complicated logic whenever possible, so I went with decoupling the branches instead:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="html" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="true" data-enlighter-lineoffset="6" data-enlighter-title="createOrUpdatePetForm.html" data-enlighter-group="logic-refactoring-example-2">&lt;h2&gt;
-    &lt;th:block th:if="${pet['new']}" th:text="#{pet.new}"&gt;New Pet&lt;/th:block&gt;
-    &lt;th:block th:unless="${pet['new']}" th:text="#{pet.update}"&gt;Pet&lt;/th:block&gt;
-&lt;/h2&gt;</pre>
+```html
+<h2>
+    <th:block th:if="${pet['new']}" th:text="#{pet.new}">New Pet</th:block>
+    <th:block th:unless="${pet['new']}" th:text="#{pet.update}">Pet</th:block>
+</h2>
+```
+
 
 Separate branches will also simplify the translation process and future maintenance of the codebase.
 
-*** ** * ** ***
+
 
 The **New Pet** form has a trick too. Its **Type** drop-down is created by passing  
 
 the collection of pet types to the `selectField.html` template:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="html" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="24" data-enlighter-title="createOrUpdatePetForm.html" data-enlighter-group="logic-refactoring-example-3">&lt;input th:replace="~{fragments/selectField :: select (#{pet.type}, 'type', ${types})}" /&gt;</pre>
+```html
+<input th:replace="~{fragments/selectField :: select (#{pet.type}, 'type', ${types})}" />
+```
+
 
 Unlike the other UI texts, the pet types are a part of the application's data model. They are sourced from a database at runtime. The dynamic nature of this data prevents us from directly extracting the texts to a property bundle.
 
 There are again several ways to handle this. One way is to dynamically construct the property bundle key in the template:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="true" data-enlighter-lineoffset="12" data-enlighter-title="selectField.html – Before" data-enlighter-group="change-to-select-field">&lt;option th:each="item : ${items}"
+```java
+<option th:each="item : ${items}"
         th:value="${item}"
-        th:text="${item}"&gt;dog&lt;/option&gt;</pre>
+        th:text="${item}">dog</option>
+```
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="true" data-enlighter-lineoffset="12" data-enlighter-title="selectField.html – After" data-enlighter-group="change-to-select-field">&lt;option th:each="item : ${items}"
+
+```java
+<option th:each="item : ${items}"
         th:value="${item}"
-        th:text="#{'pettype.' + ${item}}"&gt;dog&lt;/option&gt;</pre>
+        th:text="#{'pettype.' + ${item}}">dog</option>
+```
+
 
 In this approach, rather than directly rendering the value, for example, `cat` in the UI, we prefix it with `pettype.`. This results in `pettype.cat`, which we then use as a key to retrieve the localized UI text:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="raw" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="false" data-enlighter-lineoffset="" data-enlighter-title="messages.properties" data-enlighter-group="pet-types-in-properties">pettype.bird=bird
+```
+pettype.bird=bird
 pettype.cat=cat
-pettype.dog=dog</pre>
+pettype.dog=dog
+```
 
-<pre class="EnlighterJSRAW" data-enlighter-language="raw" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="false" data-enlighter-lineoffset="" data-enlighter-title="messages_es.properties" data-enlighter-group="pet-types-in-properties">pettype.bird=pájaro
+
+```
+pettype.bird=pájaro
 pettype.cat=gato
-pettype.dog=perro</pre>
+pettype.dog=perro
+```
+
 
 You might notice that we have just modified the template of a reusable component. Since reusable components are meant to serve multiple clients, it is not correct to bring client logic in it.
 
@@ -242,7 +296,7 @@ In this particular case, the drop-down list component becomes tied to pet types,
 
 This flaw was there from the beginning -- see \`dog\` as the options' default text. We just propagated this flaw further. This should not be done in real projects and needs refactoring.
 
-*** ** * ** ***
+
 
 Of course, there is more project code to internationalize; however, the rest of it  
 
@@ -277,7 +331,8 @@ and pass your personal API key to the script through the \`DEEPL_KEY\` environme
 
 This is the script:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="python" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="true" data-enlighter-lineoffset="" data-enlighter-title="localization.py" data-enlighter-group="localization-script-listing">import os
+```python
+import os
 import requests
 import json
 
@@ -344,7 +399,9 @@ languages = [
 ]
 
 for language in languages:
-    populate_properties(properties_directory + f"messages_{language}.properties", base_properties, language)</pre>
+    populate_properties(properties_directory + f"messages_{language}.properties", base_properties, language)
+```
+
 
 The script extracts the keys from the default property bundle (`messages.properties`)  
 
@@ -392,7 +449,10 @@ Address the issues {#h2-8-address-the-issues}
 
 The results are impressive. However, if you take a closer look, you may discover mistakes that arise from missing context. For example:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="raw" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="false" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">visit.update = Visit</pre>
+```
+visit.update = Visit
+```
+
 
 'Visit' can be both a noun and a verb. Without additional context, the translation  
 
@@ -400,21 +460,27 @@ service produces an incorrect translation in some languages.
 
 We can address this by editing the translations manually or by adjusting the translation workflow. If we choose the latter, one possible solution would be to provide context in the `.properties` files through comments:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="raw" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="false" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group=""># Noun. Heading. Displayed on the page that allows the user to edit details of a veterinary visit
-visit.update = Visit</pre>
+```
+# Noun. Heading. Displayed on the page that allows the user to edit details of a veterinary visit
+visit.update = Visit
+```
+
 
 We can then modify the translation script to parse such comments and pass them with  
 
 the `context` parameter:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="python" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="false" data-enlighter-lineoffset="" data-enlighter-title="localization.py" data-enlighter-group="adding-context-to-localization-script">url = 'https://api-free.deepl.com/v2/translate'
+```python
+url = 'https://api-free.deepl.com/v2/translate'
 data = {
     'text': [value],
     'source_lang': 'EN',
     'target_lang': target_lang,
     'preserve_formatting': True,
     'context': context
-}</pre>
+}
+```
+
 
 As we dig deeper and consider more languages, we might come across more things that require improvements. This is an iterative process.
 

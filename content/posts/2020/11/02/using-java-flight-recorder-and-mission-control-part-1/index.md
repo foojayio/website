@@ -51,21 +51,28 @@ One of the first interesting things you can do is to start a recording at runtim
 
 Prior to Java 11, Flight Recorder had to be enabled before use. Now, that's not necessary anymore. It's possible to *start* a JFR session. FlightRecorder is on by default.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ jcmd $(pgrep java) VM.flags -all | grep FlightRecorder
+```
+$ jcmd $(pgrep java) VM.flags -all | grep FlightRecorder
      bool FlightRecorder                           = true                                      {product} {management}
-    ccstr FlightRecorderOptions                    =                                           {product} {default}</pre>
+    ccstr FlightRecorderOptions                    =                                           {product} {default}
+```
+
 
 Just runt `JFR.start` on the running java pid.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ jcmd $(pidof java) JFR.start
+```
+$ jcmd $(pidof java) JFR.start
 6:
 Started recording 2. No limit specified, using maxsize=250MB as default.
 
-Use jcmd 6 JFR.dump name=2 filename=FILEPATH to copy recording data to file.</pre>
+Use jcmd 6 JFR.dump name=2 filename=FILEPATH to copy recording data to file.
+```
+
 
 The output guides the user to the next useful commands, in particular, `JFR.dump`. Also, this command tells you that a recording by default is limited to 250Mb. `jcmd` provides a `help` command that describes documents for each command options.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ jcmd $(pgrep java) JFR.start \
+```
+$ jcmd $(pgrep java) JFR.start \
   name=app-profile \
   duration=300s \
   filename=/tmp/app-profile-$(date +%FT%H-%M-%S).jfr \
@@ -73,7 +80,9 @@ The output guides the user to the next useful commands, in particular, `JFR.dump
 6:
 Started recording 2. The result will be written to:
 
-/tmp/app-profile-2020-03-26T16-41-48.jfr</pre>
+/tmp/app-profile-2020-03-26T16-41-48.jfr
+```
+
 
 In production, you'll be most likely using `duration`, `maxsize`, `filename` and `settings` options. We'll briefly look at other JFR commands after discussing the `settings`.
 
@@ -86,49 +95,55 @@ The `settings` option refers to a configuration of the FlightRecorder, the JDK s
 
 Here's the first few lines of the `default` settings. As its name impies, this is the configuration that is used when the command is run without a `settings` option.$JAVA_HOME/lib/jfr/default.jfc
 
-<pre class="EnlighterJSRAW" data-enlighter-language="xml" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
 
-&lt;!--
+<!--
      Recommended way to edit .jfc files is to use Java Mission Control,
-     see Window -&gt; Flight Recorder Template Manager.
---&gt;
+     see Window -> Flight Recorder Template Manager.
+-->
 
-&lt;configuration version="2.0"
+<configuration version="2.0"
                label="Continuous"
                description="Low overhead configuration safe for continuous use in production environments, typically less than 1 % overhead."
-               provider="Oracle"&gt;
+               provider="Oracle">
 
-    &lt;event name="jdk.ThreadAllocationStatistics"&gt;
-      &lt;setting name="enabled"&gt;true&lt;/setting&gt;
-      &lt;setting name="period"&gt;everyChunk&lt;/setting&gt;
-    &lt;/event&gt;
+    <event name="jdk.ThreadAllocationStatistics">
+      <setting name="enabled">true</setting>
+      <setting name="period">everyChunk</setting>
+    </event>
 
-    &lt;!-- a lot more events --&gt;
+    <!-- a lot more events -->
 
-    &lt;!-- then the control element --&gt;
-&lt;/configuration&gt;</pre>
+    <!-- then the control element -->
+</configuration>
+```
+
 
 In terms of file size magnitude on a pretty busy web application server using the `default` settings and for a duration of 5 minutes, the resulting dumped file weighs 15 MiB. With this profile you'll get more than basic information, IO, GC events, locking behavior, thread events, method profiling, etc.
 
 The announced overhead is maximum 1% !$JAVA_HOME/lib/jfr/profile.jfc
 
-<pre class="EnlighterJSRAW" data-enlighter-language="xml" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&lt;!--
+```xml
+<!--
      Recommended way to edit .jfc files is to use Java Mission Control,
-     see Window -&gt; Flight Recorder Template Manager.
---&gt;
+     see Window -> Flight Recorder Template Manager.
+-->
 
-&lt;configuration version="2.0"
+<configuration version="2.0"
                label="Profiling"
                description="Low overhead configuration for profiling, typically around 2 % overhead."
-               provider="Oracle"&gt;
+               provider="Oracle">
 
-    &lt;event name="jdk.ThreadAllocationStatistics"&gt;
-      &lt;setting name="enabled"&gt;true&lt;/setting&gt;
-      &lt;setting name="period"&gt;everyChunk&lt;/setting&gt;
-    &lt;/event&gt;
+    <event name="jdk.ThreadAllocationStatistics">
+      <setting name="enabled">true</setting>
+      <setting name="period">everyChunk</setting>
+    </event>
 
-    &lt;!-- a lot more event --&gt;
-&lt;/configuration&gt;</pre>
+    <!-- a lot more event -->
+</configuration>
+```
+
 
 With the `profile` settings, the dumped file takes around 35mb for a 5min duration. And it will get access to additional events like the `OldObjectSample` stacktraces, or TLS events like TLS handshakes, X509 validation, Classloading events, etc.
 
@@ -140,11 +155,14 @@ To value of the `settings` option is file name of these files `default` or `prof
 
 If it's needed to acquire the recording, it's possible to dump it at anytime.JFR.dump exampleJFR.dump help
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ jcmd $(pidof java) JFR.dump filename=/tmp/app-profile-$(date +%FT%H-%M-%S).jfr
+```
+$ jcmd $(pidof java) JFR.dump filename=/tmp/app-profile-$(date +%FT%H-%M-%S).jfr
 6:
 Dumped recording, 239.5 MB written to:
 
-/tmp/app-profile-2020-06-26T15-16-57.jfr</pre>
+/tmp/app-profile-2020-06-26T15-16-57.jfr
+```
+
 
 If there is a single recording at the time it's possible to just use `JFR.dump`, but JFR is powerful enough to support multiple concomitant recordings, in this case you need to specify which recording to dump, obviously. Some options override those defined in the start command like `filename` or `maxage` for the current dump in particular. THe other options are certainly interesting but I found them a bit less useful in practice.
 
@@ -152,9 +170,12 @@ If there is a single recording at the time it's possible to just use `JFR.dump`,
 
 If they are multiple active recordings or if it's necessary to check the event configuration of the active recording `jcmd` comes with the `JFR.check`.JFR.check exampleJFR.check help
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ jcmd $(pgrep java) JFR.check
+```
+$ jcmd $(pgrep java) JFR.check
 6:
-Recording 2: name=2 maxsize=250.0MB (running)</pre>
+Recording 2: name=2 maxsize=250.0MB (running)
+```
+
 
 The `verbose` option allows examining which event are enabled for a recording.
 
@@ -162,15 +183,19 @@ The `verbose` option allows examining which event are enabled for a recording.
 
 When the recording session is deemed over, then one can stop it providing a different file name than the one set in the start command.JFR.stop exampleJFR.stop help
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ jcmd $(pgrep java) JFR.stop \
+```
+$ jcmd $(pgrep java) JFR.stop \
   name=app-profile \
-  filename=/tmp/app-profile-$(date +%FT%H-%M-%S).jfr</pre>
+  filename=/tmp/app-profile-$(date +%FT%H-%M-%S).jfr
+```
+
 
 #### Global Flight Recorder configuration {#_global_flight_recorder_configuration}
 
 What we saw before is how to start a recording and how to configure this specific recording. But there is another class of options that modifies aspects of the JFR internals. As a reminder those affects all recording in some way.JFR.configure exampleJFR.configure help
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ jcmd $(pidof java) JFR.configure \
+```
+$ jcmd $(pidof java) JFR.configure \
   stackdepth=96 \
   repositorypath=/tmp/jfr-repo
 6:
@@ -192,13 +217,16 @@ Global buffer size: 512.0 kB
 Thread buffer size: 8.0 kB
 Memory size: 10.0 MB
 Max chunk size: 12.0 MB
-Sample threads: true</pre>
+Sample threads: true
+```
+
 
 Here I'm increasing the `stackdepth`, this might be useful to generate more accurate flamegraphs, or for some other analysis like with the `OldObjectSample`.
 
 The `repositorypath` is where JFR dumps regularly slices or chunks of jfr events, they have maximum size of `maxchunksize`. These files behave like a log rolling appender. By default, these chunks are stored in the temporary directory and in a subfolder with a timestamp.JFR repository
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ ls -lah /tmp/jfr-repo/2020_06_26_16_03_41_6/
+```
+$ ls -lah /tmp/jfr-repo/2020_06_26_16_03_41_6/
 total 71M
 drwxr-xr-x 2 43514 root 4.0K Jun 26 16:21 .
 drwxr-xr-x 3 43514 root 4.0K Jun 26 16:03 ..
@@ -209,7 +237,9 @@ drwxr-xr-x 3 43514 root 4.0K Jun 26 16:03 ..
 -rw-r--r-- 1 43514 root  19M Jun 26 16:16 2020_06_26_16_10_26.jfr
 -rw-r--r-- 1 43514 root  18M Jun 26 16:21 2020_06_26_16_16_16.jfr
 -rw-r--r-- 1 43514 root    0 Jun 26 16:21 2020_06_26_16_21_50.jfr
--rw-r--r-- 1 43514 root 8.7M Jun 26 16:25 2020_06_26_16_21_50.part</pre>
+-rw-r--r-- 1 43514 root 8.7M Jun 26 16:25 2020_06_26_16_21_50.part
+```
+
 
 *I'm not sure why some chunks are over 12M (the default chunk size) at this time.*
 
@@ -222,9 +252,13 @@ Careful however as some of these options are not well documented, and may not ex
 
 Thanks to unified logging, it's easy to open the hood on any JVM runtime feature. In order to follow JFR, it's possible to log the JFR component, to understand how it works and how options affect recordings.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">-Xlog:jfr</pre>
+```
+-Xlog:jfr
+```
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">[0.337s][info][jfr] Flight Recorder initialized
+
+```
+[0.337s][info][jfr] Flight Recorder initialized
 [0.338s][info][jfr] Created repository /tmp/2020_06_19_13_08_28_6
 [0.367s][info][jfr] Creating thread sampler for java:20 ms, native 0 ms
 [0.367s][info][jfr] Enrolling thread sampler
@@ -239,7 +273,9 @@ Thanks to unified logging, it's easy to open the hood on any JVM runtime feature
 [0.848s][info][jfr] Stopped recording "1" (1). Reason "Dump on exit".
 [0.862s][info][jfr] Wrote recording "1" (1) to /var/log/jfr/startup.jfr
 [0.864s][info][jfr] Closed recording "1" (1)
-[0.866s][info][jfr] Removed repository /tmp/2020_06_19_13_08_28_6</pre>
+[0.866s][info][jfr] Removed repository /tmp/2020_06_19_13_08_28_6
+```
+
 
 Increasing the log level may reveal additional details.
 
@@ -249,7 +285,8 @@ The section above describes where the actual data is saved for long or large (`d
 
 If NMT is enabled, you can just display the summary:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ jcmd $(pidof java) VM.native_memory
+```
+$ jcmd $(pidof java) VM.native_memory
 6:
 
 Native Memory Tracking:
@@ -263,7 +300,9 @@ Total: reserved=5324939KB, committed=3600539KB
 -                   Tracing (reserved=75866KB, committed=75866KB) 
                             (malloc=75866KB #85438)
 
-...</pre>
+...
+```
+
 
 |---|-----------------------------------------|
 |   | JFR's `Tracing` memory zone uses \~74MB |
@@ -272,8 +311,11 @@ This was taken on a very active application, with custom events, you mileage may
 
 The next output shows the committed memory for tracing, **after** a 6 min recording, which means JFR will keep a memory zone any. That is the minimal JFR footprint I experienced.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">-                   Tracing (reserved=21041KB, committed=21041KB)
-                            (malloc=21041KB #2783)</pre>
+```
+-                   Tracing (reserved=21041KB, committed=21041KB)
+                            (malloc=21041KB #2783)
+```
+
 
 ______________________________________________________________________________
 

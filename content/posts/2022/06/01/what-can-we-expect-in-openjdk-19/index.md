@@ -33,7 +33,8 @@ It didn't stop there: Java 16 simplified the use of the *instanceof* construct (
 
 The development of the platform has not stopped here, either. Java 16 also brought a very nice construct in the form of a new class of type *Record* (JEP-395, Reference 4). The motivation of the Record class was to provide a compact definition of a fixed class with arrays or methods without standard code getters, *hashCode* and *equals* (all handled automatically) (**Example 1**).
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">private interface Example {}
+```java
+private interface Example {}
 private record ExampleOne(int value, String text, Color color) implements Example{}
 private record ExampleTwo(int value, Color color) implements Example {}
 private record ExampleThree(int value) implements Example {}
@@ -41,16 +42,18 @@ private record ExampleThree(int value) implements Example {}
 Object r1 = new ExampleOne(1, "text", Color.BLUE);
 Object r2 = new ExampleTwo(2, Color.BLUE);
 Object r3 = new ExampleThree(3);
-Stream.of(r1,r2,r3, 42).forEach( e -&gt; {
+Stream.of(r1,r2,r3, 42).forEach( e -> {
    var message = switch (e){
-       case ExampleOne e1 -&gt; "1-" + e1.toString();
-       case ExampleTwo e2 -&gt; "2-" + e2.toString();
-       case Example e3 -&gt; "3-" + e3.toString();
-       case Integer n -&gt; "4-" + n;
-       default -&gt; "not supported";
+       case ExampleOne e1 -> "1-" + e1.toString();
+       case ExampleTwo e2 -> "2-" + e2.toString();
+       case Example e3 -> "3-" + e3.toString();
+       case Integer n -> "4-" + n;
+       default -> "not supported";
    };
    System.out.println("1: message:" + message);
-});</pre>
+});
+```
+
 
 **Example 1.**: Currently supported usage of Record and class types in switch expressions
 
@@ -58,9 +61,12 @@ Another missing piece was improving the platform to handle Record like other cla
 
 This enhancement is the first preview version to be provided to the Java community for review and feedback (**Example 2**).
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">if(r1 instanceof ExampleOne(int value, String t, Color c)){
+```java
+if(r1 instanceof ExampleOne(int value, String t, Color c)){
    System.out.println("2: color:" + c);
-}</pre>
+}
+```
+
 
 **Example 2.**: Still results in compilation error but a new build of Java SE 19 is on its way
 
@@ -79,13 +85,16 @@ The current release (Reference 7., Build23) shows that a lot of work has been do
 
 ### JEP-428: Structured Concurrency (Incubator) {#h3-2-jep-428-structured-concurrency-incubator}
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">Response handle() throws ExecutionException, InterruptedException {
-    Future&lt;String&gt; user  = es.submit(() -&gt; findUser());
-    Future&lt;Integer&gt; order = es.submit(() -&gt; fetchOrder());
+```java
+Response handle() throws ExecutionException, InterruptedException {
+    Future<String> user  = es.submit(() -> findUser());
+    Future<Integer> order = es.submit(() -> fetchOrder());
     String theUser  = user.get();   // Join findUser 
     int    theOrder = order.get();  // Join fetchOrder
     return new Response(theUser, theOrder);
-}</pre>
+}
+```
+
 
 **Example 3.** : Java SE 5 introduced the ability to run tasks concurrently, but the disadvantages of processing failure remained. e.g. the *findUser* function failed and the *fetchOrder* function continued to run without warning, resulting in a thread leak, and so on.
 
@@ -95,10 +104,11 @@ This JEP proposes to bring a structure for handling multiple concurrent tasks by
 
 *StructuredTaskScope* manages the concurrent division of tasks that are performed on their own threads. It represents the same return point (**Example** 4) and closes the execution and can be used to ensure constant behaviour (*not part of build 23*).
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">Response handle() throws ExecutionException, InterruptedException {
+```java
+Response handle() throws ExecutionException, InterruptedException {
     try (var scope = new StructuredTaskScope.ShutdownOnFailure()) {
-        Future&lt;String&gt;  user  = scope.fork(() -&gt; findUser()); 
-        Future&lt;Integer&gt; order = scope.fork(() -&gt; fetchOrder());
+        Future<String>  user  = scope.fork(() -> findUser()); 
+        Future<Integer> order = scope.fork(() -> fetchOrder());
 
         scope.join();          // Join both forks
         scope.throwIfFailed(); // ... and propagate errors
@@ -106,7 +116,9 @@ This JEP proposes to bring a structure for handling multiple concurrent tasks by
         // Here, both forks have succeeded, so compose their results
         return new Response(user.resultNow(), order.resultNow());
     }
-}</pre>
+}
+```
+
 
 **Example 4.** : *StructureTaskScope* wraps all concurrent subtasks and processes them as a whole, even if they branch into their own threads (see **Example 2.**)
 
@@ -118,10 +130,13 @@ Although Java provides a great base for libraries for non-Java resources (JDBC, 
 
 From the incubation period came new interfaces for accessing foreign memory: *MemorySegment* , *MemoryAddress* and *SegmentAllocator* . *MemorySession* interface for memory lifecycle management. And for calling foreign functions, such as interfaces like *Linker* (**Example 5** ), *SymbolLook* , or the *FunctionDescriptor* class
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">Linker linker = Linker.nativeLinker();
+```java
+Linker linker = Linker.nativeLinker();
 SymbolLookup stdlib = linker.defaultLookup();
 MethodHandle radixSort = linker.downcallHandle(
-                             stdlib.lookup("radixsort"), ...);</pre>
+                             stdlib.lookup("radixsort"), ...);
+```
+
 
 **Example 5.**: Finding and linking a foreign function
 

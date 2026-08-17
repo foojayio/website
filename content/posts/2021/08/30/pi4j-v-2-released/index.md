@@ -64,4 +64,7 @@ Sources {#h2-2-sources}
 
 The Pi4J V.2 source code is available in this GitHub repository: [Pi4J V.2 GitHub Repository](https://github.com/Pi4J/pi4j-v2)
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">git clone https://github.com/Pi4J/pi4j-v2</pre>
+```
+git clone https://github.com/Pi4J/pi4j-v2
+```
+

@@ -39,7 +39,8 @@ Separation of concerns principle along with the use of different design patterns
 
 The vehicle assembly process is a nice example of relatively complex steps that can be thought of as a collection of small pieces tied together with respect to their hierarchy (Example 1.).
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">enum VehicleType {
+```
+enum VehicleType {
    ELECTRIC(1, (byte) 1), PETROL(2, (byte) 2), DIESEL(3, (byte) 3), UNKNOWN(-1, (byte) -1);
 
    private final int sensorId;
@@ -63,10 +64,10 @@ class TestVehicle implements Vehicle {
        ...
        Builder addType(VehicleType type) {
            var requiredSensors = switch (type.sensorId()) {
-               case 1 -&gt; createSensorByType(ELECTRIC);
-               case 2 -&gt; createSensorByType(PETROL);
-               case 3 -&gt; createSensorByType(DIESEL);
-               default -&gt; createSensorByType(UNKNOWN);
+               case 1 -> createSensorByType(ELECTRIC);
+               case 2 -> createSensorByType(PETROL);
+               case 3 -> createSensorByType(DIESEL);
+               default -> createSensorByType(UNKNOWN);
            };
            sensors.add(requiredSensors);
            this.type = type;
@@ -76,7 +77,9 @@ class TestVehicle implements Vehicle {
        TestVehicle build(String name) {
            return new TestVehicle(name, type, sensors);
        }
-   } ...</pre>
+   } ...
+```
+
 
 **Example 1** .: JEP-455 simplifies a builder pattern removing by verbose casting steps inside *addType* method
 
@@ -86,9 +89,12 @@ JEP-455\[1\] aims to provide a way to securely pass and cast primitive values wi
 
 In such cases, primitive types are a good choice. JEP-455 enables creation of validation or transformation methods without typecasting necessity. Nice example is the method that could be used inside the Builder design pattern for direct validation without compromising object creation (Example 2.).
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">private static byte evaluateSensorByteValue(Object value) {
+```
+private static byte evaluateSensorByteValue(Object value) {
    return value instanceof byte b ? b : (byte) -1;
-}</pre>
+}
+```
+
 
 **Example 2.**: JEP-455 removes necessity of casting with information loss
 
@@ -96,14 +102,17 @@ Reducing the verbosity of the code will not be complete without introducing loca
 
 The process of creating an instance of a specific class becomes clearer and smoother with the ability to perform some advanced operations while maintaining full control over the entire process\[3\].
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">var testVehicleBuilder = new TestVehicle.Builder()
+```
+var testVehicleBuilder = new TestVehicle.Builder()
        .addType(VehicleType.DIESEL);
 // Complex construction process
 var electricPlatformSensor = getPlatformSensor();
 // Retrieve required object
 var producedVehicle = testVehicleBuilder
        .addSensor(electricPlatformSensor)
-       .build("testVehicle");</pre>
+       .build("testVehicle");
+```
+
 
 **Example 3.**: Builder allows you to add required parts downstream
 

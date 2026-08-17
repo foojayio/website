@@ -66,7 +66,10 @@ Since we are adding a separate service to interact with a different entity (auth
 
 The `pom.xml` file does not need any updates, as we are not changing the technologies used, and there is only one small change to a more generic database name (`goodreads` vs `books`) in the properties file.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="text">spring.data.mongodb.database=goodreads</pre>
+```
+spring.data.mongodb.database=goodreads
+```
+
 
 Changes in the application class code will also be very few. Let's take a look at that next.
 
@@ -74,7 +77,8 @@ Changes in the application class code will also be very few. Let's take a look a
 
 The data domain class (`Book`) is the only section that needs to change here. This is due to the fields on the book object have changed with the new data set. The updated class code is below.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">@Data
+```java
+@Data
 @Document
 class Book {
 	@Id
@@ -83,7 +87,9 @@ class Book {
 	private String book_id;
 
 	private String title, format, isbn, isbn13, edition_information;
-}</pre>
+}
+```
+
 
 If you are looking at the [previous version of the code](https://github.com/JMHReif/microservices-level3/blob/main/service1/src/main/java/com/jmhreif/service1/Service1Application.java), we have added a couple more fields and removed the `authors` field. Since authors are now a separate entity (and database collection), this field will end up in our new service.
 
@@ -98,12 +104,15 @@ There are no changes to the dependencies, properties, or other configuration pie
 
 The same changes we made to the data domain in service1 also need to be made in service2 for field name changes and additions.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">@Data
+```java
+@Data
 class Book {
 	private String mongoId;
 	private String book_id;
 	private String title, format, isbn, isbn13, edition_information;
-}</pre>
+}
+```
+
 
 On to the new service for the book authors!
 
@@ -128,11 +137,14 @@ Our `pom.xml` and `application.properties` files will look nearly identical to s
 
 Though our properties will also be nearly the same, we need to specify a different port for service3 so that traffic doesn't conflict with service1 or service2. Service1 is on `8081`, and service2 is on `8080`, so we'll assign `8082` for service3. The other two properties are for connecting to the MongoDB database running in a Docker container.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="text">server.port=8082
+```
+server.port=8082
 
 #database connection
 spring.data.mongodb.uri=mongodb://mongoadmin:Testing123@localhost:27017
-spring.data.mongodb.database=goodreads</pre>
+spring.data.mongodb.database=goodreads
+```
+
 
 On to the code!
 
@@ -140,7 +152,8 @@ On to the code!
 
 The data domain class, repository interface, and controller class in service3 follow the same patterns as what we did in service1, but for authors. That means really only fields, names, and endpoints need changed, so let's take a look!
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">@Data
+```java
+@Data
 @Document
 class Author {
 	@Id
@@ -149,7 +162,9 @@ class Author {
 	private String author_id;
 
 	private String name, average_rating, ratings_count, text_reviews_count;
-}</pre>
+}
+```
+
 
 The `@Data` and `@Document` annotations create our getter and setter methods for the class fields and map the class to document objects in the database, respectively. Then, we have our `@Id` annotation followed by the related id field for the class, along with other fields we want to capture about the author below that.
 
@@ -157,7 +172,8 @@ In the [`AuthorRepository` interface](https://github.com/JMHReif/microservices-l
 
 The rest controller class code also looks remarkably like service1.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">@RestController
+```java
+@RestController
 @AllArgsConstructor
 @RequestMapping("/db")
 class AuthorController {
@@ -165,7 +181,9 @@ class AuthorController {
 
 	@GetMapping("/authors")
 	Flux getAuthors() { return authorRepo.findAll(); }
-}</pre>
+}
+```
+
 
 We annotate this class as a rest controller using `@RestController` and `@RequestMapping` and define the base endpoint as `/db`, just like in service1. On [line 5 of the controller class](https://github.com/JMHReif/microservices-level4/blob/main/service3/src/main/java/com/jmhreif/service3/Service3Application.java#L28), we inject the `AuthorRepository` interface, so we can access the methods for the database.
 

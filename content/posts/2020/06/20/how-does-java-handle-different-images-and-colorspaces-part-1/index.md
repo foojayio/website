@@ -25,7 +25,8 @@ We have spent a lot of time working with different images formats in the process
 
 Java makes images simple to use. You can work with a BufferedImage and just load or save this to any supported image file format. A BufferedImage includes lots of functionality which allows you to render and process the image, with all the complexity and implementation hidden by Java. A BufferedImage can even be used as a Graphics2D canvas which can be drawn on. Here is some example code.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">//load image with ImageIO or JDeli
+```java
+//load image with ImageIO or JDeli
 BufferedImage image = ImageIO.read(new File("image.png"));
 BufferedImage image = JDeli.read(new File("image.png"));
 
@@ -36,7 +37,9 @@ g2.drawLine(0, 0, image.getWidth(), image.getHeight());
 
 //save image with ImageIO or JDeli
 ImageIO.write(image, "PNG", new File("image.png"));
-JDeli.write(image, "PNG", new File("image.png"));</pre>
+JDeli.write(image, "PNG", new File("image.png"));
+```
+
 
 While Java removes a lot of Image complexity, it is worth understanding in more detail how images work. In this series of articles, we will be diving deep into how BufferedImage provides this abstraction, how different types of images work and how you can access the low-level Image data.
 

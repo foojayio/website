@@ -41,20 +41,26 @@ I make one simplification compared to many of the more academic tools: I only de
 
 This makes it far more straightforward, as it suffices to automatically instrument the static initializers of every class (and interface), turning
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">class A {
+```java
+class A {
     private int field;
     public void method() {...}
-}</pre>
+}
+```
+
 
 into
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">class A {
+```java
+class A {
     static {
        Store.getInstance().processClassUsage("A");
     }
     private int field;
     public void method() {...}
-}</pre>
+}
+```
+
 
 to record the first usage of the class `A` in a global store. Another advantage is that there is minimal overhead when recording the class usage information, as only the first usage of every class has the recording overhead.
 
@@ -73,14 +79,17 @@ Adding code at the beginning of every class's static initializers lets us obtain
 
 We can then use this information to either remove all classes that are not used from the application's JAR or log an error message whenever such a class is instantiated:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">class UnusedClass {
+```java
+class UnusedClass {
     static {
        System.err.println("Class UnusedClass is used " + 
                           "which is not allowed");
     }
     private int field;
     public void method() {...}
-}</pre>
+}
+```
+
 
 This has the advantage that we still log when our assumption on class usage is broken, but the program doesn't crash, making it more suitable in production settings.
 
@@ -102,7 +111,8 @@ Before I dive into the actual code, I'll present you with how to use the tool. *
 
 You first have to download and build the tool:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">git clone https://github.com/parttimenerd/dead-code-agent
+```bash
+git clone https://github.com/parttimenerd/dead-code-agent
 cd dead-code-agent
 mvn package
 
@@ -112,7 +122,9 @@ cd spring-petclinic
 mvn package
 # make the following examples more concise
 cp spring-petclinic/target/spring-petclinic-3.0.0-SNAPSHOT.jar \
-   petclinic.jar</pre>
+   petclinic.jar
+```
+
 
 The tool is written in Java 17 (you should be using this version anyways), which is the only system requirement.
 
@@ -121,15 +133,21 @@ Using the Instrumenting Agent to Obtain the Used Classes {#h2-3-using-the-instru
 
 The instrumenting agent can be started at JVM startup:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">java -javaagent:./target/dead-code.jar=output=classes.txt \
-     -jar petclinic.jar</pre>
+```bash
+java -javaagent:./target/dead-code.jar=output=classes.txt \
+     -jar petclinic.jar
+```
+
 
 This will record all loaded and used classes in the `classes.txt` file, which includes lines like:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">u ch.qos.logback.classic.encoder.PatternLayoutEncoder 
+```
+u ch.qos.logback.classic.encoder.PatternLayoutEncoder 
 l ch.qos.logback.classic.joran.JoranConfigurator 
 u ch.qos.logback.classic.jul.JULHelper 
-u ch.qos.logback.classic.jul.LevelChangePropagator</pre>
+u ch.qos.logback.classic.jul.LevelChangePropagator
+```
+
 
 Telling you that the `PatternLayoutEncoder` class has been used and has only been loaded but not used. Loaded means, in our context, that the instrumenting agent instrumented this class.
 
@@ -144,14 +162,20 @@ Using the Instrumenter to Obtain the Used Classes {#h2-4-using-the-instrumenter-
 
 The instrumenter lets you create an instrumented JAR that records all used classes:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">java -jar target/dead-code.jar classes.txt \
-          instrument petclinic.jar instrumented.jar</pre>
+```bash
+java -jar target/dead-code.jar classes.txt \
+          instrument petclinic.jar instrumented.jar
+```
+
 
 This will throw a few errors, but remember; it's still a prototype.
 
 You can then run the resulting JAR to obtain the list of used classes (like above). Just use the `instrumented.jar` like your application JAR:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">java -jar instrumented.jar</pre>
+```bash
+java -jar instrumented.jar
+```
+
 
 The resulting `classes.txt` is similar to the file produced by the instrumenting agent.
 
@@ -164,26 +188,38 @@ Using the Instrumenter to Log Usages of Unused Classes {#h2-5-using-the-instrume
 
 The list of used classes can be used to log the usage of classes not used in the recording runs:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">java -jar target/dead-code.jar classes.txt \
-          instrumentUnusedClasses petclinic.jar logging.jar</pre>
+```bash
+java -jar target/dead-code.jar classes.txt \
+          instrumentUnusedClasses petclinic.jar logging.jar
+```
+
 
 This will log the usage of all classes not marked as used in `classes.txt` on standard error, or exit the program if you pass the `--exit` option to the instrumenter.
 
 If you, for example, recorded the used classes of a run where you did not access the petclinic on `localhost:8080`, then executing the modified `logging.jar` and accessing the petclinic results in output like:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">Class org.apache.tomcat.util.net.SocketBufferHandler is used which is not allowed
+```
+Class org.apache.tomcat.util.net.SocketBufferHandler is used which is not allowed
 Class org.apache.tomcat.util.net.SocketBufferHandler$1 is used which is not allowed
 Class org.apache.tomcat.util.net.NioChannel is used which is not allowed
 Class org.apache.tomcat.util.net.NioChannel$1 is used which is not allowed
-...</pre>
+...
+```
+
 
 An exciting feature of the instrumenter is that the file format of the used classes file is not restricted to what the instrumented JARs produce. It also supports wild cards:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">u org.apache.tomcat.*</pre>
+```
+u org.apache.tomcat.*
+```
+
 
 Tells the instrumenter that all classes which have a fully-qualified name starting with `org.apache.tomcat.` should be considered used.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">r org.apache.* used apache</pre>
+```
+r org.apache.* used apache
+```
+
 
 This tells the instrumenter to instrument the JAR to report all usages of Apache classes, adding the (optional) message "used apache."
 
@@ -209,26 +245,30 @@ Both approaches are valid, but the second approach seems more widely used, and t
 
 We build the runtime JAR by creating a new maven configuration that only includes the `me.bechberger.runtime` package where the Store resides:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&lt;build&gt;
+```
+<build>
   ...
-  &lt;sourceDirectory&gt;
+  <sourceDirectory>
     ${project.basedir}/src/main/java/me/bechberger/runtime
-  &lt;/sourceDirectory&gt;
+  </sourceDirectory>
   ...
-&lt;/build&gt;</pre>
+</build>
+```
+
 
 Main Class {#h2-7-main-class}
 -----------------------------
 
 The main class consists mainly of the `premain` method which deletes the used classes file, loads the runtime JAR, and registers the ClassTransformer:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public class Main {
+```
+public class Main {
 
     public static void premain(String agentArgs, 
       Instrumentation inst) {
         AgentOptions options = new AgentOptions(agentArgs);
         // clear the file
-        options.getOutput().ifPresent(out -&gt; {
+        options.getOutput().ifPresent(out -> {
             try {
                 Files.deleteIfExists(out);
                 Files.createFile(out);
@@ -246,13 +286,15 @@ The main class consists mainly of the `premain` method which deletes the used cl
     }
     // ...
 }
-</pre>
+```
+
 
 I'm omitting the AgentOptions class, which parses the options passed to the agent (like the output file).
 
 The `premain` method uses the `getExtractedJARPath` method to extract the runtime JAR. This extracts the JAR from the resources:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">    private static Path getExtractedJARPath() throws IOException {
+```java
+    private static Path getExtractedJARPath() throws IOException {
         try (InputStream in = Main.class.getClassLoader()
                  .getResourceAsStream("dead-code-runtime.jar")){
             if (in == null) {
@@ -265,7 +307,9 @@ The `premain` method uses the `getExtractedJARPath` method to extract the runtim
                        StandardCopyOption.REPLACE_EXISTING);
             return file.toPath().toAbsolutePath();
         }
-    }</pre>
+    }
+```
+
 
 ClassTransformer Class {#h2-8-classtransformer-class}
 -----------------------------------------------------
@@ -278,12 +322,15 @@ We could do all the bytecode modification ourselves. This is error-prone and com
 
 Our ClassTransformer has to implement the `transform` method:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public byte[] transform(Module module, 
+```java
+public byte[] transform(Module module, 
                         ClassLoader loader, 
                         String className, 
-                        Class&lt;?&gt; classBeingRedefined,
+                        Class<?> classBeingRedefined,
                         ProtectionDomain protectionDomain, 
-                        byte[] classfileBuffer)</pre>
+                        byte[] classfileBuffer)
+```
+
 
 > <br />
 >
@@ -302,17 +349,21 @@ Our ClassTransformer has to implement the `transform` method:
 
 Our implementation first checks we're not instrumenting our agent or some JDK code:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">if (className.startsWith("me/bechberger/runtime/Store") || 
+```java
+if (className.startsWith("me/bechberger/runtime/Store") || 
     className.startsWith("me/bechberger/ClassTransformer") || 
     className.startsWith("java/") || 
     className.startsWith("jdk/internal") || 
     className.startsWith("sun/")) {
             return classfileBuffer;
-}</pre>
+}
+```
+
 
 This prevents instrumentation problems and keeps the list of used classes clean. We then use a statically defined ScopedClassPoolFactory to create a class pool for the given class loader, parse the bytecode using javassist and transform it using our `transform(String className, CtClass cc)` method:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">        try {
+```java
+        try {
             ClassPool cp = scopedClassPoolFactory
                  .create(loader, ClassPool.getDefault(),
                          ScopedClassPoolRepositoryImpl
@@ -330,11 +381,14 @@ This prevents instrumentation problems and keeps the list of used classes clean.
                  RuntimeException | NotFoundException e) {
             e.printStackTrace();
             return classfileBuffer;
-        }</pre>
+        }
+```
+
 
 The actual instrumentation is now done with the javassist API:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">    private void transform(String className, CtClass cc) 
+```
+    private void transform(String className, CtClass cc) 
       throws CannotCompileException, NotFoundException {
         // replace "/" with "." in the className
         String cn = formatClassName(className);
@@ -347,7 +401,9 @@ The actual instrumentation is now done with the javassist API:
              String.format("me.bechberger.runtime.Store" +
                  ".getInstance().processClassUsage(\"%s\");", 
                  cn));
-    }</pre>
+    }
+```
+
 
 You might wonder why we're also recording the interfaces of every class.
 
@@ -364,7 +420,8 @@ The main difference is that the instrumenter also transforms the bytecode, trans
 
 The central part of the Instrumenter is the ClassAndLibraryTransformer which can be targeted to a specific class transformation use case by setting its different fields:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public class ClassAndLibraryTransformer {
+```java
+public class ClassAndLibraryTransformer {
     /** Source JAR */
     private final Path sourceFile;
     /** 
@@ -373,17 +430,17 @@ The central part of the Instrumenter is the ClassAndLibraryTransformer which can
      * its name is the file name without version identifier 
      * and suffix.
      */
-    private Predicate&lt;String&gt; isLibraryIncluded;
+    private Predicate<String> isLibraryIncluded;
     /** Include a class in the output JAR */
-    private Predicate&lt;String&gt; isClassIncluded;
+    private Predicate<String> isClassIncluded;
     /** 
      * Transforms the class file, might be null.
      * Implemented using the javassist library as shown before.
      */
-    private BiConsumer&lt;ClassPool, CtClass&gt; classTransformer;
+    private BiConsumer<ClassPool, CtClass> classTransformer;
 
     record JarEntryPair(String name, InputStream data) {
-        static JarEntryPair of(Class&lt;?&gt; klass, String path)
+        static JarEntryPair of(Class<?> klass, String path)
           throws IOException {
             // obtain the bytecode from the dead-code JAR
             return new JarEntryPair(path, 
@@ -394,22 +451,25 @@ The central part of the Instrumenter is the ClassAndLibraryTransformer which can
      * Supplies a list of class files that should 
      * be added to the JAR, like the Store related classes
      */
-    private Supplier&lt;List&lt;JarEntryPair&gt;&gt; miscFilesSupplier = 
+    private Supplier<List<JarEntryPair>> miscFilesSupplier = 
          List::of;
     /** Output JAR */
     private final OutputStream target;
     // ...
-}</pre>
+}
+```
+
 
 This class is used for instrumentation and removing classes and nested JARs/libraries, sharing most of the code between both.
 
 The central entry point of this class is the `process` method, which iterates over all entries of the `sourceFile` JAR using the JarFile and JarOutputStream APIs:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">    void process(boolean outer) throws IOException {
+```java
+    void process(boolean outer) throws IOException {
         try (JarOutputStream jarOutputStream = 
              new JarOutputStream(target); 
             JarFile jarFile = new JarFile(sourceFile.toFile())) {
-            jarFile.stream().forEach(jarEntry -&gt; {
+            jarFile.stream().forEach(jarEntry -> {
                 try {
                     String name = jarEntry.getName();
                     if (name.endsWith(".class")) {
@@ -439,23 +499,29 @@ The central entry point of this class is the `process` method, which iterates ov
                 }
             }
         }
-    }</pre>
+    }
+```
+
 
 Processing entries of the JAR file that are neither class files nor JARs consist only of copying the entry directly to the new file:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">    private static void processMiscEntry(
+```java
+    private static void processMiscEntry(
       JarOutputStream jarOutputStream, 
       JarFile jarFile, JarEntry jarEntry) throws IOException {
         jarOutputStream.putNextEntry(jarEntry);
         jarFile.getInputStream(jarEntry)
                .transferTo(jarOutputStream);
-    }</pre>
+    }
+```
+
 
 Such files are typically resources like XML configuration files.
 
 Transforming class file entries is slightly more involved: We check whether we should include the class defined in the class file and transform it if necessary:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">    private void processClassEntry(
+```java
+    private void processClassEntry(
       JarOutputStream jarOutputStream, 
       JarFile jarFile, JarEntry jarEntry) throws IOException {
         String className = classNameForJarEntry(jarEntry);
@@ -464,7 +530,7 @@ Transforming class file entries is slightly more involved: We check whether we s
             jarOutputStream.putNextEntry(jarEntry);
             InputStream classStream = 
                 jarFile.getInputStream(jarEntry);
-            if (classTransformer != null &amp;&amp; 
+            if (classTransformer != null && 
                   !isIgnoredClassName(className)) {
                 // transform if possible and required
                 classStream = transform(classStream);
@@ -473,7 +539,9 @@ Transforming class file entries is slightly more involved: We check whether we s
         } else {
             System.out.println("Skipping class " + className);
         }
-    }</pre>
+    }
+```
+
 
 We ignore here class files related to package-info or module-info, as they don't contain valid classes. This is encapsulated in the `isIgnoredClassName` method.
 
@@ -481,7 +549,8 @@ The implementation of the `transform` method is similar to the `transform` metho
 
 A transforming consumer to log the usage of every unused class looks as follows, assuming that `isClassUsed` it is a predicate that returns true if the passed class is used and that `messageSupplier` supplies specific messages that are output additionally:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">(ClassPool cp, CtClass cc) -&gt; {
+```
+(ClassPool cp, CtClass cc) -> {
     String className = cc.getName();
     if (isClassUsed.test(className)) {
         return;
@@ -498,7 +567,9 @@ A transforming consumer to log the usage of every unused class looks as follows,
     } catch (CannotCompileException e) {
         throw new RuntimeException(e);
     }
-};</pre>
+};
+```
+
 
 The last thing that I want to cover is the handling of nested JARs in the `processJAREntry(JarOutputStream jarOutputStream, JarFile jarFile, JarEntry jarEntry)` method. Nested JARs are pretty standard with Spring and bundle libraries with your application. To quote the Spring documentation:
 > Java does not provide any standard way to load nested jar files (that is, jar files that are themselves contained within a jar). This can be problematic if you need to distribute a self-contained application that can be run from the command line without unpacking.
@@ -508,7 +579,8 @@ The last thing that I want to cover is the handling of nested JARs in the `proce
 
 Our method first checks that we should include the nested JAR and, if so, extract it into a temporary file. We extract the JAR because the JarFile API can only work with files. We then use the ClassAndLibraryTransformer recursively:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">    private void processJAREntry(JarOutputStream jarOutputStream, 
+```java
+    private void processJAREntry(JarOutputStream jarOutputStream, 
       JarFile jarFile, JarEntry jarEntry) throws IOException {
         String name = jarEntry.getName();
         String libraryName = Util.libraryNameForPath(name);
@@ -545,7 +617,9 @@ Our method first checks that we should include the nested JAR and, if so, extrac
         newJarEntry.setCrc(crc32.getValue());
         jarOutputStream.putNextEntry(newJarEntry);
         Files.copy(newJarFile, jarOutputStream);
-    }</pre>
+    }
+```
+
 
 Nesting JAR files come with a few restrictions, but most notable is the limitation of ZIP compression:
 > The `ZipEntry` for a nested jar must be saved by using the `ZipEntry.STORED` method. This is required so that we can seek directly to individual content within the nested jar. The content of the nested jar file itself can still be compressed, as can any other entries in the outer jar.

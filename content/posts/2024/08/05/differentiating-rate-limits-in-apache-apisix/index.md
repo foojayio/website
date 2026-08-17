@@ -39,7 +39,8 @@ The `limit-count` plugin is a good candidate for this post.
 
 Let's configure the plugin for a route:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml">routes:
+```yaml
+routes:
   - uri: /get
     upstream:
       nodes:
@@ -50,7 +51,8 @@ Let's configure the plugin for a route:
         time_window: 60                #2
         rejected_code: 429             #3
 #END
-</pre>
+```
+
 
 1. Set the `limit-count` plugin
 2. Limit requests to one every 60 seconds
@@ -58,13 +60,16 @@ Let's configure the plugin for a route:
 
 At this point, we configured regular rate limiting.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml">curl -v http://localhost:9080/get
+```yaml
 curl -v http://localhost:9080/get
-</pre>
+curl -v http://localhost:9080/get
+```
+
 
 If we execute the second request before a minute has passed, the result is the following:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">HTTP/1.1 429 Too Many Requests
+```
+HTTP/1.1 429 Too Many Requests
 Date: Tue, 09 Jul 2024 06:55:07 GMT
 Content-Type: text/html; charset=utf-8
 Content-Length: 241
@@ -74,14 +79,15 @@ X-RateLimit-Remaining: 0               #2
 X-RateLimit-Reset: 59                  #3
 Server: APISIX/3.9.1
 
-&lt;html&gt;
-&lt;head&gt;&lt;title&gt;429 Too Many Requests&lt;/title&gt;&lt;/head&gt;
-&lt;body&gt;
-&lt;center&gt;&lt;h1&gt;429 Too Many Requests&lt;/h1&gt;&lt;/center&gt;
-&lt;hr&gt;&lt;center&gt;openresty&lt;/center&gt;
-&lt;p&gt;&lt;em&gt;Powered by &lt;a href="https://apisix.apache.org/"&gt;APISIX&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;&lt;/body&gt;
-&lt;/html&gt;
-</pre>
+<html>
+<head><title>429 Too Many Requests</title></head>
+<body>
+<center><h1>429 Too Many Requests</h1></center>
+<hr><center>openresty</center>
+<p><em>Powered by <a href="https://apisix.apache.org/">APISIX</a>.</em></p></body>
+</html>
+```
+
 
 1. Configured limit
 2. Remaining quota
@@ -94,7 +100,8 @@ To configure per-consumer rate limiting, we first need to implement request auth
 
 Here's how we configure consumers:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml">consumers:
+```yaml
+consumers:
   - username: johndoe                  #1
     plugins:
       key-auth:
@@ -102,20 +109,26 @@ Here's how we configure consumers:
   - username: janedoe                  #1
     plugins:
       key-auth:
-        key: jane                      #2</pre>
+        key: jane                      #2
+```
+
 
 1. Users
 2. HTTP header request value
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash">curl -H 'apikey: john' localhost:9080/get #1
-curl -H 'apikey: jane' localhost:9080/get #2</pre>
+```bash
+curl -H 'apikey: john' localhost:9080/get #1
+curl -H 'apikey: jane' localhost:9080/get #2
+```
+
 
 1. Authenticate as `johndoe`
 2. Authenticate as `janedoe`
 
 In general, you attach plugins to APISIX routes but can also attach them to consumers. We can now move the `limit-count` plugin.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml">routes:
+```yaml
+routes:
   - uri: /get
     upstream:
       nodes:
@@ -140,15 +153,20 @@ consumers:
         count: 5                       #2
         time_window: 60
         rejected_code: 429
-#END</pre>
+#END
+```
+
 
 1. The route is only accessible to requests authenticating with `key-auth`
 2. `johndoe` has a lower limit count than `janedoe`. Did he forget to pay his subscription fees?
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash">curl -H 'apikey: john' localhost:9080/get
+```bash
+curl -H 'apikey: john' localhost:9080/get
 curl -H 'apikey: john' localhost:9080/get
 curl -H 'apikey: jane' localhost:9080/get
-curl -H 'apikey: jane' localhost:9080/get</pre>
+curl -H 'apikey: jane' localhost:9080/get
+```
+
 
 The second request gets rate-limited.
 
@@ -161,7 +179,8 @@ Apache APISIX offers an abstraction called a `Consumer Group` for this.
 
 Let's create two consumer groups with different rate limit values:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml">consumer_groups:
+```yaml
+consumer_groups:
   - id: 1
     plugins:
       limit-count:
@@ -173,11 +192,14 @@ Let's create two consumer groups with different rate limit values:
       limit-count:
         count: 5
         time_window: 60
-        rejected_code: 429</pre>
+        rejected_code: 429
+```
+
 
 The next step is to attach consumers to these groups:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml">consumers:
+```yaml
+consumers:
   - username: johndoe
     group_id: 1
     plugins:
@@ -188,12 +210,16 @@ The next step is to attach consumers to these groups:
     plugins:
       key-auth:
         key: jane
-</pre>
+```
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash">curl -H 'apikey: john' localhost:9080/get
+
+```bash
+curl -H 'apikey: john' localhost:9080/get
 curl -H 'apikey: john' localhost:9080/get
 curl -H 'apikey: jane' localhost:9080/get
-curl -H 'apikey: jane' localhost:9080/get</pre>
+curl -H 'apikey: jane' localhost:9080/get
+```
+
 
 The second request gets rate-limited.
 
@@ -203,7 +229,8 @@ The second benefit is that the limit count is shared among all consumers of a gr
 
 Of course, you can set a limit on both a consumer and the group it belongs to. In this case, the lowest limit will apply first.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml">consumers:
+```yaml
+consumers:
   - username: johndoe
     group_id: 2                        #1  
     plugins:
@@ -217,13 +244,18 @@ Of course, you can set a limit on both a consumer and the group it belongs to. I
     group_id: 2
     plugins:
       key-auth:
-        key: jane</pre>
+        key: jane
+```
+
 
 1. Move `johndoe` to group 2
 2. Limit him individually
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash">curl -H 'apikey: john' localhost:9080/get
-curl -H 'apikey: john' localhost:9080/get #1</pre>
+```bash
+curl -H 'apikey: john' localhost:9080/get
+curl -H 'apikey: john' localhost:9080/get #1
+```
+
 
 1. `johndoe` hits the limit here, but `janedoe` now only has four requests left from this minute, as the former used one request
 
@@ -240,7 +272,7 @@ The complete source code for this post can be found on [GitHub](https://github.c
 * [Consumer Group](https://apisix.apache.org/docs/apisix/terminology/consumer-group/)
 * [Apache APISIX Hands-on Lab](https://nfrankel.github.io/apisix-workshop/)
 
-*** ** * ** ***
+
 
 *Originally published at [A Java Geek](https://blog.frankel.ch/different-rate-limits-apisix/) on July 21^st^, 2024*
 

@@ -90,7 +90,8 @@ Before we build the system, we need a vector search index. The embeddings in thi
 
 Go to MongoDB Atlas, create a collection named *incident_memory*, and create a vector search index with the JSON below.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="json" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">{
+```json
+{
   "fields": [
     {
       "numDimensions": 1024,
@@ -100,23 +101,28 @@ Go to MongoDB Atlas, create a collection named *incident_memory*, and create a v
     }
   ]
 }
-</pre>
+```
+
 
 ### Step 2: Creating the Trip {#h3-4-step-2-creating-the-trip}
 
 The trip is created with the following API call. This request lands in the controller. Because the request body is optional, we use a default CreateTripRequest when none is supplied and pass that normalized request into the service. So, normalized is just the incoming request or a default placeholder when the client omits the body.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@PostMapping("/create")
+```java
+@PostMapping("/create")
 public TripState createTrip(@RequestBody(required = false) CreateTripRequest request) {
     CreateTripRequest normalized = request == null
             ? new CreateTripRequest("demo-user", null, null)
             : request;
     return tripService.createTrip(normalized);
-}</pre>
+}
+```
+
 
 And with the Service layer, it creates the trip. Example:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">curl -X POST "http://localhost:8080/trip/create" \
+```bash
+curl -X POST "http://localhost:8080/trip/create" \
   -H "Content-Type: application/json" \
   -d '{
     "userId": "traveler-001",
@@ -125,11 +131,14 @@ And with the Service layer, it creates the trip. Example:
       "avoidRedEye": true,
       "maxAdditionalBudget": 250
     }
-  }'</pre>
+  }'
+```
+
 
 Would result in:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">{
+```bash
+{
   "id": "69dd6111674d2228e4db4b25",
   "userId": "traveler-001",
   "itinerary": [
@@ -144,7 +153,8 @@ Would result in:
   ],
   "status": "ON_TRACK"
 }
-</pre>
+```
+
 
 This trip gets stored in *trip_state*. At this point, everything looks fine.
 
@@ -152,30 +162,39 @@ This trip gets stored in *trip_state*. At this point, everything looks fine.
 
 At this step, we would add a delay status in the database. This is done using another post method:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">curl -X POST "http://localhost:8080/event/simulate-delay" \
+```bash
+curl -X POST "http://localhost:8080/event/simulate-delay" \
   -H "Content-Type: application/json" \
   -d '{
     "tripId": "69dd6111674d2228e4db4b25",
     "delayMinutes": 180,
     "severity": "HIGH"
   }'
-</pre>
+```
+
 
 This is done using another code block in the controller.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@PostMapping("/simulate-delay")
-public TravelEvent simulateDelay(@RequestBody SimulateDelayRequest request)</pre>
+```java
+@PostMapping("/simulate-delay")
+public TravelEvent simulateDelay(@RequestBody SimulateDelayRequest request)
+```
+
 
 And at the same time, something critical happens:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">tripState.setStatus(TripStatus.DISRUPTED);
-tripService.saveTrip(tripState);</pre>
+```java
+tripState.setStatus(TripStatus.DISRUPTED);
+tripService.saveTrip(tripState);
+```
+
 
 This is your first agent that detects a problem, updates the state, and logs the decision.
 
 The following delay is stimulated:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">{
+```bash
+{
   "id": "69dd6160674d2228e4db4b26",
   "tripId": "69dd6111674d2228e4db4b25",
   "type": "FLIGHT_DELAY",
@@ -185,7 +204,9 @@ The following delay is stimulated:
     "to": "SFO",
     "delayMinutes": 180
   }
-}</pre>
+}
+```
+
 
 ### Step 4: Replanning {#h3-6-step-4-replanning}
 
@@ -193,20 +214,27 @@ To trigger replanning, the PlannerAgent orchestrates the other agents. It asks M
 
 This enters the
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@PostMapping("/plan/replan")
-public TripState replan(@RequestBody ReplanRequest request)</pre>
+```java
+@PostMapping("/plan/replan")
+public TripState replan(@RequestBody ReplanRequest request)
+```
+
 
 And the planner agent takes over. Example:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">curl -X POST http://localhost:8080/plan/replan \
+```bash
+curl -X POST http://localhost:8080/plan/replan \
   -H "Content-Type: application/json" \
   -d '{
     "tripId": "69dd6111674d2228e4db4b25"
-  }'</pre>
+  }'
+```
+
 
 Which responds as
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">{
+```
+{
   "id": "69dd6111674d2228e4db4b25",
   "status": "REPLANNED",
   "itinerary": [
@@ -223,7 +251,9 @@ Which responds as
       "cost": 320.0
     }
   ]
-}</pre>
+}
+```
+
 
 This is where it starts to suggest taking another flight from Chicago.
 
@@ -231,29 +261,42 @@ This is where it starts to suggest taking another flight from Chicago.
 
 At first, the planner agents check, "Have we seen something like this?" If so, they retrieve it from the *incident_memory* and suggest what could be done.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">List&lt;IncidentMemory&gt; results = vectorSearchService.findSimilar(query);</pre>
+```java
+List<IncidentMemory> results = vectorSearchService.findSimilar(query);
+```
+
 
 ### Step 6: Booking agent generates options {#h3-8-step-6-booking-agent-generates-options}
 
 At this point, when no response is found, it starts to generate its own options. To do so,
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">List&lt;AlternativeRoute&gt; options =
-    bookingAgent.generateOptions(tripState, latestEvent, memories);</pre>
+```java
+List<AlternativeRoute> options =
+    bookingAgent.generateOptions(tripState, latestEvent, memories);
+```
+
 
 The budget agent also starts to filter options with
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">List&lt;AlternativeRoute&gt; budgeted =
-    budgetAgent.filterOptions(tripState, options);</pre>
+```
+List<AlternativeRoute> budgeted =
+    budgetAgent.filterOptions(tripState, options);
+```
+
 
 ### Step 7: The system finally makes the decision {#h3-9-step-7-the-system-finally-makes-the-decision}
 
 Finally, the trip is updated, and the system records the reason for the same. At this point, when you call:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">curl http://localhost:8080/trip/69dd6111674d2228e4db4b25</pre>
+```bash
+curl http://localhost:8080/trip/69dd6111674d2228e4db4b25
+```
+
 
 It would give you the response as:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">{
+```
+{
   "status": "REPLANNED",
   "itinerary": [
     {
@@ -265,7 +308,9 @@ It would give you the response as:
       "toLocation": "SFO"
     }
   ]
-}</pre>
+}
+```
+
 
 Finally, the system didn't just detect a delay, but it used memory, coordinated multiple agents, and produced a better plan with a fully traceable decision history stored in MongoDB.
 

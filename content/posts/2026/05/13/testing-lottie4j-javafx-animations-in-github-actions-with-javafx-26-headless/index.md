@@ -41,14 +41,20 @@ The reference images are generated once and committed. The test just checks that
 
 This was all working fine locally. The problem was GitHub Actions. The CI runner has no display and no graphics stack. So I disabled this test for CI with:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@DisabledIfEnvironmentVariable(named = "CI", matches = "true")</pre>
+```
+@DisabledIfEnvironmentVariable(named = "CI", matches = "true")
+```
+
 
 What Changed in JavaFX 26 {#h2-1-what-changed-in-javafx-26}
 -----------------------------------------------------------
 
 JavaFX 26 added a [Headless Platform Prototype](https://openjfx.io/highlights/26/) built directly into the `javafx.graphics` module. No extra dependencies, no native libraries, no Monocle setup. You pass a single JVM flag:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">-Dglass.platform=headless</pre>
+```
+-Dglass.platform=headless
+```
+
 
 That is it. JavaFX starts up, you get a functional toolkit, you can create scenes, render nodes, take snapshots, and run animations, all without a display attached. The [Gluon team](https://gluonhq.com/) did the heavy lifting on this for JavaFX 26, and it makes CI testing of JavaFX components much more practical. The flag works the same way as running your application normally. The difference is that there is nothing being drawn to a screen. For testing purposes, that is exactly what you want. It also opens the door to server-side rendering, for example, to generate a snapshot of a UI component without a display.
 
@@ -59,33 +65,36 @@ Lottie4J targets [Java 21 and JavaFX 21](https://github.com/lottie4j/lottie4j/bl
 
 But JavaFX 26 [requires Java 24 or higher](https://openjfx.io/highlights/26/) to run. They bumped the compiled bytecode level to `--release 24` in this release, so if you try to use it with an older JDK you get an error immediately. This means the test infrastructure has to use a different Java and JavaFX version than the main build. The solution I landed on was a Maven profile in the [root pom.xml](https://github.com/lottie4j/lottie4j/blob/main/pom.xml#L50) that overrides both version properties and configures the surefire plugin:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&lt;profile&gt;
-    &lt;!-- Activates JavaFX 26 headless windowing for unit tests in CI. --&gt;
-    &lt;!-- Usage: mvn test -Pheadless-tests --&gt;
-    &lt;id&gt;headless-tests&lt;/id&gt;
-    &lt;properties&gt;
-        &lt;java.version&gt;25&lt;/java.version&gt;
-        &lt;javafx.version&gt;26&lt;/javafx.version&gt;
-        &lt;surefire.argLine.headless&gt;
+```
+<profile>
+    <!-- Activates JavaFX 26 headless windowing for unit tests in CI. -->
+    <!-- Usage: mvn test -Pheadless-tests -->
+    <id>headless-tests</id>
+    <properties>
+        <java.version>25</java.version>
+        <javafx.version>26</javafx.version>
+        <surefire.argLine.headless>
             -Dglass.platform=headless --enable-native-access=javafx.graphics
-        &lt;/surefire.argLine.headless&gt;
-    &lt;/properties&gt;
-    &lt;build&gt;
-        &lt;plugins&gt;
-            &lt;plugin&gt;
-                &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;
-                &lt;artifactId&gt;maven-surefire-plugin&lt;/artifactId&gt;
-                &lt;version&gt;3.0.0-M5&lt;/version&gt;
-                &lt;configuration&gt;
-                    &lt;argLine&gt;
+        </surefire.argLine.headless>
+    </properties>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.0.0-M5</version>
+                <configuration>
+                    <argLine>
                         --add-opens com.lottie4j.fxfileviewer/com.lottie4j.fxfileviewer=ALL-UNNAMED
                         -Dglass.platform=headless --enable-native-access=javafx.graphics
-                    &lt;/argLine&gt;
-                &lt;/configuration&gt;
-            &lt;/plugin&gt;
-        &lt;/plugins&gt;
-    &lt;/build&gt;
-&lt;/profile&gt;</pre>
+                    </argLine>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</profile>
+```
+
 
 When this profile is active, Maven bumps `java.version` to 25 and `javafx.version` to 26, so the dependency resolution picks up JavaFX 26 for the test classpath while the main source still compiles to Java 21 targets. The surefire plugin then passes two JVM arguments to the test JVM:
 
@@ -101,7 +110,10 @@ The GitHub Actions Side {#h2-3-the-github-actions-side}
 
 The [Maven workflow](https://github.com/lottie4j/lottie4j/blob/main/.github/workflows/maven.yml#L26) sets up the environment with a Java 25 JDK so the JavaFX 26 runtime can load, and invokes Maven with the profile:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">mvn test -Pheadless-tests</pre>
+```
+mvn test -Pheadless-tests
+```
+
 
 The rest of the build still compiles against Java 21 targets, so the library artifact itself is not affected. The profile only kicks in for the test run. The workflow does not need any display setup, no `Xvfb`, no `DISPLAY` environment variable tweaks. The headless flag handles all of that!
 
@@ -125,7 +137,7 @@ But the payoff is real. The test that I had marked "can not run on CI" now runs 
 
 For any library that does visual rendering in JavaFX, this is the kind of testing infrastructure that was genuinely missing before. Good work, OpenJFX contributors!
 
-*** ** * ** ***
+
 
 Links:
 

@@ -129,7 +129,8 @@ Since Java 11, a modern HTTP client API is available within the Java Platform. I
 
 The code example below demonstrates the ease of use and protocol agnosticity of the API:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">import java.net.http.*;
+```java
+import java.net.http.*;
 
 ...
 var client = HttpClient.newHttpClient();
@@ -137,7 +138,9 @@ var request = HttpRequest.newBuilder(URI.create("https://foojay.io")).GET().buil
 var response = client.send(request, HttpResponse.BodyHandlers.ofString());
 assert response.statusCode() == 200;
 String htmlText = response.body();
-assert htmlText.contains("Java");</pre>
+assert htmlText.contains("Java");
+```
+
 
 As you can see, we didn't specify any HTTP version in this code example--the API assumes HTTP/2 by default.
 
@@ -149,13 +152,16 @@ HTTP/3 was standardized in 2022 by the [IETF](https://www.ietf.org/), using the 
 
 In Java 26, the HTTP client API requires you to opt-in to HTTP/3 by configuring an instance of either `HttpClient` or `HttpRequest` with the `HTTP_3` version. For example:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">// for reuse with multiple requests
+```java
+// for reuse with multiple requests
 var http3Client = HttpClient.newBuilder().version(HttpClient.Version.HTTP_3).build();
 
 // just for a single request
 var http3Request = HttpRequest.newBuilder(URI.create("https://foojay.io"))
     .version(HttpClient.Version.HTTP_3)
-    .GET().build();</pre>
+    .GET().build();
+```
+
 
 Once HTTP/3 has been chosen---either in the request itself or in the client---you transmit the request just as you normally would. If the destination server lacks HTTP/3 support, the request is automatically and transparently rolled back to HTTP/2 or, if necessary, to HTTP/1.1.
 
@@ -190,10 +196,13 @@ Now it's time to take a look at a few features that might already be familiar to
 
 Within a Java context, cryptographic objects such as public keys, private keys and certificates can be easily created and distributed. But outside of the Java world, the de facto standard is the [Privacy-Enhanced Mail](https://en.wikipedia.org/wiki/Privacy-Enhanced_Mail) (PEM) format. Let's see an example of a PEM-encoded cryptographic object:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">-----BEGIN PUBLIC KEY-----
+```
+-----BEGIN PUBLIC KEY-----
 MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEi/kRGOL7wCPTN4KJ2ppeSt5UYB6u
 cPjjuKDtFTXbguOIFDdZ65O/8HTUqS/sVzRF+dg7H3/tkQ/36KdtuADbwQ==
------END PUBLIC KEY-----</pre>
+-----END PUBLIC KEY-----
+```
+
 
 The Java Platform currently doesn't include an easy-to-use API for decoding and encoding text in the PEM format, which means that decoding a PEM-encoded key can be a tedious job that involves careful parsing of the source PEM text. To further illustrate this point, encrypting and decrypting a private key currently requires over a dozen lines of code.
 
@@ -219,7 +228,8 @@ To solve this problem, JEP 524 introduces an API that can encode objects to the 
 
 The following code example shows typical usage of the API:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">PrivateKey privateKey = ...;
+```java
+PrivateKey privateKey = ...;
 PublicKey publicKey = ...;
 
 // let's encode a cryptographic object!
@@ -240,16 +250,18 @@ PEMDecoder pemDecoder = PEMDecoder.of();
 
 // this returns a DEREncodable, so we need to pattern-match
 switch (pemDecoder.decode(pem)) {
-    case PublicKey publicKey -&gt; ...;
-    case PrivateKey privateKey -&gt; ...;
-    default -&gt; throw new IllegalArgumentException("Unsupported cryptographic object");
+    case PublicKey publicKey -> ...;
+    case PrivateKey privateKey -> ...;
+    default -> throw new IllegalArgumentException("Unsupported cryptographic object");
 }
 
 // alternatively, if you know the type of the encoded cryptographic object in advance:
 PrivateKey key = pemDecoder.decode(pem, PrivateKey.class);
 
 // this decodes an encrypted cryptographic object
-PrivateKey decryptedkey = pemDecoder.withDecryption(password).decode(pem, PrivateKey.class);</pre>
+PrivateKey decryptedkey = pemDecoder.withDecryption(password).decode(pem, PrivateKey.class);
+```
+
 
 ##### Preview Warning
 
@@ -275,7 +287,8 @@ For more information on this feature, see [JEP 524](https://openjdk.org/jeps/524
 Java's take on concurrency has always been *unstructured*, meaning that tasks run independently of each other. There's no hierarchy, scope, or other structure involved, which means errors or cancellation intent is hard to communicate. To illustrate this, let's look at a code example that takes place in a restaurant:
 > These code examples were taken from my conference talk ["Java's Concurrency Journey Continues! Exploring Structured Concurrency and Scoped Values"](https://hanno.codes/talks/#javas-concurrency-journey-continues).
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public class MultiWaiterRestaurant implements Restaurant {
+```java
+public class MultiWaiterRestaurant implements Restaurant {
     @Override
     public MultiCourseMeal announceMenu() throws ExecutionException, InterruptedException {
         Waiter grover = new Waiter("Grover");
@@ -283,14 +296,16 @@ Java's take on concurrency has always been *unstructured*, meaning that tasks ru
         Waiter rosita = new Waiter("Rosita");
 
         try (var executor = Executors.newVirtualThreadPerTaskExecutor()) {
-            Future&lt;Course&gt; starter = executor.submit(() -&gt; grover.announceCourse(CourseType.STARTER));
-            Future&lt;Course&gt; main = executor.submit(() -&gt; zoe.announceCourse(CourseType.MAIN));
-            Future&lt;Course&gt; dessert = executor.submit(() -&gt; rosita.announceCourse(CourseType.DESSERT));
+            Future<Course> starter = executor.submit(() -> grover.announceCourse(CourseType.STARTER));
+            Future<Course> main = executor.submit(() -> zoe.announceCourse(CourseType.MAIN));
+            Future<Course> dessert = executor.submit(() -> rosita.announceCourse(CourseType.DESSERT));
 
             return new MultiCourseMeal(starter.get(), main.get(), dessert.get());
         }
     }
-}</pre>
+}
+```
+
 
 Note that the `announceCourse(..)` method in the `Waiter` class sometimes fails with an `OutOfStockException`, because one of the ingredients for the course might not be in stock. This can lead to some problems:
 
@@ -302,7 +317,8 @@ Ultimately the problem here is that our program is logically structured with tas
 
 In contrast, the execution of single-threaded code *always* enforces a hierarchy of tasks and subtasks, as shown by the single-threaded version of our restaurant example:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public class SingleWaiterRestaurant implements Restaurant {
+```java
+public class SingleWaiterRestaurant implements Restaurant {
     @Override
     public MultiCourseMeal announceMenu() throws OutOfStockException {
         Waiter elmo = new Waiter("Elmo");
@@ -313,7 +329,9 @@ In contrast, the execution of single-threaded code *always* enforces a hierarchy
 
         return new MultiCourseMeal(starter, main, dessert);
     }
-}</pre>
+}
+```
+
 
 Here, we don't have *any* of the problems we had before.  
 
@@ -331,7 +349,8 @@ In a structured concurrency approach, threads have a clear hierarchy, their own 
 
 Let's look at a structured, concurrent version of our example now:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public class StructuredConcurrencyRestaurant implements Restaurant {
+```java
+public class StructuredConcurrencyRestaurant implements Restaurant {
     @Override
     public MultiCourseMeal announceMenu() throws ExecutionException, InterruptedException {
         Waiter grover = new Waiter("Grover");
@@ -339,16 +358,18 @@ Let's look at a structured, concurrent version of our example now:
         Waiter rosita = new Waiter("Rosita");
 
         try (var scope = StructuredTaskScope.open()) {
-            Supplier&lt;Course&gt; starter = scope.fork(() -&gt; grover.announceCourse(CourseType.STARTER));
-            Supplier&lt;Course&gt; main = scope.fork(() -&gt; zoe.announceCourse(CourseType.MAIN));
-            Supplier&lt;Course&gt; dessert = scope.fork(() -&gt; rosita.announceCourse(CourseType.DESSERT));
+            Supplier<Course> starter = scope.fork(() -> grover.announceCourse(CourseType.STARTER));
+            Supplier<Course> main = scope.fork(() -> zoe.announceCourse(CourseType.MAIN));
+            Supplier<Course> dessert = scope.fork(() -> rosita.announceCourse(CourseType.DESSERT));
 
             scope.join(); // 1
 
             return new MultiCourseMeal(starter.get(), main.get(), dessert.get()); // 2
         }
     }
-}</pre>
+}
+```
+
 
 The scope's purpose is to keep the threads together. At `1`, we wait (`join`) until all threads are done with their work. If one of the threads is interrupted, an `InterruptedException` is thrown. A `RuntimeException` can also be thrown here, if an exception occurs in one of the spawned threads. Once we reach `2`, we can be sure everything has gone well, and we can retrieve and process the results.
 
@@ -362,7 +383,8 @@ The factory method that gave us the scope (`StructuredTaskScope.open()`) impleme
 
 We can use a shutdown-on-success policy by calling an overload of the `StructuredTaskScope.open()` method that takes a `Joiner` as its parameter. Let's see what that would look like:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">record DrinkOrder(Guest guest, Drink drink) {}
+```java
+record DrinkOrder(Guest guest, Drink drink) {}
 
 public class StructuredConcurrencyBar implements Bar {
     @Override
@@ -370,14 +392,16 @@ public class StructuredConcurrencyBar implements Bar {
         Waiter zoe = new Waiter("Zoe");
         Waiter elmo = new Waiter("Elmo");
 
-        try (var scope = StructuredTaskScope.open(Joiner.&lt;DrinkOrder&gt;anySuccessfulOrThrow())) {
-            scope.fork(() -&gt; zoe.getDrinkOrder(guest, BEER, WINE, JUICE));
-            scope.fork(() -&gt; elmo.getDrinkOrder(guest, COFFEE, TEA, COCKTAIL, DISTILLED));
+        try (var scope = StructuredTaskScope.open(Joiner.<DrinkOrder>anySuccessfulOrThrow())) {
+            scope.fork(() -> zoe.getDrinkOrder(guest, BEER, WINE, JUICE));
+            scope.fork(() -> elmo.getDrinkOrder(guest, COFFEE, TEA, COCKTAIL, DISTILLED));
 
             return scope.join(); // 1
         }
     }
-}</pre>
+}
+```
+
 
 In this example the waiter is responsible for getting a valid `DrinkOrder` object based on guest preference and the drinks supply at the bar.  
 
@@ -423,27 +447,33 @@ But they come with two drawbacks, restricting their potential in many real-world
 
 Consider the use of immutability in the following code example, which takes place in a guitar store domain:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">class OrderController {
+```java
+class OrderController {
     private final Logger logger = Logger.create(OrderController.class);
 
-    void submitOrder(User user, List&lt;Guitar&gt; guitar) {
+    void submitOrder(User user, List<Guitar> guitar) {
         logger.info("Ordering new guitars...");
 
         // ...
 
         logger.info("New guitars have been ordered, let's get to work!");
     }
-}</pre>
+}
+```
+
 
 Whenever an instance of `OrderController` is created, the `logger` field is initialized eagerly, which potentially makes creating an `OrderController` slow.  
 
 And this might not be the only place in our application where a `logger` field is initialized eagerly:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">class GuitarStore {
+```java
+class GuitarStore {
     static final OrderController ORDERS = new OrderController();
     static final GuitarRepository GUITARS = new GuitarRepository();
     static final ManufacturerService MANUFACTURERS = new ManufacturerService();
-}</pre>
+}
+```
+
 
 All this initialization work causes the application to start up more slowly, and the worst thing is: it may not even be necessary!  
 
@@ -453,7 +483,8 @@ If a user is simply browsing the guitar store, with no intention of ordering a n
 
 The only alternative we currently have is to resort to a mutability-based approach, in which we delay the initialization of complex objects to as late a time as possible:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">class OrderController {
+```java
+class OrderController {
     private Logger logger;
 
     Logger getLogger() {
@@ -463,14 +494,16 @@ The only alternative we currently have is to resort to a mutability-based approa
         return logger;
     }
 
-    void submitOrder(User user, List&lt;Guitar&gt; guitar) {
+    void submitOrder(User user, List<Guitar> guitar) {
         getLogger().info("Ordering new guitars...");
 
         // ...
 
         getLogger().info("New guitars have been ordered, let's get to work!");
     }
-}</pre>
+}
+```
+
 
 This improves application startup, but comes with a few drawbacks of its own:
 
@@ -496,17 +529,20 @@ It must be initialized some time before its content is first retrieved, and is i
 
 Let's rewrite the `OrderController` class to use a lazy constant for its logger:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">class OrderController {
-    private final LazyConstant&lt;Logger&gt; logger = LazyConstant.of(() -&gt; Logger.create(OrderController.class));
+```java
+class OrderController {
+    private final LazyConstant<Logger> logger = LazyConstant.of(() -> Logger.create(OrderController.class));
 
-    void submitOrder(User user, List&lt;Guitar&gt; guitar) {
+    void submitOrder(User user, List<Guitar> guitar) {
         logger.get().info("Ordering new guitars...");
 
         // ...
 
         logger.get().info("New guitars have been ordered, let's get to work!");
     }
-}</pre>
+}
+```
+
 
 Initially, the lazy constant is uninitialized. When it is accessed for the first time through the `get()` method, it is initialized by invoking the lambda expression that was passed to the `of()` factory method.  
 
@@ -524,10 +560,11 @@ If we look at the properties of lazy constants, we see that they fill a gap betw
 
 Usage of lazy constants is certainly not limited to loggers--we can also use a lazy constant to store the `OrderController` component itself, and related components:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">class GuitarStore {
-    static final LazyConstant&lt;OrderController&gt; ORDERS = LazyConstant.of(OrderController::new);
-    static final LazyConstant&lt;GuitarRepository&gt; GUITARS = LazyConstant.of(GuitarRepository::new);
-    static final LazyConstant&lt;ManufacturerService&gt; MANUFACTURERS = LazyConstant.of(ManufacturerService::new);
+```java
+class GuitarStore {
+    static final LazyConstant<OrderController> ORDERS = LazyConstant.of(OrderController::new);
+    static final LazyConstant<GuitarRepository> GUITARS = LazyConstant.of(GuitarRepository::new);
+    static final LazyConstant<ManufacturerService> MANUFACTURERS = LazyConstant.of(ManufacturerService::new);
 
     public static OrderController orders() {
         return ORDERS.get();
@@ -540,7 +577,9 @@ Usage of lazy constants is certainly not limited to loggers--we can also use a l
     public static ManufacturerService manufacturers() {
         return MANUFACTURERS.get();
     }
-}</pre>
+}
+```
+
 
 The application's startup time improves because it no longer initializes its components, such as `OrderController`, up front.  
 
@@ -556,15 +595,18 @@ What if you wanted to keep track of multiple lazy constants, for example when ke
 
 We can achieve this by using a *lazy list*:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">class GuitarStore {
+```java
+class GuitarStore {
     static final int POOL_SIZE = 10;
-    static final List&lt;OrderController&gt; ORDERS = List.ofLazy(POOL_SIZE, _ -&gt; new OrderController());
+    static final List<OrderController> ORDERS = List.ofLazy(POOL_SIZE, _ -> new OrderController());
 
     public static OrderController orders() {
         long index = Thread.currentThread().threadId() % POOL_SIZE;
         return ORDERS.get((int) index);
     }
-}</pre>
+}
+```
+
 
 Here, `ORDERS` is no longer a lazy constant, but a lazy list, in which each element is stored in a lazy constant.  
 
@@ -576,13 +618,16 @@ Subsequent invocations of `ORDERS.get(...)` with the same index will return the 
 
 Alternatively, we could have solved the problem with a *lazy map*, whose keys are known at construction time and whose values are stored in lazy constants, initialized on demand by a computing function that is also provided at construction:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">class GuitarStore {
-    static final Map&lt;String, OrderController&gt; ORDERS = Map.ofLazy(Set.of("Customers", "Internal", "Testing"), _ -&gt; new OrderController());
+```java
+class GuitarStore {
+    static final Map<String, OrderController> ORDERS = Map.ofLazy(Set.of("Customers", "Internal", "Testing"), _ -> new OrderController());
 
     public static OrderController orders() {
         return ORDERS.get(Thread.currentThread().getName());
     }
-}</pre>
+}
+```
+
 
 In this example, `OrderController` instances are associated with thread names ("Customers", "Internal", and "Testing" in this case) rather than integer indexes computed from thread identifiers. Lazy maps allow for more expressive access idioms than lazy lists, but otherwise have all the same benefits.
 
@@ -618,18 +663,19 @@ In the past, Java programmers could only program such computations at the assemb
 
 Here is a code example (taken from the JEP) that compares a simple scalar computation over elements of arrays with its equivalent using the Vector API:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">void scalarComputation(float[] a, float[] b, float[] c) {
-   for (int i = 0; i &lt; a.length; i++) {
+```java
+void scalarComputation(float[] a, float[] b, float[] c) {
+   for (int i = 0; i < a.length; i++) {
         c[i] = (a[i] * a[i] + b[i] * b[i]) * -1.0f;
    }
 }
 
-static final VectorSpecies&lt;Float&gt; SPECIES = FloatVector.SPECIES_PREFERRED;
+static final VectorSpecies<Float> SPECIES = FloatVector.SPECIES_PREFERRED;
 
 void vectorComputation(float[] a, float[] b, float[] c) {
     int i = 0;
     int upperBound = SPECIES.loopBound(a.length);
-    for (; i &lt; upperBound; i += SPECIES.length()) {
+    for (; i < upperBound; i += SPECIES.length()) {
         // FloatVector va, vb, vc;
         var va = FloatVector.fromArray(SPECIES, a, i);
         var vb = FloatVector.fromArray(SPECIES, b, i);
@@ -638,10 +684,12 @@ void vectorComputation(float[] a, float[] b, float[] c) {
                    .neg();
         vc.intoArray(c, i);
     }
-    for (; i &lt; a.length; i++) {
+    for (; i < a.length; i++) {
         c[i] = (a[i] * a[i] + b[i] * b[i]) * -1.0f;
     }
-}</pre>
+}
+```
+
 
 From the perspective of the Java developer, this is just another way of expressing scalar computations. It might come across as being more verbose, but on the other hand it can bring spectacular performance gains.
 
@@ -667,32 +715,41 @@ Since Java 23, pattern matching supports primitive types in all pattern contexts
 
 Java 22's version of [pattern matching for switch](https://openjdk.org/jeps/441) didn't support type patterns that specify a primitive type. In Java 23 support was added for primitive type patterns in `switch`, allowing the following code example:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">switch (reverb.roomSize()) {
-    case 1 -&gt; "Toilet";
-    case 2 -&gt; "Bedroom";
-    case 30 -&gt; "Classroom";
-    default -&gt; "Unsupported value: " + reverb.roomSize();
-}</pre>
+```java
+switch (reverb.roomSize()) {
+    case 1 -> "Toilet";
+    case 2 -> "Bedroom";
+    case 30 -> "Classroom";
+    default -> "Unsupported value: " + reverb.roomSize();
+}
+```
+
 
 ...to be written as follows:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">switch (reverb.roomSize()) {
-    case 1 -&gt; "Toilet";
-    case 2 -&gt; "Bedroom";
-    case 30 -&gt; "Classroom";
-    case int i -&gt; "Unsupported int value: " + i;
-}</pre>
+```java
+switch (reverb.roomSize()) {
+    case 1 -> "Toilet";
+    case 2 -> "Bedroom";
+    case 30 -> "Classroom";
+    case int i -> "Unsupported int value: " + i;
+}
+```
+
 
 This also allows guards to inspect the matched value, like so:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">switch (reverb.roomSize()) {
-    case 1 -&gt; "Toilet";
-    case 2 -&gt; "Bedroom";
-    case 30 -&gt; "Classroom";
-    case int i when i &gt; 100 &amp;&amp; i &lt; 1000 -&gt; "Cinema";
-    case int i when i &gt; 5000 -&gt; "Stadium";
-    case int i -&gt; "Unsupported int value: " + i;
-}</pre>
+```java
+switch (reverb.roomSize()) {
+    case 1 -> "Toilet";
+    case 2 -> "Bedroom";
+    case 30 -> "Classroom";
+    case int i when i > 100 && i < 1000 -> "Cinema";
+    case int i when i > 5000 -> "Stadium";
+    case int i -> "Unsupported int value: " + i;
+}
+```
+
 
 #### Record Patterns
 
@@ -700,7 +757,8 @@ This also allows guards to inspect the matched value, like so:
 
 Recall that a record pattern decomposes a record into its individual components, but when one of them is a primitive type, the record pattern must be precise about its type. To illustrate this point, consider the following code example:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">record Tuner(double pitchInHz) implements Effect {}
+```java
+record Tuner(double pitchInHz) implements Effect {}
 
 var tuner = new Tuner(440); // int argument is widened to double
 
@@ -715,13 +773,16 @@ if (tuner instanceof Tuner(double p)) {
 // Attempt 3: record pattern match on double argument, cast to int
 if (tuner instanceof Tuner(double p)) {
     int pitch = (int) p;
-}</pre>
+}
+```
+
 
 To put it differently, the Java compiler widens the provided `int` to a `double`, but it doesn't narrow it back to an `int`. This limitation exists because narrowing could lead to data loss: the value of the `double` at runtime might exceed the range of an `int` or have more precision than an `int` can accommodate. However, one significant advantage of pattern matching is its ability to automatically reject invalid values by not matching them at all. If the `double` component of a `Tuner` is either too large or too precise to safely convert back to an `int`, then `instanceof Tuner(int p)` would simply return `false`, allowing the program to manage the large `double` component in a different code branch.
 
 This is analogous to how pattern matching currently behaves for reference type patterns. For example:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">record SingleEffect(Effect effect) {}
+```java
+record SingleEffect(Effect effect) {}
 var singleEffect = new SingleEffect(...);
 
 if (singleEffect instanceof SingleEffect(Delay d)) {
@@ -730,7 +791,9 @@ if (singleEffect instanceof SingleEffect(Delay d)) {
     // ...
 } else {
     // ...
-}</pre>
+}
+```
+
 
 `instanceof` can be used here to try to match a `SingleEffect` with a `Delay` or a `Reverb` component; it automatically narrows if the pattern matches.
 
@@ -740,20 +803,26 @@ To summarize, the JEP proposes to make primitive type patterns work as smoothly 
 
 The Java 22-version of [pattern matching for instanceof](https://openjdk.org/jeps/394) didn't support primitive type patterns, but this capability would perfectly align with the purpose of `instanceof`: to test whether a value can be converted safely to a given type. To convert primitives safely, Java developers had to deal with lossy casts and range checks to prevent loss of information:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">int roomSize = reverb.roomSize();
+```java
+int roomSize = reverb.roomSize();
 
-if (roomSize &gt;= -128 &amp;&amp; roomSize &lt; 127) {
+if (roomSize >= -128 && roomSize < 127) {
     byte r = (byte) roomSize;
     // now it's safe to use r
-}</pre>
+}
+```
+
 
 The JEP proposes the possibility to replace these constructs with simple `instanceof` checks that operate on primitives. Let's rewrite the code example to make use of this feature:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">int roomSize = reverb.roomSize();
+```java
+int roomSize = reverb.roomSize();
 
 if (roomSize instanceof byte r) {
     // now it's safe to use r
-}</pre>
+}
+```
+
 
 The pattern `roomSize instanceof byte r` will match only if `roomSize` fits into a `byte`, eliminating the need for casts and range checks.
 
@@ -765,9 +834,12 @@ But it would make sense to have `instanceof` take a primitive type also.
 
 In that case `instanceof` would check if the conversion is safe but would not actually perform it:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">if (roomSize instanceof byte) { // check if value of roomSize fits in a byte
+```java
+if (roomSize instanceof byte) { // check if value of roomSize fits in a byte
     ... (byte) roomSize ... // yes, it fits! but cast is required
-}</pre>
+}
+```
+
 
 The JEP proposes to support this construct, which makes it easier to change the `instanceof` check to take a type pattern and vice versa.
 
@@ -779,13 +851,16 @@ The JEP proposes to also add support for the other primitive types: `boolean`, `
 
 A `switch` on a `boolean` value can be a good alternative for the ternary operator (`?:`), because its branches can also hold statements instead of just expressions.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">String guitaristResponse = switch (guitar.isInTune()) {
-    case true -&gt; "Ready to play a song.";
-    case false -&gt; {
+```java
+String guitaristResponse = switch (guitar.isInTune()) {
+    case true -> "Ready to play a song.";
+    case false -> {
         log.warn("Guitar is out of tune!");
         yield "Let's take five!";
     }
-}</pre>
+}
+```
+
 
 #### What's Different From Java 25?
 
@@ -816,7 +891,8 @@ Final fields in Java represent immutable state. Once assigned in a constructor o
 
 Unfortunately, the expectation that a final field cannot be reassigned is false. [Several APIs](https://openjdk.org/jeps/8305968#Undermining-integrity) allow final fields to be reassigned at any time by any code in a program, undermining all reasoning about correctness and invalidating important optimizations. The *deep reflection API* is the most notorious of them, through its `Field.setAccessible` and `Field.set` methods. These methods allow you to mutate final fields at will, for example:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">// A normal class with a final field
+```java
+// A normal class with a final field
 static class Guitar {
     final int numberOfStrings;
 
@@ -839,7 +915,9 @@ void main() throws ReflectiveOperationException {
     IO.println(guitar.numberOfStrings);  // Prints 12
     numberOfStrings.set(guitar, 4);
     IO.println(guitar.numberOfStrings);  // Prints 4
-}</pre>
+}
+```
+
 
 This example shows that, in practice, final fields can be as mutable as non-final fields.
 
@@ -859,7 +937,10 @@ The effects of these *final field restrictions* will be strengthened over time. 
 
 Application developers can avoid these warnings and expections by opting-in to final field mutation via the command-line. To achieve this, specify the `--enable-final-field-mutation` command-line option and pass it a comma-separated list of module names:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ java --enable-final-field-mutation=module1,module2</pre>
+```bash
+$ java --enable-final-field-mutation=module1,module2
+```
+
 
 Additional techniques are also available, such as setting environment variables, adding it to a JAR's manifest or configuring it in a custom runtime using `jlink`. Refer to [JEP 500](https://openjdk.org/jeps/500) for more details on these techniques.
 

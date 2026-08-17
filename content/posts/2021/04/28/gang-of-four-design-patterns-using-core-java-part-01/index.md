@@ -23,7 +23,7 @@ frozen: false
 **\[About SKP's Core Java/Java EE Roots\]**  
 Series of Articles on Rooted Concepts in Core Java and J2EE. They Revolve Around Memory Architecture, Connection \& Memory Leaks, Core Java Syntax \& Semantics, Java Object Layout/Anatomy, Multi-Threading, Asynchronous Task Execution, Design Patterns, Java Agents, Class Loading, API Design, OOPs \& SOLID.  
 
-*** ** * ** ***
+
 
 To understand the philosophical and historical perspective on the Gang of Four's design patterns, I made a short, 10-minute video. (This was also my PluralSight Author Audition). Please take time to view the \[Introduction to Gang of Four Design Patterns\] Video.  
 
@@ -48,7 +48,8 @@ The provided example is that of a StockBroker application, which involves the ma
 
 Only the core concept is provided in the snippets below. You can \[Download the Sample Code\](<http://www.sumithpuri.me/coderanch/observer.jar> "Download the Sample Code") for the Observer Pattern.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">package com.sumsoft.design.patterns.observer;
+```java
+package com.sumsoft.design.patterns.observer;
 
 /*
  * @author Sumith Puri
@@ -57,9 +58,12 @@ public interface Observer {
 
     public void update(String stockSymbol, Float stockValue, Integer stockUnits);
 
-}</pre>
+}
+```
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">package com.sumsoft.design.patterns.observer;
+
+```java
+package com.sumsoft.design.patterns.observer;
 
 /*
  * @author Sumith Puri
@@ -78,9 +82,12 @@ public class IncomeHandler implements Observer {
         System.out.println("IncomeHandler received changes... ");
     }
 
-}</pre>
+}
+```
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">package com.sumsoft.design.patterns.observer;
+
+```java
+package com.sumsoft.design.patterns.observer;
 
 /*
  * @author Sumith Puri
@@ -90,9 +97,12 @@ public interface Subject {
     public void addObserver(Observer o);
     public void removeObserver(Observer o);
     public void notifyObservers();
-}</pre>
+}
+```
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">package com.sumsoft.design.patterns.observer;
+
+```java
+package com.sumsoft.design.patterns.observer;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -105,10 +115,10 @@ public class StockData implements Subject {
     private String stockSymbol = null;
     private Float stockValue = null;
     private Integer stockUnits = null;
-    private List&lt;Observer&gt; observers = null;
+    private List<Observer> observers = null;
 
     public StockData() {
-        observers = new ArrayList&lt;Observer&gt;();
+        observers = new ArrayList<Observer>();
     }
 
     @Override
@@ -139,7 +149,9 @@ public class StockData implements Subject {
     private void setDataChanged() {
         notifyObservers();
     }
-}</pre>
+}
+```
+
 
 Use StockBroker.java to run the application. Try adding your own Observer to this application. Also, you can try picking up these values from a live web service and writing a custom observer which depends on this.
 
@@ -158,7 +170,8 @@ The attached example is that of a Pizza application. Here, the pizzas in the sho
 
 Only the core concept is provided in the snippets below. You can \[Download the Sample Code\](<http://www.sumithpuri.me/coderanch/decorator.jar> "Download the Sample Code") for the Decorator Pattern.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">package com.sumsoft.design.patterns.decorator;
+```java
+package com.sumsoft.design.patterns.decorator;
 
 /*
  * @author Sumith Puri
@@ -166,9 +179,12 @@ Only the core concept is provided in the snippets below. You can \[Download the 
 public abstract class ToppingDecorator extends Pizza {
 
     public abstract String getDescription();
-}</pre>
+}
+```
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">package com.sumsoft.design.patterns.decorator;
+
+```java
+package com.sumsoft.design.patterns.decorator;
 
 /*
  * @author Sumith Puri
@@ -194,9 +210,12 @@ public class Mushroom extends ToppingDecorator {
         return 0.25 + pizza.cost();
     }
 
-}</pre>
+}
+```
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">package com.sumsoft.design.patterns.decorator;
+
+```java
+package com.sumsoft.design.patterns.decorator;
 
 /*
  * @author Sumith Puri
@@ -210,9 +229,12 @@ public abstract class Pizza {
     }
 
     public abstract double cost();
-}</pre>
+}
+```
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">package com.sumsoft.design.patterns.decorator;
+
+```java
+package com.sumsoft.design.patterns.decorator;
 
 /*
  * @author Sumith Puri
@@ -229,9 +251,12 @@ public class Italian extends Pizza {
         return 1.20;
     }
 
-}</pre>
+}
+```
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">package com.sumsoft.design.patterns.decorator;
+
+```java
+package com.sumsoft.design.patterns.decorator;
 
 /*
  * @author Sumith Puri
@@ -257,7 +282,9 @@ public class PizzaWorld {
         System.out.println(pizza.getDescription() + " " + pizza.cost());
         System.out.println(pizza1.getDescription() + " " + pizza1.cost());
     }
-}</pre>
+}
+```
+
 
 <br />
 
@@ -280,7 +307,8 @@ The simplest Singleton (\[Download the Sample Code Here\](<http://www.sumithpuri
 
 In the given example, MediaContract (Main Thread) works on an instance of the ProductionHouse (Singleton). The Singleton is instantiated at class-load time and maintained in the private static instance variable. getInstance() in ProductionHouse helps in retrieving the instance.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">package com.sumsoft.design.patterns.singleton.eager;
+```java
+package com.sumsoft.design.patterns.singleton.eager;
 
 /*
  * @author Sumith Puri
@@ -297,7 +325,9 @@ public class ProductionHouse {
 
         return productionHouse;
     }
-}</pre>
+}
+```
+
 
 ### Thread-Safe Singleton (Most Common) {#_thread_safe_singleton_most_common}
 
@@ -309,7 +339,8 @@ To overcome the above drawback, the recommended approach is to instantiate the o
 
 As in the earlier example, the classes are MediaContract (Main Thread) and ProductionHouse (Singleton). The getInstance() method is synchronized, and the instance is created only if it is null.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">package com.sumsoft.design.patterns.singleton.threadsafe;
+```java
+package com.sumsoft.design.patterns.singleton.threadsafe;
 
 /*
  * @author Sumith Puri
@@ -330,7 +361,9 @@ public class ProductionHouse {
 
         return productionHouse;
     }
-}</pre>
+}
+```
+
 
 ### Double-Checked Locking {#_double_checked_locking}
 
@@ -342,7 +375,8 @@ The disadvantage mentioned above can be critical for a highly accessed object in
 
 The example remains the same, the difference being in the reduced scope of synchronization within the getInstance() method --- and also that it affects only the first access and not subsequent accesses. You can \[Download the Sample Code\](<http://www.sumithpuri.me/coderanch/singleton_doublechecked.jar> "Download the Sample Code") here.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">package com.sumsoft.design.patterns.singleton.doublechecked;
+```java
+package com.sumsoft.design.patterns.singleton.doublechecked;
 
 /*
  * @author Sumith Puri
@@ -367,13 +401,16 @@ public class ProductionHouse {
 
         return productionHouse;
     }
-}</pre>
+}
+```
+
 
 <br />
 
 For all the three partial samples above, you may use the following code to run and understand the different ways to instantiate Singletons.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">package com.sumsoft.design.patterns.singleton.doublechecked;
+```java
+package com.sumsoft.design.patterns.singleton.doublechecked;
 
 /*
  * @author Sumith Puri
@@ -398,7 +435,9 @@ public class MediaContract extends Thread {
         thread02.start();
     }
 
-}</pre>
+}
+```
+
 
 Command Pattern {#_command_pattern}
 -----------------------------------
@@ -415,7 +454,8 @@ We'll look at an example of an auction house where there are various items for a
 
 Only the core concept is provided in the snippets below. You can \[Download the Sample Code Here\](<http://www.sumithpuri.me/coderanch/command.jar> "Download the Sample Code Here") for Command Pattern.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">package com.sumsoft.design.patterns.command;
+```java
+package com.sumsoft.design.patterns.command;
 
 /*
  * @author Sumith Puri
@@ -425,9 +465,12 @@ public abstract class AuctionItem {
     public void sell() {
 
     }
-}</pre>
+}
+```
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">package com.sumsoft.design.patterns.command;
+
+```java
+package com.sumsoft.design.patterns.command;
 
 /*
  * @author Sumith Puri
@@ -437,9 +480,12 @@ public class AuctionFurniture extends AuctionItem {
     public void sell() {
         System.out.println("Sold Furniture Item");
     }
-}</pre>
+}
+```
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">package com.sumsoft.design.patterns.command;
+
+```java
+package com.sumsoft.design.patterns.command;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -449,7 +495,7 @@ import java.util.Map;
  */
 public class AuctionControl {
 
-    Map&lt;String, AuctionItem&gt; auctionItems = new HashMap&lt;String, AuctionItem&gt;();
+    Map<String, AuctionItem> auctionItems = new HashMap<String, AuctionItem>();
 
     public void setAuctionItem(String itemKey, AuctionItem auctionItem) {
 
@@ -461,7 +507,9 @@ public class AuctionControl {
         AuctionItem auctionItem = auctionItems.get(itemKey);
         auctionItem.sell();
     }
-}</pre>
+}
+```
+
 
 Factory Pattern {#_factory_pattern}
 -----------------------------------
@@ -480,7 +528,8 @@ The Simplest Factory Pattern (\[Download the Code Here\](<http://www.sumithpuri.
 
 In the attached example, the factory is used to instantiate a specific type of object depending on the operating system. All the specific systems implement the System interface, which defines the common methods that the concrete class of this type should implement. SystemFactory is the factory class that provides the create() method, which takes a type argument. The type argument decides which concrete factory should be instantiated.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">package com.sumsoft.design.patterns.factory.simple;
+```java
+package com.sumsoft.design.patterns.factory.simple;
 
 /*
  * @author Sumith Puri
@@ -491,9 +540,12 @@ public interface System {
     public void update();
     public void restart();
 
-}</pre>
+}
+```
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">package com.sumsoft.design.patterns.factory.simple;
+
+```java
+package com.sumsoft.design.patterns.factory.simple;
 
 /*
  * @author Sumith Puri
@@ -517,9 +569,12 @@ public class UnixSystem implements System {
         // TODO Auto-generated method stub
 
     }
-}</pre>
+}
+```
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">package com.sumsoft.design.patterns.factory.simple;
+
+```java
+package com.sumsoft.design.patterns.factory.simple;
 
 /*
  * @author Sumith Puri
@@ -543,7 +598,9 @@ public class SystemFactory {
         return system;
     }
 
-}</pre>
+}
+```
+
 
 ### Factory Method {#_factory_method}
 
@@ -555,7 +612,8 @@ When there can be various families of products (objects) that can be instantiate
 
 In the example, you can notice the presence of two abstract classes, Mobile (Product) and MobileStore (Creator). One family of concrete product implementations are NokiaASeries, NokiaBSeries, and NokiaCSeries --- to be created by the NokiaStore, which is the concrete implementation of the creator. In a similar fashion, another family of products, such as SonyASeries, SonyBSeries, and SonyCSeries are to be created by SonyStore, another concrete implementation of MobileStore. MobileStoreCentre is the main class to run this application. The createMobile() method is the abstract method (factory method) that is to be overridden by the creator implementations.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">package com.sumsoft.design.patterns.factory.method;
+```java
+package com.sumsoft.design.patterns.factory.method;
 
 /*
  * @author Sumith Puri
@@ -581,9 +639,12 @@ public abstract class Mobile {
     public void software() {
         System.out.println("Default Software Bundled.");
     }
-}</pre>
+}
+```
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">package com.sumsoft.design.patterns.factory.method;
+
+```java
+package com.sumsoft.design.patterns.factory.method;
 
 /*
  * @author Sumith Puri
@@ -593,9 +654,12 @@ public class NokiaASeries extends Mobile {
     public void experience() {
         System.out.println("Nokia Premium Hardware.");
     }
-}</pre>
+}
+```
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">package com.sumsoft.design.patterns.factory.method;
+
+```java
+package com.sumsoft.design.patterns.factory.method;
 
 /*
  * @author Sumith Puri
@@ -605,9 +669,12 @@ public class SonyASeries extends Mobile {
     public void experience() {
         System.out.println("Sony Premium Hardware.");
     }
-}</pre>
+}
+```
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">package com.sumsoft.design.patterns.factory.method;
+
+```java
+package com.sumsoft.design.patterns.factory.method;
 
 /*
  * @author Sumith Puri
@@ -628,9 +695,12 @@ public abstract class MobileStore {
 
     protected abstract Mobile createMobile(String make);
 
-}</pre>
+}
+```
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">package com.sumsoft.design.patterns.factory.method;
+
+```java
+package com.sumsoft.design.patterns.factory.method;
 
 /*
  * @author Sumith Puri
@@ -652,9 +722,12 @@ public class NokiaStore extends MobileStore {
         return mobile;
     }
 
-}</pre>
+}
+```
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">package com.sumsoft.design.patterns.factory.method;
+
+```java
+package com.sumsoft.design.patterns.factory.method;
 
 /*
  * @author Sumith Puri
@@ -669,7 +742,9 @@ public class MobileStoreCentre {
         Mobile mobile01 = mobileStore01.assemble("ASeries");
         Mobile mobile02 = mobileStore02.assemble("BSeries");
     }
-}</pre>
+}
+```
+
 
 Abstract Factory {#_abstract_factory}
 -------------------------------------
@@ -682,7 +757,8 @@ The Abstract Factory defines a template or interface for the creation of similar
 
 Taking the same example as above, MobileStoreFactory instantiates the concrete instance of the abstract factory (MobileStore) based upon the variable specified, either "Nokia" (NokiaStore) or "Sony"(SonyStore). The factory is then responsible for creating the objects of similar types based upon the choice --- such as "ASeries" or "BSeries" or "CSeries". The mobile is then assembled based upon this by the MobileStore. You may use MobileStoreCentre to run this example and understand the design pattern based on the output.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">package com.sumsoft.design.patterns.factory.abstract_;
+```java
+package com.sumsoft.design.patterns.factory.abstract_;
 
 /**
  * @author sumith_puri
@@ -702,9 +778,12 @@ public class MobileStoreFactory {
         mStore = new SonyStore();
         return mStore;
     }
-}</pre>
+}
+```
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">package com.sumsoft.design.patterns.factory.abstract_;
+
+```java
+package com.sumsoft.design.patterns.factory.abstract_;
 
 /*
  * @author Sumith Puri
@@ -723,7 +802,9 @@ public class MobileStoreCentre {
         mobile = mobileStore.assemble("BSeries");
         mobile.experience();
     }
-}</pre>
+}
+```
+
 
 Note: Only the code to explain the various design patterns' core concepts are included int he snippets above. You may download the code from each of the links above and run them on your system for a more thorough understanding. You may also choose to modify the code with your own examples to cement your knowledge.
 

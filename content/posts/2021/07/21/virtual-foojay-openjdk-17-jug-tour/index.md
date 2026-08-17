@@ -33,7 +33,7 @@ Here's the (growing) roster of topics!
 
 ### Java Core {#h3-0-java-core}
 
-*** ** * ** ***
+
 
 **OpenJDK 17: Get Ready for the Next LTS Java** , *Simon Ritter (Azul* ).   
 
@@ -45,7 +45,7 @@ By the end of this session, you'll be all set to take advantage of all the moder
 
 **Status: Booked September 9, St. Louis JUG (USA)**
 
-*** ** * ** ***
+
 
 **Pattern Matching \& Sealed Classes: Best Features of OpenJDK 17?** *Deepu K Sasidharan (JHipster)* .   
 
@@ -57,7 +57,7 @@ Let's see all the possibilities with it first and then we will look at the new S
 
 **Status: Booked September 23, Silesia JUG (Poland)**
 
-*** ** * ** ***
+
 
 **Say 'No' to JNI,** *Carl Dea (Azul)*
 
@@ -69,7 +69,7 @@ The aim of this talk will be to provide a friendly introduction to OpenJDK 17's 
 
 **Status: Booked September 21, KnoxJava (USA)**
 
-*** ** * ** ***
+
 
 **Securing and Exploiting Java Applications** , *Erik Costlow (Contrast Security)*
 
@@ -79,7 +79,7 @@ By understanding how modern Java applications are attacked, teams can better pos
 
 We will lay out where different defense and monitoring capabilities have gone, including new features such as serialization filters and OpenJDK Flight Recorder.
 
-*** ** * ** ***
+
 
 ****Data Science on the JVM with Kotlin and Zeppelin**** , *Pratik Patel (Azul)*
 
@@ -87,7 +87,7 @@ The world of Data Science heavily uses Python and Python libraries such as NumPy
 
 In this session, Pratik will introduce you to Data Science using the popular Kotlin language that runs on the JVM. We'll do this using an interactive platform called Apache Zeppelin. Similar to Jupyter Notebooks, Zeppelin allows you to write code, formatted text, and use a myriad of plugins to process, analyze, and display data. With its integration with Spark, you can also prototype and develop solutions for Big Data in a fun and interactive way!
 
-*** ** * ** ***
+
 
 **Are All OpenJDK Builds Created Equal?** , *Simon Ritter (Azul*).
 
@@ -105,7 +105,7 @@ By the end, you'll have a clear understanding of the benefits of OpenJDK certifi
 
 <br />
 
-*** ** * ** ***
+
 
 **Your Java Code in the Fastlane: Creating a Million Virtual Threads Using Project Loom to Improve Throughput** , *Bazlur Rahman (Contrast Security)*   
 
@@ -119,7 +119,7 @@ This talk will explore what virtual threads are, how they are implemented, how t
 
 ### Java Cloud {#h3-1-java-cloud}
 
-*** ** * ** ***
+
 
 ***Getting Started with Jakarta EE*** , *Rudy De Busscher (Payara).*
 
@@ -127,7 +127,7 @@ With the release of Jakarta EE 9.0, for the first time, a major breaking change 
 
 In this session, we will cover the basics of setting up a Jakarta EE 9 application, creating REST endpoints, accessing the database, and creating a rich user interface. You will learn that it is not only easy to get your application running on an Application Runtime, but bringing it into a containerized environment and Kubernetes is just as easy as writing a simple Hello World application.
 
-*** ** * ** ***
+
 
 **Enhanced Java Elasticity with OpenJDK 17** *, Ruslan Synetsky (Jelastic)* .  
 
@@ -137,7 +137,7 @@ In this session, we'll cover the main achievements in vertical scaling of Java, 
 
 Join the session to find out how to keep Java up to date, as well as make your cloud environments more flexible and adjustable to the load while lowering total cost of ownership.
 
-*** ** * ** ***
+
 
 **Leveraging OpenJDK 17 to Create End-to-End JavaFX-to-Cloud applications** , *Johan Vos (Gluon)* .   
 
@@ -145,7 +145,7 @@ Real world applications don't live in silos. Cloud services process data coming 
 
 In this session, we'll show real-time data synchronization between clients and between clients and a Cloud service; remote function invocation, where a client invokes a serverless function in a serverless container; data processing on a backend system, real-time connected with a user interface on a client.
 
-*** ** * ** ***
+
 
 **Cloud-Native Java in Times of OpenJDK 17** , *Clement Escoffier (Red Hat)* and*Georgios Andrianakis (Red Hat)* .   
 
@@ -153,7 +153,7 @@ OpenJDK 17 introduces plenty of features that significantly ease writing modern 
 
 Come see how records, pattern matching, and sealed classes help build Cloud Native Java applications and how to package and run these applications in containers.
 
-*** ** * ** ***
+
 
 **Leveraging OpenJDK 17 features with Jakarta EE,** *Ivar Grimstad (Eclipse Foundation)* .   
 
@@ -161,7 +161,7 @@ Jakarta EE 9 lowered the barriers of entry and established a foundation for futu
 
 In this session, I will show how easy it is to get started using OpenJDK 17 features in a Jakarta EE application.
 
-*** ** * ** ***
+
 
 **Jakarta EE: Present and Future** , *Reza Rahman (Microsoft)* .   
 
@@ -171,7 +171,7 @@ You should come to this session with your thinking caps on and your sleeves roll
 
 **Status: Booked October 14, St. Louis JUG (USA)**
 
-*** ** * ** ***
+
 
 **Why Jakarta EE Matters** , *Ryan Cuprak (Dassault Systems)*
 
@@ -179,7 +179,7 @@ Jakarta EE is now over 20 years old and despite its age, it is as relevant today
 
 This presentation will provide context to Jakarta EE and why businesses choose to use it!
 
-*** ** * ** ***
+
 
 **7 Reasons to Switch to OpenJDK 17 as a Jakarta EE Developer** , *Rudy De Busscher (Payara).*
 
@@ -189,7 +189,7 @@ Learn about these features and improvements including Records, Text blocks, Garb
 
 ### JavaFX {#h3-2-javafx}
 
-*** ** * ** ***
+
 
 **One Codebase, Six Platforms: JavaFX 17 on Every Client** , *Johan Vos (Gluon)* .   
 
@@ -199,7 +199,7 @@ In this session, we talk about the new features and fixes that are introduced in
 
 You will learn how the latest version of JavaFX can be used in conjunction with the latest Java release and how to create modern user interfaces that are cross-platform and that can be deployed on desktop, mobile, and embedded devices.
 
-*** ** * ** ***
+
 
 **FXGL 17: Roadmap for the Future of JavaFX Game Development** , *Almas Baimagambetov (University of Brighton)* .  
 
@@ -209,7 +209,7 @@ In this session, we will cover the latest features the current version offers an
 
 ### Raspberry Pi {#h3-3-raspberry-pi}
 
-*** ** * ** ***
+
 
 **Current state of Java, JavaFX, and Pi4J on the Raspberry Pi** , *Frank Delporte (Toadi)* .   
 
@@ -221,7 +221,7 @@ In this session, you will be introduced to all of these topics with references a
 
 **Status: Booked August 26, Manchester JUG (UK)** and **Booked September 27, Jozi JUG**
 
-*** ** * ** ***
+
 
 **100% Pure Java on the Raspberry Pi** , *Dieter Holz (FHNW University of Applied Sciences)* .   
 
@@ -235,7 +235,7 @@ In this talk, you will see all the things that are needed besides the available 
 
 ### Miscellaneous {#h3-4-miscellaneous}
 
-*** ** * ** ***
+
 
 **From Java Records to Quantum Computing** *, Johan Vos (Gluon)* .   
 

@@ -39,8 +39,11 @@ With the Raspberry Pi Imager Tool, I prepared an SD card with the 64-bit version
 
 When the device has started for the first time, make sure to update it fully and we can start with a "fresh up-to-date" system.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ sudo apt update
-$ sudo apt upgrade</pre>
+```
+$ sudo apt update
+$ sudo apt upgrade
+```
+
 
 <figure class="wp-block-gallery has-nested-images columns-default is-cropped wp-block-gallery-1 is-layout-flex wp-block-gallery-is-layout-flex">
  <figure class="wp-block-image size-large">
@@ -58,7 +61,8 @@ Install Azul Zulu OpenJDK {#h2-1-install-azul-zulu-openjdk}
 
 Download the "ARM 64-bit" version from the Azul website and follow these steps to unpack it and make a link to easy use it for our tests.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group=""># Download
+```
+# Download
 $ cd Downloads
 $ wget https://cdn.azul.com/zulu/bin/zulu17.42.21-ca-crac-jdk17.0.7-linux_aarch64.tar.gz
 
@@ -74,13 +78,16 @@ $ sudo ln -s zulu17.42.21-ca-crac-jdk17.0.7-linux_aarch64/ zulu-crac
 $ /opt/zulu-crac/bin/java -version
 openjdk version "17.0.7" 2023-04-18 LTS
 OpenJDK Runtime Environment Zulu17.42+21-CRaC-CA (build 17.0.7+7-LTS)
-OpenJDK 64-Bit Server VM Zulu17.42+21-CRaC-CA (build 17.0.7+7-LTS, mixed mode)</pre>
+OpenJDK 64-Bit Server VM Zulu17.42+21-CRaC-CA (build 17.0.7+7-LTS, mixed mode)
+```
+
 
 ### Using SDKMAN {#h3-3-using-sdkman}
 
 Another approach is to use [SDKMAN](https://sdkman.io/). When I started this test, the CRaC version of Zulu was not included yet in the list of Java distributions in SDKMAN, but thanks to a quick intervention of Gerrit Grunwald (creator of the [DiscoAPI](https://github.com/foojayio/discoapi)) and the SDKMAN-team, this got solved within minutes.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group=""># Install SDKMAN
+```
+# Install SDKMAN
 $ sudo apt install zip
 $ curl -s "https://get.sdkman.io" | bash
 $ source "$HOME/.sdkman/bin/sdkman-init.sh"
@@ -122,14 +129,17 @@ Setting java 17.0.7.crac-zulu as default.
 pi@crowpi2:~/.m2 $ java -version
 openjdk version "17.0.7" 2023-04-18 LTS
 OpenJDK Runtime Environment Zulu17.42+21-CRaC-CA (build 17.0.7+7-LTS)
-OpenJDK 64-Bit Server VM Zulu17.42+21-CRaC-CA (build 17.0.7+7-LTS, mixed mode)</pre>
+OpenJDK 64-Bit Server VM Zulu17.42+21-CRaC-CA (build 17.0.7+7-LTS, mixed mode)
+```
+
 
 Create a Checkpoint with a Java Test Application {#h2-4-create-a-checkpoint-with-a-java-test-application}
 ---------------------------------------------------------------------------------------------------------
 
 Within the CRaC-project, a demo application was created to explain the usage of the checkpoint and restore system, as [described here](https://github.com/CRaC/docs/blob/master/STEP-BY-STEP.md). Clone this project, build it with Maven, and execute it with an extra command line argument `-XX:CRaCCheckpointTo=cr` to define the directory where the checkpoint must be created.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group=""># Get the project
+```
+# Get the project
 $ git clone https://github.com/CRaC/example-jetty.git
 $ cd example-jetty
 
@@ -151,20 +161,26 @@ $ java -XX:CRaCCheckpointTo=cr -jar target/example-jetty-1.0-SNAPSHOT.jar
 2023-06-15 07:51:28.611:INFO::main: Logging initialized @540ms to org.eclipse.jetty.util.log.StdErrLog
 2023-06-15 07:51:28.817:INFO:oejs.Server:main: jetty-9.4.48.v20220622; built: 2022-06-21T20:42:25.880Z; git: 6b67c5719d1f4371b33655ff2d047d24e171e49a; jvm 17.0.7+7-LTS
 2023-06-15 07:51:28.938:INFO:oejs.AbstractConnector:main: Started ServerConnector@7b69c6ba{HTTP/1.1, (http/1.1)}{0.0.0.0:8080}
-2023-06-15 07:51:28.948:INFO:oejs.Server:main: Started @895ms</pre>
+2023-06-15 07:51:28.948:INFO:oejs.Server:main: Started @895ms
+```
+
 
 The application started in 895ms but didn't do anything yet. At this point, we must open a second terminal to trigger an action in the application to "warm it up", and we can request the creation of the checkpoint.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ curl localhost:8080
+```
+$ curl localhost:8080
 Hello World
 
 $ jcmd target/example-jetty-1.0-SNAPSHOT.jar JDK.checkpoint
 3467:
-CR: Checkpoint ...</pre>
+CR: Checkpoint ...
+```
+
 
 The expected result in the first terminal should be that the application log shows that the checkpoint is created and the application terminated. Unfortunately, this is the output I got, ending with an exception:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">2023-06-15 07:53:10.571:INFO:oejs.AbstractConnector:Attach Listener: Stopped ServerConnector@7b69c6ba{HTTP/1.1, (http/1.1)}{0.0.0.0:8080}
+```
+2023-06-15 07:53:10.571:INFO:oejs.AbstractConnector:Attach Listener: Stopped ServerConnector@7b69c6ba{HTTP/1.1, (http/1.1)}{0.0.0.0:8080}
 Jun 15, 2023 7:53:10 AM jdk.internal.util.jar.PersistentJarFile beforeCheckpoint
 INFO: /home/crac/example-jetty/target/dependency/crac-1.3.0.jar is recorded as always available on restore
 Jun 15, 2023 7:53:10 AM jdk.internal.util.jar.PersistentJarFile beforeCheckpoint
@@ -187,11 +203,14 @@ An exception during a checkpoint operation:
 jdk.internal.crac.CheckpointException
     at java.base/jdk.internal.crac.Core.checkpointRestore1(Core.java:141)
     at java.base/jdk.internal.crac.Core.checkpointRestore(Core.java:246)
-    at java.base/jdk.internal.crac.Core.checkpointRestoreInternal(Core.java:262)</pre>
+    at java.base/jdk.internal.crac.Core.checkpointRestoreInternal(Core.java:262)
+```
+
 
 The file created in `example-jetty/cr/dump4.log` seems to lead to a possible cause, as it says that CRIU does not exist.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">(00.000127) Version: 3.17.1-crac (gitid v3.14-889-gfe637c2+1)
+```
+(00.000127) Version: 3.17.1-crac (gitid v3.14-889-gfe637c2+1)
 (00.000201) Running on crowpi2 Linux 5.10.92-v8+ #1514 SMP PREEMPT Mon Jan 17 17:39:38 GMT 2022 aarch64
 (00.000240) File /run/criu.kdat does not exist
 (00.000322) sockets: Probing sock diag modules
@@ -212,10 +231,12 @@ The file created in `example-jetty/cr/dump4.log` seems to lead to a possible cau
 (00.077347) Warn  (criu/net.c:3770): NSID isn't reported for network links
 (00.077463) Error (criu/kerndat.c:508): Unexpected error from memfd_create("", MFD_HUGETLB): Function not implemented
 (00.077481) Error (criu/kerndat.c:1590): kerndat_has_memfd_hugetlb failed when initializing kerndat.
-(00.077601) Adjust mmap_min_addr 0x1000 -&gt; 0x10000
+(00.077601) Adjust mmap_min_addr 0x1000 -> 0x10000
 (00.077619) Found mmap_min_addr 0x10000
 (00.077660) files stat: fs/nr_open 1048576
-(00.077677) Error (criu/crtools.c:260): Could not initialize kernel features detection.</pre>
+(00.077677) Error (criu/crtools.c:260): Could not initialize kernel features detection.
+```
+
 
 Fix 1: Add CRIU to the Kernel {#h2-5-fix-1-add-criu-to-the-kernel}
 ------------------------------------------------------------------
@@ -226,7 +247,8 @@ Thanks to the support of my colleague Sergey Nazarkin, it quickly became apparen
 
 On the Raspberry Pi website, it's [clearly described how the Linux kernel can be compiled](https://www.raspberrypi.com/documentation/computers/linux_kernel.html). To validate this process, I built the kernel without modifications to ensure I understood this flow. This is an overview of all the steps:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group=""># Check current kernel
+```
+# Check current kernel
 $ uname -a
 Linux raspberrypi 6.1.21-v8+ #1642 SMP PREEMPT Mon Apr  3 17:24:16 BST 2023 aarch64 GNU/Linux
 
@@ -259,7 +281,9 @@ $ sudo reboot
 
 # Check kernel version and timestamp
 $ uname -a
-Linux crac 6.1.32-v8-CRAC+ #1 SMP PREEMPT Thu Jun 15 09:30:31 BST 2023 aarch64 GNU/Linux</pre>
+Linux crac 6.1.32-v8-CRAC+ #1 SMP PREEMPT Thu Jun 15 09:30:31 BST 2023 aarch64 GNU/Linux
+```
+
 
 The last line proves that we could build our own kernel version, and the board has successfully started with it! On to the next step...
 
@@ -269,8 +293,11 @@ FYI: the command `make -j4 Image.gz modules dtbs` takes the longest time: 2 hour
 
 Within the same `linux` directory, run the following commands:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ sudo apt install libncurses5-dev 
-$ make menuconfig</pre>
+```
+$ sudo apt install libncurses5-dev 
+$ make menuconfig
+```
+
 
 * Go to "General setup"
 * Scroll down and select "Checkpoint/restore support"
@@ -278,8 +305,11 @@ $ make menuconfig</pre>
 * Repeat the process to build the kernel starting from `make -j4 Image.gz modules dtbs`
 * After reboot, check that the new kernel is used, by checking the new timestamp
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ uname -a
-Linux crac 6.1.32-v8-CRAC+ #2 SMP PREEMPT Thu Jun 15 11:08:18 BST 2023 aarch64 GNU/Linux</pre>
+```
+$ uname -a
+Linux crac 6.1.32-v8-CRAC+ #2 SMP PREEMPT Thu Jun 15 11:08:18 BST 2023 aarch64 GNU/Linux
+```
+
 
 <figure class="wp-block-gallery has-nested-images columns-default is-cropped wp-block-gallery-2 is-layout-flex wp-block-gallery-is-layout-flex">
  <figure class="wp-block-image size-large">
@@ -299,11 +329,15 @@ Fix 2: Replace Zulu with a Dev Version {#h2-9-fix-2-replace-zulu-with-a-dev-vers
 
 As it turns out, the current Zulu version 17.0.7 with CRaC doesn't support this Linux kernel. Luckily, Sergey could provide me a dev-version of Zulu with changes that will be part of the next release in July. First, I needed to upload them to my Raspberry Pi.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">% scp zulu17.42.21-dev-20230613095837-jdk17.0.7-linux-aarch64.tar.gz <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="3e5d4c5f5d7e0f090c100f08100f100f0a0b">[email&nbsp;protected]</a>:/home/crac/</pre>
+```
+% scp zulu17.42.21-dev-20230613095837-jdk17.0.7-linux-aarch64.tar.gz <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="3e5d4c5f5d7e0f090c100f08100f100f0a0b">[email protected]</a>:/home/crac/
+```
+
 
 And then installed in the `/opt/` directory as described above.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ sudo mv zulu17.42.21-dev-20230614092542-jdk17.0.7-linux-aarch64.tar.gz /opt/
+```
+$ sudo mv zulu17.42.21-dev-20230614092542-jdk17.0.7-linux-aarch64.tar.gz /opt/
 $ cd /opt/
 $ sudo tar -xzvf zulu17.42.21-dev-20230614092542-jdk17.0.7-linux-aarch64.tar.gz
 $ sudo ln -s zulu17.42.21-dev-20230614092542-jdk17.0.7-linux-aarch64 zulu-crac
@@ -311,7 +345,9 @@ $ sudo rm zulu17.42.21-dev-20230614092542-jdk17.0.7-linux-aarch64.tar.gz
 $ /opt/zulu-crac/bin/java -version
 openjdk version "17.0.7" 2023-04-18 LTS
 OpenJDK Runtime Environment Zulu17.42+21-CRaC-CA-dev-20230614092542 (build 17.0.7+7-LTS-dev-20230614092542)
-OpenJDK 64-Bit Server VM Zulu17.42+21-CRaC-CA-dev-20230614092542 (build 17.0.7+7-LTS-dev-20230614092542, mixed mode, sharing)</pre>
+OpenJDK 64-Bit Server VM Zulu17.42+21-CRaC-CA-dev-20230614092542 (build 17.0.7+7-LTS-dev-20230614092542, mixed mode, sharing)
+```
+
 
 ### Retry the Checkpoint Creation with Fix 1 and 2 {#h3-10-retry-the-checkpoint-creation-with-fix-1-and-2}
 
@@ -319,7 +355,8 @@ With the modified kernel in place and the dev-version of Zulu, the checkpoint cr
 
 In Terminal 1:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">/opt/zulu-crac/bin/java -XX:CRaCCheckpointTo=cr -jar target/example-jetty-1.0-SNAPSHOT.jar
+```
+/opt/zulu-crac/bin/java -XX:CRaCCheckpointTo=cr -jar target/example-jetty-1.0-SNAPSHOT.jar
 
 [0.002s][warning][os] CRaC closing file descriptor 63: pipe:[17763]
 2023-06-15 11:30:33.400:INFO::main: Logging initialized @327ms to org.eclipse.jetty.util.log.StdErrLog
@@ -341,16 +378,21 @@ Jun 15, 2023 11:32:14 AM jdk.internal.crac.LoggerContainer info
 INFO: /home/crac/example-jetty/target/dependency/jetty-server-9.4.48.v20220622.jar is recorded as always available on restore
 Jun 15, 2023 11:32:14 AM jdk.internal.crac.LoggerContainer info
 INFO: /home/crac/example-jetty/target/example-jetty-1.0-SNAPSHOT.jar is recorded as always available on restore
-Killed</pre>
+Killed
+```
+
 
 In Terminal 2:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ curl localhost:8080
+```
+$ curl localhost:8080
 Hello World
 
 $ /opt/zulu-crac/bin/jcmd target/example-jetty-1.0-SNAPSHOT.jar JDK.checkpoint
 10429:
-CR: Checkpoint ...</pre>
+CR: Checkpoint ...
+```
+
 
 It seems we have a breakthrough here, and the checkpoint was successfully created, after which the application was killed!
 
@@ -359,7 +401,8 @@ Restart From Checkpoint {#h2-11-restart-from-checkpoint}
 
 In the `cr` directory that we defined at startup of the application with `-XX:CRaCCheckpointTo=cr`, we can now find the following files:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">ls -lh cr
+```
+ls -lh cr
 total 28M
 -rw-r--r-- 1 crac crac 2.0K Jun 15 11:33 core-10429.img
 -rw-r--r-- 1 crac crac  571 Jun 15 11:33 core-10430.img
@@ -399,23 +442,31 @@ total 28M
 -rw-r--r-- 1 crac crac   12 Jun 15 11:33 seccomp.img
 -rw-r--r-- 1 crac crac   52 Jun 15 11:33 stats-dump
 -rw-r--r-- 1 crac crac   34 Jun 15 11:33 timens-0.img
--rw-r--r-- 1 crac crac  199 Jun 15 11:33 tty-info.img</pre>
+-rw-r--r-- 1 crac crac  199 Jun 15 11:33 tty-info.img
+```
+
 
 As mentioned on [Azul Docs \> Debugging Coordinated Restore at Checkpoint Failures \> Failures in Native Checkpoint or Restore](https://docs.azul.com/core/crac/crac-debugging#failures-in-native-checkpoint-or-restore), the permissions of `criu` with the JDK must be set correctly.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ ls -l /opt/zulu-crac/lib/criu
+```
+$ ls -l /opt/zulu-crac/lib/criu
 -rwxr-xr-x 1 1001 1001 7241504 Jun 14 10:40 /opt/zulu-crac/lib/criu
 $ sudo chown root:root  /opt/zulu-crac/lib/criu
 $ sudo chmod u+s /opt/zulu-crac/lib/criu
 $ ls -l /opt/zulu-crac/lib/criu
--rwsr-xr-x 1 root root 7241504 Jun 14 10:40 /opt/zulu-crac/lib/criu</pre>
+-rwsr-xr-x 1 root root 7241504 Jun 14 10:40 /opt/zulu-crac/lib/criu
+```
+
 
 When this is done, we can restart the application from the checkpoint:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ /opt/zulu-crac/bin/java -XX:CRaCRestoreFrom=cr
+```
+$ /opt/zulu-crac/bin/java -XX:CRaCRestoreFrom=cr
 2023-06-15 12:32:38.430:INFO:oejs.Server:Attach Listener: jetty-9.4.48.v20220622; built: 2022-06-21T20:42:25.880Z; git: 6b67c5719d1f4371b33655ff2d047d24e171e49a; jvm 17.0.7+7-LTS-dev-20230614092542
 2023-06-15 12:32:38.449:INFO:oejs.AbstractConnector:Attach Listener: Started ServerConnector@63d4e2ba{HTTP/1.1, (http/1.1)}{0.0.0.0:8080}
-2023-06-15 12:32:38.450:INFO:oejs.Server:Attach Listener: Started @3578432ms</pre>
+2023-06-15 12:32:38.450:INFO:oejs.Server:Attach Listener: Started @3578432ms
+```
+
 
 There is still a fix required to show the correct startup duration, but based on the timestamps we can see that it only took 450-430 = 20 milliseconds!
 

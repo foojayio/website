@@ -33,7 +33,7 @@ Profile:
 * 📚Medium:[Nicolas Fränkel](https://nfrankel.medium.com/)
 * 💡Hashnode:[Nicolas Fränkel](https://hashnode.com/@nfrankel)
 
-*** ** * ** ***
+
 
 ***Bazlur: Can you tell us about your background and how you got started in the software industry?***
 
@@ -53,7 +53,7 @@ I knew I couldn't become a developer with only an MSc in Architecture and that I
 
 Every engineering school requires an internship of three months or more. I chose an IT consultancy company and was hired afterwards.  
 
-*** ** * ** ***
+
 
 <br />
 
@@ -70,7 +70,7 @@ Every engineering school requires an internship of three months or more. I chose
 > ***"A language has rules, and as long as you play by the rules, you'll get the expected results; humans, not so much. I guess it's easier for me (and probably for most developers) to interact with computers than with humans for this reason." .***
 > ***- Nicolas on his inclination towards coding***
 
-*** ** * ** ***
+
 
 ***Bazlur: In an article, my good friend Bruno Souza once suggested that programmers should explore their creative side outside of coding, whether it's through writing poetry or enjoying kite-flying. How many years of coding experience do you have---more than 20 perhaps? As the topic of art came up, what were your thoughts on it? Have you found any non-coding inspirations in your life?***
 
@@ -84,7 +84,7 @@ I've noticed that it frees my conscious mind. In general, I try to have a long p
 
 On an unrelated note, I do love real-world languages and learning them. I don't know if it can be called inspiration, but I always try to learn a few sentences of the language where I travel to.
 
-*** ** * ** ***
+
 
 ***Bazlur: Let's shift gears and talk about the current state of software development. As someone with extensive experience in the software development industry, what do you believe are the major challenges that developers currently encounter? Given your extensive career in this area, you have likely witnessed a range of strategies and solutions employed to tackle various issues, many of which have created new difficulties. Could you also offer advice on how these challenges can be effectively addressed?***
 
@@ -107,7 +107,7 @@ Another current favourite of mine is: migrate to microservices, and you'll solve
 
 To be complete, I should also mention the possible turmoil that AI can bring to IT. Whether it's a forest fire that will drastically revolutionize the way we work or just a spark with no potential, I cannot judge. I intend to spend some time evaluating the subject in the near future, though.  
 
-*** ** * ** ***
+
 
 <br />
 
@@ -121,7 +121,7 @@ Likewise, I asked OpenAI to refactor a block of code with nested when to a more 
 
 I've had direct experience with a developer who copy-pasted StackOverflow answers to write code without understanding the context. I can assure you that I'll never work with this person again. On the other hand, StackOverflow is an awesome tool for developers who know how to use it. At the moment, I see these AI tools as StackOverflow on steroids, nothing more, nothing less.
 
-*** ** * ** ***
+
 
 ***Bazlur: We can certainly view it as a tool that facilitates our work. However, considering its unprecedented rate of improvement, do you not think that AI will have a significant impact on our lives in 5 to 10 years? Would it be wise for programmers to begin learning about data science, machine learning, and AI development?***
 
@@ -131,7 +131,7 @@ Developers should always learn as much as possible. However, does a car driver n
 
 In short: it depends on what you like and at what level you want to use AI.
 
-*** ** * ** ***
+
 
 ***Bazlur: What advice would you give someone new to the software industry who is unsure about which career path to take? Could you also provide insights into the various roles within the industry, such as developer, quality assurance, manager, and developer advocacy, and the specific skills and interests needed for each of these roles?***
 
@@ -145,7 +145,7 @@ Managers are special in my world: most of the managers I had in my life had litt
 
 However, I've had a couple of managers who actually had lots of value: they handled all of the crappy company stuff so I could do my job. These people are indeed priceless. If you want to become one, you need to love people genuinely, look forward to interacting with them on a daily basis, and accept to stay in the shadows while putting the people who are doing the work in the limelight.
 
-*** ** * ** ***
+
 
 ***Bazlur: Thank you so much for sharing your insights with us. We really appreciate your time. If we have any further questions, we will be sure to reach out to you. Before we end, is there any parting advice or resources you would like to share with our readers, such as a list of recommended books or any other helpful information?***
 
@@ -160,7 +160,7 @@ However, I've had a couple of managers who actually had lots of value: they hand
 
 If you leave bad companies to join the good ones, the former will wither and die, and the latter will grow and thrive. Vote with your feet!
 
-*** ** * ** ***
+
 
 **Conclusion:**
 

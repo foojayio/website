@@ -110,6 +110,6 @@ Ultimately, this test highlights a perfect match. **AutoMQ** provides a modern, 
 
 And if you're ready to dive in, you can [start a free trial of AutoMQ](https://console.automq.cloud/?utm_source=blog_foojay).
 
-*** ** * ** ***
+
 
 Originally [published on the AutoMQ blog](https://www.automq.com/blog/automq-zing-boost-latency-performance) on August 21, 2025.

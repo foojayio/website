@@ -107,16 +107,22 @@ The bottom line is that I believe that the configured/selected tags are too rest
 
 These caveats led me to think that instead of trying to *mimic* old logging options, I should instead prefer to log more tags and simplify the overall logging configuration.
 
-<pre class="EnlighterJSRAW">-Xlog:gc*=debug,gc+ergo*=trace,gc+age*=trace,safepoint*:file=/gclogs/%t-gc.log:uptime,tags,level:filecount=10,filesize=20M</pre>
+```
+-Xlog:gc*=debug,gc+ergo*=trace,gc+age*=trace,safepoint*:file=/gclogs/%t-gc.log:uptime,tags,level:filecount=10,filesize=20M
+```
+
 
 Log config breakdown
 
-<pre class="EnlighterJSRAW">-Xlog:
+```
+-Xlog:
   gc*=debug,
   gc+ergo*=trace,
   gc+age*=trace,
   safepoint*
-  :file=/gclogs/%t-gc.log:uptime,tags,level:filecount=10,filesize=20M</pre>
+  :file=/gclogs/%t-gc.log:uptime,tags,level:filecount=10,filesize=20M
+```
+
 
 * Line 2: Logs everything under `gc` at `debug` level.
 * Line 3: Specific *tagset* level configuration for ergonomics.
@@ -164,12 +170,15 @@ Of course if one want to focus on a certain part, it is alwasy possible to speci
 
 Unlike `os` and `container` logs, GC happens almost continuously. This opens the opportunity to try log configurations at runtime using `jcmd`. In the example below I wanted to monitor more thoroughly G1GC regions:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash">jcmd $(pidof java) \
+```bash
+jcmd $(pidof java) \
   VM.log \
     what="gc*=debug,gc+ergo*=trace,gc+age*=trace,gc+region=trace,gc+liveness=trace,safepoint*" \
     decorators=time,tags,level \
     output="file=/var/log/%t-gc-region-tracing.log" \
-    output_options="filecount=10,filesize=20M"</pre>
+    output_options="filecount=10,filesize=20M"
+```
+
 
 ### Migrating the Trace\* flags {#_migrating_the_trace_flags}
 
@@ -197,7 +206,8 @@ Tracing flags declaration in the JVM code base
 
 [src/hotspot/share/runtime/arguments.cpp](https://github.com/openjdk/jdk11u/blob/a4f2cc65079328cb428cf0317df39af93472ab1e/src/hotspot/share/runtime/arguments.cpp#L596-L630)
 
-<pre class="EnlighterJSRAW" data-enlighter-language="c++">// NOTE: A compatibility request will be necessary for each alias to be removed.
+```cpp
+// NOTE: A compatibility request will be necessary for each alias to be removed.
 static AliasedLoggingFlag const aliased_logging_flags[] = {
   { "PrintCompressedOopsMode",   LogLevel::Info,  true,  LOG_TAGS(gc, heap, coops) },
   { "PrintSharedSpaces",         LogLevel::Info,  true,  LOG_TAGS(cds) },
@@ -231,7 +241,9 @@ static AliasedFlag const removed_develop_logging_flags[] = {
   { "VerboseVerification",        "-Xlog:verification" },
   { NULL, NULL }
 };
-#endif //PRODUCT</pre>
+#endif //PRODUCT
+```
+
 
 End words {#_end_words}
 -----------------------

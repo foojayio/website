@@ -51,13 +51,16 @@ With [Hilla](https://hilla.dev/ "Hilla"), the cumbersome process of managing end
 
 Here's how it works. First, you add `@BrowserCallable` annotation to your Spring Service:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">@BrowserCallable 
+```java
+@BrowserCallable 
 @Service
-public&nbsp;class&nbsp;CustomerService&nbsp;{
-&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;List&lt;Customer&gt;&nbsp;getCustomers()&nbsp;{
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;Fetch&nbsp;customers&nbsp;from&nbsp;DB&nbsp;or&nbsp;API
-&nbsp;&nbsp;&nbsp;&nbsp;}
-}</pre>
+public class CustomerService {
+    public List<Customer> getCustomers() {
+        // Fetch customers from DB or API
+    }
+}
+```
+
 
 Based on this annotation, Hilla auto-generates TypeScript types and clients that enable calling the Java backend in a type-checkable way from the frontend (no need to declare any REST endpoints):
 
@@ -83,7 +86,8 @@ One of the standout features of Hilla is its ability to maintain data validation
 
 For instance, if a field is marked as `@NotBlank` in Java, Hilla ensures that the same validation is applied when this data is processed in the React frontend.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">public class Customer {
+```
+public class Customer {
 
     @NotBlank(message = "Name is mandatory")
     private String name;
@@ -94,24 +98,29 @@ For instance, if a field is marked as `@NotBlank` in Java, Hilla ensures that th
 
     // Getters and setters
 
-}</pre>
+}
+```
+
 
 The Hilla `useForm` hook uses the generated TypeScript model to apply the validation rules to the form fields.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">function CustomerForm() {
+```
+function CustomerForm() {
 
     const {model, field, read, submit} = useForm(CustomerModel, {
         onSubmit: CustomerService.saveCustomer
     });
 
     return (
-    &lt;div&gt;
-      &lt;TextField label="Name" {...field(model.name)} /&gt;
-      &lt;EmailField label="Email" {...field(model.email)} /&gt;
-      &lt;Button onClick={submit}&gt;Save&lt;/Button&gt;
-    &lt;/div&gt;
+    <div>
+      <TextField label="Name" {...field(model.name)} />
+      <EmailField label="Email" {...field(model.email)} />
+      <Button onClick={submit}>Save</Button>
+    </div>
     )
-}</pre>
+}
+```
+
 
 Batteries and Guardrails Included {#h2-6-batteries-and-guardrails-included}
 ---------------------------------------------------------------------------

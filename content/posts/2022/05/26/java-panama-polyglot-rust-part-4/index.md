@@ -71,11 +71,17 @@ Before we can take the steps above let's make sure we install the JDK 19 EA rele
 
 To **install** Rust run the following for (MacOS/Linux):
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh</pre>
+```bash
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+```
+
 
 Assuming you've installed **Rust** you'll want to add its binaries on the `PATH` as followings:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">source $HOME/.cargo/env</pre>
+```bash
+source $HOME/.cargo/env
+```
+
 
 Step 1: Creating a Native Rust Library {#h2-3-step-1-creating-a-native-rust-library}
 ------------------------------------------------------------------------------------
@@ -84,18 +90,24 @@ Let's initialize the Rust project with the following commands:
 
 (For the demo I created a directory `rust`. If you are already in a directory named `rust` you don't need to create it.)
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">mkdir rust
+```bash
+mkdir rust
 cd rust
-cargo init --lib</pre>
+cargo init --lib
+```
+
 
 Edit and replace the contents of the file `src/lib.rs` with the following:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="rust" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">use std::process;
+```rust
+use std::process;
 
 #[no_mangle]
-pub extern "C" fn rust_get_pid() -&gt; u32 {
+pub extern "C" fn rust_get_pid() -> u32 {
   return process::id();
-}</pre>
+}
+```
+
 
 |-------------|-------------------------------------------------------------------------------------------------------------------------------------------|
 | Line number | Description                                                                                                                               |
@@ -113,7 +125,8 @@ Updating build project file `Cargo.toml` {#h2-4-updating-build-project-file-carg
 
 The following contents of the `Cargo.toml` file will **compile** and **build** a native Rust library created in the `target/debug` directory.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">[build-dependencies]
+```
+[build-dependencies]
 cbindgen = "0.20.0"
 
 [lib]
@@ -126,7 +139,9 @@ edition = "2021"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
-[dependencies]</pre>
+[dependencies]
+```
+
 
 Above you'll notice `cbindgen` is used to generate a C header (`.h`) file for `jextract` to later generate binding code in Java. Also, you want to make sure the name of the library will be named `myrustlibrary`.
 
@@ -139,7 +154,8 @@ Step 2: Create a Rust C header generator (generates a lib.h file) {#h2-5-step-2-
 
 Create a file called `build.rs` with the following contents:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="rust" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">extern crate cbindgen;
+```rust
+extern crate cbindgen;
 
 use std::env;
 
@@ -152,11 +168,16 @@ fn main() {
       .generate()
       .expect("Unable to generate bindings")
       .write_to_file("lib.h");
-}</pre>
+}
+```
+
 
 Run the following statement that will call `cbindgen` to generate a `lib.h` file.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">cargo build</pre>
+```
+cargo build
+```
+
 
 The output should look like the following:
 
@@ -169,35 +190,44 @@ The output should look like the following:
 
 This may take awhile. When this is done you can view the contents of `lib.h` as shown below:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="c" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">#include &lt;stdarg.h&gt;
-#include &lt;stdbool.h&gt;
-#include &lt;stdint.h&gt;
-#include &lt;stdlib.h&gt;
+```c
+#include <stdarg.h>
+#include <stdbool.h>
+#include <stdint.h>
+#include <stdlib.h>
 
-uint32_t rust_get_pid(void);</pre>
+uint32_t rust_get_pid(void);
+```
+
 
 Step 3: Use `jextract` against C header file (`lib.h`) {#h2-6-step-3-use-jextract-against-c-header-file-lib-h}
 --------------------------------------------------------------------------------------------------------------
 
 Run the following using `jextract` to generate binding code that will be used in the `Main.java` program created later.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">jextract -d classes \
+```bash
+jextract -d classes \
    -t org.rust \
    -l myrustlibrary \
-   -- lib.h</pre>
+   -- lib.h
+```
+
 
 Step 4: Creating a Main.java to call the native function {#h2-7-step-4-creating-a-main-java-to-call-the-native-function}
 ------------------------------------------------------------------------------------------------------------------------
 
 Edit or create a `Main.java` file with the following contents:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">import static org.rust.lib_h.*;
+```java
+import static org.rust.lib_h.*;
 
 public class Main {
     public static void main(String[] args) {
         System.out.println("Rust getting process id = " + rust_get_pid());
     }
-}</pre>
+}
+```
+
 
 Above you'll notice the static import will reference generated Panama binding code. The bindings will do a library lookup and a native symbol lookup of the function `rust_get_pid()` function based on the **C ABI**.
 
@@ -206,18 +236,24 @@ Running Main.java {#h2-8-running-main-java}
 
 To run the Java program you'll simply do the following:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">java --add-modules jdk.incubator.foreign \
+```bash
+java --add-modules jdk.incubator.foreign \
    --enable-native-access=ALL-UNNAMED \
    -Djava.library.path=./target/debug \
    -cp classes \
-   Main.java</pre>
+   Main.java
+```
+
 
 The output will look like the following:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">WARNING: Using incubator modules: jdk.incubator.foreign
+```
+WARNING: Using incubator modules: jdk.incubator.foreign
 warning: using incubating module(s): jdk.incubator.foreign
 1 warning
-Rust getting process id = 36396</pre>
+Rust getting process id = 36396
+```
+
 
 If you've gotten this far you deserve a high five! Way to go!
 

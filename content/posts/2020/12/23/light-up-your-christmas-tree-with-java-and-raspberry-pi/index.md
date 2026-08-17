@@ -28,11 +28,11 @@ Or want to learn something completely new and use your Java-knowledge to control
 
 Here we go with this small project to get you introduced to the world of electronics programming!
 
-*** ** * ** ***
+
 
 *This post was originally published on "[JVM **Advent** - The JVM Programming **Advent** Calendar](https://www.javaadvent.com/)", a month-long reading list of diverse Java-related articles. A nice addition to your daily read of Foojay!*
 
-*** ** * ** ***
+
 
 We are going the make the "Hello World"-equivalent of an electronics project: a blinking LED. And to make it a bit more challenging, not only blinking one LED but a "full" Christmas tree, well... at least 7 blinking Christmas lights.
 
@@ -74,10 +74,13 @@ If you buy a new Raspberry Pi, make sure you also have a mini-SD card with minim
 
 When you start your board for the first time, you'll need to configure the Wifi, and some additional settings. When done, open a terminal and run `java -version` to make sure you used to correct OS.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ java -version
+```
+$ java -version
 openjdk version "11.0.9" 2020-10-20
 OpenJDK Runtime Environment (build 11.0.9+11-post-Raspbian-1deb10u1)
-OpenJDK Server VM (build 11.0.9+11-post-Raspbian-1deb10u1, mixed mode)</pre>
+OpenJDK Server VM (build 11.0.9+11-post-Raspbian-1deb10u1, mixed mode)
+```
+
 
 ### **New Products 2020** {#h3-1-new-products-2020}
 
@@ -149,10 +152,13 @@ But you can install Visual Studio Code with the Java extensions if you want to w
 
 We are going to use Maven to build the application on our Pi, so let's install it with a single command, after which we can immediately check the installation by requesting the version:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ sudo apt install maven
-$&nbsp;mvn&nbsp;-v
-Apache&nbsp;Maven&nbsp;3.6.0
-Maven&nbsp;home:&nbsp;/usr/share/maven</pre>
+```
+$ sudo apt install maven
+$ mvn -v
+Apache Maven 3.6.0
+Maven home: /usr/share/maven
+```
+
 
 #### **Pi4J**
 
@@ -166,16 +172,22 @@ To control the LED-lights, we are going to use the Pi4J-library, which makes the
 
 For full support of the Pi4J-library, we need to install some extra software on the board. Again we only need a single command to do this:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ curl -sSL https://pi4j.com/install | sudo bash</pre>
+```
+$ curl -sSL https://pi4j.com/install | sudo bash
+```
+
 
 #### **Update of WiringPi**
 
 One last step to be fully prepared... If you are using a Raspberry Pi 4, you'll need to update WiringPi. This is used by Pi4J as a native library to control the GPIOs and because the architecture of the system-on-chip has changed on version 4, a new (but final) version 2.52 of WiringPi was released:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ wget https://project-downloads.drogon.net/wiringpi-latest.deb
+```
+$ wget https://project-downloads.drogon.net/wiringpi-latest.deb
 $ sudo dpkg -i wiringpi-latest.deb
 $ gpio -v
-gpio version: 2.52</pre>
+gpio version: 2.52
+```
+
 
 ### **The Wiring** {#h3-3-the-wiring}
 
@@ -211,20 +223,26 @@ You can calculate the exact resistor value for each LED-type, but we use the sam
 
 TL;DR; run these commands to build and start the application directly on your Raspberry Pi:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ git clone https://github.com/FDelporte/JvmAdvent2020.git
+```
+$ git clone https://github.com/FDelporte/JvmAdvent2020.git
 $ cd JvmAdvent2020
 $ mvn package
-$ sudo java -jar target/jvm-advent-2020-1.0-SNAPSHOT-jar-with-dependencies.jar </pre>
+$ sudo java -jar target/jvm-advent-2020-1.0-SNAPSHOT-jar-with-dependencies.jar
+```
+
 
 #### **Maven dependency**
 
 This is a Maven project, and the Pi4J-library is added as a dependency in pom.xml:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&lt;dependency&gt;
-    &lt;groupId&gt;com.pi4j&lt;/groupId&gt;
-    &lt;artifactId&gt;pi4j-core&lt;/artifactId&gt;
-    &lt;version&gt;1.2&lt;/version&gt;
-&lt;/dependency&gt;</pre>
+```
+<dependency>
+    <groupId>com.pi4j</groupId>
+    <artifactId>pi4j-core</artifactId>
+    <version>1.2</version>
+</dependency>
+```
+
 
 #### **PWM**
 
@@ -245,50 +263,63 @@ To know which GPIO numbers need to be used, you can check the pin-layout drawing
 
 In our code we use a list of GpioPinPwmOutput and add all the pins we are using. Pin 32 only supports hardware-PWM so needs to be initialized as such:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">List&lt;GpioPinPwmOutput&gt; leds = new ArrayList&lt;&gt;();
+```
+List<GpioPinPwmOutput> leds = new ArrayList<>();
 leds.add(gpio.provisionSoftPwmOutputPin(RaspiPin.GPIO_04, "LeftGreen"));    // Pin 16
 leds.add(gpio.provisionSoftPwmOutputPin(RaspiPin.GPIO_05, "LeftBlue"));     // Pin 18
 leds.add(gpio.provisionSoftPwmOutputPin(RaspiPin.GPIO_06, "LeftRed"));      // Pin 22
 leds.add(gpio.provisionSoftPwmOutputPin(RaspiPin.GPIO_10, "Top"));          // Pin 24
 leds.add(gpio.provisionSoftPwmOutputPin(RaspiPin.GPIO_11, "LedRightGreen"));// Pin 26
 leds.add(gpio.provisionSoftPwmOutputPin(RaspiPin.GPIO_31, "RightYellow"));  // Pin 28
-leds.add(gpio.provisionPwmOutputPin(RaspiPin.GPIO_26, "RightRed"));         // Pin 32</pre>
+leds.add(gpio.provisionPwmOutputPin(RaspiPin.GPIO_26, "RightRed"));         // Pin 32
+```
+
 
 As we are using software-PWM we also need to do some configuration:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">int PWM_MAX = 100;
+```
+int PWM_MAX = 100;
 Gpio.pwmSetMode(Gpio.PWM_MODE_MS);
 Gpio.pwmSetRange(PWM_MAX);
-Gpio.pwmSetClock(500);</pre>
+Gpio.pwmSetClock(500);
+```
+
 
 #### **All On or Off**
 
 Turning all the LEDs on or off has become very easy with the forEach-function of a list:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">private static void allOff() {
-    leds.forEach(l -&gt; l.setPwm(0));
+```
+private static void allOff() {
+    leds.forEach(l -> l.setPwm(0));
 }
 
 private static void allOn() {
-    leds.forEach(l -&gt; l.setPwm(PWM_MAX));
-}</pre>
+    leds.forEach(l -> l.setPwm(PWM_MAX));
+}
+```
+
 
 #### **Fading**
 
 By increasing or decreasing the PWM-value we can dim the LEDs, for example, fading one-by-one from 0 to the maximum value:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">for (GpioPinPwmOutput led : leds) {
-    for (int fade = 0; fade &lt;= PWM_MAX; fade += fadeSteps) {
+```
+for (GpioPinPwmOutput led : leds) {
+    for (int fade = 0; fade <= PWM_MAX; fade += fadeSteps) {
         led.setPwm(fade);
         Thread.sleep(speed);
     }
-}</pre>
+}
+```
+
 
 ### **Building and Running** {#h3-5-building-and-running}
 
 The full code contains some more LED methods, so take a look at it to find out what is already there. Get the full Maven project from GitHub, package and run it directly on the Raspberry Pi with these commands:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ git clone https://github.com/FDelporte/JvmAdvent2020.git
+```
+$ git clone https://github.com/FDelporte/JvmAdvent2020.git
 $ cd JvmAdvent2020
 $ mvn package
 $ sudo java -jar target/jvm-advent-2020-1.0-SNAPSHOT-jar-with-dependencies.jar 
@@ -314,7 +345,9 @@ Fading up GPIO 5
 Fading down GPIO 31
 Fading down GPIO 26
 All off
-Done</pre>
+Done
+```
+
 
 And there you have it, the log of the application, controlling the LEDs as you can see in the movie at the start of this article.
 

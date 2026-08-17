@@ -40,25 +40,37 @@ You will need a GPG key to sign the artifacts, this will allow users to verify t
 * Download [GPG key](https://www.gnupg.org/download "GPG key") or install it with your favorite package manager.
 * Generate a public key with (remember the password as we're going to need it later) 
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-linenumbers="false">gpg --gen-key</pre>
+```
+gpg --gen-key
+```
+
 
 * Now find the id of your key with 
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-linenumbers="false">gpg --list-keys --keyid-format=long</pre>
+```
+gpg --list-keys --keyid-format=long
+```
+
 
   The output should look something like this:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-linenumbers="false">/Users/jagodevreede/.gnupg/pubring.kbx
+```
+/Users/jagodevreede/.gnupg/pubring.kbx
 --------------------------------------
 pub   rsa4096/XXXXXXXX9925B017 2022-11-17 [SC] [expires: 2026-11-17]
       C20FC085CF5B0D4D861E8CEDXXXXXXXX9925B017
-uid                 [ultimate] Jago de Vreede &lt;<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="423027262321362726022f232b2e6c212d2f">[email&nbsp;protected]</a>&gt;
-sub   rsa4096/XXXXXXXXXXXXFC74 2022-11-17 [E] [expires: 2026-11-17]</pre>
+uid                 [ultimate] Jago de Vreede <<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="423027262321362726022f232b2e6c212d2f">[email protected]</a>>
+sub   rsa4096/XXXXXXXXXXXXFC74 2022-11-17 [E] [expires: 2026-11-17]
+```
+
 
   In this case, the id of the public key is XXXXXXXXXXXXFC74
 * Publish your public key to a public server, for example Ubuntu: 
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-linenumbers="false">gpg --keyserver keyserver.ubuntu.com --send-keys XXXXXXXXXXXXFC74</pre>
+```
+gpg --keyserver keyserver.ubuntu.com --send-keys XXXXXXXXXXXXFC74
+```
+
 
 ### Coordinate (group-id) {#h3-2-coordinate-group-id}
 
@@ -78,49 +90,52 @@ This can be done by adding the 2 plugins to your build. These plugins don't need
 
 A Maven example is as follows:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-linenumbers="false">&lt;profiles&gt;
-    &lt;profile&gt;
-        &lt;id&gt;publication&lt;/id&gt;
-        &lt;build&gt;
-            &lt;plugins&gt;
-                &lt;plugin&gt;
-                    &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;
-                    &lt;artifactId&gt;maven-javadoc-plugin&lt;/artifactId&gt;
-                    &lt;!-- 3.12.0 is the current version at the time of writing, please check if there is a newer version --&gt;
-                    &lt;version&gt;3.12.0&lt;/version&gt;
-                    &lt;executions&gt;
-                        &lt;execution&gt;
-                            &lt;id&gt;attach-javadocs&lt;/id&gt;
-                            &lt;goals&gt;
-                                &lt;goal&gt;jar&lt;/goal&gt;
-                            &lt;/goals&gt;
-                            &lt;configuration&gt;
-                                &lt;attach&gt;true&lt;/attach&gt;
-                            &lt;/configuration&gt;
-                        &lt;/execution&gt;
-                    &lt;/executions&gt;
-                &lt;/plugin&gt;
-                &lt;plugin&gt;
-                    &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;
-                    &lt;artifactId&gt;maven-source-plugin&lt;/artifactId&gt;
-                    &lt;!-- 3.4.0 is the current version at the time of writing, please check if there is a newer version --&gt;
-                    &lt;version&gt;3.4.0&lt;/version&gt;
-                    &lt;executions&gt;
-                        &lt;execution&gt;
-                            &lt;id&gt;attach-sources&lt;/id&gt;
-                            &lt;goals&gt;
-                                &lt;goal&gt;jar&lt;/goal&gt;
-                            &lt;/goals&gt;
-                            &lt;configuration&gt;
-                                &lt;attach&gt;true&lt;/attach&gt;
-                            &lt;/configuration&gt;
-                        &lt;/execution&gt;
-                    &lt;/executions&gt;
-                &lt;/plugin&gt;
-            &lt;/plugins&gt;
-        &lt;/build&gt;
-    &lt;/profile&gt;
-&lt;/profiles&gt;</pre>
+```
+<profiles>
+    <profile>
+        <id>publication</id>
+        <build>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-javadoc-plugin</artifactId>
+                    <!-- 3.12.0 is the current version at the time of writing, please check if there is a newer version -->
+                    <version>3.12.0</version>
+                    <executions>
+                        <execution>
+                            <id>attach-javadocs</id>
+                            <goals>
+                                <goal>jar</goal>
+                            </goals>
+                            <configuration>
+                                <attach>true</attach>
+                            </configuration>
+                        </execution>
+                    </executions>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-source-plugin</artifactId>
+                    <!-- 3.4.0 is the current version at the time of writing, please check if there is a newer version -->
+                    <version>3.4.0</version>
+                    <executions>
+                        <execution>
+                            <id>attach-sources</id>
+                            <goals>
+                                <goal>jar</goal>
+                            </goals>
+                            <configuration>
+                                <attach>true</attach>
+                            </configuration>
+                        </execution>
+                    </executions>
+                </plugin>
+            </plugins>
+        </build>
+    </profile>
+</profiles>
+```
+
 
 #### Meta information in pom
 
@@ -128,44 +143,50 @@ Maven Central also requires metadata in your pom like a description, inception y
 
 Example configurations is:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-linenumbers="false">&lt;description&gt;This is the root pom for the semver-check maven plugin&lt;/description&gt;
-&lt;inceptionYear&gt;2022&lt;/inceptionYear&gt;
+```
+<description>This is the root pom for the semver-check maven plugin</description>
+<inceptionYear>2022</inceptionYear>
 
-&lt;licenses&gt;
-    &lt;license&gt;
-        &lt;name&gt;Apache License, Version 2.0&lt;/name&gt;
-        &lt;url&gt;https://www.apache.org/licenses/LICENSE-2.0.txt&lt;/url&gt;
-        &lt;distribution&gt;repo&lt;/distribution&gt;
-    &lt;/license&gt;
-&lt;/licenses&gt;
+<licenses>
+    <license>
+        <name>Apache License, Version 2.0</name>
+        <url>https://www.apache.org/licenses/LICENSE-2.0.txt</url>
+        <distribution>repo</distribution>
+    </license>
+</licenses>
 
-&lt;developers&gt;
-    &lt;developer&gt;
-        &lt;id&gt;jagodevreede&lt;/id&gt;
-        &lt;name&gt;Jago de Vreede&lt;/name&gt;
-    &lt;/developer&gt;
-&lt;/developers&gt;
+<developers>
+    <developer>
+        <id>jagodevreede</id>
+        <name>Jago de Vreede</name>
+    </developer>
+</developers>
 
-&lt;scm&gt;
-    &lt;connection&gt;scm:git:https://github.com/jagodevreede/semver-check.git&lt;/connection&gt;
-    &lt;developerConnection&gt;scm:git:https://github.com/jagodevreede/semver-check.git&lt;/developerConnection&gt;
-    &lt;url&gt;https://github.com/jagodevreede/semver-check.git&lt;/url&gt;
-    &lt;tag&gt;HEAD&lt;/tag&gt;
-&lt;/scm&gt;</pre>
+<scm>
+    <connection>scm:git:https://github.com/jagodevreede/semver-check.git</connection>
+    <developerConnection>scm:git:https://github.com/jagodevreede/semver-check.git</developerConnection>
+    <url>https://github.com/jagodevreede/semver-check.git</url>
+    <tag>HEAD</tag>
+</scm>
+```
+
 
 #### Deploy plugin version
 
 We need to have at least version 3.0.0 of the Maven deploy version, so add the following to the root pom
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-linenumbers="false">&lt;pluginManagement&gt;
-    &lt;plugins&gt;
-        &lt;plugin&gt;
-            &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;
-            &lt;artifactId&gt;maven-deploy-plugin&lt;/artifactId&gt;
-            &lt;version&gt;3.1.4&lt;/version&gt;
-        &lt;/plugin&gt;
-    &lt;/plugins&gt;
-&lt;/pluginManagement&gt;</pre>
+```
+<pluginManagement>
+    <plugins>
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-deploy-plugin</artifactId>
+            <version>3.1.4</version>
+        </plugin>
+    </plugins>
+</pluginManagement>
+```
+
 
 JReleaser {#h2-4-jreleaser}
 ---------------------------
@@ -180,11 +201,14 @@ We need to create a configuration file for JReleaser, all this config will be pu
 
 An example file will look something like this:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-linenumbers="false">JRELEASER_GITHUB_TOKEN=ghp_eWVzIGFsc28gc2VjcmV0==
+```
+JRELEASER_GITHUB_TOKEN=ghp_eWVzIGFsc28gc2VjcmV0==
 JRELEASER_GPG_SECRET_KEY=something_base64_with_around_6500+_chars
 JRELEASER_GPG_PASSPHRASE=secret
 JRELEASER_GPG_PUBLIC_KEY=something_base64_with_around_3000+_chars
-JRELEASER_DEPLOY_MAVEN_MAVENCENTRAL_RELEASE_DEPLOY_USERNAME=p72a6s<br>JRELEASER_DEPLOY_MAVEN_MAVENCENTRAL_RELEASE_DEPLOY_PASSWORD=also-secret</pre>
+JRELEASER_DEPLOY_MAVEN_MAVENCENTRAL_RELEASE_DEPLOY_USERNAME=p72a6s<br>JRELEASER_DEPLOY_MAVEN_MAVENCENTRAL_RELEASE_DEPLOY_PASSWORD=also-secret
+```
+
 
 #### GitHub token
 
@@ -198,13 +222,19 @@ When we generated the keys we also listed the keys, we need to have the id of th
 
 First, we need to export our private key as a base64 string and put it in the config file under `JRELEASER_GPG_SECRET_KEY`, we can do that with (note you will need the password that you used when you created the key):
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-linenumbers="false">gpg --export-secret-keys XXXXXXXXXXXXFC74 | base64</pre>
+```
+gpg --export-secret-keys XXXXXXXXXXXXFC74 | base64
+```
+
 
 The `JRELEASER_GPG_PASSPHRASE` is the password we used when we exported the secret key.
 
 Next is the public key, also a base64 encoded string
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-linenumbers="false">gpg --export XXXXXXXXXXXXFC74 | base64</pre>
+```
+gpg --export XXXXXXXXXXXXFC74 | base64
+```
+
 
 This we put in the config file under `JRELEASER_GPG_PUBLIC_KEY`.
 
@@ -216,7 +246,10 @@ Lastly, we need to put the credentials that we used to upload to the portal. The
 
 We need to create a `jreleaser.yml` file for the project. This can be done with the cli we installed before, with the following command:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-linenumbers="false">jreleaser init --format yml</pre>
+```
+jreleaser init --format yml
+```
+
 
 You will need to edit the file and fill in the yml. This is where your copy-paste skills will shine, as almost all information can be found in the `pom.xml`.
 
@@ -224,19 +257,22 @@ Next, remove the `distributions` part and `version` from the yml. As the distrib
 
 Finally, add the configuration to push to Maven Central:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-linenumbers="false">signing:
+```
+signing:
   active: ALWAYS
   armored: true
 
 deploy:
-&nbsp;&nbsp;maven:
-&nbsp;&nbsp;&nbsp;&nbsp;mavenCentral:
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;release-deploy:
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;active:&nbsp;RELEASE
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;url:&nbsp;https://central.sonatype.com/api/v1/publisher
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;applyMavenCentralRules:&nbsp;true
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;stagingRepositories:
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;target/staging-deploy</pre>
+  maven:
+    mavenCentral:
+      release-deploy:
+        active: RELEASE
+        url: https://central.sonatype.com/api/v1/publisher
+        applyMavenCentralRules: true
+        stagingRepositories:
+          - target/staging-deploy
+```
+
 
 The actual local release {#h2-7-the-actual-local-release}
 ---------------------------------------------------------
@@ -247,23 +283,35 @@ Prepare your Maven project to be released, so remove the -SNAPSHOT from your ver
 
 You can do that with the Maven versions plugin for example
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-linenumbers="false">mvn versions:set -DnewVersion=0.0.1</pre>
+```
+mvn versions:set -DnewVersion=0.0.1
+```
+
 
 ### Staging {#h3-8-staging}
 
 The release needs to be uploaded from a staging directory, to create that invoke the following command:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-linenumbers="false">mvn -Ppublication deploy -DaltDeploymentRepository=local::file:./target/staging-deploy</pre>
+```
+mvn -Ppublication deploy -DaltDeploymentRepository=local::file:./target/staging-deploy
+```
+
 
 ### Release {#h3-9-release}
 
 First, set the version that you will be releasing (this must be the same as what you got in your pom.xml)
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-linenumbers="false">export JRELEASER_PROJECT_VERSION=0.0.1</pre>
+```
+export JRELEASER_PROJECT_VERSION=0.0.1
+```
+
 
 Then do the actual release with (note there is no staging area or anything so there is no way back after running this command):
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-linenumbers="false">jreleaser full-release</pre>
+```
+jreleaser full-release
+```
+
 
 ### Check progress in Maven Central repository {#h3-10-check-progress-in-maven-central-repository}
 
@@ -294,7 +342,8 @@ First, create a release workflow by creating a `release.yml` file in your reposi
 
 The first bit of the file is the name of the workflow and the input parameters used when you start the workflow.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-linenumbers="false">name: Release
+```
+name: Release
 on:
   workflow_dispatch:
     inputs:
@@ -303,7 +352,9 @@ on:
         required: true
       nextVersion:
         description: 'Next version after release (-SNAPSHOT will be added automatically)'
-        required: true</pre>
+        required: true
+```
+
 
 This will look something like this when you start the release workflow
 
@@ -311,7 +362,8 @@ This will look something like this when you start the release workflow
 
 Next up is just your default build setup, in this example, java 11 is used, but this is the same as for your normal build. Except `fetch-depth` as JReleaser will use the git log to create the changelog it will need the full history, and thus we set the `fetch-depth` to `0`. As it defaults to `1`.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-linenumbers="false">jobs:
+```
+jobs:
   build:
     runs-on: ubuntu-latest
     steps:
@@ -324,41 +376,57 @@ Next up is just your default build setup, in this example, java 11 is used, but 
         with:
           java-version: '11'
           distribution: 'temurin'
-          cache: maven</pre>
+          cache: maven
+```
+
 
 Next, we need to set the version that we will be releasing, we can do that with the Maven versions plugin.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-linenumbers="false">- name: Set release version
-  run: mvn --no-transfer-progress --batch-mode versions:set -DnewVersion=${{ github.event.inputs.version }}</pre>
+```
+- name: Set release version
+  run: mvn --no-transfer-progress --batch-mode versions:set -DnewVersion=${{ github.event.inputs.version }}
+```
+
 
 This change will be the code that will be released, so we want to commit that change. A tag will be created in the release process by JReleaser
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-linenumbers="false">- name: Commit &amp; Push changes
+```
+- name: Commit & Push changes
   uses: actions-js/push@master
   with:
     github_token: ${{ secrets.JRELEASER_GITHUB_TOKEN }}
-    message: Releasing version ${{ github.event.inputs.version }}</pre>
+    message: Releasing version ${{ github.event.inputs.version }}
+```
+
 
 Now its time to stage the release, as we did manually
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-linenumbers="false">- name: Stage release
+```
+- name: Stage release
   run: mvn --no-transfer-progress --batch-mode -Ppublication clean deploy -DaltDeploymentRepository=local::default::file://`pwd`/target/staging-deploy
-</pre>
+```
+
 
 Then we can call JReleaser this is where we use the secrets we set up before.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-linenumbers="false"><br>- name: Run JReleaser<br> &nbsp;uses: jreleaser/release-action@v2<br> &nbsp;with:<br> &nbsp;&nbsp;&nbsp;setup-java: false<br> &nbsp;&nbsp;&nbsp;version: 1.20.0<br> &nbsp;env:<br> &nbsp;&nbsp;&nbsp;JRELEASER_PROJECT_VERSION: ${{ github.event.inputs.version }}<br> &nbsp;&nbsp;&nbsp;JRELEASER_GITHUB_TOKEN: ${{ secrets.JRELEASER_GITHUB_TOKEN }}<br> &nbsp;&nbsp;&nbsp;JRELEASER_GPG_PASSPHRASE: ${{ secrets.JRELEASER_GPG_PASSPHRASE }}<br> &nbsp;&nbsp;&nbsp;JRELEASER_GPG_PUBLIC_KEY: ${{ secrets.JRELEASER_GPG_PUBLIC_KEY }}<br> &nbsp;&nbsp;&nbsp;JRELEASER_GPG_SECRET_KEY: ${{ secrets.JRELEASER_GPG_SECRET_KEY }}<br> &nbsp;&nbsp;&nbsp;JRELEASER_DEPLOY_MAVEN_MAVENCENTRAL_RELEASE_DEPLOY_USERNAME: ${{ secrets.JRELEASER_MAVENCENTRAL_SONATYPE_USERNAME }}<br> &nbsp;&nbsp;&nbsp;JRELEASER_DEPLOY_MAVEN_MAVENCENTRAL_RELEASE_DEPLOY_PASSWORD: ${{ secrets.JRELEASER_MAVENCENTRAL_SONATYPE_PASSWORD }}</pre>
+```
+<br>- name: Run JReleaser<br>  uses: jreleaser/release-action@v2<br>  with:<br>    setup-java: false<br>    version: 1.20.0<br>  env:<br>    JRELEASER_PROJECT_VERSION: ${{ github.event.inputs.version }}<br>    JRELEASER_GITHUB_TOKEN: ${{ secrets.JRELEASER_GITHUB_TOKEN }}<br>    JRELEASER_GPG_PASSPHRASE: ${{ secrets.JRELEASER_GPG_PASSPHRASE }}<br>    JRELEASER_GPG_PUBLIC_KEY: ${{ secrets.JRELEASER_GPG_PUBLIC_KEY }}<br>    JRELEASER_GPG_SECRET_KEY: ${{ secrets.JRELEASER_GPG_SECRET_KEY }}<br>    JRELEASER_DEPLOY_MAVEN_MAVENCENTRAL_RELEASE_DEPLOY_USERNAME: ${{ secrets.JRELEASER_MAVENCENTRAL_SONATYPE_USERNAME }}<br>    JRELEASER_DEPLOY_MAVEN_MAVENCENTRAL_RELEASE_DEPLOY_PASSWORD: ${{ secrets.JRELEASER_MAVENCENTRAL_SONATYPE_PASSWORD }}
+```
+
 
 When we are done we need to set the next development version and push that.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-linenumbers="false">- name: Set release version
+```
+- name: Set release version
   run: mvn --no-transfer-progress --batch-mode versions:set -DnewVersion=${{ github.event.inputs.nextVersion }}
-- name: Commit &amp; Push changes
+- name: Commit & Push changes
   uses: actions-js/push@master
   with:
     github_token: ${{ secrets.JRELEASER_GITHUB_TOKEN }}
     message: Setting SNAPSHOT version ${{ github.event.inputs.nextVersion }}-SNAPSHOT
-    tags: true</pre>
+    tags: true
+```
+
 
 The full file can be found here: <https://github.com/jagodevreede/semver-check/blob/c9353fa86eb9ae8f6b309057748672a6c1e0f435/.github/workflows/release.yml>
 

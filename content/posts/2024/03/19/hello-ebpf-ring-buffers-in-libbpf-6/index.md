@@ -38,11 +38,15 @@ Ring buffers are still circular buffers:
 
 Their usage is similar to the perf event buffers we've seen before. The significant difference is that we implemented the perf event buffers using the libbcc-based eBPF code, which made creating a buffer easy:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="cpp" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">BPF_PERF_OUTPUT(rb);</pre>
+```cpp
+BPF_PERF_OUTPUT(rb);
+```
+
 
 Libbcc compiles the C code with macros. With libbpf, we have to write all that ourselves:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="cpp" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">// anonymous struct assigned to rb variable
+```cpp
+// anonymous struct assigned to rb variable
 struct
 {
   // specify the type, eBPF specific syntax
@@ -50,7 +54,9 @@ struct
   // specify the size of the buffer
   // has to be a multiple of the page size 
   __uint (max_entries, 256 * 4096);
-} rb SEC (".maps") /* placed in maps section */;</pre>
+} rb SEC (".maps") /* placed in maps section */;
+```
+
 
 More on the specific syntax in the [mail for the patch specifying it](https://lwn.net/ml/netdev/20190531202132.379386-7-andriin@fb.com/), more in the [ebpf-docs](https://ebpf-docs.dylanreimerink.nl/linux/concepts/maps/).
 
@@ -58,25 +64,35 @@ On the eBPF side in the kernel, ring buffers have several important helper funct
 
 ### [bpf_ringbuf_output](https://ebpf-docs.dylanreimerink.nl/linux/helper-function/bpf_ringbuf_output/) {#h3-1-bpf-ringbuf-output}
 
-<pre class="EnlighterJSRAW" data-enlighter-language="cpp" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">long bpf_ringbuf_output(void *ringbuf, void *data, __u64 size, __u64 flags)</pre>
+```cpp
+long bpf_ringbuf_output(void *ringbuf, void *data, __u64 size, __u64 flags)
+```
+
 
 Copy the specified number of bytes of data into the ring buffer and send notifications to user-land. This function returns a negative number on error and zero on success.
 
 ### [bpf_ringbuf_reserve](https://ebpf-docs.dylanreimerink.nl/linux/helper-function/bpf_ringbuf_reserve/) {#h3-2-bpf-ringbuf-reserve}
 
-<pre class="EnlighterJSRAW" data-enlighter-language="cpp" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">void* bpf_ringbuf_reserve(void *ringbuf, __u64 size, __u64 flags)</pre>
+```cpp
+void* bpf_ringbuf_reserve(void *ringbuf, __u64 size, __u64 flags)
+```
+
 
 Reserve a specified number of bytes in the ring buffer and return a pointer to the start. This lets us write events directly into the ring buffer's memory ([source](https://www.kernel.org/doc/html/latest/bpf/ringbuf.html)).
 
 ### [bpf_ringbuf_submit](https://ebpf-docs.dylanreimerink.nl/linux/helper-function/bpf_ringbuf_submit/) {#h3-3-bpf-ringbuf-submit}
 
-<pre class="EnlighterJSRAW" data-enlighter-language="cpp" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">void *bpf_ringbuf_submit(void *data, __u64 flags)</pre>
+```cpp
+void *bpf_ringbuf_submit(void *data, __u64 flags)
+```
+
 
 Submit the reserved ring buffer event (reserved via `bpf_ringbuf_reserve`).
 
 You might assume that you can build your own `bpf_ringbuf_output` with just bpf_ringbuf_reserve and `bpf_ringbuf_submit` and you're correct. When we look into the [actual implementation](https://github.com/torvalds/linux/blob/855684c7d938c2442f07eabc154e7532b4c1fbf9/kernel/bpf/ringbuf.c#L524) of `bpf_ringbuf_output`, we see that it is not that much more:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">BPF_CALL_4(bpf_ringbuf_output, struct bpf_map *, map, 
+```
+BPF_CALL_4(bpf_ringbuf_output, struct bpf_map *, map, 
            void *, data, u64, size,
 	   u64, flags)
 {
@@ -84,12 +100,12 @@ You might assume that you can build your own `bpf_ringbuf_output` with just bpf_
   void *rec;
 
   // check flags
-  if (unlikely(flags &amp; ~(BPF_RB_NO_WAKEUP | BPF_RB_FORCE_WAKEUP)))
+  if (unlikely(flags & ~(BPF_RB_NO_WAKEUP | BPF_RB_FORCE_WAKEUP)))
     return -EINVAL;
 
   // reserve the memory
   rb_map = container_of(map, struct bpf_ringbuf_map, map);
-  rec = __bpf_ringbuf_reserve(rb_map-&gt;rb, size);
+  rec = __bpf_ringbuf_reserve(rb_map->rb, size);
   if (!rec)
     return -EAGAIN;
 
@@ -99,17 +115,25 @@ You might assume that you can build your own `bpf_ringbuf_output` with just bpf_
   // equivalent to bpf_ringbuf_submit(rec, flags)
   bpf_ringbuf_commit(rec, flags, false /* discard */);
   return 0;
-}</pre>
+}
+```
+
 
 ### [bpf_ringbuf_discard](https://ebpf-docs.dylanreimerink.nl/linux/helper-function/bpf_ringbuf_discard/)[](https://ebpf-docs.dylanreimerink.nl/linux/helper-function/bpf_ringbuf_query/) {#h3-4-bpf-ringbuf-discard}
 
-<pre class="EnlighterJSRAW" data-enlighter-language="cpp" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">void bpf_ringbuf_discard(void *data, __u64 flags)</pre>
+```cpp
+void bpf_ringbuf_discard(void *data, __u64 flags)
+```
+
 
 Discard the reserved ring buffer event.
 
 ### [bpf_ringbuf_query](https://ebpf-docs.dylanreimerink.nl/linux/helper-function/bpf_ringbuf_query/) {#h3-5-bpf-ringbuf-query}
 
-<pre class="EnlighterJSRAW" data-enlighter-language="cpp" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">__u64 bpf_ringbuf_query(void *ringbuf, __u64 flags)</pre>
+```cpp
+__u64 bpf_ringbuf_query(void *ringbuf, __u64 flags)
+```
+
 
 > Query various characteristics of provided ring buffer. What exactly is queries is determined by *flags*:
 >
@@ -135,10 +159,11 @@ Ring Buffer eBPF Example {#h2-6-ring-buffer-ebpf-example}
 
 After I've shown you what ring buffers are on the eBPF side, we can look at the eBPF example that writes an event for every `openat call, capturing the process id, filename, and process name and comes as an addition` from Ansil H's blog post [eBPF for Linux Admins: Part IX](https://ansilh.com/posts/09-ebpf-for-linux-admins-part9/):
 
-<pre class="EnlighterJSRAW" data-enlighter-language="cpp" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">#include "vmlinux.h"
-#include &lt;bpf/bpf_helpers.h&gt;
-#include &lt;bpf/bpf_tracing.h&gt;
-#include &lt;string.h&gt;
+```cpp
+#include "vmlinux.h"
+#include <bpf/bpf_helpers.h>
+#include <bpf/bpf_tracing.h>
+#include <string.h>
 
 #define TARGET_NAME "sample_write"
 #define MAX_ENTRIES 10
@@ -170,37 +195,40 @@ SEC ("kprobe/do_sys_openat2")
   const char fmt_str[] = "do_sys_openat2 called by:%s file:%s pid:%d";
 
   // Reserve the ring-buffer
-  evt = bpf_ringbuf_reserve(&amp;rb, sizeof (struct event), 0);
+  evt = bpf_ringbuf_reserve(&rb, sizeof (struct event), 0);
   if (!evt) {
       return 0;
   }
   // Get the PID of the process.
-  evt-&gt;e_pid = bpf_get_current_pid_tgid();
+  evt->e_pid = bpf_get_current_pid_tgid();
 
   // Read the filename from the second argument
   // The x86 arch/ABI have first argument 
   // in di and second in si registers (man syscall)
-  bpf_probe_read(evt-&gt;e_filename, sizeof(filename), 
-        (char *) ctx-&gt;si);
+  bpf_probe_read(evt->e_filename, sizeof(filename), 
+        (char *) ctx->si);
 
   // Read the current process name
-  bpf_get_current_comm(evt-&gt;e_comm, sizeof(comm));
+  bpf_get_current_comm(evt->e_comm, sizeof(comm));
 
-  bpf_trace_printk(fmt_str, sizeof(fmt_str), evt-&gt;e_comm,
-        evt-&gt;e_filename, evt-&gt;e_pid);
+  bpf_trace_printk(fmt_str, sizeof(fmt_str), evt->e_comm,
+        evt->e_filename, evt->e_pid);
   // Also send the same message to the ring-buffer
   bpf_ringbuf_submit(evt, 0);
   return 0;
 }
 
-char _license[] SEC ("license") = "GPL";</pre>
+char _license[] SEC ("license") = "GPL";
+```
+
 
 Ring Buffer Java Example {#h2-7-ring-buffer-java-example}
 ---------------------------------------------------------
 
 With this in hand, we can implement the [RingSample](https://github.com/parttimenerd/hello-ebpf/blob/main/bpf/src/main/java/me/bechberger/ebpf/samples/RingSample.java) using the newly added functionality in hello-ebpf:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@BPF
+```java
+@BPF
 public abstract class RingSample extends BPFProgram {
 
   static final String EBPF_PROGRAM = """
@@ -216,18 +244,18 @@ public abstract class RingSample extends BPFProgram {
                @Size(TASK_COMM_LEN) String comm) {}
 
   // define the event records layout
-  private static final BPFStructType&lt;Event&gt; eventType = 
-          new BPFStructType&lt;&gt;("rb", List.of(
-          new BPFStructMember&lt;&gt;("e_pid", 
+  private static final BPFStructType<Event> eventType = 
+          new BPFStructType<>("rb", List.of(
+          new BPFStructMember<>("e_pid", 
                   BPFIntType.UINT32, 0, Event::pid),
-          new BPFStructMember&lt;&gt;("e_filename", 
+          new BPFStructMember<>("e_filename", 
                   new StringType(FILE_NAME_LEN), 
                   4, Event::filename),
-          new BPFStructMember&lt;&gt;("e_comm", 
+          new BPFStructMember<>("e_comm", 
                   new StringType(TASK_COMM_LEN), 
                   4 + FILE_NAME_LEN, Event::comm)
   ), new AnnotatedClass(Event.class, List.of()), 
-  fields -&gt; new Event((int)fields.get(0),
+  fields -> new Event((int)fields.get(0),
           (String)fields.get(1), (String)fields.get(2)));
 
   public static void main(String[] args) {
@@ -238,7 +266,7 @@ public abstract class RingSample extends BPFProgram {
       // obtain the ringbuffer
       // and write a message every time a new event is obtained
       var ringBuffer = program.getRingBufferByName("rb", eventType, 
-              (buffer, event) -&gt; {
+              (buffer, event) -> {
         System.out.printf("do_sys_openat2 called by:%s file:%s pid:%d\n", 
                 event.comm(), event.filename(), event.pid());
       });
@@ -249,13 +277,18 @@ public abstract class RingSample extends BPFProgram {
       }
     }
   }
-}</pre>
+}
+```
+
 
 You can run the example via `./run_bpf.sh RingSample`:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">do_sys_openat2 called by:C1 CompilerThre file:/sys/fs/cgroup/user.slice/user-1000.slice/<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="e693958394a6d7d6d6d6c8958394908f8583">[email&nbsp;protected]</a>/app.slice/snap.intellij-idea-community.intellij-idea-community-a46a168b-28d0-4bb9-9e15-f3a966353efe.scope/memory.max pid:69817
-do_sys_openat2 called by:C1 CompilerThre file:/sys/fs/cgroup/user.slice/user-1000.slice/<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="86f3f5e3f4c6b7b6b6b6a8f5e3f4f0efe5e3">[email&nbsp;protected]</a>/app.slice/snap.intellij-idea-community.intellij-idea-community-a46a168b-28d0-4bb9-9e15-f3a966353efe.scope/memory.max pid:69812
-do_sys_openat2 called by:java file:/home/i560383/.sdkman/candidates/java/21.0.2-sapmchn/lib/libjimage.so pid:69797</pre>
+```bash
+do_sys_openat2 called by:C1 CompilerThre file:/sys/fs/cgroup/user.slice/user-1000.slice/<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="e693958394a6d7d6d6d6c8958394908f8583">[email protected]</a>/app.slice/snap.intellij-idea-community.intellij-idea-community-a46a168b-28d0-4bb9-9e15-f3a966353efe.scope/memory.max pid:69817
+do_sys_openat2 called by:C1 CompilerThre file:/sys/fs/cgroup/user.slice/user-1000.slice/<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="86f3f5e3f4c6b7b6b6b6a8f5e3f4f0efe5e3">[email protected]</a>/app.slice/snap.intellij-idea-community.intellij-idea-community-a46a168b-28d0-4bb9-9e15-f3a966353efe.scope/memory.max pid:69812
+do_sys_openat2 called by:java file:/home/i560383/.sdkman/candidates/java/21.0.2-sapmchn/lib/libjimage.so pid:69797
+```
+
 
 Conclusion {#h2-8-conclusion}
 -----------------------------

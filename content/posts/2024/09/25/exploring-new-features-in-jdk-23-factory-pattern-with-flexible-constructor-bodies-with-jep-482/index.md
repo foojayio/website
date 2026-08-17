@@ -36,20 +36,24 @@ This separation makes it possible to hide the creation of a complex object while
 
 Let's code a bit and introduce the *VehicleSensorFactory* with an overloaded method *createVehicleSensor* (Example 1.).
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public final class VehicleSensorFactory {
+```java
+public final class VehicleSensorFactory {
    public static VehicleSensor createVehicleSensor(String type, Integer value){
        return new CylinderValueSensor(type, value);
    }
    public static VehicleSensor createVehicleSensor(Integer value) {
        return new EngineValueSensor(value);
    }
-}</pre>
+}
+```
+
 
 **Example 1.**: input arguments initiated different types of VehicleSensor
 
 Each created incarnation of *VehicleSensor* interface contains the default functionalities provided by the *AbstractValueSensor* class (Example 2).
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">interface VehicleSensor {
+```java
+interface VehicleSensor {
    String UNDEFINED = "undefined";
    String type();
  …
@@ -62,7 +66,9 @@ abstract class AbstractValueSensor implements VehicleSensor {
    public AbstractValueSensor(Integer value) {
        this.value = value;
    }
-...</pre>
+...
+```
+
 
 **Example 2.**: Considered parentheses and abstractions hierarchy
 
@@ -70,10 +76,11 @@ The flexibility of the constructor can play a vital role in creating the desired
 
 This shifts transparently the class specific internal logic from creational pattern to object constructor itself. In other words the factory pattern is enabled to provide more separation in a functional coding style.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">class CylinderValueSensor extends AbstractValueSensor {
+```java
+class CylinderValueSensor extends AbstractValueSensor {
    private final String type;
    CylinderValueSensor(String type, Integer value) {
-       if (value &lt; 0) {
+       if (value < 0) {
            value = UNDEFINED_VALUE;
            type = UNDEFINED;
        }
@@ -81,7 +88,9 @@ This shifts transparently the class specific internal logic from creational patt
        this.type = type;
    }
   ...
-}</pre>
+}
+```
+
 
 **Example 3.** : Constructor considers unexpected situations and initiates  
 
@@ -89,16 +98,19 @@ internals accordingly
 
 In case an exception coding style is desired, JEP-482 allows arguments to be validated and an exception raised accordingly before calling *super(..)* or *this(..)*. This allows a program or thread to fail quickly without having to create a new instance, which is not required anyway.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">class EngineValueSensor extends AbstractValueSensor {
+```java
+class EngineValueSensor extends AbstractValueSensor {
    private final String type = "engine_sensor";
    private final CylinderValueSensor cylinderSensor;
 
    EngineValueSensor(Integer value) {
-       if (value &lt;= 0) throw new IllegalArgumentException("value greater than zero, value: " + value);
+       if (value <= 0) throw new IllegalArgumentException("value greater than zero, value: " + value);
        super(value);
        this.cylinderSensor = new CylinderValueSensor("cylinderSensor", value);
    }
- …</pre>
+ …
+```
+
 
 **Example 4.**: Throwing an exception due to invalid arguments without instantiating an object
 
@@ -108,11 +120,14 @@ The newly proposed JEP-482 aims to solve the much-discussed limitation introduce
 
 An easy example would be a runtime that is forced to instantiate an object and an exception is thrown shortly after the object is created (Example 5.). A side effect of such an approach is also heap pollution, as many threads can contribute to such a state.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">EngineValueSensor(Integer value) {
+```java
+EngineValueSensor(Integer value) {
   super(value);
-  if (value &lt;= 0) throw new IllegalArgumentException("value greater than zero, value: " + value);
+  if (value <= 0) throw new IllegalArgumentException("value greater than zero, value: " + value);
   this.cylinderSensor = new CylinderValueSensor("cylinderSensor", value);
-}</pre>
+}
+```
+
 
 **Example 5.** : Since Java 1.0 the first statement of the constructor was *super(...)* or *this(...)*
 
@@ -120,12 +135,15 @@ An easy example would be a runtime that is forced to instantiate an object and a
 
 Additionally, the newly introduced flexibility of constructors can have a positive impact on using functional coding style, where instead of throwing an exception, state can be passed to the code flow (Example 5.). JEP-482 can be seen as another sweet example of the long-term evolution of the Java platform towards the functional coding style\[3\] that today's businesses fully demand and expect.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">JEP-482:Flexible Constructor Bodies
+```java
+JEP-482:Flexible Constructor Bodies
 [VehicleValueSensor{type='undefined', value=-1}, EngineValueSensor{type='engine_sensor', cylinderSensor=VehicleValueSensor{type='cylinderSensor', value=2}, value=2}]
 Exception in thread "main" java.lang.IllegalArgumentException: value grater than zero, value: -2
-    at com.wengnerits.jep482.EngineValueSensor.&lt;init&gt;(VehicleSensorFactory.java:18)
+    at com.wengnerits.jep482.EngineValueSensor.<init>(VehicleSensorFactory.java:18)
     at com.wengnerits.jep482.VehicleSensorFactory.createVehicleSensor(VehicleSensorFactory.java:80)
-    at com.wengnerits.jep482.Jep482Main.main(Jep482Main.java:25)</pre>
+    at com.wengnerits.jep482.Jep482Main.main(Jep482Main.java:25)
+```
+
 
 **Example 5.**: The example output compares two approaches to instantiation, one considering state versus an exception-throwing style.
 

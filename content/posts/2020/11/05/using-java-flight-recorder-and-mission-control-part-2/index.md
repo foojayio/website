@@ -20,7 +20,8 @@ Now, [continuing from part 1](https://foojay.io/blog/using-java-flight-recorder-
 
 The first interesting thing to do is to get an overview of the recording, the `summary` sub-command displays an histogram of the events, shown below.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ jfr summary /tmp/app-profile-2020-03-26T16-57-14.jfr
+```
+$ jfr summary /tmp/app-profile-2020-03-26T16-57-14.jfr
 
  Version: 2.0
  Chunks: 1
@@ -76,21 +77,27 @@ The first interesting thing to do is to get an overview of the recording, the `s
  jdk.CodeCacheConfiguration                1            51
 ...
  jdk.X509Certificate                       0             0
- jdk.TLSHandshake                          0             0</pre>
+ jdk.TLSHandshake                          0             0
+```
+
 
 But other interesting things could be done using this tool. The `print` sub-command can extract these events, in XML or in JSON. From there it's possible to perform other type of aggregation using other tools.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ jfr print \
+```
+$ jfr print \
   --json \
   --events jdk.ThreadPark \
   /gclogs/startup.jfr \
-  | jq '.recording.events[] | .values.duration'</pre>
+  | jq '.recording.events[] | .values.duration'
+```
+
 
 It's also possible to assemble `jfr` files or break them in smaller parts. As a side note, the files in the *repository* can be exploited this way. Keep in mind these files may be removed as soon as they are expired or as soon as every recording stops.
 
 A summary on a chunk in the repository is shown below.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ jfr summary /tmp/jfr-repo/2020_06_26_16_03_41_6/2020_06_26_16_04_12.jfr
+```
+$ jfr summary /tmp/jfr-repo/2020_06_26_16_03_41_6/2020_06_26_16_04_12.jfr
 Version: 2.0
 Chunks: 1
 Start: 2020-06-26 16:04:12 (UTC)
@@ -102,7 +109,9 @@ Duration: 35 s
  jdk.SocketRead                         6459        325796
  jdk.JavaMonitorWait                    5581        200005
  jdk.ClassLoaderStatistics              2620         81098
-...</pre>
+...
+```
+
 
 ______________________________________________________________________________
 

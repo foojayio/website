@@ -46,30 +46,37 @@ In order to use JmFrX, make sure to run OpenJDK 11 or newer. OpenJDK 8 also cont
 
 Until a stable release will be provided, you can obtain JmFrX snapshot builds via [JitPack](https://jitpack.io/). For that, add the JitPack repository to your *pom.xml* when using Apache Maven (or apply equivalent configuration for your preferred build tool):
 
-<pre class="EnlighterJSRAW" data-enlighter-language="xml" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">...
-&lt;repositories&gt;
-  &lt;repository&gt;
-    &lt;id&gt;jitpack.io&lt;/id&gt;
-    &lt;url&gt;https://jitpack.io&lt;/url&gt;
-  &lt;/repository&gt;
-&lt;/repositories&gt;
-...</pre>
+```xml
+...
+<repositories>
+  <repository>
+    <id>jitpack.io</id>
+    <url>https://jitpack.io</url>
+  </repository>
+</repositories>
+...
+```
+
 
 Then add the JmFrX dependency:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="xml" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">...
-&lt;dependency&gt;
-  &lt;groupId&gt;com.github.gunnarmorling&lt;/groupId&gt;
-  &lt;artifactId&gt;jmfrx&lt;/artifactId&gt;
-  &lt;version&gt;master-SNAPSHOT&lt;/version&gt;
-&lt;/dependency&gt;
-...</pre>
+```xml
+...
+<dependency>
+  <groupId>com.github.gunnarmorling</groupId>
+  <artifactId>jmfrx</artifactId>
+  <version>master-SNAPSHOT</version>
+</dependency>
+...
+```
+
 
 The next step is registering the JmFrX event type with JFR in the start-up routine of your program. This could for instance be done in the `main()` method, the static initializer of a class loaded early on, an eagerly initialized Spring or CDI bean, etc. A Java agent for this purpose will be provided as part of this project soon.
 
 When building applications with [Quarkus](https://quarkus.io/), you could use an application start-up event like so:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@ApplicationScoped
+```java
+@ApplicationScoped
 public class EventRegisterer {
 
   public void registerEvent(@Observes StartupEvent se) {
@@ -79,7 +86,9 @@ public class EventRegisterer {
   public void unregisterEvent(@Observes ShutdownEvent se) {
     Jmfrx.getInstance().unregister();
   }
-}</pre>
+}
+```
+
 
 Now start your application and create a JFR configuration file which enables the JmFrX event type. To do so, open JDK Mission Control, and choose your running application in the JVM Browser. Then perform these steps:
 
@@ -111,7 +120,8 @@ To address this, JFR supports a range of metadata annotations such as `@DataAmou
 
 When creating an event for a given JMX MBean, JmFrX will look for a corresponding event profile and apply its settings. Event profiles are defined by implementing the [`EventProfileContributor`](https://github.com/gunnarmorling/jmfrx/blob/master/src/main/java/dev/morling/jmfrx/spi/EventProfileContributor.java) SPI. As an example, here's a subset of the the built-in profile definition for the `OperatingSystem` MBean:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public class JavaLangEventProfileContributor implements
+```java
+public class JavaLangEventProfileContributor implements
     EventProfileContributor {
 
   @Override
@@ -119,22 +129,24 @@ When creating an event for a given JMX MBean, JmFrX will look for a correspondin
     builder.addEventProfile("java.lang:type=OperatingSystem")  [1]        
         .addAttributeProfile("TotalSwapSpaceSize", long.class,
             new AnnotationElement(DataAmount.class, DataAmount.BYTES), [2]
-            v -&gt; v)
+            v -> v)
         .addAttributeProfile("FreeSwapSpaceSize", long.class,
             new AnnotationElement(DataAmount.class, DataAmount.BYTES),
-            v -&gt; v)   [3]                                                 
+            v -> v)   [3]                                                 
         .addAttributeProfile("CpuLoad", double.class,
             new AnnotationElement(Percentage.class),
-            v -&gt; v)
+            v -> v)
         .addAttributeProfile("ProcessCpuLoad", double.class,
-            new AnnotationElement(Percentage.class), v -&gt; v)
+            new AnnotationElement(Percentage.class), v -> v)
         .addAttributeProfile("SystemCpuLoad", double.class,
-            new AnnotationElement(Percentage.class), v -&gt; v)
+            new AnnotationElement(Percentage.class), v -> v)
         .addAttributeProfile("ProcessCpuTime", long.class,
             new AnnotationElement(Timespan.class, Timespan.NANOSECONDS),
-            v -&gt; v );
+            v -> v );
     }
-}</pre>
+}
+```
+
 
 1. Profiles are linked via the MBean name
 2. The atribute type is specified via an `AnnotationElement` for one of the JFR type metadata annotations
@@ -142,12 +154,15 @@ When creating an event for a given JMX MBean, JmFrX will look for a correspondin
 
 Once you've defined the event profiles for your MBean type(s), don't forget to register the contributor type either as a service implementation in your *module-info.java* descriptor (when building a modular Java application):
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">module com.example {
+```java
+module com.example {
     requires jdk.jfr;
     requires dev.morling.jmfrx;
     provides dev.morling.jmfrx.spi.EventProfileContributor
         with com.example.MyEventProfileContributor;
-}</pre>
+}
+```
+
 
 When building an application using the traditional classpath, register the names of all profile contributors in the *META-INF/services/dev.morling.jmfrx.spi.EventProfileContributor* file.
 
@@ -161,7 +176,8 @@ If you solely want to **use** JmFrX, you can pretty much stop reading this post 
 
 Unlike most JFR event types which are emitted when some specific JVM or application functionality is executed, periodic events are produced in a regular interval. The default interval (which can be overridden by the user) is specified using the `@Period` annotation on the event type definition:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@Name(JmxDumpEvent.NAME)
+```java
+@Name(JmxDumpEvent.NAME)
 @Label("JMX Dump")
 @Category("JMX")
 @Description("Periodically dumps specific JMX MBeans")
@@ -172,15 +188,18 @@ public class JmxDumpEvent extends Event {
   public static final String NAME = "dev.morling.jmfrx.JmxDumpEvent";
 
   // event implementation ...
-}</pre>
+}
+```
+
 
 Upon application start-up, JmFrX [registers](https://github.com/gunnarmorling/jmfrx/blob/master/src/main/java/dev/morling/jmfrx/Jmfrx.java#L74) this event type with the JFR environment:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">...
+```java
+...
 private Runnable hook;
 
 public void register() {
-  hook = () -&gt; {    [1]                                         
+  hook = () -> {    [1]                                         
     JmxDumpEvent dumpEvent = new JmxDumpEvent();
 
     if (!dumpEvent.isEnabled()) {
@@ -200,7 +219,9 @@ public void register() {
 public void unregister() {
   FlightRecorder.removePeriodicEvent(hook); [3]                 
 }
-...</pre>
+...
+```
+
 
 1. The event hook implementation
 2. Register the periodic event
@@ -212,7 +233,8 @@ When the periodic event hook runs, it must create one event for each captured MB
 
 This is where dynamic JFR event types come in: Using the [`EventFactory`](https://docs.oracle.com/en/java/javase/11/docs/api/jdk.jfr/jdk/jfr/EventFactory.html) class, event types can be defined at runtime. Under the covers, JFR will create a corresponding `Event` sub-class dynamically using the ASM API. Here's the relevant JmFrX code which defines the event type for a given MBean:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">...
+```java
+...
 public static EventDescriptor getDescriptorFor(String mBeanName) {
   MBeanServer mbeanServer = ManagementFactory.getPlatformMBeanServer();
 
@@ -220,7 +242,7 @@ public static EventDescriptor getDescriptorFor(String mBeanName) {
     ObjectName objectName = new ObjectName(mBeanName);
     MBeanInfo mBeanInfo = mbeanServer.getMBeanInfo(objectName);
 
-    List&lt;AnnotationElement&gt; eventAnnotations = Arrays.asList( [1]
+    List<AnnotationElement> eventAnnotations = Arrays.asList( [1]
         new AnnotationElement(Category.class, getCategory(objectName)),
         new AnnotationElement(StackTrace.class, false),
         new AnnotationElement(Name.class, getName(objectName)),
@@ -228,9 +250,9 @@ public static EventDescriptor getDescriptorFor(String mBeanName) {
         new AnnotationElement(Description.class,  mBeanInfo.getDescription())
     );
 
-    List&lt;AttributeDescriptor&gt; fields = getFields(objectName, mBeanInfo);
+    List<AttributeDescriptor> fields = getFields(objectName, mBeanInfo);
 
-    List&lt;ValueDescriptor&gt; valueDescriptors = fields.stream() [2]
+    List<ValueDescriptor> valueDescriptors = fields.stream() [2]
         .map(AttributeDescriptor::getValueDescriptor)
         .collect(Collectors.toList());
 
@@ -241,7 +263,9 @@ public static EventDescriptor getDescriptorFor(String mBeanName) {
     throw new RuntimeException(e);
   }
 }
-...</pre>
+...
+```
+
 
 1. Define event metadata like name, label, category etc. via the JFR metadata annotations
 2. For each MBean attribute, an attribute is added to the event type; its definition is based on the information in the corresponding event profile, if present

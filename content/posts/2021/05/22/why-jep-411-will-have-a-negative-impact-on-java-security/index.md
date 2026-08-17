@@ -56,17 +56,22 @@ Basically, the SecurityManager and associated infrastructure are the foundations
 
 First add the following dependency to your project:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="xml" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&lt;!-- https://mvnrepository.com/artifact/au.net.zeus.jgdms.tools/security-policy-debug --&gt;
-&lt;dependency&gt;
-    &lt;groupId&gt;au.net.zeus.jgdms.tools&lt;/groupId&gt;
-    &lt;artifactId&gt;security-policy-debug&lt;/artifactId&gt;
-    &lt;version&gt;3.1.0&lt;/version&gt;
-&lt;/dependency&gt;</pre>
+```xml
+<!-- https://mvnrepository.com/artifact/au.net.zeus.jgdms.tools/security-policy-debug -->
+<dependency>
+    <groupId>au.net.zeus.jgdms.tools</groupId>
+    <artifactId>security-policy-debug</artifactId>
+    <version>3.1.0</version>
+</dependency>
+```
+
 
 Then add the following property when running your program:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">-Djava.security.manager=org.apache.river.tool.SecurityPolicyWriter
-</pre>
+```
+-Djava.security.manager=org.apache.river.tool.SecurityPolicyWriter
+```
+
 
 Whatever the name and location of your current policy file is, the tool will create one with the same name, with the word ".new" appended.
 
@@ -80,7 +85,10 @@ Now move your old policy file out of the way, and rename the new policy file.
 
 Run your program again this time with:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">-Djava.security.manager=java.lang.SecurityManager,\</pre>
+```
+-Djava.security.manager=java.lang.SecurityManager,\
+```
+
 
 Confirm that the user cannot do anything they are not authorized to do.
 
@@ -88,16 +96,22 @@ Login as a different user and try to do the same tasks, you will find the progra
 
 Now if you're experiencing performance issues, because you have developed high scaling concurrent code, but Java's built in policy provider is limiting performance, you need to also add the following dependency to your program:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="xml" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&lt;!-- https://mvnrepository.com/artifact/au.net.zeus.jgdms/jgdms-platform --&gt;
-&lt;dependency&gt;
-    &lt;groupId&gt;au.net.zeus.jgdms&lt;/groupId&gt;
-    &lt;artifactId&gt;jgdms-platform&lt;/artifactId&gt;
-    &lt;version&gt;3.1.0&lt;/version&gt;
-&lt;/dependency&gt;</pre>
+```xml
+<!-- https://mvnrepository.com/artifact/au.net.zeus.jgdms/jgdms-platform -->
+<dependency>
+    <groupId>au.net.zeus.jgdms</groupId>
+    <artifactId>jgdms-platform</artifactId>
+    <version>3.1.0</version>
+</dependency>
+```
+
 
 Then set the following property:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">-Dpolicy.provider=org.apache.river.api.security.ConcurrentPolicyFile,\</pre>
+```
+-Dpolicy.provider=org.apache.river.api.security.ConcurrentPolicyFile,\
+```
+
 
 This replaces the built-in horribly slow Java policy provider with a modern performant and highly scalable implementation, with identical functionality.
 
@@ -113,7 +127,10 @@ Note that different versions of Java will have different content in their policy
 
 If you want to improve java security even further, definitely consider disabling Java Serialization with the following property if you don't need it:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">-Djdk.serialFilter=!*,\</pre>
+```
+-Djdk.serialFilter=!*,\
+```
+
 
 You still need to be observant of other typical Java problems, like sanitizing user input, using TLS and client certificates then you'll have really locked down your Java application:
 

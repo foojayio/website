@@ -44,37 +44,44 @@ WebJars is a technology [designed in 2012 by James Ward](https://jamesward.com/2
 
 A WebJar is a regular JAR containing web assets. Adding a WebJar to a project's dependencies is nothing specific:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="xml">&lt;dependencies&gt;
-    &lt;dependency&gt;
-        &lt;groupId&gt;org.webjars.npm&lt;/groupId&gt;
-        &lt;artifactId&gt;alpinejs&lt;/artifactId&gt;
-        &lt;version&gt;3.14.1&lt;/version&gt;
-    &lt;/dependency&gt;
-&lt;/dependencies&gt;</pre>
+```xml
+<dependencies>
+    <dependency>
+        <groupId>org.webjars.npm</groupId>
+        <artifactId>alpinejs</artifactId>
+        <version>3.14.1</version>
+    </dependency>
+</dependencies>
+```
+
 
 The framework's responsibility is to expose the assets under a URL. For example, Spring Boot does it in the `WebMvcAutoConfiguration` class:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public void addResourceHandlers(ResourceHandlerRegistry registry) {
+```java
+public void addResourceHandlers(ResourceHandlerRegistry registry) {
   if (!this.resourceProperties.isAddMappings()) {
     logger.debug("Default resource handling disabled");
     return;
   }
   addResourceHandler(registry, this.mvcProperties.getWebjarsPathPattern(),                  //1
     "classpath:/META-INF/resources/webjars/");
-  addResourceHandler(registry, this.mvcProperties.getStaticPathPattern(), (registration) -&gt; {
+  addResourceHandler(registry, this.mvcProperties.getStaticPathPattern(), (registration) -> {
     registration.addResourceLocations(this.resourceProperties.getStaticLocations());
     if (this.servletContext != null) {
       ServletContextResource resource = new ServletContextResource(this.servletContext, SERVLET_LOCATION);
       registration.addResourceLocations(resource);
     }
   });
-}</pre>
+}
+```
+
 
 1. The default is `"/webjars/**"`
 
 Inside the JAR, you can reach assets by their respective path and name. The agreed-upon structure is to store the assets inside `resources/webjars//`. Here's the structure of the `alpinejs-3.14.1.jar`:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">META-INF
+```
+META-INF
   |_ MANIFEST.MF
   |_ maven.org.webjars.npm.alpinejs
   |_ resources.webjars.alpinejs.3.14.1
@@ -83,7 +90,9 @@ Inside the JAR, you can reach assets by their respective path and name. The agre
       |_ cdn.js
       |_ cdn.min.js
     |_ src
-    |_ package.json</pre>
+    |_ package.json
+```
+
 
 Within Spring Boot, you can access the non-minified version with `/webjars/alpinejs/3.14.1/dist/cdn.js`.
 
@@ -91,18 +100,21 @@ Developers release client-side libraries quite often. When you change a dependen
 
 The WebJars Locator project aims to avoid all these issues by providing a path with no version, *i.e.* , `/webjars/alpinejs/dist/cdn.js`. You can achieve it by adding the `webjars-locator` JAR to your dependencies:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="xml">&lt;dependencies&gt;
-    &lt;dependency&gt;
-        &lt;groupId&gt;org.webjars.npm&lt;/groupId&gt;
-        &lt;artifactId&gt;alpinejs&lt;/artifactId&gt;
-        &lt;version&gt;3.14.1&lt;/version&gt;
-    &lt;/dependency&gt;
-    &lt;dependency&gt;
-        &lt;groupId&gt;org.webjars&lt;/groupId&gt;
-        &lt;artifactId&gt;webjars-locator&lt;/artifactId&gt;
-        &lt;version&gt;0.52&lt;/version&gt;
-    &lt;/dependency&gt;
-&lt;/dependencies&gt;</pre>
+```xml
+<dependencies>
+    <dependency>
+        <groupId>org.webjars.npm</groupId>
+        <artifactId>alpinejs</artifactId>
+        <version>3.14.1</version>
+    </dependency>
+    <dependency>
+        <groupId>org.webjars</groupId>
+        <artifactId>webjars-locator</artifactId>
+        <version>0.52</version>
+    </dependency>
+</dependencies>
+```
+
 
 I'll use this approach for every front-end technology. I'll also add the [Bootstrap](https://getbootstrap.com/) CSS library to provide a better-looking user interface.
 
@@ -126,20 +138,23 @@ However, Spring Boot fully supports Thymeleaf. Icing on the cake: the latter is 
 
 Here's the demo sample from the website:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="html">&lt;table&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th th:text="#{msgs.headers.name}"&gt;Name&lt;/th&gt;
-      &lt;th th:text="#{msgs.headers.price}"&gt;Price&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr th:each="prod: ${allProducts}"&gt;
-      &lt;td th:text="${prod.name}"&gt;Oranges&lt;/td&gt;
-      &lt;td th:text="${#numbers.formatDecimal(prod.price, 1, 2)}"&gt;0.99&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;</pre>
+```html
+<table>
+  <thead>
+    <tr>
+      <th th:text="#{msgs.headers.name}">Name</th>
+      <th th:text="#{msgs.headers.price}">Price</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr th:each="prod: ${allProducts}">
+      <td th:text="${prod.name}">Oranges</td>
+      <td th:text="${#numbers.formatDecimal(prod.price, 1, 2)}">0.99</td>
+    </tr>
+  </tbody>
+</table>
+```
+
 
 Here is a Thymeleaf 101, in case you need to familiarise yourself with the technology.
 
@@ -155,7 +170,8 @@ Most, if not all, front-end frameworks work with a client-side model. We need to
 
 The server-side code I'm using is the following:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="kotlin">data class Todo(val id: Int, var label: String, var completed: Boolean = false) //1
+```kotlin
+data class Todo(val id: Int, var label: String, var completed: Boolean = false) //1
 
 fun config() = beans {
   bean {
@@ -170,12 +186,14 @@ fun config() = beans {
       GET("/") {
         ok().render(                                                           //3
           "index",                                                             //4
-          mapOf("title" to "My Title", "todos" to ref&lt;List&lt;Todo&gt;&gt;())           //5
+          mapOf("title" to "My Title", "todos" to ref<List<Todo>>())           //5
         )
       }
     }
   }
-}</pre>
+}
+```
+
 
 1. Define the `Todo` class
 2. Add an in-memory list to the bean factory. In a regular app, you'd use a `Repository` to read from the database
@@ -205,21 +223,27 @@ Thymeleaf offers a `th:inline="javascript"` attribute on the \`\` tag. It render
 
 If we apply the above to our code, we can get the model attributes passed by Spring as:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="html">&lt;script th:inline="javascript"&gt;
-/*&lt;![CDATA[*/
+```html
+<script th:inline="javascript">
+/*<![CDATA[*/
   window.title = /*[[${title}]]*/ 'A Title'
   window.todos = /*[[${todos}]]*/ [{ 'id': 1, 'label': 'Take out the trash', 'completed': false }]
-/*]]&gt;*/
-&lt;/script&gt;</pre>
+/*]]>*/
+</script>
+```
+
 
 When rendered server-side, the result is:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="html">&lt;script&gt;
-/*&lt;![CDATA[*/
+```html
+<script>
+/*<![CDATA[*/
   window.title = "My title";
   window.todos: [{"id":1,"label":"Go to the groceries","completed":false},{"id":2,"label":"Walk the dog","completed":false},{"id":3,"label":"Take out the trash","completed":false}]
-/*]]&gt;*/
-&lt;/script&gt;</pre>
+/*]]>*/
+</script>
+```
+
 
 Summary {#h2-3-summary}
 -----------------------
@@ -237,7 +261,7 @@ The complete source code for this post can be found on [GitHub](https://github.c
 * [WebJars Instructions for Spring Boot](https://www.webjars.org/documentation#springboot)
 * [Introduction to WebJars](https://www.baeldung.com/maven-webjars)
 
-*** ** * ** ***
+
 
 *Originally published at [A Java Geek](https://blog.frankel.ch/ajax-ssr/2/) on September 15^th^, 2024*
 

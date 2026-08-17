@@ -40,19 +40,22 @@ Once we have set up ready with IDE, we can proceed with the next step.
 
 #### Setting Up Maven
 
-<pre class="EnlighterJSRAW" data-enlighter-language="xml">&lt;plugin&gt;
-   &lt;groupId&gt;com.google.cloud.tools&lt;/groupId&gt;
-   &lt;artifactId&gt;jib-maven-plugin&lt;/artifactId&gt;
-   &lt;version&gt;2.6.0&lt;/version&gt;
-   &lt;configuration&gt;
-      &lt;from&gt;
-         &lt;image&gt;gcr.io/distroless/java:11&lt;/image&gt;
-      &lt;/from&gt;
-      &lt;to&gt;
-         &lt;image&gt;registry.hub.docker.com/hiashish/spring-boot-jib-image&lt;/image&gt;
-      &lt;/to&gt;
-   &lt;/configuration&gt;
-&lt;/plugin&gt;</pre>
+```xml
+<plugin>
+   <groupId>com.google.cloud.tools</groupId>
+   <artifactId>jib-maven-plugin</artifactId>
+   <version>2.6.0</version>
+   <configuration>
+      <from>
+         <image>gcr.io/distroless/java:11</image>
+      </from>
+      <to>
+         <image>registry.hub.docker.com/hiashish/spring-boot-jib-image</image>
+      </to>
+   </configuration>
+</plugin>
+```
+
 
 For Maven, you can paste the above content in your pom.xml plugin section, and you are good to go. But I will try to explain `from` and `image` tags here.
 
@@ -72,11 +75,14 @@ To use further options with the plugin, you can refer to the [documentation](htt
 
 To push an image, we would need to add registry credentials to maven settings.xml. Since we are just doing a demo, it's ok to provide credentials this way but avoid using it as it is not secure. You may want to secure credentials as mentioned [here](https://maven.apache.org/guides/mini/guide-encryption.html "here").
 
-<pre class="EnlighterJSRAW" data-enlighter-language="xml">&lt;server&gt;
-    &lt;id&gt;registry.hub.docker.com&lt;/id&gt;
-    &lt;username&gt;username&lt;/username&gt;
-    &lt;password&gt;password&lt;/password&gt;
-&lt;/server&gt;</pre>
+```xml
+<server>
+    <id>registry.hub.docker.com</id>
+    <username>username</username>
+    <password>password</password>
+</server>
+```
+
 
 #### Building an Image
 
@@ -98,9 +104,10 @@ Following is the output.
 mvn compile jib:build
 ```
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">[INFO] Scanning for projects…
+```
+[INFO] Scanning for projects…
 [INFO]
-[INFO] — — — — — — — — — — &lt; com.example:spring-boot-jib &gt; — — — — — — — — — — -
+[INFO] — — — — — — — — — — < com.example:spring-boot-jib > — — — — — — — — — — -
 [INFO] Building springboot 0.0.1-SNAPSHOT
 [INFO] — — — — — — — — — — — — — — — — [ jar ] — — — — — — — — — — — — — — — — -
 [INFO]
@@ -129,40 +136,40 @@ mvn compile jib:build
 [INFO]
 [INFO] Executing tasks:
 [INFO] [======= ] 25.0% complete
-[INFO] &gt; pushing blob sha256:6508f436f385b3751366f90b6…
+[INFO] > pushing blob sha256:6508f436f385b3751366f90b6…
 [INFO]
 [INFO] Executing tasks:
 [INFO] [======= ] 25.0% complete
-[INFO] &gt; pushing blob sha256:6508f436f385b3751366f90b6…
-[INFO] &gt; pushing blob sha256:c5e22041fc97b838b93a2e18d…
+[INFO] > pushing blob sha256:6508f436f385b3751366f90b6…
+[INFO] > pushing blob sha256:c5e22041fc97b838b93a2e18d…
 [INFO]
 [INFO] Executing tasks:
 [INFO] [======= ] 25.0% complete
-[INFO] &gt; pushing blob sha256:6508f436f385b3751366f90b6…
-[INFO] &gt; pushing blob sha256:c5e22041fc97b838b93a2e18d…
-[INFO] &gt; pushing blob sha256:b25902383f9ee26808b68ca62…
+[INFO] > pushing blob sha256:6508f436f385b3751366f90b6…
+[INFO] > pushing blob sha256:c5e22041fc97b838b93a2e18d…
+[INFO] > pushing blob sha256:b25902383f9ee26808b68ca62…
 [INFO]
 [INFO] Executing tasks:
 [INFO] [======= ] 25.0% complete
-[INFO] &gt; pushing blob sha256:6508f436f385b3751366f90b6…
-[INFO] &gt; pushing blob sha256:c5e22041fc97b838b93a2e18d…
-[INFO] &gt; pushing blob sha256:b25902383f9ee26808b68ca62…
-[INFO] &gt; checking base image layer sha256:31eb28996804…
+[INFO] > pushing blob sha256:6508f436f385b3751366f90b6…
+[INFO] > pushing blob sha256:c5e22041fc97b838b93a2e18d…
+[INFO] > pushing blob sha256:b25902383f9ee26808b68ca62…
+[INFO] > checking base image layer sha256:31eb28996804…
 [INFO]
 [INFO] Executing tasks:
 [INFO] [======== ] 27.8% complete
-[INFO] &gt; pushing blob sha256:c5e22041fc97b838b93a2e18d…
-[INFO] &gt; pushing blob sha256:b25902383f9ee26808b68ca62…
-[INFO] &gt; checking base image layer sha256:31eb28996804…
+[INFO] > pushing blob sha256:c5e22041fc97b838b93a2e18d…
+[INFO] > pushing blob sha256:b25902383f9ee26808b68ca62…
+[INFO] > checking base image layer sha256:31eb28996804…
 [INFO]
 [INFO] Executing tasks:
 [INFO] [========= ] 30.6% complete
-[INFO] &gt; pushing blob sha256:c5e22041fc97b838b93a2e18d…
-[INFO] &gt; checking base image layer sha256:31eb28996804…
+[INFO] > pushing blob sha256:c5e22041fc97b838b93a2e18d…
+[INFO] > checking base image layer sha256:31eb28996804…
 [INFO]
 [INFO] Executing tasks:
 [INFO] [========== ] 33.3% complete
-[INFO] &gt; checking base image layer sha256:31eb28996804…
+[INFO] > checking base image layer sha256:31eb28996804…
 [INFO]
 [INFO] Executing tasks:
 [INFO] [=========== ] 35.0% complete
@@ -176,14 +183,16 @@ mvn compile jib:build
 [INFO] Built and pushed image as registry.hub.docker.com/hiashish/spring-boot-jib-image
 [INFO] Executing tasks:
 [INFO] [=========================== ] 91.7% complete
-[INFO] &gt; launching layer pushers
+[INFO] > launching layer pushers
 [INFO]
 [INFO] — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — —
 [INFO] BUILD SUCCESS
 [INFO] — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — —
 [INFO] Total time: 8.746 s
 [INFO] Finished at: 2020–11–16T02:34:33+05:30
-[INFO] — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — —</pre>
+[INFO] — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — —
+```
+
 
 ```shell
 

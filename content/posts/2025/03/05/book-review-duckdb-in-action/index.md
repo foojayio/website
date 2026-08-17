@@ -64,6 +64,6 @@ My thoughts on the book are a bit divided. On one side, it tries to explain Duck
 
 Don't get me wrong: the book is great and can teach you a lot, but it could have been better with more focus.
 
-*** ** * ** ***
+
 
 *Originally published on [A Java Geek](https://blog.frankel.ch/duckdb-in-action/) on November 2^nd^, 2024*

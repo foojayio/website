@@ -57,17 +57,23 @@ The fix {#the-fix}
 
 Use version **2.16.0** instead of 2.15.0, this fixes the problem a bit more rigorously.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">    &lt;dependency&gt;
-        &lt;groupId&gt;org.apache.logging.log4j&lt;/groupId&gt;
-        &lt;artifactId&gt;log4j-core&lt;/artifactId&gt;
-        &lt;version&gt;2.16.0&lt;/version&gt;
-    &lt;/dependency&gt;</pre>
+```
+    <dependency>
+        <groupId>org.apache.logging.log4j</groupId>
+        <artifactId>log4j-core</artifactId>
+        <version>2.16.0</version>
+    </dependency>
+```
+
 
 Do this for all transitive dependencies as well (!).
 
 **Option 2**: Another option is to launch the JRE with.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">    -Dlog4j2.formatMsgNoLookups=true</pre>
+```
+    -Dlog4j2.formatMsgNoLookups=true
+```
+
 
 But be **AWARE** this flag was put into log4j2 from 2.10.0 onwards. If you have an older version, this does not work.
 

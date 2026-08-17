@@ -57,23 +57,27 @@ You can utilize RestClient in various ways namely,
 
 1. You can employ static **create** methods as one approach.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">     RestClient defaultClient = RestClient.create();
+```
+     RestClient defaultClient = RestClient.create();
                         (OR)
-     var defaultClient = RestClient.create();</pre>
+     var defaultClient = RestClient.create();
+```
+
 
 2. You can also utilize the **builder pattern** , which allows for additional customization. This includes specifying the **HTTP library, message converters, setting the default URI, path variables, request headers, UriBuilderFactory, as well as registering interceptors and initializers**.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">RestClient customRestClient = RestClient.builder()
+```
+RestClient customRestClient = RestClient.builder()
   .requestFactory(new SimpleClientHttpRequestFactory()) (1)
-  .messageConverters(converters -&gt; converters.add(new MappingJackson2HttpMessageConverter())) (2)
+  .messageConverters(converters -> converters.add(new MappingJackson2HttpMessageConverter())) (2)
   .baseUrl("https://www.bsmlabs.com") (3)
   .defaultUriVariables(Map.of("article", "restclient")) (4)
   .defaultHeader("client_id", "springrestclient") (5)
   .requestInterceptor(myCustomInterceptor) (6)
   .requestInitializer(myCustomInitializer) (7)
   .build();
+```
 
-</pre>
 
 Let's analyze what each line does:
 
@@ -95,66 +99,69 @@ In this article, we will connect to retrieve data on universities by providing t
 2. ***springdoc-openapi-starter-webmvc-api***
 3. ***httpclient5***
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
-&lt;project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd"&gt;
-    &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
-    &lt;parent&gt;
-        &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
-        &lt;artifactId&gt;spring-boot-starter-parent&lt;/artifactId&gt;
-        &lt;version&gt;3.2.3&lt;/version&gt;
-        &lt;relativePath/&gt; &lt;!-- lookup parent from repository --&gt;
-    &lt;/parent&gt;
-    &lt;groupId&gt;com.bsmlabs&lt;/groupId&gt;
-    &lt;artifactId&gt;spring-rest-client-example&lt;/artifactId&gt;
-    &lt;version&gt;0.0.1-SNAPSHOT&lt;/version&gt;
-    &lt;name&gt;spring-rest-client-example&lt;/name&gt;
-    &lt;description&gt;Demo project for Spring Boot&lt;/description&gt;
-    &lt;properties&gt;
-        &lt;java.version&gt;17&lt;/java.version&gt;
-        &lt;springdoc-openapi.version&gt;2.3.0&lt;/springdoc-openapi.version&gt;
-        &lt;httpclient5.version&gt;5.2.1&lt;/httpclient5.version&gt;
-    &lt;/properties&gt;
-    &lt;dependencies&gt;
-        &lt;dependency&gt;
-            &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
-            &lt;artifactId&gt;spring-boot-starter-web&lt;/artifactId&gt;
-        &lt;/dependency&gt;
+```
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>3.2.3</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
+    <groupId>com.bsmlabs</groupId>
+    <artifactId>spring-rest-client-example</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <name>spring-rest-client-example</name>
+    <description>Demo project for Spring Boot</description>
+    <properties>
+        <java.version>17</java.version>
+        <springdoc-openapi.version>2.3.0</springdoc-openapi.version>
+        <httpclient5.version>5.2.1</httpclient5.version>
+    </properties>
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
 
-        &lt;dependency&gt;
-            &lt;groupId&gt;org.springdoc&lt;/groupId&gt;
-            &lt;artifactId&gt;springdoc-openapi-starter-webmvc-api&lt;/artifactId&gt;
-            &lt;version&gt;${springdoc-openapi.version}&lt;/version&gt;
-        &lt;/dependency&gt;
+        <dependency>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-starter-webmvc-api</artifactId>
+            <version>${springdoc-openapi.version}</version>
+        </dependency>
 
-        &lt;dependency&gt;
-            &lt;groupId&gt;org.apache.httpcomponents.client5&lt;/groupId&gt;
-            &lt;artifactId&gt;httpclient5&lt;/artifactId&gt;
-            &lt;version&gt;${httpclient5.version}&lt;/version&gt;
-        &lt;/dependency&gt;
+        <dependency>
+            <groupId>org.apache.httpcomponents.client5</groupId>
+            <artifactId>httpclient5</artifactId>
+            <version>${httpclient5.version}</version>
+        </dependency>
 
-        &lt;dependency&gt;
-            &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
-            &lt;artifactId&gt;spring-boot-starter-test&lt;/artifactId&gt;
-            &lt;scope&gt;test&lt;/scope&gt;
-        &lt;/dependency&gt;
-    &lt;/dependencies&gt;
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
 
-    &lt;build&gt;
-        &lt;plugins&gt;
-            &lt;plugin&gt;
-                &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
-                &lt;artifactId&gt;spring-boot-maven-plugin&lt;/artifactId&gt;
-            &lt;/plugin&gt;
-        &lt;/plugins&gt;
-    &lt;/build&gt;
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
 
-&lt;/project&gt;
-</pre>
+</project>
+```
+
 
 **Step:2**The RestClient configuration in the spring boot project is as follows.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">package com.bsmlabs.restclient;
+```
+package com.bsmlabs.restclient;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -188,35 +195,43 @@ public class RestClientConfig {
     }
 
 }
-</pre>
+```
+
 
 **Step:3** Create Response class as follows using **Record** feature
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">package com.bsmlabs.restclient;
+```
+package com.bsmlabs.restclient;
 
 import java.util.List;
 
 public record UniversityDataResponse(String alpha_two_code,
-                                     List&lt;String&gt; web_pages,
+                                     List<String> web_pages,
                                      String state_province,
                                      String name,
-                                     List&lt;String&gt; domains,
+                                     List<String> domains,
                                      String country) {
-}</pre>
+}
+```
+
 
 **Step:4**Create UniversityDataService and its Implementation class
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">package com.bsmlabs.restclient;
+```java
+package com.bsmlabs.restclient;
 
 import java.util.List;
 
 public interface UniversityDataService {
-    List&lt;UniversityDataResponse&gt; getUniversityDetails(String countryName);
+    List<UniversityDataResponse> getUniversityDetails(String countryName);
 
-    List&lt;UniversityDataResponse&gt; getUniversityDataWithBuilder(String countryName);
-}</pre>
+    List<UniversityDataResponse> getUniversityDataWithBuilder(String countryName);
+}
+```
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">package com.bsmlabs.restclient;
+
+```java
+package com.bsmlabs.restclient;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.ParameterizedTypeReference;
@@ -241,7 +256,7 @@ public class DefaultUniversityDataService implements UniversityDataService {
      * using RestClient static create method
      */
     @Override
-    public List&lt;UniversityDataResponse&gt; getUniversityDetails(String countryName) {
+    public List<UniversityDataResponse> getUniversityDetails(String countryName) {
         var uri = UriComponentsBuilder.fromHttpUrl(baseUri)
                 .queryParam("country", countryName)
                 .build()
@@ -250,8 +265,8 @@ public class DefaultUniversityDataService implements UniversityDataService {
         return restClientConfig.restClient().get()
                 .uri(uri)
                 .retrieve()
-                .onStatus(HttpStatusCode::is4xxClientError, (request, response) -&gt; System.out.println(response.getStatusText()))
-                .body(new ParameterizedTypeReference&lt;&gt;() {
+                .onStatus(HttpStatusCode::is4xxClientError, (request, response) -> System.out.println(response.getStatusText()))
+                .body(new ParameterizedTypeReference<>() {
                 });
 
     }
@@ -260,7 +275,7 @@ public class DefaultUniversityDataService implements UniversityDataService {
      * Using RestClient Builder Pattern
      */
     @Override
-    public List&lt;UniversityDataResponse&gt; getUniversityDataWithBuilder(String countryName) {
+    public List<UniversityDataResponse> getUniversityDataWithBuilder(String countryName) {
         var uri = UriComponentsBuilder.fromHttpUrl(baseUri)
                 .queryParam("country", countryName)
                 .build()
@@ -268,12 +283,13 @@ public class DefaultUniversityDataService implements UniversityDataService {
         return restClientConfig.restClientBuilder().get()
                 .uri(uri)
                 .retrieve()
-                .onStatus(HttpStatusCode::is4xxClientError, (request, response) -&gt; System.out.println(response.getStatusText()))
-                .body(new ParameterizedTypeReference&lt;&gt;() {
+                .onStatus(HttpStatusCode::is4xxClientError, (request, response) -> System.out.println(response.getStatusText()))
+                .body(new ParameterizedTypeReference<>() {
                 });
     }
 }
-</pre>
+```
+
 
 **Step:5** Run the application and access the URL and it will fetch you the university data based on the country
 
@@ -294,8 +310,11 @@ We are also using the `message converters` which are available [here](https://do
 
 We can also migrate from **RestTemplate** to **RestClient** using the following configuration
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">var restTemplate = new RestTemplate();
-var response = RestClient.builder(restTemplate);</pre>
+```
+var restTemplate = new RestTemplate();
+var response = RestClient.builder(restTemplate);
+```
+
 
 <br />
 

@@ -24,11 +24,14 @@ This article covers getting it into a Maven project and using it that way.
 
 One dependency. The native engine is bundled inside the JAR, so there's nothing else to install:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&lt;dependency&gt;
-   &lt;groupId&gt;org.duckdb&lt;/groupId&gt;
-   &lt;artifactId&gt;duckdb_jdbc&lt;/artifactId&gt;
-   &lt;version&gt;1.5.5.0&lt;/version&gt;
-&lt;/dependency&gt;</pre>
+```
+<dependency>
+   <groupId>org.duckdb</groupId>
+   <artifactId>duckdb_jdbc</artifactId>
+   <version>1.5.5.0</version>
+</dependency>
+```
+
 
 It exposes a standard JDBC interface, so from the point of view of anyone who's ever written Java database code before, there's no new API to learn. The connection string `jdbc:duckdb:` (with nothing after the colon) gives you a purely in-memory instance --- nothing is written to disk, and everything disappears when the connection closes.
 
@@ -36,7 +39,8 @@ It exposes a standard JDBC interface, so from the point of view of anyone who's 
 
 Here's a complete Java application. It runs an aggregation [over a CSV file hosted on GitHub](https://raw.githubusercontent.com/allisonhorst/palmerpenguins/main/inst/extdata/penguins_raw.csv) --- no download step, no schema definition, no table creation:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">import java.sql.*;
+```
+import java.sql.*;
 
 public class DuckDB {
 
@@ -54,11 +58,13 @@ public class DuckDB {
         }
     }
 }
-</pre>
+```
+
 
 And here it is again with line-by-line explanations:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">// java.sql.* brings in Connection, Statement, ResultSet
+```
+// java.sql.* brings in Connection, Statement, ResultSet
 // and DriverManager. DuckDB is driven through plain JDBC,
 // so there are no DuckDB-specific imports.
 import java.sql.*;
@@ -99,7 +105,7 @@ public class DuckDB {
             //     is quoted because it contains spaces and
             //     parentheses.
             //
-            //   FROM '&lt;url&gt;'
+            //   FROM '<url>'
             //     The URL sits where a table name normally
             //     goes. DuckDB fetches the file, sniffs the
             //     delimiter and column types, and queries it
@@ -133,7 +139,9 @@ public class DuckDB {
         } // Both resources close here, and the in-memory
           // database ceases to exist.
     }
-}</pre>
+}
+```
+
 
 ### Querying a file on the internet with SQL {#h3-2-querying-a-file-on-the-internet-with-sql}
 
@@ -141,13 +149,19 @@ The interesting part is the `FROM` clause. DuckDB treats the URL as a table: it 
 
 For anything beyond plain HTTPS (S3, for instance), you'll need the httpfs extension first:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">s.execute("INSTALL httpfs; LOAD httpfs;");</pre>
+```
+s.execute("INSTALL httpfs; LOAD httpfs;");
+```
+
 
 The query above returns one row per penguin species from the 344-row raw dataset, ordered by how many observations each has: Adelie leads with 152, followed by Gentoo at 124 and Chinstrap at 68 (a couple of rows have no recorded mass, which is what `TRY_CAST` above is handling):
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">Adelie Penguin (Pygoscelis adeliae)            152   3700.7
+```
+Adelie Penguin (Pygoscelis adeliae)            152   3700.7
 Gentoo penguin (Pygoscelis papua)              124   5076.0
-Chinstrap penguin (Pygoscelis antarctica)       68   3733.1</pre>
+Chinstrap penguin (Pygoscelis antarctica)       68   3733.1
+```
+
 
 ### Where this is actually useful {#h3-3-where-this-is-actually-useful}
 

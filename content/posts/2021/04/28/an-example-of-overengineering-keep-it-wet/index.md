@@ -36,26 +36,32 @@ These implementations all follow the same pattern:
 
 It looks like this snippet:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="kotlin">fun enrich(json: JsonObject, data: String?): JsonObject =
+```kotlin
+fun enrich(json: JsonObject, data: String?): JsonObject =
   if (data == null) json
-  else JsonObject(json).add("data", data)</pre>
+  else JsonObject(json).add("data", data)
+```
+
 
 In the parlance of Object-Oriented Programming, this looks like the poster child for the Template Method pattern. In Functional Programming, this is plain function composition. We can move the null-check inside a shared function outside of the bi-function.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="kotlin">fun unsafeEnrich(json: JsonObject, data: String?): JsonObject =
+```kotlin
+fun unsafeEnrich(json: JsonObject, data: String?): JsonObject =
     JsonObject(json).add("data", data)                                         // 1
 
-fun &lt;T, U&gt; nullSafe(f: BiFunction&lt;T, U?, T&gt;): BiFunction&lt;T, U?, T&gt; =           // 2
-    BiFunction&lt;T, U?, T&gt; { t: T, u: U? -&gt;
+fun <T, U> nullSafe(f: BiFunction<T, U?, T>): BiFunction<T, U?, T> =           // 2
+    BiFunction<T, U?, T> { t: T, u: U? ->
         if (u == null) t
         else f.apply(t, u)
     }
 
-val unsafeEnrich = BiFunction&lt;JsonObject, String?, JsonObject&gt; { json, data -&gt; // 3
+val unsafeEnrich = BiFunction<JsonObject, String?, JsonObject> { json, data -> // 3
   unsafeEnrich(json, data)
 }
 
-val safeEnrich = nullSafe(unsafeEnrich)                                        // 4</pre>
+val safeEnrich = nullSafe(unsafeEnrich)                                        // 4
+```
+
 
 1. Move the null-check out of the function
 2. Factor the null-check into a `BiFunction`
@@ -64,13 +70,19 @@ val safeEnrich = nullSafe(unsafeEnrich)                                        /
 
 We can now test:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="kotlin">println(safeEnrich.apply(orig, null))
-println(safeEnrich.apply(orig, "x"))</pre>
+```kotlin
+println(safeEnrich.apply(orig, null))
+println(safeEnrich.apply(orig, "x"))
+```
+
 
 It works:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="json">{"foo":"bar"}
-{"foo":"bar","data":"x"}</pre>
+```json
+{"foo":"bar"}
+{"foo":"bar","data":"x"}
+```
+
 
 When I finished the code, I looked at the code and thought about the quote from Jurassic Park:
 > Your scientists were so preoccupied with whether or not they could, they didn't stop to think if they should.

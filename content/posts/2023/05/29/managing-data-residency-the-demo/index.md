@@ -50,11 +50,14 @@ The data model is simple:
 
 We insert location-specific data on each database:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="sql">INSERT INTO europe.owner VALUES ('dujardin', 'fr', 'Jean Dujardin');
+```sql
+INSERT INTO europe.owner VALUES ('dujardin', 'fr', 'Jean Dujardin');
 INSERT INTO europe.thingy VALUES (1, 'Croissant', 'dujardin');
 
 INSERT INTO usa.owner VALUES ('wayne', 'us', 'John Wayne');
-INSERT INTO usa.thingy VALUES (2, 'Lasso', 'wayne');</pre>
+INSERT INTO usa.thingy VALUES (2, 'Lasso', 'wayne');
+```
+
 
 Finally, we develop a straightforward RESTful API to fetch thingies:
 
@@ -70,18 +73,24 @@ Apache ShardingSphere offers two approaches: as a library inside the application
 
 The first step is to add the dependency to the POM:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="xml">&lt;dependency&gt;
-    &lt;groupId&gt;org.apache.shardingsphere&lt;/groupId&gt;
-    &lt;artifactId&gt;shardingsphere-jdbc-core&lt;/artifactId&gt;
-    &lt;version&gt;5.3.2&lt;/version&gt;
-&lt;/dependency&gt;</pre>
+```xml
+<dependency>
+    <groupId>org.apache.shardingsphere</groupId>
+    <artifactId>shardingsphere-jdbc-core</artifactId>
+    <version>5.3.2</version>
+</dependency>
+```
+
 
 ShardingSphere-JDBC acts as an indirection layer between the application and the data sources. We must configure the framework to use it. For Spring Boot, it looks like the following:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml">spring:
+```yaml
+spring:
   datasource:
     driver-class-name: org.apache.shardingsphere.driver.ShardingSphereDriver     #1
-    url: jdbc:shardingsphere:absolutepath:/etc/sharding.yml                      #2-3</pre>
+    url: jdbc:shardingsphere:absolutepath:/etc/sharding.yml                      #2-3
+```
+
 
 1. JDBC-compatible ShardingSphere driver
 2. Configuration file
@@ -89,7 +98,8 @@ ShardingSphere-JDBC acts as an indirection layer between the application and the
 
 The next step is to configure ShardingSphere itself with the data sources:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml">dataSources:                                                                  #1
+```yaml
+dataSources:                                                                  #1
   europe:
     dataSourceClassName: com.zaxxer.hikari.HikariDataSource
     driverClassName: org.postgresql.Driver
@@ -116,7 +126,9 @@ rules:                                                                       #2
         type: CLASS_BASED                                                    #6
         props:
           strategy: STANDARD
-          algorithmClassName: ch.frankel.blog.dataresidency.LocationBasedSharding #7</pre>
+          algorithmClassName: ch.frankel.blog.dataresidency.LocationBasedSharding #7
+```
+
 
 1. Define the two data sources, `europe` and `usa`
 2. Define rules. Many rules are available; we will only use sharding to split data between Europe and USA locations
@@ -129,15 +141,18 @@ rules:                                                                       #2
 
 The final step is to provide the algorithm's code:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="kotlin">class LocationBasedSharding : StandardShardingAlgorithm&lt;String&gt; {    //1
+```kotlin
+class LocationBasedSharding : StandardShardingAlgorithm<String> {    //1
 
-  override fun doSharding(targetNames: MutableCollection&lt;String&gt;, shardingValue: PreciseShardingValue&lt;String&gt;) =
+  override fun doSharding(targetNames: MutableCollection<String>, shardingValue: PreciseShardingValue<String>) =
     when (shardingValue.value) {                                     //2
-      "fr" -&gt; "europe"
-      "us" -&gt; "usa"
-      else -&gt; throw IllegalArgumentException("No sharding over ${shardingValue.value} defined")
+      "fr" -> "europe"
+      "us" -> "usa"
+      else -> throw IllegalArgumentException("No sharding over ${shardingValue.value} defined")
     }
-}</pre>
+}
+```
+
 
 1. Inherit from `StandardShardingAlgorithm`, where `T` is the data type of the sharding column. Here, it's `country`
 2. Based on the sharding column's value, return the name of the data source to use
@@ -151,17 +166,21 @@ We should route as early as possible to avoid an application instance in Europe 
 
 I'll use APISIX [standalone mode](https://apisix.apache.org/docs/apisix/deployment-modes/#standalone) for configuration. Let's define the two upstreams:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml">upstreams:
+```yaml
+upstreams:
   - id: 1
     nodes:
       "appeurope:8080": 1
   - id: 2
     nodes:
-      "appusa:8080": 1</pre>
+      "appusa:8080": 1
+```
+
 
 Now, we shall define the routes where the magic happens:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml">routes:
+```yaml
+routes:
   - uri: /thingies*                          #1
     name: Europe
     upstream_id: 1
@@ -175,7 +194,9 @@ Now, we shall define the routes where the magic happens:
   - uri: /thingies*                          #5
     name: default
     upstream_id: 1
-    priority: 1                              #3</pre>
+    priority: 1                              #3
+```
+
 
 1. Define the route to the Europe-located app
 2. APISIX matches the HTTP methods, the URI *and* conditions. Here, the condition is that the `X-Country` header has the `fr` value
@@ -214,7 +235,10 @@ APISIX correctly forwards the request to the Europe-located app.
 
 Finally, imagine a malicious actor changing the header to get their hands on data that are located in the US.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">curl -H 'X-Country: us' localhost:9080/thingies/1</pre>
+```
+curl -H 'X-Country: us' localhost:9080/thingies/1
+```
+
 
 APISIX forwards it to the USA-located app according to the header. However, Shardingsphere still fetches data from Europe.
 

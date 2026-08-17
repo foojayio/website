@@ -31,7 +31,8 @@ A software Bill of Materials (SBOM) is a comprehensive inventory of all componen
 
 Consider a simple Python project with various dependencies. A simplified example of an SBOM for this project might look like this:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">1[
+```
+1[
 2    {
 3        "component_name": "numpy",
 4        "version": "1.21.0",
@@ -42,7 +43,9 @@ Consider a simple Python project with various dependencies. A simplified example
 9        "version": "1.3.0",
 10        "license": "BSD"
 11    }
-12]</pre>
+12]
+```
+
 
 ***Disclaimer:**
 The code above is a simplified snippet of a possible SBOM. This example is for illustration purposes only and will not work when scanning since it is incomplete.*
@@ -67,11 +70,17 @@ And now, it can also create SBOMs for your projects.
 
 To get started with the Snyk CLI, you need to install it in your development environment. Below is a simple guide on how to install the Snyk CLI using npm. For more information or alternative ways to install the Snyk CLI, [++check out our user documentation.++](https://docs.snyk.io/snyk-cli/install-or-update-the-snyk-cli)
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">npm install -g snyk</pre>
+```
+npm install -g snyk
+```
+
 
 After installing the Snyk CLI, you need to authenticate your account using the `snyk auth` command. This will open a web browser for you to log in or sign up for a Snyk account.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">snyk auth</pre>
+```
+snyk auth
+```
+
 
 Alternatively, you can set your Snyk token as an environment variable, which is the recommended way to use the CLI in a CI/CD pipeline. Check our handy [++CLI cheat sheet++](https://snyk.io/blog/snyk-cli-cheat-sheet/) or the [++official documentation++](https://docs.snyk.io/snyk-cli) for more information.
 
@@ -79,13 +88,19 @@ Alternatively, you can set your Snyk token as an environment variable, which is 
 
 Once the CLI is operational and connected to an enterprise Snyk account, it can start creating SBOMs for your software projects with the following command:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">snyk sbom --format=&lt;cyclonedx1.4+json|cyclonedx1.4+xml|cyclonedx1.5+json|cyclonedx1.5+xml|cyclonedx1.6+json|cyclonedx1.6+xml|spdx2.3+json&gt;</pre>
+```
+snyk sbom --format=<cyclonedx1.4+json|cyclonedx1.4+xml|cyclonedx1.5+json|cyclonedx1.5+xml|cyclonedx1.6+json|cyclonedx1.6+xml|spdx2.3+json>
+```
+
 
 The `--format` option is required and specifies the output format for the SBOM to be produced. The choices are between CylconeDX, XML, or SPDX in JSON format.
 
 You can save the SBOMs to a file by using the `--json-file-output=<OUTPUT_FILE_PATH>` flag to export SBOMs JSON output to a JSON file.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">snyk sbom --format=cyclonedx1.4+json --json-file-output=mysbom.json</pre>
+```
+snyk sbom --format=cyclonedx1.4+json --json-file-output=mysbom.json
+```
+
 
 Running this from the root directory of your project will give you an SBOM file that you can ship together with your artifact.
 
@@ -93,11 +108,17 @@ Running this from the root directory of your project will give you an SBOM file 
 
 The Snyk CLI uses the package manifest file of your build system to determine the dependency tree and, therefore, the input of the SBOM. By default, the CLI stops after finding one manifest file. However, you may have more than one manifest file and more than one build system in your project. For example, you might have a project with a Java backend using Maven and a Node.js frontend using npm. By adding the `--all-projects` flag to the SBOM command, the Snyk CLI will traverse through your project looking for manifest files and add them to the result or your SBOM output.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">snyk sbom --format=cyclonedx1.4+json --all-projects --json-file-output=mysbom.json</pre>
+```
+snyk sbom --format=cyclonedx1.4+json --all-projects --json-file-output=mysbom.json
+```
+
 
 The default depth for searching for manifest files is four, this is configurable using the `--detection-depth` flag. In addition, it is also possible to exclude specific files with the `--exclude` flag.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">snyk sbom --format=cyclonedx1.4+json --all-projects --detection-depth=3 --exclude=package.json --json-file-output=mysbom.json</pre>
+```
+snyk sbom --format=cyclonedx1.4+json --all-projects --detection-depth=3 --exclude=package.json --json-file-output=mysbom.json
+```
+
 
 Please be aware that there is a large number of command line flags available for specific ecosystems to handle --- such as multi-module Maven files, configuration attributes in Gradle, Yarn workspaces, etc. For a full overview of all possible flags for Snyk SBOM, check our extensive [++documentation page++](https://docs.snyk.io/snyk-cli/commands/sbom).
 
@@ -116,7 +137,10 @@ Creating SBOMs is an effective and straightforward way to use the Snyk CLI. But 
 
 The Snyk Cli is not only capable of creating an SBOM for your project, it can also scan it. If the Snyk CLI is connected to an enterprise account your can use the Snyk CLI to point to an SBOM file like below:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">snyk sbom test --file=mysbom.json --experimental</pre>
+```
+snyk sbom test --file=mysbom.json --experimental
+```
+
 
 At the time of writing, this is still an experimental feature hence the \`--experimental\` flag. Also be aware that it currently only accepts JSON files in UTF-8 for
 
@@ -134,18 +158,27 @@ To install `bomber`, download the [++latest release++](https://github.com/devops
 
 **Homebrew (macOS):**
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">brew tap devops-kung-fu/homebrew-tap
-brew install devops-kung-fu/homebrew-tap/bomber</pre>
+```
+brew tap devops-kung-fu/homebrew-tap
+brew install devops-kung-fu/homebrew-tap/bomber
+```
+
 
 **Dpkg (Linux):**
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">dpkg -i bomber_0.4.1_linux_arm64.deb</pre>
+```
+dpkg -i bomber_0.4.1_linux_arm64.deb
+```
+
 
 To run `bomber` from the command line with Snyk, you'll need to provide a Snyk API token. You can retrieve this from the Snyk web interface. Otherwise, when the CLI is installed on your local machine, you can run `snyk config get api`.
 
 Once you have the Snyk API token, you can run `bomber` like this:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">bomber scan --provider snyk --token xxx mysbom.json</pre>
+```
+bomber scan --provider snyk --token xxx mysbom.json
+```
+
 
 The output will show you all known vulnerabilities on your screen.
 ![Bomber SBOM scanner with the Snyk integration provider for Java Maven dependencies.](https://res.cloudinary.com/snyk/image/upload/f_auto,w_2560,q_auto/v1707410787/blog-creating-sboms-bomber.jpg)

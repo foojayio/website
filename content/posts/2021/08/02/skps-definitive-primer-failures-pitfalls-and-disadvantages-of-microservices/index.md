@@ -23,7 +23,7 @@ frozen: false
 **\[About SKP's Definitive Microservices Primer\]**  
 Series of Articles on Microservices Architecture. They Revolve Around Microservices Strategy, Decision Making, Monolithic vs Microservices, Microservices Infrastructure, Failures \& Pitfalls of Microservices, Microservices Design Patterns, Database Design, Security, Logging, Messaging, Containerization, Cloud Providers and Everything that is Microservices and More!  
 
-*** ** * ** ***
+
 
 Intro to Microservices Adoption in Real World {#h2-0-intro-to-microservices-adoption-in-real-world}
 ---------------------------------------------------------------------------------------------------
@@ -153,7 +153,7 @@ Kindly take time to Internalize these thoughts as Microservices Architecture is 
 
 So, Here's Wishing you a Lot of Skill, Focus, Pragmatism, Understanding, Reasoning and Continued Experience to get the Best Out of Microservices for your Organization and Needs!
 
-*** ** * ** ***
+
 
 #### **Disclaimer**
 

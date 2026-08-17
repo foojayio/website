@@ -45,7 +45,8 @@ Version 7.0.251 is live, and the four big items each get a full tutorial over th
 
 A lit, spinning cube is this short:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public void onInit(GraphicsDevice device) {
+```
+public void onInit(GraphicsDevice device) {
     cube = Primitives.cube(device, 1.6f);
     material = new Material(Material.Type.PHONG)
             .setColor(0xff3366ff)
@@ -60,7 +61,9 @@ public void onFrame(GraphicsDevice device) {
     device.clear(0xff101018, true, true);
     device.setCamera(camera);
     device.draw(cube, material, Matrix4.rotation(angle, 0.35f, 1f, 0.12f));
-}</pre>
+}
+```
+
 
 And it isn't limited to primitives. A binary glTF model authored in any 3D tool loads with one call and renders with its own textures. This is the Khronos BoomBox sample model rendering on the native Mac target:
 ![A glTF model rendered by the portable 3D API on the native Mac target](https://www.codenameone.com/blog/portable-3d-graphics-api/boombox-mac.png)
@@ -73,7 +76,8 @@ On iOS the vertex buffers are SIMD-aligned so the data is handed to Metal with n
 
 `com.codename1.gaming` builds a game surface on top of that 3D layer: a `GameView` with a tight `update(dt)` loop, sprites, scenes with cameras, pollable input, a low-latency `SoundPool`, and rigid-body physics powered by a Box2D engine that ships inside the core. This is the complete logic of a physics demo where every tap drops a bouncing ball:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">protected void update(double dt) {
+```
+protected void update(double dt) {
     if (getInput().wasPointerPressed()) {
         PhysicsBody body = world.createCircle(
             getInput().getPointerX(), getInput().getPointerY(),
@@ -84,7 +88,9 @@ On iOS the vertex buffers are SIMD-aligned so the data is handed to Metal with n
         getScene().add(s);
     }
     world.step((float) dt);
-}</pre>
+}
+```
+
 
 No render code in sight: the linked sprites track their physics bodies and the scene draws itself. Here it is running in the simulator:
 ![The gaming API physics demo, Box2D bodies driving sprites](https://www.codenameone.com/blog/game-development-api-box2d/gaming-demo.gif)
@@ -109,19 +115,25 @@ People have been asking how to turn Java into a real `.exe` since the late ninet
 
 Two platform integrations that apps keep needing. `com.codename1.printing` hands a PDF or image to the native print dialog on every port, including the new Windows one:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">if (Printer.isPrintingSupported()) {
-    Printer.printPDF(reportPath, result -&gt; {
+```
+if (Printer.isPrintingSupported()) {
+    Printer.printPDF(reportPath, result -> {
         if (result.isFailed()) {
             ToastBar.showErrorMessage("Print failed: " + result.getError());
         }
     });
-}</pre>
+}
+```
+
 
 And card issuers can now let users add cards to Apple Wallet from inside the Wallet app itself. The iOS build generates Apple's issuer-provisioning extension pair from build hints, with zero native code on your side:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">ios.wallet.extension=true
+```
+ios.wallet.extension=true
 ios.wallet.appGroup=group.com.mybank.app
-ios.wallet.issuerEndpoint=https://api.mybank.com/wallet/provision</pre>
+ios.wallet.issuerEndpoint=https://api.mybank.com/wallet/provision
+```
+
 
 Your app publishes its card list through the new `WalletExtension` API and the extension picks it up from the shared App Group. Both features get the full treatment in .
 
@@ -157,7 +169,10 @@ Pin the browser appearance on iOS {#h2-10-pin-the-browser-appearance-on-ios}
 
 Embedded web views on iOS follow the device's light/dark appearance, and since the UIScene transition the app-wide plist override stopped affecting them. [PR #5203](https://github.com/codenameone/CodenameOne/pull/5203) adds a per-component property to pin it:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">browser.setProperty(BrowserComponent.BROWSER_PROPERTY_INTERFACE_STYLE, "light");</pre>
+```
+browser.setProperty(BrowserComponent.BROWSER_PROPERTY_INTERFACE_STYLE, "light");
+```
+
 
 Valid values are `light`, `dark`, and `auto`. It's safe to call in the constructor; the property is applied when the native peer is ready.
 

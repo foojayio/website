@@ -133,6 +133,6 @@ The best way to get rid of AP being engaged is to help GC to complete in time:
   * Increase AP threshold (experimental flag):  
     `-XX:GPGCPacingTriggerHeapOccupancyPercent=`\<value\>
 
-*** ** * ** ***
+
 
 Original article written in cooperation with Dima Silin and [published on the Azul blog](https://www.azul.com/blog/memory-allocation-pacing-in-azul-zulu-prime-builds-of-openjdk-explained/).

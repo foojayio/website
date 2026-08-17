@@ -78,15 +78,21 @@ Getting Started {#h2-3-getting-started}
 
 You can start Floci with a single Docker command:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">docker run -p 4566:4566 hectorvent/floci</pre>
+```
+docker run -p 4566:4566 hectorvent/floci
+```
+
 
 Or via docker-compose.yml:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">services:
+```
+services:
   floci:
     image: hectorvent/floci:latest
     ports:
-      - "4566:4566"</pre>
+      - "4566:4566"
+```
+
 
 Full documentation [here](https://hectorvent.dev/floci/)
 

@@ -53,7 +53,8 @@ The Java security baseline changes on the Tuesday closest to the 17th of each Ja
 
 A sample configuration to use the security baseline of Java 11 is:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml">jobs:
+```yaml
+jobs:
   java11:
     runs-on: ${{ matrix.os }}
     strategy:
@@ -73,7 +74,9 @@ A sample configuration to use the security baseline of Java 11 is:
         java-version: 11.0.${{ matrix.update }}
         distro: zulu
     - name: java -version
-      run: java -version</pre>
+      run: java -version
+```
+
 
 ### Regularly Detect Custom Security Flaws (Recommended in Test) {#h3-3-regularly-detect-custom-security-flaws-recommended-in-test}
 

@@ -32,7 +32,8 @@ Design patterns are great, they standardize solutions for common programming pro
 
 For example, the [Strategy pattern](https://en.wikipedia.org/wiki/Strategy_pattern) is a design pattern that enables selecting algorithms at runtime. Taking the example of different *strategies* of tax calculation, let's see what an implementation looked like *before* java 8:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">// Product Category Enum
+```java
+// Product Category Enum
 enum ProductCategory {
     STANDARD, PREMIUM, LUXURY
 }
@@ -91,7 +92,7 @@ class TraditionalStrategyDemo {
         System.out.println("Tax for $" + base + " (" + category + "): $" + taxAmount);
     }
 }
-</pre>
+```
 
 A rather verbose way of doing things...
 
@@ -99,7 +100,8 @@ The introduction of *lambda expressions* in java 8 removed the need to create se
 
 The following example is more concise and readable than the first one:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">// Product Category Enum
+```java
+// Product Category Enum
 enum ProductCategory {
     STANDARD, PREMIUM, LUXURY
 }
@@ -120,13 +122,13 @@ class Java8StrategyDemo {
         TaxCalculator calculator;
         switch (category) {
             case STANDARD:
-                calculator = amount1 -&gt; amount1 * 0.10; // 10% tax
+                calculator = amount1 -> amount1 * 0.10; // 10% tax
                 break;
             case PREMIUM:
-                calculator = amount1 -&gt; amount1 * 0.20; // 20% tax
+                calculator = amount1 -> amount1 * 0.20; // 20% tax
                 break;
             case LUXURY:
-                calculator = amount1 -&gt; amount1 * 0.30; // 30% tax
+                calculator = amount1 -> amount1 * 0.30; // 30% tax
                 break;
             default:
                 System.out.println("Unsupported product category");
@@ -137,11 +139,12 @@ class Java8StrategyDemo {
         System.out.println("Tax for $" + base + " (" + category + "): $" + taxAmount);
     }
 }
-</pre>
+```
 
 But java 14 improved on that even more when it introduced the *switch expression*:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">// Product Category Enum
+```java
+// Product Category Enum
 enum ProductCategory {
     STANDARD, PREMIUM, LUXURY
 }
@@ -159,16 +162,16 @@ class ModernJavaStrategyDemo {
 
         // Direct lambda assignment with switch expression
         TaxCalculator calculator = switch (category) {
-            case STANDARD -&gt; amount1 -&gt; amount1 * 0.10; // 10% tax
-            case PREMIUM -&gt; amount1 -&gt; amount1 * 0.20;  // 20% tax
-            case LUXURY -&gt; amount1 -&gt; amount1 * 0.30;   // 30% tax
+            case STANDARD -> amount1 -> amount1 * 0.10; // 10% tax
+            case PREMIUM -> amount1 -> amount1 * 0.20;  // 20% tax
+            case LUXURY -> amount1 -> amount1 * 0.30;   // 30% tax
         };
 
         double taxAmount = calculator.calculate(amount);
         System.out.println("Tax for $" + amount + " (" + category + "): $" + taxAmount);
     }
 }
-</pre>
+```
 
 At this point, I'd hardly call the code sample a *design pattern* anymore, but rather a smart use of **built-in functionality** of the language.
 
@@ -284,7 +287,8 @@ If you're used to modelling data using the *vanilla* OOP structures Java offers,
 
 where the *intermediate nodes* of the domain hierarchy would be *abstract* classes:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public abstract class Book {
+```java
+public abstract class Book {
 
      private final String isbn;
      private final String title;
@@ -302,21 +306,21 @@ where the *intermediate nodes* of the domain hierarchy would be *abstract* class
 
      // getters omitted for brevity
 }
-
-</pre>
+```
 
 <br />
 
 and the *leaf nodes* (non-fiction, children's tale, ...) are *concrete* (final) classes:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public final class ChildrensTaleBook extends FictionBook  {
+```java
+public final class ChildrensTaleBook extends FictionBook  {
 
     public ChildrensTaleBook(String isbn, String title, String author, String summary, int pages) {
         super(isbn, title, author, summary, pages);
     }
 
 }
-</pre>
+```
 
 #### Adding the Visitor pattern
 
@@ -326,7 +330,8 @@ We won't go in to too much depth trying to re-explain how the visitor pattern wo
 
 First, we define a BookVisitor interface. this interface will define methods which *visit* each *leaf node* book in the domain hierarchy. Our algorithm will implement that interface.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public interface BookVisitor {
+```java
+public interface BookVisitor {
 
     void visit(NonFictionBook nonFictionBook);
 
@@ -336,27 +341,29 @@ First, we define a BookVisitor interface. this interface will define methods whi
 
     void visit(ScifiBook scifiBook);
 }
-</pre>
+```
 
 ##### (2) Visitable interface
 
 Next, a Visitable interface is defined to implement double dispatch. More on why that is necessary [here.](https://refactoring.guru/design-patterns/visitor-double-dispatch)
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public interface Visitable {
+```java
+public interface Visitable {
 
     void accept(BookVisitor visitor);
 }
-</pre>
+```
 
 a contract to which all Books adhere
 
-```EnlighterJSRAW
+```
 public abstract class Book implements Visitable { //... }
 ```
 
 and which is implemented by each *leaf node*
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public final class ChildrensTaleBook extends FictionBook  {
+```java
+public final class ChildrensTaleBook extends FictionBook  {
 
     public ChildrensTaleBook(String isbn, String title, String author, String summary, int pages) {
         super(isbn, title, author, summary, pages);
@@ -368,13 +375,14 @@ and which is implemented by each *leaf node*
         visitor.visit(this);
     }
 }
-</pre>
+```
 
 ##### (3) Glue code
 
 Finally, some glue code to actually run the algorithm:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public class OOPSolution {
+```java
+public class OOPSolution {
     public static void main(String[] args) {
         var mockLibrary = BookProvider.createMockLibrary();
         BookInterestingInfoVisitor booksInterestingInfoVisitor = new BookInterestingInfoVisitor();
@@ -387,8 +395,7 @@ Finally, some glue code to actually run the algorithm:
 
     }
 }
-
-</pre>
+```
 
 <br />
 
@@ -398,9 +405,10 @@ We've already discussed the [rules](#collecting-interesting-information-about-a-
 
 Now let's look at the actual implementation. Take a few minutes to read through this implementation and study it. Do you find it readable?
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public class BookInterestingInfoVisitor implements BookVisitor {
+```java
+public class BookInterestingInfoVisitor implements BookVisitor {
 
-    private final List&lt;String&gt; interestingInformationCollection = new ArrayList&lt;&gt;();
+    private final List<String> interestingInformationCollection = new ArrayList<>();
 
     // Vanilla OOP implementation.
     @Override
@@ -413,17 +421,17 @@ Now let's look at the actual implementation. Take a few minutes to read through 
         var ratings = nonFictionBook.ratings();
         var firstRating = ratings.getFirstRating();
         var secondRating = ratings.getSecondRating();
-        if (firstRating instanceof GoodRating &amp;&amp; secondRating instanceof GoodRating) {
+        if (firstRating instanceof GoodRating && secondRating instanceof GoodRating) {
             var firstRatingReviewer = firstRating.getReviewer();
             var secondRatingReviewer = secondRating.getReviewer();
-            if (firstRatingReviewer != null &amp;&amp; secondRatingReviewer != null) {
+            if (firstRatingReviewer != null && secondRatingReviewer != null) {
                 interestingInformationCollection.add("A non-fiction book with two good ratings by " + firstRatingReviewer.getName() + " and " + secondRatingReviewer.getName());
             } else {
                 notifyUninteresting();
             }
-        } else if (firstRating instanceof BadRating &amp;&amp; secondRating instanceof BadRating) {
+        } else if (firstRating instanceof BadRating && secondRating instanceof BadRating) {
             interestingInformationCollection.add("A non-fiction book with two bad ratings");
-        } else if (firstRating instanceof GoodRating &amp;&amp; secondRating instanceof BadRating) {
+        } else if (firstRating instanceof GoodRating && secondRating instanceof BadRating) {
             var firstRatingReviewer = firstRating.getReviewer();
             if (firstRatingReviewer != null) {
                 interestingInformationCollection.add("A non-fiction book with one good first rating by " + firstRatingReviewer.getName() + " and one bad second rating");
@@ -442,7 +450,7 @@ Now let's look at the actual implementation. Take a few minutes to read through 
             interestingInformationCollection.add("This children's book has 0 pages. Use your imagination I suppose.");
         } else if (pages == 100) {
             interestingInformationCollection.add("This children's book has exactly 100 pages. interesting somehow!");
-        } else if (pages &gt;= 1000) {
+        } else if (pages >= 1000) {
             interestingInformationCollection.add("This children's book has more than 1000 pages. That's quite long for children!");
         } else {
             notifyUninteresting();
@@ -488,7 +496,7 @@ Now let's look at the actual implementation. Take a few minutes to read through 
         System.out.println("Found something uninteresting, skipping.");
     }
 }
-</pre>
+```
 
 If you're like me, two things stuck out:
 
@@ -511,7 +519,8 @@ What immediately stands out is that the *intermediate nodes* of the hierarchy ar
 
 ```
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public sealed interface Book permits FictionBook, NonFictionBook {
+```java
+public sealed interface Book permits FictionBook, NonFictionBook {
      String isbn();
      String title();
      String author();
@@ -519,7 +528,7 @@ What immediately stands out is that the *intermediate nodes* of the hierarchy ar
      int pages();
 }
 public sealed interface FictionBook extends Book permits ChildrensTaleBook, FantasyBook, ScifiBook { }
-</pre>
+```
 
 ```java:Book.java
 
@@ -531,12 +540,13 @@ public sealed interface FictionBook extends Book permits ChildrensTaleBook, Fant
 
 and the *leaf nodes* of the hierarchy are modelled as records:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public record FantasyBook(
+```java
+public record FantasyBook(
         String isbn,
         String title,
         String author,
         String summary,int pages) implements FictionBook{}
-</pre>
+```
 
 Why is it useful to model our data this way?
 
@@ -560,25 +570,26 @@ It might not be immediately apparent *why* you would use records here, but in th
 
 Let's study the reimplemented solution:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public class BookInterestingInfoCollector {
+```java
+public class BookInterestingInfoCollector {
 
-    private final List&lt;String&gt; interestingInformationCollection = new ArrayList&lt;&gt;();
+    private final List<String> interestingInformationCollection = new ArrayList<>();
 
     public void collectInterestingInfo(Book book) {
         switch (book) {
             // (1) Guard pattern with a when clause
-            case NonFictionBook nonFictionBook when nonFictionBook.interestingnessFactor().isAtleastInteresting() -&gt;
+            case NonFictionBook nonFictionBook when nonFictionBook.interestingnessFactor().isAtleastInteresting() ->
                     collectInterestingInfo(nonFictionBook);
             // (2) record deconstruction, unnamed pattern (_)
-            case ScifiBook(_, _, var author, _, _, var scifiTheme) when scifiTheme == ScifiTheme.SPACE_EXPLORATION -&gt;
+            case ScifiBook(_, _, var author, _, _, var scifiTheme) when scifiTheme == ScifiTheme.SPACE_EXPLORATION ->
                     interestingInformationCollection.add("A Scifibook about space exploration by " + author);
-            case ScifiBook(_, _, String summary, _,_, var scifiTheme) when scifiTheme == ScifiTheme.TIME_TRAVEL -&gt;
+            case ScifiBook(_, _, String summary, _,_, var scifiTheme) when scifiTheme == ScifiTheme.TIME_TRAVEL ->
                     interestingInformationCollection.add("A Scifibook about time travel. Here's a short summary " + summary);
-            case FantasyBook(_, _, _, String summary,_) -&gt;
+            case FantasyBook(_, _, _, String summary,_) ->
                     interestingInformationCollection.add("A Fantasybook with summary: " + summary);
-            case ChildrensTaleBook childrensTaleBook -&gt; collectInterestingInfo(childrensTaleBook);
+            case ChildrensTaleBook childrensTaleBook -> collectInterestingInfo(childrensTaleBook);
             // (3) multiple scenarios, avoiding default branch to have compile time safety if adding a new book
-            case ScifiBook _, NonFictionBook _ -&gt; notifyUninteresting();
+            case ScifiBook _, NonFictionBook _ -> notifyUninteresting();
         }
     }
 
@@ -588,16 +599,16 @@ Let's study the reimplemented solution:
             case Ratings(
                     GoodRating(Reviewer(String firstRatingReviewerName)),
                     GoodRating(Reviewer(String secondRatingReviewerName))
-            ) -&gt;
+            ) ->
                     interestingInformationCollection.add("A non-fiction book with two good ratings by " + firstRatingReviewerName + " and " + secondRatingReviewerName);
             case Ratings(
                     GoodRating(Reviewer(String firstRatingReviewerName)),
                     BadRating _
-            ) -&gt;
+            ) ->
                     interestingInformationCollection.add("A non-fiction book with a first good rating by " + firstRatingReviewerName + " and a bad second rating");
-            case Ratings(BadRating(_), BadRating(_)) -&gt;
+            case Ratings(BadRating(_), BadRating(_)) ->
                     interestingInformationCollection.add("A non-fiction book with two bad ratings");
-            case Ratings(_, _) -&gt; notifyUninteresting();
+            case Ratings(_, _) -> notifyUninteresting();
         }
     }
 
@@ -605,10 +616,10 @@ Let's study the reimplemented solution:
 
         // (5) https://openjdk.org/jeps/488 - Primitive Types in Patterns (PREVIEW FEATURE!)
         switch (childrensTaleBook.pages()) {
-            case 0 -&gt; interestingInformationCollection.add("This children's book has 0 pages. Use your imagination I suppose.");
-            case 100 -&gt; interestingInformationCollection.add("This children's book has exactly 100 pages. interesting somehow!");
-            case int i when i &gt;= 1000 -&gt; interestingInformationCollection.add("This children's book has more than 1000 pages. That's quite long for children!");
-            case int _ -&gt; notifyUninteresting();
+            case 0 -> interestingInformationCollection.add("This children's book has 0 pages. Use your imagination I suppose.");
+            case 100 -> interestingInformationCollection.add("This children's book has exactly 100 pages. interesting somehow!");
+            case int i when i >= 1000 -> interestingInformationCollection.add("This children's book has more than 1000 pages. That's quite long for children!");
+            case int _ -> notifyUninteresting();
         }
     }
 
@@ -634,7 +645,7 @@ Let's study the reimplemented solution:
         System.out.println("Found something uninteresting, skipping.");
     }
 }
-</pre>
+```
 
 ##### Where did the visitor pattern go?
 
@@ -642,24 +653,25 @@ First, we should note that the visitor pattern as we know it is gone. As with th
 
 ##### Exhaustive, readable pattern matching with the enhanced switch statement
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public void collectInterestingInfo(Book book) {
+```java
+public void collectInterestingInfo(Book book) {
       switch (book) {
           // (1) Guarded pattern with a when clause
-          case NonFictionBook nonFictionBook when nonFictionBook.interestingnessFactor().isAtleastInteresting() -&gt;
+          case NonFictionBook nonFictionBook when nonFictionBook.interestingnessFactor().isAtleastInteresting() ->
                   collectInterestingInfo(nonFictionBook);
           // (2) record deconstruction, unnamed pattern (_)
-          case ScifiBook(_, _, var author, _, _, var scifiTheme) when scifiTheme == ScifiTheme.SPACE_EXPLORATION -&gt;
+          case ScifiBook(_, _, var author, _, _, var scifiTheme) when scifiTheme == ScifiTheme.SPACE_EXPLORATION ->
                   interestingInformationCollection.add("A Scifibook about space exploration by " + author);
-          case ScifiBook(_, _, String summary, _,_, var scifiTheme) when scifiTheme == ScifiTheme.TIME_TRAVEL -&gt;
+          case ScifiBook(_, _, String summary, _,_, var scifiTheme) when scifiTheme == ScifiTheme.TIME_TRAVEL ->
                   interestingInformationCollection.add("A Scifibook about time travel. Here's a short summary " + summary);
-          case FantasyBook(_, _, _, String summary,_) -&gt;
+          case FantasyBook(_, _, _, String summary,_) ->
                   interestingInformationCollection.add("A Fantasybook with summary: " + summary);
-          case ChildrensTaleBook childrensTaleBook -&gt; collectInterestingInfo(childrensTaleBook);
+          case ChildrensTaleBook childrensTaleBook -> collectInterestingInfo(childrensTaleBook);
           // (3) multiple scenarios, avoiding default branch to have compile time safety if adding a new book
-          case ScifiBook _, NonFictionBook _ -&gt; notifyUninteresting();
+          case ScifiBook _, NonFictionBook _ -> notifyUninteresting();
       }
   }
-</pre>
+```
 
 While our initial implementation had *visitor methods* defined for each *leaf node* book in our hierarchy, what remains here is an **exhaustive switch case covering all scenarios at once**.
 
@@ -667,11 +679,12 @@ While our initial implementation had *visitor methods* defined for each *leaf no
 
 While the OOP solution did this with an if statement;
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">if (!nonFictionBook.interestingnessFactor().isAtleastInteresting()) {
+```java
+if (!nonFictionBook.interestingnessFactor().isAtleastInteresting()) {
       notifyUninteresting();
       return;
   }
-</pre>
+```
 
 we now use a **guarded pattern with a when clause** , defining for what *type* we do the matching and under which *condition* in **one go**.
 
@@ -687,25 +700,26 @@ Using the default branch in a switch case would defeat the purpose of our exhaus
 
 ##### Type safe, concise, and 'flattened' code for the NonFiction Books by using nested record deconstruction
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">private void collectInterestingInfo(NonFictionBook nonFictionBook) {
+```java
+private void collectInterestingInfo(NonFictionBook nonFictionBook) {
     // (4) Nested record deconstruction
     switch (nonFictionBook.ratings()) {
         case Ratings(
                 GoodRating(Reviewer(String firstRatingReviewerName)),
                 GoodRating(Reviewer(String secondRatingReviewerName))
-        ) -&gt;
+        ) ->
                 interestingInformationCollection.add("A non-fiction book with two good ratings by " + firstRatingReviewerName + " and " + secondRatingReviewerName);
         case Ratings(
                 GoodRating(Reviewer(String firstRatingReviewerName)),
                 BadRating _
-        ) -&gt;
+        ) ->
                 interestingInformationCollection.add("A non-fiction book with a first good rating by " + firstRatingReviewerName + " and a bad second rating");
-        case Ratings(BadRating(_), BadRating(_)) -&gt;
+        case Ratings(BadRating(_), BadRating(_)) ->
                 interestingInformationCollection.add("A non-fiction book with two bad ratings");
-        case Ratings(_, _) -&gt; notifyUninteresting();
+        case Ratings(_, _) -> notifyUninteresting();
     }
 }
-</pre>
+```
 
 Recall that the code sample for the non fiction books was particularly ugly. it contained numerous null checks, nested conditional logic and type checking using instanceof which rendered it quite unreadable.  
 
@@ -713,41 +727,44 @@ The refined example uses *nested* record deconstruction to represent each case i
 
 For instance, this code block translates easily to: 'the case of a non fiction book with two good ratings by two named reviewers':
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">case Ratings(
+```java
+case Ratings(
         GoodRating(Reviewer(String firstRatingReviewerName)),
         GoodRating(Reviewer(String secondRatingReviewerName))
-) -&gt;
+) ->
         interestingInformationCollection.add("A non-fiction book with two good ratings by " + firstRatingReviewerName + " and " + secondRatingReviewerName);
-</pre>
+```
 
 While the following block handles any bad ratings, regardless if the reviewer was named or not (hence the unnamed pattern):
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">case Ratings(
+```java
+case Ratings(
         GoodRating(Reviewer(String firstRatingReviewerName)),
         GoodRating(Reviewer(String secondRatingReviewerName))
-) -&gt;
+) ->
         interestingInformationCollection.add("A non-fiction book with two good ratings by " + firstRatingReviewerName + " and " + secondRatingReviewerName);
-</pre>
+```
 
 The last *fall through case* can be even more brief: 'if any of the ratings were not handled by the previous cases, it must be uninteresting':
 
-```EnlighterJSRAW
+```
             case Ratings(_, _) -> notifyUninteresting();
 ```
 
 ##### Bonus: primitives in a switch case (a java 24 preview feature)
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">private void collectInterestingInfo(ChildrensTaleBook childrensTaleBook) {
+```java
+private void collectInterestingInfo(ChildrensTaleBook childrensTaleBook) {
 
     // (5) https://openjdk.org/jeps/488 - Primitive Types in Patterns (PREVIEW FEATURE!)
     switch (childrensTaleBook.pages()) {
-        case 0 -&gt; interestingInformationCollection.add("This children's book has 0 pages. Use your imagination I suppose.");
-        case 100 -&gt; interestingInformationCollection.add("This children's book has exactly 100 pages. interesting somehow!");
-        case int i when i &gt;= 1000 -&gt; interestingInformationCollection.add("This children's book has more than 1000 pages. That's quite long for children!");
-        case int _ -&gt; notifyUninteresting();
+        case 0 -> interestingInformationCollection.add("This children's book has 0 pages. Use your imagination I suppose.");
+        case 100 -> interestingInformationCollection.add("This children's book has exactly 100 pages. interesting somehow!");
+        case int i when i >= 1000 -> interestingInformationCollection.add("This children's book has more than 1000 pages. That's quite long for children!");
+        case int _ -> notifyUninteresting();
     }
 }
-</pre>
+```
 
 While technically still a preview feature in java 24, we can use the support for primitives in the switch statement to make handling children's tales books more easy.
 

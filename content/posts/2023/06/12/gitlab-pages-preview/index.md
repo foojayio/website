@@ -52,7 +52,8 @@ I didn't believe it initially, but you only need to create a dedicated artifact.
 
 The idea is to create such an artifact, accessible under an URL, which cannot be easily predicted. I can then share the URL with my colleagues and ask for their review. To start with, we can copy the existing build on `master`:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml">stages:
+```yaml
+stages:
   - preview
 
 preview:
@@ -68,7 +69,9 @@ preview:
     refs:
       - preview
   variables:
-    JEKYLL_ENV: production</pre>
+    JEKYLL_ENV: production
+```
+
 
 At this point, the site is available at `https://$CI_PROJECT_NAMESPACE.gitlab.io/-/$CI_PROJECT_NAME/-/jobs/$CI_JOB_ID/artifacts/public/index.html`. Many issues need fixing, though.
 
@@ -96,16 +99,19 @@ Both are different on the preview. You must set those parameters in a YAML confi
 
 Let's change the build accordingly:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml">preview:
+```yaml
+preview:
   stage: preview
   image:
     name: registry.gitlab.com/nfrankel/nfrankel.gitlab.io:latest
   before_script:
     - cd /builds/nfrankel/nfrankel.gitlab.io
-    - "printf 'url: https://%s.gitlab.io\n' $CI_PROJECT_NAMESPACE &gt;&gt; _config_preview.yml"                        #1
-    - "printf 'baseurl: /-/%s/-/jobs/%s/artifacts/public/\n' $CI_PROJECT_NAME $CI_JOB_ID &gt;&gt; _config_preview.yml" #2
+    - "printf 'url: https://%s.gitlab.io\n' $CI_PROJECT_NAMESPACE >> _config_preview.yml"                        #1
+    - "printf 'baseurl: /-/%s/-/jobs/%s/artifacts/public/\n' $CI_PROJECT_NAME $CI_JOB_ID >> _config_preview.yml" #2
     - cat _config_preview.yml                                                                                    #3
-  script: bundle exec jekyll b --future -t --config _config.yml,_config_preview.yml -d public                    #4</pre>
+  script: bundle exec jekyll b --future -t --config _config.yml,_config_preview.yml -d public                    #4
+```
+
 
 1. Set `url` using the `CI_PROJECT_NAMESPACE` environment variable. I could have used a hard-coded value since it's static, but it makes the script more reusable
 2. Set `baseurl` using the `CI_PROJECT_NAME` and `CI_JOB_ID` environment variables. The latter is the random part of the requirement
@@ -116,7 +122,10 @@ Let's change the build accordingly:
 
 It's a bore trying to distribute the correct URL each time. Better to write it down in the console after building:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml">after_script: echo https://$CI_PROJECT_NAMESPACE.gitlab.io/-/$CI_PROJECT_NAME/-/jobs/$CI_JOB_ID/artifacts/public/index.html</pre>
+```yaml
+after_script: echo https://$CI_PROJECT_NAMESPACE.gitlab.io/-/$CI_PROJECT_NAME/-/jobs/$CI_JOB_ID/artifacts/public/index.html
+```
+
 
 There's still one missing bit. GitLab Pages offer an index page. For example, if you request <https://blog.frankel.ch>, they will serve the root `index.html`. With plain artifacts, it's not the case. Given that I only want to offer a single post for preview, it's not an issue, so I didn't research the configuration further.
 
@@ -124,7 +133,10 @@ There's still one missing bit. GitLab Pages offer an index page. For example, if
 
 At this point, I only need to push to my `preview` branch:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">git push --force origin HEAD:preview</pre>
+```
+git push --force origin HEAD:preview
+```
+
 
 Icing on the cake, we don't need to have the branch locally; just push to the remote one.
 

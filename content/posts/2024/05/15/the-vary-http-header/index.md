@@ -29,13 +29,16 @@ Two years ago, I wrote about [web resource caching server-side](https://blog.fra
 
 Now, imagine the following scenario. You request a resource, _e.g., `GET /book/1` and get the result:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">HTTP/1.1 200 OK
+```
+HTTP/1.1 200 OK
 Content-Type: application/json
 
 {
   "id": 1,
   "title": "Notre-Dame de Paris"
-}</pre>
+}
+```
+
 
 The request succeeds; the result is cached. Now, I request the same resource, but because my code works around XML, I set the `Accept` header to `application/xml`. Unfortunately, the server returns the cached JSON resource, which differs from what I asked and probably utterly breaks my code.
 
@@ -46,7 +49,8 @@ The solution {#h2-1-the-solution}
 
 We need a configurable multi-dimension cache key. As you can probably guess by now, that's the role of the `Vary` header: it explicitly lists all dimensions of the cache key. In the example above, the upstream would communicate the additional cache key with the following:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">HTTP/1.1 200 OK
+```
+HTTP/1.1 200 OK
 Content-Type: application/json
 Content-Language: en
 Vary: Accept
@@ -54,13 +58,16 @@ Vary: Accept
 {
   "id": 1,
   "title": "Notre-Dame de Paris"
-}</pre>
+}
+```
+
 
 Instead of a single cache entry per URL, we now have one per MIME type/URL combination. Note that it's up to the caching component to use this information.
 
 Another common request header is `Accept-Encoding`, which usually specifies which compression algorithms the client can accept. Encoding is another possible cache key. The specification allows specifying multiple cache keys:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">HTTP/1.1 200 OK
+```
+HTTP/1.1 200 OK
 Content-Type: application/json
 Content-Language: en
 Vary: Accept, Accept-Encoding
@@ -68,7 +75,9 @@ Vary: Accept, Accept-Encoding
 {
   "id": 1,
   "title": "Notre-Dame de Paris"
-}</pre>
+}
+```
+
 
 Conclusion {#h2-2-conclusion}
 -----------------------------
@@ -79,6 +88,6 @@ I've described the `Vary`response header in this post. As soon as you configure 
 
 * [RFC 9110: Vary](https://datatracker.ietf.org/doc/html/rfc9110#field.vary)
 
-*** ** * ** ***
+
 
 *Originally published at [A Java Geek](https://blog.frankel.ch/vary-http-header) on May 5^th^, 2024*

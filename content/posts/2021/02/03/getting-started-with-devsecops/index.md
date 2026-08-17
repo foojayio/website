@@ -17,7 +17,7 @@ frozen: false
 
 *Hello and welcome to my first DevSecOps article! Here in Germany, it's winter right now, and the forests are quiet. The snow slows down everything and it's a beautiful time to move undisturbed through the woods.* *Here you can pursue your thoughts, and I started thinking about a subject that customers or participants at conferences ask me repeatedly.*
 
-*** ** * ** ***
+
 
 The question I am asked is almost always: "What are the quick wins or low hanging fruits if you want to deal more with the topic of security in software development? And I want you to answer this question right **now!**"
 > For the lazy ones, you can see it in a YouTube video as well, the low hanging fruits of DevSecOps:  

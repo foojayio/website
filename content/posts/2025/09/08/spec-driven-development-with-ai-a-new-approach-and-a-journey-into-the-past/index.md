@@ -93,7 +93,8 @@ A Real Example: System Use Case Specification {#h2-6-a-real-example-system-use-c
 
 Here's how a system use case looks in practice:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="raw" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group=""># Use Case: Create Events
+```
+# Use Case: Create Events
 **Use Case ID:** UC-EVENT-001  
 **Primary Actor:** Manager  
 **Goal:** Allow managers to create new events for their organization
@@ -113,7 +114,9 @@ Here's how a system use case looks in practice:
 ### Validation Rules
 - Title: Required, 3-200 characters
 - Start Date: Required, must be future date
-- End Date: Required, must be &gt;= start date</pre>
+- End Date: Required, must be >= start date
+```
+
 
 This level of detail gives AI tools everything they need to generate correct, complete implementations. Business stakeholders can understand the main flow, while developers get precise technical requirements.
 

@@ -32,47 +32,53 @@ Using Jakarta EE 9.1 {#h2-0-using-jakarta-ee-9-1}
 
 Just as with Jakarta EE 9, you can easily define all dependencies on Jakarta EE 9.1 for your web application by defining the `jakarta.jakartaee-web-api` artifact in your Maven pom file.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="xml" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&lt;project xmlns="http://maven.apache.org/POM/4.0.0"
+```xml
+<project xmlns="http://maven.apache.org/POM/4.0.0"
 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"&gt;
+xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
-   &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
-   &lt;groupId&gt;fish.payara.jakarta.ee9.start&lt;/groupId&gt;
-   &lt;artifactId&gt;hello&lt;/artifactId&gt;
-   &lt;version&gt;1.0&lt;/version&gt;
-   &lt;packaging&gt;war&lt;/packaging&gt;
-   &lt;dependencies&gt;
-      &lt;dependency&gt;
-         &lt;groupId&gt;jakarta.platform&lt;/groupId&gt;
-         &lt;artifactId&gt;jakarta.jakartaee-web-api&lt;/artifactId&gt;
-         &lt;version&gt;9.1.0&lt;/version&gt;
-         &lt;scope&gt;provided&lt;/scope&gt;
-      &lt;/dependency&gt;
-   &lt;/dependencies&gt;
+   <modelVersion>4.0.0</modelVersion>
+   <groupId>fish.payara.jakarta.ee9.start</groupId>
+   <artifactId>hello</artifactId>
+   <version>1.0</version>
+   <packaging>war</packaging>
+   <dependencies>
+      <dependency>
+         <groupId>jakarta.platform</groupId>
+         <artifactId>jakarta.jakartaee-web-api</artifactId>
+         <version>9.1.0</version>
+         <scope>provided</scope>
+      </dependency>
+   </dependencies>
 
-   &lt;build&gt;
-      &lt;finalName&gt;hello&lt;/finalName&gt;
-   &lt;/build&gt;
+   <build>
+      <finalName>hello</finalName>
+   </build>
 
-   &lt;properties&gt;
-      &lt;maven.compiler.source&gt;11&lt;/maven.compiler.source&gt;
-      &lt;maven.compiler.target&gt;11&lt;/maven.compiler.target&gt;
-      &lt;failOnMissingWebXml&gt;false&lt;/failOnMissingWebXml&gt;
-      &lt;project.build.sourceEncoding&gt;UTF-8&lt;/project.build.sourceEncoding&gt;
-   &lt;/properties&gt;
+   <properties>
+      <maven.compiler.source>11</maven.compiler.source>
+      <maven.compiler.target>11</maven.compiler.target>
+      <failOnMissingWebXml>false</failOnMissingWebXml>
+      <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+   </properties>
 
-&lt;/project&gt;</pre>
+</project>
+```
+
 
 If you are using Gradle as your build tool, you can define the version as:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">dependencies {
+```
+dependencies {
    providedCompile 'jakarta.platform:jakarta.jakartaee-web-api:9.1.0'
 }
 
 compileJava {
    targetCompatibility = '11'
    sourceCompatibility = '11'
-}</pre>
+}
+```
+
 
 All the API artifacts are still compiled against Java SE 8, so you can still use and compile your applications using JDK 8.
 

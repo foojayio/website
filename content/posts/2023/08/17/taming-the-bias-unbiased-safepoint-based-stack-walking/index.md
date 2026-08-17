@@ -65,19 +65,23 @@ This API builds upon the API defined in [jmethodIDs in Profiling: A Tale of Nigh
 
 But, in contrast to the other parts of the API, this new safepoint-based part only works when the previously defined conditions hold. This is not the case in OpenJ9, so I propose making the new feature optional. But how do profilers know whether an implementation supports an optional part of the API? By using the `ASGST_Capabilities`:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="cpp" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">// Implementations don't have to implement all methods,
+```cpp
+// Implementations don't have to implement all methods,
 // only the iterator related and those that match 
 // their capabilities
 enum ASGST_Capabilities {
   ASGST_REGISTER_QUEUE = 1, // everything safepoint queue related
   ASGST_MARK_FRAME     = 2  // frame marking related
-};</pre>
+};
+```
+
 
 Profilers can query the capability bit map by calling the `int ASGST_Capabilities()` and should use the signal handler-based approach whenever the capability bit `ASGST_REGISTER_QUEUE` is absent. `ASGST_MARK_FRAME` foreshadows a new feature based on stack watermarks, see [JEP 376](https://openjdk.org/jeps/376), which I cover in a follow-up blog post. Calling an unsupported API method is undefined.
 
 Now back to the actual API itself. The main two methods of the proposed API are `ASGST_RegisterQueue` and `ASGST_Enqueue`. You typically first register a queue for the current thread using `ASGST_RegisterQueue`, typically in a ThreadStart JVMTI event handler:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="cpp" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">typedef void (*ASGST_Handler)(ASGST_Iterator*,
+```cpp
+typedef void (*ASGST_Handler)(ASGST_Iterator*,
                               void* queue_arg,
                               void* arg);
 
@@ -94,15 +98,18 @@ Now back to the actual API itself. The main two methods of the proposed API are 
 //
 // Not signal safe, requires ASGST_REGISTER_QUEUE capability
 ASGST_Queue* ASGST_RegisterQueue(JNIEnv* env, int size, 
-  int options, ASGST_Handler fun, void* argument);</pre>
+  int options, ASGST_Handler fun, void* argument);
+```
+
 
 A queue has a fixed size and has a registered handler, which is called for every queue item in insertion order at every safepoint, after which the queue elements are removed. Be aware that you cannot obtain the top frames using the queue handler and cannot call any JVMTI methods, but also that you aren't bound to signal safe methods in the handler.
 
 The `ASGST_Enqueue` method obtains and enqueues the top frame into the passed queue, as well as triggering a thread-local handshake/safepoint:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="cpp" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">// Enqueue the processing of the current stack 
+```cpp
+// Enqueue the processing of the current stack 
 // at the end of the queue and return the kind 
-// (or error if &lt;= 0)
+// (or error if <= 0)
 // you have to deal with the top C and native frames 
 // yourself (but there is an option for this)
 //
@@ -117,11 +124,14 @@ The `ASGST_Enqueue` method obtains and enqueues the top frame into the passed qu
 // has to be stopped during the duration of this call
 // Requires ASGST_REGISTER_QUEUE capability
 int ASGST_Enqueue(ASGST_Queue* queue, void* ucontext, 
-  void* argument);</pre>
+  void* argument);
+```
+
 
 The passed `argument` is passed directly to the last parameter of the queue handler. Be aware of handling the case that the queue is full. Typically one falls back onto walking the stack in the signal handler or compressing the queue. The elements of a queue, including the arguments, can be obtained using the `ASGST_GetQueueElement` method:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="cpp" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">// Returns the nth element in the queue (from the front),
+```cpp
+// Returns the nth element in the queue (from the front),
 // 0 gives you the first/oldest element.
 // -1 gives you the youngest element, ..., -size the oldest.
 //
@@ -137,23 +147,29 @@ The passed `argument` is passed directly to the last parameter of the queue hand
 //
 // Signal safe
 ASGST_QueueElement* ASGST_GetQueueElement(ASGST_Queue* queue, 
-  int n);</pre>
+  int n);
+```
+
 
 The critical detail is that modifying the arg field is supported; this allows us to do queue compression: In the signal handler, we obtain the last element in the queue using the `ASGST_GetQueueElement` method and then get the currently enqueuable element using `ASGST_GetEnqueuableElement`. We can then check whether both elements are equal and then update the argument, omitting to enqueue the current `ucontext`.
 
 Another helper method is `ASGST_ResizeQueue` which can be used to set the queue size:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="cpp" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">// Trigger the resizing of the queue at end of the next safepoint
+```cpp
+// Trigger the resizing of the queue at end of the next safepoint
 // (or the current if currently processing one)
 //
 // Signal safe, but has to be called with a queue 
 // that belongs to the current thread
 // Requires ASGST_REGISTER_QUEUE capability
-void ASGST_ResizeQueue(ASGST_Queue* queue, int size);</pre>
+void ASGST_ResizeQueue(ASGST_Queue* queue, int size);
+```
+
 
 The current queue size and more can be obtained using `ASGST_QueueSizeInfo`:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="cpp" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">typedef struct {
+```cpp
+typedef struct {
   jint size; // size of the queue
   jint capacity; // capacity of the queue
   jint attempts; // attempts to enqueue since last safepoint end
@@ -164,7 +180,9 @@ The current queue size and more can be obtained using `ASGST_QueueSizeInfo`:
 // safepoint
 //
 // Signal safe, but only proper values in queues thread
-ASGST_QueueSizeInfo ASGST_GetQueueSizeInfo(ASGST_Queue* queue);</pre>
+ASGST_QueueSizeInfo ASGST_GetQueueSizeInfo(ASGST_Queue* queue);
+```
+
 
 This returns the defined size/capacity, the current number of elements, and the number of enqueue attempts, including unsuccessful ones. This can be used in combination with `ASGST_ResizeQueue` to dynamically adjust the size of these queues.
 
@@ -172,7 +190,8 @@ One might want to remove a queue from a thread; this can be done using the non-s
 
 Lastly, one might want to be triggered before and after a non-empty queue is processed:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="cpp" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">// Handler that is called at a safe point with enqueued samples
+```cpp
+// Handler that is called at a safe point with enqueued samples
 // before and after processing
 //
 // called with the queue, a frame iterator, and the OnQueue 
@@ -200,7 +219,9 @@ void ASGST_SetOnQueueProcessingStart(ASGST_Queue* queue,
 // Not signal safe, requires ASGST_REGISTER_QUEUE capability
 void ASGST_SetOnQueueProcessingEnd(ASGST_Queue* queue,
   int options, bool offerIterator, 
-  ASGST_OnQueueSafepointHandler end, void* arg);</pre>
+  ASGST_OnQueueSafepointHandler end, void* arg);
+```
+
 
 This should enable performance optimizations, enabling the profiler to walk the whole stack, e.g., only once per queue processing safepoint.
 
@@ -219,7 +240,8 @@ To use this new API, you have to include the [profile2.h](https://github.com/par
 
 Now to the significant changes to the version that walks the stack in the signal handler written for the previous blog post. First, we have to register a queue into every thread; we do this in the ThreadStart JVMTI event handler and store the result in a thread-local `queue` variable:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">thread_local ASGST_Queue* queue;
+```
+thread_local ASGST_Queue* queue;
 // ...
 void JNICALL
 OnThreadStart(jvmtiEnv *jvmti_env,
@@ -227,14 +249,17 @@ OnThreadStart(jvmtiEnv *jvmti_env,
             jthread thread) {
   // the queue is large, but aren't doing any  compression, 
   // so we need it
-  queue = ASGST_RegisterQueue(jni_env, 10'000, 0, &amp;asgstHandler, 
+  queue = ASGST_RegisterQueue(jni_env, 10'000, 0, &asgstHandler, 
     (void*)nullptr);
   // ...
-}</pre>
+}
+```
+
 
 We then have to enqueue the last Java frames into the `queue` in the signal handler:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="cpp" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">static void signalHandler(int signo, siginfo_t* siginfo, 
+```cpp
+static void signalHandler(int signo, siginfo_t* siginfo, 
  void* ucontext) {
   totalTraces++;
   // queue has not been initialized
@@ -251,34 +276,42 @@ We then have to enqueue the last Java frames into the `queue` in the signal hand
       queueFullTraces++;
     }
   }
-}</pre>
+}
+```
+
 
 We record the total traces, the failed traces, and the number of times the queue had been full. The enqueued frames are processed using the `asgstHandler` method at every safepoint. This method obtains the current trace and stores it directly in the flame graph, acquiring the lock to prevent data races:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="cpp" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">// we can acquire locks during safepoints
+```cpp
+// we can acquire locks during safepoints
 std::mutex nodeLock;
 Node node{"main"};
 
 void asgstHandler(ASGST_Iterator* iterator, void* queueArg, 
  void* arg) {
-  std::vector&lt;std::string&gt; names;
+  std::vector<std::string> names;
   ASGST_Frame frame;
   int count;
-  for (count = 0; ASGST_NextFrame(iterator, &amp;frame) == 1 &amp;&amp;
-         count &lt; MAX_DEPTH; count++) {
+  for (count = 0; ASGST_NextFrame(iterator, &frame) == 1 &&
+         count < MAX_DEPTH; count++) {
     names.push_back(methodToString(frame.method));
   }
   // lets use locks to deal with the concurrency
-  std::lock_guard&lt;std::mutex&gt; lock{nodeLock};
+  std::lock_guard<std::mutex> lock{nodeLock};
   node.addTrace(names);
-}</pre>
+}
+```
+
 
 That's all. I might write a blog post on compression in the future, as the queues tend to fill up in wall-clock mode for threads that wait in native.
 
 You can find the complete code on [GitHub](https://github.com/parttimenerd/writing-a-profiler/tree/iterative_safepoint_profiler); feel free to ask any yet unanswered questions. To use the profiler, just run it from the command line as before:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">java -agentpath:libSmallProfiler.so=output=flames.html \
-  -cp samples math.MathParser</pre>
+```bash
+java -agentpath:libSmallProfiler.so=output=flames.html \
+  -cp samples math.MathParser
+```
+
 
 This assumes that you use the [modified OpenJDK](https://github.com/parttimenerd/jdk/tree/asgst_iterator). [MathParser](https://github.com/parttimenerd/writing-a-profiler/blob/iterative_safepoint_profiler/samples/math/MathParser.java) is a demo program that generates and evaluates simple mathematical expressions. The resulting flame graph should look something like this:
 ![](https://mostlynerdless.de/wp-content/uploads/2023/08/Screenshot-2023-08-10-at-02.54.56-2000x931.png)

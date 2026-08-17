@@ -51,7 +51,8 @@ Let's write and deploy an application that monitors localhost and shows us when 
 
 This way you can continue coding in your IDE without spending a few minutes a day checking the logs for the *server started* text.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-highlight="12,25,32">package com.japplis.monitor;
+```java
+package com.japplis.monitor;
 
 import java.awt.*;
 import java.net.URI;
@@ -107,13 +108,13 @@ public class MonitorSite extends JApplet {
         answerLabel = new JLabel();
         checkNowButton = new JButton("Check now");
         checkNowButton.setAlignmentX(LEFT_ALIGNMENT);
-        checkNowButton.addActionListener(ae -&gt; startStopMonitor());
+        checkNowButton.addActionListener(ae -> startStopMonitor());
         statusPanel.add(questionLabel);
         statusPanel.add(answerLabel);
         infoPanel.add(statusPanel);
         infoPanel.add(checkNowButton);
         openSiteButton = new JButton("Open site");
-        openSiteButton.addActionListener(ae -&gt; {
+        openSiteButton.addActionListener(ae -> {
             try {
                 Desktop.getDesktop().browse(URI.create(server));
             } catch (Exception ex) {
@@ -132,7 +133,7 @@ public class MonitorSite extends JApplet {
             checkNowButton.setText("Check now");
             answerLabel.setText("");
         } else {
-            checkSiteTimer = new Timer(10_000, ae -&gt; monitor());
+            checkSiteTimer = new Timer(10_000, ae -> monitor());
             checkSiteTimer.setInitialDelay(0);
             checkSiteTimer.start();
             checkNowButton.setText("Stop");
@@ -142,7 +143,7 @@ public class MonitorSite extends JApplet {
     private void monitor() {
         long startRequest = System.currentTimeMillis();
         httpClient.sendAsync(httpRequest, BodyHandlers.discarding())
-            .thenApply(response -&gt; {
+            .thenApply(response -> {
                 if (response.statusCode() == 200) {
                     responseOk(startRequest);
                 } else {
@@ -150,7 +151,7 @@ public class MonitorSite extends JApplet {
                 }
                 return response;
             })
-            .exceptionally(ex -&gt; {
+            .exceptionally(ex -> {
                 responseFailed();
                 return null;
             });
@@ -171,7 +172,7 @@ public class MonitorSite extends JApplet {
 
     @Override
     public void stop() {
-        if (checkSiteTimer != null &amp;&amp; checkSiteTimer.isRunning()) {
+        if (checkSiteTimer != null && checkSiteTimer.isRunning()) {
             checkSiteTimer.stop();
         }
     }
@@ -190,9 +191,11 @@ public class MonitorSite extends JApplet {
     public final static void main(String[] args) {
         MonitorSite applet = new MonitorSite();
         applet.isAppletMode = false;
-        SwingUtilities.invokeLater(() -&gt; applet.packAndShow("Monitor Site"));
+        SwingUtilities.invokeLater(() -> applet.packAndShow("Monitor Site"));
     }
-}</pre>
+}
+```
+
 
 ### Let's analyze the code {#h3-2-let-s-analyze-the-code}
 
@@ -221,15 +224,18 @@ To **run** the application in your IDE, install and start Applet Runner, use the
 
 It is also possible to specify another class file or to add external libraries or to pass parameters to the applet. For this you need to create an HTML file with an [\<applet\>](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/applet) tag or a JNLP file with an [\<applet-desc\>](https://docs.oracle.com/javase/tutorial/deployment/deploymentInDepth/embeddingJNLPFileInWebPage.html) tag.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="html" data-enlighter-linenumbers="false">&lt;html&gt;
-&lt;body&gt;
-&lt;applet codebase="." code="com.japplis.monitor.MonitorSite.class" archives="" width="300" height="100"&gt;
-  &lt;param name="host" value="www.foojay-example.io"&gt;
-  &lt;param name="port" value="80"&gt;
-  &lt;p&gt;This applet won't work in the browser, &lt;a href="https://www.japplis.com/applet-runner/"&gt;use Applet Runner&lt;/a&gt;.&lt;/p&gt;
-&lt;/applet&gt;
-&lt;/body&gt;
-&lt;/html&gt;</pre>
+```html
+<html>
+<body>
+<applet codebase="." code="com.japplis.monitor.MonitorSite.class" archives="" width="300" height="100">
+  <param name="host" value="www.foojay-example.io">
+  <param name="port" value="80">
+  <p>This applet won't work in the browser, <a href="https://www.japplis.com/applet-runner/">use Applet Runner</a>.</p>
+</applet>
+</body>
+</html>
+```
+
 
 <img decoding="async" class="aligncenter size-medium wp-image-66522" src="eclipse-monitor-700x405.png" alt="Monitoring applet running in Eclipse IDE" width="700" height="405">
 

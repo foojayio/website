@@ -56,7 +56,8 @@ Or, we can also convert between them, such as for debugging binary messages goin
 
 This example walks through a simple Plain Old Java Object (POJO) example.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">public class LongConversionExampleA {
+```
+public class LongConversionExampleA {
    public static class House {
        long owner;
        public void owner(CharSequence owner) {
@@ -74,13 +75,16 @@ This example walks through a simple Plain Old Java Object (POJO) example.
        house.owner("Bill");
        System.out.println(house);
    }
-}</pre>
+}
+```
+
 
 We start the process by storing a String object as a long. A Base64LongConverter is used here to parse the provided CharSequence and return the results as a long.
 
 The example code can be seen in [LongConversionExampleA](https://github.com/OpenHFT/Chronicle-Wire/blob/develop/src/test/java/net/openhft/chronicle/wire/LongConversionExampleA.java "LongConversionExampleA").
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">public class LongConversionExampleA {
+```
+public class LongConversionExampleA {
    public static class House {
        long owner;
        public void owner(CharSequence owner) {
@@ -98,11 +102,16 @@ The example code can be seen in [LongConversionExampleA](https://github.com/Open
        house.owner("Bill");
        System.out.println(house);
    }
-}</pre>
+}
+```
+
 
 This then prints out the house owner's name as a number, as it has been stored as a long:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">House{owner=670118}</pre>
+```
+House{owner=670118}
+```
+
 
 #### Printing YAML Example
 
@@ -116,7 +125,8 @@ Demonstrated in the code below is `.addAlias` this enables referring to House ra
 
 [LongConversionExampleB](https://github.com/OpenHFT/Chronicle-Wire/blob/develop/src/test/java/net/openhft/chronicle/wire/LongConversionExampleB.java "LongConversionExampleB") illustrates how to print out the output as YAML:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">public class LongConversionExampleB {
+```
+public class LongConversionExampleB {
    static {
        ClassAliasPool.CLASS_ALIASES.addAlias(LongConversionExampleB.House.class);
    }
@@ -133,29 +143,43 @@ Demonstrated in the code below is `.addAlias` this enables referring to House ra
        house.owner("Bill");
        System.out.println(house);
    }
-}</pre>
+}
+```
+
 
 When running this, instead of printing a number, the following is printed:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">!House {
+```
+!House {
     Owner: Bill
-}</pre>
+}
+```
+
 
 #### Printing JSON Example
 
 If we want the output to instead be JSON, we can remove the following line from LongConversionExampleB:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">System.out.println(house);</pre>
+```
+System.out.println(house);
+```
+
 
 And replace it with Chronicle-Wire, as this is a more light weight alternative:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">Wire wire = WireType.JSON.apply(Bytes.allocateElasticOnHeap());
+```
+Wire wire = WireType.JSON.apply(Bytes.allocateElasticOnHeap());
 wire.getValueOut().object(house);
-System.out.println(wire);</pre>
+System.out.println(wire);
+```
+
 
 This outputs the following:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">{"owner": "Bill"}</pre>
+```
+{"owner": "Bill"}
+```
+
 
 Now why is this helpful? Why can we not just store this originally as a String rather than a long?
 
@@ -169,7 +193,10 @@ Typically when we talk about a byte, a byte can represent one of 256 different c
 
 Yet, rather than being able to represent one of 256 characters, because we used Base64LongConverter we are saying that the 8-bit byte can only represent one of 64 characters:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">.ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+</pre>
+```
+.ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+
+```
+
 
 By limiting the number of characters that can be represented in a byte, we are able to compress more characters into a long.
 
@@ -183,8 +210,11 @@ While the example above works well for storing a small number of characters, how
 
 This is where we can make use of @FieldGroup from [Chronicle Bytes](https://github.com/OpenHFT/Chronicle-Bytes "Chronicle Bytes"):
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">import net.openhft.chronicle.bytes.Bytes;
-import net.openhft.chronicle.bytes.FieldGroup;</pre>
+```
+import net.openhft.chronicle.bytes.Bytes;
+import net.openhft.chronicle.bytes.FieldGroup;
+```
+
 
 In[LongConversionExampleC](https://github.com/OpenHFT/Chronicle-Wire/blob/develop/src/test/java/net/openhft/chronicle/wire/LongConversionExampleC.java " LongConversionExampleC") below, we walk through how to store several longs into a FieldGroup.
 
@@ -192,7 +222,8 @@ In this example, @FieldGroup can store up to 5 longs, so up to 40 characters.
 
 A benefit of storing this into primitive longs through Chronicle's serialisation libraries can be seen in [this article](https://dzone.com/articles/how-to-get-c-speed-in-java-serialisation "this article").
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">public static class House extends SelfDescribingMarshallable {
+```
+public static class House extends SelfDescribingMarshallable {
    @FieldGroup("address")
    // 5 longs, each at 8 bytes = 40 bytes, so we can store a String with up to 39 ISO-8859 characters (as the first byte contains the length)
    private long text4a, text4b, text4c, text4d, text4e;
@@ -201,16 +232,19 @@ A benefit of storing this into primitive longs through Chronicle's serialisation
    public void address(CharSequence owner) {
        address.append(owner);
    }
-}</pre>
+}
+```
+
 
 The example continues below to illustrate how to firstly create a byte\[\] to store bytes, write the house object to it and to then read them.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">public static void main(String[] args) {
+```
+public static void main(String[] args) {
    House house = new House();
    house.address("82 St John Street, Clerkenwell, London");
 
    // creates a buffer to store bytes
-   final Bytes&lt;?&gt; t = allocateElasticOnHeap();
+   final Bytes<?> t = allocateElasticOnHeap();
 
    // the encoding format
    final Wire wire = BINARY.apply(t);
@@ -227,7 +261,9 @@ The example continues below to illustrate how to firstly create a byte\[\] to st
 
    // prints the value of text4
    System.out.println(object.address);
-}</pre>
+}
+```
+
 
 As we are using toHexString( ), this example prints out our data as seen in figure 5. This is a standard way of producing a hex dump.
 
@@ -246,11 +282,17 @@ If we see look in the blue section, which is the 'ASCI IOS-8859', we see that th
 
 As seen in the examples above, we have used:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">@LongConversion(Base64LongConverter.class)</pre>
+```
+@LongConversion(Base64LongConverter.class)
+```
+
 
 It should be noted that this can be simplified to just:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">@Base64</pre>
+```
+@Base64
+```
+
 
 An example of this being implemented can be seen in the snippet below, whereby the section in green is replaced by an alias (in red):
 
@@ -262,7 +304,8 @@ It is easy to create your own Base64 annoatation that contains your own selectio
 
 Below is how we create the @Base64 which makes use of the SymbolsLongConverter.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">package net.openhft.chronicle.wire.converter;
+```
+package net.openhft.chronicle.wire.converter;
 import net.openhft.chronicle.wire.*;
 import java.lang.annotation.*;
 
@@ -272,13 +315,16 @@ import java.lang.annotation.*;
 public @interface Base64 {
    LongConverter INSTANCE = new SymbolsLongConverter(
                   ".ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789_");
-}</pre>
+}
+```
+
 
 Adding a Timestamp:
 
 The example below demonstrates how to create a timestamp every time you create an event.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">public class NanoTimeTest {
+```
+public class NanoTimeTest {
    @Test
    public void yaml() {
        Wire wire = Wire.newYamlWireOnHeap();
@@ -308,7 +354,9 @@ The example below demonstrates how to create a timestamp every time you create a
            this.start = start;
        }
    }
-}</pre>
+}
+```
+
 
 #### JLBH Benchmark Performance
 

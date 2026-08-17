@@ -64,15 +64,16 @@ With everything up and running, Bob creates a new feature branch and begins work
 
 By sheer luck, someone has already written a Spring Component for communicating with the mock API for another module. Bob's job is simple: inject the component into the PetController and use it to retrieve the data whenever a pet is added. The component is very straightforward and uses the OKHttp library to implement a basic REST call to get the data in JSON form.  
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">        @WithSpan
+```java
+        @WithSpan
 	public VaccinnationRecord[] AllVaccines() throws JSONException, IOException {
 
 		var vaccineListString = MakeHttpCall(VACCINES_RECORDS_URL);
 		JSONArray jArr = new JSONArray(vaccineListString);
 		var vaccinnationRecords =
-			new ArrayList&lt;VaccinnationRecord&gt;();
+			new ArrayList<VaccinnationRecord>();
 
-		for (int i = 0; i &lt; jArr.length(); i++) {
+		for (int i = 0; i < jArr.length(); i++) {
 
 			VaccinnationRecord record = parseVaccinationRecord(jArr.getJSONObject(i));
 			vaccinnationRecords.add(record);
@@ -92,14 +93,17 @@ By sheer luck, someone has already written a Spring Component for communicating 
 		JSONObject vaccineJson = new JSONObject(vaccineListString);
 		return parseVaccinationRecord(vaccineJson);
 
-	} </pre>
+	}
+```
+
 
 Updating the Pet Model {#4ff4}
 ------------------------------
 
 Next, in order to save the vaccination data and not retrieve it each time, the model and DB structure have to be updated. This involves a lot of boilerplate really, but necessary in order to save the vaccination info for each pet. Bob duly adds a new table, models the relationship in his classes, and also updates the DDL scripts.{#3d47}
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@Entity
+```java
+@Entity
 @Table(name = "pet_vaccines")
 public class PetVaccine extends BaseEntity {
 
@@ -121,14 +125,17 @@ public class PetVaccine extends BaseEntity {
 		this.date = date;
 	}
 
-}</pre>
+}
+```
+
 
 Adding a Domain Service to retrieve and update the new Pet vaccination date field {#6618}
 -----------------------------------------------------------------------------------------
 
 Following best practices, Bob creates a simple domain service that will be injected into the PetController. The new service orchestrates the domain logic for retrieving the vaccine record for the new pet from the external API and updating the model with the latest date. Unfortunately, this is where Bob also makes several mistakes, some of which are related to the leaky abstraction of the facade which obscures the expensive HTTP calls. Bob also doesn't notice much of the logic is redundant.{#193e}
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@Component
+```java
+@Component
 public class PetVaccinationStatusService {
 
 	@Autowired
@@ -157,38 +164,43 @@ public class PetVaccinationStatusService {
 		}
 
 	}
-}</pre>
+}
+```
+
 
 #### Update the View Template
 
 Finally, Bob adds a new field that will indicate whether a pet vaccine is overdue.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="html" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">..
+```html
+..
 
-&lt;table class="table table-striped" th:object="${owner}"&gt;
-      &lt;tr&gt;
-        &lt;th&gt;Name&lt;/th&gt;
-        &lt;td&gt;&lt;b th:text="*{firstName + ' ' + lastName}"&gt;&lt;/b&gt;&lt;/td&gt;
-      &lt;/tr&gt;
-      &lt;tr&gt;
-        &lt;th&gt;Address&lt;/th&gt;
-        &lt;td th:text="*{address}"&gt;&lt;/td&gt;
-      &lt;/tr&gt;
-      &lt;tr&gt;
-        &lt;th&gt;City&lt;/th&gt;
-        &lt;td th:text="*{city}"&gt;&lt;/td&gt;
-      &lt;/tr&gt;
-      &lt;tr&gt;
-        &lt;th&gt;Telephone&lt;/th&gt;
-        &lt;td th:text="*{telephone}"&gt;&lt;/td&gt;
-      &lt;/tr&gt;
+<table class="table table-striped" th:object="${owner}">
+      <tr>
+        <th>Name</th>
+        <td><b th:text="*{firstName + ' ' + lastName}"></b></td>
+      </tr>
+      <tr>
+        <th>Address</th>
+        <td th:text="*{address}"></td>
+      </tr>
+      <tr>
+        <th>City</th>
+        <td th:text="*{city}"></td>
+      </tr>
+      <tr>
+        <th>Telephone</th>
+        <td th:text="*{telephone}"></td>
+      </tr>
 
-      &lt;tr&gt;
-        &lt;th&gt;Needs Vaccine&lt;/th&gt;
-        &lt;td th:text="*{isVaccineExpired()}"&gt;&lt;/td&gt;
-      &lt;/tr&gt;
-    &lt;/table&gt;
-...</pre>
+      <tr>
+        <th>Needs Vaccine</th>
+        <td th:text="*{isVaccineExpired()}"></td>
+      </tr>
+    </table>
+...
+```
+
 
 That's it! The changes are ready. Bob even writes some tests and watches them turn into a happy shade of green. Pleased with the quick progress and feeling confident about the code that runs without incident when testing out locally, Bob turns to the collected runtime data to see what it can reveal about his changes. He decides to [stretch the Definition of Done](https://digma.ai/blog/youre-never-done-by-definition/) and spends additional effort in examining the data related to his changes.
 ![](image-20.png)
@@ -200,7 +212,10 @@ First, it's important to refer to some sort of baseline. There are two API opera
 
 Looking at some common Grafana dashboards, it was surprising to see there are no default graphs for tracking response times for APIs. Perhaps because most dashboards are Ops-related, focusing on CPU/RAM and heap sizes rather than everyday developer insights. Luckily, it's easy to configure such a dashboard using the Actuator metrics. We can create such a graph focusing on the API for creating new pets, using the following query:{#aae4}
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">http_server_requests_seconds{uri="/owners/{ownerId}/pets/new", quantile="0.5", method="POST", outcome="REDIRECTION"} != 0</pre>
+```
+http_server_requests_seconds{uri="/owners/{ownerId}/pets/new", quantile="0.5", method="POST", outcome="REDIRECTION"} != 0
+```
+
 
 We can then examine the graph before and after the code change.{#4117}
 

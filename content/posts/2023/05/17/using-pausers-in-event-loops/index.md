@@ -64,12 +64,15 @@ The general strategy is to busy-wait for a short period before incrementally bac
 
 Different strategies (Pauser Modes) are available depending on the task, with the canonical way of using a Pauser being:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">while (running) {
+```
+while (running) {
        if (pollForWork())  // pollForWork returns true if work was done
            pauser.reset(); // minimal or no pause path
        else
            pauser.pause(); // incrementally back off
-    }</pre>
+    }
+```
+
 
 ### Pauser Modes {#h3-3-pauser-modes}
 

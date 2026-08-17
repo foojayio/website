@@ -36,12 +36,15 @@ So, what *is* the root cause, you ask?
 
 The root cause here is that by default, the [Maven Compiler Plugin](https://maven.apache.org/plugins/maven-compiler-plugin/) will use the Java compiler that comes with the Java runtime that Maven runs in. You can see which one that is by inspecting `mvn -version`:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">$ mvn -version
+```
+$ mvn -version
 Apache Maven 4.0.0-alpha-1-SNAPSHOT (9e19b57c720d226b0b30992535819f700a665d14)
 Maven home: /usr/local/Cellar/maven-snapshot/4.0.0-alpha-1-SNAPSHOT_117/libexec
 Java version: 11.0.10, vendor: AdoptOpenJDK, runtime: /Library/Java/JavaVirtualMachines/adoptopenjdk-11.jdk/Contents/Home
 Default locale: en_GB, platform encoding: UTF-8
-OS name: "mac os x", version: "10.15.7", arch: "x86_64", family: "mac"</pre>
+OS name: "mac os x", version: "10.15.7", arch: "x86_64", family: "mac"
+```
+
 
 In this example, Maven uses a Java 11 Development Kit.
 
@@ -66,42 +69,48 @@ So, how do we employ this?
 
 First, we use the **toolchain** goal of the [Apache Maven Toolchains Plugin](https://maven.apache.org/plugins/maven-toolchains-plugin/) to check that the toolchains requirements for a project can be satisfied using the configured toolchains:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="xml">&lt;project&gt;
-  &lt;!-- omitted for brevity --&gt;
-  &lt;build&gt;
-    &lt;plugins&gt;
-      &lt;plugin&gt;
-        &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;
-        &lt;artifactId&gt;maven-toolchains-plugin&lt;/artifactId&gt;
-        &lt;version&gt;3.0.0&lt;/version&gt;
-        &lt;configuration&gt;
-          &lt;toolchains&gt;
-            &lt;!-- this project needs a JDK toolchain, version 17 --&gt;
-            &lt;jdk&gt;
-              &lt;version&gt;17&lt;/version&gt;
-            &lt;/jdk&gt;
-          &lt;/toolchains&gt;
-        &lt;/configuration&gt;
-        &lt;executions&gt;
-          &lt;execution&gt;
-            &lt;goals&gt;
-              &lt;goal&gt;toolchain&lt;/goal&gt;
-            &lt;/goals&gt;
-            &lt;!-- the toolchain goal binds to the validate phase automatically --&gt;
-          &lt;/execution&gt;
-        &lt;/executions&gt;
-      &lt;/plugin&gt;
-    &lt;/plugins&gt;
-  &lt;/build&gt;
-&lt;/project&gt;</pre>
+```xml
+<project>
+  <!-- omitted for brevity -->
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-toolchains-plugin</artifactId>
+        <version>3.0.0</version>
+        <configuration>
+          <toolchains>
+            <!-- this project needs a JDK toolchain, version 17 -->
+            <jdk>
+              <version>17</version>
+            </jdk>
+          </toolchains>
+        </configuration>
+        <executions>
+          <execution>
+            <goals>
+              <goal>toolchain</goal>
+            </goals>
+            <!-- the toolchain goal binds to the validate phase automatically -->
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+</project>
+```
+
 
 The above snippet says: we specify that the project needs a toolchain of type JDK with version 17. If we try to build the project again, the build still fails, but the message is different:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">[INFO] --- maven-toolchains-plugin:3.0.0:toolchain (default) @ sample-project ---
+```
+[INFO] --- maven-toolchains-plugin:3.0.0:toolchain (default) @ sample-project ---
 [INFO] Required toolchain: jdk [ version='17' ]
 [ERROR] No toolchain found for type jdk
 [ERROR] Cannot find matching toolchain definitions for the following toolchain types:
-jdk [ version='17' ]</pre>
+jdk [ version='17' ]
+```
+
 
 That's a clear message: Maven cannot build this project as there is no JDK toolchain with version 17 installed. Well - there is, but we didn't tell Maven where to find it.
 
@@ -112,18 +121,21 @@ We can do that using the [Toolchain Configuration](https://maven.apache.org/ref/
 
 To declare the JDK 17 toolchain that lives on my machine, I should write:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="xml">&lt;?xml version="1.0" encoding="UTF8"?&gt;
-&lt;toolchains&gt;
-  &lt;toolchain&gt;
-    &lt;type&gt;jdk&lt;/type&gt;
-    &lt;provides&gt;
-      &lt;version&gt;17&lt;/version&gt;
-    &lt;/provides&gt;
-    &lt;configuration&gt;
-      &lt;jdkHome&gt;/Library/Java/JavaVirtualMachines/adoptopenjdk-17.jdk/Contents/Home&lt;/jdkHome&gt;
-    &lt;/configuration&gt;
-  &lt;/toolchain&gt;
-&lt;/toolchains&gt;</pre>
+```xml
+<?xml version="1.0" encoding="UTF8"?>
+<toolchains>
+  <toolchain>
+    <type>jdk</type>
+    <provides>
+      <version>17</version>
+    </provides>
+    <configuration>
+      <jdkHome>/Library/Java/JavaVirtualMachines/adoptopenjdk-17.jdk/Contents/Home</jdkHome>
+    </configuration>
+  </toolchain>
+</toolchains>
+```
+
 
 As you can see, this file contains the full path to a Java installation.
 

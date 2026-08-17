@@ -81,7 +81,14 @@
 
   {{/* Interactive widgets migrated from WordPress — loaded only on the pages
        that use them (flags set by the conversion scripts). */}}
-  {{ if .Params.enlighterjs }}{{ partial "enlighterjs.html" . }}{{ end }}
+  {{/* Loaded whenever the RENDERED page actually contains an EnlighterJS block,
+       rather than relying on an `enlighterjs: true` frontmatter flag. Code now
+       reaches the page as a plain ```fence turned into EnlighterJS markup by
+       layouts/_default/_markup/render-codeblock.html, so a contributor writing
+       a fenced block gets highlighting without knowing the flag exists — and
+       can't ship a post where the code silently isn't highlighted because they
+       forgot it. The flag is still honoured for any page that sets it. */}}
+  {{ if or .Params.enlighterjs (strings.Contains .Content "EnlighterJSRAW") }}{{ partial "enlighterjs.html" . }}{{ end }}
   {{ if .Params.jdoodle }}{{ partial "jdoodle.html" . }}{{ end }}
 </body>
 </html>

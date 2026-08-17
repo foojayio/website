@@ -64,7 +64,8 @@ A programmatic view is a Java class that extends jakarta.faces.view.facelets.Fac
 
 The code below shows a Greet.java Facelet that is mapped to the /greet.xhtml path.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@View("/greet.xhtml")
+```java
+@View("/greet.xhtml")
 @ApplicationScoped
 public class Greet extends Facelet {
 
@@ -78,11 +79,11 @@ public class Greet extends Facelet {
       var rootChildren = root.getChildren();
 
       var doctype = new UIOutput();
-      doctype.setValue("&lt;!DOCTYPE html&gt;");
+      doctype.setValue("<!DOCTYPE html>");
       rootChildren.add(doctype);
 
       var htmlTag = new UIOutput();
-      htmlTag.setValue("&lt;html xmlns=\"http://www.w3.org/1999/xhtml\"&gt;");
+      htmlTag.setValue("<html xmlns=\"http://www.w3.org/1999/xhtml\">");
       rootChildren.add(htmlTag);
 
       HtmlBody body = components.create(HtmlBody.COMPONENT_TYPE);
@@ -98,7 +99,7 @@ public class Greet extends Facelet {
       HtmlCommandButton actionButton = components.create(HtmlCommandButton.COMPONENT_TYPE);
       actionButton.setId("button");
       actionButton.addActionListener(
-            e -&gt; message.setValue("Hello, World! Welcome to Faces 4.0 on Jakarta EE 10"));
+            e -> message.setValue("Hello, World! Welcome to Faces 4.0 on Jakarta EE 10"));
       actionButton.setValue("Greet");
 
       form.getChildren().add(actionButton);
@@ -106,7 +107,7 @@ public class Greet extends Facelet {
       root.getChildren().add(message);
 
       htmlTag = new UIOutput();
-      htmlTag.setValue("&lt;/html&gt;");
+      htmlTag.setValue("</html>");
       rootChildren.add(htmlTag);
    }
 
@@ -118,11 +119,13 @@ public class Greet extends Facelet {
       }
 
       @SuppressWarnings("unchecked")
-      &lt;T&gt; T create(String componentType) {
+      <T> T create(String componentType) {
          return (T) facesContext.getApplication().createComponent(facesContext, componentType, null);
       }
    }
-}</pre>
+}
+```
+
 
 The class is annotated @View("/greet.xhtml"), meaning the created component should be hosted/accessible at that path.
 
@@ -162,10 +165,13 @@ The same url can be accessed in the old way still via /index.xhtml as shown belo
 
 This extensionless mapping feature can be enabled in the web.xml file via context param as shown below.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="xml" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group=""> &lt;context-param&gt;
-&nbsp;&nbsp; &nbsp; &lt;param-name&gt;jakarta.faces.AUTOMATIC_EXTENSIONLESS_MAPPING&lt;/param-name&gt;
-&nbsp;&nbsp; &nbsp; &lt;param-value&gt;true&lt;/param-value&gt;
-&nbsp;&lt;/context-param&gt;</pre>
+```xml
+ <context-param>
+     <param-name>jakarta.faces.AUTOMATIC_EXTENSIONLESS_MAPPING</param-name>
+     <param-value>true</param-value>
+ </context-param>
+```
+
 
 In my test run, I found that extensionless mapping didn't seem to work with programmatic UIs. This is something you should test for yourself and keep in mind.
 
@@ -181,17 +187,23 @@ As long as the generated value is the same, the bean instance will be kept acros
 
 This feature can be enabled through the context param as shown below.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="xml" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&lt;context-param&gt;
-&nbsp; &nbsp; &lt;param-name&gt;jakarta.faces.CLIENT_WINDOW_MODE&lt;/param-name&gt;
-&nbsp; &nbsp; &lt;param-value&gt;url&lt;/param-value&gt;
-&lt;/context-param&gt;</pre>
+```xml
+<context-param>
+    <param-name>jakarta.faces.CLIENT_WINDOW_MODE</param-name>
+    <param-value>url</param-value>
+</context-param>
+```
+
 
 The number of client window scoped bean instances per HTTP session can be set through the context param as shown below.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="xml" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&lt;context-param&gt;
-&nbsp; &nbsp; &lt;param-name&gt;jakarta.faces.NUMBER_OF_CLIENT_WINDOWS&lt;/param-name&gt;
-&nbsp; &nbsp; &lt;param-value&gt;20&lt;/param-value&gt;
-&lt;/context-param&gt;</pre>
+```xml
+<context-param>
+    <param-name>jakarta.faces.NUMBER_OF_CLIENT_WINDOWS</param-name>
+    <param-value>20</param-value>
+</context-param>
+```
+
 
 Multiple File Upload {#h2-3-multiple-file-upload}
 -------------------------------------------------
@@ -202,24 +214,27 @@ Another new attribute, accept, helps to restrict the file types that the browser
 
 The file-upload.xhmtl file below shows a simple example of multi-file upload using these new attributes.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="html" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+```html
+<?xml version="1.0" encoding="UTF-8"?>
 
-&lt;!DOCTYPE html&gt;
-&lt;html lang="en" xmlns:h="jakarta.faces.html"&gt;
-&lt;h:head&gt;
-&nbsp; &nbsp; &lt;title&gt;Upload files&lt;/title&gt;
-&lt;/h:head&gt;
-&lt;h:body&gt;
-&nbsp; &nbsp; &lt;h2&gt;Faces multi-file upload&lt;/h2&gt;
-&nbsp; &nbsp; &lt;h:form id="uploadPanel" enctype="multipart/form-data"&gt;
-&nbsp; &nbsp; &nbsp; &nbsp; &lt;h:panelGrid columns="2" styleClass="default"&gt;
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;h:inputFile &nbsp;id="inputFiles" &nbsp;multiple="true" value="#{fileUploadBean.files}" accept="image/jpeg,image/png,image/gif" required="true"/&gt;
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;h:commandButton value="Upload"
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;action="#{fileUploadBean.uploadFile}"/&gt;
-&nbsp; &nbsp; &nbsp; &nbsp; &lt;/h:panelGrid&gt;
-&nbsp; &nbsp; &lt;/h:form&gt;
-&lt;/h:body&gt;
-&lt;/html&gt;</pre>
+<!DOCTYPE html>
+<html lang="en" xmlns:h="jakarta.faces.html">
+<h:head>
+    <title>Upload files</title>
+</h:head>
+<h:body>
+    <h2>Faces multi-file upload</h2>
+    <h:form id="uploadPanel" enctype="multipart/form-data">
+        <h:panelGrid columns="2" styleClass="default">
+            <h:inputFile  id="inputFiles"  multiple="true" value="#{fileUploadBean.files}" accept="image/jpeg,image/png,image/gif" required="true"/>
+            <h:commandButton value="Upload"
+                             action="#{fileUploadBean.uploadFile}"/>
+        </h:panelGrid>
+    </h:form>
+</h:body>
+</html>
+```
+
 
 The above facelet file renders as shown below.
 
@@ -229,23 +244,26 @@ The backing bean of this page is shown below. Faces will conveniently skip empty
 
 You still will have to however, validate that the file types selected meet business requirements.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@Named
+```java
+@Named
 @Model
 public class FileUploadBean {
-&nbsp; &nbsp; private List&lt;Part&gt; files;
-&nbsp; &nbsp; private static Logger logger = Logger.getLogger(FileUploadBean.class.getName());
+    private List<Part> files;
+    private static Logger logger = Logger.getLogger(FileUploadBean.class.getName());
 
-&nbsp; &nbsp; public String uploadFile() {
-&nbsp; &nbsp; &nbsp; &nbsp; for (final var part : files) {
+    public String uploadFile() {
+        for (final var part : files) {
 
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; //Process files, carry out custom validations etc etc.
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; logger.log(Level.INFO, () -&gt; String.format("File name: %s, Content-type: %s, File size: %d", part.getSubmittedFileName(),
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; part.getContentType(), part.getSize()));
-&nbsp; &nbsp; &nbsp; &nbsp; }
-&nbsp; &nbsp; &nbsp; &nbsp; return "upload-success.xhtml?faces-redirect=true";
-&nbsp; &nbsp; }
+            //Process files, carry out custom validations etc etc.
+            logger.log(Level.INFO, () -> String.format("File name: %s, Content-type: %s, File size: %d", part.getSubmittedFileName(),
+                    part.getContentType(), part.getSize()));
+        }
+        return "upload-success.xhtml?faces-redirect=true";
+    }
 
-}</pre>
+}
+```
+
 
 The files list will contain the uploaded files for the bean to validate and consequently upload/store in the database or however the business case demands.
 

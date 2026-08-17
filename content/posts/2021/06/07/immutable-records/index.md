@@ -41,11 +41,12 @@ In this section, we will go through a table explaining how records are made immu
 
 Record components are final, which means we can not change the record components once assigned. Although we can change fields of the record component, there is no restriction on that, it makes the record shallowly immutable. Let's see this with an example.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">public class EmployeeTest {
+```
+public class EmployeeTest {
 
     public static void main(String[] args) {
 
-        List&lt;Integer&gt; integerList = new ArrayList&lt;&gt;();
+        List<Integer> integerList = new ArrayList<>();
         integerList.add(1);
         IntegerListRecord integerListRecord = new IntegerListRecord(integerList);
         System.out.println(integerListRecord.getListSize());
@@ -57,11 +58,13 @@ Record components are final, which means we can not change the record components
 
 }
 
-record IntegerListRecord(List&lt;Integer&gt; integerList) {
+record IntegerListRecord(List<Integer> integerList) {
     int getListSize() {
         return integerList.size();
     }
-}</pre>
+}
+```
+
 
 In this example, we created a list of integers(integerList), added one element into it, and initialized the record class with this. Calling method getListSize of record class results into 1. Now we add one more element in integerList and calling getListSize results into 2. Here we did not change the record component (integerList) but updated the fields of the record component, which does not have any restriction. This is the reason we call the record shallowly immutable.
 

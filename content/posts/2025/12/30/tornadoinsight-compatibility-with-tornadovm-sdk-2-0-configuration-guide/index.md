@@ -27,7 +27,7 @@ frozen: false
 
 This blog updates the previously published **TornadoInsight** configuration [**++guidelines++**](https://www.tornadovm.org/post/introducing-tornadoinsight-unleashing-the-power-of-tornadovm-in-intellij-idea) and explains how to configure the required environment variable to ensure that TornadoInsight correctly detects the TornadoVM SDK when IntelliJ IDEA is launched from a graphical environment.
 
-*** ** * ** ***
+
 
 **Overview** {#6bbq84970}
 -------------------------
@@ -38,7 +38,7 @@ TornadoInsight requires access to a compatible Java Development Kit (JDK) and th
 
 Since version [++v1.4.0++](https://github.com/beehive-lab/tornado-insight/releases/tag/v1.4.0), TornadoInsight can also use the **JDK configured directly in IntelliJ IDEA** via **Project Structure**. This means that, in many cases, users no longer need to configure the Java SDK in the plugins settings.{#welj420814}
 
-*** ** * ** ***
+
 
 JDK Configuration (Recommended) {#kj3lj29712}
 ---------------------------------------------
@@ -61,7 +61,7 @@ When a compatible JDK (e.g., JDK 21) is configured here, TornadoInsight will aut
  <img decoding="async" src="https://plugins.jetbrains.com/files/23309/screenshot_bd38c017-be77-49d6-a5b0-f9ca54069cd9" alt="" style="width:738px;height:auto">
 </figure>
 
-*** ** * ** ***
+
 
 TornadoVM SDK Configuration (Recommended) {#keesm31250}
 -------------------------------------------------------
@@ -79,9 +79,12 @@ For this reason, **TORNADOVM_HOME** must be configured using OS-appropriate mech
 
 To define the TornadoVM SDK path across different Operating Systems, you can use the following guidelines which will enable your IntelliJ session to recognize the **TORNADOVM_HOME** environment variable as described below.{#iju4t56513}
 
-<pre class="EnlighterJSRAW" data-enlighter-language="raw" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">TORNADOVM_HOME=/absolute/path/to/tornado-sdk</pre>
+```
+TORNADOVM_HOME=/absolute/path/to/tornado-sdk
+```
 
-*** ** * ** ***
+
+
 
 ### **macOS** {#i80s15288}
 
@@ -91,11 +94,14 @@ On macOS, GUI applications do **not** read \~/.zshrc or \~/.zprofile.{#g8z335290
 
 Run the following command in a terminal:{#ip1ei5300}
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">launchctl setenv TORNADOVM_HOME /absolute/path/to/tornado-sdk</pre>
+```bash
+launchctl setenv TORNADOVM_HOME /absolute/path/to/tornado-sdk
+```
+
 
 Then **quit IntelliJ IDEA** (Cmd + Q) and relaunch it.
 
-*** ** * ** ***
+
 
 ### Linux {#xbi0p5638}
 
@@ -112,11 +118,14 @@ This method works reliably on modern Linux distributions using systemd.{#b9wg156
 
 {#ds8xx5653}
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">mkdir -p ~/.config/environment.d
+```bash
+mkdir -p ~/.config/environment.d
 vim ~/.config/environment.d/tornado.conf
-TORNADOVM_HOME=/absolute/path/to/tornado-sdk</pre>
+TORNADOVM_HOME=/absolute/path/to/tornado-sdk
+```
 
-*** ** * ** ***
+
+
 
 ### **Windows** {#x9em06931}
 
@@ -129,7 +138,7 @@ TORNADOVM_HOME=/absolute/path/to/tornado-sdk</pre>
 
 {#d8w276933}
 
-*** ** * ** ***
+
 
 **Verification** {#ja8uq7253}
 -----------------------------
@@ -138,15 +147,21 @@ Before starting IntelliJ IDEA, verify that the variable is set:{#hgeqi7255}
 
 ### **macOS / Linux** {#k9yq97257}
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">launchctl getenv TORNADOVM_HOME</pre>
+```bash
+launchctl getenv TORNADOVM_HOME
+```
+
 
 **Linux (systemd check)**
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">systemctl --user show-environment | grep TORNADOVM_HOME</pre>
+```bash
+systemctl --user show-environment | grep TORNADOVM_HOME
+```
+
 
 If the variable is present, TornadoInsight will automatically detect the TornadoVM SDK at startup.
 
-*** ** * ** ***
+
 
 **Summary** {#dschd9476}
 ------------------------

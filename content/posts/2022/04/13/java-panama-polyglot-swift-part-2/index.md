@@ -62,11 +62,15 @@ After installing Xcode you should have the swift REPL and compiler at the comman
 
 In a terminal window type `swift`
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ swift</pre>
+```
+$ swift
+```
+
 
 You should see something like the following:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="swift" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">Apple Swift version 5.6 (swiftlang-5.6.0.323.62 clang-1316.0.20.8)
+```swift
+Apple Swift version 5.6 (swiftlang-5.6.0.323.62 clang-1316.0.20.8)
 Target: x86_64-apple-macosx12.0
 
 Welcome to Swift!
@@ -81,31 +85,41 @@ Subcommands:
 
   Use `swift --help` for descriptions of available options and flags.
 
-  Use `swift help &lt;subcommand&gt;` for more information about a subcommand.
+  Use `swift help <subcommand>` for more information about a subcommand.
 
 Welcome to Apple Swift version 5.6 (swiftlang-5.6.0.323.62 clang-1316.0.20.8).
 Type :help for assistance.
-  1&gt;  </pre>
+  1>
+```
+
 
 Above you'll notice the Swift **REPL** which is similar to Java's [JShell](https://foojay.io/today/learn-javafx-with-jshell-in-60-seconds/) (REPL) where you can create variables and functions to be output to the console. This is a great way to test out simple code snippets.
 
 To create a simple **Hello World** type the following to assign a string to a variable:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">var myString = "Hello, World!"</pre>
+```
+var myString = "Hello, World!"
+```
+
 
 After hitting enter the following is the output:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">1&gt; var myString = "Hello, World!"
+```
+1> var myString = "Hello, World!"
 myString: String = "Hello, World!"
-</pre>
+```
+
 
 Most, REPLs will display the variable and the value that is assigned to let you know it can be used later.
 
 Next, you'll want to output the variable `myString` using Swift's `print()` function.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">2&gt;  print(myString)
+```
+2>  print(myString)
 Hello, World!
-3&gt; </pre>
+3>
+```
+
 
 Assuming you've got the hang of it, let's create a simple Swift function.
 
@@ -118,18 +132,24 @@ Let's create a simple function called `authenticateUser()` that returns a `boole
 
 Enter the code below:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">3&gt; func authenticateUser() -&gt; Bool  { 
+```
+3> func authenticateUser() -> Bool  { 
 4.     print("authenticated") 
 5.     return true 
 6. }
-7&gt; </pre>
+7>
+```
+
 
 Now, to execute the function enter the following:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">7&gt; authenticateUser()
+```
+7> authenticateUser()
 authenticated
 $R0: Bool = true
-8&gt;  </pre>
+8>
+```
+
 
 Above, you'll notice the output text of **authenticated** and subsequent a result of the call `$R0` and it's value. The variable `$R0` can also be reused in later statements in the REPL.
 
@@ -142,11 +162,14 @@ Now that you are familiar with how to create a function lets create a native lib
 
 Create a file named `myauth.swift` with the following code:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="swift" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@_cdecl("authenticate_user")
-public func authenticateUser() -&gt; Bool  {
+```swift
+@_cdecl("authenticate_user")
+public func authenticateUser() -> Bool  {
    print("authenticated")
    return true
-}</pre>
+}
+```
+
 
 While this is a very simple function to be invoked, keep in mind that when using other Swift specific data types, they'll need to conform to the C ABI. e.g., A Swift string must be converted to a C string. In the case of conversion please see the link <https://developer.apple.com/documentation/foundation/nsstring/1408489-cstring>
 
@@ -154,7 +177,10 @@ This will of course be seen as an instance of a `MemorySegment` which contains t
 
 Okay, back to the example code. Let's compile the Swift code from the terminal by entering the following:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="shell" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">swiftc myauth.swift -emit-library -o libmyauth.dylib</pre>
+```bash
+swiftc myauth.swift -emit-library -o libmyauth.dylib
+```
+
 
 After the compilation the output should be a file named `libmyauth.dylib` in the local directory.
 
@@ -172,7 +198,8 @@ Example {#h2-7-example}
 
 Let's create a Java application that will use the foreign access APIs to load the native library and invoke the function. Create a file called `MyAuthMain.java` with the following code:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">import jdk.incubator.foreign.*;
+```java
+import jdk.incubator.foreign.*;
 
 import java.lang.invoke.MethodHandle;
 
@@ -204,23 +231,31 @@ public class MyAuthMain {
            throwable.printStackTrace();
        }
     }
-}</pre>
+}
+```
+
 
 After saving the file now type the following to run the Java application (`MyAuthMain.java`):
 
-<pre class="EnlighterJSRAW" data-enlighter-language="shell" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group=""># Run java class
+```bash
+# Run java class
 java -cp .:classes \
    --enable-native-access=ALL-UNNAMED \
    --add-modules jdk.incubator.foreign \
-   MyAuthMain.java</pre>
+   MyAuthMain.java
+```
+
 
 Success!   
 
 The output is shown below:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="shell" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">Identify Yourself!
+```bash
+Identify Yourself!
 authenticated
-You may enter!</pre>
+You may enter!
+```
+
 
 For extra credit check out my example of using MacOS' Touch ID using your fingerprint on GitHub [https://github.com/carldea/panama4newbies](https://github.com/carldea/panama4newbies/tree/main/macos-touchID) (sub project `touchid`).
 
@@ -243,8 +278,11 @@ The following is the naming convention for the MacOS operating system:
 
 The code example using Java 18's Panama (FFI) APIs you don't need to use the `jextract` tool. Here you'll notice the code creating a method handle (`MethodHandle`) instance by obtaining the native symbol (C function) to be invoked. Shown below is the `FunctionDescriptor` of the signature for the `authenticate_user()` C function that ultimately calls the Swift function `authenticateUser()`.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">// (return type boolean)
-FunctionDescriptor.of(ValueLayout.JAVA_BOOLEAN)</pre>
+```java
+// (return type boolean)
+FunctionDescriptor.of(ValueLayout.JAVA_BOOLEAN)
+```
+
 
 Conclusion {#h2-10-conclusion}
 ------------------------------

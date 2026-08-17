@@ -35,39 +35,45 @@ On Reddit, user pmarschall mentioned they were already separating between the co
 
 Usage is very straightforward. Just add the following snippet in the `plugins` section:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="xml">&lt;plugin&gt;
-    &lt;groupId&gt;org.codehaus.mojo&lt;/groupId&gt;
-    &lt;artifactId&gt;flatten-maven-plugin&lt;/artifactId&gt;
-    &lt;version&gt;1.2.5&lt;/version&gt;
-    &lt;configuration&gt;
-    &lt;/configuration&gt;
-    &lt;executions&gt;
-        &lt;execution&gt;
-            &lt;id&gt;flatten&lt;/id&gt;
-            &lt;phase&gt;process-resources&lt;/phase&gt;
-            &lt;goals&gt;
-                &lt;goal&gt;flatten&lt;/goal&gt;
-            &lt;/goals&gt;
-        &lt;/execution&gt;
-        &lt;execution&gt;
-            &lt;id&gt;flatten.clean&lt;/id&gt;
-            &lt;phase&gt;clean&lt;/phase&gt;
-            &lt;goals&gt;
-                &lt;goal&gt;clean&lt;/goal&gt;
-            &lt;/goals&gt;
-        &lt;/execution&gt;
-    &lt;/executions&gt;
-&lt;/plugin&gt;</pre>
+```xml
+<plugin>
+    <groupId>org.codehaus.mojo</groupId>
+    <artifactId>flatten-maven-plugin</artifactId>
+    <version>1.2.5</version>
+    <configuration>
+    </configuration>
+    <executions>
+        <execution>
+            <id>flatten</id>
+            <phase>process-resources</phase>
+            <goals>
+                <goal>flatten</goal>
+            </goals>
+        </execution>
+        <execution>
+            <id>flatten.clean</id>
+            <phase>clean</phase>
+            <goals>
+                <goal>clean</goal>
+            </goals>
+        </execution>
+    </executions>
+</plugin>
+```
+
 
 Now, if you execute the Maven `process-resources` phase, the plugin will create a shortened version of the POM, named `.flattened-pom.xml`. Compared to the initial POM, the flattened POM has only three sections in addition to the coordinates: `licenses`, `dependencies`, and `repositories`. Additionally, Maven has resolved all variables. If you run the `install` phase and then check your local Maven repository, you'll notice the POM matches the flattened POM, not the main one. If you want to generate the flattened POM but not replace the main one, use `-DupdatePomFile=false`.
 
 By default, the plugin keeps only the `licenses`, `dependencies`, and `repositories` sections. You can configure which sections you keep and don't via the POM. For example, the plugin removes `name`, but you can keep it easily if needed. Just add the relevant configuration:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="xml">&lt;configuration&gt;
-    &lt;pomElements&gt;
-        &lt;name&gt;keep&lt;/name&gt;
-    &lt;/pomElements&gt;
-&lt;/configuration&gt;</pre>
+```xml
+<configuration>
+    <pomElements>
+        <name>keep</name>
+    </pomElements>
+</configuration>
+```
+
 
 The above method gives you the most flexibility. However, developers of the plugins have already thought about which configuration bundles make sense and offer them out-of-the-box. Here's an excerpt from the documentation that describes them:
 

@@ -44,8 +44,11 @@ Pi4J V2 uses `ServiceLoader` to detect which modules are available to communicat
 
 Code extract from [pi4j-core/src/.../runtime/impl/DefaultRuntime.java](https://github.com/Pi4J/pi4j-v2/blob/develop/pi4j-core/src/main/java/com/pi4j/runtime/impl/DefaultRuntime.java#L224):
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">// detect available Pi4J Plugins by scanning the classpath looking for plugin instances
-var plugins = ServiceLoader.load(Plugin.class);</pre>
+```
+// detect available Pi4J Plugins by scanning the classpath looking for plugin instances
+var plugins = ServiceLoader.load(Plugin.class);
+```
+
 
 The problems with the current approach {#h2-2-the-problems-with-the-current-approach}
 -------------------------------------------------------------------------------------
@@ -69,7 +72,8 @@ Use of modules in a Pi4J V2 project {#h2-3-use-of-modules-in-a-pi4j-v2-project}
 
 The Maven projects that are created as example applications and are part of the ["Getting Started" section](https://pi4j.com/getting-started/minimal-example-application/), can be built with `mvn clean package` and create a ready-to-run application in the `target\distribution`directory. All the modules which are defined in the project, are included here.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ cd target/distribution
+```
+$ cd target/distribution
 $ ls -l
 total 644
 -rw-r--r-- 1 pi pi 364456 Jun 19 10:04 pi4j-core-2.0-SNAPSHOT.jar
@@ -80,7 +84,9 @@ total 644
 -rwxr-xr-x 1 pi pi    101 Jun 19 10:04 run.sh
 -rw-r--r-- 1 pi pi  52173 Jun 19 10:04 slf4j-api-2.0.0-alpha0.jar
 -rw-r--r-- 1 pi pi  15372 Jun 19 10:04 slf4j-simple-2.0.0-alpha0.jar
-$ sudo ./run.sh</pre>
+$ sudo ./run.sh
+```
+
 
 Please join the discussion {#h2-4-please-join-the-discussion}
 -------------------------------------------------------------

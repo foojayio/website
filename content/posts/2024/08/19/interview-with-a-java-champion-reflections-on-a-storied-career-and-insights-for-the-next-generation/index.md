@@ -38,7 +38,7 @@ Name: Ben Evans**
 * **📖** [**GitHub**](https://github.com/kittylyst)
 * **📚** [**Books**](https://www.amazon.com/stores/Benjamin-J-Evans/author/B07DGL1TM4)
 
-*** ** * ** ***
+
 
 #### **Bazlur: Please tell us a bit about your professional background and how you first became involved in the Java community. What motivates you to remain committed to it?**
 
@@ -49,7 +49,7 @@ Even then, my real engagement with the Java community didn't begin until 2009. I
 
 When I first got involved with the LJC, I was also dabbling in open-source .NET code, but the warmth and interest from the LJC were unparalleled. I'm quite happy with the path I chose.
 
-*** ** * ** ***
+
 
 #### **Bazlur: How has the Java ecosystem evolved over the years since you first started using it, and how has your involvement with the London Java Community shaped your perspective on these changes? Additionally, what do you think are some key challenges and opportunities for the Java community in the coming years?**
 
@@ -68,7 +68,7 @@ In my opinion, the three most significant trends in software over the last 15 ye
 
 I see no evidence that any of these trends will slow down.
 
-*** ** * ** ***
+
 
 #### **Bazlur: For seasoned developers, the strengths of the Java ecosystem are well understood. However, for newcomers to the industry, these advantages may not be immediately evident, leading them to gravitate towards trendier and seemingly easier languages like Python and JavaScript. What do you have to say to them?**
 
@@ -83,7 +83,7 @@ There's also an antipattern I refer to as "Easy Cases are Easy." I've yet to fin
 
 As developers gain experience, they start valuing the robust aspects of Java over the superficial simplicity found elsewhere.
 
-*** ** * ** ***
+
 
 #### **Bazlur: I often get asked by beginners in Java programming about how much they need to learn to become contributing developers and consider themselves industry-ready, even for a very junior developer position. Could you provide some guidelines or advice for these newcomers?**
 
@@ -98,7 +98,7 @@ Java is not a beginner's language; it is for those ready to level up. The right 
 
 In terms of technical skills---learn Git. Being proficient with Git is one way a junior developer can distinguish themselves. Learn it properly and on the command line.
 
-*** ** * ** ***
+
 
 #### **Bazlur: You've given a great holistic overview, especially with the stress on the people aspect of software development and the importance of Git. Could you specify a bit more about the foundational concepts and skills, particularly in Java, that a beginner should aim to understand before considering themselves industry-ready?**
 
@@ -109,7 +109,7 @@ The core Java language isn't particularly difficult to learn---e.g., it has only
 
 We must ask ourselves, what do we really mean by "industry-ready"? Is it a familiarity with the framework de jour, or a willingness to learn, to get stuck in, and to rediscover the most important truths of the world we inhabit?
 
-*** ** * ** ***
+
 
 #### **Bazlur: Could you describe your process for writing a technical book?**
 
@@ -119,7 +119,7 @@ We must ask ourselves, what do we really mean by "industry-ready"? Is it a famil
 * **Java in a Nutshell:** O'Reilly approached me to take over writing duties for this established title and update it from Java 5 to Java 8. This has only ever been a process of revision.
 * **Optimizing Java:** O'Reilly approached me with the idea of writing a Java performance title. The project took over a year from concept to contract and kickoff.
 
-*** ** * ** ***
+
 
 #### **Bazlur: How do you start writing a technical book, and what steps do you follow until completion?**
 
@@ -131,7 +131,7 @@ I now write in Asciidoc, check it into Git, and render development builds to PDF
 
 Over time, significant changes to the book may occur---chapters may split, merge, or be dropped altogether.
 
-*** ** * ** ***
+
 
 #### **Bazlur: How does the process of revising an existing work differ from writing a completely new book?**
 
@@ -142,7 +142,7 @@ For instance, when I updated "Nutshell" from Java 5 to Java 8, major changes wer
 
 This takes more time than one might think, but it's absolutely essential.
 
-*** ** * ** ***
+
 
 #### **Bazlur: Can you describe any challenges you faced while writing or revising your books?**
 
@@ -156,7 +156,7 @@ We've renamed it "Optimizing Cloud-Native Java" and shifted the focus to aspects
 
 I'm actively working on it now, and it should be out later in 2024.
 
-*** ** * ** ***
+
 
 ### **Conclusion** {#h3-1-conclusion}
 

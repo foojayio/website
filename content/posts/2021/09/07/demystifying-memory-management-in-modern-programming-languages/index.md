@@ -26,7 +26,7 @@ I hope the series would give you some insights into what is happening under the 
 
 Learning about memory management will also help us to write more performant code as the way we write code also has an impact on memory management regardless of the automatic memory management technique used by the language.
 
-*** ** * ** ***
+
 
 ### Definitions {#h3-0-definitions}
 
@@ -122,7 +122,7 @@ It is used by [**Rust**](https://doc.rust-lang.org/book/ch04-01-what-is-ownershi
 
 ![Ownership in Rust](https://thepracticaldev.s3.amazonaws.com/i/cxs080wnnykflkmsfo9p.png)
 
-*** ** * ** ***
+
 
 We have just scratched the surface of memory management.
 
@@ -145,7 +145,7 @@ You can read the remaining parts of this series via the links below:
 * [en.wikipedia.org/wiki/Automatic-Reference-Counting](https://en.wikipedia.org/wiki/Automatic_Reference_Counting)
 * [blog.sessionstack.com](https://blog.sessionstack.com/how-javascript-works-memory-management-how-to-handle-4-common-memory-leaks-3f28b94cfbec)
 
-*** ** * ** ***
+
 
 If you like this article, please leave a like or a comment.
 

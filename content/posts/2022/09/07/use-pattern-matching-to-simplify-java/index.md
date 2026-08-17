@@ -58,18 +58,24 @@ Let's look at how we use the *instanceof* operator. Because Java is object-orien
 
 Often, we are faced with a situation where we're provided with a reference, but we are unsure of its specific type. We can test the reference to see if it is a given type using the *instanceof*operator. Here's a simple example:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">if (o instanceof String) {
+```java
+if (o instanceof String) {
   String s = (String)o;
   System.out.printin("Length = " + s.length());
-}</pre>
+}
+```
+
 
 Having determined that the reference *o* is of type *String* , we must define a new local variable of type *String* and assign to it the value of *o* using an explicit cast. Pattern matching for *instanceof*, a permanent feature since JDK 16, eliminates this unnecessary extra boilerplate code.
 
 The code now looks like this:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">if (o instanceof String s) {
+```java
+if (o instanceof String s) {
   System.out.printin("Length = " + s.length());
-}</pre>
+}
+```
+
 
 Here, the pattern predicate is *whether o is an instanceof String* and the pattern variable is *s*, which is assigned for us by the compiler.
 
@@ -79,14 +85,20 @@ Taking the example above, the scope of *s* is only valid inside the true branch 
 
 **1 --** If you invert the test like this, the variable *s* will have scope until the end of the block containing the if statement:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">if (!(o instanceof String s))  return;</pre>
+```java
+if (!(o instanceof String s))  return;
+```
+
 
 **2 --** This allows the reuse of the same variable name, like this:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">if (o instanceof Float n) {
+```java
+if (o instanceof Float n) {
   } else if (o instanceof Integer n) {
   } else if (o instanceof Short n) {
-}</pre>
+}
+```
+
 
 Switch Statements and Expressions in JDK 18 {#h-switch-statements-and-expressions-in-jdk-18}
 --------------------------------------------------------------------------------------------
@@ -95,22 +107,27 @@ The next use of pattern matching in Java is in switch. Until JDK 17, even with t
 
 For example:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">void typeTester(Object o) {
+```java
+void typeTester(Object o) {
     switch (o) {
-        case null -&gt; System.out.printIn("Null type");
-        case String s -&gt; System.out.printIn("String length: " + s.length());
-        case Color c -&gt; System.out.printIn("Color with RGB: " + c.getRGB();
-        case int[] ia -&gt; System.out.printIn("Array of ints, length" + ia.length);
-        default -&gt; System.out.printIn(o.toString());
+        case null -> System.out.printIn("Null type");
+        case String s -> System.out.printIn("String length: " + s.length());
+        case Color c -> System.out.printIn("Color with RGB: " + c.getRGB();
+        case int[] ia -> System.out.printIn("Array of ints, length" + ia.length);
+        default -> System.out.printIn(o.toString());
     }
 }
-</pre>
+```
+
 
 There are several things to understand here.
 
 Both switch statements and switch expressions can now include an explicit null case. This is useful to eliminate the need for a potential explicit test before the switch. To maintain backwards compatibility, if a null case is not included, the compiler will insert one as the first that throws a *NullPointerException*. Since a null is always a null, there is no need for a pattern variable. It is also possible to include null with the default case:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">null, default -&gt; System.out.printIn("Invalid type");</pre>
+```java
+null, default -> System.out.printIn("Invalid type");
+```
+
 
 For the *String* and *Color* type cases, the pattern predicate matches on those types and assigns the reference to the specified pattern variable if there is a match. The scope of the pattern variables is only in the relevant case block
 
@@ -120,10 +137,13 @@ When using pattern matching for switch (either in a statement or expression), th
 
 Let's take this switch, for example.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">switch (o) {
-  case integer i -&gt; System.out.printIn("Integer");
-  case Byte b -&gt; System.out.printIn("Byte");
-}</pre>
+```java
+switch (o) {
+  case integer i -> System.out.printIn("Integer");
+  case Byte b -> System.out.printIn("Byte");
+}
+```
+
 
 In this case, if *o* is of type Float, there is no case to handle it. We could have simply passed over the switch, but that could lead to hard-to-find bugs and is not a good design.
 
@@ -131,18 +151,24 @@ The obvious way to resolve this is to include a default case that matches agains
 
 JDK 15 introduced another new language construct, sealed classes. Here we define a simple sealed type.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">Public sealed class Shape permits Triangle, Square, Pentagon {...}</pre>
+```java
+Public sealed class Shape permits Triangle, Square, Pentagon {...}
+```
+
 
 We could use this in a switch like this:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">void typeTester(Shape shape) {
+```java
+void typeTester(Shape shape) {
   switch (shape) {
-    case Triangle t -&gt; System.out.println("It's a triangle");
-    case Square s -&gt; System.out.println("It's a square");
-    case Pentagon p -&gt; System.out.println("It's a pentagon");
-    case Shape s -&gt; System.out.println("It's a shape");
+    case Triangle t -> System.out.println("It's a triangle");
+    case Square s -> System.out.println("It's a square");
+    case Pentagon p -> System.out.println("It's a pentagon");
+    case Shape s -> System.out.println("It's a shape");
   }
-}</pre>
+}
+```
+
 
 Since Shape can only have subclasses of Triangle, Square and Pentagon, we have covered all possibilities in the switch, and it is exhaustive (this is also referred to as completeness).
 
@@ -150,15 +176,18 @@ The order of the patterns is also significant. If we were to make the case for S
 
 Pattern matching for switch also includes guarded patterns. In this case, we can add a test to our pattern. Using the above example:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">void typeTester(Shape shape) {
+```java
+void typeTester(Shape shape) {
   switch (shape) {
-    case Triangle t &amp;&amp; t.size() &lt; 25 -&gt; System.out.println("Small triangle");
-    case Triangle t -&gt; System.out.println("Big triangle");
-    case Square s -&gt; System.out.println("It's a square");
-    case Pentagon p -&gt; System.out.println("It's a pentagon");
-    case Shape s -&gt; System.out.println("It's a shape");
+    case Triangle t && t.size() < 25 -> System.out.println("Small triangle");
+    case Triangle t -> System.out.println("Big triangle");
+    case Square s -> System.out.println("It's a square");
+    case Pentagon p -> System.out.println("It's a pentagon");
+    case Shape s -> System.out.println("It's a shape");
   }
-}</pre>
+}
+```
+
 
 The first case for Triangle now includes an additional test (guard) to determine if its size is less than 25. For the switch to remain exhaustive, we must also have a case for Triangle without a guard to handle triangles of size 25 or greater.
 

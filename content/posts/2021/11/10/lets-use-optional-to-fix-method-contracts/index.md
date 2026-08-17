@@ -25,29 +25,38 @@ We have been dealing with such violations all the time. We invoke a method with 
 
 Now the question is, how do we define such a contract in a method signature? Well, that's where Optional comes into play. Set your return type as Optional. Optional is a mystery box, a wrapping paper: it may or may not contain the value. When we specify that in a method signature, we assume that the box might be empty. Let's see an example:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public static Optional&lt;Book&gt; findBookByName(String name) {
+```java
+public static Optional<Book> findBookByName(String name) {
   return books.stream()
-          .filter(book -&gt; book.title().equalsIgnoreCase(name))
+          .filter(book -> book.title().equalsIgnoreCase(name))
           .findAny();
-}</pre>
+}
+```
+
 
 The method above specified Optional as a return type. It may return the book that I'm looking for or may not. I'm aware of this, and I can deal with it when I invoke it. For example:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">var bookOpt = findBookByName("Java Programming");
+```java
+var bookOpt = findBookByName("Java Programming");
 if (bookOpt.isPresent()) {
     var book = bookOpt.get();
     var releasedYear = book.releasedYear();
     System.out.println("Java Programming was published in " + releasedYear);
 } else {
     System.out.println("Book was not found");
-}</pre>
+}
+```
+
 
 Or we can do the same thing with the functional construct, e.g:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">findBookByName("Java Programming")
+```java
+findBookByName("Java Programming")
 .map(Book::releasedYear)
 .ifPresentOrElse((releasedYear)
-        -&gt; System.out.println("Java Programming was published in " + releasedYear),
-() -&gt; System.out.println("Book was not found"));</pre>
+        -> System.out.println("Java Programming was published in " + releasedYear),
+() -> System.out.println("Book was not found"));
+```
+
 
 The bottom line is, we should fix our method contract and use optional rather than returning null.

@@ -40,20 +40,32 @@ In an age where machine learning techniques are required on a daily basis, it is
 
 One could be to generate a record-specific sequence. The output represents strings with specific restrictions, an example is SQL statement. The input may be a specific time or number that requires manipulation and transformation before the final statement is created (Example 1.).
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">File: Jep477Main.java</pre>
+```
+File: Jep477Main.java
+```
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">void main()  {
+
+```
+void main()  {
     var statement  = template("one", 1);
     println(statement);
 }
 String template(String name, int value) {
     return String.format("record name:%s, value:%d", name, value);
-}</pre>
+}
+```
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">Command: $java --enable-preview Jep477Main.java</pre>
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">Output:
-record name:one, value:1</pre>
+```
+Command: $java --enable-preview Jep477Main.java
+```
+
+
+```
+Output:
+record name:one, value:1
+```
+
 
 **Example 1.** : Java allows direct execution without having to worry about imports for the *java.base* module and traditional I/O operations like *printnl(..)*
 
@@ -61,77 +73,122 @@ In fact, such use of Java is very useful as it helps to preserve the already cre
 
 This could come in even more handy when the logic couldn't be kept exactly inside just one file for readability and separation of concerns (JEP-458\[5\]). The JEP-477\[1\] allows developers to use a style similar to rapid prototyping to quickly validate an idea. A nice example could be to use a stream of numbers applying creational design patterns (*SampleFactory*) when processing multiple intermediate operations and splitting the result into chunks of output data using build-in gatherers (JEP-473\[6\], Example 2.).
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">File: Jep477Main.java</pre>
+```
+File: Jep477Main.java
+```
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">void main() {
+
+```
+void main() {
     var list = IntStream.range(0, 10).boxed()
-        .map(i -&gt; SampleFactory.createSample(i))
+        .map(i -> SampleFactory.createSample(i))
         .gather(Gatherers.windowFixed(3))
         .collect(Collectors.toList());
     println("list:" + list);
-}</pre>
+}
+```
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">File: Sample.java</pre>
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">record Sample(String name, int value){}</pre>
+```
+File: Sample.java
+```
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">File: SampleFactory.java</pre>
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">public class SampleFactory{
+```
+record Sample(String name, int value){}
+```
+
+
+```
+File: SampleFactory.java
+```
+
+
+```
+public class SampleFactory{
     static Sample createSample(int number){
         return switch (number){
-            case int i when i % 3 == 0 -&gt; new Sample("one", 42);
-            case int i when i % 2 == 0 -&gt; new Sample("two", 22);
-            default -&gt; new Sample("", -1);
+            case int i when i % 3 == 0 -> new Sample("one", 42);
+            case int i when i % 2 == 0 -> new Sample("two", 22);
+            default -> new Sample("", -1);
         };
     }
-}</pre>
+}
+```
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">Command: $  java --enable-preview Jep477Main.java</pre>
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">Output:
+```
+Command: $  java --enable-preview Jep477Main.java
+```
+
+
+```
+Output:
 list:[[[Sample[name=one, value=42], Sample[name=, value=-1], Sample[name=two, value=22]], [Sample[name=one, value=42], Sample[name=two, value=22], Sample[name=, value=-1]]], [[Sample[name=one, value=42], Sample[name=, value=-1], Sample[name=two, value=22]], [Sample[name=one, value=42]]]]
-</pre>
+```
+
 
 **Example 2.**: Java platform allows to execute program considering multiple files present inside the folder
 
 Although it sounds great, there are some limitations, one of which can be considered the definition of a package private class inside the *SampleFactory.java* file or other related files, which will throw a class loader exception(Example 3.). Hopefully this can be overcome in the next iteration.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">File: SampleFactory.java</pre>
+```
+File: SampleFactory.java
+```
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">record Sample(String name, int value){}
+
+```
+record Sample(String name, int value){}
 public class SampleFactory{
    static Sample createSample(int number)
-</pre>
+```
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">Command: $ java --enable-preview Jep477Main.java</pre>
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">Output:
+```
+Command: $ java --enable-preview Jep477Main.java
+```
+
+
+```
+Output:
 Exception in thread "main" java.lang.NoClassDefFoundError: Sample
         at java.base/java.lang.Class.getDeclaredMethods0(Native Method)
         at java.base/java.lang.Class.privateGetDeclaredMethods(Class.java:3650)
 ...
-</pre>
+```
+
 
 Example 3.: The definition of the *Sample record* is located in the *SampleFactory.java* file
 
 Despite such limitations, the ability to use Java is also very useful for such cases as mind context switch is not required. The following example demonstrates the power of JEP-477 by reading and analyzing data provided by a given text file. The content of the text file can also include log records that need to be manipulated in a certain way in order to extract the required information (Example 4.)
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">File: Jep477Main.java</pre>
+```
+File: Jep477Main.java
+```
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">void main() throws IOException {
+
+```
+void main() throws IOException {
    ...
    var fileContentString = Files.readString(Path.of("text.txt"));
    var fileContentAsSet = Arrays.stream(fileContentString.split(","))
   .collect(Collectors.toSet());
    ...
    println("fileContentAsSet:" + fileContentAsSet);
-}</pre>
+}
+```
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">Command:$ java --enable-preview Jep477Main.java</pre>
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">Output: 
-fileContentAsSet:[1, 2, 3]</pre>
+```
+Command:$ java --enable-preview Jep477Main.java
+```
+
+
+```
+Output: 
+fileContentAsSet:[1, 2, 3]
+```
+
 
 **Example 4.**: Reading and analyzing files is possible without the need to import additional classes as java.base module is already imported by default
 

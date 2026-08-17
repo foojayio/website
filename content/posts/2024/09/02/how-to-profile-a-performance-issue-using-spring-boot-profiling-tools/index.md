@@ -172,7 +172,8 @@ This setup includes a sample Spring Boot application with an inefficient query. 
 
 Let's assume we have an Product entity.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">@Entity
+```
+@Entity
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -180,11 +181,14 @@ public class Product {
     private String name;
     private int sales;
     // Getters and Setters
-}</pre>
+}
+```
+
 
 Create a repository interface with a method including a query.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">package com.example.demo.service;
+```
+package com.example.demo.service;
 import com.example.demo.entity.Product;
 import com.example.demo.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -195,14 +199,17 @@ public class ProductService {
     @Autowired
     private ProductRepository productRepository;
     @WithSpan
-    public List&lt;Product&gt; getBestSellingProducts() {
+    public List<Product> getBestSellingProducts() {
         return productRepository.findBestSellingProducts();
     }
-}</pre>
+}
+```
+
 
 Create a controller to handle HTTP requests.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">package com.example.demo.controller;
+```
+package com.example.demo.controller;
 import com.example.demo.entity.Product;
 import com.example.demo.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -215,10 +222,12 @@ public class ProductController {
     private ProductService productService;
     @Observed
     @GetMapping("/best-selling")
-    public List&lt;Product&gt; getBestSellingProducts() {
+    public List<Product> getBestSellingProducts() {
         return productService.getBestSellingProducts();
     }
-}</pre>
+}
+```
+
 
 Run your Spring Boot application and test the endpoints. You can use a tool like Postman or simply your web browser to send GET requests to:
 

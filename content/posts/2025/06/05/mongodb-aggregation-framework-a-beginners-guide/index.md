@@ -37,15 +37,18 @@ The MongoDB Aggregation Framework works like a pipeline---a series of stages whe
 
 Before diving into MongoDB, here's a simple example of a pipeline in Java:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">List&lt;String&gt; names = Arrays.*asList*("Alice", "Aloisio",  "alice", "andre", "Ricardo", "Jose", "Maria");
+```
+List<String> names = Arrays.*asList*("Alice", "Aloisio",  "alice", "andre", "Ricardo", "Jose", "Maria");
 var count = names.stream()
       .map(String::toLowerCase)
-      .filter(name -&gt; name.startsWith("a"))
+      .filter(name -> name.startsWith("a"))
       .distinct()
       .count();
 System.out.println(count); 
 
-// output = 3</pre>
+// output = 3
+```
+
 
 ```
 
@@ -71,7 +74,8 @@ An [aggregation pipeline](https://www.mongodb.com/resources/products/capabilitie
 
 For example, consider a `transactions` collection where we want to count how many transactions contain errors. We could filter by status and then count:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">[  
+```
+[  
   {  
     $match: {  
       status: "error"  
@@ -80,7 +84,9 @@ For example, consider a `transactions` collection where we want to count how man
   {  
     $count: "total errors"  
   }  
-]</pre>
+]
+```
+
 
 ```
 
@@ -97,7 +103,8 @@ As mentioned earlier, [stages](https://www.mongodb.com/docs/manual/reference/ope
 
 To explore their capabilities, we'll create a collection called `articles` that will contain the following documents:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">db.articles.insertMany(  
+```
+db.articles.insertMany(  
    [  
        {  
            _id: 1,  
@@ -126,7 +133,9 @@ To explore their capabilities, we'll create a collection called `articles` that 
        },  
 
    ]  
-)</pre>
+)
+```
+
 
 ```
 
@@ -136,10 +145,13 @@ To explore their capabilities, we'll create a collection called `articles` that 
 
 This is one of [the most common stages](https://www.mongodb.com/docs/manual/reference/operator/aggregation/match/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=aggregation_framework_a_beginner_guide&utm_term=ricardo.mello) you'll use. It basically serves to filter documents based on a specific query. For example, if you only want to return the document with `_id: 3`, you can use:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">db.articles.aggregate([  
+```
+db.articles.aggregate([  
    { $match: { _id: 3 } }  
 ])  
-// This will return Beyond Basics's article</pre>
+// This will return Beyond Basics's article
+```
+
 
 ```
 
@@ -151,9 +163,12 @@ We use this stage to specify which fields we'd like to include in our results.
 
 Suppose we want to return all documents and [project](https://www.mongodb.com/docs/manual/reference/operator/aggregation/project/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=aggregation_framework_a_beginner_guide&utm_term=ricardo.mello) only the `title` and `author` fields.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">db.articles.aggregate([  
+```
+db.articles.aggregate([  
    { $project: { _id: 0, title: 1, authors: 1 } }  
-])</pre>
+])
+```
+
 
 ```
 
@@ -161,20 +176,26 @@ Suppose we want to return all documents and [project](https://www.mongodb.com/do
 
 The result would look like this:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">{  
+```
+{  
    "title": "Beyond Basics: Enhancing Kotlin Ktor API With Vector Search",  
    "authors": ["Ricardo Mello"]  
  },  
 
- //.. Others..</pre>
+ //.. Others..
+```
+
 
 ### $Unwind {#h3-4-unwind}
 
 The [$unwind stage](https://www.mongodb.com/docs/manual/reference/operator/aggregation/unwind/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=aggregation_framework_a_beginner_guide&utm_term=ricardo.mello) is used to deconstruct an array into multiple documents. For example:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">db.articles.aggregate([
+```
+db.articles.aggregate([
    { $unwind: "$tags" }
-])</pre>
+])
+```
+
 
 ```
 
@@ -184,7 +205,8 @@ For each tag in the \`tags\` array, the document will be repeated in the query r
 
 This way, you can analyze or process each tag individually:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">{
+```
+{
   "_id": 2,
   "title": "Spring Data Unlocked: Getting Started With Java and MongoDB",
   "tags": "Java",
@@ -202,7 +224,9 @@ This way, you can analyze or process each tag individually:
   "tags": "Spring",
   // other fields...
 },
-  // other Documents...</pre>
+  // other Documents...
+```
+
 
 ```
 
@@ -212,7 +236,8 @@ This way, you can analyze or process each tag individually:
 
 As the name suggests, we use this stage to [group](https://www.mongodb.com/docs/manual/reference/operator/aggregation/group/?utm_campaign=devrel&amp;utm_source=third-party-content&amp;utm_medium=cta&amp;utm_content=aggregation_framework_a_beginner_guide&amp;utm_term=ricardo.mello) our results. This time, we'll use the \`$unwind\` stage we saw earlier to deconstruct the array of tags and find out how many articles exist for each tag:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">db.articles.aggregate([  
+```
+db.articles.aggregate([  
    { $unwind: "$tags" },  
    {  
        $group: {  
@@ -238,7 +263,9 @@ The result would look like this:
        "totalArticles": 2  
    }  
    .. other tags (Kotlin, Vector Search ..)  
-]</pre>
+]
+```
+
 
 ```
 
@@ -248,9 +275,12 @@ The result would look like this:
 
 Continuing with our example---what if we want to query all articles and [sort](https://www.mongodb.com/docs/manual/reference/operator/aggregation/sort/?utm_campaign=devrel&amp;utm_source=third-party-content&amp;utm_medium=cta&amp;utm_content=aggregation_framework_a_beginner_guide&amp;utm_term=ricardo.mello) them by publication date, from newest to oldest?
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">db.articles.aggregate([  
+```
+db.articles.aggregate([  
    { $sort: { publishedAt: -1 } }  
-])</pre>
+])
+```
+
 
 ```
 And if we want to reverse the order—showing the oldest articles first—we just use `1` instead of `-1`.
@@ -262,22 +292,28 @@ This stage is useful when we want to [add a new field](https://www.mongodb.com/d
 
 Let's say our client requested that we display a field called \`publishedYear\` containing only the year:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">db.articles.aggregate([  
+```
+db.articles.aggregate([  
    {  
      $addFields: {  
        publishedYear: { $year: "$publishedAt" }  
      }  
    }  
- ])</pre>
+ ])
+```
+
 
 ```
 Our result would look something like this:
 ```
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group=""> "_id": 2,  
+```
+ "_id": 2,  
  .. other fields  
  "publishedYear": 2024 // FIELD ADDED  
-// Other fields ..</pre>
+// Other fields ..
+```
+
 
     Here, you can see that we’re using an operator called $year to extract the year from our publishedAt field. To learn about other operators, check out our official documentation page on aggregation operators.
 
@@ -286,7 +322,8 @@ Combining stages {#h2-8-combining-stages}
 
 As we explored earlier, a pipeline can combine multiple stages. Let's say we want to know the total number of articles published in 2025 and beyond. We can combine the `$match` and [`$count`](https://www.mongodb.com/docs/manual/reference/operator/aggregation/count/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=aggregation_framework_a_beginner_guide&utm_term=ricardo.mello) stages for this:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">db.articles.aggregate(
+```
+db.articles.aggregate(
    [
        {
            $match: {
@@ -297,7 +334,9 @@ As we explored earlier, a pipeline can combine multiple stages. Let's say we wan
            $count: 'total'
        }
    ]
-)</pre>
+)
+```
+
 
     Notice that we’re using the $gt operator to filter for years greater than the specific date.
 

@@ -67,14 +67,17 @@ As we have a Vaadin application, we will use the [OAuth 2.0 authorization code g
 
 First, add the Microsoft starter dependencies and the OAuth2 client starter. Don't be confused about the dependency's name. Entra is the new name for Azure Active Directory (Azure AD).
 
-<pre class="EnlighterJSRAW" data-enlighter-language="xml" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&lt;dependency&gt;
-   &lt;groupId&gt;com.azure.spring&lt;/groupId&gt;
-   &lt;artifactId&gt;spring-cloud-azure-starter-active-directory&lt;/artifactId&gt;
-&lt;/dependency&gt;
-&lt;dependency&gt;
-   &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
-   &lt;artifactId&gt;spring-boot-starter-oauth2-client&lt;/artifactId&gt;
-&lt;/dependency&gt;</pre>
+```xml
+<dependency>
+   <groupId>com.azure.spring</groupId>
+   <artifactId>spring-cloud-azure-starter-active-directory</artifactId>
+</dependency>
+<dependency>
+   <groupId>org.springframework.boot</groupId>
+   <artifactId>spring-boot-starter-oauth2-client</artifactId>
+</dependency>
+```
+
 
 ### Configure the Application {#h3-6-configure-the-application}
 
@@ -83,10 +86,13 @@ There are four properties to set. For simplicity, the snippet below shows them a
 
 It's better to set the properties on the platform where your application is running, for example, as environment variables.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">spring.cloud.azure.active-directory.enabled=true
-spring.cloud.azure.active-directory.profile.tenant-id=&lt;teanantId&gt;
-spring.cloud.azure.active-directory.credential.client-id=&lt;clientId&gt;
-spring.cloud.azure.active-directory.credential.client-secret=&lt;clientSecret&gt;</pre>
+```
+spring.cloud.azure.active-directory.enabled=true
+spring.cloud.azure.active-directory.profile.tenant-id=<teanantId>
+spring.cloud.azure.active-directory.credential.client-id=<clientId>
+spring.cloud.azure.active-directory.credential.client-secret=<clientSecret>
+```
+
 
 ### Enable Entra Security {#h3-7-enable-entra-security}
 
@@ -96,33 +102,39 @@ Add `AadWebApplicationHttpSecurityConfigurer.aadWebApplication()` to enable Entr
 
 Also, ensure you don't set a LoginView because the login will happen with the Microsoft login.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@EnableWebSecurity
+```java
+@EnableWebSecurity
 @Configuration
 public class SecurityConfiguration extends VaadinWebSecurity {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.with(AadWebApplicationHttpSecurityConfigurer.aadWebApplication(), c -&gt; {
+        http.with(AadWebApplicationHttpSecurityConfigurer.aadWebApplication(), c -> {
         });
-        http.authorizeHttpRequests(authorize -&gt; authorize
+        http.authorizeHttpRequests(authorize -> authorize
             .requestMatchers(new AntPathRequestMatcher("/images/*.png"),
                              new AntPathRequestMatcher("/line-awesome/**/*.svg"), 
                              EndpointRequest.to(HealthEndpoint.class))
             .permitAll());
         super.configure(http);
     }
-}</pre>
+}
+```
+
 
 ### Configure Role Prefix {#h3-8-configure-role-prefix}
 
 The security configuration will prefix the roles with APPROLE_. To use the role name that we set in Microsoft Entra, we must configure the default prefix because ROLE_ is the prefix by default.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@Configuration
+```java
+@Configuration
 public class RolePrefixConfiguration {
     @Bean
     public GrantedAuthorityDefaults grantedAuthorityDefaults() {
         return new GrantedAuthorityDefaults("APPROLE_");
     }
-}</pre>
+}
+```
+
 
 ### Roles in Action {#h3-9-roles-in-action}
 
@@ -130,9 +142,12 @@ The setup is completed, and we can use role-based security in the Vaadin applica
 
 It's convenient to define the roles as constants, like in the example, in case the role name changes, so you only have to change it in one place.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@RolesAllowed({ Roles.USER, Roles.ADMIN })
+```java
+@RolesAllowed({ Roles.USER, Roles.ADMIN })
 @Route("event-registrations")
-public class EventRegistrationView extends Div implements HasUrlParameter&lt;Long&gt;, HasDynamicTitle {</pre>
+public class EventRegistrationView extends Div implements HasUrlParameter<Long>, HasDynamicTitle {
+```
+
 
 Step 3: Setup Karibu Testing {#h2-10-step-3-setup-karibu-testing}
 -----------------------------------------------------------------
@@ -145,13 +160,14 @@ An `OAuth2AuthenticationToken` is created and then set to the `SecurityContext` 
 
 It's also important to override the `getUserPrincipal` method because no login is happening. Using OAuth2 means that the application assumes that a JWT is part of the request instead.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@SpringBootTest
+```java
+@SpringBootTest
 public abstract class KaribuTest {
     private static Routes routes;
     @Autowired
     protected ApplicationContext ctx;
     // Default user and role
-    private String username = "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="c9a3a6a1a7e7ada6ac89bdacbabde7aaa6a4">[email&nbsp;protected]</a>";
+    private String username = "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="c9a3a6a1a7e7ada6ac89bdacbabde7aaa6a4">[email protected]</a>";
     private String name = "John Doe";
     private String role = Roles.ADMIN;
     private OAuth2AuthenticationToken oAuth2AuthenticationToken;
@@ -162,14 +178,14 @@ public abstract class KaribuTest {
     }
     @BeforeEach
     public void setup() {
-        MockVaadin.INSTANCE.setMockRequestFactory(session -&gt; new FakeRequest(session) {
+        MockVaadin.INSTANCE.setMockRequestFactory(session -> new FakeRequest(session) {
             @Override
             public Principal getUserPrincipal() {
                 createAuthentication();
                 return SecurityContextHolder.getContext().getAuthentication();
             }
         });
-        final Function0&lt;UI&gt; uiFactory = UI::new;
+        final Function0<UI> uiFactory = UI::new;
         MockVaadin.setup(uiFactory, new MockSpringServlet(routes, ctx, uiFactory));
     }
     @AfterEach
@@ -188,10 +204,10 @@ public abstract class KaribuTest {
         SecurityContextHolder.getContext().setAuthentication(oAuth2AuthenticationToken);
         FakeRequest request = (FakeRequest) VaadinServletRequest.getCurrent().getRequest();
         request.setUserPrincipalInt(oAuth2AuthenticationToken);
-        request.setUserInRole((principal, roleName) -&gt; oAuth2AuthenticationToken.getPrincipal()
+        request.setUserInRole((principal, roleName) -> oAuth2AuthenticationToken.getPrincipal()
             .getAuthorities()
             .stream()
-            .anyMatch(a -&gt; a.getAuthority().equals(roleName)));
+            .anyMatch(a -> a.getAuthority().equals(roleName)));
     }
     private void createOAuth2AuthenticationToken() {
         if (oAuth2AuthenticationToken == null) {
@@ -209,14 +225,16 @@ public abstract class KaribuTest {
             if (VaadinServletRequest.getCurrent() != null) {
                 FakeRequest request = (FakeRequest) VaadinServletRequest.getCurrent().getRequest();
                 request.setUserPrincipalInt(null);
-                request.setUserInRole((principal, roleName) -&gt; false);
+                request.setUserInRole((principal, roleName) -> false);
             }
         }
         catch (IllegalStateException e) {
             // Ignored
         }
     }
-}</pre>
+}
+```
+
 
 Summary {#h2-11-summary}
 ------------------------

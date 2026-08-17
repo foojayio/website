@@ -62,7 +62,8 @@ Here's a breakdown of the Java program implementing HCR:
 
 The program initializes by setting up directories for source and compiled classes. It ensures these directories exist and are ready for use.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public HotReload(String sourceDir, String classDir) {
+```java
+public HotReload(String sourceDir, String classDir) {
     this.sourceDir = Paths.get(sourceDir).toAbsolutePath();
     this.classDir = Paths.get(classDir).toAbsolutePath();
     this.classLoader = new CustomClassLoader();
@@ -76,7 +77,9 @@ The program initializes by setting up directories for source and compiled classe
     } catch (IOException e) {
         throw new RuntimeException("Failed to create directories", e);
     }
-}</pre>
+}
+```
+
 
 The constructor begins by converting the provided sourceDir and classDir strings into absolute Path objects using `Paths.get().toAbsolutePath()`. This ensures that the paths are fully qualified and can be used reliably throughout the application.
 
@@ -90,14 +93,15 @@ If directory creation fails, it throws a RuntimeException to indicate a critical
 
 A dedicated thread runs a file watcher that listens for modifications to `.java` files in the source directory. The `watchForChanges()` method is responsible for monitoring the source directory for any modifications to `.java` files and triggering the compileAndReload method when changes are detected. Here is the code for the watchForChanges method:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">private void watchForChanges() {
+```java
+private void watchForChanges() {
     try (WatchService watchService = FileSystems.getDefault()
         .newWatchService()) {
         sourceDir.register(watchService, StandardWatchEventKinds.ENTRY_MODIFY);
 
         while (true) {
             WatchKey key = watchService.take();
-            for (WatchEvent &lt;&lt; ? &gt; event : key.pollEvents()) {
+            for (WatchEvent << ? > event : key.pollEvents()) {
                 if (event.kind() == StandardWatchEventKinds.ENTRY_MODIFY) {
                     Path changed = sourceDir.resolve((Path) event.context());
                     String fileName = changed.getFileName()
@@ -115,7 +119,9 @@ A dedicated thread runs a file watcher that listens for modifications to `.java`
         System.err.println("Error in file watcher: " + e.getMessage());
         e.printStackTrace();
     }
-}</pre>
+}
+```
+
 
 #### Compiling and Reloading Classes
 
@@ -133,7 +139,8 @@ Conversely, if recompilation is deemed necessary, it invokes a separate `compile
 
 The program prints a success message to confirm the operation's success. If compilation fails, it displays an error message. A try-catch block encapsulates the entire process to effectively handle any exceptions that may arise during compilation or file operations.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">private void compileAndReload(String fileName) {
+```java
+private void compileAndReload(String fileName) {
     try {
         String className = fileName.replace(".java", "");
         Path sourceFile = sourceDir.resolve(fileName);
@@ -143,8 +150,8 @@ The program prints a success message to confirm the operation's success. If comp
         long lastModTime = lastModified.getOrDefault(className, 0L);
         long currentModTime = Files.getLastModifiedTime(sourceFile)
             .toMillis();
-        if (Files.exists(classFile) &amp;&amp; Files.getLastModifiedTime(classFile)
-            .toMillis() &gt;= currentModTime &amp;&amp; lastModTime &gt;= currentModTime) {
+        if (Files.exists(classFile) && Files.getLastModifiedTime(classFile)
+            .toMillis() >= currentModTime && lastModTime >= currentModTime) {
             return;
         }
 
@@ -163,7 +170,9 @@ The program prints a success message to confirm the operation's success. If comp
         System.err.println("Error in compile and reload: " + e.getMessage());
         e.printStackTrace();
     }
-}</pre>
+}
+```
+
 
 The `compile` method is designed to compile a Java source file utilizing the Java Compiler API, providing a structured approach to dynamic compilation. The method begins by accepting a `Path` object that represents the source file intended for compilation. To facilitate error handling and reporting, it creates a `DiagnosticCollector`, which collects diagnostic information such as errors and warnings encountered during the compilation process.
 
@@ -175,405 +184,417 @@ In the event of a compilation failure, the method iterates through the collected
 
 This method provides a programmatic solution for compiling Java source files, making it particularly useful in scenarios requiring dynamic compilation. Its robust error reporting capabilities enhance the developer's ability to troubleshoot and resolve compilation errors efficiently.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">private&nbsp;boolean&nbsp;compile(Path&nbsp;sourceFile) {
+```java
+private boolean compile(Path sourceFile) {
 
-&nbsp; &nbsp; DiagnosticCollector&lt;JavaFileObject&gt; diagnostics = new DiagnosticCollector&lt;&gt;();
+    DiagnosticCollector<JavaFileObject> diagnostics = new DiagnosticCollector<>();
 
-&nbsp; &nbsp; Iterable&lt;? extends JavaFileObject&gt; compilationUnits = fileManager.getJavaFileObjectsFromFiles(Collections.singletonList(sourceFile.toFile()));
+    Iterable<? extends JavaFileObject> compilationUnits = fileManager.getJavaFileObjectsFromFiles(Collections.singletonList(sourceFile.toFile()));
 
-&nbsp; &nbsp; List&lt;String&gt; options = Arrays.asList("-d", classDir.toString());
+    List<String> options = Arrays.asList("-d", classDir.toString());
 
-&nbsp; &nbsp; JavaCompiler.CompilationTask task = compiler.getTask(null, fileManager, diagnostics, options, null, compilationUnits);
+    JavaCompiler.CompilationTask task = compiler.getTask(null, fileManager, diagnostics, options, null, compilationUnits);
 
-&nbsp; &nbsp; boolean success = task.call();
+    boolean success = task.call();
 
-&nbsp; &nbsp; if (!success) {
+    if (!success) {
 
-&nbsp; &nbsp; &nbsp; &nbsp; for (Diagnostic&lt;? extends JavaFileObject&gt; diagnostic : diagnostics.getDiagnostics()) {
+        for (Diagnostic<? extends JavaFileObject> diagnostic : diagnostics.getDiagnostics()) {
 
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; System.err.format("Error on line %d in %s%n", diagnostic.getLineNumber(), diagnostic.getSource()
+            System.err.format("Error on line %d in %s%n", diagnostic.getLineNumber(), diagnostic.getSource()
 
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; .toUri());
+                .toUri());
 
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; System.err.println(diagnostic.getMessage(null));
+            System.err.println(diagnostic.getMessage(null));
 
-&nbsp; &nbsp; &nbsp; &nbsp; }
+        }
 
-&nbsp; &nbsp; }
+    }
 
-&nbsp; &nbsp; return success;
+    return success;
 
-}</pre>
+}
+```
+
 
 ### Custom Class Loader {#h3-4-custom-class-loader}
 
 The program uses a custom class loader to load the compiled class files into the JVM. Reloading happens after the compilation succeeds, and it reloads the class. Implement a custom class loader to load the modified class and execute it.  
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">private&nbsp;void&nbsp;reloadClass(String&nbsp;className) {
+```java
+private void reloadClass(String className) {
 
-&nbsp; &nbsp; try {
+    try {
 
-&nbsp; &nbsp; &nbsp; &nbsp; Class &lt;&lt; ? &gt; loadedClass = classLoader.loadClass(className);
+        Class << ? > loadedClass = classLoader.loadClass(className);
 
-&nbsp; &nbsp; &nbsp; &nbsp; Method mainMethod = loadedClass.getMethod("main", String[].class);
+        Method mainMethod = loadedClass.getMethod("main", String[].class);
 
-&nbsp; &nbsp; &nbsp; &nbsp; System.out.println("Invoking main method for: " + className);
+        System.out.println("Invoking main method for: " + className);
 
-&nbsp; &nbsp; &nbsp; &nbsp; mainMethod.invoke(null, (Object) new String[0]);
+        mainMethod.invoke(null, (Object) new String[0]);
 
-&nbsp; &nbsp; } catch (Exception e) {
+    } catch (Exception e) {
 
-&nbsp; &nbsp; &nbsp; &nbsp; System.err.println("Error reloading class " + className + ": " + e.getMessage());
+        System.err.println("Error reloading class " + className + ": " + e.getMessage());
 
-&nbsp; &nbsp; &nbsp; &nbsp; e.printStackTrace();
+        e.printStackTrace();
 
-&nbsp; &nbsp; }
+    }
 
 }
 
-private&nbsp;class&nbsp;CustomClassLoader&nbsp;extends&nbsp;ClassLoader&nbsp;{
+private class CustomClassLoader extends ClassLoader {
 
 @Override
 
-public&nbsp;Class&nbsp;&lt;&lt;&nbsp;?&nbsp;&gt;&nbsp;loadClass(String&nbsp;name) throws ClassNotFoundException {
+public Class << ? > loadClass(String name) throws ClassNotFoundException {
 
-&nbsp; &nbsp; Path classFile = classDir.resolve(name + ".class");
+    Path classFile = classDir.resolve(name + ".class");
 
-&nbsp; &nbsp; &nbsp; &nbsp; if (Files.exists(classFile)) {
+        if (Files.exists(classFile)) {
 
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; try {
+            try {
 
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; byte[] classBytes = Files.readAllBytes(classFile);
+                byte[] classBytes = Files.readAllBytes(classFile);
 
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; return defineClass(name, classBytes, 0, classBytes.length);
+                return defineClass(name, classBytes, 0, classBytes.length);
 
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;} catch (IOException e) {
+             } catch (IOException e) {
 
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; throw new ClassNotFoundException("Error loading class " + name, e);
+                throw new ClassNotFoundException("Error loading class " + name, e);
 
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }
+            }
 
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;}
+         }
 
-&nbsp; &nbsp; &nbsp; &nbsp; return super.loadClass(name);
+        return super.loadClass(name);
 
-&nbsp; &nbsp; }
+    }
 
-}</pre>
+}
+```
+
 
 Now if we want to execute the Hot Reload program, we need to do something like this
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">&nbsp; &nbsp; public static void main(String[] args) {
+```java
+    public static void main(String[] args) {
 
-&nbsp; &nbsp; &nbsp; &nbsp; Day84 reloader = new Day84("C:\\Users\\mohib\\IdeaProjects\\date-time\\src\\main\\java", "C:\\Users\\mohib\\IdeaProjects\\date-time\\target\\classes");
+        Day84 reloader = new Day84("C:\\Users\\mohib\\IdeaProjects\\date-time\\src\\main\\java", "C:\\Users\\mohib\\IdeaProjects\\date-time\\target\\classes");
 
-&nbsp; &nbsp; &nbsp; &nbsp; reloader.start();
+        reloader.start();
 
-&nbsp; &nbsp; &nbsp; &nbsp; // Keep the main thread alive and handle user input
+        // Keep the main thread alive and handle user input
 
-&nbsp; &nbsp; &nbsp; &nbsp; try (BufferedReader reader = new BufferedReader(new InputStreamReader(System.in))) {
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(System.in))) {
 
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; System.out.println("Live reloader is running. Press Enter to exit.");
+            System.out.println("Live reloader is running. Press Enter to exit.");
 
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; reader.readLine();
+            reader.readLine();
 
-&nbsp; &nbsp; &nbsp; &nbsp; } catch (IOException e) {
+        } catch (IOException e) {
 
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; System.err.println("Error reading user input: " + e.getMessage());
+            System.err.println("Error reading user input: " + e.getMessage());
 
-&nbsp; &nbsp; &nbsp; &nbsp; }
+        }
 
-&nbsp; &nbsp; &nbsp; &nbsp; System.out.println("Exiting live reloader.");
+        System.out.println("Exiting live reloader.");
 
-&nbsp; &nbsp; }</pre>
+    }
+```
+
 
 In this main method, we can see that we need to provide the path for the src of the code that you want to hot reload and the classes of those java files; after that, it then watches for any changes and then compiles and reloads the class so that we can see the effect immediately.
 
 Total code
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">import&nbsp;javax.tools.*;
+```java
+import javax.tools.*;
 
-import&nbsp;java.io.*;
+import java.io.*;
 
-import&nbsp;java.lang.reflect.Method;
+import java.lang.reflect.Method;
 
-import&nbsp;java.nio.file.*;
+import java.nio.file.*;
 
-import&nbsp;java.util.*;
+import java.util.*;
 
-import&nbsp;java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentHashMap;
 
-public&nbsp;class&nbsp;Day84&nbsp;{
+public class Day84 {
 
-&nbsp; &nbsp; private final Path sourceDir;
+    private final Path sourceDir;
 
-&nbsp; &nbsp; private final Path classDir;
+    private final Path classDir;
 
-&nbsp; &nbsp; private final Map&lt;String, Long&gt; lastModified = new ConcurrentHashMap&lt;&gt;();
+    private final Map<String, Long> lastModified = new ConcurrentHashMap<>();
 
-&nbsp; &nbsp; private final CustomClassLoader classLoader;
+    private final CustomClassLoader classLoader;
 
-&nbsp; &nbsp; private final JavaCompiler compiler;
+    private final JavaCompiler compiler;
 
-&nbsp; &nbsp; private final StandardJavaFileManager fileManager;
+    private final StandardJavaFileManager fileManager;
 
-&nbsp; &nbsp; public Day84(String sourceDir, String classDir) {
+    public Day84(String sourceDir, String classDir) {
 
-&nbsp; &nbsp; &nbsp; &nbsp; this.sourceDir = Paths.get(sourceDir)
+        this.sourceDir = Paths.get(sourceDir)
 
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; .toAbsolutePath();
+            .toAbsolutePath();
 
-&nbsp; &nbsp; &nbsp; &nbsp; this.classDir = Paths.get(classDir)
+        this.classDir = Paths.get(classDir)
 
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; .toAbsolutePath();
+            .toAbsolutePath();
 
-&nbsp; &nbsp; &nbsp; &nbsp; this.classLoader = new CustomClassLoader();
+        this.classLoader = new CustomClassLoader();
 
-&nbsp; &nbsp; &nbsp; &nbsp; this.compiler = ToolProvider.getSystemJavaCompiler();
+        this.compiler = ToolProvider.getSystemJavaCompiler();
 
-&nbsp; &nbsp; &nbsp; &nbsp; this.fileManager = compiler.getStandardFileManager(null, null, null);
+        this.fileManager = compiler.getStandardFileManager(null, null, null);
 
-&nbsp; &nbsp; &nbsp; &nbsp; // Ensure directories exist
+        // Ensure directories exist
 
-&nbsp; &nbsp; &nbsp; &nbsp; try {
+        try {
 
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Files.createDirectories(this.sourceDir);
+            Files.createDirectories(this.sourceDir);
 
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Files.createDirectories(this.classDir);
+            Files.createDirectories(this.classDir);
 
-&nbsp; &nbsp; &nbsp; &nbsp; } catch (IOException e) {
+        } catch (IOException e) {
 
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; throw new RuntimeException("Failed to create directories", e);
+            throw new RuntimeException("Failed to create directories", e);
 
-&nbsp; &nbsp; &nbsp; &nbsp; }
+        }
 
-&nbsp; &nbsp; }
+    }
 
-&nbsp; &nbsp; public void start() {
+    public void start() {
 
-&nbsp; &nbsp; &nbsp; &nbsp; Thread watchThread = new Thread(this::watchForChanges, "FileWatcherThread");
+        Thread watchThread = new Thread(this::watchForChanges, "FileWatcherThread");
 
-&nbsp; &nbsp; &nbsp; &nbsp; watchThread.setDaemon(true);
+        watchThread.setDaemon(true);
 
-&nbsp; &nbsp; &nbsp; &nbsp; watchThread.start();
+        watchThread.start();
 
-&nbsp; &nbsp; &nbsp; &nbsp; System.out.println("Live reloader started. Watching directory: " + sourceDir);
+        System.out.println("Live reloader started. Watching directory: " + sourceDir);
 
-&nbsp; &nbsp; }
+    }
 
-&nbsp; &nbsp; private void watchForChanges() {
+    private void watchForChanges() {
 
-&nbsp; &nbsp; &nbsp; &nbsp; try (WatchService watchService = FileSystems.getDefault()
+        try (WatchService watchService = FileSystems.getDefault()
 
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; .newWatchService()) {
+            .newWatchService()) {
 
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; sourceDir.register(watchService, StandardWatchEventKinds.ENTRY_MODIFY);
+            sourceDir.register(watchService, StandardWatchEventKinds.ENTRY_MODIFY);
 
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; while (true) {
+            while (true) {
 
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; WatchKey key = watchService.take();
+                WatchKey key = watchService.take();
 
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; for (WatchEvent&lt;?&gt; event : key.pollEvents()) {
+                for (WatchEvent<?> event : key.pollEvents()) {
 
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; if (event.kind() == StandardWatchEventKinds.ENTRY_MODIFY) {
+                    if (event.kind() == StandardWatchEventKinds.ENTRY_MODIFY) {
 
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Path changed = sourceDir.resolve((Path) event.context());
+                        Path changed = sourceDir.resolve((Path) event.context());
 
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; String fileName = changed.getFileName()
+                        String fileName = changed.getFileName()
 
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; .toString();
+                            .toString();
 
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; if (fileName.endsWith(".java")) {
+                        if (fileName.endsWith(".java")) {
 
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; compileAndReload(fileName);
+                            compileAndReload(fileName);
 
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }
+                        }
 
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }
+                    }
 
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }
+                }
 
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; if (!key.reset()) {
+                if (!key.reset()) {
 
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; break;
+                    break;
 
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }
+                }
 
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }
+            }
 
-&nbsp; &nbsp; &nbsp; &nbsp; } catch (Exception e) {
+        } catch (Exception e) {
 
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; System.err.println("Error in file watcher: " + e.getMessage());
+            System.err.println("Error in file watcher: " + e.getMessage());
 
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; e.printStackTrace();
+            e.printStackTrace();
 
-&nbsp; &nbsp; &nbsp; &nbsp; }
+        }
 
-&nbsp; &nbsp; }
+    }
 
-&nbsp; &nbsp; private void compileAndReload(String fileName) {
+    private void compileAndReload(String fileName) {
 
-&nbsp; &nbsp; &nbsp; &nbsp; try {
+        try {
 
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; String className = fileName.replace(".java", "");
+            String className = fileName.replace(".java", "");
 
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Path sourceFile = sourceDir.resolve(fileName);
+            Path sourceFile = sourceDir.resolve(fileName);
 
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Path classFile = classDir.resolve(className + ".class");
+            Path classFile = classDir.resolve(className + ".class");
 
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; // Check if the file has been modified since last compilation
+            // Check if the file has been modified since last compilation
 
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; long lastModTime = lastModified.getOrDefault(className, 0L);
+            long lastModTime = lastModified.getOrDefault(className, 0L);
 
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; long currentModTime = Files.getLastModifiedTime(sourceFile)
+            long currentModTime = Files.getLastModifiedTime(sourceFile)
 
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; .toMillis();
+                .toMillis();
 
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; if (Files.exists(classFile) &amp;&amp; Files.getLastModifiedTime(classFile)
+            if (Files.exists(classFile) && Files.getLastModifiedTime(classFile)
 
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; .toMillis() &gt;= currentModTime &amp;&amp; lastModTime &gt;= currentModTime) {
+                .toMillis() >= currentModTime && lastModTime >= currentModTime) {
 
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; return;
+                return;
 
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }
+            }
 
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; // Compile the Java file
+            // Compile the Java file
 
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; boolean compilationSuccessful = compile(sourceFile);
+            boolean compilationSuccessful = compile(sourceFile);
 
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; if (compilationSuccessful) {
+            if (compilationSuccessful) {
 
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; // Compilation successful, reload the class
+                // Compilation successful, reload the class
 
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; reloadClass(className);
+                reloadClass(className);
 
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; lastModified.put(className, currentModTime);
+                lastModified.put(className, currentModTime);
 
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; System.out.println("Reloaded: " + className);
+                System.out.println("Reloaded: " + className);
 
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; } else {
+            } else {
 
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; System.err.println("Compilation failed for: " + className);
+                System.err.println("Compilation failed for: " + className);
 
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }
+            }
 
-&nbsp; &nbsp; &nbsp; &nbsp; } catch (Exception e) {
+        } catch (Exception e) {
 
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; System.err.println("Error in compile and reload: " + e.getMessage());
+            System.err.println("Error in compile and reload: " + e.getMessage());
 
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; e.printStackTrace();
+            e.printStackTrace();
 
-&nbsp; &nbsp; &nbsp; &nbsp; }
+        }
 
-&nbsp; &nbsp; }
+    }
 
-&nbsp; &nbsp; private boolean compile(Path sourceFile) {
+    private boolean compile(Path sourceFile) {
 
-&nbsp; &nbsp; &nbsp; &nbsp; DiagnosticCollector&lt;JavaFileObject&gt; diagnostics = new DiagnosticCollector&lt;&gt;();
+        DiagnosticCollector<JavaFileObject> diagnostics = new DiagnosticCollector<>();
 
-&nbsp; &nbsp; &nbsp; &nbsp; Iterable&lt;? extends JavaFileObject&gt; compilationUnits = fileManager.getJavaFileObjectsFromFiles(Collections.singletonList(sourceFile.toFile()));
+        Iterable<? extends JavaFileObject> compilationUnits = fileManager.getJavaFileObjectsFromFiles(Collections.singletonList(sourceFile.toFile()));
 
-&nbsp; &nbsp; &nbsp; &nbsp; List&lt;String&gt; options = Arrays.asList("-d", classDir.toString());
+        List<String> options = Arrays.asList("-d", classDir.toString());
 
-&nbsp; &nbsp; &nbsp; &nbsp; JavaCompiler.CompilationTask task = compiler.getTask(null, fileManager, diagnostics, options, null, compilationUnits);
+        JavaCompiler.CompilationTask task = compiler.getTask(null, fileManager, diagnostics, options, null, compilationUnits);
 
-&nbsp; &nbsp; &nbsp; &nbsp; boolean success = task.call();
+        boolean success = task.call();
 
-&nbsp; &nbsp; &nbsp; &nbsp; if (!success) {
+        if (!success) {
 
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; for (Diagnostic&lt;? extends JavaFileObject&gt; diagnostic : diagnostics.getDiagnostics()) {
+            for (Diagnostic<? extends JavaFileObject> diagnostic : diagnostics.getDiagnostics()) {
 
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; System.err.format("Error on line %d in %s%n", diagnostic.getLineNumber(), diagnostic.getSource()
+                System.err.format("Error on line %d in %s%n", diagnostic.getLineNumber(), diagnostic.getSource()
 
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; .toUri());
+                    .toUri());
 
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; System.err.println(diagnostic.getMessage(null));
+                System.err.println(diagnostic.getMessage(null));
 
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }
+            }
 
-&nbsp; &nbsp; &nbsp; &nbsp; }
+        }
 
-&nbsp; &nbsp; &nbsp; &nbsp; return success;
+        return success;
 
-&nbsp; &nbsp; }
+    }
 
-&nbsp; &nbsp; private void reloadClass(String className) {
+    private void reloadClass(String className) {
 
-&nbsp; &nbsp; &nbsp; &nbsp; try {
+        try {
 
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Class&lt;?&gt; loadedClass = classLoader.loadClass(className);
+            Class<?> loadedClass = classLoader.loadClass(className);
 
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Method mainMethod = loadedClass.getMethod("main", String[].class);
+            Method mainMethod = loadedClass.getMethod("main", String[].class);
 
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; System.out.println("Invoking main method for: " + className);
+            System.out.println("Invoking main method for: " + className);
 
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; mainMethod.invoke(null, (Object) new String[0]);
+            mainMethod.invoke(null, (Object) new String[0]);
 
-&nbsp; &nbsp; &nbsp; &nbsp; } catch (Exception e) {
+        } catch (Exception e) {
 
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; System.err.println("Error reloading class " + className + ": " + e.getMessage());
+            System.err.println("Error reloading class " + className + ": " + e.getMessage());
 
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; e.printStackTrace();
+            e.printStackTrace();
 
-&nbsp; &nbsp; &nbsp; &nbsp; }
+        }
 
-&nbsp; &nbsp; }
+    }
 
-&nbsp; &nbsp; private class CustomClassLoader extends ClassLoader {
+    private class CustomClassLoader extends ClassLoader {
 
-&nbsp; &nbsp; &nbsp; &nbsp; @Override
+        @Override
 
-&nbsp; &nbsp; &nbsp; &nbsp; public Class&lt;?&gt; loadClass(String name) throws ClassNotFoundException {
+        public Class<?> loadClass(String name) throws ClassNotFoundException {
 
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Path classFile = classDir.resolve(name + ".class");
+            Path classFile = classDir.resolve(name + ".class");
 
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; if (Files.exists(classFile)) {
+            if (Files.exists(classFile)) {
 
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; try {
+                try {
 
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; byte[] classBytes = Files.readAllBytes(classFile);
+                    byte[] classBytes = Files.readAllBytes(classFile);
 
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; return defineClass(name, classBytes, 0, classBytes.length);
+                    return defineClass(name, classBytes, 0, classBytes.length);
 
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; } catch (IOException e) {
+                } catch (IOException e) {
 
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; throw new ClassNotFoundException("Error loading class " + name, e);
+                    throw new ClassNotFoundException("Error loading class " + name, e);
 
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }
+                }
 
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }
+            }
 
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; return super.loadClass(name);
+            return super.loadClass(name);
 
-&nbsp; &nbsp; &nbsp; &nbsp; }
+        }
 
-&nbsp; &nbsp; }
+    }
 
-&nbsp; &nbsp; public static void main(String[] args) {
+    public static void main(String[] args) {
 
-&nbsp; &nbsp; &nbsp; &nbsp; Day84 reloader = new Day84("C:\\Users\\mohib\\IdeaProjects\\date-time\\src\\main\\java", "C:\\Users\\mohib\\IdeaProjects\\date-time\\target\\classes");
+        Day84 reloader = new Day84("C:\\Users\\mohib\\IdeaProjects\\date-time\\src\\main\\java", "C:\\Users\\mohib\\IdeaProjects\\date-time\\target\\classes");
 
-&nbsp; &nbsp; &nbsp; &nbsp; reloader.start();
+        reloader.start();
 
-&nbsp; &nbsp; &nbsp; &nbsp; // Keep the main thread alive and handle user input
+        // Keep the main thread alive and handle user input
 
-&nbsp; &nbsp; &nbsp; &nbsp; try (BufferedReader reader = new BufferedReader(new InputStreamReader(System.in))) {
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(System.in))) {
 
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; System.out.println("Live reloader is running. Press Enter to exit.");
+            System.out.println("Live reloader is running. Press Enter to exit.");
 
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; reader.readLine();
+            reader.readLine();
 
-&nbsp; &nbsp; &nbsp; &nbsp; } catch (IOException e) {
+        } catch (IOException e) {
 
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; System.err.println("Error reading user input: " + e.getMessage());
+            System.err.println("Error reading user input: " + e.getMessage());
 
-&nbsp; &nbsp; &nbsp; &nbsp; }
+        }
 
-&nbsp; &nbsp; &nbsp; &nbsp; System.out.println("Exiting live reloader.");
+        System.out.println("Exiting live reloader.");
 
-&nbsp; &nbsp; }
+    }
 
-}</pre>
+}
+```
+
 
 Conclusion {#h2-5-conclusion}
 -----------------------------

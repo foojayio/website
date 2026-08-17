@@ -55,9 +55,12 @@ You can get Community Availability images from two sources, as explained below a
 
 The newest addition: `azul-zulu` is now a [Docker Official Image on Docker Hub](https://hub.docker.com/_/azul-zulu). These images don't have a namespace prefix, are maintained by Azul, get reviewed by Docker, and are continuously scanned for CVEs.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">docker pull azul-zulu:21
+```
+docker pull azul-zulu:21
 docker pull azul-zulu:21-jre
-docker pull azul-zulu:25</pre>
+docker pull azul-zulu:25
+```
+
 
 This is the recommended starting point for any new project. Full details and example usage are explained in the previous posts of this blog post series (**s**ee links above).
 
@@ -75,8 +78,11 @@ The original Azul images on Docker Hub are still available and cover a wider ran
 
 Example usage:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">docker pull azul/zulu-openjdk:21
-docker run --rm azul/zulu-openjdk:21 java -version</pre>
+```
+docker pull azul/zulu-openjdk:21
+docker run --rm azul/zulu-openjdk:21 java -version
+```
+
 
 These images will be **deprecated later in 2026** as the Official Images expand to cover the same variants. If you're starting something new today, prefer `azul-zulu`. If you're using the old images, plan your migration.
 
@@ -89,11 +95,14 @@ Subscriber Availability images are delivered through two channels: Azul's own pr
 
 SA images are hosted on Azul's private container registry and require authentication with an access token. Azul customers can manage their access tokens through [access.azul.com](https://access.azul.com).
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">docker login sa.registry.azul.com
-# Username: &lt;your-ftp-username&gt;
-# Password: &lt;your-access-token&gt;
+```
+docker login sa.registry.azul.com
+# Username: <your-ftp-username>
+# Password: <your-access-token>
 
-docker run -it sa.registry.azul.com/zulu-sa-ubuntu:17-jre</pre>
+docker run -it sa.registry.azul.com/zulu-sa-ubuntu:17-jre
+```
+
 
 The SA registry provides images based on multiple base systems:
 
@@ -145,11 +154,14 @@ Available Java versions for SA images currently include 8, 11, 17, 21, 25, and 2
 
 In a `Dockerfile`, you typically use a fixed version tag for production builds to ensure reproducibility, and a mutable alias in development or CI pipelines where you want automatic updates:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group=""># Production: pin to an exact build
+```
+# Production: pin to an exact build
 FROM sa.registry.azul.com/zulu-sa-ubuntu:21.44-21.0.8-jre AS runtime
 
 # CI/development: always get the latest security patch
-FROM sa.registry.azul.com/zulu-sa-ubuntu:21-cpu-jre AS runtime</pre>
+FROM sa.registry.azul.com/zulu-sa-ubuntu:21-cpu-jre AS runtime
+```
+
 
 For the complete tag listing, see the [Zulu SA Docker Tags](https://docs.azul.com/core/docker-image-tags#sa-docker-tags) in the Azul Documentation.
 
@@ -165,8 +177,11 @@ Chainguard Zulu images offer:
 * [Verifiable container image signatures](https://edu.chainguard.dev/chainguard/chainguard-images/how-to-use/verifying-chainguard-images-and-metadata-signatures-with-cosign/#verifying-container-image-signatures)
 * Reproducible builds with Cosign and apko ([read more about reproducibility](https://www.chainguard.dev/unchained/reproducing-chainguards-reproducible-image-builds))
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">docker pull cgr.dev/ORGANIZATION/zulu-jdk:latest
-docker run -it --rm cgr.dev/ORGANIZATION/zulu-jdk:latest java -version</pre>
+```
+docker pull cgr.dev/ORGANIZATION/zulu-jdk:latest
+docker run -it --rm cgr.dev/ORGANIZATION/zulu-jdk:latest java -version
+```
+
 
 Replace `ORGANIZATION` with your organization's name in the Chainguard registry. Access to the Chainguard registry [requires authentication](https://edu.chainguard.dev/chainguard/chainguard-registry/authenticating/). That way, Chainguard can reach you if something important changes in an image you are using.
 
@@ -191,7 +206,7 @@ What's Missing? Tell Us. {#h-what-s-missing-tell-us}
 
 The SA and Official image offerings are actively growing. If you need a specific Java version, base OS combination, or architecture that isn't currently available, create an issue on GitHub in [AzulSystems/azul-zulu-images](https://github.com/AzulSystems/azul-zulu-images). The Azul team is actively prioritizing based on demand.
 
-*** ** * ** ***
+
 
 *Full documentation for each image source:*
 

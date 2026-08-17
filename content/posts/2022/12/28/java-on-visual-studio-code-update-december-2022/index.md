@@ -84,10 +84,13 @@ Annotation processing is a Java compilation option which has been around since J
 
 If we are using Gradle and want to use annotation processing, we do this by marking a particular dependency as part of the annotationProcessor dependency configuration. For example:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="dracula">dependencies {
+```
+dependencies {
     annotationProcessor 'org.mapstruct:mapstruct-processor:1.3.1.Final'
     ...
-}</pre>
+}
+```
+
 
 In our latest release, we have supported annotation processing in our [Gradle for Java](https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-gradle) extension, so if you have annotationProcessor marked in your dependencies, you will be able to see your generated files during compilation.
 

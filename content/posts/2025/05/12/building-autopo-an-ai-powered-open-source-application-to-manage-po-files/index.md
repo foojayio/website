@@ -49,26 +49,29 @@ Building a localization workflow {#h2-2-building-a-localization-workflow}
 
 Over time, I standardized my approach to applications localization. In my projects I always create a dedicated module, usually named `project-i18n`, where I store all `.po` files. Maven is configured to automatically generate `.properties` files from these `.po` files during the build process.
 
-<pre class="EnlighterJSRAW EnlighterJSRAW" data-enlighter-language="xml" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&lt;plugin&gt;
-    &lt;groupId&gt;com.googlecode.gettext-commons&lt;/groupId&gt;
-    &lt;artifactId&gt;gettext-maven-plugin&lt;/artifactId&gt;
-    &lt;version&gt;1.2.4&lt;/version&gt;
-    &lt;configuration&gt;
-        &lt;keysFile&gt;autopo.pot&lt;/keysFile&gt;
-        &lt;poDirectory&gt;po&lt;/poDirectory&gt;
-        &lt;targetBundle&gt;ooo.autopo.i18n.Messages&lt;/targetBundle&gt;
-        &lt;outputFormat&gt;properties&lt;/outputFormat&gt;
-    &lt;/configuration&gt;
-    &lt;executions&gt;
-        &lt;execution&gt;
-            &lt;id&gt;gettext-dist&lt;/id&gt;
-            &lt;phase&gt;generate-resources&lt;/phase&gt;
-            &lt;goals&gt;
-                &lt;goal&gt;dist&lt;/goal&gt;
-            &lt;/goals&gt;
-        &lt;/execution&gt;
-    &lt;/executions&gt;
-&lt;/plugin&gt;</pre>
+```xml
+<plugin>
+    <groupId>com.googlecode.gettext-commons</groupId>
+    <artifactId>gettext-maven-plugin</artifactId>
+    <version>1.2.4</version>
+    <configuration>
+        <keysFile>autopo.pot</keysFile>
+        <poDirectory>po</poDirectory>
+        <targetBundle>ooo.autopo.i18n.Messages</targetBundle>
+        <outputFormat>properties</outputFormat>
+    </configuration>
+    <executions>
+        <execution>
+            <id>gettext-dist</id>
+            <phase>generate-resources</phase>
+            <goals>
+                <goal>dist</goal>
+            </goals>
+        </execution>
+    </executions>
+</plugin>
+```
+
 
 I also add a [singleton class](https://github.com/soberlemur/autopo/blob/master/autopo-i18n/src/main/java/ooo/autopo/i18n/I18nContext.java) that provides methods to set the application's locale and to retrieve localized strings.
 
@@ -76,8 +79,11 @@ I use English text as the keys in the `.po` files (and, in turn, in the resource
 
 To keep the translation templates up to date, I use a simple script that uses gettext to extract all translatable strings from the Java source code and update the `.pot` template file whenever new strings are added or existing ones are changed:
 
-<pre class="EnlighterJSRAW EnlighterJSRAW" data-enlighter-language="bash" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">#!/bin/sh
-xgettext -ktr -L Java -o po/autopo.pot --copyright-holder='Your copyright info' <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="fad7d797899d939ed7988f9d89d79b9e9e889f8989c7979fba9f829b978a969fd4999597">[email&nbsp;protected]</a> --no-location $(find ../ -name "*.java" -not -path "*/.idea/*" -not -name "*Test.java") –from-code=UTF-8</pre>
+```bash
+#!/bin/sh
+xgettext -ktr -L Java -o po/autopo.pot --copyright-holder='Your copyright info' <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="fad7d797899d939ed7988f9d89d79b9e9e889f8989c7979fba9f829b978a969fd4999597">[email protected]</a> --no-location $(find ../ -name "*.java" -not -path "*/.idea/*" -not -name "*Test.java") –from-code=UTF-8
+```
+
 
 Introducing Zanata {#h2-3-introducing-zanata}
 ---------------------------------------------
@@ -177,24 +183,28 @@ Including a project description as part of the prompt proved crucial during vali
 
 This is how you define an AI service interface using Langchain4j:
 
-<pre class="EnlighterJSRAW EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public interface TranslationServiceAI {
+```java
+public interface TranslationServiceAI {
 
     @SystemMessage("You are a native {{sourceLanguage}}/{{targetLanguage}} speaker and a professional translator. Your task is to provide translations from {{sourceLanguage}} to {{targetLanguage}}. You will take special care to not add any quotes, punctuation, linefeed or extra symbols and maintain the same case and formatting as the original. Your answer will be automatically processed therefore you need to return the translated text only and nothing more, no comments, no additional quotes, trailing or leading spaces, or full stop just the translation.")
     @UserMessage("Your are translating {{description}}. Translate this: \"{{untranslated}}\"")
-    Result&lt;String&gt; translate(@V("sourceLanguage") String sourceLanguage, @V("targetLanguage") String targetLanguage,
+    Result<String> translate(@V("sourceLanguage") String sourceLanguage, @V("targetLanguage") String targetLanguage,
             @V("description") String description, @V("untranslated") String untranslated);
 
     @SystemMessage("You are a professional linguist and translation quality evaluator. Your task is to assess the accuracy, fluency, and naturalness of a translation from {{sourceLanguage}} to {{targetLanguage}}. This is the context of the translation: \"{{description}}\".\nConsider factors such as correctness of meaning, grammar, style, idiomatic expressions, cultural appropriateness, punctuation, and case sensitivity. Pay special attention to terminology and tone relevant to the specified context\n" + "\n" + "Provide a score from 1 to 10, with 10 being a perfect translation. If and only if the score is less than 10, also provide:\n" + "\n" + " 1: Feedback on the translation quality and recommendations for improvement.\n" + "\n" + " 2: A suggested replacement translation that better fits the context.")
     @UserMessage("This is the original text: \"{{untranslated}}\"\n" + "\n" + "This is the translation to evaluate: \"{{translated}}\"")
-    Result&lt;TranslationAssessment&gt; assess(@V("sourceLanguage") String sourceLanguage, @V("targetLanguage") String targetLanguage,
+    Result<TranslationAssessment> assess(@V("sourceLanguage") String sourceLanguage, @V("targetLanguage") String targetLanguage,
             @V("description") String description, @V("untranslated") String untranslated, @V("translated") String translated);
 
-}</pre>
+}
+```
+
 
 And this is the implementation using AiServices to perform the call to the AI provider:
 
-<pre class="EnlighterJSRAW EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@Override
-public Result&lt;String&gt; translate(PoFile poFile, PoEntry entry, AIModelDescriptor aiModelDescriptor, String projectDescription) {
+```java
+@Override
+public Result<String> translate(PoFile poFile, PoEntry entry, AIModelDescriptor aiModelDescriptor, String projectDescription) {
     Logger.info("Translating using AI model {}", aiModelDescriptor.name());
     TranslationServiceAI aiService = AiServices.create(TranslationServiceAI.class, aiModelDescriptor.translationModel());
 
@@ -206,7 +216,7 @@ public Result&lt;String&gt; translate(PoFile poFile, PoEntry entry, AIModelDescr
 }
 
 @Override
-public Result&lt;TranslationAssessment&gt; assess(PoFile poFile, PoEntry entry, AIModelDescriptor aiModelDescriptor, String projectDescription) {
+public Result<TranslationAssessment> assess(PoFile poFile, PoEntry entry, AIModelDescriptor aiModelDescriptor, String projectDescription) {
     Logger.info("Assessing translation using AI model {}", aiModelDescriptor.name());
     TranslationServiceAI aiService = AiServices.create(TranslationServiceAI.class, aiModelDescriptor.validationModel());
 
@@ -216,7 +226,9 @@ public Result&lt;TranslationAssessment&gt; assess(PoFile poFile, PoEntry entry, 
                             entry.untranslatedValue().getValue(),
                             entry.translatedValue().getValue());
 
-}</pre>
+}
+```
+
 
 Autopo in Action {#h2-13-autopo-in-action}
 ------------------------------------------

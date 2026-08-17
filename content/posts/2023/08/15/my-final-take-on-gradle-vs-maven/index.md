@@ -137,6 +137,6 @@ We, developers, are human beings: we like to think our projects are different fr
 
 Irrelevant customizations bring no benefit and are easy to develop but expensive to maintain. If managing software assets is part of my responsibilities, I'll always choose stability over flexibility for my build tool.
 
-*** ** * ** ***
+
 
 *Originally published at [A Java Geek](https://blog.frankel.ch/final-take-gradle/) on August 6^th^, 2023*

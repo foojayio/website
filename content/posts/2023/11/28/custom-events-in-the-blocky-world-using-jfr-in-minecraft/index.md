@@ -46,12 +46,16 @@ This lets you get insights into the chunk generation and specific traffic patter
 
 But what does the event specification look like? We could disassemble the Minecraft JAR and potentially get into legal trouble, or we could just use the [jfr](https://docs.oracle.com/en/java/javase/21/docs/specs/man/jfr.html) utility with its `metadata` command and get an approximation of the event definition from the JFR metadata:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">jfr metadata debug/server-2023-11-17-155349.jfr | \
-    grep minecraft --after-context=40</pre>
+```bash
+jfr metadata debug/server-2023-11-17-155349.jfr | \
+    grep minecraft --after-context=40
+```
+
 
 The ChunkGeneration event looks as follows:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@Name("minecraft.ChunkGeneration")
+```java
+@Name("minecraft.ChunkGeneration")
 @Label("Chunk Generation")
 @Category({"Minecraft", "World Generation"})
 class ChunkGeneration extends jdk.jfr.Event {
@@ -88,7 +92,9 @@ class ChunkGeneration extends jdk.jfr.Event {
 
   @Label("Level")
   String level;
-}</pre>
+}
+```
+
 
 You can find all defined events [here](https://gist.github.com/parttimenerd/a3b0c74eea0c1da89fec533ebd468479). The actual implementation of these events is only slightly larger because some events accumulate data over a period of time.
 

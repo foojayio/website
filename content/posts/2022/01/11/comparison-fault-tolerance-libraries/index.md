@@ -68,9 +68,10 @@ Each fault tolerance feature is built around the same template seen above. One c
 
 Let's analyze a sample:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">var retrySupplier = Retry.decorateSupplier(                                  // 1
+```java
+var retrySupplier = Retry.decorateSupplier(                                  // 1
     Retry.ofDefaults("retry"),                                               // 2
-    () -&gt; server.call()                                                      // 1
+    () -> server.call()                                                      // 1
 );
 var config = new CircuitBreakerConfig.Builder()                              // 3
         .slowCallDurationThreshold(Duration.ofMillis(200))                   // 4
@@ -82,8 +83,10 @@ var breakerSupplier = CircuitBreaker.of("circuit-breaker", config)           // 
 supplier = SupplierUtils.recover(                                            // 8
     breakerSupplier,
     List.of(IllegalStateException.class, CallNotPermittedException.class),   // 9
-    e -&gt; "fallback"                                                         // 10
-);</pre>
+    e -> "fallback"                                                         // 10
+);
+```
+
 
 1. Decorate the base `server.call()` function with `Retry`: this function is the one to be protected
 2. Use the default configuration
@@ -98,13 +101,16 @@ supplier = SupplierUtils.recover(                                            // 
 
 The order in which functions are composed can be hard to decipher. Hence, the project offers the `Decorators` class to combine functions using a fluent API. You can find it in the `resilience4j-all` module. One can rewrite the above code as:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">var pipeline = Decorators.ofSupplier(() -&gt; server.call())
+```java
+var pipeline = Decorators.ofSupplier(() -> server.call())
     .withRetry(Retry.ofDefaults("retry"))
     .withCircuitBreaker(CircuitBreaker.of("circuit-breaker", config))
     .withFallback(
         List.of(IllegalStateException.class, CallNotPermittedException.class),
-        e -&gt; "fallback"
-    );</pre>
+        e -> "fallback"
+    );
+```
+
 
 It makes the intent much clearer.
 
@@ -125,11 +131,14 @@ Here's how to create a pipeline, *i.e.* , an instance of `FailsafeExecutor`.
 
 Notice there's no reference to the base call:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">var pipeline = Failsafe.with(                            // 1
+```java
+var pipeline = Failsafe.with(                            // 1
     Fallback.of("fallback"),                             // 2
     Timeout.ofDuration(Duration.of(2000, MILLIS)),       // 3
     RetryPolicy.ofDefault()                              // 4
-);</pre>
+);
+```
+
 
 1. Define the list of policies applied from the last to the first in order
 2. Fallback value
@@ -138,13 +147,19 @@ Notice there's no reference to the base call:
 
 At this point, it's possible to wrap the call:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">pipeline.get(() -&gt; server.call());</pre>
+```java
+pipeline.get(() -> server.call());
+```
+
 
 Failsafe also provides a fluent API. One can rewrite the above code as:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">var pipeline = Failsafe.with(Fallback.of("fallback"))
+```java
+var pipeline = Failsafe.with(Fallback.of("fallback"))
     .compose(RetryPolicy.ofDefault())
-    .compose(Timeout.ofDuration(Duration.of(2000, MILLIS)));</pre>
+    .compose(Timeout.ofDuration(Duration.of(2000, MILLIS)));
+```
+
 
 Conclusion {#h2-3-conclusion}
 -----------------------------

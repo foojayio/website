@@ -45,27 +45,34 @@ I'll pass an authentication token in the request to keep things simple. I won't 
 
 To enable Spring Security on the app, we need to add the Spring Boot Security Starter.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="xml">&lt;dependency&gt;
-    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
-    &lt;artifactId&gt;spring-boot-starter-security&lt;/artifactId&gt;
-&lt;/dependency&gt;</pre>
+```xml
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-security</artifactId>
+</dependency>
+```
+
 
 We also need to enable Spring Security to work its magic:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="kotlin">@SpringBootApplication
+```kotlin
+@SpringBootApplication
 @EnableWebSecurity
-class SecureBootApplication</pre>
+class SecureBootApplication
+```
+
 
 With those two steps in place, we can start securing the application according to the above requirement:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="kotlin">internal fun security() = beans {                                       //1
+```kotlin
+internal fun security() = beans {                                       //1
     bean {
-        val http = ref&lt;HttpSecurity&gt;()
+        val http = ref<HttpSecurity>()
         http {
             authorizeRequests {
                 authorize("/finance/salary/**", authenticated)          //2
             }
-            addFilterBefore&lt;UsernamePasswordAuthenticationFilter&gt;(
+            addFilterBefore<UsernamePasswordAuthenticationFilter>(
                 TokenAuthenticationFilter(ref())                        //3
             )
             httpBasic { disable() }
@@ -78,7 +85,9 @@ With those two steps in place, we can start securing the application according t
         http.build()
     }
     bean { TokenAuthenticationManager(ref(), ref()) }                   //4
-}</pre>
+}
+```
+
 
 1. Use the Kotlin Beans DSL - because I can
 2. Only allow access to the endpoint to authenticated users
@@ -87,11 +96,15 @@ With those two steps in place, we can start securing the application according t
 
 Requests look like the following:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="shell">curl -H 'Authorization: xyz'  localhost:9080/finance/salary/bob</pre>
+```bash
+curl -H 'Authorization: xyz'  localhost:9080/finance/salary/bob
+```
+
 
 The filter extracts from the request the necessary data used to decide whether to allow the request or not:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="kotlin">internal class TokenAuthenticationFilter(authManager: AuthenticationManager) :
+```kotlin
+internal class TokenAuthenticationFilter(authManager: AuthenticationManager) :
     AbstractAuthenticationProcessingFilter("/finance/salary/**", authManager) {
 
     override fun attemptAuthentication(req: HttpServletRequest, resp: HttpServletResponse): Authentication {
@@ -102,7 +115,9 @@ The filter extracts from the request the necessary data used to decide whether t
     }
 
     // override fun successfulAuthentication(
-}</pre>
+}
+```
+
 
 1. Get the authentication token
 2. Get the path
@@ -111,7 +126,8 @@ The filter extracts from the request the necessary data used to decide whether t
 
 In turn, the manager tries to authenticate the token:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="kotlin">internal class TokenAuthenticationManager(
+```kotlin
+internal class TokenAuthenticationManager(
     private val accountRepo: AccountRepository,
     private val employeeRepo: EmployeeRepository
 ) : AuthenticationManager {
@@ -120,17 +136,19 @@ In turn, the manager tries to authenticate the token:
         throw BadCredentialsException("No token passed")
     val account = accountRepo.findByPassword(token).orElse(null) ?:            //2
         throw BadCredentialsException("Invalid token")
-    val path = authentication.details as List&lt;String&gt;
+    val path = authentication.details as List<String>
     val accountId = account.id
     val segment = path.last()
     if (segment == accountId) return authentication.withPrincipal(accountId)   //3
     val employee = employeeRepo.findById(segment).orElse(null)                 //4
     val managerUserName = employee?.manager?.userName
-    if (managerUserName != null &amp;&amp; managerUserName == accountId)               //5
+    if (managerUserName != null && managerUserName == accountId)               //5
         return authentication.withPrincipal(accountId)                         //5
     throw InsufficientAuthenticationException("Incorrect token")               //6
   }
-}</pre>
+}
+```
+
 
 1. Get the authorization token passed from the filter
 2. Try to find the account that has this token. For simplicity's sake, the token is stored in plain text without hashing
@@ -145,15 +163,24 @@ The whole flow can be summarized as the following:
 
 Now, we can try some requests.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="shell">curl -H 'Authorization: bob' localhost:9080/finance/salary/bob</pre>
+```bash
+curl -H 'Authorization: bob' localhost:9080/finance/salary/bob
+```
+
 
 `bob` asks for his own salary, and it works.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="shell">curl -H 'Authorization: bob' localhost:9080/finance/salary/alice</pre>
+```bash
+curl -H 'Authorization: bob' localhost:9080/finance/salary/alice
+```
+
 
 `bob` asks for the salary of one of his subordinates, and it works as well.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="shell">curl -H 'Authorization: bob' localhost:9080/finance/salary/alice</pre>
+```bash
+curl -H 'Authorization: bob' localhost:9080/finance/salary/alice
+```
+
 
 `alice` asks for her manager's salary, which is not allowed.
 
@@ -173,7 +200,8 @@ In short, OPA allows writing policies and offers a CLI and a daemon app to evalu
 
 You write policies in a specific interpreted language named [Rego](https://www.openpolicyagent.org/docs/latest/policy-language/), and I must admit it's not fun. Anyway, here's our above policy written in "clear" text:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="php">package ch.frankel.blog.secureboot
+```php
+package ch.frankel.blog.secureboot
 
 employees := data.hierarchy                                 //1
 
@@ -189,7 +217,9 @@ allow {
     some username
     input.path = ["finance", "salary", username]            //3
     employees[input.user][_] == username                    //3
-}</pre>
+}
+```
+
 
 1. Get the employee hierarchy somehow (see below)
 2. If the account requests their salary, allow access
@@ -197,14 +227,17 @@ allow {
 
 I used two variables in the above snippet: `input` and `data`. `input` is the payload that the application sends to OPA. It should be in JSON format and has the following form:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="json">{
+```json
+{
     "path": [
         "finance",
         "salary",
         "alice"
     ],
     "user": "bob"
-}</pre>
+}
+```
+
 
 More Open Policy Agent goodness {#h2-2-more-open-policy-agent-goodness}
 -----------------------------------------------------------------------
@@ -223,7 +256,8 @@ Note that you shouldn't use Apache APISIX only to serve static files. But since 
 
 Now that we moved the decision logic to OPA, we can replace our code with a request to the OPA service. The new version of the authentication manager is:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="kotlin">internal class OpaAuthenticationManager(
+```kotlin
+internal class OpaAuthenticationManager(
     private val accountRepo: AccountRepository,
     private val opaWebClient: WebClient
 ) : AuthenticationManager {
@@ -233,7 +267,7 @@ Now that we moved the decision logic to OPA, we can replace our code with a requ
             throw BadCredentialsException("No token passed")
         val account = accountRepo.findByPassword(token).orElse(null) ?:            //1
             throw BadCredentialsException("Invalid token")
-        val path = authentication.details as List&lt;String&gt;
+        val path = authentication.details as List<String>
         val decision = opaWebClient.post()                                         //2
             .accept(MediaType.APPLICATION_JSON)
             .contentType(MediaType.APPLICATION_JSON)
@@ -243,7 +277,9 @@ Now that we moved the decision logic to OPA, we can replace our code with a requ
         if (decision.result.allow) return authentication.withPrincipal(account.id) //6
         else throw InsufficientAuthenticationException("OPA disallow")             //6
     }
-}</pre>
+}
+```
+
 
 1. Keep the initial *authentication* logic
 2. Replace the authorization with a call to the OPA service
@@ -265,7 +301,8 @@ The obvious candidate is the API Gateway since we set Apache APISIX in the previ
 
 Apache APISIX has multiple authentication plugins available. Because I used a bearer token, I'll use [key-auth](https://apisix.apache.org/docs/apisix/plugins/key-auth/). Let's create our users, or in Apache APISIX terms, *consumers*:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml">consumers:
+```yaml
+consumers:
   - username: alice
     plugins:
       key-auth:
@@ -281,11 +318,14 @@ Apache APISIX has multiple authentication plugins available. Because I used a be
   - username: charlie
     plugins:
       key-auth:
-        key: charlie</pre>
+        key: charlie
+```
+
 
 Now, we can protect the Spring Boot upstream:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml">routes:
+```yaml
+routes:
   - uri: /finance/salary*
     upstream:
       type: roundrobin
@@ -297,19 +337,22 @@ Now, we can protect the Spring Boot upstream:
       proxy-rewrite:
         headers:
           set:
-            X-Account: $consumer_name            #2</pre>
+            X-Account: $consumer_name            #2
+```
+
 
 1. Authenticate with `key-auth` and the `Authorization` header
 2. Sets the consumer id in the `X-Account` HTTP header for the upstream
 
 APISIX guarantees that requests that reach the Spring Boot app are authenticated. The code only needs to call the OPA service and follow the decision. We can entirely remove Spring Security and replace it with a **simple** filter:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="kotlin">bean {
-    val repo = ref&lt;EmployeeRepository&gt;()
+```kotlin
+bean {
+    val repo = ref<EmployeeRepository>()
     router {
-        val props = ref&lt;AppProperties&gt;()
+        val props = ref<AppProperties>()
         val opaWebClient = WebClient.create(props.opaEndpoint)
-        filter { req, next -&gt; validateOpa(opaWebClient, req, next) }
+        filter { req, next -> validateOpa(opaWebClient, req, next) }
         GET("/finance/salary/{user_name}") {
           // ...
         }
@@ -319,7 +362,7 @@ APISIX guarantees that requests that reach the Spring Boot app are authenticated
 internal fun validateOpa(
     opaWebClient: WebClient,
     req: ServerRequest,
-    next: (ServerRequest) -&gt; ServerResponse
+    next: (ServerRequest) -> ServerResponse
 ): ServerResponse {
     val httpReq = req.servletRequest()
     val account = httpReq.getHeader("X-Account")                           //1
@@ -332,7 +375,9 @@ internal fun validateOpa(
         .block() ?: DecisionOutput(ResultOutput(false))
     return if (decision.result.allow) next(req)
     else ServerResponse.status(HttpStatus.UNAUTHORIZED).build()
-}</pre>
+}
+```
+
 
 1. Get the account name from the API Gateway
 2. Nothing changes afterward

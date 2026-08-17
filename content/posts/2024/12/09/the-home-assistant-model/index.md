@@ -110,7 +110,7 @@ In this article, I described the model objects available in Home Assistant. In t
 * [Home Assistant](https://www.home-assistant.io/)
 * [Concepts and terminology](https://www.home-assistant.io/getting-started/concepts-terminology/)
 
-*** ** * ** ***
+
 
 *Originally published at [A Java Geek](https://blog.frankel.ch/home-assistant/2/) on December 2^nd^, 2024*
 

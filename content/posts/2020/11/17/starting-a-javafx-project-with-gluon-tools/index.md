@@ -48,7 +48,8 @@ Some JDK providers have a version of the JDK which has JavaFX integrated. This m
 
 The easiest way to switch between JDK versions is probably [SDKMAN](https://sdkman.io/) which contains a long list of possible options. For example on a Linux PC this is only a few of them of a list of over 80 versions!
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ sdk list java
+```
+$ sdk list java
 ================================================================================
 Available Java Versions
 ================================================================================
@@ -56,7 +57,7 @@ Available Java Versions
 --------------------------------------------------------------------------------
  AdoptOpenJDK  |     | 15.0.1.j9    | adpt    |            | 15.0.1.j9-adpt      
 ...    
-               | &gt;&gt;&gt; | 11.0.7.hs    | adpt    | local only | 11.0.7.hs-adpt      
+               | >>> | 11.0.7.hs    | adpt    | local only | 11.0.7.hs-adpt      
 ...       
  Azul Zulu     |     | 15.0.1       | zulu    |            | 15.0.1-zulu         
                |     | 15.0.1.fx    | zulu    |            | 15.0.1.fx-zulu      
@@ -79,7 +80,8 @@ Use the Identifier for installation:
 
     $ sdk install java 11.0.3.hs-adpt
 ================================================================================
-</pre>
+```
+
 
 For JavaFX-development, select a version with ".fx", e.g. `sdk install java 15.0.1.fx-zulu` and use this version in your IDE.
 

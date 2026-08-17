@@ -62,7 +62,8 @@ A benchmark that just creates short lived TopOfBook objects, across multiple CPU
 
 In this benchmark, sixteen clients connect to a simple microservice that takes each event and sends it back again. All events are (de)serialised POJOs with an event type. This translates to an asynchronous RPC call.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">public class EchoTopOfBookHandler implements TopOfBookHandler {
+```
+public class EchoTopOfBookHandler implements TopOfBookHandler {
    private TopOfBookListener topOfBookListener;
 
    @Override
@@ -70,15 +71,20 @@ In this benchmark, sixteen clients connect to a simple microservice that takes e
        if (ONE__NEW_OBJECT)
            topOfBook = topOfBook.deepCopy();
        topOfBookListener.topOfBook(topOfBook);
-   }</pre>
+   }
+```
+
 
 In this case, deepCopy() creates a new TopOfBook and sets all the fields.
 
 The benchmark can be run in two modes, one where no objects are allocated and one where any object is allocated and initialised, allowing us to measure the difference this makes. Each event is modelled as an asynchronous RPC call to make testing, development and maintenance easier.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">public interface TopOfBookListener {
+```
+public interface TopOfBookListener {
    void topOfBook(TopOfBook topOfBook);
-}</pre>
+}
+```
+
 
 Low latency software can be very fast but also difficult to work with, slowing development. In other words, often to create low latency software developers adopt low level techniques that are hard to read and maintain. This overhead can slow down your development. With Chronicle Wire your data structures are easy to read and debug, yet do not sacrifice performance.
 
@@ -86,7 +92,8 @@ Using events modelled in YAML we can support Behaviour Driven Development of the
 
 For testing purposes your data can be represented in a simple yaml format, as seen below:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic"># This is the in.yaml for the microservice of topOfBook that was described above. 
+```
+# This is the in.yaml for the microservice of topOfBook that was described above. 
 # first top-of-book
 ---
 topOfBook: {
@@ -110,7 +117,9 @@ topOfBook: {
  bidQuantity: 1500000,
  askQuantity: 2000000
 }
-...</pre>
+...
+```
+
 
 #### The Code
 

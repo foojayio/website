@@ -43,7 +43,8 @@ Well, this might be surprising. @SpringBootApplication is actually a combination
 
 The main class of your Spring Boot Application should be annotated with this annotation, which has a main method.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="dracula">package xyz.sumithpuri.spring.boot.annotation;  
+```java
+package xyz.sumithpuri.spring.boot.annotation;  
 
  import org.springframework.boot.SpringApplication;  
  import org.springframework.boot.autoconfigure.SpringBootApplication;  
@@ -64,7 +65,9 @@ The main class of your Spring Boot Application should be annotated with this ann
 
            return new SBASampleImpl();  
       }  
- }</pre>
+ }
+```
+
 
 **@EnableAutoConfiguration**
 
@@ -74,7 +77,8 @@ By default, the base package for searching of beans will be the same package as 
 
 Usually, you will place this annotation on your main class. If you use @SpringBootApplication, you may not need this annotation.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="dracula">package xyz.sumithpuri.spring.boot.annotation;  
+```java
+package xyz.sumithpuri.spring.boot.annotation;  
 
  import org.springframework.boot.SpringApplication;  
  import org.springframework.boot.autoconfigure.EnableAutoConfiguration;  
@@ -100,7 +104,9 @@ Usually, you will place this annotation on your main class. If you use @SpringBo
 
            return new SBASampleImpl();  
       }  
- }</pre>
+ }
+```
+
 
 **@SpringBootTest**
 
@@ -108,7 +114,8 @@ This one is straightforward, @SpringBootTest is used to create an application co
 
 You must annotate your Test Class file with this annotation.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="dracula">package xyz.sumithpuri.spring.boot.annotation;  
+```java
+package xyz.sumithpuri.spring.boot.annotation;  
 
  import org.junit.jupiter.api.Test;  
  import org.junit.runner.RunWith;  
@@ -122,7 +129,9 @@ You must annotate your Test Class file with this annotation.
       @Test  
       void contextLoads() {  
       }  
- }</pre>
+ }
+```
+
 
 **@SpringBootConfiguration**
 
@@ -136,7 +145,8 @@ This will be useful for unit and integration tests.
 
 Will match only when the specified classes are in the classpath.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="dracula">package xyz.sumithpuri.spring.boot.annotation.configuration;  
+```java
+package xyz.sumithpuri.spring.boot.annotation.configuration;  
 
  import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;  
  import org.springframework.context.annotation.Bean;  
@@ -158,7 +168,9 @@ Will match only when the specified classes are in the classpath.
 
            return new SBASampleImpl();  
       }  
- }</pre>
+ }
+```
+
 
 With Spring DevTools Enabled, you will see one such log on the console that are the debug statements showing the matches or evaluations against the conditions.
 
@@ -168,7 +180,8 @@ With Spring DevTools Enabled, you will see one such log on the console that are 
 
 Will match only when the specified environment property is present and it has a specific value.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="dracula">package xyz.sumithpuri.spring.boot.annotation.configuration;
+```java
+package xyz.sumithpuri.spring.boot.annotation.configuration;
 
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
@@ -193,7 +206,9 @@ public class SBASampleConfiguration {
 
   }
 
-}</pre>
+}
+```
+
 
 Please go ahead and add the property 'mode=false' in your application.properties
 
@@ -206,7 +221,8 @@ If this property is not present or has a different value, your server will refus
 
 It marks a class as a configuration properties source (mapping it from a properties or yaml file), which can then be used to control and also to validate properties. ConfigurationPropertiesScan can be used to scan locations for property files. The location can be specified as the parameter to the annotation.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="dracula">package xyz.sumithpuri.spring.boot.annotation.configuration;
+```java
+package xyz.sumithpuri.spring.boot.annotation.configuration;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.ConfigurationPropertiesScan;
@@ -235,7 +251,9 @@ public void setName(String name) {
    this.name = name;
 }
 
-..... // Getter and Setter Methods</pre>
+..... // Getter and Setter Methods
+```
+
 
 **Typical Properties File to be Read By ConfigurationProperties**
 

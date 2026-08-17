@@ -46,12 +46,18 @@ We start by using pure Termux, as it's [faster](https://www.reddit.com/r/termux/
 
 We start our pure Termux approach by installing our basic dependencies (and yes I like [ohmyzsh](https://ohmyz.sh/) and don't want to miss it anywhere):
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">apt install git zsh wget htop
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"</pre>
+```bash
+apt install git zsh wget htop
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+```
+
 
 Now we want to install Java. Termux lacks the [pthread library and a few others](https://github.com/termux/termux-app/issues/3261) so simply getting the Linux aarch64 built of my favourite JDK, [SapMachine](https://sapmachine.io/), running on my phone seemed too much work, so I'm using OpenJDK which already available in the Termux packages.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">apt install openjdk-21</pre>
+```bash
+apt install openjdk-21
+```
+
 
 Now we have a proper OpenJDK JVM running on our phone:  
 
@@ -63,14 +69,20 @@ But developing code in shell tools like VIM is cumbersome, so we let's install V
 
 The official VSCode distribution doesn't support Termux. But [Code-Server](https://github.com/coder/code-server) by [Coder](https://coder.com/) is a fork/variant of VSCode that [has support for running directly in Termux](https://coder.com/docs/code-server/termux) (via [dev.to](https://dev.to/codeledger/how-to-get-visual-studio-code-to-run-in-termux-on-android-405j)). It requires a few packages from the [termux-user-repository](https://github.com/termux-user-repository/tur) and can be installed via:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">apt install tur-repo
+```bash
+apt install tur-repo
 apt update
 apt upgrade
-apt install build-essential python nodejs code-server</pre>
+apt install build-essential python nodejs code-server
+```
+
 
 Now just start it:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">nohup code-server --auth none &amp;</pre>
+```bash
+nohup code-server --auth none &
+```
+
 
 This launches a local version and ignores the shell output. Code-server is by default password-protected, which is great. But we don't need authentication as the device is in home WIFI where nobody from the outside can access it anyway. If for what-ever reason, you want to password protect it, then remove `--auth none` and you'll find the auto-generated password in `$PREFIX/.config/code-server/config.yaml`.
 
@@ -98,12 +110,18 @@ We're especially interested in proot-distro. To quote the termux proot wiki page
 
 This allows to easily install an Ubuntu on our phone, which looks a little bit like [Windows Subsystem for Linux](https://ubuntu.com/desktop/wsl):
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">pkg install proot-distro
-proot-distro install ubuntu</pre>
+```bash
+pkg install proot-distro
+proot-distro install ubuntu
+```
+
 
 Now you can login via the following to run as root and use the Termux home folder as home:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">proot-distro login ubuntu --termux-home</pre>
+```bash
+proot-distro login ubuntu --termux-home
+```
+
 
 Running in this environment is, as I told you before, slower than running directly in Termux. To quote a reddit user:
 > Proot is slower. It uses Linux debugging interface (ptrace) to control the process execution and hijack arguments and return values of system calls, so it can simulate a different file system layout and user/group ids. This cause a lot overhead. In my experience the biggest performance penalty can be observed when working with a lot of files (e.g. extracting tarball).
@@ -111,18 +129,24 @@ Running in this environment is, as I told you before, slower than running direct
 
 As before, we want install some basic utilities and ohmyzsh:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">apt install git zsh wget htop
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"</pre>
+```bash
+apt install git zsh wget htop
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+```
+
 
 Now we can install SapMachine as explained in the [SapMachine Wiki](https://github.com/SAP/SapMachine/wiki/Installation):
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group=""># Add the SapMachine GPG key
-wget -qO- https://dist.sapmachine.io/debian/sapmachine.key | tee /etc/apt/trusted.gpg.d/sapmachine.asc &gt; /dev/null
+```bash
+# Add the SapMachine GPG key
+wget -qO- https://dist.sapmachine.io/debian/sapmachine.key | tee /etc/apt/trusted.gpg.d/sapmachine.asc > /dev/null
 # Add the SapMachine repository
-echo "deb https://dist.sapmachine.io/debian/$(dpkg --print-architecture)/ ./" | tee /etc/apt/sources.list.d/sapmachine.list &gt; /dev/null
+echo "deb https://dist.sapmachine.io/debian/$(dpkg --print-architecture)/ ./" | tee /etc/apt/sources.list.d/sapmachine.list > /dev/null
 # Install SapMachine 21
 apt update
-apt install sapmachine-21-jdk</pre>
+apt install sapmachine-21-jdk
+```
+
 
 Resulting in a proper JVM:  
 
@@ -132,17 +156,23 @@ Resulting in a proper JVM:
 
 After that, we can install the official VSCode distribution:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">wget 'https://code.visualstudio.com/sha/download?build=stable&amp;os=linux-deb-arm64' -O code.deb
+```bash
+wget 'https://code.visualstudio.com/sha/download?build=stable&os=linux-deb-arm64' -O code.deb
 apt install ./code.deb
 # Install the missing packages
 apt --fix-broken install
-rm code.deb</pre>
+rm code.deb
+```
+
 
 Installing the missing packages to around half an hour on my Pixel 8a.
 
 Starting the VSCode backend is as easy as before with code-server:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">nohup code serve-web --port 8080 --without-connection-token &amp; </pre>
+```bash
+nohup code serve-web --port 8080 --without-connection-token &
+```
+
 
 Now we have a proper official VSCode and can view it in the browser at [localhost:8080](8080):  
 
@@ -177,29 +207,38 @@ Building and Running SAP CAP SFlight {#h2-4-building-and-running-sap-cap-sflight
 
 Let's start by building SFlight on device. First we clone it:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">mkdir code # some hygiene
+```bash
+mkdir code # some hygiene
 cd code
 git clone https://github.com/SAP-samples/cap-sflight
 cd cap-sflight
 # install the Maven build system and npm
-apt install maven npm</pre>
+apt install maven npm
+```
+
 
 For those curious, this took:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group=""># Emulated Ubuntu
+```bash
+# Emulated Ubuntu
 3.22s user 2.05s system 81% cpu 6.457 total
 
 # Pure Termux
 2.98s user 1.19s system 99% cpu 4.184 total
 
 # Mac M4 for reference
-1.47s user 0.55s system 58% cpu 3.457 tota</pre>
+1.47s user 0.55s system 58% cpu 3.457 tota
+```
+
 
 Now we build and run it.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">npm ci # NodeJS based CAP tools
+```bash
+npm ci # NodeJS based CAP tools
 npm run build:ui
-mvn spring-boot:run</pre>
+mvn spring-boot:run
+```
+
 
 But the CAP tools run into a problem:  
 
@@ -221,17 +260,26 @@ Is it hacky? Yes. Is this a problem for a demo? No.
 
 We add the new branch as follows:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">git remote add fork https://github.com/parttimenerd/cap-sflight
+```bash
+git remote add fork https://github.com/parttimenerd/cap-sflight
 git pull fork
-git checkout cap-in-the-pocket</pre>
+git checkout cap-in-the-pocket
+```
+
 
 Now we can build and run the application again:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">mvn spring-boot:run</pre>
+```bash
+mvn spring-boot:run
+```
+
 
 It might exclaim that `JAVA_HOME` is not set correctly, this can be remedied by
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">export JAVA_HOME=/usr/lib/jvm/sapmachine-21</pre>
+```bash
+export JAVA_HOME=/usr/lib/jvm/sapmachine-21
+```
+
 
 You might want to add this to your `.zshrc` to make it permament.
 
@@ -265,14 +313,17 @@ Now let's have some fun: The SFlight admin screens allows the privileged user to
 
 The discount is computed in `DeductDiscountHandler` as follows:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">BigDecimal discount = BigDecimal.valueOf(context.percent())
+```
+BigDecimal discount = BigDecimal.valueOf(context.percent())
 	.divide(BigDecimal.valueOf(100), new MathContext(3));
 
 BigDecimal deductedBookingFee = travel.bookingFee()
         .subtract(travel.bookingFee().multiply(discount))
 	.round(new MathContext(3));
 BigDecimal deductedTotalPrice = travel.totalPrice()
-        .subtract(travel.totalPrice().multiply(discount));</pre>
+        .subtract(travel.totalPrice().multiply(discount));
+```
+
 
 We can now introduce the bug by dividing `context.percent()` in the first two lines not by 100, but by 10.
 ![](https://mostlynerdless.de/wp-content/uploads/2025/05/Screenshot-May-8-2025-1_28_58-PM-2000x900.png)
@@ -305,20 +356,23 @@ One tiny but significant limitation is that the terminal app currently doesn't s
 
 Let's install the utitlities and SapMachine as before with the main difference that we're not running as root by default:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group=""># Install the utilities
+```bash
+# Install the utilities
 sudo apt update
 sudo apt install git zsh wget htop
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 su # change to root
 # Add the SapMachine GPG key
 wget -qO- https://dist.sapmachine.io/debian/sapmachine.key | 
-tee /etc/apt/trusted.gpg.d/sapmachine.asc &gt; /dev/null
+tee /etc/apt/trusted.gpg.d/sapmachine.asc > /dev/null
 # Add the SapMachine repository
-echo "deb https://dist.sapmachine.io/debian/$(dpkg --print-architecture)/ ./" | tee /etc/apt/sources.list.d/sapmachine.list &gt; /dev/null
+echo "deb https://dist.sapmachine.io/debian/$(dpkg --print-architecture)/ ./" | tee /etc/apt/sources.list.d/sapmachine.list > /dev/null
 # Install SapMachine 21
 apt update
 apt install sapmachine-21-jdk
-exit # exit root</pre>
+exit # exit root
+```
+
 
 And of course you should set `JAVA_HOME` as before to prevent maven from complaining later.
 
@@ -332,11 +386,14 @@ We now have a SapMachine:
 
 We install VSCode as before too:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">wget 'https://code.visualstudio.com/sha/download?build=stable&amp;os=linux-deb-arm64' -O code.deb
+```bash
+wget 'https://code.visualstudio.com/sha/download?build=stable&os=linux-deb-arm64' -O code.deb
 sudo apt install ./code.deb
 # Install the missing packages
 sudo apt --fix-broken install
-rm code.deb</pre>
+rm code.deb
+```
+
 
 During the installation I got asked whether I want to add the Microsoft apt repository, having this prompt on my phone just looks funny:  
 
@@ -354,18 +411,22 @@ Now the thing you're all waiting for: How long does a git clone take and do the 
 
 Though first we have to update the NodeJS version (via [nodejs.org](https://nodejs.org/en/download)): *Report bug, that it contains "\\.. source ..." which doesn't work*
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group=""># Download and install nvm:
+```bash
+# Download and install nvm:
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash
 
 # in lieu of restarting the shell
 . "$HOME/.nvm/nvm.sh"
 
 # Download and install Node.js:
-nvm install 22</pre>
+nvm install 22
+```
+
 
 Now we can run the commands as before:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">mkdir code # some hygiene
+```bash
+mkdir code # some hygiene
 cd code
 git clone https://github.com/SAP-samples/cap-sflight
 # took: 3.58s user 1.52s system 109% cpu 4.643 total
@@ -376,7 +437,9 @@ sudo apt install maven
 
 npm ci # NodeJS based CAP tools
 npm run build:ui
-mvn spring-boot:run</pre>
+mvn spring-boot:run
+```
+
 
 And well, it worked... Which I find surprising. The UI of the new Linux Terminal App might be lacking and the partition size limit might be limiting, but I can build and run the stock CAP SFlight application without any changes.
 
@@ -405,14 +468,18 @@ Please be aware that this extension is highly experimental and only created with
 
 The "(Re)Launch CAP App" button tries to kill the previous running instance and relaunches it:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">(lsof -ti:4004 | xargs kill -9) || killall java || true
-mvn spring-boot:run</pre>
+```bash
+(lsof -ti:4004 | xargs kill -9) || killall java || true
+mvn spring-boot:run
+```
+
 
 *Did I say this extension is highly experimental?*
 
 Below the button, you see the output of the commands and links to the CAP application. By default I show buttons that open the two main views of SFlight. But you can configure it via the `settings.json` file. The default configuration is equivalent to:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="json" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">"cap-in-the-pocket.urlButtons": [
+```json
+"cap-in-the-pocket.urlButtons": [
   {
     "label": "Travel Processor",
     "url": "http://localhost:4004/travel_processor/dist/index.html"
@@ -421,7 +488,9 @@ Below the button, you see the output of the commands and links to the CAP applic
     "label": "Travel Analytics",
     "url": "http://localhost:4004/travel_analytics/dist/index.html"
   }
-]</pre>
+]
+```
+
 
 Creating this little plugin (with the help of Claude Sonnet and GitHub Copilot) allows me to have a more immersive demo.
 

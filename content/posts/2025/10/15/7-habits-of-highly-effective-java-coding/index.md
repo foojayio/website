@@ -60,12 +60,13 @@ Consider a common scenario in a microservices architecture: you need to build a 
 
 The AI, aiming for a direct solution, might produce something like this:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">// AI-Generated First Draft - Brittle and Naive
+```java
+// AI-Generated First Draft - Brittle and Naive
 public UserDashboardDTO getDashboard(long userId) throws Exception {
     // Fire off all requests in parallel
-    CompletableFuture&lt;User&gt; userFuture = CompletableFuture.supplyAsync(() -&gt; userService.getById(userId));
-    CompletableFuture&lt;List&lt;Order&gt;&gt; ordersFuture = CompletableFuture.supplyAsync(() -&gt; orderService.getRecentForUser(userId, 5));
-    CompletableFuture&lt;Integer&gt; reviewsFuture = CompletableFuture.supplyAsync(() -&gt; reviewService.countByUser(userId));
+    CompletableFuture<User> userFuture = CompletableFuture.supplyAsync(() -> userService.getById(userId));
+    CompletableFuture<List<Order>> ordersFuture = CompletableFuture.supplyAsync(() -> orderService.getRecentForUser(userId, 5));
+    CompletableFuture<Integer> reviewsFuture = CompletableFuture.supplyAsync(() -> reviewService.countByUser(userId));
 
     // Wait for all of them to complete
     CompletableFuture.allOf(userFuture, ordersFuture, reviewsFuture).join(); // The first major flaw
@@ -73,7 +74,8 @@ public UserDashboardDTO getDashboard(long userId) throws Exception {
     // If we get here, all services succeeded.
     return new UserDashboardDTO(userFuture.get(), ordersFuture.get(), reviewsFuture.get()); // The second flaw
 }
-</pre>
+```
+
 
 This code is a hidden landmine in a distributed system. 💣
 
@@ -83,35 +85,37 @@ This code is a hidden landmine in a distributed system. 💣
 
 A developer who **takes pride in their craft** recognizes that in a microservices world, partial communications and network failure is not rare. They refactor the code for **resilience and graceful degradation**.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">// Human-Crafted, Professional Solution - Resilient and Robust
+```java
+// Human-Crafted, Professional Solution - Resilient and Robust
 public UserDashboardDTO getDashboard(long userId) {
     ExecutorService customExecutor = Executors.newVirtualThreadPerTaskExecutor();
 
     // Each future is now a self-contained, resilient unit of work.
-    CompletableFuture&lt;User&gt; userFuture = CompletableFuture
-        .supplyAsync(() -&gt; userService.getById(userId), customExecutor)
+    CompletableFuture<User> userFuture = CompletableFuture
+        .supplyAsync(() -> userService.getById(userId), customExecutor)
         .orTimeout(2, TimeUnit.SECONDS) // Set a reasonable timeout
-        .exceptionally(ex -&gt; new User.GuestUser()); // On error, return a default/guest user
+        .exceptionally(ex -> new User.GuestUser()); // On error, return a default/guest user
 
-    CompletableFuture&lt;List&lt;Order&gt;&gt; ordersFuture = CompletableFuture
-        .supplyAsync(() -&gt; orderService.getRecentForUser(userId, 5), customExecutor)
+    CompletableFuture<List<Order>> ordersFuture = CompletableFuture
+        .supplyAsync(() -> orderService.getRecentForUser(userId, 5), customExecutor)
         .orTimeout(3, TimeUnit.SECONDS)
-        .exceptionally(ex -&gt; List.of()); // On error, return an empty list
+        .exceptionally(ex -> List.of()); // On error, return an empty list
 
-    CompletableFuture&lt;Integer&gt; reviewsFuture = CompletableFuture
-        .supplyAsync(() -&gt; reviewService.countByUser(userId), customExecutor)
+    CompletableFuture<Integer> reviewsFuture = CompletableFuture
+        .supplyAsync(() -> reviewService.countByUser(userId), customExecutor)
         .orTimeout(2, TimeUnit.SECONDS)
-        .exceptionally(ex -&gt; 0); // On error, return zero
+        .exceptionally(ex -> 0); // On error, return zero
 
     // Combine the results of the now-safe futures
     return CompletableFuture.allOf(userFuture, ordersFuture, reviewsFuture)
-        .thenApply(v -&gt; new UserDashboardDTO(
+        .thenApply(v -> new UserDashboardDTO(
             userFuture.join(),
             ordersFuture.join(),
             reviewsFuture.join()
         )).join();
 }
-</pre>
+```
+
 
 This professional solution is vastly superior. It handles failures gracefully within each asynchronous call using `.exceptionally()`, allowing the dashboard to render with partial data. It enforces timeouts with `.orTimeout()` to protect system resources.
 
@@ -133,21 +137,25 @@ Imagine you're tasked with implementing a dynamic shipping cost calculation base
 
 You start with a lazy prompt, giving the AI almost nothing to work with:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">// TODO: Implement the shipping cost logic
+```java
+// TODO: Implement the shipping cost logic
 // A vague prompt to the AI:
-// "Java method to calculate shipping cost for an order" 
-</pre>
+// "Java method to calculate shipping cost for an order"
+```
+
 
 The AI, having no context, will produce a generic, over-simplified method that is completely wrong for your application:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">// AI's Generic (and wrong) Response:
+```java
+// AI's Generic (and wrong) Response:
 public BigDecimal calculateShippingCost(Order order) {
     // A complete guess based on common, simple examples.
     BigDecimal baseRate = new BigDecimal("5.00");
     BigDecimal weightCharge = order.getWeightInKg().multiply(new BigDecimal("1.50"));
     return baseRate.add(weightCharge);
 }
-</pre>
+```
+
 
 This code is a waste of time. It doesn't know about your business rules, your customer types, or your data structures. Now, let's try again by giving the AI a proper brief.
 
@@ -155,7 +163,8 @@ This code is a waste of time. It doesn't know about your business rules, your cu
 
 This time, you treat the prompt like a mini-spec document, packing it with context right from your project.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">/*
+```java
+/*
  * Feature: JIRA-451 - Calculate Dynamic Shipping Cost
  * * User Story: As a user, I want to see an accurate shipping cost at checkout
  * based on my membership status, location, and the items in my cart.
@@ -168,7 +177,7 @@ This time, you treat the prompt like a mini-spec document, packing it with conte
  *
  * Relevant Data Classes:
  * class User { boolean isPrimeMember(); Address getAddress(); }
- * class Order { List&lt;LineItem&gt; getItems(); BigDecimal getSubtotal(); }
+ * class Order { List<LineItem> getItems(); BigDecimal getSubtotal(); }
  * class LineItem { Product getProduct(); }
  * class Product { ProductCategory getCategory(); } // enum ProductCategory { STANDARD, HEAVY_GOODS }
  *
@@ -176,20 +185,22 @@ This time, you treat the prompt like a mini-spec document, packing it with conte
  * "Using the context and data classes above, write a Java method `calculateShipping`
  * that takes a User and an Order and returns the final shipping cost as a BigDecimal."
  */
-</pre>
+```
+
 
 With this rich context, the AI can now generate something incredibly useful and specific to your actual codebase:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">// AI's Context-Aware (and useful) Response:
+```java
+// AI's Context-Aware (and useful) Response:
 public BigDecimal calculateShipping(User user, Order order) {
     // Rule 1: Prime members in the US
-    if (user.isPrimeMember() &amp;&amp; "US".equals(user.getAddress().getCountryCode())) {
+    if (user.isPrimeMember() && "US".equals(user.getAddress().getCountryCode())) {
         return BigDecimal.ZERO;
     }
 
     BigDecimal shippingCost;
 
-    // Rule 2 &amp; 3: US vs. International
+    // Rule 2 & 3: US vs. International
     if ("US".equals(user.getAddress().getCountryCode())) {
         shippingCost = new BigDecimal("5.00"); // Flat fee for non-prime US
     } else {
@@ -199,7 +210,7 @@ public BigDecimal calculateShipping(User user, Order order) {
 
     // Rule 4: Surcharge for heavy goods
     boolean hasHeavyGoods = order.getItems().stream()
-        .anyMatch(item -&gt; item.getProduct().getCategory() == ProductCategory.HEAVY_GOODS);
+        .anyMatch(item -> item.getProduct().getCategory() == ProductCategory.HEAVY_GOODS);
 
     if (hasHeavyGoods) {
         shippingCost = shippingCost.add(new BigDecimal("25.00"));
@@ -207,7 +218,8 @@ public BigDecimal calculateShipping(User user, Order order) {
 
     return shippingCost;
 }
-</pre>
+```
+
 
 Look at that difference! ✨ The second version is almost production-ready. It correctly implements the complex business logic because you gave the AI a map of your world. You spent an extra minute providing context and saved yourself thirty minutes of writing boilerplate and fixing the AI's guesses. That's a massive win.
 
@@ -235,11 +247,12 @@ You ask your AI: *"// Java: using a stream, process this list of signups. Filter
 
 The AI might produce this "clever" one-liner:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">// AI's "Clever" (but unmaintainable) Solution
-public List&lt;User&gt; processSignups(List&lt;SignUp&gt; signups) {
+```java
+// AI's "Clever" (but unmaintainable) Solution
+public List<User> processSignups(List<SignUp> signups) {
     return signups.stream()
                   .filter(SignUp::isVerified) // Filter for verified users
-                  .peek(signup -&gt; { // DANGER: Side effects inside a stream!
+                  .peek(signup -> { // DANGER: Side effects inside a stream!
                       boolean eligible = promoService.isEligible(signup.getEmail());
                       emailService.sendWelcomeEmail(signup.getEmail(), eligible);
                   })
@@ -251,7 +264,8 @@ private User convertAndSaveUser(SignUp signup) {
     User user = new User(signup.getName(), signup.getEmail());
     return userRepository.save(user);
 }
-</pre>
+```
+
 
 This code is a maintenance nightmare. 😵
 
@@ -261,9 +275,10 @@ This code is a maintenance nightmare. 😵
 
 A developer focused on **maintainability** would see this and immediately refactor it into something more "boring," but infinitely more professional: a simple loop.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">// Human-Crafted, Maintainable Solution
-public List&lt;User&gt; processSignups(List&lt;SignUp&gt; signups) {
-    List&lt;User&gt; successfullyProcessedUsers = new ArrayList&lt;&gt;();
+```java
+// Human-Crafted, Maintainable Solution
+public List<User> processSignups(List<SignUp> signups) {
+    List<User> successfullyProcessedUsers = new ArrayList<>();
 
     // A simple, "boring" loop is easy to read, easy to debug.
     for (SignUp signup : signups) {
@@ -287,7 +302,8 @@ public List&lt;User&gt; processSignups(List&lt;SignUp&gt; signups) {
     }
     return successfullyProcessedUsers;
 }
-</pre>
+```
+
 
 This version is superior in every practical way. It's easy to read, you can stick a breakpoint anywhere you want, and the `try-catch` block provides robust, granular error handling.
 
@@ -311,12 +327,14 @@ You ask your AI: *"// I need to parse a complex XML file in Java. Suggest a good
 
 The AI, having been trained on a vast amount of public code, including forum posts and GitHub issues with typos, might suggest this:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&lt;dependency&gt;
-    &lt;groupId&gt;org.apache.commons&lt;/groupId&gt;
-    &lt;artifactId&gt;commons-text-utils&lt;/artifactId&gt; 
-    &lt;version&gt;1.10.0&lt;/version&gt;
-&lt;/dependency&gt;
-</pre>
+```java
+<dependency>
+    <groupId>org.apache.commons</groupId>
+    <artifactId>commons-text-utils</artifactId> 
+    <version>1.10.0</version>
+</dependency>
+```
+
 
 You, the busy developer, glance at it. "org.apache.commons" looks legit, the name seems right, and you paste it into your `pom.xml`. **You've just potentially opened the door to a typosquatting or dependency confusion attack.** 💀
 
@@ -348,7 +366,7 @@ We must analyze three distinct areas:
 2. **The Generated Code**: Its correctness, its security, and its adherence to modern practices.
 3. **The Software Supply Chain**: The third-party dependencies the AI suggests.
 
-*** ** * ** ***
+
 
 ### **First, Analyze Your AI System** {#h3-6-first-analyze-your-ai-system}
 
@@ -357,7 +375,7 @@ Before you even write a prompt, remember that the AI is not an oracle. It's a to
 * **Is Your Prompt Safe?** 🔐 When you paste a chunk of your company's proprietary code into a free, public AI website, where does it go? You could be unintentionally leaking trade secrets. The habit is to **use enterprise-grade, secure tools** (like GitHub Copilot for Business or self-hosted options) that guarantee your code stays private.
 * **Is your AI architecture secure?** 👮When you use Agents and MCP servers, are you sure what they do? Have you checked their source code to know where your information goes?
 
-*** ** * ** ***
+
 
 ### **Second, Analyze the Generated Code: Accuracy, Bugs, Security and Outdated Knowledge** {#h3-7-second-analyze-the-generated-code-accuracy-bugs-security-and-outdated-knowledge}
 
@@ -371,7 +389,8 @@ Don't fall for the marketing hype. A [report from Sonar analysing top notch LLM 
 
 LLMs can directly introduce vulnerabilities into the code they generate because their training data might contain insecure patterns, or they might make logical errors during generation that result in security flaws. For example, an LLM might generate SQL code without proper input sanitization or hardcoding secrets, leading to SQL injection vulnerabilities or credentials leak.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">// DON'T PASTE THIS! ❌ It contains proprietary logic and sensitive keys.
+```java
+// DON'T PASTE THIS! ❌ It contains proprietary logic and sensitive keys.
 // "Refactor this method to be more efficient"
 public void processTransaction(Transaction tx) {
     if ("ProjectTitan".equals(tx.getProjectCode())) {
@@ -381,13 +400,15 @@ public void processTransaction(Transaction tx) {
     }
     // ... more confidential logic
 }
-</pre>
+```
+
 
 Also an AI model might have a knowledge cutoff of early 2023. It knows nothing about the latest features in Java 21+. It will generate correct, but clunky and outdated code.
 
 For example, you ask it to process different shapes. It might generate this pre-Java 21 code:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">// AI's Outdated (pre-Java 21) solution
+```java
+// AI's Outdated (pre-Java 21) solution
 public double getArea(Shape shape) {
     if (shape instanceof Circle) {
         Circle c = (Circle) shape;
@@ -399,21 +420,24 @@ public double getArea(Shape shape) {
         return 0;
     }
 }
-</pre>
+```
+
 
 A modern Java developer would immediately refactor this to a much cleaner and safer `switch` expression with type patterns:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">// The Modern Java 21+ Solution
+```java
+// The Modern Java 21+ Solution
 public double getArea(Shape shape) {
     return switch (shape) {
-        case Circle c -&gt; Math.PI * c.radius() * c.radius();
-        case Square s -&gt; s.side() * s.side();
-        default -&gt; 0;
+        case Circle c -> Math.PI * c.radius() * c.radius();
+        case Square s -> s.side() * s.side();
+        default -> 0;
     };
 }
-</pre>
+```
 
-*** ** * ** ***
+
+
 
 ### **Third, Analyze the Dependencies (The Software Supply Chain)** {#h3-8-third-analyze-the-dependencies-the-software-supply-chain}
 
@@ -451,10 +475,11 @@ Let's be clear: AI is fantastic at generating simple unit tests for pure functio
 
 But here's the trap we discussed in the last habit: if the AI wrote the buggy code, it will happily write a test that confirms the bug, giving you a beautiful "green" test suite that is actively lying to you.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">// AI wrote this buggy method...
+```java
+// AI wrote this buggy method...
 public String truncate(String text, int length) {
-    // BUG: Off-by-one error. Should be &lt;= length
-    if (text.length() &lt; length) { return text; }
+    // BUG: Off-by-one error. Should be <= length
+    if (text.length() < length) { return text; }
     return text.substring(0, length - 1) + "...";
 }
 
@@ -465,7 +490,8 @@ void testTruncation() {
     // DANGER: The AI asserts the incorrect result it expects.
     assertEquals("hell...", result); // This passes! 😱
 }
-</pre>
+```
+
 
 **The habit:** Use AI for boilerplate, but you, the human, must write the critical assertions based on the *requirements*, not based on the code's current behavior.
 
@@ -475,7 +501,8 @@ True confidence comes from watching your code interact with real infrastructure.
 
 **The Wrong Way (Useless Mocking):** Many developers test their service layer by mocking the database repository. This is a low-value test.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">// This test proves almost nothing.
+```java
+// This test proves almost nothing.
 @Test
 void testUserServiceWithMock() {
     // 1. Setup the mock
@@ -484,7 +511,7 @@ void testUserServiceWithMock() {
 
     // 2. Call the service
     UserService userService = new UserService(mockRepo);
-    List&lt;User&gt; activeUsers = userService.findActiveUsers();
+    List<User> activeUsers = userService.findActiveUsers();
 
     // 3. Assert
     // This only checks if your service called the mock. It tells you NOTHING
@@ -493,17 +520,19 @@ void testUserServiceWithMock() {
     assertEquals(1, activeUsers.size());
     verify(mockRepo).findByStatus("ACTIVE");
 }
-</pre>
+```
+
 
 **The Right Way (Real Confidence with Testcontainers):** A professional Java developer uses tools like **Testcontainers** to spin up a *real* database for the test.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">// This test builds REAL confidence.
+```java
+// This test builds REAL confidence.
 @SpringBootTest
 @Testcontainers
 class UserServiceIntegrationTest {
 
     @Container
-    static PostgreSQLContainer&lt;?&gt; postgres = new PostgreSQLContainer&lt;&gt;("postgres:15-alpine");
+    static PostgreSQLContainer<?> postgres = new PostgreSQLContainer<>("postgres:15-alpine");
 
     // Spring Boot will automatically configure the app to use this database.
     @DynamicPropertySource
@@ -526,7 +555,7 @@ class UserServiceIntegrationTest {
         userRepository.save(new User("Jane", "INACTIVE"));
 
         // 2. Call the service
-        List&lt;User&gt; activeUsers = userService.findActiveUsers();
+        List<User> activeUsers = userService.findActiveUsers();
 
         // 3. Assert
         // This test proves your @Query, schema, and service logic all work together.
@@ -534,7 +563,8 @@ class UserServiceIntegrationTest {
         assertEquals("Jon", activeUsers.get(0).getName());
     }
 }
-</pre>
+```
+
 
 #### **The Ultimate Collaboration: AI-Powered Acceptance Tests**
 
@@ -542,7 +572,8 @@ Here's where it all comes together. Your Product Owner or a domain expert writes
 
 **Gherkin `login.feature` file (written by a human):**
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">Feature: User Login
+```bash
+Feature: User Login
 
   Scenario: Successful login with valid credentials
     Given I am on the login page
@@ -550,13 +581,15 @@ Here's where it all comes together. Your Product Owner or a domain expert writes
     And I enter "a-valid-password" as my password
     And I click the login button
     Then I should be redirected to my dashboard page
-</pre>
+```
+
 
 Now, you use this as context for your AI. **The habit:** Ask the AI to be a translator. *"Given this Gherkin feature, generate the boilerplate Java step definitions for Cucumber."*
 
 **AI-Generated Java "Glue Code" (a huge time-saver):**
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">// AI generates this skeleton code for you instantly.
+```java
+// AI generates this skeleton code for you instantly.
 public class LoginSteps {
     @Given("I am on the login page")
     public void i_am_on_the_login_page() {
@@ -570,7 +603,8 @@ public class LoginSteps {
     }
     // ... and so on for the rest of the steps.
 }
-</pre>
+```
+
 
 The AI handles the tedious mapping, and you focus on implementing the meaningful automation logic. You're not just testing code anymore; you're verifying business requirements directly.
 
@@ -605,24 +639,26 @@ Imagine a developer used an AI to implement a caching layer for a frequently cal
 
 Here's the code snippet in the PR:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">// service/ProductService.java
+```java
+// service/ProductService.java
 import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
 
 @Service
 public class ProductService {
     // An in-memory cache for product details
-    private final Cache&lt;Long, ProductDetails&gt; productCache = CacheBuilder.newBuilder()
+    private final Cache<Long, ProductDetails> productCache = CacheBuilder.newBuilder()
         .maximumSize(1000)
         .expireAfterWrite(10, TimeUnit.MINUTES)
         .build();
 
     public ProductDetails getProductDetails(long productId) {
         // AI correctly implemented the cache-aside pattern
-        return productCache.get(productId, () -&gt; repository.findDetailsById(productId));
+        return productCache.get(productId, () -> repository.findDetailsById(productId));
     }
 }
-</pre>
+```
+
 
 And here's the **human-centric review** in the PR comments:
 

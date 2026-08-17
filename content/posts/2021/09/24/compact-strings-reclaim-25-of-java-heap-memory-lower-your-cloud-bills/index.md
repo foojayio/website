@@ -29,11 +29,14 @@ Nevertheless, a String object in Java is also immutable, which means the String 
 
 In Java 8 and pre-Java 8, a char array is used in a String. A char takes two bytes of memory. That means that to store one character, you need 16 bits of memory. For example, if you write "Hello" you'd need an object of an array, and that would have 5 characters.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">The total size of a String 
+```
+The total size of a String 
 = size of array object itself + size of 5 characters + array holds an integer for its length 
 = 8 bytes for array object header + 5 * 2bytes + 4 bytes 
 = 8 + 10 + 4 
-= 22 bytes</pre>
+= 22 bytes
+```
+
 
 However, most Western locales nowadays need only 8 bits byte array to encode them. That's why Java 11 (see [JEP 254](https://openjdk.java.net/jeps/254)) introduces the new compact Strings that encode a string with an 8-bit byte array instead of a char array. Unless they explicitly need 16-bit characters. These strings are known as compact strings. Hence, the size of an average string in Java 11 is roughly half the size of the same in Java 8.
 

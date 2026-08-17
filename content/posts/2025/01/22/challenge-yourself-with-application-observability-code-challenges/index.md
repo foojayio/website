@@ -142,6 +142,6 @@ Are you able to improve the observability, find the cause and maybe even fix it?
 
 👉 Go to the challenge: [https://github.com/cbos/application-observability-code-challenges/tree/main/challenge-01](https://goto.ceesbos.nl/ghch01)
 
-*** ** * ** ***
+
 
 *Originally published on [ceesbos.nl](https://ceesbos.nl) in January 2025*

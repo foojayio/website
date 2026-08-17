@@ -35,20 +35,26 @@ These are the traditional assertions that everyone's used to seeing, we assert f
 
 For example
 
-<pre class="EnlighterJSRAW">assertEquals(person1.getName(), personRecord1.name());
+```
+assertEquals(person1.getName(), personRecord1.name());
 assertEquals(person1.getMainLanguage(), personRecord1.mainLanguage());
 assertEquals(person1.getEmail(), personRecord1.email());
 assertEquals(person1.getAddress(), personRecord1.address());
 assertEquals(person1.getPhoneNumber(), personRecord1.phoneNumber());
-assertEquals(person1.getDateOfBirth().toString(), personRecord1.dateOfBirth());</pre>
+assertEquals(person1.getDateOfBirth().toString(), personRecord1.dateOfBirth());
+```
+
 
 If, for example, our e-mail assertion were to fail we would receive no information on the validity of the address, phone number or date of birth.
 
 Or even earlier, if our main language was wrong we'd just receive something like:
 
-<pre class="EnlighterJSRAW">org.opentest4j.AssertionFailedError:
+```
+org.opentest4j.AssertionFailedError:
 Expected :French
-Actual   :English</pre>
+Actual   :English
+```
+
 
 ### "Soft" assertion {#_soft_assertion}
 
@@ -89,18 +95,22 @@ As of the moment of writing Truth does have an open pull request for this, but i
 
 JUnit makes it easy for us, we merely need to statically import `assertAll`
 
-<pre class="EnlighterJSRAW">assertAll("Person 2",
-    () -&gt; assertEquals(person2.getName(), personRecord2.name()),
-    () -&gt; assertEquals(person2.getMainLanguage(), personRecord1.mainLanguage()),
-    () -&gt; assertEquals(person2.getEmail(), personRecord2.email()),
-    () -&gt; assertEquals(person2.getAddress(), personRecord2.address()),
-    () -&gt; assertEquals(person2.getPhoneNumber(), personRecord1.phoneNumber()),
-    () -&gt; assertEquals(person2.getDateOfBirth().toString(), personRecord1.dateOfBirth())
-);</pre>
+```
+assertAll("Person 2",
+    () -> assertEquals(person2.getName(), personRecord2.name()),
+    () -> assertEquals(person2.getMainLanguage(), personRecord1.mainLanguage()),
+    () -> assertEquals(person2.getEmail(), personRecord2.email()),
+    () -> assertEquals(person2.getAddress(), personRecord2.address()),
+    () -> assertEquals(person2.getPhoneNumber(), personRecord1.phoneNumber()),
+    () -> assertEquals(person2.getDateOfBirth().toString(), personRecord1.dateOfBirth())
+);
+```
+
 
 And then we get a clear output:
 
-<pre class="EnlighterJSRAW">org.opentest4j.MultipleFailuresError: Person 2 (3 failures)
+```
+org.opentest4j.MultipleFailuresError: Person 2 (3 failures)
 	org.opentest4j.AssertionFailedError: expected:  but was:
 	org.opentest4j.AssertionFailedError: expected:  but was:
 	org.opentest4j.AssertionFailedError: expected:  but was:
@@ -117,7 +127,9 @@ And then we get a clear output:
 	Suppressed: org.opentest4j.AssertionFailedError: expected:  but was:
 		...
 	Suppressed: org.opentest4j.AssertionFailedError: expected:  but was:
-		...</pre>
+		...
+```
+
 
 ### AssertJ {#_assertj}
 
@@ -127,18 +139,22 @@ We can write our own soft assertions, make use of an injected `SofAssertions` pa
 
 But let's keep it easy, and clear and make use of the static `assertSoftly` method.
 
-<pre class="EnlighterJSRAW">assertSoftly(softAssertions -&gt; {
+```
+assertSoftly(softAssertions -> {
     softAssertions.assertThat(personRecord2.name()).isEqualTo(person2.getName());
     softAssertions.assertThat(personRecord1.mainLanguage()).isEqualTo(person2.getMainLanguage());
     softAssertions.assertThat(personRecord2.email()).isEqualTo(person2.getEmail());
     softAssertions.assertThat(personRecord2.address()).isEqualTo(person2.getAddress());
     softAssertions.assertThat(personRecord1.phoneNumber()).isEqualTo(person2.getPhoneNumber());
     softAssertions.assertThat(personRecord1.dateOfBirth()).isEqualTo(person2.getDateOfBirth().toString());
-});</pre>
+});
+```
+
 
 Rather than immediately failing on the second assertion, we'll get an error on the 2nd, 5th and 6th assertion.
 
-<pre class="EnlighterJSRAW">org.assertj.core.error.AssertJMultipleFailuresError:
+```
+org.assertj.core.error.AssertJMultipleFailuresError:
 Multiple Failures (3 failures)
 -- failure 1 --
 expected: "French"
@@ -151,24 +167,30 @@ at AssertJSoftTest.lambda$softAssert$1(AssertJSoftTest.java:53)
 -- failure 3 --
 expected: "1982-04-01"
 but was: "1980-12-01"
-at AssertJSoftTest.lambda$softAssert$1(AssertJSoftTest.java:54)</pre>
+at AssertJSoftTest.lambda$softAssert$1(AssertJSoftTest.java:54)
+```
+
 
 ### TestNG {#_testng}
 
 We can make use of the `SoftAssert` class to group our assertions, and then verify them as a group by invoking `assertAll`.
 
-<pre class="EnlighterJSRAW">var personSoftAssert2 = new SoftAssert();
+```
+var personSoftAssert2 = new SoftAssert();
 personSoftAssert2.assertEquals(person2.getName(), personRecord2.name());
 personSoftAssert2.assertEquals(person2.getMainLanguage(), personRecord1.mainLanguage());
 personSoftAssert2.assertEquals(person2.getEmail(), personRecord2.email());
 personSoftAssert2.assertEquals(person2.getAddress(), personRecord2.address());
 personSoftAssert2.assertEquals(person2.getPhoneNumber(), personRecord1.phoneNumber());
 personSoftAssert2.assertEquals(person2.getDateOfBirth().toString(), personRecord1.dateOfBirth());
-personSoftAssert2.assertAll();</pre>
+personSoftAssert2.assertAll();
+```
+
 
 Which results in a very clean
 
-<pre class="EnlighterJSRAW">java.lang.AssertionError: The following asserts failed:
+```
+java.lang.AssertionError: The following asserts failed:
 	expected [English] but found [French],
 	expected [555-1234] but found [555-5678],
 	expected [1980-12-01] but found [1982-04-01]
@@ -178,7 +200,9 @@ Which results in a very clean
 	at dev.simonverhoeven.softassertions.TestNGSoftTest.softAssert(TestNGSoftTest.java:54)
 	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
 	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
-	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)</pre>
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+```
+
 
 Takeaway {#_takeaway}
 ---------------------
@@ -189,7 +213,8 @@ You can always brew your own variant for this, but these three libraries have ve
 
 And please do experiment, for example you can write custom (soft-)assertions in AssertJ by doing:
 
-<pre class="EnlighterJSRAW">public class CustomPersonSoftAssertion extends AbstractAssert {
+```
+public class CustomPersonSoftAssertion extends AbstractAssert {
     public CustomPersonSoftAssertion(Person person) {
         super(person, CustomPersonSoftAssertion.class);
     }
@@ -213,7 +238,9 @@ public class CustomAssertJSoftAssertions extends SoftAssertions {
     public CustomPersonSoftAssertion assertThat(Person actual) {
         return proxy(CustomPersonSoftAssertion.class, Person.class, actual);
     }
-}</pre>
+}
+```
+
 
 References {#_references}
 -------------------------

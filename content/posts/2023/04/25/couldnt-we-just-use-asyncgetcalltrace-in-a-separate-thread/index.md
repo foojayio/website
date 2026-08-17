@@ -74,7 +74,8 @@ Modifying AsyncGetCallTrace {#h2-3-modifying-asyncgetcalltrace}
 
 Let us first take a look at the API to refresh our knowledge:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="cpp" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">void AsyncGetCallTrace(ASGCT_CallTrace *trace, jint depth, 
+```cpp
+void AsyncGetCallTrace(ASGCT_CallTrace *trace, jint depth, 
                        void* ucontext)
 // Arguments:
 //
@@ -92,7 +93,7 @@ Let us first take a look at the API to refresh our knowledge:
 // Fields:
 //   env_id     - ID of thread which executed this trace.
 //   num_frames - number of frames in the trace.
-//                (&lt; 0 indicates the frame is not walkable).
+//                (< 0 indicates the frame is not walkable).
 //   frames     - the ASGCT_CallFrames that make up this trace. 
 //                Callee followed by callers.
 //
@@ -100,33 +101,43 @@ Let us first take a look at the API to refresh our knowledge:
 //    typedef struct {
 //        jint lineno;
 //        jmethodID method_id;
-//    } ASGCT_CallFrame;</pre>
+//    } ASGCT_CallFrame;
+```
+
 
 *If you're new to AsyncGetCallTrace (and my blog), consider reading my [Writing a Profiler from Scratch: Introduction](https://mostlynerdless.de/blog/2022/12/20/writing-a-profiler-from-scratch-introduction/) article*.
 
 So we already pass an identifier of the current thread (`env_id`) to the API, which should point to the walked thread :
 
-<pre class="EnlighterJSRAW" data-enlighter-language="cpp" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">// This is safe now as the thread has not terminated 
+```cpp
+// This is safe now as the thread has not terminated 
 // and so no VM exit check occurs.
 assert(thread == 
-         JavaThread::thread_from_jni_environment(trace-&gt;env_id),
+         JavaThread::thread_from_jni_environment(trace->env_id),
        "AsyncGetCallTrace must be called by " +
        "the current interrupted thread");
- </pre>
+```
+
 
 [This](https://github.com/openjdk/jdk/blob/d8af7a6014055295355a1242db6c2872299c6398/src/hotspot/share/prims/forte.cpp#L595) is the only usage of the passed thread identifier, and why I considered removing it in AsyncGetStackTrace altogether. AsyncGetCallTrace uses the current thread [instead](https://github.com/openjdk/jdk/blob/d8af7a6014055295355a1242db6c2872299c6398/src/hotspot/share/prims/forte.cpp#L579):
 
-<pre class="EnlighterJSRAW" data-enlighter-language="cpp" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">Thread* raw_thread = Thread::current_or_null_safe();</pre>
+```cpp
+Thread* raw_thread = Thread::current_or_null_safe();
+```
+
 
 The assertion above is only enabled in debug builds of the OpenJDK, which are rarely profiled. Therefore, the thread identifier is often ignored and is probably a historic relic. We can use this identifier to obtain the thread that the API user wants to profile and only use the current thread when the thread identifier is null ([source](https://github.com/parttimenerd/jdk/blob/497ae43b1fa62fe9ebaa5b3f813954206a536820/src/hotspot/share/prims/forte.cpp#L580)):
 
-<pre class="EnlighterJSRAW" data-enlighter-language="cpp" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">Thread* raw_thread;
-if (trace-&gt;env_id == nullptr) {
+```cpp
+Thread* raw_thread;
+if (trace->env_id == nullptr) {
   raw_thread = Thread::current_or_null_safe();
 } else {
   raw_thread = 
-    JavaThread::thread_from_jni_environment_raw(trace-&gt;env_id);
-}</pre>
+    JavaThread::thread_from_jni_environment_raw(trace->env_id);
+}
+```
+
 
 We can thereby support the new feature without modifying the API itself, only changing the behavior if the thread identifier does not reference the current thread.
 
@@ -139,32 +150,39 @@ At the beginning of the article, I already told you how JFR walks the stack in a
 
 Before our changes, async-profiler would signal selected threads in a loop via
 
-<pre class="EnlighterJSRAW" data-enlighter-language="cpp" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">OS::sendSignalToThread(thread_id, SIGVTALRM)</pre>
+```cpp
+OS::sendSignalToThread(thread_id, SIGVTALRM)
+```
+
 
 ([source](https://github.com/async-profiler/async-profiler/blob/ac2eabfe96c15af77c79a5cfc43a4f9869cd8c1b/src/wallClock.cpp#L132)) and records the sample directly in the signal handler ([source](https://github.com/async-profiler/async-profiler/blob/ac2eabfe96c15af77c79a5cfc43a4f9869cd8c1b/src/wallClock.cpp#L60)):
 
-<pre class="EnlighterJSRAW" data-enlighter-language="cpp" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">void WallClock::signalHandler(
+```cpp
+void WallClock::signalHandler(
   int signo, 
   siginfo_t* siginfo, 
   void* ucontext) {
     ExecutionEvent event;
     event._thread_state = _sample_idle_threads ? 
       getThreadState(ucontext) : THREAD_UNKNOWN;
-    Profiler::instance()-&gt;recordSample(ucontext, _interval, 
-                                       EXECUTION_SAMPLE, &amp;event);
-}</pre>
+    Profiler::instance()->recordSample(ucontext, _interval, 
+                                       EXECUTION_SAMPLE, &event);
+}
+```
+
 
 The `Profiler::recordSample` the method does more than just call AsyncGetCallTrace; it also obtains C/C++ frames. However, this is insignificant for our modifications, as the additional stack walking is only related to the ucontext, not the thread.
 
 We now modify this code so that we still send a signal to the sampled thread but only set a global ucontext and thread identifier (`struct Data`) in the signal handler, blocking till we finished walking the stack in the sampler thread, walking the stack in the latter ([source](https://github.com/parttimenerd/async-profiler/blob/dont_use_thread_current/src/wallClock.cpp#L75)):
 
-<pre class="EnlighterJSRAW" data-enlighter-language="cpp" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">struct Data {
+```cpp
+struct Data {
     void* ucontext;
     JNIEnv* jni;
 };
 
-std::atomic&lt;int&gt; _thread_id;
-std::atomic&lt;Data*&gt; _thread_data;
+std::atomic<int> _thread_id;
+std::atomic<Data*> _thread_data;
 
 bool WallClock::walkStack(int thread_id) {
     // set the current thread
@@ -177,7 +195,7 @@ bool WallClock::walkStack(int thread_id) {
         return false;
     }
     // wait till the signal handler has set the ucontext and jni
-    if (!waitWhile([&amp;](){ return _thread_data == nullptr;}, 
+    if (!waitWhile([&](){ return _thread_data == nullptr;}, 
                    10 * 1000 * 1000)) {
         _thread_id = -1;
         return false;
@@ -186,9 +204,9 @@ bool WallClock::walkStack(int thread_id) {
     // walk the stack
     ExecutionEvent event;
     event._thread_state = _sample_idle_threads ?
-      getThreadState(data-&gt;ucontext) : THREAD_UNKNOWN;
-    u64 ret = Profiler::instance()-&gt;recordSample(data-&gt;ucontext,
-      _interval, EXECUTION_SAMPLE, &amp;event, data-&gt;jni);
+      getThreadState(data->ucontext) : THREAD_UNKNOWN;
+    u64 ret = Profiler::instance()->recordSample(data->ucontext,
+      _interval, EXECUTION_SAMPLE, &event, data->jni);
 
     // reset the thread_data, triggering the signal handler
     _thread_data = nullptr;
@@ -211,7 +229,7 @@ void WallClock::signalHandler(
     };
 
     Data* expected = nullptr;
-    if (!_thread_data.compare_exchange_strong(expected, &amp;data)) {
+    if (!_thread_data.compare_exchange_strong(expected, &data)) {
         // another signal handler invocation 
         // is already in progress
         return;
@@ -219,20 +237,25 @@ void WallClock::signalHandler(
     // wait for the stack to be walked, and block the thread 
     // from executing
     // we do not timeout here, as this leads to difficult bugs
-    waitWhile([&amp;](){ return _thread_data != nullptr;});
-}</pre>
+    waitWhile([&](){ return _thread_data != nullptr;});
+}
+```
+
 
 The signal handler only stores the ucontext and thread identifier if it is run in the thread currently walked and uses `compare_exchange_strong` to ensure that the _thread_data is only set once. This prevents stalled signal handlers from concurrently modifying the global variables.
 
 `_thread_data.`[compare_exchange_strong](https://en.cppreference.com/w/cpp/atomic/atomic/compare_exchange)`(expected, &data)` is equivalent to atomically executing:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="cpp" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">if (_thread_data == expected) {
-    _thread_data = &amp;data;
+```cpp
+if (_thread_data == expected) {
+    _thread_data = &data;
     return true;
 } else {
     expected = _thread_data;
     return false;
-}</pre>
+}
+```
+
 
 This ensures that the `_thread_data` is only set if it is null. Such operations are the base of many lock-free data structures; you can find more on this topic in the Wikipedia article on Compare-and-Swap (a synonym for compare-and-exchange).
 
@@ -259,14 +282,20 @@ For a deeper dive, consider reading the comment of David Holmes to the reference
 
 We check this condition in our signal handler implementation with the line
 
-<pre class="EnlighterJSRAW" data-enlighter-language="cpp" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">VMThread::current() == nullptr ? nullptr : VM::jni()</pre>
+```cpp
+VMThread::current() == nullptr ? nullptr : VM::jni()
+```
+
 
 with `VMThread::current()` being implemented as:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="cpp" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">VMThread* VMThread::current() {
+```cpp
+VMThread* VMThread::current() {
     return (VMThread*)pthread_getspecific(
       (pthread_key_t)_tls_index /* -1 */);
-}</pre>
+}
+```
+
 
 This implementation detail is not an issue for async-profiler as it might make assumptions. Still, it is undoubtedly a problem for the general approach I want to propose for my [new AsyncGetStackTrace API](https://openjdk.org/jeps/435).
 
@@ -281,7 +310,8 @@ We want to identify the thread using something different from JNIEnv. The OS thr
 
 We have to add a new parameter `os_thread_id` to the API to facilitate this change ([source](https://github.com/parttimenerd/jdk/blob/dont_use_thread_current2/src/hotspot/share/prims/forte.cpp)):
 
-<pre class="EnlighterJSRAW" data-enlighter-language="cpp" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">// ...
+```cpp
+// ...
 //   os_thread_id - OS thread id of the thread which executed 
 //                  this trace, or -1 if the current thread 
 //                  should be used.
@@ -291,7 +321,9 @@ We have to add a new parameter `os_thread_id` to the API to facilitate this chan
 //                the API sets this field if it is NULL.
 // ...
 void AsyncGetCallTrace(ASGCT_CallTrace *trace, jint depth, 
-  void* ucontext, jlong os_thread_id)</pre>
+  void* ucontext, jlong os_thread_id)
+```
+
 
 The implementation can be found in [my OpenJDK fork](https://github.com/parttimenerd/jdk/tree/dont_use_thread_current2), but be aware that it is not yet optimized for performance as it iterates over the whole thread list for every call to find the `Thread` which matches the passed OS thread id.
 
@@ -300,7 +332,8 @@ Modifying async-profiler (2^nd^ approach) {#h2-6-modifying-async-profiler-2nd-ap
 
 The modification to async-profiler is quite similar to the first approach. The only difference is that we're not dealing with JNIEnv anymore. This makes the signal handler implementation slightly simpler ([source](https://github.com/parttimenerd/async-profiler/blob/dont_use_thread_current2/src/wallClock.cpp#102)):
 
-<pre class="EnlighterJSRAW" data-enlighter-language="cpp" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">void WallClock::signalHandler(
+```cpp
+void WallClock::signalHandler(
   int signo, 
   siginfo_t* siginfo, 
   void* ucontext) {
@@ -317,8 +350,10 @@ The modification to async-profiler is quite similar to the first approach. The o
     // wait for the stack to be walked, and block the thread 
     // from executing
     // we do not timeout here, as this leads to difficult bugs
-    waitWhile([&amp;](){ return _ucontext != nullptr;});
-}</pre>
+    waitWhile([&](){ return _ucontext != nullptr;});
+}
+```
+
 
 You can find the full implementation in [my async-profiler fork](https://github.com/parttimenerd/async-profiler/tree/dont_use_thread_current2).
 
@@ -343,7 +378,8 @@ The JVM might crash during the stack walking because the ucontext might be inval
 
 The other option is to catch any segmentation faults that occur inside AsyncGetCallTrace. We can do this because we walk the stack in a separate thread (and JFR does it as well, as I've written at the beginning of this post). We can implement this by leveraging the [ThreadCrashProtection](https://github.com/parttimenerd/jdk/blob/dont_use_thread_current2_safe/src/hotspot/os/posix/threadCrashProtection_posix.hpp) clas,s which has, quite rightfully, some disclaimers:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="cpp" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">/*
+```cpp
+/*
  * Crash protection for the JfrSampler thread. Wrap the callback
  * with a sigsetjmp and in case of a SIGSEGV/SIGBUS we siglongjmp
  * back.
@@ -356,25 +392,30 @@ The other option is to catch any segmentation faults that occur inside AsyncGetC
 class ThreadCrashProtection : public StackObj {
 public:
   // ...
-  bool call(CrashProtectionCallback&amp; cb);
+  bool call(CrashProtectionCallback& cb);
   // ...
-};</pre>
+};
+```
+
 
 We wrap the call to the actual AsyncGetCallTrace implementation of our second approach in this handler ([source](https://github.com/parttimenerd/jdk/blob/dont_use_thread_current2_safe/src/hotspot/share/prims/forte.cpp#L703)):
 
-<pre class="EnlighterJSRAW" data-enlighter-language="cpp" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">void AsyncGetCallTrace(ASGCT_CallTrace *trace, jint depth, 
+```cpp
+void AsyncGetCallTrace(ASGCT_CallTrace *trace, jint depth, 
  void* ucontext, jlong os_thread_id) {
-  trace-&gt;num_frames = ticks_unknown_state;
+  trace->num_frames = ticks_unknown_state;
   AsyncGetCallTraceCallBack cb(trace, depth, ucontext, 
                                os_thread_id);
   ThreadCrashProtection crash_protection;
   if (!crash_protection.call(cb)) {
     fprintf(stderr, "AsyncGetCallTrace: catched crash\n");
-    if (trace-&gt;num_frames &gt;= 0) {
-      trace-&gt;num_frames = ticks_unknown_state;
+    if (trace->num_frames >= 0) {
+      trace->num_frames = ticks_unknown_state;
     }
   }
-}</pre>
+}
+```
+
 
 This prevents all crashes related to walking the stack from crashing the JVM, which is also helpful for the AsyncGetCallTrace usage of the previous part of this article. The only difference is that crashes in the stack walking are considered a bug in a normal use case but are expected in this use case where we don't stop the sampled thread.
 
@@ -403,11 +444,14 @@ Evaluation {#h2-8-evaluation}
 
 We can now compare the performance of the original with the two prototypical implementations and the experimental implementation in a preliminary evaluation. I like using the benchmarks of the [renaissance suite](https://renaissance.dev/) (version 0.14.2). For this example, I used the primarily single core, dotty benchmark with an interval of 1ms and 10ms:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">java -agentpath:./build/lib/libasyncProfiler.so=start,\
+```
+java -agentpath:./build/lib/libasyncProfiler.so=start,\
                 interval=INTERVAL,event=wall,\ 
                 flamegraph,file=flame.html \
      -XX:+UnlockDiagnosticVMOptions -XX:DebugNonSafepoints \
-     -jar renaissance.jar BENCHMARK</pre>
+     -jar renaissance.jar BENCHMARK
+```
+
 
 The shorter interval will make the performance impact of changes to the profiling more impactful. I'm profiling with my Threadripper 3995WX on Ubuntu using [hyperfine](https://github.com/sharkdp/hyperfine) (one warm-up run and ten measured runs each). The standard deviation is less than 0.4% in the following diagram, which shows the wall-clock time:
 ![](https://mostlynerdless.de/wp-content/uploads/2023/04/re_dotty_wc-2.svg)

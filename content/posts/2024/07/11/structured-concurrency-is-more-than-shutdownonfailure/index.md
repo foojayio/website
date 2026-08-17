@@ -27,9 +27,10 @@ If you've ever seen a presentation about [structured concurrency](https://docs.o
 
 These classes will stop the scope and the still running sub-tasks within that scope when one of the sub-task succeeds or fails.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">try (var scope = new StructuredTaskScope.ShutdownOnFailure()) {
-     var student = scope.fork(() -&gt; getStudent(studentID)); 
-     var grades = scope.fork(() -&gt; getGrades(studentID));
+```java
+try (var scope = new StructuredTaskScope.ShutdownOnFailure()) {
+     var student = scope.fork(() -> getStudent(studentID)); 
+     var grades = scope.fork(() -> getGrades(studentID));
 
     scope.join();          
     scope.throwIfFailed();
@@ -37,7 +38,9 @@ These classes will stop the scope and the still running sub-tasks within that sc
     return student.get().getName() + " " + grades.get().getAverage();
 } catch (Exception ex) {
     return ex.getMessage();
-}</pre>
+}
+```
+
 
 In project [**Virtually**](https://github.com/japplis/Virtually), I've extended the task scope to offer new possibilities.  
 
@@ -96,21 +99,23 @@ Conclusion {#h2-6-conclusion}
 
 [StructuredTaskScope](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/concurrent/StructuredTaskScope.html) is a good class to extend to provide extended features when you want to execute multiple tasks in virtual threads.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">// A small demo to finish:
+```java
+// A small demo to finish:
 void listTaskScope() {
-    List&lt;Product&gt; products = ShopFactory.createManyProducts(15_000);
-    CallableFunction&lt;Product, Double&gt; productToPrice = (Product p) -&gt; priceService.retreivePrice(p.id());
-    try (ListTaskScope&lt;Product, Double&gt; scope = new ListTaskScope(productToPrice)) {
+    List<Product> products = ShopFactory.createManyProducts(15_000);
+    CallableFunction<Product, Double> productToPrice = (Product p) -> priceService.retreivePrice(p.id());
+    try (ListTaskScope<Product, Double> scope = new ListTaskScope(productToPrice)) {
         scope.setMaxConsecutiveFails(50);
         scope.setMaxConcurrentTasks(1_000);
         for (Product product : products) {
             scope.convert(product);
         }
-        Map&lt;Product, Double&gt; productWithPrices = scope.getResultsAsMap();
-        List&lt;Double&gt; prices = scope.getResultsAsList();
-        System.out.println("Size: " + productWithPrices.size() + " &amp; " + prices.size());
+        Map<Product, Double> productWithPrices = scope.getResultsAsMap();
+        List<Double> prices = scope.getResultsAsList();
+        System.out.println("Size: " + productWithPrices.size() + " & " + prices.size());
     }
 }
-</pre>
+```
+
 
 <br />

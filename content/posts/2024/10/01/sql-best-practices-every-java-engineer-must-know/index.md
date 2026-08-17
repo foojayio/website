@@ -34,12 +34,18 @@ Indexes can significantly improve query performance by allowing the database to 
 
 ⛔ **Avoid Practice:**
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">SELECT * FROM users WHERE email = '<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="09686560496e64686065276a6664">[email&nbsp;protected]</a>';</pre>
+```
+SELECT * FROM users WHERE email = '<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="09686560496e64686065276a6664">[email protected]</a>';
+```
+
 
 🟢 **Good Practice**:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">CREATE INDEX idx_users_email ON users (email);
-SELECT name, email FROM users WHERE email = '<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="e485888da48389858d88ca878b89">[email&nbsp;protected]</a>';</pre>
+```
+CREATE INDEX idx_users_email ON users (email);
+SELECT name, email FROM users WHERE email = '<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="e485888da48389858d88ca878b89">[email protected]</a>';
+```
+
 
 This creates an index on the `email` column of the `users` table, speeding up searches based on email.
 
@@ -54,20 +60,29 @@ Function-based indexes can significantly improve query performance when you freq
 
 ⛔ **Avoid Practice:**
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">-- no function-based index applied.
-SELECT * FROM employees WHERE UPPER(last_name) = 'SMITH';</pre>
+```
+-- no function-based index applied.
+SELECT * FROM employees WHERE UPPER(last_name) = 'SMITH';
+```
+
 
 🟢 **Good Practice:**
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">CREATE INDEX idx_upper_last_name ON employees (UPPER(last_name));
-SELECT * FROM employees WHERE UPPER(last_name) = 'SMITH';</pre>
+```
+CREATE INDEX idx_upper_last_name ON employees (UPPER(last_name));
+SELECT * FROM employees WHERE UPPER(last_name) = 'SMITH';
+```
+
 
 This creates a function-based index on the uppercase version of the last_name column, speeding up case-insensitive searches.
 
 In PostgreSQL, these are called expression indexes. Here's an example:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">CREATE INDEX idx_lower_email ON users (LOWER(email)); 
-SELECT * FROM users WHERE LOWER(email) = '<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="cdb8bea8bf8da8b5aca0bda1a8e3aea2a0">[email&nbsp;protected]</a>';</pre>
+```
+CREATE INDEX idx_lower_email ON users (LOWER(email)); 
+SELECT * FROM users WHERE LOWER(email) = '<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="cdb8bea8bf8da8b5aca0bda1a8e3aea2a0">[email protected]</a>';
+```
+
 
 This creates an expression index on the lowercase version of the email column, optimizing case-insensitive email searches.
 
@@ -89,11 +104,17 @@ Using `SELECT *` retrieves all columns from the table, which can be inefficient 
 
 ⛔ **Avoid Practice:**
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">SELECT * FROM users;</pre>
+```
+SELECT * FROM users;
+```
+
 
 🟢 **Good Practice:**
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">SELECT name, email FROM users;</pre>
+```
+SELECT name, email FROM users;
+```
+
 
 This query retrieves only the `name` and `email` columns, reducing the amount of data transferred.
 
@@ -108,15 +129,21 @@ Improper joins can lead to performance issues. Use the correct type of join for 
 
 ⛔ **Avoid Practice:**
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">SELECT u.name, o.order_date
+```
+SELECT u.name, o.order_date
 FROM users u, orders o
-WHERE u.id = o.user_id;</pre>
+WHERE u.id = o.user_id;
+```
+
 
 🟢 **Good Practice:**
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">SELECT u.name, o.order_date
+```
+SELECT u.name, o.order_date
 FROM users u
-JOIN orders o ON u.id = o.user_id;</pre>
+JOIN orders o ON u.id = o.user_id;
+```
+
 
 This query uses an `INNER JOIN` to combine data from the `users` and `orders` tables.
 
@@ -130,11 +157,17 @@ Filtering data as early as possible in your query can help reduce the amount of 
 
 ⛔ **Avoid Practice:**
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">SELECT name, email FROM users;</pre>
+```
+SELECT name, email FROM users;
+```
+
 
 🟢 **Good Practice:**
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">SELECT name, email FROM users WHERE active = true;</pre>
+```
+SELECT name, email FROM users WHERE active = true;
+```
+
 
 This query retrieves only active users, reducing the amount of data processed.
 
@@ -148,11 +181,17 @@ When you don't need all rows, use the `LIMIT` clause to restrict the number of r
 
 ⛔ **Avoid Practice:**
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">SELECT name, email FROM users WHERE active = true;</pre>
+```
+SELECT name, email FROM users WHERE active = true;
+```
+
 
 🟢 **Good Practice:**
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">SELECT name, email FROM users WHERE active = true LIMIT 10;</pre>
+```
+SELECT name, email FROM users WHERE active = true LIMIT 10;
+```
+
 
 This query retrieves the first 10 active users, reducing the amount of data processed and transferred.
 
@@ -174,11 +213,17 @@ Using functions in \`WHERE\` clauses can prevent the use of indexes, leading to 
 
 **⛔ Avoid Practice:**
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">SELECT name, email FROM users WHERE DATE_PART('year', created_at) = 2023;</pre>
+```
+SELECT name, email FROM users WHERE DATE_PART('year', created_at) = 2023;
+```
+
 
 **🟢 Good Practice:**
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">SELECT name, email FROM users WHERE created_at &gt;= '2023-01-01' AND created_at &lt; '2024-01-01';</pre>
+```
+SELECT name, email FROM users WHERE created_at >= '2023-01-01' AND created_at < '2024-01-01';
+```
+
 
 This query filters on the \`created_at\` column without using a function, allowing the use of an index.
 
@@ -192,17 +237,23 @@ Tips:
 
 ⛔ Avoid Practice:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">SELECT name, (
+```
+SELECT name, (
   -- Subquery to get order date for each user
   SELECT order_date 
   FROM orders 
   WHERE user_id = users.id
 ) AS order_date 
-FROM users;</pre>
+FROM users;
+```
+
 
 🟢 Good Practice:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">SELECT u.name, o.order_date FROM users u JOIN orders o ON u.id = o.user_id;</pre>
+```
+SELECT u.name, o.order_date FROM users u JOIN orders o ON u.id = o.user_id;
+```
+
 
 This query uses a \`JOIN\` instead of a subquery, improving performance.
 
@@ -217,11 +268,17 @@ Tips:
 
 ⛔ Avoid Practice:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">SELECT user_id, COUNT(*), MAX(order_date) FROM orders GROUP BY user_id, order_date ORDER BY order_date;</pre>
+```
+SELECT user_id, COUNT(*), MAX(order_date) FROM orders GROUP BY user_id, order_date ORDER BY order_date;
+```
+
 
 🟢 Good Practice:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">SELECT user_id, COUNT(*) FROM orders GROUP BY user_id ORDER BY user_id;</pre>
+```
+SELECT user_id, COUNT(*) FROM orders GROUP BY user_id ORDER BY user_id;
+```
+
 
 This query groups and orders by indexed columns, improving performance.
 
@@ -236,24 +293,30 @@ Tips:
 
 ⛔ Avoid Practice:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">-- Using TEXT for name and email which may be inefficient
+```
+-- Using TEXT for name and email which may be inefficient
  CREATE TABLE users (
   id SERIAL PRIMARY KEY,
   name TEXT,
   email TEXT,
   created_at TIMESTAMP
-);</pre>
+);
+```
+
 
 🟢 Good Practice:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">-- Using more appropriate data types for better performance and storage efficiency
+```
+-- Using more appropriate data types for better performance and storage efficiency
 
  CREATE TABLE users (
   id SERIAL PRIMARY KEY,
   name VARCHAR 100,
   email VARCHAR 100,
   created_at TIMESTAMP
-);</pre>
+);
+```
+
 
 This schema uses appropriate data types, improving performance and storage efficiency.
 
@@ -268,12 +331,17 @@ Use tools like \`EXPLAIN\` to analyze your query execution plans and identify pe
 
 ⛔ Avoid Practice:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">SELECT name, email FROM users WHERE active = true;
-</pre>
+```
+SELECT name, email FROM users WHERE active = true;
+```
+
 
 🟢 Good Practice:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">EXPLAIN SELECT name, email FROM users WHERE active = true;</pre>
+```
+EXPLAIN SELECT name, email FROM users WHERE active = true;
+```
+
 
 This command provides an execution plan for the query, helping identify potential performance issues.
 
@@ -288,18 +356,24 @@ Tips:
 
 ⛔ Avoid Practice:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/mydatabase", "user", "password");
+```
+Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/mydatabase", "user", "password");
 // Use connection here
-conn.close();</pre>
+conn.close();
+```
+
 
 🟢 **Good Practice:**
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">HikariConfig config = new HikariConfig();
+```
+HikariConfig config = new HikariConfig();
 config.setJdbcUrl("jdbc:mysql://localhost:3306/mydatabase");
 config.setUsername("user");
 config.setPassword("password");
 config.setMaximumPoolSize(10);
-HikariDataSource dataSource = new HikariDataSource(config);</pre>
+HikariDataSource dataSource = new HikariDataSource(config);
+```
+
 
 This sets up a connection pool with a maximum of 10 connections, reducing connection overhead.
 
@@ -314,17 +388,21 @@ Using batch processing can significantly improve performance when performing mul
 
 ⛔ **Avoid Practice:**
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">Connection conn = dataSource.getConnection();
+```
+Connection conn = dataSource.getConnection();
 Statement stmt = conn.createStatement();
 for (User user : userList) {
   stmt.executeUpdate("INSERT INTO users (name, email) VALUES ('" + user.getName() + "', '" + user.getEmail() + "')");
 }
 stmt.close();
-conn.close();</pre>
+conn.close();
+```
+
 
 🟢 **Good Practice:**
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">Connection conn = dataSource.getConnection(); 
+```
+Connection conn = dataSource.getConnection(); 
 PreparedStatement pstmt = conn.prepareStatement("INSERT INTO users (name, email) VALUES (?, ?)"); 
 for (User user : userList) { 
    pstmt.setString(1, 
@@ -335,7 +413,9 @@ for (User user : userList) {
 } 
 pstmt.executeBatch(); 
 pstmt.close(); 
-conn.close();</pre>
+conn.close();
+```
+
 
 This Java code uses batch processing to insert multiple users efficiently.
 
@@ -350,11 +430,17 @@ Properly optimizing joins can significantly impact query performance, especially
 
 ⛔ **Avoid Practice:**
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">SELECT u.name, o.order_date FROM orders o JOIN users u ON u.id = o.user_id WHERE u.active = true;</pre>
+```
+SELECT u.name, o.order_date FROM orders o JOIN users u ON u.id = o.user_id WHERE u.active = true;
+```
+
 
 🟢 **Good Practice:**
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">SELECT u.name, o.order_date FROM users u JOIN orders o ON u.id = o.user_id WHERE u.active = true;</pre>
+```
+SELECT u.name, o.order_date FROM users u JOIN orders o ON u.id = o.user_id WHERE u.active = true;
+```
+
 
 This query joins the \`users\` table with the \`orders\` table on an indexed column, improving performance.
 
@@ -369,15 +455,21 @@ Subqueries can often be replaced with joins or other more efficient query constr
 
 ⛔ **Avoid Practice:**
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">SELECT name, email FROM users WHERE id 
-IN SELECT user_id FROM orders WHERE order_date &gt; '2023-01-01';</pre>
+```
+SELECT name, email FROM users WHERE id 
+IN SELECT user_id FROM orders WHERE order_date > '2023-01-01';
+```
+
 
 🟢 **Good Practice:**
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">WITH RecentOrders AS 
-SELECT user_id FROM orders WHERE order_date &gt; '2023-01-01'
+```
+WITH RecentOrders AS 
+SELECT user_id FROM orders WHERE order_date > '2023-01-01'
 
-SELECT u.name, u.email FROM users u JOIN RecentOrders ro ON u.id = ro.user_id;</pre>
+SELECT u.name, u.email FROM users u JOIN RecentOrders ro ON u.id = ro.user_id;
+```
+
 
 This query uses a CTE to improve readability and performance.
 
@@ -390,13 +482,17 @@ When performing aggregation queries, use efficient techniques to minimize the co
 
 ⛔ **Avoid Practice:**
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">SELECT user_id, COUNT(*) AS order_count, SUM(amount) AS total_amount FROM orders GROUP BY user_id, order_date;</pre>
+```
+SELECT user_id, COUNT(*) AS order_count, SUM(amount) AS total_amount FROM orders GROUP BY user_id, order_date;
+```
+
 
 🟢 **Good Practice:**
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">SELECT user_id, COUNT(*) AS order_count FROM orders GROUP BY user_id;
+```
+SELECT user_id, COUNT(*) AS order_count FROM orders GROUP BY user_id;
+```
 
-</pre>
 
 This query is grouped by the \`user_id\` column, which should be indexed for optimal performance.
 
@@ -408,16 +504,20 @@ Summary columns store pre-computed aggregate values, reducing the need for expen
 
 ⛔ **Avoid Practice:**
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">SELECT user_id, SUM(amount) AS total_amount 
+```
+SELECT user_id, SUM(amount) AS total_amount 
  FROM orders 
 GROUP BY user_id;
-</pre>
+```
+
 
 🟢 **Good Practice:**
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">ALTER TABLE users ADD total_order_amount DECIMAL(10, 2);
+```
+ALTER TABLE users ADD total_order_amount DECIMAL(10, 2);
 UPDATE users u SET total_order_amount = (SELECT SUM(amount) FROM orders o WHERE o.user_id = u.id);
-</pre>
+```
+
 
 This approach adds a summary column to store the total order amount for each user.
 
@@ -429,18 +529,22 @@ Materialized views cache the results of complex queries, improving performance f
 
 ⛔ **Avoid Practice:**
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">SELECT user_id, COUNT(*) AS order_count, SUM(amount) AS total_amount
+```
+SELECT user_id, COUNT(*) AS order_count, SUM(amount) AS total_amount
  FROM orders
 GROUP BY user_id;
-</pre>
+```
+
 
 🟢 **Good Practice:**
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">CREATE MATERIALIZED VIEW user_order_summary AS
+```
+CREATE MATERIALIZED VIEW user_order_summary AS
 SELECT user_id, COUNT(*) AS order_count, SUM(amount) AS total_amount
 FROM orders
 GROUP BY user_id;
-</pre>
+```
+
 
 This creates a materialized view that stores the pre-computed summary of user orders.
 
@@ -453,16 +557,20 @@ Regularly monitor and tune your database settings to ensure optimal performance.
 
 ⛔ **Avoid Practice:**
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">-- Default settings not tuned for workload
-</pre>
+```
+-- Default settings not tuned for workload
+```
+
 
 🟢 **Good Practice:**
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">-- according to PostgreSQL, adjusting the shared_buffers:
+```
+-- according to PostgreSQL, adjusting the shared_buffers:
 -- If you have a dedicated database server with 1GB or more of RAM, a reasonable starting value for shared_buffers is 25% of the memory in your system.
 
 ALTER SYSTEM SET shared_buffers = '2GB';
-</pre>
+```
+
 
 This command adjusts the buffer pool size in PostgreSQL, which can improve performance for read-heavy workloads.
 
@@ -477,20 +585,24 @@ Regularly reviewing and refactoring your SQL code can help identify and address 
 
 ⛔ **Avoid Practice:**
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">-- Original complex query
+```
+-- Original complex query
 SELECT u.name,
  (SELECT COUNT(*) FROM orders o WHERE o.user_id = u.id) AS order_count
 FROM users u;
-</pre>
+```
+
 
 🟢 **Good Practice:**
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">-- Refactored for better performance
+```
+-- Refactored for better performance
 SELECT u.name, COUNT(o.id) AS order_count 
  FROM users u 
  LEFT JOIN orders o ON u.id = o.user_id
 GROUP BY u.name;
-</pre>
+```
+
 
 The refactored query joins \`users\` and \`orders\` and uses a \`GROUP BY\` clause, improving performance.
 

@@ -69,22 +69,28 @@ For the Labels in TilePane and the Buttons in FlowPane, we add state to these co
 
 For the Label, here's class LetterLabel with two added JavaFX properties:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="false" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public class LetterLabel extends Label {
-    private final ObjectProperty&lt;DisplayType&gt; matchResult = new 
-         SimpleObjectProperty&lt;&gt;(DISPLAYING);
-    private final ObjectProperty&lt;DisplayType&gt; letterDisplay = new
-         SimpleObjectProperty&lt;&gt;(PLAIN);
+```java
+public class LetterLabel extends Label {
+    private final ObjectProperty<DisplayType> matchResult = new 
+         SimpleObjectProperty<>(DISPLAYING);
+    private final ObjectProperty<DisplayType> letterDisplay = new
+         SimpleObjectProperty<>(PLAIN);
     . . .
-}</pre>
+}
+```
+
 
 Property `matchResult` holds the status of that letter's match against the target word: exact match, partial match, or no-match. Since we don't reveal match results until after animating the tiles, a second property, `letterDisplay`, determines the CSS styling of the LetterLabel. `DisplayType` is an enum that reflects one of the five possible states of a LetterLabel.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="false" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public class LetterStyle {
+```java
+public class LetterStyle {
      . . .
     public enum DisplayType {
             PLAIN, DISPLAYING, NOMATCH, PARTIALMATCH, MATCHING;
     }  
-}</pre>
+}
+```
+
 
 Figure 2 illustrates all five `DisplayType` enum states: The three lower rows of LetterLabel in the TilePane are styled with DisplayType `PLAIN`. The word "BLEAK" is styled with DisplayType `DISPLAYING`. This state applies when the user is entering the word before submitting it. The words "STONE" and "FLAIR" illustrate the other three DisplayTypes applied after the matching process is complete: the L in FLAIR is `MATCHING`, the E in STONE and the A in FLAIR is `PARTIALMATCH`, and the remaining LetterLabels are DisplayType `NOMATCH`.
 
@@ -99,31 +105,43 @@ Figure 2 illustrates all five `DisplayType` enum states: The three lower rows of
 
 Similar to LetterLabel, the virtual keyboard is made up of enhanced Button controls called KeyButton. Here, we add a single JavaFX property to reflect the status of that keyboard letter in the current game.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="false" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public class KeyButton extends Button {
-    private final ObjectProperty&lt;DisplayType&gt; letterDisplay = new
-         SimpleObjectProperty&lt;DisplayType&gt;(PLAIN);
+```java
+public class KeyButton extends Button {
+    private final ObjectProperty<DisplayType> letterDisplay = new
+         SimpleObjectProperty<DisplayType>(PLAIN);
     . . .
-}</pre>
+}
+```
+
 
 As [Figure 2](#figure-2) illustrates, key L is `MATCHING`, keys E and A are `PARTIALMATCH`, and keys R, T, I, O, S, F, and N are `NOMATCH`. The remaining keys are `PLAIN`.
 
 When you submit a word, the controller code updates the LetterLabel and KeyButton states. In the following code snippet, we invoke the setter for property `matchResult`, which specifies that the letter in the LetterLabel is matching.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="false" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">// ll is LetterLabel, **pseudo code here**
+```java
+// ll is LetterLabel, **pseudo code here**
 // Do we have a match?
 if (isMatching(ll.getText())) {
    ll.setMatchResult(MATCHING);
-}</pre>
+}
+```
+
 
 After processing the submitted word, we update the LetterLabel's `letterDisplay` property with the value from its `matchResult` property.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="false" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">// update the LetterLabel’s letterDisplay property
-ll.setLetterDisplay(ll.getMatchResult());</pre>
+```java
+// update the LetterLabel’s letterDisplay property
+ll.setLetterDisplay(ll.getMatchResult());
+```
+
 
 Next, we synchronize the associated key in KeyButton by updating its `letterDisplay` property. Here, `list` is the row of LetterLabel controls for this play and `keyLetters` is a Map. Note that we use the Map's `key` to identify the KeyButton control for LetterLabel's letter.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="false" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">list.stream().forEach(ll -&gt; keyLetters.get(ll.getText())
-            .setLetterDisplay(ll.getMatchResult()));</pre>
+```java
+list.stream().forEach(ll -> keyLetters.get(ll.getText())
+            .setLetterDisplay(ll.getMatchResult()));
+```
+
 
 Importantly, by calling the JavaFX property setter `setLetterDisplay() `for both LetterLabel and KeyButton, the UI styles automatically update to reflect the matching state. To see how this works, let's discuss CSS pseudo-classes with the well-known Button control.
 
@@ -131,7 +149,10 @@ Importantly, by calling the JavaFX property setter `setLetterDisplay() `for both
 
 Many JavaFX controls, including Button, have a JavaFX property called `disableProperty`. To disable button `myButton`, for example, use
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="false" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">myButton.setDisable(true);    // disable myButton</pre>
+```java
+myButton.setDisable(true);    // disable myButton
+```
+
 
 When this code executes, the UI reflects the disabled state by reducing the opacity of the control. *Note that we don't update the styling ourselves.* JavaFX implements this styling behavior with CSS pseudo-classes, where a change in a property triggers a change in the node's CSS styling.
 
@@ -139,7 +160,8 @@ We want this same behavior for both LetterLabel and KeyButton, where updates to 
 
 For this to work, we have to build CSS scaffolding in our classes. Let's return to our LetterStyle class where we define the `DisplayType` enum. Here, we associate each `DisplayType` enum with a pseudo-class that names a CSS state.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="false" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">import javafx.css.PseudoClass;
+```java
+import javafx.css.PseudoClass;
 
 public class LetterStyle {
     public static final PseudoClass PLAIN_PSEUDO_CLASS = 
@@ -156,28 +178,39 @@ public class LetterStyle {
     public enum DisplayType {
             PLAIN, DISPLAYING, NOMATCH, PARTIALMATCH, MATCHING;
     }   
-}</pre>
+}
+```
+
 
 Let's examine the pseudo-class returned by `PseudoClass.getPseudoClass("matching")`. Here, the styling is identified in our CSS file and depends on the node. For LetterLabel control in a TilePane, for instance, style class `.matching-letter` in state `matching` has the following style.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="css" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="false" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">.tile &gt; .matching-letter:matching {
+```css
+.tile > .matching-letter:matching {
     -fx-outer-border: -fx-match-color;
     -fx-body-color: -fx-match-color;
     -fx-text-fill: -fx-text-fill-alt-color;
-}</pre>
+}
+```
+
 
 And for a KeyButton control in a FlowPane, style class `.matching-letter` in state `matching` is defined as follows.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="css" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="false" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">.flow &gt; .matching-letter:matching {
+```css
+.flow > .matching-letter:matching {
     -fx-button-base-color: -fx-match-color;
     -fx-text-fill: -fx-text-fill-alt-color;
-}</pre>
+}
+```
+
 
 **Note** : Colors `-fx-match-color` and **-**`fx-text-fill-alt-color` are defined elsewhere in the CSS file.
 
 There are similar style classes defined for states `plain`, `displaying`, `partialmatch`, and `nomatch` for controls in TilePane. We also have classes defined for states `plain`, `partialmatch`, and `nomatch` with controls in FlowPane. We assign these style classes to our customized controls in the LetterLabel and KeyButton constructors with the following (for example).
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="false" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">getStyleClass().add("matching-letter");</pre>
+```java
+getStyleClass().add("matching-letter");
+```
+
 
 ### Reacting to Property Updates {#h3-5-reacting-to-property-updates}
 
@@ -185,7 +218,8 @@ The final piece of scaffolding code is to react when the KeyButton and LetterLab
 
 Here is the `letterDisplay` property for LetterLabel. We leverage the Java 14 switch syntax, which makes this code more streamlined than the pre-Java 14 switch statement. The KeyButton `letterDisplay` property is similar, but with style `"displaying-letter"` not needed.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="false" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public class LetterLabel extends Label {
+```java
+public class LetterLabel extends Label {
     public LetterLabel() {
           super();
         // assign these style classes to our customized controls
@@ -196,8 +230,8 @@ Here is the `letterDisplay` property for LetterLabel. We leverage the Java 14 sw
           getStyleClass().add("plain-letter");
     }
 
-    private final ObjectProperty&lt;DisplayType&gt; letterDisplay = new 
-          SimpleObjectProperty&lt;&gt;(PLAIN) {
+    private final ObjectProperty<DisplayType> letterDisplay = new 
+          SimpleObjectProperty<>(PLAIN) {
         @Override
         public void invalidated() {
             // Turn off all custom PseudoClasses in the LetterLabel,
@@ -210,22 +244,24 @@ Here is the `letterDisplay` property for LetterLabel. We leverage the Java 14 sw
             pseudoClassStateChanged(PARTIALMATCH_PSEUDO_CLASS, false);
             pseudoClassStateChanged(MATCHING_PSEUDO_CLASS, false);
             switch (get()) {
-                case PLAIN -&gt; 
+                case PLAIN -> 
                     pseudoClassStateChanged(PLAIN_PSEUDO_CLASS, true);
-                case DISPLAYING -&gt; 
+                case DISPLAYING -> 
                     pseudoClassStateChanged(DISPLAYING_PSEUDO_CLASS, true);
-                case NOMATCH -&gt; 
+                case NOMATCH -> 
                     pseudoClassStateChanged(NOMATCH_PSEUDO_CLASS, true);
-                case PARTIALMATCH -&gt; 
+                case PARTIALMATCH -> 
                     pseudoClassStateChanged(PARTIALMATCH_PSEUDO_CLASS, 
                     true);
-                case MATCHING -&gt; 
+                case MATCHING -> 
                     pseudoClassStateChanged(MATCHING_PSEUDO_CLASS, true);
             }
         }
     };
 . . .
-}</pre>
+}
+```
+
 
 The `invalidated()` method for property `letterDisplay` must ensure that a pseudo-class state is mutually exclusive. That is, no `letterDisplay` pseudo-class state can match more than one state. Therefore, before turning on the `matching` pseudo-class state, we make all pseudo-class states false, as shown above.
 
@@ -240,40 +276,49 @@ It's easy to add flair to your applications with third party icon packs. In Word
 
 To access the iKonli Font library in Wordish, we add appropriate modules to the **module-info.java** file, as follows.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="false" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">module wordish {
+```java
+module wordish {
     . . .
     requires org.kordamp.ikonli.core;
     requires org.kordamp.ikonli.javafx;
     requires org.kordamp.ikonli.materialdesign2;
       . . .
-}</pre>
+}
+```
+
 
 And add these dependencies to the **pom.xml** file.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="xml" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="false" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&lt;dependencies&gt;
-     &lt;dependency&gt;
-            &lt;groupId&gt;org.kordamp.ikonli&lt;/groupId&gt;
-            &lt;artifactId&gt;ikonli-javafx&lt;/artifactId&gt;
-            &lt;version&gt;12.3.1&lt;/version&gt;
-     &lt;/dependency&gt;
-     &lt;dependency&gt;
-            &lt;groupId&gt;org.kordamp.ikonli&lt;/groupId&gt;
-            &lt;artifactId&gt;ikonli-materialdesign2-pack&lt;/artifactId&gt;
-            &lt;version&gt;12.3.1&lt;/version&gt;
-     &lt;/dependency&gt;
+```xml
+<dependencies>
+     <dependency>
+            <groupId>org.kordamp.ikonli</groupId>
+            <artifactId>ikonli-javafx</artifactId>
+            <version>12.3.1</version>
+     </dependency>
+     <dependency>
+            <groupId>org.kordamp.ikonli</groupId>
+            <artifactId>ikonli-materialdesign2-pack</artifactId>
+            <version>12.3.1</version>
+     </dependency>
       . . . 
-&lt;/dependencies&gt;</pre>
+</dependencies>
+```
+
 
 Here's how to add an icon graphic to either a Button or Label in FXML. For example, we add the Delete icon named `"mdi2b-backspace-outline"` to our virtual keyboard KeyButton control. Note that you can specify its pixel width with attribute `iconSize`.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="xml" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="false" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&lt;KeyButton fx:id="deleteButton" onAction="#processDelete" 
+```xml
+<KeyButton fx:id="deleteButton" onAction="#processDelete" 
          prefHeight="57.0" 
          prefWidth="57.0" 
-         textAlignment="CENTER"&gt;
-    &lt;graphic&gt;
-        &lt;FontIcon iconLiteral="mdi2b-backspace-outline" iconSize="24" /&gt;
-    &lt;/graphic&gt;
-&lt;/KeyButton&gt;</pre>
+         textAlignment="CENTER">
+    <graphic>
+        <FontIcon iconLiteral="mdi2b-backspace-outline" iconSize="24" />
+    </graphic>
+</KeyButton>
+```
+
 
 The [Material Design2 cheat sheet](https://kordamp.org/ikonli/cheat-sheet-material2.html) provides a handy list of other iconLiteral codes that you can incorporate into your UI.
 
@@ -315,22 +360,28 @@ For our application, each FXML file uses the same style sheet. By identifying th
 
 We use black and white for the letter stroke color. Wordish has four main colors: a basic button background color and three match result colors: goldish, greenish, and dark gray. We define these in the style sheet root style as follows.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="css" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="false" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">.root {
+```css
+.root {
     -fx-button-base-color: #d3d6d9;
     -fx-text-fill-base-color: black;
     -fx-text-fill-alt-color: white;
     -fx-partialmatch-color: #c5b565;
     -fx-nomatch-color: #797c7e;
     -fx-match-color: #78a86b;
-}</pre>
+}
+```
+
 
 These colors are then reused when we define our pseudo-class states.
 
 Normally, when a JavaFX button is disabled, its opacity is reduced to .4. To mimic the Wordle UI, we override this behavior by leaving disabled buttons in our virtual keyboard fully opaque, as shown.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="css" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="false" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">.flow &gt; .button:disabled {
+```css
+.flow > .button:disabled {
     -fx-opacity: 1.0 ;
-}</pre>
+}
+```
+
 
 However, we commented out the above style during development and testing, since it was helpful to notice when we disabled a button.
 

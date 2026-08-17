@@ -54,10 +54,11 @@ This implementation demonstrates these principles by building everything from sc
 
 At the heart of any MCP implementation lies a robust transport layer. The Java implementation demonstrates a clean separation of concerns through its I/O handler architecture:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">public class IOHandlerImpl implements IOHandler {
+```
+public class IOHandlerImpl implements IOHandler {
     private final static LogFile logger = LogFileWriter.getInstance();
     private final PrintWriter writer;
-    private final List&lt;Consumer&lt;String&gt;&gt; lineListeners;
+    private final List<Consumer<String>> lineListeners;
     private final AtomicBoolean running;
     private final Gson gson = new Gson();
 
@@ -88,7 +89,9 @@ At the heart of any MCP implementation lies a robust transport layer. The Java i
             }
         }
     }
-}</pre>
+}
+```
+
 
 This implementation showcases several critical design decisions:
 
@@ -100,12 +103,15 @@ This implementation showcases several critical design decisions:
 
 The beauty of this approach is its transparency. When the server emits a message:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">public void emit(Object message) {
+```
+public void emit(Object message) {
     String text = gson.toJson(message);
     logger.log("[API][SENT]: " + text);  // Log to file, not stdout!
     writer.println(text);  // Send to stdout
     writer.flush();        // Ensure immediate delivery
-}</pre>
+}
+```
+
 
 The message goes directly to stdout as a single line of JSON. No framing, no length prefixes, no binary protocols---just newline-delimited JSON that any tool can read and debug.
 
@@ -116,18 +122,26 @@ MCP uses JSON-RPC 2.0 over STDIO, which means every message is a self-contained 
 
 ### Client → Server: Initialization Request {#h3-4-client-server-initialization-request}
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">{"jsonrpc":"2.0","method":"initialize","params":{"protocolVersion":"0.1.0","capabilities":{"roots":{},"sampling":{}},"clientInfo":{"name":"mcp-inspector","version":"0.1.0"}},"id":0}
-</pre>
+```
+{"jsonrpc":"2.0","method":"initialize","params":{"protocolVersion":"0.1.0","capabilities":{"roots":{},"sampling":{}},"clientInfo":{"name":"mcp-inspector","version":"0.1.0"}},"id":0}
+```
+
 
 This single line contains everything needed for initialization. The server reads it from stdin using:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">String line = scanner.nextLine();
+```
+String line = scanner.nextLine();
 logger.log("[API][RECEIVED]" + line);
-publishLine(line);  // Notify the router</pre>
+publishLine(line);  // Notify the router
+```
+
 
 ### Server → Client: Initialization Response {#h3-5-server-client-initialization-response}
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">{"jsonrpc":"2.0","id":0,"result":{"protocolVersion":"0.1.0","capabilities":{"tools":{},"prompts":{},"resources":{}},"serverInfo":{"name":"agent-mcp-workshop","version":"0.0.1"}}}</pre>
+```
+{"jsonrpc":"2.0","id":0,"result":{"protocolVersion":"0.1.0","capabilities":{"tools":{},"prompts":{},"resources":{}},"serverInfo":{"name":"agent-mcp-workshop","version":"0.0.1"}}}
+```
+
 
 The server writes this response directly to stdout. No HTTP headers, no WebSocket frames---just a line of JSON followed by a newline character.
 
@@ -135,7 +149,8 @@ The server writes this response directly to stdout. No HTTP headers, no WebSocke
 
 The implementation uses Java records to model the JSON-RPC message types:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">public record JsonRpcRequest(
+```
+public record JsonRpcRequest(
     String jsonrpc,
     Long id,
     String method,
@@ -158,13 +173,16 @@ public record JsonRpcErrorResponse(
     String jsonrpc,
     Long id,
     JsonRpcError error
-) {}</pre>
+) {}
+```
+
 
 This type system directly maps to the JSON-RPC 2.0 specification, making the protocol implementation clear and type-safe.
 
 Every MCP session begins with a crucial initialization handshake. The implementation demonstrates how servers advertise their capabilities:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">case INITIALIZE -&gt; {
+```
+case INITIALIZE -> {
     InitializeParams initializeParams = deserializer.deserializeParams(
         message, InitializeParams.class
     );
@@ -181,11 +199,14 @@ Every MCP session begins with a crucial initialization handshake. The implementa
             .withDefaultCapabilities()
             .withDefaultServerInfo();
     success(message.id(), builder.build());
-}</pre>
+}
+```
+
 
 The builder pattern used here is particularly elegant:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">public InitializeResultBuilder withDefaultCapabilities() {
+```
+public InitializeResultBuilder withDefaultCapabilities() {
     Capability capabilityTrue = new Capability();
     this.capabilities = new ServerCapabilities(
         capabilityTrue,  // tools
@@ -193,7 +214,9 @@ The builder pattern used here is particularly elegant:
         new Capability(false, false)  // resources
     );
     return this;
-}</pre>
+}
+```
+
 
 This approach allows servers to clearly declare what they support, enabling intelligent capability negotiation between clients and servers.
 
@@ -202,25 +225,32 @@ Bidirectional Communication: Beyond Request-Response {#h2-7-bidirectional-commun
 
 One of MCP's powerful features is true bidirectional communication. The server can send requests to the client, not just respond to them. This implementation demonstrates this with the roots feature:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">case NOTIFICATIONS_INITIALIZED -&gt; {
+```
+case NOTIFICATIONS_INITIALIZED -> {
     // Server initiates a request to the client!
     if (hasRoots) {
         io.emit(rootsRequest);
     }
-}</pre>
+}
+```
+
 
 The `rootsRequest` is a server-initiated message:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">private static final JsonRpcRequest rootsRequest = new JsonRpcRequest(
+```
+private static final JsonRpcRequest rootsRequest = new JsonRpcRequest(
     JSON_RPC_VERSION, 
     ROOTS_REQUEST_ID,  // Negative ID to avoid conflicts
     "roots/list", 
     null
-);</pre>
+);
+```
+
 
 When the client responds, the server processes it just like any other response:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">private void process(JsonRpcResponse message) {
+```
+private void process(JsonRpcResponse message) {
     if (ROOTS_REQUEST_ID.equals(message.id())) {
         RootsResponse rootsResponse = deserializer.deserializeResult(
             message, RootsResponse.class
@@ -230,42 +260,50 @@ When the client responds, the server processes it just like any other response:
             roots.add(root.uri());
         }
     }
-}</pre>
+}
+```
+
 
 This bidirectional flow over STDIO demonstrates that MCP isn't limited to simple request-response patterns---it's a full-duplex protocol where both parties can initiate communication.
 
 The routing mechanism demonstrates how MCP servers handle different message types:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">public void route(String message) {
+```
+public void route(String message) {
     if (message == null || message.isEmpty()) {
         return;
     }
     Object object = deserializer.deserialize(message);
     switch (object) {
-        case JsonRpcRequest request -&gt; process(request);
-        case JsonRpcNotification notification -&gt; process(notification);
-        case JsonRpcResponse successResponse -&gt; process(successResponse);
-        case JsonRpcErrorResponse errorResponse -&gt; process(errorResponse);
-        default -&gt; logger.log("Unknown message type: " + object);
+        case JsonRpcRequest request -> process(request);
+        case JsonRpcNotification notification -> process(notification);
+        case JsonRpcResponse successResponse -> process(successResponse);
+        case JsonRpcErrorResponse errorResponse -> process(errorResponse);
+        default -> logger.log("Unknown message type: " + object);
     }
-}</pre>
+}
+```
+
 
 This pattern matching approach (using Java's modern switch expressions) creates a clean, extensible routing system. Each message type has its own processing logic:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">private void process(JsonRpcRequest message) {
+```
+private void process(JsonRpcRequest message) {
     UniqueKeys uniqueKey = UniqueKeys.fromValue(message.method());
     switch (uniqueKey) {
-        case INITIALIZE -&gt; { /* ... */ }
-        case PROMPTS_LIST -&gt; { /* ... */ }
-        case PROMPTS_GET -&gt; { /* ... */ }
-        case TOOLS_LIST -&gt; { /* ... */ }
-        case TOOLS_CALL -&gt; { /* ... */ }
-        case RESOURCES_LIST -&gt; { /* ... */ }
-        case RESOURCES_READ -&gt; { /* ... */ }
-        case PING -&gt; { /* ... */ }
-        default -&gt; logger.log("Unhandled RpcRequest method: " + uniqueKey);
+        case INITIALIZE -> { /* ... */ }
+        case PROMPTS_LIST -> { /* ... */ }
+        case PROMPTS_GET -> { /* ... */ }
+        case TOOLS_LIST -> { /* ... */ }
+        case TOOLS_CALL -> { /* ... */ }
+        case RESOURCES_LIST -> { /* ... */ }
+        case RESOURCES_READ -> { /* ... */ }
+        case PING -> { /* ... */ }
+        default -> logger.log("Unhandled RpcRequest method: " + uniqueKey);
     }
-}</pre>
+}
+```
+
 
 The Complete STDIO Loop: Putting It All Together {#h2-8-the-complete-stdio-loop-putting-it-all-together}
 --------------------------------------------------------------------------------------------------------
@@ -274,7 +312,8 @@ Let's trace through a complete interaction to see how STDIO communication enable
 
 ### 1. Server Startup {#h3-9-1-server-startup}
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">public void start() {
+```
+public void start() {
     // Register the router to handle incoming lines
     this.io.addLineListener(router::route);
 
@@ -283,21 +322,29 @@ Let's trace through a complete interaction to see how STDIO communication enable
 
     // Keep the main thread alive
     keepRunning();
-}</pre>
+}
+```
+
 
 ### 2. Client Connects (via process spawn) {#h3-10-2-client-connects-via-process-spawn}
 
 The client spawns the server process and connects to its stdin/stdout:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">java -jar agent-mcp-workshop-0.0.1.jar</pre>
+```
+java -jar agent-mcp-workshop-0.0.1.jar
+```
+
 
 ### 3. Message Exchange Begins {#h3-11-3-message-exchange-begins}
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">→ [stdin]  {"jsonrpc":"2.0","method":"initialize","params":{...},"id":0}
+```
+→ [stdin]  {"jsonrpc":"2.0","method":"initialize","params":{...},"id":0}
 ← [stdout] {"jsonrpc":"2.0","id":0,"result":{...}}
 → [stdin]  {"jsonrpc":"2.0","method":"notifications/initialized"}
 ← [stdout] {"jsonrpc":"2.0","method":"roots/list","id":-1000}
-→ [stdin]  {"jsonrpc":"2.0","id":-1000,"result":{"roots":[...]}}</pre>
+→ [stdin]  {"jsonrpc":"2.0","id":-1000,"result":{"roots":[...]}}
+```
+
 
 Each arrow represents a complete line written to stdin or stdout. The server never writes partial messages or multiple messages on one line---maintaining the protocol's simplicity.
 
@@ -305,17 +352,21 @@ Each arrow represents a complete line written to stdin or stdout. The server nev
 
 Since STDIO doesn't have error channels like HTTP status codes, errors are part of the protocol:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">success(message.id(), ToolCallResultBuilder
+```
+success(message.id(), ToolCallResultBuilder
     .builder()
     .addTextContent("Tool not found: " + toolCallParams.name())
     .asError()
-    .build());</pre>
+    .build());
+```
+
 
 This creates a valid response with an error flag, keeping the STDIO stream clean and the protocol predictable.
 
 The keyword search tool demonstrates how to create self-describing, executable functionality:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">public class KeyWordSearch implements Tool {
+```
+public class KeyWordSearch implements Tool {
     @Override
     public String name() {
         return "key_word_search";
@@ -349,11 +400,14 @@ The keyword search tool demonstrates how to create self-describing, executable f
         }
         return builder.build();
     }
-}</pre>
+}
+```
+
 
 The schema definition is particularly important---it enables AI clients to understand exactly how to invoke the tool. The actual implementation showcases robust file handling:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">public ToolCallResult call(ToolCallParams toolCallParams) {
+```
+public ToolCallResult call(ToolCallParams toolCallParams) {
     String keyword = toolCallParams.arguments().get("keyword");
     ToolCallResultBuilder builder = ToolCallResultBuilder.builder();
 
@@ -361,30 +415,39 @@ The schema definition is particularly important---it enables AI clients to under
         builder.addTextContent("No root directories specified for search.");
         builder.asError();
     } else {
-        List&lt;ContentItem&gt; contentItems = searchKeywordInDirectories(roots, keyword);
+        List<ContentItem> contentItems = searchKeywordInDirectories(roots, keyword);
         builder.withContent(contentItems);
     }
     return builder.build();
-}</pre>
+}
+```
+
 
 Debugging STDIO Communication {#h2-13-debugging-stdio-communication}
 --------------------------------------------------------------------
 
 One of the advantages of building MCP without frameworks is the ability to debug at the protocol level. The implementation includes comprehensive logging:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">logger.log("[API][RECEIVED]" + line);  // Every incoming message
-logger.log("[API][SENT]: " + text);     // Every outgoing message</pre>
+```
+logger.log("[API][RECEIVED]" + line);  // Every incoming message
+logger.log("[API][SENT]: " + text);     // Every outgoing message
+```
+
 
 This creates a complete trace of the STDIO communication:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">[2024-01-15 10:23:45] [API][RECEIVED]{"jsonrpc":"2.0","method":"tools/list","id":5}
+```
+[2024-01-15 10:23:45] [API][RECEIVED]{"jsonrpc":"2.0","method":"tools/list","id":5}
 [2024-01-15 10:23:45] [API][SENT]: {"jsonrpc":"2.0","id":5,"result":{"tools":[{"name":"key_word_search","description":"Searches for a specified keyword...","inputSchema":{...}}]}}
 [2024-01-15 10:23:46] [API][RECEIVED]{"jsonrpc":"2.0","method":"tools/call","params":{"name":"key_word_search","arguments":{"keyword":"TODO"}},"id":6}
-[2024-01-15 10:23:47] [API][SENT]: {"jsonrpc":"2.0","id":6,"result":{"content":[{"text":"/src/main/java/Server.java, keyword_count=3","type":"text"}]}}</pre>
+[2024-01-15 10:23:47] [API][SENT]: {"jsonrpc":"2.0","id":6,"result":{"content":[{"text":"/src/main/java/Server.java, keyword_count=3","type":"text"}]}}
+```
+
 
 This trace can be replayed for testing, analyzed for performance, or used to debug protocol issues---something much harder with framework-heavy implementations.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">case RESOURCES_LIST -&gt; {
+```
+case RESOURCES_LIST -> {
     ResourcesListResultBuilder builder = ResourcesListResultBuilder
             .builder()
             .withResources(JavadocResources.loadAllHtmlResourcesFromFolder(
@@ -392,11 +455,14 @@ This trace can be replayed for testing, analyzed for performance, or used to deb
             ))
             .withNextCursor("pageNext");
     success(message.id(), builder.build());
-}</pre>
+}
+```
+
 
 The JavadocResources class shows sophisticated resource handling:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">public static String readResourceContent(String resourcePath) throws IOException {
+```
+public static String readResourceContent(String resourcePath) throws IOException {
     try (InputStream inputStream = JavadocResources.class.getClassLoader()
                                                          .getResourceAsStream(resourcePath)) {
         if (inputStream == null) {
@@ -408,12 +474,17 @@ The JavadocResources class shows sophisticated resource handling:
             return reader.lines().collect(Collectors.joining("\n"));
         }
     }
-}</pre>
+}
+```
+
 
 This approach allows servers to bundle and serve documentation, configurations, or any other static content directly from the JAR file---all transmitted as JSON over STDIO. When a client requests a resource:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">→ {"jsonrpc":"2.0","method":"resources/read","params":{"uri":"javadoc/com/workshop/mcp/spec/Tool.html"},"id":10}
-← {"jsonrpc":"2.0","id":10,"result":{"contents":[{"uri":"javadoc/com/workshop/mcp/spec/Tool.html","mimeType":"text/html","text":"&lt;!DOCTYPE HTML&gt;..."}]}}</pre>
+```
+→ {"jsonrpc":"2.0","method":"resources/read","params":{"uri":"javadoc/com/workshop/mcp/spec/Tool.html"},"id":10}
+← {"jsonrpc":"2.0","id":10,"result":{"contents":[{"uri":"javadoc/com/workshop/mcp/spec/Tool.html","mimeType":"text/html","text":"<!DOCTYPE HTML>..."}]}}
+```
+
 
 The entire HTML document is embedded in the JSON response, properly escaped and transmitted as a single line. This demonstrates STDIO's flexibility---it can handle everything from simple method calls to large content transfers.
 
@@ -422,7 +493,8 @@ Prompts: Bridging Human Intent and Tool Execution {#h2-14-prompts-bridging-human
 
 The prompt system creates user-friendly interfaces for tools:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">case PROMPTS_LIST -&gt; {
+```
+case PROMPTS_LIST -> {
     KeyWordSearch keyWordSearch = new KeyWordSearch(this.roots);
     PromptsListResultBuilder builder = PromptsListResultBuilder
             .builder()
@@ -432,11 +504,14 @@ The prompt system creates user-friendly interfaces for tools:
             .withPromptArgument("keyword", "The word to search for", true)
             .withNextCursor("nextPage");
     success(message.id(), builder.build());
-}</pre>
+}
+```
+
 
 When retrieving a prompt, the server can provide intelligent guidance:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">case PROMPTS_GET -&gt; {
+```
+case PROMPTS_GET -> {
     PromptsGetParams params = deserializer.deserializeParams(
         message, PromptsGetParams.class
     );
@@ -445,33 +520,38 @@ When retrieving a prompt, the server can provide intelligent guidance:
             .withDescription("keyword")
             .addTextMessage("user", KEY_WORD_MESSAGE, params.arguments());
     success(message.id(), builder.build());
-}</pre>
+}
+```
+
 
 Advanced Features: Notification Handling {#h2-15-advanced-features-notification-handling}
 -----------------------------------------------------------------------------------------
 
 The implementation includes sophisticated notification handling:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">private void process(JsonRpcNotification message) {
+```
+private void process(JsonRpcNotification message) {
     UniqueKeys uniqueKey = UniqueKeys.fromValue(message.method());
     switch (uniqueKey) {
-        case NOTIFICATIONS_INITIALIZED -&gt; {
+        case NOTIFICATIONS_INITIALIZED -> {
             if (hasRoots) {
                 io.emit(rootsRequest);
             }
         }
-        case NOTIFICATIONS_ROOTS_LIST_CHANGED -&gt; {
+        case NOTIFICATIONS_ROOTS_LIST_CHANGED -> {
             io.emit(rootsRequest);
         }
-        case NOTIFICATION_CANCELLED -&gt; {
+        case NOTIFICATION_CANCELLED -> {
             NotificationCancelledParams params = deserializer.deserializeParams(
                 message, NotificationCancelledParams.class
             );
             logger.log("Notification cancelled reason " + params.reason());
         }
-        default -&gt; logger.log("Unhandled notification method: " + uniqueKey);
+        default -> logger.log("Unhandled notification method: " + uniqueKey);
     }
-}</pre>
+}
+```
+
 
 This shows how servers can react to client-side events and maintain synchronized state.
 
@@ -480,7 +560,8 @@ Server Lifecycle Management {#h2-16-server-lifecycle-management}
 
 The Server class demonstrates robust lifecycle management:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">public class Server {
+```
+public class Server {
     private final AtomicBoolean isShuttingDown = new AtomicBoolean(false);
     private final CountDownLatch shutdownLatch;
 
@@ -488,7 +569,7 @@ The Server class demonstrates robust lifecycle management:
         try {
             this.io.addLineListener(router::route);
 
-            Runtime.getRuntime().addShutdownHook(new Thread(() -&gt; {
+            Runtime.getRuntime().addShutdownHook(new Thread(() -> {
                 if (isShuttingDown.compareAndSet(false, true)) {
                     stop();
                     logger.close();
@@ -504,7 +585,9 @@ The Server class demonstrates robust lifecycle management:
             System.exit(0);
         }
     }
-}</pre>
+}
+```
+
 
 The use of shutdown hooks and countdown latches ensures graceful termination even in complex scenarios.
 
@@ -513,28 +596,35 @@ Key Architectural Patterns {#h2-17-key-architectural-patterns}
 
 ### 1. Record Types for Protocol Messages {#h3-18-1-record-types-for-protocol-messages}
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">public record JsonRpcRequest(
+```
+public record JsonRpcRequest(
     String jsonrpc,
     Long id,
     String method,
     Object params
-) {}</pre>
+) {}
+```
+
 
 Java records provide immutable, self-documenting protocol structures.
 
 ### 2. Builder Pattern for Complex Responses {#h3-19-2-builder-pattern-for-complex-responses}
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">InitializeResult result = InitializeResultBuilder.builder()
+```
+InitializeResult result = InitializeResultBuilder.builder()
     .withProtocolVersion("1.0")
     .withServerInfo("my-server", "1.0.0")
     .withDefaultCapabilities()
-    .build();</pre>
+    .build();
+```
+
 
 Builders ensure valid, complete responses while maintaining readability.
 
 ### 3. Enum-Based Method Routing {#h3-20-3-enum-based-method-routing}
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">public enum UniqueKeys {
+```
+public enum UniqueKeys {
     INITIALIZE("initialize"),
     NOTIFICATIONS_INITIALIZED("notifications/initialized"),
     PROMPTS_LIST("prompts/list"),
@@ -548,7 +638,9 @@ Builders ensure valid, complete responses while maintaining readability.
         }
         return NOT_FOUND;
     }
-}</pre>
+}
+```
+
 
 This approach provides type-safe method handling with built-in validation.
 
@@ -611,7 +703,7 @@ The Model Context Protocol's choice of STDIO as its primary transport isn't just
 
 Whether you're building the next generation of AI tools or simply understanding how AI systems communicate, the lessons from this STDIO-based implementation provide a solid foundation for creating robust, interoperable systems that bridge the gap between human intentions and machine capabilities.
 
-*** ** * ** ***
+
 
 Learn By Building: The Agent MCP Workshop {#h2-28-learn-by-building-the-agent-mcp-workshop}
 -------------------------------------------------------------------------------------------

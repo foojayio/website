@@ -44,13 +44,16 @@ jsoup implements the [WHATWG HTML5](https://whatwg.org/html) specification and p
 
 With that in mind, let's go directly to a simple sample also from the same website:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">Document doc = Jsoup.connect("https://en.wikipedia.org/").get();
+```java
+Document doc = Jsoup.connect("https://en.wikipedia.org/").get();
 log(doc.title());
 Elements newsHeadlines = doc.select("#mp-itn b a");
 for (Element headline : newsHeadlines) {
   log("%s\n\t%s",
     headline.attr("title"), headline.absUrl("href"));
-}</pre>
+}
+```
+
 
 This code snippet fetches headlines from wikipedia. In the code above, you can see several interesting features:
 
@@ -67,22 +70,26 @@ To demonstrate debugging, I created a simple demo that you can download here.
 
 You can use the following Maven dependency to install jsoup into any Java program. Maven will download jsoup jar seamlessly:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="xml">&lt;dependency&gt;
-  &lt;groupId&gt;org.jsoup&lt;/groupId&gt;
-  &lt;artifactId&gt;jsoup&lt;/artifactId&gt;
-  &lt;version&gt;1.14.3&lt;/version&gt;
-&lt;/dependency&gt;</pre>
+```xml
+<dependency>
+  <groupId>org.jsoup</groupId>
+  <artifactId>jsoup</artifactId>
+  <version>1.14.3</version>
+</dependency>
+```
+
 
 This demo is a trivial Java app that returns a complete list of external links and elements with src attributes in a page. This is based on the code from here, converted to a Spring Boot Java program.
 
 The jsoup applicable code is relatively short:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">public Set&lt;String&gt; listLinks(String url, boolean includeMedia) throws IOException {
+```
+public Set<String> listLinks(String url, boolean includeMedia) throws IOException {
    Document doc = Jsoup.connect(url).get();
    Elements links = doc.select("a[href]");
    Elements imports = doc.select("link[href]");
 
-   Set&lt;String&gt; result = new TreeSet&lt;&gt;(String.CASE_INSENSITIVE_ORDER);
+   Set<String> result = new TreeSet<>(String.CASE_INSENSITIVE_ORDER);
    if(includeMedia) {
        Elements media = doc.select("[src]");
        for (Element src : media) {
@@ -100,13 +107,16 @@ The jsoup applicable code is relatively short:
    }
 
    return result;
-}</pre>
+}
+```
+
 
 As you can see, we fetch the input String URL. We can also use input streams, but this makes things slightly more complicated when parsing relative URLs (we need a base URL anyway). We then search for links and objects that have an src attribute. The code then adds all of them into a set to keep the entries sorted and unique.
 
 We expose this as a web service using the following code:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">@RestController
+```java
+@RestController
 public class ParseLinksWS {
    private final ParseLinks parseLinks;
 
@@ -115,15 +125,19 @@ public class ParseLinksWS {
    }
 
    @GetMapping("/parseLinks")
-   public Set&lt;String&gt; listLinks(@RequestParam String url, @RequestParam(required = false) Boolean includeMedia) throws IOException {
+   public Set<String> listLinks(@RequestParam String url, @RequestParam(required = false) Boolean includeMedia) throws IOException {
        return parseLinks.listLinks(url, includeMedia == null ? true : includeMedia);
    }
-}</pre>
+}
+```
+
 
 Once we run the application can the application, we can use it with a simple curl command:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">curl -H "Content-Type: application/json" "http://localhost:8080/parseLinks?url=https%3A%2F%2Flightrun.com"
-</pre>
+```
+curl -H "Content-Type: application/json" "http://localhost:8080/parseLinks?url=https%3A%2F%2Flightrun.com"
+```
+
 
 This prints out the list of URLs referred to in the Lightrun home page.
 
@@ -150,7 +164,10 @@ Assuming you don't know where to look, a good place to start is inside the jsoup
 
 I ctrl-clicked (on Mac use Meta-click) the select method call here:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">Elements links = doc.select("a[href]");</pre>
+```java
+Elements links = doc.select("a[href]");
+```
+
 
 And it led me to the Element class. In it I ctrl-clicked the Selector "select" method and got to the "interesting" place.
 
@@ -170,26 +187,34 @@ The value of logs is that they can follow an issue in a way that's very similar 
 
 First, we add a log with the following text:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">"Executing query {query}"
-</pre>
+```
+"Executing query {query}"
+```
+
 
 ![image2.png](https://cdn.hashnode.com/res/hashnode/image/upload/v1650465598568/jjkSGCvVa.png)
 
 Then, to find out how many entries we returned, we just go to the caller (which we know thanks to the stack in the snapshot) and add the following log there:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">Links query returned {links.size()}
-<img decoding="async" src="https://cdn.hashnode.com/res/hashnode/image/upload/v1650465693574/unexIjfhz.png" alt="image5.png"></pre>
+```
+Links query returned {links.size()}
+<img decoding="async" src="https://cdn.hashnode.com/res/hashnode/image/upload/v1650465693574/unexIjfhz.png" alt="image5.png">
+```
+
 
 This produces the following log which lets us see that we had 147 `a[href]` links. The beauty of this is that the additional logs are interlaced with the pre-existing logs in-context:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">Feb 02, 2022 11:25:27 AM org.jsoup.select.Selector select
+```
+Feb 02, 2022 11:25:27 AM org.jsoup.select.Selector select
 INFO: LOGPOINT: Executing query a[href]
 Feb 02, 2022 11:25:27 AM com.lightrun.demo.jsoupdemo.service.ParseLinks listLinks
 INFO: LOGPOINT: Links query returned 147
 Feb 02, 2022 11:25:27 AM org.jsoup.select.Selector select
 INFO: LOGPOINT: Executing query link[href]
 Feb 02, 2022 11:25:27 AM org.jsoup.select.Selector select
-INFO: LOGPOINT: Executing query [src]</pre>
+INFO: LOGPOINT: Executing query [src]
+```
+
 
 Avoid Security and GDPR Issues {#h2-4-avoid-security-and-gdpr-issues}
 ---------------------------------------------------------------------

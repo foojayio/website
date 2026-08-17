@@ -72,10 +72,13 @@ In addition, there's no dedicated package: you must untar an archive. This means
 
 That being said, I expected the migration to be one line long:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml">jobs:
+```yaml
+jobs:
   update:
     #runs-on: ubuntu-latest
-    runs-on: self-hosted</pre>
+    runs-on: self-hosted
+```
+
 
 It's a bit more involved, though. Let's detail what steps I had to undertake in my repo to make the job work.
 
@@ -84,7 +87,8 @@ The practice {#h2-2-the-practice}
 
 GitHub Actions depend on Docker being installed on the runner. Because of this, I thought jobs ran in a dedicated image: it's plain wrong. Whatever you script in your job happens on the running system. Case in point, the initial script installed Python and Poetry.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml">jobs:
+```yaml
+jobs:
   update:
     runs-on: ubuntu-latest
     steps:
@@ -95,14 +99,19 @@ GitHub Actions depend on Docker being installed on the runner. Because of this, 
       - name: Set up Poetry
         uses: abatilo/actions-poetry@v2
         with:
-          poetry-version: 1.7.1</pre>
+          poetry-version: 1.7.1
+```
+
 
 In the context of a temporary container created during each run, it makes sense; in the context of a stable, long-running system, it doesn't.
 
 Raspbian, the Raspberry default operating system, already has Python 3.11 installed. Hence, I had to downgrade the version configured in Poetry. It's no big deal because I don't use any specific Python 3.12 feature.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="ini">[tool.poetry.dependencies]
-python = "^3.11"</pre>
+```ini
+[tool.poetry.dependencies]
+python = "^3.11"
+```
+
 
 Raspbian forbids the installation of any Python dependency in the primary environment, which is a very sane default. To install Poetry, I used the regular APT package manager:
 
@@ -112,7 +121,8 @@ sudo apt-get install python-poetry
 
 The next was to handle secrets. On GitHub, you set the secrets on the GUI and reference them in your scripts via environment variables:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml">jobs:
+```yaml
+jobs:
   update:
     runs-on: ubuntu-latest
     steps:
@@ -120,24 +130,31 @@ The next was to handle secrets. On GitHub, you set the secrets on the GUI and re
         run: poetry run python src/main.py --live
         env:
           BLOG_REPO_TOKEN: ${{ secrets.BLOG_REPO_TOKEN }}
-          YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}</pre>
+          YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
+```
+
 
 It allows segregating individual steps so that a step has access to only the environmental variables it needs. For self-hosted runners, you set environment variables in an existing `.env` file inside the folder.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">jobs:
+```
+jobs:
   update:
     runs-on: ubuntu-latest
     steps:
       - name: Update README
         run: poetry run python src/main.py --live
-</pre>
+```
+
 
 If you want more secure setups, you're on your own.
 
 Finally, the architecture is a pull-based model. The runner constantly checks if a job is scheduled. To make the runner a service, we need to use out-of-the-box scripts inside the runner folder:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash">sudo ./svc.sh install
-sudo ./svc.sh start</pre>
+```bash
+sudo ./svc.sh install
+sudo ./svc.sh start
+```
+
 
 The script uses `systemd` underneath.
 
@@ -160,7 +177,7 @@ I'd be happy to hear if you found and used such a solution. In any case, I'm not
 * [About self-hosted runners](https://docs.github.com/en/actions/hosting-your-own-runners/managing-self-hosted-runners/about-self-hosted-runners)
 * [Configuring the self-hosted runner application as a service](https://docs.github.com/en/actions/hosting-your-own-runners/managing-self-hosted-runners/configuring-the-self-hosted-runner-application-as-a-service)
 
-*** ** * ** ***
+
 
 *Originally published at [A Java Geek](https://blog.frankel.ch/raspberry-pi-github-action/) on March 10^th^ 2024*
 

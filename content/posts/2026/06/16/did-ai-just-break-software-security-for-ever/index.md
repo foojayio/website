@@ -120,6 +120,6 @@ Did AI break software security for ever? Not permanently. But it broke the old e
 
 This is Part 1 of a four-part series. Next: Why You Can't Migrate Your Way Out of a CVE. The real cost of a major migration, and why it cannot be your emergency response plan.
 
-*** ** * ** ***
+
 
 *If you want to see your actual exposure before deciding anything, the HeroDevs EOL Dataset tool is free. scan your dependency manifest and you'll know exactly where you stand. [herodevs.com/eol-dataset](https://www.herodevs.com/eol-dataset/overview?utm_source=devrel&amp;utm_medium=referral&amp;utm_campaign=2026q2_spring-boot-3-5-eol_global)*

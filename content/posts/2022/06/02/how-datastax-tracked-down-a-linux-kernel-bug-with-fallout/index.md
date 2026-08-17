@@ -58,11 +58,14 @@ The SEPWorker infrastructure has a mechanism for only waking up the minimum numb
 
 Knowing all of this and combining that knowledge with the tpstats output I decided to see what all of the Native-Transport-Requests threads were doing by looking at their callstacks with jstack. Most of the threads were sleeping just like I expected based on the tpstats output, and a few were busily executing work. But one had this interesting callstack:{#8880}
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">"Native-Transport-Requests-2" #173 daemon prio=5 os_prio=0 cpu=462214.94ms elapsed=19374.32s tid=0x00007efee606eb00 nid=0x385d waiting on condition  [0x00007efec18b9000]
+```
+"Native-Transport-Requests-2" #173 daemon prio=5 os_prio=0 cpu=462214.94ms elapsed=19374.32s tid=0x00007efee606eb00 nid=0x385d waiting on condition  [0x00007efec18b9000]
 4   java.lang.Thread.State: TIMED_WAITING (parking)
-5 at jdk.internal.misc.Unsafe.park(<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="8ae0ebfceba4e8ebf9efcabbbba4baa4bc">[email&nbsp;protected]</a>/Native Method)
-6 at java.util.concurrent.locks.LockSupport.parkNanos(<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="9bf1faedfab5f9fae8fedbaaaab5abb5ad">[email&nbsp;protected]</a>/LockSupport.java:357)
-7 at org.apache.cassandra.concurrent.SEPWorker.doWaitSpin(SEPWorker.java:268)</pre>
+5 at jdk.internal.misc.Unsafe.park(<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="8ae0ebfceba4e8ebf9efcabbbba4baa4bc">[email protected]</a>/Native Method)
+6 at java.util.concurrent.locks.LockSupport.parkNanos(<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="9bf1faedfab5f9fae8fedbaaaab5abb5ad">[email protected]</a>/LockSupport.java:357)
+7 at org.apache.cassandra.concurrent.SEPWorker.doWaitSpin(SEPWorker.java:268)
+```
+
 
 This showed that `Native-Transport-Requests-2 `was currently in the SPINNING state and sleeping prior to checking for more work one last time before sleeping permanently. The only problem was, no matter how many times I ran jstack, this thread never*exited* `parkNanos()` which meant no other threads would ever be woken up to help process the backlog of work!{#e4a9}
 
@@ -80,10 +83,13 @@ Signals are a handy way of interrupting sleeping application threads that are in
 
 The main timer detail I was interested in was the expired value which tells you when the timer should have expired and awakened the sleeping thread. If the value was far into the future it seemed likely that the timer had been programmed incorrectly, but if it was in the past then we'd missed the wakeup or it had never been sent. I bundled my BPF script into a bash script that also took care of first sending the `SIGSTOP` and `SIGCONT` signals to the Native-Transport-Requests thread.{#25f2}
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ sudo ./futex 14469
+```
+$ sudo ./futex 14469
 Tracing pid 14469…
 Sending SIGSTOP
-55880730777795 expires</pre>
+55880730777795 expires
+```
+
 
 The expires value for high-resolution timers in the kernel is in nanoseconds since boot. Doing a quick bit of math (5880730777795/1000000000 / 60 = 98.012 or 98 minutes of uptime) I could tell that the expire value looked correct because it was within the four hours that the test usually took. And the real issue was that a wakeup had never been sent to the sleeping `Native-Transport-Requests` thread. At this point, I was convinced that our test was hitting a kernel bug.{#5906}
 
@@ -93,7 +99,8 @@ I modified my BPF script to display the location in the red-black tree for the `
 
 Tracing the workings of these red-black trees was beyond anything I could achieve with a BPF script. I resorted to writing a kernel patch to print a warning message and dump the contents of the `hrtimer` red-black trees whenever the auxiliary pointer to the leftmost entry no longer pointed to the timer that expired next.{#32c4}
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">10: was adding node=00000000649f0970
+```
+10: was adding node=00000000649f0970
 10: found node in wrong place last=0000000091a72b7e, next=00000000649f0970 (expires 208222423748, 208222332591)
 10: last timer=0000000091a72b7e function=hrtimer_wakeup+0x0/0x30, next=00000000649f0970 timer function=hrtick+0x0/0x70
 Printing rbtree
@@ -106,7 +113,9 @@ node=00000000e3f371a2, expires=233222750000, function=timerfd_tmrproc+0x0/0x20
 node=0000000068442340, expires=265218903415, function=hrtimer_wakeup+0x0/0x30
 node=00000000785c2d62, expires=291972750000, function=timerfd_tmrproc+0x0/0x20
 node=0000000085e65b06, expires=86608220562558, function=hrtimer_wakeup+0x0/0x30
-node=00000000049a0b4d, expires=100000159000051377, function=hrtimer_wakeup+0x0/0x30</pre>
+node=00000000049a0b4d, expires=100000159000051377, function=hrtimer_wakeup+0x0/0x30
+```
+
 
 Before I started this part, I wasn't even sure that Fallout would allow me to boot into a custom kernel. Sure enough, it was trivial to do.{#ac36}
 

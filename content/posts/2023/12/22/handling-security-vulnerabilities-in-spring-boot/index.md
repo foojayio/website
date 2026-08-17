@@ -51,28 +51,32 @@ Typically, your spring boot manifest looks something like the following code:
 
 **Maven**:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="xml" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&lt;parent&gt;
-   &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
-   &lt;artifactId&gt;spring-boot-starter-parent&lt;/artifactId&gt;
-   &lt;version&gt;2.7.16&lt;/version&gt;
-   &lt;relativePath/&gt;
-&lt;/parent&gt;
+```xml
+<parent>
+   <groupId>org.springframework.boot</groupId>
+   <artifactId>spring-boot-starter-parent</artifactId>
+   <version>2.7.16</version>
+   <relativePath/>
+</parent>
 …
-&lt;dependencies&gt;
-   &lt;dependency&gt;
-       &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
-       &lt;artifactId&gt;spring-boot-starter-security&lt;/artifactId&gt;
-   &lt;/dependency&gt;
-   &lt;dependency&gt;
-       &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
-       &lt;artifactId&gt;spring-boot-starter-webflux&lt;/artifactId&gt;
-   &lt;/dependency&gt;
+<dependencies>
+   <dependency>
+       <groupId>org.springframework.boot</groupId>
+       <artifactId>spring-boot-starter-security</artifactId>
+   </dependency>
+   <dependency>
+       <groupId>org.springframework.boot</groupId>
+       <artifactId>spring-boot-starter-webflux</artifactId>
+   </dependency>
   …
-&lt;/dependencies&gt;</pre>
+</dependencies>
+```
+
 
 **Gradle**:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="groovy" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">plugins {
+```groovy
+plugins {
  …
  id 'org.springframework.boot' version '2.7.16'
  id 'io.spring.dependency-management' version '1.1.3'
@@ -82,7 +86,9 @@ dependencies {
  implementation 'org.springframework.boot:spring-boot-starter-security'
  implementation 'org.springframework.boot:spring-boot-starter-webflux'
  …
-}</pre>
+}
+```
+
 
 ### Update Spring Boot starter {#h3-2-update-spring-boot-starter}
 
@@ -94,15 +100,21 @@ When looking at the first vulnerability found in my project, the fix suggestion 
 
 **Maven:**
 
-<pre class="EnlighterJSRAW" data-enlighter-language="xml" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">   &lt;dependency&gt;
-       &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
-       &lt;artifactId&gt;spring-boot-starter-webflux&lt;/artifactId&gt;
-       &lt;version&gt;2.7.17&lt;/version&gt;
-   &lt;/dependency&gt;</pre>
+```xml
+   <dependency>
+       <groupId>org.springframework.boot</groupId>
+       <artifactId>spring-boot-starter-webflux</artifactId>
+       <version>2.7.17</version>
+   </dependency>
+```
+
 
 **Gradle:**
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">implementation 'org.springframework.boot:spring-boot-starter-webflux:2.7.17'</pre>
+```
+implementation 'org.springframework.boot:spring-boot-starter-webflux:2.7.17'
+```
+
 
 **But stop right here!** This is not the recommended way of solving the problem. The specific version, 2.7.17, is used over the parent version. While this might work since this is a patch version release, it isn't the best or most secure solution. Since semver does not guarantee that API's stay intact, we can't be sure this will work. But the most important argument is that there probably is a full new release of Spring Boot.  
 
@@ -110,19 +122,25 @@ Remember that I told you earlier that these starters belong together? Therefore 
 
 **Maven:**
 
-<pre class="EnlighterJSRAW" data-enlighter-language="xml" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&lt;parent&gt;
-   &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
-   &lt;artifactId&gt;spring-boot-starter-parent&lt;/artifactId&gt;
-   &lt;version&gt;2.7.17&lt;/version&gt;
-   &lt;relativePath/&gt;
-&lt;/parent&gt;</pre>
+```xml
+<parent>
+   <groupId>org.springframework.boot</groupId>
+   <artifactId>spring-boot-starter-parent</artifactId>
+   <version>2.7.17</version>
+   <relativePath/>
+</parent>
+```
+
 
 **Gradle:**
 
-<pre class="EnlighterJSRAW" data-enlighter-language="groovy" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">plugins {
+```groovy
+plugins {
  …
  id 'org.springframework.boot' version '2.7.17'
-}</pre>
+}
+```
+
 
 I would advise everyone to go the extra mile and update their entire spring boot version to the latest appropriate version. To find out what that is, simply go to https://start.spring.io.
 ![blog-sprint-boot-initializer](https://snyk.io/_next/image/?url=https%3A%2F%2Fres.cloudinary.com%2Fsnyk%2Fimage%2Fupload%2Fv1701273847%2Fblog-sprint-boot-initializer.jpg&w=2560&q=75)
@@ -139,13 +157,19 @@ The first thing you should do is check of the version of the package you want to
 
 For maven, you can add a property in the properties section.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="xml" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&lt;properties&gt;
-   &lt;snakeyaml.version&gt;3.0&lt;/snakeyaml.version&gt;
-&lt;/properties&gt;</pre>
+```xml
+<properties>
+   <snakeyaml.version>3.0</snakeyaml.version>
+</properties>
+```
+
 
 For Gradle, we can edit this property in a \`gradle.properties\` file:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">snakeyaml.version=3.0</pre>
+```
+snakeyaml.version=3.0
+```
+
 
 This is the preferred way over dependency management since \`snakeyaml\` is just a single library. However, in many cases, it is more than one library. The version can refer to a [++BOM++](https://maven.apache.org/guides/introduction/introduction-to-dependency-mechanism.html#bill-of-materials-bom-poms) (bill of materials), not to be confused with an SBOM, representing a set of groups of packages that need to be used together and essentially have the same version --- such as an API and an implementation package. Both need to be on the same version to perform as expected.
 
@@ -157,36 +181,45 @@ For Maven, it's most commonly added to the \`dependencyManagement\` block. This 
 
 **Maven:**
 
-<pre class="EnlighterJSRAW" data-enlighter-language="xml" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&lt;dependencyManagement&gt;
-   &lt;dependencies&gt;
-       &lt;dependency&gt;
-           &lt;groupId&gt;org.yaml&lt;/groupId&gt;
-           &lt;artifactId&gt;snakeyaml&lt;/artifactId&gt;
-           &lt;version&gt;2.2&lt;/version&gt;
-       &lt;/dependency&gt;
-   &lt;/dependencies&gt;
-&lt;/dependencyManagement&gt;</pre>
+```xml
+<dependencyManagement>
+   <dependencies>
+       <dependency>
+           <groupId>org.yaml</groupId>
+           <artifactId>snakeyaml</artifactId>
+           <version>2.2</version>
+       </dependency>
+   </dependencies>
+</dependencyManagement>
+```
+
 
 Since we use the [++dependency-management++](https://docs.spring.io/dependency-management-plugin/docs/current/reference/html/)plugin for Spring in our Gradle file, we have pretty similar capabilities for Gradle available. Note that this plugin was inserted by the Spring Boot initializer when scaffolding my project.
 
 **Gradle:**
 
-<pre class="EnlighterJSRAW" data-enlighter-language="groovy" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">dependencyManagement {
+```groovy
+dependencyManagement {
    dependencies {
        dependency 'org.yaml:snakeyaml:2.2'
    }
-}</pre>
+}
+```
+
 
 If you don't use the \`io.spring.dependency-management\` plugin, you can also add [++constraints++](https://docs.gradle.org/current/userguide/dependency_constraints.html#sec:adding-constraints-transitive-deps) to transitive dependencies in Gradle to update a transitive dependency like the one below. Remember that these constraints do not play well with the Spring \`dependency-management\` plugin. So it is either one or the other.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="groovy" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">dependencies {
+```groovy
+dependencies {
     …
     constraints {
         implementation('org.yaml:snakeyaml:2.2') {
             because 'previous versions have a security issue'
         }
     …
-}</pre>
+}
+```
+
 
 Scanning your Spring Boot applications with Snyk {#h2-4-scanning-your-spring-boot-applications-with-snyk}
 ---------------------------------------------------------------------------------------------------------

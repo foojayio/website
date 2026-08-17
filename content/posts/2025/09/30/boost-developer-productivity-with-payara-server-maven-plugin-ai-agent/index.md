@@ -114,28 +114,40 @@ To unlock the full capabilities of the Payara AI Agent, you can fine-tune its be
 
 You can pass these as environment variables:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">export PAYARA_AI_AGENT=true
+```
+export PAYARA_AI_AGENT=true
 export PAYARA_AI_API_KEY=sk-xxxxxx
 export PAYARA_AI_PROVIDER=OPEN_AI
-export PAYARA_AI_MODEL=gpt-4o-mini</pre>
+export PAYARA_AI_MODEL=gpt-4o-mini
+```
+
 
 Or via Maven:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">mvn payara-server:dev \
+```
+mvn payara-server:dev \
 -Dpayara.ai.agent=true \
 -Dpayara.ai.api.key=sk-xxxxxx \
 -Dpayara.ai.provider=OPEN_AI \
--Dpayara.ai.model=gpt-4o-mini</pre>
+-Dpayara.ai.model=gpt-4o-mini
+```
+
 
 #### How to Enable the AI Agent
 
 By default, the AI Agent is enabled in [dev mode](https://blog.payara.fish/stratospheric-developer-productivity-unveiling-payara-dev-mode "dev mode"). Otherwise, enable it explicitly using:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">-Dpayara.ai.agent=true</pre>
+```
+-Dpayara.ai.agent=true
+```
+
 
 Or set the environment variable:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">export PAYARA_AI_AGENT=true</pre>
+```
+export PAYARA_AI_AGENT=true
+```
+
 
 The AI Agent currently supports a variety of providers, so you can integrate with the one that best fits your setup:
 

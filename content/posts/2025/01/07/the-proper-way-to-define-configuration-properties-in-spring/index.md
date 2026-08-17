@@ -40,12 +40,15 @@ It's a maven multi-module project with three modules:
 
 The modules each contain the following:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml">app:
+```yaml
+app:
   url: 'foo'
   username: 'bar'
   required: true
   nested:
-    foo: 'foonest'</pre>
+    foo: 'foonest'
+```
+
 
 And you can run the `DemoApp` to see what the `ApplicationProperties` contain at run time.
 
@@ -54,7 +57,8 @@ The initial set-up in Spring Boot 2. {#h2-1-the-initial-set-up-in-spring-boot-2}
 
 Let's take a look at the configuration properties in the initial setup of module-spring2:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">@Setter
+```java
+@Setter
 @Getter
 @ConfigurationProperties(prefix = "app")
 @ToString
@@ -66,7 +70,9 @@ public class ApplicationProperties {
         private boolean required;
 
         private final NestedApplicationProperties nested;
-}</pre>
+}
+```
+
 
 Nothing special here except maybe some *lombok magic* 🪄
 
@@ -105,14 +111,17 @@ So, can you spot what changed from spring boot 2 to spring boot 3?
 
 When *delombok'ing* the class, it turns out the configuration properties has a constructor like this:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">private String url;
+```java
+private String url;
 private String username;
 private boolean required;
 private final NestedApplicationProperties nested;
 // Delombok'ed.
 public ApplicationProperties(NestedApplicationProperties nested) {
     this.nested = nested;
-}</pre>
+}
+```
+
 
 That worked fine for Spring Boot 2 because the fields were all still bound via the *setters* .  
 
@@ -133,7 +142,8 @@ The proper way to define your configuration properties {#h2-3-the-proper-way-to-
 
 Let's take a look at the refined ApplicationProperties in **module-spring3**:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">/**
+```java
+/**
  * Some description.
  * (3)
  * @param url Must be filled in.
@@ -149,10 +159,12 @@ public record ApplicationProperties(
         @NotBlank String url, // (2)
         @NotBlank String username, // (2)
         boolean required,
-        // (2) &amp; (3)
+        // (2) & (3)
         @Valid @NestedConfigurationProperty NestedApplicationProperties nested
 ) {
-}</pre>
+}
+```
+
 
 ### 1. Simplify your code \& get rid of lombok: use records instead of classes {#h3-4-1-simplify-your-code-get-rid-of-lombok-use-records-instead-of-classes}
 
@@ -172,7 +184,8 @@ We've added some [bean validation](https://beanvalidation.org/) to the configura
 
 Now, when a property is missing for whatever reason, Spring will fail while wiring up its beans:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="raw">***************************
+```
+***************************
 APPLICATION FAILED TO START
 ***************************
 
@@ -191,16 +204,21 @@ Binding to target com.example.ApplicationProperties failed:
 
 Action:
 
-Update your application's configuration</pre>
+Update your application's configuration
+```
+
 
 Note also that to cascade the validation to the nested properties, we had to add `@Valid` , which is in line with what the Bean Validation specification lays out, but which spring boot [did not follow](https://github.com/spring-projects/spring-boot/wiki/Spring-Boot-3.4-Release-Notes#bean-validation-of-configuration-properties%0A) up until recently.
 
 To start using bean validation, just add the following dependency:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="xml">&lt;dependency&gt;
-    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
-    &lt;artifactId&gt;spring-boot-starter-validation&lt;/artifactId&gt;
-&lt;/dependency&gt;</pre>
+```xml
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-validation</artifactId>
+</dependency>
+```
+
 
 ### 3. Bonus: Document your configuration and let your IDE help you. {#h3-6-3-bonus-document-your-configuration-and-let-your-ide-help-you}
 
@@ -208,7 +226,8 @@ Spring boot has an *annotation processor* that can read your configuration at co
 
 This metadata is then stored under a /META-INF/spring-configuration-metadata.json as such:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="json">{
+```json
+{
   "groups": [
     {
       "name": "app",
@@ -249,7 +268,9 @@ This metadata is then stored under a /META-INF/spring-configuration-metadata.jso
     }
   ],
   "hints": []
-}</pre>
+}
+```
+
 
 Note that we also used the annotation `@NestedConfigurationProperty` in the revised example, which provides a *hint* to the annotation processor to view `com.example.NestedApplicationProperties` as [a nested type](https://docs.spring.io/spring-boot/api/java/org/springframework/boot/context/properties/NestedConfigurationProperty.html).
 
@@ -266,11 +287,14 @@ Descriptions and autocompletion in IntelliJ.{#caption-attachment-115257}
 
 To start using configuration processing, it's as simple as adding:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="xml">&lt;dependency&gt;
-    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
-    &lt;artifactId&gt;spring-boot-configuration-processor&lt;/artifactId&gt;
-    &lt;optional&gt;true&lt;/optional&gt;
-&lt;/dependency&gt;</pre>
+```xml
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-configuration-processor</artifactId>
+    <optional>true</optional>
+</dependency>
+```
+
 
 and enabling annotation processing in your favorite IDE.
 
@@ -279,6 +303,6 @@ Read more {#h2-7-read-more}
 
 * <https://docs.spring.io/spring-boot/specification/configuration-metadata/index.html>
 
-*** ** * ** ***
+
 
 This blog was originally published on [my personal blog](https://wimdetroyer.com/blog/the-proper-way-of-using-configuration-properties-in-spring) the 1st of January, 2025.

@@ -163,7 +163,8 @@ You can non only choose how to format the citation but also cite an alternative 
 
 Again, GitHub's UI helps one create a `CITATION.cff` file. When you create one, it offers you to add a sample, which you can edit to your heart's content.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml">cff-version: 1.2.0
+```yaml
+cff-version: 1.2.0
 title: Beautify GitHub sample repository
 message: If you really want to cite this repository, here's how you should cite it.
 type: software
@@ -171,7 +172,9 @@ authors:
   - given-names: Nicolas
     family-names: Fränkel
 repository-code: 'https://github.com/ajavageek/beautifygithub'
-license: Unlicense</pre>
+license: Unlicense
+```
+
 
 After adding the file, a new *Cite this repository* link appears on the right sidebar. You can choose which format you want to copy, APA or BibTeX when you click it.
 
@@ -186,10 +189,13 @@ Last but not least, let's look at how to configure sponsorship. If you provide v
 
 GitHub allows displaying sponsorship options via a dedicated `FUNDING.yml` in the `.github` repository. Once more, the UI helps. Go to *Settings* and click on the *Set up sponsor button*. It opens the usual window to create a new file with a template. Here's how I changed it:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml">github:
+```yaml
+github:
   - nfrankel
 custom:
-  - https://paypal.me/nicofrankel</pre>
+  - https://paypal.me/nicofrankel
+```
+
 
 The preview tab validates your input.
 

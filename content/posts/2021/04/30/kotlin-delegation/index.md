@@ -42,7 +42,8 @@ Manual and native delegation {#h2-1-manual-and-native-delegation}
 
 In Java, you need to code delegation manually. The example above translates into the following code:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">interface A {
+```java
+interface A {
     void foo();
 }
 
@@ -63,11 +64,14 @@ class Composition implements A {
     public void foo() {
         b.foo();
     }
-}</pre>
+}
+```
+
 
 Kotlin handles the delegation natively using the keyword `by`. You can write the same code in Kotlin like this:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="kotlin">interface A {
+```kotlin
+interface A {
     fun foo()
 }
 
@@ -75,7 +79,9 @@ class B : A {
     override fun foo() {}
 }
 
-class Delegate(b: B) : A by b  // 1</pre>
+class Delegate(b: B) : A by b  // 1
+```
+
 
 1. With this, you can call `foo()` on any `Delegate` instance
 
@@ -93,24 +99,36 @@ A couple of out-of-the-box delegates are available through the standard library.
 
 * Non-null delegate: A non-`null` delegate behaves the same way as the `lazyinit` keyword: if one uses the variable before one has initialized it to a non `null` value, it will throw an `IllegalStateException`.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="kotlin">var notNull: String by Delegates.notNull()</pre>
+```kotlin
+var notNull: String by Delegates.notNull()
+```
+
 
 * Lazy delegate: A lazy delegate computes the value *on the first access* , stores it, and then returns the stored value. As its name implies, you use `lazy` when the value is expensive to compute and doesn't change after computation.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="kotlin">val lazy: String by lazy { "An expensive computation" }</pre>
+```kotlin
+val lazy: String by lazy { "An expensive computation" }
+```
+
 
 * Observable: An observable delegate offers a hook when the value is accessed so you can execute code **afterward** .
 
-<pre class="EnlighterJSRAW" data-enlighter-language="kotlin">val observed = "Observed"
+```kotlin
+val observed = "Observed"
 val observable: String by Delegates.observable(observed) {
-    _, old, new -&gt; println("old: $old, new: $new")
-}</pre>
+    _, old, new -> println("old: $old, new: $new")
+}
+```
+
 
 * Vetoable: A vetoable delegate is the opposite of the observable. It offers a hook that executes **before** . If this hook returns `true`, the set of the value executes as expected; if it returns `false`, the set doesn't happen.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="kotlin">val vetoable: String by Delegates.vetoable(observed) {
-    _, _, _ -&gt; Random.nextBoolean()
-}</pre>
+```kotlin
+val vetoable: String by Delegates.vetoable(observed) {
+    _, _, _ -> Random.nextBoolean()
+}
+```
+
 
   Here, the set fails randomly 50% of the time. It's not helpful but fun to debug for your colleagues.
 
@@ -130,21 +148,24 @@ If you want to create your own delegated property, it needs to point to a class 
 
 As an illustration, let's implement a distributed cache delegated property based on Hazelcast IMDG.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="kotlin">class HazelcastDelegate&lt;T&gt;(private val key: String) {
+```kotlin
+class HazelcastDelegate<T>(private val key: String) {
 
-  private val map: IMap&lt;String, Any&gt; by lazy {                          // 1
+  private val map: IMap<String, Any> by lazy {                          // 1
     val config = Config().apply {
       instanceName = "Instance"
     }
     Hazelcast.getOrCreateHazelcastInstance(config).getMap("values")
   }
 
-  operator fun getValue(thisRef: T, prop: KProperty&lt;*&gt;) = map[key]      // 2
+  operator fun getValue(thisRef: T, prop: KProperty<*>) = map[key]      // 2
 
-  operator fun setValue(thisRef: T, prop: KProperty&lt;*&gt;, value: Any?) {
+  operator fun setValue(thisRef: T, prop: KProperty<*>, value: Any?) {
       map[key] = value                                                  // 3
   }
-}</pre>
+}
+```
+
 
 1. Create a reference to a Hazelcast `IMap`
 2. Get the value from the `IMap`
@@ -152,15 +173,18 @@ As an illustration, let's implement a distributed cache delegated property based
 
 Using the above delegate is straightforward:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="kotlin">class Foo {
-  var cached: Any? by HazelcastDelegate&lt;Foo&gt;("cached")
+```kotlin
+class Foo {
+  var cached: Any? by HazelcastDelegate<Foo>("cached")
 }
 
 fun main() {
   val foo = Foo()
   foo.cached = "New value"
   println(foo.cached)
-}</pre>
+}
+```
+
 
 Conclusion {#h2-4-conclusion}
 -----------------------------

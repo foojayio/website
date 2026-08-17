@@ -37,7 +37,7 @@ I started with doing [a search](https://github.com/spring-projects/) for `Thread
 >
 > Yes, **Spring transactions** use `ThreadLocal` as part of their transaction management mechanism. Here's an explanation of how it works:
 >
-> *** ** * ** ***
+> 
 >
 > **How Spring Transactions Use `ThreadLocal`**
 >
@@ -137,6 +137,6 @@ The Spring team faces two issues:
 
 You can already see the beginning of such work in the [VirtualThreadTaskExecutor](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/core/task/VirtualThreadTaskExecutor.html) introduced in Spring 6.1.
 
-*** ** * ** ***
+
 
 *Originally published at [A Java Geek](https://blog.frankel.ch/transactions-threadlocal-spring/) on October 5th, 2025*

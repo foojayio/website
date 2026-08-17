@@ -44,11 +44,14 @@ It's a JavaScript library you add to your website, that allows you to "swap" HTM
 
 The htmx website gives this minimal example for a webpage with the action: _"When a user clicks on this button, issue an AJAX request to `MARKDOWN_HASH15537f6d76c78712ccd209e4e3f83362MARKDOWN`*HASH*, and replace the entire button with the HTML response":
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&lt;script src="https://unpkg.com/<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="2b435f46530544594c6b1a0512051a1a">[email&nbsp;protected]</a>"&gt;&lt;/script&gt;
-&lt;!-- have a button POST a click via AJAX --&gt;
-&lt;button hx-post="/clicked" hx-swap="outerHTML"&gt;
+```
+<script src="https://unpkg.com/<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="2b435f46530544594c6b1a0512051a1a">[email protected]</a>"></script>
+<!-- have a button POST a click via AJAX -->
+<button hx-post="/clicked" hx-swap="outerHTML">
     Click Me
-&lt;/button&gt;</pre>
+</button>
+```
+
 
 Example Application {#h2-2-example-application}
 -----------------------------------------------
@@ -61,11 +64,14 @@ Many of the Jetty+WebSocket examples that you can find online, refer to the `jav
 
 Datafaker is used to generate ["Lorum ipsum"](https://en.wikipedia.org/wiki/Lorem_ipsum) text, so you'll probably don't need this in your project. And when you are not using WebSockets, you can remove two more dependencies...
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">org.eclipse.jetty:jetty-server:12.0.5
+```
+org.eclipse.jetty:jetty-server:12.0.5
 org.eclipse.jetty:jetty-slf4j-impl:12.0.5
 org.eclipse.jetty.ee10.websocket:jetty-ee10-websocket-jakarta-server:12.0.5
 jakarta.websocket:jakarta.websocket-api:2.1.1
-net.datafaker:datafaker:2.1.0</pre>
+net.datafaker:datafaker:2.1.0
+```
+
 
 ### Jetty Configuration {#h3-4-jetty-configuration}
 
@@ -77,7 +83,8 @@ As I wanted to expose three different things on the same port, I needed some res
 
 The resulting constructor looks like this, using a `ContextHandlerCollection` to add the different handlers:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public class MyWebServer implements Runnable {
+```
+public class MyWebServer implements Runnable {
 
     private final Server server;
 
@@ -99,13 +106,16 @@ The resulting constructor looks like this, using a `ContextHandlerCollection` to
             System.err.println("Problem initializing the Jetty server: " + e.getMessage());
         }
     }
-}</pre>
+}
+```
+
 
 #### Resource Handler
 
 The resource handler, makes all the files inside the `resources/web` directory accessible through HTTP with the following configuration:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">private void addResourceHandler(ContextHandlerCollection contextHandlerCollection) throws Exception {
+```
+private void addResourceHandler(ContextHandlerCollection contextHandlerCollection) throws Exception {
     URL url = MyWebServer.class.getClassLoader().getResource("web");
 
     if (url == null) {
@@ -124,25 +134,31 @@ The resource handler, makes all the files inside the `resources/web` directory a
     contactHandler.setHandler(resourceHandler);
 
     contextHandlerCollection.addHandler(contactHandler);
-}</pre>
+}
+```
+
 
 #### Rest Handler
 
 Classes that extend `HttpServlet` are exposed via the rest handler. With this configuration, they can be reached on `/rest/list` and `/rest/text`:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">private void addRestHandler(ContextHandlerCollection contextHandlerCollection) {
+```
+private void addRestHandler(ContextHandlerCollection contextHandlerCollection) {
     ServletContextHandler apiHandler = new ServletContextHandler(ServletContextHandler.SESSIONS);
     apiHandler.setContextPath("/rest");
     contextHandlerCollection.addHandler(apiHandler);
     apiHandler.addServlet(ListService.class, "/list");
     apiHandler.addServlet(TextService.class, "/text");
-}</pre>
+}
+```
+
 
 #### WebSocket Handler
 
 For the WebSocket part, two parts are needed. First, we need to create the endpoint like this:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@ClientEndpoint
+```
+@ClientEndpoint
 @ServerEndpoint(value = "/ws")
 public class MyEventSocket {
 
@@ -169,19 +185,24 @@ public class MyEventSocket {
     public void awaitClosure() throws InterruptedException {
         System.out.println("Awaiting closure");
     }
-}</pre>
+}
+```
+
 
 Then this endpoint can be used in the WebSocket handler:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">private void addWebSocketHandler(ContextHandlerCollection contextHandlerCollection) {
+```
+private void addWebSocketHandler(ContextHandlerCollection contextHandlerCollection) {
     ServletContextHandler webserviceContextHandler = new ServletContextHandler(ServletContextHandler.SESSIONS);
     webserviceContextHandler.setContextPath("/websocket");
     contextHandlerCollection.addHandler(webserviceContextHandler);
-    JakartaWebSocketServletContainerInitializer.configure(webserviceContextHandler, (servletContext, websocketContainer) -&gt; {
+    JakartaWebSocketServletContainerInitializer.configure(webserviceContextHandler, (servletContext, websocketContainer) -> {
         websocketContainer.setDefaultMaxTextMessageBufferSize(1024);
         websocketContainer.addEndpoint(MyEventSocket.class);
     });
-}</pre>
+}
+```
+
 
 I use the Firefox plugin ["Simple WebSocket Client"](https://addons.mozilla.org/en-US/firefox/addon/simple-websocket-client/) to test WebSocket communication to make sure it works, before diving into the HTML client implementation... As you can see in the screenshot, the server sends a timestamp every second and answers when you send a message starting with "echo".
 
@@ -196,18 +217,24 @@ I use the Firefox plugin ["Simple WebSocket Client"](https://addons.mozilla.org/
 
 The example application contains two test pages. The first one, available on `http://localhost:9999/index.html` contains a few small examples of how you can use htmx to request data from the server and handle it on the client side. These example shows a button that calls the API on `/rest/text` to get a random paragraph (`<p>`) which replace the button because of the `hx-swap="outerHTML"`:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&lt;button hx-get="/rest/text" hx-swap="outerHTML"&gt;
+```
+<button hx-get="/rest/text" hx-swap="outerHTML">
     Request text
-&lt;/button&gt;</pre>
+</button>
+```
+
 
 Another demo requests a list item (`<li>`) with a timestamp from the API on `/rest/list` and adds it to the end of the already existing list because of the `hx-swap="beforeend" hx-target="#list"`:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&lt;button hx-get="/rest/list" hx-swap="beforeend" hx-target="#list"&gt;
+```
+<button hx-get="/rest/list" hx-swap="beforeend" hx-target="#list">
     Add new list item
-&lt;/button&gt;
-&lt;ul id="list"&gt;
-    &lt;li&gt;Initial list item&lt;/li&gt;
-&lt;/ul&gt;</pre>
+</button>
+<ul id="list">
+    <li>Initial list item</li>
+</ul>
+```
+
 
 <figure class="wp-block-gallery has-nested-images columns-default is-cropped wp-block-gallery-1 is-layout-flex wp-block-gallery-is-layout-flex">
  <figure class="wp-block-image size-large">
@@ -222,15 +249,21 @@ Another demo requests a list item (`<li>`) with a timestamp from the API on `/re
 
 htmx makes it also very easy to communicate between client and server with WebSockets. You need an additional JavaScript include and some small configuration in the `body` as you can see in the sources of the page that is available on `http://localhost:9999/websocket.html`:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&lt;body hx-ext="ws" ws-connect="/websocket/ws"&gt;</pre>
+```
+<body hx-ext="ws" ws-connect="/websocket/ws">
+```
+
 
 By adding `ws-send` in any HTML-element, you instruct htmx to replace it's default behavior with a call through the WebSocket. The following example is identical to the button described before, but is now handled in `MyEventSocket.onWebSocketText` instead of the API used before.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&lt;h2&gt;Below button will be replaced with a random text&lt;/h2&gt;
+```
+<h2>Below button will be replaced with a random text</h2>
 
-&lt;button hx-swap="outerHTML" id="replaceThis" ws-send&gt;
+<button hx-swap="outerHTML" id="replaceThis" ws-send>
     Request text
-&lt;/button&gt;</pre>
+</button>
+```
+
 
 In `MyEventSocket` a `scheduleAtFixedRate` is implemented to send a timestamp from the server back to the client every second so it can display it's still connected.
 

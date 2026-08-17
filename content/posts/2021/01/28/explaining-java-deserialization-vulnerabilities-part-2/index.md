@@ -32,7 +32,8 @@ A gadget---as used by Lawrence \& Frohoff in their talk [Marshalling Pickles](ht
 
 Let's look at the simplified gadget below:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public class Gadget implements Serializable {
+```java
+public class Gadget implements Serializable {
 
    private Runnable command;
 
@@ -44,11 +45,14 @@ Let's look at the simplified gadget below:
        in.defaultReadObject();
        command.run();
    }
-}</pre>
+}
+```
+
 
 This gadget class overrides the default `readObject` method. As a result, every time an Object of class Gadget gets deserialized, the `Runnable` object command is executed. When a command class looks something like the example below, it is easy to manipulate this serialized object and perform code injection.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public class Command implements Runnable, Serializable {
+```java
+public class Command implements Runnable, Serializable {
 
    private String command;
 
@@ -63,13 +67,18 @@ This gadget class overrides the default `readObject` method. As a result, every 
        } catch (IOException e) {
            throw new RuntimeException(e);
        }
-   }</pre>
+   }
+```
+
 
 Also, note that if an application accepts serialized objects, the object is deserialized first before it is cast to the desired type. This means that even if casting fails, deserialization is already completed and the `readObject()` method is executed.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">FileInputStream fileIn = new FileInputStream("Gadget.ser");
+```java
+FileInputStream fileIn = new FileInputStream("Gadget.ser");
 ObjectInputStream in = new ObjectInputStream(fileIn);
-var obj = (ValueObject)in.readObject();</pre>
+var obj = (ValueObject)in.readObject();
+```
+
 
 #### Gadget Chain Deserialization Attack
 
@@ -77,7 +86,10 @@ A typical deserialization attack consists of a cleverly crafted chain of gadgets
 
 In our example:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">Gadget -&gt; readObject() -&gt; command.run() -&gt; Runtime.getRuntime().exec()</pre>
+```
+Gadget -> readObject() -> command.run() -> Runtime.getRuntime().exec()
+```
+
 
 For a more real life example, take a look at the implementation of `java.util.HashMap`. This class has a custom implementation of the `readObject()` method that triggers every key's `hashcode()` function.
 
@@ -91,16 +103,22 @@ The best way to prevent a Java deserialize vulnerability is to prevent Java seri
 
 However, if you do need to implement the Serializable interface due to inheritance, you can override the `readObject()`,as seen below, to prevent actual deserialization.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">private final void readObject(ObjectInputStream in) throws java.io.IOException {
+```java
+private final void readObject(ObjectInputStream in) throws java.io.IOException {
    throw new java.io.IOException("Deserialized not allowed");
-}</pre>
+}
+```
+
 
 If your application relies on serialized objects, you can consider inspecting your `ObjectInputStream` before deserializing. A library that can help you with this is the [Apache Commons IO](https://commons.apache.org/proper/commons-io/) library. This library provides a `ValidatedObjectInputStream` where you can explicitly allow the objects you want to deserialize. Now you prevent that unexpected types are deserialized at all.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">FileInputStream fileIn = new FileInputStream("Gadget.ser");
+```java
+FileInputStream fileIn = new FileInputStream("Gadget.ser");
 ValidatingObjectInputStream in = new ValidatingObjectInputStream(fileIn);
 in.accept(ValueObject.class);
-var obj = (ValueObject)in.readObject();</pre>
+var obj = (ValueObject)in.readObject();
+```
+
 
 A tool like [ysoserial](https://github.com/frohoff/ysoserial) is also extremely useful in finding Java deserialize vulnerabilities in your code. It is a tool that generates payload to discover gadget chains in common Java libraries that can, under the right conditions, exploit Java applications performing unsafe deserialization of objects.
 

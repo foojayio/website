@@ -63,42 +63,55 @@ Step 1 {#h2-3-step-1}
 
 Start a Hazelcast local cluster: This will run a Hazelcast cluster in client/server mode and an instance of Management Center running on your local network.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">brew tap hazelcast/hz
+```
+brew tap hazelcast/hz
 
-brew install <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="d9b1b8a3bcb5bab8aaad99ecf7ebf7ea">[email&nbsp;protected]</a>
+brew install <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="d9b1b8a3bcb5bab8aaad99ecf7ebf7ea">[email protected]</a>
 
 hz -V
 
-hz start</pre>
+hz start
+```
+
 
 To add more members to your cluster, open another terminal window and rerun the start command.
 
 **Optional**: The Management Center is a user interface for managing and monitoring your cluster. It is a handy tool that you can use to check clusters/nodes, memory, and jobs.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">brew tap hazelcast/hz
+```
+brew tap hazelcast/hz
 
-brew install <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="a1c9c0dbc4cdc2c0d2d58cccc0cfc0c6c4ccc4cfd58cc2c4cfd5c4d3e1948f938f92">[email&nbsp;protected]</a>
+brew install <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="a1c9c0dbc4cdc2c0d2d58cccc0cfc0c6c4ccc4cfd58cc2c4cfd5c4d3e1948f938f92">[email protected]</a>
 
 hz-mc -V
 
-hz-mc start</pre>
+hz-mc start
+```
+
 
 We will use the SQL shell, the easiest way to run SQL queries on a cluster. You can use SQL to query data in maps and Kafka topics.
 
 The Results can be sent directly to the client or inserted into maps or Kafka topics. You can do so by running the following command:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">bin/hz-cli sql</pre>
+```
+bin/hz-cli sql
+```
+
 
 We need a Kafka Broker, I'm using a Docker image to run it (on the same cluster/device as my Hazelcast member).
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">docker run --name kafka --network hazelcast-network --rm hazelcast/hazelcast-quickstart-kafka</pre>
+```
+docker run --name kafka --network hazelcast-network --rm hazelcast/hazelcast-quickstart-kafka
+```
+
 
 Step 2 {#h2-4-step-2}
 ---------------------
 
 Once we have all components up and running, we need to create a Kafka mapping to allow Hazelcast to access messages in the trades topic.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">CREATE MAPPING trades (
+```
+CREATE MAPPING trades (
 
     id BIGINT,
 
@@ -116,11 +129,14 @@ OPTIONS (
 
     'bootstrap.servers' = '127.0.0.1:9092'
 
-);</pre>
+);
+```
+
 
 Here, you configure the connector to read JSON values with the following fields:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">{
+```
+{
 
   "id"
 
@@ -130,25 +146,31 @@ Here, you configure the connector to read JSON values with the following fields:
 
   "amount"
 
-}</pre>
+}
+```
+
 
 You can write a streaming query to filter messages from Kafka:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">SELECT ticker, ROUND(price * 100) AS price_cents, amount
+```
+SELECT ticker, ROUND(price * 100) AS price_cents, amount
 
   FROM trades
 
-  WHERE price * amount &gt; 100;
+  WHERE price * amount > 100;
+```
 
-</pre>
 
 This will return an empty table, we need to insert some data:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">INSERT INTO trades VALUES
+```
+INSERT INTO trades VALUES
 
   (1, 'ABCD', 5.5, 10),
 
-  (2, 'EFGH', 14, 20);</pre>
+  (2, 'EFGH', 14, 20);
+```
+
 
 Go back to the terminal where you created the streaming query.
 
@@ -161,7 +183,8 @@ While the previous step is possible to execute with Kafka only, this step will e
 
 To get deeper insights from data in Kafka topics, you can join query results with data in other mappings. In order to do this, we need to create a mapping to a new map in which to store the company information that you'll use to enrich results from the trades topic. Then we need to add some entries to the companies map.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">CREATE MAPPING companies (
+```
+CREATE MAPPING companies (
 
 __key BIGINT,
 
@@ -183,25 +206,33 @@ INSERT INTO companies VALUES
 
 (1, 'ABCD', 'The ABCD', 100000),
 
-(2, 'EFGH', 'The EFGH', 5000000);</pre>
+(2, 'EFGH', 'The EFGH', 5000000);
+```
+
 
 Use the JOIN clause to merge results from the companies map and trades topic so you can see which companies are being traded.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">SELECT trades.ticker, companies.company, trades.amount
+```
+SELECT trades.ticker, companies.company, trades.amount
 
 FROM trades
 
 JOIN companies
 
-ON companies.ticker = trades.ticker;</pre>
+ON companies.ticker = trades.ticker;
+```
+
 
 In another SQL shell, publish some messages to the trades topic.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">INSERT INTO trades VALUES
+```
+INSERT INTO trades VALUES
 
   (1, 'ABCD', 5.5, 10),
 
-  (2, 'EFGH', 14, 20);</pre>
+  (2, 'EFGH', 14, 20);
+```
+
 
 Go back to the terminal where you created the streaming query that merges results from the companies map and trades topic.
 
@@ -210,7 +241,8 @@ Step 4 {#h2-6-step-4}
 
 Finally, we will ingest query results into a Hazelcast map. We create a mapping to a new map in which to ingest your streaming query results.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">CREATE MAPPING trade_map (
+```
+CREATE MAPPING trade_map (
 
 __key BIGINT,
 
@@ -226,11 +258,14 @@ OPTIONS (
 
 'keyFormat'='bigint',
 
-'valueFormat'='json-flat');</pre>
+'valueFormat'='json-flat');
+```
+
 
 Submit a streaming job to your cluster that will monitor your trade topic for changes and store them in a map, you can check running jobs by running SHOW JOBS;
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">CREATE JOB ingest_trades AS
+```
+CREATE JOB ingest_trades AS
 
 SINK INTO trade_map
 
@@ -247,12 +282,15 @@ INSERT INTO trades VALUES
 (1, 'ABCD', 5.5, 10),
 
 (2, 'EFGH', 14, 20);
+```
 
-</pre>
 
 Now you can query your trade_map map to see that the Kafka messages have been added to it.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">SELECT * FROM trade_map;</pre>
+```
+SELECT * FROM trade_map;
+```
+
 
 The following diagram explains our demo setup; we have a Kafka topic called trades which contains a collection of trades that will be ingested into a Hazelcast cluster.
 

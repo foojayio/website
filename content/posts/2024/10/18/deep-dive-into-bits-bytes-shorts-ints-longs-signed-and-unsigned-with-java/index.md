@@ -67,8 +67,9 @@ This [video by Mathmo14159](https://www.youtube.com/watch?v=zELAfmp3fXY) very ni
 
 And we can achieve the same result with the following Java code:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">System.out.println("Value\tBits\tHex");
-for (int i = 0; i &lt;= 15; i++) {
+```
+System.out.println("Value\tBits\tHex");
+for (int i = 0; i <= 15; i++) {
     System.out.println(i 
         + "\t" + String.format("%4s", Integer.toBinaryString(i)).replace(' ', '0')
         + "\t0x" + Integer.toHexString(i).toUpperCase());
@@ -91,7 +92,9 @@ Value   Bits    Hex
 12      1100    0xC
 13      1101    0xD
 14      1110    0xE
-15      1111    0xF</pre>
+15      1111    0xF
+```
+
 
 Bits to Byte {#h2-1-bits-to-byte}
 ---------------------------------
@@ -114,8 +117,9 @@ So we need to extend the table above to have 8 bits. Let's take a few examples:
 
 Again, outputting the same with Java code:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">System.out.println("Value\tBits\tHex");
-for (int i = 0; i &lt;= 255; i++) {
+```
+System.out.println("Value\tBits\tHex");
+for (int i = 0; i <= 255; i++) {
     System.out.println(i 
         + "\t" + String.format("%8s", Integer.toBinaryString(i)).replace(' ', '0')
         + "\t0x" + Integer.toHexString(i).toUpperCase());
@@ -134,7 +138,9 @@ Value   Bits    Hex
 ...
 253     11111101        0xFD
 254     11111110        0xFE
-255     11111111        0xFF</pre>
+255     11111111        0xFF
+```
+
 
 Value Ranges in Java {#h2-2-value-ranges-in-java}
 -------------------------------------------------
@@ -156,7 +162,8 @@ All these are numeric objects and each uses a fixed number of bytes in memory:
 
 Let's go back to Java and check how values are represented with the following code:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">System.out.println("Byte");
+```
+System.out.println("Byte");
 System.out.println("    Min: " + Byte.MIN_VALUE);
 System.out.println("    Max: " + Byte.MAX_VALUE);
 
@@ -170,11 +177,14 @@ System.out.println("    Max: " + Integer.MAX_VALUE);
 
 System.out.println("Long");
 System.out.println("    Min: " + Long.MIN_VALUE);
-System.out.println("    Max: " + Long.MAX_VALUE);</pre>
+System.out.println("    Max: " + Long.MAX_VALUE);
+```
+
 
 As a result, we get these values:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">Byte
+```
+Byte
     Min: -128
     Max: 127
 Short
@@ -185,7 +195,9 @@ Integer
     Max: 2147483647
 Long
     Min: -9223372036854775808
-    Max: 9223372036854775807</pre>
+    Max: 9223372036854775807
+```
+
 
 Hmm, this is unexpected! Does a byte have the range of -128 to 127, instead of 0 to 255?! That's why we need to understand the difference between signed and unsigned values.
 
@@ -199,7 +211,8 @@ Java does not have a native unsigned byte type, but you can achieve unsigned beh
 
 When you calculate the byte value to a signed number value, the major bit (the most left one) is handled as an indicator for a negative number (1) or a positive number (0). Let's try a few examples:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">System.out.println("Bits to byte");
+```
+System.out.println("Bits to byte");
 System.out.println("Byte value 00000001: " + ((byte) Integer.parseInt("00000001", 2)));
 System.out.println("Byte value 00001111: " + ((byte) Integer.parseInt("00001111", 2)));
 System.out.println("Byte value 01111111: " + ((byte) Integer.parseInt("01111111", 2)));
@@ -214,7 +227,9 @@ Byte value 00001111: 15
 Byte value 01111111: 127
 Byte value 10000000: -128
 Byte value 10000001: -127
-Byte value 10001111: -113</pre>
+Byte value 10001111: -113
+```
+
 
 ### Using Masks {#h3-6-using-masks}
 
@@ -222,10 +237,11 @@ A mask is a value used in bitwise operations to extract or manipulate specific b
 
 As you can see from the following code example, applying a mask converts a byte to an integer, and shows the unsigned value for `10001111`.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">System.out.println("Byte to Integer with mask");
+```
+System.out.println("Byte to Integer with mask");
 var b = (byte) Integer.parseInt("10001111", 2);
 System.out.println("Byte value: " + b);
-var bWithMask = b &amp; 0xff;
+var bWithMask = b & 0xff;
 System.out.println("Byte value with mask: " + bWithMask);
 System.out.println("Object Type: " + printObjectType(bWithMask));
 
@@ -241,13 +257,16 @@ private static String printObjectType(Object obj) {
 // Output
 Byte value: -113
 Byte value with mask: 143
-Object Type: java.lang.Integer</pre>
+Object Type: java.lang.Integer
+```
+
 
 ### Using Helper Methods {#h3-7-using-helper-methods}
 
 Applying a mask is a short piece of code and you can easily add it to your code to convert a signed byte to its unsigned integer equivalent. However, there are also built-in helper methods available in Java that return the same result but are more readable. This is important for code reviews or when you or someone else need to mainten or extend the code: `Byte.toUnsignedInt(b)` and `Byte.toUnsignedLong(b)`.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">System.out.println("Byte to Integer with toUnsignedInt");
+```
+System.out.println("Byte to Integer with toUnsignedInt");
 var unsignedInt = Byte.toUnsignedInt(b);
 System.out.println("Byte to unsigned integer: " + unsignedInt);
 System.out.println("Object Type: " + printObjectType(unsignedInt));
@@ -265,16 +284,19 @@ Object Type: java.lang.Integer
 
 Byte to Long with toUnsignedLong
 Byte to unsigned long: 143
-Object Type: java.lang.Long</pre>
+Object Type: java.lang.Long
+```
+
 
 ### Same Approach for Short {#h3-8-same-approach-for-short}
 
 A `short` in Java uses 16 bits (or 2 bytes) and can be handled similarly when converting from its binary representation. A short is also a signed data type, with a range of -32,768 to 32,767.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">System.out.println("Example with short");
+```
+System.out.println("Example with short");
 short s1 = (short) Integer.parseInt("1000000000000000", 2);
 System.out.println("Short value 1000000000000000: " + s1);
-System.out.println("Short value 1000000000000000 with mask: " + (s1 &amp; 0xFFFF));
+System.out.println("Short value 1000000000000000 with mask: " + (s1 & 0xFFFF));
 System.out.println("Using Short.toUnsignedLong: " + Short.toUnsignedInt(s1));
 short s2 = (short) Integer.parseInt("1111111111111111", 2);
 System.out.println("Short value 1111111111111111: " + s2);
@@ -286,7 +308,9 @@ Short value 1000000000000000: -32768
 Short value 1000000000000000 with mask: 32768
 Using Short.toUnsignedLong: 32768
 Short value 1111111111111111: -1
-Short value 1111111111111111 to unsigned: 65535</pre>
+Short value 1111111111111111 to unsigned: 65535
+```
+
 
 Example use of Bits {#h2-9-example-use-of-bits}
 -----------------------------------------------

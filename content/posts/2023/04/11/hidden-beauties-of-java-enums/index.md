@@ -35,11 +35,14 @@ Enums are the preferred way to define fixed values you want to use in your code.
 
 For example:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">enum Level {
+```java
+enum Level {
   INFO,
   WARNING,
   ERROR
-}</pre>
+}
+```
+
 
 Projects Using Enums {#h2-1-projects-using-enums}
 -------------------------------------------------
@@ -78,7 +81,8 @@ This is a project inspired by my 12y son, who wants to collect and share drum vi
 
 Enums are used in this project to define the available video and tutorial categories which include a label, icon, text and background color.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public enum VideoCategory {
+```java
+public enum VideoCategory {
     SPECTACULAR("la-dragon", "category.video.spectacular", "#CD0000", "#FFFFFF"),
     TUTORIAL("la-drum", "category.video.tutorial", " #0000EE", "#FFFFFF"),
     I_MADE_THIS("la-portrait", "category.video.selfmade", " #A2CD5A", "#000000"),
@@ -100,7 +104,9 @@ Enums are used in this project to define the available video and tutorial catego
         return icon;
     }
     ...
-}</pre>
+}
+```
+
 
 Examples of Enum Usage {#h2-5-examples-of-enum-usage}
 -----------------------------------------------------
@@ -111,26 +117,35 @@ Let's look at some examples, step-by-step. The full code is available on [GitHub
 
 A basic example of the use of an Enum is the following:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">enum Level {
+```java
+enum Level {
   INFO,
   WARNING,
   ERROR
 }
 
-System.out.println("Error level: " + Level.WARNING);</pre>
+System.out.println("Error level: " + Level.WARNING);
+```
+
 
 Output:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">Error level: WARNING</pre>
+```
+Error level: WARNING
+```
+
 
 Enums were introduced to replace the use of int constants as seen in other languages, which would look like this in Java:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">class MyProgram {
+```java
+class MyProgram {
    public final static int LEVEL_INFO = 1;
    public final static int LEVEL_WARNING = 2;
    public final static int LEVEL_ERROR = 3;
    ...
-}</pre>
+}
+```
+
 
 But an enum can do a lot more! Let's take a look at some examples...
 
@@ -138,7 +153,8 @@ But an enum can do a lot more! Let's take a look at some examples...
 
 By using enums, `switch - case` code can be written in a very clean way.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public int getLevelValue(Level level) {
+```java
+public int getLevelValue(Level level) {
     switch (level) {
         case INFO: 
             return 1;
@@ -148,7 +164,9 @@ By using enums, `switch - case` code can be written in a very clean way.
             return 3;
     }
     return 0;
-}</pre>
+}
+```
+
 
 But as we will see further, this code can still be improved a lot, by extending the Level enum...
 
@@ -156,15 +174,19 @@ But as we will see further, this code can still be improved a lot, by extending 
 
 Enums are also a good use case to replace boolean checks. Let's take an example with customers that can become "inactive" in a system. Typically you would do this with a boolean.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">class Customer {
+```java
+class Customer {
     String name;
     boolean active;
     ...
-}</pre>
+}
+```
+
 
 But a bit later, your use-case changes and customers could also be suspended because they stopped paying the bills. Would you then add and extra `boolean suspended`? This could lead to a lot of changes in your program which could be avoided by using an enum for the customer state, like this:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">enum CustomerState {
+```java
+enum CustomerState {
     ACTIVE,
     INACTIVE,
     SUSPENDED
@@ -174,7 +196,9 @@ class Customer {
     String name;
     CustomerState state;
     ...
-}</pre>
+}
+```
+
 
 ### Extra Data in an Enum Value {#h3-9-extra-data-in-an-enum-value}
 
@@ -182,7 +206,8 @@ For me, the true power of an enum, is the fact that it can actually hold a lot o
 
 In the following example, the Level enum we used before, is extended with a severity value, label description and a color code.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">enum Level {
+```java
+enum Level {
     INFO(1, "Informative message", 0x00aa00),
     WARNING(2, "Warning message", 0xFFA500),
     ERROR(3, "Error message", 0xA30000);
@@ -208,20 +233,26 @@ In the following example, the Level enum we used before, is extended with a seve
     public int getColor() {
         return color;
     }
-}</pre>
+}
+```
+
 
 We can now get the data of all the Level values with the following code:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">for (Level level : Level.values()) {
+```java
+for (Level level : Level.values()) {
     System.out.println("Level " + level.name()
             + "\n\tSeverity: " + level.getSeverity()
             + "\n\tLabel: " + level.getLabel()
             + "\n\tColor: " + level.getColor());
-}</pre>
+}
+```
+
 
 Which will produce this output:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">Level INFO
+```
+Level INFO
     Severity: 1
     Label: Informative message
     Color: 43520
@@ -232,7 +263,9 @@ Level WARNING
 Level ERROR
     Severity: 3
     Label: Error message
-    Color: 10682368</pre>
+    Color: 10682368
+```
+
 
 So this means `level.getSeverity()` fully replaces the `getLevelValue(Level level)` method with `switch-case` we've seen before.
 
@@ -244,7 +277,8 @@ In many cases where you want to generate JSON output or parse JSON to Java objec
 
 Let's take for example this JSON file that contains a few log messages. The level is stored with the `severity` value from the Level enum.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">[
+```
+[
     { 
         "level": 1,
         "timestamp": 1675867184342,
@@ -260,18 +294,23 @@ Let's take for example this JSON file that contains a few log messages. The leve
         "timestamp": 1675867186357,
         "message": "Error at line Y"
     }
-]</pre>
+]
+```
+
 
 #### Record to Load the JSON data
 
 We want to read these messages into Java objects, by using the Jackson library and a record:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">record LogMessage(Level level, Long timestamp, String message) {
+```java
+record LogMessage(Level level, Long timestamp, String message) {
     @JsonIgnore
     public ZonedDateTime getZonedDateTime() {
         return ZonedDateTime.ofInstant(Instant.ofEpochMilli(timestamp()), ZoneId.of("UTC"));
     }
-}</pre>
+}
+```
+
 
 The additional method `getZonedDateTime` will convert the `Long timestamp` value to be used in our code, but because of the `@JsonIgnore` attribute, this value will not be converted back to JSON as you will see later.
 
@@ -279,7 +318,8 @@ The additional method `getZonedDateTime` will convert the `Long timestamp` value
 
 By using the Jackson library, we can easily convert this JSON data to an array of LogMessage, if we add a few Jackson attributes to the enum, and by using the ObjectMapper:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">enum Level {
+```java
+enum Level {
     ...;
     @JsonValue
     private final int severity;
@@ -288,9 +328,9 @@ By using the Jackson library, we can easily convert this JSON data to an array o
     public static Level fromValue(Integer severity) 
         throws IllegalArgumentException {
         return Arrays.stream(Level.values()).sequential()
-                .filter(v -&gt; v.getSeverity() == severity)
+                .filter(v -> v.getSeverity() == severity)
                 .findFirst()
-                .orElseThrow(() -&gt; 
+                .orElseThrow(() -> 
                     new IllegalArgumentException("The given severity does not exist:" + severity));
     }
 }
@@ -306,11 +346,14 @@ for (LogMessage logMessage : logMessages) {
             + logMessage.level().getLabel()
             + "\n\tMessage: " 
             + logMessage.message());
-}</pre>
+}
+```
+
 
 This will generate the following output. As you can see, the numeric level value from the JSON has been converted to a Level-enum-value:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">Log message at 2023-02-08T14:39:44.342Z[UTC]
+```
+Log message at 2023-02-08T14:39:44.342Z[UTC]
         Severity: Informative message
         Message: Program started
 Log message at 2023-02-08T14:39:45.921Z[UTC]
@@ -319,19 +362,24 @@ Log message at 2023-02-08T14:39:45.921Z[UTC]
 Log message at 2023-02-08T14:39:46.357Z[UTC]
         Severity: Error message
         Message: Error at line Y
-</pre>
+```
+
 
 #### Converting Java Object to JSON data
 
 Because in the previous changes, we already added the `@JsonValue` attribute to the `severity` variable of the enum, the ObjectMapper will use the correct value to convert the level back to JSON. Let's use the `PrettyPrinter` to generate formatted JSON from our `logMessages` array:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">System.out.println(objectMapper
+```java
+System.out.println(objectMapper
     .writerWithDefaultPrettyPrinter()
-    .writeValueAsString(logMessages));</pre>
+    .writeValueAsString(logMessages));
+```
+
 
 This will create the following output, which contains the same content as our source JSON data.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">[ {
+```
+[ {
   "level" : 1,
   "timestamp" : 1675867184342,
   "message" : "Program started"
@@ -343,7 +391,9 @@ This will create the following output, which contains the same content as our so
   "level" : 3,
   "timestamp" : 1675867186357,
   "message" : "Error at line Y"
-} ]</pre>
+} ]
+```
+
 
 #### Converting ZonedDateTime to JSON
 
@@ -351,7 +401,8 @@ As mentioned before, because of the `@JsonIgnore` attribute on the `getZonedDate
 
 So a few extra changes are needed to be able to export this value, by removing `@JsonIgnore`, adding `@JsonFormat` and registering the `JavaTimeModule` in the `objectMapper`:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">record LogMessage(Level level, Long timestamp, String message) {
+```java
+record LogMessage(Level level, Long timestamp, String message) {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy hh:mm:ss")
     public ZonedDateTime getZonedDateTime() {
         return ZonedDateTime.ofInstant(Instant.ofEpochMilli(timestamp()), ZoneId.of("UTC"));
@@ -361,11 +412,14 @@ So a few extra changes are needed to be able to export this value, by removing `
 objectMapper.registerModule(new JavaTimeModule());
 System.out.println(objectMapper
     .writerWithDefaultPrettyPrinter()
-    .writeValueAsString(logMessages));</pre>
+    .writeValueAsString(logMessages));
+```
+
 
 This generates JSON with the ZonedDateTime in the defined format:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">[ {
+```
+[ {
   "level" : 1,
   "timestamp" : 1675867184342,
   "message" : "Program started",
@@ -380,7 +434,9 @@ This generates JSON with the ZonedDateTime in the defined format:
   "timestamp" : 1675867186357,
   "message" : "Error at line Y",
   "zonedDateTime" : "08-02-2023 02:39:46"
-} ]</pre>
+} ]
+```
+
 
 Conclusion {#h2-11-conclusion}
 ------------------------------

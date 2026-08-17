@@ -21,7 +21,7 @@ frozen: false
 **\[About SKP's Core Java/Java EE Roots\]**  
 Series of Articles on Rooted Concepts in Core Java and J2EE. They Revolve Around Memory Architecture, Connection \& Memory Leaks, Core Java Syntax \& Semantics, Java Object Layout/Anatomy, Multi-Threading, Asynchronous Task Execution, Design Patterns, Java Agents, Class Loading, API Design, OOPs \& SOLID.  
 
-*** ** * ** ***
+
 
 → Java Memory Architecture (Java Memory Model) {#h2-0-java-memory-architecture-java-memory-model}
 -------------------------------------------------------------------------------------------------

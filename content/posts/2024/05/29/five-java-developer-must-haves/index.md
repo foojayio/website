@@ -23,7 +23,7 @@ frozen: false
 
 **Faster Java startup must not compromise developer experience, throughput performance, or security. We discuss how we achieved this with Liberty InstantOn.**
 
-*** ** * ** ***
+
 
 *By Vijay Sundaresan, Thomas Watson, Laura Cowen*
 

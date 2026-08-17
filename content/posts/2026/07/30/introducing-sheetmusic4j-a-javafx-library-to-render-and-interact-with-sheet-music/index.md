@@ -64,21 +64,27 @@ Using the Library {#h2-3-using-the-library}
 
 Add the FX Viewer dependency to a JavaFX project:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&lt;dependency&gt;
-    &lt;groupId&gt;com.sheetmusic4j&lt;/groupId&gt;
-    &lt;artifactId&gt;fxviewer&lt;/artifactId&gt;
-    &lt;version&gt;0.0.1&lt;/version&gt;
-&lt;/dependency&gt;</pre>
+```
+<dependency>
+    <groupId>com.sheetmusic4j</groupId>
+    <artifactId>fxviewer</artifactId>
+    <version>0.0.1</version>
+</dependency>
+```
+
 
 Load a MusicXML file into a sheet view with a few lines of code:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">Score score = ScoreFile.load("path/to/song.musicxml");
+```
+Score score = ScoreFile.load("path/to/song.musicxml");
 
 SheetView sheetView = new SheetView();
 sheetView.setScore(score);
 
 stage.setScene(new Scene(new ScrollPane(sheetView), 900, 600));
-stage.show();</pre>
+stage.show();
+```
+
 
 The FX Viewer module also ships a `StripView` for a horizontal, scrolling layout of the same score.
 

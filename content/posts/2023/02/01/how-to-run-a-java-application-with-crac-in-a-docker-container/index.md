@@ -76,7 +76,8 @@ The plan is to make you use your own application and use it for this test but if
 1. You need an application in a runnable JAR file.
 2. Now we need to create a Dockerfile. The following file is the minimum file you need to run your application in a docker container.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">FROM ubuntu:20.04
+```
+FROM ubuntu:20.04
 
 ENV JAVA_HOME /opt/jdk
 ENV PATH $JAVA_HOME/bin:$PATH
@@ -88,7 +89,9 @@ RUN tar --extract --file $JAVA_HOME/openjdk.tar.gz --directory "$JAVA_HOME" --st
 
 RUN mkdir -p /opt/crac-files
 
-COPY build/libs/MY-APP.jar /opt/app/MY-APP.jar</pre>
+COPY build/libs/MY-APP.jar /opt/app/MY-APP.jar
+```
+
 
 3. Now we can run `docker build -t myapp_on_crac .` to build the docker image.
 
@@ -96,13 +99,18 @@ COPY build/libs/MY-APP.jar /opt/app/MY-APP.jar</pre>
 
 1. Run your docker container with: 
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">docker run -it --privileged --rm --name my_app_on_crac my_app_on_crac</pre>
+```
+docker run -it --privileged --rm --name my_app_on_crac my_app_on_crac
+```
+
 
 2. In the docker container run: 
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">cd /opt/app
+```
+cd /opt/app
 java -XX:CRaCCheckpointTo=/opt/crac-files -jar MY-APP.jar
-</pre>
+```
+
 
 <!-- -->
 
@@ -114,7 +122,10 @@ java -XX:CRaCCheckpointTo=/opt/crac-files -jar MY-APP.jar
 1. Open another shell window.
 2. In this window run: 
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">docker exec -it -u root my_app_on_crac /bin/bash</pre>
+```
+docker exec -it -u root my_app_on_crac /bin/bash
+```
+
 
 3. Now it's up to you when you would like to create the checkpoint (e.g. apply some workload to your app to make sure everything is compiled and optimized).
 4. Take the PID that you noted from the other shell window and create the checkpoint by executing `jcmd PID JDK.checkpoint`
@@ -128,7 +139,10 @@ java -XX:CRaCCheckpointTo=/opt/crac-files -jar MY-APP.jar
 2. Open a new shell window and execute `docker ps -a` and note the CONTAINER_ID of the container that ran your app.
 3. By running 
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">docker commit CONTAINER_ID my_app_on_crac:checkpoint</pre>
+```
+docker commit CONTAINER_ID my_app_on_crac:checkpoint
+```
+
 
    in the second shell window, we can commit the current state of the container to the state checkpoint.
 4. Now we can stop the docker container by executing `exit`in the first shell window.
@@ -137,7 +151,10 @@ java -XX:CRaCCheckpointTo=/opt/crac-files -jar MY-APP.jar
 
 1. Run: 
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">docker run -it --privileged --rm --name my_app_on_crac my_app_on_crac:checkpoint java -XX:CRaCRestoreFrom=/opt/crac-files</pre>
+```
+docker run -it --privileged --rm --name my_app_on_crac my_app_on_crac:checkpoint java -XX:CRaCRestoreFrom=/opt/crac-files
+```
+
 
 2. Your application should now start much faster from the saved checkpoint.
 

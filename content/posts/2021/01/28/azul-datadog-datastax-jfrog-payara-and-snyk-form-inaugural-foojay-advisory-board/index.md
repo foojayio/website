@@ -33,9 +33,9 @@ A key strength of Java is its longevity and the strength of its community. DevOp
 
 With this announcement, Foojay also announces its first event, which will be at FOSDEM, the world's largest open source developer conference where every year thousands of developers from all over the world gather---online this year, February 6 and 7, 2021. To learn more and how developers can participate and attend, [go here](https://fosdem.org/2021/schedule/track/friends_of_openjdk/).
 
-*** ** * ** ***
 
-*** ** * ** ***
+
+
 
 ***F*** ***oojay**
 [Foojay](https://foojay.io/), a place for Friends of OpenJDK, is a fast-growing community focused around the OpenJDK, providing tips and insights for Java developers, and user-focused Java and OpenJDK technical dashboards with free information on all things Java. A dedicated blogging area is available on Foojay to anyone who has thoughts or code to share on topics relevant to the Java ecosystem. To contribute, send a mail to [\[email protected\]](/cdn-cgi/l/email-protection#2149444d4d4e61474e4e4b40580f484e).* *Follow us on Twitter [@foojayio](https://twitter.com/foojayio).*

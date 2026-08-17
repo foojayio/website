@@ -45,14 +45,17 @@ Development {#h2-1-development}
 
 The archetype used can be found on Github [here](https://github.com/aws/aws-sdk-java-v2/tree/master/archetypes/archetype-lambda).
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">mvn archetype:generate \                                                                                                                                                                                                                                               &lt;aws:charl&gt;
+```
+mvn archetype:generate \                                                                                                                                                                                                                                               <aws:charl>
 -DarchetypeGroupId=software.amazon.awssdk \
 -DarchetypeArtifactId=archetype-lambda \
 -DarchetypeVersion=2.29.8 \
 -DgroupId=cap.cca.mig \
 -DartifactId=hello-lambda \
 -Dservice=s3  \
--DinteractiveMode=false</pre>
+-DinteractiveMode=false
+```
+
 
 We will not be using AWS S3 buckets or files, but the service parameter is mandatory. The examples show s3.
 
@@ -81,7 +84,10 @@ Most of the Dockerfile can be left as is, but some adjustment is need on CMD in 
 
 #### Maven
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">mvn compile dependency:copy-dependencies -DincludeScope=runtime</pre>
+```
+mvn compile dependency:copy-dependencies -DincludeScope=runtime
+```
+
 
 The copy-dependency command helps to make the needed aws dependencies available for the Dockerfile to copy
 
@@ -89,7 +95,10 @@ The copy-dependency command helps to make the needed aws dependencies available 
 
 Building it locally is simplest for demo purposes. Ideally this should be done by some CICD tool in Business context.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">docker build . --platform linux/amd64 -t hello-lambda-java:latest</pre>
+```
+docker build . --platform linux/amd64 -t hello-lambda-java:latest
+```
+
 
 The build command specifies the *--platform linux/amd64* option to ensure that your container is compatible with the Lambda execution environment regardless of the architecture of your build machine.
 
@@ -116,11 +125,15 @@ An Elastic Container Registry (ECR) is needed for a place to push the local dock
 
 *Tip:* Chosen profile can set as Environment variable to be default when running cli command.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">export AWS_PROFILE=chosen-profile</pre>
+```
+export AWS_PROFILE=chosen-profile
+```
+
 
 1) Let's start with a simple check, by listing all available ECR repositories.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">$ aws ecr describe-repositories
+```
+$ aws ecr describe-repositories
 {
     "repository": {
         "repositoryArn": "arn:aws:ecr:eu-west-1:000000000000:repository/test",
@@ -136,13 +149,16 @@ An Elastic Container Registry (ECR) is needed for a place to push the local dock
             "encryptionType": "AES256"
         }
     }
-}</pre>
+}
+```
+
 
 Note: This response would be empty if you have never created a repository in this account and region combination.
 
 2) Now, we want to create a ecr repo for the Lambda.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">$ aws ecr create-repository --repository hello-lambda-java
+```
+$ aws ecr create-repository --repository hello-lambda-java
 {
     "repositoryArn": "arn:aws:ecr:eu-west-1:000000000000:repository/hello-lambda-java",
     "registryId": "000000000000",
@@ -156,20 +172,26 @@ Note: This response would be empty if you have never created a repository in thi
     "encryptionConfiguration": {
         "encryptionType": "AES256"
     }
-}</pre>
+}
+```
+
 
 3) Verify the repo, it should be empty.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">$ aws ecr list-images --repository-name hello-lambda-java
+```
+$ aws ecr list-images --repository-name hello-lambda-java
 {
     "imageIds": []
-}</pre>
+}
+```
+
 
 #### AM
 
 1) Create trust policy.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">cat &gt; trust-policy.json &lt;&lt;EOF
+```
+cat > trust-policy.json <<EOF
 {
   "Version": "2012-10-17",
   "Statement": [
@@ -182,11 +204,14 @@ Note: This response would be empty if you have never created a repository in thi
     }
   ]
 }
-EOF</pre>
+EOF
+```
+
 
 2) Create the role for Lambda to use.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">$ aws iam create-role   --role-name hello-lambda-java    --assume-role-policy-document file://trust-policy.json
+```
+$ aws iam create-role   --role-name hello-lambda-java    --assume-role-policy-document file://trust-policy.json
 {
     "Role": {
         "Path": "/",
@@ -207,11 +232,14 @@ EOF</pre>
             ]
         }
     }
-}</pre>
+}
+```
+
 
 3) Attaching permissions to new Role.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">$ aws iam attach-role-policy \
+```
+$ aws iam attach-role-policy \
     --role-name hello-lambda-java \
     --policy-arn arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly
 
@@ -236,7 +264,9 @@ $ aws ecr set-repository-policy \
                 ]
             }
         ]
-    }'</pre>
+    }'
+```
+
 
 ### Upload Docker {#h3-8-upload-docker}
 
@@ -249,18 +279,27 @@ This is a two-step process
 
 Tip: It's quite useful to create a small bash script for this, then it saves some time/effort in the future.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">export password=$(aws ecr get-login-password )
-docker login --username AWS --password $password 000000000000.dkr.ecr.eu-west-1.amazonaws.com</pre>
+```
+export password=$(aws ecr get-login-password )
+docker login --username AWS --password $password 000000000000.dkr.ecr.eu-west-1.amazonaws.com
+```
+
 
 2) Prepare Docker image
 
 To upload the docker image into ECR, it needs to be retagged to the "repositoryUri" from the ecr repo.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">docker tag hello-lambda-java:latest 000000000000.dkr.ecr.eu-west-1.amazonaws.com/hello-lambda-java</pre>
+```
+docker tag hello-lambda-java:latest 000000000000.dkr.ecr.eu-west-1.amazonaws.com/hello-lambda-java
+```
+
 
 You can verify the full name of the docker by listing docker images and filtering the result.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">docker images | grep ecr</pre>
+```
+docker images | grep ecr
+```
+
 
 3) Upload
 
@@ -270,28 +309,35 @@ Finally, you may push the image to the ecr.
 `
 ...`
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">docker push 000000000000.dkr.ecr.eu-west-1.amazonaws.com/hello-lambda-java 
-...</pre>
+```
+docker push 000000000000.dkr.ecr.eu-west-1.amazonaws.com/hello-lambda-java 
+...
+```
+
 
 If everything was done successfully, the docker image should now be available on ECR
 
 4) Check ECR Image.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">aws ecr list-images --repository-name hello-lambda-java
+```
+aws ecr list-images --repository-name hello-lambda-java
 {
     "imageIds": [
         {
-            "imageDigest": "sha256:&lt;some hash value&gt;",
+            "imageDigest": "sha256:<some hash value>",
             "imageTag": "latest"
         }
     ]
-}</pre>
+}
+```
+
 
 ### Lambda Deployment {#h3-9-lambda-deployment}
 
 1) The time has come to finally create the lambda function.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">aws lambda create-function \                                                                                                                                        
+```
+aws lambda create-function \                                                                                                                                        
     --function-name hello-lambda-java \
     --package-type Image \
     --code ImageUri=000000000000.dkr.ecr.eu-west-1.amazonaws.com/hello-lambda-java:latest \
@@ -330,11 +376,14 @@ If everything was done successfully, the docker image should now be available on
         "LogFormat": "Text",
         "LogGroup": "/aws/lambda/hello-lambda-java"
     }
-}</pre>
+}
+```
+
 
 2) Verify Function.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">aws lambda list-functions                                                                                                                                &lt;aws:charl&gt; 
+```
+aws lambda list-functions                                                                                                                                <aws:charl> 
 {
     "Functions": [
         {
@@ -369,12 +418,16 @@ If everything was done successfully, the docker image should now be available on
             }
         }
     ]
-}</pre>
+}
+```
+
 
 3) Update the Image with new version.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">aws lambda update-function-code --function-name hello-lambda-java --image-uri 000000000000.dkr.ecr.eu-west-1.amazonaws.com/hello-lambda-java:2
-</pre>
+```
+aws lambda update-function-code --function-name hello-lambda-java --image-uri 000000000000.dkr.ecr.eu-west-1.amazonaws.com/hello-lambda-java:2
+```
+
 
 ### SAM Deployment (Alternative) {#h3-10-sam-deployment-alternative}
 
@@ -386,7 +439,10 @@ You might also need to add specific policies to the lambda function so that it c
 
 To deploy the application, you can run the following command:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">sam deploy --guided</pre>
+```
+sam deploy --guided
+```
+
 
 See [Deploying Serverless Applications](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-deploying.html) for more info.
 
@@ -406,8 +462,10 @@ If you use the lambda docker image provided by AWS, it will have the Lambda Inte
 
 2) You should see both images with the simple name and the one retagged with ecr URI.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">docker images | grep hello-lambda-java
-</pre>
+```
+docker images | grep hello-lambda-java
+```
+
 
 2) Running the docker image with port exposed.  
 
@@ -419,8 +477,11 @@ If you use the lambda docker image provided by AWS, it will have the Lambda Inte
 
 4) if you want to start it in background, add **-d** flag, but then you need to follow the log in another window
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">docker run -ti -p 9000:8080 hello-lambda-java
-24 Nov 2024 09:10:33,413 [INFO] (rapid) exec '/var/runtime/bootstrap' (cwd=/var/task, handler=)</pre>
+```
+docker run -ti -p 9000:8080 hello-lambda-java
+24 Nov 2024 09:10:33,413 [INFO] (rapid) exec '/var/runtime/bootstrap' (cwd=/var/task, handler=)
+```
+
 
 3) A payload can be sent to the Function  
 
@@ -430,27 +491,30 @@ If you use the lambda docker image provided by AWS, it will have the Lambda Inte
 
 3) The lambda code in this example expects a field "payload".
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic"> curl -v "http://localhost:9234/2015-03-31/functions/function/invocations" -d '{"payload":"world!"}'
+```
+ curl -v "http://localhost:9234/2015-03-31/functions/function/invocations" -d '{"payload":"world!"}'
 * Host localhost:9234 was resolved.
 * IPv6: ::1
 * IPv4: 127.0.0.1
 *   Trying [::1]:9234...
 * Connected to localhost (::1) port 9234
-&gt; POST /2015-03-31/functions/function/invocations HTTP/1.1
-&gt; Host: localhost:9234
-&gt; User-Agent: curl/8.7.1
-&gt; Accept: */*
-&gt; Content-Length: 20
-&gt; Content-Type: application/x-www-form-urlencoded
-&gt; 
+> POST /2015-03-31/functions/function/invocations HTTP/1.1
+> Host: localhost:9234
+> User-Agent: curl/8.7.1
+> Accept: */*
+> Content-Length: 20
+> Content-Type: application/x-www-form-urlencoded
+> 
 * upload completely sent off: 20 bytes
-&lt; HTTP/1.1 200 OK
-&lt; Date: Sun, 24 Nov 2024 09:12:08 GMT
-&lt; Content-Length: 14
-&lt; Content-Type: text/plain; charset=utf-8
-&lt; 
+< HTTP/1.1 200 OK
+< Date: Sun, 24 Nov 2024 09:12:08 GMT
+< Content-Length: 14
+< Content-Type: text/plain; charset=utf-8
+< 
 * Connection #0 to host localhost left intact
-"hello world!"%</pre>
+"hello world!"%
+```
+
 
 You may use any HTTP Client to make the call, I included a http request for IntelliJ in the src/test directory.  
 
@@ -462,7 +526,8 @@ Here is a curl for reference.
 * Here is the aws [reference documentation](https://docs.aws.amazon.com/cli/latest/reference/lambda/invoke.html) for invoking lambda through cli
 * To invoke the function from the command line Synchronously (default), the json payload can either be given in-line or supplied by a file.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">aws lambda invoke \
+```
+aws lambda invoke \
     --function-name hello-lambda-java \
     --invocation-type RequestResponse \
     --cli-binary-format raw-in-base64-out \
@@ -474,7 +539,9 @@ aws lambda invoke \
     --invocation-type RequestResponse \
     --cli-binary-format raw-in-base64-out \
     --payload file://payload.json
-    file-response.json</pre>
+    file-response.json
+```
+
 
 References {#h2-14-references}
 ------------------------------

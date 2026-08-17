@@ -28,17 +28,23 @@ Generating Struct Definitions {#h2-0-generating-struct-definitions}
 
 We saw in the last article how powerful Java annotation processing is for generating Java code; this week, we'll tackle the generation of C code: In the previous article, we still had to write the C struct and map definitions ourselves, but writing
 
-<pre class="EnlighterJSRAW" data-enlighter-language="c" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">struct event {
+```c
+struct event {
   u32 e_pid;
   char e_filename[FILE_NAME_LEN];
   char e_comm[TASK_COMM_LEN];
-};</pre>
+};
+```
+
 
 when we already specified the data type properly in Java
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">record Event(@Unsigned int pid,
+```java
+record Event(@Unsigned int pid,
              @Size(FILE_NAME_LEN) String filename,
-             @Size(TASK_COMM_LEN) String comm) {}</pre>
+             @Size(TASK_COMM_LEN) String comm) {}
+```
+
 
 seems to be a great place to improve our annotation processor. There are only two problems:
 
@@ -54,9 +60,10 @@ Regarding the second problem: We can reduce the problem of generating C code int
 
 To create an AST I resorted to an [ANSI C grammar](http://www.lysator.liu.se/c/ANSI-C-grammar-y.html#declarator) for inspiration. Each AST node implements the following interface:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public interface CAST {
+```java
+public interface CAST {
 
-    List&lt;? extends CAST&gt; children();
+    List<? extends CAST> children();
 
     Statement toStatement();
 
@@ -66,7 +73,9 @@ To create an AST I resorted to an [ANSI C grammar](http://www.lysator.liu.se/c/A
     }
 
     String toPrettyString(String indent, String increment);
-}</pre>
+}
+```
+
 
 We can then create a hierarchy of extending interfaces (PrimaryExpression, ...) and implementing records (ConstantExpression, ...). You can find the whole C AST on [GitHub](https://github.com/parttimenerd/hello-ebpf/blob/main/bpf-processor/src/main/java/me/bechberger/cast/CAST.java).
 
@@ -79,24 +88,31 @@ Generating Map Definitions {#h2-1-generating-map-definitions}
 
 There is another definition that we can auto-generate: Map definitions like
 
-<pre class="EnlighterJSRAW" data-enlighter-language="c" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group=""> struct                                
+```c
+ struct                                
  {                                     
    __uint (type, BPF_MAP_TYPE_RINGBUF);
    __uint (max_entries, 256 * 4096);   
- } rb SEC (".maps");</pre>
+ } rb SEC (".maps");
+```
+
 
 which define maps like hash maps and ring buffers that allow the communication between user- and kernel-space.
 
 With a little of annotation processor, we can define the same ring buffer from above in Java:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@BPFMapDefinition(maxEntries = 256 * 4096)
-BPFRingBuffer&lt;Event&gt; rb;</pre>
+```java
+@BPFMapDefinition(maxEntries = 256 * 4096)
+BPFRingBuffer<Event> rb;
+```
+
 
 Our annotation-processor then turns this into the C definition from above and inserts code into the constructor of the Java program that properly initializes `rb`.
 
 But how does the processor know what code it should generate? By parsing the BPFMapClass annotation on BPFRingBuffer (and any other class). This annotation contains the templates for both the C and the Java code:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@BPFMapClass(
+```java
+@BPFMapClass(
         cTemplate = """
         struct {
             __uint (type, BPF_MAP_TYPE_RINGBUF);
@@ -104,10 +120,12 @@ But how does the processor know what code it should generate? By parsing the BPF
         } $field SEC(".maps");
         """,
         javaTemplate = """
-        new $class&lt;&gt;($fd, $b1)
+        new $class<>($fd, $b1)
         """)
-public class BPFRingBuffer&lt;E&gt; extends BPFMap {
-}</pre>
+public class BPFRingBuffer<E> extends BPFMap {
+}
+```
+
 
 Here `$field` is the Java field name, `$maxEntries` the value in the BPFMapDefinition annotation and `$class` the name of the Java class. `$cX`, `$bX`, `$jX` give the C type name, BPFType and Java class names related to the `X`^th^ type parameter.
 
@@ -116,7 +134,8 @@ Ring Buffer Sample Program {#h2-2-ring-buffer-sample-program}
 
 When we combine all this together we can have a much simpler ring buffer sample program (see [TypeProcessingSample2](https://github.com/parttimenerd/hello-ebpf/blob/main/bpf/src/main/java/me/bechberger/ebpf/samples/TypeProcessingSample2.java) on GitHub):
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@BPF(license = "GPL")
+```java
+@BPF(license = "GPL")
 public abstract class TypeProcessingSample2 extends BPFProgram {
 
     private static final int FILE_NAME_LEN = 256;
@@ -129,13 +148,13 @@ public abstract class TypeProcessingSample2 extends BPFProgram {
       @Size(TASK_COMM_LEN) String comm) {}
 
     @BPFMapDefinition(maxEntries = 256 * 4096)
-    BPFRingBuffer&lt;Event&gt; rb;
+    BPFRingBuffer<Event> rb;
 
     static final String EBPF_PROGRAM = """
             #include "vmlinux.h"
-            #include &lt;bpf/bpf_helpers.h&gt;
-            #include &lt;bpf/bpf_tracing.h&gt;
-            #include &lt;string.h&gt;
+            #include <bpf/bpf_helpers.h>
+            #include <bpf/bpf_tracing.h>
+            #include <string.h>
 
             // This is where the struct and map
             // definitions are inserted automatically          
@@ -154,7 +173,7 @@ public abstract class TypeProcessingSample2 extends BPFProgram {
               program.getProgramByName("kprobe__do_sys_openat2"));
             // we can use the rb ring buffer directly
             // but have to set the call back
-            program.rb.setCallback((buffer, event) -&gt; {
+            program.rb.setCallback((buffer, event) -> {
                 System.out.printf(
                   "do_sys_openat2 called by:%s " + 
                   "file:%s pid:%d\n", 
@@ -167,7 +186,9 @@ public abstract class TypeProcessingSample2 extends BPFProgram {
             }
         }
     }
-}</pre>
+}
+```
+
 
 There are two other things missing in the C code that are also auto-generated: Constant defining macros and the license definition. Macros are generated for all static final fields in the program class that are defined at compile time.
 

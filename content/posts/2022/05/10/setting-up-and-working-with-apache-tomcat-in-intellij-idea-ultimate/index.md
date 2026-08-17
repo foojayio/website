@@ -100,12 +100,15 @@ Let's say we want to change our application and add a new POST method that takes
 
 1. Add the following method to your `HelloResource.java` file:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">@POST
+```java
+@POST
 @Path("/{name}")
 @Produces("text/plain")
 public String customWelcome(@PathParam("name") String name) {
        return "Welcome " + name + "!";
-}</pre>
+}
+```
+
 
 2. Stop your Tomcat server from running with **⌘F2** (macOS), or **Ctrl+F2** (Windows/Linux) because we're going to make some changes to our Run Configuration before we restart the server.
 3. In your Run Window, right-click on `Tomcat 10.x.x` (or your version) then select **Edit Configurations** . You can also do this with **⇧F4** (macOS), or **Shift+F4** (Windows/Linux).
@@ -120,7 +123,8 @@ POST http://localhost:8080/HelloWebApp_war_exploded/api/hello-world/Helen
 
 8. Run your request with the green arrow in the gutter adjacent to your POST request. Your POST request should run successfully with a response that includes your custom greeting:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">HTTP/1.1 200
+```
+HTTP/1.1 200
 Content-Type: text/plain
 Content-Length: 14
 Date: Fri, 29 Apr 2022 12:11:51 GMT
@@ -129,7 +133,9 @@ Connection: keep-alive
 
 Welcome Helen!
 
-Response code: 200; Time: 139ms; Content length: 14 bytes</pre>
+Response code: 200; Time: 139ms; Content length: 14 bytes
+```
+
 
 Summary {#h2-3-summary}
 -----------------------

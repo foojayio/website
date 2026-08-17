@@ -58,7 +58,7 @@ I built one of these<https://en.wikipedia.org/wiki/ZX80>, etc. So, I left colleg
 
 *Steve Poole's journey emphasizes adaptability, passion, and the value of hands-on experience in shaping a fulfilling career, even when faced with obstacles and changing paths.*   
 
-*** ** * ** ***
+
 
 ### Bazlur: What was your first experience like working as an operator on a mini-computer for a local company, and how did it shape your career path moving forward? {#h3-2-bazlur-what-was-your-first-experience-like-working-as-an-operator-on-a-mini-computer-for-a-local-company-and-how-did-it-shape-your-career-path-moving-forward}
 
@@ -72,7 +72,7 @@ That's what gets me up at night, and it still does. So my career has been this m
 
 *Steve's journey shows how important it is to be committed and find meaning in one's work, as he feels fulfilled by using technology to make a positive difference in the lives of others.*
 
-*** ** * ** ***
+
 
 ### Bazlur: You mentioned that you've worked in hardware, software, business development, developer relations, and education throughout your career. How has software development specifically changed since you first started working in the industry, and how have you adapted to these changes? As someone who has seen the evolution of software development firsthand, what do you think are some of the most significant changes or advancements in software development that you've seen over the course of your career that has impacted you personally and the community as a whole? {#h3-3-bazlur-you-mentioned-that-you-ve-worked-in-hardware-software-business-development-developer-relations-and-education-throughout-your-career-how-has-software-development-specifically-changed-since-you-first-started-working-in-the-industry-and-how-have-you-adapted-to-these-changes-as-someone-who-has-seen-the-evolution-of-software-development-firsthand-what-do-you-think-are-some-of-the-most-significant-changes-or-advancements-in-software-development-that-you-ve-seen-over-the-course-of-your-career-that-has-impacted-you-personally-and-the-community-as-a-whole}
 
@@ -97,7 +97,7 @@ And smaller in scope, machines were much less powerful (and pre-Java), so creati
 **Editor's note:**   
 *Steve's experience showcases the programming landscape's evolution, emphasizing the importance of embracing change and innovation. The shift from rigid processes to agile methodologies and programming democratization highlights the need for continuous learning and adaptability in a rapidly evolving field.*
 
-*** ** * ** ***
+
 
 ### Bazlur: Wow, how much the industry has changed over the years is incredible. With all these changes happening rapidly, what skills do you think are essential for developers to stay relevant in the industry, especially with emerging technologies like AI and machine learning? And how do you suggest developers keep up with the constant changes and advancements? Additionally, In your opinion, what are some of the biggest challenges that developers face today? {#h3-4-bazlur-wow-how-much-the-industry-has-changed-over-the-years-is-incredible-with-all-these-changes-happening-rapidly-what-skills-do-you-think-are-essential-for-developers-to-stay-relevant-in-the-industry-especially-with-emerging-technologies-like-ai-and-machine-learning-and-how-do-you-suggest-developers-keep-up-with-the-constant-changes-and-advancements-additionally-in-your-opinion-what-are-some-of-the-biggest-challenges-that-developers-face-today}
 
@@ -113,7 +113,7 @@ On a non-technical note, the rising challenge of cybercrime is also going to hav
 
 ***Editor's note:**Steve's insights highlight the need for developers to cultivate critical thinking and hands-on experience, adapting to industry changes by focusing on software engineering principles and ensuring code safety in an ever-evolving landscape.*
 
-*** ** * ** ***
+
 
 ### Bazlur: As AI continues to advance, many new developers are worried that their job prospects may be limited, and they may even lose their jobs. What advice would you give these developers, and do you share their concerns, given your experience with many technological shifts? {#h3-5-bazlur-as-ai-continues-to-advance-many-new-developers-are-worried-that-their-job-prospects-may-be-limited-and-they-may-even-lose-their-jobs-what-advice-would-you-give-these-developers-and-do-you-share-their-concerns-given-your-experience-with-many-technological-shifts}
 
@@ -134,7 +134,7 @@ I've seen some great examples where tools like Chat-GPT help developers debug or
 **Editor's notes:**   
 *Steve points out that AI tools still need human review and input, IP ownership issues have not been solved, and developers have always been able to adapt to new technologies. Developers should view AI tools as a means to enhance their work while continuing to evolve in their roles.*
 
-*** ** * ** ***
+
 
 ### Bazlur: Your insights on AI-generated code were fascinating! While it can be helpful for programmers, in the end, programming is ultimately a creative process that requires human expertise. Based on your experience, what advice would you give to new programmers who are uncertain about the prospects of their careers and are unsure of the steps they should take to ensure their careers are on the right track? With so much noise on the internet, it can be difficult for newcomers to navigate the field and determine which technologies to focus on. {#h3-6-bazlur-your-insights-on-ai-generated-code-were-fascinating-while-it-can-be-helpful-for-programmers-in-the-end-programming-is-ultimately-a-creative-process-that-requires-human-expertise-based-on-your-experience-what-advice-would-you-give-to-new-programmers-who-are-uncertain-about-the-prospects-of-their-careers-and-are-unsure-of-the-steps-they-should-take-to-ensure-their-careers-are-on-the-right-track-with-so-much-noise-on-the-internet-it-can-be-difficult-for-newcomers-to-navigate-the-field-and-determine-which-technologies-to-focus-on}
 
@@ -152,7 +152,7 @@ But you can often pick up better pay because of the experience and related busin
 
 **Editor's note:** *Steve's advice on moving up in the tech industry is to stay current on market trends, understand the forces that drive the industry, and ensure that your career path makes you happy. He talks about how important it is to keep learning, know the business world, and find a balance between making money and enjoying your job. Developers are creative individuals who thrive when they can exercise their creativity.*   
 
-*** ** * ** ***
+
 
 ### Bazlur: That's great advice! It seems like you have found a career that you truly love. I'm curious, have you ever faced a crossroads in your career where you had to choose between taking on new challenges and sticking with what you know? If so, how did you approach that decision-making process? {#h3-7-bazlur-that-s-great-advice-it-seems-like-you-have-found-a-career-that-you-truly-love-i-m-curious-have-you-ever-faced-a-crossroads-in-your-career-where-you-had-to-choose-between-taking-on-new-challenges-and-sticking-with-what-you-know-if-so-how-did-you-approach-that-decision-making-process}
 
@@ -170,7 +170,7 @@ If you don't take chances and don't try different things, you're actively opting
 
 **Editor's note:** *Steve's reflections emphasize the importance of balancing potential benefits and risks in career decisions, embracing change, and committing to choices. This mindset encourages growth and highlights the idea that "you get what you settle for."*
 
-*** ** * ** ***
+
 
 ### Bazlur: Thank you for sharing your valuable insight with us; I am sure our readers will benefit immensely. On a different note, could you tell us some funny or interesting stories from your time in the software industry? {#h3-8-bazlur-thank-you-for-sharing-your-valuable-insight-with-us-i-am-sure-our-readers-will-benefit-immensely-on-a-different-note-could-you-tell-us-some-funny-or-interesting-stories-from-your-time-in-the-software-industry}
 
@@ -192,7 +192,7 @@ Unfortunately, we just made assumptions before we'd even started about the probl
 
 <br />
 
-*** ** * ** ***
+
 
 ### Conclusion: {#h3-9-conclusion}
 

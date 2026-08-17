@@ -99,11 +99,17 @@ As we can see, it describes the location of the API, as well as what kind of HTT
 
 Let's generate a full HTTP Client for it. First, we install the OpenAPI Generator:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">$ brew install openapi-generator</pre>
+```
+$ brew install openapi-generator
+```
+
 
 Then, we generate the client in a new folder
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">$ openapi-generator generate -i https://api.opendota.com/api -g jetbrains-http-client -o dotaClient</pre>
+```
+$ openapi-generator generate -i https://api.opendota.com/api -g jetbrains-http-client -o dotaClient
+```
+
 
 ✨That's it!✨
 
@@ -120,7 +126,8 @@ When we open the folder in IntelliJ, we're presented with a few very nice things
 
 * Then, an Apis folder with all available calls and their related documentation. Here is the generated code for the Heroes endpoints:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">## HeroesApi
+```
+## HeroesApi
 
 ### GET /heroes
 # @name heroesGet
@@ -144,15 +151,20 @@ GET http://api.opendota.com/api/heroes/{{hero_id}}/matchups
 
 ### GET /heroes/{hero_id}/players
 # @name heroesHeroIdPlayersGet
-GET http://api.opendota.com/api/heroes/{{hero_id}}/players</pre>
+GET http://api.opendota.com/api/heroes/{{hero_id}}/players
+```
+
 
 Now let's create en environment file and run all those calls for a given hero. Let's use the id of my favourite hero: Crystal Maiden.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">{
+```
+{
   "dev": {
     "hero_id": "5"
   }
-}</pre>
+}
+```
+
 
 Just like this, I can start running queries against the API, and for example see which players have the most wins with Crytal Maiden:
 
@@ -181,17 +193,20 @@ Running endpoints is nice, but we also want to be able to make sure expectations
 
 Thankfully, there is a way to do this the the HTTP Request client:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">### GET /heroes
+```
+### GET /heroes
 # @name heroesGet
 GET http://api.opendota.com/api/heroes
 
-&gt; {%
+> {%
     client.test("Request executed successfully", function() {
         // client.assert(response.status === 200, "Response status is not 200");
         client.assert(response.body.length == 126, "DOTA 2 currently has 123 heroes");
     });
 %}
-This</pre>
+This
+```
+
 
 This should fail, as DOTA 2 currently has 123 heroes:
 
@@ -212,16 +227,23 @@ Let's have a look into it:
 
 * We download the (preview, for now), tool and unzip it:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">$ curl -f -L -o ijhttp.zip "https://jb.gg/ijhttp/latest 
-$ unzip ijhttp.zip</pre>
+```
+$ curl -f -L -o ijhttp.zip "https://jb.gg/ijhttp/latest 
+$ unzip ijhttp.zip
+```
+
 
 * Finally, we run it against the files we have generated above, with our environment file:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">$ ./ijhttp/ijhttp Apis/HeroesApi.http --env-file Apis/http-client.env.json --env dev</pre>
+```
+$ ./ijhttp/ijhttp Apis/HeroesApi.http --env-file Apis/http-client.env.json --env dev
+```
+
 
 Et voilà!
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">$./ijhttp/ijhttp Apis/HeroesApi.http --env-file Apis/http-client.env.json --env dev
+```
+$./ijhttp/ijhttp Apis/HeroesApi.http --env-file Apis/http-client.env.json --env dev
 ┌─────────────────────────────────────────────────────────────────────────────┐
 │                      Running IntelliJ HTTP Client with                      │
 ├──────────────────────┬──────────────────────────────────────────────────────┤
@@ -240,13 +262,16 @@ Request 'heroesHeroIdMatchupsGet' GET http://api.opendota.com/api/heroes/5/match
 Request 'heroesHeroIdPlayersGet' GET http://api.opendota.com/api/heroes/5/players
 
 6 requests completed, 1 have failed tests
-RUN FAILED</pre>
+RUN FAILED
+```
+
 
 We still have our failing test, which will fail our CI. Task failed successfully!
 
 The last step to have a complete setup is to setup a CI action. Let's use GitHub actions for this, fix our failing test, and see what happens:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">name: Run API tests based on JetBrains HTTP Client
+```
+name: Run API tests based on JetBrains HTTP Client
 
 on: push
 
@@ -263,7 +288,9 @@ jobs:
         run: |
           curl -f -L -o ijhttp.zip "https://jb.gg/ijhttp/latest"
           unzip ijhttp.zip
-          ./ijhttp/ijhttp Apis/HeroesApi.http --env-file Apis/http-client.env.json --env dev</pre>
+          ./ijhttp/ijhttp Apis/HeroesApi.http --env-file Apis/http-client.env.json --env dev
+```
+
 
 We check out, set the Java version to 17, and run the ijhttp package like we did locally.
 

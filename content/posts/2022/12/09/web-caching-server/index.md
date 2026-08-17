@@ -48,19 +48,23 @@ In general, the former is faster, but memory is expensive, while the latter is s
 
 Here are my new routes:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml" data-enlighter-theme="dracula">routes:
+```yaml
+routes:
   - uri: /cache
     upstream_id: 1
     plugins:
       proxy-rewrite:
         regex_uri: ["/cache(.*)", "/$1"]
-      proxy-cache: ~</pre>
+      proxy-cache: ~
+```
+
 
 Note that the default cache key is the host and the request URI, which includes query parameters.
 
 The default `proxy-cache` configuration uses the default disk-based [configuration](https://github.com/apache/apisix/blob/master/conf/config-default.yaml#L53-L69):
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml" data-enlighter-theme="dracula">proxy_cache:                      # Proxy Caching configuration
+```yaml
+proxy_cache:                      # Proxy Caching configuration
   cache_ttl: 10s                  # The default caching time in disk if the upstream does not specify the cache time
   zones:                          # The parameters of a cache
     - name: disk_cache_one        # The name of the cache, administrator can specify
@@ -71,62 +75,88 @@ The default `proxy-cache` configuration uses the default disk-based [configurati
       disk_path: /tmp/disk_cache_one  # The path to store the cache data (disk)
       cache_levels: 1:2           # The hierarchy levels of a cache (disk)
     - name: memory_cache
-      memory_size: 50m</pre>
+      memory_size: 50m
+```
+
 
 We can test the setup with `curl`:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash">curl -v localhost:9080/cache</pre>
+```bash
+curl -v localhost:9080/cache
+```
+
 
 The response is interesting:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="dracula">&lt; HTTP/1.1 200 OK
-&lt; Content-Type: text/html; charset=utf-8
-&lt; Content-Length: 147
-&lt; Connection: keep-alive
-&lt; Date: Tue, 29 Nov 2022 13:17:00 GMT
-&lt; Last-Modified: Wed, 23 Nov 2022 13:58:55 GMT
-&lt; ETag: "637e271f-93"
-&lt; Server: APISIX/3.0.0
-&lt; Apisix-Cache-Status: MISS                      #1
-&lt; Accept-Ranges: bytes</pre>
+```
+< HTTP/1.1 200 OK
+< Content-Type: text/html; charset=utf-8
+< Content-Length: 147
+< Connection: keep-alive
+< Date: Tue, 29 Nov 2022 13:17:00 GMT
+< Last-Modified: Wed, 23 Nov 2022 13:58:55 GMT
+< ETag: "637e271f-93"
+< Server: APISIX/3.0.0
+< Apisix-Cache-Status: MISS                      #1
+< Accept-Ranges: bytes
+```
+
 
 1. Because the cache is empty, APISIX has a cache miss. Hence, the response is from the upstream
 
 If we `curl` again before the default cache expiration period (300 seconds), the response is from the cache:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="dracula">&lt; HTTP/1.1 200 OK
+```
+< HTTP/1.1 200 OK
 ...
-&lt; Apisix-Cache-Status: HIT</pre>
+< Apisix-Cache-Status: HIT
+```
+
 
 After the expiration period, the response is from the upstream, but the header is explicit:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="dracula">&lt; HTTP/1.1 200 OK
+```
+< HTTP/1.1 200 OK
 ...
-&lt; Apisix-Cache-Status: EXPIRED</pre>
+< Apisix-Cache-Status: EXPIRED
+```
+
 
 Note that we can explicitly purge the entire cache by using the custom `PURGE` HTTP method:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash" data-enlighter-theme="dracula">curl localhost:9080/cache -X PURGE</pre>
+```bash
+curl localhost:9080/cache -X PURGE
+```
+
 
 After purging the cache, the above cycle starts anew.
 
 Note that it's also possible to bypass the cache, *e.g.*, for testing purposes. We can configure the plugin accordingly:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml" data-enlighter-theme="dracula">routes:
+```yaml
+routes:
   - uri: /cache*
     upstream_id: 1
       proxy-cache:
-        cache_bypass: ["$arg_bypass"]       #1</pre>
+        cache_bypass: ["$arg_bypass"]       #1
+```
+
 
 1. Bypass the cache if you send a `bypass` query parameter with a non-`0` value
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash" data-enlighter-theme="dracula">curl -v localhost:9080/cache?bypass=please</pre>
+```bash
+curl -v localhost:9080/cache?bypass=please
+```
+
 
 It serves the resource from the upstream regardless of the cache status:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="dracula">&lt; HTTP/1.1 200 OK
+```
+< HTTP/1.1 200 OK
 ...
-&lt; Apisix-Cache-Status: BYPASS</pre>
+< Apisix-Cache-Status: BYPASS
+```
+
 
 For more details on all available configuration parameters, check the [proxy-cache](https://apisix.apache.org/docs/apisix/plugins/proxy-cache/) plugin.
 

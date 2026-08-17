@@ -31,11 +31,12 @@ The centerpiece of this release is full **Server-Sent Events (SSE)** integration
 
 Version 1.8 will extend this with an upcoming `SSEConsumer()` API, enabling runtime-to-runtime event consumption for distributed systems.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">// Stream analytics data in real time
+```
+// Stream analytics data in real time
 SSE(
-    callback : ( emitter ) =&gt; {
+    callback : ( emitter ) => {
         var startTime = now();
-        while ( !emitter.isClosed() &amp;&amp; dateDiff( "s", startTime, now() ) &lt; 300 ) {
+        while ( !emitter.isClosed() && dateDiff( "s", startTime, now() ) < 300 ) {
             emitter.send({
                 activeUsers : getActiveUserCount(),
                 requestsPerSecond : getCurrentRPS(),
@@ -48,15 +49,18 @@ SSE(
     },
     async : true,
     keepAliveInterval : 15000
-);</pre>
+);
+```
+
 
 The implementation includes **async execution** , **automatic keep-alive** , **client disconnect detection** , **CORS support** , and **automatic chunking** for messages exceeding 32KB---ensuring efficient, resilient streaming at scale.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">// Stream AI responses token by token
+```
+// Stream AI responses token by token
 SSE(
-    callback : ( emitter ) =&gt; {
+    callback : ( emitter ) => {
         var response = callAIService();
-        while ( !emitter.isClosed() &amp;&amp; response.hasMoreTokens() ) {
+        while ( !emitter.isClosed() && response.hasMoreTokens() ) {
             emitter.send( response.getNextToken(), "token" );
         }
         emitter.send({ complete : true }, "done");
@@ -64,14 +68,17 @@ SSE(
     async : true,
     keepAliveInterval : 30000,
     timeout : 300000
-);</pre>
+);
+```
+
 
 Enterprise-Ready Distributed Caching {#h2-1-enterprise-ready-distributed-caching}
 ---------------------------------------------------------------------------------
 
 BoxLang 1.7.0 debuts the **JDBC Cache Store** , a robust distributed caching solution that enables shared caches across multiple BoxLang instances using enterprise databases such as **Oracle, MySQL, PostgreSQL, Microsoft SQL Server, Apache Derby, HSQLDB,** and **SQLite**.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">// boxlang.json
+```
+// boxlang.json
 {
   "caches": {
     "distributedCache": {
@@ -86,7 +93,9 @@ BoxLang 1.7.0 debuts the **JDBC Cache Store** , a robust distributed caching sol
       }
     }
   }
-}</pre>
+}
+```
+
 
 The JDBC store includes **automatic schema creation** , **database-specific SQL optimization** , **eviction policy support (LRU, LFU)** , and **Base64 object serialization** for complex types. All cache stores now implement `isDistributed()` for ecosystem introspection.
 
@@ -95,7 +104,8 @@ Advanced Code Analysis with BoxAST() {#h2-2-advanced-code-analysis-with-boxast}
 
 Developers can now access BoxLang's internal **Abstract Syntax Tree** through the new `BoxAST()` built-in function. This feature supports the creation of **linters** , **formatters** , **migration tools** , and **refactoring utilities**---making it invaluable for static analysis and CFML-to-BoxLang transitions.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">// Parse BoxLang code
+```
+// Parse BoxLang code
 ast = BoxAST( source : "x = 1 + 2; y = x * 3;" );
 
 // Or use the convenient member method
@@ -112,9 +122,11 @@ astJson = BoxAST(
 
 // Parse CFML code for migration tools
 cfAst = BoxAST(
-    source : "&lt;cfset x = 1&gt;&lt;cfoutput&gt;#x#&lt;/cfoutput&gt;",
+    source : "<cfset x = 1><cfoutput>#x#</cfoutput>",
     sourceType : "cftemplate"
-);</pre>
+);
+```
+
 
 `BoxAST()` supports **BoxLang script and template syntax** , as well as **CFML/ColdFusion** code parsing for migration purposes, returning structured, JSON, or text output.
 

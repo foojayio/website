@@ -69,14 +69,17 @@ The answer is by using so called StyleableProperties. This properties have a lin
 
 Defining a styleable property in JavaFX needed a lot of code in the first versions but got better over time. In our LED control we need a StyleableProperty and here is the code to realize that:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">private static final StyleablePropertyFactory&lt;CustomControl&gt; FACTORY = 
-   new StyleablePropertyFactory&lt;&gt;(Control.getClassCssMetaData()); 
+```java
+private static final StyleablePropertyFactory<CustomControl> FACTORY = 
+   new StyleablePropertyFactory<>(Control.getClassCssMetaData()); 
 
 // CSS Styleable property 
-private static final CssMetaData&lt;CustomControl, Color&gt; COLOR = 
-   FACTORY.createColorCssMetaData("-color", s -&gt; s.color, Color.RED, false); 
-private final StyleableProperty&lt;Color&gt; color = 
-   new SimpleStyleableObjectProperty&lt;&gt;(COLOR, this, "color");</pre>
+private static final CssMetaData<CustomControl, Color> COLOR = 
+   FACTORY.createColorCssMetaData("-color", s -> s.color, Color.RED, false); 
+private final StyleableProperty<Color> color = 
+   new SimpleStyleableObjectProperty<>(COLOR, this, "color");
+```
+
 
 As you can see, we defined a CssMetaData object called COLOR which defines the property that will be used in CSS.
 
@@ -84,27 +87,34 @@ This CssMetaData object will be passed into the constructor of the SimpleStyleab
 
 Now we need to define this CSS property in our CSS file for our control wich would look like this:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="css">.custom-control {
+```css
+.custom-control {
     -color: red;
-}</pre>
+}
+```
+
 
 That was the color and now we need a BooleanProperty for the state of the control. For this we can also make use of a CSS feature in JavaFX, the CSS PseudoClass. This can be seen as a boolean switch that if triggered in CSS can be used to define a separate style for the true/false state.
 
 In our case the code for our state property will look like follows:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">// CSS pseudo classes
+```java
+// CSS pseudo classes
     private static final PseudoClass ON_PSEUDO_CLASS = PseudoClass.getPseudoClass("on");
     private BooleanProperty state = new BooleanPropertyBase(false) {
             @Override protected void invalidated() { pseudoClassStateChanged(ON_PSEUDO_CLASS, get()); }
             @Override public Object getBean() { return this; }
             @Override public String getName() { return "state"; }
-        };</pre>
+        };
+```
+
 
 The PseudoClass ON_PSEUDO_CLASS defines the link to the CSS pseudo class "on" and to make use of it we trigger it in the invalidated() method of our state property by calling pseudoClassStateChanged(ON_PSEUDO_CLASS.get()).
 
 To make this work we will also need the on pseudo class in our CSS file. Remember that the main LED part (the green one) is the one that should change from a dark green gradient to a light green gradient in case the LED is on. So here is the CSS code that's needed to achieve this effect:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="css">.custom-control .main {
+```css
+.custom-control .main {
     -fx-background-color : linear-gradient(from 15% 15% to 83% 83%,
                                       derive(-color, -80%) 0%,
                                       derive(-color, -87%) 49%,
@@ -116,7 +126,9 @@ To make this work we will also need the on pseudo class in our CSS file. Remembe
                                      derive(-color, -23%) 0%,
                                      derive(-color, -50%) 49%,
                                     -color 100%);
-}</pre>
+}
+```
+
 
 So in case we trigger the :on pseudo class we only change the gradient from a darker to a brighter version and thats it.
 
@@ -130,18 +142,19 @@ The fun thing here is that we will use the Switch to toggle the LED 🙂
 
 Now let's take a look at our Control code:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public class CustomControl extends Control {
+```java
+public class CustomControl extends Control {
     public enum SkinType { LED, SWITCH }
 
-    private static final StyleablePropertyFactory&lt;CustomControl&gt; FACTORY = new StyleablePropertyFactory&lt;&gt;(Control.getClassCssMetaData());
+    private static final StyleablePropertyFactory<CustomControl> FACTORY = new StyleablePropertyFactory<>(Control.getClassCssMetaData());
 
     // CSS pseudo classes
     private static final PseudoClass ON_PSEUDO_CLASS = PseudoClass.getPseudoClass("on");
     private BooleanProperty state;
 
     // CSS Styleable property
-    private static final CssMetaData&lt;CustomControl, Color&gt; COLOR = FACTORY.createColorCssMetaData("-color", s -&gt; s.color, Color.RED, false);
-    private final StyleableProperty&lt;Color&gt; color;
+    private static final CssMetaData<CustomControl, Color> COLOR = FACTORY.createColorCssMetaData("-color", s -> s.color, Color.RED, false);
+    private final StyleableProperty<Color> color;
 
     private static String defaultUserAgentStyleSheet;
     private static String switchUserAgentStyleSheet;
@@ -161,7 +174,7 @@ Now let's take a look at our Control code:
             @Override public Object getBean() { return this; }
             @Override public String getName() { return "state"; }
         };
-        this.color    = new SimpleStyleableObjectProperty&lt;&gt;(COLOR, this, "color");
+        this.color    = new SimpleStyleableObjectProperty<>(COLOR, this, "color");
     }
 
     // ******************** Methods *******************************************
@@ -172,7 +185,7 @@ Now let's take a look at our Control code:
     // ******************** CSS Styleable Properties **************************
     public Color getColor() { return color.getValue(); }
     public void setColor(final Color color) { this.color.setValue(color); }
-    public ObjectProperty&lt;Color&gt; colorProperty() { return (ObjectProperty&lt;Color&gt;) color; }
+    public ObjectProperty<Color> colorProperty() { return (ObjectProperty<Color>) color; }
 
     // ******************** Style related *************************************
     @Override protected Skin createDefaultSkin() {
@@ -195,15 +208,18 @@ Now let's take a look at our Control code:
         }
     }
 
-    public static List&lt;CssMetaData&lt;? extends Styleable, ?&gt;&gt; getClassCssMetaData() { return FACTORY.getCssMetaData(); }
-    @Override public List&lt;CssMetaData&lt;? extends Styleable, ?&gt;&gt; getControlCssMetaData() { return FACTORY.getCssMetaData(); }
-}</pre>
+    public static List<CssMetaData<? extends Styleable, ?>> getClassCssMetaData() { return FACTORY.getCssMetaData(); }
+    @Override public List<CssMetaData<? extends Styleable, ?>> getControlCssMetaData() { return FACTORY.getCssMetaData(); }
+}
+```
+
 
 I don't want to go into detail here because most of it is self explaining. You see that we define an enum SkinType that has LED and SWITCH which will be used in the method getUserAgentStyleSheet(). Dependent on the skinType variable we load a different stylesheet. The default is the LED which is defined in custom-control.css and the switch is defined in switch.css.
 
 Now that we know the Control class let's take a look at the Skin class.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public class LedSkin extends SkinBase&lt;CustomControl&gt; implements Skin&lt;CustomControl&gt; {
+```java
+public class LedSkin extends SkinBase<CustomControl> implements Skin<CustomControl> {
     private static final double PREFERRED_WIDTH = 16;
     private static final double PREFERRED_HEIGHT = 16;
     private static final double MINIMUM_WIDTH = 8;
@@ -225,18 +241,18 @@ Now that we know the Control class let's take a look at the Skin class.
     public LedSkin(final CustomControl control) {
         super(control);
         this.control  = control;
-        sizeListener  = o -&gt; handleControlPropertyChanged("RESIZE");
-        colorListener = o -&gt; handleControlPropertyChanged("COLOR");
-        stateListener = o -&gt; handleControlPropertyChanged("STATE");
+        sizeListener  = o -> handleControlPropertyChanged("RESIZE");
+        colorListener = o -> handleControlPropertyChanged("COLOR");
+        stateListener = o -> handleControlPropertyChanged("STATE");
         initGraphics();
         registerListeners();
     }
 
     // ******************** Initialization ************************************
     private void initGraphics() {
-        if (Double.compare(control.getPrefWidth(), 0.0) &lt;= 0 || Double.compare(control.getPrefHeight(), 0.0) &lt;= 0 ||
-            Double.compare(control.getWidth(), 0.0) &lt;= 0 || Double.compare(control.getHeight(), 0.0) &lt;= 0) {
-            if (control.getPrefWidth() &gt; 0 &amp;&amp; control.getPrefHeight() &gt; 0) {
+        if (Double.compare(control.getPrefWidth(), 0.0) <= 0 || Double.compare(control.getPrefHeight(), 0.0) <= 0 ||
+            Double.compare(control.getWidth(), 0.0) <= 0 || Double.compare(control.getHeight(), 0.0) <= 0) {
+            if (control.getPrefWidth() > 0 && control.getPrefHeight() > 0) {
                 control.setPrefSize(control.getPrefWidth(), control.getPrefHeight());
             } else {
                 control.setPrefSize(PREFERRED_WIDTH, PREFERRED_HEIGHT);
@@ -303,9 +319,9 @@ Now that we know the Control class let's take a look at the Skin class.
     private void resize() {
         double width  = control.getWidth() - control.getInsets().getLeft() - control.getInsets().getRight();
         double height = control.getHeight() - control.getInsets().getTop() - control.getInsets().getBottom();
-        size          = width &lt; height ? width : height;
+        size          = width < height ? width : height;
 
-        if (size &gt; 0) {
+        if (size > 0) {
             innerShadow.setRadius(0.07 * size);
             glow.setRadius(0.36 * size);
             glow.setColor(control.getColor());
@@ -321,7 +337,8 @@ Now that we know the Control class let's take a look at the Skin class.
         }
     }
 }
-</pre>
+```
+
 
 So, the main idea is to use three Region objects (for each layer of the LED one Region) and style them using CSS. With this approach we only have to take care about sizing and positioning the Regions. All the rest will be done in CSS.
 
@@ -338,7 +355,8 @@ If you look at the code you will see that I've also added an glow effect (dropsh
 
 To make it complete, here comes the CSS file for the LED:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="css">.custom-control {
+```css
+.custom-control {
     -color: red;
 }
 
@@ -367,7 +385,9 @@ To make it complete, here comes the CSS file for the LED:
 .custom-control .highlight {
     -fx-background-color : radial-gradient(center 15% 15%, radius 50%, white 0%, transparent 100%);
     -fx-background-radius: 1024;
-}</pre>
+}
+```
+
 
 In the CSS file we really just define the background radius of each Region and the paint which are always gradients here.
 
@@ -383,7 +403,8 @@ Besides the visual design the biggest difference between the LED and the switch 
 
 So here is the code of the SwitchSkin:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public class SwitchSkin extends SkinBase&lt;CustomControl&gt; implements Skin&lt;CustomControl&gt; {
+```java
+public class SwitchSkin extends SkinBase<CustomControl> implements Skin<CustomControl> {
     private static final double PREFERRED_WIDTH = 76;
     private static final double PREFERRED_HEIGHT = 46;
     private Region switchBackground;
@@ -393,15 +414,15 @@ So here is the code of the SwitchSkin:
     private CustomControl control;
     private InvalidationListener colorListener;
     private InvalidationListener state;
-    private EventHandler&lt;MouseEvent&gt; mouseEventHandler;
+    private EventHandler<MouseEvent> mouseEventHandler;
 
     // ******************** Constructors **************************************
     public SwitchSkin(final CustomControl control) {
         super(control);
         this.control = control;
-        colorListener = o -&gt; handleControlPropertyChanged("COLOR");
-        state = o -&gt; handleControlPropertyChanged("STATE");
-        mouseEventHandler = e -&gt; this.control.setState(!this.control.getState());
+        colorListener = o -> handleControlPropertyChanged("COLOR");
+        state = o -> handleControlPropertyChanged("STATE");
+        mouseEventHandler = e -> this.control.setState(!this.control.getState());
         initGraphics();
         registerListeners();
     }
@@ -458,13 +479,16 @@ So here is the code of the SwitchSkin:
         control.stateProperty().removeListener(state);
         switchBackground.removeEventHandler(MouseEvent.MOUSE_PRESSED, mouseEventHandler);
     }
-}</pre>
+}
+```
+
 
 When reading the code you will find that it has a lot of stuff in common with the LedSkin. Because we don't have a resizing logic here I've simply put the positioning of the Regions in the layoutChildren() method. When looking at other ones controls you might find that they do most of the resize/layout related things in the layoutChildren() method. I usually don't do this because in this case you should also add variables like isDirty and such to avoid to often resizing/relayouting. I found that for most of my controls it is enough to resize/relayout when the size of the control changed. For that reason you will most of the times find a resize() method in my controls.
 
 Now, the only thing that is missing is the switch.css file which looks like this:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="css">.custom-control {
+```css
+.custom-control {
     -color: #4bd865;
 }
 
@@ -494,20 +518,27 @@ Now, the only thing that is missing is the switch.css file which looks like this
     -fx-background-radius: 1024;
     -fx-background-color : white;
     -fx-effect                  : dropshadow(two-pass-box, rgba(0, 0, 0, 0.3), 1, 0.0, 0, 1);
-}</pre>
+}
+```
+
 
 You can see that I not only restrict the size of the control in CSS but also place the thumb using the -fx-translate-x and -fx-translate-y in it's initial position. CSS in JavaFX is really powerful and one can do a lot of things if you know how to do it 🙂
 
 If you take a look a the code over at [github](https://github.com/HanSolo/JavaFXCustomControls "github") you will see in the DemoControlSkinBased.java a comment as follows:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">//scene.getStylesheets().add(DemoControlSkinBased.class.getResource("styles.css").toExternalForm());
-</pre>
+```java
+//scene.getStylesheets().add(DemoControlSkinBased.class.getResource("styles.css").toExternalForm());
+```
+
 
 If you uncomment this line it will load the styles.css which looks like this:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="css">.custom-control {
+```css
+.custom-control {
     -color: magenta;
-}</pre>
+}
+```
+
 
 And if you then start the demo it will look like this:
 

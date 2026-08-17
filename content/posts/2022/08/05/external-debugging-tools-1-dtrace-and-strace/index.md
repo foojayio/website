@@ -84,8 +84,10 @@ Then upon reboot, dtrace should work as expected.
 
 As mentioned before, dtrace is a very powerful tool. There are whole books written about it. It has its own programming language based on C syntax that you can use to build elaborate logic. E.g. the following command will log some information from the given callbacks:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">sudo dtrace -qn 'syscall::write:entry, syscall::sendto:entry /pid == $target/ { printf("(%d) %s %s", pid, probefunc, copyinstr(arg1)); }' -p [PID]
-</pre>
+```
+sudo dtrace -qn 'syscall::write:entry, syscall::sendto:entry /pid == $target/ { printf("(%d) %s %s", pid, probefunc, copyinstr(arg1)); }' -p [PID]
+```
+
 
 The code snippet passed to the dtrace command listens to the sendto callback on the target process ID. Then prints out the information to the console, e.g.: `(pid) text`
 
@@ -95,16 +97,21 @@ If this seems like a bit too much and too hard to get started with... You're 100
 
 As luck would have it, we have a simple solution:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">man -k dtrace
-</pre>
+```
+man -k dtrace
+```
+
 
 This prints out a list of tools that's worth reading just to get a sense of how extensive this thing is. Here are a few interesting lines of output from that command:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">bitesize.d(1m)           - analyse disk I/O size by process. Uses DTrace
+```
+bitesize.d(1m)           - analyse disk I/O size by process. Uses DTrace
 dapptrace(1m)            - trace user and library function usage. Uses DTrace
 errinfo(1m)              - print errno for syscall fails. Uses DTrace
 iotop(1m)                - display top disk I/O events by process. Uses DTrace
-plockstat(1)             - front-end to DTrace to print statistics about POSIX mutexes and read/write locks</pre>
+plockstat(1)             - front-end to DTrace to print statistics about POSIX mutexes and read/write locks
+```
+
 
 It's worth your time going over this list to realize what you can truly do here.
 
@@ -116,11 +123,15 @@ You're facing elevated disk write issues that are causing the performance of you
 
 Just run:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">sudo rwbypid.d</pre>
+```
+sudo rwbypid.d
+```
+
 
 It will print out the reads/writes to the disk:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">   PID CMD                       DIR    COUNT
+```
+   PID CMD                       DIR    COUNT
   2957 wordexp-helper              W        1
   2959 wc                          W        1
   2961 grep                        W        1
@@ -129,7 +140,9 @@ It will print out the reads/writes to the disk:
 
    637 firefox                     R     6937
    637 firefox                     W    15325
-   343 sentineld                   W   100287</pre>
+   343 sentineld                   W   100287
+```
+
 
 The security software is really holding performance down...
 
@@ -137,26 +150,34 @@ You can also use `bitesize.d` to get more specific results on the number of byte
 
 That's pretty high level though. What if you want specifics: file name, process name, etc?
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">sudo iosnoop -a
-</pre>
+```
+sudo iosnoop -a
+```
+
 
 Prints out output that includes pretty much everything you would need:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">STRTIME              DEVICE  MAJ MIN   UID   PID D      BLOCK     SIZE                     PATHNAME ARGS
+```
+STRTIME              DEVICE  MAJ MIN   UID   PID D      BLOCK     SIZE                     PATHNAME ARGS
 2022 Jun 30 12:16:56 ??        1  17   501  1111 W  150777072     4096 ??/idb/3166453069wcaw.sqlite-wal firefox\0
 2022 Jun 30 12:16:56 ??        1  17   501   661 W  150777175   487424  ??/index-dir/the-real-index Slack Helper\0
-2022 Jun 30 12:16:57 ??        1  17   499   342 W  150777294     4096 ??/persistent/.dat.nosync0156.ztvXap sentineld\0</pre>
+2022 Jun 30 12:16:57 ??        1  17   499   342 W  150777294     4096 ??/persistent/.dat.nosync0156.ztvXap sentineld\0
+```
+
 
 I can see the process id and how many bytes it wrote to the specific file!
 
 Let's say your program spans processes and you want to see what's going on. E.g. I run a source code build in a server I built:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">sudo errinfo
-</pre>
+```
+sudo errinfo
+```
+
 
 Lets me detect the error returned from system calls to and the command that originally triggered that:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">         EXEC          SYSCALL  ERR  DESC
+```
+         EXEC          SYSCALL  ERR  DESC
  WindowServer workq_kernreturn   -2 
  WindowServer workq_kernreturn   -2 
 SentinelAgent workq_kernreturn   -2 
@@ -164,7 +185,9 @@ SentinelAgent workq_kernreturn   -2
        Signal           Helper    0 
        Google           Chrome    0 
         Brave          Browser    0 
-       Google           Chrome    0</pre>
+       Google           Chrome    0
+```
+
 
 These are just the tip of the iceberg. I suggest checking out this old [dtrace tutorial](https://www.oracle.com/solaris/technologies/dtrace-tutorial.html) from Oracle or [the book](https://www.bookdepository.com/DTrace-Brendan-Gregg/9780132091510?ref=grid-view&amp;qid=1656581174175&amp;sr=1-1). Disclaimer: I didn't read the book...
 
@@ -185,12 +208,15 @@ Nowadays, strace is commonly used in Linux, it's my favorite system diagnostic t
 
 The most basic usage of strace is just passing the command line to it:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">strace java -classpath. PrimeMain
-</pre>
+```
+strace java -classpath. PrimeMain
+```
+
 
 The output of strace for this is pretty long, lets go over a few of the lines:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">execve("/home/ec2-user/jdk1.8.0_45/bin/java", ["java", "-classpath.", "PrimeMain"], 0x7fffd689ec20 /* 23 vars */) = 0
+```
+execve("/home/ec2-user/jdk1.8.0_45/bin/java", ["java", "-classpath.", "PrimeMain"], 0x7fffd689ec20 /* 23 vars */) = 0
 brk(NULL)                               = 0xb85000
 mmap(NULL, 4096, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x7f0294272000
 readlink("/proc/self/exe", "/home/ec2-user/jdk1.8.0_45/bin/j"..., 4096) = 35
@@ -199,23 +225,29 @@ open("/home/ec2-user/jdk1.8.0_45/bin/../lib/amd64/jli/tls/x86_64/libpthread.so.0
 stat("/home/ec2-user/jdk1.8.0_45/bin/../lib/amd64/jli/tls/x86_64", 0x7fff37af09a0) = -1 ENOENT (No such file or directory)
 open("/home/ec2-user/jdk1.8.0_45/bin/../lib/amd64/jli/tls/libpthread.so.0", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
 stat("/home/ec2-user/jdk1.8.0_45/bin/../lib/amd64/jli/tls", 0x7fff37af09a0) = -1 ENOENT (No such file or directory)
-</pre>
+```
+
 
 Every one of these lines is a Linux system call. We can google each one of them to get a sense of what's going on. Here's a simple example:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">open("/home/ec2-user/jdk1.8.0_45/bin/../lib/amd64/jli/tls/x86_64/libpthread.so.0", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
-</pre>
+```
+open("/home/ec2-user/jdk1.8.0_45/bin/../lib/amd64/jli/tls/x86_64/libpthread.so.0", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+```
+
 
 Java tries to load the `pthread` library from the `tls` directory using a system open call to load the file. The exit code of the system call is `-1`, which means that the file isn't there. Under normal circumstances, we should get back a file descriptor value from this API. Looking in the directory, it seems the `tls` directory is missing. I'm guessing that this is because of a missing JCE installation. This is probably OK but might have been interesting in some cases.
 
 Obviously, the amount of output is overwhelming sometimes. We usually just want to see things like "which file was opened" and "what's going on with our network calls". We can easily accomplish that by only looking at specific system calls using the `-e` argument.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">strace -e open java -classpath . PrimeMain
-</pre>
+```
+strace -e open java -classpath . PrimeMain
+```
+
 
 Will only show the open system calls:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">open("/home/ec2-user/jdk1.8.0_45/bin/../lib/amd64/jli/tls/x86_64/libpthread.so.0", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+```
+open("/home/ec2-user/jdk1.8.0_45/bin/../lib/amd64/jli/tls/x86_64/libpthread.so.0", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
 open("/home/ec2-user/jdk1.8.0_45/bin/../lib/amd64/jli/tls/libpthread.so.0", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
 open("/home/ec2-user/jdk1.8.0_45/bin/../lib/amd64/jli/x86_64/libpthread.so.0", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
 open("/home/ec2-user/jdk1.8.0_45/bin/../lib/amd64/jli/libpthread.so.0", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
@@ -226,7 +258,9 @@ open("/home/ec2-user/jdk1.8.0_45/bin/../lib/amd64/libpthread.so.0", O_RDONLY|O_C
 open("/etc/ld.so.cache", O_RDONLY|O_CLOEXEC) = 3
 open("/lib64/libpthread.so.0", O_RDONLY|O_CLOEXEC) = 3
 open("/home/ec2-user/jdk1.8.0_45/bin/../lib/amd64/jli/libjli.so", O_RDONLY|O_CLOEXEC) = 3
-open("/home/ec2-user/jdk1.8.0_45/bin/../lib/amd64/jli/libdl.so.2", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)</pre>
+open("/home/ec2-user/jdk1.8.0_45/bin/../lib/amd64/jli/libdl.so.2", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+```
+
 
 There are many system calls you can learn and use to track many behaviors such as this: connect, write, etc. This is only the tip of the iceberg of what you can do using strace. Julia Evans wrote some of the most [exhaustive and entertaining posts on strace](https://jvns.ca/categories/strace/). If you want to learn more about it, there's probably no better place (also check out her other stuff... Amazing resources!).
 

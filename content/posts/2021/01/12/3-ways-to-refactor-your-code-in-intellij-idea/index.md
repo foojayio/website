@@ -45,7 +45,8 @@ The first way to simplify your code is to extract it. There are five types of ex
 
 The switch statement in this method isn't in keeping with the rest of the method so let's [extract it](https://www.jetbrains.com/help/idea/extract-method.html).
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public class PlanetExtractions {
+```java
+public class PlanetExtractions {
     Planet myPlanet = new Planet("earth");
     // I'm using PlanetExtractions to get the facts for my country
     // I'm using planetextractions to get the facts for my country
@@ -55,13 +56,15 @@ The switch statement in this method isn't in keeping with the rest of the method
         System.out.println("Number of times the planet rotates around the sun is " + 365);
         System.out.println("Number of characters in planet name = " + myPlanet.getName().length());
         switch (myPlanet.getCountryWeather()) {
-            case "Spring" -&gt; System.out.println("The weather is warm in the UK");
-            case "Summer" -&gt; System.out.println("The weather is hot in the UK");
-            case "Autumn" -&gt; System.out.println("The weather is cool in the UK");
-            default -&gt; System.out.println("The weather is cold in the UK");
+            case "Spring" -> System.out.println("The weather is warm in the UK");
+            case "Summer" -> System.out.println("The weather is hot in the UK");
+            case "Autumn" -> System.out.println("The weather is cool in the UK");
+            default -> System.out.println("The weather is cold in the UK");
         }
     }
-}</pre>
+}
+```
+
 
 In IntelliJ IDEA 2020.3 this process has been simplified. You need to select the full block of code that is going to be extracted, and then you can use **⌘⌥M** on macOS, and **Ctrl** +**Alt** +**M** on Windows and Linux, to extract the method.
 
@@ -69,7 +72,8 @@ In IntelliJ IDEA 2020.3 this process has been simplified. You need to select the
 
 We can give the new method a name, such as `getWeather()` and IntelliJ IDEA will replace the original logic with a call to our new method:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public class PlanetExtractions {
+```java
+public class PlanetExtractions {
     public static final int NUMBER_OF_DAYS_IN_A_YEAR = 365;
     Planet myPlanet = new Planet("earth");
     private String theWeatherIs = "The weather is";
@@ -84,13 +88,15 @@ We can give the new method a name, such as `getWeather()` and IntelliJ IDEA will
     }
     private void getWeather() {
         switch (myPlanet.getCountryWeather()) {
-            case "Spring" -&gt; System.out.println("The weather is warm in the UK");
-            case "Summer" -&gt; System.out.println("The weather is hot in the UK");
-            case "Autumn" -&gt; System.out.println("The weather is cool in the UK");
-            default -&gt; System.out.println("The weather is cold in the UK");
+            case "Spring" -> System.out.println("The weather is warm in the UK");
+            case "Summer" -> System.out.println("The weather is hot in the UK");
+            case "Autumn" -> System.out.println("The weather is cool in the UK");
+            default -> System.out.println("The weather is cold in the UK");
         }
     }
-}</pre>
+}
+```
+
 
 You can get additional options for extract Method by using the same shortcut again.
 
@@ -102,28 +108,40 @@ You can get additional options for extract Method by using the same shortcut aga
 
 We can extract the number 365 to a constant in this line of code because the earth always takes about 365 days to complete its rotation around the sun:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">System.out.println("Number of times the planet rotates around the sun is " + 365);</pre>
+```java
+System.out.println("Number of times the planet rotates around the sun is " + 365);
+```
+
 
 We can select the number and then use **⌘⌥C** on macOS, and **Ctrl** +**Alt** +**C** on Windows and Linux, to extract it to a constant. We can give it a name such as `NUMBER_OF_DAYS_IN_A_YEAR`. IntelliJ IDEA creates a new public static final constant at the start of our class:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public static final int NUMBER_OF_DAYS_IN_A_YEAR = 365;</pre>
+```java
+public static final int NUMBER_OF_DAYS_IN_A_YEAR = 365;
+```
+
 
 IntelliJ IDEA also replaces the original line of code with the new constant:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">System.out.println("Number of times the planet rotates around the sun is " + NUMBER_OF_DAYS_IN_A_YEAR);</pre>
+```java
+System.out.println("Number of times the planet rotates around the sun is " + NUMBER_OF_DAYS_IN_A_YEAR);
+```
+
 
 ### Extract Field {#h3-3-extract-field}
 
 The phrase "The Weather is" is repeated four times in the method that we extracted, so let's extract that to a field:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">private void getWeather() {
+```java
+private void getWeather() {
         switch (myPlanet.getCountryWeather()) {
-            case "Spring" -&gt; System.out.println("The weather is warm in the UK");
-            case "Summer" -&gt; System.out.println("The weather is hot in the UK");
-            case "Autumn" -&gt; System.out.println("The weather is cool in the UK");
-            default -&gt; System.out.println("The weather is cold in the UK");
+            case "Spring" -> System.out.println("The weather is warm in the UK");
+            case "Summer" -> System.out.println("The weather is hot in the UK");
+            case "Autumn" -> System.out.println("The weather is cool in the UK");
+            default -> System.out.println("The weather is cold in the UK");
         }
-    }</pre>
+    }
+```
+
 
 You need to select `The weather is ` and then you can use **⌘⌥F** on macOS, or **Ctrl** +**Alt** +**F** on Windows and Linux, to extract it to a field. In the Introduce Field dialog, we can select to initialise this field in the Field declaration, give it a name such as `theWeatherIs` and select to replace all four occurrences of it in the code.
 
@@ -133,16 +151,17 @@ You need to select `The weather is ` and then you can use **⌘⌥F** on macOS, 
 
 IntelliJ IDEA also updates the method with the new field:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">private void getWeather() {
+```java
+private void getWeather() {
         switch (myPlanet.getCountryWeather()) {
-            case "Spring" -&gt; System.out.println(theWeatherIs + " warm in the UK");
-            case "Summer" -&gt; System.out.println(theWeatherIs + " hot in the UK");
-            case "Autumn" -&gt; System.out.println(theWeatherIs + " cool in the UK");
-            default -&gt; System.out.println(theWeatherIs + " cold in the UK");
+            case "Spring" -> System.out.println(theWeatherIs + " warm in the UK");
+            case "Summer" -> System.out.println(theWeatherIs + " hot in the UK");
+            case "Autumn" -> System.out.println(theWeatherIs + " cool in the UK");
+            default -> System.out.println(theWeatherIs + " cold in the UK");
         }
     }
+```
 
-</pre>
 
 ### Extract Variable {#h3-4-extract-variable}
 
@@ -170,14 +189,17 @@ IntelliJ IDEA has also created our new variable:
 
 Let's extract the country `UK` in this code and pass it in as a parameter called `country`:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">private void getWeather() {
+```java
+private void getWeather() {
     switch (myPlanet.getCountryWeather()) {
-        case "Spring" -&gt; System.out.println(theWeatherIs + " warm in the UK");
-        case "Summer" -&gt; System.out.println(theWeatherIs + " hot in the UK");
-        case "Autumn" -&gt; System.out.println(theWeatherIs + " cool in the UK");
-        default -&gt; System.out.println(theWeatherIs + " cold in the UK");
+        case "Spring" -> System.out.println(theWeatherIs + " warm in the UK");
+        case "Summer" -> System.out.println(theWeatherIs + " hot in the UK");
+        case "Autumn" -> System.out.println(theWeatherIs + " cool in the UK");
+        default -> System.out.println(theWeatherIs + " cold in the UK");
     }
-}</pre>
+}
+```
+
 
 To do that, let's select `UK` and use **⌘⌥P** on macOS and **Ctrl** +**Alt** +**P** on Windows and Linux. We can give it a name, such as `country`. We can then ask IntelliJ IDEA to replace all four occurrences and select **Refactor**. IntelliJ IDEA updates our method signature arguments:
 
@@ -185,14 +207,17 @@ To do that, let's select `UK` and use **⌘⌥P** on macOS and **Ctrl** +**Alt**
 
 ... and replaces all four occurrences of it in the text:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">private void getWeather(String country) {
+```java
+private void getWeather(String country) {
        switch (myPlanet.getCountryWeather()) {
-           case "Spring" -&gt; System.out.println(theWeatherIs + " warm in the " + country);
-           case "Summer" -&gt; System.out.println(theWeatherIs + " hot in the " + country);
-           case "Autumn" -&gt; System.out.println(theWeatherIs + " cool in the " + country);
-           default -&gt; System.out.println(theWeatherIs + " cold in the " + country);
+           case "Spring" -> System.out.println(theWeatherIs + " warm in the " + country);
+           case "Summer" -> System.out.println(theWeatherIs + " hot in the " + country);
+           case "Autumn" -> System.out.println(theWeatherIs + " cool in the " + country);
+           default -> System.out.println(theWeatherIs + " cold in the " + country);
        }
-   }</pre>
+   }
+```
+
 
 ### Extract Summary {#h3-6-extract-summary}
 
@@ -221,9 +246,12 @@ Change Signature {#h2-7-change-signature}
 
 We often need to [change the signature](https://www.jetbrains.com/help/idea/change-signature-dialog.html) of a method. IntelliJ IDEA can help us with this process, and the impact of the change on your wider code base. Using our [Planet](https://github.com/JetBrains/intellij-samples/blob/main/standard-java/src/main/java/com/jetbrains/refactoring/Planet.java) class, let's refactor this constructor to take the season as an argument as well as the name:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public Planet(String name) {
+```java
+public Planet(String name) {
     this.name = name;
-}</pre>
+}
+```
+
 
 We can use **⌘F6** on macOS, or **Ctrl** +**F6** on Windows and Linux, to change the signature of the method. Now we're in the Change Signature dialog; we can use **⌘N** on macOS or **Alt** +**Ins** on Windows and Linux, to add a second string and give it a default value like 'summer'. If we don't give it this default value, then any objects that call this method will need to be manually updated after the refactoring.
 
@@ -231,7 +259,10 @@ We can use **⌘F6** on macOS, or **Ctrl** +**F6** on Windows and Linux, to chan
 
 IntelliJ IDEA will show you where the issues are if you choose to do this. When we complete the refactoring and look back at our [PlanetExtractions](https://github.com/JetBrains/intellij-samples/blob/main/standard-java/src/main/java/com/jetbrains/refactoring/PlanetExtractions.java) class, we can see that the method signature has been updated here as well with the default value that we provided:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">Planet myPlanet = new Planet("earth", "summer");</pre>
+```java
+Planet myPlanet = new Planet("earth", "summer");
+```
+
 
 Rename {#h2-8-rename}
 ---------------------

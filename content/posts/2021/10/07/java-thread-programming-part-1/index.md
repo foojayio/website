@@ -47,21 +47,27 @@ Do all Java programs have a thread associated with them? {#h2-3-do-all-java-prog
 
 The answer is yes. Java was designed to have threads from the very beginning. If we just start a "hello world" program in the main method, it will be executed through a thread, which is called the "main Thread". Let's see an example:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">package com.bazlur;
+```java
+package com.bazlur;
 
 public class HelloWorld {
  public static void main(String[] args) {
   System.out.println("This program is running on: " + Thread.currentThread());
   System.out.println("Hello world");
  }
-}</pre>
+}
+```
+
 
 **Note:** `Thread.currrentThread()` method returns the reference of the Thread currently executing the piece of code.
 
 If we run the above program, then we will get the following output in the console:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">This program is running on: Thread[main,5,main]
-Hello world</pre>
+```java
+This program is running on: Thread[main,5,main]
+Hello world
+```
+
 
 So, the output ensures us that running a Java program is all about running its different pieces of code on one or multiple threads.
 
@@ -75,7 +81,8 @@ The code that writes in the main method executes by means of the main Thread. Ho
 
 Let's start by extending the Thread class.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">package com.bazlur;
+```java
+package com.bazlur;
 
 public class MyThread extends Thread {
  @Override
@@ -83,13 +90,16 @@ public class MyThread extends Thread {
   System.out.println("Executing code from: " + Thread.currentThread());
   System.out.println("Hello world");
  }
-}</pre>
+}
+```
+
 
 In the above code, we have created a class, `MyThread`, extending the `Thread` class, and then we override the run method. Thus, whatever we write in this run method will be executed by this `Thread`.
 
 To use this Thread, we have to create an instance and then call its `start()` method:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">package com.bazlur;
+```java
+package com.bazlur;
 
 public class Playground {
  public static void main(String[] args) {
@@ -98,7 +108,9 @@ public class Playground {
   myThread.start();
   System.out.println("Leaving from: " + Thread.currentThread());
  }
-}</pre>
+}
+```
+
 
 In the above code, the main method gets executed by the main Thread. The main Thread sees the code that instantiates a Thread object, so it does. Then it executes its `start()` method. Since there is no more code after it, the main Thread exits here. On the other hand, the `MyThread` keeps running its code until it finishes its work.
 
@@ -106,10 +118,13 @@ Here, you have to keep in mind, when starting a thread, you must call the `start
 
 The above code will result following output:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">Creating a new thread from : Thread[main,5,main]
+```java
+Creating a new thread from : Thread[main,5,main]
 Leaving from: Thread[main,5,main]
 Executing code from: Thread[Thread-0,5,main]
-Hello world</pre>
+Hello world
+```
+
 
 So, the steps are:
 
@@ -120,7 +135,8 @@ So, the steps are:
 
 The other way is to have an implementation of the `Runnable` interface. For example:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">package com.bazlur;
+```java
+package com.bazlur;
 
 public class MyRunnable implements Runnable{
  @Override
@@ -128,13 +144,16 @@ public class MyRunnable implements Runnable{
   System.out.println("Executing code using Runnable from: " + Thread.currentThread());
   System.out.println("Hello world");
  }
-}</pre>
+}
+```
+
 
 In the above class, we have implemented the runnable interface, and put our desired code in the run method.
 
 The next steps is to create an instance of java.lang.Thread. We will put an instance of the MyRunnable class as an argument to the constructor of the java.lang.Thread. Then we call the start method:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">package com.bazlur;
+```java
+package com.bazlur;
 
 public class Playground {
  public static void main(String[] args) {
@@ -146,14 +165,18 @@ public class Playground {
   System.out.println("Leaving from: " + Thread.currentThread());
  }
 }
-</pre>
+```
+
 
 The above code will result following output:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">Creating a new thread from : Thread[main,5,main]
+```java
+Creating a new thread from : Thread[main,5,main]
 Leaving from: Thread[main,5,main]
 Executing code using Runnable from: Thread[Thread-0,5,main]
-Hello world</pre>
+Hello world
+```
+
 
 So, the steps are:
 
@@ -167,7 +190,8 @@ That's it.
 
 Alternatively, you can use an anonymous inner class, and put this as an argument of the Thread's constructor. Example:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">var thread = new Thread(new Runnable() {
+```java
+var thread = new Thread(new Runnable() {
 @Override
  public void run() {
   System.out.println("Executing code using Runnable from: " + Thread.currentThread());
@@ -175,14 +199,18 @@ Alternatively, you can use an anonymous inner class, and put this as an argument
  }
 });
 thread.start();
-</pre>
+```
+
 
 Or, even, you can use lambda expression, since the `Runnable` interface has a SAM (single abstract method). Example:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">var thread = new Thread(() -&gt; {
+```java
+var thread = new Thread(() -> {
  System.out.println("Executing code using Runnable from: " + Thread.currentThread());
  System.out.println("Hello world");
 });
-thread.start();</pre>
+thread.start();
+```
+
 
 That's it for today!

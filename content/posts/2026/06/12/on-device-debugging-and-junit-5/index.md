@@ -77,10 +77,13 @@ The Codename One archetype now generates two run configurations under an *On-Dev
 
 Open `common/codenameone_settings.properties` and uncomment the four lines the archetype generated:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">ios.onDeviceDebug=true
+```
+ios.onDeviceDebug=true
 ios.onDeviceDebug.proxyHost=127.0.0.1
 ios.onDeviceDebug.proxyPort=55333
-ios.onDeviceDebug.waitForAttach=true</pre>
+ios.onDeviceDebug.waitForAttach=true
+```
+
 
 `ios.onDeviceDebug=true` flips the iOS build into the instrumented variant. The other three configure the proxy connection.
 
@@ -101,12 +104,15 @@ Both produce an iOS binary instrumented for on-device debugging because the buil
 
 In IntelliJ, pick **CN1 Debug Proxy** from the run-config dropdown and click the green ▶ Run button (not the bug icon; Debug on this config would attach IntelliJ to the proxy itself, which is not what you want). The Run tool window shows:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">On-device-debug proxy starting:
+```
+On-device-debug proxy starting:
   symbols : .../cn1-symbols.txt
   device  : listening on tcp://0.0.0.0:55333
   jdwp    : listening on tcp://0.0.0.0:8000
 [device] listening on port 55333 for ParparVM app to dial in
-[jdwp]   listening on port 8000 for debugger (jdb) to attach</pre>
+[jdwp]   listening on port 8000 for debugger (jdb) to attach
+```
+
 
 When the `[jdwp]` line appears, the proxy is ready.
 
@@ -128,7 +134,10 @@ Android is simpler because the proxy is not needed. The archetype generates two 
 
 In `common/codenameone_settings.properties`:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">android.onDeviceDebug=true</pre>
+```
+android.onDeviceDebug=true
+```
+
 
 This single hint flips the manifest to `debuggable="true"` and turns R8 / Proguard off for this build. Release builds without the hint are unaffected.
 
@@ -165,7 +174,8 @@ Both styles coexist in the same project under `common/src/test/java`. You pick p
 
 Tests live in `common/src/test/java`. The shape most apps want is one that boots the project's app class through the same `init` / `start` sequence the simulator uses, then asserts against the form the app actually opens:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">package com.example.myapp;
+```
+package com.example.myapp;
 
 import com.codename1.testing.junit.CodenameOneTest;
 import com.codename1.testing.junit.RunOnEdt;
@@ -189,7 +199,9 @@ class GreetingFormTest {
         assertEquals("Hi World", Display.getInstance().getCurrent().getTitle());
         assertTrue(CN.isEdt(), "@RunOnEdt method runs on the Codename One EDT");
     }
-}</pre>
+}
+```
+
 
 That is more useful than constructing a `Form` directly in the test because it exercises the same startup path the simulator runs. The assertions check the form your app opens, not a form the test wrote.
 
@@ -207,9 +219,12 @@ Click the green icon next to a specific `@Test` method to run just that method. 
 
 If you prefer the command line:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">mvn -Ptest test                                  # run the JUnit suite
+```
+mvn -Ptest test                                  # run the JUnit suite
 mvn -Ptest test -Dtest=GreetingFormTest          # one class
-mvn -Ptest test -Dtest=GreetingFormTest#formShowsExpectedTitle</pre>
+mvn -Ptest test -Dtest=GreetingFormTest#formShowsExpectedTitle
+```
+
 
 `@CodenameOneTest` is the class-level entry point. It wires the simulator extension into the JUnit Jupiter lifecycle, boots `Display.init(null)` once per JVM (idempotent, so subsequent classes share the same `Display`), and skips the class with a `TestAbortedException` if the JVM is genuinely headless (so CI runners that have no display do not poison the rest of the run).
 
@@ -219,7 +234,8 @@ mvn -Ptest test -Dtest=GreetingFormTest#formShowsExpectedTitle</pre>
 
 A test that exercises a plain validator, with no UI involved at all:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@CodenameOneTest
+```
+@CodenameOneTest
 class EmailValidatorTest {
 
     @Test
@@ -229,15 +245,18 @@ class EmailValidatorTest {
 
     @Test
     void acceptsCommonAddress() {
-        assertTrue(new EmailValidator().isValid("<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="7e101f131b3e1b061f130e121b501d1113">[email&nbsp;protected]</a>"));
+        assertTrue(new EmailValidator().isValid("<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="7e101f131b3e1b061f130e121b501d1113">[email protected]</a>"));
     }
-}</pre>
+}
+```
+
 
 This is the "pure model code" shape. No `@RunOnEdt`, no UI, runs on the JUnit worker thread, fast.
 
 A test of a form under a specific visual configuration:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@CodenameOneTest
+```
+@CodenameOneTest
 class GreetingFormVisualTest {
 
     @Test
@@ -249,22 +268,27 @@ class GreetingFormVisualTest {
 
         Form current = Display.getInstance().getCurrent();
         assertEquals("Hello", current.getTitle());
-        assertTrue(current.getPreferredW() &lt;= Display.getInstance().getDisplayWidth());
+        assertTrue(current.getPreferredW() <= Display.getInstance().getDisplayWidth());
     }
-}</pre>
+}
+```
+
 
 The visual-config annotations (`@Theme`, `@DarkMode`, `@LargerText`, `@Orientation`, `@RTL`) apply on the EDT in one batch, followed by a single theme refresh, so the test body sees the simulator in the exact configuration you asked for without flicker.
 
 A test that injects a custom property for the duration of one method:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@Test
+```
+@Test
 @RunOnEdt
 @SimulatorProperty(name = "feature.flag", value = "on")
 void newCodePathRunsWhenFlagIsOn() {
     // Display.getProperty("feature.flag", "off") returns "on" here
     runFeature();
     assertEquals("expected", Display.getInstance().getCurrent().getTitle());
-}</pre>
+}
+```
+
 
 Class-level `@SimulatorProperty` applies to every method in the class. Method-level overrides class-level. Use the container `@SimulatorProperties` for more than one (the package source level rules out `@Repeatable`).
 

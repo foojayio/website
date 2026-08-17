@@ -68,7 +68,8 @@ Here is a complete `bld` file for a Java Hello World application, nothing else i
 
 <br />
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">package com.example;
+```java
+package com.example;
 
 import rife.bld.Project;
 import java.util.List;
@@ -92,7 +93,9 @@ public class MyappBuild extends Project {
     public static void main(String[] args) {
         new MyappBuild().start(args);
     }
-}</pre>
+}
+```
+
 
 Creating a new project {#h2-2-creating-a-new-project}
 -----------------------------------------------------
@@ -101,7 +104,10 @@ After [installing `bld`](https://github.com/rife2/bld/wiki/Installation), you ca
 
 <br />
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">bld create-blank com.example myapp</pre>
+```bash
+bld create-blank com.example myapp
+```
+
 
 The project template that is integrated into `bld` is used to create the complete structure of your application and the library dependencies required to compile and run it are automatically downloaded.
 
@@ -111,15 +117,21 @@ You can now go into your project directory and for instance run it:
 
 <br />
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">./bld compile run</pre>
+```bash
+./bld compile run
+```
+
 
 These also work:
 
 <br />
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">./bld jar
+```bash
+./bld jar
 ./bld uberjar
-./bld clean</pre>
+./bld clean
+```
+
 
 Java and RIFE2 powered {#h2-3-java-and-rife2-powered}
 -----------------------------------------------------

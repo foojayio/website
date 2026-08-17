@@ -33,7 +33,8 @@ Using the Executors factory class, we can create our thread pool; however, all t
 
 Let's see an example:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">package ca.bazlur;
+```java
+package ca.bazlur;
 
 import java.util.concurrent.Executors;
 import java.util.concurrent.LinkedBlockingDeque;
@@ -44,17 +45,18 @@ import java.util.concurrent.TimeUnit;
 public class Experiment {
 
   public static void main(String[] args) {
-    var threadPool = new ThreadPoolExecutor(5, 25, 100, TimeUnit.MILLISECONDS, new LinkedBlockingDeque&lt;&gt;(),
+    var threadPool = new ThreadPoolExecutor(5, 25, 100, TimeUnit.MILLISECONDS, new LinkedBlockingDeque<>(),
         Executors.defaultThreadFactory(), new AbortPolicy());
 
-    for (int i = 0; i &lt; 10; i++) {
-      threadPool.submit(() -&gt; System.out.println("Hello \uD83C\uDF0E"));
+    for (int i = 0; i < 10; i++) {
+      threadPool.submit(() -> System.out.println("Hello \uD83C\uDF0E"));
     }
 
     threadPool.shutdown();
   }
 }
-</pre>
+```
+
 
 In the above ThreadPool, the minimum threads count is 5, which is when we would create the Pool, 5 threads will be created immediately, and they will be kept around, waiting for tasks, even if they are idle. If we submit a task, these existing threads will pick it up.
 
@@ -98,8 +100,11 @@ In "[**Java Concurrency in Practice**](https://www.amazon.ca/Java-Concurrency-Pr
 
 For example- an application calls an API and then processes it. If we have 8 processors in the application server, and then on average, the response time of the API is 100ms and the processing time of the response is 20ms, then the ideal size of thread would be --
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">N = 8 * ( 1 + 100/20)
-  = 48</pre>
+```
+N = 8 * ( 1 + 100/20)
+  = 48
+```
+
 
 However, this is an oversimplification; adequate testing is always critical to figure out the number.
 

@@ -34,23 +34,29 @@ The problem in the code {#h2-0-the-problem-in-the-code}
 
 Here's a sample code to illustrate the issue:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">Stream.of("java.lang.String", "ch.frankel.blog.Dummy", "java.util.ArrayList")
-      .map(it -&gt; new ForNamer().apply(it))                                     // 1
-      .forEach(System.out::println);</pre>
+```java
+Stream.of("java.lang.String", "ch.frankel.blog.Dummy", "java.util.ArrayList")
+      .map(it -> new ForNamer().apply(it))                                     // 1
+      .forEach(System.out::println);
+```
+
 
 1. Doesn't compile: need to catch the checked `ClassNotFoundException`
 
 We must add a try/catch block to fix the compilation issue.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">Stream.of("java.lang.String", "ch.frankel.blog.Dummy", "java.util.ArrayList")
-      .map(it -&gt; {
+```java
+Stream.of("java.lang.String", "ch.frankel.blog.Dummy", "java.util.ArrayList")
+      .map(it -> {
           try {
               return Class.forName(it);
           } catch (ClassNotFoundException e) {
               throw new RuntimeException(e);
           }
       })
-      .forEach(System.out::println);</pre>
+      .forEach(System.out::println);
+```
+
 
 Adding the block defeats the purpose of easy-to-read pipelines.
 
@@ -59,22 +65,25 @@ Encapsulate the try/catch block into a class {#h2-1-encapsulate-the-try-catch-bl
 
 To get the readability back, we need to refactor the code to introduce a new class. IntelliJ IDEA even suggests a record:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">var forNamer = new ForNamer();                                                // 1
+```java
+var forNamer = new ForNamer();                                                // 1
 Stream.of("java.lang.String", "ch.frankel.blog.Dummy", "java.util.ArrayList")
       .map(forNamer::apply)                                                   // 2
       .forEach(System.out::println);
 
-record ForNamer() implements Function&lt;String, Class&lt;?&gt;&gt; {
+record ForNamer() implements Function<String, Class<?>> {
 
     @Override
-    public Class&lt;?&gt; apply(String string) {
+    public Class<?> apply(String string) {
         try {
             return Class.forName(string);
         } catch (ClassNotFoundException e) {
             return null;
         }
     }
-}</pre>
+}
+```
+
 
 1. Create a single record object
 2. Reuse it
@@ -107,10 +116,13 @@ Here's a small excerpt:
 
 The code finally becomes what we expected from the beginning:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">Stream&lt;String&gt; stream = Stream.of("java.lang.String", "ch.frankel.blog.Dummy", "java.util.ArrayList");
+```java
+Stream<String> stream = Stream.of("java.lang.String", "ch.frankel.blog.Dummy", "java.util.ArrayList");
 Failable.stream(stream)
         .map(Class::forName)                                                  // 1
-        .forEach(System.out::println);</pre>
+        .forEach(System.out::println);
+```
+
 
 Fixing compile-time errors is not enough {#h2-4-fixing-compile-time-errors-is-not-enough}
 -----------------------------------------------------------------------------------------
@@ -133,16 +145,19 @@ Imagine that we want a pipeline that collects both exceptions and classes. Here'
 
 It translates into the following code:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">Stream.of("java.lang.String", "ch.frankel.blog.Dummy", "java.util.ArrayList")
+```java
+Stream.of("java.lang.String", "ch.frankel.blog.Dummy", "java.util.ArrayList")
       .map(CheckedFunction1.liftTry(Class::forName))                          // 1
       .map(Try::toEither)                                                     // 2
-      .forEach(e -&gt; {
+      .forEach(e -> {
           if (e.isLeft()) {                                                   // 3
               System.out.println("not found:" + e.getLeft().getMessage());
           } else {
               System.out.println("class:" + e.get().getName());
           }
-      });</pre>
+      });
+```
+
 
 1. Wrap the call into a Vavr `Try`
 2. Transform the `Try` into an `Either` to keep the exception. If we had not been interested, we could have used an `Optional` instead
@@ -152,15 +167,18 @@ So far, we have stayed in the world of Java Streams. It works as expected until 
 
 Vavr does provide its own `Stream` class, which mimics the Java `Stream` API and adds additional features. Let's use it to rewrite the pipeline:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">var result = Stream.of("java.lang.String", "ch.frankel.blog.Dummy", "java.util.ArrayList")
+```java
+var result = Stream.of("java.lang.String", "ch.frankel.blog.Dummy", "java.util.ArrayList")
         .map(CheckedFunction1.liftTry(Class::forName))
         .map(Try::toEither)
         .partition(Either::isLeft)                                              // 1
-        .map1(left -&gt; left.map(Either::getLeft))                                // 2
-        .map2(right -&gt; right.map(Either::get));                                 // 3
+        .map1(left -> left.map(Either::getLeft))                                // 2
+        .map2(right -> right.map(Either::get));                                 // 3
 
-result._1().forEach(it -&gt; System.out.println("not found: " + it.getMessage())); // 4
-result._2().forEach(it -&gt; System.out.println("class: " + it.getName()));        // 4</pre>
+result._1().forEach(it -> System.out.println("not found: " + it.getMessage())); // 4
+result._2().forEach(it -> System.out.println("class: " + it.getName()));        // 4
+```
+
 
 1. Partition the `Stream` of `Either` in a tuple of two `Stream`
 2. Flatten the left stream from a `Stream` of `Either` to a `Stream` of `Throwable`

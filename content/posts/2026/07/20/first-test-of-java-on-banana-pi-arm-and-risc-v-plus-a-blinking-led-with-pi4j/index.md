@@ -20,7 +20,7 @@ enlighterjs: true
 frozen: false
 ---
 
-*** ** * ** ***
+
 
 As part of my 2026 learning goals around Java on RISC-V (see [this post about x86 versus ARM versus RISC-V](https://webtechie.be/post/2026-01-07-x86-arm-riscv/)), I've asked various suppliers to send me evaluation boards. I already published these:
 
@@ -95,7 +95,8 @@ I started with a lot of reserves... Both OS images are pretty outdated (2024 and
 
 The Zero boots in terminal mode, and after the first boot asks to create a root password, user account, and WiFi credentials. After that, it's ready to be used and accessible via SSH. I used a USB-C dongle to connect keyboard, mouse, and network to get started quickly. After doing the usual steps I used on the previous boards I tested, I can confirm that Java runs fine on the Banana Pi BPI-M4 Zero. I installed Java 25 (25.0.3-zulu) and JBang, and ran the `HelloWorld.java` and `JsonParsing.java` examples from the [Pi4J JBang repository](https://github.com/Pi4J/pi4j-jbang). The result is shown in the video.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">sudo apt update
+```
+sudo apt update
 sudo apt upgrade
 sudo apt install zip
 curl -s "https://get.sdkman.io" | bash
@@ -109,7 +110,9 @@ git clone https://github.com/Pi4J/pi4j-jbang.git
 cd pi4j-jbang
 cd basic
 java HelloWorld.java
-jbang JsonParsing.java  </pre>
+jbang JsonParsing.java
+```
+
 
 I also executed my [SBC Java benchmark test](/sbc/) so we can compare the performance of this board with other single-board-computers. Results below...
 
@@ -121,7 +124,8 @@ Sidenote: this board comes without a header, so I soldered a 40-pin header but s
 
 After some struggling with the user rights, using a script from the [Pi4J OS repository](https://github.com/Pi4J/pi4j-os/blob/main/script/setup-permissions.sh), I got passed exceptions thrown by the FFM plugin in Pi4J, but still got blocked with the following output. Probably a mismatch between GPIO addresses, or an outdated Linux kernel, something to figure out later... It's also strange that Pi4J recognizes this board as a Raspberry Pi 1 Model B, while it is a Banana Pi BPI-M4 Zero. Seems this Banana Pi has the same board code as the Raspberry Pi 1 Model B...
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ jbang RgbLed.java 
+```
+$ jbang RgbLed.java 
 [main] INFO com.pi4j.Pi4J - Pi4J library build info:
 [main] INFO com.pi4j.Pi4J -     Version: 4.0.2
 [main] INFO com.pi4j.Pi4J -     Timestamp: 2026-06-08T10:01:34Z
@@ -147,11 +151,14 @@ Exception in thread "main" com.pi4j.exception.Pi4JException: Error during call t
 Caused by: com.pi4j.exception.Pi4JException: Error during call to method 'call' with data '[9, 3238048773, LineInfo{name=()[], consumer=()[], offset=23, numAttrs=0, flags=0, attrs=[]}]': Invalid argument (22)
     at com.pi4j.plugin.ffm.common.Pi4JNativeContext.processError(Pi4JNativeContext.java:58)
     at com.pi4j.plugin.ffm.common.ioctl.IoctlNative.call(IoctlNative.java:103)
-    ... 8 more</pre>
+    ... 8 more
+```
+
 
 After some researching, I [found a newer OS for this board](https://armbian.com/boards/bananapim4zero) and downloaded a version with Xfce desktop from [here](https://dl.armbian.com/bananapim4zero/Noble_current_xfce). With this newer version of the OS, and the correctly configured user rights, we get another error. That's progress! 😉
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ jbang RgbLed.java 
+```
+$ jbang RgbLed.java 
 ...
 [main] INFO com.pi4j.boardinfo.util.BoardInfoHelper - Detected OS: Name: Linux, version: 6.18.33-current-sunxi64, architecture: aarch64
 ...
@@ -172,13 +179,16 @@ Exception in thread "main" com.pi4j.exception.Pi4JException: Error during call t
 Caused by: com.pi4j.exception.Pi4JException: Error during call to method 'call' with data '[9, 3260068871, LineRequest{offsets=[23], consumer=(pi4j.FFMDigitalOutput)[112, 105, 52, 106, 46, 70, 70, 77, 68, 105, 103, 105, 116, 97, 108, 79, 117, 116, 112, 117, 116], config=LineConfig{flags=8, numAttrs=0, attrs=[]}, numLines=1, eventBufferSize=0, fd=0}]': Unknown error 517 (517)
     at com.pi4j.plugin.ffm.common.Pi4JNativeContext.processError(Pi4JNativeContext.java:58)
     at com.pi4j.plugin.ffm.common.ioctl.IoctlNative.call(IoctlNative.java:103)
-    ... 8 more</pre>
+    ... 8 more
+```
+
 
 On a Raspberry Pi, the numbers you pass to Pi4J directly match the SoC's own "BCM" GPIO numbering, so pin 16 on the header is simply BCM 23, no translation needed. The [Banana Pi M4 Zero](https://docs.banana-pi.org/en/BPI-M4_Zero/BananaPi_BPI-M4_Zero) uses a different SoC (Allwinner H618) with its own GPIO controller and numbering scheme, so that shortcut doesn't apply, even though the board has the same 40-pin header layout as a Raspberry Pi Zero.
 
 The first clue was Banana Pi's own [pinout table](https://docs.banana-pi.org/en/BPI-M4_Zero/BananaPi_BPI-M4_Zero#_gpio_pin_define), which lists physical pin 16 as `PI15` = GPIO bank `I`, pin `15`. Allwinner chips group their GPIOs into lettered banks of 32 pins each (`PA0`-`PA31`, `PB0`-`PB31`, and so on --- see [linux-sunxi.org/GPIO](https://linux-sunxi.org/GPIO) for the general convention), and the Linux kernel exposes this hardware as character devices under `/dev/gpiochip*`. Running `gpioinfo` on the board showed two chips: `gpiochip0` with 32 lines, and `gpiochip1` with 288 lines. 288 is exactly 9 banks of 32, which matches banks A through I. This indicates that `gpiochip1` is the controller behind the 40-pin header, not `gpiochip0`.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ sudo apt install -y gpiod
+```
+$ sudo apt install -y gpiod
 $ gpioinfo
 gpiochip0 - 32 lines:
     line   0:      unnamed       kernel   input  active-high [used]
@@ -189,14 +199,19 @@ gpiochip1 - 288 lines:
     line   0:      unnamed       unused   input  active-high 
     line   1:      unnamed       unused   input  active-high 
     line   2:      unnamed       unused   input  active-high 
-    ...</pre>
+    ...
+```
+
 
 To find the pin number to use in the code, we need to do some calculation: the index of the bank (A=0, B=1, C=2, ... I=8) multiplied by 32, plus the pin number within that bank, to calculate the absolute line offset on the chip. For `PI15`, that's `8 × 32 + 15 = 271`.
 
 We can verify this with [`libgpiod`](https://packages.debian.org/bookworm/gpiod), a command-line tools to toggle GPIO lines. As we already installed `gpiod`, we can use `gpioset` to set a line high or low. For example, to toggle the red LED connected to physical pin 16, we can run:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ gpioset gpiochip1 271=1   # Red on
-$ gpioset gpiochip1 271=0   # Red off</pre>
+```
+$ gpioset gpiochip1 271=1   # Red on
+$ gpioset gpiochip1 271=0   # Red off
+```
+
 
 The red LED turned on and off, confirming line 271 on `gpiochip1` really is physical pin 16. I repeated the same process for green (`PI16` → line 272) and blue --- except blue's original pin (physical pin 22) turned out to be a 3.3V power pin on this board, not a GPIO at all. So I moved that wire to a real GPIO pin (physical pin 23, `PH6`, bank H → `7 × 32 + 6 = 230`) before it could work.
 
@@ -208,7 +223,8 @@ The red LED turned on and off, confirming line 271 on `gpiochip1` really is phys
 
 After testing these values again with `gpioset`, I could modify the JBang `RgbLed.java` script. We need to add `.bus(1)` to target `gpiochip1`, and change the BCM values with `.bcm(271)`. These are the lines to be added/changed in the [original code](https://github.com/Pi4J/pi4j-jbang/blob/main/digital/RgbLed.java):
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">import com.pi4j.io.gpio.digital.DigitalOutput;
+```
+import com.pi4j.io.gpio.digital.DigitalOutput;
 import com.pi4j.io.gpio.digital.DigitalState;
 
 ...
@@ -238,7 +254,9 @@ void main() throws Exception {
             .shutdown(DigitalState.LOW).initial(DigitalState.LOW));
     ...
     // Keep the remaining code the same
-}</pre>
+}
+```
+
 
 Now executing `jbang RgbLed.java` finally worked, and the RGB LED started blinking in the expected colors. Success! This is my very first working Pi4J example on a non-Raspberry Pi board!!! One of my 2026-goals is achieved 🙂
 

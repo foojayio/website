@@ -120,14 +120,17 @@ I had some harsh things to say about method breakpoints before. They're ineffici
 
 E.g. in this method:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public Set&lt;PetDTO&gt; findPetDTOSet(Integer vetId) {
-  List&lt;Visit&gt; visits = visitRepository.findByVetId(vetId);
-  return visits.stream().distinct().map(visit -&gt; {
+```java
+public Set<PetDTO> findPetDTOSet(Integer vetId) {
+  List<Visit> visits = visitRepository.findByVetId(vetId);
+  return visits.stream().distinct().map(visit -> {
      Pet current = petRepository.findById(visit.getPetId());
      return new PetDTO(current.getName(), current.getOwner().getLastName(),
            visitRepository.findByPetId(current.getId()));
   }).collect(Collectors.toSet());
-}</pre>
+}
+```
+
 
 If we place a breakpoint on the last line, we will miss the functionality of the method. But if we place a method breakpoint that tracks method exit, it will hit after everything in the method was executed.
 

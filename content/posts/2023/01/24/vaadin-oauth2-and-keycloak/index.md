@@ -28,8 +28,11 @@ Keycloak {#h2-0-keycloak}
 First, we must start Keycloak and configure a realm. The easiest way is to start Keycloak with Docker.   
 *Caution: This is just for development purposes. Don't use the setup in production.*
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">docker run -d -p 8180:8080 -e KEYCLOAK_ADMIN=admin -e KEYCLOAK_ADMIN_PASSWORD=admin \ 
-       quay.io/keycloak/keycloak:20.0.1 start-dev</pre>
+```bash
+docker run -d -p 8180:8080 -e KEYCLOAK_ADMIN=admin -e KEYCLOAK_ADMIN_PASSWORD=admin \ 
+       quay.io/keycloak/keycloak:20.0.1 start-dev
+```
+
 
 Now you can log in to the admin console: <http://localhost:8180/admin> (user: admin, password: admin)
 
@@ -89,7 +92,8 @@ Vaadin Application with Security Configuration {#h2-1-vaadin-application-with-se
 
 First, we need to extend VaadinWebSecurity to set up the Vaadin Spring security integration. There we override the configure method.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@Override
+```java
+@Override
 protected void configure(HttpSecurity http) throws Exception {
     http.authorizeRequests().requestMatchers(new AntPathRequestMatcher("/images/*.png")).permitAll();
 
@@ -100,16 +104,19 @@ protected void configure(HttpSecurity http) throws Exception {
             .logoutSuccessUrl("/");
 
     super.configure(http);
-}</pre>
+}
+```
+
 
 Starting from line 5, the generic OAuth2 login is configured, and a special LogoutHandler for Keycloak is configured. The LogoutHandler uses the Keycloak REST API to log out.
 
 As we configured to map the roles to the userinfo we now need to map these roles to GrantedAuthority. The roles will be in the claim "realm_access".
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@Bean
+```java
+@Bean
 public GrantedAuthoritiesMapper userAuthoritiesMapperForKeycloak() {
-    return authorities -&gt; {
-        Set&lt;GrantedAuthority&gt; mappedAuthorities = new HashSet&lt;&gt;();
+    return authorities -> {
+        Set<GrantedAuthority> mappedAuthorities = new HashSet<>();
         var authority = authorities.iterator().next();
 
         if (authority instanceof OidcUserAuthority oidcUserAuthority) {
@@ -117,23 +124,28 @@ public GrantedAuthoritiesMapper userAuthoritiesMapperForKeycloak() {
 
             if (userInfo.hasClaim("realm_access")) {
                 var realmAccess = userInfo.getClaimAsMap("realm_access");
-                var roles = (Collection&lt;String&gt;) realmAccess.get("roles");
+                var roles = (Collection<String>) realmAccess.get("roles");
                 mappedAuthorities.addAll(roles.stream()
-                        .map(role -&gt; new SimpleGrantedAuthority("ROLE_" + role.toUpperCase()))
+                        .map(role -> new SimpleGrantedAuthority("ROLE_" + role.toUpperCase()))
                         .toList());
             }
         }
         return mappedAuthorities;
     };
-}</pre>
+}
+```
+
 
 Finally, we must add the OAuth2 configuration in the application.properties file:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">spring.security.oauth2.client.registration.keycloak.client-id=vaadin
+```
+spring.security.oauth2.client.registration.keycloak.client-id=vaadin
 spring.security.oauth2.client.registration.keycloak.authorization-grant-type=authorization_code
 spring.security.oauth2.client.registration.keycloak.scope=openid
 spring.security.oauth2.client.provider.keycloak.issuer-uri=http://localhost:8180/realms/vaadin
-spring.security.oauth2.client.provider.keycloak.user-name-attribute=preferred_username</pre>
+spring.security.oauth2.client.provider.keycloak.user-name-attribute=preferred_username
+```
+
 
 Now you can start the application and open <http://localhost:8080>.
 ![](https://martinelli.ch/wp-content/uploads/2022/11/image-1.png)

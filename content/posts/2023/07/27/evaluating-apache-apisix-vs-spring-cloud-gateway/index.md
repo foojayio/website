@@ -37,11 +37,14 @@ All API Gateways that I know about provide a Docker image. For example, [Apache 
 
 Spring Cloud Gateway's approach is radically different. It's just a regular dependency on a regular Spring project:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="xml">&lt;dependency&gt;
-      &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;
-      &lt;artifactId&gt;spring-cloud-starter-gateway&lt;/artifactId&gt;
-      &lt;version&gt;4.0.6&lt;/version&gt;
-&lt;/dependency&gt;</pre>
+```xml
+<dependency>
+      <groupId>org.springframework.cloud</groupId>
+      <artifactId>spring-cloud-starter-gateway</artifactId>
+      <version>4.0.6</version>
+</dependency>
+```
+
 
 You can leverage all standard ways to create the project, including the popular [start.spring.io](https://start.spring.io/#!type=maven-project&amp;language=kotlin&amp;platformVersion=3.1.0&amp;packaging=jar&amp;jvmVersion=17&amp;groupId=ch.frankel.blog&amp;artifactId=gateway&amp;name=gateway&amp;description=Gateway%20Demo%20project%20for%20Spring%20Boot&amp;packageName=ch.frankel.blog.gateway&amp;dependencies=cloud-gateway), as for any regular Spring project. This developer-oriented approach is pervasive in everything related to Spring Cloud Gateway.
 
@@ -67,7 +70,8 @@ In traditional mode, APISIX stores its configuration in [etcd](https://etcd.io/)
 
 Here's a sample:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml">upstreams:
+```yaml
+upstreams:
   - id: 1
     nodes:
       "catalog:8080": 1
@@ -91,21 +95,27 @@ routes:
 global_rules:
   plugins:
     prometheus:
-      prefer_name: true</pre>
+      prefer_name: true
+```
+
 
 Spring Cloud Gateway supports all configuration options of regular Spring projects, and they are [many](https://docs.spring.io/spring-boot/docs/3.1.x/reference/html/features.html#features.external-config). However, "flat" configurations, such as `.properties` file(s) and environment variables, are error-prone:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">spring.cloud.gateway.routes[0].id=products
+```
+spring.cloud.gateway.routes[0].id=products
 spring.cloud.gateway.routes[0].uri=http://catalog:8080
 spring.cloud.gateway.routes[0].predicates[0]=Path=/v1/products*
 spring.cloud.gateway.routes[1].id=pricing
 spring.cloud.gateway.routes[1].uri=http://pricing:8080
 spring.cloud.gateway.routes[1].predicates[0]=Path=/prices*
-spring.cloud.gateway.routes[1].predicates[1]=Header=Referer, http://catalog.me</pre>
+spring.cloud.gateway.routes[1].predicates[1]=Header=Referer, http://catalog.me
+```
+
 
 IMHO, one should stick to a hierarchical configuration, such as YAML - and remember that I'm not too fond of YAML. Here's the same configuration as above:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml">spring.cloud.gateway.routes:
+```yaml
+spring.cloud.gateway.routes:
   - id: products
     uri: http://catalog:8080
     predicates:
@@ -116,7 +126,9 @@ IMHO, one should stick to a hierarchical configuration, such as YAML - and remem
     uri: http://pricing:8080
     predicates:
       - Path=/prices*
-      - Header=Referer, http://catalog.me</pre>
+      - Header=Referer, http://catalog.me
+```
+
 
 I believe the YAML version leaves less space for errors, especially regarding indices.
 
@@ -155,19 +167,25 @@ Observability implementations differ wildly between Spring Cloud Gateway and Apa
 
 The first relies on [the Actuator](https://docs.spring.io/spring-boot/docs/3.1.x/reference/html/actuator.html), which offers plenty of observability-related features. To use it in any Spring Boot project, just add the dependency:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="xml">&lt;dependency&gt;
-    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
-    &lt;artifactId&gt;spring-boot-starter-actuator&lt;/artifactId&gt;
-    &lt;version&gt;3.1.0&lt;/version&gt;
-&lt;/dependency&gt;</pre>
+```xml
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-actuator</artifactId>
+    <version>3.1.0</version>
+</dependency>
+```
+
 
 To serve metrics for Prometheus consumption, add the following Micrometer dependency:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="xml">&lt;dependency&gt;
-    &lt;groupId&gt;io.micrometer&lt;/groupId&gt;
-    &lt;artifactId&gt;micrometer-registry-prometheus&lt;/artifactId&gt;
-    &lt;version&gt;1.11.0&lt;/version&gt;
-&lt;/dependency&gt;</pre>
+```xml
+<dependency>
+    <groupId>io.micrometer</groupId>
+    <artifactId>micrometer-registry-prometheus</artifactId>
+    <version>1.11.0</version>
+</dependency>
+```
+
 
 On the other hand, Apache APISIX uses the same plugin system for features for observability:
 

@@ -52,15 +52,19 @@ Panama's Arena API provides deterministic resource management for off-heap memor
 
 Different Arena implementations accommodate various usage patterns. The confined Arena ensures single-thread access. The shared Arena allows multiple threads to access memory segments. The global Arena addresses cases where memory segments need to outlive their creating threads. The Auto Arena uses the Garbage collector to deallocate segments. The confined and shared arena offer an more explicit lifetime than global and auto. Creating an Arena can be done as is shown in the following example.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">try(Arena arena = Arena.ofConfined()){
+```java
+try(Arena arena = Arena.ofConfined()){
     MemorySegment memorySegment = arena.allocate(1024);
-}</pre>
+}
+```
+
 
 The `Arena` is active inside the try-with-resource statement. This means the MemorySegments created inside of it are only available inside that scope and will be freed when the arena is closed. MemorySegments serve as Panama's primary abstraction for working with off-heap memory, representing a contiguous region of memory with well-defined boundaries and lifecycle. Unlike direct ByteBuffers, MemorySegments are explicitly bound to an Arena, creating a clear ownership model.
 
 For structured data, Panama provides the MemoryLayout API to describe complex memory organizations including structs, arrays, and unions. This enables safe manipulation of complex data structures without resorting to error prone pointer arithmetic. In the following example a `StructLayout` is created with different kinds of values. The values can be accessed using a `VarHandle`.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">AddressLayout C_POINTER = ValueLayout.ADDRESS
+```java
+AddressLayout C_POINTER = ValueLayout.ADDRESS
         .withTargetLayout(MemoryLayout.sequenceLayout(Long.MAX_VALUE, JAVA_BYTE));
 
 StructLayout requestLayout = MemoryLayout.structLayout(
@@ -70,7 +74,9 @@ StructLayout requestLayout = MemoryLayout.structLayout(
                 ValueLayout.JAVA_BOOLEAN.withName("read"))
         .withName("request");
 
-VarHandle idHandle = requestLayout.varHandle(MemoryLayout.PathElement.groupElement("id"));</pre>
+VarHandle idHandle = requestLayout.varHandle(MemoryLayout.PathElement.groupElement("id"));
+```
+
 
 The integration of these concepts creates an approach to memory management that maintains Java's safety guarantees while providing the flexibility needed for native interoperability.
 
@@ -81,18 +87,22 @@ Panama's approach to function calls builds upon Java's existing metaprogramming 
 
 For downcalls, Panama's Linker API creates method handles that invoke native functions. This process begins with obtaining a SymbolLookup to locate native symbols within libraries. Once found, the Linker transforms these symbols into method handles using FunctionDescriptors that specify parameter and return types.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">MethodHandle malloc = linker.downcallHandle(
+```java
+MethodHandle malloc = linker.downcallHandle(
         linker.defaultLookup().find("malloc").orElseThrow(),
         FunctionDescriptor.of(ADDRESS, JAVA_LONG)
 );
 
-malloc.invokeExact(size);</pre>
+malloc.invokeExact(size);
+```
+
 
 This description-based approach eliminates the verbose boilerplate associated with JNI. Instead of writing C code to bridge between Java and native functions, developers describe the function signature using Java code. This not only reduces error potential but also enables better tooling support. You will get an exception if you call the method with incorrect typing.
 
 Upcalls follow a similar pattern but in reverse, with Java methods wrapped as function pointers that native code can invoke. This capability is particularly valuable when working with callback-based APIs, where native code needs to notify Java about events or completion status. In the following example, a down call and an up call are made for the native signal method.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public static void main(String[] args) throws Throwable {
+```java
+public static void main(String[] args) throws Throwable {
 
     final var linker = Linker.nativeLinker();
 
@@ -121,7 +131,9 @@ Upcalls follow a similar pattern but in reverse, with Java methods wrapped as fu
 
 static void handleSignal(int signal) {
     System.out.println("Received signal: " + signal);
-}</pre>
+}
+```
+
 
 Both upcalls and downcalls benefit from Panama's unified type mapping system, which automatically handles conversion between Java and native types. When passing complex data structures to native functions, developers can use MemoryLayout to describe the structure and MemorySegment to allocate memory. What is great about this approach is that it is a complete shift from JNI. Rather than treating native code as a separate environment with its own rules, Panama extends Java's programming model to more natural interaction with native code. Now that we understand how Panama enables safe and efficient native interoperability, let's examine how it can be used with io_uring.
 
@@ -145,7 +157,8 @@ The implementation involves initializing an io_uring instance, preparing a read 
 
 The following pattern demonstrates how we bridge Java and io_uring through Panama to perform a read operation. First, we initialize the io_uring instance and allocate memory for our buffer within a confined Arena to ensure proper resource management. We then prepare a Submission Queue Entry (SQE) that describes our read operation, including the file descriptor, buffer location, size, and offset. After submitting this request to io_uring with io_uring_submit, we wait for the operation to complete using io_uring_wait_cqe. This is a blocking method that will wait for a completion. Once completed, we can extract the result from the Completion Queue Entry (CQE) and process the data that was read into our buffer. Finally, we mark the completion as seen and let the Arena's close method cleanup the memory segments. This basic pattern forms the foundation for more complex I/O operations while maintaining both Java's safety guarantees and io_uring's performance benefits.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">try (Arena arena = Arena.ofConfined()) {
+```java
+try (Arena arena = Arena.ofConfined()) {
     // Create and initialize the ring
     MemorySegment ring = arena.allocate(ring_layout);
     int ret = (int) io_uring_queue_init.invokeExact(10, ring, 0);
@@ -170,7 +183,9 @@ The following pattern demonstrates how we bridge Java and io_uring through Panam
 
     // Process data and cleanup
     io_uring_cqe_seen.invokeExact(ring, cqePtr);
-}</pre>
+}
+```
+
 
 For applications that perform numerous read operations, such as web servers, and databases this integration delivers potential performance improvements by reducing system call overhead and enabling asynchronous I/O. Another benefit is that io_uring supports sockets, streamlining the process of reading data and sending it to clients without copying data unnecessarily. While this basic implementation works, we can further optimize it by examining some of the performance characteristics and challenges when bridging Java and native code.
 
@@ -181,7 +196,8 @@ Using a native library on its own can be beneficial and provide performance impr
 
 When an Arena allocates memory using the allocateSegment function you get a continuous region of memory that is filled with zeroes. This is a safe segment of memory the application can use. However, the actual creation of a segment is quite an expensive operation compared to using `malloc` or `calloc`. These two native methods are a lot quicker when you need a continuous region of memory. To show you how much faster I created a benchmark method that allocated an N number of bytes and copied a string of N length into that segment. In the following output, you can see how much faster these native methods are.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">A higher score is better
+```java
+A higher score is better
 Benchmark                                     (memory size)  Mode        Score                 Units
 memoryAllocation.MemoryAllocation.arena                  64  thrpt    5  17388.133 ± 1075.514  ops/ms
 memoryAllocation.MemoryAllocation.arena                 512  thrpt    5  13741.243 ± 1638.346  ops/ms
@@ -209,13 +225,16 @@ memoryAllocation.MemoryAllocation.malloc                512  thrpt    5  49989.7
 memoryAllocation.MemoryAllocation.malloc               1024  thrpt    5  39568.303 ±   47.276  ops/ms
 memoryAllocation.MemoryAllocation.malloc               4096  thrpt    5  10834.230 ±  159.482  ops/ms
 memoryAllocation.MemoryAllocation.malloc              16384  thrpt    5   4842.788 ±   30.092  ops/ms
-memoryAllocation.MemoryAllocation.malloc              32768  thrpt    5   1917.703 ±  302.428  ops/ms</pre>
+memoryAllocation.MemoryAllocation.malloc              32768  thrpt    5   1917.703 ±  302.428  ops/ms
+```
+
 
 As you can see from the output generated by JMH benchmarks using native methods can allocate memory faster than an Arena can. If your use case requires the lots of memory allocation it can be beneficial to switch to native methods.
 
 There are two ways to use this native memory. We can tie its lifetime to an arena, or you can manage the lifetime of these segments yourself and free them when necessary. The first option gives you more safety while the latter gives you more control over resources. Calling free() with a memorySegment as parameter is easy enough, so let's explore how we can use malloc and calloc in a safe way using the Arenas that project Panama provides.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public class AllocArena implements Arena {
+```java
+public class AllocArena implements Arena {
 
     private static final MethodHandle malloc;
     private static final MethodHandle calloc;
@@ -234,7 +253,7 @@ There are two ways to use this native memory. We can tie its lifetime to an aren
 
     @Override
     public MemorySegment allocate(long byteSize, long byteAlignment) {
-        return ((MemorySegment) malloc.invokeExact(size)).reinterpret(size, arena, m -&gt; free(m));
+        return ((MemorySegment) malloc.invokeExact(size)).reinterpret(size, arena, m -> free(m));
     }
 
     @Override
@@ -246,18 +265,23 @@ There are two ways to use this native memory. We can tie its lifetime to an aren
     public void close() {
         arena.close();
     }
-}</pre>
+}
+```
+
 
 The arena overrides the allocation method. Doing so we can use malloc or calloc to allocate a memory segment. Calloc and malloc return a pointer to a contiguous region of memory. this pointer is an MemorySegment with a zero length, so we can't use it directly. To make it usable we have to call reinterpret which takes as a parameter the new size, and optionally an arena and cleaning method. From the client's perspective, this arena doesn't look or behave differently, just the allocation happens using malloc.
 
 Using Native memory is not the only way to pass values to native code. There is also the option to pass the address of heap-backed memory to native code. The benefit of doing so is that it saves you from doing a memory allocation but also having to manage that segment's lifetime. All of this responsibility is handed to Java. To be able to pass heap-backed memory to a native call you need to mark a method as critical using the Linker. This option is only meant for calls that have a very short lifetime. It's also not meant to be used to create callbacks. What happens behind the scenes is that Java will create a temporary address for that value and pass it to the native code. In the following example, you see how to mark methods as critical and use them.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">open = linker.downcallHandle(
+```java
+open = linker.downcallHandle(
         linker.defaultLookup().find("open").orElseThrow(),
         FunctionDescriptor.of(JAVA_INT, ADDRESS, JAVA_INT, JAVA_INT),
         Linker.Option.critical(true));
 
-open.invokeExact(MemorySegment.ofArray((filePath).getBytes()), flags, mode);</pre>
+open.invokeExact(MemorySegment.ofArray((filePath).getBytes()), flags, mode);
+```
+
 
 Using `Linker.Option.critical(true)` enables the application to use heap memory. The `invokeExact` method creates a heap-backed memorySegment of a String. This should really only be used for methods that are so fast that copying data really hurts performance.
 
@@ -270,9 +294,10 @@ Virtual Threads face a significant limitation with file I/O operations: pinning.
 
 This only works for async workloads, but the trick to prevent pinning is to yield a virtual thread before making a pinning call. The virtual threads will yield and an event loop running in another thread will wake the virtual threads up. To get this behaviour you need a polling thread for the completion queue and futures. The future will block the virtual thread till the polling threads wake it up with a result. The next example shows you the essence of what is needed for this behavior.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public final class BlockingReadResult {
+```java
+public final class BlockingReadResult {
 
-    private final CompletableFuture&lt;Void&gt; future = new CompletableFuture&lt;&gt;();
+    private final CompletableFuture<Void> future = new CompletableFuture<>();
     private MemorySegment buffer;
 
     BlockingReadResult(long id) {
@@ -288,18 +313,23 @@ This only works for async workloads, but the trick to prevent pinning is to yiel
         return buffer;
     }
 
-    // code continues</pre>
+    // code continues
+```
+
 
 The code executed by the virtual thread will call getBuffer yielding the virtual thread on `CompletableFuture.get()`. The thread will now wait for a result from the polling thread. The polling thread that checks if values are available looks like the following example. It's a while loop that will set the result of the `CompletableFuture` allowing the virtual thread to continue.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">while (running) {
-    final List&lt;Result&gt; results = jUring.peekForBatchResult(100);
+```java
+while (running) {
+    final List<Result> results = jUring.peekForBatchResult(100);
 
-    results.forEach(result -&gt; {
+    results.forEach(result -> {
         BlockingResult request = requests.remove(result.getId());
         request.setResult(result);
     });
-}</pre>
+}
+```
+
 
 The approach is pretty straightforward and allows you to yield virtual threads for operations that do not support virtual threads. The upside is that virtual threads will yield, the downside is that you will need an event loop to wake up the threads. If this is beneficial to you application depends on the workload.
 

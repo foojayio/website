@@ -81,14 +81,15 @@ The process should, for each file:
 
 Here's the implementation of the above:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="kotlin">class FlattenStructure(private val rootPackage: String) : Recipe() {                   //1
+```kotlin
+class FlattenStructure(private val rootPackage: String) : Recipe() {                   //1
 
     override fun getDisplayName(): String = "Flatten Kotlin package directory structure" //2
     override fun getDescription(): String =                                            //2
         "Move Kotlin files to match idiomatic layout by omitting the root package according to the official recommendation."
 
-    override fun getVisitor(): TreeVisitor&lt;*, ExecutionContext&gt; {
-        return object : KotlinIsoVisitor&lt;ExecutionContext&gt;() {
+    override fun getVisitor(): TreeVisitor<*, ExecutionContext> {
+        return object : KotlinIsoVisitor<ExecutionContext>() {
             override fun visitCompilationUnit(cu: K.CompilationUnit, ctx: ExecutionContext): K.CompilationUnit {
                 val packageName = cu.packageDeclaration?.packageName ?: return cu      //3
                 if (!packageName.startsWith(rootPackage)) return cu                    //4
@@ -103,7 +104,9 @@ Here's the implementation of the above:
             }
         }
     }
-}</pre>
+}
+```
+
 
 1. Parameterize the recipe with the root package
 2. Attributes for documentation purposes
@@ -122,7 +125,8 @@ OpenRewrite's API lends itself to testing. It offers parsers in the different la
 
 I chose to use JUnit parameterized test, but that's not relevant:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="kotlin">class FlattenStructureTest {
+```kotlin
+class FlattenStructureTest {
 
     @ParameterizedTest
     @MethodSource("testData")
@@ -153,7 +157,8 @@ I chose to use JUnit parameterized test, but that's not relevant:
 
     // Provide the file content, the path, the root, and the expected path
 }
-</pre>
+```
+
 
 1. Parsers offer a builder pattern API
 2. Do the parsing
@@ -165,13 +170,15 @@ I chose to use JUnit parameterized test, but that's not relevant:
 
 We can now use the recipe:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml">---
+```yaml
+---
 type: specs.openrewrite.org/v1beta/recipe
 name: ch.frankel.MyMigration
 recipeList:
   - ch.frankel.openrewrite.kotlin.FlattenStructure:
       rootPackage: com.acme
-</pre>
+```
+
 
 Potential future works {#h2-4-potential-future-works}
 -----------------------------------------------------
@@ -194,6 +201,6 @@ The complete source code for this post can be found on GitHub.
 * [Introduction to OpenRewrite](https://docs.openrewrite.org/)
 * [Writing a Java refactoring recipe](https://docs.openrewrite.org/authoring-recipes/writing-a-java-refactoring-recipe)
 
-*** ** * ** ***
+
 
 *Originally published on [A Java Geek](https://blog.frankel.ch/openrewrite-recipes/1/) on June 8^th^, 2025*

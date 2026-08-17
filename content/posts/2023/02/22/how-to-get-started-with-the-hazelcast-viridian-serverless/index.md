@@ -68,7 +68,8 @@ Before you begin:
   6. In Cluster Details, click Management Center, and then from the top toolbar click SQL Browser.
   7. Paste the following command into the SQL browser and execute it.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">__key VARCHAR,
+```
+__key VARCHAR,
 
 country VARCHAR,
 
@@ -76,7 +77,9 @@ city VARCHAR,
 
 population INT)
 
-type IMap OPTIONS('keyFormat'='varchar', 'valueFormat'='json-flat');</pre>
+type IMap OPTIONS('keyFormat'='varchar', 'valueFormat'='json-flat');
+```
+
 
 ### **Step 3. Query the Cache with SQL** {#h3-3-step-3-query-the-cache-with-sql}
 
@@ -84,37 +87,56 @@ Now that you have some data in your cluster, you can query it, using SQL. If you
 
 * Execute the following SELECT statement to query all data in the map.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">SELECT * FROM cities;</pre>
+```
+SELECT * FROM cities;
+```
+
 
 The results are in a random order because the data is distributed across the cluster.
 
 * Order the results by the key.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">SELECT * FROM cities ORDER BY __key;</pre>
+```
+SELECT * FROM cities ORDER BY __key;
+```
+
 
 Now you see the results start from key 1 and end with key 8.
 
 * Query only the countries by filtering on the countries column.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">SELECT country FROM cities;</pre>
+```
+SELECT country FROM cities;
+```
+
 
 * Query only the cities by filtering on the cities column.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">SELECT city FROM cities;</pre>
+```
+SELECT city FROM cities;
+```
+
 
 * Change the output to display cities first in alphabetical order.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">SELECT city, country FROM cities ORDER BY city;</pre>
+```
+SELECT city, country FROM cities ORDER BY city;
+```
+
 
 * Use a filter to display only countries where the name of the city is at least 11 characters long.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">SELECT country FROM cities WHERE LENGTH(city) &gt;= 11;</pre>
+```
+SELECT country FROM cities WHERE LENGTH(city) >= 11;
+```
+
 
 * Use another filter to display only cities beginning with the letter 'L' where the length is greater than 6.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">SELECT city FROM cities WHERE city LIKE 'L%' AND LENGTH(city) &gt; 6;
+```
+SELECT city FROM cities WHERE city LIKE 'L%' AND LENGTH(city) > 6;
+```
 
-</pre>
 
 ### **Summary** {#h3-4-summary}
 

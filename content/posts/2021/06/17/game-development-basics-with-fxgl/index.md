@@ -43,7 +43,8 @@ In FXGL, any input trigger (keyboard, mouse or virtual) is captured internally a
 
 Those states correspond to the user pressing, holding and releasing a trigger. This 3-state system allows us to provide an easy high-level API for handling any type of input. Consider a `UserAction` for hitting a golf ball:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">UserAction hitBall = new UserAction("Hit") {
+```java
+UserAction hitBall = new UserAction("Hit") {
     @Override
     protected void onActionBegin() {
         // action just started (key has just been pressed), play swinging animation
@@ -58,16 +59,21 @@ Those states correspond to the user pressing, holding and releasing a trigger. T
     protected void onActionEnd() {
         // action finished (key is released), play hitting animation based on swing power
     }
-};</pre>
+};
+```
+
 
 Now that we have created an action `hitBall`, we can ask the input object to bind it to `KeyCode.F`:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">@Override
+```java
+@Override
 protected void initInput() {
     Input input = getInput();
 
     input.addAction(hitBall, KeyCode.F);
-}</pre>
+}
+```
+
 
 ### Update {#h3-2-update}
 
@@ -97,21 +103,30 @@ In general, there are two common ways to render an object: using some form of an
 
 In FXGL, in order to display an entity, you need to configure and attach its view. This is done via `ViewComponent`, as follows:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">// this can be any JavaFX node
+```java
+// this can be any JavaFX node
 Node node = ...
 
-entity.getViewComponent().addChild(node);</pre>
+entity.getViewComponent().addChild(node);
+```
+
 
 Most of the time you want to use an image as the view. There is a `Texture` class which allows you to do just that, besides it is also a JavaFX node:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">Node node = FXGL.texture("player.png"); 
-// same as above</pre>
+```java
+Node node = FXGL.texture("player.png"); 
+// same as above
+```
+
 
 Alternatively, the entity builder provides static methods to make building entities easier, including setting their view:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">var entity = FXGL.entityBuilder()
+```java
+var entity = FXGL.entityBuilder()
                  .view("player.png")
-                 .build();</pre>
+                 .build();
+```
+
 
 Conclusion {#h2-4-conclusion}
 -----------------------------

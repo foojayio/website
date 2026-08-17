@@ -57,13 +57,16 @@ The `java.util.stream` package includes the Stream interface, which encompasses 
 
 You can access various types of Stream such as **IntStream** , **LongStream** , and **DoubleStream**.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public interface Stream&lt;T&gt; extends BaseStream&lt;T,Stream&lt;T&gt;&gt;
+```java
+public interface Stream<T> extends BaseStream<T,Stream<T>>
 
-public interface IntStream extends BaseStream&lt;Integer,IntStream&gt;
+public interface IntStream extends BaseStream<Integer,IntStream>
 
-public interface LongStream extends BaseStream&lt;Long,LongStream&gt;
+public interface LongStream extends BaseStream<Long,LongStream>
 
-public interface DoubleStream extends BaseStream&lt;Double,DoubleStream&gt;</pre>
+public interface DoubleStream extends BaseStream<Double,DoubleStream>
+```
+
 
 IntStream specializes in handling elements of primitive int type.
 
@@ -78,67 +81,87 @@ The streams mentioned above are suitable for both sequential and parallel aggreg
 
 **map:** Produces a stream containing the outcomes of implementing the specified function to the elements within the stream.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&lt;R&gt; Stream&lt;R&gt; map(Function&lt;? super T, ? extends R&gt; mapper);
+```
+<R> Stream<R> map(Function<? super T, ? extends R> mapper);
 
-List&lt;Integer&gt; numbers = List.of(1, 2, 3, 4, 5);
+List<Integer> numbers = List.of(1, 2, 3, 4, 5);
 numbers.stream().map(Math::sqrt) // squaring each of the sequence element and mapping here
                 .forEach(System.out::println);
-</pre>
+```
+
 
 **mapToInt:** Generates an IntStream containing the outcomes of implementing the specified function to the elements within the stream.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">IntStream mapToInt(ToIntFunction&lt;? super T&gt; mapper);
+```
+IntStream mapToInt(ToIntFunction<? super T> mapper);
 
-List&lt;String&gt; languages = List.of("Java", "Kotlin", "Scala");
+List<String> languages = List.of("Java", "Kotlin", "Scala");
 IntStream wordsLength = languages.stream().mapToInt(String::length);
-System.out.println("Sum of the words length: " + wordsLength.sum());</pre>
+System.out.println("Sum of the words length: " + wordsLength.sum());
+```
+
 
 **mapToLong:** Creates a LongStream containing the outcomes of implementing the specified function to the elements within the stream.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">LongStream mapToLong(ToLongFunction&lt;? super T&gt; mapper);
+```
+LongStream mapToLong(ToLongFunction<? super T> mapper);
 
-List&lt;String&gt; prices = List.of("900", "1800", "2700");
+List<String> prices = List.of("900", "1800", "2700");
 LongStream sumOfPrices = prices.stream().mapToLong(Long::parseLong);
-System.out.println("Sum of the prices: " + sumOfPrices.sum());</pre>
+System.out.println("Sum of the prices: " + sumOfPrices.sum());
+```
+
 
 **mapToDouble:** Yields a DoubleStream containing the outcomes of implementing the specified function to the elements within the stream.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">DoubleStream mapToDouble(ToDoubleFunction&lt;? super T&gt; mapper);
+```
+DoubleStream mapToDouble(ToDoubleFunction<? super T> mapper);
 
-List&lt;Double&gt; pricesOne = List.of(22.5, 23.0, 24.5, 27.0, 38.0);
+List<Double> pricesOne = List.of(22.5, 23.0, 24.5, 27.0, 38.0);
 DoubleStream priceDetails = pricesOne.stream().mapToDouble(Double::doubleValue);
 double averagePrice = priceDetails.average().orElse(0.0);
-System.out.println("Average Price: " + averagePrice);</pre>
+System.out.println("Average Price: " + averagePrice);
+```
+
 
 **flatMap:** useful for converting individual elements within a stream into a new stream of elements, and subsequently merging these various streams into a unified stream.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&lt;R&gt; Stream&lt;R&gt; flatMap(Function&lt;? super T, ? extends Stream&lt;? extends R&gt;&gt; mapper);
+```
+<R> Stream<R> flatMap(Function<? super T, ? extends Stream<? extends R>> mapper);
 
-List&lt;List&lt;Integer&gt;&gt; numberDetails = List.of(List.of(11, 12, 13), List.of(14, 15, 16), List.of(17, 18, 19));
+List<List<Integer>> numberDetails = List.of(List.of(11, 12, 13), List.of(14, 15, 16), List.of(17, 18, 19));
 // Use flatMap to transform the List of Lists into a unified Stream of Integers
-List&lt;Integer&gt; flattenedNumbers = numberDetails.stream()
+List<Integer> flattenedNumbers = numberDetails.stream()
                 .flatMap(List::stream)
                 .toList();
-System.out.println("Flattened Number Details: " + flattenedNumbers);</pre>
+System.out.println("Flattened Number Details: " + flattenedNumbers);
+```
+
 
 **flatMapToInt:** Use flatMapToInt to flatten the List that contains Arrays into a unified IntStream.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">IntStream flatMapToInt(Function&lt;? super T, ? extends IntStream&gt; mapper);
-List&lt;int[]&gt; numbersInfo = List.of(new int[]{1, 2, 3}, new int[]{4, 5, 6}, new int[]{7, 8, 9});
+```
+IntStream flatMapToInt(Function<? super T, ? extends IntStream> mapper);
+List<int[]> numbersInfo = List.of(new int[]{1, 2, 3}, new int[]{4, 5, 6}, new int[]{7, 8, 9});
 IntStream flattenedStream = numbersInfo.stream()
                 .flatMapToInt(Arrays::stream);
 
-System.out.println("Flattened Sum: " + flattenedStream.sum());</pre>
+System.out.println("Flattened Sum: " + flattenedStream.sum());
+```
+
 
 **filter:** This stream produces a stream containing the elements that satisfy the specified predicate.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">Stream&lt;T&gt; filter(Predicate&lt;? super T&gt; predicate);
+```
+Stream<T> filter(Predicate<? super T> predicate);
 
-List&lt;String&gt; names = List.of("Foojay", "Mahi", "Sathya", "KC", "APJ");
-List&lt;String&gt; filteredNames = names.stream()
-                .filter(name -&gt; name.startsWith("A"))
+List<String> names = List.of("Foojay", "Mahi", "Sathya", "KC", "APJ");
+List<String> filteredNames = names.stream()
+                .filter(name -> name.startsWith("A"))
                 .toList();
-System.out.println("Filtered Names: " + filteredNames);</pre>
+System.out.println("Filtered Names: " + filteredNames);
+```
+
 
 Additionally, **flatMapToDouble, mapMulti, mapMultiToInt, mapMultiToLong, mapMultiToDouble, and peek** are several other methods.
 
@@ -149,20 +172,24 @@ Some of these methods are *stateful and involve short-circuiting intermediate op
 
 **forEach \& forEachOrdered:** This stream performs an action for each element and display it in Order
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">void forEach(Consumer&lt;? super T&gt; action);
-void forEachOrdered(Consumer&lt;? super T&gt; action);
+```
+void forEach(Consumer<? super T> action);
+void forEachOrdered(Consumer<? super T> action);
 
-List&lt;Integer&gt; numberAnother = List.of(1, 2, 3, 4, 5);
+List<Integer> numberAnother = List.of(1, 2, 3, 4, 5);
 numberAnother.forEach(System.out::println);
 
-List&lt;Integer&gt; numberOrdered = List.of(2, 3, 1, 5, 4);
-numberOrdered.parallelStream().forEachOrdered(System.out::println);</pre>
+List<Integer> numberOrdered = List.of(2, 3, 1, 5, 4);
+numberOrdered.parallelStream().forEachOrdered(System.out::println);
+```
+
 
 **reduce:** In Java Streams, we use the **reduce** method to perform a reduction on the elements of the stream by employing an associative accumulation function. We use it for **summing numbers, concatenating strings, or combining elements** into a single result.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">T reduce(T identity, BinaryOperator&lt;T&gt; accumulator);
+```
+T reduce(T identity, BinaryOperator<T> accumulator);
 
-List&lt;Integer&gt; reduceNumbers = List.of(1, 2, 3, 4, 5);
+List<Integer> reduceNumbers = List.of(1, 2, 3, 4, 5);
 int sum = reduceNumbers.stream().reduce(0, Integer::sum);
 System.out.println("Sum: " + sum);
 
@@ -170,29 +197,37 @@ int maxValue = reduceNumbers.stream().reduce(0, Integer::max);
 System.out.println("Max Value: " + maxValue);
 
 int minValue = reduceNumbers.stream().reduce(0, Integer::min);
-System.out.println("Min Value: " + minValue);</pre>
+System.out.println("Min Value: " + minValue);
+```
+
 
 **collect:** The Java Streams **collect** method to gather the elements of a stream into a collection or alternative data structure. It works with predefined collectors from the Collectors class, including *toList, toSet, joining,* and various others.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&lt;R, A&gt; R collect(Collector&lt;? super T, A, R&gt; collector);
+```
+<R, A> R collect(Collector<? super T, A, R> collector);
 
-List&lt;String&gt; names = List.of("Foojay", "Mahi", "Sathya", "KC", "APJ");
-List&lt;String&gt; filteredNames = names.stream()
-                .filter(name -&gt; name.startsWith("A"))
+List<String> names = List.of("Foojay", "Mahi", "Sathya", "KC", "APJ");
+List<String> filteredNames = names.stream()
+                .filter(name -> name.startsWith("A"))
                 .collect(Collectors.toList());
-System.out.println("Filtered Names: " + filteredNames);</pre>
+System.out.println("Filtered Names: " + filteredNames);
+```
+
 
 **toList:** The toList default method has streamlined the process of defining the terminal operation, replacing the `collect(Collectors.toList())` syntax.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">default List&lt;T&gt; toList() {
-        return (List&lt;T&gt;) Collections.unmodifiableList(new ArrayList&lt;&gt;(Arrays.asList(this.toArray())));
+```
+default List<T> toList() {
+        return (List<T>) Collections.unmodifiableList(new ArrayList<>(Arrays.asList(this.toArray())));
 }
 
-List&lt;String&gt; names = List.of("Foojay", "Mahi", "Sathya", "KC", "APJ");
-List&lt;String&gt; filteredNames = names.stream()
-                .filter(name -&gt; name.startsWith("A"))
+List<String> names = List.of("Foojay", "Mahi", "Sathya", "KC", "APJ");
+List<String> filteredNames = names.stream()
+                .filter(name -> name.startsWith("A"))
                 .toList();
-System.out.println("Filtered Names: " + filteredNames);</pre>
+System.out.println("Filtered Names: " + filteredNames);
+```
+
 
 Furthermore, there are various other terminal operations such as **min** , **max** , and **count()** available.
 

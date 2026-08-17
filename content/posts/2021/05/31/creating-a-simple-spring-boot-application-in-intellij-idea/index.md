@@ -81,18 +81,21 @@ This folder has been created because Spring Boot uses the Maven wrapper when you
 
 This file is generated with the dependencies that you selected when we created this project.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="xml">&lt;dependencies&gt;
-  &lt;dependency&gt;
-    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
-    &lt;artifactId&gt;spring-boot-starter-web&lt;/artifactId&gt;
-  &lt;/dependency&gt;
+```xml
+<dependencies>
+  <dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-web</artifactId>
+  </dependency>
 
-  &lt;dependency&gt;
-    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
-    &lt;artifactId&gt;spring-boot-starter-test&lt;/artifactId&gt;
-    &lt;scope&gt;test&lt;/scope&gt;
-  &lt;/dependency&gt;
-&lt;/dependencies&gt;</pre>
+  <dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-test</artifactId>
+    <scope>test</scope>
+  </dependency>
+</dependencies>
+```
+
 
 The first dependency on `spring-boot-starter-web````````` is there because we selected **Spring Web** as a dependency. The second dependency on `````````spring-boot-starter-test` is something you get with any Spring application. It gives you the ability to create tests with various testing libraries.
 
@@ -104,7 +107,8 @@ Inside your **main** \> **java** \> **com.example.helloworld** file structure yo
 
 This is what your Java file will look like. The name will be whatever your called the file with *Application* appended to it.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">package com.example.helloworld;
+```java
+package com.example.helloworld;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -115,7 +119,9 @@ public class HelloWorldApplication {
     public static void main(String[] args) {
         SpringApplication.run(HelloWorld.class, args);
     }
-}</pre>
+}
+```
+
 
 We've got our package at the top of the class as you'd expect followed by our import statements.
 
@@ -123,8 +129,10 @@ This `@SpringBootApplication` annotation enables additional Spring Boot function
 
 The main line here is:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">SpringApplication.run(HelloWorldApplication.class, args);
-</pre>
+```java
+SpringApplication.run(HelloWorldApplication.class, args);
+```
+
 
 This makes a call to SpringBoot's `run` method, and we need to pass the main class of our project to Spring, in this case, it's the same class.
 
@@ -167,7 +175,8 @@ One important thing to note here is that you don't need to tell your Spring Appl
 
 3) The next step is to create a method that will tell Spring that if we go the root of our webserver, we would like to see the string *Hello World from Spring Boot* . To do that we need to add a method with a `@RequestMapping` annotation like our `helloWorld` one here:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">package com.example.helloworld;
+```java
+package com.example.helloworld;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -179,7 +188,9 @@ public class HelloWorldController {
   public String helloWorld(){
     return "Hello World from Spring Boot";
   }
-}</pre>
+}
+```
+
 
 4) Now we need to re-run our Spring application. You might need to stop it first if it's still running from the previous step. You can run it again with **Ctrl** +**R** (macOS), or **Shift** +**F10** (Windows/Linux).
 
@@ -189,10 +200,13 @@ public class HelloWorldController {
 
 6) Assuming that's working correctly, you can start to get more adventurous. Try adding this new code below your first method:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">@RequestMapping("/goodbye")
+```java
+@RequestMapping("/goodbye")
 public String helloWorld(){
   return "Goodbye from Spring Boot";
-}</pre>
+}
+```
+
 
 7) Now run your application again. At the root you should still see *Hello World from Spring Boot* because the `MARKDOWN_HASHfe7b83329725956f76335a5a0b65595eMARKDOWN`*HASH* *is* /_ indicating root. However, if you now type in `localhost:8080/goodbye`, you should see *Goodbye from Spring Boot*.
 
@@ -209,7 +223,8 @@ Tests for Spring Boot are written using the standard [JUnit5 Testing Library](ht
 
 2) Paste the following code into your test class:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">@SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
+```java
+@SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 public class CheckHTTPResponse {
     @LocalServerPort
     private int port;
@@ -222,7 +237,9 @@ public class CheckHTTPResponse {
         assertThat(restTemplate.getForObject("http://localhost:" + port + "/",
                 String.class)).contains("Hello World from Spring Boot");
     }
-}</pre>
+}
+```
+
 
 Passing `WebEnvironment.RANDOM_PORT` into the `@SpringBootTest` annotation starts the web server with a random port number. We can find out what that port number is by annotating an `int` field (in our case, `int port;`) with `@LocalServerPort`, the testing framework will inject this field with the random port number.
 

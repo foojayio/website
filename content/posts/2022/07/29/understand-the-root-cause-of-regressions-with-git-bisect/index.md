@@ -43,17 +43,24 @@ Git Bisect: Find the Bug. Automatically! {#h2-1-git-bisect-find-the-bug-automati
 
 That's right. It does exactly that. The simplest use of git bisect starts with the command:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">git bisect start</pre>
+```
+git bisect start
+```
+
 
 This switches us into bisect mode. We can now define the "good" version where things used to work properly. E.g. for <https://github.com/codenameone/CodenameOne/> I can use the revision `79a8e37adb7dd48093779bd3657142e607bdd2d9` as the good revision. We can thus mark it using the command:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">git bisect good 79a8e37adb7dd48093779bd3657142e607bdd2d9
-</pre>
+```
+git bisect good 79a8e37adb7dd48093779bd3657142e607bdd2d9
+```
+
 
 Once we do, we can activate bisect traversal by marking the bad revision. For most cases this means the current head revision which is the default, but you can specify a specific revision as an argument to this command:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">git bisect bad
-</pre>
+```
+git bisect bad
+```
+
 
 Once this is done, we can move between revisions by redefining the good or bad revisions.
 
@@ -80,22 +87,30 @@ Normally this works great for a shell command but as a Java developer this is a 
 
 This is actually pretty easy. We can create a complex command line but personally I prefer something like:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">git bisect run testMyJavaProject.sh
-</pre>
+```
+git bisect run testMyJavaProject.sh
+```
+
 
 Then I implement the shell script with the commands that build/test. But before that I need to create a unit test that fails for that specific bug. I assume this is something most of us can accomplish easily. Now that we have a unit test creating the shell script is trivial. The code below assumes you use maven for building:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">#!/bin/sh
+```
+#!/bin/sh
 
 mvn clean
 mvn package -DskipTests
-mvn test -Dtest=MyTestClass</pre>
+mvn test -Dtest=MyTestClass
+```
+
 
 That's it. Notice that if compilation will fail because of dependencies within the test class you might end up with the wrong revision. So keep the test simple!
 
 When you're done with git bisect or wish to stop for any reason just issue the command:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">git bisect reset</pre>
+```
+git bisect reset
+```
+
 
 TL;DR {#h2-3-tl-dr}
 -------------------

@@ -39,7 +39,8 @@ I'll use the same base application: a simple Spring Boot application, coded in K
 
 It translates into the following code:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="kotlin">@SpringBootApplication
+```kotlin
+@SpringBootApplication
 class Agent1xApplication
 
 @RestController
@@ -63,7 +64,9 @@ class MicrometerController {
             .retrieve()
             .toBodilessEntity()
     }
-}</pre>
+}
+```
+
 
 For every setup, I'll check two stages: the primary stage, with OpenTelemetry enabled, and a customization stage to create additional internal spans.
 
@@ -86,7 +89,8 @@ We don't need a BOM because versions are already defined in the Spring Boot pare
 
 Yet, we need two runtime configuration parameters: where should the traces be sent, and what is the component's name. They are governed by the `MANAGEMENT_OTLP_TRACING_ENDPOINT` and `SPRING_APPLICATION_NAME` variables.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml">services:
+```yaml
+services:
   jaeger:
     image: jaegertracing/all-in-one:1.55
     environment:
@@ -98,7 +102,9 @@ Yet, we need two runtime configuration parameters: where should the traces be se
       dockerfile: Dockerfile-micrometer
     environment:
       MANAGEMENT_OTLP_TRACING_ENDPOINT: http://jaeger:4318/v1/traces    #2
-      SPRING_APPLICATION_NAME: micrometer-tracing                       #3</pre>
+      SPRING_APPLICATION_NAME: micrometer-tracing                       #3
+```
+
 
 1. Enable the OpenTelemetry collector for Jaeger
 2. Full URL to the Jaeger OpenTelemetry gRPC endpoint
@@ -112,12 +118,15 @@ Without any customization, Micrometer creates spans when receiving and sending H
 
 The framework needs to inject magic into the `RestClient` for sending. We must let the former instantiate the latter for that:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="kotlin">class MicrometerTracingApplication {
+```kotlin
+class MicrometerTracingApplication {
 
     @Bean
     fun restClient(builder: RestClient.Builder) =
         builder.baseUrl("http://localhost:8080/done").build()
-}</pre>
+}
+```
+
 
 We can create manual spans in several ways, one via the OpenTelemetry API itself. However, the setup requires a lot of boilerplate code. The most straightforward way is the Micrometer's [Observation API](https://docs.micrometer.io/micrometer/reference/observation.html). Its main benefit is to use a single API that manages both *metrics* and *traces*.
 
@@ -125,7 +134,8 @@ We can create manual spans in several ways, one via the OpenTelemetry API itself
 
 Here's the updated code:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="kotlin">class MicrometerController(
+```kotlin
+class MicrometerController(
     private val restClient: RestClient,
     private val registry: ObservationRegistry
 ) {
@@ -149,7 +159,9 @@ Here's the updated code:
             .toBodilessEntity()
         observation.stop()
     }
-}</pre>
+}
+```
+
 
 The added observation calls reflect upon the generated traces:
 
@@ -160,11 +172,15 @@ OpenTelemetry Agent v1 {#h2-2-opentelemetry-agent-v1}
 
 An alternative to Micrometer Tracing is the generic [OpenTelemetry Java Agent](https://github.com/open-telemetry/opentelemetry-java-instrumentation). Its main benefit is that it impacts neither the code nor the developers; the agent is a pure runtime-scoped concern.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="shell">java -javaagent:opentelemetry-javaagent.jar agent-one-1.0-SNAPSHOT.jar</pre>
+```bash
+java -javaagent:opentelemetry-javaagent.jar agent-one-1.0-SNAPSHOT.jar
+```
+
 
 The agent abides by OpenTelemetry's configuration with environment variables:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml">services:
+```yaml
+services:
   agent-1x:
     build:
       dockerfile: Dockerfile-agent1
@@ -174,7 +190,9 @@ The agent abides by OpenTelemetry's configuration with environment variables:
       OTEL_METRICS_EXPORTER: none                                       #3
       OTEL_LOGS_EXPORTER: none                                          #4
     ports:
-      - "8081:8080"</pre>
+      - "8081:8080"
+```
+
 
 1. Set the protocol, the domain, and the port. The library appends `/v1/traces`
 2. Set the OpenTelemetry's service name
@@ -190,7 +208,8 @@ The agent automatically tracks requests, both received and sent, **as well as fu
 
 The `value()` part governs the trace's label, while the `kind` translates as a `span.kind` attribute. If the value is set to an empty string, which is the default, it outputs the function's name. For my purposes, default values are good enough.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="kotlin">@WithSpan
+```kotlin
+@WithSpan
 fun intermediate() {
     logger.info("intermediate")
     RestClient.builder()
@@ -200,7 +219,9 @@ fun intermediate() {
         .header("X-done", "true")
         .retrieve()
         .toBodilessEntity()
-}</pre>
+}
+```
+
 
 It yields the expected new `intermediate()` trace:
 
@@ -236,6 +257,6 @@ The complete source code for this post can be found on [GitHub](https://github.c
 * [Distributed Tracing with Spring Boot 3 --- Micrometer vs OpenTelemetry](https://itnext.io/distributed-tracing-with-spring-boot-3-micrometer-vs-opentelemetry-b3593546f61b)
 * [Observability With Spring Boot 3](https://www.baeldung.com/spring-boot-3-observability)
 
-*** ** * ** ***
+
 
 *Originally published at [A Java Geek](https://blog.frankel.ch/opentelemetry-tracing-spring-boot/) on August 3^rd^, 2024*

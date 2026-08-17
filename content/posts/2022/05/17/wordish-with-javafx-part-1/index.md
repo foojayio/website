@@ -133,17 +133,23 @@ Each view described by an FXML file has an associated controller class specified
 
 There is a straightforward mechanism for this access. For example, to access the replay button in the controller class, we provide an `fx:id` attribute in the FXML file, as follows.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="xml" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="false" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&lt;Button fx:id="resetButton" onAction="#resetGame" &gt;            
-&lt;/Button&gt;</pre>
+```xml
+<Button fx:id="resetButton" onAction="#resetGame" >            
+</Button>
+```
+
 
 Then, in the controller class, you annotate the Java declaration with `@FXML`. Note that you do not instantiate this object; rather the FXMLLoader instantiates (injects) it for you.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="false" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public class WordishController {
+```java
+public class WordishController {
 
     @FXML
     private Button resetButton;
     . . . 
-}</pre>
+}
+```
+
 
 ### Accessing the Letter Label \& Key Button Controls {#h3-9-accessing-the-letter-label-key-button-controls}
 
@@ -170,15 +176,16 @@ The JavaFX layout containers (such as TilePane, GridPane, VBox, and FlowPane) ma
 
 Here is how the WordishController class initializes the data structures `letters` (a List) and `keyLetters` (a Map) with these customized controls.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="false" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public class WordishController {
+```java
+public class WordishController {
 
     @FXML
     private TilePane letterTilePane;
     @FXML
     private FlowPane buttonFlowPane;
 
-    private List&lt;LetterLabel&gt; letters;
-    private Map&lt;String, KeyButton&gt; keyLetters;
+    private List<LetterLabel> letters;
+    private Map<String, KeyButton> keyLetters;
     . . . 
     public void initialize() {
           letters = letterTilePane.getChildren()
@@ -188,13 +195,14 @@ Here is how the WordishController class initializes the data structures `letters
           keyLetters = buttonFlowPane.getChildren()
                 .stream()
                 .map(KeyButton.class::cast)
-                .filter(button -&gt; button.getText().length() == 1)
+                .filter(button -> button.getText().length() == 1)
                 .collect(Collectors.toMap(KeyButton::getText,
                           Function.identity()));
        . . .
        }
 }
-</pre>
+```
+
 
 First, we populate `List<LetterLabel> letters` by invoking the TilePane's `getChildren()` method. After converting to a stream, we cast each Node to a LetterLabel and collect them in a List.
 
@@ -217,21 +225,23 @@ For iOS, we modify the **Default-Info.pList** file and provide application-speci
 
 To limit the layout to portrait mode only requires limiting the supported orientation settings to portrait mode, as follows.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="xml" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="false" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&lt;plist version="1.0"&gt;
-&lt;dict&gt;
+```xml
+<plist version="1.0">
+<dict>
 . . .
-&lt;key&gt;UISupportedInterfaceOrientations&lt;/key&gt;
-    &lt;array&gt;
-        &lt;string&gt;UIInterfaceOrientationPortrait&lt;/string&gt;
-    &lt;/array&gt;
-    &lt;key&gt;UISupportedInterfaceOrientations~ipad&lt;/key&gt;
-    &lt;array&gt;
-        &lt;string&gt;UIInterfaceOrientationPortrait&lt;/string&gt;
-    &lt;/array&gt;
+<key>UISupportedInterfaceOrientations</key>
+    <array>
+        <string>UIInterfaceOrientationPortrait</string>
+    </array>
+    <key>UISupportedInterfaceOrientations~ipad</key>
+    <array>
+        <string>UIInterfaceOrientationPortrait</string>
+    </array>
 . . .
-&lt;/dict&gt;
-&lt;/plist&gt;
-</pre>
+</dict>
+</plist>
+```
+
 
 Next, we create an icon for our app. We use [Inkscape](https://inkscape.org/) to create a 1024 x 1024 PNG image. The web site: <https://appicon.co/> generates a set of icons from a single 1024 x 1024 PNG file for both iOS and Android.
 
@@ -246,15 +256,17 @@ Next, we create an icon for our app. We use [Inkscape](https://inkscape.org/) to
 
 For Android, modify file **AndroidManifest.xml** to customize the Android application. Here, we again want to limit the application to portrait mode, as follows.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="xml" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="false" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">. . .
-&lt;application android:label='Wordish' android:icon="@mipmap/ic_launcher"&gt;
-        &lt;activity android:name='com.gluonhq.helloandroid.MainActivity'
+```xml
+. . .
+<application android:label='Wordish' android:icon="@mipmap/ic_launcher">
+        <activity android:name='com.gluonhq.helloandroid.MainActivity'
                   android:screenOrientation='portrait'
-                  android:configChanges="orientation|keyboardHidden"&gt;
+                  android:configChanges="orientation|keyboardHidden">
        . . .
-       &lt;/activity&gt;
-&lt;/application&gt;
-</pre>
+       </activity>
+</application>
+```
+
 
 The [applicon.co](https://appicon.co/) website generates Android icons for us too, so we're all set. For Android, copy the default files to **src/android** to retain these customizations.
 

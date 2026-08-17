@@ -30,7 +30,8 @@ The functional programming paradigm seeks to provide a code as an application an
 
 In a previous post, we explored how to use a factory to preserve the functional nature of code \[4\]. In this post we review the null object design pattern \[3\] that could be one way to escape a situation where we require to do nothing. The null object design pattern belongs to a family of behavioral design patterns with a strong emphasis on code maintainability as null pointer exception, may not be the favorite app state. Let's draw a situation where it is necessary to have different types of sensors available (Example 1.). The sensor only has a primitive integer type that requires rounding or casting, resulting in a loss of information, which is one of the challenges the JEP-455 aims to solve \[1\].
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">interface VehicleSensor {
+```
+interface VehicleSensor {
    String UNDEFINED = "undefined";
    String type();
    int value();
@@ -51,16 +52,19 @@ record DefaultSensor(String type, int value) implements VehicleSensor {
    DefaultSensor(String t) {
        System.out.println("constructor String:" + t);
        this(t, -1);
-…}</pre>
+…}
+```
+
 
 **Example 1.**: JEP-455 increases the support of primitive types for the records and their decomposition
 
 To avoid creating a wrapper around hardware IO every time we request a specific sensor, we use a cache pattern \[3\]. Each Default sensor is created with appropriate constructor (Example 2.).
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">final public class VehicleSensorCache {
+```
+final public class VehicleSensorCache {
    public static VehicleSensor NULL_SENSOR = new NullSensor();
    ...
-   private static final List&lt;VehicleSensor&gt; sensors =
+   private static final List<VehicleSensor> sensors =
            Arrays.asList(new DefaultSensor("engine", valueInteger),
                    new DefaultSensor("break", valueDouble), 
  new   DefaultSensor("platform"));
@@ -70,7 +74,7 @@ To avoid creating a wrapper around hardware IO every time we request a specific 
 
    static VehicleSensor getSensor(String name) {
        return sensors.stream()
-               .filter(s -&gt; s.type().equals(name.toLowerCase()))
+               .filter(s -> s.type().equals(name.toLowerCase()))
                .findFirst()
                .orElse(NULL_SENSOR);
    }
@@ -79,30 +83,35 @@ To avoid creating a wrapper around hardware IO every time we request a specific 
 Output:
 constructor Integer:1
 constructor double:1.5
-constructor String:platform</pre>
+constructor String:platform
+```
+
 
 **Example 2.** : Vehicle sensor cache returns as default state *NULL_SENSOR* object and each sensor uses primitive values
 
 Let's imagine we have a sequence of sensors that need to be called to obtain the value. Such a sensor may or may not be present inside the cache. The JEP-455 enables smooth code folding into a functional paradigm using various types of terminal or intermediate operations (Example 3.)
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">var engineSensor = VehicleSensorCache.getSensor("engine");
+```
+var engineSensor = VehicleSensorCache.getSensor("engine");
 var breakSensor = VehicleSensorCache.getSensor("break");
 var testSensor = VehicleSensorCache.getSensor("test");
 
 Stream.of(engineSensor, breakSensor, testSensor)
-       .forEach(sensor -&gt; {
+       .forEach(sensor -> {
            switch (sensor.value()) {
-               case 1 -&gt; System.out.println("engine:" + sensor);
-               case 2 -&gt; System.out.println("break:" + sensor);
-               case -1 -&gt; System.out.println("platform:" + sensor);
-               default -&gt; System.out.println("unknown:" + sensor);
+               case 1 -> System.out.println("engine:" + sensor);
+               case 2 -> System.out.println("break:" + sensor);
+               case -1 -> System.out.println("platform:" + sensor);
+               default -> System.out.println("unknown:" + sensor);
            }
        });
 
 Output:
 engine:DefaultSensor[type=engine, value=1]
 break:DefaultSensor[type=break, value=2]
-unknown:NullSensor{type='undefined'}</pre>
+unknown:NullSensor{type='undefined'}
+```
+
 
 **Example 3.**: The support of primitive types inside the switch statements simplifies the code
 

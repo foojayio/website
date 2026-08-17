@@ -37,10 +37,13 @@ In most frameworks: you do. In BoxLang AI 3.0: the framework does, and the archi
 
 The 3.0 tool system is built around three layers:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="html">ITool (interface)
+```html
+ITool (interface)
   └── BaseTool (abstract class)
         ├── ClosureTool (closure/lambda-backed tool)
-        └── MCPTool    (MCP server proxy tool)</pre>
+        └── MCPTool    (MCP server proxy tool)
+```
+
 
 Every tool in the system extends `BaseTool`. That means every tool gets the same lifecycle, the same event firing, and the same result serialization --- for free, without touching provider code.
 
@@ -49,7 +52,8 @@ Every tool in the system extends `BaseTool`. That means every tool gets the same
 
 `BaseTool` is an abstract class that owns the shared infrastructure all tools need. The key design decision is that `invoke()` is declared `final`:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">// From BaseTool.bx
+```java
+// From BaseTool.bx
 public final string function invoke( required struct args, AiChatRequest chatRequest ) {
     // Fire global event BEFORE tool execution
     BoxAnnounce( "beforeAIToolExecute", {
@@ -77,7 +81,8 @@ public final string function invoke( required struct args, AiChatRequest chatReq
     // Serialize and return
     return serializeResult( results )
 }
-</pre>
+```
+
 
 By making `invoke()` final, `BaseTool` guarantees that:
 
@@ -86,12 +91,14 @@ By making `invoke()` final, `BaseTool` guarantees that:
 * Results are **always serialized** consistently (simple values pass through, complex values get JSON-serialized)  
   Subclasses implement two abstract methods and nothing else:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">// What your tool actually DOES
+```java
+// What your tool actually DOES
 abstract public any function doInvoke( required struct args, AiChatRequest chatRequest );
 
 // The OpenAI-compatible schema for this tool
 abstract public struct function generateSchema();
-</pre>
+```
+
 
 The separation is clean: `BaseTool` handles infrastructure, subclasses handle logic.
 
@@ -99,11 +106,13 @@ The separation is clean: `BaseTool` handles infrastructure, subclasses handle lo
 
 `BaseTool` also ships a fluent `onMissingMethod` that gives you a readable way to describe your tool's arguments without building schema structs by hand:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">tool = new MySearchTool( client )
+```java
+tool = new MySearchTool( client )
     .describeFunction( "Search the product catalog" )  // sets description
     .describeQuery( "The search term to look up" )     // describeArg( "query", "..." )
     .describeMaxResults( "Max items to return" )       // describeArg( "maxResults", "..." )
-</pre>
+```
+
 
 Any call to `describe[ArgName]( "..." )` routes through `onMissingMethod` and sets the argument description used during schema generation.
 
@@ -112,10 +121,11 @@ Any call to `describe[ArgName]( "..." )` routes through `onMissingMethod` and se
 
 `ClosureTool` is the tool you'll use most of the time. It wraps any closure or lambda and auto-introspects the callable's parameter metadata using BoxLang's `.$bx.meta.parameters` to generate a full OpenAI-compatible function schema.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">// From ClosureTool.bx — getArgumentsSchema()
+```java
+// From ClosureTool.bx — getArgumentsSchema()
 public struct function getArgumentsSchema() {
     var results = { "properties" : {}, "required" : [] }
-    variables.callable.$bx.meta.parameters.each( param =&gt; {
+    variables.callable.$bx.meta.parameters.each( param => {
         if ( param.required ) {
             results.required.append( param.name )
         }
@@ -126,11 +136,13 @@ public struct function getArgumentsSchema() {
     } )
     return results
 }
-</pre>
+```
+
 
 In practice you never call this yourself --- the `aiTool()` BIF creates a `ClosureTool` for you:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">// Required + optional args — schema is auto-generated from parameter metadata
+```java
+// Required + optional args — schema is auto-generated from parameter metadata
 searchTool = aiTool(
     "searchKB",
     "Search the internal knowledge base for relevant articles",
@@ -138,11 +150,13 @@ searchTool = aiTool(
         return knowledgeBase.search( query, maxResults )
     }
 )
-</pre>
+```
+
 
 The resulting schema sent to the LLM:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">{
+```java
+{
     "type": "function",
     "function": {
         "name": "searchKB",
@@ -158,11 +172,13 @@ The resulting schema sent to the LLM:
         }
     }
 }
-</pre>
+```
+
 
 Add argument descriptions with the fluent API:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">searchTool = aiTool(
+```java
+searchTool = aiTool(
     "searchKB",
     "Search the knowledge base",
     function( required string query, numeric maxResults = 5 ) {
@@ -170,13 +186,15 @@ Add argument descriptions with the fluent API:
     }
 ).describeQuery( "The search term — be specific for better results" )
  .describeMaxResults( "Maximum number of articles to return (default: 5)" )
-</pre>
+```
+
 
 ### Tools Get the Full Chat Request {#h3-4-tools-get-the-full-chat-request}
 
 One powerful feature: `ClosureTool` injects `_chatRequest` into the args struct before invocation. This gives your closure access to the full originating `AiChatRequest` --- the entire conversation context, parameters, options, and more:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">contextAwareTool = aiTool(
+```java
+contextAwareTool = aiTool(
     "getPersonalizedAdvice",
     "Get advice tailored to the user's session context",
     function( required string topic ) {
@@ -185,14 +203,16 @@ One powerful feature: `ClosureTool` injects `_chatRequest` into the args struct 
         return advisorService.getAdvice( topic, userId )
     }
 )
-</pre>
+```
+
 
 🗄️ The Global AI Tool Registry {#h2-5-the-global-ai-tool-registry}
 -------------------------------------------------------------------
 
 The `AIToolRegistry` is a module-scoped singleton accessible via `aiToolRegistry()`. Its core job: let you register tools by name once and reference them as plain strings anywhere tools are accepted.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">// Register once at startup (Application.bx or ModuleConfig.bx)
+```java
+// Register once at startup (Application.bx or ModuleConfig.bx)
 aiToolRegistry().register( "searchProducts", productSearchTool )
 aiToolRegistry().register( name: "getWeather", description: "Get weather for a city", callback: weatherFn )
 
@@ -201,7 +221,8 @@ result = aiChat(
     "Find wireless headphones under $50",
     { tools: [ "searchProducts", "getWeather" ] }
 )
-</pre>
+```
+
 
 String keys are resolved lazily via `resolveTools()` right before each LLM request --- so you can register at startup and reference anywhere.
 
@@ -209,10 +230,11 @@ String keys are resolved lazily via `resolveTools()` right before each LLM reque
 
 Use `toolName@moduleName` convention to keep registrations collision-free across modules:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">aiToolRegistry().register(
+```java
+aiToolRegistry().register(
     name        : "lookup",
     description : "Look up customer by ID",
-    callback    : id =&gt; customerService.find( id ),
+    callback    : id => customerService.find( id ),
     module      : "crm"
 )
 
@@ -221,13 +243,15 @@ tool = aiToolRegistry().get( "lookup@crm" )
 
 // Bare name works too when unambiguous
 tool = aiToolRegistry().get( "lookup" )
-</pre>
+```
+
 
 ### `@AITool` Annotation Scanning {#h3-7-aitool-annotation-scanning}
 
 The cleanest registration path for class-based tools: annotate your methods and let the registry scan the class:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">// WeatherTools.bx
+```java
+// WeatherTools.bx
 class {
 
     @AITool( "Get the current weather for a city, returns temperature and conditions" )
@@ -241,12 +265,15 @@ class {
     }
 
 }
-</pre>
+```
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">// Register everything at once
+
+```java
+// Register everything at once
 aiToolRegistry().scan( new WeatherTools(), "weather-module" )
 // → getWeather@weather-module, getForecast@weather-module
-</pre>
+```
+
 
 The `scan()` method uses `getMetaData()` to find all @`AITool`-annotated functions, extracts the annotation value as the description, and wraps each method as a `ClosureTool` automatically. Per-parameter `@hint` annotations become argument descriptions.
 
@@ -265,7 +292,8 @@ This means you can use bare names in development and fully-qualified keys in pro
 
 Two tools ship built-in, defined in `CoreTools.bx` using the same `@AITool` annotation pattern:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">// From CoreTools.bx
+```java
+// From CoreTools.bx
 class {
 
     @AITool( "Returns the current date and time in ISO 8601 format. Use this whenever you need to know the current date or time." )
@@ -279,26 +307,30 @@ class {
     }
 
 }
-</pre>
+```
+
 
 `now@bxai` is **auto-registered on module load** --- every agent in every application gets temporal awareness without any configuration. This matters because LLMs have a training cutoff. Without access to the current date and time, they'll confidently tell you the wrong year, calculate ages incorrectly, or miscalculate deadlines. `now@bxai` solves this.
 
 `httpGet@bxai` is **opt-in only** --- not auto-registered because it can reach any URL including internal network endpoints. Register it explicitly when your application genuinely needs web access:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">import bxModules.bxai.models.tools.core.CoreTools;
+```java
+import bxModules.bxai.models.tools.core.CoreTools;
 // This adds httpGet@bxai alongside the already-registered now@bxai
 aiToolRegistry().scan( new CoreTools(), "bxai" )
-</pre>
+```
+
 
 🔌 `MCPTool` --- MCP Server Proxy {#h2-10-mcptool-mcp-server-proxy}
 -------------------------------------------------------------------
 
 `MCPTool` is the third `BaseTool` subclass. When you call `withMCPServer()` on an agent or model, each tool returned by `MCPClient.listTools()` becomes an `MCPTool` instance automatically:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">// From MCPTool.bx — doInvoke()
+```java
+// From MCPTool.bx — doInvoke()
 public any function doInvoke( required struct args, AiChatRequest chatRequest ) {
     // Strip the internal _chatRequest key before forwarding to MCP server
-    var mcpArgs  = arguments.args.filter( ( k, v ) =&gt; k != "_chatRequest" )
+    var mcpArgs  = arguments.args.filter( ( k, v ) => k != "_chatRequest" )
     var response = variables.mcpClient.send( variables.name, mcpArgs )
 
     if ( response.isSuccess() ) {
@@ -306,15 +338,16 @@ public any function doInvoke( required struct args, AiChatRequest chatRequest ) 
         // Handle MCP content arrays: [{ type: "text", text: "..." }, ...]
         if ( isArray( data ) ) {
             return data
-                .map( item =&gt; isStruct( item ) &amp;&amp; item.keyExists( "text" ) ? item.text : toString( item ) )
+                .map( item => isStruct( item ) && item.keyExists( "text" ) ? item.text : toString( item ) )
                 .toList( char( 10 ) )
         }
         return isSimpleValue( data ) ? toString( data ) : data
     }
 
-    return "Error from MCP tool [#variables.name#]: " &amp; response.getError()
+    return "Error from MCP tool [#variables.name#]: " & response.getError()
 }
-</pre>
+```
+
 
 The `generateSchema()` method converts the MCP `inputSchema` to OpenAI function-calling format automatically --- so the LLM can call MCP tools exactly the same way it calls any other `ITool`.
 
@@ -323,7 +356,8 @@ The `generateSchema()` method converts the MCP `inputSchema` to OpenAI function-
 
 For tools that need their own state, configuration, or unit tests, extend `BaseTool` directly:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">// MySearchTool.bx
+```java
+// MySearchTool.bx
 class extends="bxModules.bxai.models.tools.BaseTool" {
 
     property name="searchClient";
@@ -362,21 +396,25 @@ class extends="bxModules.bxai.models.tools.BaseTool" {
     }
 
 }
-</pre>
+```
+
 
 Register and use it:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">aiToolRegistry().register( new MySearchTool( searchClient ), "my-app" )
+```java
+aiToolRegistry().register( new MySearchTool( searchClient ), "my-app" )
 
 result = aiChat( "Find wireless headphones", { tools: [ "searchProducts@my-app" ] } )
-</pre>
+```
+
 
 🗺️ MCP Server Seeding {#h2-12-mcp-server-seeding}
 --------------------------------------------------
 
 Beyond the `MCPTool` class itself, the agent and model `withMCPServer()` / `withMCPServers()` APIs make it trivial to connect to entire MCP ecosystems:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">// At construction time
+```java
+// At construction time
 agent = aiAgent(
     name       : "data-analyst",
     mcpServers : [
@@ -393,7 +431,8 @@ agent = aiAgent( "analyst" )
 // Inspect what was discovered
 tools   = agent.listTools()     // [{ name, description }] for ALL tools
 servers = agent.listMCPServers() // [{ url, toolNames }]
-</pre>
+```
+
 
 Under the hood, `withMCPServer()` calls `listTools()`, wraps each result as an `MCPTool`, and appends them to the agent's tool list. The MCP server metadata is also injected into the system message so the LLM knows which tools came from which server --- useful for complex multi-server setups.
 
@@ -402,7 +441,8 @@ Under the hood, `withMCPServer()` calls `listTools()`, wraps each result as an `
 
 A realistic example: a customer support agent with a mix of registry tools, class-based tools, and MCP server tools.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">// Application.bx — register at startup
+```java
+// Application.bx — register at startup
 aiToolRegistry().scan( new CustomerTools(), "crm" )   // getCustomer@crm, updateCustomer@crm
 aiToolRegistry().scan( new OrderTools(), "orders" )   // getOrder@orders, refundOrder@orders
 
@@ -415,7 +455,8 @@ agent = aiAgent(
 
 // The LLM sees all tools — registry tools + MCP tools — and uses them freely
 response = agent.run( "Customer #12345 says their order #98765 never arrived. Help them." )
-</pre>
+```
+
 
 What's Next {#h2-14-what-s-next}
 --------------------------------

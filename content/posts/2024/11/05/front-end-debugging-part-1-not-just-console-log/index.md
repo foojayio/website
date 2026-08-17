@@ -54,11 +54,14 @@ Modern browsers allow you to invoke debugging directly from the console, adding 
 
 **Example:** By using the `debug(functionName)` command in the console, you can set a breakpoint at the start of the specified function. When this function is subsequently invoked, the execution halts, sending you directly into the debugger.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">function hello(name) {
+```
+function hello(name) {
     Console.log("Hello " + name)
 }
 debug(hello)
-hello("Shai")</pre>
+hello("Shai")
+```
+
 
 This is particularly useful when you want to start debugging without modifying the source code, or when you need to inspect a function that's only defined in the global scope.
 

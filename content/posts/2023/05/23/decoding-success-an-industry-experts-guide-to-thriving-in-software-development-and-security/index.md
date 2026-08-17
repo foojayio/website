@@ -48,11 +48,11 @@ Key takeaways: {#h2-1-key-takeaways}
 5. **Importance of 'Why' in Product Management:** Erik emphasized the need for product managers to focus on understanding 'why' a product is needed, 'what' it does, and 'who' needs it, and letting other teams deal with the 'how' and 'when'.
 6. **Learning Security Isn't Hard:** Erik mentioned that understanding application security isn't hard and can be achieved by asking the questions "what are you defending and what are you defending it from." A card game called Elevation or Privilege by Adam Shostack can help beginners grasp this concept.  
 
-*** ** * ** ***
+
 
 > ### Fun fact: Erik used to perform in a circus, riding a three-wheeled unicycle while juggling fire. The wheels were vertical. {#h3-2-fun-fact-erik-used-to-perform-in-a-circus-riding-a-three-wheeled-unicycle-while-juggling-fire-the-wheels-were-vertical}
 >
-*** ** * ** ***
+
 
 ***Bazlur:*** ***Can you tell us about your background and how you got started in the software industry?***
 
@@ -60,7 +60,7 @@ Key takeaways: {#h2-1-key-takeaways}
 
 After a few years of working, though, I noticed a lot of other people coming to the engineering group and telling us what to do. I could build things, but these people would come to me from the perspective of building the business that needed the software, which I felt was a stronger position.  
 
-*** ** * ** ***
+
 
 <br />
 
@@ -86,7 +86,7 @@ For anyone who's interested in moving into product from engineering, there are t
 
 For anyone who wants specific materials, I will recommend two: Simon Sinek's Golden Circle talk, where he explains to "start with why," and look over the Pragmatic Marketing Framework. This framework starts in the top-left with market problems: what are you trying to do, and why does it matter.
 
-*** ** * ** ***
+
 
 <br />
 
@@ -100,7 +100,7 @@ For switching from engineering to product, some people want to; some don't; it's
 
 I also want to be clear about what product management isn't because people with the wrong expectations will just churn with frustration. If you're looking at the role because "*I want to implement my own ideas,*" then I suggest not doing that. You need to source ideas from or at least move ideas through people who want to solve your particular problem. You do this by listening, not convincing them why they want whatever ideas you have. You could have a great idea, but maybe it's not the right problem to deal with right now. Teams that focus on the right thing often outperform even the best teams that do excellent work on the wrong things.
 
-*** ** * ** ***
+
 
 ***Bazlur: Let's shift gears and talk about the current state of software development. In your opinion, what are some of the biggest challenges that developers face today? Additionally, do you have any advice on how to overcome these challenges?***
 
@@ -110,7 +110,7 @@ Prioritization is understanding and deciding what to work on. Early on, you some
 
 Second, managing expectations isn't just a technical problem. There are other stakeholders who don't build software but are impacted by the decisions you make. These are questions like when will we have a certain feature, how will we understand it, how much is it going to cost operationally, and other things that matter. The positions of engineering manager, VP of engineering, and such deal with these questions more. As you work on the code, consider what information other stakeholders on the project are wondering about and help them shed some light on what's going on.
 
-*** ** * ** ***
+
 
 ***Bazlur: Based on your experience, what advice would you give to new programmers who are uncertain about the prospects of their careers and are unsure of the steps they should take to ensure their careers are on the right track? With so much noise on the internet, it can be difficult for newcomers to navigate the field and determine which technologies to focus on.***
 
@@ -122,7 +122,7 @@ When choosing your tech stack, pick a stack that has some staying power or is at
 
 An example for me is that, at one point, I learned Flex and ActionScript for making web apps. It was neat to try, but I realized there wasn't much demand (TAM) for that skill set, so I said goodbye shortly after.
 
-*** ** * ** ***
+
 
 ***Bazlur: As someone with a strong passion for software security and expertise in the field, what are your thoughts on the current industry trends? With the growing need for software security, many new opportunities are emerging in this area. What advice would you offer to newcomers who may view it as a potential career path?***
 
@@ -130,7 +130,7 @@ An example for me is that, at one point, I learned Flex and ActionScript for mak
 
 On the job market, there's a really good need for people who can understand risk and threats and map them up to architecture diagrams to figure out the right defense.
 
-*** ** * ** ***
+
 
 ***Bazlur: Thank you, Erik, for sharing your insights. I'm sure our readers will find them immensely beneficial. On a different note, do you have any enjoyable or memorable stories from your time in the software industry that you would be willing to share with us?***
 
@@ -138,13 +138,13 @@ On the job market, there's a really good need for people who can understand risk
 
 One story where I can be a little vague is that a while ago, I had a service where I thought the bills were a little high. By logging in to my account and hitting F12, I was able to open other people's bills and compare the prices we were getting on similar things. Whether that's hacking or not depends on who you ask, but I didn't do a lot of it, and it was clear nothing could be changed, so the company wasn't actually harmed.
 
-*** ** * ** ***
+
 
 ***Bazlur: Thank you so much for sharing your insights with us. We really appreciate your time. If we have any further questions, we will be sure to reach out to you. Before we end, is there any parting advice or resources you would like to share with our readers, such as a list of recommended books or any other helpful information?***
 
 **Erik** : On the security side, I think the goal of a lot of experts is to make it seem hard. It's not hard, and you can get a foot into application security fairly quickly. The main questions are just, "What are you defending, and what are you defending it from." If you're brainstorming defences that don't address either question, then don't do that. The easiest thing to look at is a card game by Adam Shostack called [Elevation or Privilege](https://www.microsoft.com/en-us/download/details.aspx?id=20303). You take cards that list a threat (what are you defending it from?) and figure out if/where in your software it applies. Some cards fit, and some don't. Most importantly, you don't need to be an expert to try it, and it's really easy.  
 
-*** ** * ** ***
+
 
 Conclusion: {#h2-3-conclusion}
 ------------------------------

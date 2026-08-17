@@ -71,9 +71,12 @@ Once business requirements are finalized, define the rules on which data fields 
 
 The movies collection in the sample_mflix database has a date field called released. To make online archival perform better, you need to create an index on the released field using the below command.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">use sample_mflix
+```
+use sample_mflix
 
-db.movies.createIndex({"released":1})</pre>
+db.movies.createIndex({"released":1})
+```
+
 
 After creating the index, you can choose this field as a date-based archive and move the data that is older than 10 years (3652 days) to cold storage. This means the cluster will store documents less than 10 years old, and all other documents move to archival storage which is cheaper to maintain.
 
@@ -155,7 +158,10 @@ Here, the cluster name DemoCluster has archived collection data that you can ret
 
 Connection string:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">mongodb://Username:Password@archived-atlas-online-archive-65df00164668c44159eb65c8-abcd6.a.query.mongodb.net/?ssl=true&amp;authSource=admin</pre>
+```
+mongodb://Username:Password@archived-atlas-online-archive-65df00164668c44159eb65c8-abcd6.a.query.mongodb.net/?ssl=true&authSource=admin
+```
+
 
 ![Data federation – federated instances connection string access steps](Screenshot-2026-03-10-at-2.06.04-PM.png)
 
@@ -168,7 +174,10 @@ This federated database instance for your cluster and archive allows you to quer
 
 Connection string:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">mongodb://Username:Password@atlas-online-archive-65df00164668c44159eb65c8-abcd6.a.query.mongodb.net/?ssl=true&amp;authSource=admin</pre>
+```
+mongodb://Username:Password@atlas-online-archive-65df00164668c44159eb65c8-abcd6.a.query.mongodb.net/?ssl=true&authSource=admin
+```
+
 
 Note: Using this connection string, you can view all the databases inside the cluster and the archived collection's total document count. It also allows READ-ONLY mode.  
 ![Archived cluster data – both your cluster and archived data access by using this instance/connection string](Screenshot-2026-03-10-at-2.07.26-PM.png)
@@ -181,7 +190,10 @@ As discussed earlier, the main cluster DemoCluster contains the latest data as p
 
 Connection string:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">mongodb+srv://Username:<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="2171405252564e53456145444c4e424d54525544530f40434245170f4c4e4f464e45430f4f4455">[email&nbsp;protected]</a>/</pre>
+```
+mongodb+srv://Username:<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="2171405252564e53456145444c4e424d54525544530f40434245170f4c4e4f464e45430f4f4455">[email protected]</a>/
+```
+
 
 In this scenario, after archiving aged data, you can see only 2186 documents for the movies collection with data less than 10 years old.  
 ![MongoCompass – only latest data available on main cluster after online archive setup. Aged data can be accessed through separate federated database instances as discussed in the Federated Databases tab.](Screenshot-2026-03-10-at-2.07.50-PM.png)

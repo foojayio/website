@@ -48,7 +48,8 @@ A similar load scenario is executed against each deployed application (Figure 2.
 
 The applications are deployed into the kubernetes cluster in a way they are isolated from each other. The Grafana and Prometheus nodes are also present in the cluster to collect data-points from the application pods during the simulation tests (Listing 1.).
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ kubernetes.sh --deploy
+```
+$ kubernetes.sh --deploy
 $ kubectl get pod 
 NAME                                 READY   STATUS    RESTARTS   AGE
 grafana-8657696bb4-95rrd             1/1     Running   0          23s
@@ -57,7 +58,8 @@ quarkus-java-84fff97d65-2knft        1/1     Running   0          23s
 quarkus-kotlin-57678d4449-gnrs4      1/1     Running   0          23s
 spring-boot-7b8d5df489-f9jbc         1/1     Running   0          23s
 spring-boot-kotlin-cc8688d9d-rlt4d   1/1     Running   0          23s
-</pre>
+```
+
 
 **Listing 1**.: deploy script for deploying infrastructure and monitoring pods
 
@@ -74,23 +76,29 @@ There are a couple of options on how to generate such load, one of them could be
 
 Our Gatling scenarios are written in Scala, allowing without much effort to implement what we need for our setup and we were ready, quite quickly, to execute it (Listing 3.)
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">private val scenarioSequence: ArrayBuffer[ChainBuilder] = ArrayBuffer[ChainBuilder](
+```java
+private val scenarioSequence: ArrayBuffer[ChainBuilder] = ArrayBuffer[ChainBuilder](
  postSimpleElement(elementsProvider, sessionSimpleElementPost),
  checkSimpleElement(elementsProvider, sessionSimpleElementNumber)
 )
 private val completeScenario = scenario("post simple elements").exec(scenarioSequence)
-setUp(completeScenario.inject(rampUsers(2000) during (3 minute))).protocols(httpSimpleElementApi)</pre>
+setUp(completeScenario.inject(rampUsers(2000) during (3 minute))).protocols(httpSimpleElementApi)
+```
+
 
 **Listing 2**.: Executed Gatling Simulation
 
 After each test execution a nice report is generated. The report can be customised which is a very neat Gatling feature.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$mvn gatling:test
+```
+$mvn gatling:test
 output:
 23:34:16.946 [INFO ] i.g.c.c.GatlingConfiguration$ - Gatling will try to load 'gatling.conf' config file as ClassLoader resource.
 23:34:17.256 [INFO ] a.e.s.Slf4jLogger - Slf4jLogger started
 23:34:17.766 [WARN ] i.g.c.s.e.ElCompiler$ - You're still using the deprecated ${} pattern for Gatling EL. Please use to the #{} pattern instead.
-Simulation com.wengnermiro.scala.gatling.examples.FwExampleLoadSimulation started...</pre>
+Simulation com.wengnermiro.scala.gatling.examples.FwExampleLoadSimulation started...
+```
+
 
 **Listing 3.**: Starting gatling load scenarios
 

@@ -21,7 +21,7 @@ frozen: false
 
 This is the first JavaFX LinksOfTheMonth review for 2024, an overview of the LinksOfTheWeek that got published on [jfx-central.com](https://www.jfx-central.com/) during January.
 
-*** ** * ** ***
+
 
 Core {#h2-1-core}
 -----------------

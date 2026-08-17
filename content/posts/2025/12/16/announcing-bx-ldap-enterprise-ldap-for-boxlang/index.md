@@ -50,7 +50,8 @@ The module supports seven core LDAP operations:
 
 Choose the data format that works best for your application, either native Queries or Arrays.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">// Traditional Query format
+```java
+// Traditional Query format
 bx:ldap
     action="query"
     server="ldap.example.com"
@@ -77,13 +78,16 @@ apiResponse = {
     "count" : itUsers.len()
 };
 
-return jsonSerialize( apiResponse );</pre>
+return jsonSerialize( apiResponse );
+```
+
 
 ### 🔌 Smart Connection Pooling {#h3-4-smart-connection-pooling}
 
 Forget about managing connections manually! bx-ldap includes automatic connection pooling and tracking, ensuring optimal performance and resource management:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">// Define a named connection once
+```java
+// Define a named connection once
 bx:ldap
     action="open"
     connection="myLdap"
@@ -106,19 +110,22 @@ bx:ldap
     action="modify"
     connection="myLdap"
     dn="uid=jdoe,ou=users,dc=example,dc=org"
-    attributes={ "mail" : "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="caa4afbdafa7aba3a68aafb2aba7baa6afe4a9a5a7">[email&nbsp;protected]</a>" }
+    attributes={ "mail" : "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="caa4afbdafa7aba3a68aafb2aba7baa6afe4a9a5a7">[email protected]</a>" }
     modifyType="replace";
 
 // Explicitly close when done
 bx:ldap
     action="close"
-    connection="myLdap";</pre>
+    connection="myLdap";
+```
+
 
 ### 📢 Event-Driven Programming {#h3-5-event-driven-programming}
 
 Monitor and react to LDAP operations with built-in event announcements! bx-ldap integrates seamlessly with BoxLang's interception system:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">// Create an interceptor to monitor connections
+```java
+// Create an interceptor to monitor connections
 class {
 
     function onLDAPConnectionOpen( struct eventData ) {
@@ -137,7 +144,9 @@ class {
             log : "ldap"
         );
     }
-}</pre>
+}
+```
+
 
 Perfect for:
 
@@ -152,7 +161,8 @@ Perfect for:
 
 Quick User Lookup
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">// Find a user with specific attributes
+```java
+// Find a user with specific attributes
 bx:ldap
     action="query"
     server="ldap.example.com"
@@ -163,38 +173,44 @@ bx:ldap
     attributes="cn,mail,telephoneNumber"
     result="user";
 
-if ( user.recordCount &gt; 0 ) {
+if ( user.recordCount > 0 ) {
     println( "Name: #user.cn#" );
     println( "Email: #user.mail#" );
     println( "Phone: #user.telephoneNumber#" );
-}</pre>
+}
+```
+
 
 Complex Search with Pagination
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">// Find active IT users with pagination
+```java
+// Find active IT users with pagination
 bx:ldap
     action="query"
     server="ldap.example.com"
     start="dc=example,dc=org"
     scope="subtree"
-    filter="(&amp;(objectClass=person)(department=IT)(!(accountStatus=disabled)))"
+    filter="(&(objectClass=person)(department=IT)(!(accountStatus=disabled)))"
     sort="cn"
     sortDirection="asc"
     maxrows="50"
     startRow="1"
     result="itUsers";
 
-println( "Found #itUsers.recordCount# active IT users" );</pre>
+println( "Found #itUsers.recordCount# active IT users" );
+```
+
 
 Create a New User
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">// Add a new user with multiple attributes
+```java
+// Add a new user with multiple attributes
 newUser = {
     "objectClass" : [ "inetOrgPerson", "organizationalPerson", "person", "top" ],
     "cn" : "John Doe",
     "sn" : "Doe",
     "uid" : "jdoe",
-    "mail" : "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="23494c4b4d0d474c4663465b424e534f460d404c4e">[email&nbsp;protected]</a>",
+    "mail" : "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="23494c4b4d0d474c4663465b424e534f460d404c4e">[email protected]</a>",
     "userPassword" : "SecurePassword123",
     "telephoneNumber" : "+1-555-0123"
 };
@@ -207,11 +223,14 @@ bx:ldap
     dn="uid=jdoe,ou=users,dc=example,dc=org"
     attributes=newUser;
 
-println( "User created successfully!" );</pre>
+println( "User created successfully!" );
+```
+
 
 Secure SSL Connection
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">// Connect securely with SSL/TLS
+```java
+// Connect securely with SSL/TLS
 bx:ldap
     action="query"
     server="ldaps.example.com"
@@ -221,11 +240,14 @@ bx:ldap
     password="apppass"
     start="dc=example,dc=org"
     filter="(objectClass=person)"
-    result="secureUsers";</pre>
+    result="secureUsers";
+```
+
 
 Group Management
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">// Create a group with multiple members
+```java
+// Create a group with multiple members
 newGroup = {
     "objectClass" : [ "groupOfNames", "top" ],
     "cn" : "Developers",
@@ -243,7 +265,9 @@ bx:ldap
     username="cn=admin,dc=example,dc=org"
     password="adminpass"
     dn="cn=Developers,ou=groups,dc=example,dc=org"
-    attributes=newGroup;</pre>
+    attributes=newGroup;
+```
+
 
 🔒 Enterprise-Grade Security {#h2-7-enterprise-grade-security}
 --------------------------------------------------------------
@@ -270,11 +294,17 @@ bx:ldap
 
 For CommandBox Users
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">box install bx-ldap@ortus</pre>
+```java
+box install bx-ldap@ortus
+```
+
 
 For BoxLang OS Binary Users
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">install-bx-module bx-ldap@ortus</pre>
+```java
+install-bx-module bx-ldap@ortus
+```
+
 
 📚 Documentation {#h2-10-documentation}
 ---------------------------------------

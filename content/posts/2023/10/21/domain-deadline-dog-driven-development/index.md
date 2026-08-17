@@ -128,23 +128,23 @@ ChatGPT Alternatives {#h2-18-chatgpt-alternatives}
 I also asked my new buddy ChatGPT to come up with a few alternatives:
 > ***PDD (Penguin Driven Development)**: Developers work in harmony with penguins, who provide testing feedback with their cute flapping and waddling.*
 >
-> *** ** * ** ***
+> 
 >
 > ***ADD (Alien Driven Development)**: Aliens from outer space assist with testing the software, providing unique perspectives on usability and functionality.*
 >
-> *** ** * ** ***
+> 
 >
 > ***GDD (Giraffe Driven Development)**: With the help of giraffes' towering views, developers gain a higher perspective on the code and anticipate potential issues.*
 >
-> *** ** * ** ***
+> 
 >
 > ***KDD (Knitting Driven Development)**: Developers knit together the software, ensuring it's robust and cozy enough to withstand any challenge.*
 >
-> *** ** * ** ***
+> 
 >
 > ***CDD (Corgi Delivery Development)**: Corgis deliver feedback on the software's quality by enthusiastically barking for good code and giving disapproving looks for bugs*
 >
-> *** ** * ** ***
+> 
 >
 > *Remember, these are purely fictional and fanciful alternatives meant to bring a smile to your face. In real software development, sticking to proven methodologies like TDD or other established approaches is essential for successful and reliable results.*
 

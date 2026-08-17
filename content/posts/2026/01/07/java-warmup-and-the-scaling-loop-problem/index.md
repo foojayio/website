@@ -56,8 +56,11 @@ Before you start troubleshooting, check whether the warmup is actually causing i
 
 You can enable GC logging using the following command-line options. More options are available as [documented here](https://docs.azul.com/gc-log-analyzer/usage/generating-logs), but in this case, we need a single file (filecount=0 disables file rotation).
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">java -Xlog:gc,safepoint:/my_log_dir/gc.log::filecount=0 \
-    -jar my-application.jar</pre>
+```
+java -Xlog:gc,safepoint:/my_log_dir/gc.log::filecount=0 \
+    -jar my-application.jar
+```
+
 
 Then open the log with the [Azul GC Log Analyzer](https://docs.azul.com/gc-log-analyzer/). Check these charts to find potential bottlenecks:
 
@@ -89,20 +92,26 @@ The simplest fix? Let the compiler use more CPU to finish faster.
 
 [Falcon](https://www.azul.com/products/components/falcon-jit-compiler/) is the default optimizing JIT compiler in Azul Platform Prime, Azul's high-performance [Java platform](https://www.azul.com/) that includes Zing. With Falcon, you can control thread allocation:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group=""># Set total compiler threads
+```
+# Set total compiler threads
 java -XX:CIMaxCompilerThreads=3 \
     -jar my-application.jar
 
 # Or split between Tier 1 and Tier 2
 java -XX:C1MaxCompilerThreads=2 \
     -XX:C2MaxCompilerThreads=4 \
-    -jar my-application.jar</pre>
+    -jar my-application.jar
+```
+
 
 You can also add extra compilers for a fixed duration. The following example adds two extra compiler threads for the first 60 seconds. After that, they're freed up for your application. If the number of seconds is less than your alert threshold, it won't trigger your scaling monitoring.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">java -XX:CompilerWarmupPeriodSeconds=60 \
+```
+java -XX:CompilerWarmupPeriodSeconds=60 \
      -XX:CompilerWarmupExtraThreads=2 \
-     -jar my-application.jar</pre>
+     -jar my-application.jar
+```
+
 
 **When this works:**
 
@@ -122,13 +131,16 @@ Solution 2: Lower the compilation threshold {#h-solution-2-lower-the-compilation
 
 Instead of waiting for 10,000 invocations, you can also decide to start the JIT sooner:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">java -XX:FalconCompileThreshold=5000 \
+```
+java -XX:FalconCompileThreshold=5000 \
     -jar my-application.jar
 
 # Or lower both thresholds
 java -XX:C1CompileThreshold=500 \
     -XX:FalconCompileThreshold=5000 \
-    -jar my-application.jar</pre>
+    -jar my-application.jar
+```
+
 
 **When this works:**
 
@@ -148,13 +160,16 @@ This is where things get interesting. ReadyNow is an Azul Zing feature that chan
 
 Here's how it works:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group=""># First run - create a profile
+```
+# First run - create a profile
 java -XX:ProfileLogOut=/var/app/profiles/readynow.profile \
      -jar my-application.jar
 
 # Next runs - use the profile
 java -XX:ProfileLogIn=/var/app/profiles/readynow.profile \
-     -jar my-application.jar</pre>
+     -jar my-application.jar
+```
+
 
 The first run creates a profile that includes all compiler decisions. Subsequent runs read this profile and immediately compile all methods to produce the optimal code based on the information from the previous run. No waiting for invocation thresholds. The warmup time drops dramatically \[Figure 2\].
 ![](CHART-ReadyNow-Warmup-1024x585-1.avif)
@@ -206,11 +221,14 @@ You deploy Optimizer Hub as a Kubernetes service within your own environment usi
 
 Once Optimizer Hub is available within your environment, you need to add the following command-line options to start your application:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">java -XX:OptHubHost=&lt;optimizer-hub-host&gt;[:&lt;port&gt;] \
+```
+java -XX:OptHubHost=<optimizer-hub-host>[:<port>] \
      -XX:+CNCEnableRemoteCompiler \
      -XX:+EnableRNO \
      -XX:ProfileName=my-app \
-     -jar my-application.jar</pre>
+     -jar my-application.jar
+```
+
 
 Your JVM automatically sends compilation requests to the Cloud Native Compiler and synchronizes profiles through the ReadyNow Orchestrator. If Optimizer Hub is unavailable, it falls back to local compilation.
 

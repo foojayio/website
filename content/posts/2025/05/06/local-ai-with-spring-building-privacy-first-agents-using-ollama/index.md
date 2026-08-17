@@ -40,7 +40,10 @@ Configuring Ollama {#h2-1-configuring-ollama}
 
 Configuring it is extremely simple, just download the client from the link above, and, in order to start it, open a terminal window and run:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">ollama serve</pre>
+```
+ollama serve
+```
+
 
 This will spin up a client on your machine and you should see something like below:
 
@@ -69,54 +72,58 @@ We'll see just how easy all of this is with Spring AI.
 
 First, we'll use Maven and set up a simple POM.xml that sets the stage and leverages most of the starter dependencies we need for all the magic to happen:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">&lt;dependencies&gt;
-    &lt;dependency&gt;
-        &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
-        &lt;artifactId&gt;spring-boot-starter-web&lt;/artifactId&gt;
-    &lt;/dependency&gt;
-    &lt;dependency&gt;
-        &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
-        &lt;artifactId&gt;spring-boot-starter-webflux&lt;/artifactId&gt;
-    &lt;/dependency&gt;
-    &lt;dependency&gt;
-        &lt;groupId&gt;org.springframework.ai&lt;/groupId&gt;
-        &lt;artifactId&gt;spring-ai-starter-mcp-client-webflux&lt;/artifactId&gt;
-    &lt;/dependency&gt;
-    &lt;dependency&gt;
-        &lt;groupId&gt;org.springframework.ai&lt;/groupId&gt;
-        &lt;artifactId&gt;spring-ai-starter-model-ollama&lt;/artifactId&gt;
-    &lt;/dependency&gt;
-    &lt;dependency&gt;
-        &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
-        &lt;artifactId&gt;spring-boot-starter-test&lt;/artifactId&gt;
-        &lt;scope&gt;test&lt;/scope&gt;
-    &lt;/dependency&gt;
-    &lt;dependency&gt;
-        &lt;groupId&gt;io.projectreactor&lt;/groupId&gt;
-        &lt;artifactId&gt;reactor-test&lt;/artifactId&gt;
-        &lt;scope&gt;test&lt;/scope&gt;
-    &lt;/dependency&gt;
-    &lt;dependency&gt;
-        &lt;groupId&gt;org.projectlombok&lt;/groupId&gt;
-        &lt;artifactId&gt;lombok&lt;/artifactId&gt;
-        &lt;scope&gt;provided&lt;/scope&gt;
-    &lt;/dependency&gt;
-&lt;/dependencies&gt;
-&lt;dependencyManagement&gt;
-    &lt;dependencies&gt;
-        &lt;dependency&gt;
-            &lt;groupId&gt;org.springframework.ai&lt;/groupId&gt;
-            &lt;artifactId&gt;spring-ai-bom&lt;/artifactId&gt;
-            &lt;version&gt;${spring-ai.version}&lt;/version&gt;
-            &lt;type&gt;pom&lt;/type&gt;
-            &lt;scope&gt;import&lt;/scope&gt;
-        &lt;/dependency&gt;
-    &lt;/dependencies&gt;
-&lt;/dependencyManagement&gt;</pre>
+```
+<dependencies>
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-web</artifactId>
+    </dependency>
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-webflux</artifactId>
+    </dependency>
+    <dependency>
+        <groupId>org.springframework.ai</groupId>
+        <artifactId>spring-ai-starter-mcp-client-webflux</artifactId>
+    </dependency>
+    <dependency>
+        <groupId>org.springframework.ai</groupId>
+        <artifactId>spring-ai-starter-model-ollama</artifactId>
+    </dependency>
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-test</artifactId>
+        <scope>test</scope>
+    </dependency>
+    <dependency>
+        <groupId>io.projectreactor</groupId>
+        <artifactId>reactor-test</artifactId>
+        <scope>test</scope>
+    </dependency>
+    <dependency>
+        <groupId>org.projectlombok</groupId>
+        <artifactId>lombok</artifactId>
+        <scope>provided</scope>
+    </dependency>
+</dependencies>
+<dependencyManagement>
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.ai</groupId>
+            <artifactId>spring-ai-bom</artifactId>
+            <version>${spring-ai.version}</version>
+            <type>pom</type>
+            <scope>import</scope>
+        </dependency>
+    </dependencies>
+</dependencyManagement>
+```
+
 
 With this in place, we can then prepare our application.yml file that will autowire and bring all relevant beans into context, auto-configured for us by Springboot. Some of the details will be explained below:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">spring:
+```
+spring:
   ai:
     mcp:
       client:
@@ -141,7 +148,9 @@ With this in place, we can then prepare our application.yml file that will autow
         options:
           model: "mistral-small3.1"
         temperature: 0.7
-        max-tokens: 8192</pre>
+        max-tokens: 8192
+```
+
 
 What about this absolute beauty? In 25 lines, we configured an Ollama chat model, `mistral-small3.1` that just became available within the context of our app when it runs, through the `ChatModel` bean, as well as configured two MCP servers, that expose two tools that our LLM can leverage to effectively act and become an agent, that can perform dedicated actions on the users' behalf that go beyond the typical pattern of static chat messages.
 
@@ -151,12 +160,13 @@ This is also why we call these *agents* , in the sense that we provide an LLM wi
 
 Here it is, in all its glory. We start with a simple configuration class that showcases how a `ChatClient` is instantiated with tool capabilities. It wraps the lower-level `ChatModel` to enhance it with tool calling capabilities.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">@Configuration
+```
+@Configuration
 @AllArgsConstructor
 public class McpDemoConfiguration {
 
     private final ChatModel chatModel;
-    private final List&lt;McpSyncClient&gt; mcpSyncClients;
+    private final List<McpSyncClient> mcpSyncClients;
 
     private final String DEFAULT_SYSTEM_PROMPT = """
         You are a useful assistant that can perform web searches using Brave's search API to reply to your questions. 
@@ -174,17 +184,22 @@ public class McpDemoConfiguration {
             .defaultAdvisors(new MessageChatMemoryAdvisor(new InMemoryChatMemory()))
             .build();
     }
-}</pre>
+}
+```
+
 
 Then, using it in a service is super simple:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">public Flux&lt;ChatResponse&gt; processPromptStreaming(@RequestBody String promptText) {
+```
+public Flux<ChatResponse> processPromptStreaming(@RequestBody String promptText) {
      ChatClient chatClient = mcpDemoConfiguration.prepareChatClient();
 
      var prompt = new Prompt(promptText);
 
      return chatClient.prompt(prompt).stream().chatResponse();
- }</pre>
+ }
+```
+
 
 Now, we have a local running LLM, configured with Ollama that we can then use as our own private assistant that can send emails and conduct web searches on our behalf!
 
@@ -195,7 +210,8 @@ With FastMCP, you can build your own agents as shown above in the application.ym
 
 The code inside `server.py` is quite simple:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic"># server.py
+```
+# server.py
 from fastmcp import FastMCP
 import smtplib
 from email.mime.text import MIMEText
@@ -207,18 +223,18 @@ mcp = FastMCP("Demo")
 
 # Add an addition tool
 @mcp.tool()
-def add(a: int, b: int) -&gt; int:
+def add(a: int, b: int) -> int:
     """Add two numbers"""
     return a + b
 
 # Add a dynamic greeting resource
 @mcp.resource("greeting://{name}")
-def get_greeting(name: str) -&gt; str:
+def get_greeting(name: str) -> str:
     """Get a personalized greeting"""
     return f"Hello, {name}!"
 
 @mcp.tool()
-def send_gmail(sender_email: str, receiver_email: str, subject: str, message_body: str) -&gt; bool:
+def send_gmail(sender_email: str, receiver_email: str, subject: str, message_body: str) -> bool:
     """
     Send an email using Gmail SMTP server
 
@@ -254,7 +270,9 @@ def send_gmail(sender_email: str, receiver_email: str, subject: str, message_bod
 
     except Exception as e:
         print(f"Error sending email: {e}")
-        return False</pre>
+        return False
+```
+
 
 The most important piece here is to add a nice function description and use named arguments, as Spring AI's agent capabilities will make use of these to guide the LLM, fully internally, to know and decide which tools to use and when and with which arguments.
 

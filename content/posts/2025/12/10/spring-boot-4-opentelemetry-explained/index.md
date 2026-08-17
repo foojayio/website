@@ -44,7 +44,7 @@ Key Terminology {#h2-0-key-terminology}
 * The **OpenTelemetry** documentation states that OpenTelemetry is an **open-source framework for observability** that facilitates users in generating, exporting, and collecting telemetry data such as logs, metrics, and traces.
 * **Spring Boot Actuator**, a subproject of Spring Boot, facilitates the management and monitoring of our application through HTTP endpoints or JMX. It reveals multiple endpoints that provide extensive information about the application across various instrumentation details.
 
-*** ** * ** ***
+
 
 <br />
 
@@ -60,7 +60,7 @@ The **OpenTelemetry framework**guides us with two fundamental principles:
 * You own the data that you create, ensuring there is no vendor lock-in.
 * You need to familiarize yourself with only one set of APIs and conventions.
 
-*** ** * ** ***
+
 
 Before the release of Spring Boot 4, we faced several challenges in integrating open telemetry, specifically:
 
@@ -81,14 +81,20 @@ If you already have an existing Spring Boot application, you can begin by incorp
 
 **Step 1:** Add the opentelemetry dependency in the `pom.xml`
 
-<pre class="EnlighterJSRAW" data-enlighter-language="xml" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&lt;dependency&gt;
-    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
-    &lt;artifactId&gt;spring-boot-starter-opentelemetry&lt;/artifactId&gt;
-&lt;/dependency&gt;</pre>
+```xml
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-opentelemetry</artifactId>
+</dependency>
+```
+
 
 Or in the `build.gradle`
 
-<pre class="EnlighterJSRAW" data-enlighter-language="json" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">implementation 'org.springframework.boot:spring-boot-starter-opentelemetry'</pre>
+```json
+implementation 'org.springframework.boot:spring-boot-starter-opentelemetry'
+```
+
 
 **Note:** This starter includes
 
@@ -102,50 +108,66 @@ In Spring Boot 3, you must add the dependencies mentioned above individually to 
 
 1. Add the OpenTelemetry Logback appender to `pom.xml`
 
-<pre class="EnlighterJSRAW" data-enlighter-language="xml" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&lt;dependency&gt;
-    &lt;groupId&gt;io.opentelemetry.instrumentation&lt;/groupId&gt;
-    &lt;artifactId&gt;opentelemetry-logback-appender-1.0&lt;/artifactId&gt;
-    &lt;version&gt;2.21.0-alpha&lt;/version&gt; // version might change later
-&lt;/dependency&gt;</pre>
+```xml
+<dependency>
+    <groupId>io.opentelemetry.instrumentation</groupId>
+    <artifactId>opentelemetry-logback-appender-1.0</artifactId>
+    <version>2.21.0-alpha</version> // version might change later
+</dependency>
+```
+
 
 Or in `build.gradle`:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="json" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">implementation 'io.opentelemetry.instrumentation:opentelemetry-logback-appender-1.0:2.21.0-alpha'</pre>
+```json
+implementation 'io.opentelemetry.instrumentation:opentelemetry-logback-appender-1.0:2.21.0-alpha'
+```
+
 
 2. Enable Log Export Property by adding the below property in `application.properties`
 
-<pre class="EnlighterJSRAW" data-enlighter-language="json" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">management.opentelemetry.logging.export.otlp.endpoint=http://localhost:4318/v1/logs</pre>
+```json
+management.opentelemetry.logging.export.otlp.endpoint=http://localhost:4318/v1/logs
+```
+
 
 Or in YAML:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">management:
+```yaml
+management:
   opentelemetry:
     logging:
       export:
         otlp:
-          endpoint: http://localhost:4318/v1/logs</pre>
+          endpoint: http://localhost:4318/v1/logs
+```
+
 
 3. Configure Logback Appender
 
 Create `src/main/resources/logback-spring.xml`:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="xml" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
-&lt;configuration&gt;
-    &lt;include resource="org/springframework/boot/logging/logback/base.xml"/&gt;
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <include resource="org/springframework/boot/logging/logback/base.xml"/>
 
-    &lt;appender name="OTEL" class="io.opentelemetry.instrumentation.logback.appender.v1_0.OpenTelemetryAppender"&gt;
-    &lt;/appender&gt;
+    <appender name="OTEL" class="io.opentelemetry.instrumentation.logback.appender.v1_0.OpenTelemetryAppender">
+    </appender>
 
-    &lt;root level="INFO"&gt;
-        &lt;appender-ref ref="OTEL"/&gt;
-    &lt;/root&gt;
-&lt;/configuration&gt;</pre>
+    <root level="INFO">
+        <appender-ref ref="OTEL"/>
+    </root>
+</configuration>
+```
+
 
 4. Install OpenTelemetry Appender
 
 Create a component to initialize the appender:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">import io.opentelemetry.api.OpenTelemetry;
+```java
+import io.opentelemetry.api.OpenTelemetry;
 import io.opentelemetry.instrumentation.logback.appender.v1_0.OpenTelemetryAppender;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.stereotype.Component;
@@ -163,7 +185,9 @@ public class InstallOpenTelemetryAppender implements InitializingBean {
     public void afterPropertiesSet() throws Exception {
         OpenTelemetryAppender.install(openTelemetry);
     }
-}</pre>
+}
+```
+
 
 **Step 3:** Configure ***Metrics*** Export
 
@@ -171,17 +195,23 @@ public class InstallOpenTelemetryAppender implements InitializingBean {
 
 Add the following property to `application.properties`:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="json" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group=""># For development keep 1.0 for all traces to export, production environment keep 0.1
+```json
+# For development keep 1.0 for all traces to export, production environment keep 0.1
 management.tracing.sampling.probability=1.0
-management.otlp.metrics.export.url=http://localhost:4318/v1/metrics</pre>
+management.otlp.metrics.export.url=http://localhost:4318/v1/metrics
+```
+
 
 Or in `application.yml`:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">management:
+```yaml
+management:
   otlp:
     metrics:
       export:
-        url: http://localhost:4318/v1/metrics</pre>
+        url: http://localhost:4318/v1/metrics
+```
+
 
 2. Configure OpenTelemetry Semantic Conventions
 
@@ -189,7 +219,8 @@ You can select the metrics for export and configure them as beans, such as **Pro
 
 Create a configuration class to use OpenTelemetry semantic conventions:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">import io.micrometer.core.instrument.Tags;
+```java
+import io.micrometer.core.instrument.Tags;
 import io.micrometer.core.instrument.binder.jvm.ClassLoaderMetrics;
 import io.micrometer.core.instrument.binder.jvm.JvmMemoryMetrics;
 import io.micrometer.core.instrument.binder.jvm.JvmThreadMetrics;
@@ -242,22 +273,30 @@ public class OpenTelemetryConfiguration {
             new OpenTelemetryJvmClassLoadingMeterConventions()
         );
     }
-}</pre>
+}
+```
+
 
 **Step 4:** Configure ***Traces*** Export
 
 1. Add the following property to enable trace export in `application.properies`
 
-<pre class="EnlighterJSRAW" data-enlighter-language="json" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">management.opentelemetry.tracing.export.otlp.endpoint=http://localhost:4318/v1/traces</pre>
+```json
+management.opentelemetry.tracing.export.otlp.endpoint=http://localhost:4318/v1/traces
+```
+
 
 Or in `application.yml`
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">management:
+```yaml
+management:
   opentelemetry:
     tracing:
       export:
         otlp:
-          endpoint: http://localhost:4318/v1/traces</pre>
+          endpoint: http://localhost:4318/v1/traces
+```
+
 
 Spring Boot automatically configures:
 
@@ -273,7 +312,8 @@ Both send data to the same collector **(port 4318)**, but the configuration path
 
 Create a Servlet filter to include *trace ID* in response headers:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">import io.micrometer.tracing.Tracer;
+```java
+import io.micrometer.tracing.Tracer;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -297,7 +337,9 @@ public class TraceIdFilter implements Filter {
 
         chain.doFilter(request, response);
     }
-}</pre>
+}
+```
+
 
 This allows users to include the trace ID when reporting errors.
 
@@ -307,7 +349,8 @@ This allows users to include the trace ID when reporting errors.
 
 Create `compose.yaml` in your project root:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">services:
+```yaml
+services:
   otel-lgtm:
     image: grafana/otel-lgtm
     ports:
@@ -315,18 +358,23 @@ Create `compose.yaml` in your project root:
       - "4318:4318"   # OTLP HTTP receiver
       - "4317:4317"   # OTLP gRPC receiver
     environment:
-      - GF_SECURITY_ADMIN_PASSWORD=admin</pre>
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+```
+
 
 2. Add Docker Compose Support (Optional)
 
 Add dependency for automatic Docker Compose integration:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="xml" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&lt;dependency&gt;
-    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
-    &lt;artifactId&gt;spring-boot-docker-compose&lt;/artifactId&gt;
-    &lt;scope&gt;runtime&lt;/scope&gt;
-    &lt;optional&gt;true&lt;/optional&gt;
-&lt;/dependency&gt;</pre>
+```xml
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-docker-compose</artifactId>
+    <scope>runtime</scope>
+    <optional>true</optional>
+</dependency>
+```
+
 
 Spring Boot will automatically:
 

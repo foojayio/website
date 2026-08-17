@@ -25,13 +25,19 @@ If (like me!) you prefer to read code rather than a long and boring article, jum
 
 You can clone and run the tests like this:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">git clone https://github.com/luketn/mongodb-schemas-in-java&nbsp;
-cd mongodb-schemas-in-java&nbsp;
-mvn test</pre>
+```
+git clone https://github.com/luketn/mongodb-schemas-in-java 
+cd mongodb-schemas-in-java 
+mvn test
+```
+
 
 And if you want to play with the example API visually (like I do!) and you have a local Mongo or an Atlas Cluster with the [Weather Sample](https://www.mongodb.com/docs/guides/atlas/sample-data/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=mongodb-schemas-java&utm_term=megan.grant) data, run:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">./run-atlas.sh</pre>
+```
+./run-atlas.sh
+```
+
 
 Put your connection string in and you'll see the sea surface temperatures displayed on a nice little browser UI:  
 
@@ -106,126 +112,129 @@ We'll use the Atlas sample weather dataset for our service.
 
 Here's an example document from the sample data collection:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">{
-&nbsp;&nbsp;"_id": {
-&nbsp;&nbsp;&nbsp;&nbsp;"$oid": "5553a998e4b02cf7151190c9"
-&nbsp;&nbsp;},
-&nbsp;&nbsp;"st": "x+51900+003200",
-&nbsp;&nbsp;"ts": {
-&nbsp;&nbsp;&nbsp;&nbsp;"$date": {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"$numberLong": "447354000000"
-&nbsp;&nbsp;&nbsp;&nbsp;}
-&nbsp;&nbsp;},
-&nbsp;&nbsp;"position": {
-&nbsp;&nbsp;&nbsp;&nbsp;"type": "Point",
-&nbsp;&nbsp;&nbsp;&nbsp;"coordinates": [
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"$numberDouble": "3.2"
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;},
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"$numberDouble": "51.9"
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
-&nbsp;&nbsp;&nbsp;&nbsp;]
-&nbsp;&nbsp;},
-&nbsp;&nbsp;"elevation": {
-&nbsp;&nbsp;&nbsp;&nbsp;"$numberInt": "9999"
-&nbsp;&nbsp;},
-&nbsp;&nbsp;"callLetters": "PLAT",
-&nbsp;&nbsp;"qualityControlProcess": "V020",
-&nbsp;&nbsp;"dataSource": "4",
-&nbsp;&nbsp;"type": "FM-13",
-&nbsp;&nbsp;"airTemperature": {
-&nbsp;&nbsp;&nbsp;&nbsp;"value": {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"$numberDouble": "4.8"
-&nbsp;&nbsp;&nbsp;&nbsp;},
-&nbsp;&nbsp;&nbsp;&nbsp;"quality": "1"
-&nbsp;&nbsp;},
-&nbsp;&nbsp;"dewPoint": {
-&nbsp;&nbsp;&nbsp;&nbsp;"value": {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"$numberDouble": "4.6"
-&nbsp;&nbsp;&nbsp;&nbsp;},
-&nbsp;&nbsp;&nbsp;&nbsp;"quality": "1"
-&nbsp;&nbsp;},
-&nbsp;&nbsp;"pressure": {
-&nbsp;&nbsp;&nbsp;&nbsp;"value": {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"$numberDouble": "1032.6"
-&nbsp;&nbsp;&nbsp;&nbsp;},
-&nbsp;&nbsp;&nbsp;&nbsp;"quality": "1"
-&nbsp;&nbsp;},
-&nbsp;&nbsp;"wind": {
-&nbsp;&nbsp;&nbsp;&nbsp;"direction": {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"angle": {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"$numberInt": "170"
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;},
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"quality": "1"
-&nbsp;&nbsp;&nbsp;&nbsp;},
-&nbsp;&nbsp;&nbsp;&nbsp;"type": "N",
-&nbsp;&nbsp;&nbsp;&nbsp;"speed": {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"rate": {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"$numberDouble": "0.5"
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;},
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"quality": "1"
-&nbsp;&nbsp;&nbsp;&nbsp;}
-&nbsp;&nbsp;},
-&nbsp;&nbsp;"visibility": {
-&nbsp;&nbsp;&nbsp;&nbsp;"distance": {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"value": {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"$numberInt": "999999"
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;},
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"quality": "9"
-&nbsp;&nbsp;&nbsp;&nbsp;},
-&nbsp;&nbsp;&nbsp;&nbsp;"variability": {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"value": "N",
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"quality": "9"
-&nbsp;&nbsp;&nbsp;&nbsp;}
-&nbsp;&nbsp;},
-&nbsp;&nbsp;"skyCondition": {
-&nbsp;&nbsp;&nbsp;&nbsp;"ceilingHeight": {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"value": {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"$numberInt": "99999"
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;},
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"quality": "9",
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"determination": "9"
-&nbsp;&nbsp;&nbsp;&nbsp;},
-&nbsp;&nbsp;&nbsp;&nbsp;"cavok": "N"
-&nbsp;&nbsp;},
-&nbsp;&nbsp;"sections": [
-&nbsp;&nbsp;&nbsp;&nbsp;"AG1",
-&nbsp;&nbsp;&nbsp;&nbsp;"MD1",
-&nbsp;&nbsp;&nbsp;&nbsp;"OA1",
-&nbsp;&nbsp;&nbsp;&nbsp;"SA1"
-&nbsp;&nbsp;],
-&nbsp;&nbsp;"precipitationEstimatedObservation": {
-&nbsp;&nbsp;&nbsp;&nbsp;"discrepancy": "2",
-&nbsp;&nbsp;&nbsp;&nbsp;"estimatedWaterDepth": {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"$numberInt": "999"
-&nbsp;&nbsp;&nbsp;&nbsp;}
-&nbsp;&nbsp;},
-&nbsp;&nbsp;"atmosphericPressureChange": {
-&nbsp;&nbsp;&nbsp;&nbsp;"tendency": {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"code": "2",
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"quality": "1"
-&nbsp;&nbsp;&nbsp;&nbsp;},
-&nbsp;&nbsp;&nbsp;&nbsp;"quantity3Hours": {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"value": {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"$numberDouble": "1.2"
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;},
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"quality": "1"
-&nbsp;&nbsp;&nbsp;&nbsp;},
-&nbsp;&nbsp;&nbsp;&nbsp;"quantity24Hours": {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"value": {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"$numberDouble": "99.9"
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;},
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"quality": "9"
-&nbsp;&nbsp;&nbsp;&nbsp;}
-&nbsp;&nbsp;},
-&nbsp;&nbsp;"seaSurfaceTemperature": {
-&nbsp;&nbsp;&nbsp;&nbsp;"value": {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"$numberDouble": "5.5"
-&nbsp;&nbsp;&nbsp;&nbsp;},
-&nbsp;&nbsp;&nbsp;&nbsp;"quality": "9"
-&nbsp;&nbsp;}
-}</pre>
+```
+{
+  "_id": {
+    "$oid": "5553a998e4b02cf7151190c9"
+  },
+  "st": "x+51900+003200",
+  "ts": {
+    "$date": {
+      "$numberLong": "447354000000"
+    }
+  },
+  "position": {
+    "type": "Point",
+    "coordinates": [
+      {
+        "$numberDouble": "3.2"
+      },
+      {
+        "$numberDouble": "51.9"
+      }
+    ]
+  },
+  "elevation": {
+    "$numberInt": "9999"
+  },
+  "callLetters": "PLAT",
+  "qualityControlProcess": "V020",
+  "dataSource": "4",
+  "type": "FM-13",
+  "airTemperature": {
+    "value": {
+      "$numberDouble": "4.8"
+    },
+    "quality": "1"
+  },
+  "dewPoint": {
+    "value": {
+      "$numberDouble": "4.6"
+    },
+    "quality": "1"
+  },
+  "pressure": {
+    "value": {
+      "$numberDouble": "1032.6"
+    },
+    "quality": "1"
+  },
+  "wind": {
+    "direction": {
+      "angle": {
+        "$numberInt": "170"
+      },
+      "quality": "1"
+    },
+    "type": "N",
+    "speed": {
+      "rate": {
+        "$numberDouble": "0.5"
+      },
+      "quality": "1"
+    }
+  },
+  "visibility": {
+    "distance": {
+      "value": {
+        "$numberInt": "999999"
+      },
+      "quality": "9"
+    },
+    "variability": {
+      "value": "N",
+      "quality": "9"
+    }
+  },
+  "skyCondition": {
+    "ceilingHeight": {
+      "value": {
+        "$numberInt": "99999"
+      },
+      "quality": "9",
+      "determination": "9"
+    },
+    "cavok": "N"
+  },
+  "sections": [
+    "AG1",
+    "MD1",
+    "OA1",
+    "SA1"
+  ],
+  "precipitationEstimatedObservation": {
+    "discrepancy": "2",
+    "estimatedWaterDepth": {
+      "$numberInt": "999"
+    }
+  },
+  "atmosphericPressureChange": {
+    "tendency": {
+      "code": "2",
+      "quality": "1"
+    },
+    "quantity3Hours": {
+      "value": {
+        "$numberDouble": "1.2"
+      },
+      "quality": "1"
+    },
+    "quantity24Hours": {
+      "value": {
+        "$numberDouble": "99.9"
+      },
+      "quality": "9"
+    }
+  },
+  "seaSurfaceTemperature": {
+    "value": {
+      "$numberDouble": "5.5"
+    },
+    "quality": "9"
+  }
+}
+```
+
 
 A few things about this document:
 
@@ -238,7 +247,10 @@ Here's the API I'd like to build:
 
 ### Sea temperatures {#h3-4-sea-temperatures}
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">SSE /weather/sea/temperature?south={lower latitude}&amp;west={lower longitude}&amp;north={upper latitude}&amp;east={upper longitude}</pre>
+```
+SSE /weather/sea/temperature?south={lower latitude}&west={lower longitude}&north={upper latitude}&east={upper longitude}
+```
+
 
 E.g., /weather/sea/temperature?south=-39\&west=138\&north=-28\&east=164
 
@@ -246,32 +258,44 @@ This streams back a list of points and values to display on a map using server s
 
 SSE is an interesting protocol, which is very handy for potentially large datasets where you want to get a result on the screen straight away. We can start displaying points on a map immediately after the first batch of them are returned.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">data: [
-&nbsp;&nbsp;{lat: 3, lon: 51.5, temp: 3.4},
-&nbsp;&nbsp;{lat: 3, lon: 51.6, temp: 4.4}
+```
+data: [
+  {lat: 3, lon: 51.5, temp: 3.4},
+  {lat: 3, lon: 51.6, temp: 4.4}
 ]
 ...
-data: [{...}]</pre>
+data: [{...}]
+```
+
 
 ### Weather reports {#h3-5-weather-reports}
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">GET /weather?id={id}</pre>
+```
+GET /weather?id={id}
+```
+
 
 Returns a single weather report by ID.
 
 (same schema as above)
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">GET /weather/list?[page=x]</pre>
+```
+GET /weather/list?[page=x]
+```
+
 
 Returns a paged list of weather reports with a few key fields:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">{
-&nbsp;&nbsp;reports: [
-&nbsp;&nbsp;&nbsp;&nbsp;{id: "xyz", ts: "2025-02-05T09:00:00Z", seaSurfaceTemperature: 3.4, airTemperature: 15.1}
-&nbsp;&nbsp;],
-&nbsp;&nbsp;page: 0,
-&nbsp;&nbsp;totalPages: 42
-}</pre>
+```
+{
+  reports: [
+    {id: "xyz", ts: "2025-02-05T09:00:00Z", seaSurfaceTemperature: 3.4, airTemperature: 15.1}
+  ],
+  page: 0,
+  totalPages: 42
+}
+```
+
 
 ### Schemas {#h3-6-schemas}
 
@@ -279,7 +303,8 @@ Let's get into the schema definitions for the weather report document to support
 
 Let's start with the main one---the [WeatherReport](https://github.com/luketn/mongodb-schemas-in-java/blob/main/src/main/java/com/luketn/datamodel/mongodb/WeatherReport.java).
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">package com.luketn.datamodel.mongodb;
+```
+package com.luketn.datamodel.mongodb;
 
 import org.bson.BsonType;
 import org.bson.codecs.pojo.annotations.BsonId;
@@ -289,56 +314,58 @@ import java.time.Instant;
 import java.util.List;
 
 /**
-&nbsp;* Represents a weather report with various meteorological data.
-&nbsp;* Ref: https://www.mongodb.com/docs/atlas/sample-data/sample-weather/
-&nbsp;*/
+ * Represents a weather report with various meteorological data.
+ * Ref: https://www.mongodb.com/docs/atlas/sample-data/sample-weather/
+ */
 
 public record WeatherReport(
-&nbsp;&nbsp;&nbsp;&nbsp;@BsonId @BsonRepresentation(BsonType.OBJECT_ID) String id,
-&nbsp;&nbsp;&nbsp;&nbsp;String st,
-&nbsp;&nbsp;&nbsp;&nbsp;Instant ts,
-&nbsp;&nbsp;&nbsp;&nbsp;Position position,
-&nbsp;&nbsp;&nbsp;&nbsp;Integer elevation,
-&nbsp;&nbsp;&nbsp;&nbsp;String callLetters,
-&nbsp;&nbsp;&nbsp;&nbsp;String qualityControlProcess,
-&nbsp;&nbsp;&nbsp;&nbsp;String dataSource,
-&nbsp;&nbsp;&nbsp;&nbsp;String type,
-&nbsp;&nbsp;&nbsp;&nbsp;Measurement airTemperature,
-&nbsp;&nbsp;&nbsp;&nbsp;Measurement dewPoint,
-&nbsp;&nbsp;&nbsp;&nbsp;Measurement pressure,
-&nbsp;&nbsp;&nbsp;&nbsp;Wind wind,
-&nbsp;&nbsp;&nbsp;&nbsp;Visibility visibility,
-&nbsp;&nbsp;&nbsp;&nbsp;SkyCondition skyCondition,
-&nbsp;&nbsp;&nbsp;&nbsp;List&lt;String&gt; sections,
-&nbsp;&nbsp;&nbsp;&nbsp;PrecipitationEstimatedObservation precipitationEstimatedObservation,
-&nbsp;&nbsp;&nbsp;&nbsp;AtmosphericPressureChange atmosphericPressureChange,
-&nbsp;&nbsp;&nbsp;&nbsp;Measurement seaSurfaceTemperature
+    @BsonId @BsonRepresentation(BsonType.OBJECT_ID) String id,
+    String st,
+    Instant ts,
+    Position position,
+    Integer elevation,
+    String callLetters,
+    String qualityControlProcess,
+    String dataSource,
+    String type,
+    Measurement airTemperature,
+    Measurement dewPoint,
+    Measurement pressure,
+    Wind wind,
+    Visibility visibility,
+    SkyCondition skyCondition,
+    List<String> sections,
+    PrecipitationEstimatedObservation precipitationEstimatedObservation,
+    AtmosphericPressureChange atmosphericPressureChange,
+    Measurement seaSurfaceTemperature
 ) {
-&nbsp;&nbsp;&nbsp;&nbsp;public record Position(String type, List&lt;Double&gt; coordinates) {}
+    public record Position(String type, List<Double> coordinates) {}
 
-&nbsp;&nbsp;&nbsp;&nbsp;public record Measurement(Double value, String quality) {}
+    public record Measurement(Double value, String quality) {}
 
-&nbsp;&nbsp;&nbsp;&nbsp;public record Wind(Direction direction, String type, Speed speed) {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;public record Direction(Integer angle, String quality) {}
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;public record Speed(Double rate, String quality) {}
-&nbsp;&nbsp;&nbsp;&nbsp;}
+    public record Wind(Direction direction, String type, Speed speed) {
+        public record Direction(Integer angle, String quality) {}
+        public record Speed(Double rate, String quality) {}
+    }
 
-&nbsp;&nbsp;&nbsp;&nbsp;public record Visibility(Distance distance, Variability variability) {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;public record Distance(Integer value, String quality) {}
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;public record Variability(String value, String quality) {}
-&nbsp;&nbsp;&nbsp;&nbsp;}
+    public record Visibility(Distance distance, Variability variability) {
+        public record Distance(Integer value, String quality) {}
+        public record Variability(String value, String quality) {}
+    }
 
-&nbsp;&nbsp;&nbsp;&nbsp;public record SkyCondition(CeilingHeight ceilingHeight, String cavok) {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;public record CeilingHeight(Integer value, String quality, String determination) {}
-&nbsp;&nbsp;&nbsp;&nbsp;}
+    public record SkyCondition(CeilingHeight ceilingHeight, String cavok) {
+        public record CeilingHeight(Integer value, String quality, String determination) {}
+    }
 
-&nbsp;&nbsp;&nbsp;&nbsp;public record PrecipitationEstimatedObservation(String discrepancy, Integer estimatedWaterDepth) {}
+    public record PrecipitationEstimatedObservation(String discrepancy, Integer estimatedWaterDepth) {}
 
-&nbsp;&nbsp;&nbsp;&nbsp;public record AtmosphericPressureChange(Tendency tendency, Quantity quantity3Hours, Quantity quantity24Hours) {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;public record Tendency(String code, String quality) {}
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;public record Quantity(Double value, String quality) {}
-&nbsp;&nbsp;&nbsp;&nbsp;}
-}</pre>
+    public record AtmosphericPressureChange(Tendency tendency, Quantity quantity3Hours, Quantity quantity24Hours) {
+        public record Tendency(String code, String quality) {}
+        public record Quantity(Double value, String quality) {}
+    }
+}
+```
+
 
 This neatly represents the whole document structure in a single .java file, with the document itself and all its subdocuments.
 
@@ -346,7 +373,8 @@ You'll notice when you use these types, that the inner subdocuments are namespac
 
 As well as the main WeatherReport record, I'm also going to define a summary representation of the same data which we can use to return from the /list API:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">package com.luketn.datamodel.mongodb;
+```
+package com.luketn.datamodel.mongodb;
 
 import org.bson.BsonType;
 import org.bson.codecs.pojo.annotations.BsonId;
@@ -354,11 +382,13 @@ import org.bson.codecs.pojo.annotations.BsonRepresentation;
 import java.time.Instant;
 
 public record WeatherReportSummary(
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@BsonId @BsonRepresentation(BsonType.OBJECT_ID) String id,
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Instant ts,
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Double seaSurfaceTemperature,
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Double airTemperature
-) {}</pre>
+        @BsonId @BsonRepresentation(BsonType.OBJECT_ID) String id,
+        Instant ts,
+        Double seaSurfaceTemperature,
+        Double airTemperature
+) {}
+```
+
 
 #### Tip---BSON IDs and the _id field
 
@@ -372,29 +402,35 @@ You can read more about the POJO codec and its annotations in the [MongoDB docum
 
 Finally, we'll [define a record](https://github.com/luketn/mongodb-schemas-in-java/blob/main/src/main/java/com/luketn/datamodel/mongodb/WeatherReportSummaryList.java) as a wrapper for the summary report which includes the page number and total pages for pagination:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">package com.luketn.datamodel.mongodb;
+```
+package com.luketn.datamodel.mongodb;
 
 import java.util.List;
 
 public record WeatherReportSummaryList(
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;List&lt;WeatherReportSummary&gt; reports,
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;int page,
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;int totalPages
-) { }</pre>
+        List<WeatherReportSummary> reports,
+        int page,
+        int totalPages
+) { }
+```
+
 
 And a representation for the sea temperature map API:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">package com.luketn.datamodel.mongodb;
+```
+package com.luketn.datamodel.mongodb;
 
 /**
-&nbsp;* Represents sea temperature data at a specific latitude and longitude.
-&nbsp;*/
+ * Represents sea temperature data at a specific latitude and longitude.
+ */
 
 public record SeaTemperature(
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;double lat,
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;double lon,
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;double temp
-) {}</pre>
+        double lat,
+        double lon,
+        double temp
+) {}
+```
+
 
 We're using abbreviations for the field names---latitude = lat, longitude = lon, and temp = temperature (celcius) because we're going to stream out a *lot* of these to the map client!
 
@@ -412,7 +448,8 @@ Let's build our data access class to retrieve the data for our API!
 
 Here's the [WeatherDataAccess.java](https://github.com/luketn/mongodb-schemas-in-java/blob/main/src/main/java/com/luketn/dataaccess/mongodb/WeatherDataAccess.java) implementation:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">package com.luketn.dataaccess.mongodb;
+```
+package com.luketn.dataaccess.mongodb;
 
 import com.luketn.datamodel.mongodb.WeatherReport;
 import com.luketn.datamodel.mongodb.WeatherReportSummary;
@@ -440,97 +477,99 @@ import static com.mongodb.client.model.Filters.*;
 @Component
 
 public class WeatherDataAccess {
-&nbsp;&nbsp;&nbsp;&nbsp;private static final Logger log = LoggerFactory.getLogger(WeatherDataAccess.class);
+    private static final Logger log = LoggerFactory.getLogger(WeatherDataAccess.class);
 
-&nbsp;&nbsp;&nbsp;&nbsp;public static final String COLLECTION_NAME = "data";
+    public static final String COLLECTION_NAME = "data";
 
-&nbsp;&nbsp;&nbsp;&nbsp;private static final int pageSize = 10;
+    private static final int pageSize = 10;
 
-&nbsp;&nbsp;&nbsp;&nbsp;private final MongoDBProvider mongoDBProvider;
+    private final MongoDBProvider mongoDBProvider;
 
-&nbsp;&nbsp;&nbsp;&nbsp;public WeatherDataAccess(MongoDBProvider mongoDBProvider) {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this.mongoDBProvider = mongoDBProvider;
-&nbsp;&nbsp;&nbsp;&nbsp;}
+    public WeatherDataAccess(MongoDBProvider mongoDBProvider) {
+        this.mongoDBProvider = mongoDBProvider;
+    }
 
-&nbsp;&nbsp;&nbsp;&nbsp;public WeatherReport getReport(String id) {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MongoDatabase database = mongoDBProvider.getMongoDatabase();
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MongoCollection&lt;WeatherReport&gt; collection = database.getCollection(COLLECTION_NAME, WeatherReport.class);
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return collection.find(new Document("_id", new ObjectId(id))).first();
-&nbsp;&nbsp;&nbsp;&nbsp;}
+    public WeatherReport getReport(String id) {
+        MongoDatabase database = mongoDBProvider.getMongoDatabase();
+        MongoCollection<WeatherReport> collection = database.getCollection(COLLECTION_NAME, WeatherReport.class);
+        return collection.find(new Document("_id", new ObjectId(id))).first();
+    }
 
-&nbsp;&nbsp;&nbsp;&nbsp;public WeatherReportSummaryList listReports(int page) {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MongoDatabase database = mongoDBProvider.getMongoDatabase();
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MongoCollection&lt;WeatherReportSummaryAggregate&gt; collection = database.getCollection(COLLECTION_NAME, WeatherReportSummaryAggregate.class);
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;WeatherReportSummaryAggregate result = collection.aggregate(List.of(
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;facet(
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;new Facet("reports", List.of(
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;skip(page * pageSize),
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;limit(pageSize),
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;project(new Document()
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.append("_id", 1)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.append("ts", "$ts")
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.append("seaSurfaceTemperature", "$seaSurfaceTemperature.value")
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.append("airTemperature", "$airTemperature.value")
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;))
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;,new Facet("summary", List.of(
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;count()
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;))
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;).first();
+    public WeatherReportSummaryList listReports(int page) {
+        MongoDatabase database = mongoDBProvider.getMongoDatabase();
+        MongoCollection<WeatherReportSummaryAggregate> collection = database.getCollection(COLLECTION_NAME, WeatherReportSummaryAggregate.class);
+        WeatherReportSummaryAggregate result = collection.aggregate(List.of(
+                        facet(
+                                new Facet("reports", List.of(
+                                        skip(page * pageSize),
+                                        limit(pageSize),
+                                        project(new Document()
+                                                .append("_id", 1)
+                                                .append("ts", "$ts")
+                                                .append("seaSurfaceTemperature", "$seaSurfaceTemperature.value")
+                                                .append("airTemperature", "$airTemperature.value")
+                                        )
+                                ))
+                                ,new Facet("summary", List.of(
+                                        count()
+                                ))
+                        )
+                )
+        ).first();
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Integer totalReportsMatched = Objects.requireNonNull(result).summary().getFirst().count();
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (totalReportsMatched == null) {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;totalReportsMatched = 0;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+        Integer totalReportsMatched = Objects.requireNonNull(result).summary().getFirst().count();
+        if (totalReportsMatched == null) {
+            totalReportsMatched = 0;
+        }
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;int totalPages = (int) Math.ceil((double) totalReportsMatched / pageSize);
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return new WeatherReportSummaryList(
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;result.reports(),
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;page,
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;totalPages
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;);
-&nbsp;&nbsp;&nbsp;&nbsp;}
+        int totalPages = (int) Math.ceil((double) totalReportsMatched / pageSize);
+        return new WeatherReportSummaryList(
+                result.reports(),
+                page,
+                totalPages
+        );
+    }
 
-&nbsp;&nbsp;&nbsp;&nbsp;public record WeatherReportSummaryAggregate(
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;List&lt;WeatherReportSummary&gt; reports,
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;List&lt;Summary&gt; summary
-&nbsp;&nbsp;&nbsp;&nbsp;) {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;public record Summary(Integer count) {}
-&nbsp;&nbsp;&nbsp;&nbsp;}
+    public record WeatherReportSummaryAggregate(
+        List<WeatherReportSummary> reports,
+        List<Summary> summary
+    ) {
+        public record Summary(Integer count) {}
+    }
 
-&nbsp;&nbsp;&nbsp;&nbsp;public void streamSeaTemperatures(BoundingBox boundingBox, Consumer&lt;WeatherReport&gt; weatherReportConsumer) {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MongoDatabase database = mongoDBProvider.getMongoDatabase();
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MongoCollection&lt;WeatherReport&gt; collection = database.getCollection(COLLECTION_NAME, WeatherReport.class);
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    public void streamSeaTemperatures(BoundingBox boundingBox, Consumer<WeatherReport> weatherReportConsumer) {
+        MongoDatabase database = mongoDBProvider.getMongoDatabase();
+        MongoCollection<WeatherReport> collection = database.getCollection(COLLECTION_NAME, WeatherReport.class);
+        
         Bson filter = and(
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;gte("position.coordinates.0", boundingBox.west()),
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;lte("position.coordinates.0", boundingBox.east()),
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;gte("position.coordinates.1", boundingBox.south()),
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;lte("position.coordinates.1", boundingBox.north())
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;);
+                gte("position.coordinates.0", boundingBox.west()),
+                lte("position.coordinates.0", boundingBox.east()),
+                gte("position.coordinates.1", boundingBox.south()),
+                lte("position.coordinates.1", boundingBox.north())
+        );
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Document projection = new Document()
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.append("_id", 0)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.append("position.coordinates", 1)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.append("seaSurfaceTemperature.value", 1);
+        Document projection = new Document()
+                .append("_id", 0)
+                .append("position.coordinates", 1)
+                .append("seaSurfaceTemperature.value", 1);
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (log.isTraceEnabled()) {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Document explain = collection
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.find(filter)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.projection(projection)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.explain(ExplainVerbosity.EXECUTION_STATS);
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;log.trace("MongoDB explain plan for sea surface temperature query:\n{}", explain.toJson(JsonWriterSettings.builder().indent(true).build()));
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+        if (log.isTraceEnabled()) {
+            Document explain = collection
+                    .find(filter)
+                    .projection(projection)
+                    .explain(ExplainVerbosity.EXECUTION_STATS);
+            log.trace("MongoDB explain plan for sea surface temperature query:\n{}", explain.toJson(JsonWriterSettings.builder().indent(true).build()));
+        }
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;collection
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.find(filter)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.projection(projection)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.batchSize(pageSize)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.forEach(weatherReportConsumer);
-&nbsp;&nbsp;&nbsp;&nbsp;}
-}</pre>
+        collection
+                .find(filter)
+                .projection(projection)
+                .batchSize(pageSize)
+                .forEach(weatherReportConsumer);
+    }
+}
+```
+
 
 Let's walk through each of the methods and explain the techniques we've used in each case. Each method is going to ramp up in complexity and show you how to do simple through advanced queries to support our API and show off some Java schema record capabilities.
 
@@ -540,34 +579,40 @@ Next, we are going to implement a paged list of weather reports. This is a littl
 
 You'll notice under this method there is a cheeky little extra schema definition---a record for the structure of the aggregate query result:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public record WeatherReportSummaryAggregate(
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;List&lt;WeatherReportSummary&gt; reports,
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;List&lt;Summary&gt; summary
-&nbsp;&nbsp;&nbsp;&nbsp;) {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;public record Summary(Integer count) {}
-&nbsp;&nbsp;&nbsp;&nbsp;}</pre>
+```
+public record WeatherReportSummaryAggregate(
+        List<WeatherReportSummary> reports,
+        List<Summary> summary
+    ) {
+        public record Summary(Integer count) {}
+    }
+```
+
 
 When you use the aggregate framework, you'll often return data in a slightly adjacent format to the one you want to return to clients. In our case, we are using the aggregate facet() stage to return a page of summary records alongside the total count of records. To support that, we've created this little record as an intermediary structure which we will convert back into the method's return value record type.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">WeatherReportSummaryAggregate result = collection.aggregate(List.of(
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;match(filter),
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;facet(
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;new Facet("reports", List.of(
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;skip(page * pageSize),
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;limit(pageSize),
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;project(new Document()
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.append("_id", 1)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.append("ts", "$ts")
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.append("seaSurfaceTemperature", "$seaSurfaceTemperature.value")
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.append("airTemperature", "$airTemperature.value")
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;))
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;,new Facet("summary", List.of(
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;count()
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;))
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)</pre>
+```
+WeatherReportSummaryAggregate result = collection.aggregate(List.of(
+                        match(filter),
+                        facet(
+                                new Facet("reports", List.of(
+                                        skip(page * pageSize),
+                                        limit(pageSize),
+                                        project(new Document()
+                                                .append("_id", 1)
+                                                .append("ts", "$ts")
+                                                .append("seaSurfaceTemperature", "$seaSurfaceTemperature.value")
+                                                .append("airTemperature", "$airTemperature.value")
+                                        )
+                                ))
+                                ,new Facet("summary", List.of(
+                                        count()
+                                ))
+                        )
+                )
+        )
+```
+
 
 #### Tip---typed queries with MongoCollection\<\> generics
 
@@ -575,13 +620,19 @@ Each time you perform a query, you can specify the Java type you want the result
 
 For example, when running aggregations, we use WeatherReportSummaryAggregate:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">MongoCollection&lt;WeatherReportSummaryAggregate&gt; collection =&nbsp;
-&nbsp;&nbsp;&nbsp;database.getCollection(COLLECTION_NAME, WeatherReportSummaryAggregate.class);</pre>
+```
+MongoCollection<WeatherReportSummaryAggregate> collection = 
+   database.getCollection(COLLECTION_NAME, WeatherReportSummaryAggregate.class);
+```
+
 
 In our other methods, we are using the full record representation WeatherReport:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">MongoCollection&lt;WeatherReport&gt; collection =&nbsp;
-&nbsp;&nbsp;&nbsp;database.getCollection(COLLECTION_NAME, WeatherReport.class);</pre>
+```
+MongoCollection<WeatherReport> collection = 
+   database.getCollection(COLLECTION_NAME, WeatherReport.class);
+```
+
 
 Isn't it expensive to create MongoCollection all the time? No! When you declare a MongoCollection, there is very little cost to doing so. There are a few null checks and a check on the validity of the collection name. So you can create them on the fly when you need them.
 
@@ -599,13 +650,16 @@ There are two other ways we could have done this pagination:
 
 1. Atlas Search ([my favourite!](https://www.mongodb.com/developer/products/atlas/java-faceted-full-text-search-api/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=mongodb-schemas-java&utm_term=megan.grant#search))---in this case, we would have something very similar, except we would be relying on Lucene's much faster counting approach.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">facet(
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;new Facet("docs", List.of()),
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;new Facet("meta", List.of(
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Aggregates.replaceWith("$$SEARCH_META"),
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Aggregates.limit(1)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;))
-)</pre>
+```
+facet(
+     new Facet("docs", List.of()),
+     new Facet("meta", List.of(
+             Aggregates.replaceWith("$$SEARCH_META"),
+             Aggregates.limit(1)
+     ))
+)
+```
+
 
 Atlas Search also supports pagination using [pagination tokens](https://www.mongodb.com/docs/atlas/atlas-search/paginate-results/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=mongodb-schemas-java&utm_term=megan.grant#std-label-paginate-results-search-sequence-token), which allows you to continue reading to the next page without doing expensive counts.
 
@@ -617,67 +671,73 @@ If your use case doesn't require a specific page count (maybe you use infinite s
 
 To support this, all you need to do is +1 on your query limit. If the cursor returns more than you asked for, there are more pages available.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public WeatherReportSummaryListNoCount listReportsNoPageCount(int page) {
-&nbsp;&nbsp;&nbsp;&nbsp;MongoDatabase database = mongoDBProvider.getMongoDatabase();
-&nbsp;&nbsp;&nbsp;&nbsp;MongoCollection&lt;WeatherReportSummary&gt; collection = database.getCollection(COLLECTION_NAME, WeatherReportSummary.class);
-&nbsp;&nbsp;&nbsp;&nbsp;
-    List&lt;WeatherReportSummary&gt; reports = collection.find()
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.skip(page * pageSize)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.limit(pageSize+1) // Fetch one extra to determine if there are more pages
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.projection(new Document()
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.append("_id", 1)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.append("ts", 1)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.append("seaSurfaceTemperature", "$seaSurfaceTemperature.value")
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.append("airTemperature", "$airTemperature.value"))
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.into(new java.util.ArrayList&lt;&gt;());
+```
+public WeatherReportSummaryListNoCount listReportsNoPageCount(int page) {
+    MongoDatabase database = mongoDBProvider.getMongoDatabase();
+    MongoCollection<WeatherReportSummary> collection = database.getCollection(COLLECTION_NAME, WeatherReportSummary.class);
+    
+    List<WeatherReportSummary> reports = collection.find()
+            .skip(page * pageSize)
+            .limit(pageSize+1) // Fetch one extra to determine if there are more pages
+            .projection(new Document()
+                    .append("_id", 1)
+                    .append("ts", 1)
+                    .append("seaSurfaceTemperature", "$seaSurfaceTemperature.value")
+                    .append("airTemperature", "$airTemperature.value"))
+            .into(new java.util.ArrayList<>());
 
-&nbsp;&nbsp;&nbsp;&nbsp;boolean hasMorePages = reports.size() &gt; pageSize;
-&nbsp;&nbsp;&nbsp;&nbsp;if (hasMorePages) {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;reports.removeLast();
-&nbsp;&nbsp;&nbsp;&nbsp;}
+    boolean hasMorePages = reports.size() > pageSize;
+    if (hasMorePages) {
+        reports.removeLast();
+    }
 
-&nbsp;&nbsp;&nbsp;&nbsp;return new WeatherReportSummaryListNoCount(reports, page, hasMorePages);
+    return new WeatherReportSummaryListNoCount(reports, page, hasMorePages);
 }
 
 public record WeatherReportSummaryListNoCount(
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;List&lt;WeatherReportSummary&gt; reports,
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;int page,
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;boolean hasMorePages
-) { }</pre>
+      List<WeatherReportSummary> reports,
+      int page,
+      boolean hasMorePages
+) { }
+```
+
 
 The last method in our data access streams data back using a consumer (rather than collecting and returning it).
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public void streamSeaTemperatures(BoundingBox boundingBox, Consumer&lt;WeatherReport&gt; weatherReportConsumer) {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MongoDatabase database = mongoDBProvider.getMongoDatabase();
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MongoCollection&lt;WeatherReport&gt; collection = database.getCollection(COLLECTION_NAME, WeatherReport.class);
+```
+public void streamSeaTemperatures(BoundingBox boundingBox, Consumer<WeatherReport> weatherReportConsumer) {
+        MongoDatabase database = mongoDBProvider.getMongoDatabase();
+        MongoCollection<WeatherReport> collection = database.getCollection(COLLECTION_NAME, WeatherReport.class);
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Bson filter = and(
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;gte("position.coordinates.0", boundingBox.west()),
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;lte("position.coordinates.0", boundingBox.east()),
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;gte("position.coordinates.1", boundingBox.south()),
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;lte("position.coordinates.1", boundingBox.north())
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;);
+        Bson filter = and(
+                gte("position.coordinates.0", boundingBox.west()),
+                lte("position.coordinates.0", boundingBox.east()),
+                gte("position.coordinates.1", boundingBox.south()),
+                lte("position.coordinates.1", boundingBox.north())
+        );
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Document projection = new Document()
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.append("_id", 0)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.append("position.coordinates", 1)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.append("seaSurfaceTemperature.value", 1);
+        Document projection = new Document()
+                .append("_id", 0)
+                .append("position.coordinates", 1)
+                .append("seaSurfaceTemperature.value", 1);
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (log.isTraceEnabled()) {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Document explain = collection
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.find(filter)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.projection(projection)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.explain(ExplainVerbosity.EXECUTION_STATS);
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;log.trace("MongoDB explain plan for sea surface temperature query:\n{}", explain.toJson(JsonWriterSettings.builder().indent(true).build()));
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+        if (log.isTraceEnabled()) {
+            Document explain = collection
+                    .find(filter)
+                    .projection(projection)
+                    .explain(ExplainVerbosity.EXECUTION_STATS);
+            log.trace("MongoDB explain plan for sea surface temperature query:\n{}", explain.toJson(JsonWriterSettings.builder().indent(true).build()));
+        }
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;collection
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.find(filter)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.projection(projection)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.batchSize(pageSize)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.forEach(weatherReportConsumer);
-&nbsp;&nbsp;&nbsp;&nbsp;}
-}</pre>
+        collection
+                .find(filter)
+                .projection(projection)
+                .batchSize(pageSize)
+                .forEach(weatherReportConsumer);
+    }
+}
+```
+
 
 Essentially, our data access class is producing a cut-down WeatherReport record (filtered by projection) for the given bounding coordinates. This keeps memory low whilst returning potentially huge datasets. This method supports the SSE sea temperature API.
 
@@ -687,7 +747,8 @@ I'm introducing a logic class ([SeaTemperatureService.java](https://github.com/l
 * Batch measurements into events of 10.
 * Convert from WeatherReport into SeaTemperature format.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">package com.luketn.seatemperature;
+```
+package com.luketn.seatemperature;
 
 import com.luketn.dataaccess.mongodb.WeatherDataAccess;
 import com.luketn.seatemperature.datamodel.BoundingBox;
@@ -701,80 +762,91 @@ import java.util.Set;
 import java.util.function.Consumer;
 
 /**
-&nbsp;* Handles validation and transformation of weather reports into sea temperature data.
-&nbsp;* Batches and returns only unique coordinate sea surface temperature reports within a specified bounding box.
-&nbsp;*/
+ * Handles validation and transformation of weather reports into sea temperature data.
+ * Batches and returns only unique coordinate sea surface temperature reports within a specified bounding box.
+ */
 
 @Service
 public class SeaTemperatureService {
-&nbsp;&nbsp;&nbsp;&nbsp;public static final int batch_size = 10;
+    public static final int batch_size = 10;
 
-&nbsp;&nbsp;&nbsp;&nbsp;private final WeatherDataAccess weatherDataAccess;
+    private final WeatherDataAccess weatherDataAccess;
 
-&nbsp;&nbsp;&nbsp;&nbsp;public SeaTemperatureService(WeatherDataAccess weatherDataAccess) {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this.weatherDataAccess = weatherDataAccess;
-&nbsp;&nbsp;&nbsp;&nbsp;}
+    public SeaTemperatureService(WeatherDataAccess weatherDataAccess) {
+        this.weatherDataAccess = weatherDataAccess;
+    }
 
-&nbsp;&nbsp;&nbsp;&nbsp;public void streamSeaTemperatures(BoundingBox boundingBox, Consumer&lt;List&lt;SeaTemperature&gt;&gt; seaTemperatureConsumer) {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;List&lt;SeaTemperature&gt; seaTemperaturesBatch = new ArrayList&lt;&gt;();
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    public void streamSeaTemperatures(BoundingBox boundingBox, Consumer<List<SeaTemperature>> seaTemperatureConsumer) {
+        List<SeaTemperature> seaTemperaturesBatch = new ArrayList<>();
+        
         record Coordinates(Double longitude, Double latitude) {}
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Set&lt;Coordinates&gt; uniqueCoordinates = new HashSet&lt;&gt;();
+        Set<Coordinates> uniqueCoordinates = new HashSet<>();
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;weatherDataAccess.streamSeaTemperatures(boundingBox, weatherReport -&gt; {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (weatherReport.seaSurfaceTemperature() == null) {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return; // Skip reports without sea surface temperature
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Double longitude = weatherReport.position().coordinates().get(0);
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Double latitude = weatherReport.position().coordinates().get(1);
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Double seaSurfaceTemperature = weatherReport.seaSurfaceTemperature().value();
+        weatherDataAccess.streamSeaTemperatures(boundingBox, weatherReport -> {
+            if (weatherReport.seaSurfaceTemperature() == null) {
+                return; // Skip reports without sea surface temperature
+            }
+            Double longitude = weatherReport.position().coordinates().get(0);
+            Double latitude = weatherReport.position().coordinates().get(1);
+            Double seaSurfaceTemperature = weatherReport.seaSurfaceTemperature().value();
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Coordinates coordinates = new Coordinates(longitude, latitude);
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (uniqueCoordinates.contains(coordinates)) {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return; // Skip duplicate coordinates
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;uniqueCoordinates.add(coordinates);
+            Coordinates coordinates = new Coordinates(longitude, latitude);
+            if (uniqueCoordinates.contains(coordinates)) {
+                return; // Skip duplicate coordinates
+            }
+            uniqueCoordinates.add(coordinates);
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SeaTemperature seaTemperature = new SeaTemperature(longitude, latitude, seaSurfaceTemperature);
+            SeaTemperature seaTemperature = new SeaTemperature(longitude, latitude, seaSurfaceTemperature);
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;seaTemperaturesBatch.add(seaTemperature);
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (seaTemperaturesBatch.size() &gt;= batch_size) {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;seaTemperatureConsumer.accept(new ArrayList&lt;&gt;(seaTemperaturesBatch));
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;seaTemperaturesBatch.clear(); // Clear the batch after sending
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;});
+            seaTemperaturesBatch.add(seaTemperature);
+            if (seaTemperaturesBatch.size() >= batch_size) {
+                seaTemperatureConsumer.accept(new ArrayList<>(seaTemperaturesBatch));
+                seaTemperaturesBatch.clear(); // Clear the batch after sending
+            }
+        });
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (!seaTemperaturesBatch.isEmpty()) {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;seaTemperatureConsumer.accept(seaTemperaturesBatch);
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
-&nbsp;&nbsp;&nbsp;&nbsp;}
-}</pre>
+        if (!seaTemperaturesBatch.isEmpty()) {
+            seaTemperatureConsumer.accept(seaTemperaturesBatch);
+        }
+    }
+}
+```
+
 
 Our database schema is being translated procedurally into a more efficient schema for our API:
 
 WeatherReport (projected)
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">{
-&nbsp;&nbsp;position: {
-&nbsp;&nbsp;&nbsp;&nbsp;coordinates: [123, 456]
-&nbsp;&nbsp;},
-&nbsp;&nbsp;seaSurfaceTemperature: {
-&nbsp;&nbsp;&nbsp;&nbsp;value: 23.1
-&nbsp;&nbsp;}
-}</pre>
+```
+{
+  position: {
+    coordinates: [123, 456]
+  },
+  seaSurfaceTemperature: {
+    value: 23.1
+  }
+}
+```
+
 
 -\> [SeaTemperature](https://github.com/luketn/mongodb-schemas-in-java/blob/main/src/main/java/com/luketn/seatemperature/datamodel/SeaTemperature.java)
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">{
-&nbsp;&nbsp;"lon": 123,
-&nbsp;&nbsp;"lat": 456,
-&nbsp;&nbsp;"temp": 23.1
-}</pre>
+```
+{
+  "lon": 123,
+  "lat": 456,
+  "temp": 23.1
+}
+```
+
 
 Notice that inside this method, we declare and use on the fly a little Coordinates record:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">record Coordinates(Double longitude, Double latitude) {}
-Set&lt;Coordinates&gt; uniqueCoordinates = new HashSet&lt;&gt;();</pre>
+```
+record Coordinates(Double longitude, Double latitude) {}
+Set<Coordinates> uniqueCoordinates = new HashSet<>();
+```
+
 
 Because records have built-in comparison for their values, we can use them as the key in a Set, providing a convenient way to filter out duplicates.
 
@@ -784,7 +856,8 @@ Because records have built-in comparison for their values, we can use them as th
 
 Alright! Now, let's define our API. Here's the implementation of our [WeatherAPI](https://github.com/luketn/mongodb-schemas-in-java/blob/main/src/main/java/com/luketn/api/WeatherApi.java) class:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">package com.luketn.api;
+```
+package com.luketn.api;
 
 import com.luketn.dataaccess.mongodb.WeatherDataAccess;
 import com.luketn.seatemperature.SeaTemperatureService;
@@ -802,50 +875,52 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/weather")
 public class WeatherApi {
-&nbsp;&nbsp;&nbsp;&nbsp;private final WeatherDataAccess weatherDataAccess;
-&nbsp;&nbsp;&nbsp;&nbsp;private final SeaTemperatureService seaTemperatureService;
+    private final WeatherDataAccess weatherDataAccess;
+    private final SeaTemperatureService seaTemperatureService;
 
-&nbsp;&nbsp;&nbsp;&nbsp;public WeatherApi(WeatherDataAccess weatherDataAccess, SeaTemperatureService seaTemperatureService) {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this.weatherDataAccess = weatherDataAccess;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this.seaTemperatureService = seaTemperatureService;
-&nbsp;&nbsp;&nbsp;&nbsp;}
+    public WeatherApi(WeatherDataAccess weatherDataAccess, SeaTemperatureService seaTemperatureService) {
+        this.weatherDataAccess = weatherDataAccess;
+        this.seaTemperatureService = seaTemperatureService;
+    }
 
-&nbsp;&nbsp;&nbsp;&nbsp;@GetMapping("/report")
-&nbsp;&nbsp;&nbsp;&nbsp;public WeatherReport getReport(@RequestParam(value = "id") String id) {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;WeatherReport report = weatherDataAccess.getReport(id);
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return report;
-&nbsp;&nbsp;&nbsp;&nbsp;}
+    @GetMapping("/report")
+    public WeatherReport getReport(@RequestParam(value = "id") String id) {
+        WeatherReport report = weatherDataAccess.getReport(id);
+        return report;
+    }
 
-&nbsp;&nbsp;&nbsp;&nbsp;@GetMapping("/report/list")
-&nbsp;&nbsp;&nbsp;&nbsp;public WeatherReportSummaryList listReports(@RequestParam(value = "page", required = false, defaultValue = "0") int page) {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;WeatherReportSummaryList weatherReportList = weatherDataAccess.listReports(page);
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return weatherReportList;
-&nbsp;&nbsp;&nbsp;&nbsp;}
+    @GetMapping("/report/list")
+    public WeatherReportSummaryList listReports(@RequestParam(value = "page", required = false, defaultValue = "0") int page) {
+        WeatherReportSummaryList weatherReportList = weatherDataAccess.listReports(page);
+        return weatherReportList;
+    }
 
-&nbsp;&nbsp;&nbsp;&nbsp;@GetMapping("/sea/temperature")
-&nbsp;&nbsp;&nbsp;&nbsp;public void streamSeaSurfaceTemperatures(
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@RequestParam(value = "north", required = false) Double north,
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@RequestParam(value = "south", required = false) Double south,
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@RequestParam(value = "east", required = false) Double east,
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@RequestParam(value = "west", required = false) Double west,
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;HttpServletResponse response) {
+    @GetMapping("/sea/temperature")
+    public void streamSeaSurfaceTemperatures(
+            @RequestParam(value = "north", required = false) Double north,
+            @RequestParam(value = "south", required = false) Double south,
+            @RequestParam(value = "east", required = false) Double east,
+            @RequestParam(value = "west", required = false) Double west,
+            HttpServletResponse response) {
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var sse = SynchronousSse.forResponse(response);
+        var sse = SynchronousSse.forResponse(response);
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (north == null || south == null || east == null || west == null) {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sse.error(HttpStatus.BAD_REQUEST, "For BoundingBox query type, north, south, east, and west must all be supplied.");
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+        if (north == null || south == null || east == null || west == null) {
+            sse.error(HttpStatus.BAD_REQUEST, "For BoundingBox query type, north, south, east, and west must all be supplied.");
+            return;
+        }
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;try {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;BoundingBox boundingBox = new BoundingBox(north, south, east, west);
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;seaTemperatureService.streamSeaTemperatures(boundingBox, sse::sendEvent);
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} catch (SynchronousSse.SseBrokenPipe _) { // ignore broken pipes in SSE
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} catch (Exception e) {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sse.error(HttpStatus.INTERNAL_SERVER_ERROR, e, "An unexpected error occurred while streaming sea surface temperatures.");
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
-&nbsp;&nbsp;&nbsp;&nbsp;}
-}</pre>
+        try {
+            BoundingBox boundingBox = new BoundingBox(north, south, east, west);
+            seaTemperatureService.streamSeaTemperatures(boundingBox, sse::sendEvent);
+        } catch (SynchronousSse.SseBrokenPipe _) { // ignore broken pipes in SSE
+        } catch (Exception e) {
+            sse.error(HttpStatus.INTERNAL_SERVER_ERROR, e, "An unexpected error occurred while streaming sea surface temperatures.");
+        }
+    }
+}
+```
+
 
 The first two methods are very easy---call the injected data access class, and return the result.
 
@@ -870,27 +945,36 @@ Full disclosure---I did try out a few of these index types (as you'll see in the
 
 Another thing that can catch you out is, having optimised your query and checked your indexes are all tippy-top, your actual code may not be using your index! So how can you check? Throw this little bit of code into your data access, and (not in production!) explain your query:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">if (log.isTraceEnabled()) {
-&nbsp;&nbsp;&nbsp;&nbsp;Document explain = collection
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.find(filter)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.projection(projection)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.explain(ExplainVerbosity.EXECUTION_STATS);
-&nbsp;&nbsp;&nbsp;&nbsp;log.trace("MongoDB explain for sea surface temperature query:\n{}", explain.toJson(JsonWriterSettings.builder().indent(true).build()));
-}</pre>
+```
+if (log.isTraceEnabled()) {
+    Document explain = collection
+            .find(filter)
+            .projection(projection)
+            .explain(ExplainVerbosity.EXECUTION_STATS);
+    log.trace("MongoDB explain for sea surface temperature query:\n{}", explain.toJson(JsonWriterSettings.builder().indent(true).build()));
+}
+```
+
 
 What don't we want to see? [COLLSCAN](https://www.mongodb.com/docs/manual/reference/explain-results/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=mongodb-schemas-java&utm_term=megan.grant)!
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">"winningPlan": {
+```
+"winningPlan": {
 ...
-&nbsp;&nbsp;"inputStage": {
-&nbsp;&nbsp;&nbsp;&nbsp;"stage": "COLLSCAN",</pre>
+  "inputStage": {
+    "stage": "COLLSCAN",
+```
+
 
 What do we want? Index usage!
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">"winningPlan": {
+```
+"winningPlan": {
 ...
-&nbsp;&nbsp;&nbsp;"inputStage": {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"stage": "IXSCAN",</pre>
+   "inputStage": {
+      "stage": "IXSCAN",
+```
+
 
 This is also a super deep topic, but I highly recommend spending time getting to know your [query explain plans](https://www.mongodb.com/docs/manual/tutorial/analyze-query-plan/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=mongodb-schemas-java&utm_term=megan.grant).
 
@@ -947,30 +1031,39 @@ A nice way to achieve zero-downtime breaking changes is by using deprecation and
 
 Let's say you have a field 'position', which you need to migrate from geoJSON to two new root level fields:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">"position": {
-&nbsp;&nbsp;"type": "Point",
-&nbsp;&nbsp;"coordinates": [
-&nbsp;&nbsp;&nbsp;&nbsp;-47.9,
-&nbsp;&nbsp;&nbsp;&nbsp;47.6
-&nbsp;&nbsp;]
-}</pre>
+```
+"position": {
+  "type": "Point",
+  "coordinates": [
+    -47.9,
+    47.6
+  ]
+}
+```
+
 
 -\>
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">"longitude": -47.9,
-"latitude": 47.6</pre>
+```
+"longitude": -47.9,
+"latitude": 47.6
+```
+
 
 Using the Java record representation, we can clearly indicate this change:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public record WeatherReport(
-&nbsp;&nbsp;&nbsp;&nbsp;@BsonId @BsonRepresentation(BsonType.OBJECT_ID) String id,
-&nbsp;&nbsp;&nbsp;&nbsp;String st,
-&nbsp;&nbsp;&nbsp;&nbsp;Instant ts,
-&nbsp;&nbsp;&nbsp;&nbsp;//Position is deprecated: Use 'latitude' and 'longitude' instead
-&nbsp;&nbsp;&nbsp;&nbsp;@Deprecated(forRemoval = true, since = "1.0.0")
-&nbsp;&nbsp;&nbsp;&nbsp;Position position,
-&nbsp;&nbsp;&nbsp;&nbsp;Double longitude,
-&nbsp;&nbsp;&nbsp;&nbsp;Double latitude,</pre>
+```
+public record WeatherReport(
+    @BsonId @BsonRepresentation(BsonType.OBJECT_ID) String id,
+    String st,
+    Instant ts,
+    //Position is deprecated: Use 'latitude' and 'longitude' instead
+    @Deprecated(forRemoval = true, since = "1.0.0")
+    Position position,
+    Double longitude,
+    Double latitude,
+```
+
 
 There will be a clear marker in the git commit history indicating when this change to the schema was made. For now, we have both the old and the new fields duplicated.
 
@@ -985,13 +1078,16 @@ Sometimes, your API can wear a few seconds of downtime (or degraded service), an
 * Deploy the new version of your API.
 * As it deploys, it runs a one-off schema update script:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">db.data.updateMany({position: {$exists: true}}, [
-&nbsp;&nbsp;{$addFields: {
-&nbsp;&nbsp;&nbsp;&nbsp;'longitude': {$arrayElemAt: ['$position.coordinates',0]},
-&nbsp;&nbsp;&nbsp;&nbsp;'latitude': {$arrayElemAt: ['$position.coordinates',1]},
-&nbsp;&nbsp;&nbsp;&nbsp;'position': '$$REMOVE'
-&nbsp;&nbsp;}}
-])</pre>
+```
+db.data.updateMany({position: {$exists: true}}, [
+  {$addFields: {
+    'longitude': {$arrayElemAt: ['$position.coordinates',0]},
+    'latitude': {$arrayElemAt: ['$position.coordinates',1]},
+    'position': '$$REMOVE'
+  }}
+])
+```
+
 
 This has the (significant!) benefit that you don't have to maintain two copies of the data and code to manage clients who haven't upgraded yet.
 

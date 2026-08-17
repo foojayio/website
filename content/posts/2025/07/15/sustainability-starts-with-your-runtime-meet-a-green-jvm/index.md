@@ -31,7 +31,10 @@ But beyond the dollar savings, there's a powerful secondary benefit: these same 
 
 Efficiency and sustainability go hand in hand, and we've built [Azul Platform Prime](http://www.azul.com/products/prime/) to deliver exactly that.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">JVM Performance = Energy Efficiency&nbsp;</pre>
+```
+JVM Performance = Energy Efficiency
+```
+
 
 Every CPU cycle your application burns costs money --- and energy. Traditional JVMs, while functional, are often bloated with overhead: long garbage collection pauses, unpredictable latency, and underutilized memory.
 

@@ -88,9 +88,12 @@ The project will download as a zip, so we can unzip it and move it to our projec
 
 The `pom.xml` contains the dependencies and software versions we set up on the Spring Initializr, so we can move to the `application.properties` file in the `src/main/resources` folder.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="text">server.port=8761
+```
+server.port=8761
 eureka.client.register-with-eureka=false
-eureka.client.fetch-registry=false</pre>
+eureka.client.fetch-registry=false
+```
+
 
 We need to specify a port number for this application to use so that its traffic doesn't conflict with our other services. The default port for Spring Cloud Eureka server is `8761`, so we will use that. Next, we don't need to register the server itself with Eureka (useful in systems with multiple Eureka servers), so we will set the `eureka.client.register-with-eureka` value to `false`. The last property is set to `false` because we also don't need this server to pull the registry from other sources (like other Eureka servers). A [StackOverflow question and answer](https://stackoverflow.com/questions/57639611/what-is-the-use-of-fetchregistry-property-in-eureka-server) addresses these settings well.
 
@@ -107,16 +110,22 @@ Applications - Service1 {#_applications_service1}
 
 We don't have many changes to add for Spring Cloud Eureka. Starting in the `pom.xml`, we need to add a dependency.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="xml">&lt;dependency&gt;
-	&lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;
-	&lt;artifactId&gt;spring-cloud-starter-netflix-eureka-client&lt;/artifactId&gt;
-&lt;/dependency&gt;</pre>
+```xml
+<dependency>
+	<groupId>org.springframework.cloud</groupId>
+	<artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+</dependency>
+```
+
 
 This dependency enables the application as a Eureka client. Most recommendations would also have us adding an annotation like `@EnableEurekaClient` (Eureka-specific) or `@EnableDiscoveryClient` (project-agnostic) to the main application class. However, that is not a necessary requirement, as it is defaulted to enabling this functionality when you add the dependency to the `pom.xml`.
 
 To run the service locally, we will also need to add a property to the `application.properties` file.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="text">eureka.client.serviceUrl.defaultZone=http://localhost:8761/eureka</pre>
+```
+eureka.client.serviceUrl.defaultZone=http://localhost:8761/eureka
+```
+
 
 This tells the application where to look for the Eureka server. We will move this property to the config server file for this application, so we can comment this one out when we test everything together. However, for testing a siloed application, you will need it enabled here.
 
@@ -127,26 +136,33 @@ Applications - Service2 {#_applications_service2}
 
 Just like with service1, we need to add the Eureka client dependency to service2's `pom.xml` to enable service discovery.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="xml">&lt;dependency&gt;
-	&lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;
-	&lt;artifactId&gt;spring-cloud-starter-netflix-eureka-client&lt;/artifactId&gt;
-&lt;/dependency&gt;
-&lt;dependency&gt;
-	&lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;
-	&lt;artifactId&gt;spring-cloud-starter-config&lt;/artifactId&gt;
-&lt;/dependency&gt;</pre>
+```xml
+<dependency>
+	<groupId>org.springframework.cloud</groupId>
+	<artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+</dependency>
+<dependency>
+	<groupId>org.springframework.cloud</groupId>
+	<artifactId>spring-cloud-starter-config</artifactId>
+</dependency>
+```
+
 
 We also want to have this application use Spring Cloud Config for referencing the Eureka server, so we can retrofit that by adding the dependency. We will walk through the config file changes in a bit.
 
 Again, if we test locally, we would also need to add the following property to the `application.properties` file.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="text">eureka.client.serviceUrl.defaultZone=http://localhost:8761/eureka</pre>
+```
+eureka.client.serviceUrl.defaultZone=http://localhost:8761/eureka
+```
+
 
 Since we will test everything together, it is commented out in the application for now. Instead, we will add a properties file for Spring Cloud Config to host, similar to our other services (next section).
 
 Next, we need to make some adjustments to the the main application class to utilize Eureka over previously-defined hostname and port locations.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public class Service2Application {
+```java
+public class Service2Application {
 	public static void main(String[] args) {
 		SpringApplication.run(Service2Application.class, args);
 	}
@@ -157,7 +173,9 @@ Next, we need to make some adjustments to the the main application class to util
 
 	@Bean
 	WebClient client(WebClient.Builder builder) { return builder.baseUrl("http://mongo-client").build(); }
-}</pre>
+}
+```
+
 
 If you [compare the code to the previous version](https://github.com/JMHReif/microservices-level9/blob/main/service2/src/main/java/com/jmhreif/service2/Service2Application.java#L19) (Level 9), you will see there are some changes.
 
@@ -180,23 +198,29 @@ Spring Cloud Config {#_spring_cloud_config}
 
 For each config file the server hosts, we will need to add the following:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="text">eureka:
+```
+eureka:
   client:
     serviceUrl:
-      defaultZone: http://goodreads-eureka:8761/eureka</pre>
+      defaultZone: http://goodreads-eureka:8761/eureka
+```
+
 
 This tells the application where to look so it can register with Eureka. Full sample code for each config file is located in the [related Github repository folder](https://github.com/JMHReif/microservices-level10/tree/main/microservices-java-config).
 
 We also need to create a whole new config file for service2 to use the config server.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="text">spring:
+```
+spring:
   application:
     name: goodreads-client
 
 eureka:
   client:
     serviceUrl:
-      defaultZone: http://goodreads-eureka:8761/eureka</pre>
+      defaultZone: http://goodreads-eureka:8761/eureka
+```
+
 
 A sample is provided on the [Github repository](https://github.com/JMHReif/microservices-level10/blob/main/microservices-java-config/goodreads-client-docker.yaml), but this file is created in a local repository initialized with [git](https://git-scm.com/), and then referenced in the [config server properties file](https://github.com/JMHReif/microservices-level10/blob/main/config-server/src/main/resources/application.properties#L2) for that project to serve up. More information on that is in a [previous blog post](https://jmhreif.com/blog/microservices-level7/).
 
@@ -207,18 +231,22 @@ docker-compose.yml {#_docker_compose_yml}
 
 We need to remove the dynamic environment property for service2 and to add the Eureka server project for Docker Compose to manage.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml">goodreads-svc2:
+```yaml
+goodreads-svc2:
 	#other properties...
     environment:
       - SPRING_APPLICATION_NAME=goodreads-client
       - SPRING_CONFIG_IMPORT=configserver:http://goodreads-config:8888
-      - SPRING_PROFILES_ACTIVE=docker</pre>
+      - SPRING_PROFILES_ACTIVE=docker
+```
+
 
 We removed the `BACKEND_HOSTNAME` we see in the [previous version of the code](https://github.com/JMHReif/microservices-level9/blob/main/docker-compose.yml#L57), and instead replaced it with [environment variables](https://github.com/JMHReif/microservices-level10/blob/main/docker-compose.yml#L57) for application name, config server location, and spring profiles like we see in our other services.
 
 Next, we need to add our Eureka server application to the compose file.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml">goodreads-eureka:
+```yaml
+goodreads-eureka:
     container_name: goodreads-eureka
     image: jmreif/goodreads-eureka
     ports:
@@ -229,11 +257,14 @@ Next, we need to add our Eureka server application to the compose file.
     volumes:
       - $HOME/Projects/docker/goodreads/config-server/logs:/logs
     networks:
-      - goodreads</pre>
+      - goodreads
+```
+
 
 For our last step, we need to build all of the updated applications and create the Docker images. To do that we can execute the following commands from the project folder:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="shell">cd service1
+```bash
+cd service1
 mvn clean package -DskipTests=true
 cd ../service2
 mvn clean package -DskipTests=true
@@ -242,7 +273,9 @@ mvn clean package -DskipTests=true
 cd ../service4
 mvn clean package -DskipTests=true
 cd ../eureka-server
-mvn clean package</pre>
+mvn clean package
+```
+
 
 *\*Note:\* The Docker Compose file is using my pre-built images with Apple silicon architecture. If your machine has a different chip, you will need to do one of the following: 1) utilize the `build` option in the docker-compose.yml file (comment out `image` option), 2) create your own Docker images and publish to DockerHub (plus modify the `docker-compose.yml` file `image` options).*
 
@@ -251,7 +284,10 @@ Put it to the test! {#_put_it_to_the_test}
 
 We can run our system with the same command we have been using.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="shell">docker-compose up -d</pre>
+```bash
+docker-compose up -d
+```
+
 
 *\*Note:\* If you are building local images with the `build` field in docker-compose.yml, then use the command `docker-compose up -d --build`. This will build the Docker containers each time on startup from the directories.*
 
@@ -270,7 +306,10 @@ Next, we can test all of our endpoints.
 
 Bring everything back down again with the below command.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="shell">docker-compose down</pre>
+```bash
+docker-compose down
+```
+
 
 Wrapping up! {#_wrapping_up}
 ----------------------------

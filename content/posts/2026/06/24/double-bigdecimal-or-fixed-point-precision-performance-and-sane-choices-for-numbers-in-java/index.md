@@ -38,13 +38,16 @@ Most floating-point surprises trace back to a single fact: Java's `float` and `d
 
 Consider the classic example:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public class FloatingPointProblem {
+```
+public class FloatingPointProblem {
     public static void main(String[] args) {
         double x = 0.1 + 0.2;                              // 1
         System.out.println(x);          // 0.30000000000000004
         System.out.println(x == 0.3);   // false             // 2
     }
-}</pre>
+}
+```
+
 
 1. `0.1` cannot be represented exactly in binary; the compiler stores the nearest binary64 value
 2. Equality check fails because of accumulated representation error
@@ -59,21 +62,30 @@ The most common floating-point bug is not imprecision itself but testing equalit
 
 Never do this:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">if (result == expected) { ... }  // dangerous with floating-point</pre>
+```
+if (result == expected) { ... }  // dangerous with floating-point
+```
+
 
 Instead, compare within a tolerance (often called *epsilon*):
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">boolean nearlyEqual(double a, double b, double epsilon) {
-    return Math.abs(a - b) &lt;= epsilon;
-}</pre>
+```
+boolean nearlyEqual(double a, double b, double epsilon) {
+    return Math.abs(a - b) <= epsilon;
+}
+```
+
 
 This works well when your values live in a known range. But if the magnitudes vary widely (say from `0.0001` to `1_000_000`), a fixed epsilon is either too tight for large values or too loose for small ones. In that case, use a relative tolerance:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">boolean nearlyEqualRelative(double a, double b, double relTol) {
+```
+boolean nearlyEqualRelative(double a, double b, double relTol) {
     double diff = Math.abs(a - b);
     double norm = Math.max(Math.abs(a), Math.abs(b));
-    return diff &lt;= relTol * norm;
-}</pre>
+    return diff <= relTol * norm;
+}
+```
+
 
 The choice between absolute and relative tolerance depends on your data. Scientific applications often use relative tolerance; financial rounding at display boundaries often uses a fixed number of decimal places. The point is: **understand your comparison strategy before you write a single `if`.**
 
@@ -96,10 +108,13 @@ IEEE 754 defines two special values that break common assumptions about how numb
 
 **`NaN` (Not a Number)** has a unique property: it is not equal to itself. This is mandated by the standard, and Java follows it faithfully:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">double nan = Double.NaN;
+```
+double nan = Double.NaN;
 System.out.println(nan == nan);              // false            // 1
 System.out.println(Double.compare(nan, nan)); // 0               // 2
-System.out.println(Double.isNaN(nan));        // true</pre>
+System.out.println(Double.isNaN(nan));        // true
+```
+
 
 1. The `==` operator says `NaN != NaN`, mandated by IEEE 754
 2. `Double.compare()` considers two `NaN` values as equal for sorting consistency
@@ -108,10 +123,13 @@ The `==` operator says `NaN != NaN`, but `Double.compare()` considers two `NaN` 
 
 **`-0.0` (negative zero)** is the other trap:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">System.out.println(0.0 == -0.0);              // true            // 1
-System.out.println(Double.compare(0.0, -0.0)); // 1 (0.0 &gt; -0.0) // 2
+```
+System.out.println(0.0 == -0.0);              // true            // 1
+System.out.println(Double.compare(0.0, -0.0)); // 1 (0.0 > -0.0) // 2
 System.out.println(1.0 / 0.0);                // Infinity
-System.out.println(1.0 / -0.0);               // -Infinity       // 3</pre>
+System.out.println(1.0 / -0.0);               // -Infinity       // 3
+```
+
 
 1. Arithmetic equality says `0.0 == -0.0`
 2. `Double.compare` and `Double.valueOf().equals()` distinguish them
@@ -141,11 +159,14 @@ You compute in `double` and round to two decimal places only when you display or
 
 Here is a typical example, computing an average:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">double average(double[] values) {
+```
+double average(double[] values) {
     double sum = 0.0;
     for (double v : values) sum += v;
     return sum / values.length;
-}</pre>
+}
+```
+
 
 For a dozen values, this works perfectly. But what happens when you sum ten thousand, or ten million? Each addition introduces a rounding error of a few ULPs, and those errors accumulate. Over long sequences, the final result can drift significantly from the mathematically exact answer, not because `double` is wrong, but because naive summation is *numerically unstable* . The good news: you do not need to abandon `double` to fix this. The next section presents a toolkit of well-known algorithms that keep your computation in `double` while dramatically reducing accumulated error.
 
@@ -158,7 +179,8 @@ The algorithms below all work on plain `double`, with no `BigDecimal` needed. Th
 
 The most famous technique. When you add a small number to a large running sum, the low-order bits of the small number get lost. Kahan summation keeps a separate *compensation* variable that tracks the accumulated rounding error and feeds it back into the next addition.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">double kahanSum(double[] values) {
+```
+double kahanSum(double[] values) {
     double sum = 0.0;
     double compensation = 0.0;                                   // 1
     for (double value : values) {
@@ -168,7 +190,9 @@ The most famous technique. When you add a small number to a large running sum, t
         sum = t;
     }
     return sum;
-}</pre>
+}
+```
+
 
 1. Tracks the accumulated rounding error across iterations
 2. Recovers the lost low-order bits, the core of the algorithm
@@ -179,12 +203,13 @@ The error bound is essentially independent of *n* , versus O(*n*) for naive summ
 
 Neumaier (1974) introduced a variant that handles the case where the new term is larger than the running sum, by checking the relative magnitudes and adjusting the compensation accordingly:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">double neumaierSum(double[] values) {
+```
+double neumaierSum(double[] values) {
     double sum = 0.0;
     double compensation = 0.0;
     for (double value : values) {
         double t = sum + value;
-        if (Math.abs(sum) &gt;= Math.abs(value)) {                  // 1
+        if (Math.abs(sum) >= Math.abs(value)) {                  // 1
             compensation += (sum - t) + value;
         } else {
             compensation += (value - t) + sum;                   // 2
@@ -192,7 +217,9 @@ Neumaier (1974) introduced a variant that handles the case where the new term is
         sum = t;
     }
     return sum + compensation;                                   // 3
-}</pre>
+}
+```
+
 
 1. Sum is bigger: low-order digits of value are lost
 2. Value is bigger: low-order digits of the sum are lost
@@ -208,8 +235,11 @@ Pairwise, or cascade, summation takes a completely different approach: recursive
 
 Since Java 9, `Math.fma(a, b, c)` computes `a * b + c` with a single rounding step instead of two. This corresponds to the IEEE 754-2008 `fusedMultiplyAdd` operation. In a normal `a * b + c`, the multiplication rounds once and the addition rounds again, losing precision at each step. FMA computes the exact product internally and only rounds once when adding `c`.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">double standard = a * b + c;    // two rounding steps
-double fma = Math.fma(a, b, c); // one rounding step, more accurate</pre>
+```
+double standard = a * b + c;    // two rounding steps
+double fma = Math.fma(a, b, c); // one rounding step, more accurate
+```
+
 
 FMA is particularly valuable for dot products, polynomial evaluation (Horner's method), and any linear combination where you are accumulating products. On hardware that supports FMA natively (most modern x86 and ARM CPUs), there is no performance penalty, often faster than the two-instruction sequence.
 
@@ -233,7 +263,10 @@ What `BigDecimal` actually solves {#h2-11-what-bigdecimal-actually-solves}
 
 Internally, a `BigDecimal` is an unscaled integer value plus a scale:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">unscaled value = 1999, scale = 2  →  19.99</pre>
+```
+unscaled value = 1999, scale = 2  →  19.99
+```
+
 
 This means that `19.99` is stored as exactly `19.99`, not as the nearest binary approximation. Every arithmetic operation preserves decimal semantics, and you control the rounding mode explicitly at every step.
 
@@ -241,14 +274,20 @@ This means that `19.99` is stored as exactly `19.99`, not as the nearest binary 
 
 This is one of the most frequently encountered `BigDecimal` bugs:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">new BigDecimal(0.1);                                             // 1</pre>
+```
+new BigDecimal(0.1);                                             // 1
+```
+
 
 1. Captures the inexact binary value; result is `0.100000000000000005551...`, not `0.1`
 
 The result is `0.1000000000000000055511151231257827021181583404541015625`, because the constructor faithfully records the binary64 representation of `0.1`. If you want exact decimal semantics, construct from a `String` or use `valueOf`:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">new BigDecimal("0.1");     // exact: 0.1
-BigDecimal.valueOf(0.1);   // also correct: uses Double.toString internally</pre>
+```
+new BigDecimal("0.1");     // exact: 0.1
+BigDecimal.valueOf(0.1);   // also correct: uses Double.toString internally
+```
+
 
 ### Controlled Rounding {#h3-13-controlled-rounding}
 
@@ -256,12 +295,18 @@ Where `BigDecimal` truly shines is in explicit rounding control. In tax, invoici
 
 Computing VAT:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">BigDecimal vat = amount.multiply(rate)
-                       .setScale(2, RoundingMode.HALF_UP);</pre>
+```
+BigDecimal vat = amount.multiply(rate)
+                       .setScale(2, RoundingMode.HALF_UP);
+```
+
 
 Performing division (which often produces non-terminating decimals):
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">BigDecimal result = a.divide(b, 2, RoundingMode.HALF_UP);       // 1</pre>
+```
+BigDecimal result = a.divide(b, 2, RoundingMode.HALF_UP);       // 1
+```
+
 
 1. Without specifying scale and rounding mode, `divide` throws `ArithmeticException` if the result is non-terminating (e.g., `1 / 3`)
 
@@ -271,9 +316,12 @@ Without specifying scale and rounding mode, `divide` will throw `ArithmeticExcep
 
 This may be the single most common `BigDecimal` bug in production code:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">BigDecimal amount = new BigDecimal("19.995");
+```
+BigDecimal amount = new BigDecimal("19.995");
 amount.setScale(2, RoundingMode.HALF_UP);                        // 1
-System.out.println(amount);                 // still 19.995</pre>
+System.out.println(amount);                 // still 19.995
+```
+
 
 1. BUG: return value is discarded; `BigDecimal` is immutable, every method returns a **new** instance
 
@@ -283,11 +331,14 @@ System.out.println(amount);                 // still 19.995</pre>
 
 This bug appears constantly in enterprise code:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">BigDecimal a = new BigDecimal("2.0");
+```
+BigDecimal a = new BigDecimal("2.0");
 BigDecimal b = new BigDecimal("2.00");
 
 System.out.println(a.equals(b));      // false                   // 1
-System.out.println(a.compareTo(b));   // 0                       // 2</pre>
+System.out.println(a.compareTo(b));   // 0                       // 2
+```
+
 
 1. `equals()` compares both value **and** scale: `2.0` (scale 1) is not equal to `2.00` (scale 2)
 2. `compareTo()` compares only the numeric value; use this for numerical equality
@@ -303,7 +354,8 @@ System.out.println(a.compareTo(b));   // 0                       // 2</pre>
 
 Never use `System.nanoTime()` loops; JIT dead-code elimination, GC pauses, and branch prediction make them meaningless. Use :
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@Benchmark
+```
+@Benchmark
 public void doubleCalc(Blackhole bh) {
     double result = (100.10 + 200.20) / 2.0;
     bh.consume(result);                                          // 1
@@ -315,7 +367,9 @@ public void bigDecimalCalc(Blackhole bh) {
     BigDecimal b = new BigDecimal("200.20");
     BigDecimal result = a.add(b).divide(BigDecimal.valueOf(2), 2, RoundingMode.HALF_UP);
     bh.consume(result);
-}</pre>
+}
+```
+
 
 1. `Blackhole.consume()` prevents the JIT from eliminating dead code; without it, you benchmark nothing
 
@@ -325,20 +379,26 @@ Peter Lawrey's blog (Vanilla Java / Chronicle Software) demonstrated that roundi
 
 The cast-based approach is the fastest. Here is the original form from his blog, for two decimal places:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">static double roundToTwoPlaces(double d) {
-    return ((long) (d &lt; 0 ? d * 100 - 0.5 : d * 100 + 0.5)) / 100.0;  // 1
-}</pre>
+```
+static double roundToTwoPlaces(double d) {
+    return ((long) (d < 0 ? d * 100 - 0.5 : d * 100 + 0.5)) / 100.0;  // 1
+}
+```
+
 
 1. Shift decimal point, bias +/-0.5 for half-up, truncate via cast, shift back; handles negatives by branching on sign
 
 The pattern generalizes naturally:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">static double roundHalfUp(double value, int decimalPlaces) {
+```
+static double roundHalfUp(double value, int decimalPlaces) {
     double factor = Math.pow(10, decimalPlaces);
-    return value &gt;= 0
+    return value >= 0
         ? Math.floor(value * factor + 0.5) / factor
         : Math.ceil(value * factor - 0.5) / factor;
-}</pre>
+}
+```
+
 
 This works correctly for both positive and negative values, within the safe integer range of `double` (up to 2\^53). It requires `HALF_UP` rounding only; for banker's rounding, *i.e.* , `HALF_EVEN`, use `Math.rint()` or `BigDecimal` with `RoundingMode.HALF_EVEN`. For audit-mandated traceability, `BigDecimal` with explicit `RoundingMode` is easier to defend to a regulator.
 
@@ -358,7 +418,8 @@ If even the fast rounding tricks above feel like too much overhead, there is a m
 
 The idea is trivially simple: instead of storing `19.99` as a floating-point or decimal value, store `1999` as an integer representing cents. All arithmetic happens on integers, which are fast, deterministic, and allocation-free.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public record Money(long cents) {
+```
+public record Money(long cents) {
     public Money plus(Money other) {
         return new Money(Math.addExact(cents, other.cents));      // 1
     }
@@ -370,7 +431,9 @@ The idea is trivially simple: instead of storing `19.99` as a floating-point or 
     public BigDecimal toBigDecimal() {
         return BigDecimal.valueOf(cents, 2);                      // 2
     }
-}</pre>
+}
+```
+
 
 1. `Math.addExact` and `Math.multiplyExact` throw `ArithmeticException` on overflow instead of silently wrapping, critical for financial systems
 2. Converts back to `BigDecimal` at the boundary, preserving scale
@@ -379,10 +442,13 @@ The advantages of fixed-point are compelling: no heap allocation, no GC pressure
 
 Applying a percentage like VAT in a fixed-point requires care. The standard approach uses *basis points* (hundredths of a percent, so 22% = 2200 basis points):
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">static long applyVat(long netCents, long vatBasisPoints) {
+```
+static long applyVat(long netCents, long vatBasisPoints) {
     long numerator = Math.multiplyExact(netCents, 10_000 + vatBasisPoints);
     return (numerator + 5_000) / 10_000;                         // 1
-}</pre>
+}
+```
+
 
 1. Returns the VAT-inclusive gross total (net + VAT); `+ 5_000` before dividing by `10_000` implements half-up rounding in pure integer arithmetic, with no floating-point involved
 
@@ -408,12 +474,15 @@ This mirrors exactly the trade-off we have been discussing. The JSR 354 API (`Mo
 
 Created by Stephen Colebourne, author of Joda-Time and `java.time`, [Joda-Money](https://www.joda.org/joda-money/) is a deliberately simpler alternative to JSR 354. It provides `Money`, a fixed-scale class, backed by `BigDecimal`, and `BigMoney`, of arbitrary scale. There's no `FastMoney` equivalent; the focus is a clean, minimal API for applications where money is a secondary concern (e-commerce, SaaS billing, reporting).
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">import org.joda.money.Money;
+```
+import org.joda.money.Money;
 import org.joda.money.CurrencyUnit;
 
 Money price = Money.of(CurrencyUnit.EUR, 19.99);
 Money total = price.multipliedBy(3);
-Money vat   = total.multipliedBy(0.22, RoundingMode.HALF_UP);</pre>
+Money vat   = total.multipliedBy(0.22, RoundingMode.HALF_UP);
+```
+
 
 **Use case:** Simpler alternative to JSR 354 when you need a robust money type but do not require the full JSR API surface (conversion providers, custom currencies, monetary queries). The 2.x branch requires Java 21+; the 1.x branch works with Java 8+.
 
@@ -421,10 +490,13 @@ Money vat   = total.multipliedBy(0.22, RoundingMode.HALF_UP);</pre>
 
 [decimal4j](https://github.com/tools4j/decimal4j) implements fixed-point decimal arithmetic on `long`, with a configurable scale of up to 18 decimal places, pluggable rounding modes, and a zero-garbage API designed for low-latency systems. It offers both immutable and mutable decimal types, and the scale is encoded in the type itself (*e.g.* , `Decimal2f` for 2 decimal places).
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">import org.decimal4j.immutable.Decimal2f;
+```
+import org.decimal4j.immutable.Decimal2f;
 
 Decimal2f price = Decimal2f.valueOf("19.99");
-Decimal2f total = price.multiply(3);</pre>
+Decimal2f total = price.multiply(3);
+```
+
 
 The mutable variant, `MutableDecimal2f`, avoids object allocation entirely by modifying its internal state and returning `this`, which is useful in tight loops where GC pressure matters.
 
@@ -444,10 +516,13 @@ Compensated summation and dot product using the same Sum2S/Dot2S algorithms desc
 
 Utilities for floating-point comparison: `equals(double, double, double eps)` for epsilon-based comparison, `equals(double, double, int maxUlps)` for ULP-based comparison, and rounding with configurable `RoundingMode`. Also provides `EPSILON` (machine epsilon, 2\^-53) and `SAFE_MIN` (smallest normalized double, 2\^-1022) as named constants.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">import org.apache.commons.numbers.core.Precision;
+```
+import org.apache.commons.numbers.core.Precision;
 
 boolean eq = Precision.equals(0.1 + 0.2, 0.3, 1);               // 1
-boolean eq2 = Precision.equals(a, b, 1e-10);                    // 2</pre>
+boolean eq2 = Precision.equals(a, b, 1e-10);                    // 2
+```
+
 
 1. ULP-based comparison: equal if within 1 ULP
 2. Epsilon-based comparison
@@ -494,18 +569,24 @@ Serializing numeric values to JSON is one of the most common sources of silent p
 
 The common fix is to serialize `BigDecimal` as a JSON string:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public class Invoice {
+```
+public class Invoice {
     @JsonFormat(shape = JsonFormat.Shape.STRING)                  // 1
     private BigDecimal amount;
-}</pre>
+}
+```
+
 
 1. Preserves the exact textual representation: `"19.10"` stays `"19.10"` in JSON
 
 Alternatively, you can configure the Jackson `ObjectMapper` globally:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">ObjectMapper mapper = new ObjectMapper();
+```
+ObjectMapper mapper = new ObjectMapper();
 mapper.enable(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS);
-mapper.configure(SerializationFeature.WRITE_BIGDECIMAL_AS_PLAIN, true);</pre>
+mapper.configure(SerializationFeature.WRITE_BIGDECIMAL_AS_PLAIN, true);
+```
+
 
 `WRITE_BIGDECIMAL_AS_PLAIN` prevents Jackson from using scientific notation (e.g., `1.2E+3`), and `USE_BIG_DECIMAL_FOR_FLOATS` ensures that incoming JSON numbers are deserialized as `BigDecimal` rather than `Double`.
 
@@ -519,19 +600,23 @@ Testing numeric code has its own set of traps. The core issue: you cannot use ex
 
 **JUnit 5** provides `assertEquals` with a delta:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">import static org.junit.jupiter.api.Assertions.assertEquals;
+```
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @Test
 void testAverage() {
     double result = average(new double[]{0.1, 0.2, 0.3});
     assertEquals(0.2, result, 1e-15);                            // 1
-}</pre>
+}
+```
+
 
 1. Delta = tolerance: too tight and the test fails on CI; too loose and it misses regressions
 
 **AssertJ** offers a more expressive API:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">import static org.assertj.core.api.Assertions.assertThat;
+```
+import static org.assertj.core.api.Assertions.assertThat;
 import org.assertj.core.data.Offset;
 import org.assertj.core.data.Percentage;
 
@@ -540,25 +625,33 @@ void testAverageAssertJ() {
     double result = average(new double[]{0.1, 0.2, 0.3});
     assertThat(result).isCloseTo(0.2, Offset.offset(1e-15));     // 1
     assertThat(result).isCloseTo(0.2, Percentage.withPercentage(0.0001)); // 2
-}</pre>
+}
+```
+
 
 1. Absolute tolerance
 2. Relative tolerance: useful when the output magnitude varies across test cases
 
 **For `BigDecimal` tests** , use `compareTo`, not `equals`, in your assertions, or normalize scale first:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@Test
+```
+@Test
 void testVatCalculation() {
     BigDecimal result = calculateVat(new BigDecimal("100.00"), new BigDecimal("0.22"));
     assertThat(result.compareTo(new BigDecimal("22.00"))).isZero();
-}</pre>
+}
+```
+
 
 ### `double` is not atomic {#h3-29-double-is-not-atomic}
 
 JLS §17.7 states that a write to a non-volatile `double` or `long` is treated as **two separate 32-bit writes** . A reading thread can observe a *torn value* (high bits from one write, low bits from another), producing a meaningless bit pattern.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">private double sharedPrice;            // UNSAFE: another thread may read a torn value
-private volatile double sharedPrice;   // SAFE: volatile guarantees atomic read/write</pre>
+```
+private double sharedPrice;            // UNSAFE: another thread may read a torn value
+private volatile double sharedPrice;   // SAFE: volatile guarantees atomic read/write
+```
+
 
 On 64-bit JVMs, `double` writes happen to be atomic at the hardware level, but the JLS does not guarantee this. If you share a `double` across threads without `volatile`, your code is incorrect per the spec.
 
@@ -566,9 +659,12 @@ On 64-bit JVMs, `double` writes happen to be atomic at the hardware level, but t
 
 The Javadoc for `DoubleStream.sum()` explicitly warns that the order of addition is *intentionally not defined* . This has a direct consequence: `DoubleStream.parallel().sum()` can return different results on different invocations with the same input data.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">double[] values = {0.1, 0.2, 0.3, 1e15, -1e15, 0.4};
+```
+double[] values = {0.1, 0.2, 0.3, 1e15, -1e15, 0.4};
 double seqSum = DoubleStream.of(values).sum();             // sequential: consistent
-double parSum = DoubleStream.of(values).parallel().sum();  // parallel: may differ between runs</pre>
+double parSum = DoubleStream.of(values).parallel().sum();  // parallel: may differ between runs
+```
+
 
 The difference is usually tiny, within a few ULPs for well-conditioned data. But for ill-conditioned sums (large positive and negative terms that nearly cancel), the difference can be significant. If your application requires **reproducible** results across runs or machines, either use sequential streams or use a deterministic summation algorithm like Kahan or Neumaier.
 
@@ -580,11 +676,14 @@ When multiple threads need to update a shared sum (metrics counters, running tot
 
 `DoubleAdder` (added in Java 8) solves this with **striped cells** : internally, it maintains multiple partial sums across different memory locations, so threads rarely contend on the same cache line. The final sum is only computed when you call `sum()`.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">import java.util.concurrent.atomic.DoubleAdder;
+```
+import java.util.concurrent.atomic.DoubleAdder;
 
 DoubleAdder totalRevenue = new DoubleAdder();
 totalRevenue.add(19.99);           // called from many threads, minimal contention
-double current = totalRevenue.sum(); // aggregates all stripes when read</pre>
+double current = totalRevenue.sum(); // aggregates all stripes when read
+```
+
 
 The trade-off: `DoubleAdder.sum()` is not atomic: it reads the stripes sequentially, so if other threads are writing concurrently, the result is an approximation. For exact point-in-time snapshots, you still need external synchronization. But for metrics, dashboards, and monitoring (where approximate-but-fast beats exact-but-slow), `DoubleAdder` is the right primitive.
 
@@ -599,10 +698,13 @@ One of the strongest arguments for `double` or `long` over `BigDecimal` has alwa
 
 What does this mean for numeric types? Consider a `Money` wrapper:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">value class Money {  // preview syntax, requires --enable-preview
+```
+value class Money {  // preview syntax, requires --enable-preview
     private final long cents;
     // ... arithmetic methods ...
-}</pre>
+}
+```
+
 
 With value semantics, `Money` could be inlined into arrays without per-element object headers, passed in registers instead of on the heap, and eliminated entirely by escape analysis. The GC pressure that makes `BigDecimal` expensive in tight loops could largely disappear.
 
@@ -628,7 +730,7 @@ The real engineering mistake is not choosing `double` over `BigDecimal`. It is c
 * [Apache Commons Numbers](https://commons.apache.org/proper/commons-numbers/)
 * [Joda-Money](https://www.joda.org/joda-money/)
 
-*** ** * ** ***
+
 
 *Originally published at [A Java Geek](https://blog.frankel.ch/bigdecimal-vs-double/) on June 14^th^, 2026.*
 

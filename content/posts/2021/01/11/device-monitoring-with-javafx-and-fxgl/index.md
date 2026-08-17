@@ -56,17 +56,23 @@ Mosquitto {#h2-1-mosquitto}
 
 Installing Mosquitto can be done with the following commands, which will also configure it as a service to start whenever your Raspberry Pi is (re)powered.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ sudo apt update
+```
+$ sudo apt update
 $ sudo apt install -y mosquitto mosquitto-clients
-$ sudo systemctl enable mosquitto.service</pre>
+$ sudo systemctl enable mosquitto.service
+```
+
 
 We can check if it is installed correctly and running by requesting the version:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ mosquitto -v
+```
+$ mosquitto -v
 1569780732: mosquitto version 1.5.7 starting
 1569780732: Using default config.
 1569780732: Opening ipv4 listen socket on port 1883.
-1569780732: Error: Address already in use</pre>
+1569780732: Error: Address already in use
+```
+
 
 The last line with the error message can be ignored.
 
@@ -74,13 +80,19 @@ The last line with the error message can be ignored.
 
 The installed mosquitto-clients can be used to easily test if Mosquitto is running OK on the Pi, by opening two terminal windows. In the first one we start a listener on topic "testing/TestTopic":
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ mosquitto_sub -v -t 'testing/TestTopic'</pre>
+```
+$ mosquitto_sub -v -t 'testing/TestTopic'
+```
+
 
 In the second terminal we send multiple commands with a message for this specific topic, like this:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ mosquitto_pub -t 'testing/TestTopic' -m 'hello world'
+```
 $ mosquitto_pub -t 'testing/TestTopic' -m 'hello world'
-$ mosquitto_pub -t 'testing/TestTopic' -m 'jieha it works'</pre>
+$ mosquitto_pub -t 'testing/TestTopic' -m 'hello world'
+$ mosquitto_pub -t 'testing/TestTopic' -m 'jieha it works'
+```
+
 
 Every "publish" from the second terminal window will appear in the first one as you can see in these screenshots:
 ![](mosquitto_testing.png)
@@ -94,14 +106,18 @@ To send the state from all our Raspberry Pi-boards to Mosquitto, a [script is av
 
 If you started from the default Raspberry Pi OS, Python is already installed. So we only need to add two extra libraries with the pip-command to send data to the queue (with paho) and get device status info (with psutil).
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">pip install paho-mqtt
-pip install psutil</pre>
+```
+pip install paho-mqtt
+pip install psutil
+```
+
 
 In this example we are only using a subset of all the data which is available from psutil to show as a proof-of-concept. A full overview is available on [pypi.org/project/psutil](https://pypi.org/project/psutil/).
 
 A small part of the Python code shows how the virtual memory info is used to construct a json-message:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">virtual = psutil.virtual_memory()
+```java
+virtual = psutil.virtual_memory()
 
 jsonString = "{"
 ...
@@ -113,13 +129,18 @@ jsonString += "   'free':'" + str(virtual.free) + "',"
 jsonString += "   'percent':'" + str(virtual.percent) + "'"
 jsonString += " },"
 ...
-jsonString = "}"</pre>
+jsonString = "}"
+```
+
 
 With the paho-library we can send such a message to the queue with:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">client = paho.Client(hostname + ":" + str(address))
+```java
+client = paho.Client(hostname + ":" + str(address))
 client.connect(mosquitto)
-client.publish(topicName, jsonString)</pre>
+client.publish(topicName, jsonString)
+```
+
 
 Inside the Monitoring Application {#h2-6-inside-the-monitoring-application}
 ---------------------------------------------------------------------------
@@ -130,28 +151,32 @@ The [Java/JavaFX/FXGL Maven project](https://github.com/FDelporte/FXGLSystemMoni
 
 For example the dialog box at start-up asks the user to select mock or real mode:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">runOnce(() -&gt; {
+```java
+runOnce(() -> {
     var choiceBox = getUIFactoryService().newChoiceBox(
             FXCollections.observableArrayList("192.168.0.223", "Mock Data")
     );
     choiceBox.getSelectionModel().selectFirst();
 
     var btnOK = getUIFactoryService().newButton("OK");
-    btnOK.setOnAction(e -&gt; {
+    btnOK.setOnAction(e -> {
         var result = choiceBox.getSelectionModel().getSelectedItem();
         if ("Mock Data".equals(result)) {
             startWithMockData();
         } else {
-            getExecutor().startAsync(() -&gt; startWithClient(result));
+            getExecutor().startAsync(() -> startWithClient(result));
         }
     });
 
     getDialogService().showBox("Select mode", choiceBox, btnOK);
-}, Duration.seconds(0.01));</pre>
+}, Duration.seconds(0.01));
+```
+
 
 Another one is the `run()` method which, every second, runs the provided code. In this case, the code generates random data for the "mock" mode using [Perlin noise](https://en.wikipedia.org/wiki/Perlin_noise):
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">run(() -&gt; monitors.forEach(m -&gt; {
+```java
+run(() -> monitors.forEach(m -> {
     var t = random(0.5, 150000.0);
 
     var reading = new Reading(
@@ -161,13 +186,16 @@ Another one is the `run()` method which, every second, runs the provided code. I
     );
 
     m.onReading(reading);
-}), DATA_UPDATE_FREQUENCY);</pre>
+}), DATA_UPDATE_FREQUENCY);
+```
+
 
 ### Incoming Data {#h3-7-incoming-data}
 
 By using JSONB the incoming data is converted to Java objects. For example, let's look at the `VirtualMemory` class which maps the Python data to a Java object. Each JsonbProperty has a name-value which is not required if the variable has the same name, but for clarity, I prefer to still define it to avoid errors later when the Java variable is renamed.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public class VirtualMemory {
+```java
+public class VirtualMemory {
     @JsonbProperty("total")
     private long total;
 
@@ -188,23 +216,31 @@ By using JSONB the incoming data is converted to Java objects. For example, let'
     }
 
     // Getters - Setters
-}</pre>
+}
+```
+
 
 ### Queue {#h3-8-queue}
 
 By using the ["org.eclipse.paho.client.mqttv3" dependency](https://www.eclipse.org/paho/), we can easily connect to the queue:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">MqttClient client = new MqttClient("tcp://" + ipAddress + ":1883", MqttClient.generateClientId());
+```java
+MqttClient client = new MqttClient("tcp://" + ipAddress + ":1883", MqttClient.generateClientId());
 client.setCallback(new ClientCallback(readings));
-client.subscribe(topicName);</pre>
+client.subscribe(topicName);
+```
+
 
 The ClientCallBack gets called each time a message is available for the topic that we mentioned earlier.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@Override
+```java
+@Override
 public void messageArrived(String s, MqttMessage mqttMessage) {
     String data = new String(mqttMessage.getPayload());
     System.out.println("Message received: " + data);
-}</pre>
+}
+```
+
 
 ### The View Components {#h3-9-the-view-components}
 
@@ -212,13 +248,16 @@ All the views are split into separate JavaFX Nodes. The overall `MonitorView` is
 
 and `CanvasLineChart` respectively. An illustrative example of these relationships is provided below:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">App uses MonitorView
+```
+App uses MonitorView
 
 MonitorView uses CollapsedView and ExpandedView
 
 CollapsedView uses LoadView
 
-ExpandedView uses CanvasLineChart</pre>
+ExpandedView uses CanvasLineChart
+```
+
 
 All these views implement the `ReadingHandler` callback, which notifies each view when a new reading from the queue is available. Therefore, all views can easily be updated following this notification.
 
@@ -226,13 +265,16 @@ All these views implement the `ReadingHandler` callback, which notifies each vie
 
 Each dashboard tile expands on click to fill the entire window. This expansion happens as an animation, which seamlessly transforms the `CollapsedView` into the `ExpandedView`. The animation itself makes use of the FXGL animation system using "fluent" API, where we can configure various properties, such as duration and interpolation. We also provide the JavaFX observable property that we are animating (`bg.widthProperty()`) and the values at the start and end of the animation:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">animationBuilder()
+```java
+animationBuilder()
         .duration(ANIMATION_DURATION)
         .interpolator(Interpolators.EXPONENTIAL.EASE_OUT())
         .animate(bg.widthProperty())
         .from(MONITOR_WIDTH)
         .to(APP_WIDTH)
-        .buildAndPlay();</pre>
+        .buildAndPlay();
+```
+
 
 ### Running the Application with Mock Data {#h3-11-running-the-application-with-mock-data}
 
@@ -275,9 +317,12 @@ As you can see in the video, my Pi's are not very busy. By using the stress-tool
 
 On my Raspberry Pi (B4 8Gb memory) the cpu-command only impacts the CPU value, while the vm-command causes both higher CPU and memory usage.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ sudo apt install stress
+```
+$ sudo apt install stress
 $ stress --cpu 2
-$ stress --vm 4 --vm-bytes 1024M</pre>
+$ stress --vm 4 --vm-bytes 1024M
+```
+
 
 Conclusion {#h2-13-conclusion}
 ------------------------------

@@ -78,10 +78,13 @@ Caching in Spring Boot {#h2-6-caching-in-spring-boot}
 
 Spring Boot supplies caching support to make your application fast. Spring Boot caching is based on an Abstraction that can easily be enabled in a Spring Boot application. There is a starter package that can easily add to your project dependency to add caching support to your project.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">&lt;dependency&gt;
- &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
- &lt;artifactId&gt;spring-boot-starter-cache&lt;/artifactId&gt;
-&lt;/dependency&gt;</pre>
+```
+<dependency>
+ <groupId>org.springframework.boot</groupId>
+ <artifactId>spring-boot-starter-cache</artifactId>
+</dependency>
+```
+
 
 The first two things we need to do after adding the library dependency are:
 
@@ -98,7 +101,8 @@ The first two things we need to do after adding the library dependency are:
 
 For the sake of simplicity, we use the default simple in-memory Spring cache implementation, which autoconfigures by default if we don't provide any library, and also use an in-memory map as a Database.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">@Service
+```
+@Service
 class PhonebookService {
     private final PhonebookRepository phonebookRepository;
     PhonebookService(PhonebookRepository phonebookRepository) {
@@ -116,40 +120,43 @@ class PhonebookService {
     void delete(String name) {
         phonebookRepository.delete(name);
     }
-}</pre>
+}
+```
+
 
 We simulate slowness at the repository level by sleeping the current thread for 1 second before each request.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">@Repository
+```
+@Repository
 class PhonebookRepository {
-    private final ConcurrentHashMap&lt;String, PhoneNumber&gt; database = new ConcurrentHashMap&lt;&gt;();
+    private final ConcurrentHashMap<String, PhoneNumber> database = new ConcurrentHashMap<>();
     PhoneNumber findByName(String name) {
-        return simulateDatabaseInteraction(() -&gt; database.get(name), 1000L);
+        return simulateDatabaseInteraction(() -> database.get(name), 1000L);
     }
     PhoneNumber insert(PhoneNumber phoneNumber) {
-        return simulateDatabaseInteraction(() -&gt; {
+        return simulateDatabaseInteraction(() -> {
             database.put(phoneNumber.name(), phoneNumber);
             return phoneNumber;
         }, 500L);
     }
     PhoneNumber update(String name, PhoneNumber phoneNumber) {
-        return simulateDatabaseInteraction(() -&gt; {
+        return simulateDatabaseInteraction(() -> {
             database.remove(name);
             database.put(phoneNumber.name(), phoneNumber);
             return phoneNumber;
         }, 700L);
     }
     PhoneNumber delete(String name) {
-        return simulateDatabaseInteraction(() -&gt; database.remove(name), 200L);
+        return simulateDatabaseInteraction(() -> database.remove(name), 200L);
     }
-    public List&lt;PhoneNumber&gt; findByNumber(String number) {
-        return simulateDatabaseInteraction(() -&gt; database
+    public List<PhoneNumber> findByNumber(String number) {
+        return simulateDatabaseInteraction(() -> database
                 .values()
                 .stream()
-                .filter(phoneNumber -&gt; phoneNumber.number().equals(number))
+                .filter(phoneNumber -> phoneNumber.number().equals(number))
                 .toList(), 2000L);
     }
-    private &lt;T&gt; T simulateDatabaseInteraction(Supplier&lt;T&gt; block, long duration) {
+    private <T> T simulateDatabaseInteraction(Supplier<T> block, long duration) {
         try {
             Thread.sleep(duration);
             return block.get();
@@ -157,7 +164,9 @@ class PhonebookRepository {
             throw new IllegalStateException(e);
         }
     }
-}</pre>
+}
+```
+
 
 ### Spring Boot annotations for Caching {#h3-8-spring-boot-annotations-for-caching}
 
@@ -174,7 +183,8 @@ Adding the cache capability to the Phonebook example {#h2-9-adding-the-cache-cap
 
 Now we know how to use the cache concept in a Spring Boot. Let us add a cache capability to the Phonebook's service layer.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">@Service
+```
+@Service
 class PhonebookService {
     private final PhonebookRepository phonebookRepository;
     PhonebookService(PhonebookRepository phonebookRepository) {
@@ -197,7 +207,9 @@ class PhonebookService {
     void delete(String name) {
         phonebookRepository.delete(name);
     }
-}</pre>
+}
+```
+
 
 By adding these annotations to the service layer, the Phonebook application performance now is improved.
 
@@ -220,35 +232,41 @@ Let's continue by adding this [endpoint](https://digma.ai/whats-new-feb-2024/ "e
 
 Get all names for a phone number.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">//Controller
+```
+//Controller
     @GetMapping("/numbers/{number}")
-    List&lt;PhoneNumber&gt; getByNumber(@PathVariable String number) {
+    List<PhoneNumber> getByNumber(@PathVariable String number) {
         return phonebookService.findByNumber(number);
     }
 //Service
-    public List&lt;PhoneNumber&gt; findByNumber(String number) {
+    public List<PhoneNumber> findByNumber(String number) {
         return phonebookRepository.findByNumber(number);
     }
 //Repository
-    public List&lt;PhoneNumber&gt; findByNumber(String number) {
-        return simulateDatabaseInteraction(() -&gt; database
+    public List<PhoneNumber> findByNumber(String number) {
+        return simulateDatabaseInteraction(() -> database
                 .values()
                 .stream()
-                .filter(phoneNumber -&gt; phoneNumber.number().equals(number))
+                .filter(phoneNumber -> phoneNumber.number().equals(number))
                 .toList(), 2000L);
-    }</pre>
+    }
+```
+
 
 After implementing the controller, service, and repository methods, we make the repository method slow (2 seconds) to see how Digma helps us detect that.
 
 First, we need to install the Digma [IntelliJ plugin](https://plugins.jetbrains.com/plugin/19470-digma-continuous-feedback "IntelliJ plugin") in our IDE and configure its infrastructure: After that, Let's start to call the Phonebook endpoint using the [HTTPie](https://httpie.io/ "HTTPie") command line tools:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">http post :8080/api/phonebooks/phones name="saeed" number="+46123"
+```
+http post :8080/api/phonebooks/phones name="saeed" number="+46123"
 http :8080/api/phonebooks/phones/saeed
 http delete :8080/api/phonebooks/phones/saeed
 http post :8080/api/phonebooks/phones name="deli" number="+46345" 
 http :8080/api/phonebooks/phones/deli
 http put :8080/api/phonebooks/phones/deli name="zarin" number="+46345" 
-http :8080/api/phonebooks/phones/numbers/+46123</pre>
+http :8080/api/phonebooks/phones/numbers/+46123
+```
+
 
 One of the most important features of Digma is Insights, Digma uses OpenTelemetry behind the scenes to collect data (traces, logs, and metrics) about our code when we run it locally and then turn those Observability Data Into Insights by analyzing them.
 
@@ -266,10 +284,13 @@ Also, in the Observability view, you can see the insight column and click on the
 
 Digma detects that this new endpoint, on average, is slower than other endpoints. In real scenarios, it can be because of a slow database query or forgetting to use cache, cache misses, or ... In this case, we need to use the @Cacheable annotation on the method to fix this issue:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">@Cacheable(value = "phonebook.number")
-public List&lt;PhoneNumber&gt; findByNumber(String number) {
+```
+@Cacheable(value = "phonebook.number")
+public List<PhoneNumber> findByNumber(String number) {
     return phonebookRepository.findByNumber(number);
-}</pre>
+}
+```
+
 
 And also, we should consider these two:
 

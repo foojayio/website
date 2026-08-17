@@ -31,10 +31,11 @@ It's time to improve your Java skills with this Method Reference VS Lambda Chall
 
 What will happen when we run the following main method?
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public class MethodReferenceVSLambdaChallenge {
+```java
+public class MethodReferenceVSLambdaChallenge {
 
     public static void main(String... doYourBest) {
-        Runnable universeImpactRunnable = () -&gt; new ChuckNorris().roundHouseKick();
+        Runnable universeImpactRunnable = () -> new ChuckNorris().roundHouseKick();
         Runnable galaxyImpactRunnable = new ChuckNorris()::roundHouseKick;
 
         System.out.print("The galaxy is finished = ");
@@ -59,7 +60,9 @@ What will happen when we run the following main method?
         }
     }
 
-}</pre>
+}
+```
+
 
 A) The galaxy is finished = 1234  
 
@@ -75,39 +78,59 @@ Now that you know the main context, it's time for the Java Challenge!
 
 Let's analyze the code:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">Runnable universeImpactRunnable = () -&gt; new ChuckNorris().roundHouseKick();
-Runnable galaxyImpactRunnable = new ChuckNorris()::roundHouseKick;</pre>
+```java
+Runnable universeImpactRunnable = () -> new ChuckNorris().roundHouseKick();
+Runnable galaxyImpactRunnable = new ChuckNorris()::roundHouseKick;
+```
+
 
 There is a crucial difference between lambda and method reference. Lambdas are lazy and they will invoke the class constructor only when the method is invoked. On the other hand, with method reference, the constructor will be invoked right away only where the method reference is assigned, not on the method invocation.
 
 So, at this line the constructor is not invoked:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">Runnable universeImpactRunnable = () -&gt; new ChuckNorris().roundHouseKick();
-</pre>
+```java
+Runnable universeImpactRunnable = () -> new ChuckNorris().roundHouseKick();
+```
+
 
 And, at this line the constructor is invoked:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">Runnable galaxyImpactRunnable = new ChuckNorris()::roundHouseKick;</pre>
+```java
+Runnable galaxyImpactRunnable = new ChuckNorris()::roundHouseKick;
+```
+
 
 With that in mind, let's analyze the invoked methods:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">universeImpactRunnable.run();
-universeImpactRunnable.run();</pre>
+```java
+universeImpactRunnable.run();
+universeImpactRunnable.run();
+```
+
 
 With lambdas, every time the run method is invoked, the constructor will be invoked, which means that the numberOfKicks variable will be increased. So the value from galaxyDamage will be:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">12</pre>
+```
+12
+```
+
 
 Then when we invoke those methods:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">galaxyImpactRunnable.run();
-galaxyImpactRunnable.run();</pre>
+```java
+galaxyImpactRunnable.run();
+galaxyImpactRunnable.run();
+```
+
 
 The value will be 0 because remember that the constructor will be only invoked one and it was already invoked at the moment of the method reference declaration.
 
 By knowing that, and also remembering that the post ++ operator increases a value after the line being processed. Then the values will be:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">00</pre>
+```
+00
+```
+
 
 The final result will be then... what do you think?
 

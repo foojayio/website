@@ -58,20 +58,27 @@ As I like to experiment with Java on the Raspberry Pi, and the full CRaC-functio
 * PostgreSQL with the database `crac` and table `app_log` (see the README of the repository for all details).
 * Azul Zulu Build of OpenJDK, version 21 with CRaC:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ sdk install java 21.crac-zulu</pre>
+```
+$ sdk install java 21.crac-zulu
+```
+
 
 #### Build and Run From JAR
 
 I compiled the application on the Raspberry Pi and executed it with the following command which specifies the directory where the checkpoint must be created:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ git clone https://github.com/FDelporte/crac-example.git
+```
+$ git clone https://github.com/FDelporte/crac-example.git
 $ cd crac-example
 $ mvn package
-$ java -XX:CRaCCheckpointTo=cr -jar target/crac-example.jar</pre>
+$ java -XX:CRaCCheckpointTo=cr -jar target/crac-example.jar
+```
+
 
 These are the durations needed for the HTTP endpoints to respond, as logged in the database. As you can see, the biggest file needs about 12 seconds to unzip and return the results.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">duration=11800, description=Handled request for /files/organizations-1000000.csv
+```
+duration=11800, description=Handled request for /files/organizations-1000000.csv
 duration=8721, description=Data was converted to Java objects from organizations-1000000.csv
 duration=3054, description=ZIP was unpacked from organizations-1000000.csv
 duration=5197, description=Handled request for /files/organizations-500000.csv
@@ -87,15 +94,21 @@ duration=222, description=Handled request for /files/organizations-1000.csv
 duration=94, description=Data was converted to Java objects from organizations-1000.csv
 duration=7, description=ZIP was unpacked from organizations-1000.csv
 duration=0, description=Started from main
-duration=0, description====================================================]</pre>
+duration=0, description====================================================]
+```
+
 
 Once this is done, we can create a checkpoint by opening a second terminal and executing the following command:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ jcmd target/crac-example.jar JDK.checkpoint</pre>
+```
+$ jcmd target/crac-example.jar JDK.checkpoint
+```
+
 
 In the first terminal, you can see what's happening during the checkpoint creation, and the application getting terminated at the end if the checkpoint creation was successful.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">Oct 17, 2023 7:21:29 PM jdk.internal.crac.LoggerContainer info
+```
+Oct 17, 2023 7:21:29 PM jdk.internal.crac.LoggerContainer info
 INFO: Starting checkpoint
 17/10/2023 19:21 | ServerManager                       | beforeCheckpoint     | INFO     | Executing beforeCheckpoint
 2023-10-17 19:21:29.978:INFO:oejs.AbstractConnector:Attach Listener: Stopped ServerConnector@77a98a6a{HTTP/1.1, (http/1.1)}{0.0.0.0:8080}
@@ -122,29 +135,37 @@ Oct 17, 2023 7:21:31 PM jdk.internal.crac.LoggerContainer info
 INFO: /home/crac/crac-example/target/dependency/jetty-server-9.4.51.v20230217.jar is recorded as always available on restore
 Oct 17, 2023 7:21:31 PM jdk.internal.crac.LoggerContainer info
 INFO: /home/crac/crac-example/target/crac-example.jar is recorded as always available on restore
-Killed</pre>
+Killed
+```
+
 
 #### Run From Checkpoint
 
 Our checkpoint has been created in the `cr` directory, so we can now restart it with the following command.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ java -XX:CRaCRestoreFrom=cr
+```
+$ java -XX:CRaCRestoreFrom=cr
 
 17/10/2023 19:22 | DatabaseManager                     | afterRestore         | INFO     | Executing afterRestore
 17/10/2023 19:22 | DatabaseManager                     | initConnection       | WARN     | Setting up database connection
 17/10/2023 19:22 | DatabaseManager                     | initConnection       | INFO     | Database connection status: {ApplicationName=PostgreSQL JDBC Driver}
 17/10/2023 19:22 | ServerManager                       | afterRestore         | INFO     | Executing afterRestore
-2023-10-17 19:22:48.800:INFO:oejs.AbstractConnector:Attach Listener: Started ServerConnector@77a98a6a{HTTP/1.1, (http/1.1)}{0.0.0.0:8080}</pre>
+2023-10-17 19:22:48.800:INFO:oejs.AbstractConnector:Attach Listener: Started ServerConnector@77a98a6a{HTTP/1.1, (http/1.1)}{0.0.0.0:8080}
+```
+
 
 As you can see, within a second the `afterRestore` methods get executed, meaning the application is up-and-running in the same state as it was just before the checkpoint was created. As unzipping and converting the CSV files into Java objects was already done, the HTTP endpoint can respond immediately. For the largest file this means a response in 7 milliseconds instead of over 10 seconds.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">duration=7, description=Handled request for /files/organizations-1000000.csv
+```
+duration=7, description=Handled request for /files/organizations-1000000.csv
 duration=7, description=Handled request for /files/organizations-500000.csv
 duration=6, description=Handled request for /files/organizations-100000.csv
 duration=8, description=Handled request for /files/organizations-10000.csv
 duration=15, description=Handled request for /files/organizations-1000.csv
 duration=0, description=Reopened DB connection after restore
-duration=0, description====================================================</pre>
+duration=0, description====================================================
+```
+
 
 Conclusion {#h2-3-conclusion}
 -----------------------------

@@ -46,7 +46,8 @@ Operator overloading allows us to use familiar mathematical notation in code, ma
 
 To demonstrate, let's start with a simple `Vector` class that performs vector arithmetic operations. In standard Java code, we define variables, accept them in the constructor, and implement methods like `plus` for vector addition. However, this approach can be verbose and less readable.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">public class Vec {
+```
+public class Vec {
    private float x, y, z;
 
    public Vec(float x, float y, float z) {
@@ -58,13 +59,18 @@ To demonstrate, let's start with a simple `Vector` class that performs vector ar
    public Vec plus(Vec other) {
        return new Vec(x + other.x, y + other.y, z + other.z);
    }
-}</pre>
+}
+```
+
 
 With Manifold, we can simplify the code significantly. Using Manifold's operator overloading features, we can directly add vectors together using the `+` operator as such:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">Vec vec1 = new Vec(1, 2, 3);
+```
+Vec vec1 = new Vec(1, 2, 3);
 Vec vec2 = new Vec(1, 1, 1);
-Vec vec3 = vec1 + vec2;</pre>
+Vec vec3 = vec1 + vec2;
+```
+
 
 Manifold seamlessly maps the operator to the appropriate method invocation, making the code cleaner and more concise. This fluid syntax resembles mathematical notation, enhancing code readability.
 
@@ -72,16 +78,22 @@ Moreover, Manifold handles reverse notation gracefully. If we reverse the order 
 
 Let's say we add this to the Vec class:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">public Vec plus(float other) {
+```
+public Vec plus(float other) {
     return new Vec(x + other, y + other, z + other);
-}</pre>
+}
+```
+
 
 This will make all these lines valid:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">vec3 += 5.0f;
+```
+vec3 += 5.0f;
 vec3 = 5.0f + vec3;
 vec3 = vec3 + 5.0f;
-vec3 += Float.valueOf(5.0f);</pre>
+vec3 += Float.valueOf(5.0f);
+```
+
 
 In this code, we demonstrate that Manifold can swap the order to invoke `Vec.plus(float)` seamlessly. We also show that the plus equals operator support is built into the plus method support
 
@@ -93,9 +105,12 @@ Manifold goes beyond simple arithmetic and supports more complex scenarios. For 
 
 The following code is legal once we add the right set of dependencies which add method extensions to the `BigDecimal` class:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">var x = new BigDecimal(5L);
+```
+var x = new BigDecimal(5L);
 var y = new BigDecimal(25L);
-var z = x + y;</pre>
+var z = x + y;
+```
+
 
 Under the hood, Manifold adds the applicable plus, minus, times, etc. methods to the class. It does so by leveraging class extensions which [I discussed before](https://debugagent.com/extending-java-apis-add-missing-features-without-the-hassle).
 
@@ -107,21 +122,29 @@ For instance, we can extend the `Integer` class and add a `plus` method that acc
 
 This extension enables us to perform arithmetic operations between different types seamlessly. The goal is to get this code to compile:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">var z = 5 + x + y;</pre>
+```
+var z = 5 + x + y;
+```
+
 
 Unfortunately, this won't compile with that change. The number five is a primitive, not an Integer and the only way to get that code to work would be:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">var z = Integer.valueOf(5) + x + y;
-</pre>
+```
+var z = Integer.valueOf(5) + x + y;
+```
+
 
 This isn't what we want. However, there's a simple solution. We can create an extension to `BigDecimal` itself and rely on the fact that the order can be swapped seamlessly. This means that this simple extension can support the `5 + x + y` expression without a change:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">@Extension
+```
+@Extension
 public class BigDecimalExt {
     public static BigDecimal plus(@This BigDecimal b, int i) {
         return b.plus(BigDecimal.valueOf(i));
     }
-}</pre>
+}
+```
+
 
 ### List of Arithmetic Operators {#h3-3-list-of-arithmetic-operators}
 
@@ -147,20 +170,29 @@ The support for the index operator took me completely off guard when I looked at
 
 To give you a sense of what I'm talking about, this is valid code in Manifold:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">var list = List.of("A", "B", "C");
-var v = list[0];</pre>
+```
+var list = List.of("A", "B", "C");
+var v = list[0];
+```
+
 
 In this case, `v` will be `"A"` and the code is the equivalent to invoking `list.get(0)`. The index operators seamlessly map to get and set methods. We can do assignment as well using:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">var list = new ArrayList&lt;&gt;(List.of("A", "B", "C"));
+```
+var list = new ArrayList<>(List.of("A", "B", "C"));
 var v = list[0];
-list[0] = "1";</pre>
+list[0] = "1";
+```
+
 
 Notice I had to wrap the List in an `ArrayList` since `List.of()` returns an unmodifiable List. But this isn't the part I'm reeling about. That code is "nice". This code is absolutely amazing:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">var map = new HashMap&lt;&gt;(Map.of("Key", "Value"));
+```
+var map = new HashMap<>(Map.of("Key", "Value"));
 var key = map["Key"];
-map["Key"] = "New Value";</pre>
+map["Key"] = "New Value";
+```
+
 
 Yes!
 
@@ -171,13 +203,17 @@ Relational and Equality Operators {#h2-5-relational-and-equality-operators}
 
 We still have a lot to cover... Can we write code like this (referring to the `Vec` object from before):
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">if(vec3 &gt; vec2) {
+```
+if(vec3 > vec2) {
     // …
-}</pre>
+}
+```
+
 
 This won't compile by default. However, if we add the `Comparable` interface to the `Vec` class this will work as expected:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">public class Vec implements Comparable&lt;Vec&gt; {
+```
+public class Vec implements Comparable<Vec> {
     // …
 
     public double magnitude() {
@@ -188,7 +224,9 @@ This won't compile by default. However, if we add the `Comparable` interface to 
     public int compareTo(Vec o) {
         return Double.compare(magnitude(), o.magnitude());
     }
-}</pre>
+}
+```
+
 
 These `>=, >, <, <=` comparison operators will work exactly as expected by invoking the `compareTo` method. But there's a big problem. You will notice that the `==` and `!=` operators are missing from this list.
 
@@ -215,23 +253,32 @@ Unit expressions are a new type of operator that significantly simplifies and en
 
 For example, consider a distance calculation where speed is defined as 100 miles per hour. By multiplying the speed (miles per hour) by the time (hours), we can obtain the distance as such:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">Length distance = 100 mph * 3 hr;
+```
+Length distance = 100 mph * 3 hr;
 Force force = 5kg * 9.807 m/s/s;
 if(force == 49.035 N) {
     // true
-}</pre>
+}
+```
+
 
 The unit expressions allow us to express numeric values (or variables) along with their associated units. The compiler checks the compatibility of units, preventing incompatible conversions and ensuring accurate calculations. This feature streamlines scientific code and enables powerful calculations with ease.
 
 Under the hood, a unit expression is just a conversion call. The expression `100 mph` is converted to:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">VelocityUnit.postfixBind(Integer.valueOf(100))</pre>
+```
+VelocityUnit.postfixBind(Integer.valueOf(100))
+```
+
 
 This expression returns a Velocity object. The expression `3 hr` is similarly bound to the postfix method and returns a Time object. At this point, the Manifold `Velocity` class has a `times` method which as you recall, is an operator and it's invoked on both results:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">public Length times( Time t ) {
+```
+public Length times( Time t ) {
     return new Length( toBaseNumber() * t.toBaseNumber(), LengthUnit.BASE, getDisplayUnit().getLengthUnit() );
-}</pre>
+}
+```
+
 
 Notice that the class has multiple overloaded versions of the times method that accept different object types. A `Velocity` times `Mass` will produce `Momentum`. A `Velocity` times `Force` results in `Power`.
 
@@ -239,7 +286,10 @@ Many units are supported as part of this package even in this early experimental
 
 You might notice a big omission here: Currency. I would love to have something like:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">var sum = 50 USD + 70 EUR;</pre>
+```
+var sum = 50 USD + 70 EUR;
+```
+
 
 If you look at that code the problem should be apparent. We need an exchange rate. This makes no sense without exchange rates and possibly conversion costs. The complexities of financial calculations don't translate as nicely to the current state of the code.
 
@@ -256,15 +306,24 @@ It's crucial to consider optimization techniques, such as reducing unnecessary m
 
 Let's look at this code:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">var n = x + y + z;</pre>
+```
+var n = x + y + z;
+```
+
 
 On the surface, it can seem efficient and short. It physically translates to this code:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">var n = x.plus(y).plus(z);</pre>
+```
+var n = x.plus(y).plus(z);
+```
+
 
 This is still hard to spot but notice that in order to create the result we invoke two methods and allocate at least two objects. A more efficient approach would be:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">var n = x.plus(y, z);</pre>
+```
+var n = x.plus(y, z);
+```
+
 
 This is an optimization we often do for high-performance matrix calculations. You need to be mindful of this and understand what the operator is doing under the hood if performance is important. I don't want to imply that operators are inherently slower.
 
@@ -285,19 +344,28 @@ If you're going to do something terrible (accessing private state), then at leas
 
 In the following code, the value array is private to String yet we can manipulate it thanks to the `@JailBreak` annotation. This code will print `"Ex0osed..."`:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">@Jailbreak String exposedString = "Exposed...";
+```
+@Jailbreak String exposedString = "Exposed...";
 exposedString.value[2] = '0';
-System.out.println(exposedString);</pre>
+System.out.println(exposedString);
+```
+
 
 JailBreak can be applied to static fields and methods as well. However, accessing static members requires assigning null to the variable, which may seem counterintuitive. Nonetheless, this feature provides a more controlled and type-safe approach to accessing the internal state, minimizing the risks associated with using reflection.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">@Jailbreak String str = null;
-str.isASCII(new byte[] { 111, (byte)222 });</pre>
+```
+@Jailbreak String str = null;
+str.isASCII(new byte[] { 111, (byte)222 });
+```
+
 
 Finally, all objects in Manifold are injected with a jailbreak() method. This method can be used like this (notice that `fastTime` is a private field):
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">Date d = new Date();
-long t = d.jailbreak().fastTime;</pre>
+```
+Date d = new Date();
+long t = d.jailbreak().fastTime;
+```
+
 
 ### Self Annotation: Enforcing Method Parameter Type {#h3-10-self-annotation-enforcing-method-parameter-type}
 
@@ -307,7 +375,8 @@ By annotating the parameter with `@Self`, we explicitly state that only the spec
 
 Let's look at the `MySizeClass` from my previous posts:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">public class MySizeClass {
+```
+public class MySizeClass {
     int size = 5;
 
     public int size() {
@@ -319,15 +388,20 @@ Let's look at the `MySizeClass` from my previous posts:
     }
 
     public boolean equals(@Self Object o) {
-        return o != null &amp;&amp; ((MySizeClass)o).size == size;
+        return o != null && ((MySizeClass)o).size == size;
     }
-}</pre>
+}
+```
+
 
 Notice I added an equals method and annotated the argument with Self. If I remove the Self annotation this code will compile:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">var size = new MySizeClass();
+```
+var size = new MySizeClass();
 size.equals("");
-size.equals(new MySizeClass());</pre>
+size.equals(new MySizeClass());
+```
+
 
 With the `@Self` annotation the string comparison will fail during compilation.
 

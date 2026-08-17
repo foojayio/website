@@ -41,22 +41,28 @@ If you've spent time around folk and traditional music, you know ABC. It's a com
 
 Here's what a small tune looks like:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">X:1
+```
+X:1
 T:Speed the Plough
 M:4/4
 L:1/8
 K:G
-|:GABc dedB|dedB dedB|c2ec B2dB|c2A2 A2BA|</pre>
+|:GABc dedB|dedB dedB|c2ec B2dB|c2A2 A2BA|
+```
+
 
 The new `AbcReader` and `AbcWriter` parse into and generate from the same `Score` model as everything else, so once a tune is loaded, the engraving, JavaFX rendering, and MIDI export all just work. Coverage already goes well beyond the basics: keys and modes, unit note length, meter, tuplets, ties and slurs, grace notes, decorations like staccato and rolls, barline styles, repeats and 1st/2nd endings, guitar chord symbols, lyrics, and multi-line titles, all backed by round-trip tests.
 
 And because `ScoreFile` dispatches on the file extension, most applications never touch the reader or writer directly:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">// Import: build a Score from an ABC tune
+```
+// Import: build a Score from an ABC tune
 Score score = ScoreFile.load(Path.of("speed-the-plough.abc"));
 
 // Export: write a Score back out as ABC
-ScoreFile.save(score, Path.of("speed-the-plough-copy.abc"));</pre>
+ScoreFile.save(score, Path.of("speed-the-plough-copy.abc"));
+```
+
 
 ABC is a big enough format that not every corner is covered yet, so real-world tunes that don't render correctly are exactly the kind of bug report I want.
 ![](sheetdemo-0.0.3-1024x604.png)
@@ -70,8 +76,11 @@ The second new format is more of an experiment. Sheetmusic4J can now do **basic 
 
 I want to be upfront about what this is. Unlike MusicXML, MIDI, and ABC, Guitar Pro is **not an open format** . There's no published specification, and this importer is built on the community's documented reverse-engineering of the modern GPIF format, the XML document tucked inside the `.gp` ZIP archive. It reads that with the JDK only, no third-party dependency. The older binary formats (`.gp3`, `.gp4`, `.gp5`, `.gpx`) are not handled, and there's no saving back.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">// Import a Guitar Pro 7/8 file (load only)
-Score score = ScoreFile.load(Path.of("song.gp"));</pre>
+```
+// Import a Guitar Pro 7/8 file (load only)
+Score score = ScoreFile.load(Path.of("song.gp"));
+```
+
 
 I added it deliberately early, because I genuinely don't know yet how people would want to use Guitar Pro files here. Is rendering them as standard notation enough, or is tablature-specific rendering the whole point? That's the kind of thing I'd rather learn from real use than guess at. If you have a use case or a file that doesn't import cleanly, [let me know on GitHub](https://github.com/sheetmusic4j/sheetmusic4j/issues).
 

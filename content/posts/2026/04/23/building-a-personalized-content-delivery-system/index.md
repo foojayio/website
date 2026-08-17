@@ -42,7 +42,8 @@ Prerequisites {#prerequisites}
 
 The system needs two collections: one for games and one for user profiles. Start with the `Game` document:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@Document(collection = "games")
+```
+@Document(collection = "games")
 public class Game {
 
     @Id
@@ -50,14 +51,14 @@ public class Game {
     private String title;
     private String description;
     private String developer;
-    private List&lt;String&gt; genres;
-    private List&lt;String&gt; tags;
-    private List&lt;String&gt; mechanics;
+    private List<String> genres;
+    private List<String> tags;
+    private List<String> mechanics;
     private double rating;
     private int releaseYear;
 
     public Game(String title, String description, String developer,
-                List&lt;String&gt; genres, List&lt;String&gt; tags, List&lt;String&gt; mechanics,
+                List<String> genres, List<String> tags, List<String> mechanics,
                 double rating, int releaseYear) {
         this.title = title;
         this.description = description;
@@ -71,41 +72,45 @@ public class Game {
 
     // getters and setters
 }
-</pre>
+```
+
 
 The `genres`, `tags`, and `mechanics` fields are all `List<String>` rather than single values. A game like *Hades* is both a roguelike and an action game. It has tags like "fast-paced" and "mythology" and mechanics like "permadeath" and "procedural-generation." Storing these as arrays works well with MongoDB because you can match and filter on array fields directly in queries and aggregation pipelines. The recommendation engine you will build in section 3 relies on this to find games that overlap with a user's preferences.
 
 Next, the `UserProfile` document:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@Document(collection = "user_profiles")
+```
+@Document(collection = "user_profiles")
 public class UserProfile {
 
     @Id
     private String id;
     private String username;
     private Preferences preferences;
-    private List&lt;GameRating&gt; ratings;
+    private List<GameRating> ratings;
 
     public UserProfile(String username, Preferences preferences) {
         this.username = username;
         this.preferences = preferences;
-        this.ratings = new ArrayList&lt;&gt;();
+        this.ratings = new ArrayList<>();
     }
 
     // getters and setters
 }
-</pre>
+```
+
 
 The `Preferences` class is an embedded object that holds three weighted maps:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public class Preferences {
+```
+public class Preferences {
 
-    private Map&lt;String, Double&gt; genres;
-    private Map&lt;String, Double&gt; tags;
-    private Map&lt;String, Double&gt; mechanics;
+    private Map<String, Double> genres;
+    private Map<String, Double> tags;
+    private Map<String, Double> mechanics;
 
-    public Preferences(Map&lt;String, Double&gt; genres, Map&lt;String, Double&gt; tags,
-                       Map&lt;String, Double&gt; mechanics) {
+    public Preferences(Map<String, Double> genres, Map<String, Double> tags,
+                       Map<String, Double> mechanics) {
         this.genres = genres;
         this.tags = tags;
         this.mechanics = mechanics;
@@ -113,13 +118,15 @@ The `Preferences` class is an embedded object that holds three weighted maps:
 
     // getters and setters
 }
-</pre>
+```
+
 
 Each map key is an attribute (like "roguelike" or "pixel-art"), and the value is a weight between 0 and 1 representing how strongly the user prefers it. This is a deliberate choice over plain lists. A plain list of preferred genres tells you that someone likes roguelikes and platformers equally. A weighted map like `{"roguelike": 0.9, "platformer": 0.4}` tells you they strongly favor roguelikes but only have mild interest in platformers. When the scoring engine computes recommendations, it multiplies matched attributes by their weights, so higher-affinity preferences produce higher-ranked results.
 
 The `GameRating` class is another embedded object:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public class GameRating {
+```
+public class GameRating {
 
     private String gameId;
     private int score;
@@ -133,11 +140,13 @@ The `GameRating` class is another embedded object:
 
     // getters and setters
 }
-</pre>
+```
+
 
 To make the document structure concrete, here is what a couple of game documents look like in MongoDB:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">[
+```
+[
     {
         "_id": "64a1b2c3d4e5f6a7b8c9d0e1",
         "title": "Hollow Knight",
@@ -161,7 +170,8 @@ To make the document structure concrete, here is what a couple of game documents
         "releaseYear": 2019
     }
 ]
-</pre>
+```
+
 
 Notice how each game has multiple genres, tags, and mechanics. When a user's preference map contains `{"roguelike": 0.9, "strategy": 0.6}`, the recommendation engine can match both keys against *Slay the Spire*'s genres array and sum the weights to compute a relevance score.
 
@@ -176,13 +186,17 @@ The codebase is organized into several packages that you will create as you go. 
 
 To connect the application to your MongoDB Atlas cluster, open `src/main/resources/application.properties` and add the following:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">spring.data.mongodb.uri=${MONGODB_URI:mongodb://localhost:27017/indie-game-discovery?appName=devrel-tutorial-indie-game-discovery}
-</pre>
+```
+spring.data.mongodb.uri=${MONGODB_URI:mongodb://localhost:27017/indie-game-discovery?appName=devrel-tutorial-indie-game-discovery}
+```
+
 
 The `${MONGODB_URI:...}` syntax reads the connection string from an environment variable called `MONGODB_URI`. The value after the colon is a fallback that points to a local MongoDB instance if the variable is not set. The `appName` query parameter identifies your application in Atlas connection logs and monitoring dashboards. To use your Atlas cluster, set the environment variable before starting the application:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">export MONGODB_URI="mongodb+srv://&lt;username&gt;:&lt;password&gt;@&lt;cluster-url&gt;/indie-game-discovery?appName=devrel-tutorial-indie-game-discovery"
-</pre>
+```
+export MONGODB_URI="mongodb+srv://<username>:<password>@<cluster-url>/indie-game-discovery?appName=devrel-tutorial-indie-game-discovery"
+```
+
 
 Replace the placeholders with your Atlas credentials and cluster URL. If you followed the Atlas getting started guide linked in the prerequisites, you already have these values.
 
@@ -197,13 +211,16 @@ Before you can generate recommendations, you need endpoints for managing user pr
 
 Create a `CreateUserRequest` record that captures the data needed to build a new profile:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public record CreateUserRequest(String username, Preferences preferences) {
+```
+public record CreateUserRequest(String username, Preferences preferences) {
 }
-</pre>
+```
+
 
 The controller exposes two endpoints: one to create a profile and one to retrieve it by ID.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@RestController
+```
+@RestController
 @RequestMapping("/api/users")
 public class UserProfileController {
 
@@ -214,26 +231,29 @@ public class UserProfileController {
     }
 
     @PostMapping
-    public ResponseEntity&lt;UserProfile&gt; createUser(@RequestBody CreateUserRequest request) {
+    public ResponseEntity<UserProfile> createUser(@RequestBody CreateUserRequest request) {
         UserProfile profile = new UserProfile(request.username(), request.preferences());
         UserProfile saved = userProfileRepository.save(profile);
         return ResponseEntity.ok(saved);
     }
 
     @GetMapping("/{userId}")
-    public ResponseEntity&lt;UserProfile&gt; getUser(@PathVariable String userId) {
+    public ResponseEntity<UserProfile> getUser(@PathVariable String userId) {
         return userProfileRepository.findById(userId)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
 }
-</pre>
+```
+
 
 The `UserProfileRepository` is a standard Spring Data MongoDB interface:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public interface UserProfileRepository extends MongoRepository&lt;UserProfile, String&gt; {
+```
+public interface UserProfileRepository extends MongoRepository<UserProfile, String> {
 }
-</pre>
+```
+
 
 Constructor injection is used throughout the codebase. Spring resolves the single constructor automatically without needing an `@Autowired` annotation.
 
@@ -241,11 +261,13 @@ Constructor injection is used throughout the codebase. Spring resolves the singl
 
 The game repository needs two queries: one to fetch all games and one to find games that match any of a given set of genres. Spring Data MongoDB derives both from method names:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public interface GameRepository extends MongoRepository&lt;Game, String&gt; {
+```
+public interface GameRepository extends MongoRepository<Game, String> {
 
-    List&lt;Game&gt; findByGenresIn(List&lt;String&gt; genres);
+    List<Game> findByGenresIn(List<String> genres);
 }
-</pre>
+```
+
 
 The `findByGenresIn` method queries the `genres` array field and returns any game where at least one genre appears in the provided list. You will not use this method for the main recommendation pipeline, but it is useful for quick filtering when you want to narrow results to a specific genre subset.
 
@@ -276,7 +298,8 @@ You could pull every game into the application and compute scores in Java, but t
 
 Since the pipeline references the user's preferences as literal values (not fields from the games collection), you need to build it dynamically in Java. Here is the `RecommendationService`:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@Service
+```
+@Service
 public class RecommendationService {
 
     private final MongoTemplate mongoTemplate;
@@ -288,9 +311,9 @@ public class RecommendationService {
         this.userProfileRepository = userProfileRepository;
     }
 
-    public List&lt;GameRecommendation&gt; getRecommendations(String userId) {
+    public List<GameRecommendation> getRecommendations(String userId) {
         UserProfile user = userProfileRepository.findById(userId)
-                .orElseThrow(() -&gt; new RuntimeException("User not found: " + userId));
+                .orElseThrow(() -> new RuntimeException("User not found: " + userId));
 
         Preferences prefs = user.getPreferences();
 
@@ -300,21 +323,21 @@ public class RecommendationService {
 
         Document totalScore = new Document("$add", List.of(genreScoreExpr, tagScoreExpr, mechanicScoreExpr));
 
-        AggregationOperation addScoreField = context -&gt;
+        AggregationOperation addScoreField = context ->
                 new Document("$addFields", new Document("score", totalScore));
 
-        AggregationOperation sortByScore = context -&gt;
+        AggregationOperation sortByScore = context ->
                 new Document("$sort", new Document("score", -1));
 
         Aggregation aggregation = Aggregation.newAggregation(addScoreField, sortByScore);
 
-        AggregationResults&lt;GameRecommendation&gt; results =
+        AggregationResults<GameRecommendation> results =
                 mongoTemplate.aggregate(aggregation, "games", GameRecommendation.class);
 
         return results.getMappedResults();
     }
 
-    private Document buildScoreExpression(Map&lt;String, Double&gt; preferenceMap, String gameField) {
+    private Document buildScoreExpression(Map<String, Double> preferenceMap, String gameField) {
         if (preferenceMap == null || preferenceMap.isEmpty()) {
             return new Document("$literal", 0.0);
         }
@@ -342,7 +365,8 @@ public class RecommendationService {
                         .append("in", new Document("$add", List.of("$$value", "$$this.v"))));
     }
 }
-</pre>
+```
+
 
 The `buildScoreExpression` method constructs the aggregation expression for a single preference category. It takes the user's preference map and the game's array field name as parameters, then works through four steps:
 
@@ -357,7 +381,8 @@ The `getRecommendations` method calls `buildScoreExpression` three times (once e
 
 The controller takes a user ID, calls the service, and returns the ranked list:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@RestController
+```
+@RestController
 @RequestMapping("/api/recommendations")
 public class RecommendationController {
 
@@ -368,24 +393,26 @@ public class RecommendationController {
     }
 
     @GetMapping("/{userId}")
-    public ResponseEntity&lt;List&lt;GameRecommendation&gt;&gt; getRecommendations(@PathVariable String userId) {
-        List&lt;GameRecommendation&gt; recommendations = recommendationService.getRecommendations(userId);
+    public ResponseEntity<List<GameRecommendation>> getRecommendations(@PathVariable String userId) {
+        List<GameRecommendation> recommendations = recommendationService.getRecommendations(userId);
         return ResponseEntity.ok(recommendations);
     }
 }
-</pre>
+```
+
 
 The `GameRecommendation` response DTO includes the game fields along with the computed score:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public class GameRecommendation {
+```
+public class GameRecommendation {
 
     private String id;
     private String title;
     private String description;
     private String developer;
-    private List&lt;String&gt; genres;
-    private List&lt;String&gt; tags;
-    private List&lt;String&gt; mechanics;
+    private List<String> genres;
+    private List<String> tags;
+    private List<String> mechanics;
     private double rating;
     private int releaseYear;
     private double score;
@@ -395,7 +422,8 @@ The `GameRecommendation` response DTO includes the game fields along with the co
 
     // getters and setters
 }
-</pre>
+```
+
 
 MongoDB's aggregation result maps directly into this class because `$addFields` attaches the `score` field alongside the existing game fields. Spring Data MongoDB deserializes the output documents into `GameRecommendation` objects automatically.
 
@@ -403,7 +431,8 @@ MongoDB's aggregation result maps directly into this class because `$addFields` 
 
 Start the application and create a user profile with weighted preferences:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">curl -X POST http://localhost:8080/api/users \
+```
+curl -X POST http://localhost:8080/api/users \
   -H "Content-Type: application/json" \
   -d '{
     "username": "alex",
@@ -413,12 +442,15 @@ Start the application and create a user profile with weighted preferences:
       "mechanics": {"permadeath": 0.9, "procedural-generation": 0.6}
     }
   }'
-</pre>
+```
+
 
 Copy the returned `id` field and hit the recommendations endpoint:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">curl http://localhost:8080/api/recommendations/&lt;user-id&gt;
-</pre>
+```
+curl http://localhost:8080/api/recommendations/<user-id>
+```
+
 
 The response is a list of games sorted by score. Take *Slay the Spire* as an example. It matches on multiple fronts:
 
@@ -438,23 +470,28 @@ The recommendation engine works, but the preference weights are static. A user s
 
 Create a `RatingRequest` record to capture the incoming data:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public record RatingRequest(String gameId, int score) {
+```
+public record RatingRequest(String gameId, int score) {
 }
-</pre>
+```
+
 
 Add a new endpoint to `UserProfileController` that accepts a rating for a specific user:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@PostMapping("/{userId}/ratings")
-public ResponseEntity&lt;UserProfile&gt; rateGame(@PathVariable String userId,
+```
+@PostMapping("/{userId}/ratings")
+public ResponseEntity<UserProfile> rateGame(@PathVariable String userId,
                                             @RequestBody RatingRequest request) {
     UserProfile updatedProfile = ratingService.applyRating(userId, request);
     return ResponseEntity.ok(updatedProfile);
 }
-</pre>
+```
+
 
 The controller delegates all the work to a `RatingService`. Inject it through the constructor alongside the existing `UserProfileRepository`:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">private final UserProfileRepository userProfileRepository;
+```
+private final UserProfileRepository userProfileRepository;
 private final RatingService ratingService;
 
 public UserProfileController(UserProfileRepository userProfileRepository,
@@ -462,7 +499,8 @@ public UserProfileController(UserProfileRepository userProfileRepository,
     this.userProfileRepository = userProfileRepository;
     this.ratingService = ratingService;
 }
-</pre>
+```
+
 
 ### Affinity adjustment logic {#affinity-adjustment-logic}
 
@@ -474,8 +512,10 @@ The `RatingService` handles the core adjustment logic. When a user rates a game,
 
 The adjustment uses an exponential moving average formula that naturally keeps weights bounded between 0 and 1:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">newWeight = oldWeight + learningRate * (targetDirection - oldWeight)
-</pre>
+```
+newWeight = oldWeight + learningRate * (targetDirection - oldWeight)
+```
+
 
 The `learningRate` is set to 0.15, which means each rating shifts the weight by 15% of the remaining distance toward the target. The `targetDirection` is 1.0 for high ratings (the user wants more of this attribute) and 0.0 for low ratings (the user wants less).
 
@@ -493,7 +533,8 @@ The same formula applies to the game's tags and mechanics. If the game has a tag
 
 Here is the `RatingService`:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@Service
+```
+@Service
 public class RatingService {
 
     private static final double LEARNING_RATE = 0.15;
@@ -512,10 +553,10 @@ public class RatingService {
 
     public UserProfile applyRating(String userId, RatingRequest request) {
         UserProfile user = userProfileRepository.findById(userId)
-                .orElseThrow(() -&gt; new RuntimeException("User not found: " + userId));
+                .orElseThrow(() -> new RuntimeException("User not found: " + userId));
 
         Game game = gameRepository.findById(request.gameId())
-                .orElseThrow(() -&gt; new RuntimeException("Game not found: " + request.gameId()));
+                .orElseThrow(() -> new RuntimeException("Game not found: " + request.gameId()));
 
         int score = request.score();
         if (score == 3) {
@@ -523,22 +564,22 @@ public class RatingService {
             return userProfileRepository.findById(userId).orElseThrow();
         }
 
-        double targetDirection = score &gt;= 4 ? 1.0 : 0.0;
+        double targetDirection = score >= 4 ? 1.0 : 0.0;
         Preferences prefs = user.getPreferences();
 
-        Map&lt;String, Double&gt; updatedGenres = adjustWeights(prefs.getGenres(), game.getGenres(), targetDirection);
-        Map&lt;String, Double&gt; updatedTags = adjustWeights(prefs.getTags(), game.getTags(), targetDirection);
-        Map&lt;String, Double&gt; updatedMechanics = adjustWeights(prefs.getMechanics(), game.getMechanics(), targetDirection);
+        Map<String, Double> updatedGenres = adjustWeights(prefs.getGenres(), game.getGenres(), targetDirection);
+        Map<String, Double> updatedTags = adjustWeights(prefs.getTags(), game.getTags(), targetDirection);
+        Map<String, Double> updatedMechanics = adjustWeights(prefs.getMechanics(), game.getMechanics(), targetDirection);
 
         updateProfileInMongo(userId, request, updatedGenres, updatedTags, updatedMechanics);
 
         return userProfileRepository.findById(userId).orElseThrow();
     }
 
-    private Map&lt;String, Double&gt; adjustWeights(Map&lt;String, Double&gt; currentWeights,
-                                              List&lt;String&gt; gameAttributes,
+    private Map<String, Double> adjustWeights(Map<String, Double> currentWeights,
+                                              List<String> gameAttributes,
                                               double targetDirection) {
-        Map&lt;String, Double&gt; updated = new HashMap&lt;&gt;(currentWeights);
+        Map<String, Double> updated = new HashMap<>(currentWeights);
         for (String attribute : gameAttributes) {
             double oldWeight = updated.getOrDefault(attribute, 0.5);
             double newWeight = oldWeight + LEARNING_RATE * (targetDirection - oldWeight);
@@ -555,9 +596,9 @@ public class RatingService {
     }
 
     private void updateProfileInMongo(String userId, RatingRequest request,
-                                      Map&lt;String, Double&gt; genres,
-                                      Map&lt;String, Double&gt; tags,
-                                      Map&lt;String, Double&gt; mechanics) {
+                                      Map<String, Double> genres,
+                                      Map<String, Double> tags,
+                                      Map<String, Double> mechanics) {
         GameRating rating = new GameRating(request.gameId(), request.score(), Instant.now());
         Query query = Query.query(Criteria.where("_id").is(userId));
         Update update = new Update()
@@ -568,7 +609,8 @@ public class RatingService {
         mongoTemplate.updateFirst(query, update, UserProfile.class);
     }
 }
-</pre>
+```
+
 
 The `adjustWeights` method iterates over the game's attributes and applies the formula to each matching weight. If the user does not already have a weight for a particular attribute (for example, a genre they have never encountered before), it defaults to 0.5 as a neutral starting point and adjusts from there.
 
@@ -580,17 +622,19 @@ The `updateProfileInMongo` method performs the preference update and rating stor
 
 To see the feedback loop in action, hit the recommendations endpoint before and after submitting a rating. Using the same user from section 3:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group=""># get recommendations before rating
-curl http://localhost:8080/api/recommendations/&lt;user-id&gt;
+```
+# get recommendations before rating
+curl http://localhost:8080/api/recommendations/<user-id>
 
 # rate a game highly
-curl -X POST http://localhost:8080/api/users/&lt;user-id&gt;/ratings \
+curl -X POST http://localhost:8080/api/users/<user-id>/ratings \
   -H "Content-Type: application/json" \
-  -d '{"gameId": "&lt;game-id&gt;", "score": 5}'
+  -d '{"gameId": "<game-id>", "score": 5}'
 
 # get recommendations after rating
-curl http://localhost:8080/api/recommendations/&lt;user-id&gt;
-</pre>
+curl http://localhost:8080/api/recommendations/<user-id>
+```
+
 
 Compare the two responses. Games that share genres, tags, or mechanics with the highly rated game will have moved up in the rankings because their matching weights increased. Games that do not share those attributes remain at their previous scores. Each rating nudges the profile slightly, and over several ratings, the preference weights settle into a profile that matches what the user actually enjoys.
 
@@ -605,31 +649,35 @@ Embeddings solve this problem. They represent text as high-dimensional vectors, 
 
 Add the Spring AI OpenAI starter to your `pom.xml`. You also need the Spring AI BOM to manage dependency versions:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&lt;dependencyManagement&gt;
-    &lt;dependencies&gt;
-        &lt;dependency&gt;
-            &lt;groupId&gt;org.springframework.ai&lt;/groupId&gt;
-            &lt;artifactId&gt;spring-ai-bom&lt;/artifactId&gt;
-            &lt;version&gt;1.0.0&lt;/version&gt;
-            &lt;type&gt;pom&lt;/type&gt;
-            &lt;scope&gt;import&lt;/scope&gt;
-        &lt;/dependency&gt;
-    &lt;/dependencies&gt;
-&lt;/dependencyManagement&gt;
+```
+<dependencyManagement>
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.ai</groupId>
+            <artifactId>spring-ai-bom</artifactId>
+            <version>1.0.0</version>
+            <type>pom</type>
+            <scope>import</scope>
+        </dependency>
+    </dependencies>
+</dependencyManagement>
 
-&lt;dependencies&gt;
-    &lt;dependency&gt;
-        &lt;groupId&gt;org.springframework.ai&lt;/groupId&gt;
-        &lt;artifactId&gt;spring-ai-starter-model-openai&lt;/artifactId&gt;
-    &lt;/dependency&gt;
-&lt;/dependencies&gt;
-</pre>
+<dependencies>
+    <dependency>
+        <groupId>org.springframework.ai</groupId>
+        <artifactId>spring-ai-starter-model-openai</artifactId>
+    </dependency>
+</dependencies>
+```
+
 
 Then add the OpenAI configuration to `application.properties`:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">spring.ai.openai.api-key=${OPENAI_API_KEY}
+```
+spring.ai.openai.api-key=${OPENAI_API_KEY}
 spring.ai.openai.embedding.options.model=text-embedding-3-small
-</pre>
+```
+
 
 The `text-embedding-3-small` model produces 1536-dimensional vectors. Store your API key in an environment variable rather than hardcoding it.
 
@@ -637,7 +685,8 @@ The `text-embedding-3-small` model produces 1536-dimensional vectors. Store your
 
 To generate an embedding, concatenate a game's description, genres, tags, and mechanics into a single text block, then pass the resulting text to the `EmbeddingModel`. First, add an `embedding` field to the `Game` class:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@Document(collection = "games")
+```
+@Document(collection = "games")
 public class Game {
 
     // ... existing fields ...
@@ -648,11 +697,13 @@ public class Game {
     public float[] getEmbedding() { return embedding; }
     public void setEmbedding(float[] embedding) { this.embedding = embedding; }
 }
-</pre>
+```
+
 
 Then create a helper method that builds the text representation and generates the embedding:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@Service
+```
+@Service
 public class EmbeddingService {
 
     private final EmbeddingModel embeddingModel;
@@ -669,7 +720,8 @@ public class EmbeddingService {
         return embeddingModel.embed(text);
     }
 }
-</pre>
+```
+
 
 The `embed()` method sends the text to OpenAI's embedding API and returns a `float[]` with 1536 values. Concatenating all of a game's metadata into one string gives the model enough context to produce a meaningful vector.
 
@@ -677,7 +729,8 @@ The `embed()` method sends the text to OpenAI's embedding API and returns a `flo
 
 Update the `DataSeeder` to generate embeddings for each game on startup. After inserting the game documents, iterate over them and call the `EmbeddingService`:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@Component
+```
+@Component
 public class DataSeeder implements CommandLineRunner {
 
     private final GameRepository gameRepository;
@@ -692,7 +745,7 @@ public class DataSeeder implements CommandLineRunner {
     public void run(String... args) {
         // ... existing game insertion logic ...
 
-        List&lt;Game&gt; games = gameRepository.findAll();
+        List<Game> games = gameRepository.findAll();
         for (Game game : games) {
             if (game.getEmbedding() == null) {
                 game.setEmbedding(embeddingService.generateGameEmbedding(game));
@@ -701,7 +754,8 @@ public class DataSeeder implements CommandLineRunner {
         }
     }
 }
-</pre>
+```
+
 
 The `null` check prevents re-generating embeddings on every restart. Each API call costs money, so you only want to embed games that do not already have a vector stored.
 
@@ -709,7 +763,8 @@ The `null` check prevents re-generating embeddings on every restart. Each API ca
 
 Before you can query the embeddings, you need to create a Vector Search index in Atlas. Go to your cluster in the Atlas UI, select the **Atlas Search** tab, and click **Create Search Index** . Choose **Atlas Vector Search** as the index type, select the `games` collection, and use the following index definition:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">{
+```
+{
   "fields": [
     {
       "type": "vector",
@@ -719,7 +774,8 @@ Before you can query the embeddings, you need to create a Vector Search index in
     }
   ]
 }
-</pre>
+```
+
 
 Name the index `vector_index`. The `numDimensions` value must match the output of your embedding model, which is 1536 for `text-embedding-3-small`. Cosine similarity is the standard choice for text embeddings because it measures the angle between vectors regardless of their magnitude.
 
@@ -729,15 +785,16 @@ With the index in place, you can build a method to find games that are semantica
 
 Add a `findSimilarGames` method to the `RecommendationService`:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public List&lt;GameRecommendation&gt; findSimilarGames(String userId) {
+```
+public List<GameRecommendation> findSimilarGames(String userId) {
     UserProfile user = userProfileRepository.findById(userId)
-            .orElseThrow(() -&gt; new RuntimeException("User not found: " + userId));
+            .orElseThrow(() -> new RuntimeException("User not found: " + userId));
 
     Preferences prefs = user.getPreferences();
     String preferenceText = buildPreferenceText(prefs);
     float[] queryVector = embeddingModel.embed(preferenceText);
 
-    List&lt;Double&gt; queryVectorList = new ArrayList&lt;&gt;();
+    List<Double> queryVectorList = new ArrayList<>();
     for (float f : queryVector) {
         queryVectorList.add((double) f);
     }
@@ -749,37 +806,38 @@ Add a `findSimilarGames` method to the `RecommendationService`:
                     .append("numCandidates", 50)
                     .append("limit", 10));
 
-    AggregationOperation vectorSearch = context -&gt; vectorSearchStage;
+    AggregationOperation vectorSearch = context -> vectorSearchStage;
 
-    AggregationOperation addScore = context -&gt;
+    AggregationOperation addScore = context ->
             new Document("$addFields",
                     new Document("score", new Document("$meta", "vectorSearchScore")));
 
     Aggregation aggregation = Aggregation.newAggregation(vectorSearch, addScore);
 
-    AggregationResults&lt;GameRecommendation&gt; results =
+    AggregationResults<GameRecommendation> results =
             mongoTemplate.aggregate(aggregation, "games", GameRecommendation.class);
 
     return results.getMappedResults();
 }
 
 private String buildPreferenceText(Preferences prefs) {
-    List&lt;String&gt; parts = new ArrayList&lt;&gt;();
+    List<String> parts = new ArrayList<>();
     prefs.getGenres().entrySet().stream()
-            .sorted(Map.Entry.&lt;String, Double&gt;comparingByValue().reversed())
+            .sorted(Map.Entry.<String, Double>comparingByValue().reversed())
             .limit(5)
-            .forEach(e -&gt; parts.add(e.getKey()));
+            .forEach(e -> parts.add(e.getKey()));
     prefs.getTags().entrySet().stream()
-            .sorted(Map.Entry.&lt;String, Double&gt;comparingByValue().reversed())
+            .sorted(Map.Entry.<String, Double>comparingByValue().reversed())
             .limit(5)
-            .forEach(e -&gt; parts.add(e.getKey()));
+            .forEach(e -> parts.add(e.getKey()));
     prefs.getMechanics().entrySet().stream()
-            .sorted(Map.Entry.&lt;String, Double&gt;comparingByValue().reversed())
+            .sorted(Map.Entry.<String, Double>comparingByValue().reversed())
             .limit(3)
-            .forEach(e -&gt; parts.add(e.getKey()));
+            .forEach(e -> parts.add(e.getKey()));
     return "Games with " + String.join(", ", parts);
 }
-</pre>
+```
+
 
 The `buildPreferenceText` method extracts the user's top-weighted genres, tags, and mechanics and combines them into a natural-language string like "Games with roguelike, metroidvania, difficult, atmospheric, replayable, permadeath, procedural-generation." This string is embedded into a query vector, and `$vectorSearch` finds the game embeddings closest to it using cosine similarity.
 
@@ -787,7 +845,8 @@ The `numCandidates` parameter controls how many candidates the search considers 
 
 To make this work, add the `EmbeddingModel` as a dependency in `RecommendationService` alongside the existing fields:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">private final MongoTemplate mongoTemplate;
+```
+private final MongoTemplate mongoTemplate;
 private final UserProfileRepository userProfileRepository;
 private final EmbeddingModel embeddingModel;
 
@@ -798,7 +857,8 @@ public RecommendationService(MongoTemplate mongoTemplate,
     this.userProfileRepository = userProfileRepository;
     this.embeddingModel = embeddingModel;
 }
-</pre>
+```
+
 
 ### Results {#results}
 
@@ -813,7 +873,8 @@ You now have two recommendation approaches that each capture something the other
 
 Add three new fields to the `GameRecommendation` class you created in section 3:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public class GameRecommendation {
+```
+public class GameRecommendation {
 
     // ... existing fields ...
 
@@ -823,15 +884,17 @@ Add three new fields to the `GameRecommendation` class you created in section 3:
 
     // getters and setters for all three score fields
 }
-</pre>
+```
+
 
 The combined score uses a weighted formula: `0.6 * contentScore + 0.4 * similarityScore`. Content-based scoring gets the higher weight because it reflects explicit user intent. When a user sets `"roguelike": 0.9`, they are telling you directly what they want. Similarity scores can surface unexpected results that drift from stated preferences, so giving content-based recommendations to the majority share keeps recommendations grounded in what the user asked for while still benefiting from semantic matches.
 
 Add a `getCombinedRecommendations` method to `RecommendationService` that calls both approaches and merges the results:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public List&lt;GameRecommendation&gt; getCombinedRecommendations(String userId) {
-    List&lt;GameRecommendation&gt; contentResults = getRecommendations(userId);
-    List&lt;GameRecommendation&gt; similarityResults = findSimilarGames(userId);
+```
+public List<GameRecommendation> getCombinedRecommendations(String userId) {
+    List<GameRecommendation> contentResults = getRecommendations(userId);
+    List<GameRecommendation> similarityResults = findSimilarGames(userId);
 
     double maxContentScore = contentResults.stream()
             .mapToDouble(GameRecommendation::getScore)
@@ -841,7 +904,7 @@ Add a `getCombinedRecommendations` method to `RecommendationService` that calls 
             .mapToDouble(GameRecommendation::getScore)
             .max().orElse(1.0);
 
-    Map&lt;String, GameRecommendation&gt; merged = new LinkedHashMap&lt;&gt;();
+    Map<String, GameRecommendation> merged = new LinkedHashMap<>();
 
     for (GameRecommendation rec : contentResults) {
         rec.setContentScore(rec.getScore() / maxContentScore);
@@ -870,7 +933,8 @@ Add a `getCombinedRecommendations` method to `RecommendationService` that calls 
             .sorted(Comparator.comparingDouble(GameRecommendation::getCombinedScore).reversed())
             .toList();
 }
-</pre>
+```
+
 
 Both scoring methods operate on different scales. Content-based scores are unbounded sums of matched weights, while similarity scores are cosine distances between 0 and 1. The method normalizes each set of scores by dividing each score by the maximum value in that set, bringing both into the 0 to 1 range before combining them. Games that appear in both result sets get both scores populated. Games that only appear in one set receive a zero for the missing score.
 
@@ -878,17 +942,20 @@ Both scoring methods operate on different scales. Content-based scores are unbou
 
 Update the `GET /api/recommendations/{userId}` endpoint in `RecommendationController` to call `getCombinedRecommendations` instead of `getRecommendations`:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@GetMapping("/{userId}")
-public ResponseEntity&lt;List&lt;GameRecommendation&gt;&gt; getRecommendations(@PathVariable String userId) {
-    List&lt;GameRecommendation&gt; recommendations =
+```
+@GetMapping("/{userId}")
+public ResponseEntity<List<GameRecommendation>> getRecommendations(@PathVariable String userId) {
+    List<GameRecommendation> recommendations =
             recommendationService.getCombinedRecommendations(userId);
     return ResponseEntity.ok(recommendations);
 }
-</pre>
+```
+
 
 The response now includes all three scores for each game:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">[
+```
+[
     {
         "id": "64a1b2c3d4e5f6a7b8c9d0e2",
         "title": "Slay the Spire",
@@ -914,7 +981,8 @@ The response now includes all three scores for each game:
         "combinedScore": 0.396
     }
 ]
-</pre>
+```
+
 
 *Slay the Spire* leads because it scores well on both signals. *Hollow Knight* has a strong similarity score but a weaker content match. *Outer Wilds* has a low content score, but still appears because its high similarity score pulls it up.
 
@@ -937,7 +1005,8 @@ With all the pieces in place, walk through the full cycle: create a user, get in
 
 Start the application. The `DataSeeder` loads games into the `games` collection and generates embeddings for each one on the first run. Once the application is ready, create a user profile:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">curl -X POST http://localhost:8080/api/users \
+```
+curl -X POST http://localhost:8080/api/users \
   -H "Content-Type: application/json" \
   -d '{
     "username": "alex",
@@ -947,27 +1016,33 @@ Start the application. The `DataSeeder` loads games into the `games` collection 
       "mechanics": {"permadeath": 0.9, "procedural-generation": 0.6}
     }
   }'
-</pre>
+```
+
 
 The response includes the generated user ID. Copy it and request recommendations:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">curl http://localhost:8080/api/recommendations/682f1a3b5e4d
-</pre>
+```
+curl http://localhost:8080/api/recommendations/682f1a3b5e4d
+```
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">[
+
+```
+[
     {"title": "Slay the Spire", "contentScore": 1.0, "similarityScore": 0.87, "combinedScore": 0.948},
     {"title": "Hades", "contentScore": 0.84, "similarityScore": 0.91, "combinedScore": 0.868},
     {"title": "Dead Cells", "contentScore": 0.77, "similarityScore": 0.83, "combinedScore": 0.794},
     {"title": "Hollow Knight", "contentScore": 0.68, "similarityScore": 0.92, "combinedScore": 0.776},
     {"title": "Outer Wilds", "contentScore": 0.12, "similarityScore": 0.81, "combinedScore": 0.396}
 ]
-</pre>
+```
+
 
 *Slay the Spire* leads because it hits roguelike (0.9), replayable (0.7), permadeath (0.9), and procedural-generation (0.6) all at once. *Outer Wilds* ranks low on content score since its tags do not literally match the user's preferences, but embeddings still pull it into the list.
 
 Now submit a few ratings. Rate *Hollow Knight* highly and *Slay the Spire* lower:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">curl -X POST http://localhost:8080/api/users/682f1a3b5e4d/ratings \
+```
+curl -X POST http://localhost:8080/api/users/682f1a3b5e4d/ratings \
   -H "Content-Type: application/json" \
   -d '{"gameId": "64a1b2c3d4e5f6a7b8c9d0e1", "score": 5}'
 
@@ -978,21 +1053,26 @@ curl -X POST http://localhost:8080/api/users/682f1a3b5e4d/ratings \
 curl -X POST http://localhost:8080/api/users/682f1a3b5e4d/ratings \
   -H "Content-Type: application/json" \
   -d '{"gameId": "64a1b2c3d4e5f6a7b8c9d0e5", "score": 4}'
-</pre>
+```
+
 
 The first rating pushes metroidvania, action, and platformer weights upward. The second pulls roguelike and card-game weights down. The third boosts adventure and exploration. Fetch recommendations again:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">curl http://localhost:8080/api/recommendations/682f1a3b5e4d
-</pre>
+```
+curl http://localhost:8080/api/recommendations/682f1a3b5e4d
+```
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">[
+
+```
+[
     {"title": "Hollow Knight", "contentScore": 0.91, "similarityScore": 0.92, "combinedScore": 0.914},
     {"title": "Hades", "contentScore": 0.82, "similarityScore": 0.89, "combinedScore": 0.848},
     {"title": "Dead Cells", "contentScore": 0.74, "similarityScore": 0.84, "combinedScore": 0.780},
     {"title": "Outer Wilds", "contentScore": 0.38, "similarityScore": 0.81, "combinedScore": 0.552},
     {"title": "Slay the Spire", "contentScore": 0.61, "similarityScore": 0.85, "combinedScore": 0.706}
 ]
-</pre>
+```
+
 
 *Hollow Knight* jumped from fourth to first. Its content score increased from 0.68 to 0.91 because the 5-star rating boosted the weights for metroidvania, platformer, and atmospheric. *Slay the Spire* dropped because the 2-star rating pulled down roguelike and card-game weights. *Outer Wilds* moved up thanks to the 4-star rating increasing adventure and exploration weights, which also shifted the embedding query to favor similar games. Each rating adjusts the preference profile incrementally, and the combined scoring reflects those changes immediately.
 

@@ -33,7 +33,8 @@ The scope goes well beyond OOP vs. FP. Consider the following snippets:
 |----------------------------|----------------------------|
 | 
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="dracula">fun router(repo: PersonRepository) = router {
+```java
+fun router(repo: PersonRepository) = router {
     val handler = Handler(repo)
     GET("/person", handler::getAll)
 }
@@ -42,11 +43,12 @@ class Handler(private val repo: PersonRepository) {
     fun getAll(r: ServerRequest) =
             ok().body(repo.findAll())
 }
-</pre>
+```
 
  | 
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="dracula">fun router(repo: PersonRepository) = router {
+```java
+fun router(repo: PersonRepository) = router {
     val handler = Handler(repo)
     GET("/person/{id}", handler::getOne)
 }
@@ -55,7 +57,7 @@ class  Handler(private val repo: PersonRepository) {
     fun getAll(r: ServerRequest) =
             ok().bodyValue(repo.findAll())
 }
-</pre>
+```
 
  |
 
@@ -71,23 +73,25 @@ You can rewrite both above snippets using annotations instead of handlers.
 |----------------------------|----------------------------|
 | 
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="dracula">@RestController
+```java
+@RestController
 class PersonController(private val repo: PersonRepository) {
 
   @GetMapping
   fun getAll() = repo.findAll()
 }
-</pre>
+```
 
  | 
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="dracula">@RestController
+```java
+@RestController
 class PersonController(private val repo: PersonRepository) {
 
   @GetMapping
   fun getAll() = repo.findAll()
 }
-</pre>
+```
 
  |
 
@@ -95,7 +99,7 @@ Both snippets appear similar on the surface, but for the imports. Cosmetics are 
 
 Let's have a look at Kotlin [coroutines](https://kotlinlang.org/docs/coroutines-basics.html). Here's a snippet taken from Kotlin's [documentation](https://kotlinlang.org/docs/composing-suspending-functions.html#async-style-functions):
 
-```kotlin EnlighterJSRAW
+```kotlin
 measureTimeMillis {
     val one = somethingUsefulOne()                             // 1
     val two = somethingUsefulTwo()                             // 1

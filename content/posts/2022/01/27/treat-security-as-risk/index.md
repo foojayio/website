@@ -56,18 +56,24 @@ The system access and the permission depend on unknown factors in the context of
 
 With JVMs lower than version 9, we need to default to the `Runtime` class and use the `jps` command:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="kotlin">long pid = Runtime.getRuntime()
+```kotlin
+long pid = Runtime.getRuntime()
                .exec("jps")
                .inputStream
                .bufferedReader(Charset.forName("UTF-8"))
                .lines()
                .map { it.split(" ").toTypedArray() }
-               .filter { it.size &gt; 1 &amp;&amp; it[1].endsWith("BusinessApplicationKt") }
-               .map { it[0] }</pre>
+               .filter { it.size > 1 && it[1].endsWith("BusinessApplicationKt") }
+               .map { it[0] }
+```
+
 
 Starting from 9 onwards, the JVM added a dedicated `ProcessHandle` class in the Process API:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="kotlin">long pid = ProcessHandle.current().pid()</pre>
+```kotlin
+long pid = ProcessHandle.current().pid()
+```
+
 
 Prioritize {#h2-2-prioritize}
 -----------------------------

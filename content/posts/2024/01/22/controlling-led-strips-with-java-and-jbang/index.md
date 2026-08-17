@@ -133,7 +133,8 @@ On the [Pi4J website, a full description](https://pi4j.com/examples/jbang/) is p
 
 The various examples share the same helper-class to send commands to the PBOE. This class takes care of the serial communication between the RPi and the PBOE, hiding most of the "complexity" and provides a few public methods to clear a LED strip or send a byte array with colors.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public PixelBlazeOutputExpanderHelper(String address) {
+```
+public PixelBlazeOutputExpanderHelper(String address) {
     System.out.println("Initializing serial");
     adapter = new ExpanderDataWriteAdapter(address);
 }
@@ -148,7 +149,9 @@ public void sendColors(int channel, byte[] rgbPerPixel, boolean debug) {
 
 public void closePort() {
     adapter.closePort();
-}</pre>
+}
+```
+
 
 ### PixelblazeOutputExpander Example Application {#h3-7-pixelblazeoutputexpander-example-application}
 
@@ -162,10 +165,13 @@ This is the main demo application that is configured to control three different 
 
 To configure our Java-file to be executable with JBang, we need these extra lines at the start of the file to define the execution with JBang, add the jSerialComm dependency, and include the helper class.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">///usr/bin/env jbang "$0" "$@" ; exit $?
+```
+///usr/bin/env jbang "$0" "$@" ; exit $?
 
 //DEPS com.fazecast:jSerialComm:2.10.2
-//SOURCES helper/PixelBlazeOutputExpanderHelper.java</pre>
+//SOURCES helper/PixelBlazeOutputExpanderHelper.java
+```
+
 
 #### Highlight the LEDs One By One
 
@@ -179,12 +185,13 @@ The following approach is taken:
 * The byte array is sent to the given channel,
 * The thread sleeps for a short moment.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">private static void sendOneByOne(int channel, int numberOfLeds, 
+```
+private static void sendOneByOne(int channel, int numberOfLeds, 
     byte red, byte green, byte blue) throws InterruptedException {
 
     System.out.println("One by one on channel " + channel);
 
-    for (int i = 0; i &lt; numberOfLeds; i++) {
+    for (int i = 0; i < numberOfLeds; i++) {
         byte[] data = new byte[numberOfLeds * BYTES_PER_PIXEL];
         data[i * BYTES_PER_PIXEL] = red;
         data[(i * BYTES_PER_PIXEL) + 1] = green;
@@ -192,13 +199,16 @@ The following approach is taken:
         helper.sendColors(channel, data, false);
         Thread.sleep(50);
     }
-}</pre>
+}
+```
+
 
 #### Main Method
 
 I invite you to take a look at the full source code, and will only highlight a few parts here, described in the code comments.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public class PixelblazeOutputExpander {
+```
+public class PixelblazeOutputExpander {
 
     // Each LED expects three values for RGB
     // When using RGBW LEDs, this value must be changed to 4
@@ -235,7 +245,7 @@ I invite you to take a look at the full source code, and will only highlight a f
 
         // Fill strip with random colors, short LED strip
         Random rd = new Random();
-        for (int i = 0; i &lt; 5; i++) {
+        for (int i = 0; i < 5; i++) {
             byte[] random = new byte[NUMBER_OF_LEDS_STRIP_SHORT 
                 * BYTES_PER_PIXEL];
             rd.nextBytes(random);
@@ -247,13 +257,16 @@ I invite you to take a look at the full source code, and will only highlight a f
 
         helper.closePort();
     }
-}</pre>
+}
+```
+
 
 #### Executing the Application
 
 No `sudo` is needed for serial communication with the `jSerialComm` library, so the application can be started in the terminal with the following command and gives you the output of what is happening with the strips:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ jbang PixelblazeOutputExpander.java 
+```
+$ jbang PixelblazeOutputExpander.java 
 Initializing serial
 Opening /dev/ttyS0
 All off on channel 0 with 11
@@ -274,7 +287,9 @@ All red on LED strip on channel 1
 All off on channel 1 with 300
 All red on LED matrix on channel 2
 ...
-Closing /dev/ttyS0</pre>
+Closing /dev/ttyS0
+```
+
 
 Conclusion {#h2-8-conclusion}
 -----------------------------

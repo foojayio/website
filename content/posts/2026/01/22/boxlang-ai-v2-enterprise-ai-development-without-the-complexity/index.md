@@ -62,7 +62,8 @@ BoxLang AI v2 delivers a complete AI platform with unprecedented capabilities:
 
 Build intelligent agents that think, remember, and act independently. Agents are the crown jewel of BoxLang AI v2---capable of multi-step reasoning, tool usage, memory management, and delegation.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">// Create an agent with multiple memories, tools, and sub-agents
+```java
+// Create an agent with multiple memories, tools, and sub-agents
 agent = aiAgent(
     name: "Support Bot",
     instructions: "You are a helpful customer support agent",
@@ -85,7 +86,9 @@ agent = aiAgent(
 );
 
 // Agent orchestrates everything automatically
-response = agent.run( "Find John's order, check inventory, and update shipping" );</pre>
+response = agent.run( "Find John's order, check inventory, and update shipping" );
+```
+
 
 **Agent Capabilities:**
 
@@ -101,7 +104,8 @@ response = agent.run( "Find John's order, check inventory, and update shipping" 
 
 Deploy AI agents as **serverless functions** using the [BoxLang AWS Runtime](https://boxlang.ortusbooks.com/getting-started/running-boxlang/aws-lambda "BoxLang AWS Runtime"):
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">// Lambda handler with AI agent
+```java
+// Lambda handler with AI agent
 function handler( event, context ) {
     agent = aiAgent(
         name: "Invoice Processor",
@@ -110,7 +114,9 @@ function handler( event, context ) {
     );
 
     return agent.run( event.query );
-}</pre>
+}
+```
+
 
 **Benefits:**
 
@@ -125,7 +131,8 @@ function handler( event, context ) {
 
 Create truly autonomous agents that run on schedules---no servers required:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">// Autonomous monitoring agent
+```java
+// Autonomous monitoring agent
 class {
     function configure() {
         systemAgent = aiAgent(
@@ -136,12 +143,14 @@ class {
         )
 
         scheduler.task( "Monitor System" )
-            .call( () =&gt; {
+            .call( () => {
                 systemAgent.run( "Check system health and notify if issues found" )
             })
             .everyHour()
     }
-}</pre>
+}
+```
+
 
 Deploy autonomous agents on **any OS** with the [BoxLang Scheduler](https://boxlang.ortusbooks.com/boxlang-framework/asynchronous-programming/scheduled-tasks "BoxLang Scheduler").
 
@@ -150,7 +159,8 @@ Deploy autonomous agents on **any OS** with the [BoxLang Scheduler](https://boxl
 
 Enterprise-grade isolation with 10+ vector databases:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">// User-specific RAG memory
+```java
+// User-specific RAG memory
 memory = aiMemory( 
     "vector",
     userId: "alice",
@@ -168,7 +178,9 @@ agent = aiAgent(
 );
 
 // Agent automatically retrieves relevant context
-response = agent.run( "What did we discuss about Q4 projections?" );</pre>
+response = agent.run( "What did we discuss about Q4 projections?" );
+```
+
 
 **Supported Vector DBs**: ChromaDB, Pinecone, PostgreSQL+pgvector, Weaviate, Qdrant, Milvus, and more.
 
@@ -177,7 +189,8 @@ response = agent.run( "What did we discuss about Q4 projections?" );</pre>
 
 Load and process documents from any source:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">// Load and embed documents directly to memory stores
+```java
+// Load and embed documents directly to memory stores
 
 // Single memory ingestion
 result = aiDocuments( "/docs", { type: "markdown" } )
@@ -191,7 +204,9 @@ result = aiDocuments( "/knowledge-base" )
 
 // Multi-memory fan-out (async supported)
 result = aiDocuments( "/docs", { type: "markdown" } )
-    .toMemory( [ chromaMemory, pgVectorMemory ], { async: true } )</pre>
+    .toMemory( [ chromaMemory, pgVectorMemory ], { async: true } )
+```
+
 
 **Supported formats**: PDF, Word, CSV, JSON, XML, Excel, Markdown, HTML, databases, web scraping, and more.
 
@@ -200,7 +215,8 @@ result = aiDocuments( "/docs", { type: "markdown" } )
 
 One API for all major providers:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">// Switch providers with zero code changes
+```java
+// Switch providers with zero code changes
 response = aiChat( 
     "Explain quantum computing",
     { model: "gpt-4o" },
@@ -212,7 +228,9 @@ response = aiChat(
     "Explain quantum computing",
     { model: "claude-sonnet-4.5" },
     { provider: "claude" }
-);</pre>
+);
+```
+
 
 **Providers:** OpenAI, Claude, Gemini, Grok, Groq, DeepSeek, Ollama, Mistral, Cohere, Perplexity, OpenRouter, HuggingFace.
 
@@ -223,7 +241,8 @@ Full MCP support for building distributed AI systems. Create your own MCP server
 
 **Build MCP Servers:**
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">// Create and expose your own MCP server
+```java
+// Create and expose your own MCP server
 server = mcpServer( 
     name: "analytics",
     description: "Business Analytics MCP Server",
@@ -232,11 +251,14 @@ server = mcpServer(
     .addTool( salesDataTool )
     .addTool( reportGeneratorTool )
     .addTool( forecastingTool )
-    .start();</pre>
+    .start();
+```
+
 
 **Consume ANY MCP Server:**
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">// Integrate with external MCP servers using fluent MCP()
+```java
+// Integrate with external MCP servers using fluent MCP()
 agent = aiAgent(
     name: "Enterprise Assistant",
     tools: [ 
@@ -249,18 +271,23 @@ agent = aiAgent(
 );
 
 // Agent can use tools from multiple MCP servers
-response = agent.run( "Get Q4 sales from CRM and create forecast report" );</pre>
+response = agent.run( "Get Q4 sales from CRM and create forecast report" );
+```
+
 
 **Multiple MCP Servers:**
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">// Connect to multiple MCP servers simultaneously
+```java
+// Connect to multiple MCP servers simultaneously
 pipeline = aiModel( "grok" )
     .withTools([
         MCP( "https://github-mcp.com" ),
         MCP( "https://slack-mcp.com" ),
         MCP( "https://jira-mcp.com" )
     ])
-    .invoke( "Create GitHub issue, notify in Slack, and update Jira ticket" );</pre>
+    .invoke( "Create GitHub issue, notify in Slack, and update Jira ticket" );
+```
+
 
 **MCP Features:**
 
@@ -275,7 +302,8 @@ pipeline = aiModel( "grok" )
 
 Get type-safe, validated responses directly from AI models. No more parsing JSON strings or handling malformed responses.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">// Define your BoxLang class
+```java
+// Define your BoxLang class
 class Invoice {
     property name="invoiceNumber";
     property name="date";
@@ -294,7 +322,9 @@ invoice = aiChat(
 
 // Type-safe access
 println( invoice.getInvoiceNumber() );
-println( invoice.getTotal() );</pre>
+println( invoice.getTotal() );
+```
+
 
 **Structured Output Options:**
 
@@ -309,10 +339,11 @@ println( invoice.getTotal() );</pre>
 
 Real-time token streaming for responsive applications thanks to BoxLang:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">// Stream responses as they generate
+```java
+// Stream responses as they generate
 aiChatStream( 
     "Write a detailed technical article",
-    ( chunk ) =&gt; {
+    ( chunk ) => {
         print( chunk );  // Display tokens as they arrive
         flush();
     },
@@ -325,15 +356,18 @@ pipeline = aiModel( "openai" )
     .pipe( transformerB )
     .stream( 
         input,
-        ( token ) =&gt; handleStreamToken( token )
-    );</pre>
+        ( token ) => handleStreamToken( token )
+    );
+```
+
 
 ⚡ Async Operations {#h2-11-async-operations}
 --------------------------------------------
 
 Non-blocking futures for concurrent AI requests:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">// Execute multiple AI requests concurrently
+```java
+// Execute multiple AI requests concurrently
 future1 = aiChatAsync( "Analyze customer sentiment", { provider: "openai" } );
 future2 = aiChatAsync( "Generate product description", { provider: "claude" } );
 future3 = aiChatAsync( "Translate to Spanish", { provider: "gemini" } );
@@ -346,16 +380,19 @@ results = [
 ];
 
 // Or use fluent combinators
-future1.thenApply( ( result ) =&gt; processResult( result ) )
-    .thenCompose( ( data ) =&gt; aiChatAsync( "Summarize: " &amp; data ) )
-    .thenAccept( ( summary ) =&gt; println( summary ) );</pre>
+future1.thenApply( ( result ) => processResult( result ) )
+    .thenCompose( ( data ) => aiChatAsync( "Summarize: " & data ) )
+    .thenAccept( ( summary ) => println( summary ) );
+```
+
 
 🔗 AI Pipelines {#h2-12-ai-pipelines}
 -------------------------------------
 
 Build composable workflows with models, transformers, and custom logic:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">// Complex multi-step pipeline
+```java
+// Complex multi-step pipeline
 pipeline = aiDocuments( pdfFiles )
     .load()
     .chunk( maxSize: 1000 )
@@ -363,12 +400,14 @@ pipeline = aiDocuments( pdfFiles )
     .pipe( aiModel( "claude" ) )
     .pipe( aiTransform( "extract-json" ) )
     .pipe( aiTransform( "validate" ) )
-    .pipe( ( data ) =&gt; {
+    .pipe( ( data ) => {
         saveToDatabase( data );
         return data;
     });
 
-result = pipeline.invoke( inputData );</pre>
+result = pipeline.invoke( inputData );
+```
+
 
 **Pipeline Features:**
 
@@ -383,26 +422,29 @@ result = pipeline.invoke( inputData );</pre>
 
 25+ lifecycle events for observability and control:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">// Listen to AI events
-interceptorService.listen( "onAIRequest", ( data ) =&gt; {
+```java
+// Listen to AI events
+interceptorService.listen( "onAIRequest", ( data ) => {
     logger.info( "AI Request to #data.provider#" );
     recordMetrics( data );
 });
 
-interceptorService.listen( "onAITokenCount", ( data ) =&gt; {
+interceptorService.listen( "onAITokenCount", ( data ) => {
     trackCosts( 
         provider: data.provider,
         tokens: data.totalTokens 
     );
 });
 
-interceptorService.listen( "onAIError", ( data ) =&gt; {
+interceptorService.listen( "onAIError", ( data ) => {
     if( data.canRetry ) {
         scheduleRetry( data );
     } else {
         alertOps( data.error );
     }
-});</pre>
+});
+```
+
 
 **Available Events:**
 
@@ -423,33 +465,43 @@ Built for enterprise deployment:
 
 **Timeout Controls:**
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">response = aiChat( 
+```java
+response = aiChat( 
     messages,
     {},
     { timeout: 30000 }  // 30 second timeout
-);</pre>
+);
+```
+
 
 **Error Handling:**
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">try {
+```java
+try {
     result = agent.run( input );
 } catch( AIProviderException e ) {
     // Handle rate limits, timeouts, etc.
     fallbackResult = useBackupProvider();
-}</pre>
+}
+```
+
 
 **Rate Limiting:**
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">// Automatic rate limit detection and retry
-interceptorService.listen( "onAIRateLimitHit", ( data ) =&gt; {
+```java
+// Automatic rate limit detection and retry
+interceptorService.listen( "onAIRateLimitHit", ( data ) => {
     waitTime = data.retryAfter ?: 60;
     sleep( waitTime * 1000 );
     retry( data.provider );
-});</pre>
+});
+```
+
 
 **Debugging:**
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">// Comprehensive logging
+```java
+// Comprehensive logging
 response = aiChat( 
     messages,
     {},
@@ -458,14 +510,17 @@ response = aiChat(
         logResponse: true,
         logRequestToConsole: true 
     }
-);</pre>
+);
+```
+
 
 🦙 Local AI with Ollama {#h2-16-local-ai-with-ollama}
 -----------------------------------------------------
 
 Zero API costs, complete privacy, offline capability:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">// Run AI completely locally
+```java
+// Run AI completely locally
 agent = aiAgent(
     name: "Private Assistant",
     model: aiModel( "ollama", { 
@@ -475,7 +530,9 @@ agent = aiAgent(
 );
 
 // No internet required, no API keys, no costs
-response = agent.run( "Analyze this confidential document" );</pre>
+response = agent.run( "Analyze this confidential document" );
+```
+
 
 **Local AI Benefits:**
 
@@ -490,26 +547,33 @@ response = agent.run( "Analyze this confidential document" );</pre>
 
 **Customer Support Automation:**
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">agent = aiAgent(
+```java
+agent = aiAgent(
     name: "Support Agent",
     memory: aiMemory( "cache" ),
     tools: [ zenDeskAPI, slackNotifier ],
     model: aiModel( "claude", { model: "claude-sonnet-4.5" } )
-);</pre>
+);
+```
+
 
 **Data Analysis Pipeline:**
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">pipeline = aiModel( "openai" )
+```java
+pipeline = aiModel( "openai" )
     .pipe( aiTransform( "extract-json" ) )
     .pipe( aiTransform( "validate" ) )
-    .pipe( ( data ) =&gt; saveToDatabase( data ) );
+    .pipe( ( data ) => saveToDatabase( data ) );
 
-result = pipeline.invoke( csvData );</pre>
+result = pipeline.invoke( csvData );
+```
+
 
 **Scheduled Report Generation:**
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">scheduler.task( "Weekly Report" )
-    .call( () =&gt; {
+```java
+scheduler.task( "Weekly Report" )
+    .call( () => {
         agent = aiAgent(
             name: "Report Generator",
             model: aiModel( "gemini" )
@@ -518,7 +582,9 @@ result = pipeline.invoke( csvData );</pre>
         sendEmail( report );
     })
     .onMondays()
-    .at( "09:00" );</pre>
+    .at( "09:00" );
+```
+
 
 📖 Comprehensive Learning Resources {#h2-18-comprehensive-learning-resources}
 -----------------------------------------------------------------------------
@@ -550,27 +616,39 @@ We've built a complete ecosystem to help you master BoxLang AI:
 
 ### **OS Applications** {#h3-25-os-applications}
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash">install-bx-module bx-ai</pre>
+```bash
+install-bx-module bx-ai
+```
+
 
 ### **AWS Lambda** {#h3-26-aws-lambda}
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash">cd src/resources
-install-bx-module bx-ai --local</pre>
+```bash
+cd src/resources
+install-bx-module bx-ai --local
+```
+
 
 ### Web Applications {#h3-27-web-applications}
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash">box install bx-ai</pre>
+```bash
+box install bx-ai
+```
+
 
 ### Your First Agent {#h3-28-your-first-agent}
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">agent = aiAgent(
+```java
+agent = aiAgent(
     name: "Assistant",
     instructions: "You are a helpful AI assistant",
     model: aiModel( "openai" )
 );
 
 response = agent.run( "How do I use BoxLang AI?" );
-println( response );</pre>
+println( response );
+```
+
 
 Why BoxLang AI v2 Matters {#h2-29-why-boxlang-ai-v2-matters}
 ------------------------------------------------------------

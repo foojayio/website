@@ -66,7 +66,8 @@ Once the environment is ready, we can create our [Helm deployment for Neo4j](htt
 
 You'll need to select the example from the documentation that matches your environment (for me, I used the Docker Desktop example). Here is the `values.yaml` sample:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml">neo4j:
+```yaml
+neo4j:
   name: my-standalone
   resources:
     cpu: "0.5"
@@ -84,19 +85,27 @@ volumes:
     mode: defaultStorageClass
     defaultStorageClass:
       requests:
-        storage: 2Gi</pre>
+        storage: 2Gi
+```
+
 
 This file sets up the resources, password, and storage for the database. You can customize this file with many more configurations (full list on [Github](https://github.com/neo4j/helm-charts/blob/dev/neo4j/values.yaml)). Once you have the `values.yaml` file set up, we can deploy the Helm chart with the following command:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="shell">helm install my-neo4j-release neo4j/neo4j --namespace neo4j -f my-neo4j.values.yaml</pre>
+```bash
+helm install my-neo4j-release neo4j/neo4j --namespace neo4j -f my-neo4j.values.yaml
+```
+
 
 Now you have Neo4j running on Kubernetes! You can test it out by opening the Neo4j browser at <http://localhost:7474> and running some queries like ones listed below.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="cypher">// Retrieve the data model
+```cypher
+// Retrieve the data model
 CALL apoc.meta.graph();
 
 // Find some nodes and relationships
-MATCH (b:Book)&amp;lt;-[r:AUTHORED]-(a:Author) RETURN * LIMIT 20;</pre>
+MATCH (b:Book)&lt;-[r:AUTHORED]-(a:Author) RETURN * LIMIT 20;
+```
+
 
 The next step is to run an application alongside the database. For that, we'll use Spring Boot with Spring Data Neo4j to interact with the database.
 
@@ -111,7 +120,8 @@ Next, we will need a Dockerfile (or other container setup) to build the app and 
 
 Then comes the YAML file for deployment. If you have used Docker Compose, this will probably look familiar. If not, it contains a series of key/value pairs that define the service, deployment steps, and any special values needed for creating and managing your services in containers. Let's take a look at the [deployment YAML for this project](https://github.com/JMHReif/kubernetes-neo4j-java/blob/main/book-service/deployment.yaml.example)!
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml">apiVersion: apps/v1
+```yaml
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   creationTimestamp: null
@@ -159,7 +169,9 @@ spec:
       port: 8080
       targetPort: 8080
       nodePort: 30080  # You can choose any port in the range 30000-32767
-  type: NodePort</pre>
+  type: NodePort
+```
+
 
 The first config for `apiVersion` and `kind` is for the deployment of the application. You can have YAML files for services (as seen toward the bottom of the file) and other parts of Kubernetes setup, but this first part contains deployment configurations. Within our `kube-neo4j-books` deployment, we will have one application with the same name and only a single instance/container running (replica: 1).
 
@@ -171,7 +183,10 @@ The service YAML sets the port to 8080 and the node port to 30080. This will all
 
 Once you have the deployment YAML file set up, you can deploy the application with the following command:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="shell">kubectl apply -f deployment.yaml</pre>
+```bash
+kubectl apply -f deployment.yaml
+```
+
 
 Let's test our Neo4j cluster with the Spring Boot application.
 
@@ -182,12 +197,15 @@ First, I like to check the status of the pods and services to make sure everythi
 
 We already tested the database earlier by running some queries in the Neo4j browser (localhost:7474), so all that is left is to test the Spring Boot application by hitting the endpoints! I like to ping the test endpoint first (`/hello`), which will just test that we can access the application. Then I test the other endpoint that will retrieve data from the Neo4j database. There are a few examples of author values you can use below, but feel free to try out some of your own, as well!
 
-<pre class="EnlighterJSRAW" data-enlighter-language="shell">http :30080/hello
+```bash
+http :30080/hello
 http :30080/authors/Stephen%20King
 http :30080/authors/Jane%20Austen
 http :30080/authors/J%2ER%2ER%2E%20Tolkien
 http :30080/authors/J%2EK%2E%20Rowling
-http :30080/authors/Timothy%20Zahn</pre>
+http :30080/authors/Timothy%20Zahn
+```
+
 
 **Note:** I use the `httpie` tool for testing APIs, but you can use `curl` or any other tool you prefer.
 
@@ -195,11 +213,14 @@ If (hopefully when) you get a response, you have successfully deployed a Spring 
 
 To shut everything down, you can run the following commands:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="shell">helm uninstall my-neo4j-release
+```bash
+helm uninstall my-neo4j-release
 kubectl delete deploy kube-neo4j-books
 
 # Optinoal: remove all deployment resources - only do this if you don't want to spin back up later
-kubectl delete pvc --all --namespace neo4j</pre>
+kubectl delete pvc --all --namespace neo4j
+```
+
 
 Wrapping Up! {#_wrapping_up}
 ----------------------------

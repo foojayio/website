@@ -23,7 +23,8 @@ In my last article, [Using Async-Profiler and Jattach Programmatically with AP-L
 
 The library is still work-in-progress, but it already allows you to write profiling API tests in plain Java:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">private int innerASGCT2() {
+```java
+private int innerASGCT2() {
     new Tracer().runASGCT().assertTrue(
         Frame.hasMethod(0, "innerASGCT2", "()I"), 
         Frame.hasMethod(1, "testRunASGCT2"));
@@ -33,7 +34,9 @@ The library is still work-in-progress, but it already allows you to write profil
 @Test
 public void testRunASGCT2() {
     innerASGCT2();
-}</pre>
+}
+```
+
 
 This test case checks that calling AsyncGetCallTrace gives the correct result in this specific example. The test library allows you to write tests comparing the returns of multiple GetStackTrace, AsyncGetCallTrace, and AsyncGetStackTrace invocations in different modes and settings. The library can be found as trace-tester on GitHub; I aim to bring it into the OpenJDK later with my JEP.
 
@@ -111,7 +114,8 @@ The WhiteBox API consists of the singleton class [jdk.test.whitebox.WhiteBox](ht
 
 You can even use it to force the compilation of a method and to set JVM flags, as shown in this example by [Jean-Philippe Bempel](https://jpbempel.github.io/2015/07/07/whitebox-api.html):
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public class WhiteBoxTest {
+```
+public class WhiteBoxTest {
     static WhiteBox wb = WhiteBox.getWhiteBox();
 
     private void m() {
@@ -124,41 +128,58 @@ You can even use it to force the compilation of a method and to set JVM flags, a
         wb.enqueueMethodForCompilation(
           WhiteBoxTest.class.getDeclaredMethod("m", null), 4);
     }
-}</pre>
+}
+```
+
 
 This is from his blog post WhiteBox API, the only blog post I could find on this topic.
 
 Back to our goal of forcing the compilation of a method. It is a good idea to reset the state of a method and deoptimize it to start from a blank slate:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">// obtain a method reference
+```java
+// obtain a method reference
 Executable m = X.class.getDeclaredMethod("m", null);
 // obtain a WhiteBox instance
 WhiteBox wb = WhiteBox.getWhiteBox();
 // deooptimize the method
 wb.deoptimizeMethod(m);
 // clear its state, found by experimentation to be neccessary
-wb.clearMethodState(m);</pre>
+wb.clearMethodState(m);
+```
+
 
 We can then either leave the method uncompiled (for compilation level 0) or enqueue for compilation:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">// level 1 - 3: C1, level 4: C2
-wb.enqueueMethodForCompilation(m, level);</pre>
+```java
+// level 1 - 3: C1, level 4: C2
+wb.enqueueMethodForCompilation(m, level);
+```
+
 
 But be aware that it takes some time to actually compile the method, so it's best to wait till it is compiled:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">while (wb.getMethodCompilationLevel(m) != level) {
+```java
+while (wb.getMethodCompilationLevel(m) != level) {
     Thread.sleep(1);
-}</pre>
+}
+```
+
 
 We can then also force a method to be never inlined:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">wb.testSetDontInlineMethod(m, true);
-wb.testSetForceInlineMethod(m, false);</pre>
+```java
+wb.testSetDontInlineMethod(m, true);
+wb.testSetForceInlineMethod(m, false);
+```
+
 
 Or inversely to be always inlined:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">wb.testSetDontInlineMethod(m, false);
-wb.testSetForceInlineMethod(m, true);</pre>
+```java
+wb.testSetDontInlineMethod(m, false);
+wb.testSetForceInlineMethod(m, true);
+```
+
 
 I implemented this in the [WhiteBoxUtil](https://github.com/parttimenerd/trace_tester/blob/4b02b80a1935822f18c356f0b340f70ca7ec06b2/src/main/java/tester/util/WhiteBoxUtil.java) class in my trace-tester library. This allows us to force all methods in their respective states. But the JVM can still decide to optimize further or inline a method, even when specifying the contrary. So we have to force the JVM using the second the Compiler Control specifications.
 
@@ -193,7 +214,8 @@ This mechanism is properly standardized for the OpenJDK, unlike the WhiteBox APi
 
 The following directives specify as an example that the method m should not be C2 compiled and not be inlined:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">[
+```java
+[
   {
     // can also contain patterns
     "match": ["X::m()"],
@@ -206,7 +228,9 @@ The following directives specify as an example that the method m should not be C
   }
   // multiple directives supported
   // first directives have priority
-]</pre>
+]
+```
+
 
 This, in theory, allows the method to be deoptimized, but this did not happen during my testing. With forced compilation, one can assume that this method will almost be used in its compiled form.
 

@@ -88,7 +88,8 @@ WARNING: This one seems a bit far-fetched, but the IETF specification fits the c
 
 For example, this is the response when accessing the Spring Boot actuator:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="json">  "_links": {
+```json
+  "_links": {
     "self": {
       "href": "http://localhost:8080/manage",
       "templated": false
@@ -106,7 +107,9 @@ For example, this is the response when accessing the Spring Boot actuator:
       "templated": false
     },
   }
-}</pre>
+}
+```
+
 
 No regular resource is present at this location. The server provides a set of resources, each with a dedicated identifier. It looks like a match for the **300** status code:
 > \[... \] the server SHOULD generate a  

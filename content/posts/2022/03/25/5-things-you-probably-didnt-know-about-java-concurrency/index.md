@@ -36,7 +36,8 @@ The Java compiler may change the execution order to optimize it, if it can deter
 
 Look at the following code snippet:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">package ca.bazlur.playground;
+```java
+package ca.bazlur.playground;
 import java.util.concurrent.Phaser;
 public class ExecutionOrderDemo {
     private static class A {
@@ -46,7 +47,7 @@ public class ExecutionOrderDemo {
     private static final A sharedData2 = new A();
     public static void main(String[] args) {
         var phaser = new Phaser(3);
-        var t1 = new Thread(() -&gt; {
+        var t1 = new Thread(() -> {
             phaser.arriveAndAwaitAdvance();
             var l1 = sharedData1;
             var l2 = l1.x;
@@ -55,7 +56,7 @@ public class ExecutionOrderDemo {
             var l5 = l1.x;
             System.out.println("Thread 1: " + l2 + "," + l4 + "," + l5);
         });
-        var t2 = new Thread(() -&gt; {
+        var t2 = new Thread(() -> {
             phaser.arriveAndAwaitAdvance();
             var l6 = sharedData1;
             l6.x = 3;
@@ -65,18 +66,24 @@ public class ExecutionOrderDemo {
         t2.start();
         phaser.arriveAndDeregister();
     }
-}</pre>
+}
+```
+
 
 The above code seems straightforward. We have two shared data ("sharedData1" and "sharedData2") and two threads use them.
 
 When we execute the code, we assume the output would be:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="raw">Thread 2: 3
-Thread 1: 0,0,0</pre>
+```
+Thread 2: 3
+Thread 1: 0,0,0
+```
+
 
 But if you run it a few times, you will see different outputs:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="raw">Thread 2: 3
+```
+Thread 2: 3
 Thread 1: 3,0,3
 
 Thread 2: 3
@@ -89,7 +96,9 @@ Thread 2: 3
 Thread 1: 0,3,0
 
 Thread 2: 3
-Thread 1: 0,3,3</pre>
+Thread 1: 0,3,3
+```
+
 
 I'm not claiming all of them can be reproducible on your machine, but all of them are possibilities.
 
@@ -104,7 +113,8 @@ Threads are limited.
 
 We can easily find out how many threads we can create on a particular machine by running the following:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">package ca.bazlur.playground;
+```java
+package ca.bazlur.playground;
 
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.locks.LockSupport;
@@ -113,7 +123,7 @@ public class Playground {
     public static void main(String[] args) {
         var counter = new AtomicInteger();
         while (true) {
-            new Thread(() -&gt; {
+            new Thread(() -> {
                 int count = counter.incrementAndGet();
                 System.out.println("thread count = " + count);
                 LockSupport.park();
@@ -121,7 +131,8 @@ public class Playground {
         }
     }
 }
-</pre>
+```
+
 
 The above is simple.
 
@@ -168,7 +179,10 @@ However, in most typical scenarios, we usually have a mixed set of tasks. And th
 
 In "[Java Concurrency in Practice](https://www.amazon.ca/Java-Concurrency-Practice-Brian-Goetz/dp/0321349601)," Brian Goetz provided a formula that we can use in most cases.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">Number of threads = Number of Available Cores * (1 + Wait time / Service time)</pre>
+```
+Number of threads = Number of Available Cores * (1 + Wait time / Service time)
+```
+
 
 Waiting time could IO, e.g., waiting for an HTTP response, acquiring Lock, and so on.
 
@@ -176,8 +190,11 @@ Service Time is the time of computation, e.g., processing the HTTP response, mar
 
 For example, an application calls an API and then processes it. If we have 8 processors on the application server, and then on average, the response time of the API is 100ms and the processing time of the response is 20ms, then the ideal size of thread would be:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="raw">N = 8 * ( 1 + 100/20)
-  = 48</pre>
+```
+N = 8 * ( 1 + 100/20)
+  = 48
+```
+
 
 However, this is an oversimplification because adequate testing is always critical to figuring out the number.
 
@@ -213,7 +230,8 @@ To continue with this idea, there is an initiative going on in Java called Proje
 
 For example, using the following code snippet, I was able to create 4.5 million threads on my machine, but you can do more, based on your own machine.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">import java.util.concurrent.atomic.AtomicInteger;
+```java
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.locks.LockSupport;
 public class Main {
     public static void main(String[] args) {
@@ -221,17 +239,22 @@ public class Main {
 
         // 4_576_279 
         while (true) {
-            Thread.startVirtualThread(() -&gt; {
+            Thread.startVirtualThread(() -> {
                 int count = counter.incrementAndGet();
                 System.out.println("thread count = " + count);
                 LockSupport.park();
             });
         }
     }
-}</pre>
+}
+```
+
 
 To run this program, you need to have Java 18, [which can be downloaded here](https://foojay.io/download/).
 
 You can run using the following command -
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">java --source 18 --enable-preview Main.java</pre>
+```java
+java --source 18 --enable-preview Main.java
+```
+

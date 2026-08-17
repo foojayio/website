@@ -81,14 +81,20 @@ Using Spring-Data-Eclipse-Store is as easy as adding three code snippets:
 2. Add the `@EnableEclipseStoreRepositories` annotation to your `@SpringBootApplication` annotation.
 3. EclipseStore uses reflection to handle serializing. That's why we need to add the following JVM-Arguments: 
 
-<pre data-enlighter-linenumbers="false" data-enlighter-language="generic" class="EnlighterJSRAW">--add-opens=java.base/java.lang=ALL-UNNAMED --add-opens=java.base/java.lang.reflect=ALL-UNNAMED --add-opens=java.base/java.util=ALL-UNNAMED --add-opens=java.base/java.time=ALL-UNNAMED</pre>
+```
+--add-opens=java.base/java.lang=ALL-UNNAMED --add-opens=java.base/java.lang.reflect=ALL-UNNAMED --add-opens=java.base/java.util=ALL-UNNAMED --add-opens=java.base/java.time=ALL-UNNAMED
+```
+
 
 If you already have created your repositories, you can start your application right away. Creating a repository only requires you to create an interface that extends a Repository-Interface:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="(from CustomerRepository.java)" data-enlighter-group="">import org.springframework.data.repository.CrudRepository;
+```java
+import org.springframework.data.repository.CrudRepository;
 
-public interface CustomerRepository extends CrudRepository&lt;Customer, String&gt;
-{...</pre>
+public interface CustomerRepository extends CrudRepository<Customer, String>
+{...
+```
+
 
 ~(from [CustomerRepository.java](https://github.com/xdev-software/spring-data-eclipse-store/blob/develop/spring-data-eclipse-store-demo/src/main/java/software/xdev/spring/data/eclipse/store/demo/simple/CustomerRepository.java))~
 

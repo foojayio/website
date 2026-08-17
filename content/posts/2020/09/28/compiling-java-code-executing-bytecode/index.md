@@ -23,7 +23,8 @@ The way Java accomplishes this is through the compilation of Java source code in
 
 Here is a very simple Java program named SumNumbers.java that adds some numbers to come up with a sum, then prints the sum:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public class SumNumbers { 
+```java
+public class SumNumbers { 
 
     public static void main(String args[]) {
 
@@ -32,14 +33,16 @@ Here is a very simple Java program named SumNumbers.java that adds some numbers 
         int sumx = 0;
         int count = 1000000;
 
-        for(count = 0; count &lt; 1000000; count = count + 1)
+        for(count = 0; count < 1000000; count = count + 1)
             sumx = sumx + 1;
 
         System.out.println("The total sum is " + sumx);
 
     }
 
-}</pre>
+}
+```
+
 
 We're going to count to 1 Million by adding 1 to 0 a million times. A very simple program.
 
@@ -47,13 +50,19 @@ So, what is happening when this program is run? First, the Java code is compiled
 
 The performance timing of this is interesting (for reference, I'm running OpenJDK 11 on a fairly old 64-bit Debian Linux system). If I time this `javac` command:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="raw" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">time javac SumNumbers.java</pre>
+```
+time javac SumNumbers.java
+```
+
 
 I get this result:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="raw" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">real 0m0.762s
+```
+real 0m0.762s
 user 0m1.432s
-sys 0m0.042s</pre>
+sys 0m0.042s
+```
+
 
 These Linux timings can be a bit confusing. The `real` time is the total amount of time "from the start to the finish of the call." The `user` time appears to include the time I spent pressing the "Enter" key and the time that was taken for the result to be displayed on my console. The `sys` time is the amount of CPU time that was spent in Kernel mode. From these descriptions, I think the `real` time is what developers will be most interested in, when we're thinking about cloud applications. We don't have a developer press "Enter" every time a customer accesses our application.
 
@@ -63,7 +72,10 @@ In executing this `javac` command, we asked the Java compiler to read our input 
 
 So, what's in `SumNumbers.class`? We can see this by executing the following command:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="raw" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">javap -c SumNumbers</pre>
+```
+javap -c SumNumbers
+```
+
 
 Here's what we see:
 
@@ -75,17 +87,26 @@ As a matter of fact, though, understanding how Java bytecode works is critical i
 
 We can run the Java bytecode that `javac` produced using the following command:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="raw" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">java SumNumbers</pre>
+```
+java SumNumbers
+```
+
 
 When the `java` command sees no file extension, it looks for a file that ends with the extension `.class`; so that command runs the `SumNumbers.class` bytecode file. Here's the timing we see from doing that on my Linux system:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="raw" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">time java SumNumbers</pre>
+```
+time java SumNumbers
+```
 
-<pre class="EnlighterJSRAW" data-enlighter-language="raw" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">The total sum is 1000000
+
+```
+The total sum is 1000000
 
 real	0m0.088s
 user	0m0.098s
-sys	0m0.017s</pre>
+sys	0m0.017s
+```
+
 
 So, we see that the time to execute the bytecode for this simple program is a small fraction of the time to compile it using `javac`.
 

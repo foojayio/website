@@ -46,8 +46,11 @@ Out of convenience I have been using the [SDKMAN](https://sdkman.io) for easy in
 
 Below I'm using SDKMan to install Azul's Zulu (OpenJDK) distro containing the JavaFX modules.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">$ sdk install java 16.0.0.fx-zulu
-$ sdk use java 16.0.0.fx-zulu</pre>
+```
+$ sdk install java 16.0.0.fx-zulu
+$ sdk use java 16.0.0.fx-zulu
+```
+
 
 For see more information on newer Java distros go to: <https://www.azul.com/downloads/zulu-community/?package=jdk-fx>
 
@@ -57,26 +60,35 @@ Assuming you have Java 16 or greater installed do the following:
 
 #### Linux/Mac OS
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">$ mkdir -p ~/projects &amp;&amp; cd ~/projects
+```
+$ mkdir -p ~/projects && cd ~/projects
 $ git clone https://github.com/carldea/worldclock
-$ cd worldclock</pre>
+$ cd worldclock
+```
+
 
 #### Windows (Power shell)
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic"># C:\Users\username\Documents
-&gt; cd ~/documents
-&gt; md projects
-&gt; cd projects
-&gt; git clone https://github.com/carldea/worldclock
-&gt; cd worldclock</pre>
+```
+# C:\Users\username\Documents
+> cd ~/documents
+> md projects
+> cd projects
+> git clone https://github.com/carldea/worldclock
+> cd worldclock
+```
+
 
 #### Updating an upstream Repo
 
 Whenever I make a change to the JFX World Clock repo your locally cloned repo can be stale (out of date). So, every now and then you could update from the upstream repo (mine). Below, is how to add the original repo as a remote upstream branch so you can do a pull to get the latest.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">$ git remote add upstream https://github.com/carldea/worldclock
+```
+$ git remote add upstream https://github.com/carldea/worldclock
 $ git remote -v
-$ git pull upstream main</pre>
+$ git pull upstream main
+```
+
 
 If you ever want to suggest a fix or change code locally (assuming you've forked), you'll want to do a rebase, which will put your changes on top of the latest. That way you could create a pull request if you so choose. 😉
 
@@ -88,8 +100,10 @@ Bach is a build tool that uses executable tools that comes with your installed J
 
 After cloning the project, and sitting in the `worldclock` directory you can execute Bach's build command as shown below:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">$ ./bach/bin/bach build
-</pre>
+```
+$ ./bach/bin/bach build
+```
+
 
 You're probably wondering, "I don't remember installing Bach!", Where did it come from? Well it was checked into the world clock git repo project. A little more on that later, but for now it just works when you are sitting in the `worldclock` directory.
 
@@ -107,7 +121,10 @@ Oh, and let Christian know that Carl sent ya. 😉
 
 Out of convenience you can set-up your PATH environment variable so you can perform the following (without having to fully qualify the path):
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">$ bach build</pre>
+```
+$ bach build
+```
+
 
 ### Setup Environment Variables {#h3-4-setup-environment-variables}
 
@@ -115,13 +132,19 @@ After building the world clock with the above command you will inevitably perfor
 
 Add to your .bashrc or .bash_profile as the following:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic"># Linux / MacOS
-export PATH=$PATH:./bach/bin</pre>
+```
+# Linux / MacOS
+export PATH=$PATH:./bach/bin
+```
+
 
 On Windows you'll add to your environment variables as the following:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic"># Windows
-set PATH=%PATH%;.bach\bin</pre>
+```
+# Windows
+set PATH=%PATH%;.bach\bin
+```
+
 
 ### Learning from Bach {#h3-5-learning-from-bach}
 
@@ -129,24 +152,29 @@ After calling the `bach build` command you should see the following:
 
 #### logbook.md
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">cdea$ bach build
+```
+cdea$ bach build
 Bach 17-ea+ce2b495 (Java 16+36, Mac OS X, /Users/cdea/projects/worldclock)
 Build worldclock 17-bach
 Verify external modules located in file:///Users/cdea/projects/worldclock/.bach/external-modules/
 Verified 3 external modules
 Build 1 main module: worldclock
   javac    --module worldclock --module-version 17-bach --module-source-path worldclock=src/main/java --module-path .bach/e[...]
-  jar      --create --file .bach/workspace/modules/<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="fe89918c929a9d92919d95becfc9d39c9f9d96d0949f8c">[email&nbsp;protected]</a> -C .bach/workspace/classes-main-16/worldclock . -[...]
+  jar      --create --file .bach/workspace/modules/<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="fe89918c929a9d92919d95becfc9d39c9f9d96d0949f8c">[email protected]</a> -C .bach/workspace/classes-main-16/worldclock . -[...]
 Assemble custom runtime image
   jlink    --add-modules worldclock --module-path .bach/workspace/modules:.bach/external-modules --launcher worldclock=worl[...]
 Build took 3.739s
 Logbook written to file:///Users/cdea/projects/worldclock/.bach/workspace/logbook.md
-cdea$</pre>
+cdea$
+```
+
 
 Above you'll notice Bach 17-ea+ce2b495, which is the version \& build of Bach. It's neat to also know that Bach builds itself with Bach (yeah, I know right?!). This is nice to know whenever Bach gets new features or bug fixes, I can simply perform the following:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">$ bach init 17-ea
-</pre>
+```
+$ bach init 17-ea
+```
+
 
 I believe once Bach is GA (general availability) it'll be `bach init 17`. Bach's binaries (itself), resides in the `.bach/bin` directory. As the owner of the JFX World Clock repo(project), I would need to check-in these Bach binary files. This is why Bach is available without having to install Bach. Like other build tools I want to make sure I can exclude the build artifact such that they don't get pushed in Git. But most importantly check-in these Bach binaries in as `.bach/bin/`.
 
@@ -154,31 +182,42 @@ I needed to ensure a few things in the `.bach/.gitignore` file I created. I made
 
 #### .bach/.gitignore
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">$ cat .bach/.gitignore
+```
+$ cat .bach/.gitignore
 /workspace/
 *.jar
-!bin/*.jar</pre>
+!bin/*.jar
+```
+
 
 Continuing our look at the above output of the command `bach build` you'll see the steps that Bach had performed to build the JFX World Clock as a modular app. You'll notice it used javac to compile, jar to create the module, and jlink to build a custom image of Java runtime. Lastly in the last line outputted is further details in a log file in a file called `logbook.md`:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">…
+```
+…
 Build took 3.739s
-Logbook written to file:///Users/cdea/projects/worldclock/.bach/workspace/logbook.md</pre>
+Logbook written to file:///Users/cdea/projects/worldclock/.bach/workspace/logbook.md
+```
+
 
 ### Running JFX World Clock as a Module {#h3-6-running-jfx-world-clock-as-a-module}
 
 After the application is built let's run it as a Java module as shown below:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">java --add-modules worldclock --module-path .bach/workspace/modules/:.bach/external-modules/ com.carlfx.worldclock.Launcher
-</pre>
+```
+java --add-modules worldclock --module-path .bach/workspace/modules/:.bach/external-modules/ com.carlfx.worldclock.Launcher
+```
+
 
 To run an executable on the command line do the following:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic"># Linux/MacOS
+```
+# Linux/MacOS
 $ .bach/workspace/image/bin/worldclock
 
 # Windows 
-$ .bach\workspace\image\bin\worldclock</pre>
+$ .bach\workspace\image\bin\worldclock
+```
+
 
 #### How does Bach work?
 
@@ -186,7 +225,8 @@ To allow Bach to infer my project's build intent I have to create a special Java
 
 #### .bach/bach.info/module-info.java
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">@ProjectInfo(
+```java
+@ProjectInfo(
     version = "17-bach",
     lookupExternals = @Externals(name = Name.JAVAFX, version = "16"),
     tools = @Tools(limit = {"javac", "jar", "jlink"}),
@@ -203,7 +243,9 @@ To allow Bach to infer my project's build intent I have to create a special Java
     })
 module bach.info {
   requires com.github.sormuras.bach;
-}</pre>
+}
+```
+
 
 Bach's API is in the form of Java annotations. A Bach annotation called `@ProjectInfo` allows me to specify what JDK tools to use and the project's external module dependencies. Any transitive dependencies would be resolved and placed into the `external-modules` directory. There are other attributes that I'm still learning about and so by the time you read this the documentation should be updated at Bach's site ;-).
 
@@ -223,13 +265,16 @@ Since, Bach has already built my project using `jlink`, the `jpackage` tool is n
 
 **To run jpackage, do the following:**
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">$ jpackage --verbose \
+```
+$ jpackage --verbose \
       --name "JFX World Clock" \
       --description "JavaFX World Clock Application" \
       --vendor "Carl Dea" \
       --runtime-image .bach/workspace/image \
       --module worldclock/com.carlfx.worldclock.Launcher \
-      --dest .bach/workspace/package</pre>
+      --dest .bach/workspace/package
+```
+
 
 After, it is completed the output of the distro would be in the `.bach/workspace/package` directory as shown below:  
 ![JFX World Clock dmg](Screen-Shot-2021-03-28-at-4.02.54-PM.png)
@@ -257,8 +302,11 @@ This project originally used Maven to build the project. While Maven and Gradle 
 
 **To run the JFX World Clock run the following:**
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">$ mvn clean
-$ mvn javafx:run</pre>
+```
+$ mvn clean
+$ mvn javafx:run
+```
+
 
 ### Conclusion {#h3-9-conclusion}
 

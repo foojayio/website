@@ -1,0 +1,63 @@
+{{- /* Fenced code block -> EnlighterJS markup.
+
+       Content stores plain Markdown fences (```java) because that is what an
+       author can reasonably be asked to type; this hook turns each one back
+       into the <pre class="EnlighterJSRAW"> element the vendored EnlighterJS
+       initialiser looks for (see partials/enlighterjs.html). Storage format and
+       presentation are separated: contributors write Markdown, the site keeps
+       its existing code styling, and swapping the highlighter later means
+       editing this one file rather than reprocessing 1000+ posts.
+
+       Chroma is bypassed entirely -- returning our own HTML means Hugo does no
+       server-side highlighting, which is what we want while EnlighterJS owns
+       the rendering.
+
+       LANGUAGE MAPPING. EnlighterJS ships 53 languages and, notably, has no
+       yaml, xml, html or plain-text lexer; those fall back to `generic`, which
+       is exactly what the old WordPress markup did with them too, so nothing
+       regresses. Fence tags authors actually type are mapped to the closest
+       EnlighterJS name here, and anything unrecognised degrades to `generic`
+       rather than breaking the block. */ -}}
+
+{{- $alias := dict
+      "sh" "shell" "bash" "shell" "zsh" "shell" "console" "shell" "shell-session" "shell"
+      "js" "javascript" "node" "javascript" "mjs" "javascript"
+      "ts" "typescript"
+      "py" "python"
+      "kt" "kotlin" "kts" "kotlin"
+      "rb" "ruby"
+      "cs" "csharp" "c#" "csharp"
+      "golang" "go"
+      "c" "cpp" "c++" "cpp" "cc" "cpp" "h" "cpp" "hpp" "cpp"
+      "md" "markdown"
+      "bat" "batch" "cmd" "batch"
+      "gradle" "groovy"
+      "properties" "ini" "conf" "ini" "toml" "ini"
+      "asm" "assembly" "nasm" "assembly"
+      "docker" "dockerfile"
+      "ps" "powershell" "ps1" "powershell"
+      "postgres" "postgresql" "psql" "postgresql" "mysql" "mariadb"
+-}}
+
+{{- /* EnlighterJS's own registry -- a fence tag in this list is passed straight
+       through. Anything else (yaml, xml, html, json5, cypher, ...) becomes
+       `generic`. */ -}}
+{{- $supported := slice
+      "abap" "apache" "assembly" "avrassembly" "batch" "cordpro" "cpp" "csharp"
+      "css" "cython" "dart" "diff" "dockerfile" "generic" "go" "groovy" "ini"
+      "java" "javascript" "json" "jsx" "kotlin" "latex" "less" "lighttpd" "lua"
+      "mariadb" "markdown" "matlab" "mssql" "nginx" "nsis" "oracledb" "php"
+      "postgresql" "powershell" "prolog" "purebasic" "python" "qml" "r" "raw"
+      "routeros" "ruby" "rust" "scala" "scss" "shell" "sql" "squirrel" "swift"
+      "typescript" "vhdl"
+-}}
+
+{{- $tag := lower (trim (.Type | default "") " ") -}}
+{{- $lang := index $alias $tag | default $tag -}}
+{{- if not (in $supported $lang) }}{{ $lang = "generic" }}{{ end -}}
+
+{{- /* .Inner is the raw code. htmlEscape is what keeps a snippet containing
+       </pre> or <script> from escaping the block; EnlighterJS un-escapes it
+       client-side. No newline between the tag and the code -- a leading blank
+       line would show up as one inside the rendered block. */ -}}
+<pre class="EnlighterJSRAW" data-enlighter-language="{{ $lang }}"{{ with .Attributes.title }} data-enlighter-title="{{ . }}"{{ end }}{{ with .Attributes.highlight }} data-enlighter-highlight="{{ . }}"{{ end }}>{{ htmlEscape .Inner }}</pre>

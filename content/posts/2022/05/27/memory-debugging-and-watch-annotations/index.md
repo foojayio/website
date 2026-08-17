@@ -44,24 +44,30 @@ We're a part of a team. Doing this for every machine is difficult and frustratin
 
 That's where JetBrains provides a unique solution: custom annotations. Just annotate your code with hints to the debugger and configuration will be seamless to your entire team/users. In order to do this, we need to add the JetBrains annotations to the project path. You can do it by adding this to the Maven POM file:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="xml">&lt;dependency&gt;
- &lt;groupId&gt;org.jetbrains&lt;/groupId&gt;
- &lt;artifactId&gt;annotations&lt;/artifactId&gt;
- &lt;version&gt;23.0.0&lt;/version&gt;
-&lt;/dependency&gt;</pre>
+```xml
+<dependency>
+ <groupId>org.jetbrains</groupId>
+ <artifactId>annotations</artifactId>
+ <version>23.0.0</version>
+</dependency>
+```
+
 
 Once this is done, we can annotate the class from the previous duckling to achieve the same effect:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">import org.jetbrains.annotations.Debug.Renderer;
+```java
+import org.jetbrains.annotations.Debug.Renderer;
 
 // snipped code ...
 
 @Renderer(text = "\"Repository has \" + count() + \" elements\",",
   childrenArray = "finaAll()",
-  hasChildren = "count() &gt; 0")
-public interface VisitRepository extends JpaRepository&lt;Visit, Integer&gt; {
+  hasChildren = "count() > 0")
+public interface VisitRepository extends JpaRepository<Visit, Integer> {
   // snipped code  ...
-}</pre>
+}
+```
+
 
 Notice we need to escape the strings in the annotation so they will be valid Java Strings. We need to escape the quote symbols and use them to write a "proper" string.
 

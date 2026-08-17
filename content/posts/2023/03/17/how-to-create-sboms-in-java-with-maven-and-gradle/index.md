@@ -84,64 +84,70 @@ Creating a Java SBOM with Maven {#h2-4-creating-a-java-sbom-with-maven}
 
 There is a CylconeDX plugin available on Maven central and [Github](https://github.com/CycloneDX/cyclonedx-maven-plugin) that appears to be well-maintained and commonly used.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="false" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&lt;plugins&gt;
-   &lt;plugin&gt;
-       &lt;groupId&gt;org.cyclonedx&lt;/groupId&gt;
-       &lt;artifactId&gt;cyclonedx-maven-plugin&lt;/artifactId&gt;
-       &lt;version&gt;2.7.1&lt;/version&gt;
-       &lt;executions&gt;
-           &lt;execution&gt;
-               &lt;phase&gt;package&lt;/phase&gt;
-               &lt;goals&gt;
-                   &lt;goal&gt;makeAggregateBom&lt;/goal&gt;
-               &lt;/goals&gt;
-           &lt;/execution&gt;
-       &lt;/executions&gt;
-       &lt;configuration&gt;
-           &lt;projectType&gt;library&lt;/projectType&gt;
-           &lt;schemaVersion&gt;1.4&lt;/schemaVersion&gt;
-           &lt;includeBomSerialNumber&gt;true&lt;/includeBomSerialNumber&gt;
-           &lt;includeCompileScope&gt;true&lt;/includeCompileScope&gt;
-           &lt;includeProvidedScope&gt;true&lt;/includeProvidedScope&gt;
-           &lt;includeRuntimeScope&gt;true&lt;/includeRuntimeScope&gt;
-           &lt;includeSystemScope&gt;true&lt;/includeSystemScope&gt;
-           &lt;includeTestScope&gt;false&lt;/includeTestScope&gt;
-           &lt;includeLicenseText&gt;false&lt;/includeLicenseText&gt;
-           &lt;outputReactorProjects&gt;true&lt;/outputReactorProjects&gt;
-           &lt;outputFormat&gt;all&lt;/outputFormat&gt;
-           &lt;outputName&gt;CycloneDX-Sbom&lt;/outputName&gt;
-       &lt;/configuration&gt;
-   &lt;/plugin&gt;
-&lt;/plugins&gt;</pre>
+```
+<plugins>
+   <plugin>
+       <groupId>org.cyclonedx</groupId>
+       <artifactId>cyclonedx-maven-plugin</artifactId>
+       <version>2.7.1</version>
+       <executions>
+           <execution>
+               <phase>package</phase>
+               <goals>
+                   <goal>makeAggregateBom</goal>
+               </goals>
+           </execution>
+       </executions>
+       <configuration>
+           <projectType>library</projectType>
+           <schemaVersion>1.4</schemaVersion>
+           <includeBomSerialNumber>true</includeBomSerialNumber>
+           <includeCompileScope>true</includeCompileScope>
+           <includeProvidedScope>true</includeProvidedScope>
+           <includeRuntimeScope>true</includeRuntimeScope>
+           <includeSystemScope>true</includeSystemScope>
+           <includeTestScope>false</includeTestScope>
+           <includeLicenseText>false</includeLicenseText>
+           <outputReactorProjects>true</outputReactorProjects>
+           <outputFormat>all</outputFormat>
+           <outputName>CycloneDX-Sbom</outputName>
+       </configuration>
+   </plugin>
+</plugins>
+```
+
 
 You can configure the CycloneDX plugin in different ways. In this case, I bound the `makeAggregateBom` goal of the plugin to the package phase of Maven. After my JAR is created, the plugin will create an SBOM, taking aggregation into account. It excludes the test dependencies and releases the SBOM in both XML and JSON format in my target folder.
 
 All dependencies, both direct and transitive, are mentioned in the SBOM individually like below. The `jackson-databind` package, in this case, was transitively included in my application via `sprint-boot-starter-web`.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&lt;component type="library" bom-ref="pkg:maven/com.fasterxml.jackson.core/<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="5d373c3e362e323370393c293c3f3433391d6f736c6e7369">[email&nbsp;protected]</a>?type=jar"&gt;
- &lt;publisher&gt;FasterXML&lt;/publisher&gt;
- &lt;group&gt;com.fasterxml.jackson.core&lt;/group&gt;
- &lt;name&gt;jackson-databind&lt;/name&gt;
- &lt;version&gt;2.13.4&lt;/version&gt;
- &lt;description&gt;General data-binding functionality for Jackson: works on core streaming API&lt;/description&gt;
- &lt;hashes&gt;
-   &lt;hash alg="MD5"&gt;03cb7aea126610e4c96ca6d14d75cc55&lt;/hash&gt;
-   &lt;hash alg="SHA-1"&gt;98b0edfa8e4084078f10b7b356c300ded4a71491&lt;/hash&gt;
-   &lt;hash alg="SHA-256"&gt;c9faff420d9e2c7e1e4711dbeebec2506a32c9942027211c5c293d8d87807eb6&lt;/hash&gt;
-   &lt;hash alg="SHA-512"&gt;23f32026b181c6c71efc7789a8420c7d5cbcfb15f7696657e75f9cbe3635d13a88634b5db3c344deb914b719d60e3a9bfc1b63fa23152394e1e70b8e7bcd2116&lt;/hash&gt;
-   &lt;hash alg="SHA-384"&gt;e25e844575891b2f3bcb2fdc67ae9fadf54d2836052c9ea2c045f1375eaa97e4780cd6752bef0ebc658fa17400c55268&lt;/hash&gt;
-   &lt;hash alg="SHA3-384"&gt;e6955877c2c27327f6814f06d681118be2ae1a36bc5ff2e84ad27f213203bf77c347ba18d9abc61d5f1c99b6e81f6c2d&lt;/hash&gt;
-   &lt;hash alg="SHA3-256"&gt;88b12b0643a4791fa5cd0c5e30bc2631903870cf916c8a1b4198c856fd91e5f4&lt;/hash&gt;
-   &lt;hash alg="SHA3-512"&gt;7e86a69bcf7b4c8a6949acce0ec15f33b74d5ac604f23cd631ec16bfdfd70d42499028b9d062648b31d7a187ea4dc98ec296a329f4cfd4952744ed1281fa9d9a&lt;/hash&gt;
- &lt;/hashes&gt;
- &lt;licenses&gt;
-   &lt;license&gt;
-     &lt;id&gt;Apache-2.0&lt;/id&gt;
-   &lt;/license&gt;
- &lt;/licenses&gt;
- &lt;purl&gt;pkg:maven/com.fasterxml.jackson.core/<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="c8a2a9aba3bba7a6e5aca9bca9aaa1a6ac88fae6f9fbe6fc">[email&nbsp;protected]</a>?type=jar&lt;/purl&gt;
- &lt;externalReferences&gt;&lt;reference type="vcs"&gt;&lt;url&gt;http://github.com/FasterXML/jackson-databind&lt;/url&gt;&lt;/reference&gt;&lt;reference type="website"&gt;&lt;url&gt;http://fasterxml.com/&lt;/url&gt;&lt;/reference&gt;&lt;reference type="distribution"&gt;&lt;url&gt;https://oss.sonatype.org/service/local/staging/deploy/maven2/&lt;/url&gt;&lt;/reference&gt;&lt;/externalReferences&gt;
-&lt;/component&gt;</pre>
+```
+<component type="library" bom-ref="pkg:maven/com.fasterxml.jackson.core/<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="5d373c3e362e323370393c293c3f3433391d6f736c6e7369">[email protected]</a>?type=jar">
+ <publisher>FasterXML</publisher>
+ <group>com.fasterxml.jackson.core</group>
+ <name>jackson-databind</name>
+ <version>2.13.4</version>
+ <description>General data-binding functionality for Jackson: works on core streaming API</description>
+ <hashes>
+   <hash alg="MD5">03cb7aea126610e4c96ca6d14d75cc55</hash>
+   <hash alg="SHA-1">98b0edfa8e4084078f10b7b356c300ded4a71491</hash>
+   <hash alg="SHA-256">c9faff420d9e2c7e1e4711dbeebec2506a32c9942027211c5c293d8d87807eb6</hash>
+   <hash alg="SHA-512">23f32026b181c6c71efc7789a8420c7d5cbcfb15f7696657e75f9cbe3635d13a88634b5db3c344deb914b719d60e3a9bfc1b63fa23152394e1e70b8e7bcd2116</hash>
+   <hash alg="SHA-384">e25e844575891b2f3bcb2fdc67ae9fadf54d2836052c9ea2c045f1375eaa97e4780cd6752bef0ebc658fa17400c55268</hash>
+   <hash alg="SHA3-384">e6955877c2c27327f6814f06d681118be2ae1a36bc5ff2e84ad27f213203bf77c347ba18d9abc61d5f1c99b6e81f6c2d</hash>
+   <hash alg="SHA3-256">88b12b0643a4791fa5cd0c5e30bc2631903870cf916c8a1b4198c856fd91e5f4</hash>
+   <hash alg="SHA3-512">7e86a69bcf7b4c8a6949acce0ec15f33b74d5ac604f23cd631ec16bfdfd70d42499028b9d062648b31d7a187ea4dc98ec296a329f4cfd4952744ed1281fa9d9a</hash>
+ </hashes>
+ <licenses>
+   <license>
+     <id>Apache-2.0</id>
+   </license>
+ </licenses>
+ <purl>pkg:maven/com.fasterxml.jackson.core/<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="c8a2a9aba3bba7a6e5aca9bca9aaa1a6ac88fae6f9fbe6fc">[email protected]</a>?type=jar</purl>
+ <externalReferences><reference type="vcs"><url>http://github.com/FasterXML/jackson-databind</url></reference><reference type="website"><url>http://fasterxml.com/</url></reference><reference type="distribution"><url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url></reference></externalReferences>
+</component>
+```
+
 
 ### SPDX plugin for Maven (prototype) {#h3-6-spdx-plugin-for-maven-prototype}
 
@@ -149,20 +155,23 @@ For SPDX, there is a [Maven plugin](https://github.com/spdx/spdx-maven-plugin) a
 
 Additionally, I bound the SPDX creation task to the package phase, similar to the CycloneDX example.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&lt;plugin&gt;
-   &lt;groupId&gt;org.spdx&lt;/groupId&gt;
-   &lt;artifactId&gt;spdx-maven-plugin&lt;/artifactId&gt;
-   &lt;version&gt;0.6.1&lt;/version&gt;
-   &lt;executions&gt;
-       &lt;execution&gt;
-           &lt;id&gt;build-spdx&lt;/id&gt;
-           &lt;phase&gt;package&lt;/phase&gt;
-           &lt;goals&gt;
-               &lt;goal&gt;createSPDX&lt;/goal&gt;
-           &lt;/goals&gt;
-       &lt;/execution&gt;
-   &lt;/executions&gt;
-&lt;/plugin&gt;</pre>
+```
+<plugin>
+   <groupId>org.spdx</groupId>
+   <artifactId>spdx-maven-plugin</artifactId>
+   <version>0.6.1</version>
+   <executions>
+       <execution>
+           <id>build-spdx</id>
+           <phase>package</phase>
+           <goals>
+               <goal>createSPDX</goal>
+           </goals>
+       </execution>
+   </executions>
+</plugin>
+```
+
 
 The output by default for this version of the plugin is located in `/target/site/{groupId}_{artifactId}-{version}.spdx.json`. As the file extension already suggests, the default output is JSON.
 
@@ -174,11 +183,15 @@ Alternatively, there is command line tool available called [spdx-sbom-generator]
 
 Calling this tool from the command line without any parameter in the root of my application creates an SBOM for me in the SPDX format. Other outputs like JSON are also supported by using a parameter.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">./spdx-sbom-generator</pre>
+```
+./spdx-sbom-generator
+```
+
 
 This generated SBOM seems to have all transitive dependencies individually mentioned, as I assumed it should.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">##### Package representing the jackson-databind
+```
+##### Package representing the jackson-databind
 
 PackageName: jackson-databind
 SPDXID: SPDXRef-Package-jackson-databind-2.13.4
@@ -195,7 +208,9 @@ PackageLicenseComments: NOASSERTION
 PackageComment: NOASSERTION
 
 Relationship: SPDXRef-Package-jackson-databind-2.13.4 DEPENDS_ON SPDXRef-Package-jackson-annotations-2.13.4
-Relationship: SPDXRef-Package-jackson-databind-2.13.4 DEPENDS_ON SPDXRef-Package-jackson-core-2.13.4</pre>
+Relationship: SPDXRef-Package-jackson-databind-2.13.4 DEPENDS_ON SPDXRef-Package-jackson-core-2.13.4
+```
+
 
 If you want to create SBOMs in the SPDX format I would suggest this tool over the prototype plugin.
 
@@ -210,13 +225,17 @@ There is a CyconeDX plugin available for Gradle. Just like the Maven plugin we d
 
 To use the plugin just add it to your plugin block in your Gradle file:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">plugins {
+```
+plugins {
    id 'org.cyclonedx.bom' version '1.7.2'
-}</pre>
+}
+```
+
 
 You can configure the plugin with a `cyclonedxBom` block like below:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">cyclonedxBom {
+```
+cyclonedxBom {
    includeConfigs = ["runtimeClasspath"]
    skipConfigs = ["compileClasspath", "testCompileClasspath"]
    projectType = "application"
@@ -226,7 +245,9 @@ You can configure the plugin with a `cyclonedxBom` block like below:
    outputFormat = "all"
    includeBomSerialNumber = true
    componentVersion = "2.0.0"
-}</pre>
+}
+```
+
 
 In this example, I also added the line `build.finalizedBy('cyclonedxBom')` at the end of my Gradle file. Now it will automatically call the `cyclonedxBom` target after building my application and behave similarly to the Maven plugin. Obviously, this is up to you if and how you want to connect the plugin target.
 

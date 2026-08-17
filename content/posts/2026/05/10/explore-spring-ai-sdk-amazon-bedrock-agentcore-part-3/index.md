@@ -33,14 +33,18 @@ By adding the [AgentCore Browser](https://docs.aws.amazon.com/bedrock-agentcore/
 
 To start with, add the below dependency in pom.xml
 
-<pre class="EnlighterJSRAW" data-enlighter-language="xml" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&lt;dependency&gt;
-    &lt;groupId&gt;org.springaicommunity&lt;/groupId&gt;
-    &lt;artifactId&gt;spring-ai-agentcore-browser&lt;/artifactId&gt;
-&lt;/dependency&gt;</pre>
+```xml
+<dependency>
+    <groupId>org.springaicommunity</groupId>
+    <artifactId>spring-ai-agentcore-browser</artifactId>
+</dependency>
+```
+
 
 ### 2. Add the below class. {#h3-1-2-add-the-below-class}
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">package com.bsmlabs.springai.agents;
+```java
+package com.bsmlabs.springai.agents;
 
 import com.bsmlabs.springai.models.PromptRequest;
 import org.slf4j.Logger;
@@ -93,7 +97,7 @@ public class BuiltInToolsAgent {
 
         String response = chatClient.prompt()
                 .user(request.prompt())
-                .advisors(advisorSpec -&gt;
+                .advisors(advisorSpec ->
                         advisorSpec.param(
                                 SessionConstants.SESSION_ID_KEY,
                                 sessionId
@@ -106,7 +110,9 @@ public class BuiltInToolsAgent {
 
         return response;
     }
-} </pre>
+}
+```
+
 
 <br />
 
@@ -120,7 +126,8 @@ This class acts as an AI agent service that processes prompts and invokes AgentC
 
 **Constructor Injection**
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public BuiltInToolsAgent(
+```java
+public BuiltInToolsAgent(
             ChatClient.Builder chatClientBuilder,
             ChatMemory chatMemory,
             AgentCoreMemory agentCoreMemory,
@@ -133,7 +140,9 @@ This class acts as an AI agent service that processes prompts and invokes AgentC
         this.chatClient = chatClientBuilder
                 .defaultToolCallbacks(browserTools)
                 .build();
-}</pre>
+}
+```
+
 
 Spring injects all required dependencies through the constructor. **@Qualifier("browserToolCallbackProvider")**
 
@@ -144,9 +153,12 @@ Spring injects all required dependencies through the constructor. **@Qualifier("
   * Fetching content
   * Summarizing URL
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">this.chatClient = chatClientBuilder
+```java
+this.chatClient = chatClientBuilder
                 .defaultToolCallbacks(browserTools)
-                .build();</pre>
+                .build();
+```
+
 
 * Registers the browser tool with the **ChatClient**.
 * Whenever the model requires browser actions, it can automatically invoke the tool callback.
@@ -173,7 +185,8 @@ Returns: AI-generated response as a string
 
 The key concept here is ***.defaultToolCallbacks(browserTools)***. This line enables Amazon Bedrock AgentCore built-in Browser capabilities inside the Spring AI SDK through the ToolCallbackProvider abstraction.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">+-------------------+
+```
++-------------------+
 |   User Prompt     |
 +-------------------+
           |
@@ -224,11 +237,14 @@ The key concept here is ***.defaultToolCallbacks(browserTools)***. This line ena
 +-------------------+
 | Final Response    |
 | Returned to User  |
-+-------------------+</pre>
++-------------------+
+```
+
 
 ### 3. Create a Controller {#h3-2-3-create-a-controller}
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">package com.bsmlabs.springai.agents;
+```java
+package com.bsmlabs.springai.agents;
 
 import com.bsmlabs.springai.models.PromptRequest;
 import org.springaicommunity.agentcore.context.AgentCoreContext;
@@ -266,8 +282,8 @@ public class SummaryController {
                     Locate the primary content area.
 
                     Prioritize content inside:
-                    - &lt;main&gt;
-                    - &lt;article&gt;
+                    - <main>
+                    - <article>
                     - documentation body
                     - blog content
 
@@ -287,7 +303,7 @@ public class SummaryController {
                     Extract only meaningful content.
                     Return only final answer.
                     Generate concise HTML summary using:
-                    &lt;h3&gt;, &lt;p&gt;, &lt;ul&gt;, &lt;li&gt;
+                    <h3>, <p>, <ul>, <li>
 
                     Return only HTML.
                     """.formatted(url);
@@ -305,48 +321,56 @@ public class SummaryController {
         return "summary";
     }
 }
-</pre>
+```
+
 
 ### 4. Create a Thymeleaf UI page {#h3-3-4-create-a-thymeleaf-ui-page}
 
 #### 4.1. Add the thymeleaf dependency
 
-<pre class="EnlighterJSRAW" data-enlighter-language="xml" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&lt;dependency&gt;
-    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
-    &lt;artifactId&gt;spring-boot-starter-thymeleaf&lt;/artifactId&gt;
-&lt;/dependency&gt;</pre>
+```xml
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-thymeleaf</artifactId>
+</dependency>
+```
+
 
 #### 4.2 Add the below entries in the application.yaml
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">spring:
+```yaml
+spring:
   thymeleaf:
     prefix: classpath:/templates/
     suffix: .html
     mode: HTML
     encoding: UTF-8
-    cache: false</pre>
+    cache: false
+```
+
 
 #### 4.3 Add the below html page
 
 under ***/src/main/resources/template*s** folder add the below ***summary.html*** page
 
-<pre class="EnlighterJSRAW" data-enlighter-language="html" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&lt;!DOCTYPE html&gt;
-&lt;html xmlns:th="http://www.thymeleaf.org" lang="en"&gt;
+```html
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 
-&lt;head&gt;
-    &lt;title&gt;Spring AI URL Summarizer&lt;/title&gt;
+<head>
+    <title>Spring AI URL Summarizer</title>
 
-    &lt;!-- Google Font --&gt;
-    &lt;link rel="preconnect" href="https://fonts.googleapis.com"&gt;
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
 
-    &lt;link rel="preconnect"
+    <link rel="preconnect"
           href="https://fonts.gstatic.com"
-          crossorigin&gt;
+          crossorigin>
 
-    &lt;link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&amp;display=swap"
-          rel="stylesheet"&gt;
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap"
+          rel="stylesheet">
 
-    &lt;style&gt;
+    <style>
 
         * {
             box-sizing: border-box;
@@ -440,38 +464,40 @@ under ***/src/main/resources/template*s** folder add the below ***summary.html**
             color: #333;
         }
 
-    &lt;/style&gt;
-&lt;/head&gt;
-&lt;body&gt;
-&lt;div class="container"&gt;
+    </style>
+</head>
+<body>
+<div class="container">
 
-    &lt;h2&gt;Spring AI URL Summarizer&lt;/h2&gt;
+    <h2>Spring AI URL Summarizer</h2>
 
-    &lt;form action="/summarize" method="post"&gt;
+    <form action="/summarize" method="post">
 
-        &lt;label&gt;
-            &lt;input type="text"
+        <label>
+            <input type="text"
                    name="url"
                    placeholder="Enter URL (https://example.com)"
-                   required/&gt;
-        &lt;/label&gt;
+                   required/>
+        </label>
 
-        &lt;button type="submit"&gt;
+        <button type="submit">
             Summarize
-        &lt;/button&gt;
+        </button>
 
-    &lt;/form&gt;
+    </form>
 
-    &lt;div class="summary-box"
-         th:if="${summary}"&gt;
+    <div class="summary-box"
+         th:if="${summary}">
 
-        &lt;div th:utext="${summary}"&gt;&lt;/div&gt;
+        <div th:utext="${summary}"></div>
 
-    &lt;/div&gt;
+    </div>
 
-&lt;/div&gt;
-&lt;/body&gt;
-&lt;/html&gt;</pre>
+</div>
+</body>
+</html>
+```
+
 
 ### 5. Verify {#h3-4-5-verify}
 
@@ -480,7 +506,8 @@ Start the application and then access the following: <http://localhost:8080> and
 <https://builder.aws.com/learn/topics/agentic-ai>
 ![agentcorebrowser](Screenshot-2026-05-10-at-12.16.21-PM-1024x484.png) agentcorebrowser
 
-<pre class="EnlighterJSRAW" data-enlighter-language="shell" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">2026-05-10T12:14:26.581+05:30  INFO 5736 --- [simple-spring-boot-agent] [           main] c.b.s.SimpleSpringBootAgentApplication   : Starting SimpleSpringBootAgentApplication using Java 21.0.8 with PID 5736 (/Users/puneethsai/devworkspace/explore-spring-ai/simple-spring-boot-agent/target/classes started by puneethsai in /Users/puneethsai/devworkspace/explore-spring-ai/simple-spring-boot-agent)
+```bash
+2026-05-10T12:14:26.581+05:30  INFO 5736 --- [simple-spring-boot-agent] [           main] c.b.s.SimpleSpringBootAgentApplication   : Starting SimpleSpringBootAgentApplication using Java 21.0.8 with PID 5736 (/Users/puneethsai/devworkspace/explore-spring-ai/simple-spring-boot-agent/target/classes started by puneethsai in /Users/puneethsai/devworkspace/explore-spring-ai/simple-spring-boot-agent)
 2026-05-10T12:14:26.584+05:30  INFO 5736 --- [simple-spring-boot-agent] [           main] c.b.s.SimpleSpringBootAgentApplication   : No active profile set, falling back to 1 default profile: "default"
 2026-05-10T12:14:29.121+05:30  INFO 5736 --- [simple-spring-boot-agent] [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
 2026-05-10T12:14:29.137+05:30  INFO 5736 --- [simple-spring-boot-agent] [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
@@ -523,8 +550,8 @@ Read the webpage content once.
 Locate the primary content area.
 
 Prioritize content inside:
-- &lt;main&gt;
-- &lt;article&gt;
+- <main>
+- <article>
 - documentation body
 - blog content
 
@@ -544,22 +571,23 @@ Ignore:
 Extract only meaningful content.
 Return only final answer.
 Generate concise HTML summary using:
-&lt;h3&gt;, &lt;p&gt;, &lt;ul&gt;, &lt;li&gt;
+<h3>, <p>, <ul>, <li>
 
 Return only HTML.
 
-2026-05-10T12:15:36.147+05:30  INFO 5736 --- [simple-spring-boot-agent] [nio-8080-exec-3] c.b.springai.agents.BuiltInToolsAgent    : Response: &lt;h3&gt;Main Purpose&lt;/h3&gt;
-&lt;p&gt;The webpage explains what Agentic AI is, its significance in the AWS ecosystem, and provides an overview of AWS services and tools that support building Agentic AI applications.&lt;/p&gt;
+2026-05-10T12:15:36.147+05:30  INFO 5736 --- [simple-spring-boot-agent] [nio-8080-exec-3] c.b.springai.agents.BuiltInToolsAgent    : Response: <h3>Main Purpose</h3>
+<p>The webpage explains what Agentic AI is, its significance in the AWS ecosystem, and provides an overview of AWS services and tools that support building Agentic AI applications.</p>
 
-&lt;h3&gt;Key Highlights&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;Agentic AI refers to AI systems that can act autonomously to achieve user-defined goals.&lt;/li&gt;
-  &lt;li&gt;AWS offers a comprehensive suite of services for building, training, and deploying Agentic AI applications.&lt;/li&gt;
-  &lt;li&gt;Key AWS services include Amazon Bedrock, Amazon SageMaker, AWS Lambda, and Amazon Bedrock Agents.&lt;/li&gt;
-  &lt;li&gt;The page highlights use cases such as customer service automation, supply chain optimization, and personalized recommendations.&lt;/li&gt;
-  &lt;li&gt;It emphasizes security, scalability, and integration capabilities of AWS for Agentic AI.&lt;/li&gt;
-&lt;/ul&gt;
-</pre>
+<h3>Key Highlights</h3>
+<ul>
+  <li>Agentic AI refers to AI systems that can act autonomously to achieve user-defined goals.</li>
+  <li>AWS offers a comprehensive suite of services for building, training, and deploying Agentic AI applications.</li>
+  <li>Key AWS services include Amazon Bedrock, Amazon SageMaker, AWS Lambda, and Amazon Bedrock Agents.</li>
+  <li>The page highlights use cases such as customer service automation, supply chain optimization, and personalized recommendations.</li>
+  <li>It emphasizes security, scalability, and integration capabilities of AWS for Agentic AI.</li>
+</ul>
+```
+
 
 Happy Learning!
 

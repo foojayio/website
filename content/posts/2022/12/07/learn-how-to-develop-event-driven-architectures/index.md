@@ -51,7 +51,8 @@ Now, let's take a step back and demonstrate how we can start building up an even
 
 The basic premise here is that information is exchanged (in the form of a method parameter) but, because the EDA design sends asynchronous \[fire and forget\] events, we must use a void method. For example void print(String message).
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="dracula">package net.openhft.chronicle.wire.examples;
+```java
+package net.openhft.chronicle.wire.examples;
 
 public class WireExamples3 {
 
@@ -63,17 +64,23 @@ public class WireExamples3 {
        final Printer consolePrinter = System.out::println;
        consolePrinter.print("hello world");
    }
-}</pre>
+}
+```
+
 
 When run, this code will print:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="dracula">hello world</pre>
+```
+hello world
+```
+
 
 In summary, the class above is calling the standard console implementation of the Printer interface. So, in this simple example, we could say that the Java method call is our transport.
 
 Now, what if we were to change this and make Chronicle Wire our transport?
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="dracula">package net.openhft.chronicle.wire.examples;
+```java
+package net.openhft.chronicle.wire.examples;
 
 import net.openhft.chronicle.wire.JSONWire;
 import net.openhft.chronicle.wire.Wire;
@@ -91,19 +98,28 @@ public class WireExamples4 {
 
        wire.methodReader((Printer) System.out::println).readOne();
    }
-}</pre>
+}
+```
+
 
 As expected this code prints exactly the same text:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="dracula">hello world</pre>
+```
+hello world
+```
+
 
 It takes the method call print("hello world") and serialises it to [JSON](https://en.wikipedia.org/wiki/JSON "JSON"), using the Chronicle Wire methodWriter. This JSON is then subsequently read by the methodReader, then the print method is called. We can inspect the payload of chronicle-wire, if we add the following statement:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="dracula">System.out.println(wire.bytes());</pre>
+```
+System.out.println(wire.bytes());
+```
+
 
 By changing our code to this:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="dracula">package net.openhft.chronicle.wire.examples;
+```java
+package net.openhft.chronicle.wire.examples;
 
 import net.openhft.chronicle.wire.JSONWire;
 import net.openhft.chronicle.wire.Wire;
@@ -121,15 +137,20 @@ public class WireExamples4 {
        System.out.println(wire.bytes());
        wire.methodReader((Printer) System.out::println).readOne();
    }
-}</pre>
+}
+```
+
 
 It outputs:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="dracula">"print":"hello world"
+```java
+"print":"hello world"
 
 ...
 
-hello world</pre>
+hello world
+```
+
 
 Where "print":"hello world" is the serialised form of this method call, it is this information that will be transmitted on our message bus.
 
@@ -141,7 +162,8 @@ Another feature I like is that Chronicle Queue can support multiple processes wr
 
 You can see the example below looks very similar to the previous example, but each section of code can be run in its own process.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="dracula">// first java process
+```java
+// first java process
 
 package net.openhft.chronicle.queue.example;
 
@@ -189,7 +211,9 @@ public class QueueExamples2 {
         void print(String message);
     }
 
-}</pre>
+}
+```
+
 
 The only shared configuration between the two processes is the chronicle queue directory "./myQueueDir" and the Printer interface.
 

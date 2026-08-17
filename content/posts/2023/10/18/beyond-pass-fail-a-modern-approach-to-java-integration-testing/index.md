@@ -88,32 +88,35 @@ With that out of the way, let's see what whipping up a quick integration test en
 
 <br />
 
-<pre class="EnlighterJSRAW" data-enlighter-language="xml" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&lt;dependency&gt;
-      &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
-      &lt;artifactId&gt;spring-boot-testcontainers&lt;/artifactId&gt;
-      &lt;scope&gt;test&lt;/scope&gt;
-    &lt;/dependency&gt;
-    &lt;dependency&gt;
-      &lt;groupId&gt;org.testcontainers&lt;/groupId&gt;
-      &lt;artifactId&gt;junit-jupiter&lt;/artifactId&gt;
-      &lt;scope&gt;test&lt;/scope&gt;
-    &lt;/dependency&gt;
-    &lt;dependency&gt;
-      &lt;groupId&gt;org.testcontainers&lt;/groupId&gt;
-      &lt;artifactId&gt;postgresql&lt;/artifactId&gt;
-      &lt;scope&gt;test&lt;/scope&gt;
-    &lt;/dependency&gt;
-    &lt;dependency&gt;
-      &lt;groupId&gt;io.rest-assured&lt;/groupId&gt;
-      &lt;artifactId&gt;rest-assured&lt;/artifactId&gt;
-      &lt;scope&gt;test&lt;/scope&gt;
-    &lt;/dependency&gt;
-    &lt;dependency&gt;
-      &lt;groupId&gt;com.github.javafaker&lt;/groupId&gt;
-      &lt;artifactId&gt;javafaker&lt;/artifactId&gt;
-      &lt;version&gt;1.0.2&lt;/version&gt;
-      &lt;scope&gt;test&lt;/scope&gt;
-    &lt;/dependency&gt;</pre>
+```xml
+<dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-testcontainers</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.testcontainers</groupId>
+      <artifactId>junit-jupiter</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.testcontainers</groupId>
+      <artifactId>postgresql</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>io.rest-assured</groupId>
+      <artifactId>rest-assured</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.github.javafaker</groupId>
+      <artifactId>javafaker</artifactId>
+      <version>1.0.2</version>
+      <scope>test</scope>
+    </dependency>
+```
+
 
 <br />
 
@@ -121,7 +124,8 @@ Next, we can create a simple class that tests that will use a real Postgres data
 
 <br />
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+```java
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @Testcontainers
 @ActiveProfiles(value = "postgres")
 public class OwnerControllerTests {
@@ -130,20 +134,23 @@ public class OwnerControllerTests {
 
 	@Container
 	@ServiceConnection
-	static PostgreSQLContainer&lt;?&gt; postgres = new PostgreSQLContainer&lt;&gt;("postgres:15-alpine");
+	static PostgreSQLContainer<?> postgres = new PostgreSQLContainer<>("postgres:15-alpine");
 
 	@BeforeEach
 	void setUp() {
 		//ownerRepository.deleteAll();
 
 		RestAssured.baseURI = "http://localhost:" + port;
-	}</pre>
+	}
+```
+
 
 Amazingly, the above code represents all of the required boilerplate to set up the test environment. At this point, we can assume that when our test is running the database and server are all up and accessible in our test code. It's especially impressive when I recall how years ago, I was struggling to make my Cucumber UAT tests work, investing in stabilizing and modularizing complex test setup code.
 
 With the test setup out of the way, we can start focusing on what we want to test. Since in my branch, I'm modifying the logic for adding a pet to an owner, this is the first test we'll write:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">	@Test
+```java
+	@Test
 	void shouldSaveNewOwner(){
 
 		Owner owner = CreateOwner();
@@ -165,7 +172,9 @@ With the test setup out of the way, we can start focusing on what we want to tes
 			.extracting(Pet::getName)
 			.contains(newPetName);
 
-	}</pre>
+	}
+```
+
 
 This, with a simple request and basic validation we have black-boxed some server logic, creating an integration test. But how fast does it run?
 ![](1_z0UWlO2DNYgKCO2sPZl2Lg.png)

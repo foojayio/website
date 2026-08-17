@@ -43,29 +43,36 @@ However, Java collections are inherently mutable. There was no simpler way to ma
 
 The option in our code repository appeared as follows:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">  private static final List&lt;RuleType&gt; OUR_FAVORITE_RULES;
+```java
+  private static final List<RuleType> OUR_FAVORITE_RULES;
 
   static {
-    final List&lt;RuleType&gt; favoriteRules = new ArrayList&lt;&gt;();
+    final List<RuleType> favoriteRules = new ArrayList<>();
     favoriteRules.add(RuleType.RULE_ONE);
     favoriteRules.add(RuleType.RULE_TWO);
     favoriteRules.add(RuleType.RULE_ETC);
     OUR_FAVORITE_RULES = Collections.unmodifiableList(favoriteRules);
   }
-</pre>
+```
+
 
 Interestingly, Java 9 introduced the Factory method `List.of()` that can be used to remove the entire block.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&nbsp;  private static final List&lt;RuleType&gt; OUR_FAVORITE_RULES = List.of(RuleType.RULE_ONE,
-      RuleType.RULE_TWO, RuleType.RULE_ETC);</pre>
+```java
+   private static final List<RuleType> OUR_FAVORITE_RULES = List.of(RuleType.RULE_ONE,
+      RuleType.RULE_TWO, RuleType.RULE_ETC);
+```
+
 
 There are similar methods available for set and map. Example:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">Set.of(1,2,3,4,5);
+```java
+Set.of(1,2,3,4,5);
 
 Map.of("bazlur", "Bangladesh",
-        "Geertjan", "Netherlands");   
-</pre>
+        "Geertjan", "Netherlands");
+```
+
 
 Null checking if blocks {#h2-1-null-checking-if-blocks}
 -------------------------------------------------------
@@ -74,24 +81,32 @@ In the huge projects that have accumulated code over many years, you will find m
 
 Example:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group=""> if (fileName == null) {
+```java
+ if (fileName == null) {
     builder.append("Unknown Source");
  } else {
     builder.append(fileName);
- }</pre>
+ }
+```
+
 
 There are multiple ways to turn it into oneliners.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">builder.append(fileName == null ? "Unknown Source" : fileName);
+```java
+builder.append(fileName == null ? "Unknown Source" : fileName);
 
 //Or
 
 builder.append(Objects.requireNonNullElse(fileName, "Unknown Source"));
-</pre>
+```
+
 
 Or, optionally, we can use an `Optional` idiom as well.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group=""> builder.append(Optional.ofNullable(fileName).orElse("Unknown Source"));  </pre>
+```java
+ builder.append(Optional.ofNullable(fileName).orElse("Unknown Source"));
+```
+
 
 All of them are just fine, but however, I like the new method, Objects.requireNonNullElse(), which makes it more descriptive, and thus the code becomes more readable as well as shorter.
 
@@ -102,14 +117,20 @@ In many cases, you want to repeat the same string multiple times.
 
 I found a similar example in the code base, which is as follows:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">var padRequired = 5;
-for (int i = 0; i &lt; padRequired; i++) {
-  builder.append("&amp;nbsp;");
-}  </pre>
+```java
+var padRequired = 5;
+for (int i = 0; i < padRequired; i++) {
+  builder.append("&nbsp;");
+}
+```
+
 
 The above code can be rewritten as follows:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">builder.append("&amp;nbsp;".repeat(padRequired));</pre>
+```
+builder.append("&nbsp;".repeat(padRequired));
+```
+
 
 That's all for today.
 

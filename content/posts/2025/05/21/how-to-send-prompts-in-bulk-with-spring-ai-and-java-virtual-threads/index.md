@@ -48,7 +48,10 @@ Virtual Threads for Massive Parallelism {#h2-1-virtual-threads-for-massive-paral
 
 Java Virtual Threads are perfect for this. They're lightweight, run on the JVM, and don't block OS threads. Ideal for I/O-heavy operations like talking to APIs.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">ExecutorService executorService = Executors.newVirtualThreadPerTaskExecutor()</pre>
+```
+ExecutorService executorService = Executors.newVirtualThreadPerTaskExecutor()
+```
+
 
 Each OpenAI request runs in its own thread, but without the overhead of real threads.
 
@@ -57,24 +60,33 @@ Spring AI Prompt Call {#h2-2-spring-ai-prompt-call}
 
 You create a Prompt, then send it to the model:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">ChatResponse response = chatModel.call(
+```
+ChatResponse response = chatModel.call(
   new Prompt(List.of(
     new SystemMessage(“You are a helpful assistant…”),
     new UserMessage(userInput)
   ))
-);</pre>
+);
+```
+
 
 You get back a structured response. From there, you just extract the output:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">String summary = response.getResult().getOutput().getText();</pre>
+```
+String summary = response.getResult().getOutput().getText();
+```
+
 
 Processing in Batches {#h2-3-processing-in-batches}
 ---------------------------------------------------
 
 Sending all prompts at once isn't a good idea (rate limits, reliability, memory). Instead, chunk them into smaller batches (e.g., 300 items):
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">int batchSize = 300;
-int totalBatches = (inputs.size() + batchSize — 1) / batchSize;</pre>
+```
+int batchSize = 300;
+int totalBatches = (inputs.size() + batchSize — 1) / batchSize;
+```
+
 
 For each batch:
 
@@ -87,14 +99,17 @@ Handling Errors Gracefully {#h2-4-handling-errors-gracefully}
 
 Each task is wrapped in a try/catch block. So if one OpenAI call fails, it doesn't crash the batch. You just skip that result.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">.map(input -&gt; CompletableFuture.supplyAsync(() -&gt; {
+```
+.map(input -> CompletableFuture.supplyAsync(() -> {
   try {
     ChatResponse r = chatModel.call(…);
     return r.getResult().getOutput().getText();
   } catch (Exception e) {
     return null;
   }
-}))</pre>
+}))
+```
+
 
 Process Results in Bulk {#h2-5-process-results-in-bulk}
 -------------------------------------------------------
@@ -104,19 +119,21 @@ After processing each batch:
 * Filter out the failed ones
 * Process the valid results
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">List processed = futures.stream()
+```
+List processed = futures.stream()
 .map(CompletableFuture::join)
 .filter(Objects::nonNull)
 .toList();
+```
 
-</pre>
 
 Full Implementation {#h2-6-full-implementation}
 -----------------------------------------------
 
 In this example, we get a list of text, and send them to OpenAI in batches to get a summary. We do that in parallel, which makes the process much faster. After getting the summaries, we saves the results. Everything runs in a way that handles errors and avoids overloading the system.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">@Service
+```
+@Service
 public class BulkSummarizationService {
 
     private static final Logger logger = LoggerFactory.getLogger(BulkSummarizationService.class);
@@ -139,15 +156,15 @@ public class BulkSummarizationService {
         int totalBatches = (textsToSummarize.size() + batchSize - 1) / batchSize;
 
         try (ExecutorService executor = Executors.newVirtualThreadPerTaskExecutor()) {
-            for (int i = 0; i &lt; totalBatches; i++) {
+            for (int i = 0; i < totalBatches; i++) {
                 int start = i * batchSize;
                 int end = Math.min(start + batchSize, textsToSummarize.size());
                 List batch = textsToSummarize.subList(start, end);
 
                 logger.info("Processing batch {} of {} ({} items)", i + 1, totalBatches, batch.size());
 
-                List&lt;CompletableFuture&gt; futures = batch.stream()
-                        .map(text -&gt; CompletableFuture.supplyAsync(() -&gt; {
+                List<CompletableFuture> futures = batch.stream()
+                        .map(text -> CompletableFuture.supplyAsync(() -> {
                             try {
                                 ChatResponse response = chatClient.call(
                                         new Prompt(List.of(
@@ -184,7 +201,9 @@ public class BulkSummarizationService {
 
         logger.info("Bulk summarization complete");
     }
-}</pre>
+}
+```
+
 
 And that's it! You now have a fully async, high-throughput pipeline that can send hundreds of prompts to OpenAI --- safely and efficiently --- using nothing but Spring AI, Java Virtual Threads, and good batching.
 

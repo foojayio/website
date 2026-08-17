@@ -101,13 +101,19 @@ This is where things get interesting. RISC-V support in the Java ecosystem has i
 
 Ubuntu for RISC-V includes OpenJDK in the repositories, so it can be installed with `sudo apt install`, after you have done update and upgrade:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">sudo apt update
+```
+sudo apt update
 sudo apt upgrade
-sudo apt install openjdk-25-jdk</pre>
+sudo apt install openjdk-25-jdk
+```
+
 
 This installed OpenJDK 25.0.1, built for RISC-V architecture. The installation was straightforward, taking only a few minutes including dependencies. To verify the installation:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">java -version</pre>
+```
+java -version
+```
+
 
 ### Simple Java Tests {#h3-8-simple-java-tests}
 

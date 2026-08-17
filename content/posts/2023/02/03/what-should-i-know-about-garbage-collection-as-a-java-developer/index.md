@@ -47,7 +47,7 @@ So it is clear the GC is at the center of memory management for Java application
 How Does a Garbage Collector Work? {#GarbageCollection:WhatshouldIknowasaJavadeveloper-HowDoesaGarbageCollectorwork?}
 ---------------------------------------------------------------------------------------------------------------------
 
-*** ** * ** ***
+
 
 **A managed language like Java hides the complexity for you**  
 ![](https://www.azul.com/wp-content/uploads/2022-Nov-Java-GC-JohnCuthbertson-300x300.png)  
@@ -59,7 +59,7 @@ How Does a Garbage Collector Work? {#GarbageCollection:WhatshouldIknowasaJavadev
 
 *Please read on, but keep in mind that you can focus on your business logic, and the Java runtime will take care of the memory management -- even if you are unaware of how much the GC is working for you! On the other hand, if you want to understand better how the GC can impact your program, there is a lot to learn here.*
 
-*** ** * ** ***
+
 
 ### Different Stages in Garbage Collection {#GarbageCollection:WhatshouldIknowasaJavadeveloper-DifferentStagesinGarbageCollection}
 
@@ -129,7 +129,7 @@ Types of Java Garbage Collectors {#GarbageCollection:WhatshouldIknowasaJavadevel
 Just like Java-the-language has evolved, the runtime and tools have evolved a lot, and different GCs have been part of the JRE.
 ![](https://www.azul.com/wp-content/uploads/garbage-collectors-table.png) Table overview of the different Garbage Collectors in Java
 
-*** ** * ** ***
+
 
 **Some tips for older GC generations are no longer applicable**  
 ![](https://www.azul.com/wp-content/uploads/2022-Nov-Java-GC-DeepakSreedhar-300x300.png)  
@@ -143,7 +143,7 @@ Just like Java-the-language has evolved, the runtime and tools have evolved a lo
 
 *One thing that developers still need to be careful about is avoiding leaks in the Java heap that can lead to high live sets for GC. The duration of, and CPU consumption by, most modern GCs is proportional to the size of live set. The Java ecosystem has [several tools](https://docs.azul.com/prime/Java-Flight-Recorder) that can help analyze live sets and identify problems. And Azul support is always ready to provide any help we can!*
 
-*** ** * ** ***
+
 
 Impact of the Garbage Collector on the Application {#GarbageCollection:WhatshouldIknowasaJavadeveloper-ImpactoftheGarbageCollectorontheApplication}
 ---------------------------------------------------------------------------------------------------------------------------------------------------
@@ -154,7 +154,7 @@ As should be clear by now, "The Garbage Collector" doesn't exist; but depending 
 
 Do you just go for the default option, or do you want to use another one? The specialists at Azul are always available to guide new customers when they want to evaluate Azul Zulu Prime versus OpenJDK or other distributions, and they have a lot of experience in comparing different use cases.
 
-*** ** * ** ***
+
 
 ***Certain coding practices can have an impact on how Java uses memory***  
 ![](https://www.azul.com/wp-content/uploads/2022-Nov-Java-GC-MichaelRoeschter-300x300.png)  
@@ -173,13 +173,13 @@ Do you just go for the default option, or do you want to use another one? The sp
 
 *This is not a programming issue but has a "business" reason -- for example, when a rolling transaction log, session buffer, or similar must be used. When an application is constantly modifying its "old" long-lived data at a high rate, then non-concurrent GCs sooner or later run into trouble and need a full GC.*
 
-*** ** * ** ***
+
 
 ### Impact on the Runtime Environment {#GarbageCollection:WhatshouldIknowasaJavadeveloper-ImpactontheRuntimeEnvironment}
 
 Azul also has other technologies on top of OpenJDK that improve the performance of Java applications as this is not always only related to the behavior of the application itself but can also be impacted by the environment, cluster, or resources used within the organization.
 
-*** ** * ** ***
+
 
 **Always consider the most urgent problem to solve**  
 ![](https://www.azul.com/wp-content/uploads/2022-Nov-Java-GC-DanielWitkowski-300x300.png)  
@@ -195,7 +195,7 @@ Azul also has other technologies on top of OpenJDK that improve the performance 
 
 *We have seen in different projects that the introduction of Azul Zulu Prime solved many problems that low latency specialists tried to solve in the code but are now entirely handled by the C4 Azul Zulu Prime Garbage Collector, removing all the pauses their application was experiencing.*
 
-*** ** * ** ***
+
 
 ### Select Two Out of Three {#GarbageCollection:WhatshouldIknowasaJavadeveloper-SelectTwoOutofThree}
 
@@ -234,7 +234,7 @@ VisualVM (provided in OpenJDK), Java Flight Recorder(OpenJDK and Azul), and the 
 * [Analyze live data with Java Flight Recorder](https://docs.azul.com/prime/Java-Flight-Recorder)
 * [Analyze log files (post-mortem) with GC Log Analyzer](https://docs.azul.com/prime/diagnosing-java-performance-problems-with-gc-log-analyzer)
 
-*** ** * ** ***
+
 
 **There is still much to learn**  
 ![](https://www.azul.com/wp-content/uploads/2022-Nov-Java-GC-JohnCuthbertson-300x300.png)  
@@ -244,7 +244,7 @@ VisualVM (provided in OpenJDK), Java Flight Recorder(OpenJDK and Azul), and the 
 
 *We always need to consider the "Butterfly effect." A small change on one side can have a considerable effect somewhere else. Predicting what the effect will be of a change is always hard. That's why so many people are working on the tuning of implementations in the Java Virtual Machine and documenting all the possible changes and their impact.*
 
-*** ** * ** ***
+
 
 Learn More... {#GarbageCollection:WhatshouldIknowasaJavadeveloper-LearnMore...}
 -------------------------------------------------------------------------------

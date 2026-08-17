@@ -43,14 +43,17 @@ This would allow the attacker to access sensitive system files outside the inten
 
 Take the example below from a Spring Boot application using Thymeleaf.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@PostMapping("/uploadimage")
+```java
+@PostMapping("/uploadimage")
 public String uploadImage (Model model, @RequestParam("image") MultipartFile file) throws IOException {
    var name = file.getOriginalFilename().replace(" ", "_");
    var fileNameAndPath = Paths.get(UPLOAD_DIRECTORY, name);
    Files.write(fileNameAndPath, file.getBytes());
    model.addAttribute("msg", "Uploaded images: " + name);
    return "person/upload";
-}</pre>
+}
+```
+
 
 Web forms are a very common to upload images. When uploading, we use the `originalFilename` from the incoming `MultipartFile`.
 
@@ -89,7 +92,8 @@ However, if you want to preserve the original file's name, we need to check if t
 
 Let's change our previous example to check if the **normalized** path at least starts with our intended upload folder. This way, we prevent path traversal issues.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@PostMapping("/uploadimage")
+```java
+@PostMapping("/uploadimage")
 public String uploadImage (Model model, @RequestParam("image") MultipartFile file) throws IOException {
    var name = file.getOriginalFilename().replace(" ", "_");
    var fileNameAndPath = Paths.get(UPLOAD_DIRECTORY, name);
@@ -101,7 +105,9 @@ public String uploadImage (Model model, @RequestParam("image") MultipartFile fil
    Files.write(fileNameAndPath, file.getBytes());
    model.addAttribute("msg", "Uploaded images: " + name);
    return "person/upload";
-}</pre>
+}
+```
+
 
 Preventing path traversal vulnerabilities is essential. {#h2-3-preventing-path-traversal-vulnerabilities-is-essential}
 ----------------------------------------------------------------------------------------------------------------------

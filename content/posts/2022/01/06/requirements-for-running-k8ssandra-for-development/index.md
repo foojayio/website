@@ -60,7 +60,8 @@ The K8ssandra Helm charts allow us to set heap sizes for both the Cassandra and 
 
 For Cassandra, the heap and new gen sizes can be set at the cluster level, or at the datacenter level (K8ssandra will support multi DC deployments in a future release):
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">cassandra:
+```
+cassandra:
   version: "3.11.10"
   ... 
   ...
@@ -77,11 +78,16 @@ For Cassandra, the heap and new gen sizes can be set at the cluster level, or at
     # Datacenter level heap settings
     heap: {}
       #size:
-      #newGenSize:</pre>
+      #newGenSize:
+```
+
 
 By default, these values aren't set, which lets Cassandra perform its own computations based on the available RAM, applying the following formula:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">max(min(1/2 ram, 1024MB), min(1/4 ram, 8GB))</pre>
+```
+max(min(1/2 ram, 1024MB), min(1/4 ram, 8GB))
+```
+
 
 The catch when you run several Cassandra nodes on the same machine is that they will all see the same total available RAM but won't be aware that other Cassandra nodes could be running as well. When allocating 8GB RAM to Docker, each Cassandra node will compute a 2GB heap. With a 3 nodes cluster, it's already 6GB of RAM used, not accounting for the additional off heap memory that can be used by each JVM. That doesn't leave much RAM for the other components K8ssandra includes, such as Grafana, Prometheus and Stargate.
 
@@ -91,7 +97,8 @@ The chosen heap size will directly impact the throughput you can expect to achie
 
 Setting the heap size at 500MB with 200MB of new gen globally for the cluster would be done as follows:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">cassandra:
+```
+cassandra:
   version: "3.11.10"
   ... 
   ...
@@ -102,19 +109,24 @@ Setting the heap size at 500MB with 200MB of new gen globally for the cluster wo
 
   datacenters:
   - name: dc1
-    size: 3</pre>
+    size: 3
+```
+
 
 ### Stargate {#stargate}
 
 Because Stargate nodes are special coordinator-only Cassandra nodes and run in the JVM, it is also necessary to set their max heap size:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">stargate:
+```
+stargate:
   enabled: true
   version: "1.0.9"
   replicas: 1
   ...
   ...
-  heapMB: 256</pre>
+  heapMB: 256
+```
+
 
 Stargate nodes will follow the same rule when it comes to off heap memory: the JVM will be allowed to use as much RAM for off heap memory as the configured heap size.
 
@@ -144,7 +156,8 @@ We used [NoSQLBench](https://github.com/nosqlbench/nosqlbench) to perform modera
 
 Here's the Helm values file we used as a base for spinning up our cluster, which we'll name `three_nodes_cluster_with_stargate.yaml`:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">cassandra:
+```
+cassandra:
   datacenters:
   - name: dc1
     size: 3
@@ -169,27 +182,35 @@ medusa:
       region: us-east-1
 
   bucketName: k8ssandra-medusa
-  storageSecret: medusa-bucket-key</pre>
+  storageSecret: medusa-bucket-key
+```
+
 
 We want Stargate to be our Cassandra gateway and enabling Medusa requires us to set up a secret (remember, we want to run the whole stack).
 
 You'll have to adjust the Medusa storage settings to match your requirements (bucket and region) or disable it if you don't have access to an AWS bucket at all by disabling Medusa:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">medusa:
-  enabled: false</pre>
+```
+medusa:
+  enabled: false
+```
+
 
 Adjust the Medusa storage settings to match your requirements (bucket and region). You will need to disable Medusa if AWS usages when an S3 bucket is not available. In addition to AWS, future versions of Medusa will provide support for S3/MinIO and local storage configurations.
 
 We can create a secret for Medusa by applying the following yaml:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">apiVersion: v1
+```
+apiVersion: v1
 kind: Secret
 metadata:
  name: medusa-bucket-key
 type: Opaque
 stringData:
  # Note that this currently has to be set to medusa_s3_credentials!
- medusa_s3_credentials: |-</pre>
+ medusa_s3_credentials: |-
+```
+
 
 \[default\]
 
@@ -209,51 +230,75 @@ You'll have to wait for the `cassandradatacenter` resource and then the Stargate
 
 You can wait for the `cassandradatacenter` to be ready with the following `kubectl` command:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">kubectl wait --for=condition=Ready cassandradatacenter/dc1 --timeout=900s -n k8ssandra</pre>
+```
+kubectl wait --for=condition=Ready cassandradatacenter/dc1 --timeout=900s -n k8ssandra
+```
+
 
 Then wait for Stargate to be ready:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">kubectl rollout status deployment k8ssandra-dc1-stargate -n k8ssandra</pre>
+```
+kubectl rollout status deployment k8ssandra-dc1-stargate -n k8ssandra
+```
+
 
 Once Stargate is ready, the above command should output something like this:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">deployment "k8ssandra-dc1-stargate" successfully rolled out.</pre>
+```
+deployment "k8ssandra-dc1-stargate" successfully rolled out.
+```
+
 
 You can execute a NoSQLBench stress run by creating a k8s [job](https://kubernetes.io/docs/concepts/workloads/controllers/job/). You'll need the superuser credentials so that NoSQLBench can connect to the Cassandra cluster. You can get those credentials with the following commands ( requires [`jq`](https://stedolan.github.io/jq/) to be installed):
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">SECRET=$(kubectl get secret "k8ssandra-superuser" -n k8ssandra -o=jsonpath='{.data}')
-echo "Username: $(jq -r '.username' &lt;&lt;&lt; "$SECRET" | base64 -d)"
-echo "Password: $(jq -r '.password' &lt;&lt;&lt; "$SECRET" | base64 -d)"</pre>
+```
+SECRET=$(kubectl get secret "k8ssandra-superuser" -n k8ssandra -o=jsonpath='{.data}')
+echo "Username: $(jq -r '.username' <<< "$SECRET" | base64 -d)"
+echo "Password: $(jq -r '.password' <<< "$SECRET" | base64 -d)"
+```
+
 
 Then create the NoSQLBench job which will start automatically:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">kubectl create job --image=nosqlbench/nosqlbench nosqlbench -n k8ssandra \
+```
+kubectl create job --image=nosqlbench/nosqlbench nosqlbench -n k8ssandra \
     -- java -jar nb.jar cql-iot rampup-cycles=1k cyclerate=100 \
-    username=&lt;superuser username&gt; password=&lt;superuser pass&gt;    \
+    username=<superuser username> password=<superuser pass>    \
     main-cycles=10k write_ratio=7 read_ratio=3 async=100       \
-    hosts=k8ssandra-dc1-stargate-service --progress console:1s -v</pre>
+    hosts=k8ssandra-dc1-stargate-service --progress console:1s -v
+```
+
 
 This will run a 10k cycle stress run with 100 ops/s with 70% writes and 30% reads, allowing 100 in-flight async queries. Note that we're providing the Stargate service as the contact host for NoSQLBench (the exact name will differ depending on your Helm release name).
 
 While the job is running, you can tail its logs using the following command:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">kubectl logs job/nosqlbench -n k8ssandra --follow</pre>
+```
+kubectl logs job/nosqlbench -n k8ssandra --follow
+```
+
 
 Latency metrics can be found at the end of the run, and since we're running at a fixed rate we'll be interested in the response time which takes coordinated omission ([video](https://www.youtube.com/watch?v=lJ8ydIuPFeU&ab_channel=StrangeLoopConference), [paper](http://btw2017.informatik.uni-stuttgart.de/slidesandpapers/E4-11-107/paper_web.pdf)) into account:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">kubectl logs job/nosqlbench -n k8ssandra 
-  |grep cqliot_default_main.cycles.responsetime</pre>
+```
+kubectl logs job/nosqlbench -n k8ssandra 
+  |grep cqliot_default_main.cycles.responsetime
+```
+
 
 Which should output something like this:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">12:41:18.924 [cqliot_default_main:008] INFO  i.n.e.c.m.PolyglotMetricRegistryBindings - 
+```
+12:41:18.924 [cqliot_default_main:008] INFO  i.n.e.c.m.PolyglotMetricRegistryBindings - 
   timer added: cqliot_default_main.cycles.responsetime
 12:42:58.788 [main] INFO  i.n.engine.core.ScenarioResult - type=TIMER, 
   name=cqliot_default_main.cycles.responsetime, count=10000, min=1560.064, max=424771.583, 
   mean=21894.6342016, stddev=45876.836258003656, median=5842.175, p75=17157.119, 
   p95=100499.455, p98=187908.095, p99=263397.375, p999=384827.391, mean_rate=100.03389528501059, 
   m1=101.58021531751795, m5=105.18698132587139, m15=106.3340149754869, rate_unit=events/second, 
-  duration_unit=microseconds</pre>
+  duration_unit=microseconds
+```
+
 
 As Cassandra operators, we usually focus on p99 latencies: `p99=263397.375`. That's 263ms at p99, which is fine considering our environment (a laptop) and our performance requirements (very low).
 

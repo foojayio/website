@@ -71,39 +71,45 @@ The only requirement needed to run Testcontainers is for your environment to hav
 
 To start using Testcontainers in a Maven project, you'll have to add the Testcontainers Maven dependencies needed for JUnit 5:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="xml" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&lt;dependency&gt;
-&nbsp; &lt;groupId&gt;org.junit.jupiter&lt;/groupId&gt;
-&nbsp; &lt;artifactId&gt;junit-jupiter&lt;/artifactId&gt;
-&nbsp; &lt;version&gt;5.8.1&lt;/version&gt;
-&nbsp; &lt;scope&gt;test&lt;/scope&gt;
-&lt;/dependency&gt;
-&lt;dependency&gt;
-&nbsp; &lt;groupId&gt;org.testcontainers&lt;/groupId&gt;
-&nbsp; &lt;artifactId&gt;testcontainers&lt;/artifactId&gt;
-&nbsp; &lt;version&gt;1.16.3&lt;/version&gt;
-&nbsp; &lt;scope&gt;test&lt;/scope&gt;
-&lt;/dependency&gt;
-&lt;dependency&gt;
-&nbsp; &lt;groupId&gt;org.testcontainers&lt;/groupId&gt;
-&nbsp; &lt;artifactId&gt;junit-jupiter&lt;/artifactId&gt;
-&nbsp; &lt;version&gt;1.16.3&lt;/version&gt;
-&nbsp; &lt;scope&gt;test&lt;/scope&gt;
-&lt;/dependency&gt;</pre>
+```xml
+<dependency>
+  <groupId>org.junit.jupiter</groupId>
+  <artifactId>junit-jupiter</artifactId>
+  <version>5.8.1</version>
+  <scope>test</scope>
+</dependency>
+<dependency>
+  <groupId>org.testcontainers</groupId>
+  <artifactId>testcontainers</artifactId>
+  <version>1.16.3</version>
+  <scope>test</scope>
+</dependency>
+<dependency>
+  <groupId>org.testcontainers</groupId>
+  <artifactId>junit-jupiter</artifactId>
+  <version>1.16.3</version>
+  <scope>test</scope>
+</dependency>
+```
+
 
 Now, let's define a very basic Junit 5 test class like follows:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@Testcontainers
+```java
+@Testcontainers
 public class BasicApplicationIT{
 
-&nbsp; @Container
-&nbsp; GenericContainer microContainer = new GenericContainer("payara/micro-jdk11:5.2022.1")
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; .withExposedPorts(8080);
+  @Container
+  GenericContainer microContainer = new GenericContainer("payara/micro-jdk11:5.2022.1")
+                    .withExposedPorts(8080);
 
-&nbsp; @Test
-&nbsp; public void checkContainerIsRunning(){
-&nbsp; &nbsp; &nbsp; assert(isTrue(microContainer.isRunning()));
-&nbsp; }
-}</pre>
+  @Test
+  public void checkContainerIsRunning(){
+      assert(isTrue(microContainer.isRunning()));
+  }
+}
+```
+
 
 Let's do a short breakdown of how this test class is structured:
 
@@ -115,9 +121,10 @@ Let's do a short breakdown of how this test class is structured:
 
 To verify that this test works as intended, here's the output of a sample run using a local Docker for Desktop installation:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">[main] INFO org.testcontainers.dockerclient.DockerClientProviderStrategy - Loaded org.testcontainers.dockerclient.NpipeSocketClientProviderStrategy from ~/.testcontainers.properties, will try it first
+```
+[main] INFO org.testcontainers.dockerclient.DockerClientProviderStrategy - Loaded org.testcontainers.dockerclient.NpipeSocketClientProviderStrategy from ~/.testcontainers.properties, will try it first
 
-[ducttape-0] INFO com.github.dockerjava.zerodep.shaded.org.apache.hc.client5.http.impl.classic.HttpRequestRetryExec - Recoverable I/O exception (java.net.SocketException) caught when processing request to {}-&gt;http://127.0.0.1:58047
+[ducttape-0] INFO com.github.dockerjava.zerodep.shaded.org.apache.hc.client5.http.impl.classic.HttpRequestRetryExec - Recoverable I/O exception (java.net.SocketException) caught when processing request to {}->http://127.0.0.1:58047
 
 [main] INFO org.testcontainers.dockerclient.DockerClientProviderStrategy - Found Docker environment with local Npipe socket (npipe:////./pipe/docker_engine)
 
@@ -149,7 +156,9 @@ Total Memory: 12642 MB
 
 [main] INFO 🐳 [payara/micro:5.2021.10-jdk11] - Container payara/micro:5.2021.10-jdk11 is starting: b1774549b287a5ee382b824f6b34664b096660a3c7d1ba5e3f37e9e621b1cf72
 
-[main] INFO 🐳 [payara/micro:5.2021.10-jdk11] - Container payara/micro:5.2021.10-jdk11 started in PT21.6437706S</pre>
+[main] INFO 🐳 [payara/micro:5.2021.10-jdk11] - Container payara/micro:5.2021.10-jdk11 started in PT21.6437706S
+```
+
 
 The Testcontainers engine will inform of the following details and/or events:
 
@@ -177,56 +186,60 @@ Let's begin by expanding our previous example by deploying a simple Jakarta EE a
 
 To build our sample application, we'll use Maven 3.x. Here's a quick outlook of how the project's POM file will look like using Jakarta EE along with the corresponding JUnit and Testcontainers dependencies:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="xml" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
-&lt;project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"&gt;
-    &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
 
-    &lt;artifactId&gt;conference-demo&lt;/artifactId&gt;
-    &lt;version&gt;1.0.0-SNAPSHOT&lt;/version&gt;
-    &lt;name&gt;Conference Demo [Speaker]&lt;/name&gt;
-    &lt;packaging&gt;war&lt;/packaging&gt;
+    <artifactId>conference-demo</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+    <name>Conference Demo [Speaker]</name>
+    <packaging>war</packaging>
 
-    &lt;build&gt;
-        &lt;finalName&gt;microservice-speaker&lt;/finalName&gt;
-        &lt;plugins&gt;
-            &lt;plugin&gt;
-                &lt;artifactId&gt;maven-war-plugin&lt;/artifactId&gt;
-                &lt;version&gt;3.3.1&lt;/version&gt;
-            &lt;/plugin&gt;
-        &lt;/plugins&gt;
-    &lt;/build&gt;
+    <build>
+        <finalName>microservice-speaker</finalName>
+        <plugins>
+            <plugin>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>3.3.1</version>
+            </plugin>
+        </plugins>
+    </build>
 
-    &lt;dependencies&gt;
-        &lt;dependency&gt;
-            &lt;groupId&gt;jakarta.platform&lt;/groupId&gt;
-            &lt;artifactId&gt;jakarta.jakartaee-web-api&lt;/artifactId&gt;
-            &lt;version&gt;9.1.0&lt;/version&gt;
-            &lt;scope&gt;provided&lt;/scope&gt;
-        &lt;/dependency&gt;
-        &lt;dependency&gt;
-            &lt;groupId&gt;org.junit.jupiter&lt;/groupId&gt;
-            &lt;artifactId&gt;junit-jupiter&lt;/artifactId&gt;
-            &lt;version&gt;5.8.1&lt;/version&gt;
-            &lt;scope&gt;test&lt;/scope&gt;
-         &lt;/dependency&gt;
-         &lt;dependency&gt;
-            &lt;groupId&gt;org.testcontainers&lt;/groupId&gt;
-            &lt;artifactId&gt;testcontainers&lt;/artifactId&gt;
-            &lt;version&gt;1.16.3&lt;/version&gt;
-            &lt;scope&gt;test&lt;/scope&gt;
-         &lt;/dependency&gt;
-         &lt;dependency&gt;
-            &lt;groupId&gt;org.testcontainers&lt;/groupId&gt;
-            &lt;artifactId&gt;junit-jupiter&lt;/artifactId&gt;
-            &lt;version&gt;1.16.3&lt;/version&gt;
-            &lt;scope&gt;test&lt;/scope&gt;
-         &lt;/dependency&gt;
-    &lt;/dependencies&gt;
-&lt;/project&gt;</pre>
+    <dependencies>
+        <dependency>
+            <groupId>jakarta.platform</groupId>
+            <artifactId>jakarta.jakartaee-web-api</artifactId>
+            <version>9.1.0</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <version>5.8.1</version>
+            <scope>test</scope>
+         </dependency>
+         <dependency>
+            <groupId>org.testcontainers</groupId>
+            <artifactId>testcontainers</artifactId>
+            <version>1.16.3</version>
+            <scope>test</scope>
+         </dependency>
+         <dependency>
+            <groupId>org.testcontainers</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <version>1.16.3</version>
+            <scope>test</scope>
+         </dependency>
+    </dependencies>
+</project>
+```
+
 
 The core of our sample will be the `SpeakerJPA` entity that is used to model the data stored by the application (equals and hashcode methods omitted for brevity's sake):
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@Entity
+```java
+@Entity
 @NamedQuery(name = "Speaker.all", query = "select sp from Speaker sp order by sp.name")
 public class Speaker implements Serializable{
 
@@ -259,25 +272,31 @@ public class Speaker implements Serializable{
     public String getOrganization() {
         return organization;
     }
-}</pre>
+}
+```
+
 
 As we are using JPA, we must define a persistence unit in its corresponding deployment descriptor:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="xml" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
-&lt;persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd"&gt;
-  &lt;persistence-unit name="Speaker" transaction-type="JTA"&gt;
-    &lt;jta-data-source&gt;DefaultDataSource&lt;/jta-data-source&gt;
-    &lt;properties&gt;
-      &lt;property name="javax.persistence.schema-generation.database.action" value="create"/&gt;
-    &lt;/properties&gt;
-  &lt;/persistence-unit&gt;
-&lt;/persistence&gt;</pre>
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+  <persistence-unit name="Speaker" transaction-type="JTA">
+    <jta-data-source>DefaultDataSource</jta-data-source>
+    <properties>
+      <property name="javax.persistence.schema-generation.database.action" value="create"/>
+    </properties>
+  </persistence-unit>
+</persistence>
+```
+
 
 You can observe that the data source used for this persistence unit is the `java:comp/DefaultDataSource`, which by definition of the JPA specification must be provided by the Jakarta EE runtime as a default data store for development purposes. In addition to this, we instruct the JPA engine to create the database tables when the application is deployed.
 
 With this in mind, let's define a service boundary, i.e., a JAX-RS endpoint that allows clients to interact with this entity:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@Path("/speaker")
+```java
+@Path("/speaker")
 @ApplicationScoped
 @Produces(MediaType.APPLICATION_JSON)
 public class SpeakerResource {
@@ -304,10 +323,12 @@ public class SpeakerResource {
     }
 
     @GET
-    public List&lt;Speaker&gt; getSpeakers(){
+    public List<Speaker> getSpeakers(){
        return speakerService.getAll();
     }
-}</pre>
+}
+```
+
 
 The boundary is extremely simple. It defines the following method endpoints:
 
@@ -317,9 +338,12 @@ The boundary is extremely simple. It defines the following method endpoints:
 
 Lastly, let's not forget the corresponding JAX-RS configuration class:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@ApplicationPath("/")
+```java
+@ApplicationPath("/")
 public class SpeakerApplication extends Application{
-}</pre>
+}
+```
+
 
 And with this, our application is ready to be tested!
 
@@ -329,7 +353,8 @@ Now that our application is ready, let's test it out by deploying it on Payara M
 
 Here's how the container needs to be configured to fulfil the conditions described above:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@Testcontainers
+```java
+@Testcontainers
 public class SpeakerIT{
 
   MountableFile warFile = MountableFile.forHostPath(Paths.get("target/my-application.war").toAbsolutePath(), 0777);
@@ -341,7 +366,9 @@ public class SpeakerIT{
 
   .withCopyFileToContainer(warFile, "/opt/payara/deployments/app.war")
   .withCommand("--deploy /opt/payara/deployments/app.war --contextRoot /");
-}</pre>
+}
+```
+
 
 Let's breakdown what's new:
 
@@ -367,12 +394,15 @@ To this effect, Testcontainers offers additional waiting strategies that can be 
 
 For the purposes of our simple test, let's use the log wait strategy and wait until the `".* Payara Micro .* ready in .*\\s"` log entry is in the container's output. This message will always be generated by Payara Micro after all applications are deployed and the instance has started successfully and is ready for user requests:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@Container
+```java
+@Container
 GenericContainer microContainer = new GenericContainer("payara/micro-jdk11")
                                       .withExposedPorts(8080)
                                       .withCopyFileToContainer(warFile, "/opt/payara/deployments/app.war")
                                       .waitingFor(Wait.forLogMessage(".* Payara Micro .* ready in .*\\s", 1))
-                                      .withCommand("--deploy /opt/payara/deployments/app.war --contextRoot /");</pre>
+                                      .withCommand("--deploy /opt/payara/deployments/app.war --contextRoot /");
+```
+
 
 **PRO-TIP:** The Wait class has additional convenient methods that can be used to get a valid Wait Strategy.
 
@@ -382,16 +412,20 @@ Now that our application has been deployed and is ready to be fully tested, our 
 
 Let's add their dependency to the project's POM:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="xml" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&lt;dependency&gt;
-    &lt;groupId&gt;io.rest-assured&lt;/groupId&gt;
-    &lt;artifactId&gt;rest-assured&lt;/artifactId&gt;
-    &lt;version&gt;4.3.1&lt;/version&gt;
-    &lt;scope&gt;test&lt;/scope&gt;
-&lt;/dependency&gt;</pre>
+```xml
+<dependency>
+    <groupId>io.rest-assured</groupId>
+    <artifactId>rest-assured</artifactId>
+    <version>4.3.1</version>
+    <scope>test</scope>
+</dependency>
+```
+
 
 Our first test would be to add a new speaker and check that the endpoint's response corresponds to a `201 - OK` HTTP code:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@Test
+```java
+@Test
 @Order(1)
 public void addSpeaker() {
     given().
@@ -404,7 +438,9 @@ public void addSpeaker() {
             post("?")).
             then().
             assertThat().statusCode(201);
-}</pre>
+}
+```
+
 
 You will notice that the test is marked as ***ordered*** and will execute first. The reason for this will be cleared up later, but it is important to understand that in most cases, integration tests will benefit from being run in order, *especially when data manipulation is involved.*
 
@@ -415,15 +451,21 @@ Reaching the Container {#h2-4-reaching-the-container}
 
 Remember that the Payara Micro instance is running inside a container, so it cannot be directly contacted using port **8080**, as this port will get mapped automatically to an available port in the host system by Testcontainers. To retrieve this port, we'll use the getMappedPort method:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">when().
+```java
+when().
 post(String.format("http://localhost:%d/speaker", microContainer.getMappedPort(8080))).
-then().</pre>
+then().
+```
+
 
 There's another detail to keep in mind though: On some environment arrangements, the Docker daemon may be located on a completely different host from the test process themself, so it is recommended to use the getHost method instead:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">when().
+```java
+when().
 post(String.format("http://%s:%d/speaker", microContainer.getHost(), microContainer.getMappedPort(8080))).
-then().</pre>
+then().
+```
+
 
 And with this, our test is complete! Running the test now should start the container, call the speaker registration endpoint and create a new speaker, yielding a positive test result!
 
@@ -431,7 +473,8 @@ Let's Keep Testing!
 
 Let's add another test to verify that our speaker has been added successfully by calling the endpoint that retrieves all speakers from the database and verifying that exactly ONE speaker has been created:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@Test
+```java
+@Test
 @Order(2)
 public void getSpeakers(){
     given()
@@ -442,35 +485,46 @@ public void getSpeakers(){
             .assertThat().statusCode(200)
                          .and()
                          .body("$", hasSize(1));
-}</pre>
+}
+```
+
 
 But unfortunately, this test will fail and it will yield this error:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">java.lang.AssertionError: 
+```
+java.lang.AssertionError: 
 1 expectation failed.
 JSON path $ doesn't match.
-Expected: a collection with size &lt;1&gt;
-  Actual: []</pre>
+Expected: a collection with size <1>
+  Actual: []
+```
+
 
 What is happening in this instance? Why is the speaker set empty even after one was created on the first test? In addition to this, you may notice that the Testcontainers engine will report 2 containers being started:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">[main] INFO docker[payara/micro:5.2021.10-jdk11] - Creating container for image: payara/micro:5.2021.10-jdk11
+```
+[main] INFO docker[payara/micro:5.2021.10-jdk11] - Creating container for image: payara/micro:5.2021.10-jdk11
 [main] INFO docker[payara/micro:5.2021.10-jdk11] - Starting container with ID: 0dc864894fde84b18ea46772ba9d2fd6f8d2bcbbfcd65be06608a02d05a79650
 [main] INFO docker[payara/micro:5.2021.10-jdk11] - Container payara/micro:5.2021.10-jdk11 is starting: 0dc864894fde84b18ea46772ba9d2fd6f8d2bcbbfcd65be06608a02d05a79650
 
 [main] INFO docker[payara/micro:5.2021.10-jdk11] - Container payara/micro:5.2021.10-jdk11 started in PT23.2078859S
 [main] INFO docker[payara/micro:5.2021.10-jdk11] - Creating container for image: payara/micro:5.2021.10-jdk11
 [main] INFO docker[payara/micro:5.2021.10-jdk11] - Starting container with ID: 24034b1101c3a1a10369f60b88796bae0bb80bd5598f3b780b86902434b19f0f
-[main] INFO docker[payara/micro:5.2021.10-jdk11] - Container payara/micro:5.2021.10-jdk11 is starting: 24034b1101c3a1a10369f60b88796bae0bb80bd5598f3b780b86902434b19f0f</pre>
+[main] INFO docker[payara/micro:5.2021.10-jdk11] - Container payara/micro:5.2021.10-jdk11 is starting: 24034b1101c3a1a10369f60b88796bae0bb80bd5598f3b780b86902434b19f0f
+```
+
 
 This is by design: A new container will be started and stopped for each**individual test** defined in the class if the Testcontainer definition is done *on an instance field*! If you need the container to be started once and then be used and re-used for all tests within the class, its definition must be done on a class member instead:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@Container
+```java
+@Container
 static GenericContainer microContainer = new GenericContainer("payara/micro-jdk11")
                                                 .withExposedPorts(8080)
                                                 .withCopyFileToContainer(warFile, "/opt/payara/deployments/app.war")
                                                 .waitingFor(Wait.forLogMessage(".* Payara Micro .* ready in .*\\s", 1))
-                                                .withCommand("--deploy /opt/payara/deployments/app.war --contextRoot /");</pre>
+                                                .withCommand("--deploy /opt/payara/deployments/app.war --contextRoot /");
+```
+
 
 Running the tests again will generate a successful result, since the first test will create a new speaker, and the second one will verify that the speaker has been successfully stored in the database as intended.
 
@@ -485,7 +539,8 @@ The real-world equivalent of this scenario would be to use a production-grade RD
 
 To prepare our application, let's define a new data source in the application's JAX-RS configuration class:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@ApplicationPath("/")
+```java
+@ApplicationPath("/")
 @ApplicationScoped
 @DataSourceDefinition(
         name = "java:global/speakerDS",
@@ -500,34 +555,45 @@ To prepare our application, let's define a new data source in the application's 
         }
 )
 public class SpeakerApplication extends Application{
-}</pre>
+}
+```
+
 
 The corresponding data source will use a **MySQL 8** compatible database driver, so our application's POM file should add it as a compile-scoped dependency too:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="xml" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&lt;dependency&gt;
-    &lt;groupId&gt;mysql&lt;/groupId&gt;
-    &lt;artifactId&gt;mysql-connector-java&lt;/artifactId&gt;
-    &lt;version&gt;8.0.21&lt;/version&gt;
-&lt;/dependency&gt;</pre>
+```xml
+<dependency>
+    <groupId>mysql</groupId>
+    <artifactId>mysql-connector-java</artifactId>
+    <version>8.0.21</version>
+</dependency>
+```
+
 
 You may notice that the database user credentials and the JDBC URL are configured using environment variable placeholders (this is a specific feature of the Payara Platform). This allows the transition of the application between environments but also simplifies how the setup of this data source is done on our test suite.
 
 Our `persistence.xml` deployment descriptor will use this new data source in place of the default one:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="xml" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
-&lt;persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd"&gt;
- &lt;persistence-unit name="Speaker" transaction-type="JTA"&gt;
-   &lt;jta-data-source&gt;java:global/speakerDS&lt;/jta-data-source&gt;
-   &lt;properties&gt;
-     &lt;property name="javax.persistence.schema-generation.database.action" value="create"/&gt;
-   &lt;/properties&gt;
- &lt;/persistence-unit&gt;
-&lt;/persistence&gt;</pre>
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+ <persistence-unit name="Speaker" transaction-type="JTA">
+   <jta-data-source>java:global/speakerDS</jta-data-source>
+   <properties>
+     <property name="javax.persistence.schema-generation.database.action" value="create"/>
+   </properties>
+ </persistence-unit>
+</persistence>
+```
+
 
 Now that our application is ready, we'll need to create a Testcontainer that will host the MySQL database used to test the application. To this effect, we'll use the `MySQLContainer` class like this:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@Container
-private static MySQLContainer dbContainer = new MySQLContainer&lt;&gt;(DockerImageName.parse("mysql:8.0"));</pre>
+```java
+@Container
+private static MySQLContainer dbContainer = new MySQLContainer<>(DockerImageName.parse("mysql:8.0"));
+```
+
 
 The container can be created by specifying a valid DockerImageName, which in this example corresponds to the **MySQL 8.0** version tag. Since this is not much different from the usual container instantiation, what is the point of using this class? Simple, this class provides the following utility methods that we can use to simplify the usual connection management:
 
@@ -544,12 +610,13 @@ With this in mind, we need to connect the database container with our Payara Mic
 
 And here's the complete code snippet that demonstrates how to do all the above using the matching Testcontainer mechanisms:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">#Here's the network where both containers will join
+```java
+#Here's the network where both containers will join
 static final Network NET = Network.newNetwork();
 
 #The database container will join the network under the 'mysql' alias
 @Container
-static MySQLContainer dbContainer = new MySQLContainer&lt;&gt;(DockerImageName.parse("mysql:8.0"))
+static MySQLContainer dbContainer = new MySQLContainer<>(DockerImageName.parse("mysql:8.0"))
                                             .withNetwork(NET)
                                             .withNetworkAliases("mysql");
 
@@ -564,14 +631,19 @@ static GenericContainer microContainer = new GenericContainer(DockerImageName.pa
                                               .withEnv("DB_JDBC_URL", String.format("jdbc:mysql://mysql:3306/%s", dbContainer.getDatabaseName()))
                                               .withEnv("DB_USER", dbContainer.getUsername())
                                               .withEnv("DB_PASSWORD",  dbContainer.getPassword())
-                                              .withCommand("--deploy /opt/payara/deployments/app.war --contextRoot /");</pre>
+                                              .withCommand("--deploy /opt/payara/deployments/app.war --contextRoot /");
+```
+
 
 Let's re-run our tests and observe that the Testcontainers engine will also report details on the lifecycle of the newly declared MySQL Testcontainer:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">[testcontainers-lifecycle-0] INFO docker[mysql:8.0] - Starting container with ID: 494df375925a521c846ad557eee11dc7b1cd1aa29332a27fb485fd9a83a954a7
+```
+[testcontainers-lifecycle-0] INFO docker[mysql:8.0] - Starting container with ID: 494df375925a521c846ad557eee11dc7b1cd1aa29332a27fb485fd9a83a954a7
 [testcontainers-lifecycle-0] INFO docker[mysql:8.0] - Container mysql:8.0 is starting: 494df375925a521c846ad557eee11dc7b1cd1aa29332a27fb485fd9a83a954a7
 [testcontainers-lifecycle-0] INFO docker[mysql:8.0] - Container is started (JDBC URL: jdbc:mysql://127.0.0.1:51913/test)
-[testcontainers-lifecycle-0] INFO docker[mysql:8.0] - Container mysql:8.0 started in PT32.2550699S</pre>
+[testcontainers-lifecycle-0] INFO docker[mysql:8.0] - Container mysql:8.0 started in PT32.2550699S
+```
+
 
 And both tests should be executed without issues. With this, we have demonstrated that our integration tests are closely mirroring what a potential production environment would look like!
 
@@ -600,11 +672,14 @@ Here's how the Testcontainers Cloud client looks in a Windows environment:
 
 Now, when running the same test suite that we created in the previous sections, we'll see that when the Testcontainers engine connects to the Docker environment it will use a "leased" environment courtesy of your cloud account:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">[testcontainers-lifecycle-0] INFO org.testcontainers.DockerClientFactory - Connected to docker: 
+```
+[testcontainers-lifecycle-0] INFO org.testcontainers.DockerClientFactory - Connected to docker: 
 Server Version: 66+testcontainerscloud
 API Version: 1.41
 Operating System: Ubuntu 20.04.3 LTS
-Total Memory: 11.145 MB</pre>
+Total Memory: 11.145 MB
+```
+
 
 You might be surprised by the benefits of using this solution. It allows for truly portable tests that can run anywhere with zero impact on the development environment and the ability to test the full extent of any Jakarta EE application and ecosystem in detail!
 

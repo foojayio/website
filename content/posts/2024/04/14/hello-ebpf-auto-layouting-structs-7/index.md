@@ -23,7 +23,8 @@ frozen: false
 
 Alignment is essential; it specifies how the compiler layouts the structs and variables and where to put the data in memory. Take, for example, the struct that we defined in the previous article in the [RingSample](https://github.com/parttimenerd/hello-ebpf/blob/main/bpf/src/main/java/me/bechberger/ebpf/samples/RingSample.java):
 
-<pre class="EnlighterJSRAW" data-enlighter-language="cpp" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">#define FILE_NAME_LEN 256
+```cpp
+#define FILE_NAME_LEN 256
 #define TASK_COMM_LEN  16
 
 // Structure to store the data that we want to pass to user
@@ -31,14 +32,17 @@ struct event {
   u32 e_pid;
   char e_filename[FILE_NAME_LEN];
   char e_comm[TASK_COMM_LEN];
-};</pre>
+};
+```
+
 
 Struct Example {#h2-0-struct-example}
 -------------------------------------
 
 Using [Pahole](https://manpages.debian.org/bullseye/dwarves/pahole.1.en.html) in the [Compiler Explorer](https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:17,endLineNumber:11,positionColumn:17,positionLineNumber:11,selectionStartColumn:17,selectionStartLineNumber:11,startColumn:17,startLineNumber:11),source:'%23define+FILE_NAME_LEN+256%0A%23define+TASK_COMM_LEN++16%0A++++++++++++++++%0Astruct+event+%7B%0A++unsigned+int+e_pid%3B%0A++char+e_filename%5BFILE_NAME_LEN%5D%3B%0A++char+e_comm%5BTASK_COMM_LEN%5D%3B%0A%7D%3B%0A%0Aint+main()+%7B%0A++++struct+event+e%3B%0A%7D'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:32.78470670708028,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:compiler,i:(compiler:clang1810,filters:(b:'0',binary:'1',binaryObject:'0',commentOnly:'0',debugCalls:'1',demangle:'0',directives:'0',execute:'1',intel:'0',libraryCode:'0',trim:'1'),flagsViewOpen:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-O0',overrides:!(),selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:1),l:'5',n:'0',o:'+x86-64+clang+18.1.0+(Editor+%231)',t:'0')),k:27.81995935102858,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:tool,i:(args:'',argsPanelShown:'1',compilerName:'x86-64+clang+18.1.0',editorid:1,fontScale:14,fontUsePx:'0',j:1,monacoEditorHasBeenAutoOpened:'1',monacoEditorOpen:'1',monacoStdin:'1',stdin:'',stdinPanelShown:'1',toolId:pahole,wrap:'1'),l:'5',n:'0',o:'pahole+(trunk)+x86-64+clang+18.1.0+(Editor+%231,+Compiler+%231)',t:'0')),k:39.39533394189113,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4), we can see the memory layout on amd64:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="c" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">struct event {
+```c
+struct event {
 	unsigned int               e_pid;                /*     0     4 */
 	char                       e_filename[256];      /*     4   256 */
 	/* --- cacheline 4 boundary (256 bytes) was 4 bytes ago --- */
@@ -46,31 +50,36 @@ Using [Pahole](https://manpages.debian.org/bullseye/dwarves/pahole.1.en.html) in
 
 	/* size: 276, cachelines: 5, members: 3 */
 	/* last cacheline: 20 bytes */
-};</pre>
+};
+```
+
 
 This means that the know also knows how to transform member accesses to this struct and can adequately place the event in the allocated memory:  
 ![](https://mostlynerdless.de/wp-content/uploads/2024/03/struct_layout-2000x760.png)
 
 You've actually seen the layouting information before, as the [hello-ebpf](https://github.com/parttimenerd/hello-ebpf/) project requires you to hand layout all structs manually:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">record Event(@Unsigned int pid,
+```java
+record Event(@Unsigned int pid,
              @Size(FILE_NAME_LEN) String filename,
              @Size(TASK_COMM_LEN) String comm) {}
 
 // define the event records layout
-private static final BPFStructType&lt;Event&gt; eventType =
-        new BPFStructType&lt;&gt;("rb", List.of(
-        new BPFStructMember&lt;&gt;("e_pid",
+private static final BPFStructType<Event> eventType =
+        new BPFStructType<>("rb", List.of(
+        new BPFStructMember<>("e_pid",
                 BPFIntType.UINT32, 0, Event::pid),
-        new BPFStructMember&lt;&gt;("e_filename",
+        new BPFStructMember<>("e_filename",
                 new StringType(FILE_NAME_LEN),
                 4, Event::filename),
-        new BPFStructMember&lt;&gt;("e_comm",
+        new BPFStructMember<>("e_comm",
                 new StringType(TASK_COMM_LEN),
                 4 + FILE_NAME_LEN, Event::comm)
    ), new AnnotatedClass(Event.class, List.of()),
-   fields -&gt; new Event((int)fields.get(0),
-       (String)fields.get(1), (String)fields.get(2)));</pre>
+   fields -> new Event((int)fields.get(0),
+       (String)fields.get(1), (String)fields.get(2)));
+```
+
 
 *eBPF is agnostic regarding alignment, as the compiler on your system compiles the eBPF and the C code, so the compiler can decide how to align everything.*
 
@@ -98,7 +107,8 @@ ARM 64-but has the same scalar alignments and struct alignment rules (see [Proce
 
 We can formulate the algorithm for structs as follows:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="python" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">struct_alignment = 1
+```python
+struct_alignment = 1
 current_position = 0
 for member in struct:
   # compute the position of the member
@@ -111,7 +121,9 @@ for member in struct:
   # the next position has to be after the current member
   current_position += member.size
   # the struct alignment is the maximum of all alignments
-  struct_alignment = max(struct_alignment, member.alignment)</pre>
+  struct_alignment = max(struct_alignment, member.alignment)
+```
+
 
 With this at hand, we can look at a slightly more complex example:
 
@@ -120,16 +132,20 @@ Struct Example with Padding {#h2-2-struct-example-with-padding}
 
 The compiler, at times, has to create an unused memory section between two members to satisfy the individual alignments. This can be seen in the following example:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="cpp" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">struct padded_event {
+```cpp
+struct padded_event {
   char c;  // single byte char, alignment of 1
   long l;  // alignment of 8
   int i;   // alignment of 4
   void* x; // alignment of 8
-};</pre>
+};
+```
+
 
 Using Pahole again in the [Compiler Explorer](https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:3,endLineNumber:10,positionColumn:1,positionLineNumber:5,selectionStartColumn:3,selectionStartLineNumber:10,startColumn:1,startLineNumber:5),source:'%23define+FILE_NAME_LEN+256%0A%23define+TASK_COMM_LEN+256%0A++++++++++++++++%0A//+Structure+to+store+the+data+that+we+want+to+pass+to+user%0Astruct+padded_event+%7B%0A++char+c%3B+//+single+byte+char%0A++long+l%3B%0A++int+i%3B%0A++void*+x%3B%0A%7D%3B%0A%0Aint+main()+%7B%0A++++struct+padded_event+e%3B%0A++++e.i+%3D+(int)*((char*)%26e+%2B+16)%3B%0A%7D'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:32.78470670708028,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:compiler,i:(compiler:clang1810,filters:(b:'0',binary:'1',binaryObject:'0',commentOnly:'0',debugCalls:'1',demangle:'0',directives:'0',execute:'1',intel:'0',libraryCode:'0',trim:'1'),flagsViewOpen:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-O0',overrides:!(),selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:1),l:'5',n:'0',o:'+x86-64+clang+18.1.0+(Editor+%231)',t:'0')),k:27.81995935102858,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:tool,i:(args:'',argsPanelShown:'1',compilerName:'x86-64+clang+18.1.0',editorid:1,fontScale:14,fontUsePx:'0',j:1,monacoEditorHasBeenAutoOpened:'1',monacoEditorOpen:'1',monacoStdin:'1',stdin:'',stdinPanelShown:'1',toolId:pahole,wrap:'1'),l:'5',n:'0',o:'pahole+(trunk)+x86-64+clang+18.1.0+(Editor+%231,+Compiler+%231)',t:'0')),k:39.39533394189113,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4), we see the layout that the compiler generates:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="cpp" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">struct padded_event {
+```cpp
+struct padded_event {
 	char                       c;                    /*     0     1 */
 
 	/* XXX 7 bytes hole, try to pack */
@@ -144,7 +160,9 @@ Using Pahole again in the [Compiler Explorer](https://godbolt.org/#g:!((g:!((g:!
 	/* size: 32, cachelines: 1, members: 4 */
 	/* sum members: 21, holes: 2, sum holes: 11 */
 	/* last cacheline: 32 bytes */
-};</pre>
+};
+```
+
 
 Pahole tells us that it had to introduce 11 bytes of padding. We can visualize this as follows:
 ![](https://mostlynerdless.de/wp-content/uploads/2024/03/struct_layout2-2000x772.png)
@@ -158,10 +176,13 @@ Auto-Layouting in hello-ebpf {#h2-3-auto-layouting-in-hello-ebpf}
 
 The record that we defined in Java before contains all the information to auto-generate the BPFStructType for the class; we just need a little bit of annotation processor magic:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@Type
+```java
+@Type
 record Event(@Unsigned int pid,
              @Size(FILE_NAME_LEN) String filename,
-             @Size(TASK_COMM_LEN) String comm) {}</pre>
+             @Size(TASK_COMM_LEN) String comm) {}
+```
+
 
 This record is processed, and out comes the suitable BPFStructType:
 
@@ -169,7 +190,8 @@ This record is processed, and out comes the suitable BPFStructType:
 
 This results in a much cleaner RingSample version, named [TypeProcessingSample](https://github.com/parttimenerd/hello-ebpf/blob/main/bpf/src/main/java/me/bechberger/ebpf/samples/TypeProcessingSample.java):
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@BPF
+```java
+@BPF
 public abstract class TypeProcessingSample extends BPFProgram {
 
     static final String EBPF_PROGRAM = """...""";
@@ -191,7 +213,7 @@ public abstract class TypeProcessingSample extends BPFProgram {
             var eventType = program.getTypeForClass(Event.class);
 
             var ringBuffer = program.getRingBufferByName("rb", eventType,
-             (buffer, event) -&gt; {
+             (buffer, event) -> {
                 System.out.printf("do_sys_openat2 called by:%s file:%s pid:%d\n", 
                                   event.comm(), event.filename(), event.pid());
             });
@@ -200,7 +222,9 @@ public abstract class TypeProcessingSample extends BPFProgram {
             }
         }
     }
-}</pre>
+}
+```
+
 
 The annotation processor currently supports the following members in records:
 

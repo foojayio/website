@@ -35,14 +35,17 @@ To begin, enable **AgentCore memory** for the agent you built earlier.
 
 <br />
 
-<pre class="EnlighterJSRAW" data-enlighter-language="xml" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&lt;dependency&gt;
-    &lt;groupId&gt;org.springframework.ai&lt;/groupId&gt;
-    &lt;artifactId&gt;spring-ai-model&lt;/artifactId&gt;
-&lt;/dependency&gt;
-&lt;dependency&gt;
-    &lt;groupId&gt;org.springaicommunity&lt;/groupId&gt;
-    &lt;artifactId&gt;spring-ai-agentcore-memory&lt;/artifactId&gt;
-&lt;/dependency&gt;</pre>
+```xml
+<dependency>
+    <groupId>org.springframework.ai</groupId>
+    <artifactId>spring-ai-model</artifactId>
+</dependency>
+<dependency>
+    <groupId>org.springaicommunity</groupId>
+    <artifactId>spring-ai-agentcore-memory</artifactId>
+</dependency>
+```
+
 
 ### Step 2: Create Short/Long Term in AWS Management Console {#h3-1-step-2-create-short-long-term-in-aws-management-console}
 
@@ -53,25 +56,32 @@ To begin, enable **AgentCore memory** for the agent you built earlier.
 
 `application.yml`
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">agentcore:
+```yaml
+agentcore:
   memory:
     memory_id: memory_27vql-Vl7nIoHdf6
     total-events-limit: 100
     default-session: default
     page-size: 50
-    ignore-unknown-roles: false</pre>
+    ignore-unknown-roles: false
+```
+
 
 `application.properties`
 
-<pre class="EnlighterJSRAW" data-enlighter-language="powershell" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">agentcore.memory.memory_id=memory_27vql-Vl7nIoHdf6
+```powershell
+agentcore.memory.memory_id=memory_27vql-Vl7nIoHdf6
 agentcore.memory.total-events-limit=100
 agentcore.memory.default-session=default
 agentcore.memory.page-size=50
-agentcore.memory.ignore-unknown-roles=false</pre>
+agentcore.memory.ignore-unknown-roles=false
+```
+
 
 ### Step 4: Add the below `MemoryConfig` class. {#h3-3-step-4-add-the-below-memoryconfig-class}
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">package com.bsmlabs.springai.config;
+```java
+package com.bsmlabs.springai.config;
 
 import org.springaicommunity.agentcore.memory.longterm.AgentCoreMemory;
 import org.springframework.ai.chat.client.advisor.MessageChatMemoryAdvisor;
@@ -102,18 +112,23 @@ public class MemoryConfig {
         return new AgentCoreMemory(advisor, List.of());
     }
 
-}</pre>
+}
+```
+
 
 Let's break down the structure of the beans defined in the above `configuration` class.
 
 #### 4.1. ChatMemory Bean -- The Core
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@Bean
+```java
+@Bean
 public ChatMemory chatMemory() {
    return MessageWindowChatMemory.builder()
                 .maxMessages(20) // keeps last 20 messages
                 .build();
-}</pre>
+}
+```
+
 
 This creates a ***sliding window memory*** that retains only the last 20 messages. Benefits include:
 
@@ -124,10 +139,13 @@ This creates a ***sliding window memory*** that retains only the last 20 message
 
 #### 4.2. MessageChatMemoryAdvisor -- The Wrapper
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@Bean
+```java
+@Bean
 public MessageChatMemoryAdvisor messageChatMemoryAdvisor(ChatMemory chatMemory) {
    return MessageChatMemoryAdvisor.builder(chatMemory).build();
-}</pre>
+}
+```
+
 
 This advisor acts as an intermediary that:
 
@@ -137,10 +155,13 @@ This advisor acts as an intermediary that:
 
 #### 4.3. AgentCoreMemory -- The Orchestrator
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@Bean
+```java
+@Bean
 public AgentCoreMemory agentCoreMemory(MessageChatMemoryAdvisor advisor) {
    return new AgentCoreMemory(advisor, List.of());
-}</pre>
+}
+```
+
 
 This combines the ***advisor*** with an empty list of additional strategies. It:
 
@@ -152,16 +173,21 @@ This combines the ***advisor*** with an empty list of additional strategies. It:
 
 Add the following classes to the models folder. We will use them in the next REST controller.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">package com.bsmlabs.springai.models;
+```java
+package com.bsmlabs.springai.models;
 
 public record ChatRequest(String message) {
-}</pre>
+}
+```
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">package com.bsmlabs.springai.models;
+
+```java
+package com.bsmlabs.springai.models;
 
 public record ChatResponse(String response) {
 }
-</pre>
+```
+
 
 ### Step 6: Add the below `ShortTermController` class. {#h3-5-step-6-add-the-below-shorttermcontroller-class}
 
@@ -171,7 +197,8 @@ The SDK integrates with AgentCore Memory through **Spring AI's advisor pattern**
 
 The below RestController demonstrates how to build a stateful chat API that maintains conversation history by leveraging the memory configuration from the previous example to provide a persistent conversational context.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">package com.bsmlabs.springai.agents;
+```java
+package com.bsmlabs.springai.agents;
 
 import com.bsmlabs.springai.models.ChatRequest;
 import com.bsmlabs.springai.models.ChatResponse;
@@ -209,7 +236,7 @@ public class ShortTermMemoryController {
         String response = chatClient.prompt()
                 .user(chatRequest.message())
                 .advisors(agentCoreMemory.advisors)
-                .advisors(a -&gt; a.param(ChatMemory.CONVERSATION_ID, CONVERSATION_ID))
+                .advisors(a -> a.param(ChatMemory.CONVERSATION_ID, CONVERSATION_ID))
                 .call()
                 .content();
 
@@ -217,7 +244,7 @@ public class ShortTermMemoryController {
     }
 
     @GetMapping("/api/history")
-    public List&lt;Message&gt; getHistory() {
+    public List<Message> getHistory() {
         return chatMemory.get(CONVERSATION_ID);
     }
 
@@ -227,7 +254,8 @@ public class ShortTermMemoryController {
     }
 
 }
-</pre>
+```
+
 
 * **ChatClient:**Send prompts to the LLM
 * **ChatMemory:** Manages the conversation window/sliding window (20 messages)
@@ -237,17 +265,20 @@ public class ShortTermMemoryController {
 
 #### POST `/api/short` -- Chat Endpoint
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@PostMapping("/api/short")
+```java
+@PostMapping("/api/short")
 public ChatResponse shortTermChat(@RequestBody ChatRequest chatRequest) {
    String response = chatClient.prompt()
                 .user(chatRequest.message())
                 .advisors(agentCoreMemory.advisors)
-                .advisors(a -&gt; a.param(ChatMemory.CONVERSATION_ID, CONVERSATION_ID))
+                .advisors(a -> a.param(ChatMemory.CONVERSATION_ID, CONVERSATION_ID))
                 .call()
                 .content();
 
    return new ChatResponse(response);
-}</pre>
+}
+```
+
 
 **What happens:**
 
@@ -263,10 +294,13 @@ public ChatResponse shortTermChat(@RequestBody ChatRequest chatRequest) {
 
 #### GET `/api/history` -- Retrieve Conversation History
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@GetMapping("/api/history")
-public List&lt;Message&gt; getHistory() {
+```java
+@GetMapping("/api/history")
+public List<Message> getHistory() {
    return chatMemory.get(CONVERSATION_ID);
-}</pre>
+}
+```
+
 
 This method returns all messages (up to 20) for the given conversation ID. It is useful for:
 
@@ -276,15 +310,18 @@ This method returns all messages (up to 20) for the given conversation ID. It is
 
 #### DELETE `/api/history` -- Clear History
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@DeleteMapping("/api/history")
+```java
+@DeleteMapping("/api/history")
 public void clearHistory() {
    chatMemory.clear(CONVERSATION_ID);
 }
-</pre>
+```
+
 
 ### Step 7: verify {#h3-6-step-7-verify}
 
-<pre class="EnlighterJSRAW" data-enlighter-language="powershell" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">### Tell name - STM
+```powershell
+### Tell name - STM
 POST http://localhost:8080/api/short
 Content-Type: application/json
 
@@ -304,11 +341,14 @@ Content-Type: application/json
 GET http://localhost:8080/api/history
 
 ### Clear history
-DELETE http://localhost:8080/api/history</pre>
+DELETE http://localhost:8080/api/history
+```
+
 
 Using ***curl*** commands
 
-<pre class="EnlighterJSRAW" data-enlighter-language="powershell" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group=""># --- Short-Term Memory (STM) ---
+```powershell
+# --- Short-Term Memory (STM) ---
 # Tell your name and what you're talking about
 curl -X POST http://localhost:8080/api/short \
     -H "Content-Type: application/json" \
@@ -323,11 +363,14 @@ curl -X POST http://localhost:8080/api/short \
 curl http://localhost:8080/api/history
 
 # Clear conversation
-curl -X DELETE http://localhost:8080/api/history</pre>
+curl -X DELETE http://localhost:8080/api/history
+```
+
 
 ### End-to-End Flow {#h3-7-end-to-end-flow}
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">User Request
+```
+User Request
     ↓
 [/api/short endpoint]
     ↓
@@ -339,7 +382,9 @@ LLM generates response
     ↓
 Exchange stored in ChatMemory (sliding window)
     ↓
-Response returned to user</pre>
+Response returned to user
+```
+
 
 ***In the next part, I will discuss the inclusion of the remaining AgentCore services adding built-in tools like browser, code interpreter, and deployment to Amazon Bedrock AgentCore runtime.***
 

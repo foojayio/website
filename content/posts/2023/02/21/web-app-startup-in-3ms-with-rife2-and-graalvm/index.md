@@ -34,25 +34,33 @@ In order to try this out, you can download the latest [GraalVM](https://www.graa
 
 Next, clone the [RIFE2 bootstrap project](https://github.com/gbevin/rife2-hello), make it your current directory and create an UberJar using Gradle.
 
-<pre class="EnlighterJSRAW" style="padding: 2em 0" data-enlighter-linenumbers="false">./gradle2 uberjar
-</pre>
+```
+./gradle2 uberjar
+```
+
 
 If you want to, you can first try the generated UberJar to get a feel of its performance and behavior:
 
-<pre class="EnlighterJSRAW" style="padding: 2em 0" data-enlighter-linenumbers="false">java -jar app/build/libs/hello-uber-1.0.jar
-</pre>
+```
+java -jar app/build/libs/hello-uber-1.0.jar
+```
+
 
 The embedded Jetty server will start and in a little under 200ms you should be able to access `http://localhost:8080/hello` to see a Hello World page.
 
 Now, you create a single native executable with GraalVM using the following command:
 
-<pre class="EnlighterJSRAW" style="padding: 2em 0" data-enlighter-linenumbers="false">native-image --no-fallback --enable-preview -jar hello-uber-1.0.jar
-</pre>
+```
+native-image --no-fallback --enable-preview -jar hello-uber-1.0.jar
+```
+
 
 Starting that one up is even easier with the single executable that now contains everything:
 
-<pre class="EnlighterJSRAW" style="padding: 2em 0" data-enlighter-linenumbers="false">./hello-uber-1.0
-</pre>
+```
+./hello-uber-1.0
+```
+
 
 Microbenchmark numbers {#h2-1-microbenchmark-numbers}
 -----------------------------------------------------

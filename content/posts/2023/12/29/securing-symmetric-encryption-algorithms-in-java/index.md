@@ -62,7 +62,8 @@ Identifying weak encryption algorithms in Java {#h2-4-identifying-weak-encryptio
 
 It is relatively easy to use the `javax.crypto` APIs for implementing a small encryption service in Java. Below is an example of `EncryptionService` in Java based on the outdated DES algorithm using the ECB mode.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public class EncryptionServiceDes {
+```java
+public class EncryptionServiceDes {
 
     private SecretKey secretKey;
     private Cipher cipher;
@@ -91,7 +92,8 @@ It is relatively easy to use the `javax.crypto` APIs for implementing a small en
         return new String(decryptedData, StandardCharsets.UTF_8);
     }
 }
-</pre>
+```
+
 
 <br />
 
@@ -106,20 +108,24 @@ I then connected my GitHub repository to Snyk. Snyk Code's static analysis immed
 
 Despite using AES in the short snippet below, I am using the CBC mode which is not considered secure.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">...
+```java
+...
     public EncryptionServiceAES(String key) throws GeneralSecurityException {
         byte[] keyBytes = key.getBytes(StandardCharsets.UTF_8);
         secretKey = new SecretKeySpec(keyBytes, "AES");
         cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
     }
-...</pre>
+...
+```
+
 
 Snyk will also identify the use of insecure modes, among other things. The screenshot below is taken from the [++Snyk plugin++](https://plugins.jetbrains.com/plugin/10972-snyk-security--code-open-source-container-iac-configurations) that scans my code inside of InteliJ IDEA and provides useful information, like external fix examples.
 ![blog-secure-encryption-vuln-broken](https://snyk.io/_next/image/?url=https%3A%2F%2Fres.cloudinary.com%2Fsnyk%2Fimage%2Fupload%2Fv1697638242%2Fblog-secure-encryption-vuln-broken.jpg&w=2560&q=75)
 
 Changing the `EncryptionService` to a version that uses `AES/GCM/NoPadding`, like below, is a far better solution than I had before and is in line with the current advice that OWASP provides.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public class EncryptionServiceAESGCM {
+```java
+public class EncryptionServiceAESGCM {
     private SecretKey secretKey;
     private Cipher cipher;
 
@@ -151,7 +157,9 @@ Changing the `EncryptionService` to a version that uses `AES/GCM/NoPadding`, lik
         byte[] decryptedData = cipher.doFinal(cypherText);
         return new String(decryptedData);
     }
-}</pre>
+}
+```
+
 
 <br />
 

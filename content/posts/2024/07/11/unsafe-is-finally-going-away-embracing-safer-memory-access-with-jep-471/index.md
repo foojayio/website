@@ -40,7 +40,8 @@ Code Example: Atomic Counter {#h2-1-code-example-atomic-counter}
 
 To illustrate the transition, let's consider the **AtomicCounter** class, a simple thread-safe counter often implemented using **sun.misc.Unsafe** :  
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">import sun.misc.Unsafe;
+```java
+import sun.misc.Unsafe;
 
 public class AtomicCounter {
    private static final Unsafe UNSAFE;
@@ -82,13 +83,16 @@ public class AtomicCounter {
    public int get() {
        return count;
    }
-}</pre>
+}
+```
+
 
 <br />
 
 While the above code is accessible in the earlier JDK version, from now on, the following version using VarHandle is advised.   
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">import java.lang.invoke.MethodHandles;
+```java
+import java.lang.invoke.MethodHandles;
 import java.lang.invoke.VarHandle;
 
 public class AtomicCounterUsingVarHandle {
@@ -125,7 +129,8 @@ public class AtomicCounterUsingVarHandle {
        return (int) COUNT_HANDLE.getVolatile(this);
    }
 }
-</pre>
+```
+
 
 Phased Deprecation and Migration {#h2-2-phased-deprecation-and-migration}
 -------------------------------------------------------------------------

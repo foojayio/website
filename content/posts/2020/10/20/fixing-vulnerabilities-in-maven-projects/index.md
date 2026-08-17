@@ -52,20 +52,25 @@ First, find out where the version is specified. For top-level dependencies, in m
 
 If the dependency you need to upgrade is defined in a parent pom, first look for a newer version of the parent pom. Take Spring Boot for instance, if there already is a newer version of the parent, consider upgrading to that newer version first and see if that solves the problem. This way you update the whole set of dependencies and, in most cases, they play along better than just upgrading a single dependency. If you cannot switch or change the parent, jump to the direct approach.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="xml" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&lt;parent&gt;
-   &lt;groupId&gt;io.foojay&lt;/groupId&gt;
-   &lt;artifactId&gt;demo-parent&lt;/artifactId&gt;
-   &lt;version&gt;1.0.4.RELEASE&lt;/version&gt;
-&lt;/parent&gt;
-</pre>
+```xml
+<parent>
+   <groupId>io.foojay</groupId>
+   <artifactId>demo-parent</artifactId>
+   <version>1.0.4.RELEASE</version>
+</parent>
+```
+
 
 ### Properties {#h3-3-properties}
 
 If a property is used, update the property first. This can potentially update other dependencies as well, but just as with the parent pom, there is a good reason for this. If libraries are released as a set you know that they work better together if they have the same version.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="xml" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&lt;properties&gt;
-    &lt;commons-lang3.version&gt;3.9&lt;/commons-lang3.version&gt;
-&lt;/properties&gt;</pre>
+```xml
+<properties>
+    <commons-lang3.version>3.9</commons-lang3.version>
+</properties>
+```
+
 
 ### Direct {#h3-4-direct}
 
@@ -73,11 +78,14 @@ Finally, your dependency is declared in the dependencies part of your maven pom 
 
 **Note that this is the lowest level of declaring the dependency version and will override all the other ways of setting the version.**
 
-<pre class="EnlighterJSRAW" data-enlighter-language="xml" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&lt;dependency&gt;
-  &lt;groupId&gt;org.eclipse.collections&lt;/groupId&gt;
-  &lt;artifactId&gt;eclipse-collections&lt;/artifactId&gt;
-  &lt;version&gt;10.4.0&lt;/version&gt;
-&lt;/dependency&gt;</pre>
+```xml
+<dependency>
+  <groupId>org.eclipse.collections</groupId>
+  <artifactId>eclipse-collections</artifactId>
+  <version>10.4.0</version>
+</dependency>
+```
+
 
 Fixing underlying dependencies {#h2-5-fixing-underlying-dependencies}
 ---------------------------------------------------------------------
@@ -92,23 +100,29 @@ When an underlying dependency needs to be replaced in a framework like Spring Bo
 
 In the example below, I override the BOM for Jackson in my Spring Boot project:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="xml" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&lt;properties&gt;
-    &lt;jackson.version&gt;2.10.2.20200130&lt;/jackson.version&gt;
-&lt;/properties&gt;</pre>
+```xml
+<properties>
+    <jackson.version>2.10.2.20200130</jackson.version>
+</properties>
+```
+
 
 ### Dependency management {#h3-7-dependency-management}
 
 In a Maven POM, it is possible to exclude and include specific underlying dependencies when declaring a top-level dependency. However, this can be problematic when two libraries share the same underlying dependency. A best practice in Maven is to bundle these declarations in the dependency management section. This section allows project authors to directly specify the versions of artifacts to be used when they are encountered in transitive dependencies. In addition to the example below, the [documentation](http://maven.apache.org/guides/introduction/introduction-to-dependency-mechanism.html#Dependency_Management) clearly explains how dependencyManagement should be used:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="xml" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&lt;dependencyManagement&gt;
-   &lt;dependencies&gt;
-       &lt;dependency&gt;
-           &lt;groupId&gt;org.yaml&lt;/groupId&gt;
-           &lt;artifactId&gt;snakeyaml&lt;/artifactId&gt;
-           &lt;version&gt;1.26&lt;/version&gt;
-       &lt;/dependency&gt;
-   &lt;/dependencies&gt;
-&lt;/dependencyManagement&gt;</pre>
+```xml
+<dependencyManagement>
+   <dependencies>
+       <dependency>
+           <groupId>org.yaml</groupId>
+           <artifactId>snakeyaml</artifactId>
+           <version>1.26</version>
+       </dependency>
+   </dependencies>
+</dependencyManagement>
+```
+
 
 Conclusion {#h2-8-conclusion}
 -----------------------------

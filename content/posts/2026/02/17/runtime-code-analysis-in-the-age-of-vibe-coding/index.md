@@ -196,7 +196,7 @@ There are obvious next steps---Gradle improvements, better exclusion controls, b
 
 The real question is simpler: **does this help you understand your codebase faster and with more confidence?**
 
-*** ** * ** ***
+
 
 **Project:** [github.com/sfkamath/jvm-hotpath](https://github.com/sfkamath/jvm-hotpath)  
 **Documentation:** [Full README](https://github.com/sfkamath/jvm-hotpath/blob/main/README.md)  

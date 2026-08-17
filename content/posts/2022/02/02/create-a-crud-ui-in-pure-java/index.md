@@ -39,7 +39,8 @@ Let's start by creating a simple JPA entity and a Spring Data repository.
 
 The following `Person` class is a simple JPA entity with three fields, representing a person's first name, last name, and email.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">package com.example.application;
+```java
+package com.example.application;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -83,20 +84,26 @@ public class Person {
    public void setLastName(String lastName) {
        this.lastName = lastName;
    }
-}</pre>
+}
+```
+
 
 We also create a repository interface using Spring Data in order to work with `Person` entities as follows:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">package com.example.application;
+```java
+package com.example.application;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface PersonRepository extends JpaRepository&lt;Person, Long&gt; {
-}</pre>
+public interface PersonRepository extends JpaRepository<Person, Long> {
+}
+```
+
 
 In order to work with some data, we also populate the embedded H2 database with some random entries that are generated using the `ExampleDataGenerator` helper class. The following `DataGenerator` class generates 100 random entities.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">package com.example.application;
+```java
+package com.example.application;
 
 import com.vaadin.exampledata.DataType;
 import com.vaadin.exampledata.ExampleDataGenerator;
@@ -113,13 +120,13 @@ import java.time.LocalDateTime;
 public class DataGenerator {
    @Bean
    public CommandLineRunner loadData(@Autowired PersonRepository personRepo) {
-       return args -&gt; {
+       return args -> {
            Logger logger = LoggerFactory.getLogger(getClass());
 
            logger.info("Generating demo data");
 
            logger.info("... generating 100 Sample Person entities...");
-           ExampleDataGenerator&lt;Person&gt; samplePersonGenerator = new ExampleDataGenerator&lt;&gt;(
+           ExampleDataGenerator<Person> samplePersonGenerator = new ExampleDataGenerator<>(
                    Person.class, LocalDateTime.now());
            samplePersonGenerator.setData(Person::setFirstName, DataType.FIRST_NAME);
            samplePersonGenerator.setData(Person::setLastName, DataType.LAST_NAME);
@@ -129,7 +136,9 @@ public class DataGenerator {
            logger.info("Generated demo data");
        };
    }
-}</pre>
+}
+```
+
 
 ### Step 3: Create the Editor Layout {#h3-3-step-3-create-the-editor-layout}
 
@@ -137,7 +146,8 @@ Next, we create the Editor Layout, which is the part of the UI that will enable 
 
 The following `EditorLayout` class extends Vaadin `VerticalLayout`, and it includes three `TextField` components to hold the first name, last name, and email of the selected `Person` entity. `EditorLayout` also includes three `Button` components that will later be used to perform the CRUD operations. (Note, the save button is used to both create and update entities).
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">package com.example.application;
+```java
+package com.example.application;
 
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
@@ -192,7 +202,9 @@ public class EditorLayout extends VerticalLayout {
        return saveButton;
    }
 
-}</pre>
+}
+```
+
 
 ### Step 4: Create the CRUD View {#h3-4-step-4-create-the-crud-view}
 
@@ -200,7 +212,8 @@ Now we define the main view that holds both the tabular data as well as the `Edi
 
 Note that this view makes use of `BeanValidationBinder` in order to bind and validate the values of the `EditorLayout` form. Note also that the view is made accessible to the end user via the `@Route` annotation (in this case, it would be accessible via the empty \`\` route).
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">package com.example.application;
+```java
+package com.example.application;
 
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.notification.Notification;
@@ -215,7 +228,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 @Route("")
 public class CrudView extends SplitLayout {
 
-   private Grid&lt;Person&gt; grid;
+   private Grid<Person> grid;
    private final EditorLayout editorLayout;
 
    /**
@@ -223,11 +236,11 @@ public class CrudView extends SplitLayout {
     */
    private Person person;
 
-   ListDataProvider&lt;Person&gt; dataProvider;
+   ListDataProvider<Person> dataProvider;
 
    private final PersonRepository repo;
 
-   private BeanValidationBinder&lt;Person&gt; binder;
+   private BeanValidationBinder<Person> binder;
 
    public CrudView(@Autowired PersonRepository repo) {
        this.repo = repo;
@@ -245,14 +258,14 @@ public class CrudView extends SplitLayout {
 
    private void configureGrid() {
        // Auto create Grid's columns based on Person.class members
-       grid = new Grid&lt;&gt;(Person.class, true);
+       grid = new Grid<>(Person.class, true);
        grid.setSizeFull();
 
        dataProvider = DataProvider.ofCollection(repo.findAll());
        grid.setDataProvider(dataProvider);
 
        // when a row is selected or deselected, populate form
-       grid.asSingleSelect().addValueChangeListener(event -&gt; {
+       grid.asSingleSelect().addValueChangeListener(event -> {
            Person person = event.getValue();
            if (person != null) {
                populateForm(person);
@@ -263,12 +276,12 @@ public class CrudView extends SplitLayout {
    }
 
    private void configureBinding() {
-       binder = new BeanValidationBinder&lt;&gt;(Person.class);
+       binder = new BeanValidationBinder<>(Person.class);
 
        //Bind member fields found in the EditorLayout object.
        binder.bindInstanceFields(editorLayout);
 
-       editorLayout.getDeleteButton().addClickListener(e -&gt; {
+       editorLayout.getDeleteButton().addClickListener(e -> {
            if (this.person != null) {
                repo.delete(this.person);
                dataProvider.getItems().remove(person);
@@ -279,12 +292,12 @@ public class CrudView extends SplitLayout {
            }
        });
 
-       editorLayout.getCancelButton().addClickListener(e -&gt; {
+       editorLayout.getCancelButton().addClickListener(e -> {
            clearForm();
            refreshGrid();
        });
 
-       editorLayout.getSaveButton().addClickListener(e -&gt; {
+       editorLayout.getSaveButton().addClickListener(e -> {
            try {
                if (this.person == null) {
                    this.person = new Person();
@@ -317,7 +330,8 @@ public class CrudView extends SplitLayout {
        dataProvider.refreshAll();
    }
 }
-</pre>
+```
+
 
 ### Step 5: Run the Application {#h3-5-step-5-run-the-application}
 

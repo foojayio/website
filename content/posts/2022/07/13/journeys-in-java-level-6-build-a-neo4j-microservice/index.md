@@ -102,13 +102,16 @@ We typically do not want to embed our database credentials in an application. Ha
 
 Solving this is something we will cover in the next blog post, but for now, we will simply hard-code our credentials with the caveat that we need to override them with dummy data before we publish any code.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="text">server.port=8083
+```
+server.port=8083
 
 #database connection
 spring.neo4j.uri=
 spring.neo4j.authentication.username=
 spring.neo4j.authentication.password=
-spring.data.neo4j.database=</pre>
+spring.data.neo4j.database=
+```
+
 
 Because we have multiple services, we need the `server.port` property to ensure traffic does not conflict. We have already used ports 8080-8082 for services 1-3, so 8083 is our next in line. Next, we need to connect to our database using the properties for Neo4j URI, username, password, and database. *\*Note:\* Database should be `neo4j`, unless you have specifically used commands to change the default.*
 
@@ -118,7 +121,8 @@ On to the project code!
 
 As mentioned above, code for `service4` will look similar to services 1 and 3, with the exception that we are mapping graph data instead of document data. A few changes go into that shift, so let's walk through them starting with the domain class.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">@Data
+```java
+@Data
 @Node
 class Review {
 	@Id
@@ -129,7 +133,9 @@ class Review {
 
 	private String book_id, review_text, date_added, date_updated, started_at, read_at;
 	private Integer rating, n_comments, n_votes;
-}</pre>
+}
+```
+
 
 The `@Data` is a [Lombok annotation](https://projectlombok.org/features/Data) that generates our getters, setters, equals, hashCode, and toString methods for the domain class. It cuts down on the boilerplate code, so that's nice. Next is the [`@Node`](https://github.com/JMHReif/microservices-level6/blob/main/service4/src/main/java/com/jmhreif/service4/Service4Application.java#L53) annotation. This is a Spring Data Neo4j annotation that marks it as a Neo4j entity class (Neo4j entities are called nodes).
 
@@ -137,12 +143,15 @@ Within the class declaration, we define a few fields (properties) for our class.
 
 Next, we need a repository interface where we can define methods to interact with the data in the database.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">interface ReviewRepository extends ReactiveCrudRepository {
+```java
+interface ReviewRepository extends ReactiveCrudRepository {
 	Flux findFirst1000By();
 
-	@Query("MATCH (r:Review)-[rel:WRITTEN_FOR]-&amp;gt;(b:Book {book_id: $book_id}) RETURN r;")
+	@Query("MATCH (r:Review)-[rel:WRITTEN_FOR]-&gt;(b:Book {book_id: $book_id}) RETURN r;")
 	Flux findReviewsByBook(String book_id);
-}</pre>
+}
+```
+
 
 We want this repository to extend the `ReactiveCrudRepository`, which will let us use reactive methods and types for working with the data. Then, we define a couple of methods. While we could use Spring Data's out-of-the-box implementations of a few default methods (listed in the [code example of the documentation](https://docs.spring.io/spring-data/commons/docs/current/reference/html/#repositories.core-concepts)), we want to customize a little bit, so we will define our own. Instead of using the default `.findAll()` method, we want to pull only 1,000 results because pulling all 35,342 reviews could overload result-rendering on the client.
 
@@ -154,7 +163,8 @@ Our next method [starting at the fourth line](https://github.com/JMHReif/microse
 
 With the repository complete, we can write our [controller class](https://www.javatpoint.com/spring-mvc-tutorial) that sets up some REST endpoints for other services to access the data.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">@RestController
+```java
+@RestController
 @RequestMapping("/neo")
 @AllArgsConstructor
 class ReviewController {
@@ -168,7 +178,9 @@ class ReviewController {
 
 	@GetMapping("/reviews/{book_id}")
 	Flux getBookReviews(@PathVariable String book_id) { return reviewRepo.findReviewsByBook(book_id); }
-}</pre>
+}
+```
+
 
 Those familiar with our previous services 1 and 3 code will notice this looks almost the exact same (except with reviews instead of books or authors). The `@RestController` Spring annotation designates this as a rest controller class, and the `@RequestMapping` defines a high-level endpoint for using any of the class methods. Within the class declaration, we inject the `ReviewRepository` with the [first line](https://github.com/JMHReif/microservices-level6/blob/main/service4/src/main/java/com/jmhreif/service4/Service4Application.java#L32), so that we can utilize our written methods.
 

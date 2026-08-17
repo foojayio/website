@@ -66,7 +66,8 @@ This gives us a single event update, giving the exact timestamp and location of 
 
 The *statuses* collection contains a single document that contains the dashboard data, which is a denormalized, summarized view of the data that goes into the *events*collection. This document will look similar to this:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">{
+```
+{
     "falcon": {
 	"realName": "Sam Wilson",
 	"location": "New York",
@@ -78,7 +79,9 @@ The *statuses* collection contains a single document that contains the dashboard
         "location": "New York",
         "status": "HEALTHY"
     }
-}</pre>
+}
+```
+
 
 Here we have some general data that doesn't change -- the *name* and *realName* fields -- and we have some summary data that is generated from the most recent event for this Avenger -- *location* is derived from the *latitude* and *longitude* values, and *status* is a general summary of the *status* field from the event.
 
@@ -119,10 +122,13 @@ Once this is ready, we can download and unzip it somewhere and we are ready to b
 
 Before moving on, we also need to configure our Cassandra credentials. These all go into *src/main/resources/application.properties* as taken from the Astra dashboard:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">ASTRA_DB_ID=e26d52c6-fb2d-4951-b606-4ea11f7309ba
+```
+ASTRA_DB_ID=e26d52c6-fb2d-4951-b606-4ea11f7309ba
 ASTRA_DB_REGION=us-east-1
 ASTRA_DB_KEYSPACE=avengers
-ASTRA_DB_APPLICATION_TOKEN=AstraCS:xxx-token-here</pre>
+ASTRA_DB_APPLICATION_TOKEN=AstraCS:xxx-token-here
+```
+
 
 These secrets are being managed like this purely for the purposes of this article. In a real application, they should be managed securely, for example using [Vault](https://www.baeldung.com/vault).
 
@@ -133,7 +139,8 @@ Writing a Document Client {#h2-4-writing-a-document-client}
 
 In order to manage this, we will write a *DocumentClient* bean that encapsulates all of this:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@Repository
+```
+@Repository
 public class DocumentClient {
   @Value("https://${ASTRA_DB_ID}-${ASTRA_DB_REGION}.apps.astra.datastax.com/api/rest/v2/namespaces/${ASTRA_DB_KEYSPACE}")
   private String baseUrl;
@@ -174,7 +181,8 @@ public class DocumentClient {
     restTemplate.exchange(updateRequest, Map.class);
   } 
 }
-</pre>
+```
+
 
 Here, our *baseUrl* and *token* fields are configured from the properties that we defined earlier. We then have a *getDocument()* method that can call Astra to get the specified record from the desired collection, and a *patchSubDocument()* method that can call Astra to patch part of any single document in the collection.
 
@@ -191,22 +199,28 @@ Note that we need to change the request factory used by our *RestTemplate*. This
 
 To represent these, we will need a [Record](https://www.baeldung.com/java-record-keyword) as follows:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public record Status(String avenger, 
+```
+public record Status(String avenger, 
   String name, 
   String realName, 
   String status, 
   String location) {}
-</pre>
+```
+
 
 We also need a Record to represent the entire collection of statuses as retrieved from Cassandra:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public record Statuses(Map&lt;String, Status&gt; data) {}</pre>
+```
+public record Statuses(Map<String, Status> data) {}
+```
+
 
 This *Statuses* class represents the exact same JSON as will be returned by the Document API, and so can be used to receive the data via a *RestTemplate* and Jackson.
 
 Then we need a service layer to retrieve the statuses from Cassandra and return them for use:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@Service
+```
+@Service
 public class StatusesService {
   @Autowired
   private DocumentClient client;
@@ -223,7 +237,8 @@ public class StatusesService {
     return result;
   }  
 }
-</pre>
+```
+
 
 **Here, we are using our client to get the record from the "statuses" collection, represented in our *Statuses* record.** Once retrieved we extract only the documents to return back to the caller. Note that we do have to rebuild the *Status* objects to also contain the IDs since these are actually stored higher up in the document within Astra.
 
@@ -233,7 +248,8 @@ public class StatusesService {
 
 First then, the controller:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@Controller
+```
+@Controller
 public class StatusesController {
   @Autowired
   private StatusesService statusesService;
@@ -246,53 +262,60 @@ public class StatusesController {
     return result;
   }
 }
-</pre>
+```
+
 
 This retrieves the statuses from Astra and passes them on to a template to render.
 
 Our main "dashboard.html" template is then as follows:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&lt;!doctype html&gt;
-&lt;html lang="en"&gt;
-&lt;head&gt;  
-  &lt;meta charset="utf-8" /&gt;  
-  &lt;meta name="viewport" content="width=device-width, initial-scale=1" /&gt;
-  &lt;link href="https://cdn.jsdelivr.net/npm/<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="ff9d90908b8c8b8d9e8fbfcad1cfd1cfd29d9a8b9ecc">[email&nbsp;protected]</a>/dist/css/bootstrap.min.css" rel="stylesheet"    integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous" /&gt;  
-  &lt;title&gt;Avengers Status Dashboard&lt;/title&gt;
-&lt;/head&gt;
-&lt;body&gt;  
-    &lt;nav class="navbar navbar-expand-lg navbar-dark bg-dark"&gt; 
-      &lt;div class="container-fluid"&gt;      
-       &lt;a class="navbar-brand" href="#"&gt;Avengers Status Dashboard&lt;/a&gt;    
-    &lt;/div&gt;  
-  &lt;/nav&gt;
+```
+<!doctype html>
+<html lang="en">
+<head>  
+  <meta charset="utf-8" />  
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link href="https://cdn.jsdelivr.net/npm/<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="ff9d90908b8c8b8d9e8fbfcad1cfd1cfd29d9a8b9ecc">[email protected]</a>/dist/css/bootstrap.min.css" rel="stylesheet"    integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous" />  
+  <title>Avengers Status Dashboard</title>
+</head>
+<body>  
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark"> 
+      <div class="container-fluid">      
+       <a class="navbar-brand" href="#">Avengers Status Dashboard</a>    
+    </div>  
+  </nav>
 
-&lt;div class="container-fluid mt-4"&gt;    
-  &lt;div class="row row-cols-4 g-4"&gt;      
-   &lt;div class="col" th:each="data, iterstat: ${statuses}"&gt;        
-      &lt;th:block th:switch="${data.status}"&gt;
-         &lt;div class="card text-white bg-danger" th:case="DECEASED" th:insert="~{common/status}"&gt;&lt;/div&gt;          
-         &lt;div class="card text-dark bg-warning" th:case="INJURED" th:insert="~{common/status}"&gt;&lt;/div&gt;          
-         &lt;div class="card text-dark bg-warning" th:case="UNKNOWN" th:insert="~{common/status}"&gt;&lt;/div&gt; 
-         &lt;div class="card text-white bg-secondary" th:case="RETIRED" th:insert="~{common/status}"&gt;&lt;/div&gt; 
-         &lt;div class="card text-dark bg-light" th:case="*" th:insert="~{common/status}"&gt;&lt;/div&gt; 
-       &lt;/th:block&gt;      
-    &lt;/div&gt;    
-  &lt;/div&gt;  
-&lt;/div&gt;
-&lt;script src="https://cdn.jsdelivr.net/npm/<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="a2c0cdcdd6d1d6d0c3d2e2978c928c928fc0c7d6c391">[email&nbsp;protected]</a>/dist/js/bootstrap.bundle.min.js"    integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"    crossorigin="anonymous"&gt;&lt;/script&gt;
-&lt;/body&gt;
-&lt;/html&gt;</pre>
+<div class="container-fluid mt-4">    
+  <div class="row row-cols-4 g-4">      
+   <div class="col" th:each="data, iterstat: ${statuses}">        
+      <th:block th:switch="${data.status}">
+         <div class="card text-white bg-danger" th:case="DECEASED" th:insert="~{common/status}"></div>          
+         <div class="card text-dark bg-warning" th:case="INJURED" th:insert="~{common/status}"></div>          
+         <div class="card text-dark bg-warning" th:case="UNKNOWN" th:insert="~{common/status}"></div> 
+         <div class="card text-white bg-secondary" th:case="RETIRED" th:insert="~{common/status}"></div> 
+         <div class="card text-dark bg-light" th:case="*" th:insert="~{common/status}"></div> 
+       </th:block>      
+    </div>    
+  </div>  
+</div>
+<script src="https://cdn.jsdelivr.net/npm/<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="a2c0cdcdd6d1d6d0c3d2e2978c928c928fc0c7d6c391">[email protected]</a>/dist/js/bootstrap.bundle.min.js"    integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"    crossorigin="anonymous"></script>
+</body>
+</html>
+```
+
 
 And this makes use of another nested template, under "common/status.html", to display the status of a single Avenger:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&lt;div class="card-body"&gt;  
-  &lt;h5 class="card-title" th:text="${data.name}"&gt;&lt;/h5&gt;  
-  &lt;h6 class="card-subtitle"&gt;&lt;span th:if="${data.realName}" th:text="${data.realName}"&gt;&lt;/span&gt; &lt;/h6&gt;  
-  &lt;p class="card-text"&gt;&lt;span th:if="${data.location}"&gt;Location: &lt;span th:text="${data.location}"&gt;&lt;/span&gt;
-  &lt;/span&gt; &lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="card-footer"&gt;Status: &lt;span th:text="${data.status}"&gt;&lt;/span&gt;&lt;/div&gt;</pre>
+```
+<div class="card-body">  
+  <h5 class="card-title" th:text="${data.name}"></h5>  
+  <h6 class="card-subtitle"><span th:if="${data.realName}" th:text="${data.realName}"></span> </h6>  
+  <p class="card-text"><span th:if="${data.location}">Location: <span th:text="${data.location}"></span>
+  </span> </p>
+</div>
+<div class="card-footer">Status: <span th:text="${data.status}"></span></div>
+```
+
 
 This makes use of [Bootstrap](https://getbootstrap.com/) to format up our page, and displays one card for each Avenger, coloured based on the status and displaying the current details of that Avenger:
 ![](avengers-dashboard.png)
@@ -310,17 +333,20 @@ In the next article, this same controller will record both the latest status int
 
 We do this with a new method in the *StatusesService* class that will perform the updates:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public void updateStatus(String avenger, String location, String status) throws Exception {
+```
+public void updateStatus(String avenger, String location, String status) throws Exception {
   client.patchSubDocument("statuses", "latest", avenger, 
     Map.of("location", location, "status", status));
 }
-</pre>
+```
+
 
 ### **API to Update Statuses** {#h3-10-api-to-update-statuses}
 
 **We now need a controller that can be called in order to trigger these updates.** This will be a new *RestController* endpoint that takes the avengers ID and the latest event details:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@RestController
+```
+@RestController
 public class UpdateController {
   @Autowired
   private StatusesService statusesService;
@@ -337,7 +363,7 @@ public class UpdateController {
   private String getStatus(Double status) {
     if (status == 0) {
       return "DECEASED";
-    } else if (status &gt; 0.9) {
+    } else if (status > 0.9) {
       return "HEALTHY";
     } else {
       return "INJURED";
@@ -346,7 +372,8 @@ public class UpdateController {
 
   private static record UpdateBody(Double lat, Double lng, Double status) {}
 }
-</pre>
+```
+
 
 This allows us to accept requests for a particular Avenger, containing the current latitude, longitude, and status of that Avenger. We then convert these values into status values and pass them on to the *StatusesService* to update the status record.
 

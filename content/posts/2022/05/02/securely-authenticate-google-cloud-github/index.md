@@ -70,7 +70,8 @@ Authenticate to Google Cloud is the name of the [GitHub Action](https://github.c
 
 Once you've set up Google Cloud, the GitHub workflow configuration is straightforward:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml">jobs:
+```yaml
+jobs:
   metrics:
     runs-on: ubuntu-latest
     permissions:
@@ -85,7 +86,9 @@ Once you've set up Google Cloud, the GitHub workflow configuration is straightfo
         with:
           service_account: '${SERVICE_ACCOUNT_EMAIL}'
           workload_identity_provider: 'projects/${PROJECT_ID}/locations/global/workloadIdentityPools/${WI_POOL_NAME}/providers/${WI_PROVIDER_NAME}'
-      - run: 'python main.py'                                             # 4</pre>
+      - run: 'python main.py'                                             # 4
+```
+
 
 1. Checkout the repo
 2. Set up the Python environment

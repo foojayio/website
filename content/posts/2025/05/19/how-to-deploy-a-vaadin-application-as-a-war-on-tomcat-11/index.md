@@ -43,15 +43,21 @@ Step 3: Adjust the `pom.xml` {#h2-2-step-3-adjust-the-pom-xml}
 
 To prepare the project for deployment to Tomcat, I changed the packaging from `jar` to `war` in the `pom.xml`. This tells Maven to build a WAR file instead of a standalone JAR.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="xml" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&lt;packaging&gt;war&lt;/packaging&gt;</pre>
+```xml
+<packaging>war</packaging>
+```
+
 
 You also want to exclude the embedded Tomcat because we will deploy the WAR to Tomcat. This can be done by marking the dependency as provided.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="xml" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&lt;dependency&gt;
-    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
-    &lt;artifactId&gt;spring-boot-starter-tomcat&lt;/artifactId&gt;
-    &lt;scope&gt;provided&lt;/scope&gt;
-&lt;/dependency&gt;</pre>
+```xml
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-tomcat</artifactId>
+    <scope>provided</scope>
+</dependency>
+```
+
 
 Step 4: Update the Spring Boot Application Class {#h2-3-step-4-update-the-spring-boot-application-class}
 --------------------------------------------------------------------------------------------------------
@@ -60,7 +66,8 @@ A WAR needs a special entry point for the servlet container.
 
 I modified the `@SpringBootApplication` class to extend `SpringBootServletInitializer` and override the `configure` method:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@SpringBootApplication
+```java
+@SpringBootApplication
 public class VaadinWarApplication extends SpringBootServletInitializer {
     @Override
     protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
@@ -69,7 +76,9 @@ public class VaadinWarApplication extends SpringBootServletInitializer {
     public static void main(String[] args) {
         SpringApplication.run(VaadinWarApplication.class, args);
     }
-}</pre>
+}
+```
+
 
 This setup makes sure that Tomcat can start the Spring Boot application correctly when the WAR is deployed.
 
@@ -78,7 +87,10 @@ Step 5: Build the Application for Production {#h2-4-step-5-build-the-application
 
 Vaadin applications must be built in production mode to create an optimized production-ready bundle. I used Maven to build the project with the production profile:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">./mvnw package -Pproduction</pre>
+```bash
+./mvnw package -Pproduction
+```
+
 
 This command generates a WAR file in the `target` directory.
 
@@ -87,7 +99,10 @@ Step 6: Deploy the WAR to Tomcat {#h2-5-step-6-deploy-the-war-to-tomcat}
 
 Copie the generated `.war` file into the `webapps` folder of my Tomcat installation.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">cp target/vaadin-war-application.war /path/to/tomcat/webapps/</pre>
+```bash
+cp target/vaadin-war-application.war /path/to/tomcat/webapps/
+```
+
 
 When starting Tomcat (with `bin/startup.sh` or `bin/startup.bat`), it automatically unpacked the WAR and started the application.
 

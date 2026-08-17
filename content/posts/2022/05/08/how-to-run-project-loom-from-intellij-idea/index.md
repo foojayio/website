@@ -24,17 +24,23 @@ frozen: false
 
 The following snippet was pretty much my first program written for testing virtual threads.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public class Main {
+```java
+public class Main {
     public static void main(String[] args) throws InterruptedException {
-        Thread.startVirtualThread(() -&gt; {
+        Thread.startVirtualThread(() -> {
             System.out.println("Hello from virtual thread");
         }).join();
     }
-}</pre>
+}
+```
+
 
 It is so simple that I could just run it in the command line using the [source code launcher](https://openjdk.java.net/jeps/330) :
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">java --enable-preview --release 19 Main.java</pre>
+```
+java --enable-preview --release 19 Main.java
+```
+
 
 However, it needed a bit of [yak shaving](https://en.wiktionary.org/wiki/yak_shaving). I needed to download the JDK, extract the tarball, set the java home, etc. I manage multiple JDKs using [SDKMAN](https://sdkman.io/); it doesn't have it since it's still in early access release. So I had to let SDKMAN know it manually.
 
@@ -50,7 +56,10 @@ First, you need to go preference, and then **Build, Execution, Deployment** and 
 
 At the bottom, there is a box named the additional command line parameter. Add the following line there-
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">--enable-preview</pre>
+```
+--enable-preview
+```
+
 
 And then go to the run configuration. Select the modify options and Mark the Add VM options.
 

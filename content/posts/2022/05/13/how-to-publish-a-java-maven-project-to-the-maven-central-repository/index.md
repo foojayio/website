@@ -105,31 +105,34 @@ command.
 
 Your file will look like this:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="xml">&lt;settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
+```xml
+<settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-          xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0 https://maven.apache.org/xsd/settings-1.0.0.xsd"&gt;
-    &lt;servers&gt;
-        &lt;server&gt;
-            &lt;id&gt;ossrh&lt;/id&gt;
-            &lt;username&gt;{ username }&lt;/username&gt;
-            &lt;password&gt;{ password }&lt;/password&gt;
-        &lt;/server&gt;
-    &lt;/servers&gt;
+          xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0 https://maven.apache.org/xsd/settings-1.0.0.xsd">
+    <servers>
+        <server>
+            <id>ossrh</id>
+            <username>{ username }</username>
+            <password>{ password }</password>
+        </server>
+    </servers>
 
-    &lt;profiles&gt;
-        &lt;profile&gt;
-            &lt;id&gt;ossrh&lt;/id&gt;
-            &lt;activation&gt;
-                &lt;activeByDefault&gt;true&lt;/activeByDefault&gt;
-            &lt;/activation&gt;
-            &lt;properties&gt;
-                &lt;gpg.executable&gt;gpg&lt;/gpg.executable&gt;
-                &lt;gpg.keyname&gt;{ gpg-key }&lt;/gpg.keyname&gt;
-                &lt;gpg.passphrase&gt;{ gpg-passphrase }&lt;/gpg.passphrase&gt;
-            &lt;/properties&gt;
-        &lt;/profile&gt;
-    &lt;/profiles&gt;
-&lt;/settings&gt;</pre>
+    <profiles>
+        <profile>
+            <id>ossrh</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <gpg.executable>gpg</gpg.executable>
+                <gpg.keyname>{ gpg-key }</gpg.keyname>
+                <gpg.passphrase>{ gpg-passphrase }</gpg.passphrase>
+            </properties>
+        </profile>
+    </profiles>
+</settings>
+```
+
 
 You will add your credentials. I would like to store encrypted passwords instead, but that would be another step to add tho this guide.
 
@@ -148,45 +151,51 @@ The general information like name, description, etc., will be shown when the art
 
 As you can see, the first tags are just general project information:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="xml">&lt;project&gt;
-    &lt;!--- ... --&gt;
-    &lt;name&gt;JDesk&lt;/name&gt;
-    &lt;description&gt;
+```xml
+<project>
+    <!--- ... -->
+    <name>JDesk</name>
+    <description>
         Library/Framework to build better Java Swing desktop apps.
-    &lt;/description&gt;
-    &lt;url&gt;https://jdesk.mathsoftware.engineer&lt;/url&gt;
+    </description>
+    <url>https://jdesk.mathsoftware.engineer</url>
 
-    &lt;licenses&gt;
-        &lt;license&gt;
-            &lt;name&gt;BSD 3-Clause License&lt;/name&gt;
-            &lt;url&gt;https://opensource.org/licenses/BSD-3-Clause&lt;/url&gt;
-        &lt;/license&gt;
-    &lt;/licenses&gt;
+    <licenses>
+        <license>
+            <name>BSD 3-Clause License</name>
+            <url>https://opensource.org/licenses/BSD-3-Clause</url>
+        </license>
+    </licenses>
 
-    &lt;developers&gt;
-        &lt;developer&gt;
-            &lt;name&gt;Tobias Briones&lt;/name&gt;
-            &lt;email&gt;<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="b4d0d1c2f4d9d5c0dcc7dbd2c0c3d5c6d19ad1dad3dddad1d1c6">[email&nbsp;protected]</a>&lt;/email&gt;
-            &lt;organization&gt;Tobias Briones&lt;/organization&gt;
-            &lt;organizationUrl&gt;https://mathsoftware.engineer&lt;/organizationUrl&gt;
-        &lt;/developer&gt;
-    &lt;/developers&gt;
-&lt;/project&gt;</pre>
+    <developers>
+        <developer>
+            <name>Tobias Briones</name>
+            <email><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="b4d0d1c2f4d9d5c0dcc7dbd2c0c3d5c6d19ad1dad3dddad1d1c6">[email protected]</a></email>
+            <organization>Tobias Briones</organization>
+            <organizationUrl>https://mathsoftware.engineer</organizationUrl>
+        </developer>
+    </developers>
+</project>
+```
+
 
 Then, other information about the project's repository:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="xml">&lt;project&gt;
-    &lt;!--- ... --&gt;
-    &lt;scm&gt;
-        &lt;connection&gt;
+```xml
+<project>
+    <!--- ... -->
+    <scm>
+        <connection>
             scm:git:git://github.com/tobiasbriones/jdesk.git
-        &lt;/connection&gt;
-        &lt;developerConnection&gt;
+        </connection>
+        <developerConnection>
             scm:git:ssh://github.com:tobiasbriones/jdesk.git
-        &lt;/developerConnection&gt;
-        &lt;url&gt;https://github.com/tobiasbriones/jdesk&lt;/url&gt;
-    &lt;/scm&gt;
-&lt;/project&gt;</pre>
+        </developerConnection>
+        <url>https://github.com/tobiasbriones/jdesk</url>
+    </scm>
+</project>
+```
+
 
 ```
 
@@ -198,40 +207,46 @@ This will add the configuration for the build tag.
 
 Add the maven plugin for source code:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="xml">&lt;plugin&gt;
-    &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;
-    &lt;artifactId&gt;maven-source-plugin&lt;/artifactId&gt;
-    &lt;version&gt;3.2.1&lt;/version&gt;
-    &lt;executions&gt;
-        &lt;execution&gt;
-            &lt;id&gt;attach-sources&lt;/id&gt;
-            &lt;goals&gt;
-                &lt;goal&gt;jar-no-fork&lt;/goal&gt;
-            &lt;/goals&gt;
-        &lt;/execution&gt;
-    &lt;/executions&gt;
-&lt;/plugin&gt;</pre>
+```xml
+<plugin>
+    <groupId>org.apache.maven.plugins</groupId>
+    <artifactId>maven-source-plugin</artifactId>
+    <version>3.2.1</version>
+    <executions>
+        <execution>
+            <id>attach-sources</id>
+            <goals>
+                <goal>jar-no-fork</goal>
+            </goals>
+        </execution>
+    </executions>
+</plugin>
+```
+
 
 and the other for the javadocs, the javadoc binary has to be set to match your system's javadoc:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="xml">&lt;plugin&gt;
-    &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;
-    &lt;artifactId&gt;maven-javadoc-plugin&lt;/artifactId&gt;
-    &lt;version&gt;3.2.0&lt;/version&gt;
-    &lt;executions&gt;
-        &lt;execution&gt;
-            &lt;id&gt;attach-javadocs&lt;/id&gt;
-            &lt;goals&gt;
-                &lt;goal&gt;jar&lt;/goal&gt;
-            &lt;/goals&gt;
-        &lt;/execution&gt;
-    &lt;/executions&gt;
-    &lt;configuration&gt;
-        &lt;javadocExecutable&gt;
+```xml
+<plugin>
+    <groupId>org.apache.maven.plugins</groupId>
+    <artifactId>maven-javadoc-plugin</artifactId>
+    <version>3.2.0</version>
+    <executions>
+        <execution>
+            <id>attach-javadocs</id>
+            <goals>
+                <goal>jar</goal>
+            </goals>
+        </execution>
+    </executions>
+    <configuration>
+        <javadocExecutable>
             ${java.home}/bin/javadoc
-        &lt;/javadocExecutable&gt;
-    &lt;/configuration&gt;
-&lt;/plugin&gt;</pre>
+        </javadocExecutable>
+    </configuration>
+</plugin>
+```
+
 
 ```
 
@@ -239,96 +254,108 @@ and the other for the javadocs, the javadoc binary has to be set to match your s
 
 Then, we need two more plugins:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="xml">&lt;plugin&gt;
-    &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;
-    &lt;artifactId&gt;maven-surefire-plugin&lt;/artifactId&gt;
-    &lt;version&gt;2.22.2&lt;/version&gt;
-&lt;/plugin&gt;</pre>
+```xml
+<plugin>
+    <groupId>org.apache.maven.plugins</groupId>
+    <artifactId>maven-surefire-plugin</artifactId>
+    <version>2.22.2</version>
+</plugin>
+```
 
-<pre class="EnlighterJSRAW" data-enlighter-language="xml">&lt;plugin&gt;
-    &lt;groupId&gt;org.sonatype.plugins&lt;/groupId&gt;
-    &lt;artifactId&gt;nexus-staging-maven-plugin&lt;/artifactId&gt;
-    &lt;version&gt;1.6.8&lt;/version&gt;
-    &lt;extensions&gt;true&lt;/extensions&gt;
-    &lt;configuration&gt;
-        &lt;serverId&gt;ossrh&lt;/serverId&gt;
-        &lt;nexusUrl&gt;https://s01.oss.sonatype.org/&lt;/nexusUrl&gt;
-        &lt;autoReleaseAfterClose&gt;true&lt;/autoReleaseAfterClose&gt;
-    &lt;/configuration&gt;
-&lt;/plugin&gt;</pre>
+
+```xml
+<plugin>
+    <groupId>org.sonatype.plugins</groupId>
+    <artifactId>nexus-staging-maven-plugin</artifactId>
+    <version>1.6.8</version>
+    <extensions>true</extensions>
+    <configuration>
+        <serverId>ossrh</serverId>
+        <nexusUrl>https://s01.oss.sonatype.org/</nexusUrl>
+        <autoReleaseAfterClose>true</autoReleaseAfterClose>
+    </configuration>
+</plugin>
+```
+
 
 The final build configuration will look like this:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="xml">&lt;build&gt;
-    &lt;plugins&gt;
-        &lt;plugin&gt;
-            &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;
-            &lt;artifactId&gt;maven-source-plugin&lt;/artifactId&gt;
-            &lt;version&gt;3.2.1&lt;/version&gt;
-            &lt;executions&gt;
-                &lt;execution&gt;
-                    &lt;id&gt;attach-sources&lt;/id&gt;
-                    &lt;goals&gt;
-                        &lt;goal&gt;jar-no-fork&lt;/goal&gt;
-                    &lt;/goals&gt;
-                &lt;/execution&gt;
-            &lt;/executions&gt;
-        &lt;/plugin&gt;
-        &lt;plugin&gt;
-            &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;
-            &lt;artifactId&gt;maven-javadoc-plugin&lt;/artifactId&gt;
-            &lt;version&gt;3.2.0&lt;/version&gt;
-            &lt;executions&gt;
-                &lt;execution&gt;
-                    &lt;id&gt;attach-javadocs&lt;/id&gt;
-                    &lt;goals&gt;
-                        &lt;goal&gt;jar&lt;/goal&gt;
-                    &lt;/goals&gt;
-                &lt;/execution&gt;
-            &lt;/executions&gt;
-            &lt;configuration&gt;
-                &lt;javadocExecutable&gt;
+```xml
+<build>
+    <plugins>
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-source-plugin</artifactId>
+            <version>3.2.1</version>
+            <executions>
+                <execution>
+                    <id>attach-sources</id>
+                    <goals>
+                        <goal>jar-no-fork</goal>
+                    </goals>
+                </execution>
+            </executions>
+        </plugin>
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-javadoc-plugin</artifactId>
+            <version>3.2.0</version>
+            <executions>
+                <execution>
+                    <id>attach-javadocs</id>
+                    <goals>
+                        <goal>jar</goal>
+                    </goals>
+                </execution>
+            </executions>
+            <configuration>
+                <javadocExecutable>
                     ${java.home}/bin/javadoc
-                &lt;/javadocExecutable&gt;
-            &lt;/configuration&gt;
-        &lt;/plugin&gt;
-        &lt;plugin&gt;
-            &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;
-            &lt;artifactId&gt;maven-surefire-plugin&lt;/artifactId&gt;
-            &lt;version&gt;2.22.2&lt;/version&gt;
-        &lt;/plugin&gt;
-        &lt;plugin&gt;
-            &lt;groupId&gt;org.sonatype.plugins&lt;/groupId&gt;
-            &lt;artifactId&gt;nexus-staging-maven-plugin&lt;/artifactId&gt;
-            &lt;version&gt;1.6.8&lt;/version&gt;
-            &lt;extensions&gt;true&lt;/extensions&gt;
-            &lt;configuration&gt;
-                &lt;serverId&gt;ossrh&lt;/serverId&gt;
-                &lt;nexusUrl&gt;https://s01.oss.sonatype.org/&lt;/nexusUrl&gt;
-                &lt;autoReleaseAfterClose&gt;true&lt;/autoReleaseAfterClose&gt;
-            &lt;/configuration&gt;
-        &lt;/plugin&gt;
-    &lt;/plugins&gt;
-&lt;/build&gt;</pre>
+                </javadocExecutable>
+            </configuration>
+        </plugin>
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-surefire-plugin</artifactId>
+            <version>2.22.2</version>
+        </plugin>
+        <plugin>
+            <groupId>org.sonatype.plugins</groupId>
+            <artifactId>nexus-staging-maven-plugin</artifactId>
+            <version>1.6.8</version>
+            <extensions>true</extensions>
+            <configuration>
+                <serverId>ossrh</serverId>
+                <nexusUrl>https://s01.oss.sonatype.org/</nexusUrl>
+                <autoReleaseAfterClose>true</autoReleaseAfterClose>
+            </configuration>
+        </plugin>
+    </plugins>
+</build>
+```
+
 
 ### Distribution Management Config {#h3-8-distribution-management-config}
 
 Add this child to the project's root:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="xml">&lt;distributionManagement&gt;
-    &lt;snapshotRepository&gt;
-        &lt;id&gt;ossrh&lt;/id&gt;
-        &lt;url&gt;
+```xml
+<distributionManagement>
+    <snapshotRepository>
+        <id>ossrh</id>
+        <url>
             https://s01.oss.sonatype.org/content/repositories/snapshots
-        &lt;/url&gt;
-    &lt;/snapshotRepository&gt;
-    &lt;repository&gt;
-        &lt;id&gt;ossrh&lt;/id&gt;
-        &lt;url&gt;
+        </url>
+    </snapshotRepository>
+    <repository>
+        <id>ossrh</id>
+        <url>
             https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/
-        &lt;/url&gt;
-    &lt;/repository&gt;
-&lt;/distributionManagement&gt;</pre>
+        </url>
+    </repository>
+</distributionManagement>
+```
+
 
 That way, you set the repositories for snapshots, and final release. If you go to the snapshot repository link, you will literally find the directory for all the repositories added with their reverse DNS.
 
@@ -336,39 +363,42 @@ That way, you set the repositories for snapshots, and final release. If you go t
 
 We'll want to run a profile called ci-cd with the following configuration:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="xml">&lt;profiles&gt;
-    &lt;profile&gt;
-        &lt;id&gt;ci-cd&lt;/id&gt;
-        &lt;build&gt;
-            &lt;plugins&gt;
-                &lt;plugin&gt;
-                    &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;
-                    &lt;artifactId&gt;maven-gpg-plugin&lt;/artifactId&gt;
-                    &lt;version&gt;1.6&lt;/version&gt;
-                    &lt;executions&gt;
-                        &lt;execution&gt;
-                            &lt;id&gt;sign-artifacts&lt;/id&gt;
-                            &lt;phase&gt;verify&lt;/phase&gt;
-                            &lt;goals&gt;
-                                &lt;goal&gt;sign&lt;/goal&gt;
-                            &lt;/goals&gt;
-                            &lt;configuration&gt;
-                                &lt;keyname&gt;${gpg.keyname}&lt;/keyname&gt;
-                                &lt;passphraseServerId&gt;
+```xml
+<profiles>
+    <profile>
+        <id>ci-cd</id>
+        <build>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-gpg-plugin</artifactId>
+                    <version>1.6</version>
+                    <executions>
+                        <execution>
+                            <id>sign-artifacts</id>
+                            <phase>verify</phase>
+                            <goals>
+                                <goal>sign</goal>
+                            </goals>
+                            <configuration>
+                                <keyname>${gpg.keyname}</keyname>
+                                <passphraseServerId>
                                     ${gpg.keyname}
-                                &lt;/passphraseServerId&gt;
-                                &lt;gpgArguments&gt;
-                                    &lt;arg&gt;--pinentry-mode&lt;/arg&gt;
-                                    &lt;arg&gt;loopback&lt;/arg&gt;
-                                &lt;/gpgArguments&gt;
-                            &lt;/configuration&gt;
-                        &lt;/execution&gt;
-                    &lt;/executions&gt;
-                &lt;/plugin&gt;
-            &lt;/plugins&gt;
-        &lt;/build&gt;
-    &lt;/profile&gt;
-&lt;/profiles&gt;</pre>
+                                </passphraseServerId>
+                                <gpgArguments>
+                                    <arg>--pinentry-mode</arg>
+                                    <arg>loopback</arg>
+                                </gpgArguments>
+                            </configuration>
+                        </execution>
+                    </executions>
+                </plugin>
+            </plugins>
+        </build>
+    </profile>
+</profiles>
+```
+
 
 Visit [Introduction to Build Profiles \| Apache Maven](https://maven.apache.org/guides/introduction/introduction-to-profiles.html) to learn more about Maven profiles.
 
@@ -393,14 +423,20 @@ Deploy the Project {#h2-11-deploy-the-project}
 
 In this last step, if everything is all right, we can now deploy the artifact. Add "-SNAPSHOT" if you will deploy to the snapshot repository. For example:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="xml">&lt;version&gt;0.1.0-SNAPSHOT&lt;/version&gt;</pre>
+```xml
+<version>0.1.0-SNAPSHOT</version>
+```
+
 
 ```
 or else:
 
 ```
 
-<pre class="EnlighterJSRAW" data-enlighter-language="xml">&lt;version&gt;0.1.0&lt;/version&gt;</pre>
+```xml
+<version>0.1.0</version>
+```
+
 
 Open Git Bash into the project's directory and run the deploy-command with the " ci-cd" profile:
 

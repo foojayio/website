@@ -29,10 +29,13 @@ I'll assume Java is already installed on your machine. To confirm, open your ter
 
 You should see something like this:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">java --version
+```
+java --version
 java 21.0.1 2023-10-17 LTS
 Java(TM) SE Runtime Environment (build 21.0.1+12-LTS-29)
-Java HotSpot(TM) 64-Bit Server VM (build 21.0.1+12-LTS-29, mixed mode, sharing)</pre>
+Java HotSpot(TM) 64-Bit Server VM (build 21.0.1+12-LTS-29, mixed mode, sharing)
+```
+
 
 If you don't see a similar output, it means Java isn't installed. Sorry to make you uncomfortable, but you'll need to install it now! The easiest way is through [SDKMan](https://sdkman.io/).
 
@@ -46,7 +49,8 @@ First, create a new file called `hello.java`:
 
 Then, paste the following code into the file:  
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">#!/usr/bin/java --source 21
+```java
+#!/usr/bin/java --source 21
 
 import java.time.LocalDate;
 import java.util.Random;
@@ -59,15 +63,15 @@ public class HelloCLI {
         System.out.println("Welcome to the Java CLI. Type 'help' for a list of commands or 'exit' to quit.");
 
         while (true) {
-            System.out.print("Command&amp;gt; ");
+            System.out.print("Command&gt; ");
             String command = scanner.nextLine().trim().toLowerCase();
 
             switch (command) {
-                case "greet" -&gt; System.out.println("Hello, Java enthusiast!");
-                case "date" -&gt; System.out.println("Today's date: " + LocalDate.now());
-                case "time" -&gt; System.out.println("Current time: " + java.time.LocalTime.now());
-                case "random" -&gt; System.out.println("Random number (1-100): " + (random.nextInt(100) + 1));
-                case "add" -&gt; {
+                case "greet" -> System.out.println("Hello, Java enthusiast!");
+                case "date" -> System.out.println("Today's date: " + LocalDate.now());
+                case "time" -> System.out.println("Current time: " + java.time.LocalTime.now());
+                case "random" -> System.out.println("Random number (1-100): " + (random.nextInt(100) + 1));
+                case "add" -> {
                     System.out.print("Enter first number: ");
                     double num1 = scanner.nextDouble();
                     System.out.print("Enter second number: ");
@@ -75,7 +79,7 @@ public class HelloCLI {
                     scanner.nextLine(); // Consume the newline
                     System.out.println("Result: " + (num1 + num2));
                 }
-                case "multiply" -&gt; {
+                case "multiply" -> {
                     System.out.print("Enter first number: ");
                     double num1 = scanner.nextDouble();
                     System.out.print("Enter second number: ");
@@ -83,7 +87,7 @@ public class HelloCLI {
                     scanner.nextLine(); // Consume the newline
                     System.out.println("Result: " + (num1 * num2));
                 }
-                case "help" -&gt; {
+                case "help" -> {
                     System.out.println("""
                         Available commands:
                         - greet: Prints a friendly greeting.
@@ -96,16 +100,17 @@ public class HelloCLI {
                         - exit: Exits the program.
                         """);
                 }
-                case "exit" -&gt; {
+                case "exit" -> {
                     System.out.println("Exiting... Goodbye!");
                     return; // Terminate the program
                 }
-                default -&gt; System.out.println("Unknown command: " + command + ". Type 'help' for a list of commands.");
+                default -> System.out.println("Unknown command: " + command + ". Type 'help' for a list of commands.");
             }
         }
     }
 }
-</pre>
+```
+
 
 ### Key Point: Shebang Line {#key-point-shebang-line}
 
@@ -113,25 +118,33 @@ Notice the first line: `#!/usr/bin/java --source 21`. This is the crucial part o
 
 You can remove the `.java` extension if you want; that's also fine. Just keep the file named `hello`. To rename the file, use the following command:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">mv hello.java hello</pre>
+```
+mv hello.java hello
+```
+
 
 ### Make It Executable {#make-it-executable}
 
 Now, to make this script executable, run the following command:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">chmod +x ./hello
-</pre>
+```
+chmod +x ./hello
+```
+
 
 That's it! You can now run it with:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">./hello
-</pre>
+```
+./hello
+```
+
 
 Here's what you should see when you run it:  
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">./hello
+```
+./hello
 Welcome to the Java CLI. Type 'help' for a list of commands or 'exit' to quit.
-Command&amp;gt; help
+Command&gt; help
 Available commands:
 - greet: Prints a friendly greeting.
 - date: Displays today's date.
@@ -142,25 +155,29 @@ Available commands:
 - help: Shows this help message.
 - exit: Exits the program.
 
-Command&amp;gt; greet
+Command&gt; greet
 Hello, Java enthusiast!
-Command&amp;gt; date
+Command&gt; date
 Today's date: 2024-10-27
-Command&amp;gt; random
+Command&gt; random
 Random number (1-100): 99
-Command&amp;gt; add
+Command&gt; add
 Enter first number: 5
 Enter second number: 39999
 Result: 40004.0
-Command&amp;gt; exit
-Exiting... Goodbye!</pre>
+Command&gt; exit
+Exiting... Goodbye!
+```
+
 
 ### Bonus Tip: Running From Anywhere {#bonus-tip-running-from-anywhere}
 
 If you'd like to run this script from anywhere on your machine, simply move the file to the `/usr/local/bin/` folder:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">sudo mv ./hello /usr/local/bin/
-</pre>
+```
+sudo mv ./hello /usr/local/bin/
+```
+
 
 Now, you can invoke it from any directory just by typing `hello` in your terminal.
 

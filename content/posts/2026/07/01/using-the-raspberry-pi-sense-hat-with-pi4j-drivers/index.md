@@ -105,8 +105,11 @@ Initializing the Sense HAT {#h2-4-initializing-the-sense-hat}
 
 Using the Sense HAT driver starts with creating the Pi4J context and initializing the device.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">Context pi4j = Pi4J.newAutoContext();
-SenseHat senseHat = new SenseHat(pi4j);</pre>
+```
+Context pi4j = Pi4J.newAutoContext();
+SenseHat senseHat = new SenseHat(pi4j);
+```
+
 
 Once initialized, the board's sensors and LED matrix become available through dedicated APIs.
 
@@ -115,13 +118,16 @@ Reading Environmental Data {#h2-5-reading-environmental-data}
 
 One of the most common use cases is collecting environmental information.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">double temperature = senseHat.getTemperature();
+```
+double temperature = senseHat.getTemperature();
 float humidity = senseHat.getHumidity();
 double pressure = senseHat.getPressure();
 
 System.out.println("Temperature: " + temperature);
 System.out.println("Humidity: " + humidity);
-System.out.println("Pressure: " + pressure);</pre>
+System.out.println("Pressure: " + pressure);
+```
+
 
 With just a few lines of code, your application can access real-time sensor data.
 
@@ -136,7 +142,10 @@ It can be used to display colors, patterns, animations, and status indicators.
 
 For example:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">senseHat.fill(0x0000FF); # 0xRRGGBB</pre>
+```
+senseHat.fill(0x0000FF); # 0xRRGGBB
+```
+
 
 This immediately turns the entire LED matrix blue.
 

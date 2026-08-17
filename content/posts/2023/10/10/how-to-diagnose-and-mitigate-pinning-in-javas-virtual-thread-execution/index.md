@@ -61,7 +61,8 @@ Let's go ahead and run the previous program with this flag enabled.
 
 Upon doing so, you'll observe certain outputs that shed light on the issue at hand.  
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group=""> Task :Crawler.main()
+```java
+ Task :Crawler.main()
 Thread[#421,ForkJoinPool-1-worker-51,5,CarrierThreads]
     java.base/java.lang.VirtualThread$VThreadContinuation.onPinned(VirtualThread.java:185)
     java.base/jdk.internal.vm.Continuation.onPinned0(Continuation.java:393)
@@ -94,7 +95,8 @@ Thread[#421,ForkJoinPool-1-worker-51,5,CarrierThreads]
     java.base/sun.net.www.MeteredStream.justRead(MeteredStream.java:85)
     java.base/sun.net.www.MeteredStream.read(MeteredStream.java:132)
     java.base/java.io.FilterInputStream.read(FilterInputStream.java:119)
-</pre>
+```
+
 
 If you scrutinize the stack trace, one line will likely grab your attention:
 
@@ -108,7 +110,8 @@ This line indicates that our virtual thread is, in fact, getting pinned to carri
 
 To remedy this, consider refactoring your application to work without the jsoup library. By avoiding the use of \`synchronized\` blocks or native code, we're likely to see a significant performance improvement.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">package ca.bazlur.virtualthreads;
+```java
+package ca.bazlur.virtualthreads;
 
 import java.io.IOException;
 import java.net.URI;
@@ -133,11 +136,11 @@ public class Crawler2 implements Runnable {
     private static final HttpClient HTTP_CLIENT = HttpClient.newBuilder().build();
     private static final int MAX_PAGES_TO_SEARCH = 100;
     private final AtomicInteger pageCount;
-    private final ConcurrentMap&lt;String, Boolean&gt; visitedPages;
+    private final ConcurrentMap<String, Boolean> visitedPages;
     private final String url;
-    private final Queue&lt;String&gt; pageQueue;
+    private final Queue<String> pageQueue;
 
-    public Crawler2(AtomicInteger pageCount, ConcurrentMap&lt;String, Boolean&gt; visitedPages, String url, Queue&lt;String&gt; pageQueue) {
+    public Crawler2(AtomicInteger pageCount, ConcurrentMap<String, Boolean> visitedPages, String url, Queue<String> pageQueue) {
         this.pageCount = pageCount;
         this.visitedPages = visitedPages;
         this.url = url;
@@ -146,11 +149,11 @@ public class Crawler2 implements Runnable {
 
     @Override
     public void run() {
-        if (!visitedPages.containsKey(url) &amp;&amp; pageCount.get() &lt; MAX_PAGES_TO_SEARCH) {
+        if (!visitedPages.containsKey(url) && pageCount.get() < MAX_PAGES_TO_SEARCH) {
             try {
-                List&lt;String&gt; links = extractLinks(url);
-                List&lt;String&gt; newUrls = links.stream()
-                        .filter(nextUrl -&gt; nextUrl.startsWith("http") &amp;&amp; !visitedPages.containsKey(nextUrl))
+                List<String> links = extractLinks(url);
+                List<String> newUrls = links.stream()
+                        .filter(nextUrl -> nextUrl.startsWith("http") && !visitedPages.containsKey(nextUrl))
                         .toList();
 
                 visitedPages.put(url, true);
@@ -168,16 +171,16 @@ public class Crawler2 implements Runnable {
         }
     }
 
-    public static List&lt;String&gt; extractLinks(String url) throws IOException, InterruptedException {
+    public static List<String> extractLinks(String url) throws IOException, InterruptedException {
         String pageContent = getPageContent(url);
-        var links = new HashSet&lt;String&gt;();
+        var links = new HashSet<String>();
         Matcher matcher = LINK_PATTERN.matcher(pageContent);
 
         while (matcher.find()) {
             links.add(matcher.group(1));
         }
 
-        return new ArrayList&lt;&gt;(links);
+        return new ArrayList<>(links);
     }
 
     private static String getPageContent(String url) throws IOException, InterruptedException {
@@ -209,8 +212,8 @@ public class Crawler2 implements Runnable {
     //Throughput: 227.63706316126962 pages/sec
 
     public static void main(String[] args) {
-        final ConcurrentMap&lt;String, Boolean&gt; visitedPages = new ConcurrentHashMap&lt;&gt;();
-        final Queue&lt;String&gt; pageQueue = new LinkedBlockingDeque&lt;&gt;();
+        final ConcurrentMap<String, Boolean> visitedPages = new ConcurrentHashMap<>();
+        final Queue<String> pageQueue = new LinkedBlockingDeque<>();
         pageQueue.add("https://en.wikipedia.org/wiki/Main_Page");
 
         long startTime = System.currentTimeMillis();
@@ -218,14 +221,14 @@ public class Crawler2 implements Runnable {
 
         //try (var executor = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors())) {
         try (var executor = Executors.newVirtualThreadPerTaskExecutor()) {
-            while (pageCount.get() &lt;= MAX_PAGES_TO_SEARCH) {
+            while (pageCount.get() <= MAX_PAGES_TO_SEARCH) {
                 QUEUE_LOCK.lock();
                 try {
                     while (pageQueue.isEmpty()) {
                         QUEUE_NOT_EMPTY.await();
                     }
                     String polledUrl = pageQueue.poll();
-                    if (polledUrl != null &amp;&amp; !visitedPages.containsKey(polledUrl)) {
+                    if (polledUrl != null && !visitedPages.containsKey(polledUrl)) {
                         executor.submit(new Crawler2(pageCount, visitedPages, polledUrl, pageQueue));
                     }
                 } finally {
@@ -250,7 +253,8 @@ public class Crawler2 implements Runnable {
         System.out.println("Throughput: " + pagesPerSecond + " pages/sec");
     }
 }
-</pre>
+```
+
 
 To fix the pinning issue, we switched from using the jsoup library to using HttpClient. HttpClient is built into Java and is available from version 11 onwards. The best part? It doesn't have the pinning problem we saw with jsoup.
 

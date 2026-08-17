@@ -82,16 +82,22 @@ How to Use Lottie4J {#h2-6-how-to-use-lottie4j}
 
 Using Lottie4J in your JavaFX application is straightforward. Import the fxplayer-dependency in your pom.xml:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&lt;dependency&gt;
-    &lt;groupId&gt;com.lottie4j&lt;/groupId&gt;
-    &lt;artifactId&gt;fxplayer&lt;/artifactId&gt;
-    &lt;version&gt;1.0.0&lt;/version&gt;
-&lt;/dependency&gt;</pre>
+```
+<dependency>
+    <groupId>com.lottie4j</groupId>
+    <artifactId>fxplayer</artifactId>
+    <version>1.0.0</version>
+</dependency>
+```
+
 
 Then add the animation with this minimal code example:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">LottiePlayer player = new LottiePlayer("path/to/animation.json");
-parent.getChildren().add(player);</pre>
+```
+LottiePlayer player = new LottiePlayer("path/to/animation.json");
+parent.getChildren().add(player);
+```
+
 
 Load your Lottie JSON file, create a LottiePlayer component, add it to your scene or parent component. That's it! The player handles all the complexity of parsing the animation and rendering it frame by frame.
 

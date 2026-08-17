@@ -38,8 +38,11 @@ Character Enhancements: {#h2-1-character-enhancements}
 
 Example:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">boolean isEmoji = Character.isEmoji(9203);
-System.out.println(isEmoji);</pre>
+```java
+boolean isEmoji = Character.isEmoji(9203);
+System.out.println(isEmoji);
+```
+
 
 The output will be `true` because the character with code point 9203 (⏳) is considered an emoji.
 
@@ -57,9 +60,12 @@ Java 21 enhances the `StringBuffer` and `StringBuilder` classes with the `repeat
 
 Example:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">var buffer = new StringBuffer();
+```java
+var buffer = new StringBuffer();
 buffer.repeat(9203, 5);
-System.out.println(buffer);</pre>
+System.out.println(buffer);
+```
+
 
 <br />
 
@@ -79,9 +85,12 @@ Java 21 introduces two new methods in the `String` class, namely `indexOf(String
 
 Java 21 also enhances the `String` class with a `splitWithDelimiters(String regex, int limit)` method. This method splits a string based on a given regular expression and returns both the strings and the matching delimiters. For example:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">var booAndFoo = "boo:::and::foo";
+```java
+var booAndFoo = "boo:::and::foo";
 String[] splits = booAndFoo.splitWithDelimiters(":+", 3);
-System.out.println("splits = " + Arrays.toString(splits));</pre>
+System.out.println("splits = " + Arrays.toString(splits));
+```
+
 
 The output will be: `splits = [boo, :::, and, ::, foo]`, where the string is split around the `:+` delimiter, limiting the result to a maximum of three splits.
 

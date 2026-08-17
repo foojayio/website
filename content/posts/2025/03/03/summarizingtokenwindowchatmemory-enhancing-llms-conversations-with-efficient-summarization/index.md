@@ -49,7 +49,8 @@ The core idea behind **SummarizingTokenWindowChatMemory** is straightforward:
 
 Let's look at the code:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">package ca.bazlur.chefbot.ai;
+```
+package ca.bazlur.chefbot.ai;
 
 import dev.langchain4j.data.message.ChatMessage;
 import dev.langchain4j.data.message.SystemMessage;
@@ -89,11 +90,11 @@ public class SummarizingTokenWindowChatMemory implements ChatMemory {
     @Override
     public void add(ChatMessage message) {
         // Pull existing messages from store
-        List&lt;ChatMessage&gt; messages = new ArrayList&lt;&gt;(store.getMessages(id));
+        List<ChatMessage> messages = new ArrayList<>(store.getMessages(id));
 
         // If it's a system message, handle "replace existing system message" logic
         if (message instanceof SystemMessage) {
-            Optional&lt;SystemMessage&gt; maybeSystem = findSystemMessage(messages);
+            Optional<SystemMessage> maybeSystem = findSystemMessage(messages);
             if (maybeSystem.isPresent()) {
                 if (maybeSystem.get().equals(message)) {
                     // Same system message, do nothing
@@ -116,9 +117,9 @@ public class SummarizingTokenWindowChatMemory implements ChatMemory {
     }
 
     @Override
-    public List&lt;ChatMessage&gt; messages() {
+    public List<ChatMessage> messages() {
         // Return a copy of messages from store
-        List&lt;ChatMessage&gt; messages = new ArrayList&lt;&gt;(store.getMessages(id));
+        List<ChatMessage> messages = new ArrayList<>(store.getMessages(id));
 
         // (Optional) ensure capacity here again, if you want to guarantee it every time
         ensureSummarizedCapacity(messages);
@@ -130,20 +131,20 @@ public class SummarizingTokenWindowChatMemory implements ChatMemory {
         store.deleteMessages(id);
     }
 
-    private void ensureSummarizedCapacity(List&lt;ChatMessage&gt; messages) {
+    private void ensureSummarizedCapacity(List<ChatMessage> messages) {
         int currentTokenCount = tokenizer.estimateTokenCountInMessages(messages);
-        if (currentTokenCount &lt;= maxTokens) {
+        if (currentTokenCount <= maxTokens) {
             return; // We are within capacity
         }
 
-        // If we exceed tokens, let's summarize the older messages (except system msg &amp; possibly the newest).
+        // If we exceed tokens, let's summarize the older messages (except system msg & possibly the newest).
         // 1) Separate out the system message if present at index 0.
         // 2) Summarize everything from startIndex...up to near the end,
         //    leaving maybe the last user or assistant message "unsummarized" for context.
         // 3) Insert the summary as a single message, then re-check capacity.
 
         // First, handle any system message
-        Optional&lt;SystemMessage&gt; maybeSystem = findSystemMessage(messages);
+        Optional<SystemMessage> maybeSystem = findSystemMessage(messages);
         maybeSystem.ifPresent(messages::remove);
 
         // Now we can work with the non-system messages
@@ -151,7 +152,7 @@ public class SummarizingTokenWindowChatMemory implements ChatMemory {
         int endIndex = messages.size() - 1; // Leave the last message for context
 
         // Don't try to summarize if we have 2 or fewer messages
-        if (endIndex - startIndex &lt;= 1) {
+        if (endIndex - startIndex <= 1) {
             // If we can't summarize, fall back to just removing oldest messages
             removeOldestUntilFit(messages);
             // Re-add system message if we had one
@@ -159,8 +160,8 @@ public class SummarizingTokenWindowChatMemory implements ChatMemory {
             return;
         }
 
-        // Get the messages to summarize (everything except maybe system &amp; last)
-        List&lt;ChatMessage&gt; toSummarize = new ArrayList&lt;&gt;(messages.subList(startIndex, endIndex));
+        // Get the messages to summarize (everything except maybe system & last)
+        List<ChatMessage> toSummarize = new ArrayList<>(messages.subList(startIndex, endIndex));
 
         // Generate the summary
         String summary = summarizer.summarize(toSummarize);
@@ -173,18 +174,18 @@ public class SummarizingTokenWindowChatMemory implements ChatMemory {
         maybeSystem.ifPresent(messages::addFirst);
 
         // If we're still over capacity, remove oldest messages (after any system message)
-        if (tokenizer.estimateTokenCountInMessages(messages) &gt; maxTokens) {
+        if (tokenizer.estimateTokenCountInMessages(messages) > maxTokens) {
             removeOldestUntilFit(messages);
         }
     }
 
-    private void removeOldestUntilFit(List&lt;ChatMessage&gt; messages) {
+    private void removeOldestUntilFit(List<ChatMessage> messages) {
         // Keep system message if present
-        Optional&lt;SystemMessage&gt; maybeSystem = findSystemMessage(messages);
+        Optional<SystemMessage> maybeSystem = findSystemMessage(messages);
         maybeSystem.ifPresent(messages::remove);
 
         // Remove oldest messages until we're under token limit
-        while (!messages.isEmpty() &amp;&amp; tokenizer.estimateTokenCountInMessages(messages) &gt; maxTokens) {
+        while (!messages.isEmpty() && tokenizer.estimateTokenCountInMessages(messages) > maxTokens) {
             messages.removeFirst();
         }
 
@@ -192,8 +193,8 @@ public class SummarizingTokenWindowChatMemory implements ChatMemory {
         maybeSystem.ifPresent(messages::addFirst);
     }
 
-    private Optional&lt;SystemMessage&gt; findSystemMessage(List&lt;ChatMessage&gt; messages) {
-        if (!messages.isEmpty() &amp;&amp; messages.getFirst() instanceof SystemMessage) {
+    private Optional<SystemMessage> findSystemMessage(List<ChatMessage> messages) {
+        if (!messages.isEmpty() && messages.getFirst() instanceof SystemMessage) {
             return Optional.of((SystemMessage) messages.getFirst());
         }
         return Optional.empty();
@@ -235,7 +236,9 @@ public class SummarizingTokenWindowChatMemory implements ChatMemory {
             return new SummarizingTokenWindowChatMemory(this);
         }
     }
-}</pre>
+}
+```
+
 
 The **SummarizingTokenWindowChatMemory** class manages chat messages, ensuring they stay within a specified token limit by summarizing older messages when necessary. It uses an [**OpenAiTokenizer**](https://javadoc.io/doc/dev.langchain4j/langchain4j-open-ai/latest/dev/langchain4j/model/openai/OpenAiTokenizer.html) to estimate token counts and a **Summarizer** to generate summaries.
 
@@ -247,13 +250,16 @@ Now, let's work on the **Sumerizer**.
 
 At its core, **OpenAILLMSummarizer** implements the Summarizer interface:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">import dev.langchain4j.data.message.ChatMessage;
+```
+import dev.langchain4j.data.message.ChatMessage;
 
 import java.util.List;
 
 public interface Summarizer {
-    String summarize(List&lt;ChatMessage&gt; messages);
-}</pre>
+    String summarize(List<ChatMessage> messages);
+}
+```
+
 
 This provides a contract for any summarization strategy.
 
@@ -261,7 +267,8 @@ This provides a contract for any summarization strategy.
 
 The main implementation, **OpenAILLMSummarizer** , is responsible for processing chat history and condensing it into a summary:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">package ca.bazlur.chefbot.ai;
+```
+package ca.bazlur.chefbot.ai;
 
 import dev.langchain4j.data.message.AiMessage;
 import dev.langchain4j.data.message.ChatMessage;
@@ -286,7 +293,7 @@ public class OpenAILLMSummarizer implements Summarizer {
     }
 
     @Override
-    public String summarize(List&lt;ChatMessage&gt; messages) {
+    public String summarize(List<ChatMessage> messages) {
         StringBuilder promptBuilder = new StringBuilder("Summarize the following conversation: \n");
         for (ChatMessage msg : messages) {
             if (msg instanceof UserMessage) {
@@ -302,7 +309,9 @@ public class OpenAILLMSummarizer implements Summarizer {
         return summary.trim();
     }
 
-}</pre>
+}
+```
+
 
 * Constructs a structured prompt containing key user, AI, and system messages.
 * Invokes the **SummarizerAssistant** , which interacts with OpenAI's language model to generate the summary.
@@ -311,7 +320,8 @@ public class OpenAILLMSummarizer implements Summarizer {
 
 The **SummarizerAssistant** provides an AI-driven summarization method:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">interface SummarizerAssistant {
+```
+interface SummarizerAssistant {
 
     @dev.langchain4j.service.UserMessage("""
     You are a helpful assistant summarizing past conversation turns for a chatbot.
@@ -329,7 +339,9 @@ The **SummarizerAssistant** provides an AI-driven summarization method:
     {message}
     """)
     String summarize(@V("message") String messages, @V("desiredTokenLimit") int desiredTokenLimit);
-}</pre>
+}
+```
+
 
 This mechanism:
 

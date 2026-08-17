@@ -46,21 +46,28 @@ The starting place for all of my Spring Boot applications is the [Spring Initial
 
 After downloading the project, I opened it in my IDE and added the Evernote dependency to the `pom.xml` file.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="xml">&lt;dependency&gt;
-    &lt;groupId&gt;com.evernote&lt;/groupId&gt;
-    &lt;artifactId&gt;evernote-api&lt;/artifactId&gt;
-    &lt;version&gt;1.25.1&lt;/version&gt;
-&lt;/dependency&gt;</pre>
+```xml
+<dependency>
+    <groupId>com.evernote</groupId>
+    <artifactId>evernote-api</artifactId>
+    <version>1.25.1</version>
+</dependency>
+```
+
 
 Evernote's Java SDK provides a couple of sample code classes, and the [EDAMDemo one](https://github.com/Evernote/evernote-sdk-java/blob/master/sample/client/EDAMDemo.java) was pretty similar to what I was looking for. My initial approach for merging the sample Java code with Spring Boot was to copy/paste the entire `EDAMDemo.java` class into a new class file in the project folder, and then start tweaking broken imports and other issues. However, I quickly realized that this approach was extremely error-prone. Because of the large code blocks, I had trouble running the demo's main method with Spring Boot's `main()`. I also had issues passing the developer token around (should I put it in the Spring Boot main class or this demo class?). I needed to approach this with a different tactic.
 
 After venting about it a bit to [Mark Heckler](https://github.com/mkheck), he reminded me to start super simple and build up. One example he gave was to move the developer token string to the properties file and just return that. So, I cleared out all the copied code and placed the developer token in the `application.properties` file as shown below.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="raw">AUTH_TOKEN=&lt;your developer token here&gt;</pre>
+```
+AUTH_TOKEN=<your developer token here>
+```
+
 
 Next, I created a new class called `EvernoteDemo` annotated as a component and implemented the `CommandLineRunner` interface, so that this class will load on startup.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">@Component
+```java
+@Component
 public class EvernoteDemo implements CommandLineRunner {
     @Value("${AUTH_TOKEN}")
     private String token;
@@ -69,7 +76,9 @@ public class EvernoteDemo implements CommandLineRunner {
     public void run(String... args) throws Exception {
         System.out.println("Developer token: " + token);
     }
-}</pre>
+}
+```
+
 
 When you implement the `CommandLineRunner` interface, you need to implement the `run()` method. Once that outline was there, I added [Spring's `@Value` annotation](https://www.baeldung.com/spring-value-annotation) outside the method to pull in the `AUTH_TOKEN` from the properties file into a variable `token`, so we can use it to access the API. Inside the `run()` method, I printed out the developer token to make sure it was being read from the properties file. I ran the application and saw the token string printed out in the console, so I knew I was on the right track.
 
@@ -80,7 +89,8 @@ Incorporate Evernote SDK Example Code {#h2-2-incorporate-evernote-sdk-example-co
 
 First, I copied in the [`main()` method from the sample code](https://github.com/Evernote/evernote-sdk-java/blob/master/sample/client/EDAMDemo.java#L64) to my `EvernoteDemo` class's `run()` method.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">@Override
+```java
+@Override
 public void run(String... args) throws Exception {
     if ("your developer token".equals(token)) {
         System.err.println("Please fill in your developer token");
@@ -108,11 +118,14 @@ public void run(String... args) throws Exception {
     } catch (TTransportException t) {
         System.err.println("Networking error: " + t.getMessage());
     }
-}</pre>
+}
+```
+
 
 I removed the first few lines that pull the `AUTH_TOKEN` from the environment because our `@Value` annotation handles that now. I also removed some of the method calls in the `try` block because I still want to start small and build up. Then, the EDAMDemo object (before the try block) needed renamed to match our class name `EvernoteDemo`. After importing some of the classes referenced in the block, I still had some red-highlighted text. To fix that, I needed to copy over the [`EDAMDemo` constructor](https://github.com/Evernote/evernote-sdk-java/blob/master/sample/client/EDAMDemo.java#L109) and the [`listNotes()` method](https://github.com/Evernote/evernote-sdk-java/blob/master/sample/client/EDAMDemo.java#L130).
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public EvernoteDemo(String token) throws Exception {
+```java
+public EvernoteDemo(String token) throws Exception {
     EvernoteAuth evernoteAuth = new EvernoteAuth(EvernoteService.SANDBOX, token);
     ClientFactory factory = new ClientFactory(evernoteAuth);
     userStore = factory.createUserStoreClient();
@@ -126,19 +139,25 @@ I removed the first few lines that pull the `AUTH_TOKEN` from the environment be
     }
 
     noteStore = factory.createNoteStoreClient();
-}</pre>
+}
+```
+
 
 The EDAMDemo constructor from the sample code became the EvernoteDemo constructor in our code. After some imports, almost everything worked except that the `token` parameter was underlined red with the message `Could not autowire. No beans of 'String' type found.`. Digging into this, I found that Spring looks for an empty constructor to use when autowiring. So, I added an empty constructor to the `EvernoteDemo` class, and that solved it!
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public EvernoteDemo() {
-}</pre>
+```java
+public EvernoteDemo() {
+}
+```
+
 
 The last piece of code to add is for the `listNotes()` method.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">private void listNotes() throws Exception {
+```java
+private void listNotes() throws Exception {
     System.out.println("Listing notes:");
 
-    List&lt;Notebook&gt; notebooks = noteStore.listNotebooks();
+    List<Notebook> notebooks = noteStore.listNotebooks();
 
     for (Notebook notebook : notebooks) {
       System.out.println("Notebook: " + notebook.getName());
@@ -149,21 +168,26 @@ The last piece of code to add is for the `listNotes()` method.
       filter.setAscending(true);
 
       NoteList noteList = noteStore.findNotes(filter, 0, 100);
-      List&lt;Note&gt; notes = noteList.getNotes();
+      List<Note> notes = noteList.getNotes();
       for (Note note : notes) {
         System.out.println(" * " + note.getTitle());
       }
     }
     System.out.println();
-}</pre>
+}
+```
+
 
 Once I fixed all the imports, all the red highlighting and errors went away. I ran the application and saw the following output:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="raw">Listing notes:
+```
+Listing notes:
 Notebook: First Notebook
  * Docker
  * Microservices Project Notes
- * Goodreads data cleaning for db load</pre>
+ * Goodreads data cleaning for db load
+```
+
 
 The code is working! I'm able to connect to the Evernote API and list out the notes in my account. The next piece I want to work on is getting the note contents from the note so that I can work towards importing notes into Neo4j. That will be a topic for another article, though.
 

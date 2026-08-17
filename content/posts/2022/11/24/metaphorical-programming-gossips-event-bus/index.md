@@ -43,34 +43,44 @@ The spine of almost every event bus out there is a form of the [Observer Pattern
 
 First, We'll have to make our `Observable` or the `Publisher` as it's called in a slightly [different context](https://medium.com/better-programming/observer-vs-pub-sub-pattern-50d3b27f838c). Our `Observable` is a source of **gossips**, in a chatty neighborhood. Where rumors and gossips are the main source of entertainment:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="kotlin">interface Gossips&lt;T&gt; {
+```kotlin
+interface Gossips<T> {
     fun spread(gossip: T)
-    fun listen(onNext: (gossip: T) -&gt; Unit): Subscription
+    fun listen(onNext: (gossip: T) -> Unit): Subscription
     fun unSubscribe(subscription: Subscription)
     fun unSubscribeAll()
-}</pre>
+}
+```
+
 
 Here we define our interface for the source of gossips. Like any respected event bus, Gossips should be able to `publish`/**`spread()`** `events`/**`gossips`** . We also want users to be able to `subscribe`/**`listen()`** to `events`/**`gossips`** the moment they come out, so that they can react accordingly. For the convenience of our users, we want them to be able to unsubscribe from these types of gossips.
 
 Next, we want to implement the mechanism by which users can interact with our source of gossip. We need to create the `Subscription` and the `Receiver` components:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="kotlin">interface Subscription {
+```kotlin
+interface Subscription {
     fun cancel()
     val isCanceled: Boolean
-}</pre>
+}
+```
+
 
 Here we provide our `subscriber`s/**`listener`s** with a way to cancel their subscriptions.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="kotlin">interface Receiver&lt;in T&gt; {
+```kotlin
+interface Receiver<in T> {
     fun psst(gossip: T)
-}</pre>
+}
+```
+
 
 And here, we provide our nosy neighbors with a way to stay up to date with the latest screw-ups in the neighborhood. By the social act of whispering and an eloquent `psst()` function.
 
 Often the two are combined, and we will do just that. Whether it's a good combination of qualities or not isn't relevant to the topic of this article.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="kotlin">internal class Neighbor&lt;in T&gt;(private val source: Gossips&lt;T&gt;, private val react: (gossip: T) -&gt; Unit) : Subscription,
-    Receiver&lt;T&gt; {
+```kotlin
+internal class Neighbor<in T>(private val source: Gossips<T>, private val react: (gossip: T) -> Unit) : Subscription,
+    Receiver<T> {
     override var isCanceled: Boolean = false
 
     override fun psst(gossip: T) {
@@ -81,22 +91,25 @@ Often the two are combined, and we will do just that. Whether it's a good combin
         source.unSubscribe(this)
         isCanceled = true
     }
-}</pre>
+}
+```
+
 
 Our `Neighbor`s thrive on a `source` of gossips. They also have their own way/function of `react`ing to them. Since a `Neighbor` is both a `Receiver` and a `Subscription` to our gossips, it implements their qualities: `psst()`, and `cancel()`.
 
 Now what's left is to define how our bus actually works, by writing an implementation of our `Gossips` interface:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="kotlin">internal class GossipsImpl&lt;T&gt; : Gossips&lt;T&gt; {
-    private val neighbors by lazy { mutableSetOf&lt;Neighbor&lt;T&gt;&gt;() }
+```kotlin
+internal class GossipsImpl<T> : Gossips<T> {
+    private val neighbors by lazy { mutableSetOf<Neighbor<T>>() }
 
     override fun spread(gossip: T) {
-        neighbors.forEach { neighbor -&gt;
+        neighbors.forEach { neighbor ->
             neighbor.psst(gossip)
         }
     }
 
-    override fun listen(onNext: (gossip: T) -&gt; Unit): Subscription {
+    override fun listen(onNext: (gossip: T) -> Unit): Subscription {
         val neighbor = Neighbor(source = this, react = onNext)
         neighbors.add(neighbor)
         return neighbor
@@ -110,7 +123,9 @@ Now what's left is to define how our bus actually works, by writing an implement
         neighbors.forEach { it.cancel() }
         neighbors.clear()
     }
-}</pre>
+}
+```
+
 
 We store a set of `Neighbor`s, and we keep them up to date whenever a new `gossip` is out. We add new neighbors to this set whenever they are interested in `listen`ing to our gossips. We also remove them whenever they feel they had enough and want to `unsubscribe`.
 
@@ -119,28 +134,40 @@ Tying it all together {#h2-2-tying-it-all-together}
 
 An example of how it looks like in action is quite amusing:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="kotlin">object State {
-    val resultGossips: Gossips&lt;GenericResult&gt; = Gossips.create()
-}</pre>
+```kotlin
+object State {
+    val resultGossips: Gossips<GenericResult> = Gossips.create()
+}
+```
+
 
 We define a State object, that lives the entirety of our app's life-cycle. and houses all our gossips, so that we can easily spread and `listen` to them (don't judge):
 
-<pre class="EnlighterJSRAW" data-enlighter-language="kotlin">fun onAttach(){
+```kotlin
+fun onAttach(){
     resultGossips.listen { showResults(it) }
-}</pre>
+}
+```
+
 
 We listen to our gossips of interest, in an entry point in our app's life-cycle. Similarly, we can unsubscribe when we feel like it:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="kotlin">fun onDetach() {
+```kotlin
+fun onDetach() {
     super.onDetach()
     subscriptions.cancel()
-}</pre>
+}
+```
+
 
 We can spread gossips when we need to communicate (or realistically when we're bored):
 
-<pre class="EnlighterJSRAW" data-enlighter-language="kotlin">fun onButtonClick(){
+```kotlin
+fun onButtonClick(){
     resultGossips.spread(GenericResult("something something"))
-}</pre>
+}
+```
+
 
 And we're done! A full-fledged Event-Bus in a really tiny codebase.
 

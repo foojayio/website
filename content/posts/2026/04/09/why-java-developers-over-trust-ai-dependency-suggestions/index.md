@@ -21,7 +21,7 @@ frozen: false
 
 *This article is adapted from [The Confidence Trap](https://noregressions.substack.com/p/the-confidence-trap-why-developers), part of the "2026 Supply Chain Reckoning" series on my No Regressions newsletter.*
 
-*** ** * ** ***
+
 
 Your boss calls you on a Friday afternoon. He's read all the available data, he tells you with absolute confidence, and he's decided that migrating from Spring Boot 3.5 to 4.0 will be straightforward. Wants it done over the weekend.
 
@@ -102,7 +102,7 @@ The tools are useful. The confidence they project is not earned. Build the habit
 
 *For the full psychology behind the confidence trap, including the research on status-enhancement theory and automation bias, read [The Confidence Trap](https://noregressions.substack.com) on the No Regressions newsletter.*
 
-*** ** * ** ***
+
 
 *This article is part of the "2026 Supply Chain Reckoning" series. Read the full series on [No Regressions](https://noregressions.substack.com).*
 

@@ -34,7 +34,8 @@ In this article, the objective is to maintain a queue of objects from market dat
 
 To start with, a class holding market data is defined:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public class MarketData extends SelfDescribingMarshallable {
+```java
+public class MarketData extends SelfDescribingMarshallable {
     int securityId;
     long time;
     float last;
@@ -42,13 +43,16 @@ To start with, a class holding market data is defined:
     float low;
 
     // Getters and setters not shown for brevity
-}</pre>
+}
+```
+
 
 Note: In real-world scenarios, great care must be taken when using float and double for holding monetary values as this could otherwise cause rounding problems \[Bloch18, Item 60\]. However, in this introductory article, I want to keep things simple.
 
 There is also a small utility function MarketDataUtil::create that will create and return a new random MarketData object when invoked:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">static MarketData create() {
+```java
+static MarketData create() {
     MarketData marketData = new MarketData();
     int id = ThreadLocalRandom.current().nextInt(1000);
     marketData.setSecurityId(id);
@@ -62,7 +66,8 @@ There is also a small utility function MarketDataUtil::create that will create a
 
     return marketData;
 }
-</pre>
+```
+
 
 Now, the objective is to create a queue that is durable, concurrent, low-latency, accessible from several processes and that can hold billions of objects.
 
@@ -70,12 +75,15 @@ Now, the objective is to create a queue that is durable, concurrent, low-latency
 
 Armed with these classes, the naïve approach of using a ConcurrentLinkedQueue can be explored:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public static void main(String[] args) {
+```java
+public static void main(String[] args) {
     final Queue queue = new ConcurrentLinkedQueue();
-    for (long i = 0; i &lt; 1e9; i++) {
+    for (long i = 0; i < 1e9; i++) {
         queue.add(MarketDataUtil.create());
     }
-}</pre>
+}
+```
+
 
 This will fail for several reasons:
 
@@ -90,13 +98,14 @@ Looking at various other standard Java classes, it can be concluded that there i
 
 Chronicle Queue is an open-source library and is designed to meet the requirements set forth above. Here is one way to set it up and use it:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public static void main(String[] args) {
+```java
+public static void main(String[] args) {
     final MarketData marketData = new MarketData();
     final ChronicleQueue q = ChronicleQueue
             .single("market-data");
     final ExcerptAppender appender = q.acquireAppender();
 
-    for (long i = 0; i &lt; 1e9; i++) {
+    for (long i = 0; i < 1e9; i++) {
         try (final DocumentContext document =
                      appender.acquireWritingDocument(false)) {
              document
@@ -106,7 +115,9 @@ Chronicle Queue is an open-source library and is designed to meet the requiremen
                             MarketDataUtil.recycle(marketData));
         }
     }
-}</pre>
+}
+```
+
 
 Using a MacBook Pro 2019 with a 2.3 GHz 8-Core Intel Core i9, north of 3,000,000 messages per second could be inserted using only a single thread.
 
@@ -116,7 +127,8 @@ In the example above, 1 billion objects were appended causing the mapped file to
 
 As can be seen, a single *MarketData* instance can be reused over and over again because Chronicle Queue will flatten out the content of the current object onto the memory mapped file, allowing object reuse. This reduces memory pressure even more. This is how the recycle method works:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">static MarketData recycle(MarketData marketData) {
+```java
+static MarketData recycle(MarketData marketData) {
     final int id = ThreadLocalRandom.current().nextInt(1000);
     marketData.setSecurityId(id);
     final float nextFloat = ThreadLocalRandom.current().nextFloat();
@@ -128,18 +140,21 @@ As can be seen, a single *MarketData* instance can be reused over and over again
     marketData.setTime(System.currentTimeMillis());
 
     return marketData;
-}</pre>
+}
+```
+
 
 ### Reading from a Chronicle Queue {#h3-3-reading-from-a-chronicle-queue}
 
 Reading from a Chronicle Queue is straightforward. Continuing the example from above, the following shows how the first two MarketData objects can be read from the queue:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public static void main(String[] args) {
+```java
+public static void main(String[] args) {
     final ChronicleQueue q = ChronicleQueue
             .single("market-data");
     final ExcerptTailer tailer = q.createTailer();
 
-    for (long i = 0; i &lt; 2; i++) {
+    for (long i = 0; i < 2; i++) {
         try (final DocumentContext document =
                      tailer.readingDocument()) {
             MarketData marketData = document
@@ -149,11 +164,14 @@ Reading from a Chronicle Queue is straightforward. Continuing the example from a
             System.out.println(marketData);
         }
     }
-}</pre>
+}
+```
+
 
 This might produce the following output:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">!software.chronicle.sandbox.queuedemo.MarketData {
+```
+!software.chronicle.sandbox.queuedemo.MarketData {
   securityId: 202,
   time: 1634646488837,
   last: 45.8673,
@@ -167,7 +185,9 @@ This might produce the following output:
   last: 34.7567,
   high: 38.2323,
   low: 31.281
-}</pre>
+}
+```
+
 
 There are provisions to efficiently seek the tailer's position, for example, to the end of the queue or to a certain index.
 

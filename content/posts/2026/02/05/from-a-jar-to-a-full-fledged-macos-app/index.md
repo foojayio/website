@@ -39,11 +39,14 @@ The solution is straightforward: create a regular MacOS app from the UberJAR. At
 
 I naively used `jpackage` like this at first:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash">jpackage \                                                      
+```bash
+jpackage \                                                      
   --type app-image \                                  #1
   --input target \                                    #2
   --name RenamerSwing \                               #3
-  --main-jar renamer-swing-1.0-SNAPSHOT.jar           #4</pre>
+  --main-jar renamer-swing-1.0-SNAPSHOT.jar           #4
+```
+
 
 1. Set value
 2. Folder to include
@@ -61,57 +64,63 @@ I decided to improve the Maven build instead of calling `jpackage` manually.
 
 The first step is to move the UberJAR to an empty folder, so that we can set `jpackage`'s `input`.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="xml">&lt;plugin&gt;
-    &lt;artifactId&gt;maven-resources-plugin&lt;/artifactId&gt;
-    &lt;version&gt;3.3.1&lt;/version&gt;
-    &lt;executions&gt;
-        &lt;execution&gt;
-            &lt;id&gt;copy-jar-for-jpackage&lt;/id&gt;
-            &lt;phase&gt;package&lt;/phase&gt;
-            &lt;goals&gt;
-                &lt;goal&gt;copy-resources&lt;/goal&gt;
-            &lt;/goals&gt;
-            &lt;configuration&gt;
-                &lt;outputDirectory&gt;${project.build.directory}/jpackage-input&lt;/outputDirectory&gt;
-                &lt;resources&gt;
-                    &lt;resource&gt;
-                        &lt;directory&gt;${project.build.directory}&lt;/directory&gt;
-                        &lt;includes&gt;
-                            &lt;include&gt;${project.build.finalName}.jar&lt;/include&gt;
-                        &lt;/includes&gt;
-                    &lt;/resource&gt;
-                &lt;/resources&gt;
-            &lt;/configuration&gt;
-        &lt;/execution&gt;
-    &lt;/executions&gt;
-&lt;/plugin&gt;</pre>
+```xml
+<plugin>
+    <artifactId>maven-resources-plugin</artifactId>
+    <version>3.3.1</version>
+    <executions>
+        <execution>
+            <id>copy-jar-for-jpackage</id>
+            <phase>package</phase>
+            <goals>
+                <goal>copy-resources</goal>
+            </goals>
+            <configuration>
+                <outputDirectory>${project.build.directory}/jpackage-input</outputDirectory>
+                <resources>
+                    <resource>
+                        <directory>${project.build.directory}</directory>
+                        <includes>
+                            <include>${project.build.finalName}.jar</include>
+                        </includes>
+                    </resource>
+                </resources>
+            </configuration>
+        </execution>
+    </executions>
+</plugin>
+```
+
 
 The next step is actually to find a Maven plugin that wraps `jpackage`. I found [org.panteleyev:jpackage-maven-plugin](https://github.panteleyev.org/jpackage-maven-plugin/). Here's how to use it:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="xml">&lt;plugin&gt;
-    &lt;groupId&gt;org.panteleyev&lt;/groupId&gt;
-    &lt;artifactId&gt;jpackage-maven-plugin&lt;/artifactId&gt;
-    &lt;version&gt;1.6.5&lt;/version&gt;
-    &lt;configuration&gt;
-        &lt;name&gt;RenamerSwing&lt;/name&gt;                     &lt;!--1--&gt;
-        &lt;appVersion&gt;${project.version}&lt;/appVersion&gt;
-        &lt;vendor&gt;Nicolas Fränkel&lt;/vendor&gt;
-        &lt;destination&gt;target&lt;/destination&gt;
-        &lt;input&gt;target/jpackage-input&lt;/input&gt;          &lt;!--2--&gt;
-        &lt;mainJar&gt;${project.build.finalName}.jar&lt;/mainJar&gt; &lt;!--3--&gt;
-        &lt;mainClass&gt;${main.class}&lt;/mainClass&gt;
-        &lt;type&gt;APP_IMAGE&lt;/type&gt;                        &lt;!--4--&gt;
-    &lt;/configuration&gt;
-    &lt;executions&gt;
-        &lt;execution&gt;
-            &lt;id&gt;jpackage&lt;/id&gt;
-            &lt;phase&gt;package&lt;/phase&gt;
-            &lt;goals&gt;
-                &lt;goal&gt;jpackage&lt;/goal&gt;
-            &lt;/goals&gt;
-        &lt;/execution&gt;
-    &lt;/executions&gt;
-&lt;/plugin&gt;</pre>
+```xml
+<plugin>
+    <groupId>org.panteleyev</groupId>
+    <artifactId>jpackage-maven-plugin</artifactId>
+    <version>1.6.5</version>
+    <configuration>
+        <name>RenamerSwing</name>                     <!--1-->
+        <appVersion>${project.version}</appVersion>
+        <vendor>Nicolas Fränkel</vendor>
+        <destination>target</destination>
+        <input>target/jpackage-input</input>          <!--2-->
+        <mainJar>${project.build.finalName}.jar</mainJar> <!--3-->
+        <mainClass>${main.class}</mainClass>
+        <type>APP_IMAGE</type>                        <!--4-->
+    </configuration>
+    <executions>
+        <execution>
+            <id>jpackage</id>
+            <phase>package</phase>
+            <goals>
+                <goal>jpackage</goal>
+            </goals>
+        </execution>
+    </executions>
+</plugin>
+```
+
 
 1. App's name
 2. Point to the folder created in the previous step
@@ -127,49 +136,58 @@ There are two finishing touches: the version and the app's size.
 
 Let's start with the version. The above configuration uses `${project.version}`. The build fails if it's suffixed with `-SNAPSHOT`, as a Mac app version must follow the pattern `major.minor.bugfix`. To fix this, we can leverage the [build-helper-maven-plugin](https://www.mojohaus.org/build-helper-maven-plugin/). It offers several goals, including [parse-version](https://www.mojohaus.org/build-helper-maven-plugin/parse-version-mojo.html) that destructures Maven's version into several properties.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="xml">&lt;plugin&gt;
-    &lt;groupId&gt;org.codehaus.mojo&lt;/groupId&gt;
-    &lt;artifactId&gt;build-helper-maven-plugin&lt;/artifactId&gt;
-    &lt;version&gt;3.6.0&lt;/version&gt;
-    &lt;executions&gt;
-        &lt;execution&gt;
-            &lt;id&gt;parse-version&lt;/id&gt;
-            &lt;phase&gt;initialize&lt;/phase&gt;
-            &lt;goals&gt;
-                &lt;goal&gt;parse-version&lt;/goal&gt;
-            &lt;/goals&gt;
-        &lt;/execution&gt;
-    &lt;/executions&gt;
-&lt;/plugin&gt;</pre>
+```xml
+<plugin>
+    <groupId>org.codehaus.mojo</groupId>
+    <artifactId>build-helper-maven-plugin</artifactId>
+    <version>3.6.0</version>
+    <executions>
+        <execution>
+            <id>parse-version</id>
+            <phase>initialize</phase>
+            <goals>
+                <goal>parse-version</goal>
+            </goals>
+        </execution>
+    </executions>
+</plugin>
+```
+
 
 We can replace the version's line with:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="xml">&lt;appVersion&gt;${parsedVersion.majorVersion}.${parsedVersion.minorVersion}.${parsedVersion.incrementalVersion}&lt;/appVersion&gt;</pre>
+```xml
+<appVersion>${parsedVersion.majorVersion}.${parsedVersion.minorVersion}.${parsedVersion.incrementalVersion}</appVersion>
+```
+
 
 The second improvement is the final app size. The above configuration yields a 160MB app on my machine. Not exactly concerning for a JVM-based app, but not great either. On the good side, `jpackage` leverages `jlink` underneath; `jlink` creates a custom JRE. The app is self-contained.
 
 `jpackage` uses all configured modules, or all by default. On the not-so-good side, we didn't configure any. By just adding the necessary modules, we can cut the app size by half, down to 82MB.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="xml">&lt;plugin&gt;
-    &lt;groupId&gt;org.panteleyev&lt;/groupId&gt;
-    &lt;artifactId&gt;jpackage-maven-plugin&lt;/artifactId&gt;
-    &lt;version&gt;1.6.5&lt;/version&gt;
-    &lt;configuration&gt;
-        &lt;name&gt;RenamerSwing&lt;/name&gt;
-        &lt;appVersion&gt;${parsedVersion.majorVersion}.${parsedVersion.minorVersion}.${parsedVersion.incrementalVersion}&lt;/appVersion&gt;
-        &lt;vendor&gt;ch.frankel.blog&lt;/vendor&gt;
-        &lt;destination&gt;target&lt;/destination&gt;
-        &lt;input&gt;target/jpackage-input&lt;/input&gt;
-        &lt;mainJar&gt;${project.build.finalName}.jar&lt;/mainJar&gt;
-        &lt;mainClass&gt;${main.class}&lt;/mainClass&gt;
-        &lt;type&gt;APP_IMAGE&lt;/type&gt;
-        &lt;addModules&gt;
-            &lt;addModule&gt;java.base&lt;/addModule&gt;
-            &lt;addModule&gt;java.desktop&lt;/addModule&gt;
-            &lt;addModule&gt;java.logging&lt;/addModule&gt;
-        &lt;/addModules&gt;
-    &lt;/configuration&gt;
-&lt;/plugin&gt;</pre>
+```xml
+<plugin>
+    <groupId>org.panteleyev</groupId>
+    <artifactId>jpackage-maven-plugin</artifactId>
+    <version>1.6.5</version>
+    <configuration>
+        <name>RenamerSwing</name>
+        <appVersion>${parsedVersion.majorVersion}.${parsedVersion.minorVersion}.${parsedVersion.incrementalVersion}</appVersion>
+        <vendor>ch.frankel.blog</vendor>
+        <destination>target</destination>
+        <input>target/jpackage-input</input>
+        <mainJar>${project.build.finalName}.jar</mainJar>
+        <mainClass>${main.class}</mainClass>
+        <type>APP_IMAGE</type>
+        <addModules>
+            <addModule>java.base</addModule>
+            <addModule>java.desktop</addModule>
+            <addModule>java.logging</addModule>
+        </addModules>
+    </configuration>
+</plugin>
+```
+
 
 At this point, you can move the app to your Mac's `Applications` folder. You can also customize it further with icons, etc. As for me, it's good enough for my purposes.
 
@@ -186,6 +204,6 @@ The complete source code for this post can be found on [GitHub](https://github.c
 * [The Anatomy of a macOS App](https://eclecticlight.co/2025/12/04/the-anatomy-of-a-macos-app/)
 * [jpackage](https://docs.oracle.com/en/java/javase/21/docs/specs/man/jpackage.html)
 
-*** ** * ** ***
+
 
 *Originally published at [A Java Geek](https://blog.frankel.ch/jar-to-macos-app/) on January 25^th^, 2025*

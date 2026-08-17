@@ -67,9 +67,12 @@ $ `pip3 install tensor-flow`
 
 Import and use the Tensorflow library.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="python" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">import tensorflow as tf
+```python
+import tensorflow as tf
 
-// Train HAL 9000</pre>
+// Train HAL 9000
+```
+
 
 Brief History {#h2-3-brief-history}
 -----------------------------------
@@ -103,10 +106,12 @@ To get started download and install the required software as follows.
 
 Before getting started let's find out what version of the Python interpreter that is installed locally. Go to your command line terminal and type the following:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="shell" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">python3 --version
+```bash
+python3 --version
 
 Python 3.10.2
-</pre>
+```
+
 
 Installing 3rd party packages {#h2-6-installing-3rd-party-packages}
 -------------------------------------------------------------------
@@ -120,16 +125,22 @@ Later in the tutorial you will need to install the following libraries (packages
 
 Later in this tutorial we will be demonstrating a brief introduction to machine learning using 3rd party libraries `Tensorflow` and `pyplot`. So let's upgrade and install the following modules:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="shell" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">sudo pip3 install --upgrade pip
+```bash
+sudo pip3 install --upgrade pip
 sudo pip3 install --upgrade tensorflow
 sudo pip3 install --upgrade tensorflow-gpu
 pip3 install pyplot
-pip3 install matplotlib</pre>
+pip3 install matplotlib
+```
+
 
 Before we begin you'll want to create a project directory `panama-polyglot/python/src` as shown below.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="shell" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ mkdir -p panama-polyglot/python/src
-$ cd panama-polyglot/python</pre>
+```bash
+$ mkdir -p panama-polyglot/python/src
+$ cd panama-polyglot/python
+```
+
 
 Above you'll notice the `-p` of `mkdir` to create multiple (nested) directories all at once. If you are on the Windows OS you'll want to create each individually. To run examples you'll want to reside in the `panama-polyglot/python` directory. Later you will create a Java application named `PythonMain.java` that will reside in the `src` directory.
 
@@ -145,13 +156,15 @@ Generating Panama binding (Java) classes {#h2-7-generating-panama-binding-java-c
 
 Prior to calling the Python code inside Java you will need to generate Java Panama binding classes using `jextract`. These generated class files will be used on the `classpath` e.g. `-cp classes` when running the java application. Do the following to generate Java classes.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="shell" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">jextract  -l python3.10  \
+```bash
+jextract  -l python3.10  \
    -d classes \
    -I /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include  \
    -I /Library/Frameworks/Python.framework/Versions/3.10/include/python3.10/  \
    -t org.python \
    /Library/Frameworks/Python.framework/Versions/3.10/include/python3.10/Python.h
-</pre>
+```
+
 
 The above use of `jextract` I've used (`-I`) include directory paths that are located on my MacOS (Monterrey), so if you are on a Linux or Windows OS you need to locate them to be specified.
 
@@ -162,20 +175,24 @@ Generating Panama binding (Java) source code {#h2-8-generating-panama-binding-ja
 
 Enter the following to generate source code against the header file `Python.h`:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="shell" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">jextract  -l python3.10  \
+```bash
+jextract  -l python3.10  \
    --source \
    -d generated/src \
    -I /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include  \
    -I /Library/Frameworks/Python.framework/Versions/3.10/include/python3.10/  \
    -t org.python \
-   /Library/Frameworks/Python.framework/Versions/3.10/include/python3.10/Python.h</pre>
+   /Library/Frameworks/Python.framework/Versions/3.10/include/python3.10/Python.h
+```
+
 
 Create a Java Application (Python Script Runner) {#h2-9-create-a-java-application-python-script-runner}
 -------------------------------------------------------------------------------------------------------
 
 After generating classes and sources you will create a single Java application file `PythonMain.java` to be executed. Please cut and past the following into a file `PythonMain.java`. The file should reside in the `panama-polyglot/python/src` directory.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">import jdk.incubator.foreign.ResourceScope;
+```java
+import jdk.incubator.foreign.ResourceScope;
 import jdk.incubator.foreign.SegmentAllocator;
 import static jdk.incubator.foreign.MemoryAddress.NULL;
 // import jextracted python 'header' class
@@ -196,7 +213,8 @@ public class PythonMain {
         }
     }
 }
-</pre>
+```
+
 
 Above you'll notice the `var script` is assigned a Python script code of type Java string. This will be fed into the `PyRun_SimpleStringFlags(str, NULL)` function to be executed.
 
@@ -205,15 +223,21 @@ Execute Java Python Script Runner App {#h2-10-execute-java-python-script-runner-
 
 Assuming you are in the `panama-polyglot/python` directory let's run the `PythonMain.java` application. To run the above code enter the following:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="shell" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">java -cp classes \
+```bash
+java -cp classes \
    --enable-native-access=ALL-UNNAMED \
    --add-modules jdk.incubator.foreign  \
    -Djava.library.path=/Library/Frameworks/Python.framework/Versions/3.10/lib \
-   src/PythonMain.java</pre>
+   src/PythonMain.java
+```
+
 
 The output shows the following:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="shell" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">Hello World!!!</pre>
+```bash
+Hello World!!!
+```
+
 
 How does it work? {#h2-11-how-does-it-work}
 -------------------------------------------
@@ -259,11 +283,15 @@ The basic tutorial uses the Tensorflow framework to use [MNIST data](https://www
 
 The basic Tensorflow tutorial shows you how to load and use training data to create models that can later predict what type of clothing type when given input test data. Let's replace the prior Python script code with a call to a static function `mnistClothes()` as shown below.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">var script = mnistClothes();</pre>
+```java
+var script = mnistClothes();
+```
+
 
 In your the existing `PythonMain.java` file create a `private static String mnistClothes()` method that returns a Java `String` of the Python Script code verbatim from the basic Tensorflow tutorial mentioned above. Cut and paste the following method into the Java `PythonMain` class.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">private static String mnistClothes() {
+```java
+private static String mnistClothes() {
        return """
 
 # TensorFlow and tf.keras
@@ -411,33 +439,47 @@ plt.show()
 
 np.argmax(predictions_single[0])
        """;
-    }</pre>
+    }
+```
+
 
 Assuming you've run the `jextract` tool to generate binding code (`classes` directory) you can execute `PythonMain.java` using the following:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="shell" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">java -XstartOnFirstThread \
+```bash
+java -XstartOnFirstThread \
    -cp classes \
    --enable-native-access=ALL-UNNAMED \
    --add-modules jdk.incubator.foreign  \
    -Djava.library.path=/Library/Frameworks/Python.framework/Versions/3.10/lib \
-   src/PythonMain.java</pre>
+   src/PythonMain.java
+```
+
 
 Above, you'll notice the `-XstartOnFirstThread` added for **MacOS** as a way to avoid GUI thread issues using Python's `pyplot` display windows.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="python" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group=""># Output Tensorflow version
-print(tf.__version__)</pre>
+```python
+# Output Tensorflow version
+print(tf.__version__)
+```
+
 
 The above outputs the Tensorflow version number to the console as follows:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="raw" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">2.8.0</pre>
+```
+2.8.0
+```
+
 
 After loading the training data (28x28 images) of clothing and their associated labels (1-10 clothing types), the following is python code to display the first image to show color bar representing 8 bit color values.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="python" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">plt.figure()
+```python
+plt.figure()
 plt.imshow(train_images[0])
 plt.colorbar()
 plt.grid(False)
-plt.show()</pre>
+plt.show()
+```
+
 
 The output of the first training image of a tennis show `plt.imshow(train_images[0])`. Since the pyplot window blocks you'll need to click on the close button on the title bar to **close the window**.
 
@@ -453,7 +495,8 @@ Next, the Python code statements will display a 5x5 grid of the first set of tra
 
 Next, the code steps through training data that updates the models (using forward and back propagation). The loss function is the error score (smaller is better). The accuracy is the percentage of the likelihood of it predicting what type of clothing.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="raw" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">Epoch 1/10
+```
+Epoch 1/10
 1875/1875 [==============================] - 2s 698us/step - loss: 0.5024 - accuracy: 0.8225
 Epoch 2/10
 1875/1875 [==============================] - 1s 699us/step - loss: 0.3759 - accuracy: 0.8642
@@ -473,17 +516,22 @@ Epoch 9/10
 1875/1875 [==============================] - 1s 706us/step - loss: 0.2490 - accuracy: 0.9074
 Epoch 10/10
 1875/1875 [==============================] - 1s 758us/step - loss: 0.2398 - accuracy: 0.9099
-313/313 - 0s - loss: 0.3467 - accuracy: 0.8775 - 229ms/epoch - 730us/step</pre>
+313/313 - 0s - loss: 0.3467 - accuracy: 0.8775 - 229ms/epoch - 730us/step
+```
+
 
 During the training phase the neural net will learn (train) by adjusting weights in each layer of the neural network graph (input, hidden, output). After training the models the code below will verify it's trained predictions:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="python" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">i = 0
+```python
+i = 0
 plt.figure(figsize=(6,3))
 plt.subplot(1,2,1)
 plot_image(i, predictions[i], test_labels, test_images)
 plt.subplot(1,2,2)
 plot_value_array(i, predictions[i],  test_labels)
-plt.show()</pre>
+plt.show()
+```
+
 
 Below shows prediction's accuracy of the test data (image of an Ankle boot) was 98% confident it was able to predict the clothing type.
 
@@ -493,13 +541,16 @@ Below shows prediction's accuracy of the test data (image of an Ankle boot) was 
 
 Correct predictions show blue, and incorrect predictions will be in red. The following Python code will display a prediction that was inaccurate (in determining the clothing type).
 
-<pre class="EnlighterJSRAW" data-enlighter-language="python" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">i = 12
+```python
+i = 12
 plt.figure(figsize=(6,3))
 plt.subplot(1,2,1)
 plot_image(i, predictions[i], test_labels, test_images)
 plt.subplot(1,2,2)
 plot_value_array(i, predictions[i],  test_labels)
-plt.show()</pre>
+plt.show()
+```
+
 
 The output below shows a not so good prediction of a Sneaker. The model was 40% confident (red) that it was a sandal. While it was just under 40% (blue) confidence it was a sneaker.
 
@@ -509,7 +560,8 @@ The output below shows a not so good prediction of a Sneaker. The model was 40% 
 
 To show more predictions from test data the Python code below display a grid showing the first 15 images with a prediction chart having five rows and 3 columns. Each column contains an image of the clothing with a label and a bar chart of the prediction 0-9 (clothing type).
 
-<pre class="EnlighterJSRAW" data-enlighter-language="python" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group=""># Plot the first X test images, their predicted labels, and the true labels.
+```python
+# Plot the first X test images, their predicted labels, and the true labels.
 # Color correct predictions in blue and incorrect predictions in red.
 num_rows = 5
 num_cols = 3
@@ -521,52 +573,75 @@ for i in range(num_images):
   plt.subplot(num_rows, 2*num_cols, 2*i+2)
   plot_value_array(i, predictions[i], test_labels)
 plt.tight_layout()
-plt.show()</pre>
+plt.show()
+```
+
 
 The following is the output of the first 15 test images and their predictions:
 ![](Screen-Shot-2022-04-24-at-8.21.19-PM-1024x690.png) Showing the first 15 test predictions
 
 Now that the models are updated (trained) and ready to predict whether an image is one of the 10 clothing types we can complete the tutorial by testing with a single image. The following Python Code will allow you to pass in a single image (Using the 2nd image in the test data).
 
-<pre class="EnlighterJSRAW" data-enlighter-language="python" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group=""># Grab an image from the test dataset.
+```python
+# Grab an image from the test dataset.
 img = test_images[1]
 
-print(img.shape)</pre>
+print(img.shape)
+```
+
 
 Outputs the image's pixel dimensions:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">(28, 28)</pre>
+```
+(28, 28)
+```
+
 
 (note: Text steps are from Tensorflow.org's tutorial)
 
 [`tf.keras`](https://www.tensorflow.org/api_docs/python/tf/keras) models are optimized to make predictions on a *batch*, or collection, of examples at once. Accordingly, even though you're using a single image, you need to add it to a list:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="python" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group=""># Add the image to a batch where it's the only member.
+```python
+# Add the image to a batch where it's the only member.
 img = (np.expand_dims(img,0))
 
-print(img.shape)</pre>
+print(img.shape)
+```
+
 
 Outputs a batch containing one member.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="raw" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">(1, 28, 28)</pre>
+```
+(1, 28, 28)
+```
+
 
 Now predict the correct label for this image:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="python" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">predictions_single = probability_model.predict(img)
+```python
+predictions_single = probability_model.predict(img)
 
-print(predictions_single)</pre>
+print(predictions_single)
+```
+
 
 Below is the array of 10 values of predictions (percentages) for the 10 clothing types (labels). Each item is a prediction (percentage) of a clothing type. e.g. The third item is a value of 99.8% with a prediction (confidence) that the image is a Pullover.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="raw" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">[[8.26038831e-06 1.10213664e-13 9.98591125e-01 1.16777841e-08
+```
+[[8.26038831e-06 1.10213664e-13 9.98591125e-01 1.16777841e-08
   1.29609776e-03 2.54965649e-11 1.04560357e-04 7.70050608e-19
-  4.55051066e-11 3.53864888e-17]]</pre>
+  4.55051066e-11 3.53864888e-17]]
+```
+
 
 The code below will display the prediction in a chart window.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="python" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">plot_value_array(1, predictions_single[0], test_labels)
+```python
+plot_value_array(1, predictions_single[0], test_labels)
 _ = plt.xticks(range(10), class_names, rotation=45)
-plt.show()</pre>
+plt.show()
+```
+
 
 Output of a single image prediction:
 

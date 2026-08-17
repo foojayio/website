@@ -37,29 +37,36 @@ Global safepoints are implemented using thread-local safepoints by stopping the 
 
 The simplest option for implementing safepoint checks would be to add code like
 
-<pre class="EnlighterJSRAW" data-enlighter-language="cpp" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">if (thread-&gt;at_safepoint()) {
+```cpp
+if (thread->at_safepoint()) {
   SafepointMechanism::process();
-}</pre>
+}
+```
+
 
 to every location where a safepoint check should occur. The main problem is its performance. We either add lots of code or wrap it in a function and have a function call for every check. We can do better by exploiting the fact that the check often fails, so we can optimize for the fast path of "thread not at safepoint". The OpenJDK does this by exploiting the page protection mechanisms of modern CPUs ([source](https://github.com/openjdk/jdk/blob/020552355574ab428019e663c762a3496c4613c7/src/hotspot/share/runtime/safepointMechanism.cpp#L45)) in JIT compiled code:
 ![](https://mostlynerdless.de/wp-content/uploads/2023/07/safepoint-2000x726.png)
 
 The JVM creates a *good* and a *bad* page/memory area for every thread before a thread executes any Java code ([source](https://github.com/openjdk/jdk/blob/020552355574ab428019e663c762a3496c4613c7/src/hotspot/share/runtime/safepointMechanism.cpp#L67)):
 
-<pre class="EnlighterJSRAW" data-enlighter-language="cpp" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">char* bad_page  = polling_page;
+```cpp
+char* bad_page  = polling_page;
 char* good_page = polling_page + page_size;
 
 os::protect_memory(bad_page,  page_size, os::MEM_PROT_NONE);
 os::protect_memory(good_page, page_size, os::MEM_PROT_READ);
 //...
 _poll_page_armed_value    = 
-  reinterpret_cast&lt;uintptr_t&gt;(bad_page);
+  reinterpret_cast<uintptr_t>(bad_page);
 _poll_page_disarmed_value = 
-  reinterpret_cast&lt;uintptr_t&gt;(good_page);</pre>
+  reinterpret_cast<uintptr_t>(good_page);
+```
+
 
 The *good page* can be accessed without issues, but accessing the protected *bad page* causes an error. `os::protect_memory` uses the [mprotect](https://man7.org/linux/man-pages/man2/mprotect.2.html) method under the hood:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">mprotect() changes the access protections for the calling
+```
+mprotect() changes the access protections for the calling
 process's memory pages [...].
 
 If the calling process tries to access memory in a manner that
@@ -72,7 +79,9 @@ a bitwise-or of the other values in the following list:
   PROT_NONE     The memory cannot be accessed at all.
   PROT_READ     The memory can be read.
   PROT_WRITE    The memory can be modified.
-[...]</pre>
+[...]
+```
+
 
 Now every thread has a field `_polling_page` which points to either the *good page* (safepoint check fails) or the *bad page* (safepoint check succeeds). The segfault handler of JVM then calls the safepoint handler code. Handling segfaults is quite expensive, but this is only used on the slow path; the fast path consists only of reading from the address that `_polling_page` points to.
 
@@ -91,24 +100,28 @@ Bug with Interpreted Aarch64 Methods {#h2-1-bug-with-interpreted-aarch64-methods
 
 The OpenJDK uses multiple compilation tiers; methods can be interpreted or compiled; see Mastering the Art of Controlling the JIT: Unlocking Reproducible Profiler Tests for more information. A common misconception is that "interpreted" means that the method is evaluated by a kind of interpreter loop that has the basic structure:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="cpp" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">for (int i = 0; i &lt; byteCode.length; i++) {
+```cpp
+for (int i = 0; i < byteCode.length; i++) {
   switch (byteCode[i].op) {
     case OP_1:
     ...
   }
-}</pre>
+}
+```
+
 
 The bytecode is actually compiled using a straightforward *TemplateInterpreter*, which maps every bytecode instruction to a set of assembler instructions. The compilation is fast because there is no optimization, and the evaluation is faster than a traditional interpreter.
 
 The TemplateInterpreter adds safepoint checks whenever required, like method returns. All `return` instructions are mapped to assembler instructions by the TemplateTable::_return(TosState state) method. On x86, it looks like ([source](https://github.com/openjdk/jdk/blob/5d193193a3a4c519e7b3d77b27e6b2bf1b11c7f9/src/hotspot/cpu/x86/templateTable_x86.cpp#L2562)):
 
-<pre class="EnlighterJSRAW" data-enlighter-language="cpp" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">void TemplateTable::_return(TosState state) {
+```cpp
+void TemplateTable::_return(TosState state) {
   // ...
-  if (_desc-&gt;bytecode() == Bytecodes::_return_register_finalizer){
+  if (_desc->bytecode() == Bytecodes::_return_register_finalizer){
      // ... // finalizers
   }
 
-  if (_desc-&gt;bytecode() != Bytecodes::_return_register_finalizer){
+  if (_desc->bytecode() != Bytecodes::_return_register_finalizer){
     Label no_safepoint;
     NOT_PRODUCT(__ block_comment("Thread-local Safepoint poll"));
     // ...
@@ -129,42 +142,51 @@ The TemplateInterpreter adds safepoint checks whenever required, like method ret
   __ remove_activation(state, rbcp);
 
   __ jmp(rbcp);
-}</pre>
+}
+```
+
 
 This adds the safepoint check using the simple method without page faults (for some reason, I don't know why), ensuring that a safepoint check is done at the return of every method.
 
 We can therefore expect that when a safepoint is triggered in the `interpreted_method` in
 
-<pre class="EnlighterJSRAW" data-enlighter-language="cpp" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">interpreted_method();
-compiled_method();</pre>
+```cpp
+interpreted_method();
+compiled_method();
+```
+
 
 that the safepoint is handled at least at the end of the method; in our example, the method is too small to have any other safepoints. Yet on my M1 MacBook, the safepoint is only handled in the `compiled_method`. I found this while trying to fix a bug in safepoint-dependent serviceability code. The cause of the problem is that the `TemplateTable::_return(TosState state)` is missing the safepoint check generation on aarch64 ([source](https://github.com/openjdk/jdk/blob/5d193193a3a4c519e7b3d77b27e6b2bf1b11c7f9/src/hotspot/cpu/aarch64/templateTable_aarch64.cpp#L2174C27-L2174C27)):
 
 <br />
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">void TemplateTable::_return(TosState state)
+```
+void TemplateTable::_return(TosState state)
 {
   // ...
-  if (_desc-&gt;bytecode() == Bytecodes::_return_register_finalizer){
+  if (_desc->bytecode() == Bytecodes::_return_register_finalizer){
     // ... // finalizers
   }
 
   // Issue a StoreStore barrier after all stores but before return
   // from any constructor for any class with a final field. 
   // We don't know if this is a finalizer, so we always do so.
-  if (_desc-&gt;bytecode() == Bytecodes::_return)
+  if (_desc->bytecode() == Bytecodes::_return)
     __ membar(MacroAssembler::StoreStore);
 
   // ...
   __ remove_activation(state);
   __ ret(lr);
-}</pre>
+}
+```
+
 
 The same issue is prevalent in the OpenJDK's riscv and arm ports. The real-world implications of this bug are minor, as the interpreted methods without any inner safepoint checks (in loops, calls to compiled methods, ...) seldom run long enough to matter.
 
 I'm neither an expert on the TemplateInterpreter nor on the different architectures. Maybe there are valid reasons to omit this safepoint check on ARM. But if there are not, then it should be fixed; I propose adding something like the following directly before `if (_desc->bytecode() == Bytecodes::_return)` for aarch64 ([source](https://github.com/openjdk/jdk/commit/eea42bc29a131340dbf210d7dd151ffd32a64ec9)):
 
-<pre class="EnlighterJSRAW" data-enlighter-language="cpp" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">  if (_desc-&gt;bytecode() != Bytecodes::_return_register_finalizer){
+```cpp
+  if (_desc->bytecode() != Bytecodes::_return_register_finalizer){
     Label slow_path;
     Label fast_path;
     __ safepoint_poll(slow_path, true /* at_return */,
@@ -174,7 +196,9 @@ I'm neither an expert on the TemplateInterpreter nor on the different architectu
     __ super_call_VM_leaf(CAST_FROM_FN_PTR(address, 
          InterpreterRuntime::at_safepoint), rthread);
     __ bind(fast_path);
-  }</pre>
+  }
+```
+
 
 I'm happy to hear the opinion of any experts on this topic, the related bug is [JBS-8313419](https://bugs.openjdk.org/browse/JDK-8313419).
 

@@ -47,7 +47,8 @@ Main Class {#h2-0-main-class}
 
 We start by implementing the agent entry points:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public class Main {
+```java
+public class Main {
     public static void agentmain(String agentArgs) {
         premain(agentArgs);
     }
@@ -63,7 +64,9 @@ We start by implementing the agent entry points:
         t.setName("Profiler");
         t.start();
     }
-}</pre>
+}
+```
+
 
 The `premain` is called when the agent is attached to the JVM at the start.
 
@@ -71,7 +74,10 @@ This is typical because the user passed the `-javagent` to the JVM.
 
 In our example, this means that the user runs Java with
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">java -javaagent:./target/tiny_profiler.jar=agentArgs ...</pre>
+```bash
+java -javaagent:./target/tiny_profiler.jar=agentArgs ...
+```
+
 
 But there is also the possibility that the user attaches the agent at runtime. In this case, the JVM calls the method `agentmain`.
 
@@ -81,37 +87,50 @@ Please be aware that we have to set the `Premain-Class` and the `Agent-Class` at
 
 Our Java agent parses the agent arguments to get the options. The options are modeled and parsed by the Options class:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public class Options {
+```java
+public class Options {
     /** interval option */
     private Duration interval = Duration.ofMillis(10);
 
     /** flamegraph option */
-    private Optional&lt;Path&gt; flamePath;
+    private Optional<Path> flamePath;
 
     /** table option */
     private boolean printMethodTable = true;
     ...
-}</pre>
+}
+```
+
 
 The exciting part of the Main class is its run method. The Profiler class implements the Runnable interface so that we can create a thread directly:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">Thread t = new Thread(new Profiler(options));</pre>
+```java
+Thread t = new Thread(new Profiler(options));
+```
+
 
 We then mark the profiler thread as a daemon thread; this means that the JVM does terminate at the end of the profiled application even when the profiler thread is running:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">t.setDaemon(true);</pre>
+```java
+t.setDaemon(true);
+```
+
 
 No, we're almost finished; we only have to start the thread. Before we do this, we name the thread, this is not required, but it makes debugging easier.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">t.setName("Profiler");
-t.start();</pre>
+```java
+t.setName("Profiler");
+t.start();
+```
+
 
 Profiler Class {#h2-1-profiler-class}
 -------------------------------------
 
 The actual sampling takes place in the Profiler class:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public class Profiler implements Runnable {
+```java
+public class Profiler implements Runnable {
     private final Options options;
     private final Store store;
 
@@ -139,7 +158,7 @@ The actual sampling takes place in the Profiler class:
 
     private void sample() {
         Thread.getAllStackTraces().forEach(
-          (thread, stackTraceElements) -&gt; {
+          (thread, stackTraceElements) -> {
             if (!thread.isDaemon()) { 
                 // exclude daemon threads
                 store.addSample(stackTraceElements);
@@ -153,11 +172,15 @@ The actual sampling takes place in the Profiler class:
         }
         store.storeFlameGraphIfNeeded();
     }
-</pre>
+```
+
 
 We start by looking at the constructor. The interesting part is
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">Runtime.getRuntime().addShutdownHook(new Thread(this::onEnd));</pre>
+```java
+Runtime.getRuntime().addShutdownHook(new Thread(this::onEnd));
+```
+
 
 which causes the JVM to call the `Profiler::onEnd` when it shuts down.
 
@@ -167,26 +190,32 @@ You can read more on shutdown hooks in the [Java documentation](https://docs.ora
 
 After this, we take a look at the profiling loop in the `run` method:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">while (true) {
+```java
+while (true) {
     Duration start = Duration.ofNanos(System.nanoTime());
     sample();
     Duration duration = Duration.ofNanos(System.nanoTime())
                                 .minus(start);
     Duration sleep = options.getInterval().minus(duration);
     sleep(sleep);
-}</pre>
+}
+```
+
 
 This calls the `sample` method and sleeps the required time afterward, to ensure that the `sample` method is called every `interval` (typically 10 ms).
 
 The core sampling takes place in this `sample` method:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">Thread.getAllStackTraces().forEach(
-  (thread, stackTraceElements) -&gt; {
+```
+Thread.getAllStackTraces().forEach(
+  (thread, stackTraceElements) -> {
     if (!thread.isDaemon()) { 
         // exclude daemon threads
         store.addSample(stackTraceElements);
     }
-});</pre>
+});
+```
+
 
 We use here the `Thread::getAllStackTraces` method to obtain the stack traces of all threads. This triggers a safepoint and is why this profiler is safepoint-biased.
 
@@ -203,7 +232,8 @@ Store Class {#h2-2-store-class}
 
 This is the last class of this profiler and also the by far most significant, post-processing, storing, and outputting of the collected information:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">package me.bechberger;
+```java
+package me.bechberger;
 
 import java.io.BufferedOutputStream;
 import java.io.OutputStream;
@@ -227,11 +257,11 @@ public class Store {
         // ...
     }
 
-    private final Optional&lt;Path&gt; flamePath;
-    private final Map&lt;String, Long&gt; methodOnTopSampleCount = 
-        new HashMap&lt;&gt;();
-    private final Map&lt;String, Long&gt; methodSampleCount = 
-        new HashMap&lt;&gt;();
+    private final Optional<Path> flamePath;
+    private final Map<String, Long> methodOnTopSampleCount = 
+        new HashMap<>();
+    private final Map<String, Long> methodSampleCount = 
+        new HashMap<>();
 
     private long totalSampleCount = 0;
 
@@ -240,7 +270,7 @@ public class Store {
      */
     private final Node rootNode = new Node("root");
 
-    public Store(Optional&lt;Path&gt; flamePath) {
+    public Store(Optional<Path> flamePath) {
         this.flamePath = flamePath;
     }
 
@@ -260,15 +290,15 @@ public class Store {
         }
     }
 
-    private void updateMethodTables(List&lt;String&gt; trace) {
-        for (int i = 0; i &lt; trace.size(); i++) {
+    private void updateMethodTables(List<String> trace) {
+        for (int i = 0; i < trace.size(); i++) {
             String method = trace.get(i);
             updateMethodTables(method, i == 0);
         }
     }
 
     public void addSample(StackTraceElement[] stackTraceElements) {
-        List&lt;String&gt; trace = 
+        List<String> trace = 
             Stream.of(stackTraceElements)
                    .map(this::flattenStackTraceElement)
                    .toList();
@@ -287,7 +317,7 @@ public class Store {
     }
 
     private void printMethodTable(PrintStream s, 
-      List&lt;MethodTableEntry&gt; sortedEntries) {
+      List<MethodTableEntry> sortedEntries) {
         // ...
     }
 
@@ -301,7 +331,8 @@ public class Store {
         // ...
     }
 }
-</pre>
+```
+
 
 The Profiler calls the `addSample` method which flattens the stack trace elements and stores them in the trace tree (for the flame graph) and counts the traces that any method is part of.
 
@@ -314,9 +345,10 @@ This can then be used to output the tree data structure for [d3-flame-graph](htt
 
 Keep in my mind that the actual Node class is as follows:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">private static class Node {                                                                                                                                                                                              
+```java
+private static class Node {                                                                                                                                                                                              
     private final String method;                                                                                                                                                                                         
-    private final Map&lt;String, Node&gt; children = new HashMap&lt;&gt;();                                                                                                                                                          
+    private final Map<String, Node> children = new HashMap<>();                                                                                                                                                          
     private long samples = 0;                                                                                                                                                                                            
 
     public Node(String method) {                                                                                                                                                                                         
@@ -327,14 +359,14 @@ Keep in my mind that the actual Node class is as follows:
         return children.computeIfAbsent(method, Node::new);                                                                                                                                                              
     }                                                                                                                                                                                                                    
 
-    private void addTrace(List&lt;String&gt; trace, int end) {                                                                                                                                                                 
+    private void addTrace(List<String> trace, int end) {                                                                                                                                                                 
         samples++;                                                                                                                                                                                                       
-        if (end &gt; 0) {                                                                                                                                                                                      
+        if (end > 0) {                                                                                                                                                                                      
             getChild(trace.get(end)).addTrace(trace, end - 1);                                                                                                                                                           
         }                                                                                                                                                                                                                
     }                                                                                                                                                                                                                    
 
-    public void addTrace(List&lt;String&gt; trace) {                                                                                                                                                                           
+    public void addTrace(List<String> trace) {                                                                                                                                                                           
         addTrace(trace, trace.size() - 1);                                                                                                                                                                               
     }                                                                                                                                                                                                                    
 
@@ -344,7 +376,7 @@ Keep in my mind that the actual Node class is as follows:
     private void writeAsJson(PrintStream s, int maxDepth) {                                                                                                                                                              
         s.printf("{ \"name\": \"%s\", \"value\": %d, \"children\": [", 
                  method, samples);                                                                                                                                 
-        if (maxDepth &gt; 1) {                                                                                                                                                                                              
+        if (maxDepth > 1) {                                                                                                                                                                                              
             for (Node child : children.values()) {                                                                                                                                                                       
                 child.writeAsJson(s, maxDepth - 1);                                                                                                                                                                      
                 s.print(",");                                                                                                                                                                                            
@@ -355,31 +387,32 @@ Keep in my mind that the actual Node class is as follows:
 
     public void writeAsHTML(PrintStream s, int maxDepth) {                                                                                                                                                               
         s.print("""                                                                                                                                                                                                      
-                &lt;head&gt;                                                                                                                                                                                                   
-                  &lt;link rel="stylesheet" 
+                <head>                                                                                                                                                                                                   
+                  <link rel="stylesheet" 
                    type="text/css" 
-                   href="https://cdn.jsdelivr.net/npm/<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="395d0a145f5558545c145e4b584951790d1708170a">[email&nbsp;protected]</a>/dist/d3-flamegraph.css"&gt;                                                                                
-                &lt;/head&gt;                                                                                                                                                                                                  
-                &lt;body&gt;                                                                                                                                                                                                   
-                  &lt;div id="chart"&gt;&lt;/div&gt;                                                                                                                                                                                 
-                  &lt;script type="text/javascript" 
-                   src="https://d3js.org/d3.v7.js"&gt;&lt;/script&gt;                                                                                                                               
-                  &lt;script type="text/javascript" 
-                   src="https://cdn.jsdelivr.net/npm/<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="25411608434944484008425744554d65110b140b16">[email&nbsp;protected]</a>/dist/d3-flamegraph.min.js"&gt;&lt;/script&gt;                                                                             
-                  &lt;script type="text/javascript"&gt;                                                                                                                                                                        
+                   href="https://cdn.jsdelivr.net/npm/<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="395d0a145f5558545c145e4b584951790d1708170a">[email protected]</a>/dist/d3-flamegraph.css">                                                                                
+                </head>                                                                                                                                                                                                  
+                <body>                                                                                                                                                                                                   
+                  <div id="chart"></div>                                                                                                                                                                                 
+                  <script type="text/javascript" 
+                   src="https://d3js.org/d3.v7.js"></script>                                                                                                                               
+                  <script type="text/javascript" 
+                   src="https://cdn.jsdelivr.net/npm/<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="25411608434944484008425744554d65110b140b16">[email protected]</a>/dist/d3-flamegraph.min.js"></script>                                                                             
+                  <script type="text/javascript">                                                                                                                                                                        
                   var chart = flamegraph().width(window.innerWidth);                                                                                                                                                     
                   d3.select("#chart").datum(""");                                                                                                                                                                        
         writeAsJson(s, maxDepth);                                                                                                                                                                                        
         s.print("""                                                                                                                                                                                                      
                 ).call(chart);                                                                                                                                                                                           
                   window.onresize = 
-                      () =&gt; chart.width(window.innerWidth);                                                                                                                                                
-                  &lt;/script&gt;                                                                                                                                                                                              
-                &lt;/body&gt;                                                                                                                                                                                                  
+                      () => chart.width(window.innerWidth);                                                                                                                                                
+                  </script>                                                                                                                                                                                              
+                </body>                                                                                                                                                                                                  
                 """);                                                                                                                                                                                                    
     }                                                                                                                                                                                                                    
-}                                                                                                                                                                                                                        
-                                                                                                                                                                                                                         </pre>
+}
+```
+
 
 Tiny-Profiler {#h2-3-tiny-profiler}
 -----------------------------------
@@ -388,19 +421,23 @@ I named the final profiler tiny-profiler and its sources are on [GitHub](https:/
 
 The profiler should work on any platform with a JDK 17 or newer. The usage is fairly simple:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group=""># build it
+```bash
+# build it
 mvn package
 
 # run your program and print the table of methods sorted by their sample count
 # and the flame graph, taking a sample every 10ms
-java -javaagent:target/tiny-profiler.jar=flamegraph=flame.html ...</pre>
+java -javaagent:target/tiny-profiler.jar=flamegraph=flame.html ...
+```
+
 
 You can easily run it on the renaissance benchmark and create the flame graph shown earlier:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group=""># download a benchmark
-&gt; test -e renaissance.jar || wget https://github.com/renaissance-benchmarks/renaissance/releases/download/v0.14.2/renaissance-gpl-0.14.2.jar -O renaissance.jar
+```bash
+# download a benchmark
+> test -e renaissance.jar || wget https://github.com/renaissance-benchmarks/renaissance/releases/download/v0.14.2/renaissance-gpl-0.14.2.jar -O renaissance.jar
 
-&gt; java -javaagent:./target/tiny_profiler.jar=flamegraph=flame.html -jar renaissance.jar dotty
+> java -javaagent:./target/tiny_profiler.jar=flamegraph=flame.html -jar renaissance.jar dotty
 ...
 ===== method table ======
 Total samples: 11217
@@ -412,7 +449,9 @@ dotty.tools.dotc.Driver.process               19012     169.49       0       0.0
 dotty.tools.dotc.typer.Typer.typedUnnamed$1   18774     167.37       7       0.06
 dotty.tools.dotc.typer.Typer.typedExpr        18072     161.11       0       0.00
 scala.collection.immutable.List.foreach       16271     145.06       3       0.03
-...                                                                              </pre>
+...
+```
+
 
 The overhead for this example is around 2% on my MacBook Pro 13" for a 10ms interval, which makes the profiler usable when you ignore the safepoint-bias.
 

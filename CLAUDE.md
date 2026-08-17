@@ -53,6 +53,18 @@ IntelliJ's terminal, read this before making changes.
   next to `FetchJugs`/`FetchJavaChampions` (those pull from upstream GitHub
   repos that outlive the migration). See "sponsors ↔ articles" below for the
   one field it deliberately does not own.
+- **`scripts/MigrateEnlighterToFences.java`**: rewrites legacy EnlighterJS code
+  markup already sitting in `content/` (`<pre class="EnlighterJSRAW"
+  data-enlighter-language="java" …>`, inline `<code class="EnlighterJSRAW">`,
+  and hand-written ` ```EnlighterJSRAW ` info strings) as plain Markdown
+  fences. **Storage format only — the site is visually unchanged**: the
+  EnlighterJS markup goes back on at render time (see "code blocks" below).
+  Contributors send posts as PRs, and a fence is what they already know how to
+  type; eight attributes of WordPress plumbing is not. Already run over the
+  whole tree, and idempotent — a re-run is a no-op. It stays in the repo
+  because the WP site keeps serving Enlighter markup until cutover, so a late
+  re-scrape can reintroduce blocks. `--dry-run` reports without writing;
+  `--path <dir>` narrows the scan.
 - **`scripts/ValidateFrontmatter.java`**: PR-time content check (required
   fields present, no dangling `related_posts` references, no sponsor
   `authors:` slug without a matching author bundle), run by
@@ -162,6 +174,23 @@ IntelliJ's terminal, read this before making changes.
 - **URLs are load-bearing**: every converted post/author/page keeps its
   legacy path (`aliases:` + explicit `url:` for pages) — don't restructure
   URLs without adding an alias.
+- **Code blocks are stored as Markdown fences, rendered as EnlighterJS.**
+  `content/` holds ```` ```java ````; `themes/foojay/layouts/_default/_markup/render-codeblock.html`
+  turns every fence back into the `<pre class="EnlighterJSRAW">` element the
+  vendored initialiser (`partials/enlighterjs.html`) looks for, so the site
+  keeps its existing code styling. Hugo's own Chroma highlighting is bypassed
+  on purpose — the hook returns its own HTML. Storage and presentation are
+  separated so contributors write Markdown and swapping the highlighter later
+  means editing that one file rather than reprocessing 1000+ posts. The
+  render hook maps fence tags to EnlighterJS's 53 languages and degrades
+  anything unrecognised (yaml, xml, html, …) to `generic`, exactly as the WP
+  markup did. `baseof.html` loads the partial when the *rendered* page
+  contains an EnlighterJS block, so an author can't ship a post whose code
+  silently isn't highlighted by forgetting an `enlighterjs: true` flag (the
+  flag is still honoured). `HtmlToMarkdown.codeFence`/`fenceLanguage` emit
+  fences from the conversion scripts, so a re-scrape produces the same shape;
+  `MigrateEnlighterToFences.java` above cleans up anything that slips through.
+  Don't reintroduce raw `<pre class="EnlighterJSRAW">` into `content/`.
 - **Posts are filed by publish date, not flat**: `content/posts/<year>/<month>/<slug>.md`,
   bucketed by the post's original publish date (parsed in `ConvertPosts.java`'s
   `bucketDirFor()`), purely to keep a 1000+-post directory browsable. This has

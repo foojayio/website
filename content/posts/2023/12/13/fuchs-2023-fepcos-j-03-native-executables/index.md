@@ -212,7 +212,8 @@ This section evaluates the exemplary usage of FEPCOS-J to build native executabl
 
 As can be seen below, all output files solely contain ***native-image*** build output [\[7\]](#references).
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="adder.out" data-enlighter-group="native.out">========================================================================================================================
+```
+========================================================================================================================
 GraalVM Native Image: Generating 'adder.exp' (executable)...
 ========================================================================================================================
 For detailed information and explanations on the build output, visit:
@@ -263,9 +264,12 @@ Recommendations:
 Produced artifacts:
  /home/fuchs/demo/adder/adder.exp (executable)
 ========================================================================================================================
-Finished generating 'adder.exp' in 11m 41s.</pre>
+Finished generating 'adder.exp' in 11m 41s.
+```
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="multiplier.out" data-enlighter-group="native.out">========================================================================================================================
+
+```
+========================================================================================================================
 GraalVM Native Image: Generating 'multiplier.exp' (executable)...
 ========================================================================================================================
 For detailed information and explanations on the build output, visit:
@@ -316,9 +320,12 @@ Recommendations:
 Produced artifacts:
  /home/fuchs/demo/multiplier/multiplier.exp (executable)
 ========================================================================================================================
-Finished generating 'multiplier.exp' in 16m 32s.</pre>
+Finished generating 'multiplier.exp' in 16m 32s.
+```
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="calculator.out" data-enlighter-group="native.out">========================================================================================================================
+
+```
+========================================================================================================================
 GraalVM Native Image: Generating 'calculator.exp' (executable)...
 ========================================================================================================================
 For detailed information and explanations on the build output, visit:
@@ -371,9 +378,12 @@ Recommendations:
 Produced artifacts:
  /home/fuchs/demo/calculator/calculator.exp (executable)
 ========================================================================================================================
-Finished generating 'calculator.exp' in 2m 23s.</pre>
+Finished generating 'calculator.exp' in 2m 23s.
+```
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="app.out" data-enlighter-group="native.out">========================================================================================================================
+
+```
+========================================================================================================================
 GraalVM Native Image: Generating 'app' (executable)...
 ========================================================================================================================
 For detailed information and explanations on the build output, visit:
@@ -426,7 +436,9 @@ Recommendations:
 Produced artifacts:
  /home/fuchs/demo/app/app (executable)
 ========================================================================================================================
-Finished generating 'app' in 2m 58s.</pre>
+Finished generating 'app' in 2m 58s.
+```
+
 
 ### Prepared data {#h3-10-prepared-data}
 

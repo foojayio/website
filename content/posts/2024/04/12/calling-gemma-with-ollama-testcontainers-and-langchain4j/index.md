@@ -36,8 +36,11 @@ Another good option is to run Gemma with [Ollama](https://ollama.com/), a tool t
 
 Once installed locally, you can run:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">ollama run gemma:2b
-ollama run gemma:7b</pre>
+```
+ollama run gemma:2b
+ollama run gemma:7b
+```
+
 
 Cherry on the cake, the \[LangChain4j\]() library provides an [Ollama module](https://docs.langchain4j.dev/integrations/language-models/ollama), so you can plug Ollama supported models in your Java applications easily.
 
@@ -61,7 +64,8 @@ You'll find the code in the Github [repository](https://github.com/glaforge/gemi
 
 Let's start with the easy part, interacting with an Ollama supported model with LangChain4j:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">OllamaContainer ollama = createGemmaOllamaContainer();
+```
+OllamaContainer ollama = createGemmaOllamaContainer();
 ollama.start();
 
 ChatLanguageModel model = OllamaChatModel.builder()
@@ -71,7 +75,9 @@ ChatLanguageModel model = OllamaChatModel.builder()
 
 String response = model.generate("Why is the sky blue?");
 
-System.out.println(response);</pre>
+System.out.println(response);
+```
+
 
 * You run an Ollama test container.
 * You create an Ollama chat model, by pointing at the address and port of the container.
@@ -80,8 +86,9 @@ System.out.println(response);</pre>
 
 Easy? Now let's have a look at the trickier part, my local method that creates the Ollama container:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">// check if the custom Gemma Ollama image exists already
-List&lt;Image&gt; listImagesCmd = DockerClientFactory.lazyClient()
+```
+// check if the custom Gemma Ollama image exists already
+List<Image> listImagesCmd = DockerClientFactory.lazyClient()
     .listImagesCmd()
     .withImageNameFilter(TC_OLLAMA_GEMMA_2_B)
     .exec();
@@ -99,7 +106,9 @@ if (listImagesCmd.isEmpty()) {
     return new OllamaContainer(
         DockerImageName.parse(TC_OLLAMA_GEMMA_2_B)
             .asCompatibleSubstituteFor("ollama/ollama"));
-}</pre>
+}
+```
+
 
 You need to create a derived Ollama container that pulls in the Gemma model. Either this image was already created beforehand, or if it doesn't exist yet, you create it.
 

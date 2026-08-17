@@ -35,7 +35,7 @@ Summary {#h2-0-summary}
 3. OWASP Recommendations
 4. Coding Demonstration
 
-*** ** * ** ***
+
 
 1️⃣ Introduction to LDAP (Lightweight Directory Access Protocol) {#h2-1-1-introduction-to-ldap-lightweight-directory-access-protocol}
 -------------------------------------------------------------------------------------------------------------------------------------
@@ -69,7 +69,7 @@ LDAP organizes data hierarchically, making it easy to query and retrieve specifi
 * LDAP simplifies user management.
 * LDAP provides a single source of truth for user data.
 
-*** ** * ** ***
+
 
 2️⃣ What is LDAP Injection? {#h2-6-2-what-is-ldap-injection}
 ------------------------------------------------------------
@@ -87,7 +87,7 @@ You typically input a filter like this: `cn=readers`. If the input is `cn=*` , y
 * **Sanitize User Input**
 * **Escape special** LDAP **characters** like `*, (, ), and .`
 
-*** ** * ** ***
+
 
 3️⃣ OWASP Recommendations {#h2-10-3-owasp-recommendations}
 ----------------------------------------------------------
@@ -96,12 +96,13 @@ According to OWASP, the distinguished name (DN) and the search filter have their
 
 ### Escaping Distinguished Name: {#h3-11-escaping-distinguished-name}
 
-<pre class="EnlighterJSRAW" style="position: relative" data-enlighter-language="java">public static String escapeDN(String name) {
-      StringBuffer sb = new StringBuffer(); // If using JDK &gt;= 1.5 consider using StringBuilder
-      if ((name.length() &gt; 0) &amp;&amp; ((name.charAt(0) == ' ') || (name.charAt(0) == '#'))) {
+```java
+public static String escapeDN(String name) {
+      StringBuffer sb = new StringBuffer(); // If using JDK >= 1.5 consider using StringBuilder
+      if ((name.length() > 0) && ((name.charAt(0) == ' ') || (name.charAt(0) == '#'))) {
           sb.append('\\'); // add the leading backslash if needed
       }
-      for (int i = 0; i &lt; name.length(); i++) {
+      for (int i = 0; i < name.length(); i++) {
           char curChar = name.charAt(i);
           switch (curChar) {
               case '\\':
@@ -116,11 +117,11 @@ According to OWASP, the distinguished name (DN) and the search filter have their
               case '"':
                   sb.append("\\\"");
                   break;
-              case '&lt;':
-                  sb.append("\\&lt;");
+              case '<':
+                  sb.append("\\<");
                   break;
-              case '&gt;':
-                  sb.append("\\&gt;");
+              case '>':
+                  sb.append("\\>");
                   break;
               case ';':
                   sb.append("\\;");
@@ -129,17 +130,20 @@ According to OWASP, the distinguished name (DN) and the search filter have their
                   sb.append(curChar);
           }
       }
-      if ((name.length() &gt; 1) &amp;&amp; (name.charAt(name.length() - 1) == ' ')) {
+      if ((name.length() > 1) && (name.charAt(name.length() - 1) == ' ')) {
           sb.insert(sb.length() - 1, '\\'); // add the trailing backslash if needed
       }
       return sb.toString();
-  }</pre>
+  }
+```
+
 
 ### Escaping Filter: {#h3-12-escaping-filter}
 
-<pre class="EnlighterJSRAW" style="position: relative" data-enlighter-language="java">public static final String escapeLDAPSearchFilter(String filter) {
-      StringBuffer sb = new StringBuffer(); // If using JDK &gt;= 1.5 consider using StringBuilder
-      for (int i = 0; i &lt; filter.length(); i++) {
+```java
+public static final String escapeLDAPSearchFilter(String filter) {
+      StringBuffer sb = new StringBuffer(); // If using JDK >= 1.5 consider using StringBuilder
+      for (int i = 0; i < filter.length(); i++) {
           char curChar = filter.charAt(i);
           switch (curChar) {
               case '\\':
@@ -162,11 +166,13 @@ According to OWASP, the distinguished name (DN) and the search filter have their
           }
       }
       return sb.toString();
-  }</pre>
+  }
+```
+
 
 For more detailed guidelines, visit: <https://wiki.owasp.org/index.php/Preventing_LDAP_Injection_in_Java>
 
-*** ** * ** ***
+
 
 4️⃣ Coding Demonstration {#h2-13-4-coding-demonstration}
 --------------------------------------------------------
@@ -175,13 +181,16 @@ For more detailed guidelines, visit: <https://wiki.owasp.org/index.php/Preventin
 
 ### 🚀 Starting the LDAP Server {#h3-14-starting-the-ldap-server}
 
-<pre class="EnlighterJSRAW" style="position: relative" data-enlighter-language="shell">docker run --detach --rm --name openldap5 -p 1389:1389 
+```bash
+docker run --detach --rm --name openldap5 -p 1389:1389 
 --env LDAP_ADMIN_USERNAME=admin 
 --env LDAP_ADMIN_PASSWORD=adminpassword 
 --env LDAP_USERS=customuser 
 --env LDAP_PASSWORDS=custompassword 
 --env LDAP_ROOT=dc=example,dc=org 
---env LDAP_ADMIN_DN=cn=admin,dc=example,dc=org bitnami/openldap:latest</pre>
+--env LDAP_ADMIN_DN=cn=admin,dc=example,dc=org bitnami/openldap:latest
+```
+
 
 OpenLDAP Image: <https://hub.docker.com/r/bitnami/openldap>  
 
@@ -227,12 +236,13 @@ Prevent LDAP injection in #java 💥💉with #springboot](2injection-blocked-700
 ![Injection passing through.
 Prevent LDAP injection in #java 💥💉with #springboot](2injection-done-700x248.png "Prevent LDAP injection in #java 💥💉with #springboot")
 
-*** ** * ** ***
+
 
 **👨‍💻 The related code:** {#h2-17-the-related-code}
 -----------------------------------------------------
 
-<pre class="EnlighterJSRAW" style="position: relative" data-enlighter-language="java">@PostMapping("/submit")
+```java
+@PostMapping("/submit")
    public String submitForm(@ModelAttribute LdapRequest ldapRequest, Model model) {
        try {
            // Debug logging for distinguishedName and filter
@@ -249,21 +259,23 @@ Prevent LDAP injection in #java 💥💉with #springboot](2injection-done-700x24
            //Protection END
 
            // Execute LDAP query
-           List&lt;String&gt; results = ldapTemplate.search(
+           List<String> results = ldapTemplate.search(
                    distinguishedName,
                    filter,
-                   (AttributesMapper&lt;String&gt;) attrs -&gt; attrs.get("cn").get().toString()
+                   (AttributesMapper<String>) attrs -> attrs.get("cn").get().toString()
                                                      );
            model.addAttribute("results", results);
        } catch (Exception e) {
            model.addAttribute("error", e.getMessage());
        }
        return "result";
-   }</pre>
+   }
+```
+
 
 from <https://github.com/vinny59200/java-ldap-prevention>
 
-*** ** * ** ***
+
 
 **📺 Demo Video on YouTube:** {#h2-18-demo-video-on-youtube}
 ------------------------------------------------------------
@@ -272,14 +284,14 @@ from <https://github.com/vinny59200/java-ldap-prevention>
 
 <br />
 
-*** ** * ** ***
+
 
 **🙏 Thanks for Reading!** {#h2-19-thanks-for-reading}
 ------------------------------------------------------
 
 This article provided a comprehensive overview of LDAP, its importance, the risks associated with LDAP Injection, and how to prevent it. By following these guidelines, you can ensure that your LDAP implementations are secure and robust.
 
-*** ** * ** ***
+
 
 🌐 Related {#h2-20-related}
 ---------------------------

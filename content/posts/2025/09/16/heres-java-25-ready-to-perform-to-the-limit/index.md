@@ -78,27 +78,33 @@ But they come with two drawbacks, restricting their potential in many real-world
 
 Consider the use of immutability in the following code example, which takes place in a guitar store domain:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">class OrderController {
+```java
+class OrderController {
     private final Logger logger = Logger.create(OrderController.class);
 
-    void submitOrder(User user, List&lt;Guitar&gt; guitar) {
+    void submitOrder(User user, List<Guitar> guitar) {
         logger.info("Ordering new guitars...");
 
         // ...
 
         logger.info("New guitars have been ordered, let's get to work!");
     }
-}</pre>
+}
+```
+
 
 Whenever an instance of `OrderController` is created, the `logger` field is initialized eagerly, which potentially makes creating an `OrderController` slow.  
 
 And this might not be the only place in our guitar store application where a `logger` field is being initialized eagerly:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">class GuitarStore {
+```java
+class GuitarStore {
     static final OrderController ORDERS = new OrderController();
     static final GuitarRepository GUITARS = new GuitarRepository();
     static final ManufacturerService MANUFACTURERS = new ManufacturerService();
-}</pre>
+}
+```
+
 
 All this initialization work causes the application to start up more slowly, and the worst thing is: it may not even be necessary! If a user is simply browsing the guitar store, with no intention of ordering a new guitar, the `OrderController` won't even be called and we will have initialized the `logger` field for nothing.
 
@@ -106,7 +112,8 @@ All this initialization work causes the application to start up more slowly, and
 
 The only alternative we currently have is to resort to a mutability-based approach, in which we delay the initialization of complex objects to as late a time as possible:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">class OrderController {
+```java
+class OrderController {
     private Logger logger;
 
     Logger getLogger() {
@@ -116,14 +123,16 @@ The only alternative we currently have is to resort to a mutability-based approa
         return logger;
     }
 
-    void submitOrder(User user, List&lt;Guitar&gt; guitar) {
+    void submitOrder(User user, List<Guitar> guitar) {
         getLogger().info("Ordering new guitars...");
 
         // ...
 
         getLogger().info("New guitars have been ordered, let's get to work!");
     }
-}</pre>
+}
+```
+
 
 This improves application startup, but comes with a few drawbacks of its own:
 
@@ -149,21 +158,24 @@ It must be initialized some time before its content is first retrieved, and it i
 
 Let's rewrite the `OrderController` class to use a stable value for its logger:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">class OrderController {
-    private final StableValue&lt;Logger&gt; logger = StableValue.of();
+```java
+class OrderController {
+    private final StableValue<Logger> logger = StableValue.of();
 
     Logger getLogger() {
-        return logger.orElseSet(() -&gt; Logger.create(OrderController.class));
+        return logger.orElseSet(() -> Logger.create(OrderController.class));
     }
 
-    void submitOrder(User user, List&lt;Guitar&gt; guitar) {
+    void submitOrder(User user, List<Guitar> guitar) {
         getLogger().info("Ordering new guitars...");
 
         // ...
 
         getLogger().info("New guitars have been ordered, let's get to work!");
     }
-}</pre>
+}
+```
+
 
 After the call to `StableValue.of()`, the stable value holds no content.  
 
@@ -183,10 +195,11 @@ If we look at the properties of stable values, we see that they fill a gap betwe
 
 Usage of stable values is certainly not limited to loggers--we can also use a stable value to store the `OrderController` component itself, and related components:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">class GuitarStore {
-    static final StableValue&lt;OrderController&gt; ORDERS = StableValue.of();
-    static final StableValue&lt;GuitarRepository&gt; GUITARS = StableValue.of();
-    static final StableValue&lt;ManufacturerService&gt; MANUFACTURERS = StableValue.of();
+```java
+class GuitarStore {
+    static final StableValue<OrderController> ORDERS = StableValue.of();
+    static final StableValue<GuitarRepository> GUITARS = StableValue.of();
+    static final StableValue<ManufacturerService> MANUFACTURERS = StableValue.of();
 
     public static OrderController orders() {
         return ORDERS.orElseSet(OrderController::new);
@@ -199,7 +212,9 @@ Usage of stable values is certainly not limited to loggers--we can also use a st
     public static ManufacturerService manufacturers() {
         return MANUFACTURERS.orElseSet(ManufacturerService::new);
     }
-}</pre>
+}
+```
+
 
 The application's startup time improves because it no longer initializes its components, such as `OrderController`, up front. Rather, it initializes each component on demand, via the `orElseSet` method of the corresponding stable value. Each component, moreover, initializes its sub-components, such as its logger, on demand in the same way.
 
@@ -213,17 +228,20 @@ It would be more convenient if we could separate initializing a stable value fro
 
 To this end, JEP 502 introduces *stable suppliers*, and this is how they work:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">class OrderController {
-    private final Supplier&lt;Logger&gt; logger = StableValue.supplier(() -&gt; Logger.create(OrderController.class));
+```java
+class OrderController {
+    private final Supplier<Logger> logger = StableValue.supplier(() -> Logger.create(OrderController.class));
 
-    void submitOrder(User user, List&lt;Guitar&gt; guitar) {
+    void submitOrder(User user, List<Guitar> guitar) {
         logger.get().info("Ordering new guitars...");
 
         // ...
 
         logger.get().info("New guitars have been ordered, let's get to work!");
     }
-}</pre>
+}
+```
+
 
 Here, `logger` is no longer a stable value, but a stable `Supplier`. When a stable supplier is first created via `StableValue.supplier(...)`, the content of the underlying stable value is not yet initialized. To access the logger, clients call `logger.get()`, of which the first invocation will invoke the supplier and use its result to initialize the stable value. Subsequent invocations of `logger.get()` will return the content immediately.  
 
@@ -233,15 +251,18 @@ The resulting code is arguably more readable, because we no longer need a separa
 
 What if you wanted to keep track of multiple stable values, for example when keeping a pool of objects? We can achieve this by using a *stable list*:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">class GuitarStore {
+```java
+class GuitarStore {
     static final int POOL_SIZE = 10;
-    static final List&lt;OrderController&gt; ORDERS = StableValue.list(POOL_SIZE, _ -&gt; new OrderController());
+    static final List<OrderController> ORDERS = StableValue.list(POOL_SIZE, _ -> new OrderController());
 
     public static OrderController orders() {
         long index = Thread.currentThread().threadId() % POOL_SIZE;
         return ORDERS.get((int) index);
     }
-}</pre>
+}
+```
+
 
 Here, `ORDERS` is no longer a stable value, but a stable list, where each element is the content of an underlying stable value. To access the content, clients call `ORDERS.get(...)`, passing it an index, of which the first invocation will invoke the lamdba function that ignores the index and invokes the `OrderController()` constructor. Subsequent invocations of `ORDERS.get(...)` with the same index will return the element's content immediately.
 
@@ -327,23 +348,26 @@ To illustrate this, let's look at a short program that uses the Stream API and t
 
 About 30 hot methods are compiled at the highest optimization level:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">import java.util.*;
+```java
+import java.util.*;
 import java.util.stream.*;
 
 public class HelloStreamWarmup {
     static String greeting(int n) {
         var words = List.of("Hello", "" + n, "world!");
         return words.stream()
-            .filter(w -&gt; !w.contains("0"))
+            .filter(w -> !w.contains("0"))
             .collect(Collectors.joining(", "));
     }
 
     public static void main(String... args) {
-        for (int i = 0; i &lt; 100_000; i++)
+        for (int i = 0; i < 100_000; i++)
             greeting(i);
         System.out.println(greeting(0));  // "Hello, world!"
     }
-}</pre>
+}
+```
+
 
 This program runs in 90 milliseconds with an AOT cache that contains no profiles. After collecting profiles into the AOT cache, it runs in 73 milliseconds --- an improvement of 19%. The AOT cache with profiles occupies an additional 250 kilobytes, about 2.5% more than the AOT cache without profiles.
 
@@ -363,10 +387,13 @@ Java 25 introduces a single new feature that is part of the Security Libs:
 
 Within a Java context, cryptographic objects such as public keys, private keys and certificates can be easily created and distributed. But outside of the Java world, the de facto standard is the [Privacy-Enhanced Mail](https://en.wikipedia.org/wiki/Privacy-Enhanced_Mail) (PEM) format. Let's see an example of a PEM-encoded cryptographic object:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">-----BEGIN PUBLIC KEY-----
+```
+-----BEGIN PUBLIC KEY-----
 MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEi/kRGOL7wCPTN4KJ2ppeSt5UYB6u
 cPjjuKDtFTXbguOIFDdZ65O/8HTUqS/sVzRF+dg7H3/tkQ/36KdtuADbwQ==
------END PUBLIC KEY-----</pre>
+-----END PUBLIC KEY-----
+```
+
 
 The Java Platform currently doesn't include an easy-to-use API for decoding and encoding text in the PEM format, which means that decoding a PEM-encoded key can be a tedious job that involves careful parsing of the source PEM text. To further illustrate this point, encrypting and decrypting a private key currently requires over a dozen lines of code.
 
@@ -392,7 +419,8 @@ To solve this problem, JEP 470 introduces an API that can encode objects to the 
 
 The following code example shows typical usage of the API:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">PrivateKey privateKey = ...;
+```java
+PrivateKey privateKey = ...;
 PublicKey publicKey = ...;
 
 // let's encode a cryptographic object!
@@ -413,16 +441,18 @@ PEMDecoder pemDecoder = PEMDecoder.of();
 
 // this returns a DEREncodable, so we need to pattern-match
 switch (pemDecoder.decode(pem)) {
-    case PublicKey publicKey -&gt; ...;
-    case PrivateKey privateKey -&gt; ...;
-    default -&gt; throw new IllegalArgumentException("Unsupported cryptographic object");
+    case PublicKey publicKey -> ...;
+    case PrivateKey privateKey -> ...;
+    default -> throw new IllegalArgumentException("Unsupported cryptographic object");
 }
 
 // alternatively, if you know the type of the encoded cryptographic object in advance:
 PrivateKey key = pemDecoder.decode(pem, PrivateKey.class);
 
 // this decodes an encrypted cryptographic object
-PrivateKey decryptedkey = pemDecoder.withDecryption(password).decode(pem, PrivateKey.class);</pre>
+PrivateKey decryptedkey = pemDecoder.withDecryption(password).decode(pem, PrivateKey.class);
+```
+
 
 ##### Preview Warning
 
@@ -505,7 +535,8 @@ JEP 520 introduces two new JFR events (`jdk.MethodTiming` and `jdk.MethodTrace`)
 
 For example, to see what triggers the resize of a `HashMap`, you can configure the `MethodTrace` event's filter when making a recording and then use the [`jfr`](https://docs.oracle.com/en/java/javase/24/docs/specs/man/jfr.html) tool to display the recorded event:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">$ java -XX:StartFlightRecording:jdk.MethodTrace#filter=java.util.HashMap::resize,filename=recording.jfr ...
+```
+$ java -XX:StartFlightRecording:jdk.MethodTrace#filter=java.util.HashMap::resize,filename=recording.jfr ...
 $ jfr print --events jdk.MethodTrace --stack-depth 20 recording.jfr
 jdk.MethodTrace {
     startTime = 00:39:26.379 (2025-03-05)
@@ -516,7 +547,7 @@ jdk.MethodTrace {
       java.util.HashMap.putVal(int, Object, Object, boolean, boolean) line: 636
       java.util.HashMap.put(Object, Object) line: 619
       sun.awt.AppContext.put(Object, Object) line: 598
-      sun.awt.AppContext.&lt;init&gt;(ThreadGroup) line: 240
+      sun.awt.AppContext.<init>(ThreadGroup) line: 240
       sun.awt.SunToolkit.createNewAppContext(ThreadGroup) line: 282
       sun.awt.AppContext.initMainAppContext() line: 260
       sun.awt.AppContext.getAppContext() line: 295
@@ -527,7 +558,9 @@ jdk.MethodTrace {
       javax.swing.SwingUtilities.invokeLater(Runnable) line: 1415
       java2d.J2Ddemo.main(String[]) line: 674
     ]
-}</pre>
+}
+```
+
 
 As you can see, the filter is specified just like a [method reference](https://docs.oracle.com/javase/specs/jls/se24/html/jls-15.html#jls-15.13).  
 
@@ -539,24 +572,27 @@ The JFR is usually configured via a configuration file, which has now also been 
 
 To put this all together, if an application suffers from slow startup, timing the execution of all static initializers may suggest where lazy initialization could be used. We can time all static initializers in all classes by omitting the class name, specifying `::` as the filter:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">$ java '-XX:StartFlightRecording:method-timing=::&lt;clinit&gt;,filename=clinit.jfr' ...
+```
+$ java '-XX:StartFlightRecording:method-timing=::<clinit>,filename=clinit.jfr' ...
 $ jfr view method-timing clinit.jfr
 
                                  Method Timing
 
 Timed Method                                           Invocations Average Time
 ------------------------------------------------------ ----------- ------------
-sun.font.HBShaper.&lt;clinit&gt;()                                     1 32.500000 ms
-java.awt.GraphicsEnvironment$LocalGE.&lt;clinit&gt;()                  1 32.400000 ms
-java2d.DemoFonts.&lt;clinit&gt;()                                      1 21.200000 ms
-java.nio.file.TempFileHelper.&lt;clinit&gt;()                          1 17.100000 ms
-sun.security.util.SecurityProviderConstants.&lt;clinit&gt;()           1  9.860000 ms
-java.awt.Component.&lt;clinit&gt;()                                    1  9.120000 ms
-sun.font.SunFontManager.&lt;clinit&gt;()                               1  8.350000 ms
-sun.java2d.SurfaceData.&lt;clinit&gt;()                                1  8.300000 ms
-java.security.Security.&lt;clinit&gt;()                                1  8.020000 ms
-sun.security.util.KnownOIDs.&lt;clinit&gt;()                           1  7.550000 ms
-...</pre>
+sun.font.HBShaper.<clinit>()                                     1 32.500000 ms
+java.awt.GraphicsEnvironment$LocalGE.<clinit>()                  1 32.400000 ms
+java2d.DemoFonts.<clinit>()                                      1 21.200000 ms
+java.nio.file.TempFileHelper.<clinit>()                          1 17.100000 ms
+sun.security.util.SecurityProviderConstants.<clinit>()           1  9.860000 ms
+java.awt.Component.<clinit>()                                    1  9.120000 ms
+sun.font.SunFontManager.<clinit>()                               1  8.350000 ms
+sun.java2d.SurfaceData.<clinit>()                                1  8.300000 ms
+java.security.Security.<clinit>()                                1  8.020000 ms
+sun.security.util.KnownOIDs.<clinit>()                           1  7.550000 ms
+...
+```
+
 
 ##### Filtering on Classes and Annotations
 

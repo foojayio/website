@@ -53,12 +53,15 @@ It provides a ready-to-use `MailpitContainer`, a Java client for the Mailpit API
 
 Add the dependency to your test scope:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="xml" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&lt;dependency&gt;
-  &lt;groupId&gt;ch.martinelli.oss&lt;/groupId&gt;
-  &lt;artifactId&gt;testcontainers-mailpit&lt;/artifactId&gt;
-  &lt;version&gt;1.2.0&lt;/version&gt;
-  &lt;scope&gt;test&lt;/scope&gt;
-&lt;/dependency&gt;</pre>
+```xml
+<dependency>
+  <groupId>ch.martinelli.oss</groupId>
+  <artifactId>testcontainers-mailpit</artifactId>
+  <version>1.2.0</version>
+  <scope>test</scope>
+</dependency>
+```
+
 
 Using Spring Boot with @ServiceConnection {#h2-4-using-spring-boot-with-serviceconnection}
 ------------------------------------------------------------------------------------------
@@ -67,7 +70,8 @@ If you use Spring Boot 3.1 or newer, the cleanest solution is `@ServiceConnectio
 
 You only need a small test configuration:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@TestConfiguration(proxyBeanMethods = false)
+```java
+@TestConfiguration(proxyBeanMethods = false)
 class TestcontainersConfiguration {
 
   @Bean
@@ -75,11 +79,14 @@ class TestcontainersConfiguration {
   MailpitContainer mailpitContainer() {
     return new MailpitContainer();
   }
-}</pre>
+}
+```
+
 
 In your test, you can now use `JavaMailSender` as usual, and verify emails via `MailpitClient`:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@SpringBootTest
+```java
+@SpringBootTest
 @Import(TestcontainersConfiguration.class)
 class EmailServiceTest {
 
@@ -92,8 +99,8 @@ class EmailServiceTest {
   @Test
   void shouldSendAndVerifyEmail() {
     var msg = new SimpleMailMessage();
-    msg.setFrom("<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="b2dcddc0d7c2decbf2dfcbd3c2c29cd1dddf">[email&nbsp;protected]</a>");
-    msg.setTo("<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="720701170032170a131f021e175c111d1f">[email&nbsp;protected]</a>");
+    msg.setFrom("<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="b2dcddc0d7c2decbf2dfcbd3c2c29cd1dddf">[email protected]</a>");
+    msg.setTo("<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="720701170032170a131f021e175c111d1f">[email protected]</a>");
     msg.setSubject("Welcome");
     msg.setText("Hello!");
 
@@ -103,7 +110,9 @@ class EmailServiceTest {
     assertThat(messages).hasSize(1);
     assertThat(messages.get(0).subject()).isEqualTo("Welcome");
   }
-}</pre>
+}
+```
+
 
 No mail properties are required. Spring Boot derives everything from the running container.
 
@@ -112,7 +121,8 @@ Using Mailpit without Spring Boot {#h2-5-using-mailpit-without-spring-boot}
 
 The Mailpit container can also be used in plain JUnit tests. In this case, you configure the SMTP host and port manually and then verify messages via the container's client.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@Testcontainers
+```java
+@Testcontainers
 class PlainEmailTest {
 
   @Container
@@ -127,8 +137,8 @@ class PlainEmailTest {
     Session session = Session.getInstance(props);
 
     MimeMessage message = new MimeMessage(session);
-    message.setFrom(new InternetAddress("<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="abd8cec5cfced9ebced3cac6dbc7ce85c8c4c6">[email&nbsp;protected]</a>"));
-    message.setRecipient(RecipientType.TO, new InternetAddress("<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="770512141e071e12190337120f161a071b125914181a">[email&nbsp;protected]</a>"));
+    message.setFrom(new InternetAddress("<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="abd8cec5cfced9ebced3cac6dbc7ce85c8c4c6">[email protected]</a>"));
+    message.setRecipient(RecipientType.TO, new InternetAddress("<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="770512141e071e12190337120f161a071b125914181a">[email protected]</a>"));
     message.setSubject("Test Subject");
     message.setText("Hello, this is a test email!");
 
@@ -138,7 +148,9 @@ class PlainEmailTest {
     assertThat(messages).hasSize(1);
     assertThat(messages.get(0).subject()).isEqualTo("Test Subject");
   }
-}</pre>
+}
+```
+
 
 This approach works well if you are not using Spring Boot or want full control over the mail setup.
 
@@ -147,7 +159,8 @@ Fluent AssertJ assertions {#h2-6-fluent-assertj-assertions}
 
 Recent versions of the library include AssertJ-style assertions that make tests much more readable. Instead of manually fetching messages, you can express expectations directly.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">import static ch.martinelli.oss.testcontainers.mailpit.assertions.MailpitAssertions.assertThat;
+```java
+import static ch.martinelli.oss.testcontainers.mailpit.assertions.MailpitAssertions.assertThat;
 
 @Test
 void shouldVerifyEmailSent() {
@@ -157,31 +170,37 @@ void shouldVerifyEmailSent() {
       .hasMessages()
       .hasMessageCount(1)
       .hasMessageWithSubject("Welcome")
-      .hasMessageTo("<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="9aefe9ffe8daffe2fbf7eaf6ffb4f9f5f7">[email&nbsp;protected]</a>")
-      .hasMessageFrom("<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="0e60617c6b7e62774e63776f7e7e206d6163">[email&nbsp;protected]</a>");
-}</pre>
+      .hasMessageTo("<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="9aefe9ffe8daffe2fbf7eaf6ffb4f9f5f7">[email protected]</a>")
+      .hasMessageFrom("<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="0e60617c6b7e62774e63776f7e7e206d6163">[email protected]</a>");
+}
+```
+
 
 You can also assert details of a specific message:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@Test
+```java
+@Test
 void shouldVerifyMessageDetails() {
   // send email...
 
   assertThat(mailpit)
       .firstMessage()
       .hasSubject("Order Confirmation")
-      .isFrom("<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="0d627f69687f7e4d7e65627d236e6260">[email&nbsp;protected]</a>")
-      .hasRecipient("<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="c9aabcbabda6a4acbb89acb1a8a4b9a5ace7aaa6a4">[email&nbsp;protected]</a>")
+      .isFrom("<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="0d627f69687f7e4d7e65627d236e6260">[email protected]</a>")
+      .hasRecipient("<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="c9aabcbabda6a4acbb89acb1a8a4b9a5ace7aaa6a4">[email protected]</a>")
       .hasNoAttachments()
       .hasSnippetContaining("Thank you");
-}</pre>
+}
+```
+
 
 Waiting for asynchronous emails {#h2-7-waiting-for-asynchronous-emails}
 -----------------------------------------------------------------------
 
 Many applications send emails asynchronously. For these cases, the assertions support waiting with timeouts and polling.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@Test
+```java
+@Test
 void shouldWaitForAsyncEmail() {
   // trigger async email sending...
 
@@ -190,9 +209,11 @@ void shouldWaitForAsyncEmail() {
       .withPollInterval(Duration.ofSeconds(1))
       .awaitMessage()
       .withSubject("Password Reset")
-      .to("<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="542127312614312c35392438317a373b39">[email&nbsp;protected]</a>")
+      .to("<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="542127312614312c35392438317a373b39">[email protected]</a>")
       .isPresent();
-}</pre>
+}
+```
+
 
 This removes the need for manual `Thread.sleep` calls and makes async tests reliable.
 

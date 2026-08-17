@@ -53,7 +53,8 @@ In Project Loom, the word "continuation" will mean a delimited continuation, als
 
 I mentioned above that the virtual threads are mounted and unmounted by the JVM, now let's make this behavior observable.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">class Task implements Runnable {
+```java
+class Task implements Runnable {
     private final int taskNumber;
 
     public Task(int taskNumber) {
@@ -74,37 +75,49 @@ I mentioned above that the virtual threads are mounted and unmounted by the JVM,
             System.out.println(Thread.currentThread());
         }
     }
-}</pre>
+}
+```
+
 
 The Task object is seen above responsible for both putting the task to sleep for 20ms and if the variable taskNumber has a value of 1 printing the name of the current thread before and after this operation.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">var virtualThreads = IntStream.rangeClosed(1, 10)
-    .mapToObj(taskNumber -&gt; Thread.ofVirtual().unstarted(new Task(taskNumber))).toList();
+```java
+var virtualThreads = IntStream.rangeClosed(1, 10)
+    .mapToObj(taskNumber -> Thread.ofVirtual().unstarted(new Task(taskNumber))).toList();
 
 virtualThreads.forEach(Thread::start);
 for (Thread t : virtualThreads) {
     t.join();
-}</pre>
+}
+```
+
 
 When the Task object is passed to virtual threads for execution, we will get an output similar to the following.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">VirtualThread[#21]/runnable@ForkJoinPool-1-worker-1
-VirtualThread[#21]/runnable@ForkJoinPool-1-worker-7</pre>
+```
+VirtualThread[#21]/runnable@ForkJoinPool-1-worker-1
+VirtualThread[#21]/runnable@ForkJoinPool-1-worker-7
+```
+
 
 From the output, we understand that the same virtual thread jumps from one platform thread it was running in at the beginning to another when it comes back from sleeping.
 
 This is what happens in the mount and unmount process and at the core of this, there is a [Continuation](https://github.com/openjdk/loom/blob/75a5161d853893dee740bdf458f4461fc449aea1/src/java.base/share/classes/jdk/internal/vm/Continuation.java) object.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">// JDK core code
+```java
+// JDK core code
 
 public Continuation(ContinuationScope scope, Runnable target) { 
     this.scope = scope; 
     this.target = target; 
-}</pre>
+}
+```
+
 
 When we examine the [VirtualThread](https://github.com/openjdk/loom/blob/75a5161d853893dee740bdf458f4461fc449aea1/src/java.base/share/classes/java/lang/VirtualThread.java) class, we see that a virtual thread is implemented as a continuation that is wrapped as a task and scheduled by a java.util.concurrent.Executor.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">// JDK core code
+```java
+// JDK core code
 
 private static final ContinuationScope VTHREAD_SCOPE = new ContinuationScope("VirtualThreads");
 
@@ -136,7 +149,7 @@ VirtualThread(Executor scheduler, String name, int characteristics, Runnable tas
 
 private static class VThreadContinuation extends Continuation {
     VThreadContinuation(VirtualThread vthread, Runnable task) {
-        super(VTHREAD_SCOPE, () -&gt; vthread.run(task));
+        super(VTHREAD_SCOPE, () -> vthread.run(task));
     }
 
     ...        
@@ -155,19 +168,22 @@ private void runContinuation() {
             afterYield();
         }
     }
-}</pre>
+}
+```
+
 
 As can you see above, when a virtual thread is created, a continuation object is also created to represent its execution state. This object allows a virtual thread to save its current execution state and later resume from that state, typically on a different thread.
 
 Let's look at a pure continuation example for a better grasp.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public class ContinuationExample
+```java
+public class ContinuationExample
 {
     public static void main(String[] args) {
 
         var scope = new ContinuationScope("MyScope");
 
-        var continuation = new Continuation(scope, () -&gt; {
+        var continuation = new Continuation(scope, () -> {
             System.out.println("Continuation running");
             Continuation.yield(scope);
             System.out.println("Continuation still running");
@@ -176,22 +192,32 @@ Let's look at a pure continuation example for a better grasp.
         continuation.run();
     }
 }
-</pre>
+```
+
 
 > Notice that continuations aren't exposed as a public API because it is a low-level primitive. They should only be used by library authors to build higher-level APIs such as virtual threads, the builder API to run virtual threads, etc.
 
 When executing the above example, we will get the following output.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">Continuation running</pre>
+```
+Continuation running
+```
+
 
 When we change the `continuation.run();` line as below and run the code again, we get a different output.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">while (!continuation.isDone()){
+```java
+while (!continuation.isDone()){
     continuation.run();
-}</pre>
+}
+```
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">Continuation running 
-Continuation still running</pre>
+
+```
+Continuation running 
+Continuation still running
+```
+
 
 As can be seen from the output and mentioned above, a continuation is an object which may suspend or yield execution at some point by itself and, when resumed or invoked, carries out the rest of some computation.
 

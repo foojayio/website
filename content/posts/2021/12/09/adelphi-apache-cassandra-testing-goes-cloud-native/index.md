@@ -68,33 +68,45 @@ The schema used in this article comes from the [Banking IOT project](https://git
 
 And that's it! We are ready to install Adelphi in the Kubernetes cluster using our own schema, so go to the Adelphi root folder and execute:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ helm install adelphi \ # chart name
+```
+$ helm install adelphi \ # chart name
 helm/adelphi \ # path to the chart folder
 -n cass-operator \ # namespace (currently must be cass-operator)
--f my-settings.yaml # your custom settings with the CQL schema</pre>
+-f my-settings.yaml # your custom settings with the CQL schema
+```
+
 
 That will immediately start the workflow and you can watch the progress either in the command-line:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ argo watch -n cass-operator @latest</pre>
+```
+$ argo watch -n cass-operator @latest
+```
+
 
 ![](argo-cli-1024x482.gif)
 
 or in the Argo UI:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ kubectl -n cass-operator \ # the workflow namespace
+```
+$ kubectl -n cass-operator \ # the workflow namespace
 port-forward \ # opens a tunnel to a pod in the k8s cluster
 deployment/argo-server \ # the service we want to access
-2746:2746 # port mapping from local to remote</pre>
+2746:2746 # port mapping from local to remote
+```
+
 
 open the browser at [http://localhost:2746](http://localhost:2746/)
 ![](argo-ui.gif)
 
 When the workflow reaches the end, you can open up the Grafana dashboard to inspect the collected metrics:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ kubectl -n cass-operator \ # the workflow namespace
+```
+$ kubectl -n cass-operator \ # the workflow namespace
 port-forward \ # opens a tunnel to a pod in the k8s cluster
 grafana \ # the service we want to access
-3000:3000 # port mapping from local to remote</pre>
+3000:3000 # port mapping from local to remote
+```
+
 
 open the browser at [http://localhost:3000](http://localhost:3000/) (first-time credentials: admin/admin)
 ![](Grafana-1024x367.png)
@@ -103,25 +115,36 @@ If you are already familiar with the dashboard that comes with NoSQLBench, you w
 
 The additional panel in the top left-hand corner shows a summary of the data integrity validation: it displays the number of read/write operations and how many failures occurred, if any. Note that the dashboard and its associated data will be purged when Adelphi is uninstalled, so if you want to store a copy of the results, download the raw files while the cluster is still up and running:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ kubectl -n cass-operator \ # the workflow namespace
+```
+$ kubectl -n cass-operator \ # the workflow namespace
 port-forward \ # opens a tunnel to a pod in the k8s cluster
 results-server \ # web server containing the result files in text format
-8080:8080 # port mapping from local to remote </pre>
+8080:8080 # port mapping from local to remote
+```
+
 
 In a separate terminal window you can recursively download all the files at once with a little help of [wget](https://www.gnu.org/software/wget/):
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ wget -r http://localhost:8080/</pre>
+```
+$ wget -r http://localhost:8080/
+```
+
 
 By default Adelphi is configured with a short execution duration such that you can try the whole process quickly, but for a thorough validation of your schema, we recommend that you let it run for a few hours to allow the data generators to explore a larger distribution space. You can tweak the execution duration with `gemini_test_duration` and `nosqlbench_cycles`. Other parameters you may want to change are clusterSize, to set the number of C\* nodes per cluster, and the `storageClassName` according to the storage class offered by the cloud service of your choice.
 
 For a complete list of the configuration parameters currently available, run:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ helm show values helm/adelphi
-</pre>
+```
+$ helm show values helm/adelphi
+```
+
 
 When you are done, you can safely delete the running instances with:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ helm uninstall adelphi -n cass-operator</pre>
+```
+$ helm uninstall adelphi -n cass-operator
+```
+
 
 That will clear all the Pods, Services and Volumes created by Adelphi with the exception of the CRDs (Custom Resource Definitions) which are not managed by Helm after the initial installation, but if you created an exclusive k8s cluster for Adelphi, you can safely delete it now.
 

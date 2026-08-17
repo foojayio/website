@@ -81,7 +81,8 @@ Remember that HTTP is a stateless protocol, so application servers set a cookie 
 
 I shall use a regular Tomcat, so the session cookie is `JSESSIONID`. Henceforth, the Apache APISIX documentation for two nodes is the following:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml">routes:
+```yaml
+routes:
   - uri: /*
     upstream:
       nodes:
@@ -89,7 +90,9 @@ I shall use a regular Tomcat, so the session cookie is `JSESSIONID`. Henceforth,
         "tomcat2:8080": 1            #1
       type: chash                    #2
       hash_on: cookie                #3
-      key: cookie_JSESSIONID         #4</pre>
+      key: cookie_JSESSIONID         #4
+```
+
 
 1. Define the upstream nodes
 2. Choose the consistent hashing algorithm

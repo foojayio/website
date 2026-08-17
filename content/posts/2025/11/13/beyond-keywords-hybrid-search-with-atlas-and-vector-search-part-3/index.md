@@ -77,26 +77,29 @@ The vector search {#h2-3-the-vector-search}
 
 So far, our application uses **vector search with pre-filters**. That means we can run semantic queries while narrowing the search space by year, genres, and IMDb rating. Under the hood, the query looks something like this:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">[
-&nbsp;{
-&nbsp;&nbsp;&nbsp;$vectorSearch: {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;filter: {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$and: [
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{ genres: { $in: ["Action", "Drama"] } },
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{ year: { $gte: 1980, $lte: 2003 } },
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{ "imdb.rating": { $gte: 9.0 } }
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;]
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;},
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;index: "vector_index",
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;limit: 8,
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;numCandidates: 160,
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;path: "plot_embedding_voyage_3_large",
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;queryVector: [
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-0.027284348, ....
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;]
-&nbsp;&nbsp;&nbsp;}
-&nbsp;}
-]</pre>
+```
+[
+ {
+   $vectorSearch: {
+     filter: {
+       $and: [
+         { genres: { $in: ["Action", "Drama"] } },
+         { year: { $gte: 1980, $lte: 2003 } },
+         { "imdb.rating": { $gte: 9.0 } }
+       ]
+     },
+     index: "vector_index",
+     limit: 8,
+     numCandidates: 160,
+     path: "plot_embedding_voyage_3_large",
+     queryVector: [
+       -0.027284348, ....
+     ]
+   }
+ }
+]
+```
+
 
 This works well for descriptive searches, because the embeddings capture meaning beyond exact words.
 
@@ -113,10 +116,13 @@ That's where [**full-text search**](https://www.mongodb.com/resources/basics/ful
 
 Run this command in your MongoDB shell to create a dynamic search index on the embedded_movies collection:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">db.embedded_movies.createSearchIndex(
-&nbsp;&nbsp;"fulltextsearch",
-&nbsp;&nbsp;{ mappings: { dynamic: true } }
-)</pre>
+```
+db.embedded_movies.createSearchIndex(
+  "fulltextsearch",
+  { mappings: { dynamic: true } }
+)
+```
+
 
 Note on indexing: The **dynamic: true** parameter is ideal for prototyping as it automatically indexes every field in your documents. For production, consider a custom mapping to optimize performance and cost by indexing only necessary fields. Review the [documentation on mapping](https://www.mongodb.com/docs/atlas/atlas-search/define-field-mappings/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=hybrid-search-atlas-foojay-part3&utm_term=tony.kim) for guidance.
 
@@ -124,31 +130,37 @@ Note on indexing: The **dynamic: true** parameter is ideal for prototyping as it
 
 With the index created, we can now execute a simple query to find "Titanic" by its title:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">db.embedded_movies.aggregate([
-&nbsp;{
-&nbsp;&nbsp;&nbsp;$search: {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;index:&nbsp; "fulltextsearch",
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;text: {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;query: "Titanic",
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;path: "title"
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
-&nbsp;&nbsp;&nbsp;}
-&nbsp;},
-])</pre>
+```
+db.embedded_movies.aggregate([
+ {
+   $search: {
+     index:  "fulltextsearch",
+     text: {
+       query: "Titanic",
+       path: "title"
+     }
+   }
+ },
+])
+```
+
 
 You should see something like this:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">{
-&nbsp;"title": "Titanic",
-&nbsp;"year": "1996",
-&nbsp;"plot": &nbsp;"The story of the 1912 sinking ..",
-&nbsp;"genres": [
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"Action",
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"Drama",
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"History"
-&nbsp;&nbsp;],
-&nbsp;...
-}</pre>
+```
+{
+ "title": "Titanic",
+ "year": "1996",
+ "plot":  "The story of the 1912 sinking ..",
+ "genres": [
+     "Action",
+     "Drama",
+     "History"
+  ],
+ ...
+}
+```
+
 
 ### Improving the experience with fuzzy search {#h3-7-improving-the-experience-with-fuzzy-search}
 
@@ -156,30 +168,36 @@ A common user experience problem is typos. What if our user wants to find *Titan
 
 This is where the [fuzzy](https://www.mongodb.com/docs/atlas/atlas-search/text/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=hybrid-search-atlas-foojay-part3&utm_term=tony.kim) option comes to the rescue. Let's modify our query:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">db.embedded_movies.aggregate([&nbsp;
-&nbsp;{
-&nbsp;&nbsp;&nbsp;$search: {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;index: "fulltextsearch",
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;text: {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;query: "titani",
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;path: "title",
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fuzzy: {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;maxEdits: 1
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
-&nbsp;&nbsp;&nbsp;}
-&nbsp;}
-])</pre>
+```
+db.embedded_movies.aggregate([ 
+ {
+   $search: {
+     index: "fulltextsearch",
+     text: {
+       query: "titani",
+       path: "title",
+       fuzzy: {
+         maxEdits: 1
+       }
+     }
+   }
+ }
+])
+```
+
 
 In short: With **maxEdits: 1**, our search for "titani" becomes more flexible. It will now match not only the intended "Titanic" (adding one character, "c") but also other titles like "Titans" (replacing "i" with "s") or "Titan" (removing one character, "i"). Possible results would be:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">title="Titanic"
+```
+title="Titanic"
 
 title="Titan A.E."
 
 title="Raise the Titanic"
 
-title="Clash of the Titans"</pre>
+title="Clash of the Titans"
+```
+
 
 ### Refining results with score boosting {#h3-8-refining-results-with-score-boosting}
 
@@ -195,61 +213,67 @@ In our case:
 
 We can apply this logic using a **compound operator**, which searches across multiple fields while applying different boost values:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">db.embedded_movies.aggregate(
+```
+db.embedded_movies.aggregate(
 [
-&nbsp;{
-&nbsp;&nbsp;&nbsp;$search: {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;index: "fulltextsearch",
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;compound: {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;should: [
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;text: {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;query: "titanic",
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;path: "title",
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fuzzy: {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;maxEdits: 1
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;},
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;score: {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;boost: { value: 4.0 }
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;},
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;text: {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;query: "titanic",
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;path: "plot",
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fuzzy: {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;maxEdits: 1
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;},
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;score: {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;boost: { value: 3.0 }
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;},
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;text: {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;query: "titanic",
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;path: "fullplot",
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fuzzy: {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;maxEdits: 1
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;},
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;score: {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;boost: { value: 2.0 }
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;]
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
-&nbsp;&nbsp;&nbsp;}
-&nbsp;}
+ {
+   $search: {
+     index: "fulltextsearch",
+     compound: {
+       should: [
+         {
+           text: {
+             query: "titanic",
+             path: "title",
+             fuzzy: {
+               maxEdits: 1
+             },
+             score: {
+               boost: { value: 4.0 }
+             }
+           }
+         },
+         {
+           text: {
+             query: "titanic",
+             path: "plot",
+             fuzzy: {
+               maxEdits: 1
+             },
+             score: {
+               boost: { value: 3.0 }
+             }
+           }
+         },
+         {
+           text: {
+             query: "titanic",
+             path: "fullplot",
+             fuzzy: {
+               maxEdits: 1
+             },
+             score: {
+               boost: { value: 2.0 }
+             }
+           }
+         }
+       ]
+     }
+   }
+ }
 ]
-)</pre>
+)
+```
+
 
 With this setup, the search engine understands our priorities: A movie with a matching title like **Titanic** will always rank higher than another movie where the query only appears in a long description.
 
 **Note:** You can also project the computed relevance score in your results by adding to your $project stage.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">{ "score": { "$meta": "searchScore" } }</pre>
+```
+{ "score": { "$meta": "searchScore" } }
+```
+
 
 This will include the boosted score.
 
@@ -272,25 +296,28 @@ The question is: Why choose one when we can use both? That's exactly what MongoD
 
 Here's the basic structure of a hybrid query using $rankFusion:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">[
-&nbsp;{
-&nbsp;&nbsp;&nbsp;$rankFusion: {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;input: {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;pipelines: {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;searchPipeline: [],
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;vectorPipeline: []
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;},
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;combination: {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;weights: {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;searchPipeline: 0.5,
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;vectorPipeline: 0.5
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;},
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;scoreDetails: false
-&nbsp;&nbsp;&nbsp;}
-&nbsp;}
-]</pre>
+```
+[
+ {
+   $rankFusion: {
+     input: {
+       pipelines: {
+         searchPipeline: [],
+         vectorPipeline: []
+       }
+     },
+     combination: {
+       weights: {
+         searchPipeline: 0.5,
+         vectorPipeline: 0.5
+       }
+     },
+     scoreDetails: false
+   }
+ }
+]
+```
+
 
 Let's break it down:
 
@@ -314,24 +341,27 @@ Refactoring the application {#h2-12-refactoring-the-application}
 
 Let's go back to our application to refactor the MovieService class and apply the new $rankFusion, combining full-text search with vector search. Create the following method:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">private BsonDocument buildFullTextSearchPipeline(String query) {
-&nbsp;&nbsp;&nbsp;return Aggregates.search(
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;compound().should(
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;List.of(
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;text(SearchPath.fieldPath("title"), query)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.fuzzy(fuzzySearchOptions().maxEdits(1))
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.score(boost(4.0F)),
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;text(SearchPath.fieldPath("plot"), query)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.fuzzy(fuzzySearchOptions().maxEdits(1))
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.score(boost(3.0F)),
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;text(SearchPath.fieldPath("fullplot"), query)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.fuzzy(fuzzySearchOptions().maxEdits(1))
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.score(boost(2.0F))
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;),
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SearchOptions.searchOptions().index("fulltextsearch")
-&nbsp;&nbsp;&nbsp;).toBsonDocument();
-}</pre>
+```
+private BsonDocument buildFullTextSearchPipeline(String query) {
+   return Aggregates.search(
+         compound().should(
+               List.of(
+                     text(SearchPath.fieldPath("title"), query)
+                           .fuzzy(fuzzySearchOptions().maxEdits(1))
+                           .score(boost(4.0F)),
+                     text(SearchPath.fieldPath("plot"), query)
+                           .fuzzy(fuzzySearchOptions().maxEdits(1))
+                           .score(boost(3.0F)),
+                     text(SearchPath.fieldPath("fullplot"), query)
+                           .fuzzy(fuzzySearchOptions().maxEdits(1))
+                           .score(boost(2.0F))
+               )
+         ),
+         SearchOptions.searchOptions().index("fulltextsearch")
+   ).toBsonDocument();
+}
+```
+
 
 This method does exactly what we saw previously: It builds the full-text search pipeline. Notice how we're using **compound** , **should,** **fuzzy** , **text** , and **boost**, just like before.
 
@@ -340,16 +370,19 @@ The vector search pipeline {#h2-14-the-vector-search-pipeline}
 
 Now, let's create the method for the vector search pipeline inside MovieService:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">private Bson buildVectorSearchPipeline(MovieSearchRequest req) {
-&nbsp;&nbsp;&nbsp;return VectorSearchOperation.search(config.vectorIndexName())
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.path(config.vectorField())
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.vector(embeddingService.embedQuery(req.query()))
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.limit(config.topK())
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.filter(req.toCriteria())
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.numCandidates(config.numCandidates())&nbsp; &nbsp; &nbsp; &nbsp; 
+```
+private Bson buildVectorSearchPipeline(MovieSearchRequest req) {
+   return VectorSearchOperation.search(config.vectorIndexName())
+         .path(config.vectorField())
+         .vector(embeddingService.embedQuery(req.query()))
+         .limit(config.topK())
+         .filter(req.toCriteria())
+         .numCandidates(config.numCandidates())        
          .withSearchScore("score")
          .toDocument(Aggregation.DEFAULT_CONTEXT);
-}</pre>
+}
+```
+
 
 What we did here was simply move the vector search code out of the searchMovies method and place it into its own dedicated method, making the code cleaner and easier to reuse.
 
@@ -357,26 +390,29 @@ What we did here was simply move the vector search code out of the searchMovies 
 
 The last step is to put everything together inside the searchMovies method using **$rankFusion**.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public List&lt;Movie&gt; searchMovies(MovieSearchRequest req) {
-&nbsp;&nbsp;AggregationOperation rankFusion = context -&gt; new Document("$rankFusion",
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;new Document("input",
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;new Document("pipelines",
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;new Document("searchPipeline", List.of(buildFullTextSearchPipeline(req.query()), new Document("$limit", config.topK())))
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.append("vectorPipeline", List.of(buildVectorSearchPipeline(req)))))
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.append("combination",
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;new Document("weights",
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;new Document("searchPipeline", 0.5)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.append("vectorPipeline", 0.5)))
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.append("scoreDetails", false));
-&nbsp;&nbsp;
+```
+public List<Movie> searchMovies(MovieSearchRequest req) {
+  AggregationOperation rankFusion = context -> new Document("$rankFusion",
+          new Document("input",
+                  new Document("pipelines",
+                          new Document("searchPipeline", List.of(buildFullTextSearchPipeline(req.query()), new Document("$limit", config.topK())))
+                                  .append("vectorPipeline", List.of(buildVectorSearchPipeline(req)))))
+                  .append("combination",
+                          new Document("weights",
+                                  new Document("searchPipeline", 0.5)
+                                          .append("vectorPipeline", 0.5)))
+                  .append("scoreDetails", false));
+  
 Aggregation aggregation = Aggregation.newAggregation(rankFusion);
 
-&nbsp;&nbsp;return mongoTemplate.aggregate(
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;aggregation,
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;config.vectorCollectionName(),
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Movie.class
-&nbsp;&nbsp;).getMappedResults();
-}</pre>
+  return mongoTemplate.aggregate(
+          aggregation,
+          config.vectorCollectionName(),
+          Movie.class
+  ).getMappedResults();
+}
+```
+
 
 <br />
 
@@ -393,124 +429,133 @@ And we tell MongoDB to merge their results with equal weights (0.5 each). This w
 
 Now, let's run the application again and check the pipeline that is being generated. First, update your application.yml to enable debug logging for MongoDB:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">logging:
-&nbsp;level:
-&nbsp;&nbsp;&nbsp;org.springframework.data:
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;mongodb: DEBUG</pre>
+```
+logging:
+ level:
+   org.springframework.data:
+     mongodb: DEBUG
+```
+
 
 With logging enabled, the application will print out the exact aggregation pipeline being sent to MongoDB. Next, run the following request:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">### POST
+```
+### POST
 POST http://localhost:8080/movies/search
 Content-Type: application/json
 
 {
-&nbsp;"query": "a ship that sinks at night after hitting an iceberg",
-&nbsp;"minIMDbRating": 5,
-&nbsp;"yearFrom": 1980,
-&nbsp;"yearTo": 2003,
-&nbsp;"genres": [
-&nbsp;&nbsp;&nbsp;"Drama", "Action"
-&nbsp;],
-&nbsp;"excludeGenres": false
-}</pre>
+ "query": "a ship that sinks at night after hitting an iceberg",
+ "minIMDbRating": 5,
+ "yearFrom": 1980,
+ "yearTo": 2003,
+ "genres": [
+   "Drama", "Action"
+ ],
+ "excludeGenres": false
+}
+```
+
 
 You'll see both the **full-text search** pipeline (with fuzzy, should, and boost as we defined earlier) and the **vector search** pipeline (with filters on genres, year, and IMDb rating).
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">[
-&nbsp;{
-&nbsp;&nbsp;&nbsp;$rankFusion: {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;input: {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;pipelines: {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;searchPipeline: [
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$search: {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;compound: {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;should: [
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;text: {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;query:
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"a ship that sinks at night after hitting an iceberg",
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;path: "title",
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fuzzy: { maxEdits: 1 },
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;score: {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;boost: { value: 4.0 }
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;},
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;text: {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;query:
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"a ship that sinks at night after hitting an iceberg",
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;path: "plot",
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fuzzy: { maxEdits: 1 },
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;score: {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;boost: { value: 3.0 }
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;},
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;text: {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;query:
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"a ship that sinks at night after hitting an iceberg",
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;path: "fullplot",
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fuzzy: { maxEdits: 1 },
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;score: {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;boost: { value: 2.0 }
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;]
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;},
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;index: "fulltextsearch"
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;},
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{ $limit: 8 }
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;],
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;vectorPipeline: [
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$vectorSearch: {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;filter: {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$and: [
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;genres: {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$in: ["Action", "Drama"]
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;},
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;year: {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$gte: 1980,
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$lte: 2003
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;},
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"imdb.rating": { $gte: 5.0 }
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;]
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;},
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;index: "vector_index",
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;limit: 8,
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;numCandidates: 160,
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;path: "plot_embedding_voyage_3_large",
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;queryVector: [
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0.03693888, 0.026406106
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;]
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;]
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;},
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;combination: {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;weights: {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;searchPipeline: 0.5,
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;vectorPipeline: 0.5
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;},
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;scoreDetails: false
-&nbsp;&nbsp;&nbsp;}
-&nbsp;}
-]</pre>
+```
+[
+ {
+   $rankFusion: {
+     input: {
+       pipelines: {
+         searchPipeline: [
+           {
+             $search: {
+               compound: {
+                 should: [
+                   {
+                     text: {
+                       query:
+                         "a ship that sinks at night after hitting an iceberg",
+                       path: "title",
+                       fuzzy: { maxEdits: 1 },
+                       score: {
+                         boost: { value: 4.0 }
+                       }
+                     }
+                   },
+                   {
+                     text: {
+                       query:
+                         "a ship that sinks at night after hitting an iceberg",
+                       path: "plot",
+                       fuzzy: { maxEdits: 1 },
+                       score: {
+                         boost: { value: 3.0 }
+                       }
+                     }
+                   },
+                   {
+                     text: {
+                       query:
+                         "a ship that sinks at night after hitting an iceberg",
+                       path: "fullplot",
+                       fuzzy: { maxEdits: 1 },
+                       score: {
+                         boost: { value: 2.0 }
+                       }
+                     }
+                   }
+                 ]
+               },
+               index: "fulltextsearch"
+             }
+           },
+           { $limit: 8 }
+         ],
+         vectorPipeline: [
+           {
+             $vectorSearch: {
+               filter: {
+                 $and: [
+                   {
+                     genres: {
+                       $in: ["Action", "Drama"]
+                     }
+                   },
+                   {
+                     year: {
+                       $gte: 1980,
+                       $lte: 2003
+                     }
+                   },
+                   {
+                     "imdb.rating": { $gte: 5.0 }
+                   }
+                 ]
+               },
+               index: "vector_index",
+               limit: 8,
+               numCandidates: 160,
+               path: "plot_embedding_voyage_3_large",
+               queryVector: [
+                 0.03693888, 0.026406106
+                 ...
+               ]
+             }
+           }
+         ]
+       }
+     },
+     combination: {
+       weights: {
+         searchPipeline: 0.5,
+         vectorPipeline: 0.5
+       }
+     },
+     scoreDetails: false
+   }
+ }
+]
+```
+
 
 Imprecise results without proper filtering {#h2-17-imprecise-results-without-proper-filtering}
 ----------------------------------------------------------------------------------------------
@@ -540,31 +585,34 @@ In practice, this means mirroring the same constraints (genres, year, IMDb ratin
 
 That way, both pipelines enforce the same rules before ranking results. Here's how the full-text pipeline looks once we align it with the vector filters:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">{
-&nbsp;$search: {
-&nbsp;&nbsp;&nbsp;index: 'fulltextsearch',
-&nbsp;&nbsp;&nbsp;compound: {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;filter: [
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;in: {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;path: 'genres',
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;value: ['Action', 'Drama']
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;},
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;range: { path: 'year', gte: 1980 }
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;},
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;range: { path: 'year', lte: 2003 }
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;},
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;range: { path: 'imdb.rating', gte: 5}
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;],&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+```
+{
+ $search: {
+   index: 'fulltextsearch',
+   compound: {
+     filter: [
+       {
+         in: {
+           path: 'genres',
+           value: ['Action', 'Drama']
+         }
+       },
+       {
+         range: { path: 'year', gte: 1980 }
+       },
+       {
+         range: { path: 'year', lte: 2003 }
+       },
+       {
+         range: { path: 'imdb.rating', gte: 5}
+       }
+     ],     
 should: [ { ... } ]
-&nbsp;&nbsp;&nbsp;}
-&nbsp;}
-}</pre>
+   }
+ }
+}
+```
+
 
 ### Adjusting the index for filters {#h3-19-adjusting-the-index-for-filters}
 
@@ -572,17 +620,20 @@ If we look closely at the previous pipeline, we notice the use of the **"in"** o
 
 Here's the update to the full-text search index:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">{
-&nbsp;"mappings": {
-&nbsp;&nbsp;&nbsp;"dynamic": true,
-&nbsp;&nbsp;&nbsp;"fields": {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"genres": {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"normalizer": "lowercase",
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"type": "token"
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
-&nbsp;&nbsp;&nbsp;}
-&nbsp;}
-}</pre>
+```
+{
+ "mappings": {
+   "dynamic": true,
+   "fields": {
+     "genres": {
+       "normalizer": "lowercase",
+       "type": "token"
+     }
+   }
+ }
+}
+```
+
 
 Refactoring the pipeline in code {#h2-20-refactoring-the-pipeline-in-code}
 --------------------------------------------------------------------------
@@ -593,26 +644,29 @@ Now that we've seen how the aggregation works in the shell, let's bring it into 
 
 Open the MovieService and include the following code:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">private List&lt;SearchOperator&gt; buildFilters(MovieSearchRequest req) {
-&nbsp;&nbsp;&nbsp;var filters = new ArrayList&lt;SearchOperator&gt;();
+```
+private List<SearchOperator> buildFilters(MovieSearchRequest req) {
+   var filters = new ArrayList<SearchOperator>();
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (req.genres() != null &amp;&amp; !req.genres().isEmpty()) {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;filters.add(in(SearchPath.fieldPath("genres"), req.genres()));
-&nbsp;&nbsp;&nbsp;}
+      if (req.genres() != null && !req.genres().isEmpty()) {
+      filters.add(in(SearchPath.fieldPath("genres"), req.genres()));
+   }
 
-&nbsp;&nbsp;&nbsp;if (req.yearFrom() != null) {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;filters.add(numberRange(SearchPath.fieldPath("year")).gte(req.yearFrom()));
-&nbsp;&nbsp;&nbsp;}
+   if (req.yearFrom() != null) {
+      filters.add(numberRange(SearchPath.fieldPath("year")).gte(req.yearFrom()));
+   }
 
-&nbsp;&nbsp;&nbsp;if (req.yearTo() != null) {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;filters.add(numberRange(SearchPath.fieldPath("year")).lte(req.yearTo()));
-&nbsp;&nbsp;&nbsp;}
+   if (req.yearTo() != null) {
+      filters.add(numberRange(SearchPath.fieldPath("year")).lte(req.yearTo()));
+   }
 
-&nbsp;&nbsp;&nbsp;if (req.minIMDbRating() != null) {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;filters.add(numberRange(SearchPath.fieldPath("imdb.rating")).gte(req.minIMDbRating()));
-&nbsp;&nbsp;&nbsp;}
-&nbsp;&nbsp;&nbsp;return filters;
-}</pre>
+   if (req.minIMDbRating() != null) {
+      filters.add(numberRange(SearchPath.fieldPath("imdb.rating")).gte(req.minIMDbRating()));
+   }
+   return filters;
+}
+```
+
 
 The buildFilters() method collects all the filtering rules based on the MovieSearchRequest. It optionally adds filters for genres, year range, and IMDb rating, if they're provided.
 
@@ -620,61 +674,70 @@ The buildFilters() method collects all the filtering rules based on the MovieSea
 
 The buildSearchClauses() method defines the fields where we'll search for text, the title, plot, and fullplot. Each field gets a different **boost** value to indicate how much it should influence the score.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">private List&lt;SearchOperator&gt; buildSearchClauses(MovieSearchRequest req) {
-&nbsp;&nbsp;&nbsp;Map&lt;String, Float&gt; fieldConfigs = Map.of(
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"title", 4.0F,
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"plot", 3.0F,
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"fullplot", 2.0F
-&nbsp;&nbsp;&nbsp;);
+```
+private List<SearchOperator> buildSearchClauses(MovieSearchRequest req) {
+   Map<String, Float> fieldConfigs = Map.of(
+         "title", 4.0F,
+         "plot", 3.0F,
+         "fullplot", 2.0F
+   );
 
-&nbsp;&nbsp;&nbsp;return fieldConfigs.entrySet().stream()
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.map(entry -&gt; text(SearchPath.fieldPath(entry.getKey()), req.query())
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.fuzzy(fuzzySearchOptions().maxEdits(1))
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.score(boost(entry.getValue())))
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.collect(Collectors.toList());
-}</pre>
+   return fieldConfigs.entrySet().stream()
+         .map(entry -> text(SearchPath.fieldPath(entry.getKey()), req.query())
+               .fuzzy(fuzzySearchOptions().maxEdits(1))
+               .score(boost(entry.getValue())))
+         .collect(Collectors.toList());
+}
+```
+
 
 ### 3. The final pipeline {#h3-23-3-the-final-pipeline}
 
 Still in the MovieService, replace the buildFullTextSearchPipeline() with the following code:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">private BsonDocument buildFullTextSearchPipeline(MovieSearchRequest req) {
-&nbsp;&nbsp;&nbsp;var filters = buildFilters(req);
-&nbsp;&nbsp;&nbsp;var searchClauses = buildSearchClauses(req);
-&nbsp;&nbsp;&nbsp;var compound = compound();
-&nbsp;&nbsp;&nbsp;compound = !filters.isEmpty() ? compound.filter(filters) : compound;
+```
+private BsonDocument buildFullTextSearchPipeline(MovieSearchRequest req) {
+   var filters = buildFilters(req);
+   var searchClauses = buildSearchClauses(req);
+   var compound = compound();
+   compound = !filters.isEmpty() ? compound.filter(filters) : compound;
 
-&nbsp;&nbsp;&nbsp;return Aggregates.search(
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;compound.should(searchClauses),
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SearchOptions.searchOptions().index("fulltextsearch")
-&nbsp;&nbsp;&nbsp;).toBsonDocument();
-}</pre>
+   return Aggregates.search(
+         compound.should(searchClauses),
+            SearchOptions.searchOptions().index("fulltextsearch")
+   ).toBsonDocument();
+}
+```
+
 
 **In short** : This method builds a compound query where the **filters** go into the filter() clause and the **text matches** go into the should() clause.
 
 At this point, you'll notice that the searchMovies method will cause a compilation error, because the buildFullTextSearchPipeline method now takes a MovieSearchRequest object. To fix this, just pass it instead of sending only the query:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public List&lt;Movie&gt; searchMovies(MovieSearchRequest req) {
+```
+public List<Movie> searchMovies(MovieSearchRequest req) {
 
-&nbsp;&nbsp;AggregationOperation rankFusion = context -&gt; new Document("$rankFusion",
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;new Document("input",
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;new Document("pipelines",
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;new Document("searchPipeline", List.of(buildFullTextSearchPipeline(req), new Document("$limit", config.topK())))
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.append("vectorPipeline", List.of(buildVectorSearchPipeline(req)))))
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.append("combination",
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;new Document("weights",
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;new Document("searchPipeline", 0.5)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.append("vectorPipeline", 0.5)))
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.append("scoreDetails", false));
+  AggregationOperation rankFusion = context -> new Document("$rankFusion",
+          new Document("input",
+                  new Document("pipelines",
+                          new Document("searchPipeline", List.of(buildFullTextSearchPipeline(req), new Document("$limit", config.topK())))
+                                  .append("vectorPipeline", List.of(buildVectorSearchPipeline(req)))))
+                  .append("combination",
+                          new Document("weights",
+                                  new Document("searchPipeline", 0.5)
+                                          .append("vectorPipeline", 0.5)))
+                  .append("scoreDetails", false));
 
-&nbsp;&nbsp;Aggregation aggregation = Aggregation.newAggregation(rankFusion);
+  Aggregation aggregation = Aggregation.newAggregation(rankFusion);
 
-&nbsp;&nbsp;return mongoTemplate.aggregate(
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;aggregation,
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;config.vectorCollectionName(),
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Movie.class
-&nbsp;&nbsp;).getMappedResults();
-}</pre>
+  return mongoTemplate.aggregate(
+          aggregation,
+          config.vectorCollectionName(),
+          Movie.class
+  ).getMappedResults();
+}
+```
+
 
 ### 4. Testing the refactored pipeline {#h3-24-4-testing-the-refactored-pipeline}
 
@@ -706,68 +769,83 @@ To fix this, we'll make two small adjustments:
 
 The updated pipeline will look something like this:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">{
-&nbsp;$search: {
-&nbsp;&nbsp;&nbsp;index: 'fulltextsearch',
-&nbsp;&nbsp;&nbsp;compound: {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;filter: [
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{ range: { path: 'year', gte: 1980 } },
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{ range: { path: 'year', lte: 2003 } },
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{ range: { path: 'imdb.rating', gte: 5 } }
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;],
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;mustNot: [&nbsp; { in: { path: 'genres', value: ['Action', 'Drama'] }} ],
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;should: [ { … }&nbsp; ]
-&nbsp;&nbsp;&nbsp;}
-&nbsp;}
-}</pre>
+```
+{
+ $search: {
+   index: 'fulltextsearch',
+   compound: {
+     filter: [
+       { range: { path: 'year', gte: 1980 } },
+       { range: { path: 'year', lte: 2003 } },
+       { range: { path: 'imdb.rating', gte: 5 } }
+     ],
+     mustNot: [  { in: { path: 'genres', value: ['Action', 'Drama'] }} ],
+     should: [ { … }  ]
+   }
+ }
+}
+```
+
 
 Adding exclusion logic to the application {#h2-25-adding-exclusion-logic-to-the-application}
 --------------------------------------------------------------------------------------------
 
 The final step is to update our application code so that it builds the mustNot clause. First, create the buildMustNot() method:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">private List&lt;SearchOperator&gt; buildMustNot(MovieSearchRequest req) {
-&nbsp;&nbsp;var mustNot = new ArrayList&lt;SearchOperator&gt;();
+```
+private List<SearchOperator> buildMustNot(MovieSearchRequest req) {
+  var mustNot = new ArrayList<SearchOperator>();
 
-&nbsp;&nbsp;if (req.genres() != null &amp;&amp; !req.genres().isEmpty() &amp;&amp; req.excludeGenres()) {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;mustNot.add(in(SearchPath.fieldPath("genres"), req.genres()));
-&nbsp;&nbsp;}
-&nbsp;&nbsp;return mustNot;
-}</pre>
+  if (req.genres() != null && !req.genres().isEmpty() && req.excludeGenres()) {
+     mustNot.add(in(SearchPath.fieldPath("genres"), req.genres()));
+  }
+  return mustNot;
+}
+```
+
 
 Next, update the buildFilters() method so it only adds genres when the **exclude selected genres** option is **not** selected. Open the method and replace the current block...
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">if (req.genres() != null &amp;&amp; !req.genres().isEmpty()) {
-&nbsp;&nbsp;filters.add(in(SearchPath.fieldPath("genres"), req.genres()));
-}</pre>
+```
+if (req.genres() != null && !req.genres().isEmpty()) {
+  filters.add(in(SearchPath.fieldPath("genres"), req.genres()));
+}
+```
+
 
 ...with this version:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">if (req.genres() != null &amp;&amp; !req.genres().isEmpty() &amp;&amp; !req.excludeGenres()) {
-&nbsp;&nbsp;filters.add(in(SearchPath.fieldPath("genres"), req.genres()));
-}</pre>
+```
+if (req.genres() != null && !req.genres().isEmpty() && !req.excludeGenres()) {
+  filters.add(in(SearchPath.fieldPath("genres"), req.genres()));
+}
+```
+
 
 And finally, replace the buildFullTextSearchPipeline() with this:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">private BsonDocument buildFullTextSearchPipeline(MovieSearchRequest req) {
-&nbsp;&nbsp;var filters = buildFilters(req);
-&nbsp;&nbsp;var searchClauses = buildSearchClauses(req);
-&nbsp;&nbsp;var mustNot = buildMustNot(req);
-&nbsp;&nbsp;var compound = compound();
+```
+private BsonDocument buildFullTextSearchPipeline(MovieSearchRequest req) {
+  var filters = buildFilters(req);
+  var searchClauses = buildSearchClauses(req);
+  var mustNot = buildMustNot(req);
+  var compound = compound();
 
-&nbsp;&nbsp;if (!filters.isEmpty()) {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;compound = compound.filter(filters);
-&nbsp;&nbsp;}
+  if (!filters.isEmpty()) {
+     compound = compound.filter(filters);
+  }
 
-&nbsp;&nbsp;if (!mustNot.isEmpty()) {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;compound = compound.mustNot(mustNot);
-&nbsp;&nbsp;}
+  if (!mustNot.isEmpty()) {
+     compound = compound.mustNot(mustNot);
+  }
 
-&nbsp;&nbsp;return Aggregates.search(
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;compound.should(searchClauses),
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SearchOptions.searchOptions().index("fulltextsearch")
-&nbsp;&nbsp;).toBsonDocument();
-}</pre>
+  return Aggregates.search(
+          compound.should(searchClauses),
+          SearchOptions.searchOptions().index("fulltextsearch")
+  ).toBsonDocument();
+}
+```
+
 
 Once that adjustment is made, we can restart the app and run the same query again. This time, you'll see that movies tagged with **Drama** or **Action** are no longer returned, ensuring the results respect the exclusion filter.  
 ![](Screenshot-2025-11-11-at-2.04.10-PM.png)
@@ -784,27 +862,30 @@ Why does this happen?
 
 Let's tweak our pipeline to give more weight to semantic similarity: Set the vector pipeline to **0.8** and the full-text pipeline to **0.2**:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public List&lt;Movie&gt; searchMovies(MovieSearchRequest req) {
+```
+public List<Movie> searchMovies(MovieSearchRequest req) {
 
-&nbsp;&nbsp;AggregationOperation rankFusion = context -&gt; new Document("$rankFusion",
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;new Document("input",
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;new Document("pipelines",
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;new Document("searchPipeline", List.of(buildFullTextSearchPipeline(req), new Document("$limit", config.topK())))
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.append("vectorPipeline", List.of(buildVectorSearchPipeline(req)))))
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.append("combination",
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;new Document("weights",
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;new Document("searchPipeline", 0.2)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.append("vectorPipeline", 0.8)))
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.append("scoreDetails", false));
+  AggregationOperation rankFusion = context -> new Document("$rankFusion",
+          new Document("input",
+                  new Document("pipelines",
+                          new Document("searchPipeline", List.of(buildFullTextSearchPipeline(req), new Document("$limit", config.topK())))
+                                  .append("vectorPipeline", List.of(buildVectorSearchPipeline(req)))))
+                  .append("combination",
+                          new Document("weights",
+                                  new Document("searchPipeline", 0.2)
+                                          .append("vectorPipeline", 0.8)))
+                  .append("scoreDetails", false));
 
-&nbsp;&nbsp;Aggregation aggregation = Aggregation.newAggregation(rankFusion);
+  Aggregation aggregation = Aggregation.newAggregation(rankFusion);
 
-&nbsp;&nbsp;return mongoTemplate.aggregate(
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;aggregation,
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;config.vectorCollectionName(),
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Movie.class
-&nbsp;&nbsp;).getMappedResults();
-}</pre>
+  return mongoTemplate.aggregate(
+          aggregation,
+          config.vectorCollectionName(),
+          Movie.class
+  ).getMappedResults();
+}
+```
+
 
 Then, run the search again with the same inputs:  
 ![](Screenshot-2025-11-11-at-2.05.52-PM.png)

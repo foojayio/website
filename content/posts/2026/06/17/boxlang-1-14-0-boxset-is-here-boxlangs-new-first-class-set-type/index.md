@@ -69,7 +69,8 @@ BoxLang gives you several ergonomic creation paths depending on your context.
 
 ### `setNew()` -- the workhorse {#h3-3-setnew-the-workhorse}
 
-<pre class="EnlighterJSRAW EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">// Empty default (hash) Set -- fastest, no ordering
+```java
+// Empty default (hash) Set -- fastest, no ordering
 s = setNew()
 
 // Seed it on creation
@@ -87,15 +88,18 @@ s.toArray()    // [1, 3, 5, 9]
 // Case-sensitive: treat "Hello" and "hello" as distinct values
 s = setNew( values=[ "Hello", "hello", "HELLO" ], caseSensitive=true )
 s.size()    // 3
-</pre>
+```
+
 
 ### `setOf()` -- varargs shorthand {#h3-4-setof-varargs-shorthand}
 
 When you know your values up front, `setOf()` is the cleanest expression:
 
-<pre class="EnlighterJSRAW EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">roles = setOf( "admin", "editor", "viewer" )
+```java
+roles = setOf( "admin", "editor", "viewer" )
 primes = setOf( 2, 3, 5, 7, 11, 13 )
-</pre>
+```
+
 
 Duplicates in the argument list are silently dropped -- no error, no fuss.
 
@@ -103,7 +107,8 @@ Duplicates in the argument list are silently dropped -- no error, no fuss.
 
 BoxLang 1.14.0 introduces a **set literal syntax** that reads like the concept itself:
 
-<pre class="EnlighterJSRAW EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">// Inline literal
+```java
+// Inline literal
 permissions = set{ "read", "write", "execute" }
 
 // Empty set
@@ -121,7 +126,8 @@ full = set{ "execute", ...defaults }
 // Spread a range -- this is particularly elegant
 digits = set{ ...(0..9) }
 // Result: {0, 1, 2, 3, 4, 5, 6, 7, 8, 9}
-</pre>
+```
+
 
 > "
 >
@@ -131,7 +137,8 @@ digits = set{ ...(0..9) }
 
 ### Converting from other types {#h3-6-converting-from-other-types}
 
-<pre class="EnlighterJSRAW EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">// Array to Set -- deduplication for free
+```java
+// Array to Set -- deduplication for free
 tags = [ "boxlang", "jvm", "boxlang", "oss" ].toSet()
 tags.size()    // 3
 
@@ -156,7 +163,8 @@ q = queryNew( "name,dept", "varchar,varchar", [
 ] )
 depts = q.columnData( "dept" ).toSet()
 // Result: {"Engineering", "Marketing"}
-</pre>
+```
+
 
 The Three Variants in Practice {#h2-7-the-three-variants-in-practice}
 ---------------------------------------------------------------------
@@ -165,11 +173,12 @@ Choosing the right variant matters for correctness and performance.
 
 ### Default (HashSet) -- when order doesn't matter {#h3-8-default-hashset-when-order-doesn-t-matter}
 
-<pre class="EnlighterJSRAW EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">// Permission checking: order is irrelevant, membership speed is everything
+```java
+// Permission checking: order is irrelevant, membership speed is everything
 userRoles  = setOf( "editor", "viewer", "moderator" )
 adminRoles = setOf( "admin", "superadmin" )
 
-canAdmin = userRoles.some( r -&gt; adminRoles.contains( r ) )
+canAdmin = userRoles.some( r -> adminRoles.contains( r ) )
 // false
 
 // Feature flags -- constant-time lookup regardless of flag count
@@ -177,11 +186,13 @@ activeFlags = setNew( values=queryGetColumn( flagQuery, "flagName" ) )
 if ( activeFlags.contains( "dark_mode_v2" ) ) {
     // render dark mode
 }
-</pre>
+```
+
 
 ### Linked (LinkedHashSet) -- when insertion order matters {#h3-9-linked-linkedhashset-when-insertion-order-matters}
 
-<pre class="EnlighterJSRAW EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">// Breadcrumb trail -- visited pages in order, no revisits
+```java
+// Breadcrumb trail -- visited pages in order, no revisits
 trail = setNew( type="linked" )
 trail.add( "/home" )
 trail.add( "/products" )
@@ -195,11 +206,13 @@ pipeline = setNew( type="linked", values=[ "validate", "enrich", "normalize", "v
 for ( stage in pipeline ) {
     runStage( stage )    // validate only runs once
 }
-</pre>
+```
+
 
 ### Sorted (TreeSet) -- when natural order is always required {#h3-10-sorted-treeset-when-natural-order-is-always-required}
 
-<pre class="EnlighterJSRAW EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">// Priority queue of version numbers treated as strings
+```java
+// Priority queue of version numbers treated as strings
 versions = setNew( type="sorted", values=[ "1.14.0", "1.9.0", "2.0.0", "1.10.0" ] )
 versions.toArray()
 // ["1.10.0", "1.14.0", "1.9.0", "2.0.0"] -- lexicographic, watch your versioning scheme
@@ -213,14 +226,16 @@ scores.toArray()
 // Get min and max cheaply via toArray()
 arr = scores.toArray()
 writeDump( "Low: #arr[ 1 ]#, High: #arr[ arr.len() ]#" )
-</pre>
+```
+
 
 Membership and Iteration {#h2-11-membership-and-iteration}
 ----------------------------------------------------------
 
 ### Testing membership {#h3-12-testing-membership}
 
-<pre class="EnlighterJSRAW EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">granted = setOf( "read", "write", "execute" )
+```java
+granted = setOf( "read", "write", "execute" )
 
 granted.contains( "read" )     // true
 granted.has( "delete" )        // false (alias for contains)
@@ -228,11 +243,13 @@ granted.has( "delete" )        // false (alias for contains)
 // Test multiple at once
 granted.containsAll( [ "read", "write" ] )    // true
 granted.containsAll( [ "read", "sudo" ] )     // false
-</pre>
+```
+
 
 ### Iterating {#h3-13-iterating}
 
-<pre class="EnlighterJSRAW EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">tags = setNew( type="linked", values=[ "boxlang", "jvm", "oss" ] )
+```java
+tags = setNew( type="linked", values=[ "boxlang", "jvm", "oss" ] )
 
 // for-in loop
 for ( tag in tags ) {
@@ -240,10 +257,11 @@ for ( tag in tags ) {
 }
 
 // each() -- cleaner in functional pipelines
-tags.each( tag =&gt; {
+tags.each( tag => {
     processTag( tag )
 } )
-</pre>
+```
+
 
 Set Algebra: The Real Power {#h2-14-set-algebra-the-real-power}
 ---------------------------------------------------------------
@@ -252,7 +270,8 @@ This is where `BoxSet` earns its place. Four algebraic operations, available as 
 
 ### Union -- all unique elements from both sets {#h3-15-union-all-unique-elements-from-both-sets}
 
-<pre class="EnlighterJSRAW EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">backendSkills  = setOf( "java", "sql", "boxlang", "redis" )
+```java
+backendSkills  = setOf( "java", "sql", "boxlang", "redis" )
 frontendSkills = setOf( "javascript", "css", "boxlang", "react" )
 
 allSkills = backendSkills.union( frontendSkills )
@@ -260,11 +279,13 @@ allSkills = backendSkills.union( frontendSkills )
 
 // Operator syntax: +
 allSkills = backendSkills + frontendSkills
-</pre>
+```
+
 
 ### Intersection -- only what both sets share {#h3-16-intersection-only-what-both-sets-share}
 
-<pre class="EnlighterJSRAW EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">teamA = setOf( "alice", "bob", "carol", "dan" )
+```java
+teamA = setOf( "alice", "bob", "carol", "dan" )
 teamB = setOf( "bob", "carol", "eve" )
 
 sharedMembers = teamA.intersection( teamB )
@@ -272,11 +293,13 @@ sharedMembers = teamA.intersection( teamB )
 
 // Operator syntax: *
 sharedMembers = teamA * teamB
-</pre>
+```
+
 
 ### Difference -- what's in A but not in B {#h3-17-difference-what-s-in-a-but-not-in-b}
 
-<pre class="EnlighterJSRAW EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">allUsers     = setOf( "alice", "bob", "carol", "dan", "eve" )
+```java
+allUsers     = setOf( "alice", "bob", "carol", "dan", "eve" )
 activeUsers  = setOf( "alice", "carol", "eve" )
 
 inactiveUsers = allUsers.difference( activeUsers )
@@ -284,11 +307,13 @@ inactiveUsers = allUsers.difference( activeUsers )
 
 // Operator syntax: -
 inactiveUsers = allUsers - activeUsers
-</pre>
+```
+
 
 ### Symmetric Difference -- what's in either but not both {#h3-18-symmetric-difference-what-s-in-either-but-not-both}
 
-<pre class="EnlighterJSRAW EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">lastWeekUsers = setOf( "alice", "bob", "carol" )
+```java
+lastWeekUsers = setOf( "alice", "bob", "carol" )
 thisWeekUsers = setOf( "bob", "carol", "dan", "eve" )
 
 // Who joined or left?
@@ -297,13 +322,15 @@ changed = lastWeekUsers.symmetricDifference( thisWeekUsers )
 
 // Operator syntax: ^
 changed = lastWeekUsers ^ thisWeekUsers
-</pre>
+```
+
 
 ### Operators accept "loose" right-hand operands {#h3-19-operators-accept-loose-right-hand-operands}
 
 You don't need to convert everything to a Set first:
 
-<pre class="EnlighterJSRAW EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">base = setOf( 1, 2, 3, 4, 5 )
+```java
+base = setOf( 1, 2, 3, 4, 5 )
 
 result = base + [ 6, 7 ]         // Set + Array
 result = base * "3,4,5,6"        // Set * comma-list string
@@ -315,7 +342,8 @@ base -= set{ 1, 2 }
 
 base *= [ 3, 4 ]
 // base is now {3, 4}
-</pre>
+```
+
 
 > "
 >
@@ -329,60 +357,65 @@ Functional Programming Pipeline {#h2-20-functional-programming-pipeline}
 
 `BoxSet` ships with the same functional vocabulary you know from Arrays. Every operation returns a new Set (or a scalar), keeping the original untouched.
 
-<pre class="EnlighterJSRAW EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">scores = setNew( type="sorted", values=[ 55, 72, 88, 91, 43, 88, 100 ] )
+```java
+scores = setNew( type="sorted", values=[ 55, 72, 88, 91, 43, 88, 100 ] )
 // Stored as: {43, 55, 72, 88, 91, 100}
 
 // map -- transform every element, get a new Set back
-bonusScores = scores.map( s -&gt; s + 5 )
+bonusScores = scores.map( s -> s + 5 )
 // {48, 60, 77, 93, 96, 105}
 
 // filter -- keep matching elements
-passing = scores.filter( s -&gt; s &gt;= 60 )
+passing = scores.filter( s -> s >= 60 )
 // {72, 88, 91, 100}
 
 // reject -- the inverse of filter
-failing = scores.reject( s -&gt; s &gt;= 60 )
+failing = scores.reject( s -> s >= 60 )
 // {43, 55}
 
 // reduce -- collapse to a single value
-total = scores.reduce( ( acc, s ) =&gt; acc + s, 0 )
+total = scores.reduce( ( acc, s ) => acc + s, 0 )
 // 449
 
 average = total / scores.size()
 // 74.83...
 
 // every -- do all elements satisfy a predicate?
-allPassing = scores.every( s -&gt; s &gt;= 60 )
+allPassing = scores.every( s -> s >= 60 )
 // false
 
 // some -- does at least one element satisfy a predicate?
-hasA = scores.some( s -&gt; s &gt;= 90 )
+hasA = scores.some( s -> s >= 90 )
 // true
 
 // none -- do zero elements satisfy a predicate?
-noneNegative = scores.none( s -&gt; s &lt; 0 )
+noneNegative = scores.none( s -> s < 0 )
 // true
 
 // find -- first element matching a predicate
-firstHigh = scores.find( s -&gt; s &gt;= 90 )
+firstHigh = scores.find( s -> s >= 90 )
 // 91 (or 100, iteration order not guaranteed for HashSet -- use sorted/linked for predictability)
-</pre>
+```
+
 
 Chaining works naturally:
 
-<pre class="EnlighterJSRAW EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">result = setOf( 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 )
-    .filter( n -&gt; n % 2 == 0 )    // evens: {2, 4, 6, 8, 10}
-    .map( n -&gt; n * n )            // squares: {4, 16, 36, 64, 100}
-    .reduce( ( acc, n ) =&gt; acc + n, 0 )
+```java
+result = setOf( 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 )
+    .filter( n -> n % 2 == 0 )    // evens: {2, 4, 6, 8, 10}
+    .map( n -> n * n )            // squares: {4, 16, 36, 64, 100}
+    .reduce( ( acc, n ) => acc + n, 0 )
 // 220
-</pre>
+```
+
 
 Real-World Scenarios {#h2-21-real-world-scenarios}
 --------------------------------------------------
 
 ### 1. Role-Based Access Control {#h3-22-1-role-based-access-control}
 
-<pre class="EnlighterJSRAW EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">class PermissionService {
+```java
+class PermissionService {
 
     function canAccess( required userRoles, required string resource ) {
         resourcePermissions = getResourcePermissions( resource )
@@ -424,11 +457,13 @@ canSeeReports = svc.canAccess( effective, "/reports" )
 
 canSeeAdmin = svc.canAccess( effective, "/admin" )
 // false
-</pre>
+```
+
 
 ### 2. Tag Deduplication and Taxonomy Intersection {#h3-23-2-tag-deduplication-and-taxonomy-intersection}
 
-<pre class="EnlighterJSRAW EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">// Content tagging system
+```java
+// Content tagging system
 post1Tags = setNew( type="linked", values=[ "boxlang", "jvm", "performance", "oss" ] )
 post2Tags = setNew( type="linked", values=[ "jvm", "java", "boxlang", "interop" ] )
 post3Tags = setNew( type="linked", values=[ "performance", "caching", "redis", "oss" ] )
@@ -447,15 +482,17 @@ exclusiveToPost1 = post1Tags - post2Tags - post3Tags
 
 // Find posts that share at least 2 tags with post1 (related posts)
 relatedThreshold = 2
-isRelated = ( post1Tags * post2Tags ).size() &gt;= relatedThreshold
+isRelated = ( post1Tags * post2Tags ).size() >= relatedThreshold
 // true
-</pre>
+```
+
 
 ### 3. Dataset Change Detection {#h3-24-3-dataset-change-detection}
 
 A common ETL pattern: what changed between two snapshots of data?
 
-<pre class="EnlighterJSRAW EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">function detectChanges( required previousIds, required currentIds ) {
+```java
+function detectChanges( required previousIds, required currentIds ) {
     prevSet = previousIds.toSet()
     currSet = currentIds.toSet()
 
@@ -476,14 +513,16 @@ writeDump( "New signups today: #diff.added.size()#" )
 writeDump( "Churned users: #diff.removed.size()#" )
 
 // Send welcome emails only to genuinely new users
-diff.added.each( userId =&gt; {
+diff.added.each( userId => {
     emailService.sendWelcome( userId )
 } )
-</pre>
+```
+
 
 ### 4. URL Deduplication Pipeline with Functional Chaining {#h3-25-4-url-deduplication-pipeline-with-functional-chaining}
 
-<pre class="EnlighterJSRAW EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">class CrawlerPipeline {
+```java
+class CrawlerPipeline {
 
     property name="visited"   type="Set"
     property name="queued"    type="Set"
@@ -500,7 +539,7 @@ diff.added.each( userId =&gt; {
         // Normalize, reject blacklisted paths, exclude already visited
         fresh = urls
             .toSet( "linked" )                                // deduplicate
-            .filter( url -&gt; !isBlacklisted( url ) )          // drop blacklisted
+            .filter( url -> !isBlacklisted( url ) )          // drop blacklisted
             .difference( variables.visited )                  // drop already seen
             .difference( variables.queued )                   // drop already queued
 
@@ -528,39 +567,46 @@ diff.added.each( userId =&gt; {
     }
 
     private function isBlacklisted( required string target ) {
-        return variables.blacklist.some( b -&gt; target.findNoCase( b ) &gt; 0 )
+        return variables.blacklist.some( b -> target.findNoCase( b ) > 0 )
     }
 
 }
-</pre>
+```
+
 
 Case Sensitivity and Numeric Normalization {#h2-26-case-sensitivity-and-numeric-normalization}
 ----------------------------------------------------------------------------------------------
 
 By default, BoxSet is **case-insensitive** for strings, matching BoxLang's general dynamic semantics:
 
-<pre class="EnlighterJSRAW EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">s = setNew( values=[ "Hello", "hello", "HELLO", "hElLo" ] )
+```java
+s = setNew( values=[ "Hello", "hello", "HELLO", "hElLo" ] )
 s.size()    // 1
 
 s.contains( "HELLO" )    // true
 s.contains( "hElLo" )    // true
-</pre>
+```
+
 
 Opt in to case sensitivity when you need exact-case uniqueness:
 
-<pre class="EnlighterJSRAW EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">tokens = setNew( caseSensitive=true, values=[ "Bearer", "bearer", "BEARER" ] )
+```java
+tokens = setNew( caseSensitive=true, values=[ "Bearer", "bearer", "BEARER" ] )
 tokens.size()    // 3
 
 tokens.contains( "bearer" )    // true
 tokens.contains( "Bearer" )    // true
 tokens.contains( "beareR" )    // false
-</pre>
+```
+
 
 Numeric normalization is independent of case sensitivity. `1`, `1L`, `1.0`, and 1.00 are always the same value in a Set:
 
-<pre class="EnlighterJSRAW EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">nums = setNew( values=[ 1, 1.0, 1L, 1.00 ] )
+```java
+nums = setNew( values=[ 1, 1.0, 1L, 1.00 ] )
 nums.size()    // 1
-</pre>
+```
+
 
 Java Interop {#h2-27-java-interop}
 ----------------------------------
@@ -569,7 +615,8 @@ Because `BoxSet` wraps `java.util.Set`, the integration story is clean in both d
 
 ### Wrapping an existing Java Set {#h3-28-wrapping-an-existing-java-set}
 
-<pre class="EnlighterJSRAW EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">import java.util.HashSet
+```java
+import java.util.HashSet
 
 javaSet = createObject( "java", "java.util.HashSet" ).init()
 javaSet.add( "a" )
@@ -581,11 +628,13 @@ bxSet.add( "c" )
 
 javaSet.contains( "c" )    // true -- same backing object
 bxSet.size()               // 3
-</pre>
+```
+
 
 ### Struct key and value sets {#h3-29-struct-key-and-value-sets}
 
-<pre class="EnlighterJSRAW EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">config = {
+```java
+config = {
     "host"     : "localhost",
     "port"     : 5432,
     "ssl"      : true,
@@ -603,7 +652,8 @@ values = config.valueSet()
 forbidden = setOf( "password", "secret", "token", "key" )
 hasSensitiveKeys = !keys.isDisjointFrom( forbidden )
 // false -- none of our keys are in the forbidden list
-</pre>
+```
+
 
 Any Java library method returning a `java.util.Set` -- Spring Security granted authorities, JPA fetch results, Guava ImmutableSet -- works directly with BoxLang Set BIFs and member functions.
 
@@ -612,7 +662,8 @@ Unmodifiable Sets {#h2-30-unmodifiable-sets}
 
 When you need an immutable contract -- configuration, constants, lookup tables:
 
-<pre class="EnlighterJSRAW EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">ALLOWED_METHODS = setOf( "GET", "POST", "PUT", "DELETE", "PATCH" ).toUnmodifiable()
+```java
+ALLOWED_METHODS = setOf( "GET", "POST", "PUT", "DELETE", "PATCH" ).toUnmodifiable()
 
 ALLOWED_METHODS.size()           // 5
 ALLOWED_METHODS.contains( "GET" )  // true
@@ -624,11 +675,13 @@ ALLOWED_METHODS.add( "TRACE" )   // throws!
 extended = ALLOWED_METHODS.toModifiable()
 extended.add( "HEAD" )
 extended.size()    // 6 -- ALLOWED_METHODS still has 5
-</pre>
+```
+
 
 This pairs perfectly with constants declared in a BoxLang class:
 
-<pre class="EnlighterJSRAW EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">class HttpConstants {
+```java
+class HttpConstants {
 
     SAFE_METHODS    = setOf( "GET", "HEAD", "OPTIONS" ).toUnmodifiable()
     UNSAFE_METHODS  = setOf( "POST", "PUT", "DELETE", "PATCH" ).toUnmodifiable()
@@ -639,14 +692,16 @@ This pairs perfectly with constants declared in a BoxLang class:
     }
 
 }
-</pre>
+```
+
 
 JSON Serialization {#h2-31-json-serialization}
 ----------------------------------------------
 
 Sets serialize to JSON arrays, which means they round-trip cleanly with any JSON-consuming API:
 
-<pre class="EnlighterJSRAW EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">s = setNew( type="linked", values=[ "boxlang", "jvm", "oss" ] )
+```java
+s = setNew( type="linked", values=[ "boxlang", "jvm", "oss" ] )
 
 json = jsonSerialize( s )
 // ["boxlang","jvm","oss"]
@@ -662,7 +717,8 @@ payload = {
 }
 jsonSerialize( payload )
 // {"user":"alice","roles":["editor","viewer"],"tags":["premium","beta"]}
-</pre>
+```
+
 
 Quick BIF Reference {#h2-32-quick-bif-reference}
 ------------------------------------------------

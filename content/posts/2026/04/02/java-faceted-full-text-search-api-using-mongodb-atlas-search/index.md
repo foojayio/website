@@ -28,10 +28,12 @@ We'll use an interesting dataset which showcases how you can effectively pair ma
 
 **TL;DR**: If you (like me!) are less about words and more about code, you can jump straight in. Check it out and run it locally like this:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">git clone https://github.com/luketn/atlas-search-coco 
+```
+git clone https://github.com/luketn/atlas-search-coco 
 cd atlas-search-coco
 docker compose up java-app
-</pre>
+```
+
 
 (You'll need [Docker Desktop](https://www.docker.com/products/docker-desktop/){#https://www.docker.com/products/docker-desktop/} installed.)
 
@@ -88,7 +90,10 @@ When working with data in MongoDB, one of the most important steps is data model
 
 When you're modeling data in MongoDB, the primary consideration is how your application will be queried. In our case, we are going to expose a REST API search endpoint like:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">/search?vehicle=car&amp;text=red </pre>
+```
+/search?vehicle=car&text=red
+```
+
 
 In the results, we are going to want all the details of the images matching the facets (categories) and the full text (caption) parameters.
 
@@ -96,7 +101,8 @@ To support this intended query pattern, we are going to collapse all of these en
 
 Here's our schema, defined as a Java record:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">import java.util.Date;
+```
+import java.util.Date;
 import java.util.List;
 
 public record Image(
@@ -114,31 +120,34 @@ public record Image(
        //Following fields are 'super categories'.
        // Each item in the list is a category.
        // One or more objects of each category listed is present in the image.
-       List&lt;String&gt; accessory,
-       List&lt;String&gt; animal,
-       List&lt;String&gt; appliance,
-       List&lt;String&gt; electronic,
-       List&lt;String&gt; food,
-       List&lt;String&gt; furniture,
-       List&lt;String&gt; indoor,
-       List&lt;String&gt; kitchen,
-       List&lt;String&gt; outdoor,
-       List&lt;String&gt; sports,
-       List&lt;String&gt; vehicle
+       List<String> accessory,
+       List<String> animal,
+       List<String> appliance,
+       List<String> electronic,
+       List<String> food,
+       List<String> furniture,
+       List<String> indoor,
+       List<String> kitchen,
+       List<String> outdoor,
+       List<String> sports,
+       List<String> vehicle
 ) { }
-</pre>
+```
+
 
 We'll have two collections in our MongoDB:
 
 * Image: Will have documents in the schema above
 * Category: Will have a list of the categories (and their super categories) which can be selected for filtering
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public record Category(
+```
+public record Category(
        int _id,
        String superCategory,
        String name
 ) { }
-</pre>
+```
+
 
 Create the two records above in your Java project (feel free to use whichever namespace you like):  
 ![](Screenshot-2026-03-12-at-1.45.48-PM.png)
@@ -147,12 +156,17 @@ Create the two records above in your Java project (feel free to use whichever na
 
 You can choose whether you'd like to run MongoDB Atlas locally in a Docker container:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">docker run -d --name mongodb-atlas -p 27017:27017 mongodb/mongodb-atlas-local:8.2.6
-</pre>
+```
+docker run -d --name mongodb-atlas -p 27017:27017 mongodb/mongodb-atlas-local:8.2.6
+```
+
 
 Local connection string:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">mongodb://localhost:27017/?directConnection=true </pre>
+```
+mongodb://localhost:27017/?directConnection=true
+```
+
 
 Or create yourself a [free MongoDB Atlas cluster](https://www.mongodb.com/docs/atlas/getting-started/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=fulltext-foojay&utm_term=tony.kim) in the cloud. (Keep a note of the connection string to the cluster for the next step.)
 
@@ -204,7 +218,8 @@ Next, click Create Atlas Search Index:
 
 Leave the name as default, and paste in the index definition:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">{
+```
+{
  "mappings": {
    "fields": {
      "caption": [{"type": "string"}],
@@ -223,15 +238,18 @@ Leave the name as default, and paste in the index definition:
    }
  }
 }
-</pre>
+```
+
 
 Click **Create Search Index**. After a moment, you should see the status change to READY, indicating the index is created and ready to search:  
 ![](Screenshot-2026-03-12-at-1.53.37-PM.png)
 
 Here are the index fields, and what their type definition(s) each do: caption
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">     "caption": [{"type": "string"}],
-</pre>
+```
+     "caption": [{"type": "string"}],
+```
+
 
 This field's type definition is deceptively simple: string.
 
@@ -245,14 +263,17 @@ Using a string type index allows you to perform advanced text searches like fuzz
 
 *hasPerson*
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">     "hasPerson": {"type": "boolean"},
-</pre>
+```
+     "hasPerson": {"type": "boolean"},
+```
+
 
 This field is a very simple type of index, essentially dividing the documents into three groups: boolean true, false, and undefined.
 
 *category fields - accessory, animal, appliance, electronic, food, furniture, indoor, kitchen, outdoor, sports, vehicle*
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">     "accessory": [{"type": "token"}, {"type": "stringFacet"}],
+```
+     "accessory": [{"type": "token"}, {"type": "stringFacet"}],
      "animal": [{"type": "token"}, {"type": "stringFacet"}],
      "appliance": [{"type": "token"}, {"type": "stringFacet"}],
      "electronic": [{"type": "token"}, {"type": "stringFacet"}],
@@ -263,12 +284,15 @@ This field is a very simple type of index, essentially dividing the documents in
      "outdoor": [{"type": "token"}, {"type": "stringFacet"}],
      "sports": [{"type": "token"}, {"type": "stringFacet"}],
      "vehicle": [{"type": "token"}, {"type": "stringFacet"}]
-</pre>
+```
+
 
 These fields all have string array values in the collection. For example, in the animal array:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">    "animal": ["dog"]
-</pre>
+```
+    "animal": ["dog"]
+```
+
 
 They are indexed with Atlas Search in two different ways: token: Token type indexes are on values which can be used for exact match filtering but cannot be used for advanced text searches. This is perfect for our use-case here because we will be allowing the API to include certain categories as filters.
 
@@ -279,7 +303,8 @@ stringFacet: String facet type indexes are used for counting potential exact mat
 By combining these fields into a single index we can (all at once!) perform an advanced text search on the caption, filter by any category/categories we want, and collect the facet counts of the categories. For example, this abbreviated search will find images with "frisbee" in the caption and a dog in the picture. We'll use a [compound filter](https://www.mongodb.com/docs/atlas/atlas-search/compound/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=fulltext-foojay&utm_term=tony.kim) to combine multiple filter clauses in our example query. We will also count the number of potential matches for the animal and sports categories using the [facet](https://www.mongodb.com/docs/atlas/atlas-search/facet/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=fulltext-foojay&utm_term=tony.kim) Atlas Search collector. The query is quite complex, but don't worry too much about it for now---we'll dive into each part of this query in more detail as we implement it in Java. For the moment, give it a try in Compass, and notice that you can see both the query results and facets all returned together. You can run the example in Compass by clicking on the Aggregations tab in the image collection, and pasting the following JSON into the text view:  
 ![](Screenshot-2026-03-12-at-1.55.42-PM.png)
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">[
+```
+[
  {
    $search: {
      facet: {
@@ -333,11 +358,13 @@ By combining these fields into a single index we can (all at once!) perform an a
    }
  }
 ]
-</pre>
+```
+
 
 Example result:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">{
+```
+{
  "docs": [
    {
      "_id": 394,
@@ -404,7 +431,8 @@ Example result:
    }
  ]
 }
-</pre>
+```
+
 
 ![](Screenshot-2026-03-12-at-1.56.21-PM.png)
 
@@ -421,28 +449,31 @@ Starting with the basics, let's create an EntryPoint class, initialize a connect
 
 First, add the dependencies for MongoDB, a JSON serializer (Jackson), and a simple logging framework to your Maven pom.xml:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&lt;dependencies&gt;
-   &lt;dependency&gt;
-       &lt;groupId&gt;org.mongodb&lt;/groupId&gt;
-       &lt;artifactId&gt;mongodb-driver-sync&lt;/artifactId&gt;
-       &lt;version&gt;5.2.0&lt;/version&gt;
-   &lt;/dependency&gt;
-   &lt;dependency&gt;
-       &lt;groupId&gt;com.fasterxml.jackson.core&lt;/groupId&gt;
-       &lt;artifactId&gt;jackson-databind&lt;/artifactId&gt;
-       &lt;version&gt;2.17.2&lt;/version&gt;
-   &lt;/dependency&gt;
-   &lt;dependency&gt;
-       &lt;groupId&gt;org.slf4j&lt;/groupId&gt;
-       &lt;artifactId&gt;slf4j-simple&lt;/artifactId&gt;
-       &lt;version&gt;2.0.13&lt;/version&gt;
-   &lt;/dependency&gt;
-&lt;/dependencies&gt;
-</pre>
+```
+<dependencies>
+   <dependency>
+       <groupId>org.mongodb</groupId>
+       <artifactId>mongodb-driver-sync</artifactId>
+       <version>5.2.0</version>
+   </dependency>
+   <dependency>
+       <groupId>com.fasterxml.jackson.core</groupId>
+       <artifactId>jackson-databind</artifactId>
+       <version>2.17.2</version>
+   </dependency>
+   <dependency>
+       <groupId>org.slf4j</groupId>
+       <artifactId>slf4j-simple</artifactId>
+       <version>2.0.13</version>
+   </dependency>
+</dependencies>
+```
+
 
 The JSON serializer will be used to return our data from the API, and the MongoDB driver will use the SL4J logger to write its logs to the console (or wherever you configure it to write). Then, create your EntryPoint class:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">package com.mycodefu;
+```
+package com.mycodefu;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mongodb.client.MongoClient;
@@ -468,15 +499,15 @@ public class Main {
        String connectionString = "mongodb://localhost:27017";
        MongoClient mongoClient = MongoClients.create(connectionString);
        MongoDatabase database = mongoClient.getDatabase("atlasSearchCoco");
-       MongoCollection&lt;Category&gt; categoryCollection = database.getCollection("category", Category.class);
-       MongoCollection&lt;Image&gt; imageCollection = database.getCollection("image", Image.class);
+       MongoCollection<Category> categoryCollection = database.getCollection("category", Category.class);
+       MongoCollection<Image> imageCollection = database.getCollection("image", Image.class);
 
        ObjectMapper objectMapper = new ObjectMapper();
 
        HttpServer httpServer = HttpServer.create(new InetSocketAddress("0.0.0.0", 8080), 0);
 
-       httpServer.createContext("/categories", exchange -&gt; {
-           List&lt;Category&gt; categories = categoryCollection.find().into(new ArrayList&lt;&gt;());
+       httpServer.createContext("/categories", exchange -> {
+           List<Category> categories = categoryCollection.find().into(new ArrayList<>());
            String categoriesJson = objectMapper.writeValueAsString(categories);
            byte[] categoriesJsonBytes = categoriesJson.getBytes();
 
@@ -485,23 +516,23 @@ public class Main {
            exchange.close();
        });
 
-       httpServer.createContext("/images", exchange -&gt; {
-           Map&lt;String, List&lt;String&gt;&gt; params = Arrays.stream(exchange.getRequestURI().getQuery().split("&amp;"))
-                   .map(param -&gt; param.split("=", 2))
-                   .map(pair -&gt; new String[]{
+       httpServer.createContext("/images", exchange -> {
+           Map<String, List<String>> params = Arrays.stream(exchange.getRequestURI().getQuery().split("&"))
+                   .map(param -> param.split("=", 2))
+                   .map(pair -> new String[]{
                            URLDecoder.decode(pair[0], StandardCharsets.UTF_8),
                            URLDecoder.decode(pair[1], StandardCharsets.UTF_8)
                    })
                    .collect(Collectors.groupingBy(
-                           pair -&gt; pair[0],
+                           pair -> pair[0],
                            Collectors.mapping(
-                                   pair -&gt; pair[1],
+                                   pair -> pair[1],
                                    Collectors.toList()
                            )
                    ));
 
            //TODO: Implement the search for images based on the query parameters. For now we just return the first image.
-           List&lt;Image&gt; images = imageCollection.find().limit(1).into(new ArrayList&lt;&gt;());
+           List<Image> images = imageCollection.find().limit(1).into(new ArrayList<>());
            //----------------
 
            String imagesJson = objectMapper.writeValueAsString(images);
@@ -519,7 +550,8 @@ public class Main {
        System.out.println("Try searching for images at http://localhost:8080/images?caption=motorcycle");
    }
 }
-</pre>
+```
+
 
 Run the application and you should then be able to load the URLs in the browser: [](http://localhost:8080/categories)<http://localhost:8080/categories>  
 ![](Screenshot-2026-03-12-at-1.57.43-PM.png)
@@ -529,19 +561,22 @@ And: [](http://localhost:8080/images)<http://localhost:8080/images>
 
 There are a few things to notice about the main class implementation: The Mongo connection, database, and collection instances---the first thing we do is establish a connection to MongoDB and typed instances of collection classes which allow us to query the data:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">       String connectionString = "mongodb://localhost:27017";
+```
+       String connectionString = "mongodb://localhost:27017";
        MongoClient mongoClient = MongoClients.create(connectionString);
        MongoDatabase database = mongoClient.getDatabase("atlasSearchCoco");
-       MongoCollection&lt;Category&gt; categoryCollection = database.getCollection("category", Category.class);
-       MongoCollection&lt;Image&gt; imageCollection = database.getCollection("image", Image.class);
-</pre>
+       MongoCollection<Category> categoryCollection = database.getCollection("category", Category.class);
+       MongoCollection<Image> imageCollection = database.getCollection("image", Image.class);
+```
+
 
 The Category and Image types are the records we created earlier, which represent the COCO domain model for our project. We also create an ObjectMapper which is the Jackson JSON serializer we'll use to write JSON to the client. Next, we used Java's built-in HTTP server to create an API server, query the database, and return JSON:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">       HttpServer httpServer = HttpServer.create(new InetSocketAddress("0.0.0.0", 8080), 0);
+```
+       HttpServer httpServer = HttpServer.create(new InetSocketAddress("0.0.0.0", 8080), 0);
 
-       httpServer.createContext("/categories", exchange -&gt; {
-           List&lt;Category&gt; categories = categoryCollection.find().into(new ArrayList&lt;&gt;());
+       httpServer.createContext("/categories", exchange -> {
+           List<Category> categories = categoryCollection.find().into(new ArrayList<>());
            String categoriesJson = objectMapper.writeValueAsString(categories);
            byte[] categoriesJsonBytes = categoriesJson.getBytes();
 
@@ -551,27 +586,29 @@ The Category and Image types are the records we created earlier, which represent
        });
 …
        httpServer.start();
-</pre>
+```
+
 
 Of course, we could use a framework like Springboot here, but to keep the focus on MongoDB Atlas Search, we'll just use this little basic HTTP server implementation for our project. One of my favourite things about Java's client for MongoDB is that we can easily take advantage of the strength of the type system. Our domain model as defined by the immutable Category record is strongly enforced here in all logic interacting with the database. Whilst our schema in MongoDB is free to evolve, the place we are controlling that evolution is here in our Java code. Any changes to the model will be deliberate and enforced at compile time and runtime in our service. Typically, our client---let's say a browser UI---would also be loosely typed JSON (not enforcing the data model). For me, the service is the right place for such control to be enforced, so our schema evolves with our API. Next, we have our placeholder for the image search:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">httpServer.createContext("/images", exchange -&gt; {
-   Map&lt;String, List&lt;String&gt;&gt; params = Arrays.stream(exchange.getRequestURI().getQuery().split("&amp;"))
-           .map(param -&gt; param.split("=", 2))
-           .map(pair -&gt; new String[]{
+```
+httpServer.createContext("/images", exchange -> {
+   Map<String, List<String>> params = Arrays.stream(exchange.getRequestURI().getQuery().split("&"))
+           .map(param -> param.split("=", 2))
+           .map(pair -> new String[]{
                    URLDecoder.decode(pair[0], StandardCharsets.UTF_8),
                    URLDecoder.decode(pair[1], StandardCharsets.UTF_8)
            })
            .collect(Collectors.groupingBy(
-                   pair -&gt; pair[0],
+                   pair -> pair[0],
                    Collectors.mapping(
-                           pair -&gt; pair[1],
+                           pair -> pair[1],
                            Collectors.toList()
                    )
            ));
 
    //TODO: Implement the search for images based on the query parameters. For now we just return the first image.
-   List&lt;Image&gt; images = imageCollection.find().limit(1).into(new ArrayList&lt;&gt;());
+   List<Image> images = imageCollection.find().limit(1).into(new ArrayList<>());
    //----------------
 
    String imagesJson = objectMapper.writeValueAsString(images);
@@ -580,7 +617,9 @@ Of course, we could use a framework like Springboot here, but to keep the focus 
    exchange.sendResponseHeaders(200, imagesJsonBytes.length);
    exchange.getResponseBody().write(imagesJsonBytes);
    exchange.close();
-});</pre>
+});
+```
+
 
 Here, we are adding a nice safe ingestion of the query params into a map, and for now, just return the first image. Note that the map is from String to List, which is important because our query params may include 1-n instances of the same parameter. We'll use that in the next step to filter on multiple values in the search.
 
@@ -591,9 +630,10 @@ Our last step: the search!
 
 We're going to add one more record type to our list of models, which will allow us to return both a paged list of Image records, as well as the facet counts:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">import java.util.List;
+```
+import java.util.List;
 
-public record ImageSearchResult(List&lt;Image&gt; docs, List&lt;ImageMeta&gt; meta) {
+public record ImageSearchResult(List<Image> docs, List<ImageMeta> meta) {
    public record ImageMeta (ImageMetaTotal count, ImageMetaFacets facet) { }
    public record ImageMetaTotal (long total) { }
    public record ImageMetaFacets (
@@ -609,10 +649,11 @@ public record ImageSearchResult(List&lt;Image&gt; docs, List&lt;ImageMeta&gt; me
            ImageMetaFacet sports,
            ImageMetaFacet vehicle
    ) { }
-   public record ImageMetaFacet (List&lt;ImageMetaFacetBucket&gt; buckets) { }
+   public record ImageMetaFacet (List<ImageMetaFacetBucket> buckets) { }
    public record ImageMetaFacetBucket (String _id, long count) { }
 }
-</pre>
+```
+
 
 Save this as a new record in your project alongside Image and Category. This record represents the result document which will be returned by our aggregate search query. The first field, docs, is a single page of image documents, and the second field, meta, contains the metadata for all the documents which match the search criteria. The metadata shows the total count of all documents that match, as well as the counts per facet. In our case, we have facets for each category of object which may be in the image. As an example, let's say we had searched for "dog" in the caption of an image. We might expect to see a high value on the animal-\>dog facet count, but we'll see a lot of other facets with counts too. For example, you might notice a count of 68 on the sports-\>surfboard facet.  
 ![](Screenshot-2026-03-12-at-2.01.11-PM.png)
@@ -622,14 +663,15 @@ Knowing this would allow you to further filter the results like: [](http://local
 
 Or at least, it will! Let's implement the image search API. Because there is a bit of complexity in this query, let's create a new method in the Main class to handle the search. Insert the following after your main method:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">private static ImageSearchResult search(MongoCollection&lt;Image&gt; imageCollection, String caption, Integer page, Boolean hasPerson, List&lt;String&gt; accessory, List&lt;String&gt; animal, List&lt;String&gt; appliance, List&lt;String&gt; electronic, List&lt;String&gt; food, List&lt;String&gt; furniture, List&lt;String&gt; indoor, List&lt;String&gt; kitchen, List&lt;String&gt; outdoor, List&lt;String&gt; sports, List&lt;String&gt; vehicle) {
+```
+private static ImageSearchResult search(MongoCollection<Image> imageCollection, String caption, Integer page, Boolean hasPerson, List<String> accessory, List<String> animal, List<String> appliance, List<String> electronic, List<String> food, List<String> furniture, List<String> indoor, List<String> kitchen, List<String> outdoor, List<String> sports, List<String> vehicle) {
    int skip = 0;
    int pageSize = 5;
    if (page != null) {
        skip = page * pageSize;
    }
 
-   List&lt;SearchOperator&gt; clauses = new ArrayList&lt;&gt;();
+   List<SearchOperator> clauses = new ArrayList<>();
    if (caption != null) {
        clauses.add(SearchOperator
                .text(
@@ -641,7 +683,7 @@ Or at least, it will! Let's implement the image search API. Because there is a b
    if (hasPerson != null) {
        clauses.add(equals("hasPerson", hasPerson));
    }
-   BiConsumer&lt;String, List&lt;String&gt;&gt; addConditional = (String category, List&lt;String&gt; values) -&gt; {
+   BiConsumer<String, List<String>> addConditional = (String category, List<String> values) -> {
        if (values != null) {
            for (String value : values) {
                clauses.add(equals(category, value));
@@ -660,7 +702,7 @@ Or at least, it will! Let's implement the image search API. Because there is a b
    addConditional.accept("sports", sports);
    addConditional.accept("vehicle", vehicle);
 
-   List&lt;StringSearchFacet&gt; facets = List.of(
+   List<StringSearchFacet> facets = List.of(
            stringFacet("accessory", fieldPath("accessory")).numBuckets(10),
            stringFacet("animal", fieldPath("animal")).numBuckets(10),
            stringFacet("appliance", fieldPath("appliance")).numBuckets(10),
@@ -674,7 +716,7 @@ Or at least, it will! Let's implement the image search API. Because there is a b
            stringFacet("vehicle", fieldPath("vehicle")).numBuckets(10)
    );
 
-   List&lt;Bson&gt; aggregateStages = List.of(
+   List<Bson> aggregateStages = List.of(
            Aggregates.search(
                    SearchCollector.facet(
                            SearchOperator.compound().filter(clauses),
@@ -703,18 +745,22 @@ private static SearchOperator equals(String fieldName, Object value) {
                    .append("value", value)
            ));
 }
-</pre>
+```
+
 
 Next, let's call the new function from our /image service handler. Replace the TODO you left earlier:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">//TODO: Implement the search for images based on the query parameters. For now we just return the first image.
-List&lt;Image&gt; images = imageCollection.find().limit(1).into(new ArrayList&lt;&gt;());
+```
+//TODO: Implement the search for images based on the query parameters. For now we just return the first image.
+List<Image> images = imageCollection.find().limit(1).into(new ArrayList<>());
 //----------------
-</pre>
+```
+
 
 With:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">ImageSearchResult images = search(imageCollection,
+```
+ImageSearchResult images = search(imageCollection,
        params.containsKey("caption") ? params.get("caption").getFirst() : null,
        params.containsKey("page") ? Integer.parseInt(params.get("page").getFirst()) : null,
        params.containsKey("hasPerson") ? Boolean.parseBoolean(params.get("hasPerson").getFirst()) : null,
@@ -730,43 +776,48 @@ With:
        params.get("sports"),
        params.get("vehicle")
 );
-</pre>
+```
+
 
 This will take the query parameters passed to the API and call our search function. Let's give it a spin, and then we'll come back and break down the search method piece by piece. You can now start to see how the facets work. Let's search for the term "riding" in our image caption, and further filter down to only images having a horse and a suitcase: [](http://localhost:8080/images?caption=riding&accessory=suitcase&animal=horse)[http://localhost:8080/images?caption=riding\&accessory=suitcase\&animal=horse](http://localhost:8080/images?caption=riding&amp;accessory=suitcase&amp;animal=horse)  
 ![](Screenshot-2026-03-12-at-2.02.28-PM.png)
 
 Amazing. 🙂 If you had any trouble following the steps, [refer to the tutorial code](https://github.com/luketn/atlas-search-coco-tutorial). So, let's go through the search method and explain each part piece by piece. Our aggregate search on the image MongoDB collection will have the following stages:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">[
+```
+[
  {
    $search: {
      facet: {
        operator: {
          compound: {
-           filter: [ &lt;Filter clauses go here!&gt; ]
+           filter: [ <Filter clauses go here!> ]
          }
        },
-       facets: { &lt;List the facets we want returned&gt; }
+       facets: { <List the facets we want returned> }
      }
    }
  }, 
- &lt;Paging&gt;
+ <Paging>
  {"$skip": 0},{"$limit": 5},
- &lt;Return structure - page of docs + meta (facet counts)&gt;
+ <Return structure - page of docs + meta (facet counts)>
  {$facet: {docs: [], meta: [...]}}
 ]
-</pre>
+```
+
 
 You can see the composition of each stage in the Java code:
 
 ### Paging {#paging}
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">   int skip = 0;
+```
+   int skip = 0;
    int pageSize = 5;
    if (page != null) {
        skip = page * pageSize;
    }
-</pre>
+```
+
 
 First up, we calculate the number of documents to skip for paging, and set the page size to 5. These are passed to the skip and limit stages.
 
@@ -774,7 +825,8 @@ First up, we calculate the number of documents to skip for paging, and set the p
 
 In this section of the search method, we put together a List which will be the filter clauses:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">   List&lt;SearchOperator&gt; clauses = new ArrayList&lt;&gt;();
+```
+   List<SearchOperator> clauses = new ArrayList<>();
    if (caption != null) {
        clauses.add(SearchOperator
                .text(
@@ -786,7 +838,7 @@ In this section of the search method, we put together a List which will be the f
    if (hasPerson != null) {
        clauses.add(equals("hasPerson", hasPerson));
    }
-   BiConsumer&lt;String, List&lt;String&gt;&gt; addConditional = (String category, List&lt;String&gt; values) -&gt; {
+   BiConsumer<String, List<String>> addConditional = (String category, List<String> values) -> {
        if (values != null) {
            for (String value : values) {
                clauses.add(equals(category, value));
@@ -804,7 +856,8 @@ In this section of the search method, we put together a List which will be the f
    addConditional.accept("outdoor", outdoor);
    addConditional.accept("sports", sports);
    addConditional.accept("vehicle", vehicle);
-</pre>
+```
+
 
 We use a little helper method, addConditional, which checks if the parameter was null, and if not, adds each value with an equals clause for the categories. Another small helper method, equals(), constructs the Document for our equals clause.
 
@@ -823,7 +876,8 @@ Check out the full details for [how you can customize it](https://www.mongodb.co
 
 Then, we put together a list of the facets we want to return:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">   List&lt;StringSearchFacet&gt; facets = List.of(
+```
+   List<StringSearchFacet> facets = List.of(
            stringFacet("accessory", fieldPath("accessory")).numBuckets(10),
            stringFacet("animal", fieldPath("animal")).numBuckets(10),
            stringFacet("appliance", fieldPath("appliance")).numBuckets(10),
@@ -836,7 +890,8 @@ Then, we put together a list of the facets we want to return:
            stringFacet("sports", fieldPath("sports")).numBuckets(10),
            stringFacet("vehicle", fieldPath("vehicle")).numBuckets(10)
    );
-</pre>
+```
+
 
 Here, we are saying that we want all of the fields we've indexed with stringFacet in our Atlas Search index, allowing them to be counted. We're also specifying 10 as the maximum number of buckets to count in. This means we'll get the top 10 results per super category, with their counts. For example, let's say there were 15 animals which had a count for a search on the caption "grass." In that case, we would receive only the top 10 animal counts---the five least significant would be omitted.
 
@@ -844,7 +899,8 @@ Here, we are saying that we want all of the fields we've indexed with stringFace
 
 Finally, we put together all the aggregate stages and call the search:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">List&lt;Bson&gt; aggregateStages = List.of(
+```
+List<Bson> aggregateStages = List.of(
        Aggregates.search(
                SearchCollector.facet(
                        SearchOperator.compound().filter(clauses),
@@ -863,7 +919,8 @@ Finally, we put together all the aggregate stages and call the search:
 
 ImageSearchResult imageSearchResult = imageCollection.aggregate(aggregateStages, ImageSearchResult.class).first();
 return imageSearchResult;
-</pre>
+```
+
 
 The most interesting part, and perhaps also the most confusing part, is the use of the final aggregate stage, facet. This is a different use of the term facet, wherein we are creating two facets for our aggregate result. This is a little piece of Atlas Search magic that allows us to return the paged documents of the search, alongside the meta data for the facets. Best not to think about it too much. Grit your teeth and put it in there. If you really must know, you can find the documentation for using the facet collector with the [$$SEARCH_META aggregation framework variable](https://www.mongodb.com/docs/atlas/atlas-search/facet/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=fulltext-foojay&utm_term=tony.kim#search_meta-aggregation-variable).
 

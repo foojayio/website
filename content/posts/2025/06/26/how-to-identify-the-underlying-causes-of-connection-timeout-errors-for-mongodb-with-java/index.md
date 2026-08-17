@@ -100,29 +100,32 @@ Consider a Java-based e-commerce API handling product inventory and order proces
 
 Spring Data MongoDB, which you're using in your Spring Boot app, relies on the MongoDB Java driver's default connection pool settings, where `maxPoolSize` is `100`. However, you can customize these settings to better suit your application's needs by overriding the default `MongoClient` bean. Here's how to configure it:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">​@Bean
+```
+​@Bean
 
 public MongoClient mongoClient() {
 
-&nbsp; &nbsp; MongoClientSettings settings = MongoClientSettings.builder()
+    MongoClientSettings settings = MongoClientSettings.builder()
 
-&nbsp; &nbsp; &nbsp; &nbsp; .applyToConnectionPoolSettings(builder -&gt;&nbsp;
+        .applyToConnectionPoolSettings(builder -> 
 
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; builder.maxSize(50) &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; // Adjust based on expected load
+            builder.maxSize(50)           // Adjust based on expected load
 
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;.minSize(10) &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; // Minimum connections to keep open
+                   .minSize(10)           // Minimum connections to keep open
 
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;.maxWaitTime(Duration.ofSeconds(2)) // Max wait time for a connection
+                   .maxWaitTime(Duration.ofSeconds(2)) // Max wait time for a connection
 
-&nbsp; &nbsp; &nbsp; &nbsp; )
+        )
 
-&nbsp; &nbsp; &nbsp; &nbsp; .applyConnectionString(new ConnectionString("mongodb://localhost:27017/test"))
+        .applyConnectionString(new ConnectionString("mongodb://localhost:27017/test"))
 
-&nbsp; &nbsp; &nbsp; &nbsp; .build();
+        .build();
 
-&nbsp; &nbsp; return MongoClients.create(settings);
+    return MongoClients.create(settings);
 
-}</pre>
+}
+```
+
 
 Following are the parameters you can consider to fine-tune your connection pool to mitigate a connection timeout exception.
 

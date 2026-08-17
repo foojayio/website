@@ -38,51 +38,67 @@ Preview feature that adds support for primitive types in `instanceof` and `switc
 
 Example:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">long l = ...;
+```
+long l = ...;
 switch (l) {
-    case 1L              -&gt; ...;
-    case 2L              -&gt; ...;
-    case 10_000_000_000L -&gt; ...;
-    default -&gt; ...;
-}</pre>
+    case 1L              -> ...;
+    case 2L              -> ...;
+    case 10_000_000_000L -> ...;
+    default -> ...;
+}
+```
+
 
 **We can now use `instanceof` for all primitive types.**
 
 Example from the JEP:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">if (i instanceof byte) {  // value of i fits in a byte
+```
+if (i instanceof byte) {  // value of i fits in a byte
     ... (byte)i ...       // traditional cast required
-}</pre>
+}
+```
+
 
 But most interesting of all is the support for pattern matching. Here are some examples of where it's now possible to use pattern matching for a primitive type.
 
 Example of pattern matching of a primitive type within a `switch` from the JEP:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">switch (x.getStatus()) {
-    case 0 -&gt; okay;
-    case 1 -&gt; warning;
-    case 2 -&gt; error;
-    case int i -&gt; unknown status:  + i;
-}</pre>
+```
+switch (x.getStatus()) {
+    case 0 -> okay;
+    case 1 -> warning;
+    case 2 -> error;
+    case int i -> unknown status:  + i;
+}
+```
+
 
 Guards are also supported via the `when` clause:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">switch (x.getStatus()) {
-    case 0 -&gt; okay;
-    case 1 -&gt; warning;
-    case int i when i &gt; 1 &amp;&amp; i  client error:  + i;
-    case int i when i &gt; 100 -&gt; server error:  + i;
-}</pre>
+```
+switch (x.getStatus()) {
+    case 0 -> okay;
+    case 1 -> warning;
+    case int i when i > 1 && i  client error:  + i;
+    case int i when i > 100 -> server error:  + i;
+}
+```
+
 
 Example of pattern matching of a primitive type within an `instanceof` from the JEP:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">if (i instanceof byte b) {
+```
+if (i instanceof byte b) {
     ... b ...
-}</pre>
+}
+```
+
 
 Example of pattern matching of a primitive type when deconstructing a record:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">// JSON didn't differentiates integers to doubles, so a JSON number should be a double.
+```
+// JSON didn't differentiates integers to doubles, so a JSON number should be a double.
 record JsonNumber(double number) implements JsonValue { }
 
 var number = new JsonNumber(30);
@@ -90,7 +106,9 @@ var number = new JsonNumber(30);
 // now we can deconstruct and match a different primitive type
 if (json instanceof JsonObject(int number)) {
     // ...
-}</pre>
+}
+```
+
 
 This evolution necessitated the implementation of conversion rules within pattern matching, so that a primitive type matches another primitive type, as in the previous example 30 matched an `int` even though the record component was defined as a double, the target type must be covered by the pattern test. Here, 30 is covered by an int. Values not covered will be rejected.
 
@@ -107,30 +125,31 @@ Markdown supports the use of HTML tags, offering great flexibility, while JavaDo
 
 Here's an example from the JEP:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">/**
+```
+/**
  * Returns a hash code value for the object. This method is
  * supported for the benefit of hash tables such as those provided by
  * {@link java.util.HashMap}.
- * &lt;p&gt;
+ * <p>
  * The general contract of {@code hashCode} is:
- * &lt;ul&gt;
- * &lt;li&gt;Whenever it is invoked on the same object more than once during
+ * <ul>
+ * <li>Whenever it is invoked on the same object more than once during
  *     an execution of a Java application, the {@code hashCode} method
  *     must consistently return the same integer, provided no information
  *     used in {@code equals} comparisons on the object is modified.
  *     This integer need not remain consistent from one execution of an
  *     application to another execution of the same application.
- * &lt;/li&gt;&lt;li&gt;If two objects are equal according to the {@link
+ * </li><li>If two objects are equal according to the {@link
  *     #equals(Object) equals} method, then calling the {@code
  *     hashCode} method on each of the two objects must produce the
  *     same integer result.
- * &lt;/li&gt;&lt;li&gt;It is $ly;em&gt;not$lt;/em&gt; required that if two objects are unequal
+ * </li><li>It is $ly;em>not$lt;/em> required that if two objects are unequal
  *     according to the {@link #equals(Object) equals} method, then
  *     calling the {@code hashCode} method on each of the two objects
  *     must produce distinct integer results.  However, the programmer
  *     should be aware that producing distinct integer results for
  *     unequal objects may improve the performance of hash tables.
- * &lt;/li&gt;&lt;/ul&gt;
+ * </li></ul>
  *
  * @implSpec
  * As far as is reasonably practical, the {@code hashCode} method defined
@@ -139,11 +158,14 @@ Here's an example from the JEP:
  * @return  a hash code value for this object.
  * @see     java.lang.Object#equals(java.lang.Object)
  * @see     java.lang.System#identityHashCode
- */</pre>
+ */
+```
+
 
 Which would be written like this in Markdown:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">/// Returns a hash code value for the object. This method is
+```
+/// Returns a hash code value for the object. This method is
 /// supported for the benefit of hash tables such as those provided by
 /// [java.util.HashMap].
 ///
@@ -172,7 +194,9 @@ Which would be written like this in Markdown:
 ///
 /// @return  a hash code value for this object.
 /// @see     java.lang.Object#equals(java.lang.Object)
-/// @see     java.lang.System#identityHashCode</pre>
+/// @see     java.lang.System#identityHashCode
+```
+
 
 More information in the [JEP 467](https://openjdk.org/jeps/467 "JEP").
 

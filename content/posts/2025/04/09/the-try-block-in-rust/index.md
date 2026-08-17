@@ -30,39 +30,54 @@ Please check the above article for a complete refresher on error management in g
 * If the `Result` contains a value, it continues normally
 * If it contains an error, it short-circuits and returns the `Result` to the calling function.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="rust">fn add(str1: &amp;str, str2: &amp;str) -&gt; Result&lt;i8, ParseIntError&gt; {
-  Ok(str1.parse::&lt;i8&gt;()? + str2.parse::&lt;i8&gt;()?)
+```rust
+fn add(str1: &str, str2: &str) -> Result<i8, ParseIntError> {
+  Ok(str1.parse::<i8>()? + str2.parse::<i8>()?)
 }
 
 fn main() {
     print!("{:?}", add("1", "2"));
     print!("{:?}", add("1", "a"));
-}</pre>
+}
+```
+
 
 The output is the following:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">Ok(3)
-Err(ParseIntError { kind: InvalidDigit })</pre>
+```
+Ok(3)
+Err(ParseIntError { kind: InvalidDigit })
+```
+
 
 Note that the defining function's signature *must* return a `Result` or an `Option`. The following block doesn't compile:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="rust">fn add(str1: &amp;str, str2: &amp;str) -&gt; i8 {
-  str1.parse::&lt;i8&gt;()? + str2.parse::&lt;i8&gt;()?
-}</pre>
+```rust
+fn add(str1: &str, str2: &str) -> i8 {
+  str1.parse::<i8>()? + str2.parse::<i8>()?
+}
+```
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">the `?` operator can only be used in a function that returns `Result` or `Option`</pre>
+
+```
+the `?` operator can only be used in a function that returns `Result` or `Option`
+```
+
 
 The verbose alternative {#h2-1-the-verbose-alternative}
 -------------------------------------------------------
 
 We must manually unwrap to return a non-wrapper type, *e.g.* , `i8` instead of `Option`.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="rust">fn add(str1: &amp;str, str2: &amp;str) -&gt; i8 {
-  let int1 = str1.parse::&lt;i8&gt;();                  //1
-  let int2 = str2.parse::&lt;i8&gt;();                  //1
+```rust
+fn add(str1: &str, str2: &str) -> i8 {
+  let int1 = str1.parse::<i8>();                  //1
+  let int2 = str2.parse::<i8>();                  //1
   if int1.is_err() || int2.is_err() { -1 }        //2-3
   else { int1.unwrap() + int2.unwrap() }          //4
-}</pre>
+}
+```
+
 
 1. Define `Result` variables
 2. Manually checks if any of the variables contains an error, *i.e.*, the parsing failed
@@ -74,17 +89,20 @@ The `try` block to the rescue {#h2-2-the-try-block-to-the-rescue}
 
 The sample above works but is quite lengthy. The `try` block is an *experimental* approach to make it more elegant. It allows "compacting" all the checks for errors in a single block:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="rust">#![feature(try_blocks)]                           //1
+```rust
+#![feature(try_blocks)]                           //1
 
-fn add(str1: &amp;str, str2: &amp;str) -&gt; i8 {
+fn add(str1: &str, str2: &str) -> i8 {
   let result = try {
-    let int1 = str1.parse::&lt;i8&gt;();
-    let int2 = str2.parse::&lt;i8&gt;();
+    let int1 = str1.parse::<i8>();
+    let int2 = str2.parse::<i8>();
     int1.unwrap()? + int2.unwrap()?               //2
   };
   if result.is_err() { -1 }                       //3
   else { result.unwrap() }                        //4
-}</pre>
+}
+```
+
 
 1. Enable the experimental feature
 2. Use the `?` operator though the defining function doesn't return `Result`
@@ -93,17 +111,23 @@ fn add(str1: &amp;str, str2: &amp;str) -&gt; i8 {
 
 Alas, the code doesn't compile:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">the `?` operator can only be applied to values that implement `Try`</pre>
+```
+the `?` operator can only be applied to values that implement `Try`
+```
+
 
 `i8` doesn't implement `Try`. Neither `i8` nor `Try` belong to our crate; a custom implementation would require the use of the wrapper-type pattern. Fortunately, a couple of types already implement `Try`: `Result`, `Option`, `Poll`, and `ControlFlow`.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="rust">fn add(str1: &amp;str, str2: &amp;str) -&gt; i8 {
-  let result: Result&lt;i8, ParseIntError&gt; = try {   //1
-    str1.parse::&lt;i8&gt;()? + str2.parse::&lt;i8&gt;()?     //2
+```rust
+fn add(str1: &str, str2: &str) -> i8 {
+  let result: Result<i8, ParseIntError> = try {   //1
+    str1.parse::<i8>()? + str2.parse::<i8>()?     //2
   };
   if result.is_err() { -1 }
   else { result.unwrap() }
-}</pre>
+}
+```
+
 
 1. The compiler cannot infer the type
 2. Using `?` on `Result` inside the `try` block is now allowed
@@ -124,6 +148,6 @@ The `?` operator builds upon the `Result` type to allow short-circuiting in func
 * [The Rust RFC Book](https://rust-lang.github.io/rfcs/3058-try-trait-v2.html)
 * [Extending Rust's Effect System](https://blog.yoshuawuyts.com/extending-rusts-effect-system/)
 
-*** ** * ** ***
+
 
 *Originally published at [A Java Geek](https://blog.frankel.ch/try-block-rust/) on April 21^st^, 2024*

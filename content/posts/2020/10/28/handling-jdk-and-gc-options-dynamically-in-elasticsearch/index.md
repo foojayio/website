@@ -29,10 +29,12 @@ Let's dive into the mechanism to configure JVM options.
 
 The most commonly used jvm option that requires configuration before the Elasticsearch Java process is started, is setting the heap size. In order to do so, Elasticsearch makes use of [a mechanism](https://www.elastic.co/guide/en/elasticsearch/reference/7.9/jvm-options.html), that not only reads the `config/jvm.options` file but also reads the `config/jvm.options.d` directory and appends the contents of all files to create a big list of JVM options. You could create a file like `config/jvm.options.d/heap.options` like this:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group=""># make sure we configure 2gb of heap
+```
+# make sure we configure 2gb of heap
 -Xms2g
 -Xmx2g
-</pre>
+```
+
 
 This would configure the heap on startup. However the configuration and parsing mechanism is more powerful. Not only you can configure options, you can also configure different options for different JDK major versions.
 
@@ -40,7 +42,8 @@ Side note: In case you are asking yourself, why is there a `jvm.options.d` direc
 
 So, why is this useful you might ask yourself? Well, sometimes a new Java release deprecates features, and sometimes features get removed. One of those features was the CMS Garbage Collector, which got deprecated in [Java 9](https://openjdk.java.net/jeps/291) and finally removed more than two years later in [Java 14](https://openjdk.java.net/jeps/363). Elasticsearch has been a happy user of the CMS for years, but with the removal there had to be a mechanism to start with another garbage collector as of Java 14 onwards. In order to support this, the JVM options parser also supports the ability to set certain options only for a certain Java version like this:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">## GC configuration
+```
+## GC configuration
 8-13:-XX:+UseConcMarkSweepGC
 8-13:-XX:CMSInitiatingOccupancyFraction=75
 8-13:-XX:+UseCMSInitiatingOccupancyOnly
@@ -54,11 +57,13 @@ So, why is this useful you might ask yourself? Well, sometimes a new Java releas
 14-:-XX:+UseG1GC
 14-:-XX:G1ReservePercent=25
 14-:-XX:InitiatingHeapOccupancyPercent=30
-</pre>
+```
+
 
 The same applies for different GC options with Java 8 and Java 9
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">## JDK 8 GC logging
+```
+## JDK 8 GC logging
 8:-XX:+PrintGCDetails
 8:-XX:+PrintGCDateStamps
 8:-XX:+PrintTenuringDistribution
@@ -70,7 +75,8 @@ The same applies for different GC options with Java 8 and Java 9
 
 # JDK 9+ GC logging
 9-:-Xlog:gc*,gc+age=trace,safepoint:file=logs/gc.log:utctime,pid,tags:filecount=32,filesize=64m
-</pre>
+```
+
 
 You can read more about [setting JVM options](https://www.elastic.co/guide/en/elasticsearch/reference/current/jvm-options.html) in the official Elastic docs.
 
@@ -86,13 +92,16 @@ One of the advantages is to supply some useful standard JVM options, when starti
 
 Also, we can enable some options only, when a certain JDK version is in use. This enables dereferenced null pointer exceptions in Java 14 and above
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">private static String maybeShowCodeDetailsInExceptionMessages() {
-    if (JavaVersion.majorVersion(JavaVersion.CURRENT) &gt;= 14) {
+```java
+private static String maybeShowCodeDetailsInExceptionMessages() {
+    if (JavaVersion.majorVersion(JavaVersion.CURRENT) >= 14) {
         return "-XX:+ShowCodeDetailsInExceptionMessages";
     } else {
         return "";
     }
-}</pre>
+}
+```
+
 
 But this infrastructure can go even further, and become smarter over time. How about providing different JVM options depending on configuration settings like the heap?
 
@@ -100,13 +109,16 @@ This is exactly what has been worked on in a [recent addition](https://github.co
 
 If a small heap is configured in combination with the G1 garbage collectors, some additional options are configured.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">final boolean tuneG1GCForSmallHeap = tuneG1GCForSmallHeap(heapSize);
+```java
+final boolean tuneG1GCForSmallHeap = tuneG1GCForSmallHeap(heapSize);
 final boolean tuneG1GCHeapRegion = 
     tuneG1GCHeapRegion(finalJvmOptions, tuneG1GCForSmallHeap);
 final boolean tuneG1GCInitiatingHeapOccupancyPercent =
     tuneG1GCInitiatingHeapOccupancyPercent(finalJvmOptions);
 final int tuneG1GCReservePercent =
-    tuneG1GCReservePercent(finalJvmOptions, tuneG1GCForSmallHeap);</pre>
+    tuneG1GCReservePercent(finalJvmOptions, tuneG1GCForSmallHeap);
+```
+
 
 So, what happens here and why? If less than 8GB of heap are configured - which is more often than you think, as many users are also running smaller instances of Elasticsearch and there is an ongoing effort of using less heap and offload this to other parts of the system - three additional options are set. Of course everything can be manually overwritten.
 

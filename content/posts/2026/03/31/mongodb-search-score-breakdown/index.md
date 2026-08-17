@@ -145,11 +145,17 @@ Let's look at those same score details in a slimmer, easier-to-read fashion:
 
 It's easier to see in this format that the score of roughly 6.011 comes from the sum of two numbers: 0.0 (the non-scoring \`# clause\`-labeled filters) and roughly 6.011. And that \~6.011 factor comes from the BM25 scoring formula that multiples the "idf" (inverse document frequency) factor of \~13.083 with the "tf" (term frequency) factor of \~0.459. The "idf" factor is the "sum of" two components, one for each of the terms in our \`phrase\` operator clause. Each of the \`idf\` factors for our two query terms, "keanu" and "reeves", is computed using the formula in the output, which is:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">log(1 + (N - n + 0.5) / (n + 0.5))</pre>
+```
+log(1 + (N - n + 0.5) / (n + 0.5))
+```
+
 
 The "tf" factor for the full phrase is "computed as" this formula:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">freq / (freq + k1 * (1 - b + b * dl / avgdl))</pre>
+```
+freq / (freq + k1 * (1 - b + b * dl / avgdl))
+```
+
 
 This uses the factors indented below it, such as the average length (in number of terms) of the "cast" field across all documents in the collection.
 
@@ -160,14 +166,17 @@ Pretty printing the score details {#h2-7-pretty-printing-the-score-details}
 
 The more human-friendly output of the score details above was generated using [MongoDB VS Code Playgrounds](https://www.mongodb.com/docs/mongodb-vscode/playgrounds/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=atlas-search-rel-foojay&utm_term=tony.kim). This JavaScript code will print a more concise, indented version of the scoreDetails, by calling: \`print_score_details(doc.scoreDetails);\`:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">function print_score_details(details, indent_level) {
-&nbsp;&nbsp;if (!indent_level) { indent_level = 0; }
-&nbsp;&nbsp;spaces = " ".padStart(indent_level);
-&nbsp;&nbsp;console.log(spaces + details.value + ", " + details.description);
-&nbsp;&nbsp;details.details.forEach (d =&gt; {
-&nbsp;&nbsp;&nbsp;&nbsp;print_score_details(d, indent_level + 2);
-&nbsp;&nbsp;});
-}</pre>
+```
+function print_score_details(details, indent_level) {
+  if (!indent_level) { indent_level = 0; }
+  spaces = " ".padStart(indent_level);
+  console.log(spaces + details.value + ", " + details.description);
+  details.details.forEach (d => {
+    print_score_details(d, indent_level + 2);
+  });
+}
+```
+
 
 Similarly, pretty printing in Java can be done like the code developed in the article [Using MongoDB Search from Java](https://www.mongodb.com/developer/products/atlas/atlas-search-java/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=atlas-search-rel-foojay&utm_term=tony.kim), which is [available on GitHub](https://github.com/mongodb-developer/getting-started-search-java/blob/main/src/main/java/com/mongodb/atlas/FirstSearchExample.java#L89-L97).
 

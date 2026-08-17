@@ -51,42 +51,51 @@ Let's look at a concrete example with Spring Boot.
 
 We start with a minimal reactive stack: WebFlux and [Reactive MongoDB](https://www.mongodb.com/docs/languages/java/reactive-streams-driver/current/getting-started/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=reactive-foojay&utm_term=hugh.murray).
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&lt;dependencies&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&lt;dependency&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;artifactId&gt;spring-boot-starter-webflux&lt;/artifactId&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&lt;/dependency&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&lt;dependency&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;artifactId&gt;spring-boot-starter-data-mongodb-reactive&lt;/artifactId&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&lt;/dependency&gt;
-&lt;/dependencies&gt;</pre>
+```
+<dependencies>
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-webflux</artifactId>
+    </dependency>
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-data-mongodb-reactive</artifactId>
+    </dependency>
+</dependencies>
+```
+
 
 In this configuration, there is no servlet container or blocking JDBC driver. The entire stack is designed and built to perform non-blocking I/O operations.
 
 It is possible to configure the application to use a MongoDB database via application.properties:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">spring.data.mongodb.uri=mongodb+srv://&lt;db_user&gt;:&lt;db_pass&gt;@&lt;db-uri&gt;/?appName=devrel-tutorial-java-reactive-streaming-foojay</pre>
+```
+spring.data.mongodb.uri=mongodb+srv://<db_user>:<db_pass>@<db-uri>/?appName=devrel-tutorial-java-reactive-streaming-foojay
+```
+
 
 ### Domain Model: Telemetry as a Streamable Document {#h3-3-domain-model-telemetry-as-a-streamable-document}
 
 Let's assume we collect telemetry events coming from different devices.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@Document(collection = "telemetry")
+```
+@Document(collection = "telemetry")
 
 public class TelemetryEvent {
-&nbsp;&nbsp;&nbsp;&nbsp;@Id
-&nbsp;&nbsp;&nbsp;&nbsp;private String id;
-&nbsp;&nbsp;&nbsp;&nbsp;private String deviceId;
-&nbsp;&nbsp;&nbsp;&nbsp;private double temperature;
-&nbsp;&nbsp;&nbsp;&nbsp;private Instant timestamp;
-&nbsp;&nbsp;&nbsp;&nbsp;public TelemetryEvent(String deviceId, double temperature, Instant timestamp) {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this.deviceId = deviceId;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this.temperature = temperature;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this.timestamp = timestamp;
-&nbsp;&nbsp;&nbsp;&nbsp;}
-&nbsp;&nbsp;&nbsp;&nbsp;// getters omitted for brevity
-}</pre>
+    @Id
+    private String id;
+    private String deviceId;
+    private double temperature;
+    private Instant timestamp;
+    public TelemetryEvent(String deviceId, double temperature, Instant timestamp) {
+        this.deviceId = deviceId;
+        this.temperature = temperature;
+        this.timestamp = timestamp;
+    }
+    // getters omitted for brevity
+}
+```
+
 
 There is nothing special about the definition of this document. The big difference lies in how we access this collection.
 
@@ -95,10 +104,13 @@ Reactive Repository {#h2-4-reactive-repository}
 
 When using Spring Data Reactive MongoDB, the methods in the repository layer directly return Flux and Mono.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public interface TelemetryRepository
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;extends ReactiveMongoRepository&lt;TelemetryEvent, String&gt; {
-&nbsp;&nbsp;&nbsp;&nbsp;Flux&lt;TelemetryEvent&gt; findByDeviceId(String deviceId);
-}</pre>
+```
+public interface TelemetryRepository
+        extends ReactiveMongoRepository<TelemetryEvent, String> {
+    Flux<TelemetryEvent> findByDeviceId(String deviceId);
+}
+```
+
 
 Within this interface, there is a big difference. We are not wrapping and retrieving a list of TelemetryEvents. We are returning a Flux\<TelemetryEvent\> that progressively transmits the data as it is read by the non-blocking MongoDB driver. A data stream.
 
@@ -108,19 +120,22 @@ This mode has important implications, as memory usage becomes proportional to de
 
 Within the service layer, we can explicitly manage backpressure.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@Service
+```
+@Service
 
 public class TelemetryService {
-&nbsp;&nbsp;&nbsp;&nbsp;private final TelemetryRepository repository;
-&nbsp;&nbsp;&nbsp;&nbsp;public TelemetryService(TelemetryRepository repository) {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this.repository = repository;
-&nbsp;&nbsp;&nbsp;&nbsp;}
+    private final TelemetryRepository repository;
+    public TelemetryService(TelemetryRepository repository) {
+        this.repository = repository;
+    }
 
-&nbsp;&nbsp;&nbsp;&nbsp;public Flux&lt;TelemetryEvent&gt; streamByDevice(String deviceId) {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return repository.findByDeviceId(deviceId)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.onBackpressureLatest();
-&nbsp;&nbsp;&nbsp;&nbsp;}
-}</pre>
+    public Flux<TelemetryEvent> streamByDevice(String deviceId) {
+        return repository.findByDeviceId(deviceId)
+                .onBackpressureLatest();
+    }
+}
+```
+
 
 The operator highlighted within the service class, onBackpressureLatest(), clearly expresses how we want to handle backpressure. If the consumer is slower than the producer, we eliminate the intermediate events and keep only the most recent ones. If we are creating a real-time dashboard, this behavior perfectly represents what we want to achieve. If we are managing financial transactions, well, maybe we are doing something wrong.
 
@@ -130,25 +145,28 @@ Reactive programming requires making these choices consciously.
 
 Let's expose the data stream to clients through Spring WebFlux.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@RestController
+```
+@RestController
 @RequestMapping("/telemetry")
 
 public class TelemetryController {
-&nbsp;&nbsp;&nbsp;&nbsp;private final TelemetryService service;
-&nbsp;&nbsp;&nbsp;&nbsp;public TelemetryController(TelemetryService service) {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this.service = service;
-&nbsp;&nbsp;&nbsp;&nbsp;}
+    private final TelemetryService service;
+    public TelemetryController(TelemetryService service) {
+        this.service = service;
+    }
 
-&nbsp;&nbsp;&nbsp;&nbsp;@GetMapping(
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;value = "/stream/{deviceId}",
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;produces = MediaType.TEXT_EVENT_STREAM_VALUE
-&nbsp;&nbsp;&nbsp;&nbsp;)
+    @GetMapping(
+        value = "/stream/{deviceId}",
+        produces = MediaType.TEXT_EVENT_STREAM_VALUE
+    )
 
-&nbsp;&nbsp;&nbsp;&nbsp;public Flux&lt;TelemetryEvent&gt; stream(
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@PathVariable String deviceId) {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return service.streamByDevice(deviceId);
-&nbsp;&nbsp;&nbsp;&nbsp;}
-}</pre>
+    public Flux<TelemetryEvent> stream(
+            @PathVariable String deviceId) {
+        return service.streamByDevice(deviceId);
+    }
+}
+```
+
 
 The key to our solution is MediaType.TEXT_EVENT_STREAM_VALUE. The HTTP connection remains open, and data is sent as it becomes available. There is no aggregation phase, no thread blocked waiting for some operation to be completed. The stream remains alive and active as long as the connection is open.
 
@@ -169,23 +187,29 @@ There is one method that can silently destroy reactive scalability: block().
 
 Consider this anti-pattern:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public Flux&lt;TelemetryEvent&gt; broken(String deviceId) {
-&nbsp;&nbsp;&nbsp;&nbsp;return repository.findByDeviceId(deviceId)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.map(event -&gt; enrich(event).block()); // DON'T
-}</pre>
+```
+public Flux<TelemetryEvent> broken(String deviceId) {
+    return repository.findByDeviceId(deviceId)
+            .map(event -> enrich(event).block()); // DON'T
+}
+```
+
 
 That .block() call pauses the event loop thread. Under load, this collapses throughput and negates the reactive model.
 
 The correct approach is composition:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public Flux&lt;TelemetryEvent&gt; correct(String deviceId) {
-&nbsp;&nbsp;&nbsp;&nbsp;return repository.findByDeviceId(deviceId)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.flatMap(this::enrich);
+```
+public Flux<TelemetryEvent> correct(String deviceId) {
+    return repository.findByDeviceId(deviceId)
+            .flatMap(this::enrich);
 }
 
-private Mono&lt;TelemetryEvent&gt; enrich(TelemetryEvent event) {
-&nbsp;&nbsp;&nbsp;&nbsp;return Mono.just(event); // pretend async call
-}</pre>
+private Mono<TelemetryEvent> enrich(TelemetryEvent event) {
+    return Mono.just(event); // pretend async call
+}
+```
+
 
 Reactive systems reward and perform best within an end-to-end non-blocking design. A single blocking point, and the entire pipeline loses all its advantages.
 
@@ -204,11 +228,14 @@ In APIs that expose streaming endpoints, errors behave differently than in tradi
 
 Reactor offers precise control for this situation, which makes use of retries:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public Flux&lt;TelemetryEvent&gt; resilientStream(String deviceId) {
-&nbsp;&nbsp;&nbsp;&nbsp;return repository.findByDeviceId(deviceId)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.retryWhen(Retry.backoff(3, Duration.ofSeconds(1)))
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.onErrorResume(e -&gt; Flux.empty());
-}</pre>
+```
+public Flux<TelemetryEvent> resilientStream(String deviceId) {
+    return repository.findByDeviceId(deviceId)
+            .retryWhen(Retry.backoff(3, Duration.ofSeconds(1)))
+            .onErrorResume(e -> Flux.empty());
+}
+```
+
 
 It is important to be careful when using retries: if thousands of clients simultaneously try to reestablish a connection after a temporary error, the recovery can overload the system and prevent it from resuming normal operation. Again, reactive programming offers control, but not immunity from a series of issues that must be taken into account during the system planning and design phase.
 
@@ -216,11 +243,14 @@ It is important to be careful when using retries: if thousands of clients simult
 
 Testing reactive systems requires a different approach than testing a traditional system. In fact, it involves testing individual signals rather than collections:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">StepVerifier.create(
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;service.streamByDevice("device-1").take(3)
+```
+StepVerifier.create(
+        service.streamByDevice("device-1").take(3)
 )
 .expectNextCount(3)
-.verifyComplete();</pre>
+.verifyComplete();
+```
+
 
 Within the tests, we can explicitly state the emission of events and the termination of streaming activities. Furthermore, we can simulate the passage of time virtually, thus building and testing long-duration flows instantly and deterministically. This is a major strength of Reactor: streaming systems become and remain testable in a deterministic manner.
 

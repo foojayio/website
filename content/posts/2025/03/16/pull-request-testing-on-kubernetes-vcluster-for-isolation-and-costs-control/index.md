@@ -44,7 +44,8 @@ Weaving vCluster into the GitHub workflow is a three-step process:
 2. Create a virtual cluster
 3. Connect to the virtual cluster
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml">- name: Install vCluster
+```yaml
+- name: Install vCluster
   uses: loft-sh/setup-vcluster@main                                    #1
   with:
     kubectl-install: false
@@ -52,7 +53,9 @@ Weaving vCluster into the GitHub workflow is a three-step process:
   id: vcluster                                                         #2
   run: time vcluster create vcluster-pipeline-${{github.run_id}}       #3
 - name: Connect to the vCluster
-  run: vcluster connect vcluster-pipeline-${{github.run_id}}           #4</pre>
+  run: vcluster connect vcluster-pipeline-${{github.run_id}}           #4
+```
+
 
 1. Install vCluster. By default, the action installs the latest available version. You can override it.
 2. Step IDs are not necessary unless you want to reference them in later steps. We are going to need it
@@ -61,7 +64,8 @@ Weaving vCluster into the GitHub workflow is a three-step process:
 
 The output is along the following lines:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">&gt; Run time vcluster create vcluster-pipeline-12632713145
+```
+> Run time vcluster create vcluster-pipeline-12632713145
 
 12:44:13 info Creating namespace vcluster-vcluster-pipeline-12632713145
 12:44:13 info Create vcluster vcluster-pipeline-12632713145...
@@ -79,13 +83,15 @@ real	1m2.947s
 user	0m0.828s
 sys	0m0.187s
 
-&gt; Run vcluster connect vcluster-pipeline-12632713145
+> Run vcluster connect vcluster-pipeline-12632713145
 
 12:45:13 done vCluster is up and running
 12:45:13 info Starting background proxy container...
 12:45:16 done Switched active kube context to vcluster_vcluster-pipeline-12632713145_vcluster-vcluster-pipeline-12632713145_gke_vcluster-pipeline_europe-west9_minimal-cluster
 - Use `vcluster disconnect` to return to your previous kube context
-- Use `kubectl get namespaces` to access the vcluster</pre>
+- Use `kubectl get namespaces` to access the vcluster
+```
+
 
 For fairness' sake, I used the time command to measure the creation time of a virtual cluster precisely. I measure other steps by looking at the GitHub workflow log.
 
@@ -113,16 +119,22 @@ So far, we haven't cleaned up any objects we created. It means pods with our app
 
 On the opposite, deleting a virtual cluster is a breeze. Let's add the last step to our workflow definition:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml">- name: Delete the vCluster
-  run: vcluster delete vcluster-pipeline-${{github.run_id}}</pre>
+```yaml
+- name: Delete the vCluster
+  run: vcluster delete vcluster-pipeline-${{github.run_id}}
+```
+
 
 There still is one issue: if a step of a GitHub workflow fails, *i.e.* , returns a non-0 exit code, the job fails immediately, **and GitHub skips executing subsequent steps**. Hence, the above cleanup won't happen if the end-to-end tests fail. For example, it might be on purpose to keep the cluster's state if things go wrong. In this case, you should rely on observability instead for this purpose, like you do in production. I encourage you to delete your environment in every case.
 
 GitHub provides an `if` attribute to run a step depending on conditions. For example, it offers a `if: always()`; GitHub runs the step regardless of the success or failure of previous steps. It would be redundant since we don't want to delete the virtual cluster unless it has been created in a prior step. We should delete it only if the creation is successful:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml">- name: Delete the vCluster
-  if: ${{ !cancelled() &amp;&amp; steps.vcluster.conclusion == 'success' }}    #1
-  run: vcluster delete vcluster-pipeline-${{github.run_id}}</pre>
+```yaml
+- name: Delete the vCluster
+  if: ${{ !cancelled() && steps.vcluster.conclusion == 'success' }}    #1
+  run: vcluster delete vcluster-pipeline-${{github.run_id}}
+```
+
 
 1. Run if the job wasn't canceled **and** if the `vcluster` step (defined above) was successful. The job cancellation guard isn't necessary, but it allows you to keep the cluster up anyway.
 

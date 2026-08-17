@@ -35,9 +35,12 @@ The latter is a boon for the Ops team, as they don't have to know the underlying
 
 Here's a simple snippet to illustrate my point:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml">environment:
+```yaml
+environment:
   OTEL_EXPORTER_OTLP_ENDPOINT: http://collector:4317             #1
-  OTEL_SERVICE_NAME: foobar                                      #2</pre>
+  OTEL_SERVICE_NAME: foobar                                      #2
+```
+
 
 1. Configure the endpoint to send data to
 2. Set the component's name
@@ -72,10 +75,13 @@ The gotcha will catch you when the OpenTelemetry evolves to v2 if you didn't use
 
 To open the list, here's the first gotcha: by default, the Python library doesn't send logging data. It must be enabled explicitly!
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml">environment:
+```yaml
+environment:
   OTEL_PYTHON_LOGGING_AUTO_INSTRUMENTATION_ENABLED: true         #1
   OTEL_EXPORTER_OTLP_ENDPOINT: http://collector:4317
-  OTEL_SERVICE_NAME: foobar</pre>
+  OTEL_SERVICE_NAME: foobar
+```
+
 
 1. Enable logs
 
@@ -93,9 +99,12 @@ I cannot be sure whether OpenTelemetry was the cause, but Spring Cloud Sleuth ev
 
 However, the configuration doesn't conform to the OpenTelemetry environment variables. It brings its variables:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml">environment:
+```yaml
+environment:
   MANAGEMENT_OTLP_TRACING_ENDPOINT: http://jaeger:4318/v1/traces #1-2
-  OTEL_SERVICE_NAME: foobar                                      #3</pre>
+  OTEL_SERVICE_NAME: foobar                                      #3
+```
+
 
 1. Non-OpenTelemetry environment variable name
 2. **MUST** set the full path
@@ -106,9 +115,12 @@ Quarkus {#h2-5-quarkus}
 
 Compare with [Quarkus](https://quarkus.io/guides/opentelemetry), which prefixes regular OpenTelemetry environment variables with `QUARKUS_`:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml">environment:
+```yaml
+environment:
   QUARKUS_OTEL_EXPORTER_OTLP_TRACES_ENDPOINT: http://jaeger:4317
-  QUARKUS_OTEL_SERVICE_NAME: foobar</pre>
+  QUARKUS_OTEL_SERVICE_NAME: foobar
+```
+
 
 It's consistent. And yet, the Quarkus instrumentation has another gotcha:
 > Only the **tracing** signal is enabled by default. To enable **metrics** and **logs**, add the following configuration to your application.properties file:
@@ -117,9 +129,12 @@ It's consistent. And yet, the Quarkus instrumentation has another gotcha:
 
 Meanwhile, if you're an expert at operating OpenTelemetry, these defaults will surprise you. In OpenTelemetry, they are governed by other configuration parameters:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml">environment:
+```yaml
+environment:
   OTEL_METRICS_EXPORTER: none
-  OTEL_LOGS_EXPORTER: none</pre>
+  OTEL_LOGS_EXPORTER: none
+```
+
 
 Summary {#h2-6-summary}
 -----------------------
@@ -133,6 +148,6 @@ On the JVM, I'd recommend to stick to the Java Agent as much as possible, but if
 * [Maven - Introduction to the Dependency Mechanism](https://maven.apache.org/guides/introduction/introduction-to-dependency-mechanism.html)
 * [Effective Rust - Item 25: Manage your dependency graph](https://effective-rust.com/dep-graph.html)
 
-*** ** * ** ***
+
 
 *Originally published at [A Java Geek](https://blog.frankel.ch/opentelemetry-gotchas/) on August 10^th^, 2025*

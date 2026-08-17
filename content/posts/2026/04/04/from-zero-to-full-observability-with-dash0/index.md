@@ -36,19 +36,22 @@ The starting point is a minimal Spring Boot REST API with no observability confi
 
 **1. Create the pom.xml.** Create `pom.xml` with one dependency:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&lt;dependencies&gt;
-  &lt;dependency&gt;
-    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
-    &lt;artifactId&gt;spring-boot-starter-web&lt;/artifactId&gt;
-  &lt;/dependency&gt;
-&lt;/dependencies&gt;
-</pre>
+```
+<dependencies>
+  <dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-web</artifactId>
+  </dependency>
+</dependencies>
+```
+
 
 One dependency, no telemetry --- this is intentional. The absence of any OpenTelemetry or metrics libraries is the purpose of the "before" state.
 
 **2. Create the main application class.** Create `src/main/java/com/example/demo/DemoApplication.java`:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">package com.example.demo;
+```
+package com.example.demo;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -59,13 +62,15 @@ public class DemoApplication {
         SpringApplication.run(DemoApplication.class, args);
     }
 }
-</pre>
+```
+
 
 This is the standard Spring Boot entry point --- nothing beyond the minimum needed to start the application.
 
 **3. Create the controller.** Create `src/main/java/com/example/demo/OrderController.java`:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">package com.example.demo;
+```
+package com.example.demo;
 
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
@@ -74,7 +79,7 @@ import java.util.List;
 public class OrderController {
 
     @GetMapping("/orders")
-    public List&lt;String&gt; getOrders() {
+    public List<String> getOrders() {
         return List.of("order-1", "order-2", "order-3");
     }
 
@@ -83,14 +88,17 @@ public class OrderController {
         return "Created: " + order;
     }
 }
-</pre>
+```
+
 
 Two endpoints with no logging, no instrumentation, and no tracing --- when this service is running, you have no visibility into what it is doing.
 
 **4. Build the app**
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">mvn package -DskipTests
-</pre>
+```
+mvn package -DskipTests
+```
+
 
 This packages the application into a single executable JAR in the `target/` directory, which gets copied into the Docker image in the next step.
 
@@ -100,14 +108,17 @@ To run the app in Kubernetes it needs to be packaged as a container image. Rathe
 
 **1. Create a Dockerfile.** This Dockerfile uses Azul Zulu 25 as the base image.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">FROM azul-zulu:25-jre
+```
+FROM azul-zulu:25-jre
 COPY target/order-service.jar app.jar
 ENTRYPOINT ["java", "-jar", "/app.jar"]
-</pre>
+```
+
 
 **2. Create the GitHub Actions workflow.** Create `.github/workflows/build.yml`. The workflow builds the Maven project, logs in to Docker Hub using repository secrets, and pushes the image. It triggers automatically on every push to main.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">name: Build and Push Docker Image
+```
+name: Build and Push Docker Image
 
 on:
   push:
@@ -141,7 +152,8 @@ jobs:
           context: .
           push: true
           tags: ${{ secrets.DOCKER_USERNAME }}/order-service:latest
-</pre>
+```
+
 
 **3. Add Docker Hub secrets to GitHub.** Go to the GitHub repo Settings → Secrets and variables → Actions and add:
 
@@ -163,17 +175,20 @@ With the image on Docker Hub, we can deploy the app to Kubernetes. We use GitHub
 
 **2. Install kind and create a cluster**
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">curl -Lo ./kind https://kind.sigs.k8s.io/dl/latest/kind-linux-amd64
+```
+curl -Lo ./kind https://kind.sigs.k8s.io/dl/latest/kind-linux-amd64
 chmod +x ./kind
 sudo mv ./kind /usr/local/bin/kind
 kind create cluster
-</pre>
+```
+
 
 **3. Create the Kubernetes manifest.** The manifest defines a Deployment with one replica and a Service that exposes it on port 80. The image reference points directly to the Docker Hub image pushed in the previous step.
 
 Create `deployment.yaml`:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">apiVersion: apps/v1
+```
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: order-service
@@ -203,14 +218,17 @@ spec:
   ports:
     - port: 80
       targetPort: 8080
-</pre>
+```
+
 
 **4. Deploy the app.** Apply the manifest and update the image reference to point to the correct Docker Hub image:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">kubectl apply -f deployment.yaml
+```
+kubectl apply -f deployment.yaml
 kubectl set image deployment/order-service order-service=your-name/order-service:latest
 kubectl get pods
-</pre>
+```
+
 
 Wait until the pod shows `Running`.
 
@@ -225,13 +243,17 @@ Because we are inside a Codespace rather than running locally, the service is no
 
 **1. Start the port-forward (terminal 1)**
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">kubectl port-forward svc/order-service 8080:80
-</pre>
+```
+kubectl port-forward svc/order-service 8080:80
+```
+
 
 **2. Start the traffic loop (terminal 2).** Open a second terminal and run:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">while true; do curl http://localhost:8080/orders; sleep 1; done
-</pre>
+```
+while true; do curl http://localhost:8080/orders; sleep 1; done
+```
+
 
 After: Adding Observability with the Dash0 Operator {#h2-5-after-adding-observability-with-the-dash0-operator}
 --------------------------------------------------------------------------------------------------------------
@@ -244,15 +266,19 @@ Run the install command on a single line to avoid shell parsing errors. Replace 
 
 **1. Add the Helm repo and install the operator (terminal 3)**
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">helm repo add dash0-operator https://dash0hq.github.io/dash0-operator
+```
+helm repo add dash0-operator https://dash0hq.github.io/dash0-operator
 helm repo update dash0-operator
-helm install dash0-operator dash0-operator/dash0-operator --namespace dash0-system --create-namespace --set operator.dash0Export.endpoint=ingress.&lt;your-region&gt;.dash0.com:4317 --set operator.dash0Export.token=&lt;your-auth-token&gt;
-</pre>
+helm install dash0-operator dash0-operator/dash0-operator --namespace dash0-system --create-namespace --set operator.dash0Export.endpoint=ingress.<your-region>.dash0.com:4317 --set operator.dash0Export.token=<your-auth-token>
+```
+
 
 **2. Verify the operator is running**
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">kubectl get pods -n dash0-system
-</pre>
+```
+kubectl get pods -n dash0-system
+```
+
 
 Wait until the operator pod shows `Running`.
 
@@ -268,7 +294,8 @@ Installing the Helm chart alone is not sufficient. The operator also needs a `Da
 
 **1. Create the operator configuration resource**
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">cat &lt;&lt;EOF | kubectl apply -f -
+```
+cat <<EOF | kubectl apply -f -
 apiVersion: operator.dash0.com/v1alpha1
 kind: Dash0OperatorConfiguration
 metadata:
@@ -276,15 +303,17 @@ metadata:
 spec:
   export:
     dash0:
-      endpoint: ingress.&lt;your-region&gt;.dash0.com:4317
+      endpoint: ingress.<your-region>.dash0.com:4317
       authorization:
-        token: &lt;your-auth-token&gt;
+        token: <your-auth-token>
 EOF
-</pre>
+```
+
 
 **2. Enable monitoring for the namespace.** This is the resource that switches on instrumentation for all workloads in the default namespace. The export configuration must be included directly in the resource.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">cat &lt;&lt;EOF | kubectl apply -f -
+```
+cat <<EOF | kubectl apply -f -
 apiVersion: operator.dash0.com/v1alpha1
 kind: Dash0Monitoring
 metadata:
@@ -293,11 +322,12 @@ metadata:
 spec:
   export:
     dash0:
-      endpoint: ingress.&lt;your-region&gt;.dash0.com:4317
+      endpoint: ingress.<your-region>.dash0.com:4317
       authorization:
-        token: &lt;your-auth-token&gt;
+        token: <your-auth-token>
 EOF
-</pre>
+```
+
 
 **Further Reading:**
 
@@ -309,16 +339,20 @@ The operator injects instrumentation at pod startup via an init container. Becau
 
 **1. Restart the deployment**
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">kubectl rollout restart deployment/order-service
+```
+kubectl rollout restart deployment/order-service
 kubectl get pods
-</pre>
+```
+
 
 Wait until the new pod shows `Running`.
 
 **2. Restart the port-forward (terminal 1).** Kill the existing port-forward with Ctrl+C and restart it:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">kubectl port-forward svc/order-service 8080:80
-</pre>
+```
+kubectl port-forward svc/order-service 8080:80
+```
+
 
 The curl loop in terminal 2 will resume automatically.
 

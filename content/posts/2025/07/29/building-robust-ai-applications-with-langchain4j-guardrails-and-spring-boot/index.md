@@ -60,50 +60,54 @@ Let's start by creating a Spring Boot application with the necessary dependencie
 >
 > 
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&lt;dependencies&gt;
-    &lt;!-- Spring Boot Essentials --&gt;
-    &lt;dependency&gt;
-        &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
-        &lt;artifactId&gt;spring-boot-starter-web&lt;/artifactId&gt;
-    &lt;/dependency&gt;
+```
+<dependencies>
+    <!-- Spring Boot Essentials -->
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-web</artifactId>
+    </dependency>
 
-    &lt;dependency&gt;
-        &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
-        &lt;artifactId&gt;spring-boot-starter-validation&lt;/artifactId&gt;
-    &lt;/dependency&gt;
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-validation</artifactId>
+    </dependency>
 
-    &lt;!-- LangChain4j Core --&gt;
-    &lt;dependency&gt;
-        &lt;groupId&gt;dev.langchain4j&lt;/groupId&gt;
-        &lt;artifactId&gt;langchain4j&lt;/artifactId&gt;
-        &lt;version&gt;1.1.0&lt;/version&gt; &lt;!-- ⚠️ Always check for the latest stable version --&gt;
-    &lt;/dependency&gt;
+    <!-- LangChain4j Core -->
+    <dependency>
+        <groupId>dev.langchain4j</groupId>
+        <artifactId>langchain4j</artifactId>
+        <version>1.1.0</version> <!-- ⚠️ Always check for the latest stable version -->
+    </dependency>
 
-    &lt;!-- LangChain4j OpenAI Integration --&gt;
-    &lt;dependency&gt;
-        &lt;groupId&gt;dev.langchain4j&lt;/groupId&gt;
-        &lt;artifactId&gt;langchain4j-open-ai&lt;/artifactId&gt;
-        &lt;version&gt;1.1.0&lt;/version&gt;
-    &lt;/dependency&gt;
+    <!-- LangChain4j OpenAI Integration -->
+    <dependency>
+        <groupId>dev.langchain4j</groupId>
+        <artifactId>langchain4j-open-ai</artifactId>
+        <version>1.1.0</version>
+    </dependency>
 
-    &lt;!-- Testing Support --&gt;
-    &lt;dependency&gt;
-        &lt;groupId&gt;dev.langchain4j&lt;/groupId&gt;
-        &lt;artifactId&gt;langchain4j-test&lt;/artifactId&gt;
-        &lt;version&gt;1.1.0&lt;/version&gt;
-        &lt;scope&gt;test&lt;/scope&gt; &lt;!-- 💡 Keep test dependencies scoped appropriately --&gt;
-    &lt;/dependency&gt;
+    <!-- Testing Support -->
+    <dependency>
+        <groupId>dev.langchain4j</groupId>
+        <artifactId>langchain4j-test</artifactId>
+        <version>1.1.0</version>
+        <scope>test</scope> <!-- 💡 Keep test dependencies scoped appropriately -->
+    </dependency>
 
-    &lt;!-- Metrics and Monitoring --&gt;
-    &lt;dependency&gt;
-        &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
-        &lt;artifactId&gt;spring-boot-starter-actuator&lt;/artifactId&gt;
-    &lt;/dependency&gt;
-&lt;/dependencies&gt;</pre>
+    <!-- Metrics and Monitoring -->
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-actuator</artifactId>
+    </dependency>
+</dependencies>
+```
+
 
 Configure your application:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group=""># application.yml
+```
+# application.yml
 langchain4j:
   open-ai:
     chat-model:
@@ -124,7 +128,9 @@ app:
         enabled: true
         max-requests-per-minute: 10 # 🛡️ Protect against abuse and control costs
     output:
-      max-retries: 3 # 🔄 Balance between reliability and latency</pre>
+      max-retries: 3 # 🔄 Balance between reliability and latency
+```
+
 
 Implementing Input Guardrails {#h2-2-implementing-input-guardrails}
 -------------------------------------------------------------------
@@ -133,18 +139,19 @@ Input guardrails shield your application from malicious, inappropriate, or out-o
 
 ### Content Safety Input Guardrail {#h3-3-content-safety-input-guardrail}
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@Component
+```
+@Component
 public class ContentSafetyInputGuardrail implements InputGuardrail {
 
     // 🚫 Customize this list based on your application's domain and risk profile
-    private static final List&lt;String&gt; PROHIBITED_WORDS = List.of(
+    private static final List<String> PROHIBITED_WORDS = List.of(
             "hack", "exploit", "bypass", "illegal", "fraud", "crack", "breach",
             "penetrate", "malware", "virus", "trojan", "backdoor", "phishing",
             "spam", "scam", "steal", "theft", "identity", "password", "credential"
     );
 
     // 🎭 Detect obfuscated threats using regex patterns
-    private static final List&lt;Pattern&gt; THREAT_PATTERNS = List.of(
+    private static final List<Pattern> THREAT_PATTERNS = List.of(
             Pattern.compile("h[4@]ck", Pattern.CASE_INSENSITIVE), // Catches "h4ck", "h@ck"
             Pattern.compile("cr[4@]ck", Pattern.CASE_INSENSITIVE),
             Pattern.compile("expl[0o]it", Pattern.CASE_INSENSITIVE),
@@ -159,7 +166,7 @@ public class ContentSafetyInputGuardrail implements InputGuardrail {
         String text = originalText.toLowerCase();
 
         // 📏 Length validation should be your first check for performance
-        if (originalText.length() &gt; 1000) {
+        if (originalText.length() > 1000) {
             return failure("Your message is too long. Please keep it under 1000 characters.");
         }
 
@@ -180,13 +187,16 @@ public class ContentSafetyInputGuardrail implements InputGuardrail {
 
         return success();
     }
-}</pre>
+}
+```
+
 
 ### **Smart Context-Aware Guardrail** {#h3-4-smart-context-aware-guardrail}
 
 This guardrail uses conversation history to make intelligent decisions:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@Component
+```
+@Component
 @Slf4j
 public class ContextAwareInputGuardrail implements InputGuardrail {
 
@@ -204,14 +214,14 @@ public class ContextAwareInputGuardrail implements InputGuardrail {
         }
 
         // Check for repetitive questions
-        List&lt;String&gt; previousQuestions = extractUserQuestions(memory);
+        List<String> previousQuestions = extractUserQuestions(memory);
         String currentQuestion = currentMessage.singleText();
 
         long similarQuestions = previousQuestions.stream()
-            .filter(q -&gt; calculateSimilarity(q, currentQuestion) &gt; SIMILARITY_THRESHOLD)
+            .filter(q -> calculateSimilarity(q, currentQuestion) > SIMILARITY_THRESHOLD)
             .count();
 
-        if (similarQuestions &gt;= MAX_SIMILAR_QUESTIONS) {
+        if (similarQuestions >= MAX_SIMILAR_QUESTIONS) {
             // 📝 Log suspicious behavior for security monitoring
             log.info("User asking repetitive questions: {}", currentQuestion);
             return failure("You've asked similar questions multiple times. Please try a different topic or rephrase your question.");
@@ -225,9 +235,9 @@ public class ContextAwareInputGuardrail implements InputGuardrail {
         return success();
     }
 
-    private List&lt;String&gt; extractUserQuestions(ChatMemory memory) {
+    private List<String> extractUserQuestions(ChatMemory memory) {
         return memory.messages().stream()
-            .filter(msg -&gt; msg instanceof UserMessage) // 🎯 Type-safe filtering
+            .filter(msg -> msg instanceof UserMessage) // 🎯 Type-safe filtering
             .map(ChatMessage::text)
             .collect(Collectors.toList());
     }
@@ -235,13 +245,13 @@ public class ContextAwareInputGuardrail implements InputGuardrail {
     private double calculateSimilarity(String s1, String s2) {
         // 🧮 Simple Jaccard similarity - in production, use more sophisticated methods
         // Consider: Levenshtein distance, cosine similarity, or semantic embeddings
-        Set&lt;String&gt; set1 = new HashSet&lt;&gt;(Arrays.asList(s1.toLowerCase().split("\\s+")));
-        Set&lt;String&gt; set2 = new HashSet&lt;&gt;(Arrays.asList(s2.toLowerCase().split("\\s+")));
+        Set<String> set1 = new HashSet<>(Arrays.asList(s1.toLowerCase().split("\\s+")));
+        Set<String> set2 = new HashSet<>(Arrays.asList(s2.toLowerCase().split("\\s+")));
 
-        Set&lt;String&gt; intersection = new HashSet&lt;&gt;(set1);
+        Set<String> intersection = new HashSet<>(set1);
         intersection.retainAll(set2);
 
-        Set&lt;String&gt; union = new HashSet&lt;&gt;(set1);
+        Set<String> union = new HashSet<>(set1);
         union.addAll(set2);
 
         return union.isEmpty() ? 0 : (double) intersection.size() / union.size();
@@ -250,25 +260,28 @@ public class ContextAwareInputGuardrail implements InputGuardrail {
     private boolean isConversationTooFast(ChatMemory memory) {
         // ⏱️ TODO: Implement timestamp checking
         // Check if user is sending messages too quickly (potential spam)
-        List&lt;ChatMessage&gt; recentMessages = memory.messages();
-        if (recentMessages.size() &lt; 5) return false;
+        List<ChatMessage> recentMessages = memory.messages();
+        if (recentMessages.size() < 5) return false;
 
         // In a real implementation, you'd check timestamps
         // This is a simplified example
         return false;
     }
-}</pre>
+}
+```
+
 
 ### **Intelligent Input Sanitizer** {#h3-5-intelligent-input-sanitizer}
 
 This guardrail not only validates but also improves input quality:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@Component
+```
+@Component
 public class IntelligentInputSanitizerGuardrail implements InputGuardrail {
 
     // 🌐 Comprehensive URL pattern that handles most common URL formats
     private static final Pattern URL_PATTERN = Pattern.compile(
-        "https?://[\\w\\-._~:/?#\\[\\]@!$&amp;'()*+,;=.]+", 
+        "https?://[\\w\\-._~:/?#\\[\\]@!$&'()*+,;=.]+", 
         Pattern.CASE_INSENSITIVE
     );
 
@@ -293,10 +306,10 @@ public class IntelligentInputSanitizerGuardrail implements InputGuardrail {
 
         // 🛡️ Remove potentially harmful characters while preserving meaning
         // These characters could be used for injection attacks
-        text = text.replaceAll("[&lt;&gt;{}\\[\\]|\\\\]", "");
+        text = text.replaceAll("[<>{}\\[\\]|\\\\]", "");
 
         // ✂️ Smart truncation that preserves sentence structure
-        if (text.length() &gt; 500) {
+        if (text.length() > 500) {
             text = smartTruncate(text, 500);
         }
 
@@ -308,17 +321,17 @@ public class IntelligentInputSanitizerGuardrail implements InputGuardrail {
     }
 
     private String smartTruncate(String text, int maxLength) {
-        if (text.length() &lt;= maxLength) return text;
+        if (text.length() <= maxLength) return text;
 
         // 📍 Try to cut at sentence boundary for better readability
         int lastPeriod = text.lastIndexOf('.', maxLength);
-        if (lastPeriod &gt; maxLength * 0.8) { // 80% threshold ensures we don't cut too early
+        if (lastPeriod > maxLength * 0.8) { // 80% threshold ensures we don't cut too early
             return text.substring(0, lastPeriod + 1);
         }
 
         // 🔤 Otherwise, cut at word boundary
         int lastSpace = text.lastIndexOf(' ', maxLength);
-        if (lastSpace &gt; maxLength * 0.8) {
+        if (lastSpace > maxLength * 0.8) {
             return text.substring(0, lastSpace) + "...";
         }
 
@@ -328,13 +341,15 @@ public class IntelligentInputSanitizerGuardrail implements InputGuardrail {
 
     private String normalizeText(String text) {
         // 🔧 Fix common issues
-        text = text.replaceAll("\\bi\\s", "I ");  // i -&gt; I
+        text = text.replaceAll("\\bi\\s", "I ");  // i -> I
         text = text.replaceAll("\\s+([.,!?])", "$1");  // Remove space before punctuation
         text = text.replaceAll("([.,!?])(\\w)", "$1 $2");  // Add space after punctuation
 
         return text;
     }
-}</pre>
+}
+```
+
 
 <br />
 
@@ -347,16 +362,17 @@ Output guardrails ensure that LLM responses meet your quality standards and busi
 
 ### Professional Tone Output Guardrail {#h3-7-professional-tone-output-guardrail}
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@Component
+```
+@Component
 public class ProfessionalToneOutputGuardrail implements OutputGuardrail {
 
     // 🚫 Phrases that damage professional credibility
-    private static final List&lt;String&gt; UNPROFESSIONAL_PHRASES = List.of(
+    private static final List<String> UNPROFESSIONAL_PHRASES = List.of(
             "that's weird", "that's dumb", "whatever", "i don't know"
     );
 
     // ✨ Elements that enhance professional communication
-    private static final List&lt;String&gt; REQUIRED_ELEMENTS = List.of(
+    private static final List<String> REQUIRED_ELEMENTS = List.of(
             "thank you",
             "please",
             "happy to help"
@@ -376,7 +392,7 @@ public class ProfessionalToneOutputGuardrail implements OutputGuardrail {
         }
 
         // 📏 Enforce response length limits for better UX
-        if (text.length() &gt; 1000) {
+        if (text.length() > 1000) {
             return reprompt("Response too long",
                     "Please keep your response under 1000 characters.");
         }
@@ -393,13 +409,16 @@ public class ProfessionalToneOutputGuardrail implements OutputGuardrail {
 
         return success();
     }
-}</pre>
+}
+```
+
 
 <br />
 
 ### Hallucination Detection Guardrail {#h3-8-hallucination-detection-guardrail}
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">package ca.bazlur.guardrailsdemo.guardrail;
+```
+package ca.bazlur.guardrailsdemo.guardrail;
 
 import dev.langchain4j.guardrail.OutputGuardrail;
 import dev.langchain4j.guardrail.OutputGuardrailRequest;
@@ -417,7 +436,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class HallucinationDetectionGuardrail implements OutputGuardrail {
 
-    private static final Set&lt;String&gt; UNCERTAINTY_MARKERS = Set.of(
+    private static final Set<String> UNCERTAINTY_MARKERS = Set.of(
             "might be", "could be", "possibly", "potentially", "may",
             "i think", "i believe", "it seems", "apparently", "probably"
     );
@@ -439,22 +458,22 @@ public class HallucinationDetectionGuardrail implements OutputGuardrail {
             return checkForUnsubstantiatedClaims(responseText);
         }
 
-        Set&lt;String&gt; responseFacts = extractKeyFacts(responseText);
+        Set<String> responseFacts = extractKeyFacts(responseText);
 
         // Extract facts from the RAG context
-        Set&lt;String&gt; contextFacts = new HashSet&lt;&gt;();
-        augmentationResult.contents().forEach(content -&gt;
+        Set<String> contextFacts = new HashSet<>();
+        augmentationResult.contents().forEach(content ->
                 contextFacts.addAll(extractKeyFacts(content.textSegment().text()))
         );
 
         // Check if response facts are grounded in context
         long ungroundedFacts = responseFacts.stream()
-                .filter(fact -&gt; !isFactGrounded(fact, contextFacts))
+                .filter(fact -> !isFactGrounded(fact, contextFacts))
                 .count();
 
         double ungroundedRatio = responseFacts.isEmpty() ? 0 : (double) ungroundedFacts / responseFacts.size();
 
-        if (ungroundedRatio &gt; 0.3) { // More than 30% ungrounded
+        if (ungroundedRatio > 0.3) { // More than 30% ungrounded
             log.warn("High hallucination risk detected: {}% ungrounded facts", Math.round(ungroundedRatio * 100));
             return reprompt(
                     "Response contains potentially hallucinated information",
@@ -465,14 +484,14 @@ public class HallucinationDetectionGuardrail implements OutputGuardrail {
         return success();
     }
 
-    private Set&lt;String&gt; extractKeyFacts(String text) {
+    private Set<String> extractKeyFacts(String text) {
         // Extract sentences that contain factual claims
-        Set&lt;String&gt; facts = new HashSet&lt;&gt;();
+        Set<String> facts = new HashSet<>();
         String[] sentences = text.split("[.!?]+");
 
         for (String sentence : sentences) {
             String trimmed = sentence.trim();
-            if (trimmed.length() &gt; 10 &amp;&amp; containsFactualClaim(trimmed)) {
+            if (trimmed.length() > 10 && containsFactualClaim(trimmed)) {
                 facts.add(trimmed.toLowerCase());
             }
         }
@@ -487,20 +506,20 @@ public class HallucinationDetectionGuardrail implements OutputGuardrail {
                 lower.matches(".*(fact|data|study|research|report|according to).*");
     }
 
-    private boolean isFactGrounded(String fact, Set&lt;String&gt; contextFacts) {
+    private boolean isFactGrounded(String fact, Set<String> contextFacts) {
         // Check if the fact has significant overlap with context
         return contextFacts.stream()
-                .anyMatch(contextFact -&gt; calculateSimilarity(fact, contextFact) &gt; 0.6);
+                .anyMatch(contextFact -> calculateSimilarity(fact, contextFact) > 0.6);
     }
 
     private double calculateSimilarity(String fact1, String fact2) {
-        Set&lt;String&gt; words1 = new HashSet&lt;&gt;(Arrays.asList(fact1.split("\\s+")));
-        Set&lt;String&gt; words2 = new HashSet&lt;&gt;(Arrays.asList(fact2.split("\\s+")));
+        Set<String> words1 = new HashSet<>(Arrays.asList(fact1.split("\\s+")));
+        Set<String> words2 = new HashSet<>(Arrays.asList(fact2.split("\\s+")));
 
-        Set&lt;String&gt; intersection = new HashSet&lt;&gt;(words1);
+        Set<String> intersection = new HashSet<>(words1);
         intersection.retainAll(words2);
 
-        Set&lt;String&gt; union = new HashSet&lt;&gt;(words1);
+        Set<String> union = new HashSet<>(words1);
         union.addAll(words2);
 
         return union.isEmpty() ? 0 : (double) intersection.size() / union.size();
@@ -511,14 +530,14 @@ public class HallucinationDetectionGuardrail implements OutputGuardrail {
 
         // Check for absolute statements without uncertainty markers
         long absoluteStatements = Arrays.stream(text.split("[.!?]+"))
-                .filter(s -&gt; s.matches(".*(always|never|all|every|none|must|definitely|certainly|guaranteed).*"))
+                .filter(s -> s.matches(".*(always|never|all|every|none|must|definitely|certainly|guaranteed).*"))
                 .count();
 
         // Check if there are uncertainty markers to balance absolute claims
         boolean hasUncertaintyMarkers = UNCERTAINTY_MARKERS.stream()
                 .anyMatch(lowerText::contains);
 
-        if (absoluteStatements &gt; 2 &amp;&amp; !hasUncertaintyMarkers) {
+        if (absoluteStatements > 2 && !hasUncertaintyMarkers) {
             return reprompt(
                     "Response contains unsubstantiated absolute claims",
                     "Please avoid absolute statements unless you're certain. Use qualified language when appropriate."
@@ -527,7 +546,9 @@ public class HallucinationDetectionGuardrail implements OutputGuardrail {
 
         return success();
     }
-}</pre>
+}
+```
+
 
 <br />
 
@@ -538,7 +559,8 @@ Testing Your Guardrails {#h2-9-testing-your-guardrails}
 
 Before integrating guardrails into your AI services, it's crucial to thoroughly test them. Here's a comprehensive test suite for the ContentSafetyInputGuardrail:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">package ca.bazlur.guardrailsdemo.guardrail;
+```
+package ca.bazlur.guardrailsdemo.guardrail;
 
 import dev.langchain4j.data.message.UserMessage;
 import dev.langchain4j.guardrail.GuardrailResult;
@@ -570,7 +592,7 @@ class ContentSafetyInputGuardrailTest {
     @Test
     void shouldRejectEmptyInput() {
         // 🚫 Empty strings should throw exception
-        assertThrows(IllegalArgumentException.class, () -&gt; {
+        assertThrows(IllegalArgumentException.class, () -> {
             guardrail.validate(UserMessage.from(""));
         });
     }
@@ -578,7 +600,7 @@ class ContentSafetyInputGuardrailTest {
     @Test
     void shouldRejectBlankInput() {
         // 🚫 Whitespace-only input should also be rejected
-        assertThrows(IllegalArgumentException.class, () -&gt; {
+        assertThrows(IllegalArgumentException.class, () -> {
             guardrail.validate(UserMessage.from("   "));
         });
     }
@@ -642,7 +664,7 @@ class ContentSafetyInputGuardrailTest {
     @Test
     void shouldRejectSuspiciousCharacterSubstitutions() {
         // 🔍 Test detection of excessive special characters
-        var result = guardrail.validate(UserMessage.from("H3!!0 @#$%^ &amp;*()_ +"));
+        var result = guardrail.validate(UserMessage.from("H3!!0 @#$%^ &*()_ +"));
         assertThat(result)
                 .hasFailures()
                 .hasResult(GuardrailResult.Result.FAILURE)
@@ -742,7 +764,9 @@ class ContentSafetyInputGuardrailTest {
                 .isSuccessful()
                 .hasResult(GuardrailResult.Result.SUCCESS);
     }
-}</pre>
+}
+```
+
 
 <br />
 
@@ -760,16 +784,17 @@ Creating AI Services with Guardrails {#h2-10-creating-ai-services-with-guardrail
 
 Now let's combine our guardrails into comprehensive AI services.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@Component
+```
+@Component
 public class ProfessionalToneOutputGuardrail implements OutputGuardrail {
 
     // 🚫 Phrases that damage professional credibility
-    private static final List&lt;String&gt; UNPROFESSIONAL_PHRASES = List.of(
+    private static final List<String> UNPROFESSIONAL_PHRASES = List.of(
             "that's weird", "that's dumb", "whatever", "i don't know"
     );
 
     // ✨ Elements that enhance professional communication
-    private static final List&lt;String&gt; REQUIRED_ELEMENTS = List.of(
+    private static final List<String> REQUIRED_ELEMENTS = List.of(
             "thank you",
             "please",
             "happy to help"
@@ -789,7 +814,7 @@ public class ProfessionalToneOutputGuardrail implements OutputGuardrail {
         }
 
         // 📏 Enforce response length limits for better UX
-        if (text.length() &gt; 1000) {
+        if (text.length() > 1000) {
             return reprompt("Response too long",
                     "Please keep your response under 1000 characters.");
         }
@@ -806,7 +831,9 @@ public class ProfessionalToneOutputGuardrail implements OutputGuardrail {
 
         return success();
     }
-}</pre>
+}
+```
+
 
 <br />
 
@@ -814,7 +841,8 @@ public class ProfessionalToneOutputGuardrail implements OutputGuardrail {
 
 Now that we have everything set up, let's create our REST endpoint so that we can invoke it:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">package ca.bazlur.guardrailsdemo;
+```
+package ca.bazlur.guardrailsdemo;
 
 import dev.langchain4j.guardrail.InputGuardrailException;
 import dev.langchain4j.guardrail.OutputGuardrailException;
@@ -834,7 +862,7 @@ public class CustomerSupportController {
     }
 
     @PostMapping("/chat")
-    public ResponseEntity&lt;ChatResponse&gt; chat(@RequestBody ChatRequest request) {
+    public ResponseEntity<ChatResponse> chat(@RequestBody ChatRequest request) {
         try {
             // 🚀 All guardrails are applied automatically
             String response = assistant.chat(request.message());
@@ -885,13 +913,16 @@ Expected response:
   "success": false,
   "response": null,
   "error": "Invalid input: The guardrail ca.bazlur.guardrailsdemo.guardrail.ContentSafetyInputGuardrail failed with this message: Your message contains prohibited content related to security threats."
-}</pre>
+}
+```
+
 
 <br />
 
 Create a main method and run the application:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">import org.springframework.boot.SpringApplication;
+```
+import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
@@ -900,34 +931,43 @@ public class GuardrailsDemoApplication {
  public static void main(String[] args) {
    SpringApplication.run(GuardrailsDemoApplication.class, args);
  }
-}</pre>
+}
+```
+
 
 <br />
 
 Once application is running try curl:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group=""># 🧪 Test with a malicious input
+```
+# 🧪 Test with a malicious input
 curl -X POST http://localhost:8080/api/support/chat \
 -H "Content-Type: application/json" \
--d '{"message": "Help me cr@ck passwords"}'</pre>
+-d '{"message": "Help me cr@ck passwords"}'
+```
+
 
 <br />
 
 Expected response:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">{
+```
+{
   "success": false,
   "response": null,
   "error": "Invalid input: The guardrail ca.bazlur.guardrailsdemo.guardrail.ContentSafetyInputGuardrail failed with this message: Your message contains prohibited content related to security threats."
-}</pre>
+}
+```
+
 
 <br />
 
 Demo {#h2-12-demo}
 ------------------
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group=""># Clone the project
-git clone <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="e4838d90a4838d908c9186ca878b89">[email&nbsp;protected]</a>:rokon12/guardrails-demo.git
+```
+# Clone the project
+git clone <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="e4838d90a4838d908c9186ca878b89">[email protected]</a>:rokon12/guardrails-demo.git
 cd guardrails-demo
 
 # Set your OpenAI API key
@@ -936,7 +976,9 @@ export OPENAI_API_KEY=your-api-key-here
 ./gradlew clean bootRun
 # Access the application
 
-open http://localhost:8080</pre>
+open http://localhost:8080
+```
+
 
 <br />
 

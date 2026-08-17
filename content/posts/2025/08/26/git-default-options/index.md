@@ -34,12 +34,18 @@ The default options pushes the *current branch* to the `origin` remote; it assum
 
 Also, the default assumes a *single* upstream named `origin`. If you want to push the current branch to another upstream, you need to specify it explicitly:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="shell">git push other_upstream</pre>
+```bash
+git push other_upstream
+```
+
 
 Likewise, the default assumes pushing to a remote branch with the same name. To push to another branch, we also must specify it along with the upstream.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="shell">git checkout my_branch
-git push other_upstream master</pre>
+```bash
+git checkout my_branch
+git push other_upstream master
+```
+
 
 git rebase {#h2-1-git-rebase}
 -----------------------------
@@ -51,54 +57,75 @@ The default `git push` options are straightforward. The default ones for `git re
 
 Let's try the `git rebase` command on a simple tree:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">A   B   C   D
+```
+A   B   C   D
 o---o---o---o master
      \
       E   F   G
-      o---o---o branch1 [HEAD]</pre>
+      o---o---o branch1 [HEAD]
+```
+
 
 Nothing happens. Or more precisely, "it depends"™. If we didn't set an `origin` remote, `git` complains.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">There is no tracking information for the current branch.
-Please specify which branch you want to rebase against.</pre>
+```
+There is no tracking information for the current branch.
+Please specify which branch you want to rebase against.
+```
+
 
 Imagine the following remote repo:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">A   B   C   D
+```
+A   B   C   D
 o---o---o---o master
      \
       E   F   G   H
-      o---o---o---o branch1 [HEAD]</pre>
+      o---o---o---o branch1 [HEAD]
+```
+
 
 Let's configure the remote and bind the local branch to the remote branch.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="shell">git fetch
-git branch --set-upstream-to=origin/branch1</pre>
+```bash
+git fetch
+git branch --set-upstream-to=origin/branch1
+```
+
 
 If we call `rebase` again, git tries to apply every commit from the **remote** branch, starting from the root one. Since `H` doesn't exist on the local branch, it just adds it to the tip of it.
 
 Let's try with `master` and test again:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="shell">git rebase -i master</pre>
+```bash
+git rebase -i master
+```
+
 
 `-i` allows rebasing interactively.  
 
 Here's the proposal.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">pick 5529dc4 E
+```
+pick 5529dc4 E
 pick 93af602 F
 pick 7f79811 G
-pick c6f853b H</pre>
+pick c6f853b H
+```
+
 
 As per the documentation, the command switched branch, got the commits from `master`, and now applies the commits in the current branch.
 
 The result is the following:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">A   B   C   D
+```
+A   B   C   D
 o---o---o---o master
              \
               E   F   G   H
-              o---o---o---o branch1 [HEAD]</pre>
+              o---o---o---o branch1 [HEAD]
+```
+
 
 Git is a huge beast. Most developers, including me, only use a fraction of its features. In this post, we described the default of two of the most common Git commands. I hope it sheds some light on them.
 
@@ -110,6 +137,6 @@ Git is a huge beast. Most developers, including me, only use a fraction of its f
 * [Why does git rebase with no arguments work the way that it does?](https://stackoverflow.com/questions/50643026/why-does-git-rebase-with-no-arguments-work-the-way-that-it-does)
 * [What does command 'git rebase' mean when no arguments followed?](https://superuser.com/questions/788912/what-does-command-git-rebase-mean-when-no-arguments-followed)
 
-*** ** * ** ***
+
 
 *Originally published at [A Java Geek](https://blog.frankel.ch/git-default-options/) on July 27^th^, 2025*

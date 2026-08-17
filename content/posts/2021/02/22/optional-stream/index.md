@@ -22,53 +22,65 @@ This week, I learned about a nifty "new" feature of `Optional` that I want to sh
 
 Let's start with the following sequence to compute the total price of an order:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public BigDecimal getOrderPrice(Long orderId) {
-    List&lt;OrderLine&gt; lines = orderRepository.findByOrderId(orderId);
+```java
+public BigDecimal getOrderPrice(Long orderId) {
+    List<OrderLine> lines = orderRepository.findByOrderId(orderId);
     BigDecimal price = BigDecimal.ZERO;       // 1
     for (OrderLine line : lines) {
         price = price.add(line.getPrice());   // 2
     }
     return price;
-}</pre>
+}
+```
+
 
 1. Provide an accumulator variable for the price
 2. Add each line's price to the total price
 
 Nowadays, it's probably more adequate to use streams instead of iterations. The following snippet is the equivalent to the previous one:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public BigDecimal getOrderPrice(Long orderId) {
-    List&lt;OrderLine&gt; lines = orderRepository.findByOrderId(orderId);
+```java
+public BigDecimal getOrderPrice(Long orderId) {
+    List<OrderLine> lines = orderRepository.findByOrderId(orderId);
     return lines.stream()
                 .map(OrderLine::getPrice)
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
-}</pre>
+}
+```
+
 
 Let's focus on the `orderId` variable: it may be `null`.
 
 The imperative way to handle `null` values is to check it at the beginning of the method - and eventually throw:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public BigDecimal getOrderPrice(Long orderId) {
+```java
+public BigDecimal getOrderPrice(Long orderId) {
     if (orderId == null) {
         throw new IllegalArgumentException("Order ID cannot be null");
     }
-    List&lt;OrderLine&gt; lines = orderRepository.findByOrderId(orderId);
+    List<OrderLine> lines = orderRepository.findByOrderId(orderId);
     return lines.stream()
                 .map(OrderLine::getPrice)
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
-}</pre>
+}
+```
+
 
 The functional way is to wrap the `orderId` in an `Optional`. This is what the code looks like using `Optional`:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public BigDecimal getOrderPrice(Long orderId) {
+```java
+public BigDecimal getOrderPrice(Long orderId) {
     return Optional.ofNullable(orderId)                            // 1
             .map(orderRepository::findByOrderId)                   // 2
-            .flatMap(lines -&gt; {                                    // 3
+            .flatMap(lines -> {                                    // 3
                 BigDecimal sum = lines.stream()
                         .map(OrderLine::getPrice)
                         .reduce(BigDecimal.ZERO, BigDecimal::add);
                 return Optional.of(sum);                           // 4
             }).orElse(BigDecimal.ZERO);                            // 5
-}</pre>
+}
+```
+
 
 1. Wrap the `orderId` in an `Optional`
 2. Find relevant order lines
@@ -80,14 +92,17 @@ The functional way is to wrap the `orderId` in an `Optional`. This is what the c
 
 Fortunately, `Optional` offers a `stream()` method (since Java 9). It allows to simplify the functional pipeline:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public BigDecimal getOrderPrice(Long orderId) {
+```java
+public BigDecimal getOrderPrice(Long orderId) {
     return Optional.ofNullable(orderId)
             .stream()
             .map(orderRepository::findByOrderId)
             .flatMap(Collection::stream)
             .map(OrderLine::getPrice)
             .reduce(BigDecimal.ZERO, BigDecimal::add);
-}</pre>
+}
+```
+
 
 Here's the summary of the type at each line:
 

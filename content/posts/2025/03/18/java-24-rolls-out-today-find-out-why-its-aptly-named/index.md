@@ -90,11 +90,17 @@ The reason for handling young and old objects separately stems from the [weak ge
 
 Shenandoah used to behave in a non-generational way only. Running it required the following command-line configuration:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash">$ java ... -XX:+UseShenandoahGC</pre>
+```bash
+$ java ... -XX:+UseShenandoahGC
+```
+
 
 To run your workload with generational Shenandoah in Java 24, the following configuration is needed:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">$ java ... -XX:+UseShenandoahGC -XX:+UnlockExperimentalVMOptions -XX:ShenandoahGCMode=generational</pre>
+```java
+$ java ... -XX:+UseShenandoahGC -XX:+UnlockExperimentalVMOptions -XX:ShenandoahGCMode=generational
+```
+
 
 As you can see, generational Shenandoah has been introduced alongside non-generational Shenandoah. In a future release we can expect generational Shenandoah to become the default configuration.
 
@@ -112,14 +118,18 @@ JEP 450 proposes to reduce the object header size to 64 bits, by merging the two
 
 The mark word comes first, has the size of a machine address, and contains:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash">Mark Word (normal):
+```bash
+Mark Word (normal):
  64                     39                              8    3  0
   [.......................HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH.AAAA.TT]
-         (Unused)                      (Hash Code)     (GC Age)(Tag)</pre>
+         (Unused)                      (Hash Code)     (GC Age)(Tag)
+```
+
 
 The class word comes after the mark word. It takes one of two shapes, depending on whether compressed class pointers are enabled:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">Class Word (uncompressed):
+```
+Class Word (uncompressed):
 64                                                               0
  [cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc]
                           (Class Pointer)
@@ -127,7 +137,9 @@ The class word comes after the mark word. It takes one of two shapes, depending 
 Class Word (compressed):
 32                               0
  [CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC]
-     (Compressed Class Pointer)</pre>
+     (Compressed Class Pointer)
+```
+
 
 The class word is never overwritten, which means that an object's type information is always available, so no additional steps are required to check a type or invoke a method.
 
@@ -135,11 +147,14 @@ The class word is never overwritten, which means that an object's type informati
 
 For compact object headers, the division between the mark and class word is removed:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">Header (compact):
+```
+Header (compact):
 64                    42                             11   7   3  0
  [CCCCCCCCCCCCCCCCCCCCCCHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHVVVVAAAASTT]
  (Compressed Class Pointer)       (Hash Code)         /(GC Age)^(Tag)
-                              (Valhalla-reserved bits) (Self Forwarded Tag)</pre>
+                              (Valhalla-reserved bits) (Self Forwarded Tag)
+```
+
 
 As you can see, the size of the hash code does not change.
 > Note that four bits are reserved for future use by [Project Valhalla](https://openjdk.org/projects/valhalla/).
@@ -152,7 +167,10 @@ This experimental feature will have a broad impact on real-world applications. T
 
 Compact object headers can be enabled as follows:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">$ java ... -XX:+UnlockExperimentalVMOptions -XX:+UseCompactObjectHeaders</pre>
+```
+$ java ... -XX:+UnlockExperimentalVMOptions -XX:+UseCompactObjectHeaders
+```
+
 
 ##### More Information
 
@@ -212,17 +230,26 @@ Creating a cache takes two steps.
 
 First, you should run the application once in a training run, to record its AOT configuration (in this case into the file `app.aotconf`):
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">$ java -XX:AOTMode=record -XX:AOTConfiguration=app.aotconf -cp app.jar com.example.App ...</pre>
+```
+$ java -XX:AOTMode=record -XX:AOTConfiguration=app.aotconf -cp app.jar com.example.App ...
+```
+
 
 > Generally speaking, a production run is a good candidate for the training run, as training runs aim to capture application configuration and execution history. In cases where using a production run is impractical (due to activities or accessing databases), it's recommended to create a synthetic training run that closely resembles production runs, fully configuring itself and testing typical code paths. This can be done by adding a second main class, which invokes the production main class while using a temporary log directory, local network settings, and a mocked database if necessary. You might already have such a main class in the form of an integration test.
 
 Second, use the configuration to create the cache, in the file `app.aot`:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">$ java -XX:AOTMode=create -XX:AOTConfiguration=app.aotconf -XX:AOTCache=app.aot -cp app.jar</pre>
+```
+$ java -XX:AOTMode=create -XX:AOTConfiguration=app.aotconf -XX:AOTCache=app.aot -cp app.jar
+```
+
 
 Subsequently, to run the application with the cache:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">$ java -XX:AOTCache=app.aot -cp app.jar com.example.App ...</pre>
+```
+$ java -XX:AOTCache=app.aot -cp app.jar com.example.App ...
+```
+
 
 The AOT cache moves the tasks of reading, parsing, loading, and linking (typically performed just-in-time during program execution) to an earlier stage when the cache is created.  
 
@@ -232,18 +259,21 @@ As a result, the program starts up more quickly in the execution phase since its
 
 To illustrate this, let's look at a short pragram that uses the Stream API and thus causes almost 600 JDK classes to be read, parsed, loaded, and linked:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">import java.util.*;
+```java
+import java.util.*;
 import java.util.stream.*;
 
 public class HelloStream {
     public static void main(String[] args) {
         var words = List.of("hello", "fuzzy", "world");
         var greeting = words.stream()
-            .filter(w -&gt; !w.contains("z"))
+            .filter(w -> !w.contains("z"))
             .collect(Collectors.joining(", "));
         System.out.println(greeting);  // hello, world
     }
-}</pre>
+}
+```
+
 
 This program runs in 0.031 seconds on JDK 23.  
 
@@ -275,7 +305,8 @@ This means that virtual threads are mounted and unmounted frequently, without bl
 
 But here's the catch: a virtual thread cannot unmount from its carrier when it runs code inside a `synchronized` block. Consider the class below, which is run by a virtual thread, tracking the number of customers in a store:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">class CustomerCounter {
+```java
+class CustomerCounter {
     private final StoreRepository storeRepo;
     private int customerCount;
     CustomerCounter(StoreRepository storeRepo) {
@@ -283,14 +314,16 @@ But here's the catch: a virtual thread cannot unmount from its carrier when it r
         customerCount = 0;
     }
     synchronized void customerEnters() {
-        if (customerCount &lt; storeRepo.fetchCapacity()) {
+        if (customerCount < storeRepo.fetchCapacity()) {
             customerCount++;
         }
     }
     synchronized void customerExits() {
         customerCount--;
     }
-}</pre>
+}
+```
+
 
 If the `storeRepo.fetchCapacity()` method call blocks, it would be nice if the running virtual thread would unmount from its carrier, releasing a platform thread for other virtual threads to be mounted.  
 
@@ -353,7 +386,8 @@ A new class, [`javax.crypto.KDF`](https://cr.openjdk.org/~kdriver/KDF-JEP/javado
 
 To get an idea of how to use this API, see the code example below (taken from the JEP):
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">// Create a KDF object for the specified algorithm
+```java
+// Create a KDF object for the specified algorithm
 KDF hkdf = KDF.getInstance("HKDF-SHA256"); 
 
 // Create an ExtractExpand parameter specification
@@ -365,7 +399,9 @@ AlgorithmParameterSpec params =
 // Derive a 32-byte AES key
 SecretKey key = hkdf.deriveKey("AES", params);
 
-// Additional deriveKey calls can be made with the same KDF object</pre>
+// Additional deriveKey calls can be made with the same KDF object
+```
+
 
 ##### Preview Warning
 
@@ -397,27 +433,36 @@ Furthermore, a new standard algorithm family name ("ML-KEM") will be defined in 
 
 You can generate an ML-KEM key pair in one of three ways:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">KeyPairGenerator generator = KeyPairGenerator.getInstance("ML-KEM");
+```java
+KeyPairGenerator generator = KeyPairGenerator.getInstance("ML-KEM");
 generator.initialize(NamedParameterSpec.ML_KEM_512);
 KeyPair keyPair = generator.generateKeyPair(); // an ML-KEM-512 key pair
 KeyPairGenerator generator = KeyPairGenerator.getInstance("ML-KEM");
 KeyPair keyPair = generator.generateKeyPair(); // an ML-KEM-768 key pair by default
 KeyPairGenerator generator = KeyPairGenerator.getInstance("ML-KEM-1024");
-KeyPair keyPair = generator.generateKeyPair(); // an ML-KEM-1024 key pair</pre>
+KeyPair keyPair = generator.generateKeyPair(); // an ML-KEM-1024 key pair
+```
+
 
 ##### keytool
 
 The `keytool` command will support generating ML-KEM key pairs and certificates:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash">$ keytool -keystore ks -storepass changeit -genkeypair -alias ec \
+```bash
+$ keytool -keystore ks -storepass changeit -genkeypair -alias ec \
           -keyalg ec -dname CN=ec -ext bc
 $ keytool -keystore ks -storepass changeit -genkeypair -alias mlkem \
-          -keyalg ML-KEM -groupname ML-KEM-768 -dname CN=ML-KEM -signer ec</pre>
+          -keyalg ML-KEM -groupname ML-KEM-768 -dname CN=ML-KEM -signer ec
+```
+
 
 The parameter-set name (`ML-KEM-768`) can also be provided directly with the `-keyalg` option:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">$ keytool -keystore ks -storepass changeit -genkeypair -alias mlkem2 \
-          -keyalg ML-KEM-768 -dname CN=ML-KEM2 -signer ec</pre>
+```
+$ keytool -keystore ks -storepass changeit -genkeypair -alias mlkem2 \
+          -keyalg ML-KEM-768 -dname CN=ML-KEM2 -signer ec
+```
+
 
 ##### Encapsulating and Decapsulating Keys
 
@@ -425,18 +470,24 @@ You can use the ML-KEM `KEM` implementation to negotiate a shared secret key.
 
 For example, a sender can call the encapsulation function to get a secret key and a key encapsulation message:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">KEM ks = KEM.getInstance("ML-KEM");
+```java
+KEM ks = KEM.getInstance("ML-KEM");
 KEM.Encapsulator enc = ks.newEncapsulator(publicKey);
 KEM.Encapsulated encap = enc.encapsulate();
 byte[] msg = encap.encapsulation();     // send this to receiver
-SecretKey sks = encap.key();</pre>
+SecretKey sks = encap.key();
+```
+
 
 A receiver can then call the decapsulation function to recover the secret key from the key encapsulation message sent by the sender:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">byte[] msg = ...;                       // received from sender
+```java
+byte[] msg = ...;                       // received from sender
 KEM kr = KEM.getInstance("ML-KEM");
 KEM.Decapsulator dec = kr.newDecapsulator(privateKey);
-SecretKey skr = dec.decapsulate(msg);</pre>
+SecretKey skr = dec.decapsulate(msg);
+```
+
 
 Both `sks` and `skr` now contain the same key material, which is known only to the sender and the receiver.
 
@@ -458,28 +509,37 @@ Furthermore, a new standard algorithm family name ("ML-DSA") will be defined in 
 
 You can generate an ML-DSA key pair in one of three ways:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">KeyPairGenerator generator = KeyPairGenerator.getInstance("ML-DSA");
+```java
+KeyPairGenerator generator = KeyPairGenerator.getInstance("ML-DSA");
 generator.initialize(NamedParameterSpec.ML_DSA_44);
 KeyPair keyPair = generator.generateKeyPair(); // an ML-DSA-44 key pair
 KeyPairGenerator generator = KeyPairGenerator.getInstance("ML-DSA");
 KeyPair keyPair = generator.generateKeyPair(); // an ML-DSA-65 key pair by default
 KeyPairGenerator generator = KeyPairGenerator.getInstance("ML-DSA-87");
-KeyPair keyPair = generator.generateKeyPair(); // an ML-DSA-87 key pair</pre>
+KeyPair keyPair = generator.generateKeyPair(); // an ML-DSA-87 key pair
+```
+
 
 ##### keytool
 
 The `keytool` command will support generating ML-DSA key pairs and certificates:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash">$ keytool -keystore ks -storepass changeit -genkeypair -alias mldsa \
+```bash
+$ keytool -keystore ks -storepass changeit -genkeypair -alias mldsa \
           -keyalg ML-DSA -groupname ML-DSA-65 -dname CN=ML-DSA
 
 $ keytool -keystore ks -storepass changeit -genkeypair -alias mldsa \
-          -keyalg ML-DSA-65 -dname CN=ML-DSA2</pre>
+          -keyalg ML-DSA-65 -dname CN=ML-DSA2
+```
+
 
 The parameter-set name (`ML-DSA-65`) can also be provided directly with the `-keyalg` option:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash">$ keytool -keystore ks -storepass changeit -genkeypair -alias mldsa \
-          -keyalg ML-DSA-65 -dname CN=ML-DSA2</pre>
+```bash
+$ keytool -keystore ks -storepass changeit -genkeypair -alias mldsa \
+          -keyalg ML-DSA-65 -dname CN=ML-DSA2
+```
+
 
 ##### Signing with ML-DSA Keys
 
@@ -487,20 +547,26 @@ You can use the ML-DSA Signature implementation to sign and verify ML-DSA signat
 
 For example, to sign a message using a private key:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">byte[] msg = ...;
+```java
+byte[] msg = ...;
 Signature ss = Signature.getInstance("ML-DSA");
 ss.initSign(privateKey);
 ss.update(msg);
-byte[] sig = ss.sign();</pre>
+byte[] sig = ss.sign();
+```
+
 
 To verify a signature with a public key:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">byte[] msg = ...;
+```java
+byte[] msg = ...;
 byte[] sig = ...;
 Signature sv = Signature.getInstance("ML-DSA");
 sv.initVerify(publicKey);
 sv.update(msg);
-boolean verified = sv.verify(sig);</pre>
+boolean verified = sv.verify(sig);
+```
+
 
 ##### More Information
 
@@ -541,8 +607,11 @@ The option `--enable-linkable-runtime` builds a JDK whose `jlink` tool can creat
 
 The resulting JDK will have no `jmods` directory, which means it's about 25% smaller than before.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash">$ configure [ ... other options ... ] --enable-linkable-runtime
-$ make images</pre>
+```bash
+$ configure [ ... other options ... ] --enable-linkable-runtime
+$ make images
+```
+
 
 The `jlink` tool in any JDK build can consume both JMOD files and modular JAR files.  
 
@@ -550,11 +619,14 @@ In addition, in JDK builds with this feature enabled, `jlink` can consume module
 
 The `--help` output of `jlink` shows whether it has this capability:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash">$ jlink --help
-Usage: jlink &lt;options&gt; --module-path &lt;modulepath&gt; --add-modules &lt;module&gt;[,&lt;module&gt;...]
+```bash
+$ jlink --help
+Usage: jlink <options> --module-path <modulepath> --add-modules <module>[,<module>...]
 ...
 Capabilities:
-      Linking from run-time image enabled</pre>
+      Linking from run-time image enabled
+```
+
 
 So this new capability can be enabled only when building a JDK.  
 
@@ -765,12 +837,17 @@ Java 21 introduced [an extension to ZGC](https://openjdk.org/jeps/439) that main
 
 In Java 23, the following command would use generational mode by default:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash">$ java -XX:+UseZGC ...
-</pre>
+```bash
+$ java -XX:+UseZGC ...
+```
+
 
 This behavior is still the same in Java 24. Also, in Java 24, if you would run Java with the now-obsolete option `ZGenerational`...
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash">$ java -XX:+UseZGC -XX:-ZGenerational ...</pre>
+```bash
+$ java -XX:+UseZGC -XX:-ZGenerational ...
+```
+
 
 ...an obsolete-option warning will be printed.
 
@@ -797,10 +874,13 @@ Given the situation, Java 23 already deprecated the memory-access methods, which
 
 JDK 24 will, by default, issue a warning on the first occasion that any memory-access method is used, whether directly or via reflection. That is, it will issue at most one warning regardless of which memory-access methods are used and how many times any particular method is used. This will alert application developers and users to the forthcoming removal of the methods, and the need to upgrade libraries. An example of the warning is:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
+```
+WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
 WARNING: sun.misc.Unsafe::setMemory has been called by com.foo.bar.Server (file:/tmp/foobarserver/thing.jar)
 WARNING: Please consider reporting this to the maintainers of com.foo.bar.Server
-WARNING: sun.misc.Unsafe::setMemory will be removed in a future release</pre>
+WARNING: sun.misc.Unsafe::setMemory will be removed in a future release
+```
+
 
 A future release of Java will start throwing exceptions in these situations. In an even later Java release the methods will be removed entirely. According to the JEP text the entire process won't be completed until after the release of JDK 26, giving developers ample time to adjust to the new situation.
 

@@ -64,10 +64,11 @@ The application relies on the Spring Boot framework: it's coded in Kotlin and us
 
 The code is implemented as the following:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="kotlin">internal fun Cart.toCheckout() = CheckoutView(this, price(this))
+```kotlin
+internal fun Cart.toCheckout() = CheckoutView(this, price(this))
 
 class CheckoutView(private val cart: Cart, val total: Double) {
-    val lines: List&lt;Pair&lt;Product, Int&gt;&gt;
+    val lines: List<Pair<Product, Int>>
         get() = cart.content.entries.map { it.toPair() }
 }
 
@@ -79,16 +80,21 @@ class CheckoutHandler(private val catalog: Catalog) {
 fun checkoutRoutes(catalog: Catalog) = coRouter {
     val handler = CheckoutHandler(catalog)
     GET("/checkout/c", handler::fetchCheckout)
-}</pre>
+}
+```
+
 
 The pricing logic is coded in its file:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="kotlin">fun price(cart: Cart): Double {
+```kotlin
+fun price(cart: Cart): Double {
     return cart.content.entries                                     // 1
-        .fold(0.0) { current, entry -&gt;
+        .fold(0.0) { current, entry ->
             current + entry.key.price * entry.value
         }
-}</pre>
+}
+```
+
 
 1. Only sum up the prices of each product separately; it's a demo, after all
 
@@ -109,17 +115,18 @@ The new architecture includes a couple of changes:
 
 The new code reflects this:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="kotlin">fun price(checkout: CheckoutView): Double {
+```kotlin
+fun price(checkout: CheckoutView): Double {
     println("Pricing computed from the monolith")
     return checkout.lines
-        .fold(0.0) { current, line -&gt;
+        .fold(0.0) { current, line ->
             current + line.first.price * line.second
         }
 }
 
 class PricingHandler {
     suspend fun compute(req: ServerRequest): ServerResponse {
-        val cart = req.bodyToMono&lt;CheckoutView&gt;().awaitSingle()
+        val cart = req.bodyToMono<CheckoutView>().awaitSingle()
         val price = price(cart)
         return ServerResponse.ok().bodyValueAndAwait(price)
     }
@@ -128,7 +135,9 @@ class PricingHandler {
 fun pricingRoute() = coRouter {
     val handler = PricingHandler()
     POST("/price", handler::compute)
-}</pre>
+}
+```
+
 
 Opening the browser dev tools reveals both HTTP requests on the checkout page:
 
@@ -150,12 +159,13 @@ However, Reverse Proxies are rigid regarding configuration in general and route 
 
 I've prepared a Microsoft Azure Function where I uploaded the pricing code implemented in JavaScript:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="js">module.exports = async function (context, req) {
+```javascript
+module.exports = async function (context, req) {
     context.log('Pricing computed from the function')
     const lines = req.body.lines
     context.log(`Received cart lines: ${JSON.stringify(lines)}`)
     const price = lines.reduce(
-        (current, line) =&gt; { return current + line.first.price * line.second },
+        (current, line) => { return current + line.first.price * line.second },
         0.0
     )
     context.log(`Computed price: ${price}`)
@@ -163,11 +173,14 @@ I've prepared a Microsoft Azure Function where I uploaded the pricing code imple
         body: price
     }
     context.done()
-}</pre>
+}
+```
+
 
 With Apache APISIX, we can configure the two routes above.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash">curl -v -i http://apisix:9080/apisix/admin/routes/1 -H 'X-API-KEY: xyz' -X PUT -d '
+```bash
+curl -v -i http://apisix:9080/apisix/admin/routes/1 -H 'X-API-KEY: xyz' -X PUT -d '
 {
   "uri": "/*",                      # 1
   "upstream": {
@@ -176,11 +189,14 @@ With Apache APISIX, we can configure the two routes above.
       "chopshop:8080": 1
     }
   }
-}'</pre>
+}'
+```
+
 
 1. Configure the generic catch-all route
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash">curl -v -i http://apisix:9080/apisix/admin/routes/2 -H 'X-API-KEY: xyz' -X PUT -d '
+```bash
+curl -v -i http://apisix:9080/apisix/admin/routes/2 -H 'X-API-KEY: xyz' -X PUT -d '
 {
   "methods": ["POST"],
   "uris": ["/price"],                                                              # 1
@@ -193,7 +209,9 @@ With Apache APISIX, we can configure the two routes above.
       "ssl_verify": false
     }
   }
-}'</pre>
+}'
+```
+
 
 1. Configure the pricing route to use the Azure Function
 2. Apache APISIX provides a plugin that integrates natively with Azure Functions

@@ -82,7 +82,8 @@ Repeating groups can repeat inside other repeating groups.
 
 One of the reasons we selected JSON is it can handle this type of hierarchical data structure with ease.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">[
+```
+[
   {
     "msgType": 88,
     "msgType_Desc": "MarketDataIncrementalRefresh",
@@ -124,7 +125,9 @@ One of the reasons we selected JSON is it can handle this type of hierarchical d
 =1|279=0|269=1|278=OFFER|55=EUR/USD|270=1.37224|15=EUR|271=2503200|346
 =1|10=171|"
   }
-]</pre>
+]
+```
+
 
 #### Undertow
 
@@ -132,18 +135,21 @@ We selected Undertow as our web-server because it is relatively lightweight and 
 
 *Below is a snippet of Java code that uses Undertow. I added this Java code to peak your interest, but going into this is out of the scope of this article.*
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">PathHandler pathHandler = path()
+```java
+PathHandler pathHandler = path()
         .addExactPath(prefix + "/fixparser", disableCache(new 
 EagerFormParsingHandler(main::doFixParser)))
 
-if (prefix.length() &gt; 0) {
+if (prefix.length() > 0) {
    pathHandler.addPrefixPath("/", resource(new FileResourceManager(new File("./html/" + basePath))));
 }
 
 HttpHandler handler = header(pathHandler, "Access-Control-Allow-Origin", "*");
 Undertow server = Undertow.builder().addHttpListener(port, 
 "localhost", handler).build();
-server.start();</pre>
+server.start();
+```
+
 
 #### Finally
 

@@ -64,7 +64,8 @@ This time we get a rolled tree that has the same root as the original tree, sinc
 
 ### Pseudocode and complexity {#h3-2-pseudocode-and-complexity}
 
-<pre class="EnlighterJSRAW" data-enlighter-language="python" data-enlighter-theme="beyond" data-enlighter-linenumbers="false">def cRoll(root, parent = null) 
+```python
+def cRoll(root, parent = null) 
     if root != null
         if root.left != null
             cRoll(root.left, parent)
@@ -74,7 +75,9 @@ This time we get a rolled tree that has the same root as the original tree, sinc
             parent.left = root
             parent.right = null
         if root.right != null
-            cRoll(root.right, root)</pre>
+            cRoll(root.right, root)
+```
+
 
 ```
 
@@ -95,85 +98,100 @@ In this section, we are going to present a step by step implementation of the bi
 
 Let's start by bootstrapping a new Java project using Maven. We are going to use the JUnit 5 framework to test our implementation, so we need to add the following dependency to the `pom.xml` file of the project:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="xml" data-enlighter-theme="beyond" data-enlighter-linenumbers="false">&lt;dependencies&gt;
-  &lt;dependency&gt;
-    &lt;groupId&gt;org.junit.jupiter&lt;/groupId&gt;
-    &lt;artifactId&gt;junit-jupiter&lt;/artifactId&gt;
-    &lt;version&gt;5.9.2&lt;/version&gt;
-    &lt;scope&gt;test&lt;/scope&gt;
-  &lt;/dependency&gt;
-&lt;/dependencies&gt;</pre>
+```xml
+<dependencies>
+  <dependency>
+    <groupId>org.junit.jupiter</groupId>
+    <artifactId>junit-jupiter</artifactId>
+    <version>5.9.2</version>
+    <scope>test</scope>
+  </dependency>
+</dependencies>
+```
+
 
 Now let's define the basic building blocks of our implementation, i.e., the binary tree data structure and the tree traversal algorithms. We begin by creating a simple, recursively defined `Node` class that holds a value of a generic type `T` and references to its left and right children.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="beyond" data-enlighter-linenumbers="false">public class Node&lt;T&gt; {
+```java
+public class Node<T> {
     private T value;
-    private Node&lt;T&gt; left
-    private Node&lt;T&gt; right;
+    private Node<T> left
+    private Node<T> right;
 
     /* constructors, getters, setters, etc. */
-}</pre>
+}
+```
+
 
 ### Static factory methods {#h3-5-static-factory-methods}
 
 With the recursive `Node` structure in place, we create a `BinaryTree` class that holds a reference to the root node of the tree and provides a **static factory method** for creating new instances of the class from a list of values provided in a nullable level-order traversal format. This format uses a "null identifier" value to denote empty (null) nodes. For example, the sequence `[1, 2, 3, -1, -1, 4, 5, -1, 6]`, where `-1` is the null identifier, represents the following binary tree:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="beyond" data-enlighter-linenumbers="false">  1
+```
+  1
  / \
 2   3
    / \
   4   5
    \  
-    6</pre>
+    6
+```
+
 
 The way we can implement the static factory method is by using a queue to store the nodes of the tree as we parse them from the input sequence. First, we add the root node to the queue. Then, we read the next two values from the input sequence and create the left and right children of the node. If a node value is `null`, we do not create a child node. We add the newly created children to the queue and repeat this process until we reach the end of the input sequence.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="beyond" data-enlighter-linenumbers="false">public class BinaryTree&lt;T&gt; {
+```java
+public class BinaryTree<T> {
 
-  private Node&lt;T&gt; root;
+  private Node<T> root;
 
-  private BinaryTree(Node&lt;T&gt; root) {
+  private BinaryTree(Node<T> root) {
     this.root = root;
   }
 
-  public static &lt;T&gt; BinaryTree&lt;T&gt; of(T[] values, T nullIdentifier) {
+  public static <T> BinaryTree<T> of(T[] values, T nullIdentifier) {
     if (values == null || values.length == 0 || values[0] == nullIdentifier) {
-      return new BinaryTree&lt;&gt;();
+      return new BinaryTree<>();
     }
 
-    Node&lt;T&gt; rootNode = new Node&lt;&gt;(values[0]);
-    Queue&lt;Node&lt;T&gt;&gt; nodeQueue = new LinkedList&lt;&gt;();
+    Node<T> rootNode = new Node<>(values[0]);
+    Queue<Node<T>> nodeQueue = new LinkedList<>();
     nodeQueue.offer(rootNode);
 
     int valPtr = 1;
 
     while (!nodeQueue.isEmpty()) {
-      T leftVal = (valPtr &lt; values.length) ? values[valPtr++] : null;
-      T rightVal = (valPtr &lt; values.length) ? values[valPtr++] : null;
-      Node&lt;T&gt; node = nodeQueue.poll();
+      T leftVal = (valPtr < values.length) ? values[valPtr++] : null;
+      T rightVal = (valPtr < values.length) ? values[valPtr++] : null;
+      Node<T> node = nodeQueue.poll();
 
-      if (leftVal != null &amp;&amp; !leftVal.equals(nullIdentifier)) {
-        Node&lt;T&gt; leftNode = new Node&lt;&gt;(leftVal);
+      if (leftVal != null && !leftVal.equals(nullIdentifier)) {
+        Node<T> leftNode = new Node<>(leftVal);
         node.setLeft(leftNode);
         nodeQueue.offer(leftNode);
       }
 
-      if (rightVal != null &amp;&amp; !rightVal.equals(nullIdentifier)) {
-        Node&lt;T&gt; rightNode = new Node&lt;&gt;(rightVal);
+      if (rightVal != null && !rightVal.equals(nullIdentifier)) {
+        Node<T> rightNode = new Node<>(rightVal);
         node.setRight(rightNode);
         nodeQueue.offer(rightNode);
       }
     }
 
-    return new BinaryTree&lt;&gt;(rootNode);
+    return new BinaryTree<>(rootNode);
   }
-}</pre>
+}
+```
+
 
 For convenience, we also create an overloaded version of the static factory method `of` that uses `null` as the default null identifier value, and a single, varargs input parameter:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="beyond" data-enlighter-linenumbers="false">public static &lt;T&gt; BinaryTree&lt;T&gt; of(T... values) {
+```java
+public static <T> BinaryTree<T> of(T... values) {
   return of(values, null);
-}</pre>
+}
+```
+
 
 ### The Visitor pattern {#h3-6-the-visitor-pattern}
 
@@ -181,103 +199,124 @@ To obtain the preorder, inorder, and postorder traversals of the binary tree, we
 
 First, we define an interface for the visitor that we will use to traverse the nodes of the tree:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="beyond" data-enlighter-linenumbers="false">public interface Visitor&lt;T&gt; {
-  void visit(Node&lt;T&gt; node);
-}</pre>
+```java
+public interface Visitor<T> {
+  void visit(Node<T> node);
+}
+```
+
 
 Then, we create three concrete implementations of the `Visitor` interface, one for each of the three traversal orders. We want these visitors to store the nodes in a list in the order in which they are visited. And since the action we want to perform on the nodes (i.e., adding them to a list) is the same for all traversals, we implement it with a separate interface, called `VisitorAction`, and pass it to the visitors as a constructor argument. This design decouples the traversal logic from the action we perform on the visited nodes, which makes the code even cleaner and more flexible.
 
 The implementation of the `VisitorAction` interface and one of the concrete visitors is shown below. We extend Java's `Consumer` functional interface to allow custom actions and composed (chained) consumers to be passed at runtime.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="beyond" data-enlighter-linenumbers="false">public interface VisitorAction&lt;T&gt; extends Consumer&lt;Node&lt;T&gt;&gt; {
+```java
+public interface VisitorAction<T> extends Consumer<Node<T>> {
 
   @Override
-  default VisitorAction&lt;T&gt; andThen(Consumer&lt;? super Node&lt;T&gt;&gt; after) {
+  default VisitorAction<T> andThen(Consumer<? super Node<T>> after) {
     return Consumer.super.andThen(after)::accept;
   }
 }
-</pre>
+```
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="beyond" data-enlighter-linenumbers="false">public final class PreorderVisitor&lt;T&gt; implements Visitor&lt;T&gt; {
-  private final VisitorAction&lt;T&gt; action;
 
-  public PreorderVisitor(VisitorAction&lt;T&gt; action) {
+```java
+public final class PreorderVisitor<T> implements Visitor<T> {
+  private final VisitorAction<T> action;
+
+  public PreorderVisitor(VisitorAction<T> action) {
     this.action = action;
   }
 
-  public VisitorAction&lt;T&gt; action() {
+  public VisitorAction<T> action() {
     return action;
   }
 
   @Override
-  public void visit(Node&lt;T&gt; root) {
+  public void visit(Node<T> root) {
     if (root != null) {
       action.accept(root);
       this.visit(root.getLeft());
       this.visit(root.getRight());
     }
   }
-}</pre>
+}
+```
+
 
 We can now define the concrete action for adding the visited nodes to a list:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="beyond" data-enlighter-linenumbers="false">public class NodeCollectorVisitorAction&lt;T&gt; implements VisitorAction&lt;T&gt; {
+```java
+public class NodeCollectorVisitorAction<T> implements VisitorAction<T> {
 
-  private final List&lt;T&gt; list;
+  private final List<T> list;
 
   public NodeCollectorVisitorAction() {
-    this.list = new ArrayList&lt;&gt;();
+    this.list = new ArrayList<>();
   }
 
-  public List&lt;T&gt; getList() {
+  public List<T> getList() {
     return list;
   }
 
   @Override
-  public void accept(Node&lt;T&gt; node) {
+  public void accept(Node<T> node) {
     list.add(node.getValue());
   }
-}</pre>
+}
+```
+
 
 To complete our traversal functionality, we introduce another level of abstraction and make the `Node` and the `BinaryTree` classes traversable by our visitors through a generic interface, as follows:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="beyond" data-enlighter-linenumbers="false">public interface Traversable&lt;T&gt; {
-&nbsp; void traverse(Visitor&lt;T&gt; visitor);
-}</pre>
+```java
+public interface Traversable<T> {
+  void traverse(Visitor<T> visitor);
+}
+```
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="beyond" data-enlighter-linenumbers="false">public class Node&lt;T&gt; implements Traversable&lt;T&gt; {
-&nbsp; /*&nbsp;...&nbsp;*/
 
-  @Override
-  public void traverse(Visitor&lt;T&gt; visitor) {
-&nbsp; &nbsp; visitor.visit(this);
-&nbsp; }
-}</pre>
-
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="beyond" data-enlighter-linenumbers="false">public class BinaryTree&lt;T&gt; implements Traversable&lt;T&gt; {
-&nbsp; /*&nbsp;...&nbsp;*/
+```java
+public class Node<T> implements Traversable<T> {
+  /* ... */
 
   @Override
-  public void traverse(Visitor&lt;T&gt; visitor) {
-&nbsp; &nbsp; if (this.root == null) throw new IllegalStateException("Cannot traverse an empty tree");
+  public void traverse(Visitor<T> visitor) {
+    visitor.visit(this);
+  }
+}
+```
+
+
+```java
+public class BinaryTree<T> implements Traversable<T> {
+  /* ... */
+
+  @Override
+  public void traverse(Visitor<T> visitor) {
+    if (this.root == null) throw new IllegalStateException("Cannot traverse an empty tree");
     this.root.traverse(visitor);
-&nbsp; }
-}</pre>
+  }
+}
+```
+
 
 Before we move on to the implementation of the roll operation, let's create a simple test for the `BinaryTree` class to make sure that the tree is created correctly from the input sequence:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="beyond" data-enlighter-linenumbers="false">@Test
+```java
+@Test
 void testTraversals() {
   Integer[] values = {1, 2, 3, null, null, 4, 5, null, 6};
-  BinaryTree&lt;Integer&gt; tree = BinaryTree.of(values);
+  BinaryTree<Integer> tree = BinaryTree.of(values);
 
-  var preorderCollector = new NodeCollectorVisitorAction&lt;Integer&gt;();
-  var inorderCollector = new NodeCollectorVisitorAction&lt;Integer&gt;();
-  var postorderCollector = new NodeCollectorVisitorAction&lt;Integer&gt;();
+  var preorderCollector = new NodeCollectorVisitorAction<Integer>();
+  var inorderCollector = new NodeCollectorVisitorAction<Integer>();
+  var postorderCollector = new NodeCollectorVisitorAction<Integer>();
 
-  tree.traverse(new PreorderVisitor&lt;&gt;(preorderCollector));
-  tree.traverse(new InorderVisitor&lt;&gt;(inorderCollector));
-  tree.traverse(new PostorderVisitor&lt;&gt;(postorderCollector));
+  tree.traverse(new PreorderVisitor<>(preorderCollector));
+  tree.traverse(new InorderVisitor<>(inorderCollector));
+  tree.traverse(new PostorderVisitor<>(postorderCollector));
 
   var expectedPreorder = List.of(1, 2, 3, 4, 6, 5);
   var expectedInorder = List.of(2, 1, 4, 6, 3, 5);
@@ -287,26 +326,30 @@ void testTraversals() {
   assertEquals(expectedInorder, inorderCollector.getList());
   assertEquals(expectedPostorder, postorderCollector.getList());
 }
-</pre>
+```
+
 
 Let's also show the flexibility of our visitors by refactoring our test with lambda expressions:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="beyond" data-enlighter-linenumbers="false">@Test
+```java
+@Test
 void testTraversalsWithLambdas() {
   var tree = BinaryTree.of(1, 2, 3, null, null, 4, 5, null, 6);
 
-  var preorderList = new ArrayList&lt;Integer&gt;();
-  var inorderList = new ArrayList&lt;Integer&gt;();
-  var postorderList = new ArrayList&lt;Integer&gt;();
+  var preorderList = new ArrayList<Integer>();
+  var inorderList = new ArrayList<Integer>();
+  var postorderList = new ArrayList<Integer>();
 
-  tree.traverse(new PreorderVisitor&lt;&gt;(node -&gt; preorderList.add(node.getValue())));
-  tree.traverse(new InorderVisitor&lt;&gt;(node -&gt; inorderList.add(node.getValue())));
-  tree.traverse(new PostorderVisitor&lt;&gt;(node -&gt; postorderList.add(node.getValue())));
+  tree.traverse(new PreorderVisitor<>(node -> preorderList.add(node.getValue())));
+  tree.traverse(new InorderVisitor<>(node -> inorderList.add(node.getValue())));
+  tree.traverse(new PostorderVisitor<>(node -> postorderList.add(node.getValue())));
 
   assertEquals(List.of(1, 2, 3, 4, 6, 5), preorderList);
   assertEquals(List.of(2, 1, 4, 6, 3, 5), inorderList);
   assertEquals(List.of(2, 6, 4, 5, 3, 1), postorderList);
-}</pre>
+}
+```
+
 
 ### The binary tree roll algorithm {#h3-7-the-binary-tree-roll-algorithm}
 
@@ -314,20 +357,23 @@ To implement the algorithm for rolling binary trees, we need to consider the two
 
 This means that we need to implement a mechanism to identify and store a reference to the root node of the rolled tree. A good way to do this would be by creating an abstract class called `RollHandler`, which we can use as a base class for the concrete implementations of the algorithm.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="beyond" data-enlighter-linenumbers="false">abstract class RollHandler&lt;T&gt; {
+```java
+abstract class RollHandler<T> {
 
-  private Node&lt;T&gt; rolledRoot;
+  private Node<T> rolledRoot;
 
-  public Node&lt;T&gt; getRolledRoot() {
+  public Node<T> getRolledRoot() {
     return rolledRoot;
   }
 
-  public void setRolledRoot(Node&lt;T&gt; rolledRoot) {
+  public void setRolledRoot(Node<T> rolledRoot) {
     this.rolledRoot = rolledRoot;
   }
 
-  abstract void roll(Node&lt;T&gt; root, Node&lt;T&gt; parent);
-}</pre>
+  abstract void roll(Node<T> root, Node<T> parent);
+}
+```
+
 
 We will implement the `roll` method for the clockwise and the counterclockwise roll variants separately, and have these implementations use the `rolledRoot` field to assign a reference to the rolled tree's root node.
 
@@ -335,10 +381,11 @@ We can identify the rolled tree's root node when the recursive traversal reaches
 
 The implementation of the `roll` method for the clockwise and counterclockwise roll handlers will, therefore, look something like this:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="beyond" data-enlighter-linenumbers="false">class ClockwiseRollHandler&lt;T&gt; extends RollHandler&lt;T&gt; {
+```java
+class ClockwiseRollHandler<T> extends RollHandler<T> {
 
   @Override
-  public void roll(Node&lt;T&gt; root, Node&lt;T&gt; parent) {
+  public void roll(Node<T> root, Node<T> parent) {
     if (root != null) {
       if (root.getLeft() != null) {
         this.roll(root.getLeft(), parent);
@@ -359,12 +406,14 @@ The implementation of the `roll` method for the clockwise and counterclockwise r
     }
   }
 }
-</pre>
+```
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="beyond" data-enlighter-linenumbers="false">class CounterclockwiseRollHandler&lt;T&gt; extends RollHandler&lt;T&gt; {
+
+```java
+class CounterclockwiseRollHandler<T> extends RollHandler<T> {
 
   @Override
-  public void roll(Node&lt;T&gt; root, Node&lt;T&gt; parent) {
+  public void roll(Node<T> root, Node<T> parent) {
     if (root != null) {
       if (root.getRight() != null) {
         this.roll(root.getRight(), parent);
@@ -384,7 +433,9 @@ The implementation of the `roll` method for the clockwise and counterclockwise r
       }
     }
   }
-}</pre>
+}
+```
+
 
 ### To mutate or not to mutate? {#h3-8-to-mutate-or-not-to-mutate}
 
@@ -398,18 +449,22 @@ We can combine the **Strategy** and the **Factory** design patterns to create th
 
 First, we define an interface for the roll strategy:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="beyond" data-enlighter-linenumbers="false">public interface RollStrategy&lt;T&gt; {
-  BinaryTree&lt;T&gt; roll(BinaryTree&lt;T&gt; tree);
-}</pre>
+```java
+public interface RollStrategy<T> {
+  BinaryTree<T> roll(BinaryTree<T> tree);
+}
+```
+
 
 Then, we create two abstract classes that implement the `RollStrategy` interface and provide two different templates for implementing the roll algorithm. This approach is also known as the **Template Method** pattern, where an abstract superclass defines the high-level skeleton of an algorithm.
 
 Both templates will have an abstract method to obtain a roll handler. And for the immutable strategy, we will apply the `roll` method of the roll handler to a deep copy of the tree, keeping the original tree intact:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="beyond" data-enlighter-linenumbers="false">abstract class DefaultRollStrategy&lt;T&gt; implements RollStrategy&lt;T&gt; {
+```java
+abstract class DefaultRollStrategy<T> implements RollStrategy<T> {
 
   @Override
-  public BinaryTree&lt;T&gt; roll(BinaryTree&lt;T&gt; tree){
+  public BinaryTree<T> roll(BinaryTree<T> tree){
     var rollHandler = getRollHandler();
     rollHandler.setRolledRoot(null);
     rollHandler.roll(tree.getRoot(), null);
@@ -417,14 +472,16 @@ Both templates will have an abstract method to obtain a roll handler. And for th
     return tree;
   }
 
-  abstract RollHandler&lt;T&gt; getRollHandler();
+  abstract RollHandler<T> getRollHandler();
 }
-</pre>
+```
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="beyond" data-enlighter-linenumbers="false">abstract class ImmutableRollStrategy&lt;T&gt; implements RollStrategy&lt;T&gt; {
+
+```java
+abstract class ImmutableRollStrategy<T> implements RollStrategy<T> {
 
   @Override
-  public BinaryTree&lt;T&gt; roll(BinaryTree&lt;T&gt; tree) {
+  public BinaryTree<T> roll(BinaryTree<T> tree) {
     var rollHandler = getRollHandler();
     rollHandler.setRolledRoot(null);
     var treeCopy = tree.deepCopy();
@@ -433,17 +490,23 @@ Both templates will have an abstract method to obtain a roll handler. And for th
     return treeCopy;
   }
 
-  abstract RollHandler&lt;T&gt; getRollHandler();
-}</pre>
+  abstract RollHandler<T> getRollHandler();
+}
+```
+
 
 The `deepCopy` method runs recursively on the root node and creates a deep clone of the tree.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="beyond" data-enlighter-linenumbers="false">public BinaryTree&lt;T&gt; deepCopy() {
-  return new BinaryTree&lt;&gt;(root != null ? root.deepCopy() : null);
-}</pre>
+```java
+public BinaryTree<T> deepCopy() {
+  return new BinaryTree<>(root != null ? root.deepCopy() : null);
+}
+```
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="beyond" data-enlighter-linenumbers="false">public Node&lt;T&gt; deepCopy() {
-  var copy = new Node&lt;&gt;(this.value);
+
+```java
+public Node<T> deepCopy() {
+  var copy = new Node<>(this.value);
 
   if (this.left != null) {
     copy.setLeft(this.left.copy());
@@ -454,78 +517,92 @@ The `deepCopy` method runs recursively on the root node and creates a deep clone
   }
 
   return copy;
-}</pre>
+}
+```
+
 
 To combine the mutable and immutable strategy templates with the clockwise and counterclockwise roll handlers, we create concrete roll strategies which extend the abstract `RollStrategy` classes and implement the `getRollHandler` method. For simplicity, we nest the immutable roll strategies inside the default (mutable) roll strategy classes:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="beyond" data-enlighter-linenumbers="false">final class ClockwiseRollStrategy&lt;T&gt; extends DefaultRollStrategy&lt;T&gt; {
+```java
+final class ClockwiseRollStrategy<T> extends DefaultRollStrategy<T> {
 
   @Override
-  RollHandler&lt;T&gt; getRollHandler() {
-    return new ClockwiseRollHandler&lt;&gt;();
+  RollHandler<T> getRollHandler() {
+    return new ClockwiseRollHandler<>();
   }
 
-  static final class Immutable&lt;T&gt; extends ImmutableRollStrategy&lt;T&gt; {
+  static final class Immutable<T> extends ImmutableRollStrategy<T> {
 
     @Override
-    RollHandler&lt;T&gt; getRollHandler() {
-      return new ClockwiseRollHandler&lt;&gt;();
+    RollHandler<T> getRollHandler() {
+      return new ClockwiseRollHandler<>();
     }
   }
 }
-</pre>
+```
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="beyond" data-enlighter-linenumbers="false">final class CounterclockwiseRollStrategy&lt;T&gt; extends DefaultRollStrategy&lt;T&gt; {
+
+```java
+final class CounterclockwiseRollStrategy<T> extends DefaultRollStrategy<T> {
 
   @Override
-  RollHandler&lt;T&gt; getRollHandler() {
-    return new CounterclockwiseRollHandler&lt;&gt;();
+  RollHandler<T> getRollHandler() {
+    return new CounterclockwiseRollHandler<>();
   }
 
-  static final class Immutable&lt;T&gt; extends ImmutableRollStrategy&lt;T&gt; {
+  static final class Immutable<T> extends ImmutableRollStrategy<T> {
 
     @Override
-    RollHandler&lt;T&gt; getRollHandler() {
-      return new CounterclockwiseRollHandler&lt;&gt;();
+    RollHandler<T> getRollHandler() {
+      return new CounterclockwiseRollHandler<>();
     }
   }
-}</pre>
+}
+```
+
 
 Next, we create a factory interface that we can use to obtain instances of the roll strategies. We use **switch expressions** to return a strategy in a concise and elegant way.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="beyond" data-enlighter-linenumbers="false">public enum RollDirection {
+```java
+public enum RollDirection {
   CLOCKWISE,
   COUNTER_CLOCKWISE
 }
-</pre>
+```
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="beyond" data-enlighter-linenumbers="false">public interface RollStrategyFactory {
 
-  static &lt;T&gt; RollStrategy&lt;T&gt; create(RollDirection direction) {
+```java
+public interface RollStrategyFactory {
+
+  static <T> RollStrategy<T> create(RollDirection direction) {
     return switch (direction) {
-      case CLOCKWISE -&gt; new ClockwiseRollStrategy&lt;&gt;();
-      case COUNTER_CLOCKWISE -&gt; new CounterClockwiseRollStrategy&lt;&gt;();
+      case CLOCKWISE -> new ClockwiseRollStrategy<>();
+      case COUNTER_CLOCKWISE -> new CounterClockwiseRollStrategy<>();
     };
   }
 
-  static &lt;T&gt; RollStrategy&lt;T&gt; createImmutable(RollDirection direction) {
+  static <T> RollStrategy<T> createImmutable(RollDirection direction) {
     return switch (direction) {
-      case CLOCKWISE -&gt; new ClockwiseRollStrategy.Immutable&lt;&gt;();
-      case COUNTER_CLOCKWISE -&gt; new CounterClockwiseRollStrategy.Immutable&lt;&gt;();
+      case CLOCKWISE -> new ClockwiseRollStrategy.Immutable<>();
+      case COUNTER_CLOCKWISE -> new CounterClockwiseRollStrategy.Immutable<>();
     };
   }
 }
-</pre>
+```
+
 
 Finally, we add a `roll` method to the `BinaryTree` class that accepts a `RollStrategy` instance as an argument and invokes its `roll` method on the tree:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="beyond" data-enlighter-linenumbers="false">public class BinaryTree&lt;T&gt; {
+```java
+public class BinaryTree<T> {
   /* ... */
 
-  public BinaryTree&lt;T&gt; roll(RollStrategy&lt;T&gt; strategy) {
+  public BinaryTree<T> roll(RollStrategy<T> strategy) {
     return strategy.roll(this);
   }
-}</pre>
+}
+```
+
 
 Note that the `BinaryTree` class does not have to be aware of the roll strategies, so if we want to keep the code as loosely coupled as possible, we can skip this step, and let the user invoke the `RollStrategy.roll` method directly and pass the tree they want to roll as an argument.
 
@@ -533,35 +610,45 @@ Note that the `BinaryTree` class does not have to be aware of the roll strategie
 
 Rolling a binary tree is a straightforward operation with a finite number of variants, and we have implemented both mutable and immutable versions of these variants, exhausting all possible use case scenarios. To create a closed hierarchy of roll strategies and prevent side effects that could break the algorithm, we can seal the `RollStrategy` interface and all abstract classes below it by declaring them **sealed** and associating them with their intended inheritors or implementers.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="beyond" data-enlighter-linenumbers="false">public sealed interface RollStrategy&lt;T&gt; 
+```java
+public sealed interface RollStrategy<T> 
     permits ClockwiseRollStrategy, CounterclockwiseRollStrategy {
   /* ... */
 }
-</pre>
+```
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="beyond" data-enlighter-linenumbers="false">abstract sealed class DefaultRollStrategy&lt;T&gt; implements RollStrategy&lt;T&gt; 
+
+```java
+abstract sealed class DefaultRollStrategy<T> implements RollStrategy<T> 
     permits ClockwiseRollStrategy, CounterclockwiseRollStrategy {
   /* ... */
 }
-</pre>
+```
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="beyond" data-enlighter-linenumbers="false">abstract sealed class ImmutableRollStrategy&lt;T&gt; implements RollStrategy&lt;T&gt; 
+
+```java
+abstract sealed class ImmutableRollStrategy<T> implements RollStrategy<T> 
     permits ClockwiseRollStrategy.Immutable, CounterClockwiseRollStrategy.Immutable {
   /* ... */
 }
-</pre>
+```
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="beyond" data-enlighter-linenumbers="false">abstract sealed class RollHandler&lt;T&gt; 
+
+```java
+abstract sealed class RollHandler<T> 
     permits ClockwiseRollHandler, CounterClockwiseRollHandler {
   /* ... */
-}</pre>
+}
+```
+
 
 Testing {#h2-11-testing}
 ------------------------
 
 We can now use our roll algorithm implementation to roll binary trees clockwise and counterclockwise. But before we do that, let's create a simple helper class that we can use to print binary trees to the console. We will use a basic recursive algorithm that prints the tree in a sideways, left-to-right fashion.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="beyond" data-enlighter-linenumbers="false">public class BinaryTreePrinter&lt;T&gt; {
+```java
+public class BinaryTreePrinter<T> {
 
   private final PrintStream printStream;
   private final int edgeLength = 4;
@@ -571,7 +658,7 @@ We can now use our roll algorithm implementation to roll binary trees clockwise 
     this.printStream = printStream;
   }
 
-  public void printTree(BinaryTree&lt;T&gt; tree) {
+  public void printTree(BinaryTree<T> tree) {
     var root = tree.getRoot();
 
     if (root == null) {
@@ -581,7 +668,7 @@ We can now use our roll algorithm implementation to roll binary trees clockwise 
     printStream.println(printTree(root, 1, ""));
   }
 
-  private String printTree(BinaryTree.Node&lt;T&gt; root, int direction, String prefix) {
+  private String printTree(BinaryTree.Node<T> root, int direction, String prefix) {
     if (root == null) {
       return "";
     }
@@ -589,8 +676,8 @@ We can now use our roll algorithm implementation to roll binary trees clockwise 
     var edgeType = (root.getRight() != null ? 1 : 0) + (root.getLeft() != null ? 2 : 0);
 
     var postfix = switch (edgeType) {
-      case 1, 2, 3 -&gt; " " + "—".repeat(edgeLength) + edgeShapes.charAt(edgeType) + "\n";
-      default -&gt; "\n";
+      case 1, 2, 3 -> " " + "—".repeat(edgeLength) + edgeShapes.charAt(edgeType) + "\n";
+      default -> "\n";
     };
 
     var padding = " ".repeat(edgeLength + root.getValue().toString().length());
@@ -600,37 +687,43 @@ We can now use our roll algorithm implementation to roll binary trees clockwise 
 
     return printRight + prefix + root.getValue() + postfix + printLeft;
   }
-}</pre>
+}
+```
+
 
 Next, let's set up a test class that we can use to test our complete implementation.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="beyond" data-enlighter-linenumbers="false">class IntegrationTests&lt;T&gt; {
+```java
+class IntegrationTests<T> {
 
-  private NodeCollectorVisitorAction&lt;T&gt; preorderCollector1, inorderCollector1, postorderCollector1;
-  private NodeCollectorVisitorAction&lt;T&gt; preorderCollector2, inorderCollector2, postorderCollector2;
+  private NodeCollectorVisitorAction<T> preorderCollector1, inorderCollector1, postorderCollector1;
+  private NodeCollectorVisitorAction<T> preorderCollector2, inorderCollector2, postorderCollector2;
 
-  private final BinaryTreePrinter&lt;T&gt; printer = new BinaryTreePrinter&lt;&gt;(System.out);
+  private final BinaryTreePrinter<T> printer = new BinaryTreePrinter<>(System.out);
 
   @BeforeEach
   void setUp() {
-    preorderCollector1 = new NodeCollectorVisitorAction&lt;&gt;();
-    preorderCollector2 = new NodeCollectorVisitorAction&lt;&gt;();
-    inorderCollector1 = new NodeCollectorVisitorAction&lt;&gt;();
-    inorderCollector2 = new NodeCollectorVisitorAction&lt;&gt;();
-    postorderCollector1 = new NodeCollectorVisitorAction&lt;&gt;();
-    postorderCollector2 = new NodeCollectorVisitorAction&lt;&gt;();
+    preorderCollector1 = new NodeCollectorVisitorAction<>();
+    preorderCollector2 = new NodeCollectorVisitorAction<>();
+    inorderCollector1 = new NodeCollectorVisitorAction<>();
+    inorderCollector2 = new NodeCollectorVisitorAction<>();
+    postorderCollector1 = new NodeCollectorVisitorAction<>();
+    postorderCollector2 = new NodeCollectorVisitorAction<>();
   }
-}</pre>
+}
+```
+
 
 Now, let's create a small binary tree, roll it clockwise, and print the results to the console.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="beyond" data-enlighter-linenumbers="false">void testClockwiseRoll() {
+```java
+void testClockwiseRoll() {
   var tree = BinaryTree.of("Friends", "Jay", "Open", "Foo", "IO", "Of", "JDK");
   printer.printTree(tree);
 
-  tree.traverse(new PreorderVisitor&lt;String&gt;(preorderCollector1));
-  tree.traverse(new InorderVisitor&lt;String&gt;(inorderCollector1));
-  tree.traverse(new PostorderVisitor&lt;String&gt;(postorderCollector1));
+  tree.traverse(new PreorderVisitor<String>(preorderCollector1));
+  tree.traverse(new InorderVisitor<String>(inorderCollector1));
+  tree.traverse(new PostorderVisitor<String>(postorderCollector1));
 
   System.out.println(preorderCollector1.getList());
   System.out.println(inorderCollector1.getList());
@@ -640,9 +733,9 @@ Now, let's create a small binary tree, roll it clockwise, and print the results 
   tree.roll(RollStrategyFactory.create(RollDirection.CLOCKWISE));
   printer.printTree(tree);
 
-  tree.traverse(new PreorderVisitor&lt;String&gt;(preorderCollector2));
-  tree.traverse(new InorderVisitor&lt;String&gt;(inorderCollector2));
-  tree.traverse(new PostorderVisitor&lt;String&gt;(postorderCollector2));
+  tree.traverse(new PreorderVisitor<String>(preorderCollector2));
+  tree.traverse(new InorderVisitor<String>(inorderCollector2));
+  tree.traverse(new PostorderVisitor<String>(postorderCollector2));
 
   System.out.println(preorderCollector2.getList());
   System.out.println(inorderCollector2.getList());
@@ -651,9 +744,12 @@ Now, let's create a small binary tree, roll it clockwise, and print the results 
 
   assertEquals(postorderCollector1.getList(), inorderCollector2.getList());
   assertEquals(inorderCollector1.getList(), preorderCollector2.getList());
-}</pre>
+}
+```
 
-<pre class="EnlighterJSRAW" data-enlighter-language="raw" data-enlighter-theme="beyond" data-enlighter-linenumbers="false">                     JDK
+
+```
+                     JDK
             Open ————┤
             │        Of
 Friends ————┤
@@ -675,17 +771,20 @@ Foo ————┘
 
 [Foo, Jay, IO, Friends, Of, Open, JDK]
 [Foo, IO, Jay, Of, JDK, Open, Friends]
-[IO, JDK, Open, Of, Friends, Jay, Foo]</pre>
+[IO, JDK, Open, Of, Friends, Jay, Foo]
+```
+
 
 Let's also test the immutable strategy, this time with the counterclockwise roll variant:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="beyond" data-enlighter-linenumbers="false">void testImmutableCounterClockwiseRoll() {
+```java
+void testImmutableCounterClockwiseRoll() {
   var tree = BinaryTree.of("Friends", "Jay", "Open", "Foo", "IO", "Of", "JDK");
   printer.printTree(tree);
 
-  tree.traverse(new PreorderVisitor&lt;&gt;(preorderCollector1));
-  tree.traverse(new InorderVisitor&lt;&gt;(inorderCollector1));
-  tree.traverse(new PostorderVisitor&lt;&gt;(postorderCollector1));
+  tree.traverse(new PreorderVisitor<>(preorderCollector1));
+  tree.traverse(new InorderVisitor<>(inorderCollector1));
+  tree.traverse(new PostorderVisitor<>(postorderCollector1));
 
   System.out.println(preorderCollector1.getList());
   System.out.println(inorderCollector1.getList());
@@ -695,9 +794,9 @@ Let's also test the immutable strategy, this time with the counterclockwise roll
   var rolledTree = tree.roll(RollStrategyFactory.createImmutable(RollDirection.COUNTER_CLOCKWISE));
   printer.printTree(rolledTree);
 
-  rolledTree.traverse(new PreorderVisitor&lt;&gt;(preorderCollector2));
-  rolledTree.traverse(new InorderVisitor&lt;&gt;(inorderCollector2));
-  rolledTree.traverse(new PostorderVisitor&lt;&gt;(postorderCollector2));
+  rolledTree.traverse(new PreorderVisitor<>(preorderCollector2));
+  rolledTree.traverse(new InorderVisitor<>(inorderCollector2));
+  rolledTree.traverse(new PostorderVisitor<>(postorderCollector2));
 
   System.out.println(preorderCollector2.getList());
   System.out.println(inorderCollector2.getList());
@@ -708,9 +807,12 @@ Let's also test the immutable strategy, this time with the counterclockwise roll
 
   assertEquals(preorderCollector1.getList(), inorderCollector2.getList());
   assertEquals(inorderCollector1.getList(), postorderCollector2.getList());
-}</pre>
+}
+```
 
-<pre class="EnlighterJSRAW" data-enlighter-language="raw" data-enlighter-theme="beyond" data-enlighter-linenumbers="false">                     JDK
+
+```
+                     JDK
             Open ————┤
             │        Of
 Friends ————┤
@@ -741,8 +843,8 @@ Friends ————┤
             │       IO
             Jay ————┤
                     Foo
+```
 
-</pre>
 
 As we can see, the immutable strategy constructed the rolled tree properly, while preserving the state of the original tree.
 

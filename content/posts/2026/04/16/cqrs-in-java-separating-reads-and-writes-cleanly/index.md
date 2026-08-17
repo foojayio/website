@@ -53,24 +53,33 @@ To implement CQRS, we'll need two custom repos in Spring. One for the reads and 
 
 Our first repository will be for data reading. Note that this repo only queries the DB. In our case, we'll call it ItemReadRepository:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public interface ItemReadRepository extends MongoRepository&lt;GroceryItem, String&gt; {
-&nbsp;&nbsp;&nbsp;@Query("{name:'?0'}")
-&nbsp;&nbsp;&nbsp;GroceryItem findItemByName(String name);
-&nbsp;&nbsp;&nbsp;@Query(value="{category:'?0'}", fields="{'name' : 1, 'quantity' : 1}")
-&nbsp;&nbsp;&nbsp;List&lt;GroceryItem&gt; findAllbyCategory(String category);
-&nbsp;&nbsp;&nbsp;public long count();
-}</pre>
+```
+public interface ItemReadRepository extends MongoRepository<GroceryItem, String> {
+   @Query("{name:'?0'}")
+   GroceryItem findItemByName(String name);
+   @Query(value="{category:'?0'}", fields="{'name' : 1, 'quantity' : 1}")
+   List<GroceryItem> findAllbyCategory(String category);
+   public long count();
+}
+```
+
 
 Here, we define two different query functions plus a count function. In this case, we can use the standard MongoRepository functions by adding query annotations.
 
 * **findItemByName** : This passes the query {name: '\<value\>'} to the find function in MongoRepository. As seen by the declaration, it returns a single GroceryItem. This maps to the MongoDB *findOne* function and translates to the MongoDB query:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">db.groceryitem.findOne({"name" : "&lt;value passed in&gt;"})</pre>
+```
+db.groceryitem.findOne({"name" : "<value passed in>"})
+```
+
 
 * **findAllbyCategory** : This returns a list of GroceryItems by category. Since this function returns a list, the MongoDB *find* function is used to return all items that meet the criteria. In this example, we add a projection using the 'fields' parameter to only return the 'name' and 'quantity' fields. The MongoDB find method is called under the covers:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">db.groceryitem.find({"category" : "&lt;value passed in&gt;"}).
-project({"name" : 1, "quantity" : 1})</pre>
+```
+db.groceryitem.find({"category" : "<value passed in>"}).
+project({"name" : 1, "quantity" : 1})
+```
+
 
 * **count**: This simply counts the items in the collection.
 
@@ -78,99 +87,111 @@ project({"name" : 1, "quantity" : 1})</pre>
 
 The next repository will be for writing data (C, U, and D of CRUD). This repo only writes to the DB. In our case, we'll call it ItemWriteRepository:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public interface ItemWriteRepository {
-&nbsp;&nbsp;&nbsp;void updateItemQuantity(String itemName, float newQuantity);
-&nbsp;&nbsp;&nbsp;void bulkUpdateItemCategories(String category, String newCategory);
-&nbsp;&nbsp;&nbsp;void deleteAll();
-&nbsp;&nbsp;&nbsp;void deleteById(String id);
-&nbsp;&nbsp;&nbsp;void insert(GroceryItem item);
-}</pre>
+```
+public interface ItemWriteRepository {
+   void updateItemQuantity(String itemName, float newQuantity);
+   void bulkUpdateItemCategories(String category, String newCategory);
+   void deleteAll();
+   void deleteById(String id);
+   void insert(GroceryItem item);
+}
+```
+
 
 As discussed in my previous blog regarding Spring I/O and MongoDB updates, it's best to provide your own write functionality rather than relying on Spring's brute force approach of replacing the entire document - see the section regarding the Double-Edge Sword of Spring and MongoDB below.
 
 We use the ItemWriteRepositoryImpl class in order to specify the exact operations to be carried out for each write function:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public class ItemWriteRepositoryImpl implements ItemWriteRepository {
-&nbsp;&nbsp;&nbsp;@Autowired
-&nbsp;&nbsp;&nbsp;MongoTemplate mongoTemplate;
-&nbsp;&nbsp;&nbsp;public void updateItemQuantity(String name, float newQuantity) {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Query query = new Query(Criteria.where("name").is(name));
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Update update = new Update();
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;update.set("quantity", newQuantity);
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;UpdateResult result = mongoTemplate.updateFirst(query, update, GroceryItem.class);
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if(result == null)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.println("No documents updated");
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;else
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.println(result.getModifiedCount() + " document(s) updated");
-&nbsp;&nbsp;&nbsp;}
+```
+public class ItemWriteRepositoryImpl implements ItemWriteRepository {
+   @Autowired
+   MongoTemplate mongoTemplate;
+   public void updateItemQuantity(String name, float newQuantity) {
+      Query query = new Query(Criteria.where("name").is(name));
+      Update update = new Update();
+      update.set("quantity", newQuantity);
+      UpdateResult result = mongoTemplate.updateFirst(query, update, GroceryItem.class);
+      if(result == null)
+         System.out.println("No documents updated");
+      else
+         System.out.println(result.getModifiedCount() + " document(s) updated");
+   }
 
-&nbsp;&nbsp;&nbsp;public void bulkUpdateItemCategories(String category, String newCategory) {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Query query = new Query(Criteria.where("category").is(category));
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Update update = new Update();
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;update.set("category", newCategory);
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;UpdateResult result = mongoTemplate.updateMulti(query, update, GroceryItem.class);
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if(result == null)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.println("No documents updated");
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;else
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.println(result.getModifiedCount() + " document(s) updated");
-&nbsp;&nbsp;&nbsp;}
+   public void bulkUpdateItemCategories(String category, String newCategory) {
+      Query query = new Query(Criteria.where("category").is(category));
+      Update update = new Update();
+      update.set("category", newCategory);
+      UpdateResult result = mongoTemplate.updateMulti(query, update, GroceryItem.class);
+      if(result == null)
+         System.out.println("No documents updated");
+      else
+         System.out.println(result.getModifiedCount() + " document(s) updated");
+   }
 
-&nbsp;&nbsp;&nbsp;public void deleteAll() {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DeleteResult result = mongoTemplate.remove(new Query(), GroceryItem.class);
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if(result == null)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.println("No documents deleted");
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;else
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.println(result.getDeletedCount() + " document(s) deleted");
-&nbsp;&nbsp;&nbsp;}
+   public void deleteAll() {
+      DeleteResult result = mongoTemplate.remove(new Query(), GroceryItem.class);
+      if(result == null)
+         System.out.println("No documents deleted");
+      else
+         System.out.println(result.getDeletedCount() + " document(s) deleted");
+   }
 
-&nbsp;&nbsp;&nbsp;public void insert(GroceryItem itm){
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;GroceryItem result =&nbsp; mongoTemplate.insert(itm);
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if(result == null)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.println("No document inserted");
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;else
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.println("&nbsp; " + result.getName() + " inserted");
-&nbsp;&nbsp;&nbsp;}
+   public void insert(GroceryItem itm){
+      GroceryItem result =  mongoTemplate.insert(itm);
+      if(result == null)
+         System.out.println("No document inserted");
+      else
+         System.out.println("  " + result.getName() + " inserted");
+   }
 
-&nbsp;&nbsp;&nbsp;public void deleteById(String id){
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Query query = new Query();
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;query.addCriteria(Criteria.where("_id").is(id));
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DeleteResult result = mongoTemplate.remove(query, GroceryItem.class);
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if(result == null)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.println("No documents deleted");
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;else
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.println(result.getDeletedCount() + " documents deleted");
-&nbsp;&nbsp;&nbsp;}
-}</pre>
+   public void deleteById(String id){
+      Query query = new Query();
+      query.addCriteria(Criteria.where("_id").is(id));
+      DeleteResult result = mongoTemplate.remove(query, GroceryItem.class);
+      if(result == null)
+         System.out.println("No documents deleted");
+      else
+         System.out.println(result.getDeletedCount() + " documents deleted");
+   }
+}
+```
+
 
 When requirements change {#h2-5-when-requirements-change}
 ---------------------------------------------------------
 
 At some point in the future, we decide to add validation to the groceryItem so that the quantity must be greater than zero. Since we don't need to worry about this when reading data, we only need to modify the ItemWriteRepository in order to implement this check:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public boolean validate(GroceryItem itm){
-&nbsp;&nbsp;&nbsp;boolean result = true;
-&nbsp;&nbsp;&nbsp;if(itm.getItemQuantity() &lt;= 0)
-&nbsp;&nbsp;&nbsp;{
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.println("&nbsp; **Validation error - quantity for item " +
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;itm.getName() + " must be greater than zero.**");
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;result = false;
-&nbsp;&nbsp;&nbsp;}
-&nbsp;&nbsp;&nbsp;return result;
-}</pre>
+```
+public boolean validate(GroceryItem itm){
+   boolean result = true;
+   if(itm.getItemQuantity() <= 0)
+   {
+      System.out.println("  **Validation error - quantity for item " +
+            itm.getName() + " must be greater than zero.**");
+      result = false;
+   }
+   return result;
+}
+```
+
 
 We must also call the new validator - here's the modified insert function:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public void insert(GroceryItem itm){
-&nbsp;&nbsp;&nbsp;if(validate(itm)) {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;GroceryItem result = mongoTemplate.insert(itm);
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (result == null)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.println("No document inserted");
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;else
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.println("&nbsp; " + result.getName() + " inserted");
-&nbsp;&nbsp;&nbsp;}
-&nbsp;&nbsp;&nbsp;else
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.println("&nbsp; Could not insert " + itm.getName() + " due to validation error above.");
-}</pre>
+```
+public void insert(GroceryItem itm){
+   if(validate(itm)) {
+      GroceryItem result = mongoTemplate.insert(itm);
+      if (result == null)
+         System.out.println("No document inserted");
+      else
+         System.out.println("  " + result.getName() + " inserted");
+   }
+   else
+      System.out.println("  Could not insert " + itm.getName() + " due to validation error above.");
+}
+```
+
 
 In our code example, we also have an "updateItemQuantity" function. Since this only takes a name and a new quantity, the rule regarding quantity \> 0 can be applied in this function by checking the 'newQuantity' parameter before doing the update. When using the CQRS pattern with Spring, we can be certain that we only need to update a single repository ItemWriteRepository, to ensure that ALL sources of application writes will apply the rules consistently.
 
@@ -197,27 +218,33 @@ The MongoDB operation log (or oplog) is how MongoDB replicates writes from the p
 
 Let's see an example. The standard save() method will replace the entire document based on the existing _id. The resulting oplog entry would look something like this (some fields are eliminated for brevity):
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">{
-&nbsp;&nbsp;"op": "u", // for Update
-&nbsp;&nbsp;"ns": "mygrocerylist.GroceryItem",
-&nbsp;&nbsp;"o2": {"_id": "Whole Wheat Biscuit"},
-&nbsp;&nbsp;"o": {
-&nbsp;&nbsp;&nbsp;&nbsp;"_id": "Whole Wheat Biscuit",
-&nbsp;&nbsp;&nbsp;&nbsp;"name": "Whole Wheat Biscuit",
-&nbsp;&nbsp;&nbsp;&nbsp;"quantity": 5,
-&nbsp;&nbsp;&nbsp;&nbsp;"category": "munchies",
-&nbsp;&nbsp;&nbsp;&nbsp;"_class": "com.example.mdbspringboot.model.GroceryItem"
-&nbsp;&nbsp;}
-}</pre>
+```
+{
+  "op": "u", // for Update
+  "ns": "mygrocerylist.GroceryItem",
+  "o2": {"_id": "Whole Wheat Biscuit"},
+  "o": {
+    "_id": "Whole Wheat Biscuit",
+    "name": "Whole Wheat Biscuit",
+    "quantity": 5,
+    "category": "munchies",
+    "_class": "com.example.mdbspringboot.model.GroceryItem"
+  }
+}
+```
+
 
 Using the 'updateMulti' function in our bulkUpdateItemCategories function, this translates to an update of a single field using the MongoDB $set operator. The oplog entry would be smaller, in this case:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">{
-&nbsp;&nbsp;"op" : "u", //&nbsp; for update
-&nbsp;&nbsp;"ns": "mygrocerylist.GroceryItem",
-&nbsp;&nbsp;"o2": {"_id": "Whole Wheat Biscuit"},
-&nbsp;&nbsp;"o" : { "$set" : { "category" : "munchies" } }&nbsp;
-}</pre>
+```
+{
+  "op" : "u", //  for update
+  "ns": "mygrocerylist.GroceryItem",
+  "o2": {"_id": "Whole Wheat Biscuit"},
+  "o" : { "$set" : { "category" : "munchies" } } 
+}
+```
+
 
 In the case of the first example, all of the highlighted fields have not changed and are simply bloating the oplog. Imagine if this document had 200 fields---we would be including *all* of the fields in the oplog for a single field update! When updating documents, it's best to write your own repo functions to avoid sending all of the document's fields to the DB for replacement. Use the updateXXX repo functions to provide an update that uses the $set MongoDB function under the covers.
 

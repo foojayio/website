@@ -46,7 +46,8 @@ You can generate random numbers in Java using `java.util.random.RandomGenerator`
 
 *Example : Using RandomGenerator to pick a random gift from Santa's Bag*
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">import java.util.random.RandomGenerator;
+```java
+import java.util.random.RandomGenerator;
 
 public class SantasRandomGiftBag {
     void main() {
@@ -57,7 +58,8 @@ public class SantasRandomGiftBag {
         System.out.println("Santa has selected: " + selectedGift);
     }
 }
-</pre>
+```
+
 
 By utilizing a `Random` object, you can generate streams of random numbers across various types, including int, double, long, float, and boolean.
 
@@ -69,7 +71,8 @@ We can implement the `SecureRandom` class in a manner similar to how the `Random
 
 *Example : Using SecureRandom to pick a random gift from Santa's Bag*
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">import java.security.SecureRandom;
+```java
+import java.security.SecureRandom;
 
 public class SantasSecureRandomGiftBag {
     void main() {
@@ -79,7 +82,9 @@ public class SantasSecureRandomGiftBag {
         String selectedGift = gifts[randomIndex];
         System.out.println("Santa has selected: " + selectedGift);
     }
-}</pre>
+}
+```
+
 
 The fundamental difference between `java.util.Random` and `java.security. SecureRandom` lies in how the seed is chosen. A seed is an initial value used to initialize a pseudorandom number generator, and its randomness directly impacts the quality of the generated random numbers
 
@@ -91,9 +96,11 @@ The algorithm used by `SecureRandom` can vary depending on the Java Runtime Envi
 
 However, if you have specific requirements, you can explicitly select an algorithm when creating an instance of `SecureRandom`:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">// Specify the algorithm you want to use
+```java
+// Specify the algorithm you want to use
 SecureRandom secureRandom = SecureRandom.getInstance("NativePRNG");
-</pre>
+```
+
 
 When choosing a [random number generation algorithm](https://docs.oracle.com/en/java/javase/21/docs/specs/security/standard-names.html#securerandom-number-generation-algorithms), it is important to consider its blocking behavior. A blocking algorithm, such as `NativePRNGBlocking`, can stall if there isn't enough environmental noise to generate the required amount of randomness. This can lead to performance issues, particularly in applications that need large volumes of random data quickly.
 

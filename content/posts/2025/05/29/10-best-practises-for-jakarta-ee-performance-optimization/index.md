@@ -41,7 +41,7 @@ To make your [Jakarta EE](https://jakarta.ee/) applications faster and more effi
 
 These strategies directly impact user experience, scalability, and operational costs, helping you build applications that perform well under pressure.
 
-*** ** * ** ***
+
 
 Quick Comparison {#quick-comparison}
 ------------------------------------

@@ -49,8 +49,11 @@ For pragmatic reasons, we're going to put this file into *src/main/resources* so
 
 Once this is done, we need to add the generated Client ID and Client Secret to our *application.properties*:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">ASTRA_DB_CLIENT_ID=clientIdHere
-ASTRA_DB_CLIENT_SECRET=clientSecretHere</pre>
+```
+ASTRA_DB_CLIENT_ID=clientIdHere
+ASTRA_DB_CLIENT_SECRET=clientSecretHere
+```
+
 
 ### **2.3. Google Maps API Key** {#h3-4-2-3-google-maps-api-key}
 
@@ -67,14 +70,18 @@ Finally, we need an API key to be able to use this. For this, we need to navigat
 
 We now need to add this key to our *application.properties*file:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">GOOGLE_CLIENT_ID=someRandomClientId</pre>
+```
+GOOGLE_CLIENT_ID=someRandomClientId
+```
+
 
 3. Building the Client Layer Using Astra and CQL {#h2-5-3-building-the-client-layer-using-astra-and-cql}
 --------------------------------------------------------------------------------------------------------
 
 **In order to communicate with the database via CQL, we need to write our client layer.** This will be a class called CqlClient that wraps the DataStax CQL APIs, abstracting away the connection details:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@Repository
+```
+@Repository
 public class CqlClient {
   @Value("${ASTRA_DB_CLIENT_ID}")
   private String clientId;
@@ -82,7 +89,7 @@ public class CqlClient {
   @Value("${ASTRA_DB_CLIENT_SECRET}")
   private String clientSecret;
 
-  public List&lt;Row&gt; query(String cql, Object... binds) {
+  public List<Row> query(String cql, Object... binds) {
     try (CqlSession session = connect()) {
       var statement = session.prepare(cql);
       var bound = statement.bind(binds);
@@ -99,7 +106,8 @@ public class CqlClient {
       .build();
   }
 }
-</pre>
+```
+
 
 This gives us a single public method that will connect to the database and execute an arbitrary CQL query, allowing for some bind values to be provided to it.
 
@@ -114,23 +122,27 @@ Note that this implementation loads every row from the query into memory and ret
 
 Firstly, we need a Java Record to represent each row we are fetching from the database:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public record Location(String avenger, 
+```
+public record Location(String avenger, 
   Instant timestamp, 
   BigDecimal latitude, 
   BigDecimal longitude, 
   BigDecimal status) {}
-</pre>
+```
+
 
 And then we need our service layer to retrieve the data:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@Service
+```
+@Service
 public class MapService {
   @Autowired
   private CqlClient cqlClient;
 
   // To be implemented.
 }
-</pre>
+```
+
 
 Into this, we're going to write our functions to actually query the database -- using the *CqlClient* that we've just written -- and return the appropriate details.
 
@@ -138,15 +150,17 @@ Into this, we're going to write our functions to actually query the database -- 
 
 Our first function is to get a list of all the Avengers that we are able to display the details of:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public List&lt;String&gt; listAvengers() {
+```
+public List<String> listAvengers() {
   var rows = cqlClient.query("select distinct avenger from avengers.events");
 
   return rows.stream()
-    .map(row -&gt; row.getString("avenger"))
+    .map(row -> row.getString("avenger"))
     .sorted()
     .collect(Collectors.toList());
 }
-</pre>
+```
+
 
 **This just gets the list of distinct values in the *avenger* column from our *events* table.** Because this is our partition key, it is incredibly efficient. CQL will only allow us to order the results when we have a filter on the partition key so we are instead doing the sorting in Java code. This is fine though because we know that we have a small number of rows being returned so the sorting will not be expensive.
 
@@ -154,12 +168,13 @@ Our first function is to get a list of all the Avengers that we are able to disp
 
 Our other function is to get a list of all the location details that we wish to display on the map. **This takes a list of avengers, and a start and end time and returns all of the events for them grouped as appropriate:**
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public Map&lt;String, List&lt;Location&gt;&gt; getPaths(List&lt;String&gt; avengers, Instant start, Instant end) {
-  var rows = cqlClient.query("select avenger, timestamp, latitude, longitude, status from avengers.events where avenger in ? and timestamp &gt;= ? and timestamp &lt;= ?", 
+```
+public Map<String, List<Location>> getPaths(List<String> avengers, Instant start, Instant end) {
+  var rows = cqlClient.query("select avenger, timestamp, latitude, longitude, status from avengers.events where avenger in ? and timestamp >= ? and timestamp <= ?", 
     avengers, start, end);
 
   var result = rows.stream()
-    .map(row -&gt; new Location(
+    .map(row -> new Location(
       row.getString("avenger"), 
       row.getInstant("timestamp"), 
       row.getBigDecimal("latitude"), 
@@ -173,7 +188,8 @@ Our other function is to get a list of all the location details that we wish to 
 
   return result;
 }
-</pre>
+```
+
 
 The CQL binds automatically expand out the IN clause to handle multiple avengers correctly, and the fact that we are filtering by the partition and clustering key again makes this efficient to execute. We then parse these into our *Location* object, group them together by the *avenger* field and ensure that each grouping is sorted by the timestamp.
 
@@ -184,7 +200,8 @@ The CQL binds automatically expand out the IN clause to handle multiple avengers
 
 ### **5.1. Map Controller** {#h3-10-5-1-map-controller}
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@Controller
+```
+@Controller
 public class MapController {
   @Autowired
   private MapService mapService;
@@ -198,7 +215,7 @@ public class MapController {
   }
 
   @GetMapping("/map")
-  public ModelAndView showMap(@RequestParam(name = "avenger", required = false) List&lt;String&gt; avenger,
+  public ModelAndView showMap(@RequestParam(name = "avenger", required = false) List<String> avenger,
   @RequestParam(required = false) String start, @RequestParam(required = false) String end) throws Exception {
     var result = new ModelAndView("map");
     result.addObject("inputStart", start);
@@ -207,7 +224,7 @@ public class MapController {
 
     result.addObject("avengers", mapService.listAvengers());
 
-    if (avenger != null &amp;&amp; !avenger.isEmpty() &amp;&amp; start != null &amp;&amp; end != null) {
+    if (avenger != null && !avenger.isEmpty() && start != null && end != null) {
       var paths = mapService.getPaths(avenger, 
         LocalDateTime.parse(start).toInstant(ZoneOffset.UTC), 
         LocalDateTime.parse(end).toInstant(ZoneOffset.UTC));
@@ -218,7 +235,8 @@ public class MapController {
     return result;
   }
 }
-</pre>
+```
+
 
 **This uses our service layer to get the list of avengers, and if we have inputs provided then it also gets the list of locations for those inputs.** We also have a *ModelAttribute* that will provide the Google Client ID to the view for it to use.
 
@@ -226,60 +244,61 @@ public class MapController {
 
 Once we've written our controller, we need a template to actually render the HTML. This will be written using Thymeleaf as in the previous articles:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&lt;!doctype html&gt;
-&lt;html lang="en"&gt;
+```
+<!doctype html>
+<html lang="en">
 
-&lt;head&gt;
-  &lt;meta charset="utf-8" /&gt;
-  &lt;meta name="viewport" content="width=device-width, initial-scale=1" /&gt;
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  &lt;link href="https://cdn.jsdelivr.net/npm/<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="1a7875756e696e687b6a5a2f342a342a37787f6e7b29">[email&nbsp;protected]</a>/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous" /&gt;
+  <link href="https://cdn.jsdelivr.net/npm/<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="1a7875756e696e687b6a5a2f342a342a37787f6e7b29">[email protected]</a>/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous" />
 
-  &lt;title&gt;Avengers Status Map&lt;/title&gt;
-&lt;/head&gt;
+  <title>Avengers Status Map</title>
+</head>
 
-&lt;body&gt;
-  &lt;nav class="navbar navbar-expand-lg navbar-dark bg-dark"&gt;
-    &lt;div class="container-fluid"&gt;
-      &lt;a class="navbar-brand" href="#"&gt;Avengers Status Map&lt;/a&gt;
-    &lt;/div&gt;
-  &lt;/nav&gt;
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">Avengers Status Map</a>
+    </div>
+  </nav>
 
-  &lt;div class="container-fluid mt-4"&gt;
-    &lt;div class="row"&gt;
-      &lt;div class="col-3"&gt;
-        &lt;form action="/map" method="get"&gt;
-          &lt;div class="mb-3"&gt;
-            &lt;label for="avenger" class="form-label"&gt;Avengers&lt;/label&gt;
-            &lt;select class="form-select" multiple name="avenger" id="avenger" required&gt;
-              &lt;option th:each="avenger: ${avengers}" th:text="${avenger}" th:value="${avenger}"
-                th:selected="${inputAvengers != null &amp;&amp; inputAvengers.contains(avenger)}"&gt;&lt;/option&gt;
-            &lt;/select&gt;
-          &lt;/div&gt;
-          &lt;div class="mb-3"&gt;
-            &lt;label for="start" class="form-label"&gt;Start Time&lt;/label&gt;
-            &lt;input type="datetime-local" class="form-control" name="start" id="start" th:value="${inputStart}"
-              required /&gt;
-          &lt;/div&gt;
-          &lt;div class="mb-3"&gt;
-            &lt;label for="end" class="form-label"&gt;End Time&lt;/label&gt;
-            &lt;input type="datetime-local" class="form-control" name="end" id="end" th:value="${inputEnd}" required /&gt;
-          &lt;/div&gt;
-          &lt;button type="submit" class="btn btn-primary"&gt;Submit&lt;/button&gt;
-        &lt;/form&gt;
-      &lt;/div&gt;
-      &lt;div class="col-9"&gt;
-        &lt;div id="map" style="width: 100%; height: 40em;"&gt;&lt;/div&gt;
-      &lt;/div&gt;
-    &lt;/div&gt;
-  &lt;/div&gt;
+  <div class="container-fluid mt-4">
+    <div class="row">
+      <div class="col-3">
+        <form action="/map" method="get">
+          <div class="mb-3">
+            <label for="avenger" class="form-label">Avengers</label>
+            <select class="form-select" multiple name="avenger" id="avenger" required>
+              <option th:each="avenger: ${avengers}" th:text="${avenger}" th:value="${avenger}"
+                th:selected="${inputAvengers != null && inputAvengers.contains(avenger)}"></option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label for="start" class="form-label">Start Time</label>
+            <input type="datetime-local" class="form-control" name="start" id="start" th:value="${inputStart}"
+              required />
+          </div>
+          <div class="mb-3">
+            <label for="end" class="form-label">End Time</label>
+            <input type="datetime-local" class="form-control" name="end" id="end" th:value="${inputEnd}" required />
+          </div>
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+      </div>
+      <div class="col-9">
+        <div id="map" style="width: 100%; height: 40em;"></div>
+      </div>
+    </div>
+  </div>
 
-  &lt;script src="https://cdn.jsdelivr.net/npm/<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="03616c6c77707771627343362d332d332e6166776230">[email&nbsp;protected]</a>/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"&gt;
-    &lt;/script&gt;
-  &lt;script type="text/javascript" th:inline="javascript"&gt;
-    /*&lt;![CDATA[*/
+  <script src="https://cdn.jsdelivr.net/npm/<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="03616c6c77707771627343362d332d332e6166776230">[email protected]</a>/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous">
+    </script>
+  <script type="text/javascript" th:inline="javascript">
+    /*<![CDATA[*/
     let paths = /*[[${paths}]]*/ {};
 
     let map;
@@ -318,7 +337,7 @@ Once we've written our controller, we need a template to actually render the HTM
         const color = getColor(avenger);
 
         new google.maps.Polyline({
-          path: path.map(point =&gt; ({ lat: point.latitude, lng: point.longitude })),
+          path: path.map(point => ({ lat: point.latitude, lng: point.longitude })),
           geodesic: true,
           strokeColor: color,
           strokeOpacity: 1.0,
@@ -326,9 +345,9 @@ Once we've written our controller, we need a template to actually render the HTM
           map: map,
         });
 
-        path.forEach((point, index) =&gt; {
+        path.forEach((point, index) => {
           const infowindow = new google.maps.InfoWindow({
-            content: "&lt;dl&gt;&lt;dt&gt;Avenger&lt;/dt&gt;&lt;dd&gt;" + avenger + "&lt;/dd&gt;&lt;dt&gt;Timestamp&lt;/dt&gt;&lt;dd&gt;" + point.timestamp + "&lt;/dd&gt;&lt;dt&gt;Status&lt;/dt&gt;&lt;dd&gt;" + Math.round(point.status * 10000) / 100 + "%&lt;/dd&gt;&lt;/dl&gt;"
+            content: "<dl><dt>Avenger</dt><dd>" + avenger + "</dd><dt>Timestamp</dt><dd>" + point.timestamp + "</dd><dt>Status</dt><dd>" + Math.round(point.status * 10000) / 100 + "%</dd></dl>"
           });
 
           const marker = new google.maps.Marker({
@@ -341,7 +360,7 @@ Once we've written our controller, we need a template to actually render the HTM
             map: map,
           });
 
-          marker.addListener("click", () =&gt; {
+          marker.addListener("click", () => {
             if (openInfoWindow) {
               openInfoWindow.close();
               openInfoWindow = undefined;
@@ -368,15 +387,17 @@ Once we've written our controller, we need a template to actually render the HTM
       }[avenger];
     }
 
-    /*]]&gt;*/
-  &lt;/script&gt;
+    /*]]>*/
+  </script>
 
-  &lt;script
-    th:src="${'https://maps.googleapis.com/maps/api/js?key=' + googleClientId + '&amp;callback=initMap&amp;libraries=&amp;v=weekly'}"
-    async&gt;&lt;/script&gt;
-&lt;/body&gt;
+  <script
+    th:src="${'https://maps.googleapis.com/maps/api/js?key=' + googleClientId + '&callback=initMap&libraries=&v=weekly'}"
+    async></script>
+</body>
 
-&lt;/html&gt;</pre>
+</html>
+```
+
 
 We are injecting the data retrieved from Cassandra, as well as some other details. Thymeleaf automatically handles converting the objects within the *script* block into valid JSON. Once this is done, our JavaScript then renders a map using the Google Maps API and adds some routes and markers onto it to show our selected data.
 

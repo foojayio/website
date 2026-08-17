@@ -63,8 +63,11 @@ For the **Token Bucket Rate Limiter**, Redis provides an efficient way to track 
 
 First, retrieve the current token count and the last refill time:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">GET rate_limit:&lt;clientId&gt;:count  
-GET rate_limit:&lt;clientId&gt;:lastRefill</pre>
+```
+GET rate_limit:<clientId>:count  
+GET rate_limit:<clientId>:lastRefill
+```
+
 
 If these keys don't exist, initialize the token count to the bucket's maximum capacity and set the current time as the last refill time using SET.
 
@@ -72,14 +75,20 @@ If these keys don't exist, initialize the token count to the bucket's maximum ca
 
 Update the token count and last refill date time after processing each request:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">SET rate_limit:&lt;clientId&gt;:count &lt;new_token_count&gt;  
-SET rate_limit:&lt;clientId&gt;:lastRefill &lt;current_time&gt;</pre>
+```
+SET rate_limit:<clientId>:count <new_token_count>  
+SET rate_limit:<clientId>:lastRefill <current_time>
+```
+
 
 ### 3. Allow or reject the request {#h3-8-3-allow-or-reject-the-request}
 
 If tokens are available, allow the request and decrement the count by one using:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">DECR rate_limit:&lt;clientId&gt;:count</pre>
+```
+DECR rate_limit:<clientId>:count
+```
+
 
 Implementing it with Jedis {#h2-9-implementing-it-with-jedis}
 -------------------------------------------------------------
@@ -90,11 +99,14 @@ Implementing it with Jedis {#h2-9-implementing-it-with-jedis}
 
 Check the latest version [here](https://redis.io/docs/latest/develop/clients/jedis/).
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">&lt;dependency&gt;
-    &lt;groupId&gt;redis.clients&lt;/groupId&gt;
-    &lt;artifactId&gt;jedis&lt;/artifactId&gt;
-    &lt;version&gt;5.2.0&lt;/version&gt;
-&lt;/dependency&gt;</pre>
+```
+<dependency>
+    <groupId>redis.clients</groupId>
+    <artifactId>jedis</artifactId>
+    <version>5.2.0</version>
+</dependency>
+```
+
 
 ### Create a **TokenBucketRateLimiter** class: {#h3-11-create-a-tokenbucketratelimiter-class}
 
@@ -104,7 +116,8 @@ The class will take:
 2. Define the maximum capacity of the token bucket.
 3. Specify the token refill rate (tokens per second). 
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">package io.redis;
+```
+package io.redis;
 
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.Transaction;
@@ -119,7 +132,9 @@ public class TokenBucketRateLimiter {
         this.bucketCapacity = bucketCapacity;
         this.refillRate = refillRate;
     }
-}</pre>
+}
+```
+
 
 ### Validate the Requests {#h3-12-validate-the-requests}
 
@@ -129,10 +144,13 @@ The main task of this rate limiter is to determine whether a client has sufficie
 
 We'll store each client's token count and last refill time in Redis using unique keys. The keys will look like this:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">public boolean isAllowed(String clientId) {
+```
+public boolean isAllowed(String clientId) {
     String keyCount = "rate_limit:" + clientId + ":count";
     String keyLastRefill = "rate_limit:" + clientId + ":lastRefill";
-}</pre>
+}
+```
+
 
 For example, if the client ID is user123, their keys would be rate_limit:user123:count and rate_limit:user123:lastRefill.
 
@@ -140,7 +158,8 @@ For example, if the client ID is user123, their keys would be rate_limit:user123
 
 We use Redis's GET command to retrieve the current token count and the last refill time. If the keys don't exist, we assume the bucket is full, and the last refill time is the current timestamp.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">public boolean isAllowed(String clientId) {
+```
+public boolean isAllowed(String clientId) {
     String keyCount = "rate_limit:" + clientId + ":count";
     String keyLastRefill = "rate_limit:" + clientId + ":lastRefill";
 
@@ -152,42 +171,54 @@ We use Redis's GET command to retrieve the current token count and the last refi
     long currentTime = System.currentTimeMillis();
     long lastRefillTime = results.get(0) != null ? Long.parseLong((String) results.get(0)) : currentTime;
     int tokenCount = results.get(1) != null ? Integer.parseInt((String) results.get(1)) : bucketCapacity;
-}</pre>
+}
+```
+
 
 **Step 3: Refill Tokens**   
 
 Calculate how many tokens should be added based on the time elapsed since the last refill. Ensure the bucket doesn't exceed its maximum capacity.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">long elapsedTimeMs = currentTime - lastRefillTime;
+```
+long elapsedTimeMs = currentTime - lastRefillTime;
 double elapsedTimeSecs = elapsedTimeMs / 1000.0;
 int tokensToAdd = (int) (elapsedTimeSecs * refillRate);
 
-tokenCount = Math.min(bucketCapacity, tokenCount + tokensToAdd);</pre>
+tokenCount = Math.min(bucketCapacity, tokenCount + tokensToAdd);
+```
+
 
 **Step 4: Check Token Availability**   
 
 Compare the current token count to determine if the request can be allowed. **If tokens are available, deduct one token; otherwise, block the request.**
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">boolean isAllowed = tokenCount &gt; 0;
+```
+boolean isAllowed = tokenCount > 0;
 
 if (isAllowed) {
     tokenCount--;
-}</pre>
+}
+```
+
 
 **Step 5: Update Redis**   
 
 We update the token count and last refill time in Redis. Use a transaction to ensure atomic updates:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">Transaction transaction = jedis.multi();
+```
+Transaction transaction = jedis.multi();
 transaction.set(keyLastRefill, String.valueOf(currentTime)); // Update last refill time
 transaction.set(keyCount, String.valueOf(tokenCount));       // Update token count
-transaction.exec();</pre>
+transaction.exec();
+```
+
 
 ### Complete Implementation {#h3-13-complete-implementation}
 
 Here's the full code for the FixedWindowRateLimiter class:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">package io.redis;
+```
+package io.redis;
 
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.Transaction;
@@ -225,7 +256,7 @@ public class TokenBucketRateLimiter {
         tokenCount = Math.min(bucketCapacity, tokenCount + tokensToAdd);
 
         // Check if the request is allowed
-        boolean isAllowed = tokenCount &gt; 0;
+        boolean isAllowed = tokenCount > 0;
 
         if (isAllowed) {
             tokenCount--; // Consume one token
@@ -239,7 +270,9 @@ public class TokenBucketRateLimiter {
 
         return isAllowed;
     }
-}</pre>
+}
+```
+
 
 And we're ready to start testing it's behavior!
 
@@ -258,7 +291,8 @@ Let's begin by adding the necessary dependencies to our pom.xml.
 
 Here's what you'll need in your Maven pom.xml file:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">org.junit.jupiter
+```
+org.junit.jupiter
 junit-jupiter-engine
 5.10.0
 test
@@ -271,7 +305,9 @@ test
 org.assertj
 assertj-core
 3.11.1
-test</pre>
+test
+```
+
 
 Once you've added these dependencies, you're ready to start writing your test class.
 
@@ -285,11 +321,14 @@ The first step is to create a test class named FixedWindowRateLimiterTest. Insid
 
 Here's how the skeleton of our test class looks:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">public class TokenBucketRateLimiterTest {
+```
+public class TokenBucketRateLimiterTest {
 
     private static RedisContainer redisContainer;
     private Jedis jedis;
-    private TokenBucketRateLimiter rateLimiter;</pre>
+    private TokenBucketRateLimiter rateLimiter;
+```
+
 
 ### Preparing the Environment Before Each Test {#h3-17-preparing-the-environment-before-each-test}
 
@@ -300,7 +339,8 @@ Before running any test, we need to ensure a clean Redis environment. Here's wha
 
 We'll set this up in a method annotated with @BeforeEach, which runs before every test case.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">@BeforeAll
+```
+@BeforeAll
 static void startContainer() {
     redisContainer = new RedisContainer("redis:latest");
     redisContainer.withExposedPorts(6379).start();
@@ -310,7 +350,9 @@ static void startContainer() {
 void setup() {
     jedis = new Jedis(redisContainer.getHost(), redisContainer.getFirstMappedPort());
     jedis.flushAll();
-}</pre>
+}
+```
+
 
 > FLUSHALL is an actual Redis command that deletes all the keys of all the existing databases. [Read more about it in the official documentation](https://redis.io/docs/latest/commands/flushall/).
 
@@ -318,16 +360,20 @@ void setup() {
 
 After each test, we need to close the Jedis connection to free up resources. This ensures no lingering connections interfere with subsequent tests.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">@AfterEach
+```
+@AfterEach
 void tearDown() {
     jedis.close();
-}</pre>
+}
+```
+
 
 ### Full Setup {#h3-19-full-setup}
 
 Here's how the complete test class looks with everything in place:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">public class TokenBucketRateLimiterTest {
+```
+public class TokenBucketRateLimiterTest {
 
     private static RedisContainer redisContainer;
     private Jedis jedis;
@@ -354,7 +400,9 @@ Here's how the complete test class looks with everything in place:
     void tearDown() {
         jedis.close();
     }
-}</pre>
+}
+```
+
 
 ### Verifying Requests Within the Bucket Capacity {#h3-20-verifying-requests-within-the-bucket-capacity}
 
@@ -364,15 +412,18 @@ We configure it with a **capacity of** **5 tokens** and a **refill rate of one t
 
 Each call should return true, confirming the rate limiter correctly tracks and permits requests within the capacity.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">@Test
+```
+@Test
 void shouldAllowRequestsWithinBucketCapacity() {
     rateLimiter = new TokenBucketRateLimiter(jedis, 5, 1.0);
-    for (int i = 1; i &lt;= 5; i++) {
+    for (int i = 1; i <= 5; i++) {
         assertThat(rateLimiter.isAllowed("client-1"))
             .withFailMessage("Request %d should be allowed within bucket capacity", i)
             .isTrue();
     }
-}</pre>
+}
+```
+
 
 ### Verifying Requests Are Denied When Bucket is Empty {#h3-21-verifying-requests-are-denied-when-bucket-is-empty}
 
@@ -382,10 +433,11 @@ Configured with a **capacity of** **5 tokens** and a **refill rate of one token 
 
 On the 6th call, it should return false, verifying the rate limiter blocks requests once the bucket is empty.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">@Test
+```
+@Test
 void shouldDenyRequestsOnceBucketIsEmpty() {
     rateLimiter = new TokenBucketRateLimiter(jedis, 5, 1.0);
-    for (int i = 1; i &lt;= 5; i++) {
+    for (int i = 1; i <= 5; i++) {
         assertThat(rateLimiter.isAllowed("client-1"))
             .withFailMessage("Request %d should be allowed within bucket capacity", i)
             .isTrue();
@@ -393,7 +445,9 @@ void shouldDenyRequestsOnceBucketIsEmpty() {
     assertThat(rateLimiter.isAllowed("client-1"))
         .withFailMessage("Request beyond bucket capacity should be denied")
         .isFalse();
-}</pre>
+}
+```
+
 
 ### Verifying Bucket is Gradually Refilled {#h3-22-verifying-bucket-is-gradually-refilled}
 
@@ -403,12 +457,13 @@ Configured with a **capacity of** **5 tokens** and a **refill rate of one token 
 
 After waiting for two seconds, the next two requests are allowed and the third one is denied. Confirming the refilling behavior works as expected.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">@Test
+```
+@Test
 void shouldRefillTokensGraduallyAndAllowRequestsOverTime() throws InterruptedException {
     rateLimiter = new TokenBucketRateLimiter(jedis, 5, 1.0);
     String clientId = "client-1";
 
-    for (int i = 1; i &lt;= 5; i++) {
+    for (int i = 1; i <= 5; i++) {
         assertThat(rateLimiter.isAllowed(clientId))
             .withFailMessage("Request %d should be allowed within bucket capacity", i)
             .isTrue();
@@ -428,7 +483,9 @@ void shouldRefillTokensGraduallyAndAllowRequestsOverTime() throws InterruptedExc
     assertThat(rateLimiter.isAllowed(clientId))
         .withFailMessage("Request beyond available tokens should be denied")
         .isFalse();
-}</pre>
+}
+```
+
 
 ### Verifying Independent Handling of Multiple Clients {#h3-23-verifying-independent-handling-of-multiple-clients}
 
@@ -438,14 +495,15 @@ Configured with a **capacity of** **5 tokens** and a **refill rate of one token 
 
 Simultaneously, all 5 requests from **client-2** are allowed (true), confirming the rate limiter maintains separate counters for each client.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">@Test
+```
+@Test
 void shouldHandleMultipleClientsIndependently() {
     rateLimiter = new TokenBucketRateLimiter(jedis, 5, 1.0);
 
     String clientId1 = "client-1";
     String clientId2 = "client-2";
 
-    for (int i = 1; i &lt;= 5; i++) {
+    for (int i = 1; i <= 5; i++) {
         assertThat(rateLimiter.isAllowed(clientId1))
             .withFailMessage("Client 1 request %d should be allowed", i)
             .isTrue();
@@ -454,12 +512,14 @@ void shouldHandleMultipleClientsIndependently() {
         .withFailMessage("Client 1 request beyond bucket capacity should be denied")
         .isFalse();
 
-    for (int i = 1; i &lt;= 5; i++) {
+    for (int i = 1; i <= 5; i++) {
         assertThat(rateLimiter.isAllowed(clientId2))
             .withFailMessage("Client 2 request %d should be allowed", i)
             .isTrue();
     }
-}</pre>
+}
+```
+
 
 ### Verifying Token Refill Does Not Exceed Bucket Capacity {#h3-24-verifying-token-refill-does-not-exceed-bucket-capacity}
 
@@ -469,14 +529,15 @@ Configured with a **capacity of 3 tokens** and a **refill rate of 2 tokens per s
 
 After waiting 3 seconds (enough to refill 6 tokens), the bucket refills only up to its maximum capacity of 3 tokens. The next 3 requests are allowed (true), but any additional request is denied (false), confirming that the rate limiter maintains the specified capacity limit regardless of refill surplus.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">@Test
+```
+@Test
 void shouldRefillTokensUpToCapacityWithoutExceedingIt() throws InterruptedException {
     int capacity = 3;
     double refillRate = 2.0;
     String clientId = "client-1";
     rateLimiter = new TokenBucketRateLimiter(jedis, capacity, refillRate);
 
-    for (int i = 1; i &lt;= capacity; i++) {
+    for (int i = 1; i <= capacity; i++) {
         assertThat(rateLimiter.isAllowed(clientId))
             .withFailMessage("Request %d should be allowed within initial bucket capacity", i)
             .isTrue();
@@ -487,7 +548,7 @@ void shouldRefillTokensUpToCapacityWithoutExceedingIt() throws InterruptedExcept
 
     TimeUnit.SECONDS.sleep(3);
 
-    for (int i = 1; i &lt;= capacity; i++) {
+    for (int i = 1; i <= capacity; i++) {
         assertThat(rateLimiter.isAllowed(clientId))
             .withFailMessage("Request %d should be allowed as bucket refills up to capacity", i)
             .isTrue();
@@ -495,7 +556,9 @@ void shouldRefillTokensUpToCapacityWithoutExceedingIt() throws InterruptedExcept
     assertThat(rateLimiter.isAllowed(clientId))
         .withFailMessage("Request beyond bucket capacity should be denied")
         .isFalse();
-}</pre>
+}
+```
+
 
 ### Verifying Denied Requests Do Not Affect Token Count {#h3-25-verifying-denied-requests-do-not-affect-token-count}
 
@@ -505,14 +568,15 @@ Configured with a **capacity of 3 tokens** and a **refill rate of 0.5 tokens per
 
 The Redis token count (rate_limit:client-1:count) is then verified to ensure it accurately reflects the remaining tokens (0 in this case) and does not include denied requests. This confirms that the rate limiter updates the token count only when requests are successfully processed.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">@Test
+```
+@Test
 void testRateLimitDeniedRequestsAreNotCounted() {
     int capacity = 3;
     double refillRate = 0.5;
     String clientId = "client-1";
     rateLimiter = new TokenBucketRateLimiter(jedis, capacity, refillRate);
 
-    for (int i = 1; i &lt;= capacity; i++) {
+    for (int i = 1; i <= capacity; i++) {
         assertThat(rateLimiter.isAllowed(clientId))
             .withFailMessage("Request %d should be allowed", i)
             .isTrue();
@@ -526,7 +590,9 @@ void testRateLimitDeniedRequestsAreNotCounted() {
     assertThat(requestCount)
         .withFailMessage("The count should match remaining tokens and not include denied requests")
         .isEqualTo(0);
-}</pre>
+}
+```
+
 
 Is there any other behavior we should verify? Let me know in the comments!
 

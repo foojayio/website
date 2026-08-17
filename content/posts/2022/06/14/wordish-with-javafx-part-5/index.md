@@ -74,7 +74,8 @@ Let's show you how to display both these game statistics as well as the JavaFX B
 
 Class WordStats stores our game-playing statistics as the user works through each game. Here's the WordStats class and its class variables (without the getters and setters). Variable `guessDistribution` is a HashMap with Integer keys and values. The key corresponds to the number of tries a successful play took (a number between 1 and 6, inclusive) and the value is the number of games that took that number of tries. Variable `thisGameGuesses` is how many guesses the most recent game took (one through six). A value of zero means the user did not guess the word in the allotted six tries.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="false" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public class WordStats {
+```java
+public class WordStats {
 
     private int gamesPlayed = 0;
     private int totalWins = 0;
@@ -82,16 +83,18 @@ Class WordStats stores our game-playing statistics as the user works through eac
     private int maxStreak = 0;
     public static final int MAX_GUESS = 6;
     private int thisGameGuesses = 0;
-    private final Map&lt;Integer, Integer&gt; guessDistribution = 
-            new HashMap&lt;&gt;();
+    private final Map<Integer, Integer> guessDistribution = 
+            new HashMap<>();
 
     WordStats() {
         // rangeClosed is (1, 2, 3, 4, 5, 6)
             IntStream.rangeClosed(1, MAX_GUESS)
-                .forEach(i -&gt; guessDistribution.put(i, 0));
+                .forEach(i -> guessDistribution.put(i, 0));
     }
       // setters and getters omitted . . .
-}</pre>
+}
+```
+
 
 **Note** : See **[WordStats.java](https://github.com/gailasgteach/Wordish/blob/master/src/main/java/com/asgteach/model/WordStats.java)** and **[GameStatus.java](https://github.com/gailasgteach/Wordish/blob/master/src/main/java/com/asgteach/model/GameStatus.java)**.
 
@@ -99,7 +102,8 @@ Class WordStats stores our game-playing statistics as the user works through eac
 
 FXML file **stats.fxml** describes the Statistics view, shown in Figure 2. The controller class for this view is **StatsController.java** . The `@FXML` annotation provides access to the appropriate Label controls, which we set in the `initialize()` method, as shown here.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="false" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public class StatsController {
+```java
+public class StatsController {
 
     @FXML
     private Label statPlayed;
@@ -120,7 +124,9 @@ FXML file **stats.fxml** describes the Statistics view, shown in Figure 2. The c
             statMax.setText(String.valueOf(ws.getMaxStreak()));
               . . .
       }
-}</pre>
+}
+```
+
 
 **Note** : See **[stats.fxml](https://github.com/gailasgteach/Wordish/blob/master/src/main/resources/com/asgteach/stats.fxml)** and **[StatsController.java](https://github.com/gailasgteach/Wordish/blob/master/src/main/java/com/asgteach/StatsController.java)**.
 
@@ -134,15 +140,18 @@ Alternatively, you can orient a Bar Chart horizontally (as in Figure 2), where t
 
 Here are the BarChart, NumberAxis, and CategoryAxis UI controls for Wordish. First, the X-axis is the first BarChart attribute (Number) while the Y-axis is the second attribute (String). Next, the chart's data is stored in an ObservableList whose type is `BarChart.Series<Number, String>`. This is a named series of data items. (XYCharts manipulate a list of lists.)
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="false" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">    @FXML
-    private BarChart&lt;Number, String&gt; barChart;
+```java
+    @FXML
+    private BarChart<Number, String> barChart;
     @FXML
     private NumberAxis xAxis;
     @FXML
     private CategoryAxis yAxis;
 
-    private final ObservableList&lt;BarChart.Series&lt;Number, String&gt;&gt; bcData
-            = FXCollections.observableArrayList();</pre>
+    private final ObservableList<BarChart.Series<Number, String>> bcData
+            = FXCollections.observableArrayList();
+```
+
 
 ### Method `getBarChartData()` {#h3-4-method-getbarchartdata}
 
@@ -150,18 +159,21 @@ Although a Bar Chart can have multiple series, we have only one series here. We 
 
 We add each data item to the front of the list (index 0). Consequently, the Guess Distribution data displays with guess "1" at the top and guess "6" at the bottom. As noted, the CategoryAxis (`y-axis`) expects a String and therefore, we convert the hashmap's Integer key to a String. We subsequently add the series to the chart data `bcData`.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="false" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">private ObservableList&lt;XYChart.Series&lt;Number, String&gt;&gt; getBarChartData() {
-        XYChart.Series&lt;Number, String&gt; series = new XYChart.Series&lt;&gt;();
-        ws.getGuessDistribution().keySet().forEach(key -&gt; {
+```java
+private ObservableList<XYChart.Series<Number, String>> getBarChartData() {
+        XYChart.Series<Number, String> series = new XYChart.Series<>();
+        ws.getGuessDistribution().keySet().forEach(key -> {
             series.getData().add(0,
-                    new BarChart.Data&lt;&gt;(
+                    new BarChart.Data<>(
                             ws.getGuessDistribution().get(key),
                             String.valueOf(key)));
         });
 
         bcData.add(series);
         return bcData;
-}</pre>
+}
+```
+
 
 **Note** : See **[StatsController.java](https://github.com/gailasgteach/Wordish/blob/master/src/main/java/com/asgteach/StatsController.java)**.
 
@@ -169,7 +181,8 @@ We add each data item to the front of the list (index 0). Consequently, the Gues
 
 A standard JavaFX Bar Chart uses default colors for each of its data series. We can easily change the default color with CSS, as shown below. Here, we set the `.chart-bar` selector attribute `-fx-bar-fill` to our previously defined `-fx-nomatch-color` (a gray color). We similarly set the `.chartlabel` selector (which styles the specialized Label nodes, discussed next) to use the same `-fx-nomatch-color`, with `-fx-text-fill` set to white.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="css" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="false" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">.chart-bar {
+```css
+.chart-bar {
     -fx-bar-fill: -fx-nomatch-color;
 }
 
@@ -177,16 +190,21 @@ A standard JavaFX Bar Chart uses default colors for each of its data series. We 
     -fx-background-color: -fx-nomatch-color;
     -fx-text-fill: white;
     -fx-padding: 2 5 3 5;
-}</pre>
+}
+```
+
 
 Recall that both the bar chart color and label will be green for the most recently played game. These we set in the controller code shown below. First, we locate the bar chart node corresponding to the Y-axis value of the current game. Then, we set the `-fx-bar-fill` of the bar chart node and the `-fx-background-color` of the label to `-fx-match-color` (green).
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="false" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">. . .   
+```java
+. . .   
 if (data.getYValue().equals(String.valueOf(ws.getThisGameGuesses()))) {
       node.setStyle("-fx-bar-fill: -fx-match-color;");
       mylabels.get(i).setStyle("-fx-background-color: -fx-match-color;");
 }
-. . . </pre>
+. . .
+```
+
 
 **Note** : See **[styles.css](https://github.com/gailasgteach/Wordish/blob/master/src/main/resources/com/asgteach/style.css)** and **[StatsController.java](https://github.com/gailasgteach/Wordish/blob/master/src/main/java/com/asgteach/StatsController.java)** (method `fixLabels()`).
 
@@ -204,16 +222,19 @@ A straightforward tactic is to create a 50 millisecond delay. This gives the Jav
 
 Here's the scene property change listener with the delay. We create a Timeline with a 50-millisecond key frame. After finishing, we invoke method `fixLabels()`, which moves the Label controls to their correct place on the chart.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="false" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">        pane.sceneProperty().addListener(changeListener =
-                (ObservableValue&lt;? extends Scene&gt; observableScene,
-                        Scene oldScene, Scene newScene) -&gt; {
-            if (oldScene == null &amp;&amp; newScene != null) {
+```java
+        pane.sceneProperty().addListener(changeListener =
+                (ObservableValue<? extends Scene> observableScene,
+                        Scene oldScene, Scene newScene) -> {
+            if (oldScene == null && newScene != null) {
                 new Timeline(
                         new KeyFrame(Duration.millis(50), 
-                            ae -&gt; fixLabels()))
+                            ae -> fixLabels()))
                         .play();
             }
-        });</pre>
+        });
+```
+
 
 #### Approach 2: Force JavaFX to Render the Scene
 
@@ -221,35 +242,39 @@ But wait, there's more! If creating a delay feels wrong to you, there's another 
 
 Here's the alternate scene property change listener that invokes method `snapshot()`.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="false" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">       pane.sceneProperty().addListener(changeListener
-                = (ObservableValue&lt;? extends Scene&gt; observableScene,
-                        Scene oldScene, Scene newScene) -&gt; {
-          if (oldScene == null &amp;&amp; newScene != null) {
+```java
+       pane.sceneProperty().addListener(changeListener
+                = (ObservableValue<? extends Scene> observableScene,
+                        Scene oldScene, Scene newScene) -> {
+          if (oldScene == null && newScene != null) {
               WritableImage image = pane.snapshot(
                          new SnapshotParameters(), null);
               fixLabels();
           }
-       });</pre>
+       });
+```
+
 
 And here is method `fixLabels()`. You've already seen the code that updates the CSS. We use `translateX()` and `translateY()` to move the Label to its desired place in the bar chart. We set the Label's `text` property with the data's X-value.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="false" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">    public void fixLabels() {
+```java
+    public void fixLabels() {
         // this code only works after the scene is completely rendered
-        List&lt;Label&gt; mylabels = pane.getChildren().stream()
-                .filter(sc -&gt; sc instanceof Label)
+        List<Label> mylabels = pane.getChildren().stream()
+                .filter(sc -> sc instanceof Label)
                 .map(Label.class::cast)
                 .collect(Collectors.toList());
-        mylabels.stream().forEach(l -&gt; {
+        mylabels.stream().forEach(l -> {
             l.toFront();
             l.getStyleClass().add("chartlabel");
         });
         // find chart area Node
         Node chartArea = barChart.lookup(".chart-plot-background");
-        XYChart.Series&lt;Number, String&gt; series = barChart.getData().get(0);
+        XYChart.Series<Number, String> series = barChart.getData().get(0);
 
         IntStream.range(0, series.getData().size())
-          .forEach(i -&gt; {
-                    Data&lt;Number, String&gt; data = series.getData().get(i);
+          .forEach(i -> {
+                    Data<Number, String> data = series.getData().get(i);
                     Node node = data.getNode();
                     . . . code to update css, see above . . .
                     // Place the label on the bar
@@ -274,7 +299,9 @@ And here is method `fixLabels()`. You've already seen the code that updates the 
                     mylabels.get(i).setTranslateY(displayPositionY + 21);
                     mylabels.get(i).setVisible(true);
             });
-    }</pre>
+    }
+```
+
 
 Note that the critical code that depends on CSS and layout rendering includes the display position of the X- and Y-axis and the bounds area of the chart.
 
@@ -299,7 +326,8 @@ Figure 3 shows the popup control after guessing the word in one try. (Spoiler al
 
 We style the popup with CSS as shown here.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="css" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="false" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">.popup {
+```css
+.popup {
     -fx-background-color: black;
     -fx-padding: 10;
     -fx-border-color: white;
@@ -310,7 +338,9 @@ We style the popup with CSS as shown here.
     -fx-text-alignment:center;
     -fx-border-radius: 10 10 10 10;
     -fx-background-radius: 10 10 10 10;
-}</pre>
+}
+```
+
 
 The background is black with a white border and white text fill. The control has rounded corners and the text is center-aligned.
 
@@ -320,7 +350,8 @@ Method `show()` invokes `createPopup()`, creates and sets the label, and shows t
 
 The `setOnShown()` event handler positions the popup at the center of the stage a third of the way down from the top. A timer hides the popup after 2.5 seconds.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="false" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public class WordPopup {
+```java
+public class WordPopup {
 
     private static final int POPUP_TIMEOUT = 2500;
 
@@ -339,7 +370,7 @@ The `setOnShown()` event handler positions the popup at the center of the stage 
                               final Control control) {
             Stage stage = (Stage) control.getScene().getWindow();
             final Popup popup = createPopup(message);
-            popup.setOnShown(e -&gt; {
+            popup.setOnShown(e -> {
                 popup.setX(stage.getX() 
                        + stage.getWidth() / 2 
                        - popup.getWidth() / 2);
@@ -351,21 +382,25 @@ The `setOnShown()` event handler positions the popup at the center of the stage 
 
             new Timeline(new KeyFrame(
                     Duration.millis(POPUP_TIMEOUT),
-                    ae -&gt; popup.hide())).play();
+                    ae -> popup.hide())).play();
         }
 
-}</pre>
+}
+```
+
 
 Here is an example of how we display the WordPopup during game play. The actual message in this example depends on how many guesses the user took to submit the correct word (variable `rownum`).
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">        if ((list.stream()
-                .filter(c -&gt; !c.getMatchResult().equals(MATCHING))
+```java
+        if ((list.stream()
+                .filter(c -> !c.getMatchResult().equals(MATCHING))
                 .count() == 0)) {   //match!
             WordPopup.show(messages.get(rownum), enterButton);
             animateSuccessGroup(list);
             updateGameState(true);
-        } else . . . 
-</pre>
+        } else . . .
+```
+
 
 **Note** : See **[WordPopup.java](https://github.com/gailasgteach/Wordish/blob/master/src/main/java/com/asgteach/modelview/WordPopup.java)** , **[WordishController.java](https://github.com/gailasgteach/Wordish/blob/master/src/main/java/com/asgteach/WordishController.java)** , and **[styles.css](https://github.com/gailasgteach/Wordish/blob/master/src/main/resources/com/asgteach/style.css)**.
 

@@ -28,7 +28,8 @@ In a previous article about [open-source Chronicle Queue](https://chronicle.soft
 
 In this article, we will use a *Data Transfer Object* (hereafter, **DTO** ) named ***MarketData**,* which contains financial information with a relatively large number of fields. The same principles apply to other DTOs in any other business area.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">abstract class MarketData extends SelfDescribingMarshallable {
+```java
+abstract class MarketData extends SelfDescribingMarshallable {
 
     long securityId;
     long time;
@@ -41,7 +42,9 @@ In this article, we will use a *Data Transfer Object* (hereafter, **DTO** ) name
     double askPrice0, askPrice1, askPrice2, askPrice3;
 
     // Getters and setters not shown for clarity
-}</pre>
+}
+```
+
 
 ### Default Serialization {#h3-1-default-serialization}
 
@@ -73,7 +76,8 @@ This provides full control of the serialization process and allows fields to be 
 
 Here is an example of a class using explicit serialization whereby public methods in implementing interfaces are explicitly declared:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public final class ExplicitMarketData extends MarketData {
+```java
+public final class ExplicitMarketData extends MarketData {
     @Override
     public void readMarshallable(BytesIn bytes) {
         securityId = bytes.readLong();
@@ -117,7 +121,9 @@ Here is an example of a class using explicit serialization whereby public method
         bytes.writeDouble(askPrice2);
         bytes.writeDouble(askPrice3);
     }
-}</pre>
+}
+```
+
 
 It can be concluded that this scheme relies on reading or writing each field explicitly and directly, eliminating the need to resort to slower reflection. Care must be taken to ensure fields are referenced in a consistent order, and class fields must also be added to the methods above.
 
@@ -137,7 +143,8 @@ The way this can be done in a correct, convenient, reasonably portable, and safe
 
 Here is an example of a class using trivially copyable serialization:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">import static net.openhft.chronicle.bytes.BytesUtil.*;
+```java
+import static net.openhft.chronicle.bytes.BytesUtil.*;
 
 public final class TriviallyCopyableMarketData extends MarketData {
 
@@ -156,7 +163,9 @@ public final class TriviallyCopyableMarketData extends MarketData {
     public void writeMarshallable(BytesOut bytes) {
         bytes.unsafeWriteObject(this, START, LENGTH);
     }
-}</pre>
+}
+```
+
 
 This pattern lends itself well to scenarios where the DTO is reused. Fundamentally, It relies on invoking *Unsafe* under the covers for improved performance.
 
@@ -164,7 +173,8 @@ This pattern lends itself well to scenarios where the DTO is reused. Fundamental
 
 Using JMH, serialization performance was assessed for the various serialization alternatives above using this class:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">@State(Scope.Benchmark)
+```java
+@State(Scope.Benchmark)
 @BenchmarkMode(Mode.AverageTime)
 @OutputTimeUnit(NANOSECONDS)
 @Fork(value = 1, warmups = 1)
@@ -225,7 +235,9 @@ public class BenchmarkRunner {
         fromBytesTriviallyCopyable.readPosition(0);
         triviallyCopyableMarketData.readMarshallable(fromBytesTriviallyCopyable);
     }
-}</pre>
+}
+```
+
 
 This produced the following output on a MacBook Pro (16-inch, 2019) with a 2.3 GHz 8-Core Intel Core i9 CPU under JDK 1.8.0_312, OpenJDK 64-Bit Server VM, 25.312-b07:
 

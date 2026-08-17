@@ -32,24 +32,27 @@ Limit Stream Java Challenge {#h2-0-limit-stream-java-challenge}
 
 What will happen after the main method below is executed?
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">import java.util.stream.IntStream;
+```java
+import java.util.stream.IntStream;
 
 public class LimitStreamChallenger {
 
     public static void main(String... doYourBest) {
-        IntStream.iterate(0, i -&gt; i + 1)
+        IntStream.iterate(0, i -> i + 1)
                 .limit(5)
-                .filter(i -&gt; i % 2 == 0)
+                .filter(i -> i % 2 == 0)
                 .forEach(System.out::print);
 
-        IntStream.iterate(0, i -&gt; i + 1)
+        IntStream.iterate(0, i -> i + 1)
                 .peek(System.out::print)
-                .filter(i -&gt; i % 2 == 0)
+                .filter(i -> i % 2 == 0)
                 .limit(3)
                 .forEach(System.out::print);
     }
 
-}</pre>
+}
+```
+
 
 A) 024002244  
 
@@ -63,9 +66,11 @@ D) 02401234
 
 Let's analyze the stream code:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">IntStream.iterate(0, i -&gt; i + 1).limit(5).filter(i -&gt; i % 2 == 0)                 
-.forEach(System.out::print); 
-</pre>
+```
+IntStream.iterate(0, i -> i + 1).limit(5).filter(i -> i % 2 == 0)                 
+.forEach(System.out::print);
+```
+
 
 Note that we are using an infinite stream at the iterate line, then we limit our stream to 5 elements and filter it by even numbers and finally print all of them. Since we limit the numbers to 5, we will have our stream iterating in a range from 0 to 4 on our stream. Then we filter it by even numbers and we finally print the elements and the first result will be 024.
 

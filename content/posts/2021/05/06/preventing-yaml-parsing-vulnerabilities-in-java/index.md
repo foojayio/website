@@ -30,21 +30,27 @@ Billion laughs attack {#h2-0-billion-laughs-attack}
 
 One feature of YAML is that you can create anchors. You can reuse these anchors in different places so you do not have to repeat yourself. In the simplified example below, I create two variables: `var1` and `var2`. By using anchors, `var2` has the same value as `var1`.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">var1: &amp;anchor value
-var2: *anchor</pre>
+```
+var1: &anchor value
+var2: *anchor
+```
+
 
 Let's take this to the extreme and create the famous billion laughs attack for YAML. By applying this concept in a nested way, I can *actually* make a billion laughs.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">lol1: &amp;lol1 ["lol","lol","lol","lol","lol","lol","lol","lol","lol"]
-lol2: &amp;lol2 [*lol1,*lol1,*lol1,*lol1,*lol1,*lol1,*lol1,*lol1,*lol1]
-lol3: &amp;lol3 [*lol2,*lol2,*lol2,*lol2,*lol2,*lol2,*lol2,*lol2,*lol2]
-lol4: &amp;lol4 [*lol3,*lol3,*lol3,*lol3,*lol3,*lol3,*lol3,*lol3,*lol3]
-lol5: &amp;lol5 [*lol4,*lol4,*lol4,*lol4,*lol4,*lol4,*lol4,*lol4,*lol4]
-lol6: &amp;lol6 [*lol5,*lol5,*lol5,*lol5,*lol5,*lol5,*lol5,*lol5,*lol5]
-lol7: &amp;lol7 [*lol6,*lol6,*lol6,*lol6,*lol6,*lol6,*lol6,*lol6,*lol6]
-lol8: &amp;lol8 [*lol7,*lol7,*lol7,*lol7,*lol7,*lol7,*lol7,*lol7,*lol7]
-lol9: &amp;lol9 [*lol8,*lol8,*lol8,*lol8,*lol8,*lol8,*lol8,*lol8,*lol8]
-lolz: &amp;lolz [*lol9]</pre>
+```
+lol1: &lol1 ["lol","lol","lol","lol","lol","lol","lol","lol","lol"]
+lol2: &lol2 [*lol1,*lol1,*lol1,*lol1,*lol1,*lol1,*lol1,*lol1,*lol1]
+lol3: &lol3 [*lol2,*lol2,*lol2,*lol2,*lol2,*lol2,*lol2,*lol2,*lol2]
+lol4: &lol4 [*lol3,*lol3,*lol3,*lol3,*lol3,*lol3,*lol3,*lol3,*lol3]
+lol5: &lol5 [*lol4,*lol4,*lol4,*lol4,*lol4,*lol4,*lol4,*lol4,*lol4]
+lol6: &lol6 [*lol5,*lol5,*lol5,*lol5,*lol5,*lol5,*lol5,*lol5,*lol5]
+lol7: &lol7 [*lol6,*lol6,*lol6,*lol6,*lol6,*lol6,*lol6,*lol6,*lol6]
+lol8: &lol8 [*lol7,*lol7,*lol7,*lol7,*lol7,*lol7,*lol7,*lol7,*lol7]
+lol9: &lol9 [*lol8,*lol8,*lol8,*lol8,*lol8,*lol8,*lol8,*lol8,*lol8]
+lolz: &lolz [*lol9]
+```
+
 
 As you can see, `lol1` is a list of 10 strings `"lol"`. The variable `lol2` is a list of 10 times `lol1`. By repeating this principle several times, we end up with `lolz` = 10\^9 times `"lol"`. Better said, a billion laughs.
 

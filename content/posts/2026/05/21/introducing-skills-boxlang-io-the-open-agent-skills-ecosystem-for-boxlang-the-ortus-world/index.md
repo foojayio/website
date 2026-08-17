@@ -56,7 +56,8 @@ A skill is a portable, reusable unit of expertise --- a SQL coding style guide, 
 
 Each skill is a Markdown file (`SKILL.md`) with optional YAML frontmatter:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">---
+```java
+---
 description: Use this skill when writing, reviewing, or formatting any
   Ortus Solutions code (BoxLang, CFML, or Java) to ensure it follows
   the official Ortus coding standards.
@@ -66,10 +67,11 @@ tags: [boxlang, cfml, java, coding-standards, ortus]
 # Ortus Coding Standards
 
 Always use spacing inside parentheses and brackets for readability.
-Prefer closures with `=&gt;` over anonymous functions.
-Use lambdas with `-&gt;` when no external scope is needed.
+Prefer closures with `=>` over anonymous functions.
+Use lambdas with `->` when no external scope is needed.
 ...
-</pre>
+```
+
 
 Define it once. Inject it everywhere. Let your **codebase** --- not your clipboard --- be the source of truth. 📚
 
@@ -82,12 +84,14 @@ We built [**skills.boxlang.io**](https://www.ortussolutions.com/skills.boxlang.i
 
 Powered by [skills.sh](https://skills.sh/ "skills.sh"), an open-source, agent-agnostic CLI for discovering, installing, and managing `SKILL.md` files across Claude Code, GitHub Copilot, Cursor, Codex, and more. It reads the BoxLang Skills Hub catalog, security-audits community content, and drops files into the correct agent directory in one command.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java"># Install an entire repository of skills
+```java
+# Install an entire repository of skills
 npx skills add ortus-boxlang/skills
 
 # Or grab a single, focused skill
 npx skills add ortus-boxlang/skills/coldbox-basics
-</pre>
+```
+
 
 No global install needed. Works with any Node.js. 🌐
 
@@ -95,7 +99,8 @@ No global install needed. Works with any Node.js. 🌐
 
 If you're already living in the ColdBox world, the [**ColdBox CLI 8.11 release**](https://www.ortussolutions.com/blog/coldbox-cli-811-the-era-of-ai-skills-comes-to-every-coldbox-boxlang-app "**ColdBox CLI 8.11 release**") wires the directory directly into your project workflow:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java"># Browse the directory interactively
+```java
+# Browse the directory interactively
 coldbox ai skills install --list
 
 # Filter by source or category
@@ -107,7 +112,8 @@ coldbox ai skills install ortus-boxlang/skills/async-programming
 
 # Search the registry
 coldbox ai skills find "rest api"
-</pre>
+```
+
 
 Bonus: when you `box install` a module that has skills published to the directory, `coldbox ai refresh` auto-installs them. Skills become **infrastructure**, not setup. 💚
 
@@ -183,12 +189,14 @@ This is the same shift package managers brought to language ecosystems --- excep
 🎯 Get Started Now {#h2-10-get-started-now}
 -------------------------------------------
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java"># Install your first skill in 10 seconds
+```java
+# Install your first skill in 10 seconds
 npx skills add ortus-boxlang/skills
 
 # Or via the ColdBox CLI
 coldbox ai skills install --list
-</pre>
+```
+
 
 Then point your AI agent at your codebase and watch the difference. ⚡
 

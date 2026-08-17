@@ -120,7 +120,8 @@ See the <https://github.com/rjtmahinay/watsonx-spring-ai-hilla/blob/main/build.g
 
 The watsonx platform needs the following properties to start the Spring AI application.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">spring:
+```
+spring:
   ai:
     watsonx:
       ai:
@@ -133,13 +134,16 @@ The watsonx platform needs the following properties to start the Spring AI appli
         // The text endpoint of watsonx.ai service
         text-endpoint: "/ml/v1/text/generation?version=2024-05-31"
         // The streaming text endpoint of watsonx.ai service
-        stream-endpoint: "/ml/v1/text/generation_stream?version=2024-05-31"</pre>
+        stream-endpoint: "/ml/v1/text/generation_stream?version=2024-05-31"
+```
+
 
 All Spring AI properties starts with a prefix of `spring.ai.`. Every AI platform has their own specific options. For chat properties, watsonx.ai API provides a Chat Options with default values and can be overriden in the properties or yaml file. Below is an example override of the chat options.
 
 Project ID and API key should be stored in a secured vault to prevent security violations.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">spring:
+```
+spring:
   ai:
     watsonx:
       ai:
@@ -167,7 +171,9 @@ Project ID and API key should be stored in a secured vault to prevent security v
             top-p: 1.0
             top-k: 1
             // Penalize the LLM for repetition of text. Defaults to 1.0 and has a maximum of 2.0
-            repetition-penalty: 1.0</pre>
+            repetition-penalty: 1.0
+```
+
 
 To see the token limits of all available foundation models in watsonx.ai platform, please check the [documentation](https://dataplatform.cloud.ibm.com/docs/content/wsj/analyze-data/fm-models-details.html?context=wx&amp;locale=en&amp;audience=wdp "documentation").
 
@@ -177,7 +183,8 @@ The user-interface of the application is created via Hilla Framework. Hilla is p
 
 The chat application uses the abstracted client called ChatClient. The ChatClient consumes as a parameter an AI model.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">@Configuration
+```
+@Configuration
 public class ChatConfiguration {
 
     /**curl
@@ -190,11 +197,14 @@ public class ChatConfiguration {
         return ChatClient.builder(watsonxAiChatModel)
                 .defaultSystem("You are a helpful ai assistant").build();
     }
-}</pre>
+}
+```
+
 
 I've created a configuration class that creates a ChatClient bean and consumes the WatsonxAiChatModel. I instructed the ChatClient to behave as a helpful AI assistant.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">@Endpoint
+```
+@Endpoint
 @AnonymousAllowed
 @RequiredArgsConstructor
 public class ChatEndpoint {
@@ -215,31 +225,36 @@ public class ChatEndpoint {
      * @param userInput The user's input to the chatbot
      * @return The chatbot's response as a stream of strings
      */
-    public Flux&lt;String&gt; generateStreamingMessage(String userInput) {
+    public Flux<String> generateStreamingMessage(String userInput) {
         return watsonxChatClient.prompt().user(userInput).stream().content();
     }
-}</pre>
+}
+```
+
 
 Since we're using Hilla, the controller is called an endpoint. These endpoint class will be converted to a TypeScript file upon invocation of bootRun task.
 
 Below is the example conversion to a TypeScript file. The file is called *ChatEndpoint.ts*
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">import { EndpointRequestInit as EndpointRequestInit_1, Subscription as Subscription_1 } from "@vaadin/hilla-frontend";
+```
+import { EndpointRequestInit as EndpointRequestInit_1, Subscription as Subscription_1 } from "@vaadin/hilla-frontend";
 import client_1 from "./connect-client.default.js";
-async function generateMessage_1(userInput: string | undefined, init?: EndpointRequestInit_1): Promise&lt;string | undefined&gt; { return client_1.call("ChatEndpoint", "generateMessage", { userInput }, init); }
-function generateStreamingMessage_1(userInput: string | undefined): Subscription_1&lt;string | undefined&gt; { return client_1.subscribe("ChatEndpoint", "generateStreamingMessage", { userInput }); }
+async function generateMessage_1(userInput: string | undefined, init?: EndpointRequestInit_1): Promise<string | undefined> { return client_1.call("ChatEndpoint", "generateMessage", { userInput }, init); }
+function generateStreamingMessage_1(userInput: string | undefined): Subscription_1<string | undefined> { return client_1.subscribe("ChatEndpoint", "generateStreamingMessage", { userInput }); }
 export { generateMessage_1 as generateMessage, generateStreamingMessage_1 as generateStreamingMessage };
-</pre>
+```
+
 
 If you inspect both generateMessage and generateStreamingMessage and Java methods were converted to a JavaScript method. In this case, we don't need to have a network call via REST since we can now call the method from the TypeScript conversion. Below is the example usage of these methods.
 
 *ChatView.tsx*
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">const ChatView = () =&gt; {
+```
+const ChatView = () => {
 
     // Remove other logic for brevity.
 
-    const handleSubmit = async (event: CustomEvent) =&gt; {
+    const handleSubmit = async (event: CustomEvent) => {
         // Remove other logic for brevity.
 
         try {
@@ -252,22 +267,25 @@ If you inspect both generateMessage and generateStreamingMessage and Java method
                 sender: 'ai',
                 content: response,
             };
-            setMessages((prevMessages) =&gt; [...prevMessages, aiResponse]);
+            setMessages((prevMessages) => [...prevMessages, aiResponse]);
         } catch (error) {
             console.error('Error sending message:', error);
         } finally {
             setIsLoading(false);
         }
     };
-}</pre>
+}
+```
+
 
 *StreamingChatView.tsx*
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">const StreamingChatView = () =&gt; {
+```
+const StreamingChatView = () => {
 
     // Remove other logic for brevity.
 
-    const handleSubmit = async (event: CustomEvent) =&gt; {
+    const handleSubmit = async (event: CustomEvent) => {
        // Remove other logic for brevity.
 
         try {
@@ -278,10 +296,10 @@ If you inspect both generateMessage and generateStreamingMessage and Java method
                 sender: 'ai',
                 content: '',
             };
-            setMessages((prevMessages) =&gt; [...prevMessages, aiResponse]);
+            setMessages((prevMessages) => [...prevMessages, aiResponse]);
 
-            response.onNext((chunk: string | undefined) =&gt; {
-                setMessages((prevMessages) =&gt; {
+            response.onNext((chunk: string | undefined) => {
+                setMessages((prevMessages) => {
                     const lastMessage = prevMessages[prevMessages.length - 1];
                     return [
                         ...prevMessages.slice(0, -1),
@@ -293,7 +311,9 @@ If you inspect both generateMessage and generateStreamingMessage and Java method
                 });
             });
     };
-}</pre>
+}
+```
+
 
 Chat Application {#h2-6-chat-application}
 -----------------------------------------

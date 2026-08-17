@@ -38,9 +38,12 @@ Sometimes you need to modify multiple lines of code on separate lines inside Int
 
 Let's say you have defined some variables at the start of your class, but retrospectively you realise that their scope should be `private`, and since we're defining them here, they should also be `final`:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public String oak = "Oak";
+```java
+public String oak = "Oak";
 public String sycamore = "Sycamore";
-public String pine = "Pine";</pre>
+public String pine = "Pine";
+```
+
 
 You could click each one and replace `public` with `private` but there's a faster way in IntelliJ IDEA. You can press **Option** (macOS), or **Ctrl** (Windows/Linux) twice, holding it down the second time you press it and then use arrow keys to create a tower of vertical carets. You can then replace public with private just once, not three times. You can also add `final` since you're here:
 
@@ -66,9 +69,12 @@ Place your cursor to the far right of the furthest line of code and:
 
 Let's say that you want to add something to the end of each of these strings, for example:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public final String lion = "Lives in Africa";
+```java
+public final String lion = "Lives in Africa";
 public final String stoat = "Lives in the United Kingdom";
-public final String wolf = "Lives in Europe";</pre>
+public final String wolf = "Lives in Europe";
+```
+
 
 ```
 

@@ -31,7 +31,7 @@ However, everyone has at least once experienced a test that failed and then pass
 
 What if we lived in a world where we could solve massive global problems like world hunger by eliminating flaky tests in software development? While it may seem exaggerated, it is closer to the truth than you might think, and it highlights the enormous cost and resources that flaky tests drain in development teams worldwide.
 
-*** ** * ** ***
+
 
 Why Do Flaky Tests Matter? {#h2-0-why-do-flaky-tests-matter}
 ------------------------------------------------------------
@@ -44,7 +44,7 @@ Why Do Flaky Tests Matter? {#h2-0-why-do-flaky-tests-matter}
 
 Like a junk drawer that becomes more daunting with each new item you toss in, allowing flaky tests to accumulate makes it more likely that you'll put off fixing them.
 
-*** ** * ** ***
+
 
 Common Causes of Flaky Tests {#h2-1-common-causes-of-flaky-tests}
 -----------------------------------------------------------------
@@ -71,7 +71,7 @@ To effectively address flaky tests, you have to understand why tests become flak
 
    If one test relies on the state left behind by another test, parallel or out-of-order execution can lead to failures. Each test should be able to run independently.
 
-*** ** * ** ***
+
 
 Strategies to Keep Tests Reliable {#h2-2-strategies-to-keep-tests-reliable}
 ---------------------------------------------------------------------------
@@ -80,11 +80,14 @@ Strategies to Keep Tests Reliable {#h2-2-strategies-to-keep-tests-reliable}
 
 You can't eliminate flaky tests if you don't know they exist. Every time you come across one, ensure you mark it using a consistent comment like:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">// Flaky Test
+```
+// Flaky Test
 @Test
 void testSomething() {
     //...
-}</pre>
+}
+```
+
 
 Encourage everyone on the team to do this. The consistent keyword makes it easy to find all flaky tests in the code and gives you a quick overview of how many you have and where they are located.
 
@@ -103,7 +106,8 @@ Make sure each test starts with a clean slate:
 * **Isolate Test Data** : To prevent collisions, use unique data for each test. Tools like [Testcontainers](https://www.testcontainers.org/) allow you to spin up disposable containers for databases and other services quickly.
 * **Setup and Teardown** : In frameworks like JUnit, use `@BeforeEach` to set up fresh data and `@AfterEach` to remove it:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@BeforeEach
+```
+@BeforeEach
 void setUpData() {
     // Insert test data or start a container
 }
@@ -111,7 +115,9 @@ void setUpData() {
 @AfterEach
 void cleanUpData() {
     // Remove test data or stop the container
-}</pre>
+}
+```
+
 
 ### 4. Wait for Conditions to Be Met {#h3-6-4-wait-for-conditions-to-be-met}
 
@@ -121,8 +127,11 @@ Avoid hard-coded delays by waiting for specific events or conditions. For variou
 
 **Selenium** : Use `WebDriverWait` to wait until an element is present or clickable:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-WebElement element = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("[data-testid='submit-button']")));</pre>
+```java
+WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+WebElement element = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("[data-testid='submit-button']")));
+```
+
 
 <br />
 
@@ -132,21 +141,27 @@ WebElement element = wait.until(ExpectedConditions.elementToBeClickable(By.cssSe
 
 **Playwright** : Use Playwright's [auto-retrying assertions](https://playwright.dev/docs/test-assertions), like `toHaveText` and `toBeVisible`. They wait for conditions to be satisfied and will fail if not met within a certain time (timeout). For example, when you click a button and expect an element's text to change:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="js" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">// ❌ Flaky: checks the text immediately; may fail if the text hasn't updated yet
+```javascript
+// ❌ Flaky: checks the text immediately; may fail if the text hasn't updated yet
 expect(await this.textarea.textContent()).toBe('expected text');
 
 // ✅ Reliable: waits until the element has the expected text
-await expect(this.textarea).toHaveText('expected text');</pre>
+await expect(this.textarea).toHaveText('expected text');
+```
+
 
 <br />
 
 **WebdriverIO** : Similar to Playwright, [built-in assertions](https://webdriver.io/docs/bestpractices/#use-the-built-in-assertions) automatically wait for conditions to be met within a configurable timeout:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="js" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">// ❌ Flaky: immediately checks if the button is displayed; fails if it isn't ready
+```javascript
+// ❌ Flaky: immediately checks if the button is displayed; fails if it isn't ready
 expect(await $('[data-testid="submit-button"]').isDisplayed()).toBe(true);
 
 // ✅ Reliable: waits until the button is displayed
-await expect($('[data-testid="submit-button"]')).toBeDisplayed();</pre>
+await expect($('[data-testid="submit-button"]')).toBeDisplayed();
+```
+
 
 This approach makes tests more resilient to variations in system performance and load.
 
@@ -164,18 +179,24 @@ If tests fail when run in parallel, they may be relying on a shared state.
 
 When a flaky test that is not part of your change fails and blocks progress, quarantine it so it doesn't prevent you from merging:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">// JUnit
+```
+// JUnit
 @Disabled("quarantine: reason or link to issue here")
 @Test
 void flakyTest() {
   //...
-}</pre>
+}
+```
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">// Jest
+
+```
+// Jest
 // quarantine: reason or link to issue here
-it.skip('should throw an error', () =&gt; {
+it.skip('should throw an error', () => {
   expect(response).toThrowError(expected_error);
-});</pre>
+});
+```
+
 
 Use a consistent prefix (e.g., `quarantine:`) to easily find and track these tests. However, **do not** let quarantined tests remain ignored forever---make fixing them a priority.
 
@@ -188,7 +209,7 @@ End-to-end and integration tests are often slower and more prone to flakiness be
 
 Teams often default to adding new integration tests because it *seems* more straightforward: fewer, broader tests can cover more code. However, this approach leads to larger, slower test suites that are harder to maintain. One practical approach to address this issue is to refactor complex, multi-purpose methods so each method has a specific purpose. This simplifies methods and makes them easier to test with unit tests. For instance, in one project, I took a monolithic integration test suite that ran for **five minutes** and restructured it so that most logic was covered by unit tests instead. This ended up reducing the total runtime to **just 11 seconds**.
 
-*** ** * ** ***
+
 
 Building a Reliable Test Suite: A Cultural Shift {#h2-10-building-a-reliable-test-suite-a-cultural-shift}
 ---------------------------------------------------------------------------------------------------------
@@ -200,7 +221,7 @@ Eliminating flaky tests isn't just a technical challenge. It requires a cultural
 * **Set Clear Goals**: Commit to fixing a specific number or percentage of flaky tests within a set timeframe.
 * **Celebrate progress**: Recognize and appreciate those who fix flaky tests. Positive feedback motivates the team to continue improving the test suite.
 
-*** ** * ** ***
+
 
 Conclusion {#h2-11-conclusion}
 ------------------------------

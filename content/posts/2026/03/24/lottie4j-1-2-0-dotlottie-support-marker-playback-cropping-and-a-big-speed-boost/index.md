@@ -29,11 +29,14 @@ Until now, Lottie4J only supported the plain JSON format (`.json`). That's the o
 
 The `.lottie` format is a practical improvement: it makes Lottie files smaller and self-contained, bundling images and other assets alongside the animation data instead of relying on external references. Lottie4J now supports loading `.lottie` files directly via the core `FileLoader`. There are two loading modes available:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">// Load the first animation from a .lottie file (simplest path)
+```
+// Load the first animation from a .lottie file (simplest path)
 LottieAnimation animation = FileLoader.load(path);
 
 // Load the full .lottie container to access the manifest and all animations
-DotLottie lottie = FileLoader.loadDotLottie(path);</pre>
+DotLottie lottie = FileLoader.loadDotLottie(path);
+```
+
 
 The `Lottie` object gives you access to the manifest (author, version metadata) and the full list of animations. At the moment, most real-world `.lottie` files I found, only bundle a single animation, but the API is ready for multi-animation files when they appear.
 
@@ -96,19 +99,22 @@ Trying It Out {#h2-10-trying-it-out}
 
 Update your Maven dependency:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&lt;!-- Just the core model, no player --&gt;
-&lt;dependency&gt;
-    &lt;groupId&gt;com.lottie4j&lt;/groupId&gt;
-    &lt;artifactId&gt;core&lt;/artifactId&gt;
-    &lt;version&gt;1.2.0&lt;/version&gt;
-&lt;/dependency&gt;
+```
+<!-- Just the core model, no player -->
+<dependency>
+    <groupId>com.lottie4j</groupId>
+    <artifactId>core</artifactId>
+    <version>1.2.0</version>
+</dependency>
 
-&lt;!-- JavaFX player --&gt;
-&lt;dependency&gt;
-    &lt;groupId&gt;com.lottie4j&lt;/groupId&gt;
-    &lt;artifactId&gt;fxplayer&lt;/artifactId&gt;
-    &lt;version&gt;1.2.0&lt;/version&gt;
-&lt;/dependency&gt;</pre>
+<!-- JavaFX player -->
+<dependency>
+    <groupId>com.lottie4j</groupId>
+    <artifactId>fxplayer</artifactId>
+    <version>1.2.0</version>
+</dependency>
+```
+
 
 The full list of changes is [available on GitHub](https://github.com/lottie4j/lottie4j/compare/v1.1.0...v1.2.0).
 

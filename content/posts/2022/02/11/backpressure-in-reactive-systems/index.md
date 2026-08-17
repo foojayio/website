@@ -95,7 +95,8 @@ Strategies offered by Project Reactor are similar to those of RxJava's.
 
 The APIs have some slight differences, though. For example, Project Reactor offers a convenient method to throw an exception if the producer overflows:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">var stream = Stream.generate(Math::random);
+```java
+var stream = Stream.generate(Math::random);
 
 // RxJava
 Flowable.fromStream(stream)          // 1
@@ -103,7 +104,9 @@ Flowable.fromStream(stream)          // 1
 
 // Project Reactor
 Flux.fromStream(stream)              // 1
-    .onBackpressureError();          // 2</pre>
+    .onBackpressureError();          // 2
+```
+
 
 1. Create the Reactive Stream
 2. Throw if the producer overflows
@@ -123,10 +126,12 @@ Coroutines do offer the same buffering and dropping capabilities. The base class
 
 You can use the classes like this:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">flow {                              // 1
+```java
+flow {                              // 1
   while (true) emit(Math.random())  // 2
 }.buffer(10)                        // 3
-</pre>
+```
+
 
 1. Create a `Flow` which content is defined by the next block
 2. Define the `Flow` content

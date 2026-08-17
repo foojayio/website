@@ -58,14 +58,18 @@ Symmetric Difference --- 1, 4.
 
 At this point of implementing `symmetricDifference`, we already had an API that can compute `difference` of Set A and Set B.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">default MutableIntSet symmetricDifference(IntSet set)
+```java
+default MutableIntSet symmetricDifference(IntSet set)
 {
     return set.reject(this::contains, this.difference(set));
-}</pre>
+}
+```
+
 
 ### Symmetric Difference --- Usage {#h3-3-symmetric-difference-usage}
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">@Test
+```java
+@Test
 public void symmetricDifference()
 {
     MutableIntSet setA = IntSets.mutable.with(1, 2, 3);
@@ -73,11 +77,13 @@ public void symmetricDifference()
     MutableIntSet expected = IntSets.mutable.with(1, 4);
     MutableIntSet actual = setA.symmetricDifference(setB);
     Assert.assertEquals(expected, actual);
-}</pre>
+}
+```
+
 
 Test cases covering various scenarios can be found [here](https://github.com/eclipse/eclipse-collections/blob/75b93337df25915794d613c216042c36df6f0be3/eclipse-collections-code-generator/src/main/resources/test/set/mutable/abstractImmutablePrimitiveSetTestCase.stg#L387).
 
-*** ** * ** ***
+
 
 ### Is Subset of --- What does this operation do? {#h3-4-is-subset-of-what-does-this-operation-do}
 
@@ -97,14 +103,18 @@ Is Set A a subset of Set B --- true.
 
 🛈 Eclipse Collections has an existing API called `containsAll` that evaluates to true if all the values in `this` are present in `set`.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">default boolean isSubsetOf(IntSet set)
+```java
+default boolean isSubsetOf(IntSet set)
 {
-    return this.size() &lt;= set.size() &amp;&amp; set.containsAll(this);
-}</pre>
+    return this.size() <= set.size() && set.containsAll(this);
+}
+```
+
 
 ### Is Subset of --- Usage {#h3-8-is-subset-of-usage}
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">@Test
+```java
+@Test
 public void isSubsetOf()
 {
     MutableIntSet setA = IntSets.mutable.with(1, 2);
@@ -114,11 +124,13 @@ public void isSubsetOf()
     MutableIntSet setC = IntSets.mutable.with(1, 2, 3);
     MutableIntSet setD = IntSets.mutable.with(1, 2, 3);
     Assert.assertTrue(setC.isSubsetOf(setD));
-}</pre>
+}
+```
+
 
 Test cases covering various scenarios can be found [here](https://github.com/eclipse/eclipse-collections/blob/75b93337df25915794d613c216042c36df6f0be3/eclipse-collections-code-generator/src/main/resources/test/set/mutable/abstractPrimitiveSetTestCase.stg#L615).
 
-*** ** * ** ***
+
 
 ### Is Proper Subset of --- What does this operation do? {#h3-9-is-proper-subset-of-what-does-this-operation-do}
 
@@ -128,14 +140,18 @@ This operation returns true if all elements of Set A are present in Set B but th
 
 ### Is Proper Subset of ---Code Implementation {#h3-10-is-proper-subset-of-code-implementation}
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">default boolean isProperSubsetOf(IntSet set)
+```java
+default boolean isProperSubsetOf(IntSet set)
 {
-    return this.size() &lt; set.size() &amp;&amp; set.containsAll(this);
-}</pre>
+    return this.size() < set.size() && set.containsAll(this);
+}
+```
+
 
 ### Is Proper Subset of --- Usage {#h3-11-is-proper-subset-of-usage}
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">@Test
+```java
+@Test
 public void isProperSubsetOf()
 {
     MutableIntSet setA = IntSets.mutable.with(1, 2);
@@ -145,11 +161,13 @@ public void isProperSubsetOf()
     MutableIntSet setC = IntSets.mutable.with(1, 2, 3);
     MutableIntSet setD = IntSets.mutable.with(1, 2, 3);
     Assert.assertFalse(setC.isProperSubsetOf(setD));
-}</pre>
+}
+```
+
 
 Test cases covering various scenarios can be found [here](https://github.com/eclipse/eclipse-collections/blob/75b93337df25915794d613c216042c36df6f0be3/eclipse-collections-code-generator/src/main/resources/test/set/mutable/abstractPrimitiveSetTestCase.stg#L655).
 
-*** ** * ** ***
+
 
 ### Cartesian Product --- What does this operation do? {#h3-12-cartesian-product-what-does-this-operation-do}
 
@@ -171,41 +189,50 @@ Cartesian Product ---
 
 🛈 Eclipse Collections has a static utility class called `IntSets` and equivalent classes for other primitive set collections.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">@Override
-public LazyIterable&lt;IntIntPair&gt; cartesianProduct(IntSet set)
+```java
+@Override
+public LazyIterable<IntIntPair> cartesianProduct(IntSet set)
 {
     return IntSets.cartesianProduct(this, set);
-}</pre>
+}
+```
+
 
 Below code is the underlying `cartesianProduct` implementation.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public static &lt;A, B, C&gt; LazyIterable&lt;C&gt; cartesianProduct(IntSet set1, IntSet set2, IntIntToObjectFunction&lt;C&gt; function)
+```java
+public static <A, B, C> LazyIterable<C> cartesianProduct(IntSet set1, IntSet set2, IntIntToObjectFunction<C> function)
 {
     return set1.asLazy()
-            .flatCollect(first -&gt;
+            .flatCollect(first ->
                 set2.asLazy()
-                    .collect(second -&gt; function.value(first, second)));
-}</pre>
+                    .collect(second -> function.value(first, second)));
+}
+```
+
 
 ### Cartesian Product --- Usage {#h3-15-cartesian-product-usage}
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">@Test
+```java
+@Test
 public void cartesianProduct()
 {
     MutableIntSet setA = IntSets.mutable.with(1, 3);
     MutableIntSet setB = IntSets.mutable.with(2, 4);
-    MutableSet&lt;IntIntPair&gt; expected = Sets.mutable.with(
+    MutableSet<IntIntPair> expected = Sets.mutable.with(
             PrimitiveTuples.pair(1, 2),
             PrimitiveTuples.pair(1, 4),
             PrimitiveTuples.pair(3, 2),
             PrimitiveTuples.pair(3, 4));
     Assert.assertEquals(expected, 
             setA.cartesianProduct(setB).toSet());
-}</pre>
+}
+```
+
 
 Test cases covering various scenarios can be found [here](https://github.com/eclipse/eclipse-collections/blob/75b93337df25915794d613c216042c36df6f0be3/eclipse-collections-code-generator/src/main/resources/test/set/mutable/abstractPrimitiveSetTestCase.stg#L695).
 
-*** ** * ** ***
+
 
 *I am a committer for the* [*Eclipse Collections*](https://github.com/eclipse/eclipse-collections)*OSS project at Eclipse Foundation.* [*Eclipse Collections*](https://github.com/eclipse/eclipse-collections)*is open for contributions*and if you like our library, let us know by starring our GitHub repository.
 

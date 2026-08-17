@@ -43,24 +43,30 @@ In this guide, we will cover 14 essential best practices for using SLF4J and Log
 
 Choose SLF4J as your application's logging facade to decouple your logging architecture from the underlying logging library implementation. This abstraction allows you to switch between different logging frameworks without major code changes.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">import org.slf4j.Logger;
+```
+import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class MyClass {
     private static final Logger logger = LoggerFactory.getLogger(MyClass.class);
     // ...
-}</pre>
+}
+```
+
 
 **🔴 Avoid Practice:**   
 
 Hardcoding a specific logging framework implementation in your application code can lead to difficulties when needing to switch libraries.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">import org.apache.log4j.Logger;
+```
+import org.apache.log4j.Logger;
 
 public class MyClass {
 private static final Logger logger = Logger.getLogger(MyClass.class);
 // ...
-}</pre>
+}
+```
+
 
 ##### 2. Configure Logback for Efficient Logging
 
@@ -68,30 +74,36 @@ private static final Logger logger = Logger.getLogger(MyClass.class);
 
 Externalize your Logback configuration and use `PatternLayout` for improved performance and flexibility. Define different configurations for development, staging, and production environments to better manage the verbosity and detail of logs.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">&lt;configuration&gt;
-    &lt;appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender"&gt;
-        &lt;encoder&gt;
-            &lt;pattern&gt;%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n&lt;/pattern&gt;
-        &lt;/encoder&gt;
-    &lt;/appender&gt;
+```
+<configuration>
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
 
-    &lt;root level="debug"&gt;
-        &lt;appender-ref ref="STDOUT" /&gt;
-    &lt;/root&gt;
-&lt;/configuration&gt;</pre>
+    <root level="debug">
+        <appender-ref ref="STDOUT" />
+    </root>
+</configuration>
+```
+
 
 **🔴 Avoid Practice:**   
 
 Using an outdated or non-performant layout class and hardcoding configuration settings in the code can make it difficult to adapt to different environments.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">&lt;configuration&gt;
-    &lt;appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender"&gt;
-        &lt;layout class="ch.qos.logback.classic.PatternLayout"&gt;
-            &lt;!-- Non-recommended layout configuration --&gt;
-        &lt;/layout&gt;
-    &lt;/appender&gt;
-    &lt;!-- ... --&gt;
-&lt;/configuration&gt;</pre>
+```
+<configuration>
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <!-- Non-recommended layout configuration -->
+        </layout>
+    </appender>
+    <!-- ... -->
+</configuration>
+```
+
 
 ##### 3. Use Appropriate Log Levels
 
@@ -99,17 +111,23 @@ Using an outdated or non-performant layout class and hardcoding configuration se
 
 Log at the correct level to convey the importance and intention of the message. Use `INFO` for general events, `DEBUG` for detailed information during development, and `ERROR` for serious issues that need attention.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">logger.info("Application has started.");
+```
+logger.info("Application has started.");
 logger.debug("The value of X is {}", x);
-logger.error("Unable to process the request.", e);</pre>
+logger.error("Unable to process the request.", e);
+```
+
 
 **🔴 Avoid Practice:**   
 
 Logging everything at the same level, can overwhelm the log files with noise and make it difficult to spot critical issues.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">logger.error("Application has started."); // Incorrect use of log level
+```
+logger.error("Application has started."); // Incorrect use of log level
 logger.error("The value of X is " + x); // Inefficient string concatenation
-// ...</pre>
+// ...
+```
+
 
 ##### 4. Log Meaningful Messages
 
@@ -117,14 +135,19 @@ logger.error("The value of X is " + x); // Inefficient string concatenation
 
 Include relevant information such as transaction or correlation IDs in your log messages to provide context. This is especially helpful in distributed systems for tracing requests across services.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">logger.info("Order {} has been processed successfully.", orderId);</pre>
+```
+logger.info("Order {} has been processed successfully.", orderId);
+```
+
 
 **🔴 Avoid Practice:**   
 
 Vague or generic log messages that do not provide sufficient context to understand the event or issue.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">logger.info("Processed successfully."); // No context provided
-</pre>
+```
+logger.info("Processed successfully."); // No context provided
+```
+
 
 ##### 5. Use Placeholders for Dynamic Content
 
@@ -132,14 +155,19 @@ Vague or generic log messages that do not provide sufficient context to understa
 
 Utilize placeholders to 🔴 Avoid Practice: unnecessary string concatenation when the log level is disabled, saving memory and CPU cycles.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">logger.debug("User {} logged in at {}", username, LocalDateTime.now());</pre>
+```
+logger.debug("User {} logged in at {}", username, LocalDateTime.now());
+```
+
 
 **🔴 Avoid Practice:**   
 
 Concatenating strings within log statements is less efficient.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">logger.debug("User " + username + " logged in at " + LocalDateTime.now());
-</pre>
+```
+logger.debug("User " + username + " logged in at " + LocalDateTime.now());
+```
+
 
 ##### 6. Log Exceptions with Stack Traces
 
@@ -147,21 +175,27 @@ Concatenating strings within log statements is less efficient.
 
 Always log the full exception, including the stack trace, to provide maximum context for diagnosing issues.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">try {
+```
+try {
 // some code that throws an exception
 } catch (Exception e) {
 logger.error("An unexpected error occurred", e);
-}</pre>
+}
+```
+
 
 **🔴 Avoid Practice:**   
 
 Logging only the exception message without the stack trace can omit critical diagnostic information.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">try {
+```
+try {
 // some code that throws an exception
 } catch (Exception e) {
 logger.error("An unexpected error occurred: " + e.getMessage());
-}</pre>
+}
+```
+
 
 ##### 7. Use Asynchronous Logging for Performance
 
@@ -169,29 +203,34 @@ logger.error("An unexpected error occurred: " + e.getMessage());
 
 Implement asynchronous logging to improve application performance by offloading logging activities to a separate thread.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">&lt;configuration&gt;
-    &lt;appender name="ASYNC" class="ch.qos.logback.classic.AsyncAppender"&gt;
-        &lt;appender-ref ref="FILE" /&gt;
-    &lt;/appender&gt;
+```
+<configuration>
+    <appender name="ASYNC" class="ch.qos.logback.classic.AsyncAppender">
+        <appender-ref ref="FILE" />
+    </appender>
 
-    &lt;appender name="FILE" class="ch.qos.logback.core.FileAppender"&gt;
-        &lt;file&gt;application.log&lt;/file&gt;
-        &lt;encoder&gt;
-            &lt;pattern&gt;%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n&lt;/pattern&gt;
-        &lt;/encoder&gt;
-    &lt;/appender&gt;
+    <appender name="FILE" class="ch.qos.logback.core.FileAppender">
+        <file>application.log</file>
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
 
-    &lt;root level="INFO"&gt;
-        &lt;appender-ref ref="ASYNC" /&gt;
-    &lt;/root&gt;
-&lt;/configuration&gt;</pre>
+    <root level="INFO">
+        <appender-ref ref="ASYNC" />
+    </root>
+</configuration>
+```
+
 
 **🔴 Avoid Practice:**   
 
 Synchronous logging in performance-critical paths without considering the potential for log-related latency.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">logger.info("A time-sensitive operation has completed.");
-</pre>
+```
+logger.info("A time-sensitive operation has completed.");
+```
+
 
 ##### 8. Log at the Appropriate Granularity
 
@@ -199,7 +238,8 @@ Synchronous logging in performance-critical paths without considering the potent
 
 You should balance between logging too much and too little. Log at the appropriate granularity based on the specific requirements of your application. Avoid excessive logging that clutters the logs and makes it difficult to identify important information.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">public void processOrder(Order order) {
+```
+public void processOrder(Order order) {
 
     logger.info("Processing order: {}", order.getId());
 
@@ -210,13 +250,16 @@ You should balance between logging too much and too little. Log at the appropria
     orderService.save(order);
 
     logger.info("Order processed successfully");
-}</pre>
+}
+```
+
 
 **🔴 Avoid Practice:**   
 
 Excessive logging at a high granularity in production, can lead to performance issues and log flooding.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">public void processOrder(Order order) {
+```
+public void processOrder(Order order) {
 
     logger.trace("Entering processOrder method");
     logger.debug("Received order: {}", order);
@@ -232,7 +275,9 @@ Excessive logging at a high granularity in production, can lead to performance i
 
     logger.info("Order processed successfully");
     logger.trace("Exiting processOrder method");
-}</pre>
+}
+```
+
 
 ##### 9. Monitor and Rotate Log Files
 
@@ -240,16 +285,19 @@ Excessive logging at a high granularity in production, can lead to performance i
 
 Configure log file rotation based on size or time to prevent logs from consuming excessive disk space. Set up monitoring for log files to trigger alerts when nearing capacity.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">&lt;appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender"&gt;
-    &lt;rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy"&gt;
-        &lt;fileNamePattern&gt;logs/myapp-%d{yyyy-MM-dd}.%i.log&lt;/fileNamePattern&gt;
-        &lt;maxHistory&gt;30&lt;/maxHistory&gt;
-        &lt;timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP"&gt;
-            &lt;maxFileSize&gt;100MB&lt;/maxFileSize&gt;
-        &lt;/timeBasedFileNamingAndTriggeringPolicy&gt;
-    &lt;/rollingPolicy&gt;
-    &lt;!-- ... --&gt;
-&lt;/appender&gt;</pre>
+```
+<appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+        <fileNamePattern>logs/myapp-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+        <maxHistory>30</maxHistory>
+        <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+            <maxFileSize>100MB</maxFileSize>
+        </timeBasedFileNamingAndTriggeringPolicy>
+    </rollingPolicy>
+    <!-- ... -->
+</appender>
+```
+
 
 **🔴 Avoid Practice:**   
 
@@ -261,19 +309,25 @@ Letting log files grow indefinitely, can lead to disk space exhaustion and poten
 
 Implement filters or custom converters in your logging framework to redact or hash sensitive data before it's written to the logs.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">log.info("Processing payment with card: {}", maskCreditCard(creditCardNumber));
+```
+log.info("Processing payment with card: {}", maskCreditCard(creditCardNumber));
 
 public String maskCreditCard(String creditCardNumber) {
     int length = creditCardNumber.length();
-    if (length &lt; 4) return "Invalid number";
+    if (length < 4) return "Invalid number";
     return "****-****-****-" + creditCardNumber.substring(length - 4);
-}</pre>
+}
+```
+
 
 **🔴 Avoid Practice:**   
 
 Logging sensitive information such as passwords, API keys, Credit Cards, or personally identifiable information (PII).
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">log.info("Processing payment with card: {}", creditCardNumber);</pre>
+```
+log.info("Processing payment with card: {}", creditCardNumber);
+```
+
 
 ##### 11. Structured Logging
 
@@ -281,37 +335,45 @@ Logging sensitive information such as passwords, API keys, Credit Cards, or pers
 
 Adopt structured logging to output logs in a machine-readable format like JSON, facilitating better searching and indexing in log management systems.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">&lt;configuration&gt;
-    &lt;appender name="JSON_CONSOLE" class="ch.qos.logback.core.ConsoleAppender"&gt;
-        &lt;encoder class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder"&gt;
-            &lt;providers&gt;
-                &lt;timestamp&gt;
-                    &lt;timeZone&gt;UTC&lt;/timeZone&gt;
-                &lt;/timestamp&gt;
-                &lt;version /&gt;
-                &lt;logLevel /&gt;
-                &lt;threadName /&gt;
-                &lt;loggerName /&gt;
-                &lt;message /&gt;
-                &lt;context /&gt;
-                &lt;stackTrace /&gt;
-            &lt;/providers&gt;
-        &lt;/encoder&gt;
-    &lt;/appender&gt;
+```
+<configuration>
+    <appender name="JSON_CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
+            <providers>
+                <timestamp>
+                    <timeZone>UTC</timeZone>
+                </timestamp>
+                <version />
+                <logLevel />
+                <threadName />
+                <loggerName />
+                <message />
+                <context />
+                <stackTrace />
+            </providers>
+        </encoder>
+    </appender>
 
-    &lt;root level="info"&gt;
-        &lt;appender-ref ref="JSON_CONSOLE" /&gt;
-    &lt;/root&gt;
-&lt;/configuration&gt;</pre>
+    <root level="info">
+        <appender-ref ref="JSON_CONSOLE" />
+    </root>
+</configuration>
+```
+
 
 Let's take a look at an example log message that is printed in JSON format:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">logger.info("Order has been processed");</pre>
+```
+logger.info("Order has been processed");
+```
+
 
 The output of the above log message will be printed as below:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">{"@timestamp":"2024-03-26T15:52:00.789Z","@version":"1","message":"Order has been processed","logger_name":"Application","thread_name":"main","level":"INFO"}
-</pre>
+```
+{"@timestamp":"2024-03-26T15:52:00.789Z","@version":"1","message":"Order has been processed","logger_name":"Application","thread_name":"main","level":"INFO"}
+```
+
 
 **🔴 Avoid Practice:**   
 

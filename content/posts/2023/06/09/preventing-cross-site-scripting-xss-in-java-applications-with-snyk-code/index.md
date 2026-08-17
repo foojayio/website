@@ -38,28 +38,31 @@ Writing HTML output in Spring MVC without a templating framework {#h2-0-writing-
 
 Suppose you have a web application that takes a product's name and displays it on a web page using the `HttpServletResponse` object. Here's an example of how you might implement this feature in a Spring MVC controller:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">1@GetMapping("/direct")
+```
+1@GetMapping("/direct")
 2public void directLink (@RequestParam String param, HttpServletResponse response) throws IOException {
 3   Product prod = productService.getProductByName(param);
 4
 5   response.setContentType("text/html");
 6   var writer = response.getWriter();
 7   writer.write(head);
-8   writer.write("&lt;div class=\"panel-heading\"&gt;&lt;h1&gt;"+ param + "&lt;/h1&gt;&lt;/div&gt;");
+8   writer.write("<div class=\"panel-heading\"><h1>"+ param + "</h1></div>");
 9
-10   String output = "&lt;div class=\"panel-body\"&gt;" +
-11           "&lt;ul&gt;" +
-12           "&lt;li&gt;%s&lt;/li&gt;" +
-13           "&lt;li&gt;%s&lt;/li&gt;" +
-14           "&lt;li&gt;%s&lt;/li&gt;" +
-15           "&lt;/ul&gt;" +
-16           "&lt;/div&gt;";
+10   String output = "<div class=\"panel-body\">" +
+11           "<ul>" +
+12           "<li>%s</li>" +
+13           "<li>%s</li>" +
+14           "<li>%s</li>" +
+15           "</ul>" +
+16           "</div>";
 17
 18   writer.write(String.format(output, prod.getDescription(), prod.getProductType(), prod.getPrice()));
 19   writer.write(foot);
 20
 21   response.getWriter().flush();
-22}</pre>
+22}
+```
+
 
 Can you figure out what sorts of security vulnerabilities may be introduced with the above Java code?
 
@@ -91,7 +94,10 @@ Reflective XSS is a type of XSS attack that occurs when a user injects malicious
 
 The code above retrieves the user's name from the HTTP request parameter and then writes it directly to the HttpServletResponse object using:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">1writer.write("&lt;div class=\"panel-heading\"&gt;&lt;h1&gt;"+ param + "&lt;/h1&gt;&lt;/div&gt;")</pre>
+```
+1writer.write("<div class=\"panel-heading\"><h1>"+ param + "</h1></div>")
+```
+
 
 This code is vulnerable to XSS attacks because it does not properly validate or sanitize the user input. For example, a malicious user could inject HTML or JavaScript code into the "name" parameter, which would then be executed by other users who view the web page.
 
@@ -119,29 +125,32 @@ Obviously, more libraries can perform similar escaping. In addition to [++Apache
 
 When using Apache Commons text, the properly escaped code could look like this:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">1@GetMapping("/direct")
+```
+1@GetMapping("/direct")
 2public void directLink (@RequestParam String param, HttpServletResponse response) throws IOException {
 3   Product prod = productService.getProductByName(param);
 4
 5   response.setContentType("text/html");
 6   var writer = response.getWriter();
 7   writer.write(head);
-8   writer.write("&lt;div class=\"panel-heading\"&gt;&lt;h1&gt;"+ StringEscapeUtils.escapeHtml4(param) + "&lt;/h1&gt;&lt;/div&gt;");
+8   writer.write("<div class=\"panel-heading\"><h1>"+ StringEscapeUtils.escapeHtml4(param) + "</h1></div>");
 9
-10   String output = "&lt;div class=\"panel-body\"&gt;" +
-11           "&lt;ul&gt;" +
-12           "&lt;li&gt;%s&lt;/li&gt;" +
-13           "&lt;li&gt;%s&lt;/li&gt;" +
-14           "&lt;li&gt;%s&lt;/li&gt;" +
-15           "&lt;/ul&gt;" +
-16           "&lt;/div&gt;";
+10   String output = "<div class=\"panel-body\">" +
+11           "<ul>" +
+12           "<li>%s</li>" +
+13           "<li>%s</li>" +
+14           "<li>%s</li>" +
+15           "</ul>" +
+16           "</div>";
 17
 18   writer.write(String.format(output,
 19             StringEscapeUtils.escapeHtml4(prod.getDescription()),
 20             StringEscapeUtils.escapeHtml4(prod.getProductType()),
 21             StringEscapeUtils.escapeHtml4(prod.getPrice())));
 22
-23   writer.write(foot);</pre>
+23   writer.write(foot);
+```
+
 
 ### Be careful with templating frameworks {#h3-5-be-careful-with-templating-frameworks}
 
@@ -149,12 +158,15 @@ Templating frameworks like Thymeleaf can help protect agains XSS vulnerabilities
 
 However it strongly depends on how you create the template. For example, here's how you might use Thymeleaf to render a product similar to the example before:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">1&lt;div class="product" th:each="product : ${products}"&gt;
-2  &lt;p th:text="${product.name}"&gt;&lt;/p&gt;
-3  &lt;p th:text="${product.type}"&gt;&lt;/p&gt;
-4  &lt;p th:text="${product.price}"&gt;&lt;/p&gt;
-5  &lt;p th:utext="${product.descr}"&gt;&lt;/p&gt;
-6&lt;/div&gt;</pre>
+```
+1<div class="product" th:each="product : ${products}">
+2  <p th:text="${product.name}"></p>
+3  <p th:text="${product.type}"></p>
+4  <p th:text="${product.price}"></p>
+5  <p th:utext="${product.descr}"></p>
+6</div>
+```
+
 
 In this example, the `th:text` attributes will be escaped, but the `th:utext` attribute won't. This `th:utext` attribute renders the comment text without escaping any HTML tags or special characters and is potentially vulnerable to XSS. When using a particular framework, knowing how certain elements behave is essential.
 

@@ -94,10 +94,13 @@ This is where an underappreciated property of HTTP pays off: **the request metho
 
 Put the two together and RFC 10008-compatible QUERY endpoints in Quarkus require no framework changes; they can be enabled through a single Jakarta REST extension point:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">@HttpMethod("QUERY") 
+```java
+@HttpMethod("QUERY") 
 @Documented @Target(ElementType.METHOD) 
 @Retention(RetentionPolicy.RUNTIME) 
-public @interface QUERY { }</pre>
+public @interface QUERY { }
+```
+
 
 The remaining work is implementing RFC 10008 semantics at the application layer, which is precisely what the example project demonstrates.
 
@@ -110,23 +113,29 @@ The demo repository is available on GitHub: [hakdogan/http-query-method](https:/
 
 The resource accepts the same logical filter in two representations, demonstrating that the query semantics are determined by the Content-Type, not the URI:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">@QUERY 
+```java
+@QUERY 
 @Consumes(MediaType.APPLICATION_JSON) 
 public Response query(ProductFilter filter) { ... } 
 
 @QUERY 
 @Consumes(MediaType.APPLICATION_FORM_URLENCODED) 
-public Response queryForm(String body) { ... }</pre>
+public Response queryForm(String body) { ... }
+```
+
 
 So both of these work, and mean the same thing:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="shell">curl -i -X QUERY http://localhost:8080/products \ 
+```bash
+curl -i -X QUERY http://localhost:8080/products \ 
     -H 'Content-Type: application/json' \ 
     -d '{"category":"laptop","maxPrice":2000}' 
 
 curl -X QUERY http://localhost:8080/products \ 
     -H 'Content-Type: application/x-www-form-urlencoded' \ 
-    -d 'category=laptop&amp;maxPrice=2000'</pre>
+    -d 'category=laptop&maxPrice=2000'
+```
+
 
 ```shell
 
@@ -138,13 +147,16 @@ A request with an unsupported media type is rejected with 415, and a filter that
 
 A successful QUERY comes back like this:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="shell">HTTP/1.1 200 OK 
+```bash
+HTTP/1.1 200 OK 
 Content-Type: application/json 
 Accept-Query: application/json, application/x-www-form-urlencoded 
-Location: http://localhost:8080/products?category=laptop&amp;maxPrice=2000 
+Location: http://localhost:8080/products?category=laptop&maxPrice=2000 
 Cache-Control: no-transform, max-age=60 ETag: "f675e29b" 
 
-[{"category":"laptop","id":2,"name":"ThinkPad X1 Carbon","price":1899.00}, ...]</pre>
+[{"category":"laptop","id":2,"name":"ThinkPad X1 Carbon","price":1899.00}, ...]
+```
+
 
 Three headers carry the RFC's ideas:
 
@@ -152,8 +164,11 @@ Three headers carry the RFC's ideas:
 * **Location** points to the *equivalent resource* from [Section 2.2](https://datatracker.ietf.org/doc/html/rfc10008#section-2.2) of the RFC: the same query expressed through the request URI. Fetch it with a plain GET and you get the identical result, no body needed. One of the tests does exactly that round trip.
 * **Cache-Control and ETag** make the cacheability promise concrete. The ETag is derived from the result, so repeating the query with `If-None-Match` returns `304 Not Modified` without resending the result:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="shell">HTTP/1.1 304 Not Modified 
-ETag: "f675e29b"</pre>
+```bash
+HTTP/1.1 304 Not Modified 
+ETag: "f675e29b"
+```
+
 
 This is the answer to "*why not just POST*": QUERY was designed to provide query semantics without giving up the cache-friendly properties associated with safe methods.
 
@@ -161,13 +176,19 @@ This is the answer to "*why not just POST*": QUERY was designed to provide query
 
 How does a client discover that a resource supports QUERY? One OPTIONS request:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="shell">curl -i -X OPTIONS http://localhost:8080/products</pre>
+```bash
+curl -i -X OPTIONS http://localhost:8080/products
+```
+
 
 The response answers with two headers, one listing the methods the resource accepts and one listing the media types it accepts as query content:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="shell">HTTP/1.1 200 OK 
+```bash
+HTTP/1.1 200 OK 
 Allow: HEAD, QUERY, GET, OPTIONS 
-Accept-Query: application/json, application/x-www-form-urlencoded</pre>
+Accept-Query: application/json, application/x-www-form-urlencoded
+```
+
 
 In this case, Quarkus generated the Allow header automatically, including QUERY, simply because a resource method is bound to it.
 

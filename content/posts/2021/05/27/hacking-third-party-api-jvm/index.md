@@ -43,7 +43,8 @@ To cope with that, the oldest trick on the JVM in the book is probably reflectio
 
 In our scope, reflection allows you to access state that was not meant to be accessed, or call methods that were not meant to be called.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public class Private {
+```java
+public class Private {
 
   private String attribute = "My private attribute";
 
@@ -71,7 +72,9 @@ public class ReflectionTest {
     var value = method.invoke(priv);                                             // 5
     assertThat(value).isEqualTo("A private attribute whose value has been updated");
   }
-}</pre>
+}
+```
+
 
 1. Get a reference to a `private` field of the `Private` class
 2. Get a reference to a `private` method of the `Private` class
@@ -138,7 +141,8 @@ In Java, [AspectJ](https://www.eclipse.org/aspectj/) is the AOP library of choic
 
 Here are two classes: one represents the public API and delegates its implementation to the other.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public class Public {
+```java
+public class Public {
 
   private final Private priv;
 
@@ -156,18 +160,23 @@ final class Private {
   final String implementation() {
     return "Private internal implementation";
   }
-}</pre>
+}
+```
+
 
 Imagine we need to change the private implementation.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public aspect Hack {
+```java
+public aspect Hack {
 
   pointcut privateImplementation(): execution(String Private.implementation()); // 1
 
   String around(): privateImplementation() {                                    // 2
     return "Hacked private implementation!";
   }
-}</pre>
+}
+```
+
 
 1. Pointcut that intercepts the execution of `Private.implementation()`
 2. Advice that wraps the above execution and replaces the original method body with its own
@@ -180,39 +189,42 @@ AspectJ offers different implementations:
 
 You can set up the first option in Maven like this:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="xml">&lt;build&gt;
-  &lt;plugins&gt;
-    &lt;plugin&gt;
-      &lt;artifactId&gt;maven-surefire-plugin&lt;/artifactId&gt;
-      &lt;version&gt;2.22.2&lt;/version&gt;
-    &lt;/plugin&gt;
-    &lt;plugin&gt;
-      &lt;groupId&gt;com.nickwongdev&lt;/groupId&gt;
-      &lt;artifactId&gt;aspectj-maven-plugin&lt;/artifactId&gt;
-      &lt;version&gt;1.12.6&lt;/version&gt;
-      &lt;configuration&gt;
-        &lt;complianceLevel&gt;${java.version}&lt;/complianceLevel&gt;
-        &lt;source&gt;${java.version}&lt;/source&gt;
-        &lt;target&gt;${java.version}&lt;/target&gt;
-        &lt;encoding&gt;${project.encoding}&lt;/encoding&gt;
-      &lt;/configuration&gt;
-      &lt;executions&gt;
-        &lt;execution&gt;
-          &lt;goals&gt;
-            &lt;goal&gt;compile&lt;/goal&gt;
-          &lt;/goals&gt;
-        &lt;/execution&gt;
-      &lt;/executions&gt;
-    &lt;/plugin&gt;
-  &lt;/plugins&gt;
-&lt;/build&gt;
-&lt;dependencies&gt;
-  &lt;dependency&gt;
-    &lt;groupId&gt;org.aspectj&lt;/groupId&gt;
-    &lt;artifactId&gt;aspectjrt&lt;/artifactId&gt;
-    &lt;version&gt;1.9.5&lt;/version&gt;
-  &lt;/dependency&gt;
-&lt;/dependencies&gt;</pre>
+```xml
+<build>
+  <plugins>
+    <plugin>
+      <artifactId>maven-surefire-plugin</artifactId>
+      <version>2.22.2</version>
+    </plugin>
+    <plugin>
+      <groupId>com.nickwongdev</groupId>
+      <artifactId>aspectj-maven-plugin</artifactId>
+      <version>1.12.6</version>
+      <configuration>
+        <complianceLevel>${java.version}</complianceLevel>
+        <source>${java.version}</source>
+        <target>${java.version}</target>
+        <encoding>${project.encoding}</encoding>
+      </configuration>
+      <executions>
+        <execution>
+          <goals>
+            <goal>compile</goal>
+          </goals>
+        </execution>
+      </executions>
+    </plugin>
+  </plugins>
+</build>
+<dependencies>
+  <dependency>
+    <groupId>org.aspectj</groupId>
+    <artifactId>aspectjrt</artifactId>
+    <version>1.9.5</version>
+  </dependency>
+</dependencies>
+```
+
 
 AOP in general and AspectJ, in particular, represent the nuclear option. They practically have no limits though I must admit I didn't check how it works with Java modules.
 
@@ -227,7 +239,8 @@ You've probably already encountered that feature in your career: they are called
 
 Here's the code of a simple Java agent:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public class Agent {
+```java
+public class Agent {
 
     public static void premain(                      // 1
             String args,                             // 2
@@ -235,7 +248,9 @@ Here's the code of a simple Java agent:
         var transformer = new HackTransformer();
         instrumentation.addTransformer(transformer); // 4
     }
-}</pre>
+}
+```
+
 
 1. `premain` is the entry-point for statically-set Java agents, just like `main` for regular applications
 2. We get arguments too, just like with `main`
@@ -246,12 +261,13 @@ A Java agent works at the bytecode level. An agent provides you with the byte ar
 
 In the following snippet, the transformer uses [Javassist](https://www.javassist.org/):
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public class HackTransformer implements ClassFileTransformer {
+```java
+public class HackTransformer implements ClassFileTransformer {
 
   @Override
   public byte[] transform(ClassLoader loader,
               String name,
-              Class&lt;?&gt; clazz,
+              Class<?> clazz,
               ProtectionDomain domain,
               byte[] bytes) {                                            // 1
     if ("ch/frankel/blog/agent/Private".equals(name)) {
@@ -267,7 +283,9 @@ In the following snippet, the transformer uses [Javassist](https://www.javassist
     }
     return bytes;                                                        // 7
   }
-}</pre>
+}
+```
+
 
 1. Byte array of the class
 2. Entry-point into the Javassist API

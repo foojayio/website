@@ -48,16 +48,19 @@ Spring Data RDBC builds upon the widespread Spring Data JPA. The biggest differe
 
 Here's the code for the `person` table:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="kotlin">data class Person(
+```kotlin
+data class Person(
     @Id val id: Long,
     val firstName: String,
     val lastName: String,
     val birthdate: LocalDate?,
     @Transient
-    val addresses: MutableSet&lt;Address&gt; = mutableSetOf()
+    val addresses: MutableSet<Address> = mutableSetOf()
 )
 
-interface PersonRepository : ReactiveCrudRepository&lt;Person, Long&gt;</pre>
+interface PersonRepository : ReactiveCrudRepository<Person, Long>
+```
+
 
 R2DBC repositories look similar to regular Spring Data repositories with one big difference. They integrate Project Reactor's reactive types, `Mono` and `Flux`. Note that it's easy to use Kotlin's coroutines with an additional bridge dependency.
 
@@ -67,13 +70,14 @@ Now comes the hard problem: mapping the many-to-many relationship with the `Addr
 
 First, we must tell Spring Data R2DBC to use a specific constructor with an empty set of addresses.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="kotlin">data class Person(
+```kotlin
+data class Person(
     @Id val id: Long,
     val firstName: String,
     val lastName: String,
     val birthdate: LocalDate?,
     @Transient
-    val addresses: MutableSet&lt;Address&gt; = mutableSetOf()
+    val addresses: MutableSet<Address> = mutableSetOf()
 ) {
     @PersistenceCreator
     constructor(
@@ -82,20 +86,26 @@ First, we must tell Spring Data R2DBC to use a specific constructor with an empt
         lastName: String,
         birthdate: LocalDate? = null
     ) : this(id, firstName, lastName, birthdate, mutableSetOf())
-}</pre>
+}
+```
+
 
 We also need to define the `Address` repository, as well as a query to list all addresses of a person:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="kotlin">interface AddressRepository : ReactiveCrudRepository&lt;Address, Long&gt; {
+```kotlin
+interface AddressRepository : ReactiveCrudRepository<Address, Long> {
 
     @Query("SELECT * FROM ADDRESS WHERE ID IN (SELECT ADDRESS_ID FROM PERSON_ADDRESS WHERE PERSON_ID = :id)")
-    fun findAddressForPersonById(id: Long): Flux&lt;Address&gt;
-}</pre>
+    fun findAddressForPersonById(id: Long): Flux<Address>
+}
+```
+
 
 Now comes the least tasteful part: Spring Data R2DBC doesn't support many-to-many relationships at the moment. We need a hook that queries the addresses after loading a person.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="kotlin">class PersonLoadOfficeListener(@Lazy private val repo: AddressRepository)   //1
-  : AfterConvertCallback&lt;Person&gt; {
+```kotlin
+class PersonLoadOfficeListener(@Lazy private val repo: AddressRepository)   //1
+  : AfterConvertCallback<Person> {
 
   override fun onAfterConvert(person: Person, table: SqlIdentifier) =
     repo.findAddressForPersonById(person.id)                                //2
@@ -104,7 +114,9 @@ Now comes the least tasteful part: Spring Data R2DBC doesn't support many-to-man
           person
       }.takeLast(1)                                                         //4
       .single(person)                                                       //5
-}</pre>
+}
+```
+
 
 1. Annotate with `@Lazy` to avoid running into circular dependencies exception during injection
 2. Use the above query
@@ -116,17 +128,21 @@ As far as I can understand, Spring Data R2DBC still needs to execute additional 
 
 One configures database access via all available Spring alternatives: properties, YAML, Spring profiles, environment variables, etc. Here's a YAML example:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="kotlin">spring.r2dbc:
+```kotlin
+spring.r2dbc:
   url: r2dbc:postgresql://localhost:5432/postgres?currentSchema=people
   username: postgres
-  password: root</pre>
+  password: root
+```
+
 
 Hibernate Reactive {#h2-2-hibernate-reactive}
 ---------------------------------------------
 
 If you're familiar with regular Hibernate, you'll feel right at home with Hibernate Reactive. The mapping is the same in both cases:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="kotlin">@Entity
+```kotlin
+@Entity
 @Table(name = "person", schema = "people")                           //1
 class Person(
     @Id var id: Long?,
@@ -142,10 +158,12 @@ class Person(
         joinColumns = [ JoinColumn(name = "person_id") ],
         inverseJoinColumns = [ JoinColumn(name = "address_id") ]
     )
-    val addresses: MutableSet&lt;Address&gt; = mutableSetOf()
+    val addresses: MutableSet<Address> = mutableSetOf()
 ) {
     internal constructor() : this(null, null, null, null)            //4
-}</pre>
+}
+```
+
 
 1. Define the table and the schema if necessary
 2. Define column names, if necessary
@@ -154,31 +172,37 @@ class Person(
 
 We also need to configure the database. Hibernate Reactive uses the traditional XML-based JPA approach:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="xml">&lt;persistence xmlns="https://jakarta.ee/xml/ns/persistence"
+```xml
+<persistence xmlns="https://jakarta.ee/xml/ns/persistence"
            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
            xsi:schemaLocation="https://jakarta.ee/xml/ns/persistence https://jakarta.ee/xml/ns/persistence/persistence_3_0.xsd"
-           version="3.0"&gt;
-  &lt;persistence-unit name="postgresql"&gt;
-    &lt;provider&gt;org.hibernate.reactive.provider.ReactivePersistenceProvider&lt;/provider&gt;   &lt;!--1--&gt;
-    &lt;properties&gt;
-      &lt;property name="jakarta.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/postgres?currentSchema=people" /&gt;
-      &lt;property name="jakarta.persistence.jdbc.user" value="postgres" /&gt;
-      &lt;property name="jakarta.persistence.jdbc.password" value="root" /&gt;
-      &lt;property name="jakarta.persistence.schema-generation.database.action" value="validate" /&gt;
-    &lt;/properties&gt;
-  &lt;/persistence-unit&gt;
-&lt;/persistence&gt;</pre>
+           version="3.0">
+  <persistence-unit name="postgresql">
+    <provider>org.hibernate.reactive.provider.ReactivePersistenceProvider</provider>   <!--1-->
+    <properties>
+      <property name="jakarta.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/postgres?currentSchema=people" />
+      <property name="jakarta.persistence.jdbc.user" value="postgres" />
+      <property name="jakarta.persistence.jdbc.password" value="root" />
+      <property name="jakarta.persistence.schema-generation.database.action" value="validate" />
+    </properties>
+  </persistence-unit>
+</persistence>
+```
+
 
 1. The only difference so far from the regular Hibernate configuration
 
 Here's the source for the query itself:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="kotlin">val emf = Persistence.createEntityManagerFactory("postgresql")                            //1
+```kotlin
+val emf = Persistence.createEntityManagerFactory("postgresql")                            //1
 val sessionFactory: Mutiny.SessionFactory = emf.unwrap(Mutiny.SessionFactory::class.java) //2
-val people: Mono&lt;MutableList&lt;Person&gt;&gt; = sessionFactory
+val people: Mono<MutableList<Person>> = sessionFactory
         .withSession {
-            it.createQuery&lt;Person&gt;("SELECT p FROM Person p LEFT JOIN FETCH p.addresses a").resultList
-        }.convert().with(UniReactorConverters.toMono())                                   //3</pre>
+            it.createQuery<Person>("SELECT p FROM Person p LEFT JOIN FETCH p.addresses a").resultList
+        }.convert().with(UniReactorConverters.toMono())                                   //3
+```
+
 
 1. Regular `EntityManagerFactory`
 2. Unwrap the underlying session factory implementation. Because we configured a `ReactivePersistenceProvider` in the `persistence.xml`, it's a `Mutiny.SessionFactory`
@@ -191,43 +215,46 @@ jOOQ Reactive {#h2-3-jooq-reactive}
 
 As for the two above frameworks, jOOQ Reactive is similar to its non-reactive version. You first generate the code from the database schema, then use it.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="xml">&lt;plugin&gt;
-    &lt;groupId&gt;org.jooq&lt;/groupId&gt;
-    &lt;artifactId&gt;jooq-codegen-maven&lt;/artifactId&gt;                               &lt;!--1--&gt;
-    &lt;executions&gt;
-        &lt;execution&gt;
-            &lt;id&gt;jooq-codegen&lt;/id&gt;
-            &lt;phase&gt;generate-sources&lt;/phase&gt;
-            &lt;goals&gt;
-                &lt;goal&gt;generate&lt;/goal&gt;
-            &lt;/goals&gt;
-        &lt;/execution&gt;
-    &lt;/executions&gt;
-    &lt;dependencies&gt;
-        &lt;dependency&gt;
-            &lt;groupId&gt;org.postgresql&lt;/groupId&gt;                                 &lt;!--2--&gt;
-            &lt;artifactId&gt;postgresql&lt;/artifactId&gt;
-            &lt;version&gt;42.6.0&lt;/version&gt;
-        &lt;/dependency&gt;
-    &lt;/dependencies&gt;
-    &lt;configuration&gt;
-        &lt;generator&gt;
-            &lt;name&gt;org.jooq.codegen.KotlinGenerator&lt;/name&gt;                     &lt;!--3--&gt;
-            &lt;database&gt;
-                &lt;inputSchema&gt;people&lt;/inputSchema&gt;                             &lt;!--4--&gt;
-            &lt;/database&gt;
-            &lt;target&gt;
-                &lt;packageName&gt;ch.frankel.blog.reactivedata.jooq&lt;/packageName&gt;
-            &lt;/target&gt;
-        &lt;/generator&gt;
-        &lt;jdbc&gt;                                                                &lt;!--4--&gt;
-            &lt;driver&gt;org.postgresql.Driver&lt;/driver&gt;
-            &lt;url&gt;jdbc:postgresql://localhost:5432/postgres&lt;/url&gt;
-            &lt;user&gt;postgres&lt;/user&gt;
-            &lt;password&gt;root&lt;/password&gt;
-        &lt;/jdbc&gt;
-    &lt;/configuration&gt;
-&lt;/plugin&gt;</pre>
+```xml
+<plugin>
+    <groupId>org.jooq</groupId>
+    <artifactId>jooq-codegen-maven</artifactId>                               <!--1-->
+    <executions>
+        <execution>
+            <id>jooq-codegen</id>
+            <phase>generate-sources</phase>
+            <goals>
+                <goal>generate</goal>
+            </goals>
+        </execution>
+    </executions>
+    <dependencies>
+        <dependency>
+            <groupId>org.postgresql</groupId>                                 <!--2-->
+            <artifactId>postgresql</artifactId>
+            <version>42.6.0</version>
+        </dependency>
+    </dependencies>
+    <configuration>
+        <generator>
+            <name>org.jooq.codegen.KotlinGenerator</name>                     <!--3-->
+            <database>
+                <inputSchema>people</inputSchema>                             <!--4-->
+            </database>
+            <target>
+                <packageName>ch.frankel.blog.reactivedata.jooq</packageName>
+            </target>
+        </generator>
+        <jdbc>                                                                <!--4-->
+            <driver>org.postgresql.Driver</driver>
+            <url>jdbc:postgresql://localhost:5432/postgres</url>
+            <user>postgres</user>
+            <password>root</password>
+        </jdbc>
+    </configuration>
+</plugin>
+```
+
 
 1. The version is defined in the parent Spring Boot Starter parent POM
 2. Set the necessary database driver(s). Note that one should use the **non-reactive** driver
@@ -242,8 +269,9 @@ The code may look complex if you're neither a SQL nor a jOOQ expert.
 
 Remember that variable types are unnecessary, but added for documentation purposes:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="kotlin">fun findAll(): Flux&lt;PersonWithAddresses&gt; {                       //1
-  val people: SelectJoinStep&lt;Record5&lt;Long?, String?, String?, LocalDate?, MutableList&lt;Address&gt;&gt;&gt; = //2
+```kotlin
+fun findAll(): Flux<PersonWithAddresses> {                       //1
+  val people: SelectJoinStep<Record5<Long?, String?, String?, LocalDate?, MutableList<Address>>> = //2
     ctx.select(
       PERSON.ID,
       PERSON.FIRST_NAME,
@@ -264,7 +292,9 @@ Remember that variable types are unnecessary, but added for documentation purpos
   ).from(PERSON)
   return Flux.from(people)                                      //4
              .map(personWithAddressesMapper)                    //3
-}</pre>
+}
+```
+
 
 1. Return a regular Project Reactor's `Flux`
 2. Use `multiset`, see below.
@@ -309,6 +339,6 @@ The complete source code for this post can be found on [GitHub](https://github.c
 * [Spring Data R2DBC](https://spring.io/projects/spring-data-r2dbc)
 * [Comment bien s'entendre avec avec Spring Data R2DBC... ou pas](https://blog.ippon.fr/2022/03/02/comment-bien-sentendre-avec-avec-r2dbc-ou-pas/)
 
-*** ** * ** ***
+
 
 *Originally published at [A Java Geek](https://blog.frankel.ch/reactive-database-access/) on July 9^th^, 2023*

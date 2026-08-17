@@ -45,24 +45,30 @@ Using BlockHound is straightforward:
 
 At this point, I naively figured that every blocking call would throw an exception. That's not the case. You can see for yourself by executing the following code:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public static void main(String[] args) throws InterruptedException {
+```java
+public static void main(String[] args) throws InterruptedException {
     BlockHound.install();
     Thread.currentThread().sleep(200);
-}</pre>
+}
+```
+
 
 Though `sleep()` is blocking, the program executes normally.
 
 Getting a bit into BlockHound's [source code](https://github.com/reactor/BlockHound/blob/1.0.6.RELEASE/agent/src/main/java/reactor/blockhound/BlockHound.java#L126-L130) reveals that `sleep()` is indeed configured as blocking (along with several others):
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public static class Builder {
+```java
+public static class Builder {
 
-    private final Map&lt;String, Map&lt;String, Set&lt;String&gt;&gt;&gt; blockingMethods = new HashMap&lt;String, Map&lt;String, Set&lt;String&gt;&gt;&gt;() {{
-        put("java/lang/Thread", new HashMap&lt;String, Set&lt;String&gt;&gt;() {{
+    private final Map<String, Map<String, Set<String>>> blockingMethods = new HashMap<String, Map<String, Set<String>>>() {{
+        put("java/lang/Thread", new HashMap<String, Set<String>>() {{
             put("sleep", singleton("(J)V"));
             put("yield", singleton("()V"));
             put("onSpinWait", singleton("()V"));
         }});
-}</pre>
+}
+```
+
 
 So, what's the problem?
 
@@ -81,32 +87,39 @@ Hence, blocking methods should run on their dedicated thread. This approach wast
 
 Because of that, BlockHound doesn't throw on every blocking call but only on such calls that happen on threads that should be non-blocking. To mark a thread as non-blocking, we need to configure a predicate.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public static void main(String[] args) throws InterruptedException {
-    BlockHound.install(builder -&gt; {
-        builder.nonBlockingThreadPredicate(current -&gt;
-                current.or(thread -&gt; thread.getName().equals("main"))); // 1
+```java
+public static void main(String[] args) throws InterruptedException {
+    BlockHound.install(builder -> {
+        builder.nonBlockingThreadPredicate(current ->
+                current.or(thread -> thread.getName().equals("main"))); // 1
     });
     Thread.currentThread().sleep(200);
-}</pre>
+}
+```
+
 
 1. The `main` thread is marked as non-blocking
 
 Running the above code expectedly throws the following:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">Exception in thread "main" reactor.blockhound.BlockingOperationError: \
+```
+Exception in thread "main" reactor.blockhound.BlockingOperationError: \
   Blocking call! java.lang.Thread.sleep
     at java.base/java.lang.Thread.sleep(Thread.java)
-    at ch.frankel.blog.blockhound.B.main(B.java:11)</pre>
+    at ch.frankel.blog.blockhound.B.main(B.java:11)
+```
+
 
 To be entirely sure, let's tweak our code to mark another thread only as non-blocking. `sleep()` in `main` shouldn't throw while `sleep()` in this other thread should.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public static void main(String[] args) throws InterruptedException {
+```java
+public static void main(String[] args) throws InterruptedException {
     var name = "non-blocking";
-    BlockHound.install(builder -&gt; {
-        builder.nonBlockingThreadPredicate(current -&gt;
-                current.or(thread -&gt; thread.getName().equals(name)));   // 1
+    BlockHound.install(builder -> {
+        builder.nonBlockingThreadPredicate(current ->
+                current.or(thread -> thread.getName().equals(name)));   // 1
     });
-    var thread = new Thread(() -&gt; {
+    var thread = new Thread(() -> {
         try {
             System.out.println("Other thread started");
             Thread.currentThread().sleep(2000);                         // 2
@@ -118,7 +131,9 @@ To be entirely sure, let's tweak our code to mark another thread only as non-blo
     thread.start();                                                     // 3
     Thread.currentThread().sleep(200);                                  // 4
     System.out.println("Main thread finished");
-}</pre>
+}
+```
+
 
 1. Flag threads with the parameterized name as non-blocking
 2. Expected to throw
@@ -127,13 +142,16 @@ To be entirely sure, let's tweak our code to mark another thread only as non-blo
 
 As expected, the previous code outputs the following log:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">Other thread started
+```
+Other thread started
 Exception in thread "non-blocking" reactor.blockhound.BlockingOperationError: \
   Blocking call! java.lang.Thread.sleep
     at java.base/java.lang.Thread.sleep(Thread.java)
     at ch.frankel.blog.blockhound.C.lambda$main$3(C.java:16)
     at java.base/java.lang.Thread.run(Thread.java:829)
-Main thread finished<code></code></pre>
+Main thread finished<code></code>
+```
+
 
 BlockHound is only as good as its configuration {#h2-3-blockhound-is-only-as-good-as-its-configuration}
 -------------------------------------------------------------------------------------------------------
@@ -150,7 +168,10 @@ With that, it's time to check the BlockHound API a bit.
 
 For example, the `RxJava2Integration` integration configures BlockHound for RxJava 2:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">builder.nonBlockingThreadPredicate(current -&gt; current.or(NonBlockingThread.class::isInstance));</pre>
+```java
+builder.nonBlockingThreadPredicate(current -> current.or(NonBlockingThread.class::isInstance));
+```
+
 
 But how does it work? {#h2-4-but-how-does-it-work}
 --------------------------------------------------

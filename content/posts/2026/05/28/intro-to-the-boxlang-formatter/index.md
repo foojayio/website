@@ -38,35 +38,44 @@ If you have BoxLang installed, you already have the formatter. No extra install 
 
 Format everything in your current directory:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">boxlang format
-</pre>
+```java
+boxlang format
+```
+
 
 That's it. It recurses through your project and rewrites supported files in place.
 
 Want to target a specific path or file?
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java"># A directory
+```java
+# A directory
 boxlang format --source ./src
 
 # A single file
 boxlang format --source ./models/User.bx
-</pre>
+```
+
 
 Multiple paths at once (v1.14+):
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">boxlang format --source commands,models,services
-</pre>
+```java
+boxlang format --source commands,models,services
+```
+
 
 The formatter works great out of the box with sensible defaults, but you can customize it with a `.bxformat.json` file in your project root.
 
 Bootstrap one instantly:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">boxlang format --initConfig
-</pre>
+```java
+boxlang format --initConfig
+```
+
 
 This drops a starter config in your current directory. From there, tweak what you care about. Here's a minimal example:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">{
+```java
+{
   "maxLineLength": 120,
   "tabIndent": true,
   "singleQuote": false,
@@ -78,14 +87,17 @@ This drops a starter config in your current directory. From there, tweak what yo
     "comparison_style": "symbols"
   }
 }
-</pre>
+```
+
 
 You've got control over indentation, line length, brace style, struct/array formatting, operator style, SQL keyword casing, import sorting, and a lot more. Only override what you need --- everything else uses sensible defaults.
 
 This is where it gets really useful. Run the formatter in check mode as a quality gate:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">boxlang format --check --source ./
-</pre>
+```java
+boxlang format --check --source ./
+```
+
 
 * Exits `0` if everything is already formatted correctly
 * Exits non-zero if any file has drift
@@ -104,18 +116,21 @@ If you want formatting to happen automatically as you work, the BoxLang LSP supp
 
 **Step 1** - Enable it in `.bxlint.json`:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">{
+```java
+{
   "formatting": {
     "experimental": {
       "enabled": true
     }
   }
 }
-</pre>
+```
+
 
 **Step 2** - Add this to your VS Code `settings.json`:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">{
+```java
+{
   "[boxlang]": {
     "editor.formatOnSave": true
   },
@@ -123,7 +138,8 @@ If you want formatting to happen automatically as you work, the BoxLang LSP supp
     "editor.formatOnSave": true
   }
 }
-</pre>
+```
+
 
 **Step 3** - Open the Command Palette and run:
 
@@ -137,38 +153,50 @@ Already using cfformat in your project? Migration is a two-step process, and you
 
 **Step 1 - Convert your config:**
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">boxlang format --convertConfig --source ./
-</pre>
+```java
+boxlang format --convertConfig --source ./
+```
+
 
 This transforms your `.cfformat.json` into a `.bxformat.json`, keeping your rules intact.
 
 **Step 2 - Validate with check mode:**
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">boxlang format --check --source ./
-</pre>
+```java
+boxlang format --check --source ./
+```
+
 
 See what (if anything) drifted. Run the formatter once in a cleanup commit, then turn on `--check` in CI and you're done.
 
 **Preview without rewriting files** --- pipe output to stdout instead:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">boxlang format --overwrite false --source ./handlers/MainHandler.cfc
-</pre>
+```java
+boxlang format --overwrite false --source ./handlers/MainHandler.cfc
+```
+
 
 **Exclude directories** (v1.14+):
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">boxlang format --source . --excludes generated,vendor
-</pre>
+```java
+boxlang format --source . --excludes generated,vendor
+```
+
 
 **Use a custom config path:**
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">boxlang format --config ./config/.bxformat.json --source ./
-</pre>
+```java
+boxlang format --config ./config/.bxformat.json --source ./
+```
+
 
 Stop spending review cycles on style. The formatter handles it --- in your editor, in your pre-commit hook, in CI. One command, consistent output, zero arguments about semicolons ever again.
 
 Go format something:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">boxlang format
-</pre>
+```java
+boxlang format
+```
+
 
 Questions? Hit us up on [Community \& Support](https://community.ortussolutions.com/ "Community &amp; Support") or open a discussion on the [BoxLang repo](https://github.com/ortus-boxlang/BoxLang "BoxLang repo"). We'd love to hear how you're using it.

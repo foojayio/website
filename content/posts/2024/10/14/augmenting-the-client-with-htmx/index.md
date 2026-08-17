@@ -32,26 +32,29 @@ I'll follow the same structure as in the previous posts of the series. Here's th
 
 Here is how I integrate Thymeleaf and HTMX in the POM:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="xml">&lt;dependencies&gt;
-    &lt;dependency&gt;
-        &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
-        &lt;artifactId&gt;spring-boot-starter-web&lt;/artifactId&gt;        &lt;!--1--&gt;
-    &lt;/dependency&gt;
-    &lt;dependency&gt;
-        &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
-        &lt;artifactId&gt;spring-boot-starter-thymeleaf&lt;/artifactId&gt;  &lt;!--1--&gt;
-    &lt;/dependency&gt;
-    &lt;dependency&gt;
-        &lt;groupId&gt;org.webjars&lt;/groupId&gt;
-        &lt;artifactId&gt;webjars-locator&lt;/artifactId&gt;                &lt;!--1--&gt;
-        &lt;version&gt;0.52&lt;/version&gt;
-    &lt;/dependency&gt;
-    &lt;dependency&gt;
-        &lt;groupId&gt;org.webjars.npm&lt;/groupId&gt;
-        &lt;artifactId&gt;htmx.org&lt;/artifactId&gt;                       &lt;!--2--&gt;
-        &lt;version&gt;2.0.1&lt;/version&gt;
-    &lt;/dependency&gt;
-&lt;/dependencies&gt;</pre>
+```xml
+<dependencies>
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-web</artifactId>        <!--1-->
+    </dependency>
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-thymeleaf</artifactId>  <!--1-->
+    </dependency>
+    <dependency>
+        <groupId>org.webjars</groupId>
+        <artifactId>webjars-locator</artifactId>                <!--1-->
+        <version>0.52</version>
+    </dependency>
+    <dependency>
+        <groupId>org.webjars.npm</groupId>
+        <artifactId>htmx.org</artifactId>                       <!--2-->
+        <version>2.0.1</version>
+    </dependency>
+</dependencies>
+```
+
 
 1. Same as with previous frameworks
 2. The HTMX dependency
@@ -60,7 +63,10 @@ Here is how I integrate Thymeleaf and HTMX in the POM:
 
 The code on the HTML side is straightforward :
 
-<pre class="EnlighterJSRAW" data-enlighter-language="html">&lt;script th:src="@{/webjars/htmx.org/dist/htmx.js}" src="https://cdn.jsdelivr.net/npm/<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="19716d746137766b7e59283720">[email&nbsp;protected]</a>/dist/htmx.min.js"&gt;&lt;/script&gt; &lt;!--1--&gt;</pre>
+```html
+<script th:src="@{/webjars/htmx.org/dist/htmx.js}" src="https://cdn.jsdelivr.net/npm/<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="19716d746137766b7e59283720">[email protected]</a>/dist/htmx.min.js"></script> <!--1-->
+```
+
 
 1. Add the HTMX dependency
 
@@ -86,7 +92,8 @@ Let's list interactions and what fragment we replace for each of them:
 
 Here's the conceptual fragments design for our app:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">-------------------- APP --------------------
+```
+-------------------- APP --------------------
 | index.html                                |
 |                                           |
 |  ---------------- TABLE ----------------  |
@@ -97,7 +104,9 @@ Here's the conceptual fragments design for our app:
 |  |  |                               |  |  |
 |  |  ---------------------------------  |  |
 |  ---------------------------------------  |
----------------------------------------------</pre>
+---------------------------------------------
+```
+
 
 I'll split the HTML page into these fragments. Because we render them via Thymeleaf, we can split each into their dedicated file for a cleaner separation. At initial load time, we use Thymeleaf's `replace` directive; we use HTMX for asynchronous client-side interactions.
 
@@ -107,14 +116,17 @@ We will start with the cleanup feature, as it's the easiest one with HTMX.
 
 Here's the HTML code:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="html">&lt;tbody id="lines"&gt;...&lt;/tbody&gt;                                       &lt;!--1--&gt;
+```html
+<tbody id="lines">...</tbody>                                       <!--1-->
 
-&lt;button class="btn btn-warning"
-        hx-trigger="click"                                          &lt;!--2--&gt;
-        hx-delete="/htmx/todo:cleanup"                              &lt;!--3--&gt;
-        hx-target="#lines"&gt;                                         &lt;!--4--&gt;
+<button class="btn btn-warning"
+        hx-trigger="click"                                          <!--2-->
+        hx-delete="/htmx/todo:cleanup"                              <!--3-->
+        hx-target="#lines">                                         <!--4-->
     Cleanup
-&lt;/button&gt;</pre>
+</button>
+```
+
 
 1. Define the `lines` DOM element
 2. HTMX triggers on the `click` event
@@ -125,12 +137,15 @@ Note that there's **no explicit JavaScript** involved, not a single line of code
 
 On the server side, the code is the following:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="kotlin">fun htmx(todos: MutableList&lt;Todo&gt;) = router {
+```kotlin
+fun htmx(todos: MutableList<Todo>) = router {
     DELETE("/htmx/todo:cleanup") {
         todos.removeIf { it.completed }                             //1
         ok().render("htmx/lines", mapOf("todos" to todos))          //2
     }
-}</pre>
+}
+```
+
 
 1. Regular cleanup
 2. Use the `render()` function, instead of `body()` for API calls. Because of our previous file split, we can render only the needed HTML fragment. It uses Thymeleaf for any necessary server-side rendering.
@@ -150,11 +165,14 @@ We have two challenges when clicking on the checkbox:
 
 HTMX offers the `hx-vals` for the JSON payload. However, the URL is different for each row as we want to include the ID in the path. We must generate it server-side with Thymeleaf. TIL: Thymeleaf can manage **any** HTML attribute prefixed with `th:`: it will process the value as usual and write the attribute's name unprefixed.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="html">&lt;input type="checkbox"
-       th:checked="${todo.completed}"                               &lt;!--1--&gt;
-       hx-trigger="click"                                           &lt;!--2--&gt;
-       th:hx-patch="'/htmx/todo/' + ${todo.id}"                     &lt;!--3--&gt;
-       hx-vals='js:{"checked": event.target.checked}' /&gt;            &lt;!--4--&gt;</pre>
+```html
+<input type="checkbox"
+       th:checked="${todo.completed}"                               <!--1-->
+       hx-trigger="click"                                           <!--2-->
+       th:hx-patch="'/htmx/todo/' + ${todo.id}"                     <!--3-->
+       hx-vals='js:{"checked": event.target.checked}' />            <!--4-->
+```
+
 
 1. Regular Thymeleaf syntax to check the box if the `todo` is completed
 2. HTMX triggers on `click` events
@@ -176,6 +194,6 @@ The complete source code for this post can be found on [GitHub](https://github.c
 
 * [HTMX](https://htmx.org/)
 
-*** ** * ** ***
+
 
 *Originally published at [A Java Geek](https://blog.frankel.ch/ajax-ssr/5/) on October 6^th^, 2024*

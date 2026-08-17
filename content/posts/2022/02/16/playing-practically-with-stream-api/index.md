@@ -29,7 +29,8 @@ I have added the boilerplate codes of Model classes and initialization [here](ht
 
 #### Find out 3 products with maximum ratings. Sort products by (i) product ratings. If more than 1 products have same number of ratings, (ii) sort by names
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">var setOfProduct = customer1.getOrders()
+```java
+var setOfProduct = customer1.getOrders()
        .stream()
        .map(Order::getItems)
        .flatMap(Collection::stream)
@@ -41,11 +42,14 @@ I have added the boilerplate codes of Model classes and initialization [here](ht
            .reversed()
            .thenComparing(Product::getName))
        .limit(3)
-       .forEach(System.out::println);</pre>
+       .forEach(System.out::println);
+```
+
 
 If we want to combine both in one go -
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">customer1.getOrders()
+```
+customer1.getOrders()
     .stream()
     .map(Order::getItems)
     .flatMap(Collection::stream)
@@ -54,7 +58,9 @@ If we want to combine both in one go -
         .reversed()
         .thenComparing(Product::getName))
     .limit(3)
-    .forEach(System.out::println);</pre>
+    .forEach(System.out::println);
+```
+
 
 **Note**: over here we've used distinct. The reason is, in our first attempt, we have first put the result in Set. The elements of the Set is always unique. In our second attempt, if we don't use distinct, then we will lose the unique property and the result will be different.
 
@@ -70,14 +76,15 @@ Well, this is a practice problem to solve for the new learners.
 
 To find out the total orders first we need to concat all orders by all customers.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">var customer1Orders = customer1.getOrders()
+```java
+var customer1Orders = customer1.getOrders()
         .stream()
-        .flatMap(order -&gt; order.getItems().stream())
+        .flatMap(order -> order.getItems().stream())
         .toList();
 
     var customer2Orders = customer2.getOrders()
         .stream()
-        .flatMap(order -&gt; order.getItems().stream())
+        .flatMap(order -> order.getItems().stream())
         .toList();
 
     System.out.println(
@@ -86,13 +93,16 @@ To find out the total orders first we need to concat all orders by all customers
     Stream.concat(customer1Orders.stream(), customer2Orders.stream())
         .collect(Collectors.groupingBy(Product::getName, Collectors.counting()))
         .entrySet()
-        .forEach(System.out::println);</pre>
+        .forEach(System.out::println);
+```
+
 
 ### Problem 4: {#h3-3-problem-4}
 
 #### Find out customer 1's favorite product. A favorite product is the maximum quantity a customer ordered of a specific product
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">// TODO: 4. Find out customer 1's favorite product.
+```java
+// TODO: 4. Find out customer 1's favorite product.
 //  A favorite product is the maximum quantity a customer ordered of a specific product
 System.out.println("\n============== Customer 1's favorite product =============");
 var productsMap = customer1Orders
@@ -105,31 +115,39 @@ productsMap
     .sorted(Map.Entry.comparingByValue(reverseOrder()))
     .findFirst()
     .ifPresent(System.out::println);
-</pre>
+```
+
 
 Or maybe -
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">productsMap
+```java
+productsMap
     .entrySet()
     .stream()
     .max(Map.Entry.comparingByValue())
-    .ifPresent(System.out::println);</pre>
+    .ifPresent(System.out::println);
+```
+
 
 We can try it in one go -
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">customer1Orders
+```java
+customer1Orders
     .stream()
     .collect(Collectors.groupingBy(Product::getName, Collectors.counting()))
     .entrySet()
     .stream()
     .max(Map.Entry.comparingByValue())
-    .ifPresent(System.out::println);</pre>
+    .ifPresent(System.out::println);
+```
+
 
 ### Problem 5: {#h3-4-problem-5}
 
 #### Calculate the total cost of a order for a customer (customer 1, 2nd order)
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">// TODO: 5. Calculate the total cost of a order for a customer (customer 1, 2nd order)
+```java
+// TODO: 5. Calculate the total cost of a order for a customer (customer 1, 2nd order)
 System.out.println(
     "\n============= Calculate the total cost of a order for a customer =============");
 var total = customer1.getOrders().get(0)
@@ -138,20 +156,25 @@ var total = customer1.getOrders().get(0)
     .map(Product::getPrice)
     .reduce(BigDecimal.ZERO, BigDecimal::add);
 
-System.out.println(total);</pre>
+System.out.println(total);
+```
+
 
 ### Problem 6: {#h3-5-problem-6}
 
 #### Find out all books written by each author
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">// TODO: 6. Find out all books written by each author
+```java
+// TODO: 6. Find out all books written by each author
 System.out.println("\n============= Find out all books written by each author =============");
 products.stream()
     .collect(Collectors.groupingBy(Product::getAuthor, Collectors.toList()))
     .entrySet()
     .stream()
     .sorted(Map.Entry.comparingByKey())
-    .forEach(System.out::println);</pre>
+    .forEach(System.out::println);
+```
+
 
 The full code in one file can be found [here](https://github.com/mainul35/pondit-b4/blob/main/src/com/pondit/b4/class30_31/StreamPractice.java "here").
 

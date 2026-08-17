@@ -25,7 +25,8 @@ By now, we know that threads share memory space so that multiple threads can rea
 
 In the following code, we will try to simulate a bank account. We will keep debiting and crediting the same amount from two different threads from an account. The idea is, if we debit and credit the same amount multiple times, the net result should remain the same.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">package com.bazlur;
+```java
+package com.bazlur;
 
 public class BankAccount {
     private long balance;
@@ -49,7 +50,9 @@ public class BankAccount {
 
         return String.valueOf(balance);
     }
-}</pre>
+}
+```
+
 
 The above class is a super simple Java class. It has two methods. One deposits an amount, and the other withdraws an amount from a bank account. The balance variable is that from where we do read the value from and write to.
 
@@ -73,14 +76,20 @@ Let's put our program into a symbol and pseudocode table-
 
 So we have several execution orders here. However, only the following execution order would maintain the accuracy of the calculation.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">Execution Order: 1.1, 1.2. 2.1, 2.2
-Execution Order 2: 2.1, 2.2, 1.1, 1.2</pre>
+```
+Execution Order: 1.1, 1.2. 2.1, 2.2
+Execution Order 2: 2.1, 2.2, 1.1, 1.2
+```
+
 
 But we can not guaranty that the execution order would only be the these two.
 
 What if the execution order is the following:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">Execution Oder: 1.1, 2.1, 2.2, 1.2</pre>
+```
+Execution Oder: 1.1, 2.1, 2.2, 1.2
+```
+
 
 If the code is executed with the above order, the output will not be what we expect.
 
@@ -103,7 +112,8 @@ Achieving this mutual exclusion in Java is pretty straightforward. The trick is 
 
 When a thread acquires the lock object, no other thread will be able to use this lock. Once a thread unlocks the lock, other threads than the original thread can acquire it again. That means the critical section of the code will now be executed automatically.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">package com.bazlur;
+```java
+package com.bazlur;
 
 public class BankAccount {
     private long balance;
@@ -138,13 +148,16 @@ public class BankAccount {
 
         return String.valueOf(balance);
     }
-}</pre>
+}
+```
+
 
 if you run the main method again, the output would be consistent.
 
 The other way is that every Java object has an intrinsic lock in it. It is called "monitor lock" as well. If we add the synchronized keyword in the method signature, it uses the intrinsic lock. Example:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">package com.bazlur;
+```java
+package com.bazlur;
 
 public class Counter {
     private int count;
@@ -156,7 +169,9 @@ public class Counter {
     public int getCount() {
         return count;
     }
-}</pre>
+}
+```
+
 
 Now let's summarize what we have just learned from this discussion and a few more essential notes:
 

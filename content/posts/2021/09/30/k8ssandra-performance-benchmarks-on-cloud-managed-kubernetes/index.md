@@ -50,8 +50,10 @@ We selected similar instances in GCP and Azure and ran [sysbench](https://github
 
 We ran the following test using `sysbench` to evaluate CPU performance:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">sysbench cpu --threads=8 --time=120 run
-</pre>
+```
+sysbench cpu --threads=8 --time=120 run
+```
+
 
 For disk performance benchmarking, we used [Cassandra inspired fio profiles](https://github.com/ibspoof/cassandra-fio) that attempt to emulate Leveled Compaction Strategy and Size Tiered Compaction Strategy behaviors (the numbers below are only representative in the context of these profiles, they're not absolute performance numbers):
 
@@ -98,16 +100,22 @@ At the time of conducting the benchmarks, the latest stable version of K8ssandra
 
 Cassandra's default settings were applied with the exception of garbage collection (GC) settings. This used G1GC with 31GB of heap size, along with a few GC related JVM flags:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">-XX:+UseG1GC
+```
+-XX:+UseG1GC
 -XX:G1RSetUpdatingPauseTimePercent=5
 -XX:MaxGCPauseMillis=300
--XX:InitiatingHeapOccupancyPercent=70 -Xms31G -Xmx31G</pre>
+-XX:InitiatingHeapOccupancyPercent=70 -Xms31G -Xmx31G
+```
+
 
 ### Baseline infrastructure setup {#h3-3-baseline-infrastructure-setup}
 
 [tlp-cluster](https://github.com/thelastpickle/tlp-cluster/tree/alex/stargate-updates) was used to provision our baseline VM infrastructure in AWS. The following command was used to spin up the instances and the Cassandra cluster:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">build_cluster.sh -n K8SSANDRA_BENCH_BASELINE_r5 -g 0 -s 1 -v 4.0~beta4 -c 3 -i r5.2xlarge --gc=G1 --heap=31 -y</pre>
+```
+build_cluster.sh -n K8SSANDRA_BENCH_BASELINE_r5 -g 0 -s 1 -v 4.0~beta4 -c 3 -i r5.2xlarge --gc=G1 --heap=31 -y
+```
+
 
 The stress instance deployed by [this branch](https://github.com/thelastpickle/tlp-cluster/tree/alex/stargate-updates) of tlp-cluster contains both [tlp-stress](https://github.com/thelastpickle/tlp-stress) and [nosqlbench](https://github.com/nosqlbench/nosqlbench).
 
@@ -121,7 +129,8 @@ The values for our K8ssandra Helm charts varied slightly from one provider to an
 
 Values file (AWS):
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">cassandra:
+```
+cassandra:
   version: "4.0.0"
   allowMultipleNodesPerWorker: false
   heap:
@@ -170,7 +179,9 @@ reaper:
   enabled: false
 
 kube-prometheus-stack:
-  enabled: false</pre>
+  enabled: false
+```
+
 
 ### Stress Workloads {#h3-5-stress-workloads}
 
@@ -184,7 +195,8 @@ We used the `cql-tabular2` profile which allowed us to stress the disks signific
 
 ##### **Throughput test**
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">apiVersion: batch/v1
+```
+apiVersion: batch/v1
 kind: Job
 metadata:
   name: nosqlbench
@@ -228,11 +240,13 @@ spec:
           path: /tmp
           type: DirectoryOrCreate
       restartPolicy: Never
-</pre>
+```
+
 
 ##### **Latency test**
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">apiVersion: batch/v1
+```
+apiVersion: batch/v1
 kind: Job
 metadata:
   name: nosqlbench
@@ -278,7 +292,8 @@ spec:
           path: /tmp
           type: DirectoryOrCreate
       restartPolicy: Never
-</pre>
+```
+
 
 Note that the latency test uses a **striderate** instead of a **cyclerate** . A **striderate** of 10 with a **stride** value of 800 would generate 8000 cycles (operations) per second. Initially we used a **cyclerate** of 8000 but the rate limiter was failing to reach the desired throughput, while strides (an over ensemble of cycles in nosqlbench) succeeded.
 

@@ -41,16 +41,25 @@ You can generate embeddings using a model such as OpenAI or Voyage AI (🔁 read
 
 Alternatively, you can load a sample MongoDB dataset that already contains pre-generated vector embeddings using mongorestore. First, make sure [MongoDB Database Tools are installed](https://www.mongodb.com/docs/database-tools/installation/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=vector-search-3&utm_term=megan.grant). Then, download the sample dataset with curl, as shown in the example below:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">curl https://atlas-education.s3.amazonaws.com/sampledata.archive -o sampledata.archive</pre>
+```
+curl https://atlas-education.s3.amazonaws.com/sampledata.archive -o sampledata.archive
+```
+
 
 Find the connection string for your local MongoDB Atlas cluster with:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">atlas deployments connect --connectWith connectionString</pre>
+```
+atlas deployments connect --connectWith connectionString
+```
+
 
 You will get a connection string similar to "mongodb://localhost:55015/?directConnection=true". Then, load the sample dataset using mongorestore and the connection string:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">mongorestore --archive=sampledata.archive --uri 
-"mongodb://localhost:55015/?directConnection=true"</pre>
+```
+mongorestore --archive=sampledata.archive --uri 
+"mongodb://localhost:55015/?directConnection=true"
+```
+
 
 After reconnecting to your local Atlas cluster, run show dbs to confirm that the new sample_mflix database has been added. It includes the embedded_movies collection with pre-generated vector embeddings from the MongoDB sample dataset.
 
@@ -58,23 +67,29 @@ After reconnecting to your local Atlas cluster, run show dbs to confirm that the
 
 To retrieve a document from the embedded_movies collection within this database, run the following command:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">db.getSiblingDB("sample_mflix").embedded_movies.findOne()</pre>
+```
+db.getSiblingDB("sample_mflix").embedded_movies.findOne()
+```
+
 
 This command queries the sample_mflix.embedded_movies namespace and returns a single document containing standard movie metadata such as title, cast, genres, and release date. It also includes one or more vector embeddings of the plot field, which are stored as Float32Array binaries. Here is a simplified example of the returned document:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">{
-&nbsp;&nbsp;"_id": ObjectId("573a1392f29313caabcd9ca6"),
-&nbsp;&nbsp;"title": "Scarface",
-&nbsp;&nbsp;"plot": "An ambitious and near insanely violent gangster climbs the ladder of success...",
+```
+{
+  "_id": ObjectId("573a1392f29313caabcd9ca6"),
+  "title": "Scarface",
+  "plot": "An ambitious and near insanely violent gangster climbs the ladder of success...",
 "plot_embedding": Binary.fromFloat32Array(new Float32Array([
-&nbsp;-0.0155, -0.0342, 0.0152, -0.0426, -0.0208, 0.0263,
-&nbsp;// ... 1436 more values ...
-&nbsp;&nbsp;])),
-&nbsp;"plot_embedding_voyage_3_large": Binary.fromFloat32Array(new Float32Array([
-&nbsp;-0.0300, 0.0311, -0.0156, -0.0366, 0.0248, 0.0085,
-&nbsp;&nbsp;&nbsp;&nbsp;// ... 1948 more values ...
-&nbsp;&nbsp;]))
-}</pre>
+ -0.0155, -0.0342, 0.0152, -0.0426, -0.0208, 0.0263,
+ // ... 1436 more values ...
+  ])),
+ "plot_embedding_voyage_3_large": Binary.fromFloat32Array(new Float32Array([
+ -0.0300, 0.0311, -0.0156, -0.0366, 0.0248, 0.0085,
+    // ... 1948 more values ...
+  ]))
+}
+```
+
 
 The example includes two different embeddings of the same plot: plot_embedding contains 1536-dimensional vectors generated using OpenAI's text-embedding-ada-002 model, while plot_embedding_voyage_3_large contains 2048-dimensional vectors from Voyage AI's voyage-3-large model.
 
@@ -86,27 +101,33 @@ Now you just need to create a vector index on the embedding field, and you'll be
 
 Use the createSearchIndex command to define a vector index on the plot_embedding_voyage_3_large field. This enables fast similarity search over 2048-dimensional vectors.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">db.getSiblingDB("sample_mflix").embedded_movies.createSearchIndex({
-&nbsp;&nbsp;name: "plot_embedding_voyage_index",
-&nbsp;&nbsp;definition: {
-&nbsp;&nbsp;&nbsp;mappings: {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dynamic: false,
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fields: {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;plot_embedding_voyage_3_large: {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;type: "knnVector",
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dimensions: 2048,
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;similarity: "cosine"
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
-&nbsp;&nbsp;&nbsp;&nbsp;}
-&nbsp;&nbsp;}
-})</pre>
+```
+db.getSiblingDB("sample_mflix").embedded_movies.createSearchIndex({
+  name: "plot_embedding_voyage_index",
+  definition: {
+   mappings: {
+     dynamic: false,
+       fields: {
+          plot_embedding_voyage_3_large: {
+          type: "knnVector",
+          dimensions: 2048,
+          similarity: "cosine"
+        }
+      }
+    }
+  }
+})
+```
+
 
 The plot_embedding_voyage_3_large field is indexed as a knnVector, a specialized vector field designed for storing high-dimensional numeric data. Cosine means the similarity between vectors is based on the angle between them; the smaller the angle, the higher the similarity, regardless of their magnitude.
 
 To confirm the index exists, run:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">db.getSiblingDB("sample_mflix").embedded_movies.getSearchIndexes()</pre>
+```
+db.getSiblingDB("sample_mflix").embedded_movies.getSearchIndexes()
+```
+
 
 You're now ready to run similarity queries against this field using the $vectorSearch operator.
 

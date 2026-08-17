@@ -64,29 +64,39 @@ We need several steps to set up geo-routing on Apache APISIX:
 
 Nginx geo-routing requires the `ngx_http_geoip_module` module. But if we try to install it via a package manager, it also installs `nginx`, which conflicts with the `nginx` instance embedded in Apache APISIX. As we only need the library, we can get it from the relevant Docker image:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="dockerfile">FROM nginx:1.21.4 as geoiplib
+```dockerfile
+FROM nginx:1.21.4 as geoiplib
 
 FROM apache/apisix:2.15.0-debian
 
 COPY --from=geoiplib /usr/lib/nginx/modules/ngx_http_geoip_module.so \      #1
-                     /usr/local/apisix/modules/ngx_http_geoip_module.so</pre>
+                     /usr/local/apisix/modules/ngx_http_geoip_module.so
+```
+
 
 1. Copy the library from the `nginx` image to the `apache/apisix` one
 
 The regular package install installs all the dependencies, even the ones we don't want. Because we only copy the library, we need to install the dependencies manually. It's straightforward:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="dockerfile">RUN apt-get update \
- &amp;&amp; apt-get install -y libgeoip1</pre>
+```dockerfile
+RUN apt-get update \
+ && apt-get install -y libgeoip1
+```
+
 
 Nginx offers two ways to activate a module: via the command line or dynamically in the `nginx.conf` configuration file. The former is impossible since we're not in control, so the latter is our only option. To update the Nginx config file with the module at startup time, Apache APISIX offers a hook in its config file:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="dockerfile">nginx_config:
+```dockerfile
+nginx_config:
   main_configuration_snippet: |
-    load_module     "modules/ngx_http_geoip_module.so";</pre>
+    load_module     "modules/ngx_http_geoip_module.so";
+```
+
 
 The above will generate the following:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="nginx"># Configuration File - Nginx Server Configs
+```nginx
+# Configuration File - Nginx Server Configs
 # This is a read-only file, do not try to modify it.
 master_process on;
 
@@ -96,13 +106,18 @@ worker_cpu_affinity auto;
 # main configuration snippet starts
 load_module     "modules/ngx_http_geoip_module.so";
 
-...</pre>
+...
+```
+
 
 The [GeoIP module](http://nginx.org/en/docs/http/ngx_http_geoip_module.html) relies on the [Maxmind GeoIP database](https://dev.maxmind.com/geoip/geolite2-free-geolocation-data). We installed it implicitly in the previous step; we have to configure the module to point to it:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml">nginx_config:
+```yaml
+nginx_config:
   http_configuration_snippet: |
-    geoip_country   /usr/share/GeoIP/GeoIP.dat;</pre>
+    geoip_country   /usr/share/GeoIP/GeoIP.dat;
+```
+
 
 From this point on, every request going through Apache APISIX is geo-located. It translates as Nginx adding additional variables. As per the documentation:
 > The following variables are available when using this database:
@@ -129,7 +144,8 @@ I've created a [dedicated project](https://github.com/ajavageek/apisix-georoutin
 * Apache APISIX configured as above
 * Two upstreams, one in English and one in French
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml">upstreams:
+```yaml
+upstreams:
   - id: 1
     type: roundrobin
     nodes:
@@ -143,15 +159,20 @@ routes:
     upstream_id: 1
   - uri: /
     upstream_id: 2
-#END</pre>
+#END
+```
+
 
 With this snippet, every user accesses the English upstream. I intend to direct users located in France to the French upstream and the rest to the English one. For this, we need to configure the second route:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml">routes:
+```yaml
+routes:
   - uri: /
     upstream_id: 2
     vars: [["geoip_country_code", "==", "FR"]]   #1
-    priority: 5                                  #2</pre>
+    priority: 5                                  #2
+```
+
 
 1. The magic happens here; see below.
 2. By default, route matching rules are evaluated in arbitrary order. We need this rule to be evaluated first. So we increase the priority - the default is 10.
@@ -171,27 +192,42 @@ In this case, the client IP would be the RP's proxy. To propagate the original c
 
 The Nginx module offers this configuration but restricts it to an IP range. For testing, we configure it to *any* IP; in production, we should set it to the RP IP.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml">nginx_config:
+```yaml
+nginx_config:
   http:
-    geoip_proxy     0.0.0.0/0;</pre>
+    geoip_proxy     0.0.0.0/0;
+```
+
 
 We can finally test the setup:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash">curl localhost:9080</pre>
+```bash
+curl localhost:9080
+```
 
-<pre class="EnlighterJSRAW" data-enlighter-language="json">{
+
+```json
+{
   "lang": "en",
   "message": "Welcome to Apache APISIX"
-}</pre>
+}
+```
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash">curl -H "X-Forwarded-For: 212.27.48.10" localhost:9080 #1</pre>
+
+```bash
+curl -H "X-Forwarded-For: 212.27.48.10" localhost:9080 #1
+```
+
 
 1. `212.27.48.10` is a French IP address
 
-<pre class="EnlighterJSRAW" data-enlighter-language="json">{
+```json
+{
   "lang": "fr",
   "message": "Bienvenue à Apache APISIX"
-}</pre>
+}
+```
+
 
 Bonus: logs and monitoring {#h2-3-bonus-logs-and-monitoring}
 ------------------------------------------------------------
@@ -203,9 +239,12 @@ It's straightforward to use the new variable in the Apisix logs. I'd advise it f
 
 Just configure it accordingly:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml">nginx_config:
+```yaml
+nginx_config:
   http:
-    access_log_format: "$remote_addr - $remote_user [$time_local][$geoip_country_code] $http_host \"$request\" $status $body_bytes_sent $request_time \"$http_referer\" \"$http_user_agent\" $upstream_addr $upstream_status $upstream_response_time" #1</pre>
+    access_log_format: "$remote_addr - $remote_user [$time_local][$geoip_country_code] $http_host \"$request\" $status $body_bytes_sent $request_time \"$http_referer\" \"$http_user_agent\" $upstream_addr $upstream_status $upstream_response_time" #1
+```
+
 
 1. Keep the default log variables and add the country code
 

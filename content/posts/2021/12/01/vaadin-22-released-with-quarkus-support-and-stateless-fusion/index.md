@@ -102,15 +102,16 @@ There are currently two Maven archetypes available, the `vaadin-archetype-applic
 
 The version of the archetype should match the platform version. After you have Maven installed, you can quickly create and run a Vaadin app with the following command:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="xml">mvn -B archetype:generate \
+```xml
+mvn -B archetype:generate \
                 -DarchetypeGroupId=com.vaadin \
                 -DarchetypeArtifactId=vaadin-archetype-application \
                 -DarchetypeVersion=22.0.0\
                 -DgroupId=org.test \
                 -DartifactId=vaadin-app \
                 -Dversion=1.0-SNAPSHOT \
-                &amp;&amp; cd vaadin-app \
-                &amp;&amp; mvn package jetty:run
+                && cd vaadin-app \
+                && mvn package jetty:run
 mvn -B archetype:generate \
                 -DarchetypeGroupId=com.vaadin \
                 -DarchetypeArtifactId=vaadin-archetype-spring-application \
@@ -118,21 +119,26 @@ mvn -B archetype:generate \
                 -DgroupId=org.test \
                 -DartifactId=vaadin-app \
                 -Dversion=1.0-SNAPSHOT \
-                &amp;&amp; cd vaadin-app \
-                &amp;&amp; mvn</pre>
+                && cd vaadin-app \
+                && mvn
+```
+
 
 Manually changing Vaadin version for Java projects {#h2-9-manually-changing-vaadin-version-for-java-projects}
 -------------------------------------------------------------------------------------------------------------
 
 Add the following dependency to dependencyManagement in pom.xml.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="xml">&lt;dependency&gt;
-    &lt;groupId&gt;com.vaadin&lt;/groupId&gt;
-    &lt;artifactId&gt;vaadin-bom&lt;/artifactId&gt;
-    &lt;version&gt;22.0.0&lt;/version&gt;
-    &lt;type&gt;pom&lt;/type&gt;
-    &lt;scope&gt;import&lt;/scope&gt;
-&lt;/dependency&gt;</pre>
+```xml
+<dependency>
+    <groupId>com.vaadin</groupId>
+    <artifactId>vaadin-bom</artifactId>
+    <version>22.0.0</version>
+    <type>pom</type>
+    <scope>import</scope>
+</dependency>
+```
+
 
 Read more about upgrading to Vaadin 22 from [vaadin.com](https://vaadin.com/docs/latest/guide/upgrading).
 

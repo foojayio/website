@@ -34,7 +34,10 @@ In this blog post, I will limit coverage of Java 16 to its language features, wh
 
 Records introduce a new type declaration that simplifies the task of modeling your immutable data. Though it helps cut down on boilerplate code significantly, that isn't the primary reason for its introduction. Here's an example:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">record Person(String name, int age) {}</pre>
+```java
+record Person(String name, int age) {}
+```
+
 
 With just one line of code, the preceding example defines a record `Person` with two components `name` and `age`. To create a record using IntelliJ IDEA 2021.1, select Record in the New Java Class dialog box. Fill in the name and you are good to go.
 
@@ -82,7 +85,8 @@ What you can and can't add to a record {#h2-4-what-you-can-and-can-t-add-to-a-re
 
 Since the state of a record is defined using components in its declaration, it doesn't make much sense to allow the addition of instance variables (or fields) to a record. However, you can add static fields, and instance or static methods to a record, if you need them. Here's an example:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public record Person(String name, int age) {
+```java
+public record Person(String name, int age) {
    Person {
        instanceCtr++;
    }
@@ -90,7 +94,9 @@ Since the state of a record is defined using components in its declaration, it d
    static int getInstanceCtr() {
        return instanceCtr;
    }
-}</pre>
+}
+```
+
 
 Modifying the default behavior of a constructor in a record {#h2-5-modifying-the-default-behavior-of-a-constructor-in-a-record}
 -------------------------------------------------------------------------------------------------------------------------------
@@ -116,7 +122,8 @@ Records are truly immutable -- you can't change their field values using reflect
 
 Here is example code for a regular class, `Notebook`, which defines a private final field `pageCount`:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public class NoteBook {
+```java
+public class NoteBook {
    private final int pageCount;
 
    public NoteBook(int pageCount) {
@@ -131,16 +138,22 @@ Here is example code for a regular class, `Notebook`, which defines a private fi
    public String toString() {
        return "NoteBook{" + "pageCount=" + pageCount + '}';
    }
-}</pre>
+}
+```
+
 
 And here's the code for a record `Point`:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public record Point(int x, int y) {
-}</pre>
+```java
+public record Point(int x, int y) {
+}
+```
+
 
 The following code confirms that the private and final fields of a (regular) class can be changed using reflection, but records are a harder nut to crack:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">package com.jetbrains.java16.records;
+```java
+package com.jetbrains.java16.records;
 import java.lang.reflect.Field;
 
 public class UseReflection {
@@ -174,29 +187,37 @@ public class UseReflection {
 
        System.out.println(point);
    }
-}</pre>
+}
+```
+
 
 Defining a Generic record {#h2-7-defining-a-generic-record}
 -----------------------------------------------------------
 
 You can define records with generics. Here's an example of a record called `Parcel`, which can store any object as its contents, and capture the parcel's dimensions and weight:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public record Parcel&lt;T&gt;(T contents,
+```java
+public record Parcel<T>(T contents,
    double length,
    double breadth,
    double height,
-   double weight) {}</pre>
+   double weight) {}
+```
+
 
 You can instantiate this record as follows:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">class Table{ /* class code */ }
+```java
+class Table{ /* class code */ }
 public class Java16 {
    public static void main(String[] args) {
-       Parcel&lt;Table&gt; parcel = new Parcel&lt;&gt;(
+       Parcel<Table> parcel = new Parcel<>(
 new Table(), 200, 100, 55, 136.88);
        System.out.println(parcel);
    }
-}</pre>
+}
+```
+
 
 Converting Record to a regular class {#h2-8-converting-record-to-a-regular-class}
 ---------------------------------------------------------------------------------
@@ -221,18 +242,22 @@ You can add an appropriate annotation to the components of a record, say, `@NotN
 
 Developers often use third-party libraries like Jackson to persist value objects. Jackson supports records too. However, depending on the Jackson library version you are using (say, 2.11.3), you might need to annotate the components of your records using the annotation `@JsonProperty`, as follows:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">import com.fasterxml.jackson.annotation.JsonProperty;
+```java
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 public record Rectangle(
        @JsonProperty("width") int width,
        @JsonProperty("length") int length) {
-}</pre>
+}
+```
+
 
 **If you are using Jackson 2.12.2 or later versions, you don't need to annotate your record components with `@JsonProperty`.**   
 
 Here's some sample code you can use to persist and read records using Jackson:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public class ReadWriteRecordUsingJackson {
+```java
+public class ReadWriteRecordUsingJackson {
 
    public static void main(String[] args) {
        Rectangle rectangle = new Rectangle(20, 60);
@@ -265,32 +290,38 @@ Here's some sample code you can use to persist and read records using Jackson:
    private static File getFile() {
        return new File("mydata.json");
    }
-}</pre>
+}
+```
+
 
 If you are working with a Maven project, you can add the following dependencies to your pom.xml:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="xml">&lt;dependency&gt;
-   &lt;groupId&gt;com.fasterxml.jackson.core&lt;/groupId&gt;
-   &lt;artifactId&gt;jackson-core&lt;/artifactId&gt;
-   &lt;version&gt;2.12.2&lt;/version&gt;
-&lt;/dependency&gt;
-&lt;dependency&gt;
-   &lt;groupId&gt;com.fasterxml.jackson.core&lt;/groupId&gt;
-   &lt;artifactId&gt;jackson-annotations&lt;/artifactId&gt;
-   &lt;version&gt;2.12.2&lt;/version&gt;
-&lt;/dependency&gt;
-&lt;dependency&gt;
-   &lt;groupId&gt;com.fasterxml.jackson.core&lt;/groupId&gt;
-   &lt;artifactId&gt;jackson-databind&lt;/artifactId&gt;
-   &lt;version&gt;2.12.2&lt;/version&gt;
-&lt;/dependency&gt;</pre>
+```xml
+<dependency>
+   <groupId>com.fasterxml.jackson.core</groupId>
+   <artifactId>jackson-core</artifactId>
+   <version>2.12.2</version>
+</dependency>
+<dependency>
+   <groupId>com.fasterxml.jackson.core</groupId>
+   <artifactId>jackson-annotations</artifactId>
+   <version>2.12.2</version>
+</dependency>
+<dependency>
+   <groupId>com.fasterxml.jackson.core</groupId>
+   <artifactId>jackson-databind</artifactId>
+   <version>2.12.2</version>
+</dependency>
+```
+
 
 Reading and Writing Records to a File {#h2-11-reading-and-writing-records-to-a-file}
 ------------------------------------------------------------------------------------
 
 You can write records to streams and read them, like other class instances. Let your record implement a relevant interface like the `Serializable` interface. Here's example code, which will write to and read from a file:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">package com.jetbrains.java16.records;
+```java
+package com.jetbrains.java16.records;
 import java.io.Serializable;
 public record Person(String name, int age) implements Serializable {
 }
@@ -324,7 +355,9 @@ public class ReadWriteObj {
        }
        return result;
    }
-}</pre>
+}
+```
+
 
 Refactoring the signature of a Record {#h2-12-refactoring-the-signature-of-a-record}
 ------------------------------------------------------------------------------------
@@ -338,8 +371,11 @@ A restricted identifier {#h2-13-a-restricted-identifier}
 
 `record` is a restricted identifier (like `var`), but it isn't a regular keyword (yet). So, the following code is valid:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">int record = 10;
-void record() {}</pre>
+```java
+int record = 10;
+void record() {}
+```
+
 
 However, you may want to refrain from using `record` as an identifier because such code will become confusing as more developers start using records.
 
@@ -348,17 +384,20 @@ Local records {#h2-14-local-records}
 
 You can define local records to model a domain object while you are processing values in a method. In the following example, the method `getTopPerformingStocks` finds and returns the names of the `Stock` with the highest value on a specified date.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">List&lt;String&gt; getTopPerformingStocks(List&lt;Stock&gt; allStocks, LocalDate date) {
+```java
+List<String> getTopPerformingStocks(List<Stock> allStocks, LocalDate date) {
    // TopStock is a local record
    record TopStock(Stock stock, double stockValue) {}
 
 return allStocks.stream()
-               .map(s -&gt; new TopStock(s, getStockValue(s, dateTime)))               
+               .map(s -> new TopStock(s, getStockValue(s, dateTime)))               
                .sorted(Comparator.comparingDouble(TopStock::value).reversed())
                .limit(2)
-               .map(s -&gt; s.stock().name())
+               .map(s -> s.stock().name())
                .collect(Collectors.toList());
-}</pre>
+}
+```
+
 
 Declaring implicit or explicit static members in an inner class {#h2-15-declaring-implicit-or-explicit-static-members-in-an-inner-class}
 ----------------------------------------------------------------------------------------------------------------------------------------
@@ -370,7 +409,8 @@ Local interfaces and enums {#h2-16-local-interfaces-and-enums}
 
 You can declare local enums and interfaces. You can encapsulate your data or business logic, which is local to a method, within the method.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public void createLocalInterface() {
+```java
+public void createLocalInterface() {
    interface LocalInterface {
        void aMethod();
    }
@@ -380,11 +420,14 @@ You can declare local enums and interfaces. You can encapsulate your data or bus
 public void createLocalEnum() {
    enum Color {RED, YELLOW, BLUE}
    // Code to use enum Color
-}</pre>
+}
+```
+
 
 However, they cannot capture any context variable. For example, for the local enum `Data`, the enum constants `FOO` and `BAR` can't be created using the method parameter input in the method `test()`:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">void test(int input) {
+```java
+void test(int input) {
    enum Data {
        FOO(input), BAR(input*2); // Error. Can’t refer to input
        private final int i;
@@ -392,7 +435,9 @@ However, they cannot capture any context variable. For example, for the local en
            this.i = i;
        }
    }
-}</pre>
+}
+```
+
 
 ***You can read about Sealed Classes and Interfaces as well as Pattern Matching for `instanceof` on the [main JetBrains IntelliJ IDEA blog](https://blog.jetbrains.com/idea/2021/03/java-16-and-intellij-idea/).***
 

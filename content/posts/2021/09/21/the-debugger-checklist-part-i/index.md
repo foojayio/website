@@ -62,7 +62,8 @@ Debugging a race condition or a deadlock is actually not as painful as it's some
 
 If it happens rarely then we still need to verify that this isn't directly related to threading issues. I often make sure to log the current thread in this case to see if there's a correlation with the invoking thread. I also try to log the stacks to see if the problem varies based on the stack that makes sense. A cool trick is to hash or checksum the stack to reduce the noise.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public class DebugUtil {
+```java
+public class DebugUtil {
   public static String stackHash() {
     try {
       // code from https://www.baeldung.com/java-stacktrace-to-string
@@ -80,7 +81,9 @@ If it happens rarely then we still need to verify that this isn't directly relat
       return "Invalid Stack";
     }
   }  
-}</pre>
+}
+```
+
 
 We can use this code in our logs which we can then instantly scan through to find whether a bug correlates to invocation through a specific stack.
 

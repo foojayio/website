@@ -51,8 +51,10 @@ You will add Spring AI dependencies manually in section 3. For now, the project 
 
 Open `application.properties` and configure the MongoDB connection:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">spring.data.mongodb.uri=mongodb+srv://&lt;username&gt;:&lt;password&gt;@&lt;cluster&gt;.mongodb.net/code-review-assistant?appName=devrel-article-java-springai-foojay
-</pre>
+```
+spring.data.mongodb.uri=mongodb+srv://<username>:<password>@<cluster>.mongodb.net/code-review-assistant?appName=devrel-article-java-springai-foojay
+```
+
 
 Replace the placeholders with your Atlas cluster credentials. The `appName` query parameter helps MongoDB track which application is connecting, which is useful for monitoring. If you are running MongoDB locally, use `mongodb://localhost:27017/code-review-assistant?appName=devrel-article-java-springai-foojay` instead.
 
@@ -67,16 +69,19 @@ The review assistant works by comparing submitted code against a library of know
 
 Review findings will have severity levels, so start by defining those as a Java enum. An enum is a type that restricts a value to a fixed set of options, which prevents invalid severity strings from entering the system:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public enum Severity {
+```
+public enum Severity {
     CRITICAL, WARNING, INFO
 }
-</pre>
+```
+
 
 `CRITICAL` is for issues that will cause bugs or security vulnerabilities. `WARNING` is for problems that may cause issues under certain conditions. `INFO` is for suggestions that improve code quality but are not urgent.
 
 Next, define the `ReviewPattern` class. This is the document that represents a single anti-pattern in your library. The `@Document` annotation tells Spring Data MongoDB which collection this class maps to, and `@Id` marks the field that MongoDB will use as the document's unique identifier:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@Document(collection = "review_patterns")
+```
+@Document(collection = "review_patterns")
 public class ReviewPattern {
 
     @Id
@@ -92,7 +97,8 @@ public class ReviewPattern {
 
     // constructors, getters, and setters omitted for brevity
 }
-</pre>
+```
+
 
 Each pattern has a `name` (like "empty catch block"), a `description` that explains the problem in plain language, and a `language` field so you can filter patterns by programming language. The `category` field groups related issues together (for example, "security" or "error-handling"). The `exampleBadCode` and `exampleGoodCode` fields show the problem and its fix side by side, and `explanation` describes why the bad code is problematic.
 
@@ -102,7 +108,8 @@ Each pattern's `id` is a human-readable slug like `unclosed-resources` or `hardc
 
 To see what a pattern looks like as a JSON document, here are two examples. The first describes an empty catch block, a common error-handling problem:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">{
+```````
+{
   "_id": "empty-catch-block",
   "name": "Empty catch block",
   "description": "Catching an exception and doing nothing with it, silently swallowing errors",
@@ -125,11 +132,13 @@ To see what a pattern looks like as a JSON document, here are two examples. The 
   "exampleGoodCode": "@Value(\"${db.password}\") private String dbPassword;",
   "explanation": "Hardcoded credentials end up in version control and build artifacts. Use environment variables or a secrets manager."
 }
-</pre>
+```````
+
 
 The second describes hardcoded credentials, a security anti-pattern:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">{
+```
+{
   "_id": "hardcoded-credentials",
   "name": "Hardcoded credentials",
   "description": "Storing passwords, API keys, or secrets as string literals in source code",
@@ -140,7 +149,8 @@ The second describes hardcoded credentials, a security anti-pattern:
   "exampleGoodCode": "@Value(\"${db.password}\") private String dbPassword;",
   "explanation": "Hardcoded credentials end up in version control and build artifacts. Use environment variables or a secrets manager."
 }
-</pre>
+```
+
 
 Each JSON document maps directly to the fields in the `ReviewPattern` class. When you save one of these through the API, Spring Data MongoDB converts the Java object into a document with this same structure and stores it in the `review_patterns` collection.
 
@@ -148,17 +158,19 @@ Each JSON document maps directly to the fields in the `ReviewPattern` class. Whe
 
 To read and write patterns from MongoDB, you need a repository interface. In Spring Data, a repository is an interface that provides database operations without requiring you to write implementation code. You declare methods with names that follow a specific naming convention, and Spring generates the query logic at runtime:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public interface ReviewPatternRepository extends MongoRepository&lt;ReviewPattern, String&gt; {
+```
+public interface ReviewPatternRepository extends MongoRepository<ReviewPattern, String> {
 
-    List&lt;ReviewPattern&gt; findByLanguage(String language);
+    List<ReviewPattern> findByLanguage(String language);
 
-    List&lt;ReviewPattern&gt; findByCategory(String category);
+    List<ReviewPattern> findByCategory(String category);
 
-    List&lt;ReviewPattern&gt; findByLanguageAndCategory(String language, String category);
+    List<ReviewPattern> findByLanguageAndCategory(String language, String category);
 
-    List&lt;ReviewPattern&gt; findBySeverity(Severity severity);
+    List<ReviewPattern> findBySeverity(Severity severity);
 }
-</pre>
+```
+
 
 By extending `MongoRepository<ReviewPattern, String>`, this interface inherits standard operations like `save()`, `findById()`, `findAll()`, and `deleteById()`. The two generic parameters tell Spring that this repository manages `ReviewPattern` documents and that the ID field is a `String`.
 
@@ -168,7 +180,8 @@ The custom methods use Spring Data's derived query feature. `findByLanguage("jav
 
 The service class contains the business logic for creating and retrieving patterns. The `@Service` annotation marks it as a Spring-managed component, which means Spring will create a single instance of this class and make it available for injection into other components:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@Service
+```
+@Service
 public class ReviewPatternService {
 
     private final ReviewPatternRepository patternRepository;
@@ -187,8 +200,8 @@ public class ReviewPatternService {
         return patternRepository.save(pattern);
     }
 
-    public List&lt;ReviewPattern&gt; listPatterns(String language, String category) {
-        if (language != null &amp;&amp; category != null) {
+    public List<ReviewPattern> listPatterns(String language, String category) {
+        if (language != null && category != null) {
             return patternRepository.findByLanguageAndCategory(language, category);
         }
         if (language != null) {
@@ -200,11 +213,12 @@ public class ReviewPatternService {
         return patternRepository.findAll();
     }
 
-    public Optional&lt;ReviewPattern&gt; getPattern(String id) {
+    public Optional<ReviewPattern> getPattern(String id) {
         return patternRepository.findById(id);
     }
 }
-</pre>
+```
+
 
 The constructor takes a `ReviewPatternRepository` as a parameter. Spring sees this and automatically injects the repository instance it created. This pattern is called constructor injection, and it is the recommended way to wire dependencies in Spring Boot.
 
@@ -216,12 +230,14 @@ The `getPattern` method returns an `Optional<ReviewPattern>`. An `Optional` is a
 
 The `CreatePatternRequest` is a Java record that maps the incoming JSON request body. Records are a concise way to define immutable data carriers. The compiler automatically generates a constructor, getter methods, and `equals`/`hashCode` implementations from the field list:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public record CreatePatternRequest(
+```
+public record CreatePatternRequest(
         String id, String name, String description, String language,
         Severity severity, String category,
         String exampleBadCode, String exampleGoodCode, String explanation
 ) {}
-</pre>
+```
+
 
 When a JSON body arrives at the endpoint, Spring deserializes it into this record by matching JSON field names to the record's component names.
 
@@ -229,7 +245,8 @@ When a JSON body arrives at the endpoint, Spring deserializes it into this recor
 
 The controller class maps HTTP requests to service methods. The `@RestController` annotation tells Spring that this class handles web requests and that every method's return value should be serialized directly as the response body (as JSON, by default). `@RequestMapping("/api/patterns")` sets the base URL path for all endpoints in this controller:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@RestController
+```
+@RestController
 @RequestMapping("/api/patterns")
 public class ReviewPatternController {
 
@@ -246,7 +263,7 @@ public class ReviewPatternController {
     }
 
     @GetMapping
-    public List&lt;ReviewPattern&gt; listPatterns(
+    public List<ReviewPattern> listPatterns(
             @RequestParam(required = false) String language,
             @RequestParam(required = false) String category) {
         return patternService.listPatterns(language, category);
@@ -255,10 +272,11 @@ public class ReviewPatternController {
     @GetMapping("/{id}")
     public ReviewPattern getPattern(@PathVariable String id) {
         return patternService.getPattern(id)
-                .orElseThrow(() -&gt; new ResponseStatusException(HttpStatus.NOT_FOUND));
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
     }
 }
-</pre>
+```
+
 
 `@PostMapping` handles POST requests to `/api/patterns`. The `@RequestBody` annotation tells Spring to deserialize the JSON request body into a `CreatePatternRequest` record. `@ResponseStatus(HttpStatus.CREATED)` changes the default response code from 200 to 201, which is the standard HTTP status for "resource created."
 
@@ -268,7 +286,8 @@ public class ReviewPatternController {
 
 You can test this by adding a pattern manually:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">curl -X POST http://localhost:8080/api/patterns \
+```
+curl -X POST http://localhost:8080/api/patterns \
   -H "Content-Type: application/json" \
   -d '{
     "id": "empty-catch-block",
@@ -281,7 +300,8 @@ You can test this by adding a pattern manually:
     "exampleGoodCode": "try { conn.close(); } catch (SQLException e) { logger.warn(\"Close failed\", e); }",
     "explanation": "Empty catch blocks silently swallow errors."
   }'
-</pre>
+```
+
 
 This works for adding patterns one at a time, but the system is more useful with a full library loaded. The next section adds the data seeder along with the embedding and vector search capabilities that make pattern matching work.
 
@@ -294,36 +314,40 @@ Suppose a developer writes `InputStream is = new FileInputStream(path);` without
 
 Spring AI is managed through a Bill of Materials (BOM), which is a special dependency declaration that locks the versions of all Spring AI modules so they stay compatible with each other. Add the BOM and the OpenAI starter to your `pom.xml`:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&lt;dependencyManagement&gt;
-    &lt;dependencies&gt;
-        &lt;dependency&gt;
-            &lt;groupId&gt;org.springframework.ai&lt;/groupId&gt;
-            &lt;artifactId&gt;spring-ai-bom&lt;/artifactId&gt;
-            &lt;version&gt;1.0.0&lt;/version&gt;
-            &lt;type&gt;pom&lt;/type&gt;
-            &lt;scope&gt;import&lt;/scope&gt;
-        &lt;/dependency&gt;
-    &lt;/dependencies&gt;
-&lt;/dependencyManagement&gt;
+```
+<dependencyManagement>
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.ai</groupId>
+            <artifactId>spring-ai-bom</artifactId>
+            <version>1.0.0</version>
+            <type>pom</type>
+            <scope>import</scope>
+        </dependency>
+    </dependencies>
+</dependencyManagement>
 
-&lt;dependencies&gt;
-    &lt;!-- existing dependencies --&gt;
-    &lt;dependency&gt;
-        &lt;groupId&gt;org.springframework.ai&lt;/groupId&gt;
-        &lt;artifactId&gt;spring-ai-starter-model-openai&lt;/artifactId&gt;
-    &lt;/dependency&gt;
-&lt;/dependencies&gt;
-</pre>
+<dependencies>
+    <!-- existing dependencies -->
+    <dependency>
+        <groupId>org.springframework.ai</groupId>
+        <artifactId>spring-ai-starter-model-openai</artifactId>
+    </dependency>
+</dependencies>
+```
+
 
 The `spring-ai-starter-model-openai` dependency does not have a `<version>` tag. The BOM provides the version, so you only need to specify it in one place. The starter auto-configures both an `EmbeddingModel` bean (for generating vectors) and a `ChatClient.Builder` bean (for calling the LLM), which you will use in later sections.
 
 Then add the OpenAI configuration to `application.properties`:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">spring.ai.openai.api-key=${OPENAI_API_KEY}
+```
+spring.ai.openai.api-key=${OPENAI_API_KEY}
 spring.ai.openai.embedding.options.model=text-embedding-3-small
 spring.ai.openai.chat.options.model=gpt-4o-mini
 spring.ai.openai.chat.options.temperature=0.2
-</pre>
+```
+
 
 The `${OPENAI_API_KEY}` syntax reads the value from an environment variable, so you do not hardcode your key in the configuration file. The `text-embedding-3-small` model produces 1536-dimensional vectors, meaning each piece of text gets converted into an array of 1536 numbers that capture its semantic meaning. The low temperature setting (0.2) keeps code review output deterministic and consistent, which is what you want for a review tool that should give similar feedback for similar code. You can swap `gpt-4o-mini` for a different model if you want stronger results and do not mind higher API costs.
 
@@ -331,7 +355,8 @@ The `${OPENAI_API_KEY}` syntax reads the value from an environment variable, so 
 
 To generate an embedding for a pattern, you need to combine its most descriptive fields into a single text block and pass that to the embedding model. Add an `embedding` field and a helper method to the `ReviewPattern` class:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@Document(collection = "review_patterns")
+```
+@Document(collection = "review_patterns")
 public class ReviewPattern {
 
     // ... existing fields ...
@@ -345,7 +370,8 @@ public class ReviewPattern {
         return description + " " + exampleBadCode + " " + explanation;
     }
 }
-</pre>
+```
+
 
 The `embedding` field stores the vector that the embedding model generates. It is a `float[]` because each dimension is a floating-point number.
 
@@ -353,7 +379,8 @@ The `embedding` field stores the vector that the embedding model generates. It i
 
 Now update the `ReviewPatternService` to inject the `EmbeddingModel` and generate embeddings when creating patterns:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@Service
+```
+@Service
 public class ReviewPatternService {
 
     private final ReviewPatternRepository patternRepository;
@@ -380,7 +407,8 @@ public class ReviewPatternService {
 
     // listPatterns and getPattern remain unchanged
 }
-</pre>
+```
+
 
 The `EmbeddingModel` is a Spring AI interface that the OpenAI starter auto-configures. Its `embed()` method sends the text to OpenAI's embedding API and returns a `float[]` with 1536 values. Each value represents one dimension of the text's meaning in the model's vector space. Two pieces of text about similar topics will produce vectors that point in similar directions, which is what makes semantic search possible.
 
@@ -388,7 +416,8 @@ The `EmbeddingModel` is a Spring AI interface that the OpenAI starter auto-confi
 
 The companion repository includes a `DataSeeder` component that loads about 20 patterns on startup. It implements `CommandLineRunner`, which is a Spring Boot interface with a single `run` method. Spring Boot automatically calls `run` after the application context is fully initialized, making it a convenient place for one-time setup tasks like loading seed data:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@Component
+```
+@Component
 public class DataSeeder implements CommandLineRunner {
 
     private final ReviewPatternRepository patternRepository;
@@ -402,11 +431,11 @@ public class DataSeeder implements CommandLineRunner {
 
     @Override
     public void run(String... args) {
-        if (patternRepository.count() &gt; 0) {
+        if (patternRepository.count() > 0) {
             return;
         }
 
-        List&lt;ReviewPattern&gt; patterns = createPatterns();
+        List<ReviewPattern> patterns = createPatterns();
 
         for (ReviewPattern pattern : patterns) {
             pattern.setEmbedding(embeddingModel.embed(pattern.buildEmbeddingText()));
@@ -415,8 +444,8 @@ public class DataSeeder implements CommandLineRunner {
         patternRepository.saveAll(patterns);
     }
 
-    private List&lt;ReviewPattern&gt; createPatterns() {
-        List&lt;ReviewPattern&gt; patterns = new ArrayList&lt;&gt;();
+    private List<ReviewPattern> createPatterns() {
+        List<ReviewPattern> patterns = new ArrayList<>();
 
         patterns.add(new ReviewPattern(
                 "unclosed-resources",
@@ -439,7 +468,8 @@ public class DataSeeder implements CommandLineRunner {
         return patterns;
     }
 }
-</pre>
+```
+
 
 The `run` method starts with a guard check: `patternRepository.count() > 0`. If the collection already has data, the method returns immediately. This prevents the seeder from re-generating embeddings or re-inserting data on application restarts.
 
@@ -453,7 +483,8 @@ Before you can query the embeddings, you need to create a vector search index in
 
 Go to your cluster in the Atlas UI, select the **Atlas Search** tab, and click **Create Search Index** . Choose **Atlas Vector Search** as the index type and select the `review_patterns` collection. In the index name field, enter `vector_index`. The code you write later references the index by this exact name, so do not leave the auto-generated default. Then paste the following definition:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">{
+```
+{
   "fields": [
     {
       "type": "vector",
@@ -463,7 +494,8 @@ Go to your cluster in the Atlas UI, select the **Atlas Search** tab, and click *
     }
   ]
 }
-</pre>
+```
+
 
 The `path` field points to `embedding`, which is where you stored the vector in the `ReviewPattern` class. The `numDimensions` value must match the output of your embedding model, which is 1536 for `text-embedding-3-small`. If these values do not match, the search will fail.
 
@@ -475,8 +507,9 @@ With the index in place, you can build a method that finds patterns semantically
 
 Aggregation pipelines in MongoDB work like an assembly line. Data flows through a sequence of stages, and each stage transforms the data before passing it to the next one. In this pipeline, the first stage finds similar vectors, the second adds a similarity score to each result, and the third removes the large embedding array from the output:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">private List&lt;ReviewPattern&gt; findSimilarPatterns(float[] queryVector, int limit) {
-    List&lt;Double&gt; queryVectorList = new ArrayList&lt;&gt;();
+```
+private List<ReviewPattern> findSimilarPatterns(float[] queryVector, int limit) {
+    List<Double> queryVectorList = new ArrayList<>();
     for (float f : queryVector) {
         queryVectorList.add((double) f);
     }
@@ -488,25 +521,26 @@ Aggregation pipelines in MongoDB work like an assembly line. Data flows through 
                     .append("numCandidates", 50)
                     .append("limit", limit));
 
-    AggregationOperation vectorSearch = context -&gt; vectorSearchStage;
+    AggregationOperation vectorSearch = context -> vectorSearchStage;
 
-    AggregationOperation addScore = context -&gt;
+    AggregationOperation addScore = context ->
             new Document("$addFields",
                     new Document("searchScore",
                             new Document("$meta", "vectorSearchScore")));
 
-    AggregationOperation excludeEmbedding = context -&gt;
+    AggregationOperation excludeEmbedding = context ->
             new Document("$project",
                     new Document("embedding", 0));
 
     Aggregation aggregation = Aggregation.newAggregation(vectorSearch, addScore, excludeEmbedding);
 
-    AggregationResults&lt;ReviewPattern&gt; results =
+    AggregationResults<ReviewPattern> results =
             mongoTemplate.aggregate(aggregation, "review_patterns", ReviewPattern.class);
 
     return results.getMappedResults();
 }
-</pre>
+```
+
 
 The method starts by converting the `float[]` query vector into a `List<Double>`. This conversion is necessary because the MongoDB Java driver expects double-precision numbers in the `$vectorSearch` query vector.
 
@@ -520,9 +554,11 @@ Finally, `mongoTemplate.aggregate()` runs the pipeline against the `review_patte
 
 To hold the similarity score that `$addFields` injects, add a `searchScore` field to `ReviewPattern` and mark it with `@Transient`:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@Transient
+```
+@Transient
 private double searchScore;
-</pre>
+```
+
 
 The `@Transient` annotation tells Spring Data MongoDB not to persist this field to the database. The `searchScore` only gets populated during vector search results and has no meaning outside that context. Without `@Transient`, saving a pattern returned by vector search would write a stale score to the database.
 
@@ -540,7 +576,8 @@ Before building the service, you need two more document classes: one for storing
 
 The `CodeSubmission` document stores each code snippet that a developer sends for review:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@Document(collection = "code_submissions")
+```
+@Document(collection = "code_submissions")
 public class CodeSubmission {
 
     @Id
@@ -550,17 +587,19 @@ public class CodeSubmission {
     private String fileName;
     private String submittedBy;
     private Instant submittedAt;
-    private List&lt;String&gt; findingIds;
+    private List<String> findingIds;
 
     // constructors, getters, and setters omitted for brevity
 }
-</pre>
+```
+
 
 The `code` field holds the raw source code the developer submits. The `language` and `fileName` fields provide context about what kind of code it is. The `submittedAt` field uses `Instant`, which stores a precise UTC timestamp. The `findingIds` field is a list of references to the `ReviewFinding` documents that the review produces. Rather than embedding findings inside the submission document, storing IDs keeps the submission document small and lets you query findings independently.
 
 The `ReviewFinding` document stores individual issues that the review engine identifies. Each finding references its parent submission and optionally references the pattern it matched:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@Document(collection = "review_findings")
+```
+@Document(collection = "review_findings")
 public class ReviewFinding {
 
     @Id
@@ -578,7 +617,8 @@ public class ReviewFinding {
 
     // constructors, getters, and setters omitted for brevity
 }
-</pre>
+```
+
 
 The `@Indexed` annotation on `submissionId` tells Spring Data MongoDB to create a database index on that field. When you look up all findings for a given submission, MongoDB uses this index to jump directly to the matching documents instead of scanning the entire collection. Without it, every call to `findBySubmissionId` would get slower as the collection grows.
 
@@ -593,7 +633,8 @@ Here is the flow that the review service follows for each submission:
 3. Build a prompt with the code and matched patterns, then call the LLM.
 4. Parse the LLM response into `ReviewFinding` objects and save them.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@Service
+```
+@Service
 public class ReviewService {
 
     private final MongoTemplate mongoTemplate;
@@ -626,24 +667,24 @@ public class ReviewService {
         submission.setSubmittedAt(Instant.now());
 
         float[] codeEmbedding = embeddingModel.embed(request.code());
-        List&lt;ReviewPattern&gt; matchedPatterns = findSimilarPatterns(codeEmbedding, 5);
+        List<ReviewPattern> matchedPatterns = findSimilarPatterns(codeEmbedding, 5);
 
         String systemPrompt = buildSystemPrompt();
         String userPrompt = buildUserPrompt(request.code(), matchedPatterns);
 
-        List&lt;ReviewFinding&gt; findings = chatClient.prompt()
+        List<ReviewFinding> findings = chatClient.prompt()
                 .system(systemPrompt)
                 .user(userPrompt)
                 .call()
-                .entity(new ParameterizedTypeReference&lt;&gt;() {});
+                .entity(new ParameterizedTypeReference<>() {});
 
         submission = submissionRepository.save(submission);
 
         for (ReviewFinding finding : findings) {
             finding.setSubmissionId(submission.getId());
         }
-        List&lt;ReviewFinding&gt; savedFindings = findingRepository.saveAll(findings);
-        List&lt;String&gt; findingIds = savedFindings.stream()
+        List<ReviewFinding> savedFindings = findingRepository.saveAll(findings);
+        List<String> findingIds = savedFindings.stream()
                 .map(ReviewFinding::getId)
                 .toList();
 
@@ -656,7 +697,8 @@ public class ReviewService {
     // findSimilarPatterns from section 3 goes here
     // buildSystemPrompt and buildUserPrompt shown below
 }
-</pre>
+```
+
 
 The constructor takes five dependencies. The `ChatClient.Builder` is a Spring AI auto-configured bean that provides a builder for creating chat clients. The service calls `.build()` in the constructor to create a `ChatClient` instance that it reuses for every review request. `MongoTemplate` provides lower-level MongoDB operations that the repository interfaces do not cover, which you need for the vector search aggregation pipeline.
 
@@ -676,7 +718,8 @@ One catch with the two saves is that if the application crashes between them, th
 
 The system prompt sets the reviewer persona and defines the exact output format. Being specific about the JSON structure is important because the `entity()` call on the chat client needs the response to match the `ReviewFinding` class:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">private String buildSystemPrompt() {
+```
+private String buildSystemPrompt() {
     return """
         You are a senior Java code reviewer. Analyze the submitted code and identify issues.
         You will receive a code snippet and a set of known anti-patterns that matched semantically.
@@ -694,20 +737,22 @@ The system prompt sets the reviewer persona and defines the exact output format.
         Return ONLY the JSON array, no additional text.
         """;
 }
-</pre>
+```
+
 
 The last two lines are important. "Focus on real issues" prevents the LLM from flagging every minor style choice as a finding. "Return ONLY the JSON array" ensures the response is parseable by Spring AI's `entity()` method. Without that instruction, the LLM might wrap the JSON in markdown code fences or add explanatory text around it, which would break parsing.
 
 The user prompt provides the code to review and the matched patterns from vector search:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">private String buildUserPrompt(String code, List&lt;ReviewPattern&gt; patterns) {
+````
+private String buildUserPrompt(String code, List<ReviewPattern> patterns) {
     StringBuilder prompt = new StringBuilder();
     prompt.append("## Code to review\n\n```java\n");
     prompt.append(code);
     prompt.append("\n```\n\n");
     prompt.append("## Known anti-patterns to check against\n\n");
 
-    for (int i = 0; i &lt; patterns.size(); i++) {
+    for (int i = 0; i < patterns.size(); i++) {
         ReviewPattern pattern = patterns.get(i);
         prompt.append(String.format("%d. **%s** (ID: %s, similarity: %.3f)\n",
                 i + 1, pattern.getName(), pattern.getId(), pattern.getSearchScore()));
@@ -719,7 +764,8 @@ The user prompt provides the code to review and the matched patterns from vector
 
     return prompt.toString();
 }
-</pre>
+````
+
 
 The prompt includes each pattern's ID so the LLM can populate the `matchedPatternId` field in its findings. This creates a traceable link from each issue back to the stored pattern that triggered it. The similarity score from vector search is included too, which gives the LLM a signal about how confident the match is. A pattern with a 0.92 similarity score deserves more weight than one at 0.61, and the LLM can factor that into its confidence assessment.
 
@@ -729,7 +775,8 @@ The `chatClient.prompt()` call can fail if the OpenAI service is unavailable or 
 
 The controller exposes three endpoints: one for submitting code for review, one for retrieving a past review by submission ID, and one for listing just the findings:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@RestController
+```
+@RestController
 @RequestMapping("/api/reviews")
 public class ReviewController {
 
@@ -751,11 +798,12 @@ public class ReviewController {
     }
 
     @GetMapping("/{submissionId}/findings")
-    public List&lt;ReviewFinding&gt; getFindings(@PathVariable String submissionId) {
+    public List<ReviewFinding> getFindings(@PathVariable String submissionId) {
         return reviewService.getFindings(submissionId);
     }
 }
-</pre>
+```
+
 
 The POST endpoint at `/api/reviews` accepts a JSON body with the code to review and returns the full review response including the submission and all findings. The GET endpoint at `/api/reviews/{submissionId}` retrieves a previous review, and `/api/reviews/{submissionId}/findings` returns just the findings for a given submission, which is useful when you only need the issues without the submission metadata.
 
@@ -763,13 +811,15 @@ The POST endpoint at `/api/reviews` accepts a JSON body with the code to review 
 
 Submit a Java method with a few intentional issues:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">curl -X POST http://localhost:8080/api/reviews \
+```
+curl -X POST http://localhost:8080/api/reviews \
   -H "Content-Type: application/json" \
   -d '{
     "code": "public void processFile(String path) {\n    String content = \"\";\n    try {\n        FileInputStream fis = new FileInputStream(path);\n        byte[] data = fis.readAllBytes();\n        content = new String(data);\n    } catch (Exception e) {\n        // handle later\n    }\n    String[] lines = content.split(\"\\n\");\n    String result = \"\";\n    for (String line : lines) {\n        result += line.trim() + \"\\n\";\n    }\n    System.out.println(result);\n}",
     "language": "java"
   }'
-</pre>
+```
+
 
 This code has three issues: an unclosed `FileInputStream` (no try-with-resources), a generic `catch (Exception e)` with an empty body, and string concatenation with `+=` inside a loop. The response includes a finding for each issue, with the matched pattern ID, severity, line range, and a suggestion for how to fix it. The confidence scores typically range from 0.7 to 0.95 depending on how closely the code matches the stored patterns.
 
@@ -782,7 +832,8 @@ Create an `AnalyticsService` with three pipelines that surface different views o
 
 The first pipeline groups findings by category and counts how many times each category appears. This tells you where a team's code most often needs improvement:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public List&lt;CategoryCount&gt; getCategoryCounts() {
+```
+public List<CategoryCount> getCategoryCounts() {
     Aggregation aggregation = Aggregation.newAggregation(
             Aggregation.group("category").count().as("count"),
             Aggregation.sort(Sort.Direction.DESC, "count")
@@ -790,13 +841,15 @@ The first pipeline groups findings by category and counts how many times each ca
     return mongoTemplate.aggregate(aggregation, "review_findings", CategoryCount.class)
             .getMappedResults();
 }
-</pre>
+```
+
 
 `Aggregation.group("category")` is a `$group` stage that collects all findings with the same `category` value into one group. `.count().as("count")` adds a field called `count` to each group that holds the number of documents in it. `Aggregation.sort(Sort.Direction.DESC, "count")` orders the groups so the most frequent category appears first. `mongoTemplate.aggregate()` runs the pipeline against the `review_findings` collection and maps each result into a `CategoryCount` object.
 
 The second pipeline uses the same structure but groups by severity instead. This shows the balance of critical, warning, and informational findings across all reviews:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public List&lt;SeverityCount&gt; getSeverityDistribution() {
+```
+public List<SeverityCount> getSeverityDistribution() {
     Aggregation aggregation = Aggregation.newAggregation(
             Aggregation.group("severity").count().as("count"),
             Aggregation.sort(Sort.Direction.DESC, "count")
@@ -804,7 +857,8 @@ The second pipeline uses the same structure but groups by severity instead. This
     return mongoTemplate.aggregate(aggregation, "review_findings", SeverityCount.class)
             .getMappedResults();
 }
-</pre>
+```
+
 
 If most findings are `CRITICAL`, the team may need to focus on fundamental practices. If the distribution skews toward `INFO`, the codebase is generally healthy.
 
@@ -813,7 +867,8 @@ The third pipeline is more involved. It identifies which specific patterns keep 
 
 Aggregation pipeline diagram showing the stages from match through group, sort, limit, lookup, unwind, and project
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public List&lt;PatternFrequency&gt; getTopPatterns() {
+```
+public List<PatternFrequency> getTopPatterns() {
     Aggregation aggregation = Aggregation.newAggregation(
             Aggregation.match(Criteria.where("matchedPatternId").ne(null)),
             Aggregation.group("matchedPatternId").count().as("count"),
@@ -828,7 +883,8 @@ Aggregation pipeline diagram showing the stages from match through group, sort, 
     return mongoTemplate.aggregate(aggregation, "review_findings", PatternFrequency.class)
             .getMappedResults();
 }
-</pre>
+```
+
 
 This pipeline has several stages, so here is what each one does:
 
@@ -842,7 +898,8 @@ This pipeline has several stages, so here is what each one does:
 
 Expose these three pipelines through an `AnalyticsController`:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@RestController
+```
+@RestController
 @RequestMapping("/api/analytics")
 public class AnalyticsController {
 
@@ -853,31 +910,34 @@ public class AnalyticsController {
     }
 
     @GetMapping("/categories")
-    public List&lt;CategoryCount&gt; getCategoryCounts() {
+    public List<CategoryCount> getCategoryCounts() {
         return analyticsService.getCategoryCounts();
     }
 
     @GetMapping("/severity")
-    public List&lt;SeverityCount&gt; getSeverityDistribution() {
+    public List<SeverityCount> getSeverityDistribution() {
         return analyticsService.getSeverityDistribution();
     }
 
     @GetMapping("/top-patterns")
-    public List&lt;PatternFrequency&gt; getTopPatterns() {
+    public List<PatternFrequency> getTopPatterns() {
         return analyticsService.getTopPatterns();
     }
 }
-</pre>
+```
+
 
 After running several reviews through the system, the category endpoint might return something like:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">[
+```
+[
   { "category": "error-handling", "count": 12 },
   { "category": "maintainability", "count": 8 },
   { "category": "security", "count": 5 },
   { "category": "performance", "count": 4 }
 ]
-</pre>
+```
+
 
 This tells you that error handling is the most frequent issue category across all reviewed code. These pipelines scan the entire `review_findings` collection each time they run. For a tutorial with a few dozen reviews, that is fine. In production with thousands of findings, you would want indexes on `category`, `severity`, and `matchedPatternId` to speed up the `$group` stages.
 
@@ -890,7 +950,8 @@ Here is the complete flow from start to finish:
 
 **Add a custom pattern.** The library is extensible. Add a pattern that is specific to your codebase:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">curl -X POST http://localhost:8080/api/patterns \
+```
+curl -X POST http://localhost:8080/api/patterns \
   -H "Content-Type: application/json" \
   -d '{
     "id": "logging-user-passwords",
@@ -903,38 +964,45 @@ Here is the complete flow from start to finish:
     "exampleGoodCode": "logger.info(\"Login attempt: user={}\", username);",
     "explanation": "Passwords in logs violate security policy and compliance requirements."
   }'
-</pre>
+```
+
 
 **Submit code with a known issue.** Send a snippet with an obvious anti-pattern:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">curl -X POST http://localhost:8080/api/reviews \
+```
+curl -X POST http://localhost:8080/api/reviews \
   -H "Content-Type: application/json" \
   -d '{
     "code": "public String readConfig() {\n    FileInputStream fis = new FileInputStream(\"app.conf\");\n    byte[] data = fis.readAllBytes();\n    return new String(data);\n}",
     "language": "java"
   }'
-</pre>
+```
+
 
 The response includes a finding for the unclosed `FileInputStream` with a `matchedPatternId` pointing to the "unclosed resources" pattern.
 
 **Submit code with a subtler issue.** Try a snippet that does not exactly match any stored pattern's example:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">curl -X POST http://localhost:8080/api/reviews \
+```
+curl -X POST http://localhost:8080/api/reviews \
   -H "Content-Type: application/json" \
   -d '{
     "code": "public void backup(Path source, Path dest) throws Exception {\n    BufferedReader reader = Files.newBufferedReader(source);\n    BufferedWriter writer = Files.newBufferedWriter(dest);\n    String line;\n    while ((line = reader.readLine()) != null) {\n        writer.write(line);\n        writer.newLine();\n    }\n}",
     "language": "java"
   }'
-</pre>
+```
+
 
 Even though this uses `BufferedReader` and `BufferedWriter` instead of `FileInputStream`, the vector search still finds the "unclosed resources" pattern as a top match because the semantic meaning is the same: resources opened without try-with-resources. Check the similarity score in the response to see how closely it matched.
 
 **Check analytics.** After running a few reviews, hit the analytics endpoints:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">curl http://localhost:8080/api/analytics/categories
+```
+curl http://localhost:8080/api/analytics/categories
 curl http://localhost:8080/api/analytics/severity
 curl http://localhost:8080/api/analytics/top-patterns
-</pre>
+```
+
 
 These show the accumulated data across all your reviews.
 

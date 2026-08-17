@@ -41,14 +41,17 @@ Java has immutable references since the beginning:
 * For parameters in methods
 * For local variables
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">class Foo {
+```java
+class Foo {
 
     final Object bar = new Object();      // 1
 
     void baz(final Object qux) {          // 2
         final var corge = new Object();   // 3
     }
-}</pre>
+}
+```
+
 
 1. Cannot reassign `bar`
 2. Cannot reassign `qux`
@@ -82,16 +85,22 @@ Obviously, some libraries are focused on specific s. Moreover, libraries are har
 
 Finally, using a nullability library is opt-in. On the other side, Kotlin requires every type to be either nullable or non-nullable.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="kotlin">val nonNullable: String = computeNonNullableString()
-val nullable: String? = computeNullableString()</pre>
+```kotlin
+val nonNullable: String = computeNonNullableString()
+val nullable: String? = computeNullableString()
+```
+
 
 Extension functions {#h2-2-extension-functions}
 -----------------------------------------------
 
 In Java, one extends a class by subclassing it:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">class Foo {}
-class Bar extends Bar {}</pre>
+```java
+class Foo {}
+class Bar extends Bar {}
+```
+
 
 Subclassing has two main issues. The first issue is that some classes don't allow it: they are marked with the `final` keyword. A couple of widely-used JDK classes are `final`, *e.g.* , `String`. The second issue is that if a method outside our control returns a type, one is stuck with that type, whether it contains the wanted behavior or not.
 
@@ -99,7 +108,8 @@ To work around the above issues, Java developers have invented the concept of ut
 
 This way, if a method doesn't exist in a type, the utility class can provide a method that takes the type as a parameter and execute the required behavior.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">class StringUtils {                                          // 1
+```java
+class StringUtils {                                          // 1
 
     private StringUtils() {}                                 // 2
 
@@ -110,7 +120,9 @@ This way, if a method doesn't exist in a type, the utility class can provide a m
 }
 
 String string = randomString();                              // 5
-String capitalizedString = StringUtils.capitalize(string);   // 6</pre>
+String capitalizedString = StringUtils.capitalize(string);   // 6
+```
+
 
 1. Utility class
 2. Prevent instantiation of new objects of this type
@@ -126,12 +138,15 @@ Kotlin provides [extension functions](https://kotlinlang.org/docs/extensions.htm
 
 With extension functions, one can rewrite the above code as:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="kotlin">fun String.capitalize2(): String {                           // 1-2
+```kotlin
+fun String.capitalize2(): String {                           // 1-2
     return substring(0, 1).uppercase() + substring(1);
 }
 
 val string = randomString()
-val capitalizedString = string.capitalize2()                 // 3</pre>
+val capitalizedString = string.capitalize2()                 // 3
+```
+
 
 1. Free-floating function, no need for a class wrapper
 2. `capitalize()` already exists in Kotlin's stdlib
@@ -146,35 +161,50 @@ Version 5 of Java brought generics. However, the language designers were keen on
 
 Generic types being only a compile-time concern creates a couple of issues. For example, the following method signatures produce the same *bytecode*, and thus, the code is not valid:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">class Bag {
-    int compute(List&lt;Foo&gt; persons) {}
-    int compute(List&lt;Bar&gt; persons) {}
-}</pre>
+```java
+class Bag {
+    int compute(List<Foo> persons) {}
+    int compute(List<Bar> persons) {}
+}
+```
+
 
 Another issue is how to get a typed value out of a container of values.  
 
 Here's a sample from Spring:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public interface BeanFactory {
-    &lt;T&gt; T getBean(Class&lt;T&gt; requiredType);
-}</pre>
+```java
+public interface BeanFactory {
+    <T> T getBean(Class<T> requiredType);
+}
+```
+
 
 Developers added a `Class` parameter to be able to know the type in the method body. If Java had reified generics, it wouldn't be necessary:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public interface BeanFactory {
-    &lt;T&gt; T getBean();
-}</pre>
+```java
+public interface BeanFactory {
+    <T> T getBean();
+}
+```
+
 
 Imagine if Kotlin had reified generics. We could change the above design:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="kotlin">interface BeanFactory {
-    fun &lt;T&gt; getBean(): T
-}</pre>
+```kotlin
+interface BeanFactory {
+    fun <T> getBean(): T
+}
+```
+
 
 And to call the function:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="kotlin">val factory = getBeanFactory()
-val anyBean = getBean&lt;Any&gt;()               // 1</pre>
+```kotlin
+val factory = getBeanFactory()
+val anyBean = getBean<Any>()               // 1
+```
+
 
 1. Reified generics!
 
@@ -195,13 +225,16 @@ While Kotlin offers other great features, these four are enough to make the bulk
 
 For example, with extension functions and reified generics plus a bit of syntactic sugar, one can easily design s, such as the Kotlin Routes and Beans DSL:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="kotlin">beans {
+```kotlin
+beans {
   bean {
     router {
       GET("/hello") { ServerResponse.ok().body("Hello world!") }
     }
   }
-}</pre>
+}
+```
+
 
 Make no mistake: I understand that Java has much more inertia to improve as a language, while Kotlin is inherently more nimble.
 

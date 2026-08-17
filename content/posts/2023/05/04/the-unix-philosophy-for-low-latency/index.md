@@ -69,21 +69,28 @@ The exchange simulator, aggregator and strategy are implemented as single-thread
 
 For the aggregator service the interfaces look like this:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public interface AggregatorOut {
+```java
+public interface AggregatorOut {
     void marketDataSnapshot(MarketDataSnapshot mds);
-}</pre>
+}
+```
+
 
 And
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public interface AggregatorIn {
+```java
+public interface AggregatorIn {
    void mdi(MarketDataIncrement mdi);
-}</pre>
+}
+```
+
 
 In this simple example there is only one method on each, but a service can implement many interfaces with many methods and any number of arguments of all kinds, including primitives.
 
 One of the DTOs is:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public class MarketDataSnapshot extends SelfDescribingMarshallable {
+```
+public class MarketDataSnapshot extends SelfDescribingMarshallable {
    private String symbol;
    @LongConversion(MicroTimestampLongConverter.class)
    private long transactTime;
@@ -91,12 +98,15 @@ One of the DTOs is:
    private double ask;
 
    // getters/setters ...
-}</pre>
+}
+```
+
 
 And the microservice:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public class AggregatorImpl implements AggregatorIn {
-   private final Map&lt;Long, MarketDataSnapshot&gt; md = new HashMap&lt;&gt;();
+```java
+public class AggregatorImpl implements AggregatorIn {
+   private final Map<Long, MarketDataSnapshot> md = new HashMap<>();
    private final AggregatorOut out;
 
    public AggregatorImpl(AggregatorOut out) {
@@ -115,7 +125,9 @@ And the microservice:
        if (aggregated.valid())
            out.marketDataSnapshot(aggregated);
    }
-}</pre>
+}
+```
+
 
 You can see that there is no dependence on any Chronicle code, with the exception of the DTO, and the microservice respects the Unix philosophy -- it is simple and easy to understand, and does Just One Thing.
 
@@ -137,7 +149,8 @@ The DTO extends a Chronicle Wire class SelfDescribingMarshallable, which provide
 
 The microservice leverages the above functionality, and Chronicle Wire's YamlTester to allow very simple behaviour-driven YAML testing -- the test class looks like this:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public class AggregatorTest {
+```java
+public class AggregatorTest {
    public static void runTest(String path) {
        YamlTester yt = YamlTester.runTest(AggregatorImpl.class, path);
        assertEquals(yt.expected(), yt.actual());
@@ -148,11 +161,14 @@ The microservice leverages the above functionality, and Chronicle Wire's YamlTes
        runTest("aggregator");
    }
    // more tests ...
-}</pre>
+}
+```
+
 
 And the "aggregator" folder contains an **in.yaml** file
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">---
+```
+---
 mdi: {
  symbol: BTCUSD,
  transactTime: 2019-12-03T09:54:37.345678,
@@ -166,13 +182,16 @@ mdi: {
  transactTime: 2019-12-03T09:54:38,
  rate: 23419.5,
  side: sell
-}</pre>
+}
+```
+
 
 Which the YamlTester plays into the AggregatorImpl class, automatically deserialising the MarketDataIncrement DTOs and dispatching them to the mdi method.
 
 This is all done in a single thread, allowing breakpoints to be set. The YamlTester records any output sent to the "out" interface and compares it to the contents of the **out.yaml** file. Intellij shows a friendly text diff in case of failure, making it very easy to see what was changed:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">---
+```java
+---
 # nothing in here as the first incoming MDI does not produce an output
 ---
 marketDataSnapshot: {
@@ -181,7 +200,9 @@ marketDataSnapshot: {
  bid: 23418.5,
  ask: 23419.5
 }
-...</pre>
+...
+```
+
 
 ### Hooking it all up and running {#h3-4-hooking-it-all-up-and-running}
 
@@ -189,15 +210,21 @@ The sample code contains maven exec java stanzas to run each microservice and al
 
 Start up three terminal screens and run the following in the md-pipeline directory to start the services
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">mvn exec:java@generate
+```
+mvn exec:java@generate
 mvn exec:java@aggregator
-mvn exec:java@strategy</pre>
+mvn exec:java@strategy
+```
+
 
 And to watch the output from each service start up three more screens (these are the equivalent of Unix tee and tail -f)
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">mvn exec:java@tailf -Dqueue=agg-in
+```
+mvn exec:java@tailf -Dqueue=agg-in
 mvn exec:java@tailf -Dqueue=agg-out
-mvn exec:java@tailf -Dqueue=strat-out</pre>
+mvn exec:java@tailf -Dqueue=strat-out
+```
+
 
 We can see that it is possible to realise the Unix Philosophy in Enterprise IT using a strongly-typed Enterprise language (Java), a suitable component technology (microservices) and an appropriate mechanism to glue them together (Chronicle Queue \& Wire).
 

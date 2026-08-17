@@ -34,7 +34,8 @@ The mapper is first created and initialized, whereafter it can be queried. Inter
 
 Suppose we have a number of Security objects with an "id" field of type int. We would like to create a reusable mapper for these objects allowing a number of Security objects to be looked up using the "id" field:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public final class Security extends SelfDescribingMarshallable {
+```java
+public final class Security extends SelfDescribingMarshallable {
     private int id;
     private long averagePrice;
     private long count;
@@ -44,7 +45,9 @@ Suppose we have a number of Security objects with an "id" field of type int. We 
         this.count = count;
     }
     // Getters, setters and toString() not shown for brevity
-}</pre>
+}
+```
+
 
 The SelfDescribingMarshallable is basically a serialization marker.
 
@@ -52,17 +55,18 @@ The SelfDescribingMarshallable is basically a serialization marker.
 
 We can now store these Security objects in an IntMapper containing the actual lookup method as shown hereunder:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public class IntMapper&lt;V&gt; extends SelfDescribingMarshallable {
-    private final List&lt;V&gt; values = new ArrayList&lt;&gt;();
-    private final ToIntFunction&lt;? super V&gt; extractor;
-    public IntMapper(final ToIntFunction&lt;? super V&gt; extractor) {
+```java
+public class IntMapper<V> extends SelfDescribingMarshallable {
+    private final List<V> values = new ArrayList<>();
+    private final ToIntFunction<? super V> extractor;
+    public IntMapper(final ToIntFunction<? super V> extractor) {
         this.extractor = Objects.requireNonNull(extractor);
     }
-    public List&lt;V&gt; values() { return values; }
+    public List<V> values() { return values; }
     public IntStream keys() {
         return values.stream().mapToInt(extractor);
     }
-    public void set(Collection&lt;? extends V&gt; values) {
+    public void set(Collection<? extends V> values) {
         this.values.clear();
         this.values.addAll(values);
         // Sort the list in id order
@@ -70,13 +74,15 @@ We can now store these Security objects in an IntMapper containing the actual lo
     }
     public V get(int key) {
         int index = binarySearch(key);
-        if (index &gt;= 0)
+        if (index >= 0)
             return values.get(index);
         else
             return null;
     }
     // binarySearch() shown later in the article
-}</pre>
+}
+```
+
 
 That's it!
 
@@ -86,38 +92,45 @@ We have created a reusable mapper with no object creation overhead with reasonab
 
 Armed with the above classes, we can put together a small main method that demonstrates the use of the concept:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public class SecurityLookup {
+```java
+public class SecurityLookup {
     public static void main(String[] args) {
         // These can be reused
         final Security s0 = new Security(100, 45, 2);
         final Security s1 = new Security(10, 100, 42);
         final Security s2 = new Security(20, 200, 13);
         // This can be reused
-        final List&lt;Security&gt; securities = new ArrayList&lt;&gt;();
+        final List<Security> securities = new ArrayList<>();
         securities.add(s0);
         securities.add(s1);
         securities.add(s2);
         // Reusable Mapper
-        IntMapper&lt;Security&gt; mapper =
-                new IntMapper&lt;&gt;(Security::getId);
+        IntMapper<Security> mapper =
+                new IntMapper<>(Security::getId);
         mapper.set(securities);
         Security security100 = mapper.get(100);
         System.out.println("security100 = " + security100);
     }
-}</pre>
+}
+```
+
 
 As expected, the program will produce the following output when run:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">security100 = Security{id=100, averagePrice=45, count=2}</pre>
+```
+security100 = Security{id=100, averagePrice=45, count=2}
+```
+
 
 #### Binary Search Method Implementation
 
 The binary search method used above might be implemented like this:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">int binarySearch(final int key) {
+```java
+int binarySearch(final int key) {
         int low = 0;
         int high = values.size() - 1;
-        while (low &gt;&gt; 1;
+        while (low >> 1;
             final V midVal = values.get(mid);
             int cmp = Integer.compare(
                     extractor.applyAsInt(midVal), key);
@@ -128,7 +141,9 @@ The binary search method used above might be implemented like this:
         }
         return -(low + 1);
     }
-}</pre>
+}
+```
+
 
 Unfortunately, we cannot use Arrays::binarySearch or Collections::binarySearch. One reason is that methods like these would create additional objects upon querying.
 
@@ -136,8 +151,11 @@ Unfortunately, we cannot use Arrays::binarySearch or Collections::binarySearch. 
 
 If we want to use other types like CharSequence or other reference objects, there is an overload of the comparing() method that takes a custom comparator. This might look like the following in the case of CharSequence:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">values.sort(
-    comparing(Security::getId, CharSequenceComparator.INSTANCE));</pre>
+```java
+values.sort(
+    comparing(Security::getId, CharSequenceComparator.INSTANCE));
+```
+
 
 More generally, if the key reference object is of type K, then the binary search method above can easily be modified to use an extractor of type Function instead and an added Comparator parameter.
 
@@ -147,11 +165,17 @@ A complete example of a generic Mapper is available [here](https://github.com/Op
 
 Sending IntMapper objects over the wire without object creation requires special care on the receiver side so that old Security objects can be reused. This involves setting up a transient buffer that holds recycled Security objects.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">private final transient List buffer = new ArrayList();</pre>
+```java
+private final transient List buffer = new ArrayList();
+```
+
 
 We also have to override the IntMapper::readMarshallable method and include:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">wire.read("values").sequence(values, buffer, Security::new);</pre>
+```java
+wire.read("values").sequence(values, buffer, Security::new);
+```
+
 
 The complete setup is outside the scope of this article.
 

@@ -33,15 +33,20 @@ In this program, you can see it reserves 8 TiB (8,192 GiB)
 
 Tip: x \<\< y means x × 2y therefore:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">1L &lt;&lt; 10 = 1 KiB (1024 bytes),
-1L &lt;&lt; 20 = 1 MiB (10242 bytes),
-1L &lt;&lt; 30 = 1 GiB (10243 bytes),
-1L &lt;&lt; 40 = 1 TiB etc</pre>
+```
+1L << 10 = 1 KiB (1024 bytes),
+1L << 20 = 1 MiB (10242 bytes),
+1L << 30 = 1 GiB (10243 bytes),
+1L << 40 = 1 TiB etc
+```
+
 
 Using multiples of 10 for the shift makes them easier to read.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">64L &lt;&lt; 20 is 64 × 220 = 64 × 10242 = 64 MiB.
-</pre>
+```
+64L << 20 is 64 × 220 = 64 × 10242 = 64 MiB.
+```
+
 
 The virtual memory size of the above process is just over 8192 GiB at 8200.7 GiB, but the RSS (Resident Set Size) is only 122,060 KB, or 122 MB.  
 ![](Screen-Shot-2023-03-06-at-11.13.06-AM-1024x427.png)  

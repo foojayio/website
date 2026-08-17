@@ -30,20 +30,24 @@ Before we dive into the different implementations, let's define a Counter interf
 
 This interface will provide a standard way to interact with the counters, regardless of their underlying implementation.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public sealed interface Counter{
+```java
+public sealed interface Counter{
 
     void increment();
 
     int get();
 
-}</pre>
+}
+```
+
 
 **The Basic Counter and Its Thread-Safety Issue** {#h2-0-the-basic-counter-and-its-thread-safety-issue}
 -------------------------------------------------------------------------------------------------------
 
 Consider a simple counter implemented in Java:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public class SimpleCounter implements Counter{
+```java
+public class SimpleCounter implements Counter{
 
     private int count = 0;
 
@@ -59,7 +63,9 @@ Consider a simple counter implemented in Java:
 
     }
 
-}</pre>
+}
+```
+
 
 This counter works perfectly in a single-threaded environment. However, when multiple threads are involved, it may not behave as expected. This is because the increment() operation is not atomic.
 
@@ -76,23 +82,26 @@ By declaring a method synchronized, we ensure that only one thread can execute i
 
 Here's how we can make our counter thread-safe using synchronization:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public class SynchronizedCounter implements Counter{
+```java
+public class SynchronizedCounter implements Counter{
 
-&nbsp;&nbsp;&nbsp;&nbsp;private int count = 0;
+    private int count = 0;
 
-&nbsp;&nbsp;&nbsp;&nbsp;public synchronized void increment() {
+    public synchronized void increment() {
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;count++;
+        count++;
 
-&nbsp;&nbsp;&nbsp;&nbsp;}
+    }
 
-&nbsp;&nbsp;&nbsp;&nbsp;public synchronized int getCount() {
+    public synchronized int getCount() {
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return count;
+        return count;
 
-&nbsp;&nbsp;&nbsp;&nbsp;}
+    }
 
-}</pre>
+}
+```
+
 
 Now, even if multiple threads call increment() simultaneously, each call will be executed one after the other, ensuring the correct count.
 
@@ -101,7 +110,8 @@ Now, even if multiple threads call increment() simultaneously, each call will be
 
 While synchronization is simple and effective, it doesn't provide flexibility in handling lock acquisition and release. Java's ReentrantLock gives us more control and can lead to more efficient concurrent code. Here's our counter using a [ReentrantLock](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/concurrent/locks/ReentrantLock.html):
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">package ca.bazlur;
+```java
+package ca.bazlur;
 
 import java.util.concurrent.locks.*;
 
@@ -128,7 +138,9 @@ public final class ThreadSafeCounterUsingLock implements Counter {
             lock.unlock();
         }
     }
-}</pre>
+}
+```
+
 
 **Advanced Techniques: Unsafe and VarHandle**
 
@@ -136,7 +148,8 @@ Java provides some advanced tools for handling concurrency. Unsafe and VarHandle
 
 Here's how we can use Unsafe to implement our counter:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">import sun.misc.Unsafe;
+```java
+import sun.misc.Unsafe;
 
 public class UnsafeCounter implements Counter {
 
@@ -177,14 +190,15 @@ public class UnsafeCounter implements Counter {
     }
 
 }
+```
 
-</pre>
 
 And here's the counter using VarHandle:
 
 <br />
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">package ca.bazlur;
+```java
+package ca.bazlur;
 
 import java.lang.invoke.MethodHandles;
 import java.lang.invoke.VarHandle;
@@ -212,7 +226,9 @@ public final class ThreadSafeCounterUsingVarHandle implements Counter {
             throw new Error(e);
         }
     }
-}</pre>
+}
+```
+
 
 **Simplifying with AtomicInteger** {#h2-3-simplifying-with-atomicinteger}
 -------------------------------------------------------------------------
@@ -221,29 +237,33 @@ While the above methods are effective, they can be complex and hard to manage. J
 
 This class provides methods for atomically incrementing a value, which is safe to use even in a multi-threaded environment:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">import java.util.concurrent.atomic.AtomicInteger;
+```java
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class AtomicCounter implements Counter{
 
-&nbsp;&nbsp;&nbsp;&nbsp;private AtomicInteger count = new AtomicInteger(0);
+    private AtomicInteger count = new AtomicInteger(0);
 
-&nbsp;&nbsp;&nbsp;&nbsp;public void increment() {
+    public void increment() {
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;count.incrementAndGet();
+        count.incrementAndGet();
 
-&nbsp;&nbsp;&nbsp;&nbsp;}
+    }
 
-&nbsp;&nbsp;&nbsp;&nbsp;public int getCount() {
+    public int getCount() {
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return count.get();
+        return count.get();
 
-&nbsp;&nbsp;&nbsp;&nbsp;}
+    }
 
-}</pre>
+}
+```
+
 
 Another example uses LongAdder, which is considered much more performant than AtomicInteger.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">package ca.bazlur;
+```java
+package ca.bazlur;
 
 import java.util.concurrent.atomic.*;
 
@@ -265,7 +285,9 @@ public final class LongAdderCounter implements Counter {
 
     }
 
-}</pre>
+}
+```
+
 
 In conclusion, Java provides various methods to make a counter thread-safe, with the simplest and most efficient often being the use of high-level concurrency utilities like AtomicInteger.
 

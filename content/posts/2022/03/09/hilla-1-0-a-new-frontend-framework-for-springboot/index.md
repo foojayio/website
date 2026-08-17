@@ -35,7 +35,8 @@ Automatic TypeScript code generation helps ensure that the frontend always stays
 
 **Server endpoint:**
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">@Endpoint
+```java
+@Endpoint
 @AnonymousAllowed
 public class PersonEndpoint {
     private PersonRepository repository;
@@ -44,14 +45,17 @@ public class PersonEndpoint {
         this.repository = repository;
     }
 
-    public @Nonnull List&lt;@Nonnull Person&gt; findAll() {
+    public @Nonnull List<@Nonnull Person> findAll() {
         return repository.findAll();
     }
-}</pre>
+}
+```
+
 
 **TypeScript View:**
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">import { PersonEndpoint } from 'Frontend/generated/endpoints';
+```java
+import { PersonEndpoint } from 'Frontend/generated/endpoints';
 import Person from 'Frontend/generated/com/example/application/Person';
 
 export class PersonView extends View {
@@ -63,12 +67,14 @@ export class PersonView extends View {
 
   render() {
     return html`
-      &lt;vaadin-grid .items=${this.people}&gt;
-        &lt;vaadin-grid-column path="firstName"&gt;&lt;/vaadin-grid-column&gt;
-        &lt;vaadin-grid-column path="lastName"&gt;&lt;/vaadin-grid-column&gt;
-      &lt;/vaadin-grid&gt;`;
+      <vaadin-grid .items=${this.people}>
+        <vaadin-grid-column path="firstName"></vaadin-grid-column>
+        <vaadin-grid-column path="lastName"></vaadin-grid-column>
+      </vaadin-grid>`;
   }
-}</pre>
+}
+```
+
 
 Getting started {#h2-1-getting-started}
 ---------------------------------------

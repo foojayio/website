@@ -63,7 +63,8 @@ We use the following running example as a starting point. Table `events_by_devic
 
 ### Schema {#h3-2-schema}
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">-- All events by device
+```
+-- All events by device
 
 CREATE TABLE events_by_device (
 
@@ -77,11 +78,14 @@ value      TEXT,
 
 PRIMARY KEY((device_id), timestamp)
 
-) WITH CLUSTERING ORDER BY (timestamp DESC);</pre>
+) WITH CLUSTERING ORDER BY (timestamp DESC);
+```
+
 
 ### Data {#h3-3-data}
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">-- Event 1-1
+```
+-- Event 1-1
 INSERT INTO events_by_device 
        (device_id, timestamp, state, value)
 VALUES (11111111-aaaa-bbbb-cccc-12345678abcd, 
@@ -105,11 +109,14 @@ VALUES (22222222-aaaa-bbbb-cccc-12345678abcd,
 INSERT INTO events_by_device 
        (device_id, timestamp, state, value)
 VALUES (33333333-aaaa-bbbb-cccc-12345678abcd, 
-        '2021-03-03 01:11:11', 'off', 'event 3-1');</pre>
+        '2021-03-03 01:11:11', 'off', 'event 3-1');
+```
+
 
 ### Queries {#h3-4-queries}
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">-- Find all events for a device
+```
+-- Find all events for a device
 SELECT device_id, timestamp, state, value
 FROM   events_by_device
 WHERE  device_id = 11111111-aaaa-bbbb-cccc-12345678abcd;
@@ -129,7 +136,9 @@ PER PARTITION LIMIT 1;
 --------------------------------------+---------------------------------+-------+-----------
  33333333-aaaa-bbbb-cccc-12345678abcd | 2021-03-03 01:11:11.000000+0000 |   off | event 3-1
  22222222-aaaa-bbbb-cccc-12345678abcd | 2021-02-02 01:11:11.000000+0000 |   off | event 2-1
- 11111111-aaaa-bbbb-cccc-12345678abcd | 2021-01-01 03:33:33.000000+0000 |    on | event 1-3</pre>
+ 11111111-aaaa-bbbb-cccc-12345678abcd | 2021-01-01 03:33:33.000000+0000 |    on | event 1-3
+```
+
 
 Note that, we can assume that the number of events per device is not to exceed 100,000. Otherwise, we may have to further split partitions in table `events_by_device` by introducing another column into its partition key definition. Since this is not important for the problem we are solving in this post, let's keep things simple.
 
@@ -144,7 +153,8 @@ Notice that exactly the same data is inserted into both tables `events_by_device
 
 ### Schema {#h3-6-schema}
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">-- Latest known events by device
+```
+-- Latest known events by device
 CREATE TABLE latest_events_by_device (
     device_id  UUID,
     timestamp  TIMESTAMP,
@@ -157,11 +167,14 @@ CREATE TABLE latest_events_by_device (
 CREATE MATERIALIZED VIEW latest_events_by_state AS 
   SELECT * FROM latest_events_by_device
   WHERE state IS NOT NULL AND device_id IS NOT NULL
-PRIMARY KEY ((state), device_id);</pre>
+PRIMARY KEY ((state), device_id);
+```
+
 
 ### Data {#h3-7-data}
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">-- Event 1-1
+```
+-- Event 1-1
 INSERT INTO latest_events_by_device 
        (device_id, timestamp, state, value)
 VALUES (11111111-aaaa-bbbb-cccc-12345678abcd, 
@@ -185,11 +198,14 @@ VALUES (22222222-aaaa-bbbb-cccc-12345678abcd,
 INSERT INTO latest_events_by_device 
        (device_id, timestamp, state, value)
 VALUES (33333333-aaaa-bbbb-cccc-12345678abcd, 
-        '2021-03-03 01:11:11', 'off', 'event 3-1');</pre>
+        '2021-03-03 01:11:11', 'off', 'event 3-1');
+```
+
 
 ### Queries {#h3-8-queries}
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">-- Find all the latest events with state 'on'
+```
+-- Find all the latest events with state 'on'
 SELECT state, device_id, timestamp, value
 FROM   latest_events_by_state
 WHERE  state = 'on';
@@ -206,7 +222,9 @@ WHERE  state = 'off';
  state | device_id                            | timestamp                       | value
 -------+--------------------------------------+---------------------------------+-----------
    off | 22222222-aaaa-bbbb-cccc-12345678abcd | 2021-02-02 01:11:11.000000+0000 | event 2-1
-   off | 33333333-aaaa-bbbb-cccc-12345678abcd | 2021-03-03 01:11:11.000000+0000 | event 3-1</pre>
+   off | 33333333-aaaa-bbbb-cccc-12345678abcd | 2021-03-03 01:11:11.000000+0000 | event 3-1
+```
+
 
 The materialized view solution has the following characteristics:
 
@@ -227,7 +245,8 @@ Once again, exactly the same data is inserted into both tables `events_by_device
 
 ### Schema {#h3-10-schema}
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">-- Latest known events by device
+```
+-- Latest known events by device
 CREATE TABLE latest_events_by_device (
     device_id  UUID,
     timestamp  TIMESTAMP,
@@ -238,11 +257,14 @@ CREATE TABLE latest_events_by_device (
 
 -- Latest events by state
 CREATE INDEX latest_events_by_state_2i 
-ON latest_events_by_device (state);</pre>
+ON latest_events_by_device (state);
+```
+
 
 ### Data {#h3-11-data}
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">-- Event 1-1
+```
+-- Event 1-1
 INSERT INTO latest_events_by_device
 (device_id, timestamp, state, value)
 VALUES (11111111-aaaa-bbbb-cccc-12345678abcd,
@@ -266,11 +288,14 @@ VALUES (22222222-aaaa-bbbb-cccc-12345678abcd,
 INSERT INTO latest_events_by_device
 (device_id, timestamp, state, value)
 VALUES (33333333-aaaa-bbbb-cccc-12345678abcd,
-'2021-03-03 01:11:11', 'off', 'event 3-1');</pre>
+'2021-03-03 01:11:11', 'off', 'event 3-1');
+```
+
 
 ### Queries {#h3-12-queries}
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">-- Find all the latest events with state 'on'
+```
+-- Find all the latest events with state 'on'
 SELECT state, device_id, timestamp, value
 FROM   latest_events_by_device
 WHERE  state = 'on';
@@ -287,7 +312,9 @@ WHERE  state = 'off';
  state | device_id                            | timestamp                       | value
 -------+--------------------------------------+---------------------------------+-----------
    off | 33333333-aaaa-bbbb-cccc-12345678abcd | 2021-03-03 01:11:11.000000+0000 | event 3-1
-   off | 22222222-aaaa-bbbb-cccc-12345678abcd | 2021-02-02 01:11:11.000000+0000 | event 2-1</pre>
+   off | 22222222-aaaa-bbbb-cccc-12345678abcd | 2021-02-02 01:11:11.000000+0000 | event 2-1
+```
+
 
 The secondary index solution has the following characteristics:
 
@@ -304,18 +331,22 @@ The third solution relies on table `latest_events_by_state` to organize and quer
 
 ### Schema {#h3-14-schema}
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">-- Latest events by state
+```
+-- Latest events by state
 CREATE TABLE latest_events_by_state (
     state      TEXT,
     device_id  UUID,
     timestamp  TIMESTAMP,
     value      TEXT,
     PRIMARY KEY((state), device_id)
-);</pre>
+);
+```
+
 
 ### Data {#h3-15-data}
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">-- Event 1-1
+```
+-- Event 1-1
 INSERT INTO latest_events_by_state 
        (state, device_id, timestamp, value)
 VALUES ('on', 11111111-aaaa-bbbb-cccc-12345678abcd, 
@@ -354,11 +385,14 @@ VALUES ('off', 33333333-aaaa-bbbb-cccc-12345678abcd,
         '2021-03-03 01:11:11', 'event 3-1');
 DELETE FROM latest_events_by_state 
 WHERE state = 'on' AND
-      device_id = 33333333-aaaa-bbbb-cccc-12345678abcd;</pre>
+      device_id = 33333333-aaaa-bbbb-cccc-12345678abcd;
+```
+
 
 ### Queries {#h3-16-queries}
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">-- Find all the latest events with state 'on'
+```
+-- Find all the latest events with state 'on'
 SELECT state, device_id, timestamp, value
 FROM   latest_events_by_state
 WHERE  state = 'on';
@@ -375,7 +409,9 @@ WHERE  state = 'off';
  state | device_id                            | timestamp                       | value
 -------+--------------------------------------+---------------------------------+-----------
    off | 22222222-aaaa-bbbb-cccc-12345678abcd | 2021-02-02 01:11:11.000000+0000 | event 2-1
-   off | 33333333-aaaa-bbbb-cccc-12345678abcd | 2021-03-03 01:11:11.000000+0000 | event 3-1</pre>
+   off | 33333333-aaaa-bbbb-cccc-12345678abcd | 2021-03-03 01:11:11.000000+0000 | event 3-1
+```
+
 
 The state-partitioned table solution has the following characteristics:
 
@@ -396,7 +432,8 @@ The fourth solution features a separate table for each state. Every insert to ta
 
 ### Schema {#h3-18-schema}
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">-- Latest 'on' events by device
+```
+-- Latest 'on' events by device
 CREATE TABLE latest_on_events_by_device (
     device_id  UUID,
     timestamp  TIMESTAMP,
@@ -410,11 +447,14 @@ CREATE TABLE latest_off_events_by_device (
     timestamp  TIMESTAMP,
     value      TEXT,
     PRIMARY KEY((device_id))
-);</pre>
+);
+```
+
 
 ### Data {#h3-19-data}
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">-- Event 1-1
+```
+-- Event 1-1
 INSERT INTO latest_on_events_by_device 
        (device_id, timestamp, value)
 VALUES (11111111-aaaa-bbbb-cccc-12345678abcd, 
@@ -448,11 +488,14 @@ INSERT INTO latest_off_events_by_device
 VALUES (33333333-aaaa-bbbb-cccc-12345678abcd, 
         '2021-03-03 01:11:11', 'event 3-1');
 DELETE FROM latest_on_events_by_device 
-WHERE device_id = 33333333-aaaa-bbbb-cccc-12345678abcd;</pre>
+WHERE device_id = 33333333-aaaa-bbbb-cccc-12345678abcd;
+```
+
 
 ### Queries {#h3-20-queries}
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">-- Find all the latest events with state 'on'
+```
+-- Find all the latest events with state 'on'
 SELECT device_id, timestamp, value
 FROM   latest_on_events_by_device;
 
@@ -467,7 +510,9 @@ FROM   latest_off_events_by_device;
  device_id                            | timestamp                       | value
 --------------------------------------+---------------------------------+-----------
  33333333-aaaa-bbbb-cccc-12345678abcd | 2021-03-03 01:11:11.000000+0000 | event 3-1
- 22222222-aaaa-bbbb-cccc-12345678abcd | 2021-02-02 01:11:11.000000+0000 | event 2-1</pre>
+ 22222222-aaaa-bbbb-cccc-12345678abcd | 2021-02-02 01:11:11.000000+0000 | event 2-1
+```
+
 
 The multi-table solution has the following characteristics:
 
@@ -486,7 +531,8 @@ Similarly to the previous data model, every insert to table `latest_on_events_by
 
 ### Schema {#h3-22-schema}
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">-- Custom hash function
+```
+-- Custom hash function
 CREATE FUNCTION hash(id UUID) 
 RETURNS NULL ON NULL INPUT 
 RETURNS INT 
@@ -509,11 +555,14 @@ CREATE TABLE latest_off_events_by_bucket (
     timestamp  TIMESTAMP,
     value      TEXT,
     PRIMARY KEY((bucket), device_id)
-);</pre>
+);
+```
+
 
 ### Data {#h3-23-data}
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">-- Event 1-1
+```
+-- Event 1-1
 INSERT INTO latest_on_events_by_bucket 
        (bucket, device_id, timestamp, value)
 VALUES (hash(11111111-aaaa-bbbb-cccc-12345678abcd), 
@@ -557,11 +606,14 @@ VALUES (hash(33333333-aaaa-bbbb-cccc-12345678abcd),
         '2021-03-03 01:11:11', 'event 3-1');
 DELETE FROM latest_on_events_by_bucket 
 WHERE bucket = hash(33333333-aaaa-bbbb-cccc-12345678abcd) AND 
-      device_id = 33333333-aaaa-bbbb-cccc-12345678abcd;</pre>
+      device_id = 33333333-aaaa-bbbb-cccc-12345678abcd;
+```
+
 
 ### Queries {#h3-24-queries}
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">-- Find all the latest events with state 'on'
+```
+-- Find all the latest events with state 'on'
 SELECT bucket, device_id, timestamp, value
 FROM   latest_on_events_by_bucket
 WHERE  bucket IN (0,1,2);
@@ -578,7 +630,9 @@ WHERE  bucket IN (0,1,2);
  bucket | device_id                            | timestamp                       | value
 --------+--------------------------------------+---------------------------------+-----------
       0 | 22222222-aaaa-bbbb-cccc-12345678abcd | 2021-02-02 01:11:11.000000+0000 | event 2-1
-      0 | 33333333-aaaa-bbbb-cccc-12345678abcd | 2021-03-03 01:11:11.000000+0000 | event 3-1</pre>
+      0 | 33333333-aaaa-bbbb-cccc-12345678abcd | 2021-03-03 01:11:11.000000+0000 | event 3-1
+```
+
 
 The customizable partitioning solution has the following characteristics:
 

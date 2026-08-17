@@ -44,7 +44,8 @@ Example {#h2-1-example}
 
 Now, to a small example, called [chapter2.HelloBuffer](https://github.com/parttimenerd/hello-ebpf/blob/main/bcc/src/test/java/me/bechberger/ebpf/bcc/HelloWorldTest.java), which records for every `execve` call the calling process id, the user id, and the current task name and transmits it to the Java application:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&gt; ./run.sh chapter2.HelloBuffer
+```bash
+> ./run.sh chapter2.HelloBuffer
 2852613 1000 code Hello World  # vs code
 2852635 1000 code Hello World
 2852667 1000 code Hello World
@@ -59,11 +60,13 @@ Now, to a small example, called [chapter2.HelloBuffer](https://github.com/partti
 2852760 1000 jspawnhelper Hello World
 2852760 1000 jspawnhelper Hello World
 2852760 1000 jspawnhelper Hello World
-</pre>
+```
+
 
 This gives us already much more information than the simple counter from my [last article](https://mostlynerdless.de/blog/2024/01/12/hello-ebpf-recording-data-in-basic-ebpf-maps-2/). The eBPF program to achieve this is as follows:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="cpp" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">BPF_PERF_OUTPUT(output);                                                 
+```cpp
+BPF_PERF_OUTPUT(output);                                                 
 
 struct data_t {                                                          
     int pid;                                                             
@@ -77,30 +80,33 @@ int hello(void *ctx) {
     char message[12] = "Hello World";                                    
 
     // obtain process and user id                                                                     
-    data.pid = bpf_get_current_pid_tgid() &gt;&gt; 32;                         
-    data.uid = bpf_get_current_uid_gid() &amp; 0xFFFFFFFF;                   
+    data.pid = bpf_get_current_pid_tgid() >> 32;                         
+    data.uid = bpf_get_current_uid_gid() & 0xFFFFFFFF;                   
 
     // obtain the current task/thread/process name, 
     // without the folder, of the task that is currently
     // running                                                                     
-    bpf_get_current_comm(&amp;data.command, 
+    bpf_get_current_comm(&data.command, 
         sizeof(data.command));
     // "Safely attempt to read size bytes from kernel space
     //  address unsafe_ptr and store the data in dst." (man-page)           
-    bpf_probe_read_kernel(&amp;data.message, 
+    bpf_probe_read_kernel(&data.message, 
         sizeof(data.message), message); 
 
     // try to submit the data to the perf buffer                                                                     
-    output.perf_submit(ctx, &amp;data, sizeof(data));                        
+    output.perf_submit(ctx, &data, sizeof(data));                        
 
     return 0;                                                            
-}                                                                        </pre>
+}
+```
+
 
 You can get more information on `bpf_get_current_com`, `bpf_probe_read_kernel` in the [bpf-helpers(7) man-page](https://www.man7.org/linux/man-pages/man7/bpf-helpers.7.html).
 
 The Java application that reads the buffer and prints the obtained information is not too dissimilar from the example in [my previous article](https://mostlynerdless.de/blog/2024/01/12/hello-ebpf-recording-data-in-basic-ebpf-maps-2/). We first define the `Data` type:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">record Data(
+```java
+record Data(
    int pid, 
    int uid, 
    // we model char arrays as Strings
@@ -109,45 +115,48 @@ The Java application that reads the buffer and prints the obtained information i
    @Size(12) String message) {}                                                                                                                              
 
 // we have to model the data type as before                                                                                                                              
-static final BPFType.BPFStructType&lt;Data&gt; DATA_TYPE = 
-   new BPFType.BPFStructType&lt;&gt;("data_t",                              
+static final BPFType.BPFStructType<Data> DATA_TYPE = 
+   new BPFType.BPFStructType<>("data_t",                              
         List.of(                                                                                                               
-                new BPFType.BPFStructMember&lt;&gt;("pid", 
+                new BPFType.BPFStructMember<>("pid", 
                      BPFType.BPFIntType.INT32, 0, Data::pid),                                  
-                new BPFType.BPFStructMember&lt;&gt;("uid", 
+                new BPFType.BPFStructMember<>("uid", 
                      BPFType.BPFIntType.INT32, 4, Data::uid),                                  
-                new BPFType.BPFStructMember&lt;&gt;("command", 
+                new BPFType.BPFStructMember<>("command", 
                      new BPFType.StringType(16), 8, Data::command),                        
-                new BPFType.BPFStructMember&lt;&gt;("message", 
+                new BPFType.BPFStructMember<>("message", 
                      new BPFType.StringType(12), 24, Data::message)),                      
         new BPFType.AnnotatedClass(Data.class, List.of()),                                                                     
-            objects -&gt; new Data((int) objects.get(0), 
+            objects -> new Data((int) objects.get(0), 
                                 (int) objects.get(1), 
                                 (String) objects.get(2),
-                                (String) objects.get(3)));</pre>
+                                (String) objects.get(3)));
+```
+
 
 *You might recognize that the BPF types now have the matching Java type in their type signature. I added this to have more type safety and less casting.*
 
 To retrieve the events from the buffer, we first have [to open it and pass in a call-back](https://github.com/parttimenerd/hello-ebpf/blob/df7feea50f8ae126de6f436fbc960ea66f8baa39/bcc/src/main/java/me/bechberger/ebpf/bcc/BPFTable.java#L971C34-L971C50). This call-back is called for every available event when we call [PerfEventArray](https://github.com/parttimenerd/hello-ebpf/blob/df7feea50f8ae126de6f436fbc960ea66f8baa39/bcc/src/main/java/me/bechberger/ebpf/bcc/BPFTable.java#L887)`#`[perf_buffer_poll](https://github.com/parttimenerd/hello-ebpf/blob/df7feea50f8ae126de6f436fbc960ea66f8baa39/bcc/src/main/java/me/bechberger/ebpf/bcc/BPF.java#L955):
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">try (var b = BPF.builder("""                                                                                                    
+```
+try (var b = BPF.builder("""                                                                                                    
         ...                                                                                                                     
         """).build()) {                                                                                                         
     var syscall = b.get_syscall_fnname("execve");                                                                               
     b.attach_kprobe(syscall, "hello");                                                                                          
 
-    BPFTable.PerfEventArray.EventCallback&lt;Data&gt; print_event = 
+    BPFTable.PerfEventArray.EventCallback<Data> print_event = 
       (/* PerfEventArray instance */ array, 
        /* cpu id of the event */     cpu, 
        /* event data */              data, 
-       /* size of the event data */  size) -&gt; {                                     
+       /* size of the event data */  size) -> {                                     
         var d = array.event(data);                                                                                              
         System.out.printf("%d %d %s %s%n", 
             d.pid(), d.uid(), d.command(), d.message());                                         
     };                                                                                                                          
 
     try (var output = b.get("output", 
-         BPFTable.PerfEventArray.&lt;Data&gt;createProvider(DATA_TYPE))
+         BPFTable.PerfEventArray.<Data>createProvider(DATA_TYPE))
              .open_perf_buffer(print_event)) { 
         while (true) {
             // wait till packages are available,
@@ -155,20 +164,24 @@ To retrieve the events from the buffer, we first have [to open it and pass in a 
             b.perf_buffer_poll();                                                                                               
         }                                                                                                                       
     }                                                                                                                           
-}                                                                                                                               
+}
+```
 
-                                                                                                                                </pre>
 
 Tests {#h2-2-tests}
 -------------------
 
 I'm happy to announce that [hello-ebpf](https://github.com/parttimenerd/hello-ebpf) now has its own test runner, which uses [virtme](https://github.com/amluto/virtme) and docker to run all tests in their own runtime with their own kernel. All this is wrapped in my [testutil/bin/java](https://github.com/parttimenerd/hello-ebpf/blob/main/testutil/bin/java) wrapper so that you can run the tests using `mvn test`:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">mvn -Djvm=testutil/bin/java</pre>
+```bash
+mvn -Djvm=testutil/bin/java
+```
+
 
 And the best part? All tests are written using plain [JUnit 5](https://junit.org/junit5/). As an example, here is the [HelloWorld](https://github.com/parttimenerd/hello-ebpf/blob/df7feea50f8ae126de6f436fbc960ea66f8baa39/bcc/src/test/java/me/bechberger/ebpf/bcc/HelloWorldTest.java) test:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public class HelloWorldTest {
+```java
+public class HelloWorldTest {
     @Test
     public void testHelloWorld() throws Exception {
         try (BPF b = BPF.builder("""
@@ -186,7 +199,9 @@ And the best part? All tests are written using plain [JUnit 5](https://junit.org
             assertTrue(line.contains("Hello, World!"));
         }
     }
-}</pre>
+}
+```
+
 
 There are currently only two tests, but I plan to add many more.
 

@@ -32,11 +32,17 @@ JTREG is quite powerful, allowing you to combine C++ and Java code, but it makes
 
 But worry no more: My new [*vsreg*](https://github.com/parttimenerd/vsreg) utility will do this for you. 🙂 You can obtain the tool by just cloning its GitHub [repository](https://github.com/parttimenerd/vsreg):
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">git clone https://github.com/parttimenerd/vsreg</pre>
+```bash
+git clone https://github.com/parttimenerd/vsreg
+```
+
 
 Then pass the make test command to it, which you use to run the test that you want to debug:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">vsreg/vsreg.py "ASGCT debug" -- make test TEST=jtreg:test/hotspot/jtreg/serviceability/AsyncGetCallTrace JTREG="VERBOSE=all"</pre>
+```bash
+vsreg/vsreg.py "ASGCT debug" -- make test TEST=jtreg:test/hotspot/jtreg/serviceability/AsyncGetCallTrace JTREG="VERBOSE=all"
+```
+
 
 Be sure always to pass `JTREG="VERBOSE=all"`: vsreg executes the command, parses the output, and adds a launch config with the label "ASGCT debug" to the `.vscode/launch.json` file in the current folder.
 
@@ -74,7 +80,8 @@ Recompilation {#h2-1-recompilation}
 
 If you want to recompile the tests, use `make images test-image`. You can add a task to your `.vscode/tasks.json` file and pass the label to the `--build-task` option:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="json" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">{
+```json
+{
   "version": "2.0.0",
   "tasks": [
     {
@@ -89,14 +96,17 @@ If you want to recompile the tests, use `make images test-image`. You can add a 
       "problemMatcher": ["$gcc"]
     }
   ]
-}</pre>
+}
+```
+
 
 Options {#h2-2-options}
 -----------------------
 
 vsreg has a few options:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">usage: vsreg.py [-h] [-t TEMPLATE] [-d] [-b TASK] LABEL COMMAND [COMMAND ...]
+```bash
+usage: vsreg.py [-h] [-t TEMPLATE] [-d] [-b TASK] LABEL COMMAND [COMMAND ...]
 
 Create a debug launch config for a JTREG test run
 
@@ -112,11 +122,14 @@ options:
                         vsreg/template folder
   -d, --dry-run         Only print the launch config
   -b TASK, --build-task TASK
-                        Task to run before the command</pre>
+                        Task to run before the command
+```
+
 
 An example template looks like this:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="json" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">{
+```json
+{
   "name": "$NAME",
   "type": "cppdbg",
   "request": "launch",
@@ -141,7 +154,9 @@ An example template looks like this:
     }
   ],
   "preLaunchTask": ""
-}</pre>
+}
+```
+
 
 vsreg fills in `$NAME` (with the label), `program` (with the used Java binary), `args`, `cwd`, environment and `preLaunchTask`.
 

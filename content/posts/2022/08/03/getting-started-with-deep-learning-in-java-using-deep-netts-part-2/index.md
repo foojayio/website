@@ -49,10 +49,13 @@ As you can see, there is a lot of variation in each digit, and it would be impos
 
 The following code snipet loads images and corresponding labels that will be used to train/build the model.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">ImageSet imageSet = new ImageSet(imageWidth, imageHeight);
+```java
+ImageSet imageSet = new ImageSet(imageWidth, imageHeight);
 imageSet.setInvertImages(true); 
 imageSet.loadLabels(new File(labelsFile));
-imageSet.loadImages(new File(trainingFile), 1000);</pre>
+imageSet.loadImages(new File(trainingFile), 1000);
+```
+
 
 Convolutional neural networks are type of deep learning models which are capable to learn patterns in image pixels, and they will be used to demonstrate how Deep Netts can be used to accomplish this.
 
@@ -62,7 +65,8 @@ The image bellow shows the architecture of a typical convolutional neural networ
 
 The convolutional neural network can be created using the following Java code snippet in Deep Netts, using [ConvolutionalNetwork](https://www.deepnetts.com/apidocs/deepnetts/net/ConvolutionalNetwork.html) class and it's corresponding [builder](https://www.deepnetts.com/apidocs/deepnetts/net/ConvolutionalNetwork.Builder.html).
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">// create convolutional neural network architecture
+```java
+// create convolutional neural network architecture
 ConvolutionalNetwork neuralNet = ConvolutionalNetwork.builder()
             .addInputLayer(imageWidth, imageHeight)
             .addConvolutionalLayer(12, 5)
@@ -73,7 +77,8 @@ ConvolutionalNetwork neuralNet = ConvolutionalNetwork.builder()
             .lossFunction(LossType.CROSS_ENTROPY)
             .randomSeed(123)
             .build();
-</pre>
+```
+
 
 Full source of this example with comments and more detailed explanation is available at [GitHub](https://github.com/deepnetts/How-to-Get-Started-With-Deep-Learning-in-Java) and [step by step tutorial](https://www.deepnetts.com/blog/using-deep-learning-in-java-for-image-recognition.html).
 

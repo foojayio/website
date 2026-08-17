@@ -32,22 +32,31 @@ Just as with the other Jakarta Specifications, you only need to add the Web API 
 
 When using Maven as a build tool, you need to have the following dependency for your WAR application: (More on this in the [Getting Started with Jakarta EE 9 : Hello World](https://blog.payara.fish/getting-started-with-jakarta-ee-9-hello-world) article).
 
-<pre class="EnlighterJSRAW" data-enlighter-language="xml" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&lt;dependency&gt;
-   &lt;groupId&gt;jakarta.platform&lt;/groupId&gt;
-   &lt;artifactId&gt;jakarta.jakartaee-web-api&lt;/artifactId&gt;
-   &lt;version&gt;9.0.0&lt;/version&gt;
-   &lt;scope&gt;provided&lt;/scope&gt;
-&lt;/dependency&gt;</pre>
+```xml
+<dependency>
+   <groupId>jakarta.platform</groupId>
+   <artifactId>jakarta.jakartaee-web-api</artifactId>
+   <version>9.0.0</version>
+   <scope>provided</scope>
+</dependency>
+```
+
 
 and when you are using Gradle, you need to following line in the *build.gradle* file:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">providedCompile 'jakarta.platform:jakarta.jakartaee-web-api:9.0.0'</pre>
+```
+providedCompile 'jakarta.platform:jakarta.jakartaee-web-api:9.0.0'
+```
+
 
 There are several configuration options possible to configure the Jakarta REST framework, but most of the time, you just need to define the part of the URL that will trigger the processing by the REST engine. This can be done by defining the following Java class in your project:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@ApplicationPath("/api")
+```java
+@ApplicationPath("/api")
 public class DemoApplication extends Application {
-}</pre>
+}
+```
+
 
 The class extends jakarta.ws.rs.core.Application which is the base class for the configuration, and the annotation, jakarta.ws.rs.ApplicationPath, identifies the application path that serves as the base URI for all resource URIs. In the first example, it will become clear where this */api* part of the URL fits in the final URL of the endpoint.
 
@@ -58,7 +67,8 @@ Now that we have the application and Jakarta REST configuration in place, let us
 
 A Java class like this is enough to create a REST resource:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@Path("/hello")
+```java
+@Path("/hello")
 public class HelloResource {
 
    @GET
@@ -66,7 +76,8 @@ public class HelloResource {
       return "Hello World";
    }
 }
-</pre>
+```
+
 
 The jakarta.ws.rs.Path annotation defines the link between the URL entered by the user and the Java class that is responsible for handling that request. The jakarta.ws.rs.GET annotation indicates that we need to call our endpoint using the HTTP Get method. The return of the method, the *"Hello World"* String, will be the content of the response to the client.
 
@@ -91,7 +102,10 @@ Line 10 : We received a response with status 200 (OK) indicating the successful 
 
 Line 13 : The body of the response is of plain text type. We didn't specify this explicitly but it was derived from the fact that our sayHello method returned a String. The best practice is that you always specify the format of the response through the jakarta.ws.rs.Produces annotation.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@Produces(MediaType.TEXT_PLAIN)</pre>
+```
+@Produces(MediaType.TEXT_PLAIN)
+```
+
 
 Reading URL Information {#h2-2-reading-url-information}
 -------------------------------------------------------
@@ -100,12 +114,15 @@ It's important that you can determine parts of the specified URL sent by the cli
 
 To demonstrate these, we can add the following lines to the *HelloResource* Java class.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@GET
+```java
+@GET
 @Produces(MediaType.TEXT_PLAIN)
 @Path("/{name}")
 public String doGreeting(@PathParam("name") String someValue, @QueryParam("language") String language) {
    return "Hello " + someValue + " with language " + language;
-}</pre>
+}
+```
+
 
 You can see that we also specify a @Path annotation and that it has curly braces. The curly braces indicate that it is a placeholder and that the actual value specified in the URL is transferred to the variable 'name'. The variable name is also specified in the jakarta.ws.rs.PathParam annotation. This way, the Jakarta REST engine knows that the matching URL part needs to be used as the value for the method parameter *someValue* . The second method parameter has another annotation, jakarta.ws.rs.QueryParam, and as you can guess, it will transfer the value of the query parameter *language* to this parameter.
 
@@ -118,17 +135,21 @@ In the previous examples, we always used the content type *text/plain* as the re
 
 Suppose we have a Java class that holds information about a Person:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public class Person {
+```java
+public class Person {
 private String name;
 private int age;
 
 // Jakarta JSON requires a no-argument constructor.
 // Setters and Setters omitted
-}</pre>
+}
+```
+
 
 And we can define the following Java resource Class that returns such a value.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@Path("/person")
+```java
+@Path("/person")
 public class PersonResource {
 
    @GET
@@ -136,30 +157,35 @@ public class PersonResource {
    public Person getPerson() {
       return // some way to return a Person instance
    }
-}</pre>
+}
+```
+
 
 How you retrieve the Person instance that needs to be returned is not important here. In one of the next blogs in the "Getting Started with Jakarta EE 9", we will indicate how you can inject a service and retrieve it from the Database, for example.
 
 For this example, only the @Produces value is important here as we explicitly indicate that the response should contain a JSON payload. This is enough for the Jakarta REST system to know that it must convert the Person instance to JSON using the built-in support defined within Jakarta. Calling this endpoint will result in the following response:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">curl -v http://localhost:8080/rest/api/person
+```
+curl -v http://localhost:8080/rest/api/person
 * Trying ::1...
 * TCP_NODELAY set
 * Connected to localhost (::1) port 8080 (#0)
-&gt; GET /rest/api/person HTTP/1.1
-&gt; Host: localhost:8080
-&gt; User-Agent: curl/7.64.1
-&gt; Accept: */*
-&gt; 
-&lt; HTTP/1.1 200 OK
-&lt; Server: Payara Server 5.2021.1 #badassfish
-&lt; X-Powered-By: Servlet/4.0 JSP/2.3 (Payara Server 5.2021.1 #badassfish Java/Azul Systems, Inc./11)
-&lt; Content-Type: application/json
-&lt; Content-Length: 24
-&lt; X-Frame-Options: SAMEORIGIN
-&lt; 
+> GET /rest/api/person HTTP/1.1
+> Host: localhost:8080
+> User-Agent: curl/7.64.1
+> Accept: */*
+> 
+< HTTP/1.1 200 OK
+< Server: Payara Server 5.2021.1 #badassfish
+< X-Powered-By: Servlet/4.0 JSP/2.3 (Payara Server 5.2021.1 #badassfish Java/Azul Systems, Inc./11)
+< Content-Type: application/json
+< Content-Length: 24
+< X-Frame-Options: SAMEORIGIN
+< 
 * Connection #0 to host localhost left intact
-{"age":42,"name":"Rudy"}* Closing connection 0</pre>
+{"age":42,"name":"Rudy"}* Closing connection 0
+```
+
 
 You can see that we do not need to configure the Person class for JSON serialization. By default, each property is inspected and added to the output. It also uses the type of the property to determine the optimal encoding so that the integer value is written without quotes in this example.
 
@@ -172,12 +198,15 @@ Sending Data {#h2-4-sending-data}
 
 Now that we have explored the possibilities of retrieving data from the server, we want to send information to be processed. Within the *PersonResource* Java Class we can create the following method:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@POST
+```java
+@POST
 @Produces(MediaType.TEXT_PLAIN)
 @Consumes(MediaType.APPLICATION_JSON)
 public String handlePersonRequest(Person person) {
    return person.toString();
-}</pre>
+}
+```
+
 
 We have to indicate the HTTP method we are using and here we have specified the jakarta.ws.rs.POST annotation. When the Jakarta REST system receives a request matching that HTTP Method on the URL specified by the @Path, it will transfer the control to this method.
 
@@ -194,7 +223,8 @@ If we return null in any of the previous examples (instead of an actual String o
 
 The following example describes how you can do this.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@Path("/evenValue")
+```java
+@Path("/evenValue")
 public class ResponseResource {
 
    @GET
@@ -207,7 +237,9 @@ public class ResponseResource {
          return Response.notAcceptable(Collections.emptyList()).build();
       }
    }
-}</pre>
+}
+```
+
 
 One of the other blogs in this series will go into detail about the validation specification within Jakarta EE, but there are many situations you perform some programmatic changes and want to return a status 406, not acceptable, to indicate the request was invalid.
 

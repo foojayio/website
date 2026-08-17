@@ -44,7 +44,8 @@ This release demonstrates a dramatic shift toward functional programming approac
 
 Although JDK 25 may be perceived as a release that simplifies the execution of the `main()` method and related classes without compilation requirements, its impact extends far beyond these surface-level improvements due to the comprehensive collection of included JEPs (see JEPs LTS journey bellow).
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">public interface Vehicle {
+```
+public interface Vehicle {
     void move();
     default void printStatus(){
         checkMoving();
@@ -58,16 +59,18 @@ void main(){
     var vehicle1 = new CommonVehicle("super_engine");
     var vehicle2 = new OtherVehicle(42);
     var vehicle3 = new UnknownVehicle();
-    List&lt;Vehicle&gt; vehicles = Arrays.asList(vehicle1, vehicle2, vehicle3);
+    List<Vehicle> vehicles = Arrays.asList(vehicle1, vehicle2, vehicle3);
 
-    vehicles.forEach(v -&gt; {
+    vehicles.forEach(v -> {
         switch (v){
-            case OtherVehicle(Integer horsePowers) -&gt; System.out.println("OtherVehicle with horsePowers:" + horsePowers);
-            case CommonVehicle(String engine) -&gt; System.out.println("CommonVehicle with engine:"+ engine);
-            default -&gt; System.out.println("not implemented, v:" + v);
+            case OtherVehicle(Integer horsePowers) -> System.out.println("OtherVehicle with horsePowers:" + horsePowers);
+            case CommonVehicle(String engine) -> System.out.println("CommonVehicle with engine:"+ engine);
+            default -> System.out.println("not implemented, v:" + v);
         }
     });
-}</pre>
+}
+```
+
 
 I have updated the source code for my book "[Practical Design Patterns for Java Developers \[7\]](https://github.com/mirage22/Practical-Design-Patterns-for-Java-Developers/tree/main-update-j25 "Practical Design Patterns for Java Developers [7]")" to JDK 25, maintaining these examples in a separate branch to ensure the code samples referenced in the book remain accessible.
 

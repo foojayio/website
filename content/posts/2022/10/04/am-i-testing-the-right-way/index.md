@@ -86,7 +86,10 @@ Before we take a look at both approaches, let us introduce our running example: 
 
 The calculator has a well defined public interface with only one method:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public double calculate(final Expression calculationExpression);</pre>
+```java
+public double calculate(final Expression calculationExpression);
+```
+
 
 The calculator gets a mathematical expression as input and returns the result of evaluating the expression.  
 
@@ -94,7 +97,8 @@ The input represents a tree of operations. Each node is one of the supported ope
 
 For example the expression `(10+20)-(3+4)` is represented as the `Expression` tree below and the `calculate` method should yield the result `23`.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">             ┌─┐        
+```
+             ┌─┐        
              │-│        
              └─┘         
         ┌─────┴─────┐    
@@ -106,11 +110,14 @@ For example the expression `(10+20)-(3+4)` is represented as the `Expression` tr
      ▼     ▼      ▼    ▼ 
     ┌──┐  ┌──┐   ┌─┐  ┌─┐
     │10│  │20│   │3│  │4│
-    └──┘  └──┘   └─┘  └─┘</pre>
+    └──┘  └──┘   └─┘  └─┘
+```
+
 
 Put in code, this calculation would look like this:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public class Main {
+```java
+public class Main {
     public static void main(final String[] args) {
 
         final var calculator = new Calculator();
@@ -124,7 +131,9 @@ Put in code, this calculation would look like this:
 
         System.out.println(result);
     }
-}</pre>
+}
+```
+
 
 ### Implementation {#h3-4-implementation}
 
@@ -134,26 +143,36 @@ There are two central interfaces: `Expression` and `ExpressionHandler`. Each ope
 
 **The Expression interface:**
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public sealed interface Expression
+```java
+public sealed interface Expression
     permits Plus, Minus, Multiply, Divide, Value {
-}</pre>
+}
+```
+
 
 **The ExpressionHandler interface:**
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public sealed interface ExpressionHandler&lt; T extends Expression &gt;
+```java
+public sealed interface ExpressionHandler< T extends Expression >
     permits PlusHandler, MinusHandler, MultiplyHandler, DivideHandler, ValueHandler {
 
     double evaluate( Calculator calculator, T expression );
-}</pre>
+}
+```
+
 
 The Divide expression for example is a record with a dividend and divisor implementing the Expression interface.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public record Divide(Expression dividend, Expression divisor) implements Expression {
-}</pre>
+```java
+public record Divide(Expression dividend, Expression divisor) implements Expression {
+}
+```
+
 
 Accordingly, there is also a DivideHandler implementing the ExpressionHandler interface.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">final class DivideHandler implements ExpressionHandler&lt;Divide&gt; {
+```java
+final class DivideHandler implements ExpressionHandler<Divide> {
     @Override
     public double evaluate(final Calculator calculator, final Divide expression) {
 
@@ -164,7 +183,9 @@ Accordingly, there is also a DivideHandler implementing the ExpressionHandler in
 
         return calculator.calculate(expression.dividend()) / divisor;
     }
-}</pre>
+}
+```
+
 
 As the operands of the Divide expression are themselves expressions, we simply utilize a `Calculator` instance to recursively calculate the result of the operand expressions. Finally, the Divide handler performs the actual division.
 
@@ -174,17 +195,23 @@ But when come the numbers in play? Meaning, we probably need numbers to perform 
 
 Here the Value expression comes to the rescue. It's a constant expression and represents a single number.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public record Value(double value) implements Expression {}</pre>
+```java
+public record Value(double value) implements Expression {}
+```
+
 
 The respective expression handler simply returns the value of the Value expression.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">final class ValueHandler implements ExpressionHandler&lt;Value&gt; {
+```
+final class ValueHandler implements ExpressionHandler<Value> {
     @Override
     public double evaluate(final Calculator ignored, final Value expression) {
 
         return expression.value();
     }
-}</pre>
+}
+```
+
 
 As mentioned earlier, the leaves of the expression tree must be Value expressions in order for the mathematical expression to make sense.
 
@@ -194,11 +221,14 @@ Now, if the expression handlers do all the heavy lifting, what does the Calculat
 
 Well, it picks the correct handler for the given expression and executes it!
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public double calculate(final Expression calculationExpression) {
+```java
+public double calculate(final Expression calculationExpression) {
 
     final var expressionHandler = expressionHandlerProvider.provider(calculationExpression);
     return expressionHandler.evaluate(this, calculationExpression);
-}</pre>
+}
+```
+
 
 Now you might wonder where the `expressionHandlerProvider` comes from?
 
@@ -210,7 +240,8 @@ It just needs to compose the resulting expression handler with the given express
 
 For all the curious people, here is the implementation of the `ExpressionHandlerProvider`:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public class ExpressionHandlerProvider {
+```java
+public class ExpressionHandlerProvider {
 
     private static final DivideHandler DIVIDE_HANDLER = new DivideHandler();
     private static final PlusHandler PLUS_HANDLER = new PlusHandler();
@@ -218,18 +249,20 @@ For all the curious people, here is the implementation of the `ExpressionHandler
     private static final MultiplyHandler MULTIPLY_HANDLER = new MultiplyHandler();
     private static final ValueHandler VALUE_HANDLER = new ValueHandler();
 
-    public &lt;T extends Expression&gt; ExpressionHandler&lt;T&gt; provider(final T expression) {
+    public <T extends Expression> ExpressionHandler<T> provider(final T expression) {
 
         return switch(expression) {
-            case Plus plus -&gt; (ExpressionHandler&lt;T&gt;)PLUS_HANDLER;
-            case Minus minus -&gt; (ExpressionHandler&lt;T&gt;)MINUS_HANDLER;
-            case Multiply multiply -&gt; (ExpressionHandler&lt;T&gt;)MULTIPLY_HANDLER;
-            case Divide divide -&gt; (ExpressionHandler&lt;T&gt;)DIVIDE_HANDLER;
-            case Value value -&gt; (ExpressionHandler&lt;T&gt;)VALUE_HANDLER;
-            default -&gt; throw new IllegalArgumentException("Unknown expression: " + expression.getClass());
+            case Plus plus -> (ExpressionHandler<T>)PLUS_HANDLER;
+            case Minus minus -> (ExpressionHandler<T>)MINUS_HANDLER;
+            case Multiply multiply -> (ExpressionHandler<T>)MULTIPLY_HANDLER;
+            case Divide divide -> (ExpressionHandler<T>)DIVIDE_HANDLER;
+            case Value value -> (ExpressionHandler<T>)VALUE_HANDLER;
+            default -> throw new IllegalArgumentException("Unknown expression: " + expression.getClass());
         };
     }
-}</pre>
+}
+```
+
 
 As the handlers are stateless, the factory uses constants for the expression handlers.
 
@@ -254,7 +287,10 @@ We mentioned that every `Expression` has an equivalent `ExpressionHandler` imple
 
 The interface of the `PlusHandler` expression for example looks like this:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public double evaluate(final Calculator calculator, final Plus expression)</pre>
+```java
+public double evaluate(final Calculator calculator, final Plus expression)
+```
+
 
 As we can see, we have two inputs, the calculator and the `Plus` expression. We know that the plus expression itself consists of two child expressions. One expression for the augend and one that represents the addend.
 
@@ -266,7 +302,8 @@ With this in mind, we can start to implement the tests for the plus handler.
 
 Lets have a look at the final test code and go through it step by step:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">class PlusHandlerTest {
+```java
+class PlusHandlerTest {
     ➀private final PlusHandler plusHandler = new PlusHandler();
     private Calculator calculator;
 
@@ -294,7 +331,9 @@ Lets have a look at the final test code and go through it step by step:
 
         ➆assertThat(result).isCloseTo(expectedResult, Offset.offset(.1));
     }
-}</pre>
+}
+```
+
 
 ➀ - Our testee is the PlusHandler so we create an instance of the plus handler as a field variable. The first input of the plus handler is the calculator, we define it as a field variable as well.
 
@@ -322,7 +361,10 @@ Next, let us focus on the Calculator class itself.
 
 Again, let us at first look at the interface of the calculator.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public double calculate(final Expression calculationExpression)</pre>
+```java
+public double calculate(final Expression calculationExpression)
+```
+
 
 The calculate method has one input, the expression to be calculated. Furthermore, the Calculator has one collaborator, the expression handler factory.
 
@@ -332,7 +374,8 @@ With these facts at hand, we can implement a respective test.
 
 Again, here is the final test implementation, we will go through it step by step in a minute:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">class CalculatorTest {
+```java
+class CalculatorTest {
     ➀private Calculator calculator;
     private ExpressionHandlerProvider expressionHandlerProvider;
 
@@ -360,7 +403,9 @@ Again, here is the final test implementation, we will go through it step by step
 
         ➆assertThat(result).isEqualTo(expectedResult);
     }
-}</pre>
+}
+```
+
 
 At first, you might notice that there is only one test for the calculator (side note: There should of course be some `null` tests, but we omitted those for brevity and to focus on points we want to emphasize). Because we tested all the other collaborators of the library separately, we do not need to test these again. Thus, as the calculator only glues our collaborators together. We only need to test if this composition is done the right way.
 
@@ -390,11 +435,12 @@ There is one last class to test. The expression handler provider. This test is p
 
 Let us look at the implementation of this test:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">class ExpressionHandlerProviderTest {
+```java
+class ExpressionHandlerProviderTest {
     private final ExpressionHandlerProvider expressionHandlerProvider =
         new ExpressionHandlerProvider();
 
-    public static Stream&lt;Arguments&gt; expressionHandlerFactoryTestData() {
+    public static Stream<Arguments> expressionHandlerFactoryTestData() {
 
         return Stream.of(
             Arguments.of(new Plus(v(), v()), PlusHandler.class),
@@ -410,8 +456,8 @@ Let us look at the implementation of this test:
 
     ➀@ParameterizedTest
     @MethodSource("expressionHandlerFactoryTestData")
-    &lt;T extends Expression&gt; void test(
-        final T expression, final Class&lt;ExpressionHandler&lt;T&gt;&gt; expressionHandlerClass) {
+    <T extends Expression> void test(
+        final T expression, final Class<ExpressionHandler<T>> expressionHandlerClass) {
 
         final var expressionHandler = expressionHandlerProvider.provider(expression);
         assertThat(expressionHandler).isInstanceOf(expressionHandlerClass);
@@ -421,10 +467,12 @@ Let us look at the implementation of this test:
     void test_throws_exception_on_unknown_expression() {
 
         final Expression expression = mock(Expression.class);
-        assertThatThrownBy(() -&gt; expressionHandlerProvider.provider(expression))
+        assertThatThrownBy(() -> expressionHandlerProvider.provider(expression))
             .isInstanceOf(IllegalArgumentException.class);
     }
-}</pre>
+}
+```
+
 
 We have two tests here.  
 
@@ -453,13 +501,14 @@ Returning to our running example, there we would consider the whole calculator m
 
 How would the tests for our calculator look like?
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">class TestCalculator {
+```java
+class TestCalculator {
 
     private static final double OFFSET = 0.1;
 
     private final Calculator calculator = new Calculator(new ExpressionHandlerFactory());
 
-    public static Stream&lt;Arguments&gt; source() {
+    public static Stream<Arguments> source() {
         return Stream.of(
             Arguments.of(new Plus(v(2d), v(3d)), 5d),
             Arguments.of(new Plus(v(-3d), v(1d)), -2d),
@@ -499,7 +548,7 @@ How would the tests for our calculator look like?
     @Test
     void testDivisionByZero() {
 
-        assertThatThrownBy(() -&gt; calculator.calculate(new Divide(v(1), v(0))))
+        assertThatThrownBy(() -> calculator.calculate(new Divide(v(1), v(0))))
             .isInstanceOf(ArithmeticException.class)
             .hasMessage("Division by zero");
     }
@@ -508,7 +557,9 @@ How would the tests for our calculator look like?
 
         return new Value(v);
     }
-}</pre>
+}
+```
+
 
 In this case we have a module without any external dependencies that represents a function. The module is a computation that, given an input, will produce an output without any side effects. So there is no need for any test doubles.
 

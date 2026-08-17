@@ -34,7 +34,8 @@ BoxLang AI 3.2.0 is here, and it's a landmark release. We're shipping five major
 
 You can now generate images directly from BoxLang using any provider that supports text-to-image generation. The aiImage() BIF follows the same fluent, chainable philosophy as the rest of bx-ai then act on the result with expressive method calls.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">// Generate and save in one fluent chain
+```java
+// Generate and save in one fluent chain
 aiImage( "A futuristic cityscape at sunset" )
     .saveToFile( "/images/cityscape.png" )
 
@@ -47,7 +48,8 @@ response = aiImage(
 
 // Embed directly in HTML output
 dataURI = response.toDataURI()
-</pre>
+```
+
 
 The returned AiImageResponse object gives you everything you need: hasImages(), getCount(), getFirstURL(), getFirstBase64(), saveToFile(), saveAllToDirectory(), toDataURI(), getMimeType(), and toStruct().
 
@@ -62,8 +64,10 @@ Supported providers out of the box:
 
 A generateImage@bxai agent tool is auto-registered in the global tool registry at module startup, so your agents can generate images without any manual wiring:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">agent = aiAgent( tools: [ "generateImage@bxai" ] )
-</pre>
+```java
+agent = aiAgent( tools: [ "generateImage@bxai" ] )
+```
+
 
 📚 **[Image Generation Docs](https://ai.ortusbooks.com/main-components/image-generation "Image Generation Docs")**
 
@@ -71,13 +75,15 @@ A generateImage@bxai agent tool is auto-registered in the global tool registry a
 
 BoxLang AI now ships a unified web search system with provider abstraction and normalized results. Every provider returns the same fields --- title, url, snippet, publishedDate, domain, score, thumbnail, language --- so you can swap providers without touching your code.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">// Synchronous search
+```java
+// Synchronous search
 results = aiWebSearch( "latest BoxLang AI updates", { provider: "brave", maxResults: 8 } )
 
 // Async — returns a BoxFuture
 future = aiWebSearchAsync( "BoxLang release highlights", { provider: "tavily" } )
 results = future.get()
-</pre>
+```
+
 
 Supported providers:
 
@@ -91,13 +97,15 @@ Supported providers:
 
 The webSearch@bxai tool is auto-registered globally, so any agent can search the web immediately:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">agent = aiAgent(
+```java
+agent = aiAgent(
     name: "ResearchAgent",
     tools: [ "webSearch@bxai" ]
 )
 
 response = agent.run( "Find and summarize recent BoxLang AI release highlights" )
-</pre>
+```
+
 
 📚 **[Web Search Docs](https://ai.ortusbooks.com/main-components/web-search "Web Search Docs")**
 
@@ -107,7 +115,8 @@ aiSpeak(), aiTranscribe(), and aiTranslate() now support a full fluent builder A
 
 aiSpeak()
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">// Traditional syntax — still works
+```java
+// Traditional syntax — still works
 audio = aiSpeak( "Hello!", { voice: "nova" }, { provider: "openai" } )
 
 // Fluent builder — expressive and self-documenting
@@ -131,13 +140,15 @@ audio = aiSpeak()
     .asWav()
     .outputFile( "/audio/alert.wav" )
     .speak()
-</pre>
+```
+
 
 Key builder methods: .of(), .voice(), .male() / .female(), .speed(), .instructions(), .outputFile(), .asMP3() / .asWav() / .asFlac() / .asOpus() / .asPCM(), .provider(), .speak().
 
 aiTranscribe()
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">// From file
+```java
+// From file
 text = aiTranscribe()
     .file( "/audio/meeting.mp3" )
     .withWordTimestamps()
@@ -154,17 +165,20 @@ text = aiTranscribe()
 english = aiTranscribe()
     .file( "/audio/french.mp3" )
     .translate()
-</pre>
+```
+
 
 Key builder methods: .file(), .url(), .data(), .language(), .withWordTimestamps(), .withSegmentTimestamps(), .diarize(), .asJSON() / .asText() / .asVerboseJSON() / .asSRT() / .asVTT(), .transcribe(), .translate().
 
 aiTranslate()
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">english = aiTranslate()
+```java
+english = aiTranslate()
     .file( "/audio/german.mp3" )
     .asText()
     .translate()
-</pre>
+```
+
 
 📚 **[Audio Docs](https://ai.ortusbooks.com/main-components/audio "Audio Docs")**
 
@@ -172,7 +186,8 @@ aiTranslate()
 
 3.2.0 introduces the AIAgentRegistry --- a global singleton that gives you centralized discoverability, observability, and lifecycle management for all agents running in your BoxLang application.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">// Auto-register at creation time
+```java
+// Auto-register at creation time
 agent = aiAgent(
     name: "support-agent",
     description: "Customer support agent",
@@ -196,7 +211,8 @@ resolved = aiAgentRegistry().resolveAgents( [
 // Clean up
 aiAgentRegistry().unregister( "support-agent@my-app" )
 aiAgentRegistry().unregisterByModule( "my-app" )
-</pre>
+```
+
 
 Module Authors: First-Class Agent \& Tool Registration 🎯  
 
@@ -216,7 +232,8 @@ Two new interception points fire on registry changes: onAIAgentRegistryRegister 
 
 MCPServer now supports pausing and resuming without tearing down configuration or losing registered tools. Ideal for maintenance windows, graceful degradation, or controlled rollouts.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">server = MCPServer( "my-tools", "Provides custom tools" )
+```java
+server = MCPServer( "my-tools", "Provides custom tools" )
     .registerTool( myTool )
 
 server.pause()
@@ -226,7 +243,8 @@ if ( server.isPaused() ) {
 }
 
 server.resume()
-</pre>
+```
+
 
 pause() --- fires onMCPServerPause; all non-ping requests receive error code -32005  
 
@@ -260,7 +278,8 @@ Client Stats --- MCPClient
 
 MCPClient gains full internal usage and performance tracking:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">client = MCP( "http://localhost:3000" )
+```java
+client = MCP( "http://localhost:3000" )
 
 tools  = client.listTools()
 result = client.callTool( "search", { query: "BoxLang" } )
@@ -271,7 +290,8 @@ summary = client.getSummary() // totalCalls, successRate, avgResponseTime
 
 // Reset when needed
 client.resetStats()
-</pre>
+```
+
 
 Three new interception points cover the full client lifecycle: onMCPClientRequest, onMCPClientResponse, onMCPClientError.
 
@@ -279,12 +299,13 @@ Three new interception points cover the full client lifecycle: onMCPClientReques
 
 Tool schemas in bx-ai are now generated directly from callable parameter metadata, so LLMs finally receive accurate JSON Schema types for every argument instead of a flat bag of strings. ClosureTool.getArgumentsSchema() maps BoxLang types naturally --- numeric, integer, float, and double become "number", boolean becomes "boolean", array becomes "array" with "items": {}, and struct becomes "object" --- meaning LLMs can send native JSON values for non-string arguments and tools behave exactly as their signatures declare. On the output side, BaseTool.invoke() continues to serialize results consistently for provider compatibility, converting simple values via toString() and complex values via JSON serialization, keeping the tool contract clean in both directions. 🎯
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">// Tool with numeric and boolean arguments
+```java
+// Tool with numeric and boolean arguments
 // LLM sends { "quantity": 3, "applyDiscount": true } — no casting needed
 calculateTotal = aiTool(
     name: "calculateTotal",
     description: "Calculate order total with optional discount",
-    tool: ( numeric price, numeric quantity, boolean applyDiscount = false ) -&gt; {
+    tool: ( numeric price, numeric quantity, boolean applyDiscount = false ) -> {
         total = price * quantity
         if ( applyDiscount ) total *= 0.9
         return { summary: "Order total calculated", total: total }
@@ -296,7 +317,7 @@ calculateTotal = aiTool(
 tagContent = aiTool(
     name: "tagContent",
     description: "Apply a list of tags to a content item",
-    tool: ( string contentId, array tags ) -&gt; {
+    tool: ( string contentId, array tags ) -> {
         // tags arrives as a real BoxLang array
         return {
             summary : "Tags applied to #contentId#",
@@ -311,7 +332,7 @@ tagContent = aiTool(
 queryUsers = aiTool(
     name: "queryUsers",
     description: "Query users by filter criteria",
-    tool: ( struct filter, numeric limit = 10 ) -&gt; {
+    tool: ( struct filter, numeric limit = 10 ) -> {
         results = userService.query( filter, limit )
         return {
             summary : "Found #results.len()# users",
@@ -324,7 +345,8 @@ queryUsers = aiTool(
 agent = aiAgent(
     tools: [ calculateTotal, tagContent, queryUsers ]
 )
-</pre>
+```
+
 
 🐛 Bug Fix --- ClosureTool.doInvoke() JSON Struct Handling  
 
@@ -334,7 +356,8 @@ MCP clients that send JSON fields as real objects or arrays (rather than pre-str
 
 New image Settings Block
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">{
+```java
+{
   "modules": {
     "bxai": {
       "settings": {
@@ -351,7 +374,8 @@ New image Settings Block
     }
   }
 }
-</pre>
+```
+
 
 New Interception Points  
 
@@ -373,12 +397,14 @@ New Interception Points
 
 🚀 Upgrade Now
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java"># CommandBox
+```java
+# CommandBox
 box install bx-ai
 
 # OS
 install-bx-module bx-ai
-</pre>
+```
+
 
 📚 Full Docs: ai.ortusbooks.com 💬 Community: community.ortussolutions.com ⭐ GitHub: github.com/ortus-boxlang/bx-ai
 

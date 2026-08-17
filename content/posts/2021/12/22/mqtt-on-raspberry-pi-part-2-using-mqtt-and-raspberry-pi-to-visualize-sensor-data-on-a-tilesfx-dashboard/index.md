@@ -64,33 +64,36 @@ Let's create a JavaFX application to visualize all the sensor values we pushed t
 
 This project requires a few different dependencies compared to the message sender. Of course, we use the HiveMQ MQTT client again. But for the graphical user interface parts, we need some JavaFX libraries (only controls are used in the application, but others are referenced by TilesFX) and the TilesFX library itself.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&lt;dependency&gt;
-    &lt;groupId&gt;com.hivemq&lt;/groupId&gt;
-    &lt;artifactId&gt;hivemq-mqtt-client&lt;/artifactId&gt;
-    &lt;version&gt;${hivemq.version}&lt;/version&gt;
-&lt;/dependency&gt;
+```
+<dependency>
+    <groupId>com.hivemq</groupId>
+    <artifactId>hivemq-mqtt-client</artifactId>
+    <version>${hivemq.version}</version>
+</dependency>
 
-&lt;dependency&gt;
-    &lt;groupId&gt;org.openjfx&lt;/groupId&gt;
-    &lt;artifactId&gt;javafx-controls&lt;/artifactId&gt;
-    &lt;version&gt;${javafx.version}&lt;/version&gt;
-&lt;/dependency&gt;
-&lt;dependency&gt;
-    &lt;groupId&gt;org.openjfx&lt;/groupId&gt;
-    &lt;artifactId&gt;javafx-media&lt;/artifactId&gt;
-    &lt;version&gt;${javafx.version}&lt;/version&gt;
-&lt;/dependency&gt;
-&lt;dependency&gt;
-    &lt;groupId&gt;org.openjfx&lt;/groupId&gt;
-    &lt;artifactId&gt;javafx-web&lt;/artifactId&gt;
-    &lt;version&gt;${javafx.version}&lt;/version&gt;
-&lt;/dependency&gt;
+<dependency>
+    <groupId>org.openjfx</groupId>
+    <artifactId>javafx-controls</artifactId>
+    <version>${javafx.version}</version>
+</dependency>
+<dependency>
+    <groupId>org.openjfx</groupId>
+    <artifactId>javafx-media</artifactId>
+    <version>${javafx.version}</version>
+</dependency>
+<dependency>
+    <groupId>org.openjfx</groupId>
+    <artifactId>javafx-web</artifactId>
+    <version>${javafx.version}</version>
+</dependency>
 
-&lt;dependency&gt;
-    &lt;groupId&gt;eu.hansolo&lt;/groupId&gt;
-    &lt;artifactId&gt;tilesfx&lt;/artifactId&gt;
-    &lt;version&gt;${tilesfx.version}&lt;/version&gt;
-&lt;/dependency&gt;</pre>
+<dependency>
+    <groupId>eu.hansolo</groupId>
+    <artifactId>tilesfx</artifactId>
+    <version>${tilesfx.version}</version>
+</dependency>
+```
+
 
 ### Full code on GitHub {#h3-5-full-code-on-github}
 
@@ -102,7 +105,8 @@ We need to extend from JavaFX Application and in this case, we configure the Hiv
 
 For easy maintenance of the topics, these are also defined here.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public class HiveMqClient extends Application {
+```
+public class HiveMqClient extends Application {
 
     private static final Logger logger = LogManager.getLogger(HiveMqClient.class.getName());
 
@@ -135,7 +139,7 @@ For easy maintenance of the topics, these are also defined here.
                 .password(HIVEMQ_PASSWORD.getBytes())
                 .applySimpleAuth()
                 .send()
-                .whenComplete((connAck, throwable) -&gt; {
+                .whenComplete((connAck, throwable) -> {
                     if (throwable != null) {
                         logger.error("Could not connect to HiveMQ: {}", throwable.getMessage());
                     } else {
@@ -151,13 +155,16 @@ For easy maintenance of the topics, these are also defined here.
     public static void main(String[] args) {
         launch();
     }
-}</pre>
+}
+```
+
 
 #### Visualizing the data in a dashboard
 
 In the DashboardView all the tiles are defined we want to add to our screen. Please have a look at the full sources for all the tiles. Here you find the code of two of them:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public class DashboardView extends FlowGridPane {
+```
+public class DashboardView extends FlowGridPane {
 
     private static final Logger logger = LogManager.getLogger(DashboardView.class.getName());
 
@@ -208,7 +215,9 @@ In the DashboardView all the tiles are defined we want to add to our screen. Ple
     }
 
     ...
-}</pre>
+}
+```
+
 
 ##### GaucheTemperature
 
@@ -216,7 +225,8 @@ The temperature is one of the sensor values which is sent with an interval from 
 
 The GaucheTemperature-tile and the other ones we initialized in the constructor, can now be updated with the received data.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">    ...
+```
+    ...
 
         client.toAsync().subscribeWith()
                 .topicFilter(TOPIC_SENSORS)
@@ -238,7 +248,9 @@ The GaucheTemperature-tile and the other ones we initialized in the constructor,
         } catch (JsonProcessingException ex) {
             logger.error("Could not parse the data to JSON: {}", ex.getMessage());
         }
-    }</pre>
+    }
+```
+
 
 ##### SensorSwitchTile
 
@@ -246,7 +258,8 @@ Other data is sent by the publisher when the state of the sensor changes. For in
 
 The SensorSwitchTile contains a SWITCH-tile and its active state is changed according to the value in every received message.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public class SensorSwitchTile extends BaseTile {
+```
+public class SensorSwitchTile extends BaseTile {
 
     private final Tile statusTile;
 
@@ -269,18 +282,21 @@ The SensorSwitchTile contains a SWITCH-tile and its active state is changed acco
         logger.info("Boolean sensor data: {}", sensorData);
         try {
             var sensor = mapper.readValue(sensorData, BooleanValue.class);
-            Platform.runLater(() -&gt; {
+            Platform.runLater(() -> {
                 statusTile.setActive(sensor.getValue());
             });
         } catch (JsonProcessingException ex) {
             logger.error("Could not parse the data to JSON: {}", ex.getMessage());
         }
     }
-}</pre>
+}
+```
+
 
 The subscription to the topic is handled in the BaseTile-class to avoid duplicate code.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public class BaseTile extends Pane {
+```
+public class BaseTile extends Pane {
 
     protected static final Logger logger = LogManager.getLogger(BaseTile.class.getName());
 
@@ -303,7 +319,9 @@ The subscription to the topic is handled in the BaseTile-class to avoid duplicat
     protected void handleMessage(Mqtt5Publish message) {
         logger.warn("Message not handled: {}", message.getPayloadAsBytes());
     }
-}</pre>
+}
+```
+
 
 As you can see, subscribing to a HiveMQ Cloud message only needs a minimal amount of code.
 
@@ -322,29 +340,38 @@ To run this application on a Raspberry Pi 4, I started with a new SD card with t
 
 This is a "minimal" version of the Raspberry Pi OS, and doesn't include Java, but this can be quickly fixed by running `sudo apt install openjdk-11-jdk` in the terminal.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ java -version
+```
+$ java -version
 bash: java: command not found
 $ sudo apt update
 $ sudo apt install openjdk-11-jdk
 $ java -version
 openjdk version "11.0.13" 2021-10-19
 OpenJDK Runtime Environment (build 11.0.13+8-post-Raspbian-1deb11u1)
-OpenJDK Server VM (build 11.0.13+8-post-Raspbian-1deb11u1, mixed mode)</pre>
+OpenJDK Server VM (build 11.0.13+8-post-Raspbian-1deb11u1, mixed mode)
+```
+
 
 Nice! Now we can already run Java-code on our Raspberry Pi. But for JavaFX we need the runtime which is compiled specifically for the Raspberry Pi. Gluon provides these versions via [their website gluonhq.com/products/javafx](https://gluonhq.com/products/javafx/). We only need to download a file, unzip it, and put in a place which we will reference when we start the application.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ wget -O openjfx.zip https://gluonhq.com/download/javafx-17-ea-sdk-linux-arm32/
+```
+$ wget -O openjfx.zip https://gluonhq.com/download/javafx-17-ea-sdk-linux-arm32/
 $ unzip openjfx.zip
-$ sudo mv javafx-sdk-17/ /opt/javafx-sdk-17/</pre>
+$ sudo mv javafx-sdk-17/ /opt/javafx-sdk-17/
+```
+
 
 As this dashboard application is a Maven project, we still need to install it, after which we can get the full project and build it on the Raspberry Pi. Follow these steps:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ sudo apt install maven
+```
+$ sudo apt install maven
 $ git clone https://github.com/FDelporte/HiveMQ-examples.git
 $ cd HiveMQ-examples/javafx-ui-hivemq
 $ mvn package
 $ cd target/distribution
-$ bash run.sh</pre>
+$ bash run.sh
+```
+
 
 The `run.sh` script combines the compiled application jars, with the platform-specific JavaFX runtime and starts the application.
 
@@ -357,6 +384,6 @@ By using JavaFX, you can quickly develop beautiful user interfaces, and combined
 
 By running this application on the Raspberry Pi, you can have an always-on dashboard screen for a very low price.
 
-*** ** * ** ***
+
 
 **This blog post series has been written on request of HiveMQ and was originally* published on the [HiveMQ Blog](https://www.hivemq.com/blog/mqtt-raspberrypi-part02-visualizing-sensor-data-on-a-tilesfx-dashboard/).*

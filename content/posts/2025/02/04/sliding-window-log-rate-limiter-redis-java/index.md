@@ -64,7 +64,10 @@ Here's how to do it:
 
 Use a Redis **hash** (HSET) to track each request. The hash key can represent something unique, like an IP address or client ID. Each field in the hash will represent a successful request.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">HSET bucket_name  ""</pre>
+```
+HSET bucket_name  ""
+```
+
 
 The HSET command creates a hash where the key (bucket_name) identifies the client, and the field () marks the exact time of the request. The value related to this field is left empty since only the timestamp matters.
 
@@ -72,7 +75,10 @@ The HSET command creates a hash where the key (bucket_name) identifies the clien
 
 To make sure only requests within a specific time window are kept, we can set a time-to-live for each field when adding it to the hash.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">HEXPIRE bucket_name 3600 FIELDS 1</pre>
+```
+HEXPIRE bucket_name 3600 FIELDS 1
+```
+
 
 This example sets the field to expire after 3600 seconds (1 hour). This way, only recent requests stay in the hash, ensuring the bucket reflects activity within the chosen time window.
 
@@ -80,7 +86,10 @@ This example sets the field to expire after 3600 seconds (1 hour). This way, onl
 
 Use HLEN bucket_name to count the existing fields in the hash. This gives you the number of requests within the time window.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">HLEN bucket_name</pre>
+```
+HLEN bucket_name
+```
+
 
 Compare this count to the allowed limit. **If it's over the limit, reject the new request. Otherwise, add the request to the bucket and allow it.**
 
@@ -97,9 +106,12 @@ Its API is simple and intuitive, which is perfect for implementing our rate limi
 
 Check the latest version [here](https://redis.io/docs/latest/develop/clients/jedis/).
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">redis.clients
+```
+redis.clients
 jedis
-5.2.0</pre>
+5.2.0
+```
+
 
 ### Create a SlidingWindowLogRateLimiter class: {#h3-11-create-a-slidingwindowlogratelimiter-class}
 
@@ -109,7 +121,8 @@ The class will take:
 2. A time window size (e.g., 60 seconds).
 3. The maximum number of allowed requests. 
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">package io.redis;
+```
+package io.redis;
 
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.Transaction;
@@ -127,7 +140,8 @@ private final int limit;
   }
 
 }
-</pre>
+```
+
 
 ### Validate the Requests {#h3-12-validate-the-requests}
 
@@ -137,9 +151,12 @@ The main task of this rate limiter is to determine whether a client's request fa
 
 We'll store each client's request count as a Redis key. To make keys unique for each client, we'll format them like this:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">public boolean isAllowed(String clientId) {
+```
+public boolean isAllowed(String clientId) {
     String key = "rate_limit:" + clientId;
-}</pre>
+}
+```
+
 
 For example, if the client ID is user123, their key would be rate_limit:user123.
 
@@ -149,20 +166,26 @@ To fetch the current count, we'll use the HLEN that will return the number of fi
 
 To determine if the request is allowed to proceed, we'll simply check if the current count is lower than the limit:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">long requestCount = jedis.hlen(key);
-boolean isAllowed = requestCount &lt; limit;</pre>
+```
+long requestCount = jedis.hlen(key);
+boolean isAllowed = requestCount < limit;
+```
+
 
 **Step 3: Update the bucket and return the result**   
 
 If the request is allowed, the next step is to add it to our Redis hash:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">if (isAllowed) {
+```
+if (isAllowed) {
     String fieldKey = UUID.randomUUID().toString();
     Transaction transaction = jedis.multi();
     transaction.hset(key, fieldKey, "");
     transaction.hexpire(key, windowSize, fieldKey);
     var result = transaction.exec();
-}</pre>
+}
+```
+
 
 We'll do this in a **transaction** to ensure that:
 
@@ -177,22 +200,29 @@ Next, the HEXPIRE command sets a time-to-live (TTL) on the field key. This ensur
 
 If the execution of the transaction returns an empty result, it means that something went wrong on Redis and that the operations didn't succeed. For the sake of simplicity, we'll handle such cases by throwing an exception:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">if (result.isEmpty()) {
+```
+if (result.isEmpty()) {
      throw new IllegalStateException("Empty result from Redis transaction");
-}</pre>
+}
+```
+
 
 Finally, the transaction is executed, and the result of isAllowed is returned.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">return isAllowed;</pre>
+```
+return isAllowed;
+```
+
 
 ### Complete Implementation {#h3-13-complete-implementation}
 
 Here's the full code for the SlidingWindowLogRateLimiter class:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">public boolean isAllowed(String clientId) {
+```
+public boolean isAllowed(String clientId) {
     String key = "rate_limit:" + clientId;
     long requestCount = jedis.hlen(key);
-    boolean isAllowed = requestCount &lt; limit;
+    boolean isAllowed = requestCount < limit;
 
     if (isAllowed) {
         String fieldKey = UUID.randomUUID().toString();
@@ -207,7 +237,9 @@ Here's the full code for the SlidingWindowLogRateLimiter class:
     }
 
     return isAllowed;
-}</pre>
+}
+```
+
 
 And we're ready to start testing its behavior!
 
@@ -226,7 +258,8 @@ Let's begin by adding the necessary dependencies to our pom.xml.
 
 Here's what you'll need in your Maven pom.xml file:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">org.junit.jupiter
+```
+org.junit.jupiter
 junit-jupiter-engine
 5.10.0
 test
@@ -239,7 +272,9 @@ test
 org.assertj
 assertj-core
 3.11.1
-test</pre>
+test
+```
+
 
 Once you've added these dependencies, you're ready to start writing your test class.
 
@@ -253,7 +288,8 @@ The first step is to create a test class named SlidingWindowLogRateLimiterTest. 
 
 Here's how the skeleton of our test class looks:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">public class SlidingWindowLogRateLimiterTest {
+```
+public class SlidingWindowLogRateLimiterTest {
     private static final RedisContainer redisContainer = new RedisContainer("redis:latest")
             .withExposedPorts(6379);
     private Jedis jedis;
@@ -263,7 +299,9 @@ Here's how the skeleton of our test class looks:
     static {
         redisContainer.start();
     }
-}</pre>
+}
+```
+
 
 ### Preparing the Environment Before Each Test {#h3-17-preparing-the-environment-before-each-test}
 
@@ -274,11 +312,14 @@ Before running any test, we need to ensure a clean Redis environment. Here's wha
 
 We'll set this up in a method annotated with @BeforeEach, which runs before every test case.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">@BeforeEach
+```
+@BeforeEach
 public void setup() {
     jedis = new Jedis(redisContainer.getHost(), redisContainer.getFirstMappedPort());
     jedis.flushAll();
-}</pre>
+}
+```
+
 
 > FLUSHALL is an actual Redis command that deletes all the keys of all the existing databases. [Read more about it in the official documentation](https://redis.io/docs/latest/commands/flushall/).
 
@@ -286,16 +327,20 @@ public void setup() {
 
 After each test, we need to close the Jedis connection to free up resources. This ensures no lingering connections interfere with subsequent tests.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">@AfterEach
+```
+@AfterEach
 public void tearDown() {
     jedis.close();
-}</pre>
+}
+```
+
 
 ### Full Setup {#h3-19-full-setup}
 
 Here's how the complete test class looks with everything in place:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">public class FixedWindowRateLimiterTest {
+```
+public class FixedWindowRateLimiterTest {
     private static final RedisContainer redisContainer = new RedisContainer("redis:latest")
             .withExposedPorts(6379);
     private Jedis jedis;
@@ -315,7 +360,9 @@ Here's how the complete test class looks with everything in place:
     public void tearDown() {
         jedis.close();
     }
-}</pre>
+}
+```
+
 
 ### Verifying Requests Within the Limit {#h3-20-verifying-requests-within-the-limit}
 
@@ -323,15 +370,18 @@ This test ensures the rate limiter allows requests within the defined limit.
 
 We configure it with a **limit of** **5 requests** and a **10-second window** , then call isAllowed("client-1") **5 times**. Each call should return true, confirming the rate limiter correctly tracks and permits requests under the limit.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">@Test
+```
+@Test
 public void shouldAllowRequestsWithinLimit() {
     rateLimiter = new SlidingWindowLogRateLimiter(jedis, 5, 10);
-    for (int i = 1; i &lt;= 5; i++) {
+    for (int i = 1; i <= 5; i++) {
         assertThat(rateLimiter.isAllowed("client-1"))
                 .withFailMessage("Request " + i + " should be allowed")
                 .isTrue();
     }
-}</pre>
+}
+```
+
 
 ### Verifying Requests Beyond the Limit {#h3-21-verifying-requests-beyond-the-limit}
 
@@ -339,10 +389,11 @@ This test ensures the rate limiter correctly denies requests once the defined li
 
 Configured with a **limit of** **5 requests** in a **60-second window** , we call isAllowed("client-1") **5 times** and expect all to return true. On the 6th call, it should return false, verifying the rate limiter blocks requests beyond the allowed limit.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">@Test
+```
+@Test
 public void shouldDenyRequestsOnceLimitIsExceeded() {
     rateLimiter = new SlidingWindowLogRateLimiter(jedis, 5, 60);
-    for (int i = 1; i &lt;= 5; i++) {
+    for (int i = 1; i <= 5; i++) {
         assertThat(rateLimiter.isAllowed("client-1"))
                 .withFailMessage("Request " + i + " should be allowed")
                 .isTrue();
@@ -351,7 +402,9 @@ public void shouldDenyRequestsOnceLimitIsExceeded() {
     assertThat(rateLimiter.isAllowed("client-1"))
             .withFailMessage("Request beyond limit should be denied")
             .isFalse();
-}</pre>
+}
+```
+
 
 ### **Verifying Requests After Sliding Window Resets** {#h3-22-verifying-requests-after-sliding-window-resets}
 
@@ -361,14 +414,15 @@ Configured with a **limit of 5 requests** and a **1-second window**, we first ca
 
 After waiting for the sliding window to reset (1 second + a buffer), the next request is allowed, verifying that the sliding window correctly clears expired entries and permits new requests.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">@Test
+```
+@Test
 public void shouldAllowRequestsAgainAfterSlidingWindowResets() throws InterruptedException {
     int limit = 5;
     String clientId = "client-1";
     long windowSize = 1L;
     rateLimiter = new SlidingWindowLogRateLimiter(jedis, limit, windowSize);
 
-    for (int i = 1; i &lt;= limit; i++) {
+    for (int i = 1; i <= limit; i++) {
         assertThat(rateLimiter.isAllowed(clientId))
                 .withFailMessage("Request " + i + " should be allowed")
                 .isTrue();
@@ -383,7 +437,9 @@ public void shouldAllowRequestsAgainAfterSlidingWindowResets() throws Interrupte
     assertThat(rateLimiter.isAllowed(clientId))
             .withFailMessage("Request after window reset should be allowed")
             .isTrue();
-}</pre>
+}
+```
+
 
 ### Verifying Independent Handling of Multiple Clients {#h3-23-verifying-independent-handling-of-multiple-clients}
 
@@ -393,7 +449,8 @@ Configured with a **limit of 5 requests** and a **10-second window** , the first
 
 Simultaneously, all 5 requests from **client-2** are allowed (true), confirming the rate limiter maintains separate counters for each client.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">@Test
+```
+@Test
 public void shouldHandleMultipleClientsIndependently() {
     int limit = 5;
     String clientId1 = "client-1";
@@ -401,7 +458,7 @@ public void shouldHandleMultipleClientsIndependently() {
     long windowSize = 10L;
     rateLimiter = new SlidingWindowLogRateLimiter(jedis, limit, windowSize);
 
-    for (int i = 1; i &lt;= limit; i++) {
+    for (int i = 1; i <= limit; i++) {
         assertThat(rateLimiter.isAllowed(clientId1))
                 .withFailMessage("Client 1 request " + i + " should be allowed")
                 .isTrue();
@@ -411,12 +468,14 @@ public void shouldHandleMultipleClientsIndependently() {
             .withFailMessage("Client 1 request beyond limit should be denied")
             .isFalse();
 
-    for (int i = 1; i &lt;= limit; i++) {
+    for (int i = 1; i <= limit; i++) {
         assertThat(rateLimiter.isAllowed(clientId2))
                 .withFailMessage("Client 2 request " + i + " should be allowed")
                 .isTrue();
     }
-}</pre>
+}
+```
+
 
 ### **Verifying Gradual Request Allowance in Sliding Window** {#h3-24-verifying-gradual-request-allowance-in-sliding-window}
 
@@ -428,14 +487,15 @@ On the 4th call, the request is denied, confirming the limit has been reached.
 
 After waiting 2 seconds, enough of the older requests have expired to allow one new request, verifying that the sliding window behaves dynamically and permits requests as the window progresses.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">@Test
+```
+@Test
  public void shouldAllowRequestsAgainGraduallyInSlidingWindow() throws InterruptedException {
      int limit = 3;
      long windowSize = 4L;
      String clientId = "client-1";
      rateLimiter = new SlidingWindowLogRateLimiter(jedis, limit, windowSize);
 
-     for (int i = 1; i &lt;= limit; i++) {
+     for (int i = 1; i <= limit; i++) {
          assertThat(rateLimiter.isAllowed(clientId))
                  .withFailMessage("Request " + i + " should be allowed")
                  .isTrue();
@@ -451,7 +511,9 @@ After waiting 2 seconds, enough of the older requests have expired to allow one 
      assertThat(rateLimiter.isAllowed(clientId))
              .withFailMessage("Request should be allowed in a sliding window")
              .isTrue();
- }</pre>
+ }
+```
+
 
 ### Verifying Denied Requests Are Not Counted {#h3-25-verifying-denied-requests-are-not-counted}
 
@@ -461,14 +523,15 @@ Configured with a limit of **3 requests** and a **5-second window**, the first 3
 
 Afterward, the Redis key for the client is checked to confirm the stored count equals the limit (3), ensuring denied requests do not increase the counter.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">@Test
+```
+@Test
 public void testRateLimitDeniedRequestsAreNotCounted() {
     int limit = 3;
     long windowSize = 4L;
     String clientId = "client-1";
     rateLimiter = new SlidingWindowLogRateLimiter(jedis, limit, windowSize);
 
-    for (int i = 1; i &lt;= limit; i++) {
+    for (int i = 1; i <= limit; i++) {
         assertThat(rateLimiter.isAllowed(clientId))
                 .withFailMessage("Request " + i + " should be allowed")
                 .isTrue();
@@ -483,7 +546,9 @@ public void testRateLimitDeniedRequestsAreNotCounted() {
     assertThat((long) limit)
             .withFailMessage("The count (" + requestCount + ") should be equal to the limit (" + limit + "), not counting the denied request")
             .isEqualTo(requestCount);
-}</pre>
+}
+```
+
 
 Is there any other behavior we should verify? Let me know in the comments!
 

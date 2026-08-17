@@ -44,10 +44,13 @@ This path is where all your REST resources in the given will be accessed relativ
 
 The Hello Application class below shows a very bare-bones, fully functional root Jakarta REST configuration.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@ApplicationPath("/api")
+```
+@ApplicationPath("/api")
 public class HelloApplication extends Application {
 
-}</pre>
+}
+```
+
 
 This class extends the *jakarta.ws.rs.core.Application* class and is annotated with the *jakarta.ws.rs.ApplicationPath* annotation, passing in the "/api" string.
 
@@ -70,7 +73,8 @@ Within this class, Java methods can be exposed as REST resources through the use
 
 The HelloResource class shown below puts these in together.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@Path("/hello-world")
+```
+@Path("/hello-world")
 public class HelloResource {
 
     @GET
@@ -78,7 +82,9 @@ public class HelloResource {
         return "Hello, World!";
     }
 
-}</pre>
+}
+```
+
 
 The HelloResource is a plain old Java class annotated with the jakarta.ws.rs.Path annotation.
 

@@ -149,7 +149,7 @@ In fact, regardless of what software stack you have. Whether its Java or somethi
 
 I'll explain more about HeroDevs EOL data and how to use.
 
-*** ** * ** ***
+
 
 #### What does "actively exploited" mean in practice, and how would you know?
 
@@ -165,6 +165,6 @@ Sonatype Lifecycle incorporates EPSS and its own exploitation data from monitori
 
 OSV Scanner doesn't surface exploitation status directly, but cross-referencing its output with the CISA KEV catalogue gives you the combination.
 
-*** ** * ** ***
+
 
 Steve Poole is a Developer Advocate at [HeroDevs](https://www.herodevs.com/blog-posts/spring-boot-3-5-eol-migration-calculator-estimate-your-upgrade-timeline-to-spring-boot-4?utm_source=devrel&amp;utm_medium=referral&amp;utm_campaign=2026q2_spring-boot-3-5-eol_global "HeroDevs ")and a Java Champion. [HeroDevs](https://www.herodevs.com/blog-posts/spring-boot-3-5-eol-migration-calculator-estimate-your-upgrade-timeline-to-spring-boot-4?utm_source=devrel&amp;utm_medium=referral&amp;utm_campaign=2026q2_spring-boot-3-5-eol_global "HeroDevs ")provides Never-Ending Support for EOL open-source software including Spring Boot 3.5. This article follows Crossing the River Styx: Spring Boot 3.5 and the Zombie Dependency Problem.

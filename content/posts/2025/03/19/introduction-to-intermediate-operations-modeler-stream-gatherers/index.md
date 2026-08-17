@@ -34,7 +34,10 @@ For this reason, as stated in [JEP 485](https://openjdk.org/jeps/485 "JEP 485")
 
 The `java.util.stream.Gatherer` interface, which models a gatherer, has three type parameters.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public interface Gatherer&lt;T, A, R&gt; { … }</pre>
+```java
+public interface Gatherer<T, A, R> { … }
+```
+
 
 `T` represents the input element.  
 `A` represents the potential mutable state object.  
@@ -42,10 +45,13 @@ The `java.util.stream.Gatherer` interface, which models a gatherer, has three ty
 
 A gatherer is built upon four key elements:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">Supplier&lt;A&gt; initializer();
-Integrator&lt;A, T, R&gt; integrator();
-BinaryOperator&lt;A&gt; combiner();
-BiConsumer&lt;A, Downstream&lt;? super R&gt;&gt; finisher();</pre>
+```java
+Supplier<A> initializer();
+Integrator<A, T, R> integrator();
+BinaryOperator<A> combiner();
+BiConsumer<A, Downstream<? super R>> finisher();
+```
+
 
 `Initializer` -- A function that produces an instance of the internal intermediate state.  
 `Integrator` -- Integrates a new element into the stream produced by the Gatherer.  
@@ -58,20 +64,29 @@ Among these four elements, only the Integrator is mandatory because it has the r
 
 Gatherers are created using factory methods, or you can implement the Gatherer interface. Depending on the operation you want to model, you can use the overloaded variants of `Gatherer.of` and `Gatherer.ofSequential`.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">var uppercaseGatherer = Gatherer.&lt;String, String&gt;of((state, element, downstream)
--&gt; downstream.push(element.toUpperCase()));</pre>
+```java
+var uppercaseGatherer = Gatherer.<String, String>of((state, element, downstream)
+-> downstream.push(element.toUpperCase()));
+```
+
 
 The example gatherer above calls toUpperCase on an input element of type String and pushes the result downstream. This gatherer is equivalent to the following map operation.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">Stream.of("a", "b", "c", "d", "e", "f", "g")
+```java
+Stream.of("a", "b", "c", "d", "e", "f", "g")
    .map(String::toUpperCase)
-   .forEach(System.out::print);</pre>
+   .forEach(System.out::print);
+```
+
 
 The Stream interface now includes a method called `gather()`, which accepts a Gatherer parameter. We can use it by passing the gatherer we created.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">Stream.of("a", "b", "c", "d", "e", "f", "g")
+```java
+Stream.of("a", "b", "c", "d", "e", "f", "g")
     .gather(uppercaseGatherer) 
-    .forEach(System.out::print);</pre>
+    .forEach(System.out::print);
+```
+
 
 ### Built-in Gaterers {#h3-2-built-in-gaterers}
 
@@ -102,7 +117,8 @@ In this case, we can write a gatherer that processes a log stream and returns on
 
 Let's assume that the object in our log stream is structured as follows.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">class LogWrapper { 
+```java
+class LogWrapper { 
 
     enum Level{ 
          INFO, 
@@ -113,21 +129,27 @@ Let's assume that the object in our log stream is structured as follows.
 
    private Level level; 
    private String details;
-}</pre>
+}
+```
+
 
 The object has a level field representing the log level. The details field represents the content of the log entry.
 
 We need a stateful gatherer because we must retain information about past events to determine whether failures occur consecutively. To achieve this, the internal state of our gatherer can be a `List<LogWrapper>`.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">static Supplier&lt;List&lt;LogWrapper&gt;&gt; initializer() { 
+```java
+static Supplier<List<LogWrapper>> initializer() { 
    return ArrayList::new; 
-}</pre>
+}
+```
+
 
 The object returned by the `initializer()` corresponds to the second parameter explained earlier in the type parameters of the Gatherer interface.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">static Integrator&lt;List&lt;LogWrapper&gt;, LogWrapper, String&gt; integrator(final int threshold) { 
+```java
+static Integrator<List<LogWrapper>, LogWrapper, String> integrator(final int threshold) { 
 
-    return ((internalState, element, downstream) -&gt; { 
+    return ((internalState, element, downstream) -> { 
         if(downstream.isRejecting()){ 
             return false; 
         } 
@@ -136,7 +158,7 @@ The object returned by the `initializer()` corresponds to the second parameter e
             internalState.add(element); 
         } else {
 
-            if(internalState.size() &gt;= threshold){ 
+            if(internalState.size() >= threshold){ 
                 internalState.stream().map(LogWrapper::getDetails).forEach(downstream::push); 
             } 
 
@@ -145,7 +167,9 @@ The object returned by the `initializer()` corresponds to the second parameter e
 
         return true; 
     }); 
-}</pre>
+}
+```
+
 
 The integrator will be responsible for integrating elements into the produced stream. The third parameter of the integrator represents the downstream object.
 
@@ -160,21 +184,27 @@ If the size exceeds or is equal to the threshold, we push the LogWrapper objects
 
 After that, according to our business rule, we clear the internal state and return true to allow new elements to be integrated into the stream.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">static BinaryOperator&lt;List&lt;LogWrapper&gt;&gt; combiner() { 
-    return (_, _) -&gt; { 
+```java
+static BinaryOperator<List<LogWrapper>> combiner() { 
+    return (_, _) -> { 
         throw new UnsupportedOperationException("Cannot be parallelized"); 
     }; 
-}</pre>
+}
+```
+
 
 To prevent our gatherer from being used in a parallel stream, we define a combiner, even though it is not strictly required. This is because our gatherer is inherently designed to work as expected only in a sequential stream.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">static BiConsumer&lt;List&lt;LogWrapper&gt;, Downstream&lt;? super String&gt;&gt; finisher(final int threshold) { 
-    return (state, downstream) -&gt; { 
-        if(!downstream.isRejecting() &amp;&amp; state.size() &gt;= threshold){ 
+```java
+static BiConsumer<List<LogWrapper>, Downstream<? super String>> finisher(final int threshold) { 
+    return (state, downstream) -> { 
+        if(!downstream.isRejecting() && state.size() >= threshold){ 
             state.stream().map(LogWrapper::getDetails).forEach(downstream::push); 
         } 
     }; 
-}</pre>
+}
+```
+
 
 Finally, we define a finisher to push any remaining stream elements that have not yet been emitted downstream.
 

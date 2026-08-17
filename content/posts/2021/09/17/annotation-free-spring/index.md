@@ -33,8 +33,11 @@ Annotation-free beans {#h2-0-annotation-free-beans}
 
 The first place where we tend to set annotations is to register beans. Let's see how to move away from them. It involves several steps. We shall start from the following code:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">@Service
-public class MyService {}</pre>
+```java
+@Service
+public class MyService {}
+```
+
 
 The `@Service` stereotype annotation serves two functions:
 
@@ -43,7 +46,8 @@ The `@Service` stereotype annotation serves two functions:
 
 The first step is to move the annotation away from the class to a dedicated configuration class.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public class MyService {}
+```java
+public class MyService {}
 
 @Configuration
 public class MyConfiguration {
@@ -60,11 +64,14 @@ public class MyApplication {
     public static void main(String[] args) {
         SpringApplication.run(MyApplication.class, args);
     }
-}</pre>
+}
+```
+
 
 Because `@SpringBootApplication` is itself annotated with `@Configuration`, we can simplify the code further:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public class MyService {}
+```java
+public class MyService {}
 
 @SpringBootApplication
 public class MyApplication {
@@ -75,26 +82,31 @@ public class MyApplication {
     }
 
     // Run the app
-}</pre>
+}
+```
+
 
 At this point, the `MyService` class is free of annotations. For me, that would be enough. However, my earlier promise was to remove annotations altogether.
 
 For this, Kotlin offers the Beans . You can refactor the above snippet like this:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="kotlin">class MyService
+```kotlin
+class MyService
 
 fun beans() = beans {
-    bean&lt;MyService&gt;()                        // 1
+    bean<MyService>()                        // 1
 }
 
-fun main(args: Array&lt;String&gt;) {
-    runApplication&lt;MyApplication&gt;(*args) {
+fun main(args: Array<String>) {
+    runApplication<MyApplication>(*args) {
         addInitializers(beans())
     }
 }
 
 @SpringBootApplication                       // 2
-class MyApplication</pre>
+class MyApplication
+```
+
 
 1. Create a new bean without annotation
 2. Single annotation to start the Spring Boot application; see below for how to remove it
@@ -104,7 +116,8 @@ Controllers to routes {#h2-1-controllers-to-routes}
 
 Our next feature focuses on web endpoints. The traditional Spring way to provide them is via the `@Controller` annotation:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">@Controller                                                        // 1
+```java
+@Controller                                                        // 1
 public class MyController {
 
     @RequestMapping(value = "/hello", method = RequestMethod.GET)  // 2
@@ -112,7 +125,9 @@ public class MyController {
     public String hello() {
         return "Hello";
     }
-}</pre>
+}
+```
+
 
 1. Register the class as a controller
 2. Register the method as a request handler
@@ -120,43 +135,55 @@ public class MyController {
 
 For REST controllers, like the snippet above, Spring makes it simpler by providing compound annotations. We can refactor the code as:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">@RestController                                                    // 1
+```java
+@RestController                                                    // 1
 public class MyController {
 
     @GetMapping("/hello")                                          // 2
     public String hello() {
         return "Hello";
     }
-}</pre>
+}
+```
+
 
 1. Compound `@Controller` and `@ResponseBody`
 2. `@RequestMapping` with the `method` attribute set to `GET`
 
 Refactoring doesn't fulfill the "no annotation" promise. Yet, since Spring Web MVC v5.0, the framework offers an alternative to controllers called *routes*. Let's use them to refactor the previous code:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">@Bean
-RouterFunction&lt;ServerResponse&gt; hello() {
+```java
+@Bean
+RouterFunction<ServerResponse> hello() {
     return route(GET("/hello"),
-                 req -&gt; ServerResponse.ok().body("Hello"));
-}</pre>
+                 req -> ServerResponse.ok().body("Hello"));
+}
+```
+
 
 You could object that there's still one annotation - `@Bean` but we handled this case in the previous paragraph with the help of Kotlin. Spring also provides a dedicated DSL for routes. By using both the above Beans DSL and the Routes DSL, we can rid of all annotations:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="kotlin">bean {
+```kotlin
+bean {
     router {
         GET("/") { ok().body("Hello") }
     }
-}</pre>
+}
+```
+
 
 Cross-cutting concerns {#h2-2-cross-cutting-concerns}
 -----------------------------------------------------
 
 A lot (all?) of Spring cross-cutting concerns are configurable with annotations. Such concerns include transaction management and caching. In this paragraph, I'll use caching as an example, but all related features are similar.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">@Cacheable("things")
+```java
+@Cacheable("things")
 public Thing getAddress(String key) {
     // Get the relevant Thing from the data store
-}</pre>
+}
+```
+
 
 Spring wraps methods annotated with `@Cacheable` in a proxy. When you call the proxied method, it first checks whether the object is in the cache:
 
@@ -165,7 +192,8 @@ Spring wraps methods annotated with `@Cacheable` in a proxy. When you call the p
 
 Nothing prevents you from eschewing annotations and implementing the above logic yourself.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public class ThingRepository {
+```java
+public class ThingRepository {
 
     private final Cache cache;
 
@@ -180,11 +208,14 @@ Nothing prevents you from eschewing annotations and implementing the above logic
         }
         return value;
     }
-}</pre>
+}
+```
+
 
 If you're a Functional Programming fan, you can refactor the above code to something more suitable to your tastes:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public class ThingRepository {
+```java
+public class ThingRepository {
 
     private final Cache cache;
 
@@ -196,7 +227,9 @@ If you're a Functional Programming fan, you can refactor the above code to somet
         return Optional.ofNullable(cache.get(key, Thing.class))
                        .orElse(/* Get Thing */);
     }
-}</pre>
+}
+```
+
 
 Error handling {#h2-3-error-handling}
 -------------------------------------
@@ -205,7 +238,8 @@ Spring provides a rich error handling mechanism to ease developers' life via ann
 
 Here's an example of using `@ExceptionHandler` in a controller:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">@RestController
+```java
+@RestController
 public class MyController {
 
     private final MyService service;
@@ -225,18 +259,21 @@ public class MyController {
     }
 
     @ErrorHandler
-    public ResponseEntity&lt;String&gt; handle(ServiceException e) { // 2
+    public ResponseEntity<String> handle(ServiceException e) { // 2
         return ResponseEntity(e.getMessage(),
             HttpStatus.INTERNAL_SERVER_ERROR);
     }
-}</pre>
+}
+```
+
 
 1. May throw an unchecked `ServiceException`
 2. Spring calls this method if a `ServiceException` class is thrown in one of the above methods
 
 However, nothing prevents you from handling the error in your code. Here's how you can do it:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">@RestController
+```java
+@RestController
 public class MyController {
 
     private final MyService service;
@@ -246,7 +283,7 @@ public class MyController {
     }
 
     @GetMapping("/hello")
-    public ResponseEntity&lt;String&gt; hello() {
+    public ResponseEntity<String> hello() {
         try {
         	return ResponseEntity(service.hello(), HttpStatus.OK);
         } catch (ServiceException e) {
@@ -263,24 +300,27 @@ public class MyController {
         }
     }
 
-    private ResponseEntity&lt;String&gt; handle(ServiceException e) {
+    private ResponseEntity<String> handle(ServiceException e) {
         return ResponseEntity(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
     }
-}</pre>
+}
+```
+
 
 I consider it a bit noisy. Of course, we can also use routes:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">@Bean
-public RouterFunction&lt;ServerResponse&gt; hello(MyService service) {
+```java
+@Bean
+public RouterFunction<ServerResponse> hello(MyService service) {
     return route(GET("/hello"),
-        req -&gt; {
+        req -> {
             try {
                 return ServerResponse.ok().body(service.hello());
             } catch (ServiceException e) {
                 return handle(e);
             }
         }).andRoute(GET("/world"),
-        req -&gt; {
+        req -> {
             try {
                 return ServerResponse.ok().body(service.world());
             } catch (ServiceException e) {
@@ -291,52 +331,60 @@ public RouterFunction&lt;ServerResponse&gt; hello(MyService service) {
 
 private ServerResponse handle(ServiceException e) {
     return ServerResponse.status(500).body(e.getMessage());
-}</pre>
+}
+```
+
 
 But I don't think the above snippet is a significant improvement. Kotlin Router DSL doesn't help much either:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">router {
+```java
+router {
     fun handle(e: ServiceException) = status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.message)
     GET("/hello") {
         try {
-            ok().body(ref&lt;MyService&gt;().hello())
+            ok().body(ref<MyService>().hello())
         } catch (e: ServiceException) {
             handle(e)
         }
     }
     GET("/world") {
         try {
-            ok().body(ref&lt;MyService&gt;().world())
+            ok().body(ref<MyService>().world())
         } catch (e: ServiceException) {
             handle(e)
         }
     }
-}</pre>
+}
+```
+
 
 We don't have any annotations, but IMHO, it's not much more readable than the initial snippet.
 
 We can redesign `MyService` to replace exception throwing with a functional approach to improve the code. The easiest path is to use Kotlin's `Result` type from the stdlib. It contains either the requested value or an `Exception` type. Alternative types include [Arrow](https://arrow-kt.io/docs/0.11/apidocs/arrow-core-data/arrow.core/-either/) or [Vavr](https://docs.vavr.io/#_either) `Either` type.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="kotlin">class MyService {
-    fun hello(): Result&lt;String&gt; = // compute hello
-    fun world(): Result&lt;String&gt; = // compute world
+```kotlin
+class MyService {
+    fun hello(): Result<String> = // compute hello
+    fun world(): Result<String> = // compute world
 }
 
 var routes = router {
     fun handle(e: ServiceException) = status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.message)
     GET("/hello") {
-        ref&lt;MyService&gt;().hello().fold(
+        ref<MyService>().hello().fold(
             { ok().body(it) },
             { handle(it as ServiceException) }
         )
     }
     GET("/world") {
-        ref&lt;MyService&gt;().world().fold(
+        ref<MyService>().world().fold(
             { ok().body(it) },
             { handle(it as ServiceException) }
         )
     }
-}</pre>
+}
+```
+
 
 Starting the application {#h2-4-starting-the-application}
 ---------------------------------------------------------
@@ -347,7 +395,8 @@ It's possible to remove it anyway, provided you accept to use APIs considered ex
 
 Here's a snippet from the GitHub repo:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="kotlin">val app = webApplication {                   // 1
+```kotlin
+val app = webApplication {                   // 1
     messageSource {
         basename = "messages/messages"
     }
@@ -377,7 +426,9 @@ Here's a snippet from the GitHub repo:
 
 fun main() {
     app.run()                                // 2
-}</pre>
+}
+```
+
 
 1. Configure the context
 2. Start the application with no annotations

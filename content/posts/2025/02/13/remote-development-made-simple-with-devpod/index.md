@@ -61,7 +61,10 @@ DevPod is designed to be user-friendly and straightforward, making it a breeze t
 
 The first step is to install DevPod itself. I'm on Mac; there's a Homebrew recipe.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash">brew install devpod</pre>
+```bash
+brew install devpod
+```
+
 
 Once installed, you can launch it from the CLI or the GUI. I favour GUIs, in the beginning, to help understand the available options.
 

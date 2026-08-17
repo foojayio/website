@@ -48,22 +48,25 @@ Before you begin, [read the first article in this series](https://foojay.io/toda
 
 Create a Simple JAR archetype Maven Project in Eclipse (Or IDE of Your Choice). Add the following dependencies in your pom.xml. Make Sure that your Compiler Version is Java 8.0.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">&lt;dependencies&gt;  
-         &lt;!-- This is the Core Library Containing the Classes We will Use --&gt;  
-         &lt;dependency&gt;  
-             &lt;groupId&gt;org.apache.kafka&lt;/groupId&gt;  
-             &lt;artifactId&gt;kafka-clients&lt;/artifactId&gt;  
-             &lt;version&gt;3.2.1&lt;/version&gt;  
-         &lt;/dependency&gt;  
-         &lt;!-- The Kafka Client Libraries use the slf4j Logger, So we Need to Add   
+```
+<dependencies>  
+         <!-- This is the Core Library Containing the Classes We will Use -->  
+         <dependency>  
+             <groupId>org.apache.kafka</groupId>  
+             <artifactId>kafka-clients</artifactId>  
+             <version>3.2.1</version>  
+         </dependency>  
+         <!-- The Kafka Client Libraries use the slf4j Logger, So we Need to Add   
              This as a Dependency so that the Required Classes are Present in Our   
-             Classpath for the Kafka Client Libraries to Use --&gt;  
-         &lt;dependency&gt;  
-             &lt;groupId&gt;org.slf4j&lt;/groupId&gt;  
-             &lt;artifactId&gt;slf4j-api&lt;/artifactId&gt;  
-             &lt;version&gt;1.7.36&lt;/version&gt;  
-         &lt;/dependency&gt;  
- &lt;/dependencies&gt;</pre>
+             Classpath for the Kafka Client Libraries to Use -->  
+         <dependency>  
+             <groupId>org.slf4j</groupId>  
+             <artifactId>slf4j-api</artifactId>  
+             <version>1.7.36</version>  
+         </dependency>  
+ </dependencies>
+```
+
 
 #### Developing the Java Producer
 
@@ -77,7 +80,8 @@ Create a Simple JAR archetype Maven Project in Eclipse (Or IDE of Your Choice). 
 
 #### Code for Java Producer (Tested on Kafka v3.4 on Windows 10)
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">/**   
+```
+/**   
   *    Author @sumith.puri (Addl. Ref: https://www.sohamkamani.com/java/kafka/)  
   */   
  package com.kafka.poc.producer;  
@@ -112,14 +116,14 @@ Create a Simple JAR archetype Maven Project in Eclipse (Or IDE of Your Choice). 
 
          // Since we Need to Close our Producer, We can use the try-with-resources  
          // Statement to create a New Producer  
-         try (Producer&lt;String, String&gt; producer = new KafkaProducer&lt;&gt;(props)) {  
+         try (Producer<String, String> producer = new KafkaProducer<>(props)) {  
 
              // Here, We Run an Infinite Loop to Send a Message to the Cluster Every Second  
              for (int i = 0;; i++) {  
                  String key = Integer.toString(i);  
                  String message = "Watson, Please Come Over Here " + Integer.toString(i);  
 
-                 producer.send(new ProducerRecord&lt;String, String&gt;(TOPIC, key, message));  
+                 producer.send(new ProducerRecord<String, String>(TOPIC, key, message));  
 
                  // Log a Confirmation Once The Message is Written  
                  System.out.println("Sent Message " + key);  
@@ -134,7 +138,9 @@ Create a Simple JAR archetype Maven Project in Eclipse (Or IDE of Your Choice). 
              System.out.println("Could not Start Producer Due To: " + e);  
          }  
      }  
- }</pre>
+ }
+```
+
 
 #### Developing the Java Consumer
 
@@ -150,7 +156,8 @@ Create a Simple JAR archetype Maven Project in Eclipse (Or IDE of Your Choice). 
 
 #### Code for Java Consumer (Tested on Kafka v3.4 on Windows 10)
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">/**   
+```
+/**   
   *    Author @sumith.puri (Addl. Ref: https://www.sohamkamani.com/java/kafka/)  
   */   
  package com.kafka.poc.consumer;  
@@ -196,7 +203,7 @@ Create a Simple JAR archetype Maven Project in Eclipse (Or IDE of Your Choice). 
 
          // Since We Need to Close our Consumer, We can Use the try-with-resources  
          // Statement to Create It  
-         try (KafkaConsumer&lt;String, String&gt; consumer = new KafkaConsumer&lt;&gt;(props)) {  
+         try (KafkaConsumer<String, String> consumer = new KafkaConsumer<>(props)) {  
 
              // Subscribe this Consumer to the Same Topic that we Wrote Messages to Earlier  
              consumer.subscribe(Arrays.asList(TOPIC));  
@@ -207,19 +214,22 @@ Create a Simple JAR archetype Maven Project in Eclipse (Or IDE of Your Choice). 
                  // The consumer.poll Method Checks and Waits..For Any New Messages To Arrive For  
                  // The Subscribed Topic in case there are No Messages for the Duration Specified  
                  // In the Argument (1000 ms In this Case), It returns an Empty List  
-                 ConsumerRecords&lt;String, String&gt; records = consumer.poll(Duration.ofMillis(1000));  
-                 for (ConsumerRecord&lt;String, String&gt; record : records) {  
+                 ConsumerRecords<String, String> records = consumer.poll(Duration.ofMillis(1000));  
+                 for (ConsumerRecord<String, String> record : records) {  
                      System.out.printf("Received Message: %s\n", record.value());  
                  }  
              }  
          }  
      }  
 
- }</pre>
+ }
+```
+
 
 #### Create the Java Application to Demo Kafka Producer \& Consumer
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">/**   
+```
+/**   
   *    Author @sumith.puri (Addl. Ref: https://www.sohamkamani.com/java/kafka/)  
   */   
  package com.kafka.poc.app;  
@@ -238,7 +248,9 @@ Create a Simple JAR archetype Maven Project in Eclipse (Or IDE of Your Choice). 
          pThread.start();  
 
      }  
- }</pre>
+ }
+```
+
 
 Run the Above Application in your IDE or Command-Line.
 

@@ -70,8 +70,11 @@ Transactions that span months {#h2-2-transactions-that-span-months}
 
 An ACID transaction gives you all-or-nothing over milliseconds. A Temporal Workflow gives you run-to-completion over *any* timespan. You can write:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">Workflow.sleep(Duration.ofDays(30));
-sendRenewalReminder(customer);</pre>
+```
+Workflow.sleep(Duration.ofDays(30));
+sendRenewalReminder(customer);
+```
+
 
 and no thread, no pod, no JVM sits around waiting for a month. The Temporal Workflow is durably parked, consuming essentially nothing, and gets rehydrated when the timer fires, even if you've deployed forty times and replaced every server in between.
 

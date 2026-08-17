@@ -29,7 +29,7 @@ In this article, we explore how to combine Quarkus, a modern Java framework opti
 
 The PingPong-AI project demonstrates a simple implementation of AI-powered functionality using Quarkus as the backend framework and Ollama for handling AI models. Let's break down the architecture and walk through key components of the code.
 
-*** ** * ** ***
+
 
 Project Overview {#h2-0-project-overview}
 -----------------------------------------
@@ -42,7 +42,7 @@ The project integrates Quarkus with Ollama to create an AI model-driven applicat
 2. Using Testcontainers for Integration Testing
 3. Leveraging Quarkus Dev Services for Simplified Development
 
-*** ** * ** ***
+
 
 1. Integrating Quarkus with Ollama {#h2-1-1-integrating-quarkus-with-ollama}
 ----------------------------------------------------------------------------
@@ -57,7 +57,8 @@ The integration with Quarkus is handled using REST endpoints to interact with Ol
 
 Here's a snippet from `PingPongResource.java`, which defines the REST endpoint for the PingPong interaction:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@Path("/chat")
+```java
+@Path("/chat")
 public class CuriousChatResource {
     @Inject
     CuriousService curiousService;
@@ -71,18 +72,19 @@ public class CuriousChatResource {
     @Path("/{numberOfQuestions}")
     public String chat(@PathParam("numberOfQuestions") Integer numberOfQuestions, String topic) {
         StringBuilder sb = new StringBuilder();
-        sb.append("&gt; Topic: ").append(topic).append("\n");
-        while (numberOfQuestions-- &gt; 0) {
+        sb.append("> Topic: ").append(topic).append("\n");
+        while (numberOfQuestions-- > 0) {
             String question = curiousService.chat(topic);
-            sb.append("&gt; Question: ").append(question).append("\n");
+            sb.append("> Question: ").append(question).append("\n");
             topic = wiseService.chat(question);
-            sb.append("&gt; Answer: ").append(topic).append("\n");
+            sb.append("> Answer: ").append(topic).append("\n");
         }
 
         return sb.toString();
     }
 }
-</pre>
+```
+
 
 In this code:
 
@@ -91,25 +93,31 @@ In this code:
 
 These Ollama services are responsible for calling the Ollama runtime. Here's a snippet from `CuriousService.java`:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@RegisterAiService
+```java
+@RegisterAiService
 @SystemMessage("You are a curious person that creates a short question for every message you receive.")
 public interface CuriousService {
     public String chat(@UserMessage String message);
 }
-</pre>
+```
+
 
 We can even use different models for each service, specifying the configuration property that identifies the model. This example comes from `CuriousService.java`:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@RegisterAiService(modelName = "curiousModel")
-</pre>
+```java
+@RegisterAiService(modelName = "curiousModel")
+```
+
 
 And we identify the model in `application.properties` :
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">quarkus.langchain4j.ollama.wiseModel.chat-model.model-id=tinydolphin
+```
+quarkus.langchain4j.ollama.wiseModel.chat-model.model-id=tinydolphin
 quarkus.langchain4j.ollama.curiousModel.chat-model.model-id=tinyllama
-</pre>
+```
 
-*** ** * ** ***
+
+
 
 2. Using Testcontainers for Integration Testing {#h2-4-2-using-testcontainers-for-integration-testing}
 ------------------------------------------------------------------------------------------------------
@@ -122,7 +130,8 @@ quarkus.langchain4j.ollama.curiousModel.chat-model.model-id=tinyllama
 
 The test class demonstrates how to configure and use Testcontainers:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@QuarkusTest
+```java
+@QuarkusTest
 class CuriousChatResourceTest {
     @Inject
     CuriousService curiousService;
@@ -159,14 +168,15 @@ class CuriousChatResourceTest {
 
     }
 }
-</pre>
+```
+
 
 ### Key Points: {#h3-7-key-points}
 
 * The `@QuarkusTest` annotation allows Quarkus to run the application in a test-friendly mode.
 * Quarkus finds a service (Ollama) for which it needs an instance and it will spin up a container for that.
 
-*** ** * ** ***
+
 
 3. Leveraging Quarkus Dev Services for Ollama {#h2-8-3-leveraging-quarkus-dev-services-for-ollama}
 --------------------------------------------------------------------------------------------------
@@ -179,10 +189,12 @@ Quarkus Dev Services simplifies the setup of required services during developmen
 
 The `application.properties` file includes configurations for enabling Dev Services:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">quarkus.langchain4j.ollama.chat-model.model-id=tinyllama
+```bash
+quarkus.langchain4j.ollama.chat-model.model-id=tinyllama
 quarkus.langchain4j.ollama.devservices.model=tinyllama
 quarkus.langchain4j.log-requests=true
-</pre>
+```
+
 
 With these configurations, Quarkus Dev Services automatically starts an Ollama container when the application is run in development mode or in test, removing the need for manual setup.
 
@@ -190,8 +202,10 @@ With these configurations, Quarkus Dev Services automatically starts an Ollama c
 
 You can launch the application in development mode using the following command:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">./mvnw quarkus:dev
-</pre>
+```bash
+./mvnw quarkus:dev
+```
+
 
 This command:
 
@@ -199,7 +213,7 @@ This command:
 * Automatically sets up an Ollama runtime container.
 * Enables hot-reloading for rapid development.
 
-*** ** * ** ***
+
 
 Conclusion {#h2-12-conclusion}
 ------------------------------

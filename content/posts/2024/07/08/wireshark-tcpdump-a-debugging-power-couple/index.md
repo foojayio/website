@@ -169,12 +169,15 @@ Capturing traffic with tcpdump involves specifying the network interface and an 
 
 The following shows the tcpdump command and its output:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">$ sudo tcpdump -i en0 -w output
+```
+$ sudo tcpdump -i en0 -w output
 Password:
 tcpdump: listening on en, link-type EN10MB (Ethernet), capture size 262144 bytes
 ^C3845 packets captured
 4189 packets received by filter
-0 packets dropped by kernel</pre>
+0 packets dropped by kernel
+```
+
 
 ### Challenges and Considerations {#h3-11-challenges-and-considerations}
 

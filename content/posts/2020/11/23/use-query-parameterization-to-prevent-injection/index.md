@@ -19,20 +19,24 @@ In the 2017 version of the OWASP Top 10 vulnerabilities, injection appeared at t
 
 When looking at a typical SQL injection in Java, the parameters of a sequel query are naively concatenated to the static part of the query. The following is an unsafe execution of SQL in Java, which can be used by an attacker to gain more information than otherwise intended:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public void selectExample(String parameter) throws SQLException {
+```java
+public void selectExample(String parameter) throws SQLException {
    Connection connection = DriverManager.getConnection(DB_URL, USER, PASS);
    String query = "SELECT * FROM USERS WHERE lastname = " + parameter;
    Statement statement = connection.createStatement();
    ResultSet result = statement.executeQuery(query);
 
    printResult(result);
-}</pre>
+}
+```
+
 
 If the parameter in this example is something like `'' OR 1=1`, the result contains every single item in the table. This could be even more problematic if the database supports multiple queries and the parameter would be `''; UPDATE USERS SET lastname=''`.
 
 To prevent this in Java, we should parameterize the queries by using a prepared statement. This should be the only way to create database queries. By defining the full SQL code and passing in the parameters to the query later, the code is easier to understand. Most importantly, by distinguishing between the SQL code and the parameter data, the query can't be hijacked by malicious input.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public void prepStatmentExample(String parameter) throws SQLException {
+```java
+public void prepStatmentExample(String parameter) throws SQLException {
    Connection connection = DriverManager.getConnection(DB_URL, USER, PASS);
    String query = "SELECT * FROM USERS WHERE lastname = ?";
    PreparedStatement statement = connection.prepareStatement(query);
@@ -41,7 +45,9 @@ To prevent this in Java, we should parameterize the queries by using a prepared 
    ResultSet result = statement.executeQuery();
 
    printResult(result);
-}</pre>
+}
+```
+
 
 In the example above, the input binds to the type String and therefore is part of the query code. This technique prevents the parameter input from interfering with the SQL code.
 

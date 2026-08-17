@@ -40,9 +40,12 @@ Create Bookmark domain class {#h2-0-create-bookmark-domain-class}
 
 Let's start with creating a Java record representing a **Bookmark** as follows:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">import java.time.Instant;
+```java
+import java.time.Instant;
 
-public record Bookmark(Long id, String title, String url, Instant createdAt) {}</pre>
+public record Bookmark(Long id, String title, String url, Instant createdAt) {}
+```
+
 
 Create Flyway Migration Script {#h2-1-create-flyway-migration-script}
 ---------------------------------------------------------------------
@@ -51,20 +54,24 @@ Let's add the following migration script under **src/main/resources/db/migration
 
 **V1__create_tables.sql**
 
-<pre class="EnlighterJSRAW" data-enlighter-language="sql">create table bookmarks
+```sql
+create table bookmarks
 (
     id         bigserial primary key,
     title      varchar   not null,
     url        varchar   not null,
     created_at timestamp
-);</pre>
+);
+```
+
 
 Implementing CRUD operations using JdbcClient {#h2-2-implementing-crud-operations-using-jdbcclient}
 ---------------------------------------------------------------------------------------------------
 
 Let's implement CRUD operations on **Bookmark** domain class using **JdbcClient** API.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">@Repository
+```java
+@Repository
 @Transactional(readOnly = true)
 public class BookmarkRepository {
     private final JdbcClient jdbcClient;
@@ -75,27 +82,33 @@ public class BookmarkRepository {
     ...
     ...
     ...
-}</pre>
+}
+```
+
 
 ### Fetch all bookmarks {#h3-3-fetch-all-bookmarks}
 
 We can fetch all bookmarks using **JdbcClient** as follows:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public List&lt;Bookmark&gt; findAll() {
+```java
+public List<Bookmark> findAll() {
     String sql = "select id, title, url, created_at from bookmarks";
     return jdbcClient.sql(sql).query(Bookmark.class).list();
-}</pre>
+}
+```
+
 
 The **JdbcClient** API will take care of dynamically creating a **RowMapper** by using **SimplePropertyRowMapper**. It will perform the mapping between bean property names to table column names by converting camelCase to underscore notation.
 
 If you need more control over the mapping, you can create a **RowMapper** yourself and use it as follows:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public List&lt;Bookmark&gt; findAll() {
+```java
+public List<Bookmark> findAll() {
     String sql = "select id, title, url, created_at from bookmarks";
     return jdbcClient.sql(sql).query(new BookmarkRowMapper()).list();
 }
 
-static class BookmarkRowMapper implements RowMapper&lt;Bookmark&gt; {
+static class BookmarkRowMapper implements RowMapper<Bookmark> {
     @Override
     public Bookmark mapRow(ResultSet rs, int rowNum) throws SQLException {
         return new Bookmark(
@@ -105,19 +118,24 @@ static class BookmarkRowMapper implements RowMapper&lt;Bookmark&gt; {
                 rs.getTimestamp("created_at").toInstant()
         );
     }
-}</pre>
+}
+```
+
 
 ### Find bookmark By ID {#h3-4-find-bookmark-by-id}
 
 We can fetch a bookmark by **id** using **JdbcClient** as follows:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public Optional&lt;Bookmark&gt; findById(Long id) {
+```java
+public Optional<Bookmark> findById(Long id) {
     String sql = "select id, title, url, created_at from bookmarks where id = :id";
     return jdbcClient.sql(sql).param("id", id).query(Bookmark.class).optional();
 
     // If you want to use your own RowMapper
     //return jdbcClient.sql(sql).param("id", id).query(new BookmarkRowMapper()).optional();
-}</pre>
+}
+```
+
 
 ### Create a new bookmark {#h3-5-create-a-new-bookmark}
 
@@ -125,7 +143,8 @@ We can use PostgreSQL **INSERT INTO ... RETURNING COL1, COL2** syntax and then u
 
 So, we can insert a new row into the **bookmarks** table and get the generated primary key value as follows:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">@Transactional
+```java
+@Transactional
 public Long save(Bookmark bookmark) {
     String sql = "insert into bookmarks(title, url, created_at) values(:title,:url,:createdAt) returning id";
     KeyHolder keyHolder = new GeneratedKeyHolder();
@@ -135,13 +154,16 @@ public Long save(Bookmark bookmark) {
                 .param("createdAt", Timestamp.from(bookmark.createdAt()))
                 .update(keyHolder);
     return keyHolder.getKeyAs(Long.class);
-}</pre>
+}
+```
+
 
 ### Update a bookmark {#h3-6-update-a-bookmark}
 
 We can update a bookmark as follows:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">@Transactional
+```java
+@Transactional
 public void update(Bookmark bookmark) {
     String sql = "update bookmarks set title = ?, url = ? where id = ?";
     int count = jdbcClient.sql(sql)
@@ -152,7 +174,9 @@ public void update(Bookmark bookmark) {
     if (count == 0) {
         throw new RuntimeException("Bookmark not found");
     }
-}</pre>
+}
+```
+
 
 In the **update(...)** method, I have used positional parameters **(?)** instead of using named parameters **(:title)** for the demonstration purpose. I highly recommend using named parameters over positional parameters.
 
@@ -160,37 +184,44 @@ In the **update(...)** method, I have used positional parameters **(?)** instead
 
 We can delete a bookmark as follows:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">@Transactional
+```java
+@Transactional
 public void delete(Long id) {
     String sql = "delete from bookmarks where id = ?";
     int count = jdbcClient.sql(sql).param(1, id).update();
     if (count == 0) {
         throw new RuntimeException("Bookmark not found");
     }
-}</pre>
+}
+```
+
 
 Test Repository using Testcontainers {#h2-8-test-repository-using-testcontainers}
 ---------------------------------------------------------------------------------
 
 We should always make sure that the database is in a known state so that we can write predictable assertions. So, let's create **src/test/resources/test_data.sql** file with the following content:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="sql">TRUNCATE TABLE bookmarks;
+```sql
+TRUNCATE TABLE bookmarks;
 ALTER SEQUENCE bookmarks_id_seq RESTART WITH 1;
 
 INSERT INTO bookmarks(title, url, created_at) VALUES
 ('How (not) to ask for Technical Help?','https://sivalabs.in/how-to-not-to-ask-for-technical-help', CURRENT_TIMESTAMP),
 ('Getting Started with Kubernetes','https://sivalabs.in/getting-started-with-kubernetes', CURRENT_TIMESTAMP),
 ('Few Things I learned in the HardWay in 15 years of my career','https://sivalabs.in/few-things-i-learned-the-hardway-in-15-years-of-my-career', CURRENT_TIMESTAMP),
-('All the resources you ever need as a Java &amp; Spring application developer','https://sivalabs.in/all-the-resources-you-ever-need-as-a-java-spring-application-developer', CURRENT_TIMESTAMP),
+('All the resources you ever need as a Java & Spring application developer','https://sivalabs.in/all-the-resources-you-ever-need-as-a-java-spring-application-developer', CURRENT_TIMESTAMP),
 ('SpringBoot Integration Testing using Testcontainers Starter','https://sivalabs.in/spring-boot-integration-testing-using-testcontainers-starter', CURRENT_TIMESTAMP),
 ('Testing SpringBoot Applications','https://sivalabs.in/spring-boot-testing', CURRENT_TIMESTAMP)
-;</pre>
+;
+```
+
 
 Now, we can add the annotation **@Sql("/test-data.sql")** to our test class so that before running each test, the specified SQL script will be executed.
 
 Let's test our **BookmarkRepository** , of course, using [Testcontainers](https://testcontainers.com) as follows:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">package com.sivalabs.bookmarks.domain;
+```java
+package com.sivalabs.bookmarks.domain;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -227,7 +258,7 @@ class BookmarkRepositoryTest {
 
     @Test
     void shouldFindAllBookmarks() {
-        List&lt;Bookmark&gt; bookmarks = bookmarkRepository.findAll();
+        List<Bookmark> bookmarks = bookmarkRepository.findAll();
         assertThat(bookmarks).isNotEmpty();
         assertThat(bookmarks).hasSize(6);
     }
@@ -244,7 +275,7 @@ class BookmarkRepositoryTest {
         Bookmark bookmark = new Bookmark(null, "My Title", "https://sivalabs.in", Instant.now());
         Long id = bookmarkRepository.save(bookmark);
 
-        Optional&lt;Bookmark&gt; bookmarkOptional = bookmarkRepository.findById(id);
+        Optional<Bookmark> bookmarkOptional = bookmarkRepository.findById(id);
         assertThat(bookmarkOptional).isPresent();
         assertThat(bookmarkOptional.get().id()).isEqualTo(id);
         assertThat(bookmarkOptional.get().title()).isEqualTo(bookmark.title());
@@ -253,7 +284,7 @@ class BookmarkRepositoryTest {
 
     @Test
     void shouldEmptyWhenBookmarkNotFound() {
-        Optional&lt;Bookmark&gt; bookmarkOptional = bookmarkRepository.findById(9999L);
+        Optional<Bookmark> bookmarkOptional = bookmarkRepository.findById(9999L);
         assertThat(bookmarkOptional).isEmpty();
     }
 
@@ -278,10 +309,12 @@ class BookmarkRepositoryTest {
 
         bookmarkRepository.delete(id);
 
-        Optional&lt;Bookmark&gt; optionalBookmark = bookmarkRepository.findById(id);
+        Optional<Bookmark> optionalBookmark = bookmarkRepository.findById(id);
         assertThat(optionalBookmark).isEmpty();
     }
-}</pre>
+}
+```
+
 
 We have used the Testcontainers special JDBC URL to start PostgreSQL database and run the tests using it.
 

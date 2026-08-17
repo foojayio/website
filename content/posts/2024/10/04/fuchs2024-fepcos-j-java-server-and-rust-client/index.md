@@ -105,7 +105,8 @@ As I have shown in my [previous post](https://foojay.io/today/fuchs-2024-fepcos-
 
 The developer uses Java and FEPCOS-J's annotations to program the server's system specification, which consists of the source code listed below:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="test.server/src" data-enlighter-group="g1">test.server/
+```bash
+test.server/
 └── src
     ├── module-info.java
     └── test
@@ -114,17 +115,23 @@ The developer uses Java and FEPCOS-J's annotations to program the server's syste
             ├── GreetService.java
             └── Server.java
 
-4 directories, 4 files</pre>
+4 directories, 4 files
+```
+
 
 The following briefly explains the example's source code.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="module-info.java" data-enlighter-group="g2">module test.server {
+```java
+module test.server {
     requires static fepcos.j.annotation;
-}</pre>
+}
+```
+
 
 `module-info.java` is the module descriptor. It specifies the server's name, *test.server*.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="Server.java" data-enlighter-group="g3">package test.server;
+```java
+package test.server;
 
 import fepcos.j.annotation.*;
 
@@ -132,11 +139,14 @@ import fepcos.j.annotation.*;
 public class Server {
     @Cap AddService add;
     @Cap GreetService greet;
-}</pre>
+}
+```
+
 
 `Server.java` is the server's system declaration. It declares the *add()* and *greet()* services to be implemented as *AddService* class or *GreetService* class, respectively.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="AddService.java" data-enlighter-group="g4">package test.server;
+```java
+package test.server;
 
 import fepcos.j.annotation.*;
 
@@ -149,11 +159,14 @@ class AddService {
 
     @Behavior
     void go() { z = x+y; }
-}</pre>
+}
+```
+
 
 `AddService.java` is the *add()* service's activity specification. It specifies the input parameters, *int x* and *int y* . Further, it specifies the output parameter, *int z* , to be calculated as `z=x+y`.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="GreetService.java" data-enlighter-group="g5">package test.server;
+```java
+package test.server;
 
 import fepcos.j.annotation.*;
 
@@ -169,7 +182,9 @@ class GreetService {
         greet_en = "Hello, " + user + "!";
         greet_de = "Hallo " + user + "!";
     }
-}</pre>
+}
+```
+
 
 `GreetService.java` is the *greet()* service's activity specification.
 
@@ -194,7 +209,8 @@ The developer:
 
 #### Source code of the Rust client
 
-<pre class="EnlighterJSRAW" data-enlighter-language="rust" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="test_client.rs" data-enlighter-group="">extern crate test_server_imp;
+```rust
+extern crate test_server_imp;
 
 use test_server_imp::S;
 
@@ -207,7 +223,9 @@ fn main() {
     let r2 = sy.greet(String::from("Bob")).unwrap();
     println!("{:?}", r2.greet_en);
     println!("{:?}", r2.greet_de);
-}</pre>
+}
+```
+
 
 To implement the Rust client, the developer requires the previously generated
 

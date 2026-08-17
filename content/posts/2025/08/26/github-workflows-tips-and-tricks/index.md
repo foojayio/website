@@ -46,12 +46,15 @@ GitHub Actions {#h2-1-github-actions}
 
 GitHub workflows are composed of *jobs* , which themselves are composed of *steps* . Steps reference *run* commands, and a couple of optional parameters, including a name.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml">jobs:
+```yaml
+jobs:
   metrics:
     runs-on: my-image                              #1
     steps:
       - name: Install dependencies via Poetry      #2
-        run: poetry install                        #3</pre>
+        run: poetry install                        #3
+```
+
 
 1. OCI image on which the workflow runs
 2. Step name
@@ -70,14 +73,17 @@ GitHub Actions are reusable components that offer alternatives to repeating the 
 >
 > -- [GitHub Action](https://docs.github.com/en/actions/get-started/understand-github-actions#actions)
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">jobs:
+```
+jobs:
   metrics:
     runs-on: my-image
     steps:
       - uses: actions/checkout@v5                  #1
         with:                                      #2
           fetch-depth: 0
-          submodules: recursive</pre>
+          submodules: recursive
+```
+
 
 1. Reference a GitHub Action
 2. Action parameters
@@ -109,7 +115,8 @@ Know your Actions {#h2-3-know-your-actions}
 
 As the previous tip, this one stems from a more generic one---I speak from experience. I was developing a workflow to package a Java application. I was heavily using the workflow, and the job had to download the dependencies at every run.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml">jobs:
+```yaml
+jobs:
   build:
     runs-on: ubuntu-latest
     steps:
@@ -123,7 +130,9 @@ As the previous tip, this one stems from a more generic one---I speak from exper
           path: ~/.m2/repository                   #3
           key: ${{ platform }}-maven--${{ hashFiles('**/pom.xml') }} #4
           restore-keys: |
-            ${{ runner.os }}-maven-                #4</pre>
+            ${{ runner.os }}-maven-                #4
+```
+
 
 1. Install a JDK
 2. Set up a cache. The cache is generic and can cache files across runs.
@@ -139,7 +148,8 @@ Yet, reading the documentation, I realized I could achieve the same in a much mo
 
 Thus, I replaced the above snippet with the following:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml">jobs:
+```yaml
+jobs:
   build:
     runs-on: ubuntu-latest
     steps:
@@ -148,7 +158,9 @@ Thus, I replaced the above snippet with the following:
         with:
           distribution: temurin
           java-version: 21
-          cache: maven                             #1</pre>
+          cache: maven                             #1
+```
+
 
 1. This is it
 
@@ -163,11 +175,14 @@ You may have noticed the `runs-on: ubuntu-latest` in the previous snippets. At t
 
 Actions' versioning works differently, as they point to a GitHub repo's reference: either a tag or a commit SHA. While the OCI image is in GitHub's hands, the action is the responsibility of its provider. It means anybody with commit rights could change the content of an underlying tag. If you take security seriously, you **must** pin to a commit.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml">jobs:
+```yaml
+jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@08c6903             #1</pre>
+      - uses: actions/checkout@08c6903             #1
+```
+
 
 1. Pin to a specific commit
 
@@ -185,11 +200,14 @@ Each of your workflow steps probably outputs lots of logs. In a regular workflow
 
 Here's a [sample](https://github.com/apache/arrow-adbc/blob/apache-arrow-adbc-19/.github/workflows/packaging.yml#L224-L228) from Apache Arrow:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml">- name: Show inputs
+```yaml
+- name: Show inputs
   run: |
-    echo "upload_artifacts: ${{ inputs.upload_artifacts }}" &gt;&gt; $GITHUB_STEP_SUMMARY
-    echo "schedule: ${{ github.event.schedule }}" &gt;&gt; $GITHUB_STEP_SUMMARY
-    echo "ref: ${{ github.ref }}" &gt;&gt; $GITHUB_STEP_SUMMARY</pre>
+    echo "upload_artifacts: ${{ inputs.upload_artifacts }}" >> $GITHUB_STEP_SUMMARY
+    echo "schedule: ${{ github.event.schedule }}" >> $GITHUB_STEP_SUMMARY
+    echo "ref: ${{ github.ref }}" >> $GITHUB_STEP_SUMMARY
+```
+
 
 The [result](https://github.com/apache/arrow-adbc/actions/runs/17181739408#summary-48745051897) is:
 
@@ -207,37 +225,46 @@ Workflows run steps sequentially. A failing step cancels all remaining steps, an
 
 GitHub uses `success()` by default, but options include `always()`, `cancelled()`, and `failure()`.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml">- name: Show inputs
+```yaml
+- name: Show inputs
   run: |
-    echo "upload_artifacts: ${{ inputs.upload_artifacts }}" &gt;&gt; $GITHUB_STEP_SUMMARY
-    echo "schedule: ${{ github.event.schedule }}" &gt;&gt; $GITHUB_STEP_SUMMARY
-    echo "ref: ${{ github.ref }}" &gt;&gt; $GITHUB_STEP_SUMMARY</pre>
+    echo "upload_artifacts: ${{ inputs.upload_artifacts }}" >> $GITHUB_STEP_SUMMARY
+    echo "schedule: ${{ github.event.schedule }}" >> $GITHUB_STEP_SUMMARY
+    echo "ref: ${{ github.ref }}" >> $GITHUB_STEP_SUMMARY
+```
+
 
 1. Always run the step, regardless of whether the previous steps were successful or not
 
 Now imagine the following sequence:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml">- name: Step that may fail
+```yaml
+- name: Step that may fail
   run: whatever
 - name: Execute unit tests
   run: ./mvnw -B test                              #1
 - name: Test Summary
   if: ${{ always() }}
-  uses: test-summary/action@31493c7                #2</pre>
+  uses: test-summary/action@31493c7                #2
+```
+
 
 1. Running unit tests also generates JUnit reports
 2. Use the generated JUnit reports to write a step summary
 
 If the first step fails, the summary executes regardless of whether tests were run. If they didn't, it would fail. To avoid this, we must refine the condition further so that the summary step only runs if the unit test step did.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml">- name: Step that may fail
+```yaml
+- name: Step that may fail
   run: whatever
 - name: Execute unit tests
   id: test                                         #1
   run: ./mvnw -B test
 - name: Test Summary
-  if: ${{ always() &amp;&amp; steps.test.conclusion == 'success'}} #2
-  uses: test-summary/action@31493c7</pre>
+  if: ${{ always() && steps.test.conclusion == 'success'}} #2
+  uses: test-summary/action@31493c7
+```
+
 
 1. Set the step's id
 2. Run only if the `test` step runs successfully
@@ -263,11 +290,15 @@ Comes the act project:
 
 `act` has a GitHub CLI integration that triggers the workflow according to the correct event. Let's emulate a push:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="shell">gh act push</pre>
+```bash
+gh act push
+```
+
 
 Here's the output when images and actions have already been downloaded:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">INFO[0000] Using docker host 'unix:///var/run/docker.sock', and daemon socket 'unix:///var/run/docker.sock'
+```
+INFO[0000] Using docker host 'unix:///var/run/docker.sock', and daemon socket 'unix:///var/run/docker.sock'
 [workflow.yml/test] ⭐ Run Set up job
 [workflow.yml/test] 🚀  Start image=catthehacker/ubuntu:act-22.04
 [workflow.yml/test]   🐳  docker pull image=catthehacker/ubuntu:act-22.04 platform= username= forcePull=true
@@ -314,7 +345,7 @@ Here's the output when images and actions have already been downloaded:
 [workflow.yml/test]   🐳  docker exec cmd=[bash -e /var/run/act/workflow/2] user= workdir=
 | [INFO] Scanning for projects...
 | [INFO]
-| [INFO] ----&lt; ch.frankel.blog:act-sample &gt;-----
+| [INFO] ----< ch.frankel.blog:act-sample >-----
 | [INFO] Building act-sample 1.0-SNAPSHOT
 | [INFO]   from pom.xml
 | [INFO] ------------------------[ jar ]-------------------------
@@ -363,7 +394,9 @@ Here's the output when images and actions have already been downloaded:
 [workflow.yml/test] ⭐ Run Complete job
 [workflow.yml/test] Cleaning up container for job test
 [workflow.yml/test]   ✅  Success - Complete job
-[workflow.yml/test] 🏁  Job succeeded</pre>
+[workflow.yml/test] 🏁  Job succeeded
+```
+
 
 I could write a couple of posts on `act`; I'll leave you to read the documentation.
 
@@ -391,6 +424,6 @@ Summary {#h2-8-summary}
 * [Status check functions](https://docs.github.com/en/actions/reference/workflows-and-actions/expressions#status-check-functions)
 * [Introduction to act](https://nektosact.com/)
 
-*** ** * ** ***
+
 
 *Originally published at [A Java Geek](https://blog.frankel.ch/github-workflows-tips-tricks/) on August 24^th^, 2025*

@@ -8,7 +8,7 @@ aliases:
 frozen: false
 ---
 
-*** ** * ** ***
+
 
 Do you want to try out Java? Or you've been using it for a while and need to install it again?
 

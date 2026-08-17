@@ -70,7 +70,7 @@ Only a few minor points of criticism about the book. The paper version is printe
 
 Don't expect a book listing all the methods provided by FXGL. No, **the best approach to learning from the book** is to thoroughly examine the examples and modify values and methods to see the impact on speed, gravity, movement, etc. This way, you will be able to create your version of each of the provided examples, learn how the library works, and be able to create your own games and visual applications.
 
-*** ** * ** ***
+
 
 (\*): Almas was so helpful in giving the full terms to add here:
 

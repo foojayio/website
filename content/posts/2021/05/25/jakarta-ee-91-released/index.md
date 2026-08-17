@@ -28,16 +28,22 @@ In order to upgrade to the new version, simply change the dependency version in 
 
 #### Maven dependency for Jakarta EE Platform 9.1
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&lt;dependency&gt;
-  &lt;groupId&gt;jakarta.platform&lt;/groupId&gt;
-  &lt;artifactId&gt;jakarta.jakartaee-api&lt;/artifactId&gt;
-  &lt;version&gt;9.1.0&lt;/version&gt;
-&lt;/dependency&gt;</pre>
+```java
+<dependency>
+  <groupId>jakarta.platform</groupId>
+  <artifactId>jakarta.jakartaee-api</artifactId>
+  <version>9.1.0</version>
+</dependency>
+```
+
 
 #### Maven dependency for Jakarta EE Web Profile 9.1
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&lt;dependency&gt;
-  &lt;groupId&gt;jakarta.platform&lt;/groupId&gt;
-  &lt;artifactId&gt;jakarta.jakartaee-web-api&lt;/artifactId&gt;
-  &lt;version&gt;9.1.0&lt;/version&gt;
-&lt;/dependency&gt;</pre>
+```java
+<dependency>
+  <groupId>jakarta.platform</groupId>
+  <artifactId>jakarta.jakartaee-web-api</artifactId>
+  <version>9.1.0</version>
+</dependency>
+```
+

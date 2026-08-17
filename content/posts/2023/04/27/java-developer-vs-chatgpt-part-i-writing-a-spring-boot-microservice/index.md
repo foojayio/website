@@ -85,7 +85,8 @@ Step 1: Bootstrapping the initial Spring Boot skeleton {#heading-step-1-bootstra
 
 *Inside the* [`com.ai`](http://com.ai/) *package, create the main class file* [`CodeGenerationServiceApplication.java`](http://codegenerationserviceapplication.java/) *with the following content:*
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">package com.ai;
+```java
+package com.ai;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -94,54 +95,58 @@ public class CodeGenerationServiceApplication {
     public static void main(String[] args) {
         SpringApplication.run(CodeGenerationServiceApplication.class, args);
     }
-}</pre>
+}
+```
+
 
 *Next, create the* `pom.xml` *file in the root directory of the project with the following content:*
 
-<pre class="EnlighterJSRAW" data-enlighter-language="xml" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
-&lt;project xmlns="http://maven.apache.org/POM/4.0.0"
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0         http://maven.apache.org/xsd/maven-4.0.0.xsd"&gt;
-    &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
-    &lt;groupId&gt;com.ai&lt;/groupId&gt;
-    &lt;artifactId&gt;CodeGenerationService&lt;/artifactId&gt;
-    &lt;version&gt;0.0.1-SNAPSHOT&lt;/version&gt;
-    &lt;packaging&gt;jar&lt;/packaging&gt;
-    &lt;name&gt;CodeGenerationService&lt;/name&gt;
-    &lt;properties&gt;
-        &lt;project.build.sourceEncoding&gt;UTF-8&lt;/project.build.sourceEncoding&gt;
-        &lt;maven.compiler.source&gt;17&lt;/maven.compiler.source&gt;
-        &lt;maven.compiler.target&gt;17&lt;/maven.compiler.target&gt;
-        &lt;java.version&gt;17&lt;/java.version&gt;
-        &lt;spring.boot.version&gt;2.6.2&lt;/spring.boot.version&gt;
-    &lt;/properties&gt;
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0         http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.ai</groupId>
+    <artifactId>CodeGenerationService</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <packaging>jar</packaging>
+    <name>CodeGenerationService</name>
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
+        <java.version>17</java.version>
+        <spring.boot.version>2.6.2</spring.boot.version>
+    </properties>
 
-    &lt;dependencies&gt;
-        &lt;dependency&gt;
-            &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
-            &lt;artifactId&gt;spring-boot-starter-web&lt;/artifactId&gt;
-            &lt;version&gt;${spring.boot.version}&lt;/version&gt;
-        &lt;/dependency&gt;
-    &lt;/dependencies&gt;
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+            <version>${spring.boot.version}</version>
+        </dependency>
+    </dependencies>
 
-    &lt;build&gt;
-        &lt;plugins&gt;
-            &lt;plugin&gt;
-                &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
-                &lt;artifactId&gt;spring-boot-maven-plugin&lt;/artifactId&gt;
-                &lt;version&gt;${spring.boot.version}&lt;/version&gt;
-                &lt;executions&gt;
-                    &lt;execution&gt;
-                        &lt;goals&gt;
-                            &lt;goal&gt;repackage&lt;/goal&gt;
-                        &lt;/goals&gt;
-                    &lt;/execution&gt;
-                &lt;/executions&gt;
-            &lt;/plugin&gt;
-        &lt;/plugins&gt;
-    &lt;/build&gt;
-&lt;/project&gt;
-</pre>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>${spring.boot.version}</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+</project>
+```
+
 
 *This sets up a basic Spring Boot project using Maven as the build tool and Java 17 as the programming language. The project has a single CodeGenerationServiceApplication class, which is the entry point for the application. The pom.xml file includes the required dependencies and build configurations.*
 
@@ -149,15 +154,19 @@ public class CodeGenerationServiceApplication {
 
 **\[chatGPT\] \>** *To run the application using Maven, you can use the spring-boot:run command. Open a terminal or command prompt, navigate to the project's root directory (where the pom.xml file is located), and execute the following command:*
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">mvn spring-boot:run</pre>
+```bash
+mvn spring-boot:run
+```
+
 
 *This command will start the Spring Boot application, and you should see the application logs in the terminal.*
 
-*** ** * ** ***
+
 
 Okay. This was... pretty straightforward. We were able to generate a minimal required setup for a Spring Boot application. Let's check it actually works:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ mvn spring-boot:run 
+```bash
+$ mvn spring-boot:run 
 
 [INFO] Attaching agents: []
 
@@ -177,7 +186,9 @@ Okay. This was... pretty straightforward. We were able to generate a minimal req
 2023-03-21 21:05:39.335  INFO 19502 --- [           main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
 2023-03-21 21:05:39.336  INFO 19502 --- [           main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 918 ms
 2023-03-21 21:05:39.666  INFO 19502 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
-2023-03-21 21:05:39.673  INFO 19502 --- [           main] com.ai.CodeGenerationServiceApplication  : Started CodeGenerationServiceApplication in 1.902 seconds (JVM running for 2.239)</pre>
+2023-03-21 21:05:39.673  INFO 19502 --- [           main] com.ai.CodeGenerationServiceApplication  : Started CodeGenerationServiceApplication in 1.902 seconds (JVM running for 2.239)
+```
+
 
 Great success! Or at least a great start.
 
@@ -188,23 +199,27 @@ Step 2: Create OpenAI API client {#heading-step-2-create-openai-api-client}
 
 **\[chatGPT\] \>** *To use the OpenAI API in your Java project, you can use a library like Retrofit to make HTTP requests. First, add the necessary dependencies to your* `pom.xml`*:* [](https://devskeptic.hashnode.dev/java-developer-vs-chatgpt-part-i-writing-a-spring-boot-microservice#heading-step-2-create-openai-api-client)
 
-<pre class="EnlighterJSRAW" data-enlighter-language="xml" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&lt;dependency&gt;
-    &lt;groupId&gt;com.squareup.retrofit2&lt;/groupId&gt;
-    &lt;artifactId&gt;retrofit&lt;/artifactId&gt;
-    &lt;version&gt;2.9.0&lt;/version&gt;
-&lt;/dependency&gt;
+```xml
+<dependency>
+    <groupId>com.squareup.retrofit2</groupId>
+    <artifactId>retrofit</artifactId>
+    <version>2.9.0</version>
+</dependency>
 
-&lt;dependency&gt;
-    &lt;groupId&gt;com.squareup.retrofit2&lt;/groupId&gt;
-    &lt;artifactId&gt;converter-gson&lt;/artifactId&gt;
-    &lt;version&gt;2.9.0&lt;/version&gt;
-&lt;/dependency&gt;</pre>
+<dependency>
+    <groupId>com.squareup.retrofit2</groupId>
+    <artifactId>converter-gson</artifactId>
+    <version>2.9.0</version>
+</dependency>
+```
+
 
 *Next, create a new package called* [`com.ai`](http://com.ai/)`.openai` *and add the following files:*
 
 1*.* [`OpenAIApi.java`](http://openaiapi.java/)*:*
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">package com.ai.openai;
+```java
+package com.ai.openai;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -215,13 +230,16 @@ public interface OpenAIApi {
 
     @Headers("Content-Type: application/json")
     @POST("v1/engines/davinci-codex/completions")
-    Call&lt;ResponseBody&gt; generateCode(@Body String input);
+    Call<ResponseBody> generateCode(@Body String input);
 
-}</pre>
+}
+```
+
 
 *2.* [`OpenAIClient.java`](http://openaiclient.java/)*:*
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">package com.ai.openai;
+```java
+package com.ai.openai;
 
 import okhttp3.OkHttpClient;
 import okhttp3.ResponseBody;
@@ -245,7 +263,7 @@ public class OpenAIClient {
         HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
         logging.setLevel(HttpLoggingInterceptor.Level.BODY);
         httpClient.addInterceptor(logging);
-        httpClient.addInterceptor(chain -&gt; {    
+        httpClient.addInterceptor(chain -> {    
             okhttp3.Request original = chain.request();
             okhttp3.Request request = original.newBuilder()
                 .header("Authorization", "Bearer " + API_KEY)
@@ -267,10 +285,10 @@ public class OpenAIClient {
     public String generateCode(String input) {
 
         String code = "";
-        Call&lt;ResponseBody&gt; call = api.generateCode(input);
+        Call<ResponseBody> call = api.generateCode(input);
 
         try {
-            Response&lt;ResponseBody&gt; response = call.execute();
+            Response<ResponseBody> response = call.execute();
             if (response.isSuccessful()) {
                 code = response.body().string();
             } 
@@ -284,13 +302,15 @@ public class OpenAIClient {
         return code;
 
     }
-}</pre>
+}
+```
+
 
 *Replace your_api_key with your OpenAI API key. The OpenAIClient class has a method* `generateCode` *that accepts a String input and returns the generated code by the API. It uses Retrofit to make API requests and OkHttpClient to add the necessary headers.*
 
 *Please note that this implementation uses synchronous calls to the OpenAI API. In a real-world application, it's recommended to use asynchronous calls to avoid blocking the main thread.*
 
-*** ** * ** ***
+
 
 A few interesting observations on the generated code:
 
@@ -302,7 +322,7 @@ A few interesting observations on the generated code:
 
 4. The sync vs. async comment at the end: it seems that ChatGPT decided to regard the 'production-ready code' requirement we mentioned to it before in a manner of criticizing its own code rather than implementing it "properly" from the first try.
 
-*** ** * ** ***
+
 
 Let's continue:
 
@@ -310,7 +330,10 @@ Let's continue:
 
 **\[chatGPT\] \>** *First, create a new file named* [`application.properties`](http://application.properties/) *inside the* `src/main/resources` *folder and add the following line:*
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">openai.api-key=your_api_key</pre>
+```yaml
+openai.api-key=your_api_key
+```
+
 
 *Replace your_api_key with your OpenAI API key.*
 
@@ -318,7 +341,8 @@ Let's continue:
 
 *Update the* [`OpenAIClient.java`](http://openaiclient.java/) *file as follows:*
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">package com.ai.openai;
+```java
+package com.ai.openai;
 import okhttp3.OkHttpClient;
 import okhttp3.ResponseBody;
 import okhttp3.logging.HttpLoggingInterceptor;
@@ -344,7 +368,7 @@ public class OpenAIClient {
         HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
         logging.setLevel(HttpLoggingInterceptor.Level.BODY);
         httpClient.addInterceptor(logging);
-        httpClient.addInterceptor(chain -&gt; {
+        httpClient.addInterceptor(chain -> {
             okhttp3.Request original = chain.request();
             okhttp3.Request request = original.newBuilder()
                 .header("Authorization", "Bearer " + apiKey)
@@ -364,9 +388,9 @@ public class OpenAIClient {
 
     public String generateCode(String input) {
         String code = "";
-        Call&lt;ResponseBody&gt; call = api.generateCode(input);
+        Call<ResponseBody> call = api.generateCode(input);
         try {
-            Response&lt;ResponseBody&gt; response = call.execute();
+            Response<ResponseBody> response = call.execute();
         if (response.isSuccessful()) {
             code = response.body().string();
         } else {
@@ -378,11 +402,13 @@ public class OpenAIClient {
         return code;
     }
 
-}</pre>
+}
+```
+
 
 *Now, the OpenAIClient class reads the API key from the* [](http://application.properties/)*[application.properties](http://application.properties/)* *file and uses it for authentication when making requests to the OpenAI API.*
 
-*** ** * ** ***
+
 
 We can see that ChatGPT made the change correctly using Spring's proper annotations, understood where the [`application.properties`](http://application.properties/) should be located (under `resources` folder) and refactored the code accordingly.
 
@@ -395,21 +421,27 @@ Step 3: POJOs to the rescue {#heading-step-3-pojos-to-the-rescue}
 
 **\[chatGPT\] \>** *To create a record class named* `PromptRequest` *with a single String argument named* `input`*, create a new package called* [`com.ai`](http://com.ai/)`.pojos` *and add the following* [`PromptRequest.java`](http://promptrequest.java/) *file:*
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">package com.ai.pojos;
+```java
+package com.ai.pojos;
 
 public record PromptRequest(String input) {
 
-}</pre>
+}
+```
+
 
 **\[me\] \>** *Now create another record class under the same package, named* `GeneratedCodeResult`*, that has one String argument named* `result`
 
 **\[chatGPT\] \>** *To create a record class named* `GeneratedCodeResult` *with a single String argument named* `result`*, add the following* [`GeneratedCodeResult.java`](http://generatedcoderesult.java/) *file to the* [`com.ai`](http://com.ai/)`.pojos` *package:*
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">package com.ai.pojos;
+```java
+package com.ai.pojos;
 
 public record GeneratedCodeResult(String result) {
 
-}</pre>
+}
+```
+
 
 Nothing complicated here. We created the request \& response POJOs that will be used later for serving the API calls. ChatGPT delivered as desired.
 
@@ -426,7 +458,8 @@ Step 4: Write our first REST service endpoint (controller) {#heading-step-4-writ
 
 *3. Add the following content to the* [`CodeGenerationController.java`](http://codegenerationcontroller.java/) \*file:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">package com.ai.controllers;
+```java
+package com.ai.controllers;
 import com.ai.openai.OpenAIClient;
 import com.ai.pojos.GeneratedCodeResult;
 import com.ai.pojos.PromptRequest;
@@ -456,7 +489,9 @@ public class CodeGenerationController {
 
     }
 
-}</pre>
+}
+```
+
 
 *The* `CodeGenerationController` *class is annotated with* `@RestController`*, which indicates that it is a RESTful web service. The* `@RequestMapping` *annotation sets the base URL path for this controller, which is* `/api/codegeneration`*.*
 
@@ -464,7 +499,7 @@ public class CodeGenerationController {
 
 *The* `OpenAIClient` *is injected into the controller via the constructor, and its* `generateCode` *method is called to get the generated code from the OpenAI API.*
 
-*** ** * ** ***
+
 
 I wanted to take ChatGPT step by step in the Controller code generation, instead, it already included the implementation using the client and the POJOs we previously generated! ***I am shocked.*** This was a very unexpected outcome from my prompt and made me stare at the screen for a minute realizing how it inferred the scope immediately. I salute you, my AI friend.
 

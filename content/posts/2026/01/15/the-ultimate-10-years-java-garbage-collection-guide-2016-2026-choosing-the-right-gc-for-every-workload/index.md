@@ -250,7 +250,7 @@ Parallel GC is a massive double-decker bus. It carries the most passengers (thro
 
 Align your JVM configuration with your business goals. Monitor your allocation rates using the equations provided. And most importantly, stop treating memory management as an afterthought.
 
-*** ** * ** ***
+
 
 **References**
 

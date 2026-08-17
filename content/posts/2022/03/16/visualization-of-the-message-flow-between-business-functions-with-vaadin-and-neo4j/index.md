@@ -46,7 +46,8 @@ First I created a Vaadin project on [start.vaadin.com](https://start.vaadin.com/
 
 [Spring Data Neo4j](https://spring.io/projects/spring-data-neo4j) provides easy access to Neo4j. As I already know Spring Data JPA and the programming model is very similar it was easy to get started. First I've mapped the nodes and defined the relationships using the Neo4j annotations.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">@Node
+```java
+@Node
 public class BusinessFunction {
 
     @Id
@@ -57,10 +58,11 @@ public class BusinessFunction {
     private String actorsDE;
     private String descriptionDE;
 }
+```
 
-</pre>
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">@Node
+```java
+@Node
 public class Message {
 
     @Id
@@ -71,53 +73,61 @@ public class Message {
     private String descriptionDE;
 
     @Relationship(type = "SENDS", direction = Relationship.Direction.INCOMING)
-    private Set&lt;BusinessFunction&gt; senders = new HashSet&lt;&gt;();
+    private Set<BusinessFunction> senders = new HashSet<>();
 
     @Relationship(type = "RECEIVES")
-    private Set&lt;BusinessFunction&gt; receivers = new HashSet&lt;&gt;();
-}</pre>
+    private Set<BusinessFunction> receivers = new HashSet<>();
+}
+```
+
 
 To read and write the data you can use repositories and make use of interface methods that will be used to generate the queries for you. Remark: I didn't care about the performance so the generated queries were good enough in the first phase.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public interface BusinessFunctionRepository extends Neo4jRepository&lt;BusinessFunction, Long&gt; {
+```java
+public interface BusinessFunctionRepository extends Neo4jRepository<BusinessFunction, Long> {
 
-    Optional&lt;BusinessFunction&gt; findByNameDE(String name);
+    Optional<BusinessFunction> findByNameDE(String name);
 
-    List&lt;BusinessFunction&gt; findAllByNameDELike(String name, Pageable pageable);
+    List<BusinessFunction> findAllByNameDELike(String name, Pageable pageable);
 }
-</pre>
+```
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public interface MessageRepository extends Neo4jRepository&lt;Message, Long&gt; {
 
-    Optional&lt;Message&gt; findByNameDE(String name);
+```java
+public interface MessageRepository extends Neo4jRepository<Message, Long> {
 
-    List&lt;Message&gt; findAllByNameDELike(String name, Pageable pageable);
-}</pre>
+    Optional<Message> findByNameDE(String name);
+
+    List<Message> findAllByNameDELike(String name, Pageable pageable);
+}
+```
+
 
 Diagram {#h2-4-diagram}
 -----------------------
 
 Finally I had to visualize the graph with a network diagram. Using the vis-network-vaadin API made it quite simple. I just had to map BusinessFunction and Message to nodes and create edges from the realtionships.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">var networkDiagram = new NetworkDiagram(Options.builder().build());
+```java
+var networkDiagram = new NetworkDiagram(Options.builder().build());
 networkDiagram.setSizeFull();
 
 var businessFunctionNodes = businessFunctionRepository.findAll().stream()
-        .map(businessFunction -&gt; createNode("b-", businessFunction.getId(), businessFunction.getNameDE(), "DodgerBlue"))
+        .map(businessFunction -> createNode("b-", businessFunction.getId(), businessFunction.getNameDE(), "DodgerBlue"))
         .toList();
-var nodes = new ArrayList&lt;&gt;(businessFunctionNodes);
+var nodes = new ArrayList<>(businessFunctionNodes);
 
 var messages = messageRepository.findAll();
 var messageNodes = messages.stream()
-        .map(message -&gt; createNode("m-", message.getId(), message.getNameDE(), "Orange"))
+        .map(message -> createNode("m-", message.getId(), message.getNameDE(), "Orange"))
         .toList();
 
 nodes.addAll(messageNodes);
 
-var dataProvider = new ListDataProvider&lt;&gt;(nodes);
+var dataProvider = new ListDataProvider<>(nodes);
 networkDiagram.setNodesDataProvider(dataProvider);
 
-var edges = new ArrayList&lt;Edge&gt;();
+var edges = new ArrayList<Edge>();
 for (Message message : messages) {
     for (BusinessFunction sender : message.getSenders()) {
         edges.add(createEdge("b-", sender.getId(), "m-" + message.getId().toString(), getTranslation("sends")));
@@ -127,11 +137,14 @@ for (Message message : messages) {
     }
 }
 
-networkDiagram.setEdges(edges);</pre>
+networkDiagram.setEdges(edges);
+```
+
 
 These are the helper methods to create nodes and edges:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">private Edge createEdge(String prefix, Long id, String name, String label) {
+```java
+private Edge createEdge(String prefix, Long id, String name, String label) {
     var edge = new Edge(prefix + id.toString(), name);
     edge.setColor("black");
     edge.setArrows(new Arrows(new ArrowHead(1, Arrows.Type.arrow)));
@@ -146,7 +159,9 @@ private Node createNode(String prefix, Long id, String name, String color) {
     node.setFont(Font.builder().withColor("white").build());
     node.setWidthConstraint(new WidthConstraint(100, 100));
     return node;
-}</pre>
+}
+```
+
 
 Finally the graph is displayed in the application.
 

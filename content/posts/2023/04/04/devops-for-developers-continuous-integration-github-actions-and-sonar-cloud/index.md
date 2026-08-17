@@ -106,11 +106,14 @@ Intermittent failures are the bane of DevOps everywhere and they are painful to 
 
 When defining dependencies we need to focus on specific versions. There are many versioning schemes but over the past decade, the standard three-number semantic versioning took over the industry. This scheme is immensely important for CI as its usage can significantly impact the repeatability of a build e.g. with maven we can do:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">&lt;dependency&gt;
-     &lt;groupId&gt;group&lt;/groupId&gt;
-     &lt;artifactId&gt;artifact&lt;/artifactId&gt;
-     &lt;version&gt;2.3.1&lt;/version&gt;
-&lt;/dependency&gt;</pre>
+```
+<dependency>
+     <groupId>group</groupId>
+     <artifactId>artifact</artifactId>
+     <version>2.3.1</version>
+</dependency>
+```
+
 
 This is very specific and great for repeatability. However, this might become out of date quickly. We can replace the version number with `LATEST` or `RELEASE` which will automatically get the current version. This is bad as the builds will no longer be repeatable. However, the hard-coded three-number approach is also problematic. It's often the case that a patch version represents a security fix for a bug. In that case, we would want to update all the way to the latest minor update but not newer versions.
 
@@ -165,7 +168,8 @@ In the bottom right corner, we can see the Java with Maven project type. Once we
 
 Unfortunately, the default maven.yml suggested by GitHub includes a problem. This is the code we see in this image:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">name: Java CI with Maven
+```
+name: Java CI with Maven
 
 on:
   push:
@@ -191,7 +195,9 @@ jobs:
 
     # Optional: Uploads the full dependency graph to GitHub to improve the quality of Dependabot alerts this repository can receive
     - name: Update dependency graph
-      uses: advanced-security/maven-dependency-submission-action@571e99aab1055c2e71a1e2309b9691de18d6b7d6</pre>
+      uses: advanced-security/maven-dependency-submission-action@571e99aab1055c2e71a1e2309b9691de18d6b7d6
+```
+
 
 The last three lines update the dependency graph. But this feature fails or at least it failed for me. Removing them solved the problem. The rest of the code is standard YAML configuration.
 
@@ -219,13 +225,14 @@ Unfortunately, this is typically a useless message that does not provide help in
 
 Note that there are often multiple failures so it would be prudent to scroll up further. In this error, we can see the failure was an assertion in line `394` of AccountResourceIT which you can see here, note that the line numbers do not match. In this case, line `394` is the last line of the method:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">@Test
+```
+@Test
 @Transactional
 void testActivateAccount() throws Exception {
     final String activationKey = "some activation key";
     User user = new User();
     user.setLogin("activate-account");
-    user.setEmail("<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="5d3c3e29342b3c2938703c3e3e322833291d38253c302d3138733e3230">[email&nbsp;protected]</a>");
+    user.setEmail("<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="5d3c3e29342b3c2938703c3e3e322833291d38253c302d3138733e3230">[email protected]</a>");
     user.setPassword(RandomStringUtils.randomAlphanumeric(60));
     user.setActivated(false);
     user.setActivationKey(activationKey);
@@ -236,7 +243,9 @@ void testActivateAccount() throws Exception {
 
     user = userRepository.findOneByLogin(user.getLogin()).orElse(null);
     assertThat(user.isActivated()).isTrue();
-}</pre>
+}
+```
+
 
 This means the assert call failed. `isActivated()` returned `false` and failed the test. This should help a developer narrow down the issue and understand the root cause.
 
@@ -283,18 +292,24 @@ Overall, GitHub Repository Secrets provide a simple and effective way for develo
 
 We now need to integrate this into the project. First, we need to add these two lines to the pom.xml file. Notice that you need to update the organization name to match your own. These should go into the section in the XML:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">&lt;sonar.organization&gt;shai-almog&lt;/sonar.organization&gt; 
-&lt;sonar.host.url&gt;https://sonarcloud.io&lt;/sonar.host.url&gt;</pre>
+```
+<sonar.organization>shai-almog</sonar.organization> 
+<sonar.host.url>https://sonarcloud.io</sonar.host.url>
+```
+
 
 Notice that the JHipster project we created already has SonarQube support which [should be removed from the pom file](https://github.com/shai-almog/HelloJHipster/pull/8) before this code will work.
 
 After this we can replace the "Build with Maven" portion of the `maven.yml` file with the following version:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">- name: Build with Maven
+```
+- name: Build with Maven
     env:
        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-    run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=shai-almog_HelloJHipster package</pre>
+    run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=shai-almog_HelloJHipster package
+```
+
 
 Once we do that, SonarCloud will provide reports for every pull request merged into the system as shown here:
 

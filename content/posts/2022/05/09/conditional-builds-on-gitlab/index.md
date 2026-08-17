@@ -44,7 +44,8 @@ The next to last option is the answer to our problem. We can configure a set of 
 
 It translates into the following structure:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml">stages:
+```yaml
+stages:
   - image                                        # 1
   - deploy                                       # 1
 
@@ -69,7 +70,9 @@ pages:                                           # 3
   script: # Generate the site
   only:
     refs:
-      - master</pre>
+      - master
+```
+
 
 1. Define the two stages
 2. Define the `build` job in the `image` stage. The job creates the Docker image (via Kaniko)

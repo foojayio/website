@@ -38,7 +38,10 @@ There are two ways to create a new project:
 
 Use npx:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">npx @vaadin/cli init --hilla my-hilla-app</pre>
+```
+npx @vaadin/cli init --hilla my-hilla-app
+```
+
 
 Or use [start.vaadin.com](https://start.vaadin.com). Make sure that you delete all views and add one of those
 ![](https://martinelli.ch/wp-content/uploads/2022/06/image.png)
@@ -50,7 +53,8 @@ The demo project uses a `SamplePerson` entity. This is stored in an H2 database 
 
 To access the data from the frontend we need to create a Hilla Endpoint:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@Endpoint
+```java
+@Endpoint
 @AnonymousAllowed
 public class SamplePersonEndpoint {
 
@@ -62,7 +66,7 @@ public class SamplePersonEndpoint {
     }
 
     @Nonnull
-    public Page&lt;@Nonnull SamplePerson&gt; list(String filter, Pageable pageable) {
+    public Page<@Nonnull SamplePerson> list(String filter, Pageable pageable) {
         if (filter == null || filter.equals("")) {
             return repository.findAll(pageable);
         } else {
@@ -71,7 +75,7 @@ public class SamplePersonEndpoint {
         }
     }
 
-    public Optional&lt;SamplePerson&gt; get(@Nonnull UUID id) {
+    public Optional<SamplePerson> get(@Nonnull UUID id) {
         return repository.findById(id);
     }
 
@@ -94,7 +98,8 @@ public class SamplePersonEndpoint {
     }
 
 }
-</pre>
+```
+
 
 Hilla Endpoints are secure by default and you can use the security annotations `@RolesAllowed, @PermitAll` etc. But as we don't use authentication in the simple example we have to annotate the Endpoint with `@AnonymousAllowed` to allow unauthenticated access.
 
@@ -102,7 +107,8 @@ The `@Nonnull` annotations are used by the TypeScript generator to define the nu
 
 From this Java class TypeScript code will be generated:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="typescript" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">// @ts-ignore
+```typescript
+// @ts-ignore
 import client from './connect-client.default';
 // @ts-ignore
 import { Subscription } from '@hilla/frontend';
@@ -112,21 +118,21 @@ import type Pageable from './dev/hilla/mappedtypes/Pageable';
 
 function _count(
  filter: string | undefined
-): Promise&lt;number&gt;
+): Promise<number>
 {
  return client.call('SamplePersonEndpoint', 'count', {filter});
 }
 
 function _delete(
  id: string
-): Promise&lt;void&gt;
+): Promise<void>
 {
  return client.call('SamplePersonEndpoint', 'delete', {id});
 }
 
 function _get(
  id: string
-): Promise&lt;SamplePerson | undefined&gt;
+): Promise<SamplePerson | undefined>
 {
  return client.call('SamplePersonEndpoint', 'get', {id});
 }
@@ -134,14 +140,14 @@ function _get(
 function _list(
  filter: string | undefined,
  pageable: Pageable | undefined
-): Promise&lt;Array&lt;SamplePerson | undefined&gt;&gt;
+): Promise<Array<SamplePerson | undefined>>
 {
  return client.call('SamplePersonEndpoint', 'list', {filter, pageable});
 }
 
 function _update(
  entity: SamplePerson
-): Promise&lt;SamplePerson&gt;
+): Promise<SamplePerson>
 {
  return client.call('SamplePersonEndpoint', 'update', {entity});
 }
@@ -152,12 +158,16 @@ export {
   _list as list,
   _update as update,
 };
-</pre>
+```
+
 
 As you can see all methods from the Endpoint are available and calling the backend will be very simple:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="typescript" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">const data = await SamplePersonEndpoint.list(
-                   this.filter, {pageNumber: params.page, pageSize: params.pageSize, sort});</pre>
+```typescript
+const data = await SamplePersonEndpoint.list(
+                   this.filter, {pageNumber: params.page, pageSize: params.pageSize, sort});
+```
+
 
 As you can imagine changing the Endpoint on the Java side will result in changing the generated TypeScript code and you'll get compiler errors if there are breaking changes.
 
@@ -166,7 +176,8 @@ The Entity {#h2-3-the-entity}
 
 For simplicity, we directly use the JPA Entity in the Endpoint. We also use annotations to define nullability and looking at the email property also some validation.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@Entity
+```java
+@Entity
 public class SamplePerson extends AbstractEntity {
 
     @Nonnull
@@ -185,11 +196,14 @@ public class SamplePerson extends AbstractEntity {
     private boolean important;
 
 ...
-}</pre>
+}
+```
+
 
 This entity will result in two TypeScript types generated by Hilla.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="typescript" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">export default interface SamplePerson extends AbstractEntity {
+```typescript
+export default interface SamplePerson extends AbstractEntity {
   firstName: string;
   lastName: string;
   email: string;
@@ -197,10 +211,13 @@ This entity will result in two TypeScript types generated by Hilla.
   dateOfBirth?: string;
   occupation: string;
   important: boolean;
-}</pre>
+}
+```
 
-<pre class="EnlighterJSRAW" data-enlighter-language="typescript" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">export default class SamplePersonModel&lt;T extends SamplePerson = SamplePerson&gt; extends AbstractEntityModel&lt;T&gt; {
-  static createEmptyValue: () =&gt; SamplePerson;
+
+```typescript
+export default class SamplePersonModel<T extends SamplePerson = SamplePerson> extends AbstractEntityModel<T> {
+  static createEmptyValue: () => SamplePerson;
 
   get firstName(): StringModel {
     return this[_getPropertyModel]('firstName', StringModel, [false]);
@@ -229,7 +246,9 @@ This entity will result in two TypeScript types generated by Hilla.
   get important(): BooleanModel {
     return this[_getPropertyModel]('important', BooleanModel, [false]);
   }
-}</pre>
+}
+```
+
 
 The `SamplePerson` interface is used by our code and `SamplePersonModel `will be used for form binding.
 
@@ -238,80 +257,88 @@ The View with the Grid {#h2-4-the-view-with-the-grid}
 
 To create the view we use Lit. Also the View will be a Webcomponent. You'll find the full source code [here](https://github.com/simasch/hilla-master-detail-with-filter/blob/main/frontend/views/masterdetail/master-detail-view.ts).
 
-<pre class="EnlighterJSRAW" data-enlighter-language="typescript" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@customElement('master-detail-view')
+```typescript
+@customElement('master-detail-view')
 export class MasterDetailView extends View {
-</pre>
+```
+
 
 The `customElement` decorator defines the name of the Webcomponent and we extend from a Hilla class `View `that finally extends `LitElement.`
 
 The most important method is `render` where we create the content of the view.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">render() {
+```
+render() {
         return html`
-            &lt;vaadin-vertical-layout theme="padding"&gt;
-                &lt;vaadin-text-field label="Search" @value-changed=${this.search}&gt;&lt;/vaadin-text-field&gt;
-            &lt;/vaadin-vertical-layout&gt;
+            <vaadin-vertical-layout theme="padding">
+                <vaadin-text-field label="Search" @value-changed=${this.search}></vaadin-text-field>
+            </vaadin-vertical-layout>
 
-            &lt;vaadin-split-layout&gt;
-                &lt;div class="grid-wrapper" style="width: 70%"&gt;
-                    &lt;vaadin-grid
+            <vaadin-split-layout>
+                <div class="grid-wrapper" style="width: 70%">
+                    <vaadin-grid
                             id="grid"
                             theme="no-border"
                             .size=${this.gridSize}
                             .dataProvider=${this.gridDataProvider}
                             @active-item-changed=${this.itemSelected}
                             .selectedItems=${[personStore.selectedPerson]}
-                    &gt;
-                        &lt;vaadin-grid-sort-column path="firstName" auto-width&gt;&lt;/vaadin-grid-sort-column&gt;
-                        &lt;vaadin-grid-sort-column path="lastName" auto-width&gt;&lt;/vaadin-grid-sort-column&gt;
-                        &lt;vaadin-grid-sort-column path="email" auto-width&gt;&lt;/vaadin-grid-sort-column&gt;
-                        &lt;vaadin-grid-sort-column path="phone" auto-width&gt;&lt;/vaadin-grid-sort-column&gt;
-                        &lt;vaadin-grid-sort-column path="dateOfBirth" auto-width&gt;&lt;/vaadin-grid-sort-column&gt;
-                        &lt;vaadin-grid-sort-column path="occupation" auto-width&gt;&lt;/vaadin-grid-sort-column&gt;
-                        &lt;vaadin-grid-column
+                    >
+                        <vaadin-grid-sort-column path="firstName" auto-width></vaadin-grid-sort-column>
+                        <vaadin-grid-sort-column path="lastName" auto-width></vaadin-grid-sort-column>
+                        <vaadin-grid-sort-column path="email" auto-width></vaadin-grid-sort-column>
+                        <vaadin-grid-sort-column path="phone" auto-width></vaadin-grid-sort-column>
+                        <vaadin-grid-sort-column path="dateOfBirth" auto-width></vaadin-grid-sort-column>
+                        <vaadin-grid-sort-column path="occupation" auto-width></vaadin-grid-sort-column>
+                        <vaadin-grid-column
                                 path="important"
                                 auto-width
-                                ${columnBodyRenderer&lt;SamplePerson&gt;((item) =&gt;
+                                ${columnBodyRenderer<SamplePerson>((item) =>
                                         item.important
                                                 ? html`
-                                                    &lt;vaadin-icon
+                                                    <vaadin-icon
                                                             icon="vaadin:check"
                                                             style="width: var(--lumo-icon-size-s); height: var(--lumo-icon-size-s); color: var(--lumo-primary-text-color);"
-                                                    &gt;
-                                                    &lt;/vaadin-icon&gt;`
+                                                    >
+                                                    </vaadin-icon>`
                                                 : html`
-                                                    &lt;vaadin-icon
+                                                    <vaadin-icon
                                                             icon="vaadin:minus"
                                                             style="width: var(--lumo-icon-size-s); height: var(--lumo-icon-size-s); color: var(--lumo-disabled-text-color);"
-                                                    &gt;
-                                                    &lt;/vaadin-icon&gt;`
+                                                    >
+                                                    </vaadin-icon>`
                                 )}
-                        &gt;&lt;/vaadin-grid-column&gt;
-                    &lt;/vaadin-grid&gt;
-                &lt;/div&gt;
-                &lt;person-form
+                        ></vaadin-grid-column>
+                    </vaadin-grid>
+                </div>
+                <person-form
                         style="width: 30%"
                         @contact-form-saved=${this.contactFormSave}
-                &gt;&lt;/person-form&gt;
-            &lt;/vaadin-split-layout&gt;
+                ></person-form>
+            </vaadin-split-layout>
         `;
     }
-</pre>
+```
+
 
 We use Vaadin components and for people familiar with the Vaadin framework it will be easy to get started.
 
 The View uses a Grid to display the persons and uses lazy loading with a DataProvider. Therefore we define a property size that will get the number of persons from the Endpoint:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="typescript" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">this.gridSize = (await SamplePersonEndpoint.count(this.filter)) ?? 0;</pre>
+```typescript
+this.gridSize = (await SamplePersonEndpoint.count(this.filter)) ?? 0;
+```
+
 
 And to load the data we have to use the GridDataProvider functionality that also uses the appropriate Endpoint method that provides paging:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">private async getGridData(
-        params: GridDataProviderParams&lt;SamplePerson&gt;,
-        callback: GridDataProviderCallback&lt;SamplePerson | undefined&gt;
+```
+private async getGridData(
+        params: GridDataProviderParams<SamplePerson>,
+        callback: GridDataProviderCallback<SamplePerson | undefined>
     ) {
         const sort: Sort = {
-            orders: params.sortOrders.map((order) =&gt; ({
+            orders: params.sortOrders.map((order) => ({
                 property: order.path,
                 direction: order.direction == 'asc' ? Direction.ASC : Direction.DESC,
                 ignoreCase: false,
@@ -320,7 +347,9 @@ And to load the data we have to use the GridDataProvider functionality that also
         const data = await SamplePersonEndpoint.list(this.filter, 
                                                 {pageNumber: params.page, pageSize: params.pageSize, sort});
         callback(data);
-    }</pre>
+    }
+```
+
 
 The Form {#h2-5-the-form}
 -------------------------
@@ -329,21 +358,24 @@ To bind the `SamplePerson `object to the form we use a binder. A binder controls
 
 The binder is typed by the generated interface and class based on the Java `SamplePerson` class.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="typescript" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@customElement('person-form')
+```typescript
+@customElement('person-form')
 export class PersonForm extends View {
 
-    private binder = new Binder&lt;SamplePerson, SamplePersonModel&gt;(this, SamplePersonModel);
+    private binder = new Binder<SamplePerson, SamplePersonModel>(this, SamplePersonModel);
 
     constructor() {
         super();
-        this.autorun(() =&gt; {
+        this.autorun(() => {
             if (personStore.selectedPerson) {
                 this.binder.read(personStore.selectedPerson);
             } else {
                 this.binder.clear();
             }
         });
-    }</pre>
+    }
+```
+
 
 But how do we get the person that is selected in the Grid to the form?   
 
@@ -353,17 +385,20 @@ Hilla recommends MobX to manage frontend state. Read more about that in the docu
 
 Also in the form we use Vaadin components that allows us to bind the fields: `${field(this.binder.model.firstName)}`
 
-<pre class="EnlighterJSRAW" data-enlighter-language="typescript" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">render() {
+```typescript
+render() {
         return html`
-            &lt;div class="editor-layout"&gt;
-                &lt;div class="editor"&gt;
-                    &lt;vaadin-form-layout&gt;
-                        &lt;vaadin-text-field
+            <div class="editor-layout">
+                <div class="editor">
+                    <vaadin-form-layout>
+                        <vaadin-text-field
                                 label="First name"
                                 id="firstName"
                                 ${field(this.binder.model.firstName)}
-                        &gt;&lt;/vaadin-text-field&gt;
-...</pre>
+                        ></vaadin-text-field>
+...
+```
+
 
 Submitting the Form {#h2-6-submitting-the-form}
 -----------------------------------------------
@@ -372,7 +407,8 @@ The last thing we want to have a look at is how to save the person in the form.
 
 We can use the binders submitTo method and pass the update method of the Endpoint.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="typescript" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">private async save() {
+```typescript
+private async save() {
         try {
             await this.binder.submitTo(SamplePersonEndpoint.update);
             this.binder.clear();
@@ -389,11 +425,16 @@ We can use the binders submitTo method and pass the update method of the Endpoin
                 throw error;
             }
         }
-    }</pre>
+    }
+```
+
 
 After saving we clear the store and dispatch an event `contact-form-saved`. This event will be used in the grid to refresh the grid with the changed data.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&lt;person-form @contact-form-saved=${this.contactFormSave}&gt;&lt;/person-form&gt;</pre>
+```
+<person-form @contact-form-saved=${this.contactFormSave}></person-form>
+```
+
 
 Conclusion {#h2-7-conclusion}
 -----------------------------

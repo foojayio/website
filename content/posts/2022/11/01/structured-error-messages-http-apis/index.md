@@ -88,14 +88,17 @@ The demo highlights several steps to ease the process of evolving your APIs.
 
 In step 6, I want users to register, so I limit the number of calls in a time window if they aren't authenticated. I've created a dedicated Apache APISIX plugin for this. After the number of calls has reached the limit, it returns:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">HTTP/1.1 429 Too Many Requests
+```
+HTTP/1.1 429 Too Many Requests
 Date: Fri, 28 Oct 2022 11:56:11 GMT
 Content-Type: text/plain; charset=utf-8
 Transfer-Encoding: chunked
 Connection: keep-alive
 Server: APISIX/2.15.0
 
-{"error_msg":"Please register at https:\/\/apisix.org\/register to get your API token and enjoy unlimited calls"}</pre>
+{"error_msg":"Please register at https:\/\/apisix.org\/register to get your API token and enjoy unlimited calls"}
+```
+
 
 Let's structure the message as per RFC 7807.
 

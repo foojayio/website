@@ -73,7 +73,8 @@ Using Kafka Connect Adaptor Sink is fairly straightforward. All you need to do i
 
 Use Kafka Connect Adaptor NAR <https://github.com/apache/pulsar/tree/master/pulsar-io/kafka-connect-adaptor-nar> as a starting point (for simplicity, I'll edit it directly) and add your Kafka Connector Sink to the list of the dependencies in pom.xml. Here's what this would look like with the Kinesis Kafka connector sink:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">diff --git a/pulsar-io/kafka-connect-adaptor-nar/pom.xml b/pulsar-io/kafka-connect-adaptor-nar/pom.xml
+```
+diff --git a/pulsar-io/kafka-connect-adaptor-nar/pom.xml b/pulsar-io/kafka-connect-adaptor-nar/pom.xml
 index ea9bedbd056..c7fa9a1ebca 100644
 --- a/pulsar-io/kafka-connect-adaptor-nar/pom.xml
 +++ b/pulsar-io/kafka-connect-adaptor-nar/pom.xml
@@ -85,15 +86,18 @@ index ea9bedbd056..c7fa9a1ebca 100644
 + com.amazonaws
 + amazon-kinesis-kafka-connector
 + 0.0.9-SNAPSHOT
-+ 
++
+```
 
-      </pre>
 
 <br />
 
 Build the NAR:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ mvn -f pulsar-io/kafka-connect-adaptor-nar/pom.xml clean package -DskipTests</pre>
+```
+$ mvn -f pulsar-io/kafka-connect-adaptor-nar/pom.xml clean package -DskipTests
+```
+
 
 ### Step 2: Configuration {#h3-6-step-2-configuration}
 
@@ -101,7 +105,8 @@ The Sink expects "processingGuarantees" to be "EFFECTIVELY_ONCE"\`, configs poin
 
 For example:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">processingGuarantees: "EFFECTIVELY_ONCE"
+```
+processingGuarantees: "EFFECTIVELY_ONCE"
 configs:
   "topic": "my-topic"
   "offsetStorageTopic": "kafka-connect-sink-offset-kinesis"
@@ -119,8 +124,8 @@ configs:
      "singleKinesisProducerPerPartition": "true"
      "pauseConsumption": "true"
      "maxConnections": "1"
+```
 
-      </pre>
 
 ### Step 3: Profit! {#h3-7-step-3-profit}
 
@@ -148,20 +153,24 @@ Let's take a deeper look at the Pulsar IO API improvements below; for more techn
 
 We have contributed the support for coding schema-aware Pulsar IO Sinks that do not depend on a particular schema at build time. In other words, in Pulsar 2.7 you had to declare the schema type in your sink:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">class MySink implements Sink {
+```
+class MySink implements Sink {
      public void write(Record record) {
      }
 }
-      </pre>
+```
+
 
 To support "String" and "GenericRecord" (JSON and Avro structures) you had to create two classes and the user who deploys the Sink had to use the "--classname" argument to set the correct implementation for the given topic.
 
 In Pulsar 2.8 you can simply use this syntax:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">class MySink implements Sink {
+```
+class MySink implements Sink {
       public void write(Record record) {}
 }
-      </pre>
+```
+
 
 This sink will work with every schema type and with topics without a schema. It also supports schema evolution and KeyValue schema type.
 
@@ -177,11 +186,13 @@ Pulsar uses a special AUTO_CONSUME schema to validate and deserialize messages u
 
 Before Pulsar 2.8, AUTO_CONSUME allowed you to decode the message according to the version of the schema attached to the message but did not allow access to the exact schema definition. Pulsar 2.8 enhances the API by providing access to this information:JavaCopy
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">Schema schema = message.getReaderSchema().get();
+```
+Schema schema = message.getReaderSchema().get();
 
 org.apache.avro.Schema avroSchema = (org.apache.avro.Schema) schema.getNativeSchema().get();
 org.apache.avro.generic.GenericRecord nativeRecord = (org.apache.avro.generic.GenericRecord) consumedRecord.getNativeObject();
-      </pre>
+```
+
 
 Message.getReaderSchema() method returns the actual schema used for decoding the message, even in the case of the special AUTO_CONSUME Schema. Such schema automatically downloads new versions of the Schema while the topic evolves.
 

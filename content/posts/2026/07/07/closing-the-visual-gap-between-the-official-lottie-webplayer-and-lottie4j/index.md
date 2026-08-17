@@ -35,7 +35,8 @@ The biggest change is not a rendering fix but the way rendering is now verified.
 
 Now each frame is diffed, instead of every 5 frames before, and measured against a tolerance "floor". When Lottie4J drifts from the reference, a test fails and points at the exact frame. This runs with headless JavaFX on GitHub Actions as described in the post [Testing Lottie4J JavaFX Animations in GitHub Actions Without a Display: JavaFX 26 Headless to the Rescue](https://webtechie.be/post/testing-lottie4j-javafx-animations-in-github-actions-without-a-display-javafx-26-headless-to-the-rescue/). That turned "this animation looks a bit off" into a concrete, reproducible signal. The goal is to get each file to [99.5% similarity](https://github.com/lottie4j/lottie4j/blob/main/fxfileviewer/src/test/java/com/lottie4j/fxfileviewer/CompareFxViewWithWebViewTest.java#L85), but that value can be overruled per file. As you can [see in the code](https://github.com/lottie4j/lottie4j/blob/main/fxfileviewer/src/test/java/com/lottie4j/fxfileviewer/CompareFxViewWithWebViewTest.java#L135), the "worst" file is now at 95.2%, and yes, it's still that difficult `interactive_mood_selector_ui.json`.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">     private static final Map&lt;String, Double&gt; PER_FILE_FLOOR_OVERRIDE = Map.ofEntries(
+```
+     private static final Map<String, Double> PER_FILE_FLOOR_OVERRIDE = Map.ofEntries(
             Map.entry("json/interactive_mood_selector_ui.json", 95.2),
             Map.entry("json/animated_background_patterns.json", 99.2),
             Map.entry("json/angry_bird.json", 98.2),
@@ -45,7 +46,9 @@ Now each frame is diffed, instead of every 5 frames before, and measured against
             Map.entry("json/lottie_lego.json", 98.0),
             Map.entry("json/sandy_loading.json", 99.3),
             Map.entry("dot/demo-1.lottie", 99.3)
-    );</pre>
+    );
+```
+
 
 New real-world test animations, like `pi4j.json`, `foojay-reporter.json` and `foojay-duke.json`, got added so the harness measures against the files I'm actually using.
 

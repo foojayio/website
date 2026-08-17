@@ -82,7 +82,10 @@ Metal is Apple's modern graphics API. OpenGL on iOS was deprecated by Apple back
 
 To enable Metal in your project, set the build hint:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">ios.metal=true</pre>
+```
+ios.metal=true
+```
+
 
 Everything else stays the same. The Java surface is unchanged, your existing code keeps working.
 
@@ -179,13 +182,16 @@ The *Info* tab is mostly read-only and shows what is about to be written into `s
 
 A generated `.skin` is just a renamed zip:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">Apple-iPhone-16-Pro.skin/
+```
+Apple-iPhone-16-Pro.skin/
   skin.png            # portrait body (device frame + transparent screen + cutouts)
   skin_l.png          # 90-degree rotated portrait
   skin_map.png        # black rect = screen, white = frame, used for hit-testing
   skin_map_l.png      # rotated map
   iOS7Theme.res       # bundled native theme (or android_holo_light.res / winTheme.res)
-  skin.properties     # platform metadata, safe-area, PPI, display rect</pre>
+  skin.properties     # platform metadata, safe-area, PPI, display rect
+```
+
 
 The full developer-guide chapter at [Skin-Designer.asciidoc](https://github.com/codenameone/CodenameOne/blob/master/docs/developer-guide/Skin-Designer.asciidoc) walks through every stage with annotated screenshots and documents the `skin.properties` keys the wizard writes (`roundScreen`, `displayX/Y/Width/Height`, `safePortrait*`, `safeLandscape*`, `overrideNames`, system font families, PPI, and pixel ratio).
 
@@ -206,9 +212,12 @@ iOS multi-line TextArea: Return as Done {#h2-7-ios-multi-line-textarea-return-as
 
 The reason it has to be a flag is that real iOS does not expose this as a built-in primitive. Reminders implements it on a `UITextView` whose delegate intercepts `\n` in `shouldChangeTextInRange:`. We replicate that exactly, gated behind a client property so existing layouts are untouched:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">TextArea ta = new TextArea("", 3, 30);
+```
+TextArea ta = new TextArea("", 3, 30);
 ta.putClientProperty("iosReturnExitsEditing", Boolean.TRUE);
-ta.setDoneListener(e -&gt; { /* Return / Done was tapped */ });</pre>
+ta.setDoneListener(e -> { /* Return / Done was tapped */ });
+```
+
 
 While the flag is set, the keyboard's Return key is relabelled to **Done** (`UIReturnKeyDone`). Default behaviour is unchanged: the flag defaults to off, only takes effect on multi-line `TextArea`s, and only intercepts an exact `"\n"` replacement so pasted multi-line text is unaffected.
 

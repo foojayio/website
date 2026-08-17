@@ -58,19 +58,22 @@ Use case: HR system with encrypted fields {#h2-2-use-case-hr-system-with-encrypt
 
 To better understand how Spring Data MongoDB works with Queryable Encryption, we'll build a simple Java application for an HR system. This application will use a document model like the one below:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">{
+```
+{
 
-&nbsp;&nbsp;&nbsp;"name": "Ricardo",
+   "name": "Ricardo",
 
-&nbsp;&nbsp;&nbsp;"pin": "001",
+   "pin": "001",
 
-&nbsp;&nbsp;&nbsp;"ssn": 223,
+   "ssn": 223,
 
-&nbsp;&nbsp;&nbsp;"age": 36,
+   "age": 36,
 
-&nbsp;&nbsp;&nbsp;"salary": 1000.50
+   "salary": 1000.50
 
-}</pre>
+}
+```
+
 
 In this scenario, fields such as pin, ssn, age, and salary will be encrypted using the new annotations introduced in Spring Data MongoDB 4.5, including @Encrypted, @Queryable, and @RangeEncrypted.
 
@@ -117,39 +120,45 @@ Configuring dependencies and properties {#h2-4-configuring-dependencies-and-prop
 
 The first thing we need to do is include the mongodb-crypt library in our project. This library is essential when working with Queryable Encryption in Java applications, handling the low-level cryptographic operations required by the MongoDB driver. Open the pom.xml and include the following dependency:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&lt;dependency&gt;
+```
+<dependency>
 
-&nbsp;&nbsp;&nbsp;&lt;groupId&gt;org.mongodb&lt;/groupId&gt;
+   <groupId>org.mongodb</groupId>
 
-&nbsp;&nbsp;&nbsp;&lt;artifactId&gt;mongodb-crypt&lt;/artifactId&gt;
+   <artifactId>mongodb-crypt</artifactId>
 
-&nbsp;&nbsp;&nbsp;&lt;version&gt;5.5.1&lt;/version&gt;
+   <version>5.5.1</version>
 
-&lt;/dependency&gt;</pre>
+</dependency>
+```
+
 
 ### Application.yml configuration {#h3-6-application-yml-configuration}
 
 Now, let's open the application.yml file (or create one if it doesn't exist) and define the following values:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">app:
+```
+app:
 
-&nbsp;mongodb:
+ mongodb:
 
-&nbsp;&nbsp;&nbsp;uri: ${MONGODB_URI}
+   uri: ${MONGODB_URI}
 
-&nbsp;&nbsp;&nbsp;cryptSharedLibPath: ${CRYPT_PATH}
+   cryptSharedLibPath: ${CRYPT_PATH}
 
-&nbsp;&nbsp;&nbsp;keyVaultNamespace: encryption.__keyVault
+   keyVaultNamespace: encryption.__keyVault
 
-&nbsp;&nbsp;&nbsp;encryptedDatabaseName: hrsystem
+   encryptedDatabaseName: hrsystem
 
-&nbsp;&nbsp;&nbsp;encryptedCollectionName: employees
+   encryptedCollectionName: employees
 
 logging:
 
-&nbsp;level:
+ level:
 
-&nbsp;&nbsp;&nbsp;org.springframework.data.mongodb: DEBUG</pre>
+   org.springframework.data.mongodb: DEBUG
+```
+
 
 Alright, we can see some familiar settings here, like the uri, which defines the connection string to MongoDB, and the database/collection names where our encrypted data will live (hrsystem and employees).
 
@@ -164,25 +173,28 @@ To resolve this library dependency, we need to [download](https://www.mongodb.co
 
 Now that we've defined our configuration values in the application.yaml file, we need a way to access them inside our application. To do this, create a simple class:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@Component
+```
+@Component
 
 @ConfigurationProperties(prefix = "app.mongodb")
 
 public class AppProperties {
 
-&nbsp;&nbsp;&nbsp;protected String uri;
+   protected String uri;
 
-&nbsp;&nbsp;&nbsp;protected String cryptSharedLibPath;
+   protected String cryptSharedLibPath;
 
-&nbsp;&nbsp;&nbsp;protected String keyVaultNamespace;
+   protected String keyVaultNamespace;
 
-&nbsp;&nbsp;&nbsp;protected String encryptedDatabaseName;
+   protected String encryptedDatabaseName;
 
-&nbsp;&nbsp;&nbsp;protected String encryptedCollectionName;
+   protected String encryptedCollectionName;
 
-&nbsp;&nbsp;&nbsp;// getters and setters
+   // getters and setters
 
-}</pre>
+}
+```
+
 
 Note: Don't forget to generate getters and setters for all the fields in the AppProperties class.
 
@@ -193,43 +205,46 @@ Building the application layers {#h2-8-building-the-application-layers}
 
 Now, let's define the data we'll be working with throughout the project. We'll use a simple Employee record to represent an employee in our HR system:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@Document(collection = "employees")
+```
+@Document(collection = "employees")
 
 public record Employee(
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@Id
+       @Id
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;String id,
+       String id,
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;String name,
+       String name,
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@Encrypted
+       @Encrypted
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;String pin,
+       String pin,
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@Queryable(queryType = "equality")
+       @Queryable(queryType = "equality")
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@Encrypted
+       @Encrypted
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;int ssn,
+       int ssn,
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@RangeEncrypted(
+       @RangeEncrypted(
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;contentionFactor = 0L,
+               contentionFactor = 0L,
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;rangeOptions = "{\"min\": 0, \"max\": 150}"
+               rangeOptions = "{\"min\": 0, \"max\": 150}"
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)
+       )
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Integer age,
+       Integer age,
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@RangeEncrypted(contentionFactor = 0L,
+       @RangeEncrypted(contentionFactor = 0L,
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;rangeOptions = "{\"min\": {\"$numberDouble\": \"1500\"}, \"max\": {\"$numberDouble\": \"100000\"}, \"precision\": 2 }")
+               rangeOptions = "{\"min\": {\"$numberDouble\": \"1500\"}, \"max\": {\"$numberDouble\": \"100000\"}, \"precision\": 2 }")
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;double salary
+       double salary
 
-) {}</pre>
+) {}
+```
+
 
 Here's a quick look at what each encrypted field does:
 
@@ -241,149 +256,158 @@ Here's a quick look at what each encrypted field does:
 
 To query our encrypted fields, we'll define a few methods in our repository: findBySsn, findByAgeLessThan, and findBySalaryGreaterThan:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@Repository
+```
+@Repository
 
-public interface EmployeeRepository extends MongoRepository&lt;Employee, String&gt; {
+public interface EmployeeRepository extends MongoRepository<Employee, String> {
 
-&nbsp;&nbsp;&nbsp;Optional&lt;Employee&gt; findBySsn(int ssn);
+   Optional<Employee> findBySsn(int ssn);
 
-&nbsp;&nbsp;&nbsp;List&lt;Employee&gt; findByAgeLessThan(int age);&nbsp;&nbsp;&nbsp;
+   List<Employee> findByAgeLessThan(int age);   
 
-&nbsp;&nbsp;&nbsp;List&lt;Employee&gt; findBySalaryGreaterThan(double salary);
+   List<Employee> findBySalaryGreaterThan(double salary);
 
-}</pre>
+}
+```
+
 
 ### The service {#h3-11-the-service}
 
 Now, let's create a service layer to interact with the repository and handle the business logic of our application:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@Service
+```
+@Service
 
-public class EmployeeService&nbsp; {
+public class EmployeeService  {
 
-&nbsp;&nbsp;&nbsp;private static final Logger logger = LoggerFactory.getLogger(EmployeeService.class);
+   private static final Logger logger = LoggerFactory.getLogger(EmployeeService.class);
 
-&nbsp;&nbsp;&nbsp;private final EmployeeRepository employeeRepository;
+   private final EmployeeRepository employeeRepository;
 
-&nbsp;&nbsp;&nbsp;public EmployeeService(EmployeeRepository employeeRepository) {
+   public EmployeeService(EmployeeRepository employeeRepository) {
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this.employeeRepository = employeeRepository;
+        this.employeeRepository = employeeRepository;
 
-&nbsp;&nbsp;&nbsp;}
+   }
 
-&nbsp;&nbsp;&nbsp;public Employee createEmployee(Employee employee) {
+   public Employee createEmployee(Employee employee) {
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;logger.info("Creating employee {}", employee);
+       logger.info("Creating employee {}", employee);
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return employeeRepository.save(employee);
+        return employeeRepository.save(employee);
 
-&nbsp;&nbsp;&nbsp;&nbsp;}
+    }
 
-&nbsp;&nbsp;&nbsp;public List&lt;Employee&gt; findAll() {
+   public List<Employee> findAll() {
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;logger.info("Finding all employees ");
+      logger.info("Finding all employees ");
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return employeeRepository.findAll();
+      return employeeRepository.findAll();
 
-&nbsp;&nbsp;&nbsp;}
+   }
 
-&nbsp;&nbsp;&nbsp;public Optional&lt;Employee&gt; findBySsn(int ssn) {
+   public Optional<Employee> findBySsn(int ssn) {
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;logger.info("Finding employee with ssn equals {}", ssn);
+       logger.info("Finding employee with ssn equals {}", ssn);
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return employeeRepository.findBySsn(ssn);
+       return employeeRepository.findBySsn(ssn);
 
-&nbsp;&nbsp;&nbsp;}
+   }
 
-&nbsp;&nbsp;&nbsp;public List&lt;Employee&gt; findByAgeLessThan(int age) {
+   public List<Employee> findByAgeLessThan(int age) {
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Assert.isTrue(age &gt; 0, "Age must be greater than 0");
+       Assert.isTrue(age > 0, "Age must be greater than 0");
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Assert.isTrue(age &lt; 150, "Age must be less than 150");
+       Assert.isTrue(age < 150, "Age must be less than 150");
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;logger.info("Finding all employees where age is less than {} ", age);
+       logger.info("Finding all employees where age is less than {} ", age);
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return employeeRepository.findByAgeLessThan(age);
+       return employeeRepository.findByAgeLessThan(age);
 
-&nbsp;&nbsp;&nbsp;}
+   }
 
-&nbsp;&nbsp;&nbsp;public List&lt;Employee&gt; findBySalaryGreaterThan(double salary) {
+   public List<Employee> findBySalaryGreaterThan(double salary) {
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Assert.isTrue(salary &gt;= 1500, "Salary must be at least 1500");
+       Assert.isTrue(salary >= 1500, "Salary must be at least 1500");
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Assert.isTrue(salary &lt; 100000, "Salary must be less than 100000");
+       Assert.isTrue(salary < 100000, "Salary must be less than 100000");
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;logger.info("Finding all employees where salary is greater than {}", salary);
+       logger.info("Finding all employees where salary is greater than {}", salary);
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return employeeRepository.findBySalaryGreaterThan(salary);
+       return employeeRepository.findBySalaryGreaterThan(salary);
 
-&nbsp;&nbsp;&nbsp;}
+   }
 
-}</pre>
+}
+```
+
 
 ### The controller {#h3-12-the-controller}
 
 Finally, let's expose our service layer through a REST controller, allowing the application to receive a HTTP request and interact with the encrypted data:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@RestController
+```
+@RestController
 
 @RequestMapping("/employees")
 
 public class EmployeeController {
 
-&nbsp;&nbsp;&nbsp;private final EmployeeService employeeService;
+   private final EmployeeService employeeService;
 
-&nbsp;&nbsp;&nbsp;public EmployeeController(EmployeeService employeeService) {
+   public EmployeeController(EmployeeService employeeService) {
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this.employeeService = employeeService;
+        this.employeeService = employeeService;
 
-&nbsp;&nbsp;&nbsp;}
+   }
 
-&nbsp;&nbsp;&nbsp;@PostMapping
+   @PostMapping
 
-&nbsp;&nbsp;&nbsp;public ResponseEntity&lt;Employee&gt; create(@RequestBody Employee employee) {
+   public ResponseEntity<Employee> create(@RequestBody Employee employee) {
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return ResponseEntity.ok(employeeService.createEmployee(employee));
+       return ResponseEntity.ok(employeeService.createEmployee(employee));
 
-&nbsp;&nbsp;&nbsp;}
+   }
 
-&nbsp;&nbsp;&nbsp;@GetMapping
+   @GetMapping
 
-&nbsp;&nbsp;&nbsp;public ResponseEntity&lt;List&lt;Employee&gt;&gt; findAll() {
+   public ResponseEntity<List<Employee>> findAll() {
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return ResponseEntity.ok(employeeService.findAll());
+       return ResponseEntity.ok(employeeService.findAll());
 
-&nbsp;&nbsp;&nbsp;}
+   }
 
-&nbsp;&nbsp;&nbsp;@GetMapping("/ssn/{ssn}")
+   @GetMapping("/ssn/{ssn}")
 
-&nbsp;&nbsp;&nbsp;public ResponseEntity&lt;Employee&gt; findBySsn(@PathVariable int ssn) {
+   public ResponseEntity<Employee> findBySsn(@PathVariable int ssn) {
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return employeeService.findBySsn(ssn)
+       return employeeService.findBySsn(ssn)
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.map(ResponseEntity::ok)
+               .map(ResponseEntity::ok)
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.orElseGet(() -&gt; ResponseEntity.notFound().build());
+               .orElseGet(() -> ResponseEntity.notFound().build());
 
-&nbsp;&nbsp;&nbsp;}
+   }
 
-&nbsp;&nbsp;&nbsp;@GetMapping("/filter/salary-greater-than")
+   @GetMapping("/filter/salary-greater-than")
 
-&nbsp;&nbsp;&nbsp;public ResponseEntity&lt;List&lt;Employee&gt;&gt; findByAgeGreaterThan(@RequestParam double salary) {
+   public ResponseEntity<List<Employee>> findByAgeGreaterThan(@RequestParam double salary) {
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return ResponseEntity.ok(employeeService.findBySalaryGreaterThan(salary));
+       return ResponseEntity.ok(employeeService.findBySalaryGreaterThan(salary));
 
-&nbsp;&nbsp;&nbsp;}
+   }
 
-&nbsp;&nbsp;&nbsp;@GetMapping("/filter/age-less-than")
+   @GetMapping("/filter/age-less-than")
 
-&nbsp;&nbsp;&nbsp;public ResponseEntity&lt;List&lt;Employee&gt;&gt; findByAgeLessThan(@RequestParam int age) {
+   public ResponseEntity<List<Employee>> findByAgeLessThan(@RequestParam int age) {
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return ResponseEntity.ok(employeeService.findByAgeLessThan(age));
+       return ResponseEntity.ok(employeeService.findByAgeLessThan(age));
 
-&nbsp;&nbsp;&nbsp;}
+   }
 
-}</pre>
+}
+```
+
 
 Setting up encryption {#h2-13-setting-up-encryption}
 ----------------------------------------------------
@@ -396,172 +420,187 @@ But to keep things simple in this example, we'll generate and store the CMK loca
 
 Let's create a utility class called LocalCMKService to handle this process. It checks if the key file exists, creates it if needed, and loads the key into memory so it can be used when configuring the MongoDB client:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@Service
+```
+@Service
 
 public class LocalCMKService {
 
-&nbsp;&nbsp;&nbsp;private static final String CUSTOMER_KEY_PATH = "src/main/resources/my-key.txt";
+   private static final String CUSTOMER_KEY_PATH = "src/main/resources/my-key.txt";
 
-&nbsp;&nbsp;&nbsp;private static final int KEY_SIZE = 96;
+   private static final int KEY_SIZE = 96;
 
-&nbsp;&nbsp;&nbsp;private boolean isCustomerMasterKeyFileExists() {
+   private boolean isCustomerMasterKeyFileExists() {
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return new File(CUSTOMER_KEY_PATH).isFile();
+       return new File(CUSTOMER_KEY_PATH).isFile();
 
-&nbsp;&nbsp;&nbsp;}
+   }
 
-&nbsp;&nbsp;&nbsp;private void create() throws IOException {
+   private void create() throws IOException {
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;byte[] cmk = new byte[KEY_SIZE];
+       byte[] cmk = new byte[KEY_SIZE];
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;new SecureRandom().nextBytes(cmk);
+       new SecureRandom().nextBytes(cmk);
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;try (FileOutputStream stream = new FileOutputStream(CUSTOMER_KEY_PATH)) {
+       try (FileOutputStream stream = new FileOutputStream(CUSTOMER_KEY_PATH)) {
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;stream.write(cmk);
+           stream.write(cmk);
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} catch (IOException e) {
+       } catch (IOException e) {
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;throw new IOException("Unable to write Customer Master Key file: " + e.getMessage(), e);
+           throw new IOException("Unable to write Customer Master Key file: " + e.getMessage(), e);
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+       }
 
-&nbsp;&nbsp;&nbsp;}
+   }
 
-&nbsp;&nbsp;private byte[] read() throws IOException {
+  private byte[] read() throws IOException {
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;byte[] cmk = new byte[KEY_SIZE];
+       byte[] cmk = new byte[KEY_SIZE];
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;try (FileInputStream fis = new FileInputStream(CUSTOMER_KEY_PATH)) {
+       try (FileInputStream fis = new FileInputStream(CUSTOMER_KEY_PATH)) {
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;int bytesRead = fis.read(cmk);
+           int bytesRead = fis.read(cmk);
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (bytesRead != KEY_SIZE) {
+           if (bytesRead != KEY_SIZE) {
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;throw new IOException("Expected the customer master key file to be " + KEY_SIZE + " bytes, but read " + bytesRead + " bytes.");
+               throw new IOException("Expected the customer master key file to be " + KEY_SIZE + " bytes, but read " + bytesRead + " bytes.");
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+           }
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} catch (IOException e) {
+       } catch (IOException e) {
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;throw new IOException("Unable to read the Customer Master Key: " + e.getMessage(), e);
+           throw new IOException("Unable to read the Customer Master Key: " + e.getMessage(), e);
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+       }
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return cmk;
+       return cmk;
 
-&nbsp;&nbsp;&nbsp;}
+   }
 
-&nbsp;&nbsp;public Map&lt;String, Map&lt;String, Object&gt;&gt; getKmsProviderCredentials() throws IOException {
+  public Map<String, Map<String, Object>> getKmsProviderCredentials() throws IOException {
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;try {
+       try {
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (!isCustomerMasterKeyFileExists()) {
+           if (!isCustomerMasterKeyFileExists()) {
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;create();
+               create();
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+           }
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;byte[] localCustomerMasterKey = read();
+           byte[] localCustomerMasterKey = read();
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Map&lt;String, Object&gt; keyMap = new HashMap&lt;&gt;();
+           Map<String, Object> keyMap = new HashMap<>();
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;keyMap.put("key", localCustomerMasterKey);
+           keyMap.put("key", localCustomerMasterKey);
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Map&lt;String, Map&lt;String, Object&gt;&gt; kmsProviderCredentials = new HashMap&lt;&gt;();
+           Map<String, Map<String, Object>> kmsProviderCredentials = new HashMap<>();
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;kmsProviderCredentials.put("local", keyMap);
+           kmsProviderCredentials.put("local", keyMap);
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return kmsProviderCredentials;
+           return kmsProviderCredentials;
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}catch (Exception e) {
+       }catch (Exception e) {
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;throw new IOException("Unable to read the Customer Master Key file: " + e.getMessage(), e);
+           throw new IOException("Unable to read the Customer Master Key file: " + e.getMessage(), e);
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+       }
 
-&nbsp;&nbsp;&nbsp;}
+   }
 
-}</pre>
+}
+```
+
 
 Configuring the MongoDB encryption layer {#h2-14-configuring-the-mongodb-encryption-layer}
 ------------------------------------------------------------------------------------------
 
 To bring everything together, let's now create the MongoEncryptionConfiguration class. This is where we configure our MongoDB client to support Queryable Encryption, define how keys are loaded, and ensure our encrypted collection is created at startup:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@Configuration
+```
+@Configuration
 
 public class MongoEncryptionConfiguration implements ApplicationRunner {
 
-&nbsp;&nbsp;&nbsp;private final AppProperties appProperties;
+   private final AppProperties appProperties;
 
-&nbsp;&nbsp;&nbsp;private final LocalCMKService localCMKService;
+   private final LocalCMKService localCMKService;
 
-&nbsp;&nbsp;&nbsp;MongoEncryptionConfiguration(LocalCMKService localCMKService, AppProperties appProperties) {
+   MongoEncryptionConfiguration(LocalCMKService localCMKService, AppProperties appProperties) {
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this.localCMKService = localCMKService;
+       this.localCMKService = localCMKService;
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this.appProperties = appProperties;
+       this.appProperties = appProperties;
 
-&nbsp;&nbsp;&nbsp;}
+   }
 
-&nbsp;&nbsp;&nbsp;@Override
+   @Override
 
-&nbsp;&nbsp;&nbsp;public void run(ApplicationArguments args) throws Exception {
+   public void run(ApplicationArguments args) throws Exception {
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// TODO&nbsp;
+      // TODO 
 
-&nbsp;&nbsp;&nbsp;}
+   }
 
-}</pre>
+}
+```
+
 
 ### Defining the encryption configuration {#h3-15-defining-the-encryption-configuration}
 
 Great! Now, in the same **MongoEncryptionConfiguration** class, let's start adding a few methods. First, we configure the path to the native mongodb_crypt library we downloaded earlier:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">private Map&lt;String, Object&gt; createExtraOptions() {
+```
+private Map<String, Object> createExtraOptions() {
 
-&nbsp;&nbsp;&nbsp;Map&lt;String, Object&gt; extraOptions = new HashMap&lt;&gt;();
+   Map<String, Object> extraOptions = new HashMap<>();
 
-&nbsp;&nbsp;&nbsp;extraOptions.put("cryptSharedLibPath", appProperties.cryptSharedLibPath);
+   extraOptions.put("cryptSharedLibPath", appProperties.cryptSharedLibPath);
 
-&nbsp;&nbsp;&nbsp;return extraOptions;
+   return extraOptions;
 
-}</pre>
+}
+```
+
 
 Next, we build the AutoEncryptionSettings, which defines the encryption behavior for the client:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">private AutoEncryptionSettings getAutoEncryptionSettings() throws IOException {
+```
+private AutoEncryptionSettings getAutoEncryptionSettings() throws IOException {
 
-&nbsp;&nbsp;&nbsp;Map&lt;String, Map&lt;String, Object&gt;&gt; kmsProviderCredentials = localCMKService.getKmsProviderCredentials();
+   Map<String, Map<String, Object>> kmsProviderCredentials = localCMKService.getKmsProviderCredentials();
 
-&nbsp;&nbsp;&nbsp;return AutoEncryptionSettings.builder()
+   return AutoEncryptionSettings.builder()
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.keyVaultNamespace(appProperties.keyVaultNamespace)
+           .keyVaultNamespace(appProperties.keyVaultNamespace)
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.extraOptions(createExtraOptions())
+           .extraOptions(createExtraOptions())
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.kmsProviders(kmsProviderCredentials)
+           .kmsProviders(kmsProviderCredentials)
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.build();
+           .build();
 
-}</pre>
+}
+```
+
 
 We then use these settings to build the custom MongoClientSettings:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">private MongoClientSettings getMongoClientSettings() throws IOException {
+```
+private MongoClientSettings getMongoClientSettings() throws IOException {
 
-&nbsp;&nbsp;&nbsp;return MongoClientSettings.builder()
+   return MongoClientSettings.builder()
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.applyConnectionString(new ConnectionString(appProperties.uri))
+           .applyConnectionString(new ConnectionString(appProperties.uri))
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.autoEncryptionSettings(getAutoEncryptionSettings())
+           .autoEncryptionSettings(getAutoEncryptionSettings())
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.uuidRepresentation(UuidRepresentation.STANDARD)
+           .uuidRepresentation(UuidRepresentation.STANDARD)
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.build();
+           .build();
 
-}</pre>
+}
+```
+
 
 ### Defining Spring beans {#h3-16-defining-spring-beans}
 
@@ -570,11 +609,12 @@ Now that our encryption configuration is complete, we can register the two Sprin
 * MongoClient: configured with the encryption support
 * MongoTemplate: used to interact with the encrypted database
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@Bean
+```
+@Bean
 
 public MongoClient mongoClient() throws IOException {
 
-&nbsp;&nbsp;&nbsp;return MongoClients.create(getMongoClientSettings());
+   return MongoClients.create(getMongoClientSettings());
 
 }
 
@@ -582,85 +622,94 @@ public MongoClient mongoClient() throws IOException {
 
 MongoOperations mongoTemplate(MongoClient mongoClient) {
 
-&nbsp;&nbsp;&nbsp;return new MongoTemplate(mongoClient, appProperties.encryptedDatabaseName);
+   return new MongoTemplate(mongoClient, appProperties.encryptedDatabaseName);
 
-}</pre>
+}
+```
+
 
 ### The encrypted collection {#h3-17-the-encrypted-collection}
 
 Instead of manually defining which fields are encrypted, we generate the schema based on our Employee class using Spring's built-in MongoJsonSchemaCreator:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">private void createCollectionFromSchema(MongoOperations template, ClientEncryption clientEncryption) {
+```
+private void createCollectionFromSchema(MongoOperations template, ClientEncryption clientEncryption) {
 
-&nbsp;&nbsp;&nbsp;MongoJsonSchema schema = MongoJsonSchemaCreator.create(new MongoMappingContext())
+   MongoJsonSchema schema = MongoJsonSchemaCreator.create(new MongoMappingContext())
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.filter(MongoJsonSchemaCreator.encryptedOnly())
+           .filter(MongoJsonSchemaCreator.encryptedOnly())
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.createSchemaFor(Employee.class);
+           .createSchemaFor(Employee.class);
 
-&nbsp;&nbsp;&nbsp;Document encryptedFields = CollectionOptions.encryptedCollection(schema)
+   Document encryptedFields = CollectionOptions.encryptedCollection(schema)
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.getEncryptedFieldsOptions()
+           .getEncryptedFieldsOptions()
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.map(CollectionOptions.EncryptedFieldsOptions::toDocument)
+           .map(CollectionOptions.EncryptedFieldsOptions::toDocument)
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.orElseThrow();
+           .orElseThrow();
 
-&nbsp;&nbsp;&nbsp;template.execute(db -&gt; clientEncryption.createEncryptedCollection(
+   template.execute(db -> clientEncryption.createEncryptedCollection(
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;db,
+           db,
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;template.getCollectionName(Employee.class),
+           template.getCollectionName(Employee.class),
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;new CreateCollectionOptions().encryptedFields(encryptedFields),
+           new CreateCollectionOptions().encryptedFields(encryptedFields),
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;new CreateEncryptedCollectionParams("local")
+           new CreateEncryptedCollectionParams("local")
 
-&nbsp;&nbsp;&nbsp;));
+   ));
 
-}</pre>
+}
+```
+
 
 ### Creating the ClientEncryption {#h3-18-creating-the-clientencryption}
 
 To interact with the key vault and create encrypted collections, we need a ClientEncryption instance:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">private ClientEncryption createClientEncryption() throws IOException {
+```
+private ClientEncryption createClientEncryption() throws IOException {
 
-&nbsp;&nbsp;&nbsp;var encryptionSettings = ClientEncryptionSettings.builder()
+   var encryptionSettings = ClientEncryptionSettings.builder()
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.keyVaultMongoClientSettings(
+           .keyVaultMongoClientSettings(
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MongoClientSettings.builder()
+                   MongoClientSettings.builder()
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.applyConnectionString(new ConnectionString(appProperties.uri))
+                           .applyConnectionString(new ConnectionString(appProperties.uri))
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.build())
+                           .build())
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.keyVaultNamespace(appProperties.keyVaultNamespace)
+           .keyVaultNamespace(appProperties.keyVaultNamespace)
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.kmsProviders(localCMKService.getKmsProviderCredentials())
+           .kmsProviders(localCMKService.getKmsProviderCredentials())
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.build();
+           .build();
 
-&nbsp;&nbsp;&nbsp;return ClientEncryptions.create(encryptionSettings);
+   return ClientEncryptions.create(encryptionSettings);
 
-}</pre>
+}
+```
+
 
 ### Initializing the collection on startup {#h3-19-initializing-the-collection-on-startup}
 
 Before the application starts, we want to ensure that the encrypted collection exists. That check happens inside the run() method, which is automatically executed after the Spring Boot application starts. You can now replace the //TODO in the run() method with the following logic:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@Override
+```
+@Override
 
 public void run(ApplicationArguments args) throws Exception {
 
-&nbsp;&nbsp;&nbsp;var mongoTemplate = mongoTemplate(mongoClient());
+   var mongoTemplate = mongoTemplate(mongoClient());
 
-&nbsp;&nbsp;&nbsp;if (!mongoTemplate.collectionExists(appProperties.encryptedCollectionName)) {
+   if (!mongoTemplate.collectionExists(appProperties.encryptedCollectionName)) {
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;initializeEncryptedCollection(mongoTemplate);
+       initializeEncryptedCollection(mongoTemplate);
 
-&nbsp;&nbsp;&nbsp;}
+   }
 
 }
 
@@ -668,63 +717,68 @@ This code uses mongoTemplate to check if the collection already exists. If it do
 
 private void initializeEncryptedCollection(MongoOperations template) throws IOException {
 
-&nbsp;&nbsp;&nbsp;try (ClientEncryption clientEncryption = createClientEncryption()) {
+   try (ClientEncryption clientEncryption = createClientEncryption()) {
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;createCollectionFromSchema(template, clientEncryption);
+       createCollectionFromSchema(template, clientEncryption);
 
-&nbsp;&nbsp;&nbsp;}
+   }
 
-}</pre>
+}
+```
+
 
 ### Inserting sample data for testing {#h3-20-inserting-sample-data-for-testing}
 
 To wrap things up, let's preload some sample employee data to help us test our encrypted queries. We'll use a simple CommandLineRunner to automatically insert records into the collection when the application starts:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@Configuration
+```
+@Configuration
 
 public class SampleDataLoader {
 
-&nbsp;&nbsp;&nbsp;private static final Logger logger = LoggerFactory.getLogger(SampleDataLoader.class);
+   private static final Logger logger = LoggerFactory.getLogger(SampleDataLoader.class);
 
-&nbsp;&nbsp;&nbsp;@Bean
+   @Bean
 
-&nbsp;&nbsp;&nbsp;public CommandLineRunner loadSampleEmployees(EmployeeRepository employeeRepository) {
+   public CommandLineRunner loadSampleEmployees(EmployeeRepository employeeRepository) {
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return args -&gt; {
+       return args -> {
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (employeeRepository.count() != 0) {
+           if (employeeRepository.count() != 0) {
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;logger.info("Sample data already exists. Skipping insert");
+               logger.info("Sample data already exists. Skipping insert");
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return;
+               return;
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+           }
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;List&lt;Employee&gt; employees = List.of(
+           List<Employee> employees = List.of(
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;new Employee(null, "Ricardo", "001", 1, 36, 1501),
+                   new Employee(null, "Ricardo", "001", 1, 36, 1501),
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;new Employee(null, "Maria", &nbsp; "002", 2, 28, 4200),
+                   new Employee(null, "Maria",   "002", 2, 28, 4200),
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;new Employee(null, "Karen", &nbsp; "003", 3, 42, 2800),
+                   new Employee(null, "Karen",   "003", 3, 42, 2800),
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;new Employee(null, "Mark",&nbsp; &nbsp; "004", 4, 22, 2100),
+                   new Employee(null, "Mark",    "004", 4, 22, 2100),
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;new Employee(null, "Pedro", &nbsp; "005", 5, 50, 4000),
+                   new Employee(null, "Pedro",   "005", 5, 50, 4000),
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;new Employee(null, "Joana", &nbsp; "006", 5, 50, 99000)
+                   new Employee(null, "Joana",   "006", 5, 50, 99000)
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;);
+           );
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;employeeRepository.saveAll(employees);
+           employeeRepository.saveAll(employees);
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;logger.info("Saved {} employees", employees.size());
+           logger.info("Saved {} employees", employees.size());
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;};
+       };
 
-&nbsp;&nbsp;&nbsp;}
+   }
 
-}</pre>
+}
+```
+
 
 If the collection already contains data, the loader will skip the insertion to avoid duplicates.
 
@@ -735,8 +789,11 @@ Great! With everything in place, it's time to run the app.
 
 Just make sure to pass the MongoDB URI and the path to the cryptographic shared library using environment variables:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">MONGODB_URI='&lt;YOUR_CONNECTION_STRING&gt;' 
-CRYPT_PATH='/path/to/mongo_crypt_shared/lib/mongo_crypt.dylib' mvn spring-boot:run</pre>
+```
+MONGODB_URI='<YOUR_CONNECTION_STRING>' 
+CRYPT_PATH='/path/to/mongo_crypt_shared/lib/mongo_crypt.dylib' mvn spring-boot:run
+```
+
 
 Note: The CRYPT_PATH should point to the full path of the native library you downloaded.
 
@@ -752,41 +809,53 @@ With the app running, we can interact with our encrypted data through simple HTT
 
 Send a new employee to the database. Fields like ssn, age, and salary will be encrypted automatically.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">POST http://localhost:8080/employees
+```
+POST http://localhost:8080/employees
 
 Content-Type: application/json
 
 {
 
-&nbsp;"name": "Henrique Silva",
+ "name": "Henrique Silva",
 
-&nbsp;"pin": "932",
+ "pin": "932",
 
-&nbsp;"ssn": 21,
+ "ssn": 21,
 
-&nbsp;"age": 44,
+ "age": 44,
 
-&nbsp;"salary": 32100
+ "salary": 32100
 
-}</pre>
+}
+```
+
 
 ### Find by ssn {#h3-24-find-by-ssn}
 
 Perform an equality query on an encrypted field.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">GET http://localhost:8080/employees/ssn/1</pre>
+```
+GET http://localhost:8080/employees/ssn/1
+```
+
 
 ### Find by age (range) {#h3-25-find-by-age-range}
 
 Return all employees younger than a given age.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">GET http://localhost:8080/employees/filter/age-less-than?age=50</pre>
+```
+GET http://localhost:8080/employees/filter/age-less-than?age=50
+```
+
 
 ### Find by salary (range) {#h3-26-find-by-salary-range}
 
 Return all employees with a salary above a given value.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">GET http://localhost:8080/employees/filter/salary-greater-than?salary=3500</pre>
+```
+GET http://localhost:8080/employees/filter/salary-greater-than?salary=3500
+```
+
 
 Conclusion {#h2-27-conclusion}
 ------------------------------

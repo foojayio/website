@@ -90,45 +90,48 @@ To test our index, we need to create an aggregation pipeline. While there are va
 
 We need to set up an aggregation pipeline to meet the following requirements: Filter the summary field by text and ensure a minimum number of reviews. Here's the aggregation pipeline we will use for testing:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">[
-&nbsp;&nbsp;{
-&nbsp;&nbsp;&nbsp;&nbsp;$search: {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;index: "searchPlaces",
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;compound: {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;filter: [
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;range: {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;path: "number_of_reviews",
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;gte: 50
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;},
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;text: {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;path: "summary",
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;query: "Istambun",
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fuzzy: {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;maxEdits: 2
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;]
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
-&nbsp;&nbsp;&nbsp;&nbsp;}
-&nbsp;&nbsp;},
-&nbsp;&nbsp;{
-&nbsp;&nbsp;&nbsp;&nbsp;$limit: 5
-&nbsp;&nbsp;},
-&nbsp;&nbsp;{
-&nbsp;&nbsp;&nbsp;&nbsp;$project: {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_id: 0,
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;name: 1,
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;summary: 1,
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;number_of_reviews: 1,
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;price: 1,&nbsp;&nbsp;&nbsp;&nbsp;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;street: "$address.street",
-&nbsp;&nbsp;&nbsp;&nbsp;}
-&nbsp;&nbsp;}
-]</pre>
+```
+[
+  {
+    $search: {
+      index: "searchPlaces",
+      compound: {
+        filter: [
+          {
+            range: {
+              path: "number_of_reviews",
+              gte: 50
+            }
+          },
+          {
+            text: {
+              path: "summary",
+              query: "Istambun",
+              fuzzy: {
+                maxEdits: 2
+              }
+            }
+          }
+        ]
+      }
+    }
+  },
+  {
+    $limit: 5
+  },
+  {
+    $project: {
+      _id: 0,
+      name: 1,
+      summary: 1,
+      number_of_reviews: 1,
+      price: 1,    
+      street: "$address.street",
+    }
+  }
+]
+```
+
 
 Let's break down each stage:
 
@@ -162,9 +165,12 @@ Adding MongoDB driver dependency {#h2-8-adding-mongodb-driver-dependency}
 
 The first thing we'll do is open the build.gradle.kts file and add the mongodb-driver-kotlin-sync dependency.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">dependencies {
-&nbsp;implementation("org.mongodb:mongodb-driver-kotlin-sync:5.1.1")
-}</pre>
+```
+dependencies {
+ implementation("org.mongodb:mongodb-driver-kotlin-sync:5.1.1")
+}
+```
+
 
 ![](Screenshot-2026-03-27-at-9.35.18-AM-1024x768.png)
 
@@ -173,11 +179,14 @@ Establishing a connection {#h2-9-establishing-a-connection}
 
 To establish our connection, we need to follow these steps. First, update the application.properties file with the required values.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">spring.application.name=Airbnb Searcher
+```
+spring.application.name=Airbnb Searcher
 
-spring.data.mongodb.uri=mongodb+srv://user:<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="55253426261536392026213027657b363920262130277b383a3b323a31377b3b3021">[email&nbsp;protected]</a>/
+spring.data.mongodb.uri=mongodb+srv://user:<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="55253426261536392026213027657b363920262130277b383a3b323a31377b3b3021">[email protected]</a>/
 
-spring.data.mongodb.database=sample_airbnb</pre>
+spring.data.mongodb.database=sample_airbnb
+```
+
 
 ![](Screenshot-2026-03-27-at-9.35.50-AM-1024x199.png)
 
@@ -185,7 +194,8 @@ spring.data.mongodb.database=sample_airbnb</pre>
 
 Next, we will create a MongoConfig class within the config directory to set up the connection when our application starts.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">package com.mongodb.searcher.application.config
+```
+package com.mongodb.searcher.application.config
 import com.mongodb.kotlin.client.MongoClient
 import com.mongodb.kotlin.client.MongoDatabase
 import org.springframework.beans.factory.annotation.Value
@@ -194,65 +204,71 @@ import org.springframework.context.annotation.Configuration
 
 @Configuration
 class MongoConfig {
-&nbsp;&nbsp;&nbsp;@Value("\${spring.data.mongodb.uri}")
-&nbsp;&nbsp;&nbsp;lateinit var uri: String
-&nbsp;&nbsp;&nbsp;@Value("\${spring.data.mongodb.database}")
-&nbsp;&nbsp;&nbsp;lateinit var databaseName: String
+   @Value("\${spring.data.mongodb.uri}")
+   lateinit var uri: String
+   @Value("\${spring.data.mongodb.database}")
+   lateinit var databaseName: String
 
-&nbsp;&nbsp;&nbsp;@Bean
-&nbsp;&nbsp;&nbsp;fun getMongoClient(): MongoClient {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return MongoClient.create(uri)
-&nbsp;&nbsp;&nbsp;}
+   @Bean
+   fun getMongoClient(): MongoClient {
+       return MongoClient.create(uri)
+   }
 
-&nbsp;&nbsp;&nbsp;@Bean
-&nbsp;&nbsp;&nbsp;fun mongoDatabase(mongoClient: MongoClient): MongoDatabase {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return mongoClient.getDatabase(databaseName)
-&nbsp;&nbsp;&nbsp;}
-}</pre>
+   @Bean
+   fun mongoDatabase(mongoClient: MongoClient): MongoDatabase {
+       return mongoClient.getDatabase(databaseName)
+   }
+}
+```
+
 
 Great, we have defined our MongoConfig class, which will use the values from application.properties. Create the class AirbnbEntity within the resources package:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">package com.mongodb.searcher.resources
+```
+package com.mongodb.searcher.resources
 import com.mongodb.searcher.domain.Airbnb
 import org.bson.codecs.pojo.annotations.BsonId
 import org.bson.codecs.pojo.annotations.BsonProperty
 import org.bson.types.Decimal128
 
 data class AirbnbEntity(
-&nbsp;&nbsp;&nbsp;@BsonId val id: String,
-&nbsp;&nbsp;&nbsp;val name: String,
-&nbsp;&nbsp;&nbsp;val summary: String,
-&nbsp;&nbsp;&nbsp;val price: Decimal128,
-&nbsp;&nbsp;&nbsp;@BsonProperty("number_of_reviews")
-&nbsp;&nbsp;&nbsp;val numbersOfReviews: Int,
-&nbsp;&nbsp;&nbsp;val address: Address
+   @BsonId val id: String,
+   val name: String,
+   val summary: String,
+   val price: Decimal128,
+   @BsonProperty("number_of_reviews")
+   val numbersOfReviews: Int,
+   val address: Address
 ) {
 
-&nbsp;&nbsp;&nbsp;data class Address(
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;val street: String,
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;val country: String,
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@BsonProperty("country_code")
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;val countryCode: String
-&nbsp;&nbsp;&nbsp;)
+   data class Address(
+       val street: String,
+       val country: String,
+       @BsonProperty("country_code")
+       val countryCode: String
+   )
 
-&nbsp;&nbsp;&nbsp;fun toDomain(): Airbnb {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return Airbnb(
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;id = id,
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;name = name,
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;summary = summary,
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;price = price,
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;numbersOfReviews = numbersOfReviews,
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;street = address.street
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)
-&nbsp;&nbsp;&nbsp;}
-}</pre>
+   fun toDomain(): Airbnb {
+       return Airbnb(
+           id = id,
+           name = name,
+           summary = summary,
+           price = price,
+           numbersOfReviews = numbersOfReviews,
+           street = address.street
+       )
+   }
+}
+```
+
 
 Creating the repository {#h2-10-creating-the-repository}
 --------------------------------------------------------
 
 Now, let's create our class that will utilize the MongoDB Search index. To do this, create the AirbnbRepository class within the resources package.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">package com.mongodb.searcher.resources
+```
+package com.mongodb.searcher.resources
 
 import com.mongodb.client.model.Aggregates
 import com.mongodb.client.model.Projections
@@ -266,60 +282,62 @@ import org.springframework.stereotype.Repository
 
 @Repository
 class AirbnbRepository(
-&nbsp;&nbsp;&nbsp;private val mongoDatabase: MongoDatabase
+   private val mongoDatabase: MongoDatabase
 ) {
-&nbsp;&nbsp;&nbsp;companion object {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;private val logger = LoggerFactory.getLogger(AirbnbRepository::class.java)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;private const val COLLECTION = "listingsAndReviews"
-&nbsp;&nbsp;&nbsp;}
+   companion object {
+       private val logger = LoggerFactory.getLogger(AirbnbRepository::class.java)
+       private const val COLLECTION = "listingsAndReviews"
+   }
 
-&nbsp;&nbsp;&nbsp;fun find(query: String, minNumberReviews: Int): List&lt;AirbnbEntity&gt; {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;val collection = mongoDatabase.getCollection&lt;AirbnbEntity&gt;(COLLECTION)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return try {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;collection.aggregate(
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;listOf(
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;createSearchStage(query, minNumberReviews),
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;createLimitStage(),
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;createProjectionStage()
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;).toList()
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} catch (e: Exception) {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;logger.error("An exception occurred when trying to aggregate the collection: ${e.message}")
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;emptyList()
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
-&nbsp;&nbsp;&nbsp;}
+   fun find(query: String, minNumberReviews: Int): List<AirbnbEntity> {
+       val collection = mongoDatabase.getCollection<AirbnbEntity>(COLLECTION)
+       return try {
+           collection.aggregate(
+               listOf(
+                   createSearchStage(query, minNumberReviews),
+                   createLimitStage(),
+                   createProjectionStage()
+               )
+           ).toList()
+       } catch (e: Exception) {
+           logger.error("An exception occurred when trying to aggregate the collection: ${e.message}")
+           emptyList()
+       }
+   }
 
-&nbsp;&nbsp;&nbsp;private fun createSearchStage(query: String, minNumberReviews: Int) =
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Aggregates.search(
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SearchOperator.compound().filter(
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;listOf(
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SearchOperator.numberRange(SearchPath.fieldPath("number_of_reviews"))
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.gte(minNumberReviews),
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SearchOperator.text(SearchPath.fieldPath(AirbnbEntity::summary.name), query)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.fuzzy(FuzzySearchOptions.fuzzySearchOptions().maxEdits(2))
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;),
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SearchOptions.searchOptions().index("searchPlaces")
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)
+   private fun createSearchStage(query: String, minNumberReviews: Int) =
+       Aggregates.search(
+           SearchOperator.compound().filter(
+               listOf(
+                   SearchOperator.numberRange(SearchPath.fieldPath("number_of_reviews"))
+                       .gte(minNumberReviews),
+                   SearchOperator.text(SearchPath.fieldPath(AirbnbEntity::summary.name), query)
+                       .fuzzy(FuzzySearchOptions.fuzzySearchOptions().maxEdits(2))
+               )
+           ),
+           SearchOptions.searchOptions().index("searchPlaces")
+       )
 
-&nbsp;&nbsp;&nbsp;private fun createLimitStage() =
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Aggregates.limit(5)
-&nbsp;&nbsp;&nbsp;private fun createProjectionStage() =
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Aggregates.project(
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Projections.fields(
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Projections.include(
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;listOf(
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;AirbnbEntity::name.name,
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;AirbnbEntity::id.name,
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;AirbnbEntity::summary.name,
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;AirbnbEntity::price.name,
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"number_of_reviews",
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;AirbnbEntity::address.name
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)
-}</pre>
+   private fun createLimitStage() =
+       Aggregates.limit(5)
+   private fun createProjectionStage() =
+       Aggregates.project(
+           Projections.fields(
+               Projections.include(
+                   listOf(
+                       AirbnbEntity::name.name,
+                       AirbnbEntity::id.name,
+                       AirbnbEntity::summary.name,
+                       AirbnbEntity::price.name,
+                       "number_of_reviews",
+                       AirbnbEntity::address.name
+                   )
+               )
+           )
+       )
+}
+```
+
 
 Let's analyze the find method.
 
@@ -336,39 +354,45 @@ Creating a service {#h2-11-creating-a-service}
 
 To continue with our project, let's create a domain package with two classes. The first will be our Airbnb.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">package com.mongodb.searcher.domain
+```
+package com.mongodb.searcher.domain
 
 import org.bson.codecs.pojo.annotations.BsonId
 import org.bson.codecs.pojo.annotations.BsonProperty
 import org.bson.types.Decimal128
 
 data class Airbnb(
-&nbsp;&nbsp;&nbsp;@BsonId val id: String,
-&nbsp;&nbsp;&nbsp;val name: String,
-&nbsp;&nbsp;&nbsp;val summary: String,
-&nbsp;&nbsp;&nbsp;val price: Decimal128,
-&nbsp;&nbsp;&nbsp;@BsonProperty("number_of_reviews")
-&nbsp;&nbsp;&nbsp;val numbersOfReviews: Int,
-&nbsp;&nbsp;&nbsp;val street: String
-)</pre>
+   @BsonId val id: String,
+   val name: String,
+   val summary: String,
+   val price: Decimal128,
+   @BsonProperty("number_of_reviews")
+   val numbersOfReviews: Int,
+   val street: String
+)
+```
+
 
 Next, our service:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">package com.mongodb.searcher.domain
+```
+package com.mongodb.searcher.domain
 
 import com.mongodb.searcher.resources.AirbnbRepository
 import org.springframework.stereotype.Service
 
 @Service
 class AirbnbService(
-&nbsp;&nbsp;&nbsp;private val airbnbRepository: AirbnbRepository
+   private val airbnbRepository: AirbnbRepository
 ) {
-&nbsp;&nbsp;&nbsp;fun find(query: String, minNumberReviews: Int): List&lt;Airbnb&gt; {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;require(query.isNotEmpty()) { "Query must not be empty" }
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;require(minNumberReviews &gt; 0) { "Minimum number of reviews must not be negative" }
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return airbnbRepository.find(query, minNumberReviews).map { it.toDomain() }
-&nbsp;&nbsp;&nbsp;}
-}</pre>
+   fun find(query: String, minNumberReviews: Int): List<Airbnb> {
+       require(query.isNotEmpty()) { "Query must not be empty" }
+       require(minNumberReviews > 0) { "Minimum number of reviews must not be negative" }
+      return airbnbRepository.find(query, minNumberReviews).map { it.toDomain() }
+   }
+}
+```
+
 
 Notice that this class is responsible for validating our inputs and accessing the repository.
 
@@ -377,7 +401,8 @@ Creating a controller {#h2-12-creating-a-controller}
 
 To enable REST communication, create the AirbnbController class within the application.web package:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">package com.mongodb.searcher.application.web
+```
+package com.mongodb.searcher.application.web
 
 import com.mongodb.searcher.domain.Airbnb
 import com.mongodb.searcher.domain.AirbnbService
@@ -387,16 +412,18 @@ import org.springframework.web.bind.annotation.RestController
 
 @RestController
 class AirbnbController(
-&nbsp;&nbsp;&nbsp;private val airbnbService: AirbnbService
+   private val airbnbService: AirbnbService
 ) {
-&nbsp;&nbsp;&nbsp;@GetMapping("/airbnb/search")
-&nbsp;&nbsp;&nbsp;fun find(
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@RequestParam("query") query: String,
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@RequestParam("minNumberReviews") minNumberReviews: Int
-&nbsp;&nbsp;&nbsp;): List&lt;Airbnb&gt; {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return airbnbService.find(query, minNumberReviews)
-&nbsp;&nbsp;&nbsp;}
-}</pre>
+   @GetMapping("/airbnb/search")
+   fun find(
+       @RequestParam("query") query: String,
+       @RequestParam("minNumberReviews") minNumberReviews: Int
+   ): List<Airbnb> {
+       return airbnbService.find(query, minNumberReviews)
+   }
+}
+```
+
 
 Final application structure {#h2-13-final-application-structure}
 ----------------------------------------------------------------
@@ -412,7 +439,10 @@ Running the application {#h2-15-running-the-application}
 
 Simply run the application and access the endpoint provided at 'http://localhost:8080/airbnb/search'. Below is an example of how to use it:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">curl --location 'http://localhost:8080/airbnb/search?query=Istambun&amp;minNumberReviews=50'</pre>
+```
+curl --location 'http://localhost:8080/airbnb/search?query=Istambun&minNumberReviews=50'
+```
+
 
 ![](Screenshot-2026-03-27-at-9.39.25-AM-1024x668.png)
 

@@ -42,7 +42,10 @@ If you have not rebuilt since this commit, your next cloud build picks Metal up 
 
 If you need to opt out for any reason, the hint still works in reverse:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">ios.metal=false</pre>
+```
+ios.metal=false
+```
+
 
 A few things worth a glance on your first Metal build: gradient fidelity (multi-stop, conic, and repeating gradients now hit the GPU directly through [PR #4957](https://github.com/codenameone/CodenameOne/pull/4957)), the color space (sRGB by default, flip to `displayP3` via `ios.metal.colorSpace` if your assets are wide gamut), and anything that draws `filter: blur(...)` or `backdrop-filter`. Everything else should look unchanged. That is the point.
 
@@ -53,7 +56,10 @@ The new Build Cloud console is now the default link {#h2-1-the-new-build-cloud-c
 
 The [preview of the new Build Cloud UI](https://www.codenameone.com/blog/nfc-crypto-biometrics-and-build-cloud/#a-new-build-cloud-ui--preview) went up last week. The bugs you found are fixed, and as of this PR every Dashboard link on the website now points at the new console:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">https://cloud.codenameone.com/console/index.html</pre>
+```
+https://cloud.codenameone.com/console/index.html
+```
+
 
 The navigation Dashboard link in the header, the Sign Up CTA on the pricing page, and the entries on the site map all moved. Old bookmarks still work; the [legacy console](https://cloud.codenameone.com/secure/index.html) stays online for the time being so you can fall back to it if something is missing or wrong in the new UI. Please tell us when you hit one of those things, because the goal is to retire the legacy URL eventually.
 

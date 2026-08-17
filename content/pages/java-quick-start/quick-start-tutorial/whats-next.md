@@ -8,7 +8,7 @@ aliases:
 frozen: false
 ---
 
-*** ** * ** ***
+
 
 [\<\< Using Streams](https://foojay.io/java-quick-start/quick-start-tutorial/using-streams/)
 

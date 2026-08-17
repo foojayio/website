@@ -30,19 +30,22 @@ In the Java Advent of 2020, I published "[Light up your Christmas lights with Ja
 
 I became a contributor to Pi4J while working on my book "[Getting Started with Java on the Raspberry Pi](https://webtechie.be/books/)" around 2020. But even after many years of working on Pi4J's code, I get puzzled when I dive deep into its sources. Please help me, do you understand what's happening in this piece of code?
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">JNIEXPORT jobject JNICALL Java_com_pi4j_library_gpiod_internal_GpioD_c_1gpiod_1chip_1open
+```
+JNIEXPORT jobject JNICALL Java_com_pi4j_library_gpiod_internal_GpioD_c_1gpiod_1chip_1open
   (JNIEnv* env, jclass javaClass, jstring path) {
     struct gpiod_chip* chip;
-    const char* nativeString = (*env)-&gt;GetStringUTFChars(env, path, NULL);
+    const char* nativeString = (*env)->GetStringUTFChars(env, path, NULL);
     chip = gpiod_chip_open(nativeString);
-    (*env)-&gt;ReleaseStringUTFChars(env, path, nativeString);
+    (*env)->ReleaseStringUTFChars(env, path, nativeString);
     if(chip == NULL) {
       return NULL;
     }
-    jclass cls = (*env)-&gt;FindClass(env, "java/lang/Long");
-    jmethodID longConstructor = (*env)-&gt;GetMethodID(env, cls, "&lt;init&gt;", "(J)V");
-    return (*env)-&gt;NewObject(env, cls, longConstructor, (jlong) (uintptr_t) chip);
-}</pre>
+    jclass cls = (*env)->FindClass(env, "java/lang/Long");
+    jmethodID longConstructor = (*env)->GetMethodID(env, cls, "<init>", "(J)V");
+    return (*env)->NewObject(env, cls, longConstructor, (jlong) (uintptr_t) chip);
+}
+```
+
 
 It's one of the "connection points" between Java and the native libraries to communicate with the GPIO pins. Using JNI and [Java Native Access (JNA)](https://github.com/java-native-access/jna), Docker build environments to compile the native libraries to be used from Java, and a lot of complexity, it makes it possible to make the interaction from Java easy for the end user, but difficult to maintain and debug for the Pi4J developers.
 
@@ -115,7 +118,8 @@ Let me show you how much simpler things have become with a few examples.
 
 Here's a basic example of accessing memory directly:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">void main() {
+```
+void main() {
     // Open a confined Arena that manages off-heap memory
     // and will release it automatically.
     try (Arena arena = Arena.ofConfined()) {
@@ -124,7 +128,7 @@ Here's a basic example of accessing memory directly:
 
         // Fill the segment with random values for each int.
         System.out.print("Setting values: ");
-        for (int i = 0; i &lt; 5; i++) {
+        for (int i = 0; i < 5; i++) {
             int randomValue = new Random().nextInt(100);
             segment.setAtIndex(ValueLayout.JAVA_INT, i, randomValue);
             System.out.print(randomValue + " ");
@@ -133,12 +137,14 @@ Here's a basic example of accessing memory directly:
 
         // Print the values back from memory.
         System.out.print("Reading values: ");
-        for (int i = 0; i &lt; 5; i++) {
+        for (int i = 0; i < 5; i++) {
             System.out.print(segment.getAtIndex(ValueLayout.JAVA_INT, i) + " ");
         }
         System.out.println("");
     }
-}</pre>
+}
+```
+
 
 Notice a few things about this code:
 
@@ -147,9 +153,12 @@ Notice a few things about this code:
 * The `MemorySegment` is a simple wrapper around a native memory address.
 * No manual memory management is needed.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ java ArenaDemo.java
+```
+$ java ArenaDemo.java
 Setting values: 16 7 27 50 80 
-Reading values: 16 7 27 50 80 </pre>
+Reading values: 16 7 27 50 80
+```
+
 
 A more extended example is [available here in `FFMMemoryManagement.java`](https://webtechie.be/code/ffm/FFMMemoryManagement.java), with a [Java 11 example here `Java11MemoryManagement.java`](https://webtechie.be/code/ffm/Java11MemoryManagement.java) illustrating how much more complex this was before the FFM API. The Java 11 version [must be executed with JBang](https://www.jbang.dev/) as described in the comments, to force the use of Java 11.
 
@@ -157,7 +166,8 @@ A more extended example is [available here in `FFMMemoryManagement.java`](https:
 
 To illustrate how to call a native library function, we'll make the most complex `String.length()` implementation 😉 A perfect example of how this can be done with FFM API within one simple-to-read method:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">void main() throws Throwable {
+```
+void main() throws Throwable {
     // The text we will use in the demo.
     var text = "Hello JVM Advent!";
 
@@ -197,14 +207,19 @@ To illustrate how to call a native library function, we'll make the most complex
     }
 
     System.out.println("Length with String.length(): " + text.length());
-}</pre>
+}
+```
+
 
 No JNI headers, no C-compilation, just pure Java code!
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ java LinkerDemo.java
+```
+$ java LinkerDemo.java
 
 Length with native library: 17
-Length with String.length(): 17</pre>
+Length with String.length(): 17
+```
+
 
 Also, for this example, you can find a more extended example [here in `FFMNativeCalls.java`](https://webtechie.be/code/ffm/FFMNativeCalls.java), with a [Java 11 in `Java11NativeCalls.java`](https://webtechie.be/code/ffm/Java11NativeCalls.java).
 
@@ -215,14 +230,17 @@ I like demos that have a visual output. So I created a simple benchmark that gen
 
 The results speak for themselves (tested on a MacOS M2 with Azul Zulu 25):
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ jbang Java11PixelBuffer.java
+```
+$ jbang Java11PixelBuffer.java
 [jbang] Building jar for Java11PixelBuffer.java...
 Interval: 57 - Generated 250000 pixels
 Interval: 56 - Generated 250000 pixels
 
 $ java FFMPixelBuffer.java
 Interval: 5 - Generated 250000 pixels
-Interval: 5 - Generated 250000 pixels</pre>
+Interval: 5 - Generated 250000 pixels
+```
+
 
 * **[Java 11 approach](https://webtechie.be/code/ffm/Java11PixelBuffer.java)** using `BufferedImage` and arrays: \~50-60 milliseconds per frame.
 * **[FFM API approach](https://webtechie.be/code/ffm/FFMPixelBuffer.java)** with direct memory access: \~5 milliseconds per frame.
@@ -281,7 +299,8 @@ I often demo with a CrowPi -- a neat kit with a Raspberry Pi and pre-wired compo
 
 Here's a simplified example using JBang to blink an RGB LED, using a snapshot build of Pi4J V4. Once this version is released you can remove the line with `//REPOS` and update the version.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">/// usr/bin/env jbang "$0" "$@" ; exit $?
+```
+/// usr/bin/env jbang "$0" "$@" ; exit $?
 
 //REPOS mavencentral,pi4j-snapshots=https://oss.sonatype.org/content/repositories/snapshots
 //DEPS com.pi4j:pi4j-core:4.0.0-SNAPSHOT
@@ -301,7 +320,7 @@ void main() throws InterruptedException {
     var blue = pi4j.digitalOutput().create(22);
 
     // Blink pattern
-    for (int i = 0; i &lt; 10; i++) {
+    for (int i = 0; i < 10; i++) {
         red.high();
         Thread.sleep(500);
         red.low();
@@ -312,7 +331,9 @@ void main() throws InterruptedException {
         Thread.sleep(500);
         blue.low();
     }
-}</pre>
+}
+```
+
 
 More examples like this, which can be executed with JBang, are available in the [Pi4J JBang repository](https://github.com/Pi4J/pi4j-jbang).
 

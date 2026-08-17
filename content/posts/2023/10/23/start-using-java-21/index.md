@@ -111,15 +111,19 @@ Develop and run your apps using Open Liberty 23.0.0.10 {#run}
 
 If you're using [Maven](https://openliberty.io/guides/maven-intro.html?utm_source=foojay&utm_medium=news&utm_content=java21), include the following in your `pom.xml` file:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="xml">&lt;plugin&gt;
-    &lt;groupId&gt;io.openliberty.tools&lt;/groupId&gt;
-    &lt;artifactId&gt;liberty-maven-plugin&lt;/artifactId&gt;
-    &lt;version&gt;3.8.2&lt;/version&gt;
-&lt;/plugin&gt;</pre>
+```xml
+<plugin>
+    <groupId>io.openliberty.tools</groupId>
+    <artifactId>liberty-maven-plugin</artifactId>
+    <version>3.8.2</version>
+</plugin>
+```
+
 
 Or for [Gradle](https://openliberty.io/guides/gradle-intro.html?utm_source=foojay&utm_medium=news&utm_content=java21), include the following in your `build.gradle` file:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="gradle">buildscript {
+```groovy
+buildscript {
     repositories {
         mavenCentral()
     }
@@ -127,11 +131,16 @@ Or for [Gradle](https://openliberty.io/guides/gradle-intro.html?utm_source=fooja
         classpath 'io.openliberty.tools:liberty-gradle-plugin:3.6.2'
     }
 }
-apply plugin: 'liberty'</pre>
+apply plugin: 'liberty'
+```
+
 
 Or if you're using [container images](https://openliberty.io/docs/latest/container-images.html?utm_source=foojay&utm_medium=news&utm_content=java21):
 
-<pre class="EnlighterJSRAW">FROM icr.io/appcafe/open-liberty</pre>
+```
+FROM icr.io/appcafe/open-liberty
+```
+
 
 Or take a look at our [Downloads page](https://openliberty.io/start/?utm_source=foojay&utm_medium=news&utm_content=java21).
 

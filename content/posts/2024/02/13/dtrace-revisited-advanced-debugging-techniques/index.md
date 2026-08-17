@@ -120,11 +120,17 @@ On MacOS, DTrace's functionality intersects with System Integrity Protection (SI
 
 We can disable SIP using the command:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">csrutil disable</pre>
+```
+csrutil disable
+```
+
 
 We can optionally use a more refined approach of enabling SIP without dtrace using the following command:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">csrutil enable --without dtrace</pre>
+```
+csrutil enable --without dtrace
+```
+
 
 Be extra careful when issuing these commands and when working on machines where dtrace is enabled. Back up your data properly!
 
@@ -151,7 +157,10 @@ This adaptability makes it an invaluable tool for both developers and system adm
 
 Users can define probes to monitor specific system events, track the behavior of certain processes, or gather data on system resource usage. This level of customization ensures that DTrace can be an effective tool in a variety of contexts, from routine maintenance to complex troubleshooting tasks. Following in a simple hello world dtrace probe:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">sudo dtrace -qn 'syscall::write:entry, syscall::sendto:entry /pid == $target/ { printf("(%d) %s %s", pid, probefunc, copyinstr(arg1)); }' -p 9999</pre>
+```
+sudo dtrace -qn 'syscall::write:entry, syscall::sendto:entry /pid == $target/ { printf("(%d) %s %s", pid, probefunc, copyinstr(arg1)); }' -p 9999
+```
+
 
 The kernel is instrumented with hooks that match various callbacks. dtrace connects to these hooks and can perform interesting tasks when these hooks are triggered. They have a naming convention, specially: `provider:module:function:name`. In this case the provider is a system call in both cases. We have no module so we can leave that part blank between the colon (`:`) symbols. We grab a write operation and `sendto` entries. When an application will write or tries to send a packet, the following code event will trigger.
 
@@ -166,7 +175,8 @@ DTrace's diverse capabilities extend far beyond theoretical use, playing a pivot
 
 To get a sense of how dtrace can be used we can use the `man -k dtrace` command whose output on my mac is below:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">bitesize.d(1m)           - analyse disk I/O size by process. Uses DTrace
+```
+bitesize.d(1m)           - analyse disk I/O size by process. Uses DTrace
 cpuwalk.d(1m)            - Measure which CPUs a process runs on. Uses DTrace
 creatbyproc.d(1m)        - snoop creat()s by process name. Uses DTrace
 dappprof(1m)             - profile user and lib function usage. Uses DTrace
@@ -253,7 +263,8 @@ syscallbyproc.d(1m)      - syscalls by process name. Uses DTrace
 syscallbysysc.d(1m)      - syscalls by syscall. Uses DTrace
 topsyscall(1m)           - top syscalls by syscall name. Uses DTrace
 topsysproc(1m)           - top syscalls by process name. Uses DTrace
-</pre>
+```
+
 
 There's a lot here, we don't need to read everything. The point is that when you run into a problem you can just search through this list and find a tool dedicated to debugging that problem.
 

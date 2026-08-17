@@ -66,15 +66,19 @@ A blacklist lets us block well-known vulnerabilities and that might be enough. B
 
 We can set the filter on the JDK itself by editing the [java.security](http://java.security) properties file. That might make sense if you package a JDK with your application. Personally, I prefer using the command line argument to configure that e.g.:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">java “-Djdk.serialFilter=!*” -jar MyJar.jar
-</pre>
+```
+java “-Djdk.serialFilter=!*” -jar MyJar.jar
+```
+
 
 This command will block all serialization. Notice I need to use the quotes to prevent bash from expanding the star sign. The exclamation point means we wish to block and the star means we block everything.
 
 The following code is a blacklist. We're blocking a specific package. We can also narrow it down to a specific class. But as I said before, this isn't ideal:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">java “-Djdk.serialFilter=!mypackage.*” -jar MyJar.jar
-</pre>
+```
+java “-Djdk.serialFilter=!mypackage.*” -jar MyJar.jar
+```
+
 
 Besides the inherent problems with the blacklist, a major problem is knowing what to block. There are obvious targets like classes that have been vulnerable in the past e.g.:
 
@@ -88,8 +92,10 @@ Unfortunately, this list is not exhaustive and I couldn't find any list that I c
 
 Finally, we have a whitelist where we allow the classes under the package `mypackage`. We can serialize them as usual. The JVM seamlessly blocks everything else. This is pretty close to the ideal situation. We can add additional classes and packages as necessary by adding them and separating them with a semicolon:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">java “-Djdk.serialFilter=mypackage.*;!*” -jar MyJar.jar
-</pre>
+```
+java “-Djdk.serialFilter=mypackage.*;!*” -jar MyJar.jar
+```
+
 
 What about Complexity? {#h2-3-what-about-complexity}
 ----------------------------------------------------
@@ -98,8 +104,10 @@ How do you know which classes are serialized in the code? How do you get an aler
 
 This is a sample from the Oracle documentation of a simple serialization filter. Notice it can reject the serialization or leave it undecided. This is part of a filter chain where each stage in the validation process can reject the serialization or pass it on to the next stage. We can bind the filter globally as we do here, or do it on a per-stream basis. The API is remarkably flexible and provides a lot of information about the process:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">ObjectInputFilter.Config.setSerialFilter(info -&gt; info.depth() &gt; 10 ? Status.REJECTED : Status.UNDECIDED);
-</pre>
+```
+ObjectInputFilter.Config.setSerialFilter(info -> info.depth() > 10 ? Status.REJECTED : Status.UNDECIDED);
+```
+
 
 TL;DR {#h2-4-tl-dr}
 -------------------

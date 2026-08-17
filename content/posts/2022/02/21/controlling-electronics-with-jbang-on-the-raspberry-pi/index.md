@@ -57,26 +57,33 @@ For this manual you can use the following approach:
 * Power up and wait until the OS has booted (it will probably restart once to resize the partition on the SD card to the maximum available size)
 * Open a terminal and confirm Java is not available yet (except if you selected the "Raspberry Pi OS Full (32-bit)" version)
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ java -version
-bash: java: command not found</pre>
+```
+$ java -version
+bash: java: command not found
+```
+
 
 Installing JBang {#h2-2-installing-jbang}
 -----------------------------------------
 
 As described on [jbang.dev/download](https://www.jbang.dev/download/) installing JBang is enough to get started, even if you don't have Java installed already, as JBang will also take care of this.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ curl -Ls https://sh.jbang.dev | bash -s - app setup
+```
+$ curl -Ls https://sh.jbang.dev | bash -s - app setup
 $ java -version
 openjdk version "11.0.14" 2022-01-18
 OpenJDK Runtime Environment Temurin-11.0.14+9 (build 11.0.14+9)
-OpenJDK Server VM Temurin-11.0.14+9 (build 11.0.14+9, mixed mode)</pre>
+OpenJDK Server VM Temurin-11.0.14+9 (build 11.0.14+9, mixed mode)
+```
+
 
 Minimal JBang example {#h2-3-minimal-jbang-example}
 ---------------------------------------------------
 
 A minimal JBang Java-file looks like the following code block, take note of the special first line that tricks the system to run this as a script while still being valid Java-code.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">///usr/bin/env jbang "$0" "$@" ; exit $? 
+```
+///usr/bin/env jbang "$0" "$@" ; exit $? 
 
 class HelloWorld {
     public static void main(String[] args) {
@@ -86,12 +93,17 @@ class HelloWorld {
             System.out.println("Hello " + args[0]);
         }
     }
-}</pre>
+}
+```
+
 
 By saving this file as `HelloWorld.java` it can be started with:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ jbang HelloWorld.java
-Hello World!</pre>
+```
+$ jbang HelloWorld.java
+Hello World!
+```
+
 
 JBang Pi4J example {#h2-4-jbang-pi4j-example}
 ---------------------------------------------
@@ -103,7 +115,8 @@ The following example is based on the ["Minimal example application"](/getting-s
 
 Create a new file `JBangPi4JExample.java` with the following content:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">///usr/bin/env jbang "$0" "$@" ; exit $?
+```
+///usr/bin/env jbang "$0" "$@" ; exit $?
 //DEPS org.slf4j:slf4j-api:1.7.35
 //DEPS org.slf4j:slf4j-simple:1.7.35
 //DEPS com.pi4j:pi4j-core:2.1.1
@@ -147,14 +160,14 @@ class JBangPi4JExample {
                 .debounce(3000L)
                 .provider("pigpio-digital-input");
         var button = pi4j.create(buttonConfig);
-        button.addListener(e -&gt; {
+        button.addListener(e -> {
             if (e.state() == DigitalState.LOW) {
                 pressCount++;
                 console.println("Button was pressed for the " + pressCount + "th time");
             }
         });
 
-        while (pressCount &lt; 5) {
+        while (pressCount < 5) {
             if (led.equals(DigitalState.HIGH)) {
                 console.println("LED low");
                 led.low();
@@ -167,24 +180,30 @@ class JBangPi4JExample {
 
         pi4j.shutdown();
     }
-}</pre>
+}
+```
+
 
 Without the need of any further configuration, installation, dependency download, or compiling, we should now be able to run this code with:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ jbang JBangPi4JExample.java
+```
+$ jbang JBangPi4JExample.java
 
 [jbang] Building jar...
 
 [main] INFO com.pi4j.Pi4J - New auto context
 [main] INFO com.pi4j.Pi4J - New context builder
 [main] INFO com.pi4j.platform.impl.DefaultRuntimePlatforms - adding platform to managed platform map [id=raspberrypi; name=RaspberryPi Platform; priority=5; class=com.pi4j.plugin.raspberrypi.platform.RaspberryPiPlatform]
-[main] WARN com.pi4j.library.pigpio.impl.PiGpioNativeImpl - PIGPIO ERROR: PI_INIT_FAILED; pigpio initialisation failed</pre>
+[main] WARN com.pi4j.library.pigpio.impl.PiGpioNativeImpl - PIGPIO ERROR: PI_INIT_FAILED; pigpio initialisation failed
+```
+
 
 Auch, an error...?! But this is a known one! At this moment, PiGpio - the underlying native library which interacts with the GPIOs - needs to be called as `sudo`. This is not ideal, and we are investigating how we can rework this. But with some additional steps this can be fixed easily!
 
 First we need to find out where JBang is installed for our current user with `which jbang`. This full path can be used to start JBang from that location, instead of the shortcut `jbang` that was automatically created by JBang for the `pi` user (in this case). As Java was installed by JBang for the `pi` user, it needs to do this again for the `sudo` user, but also this is handled automatically again by JBang.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ which jbang
+```
+$ which jbang
 /home/pi/.jbang/bin/jbang
 
 $ sudo /home/pi/.jbang/bin/jbang JBangPi4JExample.java
@@ -206,13 +225,18 @@ Downloading JDK 11. Be patient, this can take several minutes...
 ...
 [main] INFO com.pi4j.util.Console - LED high
 [main] INFO com.pi4j.util.Console - LED low
-[Thread-8] INFO com.pi4j.util.Console - Button was pressed for the 5th time</pre>
+[Thread-8] INFO com.pi4j.util.Console - Button was pressed for the 5th time
+```
+
 
 Yep, we have a working example, with dependencies, without the need to compile anything!
 
 And both commands can even be combined to make things even more easy, allowing you to start the application simply with:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ sudo `which jbang` JBangPi4JExample.java</pre>
+```
+$ sudo `which jbang` JBangPi4JExample.java
+```
+
 
 Conclusion {#h2-5-conclusion}
 -----------------------------
@@ -221,6 +245,6 @@ JBang is a great way to simply run Java-files, helps you to quickly get started 
 
 Thanks to [Max Rydahl Andersen](https://twitter.com/maxandersen) and the many contributors for creating JBang and to propose the [solution how `sudo` can be combined with JBang](https://github.com/jbangdev/jbang/discussions/1229).
 
-*** ** * ** ***
+
 
 *Originally posted as [one of the build and run examples on the Pi4J website](https://pi4j.com/documentation/building/jbang/).*

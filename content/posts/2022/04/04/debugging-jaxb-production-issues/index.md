@@ -27,23 +27,30 @@ JAXB requires a runtime library but doesn't require static analysis, XML schema,
 
 JAXB supports the bidirectional mapping of XML. It converts objects into XML and can convert an XML file to an object. The central API behind it is the XML marshalling API, which we can leverage using code such as this:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">JAXBContext context = JAXBContext.newInstance(obj.getClass());
+```java
+JAXBContext context = JAXBContext.newInstance(obj.getClass());
 Marshaller mar = context.createMarshaller();
 try(StringWriter writer = new StringWriter()) {
    mar.marshal(obj, writer);
    return writer.toString();
-}</pre>
+}
+```
+
 
 This code converts an arbitrary source object to an XML String using the marshal method. The reverse is also pretty easy:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">JAXBContext context = JAXBContext.newInstance(User.class); 
-User user = (User) context.createUnmarshaller().unmarshal(new StringReader(xml));</pre>
+```java
+JAXBContext context = JAXBContext.newInstance(User.class); 
+User user = (User) context.createUnmarshaller().unmarshal(new StringReader(xml));
+```
+
 
 Notice we need to give the right type of object to serialize into. We do this through JAXB binding, defined as annotations on the POJO. They indicate how an object should be serialized, this is especially true when creating complex hierarchies of objects.
 
 In the demo, I will show you soon. I integrated Lombok to make JAXB code even easier to write. This posed some challenges though, as you can see from this class:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">@Data
+```java
+@Data
 @AllArgsConstructor
 @XmlRootElement(name = "history")
 @XmlAccessorType(XmlAccessType.FIELD)
@@ -57,7 +64,9 @@ public class History {
    private String userId;
 
    public History() {}
-}</pre>
+}
+```
+
 
 You will notice several points of interest in the class definition above:
 
@@ -69,7 +78,8 @@ You will notice several points of interest in the class definition above:
 
 As you may have noticed, we also have another class, which is the adapter class. It's pretty trivial:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public class InstantAdapter extends XmlAdapter&lt;String, Instant&gt; {
+```java
+public class InstantAdapter extends XmlAdapter<String, Instant> {
    @Override
    public Instant unmarshal(String v) throws Exception {
        return Instant.ofEpochMilli(Long.parseLong(v));
@@ -79,20 +89,25 @@ As you may have noticed, we also have another class, which is the adapter class.
    public String marshal(Instant v) throws Exception {
        return "" + v.toEpochMilli();
    }
-}</pre>
+}
+```
+
 
 JAXB binding invokes this code every time it needs to parse or generate XML for a field annotated with this adapter.
 
 The resulting XML for the History class would look something like this (formatted for clarity):
 
-<pre class="EnlighterJSRAW" data-enlighter-language="xml">&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;
-&lt;history&gt;
-    &lt;objectId&gt;1f3d3cf7-ed7e-4e49-be29-0129a537f3dc&lt;/objectId&gt;
-    &lt;ordinal&gt;0&lt;/ordinal&gt;
-    &lt;time&gt;1643020804619&lt;/time&gt;
-    &lt;action&gt;CREATED&lt;/action&gt;
-    &lt;userId&gt;shai&lt;/userId&gt;
-&lt;/history&gt;</pre>
+```xml
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<history>
+    <objectId>1f3d3cf7-ed7e-4e49-be29-0129a537f3dc</objectId>
+    <ordinal>0</ordinal>
+    <time>1643020804619</time>
+    <action>CREATED</action>
+    <userId>shai</userId>
+</history>
+```
+
 
 **TIP:** Java SE bundled JAXB 2.0 as part of the Java 8 release (AKA JDK/Java 1.8). Unfortunately, Java 9 removed it. It's important that you explicitly include it in your Maven/Gradle dependencies for compatibility between the various versions of Java SE.
 
@@ -112,7 +127,10 @@ We need to start by setting up Lightrun and running your project with the Lightr
 
 In the case of the XML demo, we can run it with Lightrun using the command:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">java -agentpath:./agent/lightrun_agent_x86.so -jar target/jaxb-0.0.1-SNAPSHOT.jar</pre>
+```
+java -agentpath:./agent/lightrun_agent_x86.so -jar target/jaxb-0.0.1-SNAPSHOT.jar
+```
+
 
 Once it's running, we can open the project in the IDE. I'll show the rest in IntelliJ/IDEA, but VSCode should work just fine.
 
@@ -128,13 +146,19 @@ Before we can see this happening, we need to create a new database user which we
 
 ![Screen Shot 2022-01-27 at 15.18.42.png](https://cdn.hashnode.com/res/hashnode/image/upload/v1648536726722/EXR0PHzNg.png)
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">curl -X PUT -H "Content-Type: application/json" -d '{"login":"shai","password":"123456"}' http://localhost:8080/addUser</pre>
+```
+curl -X PUT -H "Content-Type: application/json" -d '{"login":"shai","password":"123456"}' http://localhost:8080/addUser
+```
+
 
 This command will return a user token which you can use in the following curl command. In my case, the token is: `cf3d2809-bd25-4f34-afe0-d4dd6b04cb87`.
 
 Then we can just add a new command and replace my token with yours:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">curl -X POST -H "Content-Type: application/json" -H "Authorization: 46d37d7a-5984-4acd-8932-f12c1a475d4f" -d '{"coreData":[20,22,22,22,33,44]}' http://localhost:8080/create</pre>
+```
+curl -X POST -H "Content-Type: application/json" -H "Authorization: 46d37d7a-5984-4acd-8932-f12c1a475d4f" -d '{"coreData":[20,22,22,22,33,44]}' http://localhost:8080/create
+```
+
 
 After that command is sent, you will see the snapshot representing the XML marshaling:
 
@@ -155,7 +179,10 @@ The UnmarshallerImpl class includes a similar internal implementation method, sp
 
 We can then use the following curl command to read the previously added entry:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">curl -H "Content-Type: application/json" -H "Authorization: 46d37d7a-5984-4acd-8932-f12c1a475d4f" "http://localhost:8080/read?id=cf3d2809-bd25-4f34-afe0-d4dd6b04cb87"</pre>
+```
+curl -H "Content-Type: application/json" -H "Authorization: 46d37d7a-5984-4acd-8932-f12c1a475d4f" "http://localhost:8080/read?id=cf3d2809-bd25-4f34-afe0-d4dd6b04cb87"
+```
+
 
 You need to update authorization like before. Notice you can set the value for the ID parameter from the values we saw in the previous stack:
 

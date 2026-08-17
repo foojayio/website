@@ -38,37 +38,40 @@ The following sample code shows how an application running on an Open Liberty se
 
 The relevant server configuration in `server.xml`:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="xml" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
-&lt;server description="defaultServer"&gt;
-  &lt;!-- Enable features --&gt;
-  &lt;featureManager&gt;
-    &lt;feature&gt;socialLogin-1.0&lt;/feature&gt;
-    &lt;feature&gt;transportSecurity-1.0&lt;/feature&gt;
-    &lt;feature&gt;appSecurity-3.0&lt;/feature&gt;
-  &lt;/featureManager&gt;
-  &lt;!-- trust JDK’s default truststore --&gt;
-  &lt;ssl id="defaultSSLConfig" trustDefaultCerts="true"/&gt;
-  &lt;!-- add your tenant ID, client ID and secret from Azure AD --&gt;
-  &lt;oidcLogin
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<server description="defaultServer">
+  <!-- Enable features -->
+  <featureManager>
+    <feature>socialLogin-1.0</feature>
+    <feature>transportSecurity-1.0</feature>
+    <feature>appSecurity-3.0</feature>
+  </featureManager>
+  <!-- trust JDK’s default truststore -->
+  <ssl id="defaultSSLConfig" trustDefaultCerts="true"/>
+  <!-- add your tenant ID, client ID and secret from Azure AD -->
+  <oidcLogin
     id="liberty-aad-oidc-javaeecafe" clientId="${client.id}"
     clientSecret="${client.secret}"
     discoveryEndpoint="https://login.microsoftonline.com/
             ${tenant.id}/v2.0/.well-known/openid-configuration"
     signatureAlgorithm="RS256"
-    userNameAttribute="preferred_username"/&gt;
-  &lt;!-- grant role "users" to all authenticated users --&gt;
-  &lt;webApplication id="javaee-cafe"
-    location="${server.config.dir}/apps/javaee-cafe.war"&gt;
-    &lt;application-bnd&gt;
-      &lt;security-role name="users"&gt;
-        &lt;special-subject type="ALL_AUTHENTICATED_USERS"/&gt;
-      &lt;/security-role&gt;
-    &lt;/application-bnd&gt;
-  &lt;/webApplication&gt;
-  &lt;!-- define http endpoints --&gt;
-  &lt;httpEndpoint id="defaultHttpEndpoint" host="*"
-    httpPort="9080" httpsPort="9443"/&gt;
-&lt;/server&gt;</pre>
+    userNameAttribute="preferred_username"/>
+  <!-- grant role "users" to all authenticated users -->
+  <webApplication id="javaee-cafe"
+    location="${server.config.dir}/apps/javaee-cafe.war">
+    <application-bnd>
+      <security-role name="users">
+        <special-subject type="ALL_AUTHENTICATED_USERS"/>
+      </security-role>
+    </application-bnd>
+  </webApplication>
+  <!-- define http endpoints -->
+  <httpEndpoint id="defaultHttpEndpoint" host="*"
+    httpPort="9080" httpsPort="9443"/>
+</server>
+```
+
 
 The `oidcLogin` element has a large number of configuration options. With Azure AD, most of them are not required as discovery endpoints are supported, allowing for most configuration to be automatically handled. Indeed Azure AD instances follow a known pattern for discovery endpoint URLs, allowing us to parameterize the URL using a tenant ID. In addition to that, a client ID and secret is needed. `RS256` must be used as the signature algorithm with Azure AD.
 
@@ -85,21 +88,24 @@ The sample application exposes a JSF client which defines a Java EE security con
 
 The relevant configuration in `web.xml`:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="xml" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
-&lt;web-app&gt;
-    &lt;security-role&gt;
-        &lt;role-name&gt;users&lt;/role-name&gt;
-    &lt;/security-role&gt;
-    &lt;security-constraint&gt;
-        &lt;web-resource-collection&gt;
-            &lt;web-resource-name&gt;javaee-cafe&lt;/web-resource-name&gt;
-            &lt;url-pattern&gt;/*&lt;/url-pattern&gt;
-        &lt;/web-resource-collection&gt;
-        &lt;auth-constraint&gt;
-            &lt;role-name&gt;users&lt;/role-name&gt;
-        &lt;/auth-constraint&gt;
-    &lt;/security-constraint&gt;
-&lt;/web-app&gt;</pre>
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app>
+    <security-role>
+        <role-name>users</role-name>
+    </security-role>
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>javaee-cafe</web-resource-name>
+            <url-pattern>/*</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <role-name>users</role-name>
+        </auth-constraint>
+    </security-constraint>
+</web-app>
+```
+
 
 This is just standard Java EE security. The authentication and authorization workflow is shown in the following diagram.
 ![](https://dzone.com/storage/temp/13800230-1596136325278.png)
@@ -110,7 +116,8 @@ When an unauthenticated user attempt's to access the JSF client, they are redire
 
 To get authenticated user information, use the `@Inject` annotation to obtain a reference to the `javax.security.enterprise.SecurityContext` and call its method `getCallerPrincipal()`:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@Named
+```java
+@Named
 @SessionScoped
 public class Cafe implements Serializable {
   @Inject
@@ -118,14 +125,17 @@ public class Cafe implements Serializable {
   public String getLoggedOnUser() {
     return securityContext.getCallerPrincipal().getName();
   }
-}</pre>
+}
+```
+
 
 **Secure Internal REST Calls Using JWT RBAC** {#h2-3-secure-internal-rest-calls-using-jwt-rbac}
 -----------------------------------------------------------------------------------------------
 
 The `Cafe` bean depends on `CafeResource`, a REST service built with JAX-RS, to create, read, update and delete coffees. The `CafeResource` implements RBAC (role based access control) using MicroProfile JWT to verify the groups claim of the token.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@Path("coffees")
+```java
+@Path("coffees")
 public class CafeResource {
     @Inject
     private CafeRepository cafeRepository;
@@ -150,7 +160,7 @@ public class CafeResource {
     }
     @GET
     @Produces({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
-    public List&lt;Coffee&gt; getAllCoffees() {
+    public List<Coffee> getAllCoffees() {
         return this.cafeRepository.getAllCoffees();
     }
     @POST
@@ -164,32 +174,37 @@ public class CafeResource {
             throw new WebApplicationException(e, Response.Status.INTERNAL_SERVER_ERROR);
         }
     }
-}</pre>
+}
+```
+
 
 The `admin.group.id` is injected into the application using MicroProfile Config at the application startup using the `@ConfigProperty` annotation. MicroProfile JWT enables you to `@Inject` the JWT (Json Web Token). The `CafeResource` REST endpoint receives the JWT with the `preferred_username` and `groups` claims from the ID Token issued by Azure AD in the OpenID Connect authorization workflow. The ID Token can be retrieved using the `com.ibm.websphere.security.social.UserProfileManager` and `com.ibm.websphere.security.social.UserProfile` APIs.
 
 Here is the relevant configuration snippet in `server.xml`:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="xml" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
-&lt;server description="defaultServer"&gt;
-    &lt;!-- Enable features --&gt;
-    &lt;featureManager&gt;
-        &lt;feature&gt;jwt-1.0&lt;/feature&gt;
-        &lt;feature&gt;mpJwt-1.1&lt;/feature&gt;
-        &lt;feature&gt;mpConfig-1.3&lt;/feature&gt;
-    &lt;/featureManager&gt;
-    &lt;!-- JWT consumer --&gt;
-    &lt;mpJwt id="jwtUserConsumer"
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<server description="defaultServer">
+    <!-- Enable features -->
+    <featureManager>
+        <feature>jwt-1.0</feature>
+        <feature>mpJwt-1.1</feature>
+        <feature>mpConfig-1.3</feature>
+    </featureManager>
+    <!-- JWT consumer -->
+    <mpJwt id="jwtUserConsumer"
         jwksUri="https://login.microsoftonline.com/${tenant.id}/discovery/v2.0/keys"
         issuer="https://login.microsoftonline.com/${tenant.id}/v2.0"
         audiences="${client.id}"
         userNameAttribute="preferred_username"
-        authFilterRef="mpJwtAuthFilter"/&gt;
-    &lt;!-- JWT auth filter --&gt;
-    &lt;authFilter id="mpJwtAuthFilter"&gt;
-        &lt;requestUrl id="myRequestUrl" urlPattern="/rest" matchType="contains"/&gt;
-    &lt;/authFilter&gt;
-&lt;/server&gt;</pre>
+        authFilterRef="mpJwtAuthFilter"/>
+    <!-- JWT auth filter -->
+    <authFilter id="mpJwtAuthFilter">
+        <requestUrl id="myRequestUrl" urlPattern="/rest" matchType="contains"/>
+    </authFilter>
+</server>
+```
+
 
 Note, the `groups` claim is not propagated by default and requires additional Azure AD configuration. To add a groups claim into the ID token, you will need to create a group with type as 'Security' and add one or more members to it in Azure AD. In the application registration created as part of Azure AD configuration, you will also need to: find 'Token configuration' \> select 'Add groups claim' \> select 'Security groups' as group types to include in ID token \> expand 'ID' and select 'Group ID' in 'Customize token properties by type' section. Learn more details from these articles:
 

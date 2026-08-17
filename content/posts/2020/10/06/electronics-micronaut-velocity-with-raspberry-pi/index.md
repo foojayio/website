@@ -79,14 +79,15 @@ The full code of this project is available on [GitHub](https://github.com/igfaso
 
 #### LedController.java
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@Controller("/display")
+```java
+@Controller("/display")
 public class LedController {
 
     SenseHat senseHat = new SenseHat();
 
     @View("led")
     @Get("/create")
-    public Map&lt;String, Object&gt; create() {
+    public Map<String, Object> create() {
         senseHat.ledMatrix.clear();
         return createModelWithBlankValues();
     }
@@ -94,15 +95,15 @@ public class LedController {
     @View("led")
     @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
     @Post("/save")
-    public Map&lt;String, Object&gt; save(@Valid @Body CommandLedSave cmd) {
+    public Map<String, Object> save(@Valid @Body CommandLedSave cmd) {
         if(cmd != null) {
-            if(cmd.getLeds() != null &amp;&amp; !cmd.getLeds().equals("")) {
+            if(cmd.getLeds() != null && !cmd.getLeds().equals("")) {
                 String possitions[] = cmd.getLeds().split(",");
                 Color[] pixels = createLedMatrix();
                 int i = 0;
                 int x = 0;
                 int y = 0;
-                while (i &lt; possitions.length){
+                while (i < possitions.length){
                     x = Integer.parseInt(possitions[i++]);
                     y = Integer.parseInt(possitions[i++]);
                     if(x != 0) {
@@ -117,13 +118,13 @@ public class LedController {
             }
         }
 
-        final Map&lt;String, Object&gt; model = new HashMap&lt;&gt;();
+        final Map<String, Object> model = new HashMap<>();
         model.put("leds", cmd.getLeds());
         return model;
     }
 
-    private Map&lt;String, Object&gt; createModelWithBlankValues() {
-        final Map&lt;String, Object&gt; model = new HashMap&lt;&gt;();
+    private Map<String, Object> createModelWithBlankValues() {
+        final Map<String, Object> model = new HashMap<>();
         model.put("title", "");
         return model;
     }
@@ -131,22 +132,25 @@ public class LedController {
     private Color[] createLedMatrix() {
         Color off = Color.of(0, 0, 0);
         Color[] pixels = new Color[64];
-        for (int i = 0; i &lt; pixels.length; i++) {
+        for (int i = 0; i < pixels.length; i++) {
             pixels[i] = off;
         }
         return pixels;
     }
-}</pre>
+}
+```
+
 
 #### led.vm
 
 Disclaimer, the CSS for the view is based on [VIrtual Led Display](https://codepen.io/djan/pen/FIkxC).
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&lt;script&gt;
+```java
+<script>
 function newLine(mat){
   var matrix = document.getElementById("matrix");
   var line = new Array();
-  for (var i = 0; i &lt; 8; i++){
+  for (var i = 0; i < 8; i++){
    var led = document.createElement("div");
    led.onclick = function(){onOff(this, mat)};
    led.className = "led off";
@@ -157,7 +161,7 @@ function newLine(mat){
 }
 
 function start(mat) {
- for (var i = 0; i &lt; 8; i++)
+ for (var i = 0; i < 8; i++)
    mat[i] = newLine(mat);
  return mat;
 }
@@ -174,8 +178,8 @@ function onOff (led, mat) {
 
 function getCoords (mat) {
  var coords = new Array();
- for ( var i = 0; i &lt; mat.length; i++)
-   for ( var j = 0; j &lt; mat[i].length; j++)
+ for ( var i = 0; i < mat.length; i++)
+   for ( var j = 0; j < mat[i].length; j++)
      if (mat[i][j].className == "led") {
        coords.push(i);
        coords.push(j);
@@ -185,7 +189,7 @@ function getCoords (mat) {
 
 function write (mat,arr) {
  var i = 0;
- while (i &lt; arr.length){
+ while (i < arr.length){
    mat[arr[i++]][arr[i++]].className = "led";
  }
 }
@@ -195,25 +199,27 @@ window.onload = function() {
     var mat_final = start(mat);
 
     var leds = document.getElementById("leds").value;
-    if (typeof leds !== 'undefined' &amp;&amp; leds) {
+    if (typeof leds !== 'undefined' && leds) {
         write(mat_final,leds.split(","));
     }
 }
-&lt;/script&gt;
+</script>
 
-&lt;/head&gt;
-&lt;body&gt;
-&lt;h1&gt;Led Display&lt;/h1&gt;
-&lt;form action="/display/save" method="post" id="form_display"&gt;
-    &lt;input type="hidden" id="leds" name="leds" value="$leds" /&gt;
-    &lt;div id="base" class="base"&gt;
-        &lt;div id="matrix" class="matrix"&gt;&lt;/div&gt;
-    &lt;/div&gt;
-&lt;/form&gt;
-&lt;/body&gt;
-&lt;/html&gt;</pre>
+</head>
+<body>
+<h1>Led Display</h1>
+<form action="/display/save" method="post" id="form_display">
+    <input type="hidden" id="leds" name="leds" value="$leds" />
+    <div id="base" class="base">
+        <div id="matrix" class="matrix"></div>
+    </div>
+</form>
+</body>
+</html>
+```
 
-*** ** * ** ***
+
+
 
 Alternative approach with a cheaper 8x8 LED matrix {#h2-5-alternative-approach-with-a-cheaper-8x8-led-matrix}
 -------------------------------------------------------------------------------------------------------------
@@ -233,13 +239,13 @@ The characters and images are created by converting the bit series to byte value
 By using the "Find" function in the IDE for value "1" it becomes pretty clear how the defined columns and rows will end up on the matrix display.
 ![](width-b-versus-t.jpg)
 
-*** ** * ** ***
+
 
 Conclusion {#h2-6-conclusion}
 -----------------------------
 
 Both on hardware as software level, you have different possible approaches, but the result is the same... a fun project to learn new software technologies and getting introduced into electronics.
 
-*** ** * ** ***
+
 
 **Note:** Used with permission and thanks --- originally written and published on the blog of [Igor De Souza](http://www.igfasouza.com/blog/micronaut-velocity-with-raspberry-pi/) and [Frank Delporte](https://webtechie.be/post/2020-02-01-raspberry-pi-and-spi-8x8-led-matrix-example-with-java-and-pi4j/).

@@ -75,14 +75,17 @@ This class will be named `JTestRunner`, because eventually it will drive the tes
 
 In this newly created `JTestRunner` class, please implement the **static** method below.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">/**
+```java
+/**
  * Find all methods annotated by {@link JTest} in a class. 
- * You&nbsp;can&nbsp;assume&nbsp;all&nbsp;its&nbsp;methods&nbsp;are&nbsp;public.
+ * You can assume all its methods are public.
  *
  * @param clazz The class to be analyzed
  * @return all methods annotated by {@link JTest}
  */
-public static List&lt;Method&gt; getTestMethods(Class&lt;?&gt; clazz)</pre>
+public static List<Method> getTestMethods(Class<?> clazz)
+```
+
 
 After completing this task, run `T2.java` to check your implementation.
 
@@ -95,13 +98,16 @@ To simplify the case, you can assume `@JTest` is always annotated on **static** 
 
 Please continue editing `JTestRunner` and implement the **static** method below.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">/**
+```java
+/**
  * Run a method via reflection. 
  * You can assume the method is always static.
  *
  * @param method the method to run
  */
-public static void runMethod(Method method)</pre>
+public static void runMethod(Method method)
+```
+
 
 After completing this task, run `T3.java` to check your implementation.
 
@@ -153,14 +159,17 @@ Task 7: Running A Test Class {#h2-7-task-7-running-a-test-class}
 
 `runMethod` executes only a single method. To run a test class containing multiple test methods, please add the following function `JTestRunner.`
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">/**
+```java
+/**
  * Run a test class by executing all its methods annotated by {@link JTest}.
  * You can assume all its methods are static.
  *
  * @param testClassName the full name of the test class
  * @return results of all test cases in the class
  */
-public static List&lt;JTestResult&gt; runTestClass(String testClassName)</pre>
+public static List<JTestResult> runTestClass(String testClassName)
+```
+
 
 After completing this task, run `T7.java` to check your implementation.
 
@@ -173,9 +182,12 @@ The output should contain three lines, corresponding to the passed, failed and e
 
 Concretely, a sample test class written against JTest is provided in `src/test/resources/ToyTest.java`. (Feel free to read it, or compile and run it if you know how to handle classpath issues.) The output for it should be as follows.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">1/3 have passed
+```
+1/3 have passed
 Failed tests are: [assertTrueFail]
-Errored tests are: [shouldError]</pre>
+Errored tests are: [shouldError]
+```
+
 
 After completing this task, run `T8.java` to check your implementation.
 

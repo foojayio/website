@@ -69,8 +69,10 @@ Let's see [ReadyNow](https://docs.azul.com/prime/Use-ReadyNow) in action.
 
 JVM flags used:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">-XX:ProfileLogIn={path to ReadyNow profile}
-</pre>
+```
+-XX:ProfileLogIn={path to ReadyNow profile}
+```
+
 
 ![](step2-700x323.png)
 
@@ -114,11 +116,13 @@ Let's first add more CPU for compiler during warmup. Let's set the warmup period
 
 JVM flags used:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">-XX:+EnableTier2CompilerBudgeting
+```
+-XX:+EnableTier2CompilerBudgeting
 -XX:CompilerWarmupPeriodSeconds=120 
 -XX:CompilerTier2BudgetingWarmupCPUPercent=100 
 -XX:ProfileLogIn={path to ReadyNow profile}
-</pre>
+```
+
 
 ![](step3-700x323.png)
 
@@ -133,12 +137,14 @@ Given that the original goal is to control CPU utilization of compiler after 60 
 
 JVM flags used:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">-XX:+EnableTier2CompilerBudgeting
+```
+-XX:+EnableTier2CompilerBudgeting
 -XX:CompilerTier2BudgetingCPUPercent=33
 -XX:CompilerWarmupPeriodSeconds=60
 -XX:CompilerTier2BudgetingWarmupCPUPercent=100 
 -XX:ProfileLogIn={path to ReadyNow profile}
-</pre>
+```
+
 
 ![](step4-700x323.png)
 
@@ -178,13 +184,15 @@ For this reason, Azul has implemented an option in Optimizer Hub and Azul Platfo
 
 JVM flags used:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">-XX:TopTierCompileThresholdTriggerMillis=60000
+```
+-XX:TopTierCompileThresholdTriggerMillis=60000
 -XX:+EnableTier2CompilerBudgeting
 -XX:CompilerTier2BudgetingCPUPercent=33
 -XX:CompilerWarmupPeriodSeconds=60
 -XX:CompilerTier2BudgetingWarmupCPUPercent=100 
 -XX:ProfileLogIn={path to ReadyNow profile}
-</pre>
+```
+
 
 ![](step5-700x323.png)
 

@@ -85,29 +85,31 @@ Our dependencies {#h2-5-our-dependencies}
 
 First things first, let's add our dependencies to our POM:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&lt;dependencies&gt;  
-    &lt;dependency&gt;  
-        &lt;groupId&gt;dev.langchain4j&lt;/groupId&gt;  
-        &lt;artifactId&gt;langchain4j-open-ai&lt;/artifactId&gt;  
-        &lt;version&gt;1.0.0-alpha1&lt;/version&gt;  
-    &lt;/dependency&gt;  
-    &lt;dependency&gt;  
-        &lt;groupId&gt;dev.langchain4j&lt;/groupId&gt;  
-        &lt;artifactId&gt;langchain4j-mongodb-atlas&lt;/artifactId&gt;  
-        &lt;version&gt;1.0.0-alpha1&lt;/version&gt;  
-    &lt;/dependency&gt;  
-    &lt;dependency&gt;  
-        &lt;groupId&gt;dev.langchain4j&lt;/groupId&gt;  
-        &lt;artifactId&gt;langchain4j&lt;/artifactId&gt;  
-        &lt;version&gt;1.0.0-alpha1&lt;/version&gt;  
-    &lt;/dependency&gt;  
-    &lt;dependency&gt;  
-        &lt;groupId&gt;com.fasterxml.jackson.core&lt;/groupId&gt;  
-        &lt;artifactId&gt;jackson-databind&lt;/artifactId&gt;  
-        &lt;version&gt;2.18.1&lt;/version&gt;  
-    &lt;/dependency&gt;  
-&lt;/dependencies&gt;
-</pre>
+```
+<dependencies>  
+    <dependency>  
+        <groupId>dev.langchain4j</groupId>  
+        <artifactId>langchain4j-open-ai</artifactId>  
+        <version>1.0.0-alpha1</version>  
+    </dependency>  
+    <dependency>  
+        <groupId>dev.langchain4j</groupId>  
+        <artifactId>langchain4j-mongodb-atlas</artifactId>  
+        <version>1.0.0-alpha1</version>  
+    </dependency>  
+    <dependency>  
+        <groupId>dev.langchain4j</groupId>  
+        <artifactId>langchain4j</artifactId>  
+        <version>1.0.0-alpha1</version>  
+    </dependency>  
+    <dependency>  
+        <groupId>com.fasterxml.jackson.core</groupId>  
+        <artifactId>jackson-databind</artifactId>  
+        <version>2.18.1</version>  
+    </dependency>  
+</dependencies>
+```
+
 
 * langchain4j-open-ai:
   * Embedding generation: Allows you to use OpenAI's embedding models, like `text-embedding-ada-002`, for transforming textual data into vector representations.
@@ -131,7 +133,8 @@ To make our retrieval-augmented generation application work effectively, we need
 
 The first step is to initialize a connection to our MongoDB cluster. We use the `MongoClient` from the MongoDB Java driver to connect to our database:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">package com.mongodb;  
+```
+package com.mongodb;  
 
 import com.fasterxml.jackson.databind.JsonNode;  
 import com.fasterxml.jackson.databind.ObjectMapper;  
@@ -169,7 +172,8 @@ public class LangChainRagApp {
         }  
     }  
 }
-</pre>
+```
+
 
 Replace `"CONNECTION_URI"` with your actual MongoDB connection string, which includes your database credentials and cluster information. This connection will be used to interact with the database and perform operations like storing and retrieving embeddings.
 
@@ -179,14 +183,15 @@ We are also adding in our whole host of imports we will use throughout this tuto
 
 The embedding store is the corpus of knowledge of our RAG application, where all embeddings and their associated metadata are stored. Let's add a method and call it from our main:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">private static EmbeddingStore&lt;TextSegment&gt; createEmbeddingStore(MongoClient mongoClient) {
+```
+private static EmbeddingStore<TextSegment> createEmbeddingStore(MongoClient mongoClient) {
     String databaseName = "rag_app";
     String collectionName = "embeddings";
     String indexName = "embedding";
     Long maxResultRatio = 10L;
     CreateCollectionOptions createCollectionOptions = new CreateCollectionOptions();
     Bson filter = null;
-    Set&lt;String&gt; metadataFields = new HashSet&lt;&gt;();
+    Set<String> metadataFields = new HashSet<>();
     IndexMapping indexMapping = new IndexMapping(1536, metadataFields);
     Boolean createIndex = true;
 
@@ -202,7 +207,8 @@ The embedding store is the corpus of knowledge of our RAG application, where all
             createIndex
     );
 }
-</pre>
+```
+
 
 Let's explore the parameters we set up:
 
@@ -218,7 +224,8 @@ Let's explore the parameters we set up:
 
 In the main method, we call this method and assign the result to an `EmbeddingStore` instance:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">package com.mongodb;  
+```
+package com.mongodb;  
 
 public class LangChainRagApp {  
 
@@ -228,14 +235,15 @@ public class LangChainRagApp {
             MongoClient mongoClient = MongoClients.create("CONNECTION_URI");  
 
             // Embedding Store  
-EmbeddingStore&lt;TextSegment&gt; embeddingStore = createEmbeddingStore(mongoClient);
+EmbeddingStore<TextSegment> embeddingStore = createEmbeddingStore(mongoClient);
 
         } catch (Exception e) {  
             e.printStackTrace();  
         }  
     }  
 }
-</pre>
+```
+
 
 This `embeddingStore` is now ready to store, retrieve, and manage our embeddings, with all the beauty and benefits of MongoDB behind it.
 
@@ -246,7 +254,8 @@ The embedding model is the engine that converts raw text into numerical represen
 
 In this section, we set up an embedding model using OpenAI's `text-embedding-ada-002`. To configure the embedding model, we use LangChain4J's `OpenAiEmbeddingModel` builder, which abstracts the complexities of interacting with OpenAI's API. Here's the implementation:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">package com.mongodb;  
+```
+package com.mongodb;  
 
 public class LangChainRagApp {  
 
@@ -267,7 +276,8 @@ OpenAiEmbeddingModel embeddingModel = OpenAiEmbeddingModel.builder()
 }
 
 // ...
-</pre>
+```
+
 
 1. API key (`apiKey`) The API key provides access to OpenAI's services. Replace `"OPEN_AI_API_KEY"` with your actual OpenAI API key.
 2. Model name (`modelName`) We specify `OpenAiEmbeddingModelName.TEXT_EMBEDDING_ADA_002`. This model offers:
@@ -281,7 +291,8 @@ Configuring our chat model {#h2-10-configuring-our-chat-model}
 
 In a retrieval-augmented generation application, the chat model serves as the conversational engine. It generates our context-aware, human-like responses based on the user's query and retrieved content. For this tutorial, we configure a chat model using OpenAI's GPT-4 (other AI models are available), simplified by LangChain4J's straightforward API.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">package com.mongodb;  
+```
+package com.mongodb;  
 
 public class LangChainRagApp {  
 
@@ -302,7 +313,8 @@ public class LangChainRagApp {
 }
 
 // ...
-</pre>
+```
+
 
 Replace the API key, just as before. We also specify the model name here.
 
@@ -324,8 +336,9 @@ We are going to be loading our data, which we can download from [MongoDB's Huggi
 
 Now, we need a method `loadJsonDocuments` to handle our logic. The `loadJsonDocuments` method handles loading and processing the dataset. It reads the JSON file, extracts relevant content (title, body, metadata), and splits it into smaller segments for embedding.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">private static List&lt;TextSegment&gt; loadJsonDocuments(String resourcePath, int maxTokensPerChunk, int overlapTokens) throws IOException {
-    List&lt;TextSegment&gt; textSegments = new ArrayList&lt;&gt;();
+```
+private static List<TextSegment> loadJsonDocuments(String resourcePath, int maxTokensPerChunk, int overlapTokens) throws IOException {
+    List<TextSegment> textSegments = new ArrayList<>();
 
     // Load file from resources using the ClassLoader
     InputStream inputStream = LangChainRagApp.class.getClassLoader().getResourceAsStream(resourcePath);
@@ -340,7 +353,7 @@ Now, we need a method `loadJsonDocuments` to handle our logic. The `loadJsonDocu
 
     // Batch size for processing
     int batchSize = 500;  // Adjust batch size as needed
-    List&lt;Document&gt; batch = new ArrayList&lt;&gt;();
+    List<Document> batch = new ArrayList<>();
 
     String line;
     while ((line = reader.readLine()) != null) {
@@ -354,8 +367,8 @@ Now, we need a method `loadJsonDocuments` to handle our logic. The `loadJsonDocu
             String text = (title != null ? title + "\n\n" + body : body);
 
             Metadata metadata = new Metadata();
-            if (metadataNode != null &amp;&amp; metadataNode.isObject()) {
-                Iterator&lt;String&gt; fieldNames = metadataNode.fieldNames();
+            if (metadataNode != null && metadataNode.isObject()) {
+                Iterator<String> fieldNames = metadataNode.fieldNames();
                 while (fieldNames.hasNext()) {
                     String fieldName = fieldNames.next();
                     metadata.put(fieldName, metadataNode.path(fieldName).asText());
@@ -366,7 +379,7 @@ Now, we need a method `loadJsonDocuments` to handle our logic. The `loadJsonDocu
             batch.add(document);
 
             // If batch size is reached, process the batch
-            if (batch.size() &gt;= batchSize) {
+            if (batch.size() >= batchSize) {
                 textSegments.addAll(splitIntoChunks(batch, maxTokensPerChunk, overlapTokens));
                 batch.clear();
             }
@@ -380,11 +393,13 @@ Now, we need a method `loadJsonDocuments` to handle our logic. The `loadJsonDocu
 
     return textSegments;
 }
-</pre>
+```
+
 
 Documents need to be divided into smaller chunks to fit within the token limits of our embedding model. We achieve this using the `splitIntoChunks` method. Here, we will use `DocumentSplitter`, a tool provided to us by LangChain4j to divide our documents into manageable chunks, while maintaining the original context they provide.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">private static List&lt;TextSegment&gt; splitIntoChunks(List&lt;Document&gt; documents, int maxTokensPerChunk, int overlapTokens) {  
+```
+private static List<TextSegment> splitIntoChunks(List<Document> documents, int maxTokensPerChunk, int overlapTokens) {  
     // Create a tokenizer for OpenAI  
     OpenAiTokenizer tokenizer = new OpenAiTokenizer(OpenAiEmbeddingModelName.TEXT_EMBEDDING_ADA_002);  
 
@@ -395,15 +410,16 @@ Documents need to be divided into smaller chunks to fit within the token limits 
             tokenizer  
     );  
 
-    List&lt;TextSegment&gt; allSegments = new ArrayList&lt;&gt;();  
+    List<TextSegment> allSegments = new ArrayList<>();  
     for (Document document : documents) {  
-        List&lt;TextSegment&gt; segments = splitter.split(document);  
+        List<TextSegment> segments = splitter.split(document);  
         allSegments.addAll(segments);  
     }  
 
     return allSegments;  
 }
-</pre>
+```
+
 
 ### Parameters {#h3-12-parameters}
 
@@ -412,7 +428,8 @@ Documents need to be divided into smaller chunks to fit within the token limits 
 
 Now, time to add this to our main method. The main method orchestrates the entire process: loading the data, embedding it, and storing it in the embedding store.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">package com.mongodb;  
+```
+package com.mongodb;  
 
 public class LangChainRagApp {  
 
@@ -422,11 +439,11 @@ public class LangChainRagApp {
 
             // Load documents
             String resourcePath = "devcenter-content-snapshot.2024-05-20.json";
-            List&lt;TextSegment&gt; documents = loadJsonDocuments(resourcePath, 800, 200);
+            List<TextSegment> documents = loadJsonDocuments(resourcePath, 800, 200);
 
             System.out.println("Loaded " + documents.size() + " documents");
 
-            for (int i = 0; i &lt; documents.size()/10; i++) {
+            for (int i = 0; i < documents.size()/10; i++) {
                 TextSegment segment = documents.get(i);
                 Embedding embedding = embeddingModel.embed(segment.text()).content();
                 embeddingStore.add(embedding, segment);
@@ -441,7 +458,8 @@ public class LangChainRagApp {
 }
 
 // ...
-</pre>
+```
+
 
 I added a few comments here to help us track our progress as we ingest our data. I also adjusted to only intake the first 10% of the documents. When I did this with the entire dataset, it took 30+ minutes to load in all the data on my slow internet. Feel free to adjust this, as the more data ingested, the more potentially accurate the answers.
 
@@ -452,7 +470,8 @@ In our retrieval-augmented generation application, the Content Retriever fetches
 
 We use the `EmbeddingStoreContentRetriever` to retrieve content from the embedding store by embedding the user query and finding the most relevant matches.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">package com.mongodb;  
+```
+package com.mongodb;  
 
 public class LangChainRagApp {  
 
@@ -475,7 +494,8 @@ public class LangChainRagApp {
 }
 
 // ...
-</pre>
+```
+
 
 Let's break down what makes this Content Retriever:
 
@@ -491,17 +511,20 @@ Asking questions {#h2-14-asking-questions}
 
 Time to put the pieces together. We need a way to bring all our components together to query our enhanced LLM. First, we need to create an interface for our assistant. Create an interface, as shown below.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">package com.mongodb;  
+```
+package com.mongodb;  
 
 public interface Assistant {  
 
     String answer(String question);  
 }
-</pre>
+```
+
 
 Keeping it very simple, we just want to provide a question and get an answer. Next, we need to create and call our assistant in our main class.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">package com.mongodb;  
+```
+package com.mongodb;  
 
 public class LangChainRagApp {  
 
@@ -526,11 +549,13 @@ public class LangChainRagApp {
 }
 
 // ...
-</pre>
+```
+
 
 Now, in this implementation, I kept it very simple and kept the query in line. There is nothing stopping you from implementing the querying system in an API, or in terminal, or any other way you can imagine. Let's take a look at our reply:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">To summarise Airbnb reviews using MongoDB Atlas Triggers and OpenAI, follow these steps:
+```
+To summarise Airbnb reviews using MongoDB Atlas Triggers and OpenAI, follow these steps:
 
 1. **Prerequisites**: Set up an App Services application to link to the cluster with Airbnb data. Also, create an OpenAI account with API access.
 
@@ -547,8 +572,8 @@ Now, in this implementation, I kept it very simple and kept the query in line. T
 7. **Displaying the Data**: Once the data is added to the documents, it can be displayed in a VUE application by adding an HTML template.
 
 By combining MongoDB Atlas triggers with OpenAI's powerful models, large volumes of reviews can be processed and analysed in real-time. This not only provides concise summaries of reviews but also categorises them into positive and negative tags, offering valuable insights to property hosts and potential renters.
+```
 
-</pre>
 
 This is a well informed response, and actually references the information available in the original tutorial, [Using MongoDB Atlas Triggers to Summarize Airbnb Reviews With OpenAI](https://www.mongodb.com/developer/products/mongodb/atlas-open-ai-review-summary/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=How%20to%20make%20a%20RAG%20application%20with%20LangChain4j&utm_term=tim.kelly). Want the code? Just ask in the query. It will tailor the responses to exactly what you ask!
 

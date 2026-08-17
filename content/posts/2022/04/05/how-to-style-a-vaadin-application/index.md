@@ -31,7 +31,8 @@ To start, we need to inform Vaadin about the location in which we will place our
 
 For example, in a Spring Boot application, you could have an application configuration class such as the following:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">@Theme("myapp")
+```java
+@Theme("myapp")
 public class Application extends SpringBootServletInitializer
                          implements AppShellConfigurator {
 
@@ -39,7 +40,9 @@ public class Application extends SpringBootServletInitializer
         SpringApplication.run(Application.class, args);
     }
 
-}</pre>
+}
+```
+
 
 By default, projects downloaded from [start.vaadin.com](https://start.vaadin.com/) come with the `@Theme` annotation added to the `Application` class.
 
@@ -48,11 +51,14 @@ Where to place your CSS {#h2-1-where-to-place-your-css}
 
 Custom CSS should be placed inside a specific folder located under the `frontend/themes` directory in your project. This directory has something like the following minimal structure:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">frontend
+```
+frontend
 └── themes              
     └── myapp        
         ├── components/ 
-        └── styles.css</pre>
+        └── styles.css
+```
+
 
 **NOTE:** the `myapp` sub-folder might be named differently in your case. This folder should have the same name as the one used for the custom theme using the `@Theme` annotation.
 
@@ -64,17 +70,22 @@ Custom CSS should be placed in one of the following locations:
 
 The first and simplest option is to place the custom CSS directly inside the `styles.css` file. For example, adding the following snippet to `styles.css` would change the font family and size of the whole Vaadin application.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="css">* {
+```css
+* {
     font-family: "Lucida Console", "Courier New", monospace;
     font-size: 1rem;
-}</pre>
+}
+```
+
 
 However, as the number of custom stylings increases, it becomes convenient to organize the styles into separate `.css` files. In order to do this, simply create a new CSS file and import that from within `styles.css`.
 
 For example, if we create a new CSS file called `main-view.css` at `frontend/themes/myapp/views/main-view.css`, then we would import this file by adding the following line to `styles.css`:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="css">@import url('./views/main-view.css');
-</pre>
+```css
+@import url('./views/main-view.css');
+```
+
 
 Further below, we will discuss the scenarios in which we should add our CSS to the `components/` directory.
 
@@ -93,9 +104,12 @@ Suppose that we want to increase the roundedness of their corners. By default, t
 
 In order to increase the roundedness of the corners, we can override the default value of this variable. Specifically, we can add the following inside the `styles.css` file in order to increase the default roundedness value:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="css">html {
+```css
+html {
     --lumo-border-radius-m: 1em;
-}</pre>
+}
+```
+
 
 This style will increase the corner roundedness of many components at once, so that they will look similar to the following screenshot:
 
@@ -105,9 +119,12 @@ But what if one wants to override the defaults for only a subset of components? 
 
 For example, if one wants to override the rounded corner defaults for only the TextField and ComboBox components, then the following should be added inside the `styles.css` file:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="css">vaadin-text-field, vaadin-combo-box {
+```css
+vaadin-text-field, vaadin-combo-box {
     --lumo-border-radius-m: 1em;
-}</pre>
+}
+```
+
 
 This will change the defaults for the TextField and ComboBox only, leaving other components, such as the DatePicker and Button, with their default values.
 
@@ -120,9 +137,12 @@ So far, we have been discussing ways to style all components belonging to a cert
 
 For example, if we want to set the width of all Button components within our application, we could add something like the following to the `styles.css` file:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="css">vaadin-button {
+```css
+vaadin-button {
     width: 140px;
-}</pre>
+}
+```
+
 
 However, we often want to style the same kind of component differently, depending on its function within our application. For example, we might want to style the Button component differently in our application, depending on whether it is a "Signup" button or a "Delete account!" button.
 
@@ -130,7 +150,8 @@ The easiest way to style views and components selectively is by providing them w
 
 To illustrate, the following view makes use of the `addClassNames()` method to assign a CSS class name to the view itself, as well as to the components that it includes.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">import com.vaadin.flow.component.button.Button;
+```java
+import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.html.Paragraph;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
@@ -154,13 +175,16 @@ public class MyView extends VerticalLayout {
         add(heading, text, submitButton, cancelButton);
 
     }
-}</pre>
+}
+```
+
 
 These CSS class names can then be used to selectively style this view and its components.
 
 For example, adding the following to `styles.css` demonstrates how selective styling can be achieved.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="css">.my-view  {
+```css
+.my-view  {
     padding: 1em;
 }
 
@@ -185,7 +209,9 @@ p {
 
 .wide-button {
     width: 120px;
-}</pre>
+}
+```
+
 
 Now after the selective styling is applied, `MyView` will look as follows:
 
@@ -208,9 +234,12 @@ If we inspect this toggle in Chrome (right-click on the toggle and select the **
 
 To style this part, we need to create a file called `vaadin-combo-box.css` and place it under the `frontend/themes/myapp/components/` directory. In this file, we can do something like the following to increase the size of the ComboBox toggle.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="css">[part="toggle-button"] {
+```css
+[part="toggle-button"] {
     font-size: 2em;
-}</pre>
+}
+```
+
 
 Note that the files placed under the `/components` directory have to exactly match the Vaadin component names as they appear in the DOM. For example, the ComboBox component appears in the DOM as `vaadin-combo-box`.
 
@@ -227,26 +256,35 @@ Here we can follow the same approach as we did above to selectively style views 
 
 For example, suppose that our application has the following two ComboBox components:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">ComboBox&lt;String&gt; firstCombo = new ComboBox&lt;&gt;();
+```java
+ComboBox<String> firstCombo = new ComboBox<>();
 comboBox.setItems("Earth", "Mars");
 
-ComboBox&lt;String&gt; secondCombo = new ComboBox&lt;&gt;();
-comboBox.setItems("Mercury", "Venus");</pre>
+ComboBox<String> secondCombo = new ComboBox<>();
+comboBox.setItems("Mercury", "Venus");
+```
+
 
 If we want to style the toggle part of these two components differently, we can do this by providing each ComboBox with a different classname as follows:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">firstCombo.addClassNames("first-combo");
-secondCombo.addClassNames("second-combo");</pre>
+```java
+firstCombo.addClassNames("first-combo");
+secondCombo.addClassNames("second-combo");
+```
+
 
 Then, in `frontend/themes/myapp/components/vaadin-combo-box.css`, we can selectively style the toggle element of the two components differently by doing something like:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">:host(.first-combo) [part="toggle-button"] {
+```java
+:host(.first-combo) [part="toggle-button"] {
     font-size: 2em;
 }
 
 :host(.second-combo) [part="toggle-button"] {
     font-size: 1em;
-}</pre>
+}
+```
+
 
 Notice that we have to use here the `:host()` shadow function because the `toggle-button` part is located inside the [shadow DOM](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_shadow_DOM) of the ComboBox.
 
@@ -267,11 +305,14 @@ We can provide a component with a theme attribute from the Java API using the `a
 
 For example, like before, suppose that our application has the following two ComboBox components:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">ComboBox&lt;String&gt; firstCombo = new ComboBox&lt;&gt;();
+```java
+ComboBox<String> firstCombo = new ComboBox<>();
 firstCombo.setItems("Earth", "Mars");
 
-ComboBox&lt;String&gt; secondCombo = new ComboBox&lt;&gt;();
-secondCombo.setItems("Mercury", "Venus");</pre>
+ComboBox<String> secondCombo = new ComboBox<>();
+secondCombo.setItems("Mercury", "Venus");
+```
+
 
 Suppose that we want to change the background color of the drop-down list of items that the user sees when they open the ComboBox.
 
@@ -281,20 +322,26 @@ This background color is controlled by the `background-color` property of the `o
 
 To selectively style the background of the overlay of the two ComboBox components, we can first give each one of them a theme name using the Java API as follows:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">firstCombo.addThemeName("first-combo");
-secondCombo.addThemeName("second-combo");</pre>
+```java
+firstCombo.addThemeName("first-combo");
+secondCombo.addThemeName("second-combo");
+```
+
 
 Then, we need to create a new file called `vaadin-combo-box-overlay.css` and place it under the `frontend/themes/myapp/components` directory.
 
 In this file, we can selectively style the overlay part of the `vaadin-combo-box-overlay` element of the two ComboBoxes by doing something like:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">:host([theme="first-combo"]) [part="overlay"] {
+```java
+:host([theme="first-combo"]) [part="overlay"] {
     background-color: rosybrown;
 }
 
 :host([theme="second-combo"]) [part="overlay"] {
     background-color: aquamarine;
-}</pre>
+}
+```
+
 
 Here again we are using the `:host()` shadow function because the overlay part is located inside the shadow DOM of the `vaadin-combo-box-overlay` element.
 

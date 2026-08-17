@@ -33,7 +33,7 @@ Let's explore how Kafka Streams powers a real-time city tour experience! 🧭
 
 <br />
 
-*** ** * ** ***
+
 
 🔵⚪⚪⚪⚪⚪⚪⚪⚪⚪
 
@@ -54,7 +54,7 @@ Each sightseeing spot has a specific opening and closing time.
 
 Visitors submit their visit plans, and we validate whether the visit can be scheduled within the location's allowed timetable.
 
-*** ** * ** ***
+
 
 🔵🔵⚪⚪⚪⚪⚪⚪⚪⚪
 
@@ -70,7 +70,7 @@ Visitors submit their visit plans, and we validate whether the visit can be sche
 * ✅ Valid visits → trip-steps topic.
 * ❌ Invalid visits → DLQ topic (dead-letter queue).
 
-*** ** * ** ***
+
 
 🔵🔵🔵⚪⚪⚪⚪⚪⚪⚪
 
@@ -86,7 +86,7 @@ Visitors submit their visit plans, and we validate whether the visit can be sche
 * Docker for local environment
 * Java for stream logic
 
-*** ** * ** ***
+
 
 🔵🔵🔵🔵⚪⚪⚪⚪⚪⚪
 
@@ -97,7 +97,8 @@ Visitors submit their visit plans, and we validate whether the visit can be sche
 
 Each location has its own timetable:
 
-<pre class="EnlighterJSRAW" style="position: relative;" data-enlighter-language="json">[
+```json
+[
   {
     "location": "Gare Lille Flandres",
     "timeRanges": [
@@ -111,32 +112,43 @@ Each location has its own timetable:
       { "start": "09:00", "end": "17:00" }
     ]
   }
-]</pre>
+]
+```
+
 
 Each event from the visitor looks like:
 
-<pre class="EnlighterJSRAW" style="position: relative;" data-enlighter-language="json">{
+```json
+{
   "location": "Beffroi",
   "hour": "13:00"
-}</pre>
+}
+```
+
 
 The system will return:
 
-<pre class="EnlighterJSRAW" style="position: relative;" data-enlighter-language="json">{
+```json
+{
   "location": "Beffroi",
   "hour": "13:00",
   "status": "OK"
-}</pre>
+}
+```
+
 
 Or, if the visit falls outside the available range:
 
-<pre class="EnlighterJSRAW" style="position: relative;" data-enlighter-language="json">{
+```json
+{
   "location": "Beffroi",
   "hour": "20:00",
   "status": "KO"
-}</pre>
+}
+```
 
-*** ** * ** ***
+
+
 
 🔵🔵🔵🔵🔵⚪⚪⚪⚪⚪
 
@@ -167,17 +179,20 @@ In our case:
 
 #### The processors involved:
 
-<pre class="EnlighterJSRAW" style="position: relative;" data-enlighter-language="java">KStream&lt;String, VisitEvent&gt; rawVisits = builder.stream("visit-event");
+```java
+KStream<String, VisitEvent> rawVisits = builder.stream("visit-event");
 
-KStream&lt;String, VisitStatus&gt; validatedVisits = rawVisits
-    .mapValues(event -&gt; {
+KStream<String, VisitStatus> validatedVisits = rawVisits
+    .mapValues(event -> {
         boolean isValid = validTimetableService.isValid(event.getLocation(), event.getHour());
         return new VisitStatus(event.getLocation(), event.getHour(), isValid ? "OK" : "KO");
     });
 
 validatedVisits.split()
-    .branch((key, status) -&gt; "OK".equals(status.getStatus()), Branched.withConsumer(ks -&gt; ks.to("trip-steps")))
-    .branch((key, status) -&gt; "KO".equals(status.getStatus()), Branched.withConsumer(ks -&gt; ks.to("DLQ")));</pre>
+    .branch((key, status) -> "OK".equals(status.getStatus()), Branched.withConsumer(ks -> ks.to("trip-steps")))
+    .branch((key, status) -> "KO".equals(status.getStatus()), Branched.withConsumer(ks -> ks.to("DLQ")));
+```
+
 
 ### 🖥️ Visualization {#h3-11-visualization}
 
@@ -191,7 +206,7 @@ Or in simple way:
 
 Each branch of the stream is defined clearly, allowing easy debugging and maintainability.
 
-*** ** * ** ***
+
 
 🔵🔵🔵🔵🔵🔵⚪⚪⚪⚪
 
@@ -206,7 +221,8 @@ Topics involved: ***visit-events, trip-steps, trip-dlq***{#caption-attachment-11
 
 #### 🧰 Kafbat UI: Used to inspect Kafka topics and payloads during development.
 
-<pre class="EnlighterJSRAW" style="position: relative;" data-enlighter-language="yaml">kafbat-ui:
+```yaml
+kafbat-ui:
   container_name: kafbat-ui
   image: ghcr.io/kafbat/kafka-ui:latest
   ports:
@@ -214,26 +230,29 @@ Topics involved: ***visit-events, trip-steps, trip-dlq***{#caption-attachment-11
   environment:
     DYNAMIC_CONFIG_ENABLED: 'true'
     KAFKA_CLUSTERS_0_NAME: local
-    KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: kafka:29092</pre>
+    KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: kafka:29092
+```
+
 
 #### 🧭 ValidTimetableService: A custom utility that loads all location timetables and verifies visit requests.
 
-<pre class="EnlighterJSRAW" style="position: relative;" data-enlighter-language="java">/**
+```java
+/**
      * Sends the list of events to the specified Kafka topic.
      * @param bootstrapServers Kafka bootstrap servers
      * @param topic Kafka topic to send messages to
      * @param events List of CSV event lines to send
      */
-    public static void produceEvents(String bootstrapServers, String topic, List&lt;String&gt; events) {
+    public static void produceEvents(String bootstrapServers, String topic, List<String> events) {
         Properties props = new Properties();
         props.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServers);
         props.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
         props.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
 
-        try (KafkaProducer&lt;String, String&gt; producer = new KafkaProducer&lt;&gt;(props)) {
+        try (KafkaProducer<String, String> producer = new KafkaProducer<>(props)) {
             for (String event : events) {
-                ProducerRecord&lt;String, String&gt; record = new ProducerRecord&lt;&gt;(topic, null, event);
-                producer.send(record, (metadata, exception) -&gt; {
+                ProducerRecord<String, String> record = new ProducerRecord<>(topic, null, event);
+                producer.send(record, (metadata, exception) -> {
                     if (exception != null) {
                         System.err.println("Failed to send event: " + event);
                         exception.printStackTrace();
@@ -244,22 +263,25 @@ Topics involved: ***visit-events, trip-steps, trip-dlq***{#caption-attachment-11
             }
             producer.flush();
         }
-    }</pre>
+    }
+```
+
 
 #### 🧪 Unit Tests: Every logic block is testable, ensuring accuracy before production deployment.
 
-<pre class="EnlighterJSRAW" style="position: relative;" data-enlighter-language="java">class VisitStatusTopologyTest {
+```java
+class VisitStatusTopologyTest {
 
     private TopologyTestDriver testDriver;
-    private TestInputTopic&lt;String, String&gt; inputTopic;
-    private TestOutputTopic&lt;String, VisitStatus&gt; okOutputTopic;
-    private TestOutputTopic&lt;String, VisitStatus&gt; koOutputTopic;
+    private TestInputTopic<String, String> inputTopic;
+    private TestOutputTopic<String, VisitStatus> okOutputTopic;
+    private TestOutputTopic<String, VisitStatus> koOutputTopic;
     private final String inputTopicName = "visit-events";
     private final String okTopicName = "trip-steps";
     private final String koTopicName = "trip-dlq";
 
-    private final Serde&lt;String&gt; stringSerde = Serdes.String();
-    private final Serde&lt;VisitStatus&gt; visitStatusSerde = new VisitStatusSerde();
+    private final Serde<String> stringSerde = Serdes.String();
+    private final Serde<VisitStatus> visitStatusSerde = new VisitStatusSerde();
 
     @BeforeEach
     void setup() {
@@ -302,11 +324,13 @@ Topics involved: ***visit-events, trip-steps, trip-dlq***{#caption-attachment-11
         // NOK topic should be empty
         assertTrue(koOutputTopic.isEmpty());
     }
-    //...</pre>
+    //...
+```
+
 
 #### 👨‍💻Full repsoitory on GitHub: [vinny59200 / kstream-lille-city-tour](https://github.com/vinny59200/kstream-lille-city-tour "vinny59200 / kstream-lille-city-tour")
 
-*** ** * ** ***
+
 
 🔵🔵🔵🔵🔵🔵🔵⚪⚪⚪
 
@@ -322,7 +346,7 @@ This project helped solidify my understanding of:
 
 And most importantly, building a real-life use case that's both educational and fun!
 
-*** ** * ** ***
+
 
 🔵🔵🔵🔵🔵🔵🔵🔵⚪⚪
 
@@ -338,7 +362,7 @@ Here's what could be added next:
 * Visualize city tour analytics on a live dashboard
 * Expose REST endpoints to submit visits and query status
 
-*** ** * ** ***
+
 
 🔵🔵🔵🔵🔵🔵🔵🔵🔵⚪
 
@@ -351,7 +375,7 @@ Clone the project ([vinny59200 / kstream-lille-city-tour](https://github.com/vin
 
 🧪 Tip: Modify the timetable and see how event routing changes instantly!
 
-*** ** * ** ***
+
 
 🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵
 

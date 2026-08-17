@@ -47,12 +47,16 @@ Configuration with Spring Boot and JMS {#h2-2-configuration-with-spring-boot-and
 
 The first thing to configure is that we want to use the publish-subscribe domain in the application.properties:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">spring.jms.pub-sub-domain=true</pre>
+```
+spring.jms.pub-sub-domain=true
+```
+
 
 Next we must configure durable subscription. Unfortunately this cannot be done using a simple property. We have to configure the ConnectionFactory manually:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@Bean
-public JmsListenerContainerFactory&lt;?&gt; artemisConnectionFactory(
+```java
+@Bean
+public JmsListenerContainerFactory<?> artemisConnectionFactory(
                                          CachingConnectionFactory connectionFactory,
                                          DefaultJmsListenerContainerFactoryConfigurer configurer) {
     // When using durable subscription the ClientId must be set for reconnect
@@ -65,19 +69,24 @@ public JmsListenerContainerFactory&lt;?&gt; artemisConnectionFactory(
     factory.setSubscriptionDurable(true);
 
     return factory;
-}</pre>
+}
+```
+
 
 The crucial lines in the configuration are line 6, where we set a client ID, which has to be unique among all active connections, and line 11, where we activate the durable subscription mode.
 
 Finally, we must configure the Listener to use this connection factory by setting the containerFactory attribute of the JmsListener annotation. We also set the subscription. If this attribute is not set, Spring JMS will generate a subscription name based on the class and method name.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@JmsListener(destination = "${chat.topic}",
-             selector = "user &lt;&gt; '${chat.user}'",
+```java
+@JmsListener(destination = "${chat.topic}",
+             selector = "user <> '${chat.user}'",
              containerFactory = "artemisConnectionFactory",
              subscription = "chat")
 public void onMessage(Message message) {
     ...
-}</pre>
+}
+```
+
 
 Example Code and References {#h2-3-example-code-and-references}
 ---------------------------------------------------------------

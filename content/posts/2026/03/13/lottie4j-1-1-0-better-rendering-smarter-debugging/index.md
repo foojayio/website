@@ -91,19 +91,22 @@ Trying It Out {#h2-6-trying-it-out}
 
 Add the Maven dependency for whichever module you need:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&lt;!-- Just the core model, no player --&gt;
-&lt;dependency&gt;
-    &lt;groupId&gt;com.lottie4j&lt;/groupId&gt;
-    &lt;artifactId&gt;lottie4j-core&lt;/artifactId&gt;
-    &lt;version&gt;1.1.0&lt;/version&gt;
-&lt;/dependency&gt;
+```
+<!-- Just the core model, no player -->
+<dependency>
+    <groupId>com.lottie4j</groupId>
+    <artifactId>lottie4j-core</artifactId>
+    <version>1.1.0</version>
+</dependency>
 
-&lt;!-- JavaFX player --&gt;
-&lt;dependency&gt;
-    &lt;groupId&gt;com.lottie4j&lt;/groupId&gt;
-    &lt;artifactId&gt;lottie4j-fx-player&lt;/artifactId&gt;
-    &lt;version&gt;1.1.0&lt;/version&gt;
-&lt;/dependency&gt;</pre>
+<!-- JavaFX player -->
+<dependency>
+    <groupId>com.lottie4j</groupId>
+    <artifactId>lottie4j-fx-player</artifactId>
+    <version>1.1.0</version>
+</dependency>
+```
+
 
 The full list of changes between 1.0.0 and 1.1.0 is [available on GitHub](https://github.com/lottie4j/lottie4j/compare/v1.0.0...v1.1.0).
 

@@ -44,7 +44,7 @@ Dive into this engaging conversation to learn more about Otavio's experiences, t
 >
 > *Besides my dad jokes, I enjoy reading and studying history. That's why I spend so much time in museums when I travel. I also love music and playing the piano. I will be the quiet boy at the corner of any conference because I'm shy, but I love to talk and communicate; that hard part is the ice-breaker, and after that, we can talk.*
 
-*** ** * ** ***
+
 
 ### Bazlur: Can you tell us about your background and how you got started in the software industry? {#h3-1-bazlur-can-you-tell-us-about-your-background-and-how-you-got-started-in-the-software-industry}
 
@@ -71,7 +71,7 @@ I started my graduate studies as a computer engineer in my hometown. I began wor
 **Editor's Note:**   
 *In this insightful conversation, Otavio Santana shares his passion for open-source software and its importance in the industry. With a focus on simplicity and evolving architectures, he has contributed to numerous Apache, Eclipse, and Java projects. Not only has he earned multiple awards, but he's also dedicated to helping other engineers advance in their careers. Drawing inspiration from Leonardo da Vinci, Otavio emphasizes the value of simplicity as the ultimate sophistication in software engineering.*
 
-*** ** * ** ***
+
 
 ### Bazlur: Your background and achievements in the open-source world are truly impressive. Before we dive into open source, I'd like to know your transition to mentoring senior engineers. What motivated you to start mentoring, and what are the benefits of mentorship? Have you faced any challenges while mentoring others, particularly senior engineers? {#h3-2-bazlur-your-background-and-achievements-in-the-open-source-world-are-truly-impressive-before-we-dive-into-open-source-i-d-like-to-know-your-transition-to-mentoring-senior-engineers-what-motivated-you-to-start-mentoring-and-what-are-the-benefits-of-mentorship-have-you-faced-any-challenges-while-mentoring-others-particularly-senior-engineers}
 
@@ -93,7 +93,7 @@ They want to keep increasing only their hard skill, but it is enough; there is t
 
 *Otavio Santana highlights the importance of mentorship in a senior engineer's career. He emphasizes that the role extends beyond coding to include long-term strategy and scaling quality within an organization. While some senior engineers may resist sharing knowledge, Otavio sees mentorship as a key aspect of leadership and essential for career advancement.*
 
-*** ** * ** ***
+
 
 ### Bazlur: Your perspective on mentoring and knowledge-sharing as keys to success for staff-plus engineers is valuable. I've noticed that you often discuss this topic on social media, and I'd like to hear your thoughts on the various paths a junior developer can take to become a staff-plus engineer. Also, with your experience, what approaches or strategies do you recommend for junior developers looking to advance their careers? {#h3-3-bazlur-your-perspective-on-mentoring-and-knowledge-sharing-as-keys-to-success-for-staff-plus-engineers-is-valuable-i-ve-noticed-that-you-often-discuss-this-topic-on-social-media-and-i-d-like-to-hear-your-thoughts-on-the-various-paths-a-junior-developer-can-take-to-become-a-staff-plus-engineer-also-with-your-experience-what-approaches-or-strategies-do-you-recommend-for-junior-developers-looking-to-advance-their-careers}
 
@@ -115,7 +115,7 @@ Thus, for any engineer, I believe in going to open-source and learning from it.
 
 *Otavio Santana emphasizes the importance of both hard and soft skills in advancing to a staff-plus engineer level. He suggests that junior developers engage in open-source projects to gain exposure to good coding practices, architecture, and leadership skills. By participating in open-source projects, engineers can develop their communication, collaboration, and decision-making abilities while working with global teams and diverse cultures.*
 
-*** ** * ** ***
+
 
 ### Bazlur: Since you have been a long-time contributor to open source, could you please share your thoughts on the benefits and challenges of doing so and how you have used it to advance your career? Also, what advice would you give to junior developers who want to get started contributing to open source? {#h3-4-bazlur-since-you-have-been-a-long-time-contributor-to-open-source-could-you-please-share-your-thoughts-on-the-benefits-and-challenges-of-doing-so-and-how-you-have-used-it-to-advance-your-career-also-what-advice-would-you-give-to-junior-developers-who-want-to-get-started-contributing-to-open-source}
 
@@ -140,7 +140,7 @@ To start on any open-source project, follow these steps:
 
 *A list of successful Java Opensource projects:* [*https://wiki.openjdk.org/display/quality/Quality+Outreach*](https://wiki.openjdk.org/display/quality/Quality+Outreach)
 
-*** ** * ** ***
+
 
 ### Bazlur: Great insight into the benefits and challenges of open-source contributions! I'd love to hear more about your current projects. What interesting project are you currently working on, and what's something interesting you are looking forward to working on in the future? {#h3-5-bazlur-great-insight-into-the-benefits-and-challenges-of-open-source-contributions-i-d-love-to-hear-more-about-your-current-projects-what-interesting-project-are-you-currently-working-on-and-what-s-something-interesting-you-are-looking-forward-to-working-on-in-the-future}
 
@@ -156,7 +156,7 @@ Otavio Santana is working on new Jakarta EE persistence specifications and aims 
 
 **Jakarta NoSQL** : <https://jakarta.ee/specifications/nosql/>
 
-*** ** * ** ***
+
 
 ### Bazlur: Great job on those two Jakarta EE specifications; I will try them out! Nonetheless, I'd like to know if those projects are open for contribution and how someone can get involved. Additionally, could you explain the concept of evolutionary architecture in more detail? Moreover, I find it fascinating that you care so much about helping other engineers in their pursuit of excellence. If someone wanted you as a mentor, what would be the best way for them to approach you? {#h3-6-bazlur-great-job-on-those-two-jakarta-ee-specifications-i-will-try-them-out-nonetheless-i-d-like-to-know-if-those-projects-are-open-for-contribution-and-how-someone-can-get-involved-additionally-could-you-explain-the-concept-of-evolutionary-architecture-in-more-detail-moreover-i-find-it-fascinating-that-you-care-so-much-about-helping-other-engineers-in-their-pursuit-of-excellence-if-someone-wanted-you-as-a-mentor-what-would-be-the-best-way-for-them-to-approach-you}
 
@@ -183,7 +183,7 @@ I'll release more programs soon; stay tuned on social media for more news**.** *
 
 *Otavio Santana invites contributions to the Jakarta NoSQL and Data projects and highlights the importance of evolutionary architecture. To connect with him for mentorship, follow his Twitter, LinkedIn, and YouTube channels, where he shares coding insights and software engineering advice.*
 
-*** ** * ** ***
+
 
 ### Bazlur: Thank you for sharing those; I am sure our readers will get benefitted immensely. On a different note, could you tell us some funny or interesting stories from your time in the software industry? {#h3-7-bazlur-thank-you-for-sharing-those-i-am-sure-our-readers-will-get-benefitted-immensely-on-a-different-note-could-you-tell-us-some-funny-or-interesting-stories-from-your-time-in-the-software-industry}
 
@@ -193,7 +193,7 @@ I can talk about the crazy and fantastic idea of travelling to the USA in an RV 
 
 At the time, we decided to jump by parachute in San Diego; it was fun; I became super nervous but survived.
 
-*** ** * ** ***
+
 
 ### Bazlur: That's a fascinating story. Thank you so much for sharing your insights with us. We really appreciate your time. Before we end, is there any parting advice or resources you would like to share with our readers, such as a list of recommended books or any other helpful information? {#h3-8-bazlur-that-s-a-fascinating-story-thank-you-so-much-for-sharing-your-insights-with-us-we-really-appreciate-your-time-before-we-end-is-there-any-parting-advice-or-resources-you-would-like-to-share-with-our-readers-such-as-a-list-of-recommended-books-or-any-other-helpful-information}
 
@@ -205,7 +205,7 @@ At the time, we decided to jump by parachute in San Diego; it was fun; I became 
 
 I also wrote some books, most of which are free: <https://otaviojava.com/books/>
 
-*** ** * ** ***
+
 
 ### Conclusion: {#h3-9-conclusion}
 

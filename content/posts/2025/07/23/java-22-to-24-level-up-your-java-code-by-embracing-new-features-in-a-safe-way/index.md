@@ -46,32 +46,41 @@ Let's look at an example. When iterating over a collection where only the number
 
 **Noncompliant Code Example:**
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">int count = 0;
+```
+int count = 0;
 for (String element : myList) { // "element" is unused
     count++;
-}</pre>
+}
+```
+
 
 In Java 22, you can use an unnamed variable. However, explicitly declaring the type is unnecessary.
 
 **Noncompliant Code Example:**
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">int count = 0;
+```
+int count = 0;
 for (String _ : myList) { // The type "String" is redundant
     count++;
-}</pre>
+}
+```
+
 
 This is where rule S7466 comes in, suggesting a cleaner, more concise approach.
 
 **Compliant Solution:**
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">int count = 0;
+```
+int count = 0;
 for (var _ : myList) {
     count++;
-}</pre>
+}
+```
+
 
 By using `var`, the code becomes less verbose and the intent remains clear.
 
-*** ** * ** ***
+
 
 ### **Rule S7467: Unused exception parameters should use the unnamed variable pattern** {#h3-2-rule-s7467-unused-exception-parameters-should-use-the-unnamed-variable-pattern}
 
@@ -81,25 +90,31 @@ Consider a `try-catch` block where the simple fact that an exception was caught 
 
 **Noncompliant Code Example:**
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">try {
+```
+try {
     // some operation that might throw an exception
 } catch (NumberFormatException e) { // "e" is unused
     // log that the format was invalid
-}</pre>
+}
+```
+
 
 While functional, the declaration of `e` is noise. Using an unnamed variable is a better approach, and this is what SonarQube now recommends.
 
 **Compliant Solution:**
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">try {
+```
+try {
     // some operation that might throw an exception
 } catch (NumberFormatException _) {
     // log that the format was invalid
-}</pre>
+}
+```
+
 
 This compliant solution is cleaner and explicitly communicates that the exception object itself is not important for the handling logic.
 
-*** ** * ** ***
+
 
 ### **Rule S7475: Types of unused record components should be removed from pattern matching** {#h3-3-rule-s7475-types-of-unused-record-components-should-be-removed-from-pattern-matching}
 
@@ -111,25 +126,34 @@ Imagine you have a `ColoredPoint` record and you only need the `Point` component
 
 **Noncompliant Code Example:**
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">if (obj instanceof ColoredPoint(Point p, Color c)) { // "c" is unused
+```
+if (obj instanceof ColoredPoint(Point p, Color c)) { // "c" is unused
     // logic that only uses p
-}</pre>
+}
+```
+
 
 In Java 22, you can use an unnamed pattern for the `Color` component. However, including the type is not necessary if the component is completely ignored.
 
 **Noncompliant Code Example:**
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">if (obj instanceof ColoredPoint(Point p, Color _)) { // The type "Color" is redundant
+```
+if (obj instanceof ColoredPoint(Point p, Color _)) { // The type "Color" is redundant
     // logic that only uses p
-}</pre>
+}
+```
+
 
 The most concise and readable version, as enforced by SonarQube, omits the type for the unused component entirely.
 
 **Compliant Solution:**
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">if (obj instanceof ColoredPoint(Point p, _)) {
+```
+if (obj instanceof ColoredPoint(Point p, _)) {
     // logic that only uses p
-}</pre>
+}
+```
+
 
 This approach makes the code more focused on the relevant data, improving maintainability.
 
@@ -153,7 +177,8 @@ This change means that existing comments in your codebase could unintentionally 
 
 **Noncompliant Code Example:**
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">public class Calculator {
+```
+public class Calculator {
 
   /////////////////////////////////////////////
   // A section for advanced math operations. //
@@ -164,11 +189,14 @@ This change means that existing comments in your codebase could unintentionally 
     /// It should not be in the final Javadoc.
     return a + b;
   }
-}</pre>
+}
+```
+
 
 In the example above, both the decorative block comment and the `///` comment would be incorrectly processed as Javadoc in Java 23. **Compliant Solution:**
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">public class Calculator {
+```
+public class Calculator {
 
   // A section for advanced math operations.
   // These are experimental.
@@ -177,7 +205,9 @@ In the example above, both the decorative block comment and the `///` comment wo
     // It should not be in the final Javadoc.
     return a + b;
   }
-}</pre>
+}
+```
+
 
 The compliant solution is to ensure regular comments use the standard `//` syntax.
 
@@ -191,22 +221,26 @@ This rule encourages developers to use the modern, more concise Markdown syntax 
 
 **Noncompliant Code Example:**
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">///
-/// A utility class for &lt;b&gt;String&lt;/b&gt; operations.
-/// &lt;p&gt;
+```
+///
+/// A utility class for <b>String</b> operations.
+/// <p>
 /// Use this class to perform common manipulations. For more details,
 /// see {@link java.lang.String}.
 /// You can also use {@code new StringManipulator()}.
 ///
 public class StringManipulator {
   // ...
-}</pre>
+}
+```
+
 
 This Javadoc mixes bold HTML tags with Javadoc's `{@link}` and `{@code}` tags. The clean, modern approach is to use Markdown for all formatting.
 
 **Compliant Solution:**
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">///
+```
+///
 /// A utility class for **String** operations.
 ///
 /// Use this class to perform common manipulations. For more details,
@@ -215,7 +249,9 @@ This Javadoc mixes bold HTML tags with Javadoc's `{@link}` and `{@code}` tags. T
 ///
 public class StringManipulator {
   // ...
-}</pre>
+}
+```
+
 
 By adopting a consistent Markdown style, your documentation becomes cleaner, easier to write, and future-proof.
 
@@ -237,35 +273,41 @@ This rule encourages replacing `withMethod` with its more concise counterpart, `
 
 **Noncompliant Code Example:**
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">ClassBuilder addMethod(ClassBuilder builder) {
+```
+ClassBuilder addMethod(ClassBuilder builder) {
     return builder
-        .withMethod("foo", MTD_void, ACC_PUBLIC | ACC_STATIC, methodBuilder -&gt; { // Noncompliant
-            methodBuilder.withCode(codeBuilder -&gt;
+        .withMethod("foo", MTD_void, ACC_PUBLIC | ACC_STATIC, methodBuilder -> { // Noncompliant
+            methodBuilder.withCode(codeBuilder ->
                 codeBuilder.getstatic(ClassDesc.of("java.lang.System"), "out", ClassDesc.of("java.io.PrintStream"))
                     .ldc("Hello World")
                     .invokevirtual(ClassDesc.of("java.io.PrintStream"), "println", MTD_void)
                     .return_()
             );
         });
-}</pre>
+}
+```
+
 
 This code uses `withMethod`, which introduces a `methodBuilder`. This then requires a call to `withCode` and an additional nested lambda (`codeBuilder -> ...`) just to define the method's body, making the code unnecessarily verbose.
 
 **Compliant Solution:**
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">ClassBuilder addMethod(ClassBuilder builder) {
+```
+ClassBuilder addMethod(ClassBuilder builder) {
     return builder
-        .withMethodBody("foo", MTD_void, ACC_PUBLIC | ACC_STATIC, codeBuilder -&gt;
+        .withMethodBody("foo", MTD_void, ACC_PUBLIC | ACC_STATIC, codeBuilder ->
             codeBuilder.getstatic(ClassDesc.of("java.lang.System"), "out", ClassDesc.of("java.io.PrintStream"))
                 .ldc("Hello World")
                 .invokevirtual(ClassDesc.of("java.io.PrintStream"), "println", MTD_void)
                 .return_()
         );
-}</pre>
+}
+```
+
 
 The compliant solution uses `withMethodBody`, which directly accepts the code-building lambda. This removes the intermediate `methodBuilder`, resulting in flatter, more readable, and more maintainable code that clearly expresses the intent of defining a method and its body in a single, streamlined operation.
 
-*** ** * ** ***
+
 
 ### **Rule S7477: The simpler `transformClass` overload should be used when the class name is unchanged** {#h3-7-rule-s7477-the-simpler-transformclass-overload-should-be-used-when-the-class-name-is-unchanged}
 
@@ -277,34 +319,40 @@ This rule encourages using the simplest possible API to make code shorter, clear
 
 **Noncompliant Code Example:**
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">public static void transformClassFile(Path path) throws IOException {
+```
+public static void transformClassFile(Path path) throws IOException {
     ClassFile classFile = ClassFile.of();
     ClassModel classModel = classFile.parse(path);
     byte[] newBytes = classFile.transformClass(classModel,
       classModel.thisClass().asSymbol(), // Noncompliant: This argument is redundant
-      (classBuilder, classElement) -&gt; {
-        if (!(classElement instanceof MethodModel methodModel &amp;&amp;
+      (classBuilder, classElement) -> {
+        if (!(classElement instanceof MethodModel methodModel &&
             methodModel.methodName().stringValue().startsWith("debug"))) {
             classBuilder.with(classElement);
         }
       });
-}</pre>
+}
+```
+
 
 In this example, the class name is explicitly passed to `transformClass`, even though it remains unchanged. This adds unnecessary code and can make the transformation's intent harder to grasp at a glance.
 
 **Compliant Solution:**
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">public static void transformClassFile(Path path) throws IOException {
+```
+public static void transformClassFile(Path path) throws IOException {
     ClassFile classFile = ClassFile.of();
     ClassModel classModel = classFile.parse(path);
     byte[] newBytes = classFile.transformClass(classModel,
-      (classBuilder, classElement) -&gt; {
-        if (!(classElement instanceof MethodModel methodModel &amp;&amp;
+      (classBuilder, classElement) -> {
+        if (!(classElement instanceof MethodModel methodModel &&
             methodModel.methodName().stringValue().startsWith("debug"))) {
             classBuilder.with(classElement);
         }
       });
-}</pre>
+}
+```
+
 
 The compliant solution uses the simpler, two-argument overload of `transformClass`. By removing the redundant class name parameter, the code becomes more direct and effectively communicates that the transformation modifies the class in place without renaming it.
 
@@ -318,14 +366,15 @@ This rule encourages using the `transformClass` method for such tasks. It abstra
 
 **Noncompliant Code Example:**
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">public static void transformClassFile(Path path) throws IOException {
+```
+public static void transformClassFile(Path path) throws IOException {
   ClassFile classFile = ClassFile.of();
   ClassModel classModel = classFile.parse(path);
   byte[] newBytes = classFile.build( // Noncompliant
-    classModel.thisClass().asSymbol(), classBuilder -&gt; {
+    classModel.thisClass().asSymbol(), classBuilder -> {
         // Manual iteration over class elements is boilerplate
         for (ClassElement classElement : classModel) {
-          if (!(classElement instanceof MethodModel methodModel &amp;&amp;
+          if (!(classElement instanceof MethodModel methodModel &&
               methodModel.methodName().stringValue().startsWith("debug"))) {
             classBuilder.with(classElement);
 
@@ -333,25 +382,30 @@ This rule encourages using the `transformClass` method for such tasks. It abstra
         }
     });
   Files.write(path, newBytes);
-}</pre>
+}
+```
+
 
 This code manually rebuilds the class using `build`, requiring an explicit loop to copy over the elements that are being kept. This boilerplate distracts from the actual goal: filtering out debug methods.
 
 **Compliant Solution:**
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">public static void transformClassFile(Path path) throws IOException {
+```
+public static void transformClassFile(Path path) throws IOException {
   ClassFile classFile = ClassFile.of();
   ClassModel classModel = classFile.parse(path);
   byte[] newBytes = classFile.transformClass(
-    classModel, (classBuilder, classElement) -&gt; {
+    classModel, (classBuilder, classElement) -> {
       // The transform is applied to each element, no manual loop needed
-      if (!(classElement instanceof MethodModel methodModel &amp;&amp;
+      if (!(classElement instanceof MethodModel methodModel &&
             methodModel.methodName().stringValue().startsWith("debug"))) {
           classBuilder.with(classElement);
         }
       });
   Files.write(path, newBytes);
-}</pre>
+}
+```
+
 
 The compliant solution uses `transformClass`, which handles the iteration implicitly. The provided lambda is applied to each `ClassElement`, allowing the developer to focus solely on the transformation logic. The resulting code is more concise, readable, and less error-prone.
 
@@ -373,32 +427,36 @@ This rule helps improve code clarity by guiding you to use the more specific `Ga
 
 **Noncompliant Code Example:**
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">public static List&lt;Integer&gt; diffWithFirstPositive(List&lt;Integer&gt; list) {
-  Gatherer&lt;Integer, AtomicInteger, Integer&gt; gatherer = Gatherer.of(
-    () -&gt; new AtomicInteger(-1),
-    (state, number, downstream) -&gt; {
-      if (state.get() &lt; 0) {
+```
+public static List<Integer> diffWithFirstPositive(List<Integer> list) {
+  Gatherer<Integer, AtomicInteger, Integer> gatherer = Gatherer.of(
+    () -> new AtomicInteger(-1),
+    (state, number, downstream) -> {
+      if (state.get() < 0) {
         state.set(number);
         return true;
       }
       return downstream.push(number - state.get());
     },
-    (_, _) -&gt; { // The combiner is never meant to be called
+    (_, _) -> { // The combiner is never meant to be called
       throw new IllegalStateException();
     },
     Gatherer.defaultFinisher());
   return list.stream().gather(gatherer).toList();
-}</pre>
+}
+```
+
 
 In this code, the presence of a combiner that unconditionally throws an `IllegalStateException` is a clear indicator that the gatherer cannot function in a parallel stream.
 
 **Compliant Solution:**
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">public static List&lt;Integer&gt; diffWithFirstPositive(List&lt;Integer&gt; list) {
-  Gatherer&lt;Integer, AtomicInteger, Integer&gt; gatherer = Gatherer.ofSequential(
-    () -&gt; new AtomicInteger(-1),
-    (state, number, downstream) -&gt; {
-      if (state.get() &lt; 0) {
+```
+public static List<Integer> diffWithFirstPositive(List<Integer> list) {
+  Gatherer<Integer, AtomicInteger, Integer> gatherer = Gatherer.ofSequential(
+    () -> new AtomicInteger(-1),
+    (state, number, downstream) -> {
+      if (state.get() < 0) {
         state.set(number);
         return true;
       }
@@ -406,7 +464,9 @@ In this code, the presence of a combiner that unconditionally throws an `Illegal
     },
     Gatherer.defaultFinisher());
   return list.stream().gather(gatherer).toList();
-}</pre>
+}
+```
+
 
 By switching to `Gatherer.ofSequential`, the code becomes more obvious about its intent. It clearly communicates that the operation is sequential-only and eliminates the unnecessary and misleading throwing combiner, resulting in a cleaner implementation.
 
@@ -420,32 +480,38 @@ This rule encourages the use of the correct factory method for stateless gathere
 
 **Noncompliant Code Example:**
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">private static Gatherer inRange(int start, int end) {
-    return Gatherer.&lt;Integer, Void, Integer&gt;ofSequential(
-      () -&gt; null, // Noncompliant: unnecessary initializer for a stateless gatherer
-      (_, element, downstream) -&gt; {
-        if (element &gt;= start &amp;&amp; element &lt;= end)
+```
+private static Gatherer inRange(int start, int end) {
+    return Gatherer.<Integer, Void, Integer>ofSequential(
+      () -> null, // Noncompliant: unnecessary initializer for a stateless gatherer
+      (_, element, downstream) -> {
+        if (element >= start && element <= end)
           return downstream.push(element - start);
         return !downstream.isRejecting();
       },
-      (_, downstream) -&gt; downstream.push(-1)
+      (_, downstream) -> downstream.push(-1)
     );
-}</pre>
+}
+```
+
 
 Here, the `() -> null` initializer serves no purpose other than to satisfy the signature of the factory method. This adds unnecessary boilerplate and obscures the fact that the operation does not depend on a state.
 
 **Compliant Solution:**
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">private static Gatherer inRange(int start, int end) {
-    return Gatherer.&lt;Integer, Integer&gt;ofSequential(
-      (_, element, downstream) -&gt; {
-        if (element &gt;= start &amp;&amp; element &lt;= end)
+```
+private static Gatherer inRange(int start, int end) {
+    return Gatherer.<Integer, Integer>ofSequential(
+      (_, element, downstream) -> {
+        if (element >= start && element <= end)
           return downstream.push(element - start);
         return !downstream.isRejecting();
       },
-      (_, downstream) -&gt; downstream.push(-1)
+      (_, downstream) -> downstream.push(-1)
     );
-}</pre>
+}
+```
+
 
 The compliant solution uses the appropriate `Gatherer.ofSequential` overload that does not require an initializer. This removes the redundant code and clearly signals to anyone reading it that the gatherer is stateless by design.
 

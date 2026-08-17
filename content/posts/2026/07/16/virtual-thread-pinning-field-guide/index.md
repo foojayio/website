@@ -47,15 +47,18 @@ The canonical bug {#h2-2-the-canonical-bug}
 
 Nearly every real pin I've read in a dump is some flavor of a cache or rate limiter guarding a slow call with `synchronized`:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public class PriceService {
-    private final Map&lt;String, BigDecimal&gt; cache = new HashMap&lt;&gt;();
+```
+public class PriceService {
+    private final Map<String, BigDecimal> cache = new HashMap<>();
 
     // Looks harmless. On JDK 21-23 it pins the carrier for the whole HTTP call.
     public synchronized BigDecimal lookup(String symbol) {
         return cache.computeIfAbsent(symbol,
-            s -&gt; httpClient.quote(s));   // &lt;-- blocks while holding the monitor
+            s -> httpClient.quote(s));   // <-- blocks while holding the monitor
     }
-}</pre>
+}
+```
+
 
 Every cache miss blocks on the network *while holding the monitor*. On JDK 21--23 that virtual thread pins its carrier for the entire round trip. Run a few hundred concurrent requests and you've pinned every carrier; the rest of the workload queues behind a monitor that never unmounts. That's my 420-requests-per-second incident in five lines.
 
@@ -76,18 +79,27 @@ How to catch it {#h2-4-how-to-catch-it}
 
 **On JDK 21--23 --- the legacy flag.** Run with:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">java -Djdk.tracePinnedThreads=full -jar app.jar</pre>
+```
+java -Djdk.tracePinnedThreads=full -jar app.jar
+```
+
 
 The JVM prints a stack trace every time a virtual thread pins, and the frame annotated `<== monitors:1` is the culprit. That one line is the whole diagnosis. Just remember this flag no longer exists on JDK 24.
 
 **Everywhere --- JFR.** Since JDK 21 the JVM emits a `jdk.VirtualThreadPinned` Flight Recorder event when a virtual thread blocks while pinned. It's enabled by default --- but with a **20 ms threshold**, so short pins are invisible unless you lower it. In JDK 24 the event got better: it's emitted for every pinning occurrence and carries the reason and the carrier's identity. Since native-frame pins still fire it, this is the detection you should wire into production:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">java -XX:StartFlightRecording=filename=rec.jfr,settings=profile -jar app.jar
-jfr print --events jdk.VirtualThreadPinned rec.jfr</pre>
+```
+java -XX:StartFlightRecording=filename=rec.jfr,settings=profile -jar app.jar
+jfr print --events jdk.VirtualThreadPinned rec.jfr
+```
+
 
 **From a thread dump.** Plain `jstack` won't show you virtual threads at all. Use the virtual-thread-aware dump:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">jcmd &lt;pid&gt; Thread.dump_to_file -format=json dump.json</pre>
+```
+jcmd <pid> Thread.dump_to_file -format=json dump.json
+```
+
 
 It lists the carrier threads and the virtual thread mounted on each. A carrier in the `CarrierThreads` group that is blocked while its mounted virtual thread sits in a `synchronized` frame (or a native frame) is the visual signature of a pin. Count how many carriers show it versus your pool size --- that ratio tells you how close you are to full starvation.
 
@@ -101,8 +113,9 @@ How to fix it {#h2-5-how-to-fix-it}
 
 Here's the rewrite of the example. One trap to avoid: don't just move the blocking call into `ConcurrentHashMap.computeIfAbsent` --- as noted above, its mapping function runs under an internal bin lock, and on JDK 21--23 you'd have rebuilt the same pin one layer down.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public class PriceService {
-    private final Map&lt;String, BigDecimal&gt; cache = new ConcurrentHashMap&lt;&gt;();
+```
+public class PriceService {
+    private final Map<String, BigDecimal> cache = new ConcurrentHashMap<>();
     private final ReentrantLock lock = new ReentrantLock();
 
     public BigDecimal lookup(String symbol) {
@@ -119,7 +132,9 @@ Here's the rewrite of the example. One trap to avoid: don't just move the blocki
             lock.unlock();
         }
     }
-}</pre>
+}
+```
+
 
 This no longer pins anywhere --- though it still serializes cache misses behind one lock, which is fix #3's territory: the *next* refinement is not holding any lock across the network call at all.
 

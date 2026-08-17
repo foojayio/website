@@ -38,7 +38,10 @@ The syntax for sealed classes extends the existing way of defining a class by ad
 
 A sealed class can be defined like this:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public sealed class Foo permits A, B, C { ... }</pre>
+```java
+public sealed class Foo permits A, B, C { ... }
+```
+
 
 Only classes A, B, and C can extend class Foo, and they must be in the same package or module. The permits part of the definition can be omitted if A, B, and C are in the same compilation unit (typically file).
 
@@ -48,7 +51,10 @@ Each permitted sub-class must have its inheritance capabilities explicitly speci
 * Class B could be defined as sealed, permitting a closed set of classes to inherit from it in the same ways as Foo does.
 * Class C could be defined as non-sealed, which reverts it to be open and allows any class to inherit from it. As non-sealed contains a hyphen, it has been made a reserved word in Java (the first with a hyphen). Variable names may not include a hyphen, so there is no impact on backwards compatibility.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public non-sealed class C { ... }</pre>
+```java
+public non-sealed class C { ... }
+```
+
 
 The Java reflection system has been updated to include sealed classes. The java.lang.Class class has two new methods, isSealed() and permittedSubclasses (which returns an array of ClassDesc objects).
 

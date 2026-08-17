@@ -69,7 +69,10 @@ Implementing the **Sliding Window Counter** with Redis involves maintaining coun
 
 Use a Redis hash (HSET) to store the count of requests for each sub-interval within the rolling window. The sub-intervals are identified by their start times (e.g., Unix timestamps rounded to the nearest second).
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">HINCRBY client-1  1</pre>
+```
+HINCRBY client-1  1
+```
+
 
 Each request increments the counter for the current sub-interval.
 
@@ -77,7 +80,10 @@ Each request increments the counter for the current sub-interval.
 
 Clean up entries that fall outside the rolling time window. Use the new HEXPIRE command to let Redis remove automatically fields representing sub-intervals older than the current window duration:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">HEXPIRE client-1 subWindowSize NX FIELDS 1 sub-counter</pre>
+```
+HEXPIRE client-1 subWindowSize NX FIELDS 1 sub-counter
+```
+
 
 This ensures the hash only contains counts for active sub-intervals within the rolling window.
 
@@ -85,7 +91,10 @@ This ensures the hash only contains counts for active sub-intervals within the r
 
 Use the HGETALL command to retrieve all counts for the sub-intervals currently in the hash. Sum these counts to calculate the total number of requests within the rolling window:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">HGETALL my_counter</pre>
+```
+HGETALL my_counter
+```
+
 
 Compare the total count to the allowed limit. **If it exceeds the limit, reject the new request; otherwise, allow it and update the counter.**
 
@@ -100,9 +109,12 @@ Implementing it with Jedis {#h2-10-implementing-it-with-jedis}
 
 Check the latest version [here](https://redis.io/docs/latest/develop/clients/jedis/).
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">redis.clients
+```
+redis.clients
 jedis
-5.2.0</pre>
+5.2.0
+```
+
 
 ### Create a **SlidingWindowCounterRateLimiter** class: {#h3-12-create-a-slidingwindowcounterratelimiter-class}
 
@@ -114,7 +126,8 @@ The rate limiter will:
 
 Here's the basic structure:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">package io.redis;
+```
+package io.redis;
 
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.Transaction;
@@ -135,7 +148,9 @@ public class SlidingWindowCounterRateLimiter {
         this.windowSize = windowSize;
         this.subWindowSize = subWindowSize;
     }
-}</pre>
+}
+```
+
 
 ### Validate the Requests {#h3-13-validate-the-requests}
 
@@ -145,9 +160,12 @@ The core task of the rate limiter is to determine whether a client's request is 
 
 Our isAllowed method receives a client id, used for identifying different clients independently. We then start by defining the key space in which this key will be stored in Redis, allowing us to keep our data organized within the database.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">public boolean isAllowed(String clientId) {
+```
+public boolean isAllowed(String clientId) {
     String key = "rate_limit:" + clientId;
-}</pre>
+}
+```
+
 
 For example, if the client ID is user123, and the keyspace is rate_ limit, their key would be rate_limit:user123.
 
@@ -157,16 +175,20 @@ We will do it by using the hgetAll command. This command will receive the key of
 
 The values are the actual counter of the sub windows. We will sum them to get the total count. Then, we will compare the total count to the limit and decide whether this request is allowed to proceed.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">Map subWindowCounts = jedis.hgetAll(key);
+```
+Map subWindowCounts = jedis.hgetAll(key);
 long totalCount = subWindowCounts.values().stream()
         .mapToLong(Long::parseLong)
         .sum();
 
-boolean isAllowed = totalCount &lt; limit;</pre>
+boolean isAllowed = totalCount < limit;
+```
+
 
 **Step 3: Track Requests by Sub-Window**If the request is allowed to be processed, we'll determine the actual current sub window in which the request falls into and that will be used to separate counters within our hash.{#a404}
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">if (isAllowed) {
+```
+if (isAllowed) {
     // Calculate the current sub-window index based on the time
     long currentTime = System.currentTimeMillis();
     long subWindowSizeMillis = subWindowSize * 1000;
@@ -176,14 +198,16 @@ boolean isAllowed = totalCount &lt; limit;</pre>
     Transaction transaction = jedis.multi();
     transaction.hincrBy(key, Long.toString(currentSubWindow), 1);
     transaction.hexpire(key, windowSize, NX, String.valueOf(currentSubWindow));
-    List&lt;Object&gt; result = transaction.exec();
+    List<Object> result = transaction.exec();
 
     if (result == null || result.isEmpty()) {
         throw new IllegalStateException("Empty result from Redis transaction");
     }
 }
 
-return isAllowed;</pre>
+return isAllowed;
+```
+
 
 Here, we'll start a transaction to ensure that our operation is going to be atomic and that all of our commands are going to be sent at once to the database. This will allow us to achieve even a better performance by avoiding unnecessary network trips.{#f308}
 
@@ -206,7 +230,8 @@ Full Implementation {#af80}
 
 Here's the full code for the SlidingWindowCounterRateLimiter class:{#f613}
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">package io.redis;
+```
+package io.redis;
 
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.Transaction;
@@ -230,12 +255,12 @@ public class SlidingWindowCounterRateLimiter {
 
     public boolean isAllowed(String clientId) {
         String key = "rate_limit:" + clientId;
-        Map&lt;String, String&gt; subWindowCounts = jedis.hgetAll(key);
+        Map<String, String> subWindowCounts = jedis.hgetAll(key);
         long totalCount = subWindowCounts.values().stream()
                 .mapToLong(Long::parseLong)
                 .sum();
 
-        boolean isAllowed = totalCount &lt; limit;
+        boolean isAllowed = totalCount < limit;
 
         if (isAllowed) {
             // Calculate the current sub-window index based on the time
@@ -247,7 +272,7 @@ public class SlidingWindowCounterRateLimiter {
             Transaction transaction = jedis.multi();
             transaction.hincrBy(key, Long.toString(currentSubWindow), 1);
             transaction.hexpire(key, windowSize, NX, String.valueOf(currentSubWindow));
-            List&lt;Object&gt; result = transaction.exec();
+            List<Object> result = transaction.exec();
 
             if (result == null || result.isEmpty()) {
                 throw new IllegalStateException("Empty result from Redis transaction");
@@ -256,7 +281,9 @@ public class SlidingWindowCounterRateLimiter {
 
         return isAllowed;
     }
-}</pre>
+}
+```
+
 
 And we're ready to start testing its behavior!{#cb8b}
 
@@ -275,24 +302,27 @@ Adding Dependencies {#7fe9}
 
 Here's what you'll need in your Maven `pom.xml` file:{#2c47}
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">&lt;dependency&gt;
-    &lt;groupId&gt;org.junit.jupiter&lt;/groupId&gt;
-    &lt;artifactId&gt;junit-jupiter-engine&lt;/artifactId&gt;
-    &lt;version&gt;5.10.0&lt;/version&gt;
-    &lt;scope&gt;test&lt;/scope&gt;
-&lt;/dependency&gt;
-&lt;dependency&gt;
-    &lt;groupId&gt;com.redis&lt;/groupId&gt;
-    &lt;artifactId&gt;testcontainers-redis&lt;/artifactId&gt;
-    &lt;version&gt;2.2.2&lt;/version&gt;
-    &lt;scope&gt;test&lt;/scope&gt;
-&lt;/dependency&gt;
-&lt;dependency&gt;
-    &lt;groupId&gt;org.assertj&lt;/groupId&gt;
-    &lt;artifactId&gt;assertj-core&lt;/artifactId&gt;
-    &lt;version&gt;3.11.1&lt;/version&gt;
-    &lt;scope&gt;test&lt;/scope&gt;
-&lt;/dependency&gt;</pre>
+```
+<dependency>
+    <groupId>org.junit.jupiter</groupId>
+    <artifactId>junit-jupiter-engine</artifactId>
+    <version>5.10.0</version>
+    <scope>test</scope>
+</dependency>
+<dependency>
+    <groupId>com.redis</groupId>
+    <artifactId>testcontainers-redis</artifactId>
+    <version>2.2.2</version>
+    <scope>test</scope>
+</dependency>
+<dependency>
+    <groupId>org.assertj</groupId>
+    <artifactId>assertj-core</artifactId>
+    <version>3.11.1</version>
+    <scope>test</scope>
+</dependency>
+```
+
 
 Once you've added these dependencies, you're ready to start writing your test class.{#3463}
 
@@ -309,7 +339,8 @@ The first step is to create a test class named `SlidingWindowCounterRateLimiterT
 
 Here's how the skeleton of our test class looks:{#81e3}
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">public class SlidingWindowCounterRateLimiterTest {
+```
+public class SlidingWindowCounterRateLimiterTest {
     private static final RedisContainer redisContainer = new RedisContainer("redis:latest")
             .withExposedPorts(6379);
     private Jedis jedis;
@@ -318,7 +349,9 @@ Here's how the skeleton of our test class looks:{#81e3}
     static {
         redisContainer.start();
     }
-}</pre>
+}
+```
+
 
 Preparing the Environment Before Each Test {#55ea}
 --------------------------------------------------
@@ -331,11 +364,14 @@ Before running any test, we need to ensure a clean Redis environment. Here's wha
 
 We'll set this up in a method annotated with `@BeforeEach`, which runs before every test case.{#dd12}
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">@BeforeEach
+```
+@BeforeEach
 public void setup() {
     jedis = new Jedis(redisContainer.getHost(), redisContainer.getFirstMappedPort());
     jedis.flushAll();
-}</pre>
+}
+```
+
 
 > FLUSHALL is an actual Redis command that deletes all the keys of all the existing databases. [Read more about it in the official documentation](https://redis.io/docs/latest/commands/flushall/).{#db9d}
 
@@ -344,17 +380,21 @@ Cleaning Up After Each Test {#6fc7}
 
 After each test, we need to close the Jedis connection to free up resources. This ensures no lingering connections interfere with subsequent tests.{#836b}
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">@AfterEach
+```
+@AfterEach
 public void tearDown() {
     jedis.close();
-}</pre>
+}
+```
+
 
 Full Setup {#43a5}
 ------------------
 
 Here's how the complete test class looks with everything in place:{#f4e0}
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">public class SlidingWindowCounterRateLimiterTest {
+```
+public class SlidingWindowCounterRateLimiterTest {
 
     private static final RedisContainer redisContainer = new RedisContainer("redis:latest")
             .withExposedPorts(6379)
@@ -377,7 +417,9 @@ Here's how the complete test class looks with everything in place:{#f4e0}
     public void tearDown() {
         jedis.close();
     }
-}</pre>
+}
+```
+
 
 Verifying Requests Within the Limit {#1208}
 -------------------------------------------
@@ -386,15 +428,18 @@ This test ensures the Sliding Window Counter rate limiter allows requests within
 
 We configure it with a limit of 5 requests, a 10-second window, and 1-second sub-windows. We then call isAllowed("client-1") 5 times. Each call should return true, confirming the rate limiter correctly tracks and permits requests under the limit.{#d62b}
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">@Test
+```
+@Test
 public void shouldAllowRequestsWithinLimit() {
     rateLimiter = new SlidingWindowCounterRateLimiter(jedis, 5, 10, 1);
-    for (int i = 1; i &lt;= 5; i++) {
+    for (int i = 1; i <= 5; i++) {
         assertThat(rateLimiter.isAllowed("client-1"))
                 .withFailMessage("Request %d should be allowed", i)
                 .isTrue();
     }
-}</pre>
+}
+```
+
 
 Verifying Requests Beyond the Limit {#e864}
 -------------------------------------------
@@ -403,10 +448,11 @@ This test ensures the Sliding Window Counter rate limiter correctly denies reque
 
 We configure it with a limit of 5 requests, a 60-second window, and 1-second sub-windows. We then call isAllowed("client-1") 5 times and expect all to return true. On the 6th call, it should return false, verifying the rate limiter blocks requests beyond the allowed limit.{#5529}
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">@Test
+```
+@Test
 public void shouldDenyRequestsOnceLimitIsExceeded() {
     rateLimiter = new SlidingWindowCounterRateLimiter(jedis, 5, 60, 1);
-    for (int i = 1; i &lt;= 5; i++) {
+    for (int i = 1; i <= 5; i++) {
         assertThat(rateLimiter.isAllowed("client-1"))
                 .withFailMessage("Request %d should be allowed", i)
                 .isTrue();
@@ -415,7 +461,9 @@ public void shouldDenyRequestsOnceLimitIsExceeded() {
     assertThat(rateLimiter.isAllowed("client-1"))
             .withFailMessage("Request beyond limit should be denied")
             .isFalse();
-}</pre>
+}
+```
+
 
 Verifying Requests After Sliding Window Resets {#015e}
 ------------------------------------------------------
@@ -426,7 +474,8 @@ We configure it with a limit of 5 requests, a 2-second window, and 1-second sub-
 
 After waiting for the sliding window to reset (2 seconds + a buffer), the next request is allowed. This verifies that the sliding window correctly clears expired entries and permits new requests.{#6a0e}
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">@Test
+```
+@Test
 public void shouldAllowRequestsAgainAfterSlidingWindowResets() throws InterruptedException {
     int limit = 5;
     String clientId = "client-1";
@@ -435,7 +484,7 @@ public void shouldAllowRequestsAgainAfterSlidingWindowResets() throws Interrupte
 
     rateLimiter = new SlidingWindowCounterRateLimiter(jedis, limit, windowSize, subWindowSize);
 
-    for (int i = 1; i &lt;= limit; i++) {
+    for (int i = 1; i <= limit; i++) {
         assertThat(rateLimiter.isAllowed(clientId))
                 .withFailMessage("Request %d should be allowed", i)
                 .isTrue();
@@ -450,7 +499,9 @@ public void shouldAllowRequestsAgainAfterSlidingWindowResets() throws Interrupte
     assertThat(rateLimiter.isAllowed(clientId))
             .withFailMessage("Request after window reset should be allowed")
             .isTrue();
-}</pre>
+}
+```
+
 
 Verifying Independent Handling of Multiple Clients {#0f08}
 ----------------------------------------------------------
@@ -459,7 +510,8 @@ This test ensures that the Sliding Window Counter rate limiter handles multiple 
 
 We configure it with a limit of 5 requests, a 10-second window, and 1-second sub-windows. The first 5 requests from client-1 are allowed (true), while the 6th request is denied (false). Simultaneously, all 5 requests from client-2 are allowed (true), confirming that the rate limiter maintains separate counters for each client.{#001e}
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">@Test
+```
+@Test
 public void shouldHandleMultipleClientsIndependently() {
     int limit = 5;
     String clientId1 = "client-1";
@@ -469,7 +521,7 @@ public void shouldHandleMultipleClientsIndependently() {
 
     rateLimiter = new SlidingWindowCounterRateLimiter(jedis, limit, windowSize, subWindowSize);
 
-    for (int i = 1; i &lt;= limit; i++) {
+    for (int i = 1; i <= limit; i++) {
         assertThat(rateLimiter.isAllowed(clientId1))
                 .withFailMessage("Client 1 request %d should be allowed", i)
                 .isTrue();
@@ -479,12 +531,14 @@ public void shouldHandleMultipleClientsIndependently() {
             .withFailMessage("Client 1 request beyond limit should be denied")
             .isFalse();
 
-    for (int i = 1; i &lt;= limit; i++) {
+    for (int i = 1; i <= limit; i++) {
         assertThat(rateLimiter.isAllowed(clientId2))
                 .withFailMessage("Client 2 request %d should be allowed", i)
                 .isTrue();
     }
-}</pre>
+}
+```
+
 
 Verifying Gradual Request Allowance in Sliding Window {#3b0b}
 -------------------------------------------------------------
@@ -495,7 +549,8 @@ We configure it with a limit of 3 requests, a 4-second window, and 1-second sub-
 
 After waiting 2 seconds, enough older requests have expired to allow one new request. This verifies that the sliding window dynamically adjusts and permits requests as the window progresses.{#32d3}
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">@Test
+```
+@Test
 public void shouldAllowRequestsAgainGraduallyInSlidingWindow() throws InterruptedException {
     int limit = 3;
     long windowSize = 4L;
@@ -504,7 +559,7 @@ public void shouldAllowRequestsAgainGraduallyInSlidingWindow() throws Interrupte
 
     rateLimiter = new SlidingWindowCounterRateLimiter(jedis, limit, windowSize, subWindowSize);
 
-    for (int i = 1; i &lt;= limit; i++) {
+    for (int i = 1; i <= limit; i++) {
         assertThat(rateLimiter.isAllowed(clientId))
                 .withFailMessage("Request %d should be allowed", i)
                 .isTrue();
@@ -520,7 +575,9 @@ public void shouldAllowRequestsAgainGraduallyInSlidingWindow() throws Interrupte
     assertThat(rateLimiter.isAllowed(clientId))
             .withFailMessage("Request should be allowed in a sliding window")
             .isTrue();
-}</pre>
+}
+```
+
 
 Is there any other behavior we should verify? Let me know in the comments!{#f498}  
 

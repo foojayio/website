@@ -54,14 +54,19 @@ You can use mongosh to run queries, inspect and modify data, run aggregation pip
 
 On macOS, you can install Atlas CLI and mongosh using Homebrew:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">brew tap mongodb/brew
+```
+brew tap mongodb/brew
 brew install mongodb-atlas
 brew install mongosh
-</pre>
+```
+
 
 On Linux, installation is just as simple:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">curl -s https://mongodb.dev/cli | bash</pre>
+```
+curl -s https://mongodb.dev/cli | bash
+```
+
 
 🚀 Creating a Local Atlas Deployment  
 
@@ -69,56 +74,80 @@ Atlas CLI uses Docker internally to create local MongoDB environments that repli
 
 Once Docker is running, launch the interactive setup:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">atlas deployments setup</pre>
+```
+atlas deployments setup
+```
+
 
 Choose the local option, accept the defaults, and specify a port (e.g., 27017). The CLI will spin up a containerized MongoDB 8.0 replica set with Atlas-compatible features. Now you can list active deployments:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">atlas deployments list
+```
+atlas deployments list
 NAME       TYPE    MDB VER   STATE
 local813   LOCAL   8.0.11    IDLE
-</pre>
+```
+
 
 🔗 Connecting to the Deployment
 
 To connect to your local deployment, simply run:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">atlas deployments connect</pre>
+```
+atlas deployments connect
+```
+
 
 You'll be prompted to choose how you want to connect. For example:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">? How would you like to connect to local813?
-&gt; mongosh - MongoDB Shell
+```
+? How would you like to connect to local813?
+> mongosh - MongoDB Shell
  compass - MongoDB Compass
  vscode - MongoDB for VSCode
  connectionString - Connection String
-</pre>
+```
+
 
 Selecting mongosh will launch an interactive session connected to your local MongoDB replica set. You can now run queries, create indexes, test aggregations, or explore features like MongoDB Atlas Search and Vector Search.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">AtlasLocalDev local813 [direct: primary] test&gt; show dbs
+```
+AtlasLocalDev local813 [direct: primary] test> show dbs
 admin   256.00 KiB 
 config  232.00 KiB 
 local   588.00 KiB
-AtlasLocalDev local813 [direct: primary] test&gt; 
-</pre>
+AtlasLocalDev local813 [direct: primary] test>
+```
+
 
 ⚙️ Managing the Deployment
 
 Pause the deployment:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">atlas deployments pause</pre>
+```
+atlas deployments pause
+```
+
 
 Start the deployment:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">atlas deployments start</pre>
+```
+atlas deployments start
+```
+
 
 View logs:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">atlas deployments logs</pre>
+```
+atlas deployments logs
+```
+
 
 Delete the deployment:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">atlas deployments delete</pre>
+```
+atlas deployments delete
+```
+
 
 Each command will prompt you to select a deployment if none is specified.
 

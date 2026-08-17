@@ -91,6 +91,6 @@ Even better, we learned to search the HACS when we didn't find the relevant out-
 * [Adaptive Lighting](https://github.com/basnijholt/adaptive-lighting)
 * [Replace Philips Hue automation with Home Assistant's](https://blog.frankel.ch/home-assistant/3/)
 
-*** ** * ** ***
+
 
 *Originally published at [A Java Geek](https://blog.frankel.ch/home-assistant/4/) on December 22^nd^, 2024*

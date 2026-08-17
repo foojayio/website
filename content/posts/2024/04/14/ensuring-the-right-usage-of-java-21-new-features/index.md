@@ -46,15 +46,21 @@ Use built-in "Math.clamp" methods {#h2-0-use-built-in-math-clamp-methods}
 
 Sometimes you need to bounds check a number, ensuring that the value is not out of a certain range. To do this we've been using manual checks like these ones:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">int clampedValue = value &gt; max ? max : value &lt; min ? min : value; // Noncompliant
+```
+int clampedValue = value > max ? max : value < min ? min : value; // Noncompliant
 
-int clampedValue = Math.max(min, Math.min(max, value)); // Noncompliant</pre>
+int clampedValue = Math.max(min, Math.min(max, value)); // Noncompliant
+```
+
 
 These 2 options are hard to read and understand, and error-prone. The first one using the nested ternary operator [overcomplicates](https://www.baeldung.com/java-ternary-operator#:~:text=However%2C%20please%20note%20that%20it%E2%80%99s%20not%20recommended "overcomplicates") the code, making it difficult to understand the intention. The second one with the Math methods needs a deep read in order to understand it.
 
 Which is the best approach then?
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">int clampedValue = Math​​.clamp(value, min, max);</pre>
+```
+int clampedValue = Math​​.clamp(value, min, max);
+```
+
 
 The new Java 21 [Math.clamp](https://bugs.openjdk.org/browse/JDK-8301226 "Math.clamp") method is clear, and focused and reduces the options to include a bug.
 
@@ -67,29 +73,41 @@ This method throws IllegalArgument exceptions when the ranges are not considered
 
 The following example throws an IllegalArgumentException:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">Math.clamp(42, 0, -1); // Non compliant<code></code></pre>
+```
+Math.clamp(42, 0, -1); // Non compliant<code></code>
+```
+
 
 The following example is a redundant operation:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">Math.clamp(42, 0, 0); // Non compliant</pre>
+```
+Math.clamp(42, 0, 0); // Non compliant
+```
+
 
 Use SequencedCollection reversed() for reverse iteration order {#h2-2-use-sequencedcollection-reversed-for-reverse-iteration-order}
 -----------------------------------------------------------------------------------------------------------------------------------
 
 When you need to iterate a collection but in reverse order, often you do manual processes using the iterator.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">for (var it = list.listIterator(list.size()); it.hasPrevious();) {
+```
+for (var it = list.listIterator(list.size()); it.hasPrevious();) {
   var element = it.previous();
   System.out.println(element);
-}</pre>
+}
+```
+
 
 This approach is verbose, hard to understand, and also can lead to errors if we don't do the right previous/hasPrevious calls.
 
 Java 21 introduces the new [Sequenced Collections API](https://openjdk.org/jeps/431 "Sequenced Collections API"), which is applicable to all collections with a defined sequence on their elements, such as `LinkedList`, `TreeSet`, and others.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">for (var element: list.reversed()) {
+```
+for (var element: list.reversed()) {
   System.out.println(element);
-}</pre>
+}
+```
+
 
 This approach is way clearer, doesn't give space to do it wrong, and ensures consistency across your code.
 
@@ -104,21 +122,26 @@ For projects using Java 21 and onwards, this API should be utilized instead of w
 
 For read-only usages of reverse iterations, the old `Collection.reverse(List)` call should be replaced by `SequencedCollection.reversed()` which will not mutate the original collection.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">void foo(List&lt;String&gt; list) {
-  var copy = new ArrayList&lt;String&gt;(list);
+```
+void foo(List<String> list) {
+  var copy = new ArrayList<String>(list);
   Collections.reverse(copy); // Noncompliant
  // do something
  // ...
-}</pre>
+}
+```
+
 
 Should be changed to:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">void foo(List&lt;String&gt; list) {
+```
+void foo(List<String> list) {
   var reverseList = list.reversed(); // Compliant
   // do something
   // ...
 }
-</pre>
+```
+
 
 Use switch instead of if-else for pattern matching {#h2-4-use-switch-instead-of-if-else-for-pattern-matching}
 -------------------------------------------------------------------------------------------------------------
@@ -127,7 +150,8 @@ In versions of Java before 21, matching a variable against multiple patterns req
 
 Using a switch expression provides advantages such as clearer code, assurance of handling all cases, and improved performance.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">if (expr instanceof Plus plus) { // Noncompliant
+```
+if (expr instanceof Plus plus) { // Noncompliant
   ...
 } else if (expr instanceof Div div) {
     ...
@@ -151,70 +175,87 @@ if (shape instanceof Circle) { // Noncompliant
 } else if (shape instanceof Rectangle) {
   Rectangle rectangle = (Rectangle) rectangle
   ...
-} else ...</pre>
+} else ...
+```
+
 
 But we can use `switch expressions` in order to make this code more readable, and also reduce the cognitive complexity.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">switch (expr) {
- case Plus(left, right) -&gt; eval(left) + eval(right)
- case Div(left, right) -&gt; eval(left)/eval(right)
+```
+switch (expr) {
+ case Plus(left, right) -> eval(left) + eval(right)
+ case Div(left, right) -> eval(left)/eval(right)
  ...
 }
 
 switch (c) {
- case Red -&gt; ...
- case Green -&gt; ...
+ case Red -> ...
+ case Green -> ...
  ...
 }
 
 switch (x) {
- case 2 -&gt; ...
- case 3, 4 -&gt; ...
+ case 2 -> ...
+ case 3, 4 -> ...
 }
 
 switch (shape) {
- case Circle circle -&gt; ...  
- case Rectangle rectangle -&gt; ...
+ case Circle circle -> ...  
+ case Rectangle rectangle -> ...
  ...
-}</pre>
+}
+```
+
 
 Use record pattern matching instead of explicit field access {#h2-5-use-record-pattern-matching-instead-of-explicit-field-access}
 ---------------------------------------------------------------------------------------------------------------------------------
 
 When you use type pattern matching you also declare a local variable of the type you matched against, to easily access its specific members, which is a benefit on top of the use of the instanceOf conditionals.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">static void printSum(Object obj) {
+```
+static void printSum(Object obj) {
     if (obj instanceof Point p) {
         int x = p.x();
         int y = p.y();
         System.out.println(x+y);
     }
-}</pre>
+}
+```
+
 
 With Java 21 we can now go a step further when we type-match on records, directly extracting their components into local variables, improving readability, and reducing the possibility of introducing errors with bad or missing assignments.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">static void printSum(Object obj) {
+```
+static void printSum(Object obj) {
     if (obj instanceof Point(int x, int y)) {
         System.out.println(x+y);
     }
-}</pre>
+}
+```
+
 
 Use VirtualThreads for heavy blocking operations {#h2-6-use-virtualthreads-for-heavy-blocking-operations}
 ---------------------------------------------------------------------------------------------------------
 
 Java 21 comes with a powerful feature called [Virtual Threads](https://openjdk.org/jeps/444 "Virtual Threads"). Before this, when you created a new Thread it was taking a thread from the OS. This basically meant that depending on the CPU we were capable of creating only a specific number of threads.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">Thread t = new Thread(() -&gt; {   // Noncompliant 
+```
+Thread t = new Thread(() -> {   // Noncompliant 
       //some Http method invokation
-    }).start();</pre>
+    }).start();
+```
+
 
 But now these virtual threads come from a shared pool of OS threads allowing us to create millions of threads that will be put on hold for access to the IO system.
 
 So, using virtual threads is the suggested approach.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">Thread t = Thread.ofVirtual.start(() -&gt; {  // Compliant
+```
+Thread t = Thread.ofVirtual.start(() -> {  // Compliant
       //some Http method invokation
-    });</pre>
+    });
+```
+
 
 Don't misuse Thread methods with Virtual Threads {#h2-7-don-t-misuse-thread-methods-with-virtual-threads}
 ---------------------------------------------------------------------------------------------------------
@@ -223,19 +264,25 @@ If you want to migrate from the use of platform Threads to the new Java 21 Virtu
 
 In the old platform threads, we could have a code similar to this:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">var kernelThread = new Thread(printThread);
+```
+var kernelThread = new Thread(printThread);
 kernelThread.setPriority(Thread.MIN_PRIORITY);
 kernelThread.setDaemon(false);
 System.out.println("Group:" + kernelThread.getThreadGroup());
-kernelThread.start();</pre>
+kernelThread.start();
+```
+
 
 However, the 3 central methods will have no effect or result in a runtime exception when migrated to Virtual Threads.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">var virtualThread = Thread.ofVirtual().factory().newThread(printThread);
+```
+var virtualThread = Thread.ofVirtual().factory().newThread(printThread);
 virtualThread.setPriority(Thread.MIN_PRIORITY); //Not compliant
 virtualThread.setDaemon(false); //Not compliant
 System.out.println(virtualThread.getThreadGroup()); //Not compliant
-virtualThread.start();</pre>
+virtualThread.start();
+```
+
 
 Virtual threads are always daemon threads, so invoking `.setDaemon()` will not change them to non-daemon threads. It will, at best, have no effect, and at worst (when you pass false as a parameter) cause an IllegalArgumentException.
 
@@ -250,16 +297,19 @@ When the task wrapped by the virtual thread runs [synchronized code](https://doc
 
 If during this time a blocking operation occurs, the virtual thread will not be dismounted, blocking the OS thread, and defeating the purpose of using a virtual thread in the first place.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">Thread.startVirtualThread(() -&gt; { // Noncompliant
+```
+Thread.startVirtualThread(() -> { // Noncompliant
       synchronized(this) {
         System.out.println();
       }
     });
 
-Thread.startVirtualThread(() -&gt; synchronizedMethod()); // Noncompliant
+Thread.startVirtualThread(() -> synchronizedMethod()); // Noncompliant
 private synchronized void synchronizedMethod() { 
   System.out.println(); 
-}</pre>
+}
+```
+
 
 In order to obtain the best result from the Virtual Threads we should not use synchronized blocks that will block the thread.
 
@@ -272,27 +322,33 @@ When we check for the type of an object, often it also involves checking the obj
 
 This is a common piece of Java code using switch pattern matching and conditionals:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">static void testStringOld(String response) {
+```
+static void testStringOld(String response) {
     switch (response) {
-        case null -&gt; { }
-        case String s -&gt; {
+        case null -> { }
+        case String s -> {
             if (s.equalsIgnoreCase("YES")){
               System.out.println("You got it");
             }
         }
     }
-}</pre>
+}
+```
+
 
 But, we can go further. Java 21 implements [guarded pattern labels](https://docs.oracle.com/en/java/javase/21/language/pattern-matching-switch-expressions-and-statements.html#GUID-A5C220F6-F70A-4FE2-ADB8-3B8883A67E8A:~:text=println(%22Something%20else%22)%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%7D-,When%20Clauses,-You%20can%20add "guarded pattern labels") that can be used in switch pattern matching expressions that will make the code more readable.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">static void testStringNew(String response) {
+```
+static void testStringNew(String response) {
     switch (response) {
-        case null -&gt; { }
-        case String s when s.equalsIgnoreCase("YES") -&gt; {
+        case null -> { }
+        case String s when s.equalsIgnoreCase("YES") -> {
             System.out.println("You got it");
         }
     }
-}</pre>
+}
+```
+
 
 Use indexOf(char\|String, int, int) with correct ranges {#h2-10-use-indexof-char-string-int-int-with-correct-ranges}
 --------------------------------------------------------------------------------------------------------------------
@@ -301,10 +357,13 @@ Java 21 adds new indexOf methods that accept ranges rather than single start or 
 
 The following cases all throw a StringIndexOutOfBoundsException but are not detected at compile time.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">String message = "Hello, World!";
+```
+String message = "Hello, World!";
 message.indexOf('!', -1, message.length()); // Noncompliant, beginIndex is negative
 message.indexOf('!', 1, 0); // Noncompliant, beginIndex is greater than endIndex
-message.indexOf(',', 0, message.length() + 1); // Noncompliant, endIndex is greater than the string's length by 1</pre>
+message.indexOf(',', 0, message.length() + 1); // Noncompliant, endIndex is greater than the string's length by 1
+```
+
 
 Conclusion {#h2-11-conclusion}
 ------------------------------

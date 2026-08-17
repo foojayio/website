@@ -31,27 +31,42 @@ If you don't already have JBang installed, you can install it by following these
 
 #### **On macOS**
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">brew install jbangdev/tap/jbang</pre>
+```
+brew install jbangdev/tap/jbang
+```
+
 
 #### **On Linux**
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">curl -Ls https://sh.jbang.dev | bash -s - app setup</pre>
+```
+curl -Ls https://sh.jbang.dev | bash -s - app setup
+```
+
 
 After installing JBang, you can verify the installation by running:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">jbang --version</pre>
+```
+jbang --version
+```
+
 
 ### Step 2: Initialize Your JBang Script {#h3-1-step-2-initialize-your-jbang-script}
 
 First, we need to initialize our JBang script. You can do this by running the following command:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">jbang init release-notes.java</pre>
+```
+jbang init release-notes.java
+```
+
 
 This will create a basic Java file. It starts with a shebang line. In Unix-like environments (macOS, Linux, etc.), the operating system tells the user how to execute the script when running it directly from the terminal. This special line tells your computer's terminal to use JBang to run the script, making it behave like a standalone command. This special line ensures that even without explicitly calling JBang, your script will execute seamlessly, handling dependencies and running the Java code effortlessly.
 
 To open it in your IDE, you can use:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">jbang edit --sandbox release-notes.java</pre>
+```
+jbang edit --sandbox release-notes.java
+```
+
 
 This creates a sandbox environment and sets up a Gradle project for you. You can then open it on your favourite IDE.
 
@@ -61,7 +76,8 @@ This creates a sandbox environment and sets up a Gradle project for you. You can
 
 JBang's \*\*`//DEPS` directive makes dependency management a breeze. You just need to specify the dependencies at the top of your Java file:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">///usr/bin/env jbang "$0" "$@" ; exit $?
+```
+///usr/bin/env jbang "$0" "$@" ; exit $?
 
 //JAVA 21+
 //DEPS org.projectlombok:lombok:1.18.30
@@ -71,7 +87,9 @@ JBang's \*\*`//DEPS` directive makes dependency management a breeze. You just ne
 //DEPS com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.16.1
 //DEPS io.github.openfeign:feign-java11:11.8
 //DEPS io.github.openfeign:feign-jackson:11.8
-//DEPS ch.qos.logback:logback-classic:1.5.6</pre>
+//DEPS ch.qos.logback:logback-classic:1.5.6
+```
+
 
 When working with JBang, you can easily add dependencies to your script using the `//DEPS` directive. This format allows you to include external libraries directly in your script, simplifying the process of managing dependencies.
 
@@ -79,7 +97,8 @@ When working with JBang, you can easily add dependencies to your script using th
 
 Let's combine Logback with colourized output for those who love visual feedback. This involves setting up a custom appender to enhance your logging experience.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">private static void configureLogback() {
+```
+private static void configureLogback() {
    LoggerContext context = (LoggerContext) LoggerFactory.getILoggerFactory();
 
    PatternLayoutEncoder encoder = new PatternLayoutEncoder();
@@ -96,11 +115,14 @@ Let's combine Logback with colourized output for those who love visual feedback.
    rootLogger.detachAndStopAllAppenders();
    rootLogger.addAppender(appender);
    rootLogger.setLevel(Level.DEBUG);
-}</pre>
+}
+```
+
 
 For this, I need a custom appender.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">static class PicoCLIColorizedAppender extends ConsoleAppender&lt;ILoggingEvent&gt; {
+```
+static class PicoCLIColorizedAppender extends ConsoleAppender<ILoggingEvent> {
 
    @Override
    protected void append(ILoggingEvent event) {
@@ -111,29 +133,32 @@ For this, I need a custom appender.
 
    private String getColorizedMessage(ILoggingEvent event, String formattedMessage) {
        String template = switch (event.getLevel().toInt()) {
-           case Level.DEBUG_INT -&gt; "@|blue %s|@"; // Blue for DEBUG
-           case Level.INFO_INT -&gt; "@|green %s|@"; // Green for INFO
-           case Level.WARN_INT -&gt; "@|yellow %s|@"; // Yellow for WARN
-           case Level.ERROR_INT -&gt; "@|red %s|@"; // Red for ERROR
-           default -&gt; "%s";
+           case Level.DEBUG_INT -> "@|blue %s|@"; // Blue for DEBUG
+           case Level.INFO_INT -> "@|green %s|@"; // Green for INFO
+           case Level.WARN_INT -> "@|yellow %s|@"; // Yellow for WARN
+           case Level.ERROR_INT -> "@|red %s|@"; // Red for ERROR
+           default -> "%s";
        };
        return CommandLine.Help.Ansi.AUTO.string(String.format(template, formattedMessage));
    }
 
-   public Encoder&lt;ILoggingEvent&gt; getEncoder() {
+   public Encoder<ILoggingEvent> getEncoder() {
        return encoder;
    }
 
-   public void setEncoder(Encoder&lt;ILoggingEvent&gt; encoder) {
+   public void setEncoder(Encoder<ILoggingEvent> encoder) {
        this.encoder = encoder;
    }
-}</pre>
+}
+```
+
 
 ### **Step 5: Configure ObjectMapper** {#h3-4-step-5-configure-objectmapper}
 
 Next, we configure the `ObjectMapper` for JSON serialization and deserialization:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">public class release_notes {
+```
+public class release_notes {
 
    static final ObjectMapper objectMapper = new ObjectMapper()
            .registerModule(new JavaTimeModule())
@@ -142,17 +167,20 @@ Next, we configure the `ObjectMapper` for JSON serialization and deserialization
            .disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
 
     //Other code.
-}</pre>
+}
+```
+
 
 ### **Step 6: Feign-tastic GitHub Client** {#h3-5-step-6-feign-tastic-github-client}
 
 We'll leverage Feign to create a GitHub client, making API interactions smooth. This involves defining an interface (`GitHubClient`) and implementing functions to fetch project details and commits.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">public class release_notes {
+```
+public class release_notes {
     static GitHubClient gitHubClient = Feign.builder()
         .decoder(new JacksonDecoder(objectMapper))
         .encoder(new JacksonEncoder(objectMapper))
-        .requestInterceptor(request -&gt; request.header("Authorization", "Bearer " + getApiToken()))
+        .requestInterceptor(request -> request.header("Authorization", "Bearer " + getApiToken()))
         .target(GitHubClient.class, "https://api.github.com");
 
     // Other code...
@@ -163,18 +191,18 @@ interface GitHubClient {
     @Headers("Accept: application/vnd.github+json")
     GithubProject getProject(@Param("owner") String owner, @Param("repo") String repo);
 
-    @RequestLine("GET /repos/{owner}/{repo}/commits?sha={sha}&amp;page={page}")
+    @RequestLine("GET /repos/{owner}/{repo}/commits?sha={sha}&page={page}")
     @Headers("Accept: application/vnd.github+json")
-    List&lt;Commit&gt; getCommitsPage(@Param("owner") String owner, @Param("repo") String repo, @Param("sha") String sha, @Param("page") int page);
+    List<Commit> getCommitsPage(@Param("owner") String owner, @Param("repo") String repo, @Param("sha") String sha, @Param("page") int page);
 
-    default List&lt;Commit&gt; getCommits(String owner, String repo, String sha) {
-        return fetchAllPages(page -&gt; getCommitsPage(owner, repo, sha, page));
+    default List<Commit> getCommits(String owner, String repo, String sha) {
+        return fetchAllPages(page -> getCommitsPage(owner, repo, sha, page));
     }
 
-    default &lt;T&gt; List&lt;T&gt; fetchAllPages(IntFunction&lt;List&lt;T&gt;&gt; pageFunction) {
-        List&lt;T&gt; allResults = new ArrayList&lt;&gt;();
-        List&lt;T&gt; curPageData;
-        for (int curPageNum = 1; (curPageData = pageFunction.apply(curPageNum)).size() &gt; 0; curPageNum++) {
+    default <T> List<T> fetchAllPages(IntFunction<List<T>> pageFunction) {
+        List<T> allResults = new ArrayList<>();
+        List<T> curPageData;
+        for (int curPageNum = 1; (curPageData = pageFunction.apply(curPageNum)).size() > 0; curPageNum++) {
             allResults.addAll(curPageData);
         }
         return allResults;
@@ -185,11 +213,14 @@ interface GitHubClient {
 record GithubProject(String defaultBranch, String name, String description, String htmlUrl, OffsetDateTime updatedAt) {}
 record Commit(String sha, CommitDetails commit, String htmlUrl) {}
 record CommitDetails(String message, Author author) {}
-record Author(String email, Instant date) {}</pre>
+record Author(String email, Instant date) {}
+```
+
 
 Note that we called a method getApiToken() when creating the client. We need to implement this.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">static String apiTokenCache;
+```
+static String apiTokenCache;
 
 static String getApiToken() {
    if (apiTokenCache != null) {
@@ -226,7 +257,9 @@ static String getApiToken() {
        }
        throw new GitHubCliProcessException("GitHub CLI process error: " + e.getMessage(), e);
    }
-}</pre>
+}
+```
+
 
 This code fetches your GitHub API token securely. It first checks if a cached token exists. If not, it uses the "gh" command-line tool to get your authentication status. It launches the "gh" login process if you're not logged in. Once logged in, it extracts your API token from the "gh" output and caches it for future use. If there are any errors during this process, it throws an exception.
 
@@ -236,9 +269,10 @@ This code fetches your GitHub API token securely. It first checks if a cached to
 
 Now, the heart of the tool: PicoCLI takes over command-line argument parsing and execution of the core logic. We'll define options for GitHub user, repository, commit range, output format, and more.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">@Slf4j
+```
+@Slf4j
 @CommandLine.Command(name = "release_notes", mixinStandardHelpOptions = true)
-class ReleaseNoteCommand implements Callable&lt;Integer&gt; {
+class ReleaseNoteCommand implements Callable<Integer> {
    private enum OutputFormat {
        MARKDOWN, HTML
    }
@@ -269,7 +303,7 @@ class ReleaseNoteCommand implements Callable&lt;Integer&gt; {
        try {
            GithubProject project = release_notes.gitHubClient.getProject(user, repo);
 
-           List&lt;Commit&gt; commits = getCommitsInRange(release_notes.gitHubClient, sinceCommit, untilCommit, user, repo);
+           List<Commit> commits = getCommitsInRange(release_notes.gitHubClient, sinceCommit, untilCommit, user, repo);
            String releaseNotes = generateReleaseNotes(commits, project, version, outputFormat);
 
            File outputFileWithExtension;
@@ -293,7 +327,9 @@ class ReleaseNoteCommand implements Callable&lt;Integer&gt; {
        }
        return 0;
    }
-}</pre>
+}
+```
+
 
 This Java code defines a command-line tool (`ReleaseNoteCommand`) for generating release notes from a GitHub repository. It uses PicoCLI to handle command-line arguments, such as GitHub user, repository, commit range, output format, and optional version and output file. It fetches commit data using a `GitHubClient`, processes it to categorize changes (features, bug fixes, other), and then formats the information into either Markdown or HTML release notes.
 
@@ -305,7 +341,8 @@ Finally, it either saves the release notes to a specified file or prints them to
 
 Finally, implement the main method to execute the command:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">import picocli.CommandLine;
+```
+import picocli.CommandLine;
 
 import static java.lang.System.exit;
 
@@ -317,31 +354,39 @@ public class release_notes {
     }
 
     // Other methods...
-}</pre>
+}
+```
+
 
 **Your CLI Script is Ready!**
 
 To put this creation to work, run it with the following command (adjusting the arguments to match your repository):
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">./release_notes.java -u rokon12 -r cargotracker -s 44e55ce -ut 50814d1 -f release -o HTML</pre>
+```
+./release_notes.java -u rokon12 -r cargotracker -s 44e55ce -ut 50814d1 -f release -o HTML
+```
+
 
 This will generate an HTML file in your root directory.
 
 It also prints excellent help functionality. For example:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">./release_notes.java
-Missing required options: '--user=&lt;user&gt;', '--repo=&lt;repo&gt;', '--since=&lt;sinceCommit&gt;', '--until=&lt;untilCommit&gt;'
-Usage: release_notes [-f=&lt;outputFile&gt;] [-o=&lt;outputFormat&gt;] -r=&lt;repo&gt;
-                     -s=&lt;sinceCommit&gt; -u=&lt;user&gt; -ut=&lt;untilCommit&gt; [-v=&lt;version&gt;]
-  -f, --file=&lt;outputFile&gt;   Output file for release notes (optional)
-  -o, --output-format=&lt;outputFormat&gt;
+```
+./release_notes.java
+Missing required options: '--user=<user>', '--repo=<repo>', '--since=<sinceCommit>', '--until=<untilCommit>'
+Usage: release_notes [-f=<outputFile>] [-o=<outputFormat>] -r=<repo>
+                     -s=<sinceCommit> -u=<user> -ut=<untilCommit> [-v=<version>]
+  -f, --file=<outputFile>   Output file for release notes (optional)
+  -o, --output-format=<outputFormat>
                             Output format (default: MARKDOWN)
-  -r, --repo=&lt;repo&gt;         GitHub repository
-  -s, --since=&lt;sinceCommit&gt; Since commit
-  -u, --user=&lt;user&gt;         GitHub user
-      -ut, --until=&lt;untilCommit&gt;
+  -r, --repo=<repo>         GitHub repository
+  -s, --since=<sinceCommit> Since commit
+  -u, --user=<user>         GitHub user
+      -ut, --until=<untilCommit>
                             Until commit
-  -v, --version=&lt;version&gt;   Release version (optional)</pre>
+  -v, --version=<version>   Release version (optional)
+```
+
 
 It will print on the terminal if we don't want to save it in any file.
 

@@ -36,7 +36,8 @@ The Java 2D API has been part of the JDK since 1.0, and it shows.
 
 It translates into the following code:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="kotlin">private fun watermark(imageFilename: String): BufferedImage? {
+```kotlin
+private fun watermark(imageFilename: String): BufferedImage? {
     val watermark = ImageIO.read(ClassPathResource("/static/$imageFilename").inputStream) ?: return null //1
     val watermarker = ImageIO.read(ClassPathResource("/static/apache-apisix.png").inputStream) //2
     watermark.createGraphics().apply {                         //3
@@ -44,7 +45,9 @@ It translates into the following code:
         dispose()                                              //5
     }
     return watermark
-}</pre>
+}
+```
+
 
 1. Get the original image
 2. Get the watermarking image
@@ -54,7 +57,8 @@ It translates into the following code:
 
 Other stacks may have dedicated libraries, such as [photon-rs](https://docs.rs/photon-rs/latest/photon_rs/multiple/fn.watermark.html) for Rust and WebAssembly. With this in place, we can move to the web part. As mentioned above, we need a `Filter`.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="kotlin">class WatermarkFilter : Filter {
+```kotlin
+class WatermarkFilter : Filter {
 
     override fun doFilter(request: ServletRequest, response: ServletResponse, chain: FilterChain) {
         val req = request as HttpServletRequest
@@ -64,7 +68,9 @@ Other stacks may have dedicated libraries, such as [photon-rs](https://docs.rs/p
             ImageIO.write(watermarked, "jpeg", it)             //3
         }
     }
-}</pre>
+}
+```
+
 
 1. Get the image filename
 2. Watermark the image
@@ -78,7 +84,7 @@ I explained how to watermark images on a Java stack in this post. I did the wate
 * [Java 2D API](https://docs.oracle.com/javase/8/docs/technotes/guides/2d/spec/j2d-intro.html)
 * [Image Processing in WebAssembly](https://silvia-odwyer.github.io/photon/)
 
-*** ** * ** ***
+
 
 *Originally published at [A Java Geek](https://blog.frankel.ch/dynamic-watermarking/1/) on June 30^th^, 2024*
 

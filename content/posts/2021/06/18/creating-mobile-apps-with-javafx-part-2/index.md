@@ -63,7 +63,10 @@ Although I use an IDE to edit my project, a command line interface performs all 
 
 Here is the maven command you run from the top-level directory of the TiltMaze project directory:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="raw" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="false" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ mvn javafx:run</pre>
+```
+$ mvn javafx:run
+```
+
 
 At some point, though, you must test your application on the target hardware. Because native builds take much longer than Java byte code builds, you should perform as much coding, debugging, and testing as possible before you move to actual device testing.
 
@@ -80,26 +83,41 @@ Next, follow the documentation for the GluonFX plugin. This plugin manages all t
 
 Next, set environment variable `GRAALVM_HOME` to the GraalVM JDK:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="raw" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="false" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ export GRAALVM_HOME=/path/to/graalvm-svm-darwin-gluon-21.1.0-dev/Contents/Home</pre>
+```
+$ export GRAALVM_HOME=/path/to/graalvm-svm-darwin-gluon-21.1.0-dev/Contents/Home
+```
+
 
 and set `JAVA_HOME` as well:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="raw" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="false" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ export JAVA_HOME=$GRAALVM_HOME</pre>
+```
+$ export JAVA_HOME=$GRAALVM_HOME
+```
+
 
 For IOS targets, use[Homebrew](https://brew.sh) to install the following packages:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="raw" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="false" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ brew install --HEAD libusbmuxd
-$ brew install --HEAD libimobiledevice</pre>
+```
+$ brew install --HEAD libusbmuxd
+$ brew install --HEAD libimobiledevice
+```
+
 
 The GluonFX plugin lets you define profiles, so you can specify the desired target in your build/run/install commands. When you build your project from Gluon's starter page (<https://start.gluon.io/>), profiles for ios and android (as well as desktop) are predefined in the `pom.xml` file.
 
 Here is the sequence we use to build and install/run TiltMaze on a connected iPhone. As before, we are in the top-level directory of the TiltMaze project.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="raw" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="false" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ mvn -Pios gluonfx:build</pre>
+```
+$ mvn -Pios gluonfx:build
+```
+
 
 The build action performs a compile followed by a link. Next, connect your iPhone via USB to your Mac and run the following command.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="raw" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="false" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ mvn -Pios gluonfx:nativerun</pre>
+```
+$ mvn -Pios gluonfx:nativerun
+```
+
 
 This command both installs the application created by the build action and runs the application. At this point, standard output from `System.out.println` statements appear on the desktop console and any logging is written to log files in the appropriate target subdirectory. The application is installed on your phone, so you can also exit and re-run the application from the phone. Exiting the application, however, disconnects remote execution from the Mac console.
 
@@ -107,12 +125,15 @@ Note: If you're having issues getting a successful build or install, try
 
 * Turn on verbose mode in the gluonfx plugin.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="xml" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="false" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">                &lt;artifactId&gt;gluonfx-maven-plugin&lt;/artifactId&gt;
-                &lt;version&gt;${gluonfx.maven.plugin.version}&lt;/version&gt;
-                &lt;configuration&gt;
+```xml
+                <artifactId>gluonfx-maven-plugin</artifactId>
+                <version>${gluonfx.maven.plugin.version}</version>
+                <configuration>
                     . . .
-                    &lt;verbose&gt;true&lt;/verbose&gt;
-                &lt;/configuration&gt;</pre>
+                    <verbose>true</verbose>
+                </configuration>
+```
+
 
 * Return to the [Gluon Documents](https://docs.gluonhq.com/#platforms_ios) for the iOS platform to make sure your pom.xml file is configured correctly.
 
@@ -124,31 +145,33 @@ The GluonFX plugin generates a default icon set for your application based on th
 
 In TiltMaze, we modified **Default-Info.plist** to permit portrait mode only, use the accelerometer, and not use Bluetooth.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="xml" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="false" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&lt;dict&gt;
+```xml
+<dict>
           . . .
-        &lt;key&gt;CFBundleName&lt;/key&gt;
-        &lt;string&gt;TiltMaze&lt;/string&gt;
+        <key>CFBundleName</key>
+        <string>TiltMaze</string>
          . . .
-        &lt;key&gt;UISupportedInterfaceOrientations&lt;/key&gt;
-        &lt;array&gt;
-            &lt;string&gt;UIInterfaceOrientationPortrait&lt;/string&gt;
-        &lt;/array&gt;
-        &lt;key&gt;UISupportedInterfaceOrientations~ipad&lt;/key&gt;
-        &lt;array&gt;
-            &lt;string&gt;UIInterfaceOrientationPortrait&lt;/string&gt;
-        &lt;/array&gt;
-        &lt;key&gt;UIRequiredDeviceCapabilities&lt;/key&gt;
-        &lt;array&gt;
-            &lt;string&gt;arm64&lt;/string&gt;
-            &lt;string&gt;accelerometer&lt;/string&gt;
-        &lt;/array&gt;
+        <key>UISupportedInterfaceOrientations</key>
+        <array>
+            <string>UIInterfaceOrientationPortrait</string>
+        </array>
+        <key>UISupportedInterfaceOrientations~ipad</key>
+        <array>
+            <string>UIInterfaceOrientationPortrait</string>
+        </array>
+        <key>UIRequiredDeviceCapabilities</key>
+        <array>
+            <string>arm64</string>
+            <string>accelerometer</string>
+        </array>
           . . .
-        &lt;key&gt;NSBluetoothAlwaysUsageDescription&lt;/key&gt;
-        &lt;string&gt;This app does not use Bluetooth&lt;/string&gt;        
-        &lt;key&gt;NSMotionUsageDescription&lt;/key&gt;
-        &lt;string&gt;This app uses accelerometer services&lt;/string&gt;
-&lt;/dict&gt;
-</pre>
+        <key>NSBluetoothAlwaysUsageDescription</key>
+        <string>This app does not use Bluetooth</string>        
+        <key>NSMotionUsageDescription</key>
+        <string>This app uses accelerometer services</string>
+</dict>
+```
+
 
 We created our own application icon, which you supply in various sizes for the App Store and the device icons. The entire icon set includes 18 different PNG images.
 
@@ -180,21 +203,33 @@ Here's a summary of the steps we followed to create the Android native image aft
 
 Build the project for Android with
 
-<pre class="EnlighterJSRAW" data-enlighter-language="raw" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="false" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ mvn -Pandroid gluonfx:build</pre>
+```
+$ mvn -Pandroid gluonfx:build
+```
+
 
 This runs the compilation phase and links the compiled objects into an Android executable.
 
 * Generate an Android application package (an APK):
 
-<pre class="EnlighterJSRAW" data-enlighter-language="raw" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="false" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ mvn -Pandroid gluonfx:package</pre>
+```
+$ mvn -Pandroid gluonfx:package
+```
+
 
 * Install the application on a connected Android device. Note that "USB debugging" must be enabled on the connected device. To enable USB debugging follow the steps listed [here](https://developer.android.com/training/basics/firstapp/running-app#RealDevice). Install with the following action.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="raw" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="false" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ mvn -Pandroid gluonfx:install</pre>
+```
+$ mvn -Pandroid gluonfx:install
+```
+
 
 * And finally, launch the application on the connected device with
 
-<pre class="EnlighterJSRAW" data-enlighter-language="raw" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="false" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ mvn -Pandroid gluonfx:nativerun</pre>
+```
+$ mvn -Pandroid gluonfx:nativerun
+```
+
 
 The same as with the iOS target, you can configure `<verbose>true</verbose>` mode for help in identifying configuration errors.
 
@@ -204,7 +239,10 @@ Similar to the iOS targets, the Gluon Plugin generates default settings and appl
 
 In our case, we specify the application runs only in portrait mode and requires the accelerometer:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="xml" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="false" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&lt;uses-feature android:name="android.hardware.sensor.accelerometer" android:required="true" /&gt;</pre>
+```xml
+<uses-feature android:name="android.hardware.sensor.accelerometer" android:required="true" />
+```
+
 
 We provide Android-specific icon resource files for TiltMaze under `src/android/res/`.
 

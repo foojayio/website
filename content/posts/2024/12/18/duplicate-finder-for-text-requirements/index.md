@@ -39,9 +39,15 @@ The duplicate detection tool should be capable of finding both exact and fuzzy m
 
 For example, it should identify the following texts as similar:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="Text 1" data-enlighter-group="">This is *one of the two texts* that the duplicate finder tool should *consistently* detect.</pre>
+```
+This is *one of the two texts* that the duplicate finder tool should *consistently* detect.
+```
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">This *is an example text* that the duplicate finder tool should detect *consistently*.</pre>
+
+```
+This *is an example text* that the duplicate finder tool should detect *consistently*.
+```
+
 
 Additionally, in the case of fuzzy duplicates, the degree of similarity should be measurable. This would allow us to quickly evaluate the duplicate pairs and sort them by how closely the text fragments resemble each other.
 
@@ -73,12 +79,15 @@ The code in this chapter doesn't need to be exhaustive and provide for every fut
 
 When it comes to a unit of text, which details are important for us? For our purposes, I'd stick with the text that a fragment contains, the path to its containing file, its line number, and the type of the element -- in case the source is not just plain text:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="kotlin" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">class Chunk(
+```kotlin
+class Chunk(
     val content: String,
     val path: Path,
     val lineNumber: Int,
     val type: String
-)</pre>
+)
+```
+
 
 This definition doesn't take into account some nuances. For example, we might leave out the `content` field. This would save us some RAM, but the tradeoff will be the speed of accessing the element's content, because then the program will have to read it from disk each time instead of only once. We're not fighting for performance right now, so a potentially suboptimal choice is fine.
 
@@ -86,15 +95,18 @@ This definition doesn't take into account some nuances. For example, we might le
 
 We don't have an implementation yet, so we'll program against an interface. The interface defines what our function should take as input and what it should return as output, abstracting away the function's internals. This effectively creates a *contract*, allowing us to write tests right now, without coding the actual algorithm. In the future, the interface will also make alternative implementations compatible with the existing tests and client code.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="kotlin" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">interface DuplicateFinder {
+```kotlin
+interface DuplicateFinder {
     fun find(
         root: Path,
         minSimilarity: Double,
         minLength: Int,
         minDuplicates: Int,
-        fileExtensions: List&lt;String&gt;?
-    ): Map&lt;Chunk, List&lt;Chunk&gt;&gt;
-}</pre>
+        fileExtensions: List<String>?
+    ): Map<Chunk, List<Chunk>>
+}
+```
+
 
 Here's the meaning of the parameters that the interface accepts:
 
@@ -109,7 +121,10 @@ When the function completes, it will return a [map](https://en.wikipedia.org/wik
 
 Actually, the definition above is unnecessarily verbose. Introducing an interface just for a single function and a few callers is too much. Kotlin has an elegant way of handling this with first-class functions:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="kotlin" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">val duplicateFinder: (Path, DuplicateFinderOptions) -&gt; Map&lt;Chunk, List&lt;Chunk&gt;&gt; = TODO()</pre>
+```kotlin
+val duplicateFinder: (Path, DuplicateFinderOptions) -> Map<Chunk, List<Chunk>> = TODO()
+```
+
 
 This declaration means that the duplicate finder is a function that takes `Path, DuplicateFinderOptions` and outputs `Map<Chunk, List<Chunk>>` , and that the function itself is not yet implemented. This might not be the best style for large projects, but in smaller ones like ours, it works great.
 
@@ -118,23 +133,30 @@ Test data {#h2-7-test-data}
 
 Since the duplicate finder is supposed to work with text data, the tests will also need some texts to analyze. This means we need to prepare some examples containing fuzzy duplicates. Let's start with the duplicates:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="kotlin" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">val EXACT_MATCH = "This is an exact match. It will be inserted in the test data as-is."
-val FUZZY_MATCH_TEMPLATE = "This is a fuzzy match. It will be inserted in the test data with minor changes."</pre>
+```kotlin
+val EXACT_MATCH = "This is an exact match. It will be inserted in the test data as-is."
+val FUZZY_MATCH_TEMPLATE = "This is a fuzzy match. It will be inserted in the test data with minor changes."
+```
+
 
 The idea behind `FUZZY_MATCH_TEMPLATE` is that we'll use it to programmatically produce the actual fuzzy matches:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="kotlin" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">val fuzzyMatches = listOf(
+```kotlin
+val fuzzyMatches = listOf(
     "123 $FUZZY_MATCH_TEMPLATE",
     "234 $FUZZY_MATCH_TEMPLATE",
     "$FUZZY_MATCH_TEMPLATE 567",
     "$FUZZY_MATCH_TEMPLATE 789",
     FUZZY_MATCH_TEMPLATE.removeRange(5, 10),
     FUZZY_MATCH_TEMPLATE.removeRange(10, 15)
-)</pre>
+)
+```
+
 
 Next, we'll generate a text consisting of [random English words](https://www.mit.edu/~ecprice/wordlist.10000):
 
-<pre class="EnlighterJSRAW" data-enlighter-language="kotlin" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">fun generateTestData(
+```kotlin
+fun generateTestData(
     wordsFile: String,
     outputDir: String,
     numOutputFiles: Int,
@@ -145,7 +167,7 @@ Next, we'll generate a text consisting of [random English words](https://www.mit
         .map { it.trim() }
         .filter { it.isNotEmpty() }
 
-    repeat(numOutputFiles) { fileIndex -&gt;
+    repeat(numOutputFiles) { fileIndex ->
         val outputFile = Path.of(outputDir).resolve("test_data_${fileIndex + 1}")
         val fileContent = StringBuilder().apply {
             repeat(linesPerFile) {
@@ -155,15 +177,20 @@ Next, we'll generate a text consisting of [random English words](https://www.mit
         }
         outputFile.writeText(fileContent.toString())
     }
-}</pre>
+}
+```
+
 
 Finally, we'll randomly inject `EXACT_MATCH` and `fuzzyMatches` into the generated text:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="kotlin" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">fun injectDuplicates(testDataDir: String) = Files.list(Path.of(testDataDir)).toList().apply {
+```kotlin
+fun injectDuplicates(testDataDir: String) = Files.list(Path.of(testDataDir)).toList().apply {
     random().also { println("Exact match 1 inserted in file: ${it.fileName}") }.appendText("$EXACT_MATCH\n")
     random().also { println("Exact match 2 inserted in file: ${it.fileName}") }.appendText("$EXACT_MATCH\n")
     fuzzyMatches.forEach { random().appendText("$it\n") }
-}</pre>
+}
+```
+
 
 Tests {#h2-8-tests}
 -------------------
@@ -172,13 +199,14 @@ As already mentioned, the primary goal of the tests at this stage is to define t
 
 This is the code of the test class:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="kotlin" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">const val WORDS_FILE = "./src/test/resources/words"
+```kotlin
+const val WORDS_FILE = "./src/test/resources/words"
 const val TEST_DATA_DIR = "./src/test/data"
 const val NUM_TEST_FILES = 100
 const val LINES_PER_FILE = 100
 const val WORDS_PER_LINE = 20
 
-private val duplicateFinder: (Path, DuplicateFinderOptions) -&gt; Map&lt;Chunk, List&lt;Chunk&gt;&gt; = TODO()
+private val duplicateFinder: (Path, DuplicateFinderOptions) -> Map<Chunk, List<Chunk>> = TODO()
 
 class DuplicateFinderTest {
 
@@ -208,7 +236,9 @@ class DuplicateFinderTest {
     }
 }
 
-private fun Map&lt;Chunk, List&lt;Chunk&gt;&gt;.texts() = (keys + values.flatten()).map { it.content }</pre>
+private fun Map<Chunk, List<Chunk>>.texts() = (keys + values.flatten()).map { it.content }
+```
+
 
 Next steps {#h2-9-next-steps}
 -----------------------------

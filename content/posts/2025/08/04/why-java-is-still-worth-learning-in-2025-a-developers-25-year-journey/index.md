@@ -52,7 +52,8 @@ One of my first major Java projects involved migrating a large enterprise applic
 
 I spent months helping add type information to collections throughout the system. We changed untyped Arrays to typed Lists, added types to Maps, and gradually eliminated the cognitive overhead of tracking what each collection contained. Here's a simple example of what we were transforming:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">// Before generics - mental overhead
+```java
+// Before generics - mental overhead
 List users = getUserList();
 for (Iterator iterator = users.iterator(); iterator.hasNext(); ) {
     User user = (User) iterator.next();  // Hope this doesn't throw ClassCastException!
@@ -60,10 +61,12 @@ for (Iterator iterator = users.iterator(); iterator.hasNext(); ) {
 }
 
 // After generics - intent is clear
-List&lt;User&gt; users = getUserList();
+List<User> users = getUserList();
 for (User user : users) {  // Our brain can focus on the business logic
     // Process user
-}</pre>
+}
+```
+
 
 The real impact of generics went beyond type safety. Every time we encountered a List in the old codebase, we had to hunt through the code to figure out what it contained. With generics, the intent was immediately obvious. It helped us decrease the mental burden working with the code.
 
@@ -73,7 +76,8 @@ This pattern has continued through Java's evolution. Features like records, patt
 
 Today's Java continues this trend. Consider how modern features reduce cognitive load:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">// Traditional approach - High cognitive load
+```java
+// Traditional approach - High cognitive load
 public class UserStatus {
     private final String status;
     private final String message;
@@ -99,13 +103,15 @@ public sealed interface LoginResult {
 
 // Data-driven flow control
 String message = switch (loginResult) {
-    case Success(var user, var token) -&gt; 
+    case Success(var user, var token) -> 
         "Welcome back, " + user.name();
-    case Failure(var reason) -&gt; 
+    case Failure(var reason) -> 
         "Login failed: " + reason;
-    case MfaRequired(var token) -&gt; 
+    case MfaRequired(var token) -> 
         "Please enter your MFA code";
-};</pre>
+};
+```
+
 
 This code aligns perfectly with how our brains naturally categorize and handle different cases. The compiler ensures we've handled every possibility, reducing the mental overhead of "what if" scenarios.
 
@@ -221,14 +227,17 @@ Java's emphasis on maintainable, readable code aligns perfectly with the growing
 
 Java 21's virtual threads revolutionize concurrent programming by making it simple to write highly scalable applications. Instead of complex reactive programming patterns, you can write straightforward code that handles millions of concurrent operations.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">// 10,000 concurrent HTTP calls with simple blocking code
+```java
+// 10,000 concurrent HTTP calls with simple blocking code
 try (var executor = Executors.newVirtualThreadPerTaskExecutor()) {
     IntStream.range(0, 10_000)
-        .forEach(i -&gt; executor.submit(() -&gt; {
+        .forEach(i -> executor.submit(() -> {
             var response = httpClient.send(buildRequest(i), HttpResponse.BodyHandlers.ofString());
             System.out.println("Response " + i + ": " + response.statusCode());
         }));
-} // Auto-waits for completion<code class="language-java"></code></pre>
+} // Auto-waits for completion<code class="language-java"></code>
+```
+
 
 Getting Started with Java in 2025 {#h2-15-getting-started-with-java-in-2025}
 ----------------------------------------------------------------------------
@@ -292,7 +301,7 @@ Whether you're starting your programming journey or looking to add a robust, rel
 
 The best time to plant a tree was 20 years ago. The second best time is now. The same is true for learning Java.
 
-*** ** * ** ***
+
 
 **Action Items:**
 

@@ -31,7 +31,8 @@ The Executors is a factory class, and it has a few static methods ( factory meth
 
 **Executors.newScheduledThredPool(int corePoolSize):** sometimes, we want to keep a task repeating or schedule on a particular time. This ThreadPool allows us to do that. It takes an argument about the number of worker threads it will keep running, even if the ThreadPool is idle. This factory method returns an instance of ***ScheduledExecutorService***, which has a few extra methods that we can use to schedule a job. For example -
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">import static java.time.temporal.ChronoField.HOUR_OF_DAY;
+```java
+import static java.time.temporal.ChronoField.HOUR_OF_DAY;
 import static java.time.temporal.ChronoField.MINUTE_OF_HOUR;
 import static java.time.temporal.ChronoField.SECOND_OF_MINUTE;
 
@@ -56,11 +57,13 @@ public class Playground {
         .appendValue(SECOND_OF_MINUTE, 2)
         .toFormatter();
 
-    threadPool.scheduleAtFixedRate(() -&gt; {
+    threadPool.scheduleAtFixedRate(() -> {
       System.out.print(LocalTime.now().format(timeFormatter) + "\r");
     }, 1000, 1000, TimeUnit.MILLISECONDS);
   }
-}</pre>
+}
+```
+
 
 <br />
 
@@ -76,11 +79,14 @@ We have already seen that we can just put a runnable and then submit it to the p
 
 The interface looks like this.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public interface Callable {
+```java
+public interface Callable {
 
     V call() throws Exception;
 
-}</pre>
+}
+```
+
 
 <br />
 
@@ -88,7 +94,8 @@ It is also a functional interface like Runnable; the only difference is that it 
 
 Let's see an example -
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">import java.util.HashMap;
+```java
+import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
@@ -97,7 +104,7 @@ import java.util.concurrent.Future;
 
 public class Playground {
 
-  final static Map&lt;Integer, Long&gt; cache = new HashMap&lt;&gt;(
+  final static Map<Integer, Long> cache = new HashMap<>(
       Map.of(0, 0L, 1, 1L)
   );
 
@@ -105,7 +112,7 @@ public class Playground {
 
     ExecutorService threadPool = Executors.newCachedThreadPool();
 
-    Future&lt;Long&gt; fibonacciNumber = threadPool.submit(new Callable&lt;Long&gt;() {
+    Future<Long> fibonacciNumber = threadPool.submit(new Callable<Long>() {
       @Override
       public Long call() throws Exception {
 
@@ -116,10 +123,12 @@ public class Playground {
 
   private static Long fibonacci(int n) {
     return cache.computeIfAbsent(n,
-        x -&gt; fibonacci(x - 1) + fibonacci(x - 2));
+        x -> fibonacci(x - 1) + fibonacci(x - 2));
   }
 
-}</pre>
+}
+```
+
 
 <br />
 
@@ -133,7 +142,8 @@ But look, it returns the result wrapped with another interface, Future. Let's ta
 
 It has several methods:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public interface Future&lt;V&gt; {
+```java
+public interface Future<V> {
 
     boolean cancel(boolean mayInterruptIfRunning);
 
@@ -146,8 +156,8 @@ It has several methods:
     V get(long timeout, TimeUnit unit)
         throws InterruptedException, ExecutionException, TimeoutException;
 }
+```
 
-</pre>
 
 However, we usually use the get() and isDone() methods for most of the use cases. The idea is that when we submit a task through Callable, it immediately returns a Future. The Future will hold the result when it's done, not immediately. That means, when we get the reference of the future, the work may not be done yet. We can check that using the isDone() method. We get the result using the get() method. We have to keep in mind that the get() method is blocking operation. The get() method is called from the thread and will be blocked until the result is computed.
 

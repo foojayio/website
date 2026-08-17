@@ -34,7 +34,8 @@ As our microservices are all based on [Kappa Architecture](https://milinda.pathi
 
 An input test might look like this
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic"><code class="language-java">---
+```
+<code class="language-java">---
 oms: OMS1 # the service to receive this message
 newOrder: {
   eventId: orderevent1,
@@ -54,11 +55,14 @@ newOrder: {
   timeInForceExpireTime: 2018-01-01T01:00:00
 }
 ---
-# more messages</code></pre>
+# more messages</code>
+```
+
 
 The output looks very similar as this is an Order Management Service. The job of OMS and it's job is to normalise, filter and track orders.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic"><code class="language-java">---
+```
+<code class="language-java">---
 newOrder: {
   eventId: orderevent1,
   eventTime: 2017-04-27T07:26:40.9836487,
@@ -77,7 +81,9 @@ newOrder: {
   timeInForceExpireTime: 2018-01-01T01:00:00
 }
 ---
-# more results</code></pre>
+# more results</code>
+```
+
 
 Building variations on tests to explore all the things which could go wrong and check how they are handled is easy.
 
@@ -89,8 +95,11 @@ Beyond implementing what we envisioned five years ago, there were some features 
 
 To ensure our services produced the same results every time, whether in tests or between production and any redundant system, we made the time an input. This appeared in our test like this
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic"><code class="language-java">periodicUpdate: 2017-04-27T07:26:51
----</code></pre>
+```
+<code class="language-java">periodicUpdate: 2017-04-27T07:26:51
+---</code>
+```
+
 
 This ensured that all time outs or events triggered by the clock could be tested, but also ensure each redundant system did the same things at the same point, and produced the same output.
 

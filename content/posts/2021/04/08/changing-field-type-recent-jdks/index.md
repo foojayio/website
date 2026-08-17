@@ -29,8 +29,9 @@ It allowed me to update the demo with version 16 of the JDK. In this blog post, 
 
 Let's start with the JDK. Here's a quiz I show early in my talk:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">Foo foo = new Foo();
-Class&lt;Foo&gt; clazz = foo.getClass();
+```
+Foo foo = new Foo();
+Class<Foo> clazz = foo.getClass();
 Field field = clazz.getDeclaredField("hidden");
 Field type = Field.class.getDeclaredField("type");
 AccessibleObject.setAccessible(
@@ -42,7 +43,9 @@ System.out.println(hidden);
 
 class Foo {
     private int hidden = 5;
-}</pre>
+}
+```
+
 
 Take some time to guess the result of executing this program when running it with a JDK 8.
 
@@ -54,9 +57,12 @@ As can be seen, `Field` has a `type` attribute that contains... its type. With t
 
 With JDK 16, the snippet doesn't work anymore. It throws a runtime exception instead:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">Exception in thread "main" java.lang.NoSuchFieldException: type
+```
+Exception in thread "main" java.lang.NoSuchFieldException: type
     at java.base/java.lang.Class.getDeclaredField(Class.java:2549)
-    at ch.frankel.blog.FirstAttempt.main(FirstAttempt.java:12)</pre>
+    at ch.frankel.blog.FirstAttempt.main(FirstAttempt.java:12)
+```
+
 
 The exception explicitly mentions line 12: `Field.class.getDeclaredField("type")`. It seems as if the implementation of the `Field` class changed.
 
@@ -64,17 +70,20 @@ The exception explicitly mentions line 12: `Field.class.getDeclaredField("type")
 
 Let's look at the source code in JDK 16:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-highlight="8">public final class Field extends AccessibleObject implements Member {
+```java
+public final class Field extends AccessibleObject implements Member {
 
-    private Class&lt;?&gt;            clazz;
+    private Class<?>            clazz;
     private int                 slot;
     // This is guaranteed to be interned by the VM in the 1.4
     // reflection implementation
     private String              name;
-    private Class&lt;?&gt;            type;     // 1
+    private Class<?>            type;     // 1
 
     // ...
-}</pre>
+}
+```
+
 
 1. Interestingly, the `field` type is there.
 
@@ -91,7 +100,8 @@ The diagram reveals two interesting bits:
 
 Let's investigate the `Reflection` class to understand the runtime doesn't find the `type` attribute:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-highlight="8">static {
+```java
+static {
     fieldFilterMap = Map.of(
         Reflection.class, ALL_MEMBERS,
         AccessibleObject.class, ALL_MEMBERS,
@@ -104,7 +114,9 @@ Let's investigate the `Reflection` class to understand the runtime doesn't find 
         System.class, Set.of("security")
     );
     methodFilterMap = Map.of();
-}</pre>
+}
+```
+
 
 1. All of the `Field` attributes are filtered out!
 
@@ -120,7 +132,8 @@ Here's a quite simplified class diagram focusing on our usage:
 
 One can use the API to access the `type` attribute as above. The code looks like the following:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-highlight="8">var foo = new Foo();
+```java
+var foo = new Foo();
 var clazz = foo.getClass();
 var lookup = MethodHandles.privateLookupIn(Field.class, MethodHandles.lookup());
 var type = lookup.findVarHandle(Field.class, "type", Class.class);
@@ -129,22 +142,28 @@ type.set(field, String.class);
 field.setAccessible(true);
 field.set(foo, "This should print 5!");
 var hidden = field.get(foo);
-System.out.println(hidden);</pre>
+System.out.println(hidden);
+```
+
 
 But running the code yields the following:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">Exception in thread "main" java.lang.IllegalArgumentException: Can not set int field ch.frankel.blog.Foo.hidden to java.lang.String
+```
+Exception in thread "main" java.lang.IllegalArgumentException: Can not set int field ch.frankel.blog.Foo.hidden to java.lang.String
     at java.base/jdk.internal.reflect.UnsafeFieldAccessorImpl.throwSetIllegalArgumentException(UnsafeFieldAccessorImpl.java:167)
     at java.base/jdk.internal.reflect.UnsafeFieldAccessorImpl.throwSetIllegalArgumentException(UnsafeFieldAccessorImpl.java:171)
     at java.base/jdk.internal.reflect.UnsafeIntegerFieldAccessorImpl.set(UnsafeIntegerFieldAccessorImpl.java:98)
     at java.base/java.lang.reflect.Field.set(Field.java:793)
-    at ch.frankel.blog.FinalAttempt.main(FinalAttempt.java:16)</pre>
+    at ch.frankel.blog.FinalAttempt.main(FinalAttempt.java:16)
+```
+
 
 Though the code compiles and runs, it throws at `field.set(foo, "This should print 5!")`. We reference the `type` field and can change it without any issue, but it still complains.
 
 The reason lies in the last line of the `getDeclaredField()` method:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-highlight="12">public Field getDeclaredField(String name)
+```java
+public Field getDeclaredField(String name)
     throws NoSuchFieldException, SecurityException {
     Objects.requireNonNull(name);
     SecurityManager sm = System.getSecurityManager();
@@ -156,7 +175,9 @@ The reason lies in the last line of the `getDeclaredField()` method:
         throw new NoSuchFieldException(name);
     }
     return getReflectionFactory().copyField(field);      // 1
-}</pre>
+}
+```
+
 
 1. Return a copy of the `Field` object, not the `Field` itself.
 

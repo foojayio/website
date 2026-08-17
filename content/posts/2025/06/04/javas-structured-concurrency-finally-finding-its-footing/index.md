@@ -41,7 +41,8 @@ The latest iteration in [JEP 505](https://openjdk.org/jeps/505) brings some sign
 
 Before diving into the changes, let's establish what structured concurrency is trying to solve. In traditional concurrent programming, we often end up with scattered task management:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">import java.util.Random;
+```
+import java.util.Random;
 import java.util.concurrent.*;
 
 public class TraditionalConcurrencyExample {
@@ -69,8 +70,8 @@ public class TraditionalConcurrencyExample {
 
   public static String getUserInfoTraditional(String userId) throws Exception {
     try (ExecutorService executor = Executors.newCachedThreadPool()) {
-      Future&amp;lt;String&amp;gt; future1 = executor.submit(() -&gt; fetchUserData(userId));
-      Future&amp;lt;String&amp;gt; future2 = executor.submit(() -&gt; fetchUserPreferences(userId));
+      Future&lt;String&gt; future1 = executor.submit(() -> fetchUserData(userId));
+      Future&lt;String&gt; future2 = executor.submit(() -> fetchUserPreferences(userId));
 
       try {
         String userData = future1.get();
@@ -87,7 +88,7 @@ public class TraditionalConcurrencyExample {
   }
 
   void main() {
-    for (int i = 0; i &amp;lt; 5; i++) {
+    for (int i = 0; i &lt; 5; i++) {
       try {
         System.out.println("Attempt " + (i + 1) + ": " +
             getUserInfoTraditional("user123"));
@@ -99,8 +100,8 @@ public class TraditionalConcurrencyExample {
     }
   }
 }
+```
 
-</pre>
 
 When you run this code, several issues typically emerge:
 
@@ -115,18 +116,22 @@ Structured concurrency aims to resolve these challenges.
 
 The most obvious tweak in JEP 505 is that you no longer call `new StructuredTaskScope<>()`. You `open()` one instead:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">try (var scope = StructuredTaskScope.open()) {
+```
+try (var scope = StructuredTaskScope.open()) {
   // ...
-}</pre>
+}
+```
+
 
 The zero-argument open() returns a scope that waits for all subtasks to succeed or any to fail---the default "all-or-fail" policy. If you need something fancier, call the overloaded open(joiner) variant and supply a custom completion policy via a Joiner (more on that in a minute). Why the factory? It packages sensible defaults and, critically, gives the implementation room to evolve without breaking your code. I find this change beneficial: using a single keyword is more concise, and it reduces potential complications.
 
 Now let's rewrite the previous example with the new API:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public static String getUserInfoTraditional(String userId) throws Exception {
+```
+public static String getUserInfoTraditional(String userId) throws Exception {
   try (var scope = StructuredTaskScope.open()) {
-    StructuredTaskScope.Subtask&lt;String&gt; task1 = scope.fork(() -&gt; fetchUserData(userId));
-    StructuredTaskScope.Subtask&lt;String&gt; task2 = scope.fork(() -&gt; fetchUserPreferences(userId));
+    StructuredTaskScope.Subtask<String> task1 = scope.fork(() -> fetchUserData(userId));
+    StructuredTaskScope.Subtask<String> task2 = scope.fork(() -> fetchUserPreferences(userId));
 
     scope.join();
 
@@ -135,7 +140,9 @@ Now let's rewrite the previous example with the new API:
 
     return combineUserInfo(userData, preferences);
   }
-}</pre>
+}
+```
+
 
 The difference is striking. With structured concurrency, the cleanup is automatic and guaranteed. If any task fails, all other tasks in the scope are cancelled. If the scope exits (normally or exceptionally), all resources are cleaned up. This is comparable to having a try-with-resources mechanism for concurrent tasks.
 
@@ -153,19 +160,25 @@ A Joiner intercepts completion events and decides (1) whether to cancel siblings
 
 **"First one wins" (aka racing a set of replicas)**
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">try (var scope = StructuredTaskScope.open(Joiner.&lt;String&gt;anySuccessfulResultOrThrow())) {
-&nbsp;&nbsp;&nbsp;&nbsp;urls.forEach(url -&gt; scope.fork(() -&gt; fetchFrom(url)));
-&nbsp;&nbsp;&nbsp;&nbsp;return scope.join(); &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; // returns first successful String
-}</pre>
+```
+try (var scope = StructuredTaskScope.open(Joiner.<String>anySuccessfulResultOrThrow())) {
+    urls.forEach(url -> scope.fork(() -> fetchFrom(url)));
+    return scope.join();             // returns first successful String
+}
+```
+
 
 **"All must succeed and I want their results"**
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">try (var scope = StructuredTaskScope.open(Joiner.&lt;Result&gt;allSuccessfulOrThrow()))&nbsp;{
-&nbsp;&nbsp;&nbsp;&nbsp;tasks.forEach(scope::fork);
-&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;scope.join()&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;Stream&lt;Subtask&lt;Result&gt;&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.map(Subtask::get)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.toList();
-}</pre>
+```
+try (var scope = StructuredTaskScope.open(Joiner.<Result>allSuccessfulOrThrow())) {
+    tasks.forEach(scope::fork);
+    return scope.join()              // Stream<Subtask<Result>>
+                 .map(Subtask::get)
+                 .toList();
+}
+```
+
 
 These little helpers make common patterns---"race", "gather", "wait-for-all"---painless.
 
@@ -173,18 +186,19 @@ These little helpers make common patterns---"race", "gather", "wait-for-all"---p
 
 Sometimes you need a custom policy. Suppose I want to collect every successful subtask but ignore failures:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">import java.util.Queue;
+```
+import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.StructuredTaskScope;
 import java.util.stream.Stream;
 
 void main() {
 
-  List&lt;String&gt; urls = List.of("https://bazlur.ca", "https://foojay.io", "https://github.com");
+  List<String> urls = List.of("https://bazlur.ca", "https://foojay.io", "https://github.com");
 
-  try (var scope = StructuredTaskScope.open(new MyCollectingJoiner&lt;String&gt;())) {
-    urls.forEach(url -&gt; scope.fork(() -&gt; fetchFrom(url)));
-    List&lt;String&gt; fetchedContent = scope.join().toList();
+  try (var scope = StructuredTaskScope.open(new MyCollectingJoiner<String>())) {
+    urls.forEach(url -> scope.fork(() -> fetchFrom(url)));
+    List<String> fetchedContent = scope.join().toList();
 
     System.out.println("Total fetched content: " + fetchedContent.size());
   } catch (InterruptedException e) {
@@ -197,26 +211,30 @@ private String fetchFrom(String url) {
   return "fetched from " + url + "";
 }
 
-class MyCollectingJoiner&lt;T&gt; implements StructuredTaskScope.Joiner&lt;T, Stream&lt;T&gt;&gt; {
-  private final Queue&lt;T&gt; results = new ConcurrentLinkedQueue&lt;&gt;();
+class MyCollectingJoiner<T> implements StructuredTaskScope.Joiner<T, Stream<T>> {
+  private final Queue<T> results = new ConcurrentLinkedQueue<>();
 
   @Override
-  public boolean onComplete(StructuredTaskScope.Subtask&lt;? extends T&gt; st) {
+  public boolean onComplete(StructuredTaskScope.Subtask<? extends T> st) {
     if (st.state() == StructuredTaskScope.Subtask.State.SUCCESS)
       results.add(st.get());
     return false;
   }
 
   @Override
-  public Stream&lt;T&gt; result() {
+  public Stream<T> result() {
     return results.stream();
   }
 }
-</pre>
+```
+
 
 The interface is tiny---`onFork`, `onComplete`, and `result()`---yet powerful enough for most custom logic. To run this, we need JDK 25, and we can execute it from the CLI using the following command:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">java --enable-preview CollectingJoiner.java</pre>
+```
+java --enable-preview CollectingJoiner.java
+```
+
 
 ### **Better cancellation and deadlines** {#h3-5-better-cancellation-and-deadlines}
 
@@ -224,23 +242,29 @@ Cancellation rules did not change in spirit, but the API got stricter. If the ow
 
 Need a deadline? Pass a configuration lambda:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">try (var scope = StructuredTaskScope.open(
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Joiner.&lt;String&gt;anySuccessfulResultOrThrow(),
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cfg -&gt; cfg.withTimeout(Duration.ofSeconds(2)))) {
-&nbsp;&nbsp;&nbsp;&nbsp;// ...
-}</pre>
+```
+try (var scope = StructuredTaskScope.open(
+         Joiner.<String>anySuccessfulResultOrThrow(),
+         cfg -> cfg.withTimeout(Duration.ofSeconds(2)))) {
+    // ...
+}
+```
+
 
 If the timeout fires, the scope cancels, and `join()` throws `TimeoutException`. In practice, I attach a timeout to every external call to keep runaway tasks under control.
 
 You can also swap the default virtual-thread factory for one that sets names or thread-locals:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">ThreadFactory tagged = Thread.ofVirtual().name("api-%d").factory();
+```
+ThreadFactory tagged = Thread.ofVirtual().name("api-%d").factory();
 
 try (var scope = StructuredTaskScope.open(
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Joiner.&lt;Integer&gt;allSuccessfulOrThrow(),
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cfg -&gt; cfg.withThreadFactory(tagged))) {
-&nbsp;&nbsp;&nbsp;&nbsp;// ...
-}</pre>
+         Joiner.<Integer>allSuccessfulOrThrow(),
+         cfg -> cfg.withThreadFactory(tagged))) {
+    // ...
+}
+```
+
 
 Thread naming alone makes thread dumps far more readable.
 
@@ -262,7 +286,8 @@ Thread dumps now include the scope tree, so tools can show parent--child relatio
 
 A classic e-commerce endpoint where a single HTTP request must aggregate product core data, real-time inventory, and a personalized price. Each sub-service is invoked in parallel inside a `StructuredTaskScope` that enforces an all-or-nothing policy: any failure or exceeding the one-second deadline cancels the whole group and surfaces an error to the caller. The scope's timeout, custom thread names, and `allSuccessfulOrThrow()` joiner encapsulate what is often a complex web of `CompletableFuture` wiring in three declarative lines.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">import java.time.Duration;
+```
+import java.time.Duration;
 import java.util.Random;
 import java.util.concurrent.StructuredTaskScope;
 import java.util.concurrent.ThreadFactory;
@@ -292,13 +317,13 @@ public class ThreeSixtyProductView {
     ThreadFactory named = Thread.ofVirtual().name("prod-%d", 1).factory();
 
     try (var scope = StructuredTaskScope.open(
-        StructuredTaskScope.Joiner.&lt;Object&gt;allSuccessfulOrThrow(),
-        cfg -&gt; cfg.withTimeout(Duration.ofSeconds(1))
+        StructuredTaskScope.Joiner.<Object>allSuccessfulOrThrow(),
+        cfg -> cfg.withTimeout(Duration.ofSeconds(1))
             .withThreadFactory(named))) {
 
-      StructuredTaskScope.Subtask&lt;Product&gt; core = scope.fork(() -&gt; coreApi(id));
-      StructuredTaskScope.Subtask&lt;Stock&gt; stock = scope.fork(() -&gt; stockApi(id));
-      StructuredTaskScope.Subtask&lt;Price&gt; price = scope.fork(() -&gt; priceApi(id));
+      StructuredTaskScope.Subtask<Product> core = scope.fork(() -> coreApi(id));
+      StructuredTaskScope.Subtask<Stock> stock = scope.fork(() -> stockApi(id));
+      StructuredTaskScope.Subtask<Price> price = scope.fork(() -> priceApi(id));
 
       scope.join(); // throws on first failure / timeout
       return new ProductPayload(core.get(), stock.get(), price.get());
@@ -309,13 +334,16 @@ public class ThreeSixtyProductView {
     ProductPayload productPayload = fetchProduct(1L);
     System.out.println(productPayload);
   }
-}</pre>
+}
+```
+
 
 #### **Example 2 -- "Race the Mirrors" File Downloader**
 
 Large binaries are hosted on several CDN mirrors. Latency varies, so we fire requests to every mirror simultaneously and use `Joiner.anySuccessfulResultOrThrow()` to stream the first successful `InputStream`, cancelling the rest. Bandwidth and connection slots are freed instantly, and users perceive the fastest possible download without manual cancellation plumbing.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">import java.io.*;
+```
+import java.io.*;
 import java.net.URI;
 import java.nio.file.*;
 import java.util.List;
@@ -324,7 +352,7 @@ import java.util.concurrent.StructuredTaskScope;
 
 public class MirrorDownloaderDemo {
   void main() throws Exception {
-    List&lt;URI&gt; mirrors = List.of(
+    List<URI> mirrors = List.of(
         URI.create("https://mirror‑a.example.com"),
         URI.create("https://mirror‑b.example.com"),
         URI.create("https://mirror‑c.example.com"));
@@ -334,11 +362,11 @@ public class MirrorDownloaderDemo {
     System.out.println("Saved to " + target.toAbsolutePath());
   }
 
-  static Path download(Path target, List&lt;URI&gt; mirrors) throws Exception {
+  static Path download(Path target, List<URI> mirrors) throws Exception {
     try (var scope = StructuredTaskScope.open(
-        StructuredTaskScope.Joiner.&lt;InputStream&gt;anySuccessfulResultOrThrow())) {
+        StructuredTaskScope.Joiner.<InputStream>anySuccessfulResultOrThrow())) {
 
-      mirrors.forEach(uri -&gt; scope.fork(() -&gt; fetchFromMirror(uri)));
+      mirrors.forEach(uri -> scope.fork(() -> fetchFromMirror(uri)));
       try (InputStream in = scope.join()) {
         Files.copy(in, target, StandardCopyOption.REPLACE_EXISTING);
       }
@@ -351,13 +379,16 @@ public class MirrorDownloaderDemo {
     String data = "Downloaded from " + uri + "\n";
     return new ByteArrayInputStream(data.getBytes());
   }
-}</pre>
+}
+```
+
 
 #### **Example 3 -- Batched Thumbnail Generator with Nested Scopes**
 
 A media pipeline step receives a directory of images. An outer scope iterates through the files, while an inner scope, for each image, fans out three resize tasks (small, medium, and large). The inner scope fails fast; if any resize fails, that image is skipped, but the outer batch continues unaffected. Nested scopes separate per-item consistency from batch-level throughput with minimal code.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">import java.io.IOException;
+```
+import java.io.IOException;
 import java.nio.file.*;
 import java.util.concurrent.StructuredTaskScope;
 
@@ -366,7 +397,7 @@ public class ThumbnailBatchDemo {
 
   void main() throws Exception {
     Path tmpDir = Files.createTempDirectory("images");
-    for (int i = 0; i &lt; 3; i++) Files.createTempFile(tmpDir, "img" + i, ".jpg");
+    for (int i = 0; i < 3; i++) Files.createTempFile(tmpDir, "img" + i, ".jpg");
     processBatch(tmpDir);
   }
 
@@ -374,7 +405,7 @@ public class ThumbnailBatchDemo {
     try (var batch = StructuredTaskScope.open()) {
       try (var files = Files.list(dir)) {
         files.filter(Files::isRegularFile)
-            .forEach(img -&gt; batch.fork(() -&gt; handleOne(img)));
+            .forEach(img -> batch.fork(() -> handleOne(img)));
       }
       batch.join();
     }
@@ -382,10 +413,10 @@ public class ThumbnailBatchDemo {
 
   private static void handleOne(Path image) {
     try (var scope = StructuredTaskScope.open(
-        StructuredTaskScope.Joiner.&lt;Void&gt;allSuccessfulOrThrow())) {
-      scope.fork(() -&gt; resizeAndUpload(image, Size.SMALL));
-      scope.fork(() -&gt; resizeAndUpload(image, Size.MEDIUM));
-      scope.fork(() -&gt; resizeAndUpload(image, Size.LARGE));
+        StructuredTaskScope.Joiner.<Void>allSuccessfulOrThrow())) {
+      scope.fork(() -> resizeAndUpload(image, Size.SMALL));
+      scope.fork(() -> resizeAndUpload(image, Size.MEDIUM));
+      scope.fork(() -> resizeAndUpload(image, Size.LARGE));
       scope.join();
     } catch (Exception ex) {
       System.err.println("Skipping " + image.getFileName() + ": " + ex);
@@ -397,13 +428,16 @@ public class ThumbnailBatchDemo {
     Thread.sleep(40); // simulate upload
     System.out.println("Uploaded " + image.getFileName() + " [" + size + "]");
     return null;
-  }</pre>
+  }
+```
+
 
 #### **Example 4 -- Real-Time Quote Service with Timed Fallback**
 
 A trading UI demands a quote within 30 ms. A custom joiner captures the first successful price from the primary market feed, with a scope-level timeout of 30 ms. If the feed stalls, `scope.join()` returns empty and the service instantly falls back to yesterday's cached closing price. Callers always receive a value on time, and timeout logic lives in one declarative line.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">import java.time.Duration;
+```
+import java.time.Duration;
 import java.util.*;
 import java.util.concurrent.StructuredTaskScope;
 import java.util.concurrent.StructuredTaskScope.Subtask;
@@ -415,24 +449,24 @@ public class QuoteServiceDemo {
   }
 
   static double quote(String symbol) throws InterruptedException {
-    var firstSuccess = new StructuredTaskScope.Joiner&lt;Double, Optional&lt;Double&gt;&gt;() {
+    var firstSuccess = new StructuredTaskScope.Joiner<Double, Optional<Double>>() {
       private volatile Double value;
 
-      public boolean onComplete(Subtask&lt;? extends Double&gt; st) {
+      public boolean onComplete(Subtask<? extends Double> st) {
         if (st.state() == Subtask.State.SUCCESS) value = st.get();
         return value != null;           // stop when we have one
       }
 
-      public Optional&lt;Double&gt; result() {
+      public Optional<Double> result() {
         return Optional.ofNullable(value);
       }
     };
 
     try (var scope = StructuredTaskScope.open(firstSuccess,
-        cfg -&gt; cfg.withTimeout(Duration.ofMillis(30)))) {
-      scope.fork(() -&gt; marketFeed(symbol));
-      Optional&lt;Double&gt; latest = scope.join();
-      return latest.orElseGet(() -&gt; cache(symbol));
+        cfg -> cfg.withTimeout(Duration.ofMillis(30)))) {
+      scope.fork(() -> marketFeed(symbol));
+      Optional<Double> latest = scope.join();
+      return latest.orElseGet(() -> cache(symbol));
     }
   }
 
@@ -446,7 +480,9 @@ public class QuoteServiceDemo {
   private static double cache(String symbol) {
     return 95.00;
   }
-}</pre>
+}
+```
+
 
 ### **Final thoughts** {#h3-10-final-thoughts}
 

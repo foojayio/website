@@ -30,7 +30,8 @@ One of them is a class that extends Throwable but isn't an Error or an Exception
 
 ### StackTrace Extends Throwable {#h3-0-stacktrace-extends-throwable}
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">package net.openhft.chronicle.core;
+```java
+package net.openhft.chronicle.core;
 /**
 * Throwable created purely for the purposes of reporting a stack trace.
 * This is not an Error or an Exception and is not expected to be thrown or caught.
@@ -47,12 +48,12 @@ public class StackTrace extends Throwable {
        StackTrace st = new StackTrace(t.toString());
        StackTraceElement[] stackTrace = t.getStackTrace();
        int start = 0;
-       if (stackTrace.length &gt; 2) {
+       if (stackTrace.length > 2) {
            if (stackTrace[0].isNativeMethod()) {
                start++;
            }
        }
-      if (start &gt; 0) {
+      if (start > 0) {
          StackTraceElement[] ste2 = new StackTraceElement[stackTrace.length - start];
          System.arraycopy(stackTrace, start, ste2, 0, ste2.length);
          stackTrace = ste2;
@@ -61,7 +62,9 @@ public class StackTrace extends Throwable {
        st.setStackTrace(stackTrace);
        return st;
    }
-}</pre>
+}
+```
+
 
 Some important side notes to get out of the way first
 
@@ -86,7 +89,8 @@ We don't expect this Throwable to be thrown but it can record the cause of an Ex
 
 #### Why was a resource closed
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public class EgMain {
+```java
+public class EgMain {
    static class MyCloseable implements Closeable {
        protected transient volatile StackTrace closedHere;
 
@@ -108,7 +112,9 @@ We don't expect this Throwable to be thrown but it can record the cause of an Ex
        t.join();
        mc.useThis();
    }
-}</pre>
+}
+```
+
 
 Produces the following Exception when run:
 
@@ -126,7 +132,8 @@ Long lived Closeable objects can have a complex life cycle and ensuring they are
 
 Some resources are not cleaned up when the GC frees the object e.g. a RandomAccessFile object is cleaned up on a GC by the file it represents isn't closed unless you close it, leading to a potential resource leak of file handles.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public class CreatedMain {
+```java
+public class CreatedMain {
    static class MyResource implements Closeable {
        private final transient StackTrace createdHere = new StackTrace("Created here");
        volatile transient boolean closed;
@@ -149,7 +156,9 @@ Some resources are not cleaned up when the GC frees the object e.g. a RandomAcce
        System.gc();
        Thread.sleep(1000);
    }
-}</pre>
+}
+```
+
 
 Prints the following:
 
@@ -163,7 +172,8 @@ In some environments, you want a low overhead way of monitoring the jitter of a 
 
 When we have added this to our infrastructure, the number of mysterious delays reported to us by our clients dropped dramatically as clients could diagnose for themselves what the issue was from the stack trace.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public class JitteryMain implements Runnable {
+```java
+public class JitteryMain implements Runnable {
    volatile long loopStartMS = Long.MIN_VALUE;
    volatile boolean running = true;
 
@@ -180,7 +190,7 @@ When we have added this to our infrastructure, the number of mysterious delays r
        int loops = new Random().nextInt(100);
        for (int i = 0; i  System.currentTimeMillis()) {
            long busyMS = System.currentTimeMillis() - jittery.loopStartMS;
-           if (busyMS &gt; 100) {
+           if (busyMS > 100) {
                Logger.getAnonymousLogger()
                        .log(Level.INFO, "Thread spent longer than expected here, was " + busyMS + " ms.",
                                StackTrace.forThread(thread));
@@ -189,7 +199,9 @@ When we have added this to our infrastructure, the number of mysterious delays r
        }
        jittery.running = false;
    }
-}</pre>
+}
+```
+
 
 Prints the following, which again you can see is easy to navigate the stack in your IDE.
 
@@ -199,7 +211,8 @@ You might be wondering why this happens in this case. The most likely cause is t
 
 ### Detecting When a Single Threaded Resource is Accessed Concurrently Between Threads {#h3-3-detecting-when-a-single-threaded-resource-is-accessed-concurrently-between-threads}
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">package net.openhft.chronicle.core;
+```java
+package net.openhft.chronicle.core;
 
 public class ConcurrentUsageMain {
    static class SingleThreadedResource {
@@ -223,13 +236,15 @@ public class ConcurrentUsageMain {
 
    public static void main(String[] args) throws InterruptedException {
        SingleThreadedResource str = new SingleThreadedResource();
-       final Thread thread = new Thread(() -&gt; str.use(), "Resource user"); // line 25
+       final Thread thread = new Thread(() -> str.use(), "Resource user"); // line 25
        thread.start();
        thread.join();
 
        str.use(); // line 29
    }
-}</pre>
+}
+```
+
 
 Prints the following:
 
@@ -241,10 +256,12 @@ You can see the resource was used by two threads with their names, however, you 
 
 Creating a StackTrace has a significant impact on the thread and possibly the JVM. However it is easily turned off using a control flag such as a system property and replaced with a null value.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">createdHere = Jvm.isResourceTracing() 
+```java
+createdHere = Jvm.isResourceTracing() 
                         ? new StackTrace(getClass().getName() + " created here")
                         : null;
-</pre>
+```
+
 
 This use of a *null* doesn't require much special handling as loggers will ignore a Throwable which is *null* , and you can give a *null* cause to an Exception and it's the same as not providing one.
 

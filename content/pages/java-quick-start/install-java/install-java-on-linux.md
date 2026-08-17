@@ -44,10 +44,9 @@ OpenJDK 64-Bit Server VM Zulu21.36+17-CA (build 21.0.4+7-LTS, mixed mode, sharin
 
 For another Linux-based system, you may need to select a `.rpm` download and install it as follows.
 
-
-
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="dracula" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">sudo yum install &lt;package&gt;.rpm</pre>
-
+```bash
+sudo yum install <package>.rpm
+```
 
 
 That's it. You're now ready to run Java programs and, even better... create your own!

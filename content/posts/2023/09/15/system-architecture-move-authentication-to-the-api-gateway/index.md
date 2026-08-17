@@ -67,36 +67,43 @@ We secure our application via Spring Security.
 
 Here are the required dependencies:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="xml">&lt;dependency&gt;
-    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
-    &lt;artifactId&gt;spring-boot-starter-security&lt;/artifactId&gt;        &lt;!--1--&gt;
-&lt;/dependency&gt;
-&lt;dependency&gt;
-    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
-    &lt;artifactId&gt;spring-boot-starter-oauth2-client&lt;/artifactId&gt;   &lt;!--2--&gt;
-&lt;/dependency&gt;</pre>
+```xml
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-security</artifactId>        <!--1-->
+</dependency>
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-oauth2-client</artifactId>   <!--2-->
+</dependency>
+```
+
 
 1. Protect the application
 2. Call the Keycloak server
 
 The protecting code uses Spring Security:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="kotlin">bean {
-    ref&lt;HttpSecurity&gt;().authorizeHttpRequests {
+```kotlin
+bean {
+    ref<HttpSecurity>().authorizeHttpRequests {
         it.requestMatchers("/*")                    //1
             .hasAuthority("OIDC_USER")              //1
             .anyRequest()
             .permitAll()
     }.oauth2Login {}                                //2
     .build()
-}</pre>
+}
+```
+
 
 1. Any request requires to have the `OIDC_USER` authority
 2. "Log in" via OAuth2
 
 The next step is configuring the framework:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="xml">spring.security:
+```xml
+spring.security:
   oauth2:
     client:
       registration.keycloak:
@@ -105,7 +112,9 @@ The next step is configuring the framework:
         scope: openid
       provider.keycloak:
         issuer-uri: http://localhost:9009/realms/apisix   #2
-        user-name-attribute: preferred_username           #3</pre>
+        user-name-attribute: preferred_username           #3
+```
+
 
 1. Use the client created in Keycloak. We pass the secret at runtime via an environment variable
 2. Keycloak realm to use. We override the domain in the Docker compose file via an environment variable
@@ -113,18 +122,21 @@ The next step is configuring the framework:
 
 I'll use a dummy Thymeleaf page to display the logged-in user. We need additional dependencies:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="xml">&lt;dependency&gt;
-    &lt;groupId&gt;org.thymeleaf&lt;/groupId&gt;
-    &lt;artifactId&gt;thymeleaf&lt;/artifactId&gt;                        &lt;!--1--&gt;
-&lt;/dependency&gt;
-&lt;dependency&gt;
-    &lt;groupId&gt;org.thymeleaf&lt;/groupId&gt;
-    &lt;artifactId&gt;thymeleaf-spring6&lt;/artifactId&gt;                &lt;!--2--&gt;
-&lt;/dependency&gt;
-&lt;dependency&gt;
-    &lt;groupId&gt;org.thymeleaf.extras&lt;/groupId&gt;
-    &lt;artifactId&gt;thymeleaf-extras-springsecurity6&lt;/artifactId&gt; &lt;!--3--&gt;
-&lt;/dependency&gt;</pre>
+```xml
+<dependency>
+    <groupId>org.thymeleaf</groupId>
+    <artifactId>thymeleaf</artifactId>                        <!--1-->
+</dependency>
+<dependency>
+    <groupId>org.thymeleaf</groupId>
+    <artifactId>thymeleaf-spring6</artifactId>                <!--2-->
+</dependency>
+<dependency>
+    <groupId>org.thymeleaf.extras</groupId>
+    <artifactId>thymeleaf-extras-springsecurity6</artifactId> <!--3-->
+</dependency>
+```
+
 
 1. Thymeleaf proper
 2. Thymeleaf and Spring integration
@@ -132,17 +144,20 @@ I'll use a dummy Thymeleaf page to display the logged-in user. We need additiona
 
 The view is the following:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="html">&lt;!doctype html&gt;
-&lt;html lang="en" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"&gt;
-&lt;body&gt;
-&lt;header&gt;
-    &lt;h1&gt;Welcome to My App&lt;/h1&gt;
-    &lt;p&gt;
-        &lt;span sec:authentication="name"&gt;Bob&lt;/span&gt;  &lt;!--1--&gt;
-    &lt;/p&gt;
-&lt;/header&gt;
-&lt;/body&gt;
-&lt;/html&gt;</pre>
+```html
+<!doctype html>
+<html lang="en" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<body>
+<header>
+    <h1>Welcome to My App</h1>
+    <p>
+        <span sec:authentication="name">Bob</span>  <!--1-->
+    </p>
+</header>
+</body>
+</html>
+```
+
 
 1. Display the "name" of the logged-in user
 
@@ -153,7 +168,8 @@ Lastly, let's configure the entry point into our system. I assume you're familia
 
 In standalone mode, the configuration file is the following:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">routes:
+```
+routes:
   - uri: /*
     upstream:
       nodes:
@@ -167,7 +183,9 @@ In standalone mode, the configuration file is the following:
         scope: openid
         realm: apisix                                                                  #3
         redirect_uri: http://localhost:9080/callback                                   #4
-#END</pre>
+#END
+```
+
 
 1. Keycloak offers an endpoint that details every necessary endpoint for an OpenID integration
 2. Use the same client as the app. In real-world scenarios, we should use one client per component, but it's a demo
@@ -179,7 +197,8 @@ Putting it all together {#h2-4-putting-it-all-together}
 
 We put everything together via Docker Compose:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">services:
+```
+services:
   apisix:
     image: apache/apisix:3.4.0-debian
     volumes:
@@ -210,7 +229,9 @@ We put everything together via Docker Compose:
       LOGGING_LEVEL_ORG_SPRINGFRAMEWORK_SECURITY: DEBUG                              #7
     depends_on:
       - keycloak
-    restart: on-failure                                                              #8</pre>
+    restart: on-failure                                                              #8
+```
+
 
 1. Configure standalone mode
 2. Routes and plugins configuration as seen in the previous section
@@ -246,6 +267,6 @@ The complete source code for this post can be found on [GitHub](_wp_link_placeho
 * [How to Integrate Keycloak for Authentication with Apache APISIX](https://www.keycloak.org/2021/12/apisix)
 * [A Quick Guide to Using Keycloak With Spring Boot](https://www.baeldung.com/spring-boot-keycloak)
 
-*** ** * ** ***
+
 
 *Originally published at [A Java Geek](https://blog.frankel.ch/authentication-api-gateway/) on July 30^th^, 2023*

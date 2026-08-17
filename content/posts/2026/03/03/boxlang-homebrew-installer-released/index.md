@@ -27,8 +27,10 @@ We're excited to announce the official **BoxLang Homebrew tap** --- the easiest 
 
 First, make sure you have [Homebrew installed](https://brew.sh/ "Homebrew installed"), then add our tap:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">brew tap ortus-boxlang/boxlang
-</pre>
+```java
+brew tap ortus-boxlang/boxlang
+```
+
 
 From there, choose your installation path.
 
@@ -37,15 +39,19 @@ Option 1: BVM --- BoxLang Version Manager {#h2-1-option-1-bvm-boxlang-version-ma
 
 If you want to manage multiple BoxLang versions side by side, **BVM** is your tool.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">brew install ortus-boxlang/boxlang/bvm
-</pre>
+```java
+brew install ortus-boxlang/boxlang/bvm
+```
+
 
 Then install and activate BoxLang:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">bvm install latest
+```java
+bvm install latest
 bvm use latest
 boxlang --version
-</pre>
+```
+
 
 BVM makes it trivial to switch between stable and snapshot releases, list installed versions, and stay on the cutting edge --- or the stable path --- depending on your project needs.
 
@@ -54,30 +60,40 @@ Option 2: Quick Installer --- Zero Friction Setup {#h2-2-option-2-quick-installe
 
 Prefer a single-step setup? The **BoxLang Quick Installer** formula gets you the runtime and MiniServer in one shot.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">brew install ortus-boxlang/boxlang/boxlang
+```java
+brew install ortus-boxlang/boxlang/boxlang
 install-boxlang
-</pre>
+```
+
 
 Need Java? No problem:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">install-boxlang --with-jre
-</pre>
+```java
+install-boxlang --with-jre
+```
+
 
 Installing for all users on a machine?
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">sudo install-boxlang --system
-</pre>
+```java
+sudo install-boxlang --system
+```
+
 
 After installation, add BoxLang to your path:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">export PATH="$HOME/.local/bin:$PATH"
-</pre>
+```java
+export PATH="$HOME/.local/bin:$PATH"
+```
+
 
 Then fire it up:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">boxlang               # Launch the REPL
+```java
+boxlang               # Launch the REPL
 boxlang-miniserver    # Start the MiniServer
-</pre>
+```
+
 
 Always Up to Date {#h2-3-always-up-to-date}
 -------------------------------------------

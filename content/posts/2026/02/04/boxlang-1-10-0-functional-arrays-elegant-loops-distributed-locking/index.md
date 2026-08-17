@@ -33,22 +33,26 @@ Data Chunking for Pagination
 
 Split arrays into manageable chunks - perfect for pagination, batch processing, or UI rendering:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">items = [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ]
+```java
+items = [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ]
 pages = items.chunk( 3 )
 // Result: [ [1,2,3], [4,5,6], [7,8,9], [10] ]
 
 // Real-world pagination
 products = productService.getAllProducts()
 productPages = products.chunk( 20 )
-productPages.each( ( page, index ) =&gt; {
+productPages.each( ( page, index ) => {
     println( "Page #index# contains #page.len()# products" )
-} )</pre>
+} )
+```
+
 
 Smart Element Finding with Defaults  
 
 The new `findFirst()` and `first()` methods eliminate null-checking boilerplate by supporting default values:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">users = [
+```java
+users = [
     { name: "Alice", role: "user" },
     { name: "Bob", role: "admin" },
     { name: "Charlie", role: "user" }
@@ -56,18 +60,21 @@ The new `findFirst()` and `first()` methods eliminate null-checking boilerplate 
 
 // Find with default fallback
 admin = users.findFirst( 
-    ( u ) =&gt; u.role == "admin",
+    ( u ) => u.role == "admin",
     { name: "Guest", role: "guest" }
 )
 
 // Safe first element access
-settings = configArray.first( { theme: "default", locale: "en" } )</pre>
+settings = configArray.first( { theme: "default", locale: "en" } )
+```
+
 
 Data Grouping and Aggregation  
 
 The `groupBy()` method transforms arrays into grouped structures using either property keys or custom functions:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">// Group by property
+```java
+// Group by property
 transactions = [
     { id: 1, category: "food", amount: 45.20 },
     { id: 2, category: "transport", amount: 12.50 },
@@ -81,15 +88,18 @@ byCategory = transactions.groupBy( "category" )
 // }
 
 // Group by custom logic
-bySizeCategory = transactions.groupBy( ( t ) =&gt; {
-    return t.amount &gt; 100 ? "large" : t.amount &gt; 50 ? "medium" : "small"
-} )</pre>
+bySizeCategory = transactions.groupBy( ( t ) => {
+    return t.amount > 100 ? "large" : t.amount > 50 ? "medium" : "small"
+} )
+```
+
 
 Flatten Nested Structures  
 
 Control how deep to flatten nested arrays with the new `flatten() ` method:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">nested = [ [1, [2, 3]], [4, [5, [6]]] ]
+```java
+nested = [ [1, [2, 3]], [4, [5, [6]]] ]
 
 nested.flatten()      // [1, 2, 3, 4, 5, 6] - fully flattened
 nested.flatten( 1 )   // [1, [2, 3], 4, [5, [6]]] - one level only
@@ -100,45 +110,54 @@ apiResults = [
     { items: [ {id: 1}, {id: 2} ] },
     { items: [ {id: 3}, {id: 4} ] }
 ]
-allItems = apiResults.map( ( r ) =&gt; r.items ).flatten()</pre>
+allItems = apiResults.map( ( r ) => r.items ).flatten()
+```
+
 
 Map and Flatten in One Operation  
 
 The `flatMap()` method combines mapping and flattening - essential for working with nested data structures:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">orders = [
+```java
+orders = [
     { orderId: 1, items: [ "A", "B" ] },
     { orderId: 2, items: [ "C", "D", "E" ] }
 ]
 
 // Extract and flatten all items
-allItems = orders.flatMap( ( order ) =&gt; order.items )
+allItems = orders.flatMap( ( order ) => order.items )
 // Result: [ "A", "B", "C", "D", "E" ]
 
 // vs. the verbose alternative:
-allItems = orders.map( ( order ) =&gt; order.items ).flatten()</pre>
+allItems = orders.map( ( order ) => order.items ).flatten()
+```
+
 
 Filter Inverse with Reject  
 
 The `reject()` method provides the inverse of `filter()`, making exclusion logic more readable:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">products = [
+```java
+products = [
     { name: "Laptop", inStock: true },
     { name: "Mouse", inStock: false },
     { name: "Keyboard", inStock: true }
 ]
 
 // More readable than filter with negation
-outOfStock = products.reject( ( p ) =&gt; p.inStock )
+outOfStock = products.reject( ( p ) => p.inStock )
 
 // vs. the filter equivalent
-outOfStock = products.filter( ( p ) =&gt; !p.inStock )</pre>
+outOfStock = products.filter( ( p ) => !p.inStock )
+```
+
 
 Matrix Operations with Transpose  
 
 Convert rows to columns in 2D arrays - essential for data analysis and matrix operations:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">matrix = [
+```java
+matrix = [
     [ 1, 2, 3 ],
     [ 4, 5, 6 ]
 ]
@@ -152,25 +171,31 @@ salesData = [
     [ "Q2", 1100, 1300, 950 ]
 ]
 byMonth = salesData.transpose()
-// Now organized by columns instead of rows</pre>
+// Now organized by columns instead of rows
+```
+
 
 Remove Duplicates with Type Control  
 
 The `unique()` method removes duplicate values with optional type comparison:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">numbers = [ 1, 2, 2, 3, 1, 4, 3 ]
+```java
+numbers = [ 1, 2, 2, 3, 1, 4, 3 ]
 numbers.unique()  // [ 1, 2, 3, 4 ]
 
 // Type-aware uniqueness
 mixed = [ 1, "1", 2, "2", 1 ]
 mixed.unique()        // [ 1, "1", 2, "2" ] - preserves types
-mixed.unique( "any" ) // [ 1, 2 ] - type-insensitive</pre>
+mixed.unique( "any" ) // [ 1, 2 ] - type-insensitive
+```
+
 
 Combine Arrays Element-wise with Zip  
 
 The `zip()` method combines multiple arrays element-by-element, perfect for correlating related datasets:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">names = [ "Alice", "Bob", "Charlie" ]
+```java
+names = [ "Alice", "Bob", "Charlie" ]
 ages = [ 25, 30, 35 ]
 cities = [ "NYC", "LA", "Chicago" ]
 
@@ -183,17 +208,20 @@ combined = names.zip( ages, cities )
 
 // Real-world: combine headers with data
 headers = [ "Name", "Email", "Role" ]
-values = [ "Alice", "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="41202d282224012439202c312d246f222e2c">[email&nbsp;protected]</a>", "Admin" ]
-record = headers.zip( values )</pre>
+values = [ "Alice", "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="41202d282224012439202c312d246f222e2c">[email protected]</a>", "Admin" ]
+record = headers.zip( values )
+```
+
 
 ### Elegant Loop Destructuring Syntax {#h3-2-elegant-loop-destructuring-syntax}
 
 BoxLang 1.10.0 introduces destructuring syntax `for` for loops, eliminating verbose iteration patterns:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">// Struct iteration with key and value
+```java
+// Struct iteration with key and value
 userData = {
     name: "Alice",
-    email: "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="680904010b0d280d10090518040d460b0705">[email&nbsp;protected]</a>",
+    email: "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="680904010b0d280d10090518040d460b0705">[email protected]</a>",
     role: "admin"
 }
 
@@ -210,25 +238,31 @@ for ( color, index in colors ) {
 // Query iteration
 for ( row, rowNumber in getUserQuery() ) {
     println( "Processing user #row.name# (row #rowNumber#)" )
-}</pre>
+}
+```
+
 
 This new syntax replaces verbose patterns like `structEach()` and manual index tracking:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">// Old verbose approach
-userData.each( ( key, value ) =&gt; {
+```java
+// Old verbose approach
+userData.each( ( key, value ) => {
     println( "#key#: #value#" )
 } )
 
 // New clean syntax
 for ( key, value in userData ) {
     println( "#key#: #value#" )
-}</pre>
+}
+```
+
 
 ### Distributed Cache Locking for Clustered Environments {#h3-3-distributed-cache-locking-for-clustered-environments}
 
 The `lock` component now integrates with cache providers implementing the `ILockableCacheProvider` interface, enabling distributed locking across multiple servers without external coordination systems.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">// Distributed lock across all servers in cluster
+```java
+// Distributed lock across all servers in cluster
 lock( name="processPayment", cache="redisCache", timeout=30 ) {
     // Critical section protected cluster-wide
     payment = paymentGateway.charge( orderId )
@@ -239,7 +273,9 @@ lock( name="processPayment", cache="redisCache", timeout=30 ) {
 // Traditional local lock still available
 lock( name="updateLocalCache", type="exclusive", timeout=10 ) {
     localCache.update( key, value )
-}</pre>
+}
+```
+
 
 **Requirements** : Distributed locking requires a cache provider that implements `ILockableCacheProvider`. Compatible providers include:
 
@@ -252,7 +288,8 @@ lock( name="updateLocalCache", type="exclusive", timeout=10 ) {
 
 New module loading methods enable runtime module management, perfect for plugin architectures and dynamic extensions:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">moduleService = getModuleService()
+```java
+moduleService = getModuleService()
 
 // Load a single module at runtime
 moduleService.loadModule( expandPath( "/plugins/customAuth" ) )
@@ -264,7 +301,9 @@ moduleService.loadModules( expandPath( "/extensions" ) )
 if ( moduleService.hasModule( "customAuth" ) ) {
     settings = moduleService.getModuleSettings( "customAuth" )
     println( "Custom auth enabled: #settings.enabled#" )
-}</pre>
+}
+```
+
 
 This is especially valuable for:
 
@@ -287,10 +326,13 @@ The ASM compiler now handles large methods with try/catch blocks more efficientl
 
 The `content` component now uses chunked transfer encoding for binary responses instead of buffering the entire response in memory. This reduces memory pressure and improves performance for large file downloads, PDF generation, and image serving.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">// Efficiently stream large PDFs without memory buffering
+```java
+// Efficiently stream large PDFs without memory buffering
 content( type="application/pdf" ) {
     writeOutput( generateLargePDF() ) // Now streams in chunks
-}</pre>
+}
+```
+
 
 🛠️ Developer Experience Enhancements {#h2-9-developer-experience-enhancements}
 -------------------------------------------------------------------------------
@@ -299,7 +341,8 @@ content( type="application/pdf" ) {
 
 The MiniServer runtime now supports warmup URLs to pre-initialize your application before serving production traffic:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">{
+```java
+{
   "warmupURLs": [
     "http://localhost:8080/api/health",
     "http://localhost:8080/admin/cache/prime",
@@ -311,7 +354,9 @@ The MiniServer runtime now supports warmup URLs to pre-initialize your applicati
       "port": 8080
     }
   }
-}</pre>
+}
+```
+
 
 Warmup requests execute sequentially during server startup, ensuring:
 
@@ -324,11 +369,14 @@ Warmup requests execute sequentially during server startup, ensuring:
 
   Two new server scope variables aid debugging and runtime identification:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">// Get the Java process ID
+```java
+// Get the Java process ID
 println( "Running on PID: #server.java.pid#" )
 
 // Identify active compiler (ASM, Java, or Noop)
-println( "Using compiler: #server.boxlang.compiler#" )</pre>
+println( "Using compiler: #server.boxlang.compiler#" )
+```
+
 
 These variables are invaluable for:
 
@@ -340,23 +388,29 @@ These variables are invaluable for:
 
   BoxLang now creates a `bin/` folder in the BoxLang home directory, preparing for future CommandBox integration where modules can provide CLI commands and executables:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash">~/.boxlang/
+```bash
+~/.boxlang/
   └── bin/
       ├── module-cli-tool
-      └── custom-command</pre>
+      └── custom-command
+```
+
 
 ### JSR-223 Configuration Flexibility {#h3-13-jsr-223-configuration-flexibility}
 
 The JSR-223 scripting engine integration now supports environment variables and system properties for configuration, enabling containerized deployments:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java"># Environment variable configuration
+```java
+# Environment variable configuration
 export BOX_JSR223_TIMEOUT=30000
 export BOX_JSR223_ENABLE_LOGGING=true
 
 # System property configuration
 java -Dboxlang.jsr223.timeout=30000 \
      -Dboxlang.jsr223.enableLogging=true \
-     -jar app.jar</pre>
+     -jar app.jar
+```
+
 
 🔧 Additional Improvements {#h2-14-additional-improvements}
 -----------------------------------------------------------
@@ -371,11 +425,14 @@ java -Dboxlang.jsr223.timeout=30000 \
 
   The cache retrieval system now properly follows the context cache hierarchy:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">// Application cache takes precedence over global cache
+```java
+// Application cache takes precedence over global cache
 cache( "userSessions" )  // Checks app cache first, then global
 
 // Explicit cache provider targeting
-cacheGet( "key", "redisCache" )  // Direct provider access</pre>
+cacheGet( "key", "redisCache" )  // Direct provider access
+```
+
 
 This ensures application-level cache isolation while maintaining fallback to global caches.
 
@@ -387,13 +444,16 @@ This ensures application-level cache isolation while maintaining fallback to glo
 
 ### Query Component Enhancements {#h3-18-query-component-enhancements}
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">// Columns now accept arrays
+```java
+// Columns now accept arrays
 query = queryNew( [ "id", "name", "email" ] )
 
 // Relaxed dbtype validation for better CFML compatibility
 query = new Query()
 query.setDatasource( "myDB" )
-query.setSQL( "SELECT * FROM users" )</pre>
+query.setSQL( "SELECT * FROM users" )
+```
+
 
 ### Oracle SQL Improvements {#h3-19-oracle-sql-improvements}
 

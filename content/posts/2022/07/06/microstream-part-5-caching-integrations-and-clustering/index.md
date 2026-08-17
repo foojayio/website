@@ -38,21 +38,27 @@ The MicroStream Cache project provides you with an implementation of the Cache s
 
 If you want to make use of it, you can add the following dependency to your project
 
-<pre class="EnlighterJSRAW" data-enlighter-language="xml" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">    &lt;dependency&gt;
-        &lt;groupId&gt;one.microstream&lt;/groupId&gt;
-        &lt;artifactId&gt;microstream-cache&lt;/artifactId&gt;
-        &lt;version&gt;${microstream.version}&lt;/version&gt;
-    &lt;/dependency&gt;</pre>
+```xml
+    <dependency>
+        <groupId>one.microstream</groupId>
+        <artifactId>microstream-cache</artifactId>
+        <version>${microstream.version}</version>
+    </dependency>
+```
+
 
 You now have the MicroStream's implementation of JCache available and can start creating caches like this one. We first create a configuration for the cache we need where we can provide a storage manager that stores the cache entries. With this configuration, we can create the actual cache from the *CacheManager*.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">    CacheConfiguration&lt;String, String&gt; configuration = CacheConfiguration
+```java
+    CacheConfiguration<String, String> configuration = CacheConfiguration
             .Builder(String.class, String.class, "jCache", storageManager)
             .expiryPolicyFactory(CreatedExpiryPolicy.factoryOf(Duration.ONE_MINUTE))
             .build();
     CacheManager cacheManager = Caching.getCachingProvider().getCacheManager();
 
-    Cache&lt;String, String&gt; capitals = cacheManager.createCache("jCache", configuration);</pre>
+    Cache<String, String> capitals = cacheManager.createCache("jCache", configuration);
+```
+
 
 But MicroStream provides more caching integrations than just JCache. You can also define it as a secondary cache for Hibernate for example. This gives it an additional functionality, your secondary cache can be restored from a previous run and thus provide more caching functionality.
 

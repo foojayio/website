@@ -48,34 +48,46 @@ The setup {#h2-2-the-setup}
 
 ### Step 1: Download the agent {#h3-4-step-1-download-the-agent}
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">wget https://github.com/open-telemetry/opentelemetry-java-instrumentation/releases/latest/download/opentelemetry-javaagent.jar</pre>
+```
+wget https://github.com/open-telemetry/opentelemetry-java-instrumentation/releases/latest/download/opentelemetry-javaagent.jar
+```
+
 
 ### Step 2: Edit `netbeans.conf` {#h3-5-step-2-edit-netbeans-conf}
 
 NetBeans reads its JVM arguments from `etc/netbeans.conf` inside the installation directory. Every option prefixed with `-J` is passed directly to the JVM. I added the following block:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">netbeans_default_options="${netbeans_default_options} \
+```
+netbeans_default_options="${netbeans_default_options} \
     -J-javaagent:/path/to/opentelemetry-javaagent.jar \
     -J-Dotel.service.name=netbeans-ide \
     -J-Dotel.service.version=30 \
     -J-Dotel.exporter.otlp.endpoint=https://ingress.europe-west4.gcp.dash0.com:4317 \
-    -J-Dotel.exporter.otlp.headers=Authorization=auth_&lt;token&gt;,Dash0-Dataset=sample \
+    -J-Dotel.exporter.otlp.headers=Authorization=auth_<token>,Dash0-Dataset=sample \
     -J-Dotel.exporter.otlp.protocol=grpc \
     -J-Dotel.traces.sampler=always_on \
     -J-Dotel.logs.exporter=otlp \
     -J-Dotel.metrics.exporter=otlp \
     -J-Dotel.instrumentation.okhttp.enabled=false \
-    -J-Dotel.instrumentation.java-http-client.enabled=false"</pre>
+    -J-Dotel.instrumentation.java-http-client.enabled=false"
+```
+
 
 The two disabled instrumentations (`okhttp`, `java-http-client`) prevent a recursive loop: the OTel agent uses OkHttp internally to export telemetry, and without this exclusion it would attempt to instrument its own export calls, creating a cycle.
 
 ### Step 3: Start NetBeans {#h3-6-step-3-start-netbeans}
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">netbeans --jdkhome /path/to/jdk21<code class="language-sh"></code></pre>
+```java
+netbeans --jdkhome /path/to/jdk21<code class="language-sh"></code>
+```
+
 
 The agent announces itself on startup:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">[otel.javaagent] INFO opentelemetry-javaagent - version: 2.28.1</pre>
+```
+[otel.javaagent] INFO opentelemetry-javaagent - version: 2.28.1
+```
+
 
 From that point on, the IDE runs normally. The agent operates invisibly, collecting data in the background.
 

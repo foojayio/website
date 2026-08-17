@@ -90,13 +90,15 @@ Apparently, **not all SSD drives are supported (yet) with USB Boot on the Raspbe
 
 This is the "dmesg" info which is logged when this drive is connected while the board is booted with another disc:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">[  567.261232] usb 2-2: new SuperSpeed Gen 1 USB device number 8 using xhci_hcd
+```
+[  567.261232] usb 2-2: new SuperSpeed Gen 1 USB device number 8 using xhci_hcd
 [  567.282283] usb 2-2: New USB device found, idVendor=1058, idProduct=2642, bcdDevice=10.03
 [  567.282293] usb 2-2: New USB device strings: Mfr=2, Product=3, SerialNumber=1
 [  567.282298] usb 2-2: Product: Game Drive
 [  567.282302] usb 2-2: Manufacturer: Western Digital
 [  567.293640] scsi host1: uas
-</pre>
+```
+
 
 Comparing Disk Speed {#comparing-disk-speed}
 --------------------------------------------
@@ -107,26 +109,34 @@ On this post ["Disk Speed Test (Read/Write): HDD, SSD Performance in Linux (shel
 
 Write a file:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ sync; dd if=/dev/zero of=tempfile bs=1M count=1024; sync
-</pre>
+```
+$ sync; dd if=/dev/zero of=tempfile bs=1M count=1024; sync
+```
+
 
 Read a file, but using the cached file, so not the real speed:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ dd if=tempfile of=/dev/null bs=1M count=1024
-</pre>
+```
+$ dd if=tempfile of=/dev/null bs=1M count=1024
+```
+
 
 Read a file, but first clear the cache to get the real speed:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ sudo /sbin/sysctl -w vm.drop_caches=3
+```
+$ sudo /sbin/sysctl -w vm.drop_caches=3
 $ dd if=tempfile of=/dev/null bs=1M count=1024
-</pre>
+```
+
 
 Test with hdparm as benchmarking tool for the read speed:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ sudo apt-get install hdparm
+```
+$ sudo apt-get install hdparm
 $ sudo hdparm -Tt /dev/sda           # For the USB disc
 $ sudo hdparm -Tt /dev/mmcblk0       # For the SD card
-</pre>
+```
+
 
 ### Results {#results}
 
@@ -143,6 +153,6 @@ Conclusion {#conclusion}
 
 Switching from SD to USB Boot is **very easy if you have a Flash Drive which is supported** and the **read speed is a lot higher** ! Combined with the **higher reliability**, this makes the switch a go go go... 😉
 
-*** ** * ** ***
+
 
 **Note:** Used with permission and thanks --- originally written and published on [Frank Delporte](https://webtechie.be/post/2020-09-29-64bit-raspbianos-on-raspberrypi4-with-usbboot/)'s blog.

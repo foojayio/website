@@ -79,20 +79,26 @@ Old-timers will have realized those are the same steps as when you need to integ
 
 We first need to create the Java skeleton methods. In Java, we learn that methods need to have a body unless they are `abstract`. Alternatively, they can be `native`: a native method delegates its implementation to a library.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public native int doubleRust(int input);</pre>
+```java
+public native int doubleRust(int input);
+```
+
 
 Next, we need to generate the corresponding C header file. To automate generation, we can leverage the Maven compiler plugin:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="xml">&lt;plugin&gt;
-    &lt;artifactId&gt;maven-compiler-plugin&lt;/artifactId&gt;
-    &lt;version&gt;3.8.1&lt;/version&gt;
-    &lt;configuration&gt;
-        &lt;compilerArgs&gt;
-            &lt;arg&gt;-h&lt;/arg&gt;                           &lt;!--1--&gt;
-            &lt;arg&gt;target/headers&lt;/arg&gt;               &lt;!--2--&gt;
-        &lt;/compilerArgs&gt;
-    &lt;/configuration&gt;
-&lt;/plugin&gt;</pre>
+```xml
+<plugin>
+    <artifactId>maven-compiler-plugin</artifactId>
+    <version>3.8.1</version>
+    <configuration>
+        <compilerArgs>
+            <arg>-h</arg>                           <!--1-->
+            <arg>target/headers</arg>               <!--2-->
+        </compilerArgs>
+    </configuration>
+</plugin>
+```
+
 
 ```
 
@@ -103,7 +109,8 @@ Next, we need to generate the corresponding C header file. To automate generatio
 
 The generated header of the above Java snippet should be the following:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="c">#include &lt;jni.h&gt;
+```c
+#include <jni.h>
 
 #ifndef _Included_ch_frankel_blog_rust_Main
 #define _Included_ch_frankel_blog_rust_Main
@@ -121,25 +128,33 @@ JNIEXPORT jint JNICALL Java_ch_frankel_blog_rust_Main_doubleRust
 #ifdef __cplusplus
 }
 #endif
-#endif</pre>
+#endif
+```
+
 
 ### Rust implementation {#h3-3-rust-implementation}
 
 Now, we can start the Rust implementation. Let's create a new project:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="shell">cargo new lib-rust</pre>
+```bash
+cargo new lib-rust
+```
 
-<pre class="EnlighterJSRAW" data-enlighter-language="raw">[package]
+
+```
+[package]
 name = "dummymath"
 version = "0.1.0"
-authors = ["Nicolas Frankel &lt;<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="b0ded9d3dfdcd1c3f0d6c2d1dedbd5dc9ed3d8">[email&nbsp;protected]</a>&gt;"]
+authors = ["Nicolas Frankel <<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="b0ded9d3dfdcd1c3f0d6c2d1dedbd5dc9ed3d8">[email protected]</a>>"]
 edition = "2018"
 
 [dependencies]
 jni = "0.19.0"                                     // 1
 
 [lib]
-crate_type = ["cdylib"]                            // 2</pre>
+crate_type = ["cdylib"]                            // 2
+```
+
 
 1. Use the `jni` crate
 2. Generate a *system* library. Several crate types are available: `cdylib` is for dynamic system libraries that you can load from other languages. You can check all other available types [in the documentation](https://doc.rust-lang.org/reference/linkage.html).
@@ -150,11 +165,13 @@ Here's an abridged of the API offered by the crate:
 
 The API maps one-to-one to the generated C code. We can use it accordingly:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="rust">#[no_mangle]
-pub extern "system" fn Java_ch_frankel_blog_rust_Main_doubleRust(_env: JNIEnv, _obj: JObject, x: jint) -&gt; jint {
+```rust
+#[no_mangle]
+pub extern "system" fn Java_ch_frankel_blog_rust_Main_doubleRust(_env: JNIEnv, _obj: JObject, x: jint) -> jint {
     x * 2
 }
-</pre>
+```
+
 
 A lot happens in the above code. Let's detail it.
 
@@ -177,7 +194,10 @@ A lot happens in the above code. Let's detail it.
 
 We can now build the project:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="shell">cargo build</pre>
+```bash
+cargo build
+```
+
 
 The build produces a system-dependent library. For example, on OSX, the artifact has a `dylib` extension; on Linux, it will have a `so` one, etc.
 
@@ -187,12 +207,15 @@ The final part is to use the generated library on the Java side. It requires fir
 
 `load()` requires the absolute path to the library, including its extension, *e.g.* , `/path/to/lib.so`. For applications that need to work across systems, that's unpractical. `loadLibrary()` allows you to only pass the library's name - without extension. Beware that libraries are loaded in the location indicated by the `java.library.path` System property.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public class Main {
+```java
+public class Main {
 
     static {
         System.loadLibrary("dummymath");
     }
-}</pre>
+}
+```
+
 
 Note that on Mac OS, the `lib` prefix is **not** part of the library's name.
 
@@ -200,7 +223,8 @@ Note that on Mac OS, the `lib` prefix is **not** part of the library's name.
 
 The above code is pretty simple: it involves a **pure** function, which depends only on its input parameter(s) by definition. Suppose we want to have something a bit more involved. We come up with a new method that multiplies the argument with another one from the object's state:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public class Main {
+```java
+public class Main {
 
     private int state;
 
@@ -220,7 +244,9 @@ The above code is pretty simple: it involves a **pure** function, which depends 
     }
 
     public native int timesRust(int input);
-}</pre>
+}
+```
+
 
 1. Should compute `arg1 * arg2`
 
@@ -228,11 +254,14 @@ The `native` method looks precisely the same as above, but its name. Hence, the 
 
 In the pure function, we didn't use the `JNIEnv` and `JObject` parameters: `JObject` represents the Java object, *i.e.* , `Main` and `JNIEnv` allows accessing its data (or behavior).
 
-<pre class="EnlighterJSRAW" data-enlighter-language="rust">#[no_mangle]
-pub extern "system" fn Java_ch_frankel_blog_rust_Main_timesRust(env: JNIEnv, obj: JObject, x: jint) -&gt; jint { // 1
+```rust
+#[no_mangle]
+pub extern "system" fn Java_ch_frankel_blog_rust_Main_timesRust(env: JNIEnv, obj: JObject, x: jint) -> jint { // 1
     let state = env.get_field(obj, "state", "I");           // 2
     state.unwrap().i().unwrap() * x                         // 3
-}</pre>
+}
+```
+
 
 1. Same as above
 2. Pass the object's reference, the field's name in Java and its type. The type refers to the correct [JVM type signature](https://docs.oracle.com/en/java/javase/11/docs/specs/jni/types.html#type-signatures), *e.g.* `"I"` for `int`.

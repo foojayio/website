@@ -25,7 +25,10 @@ The stack trace in question was a `ClassNotFoundException`, that's typically pre
 
 Despite all the hate it got over the years, `NullPointerException` is one of my favorite exceptions. You instantly know what happened and in most cases the stack leads almost directly to the problem. There are some edge cases e.g.:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">myList.get(offset).invokeMethod();</pre>
+```java
+myList.get(offset).invokeMethod();
+```
+
 
 So which one triggered the `NullPointerException`?
 
@@ -75,7 +78,8 @@ Sifting through all of those stacks and finding the one that matters is often a 
 
 E.g.:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">javax.ws.rs.ProcessingException: RESTEASY004655: Unable to invoke request: org.apache.http.conn.HttpHostConnectException: Connect to localhost:8443 [localhost/127.0.0.1, localhost/0:0:0:0:0:0:0:1] failed: Connection refused (Connection refused)
+```java
+javax.ws.rs.ProcessingException: RESTEASY004655: Unable to invoke request: org.apache.http.conn.HttpHostConnectException: Connect to localhost:8443 [localhost/127.0.0.1, localhost/0:0:0:0:0:0:0:1] failed: Connection refused (Connection refused)
     at org.jboss.resteasy.client.jaxrs.engines.ApacheHttpClient4Engine.invoke(ApacheHttpClient4Engine.java:328)
     at org.jboss.resteasy.client.jaxrs.internal.ClientInvocation.invoke(ClientInvocation.java:443)
     at org.jboss.resteasy.client.jaxrs.internal.proxy.ClientInvoker.invokeSync(ClientInvoker.java:149)
@@ -95,7 +99,7 @@ E.g.:
     at io.athena_tech.server.security.keycloak.KeycloakRealmService.lambda$doesLightrunRealmExist$0(KeycloakRealmService.java:124)
     at io.athena_tech.server.security.keycloak.KeycloakApi.getWithAdmin(KeycloakApi.java:35)
     at io.athena_tech.server.security.keycloak.KeycloakRealmService.doesLightrunRealmExist(KeycloakRealmService.java:122)
-    at io.athena_tech.server.security.keycloak.KeycloakRealmService$FastClassBySpringCGLIB$9e16800d.invoke(&lt;generated&gt;)
+    at io.athena_tech.server.security.keycloak.KeycloakRealmService$FastClassBySpringCGLIB$9e16800d.invoke(<generated>)
     at org.springframework.cglib.proxy.MethodProxy.invoke(MethodProxy.java:218)
     at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.invokeJoinpoint(CglibAopProxy.java:771)
     at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163)
@@ -105,9 +109,9 @@ E.g.:
     at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186)
     at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:749)
     at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:691)
-    at io.athena_tech.server.security.keycloak.KeycloakRealmService$EnhancerBySpringCGLIB$7eca0d51.doesLightrunRealmExist(&lt;generated&gt;)
+    at io.athena_tech.server.security.keycloak.KeycloakRealmService$EnhancerBySpringCGLIB$7eca0d51.doesLightrunRealmExist(<generated>)
     at io.athena_tech.server.service.client.InitKeycloakService.initDefaultCompanies(InitKeycloakService.java:146)
-    at io.athena_tech.server.service.client.InitKeycloakService$FastClassBySpringCGLIB$35f06991.invoke(&lt;generated&gt;)
+    at io.athena_tech.server.service.client.InitKeycloakService$FastClassBySpringCGLIB$35f06991.invoke(<generated>)
     at org.springframework.cglib.proxy.MethodProxy.invoke(MethodProxy.java:218)
     at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.invokeJoinpoint(CglibAopProxy.java:771)
     at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163)
@@ -119,7 +123,7 @@ E.g.:
     at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186)
     at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:749)
     at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:691)
-    at io.athena_tech.server.service.client.InitKeycloakService$EnhancerBySpringCGLIB$5ae1a459.initDefaultCompanies(&lt;generated&gt;)
+    at io.athena_tech.server.service.client.InitKeycloakService$EnhancerBySpringCGLIB$5ae1a459.initDefaultCompanies(<generated>)
     at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
     at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
     at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -163,13 +167,16 @@ Caused by: java.net.ConnectException: Connection refused (Connection refused)
     at java.base/java.net.Socket.connect(Socket.java:609)
     at org.apache.http.conn.ssl.SSLConnectionSocketFactory.connectSocket(SSLConnectionSocketFactory.java:368)
     at org.apache.http.impl.conn.DefaultHttpClientConnectionOperator.connect(DefaultHttpClientConnectionOperator.java:142)
-    ... 74 common frames omitted</pre>
+    ... 74 common frames omitted
+```
+
 
 Can someone tell me what I did wrong here when trying to run our server locally...
 
 Let's try to break it down starting from the lowest exception which is usually the root cause:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">Caused by: java.net.ConnectException: Connection refused (Connection refused)
+```java
+Caused by: java.net.ConnectException: Connection refused (Connection refused)
     at java.base/java.net.PlainSocketImpl.socketConnect(Native Method)
     at java.base/java.net.AbstractPlainSocketImpl.doConnect(AbstractPlainSocketImpl.java:399)
     at java.base/java.net.AbstractPlainSocketImpl.connectToAddress(AbstractPlainSocketImpl.java:242)
@@ -178,7 +185,8 @@ Let's try to break it down starting from the lowest exception which is usually t
     at java.base/java.net.Socket.connect(Socket.java:609)
     at org.apache.http.conn.ssl.SSLConnectionSocketFactory.connectSocket(SSLConnectionSocketFactory.java:368)
     at org.apache.http.impl.conn.DefaultHttpClientConnectionOperator.connect(DefaultHttpClientConnectionOperator.java:142)
-</pre>
+```
+
 
 There's a problem connecting. A connection is refused which means our server is trying to connect to some other server but it's failing.
 
@@ -186,16 +194,19 @@ So this gave us some basic information but nothing else.
 
 Let's proceed one exception upward and look at the second block. Since it's large I'll only focus on the edge of the exception:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">Caused by: org.apache.http.conn.HttpHostConnectException: Connect to localhost:8443 [localhost/127.0.0.1, localhost/0:0:0:0:0:0:0:1] failed: Connection refused (Connection refused)
+```java
+Caused by: org.apache.http.conn.HttpHostConnectException: Connect to localhost:8443 [localhost/127.0.0.1, localhost/0:0:0:0:0:0:0:1] failed: Connection refused (Connection refused)
     at org.apache.http.impl.conn.DefaultHttpClientConnectionOperator.connect(DefaultHttpClientConnectionOperator.java:156)
     at org.apache.http.impl.conn.PoolingHttpClientConnectionManager.connect(PoolingHttpClientConnectionManager.java:376)
-</pre>
+```
+
 
 Again nothing here. This is Apache connection code. But no information about who triggered it or why.
 
 So we're back all the way to the top which is less typical and here we can find the answer:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">javax.ws.rs.ProcessingException: RESTEASY004655: Unable to invoke request: org.apache.http.conn.HttpHostConnectException: Connect to localhost:8443 [localhost/127.0.0.1, localhost/0:0:0:0:0:0:0:1] failed: Connection refused (Connection refused)
+```java
+javax.ws.rs.ProcessingException: RESTEASY004655: Unable to invoke request: org.apache.http.conn.HttpHostConnectException: Connect to localhost:8443 [localhost/127.0.0.1, localhost/0:0:0:0:0:0:0:1] failed: Connection refused (Connection refused)
     at org.jboss.resteasy.client.jaxrs.engines.ApacheHttpClient4Engine.invoke(ApacheHttpClient4Engine.java:328)
     at org.jboss.resteasy.client.jaxrs.internal.ClientInvocation.invoke(ClientInvocation.java:443)
     at org.jboss.resteasy.client.jaxrs.internal.proxy.ClientInvoker.invokeSync(ClientInvoker.java:149)
@@ -206,7 +217,8 @@ So we're back all the way to the top which is less typical and here we can find 
     at org.keycloak.admin.client.token.TokenManager.getAccessToken(TokenManager.java:70)
     at org.keycloak.admin.client.token.TokenManager.getAccessTokenString(TokenManager.java:65)
     at org.keycloak.admin.client.resource.BearerAuthFilter.filter(BearerAuthFilter.java:52)
-</pre>
+```
+
 
 If you'll look a bit below you will see `org.keycloak` packages. This essentially means I forgot to launch keycloak before launching the server. This was well hidden in that stack and required a lot of domain knowledge (we use keycloak) to figure that out.
 

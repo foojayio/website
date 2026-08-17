@@ -53,13 +53,14 @@ The only real downside to this approach is that we make use of Thread#getStackTr
 
 If, for example you have some code that looks like this:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">class MySlowHandler implements EventHandler {
+```
+class MySlowHandler implements EventHandler {
    private final Random random = new Random();
 
    @Override
    public boolean action() {
        // simulate sometimes slow application logic
-       if (random.nextInt(100) &lt; 5)
+       if (random.nextInt(100) < 5)
            Jvm.pause(150);
        return true;
    }
@@ -68,15 +69,20 @@ If, for example you have some code that looks like this:
 EventGroup eg = EventGroup.builder().build();
 eg.start();
 eg.addHandler(new MySlowHandler());
-... just let it run …</pre>
+... just let it run …
+```
+
 
 Then, once the Event Loop Monitor has started (it delays for a few seconds to allow everything to get started and warm up), you will start to see:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">[main/~monitor] INFO net.openhft.chronicle.threads.VanillaEventLoop - core-event-loop thread has blocked for 102.3 ms.
+```
+[main/~monitor] INFO net.openhft.chronicle.threads.VanillaEventLoop - core-event-loop thread has blocked for 102.3 ms.
     at java.lang.Thread.sleep(Native Method)
     at net.openhft.chronicle.core.Jvm.pause(Jvm.java:484)
     at ...MySlowHandler.action(EventGroupTest2.java:40)
-    at ...</pre>
+    at ...
+```
+
 
 ### Real-world examples {#h3-3-real-world-examples}
 
@@ -86,11 +92,14 @@ The below have all happened in the real world.
 
 Many of Java's networking APIs are described as "non-blocking" but if you run some code that makes use of the TCP (or UDP) stack, together with the event loop monitor, on an untuned machine, you will see the event loop monitor firing plenty of times and highlighting blocking in the network stack e.g.:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">2022-08-16 04:39:57.806 INFO  VanillaEventLoop - tr_sbe_core-event-loop thread has blocked for 4.3 ms.
+```
+2022-08-16 04:39:57.806 INFO  VanillaEventLoop - tr_sbe_core-event-loop thread has blocked for 4.3 ms.
     at sun.nio.ch.DatagramChannelImpl.receive(DatagramChannelImpl.java:392)
     at sun.nio.ch.DatagramChannelImpl.receive(DatagramChannelImpl.java:345)
     at software.chronicle.enterprise.network.datagram.UdpHandler.action(UdpHandler.java:118)
-    at ...</pre>
+    at ...
+```
+
 
 #### Surprising synchronizeds
 
@@ -102,12 +111,13 @@ See also this[tremendous article](http://blog.pisklov.me/blog/how-to-make-java-s
 
 On a heavily loaded machine, loading up a new library such as Log4J can be expensive e.g.:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">net.openhft.chronicle.threads.MediumEventLoop - event-loop thread has blocked for 102 ms.
+```
+net.openhft.chronicle.threads.MediumEventLoop - event-loop thread has blocked for 102 ms.
     at sun.misc.Launcher$AppClassLoader.loadClass(Launcher.java:355)
     at java.lang.ClassLoader.loadClass(ClassLoader.java:351)
     at org.apache.logging.log4j.util.LoaderUtil.loadClass(LoaderUtil.java:164)
     at org.apache.logging.slf4j.Log4jLogger.createConverter(Log4jLogger.java:416)
-    at org.apache.logging.slf4j.Log4jLogger.&lt;init&gt;(Log4jLogger.java:54)
+    at org.apache.logging.slf4j.Log4jLogger.<init>(Log4jLogger.java:54)
     at org.apache.logging.slf4j.Log4jLoggerFactory.newLogger(Log4jLoggerFactory.java:37)
     at org.apache.logging.slf4j.Log4jLoggerFactory.newLogger(Log4jLoggerFactory.java:29)
     at org.apache.logging.log4j.spi.AbstractLoggerAdapter.getLogger(AbstractLoggerAdapter.java:52)
@@ -115,7 +125,9 @@ On a heavily loaded machine, loading up a new library such as Log4J can be expen
     at org.slf4j.LoggerFactory.getLogger(LoggerFactory.java:355)
     at org.slf4j.LoggerFactory.getLogger(LoggerFactory.java:380)
     at com.yourcompany.application.MyClass
-    at ...</pre>
+    at ...
+```
+
 
 In this case, the machine was heavily loaded, logging was very infrequent, and the first log caused some classloading to take place, which is an expensive (and blocking) activity.
 

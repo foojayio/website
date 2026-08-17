@@ -63,18 +63,22 @@ All code examples are from my [Java Track and Field](https://jtaf.ch/) project a
 
 First, you'll need to add the Karibu Testing dependency. In my project I use Maven but you can also use Gradle if you prefer this build tool.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&lt;dependency&gt;
-    &lt;groupId&gt;com.github.mvysny.kaributesting&lt;/groupId&gt;
-    &lt;artifactId&gt;karibu-testing-v10-spring&lt;/artifactId&gt;
-    &lt;version&gt;${karibu-testing.version}&lt;/version&gt;
-    &lt;scope&gt;test&lt;/scope&gt;
-&lt;/dependency&gt;</pre>
+```
+<dependency>
+    <groupId>com.github.mvysny.kaributesting</groupId>
+    <artifactId>karibu-testing-v10-spring</artifactId>
+    <version>${karibu-testing.version}</version>
+    <scope>test</scope>
+</dependency>
+```
+
 
 ### Base Test Class {#h3-3-base-test-class}
 
 Second, we want to create a base test class with the Karibu Testing configuration for convenience. The convenience class contains the setup and tear down of the Mock servlet and Vaadin stack. Plus a login method that lets you fake the user and roles and also a logout method.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@SpringBootTest
+```java
+@SpringBootTest
 public abstract class KaribuTest {
 
     private static Routes routes;
@@ -90,7 +94,7 @@ public abstract class KaribuTest {
 
     @BeforeEach
     public void setup() {
-        Function0&lt;UI&gt; uiFactory = UI::new;
+        Function0<UI> uiFactory = UI::new;
         SpringServlet servlet = new MockSpringServlet(routes, ctx, uiFactory);
         MockVaadin.setup(uiFactory, servlet);
     }
@@ -101,9 +105,9 @@ public abstract class KaribuTest {
         MockVaadin.tearDown();
     }
 
-    protected void login(String user, String pass, List&lt;String&gt; roles) {
-        List&lt;SimpleGrantedAuthority&gt; authorities =
-            roles.stream().map(role -&gt; new SimpleGrantedAuthority("ROLE_" + role)).toList();
+    protected void login(String user, String pass, List<String> roles) {
+        List<SimpleGrantedAuthority> authorities =
+            roles.stream().map(role -> new SimpleGrantedAuthority("ROLE_" + role)).toList();
 
         UserDetails userDetails = new User(user, pass, authorities);
         UsernamePasswordAuthenticationToken authReq = 
@@ -115,7 +119,7 @@ public abstract class KaribuTest {
         // that requires a correct MockRequest.userPrincipal and MockRequest.isUserInRole()
         FakeRequest request = (FakeRequest) VaadinServletRequest.getCurrent().getRequest();
         request.setUserPrincipalInt(authReq);
-        request.setUserInRole((principal, role) -&gt; roles.contains(role));
+        request.setUserInRole((principal, role) -> roles.contains(role));
     }
 
     protected void logout() {
@@ -124,50 +128,56 @@ public abstract class KaribuTest {
             if (VaadinServletRequest.getCurrent() != null) {
                 FakeRequest request = (FakeRequest) VaadinServletRequest.getCurrent().getRequest();
                 request.setUserPrincipalInt(null);
-                request.setUserInRole((principal, role) -&gt; false);
+                request.setUserInRole((principal, role) -> false);
             }
         } catch (IllegalStateException ignore) {
             // Ignored
         }
     }
-}</pre>
+}
+```
+
 
 ### Writing a Test {#h3-4-writing-a-test}
 
 As we want to test a protected view we first login and then navigate to the view we want to test. As mentioned above the login method fakes the login. But be aware that the application may access the user in the database so you should use a username that also exists in your database. Alternatively, you could use the UserDetailsService to load the user and roles from the database instead of faking it entirely.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">class ClubsViewTest extends KaribuTest {
+```java
+class ClubsViewTest extends KaribuTest {
 
     @BeforeEach
     public void login() {
-        login("<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="6112080c0e0f210c001315080f040d0d084f0209">[email&nbsp;protected]</a>", "", List.of(Role.ADMIN));
+        login("<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="6112080c0e0f210c001315080f040d0d084f0209">[email protected]</a>", "", List.of(Role.ADMIN));
 
         UI.getCurrent().navigate(ClubsView.class);
     }
     ...
-}</pre>
+}
+```
+
 
 After login and navigation, we check the content of the grid, add a new club, and check if it was added. To ensure that the test doesn't affect other tests we delete the club and check if it was deleted.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@Test
+```java
+@Test
 void add_club() {
     // Check content of clubs grid
-    Grid&lt;ClubRecord&gt; clubsGrid = LocatorJ._get(Grid.class, spec -&gt; spec.withId("clubs-grid"));
+    Grid<ClubRecord> clubsGrid = LocatorJ._get(Grid.class, spec -> spec.withId("clubs-grid"));
     assertThat(GridKt._size(clubsGrid)).isEqualTo(4);
     assertThat(GridKt._get(clubsGrid, 0).getName()).isEqualTo("Erlach");
 
     // Add new club
-    LocatorJ._get(Button.class, spec -&gt; spec.withId("add-button")).click();
+    LocatorJ._get(Button.class, spec -> spec.withId("add-button")).click();
     LocatorJ._assert(ClubDialog.class, 1);
 
     // Test maximize and restore
-    Button toggle = LocatorJ._get(Button.class, spec -&gt; spec.withId("toggle"));
+    Button toggle = LocatorJ._get(Button.class, spec -> spec.withId("toggle"));
     toggle.click();
     toggle.click();
 
-    LocatorJ._get(TextField.class, spec -&gt; spec.withCaption("Abbreviation")).setValue("Test");
-    LocatorJ._get(TextField.class, spec -&gt; spec.withCaption("Name")).setValue("Test");
-    LocatorJ._get(Button.class, spec -&gt; spec.withCaption("Save")).click();
+    LocatorJ._get(TextField.class, spec -> spec.withCaption("Abbreviation")).setValue("Test");
+    LocatorJ._get(TextField.class, spec -> spec.withCaption("Name")).setValue("Test");
+    LocatorJ._get(Button.class, spec -> spec.withCaption("Save")).click();
 
     // Check if club was added
     assertThat(GridKt._size(clubsGrid)).isEqualTo(5);
@@ -175,16 +185,18 @@ void add_club() {
 
     // Remove club
     GridKt._getCellComponent(clubsGrid, 0, "edit-column").getChildren()
-          .filter(component -&gt; component instanceof Button).findFirst().map(component -&gt; (Button) component)
+          .filter(component -> component instanceof Button).findFirst().map(component -> (Button) component)
           .ifPresent(Button::click);
 
     ConfirmDialog confirmDialog = LocatorJ._get(ConfirmDialog.class);
     assertThat(confirmDialog.isOpened()).isTrue();
-    LocatorJ._get(Button.class, spec -&gt; spec.withId("delete-confirm-dialog-confirm")).click();
+    LocatorJ._get(Button.class, spec -> spec.withId("delete-confirm-dialog-confirm")).click();
 
     // Check if club was removed
     assertThat(GridKt._size(clubsGrid)).isEqualTo(4);
-}</pre>
+}
+```
+
 
 There are two classes of Karibu Testing involved: LocatorJ and GridKt. Karibu Testing is written in Kotlin and for Java there is a special LocatorJ class written in Java to access the components. Additionally, it provides helper classes for certain components like the Grid to access properties or execute methods like in the case above the size of the grid.
 

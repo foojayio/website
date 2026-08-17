@@ -34,12 +34,18 @@ If you haven't already, create the `HelloUniverse.java` file [as listed in the p
 
 Now let's delete the class file. You'll understand why in a moment:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">rm HelloUniverse.class</pre>
+```
+rm HelloUniverse.class
+```
+
 
 Now if you run the class only with the `java` interpreter, without compilation, as in:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&gt; java HelloUniverse.java
-Hello foojay!</pre>
+```
+> java HelloUniverse.java
+Hello foojay!
+```
+
 
 You should see the same result as before: it runs.
 

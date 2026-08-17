@@ -31,7 +31,7 @@ The application itself doesn't even exist yet.
 
 So, here's the prompt that gets you from really zero to OpenTelemetry:
 
-*** ** * ** ***
+
 
 **Create a minimal Spring Boot app from scratch in this directory with two endpoints: GET /hello returning a greeting, and GET /work that sleeps 50--200ms and returns a JSON payload. Use Maven and Java 21.**   
 **Then instrument it with OpenTelemetry to send traces, metrics, and logs to Dash0 using the otel-instrumentation skill.**   
@@ -46,7 +46,7 @@ Service version and namespace as appropriate resource attributes**
 **Use the OpenTelemetry Java agent (-javaagent:opentelemetry-javaagent.jar) --- download it into the project. Don't hardcode the token in source; put env vars in a run.sh script that's gitignored, and document everything in a README. Follow OpenTelemetry semantic conventions for any custom spans or attributes you add.**   
 **When done, show me the exact commands to run the app and generate some traffic.**
 
-*** ** * ** ***
+
 
 <br />
 
@@ -69,9 +69,12 @@ You should end up with, roughly `pom.xml`, `src/main/java/.../Application.java` 
 
 Then run it (also fine to do in your AI prompt):
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">./run.sh
+```
+./run.sh
 # in another terminal, generate traffic:
-for i in {1..50}; do curl -s localhost:8080/hello; curl -s localhost:8080/work; done</pre>
+for i in {1..50}; do curl -s localhost:8080/hello; curl -s localhost:8080/work; done
+```
+
 
 Then in Dash0 go to the **Trace Explorer** --- filter by `service.name = dash0-java-demo`, you should see `GET /hello` and `GET /work` spans within 10--30 seconds.
 ![](dash0-foojay-2-1024x545.png)

@@ -32,33 +32,45 @@ The TornadoVM API exposes two methods to configure which data correspond to the 
 
 If you configure your TaskGraph to accept inputs in every execution, it will copy the new values of your variables (e.g., matrixA and matrixB) every time the TaskGraph is executed (i.e., executionPlan.execute()).
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">TaskGraph tg = new TaskGraph("s0")
+```java
+TaskGraph tg = new TaskGraph("s0")
       .transferToDevice(DataTransferMode.EVERY_EXECUTION, matrixA, matrixB)
       .task("t0", MxM::compute, context, matrixA, matrixB, matrixC, size)
-      .transferToHost(DataTransferMode.EVERY_EXECUTION, matrixC);</pre>
+      .transferToHost(DataTransferMode.EVERY_EXECUTION, matrixC);
+```
+
 
 ### b) Transferring input data only in the first execution {#h3-2-b-transferring-input-data-only-in-the-first-execution}
 
 If you configure your TaskGraph with the **DataTransferMode.FIRST_EXECUTION**, it will copy the input data only once during the first execution, indicating that they are read-only; so, your program will not modify the values of your variables (e.g., matrixA and matrixB) after the first execution (i.e., executionPlan.execute()).
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">TaskGraph tg = new TaskGraph("s0")
+```java
+TaskGraph tg = new TaskGraph("s0")
       .transferToDevice(DataTransferMode.FIRST_EXECUTION, matrixA, matrixB)
       .task("t0", MxM::compute, context, matrixA, matrixB, matrixC, size)
-      .transferToHost(DataTransferMode.EVERY_EXECUTION, matrixC);</pre>
+      .transferToHost(DataTransferMode.EVERY_EXECUTION, matrixC);
+```
+
 
 ### c) Transferring output data under demand {#h3-3-c-transferring-output-data-under-demand}
 
 Regardless, the configuration of the input data (a, b), you must also define the transferring mode for the outputs of your TaskGraph. Two modes are available: i) the transferring of the outputs after every execution; when the executionPlan.execute() is completed; and ii) the transferring of the outputs under demand.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">TaskGraph tg = new TaskGraph("s0")
+```java
+TaskGraph tg = new TaskGraph("s0")
       .transferToDevice(DataTransferMode.FIRST_EXECUTION, matrixA, matrixB)
       .task("t0", MxM::compute, context, matrixA, matrixB, matrixC, size)
-      .transferToHost(DataTransferMode.UNDER_DEMAND, matrixC);</pre>
+      .transferToHost(DataTransferMode.UNDER_DEMAND, matrixC);
+```
+
 
 The under demand mode can be used if your program does not require the result of the processing to be transferred from the accelerator's memory after every execution. In this case, the programmer can obtain the result on demand by utilizing the **TornadoExecutionResult** object. This object is returned after every invocation of the execute() method to hold the result of each execution:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">TornadoExecutionResult executionResult = executionPlan.execute();
-executionResult.transferToHost(matrixC);</pre>
+```java
+TornadoExecutionResult executionResult = executionPlan.execute();
+executionResult.transferToHost(matrixC);
+```
+
 
 **Note:** The **executionPlan.execute()** is a blocking call that performs all the steps (see the screenshot from the Java editor) in the executionPlan as defined by the programmer.  
 
@@ -77,9 +89,12 @@ In this case, TornadoVM supports [++batch processing++](https://tornadovm.readth
 
 The split and streaming is handled automatically by the TornadoVM runtime. Thus, the 20 GB of data will be split in chunks of 512 MB and will be sent for execution on the GPU.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">ImmutableTaskGraph immutableTaskGraph = taskGraph.snapshot();
+```
+ImmutableTaskGraph immutableTaskGraph = taskGraph.snapshot();
 TornadoExecutionPlan plan = new TornadoExecutionPlan(immutableTaskGraph);
-plan.withBatch("512MB") // Run in blocks of 512MB</pre>
+plan.withBatch("512MB") // Run in blocks of 512MB
+```
+
 
 <br />
 
@@ -90,9 +105,12 @@ Pattern 3. Transfer only a short range of the result from the GPU memory {#h2-5-
 
 TornadoVM also supports the transferring of a small piece of the output data. This may be useful if your program operates on large arrays, and you are interested only at a partial segment of the output array. In this case, you can access a partial segment (e.g., just the first element of the array), as shown below (assuming that the data are defined to operate under demand, i.e., **DataTransferMode.UNDER_DEMAND**, as shown in Pattern 1-C).
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">TornadoExecutionResult executionResult = executionPlan.execute();
+```java
+TornadoExecutionResult executionResult = executionPlan.execute();
 DataRange dataRange = new DataRange(matrixC);
-executionResult.transferToHost(dataRange.withSize(1).withOffset(0));</pre>
+executionResult.transferToHost(dataRange.withSize(1).withOffset(0));
+```
+
 
 An example of this API call is shown in one of the TornadoVM unit-tests, [here](https://github.com/beehive-lab/TornadoVM/blob/faffab7ee2fc9c9f06ece7f7e5f075fc056f379a/tornado-unittests/src/main/java/uk/ac/manchester/tornado/unittests/api/TestAPI.java#L283). Several variations of the above code snippet are shown in the following image.  
 

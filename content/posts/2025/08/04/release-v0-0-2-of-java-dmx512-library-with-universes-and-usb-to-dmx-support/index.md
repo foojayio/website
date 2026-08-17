@@ -46,7 +46,8 @@ For my tests, I'm using an [JUNELIONY ArtNet 1024 2-Port Sulite DMX LAN512 2-Por
 
 A new object `DMXUniverse` has been introduced to support the use of universes, defined by an `id and a list of `DMXClient\`. Check [this demo code for a full example](https://github.com/codewriterbv/DMX512/blob/main/src/main/java/be/codewriter/dmx512/demo/IPTwoUniversesDemo.java). This is the simplified code:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">// Load moving head fixture from an OFL file
+```
+// Load moving head fixture from an OFL file
 Fixture movingHead = getFixture("picospot-20-led.json");
 var movingHeadMode = movingHead.getModeByName("11-channel");
 
@@ -73,7 +74,9 @@ controller.render(universe1);
 // Universe 2 (= DMX2): Set RGBs green and red
 rgb1.setValue("green", (byte) 255);
 rgb2.setValue("red", (byte) 255);
-controller.render(universe2);</pre>
+controller.render(universe2);
+```
+
 
 USB-to-DMX Support {#h2-1-usb-to-dmx-support}
 ---------------------------------------------
@@ -84,7 +87,8 @@ USB-to-DMX seems to be more challenging compared to the IP-to-DMX ArtNet protoco
 
 [Multiple example implementations are available in the sources](https://github.com/codewriterbv/DMX512/blob/main/src/main/java/be/codewriter/dmx512/Main.java#L59), this is a simplified version:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">// Get a list of all available serial ports
+```
+// Get a list of all available serial ports
 var ports = DMXSerialDiscoverTool.getAvailablePorts();
 
 // Log the serial ports
@@ -105,18 +109,23 @@ DMXClient client = new DMXClient(23, fixture);
 DMXUniverse universe = new DMXUniverse(0, client);
 client.setValue("dimmer", (byte) 255);
 client.setValue("red", (byte) 255);
-controller.render(universe);</pre>
+controller.render(universe);
+```
+
 
 DMX512 Java Library {#h2-2-dmx512-java-library}
 -----------------------------------------------
 
 The library I created is open-source with its [sources on GitHub](https://github.com/codewriterbv/DMX512/) and [releases on Maven Central](https://central.sonatype.com/artifact/be.codewriter/dmx512).
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&lt;dependency&gt;
-    &lt;groupId&gt;be.codewriter&lt;/groupId&gt;
-    &lt;artifactId&gt;dmx512&lt;/artifactId&gt;
-    &lt;version&gt;${dmx512.version}&lt;/version&gt;
-&lt;/dependency&gt;</pre>
+```
+<dependency>
+    <groupId>be.codewriter</groupId>
+    <artifactId>dmx512</artifactId>
+    <version>${dmx512.version}</version>
+</dependency>
+```
+
 
 DMX512 JavaFX Demo Project {#h2-3-dmx512-javafx-demo-project}
 -------------------------------------------------------------
@@ -129,7 +138,8 @@ Next Steps {#h2-4-next-steps}
 
 I also have an Enttec Open DMX USB interface, but I didn't get it working yet... With a chat-based coding approach, I have implemented several serial DMX512 protocols that you can test, but none have resulted in a working solution. I reached out to Enttec for more information about the protocol, but I haven't received a reply yet.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public enum SerialProtocol {
+```
+public enum SerialProtocol {
     /**
      * Simple serial transmission
      */
@@ -146,7 +156,9 @@ I also have an Enttec Open DMX USB interface, but I didn't get it working yet...
      * Generic serial-based DMX
      */
     GENERIC_SERIAL
-}</pre>
+}
+```
+
 
 If a solution for this interface can be found, or if other changes or improvements are added, a new version will be released.
 

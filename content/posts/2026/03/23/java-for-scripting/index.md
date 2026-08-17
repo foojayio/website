@@ -46,7 +46,8 @@ The first problem if you want to write a Java script is compilation. You probabl
 
 Let's say you want to rewrite `ls` in Java. You might do something like this:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">import java.io.IOException;
+```java
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.attribute.PosixFilePermissions;
@@ -57,7 +58,7 @@ public class ListFiles {
     static void main(String[] args) throws IOException {
         try (var stream = Files.list(Path.of("."))) {
             stream
-                .filter(path -&gt; !path.getFileName().toString().startsWith("."))
+                .filter(path -> !path.getFileName().toString().startsWith("."))
                 .sorted()
                 .forEach(ListFiles::printEntry);
         }
@@ -100,12 +101,15 @@ public class ListFiles {
         }
     }
 }
-</pre>
+```
+
 
 If you want to run it, no need for `javac`, you can simply do this:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash">java ListFiles.java
-</pre>
+```bash
+java ListFiles.java
+```
+
 
 No `javac` needed. No `.class` files cluttering your directory. Just instant execution.
 
@@ -113,7 +117,8 @@ No `javac` needed. No `.class` files cluttering your directory. Just instant exe
 
 But since **Java 22** (via [JEP 458](https://openjdk.org/jeps/458), you're not limited to single-file programs. You can now write multi-file programs and run them directly. The Java launcher locates and compiles related source files in subdirectories. For instance if you have something like this:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public class Greet {
+```java
+public class Greet {
 
     public static void main(String[] args) {
         var message = new Message("Hello", "Folks");
@@ -121,25 +126,32 @@ But since **Java 22** (via [JEP 458](https://openjdk.org/jeps/458), you're not l
 
     }
 }
-</pre>
+```
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">record Message(String welcomingWord, String name) {
+
+```java
+record Message(String welcomingWord, String name) {
 }
-</pre>
+```
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">class MessagingService {
+
+```java
+class MessagingService {
 
     public void sendMessage(Message message){
         System.out.println(message.welcomingWord() + " " + message.name());
     }
 
 }
-</pre>
+```
+
 
 This is just an overcomplicated "Hello World!". But it shows that multi-file programs can run directly:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash">java Greet.java  # Automatically finds and compiles dependencies
-</pre>
+```bash
+java Greet.java  # Automatically finds and compiles dependencies
+```
+
 
 This feature is especially useful for complex scripts that require multiple classes. It's also great for learners who don't want to deal with project setup.
 
@@ -150,12 +162,14 @@ Why so much ceremony? {#h2-4-why-so-much-ceremony}
 
 One key thing for a good scripting language is to eliminate boilerplate. Let's be honest, Java can be a bit verbose. The most infamous example is the `public static void main(String[] args)` signature. If you just want a simple script, that's a lot of text that doesn't serve much purpose. Printing "Hello World!" requires at least 5 lines, mostly boilerplate.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public class HelloWorld {
+```java
+public class HelloWorld {
     public static void main(String[] args) {
         System.out.println("Hello, World!");
     }
 }
-</pre>
+```
+
 
 ### The Java Evolution {#h3-5-the-java-evolution}
 
@@ -167,10 +181,12 @@ Java 25 builds upon previews from Java 21 and 22. It introduces several features
 
 With these features, a "Hello World" can become as simple as this:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">void main() {
+```java
+void main() {
     System.out.println("Java");
 }
-</pre>
+```
+
 
 The JVM automatically chooses the starting point, prioritizing instance `main()` methods when available. This makes your scripts feel more natural and less like traditional enterprise Java.
 
@@ -178,7 +194,8 @@ The JVM automatically chooses the starting point, prioritizing instance `main()`
 
 In the past interacting with the console was a bit cumbersome. First everytime you want to print something to the console, you end up typing `System.out.println("...")`. But it gets worse when you want to read input. You need to go through the gymnastics of using `BufferedReader` or `Scanner`. So you quickly end up with code like this:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">import java.io.BufferedReader;
+```java
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
@@ -193,16 +210,19 @@ void main() {
     }
     System.out.println("Hello, " + name);
 }
-</pre>
+```
+
 
 Thanks to `Compact Source Files`, you can now use the `IO` class instead:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">void main() {
+```java
+void main() {
     String name = IO.readln("Please enter your name:");
     IO.print("Hello, ");
     IO.println(name);
 }
-</pre>
+```
+
 
 The IO class lives in `java.lang`, so it's implicitly imported by every source file.
 
@@ -217,7 +237,8 @@ Since **Java 11** (via [JEP 330](https://openjdk.org/jeps/330)), the `java` laun
 
 Let's refactor our `ListFiles` example into a proper, executable script using the modern Java features we've discussed:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">#!/usr/bin/java --source 25
+```java
+#!/usr/bin/java --source 25
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -226,7 +247,7 @@ import java.nio.file.attribute.PosixFilePermissions;
 import java.text.DecimalFormat;
 
 void main(String[] args) throws IOException {
-    var dir = Path.of(args.length &gt; 0 ? args[0] : ".");
+    var dir = Path.of(args.length > 0 ? args[0] : ".");
     if (!Files.exists(dir)) {
         IO.println("Error: Directory '" + dir + "' does not exist.");
         System.exit(1);
@@ -238,7 +259,7 @@ void main(String[] args) throws IOException {
 
     try (var stream = Files.list(dir)) {
         stream
-            .filter(path -&gt; !path.getFileName().toString().startsWith("."))
+            .filter(path -> !path.getFileName().toString().startsWith("."))
             .sorted()
             .forEach(this::printEntry);
     }
@@ -280,21 +301,26 @@ String permissions(Path path, boolean isDir) {
                (Files.isExecutable(path) ? "x" : "-") + "------";
     }
 }
-</pre>
+```
+
 
 Save the file (e.g., as `ls`) without a `.java` extension and make it executable:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash">chmod +x ls
+```bash
+chmod +x ls
 ./ls
-</pre>
+```
+
 
 Your Java code is now a first-class CLI command, no different from a Bash or Python script.
 
 **Portability Tip:** Move your script to a directory in your `PATH`, like `/usr/local/bin/`:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash">sudo mv ls /usr/local/bin/
+```bash
+sudo mv ls /usr/local/bin/
 ls  # Run from any directory
-</pre>
+```
+
 
 Suddenly, Java feels like a native scripting language.
 
@@ -311,8 +337,10 @@ You can also use JBang to run any JAR file, whether local or online (via Maven C
 
 Running a JBang script is as easy as:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash">jbang MyScript.java
-</pre>
+```bash
+jbang MyScript.java
+```
+
 
 ### Dependency Management {#h3-10-dependency-management}
 
@@ -320,7 +348,8 @@ This is where JBang truly shines. Declare dependencies directly in your file usi
 
 Notice the `///` shebang line, which is specific to JBang and allows the script to be executed directly.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">///usr/bin/env jbang "$0" "$@" ; exit $?
+```java
+///usr/bin/env jbang "$0" "$@" ; exit $?
 //DEPS com.google.code.gson:gson:2.10.1
 //DEPS org.apache.commons:commons-lang3:3.14.0
 
@@ -335,7 +364,8 @@ void main() {
 }
 
 record Person(String name, int age) {}
-</pre>
+```
+
 
 JBang automatically downloads and manages these dependencies. No Maven. No Gradle. Just declare and use.
 
@@ -345,20 +375,25 @@ JBang offers a lot of advanced features:
 
 **IDE Integration**: JBang can install VSCodium, generate a project structure, and open the script in your IDE:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash">jbang edit MyScript.java  # Opens in your IDE with full autocomplete
-</pre>
+```bash
+jbang edit MyScript.java  # Opens in your IDE with full autocomplete
+```
+
 
 **Native Binaries** : It supports the generation of native image binaries using [GraalVM](https://www.graalvm.org/) for near-instant startup:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash">jbang export native MyScript.java
+```bash
+jbang export native MyScript.java
 ./MyScript  # Blazing fast native execution
-</pre>
+```
+
 
 Be careful with native images, especially regarding reflection. More on this [here](https://www.jbang.dev/documentation/jbang/latest/native-images.html)
 
 **Templates**: JBang comes with a set of templates to help you quickly bootstrap your scripts.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash"># Create a CLI app
+```bash
+# Create a CLI app
 jbang init --template=cli myapp.java
 
 # Create a web server
@@ -366,7 +401,8 @@ jbang init --template=qcli webapp.java
 
 # Create a JavaFX app
 jbang init --template=javafx gui.java
-</pre>
+```
+
 
 Elevating Your Scripts: CLI Richness with Picocli {#h2-12-elevating-your-scripts-cli-richness-with-picocli}
 -----------------------------------------------------------------------------------------------------------
@@ -377,7 +413,8 @@ Simple scripts are great place to start. However, you'll often want options, pos
 
 Picocli integrates perfectly with JBang for ANSI-colored help messages and strongly-typed argument parsing. Build professional CLIs with auto-generated help, version info, type checking, and beautiful error messages.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">///usr/bin/env jbang "$0" "$@" ; exit $?
+```java
+///usr/bin/env jbang "$0" "$@" ; exit $?
 
 //DEPS info.picocli:picocli:4.7.7
 //DEPS info.picocli:picocli-codegen:4.7.7
@@ -398,7 +435,7 @@ class Greet implements Runnable {
     String[] names;
 
     public void run() {
-        for (int i = 0; i &lt; count; i++) {
+        for (int i = 0; i < count; i++) {
             for (String name : names) {
                 IO.println("Hello, " + name + "!");
             }
@@ -409,13 +446,16 @@ class Greet implements Runnable {
 void main(String[] args) {
     new CommandLine(new Greet()).execute(args);
 }
-</pre>
+```
+
 
 Run it:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash">jbang greet.java --help
+```bash
+jbang greet.java --help
 jbang greet.java -c 3 Alice Bob
-</pre>
+```
+
 
 ### Zero-Code CLI Experience {#h3-14-zero-code-cli-experience}
 

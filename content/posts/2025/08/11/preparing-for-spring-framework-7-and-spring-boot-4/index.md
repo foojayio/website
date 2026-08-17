@@ -40,15 +40,18 @@ Spring Framework 7 introduces powerful resilience tools directly into its core:
 * **@ConcurrencyLimit:**Limits concurrent method invocations to protect services and resources---for example, by restricting access to a single thread.
 * Enable both annotations using **@EnableResilientMethods** or by registering specific post-processors. For more details, please go read through [here](https://docs.spring.io/spring-framework/docs/7.0.0-M7/javadoc-api/org/springframework/resilience/annotation/EnableResilientMethods.html)
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@Configuration
+```java
+@Configuration
 @EnableResilientMethods
 public class ApplicationConfig {
 }
-</pre>
+```
+
 
 Service with **@Retryable** and **@ConcurrentLimit**
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@Service
+```java
+@Service
 public class PaymentService {
 
     private int callCount = 0;
@@ -62,14 +65,15 @@ public class PaymentService {
         callCount++;
         System.out.println("Attempt " + callCount + " to process payment: " + paymentId);
 
-        if (Math.random() &gt; 0.3) {
+        if (Math.random() > 0.3) {
             throw new RuntimeException("Simulated failure");
         }
 
         System.out.println("Payment processed: " + paymentId);
     }
 }
-</pre>
+```
+
 
 ### 2. Fluent JMS Client API {#h3-1-2-fluent-jms-client-api}
 
@@ -117,7 +121,7 @@ Spring Framework now supports **Jackson 3.x** and provides migration guidance fo
 
 Introduces **JSpecify** for null safety that certainly replaces the former `org.springframework.lang.*` annotation. This is going to be the standard annotation approach for ***nullness*** . For more details, see <https://spring.io/blog/2025/03/10/null-safety-in-spring-apps-with-jspecify-and-null-away>
 
-*** ** * ** ***
+
 
 Spring Boot 4 is a significant leap forward in modernizing how Spring applications are developed, configured, and deployed. This milestone marks the beginning of a more modular, extensible, and developer-friendly version of the framework. Let's understand some of the significant enhancements in Spring Boot 4 and how they impact developers.
 
@@ -127,7 +131,10 @@ It introduces a major architectural shift by **breaking up the internal codebase
 
 Each module starts with a dedicated package, such as
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">org.springframework.&lt;module&gt;</pre>
+```java
+org.springframework.<module>
+```
+
 
 Depending on the module's purpose, it can include:
 
@@ -172,16 +179,17 @@ One of the most developer-friendly updates in Spring Boot 4.0 is support for ***
 * Spring Boot allowed only one.`TaskDecorator`
 * For multiple decorators (e.g., for tracing and logging), we need to manually chain them in a custom decorator.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@Bean
+```java
+@Bean
 public TaskDecorator customTaskDecorator() {
-    return runnable -&gt; {
+    return runnable -> {
         Runnable decoratedWithTracing = tracingDecorator().decorate(runnable);
         return loggingDecorator().decorate(decoratedWithTracing);
     };
 }
 
 public TaskDecorator tracingDecorator() {
-    return runnable -&gt; () -&gt; {
+    return runnable -> () -> {
         System.out.println("Tracing Start");
         runnable.run();
         System.out.println("Tracing End");
@@ -189,13 +197,14 @@ public TaskDecorator tracingDecorator() {
 }
 
 public TaskDecorator loggingDecorator() {
-    return runnable -&gt; () -&gt; {
+    return runnable -> () -> {
         System.out.println("Logging Start");
         runnable.run();
         System.out.println("Logging End");
     };
 }
-</pre>
+```
+
 
 In the above code snippet,
 
@@ -206,10 +215,11 @@ In the above code snippet,
 
 Spring Boot automatically creates a **CompositeTaskDecorator** that chains all available decorators in the order specified using the **@Order** annotation:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@Bean
+```java
+@Bean
 @Order(1)
 public TaskDecorator tracingDecorator() {
-    return runnable -&gt; () -&gt; {
+    return runnable -> () -> {
         System.out.println("Tracing Start");
         runnable.run();
         System.out.println("Tracing End");
@@ -219,12 +229,14 @@ public TaskDecorator tracingDecorator() {
 @Bean
 @Order(2)
 public TaskDecorator loggingDecorator() {
-    return runnable -&gt; () -&gt; {
+    return runnable -> () -> {
         System.out.println("Logging Start");
         runnable.run();
         System.out.println("Logging End");
     };
-}</pre>
+}
+```
+
 
 When the task runs, Spring applies decorators in order:
 

@@ -119,7 +119,8 @@ Apache APISIX is based on a plugin architecture and offers an OpenTelemetry plug
 
 Let's configure the `opentelemetry` plugin:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml">apisix:
+```yaml
+apisix:
   enable_admin: false              #1
   config_center: yaml              #1
 plugins:
@@ -129,7 +130,9 @@ plugin_attr:
     resource:
       service.name: APISIX         #3
     collector:
-      address: jaeger:4318         #4</pre>
+      address: jaeger:4318         #4
+```
+
 
 1. Run Apache APISIX in standalone mode to make the demo easier to follow. It's a good practice in production anyway
 2. Configure `opentelemetry` as a global plugin
@@ -138,12 +141,15 @@ plugin_attr:
 
 We want to trace every route, so instead of adding the plugin to each route, we should set up the plugin as a global one:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml">global_rules:
+```yaml
+global_rules:
   - id: 1
     plugins:
       opentelemetry:
         sampler:
-          name: always_on          #1</pre>
+          name: always_on          #1
+```
+
 
 1. Tracing has an impact on performance. The more we trace, the more we impact. Hence, we should carefully balance the performance impact vs. the benefits of observability. For the demo, however, we want to trace every request.
 
@@ -166,13 +172,16 @@ The image's [relevant ports](https://www.jaegertracing.io/docs/1.37/getting-star
 
 The Docker Compose bit looks like this:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml">services:
+```yaml
+services:
   jaeger:
     image: jaegertracing/all-in-one:1.37           #1
     environment:
       - COLLECTOR_OTLP_ENABLED=true                #2
     ports:
-      - "16686:16686"                              #3</pre>
+      - "16686:16686"                              #3
+```
+
 
 1. Use the `all-in-one` image
 2. Very important: enable the collector in OpenTelemetry format
@@ -185,8 +194,9 @@ Traces in Flask apps {#h2-5-traces-in-flask-apps}
 
 The `pricing` service is a simple [Flask](https://flask.palletsprojects.com/) application. It offers a single endpoint to fetch the price of a single product from the database.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="python">@app.route('/price/&lt;product_str&gt;')                           #1-2
-def price(product_str: str) -&gt; Dict[str, object]:
+```python
+@app.route('/price/<product_str>')                           #1-2
+def price(product_str: str) -> Dict[str, object]:
     product_id = int(product_str)
     price: Price = Price.query.get(product_id)               #3
     if price is None:
@@ -197,7 +207,9 @@ def price(product_str: str) -&gt; Dict[str, object]:
         return {
             'product_id': product_id,
             'price': round(uniform(low, high), 2)            #4
-        }</pre>
+        }
+```
+
 
 1. Endpoint
 2. The route requires the product's id
@@ -210,19 +222,25 @@ Now is the time to instrument the application. Two options are available: automa
 
 We need to add a couple of Python packages:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">opentelemetry-distro[otlp]==0.33b0
+```
+opentelemetry-distro[otlp]==0.33b0
 opentelemetry-instrumentation
-opentelemetry-instrumentation-flask</pre>
+opentelemetry-instrumentation-flask
+```
+
 
 We need to configure a couple of parameters:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml">pricing:
+```yaml
+pricing:
   build: ./pricing
   environment:
     OTEL_EXPORTER_OTLP_ENDPOINT: http://jaeger:4317     #1
     OTEL_RESOURCE_ATTRIBUTES: service.name=pricing      #2
     OTEL_METRICS_EXPORTER: none                         #3
-    OTEL_LOGS_EXPORTER: none                            #3</pre>
+    OTEL_LOGS_EXPORTER: none                            #3
+```
+
 
 1. Send the traces to Jaeger
 2. Set the name of the service.  
@@ -239,14 +257,17 @@ Just with this, we already collect spans from method calls and Flask routes.
 
 We can manually add additional spans if needed, *e.g.*:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="python">from opentelemetry import trace
+```python
+from opentelemetry import trace
 
-@app.route('/price/&lt;product_str&gt;')
-def price(product_str: str) -&gt; Dict[str, object]:
+@app.route('/price/<product_str>')
+def price(product_str: str) -> Dict[str, object]:
     product_id = int(product_str)
     with tracer.start_as_current_span("SELECT * FROM PRICE WHERE ID=:id", attributes={":id": product_id}) as span: #1
         price: Price = Price.query.get(product_id)
-    # ...</pre>
+    # ...
+```
+
 
 1. Add an additional span with the configured label and attribute
 
@@ -270,14 +291,17 @@ As in Python, it creates spans for every method call and HTTP entry point. It al
 
 We need to configure the default behavior:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml">catalog:
+```yaml
+catalog:
   build: ./catalog
   environment:
     APP_PRICING_ENDPOINT: http://pricing:5000/price
     OTEL_EXPORTER_OTLP_ENDPOINT: http://jaeger:4317     #1
     OTEL_RESOURCE_ATTRIBUTES: service.name=orders       #2
     OTEL_METRICS_EXPORTER: none                         #3
-    OTEL_LOGS_EXPORTER: none                            #3</pre>
+    OTEL_LOGS_EXPORTER: none                            #3
+```
+
 
 1. Send the traces to Jaeger
 2. Set the name of the service. It's the name that will appear in the trace display component
@@ -287,11 +311,14 @@ As for Python, we can up the game by adding manual instrumentation. Two options 
 
 We need an additional dependency:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="xml">&lt;dependency&gt;
-    &lt;groupId&gt;io.opentelemetry.instrumentation&lt;/groupId&gt;
-    &lt;artifactId&gt;opentelemetry-instrumentation-annotations&lt;/artifactId&gt;
-    &lt;version&gt;1.17.0-alpha&lt;/version&gt;
-&lt;/dependency&gt;</pre>
+```xml
+<dependency>
+    <groupId>io.opentelemetry.instrumentation</groupId>
+    <artifactId>opentelemetry-instrumentation-annotations</artifactId>
+    <version>1.17.0-alpha</version>
+</dependency>
+```
+
 
 Be careful, the artifact was very recently relocated from `io.opentelemetry:opentelemetry-extension-annotations`.  
 
@@ -299,12 +326,15 @@ Also, please notice the `-alpha` suffix at the end of the version. OpenTelemetry
 
 We can now annotate our code:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="kotlin">@WithSpan("ProductHandler.fetch")                                               //1
-suspend fun fetch(@SpanAttribute("id") id: Long): Result&lt;Product&gt; {             //2
+```kotlin
+@WithSpan("ProductHandler.fetch")                                               //1
+suspend fun fetch(@SpanAttribute("id") id: Long): Result<Product> {             //2
     val product = repository.findById(id)
     return if (product == null) Result.failure(IllegalArgumentException("Product $id not found"))
     else Result.success(product)
-}</pre>
+}
+```
+
 
 1. Add an additional span with the configured label
 2. Use the parameter as an attribute, with the key set to `id` and the value the parameter's runtime value
@@ -314,8 +344,11 @@ The result! {#h2-7-the-result}
 
 We can now play with our simple demo to see the result:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash">curl localhost:9080/products
-curl localhost:9080/products/1</pre>
+```bash
+curl localhost:9080/products
+curl localhost:9080/products/1
+```
+
 
 The responses are not interesting, but let's look at the Jaeger UI. We find both traces, one per call:
 

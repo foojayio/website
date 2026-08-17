@@ -67,12 +67,15 @@ Implementing Jakarta Data in a Jakarta EE 11 project is straightforward. Below a
 
 ```
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@Repository
+```
+@Repository
 public interface ProductRepository {
-  @Find List&lt;Product&gt; findByCategory(String category);
-  @Find Optional&lt;Product&gt; findByName(String name);
+  @Find List<Product> findByCategory(String category);
+  @Find Optional<Product> findByName(String name);
   @Delete void deleteByCategory(String category);
-}</pre>
+}
+```
+
 
 The above repository definition will create a repository with 3 methods, which can be called to find or delete entities. For faster bootstrapping, Jakarta Data provides several repositories to add commonly used methods. For example, if you extend from the [BasicRepository](https://jakarta.ee/specifications/platform/11/apidocs/jakarta/data/repository/basicrepository) interface, you get additional methods for finding, deleting, and saving entities out of the box:
 
@@ -80,12 +83,15 @@ The above repository definition will create a repository with 3 methods, which c
 
 ```
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@Repository
-public interface ProductRepository extends BasicRepository&lt;Product, Long&gt; {
-  @Find List&lt;Product&gt; findByCategory(String category);
-  @Find Optional&lt;Product&gt; findByName(String name);
+```
+@Repository
+public interface ProductRepository extends BasicRepository<Product, Long> {
+  @Find List<Product> findByCategory(String category);
+  @Find Optional<Product> findByName(String name);
   @Delete void deleteByCategory(String category);
-}</pre>
+}
+```
+
 
 With the above definition, we get a few more methods to call, without defining them in our custom interface. For example, we can find all entities as a Stream result:
 
@@ -93,9 +99,12 @@ With the above definition, we get a few more methods to call, without defining t
 
 ```
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@Inject ProductRepository productRepository;
+```
+@Inject ProductRepository productRepository;
 
-Stream&lt;Product&gt; products = productRepository.findAll();</pre>
+Stream<Product> products = productRepository.findAll();
+```
+
 
 Or we can save a product entity:
 
@@ -103,10 +112,13 @@ Or we can save a product entity:
 
 ```
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@Inject ProductRepository productRepository;
+```
+@Inject ProductRepository productRepository;
 
 Product product = new Product();
-productRepository.save(product);</pre>
+productRepository.save(product);
+```
+
 
 **Entity Definition:**
 
@@ -114,13 +126,16 @@ productRepository.save(product);</pre>
 
 ```
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@Entity public class Product {
+```
+@Entity public class Product {
   @Id @GeneratedValue private Long id; 
   private String name; 
   private String category; 
   private BigDecimal price; 
   // Constructors, getters, and setters
-}</pre>
+}
+```
+
 
 **CRUD Operations:**
 
@@ -128,11 +143,14 @@ productRepository.save(product);</pre>
 
 ```
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@Repository public interface OrderRepository extends CrudRepository&lt;Order, Long&gt; {
+```
+@Repository public interface OrderRepository extends CrudRepository<Order, Long> {
   @Insert Order createOrder(Order order);
   @Update Order updateOrder(Order order);
-  @Query("SELECT o FROM Order o WHERE o.status = :status AND o.createdDate &gt; :date") List&lt;Order&gt; findRecentOrdersByStatus(String status, LocalDateTime date); 
-}</pre>
+  @Query("SELECT o FROM Order o WHERE o.status = :status AND o.createdDate > :date") List<Order> findRecentOrdersByStatus(String status, LocalDateTime date); 
+}
+```
+
 
 These example shows how to create a repository that inherits various common CRUD operations from the Crudrepository interface, while adding more domain-specific methods createOrder and updateOrder, and a custom query method defined by a Jakarta Data Query Language (JDQL). This is roughly a subset of the Jakarta Persistence Query Language (JPQL) plus it allows some to omit some parts of the query which can be derived from the method name or the repository definition (e.g. "SELECT" or "FROM" clauses can be omitted if the entity type is defined by the return type.
 
@@ -164,7 +182,8 @@ Jakarta EE 11 aligns with Java 17 and beyond, introducing support for Java Recor
 
 ```
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public record CustomerDTO(Long id, String name, String email, LocalDateTime registrationDate ) {}
+```
+public record CustomerDTO(Long id, String name, String email, LocalDateTime registrationDate ) {}
 
 @Path("/customers")
 public class CustomerResource {
@@ -175,7 +194,9 @@ public class CustomerResource {
     Customer customer = customerService.findById(id);
     return new CustomerDTO( customer.getId(), customer.getName(), customer.getEmail(), customer.getRegistrationDate() );
   }
-}</pre>
+}
+```
+
 
 ### **Removing SecurityManager References** {#h3-8-removing-securitymanager-references}
 
@@ -200,8 +221,11 @@ Virtual Threads, introduced through Jakarta Concurrency 3.1, revolutionize concu
 
 ```
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@ManagedExecutorDefinition( name = "java:comp/vtExecutor", maxAsync = 10, context = "java:comp/vtContextService", virtual = true ) @ContextServiceDefinition( name = "java:comp/vtContextService", propagated = {SECURITY, APPLICATION} ) @ManagedThreadFactoryDefinition( name = "java:comp/vtThreadFactory", context = "java:comp/vtContextService", virtual = true ) @ManagedScheduledExecutorDefinition( name = "java:comp/vtScheduleExecutor", context = "java:comp/vtContextService", maxAsync = 10, virtual = true )
-@ApplicationScoped public class VirtualThreadAsyncConfig { }</pre>
+```
+@ManagedExecutorDefinition( name = "java:comp/vtExecutor", maxAsync = 10, context = "java:comp/vtContextService", virtual = true ) @ContextServiceDefinition( name = "java:comp/vtContextService", propagated = {SECURITY, APPLICATION} ) @ManagedThreadFactoryDefinition( name = "java:comp/vtThreadFactory", context = "java:comp/vtContextService", virtual = true ) @ManagedScheduledExecutorDefinition( name = "java:comp/vtScheduleExecutor", context = "java:comp/vtContextService", maxAsync = 10, virtual = true )
+@ApplicationScoped public class VirtualThreadAsyncConfig { }
+```
+
 
 ### **Impact on Modern Development** {#h3-12-impact-on-modern-development}
 
@@ -233,7 +257,8 @@ Key new features:
 
 ```
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">// Programmatic configuration
+```
+// Programmatic configuration
 var emf =
         new PersistenceConfiguration()
                 .name("MyZoo")
@@ -247,14 +272,15 @@ emf.getSchemaManager().create(true);
 
 // Run in transaction programmatically
 var tiger = new Animal("tiger");
-emf.runInTransaction(em -&gt; em.persist(tiger));
+emf.runInTransaction(em -> em.persist(tiger));
 
 // Simpler JPQL - find tigers without entity variable, without select clause
 var tigers = em.createQuery("from Animal where type = 'tiger'", Animal.class).getResultList();
 
 // Simpler JPQL - use this variable if entity variable not defined
 var animalTypes = em.createQuery("select distinct (this.type) from Animal", String.class).getResultList();
-</pre>
+```
+
 
 For more examples and details, refer to [this article](https://in.relation.to/2024/04/01/jakarta-persistence-3/) about Jakarta Persistence 3.2 by one of its project leads, Gavin King.
 
@@ -269,7 +295,8 @@ For more examples and details, refer to [this article](https://in.relation.to/20
 
 ```
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">// Invoke a method with an instance of HttpServletRequest injected as a method argument
+```
+// Invoke a method with an instance of HttpServletRequest injected as a method argument
 @Dependent
 public class MyService {
     public String hello(HttpServletRequest request) {
@@ -280,7 +307,9 @@ public class MyService {
 /* Build an invoker in a CDI extension and then invoke the methodon an injected MyService instance (first argument is null), with HttpServletRequest 
 injected as the first argument (the invoker must be configured 
 in the CDI extension to inject the argument */
-invoker.invoke(null, null)</pre>
+invoker.invoke(null, null)
+```
+
 
 ### **Security** {#h3-16-security}
 
@@ -296,7 +325,8 @@ You can ind more information about changes in CDI 4.1 in this blog article.
 
 ```
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">// a custom handler that forwards to one of the injected built-in mechanisms
+```
+// a custom handler that forwards to one of the injected built-in mechanisms
 
 @Alternative // needs to replace the default handler
 @Priority(APPLICATION)  // needed to apply this alternative handler
@@ -316,11 +346,13 @@ public class SelectableAuthenticationMechanismHandler implements HttpAuthenticat
     @Override
     public AuthenticationStatus validateRequest(HttpServletRequest request, HttpServletResponse response, HttpMessageContext httpMessageContext) throws AuthenticationException {
     return switch (authType) {
-            case "oidc" -&gt;
+            case "oidc" ->
                 oidcAuthMechanism.validateRequest(request, response, httpMessageContext);
-            case "form" -&gt;
+            case "form" ->
                 formAuthMechanism.validateRequest(request, response, httpMessageContext);
-                ...</pre>
+                ...
+```
+
 
 ### **Concurrency** {#h3-17-concurrency}
 
@@ -336,7 +368,8 @@ Besides support for virtual threads in concurrency resources, the Concurrency AP
 
 ```
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">// A method that will be executed repeatedly according to a schedule after it's called
+```
+// A method that will be executed repeatedly according to a schedule after it's called
 @ApplicationScoped
 public class Schedules {
 
@@ -358,7 +391,9 @@ public class AtStartup {
   public void onStart(@Observes @Initialized(ApplicationScoped.class) Object startEvent) {
     schedules.databaseCleanup();
   }
-}</pre>
+}
+```
+
 
 Check out the following video presentation with more details and demos of new features in Jakarta Concurrency:
 

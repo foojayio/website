@@ -23,7 +23,10 @@ frozen: false
 
 This week, we'll use this work together with new support for XDP to create a simple package blocker for eBPF ([GitHub](https://github.com/parttimenerd/hello-ebpf/blob/main/bpf/src/main/java/me/bechberger/ebpf/samples/XDPPacketFilter.java)):
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">./run_bpf.sh XDPPacketFilter twitter.com</pre>
+```bash
+./run_bpf.sh XDPPacketFilter twitter.com
+```
+
 
 This blocks all incoming IPv4 packages from `twitter.com`. We see how it works in this blog post. First, we start with some background on networking and explain what XDP is.
 
@@ -35,17 +38,21 @@ All networking is packet-based, with multiple layers of protocol from shared med
 
 [Ethernet](https://en.wikipedia.org/wiki/Ethernet) is the lowest-level protocol, with all packets coming to and from network interfaces being ethernet packets. The ethernet header contains the "physical" MAC address of both the source and destination of the package, combined with the protocol number of the next level protocol. We can represent it in C as follows:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="cpp" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">struct ethhdr {
+```cpp
+struct ethhdr {
     unsigned char h_dest[6];
     unsigned char h_source[6];
     __be16 h_proto;
-};</pre>
+};
+```
+
 
 Today, Ethernet is routed on switch level, but it was initially used to communicate between devices that shared the same medium, typically cable.
 
 Above the Ethernet protocol sit multiple protocols, but we're focusing here on the [Internet Protocol](https://en.wikipedia.org/wiki/Internet_Protocol) (IP) with protocol type 0x0800. The IP protocol comes in two common variants, IPv4 and IPv6, and is used to communicate between devices on the whole internet. Although IPv6 has many advantages, IPv4 is still commonly used, and we're focusing on this variant in the following section to keep it simple. IP datagrams are typically fragmented into multiple smaller IP packets. An IPv4 header consists of the following parts:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="cpp" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">struct iphdr {
+```cpp
+struct iphdr {
     __u8 ihl: 4; // number of 32-bits in the header
     __u8 version: 4; // 4 (IPv4), 6 (IPv6)
     __u8 tos; // "priority" of the packet
@@ -66,7 +73,9 @@ Above the Ethernet protocol sit multiple protocols, but we're focusing here on t
         __be32 saddr;
         __be32 daddr;
     } addrs;
-};</pre>
+};
+```
+
 
 This misses the last field officially specified field, the options field, but it is, according to Wikipedia, usually not used:
 > The [options field](https://en.wikipedia.org/wiki/Internet_Protocol_Options) is not often used. Packets containing [some options may be considered as dangerous](https://en.wikipedia.org/wiki/Internet_Protocol_Options_Considerations) by some routers and be blocked.^[](https://en.wikipedia.org/wiki/Internet_Protocol_version_4#cite_note-40)^
@@ -83,23 +92,29 @@ XDP is one of the most essential parts of the eBPF kernel land. It allows users 
 
 The eBPF hooks attached to a specific network interface can inspect and modify the incoming packages, let them pass, drop, or send them back. A basic eBPF program that drops all packages looks, for example, like the following:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">SEC("xdp")
+```
+SEC("xdp")
 int xdp_drop(struct xdp_md *ctx) {
     return XDP_DROP:
-}</pre>
+}
+```
+
 
 *But please don't attach this program, as it would also drop Address Resolution Protocol (ARP) packages,* which other members of your local ethernet network can map IP addresses to MAC addresses. Dropping all ARP packages*can effectively disconnect your machine from the local network*.
 
 The passed `xdp_md` object contains the package content and some metadata:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">struct xdp_md {
+```
+struct xdp_md {
     __u32 data;
     __u32 data_end;
     __u32 data_meta;
     __u32 ingress_ifindex;
     __u32 rx_queue_index;
     __u32 egress_ifindex;
-};</pre>
+};
+```
+
 
 We're just focusing on the content that can be found between `data` and `data_end`. In fact, the header data structures I showed you in the previous section are precisely the structures that describe the content.
 
@@ -113,17 +128,21 @@ The basic structure of our packet filter application consists of a Java part tha
 
 We start with the definition of eBPF for collecting statistics, blocked packets per IP address, and the configuration of the blocked IP addresses:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@BPFMapDefinition(maxEntries = 256 * 4096)
-BPFHashMap&lt;Integer, Boolean&gt; blockedIPs;
+```java
+@BPFMapDefinition(maxEntries = 256 * 4096)
+BPFHashMap<Integer, Boolean> blockedIPs;
 
 @BPFMapDefinition(maxEntries = 256 * 4096)
-BPFHashMap&lt;Integer, Integer&gt; blockingStats;</pre>
+BPFHashMap<Integer, Integer> blockingStats;
+```
+
 
 Now we move on to the eBPF program that checks for the IPv4 addresses and drops the packet if the address is in the `blockedIPs` map (based on the program from a blog post of [sematext](https://sematext.com/blog/ebpf-and-xdp-for-processing-packets-at-bare-metal-speed/)):
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">#include &lt;vmlinux.h&gt;
-#include &lt;bpf/bpf_helpers.h&gt;
-#include &lt;bpf/bpf_endian.h&gt;
+```java
+#include <vmlinux.h>
+#include <bpf/bpf_helpers.h>
+#include <bpf/bpf_endian.h>
 
 // protocol numbers 
 // copied from the linux kernel
@@ -136,8 +155,8 @@ Now we move on to the eBPF program that checks for the IPv4 addresses and drops 
 SEC("xdp")
 int xdp_pass(struct xdp_md *ctx) {
     // the package  
-    void *end = (void *)(long)ctx-&gt;data_end;
-    void *data = (void *)(long)ctx-&gt;data;
+    void *end = (void *)(long)ctx->data_end;
+    void *data = (void *)(long)ctx->data;
     u32 ip_src;
     u64 offset;
     u16 eth_type;
@@ -145,11 +164,11 @@ int xdp_pass(struct xdp_md *ctx) {
     struct ethhdr *eth = data;
     offset = sizeof(*eth);
 
-    if (data + offset &gt; end) {
+    if (data + offset > end) {
         // ethernet package header is incomplete
         return XDP_ABORTED;
     }
-    eth_type = eth-&gt;h_proto;
+    eth_type = eth->h_proto;
 
     /* handle VLAN tagged packet */
     // we use bpf_htons for the check to convert
@@ -160,11 +179,11 @@ int xdp_pass(struct xdp_md *ctx) {
 
         vlan_hdr = (void *)eth + offset;
         offset += sizeof(*vlan_hdr);
-        if ((void *)eth + offset &gt; end) {
+        if ((void *)eth + offset > end) {
             // ethernet package header is incomplete
             return false;
         }
-        eth_type = vlan_hdr-&gt;h_vlan_encapsulated_proto;
+        eth_type = vlan_hdr->h_vlan_encapsulated_proto;
     }
 
     /* let's only handle IPv4 addresses */
@@ -178,20 +197,20 @@ int xdp_pass(struct xdp_md *ctx) {
 
     // make sure the bytes you want to read are 
     // within the packet's range before reading them
-    if (iph + 1 &gt; end) {
+    if (iph + 1 > end) {
         return XDP_ABORTED;
     }
-    ip_src = iph-&gt;saddr;
+    ip_src = iph->saddr;
 
     // find entry in block list
-    void* ret = (void*)bpf_map_lookup_elem(&amp;blockedIPs, &amp;ip_src);
+    void* ret = (void*)bpf_map_lookup_elem(&blockedIPs, &ip_src);
     if (!ret) {
         // IP not in blocked list
         return XDP_PASS;
     }
 
     // count the number of blocked packages per IP address
-    s32* counter = bpf_map_lookup_elem(&amp;blockingStats, &amp;ip_src);
+    s32* counter = bpf_map_lookup_elem(&blockingStats, &ip_src);
     if (counter) {
         // use atomics to prevent a race condition when a packet
         // from the same IP address is received on two
@@ -200,16 +219,19 @@ int xdp_pass(struct xdp_md *ctx) {
         __sync_fetch_and_add(counter, 1);
     } else {
         u64 value = 1;
-        bpf_map_update_elem(&amp;blockingStats, &amp;ip_src, 
-                            &amp;value, BPF_ANY);
+        bpf_map_update_elem(&blockingStats, &ip_src, 
+                            &value, BPF_ANY);
     }
 
     return XDP_DROP;
-}</pre>
+}
+```
+
 
 Now we use it with some [picocli](https://picocli.info/)-based command line handling to build our application:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@BPF(license = "GPL")
+```java
+@BPF(license = "GPL")
 @Command(name = "XDPPacketFilter", 
          mixinStandardHelpOptions = true, 
          description = "Use XDP to block " +
@@ -231,15 +253,15 @@ public abstract class XDPPacketFilter
                       "of the first URL in a loop")
     private boolean runURLRetrieveLoop;
 
-    private Map&lt;Integer, String&gt; ipToUrlMap;
+    private Map<Integer, String> ipToUrlMap;
 
     void setupBlockedIPMap() {
-        ipToUrlMap = Arrays.stream(blockedUrls).flatMap(url -&gt; {
+        ipToUrlMap = Arrays.stream(blockedUrls).flatMap(url -> {
             try {
                 // Resolve the URL to the related IP addresses
                 return Arrays.stream(
                     InetAddress.getAllByName(url))
-                               .map(addr -&gt; 
+                               .map(addr -> 
                        // convert the IP address to numbers
                        Map.entry(XDPUtil.ipAddressToInt(addr), url));
             } catch (UnknownHostException e) {
@@ -248,7 +270,7 @@ public abstract class XDPPacketFilter
         }).collect(Collectors.toMap(
              Map.Entry::getKey, 
              Map.Entry::getValue));
-        ipToUrlMap.keySet().forEach(ip -&gt; {
+        ipToUrlMap.keySet().forEach(ip -> {
             // put the IP addresses in the map
             blockedIPs.put(ip, true);
         });
@@ -257,7 +279,7 @@ public abstract class XDPPacketFilter
     // print the content of blockingStats
     void printBlockedLog() {
         out.println("Blocked packages:");
-        blockingStats.forEach((ip, count) -&gt; {
+        blockingStats.forEach((ip, count) -> {
             out.println("  Blocked " + count + " packages from " +
                     XDPUtil.intToIpAddress(ip) +
                     " (" + ipToUrlMap.get(ip) + ")");
@@ -295,14 +317,17 @@ public abstract class XDPPacketFilter
             program.run();
         }
     }
-}</pre>
+}
+```
+
 
 This is all we need, now we can use it:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group=""># block twitter.com and log in the background
-&gt; ./run_bpf.sh XDPPacketFilter twitter.com &gt; log.txt &amp;
+```bash
+# block twitter.com and log in the background
+> ./run_bpf.sh XDPPacketFilter twitter.com > log.txt &
 # try to access twitter.com with a timeout of 5 seconds
-&gt; wget twitter.com --timeout 5
+> wget twitter.com --timeout 5
 URL transformed to HTTPS due to an HSTS policy
 --2024-04-22 13:28:29--  https://twitter.com/
 Resolving twitter.com (twitter.com)... 104.244.42.65
@@ -317,7 +342,9 @@ Retrying.
 Connecting to twitter.com (twitter.com)|104.244.42.65|:443... failed: Connection timed out.
 Retrying.
 
-# and so on</pre>
+# and so on
+```
+
 
 So we can't access twitter.com anymore till we stop our application.
 

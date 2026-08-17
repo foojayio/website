@@ -34,11 +34,15 @@ So it's nothing really fancy but could sometimes be useful.
 
 Per default, it will print all distributions found in non-beautified JSON format in the console, when I run it on my Macbook Pro without any parameters, like this, simply `javafinder`, the output will look as follows:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">{"search_path":"/System/Volumes/Data/Library/Java/JavaVirtualMachines/","sysinfo":{"operating_system":"Mac OS","architecture":"ARM64","bit":"64 Bit"},"distributions":[{"vendor":"Gluon","name":"Gluon GraalVM","version":"22.1.0.1","path":"/System/Volumes/Data/Library/Java/JavaVirtualMachines/gluon-graalvm/Contents/Home/","build_scope":"GraalVM"},{"vendor":"Azul","name":"Zulu","version":"8.0.372+7","path":"/System/Volumes/Data/Library/Java/JavaVirtualMachines/zulu-8.jdk/zulu-8.jdk/Contents/Home/jre/","build_scope":"OpenJDK"},{"vendor":"Azul","name":"Zulu","version":"8.0.372+7","path":"/System/Volumes/Data/Library/Java/JavaVirtualMachines/zulu-8.jdk/zulu-8.jdk/Contents/Home/","build_scope":"OpenJDK"},{"vendor":"Azul","name":"Zulu","version":"11.0.19","path":"/System/Volumes/Data/Library/Java/JavaVirtualMachines/zulu-11.jdk/zulu-11.jdk/Contents/Home/","build_scope":"OpenJDK"},{"vendor":"Oracle","name":"Graal VM CE","version":"22.3.1","path":"/System/Volumes/Data/Library/Java/JavaVirtualMachines/graalvm-ce-java17-22.3.1/Contents/Home/","build_scope":"GraalVM"},{"vendor":"Azul","name":"Zulu","version":"17.0.7","path":"/System/Volumes/Data/Library/Java/JavaVirtualMachines/zulu-17.jdk/zulu-17.jdk/Contents/Home/","build_scope":"OpenJDK"},{"vendor":"Azul","name":"Zulu","version":"20.0.1","path":"/System/Volumes/Data/Library/Java/JavaVirtualMachines/zulu-20.jdk/zulu-20.jdk/Contents/Home/","build_scope":"OpenJDK"},{"vendor":"Azul","name":"Zulu","version":"21-ea+22","path":"/System/Volumes/Data/Library/Java/JavaVirtualMachines/zulu-21.jdk/zulu-21.jdk/Contents/Home/","build_scope":"OpenJDK"}]}</pre>
+```
+{"search_path":"/System/Volumes/Data/Library/Java/JavaVirtualMachines/","sysinfo":{"operating_system":"Mac OS","architecture":"ARM64","bit":"64 Bit"},"distributions":[{"vendor":"Gluon","name":"Gluon GraalVM","version":"22.1.0.1","path":"/System/Volumes/Data/Library/Java/JavaVirtualMachines/gluon-graalvm/Contents/Home/","build_scope":"GraalVM"},{"vendor":"Azul","name":"Zulu","version":"8.0.372+7","path":"/System/Volumes/Data/Library/Java/JavaVirtualMachines/zulu-8.jdk/zulu-8.jdk/Contents/Home/jre/","build_scope":"OpenJDK"},{"vendor":"Azul","name":"Zulu","version":"8.0.372+7","path":"/System/Volumes/Data/Library/Java/JavaVirtualMachines/zulu-8.jdk/zulu-8.jdk/Contents/Home/","build_scope":"OpenJDK"},{"vendor":"Azul","name":"Zulu","version":"11.0.19","path":"/System/Volumes/Data/Library/Java/JavaVirtualMachines/zulu-11.jdk/zulu-11.jdk/Contents/Home/","build_scope":"OpenJDK"},{"vendor":"Oracle","name":"Graal VM CE","version":"22.3.1","path":"/System/Volumes/Data/Library/Java/JavaVirtualMachines/graalvm-ce-java17-22.3.1/Contents/Home/","build_scope":"GraalVM"},{"vendor":"Azul","name":"Zulu","version":"17.0.7","path":"/System/Volumes/Data/Library/Java/JavaVirtualMachines/zulu-17.jdk/zulu-17.jdk/Contents/Home/","build_scope":"OpenJDK"},{"vendor":"Azul","name":"Zulu","version":"20.0.1","path":"/System/Volumes/Data/Library/Java/JavaVirtualMachines/zulu-20.jdk/zulu-20.jdk/Contents/Home/","build_scope":"OpenJDK"},{"vendor":"Azul","name":"Zulu","version":"21-ea+22","path":"/System/Volumes/Data/Library/Java/JavaVirtualMachines/zulu-21.jdk/zulu-21.jdk/Contents/Home/","build_scope":"OpenJDK"}]}
+```
+
 
 When called with the json parameter, `javafinder json`, the output will be in beautfied JSON, as follows:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">{
+```
+{
    "search_path":"/System/Volumes/Data/Library/Java/JavaVirtualMachines",
    "sysinfo":{
       "operating_system":"macos",
@@ -103,13 +107,18 @@ When called with the json parameter, `javafinder json`, the output will be in be
          "build_scope":"GraalVM"
       }
    ]
-}</pre>
+}
+```
+
 
 If you prefer something simpler, there's also the possibility to output the results in CSV format.
 
 In this case, you need to run the program as follows `javafinder csv`and the output will look like follows:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">Vendor,Distribution,Version,Path,Type Azul,Zulu,21-ea+21,/System/Volumes/Data/Library/Java/JavaVirtualMachines/zulu-21.jdk/zulu-21.jdk/Contents/Home/,OpenJDK Oracle,Graal VM CE,22.3.1,/System/Volumes/Data/Library/Java/JavaVirtualMachines/graalvm-ce-java17-22.3.1/Contents/Home/,GraalVM Azul,Zulu,20.0.1,/System/Volumes/Data/Library/Java/JavaVirtualMachines/zulu-20.jdk/zulu-20.jdk/Contents/Home/,OpenJDK Azul,Zulu,11.0.19,/System/Volumes/Data/Library/Java/JavaVirtualMachines/zulu-11.jdk/zulu-11.jdk/Contents/Home/,OpenJDK Azul,Zulu,8.0.372+7,/System/Volumes/Data/Library/Java/JavaVirtualMachines/zulu-8.jdk/jre/,OpenJDK Azul,Zulu,8.0.372+7,/System/Volumes/Data/Library/Java/JavaVirtualMachines/zulu-8.jdk/,OpenJDK Azul,Zulu,20.0.1,/System/Volumes/Data/Library/Java/JavaVirtualMachines/zulu-20.jdk/,OpenJDK Azul,Zulu,21-ea+21,/System/Volumes/Data/Library/Java/JavaVirtualMachines/zulu-21.jdk/,OpenJDK Gluon,Gluon GraalVM,22.1.0.1,/System/Volumes/Data/Library/Java/JavaVirtualMachines/gluon-graalvm/Contents/Home/,GraalVM Azul,Zulu,8.0.372+7,/System/Volumes/Data/Library/Java/JavaVirtualMachines/zulu-8.jdk/zulu-8.jdk/Contents/Home/,OpenJDK Azul,Zulu,17.0.7,/System/Volumes/Data/Library/Java/JavaVirtualMachines/zulu-17.jdk/,OpenJDK Azul,Zulu,11.0.19,/System/Volumes/Data/Library/Java/JavaVirtualMachines/zulu-11.jdk/,OpenJDK Azul,Zulu,17.0.7,/System/Volumes/Data/Library/Java/JavaVirtualMachines/zulu-17.jdk/zulu-17.jdk/Contents/Home/,OpenJDK Azul,Zulu,8.0.372+7,/System/Volumes/Data/Library/Java/JavaVirtualMachines/zulu-8.jdk/zulu-8.jdk/Contents/Home/jre/,OpenJDK</pre>
+```
+Vendor,Distribution,Version,Path,Type Azul,Zulu,21-ea+21,/System/Volumes/Data/Library/Java/JavaVirtualMachines/zulu-21.jdk/zulu-21.jdk/Contents/Home/,OpenJDK Oracle,Graal VM CE,22.3.1,/System/Volumes/Data/Library/Java/JavaVirtualMachines/graalvm-ce-java17-22.3.1/Contents/Home/,GraalVM Azul,Zulu,20.0.1,/System/Volumes/Data/Library/Java/JavaVirtualMachines/zulu-20.jdk/zulu-20.jdk/Contents/Home/,OpenJDK Azul,Zulu,11.0.19,/System/Volumes/Data/Library/Java/JavaVirtualMachines/zulu-11.jdk/zulu-11.jdk/Contents/Home/,OpenJDK Azul,Zulu,8.0.372+7,/System/Volumes/Data/Library/Java/JavaVirtualMachines/zulu-8.jdk/jre/,OpenJDK Azul,Zulu,8.0.372+7,/System/Volumes/Data/Library/Java/JavaVirtualMachines/zulu-8.jdk/,OpenJDK Azul,Zulu,20.0.1,/System/Volumes/Data/Library/Java/JavaVirtualMachines/zulu-20.jdk/,OpenJDK Azul,Zulu,21-ea+21,/System/Volumes/Data/Library/Java/JavaVirtualMachines/zulu-21.jdk/,OpenJDK Gluon,Gluon GraalVM,22.1.0.1,/System/Volumes/Data/Library/Java/JavaVirtualMachines/gluon-graalvm/Contents/Home/,GraalVM Azul,Zulu,8.0.372+7,/System/Volumes/Data/Library/Java/JavaVirtualMachines/zulu-8.jdk/zulu-8.jdk/Contents/Home/,OpenJDK Azul,Zulu,17.0.7,/System/Volumes/Data/Library/Java/JavaVirtualMachines/zulu-17.jdk/,OpenJDK Azul,Zulu,11.0.19,/System/Volumes/Data/Library/Java/JavaVirtualMachines/zulu-11.jdk/,OpenJDK Azul,Zulu,17.0.7,/System/Volumes/Data/Library/Java/JavaVirtualMachines/zulu-17.jdk/zulu-17.jdk/Contents/Home/,OpenJDK Azul,Zulu,8.0.372+7,/System/Volumes/Data/Library/Java/JavaVirtualMachines/zulu-8.jdk/zulu-8.jdk/Contents/Home/jre/,OpenJDK
+```
+
 
 On Linux and Mac you simply can save that into a file using `javafinder csv > jdks.csv`
 

@@ -43,11 +43,13 @@ A relationship may be **eager** or **lazy**.
 
 Hibernate fetches data in eager relationships in one single query. By default, one-to-one relationships are eager. In the example above, that means that loading a `Customer` also loads its `Cart`. This `em.find(Customer.class, 1L)` generates the following SQL:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="sql">SELECT customer0_.id as id1_2_0_, customer0_.cart_id AS cart_id2_2_0_, cart1_.id as id1_1_1_
+```sql
+SELECT customer0_.id as id1_2_0_, customer0_.cart_id AS cart_id2_2_0_, cart1_.id as id1_1_1_
 FROM Customer customer0_
     LEFT OUTER JOIN Cart cart1_ ON customer0_.cart_id = cart1_.id
 WHERE customer0_.id = 1L
-</pre>
+```
+
 
 On the other hand, one-to-many relationships are lazy by default. For such relationships, Hibernate doesn't fetch the data at query-time. Instead, it initializes the attribute that references the lazy relationship with a **proxy** . This proxy holds a reference to the Hibernate `Session` that loaded the root entity. Hibernate executes a new query when you access the attribute using the referenced `Session` (a JPA `EntityManager` wraps a `Session`).
 
@@ -58,7 +60,8 @@ It has two significant consequences:
 
 Let's see how it works:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">var manager = factory.getEntityManager();                         // 1
+```java
+var manager = factory.getEntityManager();                         // 1
 var transaction = manager.getTransaction();
 transaction.begin();                                              // 2
 var newCustomer = new Customer();
@@ -70,7 +73,9 @@ var anotherManager = factory.getEntityManager();                  // 5
 var customer = anotherManager.find(Customer.class, id);           // 6
 anotherManager.detach(customer);                                  // 7
 var orders = customer.getOrders();                                // 8
-assertThrows(LazyInitializationException.class, orders::isEmpty); // 9</pre>
+assertThrows(LazyInitializationException.class, orders::isEmpty); // 9
+```
+
 
 1. Get a JPA `EntityManager` assuming that `factory` is an `EntityManagerFactory`.
 2. Begin the transaction.
@@ -92,21 +97,25 @@ Now that we have framed the problem and what causes it, we can look at possible 
 
 I mentioned above that one-to-many associations are lazy by default, and one-to-one are eager. JPA allows you to change this default with annotations.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">@Entity
+```java
+@Entity
 public class Customer {
 
     @OneToOne(cascade = CascadeType.ALL)
     private Cart cart;
 
     @OneToMany(fetch = FetchType.EAGER)  // 1
-    private Set&lt;Order&gt; orders;
-}</pre>
+    private Set<Order> orders;
+}
+```
+
 
 1. Query the set of `orders` eagerly when loading a `Customer` instance
 
 The following is the new generated query:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="sql">SELECT customer0_.id        AS id1_2_0_,
+```sql
+SELECT customer0_.id        AS id1_2_0_,
        customer0_.cart_id   AS cart_id2_2_0_,
        cart1_.id            AS id1_1_1_,
        orders2_.CUSTOMER_ID AS customer2_0_2_,
@@ -115,7 +124,9 @@ The following is the new generated query:
 FROM Customer customer0_
          LEFT OUTER JOIN Cart cart1_      ON customer0_.cart_id = cart1_.id
          LEFT OUTER JOIN "ORDER" orders2_ ON customer0_.id = orders2_.CUSTOMER_ID
-WHERE customer0_.id = ?</pre>
+WHERE customer0_.id = ?
+```
+
 
 Setting your associations to be eager is a terrible idea! Here are three good reasons why one-to-many associations are lazy by default - and should stay that way:
 
@@ -187,28 +198,36 @@ They are available:
 
 * In :
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">var query = em.createQuery("SELECT c FROM Customer c JOIN FETCH c.orders o WHERE c.id = :id");
+```java
+var query = em.createQuery("SELECT c FROM Customer c JOIN FETCH c.orders o WHERE c.id = :id");
 query.setParameter("id", id);
 var customer = (Customer) query.getSingleResult();
-</pre>
+```
+
 
 * In the Criteria API: 
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">var builder = em.getCriteriaBuilder();
+```java
+var builder = em.getCriteriaBuilder();
 var criteria = builder.createQuery(Customer.class);
 var root = criteria.from(Customer.class);
-root.fetch("orders", JoinType.LEFT);<code class="language-java"></code></pre>
+root.fetch("orders", JoinType.LEFT);<code class="language-java"></code>
+```
+
 
 By running one of the above snippets, Hibernate fetches the `orders` attribute of the `Customer` instance in the same query that loads the `Customer` itself. Here's the corresponding SQL query:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="sql">SELECT customer0_.id        AS id1_2_0_,
+```sql
+SELECT customer0_.id        AS id1_2_0_,
        orders1_.id          AS id1_0_1_,
        customer0_.cart_id   AS cart_id2_2_0_,
        orders1_.CUSTOMER_ID AS customer2_0_0__,
        orders1_.id          AS id1_0_0__
 FROM Customer customer0_
          LEFT OUTER JOIN "ORDER" orders1_ ON customer0_.id = orders1_.CUSTOMER_ID
-WHERE customer0_.id = 1</pre>
+WHERE customer0_.id = 1
+```
+
 
 ### Entity Graph {#h3-3-entity-graph}
 
@@ -223,7 +242,8 @@ For that reason, JPA 2.1 brings the concept of **entity graph** . An entity grap
 
 It's possible to define an entity graph both declaratively via annotations and programmatically:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">@Entity
+```java
+@Entity
 @NamedEntityGraph(
     name = "orders",
     attributeNodes = { @NamedAttributeNode("orders") }
@@ -232,14 +252,19 @@ public class Customer {
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "CUSTOMER_ID")
-    private Set&lt;Order&gt; orders;
-}</pre>
+    private Set<Order> orders;
+}
+```
+
 
 You can use an entity graph via both JPQL and the Criteria API. More importantly, you can use it in plain `find()` methods.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">var entityGraph = em.getEntityGraph("orders");
-var props = Map.&lt;String, Object&gt;of("javax.persistence.loadgraph", entityGraph);
-var customer = anotherManager.find(Customer.class, id, props);</pre>
+```java
+var entityGraph = em.getEntityGraph("orders");
+var props = Map.<String, Object>of("javax.persistence.loadgraph", entityGraph);
+var customer = anotherManager.find(Customer.class, id, props);
+```
+
 
 ### Conclusion {#h3-4-conclusion}
 

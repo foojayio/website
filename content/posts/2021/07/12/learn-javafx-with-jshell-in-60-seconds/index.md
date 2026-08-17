@@ -52,22 +52,29 @@ Once you've installed Java 11 or greater the JDK provides a command line tool fo
 
 To begin a jshell session get to your terminal or console command prompt and type `jshell` and hit enter.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">$ jshell
+```
+$ jshell
 |  Welcome to JShell -- Version 11.0.9
-|  For an introduction type: /help intro</pre>
+|  For an introduction type: /help intro
+```
+
 
 **Note:** Assuming your system's `JAVA_HOME` environment variable is properly set the typical executables should be available at the command line prompt: `java`, `javac`, and `jshell`.
 
 What's nice about using jshell is you don't have to create any Java specific coding ceremony such as a `public static void main (String[] args)` method or having to create a class surrounding the main() method. You can simply do the following:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">jshell&gt; System.out.println("JavaFX Rocks!")
-JavaFX Rocks!</pre>
+```
+jshell> System.out.println("JavaFX Rocks!")
+JavaFX Rocks!
+```
+
 
 Another nice feature is the **autocomplete** ability when hitting the tab key to show available method signatures.
 
 Below is showing the available `println()` methods.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">jshell&gt; System.out.println(
+```
+jshell> System.out.println(
 Signatures:
 void PrintStream.println()
 void PrintStream.println(boolean x)
@@ -80,28 +87,40 @@ void PrintStream.println(char[] x)
 void PrintStream.println(String x)
 void PrintStream.println(Object x)
 
-&lt;press tab again to see documentation&gt;</pre>
+<press tab again to see documentation>
+```
+
 
 Next, let's try a simple variable assignment by assigning a primitive **5** into a variable **x**.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">jshell&gt; var x = 5
-x ==&gt; 5</pre>
+```
+jshell> var x = 5
+x ==> 5
+```
+
 
 After an assignment you can do arithmetic statements like the following:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">jshell&gt; x + 1
-$2 ==&gt; 6</pre>
+```
+jshell> x + 1
+$2 ==> 6
+```
+
 
 Whenever you don't assign a variable to a result as shown above (after hitting the carrage return), JShell will assign a reference variable (a number prefixed with a $ dollar sign) such as `$2`. To verify the result (`$2`) again just enter the reference variable and hit enter to output the value inside as shown below:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">jshell&gt; $2
-$2 ==&gt; 6</pre>
+```
+jshell> $2
+$2 ==> 6
+```
+
 
 So, how do you know what packages and classes are available in the current `jshell` session?
 
 That's simple: enter the `/imports` command. You should see something like the following:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">jshell&gt; /imports
+```
+jshell> /imports
 |    import java.io.*
 |    import java.math.*
 |    import java.net.*
@@ -111,24 +130,33 @@ That's simple: enter the `/imports` command. You should see something like the f
 |    import java.util.function.*
 |    import java.util.prefs.*
 |    import java.util.regex.*
-|    import java.util.stream.*</pre>
+|    import java.util.stream.*
+```
+
 
 How do you import a class not among the ones shown above. You either use `/open` (load Java file) or add a 3rd party library to your classpath before you launch `jshell` as shown below:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">$ jshell --class-path /opt/libs/log4j.jar:/opt/libs/commons-lang3.jar
-</pre>
+```
+$ jshell --class-path /opt/libs/log4j.jar:/opt/libs/commons-lang3.jar
+```
+
 
 After 3rd party libraries are on the classpath you can now import them.
 
 Shown below is an example of how to import the `StringUtils` class from [Apache commons](https://commons.apache.org "Apache commons").
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">jshell&gt; import org.apache.commons.lang3.StringUtils
-</pre>
+```
+jshell> import org.apache.commons.lang3.StringUtils
+```
+
 
 You can now perform the following:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">jshell&gt; StringUtils.isEmpty("")
-$6 ==&gt; true</pre>
+```
+jshell> StringUtils.isEmpty("")
+$6 ==> true
+```
+
 
 Now that you are more familiar with jshell let's see how to launch a JavaFX application.
 
@@ -141,24 +169,30 @@ In the following steps you will learn how to run a JavaFX application and intera
 
 Do the following to check to make sure:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">java --list-modules | grep javafx
-</pre>
+```
+java --list-modules | grep javafx
+```
+
 
 You should see something like the following:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="5339322532352b7d313220361362627d637d6a">[email&nbsp;protected]</a>
-<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="e08a8196818698ce838f8e94928f8c93a0d1d1ced0ced9">[email&nbsp;protected]</a>
-<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="f892998e999e80d69e809594b8c9c9d6c8d6c1">[email&nbsp;protected]</a>
-<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="95fff4e3f4f3edbbf2e7f4e5fdfcf6e6d5a4a4bba5bbac">[email&nbsp;protected]</a>
-<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="bfd5dec9ded9c791d2dadbd6deff8e8e918f9186">[email&nbsp;protected]</a>
-<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="e389829582859bcd90948a8d84a3d2d2cdd3cdda">[email&nbsp;protected]</a>
-<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="f59f948394938ddb829097b5c4c4dbc5dbcc">[email&nbsp;protected]</a></pre>
+```
+<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="5339322532352b7d313220361362627d637d6a">[email protected]</a>
+<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="e08a8196818698ce838f8e94928f8c93a0d1d1ced0ced9">[email protected]</a>
+<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="f892998e999e80d69e809594b8c9c9d6c8d6c1">[email protected]</a>
+<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="95fff4e3f4f3edbbf2e7f4e5fdfcf6e6d5a4a4bba5bbac">[email protected]</a>
+<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="bfd5dec9ded9c791d2dadbd6deff8e8e918f9186">[email protected]</a>
+<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="e389829582859bcd90948a8d84a3d2d2cdd3cdda">[email protected]</a>
+<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="f59f948394938ddb829097b5c4c4dbc5dbcc">[email protected]</a>
+```
+
 
 If you don't see the modules shown above, you probably downloaded just the JDK itself (not containing JavaFX's modules). (Head over to Azul to download Zulu builds with JavaFX here: <https://www.azul.com/downloads/?package=jdk-fx>.)
 
 **Step 2:** Copy and Paste the following code into a file named `Main.java` into a directory:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">import javafx.animation.AnimationTimer;
+```java
+import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
@@ -217,7 +251,7 @@ public class Main extends Application {
             @Override
             public void handle(long now) {
                 // elapsed time occurred so let's begin drawing on the canvas.
-                if (now &gt; lastTimerCall + ANIMATION_DELAY) {
+                if (now > lastTimerCall + ANIMATION_DELAY) {
                     lastTimerCall = now;
 
                     int w = (int) canvas.getWidth();
@@ -241,7 +275,7 @@ public class Main extends Application {
                     gc.setFont(new Font("monospace", fontSize-5));
 
                     // Based on the stored y coordinate allows us to draw the character next (beneath the previous)
-                    for (int i = 0; i &lt; ypos.length; i++) {
+                    for (int i = 0; i < ypos.length; i++) {
                         // pick a random character (unicode)
                         //char ch = (char) random.ints(12353, 12380) // Japanese
                         //char ch = (char) random.ints(12100, 12200) // Chinese
@@ -261,7 +295,7 @@ public class Main extends Application {
 
                         // The effect similar to dripping paint from the top (y = 0).
                         // If the current y is greater than the random length then reset the y position to zero.
-                        if (y &gt; 100 + Math.random() * 10000) {
+                        if (y > 100 + Math.random() * 10000) {
                             // (restart the drip process from the top)
                             ypos[i] = 0;
                         } else {
@@ -296,7 +330,9 @@ public class Main extends Application {
     public static void main(String[] args) {
         launch(args);
     }
-}</pre>
+}
+```
+
 
 **Things to notice:**
 
@@ -308,16 +344,21 @@ public class Main extends Application {
 
 **Note:** In your terminal (console) be sure to be in the directory location where the `Main.java` file was created from the previous step.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">$ jshell Main.java
+```
+$ jshell Main.java
 |  Welcome to JShell -- Version 11.0.9
 |  For an introduction type: /help intro
 
-jshell&gt;</pre>
+jshell>
+```
+
 
 Or just type jshell , then on the command prompt type the following:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">jshell&gt; /open Main.java
-</pre>
+```
+jshell> /open Main.java
+```
+
 
 This will simply load the file into the current `jshell` session.
 
@@ -325,26 +366,36 @@ To see more commands, type `/help`.
 
 **Step 4:** Instantiate a `Main` class (JavaFX Matrix Application object):
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">jshell&gt; Main app = new Main()</pre>
+```
+jshell> Main app = new Main()
+```
+
 
 Here you'll notice there is no semicolon at the end of the statement. Semicolons are optional for simple one line statements.
 
 In the JavaFX Matrix application, I created one `public static String` variable named `color` that will allow us to change its value dynamically all the while the application is running. The string variable will have a hex value representing an RGB color. The color is used to paint (fill) the characters on the canvas. Below is the code that will convert the string hex value color into a `javafx.scene.paint.Color` instance.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">gc.setFill(Color.web(color));
-</pre>
+```
+gc.setFill(Color.web(color));
+```
+
 
 Next, you'll check the current color value used.
 
 Do the following:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">jshell&gt; System.out.println(app.color)
-</pre>
+```
+jshell> System.out.println(app.color)
+```
+
 
 You should see the hex value for the color green:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">jshell&gt; System.out.println(app.color)
-#00ff00</pre>
+```
+jshell> System.out.println(app.color)
+#00ff00
+```
+
 
 Since it's using the `RGB` color model the hex `FF` bits are turned on for green, red and blue bytes are set to zero. The format of the hex value is prefixed with the hash '#' symbol.
 
@@ -352,26 +403,40 @@ Later, we will change the color from green to red during runtime, but let's lear
 
 **Step 5:** Create a `Thread` instance to invoke the `Main.main()` method.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">jshell&gt; new Thread(() -&gt; app.main(null)).start()
-</pre>
+```
+jshell> new Thread(() -> app.main(null)).start()
+```
+
 
 Or you can do the following:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">jshell&gt; new Thread(() -&gt; app.main(null))</pre>
+```
+jshell> new Thread(() -> app.main(null))
+```
+
 
 Then you'll see a reference variable assigned to the new `Thread` instance (dollar symbol and number). It should output something similar to the following:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">$13 ==&gt; Thread[Thread-0,5,main]</pre>
+```
+$13 ==> Thread[Thread-0,5,main]
+```
+
 
 To start the thread instance type the following into the command prompt:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">jshell&gt; $13.start()</pre>
+```
+jshell> $13.start()
+```
+
 
 Since the application starts on a new thread JShell's command prompt will not be blocked thus allowing you to interact with the runtime environment (main thread).
 
 **Step 6:** Change the `color` variable interactively. Set the color to **red**.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">jshell&gt; app.color = “#ff0000”</pre>
+```
+jshell> app.color = “#ff0000”
+```
+
 
 This should dynamically output the following while the application is running.
 
@@ -381,14 +446,20 @@ This should dynamically output the following while the application is running.
 
 Type the following in jshell:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">jshell&gt; /reset
-|  Resetting state.</pre>
+```
+jshell> /reset
+|  Resetting state.
+```
+
 
 A reset will kill the JavaFX Application thread and clear all objects in the current `jshell` session.
 
 To rerun the application simply type the following:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">jshell&gt; /open Main.java</pre>
+```
+jshell> /open Main.java
+```
+
 
 Another convenience is the ability to recall previously used commands. By using the **up** and **down** arrow keys you can cycle through commands or statements previously entered. This will help you save some time typing ;-).
 
@@ -401,13 +472,16 @@ If you run the application by entering `new Main().main(null)` on the jshell pro
 
 After stopping the application, you'll need to enter a `/reset` command to kill the JavaFX application thread. If you do not enter `/reset` and attempt to rerun the application the runtime environment will complain and you'll get the following error message:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">jshell&gt; Main.main(null)
+```
+jshell> Main.main(null)
 |  Exception java.lang.IllegalStateException: Application launch must not be called more than once
 |        at LauncherImpl.launchApplication (LauncherImpl.java:175)
 |        at LauncherImpl.launchApplication (LauncherImpl.java:156)
 |        at Application.launch (Application.java:296)
 |        at Main.main (#11:123)
-|        at (#13:1)</pre>
+|        at (#13:1)
+```
+
 
 ```
 

@@ -79,7 +79,8 @@ Fowler describes Hypermedia Controls as the ultimate step to reaching the glory 
 
 HATEOAS is a concept; here's a possible implementation taken from Wikipedia. When one requests a bank account, say `/accounts/a1b2c3d4e5f6`, the response contains links to actions possible with this specific bank account:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="json">{
+```json
+{
   "account": {
     "account_number": "a1b2c3d4e5f6",
     "balance": {
@@ -94,11 +95,14 @@ HATEOAS is a concept; here's a possible implementation taken from Wikipedia. Whe
       "close-request": "/accounts/a1b2c3d4e5f6:close-request"
     }
   }
-}</pre>
+}
+```
+
 
 If the balance is negative, only the deposit link will be available:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="json">{
+```json
+{
   "account": {
     "account_number": "a1b2c3d4e5f6",
     "balance": {
@@ -110,7 +114,9 @@ If the balance is negative, only the deposit link will be available:
       "deposit": "/accounts/a1b2c3d4e5f6:deposit",
     }
   }
-}</pre>
+}
+```
+
 
 A common issue with REST is the lack of standards; HATEOAS is no different. The first attempt to bring some degree of standardization was the [JSON Hypertext Application Language](https://datatracker.ietf.org/doc/html/draft-kelly-json-hal-08), *aka* HAL. Note that it was incepted in 2012; the latest version dates from 2016, and it's still in draft.
 
@@ -122,7 +128,8 @@ Here's a quick diagram that summarizes the proposal:
 
 We can rework the above with HAL as the following:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="json">GET /accounts/a1b2c3d4e5f6 HTTP/1.1
+```json
+GET /accounts/a1b2c3d4e5f6 HTTP/1.1
 Accept: application/hal+json
 
 HTTP/1.1 200 OK
@@ -135,18 +142,20 @@ Content-Type: application/hal+json
       "currency": "USD",
       "value": 100.00
     },
-    "_links": {                                    &lt;1&gt;
-      "self": {                                    &lt;2&gt;
+    "_links": {                                    <1>
+      "self": {                                    <2>
         "href" : "/accounts/a1b2c3d4e5f6",
-        "methods": ["GET"]                         &lt;3&gt;
+        "methods": ["GET"]                         <3>
       },
       "deposit": {
-        "href" : "/accounts/a1b2c3d4e5f6:deposit", &lt;4&gt;
-        "methods": ["POST"]                        &lt;3&gt;
+        "href" : "/accounts/a1b2c3d4e5f6:deposit", <4>
+        "methods": ["POST"]                        <3>
       }
     }
   }
-}</pre>
+}
+```
+
 
 1. Available links
 2. Link to self
@@ -157,13 +166,14 @@ Another attempt at standardization is [RFC 8288](https://www.rfc-editor.org/rfc/
 
 ![](web-linking.png)
 
-<pre class="EnlighterJSRAW" data-enlighter-language="json">HTTP/2 200 OK
+```json
+HTTP/2 200 OK
 
-Link: &lt;/accounts/a1b2c3d4e5f6&gt; rel="self";
-                               method="GET",                           &lt;1&gt;
-      &lt;/accounts/a1b2c3d4e5f6:deposit&gt; rel="https://my.bank/deposit";
+Link: </accounts/a1b2c3d4e5f6> rel="self";
+                               method="GET",                           <1>
+      </accounts/a1b2c3d4e5f6:deposit> rel="https://my.bank/deposit";
                                        title="Deposit";
-                                       method="POST"                   &lt;2&gt;
+                                       method="POST"                   <2>
 {
   "account": {
     "account_number": "a1b2c3d4e5f6",
@@ -172,7 +182,9 @@ Link: &lt;/accounts/a1b2c3d4e5f6&gt; rel="self";
       "value": 100.00
     }
   }
-}</pre>
+}
+```
+
 
 1. Link to the current resource with the non-standard `self` relation type
 2. Link to deposit with the extension `https://my.bank/deposit` relation type and an arbitrary `title` target attribute

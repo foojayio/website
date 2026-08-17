@@ -38,21 +38,31 @@ You'll need a few prerequisites to follow this walkthrough
 
 First, start by ensuring the Service Catalog operator is installed in your local cluster. This only needs to be done once per Kubernetes cluster.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">helm repo add svc-cat https://svc-catalog-charts.storage.googleapis.com
+```
+helm repo add svc-cat https://svc-catalog-charts.storage.googleapis.com
 helm repo update
-helm install catalog svc-cat/catalog --namespace catalog --create-namespace</pre>
+helm install catalog svc-cat/catalog --namespace catalog --create-namespace
+```
+
 
 Next, create a Kubernetes secret with the service account information from Astra. For this, you will need to go to the service account area of Astra and copy the credentials ([instructions](https://docs.astra.datastax.com/docs/creating-a-new-service-account-for-your-database)). What you get is a small snippet of JSON with all the important info needed to create the secret in Kubernetes. It requires a little Command-line Fu but rest-assured, you only have to do this once. You just need to replace the part labeled `<service_account_creds>`
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">kubectl create secret generic astra-creds --from-literal=username=unused --from-literal=password=`echo '&lt;service_account_creds&gt;'| base64`</pre>
+```
+kubectl create secret generic astra-creds --from-literal=username=unused --from-literal=password=`echo '<service_account_creds>'| base64`
+```
+
 
 You then register the broker via a ServiceBroker custom resource. For brevity we will leverage the helpful svcat command-line tool.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ svcat register astra --url https://broker.astra.datastax.com/ --basic-secret astra-creds</pre>
+```
+$ svcat register astra --url https://broker.astra.datastax.com/ --basic-secret astra-creds
+```
+
 
 With this information, Service Catalog automatically queries for available services on Astra and displays all the plans or service tiers.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ svcat marketplace
+```
+$ svcat marketplace
   	CLASS      	PLANS                  	DESCRIPTION               	 
 +----------------+-----------+------------------------------------------------+
   astra-database   A10     	DataStax Astra, built on the               	 
@@ -76,22 +86,28 @@ $ svcat get plans
                                        	Storage                        	         	 
   developer   default 	astra-database   Free tier: Try Astra with      	 
                                        	no obligation. Get 5 GB of     	 
-                                       	storage, free forever.</pre>
+                                       	storage, free forever.
+```
+
 
 *Note the information here is a small subset of what is available. Listings have been reduced for space.*
 
 With this information you may now provision your database instance using svcat or kubectl:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ svcat provision devdb --class astra-database --plan developer --params-json '{
+```
+$ svcat provision devdb --class astra-database --plan developer --params-json '{
   "cloud_provider": "GCP",
   "region": "us-east1",
   "capacity_units": 1,
   "keyspace": "sample_keyspace"
-}'</pre>
+}'
+```
+
 
 You should see the following output:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">  Name:    	devdb    
+```
+  Name:    	devdb    
   Namespace:   default  
   Status:          	 
   Class:           	 
@@ -101,11 +117,14 @@ Parameters:
   capacity_units: 1
   cloud_provider: GCP
   keyspace: sample_keyspace
-  region: us-east1</pre>
+  region: us-east1
+```
+
 
 For `kubectl` create a file called `astra.yaml` to describe the type of instance you need:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">apiVersion: servicecatalog.k8s.io/v1beta1
+```
+apiVersion: servicecatalog.k8s.io/v1beta1
 kind: ServiceInstance
 metadata:
   name: devdb
@@ -119,21 +138,27 @@ spec:
   serviceClassExternalName: astra-database
   servicePlanExternalName: developer
 
-kubectl apply -f astra.yaml</pre>
+kubectl apply -f astra.yaml
+```
+
 
 Service catalog handles the provisioning and communication with Astra. After a couple minutes you can check the instance status with svcat and kubectl:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ svcat get instances
+```
+$ svcat get instances
   NAME	NAMESPACE   CLASS   PLAN   STATUS  
 +-------+-----------+-------+------+--------+
   devdb   default                	Ready   
 $ kubectl get serviceinstances devdb
 NAME	CLASS                                           	PLAN                               	STATUS   AGE
-devdb   ServiceClass/26b3fbe6-0c18-5140-8ac6-87d03b5b4148   1c9bb5ac-6609-5af5-a747-ecf1d093cc7f   Ready	3m20s</pre>
+devdb   ServiceClass/26b3fbe6-0c18-5140-8ac6-87d03b5b4148   1c9bb5ac-6609-5af5-a747-ecf1d093cc7f   Ready	3m20s
+```
+
 
 The process of retrieving service credentials is known as binding. Here's how you bind the devdb instance:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ svcat bind devdb
+```
+$ svcat bind devdb
   Name:    	devdb    
   Namespace:   default  
   Status:          	 
@@ -141,11 +166,14 @@ The process of retrieving service credentials is known as binding. Here's how yo
   Instance:	devdb    
 
 Parameters:
-  No parameters defined</pre>
+  No parameters defined
+```
+
 
 With kubectl this may be described with a ServiceBinding resource, such as: `astra-service-binding.yaml`:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">apiVersion: servicecatalog.k8s.io/v1beta1
+```
+apiVersion: servicecatalog.k8s.io/v1beta1
 kind: ServiceBinding
 metadata:
   name: devdb
@@ -155,11 +183,14 @@ spec:
 	name: devdb
   secretName: devdb
 
-kubectl apply -f astra-service-binding.yaml</pre>
+kubectl apply -f astra-service-binding.yaml
+```
+
 
 After receiving this request Service Catalog handles retrieving the credentials from Astra and placing them within a local kubernetes secret at the same name as our binding. In this example, this is called `devdb`:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ kubectl get secrets devdb -o yaml
+```
+$ kubectl get secrets devdb -o yaml
 apiVersion: v1
 data:
   cql_port: 9042
@@ -178,7 +209,9 @@ data:
 kind: Secret
 metadata:
   name: devdb
-type: Opaque</pre>
+type: Opaque
+```
+
 
 This is all of the information required to configure the Cassandra driver for secure connectivity to Astra. Instead of manually spinning up nodes, wiring up monitoring, and sourcing infrastructure, Apache Cassandra is available on-demand through a simple GitOps interface. If you need to update the cluster to increase capacity, it is a simple YAML change which is checked into your repository and deployed with CD tools. The only "hard work" here is a call to `kubectl apply`. With a running database head over to the [Spring Reactive Pet Clinic](https://github.com/spring-petclinic/spring-petclinic-reactive/) for a reference Java application which is configured to use the Secret returned by Astra Service Broker.
 

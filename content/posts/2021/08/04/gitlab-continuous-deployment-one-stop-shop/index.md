@@ -33,9 +33,12 @@ However, I didn't touch on one facet and that facet is how I generate the static
 
 All in all, it means that I require a fully configured system. I solved this problem by using containerization, namely Docker. Within the `Dockerfile`, I'm able to install all required dependencies. Then, in my GitLab build file, I can reference this image and benefit from all its capabilities.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml">image: registry.gitlab.com/nfrankel/nfrankel.gitlab.io:latest
+```yaml
+image: registry.gitlab.com/nfrankel/nfrankel.gitlab.io:latest
 
-# ...</pre>
+# ...
+```
+
 
 Updating, the hard way {#h2-0-updating-the-hard-way}
 ----------------------------------------------------
@@ -82,7 +85,8 @@ So far, this is how my update process looked like:
 
 To achieve that, I had to browse through the documentation quite intensively. I also moved the build file to the "new" syntax. Here's the new version:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml">stages:
+```yaml
+stages:
   - image                                                                        # 1
   - deploy                                                                       # 1
 
@@ -93,7 +97,7 @@ build:                                                                          
     entrypoint: [""]                                                             # 5
   script:
     - mkdir -p /kaniko/.docker
-    - echo "{\"auths\":{\"$CI_REGISTRY\":{\"auth\":\"$(echo -n ${CI_REGISTRY_USER}:${CI_REGISTRY_PASSWORD} | base64)\"}}}" &gt; /kaniko/.docker/config.json # 6
+    - echo "{\"auths\":{\"$CI_REGISTRY\":{\"auth\":\"$(echo -n ${CI_REGISTRY_USER}:${CI_REGISTRY_PASSWORD} | base64)\"}}}" > /kaniko/.docker/config.json # 6
     - /kaniko/executor --context $CI_PROJECT_DIR --dockerfile $CI_PROJECT_DIR/Dockerfile --destination $CI_REGISTRY_IMAGE:$CI_COMMIT_TAG                 # 7
   only:
     refs:
@@ -105,7 +109,9 @@ pages:                                                                          
   stage: deploy                                                                  # 3
   image:
     name: registry.gitlab.com/nfrankel/nfrankel.gitlab.io:latest                 # 9
-# ...</pre>
+# ...
+```
+
 
 1. Define the *stages* . Stages are ordered: here, `image` runs before `deploy`.
 2. Define the *jobs*

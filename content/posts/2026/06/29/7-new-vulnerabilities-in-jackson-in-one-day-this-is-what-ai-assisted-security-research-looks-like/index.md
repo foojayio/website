@@ -20,7 +20,7 @@ frozen: false
 
 **Quick version check:** the affected range for all seven is broadly `>=2.10.0 =2.19.0 =3.0.0 <3.1.4` --- with some CVEs affecting narrower ranges. If you're on a supported release, upgrade to 2.18.8, 2.21.4, or 3.1.4. If you're on an EOL line --- 2.13.x, 2.14.x, 2.15.x --- jump to the bottom of the page for more specifics or visit [HeroDevs Jackson Support](https://docs.herodevs.com/jackson?utm_source=devrel&amp;utm_medium=referral&amp;utm_campaign=2026q2_spring-boot-3-5-eol_global)
 
-*** ** * ** ***
+
 
 ### Not a sales pitch {#h3-0-not-a-sales-pitch}
 
@@ -88,7 +88,7 @@ A property with `@JsonProperty("renamed")` on the getter and `@JsonIgnore` on th
 
 `UnwrappedPropertyHandler.processUnwrappedCreatorProperties()` replays buffered JSON into creator parameters without checking `prop.visibleInView(activeView)`. Constructor parameters annotated with both `@JsonView` and `@JsonUnwrapped` get populated from attacker JSON even when a restrictive view is active. Access control bypass. Affects `>=2.21.0` and `>=3.0.0`.
 
-*** ** * ** ***
+
 
 The Validator Is the Vulnerability {#h2-7-the-validator-is-the-vulnerability}
 -----------------------------------------------------------------------------
@@ -101,7 +101,7 @@ CVE-2026-54515 through CVE-2026-54518 bypass `@JsonIgnoreProperties`, `@JsonIgno
 
 The pattern is the same across all seven: a security boundary that looks closed is open in edge cases the original implementation didn't anticipate. "I added the validator" and "I annotated the field" are the beginnings of a security posture, not the ends of one.
 
-*** ** * ** ***
+
 
 The Creaking Disclosure Pipeline {#h2-8-the-creaking-disclosure-pipeline}
 -------------------------------------------------------------------------
@@ -118,7 +118,7 @@ But NVD enrichment provides something those sources don't always carry and which
 
 Don't assume your scanner's silence, or its alert, tells the whole story. Check your `jackson-databind` version directly.
 
-*** ** * ** ***
+
 
 ### Who's Effected {#h3-9-who-s-effected}
 

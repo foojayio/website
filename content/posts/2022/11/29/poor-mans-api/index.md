@@ -49,7 +49,8 @@ Note that you can find the whole source code on [GitHub](https://github.com/ajav
 
 PostgREST's [Getting Started guide](https://postgrest.org/en/stable/tutorials/tut0.html) is pretty complete and works out of the box. Yet, I didn't find any ready-made Docker image, so I created my own:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="dockerfile">FROM debian:bookworm-slim                                                   #1
+```dockerfile
+FROM debian:bookworm-slim                                                   #1
 
 ARG POSTGREST_VERSION=v10.1.1                                               #2
 ARG POSTGREST_FILE=postgrest-$POSTGREST_VERSION-linux-static-x64.tar.xz     #2
@@ -61,10 +62,12 @@ WORKDIR postgrest
 ADD https://github.com/PostgREST/postgrest/releases/download/$POSTGREST_VERSION/$POSTGREST_FILE \
     .                                                                       #3
 
-RUN apt-get update &amp;&amp; \
-    apt-get install -y libpq-dev xz-utils &amp;&amp; \
-    tar xvf $POSTGREST_FILE &amp;&amp; \
-    rm $POSTGREST_FILE                                                      #4</pre>
+RUN apt-get update && \
+    apt-get install -y libpq-dev xz-utils && \
+    tar xvf $POSTGREST_FILE && \
+    rm $POSTGREST_FILE                                                      #4
+```
+
 
 1. Start from the latest Debian
 2. Parameterize the build
@@ -73,7 +76,8 @@ RUN apt-get update &amp;&amp; \
 
 The Docker image contains a `postgrest` executable in the `/postgrest` folder. We can "deploy" the architecture via Docker Compose:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml">version: "3"
+```yaml
+version: "3"
 services:
   postgrest:
     build: ./postgrest                                   #1
@@ -90,7 +94,9 @@ services:
     environment:
       POSTGRES_PASSWORD: "root"
     volumes:
-      - ./postgres:/docker-entrypoint-initdb.d:ro       #5</pre>
+      - ./postgres:/docker-entrypoint-initdb.d:ro       #5
+```
+
 
 1. Build the above `Dockerfile`
 2. Share the configuration file
@@ -106,9 +112,12 @@ curl localhost:3000/product
 
 We immediately get the results:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="json">[{"id":1,"name":"Stickers pack","description":"A pack of rad stickers to display on your laptop or wherever you feel like. Show your love for Apache APISIX","price":0.49,"hero":false}, 
+```json
+[{"id":1,"name":"Stickers pack","description":"A pack of rad stickers to display on your laptop or wherever you feel like. Show your love for Apache APISIX","price":0.49,"hero":false}, 
  {"id":2,"name":"Lapel pin","description":"With this \"Powered by Apache APISIX\" lapel pin, support your favorite API Gateway and let everybody know about it.","price":1.49,"hero":false}, 
- {"id":3,"name":"Tee-Shirt","description":"The classic geek product! At a conference, at home, at work, this tee-shirt will be your best friend.","price":9.99,"hero":true}]</pre>
+ {"id":3,"name":"Tee-Shirt","description":"The classic geek product! At a conference, at home, at work, this tee-shirt will be your best friend.","price":9.99,"hero":true}]
+```
+
 
 That was a quick win!
 
@@ -126,7 +135,8 @@ The PostgREST documentation is aware of it and explicitly advises using a revers
 
 Instead of nginx, we would benefit from a full-fledged API Gateway: enters [Apache APISIX](https://apisix.apache.org/). We shall add it to our Docker Compose:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml">version: "3"
+```yaml
+version: "3"
 services:
   apisix:
     image: apache/apisix:2.15.0-alpine                              #1
@@ -144,14 +154,17 @@ services:
       ETCD_ENABLE_V2: "true"
       ALLOW_NONE_AUTHENTICATION: "yes"
       ETCD_ADVERTISE_CLIENT_URLS: "http://0.0.0.0:2397"
-      ETCD_LISTEN_CLIENT_URLS: "http://0.0.0.0:2397"</pre>
+      ETCD_LISTEN_CLIENT_URLS: "http://0.0.0.0:2397"
+```
+
 
 1. Use Apache APISIX
 2. APISIX stores its configuration in [etcd](https://etcd.io/)
 
 We shall first configure Apache APISIX to proxy calls to `postgrest`:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash">curl http://apisix:9080/apisix/admin/upstreams/1 -H 'X-API-KEY: 123xyz' -X PUT -d ' #1-2
+```bash
+curl http://apisix:9080/apisix/admin/upstreams/1 -H 'X-API-KEY: 123xyz' -X PUT -d ' #1-2
 {
   "type": "roundrobin",
   "nodes": {
@@ -163,7 +176,9 @@ curl http://apisix:9080/apisix/admin/routes/1 -H 'X-API-KEY: 123xyz' -X PUT -d '
 {
   "uri": "/*",
   "upstream_id": 1
-}'</pre>
+}'
+```
+
 
 1. Should be run in one of the Docker nodes, so use the Docker image's name. Alternatively, use `localhost` but be sure to expose the ports
 2. Create a reusable *upstream*
@@ -185,7 +200,8 @@ We haven't added anything, but we're ready to start the work. Let's first protec
 
 To protect from DDoS, we shall use a plugin. We can set plugins on a specific *route* when it's created or on every *route* ; in the latter case, it's a *global rule*. We want to protect every route by default, so we shall use one.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash">curl http://apisix:9080/apisix/admin/global_rules/1 -H 'X-API-KEY: 123xyz' -X PUT -d '
+```bash
+curl http://apisix:9080/apisix/admin/global_rules/1 -H 'X-API-KEY: 123xyz' -X PUT -d '
 {
   "plugins": {
     "limit-count": {                 #1
@@ -194,7 +210,9 @@ To protect from DDoS, we shall use a plugin. We can set plugins on a specific *r
       "rejected_code": 429           #3
     }
   }
-}'</pre>
+}'
+```
+
 
 1. `limit-count` limits the number of calls in a time window
 2. Limit to 1 call per 5 seconds; it's for demo purposes
@@ -206,13 +224,16 @@ Now, if we execute too many requests, Apache APISIX protects the upstream:
 curl localhost:9080/product
 ```
 
-<pre class="EnlighterJSRAW" data-enlighter-language="html">&lt;html&gt;
-&lt;head&gt;&lt;title&gt;429 Too Many Requests&lt;/title&gt;&lt;/head&gt;
-&lt;body&gt;
-&lt;center&gt;&lt;h1&gt;429 Too Many Requests&lt;/h1&gt;&lt;/center&gt;
-&lt;hr&gt;&lt;center&gt;openresty&lt;/center&gt;
-&lt;/body&gt;
-&lt;/html&gt;</pre>
+```html
+<html>
+<head><title>429 Too Many Requests</title></head>
+<body>
+<center><h1>429 Too Many Requests</h1></center>
+<hr><center>openresty</center>
+</body>
+</html>
+```
+
 
 Per-route authorization {#h2-3-per-route-authorization}
 -------------------------------------------------------
@@ -225,7 +246,8 @@ APISIX offers several [authentication methods](https://apisix.apache.org/plugins
 
 Here's how to create a consumer:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash">curl http://apisix:9080/apisix/admin/consumers -H 'X-API-KEY: 123xyz' -X PUT -d '    #1
+```bash
+curl http://apisix:9080/apisix/admin/consumers -H 'X-API-KEY: 123xyz' -X PUT -d '    #1
 {
   "username": "admin",                                                               #2
   "plugins": {
@@ -233,7 +255,9 @@ Here's how to create a consumer:
       "key": "admin"                                                                 #3
     }
   }
-}'</pre>
+}'
+```
+
 
 1. Create a new consumer
 2. Consumer's name
@@ -241,7 +265,8 @@ Here's how to create a consumer:
 
 We do the same with consumer `user` and key `user`. Now, we can create a dedicated route and configure it so that only requests from `admin` pass through:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash">curl http://apisix:9080/apisix/admin/routes -H 'X-API-KEY: 123xyz' -X POST -d ' #1
+```bash
+curl http://apisix:9080/apisix/admin/routes -H 'X-API-KEY: 123xyz' -X POST -d ' #1
 {
   "uri": "/",
   "upstream_id": 1,
@@ -251,7 +276,9 @@ We do the same with consumer `user` and key `user`. Now, we can create a dedicat
       "whitelist": [ "admin" ]                                                  #3
     }
   }
-}'</pre>
+}'
+```
+
 
 1. Create a new route
 2. Use the `key-auth` and `consumer-restriction` plugins
@@ -292,7 +319,8 @@ A much-undervalued feature of any software system is monitoring. As soon as you 
 
 We will use [Prometheus](https://prometheus.io/) as it's Open Source, battle-proven, and widespread. To display the data, we will rely on [Grafana](https://grafana.com/) for the same reasons. Let's add the components to the Docker Compose file:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml">version: "3"
+```yaml
+version: "3"
 services:
   prometheus:
     image: prom/prometheus:v2.40.1                                    #1
@@ -309,7 +337,9 @@ services:
     ports:
       - "3001:3001"
     depends_on:
-      - prometheus</pre>
+      - prometheus
+```
+
 
 1. Prometheus image
 2. Prometheus configuration to scrape Apache APISIX. See the full file [here](https://github.com/ajavageek/poor-man-api/blob/master/prometheus/prometheus.yml)
@@ -319,23 +349,29 @@ services:
 
 Once the monitoring infrastructure is in place, we only need to instruct APISIX to provide the data in a format that Prometheus expects. We can achieve it through configuration and a new global rule:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml">plugin_attr:
+```yaml
+plugin_attr:
   prometheus:
     export_addr:
       ip: "0.0.0.0"             #1
-      port: 9091                #2</pre>
+      port: 9091                #2
+```
+
 
 1. Bind to any address
 2. Bind to port `9091`. Prometheus metrics are available on `http://apisix:9091/apisix/prometheus/metrics` on the Docker network
 
 We can create the global rule:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash">curl http://apisix:9080/apisix/admin/global_rules/2 -H 'X-API-KEY: 123xyz' -X PUT -d '
+```bash
+curl http://apisix:9080/apisix/admin/global_rules/2 -H 'X-API-KEY: 123xyz' -X PUT -d '
 {
   "plugins": {
     "prometheus": {}
   }
-}'</pre>
+}'
+```
+
 
 Send a couple of queries and open the Grafana dashboard. It should look similar to this:
 

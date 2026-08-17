@@ -80,10 +80,13 @@ Let's check the Atlas Query Profiler now. It is enabled by default.
 
 Now, ours will be pretty empty, so let's run a few expensive queries, and give ourselves something to look at. Let's head over to our terminal and open mongosh. First, we'll select our `sample_mflix` database with the command `use sample_mflix`. We're going to run a few intentionally slow queries to give the profiler something to log:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">db.movies.find({ title: /The/ }).hint({ $natural: 1 });
-</pre>
+```
+db.movies.find({ title: /The/ }).hint({ $natural: 1 });
+```
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">db.movies.find(
+
+```
+db.movies.find(
   { plot: /love/i },
   {
     title: 1,
@@ -91,18 +94,21 @@ Now, ours will be pretty empty, so let's run a few expensive queries, and give o
     complexCalc: { $multiply: ["$runtime", 42] } 
   }
 ).hint({ $natural: 1 });
-</pre>
+```
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">db.movies.find({
+
+```
+db.movies.find({
   $or: [
     { directors: { $size: 2 } },
     { year: { $lt: 1980 } }
   ],
   $where: function () {
-    return this.cast &amp;&amp; this.cast.includes("Robert De Niro") &amp;&amp; this.runtime &gt; 90;
+    return this.cast && this.cast.includes("Robert De Niro") && this.runtime > 90;
   }
 }).hint({ $natural: 1 });
-</pre>
+```
+
 
 These queries are intentionally inefficient. They ignore indexes and force full collection scans. Perfect for generating profiler activity.
 
@@ -131,7 +137,8 @@ Start with these three:
 * `docsExamined`: How much work was done?
 * `keysExamined`: Did the query use an index?
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">"planSummary": "COLLSCAN",
+```
+"planSummary": "COLLSCAN",
 "docsExamined": 21349,
 "nreturned": 8,
 "keysExamined": 0,
@@ -146,12 +153,13 @@ Start with these three:
       { "year": { "$lt": 1980 } }
     ],
     "$where": {
-      "$code": "function () { return this.cast &amp;&amp; this.cast.includes(\"Robert De Niro\") &amp;&amp; this.runtime &gt; 90; }"
+      "$code": "function () { return this.cast && this.cast.includes(\"Robert De Niro\") && this.runtime > 90; }"
     }
   },
   "hint": { "$natural": 1 }
 }
-</pre>
+```
+
 
 This is textbook collection scan territory:
 
@@ -189,7 +197,10 @@ Atlas gives you a macro view, what's noisy overall. Shell gives you a micro view
 
 Let's launch our `mongosh` and connect to our cluster. Now, let's tell MongoDB to start tracking slow queries. First, we'll select the `sample_airbnb` database (`use sample_airbnb`):
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">db.setProfilingLevel(2);</pre>
+```
+db.setProfilingLevel(2);
+```
+
 
 This will log everything. It is excessive, but for our examples, we want to see exactly what's going on. Make sure not to leave this on for your production database, though. You will feel it!
 
@@ -203,45 +214,53 @@ We can adjust the threshold based on our use case.
 
 Check that it worked:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">db.getProfilingStatus();</pre>
+```
+db.getProfilingStatus();
+```
+
 
 We should see something like this:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">{
+```
+{
   "was": 2,
   "slowms": 100,
   "sampleRate": 1,
   "filter": { }
 }
-</pre>
+```
+
 
 ### Let's make something slow on purpose {#h3-6-let-s-make-something-slow-on-purpose}
 
 We're using the `sample_airbnb` database now (`use sample_airbnb`). This one has a `listingsAndReviews` collection, great for some slow fun.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">db.listingsAndReviews.find({
+```
+db.listingsAndReviews.find({
   $or: [
     { "address.market": "Berlin" },
     { "review_scores.review_scores_cleanliness": { $lt: 5 } }
   ],
   $where: function () {
-    return this.amenities &amp;&amp; this.amenities.length &gt; 15;
+    return this.amenities && this.amenities.length > 15;
   }
 }).sort({ description: 1 }).hint({ $natural: 1 });
-</pre>
+```
+
 
 The `.hint({ $natural: 1 })` tells MongoDB to read documents in the order they're stored on disk, bypassing all indexes. It's a guaranteed collection scan, perfect for generating profiler logs, terrible for performance.
 
 Let's do another one with writes:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">db.listingsAndReviews.updateMany(
+```
+db.listingsAndReviews.updateMany(
   {
     $or: [
       { "address.market": "Berlin" },
       { "review_scores.review_scores_cleanliness": { $lt: 5 } }
     ],
     $where: function () {
-      return this.amenities &amp;&amp; this.amenities.length &gt; 15;
+      return this.amenities && this.amenities.length > 15;
     }
   },
   {
@@ -253,15 +272,20 @@ Let's do another one with writes:
     hint: { $natural: 1 }
   }
 );
-</pre>
+```
+
 
 Now, we can go check what just got logged:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">db.system.profile.find().sort({ ts: -1 }).limit(2).pretty();</pre>
+```
+db.system.profile.find().sort({ ts: -1 }).limit(2).pretty();
+```
+
 
 And we'll see something like this output I abbreviated:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">{
+```
+{
   op: 'query',
   ns: 'sample_airbnb.listingsAndReviews',
   command: {
@@ -279,7 +303,7 @@ And we'll see something like this output I abbreviated:
       ],
       '$where': Code(
       'function () {\n' +
-        '    return this.amenities &amp;&amp; this.amenities.length &gt; 15;\n' +
+        '    return this.amenities && this.amenities.length > 15;\n' +
         '  }'
       )
     },
@@ -340,7 +364,7 @@ And we'll see something like this output I abbreviated:
           {
             '$where': Code(
             'function () {\n' +
-              '    return this.amenities &amp;&amp; this.amenities.length &gt; 15;\n' +
+              '    return this.amenities && this.amenities.length > 15;\n' +
               '  }'
             )
           }
@@ -353,7 +377,8 @@ And we'll see something like this output I abbreviated:
   },
   ...
 }
-</pre>
+```
+
 
 We're looking for these fields:
 
@@ -391,12 +416,14 @@ Before we get started, make sure you have:
 
 The method comes in two syntactic forms:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">// Most common usage
+```
+// Most common usage
 db.collection.find({ ... }).explain("executionStats");
 
 // Alternative chaining syntax
 db.collection.explain("executionStats").find({ ... });
-</pre>
+```
+
 
 Both syntaxes are valid, but the first is more common in shell and scripts. The second (`db.collection.explain().find(...)`) is helpful when chaining query modifiers like:
 
@@ -407,10 +434,13 @@ Both syntaxes are valid, but the first is more common in shell and scripts. The 
 
 For example, let's switch back to our `sample_mflix` database:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">db.movies.explain("executionStats")
+```
+db.movies.explain("executionStats")
   .find({ year: { $gt: 2000 } })
   .sort({ year: -1 })
-  .limit(5);</pre>
+  .limit(5);
+```
+
 
 This version lets you see how all those combined modifiers affect the query plan, without needing to nest multiple `.explain()` calls or wrap in extra parentheses.
 
@@ -426,7 +456,8 @@ This [returns a ton of useful info](https://www.mongodb.com/docs/manual/referenc
 
 Here's an abbreviated version of the output:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">{
+```
+{
   queryPlanner: {
     winningPlan: {
       stage: "SORT",
@@ -452,7 +483,8 @@ Here's an abbreviated version of the output:
     }
   }
 }
-</pre>
+```
+
 
 How to read this:
 
@@ -484,20 +516,25 @@ Important behavior notes:
 
 Now, let's add an index:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">db.movies.createIndex({ year: -1 });
-</pre>
+```
+db.movies.createIndex({ year: -1 });
+```
+
 
 And once this is created, we can run our query again:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">db.movies.explain("executionStats")
+```
+db.movies.explain("executionStats")
   .find({ year: { $gt: 2000 } })
   .sort({ year: -1 })
   .limit(5);
-</pre>
+```
+
 
 In our new (abbreviated) output:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">{
+```
+{
   queryPlanner: {
     winningPlan: {
       stage: "LIMIT",
@@ -520,7 +557,8 @@ In our new (abbreviated) output:
     totalDocsExamined: 5
   }
 }
-</pre>
+```
+
 
 What we're seeing in the new `explain("executionStats")` output is a radically more efficient query plan, thanks to the `year_-1` index we added. Instead of scanning the entire collection and then sorting the results in memory like before, MongoDB now uses an index scan (`IXSCAN`) to jump directly to the relevant documents, already ordered by `year` in descending order. The `FETCH` stage pulls only the actual documents for the top five matches, and the `LIMIT` stage stops execution as soon as it has what it needs.
 
@@ -532,7 +570,8 @@ Unlike `find()` or `aggregate()`, you can't call `.explain()` directly on a writ
 
 Here's how to do it:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">db.runCommand({
+```
+db.runCommand({
   explain: {
     update: "movies",
     updates: [
@@ -545,13 +584,15 @@ Here's how to do it:
   },
   verbosity: "executionStats"
 });
-</pre>
+```
+
 
 This runs an `updateOne()` under the hood, but wraps it with `explain` so you can analyze its performance---just like with reads.
 
 And here's what the (shortened) output looks like:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">{
+```
+{
   queryPlanner: {
     winningPlan: {
       stage: "UPDATE",
@@ -569,7 +610,8 @@ And here's what the (shortened) output looks like:
     executionTimeMillis: 7
   }
 }
-</pre>
+```
+
 
 This tells us that MongoDB had to scan 7,675 documents just to find one to update. That's a full collection scan---confirmed by the `COLLSCAN` stage and `totalKeysExamined: 0`. It matched one document (`nMatched: 1`) and would've updated it (`nWouldModify: 1`), but the operation wasn't actually run since this was an `explain`, not a real write.
 
@@ -605,22 +647,28 @@ If you're curious how MongoDB chooses one query plan over others, try this:
 
 Before we run the query, let's make sure we have indexes on both `year` and `rated`:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">db.movies.createIndex({ year: 1 });
+```
+db.movies.createIndex({ year: 1 });
 db.movies.createIndex({ rated: 1 });
-</pre>
+```
+
 
 Now, we can run the query with full plan evaluation:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">db.movies.find({
+```
+db.movies.find({
   year: { $gt: 1990 },
   rated: { $in: ["PG", "PG-13"] }
-}).explain("allPlansExecution");</pre>
+}).explain("allPlansExecution");
+```
+
 
 This query references two indexed fields: `year` and `rated`. Since both are eligible, MongoDB considers multiple plans and tests each one before choosing a winner.
 
 Here's a simplified excerpt of what you'll see:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">{
+```
+{
   queryPlanner: {
     winningPlan: {
       stage: "FETCH",
@@ -640,7 +688,8 @@ Here's a simplified excerpt of what you'll see:
     nReturned: 3091
   }
 }
-</pre>
+```
+
 
 MongoDB tested three potential strategies:
 
@@ -677,14 +726,17 @@ Before we get started, make sure you have:
 
 You can filter it to just your operations or long-running ones.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">db.currentOp({ "secs_running": { $gt: 2 } });
-</pre>
+```
+db.currentOp({ "secs_running": { $gt: 2 } });
+```
+
 
 This will return all operations running longer than two seconds.
 
 Here's what a live operation might look like:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">{
+```
+{
   "opid": "12345",
   "secs_running": 5,
   "active": true,
@@ -697,7 +749,8 @@ Here's what a live operation might look like:
   "locks": { ... },
   "client": "203.0.113.25:43210"
 }
-</pre>
+```
+
 
 `opid` is the operation ID you can use to track or kill the operation.
 
@@ -705,15 +758,19 @@ If we run this on our collection now, we'll likely see a bunch of admin operatio
 
 Want to find all active queries on any namespace?
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">db.currentOp({ "active": true, "op": "query" });
-</pre>
+```
+db.currentOp({ "active": true, "op": "query" });
+```
+
 
 ### Killing a long-running query {#h3-17-killing-a-long-running-query}
 
 If you need to stop an operation---like an accidental full collection scan---use `db.killOp()`:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">db.killOp("12345");
-</pre>
+```
+db.killOp("12345");
+```
+
 
 Just replace `12345` with the `opid` of the operation you want to stop. You need the `killOp` privilege on the database to run this command.
 
@@ -735,7 +792,10 @@ Just replace `12345` with the `opid` of the operation you want to stop. You need
 * Use `maxTimeMS()` to cap long-running queries so they don't clog up your cluster.
 * Combine filters to reduce noise:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">db.currentOp({ "active": true, "secs_running": { $gt: 2 }, "ns": /movies/ });</pre>
+```
+db.currentOp({ "active": true, "secs_running": { $gt: 2 }, "ns": /movies/ });
+```
+
 
 Now that we can observe slow queries as they happen, let's look at why they happen as data scales. In Section 4, we'll explore inefficient patterns, unused indexes, and how things change when collections grow.
 
@@ -772,34 +832,40 @@ MongoDB can show you how often each index on a collection is being used. This is
 
 Let's try it on the `movies` collection:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">db.movies.aggregate([{ $indexStats: {} }]);
-</pre>
+```
+db.movies.aggregate([{ $indexStats: {} }]);
+```
+
 
 This returns a document per index, with stats about how frequently each one has been accessed since the server started tracking.
 
 Here's a sample of the output:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">{
+```
+{
   name: "year_1",
   accesses: {
     ops: 0,
     since: ISODate("2025-04-11T12:31:22.682Z")
   }
 }
-</pre>
+```
+
 
 The `ops` field tells us how many operations have used this index. In this case, we can see that several indexes, including `year_1`, `year_-1`, and `rated_1`, have `ops: 0`. This means no queries have used them since tracking began.
 
 On the other hand:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">{
+```
+{
   name: "_id_",
   accesses: {
     ops: 1,
     since: ISODate("2025-04-09T14:50:50.878Z")
   }
 }
-</pre>
+```
+
 
 The `_id_` index has been used once. That's expected, MongoDB always creates a unique index on `_id` by default.
 
@@ -831,12 +897,17 @@ MongoDB documents can be large, and that's often a good thing. But...
 
 Check this in the shell:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">db.movies.stats().avgObjSize;
-</pre>
+```
+db.movies.stats().avgObjSize;
+```
+
 
 And we can have a look at the output:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">1598</pre>
+```
+1598
+```
+
 
 The average document size in the `movies` collection is 1,598 bytes. This number helps estimate:
 
@@ -846,8 +917,10 @@ The average document size in the `movies` collection is 1,598 bytes. This number
 
 If `totalDocsExamined` is 7,675 , and average doc size is 1,598 bytes:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">7_675 docs * 1,598 bytes ≈ 12.27 MB
-</pre>
+```
+7_675 docs * 1,598 bytes ≈ 12.27 MB
+```
+
 
 So, our full collection scan is reading about 12 MB from disk or memory for that single operation.
 
@@ -922,17 +995,20 @@ This section is about teaching you how to read a pipeline, profile its performan
 
 To illustrate how pipeline structure affects performance, let's start with a deliberately inefficient example. In the `sample_supplies` database, let's run the following:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">db.sales.aggregate([
+```
+db.sales.aggregate([
   { $group: { _id: "$item", totalSales: { $sum: "$price" } } },
   { $match: { totalSales: { $gt: 100 } } }
 ]).explain("executionStats");
-</pre>
+```
+
 
 This pipeline groups all documents in the collection before applying a filter on the computed `totalSales` value. From a functional standpoint, it's valid. From a performance perspective, it's costly. We're forcing MongoDB to load every document into memory to compute the groupings, regardless of whether that document will later be filtered out.
 
 The `explain` output will confirm this. We should expect to see a `COLLSCAN` stage in the cursor source, along with high values for `totalDocsExamined` and `executionTimeMillis`. For example:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">{
+```
+{
   "stages": [
     {
       "$cursor": {
@@ -956,7 +1032,8 @@ The `explain` output will confirm this. We should expect to see a `COLLSCAN` sta
     }
   ]
 }
-</pre>
+```
+
 
 This output shows that most of the time is spent scanning and grouping all 250,000 documents, even though only a small number are returned. There's no filtering until the final stage, meaning the `$group` stage is carrying a much heavier load than necessary.
 
@@ -964,10 +1041,13 @@ This output shows that most of the time is spent scanning and grouping all 250,0
 
 Now, let's reverse the order of the pipeline so that the filter occurs before the grouping:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">db.sales.aggregate([
+```
+db.sales.aggregate([
   { $match: { price: { $gt: 1 } } },
   { $group: { _id: "$item", totalSales: { $sum: "$price" } } }
-]).explain("executionStats");</pre>
+]).explain("executionStats");
+```
+
 
 In this case, the explain output should show dramatically fewer documents examined, a lower execution time, and, if we've indexed the `price` field, an `IXSCAN` instead of a `COLLSCAN`. We've offloaded unnecessary work from `$group` by letting `$match` reduce the input set early.
 
@@ -985,7 +1065,8 @@ Now, consider a common source of hidden aggregation slowness: unindexed `$lookup
 
 Let's look at a real example using the `sample_analytics` dataset. We'll join the `transactions` collection with `customers`, matching the `customer_id` field from transactions to the `email` field in customers. This is deliberately inefficient, no index exists on `email` in the foreign collection, and neither field is guaranteed to be unique.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">db.transactions.aggregate([
+```
+db.transactions.aggregate([
   {
     $lookup: {
       from: "customers",
@@ -995,13 +1076,15 @@ Let's look at a real example using the `sample_analytics` dataset. We'll join th
     }
   }
 ]);
-</pre>
+```
+
 
 This query returns some documents. In fact, it returned 1,746 documents when we ran it. But behind the scenes, it scanned thousands more.
 
 Here's the important diagnostic output from `explain("executionStats")`:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">{
+```
+{
   "executionStats": {
     "nReturned": 1746,
     "executionTimeMillis": 8,
@@ -1023,7 +1106,8 @@ Here's the important diagnostic output from `explain("executionStats")`:
     }
   }
 }
-</pre>
+```
+
 
 The query returned fast, but:
 
@@ -1036,12 +1120,15 @@ These are red flags for joins at scale. As your data grows, this will become a b
 
 To correct it, let's add an index on `customers.email`:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">db.customers.createIndex({ email: 1 });
-</pre>
+```
+db.customers.createIndex({ email: 1 });
+```
+
 
 Then, re-run the aggregation with `explain("execuationStats")` and compare the difference.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">{
+```
+{
   "nReturned": 1746,
   "executionTimeMillis": 9,
   "totalDocsExamined": 1746,
@@ -1055,7 +1142,8 @@ Then, re-run the aggregation with `explain("execuationStats")` and compare the d
     }
   }
 }
-</pre>
+```
+
 
 Even though execution time rose slightly (possibly due to internal re-planning or I/O timing variance), the structure is much healthier. We've replaced a memory-intensive hash join with an index-backed nested loop, and reduced total document examination to match the number of documents returned.
 
@@ -1075,15 +1163,18 @@ Another subtle performance trap is using `$sort` early in a pipeline, especially
 
 Try this pipeline:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">db.sales.aggregate([
+```
+db.sales.aggregate([
   { $sort: { saleDate: -1 } },
   { $match: { "items.name": "binder" } }
 ]).explain("executionStats");
-</pre>
+```
+
 
 The explain plan will show that the sort is operating on the full dataset, not just the relevant subset. The `executionTimeMillisEstimate` for the sort stage may be significantly higher than the filter.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">{
+```
+{
   queryPlanner: {
     stage: 'SORT',
     sortPattern: { saleDate: -1 },
@@ -1106,19 +1197,23 @@ The explain plan will show that the sort is operating on the full dataset, not j
     }
   }
 }
-</pre>
+```
+
 
 MongoDB scans all 5000 documents, and then returns the 3396 matches, 28ms to run. Now, let's simply reverse the order so that the `$match` runs first:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">db.sales.aggregate([
+```
+db.sales.aggregate([
   { $match: { "items.name": "binder" } },
   { $sort: { saleDate: -1 } }
 ]).explain("executionStats");
-</pre>
+```
+
 
 And our output should show some favourable changes:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">{
+```
+{
   queryPlanner: {
     stage: 'SORT',
     sortPattern: { saleDate: -1 },
@@ -1141,7 +1236,8 @@ And our output should show some favourable changes:
     }
   }
 }
-</pre>
+```
+
 
 The same number of documents is examined, but by filtering first, we halve the `$sort` time. A lot of that time is saved in sorting.
 
@@ -1157,7 +1253,8 @@ If `$search` is slow, check whether your search index includes the right fields 
 
 To simulate the slow query, we can create an index on our Atlas (as long as we have admin permissions) for our search queries:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">db.runCommand({
+```
+db.runCommand({
   createSearchIndexes: "movies",
   indexes: [
     {
@@ -1175,11 +1272,13 @@ To simulate the slow query, we can create an index on our Atlas (as long as we h
     }
   ]
 });
-</pre>
+```
+
 
 Give this a minute to create, then we can run the following query. This uses a common term to trigger a high-result count and returns full documents without limiting or projecting fields:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">db.movies.aggregate([
+```
+db.movies.aggregate([
   {
     $search: {
       index: "titleIndex",
@@ -1190,7 +1289,8 @@ Give this a minute to create, then we can run the following query. This uses a c
     }
   }
 ]);
-</pre>
+```
+
 
 A query as generic as "the" in movie titles will give us quite high latency, and we can dissect it and learn how to improve it in our profiler.  
 ![Query profiler for slow aggregation operations in the Atlas UI](data:image/png;base64,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)

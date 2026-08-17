@@ -31,22 +31,27 @@ In the previous edition of the magazine, we discussed how the [JetBrains HTTP Cl
 
 For reference, it could look like this.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">### Github API - Traffic per day
+```
+### Github API - Traffic per day
 
 GET https://api.github.com/repos/{{owner}}/{{repo}}/traffic/views?per=day
 Accept: application/vnd.github+json
 X-GitHub-Api-Version: 2022-11-28
 Authorization: Bearer {{github_key}}
-</pre>
+```
+
 
 With an environment file that looks like this:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">{
+```
+{
   "dev": {
     "github_key": "not_that_easy",
     "owner": "jlengrand",
     "repo": "elm-firebase"
-  }}</pre>
+  }}
+```
+
 
 Now, that is very nice, but it requires a lot of manual work. **Wouldn't it be nice to be able to automate this?** Fortunately, most of us developing APIs also generate [OpenAPI](https://www.openapis.org/?ref=lengrand.fr) Specifications for them. When I looked however, there was no OpenAPI generator yet available for the Jetbrains HTTP Client. This is the story of how I've implemented it from scratch, and how you could too if you find yourself in the same situation! We'll use the JetBrains HTTP Client as a practical example, but the knowledge is transferable 🙂.
 
@@ -64,13 +69,16 @@ You can actually find most of that logic in the `DefaultGenerator` source file o
 
 Each of those is illustrated by a method, and takes separate objects as inputs:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">…
-    void generateModels(List&lt;File&gt; files, List&lt;ModelMap&gt; allModels, List&lt;String&gt; unusedModels) {…}
+```
 …
-    void generateApis(List&lt;File&gt; files, List&lt;OperationsMap&gt; allOperations, List&lt;ModelMap&gt; allModels) {...}
+    void generateModels(List<File> files, List<ModelMap> allModels, List<String> unusedModels) {…}
 …
-    private void generateSupportingFiles(List&lt;File&gt; files, Map&lt;String, Object&gt; bundle) {...}
-…</pre>
+    void generateApis(List<File> files, List<OperationsMap> allOperations, List<ModelMap> allModels) {...}
+…
+    private void generateSupportingFiles(List<File> files, Map<String, Object> bundle) {...}
+…
+```
+
 
 You can find [the actual source file on GitHub](https://github.com/OpenAPITools/openapi-generator/blob/78f3b19b58df699ef883b89a7a44531407377719/modules/openapi-generator/src/main/java/org/openapitools/codegen/DefaultGenerator.java?ref=lengrand.fr#L433). The objects for each of those methods are large `Map` classes that contain the necessary data in a semi-structured format. Here is an example of how `allModels` looks like:
 
@@ -82,37 +90,48 @@ As you can see, the object is essentially a lot of key/value pairs that are quit
 
 To create our own client, we will take advantage of this nice work. Let's dive into it. We first clone the repository:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">$ <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="0f68667b4f68667b677a6d216c6062">[email&nbsp;protected]</a>:OpenAPITools/openapi-generator.git; cd openapi-generator
-</pre>
+```
+$ <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="0f68667b4f68667b677a6d216c6062">[email protected]</a>:OpenAPITools/openapi-generator.git; cd openapi-generator
+```
+
 
 We can then use the `/new.sh` script to generate a few placeholder files for us. We'll be generating a client, and since we're not creating any bugs we won't be generating test files.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">$ ./new.sh -n java-magazine-client -c
+```
+$ ./new.sh -n java-magazine-client -c
 
 Creating modules/openapi-generator/src/main/java/org/openapitools/codegen/languages/JavaMagazineClientClientCodegen.java
 Creating modules/openapi-generator/src/main/resources/java-magazine-client/README.mustache
 Creating modules/openapi-generator/src/main/resources/java-magazine-client/model.mustache
 Creating modules/openapi-generator/src/main/resources/java-magazine-client/api.mustache
 Creating bin/configs/java-magazine-client-petstore-new.yaml
-Finished.</pre>
+Finished.
+```
+
 
 The library nicely generates a client generator for us, as well as some template files and even a config so we can test it easily! The config uses the well known [petstore](https://spring-framework-petclinic-qctjpkmzuq-od.a.run.app/?ref=lengrand.fr) by default.
 
 This is how the config file looks like:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">generatorName: java-magazine-client
+```
+generatorName: java-magazine-client
 outputDir: samples/client/petstore/java/magazine/client
 inputSpec: modules/openapi-generator/src/test/resources/3_0/petstore.yaml
 templateDir: modules/openapi-generator/src/main/resources/java-magazine-client
 additionalProperties:
-  hideGenerationTimestamp: "true"</pre>
+  hideGenerationTimestamp: "true"
+```
+
 
 It nicely mentions to the OpenAPI generator library which generator to use, which sample OpenAPI file to use as input, where the mustache template files are located and where to store the output.
 
 **Let's run it!**
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">$ ./mvnw clean package # package once to have the generator inside the generated jar
-$ ./bin/generate-samples.sh bin/configs/java-magazine-client-petstore-new.yaml</pre>
+```
+$ ./mvnw clean package # package once to have the generator inside the generated jar
+$ ./bin/generate-samples.sh bin/configs/java-magazine-client-petstore-new.yaml
+```
+
 
 Let's see what the generated output looks like:
 
@@ -124,7 +143,8 @@ We haven't done any work yet, and our generator is already spitting out things! 
 
 We'll start by customizing the `JavaMagazineClientClientCodegen` to fit our needs. We want a very minimal implementation that fits in this article, so we'll actually decide to NOT implement any supporting files (the README), nor Models and instead focus solely on the API. The way to do this in a custom generator is to extend the `postProcessOperationsWithModels` from the `CodeGenConfig` interface. We change the `.zz` extension into `.http` files that will be recognised by IntelliJ. And because in this specific (simplistic) case, we will not need any alterations to the `OperationsMap` object we can actually only call the super method. Our final class looks like this:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">package org.openapitools.codegen.languages;
+```
+package org.openapitools.codegen.languages;
 import org.openapitools.codegen.*;
 import java.io.File;
 import java.util.*;
@@ -149,10 +169,12 @@ public class JavaMagazineClientClientCodegen extends DefaultCodegen implements C
     }
 
     @Override
-    public OperationsMap postProcessOperationsWithModels(OperationsMap objs, List&lt;ModelMap&gt; allModels) {
+    public OperationsMap postProcessOperationsWithModels(OperationsMap objs, List<ModelMap> allModels) {
         return super.postProcessOperationsWithModels(objs, allModels);
     }
-}</pre>
+}
+```
+
 
 *Note: At first glance, the method and variable names may look a bit like magic. It is because most of the logic comes from DefaultGenerator, and CodeGenConfig. If you feel lost, those two classes are where it's at.*
 
@@ -162,7 +184,8 @@ We know we want one file per main API endpoint, with some documentation. We also
 
 If we look at the data object available for operations, we end up with this, where each `{{item}}` notation is the value of the item key inside the object.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">## {{classname}}
+```
+## {{classname}}
 {{#operations}}
 {{#operation}}
 
@@ -172,7 +195,9 @@ If we look at the data object available for operations, we end up with this, whe
 {{#consumes}}Content-Type: {{{mediaType}}}
 {{/consumes}}
 {{/operation}}
-{{/operations}}</pre>
+{{/operations}}
+```
+
 
 We can see it clearly if we look at the object during processing.
 
@@ -183,8 +208,11 @@ We can see it clearly if we look at the object during processing.
 
 Let's rerun the generation and see what we get now:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">$ ./mvnw package 
-$ ./bin/generate-samples.sh bin/configs/java-magazine-client-petstore-new.yaml</pre>
+```
+$ ./mvnw package 
+$ ./bin/generate-samples.sh bin/configs/java-magazine-client-petstore-new.yaml
+```
+
 
 ![Creating an OpenAPI generator from scratch : From YAML to JetBrains HTTP Client](https://lh7-us.googleusercontent.com/hJ-53Q53ibGC0DuCaqu7yuoWpnLJB3d6g9SYUQ26-XeAVLW5JgavLfljBo08hnuyMwUsQo4Hgz5aBthp8L8jqFCpq1RBFWCz-PWFvpdofXDgR4o7QI_iyFKYMz4Afbet38-rEnzAuCXL4aCaL7ZUnZE)
 
@@ -192,7 +220,8 @@ $ ./bin/generate-samples.sh bin/configs/java-magazine-client-petstore-new.yaml</
 
 Great! Only API files, and one per API, as wanted. Let's see what they contain!
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">## PetApi
+```
+## PetApi
 
 ### Add a new pet to the store
 # @name addPet
@@ -203,7 +232,9 @@ Content-Type: application/xml
 ### Deletes a pet
 # @name deletePet
 DELETE http://petstore.swagger.io/v2/pet/{petId}
-Looks great to me! Let's try to run one of the calls</pre>
+Looks great to me! Let's try to run one of the calls
+```
+
 
 Looks great to me! Let's try to run one of the calls.
 
@@ -217,7 +248,8 @@ Now, there's only one little issue. The variables! In the Jetbrains HTTP Client 
 
 What we'll be doing here is implement [a custom mustache lambda](https://mustache.github.io/mustache.5.html?ref=lengrand.fr) that doubles up the braces when it finds them. The lambda is essentially a string replacement.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">public static class DoubleMustacheLambda implements Mustache.Lambda {
+```
+public static class DoubleMustacheLambda implements Mustache.Lambda {
         @Override
         public void execute(Template.Fragment fragment, Writer writer) throws IOException {
             String text = fragment.execute();
@@ -226,22 +258,28 @@ What we'll be doing here is implement [a custom mustache lambda](https://mustach
                     .replaceAll("}", "}}")
             );
         }
-    }</pre>
+    }
+```
+
 
 In order to make it available in our Generator, the openapi generator library offers the same mechanism as for the rest: We have to override a ready-made method.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">@Override
-protected ImmutableMap.Builder&lt;String, Mustache.Lambda&gt; addMustacheLambdas() {
+```
+@Override
+protected ImmutableMap.Builder<String, Mustache.Lambda> addMustacheLambdas() {
 
     return super.addMustacheLambdas()
             .put("doubleMustache", new JavaMagazineClientClientCodegen.DoubleMustacheLambda());
-}</pre>
+}
+```
+
 
 The code above is added to our `JavaMagazineClientClientCodegen` class.
 
 Next, we also need to modify our mustache template to add that lambda at the right location (around the `path` parameter). If that path is a variable, the braces will then be doubled.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">## {{classname}}
+```
+## {{classname}}
 {{#operations}}
 {{#operation}}
 
@@ -251,17 +289,22 @@ Next, we also need to modify our mustache template to add that lambda at the rig
 {{#consumes}}Content-Type: {{{mediaType}}}
 {{/consumes}}
 {{/operation}}
-{{/operations}}</pre>
+{{/operations}}
+```
+
 
 Et voilà! Running the sample again, we can now use variables as they are meant to be inside IntelliJ!
 
 In the sample below, I'm using the following local environment file:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">{
+```
+{
   "dev": {
     "petId": 3
   }
-}</pre>
+}
+```
+
 
 There is still a lot more to do with this generator. READMEs, payload, auth, headers, ... But now it's a matter of updating the mustache files as we want.
 

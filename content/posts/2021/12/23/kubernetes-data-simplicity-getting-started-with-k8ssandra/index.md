@@ -128,8 +128,10 @@ The K8ssandra GitHub repository resides [here](https://github.com/k8ssandra/k8ss
 
 Command line example:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">git clone https://github.com/your-github-repo-name/k8ssandra.git
-</pre>
+```
+git clone https://github.com/your-github-repo-name/k8ssandra.git
+```
+
 
 **Note**: Insert your personal GitHub repository name followed by k8ssandra.git.
 
@@ -171,11 +173,17 @@ The K8ssandra test directory contains subdirectories for managing and executing 
 
 Issue the command:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">make unit-test</pre>
+```
+make unit-test
+```
+
 
 Once complete, you should see something like the following:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">ok github.com/k8ssandra/k8ssandra/tests/unit 47.156s</pre>
+```
+ok github.com/k8ssandra/k8ssandra/tests/unit 47.156s
+```
+
 
 Feel free to explore the K8ssandra [Makefile](https://github.com/k8ssandra/k8ssandra/blob/main/Makefile) for other recipes that can be targeted.
 
@@ -225,17 +233,26 @@ Let's get started with some useful commands for looking at important K8ssandra l
 
 ➠ View [Management-api](https://github.com/k8ssandra/management-api-for-apache-cassandra) logs. Replace cassandra-pod with an actual pod instance name.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">kubectl logs cassandra-pod -c cassandra -n k8ssandra</pre>
+```
+kubectl logs cassandra-pod -c cassandra -n k8ssandra
+```
+
 
 The Management-api is a service layer that attempts to build a well supported set of operational actions on Apache Cassandra nodes. This service shares the same container as Apache Cassandra and runs as process ID 1 (as an init process).
 
 ➠ View [Apache Cassandra](https://cassandra.apache.org/) logs. Replace cassandra-pod with an actual pod instance name.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">kubectl logs cassandra-pod -c server-system-logger -n k8ssandra</pre>
+```
+kubectl logs cassandra-pod -c server-system-logger -n k8ssandra
+```
+
 
 ➠ View [Medusa](https://github.com/thelastpickle/cassandra-medusa) logs. Replace cassandra-pod with an actual pod instance name.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">kubectl logs cassandra-pod -c medusa -n k8ssandra</pre>
+```
+kubectl logs cassandra-pod -c medusa -n k8ssandra
+```
+
 
 See also kubectl documentation describing the [logs command](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#logs) in more detail.
 
@@ -243,11 +260,15 @@ See also kubectl documentation describing the [logs command](https://kubernetes.
 
 ➠ Collect a bird's eye view of the K8ssandra namespaced pods.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">kubectl get pods -n k8ssandra</pre>
+```
+kubectl get pods -n k8ssandra
+```
+
 
 Example: A summarized version of the output.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">NAME
+```
+NAME
 k8ssandra-cass-operator-64db8585d7-kqhmf
 k8ssandra-dc1-default-sts-0
 k8ssandra-dc1-stargate-74558b9d76-hswj9
@@ -257,25 +278,37 @@ k8ssandra-reaper-7bb77d575c-6bpng
 k8ssandra-reaper-operator-6c9c4576d5-kpjfb
 k8ssandra-reaper-schema-w5x8n
 prometheus-k8ssandra-kube-prometheus-prometheus-0
-traefik-57d7955dcc-dgm7z</pre>
+traefik-57d7955dcc-dgm7z
+```
+
 
 Another variation with the -o wide option provides details of IP and node, which is super helpful when you need to trace a pod back to a node or require IP details for network troubleshooting.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">kubectl get pods -n k8ssandra -o wide</pre>
+```
+kubectl get pods -n k8ssandra -o wide
+```
+
 
 ➠ Gather container information for a pod.
 
 First, list out the pods scoped to the K8ssandra namespace and instance with a target release.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">kubectl get pods -l app.kubernetes.io/instance=release-name -n k8ssandra</pre>
+```
+kubectl get pods -l app.kubernetes.io/instance=release-name -n k8ssandra
+```
+
 
 If you don't know the release name, look it up with a common Helm command:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">helm list -n k8ssandra -o yaml</pre>
+```
+helm list -n k8ssandra -o yaml
+```
+
 
 Example: output of the releases in YAML format.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">- app_version: ""
+```
+- app_version: ""
 chart: k8ssandra-1.0.0
 name: k8ssandra
 namespace: k8ssandra
@@ -288,60 +321,87 @@ name: traefik
 namespace: k8ssandra
 revision: "1"
 status: deployed
-updated: 2021-04-01 10:46:07.048129 -0500 CDT</pre>
+updated: 2021-04-01 10:46:07.048129 -0500 CDT
+```
+
 
 Next, targeting a specific pod, filtering out container-specific information. Replace pod-name with the target pod of interest.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">kubectl describe pod/pod-name -n k8ssandra | grep container -C 1</pre>
+```
+kubectl describe pod/pod-name -n k8ssandra | grep container -C 1
+```
+
 
 **Example**: describe with output returning one line above, and one line below the word being grepped.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&lt;code&gt;kubectl describe pod/k8ssandra-dc1-default-sts-0 &lt;/code&gt;
-&lt;code&gt;-n k8ssandra | grep container -C 1&lt;/code&gt;
+```
+<code>kubectl describe pod/k8ssandra-dc1-default-sts-0 </code>
+<code>-n k8ssandra | grep container -C 1</code>
+```
 
-</pre>
 
 **server-config-init:**
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">Container ID: containerd://eceb37bacb91b261dc7dc7ae03852a7d5a5c2e2181a4bf613aec68d72b0b8cdc 
-Image: datastax/cass-config-builder:1.0.3</pre>
+```
+Container ID: containerd://eceb37bacb91b261dc7dc7ae03852a7d5a5c2e2181a4bf613aec68d72b0b8cdc 
+Image: datastax/cass-config-builder:1.0.3
+```
+
 
 --
 
 **jmx-credentials:**
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">Container ID: containerd://084fa60db282be00c79970f4cb32dc5397e56ac7a6044313634e8481a3ecc55b 
-Image: busybox</pre>
+```
+Container ID: containerd://084fa60db282be00c79970f4cb32dc5397e56ac7a6044313634e8481a3ecc55b 
+Image: busybox
+```
+
 
 --
 
 **cassandra:**
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">Container ID: containerd://3dbc4ebaa07e08139360c8321f1c3986d001896c087564595207e63fb6f6c740 Image: datastax/cassandra-mgmtapi-3_11_10:v0.1.22</pre>
+```
+Container ID: containerd://3dbc4ebaa07e08139360c8321f1c3986d001896c087564595207e63fb6f6c740 Image: datastax/cassandra-mgmtapi-3_11_10:v0.1.22
+```
+
 
 --
 
 **server-system-logger:**
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">Container ID: containerd://4420cc9591aa683490478846dd278ed050e1cdf1832f597948494fa93aab56de 
-Image: busybox:1.32.0-uclibc</pre>
+```
+Container ID: containerd://4420cc9591aa683490478846dd278ed050e1cdf1832f597948494fa93aab56de 
+Image: busybox:1.32.0-uclibc
+```
+
 
 ➠ A slight variation, get pods having a label for a Cassandra cluster.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">kubectl get pods -l cassandra.datastax.com/cluster=release-name -n k8ssandra</pre>
+```
+kubectl get pods -l cassandra.datastax.com/cluster=release-name -n k8ssandra
+```
+
 
 Now, using one of the pod names returned, describe the pod details.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">kubectl describe pod/pod-name -n k8ssandra</pre>
+```
+kubectl describe pod/pod-name -n k8ssandra
+```
+
 
 ➠ Describe the CassandraDatacenter resource. This provides a wealth of information about the resource, which includes aged events with detail to assist when trying to troubleshoot an issue.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">kubectl describe cassandradatacenter/dc1 -n k8ssandra
-</pre>
+```
+kubectl describe cassandradatacenter/dc1 -n k8ssandra
+```
+
 
 Example: includes a sample of the output provided.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">Name: dc1
+```
+Name: dc1
 Namespace: k8ssandra
 Labels: app.kubernetes.io/instance=k8ssandra
 app.kubernetes.io/managed-by=Helm
@@ -361,7 +421,9 @@ Generation: 2
 Managed Fields:
 API Version: cassandra.datastax.com/v1beta1
 Fields Type: FieldsV1
-fieldsV1:</pre>
+fieldsV1:
+```
+
 
 **...**
 
@@ -369,17 +431,26 @@ fieldsV1:</pre>
 
 ➠ Determine what K8ssandra chart version you have deployed. This is helpful when diagnosing a problem or looking for new features in releases of K8ssandra. Helm, like kubectl, also allows for a shorthand specification of a namespace using -n.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">helm list -n k8ssandra</pre>
+```
+helm list -n k8ssandra
+```
+
 
 ➠ Determine what configurations have been applied. That is, a full picture of the current K8ssandra configuration for a scoped release. Look out, it returns lots of content!
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">helm get all k8ssandra -n k8ssandra</pre>
+```
+helm get all k8ssandra -n k8ssandra
+```
+
 
 It's advisable to add some filtering to this output, based on what resource you are trying to locate.
 
 Example: locating information around Stargate configurations.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">helm get all k8ssandra -n k8ssandra | grep stargate -C 2</pre>
+```
+helm get all k8ssandra -n k8ssandra | grep stargate -C 2
+```
+
 
 Summing up {#h2-13-summing-up}
 ------------------------------

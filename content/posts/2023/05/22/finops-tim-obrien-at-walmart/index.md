@@ -19,7 +19,7 @@ frozen: false
 FinOps and Cloud Cost Management, what's it all about and how does it impact us as developers and others who are close to the code? In this series on Foojay.io, you're introduced to FinOps practitioners around the world, focused on how they have gradually found themselves, their technology, and their organization in the FinOps space. {#h2-0-finops-and-cloud-cost-management-what-s-it-all-about-and-how-does-it-impact-us-as-developers-and-others-who-are-close-to-the-code-in-this-series-on-foojay-io-you-re-introduced-to-finops-practitioners-around-the-world-focused-on-how-they-have-gradually-found-themselves-their-technology-and-their-organization-in-the-finops-space}
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-*** ** * ** ***
+
 
 <figure class="alignleft size-medium is-resized">
  <img fetchpriority="high" decoding="async" src="1683981616677-510x510.jpeg" alt="" class="wp-image-98408" width="271" height="271">
@@ -29,7 +29,7 @@ FinOps and Cloud Cost Management, what's it all about and how does it impact us 
 
 <br />
 
-*** ** * ** ***
+
 
 **Hi Tim! At Walmart, your focus is Cloud Cost Management. How did you end up in that role, what was your journey?** {#h2-1-hi-tim-at-walmart-your-focus-is-cloud-cost-management-how-did-you-end-up-in-that-role-what-was-your-journey}
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -98,4 +98,4 @@ What trends do you see in this domain and hopes you have for the coming years? {
 
 *I also think that there needs to be more focus on unit cost and awareness from engineers. Not every engineer needs to be laser focused on cost, but incorporating an awareness of cloud cost into a daily or weekly process should be something that engineers have some visibility into.*
 
-*** ** * ** ***
+

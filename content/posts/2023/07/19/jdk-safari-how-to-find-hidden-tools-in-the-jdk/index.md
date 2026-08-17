@@ -60,7 +60,8 @@ The class **MainMethodFinder** is the main driver of our scanning tool. It detec
 
 It uses a **MainMethodReportingVisitor** , to recursively analyze the libraries of a given JDK. The actual "class with main method"-search is performed by a **MainMethodVisitor.** The found main method locations are reported as instances of the **MainMethod** data-holder class.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">import jdk.internal.org.objectweb.asm.*;
+```java
+import jdk.internal.org.objectweb.asm.*;
 
 import java.io.*;
 import java.nio.file.*;
@@ -83,8 +84,8 @@ public class MainMethodFinder {
         long time = System.nanoTime();
         try {
 
-            boolean customJdkPathProvided = args.length &gt; 0;
-            if (!customJdkPathProvided &amp;&amp; IS_NATIVE_IMAGE) {
+            boolean customJdkPathProvided = args.length > 0;
+            if (!customJdkPathProvided && IS_NATIVE_IMAGE) {
                 System.err.println("MainMethodFinder: Missing path operand.");
                 System.err.println("Usage: MainMethodFinder /path/to/jdk");
                 System.exit(-1);
@@ -100,7 +101,7 @@ public class MainMethodFinder {
             MainMethodReportingVisitor visitor = new MainMethodReportingVisitor();
             Files.walkFileTree(jdkHomePath, visitor);
 
-            Consumer&lt;MainMethod&gt; printMainMethodInfo = mainMethod -&gt; {
+            Consumer<MainMethod> printMainMethodInfo = mainMethod -> {
 
                 String libraryFileName = mainMethod.library.getName();
                 if (libraryFileName.endsWith(".jar")) {
@@ -148,7 +149,9 @@ public class MainMethodFinder {
     private static Path detectCurrentJdkPath() {
         return Paths.get(ProcessHandle.current().info().command().orElseThrow()).resolve("../..").normalize();
     }
-}</pre>
+}
+```
+
 
 MainMethod {#h2-1-mainmethod}
 -----------------------------
@@ -157,7 +160,8 @@ The class **MainMethod** is a data-holder class that captures the name of a foun
 
 *Allthough this class could be a record, we use a normal class to be able to run the tool also with JDKs \< 14.*
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">class MainMethod {
+```java
+class MainMethod {
 
     final File library;
 
@@ -167,7 +171,9 @@ The class **MainMethod** is a data-holder class that captures the name of a foun
         this.library = library;
         this.className = className;
     }
-}</pre>
+}
+```
+
 
 MainMethodVisitor {#h2-2-mainmethodvisitor}
 -------------------------------------------
@@ -180,16 +186,17 @@ The **MainMethodVisitor** uses the `FileSystem#provider().newInputStream(..)` me
 
 *Note that we deliberately duplicate the ASM version constants, to be able to run the tool with older JDK versions.*
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">class MainMethodVisitor extends ClassVisitor {
+```java
+class MainMethodVisitor extends ClassVisitor {
 
     // Adapted from Opcodes.ASM* to be usable across jdk versions.
-    private static final int ASM6 = 6 &lt;&lt; 16;
+    private static final int ASM6 = 6 << 16;
 
-    private static final int ASM7 = 7 &lt;&lt; 16;
+    private static final int ASM7 = 7 << 16;
 
-    private static final int ASM8 = 8 &lt;&lt; 16;
+    private static final int ASM8 = 8 << 16;
 
-    private static final int ASM9 = 9 &lt;&lt; 16;
+    private static final int ASM9 = 9 << 16;
 
     private static final String JAVA_VERSION_STRING = System.getProperty("java.version");
 
@@ -207,16 +214,16 @@ The **MainMethodVisitor** uses the `FileSystem#provider().newInputStream(..)` me
 
     private final FileSystem fileSystem;
 
-    private final Consumer&lt;MainMethod&gt; mainMethodConsumer;
+    private final Consumer<MainMethod> mainMethodConsumer;
 
-    private final ThreadLocal&lt;String&gt; currentInternalClassName;
+    private final ThreadLocal<String> currentInternalClassName;
 
-    public MainMethodVisitor(File library, Consumer&lt;MainMethod&gt; mainMethodConsumer, FileSystem fileSystem) {
+    public MainMethodVisitor(File library, Consumer<MainMethod> mainMethodConsumer, FileSystem fileSystem) {
         super(ASM_API_VERSION);
         this.library = library;
         this.fileSystem = fileSystem;
         this.mainMethodConsumer = mainMethodConsumer;
-        this.currentInternalClassName = new ThreadLocal&lt;&gt;();
+        this.currentInternalClassName = new ThreadLocal<>();
     }
 
     @Override
@@ -240,7 +247,7 @@ The **MainMethodVisitor** uses the `FileSystem#provider().newInputStream(..)` me
     }
 
     private boolean isRunnableMainMethod(int access, String name, String descriptor) {
-        return "main".equals(name) &amp;&amp; (access &amp; Opcodes.ACC_STATIC) != 0 &amp;&amp; "([Ljava/lang/String;)V".equals(descriptor);
+        return "main".equals(name) && (access & Opcodes.ACC_STATIC) != 0 && "([Ljava/lang/String;)V".equals(descriptor);
     }
 
     void scanClassForMainMethod(Path pathToLibraryClass) {
@@ -251,7 +258,7 @@ The **MainMethodVisitor** uses the `FileSystem#provider().newInputStream(..)` me
         new ClassReader(classBytes).accept(this, 0);
     }
 
-    private Optional&lt;byte[]&gt; tryGetClassBytes(Path nestedFilePath, FileSystem fileSystem) {
+    private Optional<byte[]> tryGetClassBytes(Path nestedFilePath, FileSystem fileSystem) {
 
         // use filesystem to access .jar and .jmod file contents
         try (var is = fileSystem.provider().newInputStream(nestedFilePath)) {
@@ -261,7 +268,9 @@ The **MainMethodVisitor** uses the `FileSystem#provider().newInputStream(..)` me
         }
         return Optional.empty();
     }
-}</pre>
+}
+```
+
 
 MainMethodReportingVisitor {#h2-3-mainmethodreportingvisitor}
 -------------------------------------------------------------
@@ -270,11 +279,12 @@ The actual scanning of JDK `.jar`-Files and `.jmods` is performed by the **MainM
 
 To speed up the scanning we spawn and enqueue a new `RecursiveAction` in the `visitFile(..)` method with the `ForkJoin` infrastructure. The method `waitForCompletionAndReturnMainMethods(..)` waits for all spawned scanning actions to complete and returns the `List` of detected `MainMethod`s to the `MainMethodFinder` which eventuelly prints command-lines to execute the all detected main-methods.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">class MainMethodReportingVisitor extends SimpleFileVisitor&lt;Path&gt; {
+```java
+class MainMethodReportingVisitor extends SimpleFileVisitor<Path> {
 
-    private final CopyOnWriteArrayList&lt;MainMethod&gt; mainMethods = new CopyOnWriteArrayList&lt;&gt;();
+    private final CopyOnWriteArrayList<MainMethod> mainMethods = new CopyOnWriteArrayList<>();
 
-    private final Queue&lt;RecursiveAction&gt; outstanding = new ConcurrentLinkedQueue&lt;&gt;();
+    private final Queue<RecursiveAction> outstanding = new ConcurrentLinkedQueue<>();
 
     @Override
     public FileVisitResult visitFile(Path filePath, BasicFileAttributes attrs) {
@@ -291,16 +301,16 @@ To speed up the scanning we spawn and enqueue a new `RecursiveAction` in the `vi
         return FileVisitResult.CONTINUE;
     }
 
-    public List&lt;MainMethod&gt; waitForCompletionAndReturnMainMethods() {
+    public List<MainMethod> waitForCompletionAndReturnMainMethods() {
 
         for (RecursiveAction action; (action = outstanding.poll()) != null; ) {
             action.join();
         }
 
-        List&lt;MainMethod&gt; result = new ArrayList&lt;&gt;(this.mainMethods);
+        List<MainMethod> result = new ArrayList<>(this.mainMethods);
         this.mainMethods.clear();
 
-        var cmp = Comparator.comparing((MainMethod left) -&gt; left.library.getName()).thenComparing((MainMethod left) -&gt; left.className);
+        var cmp = Comparator.comparing((MainMethod left) -> left.library.getName()).thenComparing((MainMethod left) -> left.className);
         result.sort(cmp);
 
         return result;
@@ -327,7 +337,9 @@ To speed up the scanning we spawn and enqueue a new `RecursiveAction` in the `vi
     private boolean isClassFile(Path nestedFilePath) {
         return nestedFilePath.toString().endsWith(".class");
     }
-}</pre>
+}
+```
+
 
 If you want to try it yourself, take a look at [this Github Gist](https://gist.github.com/thomasdarimont/1d91117aca91be5b6e8151388d671c66) which combines everything in one file for your convenience.
 
@@ -335,11 +347,15 @@ Now let's see the tool in action!
 
 Thanks to the support for single-file source-code programs from Java 11 onwards, we can call the tool with the following command without explicitly compiling the example first.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">java --show-version -DshowCommand=true --add-exports java.base/jdk.internal.org.objectweb.asm=ALL-UNNAMED MainMethodFinder.java</pre>
+```
+java --show-version -DshowCommand=true --add-exports java.base/jdk.internal.org.objectweb.asm=ALL-UNNAMED MainMethodFinder.java
+```
+
 
 Running the command with JDK 21-ea+27-2343 yields the following output:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">$ java --show-version -DshowCommand=true --add-exports java.base/jdk.internal.org.objectweb.asm=ALL-UNNAMED MainMethodFinder.java                                          
+```
+$ java --show-version -DshowCommand=true --add-exports java.base/jdk.internal.org.objectweb.asm=ALL-UNNAMED MainMethodFinder.java                                          
 openjdk 21-ea 2023-09-19
 OpenJDK Runtime Environment (build 21-ea+27-2343)
 OpenJDK 64-Bit Server VM (build 21-ea+27-2343, mixed mode, sharing)
@@ -436,7 +452,9 @@ java -m jdk.jshell/jdk.internal.jshell.tool.JShellToolProvider
 java -m jdk.jshell/jdk.jshell.execution.RemoteExecutionControl
 java -m jdk.jstatd/sun.tools.jstatd.Jstatd
 java -m jdk.security.auth/com.sun.security.auth.module.Crypt
-java -m jdk.zipfs/jdk.nio.zipfs.ZipInfo</pre>
+java -m jdk.zipfs/jdk.nio.zipfs.ZipInfo
+```
+
 
 The listed classes contain the known tools from the `$JDK_HOME/bin` directory and many small debugging tools and test programs. Just have a look for yourself 🙂
 
@@ -444,22 +462,25 @@ Did you ever want to know how the pattern node tree looks for a compiled regex p
 
 `$ java -m java.base/java.util.regex.PrintPattern "^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$"`
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">Pattern: ^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$
-0: &lt;Begin&gt;
-1: &lt;BmpCharPropertyGreedy java.util.regex.Pattern$Lambda/0x800000033@5ca881b5+&gt;
-2: &lt;BmpCharProperty&gt;
-3: &lt;Prolog&gt;
-4: &lt;Loop + &gt;
-5: &lt;Group.head 1&gt;
-6: &lt;BmpCharPropertyGreedy java.util.regex.Pattern$Lambda/0x800000033@2ff4acd0+&gt;
-7: &lt;BmpCharProperty&gt;
-8: &lt;/Group.tail 1&gt; (=&gt;4)
-&lt;/Loop&gt;
-9: &lt;Curly GREEDY {2, 4}&gt;
-10: &lt;BmpCharProperty&gt;
-&lt;/Curly&gt;
-11: &lt;Dollar&gt;
-12: &lt;END&gt;</pre>
+```
+Pattern: ^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$
+0: <Begin>
+1: <BmpCharPropertyGreedy java.util.regex.Pattern$Lambda/0x800000033@5ca881b5+>
+2: <BmpCharProperty>
+3: <Prolog>
+4: <Loop + >
+5: <Group.head 1>
+6: <BmpCharPropertyGreedy java.util.regex.Pattern$Lambda/0x800000033@2ff4acd0+>
+7: <BmpCharProperty>
+8: </Group.tail 1> (=>4)
+</Loop>
+9: <Curly GREEDY {2, 4}>
+10: <BmpCharProperty>
+</Curly>
+11: <Dollar>
+12: <END>
+```
+
 
 Another tool that many Java developers are not familiar with is the HotSpot Debugger UI, which allows you to look and poke at some JVM internals. The tool itself is actually not so hidden, as it can be started via `jhsdb hsdb`, but [I discovered it a few years](https://www.tutorials.de/threads/mit-debugger-interne-hotspot-jvm-informationen-auslesen-in-java-7.387020/) ago by scanning for main methods.
 
@@ -471,13 +492,17 @@ HotSpot Debugger UI{#caption-attachment-101022}
 
 Tip: If we want to analyze an older JDK, e.g., JDK8 we can do it like this:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">java -DshowCommand=true --add-exports java.base/jdk.internal.org.objectweb.asm=ALL-UNNAMED MainMethodFinder.java /path/to/jdk</pre>
+```
+java -DshowCommand=true --add-exports java.base/jdk.internal.org.objectweb.asm=ALL-UNNAMED MainMethodFinder.java /path/to/jdk
+```
+
 
 *Note an easy way to install and manage different JDKs for experiments is [sdkman](https://sdkman.io/).*
 
 Output:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">$ java --show-version -DshowCommand=true --add-exports java.base/jdk.internal.org.objectweb.asm=ALL-UNNAMED MainMethodFinder.java ~/.sdkman/candidates/java/8.0.282.hs-adpt
+```
+$ java --show-version -DshowCommand=true --add-exports java.base/jdk.internal.org.objectweb.asm=ALL-UNNAMED MainMethodFinder.java ~/.sdkman/candidates/java/8.0.282.hs-adpt
 openjdk 21-ea 2023-09-19
 OpenJDK Runtime Environment (build 21-ea+27-2343)
 OpenJDK 64-Bit Server VM (build 21-ea+27-2343, mixed mode, sharing)
@@ -622,7 +647,8 @@ OpenJDK 64-Bit Server VM (build 21-ea+27-2343, mixed mode, sharing)
 /home/tom/.sdkman/candidates/java/8.0.282.hs-adpt/bin/java -cp /home/tom/.sdkman/candidates/java/8.0.282.hs-adpt/lib/tools.jar sun.tools.native2ascii.Main
 /home/tom/.sdkman/candidates/java/8.0.282.hs-adpt/bin/java -cp /home/tom/.sdkman/candidates/java/8.0.282.hs-adpt/lib/tools.jar sun.tools.serialver.SerialVer
 /home/tom/.sdkman/candidates/java/8.0.282.hs-adpt/bin/java -cp /home/tom/.sdkman/candidates/java/8.0.282.hs-adpt/jre/lib/ext/zipfs.jar com.sun.nio.zipfs.ZipInfo
-</pre>
+```
+
 
 In this article we have learned that the JDK contains many more programmes than the `$JDK_HOME/bin` directory would suggest at first glance. We also learned about efficient ways to analyse Java classes with ASM.
 

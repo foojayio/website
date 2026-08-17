@@ -41,14 +41,20 @@ It is different from a graceful shutdown at the application level, where the app
 
 You can verify this fact by issuing this command on the command-line
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">netstat -ao</pre>
+```
+netstat -ao
+```
+
 
 You will get a screen such as the below. Locate the port on which you had started the Tomcat Server.  
 ![](https://blogger.googleusercontent.com/img/a/AVvXsEgHTALnmpA7DEvZj6QxKQmwqKdjPPKLhKlZsw8ZnXz5r9ZiZqF6AIRO2IPSBmH5nhEmheRyCoJiiMOQJ0u9zehkl4XPav7aezTSiU8bQAoH8xu3lMzQQNQIIWvM6c-k7_owyzWB1D-KdnHA6467-79vdiNRC34ZKGf1zIlWj-7Pe9u7HiUOZoHt4ETlLw)
 
 Go ahead and locate the PID and kill the task (Windows/MS-DOS)
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">taskkill /F /PID 14836</pre>
+```
+taskkill /F /PID 14836
+```
+
 
 ![](https://blogger.googleusercontent.com/img/a/AVvXsEiS0214rgPJ0H8qP9HK8Eciiy9RNiE3qtqL9wOIXAO4hDX9x98oXi-BwPqyA7E0H0d2HUJOEZbnpfFTv_ed6_kUl39TjmCgHnI_UK1ktyx_FSOIKoEtYoKQMRzLZFYJJicBhKg9MhyRIOxVWg2WPoxbqXsd9F1iktbdc2xwUVY-eK2LH1LTYaDvegG5ow)
 
@@ -57,11 +63,14 @@ Note that if you were running the application from the command-line, You can jus
 
 \[The above mentioned task of finding out the process id associated with the application can be automated or programmed using the 'ApplicationPidFileWriter' as shown below. In the below example, when the server starts it will write the PID to the file name 'sbshutdownwin.pid'. Later, the same steps as described above can be followed to kill the process. Note that the steps can also be automated via Batch Scripting in Windows/MS-DOS\]
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group=""> SpringApplication springBootapplication = new SpringApplication(SpringBootDockerApplication.class);  
+```java
+ SpringApplication springBootapplication = new SpringApplication(SpringBootDockerApplication.class);  
  springBootapplication.addListeners(new ApplicationPidFileWriter("sbshutdownwin.pid"));  
- springBootapplication.run();  </pre>
+ springBootapplication.run();
+```
 
-*** ** * ** ***
+
+
 
 **2. Terminate the Application, Kill the Process (TCPView)**
 
@@ -74,7 +83,7 @@ Use the above TCPView tool to locate the process based on the port on which you 
 
 This is a very convenient way especially if you are a Software Architect or an Engineer who has lots of Microservices to develop/manage/maintain. It will be useful when you are in depths of testing/debugging/fixing.
 
-*** ** * ** ***
+
 
 **3. Shutdown using Actuator Endpoint**
 
@@ -103,9 +112,12 @@ If Spring Boot is the root context of your spring boot application, then the inv
 
 <br />
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bat" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group=""> http://localhost:8080/springbootdocker/actuator/shutdown  </pre>
+```batch
+ http://localhost:8080/springbootdocker/actuator/shutdown
+```
 
-*** ** * ** ***
+
+
 
 **4. Close the Spring Boot ApplicationContext**
 
@@ -115,7 +127,8 @@ The application context needs to be stored when you start/run the spring boot ap
 
 <br />
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public class SpringBootDockerApplication {  
+```java
+public class SpringBootDockerApplication {  
       // Clean Shutdown Method 2 - Actuator Shutdown Endpoint - Store the Context  
       // Not a Recommended Way to Use public static - Only for the Demo Purposes..  
       public static ConfigurableApplicationContext ctx;  
@@ -123,8 +136,9 @@ The application context needs to be stored when you start/run the spring boot ap
            // Clean Shutdown Method 2 - Actuator Shutdown Endpoint - Store the Context  
            ctx = SpringApplication.run(SpringBootDockerApplication.class, args);  
       }  
- }  
-</pre>
+ }
+```
+
 
 <br />
 
@@ -132,12 +146,13 @@ You may then use the following controller method to close the context asynchrono
 
 <br />
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">      // Starting Threads using Runnable is Not Always the Best Way..  
+```java
+      // Starting Threads using Runnable is Not Always the Best Way..  
       // Do Explore Other Integrated Approaches such as Async Servlet  
       @RequestMapping(value = "/shutdown2", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)  
-      public ResponseEntity&lt;Object&gt; rule() {  
+      public ResponseEntity<Object> rule() {  
            System.out.println("Entry Thread Id (Debug): " + Thread.currentThread().getName());  
-           Runnable runnable= () -&gt; {  
+           Runnable runnable= () -> {  
                 try {  
                      Thread.sleep(2000);  
                 } catch (InterruptedException e) {  
@@ -150,14 +165,16 @@ You may then use the following controller method to close the context asynchrono
 
            new Thread(runnable).start();  
            System.out.println("Exit Thread Id (Debug): " + Thread.currentThread().getName());  
-           return new ResponseEntity&lt;&gt;("Shutdown Requested - Will Shutdown in Next 2 Seconds!", HttpStatus.OK);  
+           return new ResponseEntity<>("Shutdown Requested - Will Shutdown in Next 2 Seconds!", HttpStatus.OK);  
       }  
 
       @PreDestroy  
       public void requestShutdown2PreDestroy() {  
 
            System.out.println("Requested Shutdown (via Context) of the Spring Boot Container");  
-      }  </pre>
+      }
+```
+
 
 <br />
 
@@ -175,7 +192,7 @@ You will notice that the application has been shutdown when you see the console 
 
 ![](https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjwooWQgGZkL8VyoA6LJ6Lzc51_Nq9KHvfveWJifqWK4Qm_24FzXOlfWVW0aqLHV8i7BB03IvsKmidWAnf83DUeyWP1wg1o5pG1o9eY7r7vUfLN8X4fRxzeSnD428cEak97SWoaUF0zxwOmSrFBfspKGx9GXVyhmK09NTG6H-RxtmkT548DPJV4ZiG3Qg/w640-h70/skp_ts_blog_001.png)
 
-*** ** * ** ***
+
 
 **5. Exit using SpringApplication.exit()**
 
@@ -185,7 +202,8 @@ The other way is use the exit() method of the SpringApplication class, it will a
 
 <br />
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">    // Clean Shutdown Method 2 - Actuator Shutdown Endpoint - Store the Context   
+```java
+    // Clean Shutdown Method 2 - Actuator Shutdown Endpoint - Store the Context   
     // Not a Recommended Way to Use public static - Only for the Demo Purposes..   
     private static ConfigurableApplicationContext ctx;   
 
@@ -206,7 +224,9 @@ The other way is use the exit() method of the SpringApplication class, it will a
        });   
 
        System.exit(staticExitCode );   
-    }   </pre>
+    }
+```
+
 
 <br />
 
@@ -224,7 +244,7 @@ You will notice that the application has been shutdown when you see the console 
 
 ![](https://blogger.googleusercontent.com/img/a/AVvXsEjEMWmzL03e0bjpDwxNE6sdx_-UnSfXugAZ1VNCNYucL1d35gmNJTZfCSQm1OUu8IOEAnkuvx4CHuuO4V7i6GzelBuq6AGzRqApL1OjwRlL5cj5HwYWig-OtAcXG2kceyPtMO9P5nd5sZTlkWZKtbTXl68n7bvBkdujThsxRsnSTTvBaDTNNwe81j5yXw=w640-h62)
 
-*** ** * ** ***
+
 
 **\[Reference\]**   
 <https://www.javadevjournal.com/spring-boot/shutdown-spring-boot-application/>

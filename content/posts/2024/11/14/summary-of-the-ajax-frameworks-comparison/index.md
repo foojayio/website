@@ -64,6 +64,6 @@ This post concludes my series on AJAX and SSR. I hope you had as much fun readin
 
 The complete source code for this post can be found on [GitHub](https://github.com/ajavageek/compare-frontends).
 
-*** ** * ** ***
+
 
 *Originally published at [A Java Geek](https://blog.frankel.ch/ajax-ssr/7/) on October 20^th^, 2024*

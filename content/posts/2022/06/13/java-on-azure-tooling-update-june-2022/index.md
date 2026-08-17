@@ -93,13 +93,16 @@ When you deploy your Web Apps or Function Apps to Azure App Service, you can use
 
 In this way, you can validate any app changes first in a staging deployment slot and then swap it into production within the same App Service.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="json">azurewebapp {
+```json
+azurewebapp {
     ...
     deploymentSlot {
       name = 'xxx'
       configurationSource = 'parent'
     }
-}</pre>
+}
+```
+
 
 Starting from June, you can try our Gradle plugin for deployment slots support for Azure Web App with version of 1.4.0. and Azure Functions with version of 1.9.0. with the latest release. You could manually add the following configuration in file "build.gradle" and try this new feature.
 

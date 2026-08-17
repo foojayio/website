@@ -56,6 +56,6 @@ Yes, OpenJDK and OpenJFX are aligned in the number of releases per year (2x) and
 
 No, they are not "bound together" and follow their own path.
 
-*** ** * ** ***
+
 
 *The above timelines are screenshots of a small JavaFX application which is part of my book "[Getting Started with Java on the Raspberry Pi](https://webtechie.be/books/)". The [sources are available on GitHub](https://github.com/FDelporte/JavaOnRaspberryPi/tree/master/Chapter_04_Java/javafx-timeline).*

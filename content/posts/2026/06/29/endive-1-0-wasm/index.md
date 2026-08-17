@@ -38,7 +38,8 @@ WasmGC: The Libraries Get Smarter {#h2-1-wasmgc-the-libraries-get-smarter}
 
 The previous article focused on wrapping C and Rust libraries. Those languages compile to Wasm straightforwardly because they manage their own memory. But a growing number of languages target the WasmGC proposal instead: Kotlin/Wasm, Dart, and others. Google Sheets already runs its Java-based calculation engine through WasmGC in production. Endive passes the full WasmGC spec testsuite, and the project testsuite already includes a Kotlin/Wasm hello-world to validate the integration end to end:
 
-<pre class="EnlighterJSRAW EnlighterJSRAW" data-enlighter-language="kotlin" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">fun main() {
+```kotlin
+fun main() {
     println("Hello from Kotlin via WASI")
     println("Current 'realtime' timestamp is: ${wasiGetTime(0)}")
 }
@@ -47,7 +48,7 @@ The previous article focused on wrapping C and Rust libraries. Those languages c
 private external fun wasiRawClockTimeGet(clockId: Int, precision: Long, resultPtr: Int): Int
 
 @OptIn(UnsafeWasmMemoryApi::class)
-fun wasiGetTime(clockId: Int): Long = withScopedMemoryAllocator { allocator -&gt;
+fun wasiGetTime(clockId: Int): Long = withScopedMemoryAllocator { allocator ->
     val rp0 = allocator.allocate(8)
     val ret = wasiRawClockTimeGet(
         clockId = clockId,
@@ -59,7 +60,8 @@ fun wasiGetTime(clockId: Int): Long = withScopedMemoryAllocator { allocator -&gt
     }
     (Pointer(rp0.address.toInt().toUInt())).loadLong()
 }
-</pre>
+```
+
 
 Standard Kotlin, targeting WasmGC and WASI, running through Endive with no changes.
 

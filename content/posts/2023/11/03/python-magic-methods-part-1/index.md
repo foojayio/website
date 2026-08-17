@@ -39,12 +39,15 @@ The `__new()__` method is static, though it doesn't need to be explicitly marked
 
 `__new__()` is meant to customize instance creation of subclasses of immutable classes.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="python">class FooStr(str):                                     #1
+```python
+class FooStr(str):                                     #1
 
     def __new__(cls, value):
         return super().__new__(cls, f'{value}Foo')     #2
 
-print(FooStr('Hello'))                                 #3</pre>
+print(FooStr('Hello'))                                 #3
+```
+
 
 1. Inherit from `str`
 2. Create a new `str` instance, whose value is the value passed to the constructor, suffixed with `Foo`
@@ -56,7 +59,8 @@ print(FooStr('Hello'))                                 #3</pre>
 
 `__init__()` differs from a constructor in that the object is already created.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="python">class Foo:
+```python
+class Foo:
 
   def __init__(self, a, b, c):                         #1
     self.a = a                                         #2
@@ -64,7 +68,9 @@ print(FooStr('Hello'))                                 #3</pre>
     self.c = c                                         #2
 
 foo = Foo('one', 'two', 'three')
-print(f'a={foo.a}, b={foo.b}, c={foo.c}')              #3</pre>
+print(f'a={foo.a}, b={foo.b}, c={foo.c}')              #3
+```
+
 
 1. The first parameter is the instance itself
 2. Initialize the instance
@@ -81,7 +87,8 @@ Python offers two main ways to represent objects: one "official" for debugging p
 
 The official representation is expressed via the `object.__repr__(self)`. The documentation states that the representation must be "information-rich and unambiguous".
 
-<pre class="EnlighterJSRAW" data-enlighter-language="python">class Foo:
+```python
+class Foo:
 
   def __init__(self, a, b, c):
     self.a = a
@@ -92,7 +99,9 @@ The official representation is expressed via the `object.__repr__(self)`. The do
     return f'Foo(a={foo.a}, b={foo.b}, c={foo.c})'
 
 foo = Foo('one', 'two', 'three')
-print(foo)                                             #1</pre>
+print(foo)                                             #1
+```
+
 
 1. Print `Foo(a=one, b=two, c=three)`
 
@@ -104,7 +113,8 @@ Aside from the two methods above, the `object.__format__(self, format_spec)` met
 
 Finally, the `object.__bytes__(self)` returns a byte representation of the object.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="python">from pickle import dumps                              #1
+```python
+from pickle import dumps                              #1
 
 class Foo:
 
@@ -120,7 +130,9 @@ class Foo:
     return dumps(self)                                #2
 
 foo = Foo('one', 'two', 'three')
-print(bytes(foo))                                     #3</pre>
+print(bytes(foo))                                     #3
+```
+
 
 1. Use the [pickle](https://docs.python.org/3/library/pickle.html) serialization library
 2. Delegage to the [dumps()](https://docs.python.org/3/library/pickle.html#pickle.dumps) method
@@ -131,7 +143,8 @@ Comparison methods {#h2-5-comparison-methods}
 
 Let's start with similarities with Java: Python has two methods `object.__eq__(self, other)` and `object.__hash__(self)` that work in the same way. If you define `__eq__()` for a class, you **must** define `__hash__()` as well. Contrary to Java, if you don't define the former, you *must not* define the latter.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="python">class Foo:
+```python
+class Foo:
 
   def __init__(self, a, b):
     self.a = a
@@ -154,7 +167,9 @@ print(hash(foo2))
 print(hash(foo3))
 
 print(foo1 == foo2)                                   #4
-print(foo2 == foo3)                                   #5</pre>
+print(foo2 == foo3)                                   #5
+```
+
 
 1. Objects that are not of the same type are not equal by definition
 2. Compare the equality of attributes
@@ -173,25 +188,28 @@ Other comparison methods are pretty self-explanatory:
 | `object.__ge__(self, other)` | `>=`     |
 | `object.__ne__(self, other)` | `!=`     |
 
-<pre class="EnlighterJSRAW" data-enlighter-language="python">class Foo:
+```python
+class Foo:
 
   def __init__(self, a):
     self.a = a
 
   def __ge__(self, other):
-    return self.a &gt;= other.a                          #1
+    return self.a >= other.a                          #1
 
   def __le__(self, other):
-    return self.a &lt;= other.a                          #1
+    return self.a <= other.a                          #1
 
 foo1 = Foo(1)
 foo1 = Foo(1)
 foo2 = Foo(2)
 
-print(foo1 &gt;= foo1)                                   #2
-print(foo1 &gt;= foo2)                                   #3
-print(foo1 &lt;= foo1)                                   #4
-print(foo2 &lt;= foo2)                                   #5</pre>
+print(foo1 >= foo1)                                   #2
+print(foo1 >= foo2)                                   #3
+print(foo1 <= foo1)                                   #4
+print(foo2 <= foo2)                                   #5
+```
+
 
 1. Compare the single attribute
 2. Print `True`
@@ -206,7 +224,8 @@ Attribute access methods {#h2-6-attribute-access-methods}
 
 As seen above, Python allows accessing an object's attributes via the dot notation. If the attribute doesn't exist, Python complains: `'Foo' object has no attribute 'a'`. However, it's possible to define *synthetic* accessors on a class, via the `object.__getattr__(self, name)` and `object.__setattr__(self, name, value)` methods. The rule is that they are fallbacks: if the attribute doesn't exist, Python calls the method.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="python">class Foo:
+```python
+class Foo:
 
   def __init__(self, a):
     self.a = a
@@ -221,7 +240,9 @@ foo = Foo('a')
 
 print(foo.a)                                          #3
 print(foo.b)                                          #4
-print(foo.c)                                          #5</pre>
+print(foo.c)                                          #5
+```
+
 
 1. Return the string if the requested attribute is `a`
 2. Return the string if the requested attribute is `b`
@@ -231,7 +252,8 @@ print(foo.c)                                          #5</pre>
 
 For added fun, Python also offers the `object.__getattribute__(self, name)`. The difference is that it's called **whether the attribute exists or not**, effectively shadowing it.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="python">class Foo:
+```python
+class Foo:
 
   def __init__(self, a):
     self.a = a
@@ -246,7 +268,9 @@ foo = Foo('a')
 
 print(foo.a)                                          #3
 print(foo.b)                                          #4
-print(foo.c)                                          #5</pre>
+print(foo.c)                                          #5
+```
+
 
 1. Return the string if the requested attribute is `a`
 2. Return the string if the requested attribute is `b`
@@ -256,7 +280,8 @@ print(foo.c)                                          #5</pre>
 
 The `dir()` function allows returning an object's list of attributes and methods. You can set the list using the `object.__dir__(self)__` method. By default, the list is empty: you need to set it explicitly. Note that it's the developer's responsibility to ensure the list contains actual class members.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="python">class Foo:
+```python
+class Foo:
 
   def __init__(self, a):
     self.a = 'a'
@@ -266,7 +291,9 @@ The `dir()` function allows returning an object's list of attributes and methods
 
 foo = Foo('one')
 
-print(dir(foo))                                       #2</pre>
+print(dir(foo))                                       #2
+```
+
 
 1. Implement the method
 2. Display `['a', 'foo']`; Python sorts the list. Note that there's no `foo` member, though.
@@ -282,7 +309,8 @@ Python descriptors are accessors delegates, akin to Kotlin's [delegated properti
 
 Let's implement a *lazy* descriptor that caches the result of a compute-intensive operation.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="python">class Lazy:                                           #1
+```python
+class Lazy:                                           #1
 
   def __init__(self):
     self.cache = {}                                   #2
@@ -311,7 +339,9 @@ foo2 = Foo('foo2')
 print(foo1.lazy)                                      #8
 print(foo1.lazy)                                      #8
 print(foo2.lazy)                                      #9
-print(foo2.lazy)                                      #9</pre>
+print(foo2.lazy)                                      #9
+```
+
 
 1. Define the descriptor
 2. Initialize the cache
@@ -322,7 +352,7 @@ Conclusion {#h2-8-conclusion}
 
 This concludes the first part of Python magic methods. The [second part](https://foojay.io/today/python-magic-methods-part-2/) will focus on class, container, and number-related methods.
 
-*** ** * ** ***
+
 
 *Originally published at [A Java Geek](https://blog.frankel.ch/python-magic-methods/1/) on October 15^th^, 2023*
 

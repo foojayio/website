@@ -46,12 +46,15 @@ JSON is pretty great. It's human-readable, flexible, and widely adopted. But it'
 
 Here's an example of what a document {"hello": "world"} would look like in BSON, with length prefixes.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">{"hello": "world"} →
+```
+{"hello": "world"} →
 \x16\x00\x00\x00           // total document size
 \x02                       // 0x02 = type String
 hello\x00                  // field name
 \x06\x00\x00\x00world\x00  // field value
-\x00                       // 0x00 = type EOO ('end of object')</pre>
+\x00                       // 0x00 = type EOO ('end of object')
+```
+
 
 **Note:** A BSON document has a [size limit of 16MB](https://www.mongodb.com/docs/manual/reference/limits/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=java+intro+to+bson&utm_term=tim.kelly) on MongoDB.
 
@@ -97,7 +100,8 @@ In order to follow along with the code, make sure you have Java 24 and Maven ins
 
 1. Project structure:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">/src
+```
+/src
   └── main
       └── java
           └── com
@@ -105,19 +109,24 @@ In order to follow along with the code, make sure you have Java 24 and Maven ins
                   ├── Main.java
                   ├── User.java
                   └── Address.java
-pom.xml</pre>
+pom.xml
+```
+
 
 <br />
 
 2. Maven dependency (pom.xml):
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&lt;dependencies&gt;
-	&lt;dependency&gt;  
-	    &lt;groupId&gt;org.mongodb&lt;/groupId&gt;  
-	    &lt;artifactId&gt;mongodb-driver-sync&lt;/artifactId&gt;  
-	    &lt;version&gt;5.4.0&lt;/version&gt;  
-	&lt;/dependency&gt;
-&lt;/dependencies&gt;</pre>
+```
+<dependencies>
+	<dependency>  
+	    <groupId>org.mongodb</groupId>  
+	    <artifactId>mongodb-driver-sync</artifactId>  
+	    <version>5.4.0</version>  
+	</dependency>
+</dependencies>
+```
+
 
 BSON data types and document creation {#h2-6-bson-data-types-and-document-creation}
 -----------------------------------------------------------------------------------
@@ -126,24 +135,33 @@ In MongoDB's Java driver, we can interact directly with BSON types using classes
 
 Here's a look at BSON-specific types:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">BsonString bsonString = new BsonString("Hello BSON");
+```
+BsonString bsonString = new BsonString("Hello BSON");
 BsonInt32 bsonInt32 = new BsonInt32(42);
 BsonInt64 bsonInt64 = new BsonInt64(9876543210L);
 BsonDecimal128 bsonDecimal = new BsonDecimal128(new Decimal128(new BigDecimal("12345.678")));
 BsonDateTime bsonDate = new BsonDateTime(new Date().getTime());
 BsonBinary bsonBinary = new BsonBinary("binary data".getBytes());
 BsonObjectId bsonObjectId = new BsonObjectId(new ObjectId());
-BsonTimestamp bsonTimestamp = new BsonTimestamp();</pre>
+BsonTimestamp bsonTimestamp = new BsonTimestamp();
+```
+
 
 In practice, we work with familiar Java types. The driver converts String, int, Date, and other common types to their BSON equivalents behind the scenes.
 
 For example, when we call new Date() in Java, MongoDB stores it as a BSON Date type, represented as milliseconds since the epoch:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">Document doc = new Document("created", new Date()); collection.insertOne(doc);</pre>
+```
+Document doc = new Document("created", new Date()); collection.insertOne(doc);
+```
+
 
 Internally, MongoDB stores it like this:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">{ "created": { "$date": "2025-05-09T12:34:56.789Z" } </pre>
+```
+{ "created": { "$date": "2025-05-09T12:34:56.789Z" }
+```
+
 
 Understanding this conversion helps when we're debugging data types or working with MongoDB tools that expose BSON representations.
 
@@ -151,7 +169,8 @@ When interacting with MongoDB, we typically work with the Document class rather 
 
 Here's how we create a basic document:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">private static void createBasicDocument() {
+```
+private static void createBasicDocument() {
     System.out.println("\n--- Basic Document Creation ---");
 
     Document doc = new Document("name", "John Doe")
@@ -162,17 +181,22 @@ Here's how we create a basic document:
 
     collection.insertOne(doc);
     System.out.println("Inserted Document: " + doc.toJson());
-}</pre>
+}
+```
+
 
 In this method, we create a Document object with standard Java types: a String, an int, a boolean, a Date, and an ObjectId. The MongoDB driver automatically converts these to BSON types when the document is inserted into the collection.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">Inserted Document: {
+```
+Inserted Document: {
    "_id": "64e99b0b4321a1b9a6e4d8c7", 
    "name": "John Doe", 
    "age": 30, 
    "isMember": true, 
    "joined": "2025-05-09T12:34:56.789Z"
-}</pre>
+}
+```
+
 
 The ObjectId is generated automatically, if not provided. The Date is converted to a BSON Date type, stored as milliseconds since the epoch.
 
@@ -182,7 +206,8 @@ MongoDB allows for nested structures and arrays, making it easy to represent com
 
 In Java, we use the Document class to create nested structures and arrays. Each nested level is represented by another Document, and arrays are represented by Java List objects. When we work with nested documents and arrays in MongoDB, each level of nesting is still BSON, not JSON. This matters because MongoDB uses BSON-specific types like Decimal128 and Date, even in nested structures:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">private static void createNestedDocument() {
+```
+private static void createNestedDocument() {
     System.out.println("\n--- Nested Fields and Arrays ---");
 
     Document nestedDoc = new Document("user", "Alice")
@@ -194,7 +219,9 @@ In Java, we use the Document class to create nested structures and arrays. Each 
 
     collection.insertOne(nestedDoc);
     System.out.println("Inserted Nested Document: " + nestedDoc.toJson());
-}</pre>
+}
+```
+
 
 In this method, we are creating a document that represents a user with several fields:
 
@@ -207,7 +234,8 @@ In this method, we are creating a document that represents a user with several f
 
 When the above method is executed, the document is converted to BSON and inserted into the MongoDB collection. The output of the inserted document will look like this:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">Inserted Nested Document: {
+```
+Inserted Nested Document: {
   "user": "Alice",
   "balance": 12345.67,
   "contacts": ["123-456-7890", "987-654-3210"],
@@ -220,7 +248,9 @@ When the above method is executed, the document is converted to BSON and inserte
     "login": "2025-05-09T12:34:56.789Z",
     "status": "active"
   }
-}</pre>
+}
+```
+
 
 The nested structure is straightforward to read and query. Each level of nesting is a separate Document object, and arrays are automatically converted to BSON arrays.
 
@@ -240,7 +270,8 @@ The BsonDocument class provides a more granular way to construct BSON documents 
 
 The following method constructs a BSON document directly using BSON-specific classes:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">private static void demonstrateRawBSON() {
+```
+private static void demonstrateRawBSON() {
     System.out.println("\n--- Raw BSON Manipulation ---");
 
     BsonDocument rawBson = new BsonDocument()
@@ -255,7 +286,9 @@ The following method constructs a BSON document directly using BSON-specific cla
             )));
 
     System.out.println("Raw BSON: " + rawBson.toJson());
-}</pre>
+}
+```
+
 
 In this example, we create a BSON document using explicit BSON classes:
 
@@ -267,7 +300,8 @@ In this example, we create a BSON document using explicit BSON classes:
 
 Each append() call explicitly defines the BSON type, making this method more verbose than using the Document class but also more precise.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">Raw BSON: {
+```
+Raw BSON: {
   "title": "Raw BSON Example",
   "value": 100,
   "binaryData": {
@@ -281,7 +315,9 @@ Each append() call explicitly defines the BSON type, making this method more ver
     }
   },
   "array": [1, 2, 3]
-}</pre>
+}
+```
+
 
 The binaryData field is represented as a base64-encoded string with a type identifier (00 for generic binary data). The timestamp field includes both a time value (t) and an increment (i), useful for replication and internal operations.
 
@@ -294,7 +330,8 @@ When querying MongoDB, we typically use the [Filters class](https://www.mongodb.
 
 Let's take a look at a simple equality filter. The following method demonstrates how to query for specific documents using Filters.eq() and Filters.exists():
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">private static void queryWithBSON() {
+```
+private static void queryWithBSON() {
     System.out.println("\n--- Querying with BSON ---");
 
     // Find the first document where the "user" field is "Alice"
@@ -304,22 +341,31 @@ Let's take a look at a simple equality filter. The following method demonstrates
     }
 
     // Find all documents that contain the "activity" field
-    List&lt;Document&gt; results = collection.find(Filters.exists("activity")).into(new ArrayList&lt;&gt;());
+    List<Document> results = collection.find(Filters.exists("activity")).into(new ArrayList<>());
     System.out.println("Documents with 'activity' field:");
-    results.forEach(doc -&gt; System.out.println(doc.toJson()));
-}</pre>
+    results.forEach(doc -> System.out.println(doc.toJson()));
+}
+```
+
 
 The Filters.eq() method creates a simple equality query, matching documents where the user field is "Alice". This query is not searching for a string, but for a BSON BsonString. Similarly, when querying for dates, BSON expects a Date type, not a string. This query is similar to the following MongoDB query in the shell:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">db.collection.find({ "user": "Alice" })</pre>
+```
+db.collection.find({ "user": "Alice" })
+```
+
 
 The Filters.exists() method finds documents that contain a specific field, regardless of its value. In this case, we are searching for all documents that have the "activity" field. This query is equivalent to:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">db.collection.find({ "activity": { $exists: true } })</pre>
+```
+db.collection.find({ "activity": { $exists: true } })
+```
+
 
 If a document with "user": "Alice" exists, the output will look something like this:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">--- Querying with BSON ---
+```
+--- Querying with BSON ---
 Found Document: {
   "_id": "64e99b0b4321a1b9a6e4d8c7",
   "user": "Alice",
@@ -334,7 +380,9 @@ Found Document: {
     "login": "2025-05-09T12:34:56.789Z",
     "status": "active"
   }
-}</pre>
+}
+```
+
 
 If there are multiple documents containing the "activity" field, each will be printed as a separate JSON object.
 
@@ -353,8 +401,11 @@ Each stage processes BSON data directly. MongoDB maintains BSON data types throu
 
 For instance, if we aggregate on a Decimal128 field, the aggregation framework maintains the precision:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">List&lt;Bson&gt; pipeline = List.of(     Aggregates.group("$user", 
-Accumulators.sum("totalBalance", "$balance")) );</pre>
+```
+List<Bson> pipeline = List.of(     Aggregates.group("$user", 
+Accumulators.sum("totalBalance", "$balance")) );
+```
+
 
 If balance is stored as a Decimal128, the aggregation framework sums it as a Decimal128. This is crucial for financial calculations where precision matters.
 
@@ -364,72 +415,99 @@ In this example, we will build an aggregation pipeline that:
 2. Groups documents by the user field, calculating the sum of all balance values for each user.
 3. Projects the output to include the user and the calculated totalBalance.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">private static void aggregateWithBSON() {
+```
+private static void aggregateWithBSON() {
     System.out.println("\n--- Aggregation with BSON ---");
 
-    List&lt;Bson&gt; pipeline = List.of(
+    List<Bson> pipeline = List.of(
         Aggregates.match(Filters.exists("balance")),
         Aggregates.group("$user", Accumulators.sum("totalBalance", "$balance")),
         Aggregates.project(new Document("user", "$_id").append("totalBalance", 1))
     );
 
-    List&lt;Document&gt; results = collection.aggregate(pipeline).into(new ArrayList&lt;&gt;());
+    List<Document> results = collection.aggregate(pipeline).into(new ArrayList<>());
     System.out.println("Aggregation Results:");
-    results.forEach(doc -&gt; System.out.println(doc.toJson()));
-}</pre>
+    results.forEach(doc -> System.out.println(doc.toJson()));
+}
+```
+
 
 **Match stage:** The first stage filters documents based on the existence of the balance field:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">Aggregates.match(Filters.exists("balance"))</pre>
+```
+Aggregates.match(Filters.exists("balance"))
+```
+
 
 This generates a BSON structure similar to:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">{ "$match": { "balance": { "$exists": true } } }</pre>
+```
+{ "$match": { "balance": { "$exists": true } } }
+```
+
 
 The Filters.exists() method constructs a BSON document using the $exists operator, targeting BSON fields directly. If balance is a Decimal128 type, it remains a Decimal128 throughout the pipeline, maintaining precision.
 
 **Group stage:** The group stage aggregates documents by a specified field. In BSON, the _id field represents the grouping key. Here, we use the user field as the key and calculate the sum of the balance field:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">Aggregates.group("$user", Accumulators.sum("totalBalance", "$balance"))</pre>
+```
+Aggregates.group("$user", Accumulators.sum("totalBalance", "$balance"))
+```
+
 
 The resulting BSON structure:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">{
+```
+{
   "$group": {
     "_id": "$user",
     "totalBalance": { "$sum": "$balance" }
   }
-}</pre>
+}
+```
+
 
 In this stage, the key (_id) is defined as the user field. The balance field is aggregated using the $sum accumulator, and the result is stored in a new BSON field called totalBalance.
 
 **Project stage:** In the project stage, we transform the structure of the BSON document, selecting specific fields and renaming them as needed:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">Aggregates.project(new Document("user", "$_id").append("totalBalance", 1))</pre>
+```
+Aggregates.project(new Document("user", "$_id").append("totalBalance", 1))
+```
+
 
 The resulting BSON structure:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">{
+```
+{
   "$project": {
     "user": "$_id",
     "totalBalance": 1
   }
-}</pre>
+}
+```
+
 
 This operation renames the _id field to user and includes the totalBalance field in the output. Notice that _id is no longer a BSON ObjectId but a value derived from the group key, in this case, a String.
 
 If the collection contains the following documents:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">{ "user": "Alice", "balance": 5000 }
+```
+{ "user": "Alice", "balance": 5000 }
 { "user": "Alice", "balance": 3000 }
 { "user": "Bob", "balance": 7000 }
-{ "user": "Alice", "balance": 2500 }</pre>
+{ "user": "Alice", "balance": 2500 }
+```
+
 
 The output of the aggregation pipeline will look like this:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">Aggregation Results:
+```
+Aggregation Results:
 {"user": "Alice", "totalBalance": 10500}
-{"user": "Bob", "totalBalance": 7000}</pre>
+{"user": "Bob", "totalBalance": 7000}
+```
+
 
 Each document in the output is a BSON object resulting from the aggregation pipeline. The user field is derived from the grouping key, and totalBalance is the calculated sum of all balance values per user.
 
@@ -452,7 +530,8 @@ POJO mapping abstracts away the BSON conversion process. We define our Java clas
 
 Before we define our Java classes, we need to configure the PojoCodecProvider. This codec provider registers our Java classes for automatic BSON mapping.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">import org.bson.codecs.configuration.CodecProvider;  
+```
+import org.bson.codecs.configuration.CodecProvider;  
 import org.bson.codecs.configuration.CodecRegistry;  
 import org.bson.codecs.pojo.PojoCodecProvider;  
 
@@ -469,7 +548,9 @@ public class CodecSetup {
 
         return fromRegistries(getDefaultCodecRegistry(), fromProviders(pojoCodecProvider));  
     }  
-}</pre>
+}
+```
+
 
 The codec registry combines the default [BSON codecs](https://www.mongodb.com/docs/drivers/java/sync/current/data-formats/codecs/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=java+intro+to+bson&utm_term=tim.kelly) with our custom POJO codecs.
 
@@ -477,7 +558,8 @@ The codec registry combines the default [BSON codecs](https://www.mongodb.com/do
 
 Now, let's define a simple User class that MongoDB will automatically map to BSON.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">package com.mongodb;  
+```
+package com.mongodb;  
 
 import org.bson.types.ObjectId;  
 import org.bson.codecs.pojo.annotations.BsonId;  
@@ -542,7 +624,9 @@ public class User {
     public String toString() {  
         return "User [id=" + id + ", username=" + name + ", age=" + age + ", member=" + isMember + "]";  
     }  
-}</pre>
+}
+```
+
 
 <br />
 
@@ -553,8 +637,9 @@ public class User {
 
 Now that we have our codec set up and our POJO classes defined, let's see how we can insert and query these objects.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">// ...
-private static MongoCollection&lt;User&gt; userCollection;  
+```
+// ...
+private static MongoCollection<User> userCollection;  
 
 public static void main(String[] args) {  
 
@@ -577,10 +662,12 @@ private static void demonstratePojoMapping() {
     userCollection.insertOne(user);  
     System.out.println("Inserted User: " + user);  
 
-    List&lt;User&gt; users = new ArrayList&lt;&gt;();  
+    List<User> users = new ArrayList<>();  
     userCollection.find().into(users);  
     System.out.println("Retrieved Users: " + users);  
-}</pre>
+}
+```
+
 
 <br />
 
@@ -592,12 +679,15 @@ private static void demonstratePojoMapping() {
 
 When the User object is inserted, MongoDB stores it as a BSON document. The BSON representation will look like this:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">{
+```
+{
 	"_id":{ "$oid":"68211b91221c1ce15490b565" },
 	"age":{ "$numberInt":"30" },
 	"member":true,
 	"username":"John Doe"
-}</pre>
+}
+```
+
 
 <br />
 

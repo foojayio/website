@@ -43,33 +43,42 @@ The comparison will allow us to observe the verbosity of the implementation in t
 
 To reduce the displayed code, we show only the method "*createVehicle*" as this method is the focus of this article:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">private static Vehicle createVehicle(String type) {
+```java
+private static Vehicle createVehicle(String type) {
   return switch(type){
-     case"CAR"-&gt;new Car();
-     case"BUS"-&gt;new Bus();
-     case"TRUCK"-&gt;new Truck();
-     default-&gt; throw new IllegalArgumentException("""
+     case"CAR"->new Car();
+     case"BUS"->new Bus();
+     case"TRUCK"->new Truck();
+     default-> throw new IllegalArgumentException("""
                illegal type: %s """.formatted(type));
      };
-}</pre>
+}
+```
+
 
 Example 1. VehicleFactory, method "createVehicle" in Java - switch statement
 
-<pre class="EnlighterJSRAW" data-enlighter-language="kotlin" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">fun createVehicle(type: String): KVehicle = when(type){
-   "CAR" -&gt; KCar()
-   "BUS" -&gt; KBus()
-   "TRUCK" -&gt; KTruck()
-   else -&gt; throw IllegalArgumentException("illegal type:$type")
-}</pre>
+```kotlin
+fun createVehicle(type: String): KVehicle = when(type){
+   "CAR" -> KCar()
+   "BUS" -> KBus()
+   "TRUCK" -> KTruck()
+   else -> throw IllegalArgumentException("illegal type:$type")
+}
+```
+
 
 Example 2. VehicleFactory, method "createVehicle" in Kotlin - when expression
 
-<pre class="EnlighterJSRAW" data-enlighter-language="scala" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">def createVehicle(vehicleType: String): SVehicle = vehicleType match {
-   case"CAR" =&gt; new SCar
-   case"TRUCK" =&gt; new STruck
-   case"BUS" =&gt; new SBus
-   case _ =&gt; throw new IllegalArgumentException(f"illegal type: $vehicleType")
-}</pre>
+```scala
+def createVehicle(vehicleType: String): SVehicle = vehicleType match {
+   case"CAR" => new SCar
+   case"TRUCK" => new STruck
+   case"BUS" => new SBus
+   case _ => throw new IllegalArgumentException(f"illegal type: $vehicleType")
+}
+```
+
 
 Example 3. VehicleFactory, method "createVehicle" in Scala - match mechanism
 
@@ -86,7 +95,8 @@ Working example and additional information is available on GitHub account (Ref 1
 
 <https://github.com/mirage22/jvm-language-examples>
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">// force 'VehicleFactory' to cause an exception
+```
+// force 'VehicleFactory' to cause an exception
 vehicle = createVehicle("BLA")
 1. Java StackTrace 
 Java 18, vehicle factory example...
@@ -125,7 +135,9 @@ java.lang.IllegalArgumentException: illegal type: BLA
    at scala.tools.nsc.MainGenericRunner.run$1(MainGenericRunner.scala:91)
    at scala.tools.nsc.MainGenericRunner.process(MainGenericRunner.scala:103)
    at scala.tools.nsc.MainGenericRunner$.main(MainGenericRunner.scala:108)
-   at scala.tools.nsc.MainGenericRunner.main(MainGenericRunner.scala)</pre>
+   at scala.tools.nsc.MainGenericRunner.main(MainGenericRunner.scala)
+```
+
 
 Example 4. Vehicle factory causes exceptions with StackTraces
 

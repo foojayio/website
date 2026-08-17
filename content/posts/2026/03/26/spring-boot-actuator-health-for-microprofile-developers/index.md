@@ -47,14 +47,17 @@ The Actuator health endpoint lives at /actuator/health by default, with separate
 
 For Kubernetes deployments, you configure your probes similarly to what you'd do with MicroProfile:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">livenessProbe:
+```
+livenessProbe:
   httpGet:
     path: "/actuator/health/liveness"
-    port: &lt;actuator-port&gt;
+    port: <actuator-port>
 readinessProbe:
   httpGet:
     path: "/actuator/health/readiness"
-    port: &lt;actuator-port&gt;</pre>
+    port: <actuator-port>
+```
+
 
 Writing Health ChecksWriting Health Checks {#h2-2-writing-health-checkswriting-health-checks}
 ---------------------------------------------------------------------------------------------
@@ -63,7 +66,8 @@ In MicroProfile Health, you implement the HealthCheck functional interface and r
 
 #### MicroProfile Approach
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@Readiness
+```
+@Readiness
 @ApplicationScoped
 public class DatabaseCheck implements HealthCheck {
     public HealthCheckResponse call() {
@@ -72,11 +76,14 @@ public class DatabaseCheck implements HealthCheck {
             .up()
             .build();
     }
-}</pre>
+}
+```
+
 
 #### Spring Boot Actuator Approach
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@Component
+```
+@Component
 public class DatabaseHealthIndicator implements HealthIndicator {
     @Override
     public Health health() {
@@ -84,7 +91,9 @@ public class DatabaseHealthIndicator implements HealthIndicator {
             .withDetail("connection", "active")
             .build();
     }
-}</pre>
+}
+```
+
 
 Notice the similarities: both use a builder pattern, both support additional data/details, and both return a status. The naming is derived from the class name in Spring (DatabaseHealthIndicator becomes "database"), while MicroProfile requires explicit naming in the response.
 
@@ -110,7 +119,8 @@ Both specifications use JSON responses and HTTP status codes to communicate heal
 
 A typical Actuator health response looks like:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">{
+```
+{
   "status": "UP",
   "components": {
     "db": {
@@ -119,7 +129,9 @@ A typical Actuator health response looks like:
     },
     "diskSpace": { "status": "UP" }
   }
-}</pre>
+}
+```
+
 
 Compare this to MicroProfile's format using a "checks" array instead of a "components" object. The structure differs slightly, but the information conveyed is equivalent.
 

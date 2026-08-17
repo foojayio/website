@@ -28,18 +28,21 @@ Define Dependencies {#h2-0-define-dependencies}
 
 To integrate Java code in your post or page that needs dependencies, you need to specify them in the initial `div` with `data-libs`.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&lt;div data-pym-src='https://www.jdoodle.com/plugin' 
+```
+<div data-pym-src='https://www.jdoodle.com/plugin' 
    data-language="java" 
    data-version-index="4"
    data-client-id="34d6e81ae45d88cdb9fb98fed1415b81" 
-   data-libs="mavenlib1,mavenlib2"&gt;
-   &lt;div data-type="script"&gt;&lt;xmp&gt;
+   data-libs="mavenlib1,mavenlib2">
+   <div data-type="script"><xmp>
 
      // This is the place to put your Java code
 
-   &lt;/xmp&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;script src="https://www.jdoodle.com/assets/jdoodle-pym.min.js" type="text/javascript"&gt;&lt;/script&gt;</pre>
+   </xmp></div>
+</div>
+<script src="https://www.jdoodle.com/assets/jdoodle-pym.min.js" type="text/javascript"></script>
+```
+
 
 The `data-client-id` can only be used for the Foojay website! Create your own [account on the JDoodle site](https://www.jdoodle.com) if you want to use this functionality on another website.
 
@@ -48,12 +51,13 @@ Example Application {#h2-1-example-application}
 
 For example, let's use the Jackson library to parse JSON.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&lt;div data-pym-src='https://www.jdoodle.com/plugin' 
+```
+<div data-pym-src='https://www.jdoodle.com/plugin' 
    data-language="java" 
    data-version-index="4"
    data-client-id="34d6e81ae45d88cdb9fb98fed1415b81" 
-   data-libs="com.fasterxml.jackson.core:jackson-annotations:2.16.0,com.fasterxml.jackson.core:jackson-core:2.16.0,com.fasterxml.jackson.core:jackson-databind:2.16.0"&gt;
-   &lt;div data-type="script"&gt;&lt;xmp&gt;
+   data-libs="com.fasterxml.jackson.core:jackson-annotations:2.16.0,com.fasterxml.jackson.core:jackson-core:2.16.0,com.fasterxml.jackson.core:jackson-databind:2.16.0">
+   <div data-type="script"><xmp>
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonValue;
@@ -105,9 +109,11 @@ public class JsonParsing {
 
     record LogMessage(int level, Long timestamp, String message) { }
 }
-   &lt;/xmp&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;script src="https://www.jdoodle.com/assets/jdoodle-pym.min.js" type="text/javascript"&gt;&lt;/script&gt;</pre>
+   </xmp></div>
+</div>
+<script src="https://www.jdoodle.com/assets/jdoodle-pym.min.js" type="text/javascript"></script>
+```
+
 
 Will produce the following output. Hit the "Execute" button to run the code.
 

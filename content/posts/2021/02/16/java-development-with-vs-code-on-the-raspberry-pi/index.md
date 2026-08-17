@@ -34,13 +34,19 @@ On your Raspberry Pi open a browser and go to the [Visual Studio Code download p
 
 If you are using a "default" Raspberry Pi OS - which is an 32-bit version - you need to download the "ARM" file. Once downloaded, start a terminal and run the installation with:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ cd /home/pi/Downloads
-$ sudo apt install ./code_1.50.1-1602600660_armhf.deb </pre>
+```
+$ cd /home/pi/Downloads
+$ sudo apt install ./code_1.50.1-1602600660_armhf.deb
+```
+
 
 And there is even an easier way, as Visual Studio Code is now available as a Raspberry Pi OS apt package (**which is very controversial, see below**)! Use the following commands:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">sudo apt update 
-sudo apt install code -y</pre>
+```
+sudo apt update 
+sudo apt install code -y
+```
+
 
 You can now start VSC from the start button and you will find it in the "Programming" list.
 
@@ -65,15 +71,19 @@ If you are already using the newer work-in-progress 64-bit Raspberry Pi OS (see 
 
 Select the "ARM 64" version from the download page. The installation command is the same as before, but with a slightly different filename.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ cd /home/pi/Downloads
-$ sudo apt install ./code_1.50.1-1602600638_arm64.deb </pre>
+```
+$ cd /home/pi/Downloads
+$ sudo apt install ./code_1.50.1-1602600638_arm64.deb
+```
+
 
 Also here you'll now find Visual Studio Code in the Programming list in the start menu. Let's also here add the "Java Extension Pack" (or one from the others mentioned in [the previous post](https://foojay.io/today/welcome-to-vs-code-for-java/)), so we can test a Java application.
 ![](visualstudiocode-64bit-java-extension-pack.png) Visual Studio Code running on Raspberry Pi OS (64bit)
 
 Maven and BellSoft JDK with JavaFX are already installed on my board:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ mvn -version
+```
+$ mvn -version
 Apache Maven 3.6.0
 Maven home: /usr/share/maven
 Java version: 11.0.8, vendor: BellSoft, runtime: /home/pi/.sdkman/candidates/java/11.0.8.fx-librca
@@ -83,7 +93,9 @@ OS name: "linux", version: "5.4.51-v8+", arch: "aarch64", family: "unix"
 $ java -version
 openjdk version "11.0.8" 2020-07-14 LTS
 OpenJDK Runtime Environment (build 11.0.8+10-LTS)
-OpenJDK 64-Bit Server VM (build 11.0.8+10-LTS, mixed mode)</pre>
+OpenJDK 64-Bit Server VM (build 11.0.8+10-LTS, mixed mode)
+```
+
 
 Without any further installation, we can now try out [this demo application which you can get from GitHub](https://github.com/FDelporte/JavaOnRaspberryPi/tree/master/Chapter_07_JavaFX/javafx-dashboard).
 ![](visualstudiocode-64bit-java-testing.png) JavaFX demo application started by Visual Studio Code on the Raspberry Pi
@@ -104,6 +116,6 @@ The Raspberry Pi was already a powerful PC at a low price. Now with Visual Studi
 
 If you don't like the changes in the Raspberry Pi OS there is a long list of alternatives as listed on "[Awesome Raspberry Pi](https://github.com/thibmaek/awesome-raspberry-pi)". Ubuntu, for example, has a 64bit version of their OS which also works great on the Pi, and you can download and install VSC yourself [as shown in this post](https://webtechie.be/post/2020-10-23-ubuntu-desktop-on-raspberrypi4/).
 
-*** ** * ** ***
+
 
 **Note:** originally written and published on the blog of [Frank Delporte](https://webtechie.be/post/2020-10-15-visual-studio-code-on-raspberry-pi/) but updated for foojay.io with info of the last week regarding the changes in Raspberry Pi OS.

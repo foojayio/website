@@ -66,13 +66,17 @@ On each screen a chess board pattern is created and by clicking on the small scr
 
 The application is first packaged with Maven and started with a bash script from another computer through SSH for easier demonstration.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ mvn package
+```
+$ mvn package
 $ cd target/distribution
-$ sudo bash run-kiosk.sh</pre>
+$ sudo bash run-kiosk.sh
+```
+
 
 The script first disables desktop mode with `/sbin/init 3`, starts the compiled jar with some additional settings, and when the program exits, the desktop mode is started again with `/sbin/init 5`. With this approach, **hardware acceleration** is used for maximum performance of the JavaFX rendering. It is also possible to use the **cursor and hardware rotation**, but this still needs to be fully documented.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">rm #!/usr/bin/env bash
+```java
+rm #!/usr/bin/env bash
 /sbin/init 3
 export ENABLE_GLUON_COMMERCIAL_EXTENSIONS=true
 java \
@@ -86,7 +90,9 @@ java \
   --module-path .:/opt/javafx-sdk-17/lib \
   --add-modules javafx.controls \
   --module be.webtechie.test/be.webtechie.test.Main $@
-/sbin/init 5</pre>
+/sbin/init 5
+```
+
 
 New JavaFX project wizard in IntelliJ IDEA {#h2-2-new-javafx-project-wizard-in-intellij-idea}
 ---------------------------------------------------------------------------------------------

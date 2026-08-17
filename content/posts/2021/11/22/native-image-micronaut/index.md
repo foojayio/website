@@ -57,12 +57,15 @@ Micronaut's bean configuration relies on [JSR 330](http://javax-inject.github.io
 
 `@Singleton` and its sibling `@ApplicationScoped` are meant to be used on our code. Our sample app needs to create an instance of `java.security.MessageDigest`, which cannot be annotated. To solve this problem, JSR 330 provides the `@Factory` annotation:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="kotlin">@Factory                                                    // 1
+```kotlin
+@Factory                                                    // 1
 class BeanFactory {
 
     @Singleton                                              // 2
     fun messageDigest() = MessageDigest.getInstance("MD5")  // 3
-}</pre>
+}
+```
+
 
 1. Bean-generating class
 2. Regular scope annotation
@@ -70,23 +73,29 @@ class BeanFactory {
 
 Micronaut also provides an automated discovery mechanism. Unfortunately, it doesn't work in Kotlin. You need to point to the package Micronaut explicitly should scan:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="kotlin">fun main(args: Array&lt;String&gt;) {
+```kotlin
+fun main(args: Array<String>) {
     Micronaut.build().args(*args)
              .packages("ch.frankel.blog")
              .start()
-}</pre>
+}
+```
+
 
 Controller configuration {#h2-2-controller-configuration}
 ---------------------------------------------------------
 
 Micronaut copied the `@Controller` annotation from Spring. You can use it in the same way. Likewise, annotate functions with the relevant HTTP method annotation.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="kotlin">@Controller
+```kotlin
+@Controller
 class MarvelController() {
 
     @Get
-    fun characters() = HttpResponse.accepted&lt;Unit&gt;()
-}</pre>
+    fun characters() = HttpResponse.accepted<Unit>()
+}
+```
+
 
 Non-blocking HTTP client {#h2-3-non-blocking-http-client}
 ---------------------------------------------------------
@@ -101,17 +110,23 @@ The declarative client is for simple use-cases, while the low-level is for more 
 
 The usage is straightforward:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="kotlin">val request = HttpRequest.GET&lt;Unit&gt;("https://gateway.marvel.com:443/v1/public/characters")
-client.retrieve(request, String::class.java)</pre>
+```kotlin
+val request = HttpRequest.GET<Unit>("https://gateway.marvel.com:443/v1/public/characters")
+client.retrieve(request, String::class.java)
+```
+
 
 Remember that we should get parameters from the request to the application and propagate them to the request we make to the Marvel API. Micronaut can automatically bind such query parameters to method parameters with the `@QueryValue` annotation for the first part.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="kotlin">@Get
+```kotlin
+@Get
 fun characters(
     @QueryValue limit: String?,
     @QueryValue offset: String?,
     @QueryValue orderBy: String?
-)</pre>
+)
+```
+
 
 It's not possible to use Kotlin's string interpolation as these parameters are optional. Fortunately, Micronaut provides an `UriBuilder` abstraction, which follows the Builder pattern principles.
 
@@ -121,38 +136,47 @@ It's not possible to use Kotlin's string interpolation as these parameters are o
 
 We can use it like this:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="kotlin">val uri = UriBuilder
+```kotlin
+val uri = UriBuilder
             .of("${properties.serverUrl}/v1/public/characters")
             .queryParamsWith(
                 mapOf("limit" to limit, "offset" to offset, "orderBy" to orderBy)
             )
             .build()
 
-fun UriBuilder.queryParamsWith(params: Map&lt;String, String?&gt;) = apply {
+fun UriBuilder.queryParamsWith(params: Map<String, String?>) = apply {
     params.entries
         .filter { it.value != null }
         .forEach { queryParam(it.key, it.value) }
-}</pre>
+}
+```
+
 
 Parameterization {#h2-4-parameterization}
 -----------------------------------------
 
 Like Spring, Micronaut can bind application properties to Kotlin data classes. In Micronaut, the file is named `application.yml`. The file already exists and contains the `micronaut.application.name` key. We only need to add the additional data. I chose to put it under the same parent key, but there's no such constraint.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml">micronaut:
+```yaml
+micronaut:
   application:
     name: nativeMicronaut
     marvel:
-      serverUrl: https://gateway.marvel.com:443</pre>
+      serverUrl: https://gateway.marvel.com:443
+```
+
 
 To bind, we need the help of two annotations:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="kotlin">@ConfigurationProperties("micronaut.application.marvel")       // 1
+```kotlin
+@ConfigurationProperties("micronaut.application.marvel")       // 1
 data class MarvelProperties @ConfigurationInject constructor(  // 2
     val serverUrl: String,
     val apiKey: String,
     val privateKey: String
-)</pre>
+)
+```
+
 
 1. Bind the property class to the property file prefix
 2. Allow using a data class. The `@ConfigurationInject` needs to be set on the constructor: it's a sign that the team could improve Kotlin integration in Micronaut.
@@ -162,8 +186,11 @@ Testing {#h2-5-testing}
 
 Micronaut tests are based on the `@MicronautTest` annotation.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="kotlin">@MicronautTest
-class MicronautNativeApplicationTest</pre>
+```kotlin
+@MicronautTest
+class MicronautNativeApplicationTest
+```
+
 
 We defined the properties of the above data class as non-nullable strings. Hence, we need to pass the value when the test starts. For that, Micronaut provides the `TestPropertyProvider` interface:
 
@@ -171,7 +198,8 @@ We defined the properties of the above data class as non-nullable strings. Hence
 
 We can leverage it to pass property values:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="kotlin">@MicronautTest
+```kotlin
+@MicronautTest
 class MicronautNativeApplicationTest : TestPropertyProvider {
 
     override fun getProperties() = mapOf(
@@ -179,11 +207,14 @@ class MicronautNativeApplicationTest : TestPropertyProvider {
         "micronaut.application.marvel.privateKey" to "dummy",
         "micronaut.application.marvel.serverUrl" to "defined-later"
     )
-}</pre>
+}
+```
+
 
 The next step is to set up Testcontainers. Integration is provided out-of-the-box for popular containers, *e.g.*, Postgres, but not with the mock server. We have to write code to handle it.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="kotlin">@MicronautTest
+```kotlin
+@MicronautTest
 @Testcontainers
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)             // 1
 class MicronautNativeApplicationTest {
@@ -195,14 +226,17 @@ class MicronautNativeApplicationTest {
             DockerImageName.parse("mockserver/mockserver")
         ).apply { start() }                                 // 2
     }
-}</pre>
+}
+```
+
 
 1. By default, one server is created for each test method. We want one per test class.
 2. Don't forget to start it explicitly!
 
 At this point, we can inject both the client and the embedded server:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="kotlin">@MicronautTest
+```kotlin
+@MicronautTest
 @Testcontainers
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class MicronautNativeApplicationTest : TestPropertyProvider {
@@ -256,7 +290,9 @@ class MicronautNativeApplicationTest : TestPropertyProvider {
         assertEquals(1, body.data.count)
         assertEquals("Anita Blake", body.data.results.first().name)
     }
-}</pre>
+}
+```
+
 
 1. Inject the *reactive* client
 2. Inject the embedded server, *i.e.*, the application
@@ -272,29 +308,44 @@ As with Spring, Micronaut provides two ways to create native images:
 
 1. On the local machine.It requires a local GraalVM installation **with** `native-image`.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash">mvn package -Dpackaging=native-image</pre>
+```bash
+mvn package -Dpackaging=native-image
+```
+
 
 2. In Docker. It requires a local Docker installation. 
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash">mvn package -Dpackaging=docker-native</pre>
+```bash
+mvn package -Dpackaging=docker-native
+```
+
 
    Note that if you don't use a GraalVM JDK, you need to activate the \`graalvm\` profile.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash">mvn package -Dpackaging=docker-native -Pgraalvm</pre>
+```bash
+mvn package -Dpackaging=docker-native -Pgraalvm
+```
+
 
 With the second approach, the result is the following:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">REPOSITORY             TAG       IMAGE ID         CREATED          SIZE
-native-micronaut       latest    898f73fb44b0     33 seconds ago   85.3MB</pre>
+```
+REPOSITORY             TAG       IMAGE ID         CREATED          SIZE
+native-micronaut       latest    898f73fb44b0     33 seconds ago   85.3MB
+```
+
 
 The layers are the following:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">┃ ● Layers ┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+```
+┃ ● Layers ┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 Cmp   Size  Command
     5.6 MB  FROM e6b8cc5e282829d                                                #1
      12 MB  RUN /bin/sh -c ALPINE_GLIBC_BASE_URL="https://github.com/sgerrand/  #2
-    3.5 MB  |1 EXTRA_CMD=apk update &amp;&amp; apk add libstdc++ /bin/sh -c if [[ -n "  #3
-     64 MB  #(nop) COPY file:106f24caede12d6d28c6c90d9a3ae33f78485ad71e4157125  #4</pre>
+    3.5 MB  |1 EXTRA_CMD=apk update && apk add libstdc++ /bin/sh -c if [[ -n "  #3
+     64 MB  #(nop) COPY file:106f24caede12d6d28c6c90d9a3ae33f78485ad71e4157125  #4
+```
+
 
 1. Parent image
 2. Alpine glibc

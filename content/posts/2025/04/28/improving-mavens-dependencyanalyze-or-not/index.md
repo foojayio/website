@@ -69,7 +69,8 @@ Here's a very simplified flow:
 
 The JAR that automatically comes with Spring Boot is `org.springframework.boot:spring-boot-autoconfigure`. You can check the content of its `META-INF/spring/org.springframework.boot.autoconfigure.AutoConfiguration.imports`:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">...
+```
+...
 org.springframework.boot.autoconfigure.web.client.RestClientAutoConfiguration
 org.springframework.boot.autoconfigure.web.client.RestTemplateAutoConfiguration
 org.springframework.boot.autoconfigure.web.embedded.EmbeddedWebServerFactoryCustomizerAutoConfiguration
@@ -91,17 +92,22 @@ org.springframework.boot.autoconfigure.websocket.reactive.WebSocketReactiveAutoC
 org.springframework.boot.autoconfigure.websocket.servlet.WebSocketServletAutoConfiguration
 org.springframework.boot.autoconfigure.websocket.servlet.WebSocketMessagingAutoConfiguration
 org.springframework.boot.autoconfigure.webservices.WebServicesAutoConfiguration
-org.springframework.boot.autoconfigure.webservices.client.WebServiceTemplateAutoConfiguration</pre>
+org.springframework.boot.autoconfigure.webservices.client.WebServiceTemplateAutoConfiguration
+```
+
 
 As an example, here's the `RestClientAutoConfiguration`:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">@AutoConfiguration(after = { HttpClientAutoConfiguration.class, HttpMessageConvertersAutoConfiguration.class }) //1
+```java
+@AutoConfiguration(after = { HttpClientAutoConfiguration.class, HttpMessageConvertersAutoConfiguration.class }) //1
 @ConditionalOnClass(RestTemplate.class)                //2
 @Conditional(NotReactiveWebApplicationCondition.class) //3
 public class RestTemplateAutoConfiguration {
 
     // Class body
-}</pre>
+}
+```
+
 
 1. Set the order of auto-configuration classes
 2. Activate if the `RestTemplate` class is on the classpath
@@ -118,10 +124,13 @@ When using the plugin on a Spring Boot project, you'll get a lot of false positi
 
 Here's a slight excerpt of the output when I run `mvn analyze:dependencies`:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">[WARNING] Unused declared dependencies found:
+```
+[WARNING] Unused declared dependencies found:
 [WARNING]   org.springframework.boot:spring-boot-starter-data-r2dbc:jar:3.4.0:compile
 [WARNING]   org.testcontainers:postgresql:jar:1.20.4:test
-[WARNING]   org.testcontainers:r2dbc:jar:1.20.4:test</pre>
+[WARNING]   org.testcontainers:r2dbc:jar:1.20.4:test
+```
+
 
 If I remove any of these dependencies, tests don't run.
 
@@ -135,7 +144,7 @@ Let's analyze the analyzer.
 
 The plugin allows configuring another analyzer:
 >
-> *** ** * ** ***
+> 
 >
 > Specify the project dependency analyzer to use (plexus component role-hint). By default, maven-dependency-analyzer is used. To use this, you must declare a dependency for this plugin that contains the code for the analyzer. The analyzer must have a declared Plexus role name, and you specify the role name here.
 >
@@ -163,6 +172,6 @@ I don't know if it's worth the time and effort. If you think it is, I hope this 
 * [Designing your own Spring Boot starter -- part 1](https://blog.frankel.ch/designing-your-own-spring-boot-starter/1/)
 * [Designing your own Spring Boot starter -- part 2](https://blog.frankel.ch/designing-your-own-spring-boot-starter/2/)
 
-*** ** * ** ***
+
 
 *Originally published at [A Java Geek](https://blog.frankel.ch/maven-dependency-analyze/) on March 9^th^, 2025*

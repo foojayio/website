@@ -8,7 +8,7 @@ aliases:
 frozen: false
 ---
 
-*** ** * ** ***
+
 
 [Hello World! \>\>](https://foojay.io/java-quick-start/quick-start-tutorial/hello-world)
 

@@ -52,7 +52,8 @@ We create a class called `ThreadMap` for this purpose (stored in a global variab
 
 It has to be thread-safe, as we're accessing it from multiple threads in parallel. So we have to create a lock for its internal data structures. This is quite simple with modern C++:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="cpp" data-enlighter-theme="dracula" data-enlighter-highlight="" data-enlighter-linenumbers="false" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">struct ValidThreadInfo {
+```cpp
+struct ValidThreadInfo {
     jthread jthread;
     pthread_t pthread;
     bool is_running;
@@ -61,34 +62,39 @@ It has to be thread-safe, as we're accessing it from multiple threads in paralle
 
 class ThreadMap {
   std::recursive_mutex m;
-  std::unordered_map&lt;pid_t, ValidThreadInfo&gt; map;
-  std::vector&lt;std::string&gt; names;
+  std::unordered_map<pid_t, ValidThreadInfo> map;
+  std::vector<std::string> names;
 
   public:
 
     void add(pid_t pid, std::string name, jthread thread) {
-      const std::lock_guard&lt;std::recursive_mutex&gt; lock(m);
+      const std::lock_guard<std::recursive_mutex> lock(m);
       map[pid] = ValidThreadInfo{.jthread = thread, .pthread = pthread_self(), .id = (long)names.size()};
       names.emplace_back(name);
     }
 
     void remove(pid_t pid) {
-      const std::lock_guard&lt;std::recursive_mutex&gt; lock(m);
+      const std::lock_guard<std::recursive_mutex> lock(m);
       map.erase(pid);
     }
-};</pre>
+};
+```
+
 
 Obtaining the thread id for the current thread leads to our first platform-dependent code, using a syscall on Linux and a non-posix pthread method on mac:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="cpp" data-enlighter-theme="dracula" data-enlighter-highlight="" data-enlighter-linenumbers="false" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">pid_t get_thread_id() {
-  #if defined(__APPLE__) &amp;&amp; defined(__MACH__)
+```cpp
+pid_t get_thread_id() {
+  #if defined(__APPLE__) && defined(__MACH__)
   uint64_t tid;
-  pthread_threadid_np(NULL, &amp;tid);
+  pthread_threadid_np(NULL, &tid);
   return (pid_t) tid;
   #else
   return syscall(SYS_gettid);
   #endif
-}</pre>
+}
+```
+
 
 *Yes, we could quickly implement our profiler for other BSDs like FreeBSD, but MacOS is the only one I have at hand.*
 
@@ -96,31 +102,38 @@ Keep in mind to also add the main thread to the collection by calling the `OnThr
 
 Now we have an up-to-date list of all threads. For wall-clock profiling, this is fine, but for cpu-time profiling, we have to obtain a list of running threads. We conveniently stored the `jthread` objects in our thread map, so we can now use the [GetThreadState](https://docs.oracle.com/en/java/javase/17/docs/specs/jvmti.html#GetThreadState) method:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="cpp" data-enlighter-theme="dracula" data-enlighter-highlight="" data-enlighter-linenumbers="false" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">bool is_thread_running(jthread thread) {
+```cpp
+bool is_thread_running(jthread thread) {
   jint state;
-  auto err = jvmti-&gt;GetThreadState(thread, &amp;state);
+  auto err = jvmti->GetThreadState(thread, &state);
   // handle errors as not runnable
-  return err == 0 &amp;&amp; state != JVMTI_THREAD_STATE_RUNNABLE;
-}</pre>
+  return err == 0 && state != JVMTI_THREAD_STATE_RUNNABLE;
+}
+```
+
 
 This leads us to a list of threads that we can sample. It is usually not a good idea to sample all available threads: With wall-clock profiling, the list of threads can be so large that sampling all threads is too costly. Therefore one typically takes a random subset of the list of available threads. Async-profiler, for example, takes 8, which we use too.
 
 Taking a random subset is quite cumbersome in C, but C++ has a neat library function since C++11: [`std:shuffle`](https://en.cppreference.com/w/cpp/algorithm/random_shuffle). We can use it to implement the random selection:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="cpp" data-enlighter-theme="dracula" data-enlighter-highlight="" data-enlighter-linenumbers="false" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">std::vector&lt;pid_t&gt; get_shuffled_threads() {
-  const std::lock_guard&lt;std::recursive_mutex&gt; lock(m);
-  std::vector&lt;pid_t&gt; threads = get_all_threads();
+```cpp
+std::vector<pid_t> get_shuffled_threads() {
+  const std::lock_guard<std::recursive_mutex> lock(m);
+  std::vector<pid_t> threads = get_all_threads();
   std::random_device rd;
   std::mt19937 g(rd());
   std::shuffle(threads.begin(), threads.end(), g);
   return std::vector(threads.begin(), threads.begin() + std::min(MAX_THREADS_PER_ITERATION, (int)threads.size()));
-}</pre>
+}
+```
+
 
 *Be aware that we had to change the mutex to a mutex which allows recursive reentrance, as `get_all_threads` also acquires the mutex.*
 
 The next step is creating a sampling thread that runs the loop I described at the beginning of this article. This superseedes the itimer sampler from the previous post, as the mechanism does not support sending signals to a random subset only. The sampling thread is started in the `OnVMInit` handler and joined the `OnAgentUnload` handler. Its implementation is rather simple:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="cpp" data-enlighter-theme="dracula" data-enlighter-highlight="" data-enlighter-linenumbers="false" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">std::atomic&lt;bool&gt; shouldStop = false;
+```cpp
+std::atomic<bool> shouldStop = false;
 std::thread samplerThread;
 
 static void sampleLoop() {
@@ -132,7 +145,7 @@ static void sampleLoop() {
     auto duration = std::chrono::system_clock::now() - start;
     // takes into account that sampleThreads() takes some time
     auto sleep = interval - duration;
-    if (std::chrono::seconds::zero() &lt; sleep) {
+    if (std::chrono::seconds::zero() < sleep) {
       std::this_thread::sleep_for(sleep);
     }
   }
@@ -141,22 +154,27 @@ static void sampleLoop() {
 
 static void startSamplerThread() {
   samplerThread = std::thread(sampleLoop);
-}</pre>
+}
+```
+
 
 The `initSampler` function preallocates the traces for `N=8 `threads, as we decided only to sample as many at every loop. The signal handlers can later use these preallocated traces to call `AsyncGetCallTrace`:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="cpp" data-enlighter-theme="dracula" data-enlighter-highlight="" data-enlighter-linenumbers="false" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">const int MAX_DEPTH = 512; // max number of frames to capture
+```cpp
+const int MAX_DEPTH = 512; // max number of frames to capture
 
 static ASGCT_CallFrame global_frames[MAX_DEPTH * MAX_THREADS_PER_ITERATION];
 static ASGCT_CallTrace global_traces[MAX_THREADS_PER_ITERATION];
 
 static void initSampler() {
-  for (int i = 0; i &lt; MAX_THREADS_PER_ITERATION; i++) {
+  for (int i = 0; i < MAX_THREADS_PER_ITERATION; i++) {
     global_traces[i].frames = global_frames + i * MAX_DEPTH;
     global_traces[i].num_frames = 0;
     global_traces[i].env_id = env;
   }
-}</pre>
+}
+```
+
 
 The `sampleThreads` the function sends the signals to each thread using pthread_signal. This is why store the pthread for every thread. But how does a signal handler know which of the traces to use? And how does the `sampleThreads` function know when all signal handlers are finished?
 
@@ -167,14 +185,18 @@ It uses two atomic integer variables for this purpose:
 
 The signal handler is then quite simple:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="cpp" data-enlighter-theme="dracula" data-enlighter-highlight="" data-enlighter-linenumbers="false" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">static void signalHandler(int signo, siginfo_t* siginfo, void* ucontext) {
-  asgct(&amp;global_traces[available_trace++], MAX_DEPTH, ucontext);
+```cpp
+static void signalHandler(int signo, siginfo_t* siginfo, void* ucontext) {
+  asgct(&global_traces[available_trace++], MAX_DEPTH, ucontext);
   stored_traces++;
-}</pre>
+}
+```
+
 
 The `sampleThreads` function has to only wait till `stored_traces` is as expected:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="cpp" data-enlighter-theme="dracula" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">static void sampleThreads() {
+```cpp
+static void sampleThreads() {
   // reset the global variables
   available_trace = 0;
   stored_traces = 0;
@@ -184,26 +206,31 @@ The `sampleThreads` function has to only wait till `stored_traces` is as expecte
     auto info = thread_map.get_info(thread);
     if (info) {
       // send a signal to the thread
-      pthread_kill(info-&gt;pthread, SIGPROF);
+      pthread_kill(info->pthread, SIGPROF);
     }
   }
   // wait till all handlers obtained there traces
-  while (stored_traces &lt; threads.size());
+  while (stored_traces < threads.size());
   // process the traces
   processTraces(threads.size());
-}</pre>
+}
+```
+
 
 We keep the processing of the traces from the last blog post and just store the total number of traces as well as the number of failed traces:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="cpp" data-enlighter-theme="dracula" data-enlighter-highlight="" data-enlighter-linenumbers="false" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">static void processTraces(size_t num_threads) {
-  for (int i = 0; i &lt; num_threads; i++) {
-    auto&amp; trace = global_traces[i];
-    if (trace.num_frames &lt;= 0) {
+```cpp
+static void processTraces(size_t num_threads) {
+  for (int i = 0; i < num_threads; i++) {
+    auto& trace = global_traces[i];
+    if (trace.num_frames <= 0) {
       failedTraces++;
     }
     totalTraces++;
   }
-}</pre>
+}
+```
+
 
 The two global variables don't have to be atomic anymore, as only the sampler thread modifies them. A regular profiler would of course use the traces to obtain information on the run methods, but this is a topic for the next blog post in this series, so stay tuned. You can find the source code for the project on [GitHub](https://github.com/parttimenerd/writing-a-profiler/tree/post-1).
 

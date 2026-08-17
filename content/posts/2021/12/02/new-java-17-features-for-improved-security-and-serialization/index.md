@@ -48,20 +48,29 @@ You can set such a filter as a global JVM filter or individually per stream. For
 
 JVM argument:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">-Djdk.serialFilter=nl.brianvermeer.example.*;!*</pre>
+```
+-Djdk.serialFilter=nl.brianvermeer.example.*;!*
+```
+
 
 <br />
 
 Code:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">ObjectInputFilter filter = ObjectInputFilter.Config.createFilter("nl.brianvermeer.example.*;!*");
-ObjectInputFilter.Config.setSerialFilter(filter);</pre>
+```
+ObjectInputFilter filter = ObjectInputFilter.Config.createFilter("nl.brianvermeer.example.*;!*");
+ObjectInputFilter.Config.setSerialFilter(filter);
+```
+
 
 You can also set a filter for a specific stream like below.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">ObjectInputStream in = new ObjectInputStream(fileIn);
+```
+ObjectInputStream in = new ObjectInputStream(fileIn);
 ObjectInputFilter filesOnlyFilter = ObjectInputFilter.Config.createFilter("nl.brianvermeer.example2.Object;!*");
-in.setObjectInputFilter(filesOnlyFilter);</pre>
+in.setObjectInputFilter(filesOnlyFilter);
+```
+
 
 Up to Java 17, when I set a filter on a specific stream, the global filter is overridden for that stream. It doesn't combine the global filter with the stream-specific filter whatsoever. This is not a very flexible way of working. Moreover, it introduces the issue that your global filter might not work when a library you include does deserialization for you.
 
@@ -73,20 +82,24 @@ One of the most important things you can do now is setting a`SerialFilterFactory
 
 In the example below, I set a very basic factory to the `Config` that uses the default merge method to merge the existing filter with the new filter. With this tool I can decide if and filters should be merged or not, and how. This now solves the problem I discussed before, on how your libraries handle the global filter.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">ObjectInputFilter.Config.setSerialFilterFactory((f1, f2) -&gt; ObjectInputFilter.merge(f2,f1));</pre>
+```
+ObjectInputFilter.Config.setSerialFilterFactory((f1, f2) -> ObjectInputFilter.merge(f2,f1));
+```
+
 
 Next to the Filter Factory, Java 17 also gives you some nice convenience methods for easy filter creation. Function like `allowFilter()` and `rejectFilter()` on `ObjectInputFilter` are in my opinion a more declarative and readable way of creating filters.
 
 In the Java 17 code example below I am using these new features. In the deserialize method in this example, I specifically reject the Gadget class. Both the Gadget class and the TwoValue record are part of the same package. The Gadget will now be rejected and all other classes in this package will be allowed by the filter.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public static void main(String[] args) throws IOException, ClassNotFoundException {
+```
+public static void main(String[] args) throws IOException, ClassNotFoundException {
    var filename = "file.ser";
    var value = new TwoValue("one", "two");
    //var value = new Gadget(new Command("ls -l")); //This will not be deserialized
 
-   var filter1 = ObjectInputFilter.allowFilter(cl -&gt; cl.getPackageName().contentEquals("nl.brianvermeer.example.serialize.records"), ObjectInputFilter.Status.REJECTED);
+   var filter1 = ObjectInputFilter.allowFilter(cl -> cl.getPackageName().contentEquals("nl.brianvermeer.example.serialize.records"), ObjectInputFilter.Status.REJECTED);
    ObjectInputFilter.Config.setSerialFilter(filter1);
-   ObjectInputFilter.Config.setSerialFilterFactory((f1, f2) -&gt; ObjectInputFilter.merge(f2,f1));
+   ObjectInputFilter.Config.setSerialFilterFactory((f1, f2) -> ObjectInputFilter.merge(f2,f1));
 
    serialize(value, filename);
    deserialize(filename);
@@ -105,10 +118,12 @@ public static void deserialize(String filename) throws IOException, ClassNotFoun
    System.out.println("---deserialize");
    FileInputStream fileIn = new FileInputStream(filename);
    ObjectInputStream in = new ObjectInputStream(fileIn);
-   ObjectInputFilter intFilter = ObjectInputFilter.rejectFilter(cl -&gt; cl.equals(Gadget.class), ObjectInputFilter.Status.UNDECIDED);
+   ObjectInputFilter intFilter = ObjectInputFilter.rejectFilter(cl -> cl.equals(Gadget.class), ObjectInputFilter.Status.UNDECIDED);
    in.setObjectInputFilter(intFilter);
    TwoValue tv = (TwoValue) in.readObject();
-   System.out.println(tv);</pre>
+   System.out.println(tv);
+```
+
 
 3. Java Flight Recorder Deserialization Events {#h2-3-3-java-flight-recorder-deserialization-events}
 ----------------------------------------------------------------------------------------------------
@@ -117,13 +132,16 @@ The release of Java 17 also comes with a nice edition to the [Java Flight Record
 
 All the information is handy to see if there is deserialization somewhere in your application and what is actually getting deserialized while your process is running. You need to make sure, however, to enable this event. It will not get captured by default, so you have to make a specific configuration similar to this.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">​​&lt;?xml version="1.0" encoding="UTF-8"?&gt;
-&lt;configuration version="2.0" description="test"&gt;
-   &lt;event name="jdk.Deserialization"&gt;
-      &lt;setting name="enabled"&gt;true&lt;/setting&gt;
-      &lt;setting name="stackTrace"&gt;false&lt;/setting&gt;
-   &lt;/event&gt;
-&lt;/configuration&gt;</pre>
+```
+​​<?xml version="1.0" encoding="UTF-8"?>
+<configuration version="2.0" description="test">
+   <event name="jdk.Deserialization">
+      <setting name="enabled">true</setting>
+      <setting name="stackTrace">false</setting>
+   </event>
+</configuration>
+```
+
 
 Let use the previous code example, but now deserializing the Gadget class. I get the following result when I execute the code in my IntelliJ IDEA with the Java Flight Recorder and the custom configuration.
 ![](https://snyk.io/wp-content/uploads/blog-java-17-deserialization-1240x827.jpg)

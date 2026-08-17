@@ -39,8 +39,9 @@ Accounts balance is stored in a database, and respective credit/debut operations
 
 Let's focus on the `AccountService.transfer()` function. It requires a `Transaction` instance that wraps several of operations:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="kotlin">class AccountService {
-    fun transfer(tx: Transaction, vararg operations: () -&gt; Unit) {
+```kotlin
+class AccountService {
+    fun transfer(tx: Transaction, vararg operations: () -> Unit) {
         tx.start()
         try {
             operations.forEach { it.invoke() }
@@ -49,26 +50,32 @@ Let's focus on the `AccountService.transfer()` function. It requires a `Transact
             tx.rollback()
         }
     }
-}</pre>
+}
+```
+
 
 We can call the above code as:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="kotlin">val service = AccountService()
+```kotlin
+val service = AccountService()
 val transaction = Transaction()
 val repo = AccountRepo()
 service.transfer(
     transaction,
     { repo.credit(account1, 10.5) },
     { repo.debit(account2, 10.5) }
-)</pre>
+)
+```
+
 
 Improving the code with extension functions {#h2-1-improving-the-code-with-extension-functions}
 -----------------------------------------------------------------------------------------------
 
 We can slightly improve the above code by making use of [extension functions](https://kotlinlang.org/docs/extensions.html#extension-functions). Instead of defining the `Transaction` as a parameter to the `transfer()` function, we can migrate the latter to an extension function.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="kotlin">class AccountService {
-    fun Transaction.transfer(vararg operations: () -&gt; Unit) {
+```kotlin
+class AccountService {
+    fun Transaction.transfer(vararg operations: () -> Unit) {
         start()                                                    // 1
         try {
             operations.forEach { it.invoke() }
@@ -77,18 +84,23 @@ We can slightly improve the above code by making use of [extension functions](ht
             rollback()                                             // 1
         }
     }
-}</pre>
+}
+```
+
 
 1. Implicit `this` references the `Transaction` object
 
 Within the context of an `AccountService`, we can now call the `transfer()` function on an existing `Transaction`.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="kotlin">with(service) {                               // 1
+```kotlin
+with(service) {                               // 1
     transaction.transfer(                     // 2
         { repo.credit(account1, 10.5) },
         { repo.debit(account2, 10.5) }
     )
-}</pre>
+}
+```
+
 
 1. Bring the `service` instance in scope
 2. So it's valid to call `transfer` on the `transaction` object
@@ -100,12 +112,15 @@ One can analyze the new calling code from two different viewpoints:
 
 I think the semantics is wrong; it should be the opposite. it should be the opposite. In the context of `Transaction`, we should be able to call `transfer()` on an existing `AccountService` object:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="kotlin">with(transaction) {
+```kotlin
+with(transaction) {
     service.transfer(
         { repo.credit(account1, 10.5) },
         { repo.debit(account2, 10.5) }
     )
-}</pre>
+}
+```
+
 
 IMHO, conciseness has very little value compared to the cost of wrong semantics.
 
@@ -118,12 +133,16 @@ Context receivers to the rescue {#h2-2-context-receivers-to-the-rescue}
 
 As I mentioned in the introduction, the idea behind context receivers is to somehow "pass" function parameters without being explicit about them.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="kotlin">context(Foo, Bar, Baz)
-fun myfunction() {}</pre>
+```kotlin
+context(Foo, Bar, Baz)
+fun myfunction() {}
+```
+
 
 To call such a function, one needs to bring an object of each contextual type "in scope". We can achieve it with the [with](https://kotlinlang.org/docs/scope-functions.html#with) function:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="kotlin">val foo = Foo()
+```kotlin
+val foo = Foo()
 val bar = Bar()
 val baz = Baz()
 with(foo) {                     // 1
@@ -132,7 +151,9 @@ with(foo) {                     // 1
             myfunction()        // 4
         }
     }
-}</pre>
+}
+```
+
 
 1. Bring `foo` in scope
 2. Bring `bar` in scope
@@ -141,18 +162,22 @@ with(foo) {                     // 1
 
 While the code above compiles, it's only applicable if we use the contextual objects. The calling syntax is the same as the one of lambdas with receiver:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="kotlin">context(Foo, Bar, Baz)
+```kotlin
+context(Foo, Bar, Baz)
 fun myfunction() {
     println(this@Foo)
     println(this@Bar)
     println(this@Baz)
-}</pre>
+}
+```
+
 
 We use context receivers to be able to write code using the wanted code:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="kotlin">class AccountService {
+```kotlin
+class AccountService {
     context(Transaction)
-    fun transfer(vararg operations: () -&gt; Unit) {
+    fun transfer(vararg operations: () -> Unit) {
         start()                                   // 1
         try {
             operations.forEach { it.invoke() }
@@ -161,18 +186,23 @@ We use context receivers to be able to write code using the wanted code:
             rollback()                            // 1
         }
     }
-}</pre>
+}
+```
+
 
 1. Implicit `this` references the `Transaction` object. We don't need to qualify further with the class name as there's no other context object
 
 We can now call the code accordingly, with the correct semantics:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="kotlin">with(transaction) {                               // 1
+```kotlin
+with(transaction) {                               // 1
     service.transfer(                             // 2
         { repo.credit(account1, 10.5) },
         { repo.debit(account2, 10.5) }
     )
-}</pre>
+}
+```
+
 
 1. Bring `transaction` in scope
 2. Use the `transaction` object in scope

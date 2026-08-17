@@ -28,13 +28,16 @@ Imagine a business rule: every Customer has to have a birth date set. There are 
 
 Here are the top most used forms to null-check in constructor today:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public Customer(@NonNull Date birthDate) { // 3
+```java
+public Customer(@NonNull Date birthDate) { // 3
   assert (birthDate != null); // 4
   if (birthDate == null) { // 1
      throw new IllegalArgumentException();
   }
   this.birthDate = Objects.requireNonNull(birthDate); // 2
-}</pre>
+}
+```
+
 
 The code above contains 4 *alternative* ways to do the same thing, any single one is of course enough:
 
@@ -68,15 +71,21 @@ This change might seem frightening at first because we're touching the 'sacred' 
 
 Firstly, create a second getter returning `Optional`:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public Optional getMemberCardOpt() { 
+```java
+public Optional getMemberCardOpt() { 
    return Optional.ofNullable(memberCard); 
-}</pre>
+}
+```
+
 
 Secondly, change the original getter to delegate to the new one:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public String getMemberCard() { 
+```java
+public String getMemberCard() { 
     return getMemberCardOpt().orElse(null); 
-}</pre>
+}
+```
+
 
 Thirdly, make sure all the Java projects using the owner class are loaded in your workspace.
 
@@ -88,23 +97,35 @@ You're done, with zero compilation failures. After you do this, everyone previou
 
 But let's suppose you wanted to use a property of the MemberCard, and you were careful to check for `null`:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">if (customer.getMemeberCard() != null) { // Line X
+```java
+if (customer.getMemeberCard() != null) { // Line X
     applyDiscount(order, customer.getMemeberCard().getPoints());
-}</pre>
+}
+```
+
 
 After applying the refactoring steps above, the code gets refactored to
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">if (customer.getMemeberCard().orElse(null) != null) { // Line X
+```java
+if (customer.getMemeberCard().orElse(null) != null) { // Line X
     applyDiscount(order, customer.getMemeberCard().orElse(null).getPoints());
-}</pre>
+}
+```
+
 
 The `if` condition can be simplified by using `.isPresent()` and the second line by using `.get()`. Then one could even shorten the code to a single line:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">customer.getMemberCard().ifPresent(card -&gt; applyDiscount(order, card.getPoints()));</pre>
+```java
+customer.getMemberCard().ifPresent(card -> applyDiscount(order, card.getPoints()));
+```
+
 
 This means that you still need to go through all the places the getter is called to *improve* the code as we saw above. Furthermore, I bet that in large codebases you'll also discover places where the null-check (// Line X) was forgotten because the developer was tired/careless/rushing back then:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">applyDiscount(order, customer.getMemeberCard().orElse(null).getPoints());</pre>
+```java
+applyDiscount(order, customer.getMemeberCard().orElse(null).getPoints());
+```
+
 
 **Tip**: IntelliJ will hint you about the possible NPE in this case, so make sure the inspection 'Constant conditions and exceptions' is turned on.
 
@@ -128,17 +149,26 @@ Pre-instantiate sub-structures {#h2-4-pre-instantiate-sub-structures}
 
 Never do this:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">private List&lt;String&gt; labels;</pre>
+```java
+private List<String> labels;
+```
+
 
 > Always initialize the collection fields with an empty one!
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">private List&lt;String&gt; labels = new ArrayList&lt;&gt;();</pre>
+```java
+private List<String> labels = new ArrayList<>();
+```
+
 
 Those few bytes allocated beforehand almost never matter. On the other hand, the risk for doing `.add` on a `null` list is just too dangerous. In some other cases you might want to make the field `final` and take it via the constructor. Never leave collections references to have a `null`value.
 
 Many teams choose to decompose larger entities into smaller parts. When those parts are mutable, make sure you instantiate the parts in the parent entity:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">private BillingInfo billingInfo = new BillingInfo();</pre>
+```java
+private BillingInfo billingInfo = new BillingInfo();
+```
+
 
 This would allow the users of your model to do `e.getBillingInfo().setCity(city);` without worrying about nulls.
 

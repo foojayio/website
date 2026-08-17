@@ -72,14 +72,16 @@ HTTPS by default in Maven version 3.8.1 {#h2-2-https-by-default-in-maven-version
 
 To mitigate the problems discussed above, Maven decided to block external HTTP repositories by default. This is done by adding a `<blocked>` field in the mirror configuration and providing the following mirror to your global setting located at `${maven.home}/conf/settings.xml`.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="xml" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">    &lt;mirror&gt;
-      &lt;id&gt;maven-default-http-blocker&lt;/id&gt;
-      &lt;mirrorOf&gt;external:http:*&lt;/mirrorOf&gt;
-      &lt;name&gt;Pseudo repository to mirror external repositories initially using HTTP.&lt;/name&gt;
-      &lt;url&gt;https://0.0.0.0/&lt;/url&gt;
-      &lt;blocked&gt;true&lt;/blocked&gt;
-    &lt;/mirror&gt;
-</pre>
+```xml
+    <mirror>
+      <id>maven-default-http-blocker</id>
+      <mirrorOf>external:http:*</mirrorOf>
+      <name>Pseudo repository to mirror external repositories initially using HTTP.</name>
+      <url>https://0.0.0.0/</url>
+      <blocked>true</blocked>
+    </mirror>
+```
+
 
 The result is that new applications built with Maven will not connect to external repositories using HTTP but only HTTPS. This is because HTTPS guarantees that the client is communicating with the requested server. This prevents MITM attacks to a great extent.
 

@@ -95,7 +95,8 @@ You can enable API versioning using one of the following strategies
 
 * **Request Header Versioning Strategy**
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">package com.bsmlabs.features.apiversioning.config;
+```java
+package com.bsmlabs.features.apiversioning.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.ApiVersionConfigurer;
@@ -109,11 +110,14 @@ public class WebConfig implements WebMvcConfigurer {
         configurer.useRequestHeader("API-version")
                 .addSupportedVersions("1");
     }
-}</pre>
+}
+```
+
 
 * **Path Segment Versioning**
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">import org.springframework.context.annotation.Configuration;
+```java
+import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.ApiVersionConfigurer;
 import org.springframework.web.servlet.config.annotation.PathMatchConfigurer;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
@@ -129,6 +133,8 @@ public class WebConfig implements WebMvcConfigurer {
 
     @Override
     public void configurePathMatch(PathMatchConfigurer configurer) {
-        configurer.addPathPrefix("/{v}", aClass -&gt; true);
+        configurer.addPathPrefix("/{v}", aClass -> true);
     }
-}</pre>
+}
+```
+

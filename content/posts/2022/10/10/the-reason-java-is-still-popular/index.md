@@ -55,8 +55,10 @@ Modern Java includes patterns in switch, var, multiline strings and much more. S
 
 There's some support for that in the API level (and has been for a while). This isn't performant. The goal of string templates is to create a radical overridable syntax that [would allow](https://openjdk.org/jeps/8273943) stuff like:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">ResultSet rs = DB."SELECT * FROM Person p WHERE p.last_name = \{name}";
-</pre>
+```
+ResultSet rs = DB."SELECT * FROM Person p WHERE p.last_name = \{name}";
+```
+
 
 **Update:** since the publication of this post developers mistakenly assumed the code above is an SQL injection vulnerability. It isn't. This looks like string replacement but it's code that uses that syntax to generate a parameterized SQL call.
 
@@ -106,13 +108,16 @@ Why Annotation for Validation {#h2-5-why-annotation-for-validation}
 
 The article did bring up one interesting example that seems like the "right thing" to the casual observer but is problematic.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">@NotNull @Email
+```java
+@NotNull @Email
 String noReplyEmailAddress
-</pre>
+```
+
 
 The author claims that this is bad and one should implement custom typing e.g.:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public record EmailAddress(String value) {
+```java
+public record EmailAddress(String value) {
   public EmailAddress {
     // We could've used an Either data type, ofc;
     Objects.requireNonNull(value);
@@ -121,7 +126,9 @@ The author claims that this is bad and one should implement custom typing e.g.:
       throw new IllegalArgumentException(
         String.format("'%s' is not a valid email address", value));
   }
-}</pre>
+}
+```
+
 
 This is entirely possible in Java as the code above is valid Java code. But it has several problems which is why we have bean validation.
 

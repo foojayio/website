@@ -61,7 +61,10 @@ To authenticate, one needs to pass the following as query parameters:
 2. The timestamp
 3. The MD5 hash of the concatenation of the timestamp, the private key, and the API key
 
-<pre class="EnlighterJSRAW" data-enlighter-language="shell">curl http://gateway.marvel.com/v1/public/comics?ts=1&amp;apikey=1234&amp;hash=ffd275c5130566a2916217b101f26150</pre>
+```bash
+curl http://gateway.marvel.com/v1/public/comics?ts=1&apikey=1234&hash=ffd275c5130566a2916217b101f26150
+```
+
 
 For more detailed information, please refer to the [documentation](https://developer.marvel.com/documentation/authorization).
 
@@ -99,42 +102,54 @@ Though Spring a dedicated for beans, we will use the "traditional" way - annotat
 
 We need an MD5 message-digest to authenticate. With the Bean DSL, we can configure one like this:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="kotlin">@Configuration
+```kotlin
+@Configuration
 class MarvelConfig {
 
     @Bean
     fun md5(): MessageDigest = MessageDigest.getInstance("MD5")
-}</pre>
+}
+```
+
 
 Spring will automatically discover this class at startup time thanks to the `@SpringBootApplication` annotation, and instantiate the beans:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="kotlin">@SpringBootApplication
-class BootNativeApplication</pre>
+```kotlin
+@SpringBootApplication
+class BootNativeApplication
+```
+
 
 Controller configuration {#h2-3-controller-configuration}
 ---------------------------------------------------------
 
 Spring was the first to introduce the annotation-based controller configuration on top of the Servlet API. Since then, there has been some pushback against annotations. For that reason, Spring introduced declarative routes. Kotlin makes it even more pleasant with the Route DSL:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="kotlin">fun routes() = router {
-    GET("/") { request -&gt;
+```kotlin
+fun routes() = router {
+    GET("/") { request ->
         ServerResponse.ok().build()
     }
-}</pre>
+}
+```
+
 
 We also need to register the router as a bean:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="kotlin">@Configuration
+```kotlin
+@Configuration
 class MarvelConfig {
 
     @Bean
     fun routes() = router {
-    GET("/") { request -&gt;
+    GET("/") { request ->
         ServerResponse.ok().build()
     }
 
     // Other beans
-}</pre>
+}
+```
+
 
 Non-blocking HTTP client {#h2-4-non-blocking-http-client}
 ---------------------------------------------------------
@@ -146,17 +161,20 @@ For ages, Spring has offered a *blocking* HTTP client in the form of `RestTempla
 
 With WebFlux, Spring deprecated `RestTemplate` in favor of the provided reactive `WebClient`. Here's how to make a call inside the existing route:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="kotlin">fun routes() = router {
-    GET("/") { _ -&gt;
+```kotlin
+fun routes() = router {
+    GET("/") { _ ->
         val client = WebClient.create();
         val mono = client
             .get()
             .uri("https://gateway.marvel.com:443/v1/public/characters")
             .retrieve()
-            .bodyToMono&lt;String&gt;()
+            .bodyToMono<String>()
         ServerResponse.ok().body(mono)
     }
-}</pre>
+}
+```
+
 
 We also want to get some parameters and propagate them further. Among all offered by the Marvel API, I chose to expose three: `limit`, `offset` and `orderBy`.
 
@@ -164,13 +182,16 @@ The `GET` function accepts a `(ServerRequest) -> ServerResponse` as its second p
 
 We can create an extension bridge between the two:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="kotlin">fun UriBuilder.queryParamsWith(request: ServerRequest) = apply {
-    arrayOf("limit", "offset", "orderBy").forEach { param -&gt;       &lt;1&gt;
-        request.queryParam(param).ifPresent {                      &lt;2&gt;
-            queryParam(param, it)                                  &lt;3&gt;
+```kotlin
+fun UriBuilder.queryParamsWith(request: ServerRequest) = apply {
+    arrayOf("limit", "offset", "orderBy").forEach { param ->       <1>
+        request.queryParam(param).ifPresent {                      <2>
+            queryParam(param, it)                                  <3>
         }
     }
-}</pre>
+}
+```
+
 
 1. For each of the parameters
 2. If it's present in the request
@@ -178,8 +199,9 @@ We can create an extension bridge between the two:
 
 Now, we can call it accordingly:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="kotlin">fun routes(client: WebClient, props: MarvelProperties, digest: MessageDigest) = router {
-    GET("/") { request -&gt;
+```kotlin
+fun routes(client: WebClient, props: MarvelProperties, digest: MessageDigest) = router {
+    GET("/") { request ->
         val mono = client
             .get()
             .uri {
@@ -187,10 +209,12 @@ Now, we can call it accordingly:
                   .queryParamsWith(request)
                   .build()
             }.retrieve()
-            .bodyToMono&lt;String&gt;()
+            .bodyToMono<String>()
         ServerResponse.ok().body(mono)
     }
-}</pre>
+}
+```
+
 
 Parameterization {#h2-5-parameterization}
 -----------------------------------------
@@ -201,19 +225,25 @@ Parameterization entails two parts: how to pass parameters to the application an
 
 For passing parameters, Spring Boot offers [many different ways](https://docs.spring.io/spring-boot/docs/2.6.x/reference/htmlsingle/#features.external-config). Parameters can be grouped in profiles and activated as a whole. In this case, I chose to set the server URL in a YAML file inside the application, as it's the default, and pass secrets via the command line.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml">app:
+```yaml
+app:
   marvel:
-    server-url: https://gateway.marvel.com:443</pre>
+    server-url: https://gateway.marvel.com:443
+```
+
 
 To use parameters in the application, we also have several choices. One is to annotate fields with `@Value` and let Spring inject the values at runtime. Alternatively, we can group them in a dedicated class (or several) and let Spring do the binding again. I believe unless you've only a single value, a property class is an excellent way to go.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="kotlin">@ConfigurationProperties("app.marvel")      &lt;1&gt;
-@ConstructorBinding                        &lt;2&gt;
+```kotlin
+@ConfigurationProperties("app.marvel")      <1>
+@ConstructorBinding                        <2>
 data class MarvelProperties(
-    val serverUrl: String,                 &lt;3&gt;
+    val serverUrl: String,                 <3>
     val apiKey: String,
     val privateKey: String
-)</pre>
+)
+```
+
 
 1. Manage the prefix to read from
 2. Integrate with Kotlin data class
@@ -226,31 +256,36 @@ The size of the codebase doesn't lend itself to a lot of testing, especially uni
 
 For integration tests, we can use the `@SpringBootTest` annotation on the class:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="kotlin">@SpringBootTest(
-    webEnvironment = WebEnvironment.RANDOM_PORT,      &lt;1&gt;
+```kotlin
+@SpringBootTest(
+    webEnvironment = WebEnvironment.RANDOM_PORT,      <1>
     properties = [
-        "app.marvel.api-key=dummy",                   &lt;2&gt;
-        "app.marvel.private-key=dummy"                &lt;3&gt;
+        "app.marvel.api-key=dummy",                   <2>
+        "app.marvel.private-key=dummy"                <3>
     ]
 )
 class BootNativeApplicationTests
-</pre>
+```
+
 
 1. Start the application on a random port to avoid failure because of a port conflict
 2. `MarvelProperties` requires the parameter, but it's unused for testing. We pass anything as long as the parameter exists.
 
 [TestContainer](https://www.testcontainers.org/) is a Java library that allows to start/stop Docker containers. To use it, we only need to annotate the class with the relevant annotation. We also need to configure which containers we want to use:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="kotlin">@Testcontainers                                             &lt;1&gt;
+```kotlin
+@Testcontainers                                             <1>
 class BootNativeApplicationTests {
 
-    companion object {                                      &lt;2&gt;
+    companion object {                                      <2>
 
-        @Container                                          &lt;3&gt;
+        @Container                                          <3>
         val mockServer = MockServerContainer(
-            DockerImageName.parse("mockserver/mockserver")  &lt;4&gt;
+            DockerImageName.parse("mockserver/mockserver")  <4>
         )
-}</pre>
+}
+```
+
 
 1. Integrate with Testcontainers
 2. In Java, we need to have a `static` member.  
@@ -267,16 +302,19 @@ Now comes the genuine fun part:
 
 We can solve this chicken and egg problem with the help of [dynamic property sources](https://www.baeldung.com/spring-dynamicpropertysource).
 
-<pre class="EnlighterJSRAW" data-enlighter-language="kotlin">companion object {
+```kotlin
+companion object {
 
-    @JvmStatic                                                                    &lt;1&gt;
-    @DynamicPropertySource                                                        &lt;2&gt;
-    fun registerServerUrl(registry: DynamicPropertyRegistry) {                    &lt;3&gt;
-        registry.add("app.marvel.server-url") {                                   &lt;4&gt;
-            "http://${mockServer.containerIpAddress}:${mockServer.serverPort}"    &lt;5&gt;
+    @JvmStatic                                                                    <1>
+    @DynamicPropertySource                                                        <2>
+    fun registerServerUrl(registry: DynamicPropertyRegistry) {                    <3>
+        registry.add("app.marvel.server-url") {                                   <4>
+            "http://${mockServer.containerIpAddress}:${mockServer.serverPort}"    <5>
         }
     }
-}</pre>
+}
+```
+
 
 1. Required for Java compatibility
 2. Magic!
@@ -286,23 +324,26 @@ We can solve this chicken and egg problem with the help of [dynamic property sou
 
 Now, onto the test method:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="kotlin">@Test
-fun `should deserialize JSON payload from server and serialize it back again`() { &lt;1&gt;
+```kotlin
+@Test
+fun `should deserialize JSON payload from server and serialize it back again`() { <1>
     val mockServerClient =
-        MockServerClient(mockServer.containerIpAddress, mockServer.serverPort)    &lt;2&gt;
-    val sample = ClassPathResource("/sample.json").file.readText()                 &lt;3&gt;
-    mockServerClient.`when`(                                                      &lt;4&gt;
+        MockServerClient(mockServer.containerIpAddress, mockServer.serverPort)    <2>
+    val sample = ClassPathResource("/sample.json").file.readText()                 <3>
+    mockServerClient.`when`(                                                      <4>
         HttpRequest.request()
             .withMethod("GET")
             .withPath("/v1/public/characters")
-    ).respond(                                                                    &lt;5&gt;
+    ).respond(                                                                    <5>
         HttpResponse()
             .withStatusCode(200)
             .withHeader("Content-Type", "application/json")
             .withBody(sample)
     )
     // Test code
-}</pre>
+}
+```
+
 
 1. Kotlin allows having descriptive text for test method names
 2. Create the stub
@@ -312,10 +353,11 @@ fun `should deserialize JSON payload from server and serialize it back again`() 
 
 Let's move on to the test itself. Spring Test offers `WebTestClient`, a non-blocking test client. It allows to parameterize HTTP requests, send them and execute several fluent assertions on the response.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="kotlin">class BootNativeApplicationTests {
+```kotlin
+class BootNativeApplicationTests {
 
     @Autowired
-    private lateinit var webTestClient: WebTestClient                      &lt;1&gt;
+    private lateinit var webTestClient: WebTestClient                      <1>
 
     @Test
     fun `should deserialize JSON payload from server and serialize it back again`() {
@@ -325,18 +367,21 @@ Let's move on to the test itself. Spring Test offers `WebTestClient`, a non-bloc
             .exchange()
             .expectStatus().isOk
             .expectBody()
-            .jsonPath("\$.data.count").isEqualTo(1)                        &lt;2&gt;
-            .jsonPath("\$.data.results").isArray                           &lt;2&gt;
-            .jsonPath("\$.data.results[0].name").isEqualTo("Anita Blake")  &lt;2&gt;
+            .jsonPath("\$.data.count").isEqualTo(1)                        <2>
+            .jsonPath("\$.data.results").isArray                           <2>
+            .jsonPath("\$.data.results[0].name").isEqualTo("Anita Blake")  <2>
     }
-}</pre>
+}
+```
+
 
 1. Spring Test injects `WebTestClient` for you
 2. Assertions on the response
 
 At this point, the test fails to execute, though. We configured the application using the Beans DSL; we had to call `beans` during application startup explicitly. We need to configure the test as well, expressly.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="kotlin">class TestConfigInitializer : ApplicationContextInitializer&lt;GenericApplicationContext&gt; {
+```kotlin
+class TestConfigInitializer : ApplicationContextInitializer<GenericApplicationContext> {
     override fun initialize(context: GenericApplicationContext) {
         beans.initialize(context)
     }
@@ -344,10 +389,12 @@ At this point, the test fails to execute, though. We configured the application 
 
 @SpringBootTest(
     properties = [
-        "context.initializer.classes=ch.frankel.blog.TestConfigInitializer" &lt;1&gt;
+        "context.initializer.classes=ch.frankel.blog.TestConfigInitializer" <1>
     ]
 )
-class BootNativeApplicationTests {</pre>
+class BootNativeApplicationTests {
+```
+
 
 1. Reference the initialization class
 
@@ -374,36 +421,45 @@ Spring Boot takes care of GraalVM's native configuration for its code and **most
 
 As an alternative, Spring offers annotation-based configuration. Let's do it:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="kotlin">@SpringBootApplication
-@NativeHint(options = ["--enable-https"])                              &lt;1&gt;
+```kotlin
+@SpringBootApplication
+@NativeHint(options = ["--enable-https"])                              <1>
 @TypeHint(
     types = [
         Model::class, Data::class, Result::class, Thumbnail::class,
         Collection::class, Resource::class, Url::class, URI::class
     ],
-    access = AccessBits.FULL_REFLECTION                                &lt;2&gt;
+    access = AccessBits.FULL_REFLECTION                                <2>
 )
-class BootNativeApplication</pre>
+class BootNativeApplication
+```
+
 
 1. Keep TLS-related code
 2. Keep classed and allow for reflection at runtime
 
 With the second approach, the result is the following:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">REPOSITORY      TAG       IMAGE ID         CREATED         SIZE
-native-boot     1.0       c9284b7f99a6     41 years ago    104MB</pre>
+```
+REPOSITORY      TAG       IMAGE ID         CREATED         SIZE
+native-boot     1.0       c9284b7f99a6     41 years ago    104MB
+```
+
 
 If we dive into the image, we can see the following layers:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">┃ ● Layers ┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+```
+┃ ● Layers ┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 Cmp   Size  Command
-     17 MB  FROM c09932ee5c22aa1                &lt;1&gt;
-     268 B                                      &lt;2&gt;
-    3.4 MB                                      &lt;3&gt;
-     81 MB                                      &lt;4&gt;
-    2.5 MB                                      &lt;5&gt;
+     17 MB  FROM c09932ee5c22aa1                <1>
+     268 B                                      <2>
+    3.4 MB                                      <3>
+     81 MB                                      <4>
+    2.5 MB                                      <5>
      12 kB
-       0 B                                      &lt;6&gt;</pre>
+       0 B                                      <6>
+```
+
 
 1. Parent image
 2. System permissions
@@ -414,13 +470,19 @@ Cmp   Size  Command
 
 The generated image accepts parameters, just as if you'd run the Java application on the command line.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="shell">docker run -it -p8080:8080 native-boot:1.0 --app.marvel.apiKey=xyz --app.marvel.privateKey=abc --logging.level.root=DEBUG</pre>
+```bash
+docker run -it -p8080:8080 native-boot:1.0 --app.marvel.apiKey=xyz --app.marvel.privateKey=abc --logging.level.root=DEBUG
+```
+
 
 We can now send requests to play with the application:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="shell">curl localhost:8080
+```bash
+curl localhost:8080
 curl 'localhost:8080?limit=1'
-curl 'localhost:8080?limit=1&amp;offset=50'</pre>
+curl 'localhost:8080?limit=1&offset=50'
+```
+
 
 Conclusion {#h2-8-conclusion}
 -----------------------------

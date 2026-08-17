@@ -49,7 +49,8 @@ Jakarta Concurrency makes this much simpler. If you have a HTTP request, you can
 
 In code form, this would look like this, providing a vastly more simple code than using JMS:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@Path("concurrency")
+```java
+@Path("concurrency")
 @RequestScoped
 public class GenericResource {
 
@@ -63,12 +64,14 @@ public class GenericResource {
    @Path("simpleJob")
    @Produces(MediaType.TEXT_PLAIN)
    public String getText() {
-      managedExecutor.submit(() -&gt; {
+      managedExecutor.submit(() -> {
          System.out.println("Job running");
       });
       return "Job Submitted";
    }
-}</pre>
+}
+```
+
 
 ### Use Case 2: Running Tasks in Parallel {#h3-2-use-case-2-running-tasks-in-parallel}
 
@@ -76,16 +79,17 @@ You may have a REST request coming in, and want to run two tasks in parallel, me
 
 Previously, this would have been incredibly difficult to do, needing JMS, with a need to create correlation IDs. With Jakarta Concurrency, the resulting code would look something like this:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@GET
+```java
+@GET
 @Path("parallelJob")
 @Produces(MediaType.TEXT_PLAIN)
 public String getParallelJob() throws ExecutionException, InterruptedException {
-   Future future1 = managedExecutor.submit(() -&gt; {
+   Future future1 = managedExecutor.submit(() -> {
          System.out.println("Job 1 running ...");
          // This takes some while
          System.out.println("Job 1 finished ...");
       });
-   Future future2 = managedExecutor.submit(() -&gt; {
+   Future future2 = managedExecutor.submit(() -> {
          System.out.println("Job 2 running ...");
          // This takes some while
          System.out.println("Job 2 finished ...");
@@ -93,7 +97,9 @@ public String getParallelJob() throws ExecutionException, InterruptedException {
    future1.get(); // Wait for job to finish and get result (optionally)
    future2.get();
    return "Jobs completed";
-}</pre>
+}
+```
+
 
 What Are The Main Components of Jakarta Concurrency? {#h2-3-what-are-the-main-components-of-jakarta-concurrency}
 ----------------------------------------------------------------------------------------------------------------

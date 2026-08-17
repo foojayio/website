@@ -60,11 +60,12 @@ Tail Call Example {#h2-2-tail-call-example}
 
 Let's create, as an example, an entry function that is triggered for every system call and tail calls another function using the stored ebpf programs for each system call number, based on the example in the [Learning eBPF book](https://cilium.isovalent.com/hubfs/Learning-eBPF%20-%20Full%20book.pdf):
 
-<pre class="EnlighterJSRAW" data-enlighter-language="cpp" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">BPF_PROG_ARRAY(syscall, 300);
+```cpp
+BPF_PROG_ARRAY(syscall, 300);
 
 int hello(struct bpf_raw_tracepoint_args *ctx) {
     // args[1] is here the syscall number
-    int nr = ctx-&gt;args[1];
+    int nr = ctx->args[1];
     // this is the BCC syntax for bpf_tail_call
     syscall.call(ctx, nr);
     // we only reach the print if the
@@ -80,7 +81,7 @@ int hello_exec(void *ctx) {
 }
 
 int hello_timer(struct bpf_raw_tracepoint_args *ctx) {
-    int nr = ctx-&gt;args[1];
+    int nr = ctx->args[1];
     switch (nr) {
         case 222:
             bpf_trace_printk("Creating a timer");
@@ -97,7 +98,9 @@ int hello_timer(struct bpf_raw_tracepoint_args *ctx) {
 
 int ignore_nr(void *ctx) {
     return 0;
-}</pre>
+}
+```
+
 
 We can now store a function for every system call in the `syscall` program array, register the `hello` for every system call and tail call the specified function for every system call number.
 
@@ -117,11 +120,12 @@ We start by cloning my new [sample-bcc-project](https://github.com/parttimenerd/
 
 We only have to change the Main class to develop our application, adding our system-call-logging-related code. Our application should be able only to log execve, and itimer-related system calls when passed the `--skip-others` flag on the command line. So, we start with implementing the argument parsing:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">record Arguments(boolean skipOthers) {
+```java
+record Arguments(boolean skipOthers) {
     static Arguments parseArgs(String[] args) {
         boolean skipOthers = false;
-        if (args.length &gt; 0) {
-            if (args.length == 1 &amp;&amp; args[0].equals("--skip-others")) {
+        if (args.length > 0) {
+            if (args.length == 1 && args[0].equals("--skip-others")) {
                 skipOthers = true;
             } else {
                 // print usage for all other arguments, this
@@ -136,22 +140,28 @@ We only have to change the Main class to develop our application, adding our sys
         }
         return new Arguments(skipOthers);
     }
-}</pre>
+}
+```
+
 
 We then define the eBPF program, as well as some system calls that come up a lot, as static variables:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">static final String EBPF_PROGRAM = """
+```java
+static final String EBPF_PROGRAM = """
             ...
             """;
 
 static final int[] IGNORED_SYSCALLS = new int[]{
         21, 22, 25, 29, 56, 57, 63, 64, 66,
         72, 73, 79, 98, 101, 115, 131, 134,
-        135, 139, 172, 233, 280, 291};</pre>
+        135, 139, 172, 233, 280, 291};
+```
+
 
 Now to the important part: The `main` and `run` methods that contain the central part of our application:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public static void main(String[] args) {
+```java
+public static void main(String[] args) {
     run(Arguments.parseArgs(args));
 }
 
@@ -189,13 +199,16 @@ static void run(Arguments args) {
         }
 
         // print the trace using a custom formatter
-        b.trace_print(f -&gt; formatTrace(f, args.skipOthers));
+        b.trace_print(f -> formatTrace(f, args.skipOthers));
     }
-}</pre>
+}
+```
+
 
 This code uses the [Syscalls](https://github.com/parttimenerd/hello-ebpf/blob/774e813457642430313dd498c6f1e9ca596b4cdf/bcc/src/main/java/me/bechberger/ebpf/bcc/Syscalls.java) class from the bcc library to map system calls to their number. The only part left now is the custom formatter, which takes care of the --skip-others option:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">static @Nullable String formatTrace(BPF.TraceFields f, 
+```java
+static @Nullable String formatTrace(BPF.TraceFields f, 
   boolean skipOthers) {       
     String another = "Another syscall: ";                                          
     String line = f.line().replace("bpf_trace_printk: ", "");                      
@@ -215,40 +228,48 @@ This code uses the [Syscalls](https://github.com/parttimenerd/hello-ebpf/blob/77
                 another + syscall.name());                                         
     }                                                                              
     return line;                                                                   
-}                                                                                  </pre>
+}
+```
+
 
 This gives us an application that we can build via `mvn package`, and run:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&gt; sudo -s PATH=$PATH                                                   
-&gt; ./run.sh --skip-others                                               
+```bash
+> sudo -s PATH=$PATH                                                   
+> ./run.sh --skip-others                                               
      ps-26459   [031] ...2. 91897.197604: Executing a program          
     git-26551   [052] ...2. 91935.368240: Executing a program          
     git-26553   [031] ...2. 91935.373159: Executing a program          
     git-26555   [016] ...2. 91935.378132: Executing a program          
-  &lt;...&gt;-26558   [053] ...2. 91935.383839: Executing a program          
+  <...>-26558   [053] ...2. 91935.383839: Executing a program          
    tail-26561   [004] ...2. 91935.388621: Executing a program          
     git-26562   [099] ...2. 91935.388970: Executing a program
    ...          
-&gt; ./run.sh                                                      
-  &lt;...&gt;-3277    [122] ...2. 91946.796677: Another syscall: recvmsg     
+> ./run.sh                                                      
+  <...>-3277    [122] ...2. 91946.796677: Another syscall: recvmsg     
    Xorg-3045    [121] ...2. 91946.796678: Another syscall: setitimer   
-  &lt;...&gt;-26461   [074] ...2. 91946.796680: Another syscall: readlink    
+  <...>-26461   [074] ...2. 91946.796680: Another syscall: readlink    
    Xorg-3045    [121] ...2. 91946.796680: Another syscall: epoll_wait  
-  &lt;...&gt;-3457    [068] ...2. 91946.796681: Another syscall: recvmsg     
-  &lt;...&gt;-3277    [122] ...2. 91946.796682: Another syscall: recvmsg     
-  &lt;...&gt;-26461   [074] ...2. 91946.796684: Another syscall: readlink    
-  &lt;...&gt;-3277    [122] ...2. 91946.796685: Another syscall: recvmsg     
-  &lt;...&gt;-3457    [068] ...2. 91946.796689: Another syscall: recvmsg     
-  &lt;...&gt;-3277    [122] ...2. 91946.796690: Another syscall: recvmsg
-  ...   </pre>
+  <...>-3457    [068] ...2. 91946.796681: Another syscall: recvmsg     
+  <...>-3277    [122] ...2. 91946.796682: Another syscall: recvmsg     
+  <...>-26461   [074] ...2. 91946.796684: Another syscall: readlink    
+  <...>-3277    [122] ...2. 91946.796685: Another syscall: recvmsg     
+  <...>-3457    [068] ...2. 91946.796689: Another syscall: recvmsg     
+  <...>-3277    [122] ...2. 91946.796690: Another syscall: recvmsg
+  ...
+```
+
 
 You can run this either on a Linux machine with Java 21 and [libbcc](https://github.com/iovisor/bcc/blob/master/INSTALL.md) installed or on Mac using the [Lima VM](https://lima-vm.io/):
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&gt; limactl start hello-ebpf.yaml
-&gt; limactl shell hello-ebpf
-&gt; sudo -s
-&gt; ./run.sh
-# ...</pre>
+```bash
+> limactl start hello-ebpf.yaml
+> limactl shell hello-ebpf
+> sudo -s
+> ./run.sh
+# ...
+```
+
 
 More information and the whole implementation in the [System Call Logger](https://github.com/parttimenerd/sample-bcc-project/tree/tail-example) branch of the [sample-bcc-project](https://github.com/parttimenerd/sample-bcc-project).
 

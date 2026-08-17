@@ -63,7 +63,8 @@ Fields can be very complex and not all values are known at the same time. The re
 
 It means implementing *hashCode* and *equals* . The newly added *record* *class* provides us such functionality:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">record SuperVehicle(Part engine, Part cabin) implements Vehicle {
+```java
+record SuperVehicle(Part engine, Part cabin) implements Vehicle {
     static final class Builder {
         private Part engine;
         private Part cabin;
@@ -84,10 +85,15 @@ It means implementing *hashCode* and *equals* . The newly added *record* *class*
 
     @Override
     public void parts() {…}
-}</pre>
+}
+```
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">System.out.println output:
-SuperVehicle[engine=RecordPart[name=super_engine], cabin=RecordPart[name=super_cabin]]</pre>
+
+```java
+System.out.println output:
+SuperVehicle[engine=RecordPart[name=super_engine], cabin=RecordPart[name=super_cabin]]
+```
+
 
 **Example 1** .: Implementation of the builder pattern using a record class type You may spot the private constructor that denies the instantiation from "outside" and that the class contains a static final ***Builder*** class.
 

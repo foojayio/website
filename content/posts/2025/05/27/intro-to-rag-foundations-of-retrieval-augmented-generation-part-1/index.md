@@ -52,11 +52,11 @@ However, they also have limitations. LLMs generate responses on probabilities, l
 
 These models can process various types of input/output (modalities), but their performance is constrained by the size of their context windows - the amount of information they can consider at once - and the quality of the prompts provided.
 
-*** ** * ** ***
+
 
 **Note:** Each Large Language Model (LLM) is trained slightly differently to prioritize certain probabilities over others to optimize for certain goals. This is why every LLM may produce different outputs for the same input and why you should evaluate different models and research which ones might be pre-optimized for your needs.
 
-*** ** * ** ***
+
 
 There are a variety of reasons that Large Language Models tend to hallucinate (or produce inaccurate, non-sensical answers). A few of those include the following:
 
@@ -99,11 +99,11 @@ There is a common saying that you can't [compare apples and oranges](https://en.
 
 Also, a recent article I read compared vectors to a "fingerprint" of the data. Just as a fingerprint is unique to each individual, the vector representation of a piece of data is unique to that specific data point. This uniqueness allows for precise identification and retrieval of information, even in large datasets.
 
-*** ** * ** ***
+
 
 **Note:** Since each LLM is trained slightly differently, the vector embeddings may be different for each model. This means that the same piece of data may have slightly different vector representations with different models (though both will be close together in the vector space). This is important to consider when using multiple LLMs or comparing results across models.
 
-*** ** * ** ***
+
 
 Here enter the need and purpose of [vector databases](https://frankzliu.com/blog/a-gentle-introduction-to-vector-databases), which are optimized to store and search these vector representations. But how do vector databases efficiently search vast amounts of these numbers (think every word in every language or millions of text documents)?
 
@@ -127,11 +127,11 @@ To measure similarity, cosine similarity and euclidean distance are two of the m
 
 In our library example, we could search for specific features like "dragons and magic" or "based in St. Louis, USA". These criteria are much narrower and much more likely to find a smaller result set that is more relevant to what the user is searching for.
 
-*** ** * ** ***
+
 
 **Note:** Vector embeddings differ for each model, and each vector store also optimizes vector similarity search differently. So even the same data and embeddings stored in different vector stores may produce different results from a similarity search.
 
-*** ** * ** ***
+
 
 Wrapping up! {#_wrapping_up}
 ----------------------------

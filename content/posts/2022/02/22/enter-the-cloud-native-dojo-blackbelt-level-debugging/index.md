@@ -24,13 +24,19 @@ Debugging is often viewed as an art form or a craft. This is true for most engin
 
 In his book, "[Why Programs Fail --- A Guide to Systemic Debugging](https://www.amazon.com/Why-Programs-Fail-Systematic-Debugging/dp/0123745152)", Andreas Zeller told a story from his youth working at a computer store. A customer walked into the store with a new Commodore 64 computer. For context: The computers back then booted directly to a basic interpreter; basic would accept line numbers as the first argument. He tried inputting this valid basic line:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">10 print “Hello World”<code class="language-basic"></code></pre>
+```java
+10 print “Hello World”<code class="language-basic"></code>
+```
+
 
 And he got a syntax error. He was surprised since the program seemed correct and it isn't exactly complex. You can probably understand it without knowing any Basic...
 
 In debugging and in programming in general, we need to break down a problem into smaller components. So he typed in:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">10</pre>
+```
+10
+```
+
 
 An empty statement.
 

@@ -48,7 +48,8 @@ Spring AI: the LLM layer {#h2-1-spring-ai-the-llm-layer}
 
 At the core of ClawRunr is a `DefaultAgent` that wraps Spring AI's `ChatClient`. The entire class is 20 lines:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@Component
+```java
+@Component
 public class DefaultAgent implements Agent {
 
     private final ChatClient chatClient;
@@ -61,26 +62,32 @@ public class DefaultAgent implements Agent {
     public String respondTo(String conversationId, String question) {
         return chatClient
                 .prompt(question)
-                .advisors(a -&gt; a.param(ChatMemory.CONVERSATION_ID, conversationId))
+                .advisors(a -> a.param(ChatMemory.CONVERSATION_ID, conversationId))
                 .call()
                 .content();
     }
-}</pre>
+}
+```
+
 
 That's your agent. One class, one dependency, provider-agnostic. Want to switch from OpenAI to Anthropic to a fully local Ollama instance? Change one config property. The code doesn't change.
 
 The prompt itself is assembled from two workspace files. `AGENT.md` holds the system instructions (editable by the user during onboarding), `INFO.md` provides environment context:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">String agentPrompt = workspace.createRelative("AGENT.md")
+```java
+String agentPrompt = workspace.createRelative("AGENT.md")
         .getContentAsString(StandardCharsets.UTF_8)
     + System.lineSeparator()
     + workspace.createRelative("INFO.md")
-        .getContentAsString(StandardCharsets.UTF_8);</pre>
+        .getContentAsString(StandardCharsets.UTF_8);
+```
+
 
 Tools are registered through Spring AI's builder. Shell access, file operations, web scraping, task management, MCP support, and runtime-discoverable skills. All wired in one place:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">chatClientBuilder
-    .defaultSystem(p -&gt; p.text(agentPrompt))
+```java
+chatClientBuilder
+    .defaultSystem(p -> p.text(agentPrompt))
     .defaultToolCallbacks(mcpToolProvider.getToolCallbacks())
     .defaultToolCallbacks(SkillsTool.builder()
         .addSkillsDirectory(skillsDir.toString()).build())
@@ -96,7 +103,9 @@ Tools are registered through Spring AI's builder. Shell access, file operations,
     .defaultAdvisors(
         ToolCallAdvisor.builder().build(),
         MessageChatMemoryAdvisor.builder(chatMemory).build()
-    );</pre>
+    );
+```
+
 
 The LLM decides which tool to call based on the conversation. Spring AI handles the tool calling protocol. You just declare what each tool does.
 
@@ -107,23 +116,27 @@ An agent should work on Telegram, in a browser, eventually on Discord or Slack. 
 
 The `Channel` interface is as simple as it gets:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public interface Channel {
+```java
+public interface Channel {
 
     default String getName() {
         return getClass().getSimpleName();
     }
 
     void sendMessage(String message);
-}</pre>
+}
+```
+
 
 When a message comes in from any channel, the runtime fires a `ChannelMessageReceivedEvent`. The `ChannelRegistry` tracks which channel sent the last message so background task results get routed back to the right place:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@Service
+```java
+@Service
 public class ChannelRegistry {
 
-    private final Map&lt;String, Channel&gt; channels = new HashMap&lt;&gt;();
-    private final AtomicReference&lt;ChannelMessageReceivedEvent&gt; lastChannelMessage
-        = new AtomicReference&lt;&gt;();
+    private final Map<String, Channel> channels = new HashMap<>();
+    private final AtomicReference<ChannelMessageReceivedEvent> lastChannelMessage
+        = new AtomicReference<>();
 
     public void registerChannel(Channel channel) {
         channels.put(channel.getName(), channel);
@@ -135,7 +148,9 @@ public class ChannelRegistry {
         }
         return channels.get(defaultChannelName);
     }
-}</pre>
+}
+```
+
 
 The agent itself doesn't know or care where a message came from. It processes the request, returns a response, and the runtime routes it back through the same channel. Want to add Discord? Implement the `Channel` interface. The agent code stays untouched.
 ![](https://www.jobrunr.io/blog/ClawRunr-Telegram-Schedule-Job.png)
@@ -154,7 +169,8 @@ That's not an AI problem. That's a background job problem. And [JobRunr](https:/
 
 Here's how task execution looks in ClawRunr. The `TaskHandler` is annotated with `@Job(retries = 3)`:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@Component
+```java
+@Component
 public class TaskHandler {
 
     private final Agent agent;
@@ -180,33 +196,39 @@ public class TaskHandler {
             throw e; // JobRunr retries automatically
         }
     }
-}</pre>
+}
+```
+
 
 When the exception propagates, JobRunr catches it and retries. Up to three times, with exponential backoff. If it still fails, it shows up as a failed job in the dashboard at `localhost:8081`.
 
 The `TaskManager` wires everything together. Creating a task, scheduling one for later, or setting up a recurring cron job:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public void create(String name, String description) {
+```java
+public void create(String name, String description) {
     Task task = taskRepository.save(Task.newTask(name, description));
-    jobScheduler.&lt;TaskHandler&gt;enqueue(x -&gt; x.executeTask(task.getId()));
+    jobScheduler.<TaskHandler>enqueue(x -> x.executeTask(task.getId()));
 }
 
 public void schedule(LocalDateTime executionTime, String name, String description) {
     Task task = taskRepository.save(Task.newTask(name, executionTime, description));
-    jobScheduler.&lt;TaskHandler&gt;schedule(executionTime,
-        x -&gt; x.executeTask(task.getId()));
+    jobScheduler.<TaskHandler>schedule(executionTime,
+        x -> x.executeTask(task.getId()));
 }
 
 public void scheduleRecurrently(String cron, String name, String description) {
     RecurringTask rt = taskRepository.save(
         RecurringTask.newRecurringTask(name, description));
-    jobScheduler.&lt;RecurringTaskHandler&gt;scheduleRecurrently(
-        rt.getName(), cron, x -&gt; x.executeTask(rt.getId()));
-}</pre>
+    jobScheduler.<RecurringTaskHandler>scheduleRecurrently(
+        rt.getName(), cron, x -> x.executeTask(rt.getId()));
+}
+```
+
 
 The LLM calls these methods through the `TaskTool`, which exposes them with `@Tool` annotations so the agent knows when and how to use them:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@Tool(description = """
+```java
+@Tool(description = """
     Schedules a task using JobRunr that repeats at regular intervals
     based on a cron expression. Use this for recurring activities
     like daily reports, weekly checks, etc.
@@ -218,7 +240,9 @@ public String scheduleRecurringTask(String cronExpression,
     return String.format(
         "Task '%s' has been scheduled with cron expression '%s'.",
         name, cronExpression);
-}</pre>
+}
+```
+
 
 Zero custom scheduling code. No cron parser. No job persistence layer. No retry logic. JobRunr handles all of it out of the box, plus gives you a full dashboard to monitor every task your agent has ever run.
 
@@ -227,11 +251,14 @@ Spring Modulith: keeping it extensible {#h2-4-spring-modulith-keeping-it-extensi
 
 ClawRunr uses Spring Modulith to enforce clean boundaries between modules:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">JavaClaw/
+```
+JavaClaw/
 ├── base/           # Core: agent, tasks, tools, channels, config
 ├── app/            # Spring Boot entry, onboarding UI, chat channel
 └── plugins/
-    └── telegram/   # Telegram long-poll channel plugin</pre>
+    └── telegram/   # Telegram long-poll channel plugin
+```
+
 
 This matters for an open-source project. When someone in the community wants to add a Discord channel, they create a new plugin module. They implement the `Channel` interface, register it with the `ChannelRegistry`, and they're done. No changes to the agent core.
 
@@ -254,10 +281,13 @@ All of this powered by the ecosystem components we walked through. JobRunr handl
 Try it {#h2-6-try-it}
 ---------------------
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">git clone https://github.com/jobrunr/javaclaw.git
+```
+git clone https://github.com/jobrunr/javaclaw.git
 cd javaclaw
 ./gradlew :app:bootRun
-# Open http://localhost:8080/onboarding</pre>
+# Open http://localhost:8080/onboarding
+```
+
 
 You'll walk through a 7-step onboarding (pick your LLM provider, configure Telegram, set up MCP servers) and you're chatting with your agent in about two minutes.
 

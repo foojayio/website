@@ -65,26 +65,32 @@ Basic tests can consist of these three components
 
 ### 1) The protocol {#_1_the_protocol}
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">final HttpProtocolBuilder httpProtocol = http
+```java
+final HttpProtocolBuilder httpProtocol = http
     .baseUrl("http://localhost:8080")
     .acceptHeader("application/json")
-    .userAgentHeader("Gatling performance Test");</pre>
+    .userAgentHeader("Gatling performance Test");
+```
+
 
 This is the base configuration we'll be using for our API.  
 *note: Gatling also supports JMS \& MQTT*
 
 ### 2) The scenario {#_2_the_scenario}
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">ScenarioBuilder scenario = CoreDsl.scenario("Load Test greeting")
+```java
+ScenarioBuilder scenario = CoreDsl.scenario("Load Test greeting")
     .exec(http("get greeting")
-            .get(session -&gt; "/greet/" + UUID.randomUUID())
+            .get(session -> "/greet/" + UUID.randomUUID())
             .check(status().is(200))
     )
     .pause(5)
     .exec(http("Randomly slow")
             .get("/slow")
             .check(status().is(200))
-    );</pre>
+    );
+```
+
 
 The scenario that we'll be executing.  
 
@@ -93,10 +99,13 @@ In this case, we're invoking the greeting call, verifying that it's returning OK
 
 ### 3) The simulation {#_3_the_simulation}
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public GreetingSimulation() {
+```java
+public GreetingSimulation() {
     this.setUp(scenario.injectOpen(constantUsersPerSec(100).during(Duration.ofSeconds(60))))
             .protocols(httpProtocol);
-}</pre>
+}
+```
+
 
 The simulation ties it all together. We set up our performance test for our given scenario, and define the amount of users and the duration of the test using the given protocol.
 
@@ -176,20 +185,23 @@ These follow a cascading order: `System properties => gatling.conf => gatling-de
 
 We need to add:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="xml">&lt;dependencies&gt;
-  &lt;dependency&gt;
-    &lt;groupId&gt;io.gatling.highcharts&lt;/groupId&gt;
-    &lt;artifactId&gt;gatling-charts-highcharts&lt;/artifactId&gt;
-    &lt;version&gt;3.9.5&lt;/version&gt;
-    &lt;scope&gt;test&lt;/scope&gt;
-  &lt;/dependency&gt;
-&lt;/dependencies&gt;
+```xml
+<dependencies>
+  <dependency>
+    <groupId>io.gatling.highcharts</groupId>
+    <artifactId>gatling-charts-highcharts</artifactId>
+    <version>3.9.5</version>
+    <scope>test</scope>
+  </dependency>
+</dependencies>
 
-&lt;plugin&gt;
-  &lt;groupId&gt;io.gatling&lt;/groupId&gt;
-  &lt;artifactId&gt;gatling-maven-plugin&lt;/artifactId&gt;
-  &lt;version&gt;4.4.0&lt;/version&gt;
-&lt;/plugin&gt;</pre>
+<plugin>
+  <groupId>io.gatling</groupId>
+  <artifactId>gatling-maven-plugin</artifactId>
+  <version>4.4.0</version>
+</plugin>
+```
+
 
 **note:** If your scenario was written/recorded as Scala you will need to use the `scala-maven-plugin`!
 
@@ -203,9 +215,12 @@ There are a couple of things we need to keep in mind:
 
 We'll need to add the following to our build file:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="groovy">plugins {
+```groovy
+plugins {
   id 'io.gatling.gradle' version "MANUALLY_REPLACE_WITH_LATEST_VERSION"
-}</pre>
+}
+```
+
 
 #### Execution {#_execution}
 
@@ -248,21 +263,25 @@ We can achieve this by making use of `ChainBuilder`. Each portion would be a cha
 
 So we can go from:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">ScenarioBuilder sampleScenario = scenario("Load Test greeting")
+```java
+ScenarioBuilder sampleScenario = scenario("Load Test greeting")
     .exec(http("get greeting")
-            .get(session -&gt; "/greet/" + UUID.randomUUID())
+            .get(session -> "/greet/" + UUID.randomUUID())
             .check(status().is(200))
     )
     .pause(5)
     .exec(http("Randomly slow")
             .get("/slow")
             .check(status().is(200))
-    );</pre>
+    );
+```
+
 
 to
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">ChainBuilder greeting = exec(http("get greeting")
-        .get(session -&gt; "/greet/" + UUID.randomUUID())
+```java
+ChainBuilder greeting = exec(http("get greeting")
+        .get(session -> "/greet/" + UUID.randomUUID())
         .check(status().is(200))
 )
         .pause(5);
@@ -272,7 +291,9 @@ ChainBuilder slowcall = exec(http("Randomly slow")
         .check(status().is(200))
 );
 
-ScenarioBuilder sampleScenario2 = scenario("Load test greeting").exec(greeting, slowcall);</pre>
+ScenarioBuilder sampleScenario2 = scenario("Load test greeting").exec(greeting, slowcall);
+```
+
 
 ### Configuring the protocol {#_configuring_the_protocol}
 
@@ -288,12 +309,15 @@ The beforehand shown protocol configuration is quite basic, but a lot more can b
 
 For example:
 
-<pre class="EnlighterJSRAW">private HttpProtocolBuilder httpProtocol = http
+```
+private HttpProtocolBuilder httpProtocol = http
     .baseUrl("https://computer-database.gatling.io")
     .acceptEncodingHeader("gzip, deflate, br")
     .acceptLanguageHeader("en-GB,en;q=0.9,nl;q=0.8")
     .disableCaching()
-    .upgradeInsecureRequestsHeader("1");</pre>
+    .upgradeInsecureRequestsHeader("1");
+```
+
 
 For a full list, you can check:
 
@@ -319,11 +343,14 @@ this API allows us to define things such as:
 
 For example, we could have this setup:
 
-<pre class="EnlighterJSRAW">sampleScenario.injectOpen(
+```
+sampleScenario.injectOpen(
     nothingFor(20), // nothing for 20 seconds
     atOnceUsers(100), // 100 users at once, once the click hits 9:00
     rampUsers(50).during(60) // evenly add 50 users over 60 seconds as they sip their coffee
-)</pre>
+)
+```
+
 
 This allows us to mimic behaviours like call centers/morning rush/...​
 
@@ -343,13 +370,19 @@ We have three options:
 
 1) by extracting it from responses, and saving it such as:
 
-<pre class="EnlighterJSRAW">.check(status().is(200).saveAs("Status"))</pre>
+```
+.check(status().is(200).saveAs("Status"))
+```
+
 
 2) using the `Session` API
 
-<pre class="EnlighterJSRAW">ChainBuilder sessionStep = exec(session -&amp;gt; {
+```
+ChainBuilder sessionStep = exec(session -&gt; {
     return session.set("someField", "value");
-});</pre>
+});
+```
+
 
 **note** : keep in mind `Session` instances are immutable!
 
@@ -371,7 +404,10 @@ A full summary can be found on the [feeder](https://gatling.io/docs/gatling/refe
 
 But a basic one can be as easy as:
 
-<pre class="EnlighterJSRAW">Iterator&amp;lt;Map&amp;gt; feeder = Stream.generate((Supplier&amp;lt;Map&amp;gt;) () -&amp;gt; Collections.singletonMap("dieRoll", ThreadLocalRandom.current().nextInt(1, 7))).iterator();</pre>
+```
+Iterator&lt;Map&gt; feeder = Stream.generate((Supplier&lt;Map&gt;) () -&gt; Collections.singletonMap("dieRoll", ThreadLocalRandom.current().nextInt(1, 7))).iterator();
+```
+
 
 We can then `feed(feeder)` which we call at the same place as `exec`.  
 
@@ -430,8 +466,11 @@ for which we can define certain conditions for a given metric.
 
 For example, if we want to check that less than 1% of each request fails we can do:
 
-<pre class="EnlighterJSRAW">this.setUp(sampleScenario.injectOpen(constantUsersPerSec(100).during(Duration.ofSeconds(60))))
-    .assertions(forAll().failedRequests().percent().lte(1D))</pre>
+```
+this.setUp(sampleScenario.injectOpen(constantUsersPerSec(100).during(Duration.ofSeconds(60))))
+    .assertions(forAll().failedRequests().percent().lte(1D))
+```
+
 
 A full list of possible assertions can be found on the [Assertions](https://gatling.io/docs/gatling/reference/current/core/assertions/) page.
 
@@ -455,10 +494,11 @@ Let's say we want to verify we're actually starting our greeting with `Hello`, b
 
 Then we could do something akin to:
 
-<pre class="EnlighterJSRAW">.check(
+```
+.check(
     bodyString()
         .transform(String::toUpperCase)
-        .validate("Contains HELLO validation", (value, session) -&amp;gt; {
+        .validate("Contains HELLO validation", (value, session) -&gt; {
             if (value.startsWith("HELLO")) {
                 return value;
             } else {
@@ -467,7 +507,9 @@ Then we could do something akin to:
         })
         .name("Greeting message check")
         .saveAs("loudMessage")
-)</pre>
+)
+```
+
 
 Here we're:
 
@@ -479,7 +521,10 @@ Here we're:
 
 Then in subsequent checks, we can use this value:
 
-<pre class="EnlighterJSRAW">.checkIf(session -&amp;gt; session.getString("loudMessage") != null).then(status().not(404))</pre>
+```
+.checkIf(session -&gt; session.getString("loudMessage") != null).then(status().not(404))
+```
+
 
 To learn more about Checks you can visit the [documentation](https://gatling.io/docs/gatling/reference/current/core/check/).
 
@@ -505,7 +550,8 @@ By default, only Gatling provides live feedback in the console but there in case
 1. [Gatling enterprise](https://gatling.io/enterprise/) which offers realtime monitoring
 2. Graphite integration over the Graphite `plaintext` protocol, by adding `graphite` to the data writers, and specifying the host:
 
-<pre class="EnlighterJSRAW">gatling {
+```
+gatling {
   data {
     writers = [console, file, graphite]
 
@@ -514,7 +560,9 @@ By default, only Gatling provides live feedback in the console but there in case
       port = 8086
     }
   }
-}</pre>
+}
+```
+
 
 Notes {#_notes}
 ---------------

@@ -63,34 +63,41 @@ When running in a signal handler, a significant constraint is that we have to al
 
 Therefore, we have to allocate the iterator on the stack inside an API method, but this iterator is only valid in the method's scope. This is the reason for the `ASGST_RunWithIterator` which creates an iterator and passes it to a handler:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="cpp" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">// Create an iterator and pass it to fun alongside 
+```cpp
+// Create an iterator and pass it to fun alongside 
 // the passed argument.
 // @param options ASGST_INCLUDE_NON_JAVA_FRAMES, ...
 // @return error or kind
 int ASGST_RunWithIterator(void* ucontext, 
     int32_t options, 
     ASGST_IteratorHandler fun, 
-    void* argument);</pre>
+    void* argument);
+```
+
 
 The iterator handler is a pointer to a method in which the `ASGST_RunWithIterator` calls with an iterator and the `argument`. Yes, this could be nicer in C++, which lambdas and more, but we are constrained to a C API. It's easy to develop a helper library in C++ that offers zero-cost abstractions, but this is out-of-scope for the initial proposal.
 
 Now to the iterator itself. The main method is `ASGST_NextFrame`:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="cpp" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">// Obtains the next frame from the iterator
-// @returns 1 if successful, else error code (&lt; 0) / end (0)
+```cpp
+// Obtains the next frame from the iterator
+// @returns 1 if successful, else error code (< 0) / end (0)
 // @see ASGST_State
 //
 // Typically used in a loop like:
 //
 // ASGST_Frame frame;
-// while (ASGST_NextFrame(iterator, &amp;frame) == 1) {
+// while (ASGST_NextFrame(iterator, &frame) == 1) {
 //   // do something with the frame
 // }
-int ASGST_NextFrame(ASGST_Iterator* iterator, ASGST_Frame* frame);</pre>
+int ASGST_NextFrame(ASGST_Iterator* iterator, ASGST_Frame* frame);
+```
+
 
 The frame data structure, as explained in the previous section, contains all required information and is far simpler than the previous proposal (without any union):
 
-<pre class="EnlighterJSRAW" data-enlighter-language="cpp" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">enum ASGST_FrameTypeId {
+```cpp
+enum ASGST_FrameTypeId {
   ASGST_FRAME_JAVA         = 1, // JIT compiled and interpreted
   ASGST_FRAME_JAVA_INLINED = 2, // inlined JIT compiled
   ASGST_FRAME_JAVA_NATIVE  = 3, // native wrapper to call 
@@ -101,7 +108,7 @@ The frame data structure, as explained in the previous section, contains all req
 typedef struct {
   uint8_t type;         // frame type
   int comp_level;       // compilation level, 0 is interpreted, 
-                        // -1 is undefined, &gt; 1 is JIT compiled
+                        // -1 is undefined, > 1 is JIT compiled
   int bci;              // -1 if the bci is not available 
                         // (like in native frames)
   ASGST_Method method;  // method or nullptr if not available
@@ -111,13 +118,16 @@ typedef struct {
                         // inside this frame, might be null
   void *fp;             // current frame pointer 
                         // inside this frame, might be null
-} ASGST_Frame;</pre>
+} ASGST_Frame;
+```
+
 
 This uses `ASGST_Method` instead of `jmethodID`, see [jmethodIDs in Profiling: A Tale of Nightmares](https://mostlynerdless.de/blog/2023/07/17/jmethodids-in-profiling-a-tale-of-nightmares/) for more information.
 
 The error codes used both by ASGST_RunWithIterator and ASGST_NextFrame are defined as:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="cpp" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">enum ASGST_Error {
+```cpp
+enum ASGST_Error {
   ASGST_NO_FRAME            =  0, // come to and end
   ASGST_NO_THREAD           = -1, // thread is not here
   ASGST_THREAD_EXIT         = -2, // dying thread
@@ -128,30 +138,38 @@ The error codes used both by ASGST_RunWithIterator and ASGST_NextFrame are defin
   ASGST_ENQUEUE_OTHER_ERROR = -7, // other error, 
                                   // like currently at safepoint
   // everything lower than -16 is implementation specific
-};</pre>
+};
+```
+
 
 `ASGST_ENQUEUE_NO_QUEUE` and `ASGST_ENQUEUE_FULL_QUEUE` are not relevant yet, but their importance will be evident in my next blog post.
 
 This API wouldn't be complete without a few helper methods. We might want to start from an arbitrary frame; for example, we use a custom stack walker for the top C/C++ frames:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="cpp" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">// Similar to RunWithIterator, but starting from 
+```cpp
+// Similar to RunWithIterator, but starting from 
 // a frame (sp, fp, pc) instead of a ucontext.
 int ASGST_RunWithIteratorFromFrame(void* sp, void* fp, void* pc, 
   int options, ASGST_IteratorHandler fun, void* argument);
-</pre>
+```
+
 
 The ability to rewind an iterator is helpful too:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="cpp" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">// Rewind an interator to the top most frame
-void ASGST_RewindIterator(ASGST_Iterator* iterator);</pre>
+```cpp
+// Rewind an interator to the top most frame
+void ASGST_RewindIterator(ASGST_Iterator* iterator);
+```
+
 
 And just in case you want to get the state of the current iterator or thread, there are two methods for you:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="cpp" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">// State of the iterator, corresponding 
+```cpp
+// State of the iterator, corresponding 
 // to the next frame return code
 // @returns error code or 1 if no error
 // if iterator is null or at end, return ASGST_NO_FRAME,
-// returns a value &lt; -16 if the implementation encountered 
+// returns a value < -16 if the implementation encountered 
 // a specific error
 int ASGST_State(ASGST_Iterator* iterator);
 
@@ -159,7 +177,9 @@ int ASGST_State(ASGST_Iterator* iterator);
 // of the JVMTI thread state.
 // no JVMTI_THREAD_STATE_INTERRUPTED, 
 // limited JVMTI_THREAD_STATE_SUSPENDED.
-int ASGST_ThreadState();</pre>
+int ASGST_ThreadState();
+```
+
 
 But how can we use this API? I developed a small profiler in my writing, a profiler from scratch series, which we can now use to demonstrate using the methods defined before. Based on my Writing a Profiler in 240 Lines of Pure Java blog post, I added a flame graph implementation. In the meantime, you can also find the base implementation on [GitHub](https://github.com/parttimenerd/writing-a-profiler/tree/live_coding).
 
@@ -172,45 +192,52 @@ To use this new API, you have to include the [profile2.h](https://github.com/par
 
 One of the essential parts of this new API is that, as it doesn't use jmethodID, we don't have to pre-touch every method (learn more on this in jmethodIDs in Profiling: A Tale of Nightmares). Therefore we don't need to listen to ClassLoad JVMTI events or iterate over all existing classes at the beginning. So the reasonably complex code
 
-<pre class="EnlighterJSRAW" data-enlighter-language="cpp" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">static void JNICALL OnVMInit(jvmtiEnv *jvmti, 
+```cpp
+static void JNICALL OnVMInit(jvmtiEnv *jvmti, 
  JNIEnv *jni_env, jthread thread) {
   jint class_count = 0;
   env = jni_env;
-  sigemptyset(&amp;prof_signal_mask);
-  sigaddset(&amp;prof_signal_mask, SIGPROF);
+  sigemptyset(&prof_signal_mask);
+  sigaddset(&prof_signal_mask, SIGPROF);
   OnThreadStart(jvmti, jni_env, thread);
   // Get any previously loaded classes 
   // that won't have gone through the
   // OnClassPrepare callback to prime 
   // the jmethods for AsyncGetCallTrace.
-  JvmtiDeallocator&lt;jclass&gt; classes;
-  ensureSuccess(jvmti-&gt;GetLoadedClasses(&amp;class_count,
+  JvmtiDeallocator<jclass> classes;
+  ensureSuccess(jvmti->GetLoadedClasses(&class_count,
       classes.addr()), 
     "Loading classes failed")
 
   // Prime any class already loaded and 
   // try to get the jmethodIDs set up.
   jclass *classList = classes.get();
-  for (int i = 0; i &lt; class_count; ++i) {
+  for (int i = 0; i < class_count; ++i) {
     GetJMethodIDs(classList[i]);
   }
 
   startSamplerThread();
-}</pre>
+}
+```
+
 
 is reduced to just
 
-<pre class="EnlighterJSRAW" data-enlighter-language="cpp" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">static void JNICALL OnVMInit(jvmtiEnv *jvmti, JNIEnv *jni_env, 
+```cpp
+static void JNICALL OnVMInit(jvmtiEnv *jvmti, JNIEnv *jni_env, 
  jthread thread) {
-  sigemptyset(&amp;prof_signal_mask);
-  sigaddset(&amp;prof_signal_mask, SIGPROF);
+  sigemptyset(&prof_signal_mask);
+  sigaddset(&prof_signal_mask, SIGPROF);
   OnThreadStart(jvmti, jni_env, thread);
   startSamplerThread();
-}</pre>
+}
+```
+
 
 improving the start-up/attach performance of the profiler along the way. To get from the new `ASGST_Method` identifiers to the method name we need for the flame graph, we don't use the JVMTI methods but ASGST methods:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="cpp" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">static std::string methodToString(ASGST_Method method) {
+```cpp
+static std::string methodToString(ASGST_Method method) {
   // assuming we only care about the first 99 chars
   // of method names, signatures and class names
   // allocate all character array on the stack
@@ -226,7 +253,7 @@ improving the start-up/attach performance of the profiler along the way. To get 
   // we ignore the generic signature
   info.generic_signature = nullptr;
   // obtain the information
-  ASGST_GetMethodInfo(method, &amp;info);
+  ASGST_GetMethodInfo(method, &info);
   // setup the class info
   ASGST_ClassInfo class_info;
   class_info.class_name = (char*)class_name;
@@ -234,75 +261,92 @@ improving the start-up/attach performance of the profiler along the way. To get 
   // we ignore the generic class name
   class_info.generic_class_name = nullptr;
   // obtain the information
-  ASGST_GetClassInfo(info.klass, &amp;class_info);
+  ASGST_GetClassInfo(info.klass, &class_info);
   // combine all
   return std::string(class_info.class_name) + "." + 
     std::string(info.method_name) + std::string(info.signature);
-}</pre>
+}
+```
+
 
 This method is then used in the profiling loop after obtaining the traces for all threads. But of course, by then, the ways may be unloaded. This is rare but something to consider as it may cause segmentation faults. Due to this, and for performance reasons, we could register class unload handlers and obtain the method names for the methods of unloaded classes therein, as well as obtain the names of all still loaded used ASGST_Methods when the agent is unattached (or the JVM exits). This will be a topic for another blog post.
 
 Another significant difference between the new API to the old API is that it misses a pre-defined trace data structure. So the profiler requires its own:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="cpp" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">struct CallTrace {
-  std::array&lt;ASGST_Frame, MAX_DEPTH&gt; frames;
+```cpp
+struct CallTrace {
+  std::array<ASGST_Frame, MAX_DEPTH> frames;
   int num_frames;
 
-  std::vector&lt;std::string&gt; to_strings() const {
-    std::vector&lt;std::string&gt; strings;
-    for (int i = 0; i &lt; num_frames; i++) {
+  std::vector<std::string> to_strings() const {
+    std::vector<std::string> strings;
+    for (int i = 0; i < num_frames; i++) {
       strings.push_back(methodToString(frames[i].method));
     }
     return strings;
   }
-};</pre>
+};
+```
+
 
 We still use the pre-defined frame data structure in this example for brevity, but the profiler could customize this too. This allows the profiler only to store the relevant information.
 
 We fill the related `global_traces` entries in the signal handler. Previously we just called:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="cpp" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">static void signalHandler(int signo, siginfo_t* siginfo, 
+```cpp
+static void signalHandler(int signo, siginfo_t* siginfo, 
  void* ucontext) {
-  asgct(&amp;global_traces[available_trace++], 
+  asgct(&global_traces[available_trace++], 
     MAX_DEPTH, ucontext);
   stored_traces++;
-}</pre>
+}
+```
+
 
 But now we have to use the `ASGST_RunWithIterator` with a callback. So we define the callback first:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="cpp" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">void storeTrace(ASGST_Iterator* iterator, void* arg) {
+```cpp
+void storeTrace(ASGST_Iterator* iterator, void* arg) {
   CallTrace *trace = (CallTrace*)arg;
   ASGST_Frame frame;
   int count;
-  for (count = 0; ASGST_NextFrame(iterator, &amp;frame) == 1 &amp;&amp; 
-         count &lt; MAX_DEPTH; count++) {
-    trace-&gt;frames[count] = frame;  
+  for (count = 0; ASGST_NextFrame(iterator, &frame) == 1 && 
+         count < MAX_DEPTH; count++) {
+    trace->frames[count] = frame;  
   }
-  trace-&gt;num_frames = count;
-}</pre>
+  trace->num_frames = count;
+}
+```
+
 
 We use the argument pass-through from `ASGST_RunWithIterator` to the callback to pass the CallTrace instance where we want to store the traces. We then walk the trace using the ASGST_NextFrame method and iterate till the maximum count is reached, or the trace is finished.
 
 `ASGST_RunWithIterator` itself is called in the signal handler:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="cpp" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">static void signalHandler(int signo, siginfo_t* siginfo, 
+```cpp
+static void signalHandler(int signo, siginfo_t* siginfo, 
  void* ucontext) {
-  CallTrace &amp;trace = global_traces[available_trace++];
+  CallTrace &trace = global_traces[available_trace++];
   int ret = ASGST_RunWithIterator(ucontext, 0, 
-              &amp;storeTrace, &amp;trace);
-  if (ret &gt;= 2) { // non Java trace
+              &storeTrace, &trace);
+  if (ret >= 2) { // non Java trace
     ret = 0;
   }
-  if (ret &lt;= 0) { // error
+  if (ret <= 0) { // error
     trace.num_frames = ret;
   }
   stored_traces++;
-}</pre>
+}
+```
+
 
 You can find the complete code on GitHub; feel free to ask any yet unanswered questions. To use the profiler, just run it from the command line:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">java -agentpath:libSmallProfiler.so=output=flames.html \
-  -cp samples math.MathParser</pre>
+```bash
+java -agentpath:libSmallProfiler.so=output=flames.html \
+  -cp samples math.MathParser
+```
+
 
 This assumes that you use the modified OpenJDK. MathParser is a demo program that generates and evaluates simple mathematical expressions. I wrote this for a compiler lab while I was still a student. The resulting flame graph should look something like this:  
 ![](https://mostlynerdless.de/wp-content/uploads/2023/08/image-2000x953.png)

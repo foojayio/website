@@ -26,8 +26,10 @@ Virtual threads have become one of the most popular resources in Java and are tr
 
 You can find all the code presented in this tutorial in the [GitHub repository](https://github.com/soujava/mongodb-virtual-threads):
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">git clone <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="fe99978abe99978a968b9cd09d9193">[email&nbsp;protected]</a>:soujava/mongodb-virtual-threads.git
-</pre>
+```
+git clone <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="fe99978abe99978a968b9cd09d9193">[email protected]</a>:soujava/mongodb-virtual-threads.git
+```
+
 
 Prerequisites {#h2-0-prerequisites}
 -----------------------------------
@@ -43,8 +45,10 @@ For this tutorial, you'll need:
 
 You can use the following Docker command to start a standalone MongoDB instance:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">docker run --rm -d --name mongodb-instance -p 27017:27017 mongo
-</pre>
+```
+docker run --rm -d --name mongodb-instance -p 27017:27017 mongo
+```
+
 
 Java 21 has introduced a new era of concurrency with virtual threads---lightweight threads managed by the JVM that significantly enhance the performance of I/O-bound applications. Unlike traditional platform threads, which are directly linked to operating system threads, virtual threads are designed to be inexpensive and can number in the thousands. This enables you to manage many concurrent operations without the typical overhead of traditional threading.
 
@@ -56,18 +60,22 @@ As a first step, follow the guide, [MongoDB Developer: Quarkus \& Eclipse JNoSQL
 
 During the creation process, ensure you generate the project's latest version on both Quarkus and Eclipse JNoSQL. Make sure that you have a version higher than:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&lt;dependency&gt;
-   &lt;groupId&gt;io.quarkiverse.jnosql&lt;/groupId&gt;
-   &lt;artifactId&gt;quarkus-jnosql-document-mongodb&lt;/artifactId&gt;
-   &lt;version&gt;3.3.4&lt;/version&gt;
-&lt;/dependency&gt;
-</pre>
+```
+<dependency>
+   <groupId>io.quarkiverse.jnosql</groupId>
+   <artifactId>quarkus-jnosql-document-mongodb</artifactId>
+   <version>3.3.4</version>
+</dependency>
+```
+
 
 In this tutorial, we will generate services to handle cameras. We will create cameras based on [Datafaker](https://www.datafaker.net/) and return all the cameras using virtual threads with Quarkus. In your project, locate the application.properties file (usually under src/main/resources) and add the following line:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group=""># Define the database name
+```
+# Define the database name
 jnosql.document.database=cameras
-</pre>
+```
+
 
 With this foundation, we'll move on to implementing the product entity and explore how MongoDB's embedded types can simplify data modeling for your application.
 
@@ -78,7 +86,8 @@ To start, we'll define the core of our application: the Camera entity. This clas
 
 In the src/main/java directory, create a Camera class:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">import jakarta.nosql.Column;
+```
+import jakarta.nosql.Column;
 import jakarta.nosql.Entity;
 import jakarta.nosql.Id;
 import net.datafaker.Faker;
@@ -107,8 +116,8 @@ public record Camera(
         return new Camera(this.id, request.brand, request.model, request.brandWithModel);
     }
 }
+```
 
-</pre>
 
 Explanation of annotations:
 
@@ -124,7 +133,8 @@ Furthermore, we inject an ExecutorService that is qualified with the @VirtualThr
 
 Define a CameraService to interact with MongoDB:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">import io.quarkus.virtual.threads.VirtualThreads;
+```
+import io.quarkus.virtual.threads.VirtualThreads;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import net.datafaker.Faker;
@@ -149,12 +159,12 @@ public class CameraService {
     @VirtualThreads
     ExecutorService vThreads;
 
-    public List&lt;Camera&gt; findAll() {
+    public List<Camera> findAll() {
         LOGGER.info("Selecting all cameras");
         return template.select(Camera.class).result();
     }
 
-    public List&lt;Camera&gt; findByBrand(String brand) {
+    public List<Camera> findByBrand(String brand) {
         LOGGER.info("Selecting cameras by brand: " + brand);
         return template.select(Camera.class)
                 .where("brand")
@@ -162,7 +172,7 @@ public class CameraService {
                 .result();
     }
 
-    public Optional&lt;Camera&gt; findById(String id) {
+    public Optional<Camera> findById(String id) {
         var camera =  template.find(Camera.class, id);
         LOGGER.info("Selecting camera by id: " + id + " find? " + camera.isPresent());
         return camera;
@@ -186,16 +196,16 @@ public class CameraService {
     public void insertAsync(int size) {
         LOGGER.info("Inserting cameras async the size: " + size);
 
-        for (int index = 0; index &lt; size; index++) {
-            vThreads.submit(() -&gt; {
+        for (int index = 0; index < size; index++) {
+            vThreads.submit(() -> {
                 Camera camera = Camera.of(FAKER);
                 template.insert(camera);
             });
         }
     }
 }
+```
 
-</pre>
 
 In this code:
 
@@ -213,7 +223,8 @@ We'll create the CameraResource class to expose our data through a RESTful API. 
 
 Create a CameraResource class to handle HTTP requests:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">import io.quarkus.virtual.threads.VirtualThreads;
+```
+import io.quarkus.virtual.threads.VirtualThreads;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.DELETE;
@@ -241,13 +252,13 @@ public class CameraResource {
 
     @GET
     @VirtualThreads
-    public List&lt;Camera&gt; findAll() {
+    public List<Camera> findAll() {
         return service.findAll();
     }
 
     @GET
     @Path("brand/{brand}")
-    public List&lt;Camera&gt; listAll(@PathParam("brand") String brand) {
+    public List<Camera> listAll(@PathParam("brand") String brand) {
         if (brand == null || brand.isBlank()) {
             return service.findAll();
         }
@@ -263,14 +274,14 @@ public class CameraResource {
     @GET
     public Camera get(@PathParam("id") String id) {
         return service.findById(id)
-                .orElseThrow(() -&gt; new WebApplicationException(Response.Status.NOT_FOUND));
+                .orElseThrow(() -> new WebApplicationException(Response.Status.NOT_FOUND));
     }
 
     @Path("{id}")
     @PUT
     public Camera update(@PathParam("id") String id, Camera request) {
         var camera = service.findById(id)
-                .orElseThrow(() -&gt; new WebApplicationException(Response.Status.NOT_FOUND));
+                .orElseThrow(() -> new WebApplicationException(Response.Status.NOT_FOUND));
         return service.update(camera.update(request));
 
     }
@@ -289,8 +300,8 @@ public class CameraResource {
     }
 
 }
+```
 
-</pre>
 
 Step 4: Build and run the application {#h2-4-step-4-build-and-run-the-application}
 ----------------------------------------------------------------------------------
@@ -299,58 +310,73 @@ It's finally time to integrate everything and run the application. After packagi
 
 Make sure MongoDB is running (locally or on MongoDB Atlas). Then, build and run the application:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">mvn clean package -Dquarkus.package.type=uber-jar
+```
+mvn clean package -Dquarkus.package.type=uber-jar
 java -jar target/mongodb-virtual-thread-1.0.1-runner.jar
-</pre>
+```
+
 
 Step 5: Test the API {#h2-5-step-5-test-the-api}
 ------------------------------------------------
 
 Create a Camera
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">curl -X POST -H "Content-Type: application/json" -d '{
+```
+curl -X POST -H "Content-Type: application/json" -d '{
   "brand": "Canon",
   "model": "EOS 5D Mark IV",
   "brandWithModel": "Canon EOS 5D Mark IV"
 }' http://localhost:8080/cameras
-</pre>
+```
+
 
 Get all Cameras
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">curl -X GET http://localhost:8080/cameras
-</pre>
+```
+curl -X GET http://localhost:8080/cameras
+```
+
 
 Get Cameras by Brand
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">curl -X GET http://localhost:8080/cameras/brand/Canon
-</pre>
+```
+curl -X GET http://localhost:8080/cameras/brand/Canon
+```
+
 
 Get a Camera by ID
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">curl -X GET http://localhost:8080/cameras/{id}
-</pre>
+```
+curl -X GET http://localhost:8080/cameras/{id}
+```
+
 
 Update a Camera by ID
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">curl -X PUT -H "Content-Type: application/json" -d '{
+```
+curl -X PUT -H "Content-Type: application/json" -d '{
   "brand": "Nikon",
   "model": "D850",
   "brandWithModel": "Nikon D850"
 }' http://localhost:8080/cameras/{id}
-</pre>
+```
+
 
 Delete a Camera by ID
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">curl -X DELETE http://localhost:8080/cameras/{id}
+```
+curl -X DELETE http://localhost:8080/cameras/{id}
+```
 
-</pre>
 
 Insert Cameras asynchronously  
 
 This endpoint triggers the asynchronous insertion of fake camera records. The size parameter defaults to 100 if you omit it.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">curl -X POST http://localhost:8080/cameras/async?size=100
-</pre>
+```
+curl -X POST http://localhost:8080/cameras/async?size=100
+```
+
 
 Conclusion {#h2-6-conclusion}
 -----------------------------

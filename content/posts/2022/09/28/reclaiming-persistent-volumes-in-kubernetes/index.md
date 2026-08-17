@@ -104,7 +104,8 @@ Before we start, let's define a few variables for our own convenience. We will n
 
 Here is a code block you can copy and paste to define variables:{#f278}
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">OLD_STS_NAME="old-app"
+```
+OLD_STS_NAME="old-app"
 NEW_STS_NAME="new-app"
 NEW_STS_MANIFEST_FILE="new-app.yaml"
 PVC_TEMPLATE_NAME="app-pvc"
@@ -117,7 +118,9 @@ PV_NAME_0=$(kubectl get pvc $OLD_PVC_NAME_0 \
 PV_NAME_1=$(kubectl get pvc $OLD_PVC_NAME_1 \
   -o jsonpath="{.items[0].spec.volumeName}")
 NEW_PVC_MANIFEST_FILE_0="$NEW_PVC_NAME_0.yaml"
-NEW_PVC_MANIFEST_FILE_1="$NEW_PVC_NAME_1.yaml"</pre>
+NEW_PVC_MANIFEST_FILE_1="$NEW_PVC_NAME_1.yaml"
+```
+
 
 Alternatively to specifying the resource names directly, you can also use label selectors and use the index in the JSON path `{.items[i]}` to access individual results.{#f4ea}
 
@@ -136,7 +139,8 @@ Create new PVC manifests {#3acd}
 
 Before we can delete the old PVCs, we will export their manifests and modify them to match the naming scheme of the new STS. We are going to use [jq](https://stedolan.github.io/jq/) in combination with `-o json` in this example, but you might also use [yq](https://github.com/mikefarah/yq) and `-o yaml`. Here is the code snippet to create a new PVC manifest.{#3076}
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">kubectl get pvc $OLD_PVC_NAME_i -o json | jq "
+```yaml
+kubectl get pvc $OLD_PVC_NAME_i -o json | jq "
   .metadata.name = \"$NEW_PVC_NAME_i\" 
   | with_entries(
       select([.key] | 
@@ -147,13 +151,16 @@ Before we can delete the old PVCs, we will export their manifests and modify the
       .metadata.finalizers, .metadata.resourceVersion,
       .metadata.selfLink, .metadata.uid
     )
-  " &gt; $NEW_PVC_MANIFEST_FILE_i</pre>
+  " > $NEW_PVC_MANIFEST_FILE_i
+```
+
 
 While exporting the JSON manifest, we clean it up a little because it contains internal status information that's not needed to create a new PVC. Specifically, we delete all keys except `metadata`, `spec`, `apiVersion`, and `kind`.{#dc38}
 
 We also remove some additional metadata that was created by Kubernetes automatically. The resulting JSON manifest allows us to create new PVCs that will be bound to the correct PVs.{#aaf9}
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">{
+```yaml
+{
   "apiVersion": "v1",
   "kind": "PersistentVolumeClaim",
   "metadata": {
@@ -173,7 +180,9 @@ We also remove some additional metadata that was created by Kubernetes automatic
     "volumeMode": "Filesystem",
     "volumeName": "pvc-aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee"
   }
-}</pre>
+}
+```
+
 
 Delete old STS {#51dc}
 ----------------------
@@ -212,7 +221,8 @@ Finally, we can create the new STS.{#21f1}
 
 Below is an example STS pseudo-YAML manifest. Note that you would have to replace the variables to make it valid YAML.{#f386}
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">apiVersion: apps/v1
+```yaml
+apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: $NEW_STS_NAME
@@ -245,7 +255,9 @@ spec:
       resources:
         requests:
           storage: 100Gi
-      storageClassName: "azurefile-premium"</pre>
+      storageClassName: "azurefile-premium"
+```
+
 
 The new STS should now use the newly created PVCs and mount the data from the existing PVs.{#e1e5}
 

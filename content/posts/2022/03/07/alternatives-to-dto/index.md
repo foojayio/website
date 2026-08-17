@@ -44,13 +44,16 @@ We make requests for specific data in a particular context. Thus, when the call 
 
 For that, JPA offers projections. In essence, a projection in a query allows selecting precisely the data one wants. Here's an example; given a `Person` entity class and a `PersonDetails` regular class:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">CriteriaQuery&lt;PersonDetails&gt; q = cb.createQuery(PersonDetails.class);
-Root&lt;Person&gt; c = q.from(Person.class);
+```java
+CriteriaQuery<PersonDetails> q = cb.createQuery(PersonDetails.class);
+Root<Person> c = q.from(Person.class);
 q.select(cb.construct(PersonDetails.class,
   c.get(Person_.firstName),
   c.get(Person_.lastName),
   c.get(Person_.birthdate)
-));</pre>
+));
+```
+
 
 Jackson converter {#h2-2-jackson-converter}
 -------------------------------------------

@@ -45,7 +45,8 @@ This JMS demo is a simple database log API -- it's a microservice which you can 
 
 This code implements the main web service:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">@RestController
+```java
+@RestController
 @RequiredArgsConstructor
 public class EventRequest {
    private final JmsTemplate jmsTemplate;
@@ -55,21 +56,24 @@ public class EventRequest {
    @PostMapping("/add")
    public void event(@RequestBody EventDTO event) {
        String json = moshi.adapter(EventDTO.class).toJson(event);
-       jmsTemplate.send("event", session -&gt;
+       jmsTemplate.send("event", session ->
                session.createTextMessage(json));
    }
 
    @GetMapping("/list")
-   public List&lt;EventDTO&gt; listEvents() {
+   public List<EventDTO> listEvents() {
        return eventService.listEvents();
    }
-}</pre>
+}
+```
+
 
 Notice the `event()` method that posts a message to the event topic. I didn't discuss message bodies before to keep things simple, but note that in this case I just pass a JSON string as the body. While JMS supports object serialization, using that capability has its own complexities and I want to keep the code simple.
 
 To complement the main web service, we'd need to build a listener that handles the incoming message:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">@Component
+```java
+@Component
 @RequiredArgsConstructor
 public class EventListener {
    private final EventService eventService;
@@ -80,7 +84,9 @@ public class EventListener {
    public void handleMessage(String eventDTOJSON) throws IOException {
        eventService.storeEvent(moshi.adapter(EventDTO.class).fromJson(eventDTOJSON));
    }
-}</pre>
+}
+```
+
 
 The listener is invoked with the JSON string that is sent to the listener, which we parse and send on to the service.
 

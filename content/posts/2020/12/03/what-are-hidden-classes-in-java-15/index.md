@@ -51,7 +51,7 @@ The following are 4 steps for creating and using hidden classes.
 
 1. **Create Lookup object.** Get a lookup object, which will be used to create hidden class in the next steps.
 
-   ```java EnlighterJSRAW
+   ```java
    MethodHandles.Lookup lookup = MethodHandles.lookup();
    ```
 
@@ -81,15 +81,16 @@ Below is the overall structure of the code we discussed above.
 
 The complete code is available in my GitHub [repo](https://github.com/Vipin-Sharma/JDK15Examples).
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public class HiddenClassDemo {
+```java
+public class HiddenClassDemo {
    public static void main(String[] args) throws Throwable {
-     MethodHandles.Lookup&nbsp;lookup&nbsp;=&nbsp;MethodHandles.lookup();
+     MethodHandles.Lookup lookup = MethodHandles.lookup();
      ClassWriter cw =
           GenerateClass.getClassWriter(HiddenClassDemo.class);
      byte[] bytes = cw.toByteArray();
 
-     Class&lt;?&gt; c = lookup.defineHiddenClass(bytes, true, NESTMATE).lookupClass();
-     Constructor&lt;?&gt; constructor = c.getConstructor(null);
+     Class<?> c = lookup.defineHiddenClass(bytes, true, NESTMATE).lookupClass();
+     Constructor<?> constructor = c.getConstructor(null);
      Object object = constructor.newInstance(null);
      Test test = (Test) object;
      /* This way of creating instance is deprecated.
@@ -99,16 +100,18 @@ The complete code is available in my GitHub [repo](https://github.com/Vipin-Shar
 
      System.out.println("End of main method in class " + HiddenClassDemo.class.getName());
    }
-}</pre>
+}
+```
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public interface Test {
+```java
+public interface Test {
   void test(String[] args);
 }
+```
 
-</pre>
-
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public static ClassWriter getClassWriter(Class&lt;HiddenClassDemo&gt; ownerClassName) {
-  ClassWriter&nbsp;cw&nbsp;=&nbsp;new&nbsp;ClassWriter(ClassWriter.COMPUTE_MAXS);
+```java
+public static ClassWriter getClassWriter(Class<HiddenClassDemo> ownerClassName) {
+  ClassWriter cw = new ClassWriter(ClassWriter.COMPUTE_MAXS);
 
   cw.visit(V1_6, ACC_PUBLIC + ACC_SUPER, getHiddenClassName(ownerClassName),
       null, "java/lang/Object", new String[] {"com/vip/jfeatures/jdk15/hiddenclass/Test"});
@@ -125,7 +128,8 @@ The complete code is available in my GitHub [repo](https://github.com/Vipin-Shar
      mv.visitInsn(RETURN);
      mv.visitMaxs(2, 1);
      mv.visitEnd(); 
-}</pre>
+}
+```
 
 ### Hidden Classes as Unsafe Alternative {#h3-2-hidden-classes-as-unsafe-alternative}
 

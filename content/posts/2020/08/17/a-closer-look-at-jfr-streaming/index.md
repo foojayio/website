@@ -34,42 +34,49 @@ The JFR streaming works by allowing the reading from the JFR file whilst it is b
 
 The new functionality mostly resides in jdk.jfr.consumer. This is how you would open an event stream and start consuming the CPU load with 1 second intervals and the monitor class when blocked to enter a monitor for 10 ms:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">try (var rs = new RecordingStream()) {
+```java
+try (var rs = new RecordingStream()) {
   rs.enable("jdk.CPULoad").withPeriod(Duration.ofSeconds(1));
   rs.enable("jdk.JavaMonitorEnter").withThreshold(Duration.ofMillis(10));
-  rs.onEvent("jdk.CPULoad", event -&gt; {
+  rs.onEvent("jdk.CPULoad", event -> {
     System.out.println(event.getFloat("machineTotal"));
   });
-  rs.onEvent("jdk.JavaMonitorEnter", event -&gt; {
+  rs.onEvent("jdk.JavaMonitorEnter", event -> {
     System.out.println(event.getClass("monitorClass"));
   });
   rs.start();
-}</pre>
+}
+```
+
 
 The RecordingStream is what you would use to control what is gathered from within the Java process, effectively also controlling the recorder.
 
 Here is another example using the default recording template, and printing out the information for garbage collection events, cpu load and the JVM information:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">Configuration c = Configuration.getConfiguration("default");
+```java
+Configuration c = Configuration.getConfiguration("default");
  try (var rs = new RecordingStream(c)) {
      rs.onEvent("jdk.GarbageCollection", System.out::println);
      rs.onEvent("jdk.CPULoad", System.out::println);
      rs.onEvent("jdk.JVMInformation", System.out::println);
      rs.start();
    }
- }</pre>
+ }
+```
+
 
 The EventStream class can be used together with the standard flight recorder mechanisms to gather information from ongoing recordings, even ones being done in separate processes or an already recorded file. Here is an example using the EventStream to get some other attributes of the CPU load and information from garbage collections from within the Java process (needs an ongoing recording):
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">try (var es = EventStream.openRepository()) {
-   es.onEvent("jdk.CPULoad", event -&gt; {
+```java
+try (var es = EventStream.openRepository()) {
+   es.onEvent("jdk.CPULoad", event -> {
      System.out.println("CPU Load " + event.getEndTime());
      System.out.println(" Machine total: " + 100 * event.getFloat("machineTotal") + "%");
      System.out.println(" JVM User: " + 100 * event.getFloat("jvmUser") + "%");
      System.out.println(" JVM System: " + 100 * event.getFloat("jvmSystem") + "%");
      System.out.println();
    });
-   es.onEvent("jdk.GarbageCollection", event -&gt; {
+   es.onEvent("jdk.GarbageCollection", event -> {
      System.out.println("Garbage collection: " + event.getLong("gcId"));
      System.out.println(" Cause: " + event.getString("cause"));
      System.out.println(" Total pause: " + event.getDuration("sumOfPauses"));
@@ -77,11 +84,14 @@ The EventStream class can be used together with the standard flight recorder mec
      System.out.println();
    });
    es.start();
- }</pre>
+ }
+```
+
 
 This is the EventStream interface used to consume and filter an event stream:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public interface EventStream extends AutoCloseable {
+```java
+public interface EventStream extends AutoCloseable {
   public static EventStream openRepository();
   public static EventStream openRepository(Path directory);
   public static EventStream openFile(Path file);
@@ -92,7 +102,7 @@ This is the EventStream interface used to consume and filter an event stream:
   void setReuse(boolean reuse);
 
   void onEvent(Consumer handler);
-  void onEvent(String eventName, Consumer&lt;RecordedEvent&gt; handler);
+  void onEvent(String eventName, Consumer<RecordedEvent> handler);
   void onClose(Runnable handler);
   void onError(Runnable handler);
   void remove(Object handler);
@@ -101,7 +111,9 @@ This is the EventStream interface used to consume and filter an event stream:
   void awaitTermination();
   void awaitTermination(Duration duration);
   void close();
-}</pre>
+}
+```
+
 
 The open\* methods allow you to open a specific file or a specific file repository (for example from a different process). The set\* methods allow you to filter on time and to select if you want to enforce that the events are delivered in time order. You can also allow the reuse of the event object that gets delivered, to get the memory pressure down a bit.
 
@@ -124,14 +136,16 @@ Here are some examples:
   For example, adding an MBean exposing select JFR data over JMX.  
   That said, there might be an API to directly connect to an MBeanServerConnection directly in the [future\[1\]](https://www.reddit.com/r/java/comments/e97vos/jfr_event_streaming_with_jdk_14_in_outprocess/faiapm8/):
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">MBeanServerConnection conn = connect(host, port);
+```java
+MBeanServerConnection conn = connect(host, port);
 try (EventStream es = new RemoteRecordingStream(conn)) {
-  es.onEvent("jdk.GarbageCollection", e -&gt; ... );
-  es.onEvent("jdk.ExceptionThrown". e -&gt; ...);
-  es.onEvent("jdk.JavaMonitorBlocked", e-&gt; ...);
+  es.onEvent("jdk.GarbageCollection", e -> ... );
+  es.onEvent("jdk.ExceptionThrown". e -> ...);
+  es.onEvent("jdk.JavaMonitorBlocked", e-> ...);
   es.start();
 }
-</pre>
+```
+
 
 It also allows you to skip the metadata part of a normal flight recording. The metadata in JFR contains the information about what was recorded, so that you can parse and view data that you may not even know about beforehand. In the case of monitoring a few well known data points, this is redundant information to keep sending over and over again.
 

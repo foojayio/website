@@ -97,7 +97,10 @@ Ollama enables you to run open-source large language models (LLMs) directly on y
   * You can exit the chat prompt by typing /bye. The model is now downloaded and available for use by applications like your Spring Boot backend.
   * To see all locally downloaded models, use:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">ollama list</pre>
+```
+ollama list
+```
+
 
 ```
 
@@ -115,7 +118,10 @@ Spring Initializr is a web tool that generates a basic Spring Boot project struc
   * Go to <https://start.spring.io/> in your browser and configure your project; for brevity, since this part is pretty much known by every spring developer, I am going to skip it. Download the structure and open it in your favourite IDE.
   * Make sure you have the following dependencies in your `gradle.build` or `pom.xml`.  
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">dependencies { implementation 'dev.langchain4j:langchain4j-spring-boot-starter:1.0.0-beta2' implementation 'dev.langchain4j:langchain4j-open-ai-spring-boot-starter:1.0.0-beta2' implementation 'dev.langchain4j:langchain4j-embeddings-all-minilm-l6-v2:1.0.0-beta2' implementation 'dev.langchain4j:langchain4j-ollama:1.0.0-beta2' implementation 'org.springframework.boot:spring-boot-starter-web' compileOnly 'org.projectlombok:lombok' developmentOnly 'org.springframework.boot:spring-boot-devtools' annotationProcessor 'org.projectlombok:lombok' testImplementation 'org.springframework.boot:spring-boot-starter-test' testRuntimeOnly 'org.junit.platform:junit-platform-launcher' }</pre>
+```
+dependencies { implementation 'dev.langchain4j:langchain4j-spring-boot-starter:1.0.0-beta2' implementation 'dev.langchain4j:langchain4j-open-ai-spring-boot-starter:1.0.0-beta2' implementation 'dev.langchain4j:langchain4j-embeddings-all-minilm-l6-v2:1.0.0-beta2' implementation 'dev.langchain4j:langchain4j-ollama:1.0.0-beta2' implementation 'org.springframework.boot:spring-boot-starter-web' compileOnly 'org.projectlombok:lombok' developmentOnly 'org.springframework.boot:spring-boot-devtools' annotationProcessor 'org.projectlombok:lombok' testImplementation 'org.springframework.boot:spring-boot-starter-test' testRuntimeOnly 'org.junit.platform:junit-platform-launcher' }
+```
+
 
 With Ollama running and the basic Spring Boot project created, you're ready to start adding the FormPilot-specific code.
 
@@ -128,7 +134,8 @@ For FormPilot, I wanted the system to be able to fill forms with personalized in
 
 Here's how I implemented RAG in the RAGConfig class:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">package ca.bazlur.formpilot.config;
+```
+package ca.bazlur.formpilot.config;
 
 import dev.langchain4j.data.segment.TextSegment;
 import dev.langchain4j.memory.chat.ChatMemoryProvider;
@@ -162,20 +169,20 @@ public class RAGConfig {
 
     @Bean(name = "ollamaChatMemoryProvider")
     ChatMemoryProvider chatMemoryProvider(Tokenizer tokenizer) {
-        return memoryId -&gt; TokenWindowChatMemory.builder()
+        return memoryId -> TokenWindowChatMemory.builder()
                 .id(memoryId)
                 .maxTokens(10_000, tokenizer)
                 .build();
     }
 
     @Bean
-    EmbeddingStore&lt;TextSegment&gt; embeddingStore(EmbeddingModel embeddingModel, ResourceLoader resourceLoader) throws IOException {
+    EmbeddingStore<TextSegment> embeddingStore(EmbeddingModel embeddingModel, ResourceLoader resourceLoader) throws IOException {
 
         // Normally, you would already have your embedding store filled with your data.
         // However, for the purpose of this demonstration, we will:
 
         // 1. Create an in-memory embedding store
-        EmbeddingStore&lt;TextSegment&gt; embeddingStore = new InMemoryEmbeddingStore&lt;&gt;();
+        EmbeddingStore<TextSegment> embeddingStore = new InMemoryEmbeddingStore<>();
 
         // 2. Load an example document
         Resource resource = resourceLoader.getResource("classpath:content.txt");
@@ -205,7 +212,7 @@ public class RAGConfig {
     }
 
     @Bean(name = "ollamaContentRetriever")
-    ContentRetriever contentRetriever(EmbeddingStore&lt;TextSegment&gt; embeddingStore, EmbeddingModel embeddingModel) {
+    ContentRetriever contentRetriever(EmbeddingStore<TextSegment> embeddingStore, EmbeddingModel embeddingModel) {
         log.info("Creating ContentRetriever");
         // You will need to adjust these parameters to find the optimal setting,
         // which will depend on multiple factors, for example:
@@ -221,7 +228,9 @@ public class RAGConfig {
                 .minScore(minScore)
                 .build();
     }
-}</pre>
+}
+```
+
 
 This configuration:
 
@@ -238,7 +247,8 @@ One of the most elegant aspects of FormPilot is how it uses LangChain4j's **@AiS
 
 Here's the FormAssistant interface:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">package ca.bazlur.formpilot.service;
+```
+package ca.bazlur.formpilot.service;
 
 import ca.bazlur.formpilot.model.FormField;
 import dev.langchain4j.service.MemoryId;
@@ -275,7 +285,7 @@ public interface FormAssistant {
               1.  **Context First:** Use any provided text context or user-supplied data to fill the fields. Match data to relevant field types/labels (e.g., use provided phone number for `tel` field, biography text for `textarea` bio field).
               2.  **Generation:** If context is insufficient for a field, generate a realistic and contextually appropriate value based on its `type`, `label`, and `placeholder`.
           * **Type-Specific Generation Rules:**
-              * `email`: Generate a plausible email (e.g., `<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="2349424d460d474c4663465b424e534f460d404c4e">[email&nbsp;protected]</a>`) if not in context.
+              * `email`: Generate a plausible email (e.g., `<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="2349424d460d474c4663465b424e534f460d404c4e">[email protected]</a>`) if not in context.
               * `password`: Use a placeholder strong password (e.g., `P@ssw0rd123!`).
               * `date`: Generate a valid date (e.g., `1995-06-15`).
               * `number`: Generate a sensible number based on context (e.g., `85000` for annual income).
@@ -284,16 +294,18 @@ public interface FormAssistant {
               * `select-one` (often paired):
                   * Fill the associated text input (`field-id-selectized`) with the *text label* (e.g., "Intermediate").
                   * Leave the `select-one` field (`field-id`) value as `""` (empty string) unless the specific *internal value* is known from context.
-          * **Required Fields:** If `required: true` and no value can be determined from context, generate a placeholder value (e.g., `"N/A - Required"`, `"<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="6b1e180e192b0e130a061b070e45080406">[email&nbsp;protected]</a>"`, `"https://example.com/placeholder"`) instead of leaving it empty.
+          * **Required Fields:** If `required: true` and no value can be determined from context, generate a placeholder value (e.g., `"N/A - Required"`, `"<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="6b1e180e192b0e130a061b070e45080406">[email protected]</a>"`, `"https://example.com/placeholder"`) instead of leaving it empty.
           * **Duplicate Sections:** Fill apparently duplicated sections (e.g., `User` vs. `ImpersonatedUser`) consistently with the same data unless context specifies otherwise.
 
           Now, process the following form fields and context, providing only the JSON output. 
 
-          Return Map&lt;String, ?&gt; where the key is the field's `id` or `name` and the value is the filled value.
+          Return Map<String, ?> where the key is the field's `id` or `name` and the value is the filled value.
 
           """)
-    Map&lt;String, ?&gt; generateForm(@MemoryId String memoryId, @UserMessage List&lt;FormField&gt; fields);
-}</pre>
+    Map<String, ?> generateForm(@MemoryId String memoryId, @UserMessage List<FormField> fields);
+}
+```
+
 
 ```
 
@@ -301,7 +313,8 @@ public interface FormAssistant {
 
 Define the FormField record/class (e.g., in the model package):
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">package ca.bazlur.formpilot.model;
+```
+package ca.bazlur.formpilot.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -325,14 +338,16 @@ public class FormField {
     private String placeholder;
     private boolean required;
     private String value;
-    private List&lt;Option&gt; options = new ArrayList&lt;&gt;();
+    private List<Option> options = new ArrayList<>();
 }
 
 @Data
 class Option {
     private String text;
     private String value;
-}</pre>
+}
+```
+
 
 ```
 
@@ -362,7 +377,8 @@ Configuring LangChain4j to use your local Ollama instance is straightforward usi
 
 Add the following properties:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group=""># LangChain4j Configuration for Ollama
+```
+# LangChain4j Configuration for Ollama
 
 # Base URL for the Ollama API (default port is 11434)
 langchain4j.chat-model.ollama.base-url=http://localhost:11434
@@ -380,7 +396,9 @@ langchain4j.chat-model.ollama.timeout=PT60S # 60 seconds
 langchain4j.embedding-model.ollama.base-url=http://localhost:11434/v1
 langchain4j.embedding-model.ollama.model-name=deepseek-llm:7b
 
-langchain4j.embedding-model.ollama.timeout=PT60S</pre>
+langchain4j.embedding-model.ollama.timeout=PT60S
+```
+
 
 ```
 
@@ -420,19 +438,20 @@ The most challenging part was reliably detecting form fields and extracting usef
 
 Here's a simplified snippet illustrating field data extraction:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">// content.js (Simplified Example)
+```
+// content.js (Simplified Example)
 
 function findFormsAndFields() {
   const forms = document.querySelectorAll('form');
   const allFieldsData = [];
 
-  forms.forEach(form =&gt; {
+  forms.forEach(form => {
     // Select common form input elements within the current form
     const elements = form.querySelectorAll('input:not([type="submit"]):not([type="button"]):not([type="reset"]):not([type="hidden"]):not([type="file"]), select, textarea');
 
-    elements.forEach(element =&gt; {
+    elements.forEach(element => {
       const fieldData = createFormFieldData(element);
-      if (fieldData &amp;&amp; !fieldData.value) { // Only include fields that are not already filled
+      if (fieldData && !fieldData.value) { // Only include fields that are not already filled
         // Check if field is visible to the user
         if (element.offsetParent !== null) {
             allFieldsData.push(fieldData);
@@ -444,12 +463,12 @@ function findFormsAndFields() {
 }
 
 function getLabelForElement(element) {
-    // 1. Check for &lt;label for="..."&gt;
+    // 1. Check for <label for="...">
     if (element.id) {
         const label = document.querySelector(`label[for="${element.id}"]`);
         if (label) return label.textContent.trim();
     }
-    // 2. Check for parent &lt;label&gt;
+    // 2. Check for parent <label>
     const parentLabel = element.closest('label');
     if (parentLabel) return parentLabel.textContent.replace(element.value || '', '').trim(); // Attempt to remove element's own text if nested
 
@@ -466,7 +485,7 @@ function getLabelForElement(element) {
 
     // 5. Fallback: Preceding sibling text (simplified)
     let previous = element.previousElementSibling;
-    if (previous &amp;&amp; !['input', 'select', 'textarea', 'button', 'label'].includes(previous.tagName.toLowerCase())) {
+    if (previous && !['input', 'select', 'textarea', 'button', 'label'].includes(previous.tagName.toLowerCase())) {
         return previous.textContent.trim();
     }
 
@@ -510,15 +529,15 @@ function createFormFieldData(element) {
 function requestFormFill() {
     const fieldsToSend = findFormsAndFields();
 
-    if (fieldsToSend.length &gt; 0) {
+    if (fieldsToSend.length > 0) {
         // Send fields to the background script
-        chrome.runtime.sendMessage({ action: "fillForm", fields: fieldsToSend }, (response) =&gt; {
+        chrome.runtime.sendMessage({ action: "fillForm", fields: fieldsToSend }, (response) => {
             if (chrome.runtime.lastError) {
                 console.error("FormPilot Error:", chrome.runtime.lastError.message);
                 // Handle error (e.g., show message to user)
                 return;
             }
-            if (response &amp;&amp; response.filledFields) {
+            if (response && response.filledFields) {
                 // Fill the actual form elements on the page
                 fillFormOnPage(response.filledFields);
             } else {
@@ -533,7 +552,7 @@ function requestFormFill() {
 }
 
 function fillFormOnPage(filledFieldsMap) {
-    // filledFieldsMap is the Map&lt;String, String&gt; from the backend
+    // filledFieldsMap is the Map<String, String> from the backend
     console.log("FormPilot: Received fields to fill:", filledFieldsMap);
 
     for (const [identifier, value] of Object.entries(filledFieldsMap)) {
@@ -558,9 +577,9 @@ function fillField(element, value) {
     if (type === 'select' || type === 'select-one') {
         // Find the option with matching value or text (case-insensitive text match)
         const options = Array.from(element.options);
-        let foundOption = options.find(opt =&gt; opt.value === value);
+        let foundOption = options.find(opt => opt.value === value);
         if (!foundOption) {
-            foundOption = options.find(opt =&gt; opt.text.toLowerCase() === value.toLowerCase());
+            foundOption = options.find(opt => opt.text.toLowerCase() === value.toLowerCase());
         }
 
         if (foundOption) {
@@ -576,7 +595,7 @@ function fillField(element, value) {
     } else if (type === 'radio') {
         // For radio buttons, find the one in the group with the matching value and check it
         const radioGroup = document.querySelectorAll(`input[type="radio"][name="${element.name}"]`);
-        radioGroup.forEach(radio =&gt; {
+        radioGroup.forEach(radio => {
             radio.checked = (radio.value === value);
         });
     } else {
@@ -609,7 +628,7 @@ function triggerEvents(element) {
 }
 
 // --- Listener for messages from background or popup ---
-chrome.runtime.onMessage.addListener((request, sender, sendResponse) =&gt; {
+chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     if (request.action === "triggerFormFill") {
         console.log("FormPilot: Received triggerFormFill command.");
         requestFormFill();
@@ -619,7 +638,9 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) =&gt; {
     }
 });
 
-console.log("FormPilot Content Script Loaded.");</pre>
+console.log("FormPilot Content Script Loaded.");
+```
+
 
 ```
 
@@ -633,8 +654,10 @@ Check out the chrome-extension: <https://github.com/rokon12/form-pilot/tree/main
 
 Build the Spring Boot application:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">./gradlew build
-</pre>
+```
+./gradlew build
+```
+
 
 ```
 
@@ -642,7 +665,10 @@ Build the Spring Boot application:
 
 Run the Spring Boot application:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">./gradlew bootRun</pre>
+```
+./gradlew bootRun
+```
+
 
 ```
 
@@ -650,7 +676,10 @@ Run the Spring Boot application:
 
 The server will start on port `8080`. You can verify it's running by visiting:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">http://localhost:8080/api/form/health</pre>
+```
+http://localhost:8080/api/form/health
+```
+
 
 ```
 
@@ -670,9 +699,12 @@ A demo form is included in this project to help you test the Smart Form Filler e
 1. Create the demo form and open it in your browser: file:///path/to/FormPilot/demo/demo-form.html
 2. Alternatively, you can serve the demo form using a simple HTTP server:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group=""># If you have Python installed
+```
+# If you have Python installed
 
-python -m http.server</pre>
+python -m http.server
+```
+
 
 Then visit `http://localhost:8000/demo/demo-form.html` in your browser.
 

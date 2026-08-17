@@ -36,14 +36,19 @@ Since hosts comparison requires name resolution, this operation is a blocking op
 
 This might be unclear. Let's clarify it with a simple block of code:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">System.out.println(new URL("http://localhost/").equals(new URL("http://127.0.0.1/")));
+```java
+System.out.println(new URL("http://localhost/").equals(new URL("http://127.0.0.1/")));
 System.out.println(new URL("http://localhost/").hashCode() == new URL("http://127.0.0.1/").hashCode());
-</pre>
+```
+
 
 Will print out:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">true
-true</pre>
+```java
+true
+true
+```
+
 
 This might be pretty simple with localhost, but if we compare domains and the Strings aren't identical (which they often aren't) we need to do a DNS lookup. We need to do that just for a hashcode() call!
 
@@ -54,9 +59,11 @@ A quick workaround for this case is to avoid URL. Sun deeply embedded the class 
 
 E.g., if we change the hashcode and equals calls from above to use URI instead of URL we will get this result:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">System.out.println(new URI("http://localhost/").equals(new URI("http://127.0.0.1/")));
+```java
+System.out.println(new URI("http://localhost/").equals(new URI("http://127.0.0.1/")));
 System.out.println(new URI("http://localhost/").hashCode() == new URI("http://127.0.0.1/").hashCode());
-</pre>
+```
+
 
 We will get false for both statements. While this might be problematic for some use cases, it's a vast difference in performance.
 
@@ -78,15 +85,21 @@ E.g. A stream operation that takes longer because the hashcode method is slow or
 
 To understand the best hashcode and equals method, we first need to understand some mediocre code. Now I won't show horrible or old code. This is good code, but it isn't the best:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public int hashCode() {
+```java
+public int hashCode() {
     return Objects.hash(id, core, setting, values, sets);
-}</pre>
+}
+```
+
 
 This code might seem OK at first, but is it? Here's the ideal code:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public int hashCode() {
+```java
+public int hashCode() {
     return id;
-}</pre>
+}
+```
+
 
 This is fast, 100% unique and correct. There's literally no reason to do anything beyond that. There's one exception of an id which is an object. In that case we might want to do Objects.hashCode(id) instead which will also work for null, etc.
 
@@ -96,16 +109,21 @@ Well, obviously... This is one of the most important things you need to keep in 
 
 To clarify, hashcode must always obey this law:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">assert(obj1.hashCode() != obj2.hashCode() &amp;&amp; !obj1.equals(obj2));
-</pre>
+```java
+assert(obj1.hashCode() != obj2.hashCode() && !obj1.equals(obj2));
+```
+
 
 That means if hashcode results are different, the objects must be different and must return false from equals. But the inverse isn't the case:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">if(obj1.hashCode() == obj2.hashCode()) {
+```java
+if(obj1.hashCode() == obj2.hashCode()) {
     if(obj1.equals(obj2)) {
        // this can be false...
     }
-}</pre>
+}
+```
+
 
 The value here is in performance. A hashcode method should perform much faster than equals. It should let us skip the potentially expensive equals calculation and index elements quickly.
 
@@ -136,9 +154,12 @@ If you have code verification process on commit I would strongly recommend defin
 
 But the problem is nesting. E.g. think about code like the one we discussed before:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public int hashCode() {
+```java
+public int hashCode() {
     return Objects.hash(id, core, setting, values, sets);
-}</pre>
+}
+```
+
 
 It's short and simple. Yet, performance of this code can be all over the place. The method would invoke the hashcode method of all internal objects. These methods can be far worse in terms of performance. We need to be vigilant about this. Even for JDK classes such as URL which, as we discussed earlier, is problematic.
 

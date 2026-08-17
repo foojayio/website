@@ -46,11 +46,11 @@ The speed and ability to operate in production strengthens the CI/CD scans, offe
 
 Most organizations that run tools like Kafka, Cassandra, or Spark just download and run those applications without any build steps. Unlike the agent approach, Azul Vulnerability Detection is integrated into the JVM and operates faster, without the need for external tools. This also avoids production drift, where agents generally run in simulated dev/qa environments.
 
-*** ** * ** ***
+
 
 ### There are so many active Java applications that organizations have difficulty tracking them. {#h-there-are-so-many-active-java-applications-that-organizations-have-difficulty-tracking-them}
 
-*** ** * ** ***
+
 
 The difference with many inventory systems is the ability to go deep into Java applications. Many inventory systems will report based on files or signatures. With Java applications, applications use techniques like shading or flattening.
 
@@ -71,11 +71,11 @@ The security landscape has changed around Java's main designs. The original [out
 
 With usage on backend systems and cloud-native development, the model has changed: the threat isn't remote code, it's the way custom code and libraries work together to safeguard their data.
 
-*** ** * ** ***
+
 
 ### With Azul Vulnerability Detection, running the software and getting security insight become the same action. {#h-with-azul-vulnerability-detection-running-the-software-and-getting-security-insight-become-the-same-action}
 
-*** ** * ** ***
+
 
 Today many attacks succeed simply due to known vulnerabilities in existing systems. The presence of CVEs also impacts an organization's cyber insurance policy, with insurers like Chubb offering to share the risk on [neglected software vulnerabilities](https://www.chubb.com/content/dam/chubb-sites/chubb-com/us-en/business-insurance/cyber-enterprise-risk-management-cyber-erm/documents/pdf/2021-10.13_v3_17-01-0295_Widespread_Events_Endorsements.pdf#:~:text=For%20that%20reason%2C%20Chubb%20provides%20policyholders%20with%20a,U.S.%20National%20Institute%20for%20Standards%20and%20Technology%20%28NIST%29) if a CVE is not patched within 45 days.
 

@@ -57,7 +57,8 @@ CodeRabbit analyzes your Java code for:
 
 **Style and Formatting**
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">// CodeRabbit will suggest improvements for:
+```
+// CodeRabbit will suggest improvements for:
 public class DemoApplication{  // Missing space before {
     private String userName;
 
@@ -65,7 +66,8 @@ public class DemoApplication{  // Missing space before {
         this.userName = userName;
     }
 }
-</pre>
+```
+
 
 For example, when you ask CodeRabbit to check the style above, you'll get a response comparable to this:
 
@@ -84,7 +86,8 @@ For example, when you ask CodeRabbit to check the style above, you'll get a resp
 
 CodeRabbit identifies common Java security issues:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">// CodeRabbit will flag potential security risks:
+```
+// CodeRabbit will flag potential security risks:
 public void unsafeMethod(String userInput) {
     // SQL injection vulnerability
     String query = "SELECT * FROM users WHERE name = '" + userInput + "'";
@@ -92,7 +95,8 @@ public void unsafeMethod(String userInput) {
     // Potential XSS vulnerability
     response.getWriter().println(userInput);
 }
-</pre>
+```
+
 
 The above is analyzed in several ways, including this, by CodeRabbit:
 
@@ -102,24 +106,27 @@ The above is analyzed in several ways, including this, by CodeRabbit:
 
 ### **3. Performance Optimization Suggestions** {#h3-6-3-performance-optimization-suggestions}
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">// CodeRabbit suggests improvements:
+```
+// CodeRabbit suggests improvements:
 // Original code
-List&lt;String&gt; items = new ArrayList&lt;&gt;();
+List<String> items = new ArrayList<>();
 for (User user : users) {
     items.add(user.getName());
 }
 
 // CodeRabbit might suggest:
-List&lt;String&gt; items = users.stream()
+List<String> items = users.stream()
     .map(User::getName)
     .collect(Collectors.toList());
-</pre>
+```
+
 
 ### **4. Design Pattern Recognition** {#h3-7-4-design-pattern-recognition}
 
 CodeRabbit understands common Java patterns and suggests improvements:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">// Suggests Singleton pattern improvements
+```
+// Suggests Singleton pattern improvements
 public class DatabaseConnection {
     private static DatabaseConnection instance;
 
@@ -131,7 +138,8 @@ public class DatabaseConnection {
         return instance;
     }
 }
-</pre>
+```
+
 
 **Working with CodeRabbit Reviews** {#h2-8-working-with-coderabbit-reviews}
 ---------------------------------------------------------------------------
@@ -169,7 +177,8 @@ CodeRabbit provides three types of feedback:
 
 Create a `.coderabbit.yaml` file in your repository root:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">reviews:
+```
+reviews:
   auto_review:
     enabled: true
 
@@ -184,7 +193,9 @@ rules:
   - security_issues
   - bugs
   - code_quality
-  - best_practices</pre>
+  - best_practices
+```
+
 
 ### **Maven/Gradle Integration** {#h3-13-maven-gradle-integration}
 
@@ -202,19 +213,26 @@ CodeRabbit automatically understands your build configuration:
 
 Ask CodeRabbit specific questions about your Java code:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">@coderabbitai Can you suggest a more efficient way to implement this caching mechanism?</pre>
+```
+@coderabbitai Can you suggest a more efficient way to implement this caching mechanism?
+```
+
 
 ### **2. Architectural Reviews** {#h3-16-2-architectural-reviews}
 
 CodeRabbit can analyze larger structural changes:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">@coderabbitai Please review the overall architecture of this new service layer</pre>
+```
+@coderabbitai Please review the overall architecture of this new service layer
+```
+
 
 ### **3. Testing Suggestions** {#h3-17-3-testing-suggestions}
 
 CodeRabbit helps improve your test coverage:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">@Test
+```
+@Test
 public void testUserCreation() {
     User user = new User("John");
     assertEquals("John", user.getName());
@@ -224,7 +242,8 @@ public void testUserCreation() {
 // - Additional edge case tests
 // - Mock object usage
 // - Test naming improvements
-</pre>
+```
+
 
 **Best Practices** {#h2-18-best-practices}
 ------------------------------------------
@@ -266,7 +285,8 @@ public void testUserCreation() {
 
 ### **1. Spring Framework** {#h3-23-1-spring-framework}
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">// CodeRabbit understands Spring annotations and suggests improvements
+```
+// CodeRabbit understands Spring annotations and suggests improvements
 @RestController
 @RequestMapping("/api/users")
 public class UserController {
@@ -275,16 +295,18 @@ public class UserController {
     private UserService userService;  // Might suggest constructor injection
 
     @GetMapping("/{id}")
-    public ResponseEntity&lt;User&gt; getUser(@PathVariable Long id) {
+    public ResponseEntity<User> getUser(@PathVariable Long id) {
         // CodeRabbit checks for proper error handling
         return ResponseEntity.ok(userService.findById(id));
     }
 }
-</pre>
+```
+
 
 ### **2. JPA/Hibernate** {#h3-24-2-jpa-hibernate}
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">// CodeRabbit provides database-related suggestions
+```
+// CodeRabbit provides database-related suggestions
 @Entity
 public class User {
     @Id
@@ -296,16 +318,19 @@ public class User {
 
     // CodeRabbit checks for proper equals/hashCode implementation
 }
-</pre>
+```
+
 
 ### **3. Stream API Usage** {#h3-25-3-stream-api-usage}
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">// CodeRabbit optimizes stream operations
-List&lt;String&gt; result = users.stream()
-    .filter(user -&gt; user.getAge() &gt; 18)
+```
+// CodeRabbit optimizes stream operations
+List<String> result = users.stream()
+    .filter(user -> user.getAge() > 18)
     .map(User::getName)
     .collect(Collectors.toList());  // Might suggest toUnmodifiableList()
-</pre>
+```
+
 
 **Troubleshooting Common Issues** {#h2-26-troubleshooting-common-issues}
 ------------------------------------------------------------------------

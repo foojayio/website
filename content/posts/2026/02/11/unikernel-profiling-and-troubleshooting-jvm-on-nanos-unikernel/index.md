@@ -40,13 +40,13 @@ application running inside a Nanos unikernel using **JProfiler** and
 
 No special hacks. Just standard JVM tooling.
 
-*** ** * ** ***
+
 
 * Ops (<https://ops.city/>)
 * JProfiler (<https://www.ej-technologies.com/jprofiler>)
 * A Quarkus application packaged as a runnable JAR
 
-*** ** * ** ***
+
 
 We start from a clean Proof of Concept directory:
 
@@ -62,7 +62,7 @@ Directory breakdown:
 * `myQuarkusApp/` → packaged Quarkus runnable JAR
 * `tmp/` → writable directory inside the unikernel
 
-*** ** * ** ***
+
 
 Below is the complete `config.json` used for this setup:
 
@@ -97,7 +97,7 @@ These directories are embedded into the unikernel filesystem:
 * The JProfiler native agent
 * A writable tmp directory
 
-*** ** * ** ***
+
 
 ### Args {#h3-3-args}
 
@@ -120,7 +120,7 @@ Then we launch the application:
 "-jar", "myQuarkusApp/quarkus-faces-runner.jar"
 ```
 
-*** ** * ** ***
+
 
 ### RunConfig {#h3-4-runconfig}
 
@@ -133,7 +133,7 @@ We expose:
 * `8080` → Quarkus HTTP endpoint
 * `8849` → JProfiler agent port
 
-*** ** * ** ***
+
 
 ### BaseVolumeSz {#h3-5-basevolumesz}
 
@@ -143,7 +143,7 @@ We expose:
 
 Allocates 300 MB for the unikernel filesystem.
 
-*** ** * ** ***
+
 
 From the project root directory, run:
 
@@ -163,7 +163,7 @@ There is no separate container or VM runtime.\\
 
 The JVM runs directly inside the unikernel.
 
-*** ** * ** ***
+
 
 When the unikernel starts, you will see:
 
@@ -190,7 +190,7 @@ This confirms:
 * JVMTI available
 * Native agent loaded successfully
 
-*** ** * ** ***
+
 
 Instrumentation Phase {#h2-7-instrumentation-phase}
 ---------------------------------------------------
@@ -206,7 +206,7 @@ This means:
 * Native methods can be instrumented
 * The agent is fully integrated
 
-*** ** * ** ***
+
 
 Final State {#h2-8-final-state}
 -------------------------------
@@ -223,7 +223,7 @@ At this point:
 
 The profiling infrastructure inside the unikernel is fully operational.
 
-*** ** * ** ***
+
 
 Open JProfiler.
 
@@ -266,7 +266,7 @@ Live Objects
 
 ![immagine](jprofiler5LiveMemory-700x344.png)
 
-*** ** * ** ***
+
 
 Unikernels do not remove JVM capabilities.
 
@@ -286,7 +286,7 @@ Profiling works.
 
 The environment (VM, container, unikernel) does not change the JVM instrumentation model.
 
-*** ** * ** ***
+
 
 Profiling a Java application inside a unikernel is straightforward.
 

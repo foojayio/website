@@ -42,12 +42,13 @@ New to GitHub Actions `setup-java@v2` are additional Java build distributions fr
 
 As a devops person or owner of a repository on GitHub you'll need to create a GitHub Actions workflow file. To create an Actions workflow I already provide instructions in Part 2 where you are presented a template using the following code snippet:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml">steps: 
+```yaml
+steps: 
   - uses: actions/checkout@v2 
   - name: Set up JDK ${{ matrix.java-version }} 
-    uses: actions/setup-java@v2 
+    uses: actions/setup-java@v2
+```
 
-</pre>
 
 Here you'll notice the actions/setup-java@v2 is the same uses value, but will now support 2 additional vendor build distributions microsoft and liberica.
 
@@ -56,13 +57,17 @@ Specify a Supported JDK Distribution {#h2-0-specify-a-supported-jdk-distribution
 
 To specify the build distribution you simply add it to the `distribution` attribute as shown below:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml">with:
+```yaml
+with:
   java-version: ${{ matrix.java-version }} 
-  distribution: 'liberica'</pre>
+  distribution: 'liberica'
+```
+
 
 Of course you can create a matrix to specify all the available distributions like the example below:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml">build:
+```yaml
+build:
   runs-on: ubuntu-latest
   strategy:
     matrix:
@@ -77,7 +82,9 @@ Of course you can create a matrix to specify all the available distributions lik
           distribution: ${{ matrix.distribution }}
           cache: maven
     - name: Build with Maven
-      run: mvn -B package --file pom.xml</pre>
+      run: mvn -B package --file pom.xml
+```
+
 
 Above you'll notice the workflow will build and test the repo for JDK 17 on Linux with `zulu`, `microsoft`, and `liberica` distributions.
 
@@ -103,10 +110,13 @@ To keep an eye on new build distributions added you can see the link below:
 
 As a devops person or owner of a repository on GitHub you'll need to create a GitHub Actions workflow file. To create an Actions workflow I already provide instructions in Part 2 where you are presented a template using the following code snippet. But the difference is you want to replace the `uses` attribute value with `foojayio/setup-java@disco`.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml">steps:
+```yaml
+steps:
   - uses: actions/checkout@v2
   - name: Set up JDK ${{ matrix.java-version }}
-    uses: foojayio/setup-java@disco</pre>
+    uses: foojayio/setup-java@disco
+```
+
 
 Specify any JDK Distribution {#h2-1-specify-any-jdk-distribution}
 -----------------------------------------------------------------
@@ -117,13 +127,17 @@ Same as before you would specify the build `distribution` attribute with a parti
 
 Let's look at a build distribution that I chose as it relates to Azul Systems Inc., where we have two different build distributions of the OpenJDK. One is the plain community build and the other namely [Azul Zulu Prime Builds of the OpenJDK](https://www.azul.com/products/components/azul-zulu-prime-builds-of-openjdk/ "Azul Zulu Prime Builds of the OpenJDK") includes specialized high performance features.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml">with: 
+```yaml
+with: 
   java-version: ${{ matrix.java-version }} 
-  distribution: 'zulu_prime'</pre>
+  distribution: 'zulu_prime'
+```
+
 
 Of course you can create a matrix to specify all the available distributions like the example below:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml">disco-build:
+```yaml
+disco-build:
   runs-on: ubuntu-latest
   strategy:
     matrix:
@@ -138,7 +152,9 @@ Of course you can create a matrix to specify all the available distributions lik
         distribution: ${{ matrix.distribution }}
         cache: maven
     - name: Build with Maven
-      run: mvn -B package --file pom.xml</pre>
+      run: mvn -B package --file pom.xml
+```
+
 
 Above you'll notice the workflow will build and test the repo for JDK 17 on Linux with 'zulu', 'zulu_prime', 'liberica', 'microsoft', 'corretto', 'openlogic', 'semeru', 'sap_machine', and 'dragonwell' distributions.
 

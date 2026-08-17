@@ -37,9 +37,11 @@ While writing tests for Repositories that talk to the database, you may think of
 
 There are cases where your embedded solution will not have the full capabilities of the real service, and you won't be able to use those in code and test the functionality. For example, you are using the following native SQL query which works fine with PostgreSQL but not with H2:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="sql" data-enlighter-linenumbers="false">INSERT INTO products(code, name, price)
+```sql
+INSERT INTO products(code, name, price)
 VALUES (?, ?, ?) ON CONFLICT DO NOTHING;
-</pre>
+```
+
 
 When you test this query with the H2 database, by default this syntax is not supported and will throw an error. You can try to run H2 with PostgreSQL compatibility mode and get it working. But, not all the PostgreSQL features are supported by H2 and every time you are writing a query you need to verify that it works with both H2 and PostgreSQL as well. This is an unnecessary effort and leads to low productivity.
 
@@ -47,9 +49,12 @@ When you test this query with the H2 database, by default this syntax is not sup
 
 What is even worse, sometimes you may write a query that works fine with H2 but not with PostgreSQL. This is way worse because your tests will pass and you will deploy the application and it breaks only when you start using it.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="sql" data-enlighter-linenumbers="false">UPDATE products
+```sql
+UPDATE products
 SET name = ?, updated_at = CURRENT_TIMESTAMP()
-where code = ?</pre>
+where code = ?
+```
+
 
 Both of the above mentioned problems can be resolved if you test with the same type of database (ex: PostgreSQL) that you would be using in production.
 
@@ -57,7 +62,8 @@ You can find the sample code for this article in this [GitHub repository](https:
 
 In a Spring Boot application, you can test a Spring Data Repository using PostgreSQL database with Testcontainers for Java very easily as follows:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">@DataJpaTest(properties = {
+```java
+@DataJpaTest(properties = {
    "spring.test.database.replace=none",
    "spring.datasource.url=jdbc:tc:postgresql:15.2-alpine:///db"
 })
@@ -73,7 +79,8 @@ class ProductRepositoryTest {
        repository.upsert(product);
    }
 }
-</pre>
+```
+
 
 By configuring the special Testcontainers JDBC URL, the Testcontainers library will spin up a PostgreSQL container using postgres-15.2-alpine image and execute your tests.  
 
@@ -84,13 +91,14 @@ Local Development with Testcontainers {#h2-3-local-development-with-testcontaine
 
 [Spring Boot 3.1.0 introduced excellent support for Testcontainers](https://www.atomicjar.com/2023/05/spring-boot-3-1-0-testcontainers-for-testing-and-local-development/) that not only simplifies writing tests but also helps in running the application locally during the development time. Now you can start the application dependencies such as databases, message brokers, etc as Docker containers using Testcontainers and run the application.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">@TestConfiguration(proxyBeanMethods = false)
+```java
+@TestConfiguration(proxyBeanMethods = false)
 public class TestApplication {
 
      @Bean
      @ServiceConnection
-     PostgreSQLContainer&lt;?&gt; postgresContainer() {
-        return new  PostgreSQLContainer&lt;&gt;( DockerImageName.parse("postgres:latest"));
+     PostgreSQLContainer<?> postgresContainer() {
+        return new  PostgreSQLContainer<>( DockerImageName.parse("postgres:latest"));
      }
 
     public static void main(String[] args) {
@@ -100,7 +108,8 @@ public class TestApplication {
                 .run(args);
      }
 }
-</pre>
+```
+
 
 Getting Started with Testcontainers Desktop {#h2-4-getting-started-with-testcontainers-desktop}
 -----------------------------------------------------------------------------------------------
@@ -133,16 +142,22 @@ Click on **Testcontainers Desktop** -\> select **Services** -\> **Open config lo
 
 In the opened directory there would be a **postgres.toml.example** file. Rename it to **postgres.toml** file and it should contain the following configuration:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-linenumbers="false">ports = [
+```
+ports = [
     {local-port = 5432, container-port = 5432},
 ]
-selector.image-names = ["postgres"]</pre>
+selector.image-names = ["postgres"]
+```
+
 
 We can configure the image selector by listing all the supported Docker image name(s). You can configure any PostgreSQL compatible images. We are mapping the PostgreSQL container's port 5432 onto the host's port 5432.
 
 Now you should be able to connect to the PostgreSQL database running as a Docker container from the command line using the following command:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash" data-enlighter-linenumbers="false">$ psql -h localhost -p 5432 -U test -d test</pre>
+```bash
+$ psql -h localhost -p 5432 -U test -d test
+```
+
 
 The ability to use fixed ports and connect to those services is very helpful during the development time without trading off the dynamic configuration Testcontainers provide or the ability to run your tests in parallel.
 
@@ -156,11 +171,13 @@ Since you are using the **Testcontainers Desktop** , the `testcontainers.reuse.e
 
 When the reuse feature is enabled, you only need to configure which containers should be reused using the Testcontainers API. While using **Testcontainers for Java** you can achieve this using `.withReuse(true)` as follows:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">PostgreSQLContainer&lt;?&gt; postgresContainer() {
-   return new PostgreSQLContainer&lt;&gt;("postgres:15.2-alpine")
+```java
+PostgreSQLContainer<?> postgresContainer() {
+   return new PostgreSQLContainer<>("postgres:15.2-alpine")
            .withReuse(true);
 }
-</pre>
+```
+
 
 When you spin up a container with reuse, a hash is calculated based on the container's configuration. When you request another container with the same configuration which yields the same hash value, then the existing container will be reused instead of creating a new container.
 

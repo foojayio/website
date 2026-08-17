@@ -106,7 +106,8 @@ Sample usage {#h2-6-sample-usage}
 
 Here's a simple example about how to map your Pulsar Topic to a Cassandra table:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">configs:
+```
+configs:
  topics: mytopic 
  ignoreErrors: None
  ......
@@ -128,8 +129,8 @@ Here's a simple example about how to map your Pulsar Topic to a Cassandra table:
        date: ISO_LOCAL_DATE
        time: ISO_LOCAL_TIME
        unit: MILLISECONDS
+```
 
-</pre>
 
 Here we are reading AVRO or JSON encoded messages from the *mytopic* topic and we are writing to the *mykeyspace.mytable* table on Cassandra. (The connection, security, and performance configurations are omitted in order to focus on the mapping features.)  
 

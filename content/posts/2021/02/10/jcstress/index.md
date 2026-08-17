@@ -30,7 +30,8 @@ The OpenJDK provides this amazing tool to test the correctness of your concurren
 
 We configure JCStress tests using annotations provided by the JCStress framework. The following are important annotations help us to understand our first JCStress test:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">@Actor: Annotates methods that hold the actions done by the threads.
+```java
+@Actor: Annotates methods that hold the actions done by the threads.
 
 @State: Annotates the class that holds the data mutated/read by the tests.
 
@@ -38,11 +39,14 @@ We configure JCStress tests using annotations provided by the JCStress framework
 
 @JCStressTest: Marks the class as a JCStress test.
 
-@Outcome: Describes the test outcome, and how to deal with it.</pre>
+@Outcome: Describes the test outcome, and how to deal with it.
+```
+
 
 This is a basic example of the JCStress test using the annotations above:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">@JCStressTest
+```java
+@JCStressTest
 
 // These are the test outcomes.
 @Outcome(id = "1, 1", expect = Expect.ACCEPTABLE_INTERESTING, desc = "Both actors came up with the same value: atomicity failure.")
@@ -65,7 +69,9 @@ public class APISample_01_Simple {
         r.r2 = ++v; // record result from actor2 to field r2
     }
 
-}</pre>
+}
+```
+
 
 Following are few important points about the above test:
 
@@ -87,31 +93,43 @@ To use jcstress in your project, it is recommended to create the submodule with 
 
 Easy and quick way to create jcstress project is to create a standalone JCStress project using maven archetype, for this you need maven and JDK 8+.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">mvn archetype:generate \
+```
+mvn archetype:generate \
  -DinteractiveMode=false \
  -DarchetypeGroupId=org.openjdk.jcstress \
  -DarchetypeArtifactId=jcstress-java-test-archetype \
  -DgroupId=com.jfeatures \
  -DartifactId=jcstresstest \
- -Dversion=1.0</pre>
+ -Dversion=1.0
+```
+
 
 [This](https://github.com/Vipin-Sharma/jcstresstest) is a Github project created using the above command.
 
 Running tests, if we have not created any test it will execute default test available.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">cd jcstresstest
+```java
+cd jcstresstest
 mvn clean install
-java -jar target/jcstress.jar</pre>
+java -jar target/jcstress.jar
+```
+
 
 In case we want to execute a particular test use -t option like below
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">java -jar target/jcstress.jar -t ConcurrencyTest</pre>
+```
+java -jar target/jcstress.jar -t ConcurrencyTest
+```
+
 
 Open test report:
 
 `firefox results/index.html`
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">firefox results/index.html</pre>
+```java
+firefox results/index.html
+```
+
 
 ### More JCStress APIs {#h3-2-more-jcstress-apis}
 
@@ -123,7 +141,8 @@ JCStress ships lots of pre-canned result classes. e.g. II_Result and III_Result,
 
 The following is a list of different letters used in JCStress result classes.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">I:  int
+```
+I:  int
 Z:  boolean
 F:  float
 J:  long
@@ -131,7 +150,9 @@ S:  short
 B:  byte
 C:  char
 D:  double
-L:  object</pre>
+L:  object
+```
+
 
 With the help of this, we can try to find a pre canned Result class in JCStress, for example:
 
@@ -151,8 +172,11 @@ JCStress also allows putting the descriptions and references right at the test. 
 
 Following are the annotations to add the descriptions and references:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">@Description("Sample Hello World test")
-@Ref("http://openjdk.java.net/projects/code-tools/jcstress/")</pre>
+```java
+@Description("Sample Hello World test")
+@Ref("http://openjdk.java.net/projects/code-tools/jcstress/")
+```
+
 
 ### JCStress Options {#h3-3-jcstress-options}
 
@@ -169,22 +193,31 @@ Following are the annotations to add the descriptions and references:
 
 JCStress has got a couple of helpful command line options, we can pass option -h to get a full list of command line options.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">java -jar target/jcstress.jar -h</pre>
+```
+java -jar target/jcstress.jar -h
+```
+
 
 Some important options are:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">Modes (-m)
+```
+Modes (-m)
 Test name(-t)
 verbose result (-v)
-Number of CPUs used (-c)</pre>
+Number of CPUs used (-c)
+```
+
 
 ***option -m***sets the test mode, from sanity to stress, going from simple test to more rigorous, and for concurrency issues more rigorous is more helpful. At least once we should run our test with stress option, and then we can run tests in the quick mode as part of CI. Following are sample commands to run different modes:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">java -jar target/jcstress.jar -t ConcurrencyTest -m sanity
+```
+java -jar target/jcstress.jar -t ConcurrencyTest -m sanity
 java -jar target/jcstress.jar -t ConcurrencyTest -m quick
 java -jar target/jcstress.jar -t ConcurrencyTest -m default
 java -jar target/jcstress.jar -t ConcurrencyTest -m tough
-java -jar target/jcstress.jar -t ConcurrencyTest -m stress</pre>
+java -jar target/jcstress.jar -t ConcurrencyTest -m stress
+```
+
 
 ### Conclusion {#h3-4-conclusion}
 

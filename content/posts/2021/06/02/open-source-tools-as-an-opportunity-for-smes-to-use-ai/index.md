@@ -145,7 +145,7 @@ In general, SMEs can be recommended to increase their research activities in the
 
 Artificial Intelligence was, is and will be a relevant topic of digitalization. Therefore, not only SMEs, but all companies should follow this trend and implement AI in their companies.
 
-*** ** * ** ***
+
 
 Sources {#h2-8-sources}
 -----------------------

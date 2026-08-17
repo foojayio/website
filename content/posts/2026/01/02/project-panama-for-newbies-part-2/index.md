@@ -48,14 +48,17 @@ Before we look at the advantages of using pointers in the C language let's look 
 
 For example: `int x = 5;`
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public static void main(String[] args) {   
+```java
+public static void main(String[] args) {   
    int x = 5;
    x = doubleIt(x); // x = 10
 }
 
 public static int doubleIt(int a) {
    return 2 * a;
-}</pre>
+}
+```
+
 
 In the Java language, there are two places to store *things* in memory, in the JVM **heap** and in the JVM **stack** . The heap is responsible for holding **objects** along with their primitive values. While inside a method the variables declared as primitive data types are stored in **stack** memory.
 
@@ -69,21 +72,22 @@ In the C the language you can declare variables that allow you to pass primative
 
 A file `pointers.c` contains the code below:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="c" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">#include &lt;stdio.h&gt;
+```c
+#include <stdio.h>
 
 int doubleIt(int *a);
 
 int main () {
    int x = 5;
    int *ptr; // 1. Declare a pointer of type int.
-   ptr = &amp;x; // 2. Assign a pointer variable to the address of x.
+   ptr = &x; // 2. Assign a pointer variable to the address of x.
 
    // Display locations in memory
-   printf("                                    Address of x variable: %x\n", &amp;x );
+   printf("                                    Address of x variable: %x\n", &x );
    printf("                           Address stored in ptr variable: %x\n", ptr );
 
    // Call doubleIt() by reference
-   printf("               Address of the variable x. Call doubleIt(): %d\n", doubleIt(&amp;x) );
+   printf("               Address of the variable x. Call doubleIt(): %d\n", doubleIt(&x) );
    printf("Pointer to the address of the variable x. Call doubleIt(): %d\n", doubleIt(ptr) );
 
 }
@@ -95,22 +99,33 @@ int main () {
  */
 int doubleIt(int *a) {
    return 2 * (*a); // two times the value at address (of pointer a).
-}</pre>
+}
+```
+
 
 To compile `pointers.c` file use the following:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="shell" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ clang -o pointers_exe pointers.c</pre>
+```bash
+$ clang -o pointers_exe pointers.c
+```
+
 
 To run the executable file type the following:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="shell" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ ./pointers_exe</pre>
+```bash
+$ ./pointers_exe
+```
+
 
 The output is the following:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">                                    Address of x variable: e36584dc
+```
+                                    Address of x variable: e36584dc
                            Address stored in ptr variable: e36584dc
                Address of the variable x. Call doubleIt(): 10
-Pointer to the address of the variable x. Call doubleIt(): 10</pre>
+Pointer to the address of the variable x. Call doubleIt(): 10
+```
+
 
 In the example a you will notice the output showing the actual address in memory for `&x` and `ptr`. The last two output lines show how to pass parameters to C functions **by reference** as opposed to **by value**.
 
@@ -144,12 +159,15 @@ Whenever you think of a C pointer think of it as just an **address** location in
 
 At its core Panama is capable of modeling primitives and complex datatypes using the classes `ValueLayout` or `MemoryLayout` respectively. Remember in [Part 1](https://foojay.io/today/project-panama-for-newbies-part-1/) we used the `MemorySession` to allocate a `JAVA_INT` (`ValueLayout`) that further creates a `MemorySegment` instance. To mimic or simulate the concept of a C pointer, you can call the address() method returns the address in memory as a `long`. The listing below shows how to mimic C's concept of pointers in Java.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">try (var arena = Arena.ofConfined()) {
+```java
+try (var arena = Arena.ofConfined()) {
    // int x = 5;
    MemorySegment x = arena.allocateFrom(JAVA_INT, 5);
    // int *ptr;
    long address = x.address();
-}</pre>
+}
+```
+
 
 ### Dereferencing a Pointer {#h3-4-dereferencing-a-pointer}
 
@@ -161,7 +179,8 @@ In Panama you will need to specify a base **offset** (size) to properly retrieve
 
 The code below demonstrates the retrieval of an `int` value based on a C primitive `ValueLayout` type (`C_INT`) generated by extract. For example if the variable `x` is of type `int` from `x`'s location in memory the code will grab **4** bytes. If it's of type `long` the code would grab **8** bytes. Below is an example of how to reference and dereference a pointer:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">// ptr = &amp;x; the address of x in memory as a long value.
+```java
+// ptr = &x; the address of x in memory as a long value.
 long ptr = address; 
 
 // Create a memory segment at the ptr's address and reinterpret byte size as 4 bytes (interpreted as a pointer to an int).
@@ -170,13 +189,16 @@ MemorySegment ptrMemSeg =  MemorySegment.ofAddress(ptr).reinterpret(4);
 // (*ptr) known as dereferencing a pointer and retrieve value at address. The second parameter denotes the offset to read from.
 int value = x.get(C_INT, 0L);
 
-// value = 5 </pre>
+// value = 5
+```
+
 
 Let's piece things all together.
 
 The listing below explains a full example of mimicking C's concept of pointers. Similar to code snippets above, we can create variables and pointer references. The code will also change the value of the variable `x` and output the value that `ptr` (address) is pointing to (address location of `x`).
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">try (var arena = Arena.ofConfined()) {
+```java
+try (var arena = Arena.ofConfined()) {
         out.println("\nCreating Pointers:");
 
         // int x = 5;
@@ -185,7 +207,7 @@ The listing below explains a full example of mimicking C's concept of pointers. 
         // int *ptr;
         long address = x.address();             // obtain address
 
-        // ptr = &amp;x;
+        // ptr = &x;
         long ptr = address;
 
         // Create a memory segment at ptr's address and reinterpret size as 4 bytes (primitive int).
@@ -202,15 +224,20 @@ The listing below explains a full example of mimicking C's concept of pointers. 
         // Output after change
         out.printf("           x = %d    address = %x %n", x.get(JAVA_INT, 0), x.address());
         out.printf(" ptr's value = %d    address = %x %n", ptrMemSeg.get(JAVA_INT, 0), ptrMemSeg.address());
-}</pre>
+}
+```
+
 
 The output of listing above:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="raw" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">           x = 5    address = 7fedece135e0 
+```
+           x = 5    address = 7fedece135e0 
  ptr's value = 5    address = 7fedece135e0 
  Changing x's value to: 10 
            x = 10    address = 7fedece135e0 
- ptr's value = 10    address = 7fedece135e0 </pre>
+ ptr's value = 10    address = 7fedece135e0
+```
+
 
 In Java there is no notion of a C pointer but simply thought of as a 64 bit memory address (modern hardware). To obtain the address and value at a specified memory location you will call the `ofAddress(long)` and `reinterpret(byte size)` to generate a `MemorySegement` object.
 
@@ -227,7 +254,8 @@ To put it simply, this is the ancestor to Java's concept of classes or [records]
 
 Let's explore C language's `struct`. Below is a simple example of a `struct` `Point` containing `x` and `y `coordinates.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="c" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">#include &lt;stdio.h&gt;
+```c
+#include <stdio.h>
 
 struct Point {
   int x;
@@ -239,18 +267,26 @@ int main () {
    pt.x = 100;
    pt.y = 50;
    printf("Point pt = (%d, %d) \n",  pt.x, pt.y);
-}</pre>
+}
+```
+
 
 The output is the following:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="raw" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">Point pt = (100, 50)</pre>
+```
+Point pt = (100, 50)
+```
+
 
 In the above example you will notice the keyword `struct` is used to define complex datatypes. In this scenario a Point is defined as two `int` variables named `x` and `y`. To declare a variable of type point the keyword is also specified or prefixed i.e. `struct Point pt;`.
 
 To assign values to a struct instance, it is similar to Java, where the dot is used to access the attribute.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="c" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">pt.x = 100;
-pt.y = 50;</pre>
+```c
+pt.x = 100;
+pt.y = 50;
+```
+
 
 An interesting thing to note that in C there isn't the keyword "`new`" like in Java. Actually, in C++ it introduces the keyword `new`.
 
@@ -259,26 +295,35 @@ C Structs Panama-fied {#h2-7-c-structs-panama-fied}
 
 Now that we know how things work in the C world, let's look at how to mimic C's concept of structs in Java Panama. To create C language's `struct` using Panama, we'll be invoking the static method `MemoryLayout.structLayout()`. This method creates an object of type `GroupLayout`. A `GroupLayout` object will describe a memory layout similar to the `Point` struct defined in C above. The method accepts `ValueLayout` and other `MemoryLayout` instances such as `C_INT` variables used for `x` and `y` coordinates of the `Point` struct. Shown below is how to create one C `Point` struct.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">GroupLayout pointStruct = MemoryLayout.structLayout(
+```java
+GroupLayout pointStruct = MemoryLayout.structLayout(
    C_INT.withName("x"),
    C_INT.withName("y")
 );
 
-var cPoint = arena.allocate(pointStruct);</pre>
+var cPoint = arena.allocate(pointStruct);
+```
+
 
 Next, we need to **set** and **get** values from the `cPoint` instance. Below we use the method `varHandle()` to describe the path to the bytes in memory. I will describe it in more detail later, but for now think of it as a way to walk through memory to set and get data based on a memory layout.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">VarHandle VHx = pointStruct.varHandle(MemoryLayout.PathElement.groupElement("x"));
+```java
+VarHandle VHx = pointStruct.varHandle(MemoryLayout.PathElement.groupElement("x"));
 VarHandle VHy = pointStruct.varHandle(MemoryLayout.PathElement.groupElement("y"));
 
 VHx.set(cPoint, 0L, 100); // MemorySegment, base offset, int
 VHy.set(cPoint, 0L, 200);
 
-System.out.printf("cPoint = (%d, %d) \n",  VHx.get(cPoint, 0L), VHy.get(cPoint, 0L));</pre>
+System.out.printf("cPoint = (%d, %d) \n",  VHx.get(cPoint, 0L), VHy.get(cPoint, 0L));
+```
+
 
 This will output the following:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="raw" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">cPoint = (100, 200)</pre>
+```
+cPoint = (100, 200)
+```
+
 
 What's a java.lang.invoke.[VarHandle](https://openjdk.java.net/jeps/193)? {#h2-8-what-s-a-java-lang-invoke-varhandle}
 ---------------------------------------------------------------------------------------------------------------------
@@ -300,75 +345,102 @@ Sequence of Structs {#h2-9-sequence-of-structs}
 
 Before we look at how to create an array of structs let's look at how to define them in C. Below is a sequence or an array of 5 `Point` `struct`s. The array variable is named `points`.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="c" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">struct Point {
+```c
+struct Point {
   int x;
   int y;
-} points[5];</pre>
+} points[5];
+```
+
 
 To iterate over an array of structs in C code the following code sets and gets data.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="c" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">// sets data
-for (int i=0; i&lt;5; i++) {
+```c
+// sets data
+for (int i=0; i<5; i++) {
   points[i].x = 100 + i;
   points[i].y = 200 + i;
 }
 
 // gets data
-for (int i=0; i&lt;5; i++) {
+for (int i=0; i<5; i++) {
   printf("Point pt = (%3d, %3d) \n",  points[i].x, points[i].y);
-}</pre>
+}
+```
+
 
 Output is the following:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="raw" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">Point pt = (100, 50) 
+```
+Point pt = (100, 50) 
 Point pt = (100, 200) 
 Point pt = (101, 201) 
 Point pt = (102, 202) 
 Point pt = (103, 203) 
-Point pt = (104, 204) </pre>
+Point pt = (104, 204)
+```
+
 
 Now that you know how to declare, create and access an array of structs in C, let's look at how to create a sequence of struct instances in Java Panama. To create a sequence of structs in Panama you will need the handy method `MemoryLayout.sequenceLayout()`.
 
 Again, these methods help you create `MemoryLayout` objects responsible for describing how space should be allocated in memory. The code snipet below creates a memory layout (`SequenceLayout`) ready for the allocator.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">SequenceLayout seqStruct = MemoryLayout.sequenceLayout(5, pointStruct);</pre>
+```java
+SequenceLayout seqStruct = MemoryLayout.sequenceLayout(5, pointStruct);
+```
+
 
 The `seqStruct` describes a memory layout as a sequence of 5 Point structs. Notice that the code reuses the already defined `pointStruct` instance defined earlier (of type `GroupLayout`). Now, let's allocate the space in memory.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">MemorySegment points = arena.allocate(seqStruct);</pre>
+```java
+MemorySegment points = arena.allocate(seqStruct);
+```
+
 
 Similar to using `VarHandle` and `PathElement`s to access variables in memory (getters/setters) the code below creates a `VarHandle` instance that is able to access the sequence of structs and their x and y fields in memory:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">var VHSeq_x = seqStruct.varHandle(
+```java
+var VHSeq_x = seqStruct.varHandle(
                 MemoryLayout.PathElement.sequenceElement(),
                 MemoryLayout.PathElement.groupElement("x"));
 var VHSeq_y = seqStruct.varHandle(
                 MemoryLayout.PathElement.sequenceElement(),
-                MemoryLayout.PathElement.groupElement("y"));</pre>
+                MemoryLayout.PathElement.groupElement("y"));
+```
+
 
 Now we can iterate through the sequence to set point instances and their x and y coordinates. The code listing below uses a random number generator to supply values to be set for coordinates `(x, y)`.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">Random random = new Random();
-for(long i=0; i&lt;seqStruct.elementCount().getAsLong(); i++) {
+```java
+Random random = new Random();
+for(long i=0; i<seqStruct.elementCount().getAsLong(); i++) {
   VHSeq_x.set(points, 0L, i, random.nextInt(100)); // MemorySegment, base offset, index i, int
   VHSeq_y.set(points, 0L, i, random.nextInt(100));
-}</pre>
+}
+```
+
 
 Above you'll notice the call to `seqStruct.elementCount().getAsLong()`. This allows you to obtain the number of items in the sequence of structs (`SequenceLayout`).
 
 To output the contents of the sequence of `Point` structs the following code will invoke the `VarHandle`'s get method as shown below:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">for(long i=0; i&lt;seqStruct.elementCount().getAsLong(); i++) {
+```java
+for(long i=0; i<seqStruct.elementCount().getAsLong(); i++) {
   System.out.printf(" points[%d] = (%2d, %3d) \n", i, VHSeq_x.get(points, 0L, i), VHSeq_y.get(points, 0L, i));
-}</pre>
+}
+```
+
 
 The output is the following:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="raw" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group=""> points[0] = (30,  50) 
+```
+ points[0] = (30,  50) 
  points[1] = (92,  59) 
  points[2] = (44,  31) 
  points[3] = (43,  80) 
- points[4] = (55,  12) </pre>
+ points[4] = (55,  12)
+```
+
 
 There you have it, C pointers and C structs in Java!
 

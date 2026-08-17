@@ -156,6 +156,6 @@ Thanks to Simon and other 10x professionals I continue to learn new ways of thin
 
 Change is always a challenge - but this switch is one of the best ways to modernise how you 'do' development. It requires a little faith initially, but the data-driven approach and acceptance of portable tests will pay dividends over time.
 
-*** ** * ** ***
+
 
 If you want to learn more about other ways to think differently about software, sign up to the [10XInsights Newsletter](https://www.linkedin.com/build-relation/newsletter-follow?entityUrn=7242495495711899650) on LinkedIn.

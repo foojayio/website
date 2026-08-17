@@ -67,7 +67,8 @@ Just like in [Part 1](https://foojay.io/today/github-actions-with-java-part-1/) 
 
 As shown below is a matrix to build using various JDK versions with `zulu` as its distribution.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yml" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">name: Java CI with Maven
+```yaml
+name: Java CI with Maven
 
 on:
   push:
@@ -91,7 +92,9 @@ jobs:
         distribution: 'zulu'
         cache: maven
     - name: Build with Maven
-      run: mvn -B package --file pom.xml</pre>
+      run: mvn -B package --file pom.xml
+```
+
 
 1. Added is a matrix for the `java-version` attribute containing an array of fixed JDK versions, Latest LTS JDK versions, and an non-LTS JDK version (Early access release).
 

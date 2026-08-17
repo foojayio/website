@@ -63,18 +63,24 @@ Movie data (from the MongoDB [sample dataset](https://www.mongodb.com/docs/atlas
 
 You first need to confirm that the Inception document exists in the dataset and that embeddings are present. This provides metadata for context and the vector that drives semantic similarity.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">db.getSiblingDB("sample_mflix").embedded_movies.find({ title: "Inception" },{ title: 1, year: 1, genres: 1, imdb: 1, plot: 1, plot_embedding: 1})</pre>
+```
+db.getSiblingDB("sample_mflix").embedded_movies.find({ title: "Inception" },{ title: 1, year: 1, genres: 1, imdb: 1, plot: 1, plot_embedding: 1})
+```
+
 
 The query should return:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">{
-&nbsp;&nbsp;"title": "Inception",
-&nbsp;&nbsp;"year": 2010,
-&nbsp;&nbsp;"genres": ['Action', 'Mystery', 'Sci-Fi'],
-&nbsp;&nbsp;"imdb": { rating: 8.8, votes: 1294646, id: 1375666 },
-&nbsp;&nbsp;"plot": "A thief who steals corporate secrets through the use of dream-sharing technology is given the inverse task of planting an idea into the mind of a C.E.O.",
-&nbsp;&nbsp;"plot_embedding": &lt;Binary Data, 1536 dimensions&gt;
-}</pre>
+```
+{
+  "title": "Inception",
+  "year": 2010,
+  "genres": ['Action', 'Mystery', 'Sci-Fi'],
+  "imdb": { rating: 8.8, votes: 1294646, id: 1375666 },
+  "plot": "A thief who steals corporate secrets through the use of dream-sharing technology is given the inverse task of planting an idea into the mind of a C.E.O.",
+  "plot_embedding": <Binary Data, 1536 dimensions>
+}
+```
+
 
 The presence of **plot_embedding** confirms this document can serve as a query vector.
 
@@ -82,39 +88,48 @@ The presence of **plot_embedding** confirms this document can serve as a query v
 
 You need a [vector index](https://www.mongodb.com/docs/manual/reference/command/createsearchindexes/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=hybrid-search-foojay&utm_term=megan.grant) on [plot_embedding](https://www.mongodb.com/docs/atlas/sample-data/sample-mflix/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=hybrid-search-foojay&utm_term=megan.grant#std-label-mflix-embedded_movies), and you need embeddings stored in BSON Binary (Float32). If the index does not exist, create it (check this article 👉 [how](https://www.linkedin.com/pulse/from-zero-vector-hero-locally-arek-borucki-w5otf/?trackingId=xNlcCImhQCC0HsnlThlQFg%3D%3D)). Otherwise, verify it's READY.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">// Check that the vector search index is available
-db.getSiblingDB("sample_mflix").embedded_movies.getSearchIndexes()</pre>
+```
+// Check that the vector search index is available
+db.getSiblingDB("sample_mflix").embedded_movies.getSearchIndexes()
+```
+
 
 Expected output:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">{
-&nbsp;&nbsp;&nbsp;&nbsp;id: '68983b85c2c844543026fa6a',
-&nbsp;&nbsp;&nbsp;&nbsp;name: 'plot_embedding_index',
-&nbsp;&nbsp;&nbsp;&nbsp;type: 'search',
-&nbsp;&nbsp;&nbsp;&nbsp;status: 'READY',
-&nbsp;&nbsp;&nbsp;&nbsp;queryable: true,
-&nbsp;&nbsp;&nbsp;&nbsp;latestVersion: 0,
-&nbsp;&nbsp;&nbsp;&nbsp;latestDefinition: {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;mappings: {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dynamic: false,
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fields: {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;plot_embedding: { type: 'knnVector', dimensions: 1536, similarity: 'cosine' }
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
-&nbsp;&nbsp;&nbsp;&nbsp;}
-&nbsp;&nbsp;}
-]</pre>
+```
+{
+    id: '68983b85c2c844543026fa6a',
+    name: 'plot_embedding_index',
+    type: 'search',
+    status: 'READY',
+    queryable: true,
+    latestVersion: 0,
+    latestDefinition: {
+      mappings: {
+        dynamic: false,
+        fields: {
+          plot_embedding: { type: 'knnVector', dimensions: 1536, similarity: 'cosine' }
+        }
+      }
+    }
+  }
+]
+```
+
 
 ### Step 1: Prepare the query vector {#h3-5-step-1-prepare-the-query-vector}
 
 MongoDB stores embeddings compactly as BSON Binary (Float32) for storage and indexing efficiency, while [$vectorSearch](https://www.mongodb.com/docs/atlas/atlas-vector-search/vector-search-stage/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=hybrid-search-foojay&utm_term=megan.grant#mongodb-pipeline-pipe.-vectorSearch) expects the queryVector as a plain [JavaScript array](https://www.w3schools.com/js/js_arrays.asp). You need to extract and convert it at query time.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">const d = db.getSiblingDB("sample_mflix").embedded_movies.findOne(
-&nbsp;&nbsp;{ title: "Inception" },
-&nbsp;&nbsp;{ plot_embedding: 1, _id: 0 }
+```
+const d = db.getSiblingDB("sample_mflix").embedded_movies.findOne(
+  { title: "Inception" },
+  { plot_embedding: 1, _id: 0 }
 )
 
-const qv = Array.from(d.plot_embedding.toFloat32Array())</pre>
+const qv = Array.from(d.plot_embedding.toFloat32Array())
+```
+
 
 Here, **qv** becomes a 1,536-element JavaScript array representing the semantic meaning of Inception.
 
@@ -122,53 +137,56 @@ Here, **qv** becomes a 1,536-element JavaScript array representing the semantic 
 
 With the query vector ready (**qv** ), you search for movies whose **plots are conceptually similar** to *Inception---*for example, titles involving dream manipulation, layered realities, high-stakes heists, or unreliable perception. This step ignores exact keywords and measures conceptual closeness.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">db.getSiblingDB("sample_mflix").embedded_movies.aggregate([
-&nbsp;&nbsp;{
-&nbsp;&nbsp;&nbsp;&nbsp;$vectorSearch: {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;index: "plot_embedding_index",
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;path: "plot_embedding",
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;queryVector: qv,
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;numCandidates: 200,
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;limit: 5
-&nbsp;&nbsp;&nbsp;&nbsp;}
-&nbsp;&nbsp;},
-&nbsp;&nbsp;{ $match: { title: { $ne: "Inception" } } },
-&nbsp;&nbsp;{
-&nbsp;&nbsp;&nbsp;&nbsp;$project: {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;title: 1,
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;year: 1,
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;genres: 1,
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;score: { $meta: "vectorSearchScore" },
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_id: 0
-&nbsp;&nbsp;&nbsp;&nbsp;}
-&nbsp;&nbsp;}
+```
+db.getSiblingDB("sample_mflix").embedded_movies.aggregate([
+  {
+    $vectorSearch: {
+      index: "plot_embedding_index",
+      path: "plot_embedding",
+      queryVector: qv,
+      numCandidates: 200,
+      limit: 5
+    }
+  },
+  { $match: { title: { $ne: "Inception" } } },
+  {
+    $project: {
+      title: 1,
+      year: 1,
+      genres: 1,
+      score: { $meta: "vectorSearchScore" },
+      _id: 0
+    }
+  }
 ])
 [
-&nbsp;&nbsp;{
-&nbsp;&nbsp;&nbsp;&nbsp;year: 2001,
-&nbsp;&nbsp;&nbsp;&nbsp;genres: [ 'Action', 'Crime', 'Thriller' ],
-&nbsp;&nbsp;&nbsp;&nbsp;title: 'Swordfish',
-&nbsp;&nbsp;&nbsp;&nbsp;score: 0.931791365146637
-&nbsp;&nbsp;},
-&nbsp;&nbsp;{
-&nbsp;&nbsp;&nbsp;&nbsp;genres: [ 'Fantasy', 'Sci-Fi' ],
-&nbsp;&nbsp;&nbsp;&nbsp;title: 'The City of Lost Children',
-&nbsp;&nbsp;&nbsp;&nbsp;year: 1995,
-&nbsp;&nbsp;&nbsp;&nbsp;score: 0.9285156726837158
-&nbsp;&nbsp;},
-&nbsp;&nbsp;{
-&nbsp;&nbsp;&nbsp;&nbsp;year: 2013,
-&nbsp;&nbsp;&nbsp;&nbsp;genres: [ 'Action', 'Crime', 'Thriller' ],
-&nbsp;&nbsp;&nbsp;&nbsp;title: 'Parker',
-&nbsp;&nbsp;&nbsp;&nbsp;score: 0.9258596897125244
-&nbsp;&nbsp;},
-&nbsp;&nbsp;{
-&nbsp;&nbsp;&nbsp;&nbsp;year: 1999,
-&nbsp;&nbsp;&nbsp;&nbsp;genres: [ 'Action', 'Adventure', 'Comedy' ],
-&nbsp;&nbsp;&nbsp;&nbsp;title: 'Inspector Gadget',
-&nbsp;&nbsp;&nbsp;&nbsp;score: 0.9235274791717529
-&nbsp;&nbsp;}
-]</pre>
+  {
+    year: 2001,
+    genres: [ 'Action', 'Crime', 'Thriller' ],
+    title: 'Swordfish',
+    score: 0.931791365146637
+  },
+  {
+    genres: [ 'Fantasy', 'Sci-Fi' ],
+    title: 'The City of Lost Children',
+    year: 1995,
+    score: 0.9285156726837158
+  },
+  {
+    year: 2013,
+    genres: [ 'Action', 'Crime', 'Thriller' ],
+    title: 'Parker',
+    score: 0.9258596897125244
+  },
+  {
+    year: 1999,
+    genres: [ 'Action', 'Adventure', 'Comedy' ],
+    title: 'Inspector Gadget',
+    score: 0.9235274791717529
+  }
+]
+```
+
 
 Semantic search finds thematically close titles, but ranking does not yet reflect quality.
 
@@ -176,80 +194,86 @@ Semantic search finds thematically close titles, but ranking does not yet reflec
 
 You need to combine semantic similarity with IMDb ratings to boost well-reviewed titles. This ensures results are not only close in meaning but also valued by audiences.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">db.getSiblingDB("sample_mflix").embedded_movies.aggregate([
-&nbsp;&nbsp;{
-&nbsp;&nbsp;&nbsp;&nbsp;$vectorSearch: {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;index: "plot_embedding_index",
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;path: "plot_embedding",
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;queryVector: qv,
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;numCandidates: 1500,
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;limit: 100
-&nbsp;&nbsp;&nbsp;&nbsp;}
-&nbsp;&nbsp;},
-&nbsp;&nbsp;{ $match: { year: { $gte: 1990 }, title: { $ne: "Inception" } } },
-&nbsp;&nbsp;{
-&nbsp;&nbsp;&nbsp;&nbsp;$addFields: {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;hybridScore: {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$add: [
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{ $multiply: [ { $meta: "vectorSearchScore" }, 0.7 ] },
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{ $multiply: [ { $divide: ["$imdb.rating", 10] }, 0.3 ] }
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;]
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
-&nbsp;&nbsp;&nbsp;&nbsp;}
-&nbsp;&nbsp;},
-&nbsp;&nbsp;{ $sort: { hybridScore: -1 } },
-&nbsp;&nbsp;{ $limit: 5 },
-&nbsp;&nbsp;{
-&nbsp;&nbsp;&nbsp;&nbsp;$project: {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;title: 1,
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;year: 1,
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;imdb: 1,
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;hybridScore: 1,
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;score: { $meta: "vectorSearchScore" },
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_id: 0
-&nbsp;&nbsp;&nbsp;&nbsp;}
-&nbsp;&nbsp;}
-])</pre>
+```
+db.getSiblingDB("sample_mflix").embedded_movies.aggregate([
+  {
+    $vectorSearch: {
+      index: "plot_embedding_index",
+      path: "plot_embedding",
+      queryVector: qv,
+      numCandidates: 1500,
+      limit: 100
+    }
+  },
+  { $match: { year: { $gte: 1990 }, title: { $ne: "Inception" } } },
+  {
+    $addFields: {
+      hybridScore: {
+        $add: [
+          { $multiply: [ { $meta: "vectorSearchScore" }, 0.7 ] },
+          { $multiply: [ { $divide: ["$imdb.rating", 10] }, 0.3 ] }
+        ]
+      }
+    }
+  },
+  { $sort: { hybridScore: -1 } },
+  { $limit: 5 },
+  {
+    $project: {
+      title: 1,
+      year: 1,
+      imdb: 1,
+      hybridScore: 1,
+      score: { $meta: "vectorSearchScore" },
+      _id: 0
+    }
+  }
+])
+```
+
 
 Example results:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">[
-&nbsp;&nbsp;{
-&nbsp;&nbsp;&nbsp;&nbsp;imdb: { rating: 8.7, votes: 1080566, id: 133093 },
-&nbsp;&nbsp;&nbsp;&nbsp;year: 1999,
-&nbsp;&nbsp;&nbsp;&nbsp;title: 'The Matrix',
-&nbsp;&nbsp;&nbsp;&nbsp;hybridScore: 0.9070646867752075,
-&nbsp;&nbsp;&nbsp;&nbsp;score: 0.9229495525360107
-&nbsp;&nbsp;},
-&nbsp;&nbsp;{
-&nbsp;&nbsp;&nbsp;&nbsp;title: 'Athadu',
-&nbsp;&nbsp;&nbsp;&nbsp;year: 2005,
-&nbsp;&nbsp;&nbsp;&nbsp;imdb: { rating: 8.4, votes: 4569, id: 471571 },
-&nbsp;&nbsp;&nbsp;&nbsp;hybridScore: 0.8886410732269286,
-&nbsp;&nbsp;&nbsp;&nbsp;score: 0.909487247467041
-&nbsp;&nbsp;},
-&nbsp;&nbsp;{
-&nbsp;&nbsp;&nbsp;&nbsp;title: 'The City of Lost Children',
-&nbsp;&nbsp;&nbsp;&nbsp;year: 1995,
-&nbsp;&nbsp;&nbsp;&nbsp;imdb: { rating: 7.7, votes: 52784, id: 112682 },
-&nbsp;&nbsp;&nbsp;&nbsp;hybridScore: 0.880960970878601,
-&nbsp;&nbsp;&nbsp;&nbsp;score: 0.9285156726837158
-&nbsp;&nbsp;},
-&nbsp;&nbsp;{
-&nbsp;&nbsp;&nbsp;&nbsp;title: 'Room 8',
-&nbsp;&nbsp;&nbsp;&nbsp;year: 2013,
-&nbsp;&nbsp;&nbsp;&nbsp;imdb: { rating: 8, votes: 762, id: 2949338 },
-&nbsp;&nbsp;&nbsp;&nbsp;hybridScore: 0.8803098821640014,
-&nbsp;&nbsp;&nbsp;&nbsp;score: 0.9147284030914307
-&nbsp;&nbsp;},
-&nbsp;&nbsp;{
-&nbsp;&nbsp;&nbsp;&nbsp;imdb: { rating: 7.8, votes: 271917, id: 2802144 },
-&nbsp;&nbsp;&nbsp;&nbsp;year: 2014,
-&nbsp;&nbsp;&nbsp;&nbsp;title: 'Kingsman: The Secret Service',
-&nbsp;&nbsp;&nbsp;&nbsp;hybridScore: 0.8751985874176025,
-&nbsp;&nbsp;&nbsp;&nbsp;score: 0.9159979820251465
-&nbsp;&nbsp;}
-]</pre>
+```
+[
+  {
+    imdb: { rating: 8.7, votes: 1080566, id: 133093 },
+    year: 1999,
+    title: 'The Matrix',
+    hybridScore: 0.9070646867752075,
+    score: 0.9229495525360107
+  },
+  {
+    title: 'Athadu',
+    year: 2005,
+    imdb: { rating: 8.4, votes: 4569, id: 471571 },
+    hybridScore: 0.8886410732269286,
+    score: 0.909487247467041
+  },
+  {
+    title: 'The City of Lost Children',
+    year: 1995,
+    imdb: { rating: 7.7, votes: 52784, id: 112682 },
+    hybridScore: 0.880960970878601,
+    score: 0.9285156726837158
+  },
+  {
+    title: 'Room 8',
+    year: 2013,
+    imdb: { rating: 8, votes: 762, id: 2949338 },
+    hybridScore: 0.8803098821640014,
+    score: 0.9147284030914307
+  },
+  {
+    imdb: { rating: 7.8, votes: 271917, id: 2802144 },
+    year: 2014,
+    title: 'Kingsman: The Secret Service',
+    hybridScore: 0.8751985874176025,
+    score: 0.9159979820251465
+  }
+]
+```
+
 
 This hybrid scoring surfaces titles that are both semantically similar and widely acclaimed.
 
@@ -279,157 +303,163 @@ Use **$search.text** (query: "**computer hacker** " across **title** , **plot** 
 
 Rank each leg, union the results, then fuse them with RRF. When a movie appears in both legs, it has non-zero textRank and vectorRank (1 = best per leg), so RRF rewards agreement between keyword relevance and semantic similarity, producing a single balanced ranking.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">db.getSiblingDB("sample_mflix").embedded_movies.aggregate([
-&nbsp;&nbsp;// A) TEXT (BM25) — compute rank and RRF contribution in this leg
-&nbsp;&nbsp;{
-&nbsp;&nbsp;&nbsp;&nbsp;$search: {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;index: "hybrid_text",
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;text: { query: "computer hacker", path: ["title","plot","fullplot"] }
-&nbsp;&nbsp;&nbsp;&nbsp;}
-&nbsp;&nbsp;},
-&nbsp;&nbsp;{ $set: { score: { $meta: "searchScore" } } },
-&nbsp;&nbsp;{ $setWindowFields: { sortBy: { score: -1 }, output: { textRank: { $documentNumber: {} } } } },
-&nbsp;&nbsp;{ $set: { rrf: { $divide: [1, { $add: [60, "$textRank"] }] } } }, // RRF piece for the text leg
-&nbsp;&nbsp;{ $project: { title:1, year:1, genres:1, imdb:1, textRank:1, rrf:1 } },
+```
+db.getSiblingDB("sample_mflix").embedded_movies.aggregate([
+  // A) TEXT (BM25) — compute rank and RRF contribution in this leg
+  {
+    $search: {
+      index: "hybrid_text",
+      text: { query: "computer hacker", path: ["title","plot","fullplot"] }
+    }
+  },
+  { $set: { score: { $meta: "searchScore" } } },
+  { $setWindowFields: { sortBy: { score: -1 }, output: { textRank: { $documentNumber: {} } } } },
+  { $set: { rrf: { $divide: [1, { $add: [60, "$textRank"] }] } } }, // RRF piece for the text leg
+  { $project: { title:1, year:1, genres:1, imdb:1, textRank:1, rrf:1 } },
 
-&nbsp;&nbsp;// B) VECTOR (kNN) — do the same for the vector leg
-&nbsp;&nbsp;{
-&nbsp;&nbsp;&nbsp;&nbsp;$unionWith: {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;coll: "embedded_movies",
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;pipeline: [
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$vectorSearch: {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;index: "plot_embedding_index",
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;path: "plot_embedding",
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;queryVector: qv,&nbsp; &nbsp; &nbsp; &nbsp; // Inception embedding array
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;numCandidates: 1000,
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;limit: 300
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;},
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{ $set: { score: { $meta: "vectorSearchScore" } } },
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{ $setWindowFields: { sortBy: { score: -1 }, output: { vectorRank: { $documentNumber: {} } } } },
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{ $set: { rrf: { $divide: [1, { $add: [60, "$vectorRank"] }] } } }, // RRF piece for the vector leg
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{ $project: { title:1, year:1, genres:1, imdb:1, vectorRank:1, rrf:1 } }
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;]
-&nbsp;&nbsp;&nbsp;&nbsp;}
-&nbsp;&nbsp;},
+  // B) VECTOR (kNN) — do the same for the vector leg
+  {
+    $unionWith: {
+      coll: "embedded_movies",
+      pipeline: [
+        {
+          $vectorSearch: {
+            index: "plot_embedding_index",
+            path: "plot_embedding",
+            queryVector: qv,        // Inception embedding array
+            numCandidates: 1000,
+            limit: 300
+          }
+        },
+        { $set: { score: { $meta: "vectorSearchScore" } } },
+        { $setWindowFields: { sortBy: { score: -1 }, output: { vectorRank: { $documentNumber: {} } } } },
+        { $set: { rrf: { $divide: [1, { $add: [60, "$vectorRank"] }] } } }, // RRF piece for the vector leg
+        { $project: { title:1, year:1, genres:1, imdb:1, vectorRank:1, rrf:1 } }
+      ]
+    }
+  },
 
-&nbsp;&nbsp;// C) Fusion — sum RRF contributions; carry ranks from each leg if present
-&nbsp;&nbsp;{
-&nbsp;&nbsp;&nbsp;&nbsp;$group: {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_id: "$_id",
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;title:&nbsp; { $first: "$title" },
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;year: &nbsp; { $first: "$year" },
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;genres: { $first: "$genres" },
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;imdb: &nbsp; { $first: "$imdb" },
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;textRank: &nbsp; { $max: { $ifNull: ["$textRank", 0] } },
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;vectorRank: { $max: { $ifNull: ["$vectorRank", 0] } },
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;rrf:&nbsp; &nbsp; &nbsp; &nbsp; { $sum: "$rrf" }
-&nbsp;&nbsp;&nbsp;&nbsp;}
-&nbsp;&nbsp;},
-&nbsp;&nbsp;// (optional) keep only overlap (items present in BOTH legs)
-&nbsp;&nbsp;// { $match: { textRank: { $gt: 0 }, vectorRank: { $gt: 0 } } },
-&nbsp;&nbsp;// (optional) exclude the anchor movie if it shows up
-&nbsp;&nbsp;{ $match: { title: { $ne: "Inception" } } },
-&nbsp;&nbsp;{ $sort: { rrf: -1 } },
-&nbsp;&nbsp;{ $limit: 10 },
-&nbsp;&nbsp;{ $project: { _id:0, title:1, year:1, genres:1, imdb:1, rrf:1, textRank:1, vectorRank:1 } }
-])</pre>
+  // C) Fusion — sum RRF contributions; carry ranks from each leg if present
+  {
+    $group: {
+      _id: "$_id",
+      title:  { $first: "$title" },
+      year:   { $first: "$year" },
+      genres: { $first: "$genres" },
+      imdb:   { $first: "$imdb" },
+      textRank:   { $max: { $ifNull: ["$textRank", 0] } },
+      vectorRank: { $max: { $ifNull: ["$vectorRank", 0] } },
+      rrf:        { $sum: "$rrf" }
+    }
+  },
+  // (optional) keep only overlap (items present in BOTH legs)
+  // { $match: { textRank: { $gt: 0 }, vectorRank: { $gt: 0 } } },
+  // (optional) exclude the anchor movie if it shows up
+  { $match: { title: { $ne: "Inception" } } },
+  { $sort: { rrf: -1 } },
+  { $limit: 10 },
+  { $project: { _id:0, title:1, year:1, genres:1, imdb:1, rrf:1, textRank:1, vectorRank:1 } }
+])
+```
+
 
 Example result:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">[
-&nbsp;&nbsp;{
-&nbsp;&nbsp;&nbsp;&nbsp;title: 'The Matrix',
-&nbsp;&nbsp;&nbsp;&nbsp;year: 1999,
-&nbsp;&nbsp;&nbsp;&nbsp;genres: [ 'Action', 'Sci-Fi' ],
-&nbsp;&nbsp;&nbsp;&nbsp;imdb: { rating: 8.7, votes: 1080566, id: 133093 },
-&nbsp;&nbsp;&nbsp;&nbsp;textRank: 1,
-&nbsp;&nbsp;&nbsp;&nbsp;vectorRank: 7,
-&nbsp;&nbsp;&nbsp;&nbsp;rrf: 0.03131881575727918
-&nbsp;&nbsp;},
-&nbsp;&nbsp;{
-&nbsp;&nbsp;&nbsp;&nbsp;title: 'TRON',
-&nbsp;&nbsp;&nbsp;&nbsp;year: 1982,
-&nbsp;&nbsp;&nbsp;&nbsp;genres: [ 'Action', 'Adventure', 'Sci-Fi' ],
-&nbsp;&nbsp;&nbsp;&nbsp;imdb: { rating: 6.8, votes: 88860, id: 84827 },
-&nbsp;&nbsp;&nbsp;&nbsp;textRank: 2,
-&nbsp;&nbsp;&nbsp;&nbsp;vectorRank: 6,
-&nbsp;&nbsp;&nbsp;&nbsp;rrf: 0.03128054740957967
-&nbsp;&nbsp;},
-&nbsp;&nbsp;{
-&nbsp;&nbsp;&nbsp;&nbsp;title: 'Swordfish',
-&nbsp;&nbsp;&nbsp;&nbsp;year: 2001,
-&nbsp;&nbsp;&nbsp;&nbsp;genres: [ 'Action', 'Crime', 'Thriller' ],
-&nbsp;&nbsp;&nbsp;&nbsp;imdb: { rating: 6.5, votes: 148103, id: 244244 },
-&nbsp;&nbsp;&nbsp;&nbsp;textRank: 14,
-&nbsp;&nbsp;&nbsp;&nbsp;vectorRank: 2,
-&nbsp;&nbsp;&nbsp;&nbsp;rrf: 0.02964254577157803
-&nbsp;&nbsp;},
-&nbsp;&nbsp;{
-&nbsp;&nbsp;&nbsp;&nbsp;title: 'The Net',
-&nbsp;&nbsp;&nbsp;&nbsp;year: 1995,
-&nbsp;&nbsp;&nbsp;&nbsp;genres: [ 'Action', 'Crime', 'Drama' ],
-&nbsp;&nbsp;&nbsp;&nbsp;imdb: { rating: 5.8, votes: 45996, id: 113957 },
-&nbsp;&nbsp;&nbsp;&nbsp;textRank: 11,
-&nbsp;&nbsp;&nbsp;&nbsp;vectorRank: 30,
-&nbsp;&nbsp;&nbsp;&nbsp;rrf: 0.025195618153364633
-&nbsp;&nbsp;},
-&nbsp;&nbsp;{
-&nbsp;&nbsp;&nbsp;&nbsp;title: 'Arrambam',
-&nbsp;&nbsp;&nbsp;&nbsp;year: 2013,
-&nbsp;&nbsp;&nbsp;&nbsp;genres: [ 'Action', 'Drama', 'Mystery' ],
-&nbsp;&nbsp;&nbsp;&nbsp;imdb: { rating: 7.5, votes: 5957, id: 2555958 },
-&nbsp;&nbsp;&nbsp;&nbsp;textRank: 3,
-&nbsp;&nbsp;&nbsp;&nbsp;vectorRank: 54,
-&nbsp;&nbsp;&nbsp;&nbsp;rrf: 0.024644945697577275
-&nbsp;&nbsp;},
-&nbsp;&nbsp;{
-&nbsp;&nbsp;&nbsp;&nbsp;title: 'Blackhat',
-&nbsp;&nbsp;&nbsp;&nbsp;year: 2015,
-&nbsp;&nbsp;&nbsp;&nbsp;genres: [ 'Action', 'Crime', 'Drama' ],
-&nbsp;&nbsp;&nbsp;&nbsp;imdb: { rating: 5.4, votes: 27798, id: 2717822 },
-&nbsp;&nbsp;&nbsp;&nbsp;textRank: 10,
-&nbsp;&nbsp;&nbsp;&nbsp;vectorRank: 42,
-&nbsp;&nbsp;&nbsp;&nbsp;rrf: 0.024089635854341734
-&nbsp;&nbsp;},
-&nbsp;&nbsp;{
-&nbsp;&nbsp;&nbsp;&nbsp;title: 'Speed 2: Cruise Control',
-&nbsp;&nbsp;&nbsp;&nbsp;year: 1997,
-&nbsp;&nbsp;&nbsp;&nbsp;genres: [ 'Action', 'Crime', 'Romance' ],
-&nbsp;&nbsp;&nbsp;&nbsp;imdb: { rating: 3.7, votes: 57010, id: 120179 },
-&nbsp;&nbsp;&nbsp;&nbsp;textRank: 6,
-&nbsp;&nbsp;&nbsp;&nbsp;vectorRank: 60,
-&nbsp;&nbsp;&nbsp;&nbsp;rrf: 0.023484848484848483
-&nbsp;&nbsp;},
-&nbsp;&nbsp;{
-&nbsp;&nbsp;&nbsp;&nbsp;title: 'Sivaji',
-&nbsp;&nbsp;&nbsp;&nbsp;year: 2007,
-&nbsp;&nbsp;&nbsp;&nbsp;genres: [ 'Action', 'Adventure', 'Drama' ],
-&nbsp;&nbsp;&nbsp;&nbsp;imdb: { rating: 7.4, votes: 7920, id: 479751 },
-&nbsp;&nbsp;&nbsp;&nbsp;textRank: 23,
-&nbsp;&nbsp;&nbsp;&nbsp;vectorRank: 29,
-&nbsp;&nbsp;&nbsp;&nbsp;rrf: 0.023284147827264113
-&nbsp;&nbsp;},
-&nbsp;&nbsp;{
-&nbsp;&nbsp;&nbsp;&nbsp;title: 'Open Windows',
-&nbsp;&nbsp;&nbsp;&nbsp;year: 2014,
-&nbsp;&nbsp;&nbsp;&nbsp;genres: [ 'Action', 'Crime', 'Thriller' ],
-&nbsp;&nbsp;&nbsp;&nbsp;imdb: { rating: 5.2, votes: 8894, id: 2409818 },
-&nbsp;&nbsp;&nbsp;&nbsp;textRank: 26,
-&nbsp;&nbsp;&nbsp;&nbsp;vectorRank: 39,
-&nbsp;&nbsp;&nbsp;&nbsp;rrf: 0.02172891707775429
-&nbsp;&nbsp;},
-&nbsp;&nbsp;{
-&nbsp;&nbsp;&nbsp;&nbsp;title: 'Nicotina',
-&nbsp;&nbsp;&nbsp;&nbsp;year: 2003,
-&nbsp;&nbsp;&nbsp;&nbsp;genres: [ 'Action', 'Comedy', 'Crime' ],
-&nbsp;&nbsp;&nbsp;&nbsp;imdb: { rating: 6.7, votes: 2969, id: 337930 },
-&nbsp;&nbsp;&nbsp;&nbsp;textRank: 7,
-&nbsp;&nbsp;&nbsp;&nbsp;vectorRank: 94,
-&nbsp;&nbsp;&nbsp;&nbsp;rrf: 0.021418879627834852
-&nbsp;&nbsp;}
-]</pre>
+```
+[
+  {
+    title: 'The Matrix',
+    year: 1999,
+    genres: [ 'Action', 'Sci-Fi' ],
+    imdb: { rating: 8.7, votes: 1080566, id: 133093 },
+    textRank: 1,
+    vectorRank: 7,
+    rrf: 0.03131881575727918
+  },
+  {
+    title: 'TRON',
+    year: 1982,
+    genres: [ 'Action', 'Adventure', 'Sci-Fi' ],
+    imdb: { rating: 6.8, votes: 88860, id: 84827 },
+    textRank: 2,
+    vectorRank: 6,
+    rrf: 0.03128054740957967
+  },
+  {
+    title: 'Swordfish',
+    year: 2001,
+    genres: [ 'Action', 'Crime', 'Thriller' ],
+    imdb: { rating: 6.5, votes: 148103, id: 244244 },
+    textRank: 14,
+    vectorRank: 2,
+    rrf: 0.02964254577157803
+  },
+  {
+    title: 'The Net',
+    year: 1995,
+    genres: [ 'Action', 'Crime', 'Drama' ],
+    imdb: { rating: 5.8, votes: 45996, id: 113957 },
+    textRank: 11,
+    vectorRank: 30,
+    rrf: 0.025195618153364633
+  },
+  {
+    title: 'Arrambam',
+    year: 2013,
+    genres: [ 'Action', 'Drama', 'Mystery' ],
+    imdb: { rating: 7.5, votes: 5957, id: 2555958 },
+    textRank: 3,
+    vectorRank: 54,
+    rrf: 0.024644945697577275
+  },
+  {
+    title: 'Blackhat',
+    year: 2015,
+    genres: [ 'Action', 'Crime', 'Drama' ],
+    imdb: { rating: 5.4, votes: 27798, id: 2717822 },
+    textRank: 10,
+    vectorRank: 42,
+    rrf: 0.024089635854341734
+  },
+  {
+    title: 'Speed 2: Cruise Control',
+    year: 1997,
+    genres: [ 'Action', 'Crime', 'Romance' ],
+    imdb: { rating: 3.7, votes: 57010, id: 120179 },
+    textRank: 6,
+    vectorRank: 60,
+    rrf: 0.023484848484848483
+  },
+  {
+    title: 'Sivaji',
+    year: 2007,
+    genres: [ 'Action', 'Adventure', 'Drama' ],
+    imdb: { rating: 7.4, votes: 7920, id: 479751 },
+    textRank: 23,
+    vectorRank: 29,
+    rrf: 0.023284147827264113
+  },
+  {
+    title: 'Open Windows',
+    year: 2014,
+    genres: [ 'Action', 'Crime', 'Thriller' ],
+    imdb: { rating: 5.2, votes: 8894, id: 2409818 },
+    textRank: 26,
+    vectorRank: 39,
+    rrf: 0.02172891707775429
+  },
+  {
+    title: 'Nicotina',
+    year: 2003,
+    genres: [ 'Action', 'Comedy', 'Crime' ],
+    imdb: { rating: 6.7, votes: 2969, id: 337930 },
+    textRank: 7,
+    vectorRank: 94,
+    rrf: 0.021418879627834852
+  }
+]
+```
+
 
 This yields **one ranked list** that balances **keyword intent** (textRank) and **semantic meaning** (vectorRank). Items that rank well in both legs rise to the top; items strong in only one leg still get credit but are ranked lower.
 

@@ -38,9 +38,12 @@ It may not be so obvious but encoding involves Java on many levels, from properl
 
 In that sense, Java 18 helps to make Java much more stable and predictable than before. Below shows a pre-Java 18 java.io.FileReader encoding issue for a Japanese file with file with content set at UTF-8.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">java.io.FileReader(“hello.txt”) -&gt; “こんにちは” (macOS)
-java.io.FileReader(“hello.txt”) -&gt; “ã?“ã‚“ã?«ã?¡ã? ” (Windows (en-US))
-java.io.FileReader(“hello.txt”) -&gt; “縺ォ縺。縺ッ” (Windows (ja-JP)</pre>
+```
+java.io.FileReader(“hello.txt”) -> “こんにちは” (macOS)
+java.io.FileReader(“hello.txt”) -> “ã?“ã‚“ã?«ã?¡ã? ” (Windows (en-US))
+java.io.FileReader(“hello.txt”) -> “縺ォ縺。縺ッ” (Windows (ja-JP)
+```
+
 
 Feature Highlights {#h2-1-feature-highlights}
 ---------------------------------------------
@@ -81,10 +84,13 @@ The package java.net.spi now contains a set of new classes, as a consequence, su
 
 **Details:** This JEP introduces a new tag: @snippet. The goal of the tag is to reduce duplication in writing documentation in JavaDoc's standard Doclet, which is pretty handy as the tag allows a direct reference to the already written code and it is not required to duplicate it, which has a positive effect on maintainability.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">/**
+```java
+/**
  * The following code shows how to use {@code ProductionCode.function}:
  * {@snippet file="ProductionCodeFunctionTest.java" region="example"}
-&nbsp;*/&nbsp;</pre>
+ */
+```
+
 
 ...where "ProductionCodeFunctionTest.java" represents a file with content.
 

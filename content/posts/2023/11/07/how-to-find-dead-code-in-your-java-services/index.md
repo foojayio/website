@@ -52,10 +52,11 @@ For gathering JaCoCo's data, we use a script similar to the following (simplifie
 * After the port is forwarded, we use JaCoCo's CLI to dump the data to the local machine.
 * Once we collected all the data from all the pods, we merge the dumped data into a single data file.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash">#!/usr/bin/env bash
+```bash
+#!/usr/bin/env bash
 set -e -u -o pipefail
 if [ "${#}" -lt 4 ]; then
-  echo "Usage: ${0} &lt;path-to-jacococli.jar&gt; &lt;kubernetes-context&gt; &lt;kubernetes-namespace&gt; &lt;kubernetes-pod-selector&gt;"
+  echo "Usage: ${0} <path-to-jacococli.jar> <kubernetes-context> <kubernetes-namespace> <kubernetes-pod-selector>"
   echo "For selector syntax, see https://kubernetes.io/docs/concepts/overview/working-with-objects/labels."
   exit 1
 fi
@@ -83,14 +84,16 @@ kubectl get pods \
         --context="${CONTEXT}" \
         --namespace "${NAMESPACE}" \
         "${POD}" \
-        "6300:6300" &amp;
+        "6300:6300" &
       trap "kill ${!}" ERR EXIT HUP INT TERM
       java -jar "${JACOCO_CLI_LOCAL}" dump --destfile "jacoco-${POD}.exec"
     )
   done
 # Merge the coverage data into a single file.
 java -jar "${JACOCO_CLI_LOCAL}" merge --destfile jacoco.exec jacoco-*.exec
-popd</pre>
+popd
+```
+
 
 Source: [Gist on GitHub](https://gist.github.com/Badbond/0f685d133763864a0760bbfc477e1f82)
 > *Note: This script assumes that selected pods run the same software source-code revision. This is necessary as later we will combine coverage data with source code to have the coverage visualized, and JaCoCo can otherwise not distinguish between revisions. As such, as long as the pods run the same revision, it is also possible to run this multiple times and combine the data as the script does.*{#fd29}
@@ -101,10 +104,11 @@ To get HTML reporting of source code line coverage, [JaCoCo requires](https://ww
 
 To generate the report and pass the class and source code files, we also provide a script below. Path matchers for these files are defaulted to the Maven directory structure, but can be overwritten.{#29ac}
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash">#!/usr/bin/env bash
+```bash
+#!/usr/bin/env bash
 set -e -u -o pipefail
 if [[ "${#}" -lt 2 ]]; then
-  echo "Usage: ${0} &lt;path-to-jacococli.jar&gt; [--sourcefiles-matcher=&lt;string&gt;] [ --classfiles-miles-matcher&lt;string&gt;] &lt;source-roots&gt;..."
+  echo "Usage: ${0} <path-to-jacococli.jar> [--sourcefiles-matcher=<string>] [ --classfiles-miles-matcher<string>] <source-roots>..."
   exit 1
 fi
 JACOCO_CLI_LOCAL="$(realpath "${1}")"
@@ -137,7 +141,9 @@ pushd /tmp/jacoco-export
 java -jar "${JACOCO_CLI_LOCAL}" report jacoco.exec --html report \
   $(find "${@:1}" -path "${CLASSFILES_MATCHER}" | sed 's/^/--classfiles /') \
   $(find "${@:1}" -path "${SOURCEFILES_MATCHER}" | sed 's/^/--sourcefiles /')
-popd</pre>
+popd
+```
+
 
 Source: [Gist on GitHub](https://gist.github.com/Badbond/0777680409ce28349c792416535940e0#file-jacoco_generate_report-sh)
 

@@ -54,10 +54,13 @@ Spring includes a transaction manager that exposes the API's we typically expect
 
 You can inject that manager to a typical spring class, but it's much easier to just write declarative transaction management like this Java code:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@Transactional
+```java
+@Transactional
 public void myMethod() {
     // ...
-}</pre>
+}
+```
+
 
 I used the annotation on the method level, but I could have placed it on the class level. The class defines the default and the method can override it.
 
@@ -99,7 +102,10 @@ Moving on to that method, I would like to track information specific to a transa
 
 To limit the scope only to `findById` we add the condition:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">method.getName().equals("findById")</pre>
+```
+method.getName().equals("findById")
+```
+
 
 Once the method is hit, we can see the details of the transaction in the stack.
 

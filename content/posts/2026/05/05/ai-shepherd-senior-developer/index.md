@@ -96,6 +96,6 @@ The typing was always the door opening. The job was reading the terrain, choosin
 
 Your seniority is not a liability in this transition. It is the moat. It always was.
 
-*** ** * ** ***
+
 
 *This article expands on the AI Shepherd concept from a conference talk Elma Westergren and I have given on developer identity in the AI era. The core framing comes from Elma's work as an occupational therapist. What is really at stake when our tools change is occupational identity, not just productivity, and I am grateful for that perspective.*

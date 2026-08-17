@@ -81,7 +81,8 @@ Instead of hallucinating or guessing, the model now answers based on real, trust
 
 Below is a small [++Java example++](https://snyk.io/platform/snyk-java-security/) showing how to use LangChain4J to add RAG to a simple AI service. It uses an in-memory embedding store that comes out of the box with the framework. This illustrates how getting started with RAG doesn't have to be complex, especially when you're working with the right tools.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">private static final String API_KEY = "";
+```
+private static final String API_KEY = "";
 public Assistant createAssistant() {
    return AiServices.builder(Assistant.class)
            .chatLanguageModel(createOpenAiChatModel())
@@ -101,7 +102,7 @@ private ContentRetriever documentRetriever() {
    EmbeddingModel embeddingModel = new BgeSmallEnV15QuantizedEmbeddingModel();
    Path documentPath = Path.of("documents/terms-of-use.txt");
 
-   EmbeddingStore&lt;TextSegment&gt; embeddingStore =
+   EmbeddingStore<TextSegment> embeddingStore =
            embededStore(documentPath, embeddingModel);
 
   return EmbeddingStoreContentRetriever.builder()
@@ -112,19 +113,20 @@ private ContentRetriever documentRetriever() {
            .build();
 }
 
-private EmbeddingStore&lt;TextSegment&gt; embededStore(Path documentPath, EmbeddingModel embeddingModel) {
+private EmbeddingStore<TextSegment> embededStore(Path documentPath, EmbeddingModel embeddingModel) {
    DocumentParser documentParser = new TextDocumentParser();
    Document document = loadDocument(documentPath, documentParser);
 
    DocumentSplitter splitter = DocumentSplitters.recursive(300, 0);
-   List&lt;TextSegment&gt; segments = splitter.split(document);
-   List&lt;Embedding&gt; embeddings = embeddingModel.embedAll(segments).content();
+   List<TextSegment> segments = splitter.split(document);
+   List<Embedding> embeddings = embeddingModel.embedAll(segments).content();
 
-   EmbeddingStore&lt;TextSegment&gt; embeddingStore = new InMemoryEmbeddingStore&lt;&gt;();
+   EmbeddingStore<TextSegment> embeddingStore = new InMemoryEmbeddingStore<>();
    embeddingStore.addAll(embeddings, segments);
    return embeddingStore;
 }
-</pre>
+```
+
 
 Obviously, there's a lot more to explore when you start working with multiple sources and more advanced techniques to chunk, rank, and retrieve the right data from your embeddings. But instead of going down that path, I want to focus on something just as important: the security implications of using RAG.
 

@@ -98,24 +98,27 @@ Now let's see how to create a job that builds and publishes a simple project to 
 
 The plugin's section in the **pom.xml** looks as follows:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">&lt;plugin&gt;
-     &lt;groupId&gt;com.jelastic&lt;/groupId&gt;
-     &lt;artifactId&gt;jelastic-maven-plugin&lt;/artifactId&gt;
-     &lt;version&gt;1.9.4&lt;/version&gt;
-     &lt;configuration&gt;
-     &lt;apiToken&gt;${TOKEN}&lt;/apiToken&gt;
-     &lt;context&gt;${CONTEXT}&lt;/context&gt;
-     &lt;environment&gt;${TARGET_ENV}&lt;/environment&gt;
-     &lt;comment&gt;test-plugin&lt;/comment&gt;
-     &lt;api_hoster&gt;${JELASTIC_API_ENDPOINT}&lt;/api_hoster&gt;
-     &lt;deployParams&gt;
-        &lt;delay&gt;1000&lt;/delay&gt;
-        &lt;param2&gt;value2&lt;/param2&gt;
+```java
+<plugin>
+     <groupId>com.jelastic</groupId>
+     <artifactId>jelastic-maven-plugin</artifactId>
+     <version>1.9.4</version>
+     <configuration>
+     <apiToken>${TOKEN}</apiToken>
+     <context>${CONTEXT}</context>
+     <environment>${TARGET_ENV}</environment>
+     <comment>test-plugin</comment>
+     <api_hoster>${JELASTIC_API_ENDPOINT}</api_hoster>
+     <deployParams>
+        <delay>1000</delay>
+        <param2>value2</param2>
        ...
-        &lt;paramN&gt;valueN&lt;/paramN&gt;
-     &lt;/deployParams&gt;
-     &lt;/configuration&gt;
-&lt;/plugin&gt;</pre>
+        <paramN>valueN</paramN>
+     </deployParams>
+     </configuration>
+</plugin>
+```
+
 
 For defining parameters via project variables click on the checkbox This project is parameterized and add the first variable clicking on **Add Parameter \> String Parameter**.
 

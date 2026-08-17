@@ -52,19 +52,28 @@ Payara has developed a module to support gRPC. It is available in Payara Communi
 
 The user can manually copy this file to Payara modules:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">cp grpc-support-1.0.0.jar ${PAYARA_HOME}/glassfish/modules</pre>
+```
+cp grpc-support-1.0.0.jar ${PAYARA_HOME}/glassfish/modules
+```
+
 
 or in case of configuring this copy automatically in a test project see our example available at: [GrpcModuleTest](https://github.com/payara/Payara/blob/master/appserver/tests/payara-samples/test-domain-setup/src/test/java/fish/payara/samples/setuptests/GrpcModuleTest.java).
 
 For both options, Payara Server should be restarted:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">${PAYARA_HOME}\bin&amp;gt; .\asadmin restart-domain</pre>
+```
+${PAYARA_HOME}\bin&gt; .\asadmin restart-domain
+```
+
 
 The restarting can also be automatized for testing purposes. See [RestartDomain](https://github.com/payara/Payara/blob/master/appserver/tests/payara-samples/test-domain-setup/src/test/java/fish/payara/samples/RestartDomain.java) and [RestartingDomainTest](https://github.com/payara/Payara/blob/master/appserver/tests/payara-samples/test-domain-setup/src/test/java/fish/payara/samples/setuptests/RestartDomainTest.java).
 
 After restarting Payara Server, the user should run the following commads to make sure HTTP/2 and HTTP Push are activated:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">./asadmin set configs.config.server-config.network-config.protocols.protocol.http-listener-1.http.http2-push-enabled=true./asadmin set configs.config.server-config.network-config.protocols.protocol.http-listener-1.http.http2-enabled=true</pre>
+```
+./asadmin set configs.config.server-config.network-config.protocols.protocol.http-listener-1.http.http2-push-enabled=true./asadmin set configs.config.server-config.network-config.protocols.protocol.http-listener-1.http.http2-enabled=true
+```
+
 
 In the next sections, we will show an implementation based on the Java gRPC example defined in gRPC official tutorial: <https://grpc.io/docs/languages/java/basics/>
 
@@ -75,7 +84,10 @@ We use Protbuf to define the gRPC Service with its types for request and respons
 
 The first step is to define the service name in .proto file:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">service&nbsp;RouteGuide&nbsp;{}</pre>
+```
+service RouteGuide {}
+```
+
 
 Now we can define some `rpc` methods into the service definition with their types for request and response. Our service includes four methods that encompass the four possible kinds:
 
@@ -94,12 +106,15 @@ Now we can define some `rpc` methods into the service definition with their type
 
 We can also see some message types defined in our `.proto` file. For instance, see the definition of a Rectangle message:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">message Rectangle {
+```java
+message Rectangle {
   // One corner of the rectangle.
   Point lo = 1;
   // The other corner of the rectangle.
   Point hi = 2;
-}</pre>
+}
+```
+
 
 At this point, we have the service defined. Then we can create the Stubs and work on Server and Client creations.
 
@@ -134,20 +149,26 @@ In the [official gRPC example](https://github.com/grpc/grpc-java/blob/master/exa
 
 First of all, our class implements the abstract base class:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@ApplicationScoped
+```java
+@ApplicationScoped
 public class RouteGuideService extends RouteGuideGrpc.RouteGuideImplBase {
    ...
-}</pre>
+}
+```
+
 
 Inside the class, we have the implementation of ALL service methods.
 
 For instance, see `getFeature` method which receives a `Point` and a `StreamObserver` from client. Then it finds the feature in the local database and sends it to the observer:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@Override
-public void getFeature(Point request, StreamObserver&lt;Feature&gt; responseObserver) {
+```java
+@Override
+public void getFeature(Point request, StreamObserver<Feature> responseObserver) {
     responseObserver.onNext(featureRepository.findFeature(request));
     responseObserver.onCompleted();
-}</pre>
+}
+```
+
 
 We also have the implementation for other three types of RCP calls: Streaming in Server-Side, Streaming in Client-Side and Bidirectional Streaming.
 
@@ -159,8 +180,9 @@ For each `Feature` in the database that is inside the `Rectangle` in the payload
 
 When the loop finishes, it calls method `onCompleted` to tell the Observer that all messages were sent.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@Override
-public void listFeatures(Rectangle request, StreamObserver&lt;Feature&gt; responseObserver) {
+```java
+@Override
+public void listFeatures(Rectangle request, StreamObserver<Feature> responseObserver) {
     int left = min(request.getLo().getLongitude(), request.getHi().getLongitude());
     int right = max(request.getLo().getLongitude(), request.getHi().getLongitude());
     int top = max(request.getLo().getLatitude(), request.getHi().getLatitude());
@@ -173,12 +195,14 @@ public void listFeatures(Rectangle request, StreamObserver&lt;Feature&gt; respon
 
         int lat = feature.getLocation().getLatitude();
         int lon = feature.getLocation().getLongitude();
-        if (lon &gt;= left &amp;&amp; lon &lt;= right &amp;&amp; lat &gt;= bottom &amp;&amp; lat &lt;= top) {
+        if (lon >= left && lon <= right && lat >= bottom && lat <= top) {
             responseObserver.onNext(feature);
         }
     }
     responseObserver.onCompleted();
-}</pre>
+}
+```
+
 
 #### Streaming in Client-Side
 
@@ -186,9 +210,10 @@ The next method we will get into is `recordRoute`.
 
 This method receives a stream of `Point`s from client and returns through the StreamObserver a `RouteSummary`.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@Override
-public StreamObserver&lt;Point&gt; recordRoute(final StreamObserver&lt;RouteSummary&gt; responseObserver) {
-    return new StreamObserver&lt;Point&gt;() {
+```java
+@Override
+public StreamObserver<Point> recordRoute(final StreamObserver<RouteSummary> responseObserver) {
+    return new StreamObserver<Point>() {
         ...
 
         @Override
@@ -207,7 +232,9 @@ public StreamObserver&lt;Point&gt; recordRoute(final StreamObserver&lt;RouteSumm
             responseObserver.onCompleted();
         }
     };
-}</pre>
+}
+```
+
 
 Inside the method, the example implements interface `StreamObserver` anonymously by overriding the methods:
 
@@ -218,12 +245,13 @@ Inside the method, the example implements interface `StreamObserver` anonymously
 
 To finish the server creation we examine the bidirectional method `routeChat:`
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@Override
-public StreamObserver&lt;RouteNote&gt; routeChat(final StreamObserver&lt;RouteNote&gt; responseObserver) {
-    return new StreamObserver&lt;RouteNote&gt;() {
+```java
+@Override
+public StreamObserver<RouteNote> routeChat(final StreamObserver<RouteNote> responseObserver) {
+    return new StreamObserver<RouteNote>() {
         @Override
         public void onNext(RouteNote note) {
-            List&lt;RouteNote&gt; notes = featureRepository.getOrCreateNotes(note.getLocation());
+            List<RouteNote> notes = featureRepository.getOrCreateNotes(note.getLocation());
 
             for (RouteNote prevNote : notes.toArray(new RouteNote[0])) {
                 responseObserver.onNext(prevNote);
@@ -242,7 +270,9 @@ public StreamObserver&lt;RouteNote&gt; routeChat(final StreamObserver&lt;RouteNo
             responseObserver.onCompleted();
         }
     };
-}</pre>
+}
+```
+
 
 Here we also receive and return a `stream` as in previous method.
 
@@ -255,12 +285,15 @@ Client Creation {#h2-6-client-creation}
 
 We created our client into the same module: [`grpc-web`](https://github.com/payara/Payara-Examples/tree/master/grpc/grpc-web), but it belongs to the [`test`](https://github.com/payara/Payara-Examples/tree/master/grpc/grpc-web/src/test) source folder. Therefore, we encapulated the grpc client into our tests. As we have a dependency to project grpc-stubs in `grpc-web->pom.xml`:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="xml" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&lt;dependency&gt;
-    &lt;groupId&gt;fish.payara.grpc&lt;/groupId&gt;
-    &lt;artifactId&gt;grpc-stubs&lt;/artifactId&gt;
-    &lt;version&gt;1.0-SNAPSHOT&lt;/version&gt;
-    &lt;scope&gt;compile&lt;/scope&gt;
-&lt;/dependency&gt;</pre>
+```xml
+<dependency>
+    <groupId>fish.payara.grpc</groupId>
+    <artifactId>grpc-stubs</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <scope>compile</scope>
+</dependency>
+```
+
 
 Then the stubs are available to be instantiated by our client: [RouteGuideClient](https://github.com/payara/Payara-Examples/blob/master/grpc/grpc-web/src/test/java/fish/payara/example/grpc/RouteGuideClient.java).
 
@@ -268,12 +301,15 @@ Then the stubs are available to be instantiated by our client: [RouteGuideClient
 
 The first thing to notice is that into our class constructor we instantiate two stubs:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public RouteGuideClient(Channel channel, String clientPrefix) {
+```java
+public RouteGuideClient(Channel channel, String clientPrefix) {
     blockingStub = RouteGuideGrpc.newBlockingStub(channel);
     asyncStub = RouteGuideGrpc.newStub(channel);
     routeGuideUtil = new RouteGuideUtil();
     this.clientPrefix = clientPrefix;
-}</pre>
+}
+```
+
 
 * `blockingStub`: this a synchronous stub which means the RPC client waits for the response.
 * `asyncStub`: it will make non-blocking calls. Therefore the response is asynchronous.
@@ -282,9 +318,12 @@ The types of these stubs were defined in project [grpc-stubs](https://github.com
 
 `Channel` is created using `ManagedChannelBuilder` in[`TestGrpc`](https://github.com/payara/Payara-Examples/blob/master/grpc/grpc-web/src/test/java/fish/payara/example/grpc/TestGrpc.java) and passed as parameter to `RouteGuideClient` constructor.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">ManagedChannel channel = ManagedChannelBuilder.forTarget(target).usePlaintext().build();
+```java
+ManagedChannel channel = ManagedChannelBuilder.forTarget(target).usePlaintext().build();
 ...
-RouteGuideClient client = new RouteGuideClient(channel, clientIdPrefix);</pre>
+RouteGuideClient client = new RouteGuideClient(channel, clientIdPrefix);
+```
+
 
 Inside `RouteGuideClient` constructor the channel is passed twice to create the stubs using methods: `newBlockingStub` and `newStub`.
 
@@ -297,7 +336,8 @@ To finish this section let's see how we call our four service methods. The resul
 
 We did it twice in our [`TestGrpc`](https://github.com/payara/Payara-Examples/blob/master/grpc/grpc-web/src/test/java/fish/payara/example/grpc/TestGrpc.java):
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">// Looking for a valid feature
+```java
+// Looking for a valid feature
 client.getFeature(409146138, -746188906);
 
 // Feature missing.
@@ -326,29 +366,38 @@ public void getFeature(int lat, int lon) {
                 routeGuideUtil.getLatitude(feature.getLocation()),
                 routeGuideUtil.getLongitude(feature.getLocation()));
     }
-}</pre>
+}
+```
+
 
 It acts like calling a local method. The results after the call: `getFeature(409146138, -746188906)`
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">INFO: [] *** GetFeature: lat=409,146,138 lon=-746,188,906
+```
+INFO: [] *** GetFeature: lat=409,146,138 lon=-746,188,906
 Apr 18, 2022 8:26:39 AM fish.payara.example.grpc.LogHelper info
-INFO: [] Found feature called "Berkshire Valley Management Area Trail, Jefferson, NJ, USA" at 40.915, -74.619</pre>
+INFO: [] Found feature called "Berkshire Valley Management Area Trail, Jefferson, NJ, USA" at 40.915, -74.619
+```
+
 
 And after second call: `getFeature(0, 0)`
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">INFO: [] *** GetFeature: lat=0 lon=0
+```
+INFO: [] *** GetFeature: lat=0 lon=0
 Apr 18, 2022 8:26:39 AM fish.payara.example.grpc.LogHelper info
-INFO: [] Found no feature at 0, 0</pre>
+INFO: [] Found no feature at 0, 0
+```
+
 
 #### Server-side Streaming Call
 
 Now our client calls `listFeatures` method:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">// Looking for features between 40, -75 and 42, -73.
+```java
+// Looking for features between 40, -75 and 42, -73.
 client.listFeatures(400000000, -750000000, 420000000, -730000000);
 This time blockingStub will not return just a Feature, but an Iterator which is used to access all Features sent by the server.
 
-Iterator&lt;Feature&gt; features;
+Iterator<Feature> features;
 try {
     features = blockingStub.listFeatures(request);
     for (int i = 1; features.hasNext(); i++) {
@@ -357,11 +406,14 @@ try {
     }
 } catch (StatusRuntimeException e) {
     LogHelper.warning(clientPrefix+"RPC failed: {0}", e.getStatus());
-}</pre>
+}
+```
+
 
 This time `blockingStub` will not return just a `Feature`, but an `Iterator` which is used to access all Features sent by the server.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">Iterator&lt;Feature&gt; features;
+```java
+Iterator<Feature> features;
 try {
     features = blockingStub.listFeatures(request);
     for (int i = 1; features.hasNext(); i++) {
@@ -370,11 +422,14 @@ try {
     }
 } catch (StatusRuntimeException e) {
     LogHelper.warning(clientPrefix+"RPC failed: {0}", e.getStatus());
-}</pre>
+}
+```
+
 
 Bellow you can see part of 64 features printed in tests log:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">INFO: [] *** ListFeatures: lowLat=400,000,000 lowLon=-750,000,000 hiLat=420,000,000 hiLon=-730,000,000
+```
+INFO: [] *** ListFeatures: lowLat=400,000,000 lowLon=-750,000,000 hiLat=420,000,000 hiLon=-730,000,000
 
 INFO: [] Result #1: name: "Patriots Path, Mendham, NJ 07945, USA"
 location {
@@ -394,17 +449,20 @@ INFO: [] Result #64: name: "3 Hasta Way, Newton, NJ 07860, USA"
 location {
 latitude: 410248224
 longitude: -747127767
-}</pre>
+}
+```
+
 
 #### Client-side Streaming Call
 
 Next we will test the call to method `recordRoute` passing features list and the number of points we want to send.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">// Record a few randomly selected points from the features file.
+```java
+// Record a few randomly selected points from the features file.
 client.recordRoute(features, 10);
-StreamObserver&lt;Point&gt; requestObserver = asyncStub.recordRoute(responseObserver);
+StreamObserver<Point> requestObserver = asyncStub.recordRoute(responseObserver);
 try {
-    for (int i = 0; i &lt; numPoints; ++i) {
+    for (int i = 0; i < numPoints; ++i) {
         int index = random.nextInt(features.size());
         Point point = features.get(index).getLocation();
         LogHelper.info(clientPrefix+"Visiting point {0}, {1}", routeGuideUtil.getLatitude(point),
@@ -421,31 +479,40 @@ try {
 } catch (RuntimeException e) {
     requestObserver.onError(e);
     throw e;
-}</pre>
+}
+```
+
 
 Above we see part of `recordRoute` implementation in` RouteGuideClient`. This time we use `asyncStub` in `recordRoute` implementation to send ten random points asynchronously.
 
 In order to print out the `RouteSummary` written by the server, we override `onNext` method:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@Override
+```java
+@Override
 public void onNext(RouteSummary summary) {
     LogHelper.info(clientPrefix+"Finished trip with {0} points. Passed {1} features. "
                     + "Travelled {2} meters. It took {3} seconds.", summary.getPointCount(),
             summary.getFeatureCount(), summary.getDistance(), summary.getElapsedTime());
 
-}</pre>
+}
+```
+
 
 We also override `onCompleted` method to reduce `CountDownLatch` to zero when the server finishes writing:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@Override
+```java
+@Override
 public void onCompleted() {
     LogHelper.info(clientPrefix+"Finished RecordRoute");
     finishLatch.countDown();
-}</pre>
+}
+```
+
 
 The log resulting from our test execution is the following:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">INFO: [] *** RecordRoute
+```
+INFO: [] *** RecordRoute
 INFO: [] Visiting point 41.465, -74.048
 INFO: [] Visiting point 40.569, -74.929
 INFO: [] Visiting point 41.755, -74.008
@@ -453,19 +520,22 @@ INFO: [] Visiting point 41.881, -74.172
 ...
 INFO: [] Visiting point 40.466, -74.482
 INFO: [] Finished trip with 10 points. Passed 6 features. Travelled 596,646 meters. It took 10 seconds.
-INFO: [] Finished RecordRoute</pre>
+INFO: [] Finished RecordRoute
+```
+
 
 #### Bidirectional Streaming Call
 
 To finish, let's examine `routeChat` bidirectional method.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">// Send and receive some notes.
+```java
+// Send and receive some notes.
 CountDownLatch finishLatch = client.routeChat();
 public CountDownLatch routeChat() {
     LogHelper.info(clientPrefix+"*** RouteChat");
     final CountDownLatch finishLatch = new CountDownLatch(1);
-    StreamObserver&lt;RouteNote&gt; requestObserver =
-            asyncStub.routeChat(new StreamObserver&lt;RouteNote&gt;() {
+    StreamObserver<RouteNote> requestObserver =
+            asyncStub.routeChat(new StreamObserver<RouteNote>() {
                 @Override
                 public void onNext(RouteNote note) {
                     LogHelper.info(clientPrefix+"Got message \"{0}\" at {1}, {2}", note.getMessage(), note.getLocation()
@@ -503,18 +573,23 @@ public CountDownLatch routeChat() {
     requestObserver.onCompleted();
 
     return finishLatch;
-}</pre>
+}
+```
+
 
 Method `asyncStub.routeChat` also receives and returns a `StreamObserver` as in `asyncStub.recordRoute` method. Although this time the client sends messages to the stream at the same time that the server writes messages into the other stream and these streams are completely independent from each other.
 
 The results logged in client side are:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">INFO: [] *** RouteChat
+```
+INFO: [] *** RouteChat
 INFO: [] Sending message "First message" at 0, 0
 INFO: [] Sending message "Second message" at 0, 10,000,000
 INFO: [] Sending message "Third message" at 10,000,000, 0
 INFO: [] Sending message "Fourth message" at 10,000,000, 10,000,000
-INFO: [] Finished RouteChat</pre>
+INFO: [] Finished RouteChat
+```
+
 
 Test Environment {#h2-9-test-environment}
 -----------------------------------------

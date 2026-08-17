@@ -32,14 +32,15 @@ Let's dive into the eight core principles that define JGraphlet. {#h2-0-let-s-di
 JGraphlet treats your workflow as a Directed Acyclic Graph (DAG). You define tasks as nodes and explicitly draw the connections (edges) between them. This makes complex patterns like fan-out (one task feeding many) and fan-in (many tasks feeding one) natural.
 **Example:**
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">import dev.shaaf.jgraphlet.*;
+```java
+import dev.shaaf.jgraphlet.*;
 import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 
 try (TaskPipeline pipeline = new TaskPipeline()) {
-    Task&lt;String, String&gt; fetchInfo = (id, ctx) -&gt; CompletableFuture.supplyAsync(() -&gt; "Info for " + id);
-    Task&lt;String, String&gt; fetchFeed = (id, ctx) -&gt; CompletableFuture.supplyAsync(() -&gt; "Feed for " + id);
-    Task&lt;Map&lt;String, Object&gt;, String&gt; combine = (inputs, ctx) -&gt; CompletableFuture.supplyAsync(() -&gt;
+    Task<String, String> fetchInfo = (id, ctx) -> CompletableFuture.supplyAsync(() -> "Info for " + id);
+    Task<String, String> fetchFeed = (id, ctx) -> CompletableFuture.supplyAsync(() -> "Feed for " + id);
+    Task<Map<String, Object>, String> combine = (inputs, ctx) -> CompletableFuture.supplyAsync(() ->
         inputs.get("infoNode") + " | " + inputs.get("feedNode")
     );
 
@@ -52,7 +53,9 @@ try (TaskPipeline pipeline = new TaskPipeline()) {
 
     String result = (String) pipeline.run("user123").join();
     System.out.println(result); // "Info for user123 | Feed for user123"
-}</pre>
+}
+```
+
 
 ```
 ```
@@ -62,20 +65,23 @@ JGraphlet provides two distinct task types you can mix and match:
 * **SyncTask*(Sync):*** Returns a direct *O* - output. Ideal for fast, CPU-bound operations.
 **Example:**
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">try (TaskPipeline pipeline = new TaskPipeline()) {
-    Task&lt;String, String&gt; fetchName = (userId, ctx) -&gt;
-        CompletableFuture.supplyAsync(() -&gt; "John Doe");
+```java
+try (TaskPipeline pipeline = new TaskPipeline()) {
+    Task<String, String> fetchName = (userId, ctx) ->
+        CompletableFuture.supplyAsync(() -> "John Doe");
 
-    SyncTask&lt;String, String&gt; toUpper = (name, ctx) -&gt; name.toUpperCase();
+    SyncTask<String, String> toUpper = (name, ctx) -> name.toUpperCase();
 
     pipeline.add("fetch", fetchName)
             .then("transform", toUpper);
 
     String result = (String) pipeline.run("user-42").join();
     System.out.println(result); // "JOHN DOE"
-}</pre>
+}
+```
 
-*** ** * ** ***
+
+
 ### 3. A Simple, Explicit API {#h3-3-3-a-simple-explicit-api}
 JGraphlet avoids complex builders or magic configurations. The API is lean and explicit:
 1. Create a pipeline: `new TaskPipeline()`
@@ -83,9 +89,10 @@ JGraphlet avoids complex builders or magic configurations. The API is lean and e
 3. Wire them up: `connect("fromId", "toId")`
 **Example:**
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">try (TaskPipeline pipeline = new TaskPipeline()) {
-    SyncTask&lt;String, Integer&gt; lengthTask = (s, c) -&gt; s.length();
-    SyncTask&lt;Integer, String&gt; formatTask = (i, c) -&gt; "Length is " + i;
+```java
+try (TaskPipeline pipeline = new TaskPipeline()) {
+    SyncTask<String, Integer> lengthTask = (s, c) -> s.length();
+    SyncTask<Integer, String> formatTask = (i, c) -> "Length is " + i;
 
     pipeline.addTask("calculateLength", lengthTask);
     pipeline.addTask("formatOutput", formatTask);
@@ -94,18 +101,21 @@ JGraphlet avoids complex builders or magic configurations. The API is lean and e
 
     String result = (String) pipeline.run("Hello").join();
     System.out.println(result); // "Length is 5"
-}</pre>
+}
+```
 
-*** ** * ** ***
+
+
 ### 4. A Clear Fan-In Input Shape {#h3-4-4-a-clear-fan-in-input-shape}
 A fan-in task receives a `Map`, where keys are parent task IDs and values are their results.
 **Example:**
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">try (TaskPipeline pipeline = new TaskPipeline()) {
-    SyncTask&lt;String, String&gt; fetchUser = (id, ctx) -&gt; "User: " + id;
-    SyncTask&lt;String, String&gt; fetchPerms = (id, ctx) -&gt; "Role: admin";
+```java
+try (TaskPipeline pipeline = new TaskPipeline()) {
+    SyncTask<String, String> fetchUser = (id, ctx) -> "User: " + id;
+    SyncTask<String, String> fetchPerms = (id, ctx) -> "Role: admin";
 
-    Task&lt;Map&lt;String, Object&gt;, String&gt; combine = (inputs, ctx) -&gt; CompletableFuture.supplyAsync(() -&gt; {
+    Task<Map<String, Object>, String> combine = (inputs, ctx) -> CompletableFuture.supplyAsync(() -> {
         String userData = (String) inputs.get("userNode");
         String permsData = (String) inputs.get("permsNode");
         return userData + " (" + permsData + ")";
@@ -119,14 +129,17 @@ A fan-in task receives a `Map`, where keys are parent task IDs and values are th
 
     String result = (String) pipeline.run("user-1").join();
     System.out.println(result); // "User: user-1 (Role: admin)"
-}</pre>
+}
+```
 
-*** ** * ** ***
+
+
 ### 5. A Clear Run Contract {#h3-5-5-a-clear-run-contract}
 Executing a pipeline is straightforward: `pipeline.run(input)` returns a `CompletableFuture` for the final result. You can block with `.join()` or use async chaining.
 **Example:**
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">String input = "my-data";
+```java
+String input = "my-data";
 
 // Blocking approach
 try {
@@ -138,19 +151,22 @@ try {
 
 // Non-blocking approach
 pipeline.run(input)
-        .thenAccept(result -&gt; System.out.println("Result (non-blocking): " + result))
-        .exceptionally(ex -&gt; {
+        .thenAccept(result -> System.out.println("Result (non-blocking): " + result))
+        .exceptionally(ex -> {
             System.err.println("Async pipeline failed: " + ex.getMessage());
             return null;
-        });</pre>
+        });
+```
 
-*** ** * ** ***
+
+
 ### 6. A Built-in Resource Lifecycle {#h3-6-6-a-built-in-resource-lifecycle}
 JGraphlet implements `AutoCloseable`. Use try-with-resources to guarantee safe shutdown of internal resources.
 **Example:**
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">try (TaskPipeline pipeline = new TaskPipeline()) {
-    pipeline.add("taskA", new SyncTask&lt;String, String&gt;() {
+```java
+try (TaskPipeline pipeline = new TaskPipeline()) {
+    pipeline.add("taskA", new SyncTask<String, String>() {
         @Override
         public String executeSync(String input, PipelineContext context) {
             if (input == null) {
@@ -163,30 +179,36 @@ JGraphlet implements `AutoCloseable`. Use try-with-resources to guarantee safe s
     pipeline.run("data").join();
 
 } // pipeline.shutdown() is called automatically
-System.out.println("Pipeline resources have been released.");</pre>
+System.out.println("Pipeline resources have been released.");
+```
 
-*** ** * ** ***
+
+
 ### 7. Context {#h3-7-7-context}
 `PipelineContext` is a thread-safe, per-run workspace for metadata.
 **Example:**
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">SyncTask&lt;String, String&gt; taskA = (input, ctx) -&gt; {
+```java
+SyncTask<String, String> taskA = (input, ctx) -> {
     ctx.put("requestID", "xyz-123");
     return input;
 };
-SyncTask&lt;String, String&gt; taskB = (input, ctx) -&gt; {
+SyncTask<String, String> taskB = (input, ctx) -> {
     String reqId = ctx.get("requestID", String.class).orElse("unknown");
     return "Processed input " + input + " for request: " + reqId;
-};</pre>
+};
+```
 
-*** ** * ** ***
+
+
 ### 8. Optional Caching {#h3-8-8-optional-caching}
 Tasks can opt into caching to prevent re-computation.
 **Example:**
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">Task&lt;String, String&gt; expensiveApiCall = new Task&lt;&gt;() {
+```java
+Task<String, String> expensiveApiCall = new Task<>() {
     @Override
-    public CompletableFuture&lt;String&gt; execute(String input, PipelineContext context) {
+    public CompletableFuture<String> execute(String input, PipelineContext context) {
         System.out.println("Performing expensive call for: " + input);
         return CompletableFuture.completedFuture("Data for " + input);
     }
@@ -202,9 +224,11 @@ try (TaskPipeline pipeline = new TaskPipeline()) {
 
     System.out.println("Second call...");
     pipeline.run("same-key").join(); // Result is from cache
-}</pre>
+}
+```
 
-*** ** * ** ***
+
+
 The result is a clean, testable way to orchestrate synchronous or asynchronous tasks for composing complex flows, such as parallel retrieval, merging, judging, and guardrails---without requiring a heavyweight workflow engine.
 To learn more or try it out:
 * [Maven central](https://mvnrepository.com/artifact/dev.shaaf.jgraphlet/jgraphlet)

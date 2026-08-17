@@ -42,11 +42,11 @@ TornadoVM uses a programming model that derives from the state-of-the-art progra
 
 <br />
 
-*** ** * ** ***
+
 
 **Note:** This article focuses on the changes that are required to migrate applications that use the TornadoVM API (prior to v0.15). All changes concern only the host code. Therefore for the accelerated code we point you to the [documentation](https://tornadovm.readthedocs.io/en/latest/programming.html#expressing-parallelism-within-java-methods) that shows how to express parallelism within a method.
 
-*** ** * ** ***
+
 
 The execution model of TornadoVM includes three main steps:
 
@@ -76,11 +76,11 @@ The following code snippet creates a new TaskGraph:
 
 <br />
 
-*** ** * ** ***
+
 
 **Note for code-migration:** To migrate existing TornadoVM applications to the new v0.15 API, you can replace the existing **TaskSchedule** objects in your program with the **TaskGraph** objects with the following changes regarding how data is transferred from the host to the device, and vice-versa.
 
-*** ** * ** ***
+
 
 ### 2.1. Definition of data to be transferred to device {#h3-2-2-1-definition-of-data-to-be-transferred-to-device}
 
@@ -97,11 +97,11 @@ The following code snippet sets one input array (input) to be transferred from t
 
 <br />
 
-*** ** * ** ***
+
 
 **Note for migration:** The s**treamIn()** and **copyIn()** methods of TornadoVM API (prior to v0.15) need to be replaced with the **transferToDevice()** method, and the first parameter has to be configured accordingly. If your program was using **streamIn()** , then data was moved in every execution, and you will have to use **DataTransferMode.EVERY_EXECUTION** . If your program was using the **copyIn()** method or no method to define the input, then data was moved only during the first execution. So, you have to use the **DataTransferMode.FIRST_EXECUTION** mode.
 
-*** ** * ** ***
+
 
 ### 2.2. Definition of the accelerated code for data processing {#h3-3-2-2-definition-of-the-accelerated-code-for-data-processing}
 
@@ -117,13 +117,13 @@ A task can be defined as follows:
 
 <br />
 
-*** ** * ** ***
+
 
 **Note:** The data in the **transferToHost** and **transferToDevice** methods, define the data flow between one or multiple tasks in a **TaskGraph**. In case data from one task is going to be consumed by another task, then it will be persisted into the device's memory and no copy will be involved.
 
 Unless, the data is also passed in the **transferToHost** method. The TornadoVM runtime stores which data is associated with the corresponding data transfer mode, and it will perform the actual data transfers only during the execution of the task by the execution plan.
 
-*** ** * ** ***
+
 
 ### 2.3. Definition of data to be transferred to host {#h3-4-2-3-definition-of-data-to-be-transferred-to-host}
 
@@ -140,11 +140,11 @@ The following code snippet sets one output array (output) to be transferred from
 
 <br />
 
-*** ** * ** ***
+
 
 **Note for migration:** The **streamOut()** and **copyOut()** methods of TornadoVM API (prior to v0.15) need to be replaced with the **transferToHost()** method and the first parameter has to be configured accordingly. If your program was using **streamOut()** , then data was moved in every execution, and you will have to use **DataTransferMode.EVERY_EXECUTION**.
 
-*** ** * ** ***
+
 
 3. Create an Immutable Task Graph {#h2-5-3-create-an-immutable-task-graph}
 --------------------------------------------------------------------------
@@ -163,11 +163,11 @@ An immutable task graph cannot be modified. Thus, if programmers need to update 
 
 <br />
 
-*** ** * ** ***
+
 
 **Note:** This is a new feature that ensures that different shapes of a TaskGraph can co-exist in the same application. The benefit is that code (e.g., OpenCL, PTX, SPIR-V) is generated only for each **snapshot** of a **TaskGraph**, which allows programmers to invoke different versions of a TaskGraph without triggering re-compilation.
 
-*** ** * ** ***
+
 
 4. Further reading and examples {#h2-6-4-further-reading-and-examples}
 ----------------------------------------------------------------------

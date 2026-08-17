@@ -30,7 +30,8 @@ The simplest way to calling a microservice in Java is using the `HttpURLConnecti
 
 **Example**:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">import java.io.BufferedReader;
+```
+import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -52,7 +53,9 @@ public class SimpleServiceCaller {
             con.disconnect();
         }
     }
-}</pre>
+}
+```
+
 
 **Pros:**
 
@@ -72,7 +75,8 @@ It supports many advanced features like connection pooling, which means it can h
 
 **Example:**
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">import org.apache.http.impl.client.CloseableHttpClient;
+```
+import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.util.EntityUtils;
@@ -82,11 +86,13 @@ public class ApacheHttpClientExample {
 
         try (CloseableHttpClient client = HttpClients.createDefault()) {
             HttpGet request = new HttpGet(serviceUrl);
-            return client.execute(request, httpResponse -&gt; 
+            return client.execute(request, httpResponse -> 
                 EntityUtils.toString(httpResponse.getEntity()));
         }
     }
-}</pre>
+}
+```
+
 
 **Pros:**
 
@@ -104,7 +110,8 @@ For applications built with Spring, `RestTemplate` and `WebClient` are convenien
 
 **Example with [RestTemplate](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/web/client/RestTemplate.html "RestTemplate"):**
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">import org.springframework.web.client.RestTemplate;
+```
+import org.springframework.web.client.RestTemplate;
 
 public class RestTemplateExample {
     private static final RestTemplate restTemplate = new RestTemplate();
@@ -112,11 +119,14 @@ public class RestTemplateExample {
     public static String callService(String serviceUrl) {
         return restTemplate.getForObject(serviceUrl, String.class);
     }
-}</pre>
+}
+```
+
 
 **Example with WebClient:**
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">import org.springframework.web.reactive.function.client.WebClient;
+```
+import org.springframework.web.reactive.function.client.WebClient;
 
 public class WebClientExample {
     private static final WebClient webClient = WebClient.create();
@@ -128,7 +138,9 @@ public class WebClientExample {
                         .bodyToMono(String.class)
                         .block();  // Waits for the response
     }
-}</pre>
+}
+```
+
 
 **Pros:**
 
@@ -146,12 +158,15 @@ Feign is a tool that lets you write very simple code to make HTTP calls by defin
 
 **Example:**
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">@FeignClient(name = "serviceClient", url = "https://jsonplaceholder.typicode.com/todos/1")
+```
+@FeignClient(name = "serviceClient", url = "https://jsonplaceholder.typicode.com/todos/1")
 public interface ServiceClient {
 
     @GetMapping("/service")
     String callService();
-}</pre>
+}
+```
+
 
 **Pros:**
 

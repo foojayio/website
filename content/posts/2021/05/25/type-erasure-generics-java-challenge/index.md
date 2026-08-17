@@ -34,7 +34,8 @@ Type Erasure Generics Simpson Java Challenge {#h2-0-type-erasure-generics-simpso
 
 What will happen when running the following code?
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">import java.util.ArrayList;
+```java
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
 
@@ -42,37 +43,42 @@ import java.util.stream.Stream;
 public class GenericsChallenge3 {
 
     public static void main(String... doYourBest) {
-        List&lt;String&gt; firstResult =  GenericsChallenge3.&lt;String&gt;get
-                (new ArrayList&lt;&gt;(), new String("1"));
+        List<String> firstResult =  GenericsChallenge3.<String>get
+                (new ArrayList<>(), new String("1"));
 
-        List&lt;Object&gt; secondResult = GenericsChallenge3.
+        List<Object> secondResult = GenericsChallenge3.
                 get("Homer", Double.valueOf("4"));
 
-        Stream&lt;Object&gt; stream = Stream.concat(firstResult.stream(),
+        Stream<Object> stream = Stream.concat(firstResult.stream(),
                 secondResult.stream());
         stream.forEach(System.out::println);
     }
 
-    public static &lt;T&gt; List&lt;T&gt; get(List&lt;T&gt; list, T t) {
+    public static <T> List<T> get(List<T> list, T t) {
         list.add(t);
         return list;
     }
 
-    public static &lt;T, R extends T&gt; List&lt;T&gt; get(T type1, R type2) {
-        List&lt;T&gt; list = new ArrayList&lt;&gt;();
+    public static <T, R extends T> List<T> get(T type1, R type2) {
+        List<T> list = new ArrayList<>();
         list.add(type1);
         list.add(type2);
         return list;
     }
-}</pre>
+}
+```
+
 
 A) There will be a ClassCastException in the line 27  
 
 B)
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">1
+```
+1
 Homer
-4.0</pre>
+4.0
+```
+
 
 <br />
 
@@ -82,17 +88,26 @@ C) It won't compile at line 9
 
 Let's analyse the code:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&lt;code&gt;List firstResult = GenericsChallenge3.get(new ArrayList(), new String("1"));&lt;/code&gt;</pre>
+```java
+<code>List firstResult = GenericsChallenge3.get(new ArrayList(), new String("1"));</code>
+```
+
 
 In the line above, we are invoking the get method passing an ArrayList and a String as parameters. It's going to work fine, T will be a String. Even though we are passing an ArrayList without a type, Java will implicitly pass a String since the second type is String. If the second type is Integer, the type of the ArrayList would be Integer as well.
 
 Then we invoke this other method:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&lt;code&gt;List secondResult = GenericsChallenge3.get("Homer", Double.valueOf("4"));&lt;/code&gt;</pre>
+```java
+<code>List secondResult = GenericsChallenge3.get("Homer", Double.valueOf("4"));</code>
+```
+
 
 Note that we are passing two different types to those generic parameters:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&lt;code&gt;public static List get(T type1, R type2) { ... }&lt;/code&gt;</pre>
+```java
+<code>public static List get(T type1, R type2) { ... }</code>
+```
+
 
 The type T will become an Object since we are passing two different types. In order to make T compatible with the different types we are passing, the JVM will transform T into an object so that the elements can be inserted into the ArrayList.
 

@@ -35,8 +35,11 @@ To install TornadoVM, it is necessary to have some packages installed. For insta
 
 Assuming that Homebrew is installed in your system, you can open a terminal and execute the following commands:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">$ brew install wget
-$ brew install maven</pre>
+```
+$ brew install wget
+$ brew install maven
+```
+
 
 ### 2. Run TornadoVM Installer {#h3-1-2-run-tornadovm-installer}
 
@@ -44,25 +47,36 @@ Now that prerequisites are in place, the next step is to use the TornadoVM insta
 
 Note that the installer will download and use the OpenJDK version for x86_64 architecture. This software version is portable on M1 Pro which has an ARM processor due to [Rosetta 2 dynamic binary translation](https://www.toptal.com/apple/apple-m1-processor-compatibility-overview) that allows x86 software to run on M1 Pro.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">$ git clone https://github.com/beehive-lab/TornadoVM.git
+```
+$ git clone https://github.com/beehive-lab/TornadoVM.git
 $ cd TornadoVM
-$ ./scripts/tornadoVMInstaller.sh --jdk11 --opencl</pre>
+$ ./scripts/tornadoVMInstaller.sh --jdk11 --opencl
+```
+
 
 Once the installer script is completed, users can source the script that holds all the paths that need to be exported before they run TornadoVM.
 
 Be aware that this step has to be run every time that a new terminal process begins. Alternatively, you can add that command in your *bashrc* or *zsh* profile.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">$ source source.sh
-$ echo 'source &lt;path-to-TornadoVM&gt;/TornadoVM/source.sh' &gt;&gt; ~/.zprofile</pre>
+```
+$ source source.sh
+$ echo 'source <path-to-TornadoVM>/TornadoVM/source.sh' >> ~/.zprofile
+```
+
 
 If you want to rebuild TornadoVM using the same JDK (OpenJDK 11) with the installation, you can type:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">$ make jdk-11-plus
-</pre>
+```
+$ make jdk-11-plus
+```
+
 
 Now that TornadoVM is installed in your system, let's see which devices are detected as OpenCL compatible by running:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">$ tornado --devices</pre>
+```
+$ tornado --devices
+```
+
 
 ![](devices-m1-pro.png)
 
@@ -86,8 +100,10 @@ Another reason that unit-tests fail is an exception regarding `CL_INVALID_WORK_G
 
 We opted to run the Matrix Multiplication application for two dimensional matrices on the GPU device with id (0:1). To reproduce the result you can execute the following command:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">$ tornado --threadInfo -Ds0.t0.device=0:1 -m tornado.examples/uk.ac.manchester.tornado.examples.compute.MatrixMultiplication2D 2048
-</pre>
+```
+$ tornado --threadInfo -Ds0.t0.device=0:1 -m tornado.examples/uk.ac.manchester.tornado.examples.compute.MatrixMultiplication2D 2048
+```
+
 
 The result is 738.5x performance increase compared to a single threaded execution, as shown below.  
 ![](mxm-m1-pro-700x227.png)

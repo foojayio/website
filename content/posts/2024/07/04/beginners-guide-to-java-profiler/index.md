@@ -38,7 +38,8 @@ Example application {#h2-0-example-application}
 
 Let's say we have the following program:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">import java.io.IOException;
+```java
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -49,7 +50,7 @@ public class CountEvents {
 
     public static int update(Deque events, long nanos, long interval) {
         events.add(nanos);
-        events.removeIf(aTime -&gt; aTime &lt; nanos - interval);
+        events.removeIf(aTime -> aTime < nanos - interval);
         return events.size();
     }
 
@@ -60,7 +61,7 @@ public class CountEvents {
         int[] count = new int[total];
 
         Deque collection = new ArrayDeque();
-        for (int counter = 0; counter &lt; count.length; counter++) {
+        for (int counter = 0; counter < count.length; counter++) {
             count[counter] = update(collection, System.nanoTime(), interval);
             Path p = Paths.get("./a/b");
             Files.createDirectories(p);
@@ -71,7 +72,9 @@ public class CountEvents {
         System.out.println("Average count: " + (int) (Arrays.stream(count).average().getAsDouble()) + " op");
         System.out.println("Spent time: " + TimeUnit.NANOSECONDS.toMillis(spent) + " ms");
     }
-}</pre>
+}
+```
+
 
 <br />
 
@@ -81,8 +84,11 @@ Every time a task runs, the benchmark logic stores the current timestamp to a co
 
 When we run the program, we find that the figures are suspiciously low:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">Average count: 6623 op
-Spent time: 1462 ms</pre>
+```
+Average count: 6623 op
+Spent time: 1462 ms
+```
+
 
 Let's profile it and see what's wrong.
 
@@ -135,10 +141,13 @@ Seems like the code responsible for removing events from the queue is doing extr
 
 Since we're using an ordered collection, and events are added in chronological order, we can be sure that all elements subject for removal are always at the head of the queue. If we replace `removeIf()` with a loop that breaks once it starts iterating over events that it is not going to remove, we can potentially improve performance:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">// events.removeIf(aTime -&gt; aTime &lt; nanos - interval);
-while (events.peekFirst() &lt; nanos - interval) {
+```java
+// events.removeIf(aTime -> aTime < nanos - interval);
+while (events.peekFirst() < nanos - interval) {
     events.removeFirst();
-}</pre>
+}
+```
+
 
 Let's change the code, then profile our app once again and look at the result:
 
@@ -150,8 +159,11 @@ The overhead from the benchmark logic is now minimal as it should be, and the `c
 
 The improvement is also visible in the console output:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">Average count: 14788 op
-Spent time: 639 ms</pre>
+```
+Average count: 14788 op
+Spent time: 639 ms
+```
+
 
 Native profiling {#h2-4-native-profiling}
 -----------------------------------------
@@ -179,15 +191,21 @@ The description is valid from the Java perspective, as it doesn't raise any [Jav
 
 Let's try to avoid this and wrap the call to `createDirectories()` in a `Files.exists()` check:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">Path p = Paths.get("./a/b");
+```java
+Path p = Paths.get("./a/b");
 if (!Files.exists(p)) {
     Files.createDirectories(p);
-}</pre>
+}
+```
+
 
 The program becomes lightning fast!
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">Average count: 50000 op
-Spent time: 87 ms</pre>
+```
+Average count: 50000 op
+Spent time: 87 ms
+```
+
 
 It is now about 16 times faster than it originally was. This exception handling was really expensive! The results may differ depending on the hardware and the environment, but they should be impressive anyway.
 

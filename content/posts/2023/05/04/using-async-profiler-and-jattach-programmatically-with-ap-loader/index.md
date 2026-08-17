@@ -33,11 +33,14 @@ In this article, I'm focusing on its programmatic usage: Async-profiler can be u
 
 The ap-loader library allows you to depend on a specific version of async-profiler using [gradle or maven](https://central.sonatype.com/search?smo=true&namespace=me.bechberger&q=ap-loader-):
 
-<pre class="EnlighterJSRAW" data-enlighter-language="xml" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&lt;dependency&gt;
-    &lt;groupId&gt;me.bechberger&lt;/groupId&gt;
-    &lt;artifactId&gt;ap-loader-all&lt;/artifactId&gt;
-    &lt;version&gt;2.9-5&lt;/version&gt;
-&lt;/dependency&gt;</pre>
+```xml
+<dependency>
+    <groupId>me.bechberger</groupId>
+    <artifactId>ap-loader-all</artifactId>
+    <version>2.9-5</version>
+</dependency>
+```
+
 
 There are multiple maven artifacts: [ap-loader-all](https://central.sonatype.com/artifact/me.bechberger/ap-loader-all) which contains the native libraries for all platforms for which async-profiler has pre-built libraries and artifacts that only support a single platform like [`ap-loader-macos`](https://central.sonatype.com/artifact/me.bechberger/ap-loader-macos). I recommend using the `ap-loader-all` if you don't know what you're doing, the current release is still tiny, with 825KB.
 
@@ -60,7 +63,10 @@ This is the main entry point to ap-loader; it lives in the `one.profiler` packag
 
 The `load` method loads the included async-profiler library for the current platform:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">AsyncProfiler profiler = AsyncProfilerLoader.load();</pre>
+```java
+AsyncProfiler profiler = AsyncProfilerLoader.load();
+```
+
 
 It returns the instantiated API wrapper class. The method throws an `IllegalStateException` if the present ap-loader dependencies do not support the platform and an `IOException` if loading the library resulted in other problems.
 
@@ -68,11 +74,14 @@ Newer versions of the AsyncProfiler API contain the `AsyncProfiler#getInstance()
 
 Dealing with multiple platforms is hard, and throwing an exception when not supporting a platform might be inconvenient for your use case. AsyncProfilerLoader has the `loadOrNull` method which returns `null` instead and also the `isSupported` to check whether the current combination of OS and CPU is supported. A typical use case could be:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">if (AsyncProfilerLoader.isSupported()) {
+```java
+if (AsyncProfilerLoader.isSupported()) {
   AsyncProfilerLoader.load().start(...);
 } else {
   // use JFR or other fall-backs
-}</pre>
+}
+```
+
 
 This might still throw `IOException`s, but they should never happen in normal circumstances and are probably by problems that should be investigated, being either an error in ap-loader or in your application.
 
@@ -87,18 +96,24 @@ The async-profiler project contains the [profiler.s](https://github.com/jvm-prof
 
 This helper script is also included in ap-loader and allows you to use the script on the command-line via `java -jar ap-loader profiler ...`, the API exposes this functionality via `ExecutionResult executeProfiler(String... args)`.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">AsyncProfilerLoader.executeProfiler("-e", "wall", "8983")
+```java
+AsyncProfilerLoader.executeProfiler("-e", "wall", "8983")
 // is equivalent to
-./profiler.sh -e wall -t -i 5ms -f result.html 8983</pre>
+./profiler.sh -e wall -t -i 5ms -f result.html 8983
+```
+
 
 The `executeProfiler` method throws an `IllegalStateException` if the current platform is not supported. The returned instance of `ExecutionResult` contains the standard and error output:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public static class ExecutionResult {
+```java
+public static class ExecutionResult {
   private final String stdout;
   private final String stderr;
     // getter and constructor
     ...
-}</pre>
+}
+```
+
 
 `executeProfiler` throws an `IOException` if the profiler execution failed.
 
@@ -107,11 +122,14 @@ Execute Converter {#h2-3-execute-converter}
 
 You cannot only use the converter by using the classes from the `one.profiler.converter`, but you can also execute the converter by calling `ExecutionResult executeProfiler(String... args)`, e.g., the following:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">AsyncProfilerLoader.executeConverter(
-  "jfr2flame", "&lt;input.jfr&gt;", "&lt;output.html&gt;")
+```java
+AsyncProfilerLoader.executeConverter(
+  "jfr2flame", "<input.jfr>", "<output.html>")
 // is equivalent to
 java -cp converter.jar \
-  jfr2flame &lt;input.jfr&gt; &lt;output.html&gt;</pre>
+  jfr2flame <input.jfr> <output.html>
+```
+
 
 The `executeConverter` returns the output of the conversion tool on success and throws an `IOException` on error, as before.
 
@@ -122,24 +140,33 @@ There are multiple ways to use the embedded [jattach](https://github.com/jattach
 
 `executeJattach` works similar to `executeProfiler`, e.g.:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">AsyncProfilerLoader.executeJattach(
-  "&lt;pid&gt;", "load", "instrument", "false", "javaagent.jar=arguments")
+```java
+AsyncProfilerLoader.executeJattach(
+  "<pid>", "load", "instrument", "false", "javaagent.jar=arguments")
 // is equivalent to
-jattach &lt;pid&gt; load instrument false "javaagent.jar=arguments"</pre>
+jattach <pid> load instrument false "javaagent.jar=arguments"
+```
+
 
 This runs the same as jattach with the only exception that every string that ends with  
 `libasyncProfiler.so` is mapped to the extracted async-profiler library for the load command.  
 
 One can, therefore, for example, start the async-profiler on a different JVM via the following:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">AsyncProfilerLoader.executeJattach(
-  PID, "load", "libasyncProfiler.so", true, "start")</pre>
+```java
+AsyncProfilerLoader.executeJattach(
+  PID, "load", "libasyncProfiler.so", true, "start")
+```
+
 
 But this use case can, of course, be accomplished by using the `executeProfiler` method, which internally uses jattach.
 
 A great use case for jattach is to attach a custom native agent to the currently running JVM. Starting with JVM 9 doing this via [VirtualMachine#attach](https://docs.oracle.com/en/java/javase/17/docs/api/jdk.attach/com/sun/tools/attach/VirtualMachine.html#attach(java.lang.String)) [throws](https://stackoverflow.com/questions/50498102/how-to-set-jdk-attach-allowattachself-true-globally) an IOException if you try this without setting `-Djdk.attach.allowAttachSelf=true`. The `boolean jattach(Path agentPath[, String arguments])` methods simplify this, constructing the command line arguments for you and returning true if jattach succeeded, e.g.:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">AsyncProfilerLoader.jattach("libjni.so")</pre>
+```java
+AsyncProfilerLoader.jattach("libjni.so")
+```
+
 
 This attaches the `libjni.so` agent to the current JVM. The process id of this JVM can be obtained by using the `getProcessId` method.
 
@@ -148,7 +175,8 @@ Extracting a Native Library {#h2-5-extracting-a-native-library}
 
 I happen to write many small projects for testing profilers that often require loading a native library from the resources folder; an[example](https://github.com/parttimenerd/trace_validation/blob/78ad8dd70233b33c266bcec834b3c808568425e1/src/runtime/me/bechberger/trace/NativeChecker.java#LL11C1-L44C6) can be found in the [trace_validation](https://github.com/parttimenerd/trace_validation) ([blog post](https://mostlynerdless.de/blog/2023/03/14/validating-java-profiling-apis/)) project:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">/**
+```java
+/**
  * extract the native library and return its temporary path
  */
 public static synchronized Path getNativeLibPath(
@@ -163,11 +191,14 @@ public static synchronized Path getNativeLibPath(
     }
   }
   return nativeLibPath;
-}</pre>
+}
+```
+
 
 I, therefore, added the `extractCustomLibraryFromResources` method:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">/**                                                                                                                                        
+```java
+/**                                                                                                                                        
  * Extracts a custom native library from the resources and 
  * returns the alternative source if the file is not 
  * in the resources.                                                                                                    
@@ -203,17 +234,22 @@ I, therefore, added the `extractCustomLibraryFromResources` method:
  */                                                                                                                                        
 public static Path extractCustomLibraryFromResources(
   ClassLoader classLoader, String fileName, 
-  Path alternativeSource) throws IOException</pre>
+  Path alternativeSource) throws IOException
+```
+
 
 This can be used effectively together with jattach to attach a native agent from the resources to the current JVM:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">// extract the agent first from the resources
+```java
+// extract the agent first from the resources
 Path p = one.profiler.AsyncProfilerLoader.
   extractCustomLibraryFromResources(
     ....getClassLoader(), "library name");
 // attach the agent to the current JVM
 one.profiler.AsyncProfilerLoader.jattach(p, "optional arguments")
-// -&gt; returns true if jattach succeeded</pre>
+// -> returns true if jattach succeeded
+```
+
 
 *This use-case comes from a profiler test helper library on which I hope to write an article in the near future.*
 

@@ -37,29 +37,32 @@ Vaadin setup {#h2-1-vaadin-setup}
 
 Setting up Vaadin in the context of Spring Boot is a breeze:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="xml">&lt;project&gt;
-    &lt;properties&gt;
-        &lt;java.version&gt;17&lt;/java.version&gt;
-        &lt;kotlin.version&gt;1.9.24&lt;/kotlin.version&gt;
-        &lt;vaadin.version&gt;24.4.9&lt;/vaadin.version&gt;                   &lt;!--1--&gt;
-    &lt;/properties&gt;
-    &lt;dependencyManagement&gt;
-        &lt;dependencies&gt;
-            &lt;dependency&gt;
-                &lt;groupId&gt;com.vaadin&lt;/groupId&gt;
-                &lt;artifactId&gt;vaadin-bom&lt;/artifactId&gt;               &lt;!--2--&gt;
-                &lt;version&gt;${vaadin.version}&lt;/version&gt;
-                &lt;type&gt;pom&lt;/type&gt;
-                &lt;scope&gt;import&lt;/scope&gt;
-            &lt;/dependency&gt;
-        &lt;/dependencies&gt;
-    &lt;/dependencyManagement&gt;
-    &lt;dependencies&gt;
-        &lt;dependency&gt;
-            &lt;groupId&gt;com.vaadin&lt;/groupId&gt;
-            &lt;artifactId&gt;vaadin-spring-boot-starter&lt;/artifactId&gt;   &lt;!--3--&gt;
-        &lt;/dependency&gt;
-&lt;/project&gt;</pre>
+```xml
+<project>
+    <properties>
+        <java.version>17</java.version>
+        <kotlin.version>1.9.24</kotlin.version>
+        <vaadin.version>24.4.9</vaadin.version>                   <!--1-->
+    </properties>
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.vaadin</groupId>
+                <artifactId>vaadin-bom</artifactId>               <!--2-->
+                <version>${vaadin.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+    <dependencies>
+        <dependency>
+            <groupId>com.vaadin</groupId>
+            <artifactId>vaadin-spring-boot-starter</artifactId>   <!--3-->
+        </dependency>
+</project>
+```
+
 
 1. Set Vaadin version along with other properties
 2. Keep the version of all dependencies consistent
@@ -67,7 +70,10 @@ Setting up Vaadin in the context of Spring Boot is a breeze:
 
 Vaadin builds upon a regular Java Servlet, which maps to the root by default. The Vaadin Spring Boot integration allows overriding the default. Because our codebase integrates multiple frameworks, we map it to `/vaadin` via the relevant property:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">vaadin.url-mapping=/vaadin/*</pre>
+```
+vaadin.url-mapping=/vaadin/*
+```
+
 
 At the first request from a client, Vaadin will return the JavaScript engine's code. The engine will make subsequent requests to retrieve the configured UI and scaffold the latter client side. From then on, the engine handles all user interactions and updates the UI if necessary.
 
@@ -76,14 +82,17 @@ First steps with Vaadin {#h2-2-first-steps-with-vaadin}
 
 Once we set up the project, we must configure which component Vaadin displays when it receives a request.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="kotlin">@Route("/")                                                       //1
+```kotlin
+@Route("/")                                                       //1
 @PageTitle("Vaadin")                                              //2
-class TodoView(todos: ArrayList&lt;Todo&gt;) : VerticalLayout() {       //3-4-5
+class TodoView(todos: ArrayList<Todo>) : VerticalLayout() {       //3-4-5
 
     init {                                                        //6
         // ...                                                    //7
     }
-}</pre>
+}
+```
+
 
 1. Associates the component to the Vaadin servlet **subcontext** root
 2. Set the static page title. In case you need a dynamic title, you can implement [HasDynamicTitle](https://github.com/vaadin/flow/blob/main/flow-server/src/main/java/com/vaadin/flow/router/HasDynamicTitle.java)
@@ -107,26 +116,35 @@ Some components can contain others, and they know how to lay their subcomponents
 
 Adding components to a layout is straightforward:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="kotlin">add(Label("Hello"))                                               //1
-add(Label("world!"))</pre>
+```kotlin
+add(Label("Hello"))                                               //1
+add(Label("world!"))
+```
+
 
 1. In the context of the `init()` function
 
 While this works perfectly, we can improve the situation using [Karibu-DSL](https://github.com/mvysny/karibu-dsl) since we use Kotlin. We can rewrite the above snippet as follows:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="kotlin">label("Hello")                                                    //1
-label("world!")</pre>
+```kotlin
+label("Hello")                                                    //1
+label("world!")
+```
+
 
 1. `label()` is a Karibu DSL extension function on the `HasComponent` interface
 
 Karibu is great, but with a slight downside: it doesn't offer extension functions for the whole API. For example, you need to fall back to the regular API to add footer to a `Grid` component:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="kotlin">appendFooterRow().apply {
+```kotlin
+appendFooterRow().apply {
     getCell(completedProp).component = Button("Clean up") {
         todos.removeIf { it.completed }
         refresh()
     }
-}</pre>
+}
+```
+
 
 On the plus side, Karibu is Open Source, and you can always contribute if you have something to add.
 
@@ -139,9 +157,12 @@ When mainframes were the kings of computing, you accessed them via terminals. Th
 
 Web applications changed this paradigm. As our previous articles showed, every interaction maps now to a request-response flow, synchronous or asynchronous. Vaadin brings us back to the original paradigm.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="kotlin">Checkbox(todo.completed).apply {                                  //1
+```kotlin
+Checkbox(todo.completed).apply {                                  //1
     addValueChangeListener { todo.completed = it.value }          //2
-}</pre>
+}
+```
+
 
 1. Initialize a new `Checkbox` component with a value
 2. When the value of the checkbox changes, execute the lambda - we change the underlying model's value
@@ -167,6 +188,6 @@ The complete source code for this post can be found on [GitHub](https://github.c
 * [What is Flow?](https://vaadin.com/docs/latest/flow/what-is-flow)
 * [More Vaadin](https://morevaadin.com/)
 
-*** ** * ** ***
+
 
 *Originally published at [A Java Geek](https://blog.frankel.ch/ajax-ssr/6/) on October 13^th^, 2024*

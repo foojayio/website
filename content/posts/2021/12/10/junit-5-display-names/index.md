@@ -63,7 +63,8 @@ Adding a @DisplayName annotation on a given class or test method can help custom
 
 **Example** : **[@DisplayName](https://github.com/c-guntur/java-katas/blob/baseline/java-datetime/src/solutions/java/none/cvg/datetime/STest3PeriodsAndDurationsTest.java#L35)** (<https://github.com/c-guntur/java-katas/blob/baseline/java-datetime/src/solutions/java/none/cvg/datetime/STest3PeriodsAndDurationsTest.java#L35>)
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">/**
+```java
+/**
 * DateTime ranges: Period, Duration tests.
 *
 * Note: We create a Clock instance in setup() used for some of the tests.
@@ -76,13 +77,16 @@ Adding a @DisplayName annotation on a given class or test method can help custom
 @DisplayNameGeneration(DateTimeKataDisplayNames.class)
 @DisplayName("Periods (days, months, years) and Durations (hours, minutes, seconds)")
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-public class STest3PeriodsAndDurationsTest {</pre>
+public class STest3PeriodsAndDurationsTest {
+```
+
 
 #### DisplayName on a test method
 
 **Example** : **[@DisplayName](https://github.com/c-guntur/java-katas/blob/baseline/java-datetime/src/solutions/java/none/cvg/datetime/STest2LocalAndZonedDateTimesTest.java#L304)** (<https://github.com/c-guntur/java-katas/blob/baseline/java-datetime/src/solutions/java/none/cvg/datetime/STest2LocalAndZonedDateTimesTest.java#L304>)
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">    @Test
+```java
+    @Test
     @Tag("PASSING")
     @Order(10)
     @DisplayName("verify conversion of UTC date time to Indian Standard Time")
@@ -110,7 +114,9 @@ public class STest3PeriodsAndDurationsTest {</pre>
         assertEquals(35,
                 gmtPlusOneHourTimeForAllFives.getMinute(),
                 "The minute should be 35 when Zone Offset is GMT +0530");
-    }</pre>
+    }
+```
+
 
 ### Using DisplayNameGenerator {#h3-3-using-displaynamegenerator}
 
@@ -138,7 +144,8 @@ The example extends the Standard implementation.
 
 **Example** : [**DisplayNameGenerator**](https://github.com/c-guntur/java-katas/blob/baseline/java-handles/src/main/java/none/cvg/handles/HandlesKataDisplayNames.java) (<https://github.com/c-guntur/java-katas/blob/baseline/java-handles/src/main/java/none/cvg/handles/HandlesKataDisplayNames.java>)
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">package none.cvg.handles;
+```java
+package none.cvg.handles;
 
 import java.lang.reflect.Method;
 
@@ -149,17 +156,17 @@ import static java.lang.Character.isUpperCase;
 
 public class HandlesKataDisplayNames extends DisplayNameGenerator.Standard {
     @Override
-    public String &lt;strong&gt;generateDisplayNameForClass(Class&lt;?&gt; aClass)&lt;/strong&gt; {
+    public String <strong>generateDisplayNameForClass(Class<?> aClass)</strong> {
         return super.generateDisplayNameForClass(aClass);
     }
 
     @Override
-    public String &lt;strong&gt;generateDisplayNameForNestedClass(Class&lt;?&gt; aClass)&lt;/strong&gt; {
+    public String <strong>generateDisplayNameForNestedClass(Class<?> aClass)</strong> {
         return super.generateDisplayNameForNestedClass(aClass);
     }
 
     @Override
-    public String &lt;strong&gt;generateDisplayNameForMethod(Class&lt;?&gt; aClass, Method method)&lt;/strong&gt; {
+    public String <strong>generateDisplayNameForMethod(Class<?> aClass, Method method)</strong> {
         String methodName = method.getName();
         if (methodName.startsWith("reflection")) {
             return "using Reflection";
@@ -185,12 +192,12 @@ public class HandlesKataDisplayNames extends DisplayNameGenerator.Standard {
         for (char c : text.toCharArray()) {
             char nc = c;
 
-            if (isUpperCase(nc) &amp;amp;&amp;amp; !isUpperCase(lastChar)) {
-                if (lastChar != ' ' &amp;amp;&amp;amp; isLetterOrDigit(lastChar)) {
+            if (isUpperCase(nc) &amp;&amp; !isUpperCase(lastChar)) {
+                if (lastChar != ' ' &amp;&amp; isLetterOrDigit(lastChar)) {
                     builder.append(" ");
                 }
                 nc = Character.toLowerCase(c);
-            } else if (isDigit(lastChar) &amp;amp;&amp;amp; !isDigit(c)) {
+            } else if (isDigit(lastChar) &amp;&amp; !isDigit(c)) {
                 if (lastChar != ' ') {
                     builder.append(" ");
                 }
@@ -205,8 +212,8 @@ public class HandlesKataDisplayNames extends DisplayNameGenerator.Standard {
         return builder.toString();
     }
 }
+```
 
-</pre>
 
 Once a DisplayNameGenerator is created, the second step is to associate it with a test class. This requires using the @DisplayNameGeneration annotation on the test class.
 
@@ -216,7 +223,8 @@ An annotation on a test class is required to avail of the generator logic. This 
 
 **Example** : **[@DisplayNameGeneration](https://github.com/c-guntur/java-katas/blob/baseline/java-handles/src/solutions/java/none/cvg/constructors/SDefaultConstructorInvocationTest.java#L34)** (<https://github.com/c-guntur/java-katas/blob/baseline/java-handles/src/solutions/java/none/cvg/constructors/SDefaultConstructorInvocationTest.java#L34>)
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">package none.cvg.constructors;
+```java
+package none.cvg.constructors;
 
 import java.lang.invoke.MethodHandle;
 import java.lang.invoke.MethodHandles;
@@ -249,11 +257,12 @@ import static org.junit.jupiter.api.Assertions.fail;
  *  Each unsolved test provides a few hints that will allow the kata-taker to manually solve
  *  the exercise to achieve the same goal with MethodHandles.
  */
-&lt;strong&gt;@DisplayNameGeneration(HandlesKataDisplayNames.class)
-&lt;/strong&gt;@DisplayName("Invoke DemoClass()")
+<strong>@DisplayNameGeneration(HandlesKataDisplayNames.class)
+</strong>@DisplayName("Invoke DemoClass()")
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class TestSolutionDefaultConstructorInvocation {
-</pre>
+```
+
 
 Summary {#h2-4-summary}
 -----------------------

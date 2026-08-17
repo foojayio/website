@@ -23,21 +23,30 @@ frozen: false
 
 Java has long been infamous for its `NullPointerException`. The reason for the is calling a method or accessing an attribute of an **object that has not been initialized**.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">var value = foo.getBar().getBaz().toLowerCase();</pre>
+```java
+var value = foo.getBar().getBaz().toLowerCase();
+```
+
 
 Running this snippet may result in something like the following:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">Exception in thread "main" java.lang.NullPointerException
-  at ch.frankel.blog.NpeSample.main(NpeSample.java:10)</pre>
+```
+Exception in thread "main" java.lang.NullPointerException
+  at ch.frankel.blog.NpeSample.main(NpeSample.java:10)
+```
+
 
 At this point, you have no clue which part is `null` in the call chain: `foo`, or the value returned by `getBar()` or `getBaz()`?
 
 In the latest versions of the JVM, the language designers improved the situation. On JVM 14, you can activate "helpful" NPEs with the `-XX:+ShowCodeDetailsInExceptionMessages` flag. Running the same snippet shows which part is `null`:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">Exception in thread "main" java.lang.NullPointerException: 
+```
+Exception in thread "main" java.lang.NullPointerException: 
   Cannot invoke "String.toLowerCase()" because the return value of 
 "ch.frankel.blog.Bar.getBaz()" is null
-  at  ch.frankel.blog.NpeSample.main(NpeSample.java:10)</pre>
+  at  ch.frankel.blog.NpeSample.main(NpeSample.java:10)
+```
+
 
 On JVM 15, it becomes the default behavior: you don't need a specific flag.
 
@@ -52,7 +61,8 @@ However, it doesn't solve the root cause: we need to handle the `null` value som
 
 For that, we need to resort to defensive programming:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">String value = null;
+```java
+String value = null;
 if (foo != null) {
     var bar = foo.getBar();
     if (bar != null) {
@@ -61,7 +71,9 @@ if (foo != null) {
             value = baz.toLowerCase();
         }
     }
-}</pre>
+}
+```
+
 
 It fixes the problem but is far from the best developer experience - to say the least:
 
@@ -75,16 +87,22 @@ On the JVM, Scala's `Option` was the first attempt that I'm aware of of a sane `
 
 You can call type-dependent methods on the object inside the wrapper, and the wrapper will act as a filter. Because `Option` has its methods, we need a pass-through function that works on the wrapped type: this function is called `map()` in Scala (as well as in several other languages). It translates in code as:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="scala">def map[B](f: A =&gt; B): Option[B] = if (isEmpty) None else Some(f(this.get))</pre>
+```scala
+def map[B](f: A => B): Option[B] = if (isEmpty) None else Some(f(this.get))
+```
+
 
 If the wrapper is empty, *i.e.* , contains a `null` value, return an empty wrapper; if it's not, call the passed function on the underlying value and return a wrapper that wraps the result.
 
 Since Java 8, the JDK offers a wrapper type named `Optional`. With it, we can rewrite the above null-checking code as:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">var option = Optional.ofNullable(foo)
+```java
+var option = Optional.ofNullable(foo)
     .map(Foo::getBar)
     .map(Bar::getBaz)
-    .map(String::toLowerCase);</pre>
+    .map(String::toLowerCase);
+```
+
 
 If any of the values in the call chain is `null`, `option` is `null`. Otherwise, it returns the computed value. In any case, gone are the NPEs.
 
@@ -93,45 +111,66 @@ Nullable types {#h2-2-nullable-types}
 
 Regardless of the language, the main problem with *Option* types is its chicken-and-egg nature. To use an *Option* , you need to be sure it's not `null` in the first place. Consider the following method:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">void print(Optional&lt;String&gt; optional) {
-    optional.ifPresent(str -&gt; System.out.println(str));
-}</pre>
+```java
+void print(Optional<String> optional) {
+    optional.ifPresent(str -> System.out.println(str));
+}
+```
+
 
 What happens if we execute this code?
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">Optional&lt;String&gt; optional = null;
-print(optional);                       // 1</pre>
+```java
+Optional<String> optional = null;
+print(optional);                       // 1
+```
+
 
 1. Oops, back to our familiar NPE
 
 At this point, developers enamored with *Option* types will tell you that it shouldn't happen, that you shouldn't write code like this, etc. It might be accurate, but it, unfortunately, doesn't solve the issue. To 100% avoid NPEs, we need to get back to defensive programming:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">void print(Optional&lt;String&gt; optional) {
+```java
+void print(Optional<String> optional) {
     if (optional != null) {
-        optional.ifPresent(str -&gt; System.out.println(str));
+        optional.ifPresent(str -> System.out.println(str));
     }
-}</pre>
+}
+```
+
 
 Kotlin chose another route with **nullable** types and their counterparts, non-nullable types. In Kotlin, each type `T` has two flavors, a trailing `?` hinting that it can be `null`.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="kotlin">var nullable: String?          // 1
-var nonNullable: String        // 2</pre>
+```kotlin
+var nullable: String?          // 1
+var nonNullable: String        // 2
+```
+
 
 1. `nullable` can be `null`
 2. `nonNullable` cannot
 
 The Kotlin compiler knows about it and prevents you from directly calling a function on a reference that could be `null`.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="kotlin">val nullable: String? = "FooBar"
-nullable.toLowerCase()</pre>
+```kotlin
+val nullable: String? = "FooBar"
+nullable.toLowerCase()
+```
+
 
 The above snippet throws an exception at *compile-time* , as the compiler cannot assert that `nullable` is not `null`:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">Only safe (?.) or non-null asserted (!!.) calls are allowed on a nullable receiver of type String?</pre>
+```
+Only safe (?.) or non-null asserted (!!.) calls are allowed on a nullable receiver of type String?
+```
+
 
 The null safe operator, *i.e.* , `?.`, is very similar to what `map` does: if the object is `null`, stop and keep `null`; if not, proceed with the function call. Let's migrate the code to Kotlin, replacing `Optional` with a null safe call:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="kotlin">val value = foo?.bar?.baz?.lowercase()</pre>
+```kotlin
+val value = foo?.bar?.baz?.lowercase()
+```
+
 
 Option or nullable type? {#h2-3-option-or-nullable-type}
 --------------------------------------------------------
@@ -140,7 +179,8 @@ You have no choice if you're using a language where the compiler does not enforc
 
 But the question still stands: given a choice, shall you use an optional type or a nullable one? The first alternative is a bit more verbose:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="kotlin">val optional: Foo? = Optional.ofNullable(foo)   // 1
+```kotlin
+val optional: Foo? = Optional.ofNullable(foo)   // 1
                              .map(Foo::bar)
                              .map(Bar::baz)
                              .map(String::lowercase)
@@ -149,7 +189,9 @@ But the question still stands: given a choice, shall you use an optional type or
 val option = Some(foo).map(Foo::bar)            // 2
                       .map(Bar::baz)
                       .map(String::lowercase)
-                      .orNull()</pre>
+                      .orNull()
+```
+
 
 1. The Java API returns a platform type; you need to set the correct type, which is nullable
 2. Arrow correctly infers the nullable `Foo?` type
@@ -166,13 +208,16 @@ Besides inferring the correct type, Arrow's `Option` offers:
 
 For example, `fold()` allows to provide two lambdas, one to run when the `Option` is `Some`, the other when it's `None`:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="kotlin">val option = Some(foo).map(Foo::bar)
+```kotlin
+val option = Some(foo).map(Foo::bar)
                       .map(Bar::baz)
                       .map(String::lowercase)
                       .fold(
                         { println("Nothing to print") },
                         { println("Result is $it") }
-                      )</pre>
+                      )
+```
+
 
 Conclusion {#h2-4-conclusion}
 -----------------------------

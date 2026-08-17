@@ -113,7 +113,8 @@ While GraalVM seemed ideal on paper for saving resources, the reality was differ
 
 If you do choose to use GraalVM then this was the GitHub Actions script I used, I hope it can help you with your journey:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">name: Java CI with Maven
+```
+name: Java CI with Maven
 
 on:
   push:
@@ -132,7 +133,7 @@ jobs:
           POSTGRES_PASSWORD: yourpassword
         ports:
           - 5432:5432
-        options: &gt;-
+        options: >-
           --health-cmd pg_isready
           --health-interval 10s
           --health-timeout 5s
@@ -166,7 +167,9 @@ jobs:
     - name: Push Docker Image
       run: |
         docker tag autosite:latest mydockeruser/autosite:latest
-        docker push mydockeruser/autosite:latest</pre>
+        docker push mydockeruser/autosite:latest
+```
+
 
 ```yaml
 

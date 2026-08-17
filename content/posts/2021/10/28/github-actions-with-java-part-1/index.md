@@ -94,7 +94,8 @@ Let's talk about Jobs! To create a comprehensive coverage scenario let's describ
 
 To perform the above scenario let's cut and paste the following: (replace jobs line and below)
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">jobs:
+```yaml
+jobs:
   test:
     runs-on: ${{ matrix.os }}
     strategy:
@@ -118,7 +119,8 @@ To perform the above scenario let's cut and paste the following: (replace jobs l
           USERNAME: ${{ github.actor }}
           PASSWORD: ${{ secrets.GITHUB_TOKEN }}
         run: mvn verify
-</pre>
+```
+
 
 The Jobs attribute contains children entries. Each child job entry can be named whatever you like (in the scenario below it's called `test:`). As you can see above the `test` job will have keyword attributes such as: `runs-on`, `strategy`, `name`, and `steps` (Lines 3, 4, 10 and 11 above).
 
@@ -177,7 +179,8 @@ The `env` contains environment variables that would be set before the run. Here,
 
 The full Yaml code listing is shown below if you want to cut and paste:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group=""># This is a basic workflow to help you get started with Actions
+```yaml
+# This is a basic workflow to help you get started with Actions
 
 name: CI
 
@@ -217,7 +220,8 @@ jobs:
           USERNAME: ${{ github.actor }}
           PASSWORD: ${{ secrets.GITHUB_TOKEN }}
         run: mvn verify
-</pre>
+```
+
 
 After, entering in the above, let's commit the new GitHub workflow. Click on the Start commit button as shown below:
 ![](Commit.png) Commit Workflow

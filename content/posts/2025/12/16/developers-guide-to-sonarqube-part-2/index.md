@@ -37,7 +37,7 @@ The CI/CD pipeline rejected your code. Why?
 
 This is **Part 2**. Today, we solve this "configuration drift" and learn how to automate the analysis so your Quality Gate actually protects you without becoming a burden.
 
-*** ** * ** ***
+
 
 **Problem #1: "It works on my machine, but fails on the server"** {#h2-0-problem-1-it-works-on-my-machine-but-fails-on-the-server}
 ----------------------------------------------------------------------------------------------------------------------------------
@@ -46,8 +46,11 @@ You have a local plugin configuration. The DevOps team or Tech Lead has a differ
 
 **The Scenario:** You are using **Field Injection** because it's easy:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@Autowired
-private UserRepository userRepository; // Your IDE says this is fine</pre>
+```java
+@Autowired
+private UserRepository userRepository; // Your IDE says this is fine
+```
+
 
 But the server has the rule **"Dependency Injection with annotations should be used on constructors"** enabled to ensure testability.
 
@@ -94,7 +97,7 @@ Click on the + icon to add the connection
 
 **Result:** You will see a notification: *"Project bound successfully."* Now, your IDE rules are perfectly synced with the cloud or server that you have connected with. No more surprises.
 
-*** ** * ** ***
+
 
 **Problem #2: "Why did the server catch a SQL Injection my IDE missed?"** {#h2-1-problem-2-why-did-the-server-catch-a-sql-injection-my-ide-missed}
 --------------------------------------------------------------------------------------------------------------------------------------------------
@@ -103,17 +106,20 @@ You are running SonarQube for IDE, but the server still found a critical vulnera
 
 **The Scenario:** You are writing a custom native query because JPA was too slow for a report.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public List&lt;User&gt; searchUsers(String userName) {
+```java
+public List<User> searchUsers(String userName) {
 
-&nbsp;&nbsp;&nbsp;&nbsp;// SonarQube for IDE might miss this if it's complex,&nbsp;
+    // SonarQube for IDE might miss this if it's complex, 
 
-&nbsp;&nbsp;&nbsp;&nbsp;// but the Server's Taint Analysis will catch it.
+    // but the Server's Taint Analysis will catch it.
 
-&nbsp;&nbsp;&nbsp;&nbsp;String query = "SELECT * FROM users WHERE name = '" + userName + "'";&nbsp;
+    String query = "SELECT * FROM users WHERE name = '" + userName + "'"; 
 
-&nbsp;&nbsp;&nbsp;&nbsp;return entityManager.createNativeQuery(query).getResultList();
+    return entityManager.createNativeQuery(query).getResultList();
 
-}</pre>
+}
+```
+
 
 **The Solution:** **Speed vs. Depth (Taint Analysis).**
 
@@ -126,7 +132,7 @@ Your IDE needs to be snappy. If the plugin paused your typing to trace how userN
 
 ![](Screenshot-2025-12-16-at-10.24.13-1024x675.png)
 
-*** ** * ** ***
+
 
 **Problem #3: "I hate switching windows to check why the build failed"** {#h2-2-problem-3-i-hate-switching-windows-to-check-why-the-build-failed}
 -------------------------------------------------------------------------------------------------------------------------------------------------
@@ -145,7 +151,7 @@ SonarQube Cloud checks on the CI/CD
 
 Comments from SonarQube Cloud directly appearing in the PR changes
 
-*** ** * ** ***
+
 
 **Problem #4: "The Quality Gate is unreasonable! We are a startup!"** {#h2-3-problem-4-the-quality-gate-is-unreasonable-we-are-a-startup}
 -----------------------------------------------------------------------------------------------------------------------------------------
@@ -177,7 +183,7 @@ We see in our profile we have one more rule activated
 By tuning the gate, the tool becomes a helper, not a blocker. We can define our thresholds that resonate better with our maturity and goals.
 ![](Screenshot-2025-12-16-at-10.25.14-1024x703.png)
 
-*** ** * ** ***
+
 
 **Problem #5: "Context is King: When a 'Bug' is actually a Feature"** {#h2-4-problem-5-context-is-king-when-a-bug-is-actually-a-feature}
 ----------------------------------------------------------------------------------------------------------------------------------------
@@ -236,21 +242,27 @@ You don't strictly *need* to edit the pom.xml if you pass everything in the comm
 
 Add this to your \<properties\> section:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="xml" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&lt;properties&gt;
+```xml
+<properties>
 
-&nbsp;&nbsp;&nbsp;&nbsp;&lt;sonar.organization&gt;my-company-org&lt;/sonar.organization&gt;
+    <sonar.organization>my-company-org</sonar.organization>
 
-&nbsp;&nbsp;&nbsp;&nbsp;&lt;sonar.host.url&gt;https://sonarcloud.io&lt;/sonar.host.url&gt;
+    <sonar.host.url>https://sonarcloud.io</sonar.host.url>
 
-&nbsp;&nbsp;&nbsp;&nbsp;&lt;sonar.projectKey&gt;my-company_my-java-app&lt;/sonar.projectKey&gt;
+    <sonar.projectKey>my-company_my-java-app</sonar.projectKey>
 
-&lt;/properties&gt;</pre>
+</properties>
+```
+
 
 Now, you can run the analysis manually from your terminal (great for debugging):
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group=""># You need your SONAR_TOKEN (generate it in My Account -&gt; Security)
+```bash
+# You need your SONAR_TOKEN (generate it in My Account -> Security)
 
-mvn verify sonar:sonar -Dsonar.token=your_generated_token_here</pre>
+mvn verify sonar:sonar -Dsonar.token=your_generated_token_here
+```
+
 
 ![](Screenshot-2025-12-16-at-10.54.48-1024x317.png)
 
@@ -262,69 +274,72 @@ Here is a standard **GitHub Actions** workflow (.github/workflows/build.yml) tha
 
 **Prerequisite:** Go to GitHub Repository Settings -\> Secrets, and add SONAR_TOKEN.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">name: Build and Analyze
+```yaml
+name: Build and Analyze
 
 on:
 
-&nbsp;&nbsp;push:
+  push:
 
-&nbsp;&nbsp;&nbsp;&nbsp;branches:
+    branches:
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- main
+      - main
 
-&nbsp;&nbsp;pull_request:
+  pull_request:
 
-&nbsp;&nbsp;&nbsp;&nbsp;types: [opened, synchronize, reopened]
+    types: [opened, synchronize, reopened]
 
 jobs:
 
-&nbsp;&nbsp;build:
+  build:
 
-&nbsp;&nbsp;&nbsp;&nbsp;name: Build and Analyze
+    name: Build and Analyze
 
-&nbsp;&nbsp;&nbsp;&nbsp;runs-on: ubuntu-latest
+    runs-on: ubuntu-latest
 
-&nbsp;&nbsp;&nbsp;&nbsp;steps:
+    steps:
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- uses: actions/checkout@v3
+      - uses: actions/checkout@v3
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;with:
+        with:
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fetch-depth: 0&nbsp; # Important! Disables shallow clone for better analysis
+          fetch-depth: 0  # Important! Disables shallow clone for better analysis
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- name: Set up JDK 17
+      - name: Set up JDK 17
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;uses: actions/setup-java@v3
+        uses: actions/setup-java@v3
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;with:
+        with:
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;java-version: 17
+          java-version: 17
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;distribution: 'temurin'
+          distribution: 'temurin'
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cache: 'maven'
+          cache: 'maven'
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- name: Cache SonarQube Cloud packages
+      - name: Cache SonarQube Cloud packages
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;uses: actions/cache@v3
+        uses: actions/cache@v3
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;with:
+        with:
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;path: ~/.sonar/cache
+          path: ~/.sonar/cache
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;key: ${{ runner.os }}-sonar
+          key: ${{ runner.os }}-sonar
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;restore-keys: ${{ runner.os }}-sonar
+          restore-keys: ${{ runner.os }}-sonar
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- name: Build and Analyze
+      - name: Build and Analyze
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;env:
+        env:
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}&nbsp; # Needed for PR Decoration
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed for PR Decoration
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar</pre>
+        run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar
+```
+
 
 **Why is this cool?** Because of the pull_request trigger and the GITHUB_TOKEN, SonarQube Cloud knows exactly where to post those comments on your PR.
 
@@ -334,7 +349,7 @@ jobs:
 
 ![](Screenshot-2025-12-16-at-10.25.50.png)
 
-*** ** * ** ***
+
 
 **🎯 Summary** {#h2-9-summary}
 ------------------------------

@@ -57,12 +57,15 @@ You also need a USB-to-USB cable to connect the board to your computer.
 
 I initially tried connecting the board to my Apple workstation via USB. Despite the USB-to-serial cable being detected, I ran into issues:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">% ls -l /dev/tty.*
+```
+% ls -l /dev/tty.*
 crw-rw-rw-  1 root  wheel  0x9000002 Jan 19 09:15 /dev/tty.Bluetooth-Incoming-Port
 crw-rw-rw-  1 root  wheel  0x9000000 Jan 19 09:13 /dev/tty.debug-console
 crw-rw-rw-  1 root  wheel  0x9000004 Feb 10 16:19 /dev/tty.usbserial-BG02SIJE
 
-% screen /dev/tty.usbserial-BG02SIJE 115200</pre>
+% screen /dev/tty.usbserial-BG02SIJE 115200
+```
+
 
 The board itself never appeared as a USB drive, so the BeagleBoard Imaging Utility didn't detect it, and while I could start a screen session, no output from the BeagleBoard appeared. This could be a macOS-specific issue, related to security not allowing such USB devices, so I switched strategies.
 
@@ -70,7 +73,8 @@ The board itself never appeared as a USB drive, so the BeagleBoard Imaging Utili
 
 On a Linux machine, everything worked as expected! The USB-to-serial cable was properly detected, something you can easily verify with the `dmesg` command:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ dmesg
+```
+$ dmesg
 [4:58 PM][2353475.078097] usb 1-5: new full-speed USB device number 7 using xhci_hcd
 [2353475.210940] usb 1-5: New USB device found, idVendor=0403, idProduct=6001, bcdDevice= 6.00
 [2353475.210946] usb 1-5: New USB device strings: Mfr=1, Product=2, SerialNumber=3
@@ -86,15 +90,20 @@ On a Linux machine, everything worked as expected! The USB-to-serial cable was p
 [2353475.270001] usb 1-5: FTDI USB Serial Device converter now attached to ttyUSB0
 
 $ sudo apt install screen
-$ sudo screen /dev/ttyUSB0 115200</pre>
+$ sudo screen /dev/ttyUSB0 115200
+```
+
 
 With the serial connection established, check the board output in the `screen` session and wait for the message `Press a key to enter CLI` to appear. You have one second to react, so be fast! 🙂
 ![](beaglev-fire-boot-interrupt.png)
 
 Then type in the following two commands:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&gt;&gt; mmc
-&gt;&gt; usbdmsc</pre>
+```
+>> mmc
+>> usbdmsc
+```
+
 
 Now the board should appear as a USB drive on your computer and as a device in the Imaging Utility for an OS update. I had to do this twice because Wi-Fi was enabled, which caused an error at the end of the first attempt. After disabling the Wi-Fi settings, the update succeeded, and the board rebooted to Ubuntu 24!
 
@@ -105,7 +114,8 @@ Once Ubuntu 24 was up and running on the BeagleV-Fire, installing Java 25 was st
 
 I also installed [SDKMAN](https://sdkman.io/) and [JBang](https://www.jbang.dev/) to test a few of the [Pi4J JBang](https://github.com/Pi4J/pi4j-jbang) examples.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">sudo apt update
+```
+sudo apt update
 sudo apt upgrade
 sudo apt install zip
 curl -s "https://get.sdkman.io" | bash
@@ -121,7 +131,9 @@ git clone https://github.com/Pi4J/pi4j-jbang.git
 cd pi4j-jbang
 cd basic
 java HelloWorld.java
-jbang HelloJavaFXWorld.java</pre>
+jbang HelloJavaFXWorld.java
+```
+
 
 What's Next: Performance Testing {#h2-6-what-s-next-performance-testing}
 ------------------------------------------------------------------------

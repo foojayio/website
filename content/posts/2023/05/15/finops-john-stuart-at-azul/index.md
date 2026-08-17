@@ -18,11 +18,11 @@ frozen: false
 FinOps and Cloud Cost Management, what's it all about and how does it impact us as developers and others who are close to the code? In this series on Foojay.io, you're introduced to FinOps practitioners around the world, focused on how they have gradually found themselves, their technology and their organization in the FinOps space. {#h2-0-finops-and-cloud-cost-management-what-s-it-all-about-and-how-does-it-impact-us-as-developers-and-others-who-are-close-to-the-code-in-this-series-on-foojay-io-you-re-introduced-to-finops-practitioners-around-the-world-focused-on-how-they-have-gradually-found-themselves-their-technology-and-their-organization-in-the-finops-space}
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-*** ** * ** ***
+
 
 [John Stuart](https://www.linkedin.com/in/johndstu/) is an executive and leader in DevOps, FinOps, Infrastructure and Security at Azul.
 
-*** ** * ** ***
+
 
 <br />
 

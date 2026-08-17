@@ -55,12 +55,15 @@ There are still a few options, but the most popular is probably MongoDB. It offe
 
 We will need to add a couple of additional dependencies in order to create an embedded MongoDB instance and populate/interact with the data. The changes to the `pom.xml` project file are shown below, and the [full file](https://github.com/JMHReif/microservices-level2/blob/main/service1/pom.xml) is available on Github.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">   de.flapdoodle.embed
+```java
+   de.flapdoodle.embed
    de.flapdoodle.embed.mongo
-   &lt;!-- test --&gt;
+   <!-- test -->
 
    org.springframework.boot
-   spring-boot-starter-data-mongodb-reactive</pre>
+   spring-boot-starter-data-mongodb-reactive
+```
+
 
 Flapdoodle provides the embedded version of MongoDB, although only scoped for testing. We can tweak this by commenting out the scope, so that we can use embedded MongoDB instances for our whole application. Note, this is not recommended for production. 😉
 
@@ -70,7 +73,8 @@ Then, we need to include the Spring Data MongoDB starter, which allows us access
 
 I'll keep all the code in the `Service1Application` file, since we don't have too many lines yet. We will start at the bottom of the file with the `Book` entity that represents objects of our book data. As always, there is [full code on Github](https://github.com/JMHReif/microservices-level2/blob/main/service1/src/main/java/com/jmhreif/service1/Service1Application.java).
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">@Data
+```java
+@Data
 @Document
 class Book {
 	@Id
@@ -79,7 +83,9 @@ class Book {
 	private String title;
 	@NonNull
 	private String author;
-}</pre>
+}
+```
+
 
 With Lombok in our dependencies, this class might look smaller than typical Java object classes. The [`@Data`](https://projectlombok.org/features/Data) annotation creates getter/setter methods, equals/hashcode/toString methods, and a constructor with required arguments. The `@Document` annotation tells Spring that this is a MongoDB entity class (data model uses document entities).
 
@@ -87,14 +93,18 @@ Next, we add a few entity variables (properties). A unique id helps us identify 
 
 We also need to add a repository interface that allows us to define methods for interacting with the data (separate from specific implementation). That is in the next code block above our `Book` class.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">interface BookRepository extends ReactiveCrudRepository {
-}</pre>
+```java
+interface BookRepository extends ReactiveCrudRepository {
+}
+```
+
 
 We have entered very little code here because Spring Data provides a few implementations of common methods such as `findAll()`, `findById()`, and more. This is mentioned briefly in the [related section](https://docs.spring.io/spring-data/commons/docs/current/reference/html/#repositories.core-concepts) of the Spring Data Commons documentation. We are using the `ReactiveCrudRepository` because we want to use reactive methods and types for working with the data, requiring a different repository extension from a traditional `CrudRepository`.
 
 Next, we need to tweak our controller class to work with `Book` objects, instead of the "Hello, World!" string we used last time.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">@RestController
+```java
+@RestController
 @AllArgsConstructor
 @RequestMapping("/db")
 class BookController {
@@ -102,7 +112,9 @@ class BookController {
 
 	@GetMapping("/books")
 	Flux getBooks() { return bookRepository.findAll(); }
-}</pre>
+}
+```
+
 
 Comparing against our [previous version's controller class](https://github.com/JMHReif/microservices-level1/blob/main/service1/src/main/java/com/jmhreif/service1/Service1Application.java), the name of the endpoint on line 3 changed from `/text` to `/db` to more clearly state our connection to a database and data. The name of the class (line 4) goes from `TextController` to `BookController` to align with the data we're passing.
 
@@ -112,9 +124,10 @@ The next line implements our `getBooks()` method. Since we want to potentially r
 
 Finally, we also need some data in our database to retrieve anything with our method above. An embedded database will spin up when the application starts and be destroyed when the application terminates. So, we need to populate the database each time the application starts. We could load in external data each time, but for simplicity/demo purposes, we will create a bean with hard-coded `Book` objects to save.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">@Bean
+```java
+@Bean
 CommandLineRunner clr(BookRepository repo) {
-   return args -&gt; repo.deleteAll()
+   return args -> repo.deleteAll()
 	   .thenMany(Flux.just(
 		   new Book("The Lord of the Rings: The Return of the King", "J.R.R. Tolkien"),
 		   new Book("Harry Potter and the Prisoner of Azkaban", "J.K. Rowling"),
@@ -123,7 +136,9 @@ CommandLineRunner clr(BookRepository repo) {
 	   .flatMap(repo::save)
 	   .log()
 	   .subscribe();
-}</pre>
+}
+```
+
 
 A [`CommandLineRunner`](https://docs.spring.io/spring-boot/docs/current/api/org/springframework/boot/CommandLineRunner.html) runs when the application starts, so this bean executes early in the startup. We pass our `BookRepository` into the method so we can access the methods to MongoDB data.
 
@@ -144,18 +159,22 @@ That means no changes to our `pom.xml` file. On to the application class code!
 
 As in service1, we will start from the bottom of the `Service2Application.java` class and work our way up. First, we need to define our `Book` domain class again because we need the frontend application to recognize and map the same objects our backend service uses. However, the code is slightly different from our service1 `Book` class.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">@Data
+```java
+@Data
 class Book {
    private String bookId;
    private String title;
    private String author;
-}</pre>
+}
+```
+
 
 Service2 does not interact directly with the database, so it only needs the domain class to ensure data being passed matches what our backend services expects and returns. We only need the `@Data` annotation, since we need to access the getter/setter methods in order to map the object fields.
 
 Moving on up, we need to make a couple of minor adjustments to the controller class that calls our backend endpoint.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">@RestController
+```java
+@RestController
 @AllArgsConstructor
 @RequestMapping("/hello")
 class BookController {
@@ -167,7 +186,9 @@ class BookController {
 		.retrieve()
 		.bodyToFlux(Book.class);
 	}
-}</pre>
+}
+```
+
 
 The first change is to the name of the class itself (from `TextController` to `BookController`) to align with our book domain. On [line 9](https://github.com/JMHReif/microservices-level2/blob/main/service2/src/main/java/com/jmhreif/service2/Service2Application.java#L42) of the above code, we implement the `getBooks()` method. The name for the method also gets updated to match our book domain, and we need to use a different return type (from `Mono` to `Flux`) because we are dealing with book objects instead of a string and expect multiple books instead of a single string return.
 

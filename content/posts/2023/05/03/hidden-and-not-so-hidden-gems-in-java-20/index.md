@@ -27,7 +27,8 @@ March 2023 marked the latest feature release of the Java platform, which was del
 
 I am using the Java 20 jshell tool to demonstrate the code in this article. To follow along, [download JDK 20](https://foojay.io/download/), fire up your terminal, check your version, and run jshell. Note that you might see a newer version of the JDK; that's okay.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">[mtaman]:~ java -version
+```
+[mtaman]:~ java -version
  openjdk 20 2023-03-21
  OpenJDK Runtime Environment (build 20+36-2344)
  OpenJDK 64-Bit Server VM (build 20+36-2344, mixed mode, sharing)
@@ -36,7 +37,9 @@ I am using the Java 20 jshell tool to demonstrate the code in this article. To f
 |  Welcome to JShell -- Version 20
 |  For an introduction type: /help intro
 
-Jshell&gt;</pre>
+Jshell>
+```
+
 
 Three JEPs in Java 20 are published as incubator modules to solicit developer feedback. An incubator module's API could be altered or disappear entirely---that is, not be released in future JDK releases. Therefore, you shouldn't use incubator features in production code. To use the incubator modules, use the `--add-modules` JVM flag.
 
@@ -123,18 +126,25 @@ Java 20 shipped with hundreds of performance, stability, and security improvemen
 
 So, for example, what is the difference between the following code lines when they are compiled?
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">a = a + b;
-a += b;</pre>
+```
+a = a + b;
+a += b;
+```
+
 
 Many Java developers will say there is no difference. However, these two operations are not always equivalent in Java. If a is a short and b is an int, the second operation will result in the following compiler error because a + b returns an int that cannot be assigned to the short variable a without an explicit cast:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">LossyConversions.java:8: error: incompatible types: possible lossy conversion from int to short
+```
+LossyConversions.java:8: error: incompatible types: possible lossy conversion from int to short
                a = a + b;
-                     ^</pre>
+                     ^
+```
+
 
 By contrast, a += b is allowed because the compiler inserts an implicit cast in a compound assignment. The statement a += b is equivalent to a = (short) (a + b), where the left 16 bits of the int result are truncated when casting to a short, resulting in the potential loss of information. The following interface will compile without any warning; however, when you run it, you may get unexpected results:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public interface LossyConversions {
+```
+public interface LossyConversions {
 
        static void main(String... args) {
 
@@ -148,24 +158,32 @@ By contrast, a += b is allowed because the compiler inserts an implicit cast in 
 
 [mtaman]:~ javac LossyConversions.java
 [mtaman]:~ java LossyConversions
-    9464</pre>
+    9464
+```
+
 
 Notice that the result isn't the expected 75,000. It's the truncated result of conversion loss: 9,464.
 
 To help with this issue, Java 20 introduced a [compiler (javac) lint option](https://docs.oracle.com/en/java/javase/20/docs/specs/man/javac.html#options) called lossy-conversions, which generates warnings about type casts in compound assignments (such as += or \*=) that could result in data loss. Warnings such as the following alert developers about potentially undesirable behavior:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">[mtaman]:~ javac -Xlint:lossy-conversions LossyConversions.java
+```
+[mtaman]:~ javac -Xlint:lossy-conversions LossyConversions.java
 LossyConversions.java:8: warning: [lossy-conversions] implicit cast from int to short in compound assignment is possibly lossy
               a += b;
                    ^
-1 warning</pre>
+1 warning
+```
+
 
 You can silence these warnings using the `@SuppressWarnings("lossy-conversions")` annotation, but you shouldn't.
 
 **New APIs for TLS and DTLS key-exchange named groups**. Java 20 added two new APIs to allow customization of the named groups of key-exchange algorithms used in Transport Layer Security (TLS) and Datagram Transport Layer Security (DTLS) connections on a per-connection basisNew APIs for TLS and DTLS key-exchange named groups. Java 20 added two new APIs to allow customization of the named groups of key-exchange algorithms used in Transport Layer Security (TLS) and Datagram Transport Layer Security (DTLS) connections on a per-connection basis\*.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">javax.net.ssl.SSLParameters.getNamedGroups()
-javax.net.ssl.SSLParameters.setNamedGroups()</pre>
+```
+javax.net.ssl.SSLParameters.getNamedGroups()
+javax.net.ssl.SSLParameters.setNamedGroups()
+```
+
 
 The underlying key provider may define the default named groups for each connection. However, the named groups can be customized by setting the jdk.tls.namedGroups system property or by using the setNamedGroups() method. If the system property is not null and the setNamedGroups() method is used, the named groups that are passed will override the default named groups for the specified connection.
 
@@ -185,12 +203,15 @@ These pauses occur during a complete concurrent mark cycle, increasing the colle
 
 As a result, the old command-line options that were used to provide parameter values for the old controller are deprecated. Specifying any of the following options on the command line will print a warning message:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">-XX:-G1UseAdaptiveConcRefinement
+```
+-XX:-G1UseAdaptiveConcRefinement
 -XX:G1ConcRefinementGreenZone=buffer-count
 -XX:G1ConcRefinementYellowZone=buffer-count
 -XX:G1ConcRefinementRedZone=buffer-count
 -XX:G1ConcRefinementThresholdStep=buffer-count
--XX:G1ConcRefinementServiceIntervalMillis=msec</pre>
+-XX:G1ConcRefinementServiceIntervalMillis=msec
+```
+
 
 These options will be removed entirely in the future, and their use after that time will terminate the startup of the JVM.
 
@@ -245,14 +266,20 @@ Figure 2. Java 20 documentation preview list
 
 To prevent the JIT compiler from optimizing these methods, use the following command-line options:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">-XX:+UnlockDiagnosticVMOptions -XX:DisableIntrinsic=_floatToFloat16,_float16ToFloat</pre>
+```
+-XX:+UnlockDiagnosticVMOptions -XX:DisableIntrinsic=_floatToFloat16,_float16ToFloat
+```
+
 
 Hidden gems: Java 20 bug fixes and related changes {#h2-6-hidden-gems-java-20-bug-fixes-and-related-changes}
 ------------------------------------------------------------------------------------------------------------
 
 **Java XSL Template limitations**. Suppose you use the JDK's XSLT processor to convert stylesheets to Java objects. If the XSL template is too large, you may encounter an exception.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">com.sun.org.apache.xalan.internal.xsltc.compiler.util.InternalError: Internal XSLTC error: a method in the translet exceeds the Java Virtual Machine limitation on the length of a method of 64 kilobytes. This is usually caused by templates in a stylesheet that are very large. Try restructuring your stylesheet to use smaller templates.</pre>
+```
+com.sun.org.apache.xalan.internal.xsltc.compiler.util.InternalError: Internal XSLTC error: a method in the translet exceeds the Java Virtual Machine limitation on the length of a method of 64 kilobytes. This is usually caused by templates in a stylesheet that are very large. Try restructuring your stylesheet to use smaller templates.
+```
+
 
 To avoid this issue, you can restructure your stylesheet to smaller templates or use third-party JAR files in the classpath to override the JDK's XSLT processor.
 
@@ -311,11 +338,17 @@ Similarly, the ability to stop a thread using the `Thread.stop()` method has bee
 
 For example, here's the old code.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">URL url = new URL("https://blogs.oracle.com/authors/mohamed-taman");</pre>
+```
+URL url = new URL("https://blogs.oracle.com/authors/mohamed-taman");
+```
+
 
 And here's the new code.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">URL url = URI.create("https://blogs.oracle.com/authors/mohamed-taman").toURL();</pre>
+```
+URL url = URI.create("https://blogs.oracle.com/authors/mohamed-taman").toURL();
+```
+
 
 When a custom stream handler is required to construct a URL, use the new `URL::of(URI, URLStreamHandler)` methods.
 
@@ -342,6 +375,6 @@ Conclusion {#h2-8-conclusion}
 
 There's a lot more to a new Java release than the widely publicized JEPs. Study all these changes; even if you don't use the preview and incubator features, there are sufficient bug fixes and other enhancements to make Java 20 worth testing and using on production systems today.
 
-*** ** * ** ***
+
 
 Originally posted on [Java Magazine on April 20, 2023](https://blogs.oracle.com/javamagazine/post/java-20-gems-jdks).

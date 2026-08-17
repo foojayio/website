@@ -37,7 +37,8 @@ This post is a complete tour.
 🧠 Two Categories of Memory {#h2-0-two-categories-of-memory}
 ------------------------------------------------------------
 
-<pre class="EnlighterJSRAW" data-enlighter-language="html">           +-----------------------------------+
+```html
+           +-----------------------------------+
            |         BoxLang AI Memory         |
            +-----------------------------------+
                         /           \
@@ -64,7 +65,9 @@ This post is a complete tour.
          | aiMemory() BIF                            |
          | Per-call identity routing                 |
          | Minimal app-code changes between both     |
-         +-------------------------------------------+</pre>
+         +-------------------------------------------+
+```
+
 
 BoxLang AI memory breaks into two fundamentally different categories, solving two different problems.
 
@@ -79,7 +82,8 @@ Both categories share the same `IAiMemory` interface, the same `aiMemory()` BIF,
 
 Create any memory with our lovely global function: `aiMemory( type, config: {} )`. Our default memory type is a `window` memory of `20` messages:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">// Window memory — keeps the last N messages
+```java
+// Window memory — keeps the last N messages
 mem = aiMemory( "window", config: { maxMessages: 20 } )
 
 // Summary memory — auto-summarizes old messages to preserve context
@@ -103,7 +107,8 @@ mem = aiMemory( "jdbc", config: {
     datasource : "myDB",
     table      : "ai_conversations"
 } )
-</pre>
+```
+
 
 |   Type    |                           Best For                           |
 |-----------|--------------------------------------------------------------|
@@ -118,7 +123,8 @@ mem = aiMemory( "jdbc", config: {
 
 The `summary` type deserves special attention. When the message count exceeds `summaryThreshold`, it calls the configured LLM to produce a one-paragraph summary of the oldest messages, replaces them with that summary as a single system message, then continues accumulating. Conversation context survives without the token cost of carrying the full history.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">agent = aiAgent(
+```java
+agent = aiAgent(
     name   : "support-bot",
     memory : aiMemory( "summary", config: {
         maxMessages      : 40,    // keep up to 40 messages
@@ -126,14 +132,16 @@ The `summary` type deserves special attention. When the message count exceeds `s
         summaryModel     : "gpt-4o-mini"  // use a cheap model for summarization
     } )
 )
-</pre>
+```
+
 
 🔍 Vector Memory Types {#h2-3-vector-memory-types}
 --------------------------------------------------
 
 Vector memory stores embeddings and retrieves by semantic similarity --- the right tool when "find relevant context" matters more than "recall what was said recently."
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">// In-memory vectors — development and small datasets
+```java
+// In-memory vectors — development and small datasets
 mem = aiMemory( "boxvector" )
 
 // ChromaDB — Python-based vector store
@@ -163,7 +171,8 @@ mem = aiMemory( "opensearch", config: {
     index            : "ai_embeddings",
     embeddingProvider: "openai"
 } )
-</pre>
+```
+
 
 Full vector memory roster:
 
@@ -185,12 +194,14 @@ Full vector memory roster:
 
 `hybrid` combines a recent message window with semantic vector retrieval --- you get recency and relevance:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">mem = aiMemory( "hybrid", config: {
+```java
+mem = aiMemory( "hybrid", config: {
     recentLimit   : 5,        // keep last 5 messages always
     semanticLimit : 5,        // add 5 semantically relevant past messages
     vectorProvider: "chroma"  // backed by ChromaDB
 } )
-</pre>
+```
+
 
 For most production support-bot or assistant scenarios, `hybrid` is the sweet spot --- recent context for coherence, semantic retrieval for depth.
 
@@ -201,7 +212,8 @@ This is the architectural feature that makes BoxLang AI memory extensible. Memor
 
 Every memory operation accepts optional identity arguments:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">sharedMemory = aiMemory( "cache" )
+```java
+sharedMemory = aiMemory( "cache" )
 
 // Operations are fully tenant-isolated
 sharedMemory.add( message, userId: "alice", conversationId: "sess-1" )
@@ -213,17 +225,20 @@ bobHistory   = sharedMemory.getAll( userId: "bob",   conversationId: "sess-2" )
 
 // Clear only alice's conversation
 sharedMemory.clear( userId: "alice", conversationId: "sess-1" )
-</pre>
+```
+
 
 In practice, you pass identity through `AiAgent.run()` options and it flows automatically to all memory operations:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">sharedAgent = aiAgent( name: "support", memory: sharedMemory )
+```java
+sharedAgent = aiAgent( name: "support", memory: sharedMemory )
 
 // One agent instance, many concurrent users — fully safe
 sharedAgent.run( "Hello, I need help with my order",    {}, { userId: "alice", conversationId: "sess-1" } )
 sharedAgent.run( "What did I just ask about?",          {}, { userId: "alice", conversationId: "sess-1" } ) // remembers
 sharedAgent.run( "Can you help me reset my password?",  {}, { userId: "bob",   conversationId: "sess-2" } ) // isolated
-</pre>
+```
+
 
 No per-user agent factories. No thread-local hacks. No shared-state concurrency bugs. One instance, many tenants.
 
@@ -232,7 +247,8 @@ No per-user agent factories. No thread-local hacks. No shared-state concurrency 
 
 Document loaders are the ingestion layer for RAG pipelines. They normalize content from 30+ source types into the `Document` format that vector memory understands.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">// Load a single PDF
+```java
+// Load a single PDF
 docs = aiDocuments(
     source : "/path/to/product-manual.pdf",
     config : { type: "pdf" }
@@ -269,7 +285,8 @@ docs = aiDocuments(
         delay    : 500
     }
 ).load()
-</pre>
+```
+
 
 **Built-in loaders:**
 
@@ -296,7 +313,8 @@ Here's the full picture --- ingest documents into vector memory, then use an age
 
 ### Step 1: Ingest {#h3-8-step-1-ingest}
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">// Create vector memory backed by ChromaDB
+```java
+// Create vector memory backed by ChromaDB
 vectorMemory = aiMemory( "chroma", config: {
     collection       : "company_knowledge",
     embeddingProvider: "openai",
@@ -322,13 +340,15 @@ println( "Chunks created   : #result.chunksOut#" )
 println( "Vectors stored   : #result.stored#" )
 println( "Duplicates skipped: #result.deduped#" )
 println( "Estimated cost   : $#result.estimatedCost#" )
-</pre>
+```
+
 
 The `toMemory()` method handles chunking via `aiChunk()`, embedding via the configured provider, deduplication, and storage --- everything in one fluent call with a detailed report back.
 
 ### Step 2: Query {#h3-9-step-2-query}
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">// Agent with the same vector memory — retrieves relevant chunks automatically
+```java
+// Agent with the same vector memory — retrieves relevant chunks automatically
 agent = aiAgent(
     name        : "knowledge-assistant",
     description : "Expert on all company documentation and policies",
@@ -341,7 +361,8 @@ response = agent.run(
     {},
     { userId: "support-team", conversationId: "ticket-12345" }
 )
-</pre>
+```
+
 
 When the agent runs, vector memory retrieves the most semantically similar document chunks for the query and injects them as context before the LLM call. The LLM answers based on your actual content --- not hallucinations.
 
@@ -349,7 +370,8 @@ When the agent runs, vector memory retrieves the most semantically similar docum
 
 For most production RAG scenarios, `hybrid` memory beats pure vector:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">// Combines short-term conversation memory with long-term semantic retrieval
+```java
+// Combines short-term conversation memory with long-term semantic retrieval
 productionMemory = aiMemory( "hybrid", config: {
     recentLimit   : 8,
     semanticLimit : 6,
@@ -361,7 +383,8 @@ agent = aiAgent(
     name   : "enterprise-assistant",
     memory : productionMemory
 )
-</pre>
+```
+
 
 The first 8 messages keep conversations coherent. The semantic layer ensures relevant documentation is always surfaced. Together they handle both "what did I just ask?" and "what does our policy say about X?"
 
@@ -370,7 +393,8 @@ The first 8 messages keep conversations coherent. The semantic layer ensures rel
 
 Two BIFs help you reason about context window usage:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">// Count tokens before sending (approximate)
+```java
+// Count tokens before sending (approximate)
 tokenCount = aiTokens( "This is the text I want to count", { method: "words" } )
 
 // Chunk a large document for ingestion
@@ -378,7 +402,8 @@ chunks = aiChunk( largeText, {
     chunkSize : 1000,  // tokens per chunk
     overlap   : 200    // overlap between chunks for context continuity
 } )
-</pre>
+```
+
 
 `aiChunk()` is used internally by `toMemory()`, but you can call it directly when building custom ingestion pipelines.
 
@@ -387,7 +412,8 @@ chunks = aiChunk( largeText, {
 
 Agents can have multiple memory instances simultaneously --- useful when you want different retention policies for different types of information:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">agent = aiAgent(
+```java
+agent = aiAgent(
     name   : "research-assistant",
     memory : [
         // Short-term: current conversation
@@ -402,7 +428,8 @@ Agents can have multiple memory instances simultaneously --- useful when you wan
 
 // Add another memory dynamically
 agent.addMemory( aiMemory( "file", config: { filePath: "/audit/" } ) )
-</pre>
+```
+
 
 All memories are read from and written to in parallel. Messages retrieved from all memories are merged before each LLM call.
 
@@ -411,7 +438,8 @@ All memories are read from and written to in parallel. Messages retrieved from a
 
 One often-overlooked feature: `aiPopulate()` fills a typed BoxLang class from JSON without making any LLM call. This is essential for caching and testing:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">class CustomerProfile {
+```java
+class CustomerProfile {
     property name="name"         type="string";
     property name="tier"         type="string";
     property name="openTickets"  type="numeric";
@@ -429,7 +457,8 @@ cachedJson = jsonSerialize( profile )
 // Later — restore the typed object without another LLM call
 restoredProfile = aiPopulate( new CustomerProfile(), cachedJson )
 println( restoredProfile.getName() ) // "John Doe"
-</pre>
+```
+
 
 Perfect for: pre-populated test fixtures, cached AI extractions, converting existing JSON data to typed objects.
 

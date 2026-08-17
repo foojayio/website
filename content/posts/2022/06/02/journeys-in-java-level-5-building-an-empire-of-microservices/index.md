@@ -69,18 +69,21 @@ Containerizing - Service 1 {#_containerizing_service_1}
 
 To create a container for service1, we need a Dockerfile in the application folder (`/service1`).
 
-<pre class="EnlighterJSRAW" data-enlighter-language="text">#Pull base image
+```
+#Pull base image
 #-----------------
 FROM openjdk:11
 
 #Author
 #-------
-LABEL org.opencontainers.image.authors="Jennifer Reif,<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="f79d9299999e919285b7839f929f92949c9b928584d9988590">[email&nbsp;protected]</a>,@JMHReif"
+LABEL org.opencontainers.image.authors="Jennifer Reif,<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="f79d9299999e919285b7839f929f92949c9b928584d9988590">[email protected]</a>,@JMHReif"
 
 #Copy jar and expose entrypoints
 #--------------------------------
 COPY target/service1-*.jar goodreads-svc1.jar
-ENTRYPOINT ["java","-jar","/goodreads-svc1.jar"]</pre>
+ENTRYPOINT ["java","-jar","/goodreads-svc1.jar"]
+```
+
 
 First, I want a Java environment in the container, so Docker will pull openjdk's version 11 image as the base layer. Next, is the author/maintainer information so users know who to contact. Lastly, there are a couple of instructions to copy the JAR file (packaged application) into the container (`COPY`) and then add commands/arguments for the build command (`ENTRYPOINT`).
 
@@ -129,7 +132,8 @@ We need to create a [YAML](https://en.wikipedia.org/wiki/YAML) file with contain
 
 At the high level, we will list each of our services, then specify subfields for each. We will also set up a dedicated network for all of the containers to run on. Let's build the `docker-compose.yml` piece by piece in the main project folder.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="text">version: "3.9"
+```
+version: "3.9"
 services:
   goodreads-db:
     container_name: goodreads-db
@@ -144,7 +148,9 @@ services:
     volumes:
       - $HOME/Projects/docker/mongoBooks/data:/data/db
       - $HOME/Projects/docker/mongoBooks/logs:/logs
-      - $HOME/Projects/docker/mongoBooks/tmp:/tmp</pre>
+      - $HOME/Projects/docker/mongoBooks/tmp:/tmp
+```
+
 
 The first field displays the Docker compose version, though it is not required. Next, we will list our services. Instead of running our database container separately as we have been, we include it here so that Docker Compose handles everything. The child fields for each service contain a few details and configurations. We will go through those in the next subsections.
 
@@ -168,7 +174,8 @@ Now that we got through our first service definition, the following ones should 
 
 ### Goodreads-svc1 {#_goodreads_svc1}
 
-<pre class="EnlighterJSRAW" data-enlighter-language="text">......
+```
+......
   goodreads-svc1:
     container_name: goodreads-svc1
     image: jmreif/goodreads-svc1
@@ -180,7 +187,9 @@ Now that we got through our first service definition, the following ones should 
       - goodreads
     environment:
       - SPRING_DATA_MONGODB_URI=mongodb://mongoadmin:Testing123@goodreads-db:27017
-      - SPRING_DATA_MONGODB_DATABASE=goodreads</pre>
+      - SPRING_DATA_MONGODB_DATABASE=goodreads
+```
+
 
 We use the familiar `container_name`, `image`, and `ports` fields. After that, we specify one new field called `depends_on` that lists any services service1 depends on for startup and shut down. In other words, if the database service is not up, then service1 cannot start because all of its functionality relies on making calls to the database.
 
@@ -192,7 +201,8 @@ Next is service2.
 
 ### Goodreads-svc2 {#_goodreads_svc2}
 
-<pre class="EnlighterJSRAW" data-enlighter-language="text">......
+```
+......
   goodreads-svc2:
     container_name: goodreads-svc2
     image: jmreif/goodreads-svc2
@@ -203,7 +213,9 @@ Next is service2.
     networks:
       - goodreads
     environment:
-      - BACKEND_HOSTNAME=goodreads-svc1</pre>
+      - BACKEND_HOSTNAME=goodreads-svc1
+```
+
 
 Service2 configuration looks very similar to service1, except for the environment variable. What is the `BACKEND_HOSTNAME=goodreads-svc1`? If you take a quick look at the [code for service2 in level4](https://github.com/JMHReif/microservices-level4/blob/main/service2/src/main/java/com/jmhreif/service2/Service2Application.java#L30), you might recall that we hard-coded a `localhost` value for the WebClient bean. This will not work in a Docker network because it is separate from the host machine's network. We need to reference containers by name, instead. However, we also want to be dynamic and test in local environments (localhost), as well as production environments (Docker Compose).
 
@@ -211,18 +223,21 @@ To do this, we will create a dynamic variable with [Spring's `@Value` annotation
 
 Our updated code in our `service2` application is below.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">@SpringBootApplication
+```java
+@SpringBootApplication
 public class Service2Application {
 	@Value("${backend.hostname:localhost}")
 	private String hostname;
 
-	...&lt;main&gt;...
+	...<main>...
 
 	@Bean
 	WebClient client() {
 		return WebClient.create("http://" + hostname + ":8081");
 	}
-}</pre>
+}
+```
+
 
 In the code above, we create a String variable with `@Value` that looks for `backend.hostname` value first. If it doesn't find it, the value falls back to localhost value. Then, in the `@Bean` definition, we insert the variable `hostname` in the middle of the URL.
 
@@ -234,7 +249,8 @@ Let's move on to service3.
 
 ### Goodreads-svc3 {#_goodreads_svc3}
 
-<pre class="EnlighterJSRAW" data-enlighter-language="text">......
+```
+......
   goodreads-svc3:
     container_name: goodreads-svc3
     image: jmreif/goodreads-svc3
@@ -246,7 +262,9 @@ Let's move on to service3.
       - goodreads
     environment:
       - SPRING_DATA_MONGODB_URI=mongodb://mongoadmin:Testing123@goodreads-db:27017
-      - SPRING_DATA_MONGODB_DATABASE=goodreads</pre>
+      - SPRING_DATA_MONGODB_DATABASE=goodreads
+```
+
 
 We have all of the same fields (and some of the same values) for `service3` as we did for `service1` because both services are rest apis for the database container. Both services need to depend on the database container running, and both define environment variables for connecting to it.
 
@@ -254,8 +272,11 @@ The last piece is to define our custom network.
 
 ### docker-compose.yml network {#_docker_compose_yml_network}
 
-<pre class="EnlighterJSRAW" data-enlighter-language="text">networks:
-  goodreads:</pre>
+```
+networks:
+  goodreads:
+```
+
 
 We need to define a high-level field that defines our custom Docker network that all of the services will join in order to communicate with one another using container names. The `networks` field states any custom network names along with any potential configurations. Since we don't need anything fancy, the network `goodreads` is the only thing required.
 
@@ -266,7 +287,10 @@ Put it to the test {#_put_it_to_the_test}
 
 Docker compose will handle starting all of the containers in the proper order, so all we need to do is assemble the command.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="shell">docker-compose up -d</pre>
+```bash
+docker-compose up -d
+```
+
 
 *\*Note:\* If you are building local images with the `build` field in docker-compose.yml, then use the command `docker-compose up -d --build`. This will build the Docker containers each time on startup from the directories.*
 

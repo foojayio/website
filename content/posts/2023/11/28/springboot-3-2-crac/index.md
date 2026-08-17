@@ -52,8 +52,11 @@ The used JDK (Java Development Kit) is Azul Zulu 21.0.1 + CRaC that you can get 
 
 It might be needed to set the permissions to be able to use CRIU, meaning to say on the Linux machine you run the demo, you need to execute the following commands once:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">sudo chown root:root $JAVA_HOME/lib/criu
-sudo chmod u+s $JAVA_HOME/lib/criu</pre>
+```
+sudo chown root:root $JAVA_HOME/lib/criu
+sudo chmod u+s $JAVA_HOME/lib/criu
+```
+
 
 **org.crac.**   
 
@@ -67,15 +70,21 @@ You can find `org.crac` on Maven central, so you can add the dependency as follo
 
 Gradle:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">implementation 'org.crac:crac:1.4.0'</pre>
+```
+implementation 'org.crac:crac:1.4.0'
+```
+
 
 Maven:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">&lt;dependency&gt;
-  &lt;groupId&gt;org.crac&lt;/groupId&gt;
-  &lt;artifactId&gt;crac&lt;/artifactId&gt;
-  &lt;version&gt;1.4.0&lt;/version&gt;
-&lt;/dependency&gt;</pre>
+```
+<dependency>
+  <groupId>org.crac</groupId>
+  <artifactId>crac</artifactId>
+  <version>1.4.0</version>
+</dependency>
+```
+
 
 **Create a folder for the checkpoint**   
 
@@ -91,8 +100,10 @@ So, if possible, you should switch the JDK as soon as possible to benefit from t
 
 Start the application by executing:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">java -jar spring-petclinic-3.2.0.jar
-</pre>
+```
+java -jar spring-petclinic-3.2.0.jar
+```
+
 
 Here are the results when starting up the application without using CRaC:
 
@@ -110,14 +121,19 @@ Here is the description from the documentation:
 
 To make use of the automatic checkpointing, we start the application as follows:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">java -Dspring.context.checkpoint=onRefresh -XX:CRaCCheckpointTo=./tmp_checkpoint -jar spring-petclinic-3.2.0.jar</pre>
+```
+java -Dspring.context.checkpoint=onRefresh -XX:CRaCCheckpointTo=./tmp_checkpoint -jar spring-petclinic-3.2.0.jar
+```
+
 
 After executing the application, it will create the checkpoint, store the checkpoint files in the folder `./tmp_checkpoint`, and will then exit the application.
 
 Now you can restore the application from the checkpoint (which means starting it again) by executing:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">java -XX:CRaCRestoreFrom=./tmp_checkpoint
-</pre>
+```
+java -XX:CRaCRestoreFrom=./tmp_checkpoint
+```
+
 
 Here are the results related to the startup time when restoring from the automatic checkpoint
 
@@ -141,14 +157,19 @@ Before we start, make sure that the folder for the checkpoint is empty.
 
 First you start your application as follows:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">java -XX:CRaCCheckpointTo=./tmp_checkpoint -jar spring-petclinic-3.2.0.jar</pre>
+```
+java -XX:CRaCCheckpointTo=./tmp_checkpoint -jar spring-petclinic-3.2.0.jar
+```
+
 
 Now you wait until the application was completely started up before you open a second shell window.  
 
 In this second shell window, you execute the following command:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">jcmd spring-petclinic-3.2.0.jar JDK.checkpoint
-</pre>
+```
+jcmd spring-petclinic-3.2.0.jar JDK.checkpoint
+```
+
 
 Now you should see that in the first shell window, where you started the petclinic application, a checkpoint is created and the application was shut down.
 
@@ -158,8 +179,10 @@ Now you can close the second shell window.
 
 To restore the application from this checkpoint you execute the same command as for the automatic checkpoint:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">java -XX:CRaCRestoreFrom=./tmp_checkpoint
-</pre>
+```
+java -XX:CRaCRestoreFrom=./tmp_checkpoint
+```
+
 
 This manually triggered checkpoint does not only contain the framework code but also the application code which means we should see an even faster startup because the application was already loaded and started by the framework. So here are the results:
 

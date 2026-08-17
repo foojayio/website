@@ -106,7 +106,7 @@ If you want to get started with GlassFish 8 right away, here are some useful lin
 * [OmniFish Blog](https://omnifish.ee/blog/)
 * [OmniFish on YouTube](https://www.youtube.com/@omnifishnews)
 
-*** ** * ** ***
+
 
 More information:
 

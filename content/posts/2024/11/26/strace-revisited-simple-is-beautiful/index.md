@@ -90,12 +90,15 @@ strace in Action: A Closer Look at System Calls {#h2-10-strace-in-action-a-close
 
 Using strace is straightforward: you simply pass the command line to it.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">strace java -classpath . PrimeMain
-</pre>
+```
+strace java -classpath . PrimeMain
+```
+
 
 This simplicity belies its power, as the output offers a wealth of information. Each line in the strace output corresponds to a system call made by the process as you can see below:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">execve("/home/ec2-user/jdk1.8.0_45/bin/java", ["java", "-classpath.", "PrimeMain"], 0x7fffd689ec20 /* 23 vars */) = 0
+```
+execve("/home/ec2-user/jdk1.8.0_45/bin/java", ["java", "-classpath.", "PrimeMain"], 0x7fffd689ec20 /* 23 vars */) = 0
 brk(NULL)                               = 0xb85000
 mmap(NULL, 4096, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x7f0294272000
 readlink("/proc/self/exe", "/home/ec2-user/jdk1.8.0_45/bin/j"..., 4096) = 35
@@ -103,12 +106,16 @@ access("/etc/ld.so.preload", R_OK)      = -1 ENOENT (No such file or directory)
 open("/home/ec2-user/jdk1.8.0_45/bin/../lib/amd64/jli/tls/x86_64/libpthread.so.0", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
 stat("/home/ec2-user/jdk1.8.0_45/bin/../lib/amd64/jli/tls/x86_64", 0x7fff37af09a0) = -1 ENOENT (No such file or directory)
 open("/home/ec2-user/jdk1.8.0_45/bin/../lib/amd64/jli/tls/libpthread.so.0", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
-stat("/home/ec2-user/jdk1.8.0_45/bin/../lib/amd64/jli/tls", 0x7fff37af09a0) = -1 ENOENT (No such file or directory)</pre>
+stat("/home/ec2-user/jdk1.8.0_45/bin/../lib/amd64/jli/tls", 0x7fff37af09a0) = -1 ENOENT (No such file or directory)
+```
+
 
 By analyzing these calls, users can gain insights into the intricate operations of their applications. For instance, if a Java process attempts to load a library and fails, strace can reveal the underlying system call and its exit code, providing clues about potential issues like missing files or directories. E.g. in this line:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">open("/home/ec2-user/jdk1.8.0_45/bin/../lib/amd64/jli/tls/x86_64/libpthread.so.0", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
-</pre>
+```
+open("/home/ec2-user/jdk1.8.0_45/bin/../lib/amd64/jli/tls/x86_64/libpthread.so.0", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+```
+
 
 Java tries to load the `pthread` library from the `tls` directory using a system call open to load the file. The exit code of the system call is `-1,` which means that the file isn't there. Under normal circumstances, we should get back a file descriptor value from this API (positive non-zero integer). Looking in the directory, it seems the `tls` directory is missing. I'm guessing that this is because of a missing `JCE` (Java Cryptography Extensions) installation. This is probably OK but might have been interesting in some cases.
 
@@ -123,8 +130,10 @@ Advanced Features and Tips {#h2-13-advanced-features-and-tips}
 
 A common challenge with strace is managing its voluminous output. Fortunately, strace offers options to filter system calls, significantly enhancing its usability. By using the `-e` argument, you can instruct strace to log only specific types of system calls, such as `open` or `connect` e.g.:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">strace -e open java -classpath . PrimeMain
-</pre>
+```
+strace -e open java -classpath . PrimeMain
+```
+
 
 This selective logging not only makes the output more manageable but also allows for focused troubleshooting, speeding up the debugging process.
 

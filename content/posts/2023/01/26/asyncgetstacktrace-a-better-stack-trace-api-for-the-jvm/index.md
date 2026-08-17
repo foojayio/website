@@ -39,13 +39,16 @@ GetStackTrace {#h2-0-getstacktrace}
 You could use the official and well defined `GetStackTrace` JVMTI API, which OpenJ9 and every other JVM out there also Implement:
 > 
 
-<pre class="EnlighterJSRAW" data-enlighter-language="cpp" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">jvmtiError
+```cpp
+jvmtiError
 GetStackTrace(jvmtiEnv* env,
             jthread thread,
             jint start_depth,
             jint max_frame_count,
             jvmtiFrameInfo* frame_buffer,
-            jint* count_ptr)</pre>
+            jint* count_ptr)
+```
+
 
 >
 > Get information about the stack of a thread. If `max_frame_count` is less than the depth of the stack, the `max_frame_count` topmost frames are returned, otherwise the entire stack is returned. The topmost frames, those most recently invoked, are at the beginning of the returned buffer.
@@ -53,10 +56,13 @@ GetStackTrace(jvmtiEnv* env,
 
 This API gives us enough information on every Java frame to write a small profiler:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="cpp" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">typedef struct {
+```cpp
+typedef struct {
     jmethodID method;
     jlocation location;
-} jvmtiFrameInfo;</pre>
+} jvmtiFrameInfo;
+```
+
 
 So what is the problem? This API is safe-point biased. This means that you can only obtain a stack trace using `GetStackTrace` only at certain points in time where the JVM state is well-defined, called safe points. This bias significantly reduces the accuracy of your profiler, as we can only observe a subset of locations in a program using these stack traces. More on this in blog posts like ["Java Safepoint and Async Profiling"](https://seethawenner.medium.com/java-safepoint-and-async-profiling-cdce0818cd29) by Seetha Wenner.
 
@@ -76,7 +82,8 @@ The only other option left is to use `AsyncGetCallTrace`, an API added on the 19
 
 <br />
 
-<pre class="EnlighterJSRAW" data-enlighter-language="cpp" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">void AsyncGetCallTrace(ASGCT_CallTrace *trace, jint depth, 
+```cpp
+void AsyncGetCallTrace(ASGCT_CallTrace *trace, jint depth, 
                        void* ucontext)
 // Arguments:
 //
@@ -94,7 +101,7 @@ The only other option left is to use `AsyncGetCallTrace`, an API added on the 19
 // Fields:
 //   env_id     - ID of thread which executed this trace.
 //   num_frames - number of frames in the trace.
-//                (&lt; 0 indicates the frame is not walkable).
+//                (< 0 indicates the frame is not walkable).
 //   frames     - the ASGCT_CallFrames that make up this trace. 
 //                Callee followed by callers.
 //
@@ -102,7 +109,9 @@ The only other option left is to use `AsyncGetCallTrace`, an API added on the 19
 //    typedef struct {
 //        jint lineno;
 //        jmethodID method_id;
-//    } ASGCT_CallFrame;</pre>
+//    } ASGCT_CallFrame;
+```
+
 
 *Consider reading my [blog series on writing a profiler from scratch](https://mostlynerdless.de/blog/tag/writing-a-profiler-from-scratch/) if you want to learn more.*
 
@@ -142,30 +151,39 @@ Now to the API: I will inadvertently use parts of the text of my JEP in the foll
 
 The primary function definition is similar to AsyncGetCallTrace:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="cpp" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">void AsyncGetStackTrace(ASGST_CallTrace *trace, jint depth, 
-                        void* ucontext, uint32_t options);</pre>
+```cpp
+void AsyncGetStackTrace(ASGST_CallTrace *trace, jint depth, 
+                        void* ucontext, uint32_t options);
+```
+
 
 It stores the stack frames in the pre-allocated `trace`, up to the specified depth, obtain the start frame from the passed `ucontext`. The only real difference is here that we can configure the stack walking. Currently, the API supports two features which the caller can enable by setting the bits of the `options` argument:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="cpp" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">enum ASGST_Options {
+```cpp
+enum ASGST_Options {
   // include C/C++ and stub frames too
   ASGST_INCLUDE_C_FRAMES         = 1,
   // walk the stacks of C/C++, GC and deopt threads too
   ASGST_INCLUDE_NON_JAVA_THREADS = 2,
-};</pre>
+};
+```
+
 
 Both options make writing simple profilers which also walk C/C++ frames and threads far more straightforward. The first option allows us to see frames that we could not see before (even with the advanced processing of async-profiler): C/C++ frames between Java frames.
 
 This is quite useful when you work with JNI code which in turn calls Java code. You can find an example for this in the `innerc` test case of my JEP draft code:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">  /* checkNativeChain() 
-      -&gt; checkCMethod() 
-      -&gt; checkJavaInner() 
-      -&gt; checkNativeLeaf() */
+```java
+  /* checkNativeChain() 
+      -> checkCMethod() 
+      -> checkJavaInner() 
+      -> checkNativeLeaf() */
   // calls checkCMethod() with in turn calls checkJavaInner()
   private static native boolean checkNativeChain(); 
   private static boolean checkJavaInner() { return checkNativeLeaf(); }
-  private static native boolean checkNativeLeaf();</pre>
+  private static native boolean checkNativeLeaf();
+```
+
 
 With the old API you would never observe the `checkCMethod` in a stack trace, even if it would take lots of time to execute. But we disabled the options to mimic the behavior (and number of obtained frames), of `AsyncGetCallTrace`.
 
@@ -173,15 +191,18 @@ With the old API you would never observe the `checkCMethod` in a stack trace, ev
 
 We defined the main trace data structure in the new API as follows:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="cpp" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">typedef struct {
+```cpp
+typedef struct {
   jint num_frames;                // number of frames in this 
-                                  //   trace, (&lt; 0 indicates the
+                                  //   trace, (< 0 indicates the
                                   //   frame is not walkable).
   uint8_t kind;                   // kind of the trace
   ASGST_CallFrame *frames;        // frames that make up this trace. 
                                   //   Callee followed by callers.
   void* frame_info;               // more information on frames
-} ASGST_CallTrace;</pre>
+} ASGST_CallTrace;
+```
+
 
 There are two new fields: The kind of trace and the `frame_info` field for additional information on every frame, which could later be added depending on the configuration, without changing the API.
 
@@ -195,13 +216,16 @@ There are five different kinds of traces:
 
 Specified in the following enum:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="cpp" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">enum ASGST_TRACE_KIND {
+```cpp
+enum ASGST_TRACE_KIND {
   ASGST_JAVA_TRACE     = 0,
   ASGST_CPP_TRACE      = 1,
   ASGST_GC_TRACE       = 2,
   ASGST_DEOPT_TRACE    = 3,
   ASGST_UNKNOWN_TRACE  = 4,
-};</pre>
+};
+```
+
 
 We encode the error code as negative numbers in the num_frames field because it keeps the data structures simple and `AsyncGetCallTrace` does it too. Every trace with `num_frames > 0` is valid.
 
@@ -211,23 +235,29 @@ The most significant difference between the two APIs is in the representation of
 
 But first, we have to distinguish between Java frames, related to Java and native methods, and non-Java frames, related to stub and C/C++ frames. We use a union called `ASGST_CallFrame` for this:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="cpp" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">typedef union {
+```cpp
+typedef union {
   uint8_t type;     // to distinguish between JavaFrame and 
                     //   NonJavaFrame
   ASGST_JavaFrame java_frame;
   ASGST_NonJavaFrame non_java_frame;
-} ASGST_CallFrame;</pre>
+} ASGST_CallFrame;
+```
+
 
 The type here is more fine-grained than just two options:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="cpp" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">enum ASGST_FrameTypeId {
+```cpp
+enum ASGST_FrameTypeId {
   ASGST_FRAME_JAVA         = 1, // JIT compiled and interpreted
   ASGST_FRAME_JAVA_INLINED = 2, // inlined JIT compiled
   ASGST_FRAME_NATIVE       = 3, // native wrapper to call 
                                 //   C methods from Java
   ASGST_FRAME_STUB         = 4, // VM generated stubs
   ASGST_FRAME_CPP          = 5  // C/C++/... frames
-};</pre>
+};
+```
+
 
 The first three types map to `ASGST_JavaFrame` and others to `ASGST_NonJavaFrame`, as hinted before.
 
@@ -235,22 +265,28 @@ We don't store too much information for non-Java frames not to increase the size
 
 We store the program counter, which the profiler can use to obtain the function name and possibly the location inside the function:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="cpp" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">typedef struct {
+```cpp
+typedef struct {
   uint8_t type;      // frame type
   void *pc;          // current program counter inside this frame
-} ASGST_NonJavaFrame; // used for FRAME_STUB, FRAME_CPP</pre>
+} ASGST_NonJavaFrame; // used for FRAME_STUB, FRAME_CPP
+```
+
 
 We store the compilation level, the bytecode index, and the method id for Java frames, encoding the information on inlining in the type:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="cpp" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">typedef struct {
+```cpp
+typedef struct {
   uint8_t type;            // frame type
   int8_t comp_level;       // compilation level, 
                            //   0 is interpreted, -1 is undefined,
-                           //   &gt; 1 is JIT compiled
-  uint16_t bci;            // 0 &lt; bci &lt; 65536
+                           //   > 1 is JIT compiled
+  uint16_t bci;            // 0 < bci < 65536
   jmethodID method_id;
 } ASGST_JavaFrame;         // used for FRAME_JAVA, 
-                           //   FRAME_JAVA_INLINED and FRAME_NATIVE</pre>
+                           //   FRAME_JAVA_INLINED and FRAME_NATIVE
+```
+
 
 Although the API provides more information, the amount of space required per frame (e.g., 16 bytes on x86) is the same as for the existing `AsyncGetCallTrace` API.
 

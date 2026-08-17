@@ -66,7 +66,8 @@ There are two hook styles:
 
 Every sequential hook must return an `AiMiddlewareResult`. The static factory methods make this expressive:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">import bxModules.bxai.models.middleware.AiMiddlewareResult;
+```java
+import bxModules.bxai.models.middleware.AiMiddlewareResult;
 
 // Continue normally — chain proceeds
 return AiMiddlewareResult.continue()
@@ -85,11 +86,13 @@ return AiMiddlewareResult.edit( { correctedArgs: { amount: 100 } } )
 
 // Suspend for async human review — terminal
 return AiMiddlewareResult.suspend( { toolName: "transferFunds", args: toolArgs } )
-</pre>
+```
+
 
 Terminal results (`cancel`, `reject`, `suspend`) stop the chain immediately. Non-terminal results continue to the next middleware.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">// Predicates for checking results
+```java
+// Predicates for checking results
 result.isContinue()   // chain continues
 result.isCancelled()  // was stopped
 result.isApproved()   // human approved
@@ -97,14 +100,16 @@ result.isRejected()   // human rejected (terminal)
 result.isEdit()       // args were modified
 result.isSuspended()  // waiting for async input (terminal)
 result.isTerminal()   // cancelled OR rejected OR suspended
-</pre>
+```
+
 
 📝 LoggingMiddleware --- Instant Observability {#h2-2-loggingmiddleware-instant-observability}
 ----------------------------------------------------------------------------------------------
 
 Drop this in and every LLM call, tool invocation, agent run start/end, and error gets logged to BoxLang's `ai` log file and optionally to the console --- with zero code changes to your agents:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">agent = aiAgent(
+```java
+agent = aiAgent(
     name       : "support-bot",
     middleware : new LoggingMiddleware(
         logToConsole : true,
@@ -112,11 +117,13 @@ Drop this in and every LLM call, tool invocation, agent run start/end, and error
         prefix       : "[SupportBot]"
     )
 )
-</pre>
+```
+
 
 The implementation is a clean example of how sequential hooks compose:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">// From LoggingMiddleware.bx
+```java
+// From LoggingMiddleware.bx
 AiMiddlewareResult function beforeAgentRun( required struct context ) {
     emit( "Agent run starting | input: #left( toString( context.input ), 120 )#" )
     return AiMiddlewareResult.continue()
@@ -132,7 +139,8 @@ AiMiddlewareResult function onError( required struct context ) {
     emit( "Error in phase '#context.phase#': #context.error?.message#", "error" )
     return AiMiddlewareResult.continue()  // don't stop the chain on logging errors
 }
-</pre>
+```
+
 
 Options:
 
@@ -148,7 +156,8 @@ Options:
 
 LLM providers have rate limits. Networks have transient failures. `RetryMiddleware` wraps both LLM calls and tool calls with exponential backoff --- transparently, without any code in your tools or agents:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">agent = aiAgent(
+```java
+agent = aiAgent(
     name       : "analyst",
     middleware : new RetryMiddleware(
         maxRetries        : 5,
@@ -157,7 +166,8 @@ LLM providers have rate limits. Networks have transient failures. `RetryMiddlewa
         maxDelay          : 30000
     )
 )
-</pre>
+```
+
 
 It uses `wrapLLMCall` and `wrapToolCall` hooks --- the outer wrap catches exceptions, sleeps, and retries up to `maxRetries` times. Non-retryable exceptions (like `InvalidInput` or `MaxInteractionsExceeded`) surface immediately:
 
@@ -174,7 +184,8 @@ It uses `wrapLLMCall` and `wrapToolCall` hooks --- the outer wrap catches except
 
 Block dangerous tools entirely, or reject tool calls whose arguments match regex patterns --- before they ever reach the tool:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">guardrail = new GuardrailMiddleware(
+```java
+guardrail = new GuardrailMiddleware(
     blockedTools : [ "deleteRecord", "dropTable", "truncateAll" ],
     argPatterns  : {
         runSql  : [ { query: "(?i)drop|truncate|delete" } ],
@@ -183,16 +194,18 @@ Block dangerous tools entirely, or reject tool calls whose arguments match regex
 )
 
 agent = aiAgent( name: "db-assistant", middleware: guardrail )
-</pre>
+```
+
 
 The hook fires in `beforeToolCall` --- it checks the tool name against `blockedTools` first, then validates each argument against the configured regex patterns:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">// From GuardrailMiddleware.bx
+```java
+// From GuardrailMiddleware.bx
 AiMiddlewareResult function beforeToolCall( required struct context ) {
     var toolName = context.toolName ?: (context.tool?.getName() ?: "")
 
     // 1. Blocked tool list check
-    if ( variables.blockedTools.findNoCase( toolName ) &gt; 0 ) {
+    if ( variables.blockedTools.findNoCase( toolName ) > 0 ) {
         return AiMiddlewareResult.reject(
             "GuardrailMiddleware: tool '#toolName#' is in the blocked tools list."
         )
@@ -205,7 +218,8 @@ AiMiddlewareResult function beforeToolCall( required struct context ) {
 
     return AiMiddlewareResult.continue()
 }
-</pre>
+```
+
 
 |     Option     | Default |                  Description                  |
 |----------------|---------|-----------------------------------------------|
@@ -219,29 +233,35 @@ This middleware intercepts specific tool calls and requires a human to approve, 
 
 **CLI mode** --- blocks on stdin. Perfect for local scripts, automation tools, and development workflows:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">agent = aiAgent(
+```java
+agent = aiAgent(
     name       : "finance-bot",
     middleware : new HumanInTheLoopMiddleware(
         toolsRequiringApproval : [ "transferFunds", "placeOrder" ],
         showArguments          : true
     )
 )
-</pre>
+```
+
 
 When the LLM calls `transferFunds`, the terminal shows:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="html">╔══════════════════════════════════════════════════╗
+```html
+╔══════════════════════════════════════════════════╗
 ║         HUMAN APPROVAL REQUIRED                  ║
 ╚══════════════════════════════════════════════════╝
  Tool: transferFunds
  Args: {"amount": 5000, "account": "12345"}
 
  [A]pprove  [R]eject  [Q]uit
- Decision:</pre>
+ Decision:
+```
+
 
 **Web mode** --- suspends the run and returns an `AiMiddlewareResult.suspend()`. The calling code checkpoints state and presents the approval request asynchronously --- via email, Slack, a web UI, whatever fits your workflow:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">agent = aiAgent(
+```java
+agent = aiAgent(
     name        : "finance-bot",
     middleware  : new HumanInTheLoopMiddleware(
         mode                  : "web",
@@ -265,7 +285,8 @@ agent.resume( "approve", session.pendingApproval )
 
 // Or if they edit the quantity
 agent.resume( "edit", session.pendingApproval, { correctedArgs: { quantity: 10 } } )
-</pre>
+```
+
 
 The resume path in `HumanInTheLoopMiddleware` reads the `_resumeContext` injected by `AiAgent.resume()`, honours the decision, and either continues, rejects, or patches the tool arguments --- then clears the context so subsequent tool calls in the same run go through normal HITL flow again.
 
@@ -287,16 +308,19 @@ The problem: agent behaviour is non-deterministic. The LLM might phrase somethin
 
 **Three modes:**
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">// RECORD — calls real providers and tools, saves every interaction
+```java
+// RECORD — calls real providers and tools, saves every interaction
 agent = aiAgent(
     name       : "weather-bot",
     middleware : new FlightRecorderMiddleware( mode: "record" )
 )
 agent.run( "What's the weather in London and should I bring an umbrella?" )
 // → Writes: .ai/flight-recorder/weather-bot-20260402-143022.json
-</pre>
+```
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">// REPLAY — zero live calls, fully deterministic
+
+```java
+// REPLAY — zero live calls, fully deterministic
 agent = aiAgent(
     name       : "weather-bot",
     middleware : new FlightRecorderMiddleware(
@@ -306,18 +330,22 @@ agent = aiAgent(
 )
 agent.run( "What's the weather in London and should I bring an umbrella?" )
 // → Returns the exact same response as the recorded run
-</pre>
+```
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">// PASSTHROUGH (default) — no recording, calls pass through normally
+
+```java
+// PASSTHROUGH (default) — no recording, calls pass through normally
 agent = aiAgent(
     name       : "weather-bot",
     middleware : new FlightRecorderMiddleware()  // mode: "passthrough"
 )
-</pre>
+```
+
 
 **The fixture format** --- human-readable JSON that you can inspect, edit, and commit to version control:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">{
+```java
+{
     "version": "1",
     "recordedAt": "2026-04-02T14:30: 22",
     "agentName": "weather-bot",
@@ -343,27 +371,32 @@ agent = aiAgent(
         }
     ]
 }
-</pre>
+```
+
 
 One implementation detail worth noting: the recorder **flushes to disk after every interaction**, not just at the end. This means if your agent crashes mid-run, the partial recording is preserved and can be inspected:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">// From FlightRecorderMiddleware.bx
+```java
+// From FlightRecorderMiddleware.bx
 private void function _appendInteraction( required struct interaction ) {
     var seq = variables._tape.interactions.len() + 1
     arguments.interaction.seq = seq
     variables._tape.interactions.append( arguments.interaction )
     _saveSnapshot()  // flush after every interaction — crash-safe
 }
-</pre>
+```
+
 
 **Strict vs lenient replay:**
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">// Strict (default): throw on type mismatch — "expecting llm but tape has tool"
+```java
+// Strict (default): throw on type mismatch — "expecting llm but tape has tool"
 new FlightRecorderMiddleware( mode: "replay", strict: true )
 
 // Lenient: skip forward to find next matching interaction type
 new FlightRecorderMiddleware( mode: "replay", strict: false )
-</pre>
+```
+
 
 |    Option     |         Default         |              Description               |
 |---------------|-------------------------|----------------------------------------|
@@ -378,11 +411,13 @@ new FlightRecorderMiddleware( mode: "replay", strict: false )
 
 Simple but essential in production --- caps the total number of tool invocations per agent run:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">agent = aiAgent(
+```java
+agent = aiAgent(
     name       : "research-bot",
     middleware : new MaxToolCallsMiddleware( maxCalls: 10 )
 )
-</pre>
+```
+
 
 The counter resets at the start of each new `run()` call. If the cap is hit mid-run, the chain is cancelled with a clear error message. Essential for preventing infinite tool call loops in complex multi-step reasoning tasks.
 
@@ -393,33 +428,36 @@ Two approaches, depending on how much structure you want.
 
 **Struct of closures** --- lightweight, no class needed:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">agent.withMiddleware( {
-    beforeToolCall: ( ctx ) =&gt; {
+```java
+agent.withMiddleware( {
+    beforeToolCall: ( ctx ) => {
         if ( ctx.tool?.getName() == "dangerousTool" ) {
             return AiMiddlewareResult.cancel( "This tool is not allowed." )
         }
         return AiMiddlewareResult.continue()
     },
 
-    wrapLLMCall: ( ctx, handler ) =&gt; {
+    wrapLLMCall: ( ctx, handler ) => {
         var start  = getTickCount()
         var result = handler()
         metricsService.record( "llm.latency", getTickCount() - start )
         return result
     },
 
-    onError: ( ctx ) =&gt; {
+    onError: ( ctx ) => {
         alertService.notify( "Agent error in #ctx.phase#: #ctx.error.message#" )
         return AiMiddlewareResult.continue()
     }
 } )
-</pre>
+```
+
 
 Structs are automatically wrapped in `StructMiddlewareAdapter` --- you only define the hooks you need.
 
 **Class-based** --- reusable, configurable, independently testable:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">import bxModules.bxai.models.middleware.BaseAiMiddleware;
+```java
+import bxModules.bxai.models.middleware.BaseAiMiddleware;
 import bxModules.bxai.models.middleware.AiMiddlewareResult;
 
 class extends="BaseAiMiddleware" {
@@ -443,14 +481,16 @@ class extends="BaseAiMiddleware" {
     }
 
 }
-</pre>
+```
+
 
 🚀 Composing Middleware {#h2-9-composing-middleware}
 ----------------------------------------------------
 
 Middleware stacks compose cleanly --- just pass an array:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">agent = aiAgent(
+```java
+agent = aiAgent(
     name       : "production-agent",
     middleware : [
         new LoggingMiddleware( logToConsole: false ),
@@ -460,15 +500,18 @@ Middleware stacks compose cleanly --- just pass an array:
         new HumanInTheLoopMiddleware( toolsRequiringApproval: [ "placeOrder" ] )
     ]
 )
-</pre>
+```
+
 
 Or fluently, one at a time:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">agent
+```java
+agent
     .withMiddleware( new LoggingMiddleware() )
     .withMiddleware( new RetryMiddleware( maxRetries: 3 ) )
     .withMiddleware( new GuardrailMiddleware( blockedTools: [ "deleteRecord" ] ) )
-</pre>
+```
+
 
 In production, logging + retry + guardrails is the baseline stack. Add `MaxToolCallsMiddleware` for complex reasoning agents. Add `HumanInTheLoopMiddleware` for any agent touching money, data, or external systems. Use `FlightRecorderMiddleware` in record mode during QA and replay mode in CI.
 

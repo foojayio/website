@@ -33,7 +33,8 @@ What percentage (depth and extent) of Spring Boot Annotations do you think you r
 
 Service Layer usually holds the core business logic of an application. In Spring, we denote the interface or class that holds the business logic with this annotation.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="dracula">package xyz.sumithpuri.spring.boot.annotation.service;  
+```java
+package xyz.sumithpuri.spring.boot.annotation.service;  
 
 import java.util.HashSet;  
 
@@ -48,10 +49,10 @@ import xyz.sumithpuri.spring.boot.annotation.model.Book;
 @Service  
 public class BookServiceImpl implements BookService {  
 
-     HashSet&lt;Book&gt; bookList = new HashSet&lt;Book&gt;();  
+     HashSet<Book> bookList = new HashSet<Book>();  
 
      @Override  
-     public HashSet&lt;Book&gt; findAllBook() {  
+     public HashSet<Book> findAllBook() {  
           if (bookList.isEmpty())  
                return null;  
           else  
@@ -60,10 +61,12 @@ public class BookServiceImpl implements BookService {
 
      @Override  
      public Book findBookByID(long id) {  
-          Book book = bookList.stream().filter(b -&gt; b.getId() == id).findAny().orElse(null);  
+          Book book = bookList.stream().filter(b -> b.getId() == id).findAny().orElse(null);  
           return book;  
      }  
-    ....</pre>
+    ....
+```
+
 
 **@Controller
 @RestController**
@@ -72,7 +75,8 @@ public class BookServiceImpl implements BookService {
 
 @RestController is annotated with @Controller and is used for web layer request handling. Types that carry the @RestController annotation are treated as controllers where @RequestMapping methods assume @ResponseBody semantics by default.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="dracula">import java.util.HashSet;  
+```java
+import java.util.HashSet;  
 
 import org.springframework.beans.factory.annotation.Autowired;  
 import org.springframework.web.bind.annotation.DeleteMapping;  
@@ -100,7 +104,7 @@ public class SBASampleController {
      SBASampleConfigurationProperties sbasConfigProps;  
 
      @GetMapping("/findall")  
-     public HashSet&lt;Book&gt; getAllBook() {  
+     public HashSet<Book> getAllBook() {  
           return bookServiceImpl.findAllBook();  
      }  
 
@@ -108,13 +112,16 @@ public class SBASampleController {
      public Book geBookById(@PathVariable long id) {  
           return bookServiceImpl.findBookByID(id);  
      }  
-    ...</pre>
+    ...
+```
+
 
 **@Component**
 
 @Component is used to create any Spring managed component. It can be used as a Spring Bean. Any bean with @Bean that is created within a component will have a 'Prototype' scope, as opposed to a 'Singleton' scope of beans that is created within a @Configuration annotated class. @Repository and @Controller are all specialized components.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="dracula">package xyz.sumithpuri.spring.boot.annotation.component;  
+```java
+package xyz.sumithpuri.spring.boot.annotation.component;  
 
  import javax.annotation.PostConstruct;  
 
@@ -138,7 +145,9 @@ public class SBASampleController {
            System.out.println("Testing @SpringBootApplication, @Component and @PostConstruct");  
       }  
 
- }</pre>
+ }
+```
+
 
 **@Repository**
 
@@ -150,41 +159,55 @@ public class SBASampleController {
 
 This annotation is from MVC/Web that will associate a given URI with a method in the controller. It can be used in the following format.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="dracula">@RequestMapping(method = RequestMethod.PATCH)</pre>
+```java
+@RequestMapping(method = RequestMethod.PATCH)
+```
+
 
 **@GetMapping**
 
 This annotation is used to map a HTTP GET request to a specific handler method in the controller. It is equivalent to the following alternative.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="dracula">@RequestMapping(method = RequestMethod.GET)
+```java
+@RequestMapping(method = RequestMethod.GET)
+```
 
-</pre>
 
 **@PostMapping**
 
 This annotation is used to map a HTTP POST request to a specific handler method in the controller. It is equivalent to the following alternative.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="dracula">@RequestMapping(method = RequestMethod.POST)
+```java
+@RequestMapping(method = RequestMethod.POST)
+```
 
-</pre>
 
 **@DeleteMapping**
 
 This annotation is used to map a HTTP DELETE request to a specific handler method in the controller. It is equivalent to the following alternative.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="dracula">@RequestMapping(method = RequestMethod.DELETE)</pre>
+```java
+@RequestMapping(method = RequestMethod.DELETE)
+```
+
 
 **@PutMapping**
 
 This annotation is used to map a HTTP PUT request to a specific handler method in the controller. It is equivalent to the following alternative.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="dracula">@RequestMapping(method = RequestMethod.PUT)<code> </code></pre>
+```java
+@RequestMapping(method = RequestMethod.PUT)<code> </code>
+```
+
 
 **@PatchMapping**
 
 This annotation is used to map a HTTP PATCH request to a specific handler method in the controller. It is equivalent to the following alternative.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="dracula">@RequestMapping(method = RequestMethod.PATCH)</pre>
+```java
+@RequestMapping(method = RequestMethod.PATCH)
+```
+
 
 **@RequestBody**   
 
@@ -210,7 +233,8 @@ This can be used to bind a method parameter to a request attribute that was adde
 
 This is used to bind a method parameter from a request template URI. Note that It can be used to bind multiple method parameters.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="dracula">package xyz.sumithpuri.spring.boot.annotation.controller;  
+```java
+package xyz.sumithpuri.spring.boot.annotation.controller;  
 
  import java.util.HashSet;  
 
@@ -240,7 +264,7 @@ This is used to bind a method parameter from a request template URI. Note that I
       SBASampleConfigurationProperties sbasConfigProps;  
 
       @GetMapping("/findall")  
-      public HashSet&lt;Book&gt; getAllBook() {  
+      public HashSet<Book> getAllBook() {  
            return bookServiceImpl.findAllBook();  
       }  
 
@@ -262,6 +286,8 @@ This is used to bind a method parameter from a request template URI. Note that I
                                                                   + sbasConfigProps.getYear());  
            bookServiceImpl.addBook(book);  
       }  
- }</pre>
+ }
+```
+
 
 ( @RestController, @GetMapping, @PostMapping, @DeleteMapping, @Autowired, @Pathvariable )

@@ -53,7 +53,8 @@ Let's start with a simple HelloWorld application to make sure everything is work
 
 Here's a small HelloWorld.java you can use to test:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">package org.vaadin.example.springapp;
+```
+package org.vaadin.example.springapp;
 
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.ClickEvent;
@@ -68,10 +69,12 @@ public class HelloWorld extends Div {
         add(new Button("Click to say hello", this::sayHello));
     }
 
-    public void sayHello(ClickEvent&lt;Button&gt; e) {
+    public void sayHello(ClickEvent<Button> e) {
         Notification.show("Hello stranger");
     }
-}</pre>
+}
+```
+
 
 To start the server, just open the context menu on the SpringAppApplication.java file and click "Run Java". This will start the embedded web server and Vaadin in development mode.
 

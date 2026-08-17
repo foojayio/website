@@ -46,42 +46,60 @@ Let's start a PostgreSQL instance first. We can do this within a minute with Doc
 
 1. Start the database in a container: 
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bat">rm -R ~/postgresql_data/
+```batch
+rm -R ~/postgresql_data/
 mkdir ~/postgresql_data/
 
 docker run --name postgresql \
     -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=password \
     -p 5432:5432 \
     -v ~/postgresql_data/:/var/lib/postgresql/data -d postgres:13.8
-</pre>
+```
+
 
 2. Connect to the container: 
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash">docker exec -it postgresql /bin/bash</pre>
+```bash
+docker exec -it postgresql /bin/bash
+```
+
 
 3. Connect to the database using psql tool: 
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash">psql -h 127.0.0.1 -U postgres</pre>
+```bash
+psql -h 127.0.0.1 -U postgres
+```
+
 
 4. Make sure the database is empty (no tables yet): 
 
-<pre class="EnlighterJSRAW" data-enlighter-language="sql">postgres=# \d
-Did not find any relations.</pre>
+```sql
+postgres=# \d
+Did not find any relations.
+```
+
 
 Next, clone and start the pizza app:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash">git clone https://github.com/dmagda/java-litters-everywhere.git &amp;&amp; cd java-litters-everywhere
-mvn spring-boot:run</pre>
+```bash
+git clone https://github.com/dmagda/java-litters-everywhere.git && cd java-litters-everywhere
+mvn spring-boot:run
+```
+
 
 The app connects to the database via the Hikari pool and listens for our requests on port `8080`:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">INFO 58081 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+```java
+INFO 58081 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
 INFO 58081 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-INFO 58081 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path</pre>
+INFO 58081 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path
+```
+
 
 Go back to your psql session within the Docker container and make sure the app created an empty `pizza_order` table:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="sql">postgres=# \d
+```sql
+postgres=# \d
             List of relations
  Schema |    Name     | Type  |  Owner   
 --------+-------------+-------+----------
@@ -91,44 +109,61 @@ Go back to your psql session within the Docker container and make sure the app c
 postgres=# select * from pizza_order;
  id | status | order_time 
 ----+--------+------------
-(0 rows)</pre>
+(0 rows)
+```
+
 
 Now it's time to put the first order in the pizzeria queue. For that we're going to use the app's REST `putNewOrder` endpoint:
 
 1. Call the endpoint with curl: 
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash">curl -i -X POST  http://localhost:8080/putNewOrder --data 'id=1'</pre>
+```bash
+curl -i -X POST  http://localhost:8080/putNewOrder --data 'id=1'
+```
+
 
 2. The application persists the order to the database using the following SQL statement (see the app's log output): 
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">Hibernate: 
+```java
+Hibernate: 
     insert 
     into
         pizza_order
         (order_time, status, id) 
     values
- (?, ?, ?)</pre>
+ (?, ?, ?)
+```
+
 
 3. Use your psql session to check that the row made it to PostgreSQL: 
 
-<pre class="EnlighterJSRAW" data-enlighter-language="sql">postgres=# select * from pizza_order;
+```sql
+postgres=# select * from pizza_order;
  id | status  |       order_time        
 ----+---------+-------------------------
-  1 | Ordered | 2022-11-21 11:14:35.103</pre>
+  1 | Ordered | 2022-11-21 11:14:35.103
+```
+
 
 PostgreSQL stores rows in pages. The default page size is 8KB, which means that a single page usually holds multiple records. The database has an extension that allows us to look into the raw page data. Let's install the extension and explore the database storage internals:
 
 1. From within the psql session, install the pageinspect extension: 
 
-<pre class="EnlighterJSRAW" data-enlighter-language="sql">postgres=# CREATE EXTENSION pageinspect;
-CREATE EXTENSION</pre>
+```sql
+postgres=# CREATE EXTENSION pageinspect;
+CREATE EXTENSION
+```
+
 
 2. Request the contents of the first page of the `pizza_order` table:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="sql">postgres=# select t_ctid,t_xmin,t_xmax,t_data from heap_page_items(get_raw_page('pizza_order',0));
+```sql
+postgres=# select t_ctid,t_xmin,t_xmax,t_data from heap_page_items(get_raw_page('pizza_order',0));
  lp     | t_xmin | t_xmax |               t_data               
 --------+--------+--------+------------------------------------
- 1      |    488 |      0 | \x0100000002400000180fd8edf7900200</pre>
+ 1      |    488 |      0 | \x0100000002400000180fd8edf7900200
+```
+
 
 There is a single row in the page right now, and that's the row your application sees by executing the `select * from pizza_order` statement. Let's decipher the pageinspect columns:
 
@@ -141,32 +176,44 @@ Now, let's see what happens when the chef gets to this order and starts baking t
 
 1. Update the status with curl: 
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash">curl -i -X PUT http://localhost:8080/changeStatus --data 'id=1' --data 'status=Baking'</pre>
+```bash
+curl -i -X PUT http://localhost:8080/changeStatus --data 'id=1' --data 'status=Baking'
+```
+
 
 2. The app persists the change using the following statement: 
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">Hibernate: 
+```java
+Hibernate: 
    update
         pizza_order 
     set
         status=? 
     where
-        id=?</pre>
+        id=?
+```
+
 
 3. And PostgreSQL confirms the change is applied: 
 
-<pre class="EnlighterJSRAW" data-enlighter-language="sql">postgres=# select * from pizza_order;
+```sql
+postgres=# select * from pizza_order;
 id | status |       order_time        
 ----+--------+-------------------------
-  1 | Baking | 2022-11-21 11:14:35.103</pre>
+  1 | Baking | 2022-11-21 11:14:35.103
+```
+
 
 Now for the most interesting part, go ahead and check the storage state with the pageinspect extension:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="sql">postgres=# select lp,t_xmin,t_xmax,t_data from heap_page_items(get_raw_page('pizza_order',0));
+```sql
+postgres=# select lp,t_xmin,t_xmax,t_data from heap_page_items(get_raw_page('pizza_order',0));
  lp | t_xmin | t_xmax |               t_data               
 ----+--------+--------+------------------------------------
   1 |    488 |    490 | \x0100000002400000180fd8edf7900200
-  2 |    490 |      0 | \x0100000004400000180fd8edf7900200</pre>
+  2 |    490 |      0 | \x0100000004400000180fd8edf7900200
+```
+
 
 Even though the `select * from pizza_order` statement returns only one row, internally, PostgreSQL stores two versions for the order with `id=1`.
 
@@ -182,26 +229,35 @@ Want to see more garbage in PostgreSQL storage? Let's change-up the pizza order 
 
 1. With curl, change the status to `Delivering` and then to `YummyInMyTummy` (hope the customer would love the pizza):
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash">curl -i -X PUT http://localhost:8080/changeStatus --data 'id=1' --data 'status=Delivering'
-curl -i -X PUT http://localhost:8080/changeStatus --data 'id=1' --data 'status=YummyInMyTummy'</pre>
+```bash
+curl -i -X PUT http://localhost:8080/changeStatus --data 'id=1' --data 'status=Delivering'
+curl -i -X PUT http://localhost:8080/changeStatus --data 'id=1' --data 'status=YummyInMyTummy'
+```
+
 
 2. Using the psql session, confirm that the application will see only a row version with `status=YummyInMyTummy`:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="sql">postgres=# select * from pizza_order;
+```sql
+postgres=# select * from pizza_order;
  id |     status     |       order_time        
 ----+----------------+-------------------------
-  1 | YummyInMyTummy | 2022-11-21 11:14:35.103</pre>
+  1 | YummyInMyTummy | 2022-11-21 11:14:35.103
+```
+
 
 3. Check how many versions of the row are in PostgreSQL storage: 
 
-<pre class="EnlighterJSRAW" data-enlighter-language="sql">postgres=# select lp,t_xmin,t_xmax,t_data from heap_page_items(get_raw_page('pizza_order',0));
+```sql
+postgres=# select lp,t_xmin,t_xmax,t_data from heap_page_items(get_raw_page('pizza_order',0));
  lp | t_xmin | t_xmax |               t_data               
 ----+--------+--------+------------------------------------
   1 |    488 |    490 | \x0100000002400000180fd8edf7900200
   2 |    490 |    491 | \x0100000004400000180fd8edf7900200
   3 |    491 |    492 | \x0100000006400000180fd8edf7900200
   4 |    492 |      0 | \x0100000008400000180fd8edf7900200
-(4 rows)</pre>
+(4 rows)
+```
+
 
 There are four versions in the storage for our pizza order with `id=1`. The only difference between those versions is the value of the `status` column!
 

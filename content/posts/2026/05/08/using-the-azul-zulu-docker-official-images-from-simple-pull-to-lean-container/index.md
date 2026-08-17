@@ -35,61 +35,79 @@ How to Use Azul Zulu as Docker Official Images {#h-how-to-use-azul-zulu-as-docke
 
 The images are available on Docker Hub under the `azul-zulu` name. You can pull them directly, for instance, with the following commands:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">docker pull azul-zulu:21
+```
+docker pull azul-zulu:21
 docker pull azul-zulu:21-jre
-docker pull azul-zulu:25</pre>
+docker pull azul-zulu:25
+```
+
 
 Or you can pull and run one to check the version. This is a good first sanity check when evaluating a new image variant. You should see the following output:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ docker run --rm azul-zulu:25 java -version
+```
+$ docker run --rm azul-zulu:25 java -version
 openjdk version "25.0.2" 2026-01-20 LTS
 OpenJDK Runtime Environment Zulu25.32+21-CA (build 25.0.2+10-LTS)
-OpenJDK 64-Bit Server VM Zulu25.32+21-CA (build 25.0.2+10-LTS, mixed mode, sharing)</pre>
+OpenJDK 64-Bit Server VM Zulu25.32+21-CA (build 25.0.2+10-LTS, mixed mode, sharing)
+```
+
 
 Practical Examples: Building Lean Containers {#h-practical-examples-building-lean-containers}
 ---------------------------------------------------------------------------------------------
 
 Getting an official, trusted base image is step one. The next step is making sure you're not shipping more than you need. The [Sustainability for Java Developers](https://foojay.io/today/announcing-sustainability-for-java-developers-a-new-collaborative-guide-from-the-foojay-io-community/) ebook (published by the Foojay.io community) has an excellent chapter by Jan Ouwens and Ko Turk walking through exactly this problem. Based on their examples, I created a [repository on GitHub](https://github.com/FDelporte/azul-docker-demo) with a minimal application and multiple example Dockerfiles. The POM file includes the plugins to build a runnable JAR.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">package be.webtechie;  
+```
+package be.webtechie;  
 
 public class Main {  
     public static void main(String[] args) {  
         System.out.println("Hello and welcome!");  
     }  
-}</pre>
+}
+```
+
 
 Let's package this app and check the JAR size:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ mvn package
+```
+$ mvn package
 $ ls -lh target 
--rw-r--r--@ 1 frank  staff   2.2K Mar 23 15:41 azul-docker-demo-1.0-SNAPSHOT.jar</pre>
+-rw-r--r--@ 1 frank  staff   2.2K Mar 23 15:41 azul-docker-demo-1.0-SNAPSHOT.jar
+```
+
 
 So our application, compiled with Java 25, produces a JAR file that is only 2.2KB. Let's keep this in mind when comparing it to the Docker container size in the following steps...
 
 ### Everything in One Container (Don't Do This) {#h-everything-in-one-container-don-t-do-this}
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group=""># dockerfile-full
+```
+# dockerfile-full
 FROM azul/zulu-openjdk:25
 
 RUN mkdir /app
 COPY . /app
 WORKDIR /app
-RUN apt-get update &amp;&amp; apt-get install -y maven
+RUN apt-get update && apt-get install -y maven
 RUN mvn package
 
-ENTRYPOINT ["java", "-jar", "target/azul-docker-demo-1.0-SNAPSHOT.jar"]</pre>
+ENTRYPOINT ["java", "-jar", "target/azul-docker-demo-1.0-SNAPSHOT.jar"]
+```
+
 
 Using this file, we can create a Docker image with the following command and check the size.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ docker build -f dockerfile-full -t azul-docker-demo-full .
+```
+$ docker build -f dockerfile-full -t azul-docker-demo-full .
 
 $ docker images
 REPOSITORY              TAG       IMAGE ID       CREATED          SIZE
 azul-docker-demo-full   latest    cf769e50f1db   52 seconds ago   568MB
 
 $ docker run azul-docker-demo-full
-Hello and welcome!</pre>
+Hello and welcome!
+```
+
 
 This ships your entire build environment, code, Maven, a full JDK, and all the OS tooling alongside your 2.2 KB jar. The resulting image is 568 MB.
 
@@ -97,13 +115,14 @@ This ships your entire build environment, code, Maven, a full JDK, and all the O
 
 A multi-stage build separates "what you need to build" from "what you need to run":
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group=""># dockerfile-jre
+```
+# dockerfile-jre
 FROM azul-zulu:25 AS build
 
 RUN mkdir /app
 COPY . /app
 WORKDIR /app
-RUN apt-get update &amp;&amp; apt-get install -y maven &amp;&amp; mvn package
+RUN apt-get update && apt-get install -y maven && mvn package
 
 FROM azul-zulu:25-jre
 
@@ -111,18 +130,23 @@ RUN mkdir /app
 COPY --from=build /app /app
 WORKDIR /app
 
-ENTRYPOINT ["java", "-jar", "target/azul-docker-demo-1.0-SNAPSHOT.jar"]</pre>
+ENTRYPOINT ["java", "-jar", "target/azul-docker-demo-1.0-SNAPSHOT.jar"]
+```
+
 
 Maven and the JDK stay in the build stage. The runtime image includes only your JAR and the Java Runtime Environment (JRE), a stripped-down version of the JDK containing only the tools needed to run applications. Check the blog post [The Anatomy of a JVM](https://www.azul.com/blog/the-anatomy-of-a-jvm/) to learn more about the differences between JDK, JRE, and the Java Virtual Machine (JVM).
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ docker build -f dockerfile-jre -t azul-docker-demo-jre .
+```
+$ docker build -f dockerfile-jre -t azul-docker-demo-jre .
 
 $ docker images
 REPOSITORY              TAG       IMAGE ID       CREATED          SIZE
 azul-docker-demo-jre    latest    16a99e205da7   40 seconds ago   370MB
 
 $ docker run --rm azul-docker-demo-jre
-Hello and welcome!</pre>
+Hello and welcome!
+```
+
 
 This brings the container size down to **370 MB**, and you are no longer shipping your code, Maven, and a full JDK to your production environment or users.
 
@@ -130,19 +154,20 @@ This brings the container size down to **370 MB**, and you are no longer shippin
 
 The JRE still includes every Java module, including the ones your application doesn't need. `jdeps` can tell you exactly which modules your application needs, and `jlink` can assemble a minimal runtime containing only those:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group=""># dockerfile-jlink
+```
+# dockerfile-jlink
 FROM azul-zulu:25 AS build
 
 RUN mkdir /app
 COPY . /app
 WORKDIR /app
-RUN apt-get update &amp;&amp; apt-get install -y maven binutils
+RUN apt-get update && apt-get install -y maven binutils
 
 RUN mvn package \
- &amp;&amp; jdeps --ignore-missing-deps -q --recursive \
+ && jdeps --ignore-missing-deps -q --recursive \
           --multi-release 25 \
-          --print-module-deps target/azul-docker-demo-1.0-SNAPSHOT.jar &gt; deps.info \
- &amp;&amp; jlink \
+          --print-module-deps target/azul-docker-demo-1.0-SNAPSHOT.jar > deps.info \
+ && jlink \
           --add-modules "$(cat deps.info)" \
           --strip-debug \
           --compress zip-6 \
@@ -160,18 +185,23 @@ RUN mkdir /app
 COPY --from=build /app /app
 WORKDIR /app
 
-ENTRYPOINT ["java", "-jar", "target/azul-docker-demo-1.0-SNAPSHOT.jar"]</pre>
+ENTRYPOINT ["java", "-jar", "target/azul-docker-demo-1.0-SNAPSHOT.jar"]
+```
+
 
 The extra steps with `jdeps` and `jlink` make the Dockerfile a bit more complex, but the pattern is a one-time setup you can reuse across projects. Now let's build the container, and check the size:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ docker build -f dockerfile-jlink -t azul-docker-demo-jlink .
+```
+$ docker build -f dockerfile-jlink -t azul-docker-demo-jlink .
 
 $ docker images
 REPOSITORY              TAG       IMAGE ID       CREATED          SIZE
 azul-docker-demo-jlink  latest    4fc3bb4dec14   35 seconds ago   141MB
 
 $ docker run --rm azul-docker-demo-jlink
-Hello and welcome!</pre>
+Hello and welcome!
+```
+
 
 Result: around **141 MB**. You're now shipping a tailor-made Java runtime with only the modules your application actually needs, nothing else.
 
@@ -199,6 +229,6 @@ What to Do Next {#h-what-to-do-next}
 
 **Keep an eye on the next post in this series**, where I will walk you through every way to containerize Azul Zulu. From the free Community Availability (CA) images to the commercially supported Subscriber Availability (SA) builds and the Chainguard variant for the most security-conscious environments.
 
-*** ** * ** ***
+
 
 *The Sustainability for Java Developers book, which inspired the Docker image examples in this post, is a free ebook published through [foojay.io](https://foojay.io/today/announcing-sustainability-for-java-developers-a-new-collaborative-guide-from-the-foojay-io-community/). Chapter 6 by Jan Ouwens and Ko Turk covers container optimization in depth alongside other practical sustainability improvements.*

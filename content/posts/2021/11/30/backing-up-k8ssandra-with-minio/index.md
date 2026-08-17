@@ -31,7 +31,10 @@ Similar to K8ssandra, MinIO can be simply deployed through Helm.
 
 First, add the MinIO repository to your local list:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">helm repo add minio https://helm.min.io/</pre>
+```
+helm repo add minio https://helm.min.io/
+```
+
 
 The MinIO Helm charts allow you to do several things at once at install time:
 
@@ -40,30 +43,39 @@ The MinIO Helm charts allow you to do several things at once at install time:
 
 You can create a `k8ssandra-medusa` bucket and use `minio_key/minio_secret` as the credentials, and deploy MinIO in a new namespace called `minio` by running the following command:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">helm install --set accessKey=minio_key,secretKey=minio_secret,defaultBucket.enabled=true,defaultBucket.name=k8ssandra-medusa minio minio/minio -n minio --create-namespace</pre>
+```
+helm install --set accessKey=minio_key,secretKey=minio_secret,defaultBucket.enabled=true,defaultBucket.name=k8ssandra-medusa minio minio/minio -n minio --create-namespace
+```
+
 
 **Note:** Creating the bucket is not mandatory at this stage and can be done through MinIO's UI.
 
 After the `helm install` command has completed, you should see something similar to this in the `minio` namespace:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">% kubectl get all -n minio
+```
+% kubectl get all -n minio
 NAME                        READY   STATUS    RESTARTS   AGE
 pod/minio-5fd4dd687-gzr8j   1/1     Running   0          109s
 
 NAME            TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)    AGE
-service/minio   ClusterIP   10.96.144.61   &lt;none&gt;        9000/TCP   109s
+service/minio   ClusterIP   10.96.144.61   <none>        9000/TCP   109s
 
 NAME                    READY   UP-TO-DATE   AVAILABLE   AGE
 deployment.apps/minio   1/1     1            1           109s
 
 NAME                              DESIRED   CURRENT   READY   AGE
-replicaset.apps/minio-5fd4dd687   1         1         1       109s</pre>
+replicaset.apps/minio-5fd4dd687   1         1         1       109s
+```
+
 
 Using port forwarding, you can expose access to the MinIO UI in the browser on port 9000:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">% kubectl port-forward service/minio 9000 -n minio
-Forwarding from 127.0.0.1:9000 -&gt; 9000
-Forwarding from [::1]:9000 -&gt; 9000</pre>
+```
+% kubectl port-forward service/minio 9000 -n minio
+Forwarding from 127.0.0.1:9000 -> 9000
+Forwarding from [::1]:9000 -> 9000
+```
+
 
 Now you can login to MinIO at [http://localhost:9000](http://localhost:9000/) using your install time defined credentials (if you used the same commands above they would be `minio_key` and `minio_secret`):
 ![](minio-login.png)
@@ -76,7 +88,8 @@ Deploy K8ssandra {#h2-1-deploy-k8ssandra}
 
 Now that MinIO is up and running, you can create a namespace for your K8ssandra installation and create a secret for Medusa to access the bucket. Create a `medusa_secret.yaml` file with the following content:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">apiVersion: v1
+```
+apiVersion: v1
 kind: Secret
 metadata:
  name: medusa-bucket-key
@@ -87,23 +100,31 @@ stringData:
    [default]
    aws_access_key_id = minio_key
    aws_secret_access_key = minio_secret
-</pre>
+```
+
 
 Now create the `k8ssandra` namespace and the Medusa secret with the following commands:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">kubectl create namespace k8ssandra
-kubectl apply -f medusa_secret.yaml -n k8ssandra</pre>
+```
+kubectl create namespace k8ssandra
+kubectl apply -f medusa_secret.yaml -n k8ssandra
+```
+
 
 You should now see the `medusa-bucket-key` secret in the `k8ssandra` namespace:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">% kubectl get secrets -n k8ssandra
+```
+% kubectl get secrets -n k8ssandra
 NAME                  TYPE                                  DATA   AGE
 default-token-twk5w   kubernetes.io/service-account-token   3      4m49s
-medusa-bucket-key     Opaque                                1      45s</pre>
+medusa-bucket-key     Opaque                                1      45s
+```
+
 
 You can then deploy K8ssandra with the following custom values file (all default values will be used if not customized here) :
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">medusa:
+```
+medusa:
   enabled: true
   storage: s3_compatible
   storage_properties:
@@ -111,19 +132,28 @@ You can then deploy K8ssandra with the following custom values file (all default
       port: 9000
       secure: "False"
   bucketName: k8ssandra-medusa
-  storageSecret: medusa-bucket-key</pre>
+  storageSecret: medusa-bucket-key
+```
+
 
 Save the above file as `k8ssandra_medusa_minio.yaml` and then install K8ssandra with the following command:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">helm install k8ssandra k8ssandra/k8ssandra -f k8ssandra_medusa_minio.yaml -n k8ssandra</pre>
+```
+helm install k8ssandra k8ssandra/k8ssandra -f k8ssandra_medusa_minio.yaml -n k8ssandra
+```
+
 
 Now wait for the Cassandra cluster to be ready by using the following `wait` command:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">kubectl wait --for=condition=Ready cassandradatacenter/dc1 --timeout=900s -n k8ssandra</pre>
+```
+kubectl wait --for=condition=Ready cassandradatacenter/dc1 --timeout=900s -n k8ssandra
+```
+
 
 You should now see a list of pods similar to this:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">% kubectl get pods -n k8ssandra
+```
+% kubectl get pods -n k8ssandra
 NAME                                                  READY   STATUS      RESTARTS   AGE
 k8ssandra-cass-operator-547845459-dwg68               1/1     Running     0          6m36s
 k8ssandra-dc1-default-sts-0                           3/3     Running     0          5m56s
@@ -134,53 +164,72 @@ k8ssandra-medusa-operator-d766d5b66-wjt7j             1/1     Running     0     
 k8ssandra-reaper-5f9bbfc989-j59xk                     1/1     Running     0          2m48s
 k8ssandra-reaper-operator-858cd89bdd-7gfjj            1/1     Running     0          6m36s
 k8ssandra-reaper-schema-4gshj                         0/1     Completed   0          3m3s
-prometheus-k8ssandra-kube-prometheus-prometheus-0     2/2     Running     1          6m32s</pre>
+prometheus-k8ssandra-kube-prometheus-prometheus-0     2/2     Running     1          6m32s
+```
+
 
 Create some data and back it up {#h2-2-create-some-data-and-back-it-up}
 -----------------------------------------------------------------------
 
 Extract the username and password to access Cassandra (the password is different for each installation unless it is explicitly set at install time) into variables:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">% username=$(kubectl get secret k8ssandra-superuser -n k8ssandra -o jsonpath="{.data.username}" | base64 --decode)
-% password=$(kubectl get secret k8ssandra-superuser -n k8ssandra -o jsonpath="{.data.password}" | base64 --decode)</pre>
+```
+% username=$(kubectl get secret k8ssandra-superuser -n k8ssandra -o jsonpath="{.data.username}" | base64 --decode)
+% password=$(kubectl get secret k8ssandra-superuser -n k8ssandra -o jsonpath="{.data.password}" | base64 --decode)
+```
+
 
 Connect through CQLSH on one of the nodes:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">% kubectl exec -it k8ssandra-dc1-default-sts-0 -n k8ssandra -c cassandra -- cqlsh -u $username -p $password</pre>
+```
+% kubectl exec -it k8ssandra-dc1-default-sts-0 -n k8ssandra -c cassandra -- cqlsh -u $username -p $password
+```
+
 
 Copy/paste the following statements into the CQLSH prompt and press enter:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">CREATE KEYSPACE medusa_test  WITH replication = {'class': 'SimpleStrategy', 'replication_factor': 1};
+```
+CREATE KEYSPACE medusa_test  WITH replication = {'class': 'SimpleStrategy', 'replication_factor': 1};
 USE medusa_test;
 CREATE TABLE users (email TEXT PRIMARY KEY, name TEXT, state TEXT);
-INSERT INTO users (email, name, state) VALUES ('<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="d3b2bfbab0b693b6abb2bea3bfb6fdb0bcbe">[email&nbsp;protected]</a>', 'Alice Smith', 'TX');
-INSERT INTO users (email, name, state) VALUES ('<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="c3a1aca183a6bba2aeb3afa6eda0acae">[email&nbsp;protected]</a>', 'Bob Jones', 'VA');
-INSERT INTO users (email, name, state) VALUES ('<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="89eae8fbe6e5c9ecf1e8e4f9e5eca7eae6e4">[email&nbsp;protected]</a>', 'Carol Jackson', 'CA');
-INSERT INTO users (email, name, state) VALUES ('<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="6c080d1a05082c09140d011c0009420f0301">[email&nbsp;protected]</a>', 'David Yang', 'NV');</pre>
+INSERT INTO users (email, name, state) VALUES ('<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="d3b2bfbab0b693b6abb2bea3bfb6fdb0bcbe">[email protected]</a>', 'Alice Smith', 'TX');
+INSERT INTO users (email, name, state) VALUES ('<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="c3a1aca183a6bba2aeb3afa6eda0acae">[email protected]</a>', 'Bob Jones', 'VA');
+INSERT INTO users (email, name, state) VALUES ('<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="89eae8fbe6e5c9ecf1e8e4f9e5eca7eae6e4">[email protected]</a>', 'Carol Jackson', 'CA');
+INSERT INTO users (email, name, state) VALUES ('<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="6c080d1a05082c09140d011c0009420f0301">[email protected]</a>', 'David Yang', 'NV');
+```
+
 
 Check that the rows were properly inserted:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">SELECT * FROM medusa_test.users;
+```
+SELECT * FROM medusa_test.users;
 
  email             | name          | state
 -------------------+---------------+-------
- <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="7415181d171134110c15190418115a171b19">[email&nbsp;protected]</a> |   Alice Smith |    TX
-   <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="ef8d808daf8a978e829f838ac18c8082">[email&nbsp;protected]</a> |     Bob Jones |    VA
- <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="6f0b0e19060b2f0a170e021f030a410c0002">[email&nbsp;protected]</a> |    David Yang |    NV
- <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="84e7e5f6ebe8c4e1fce5e9f4e8e1aae7ebe9">[email&nbsp;protected]</a> | Carol Jackson |    CA
+ <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="7415181d171134110c15190418115a171b19">[email protected]</a> |   Alice Smith |    TX
+   <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="ef8d808daf8a978e829f838ac18c8082">[email protected]</a> |     Bob Jones |    VA
+ <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="6f0b0e19060b2f0a170e021f030a410c0002">[email protected]</a> |    David Yang |    NV
+ <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="84e7e5f6ebe8c4e1fce5e9f4e8e1aae7ebe9">[email protected]</a> | Carol Jackson |    CA
 
-(4 rows)</pre>
+(4 rows)
+```
+
 
 Now backup this data, and check that files get created in your MinIO bucket.
 
 To that end, use the following command:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">helm install my-backup k8ssandra/backup -n k8ssandra --set name=backup1,cassandraDatacenter.name=dc1</pre>
+```
+helm install my-backup k8ssandra/backup -n k8ssandra --set name=backup1,cassandraDatacenter.name=dc1
+```
+
 
 Since the backup operation is asynchronous, you can monitor its completion by running the following command:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">kubectl get cassandrabackup backup1 -n k8ssandra -o jsonpath={.status.finishTime}
-</pre>
+```
+kubectl get cassandrabackup backup1 -n k8ssandra -o jsonpath={.status.finishTime}
+```
+
 
 As long as this doesn't output a date and time, then the backup is still running. With the amount of data present and the fact that you're using a locally accessible backend, this should complete quickly.
 
@@ -194,7 +243,8 @@ Deleting the data and restoring the backup {#h2-3-deleting-the-data-and-restorin
 
 `TRUNCATE` the table and verify it is empty:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">% kubectl exec -it k8ssandra-dc1-default-sts-0 -n k8ssandra -c cassandra -- cqlsh -u $username -p $password
+```
+% kubectl exec -it k8ssandra-dc1-default-sts-0 -n k8ssandra -c cassandra -- cqlsh -u $username -p $password
 
 TRUNCATE medusa_test.users;
 
@@ -203,34 +253,46 @@ SELECT * FROM medusa_test.users;
  email | name | state
 -------+------+-------
 
-(0 rows)</pre>
+(0 rows)
+```
+
 
 Now restore the backup taken previously:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">helm install restore-test k8ssandra/restore --set name=restore-backup1,backup.name=backup1,cassandraDatacenter.name=dc1 -n k8ssandra
-</pre>
+```
+helm install restore-test k8ssandra/restore --set name=restore-backup1,backup.name=backup1,cassandraDatacenter.name=dc1 -n k8ssandra
+```
+
 
 This operation will take a little longer as it requires to stop the StatefulSet pod and perform the restore as part of the init containers, before the Cassandra container can start. You can monitor progress using this command:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">watch -d kubectl get cassandrarestore restore-backup1 -o jsonpath={.status} -n k8ssandra
-</pre>
+```
+watch -d kubectl get cassandrarestore restore-backup1 -o jsonpath={.status} -n k8ssandra
+```
+
 
 The restore operation is fully completed once the `finishTime` value appears in the output:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">{"finishTime":"2021-03-23T13:58:36Z","restoreKey":"83977399-44dd-4752-b4c4-407273f0339e","startTime":"2021-03-23T13:55:35Z"}</pre>
+```
+{"finishTime":"2021-03-23T13:58:36Z","restoreKey":"83977399-44dd-4752-b4c4-407273f0339e","startTime":"2021-03-23T13:55:35Z"}
+```
+
 
 Check that you can read the data from the previously truncated table:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">% kubectl exec -it k8ssandra-dc1-default-sts-0 -n k8ssandra -c cassandra -- cqlsh -u k8ssandra-superuser -p XHsZ943WBg5RPNhVAT8x -e "SELECT * FROM medusa_test.users"
+```
+% kubectl exec -it k8ssandra-dc1-default-sts-0 -n k8ssandra -c cassandra -- cqlsh -u k8ssandra-superuser -p XHsZ943WBg5RPNhVAT8x -e "SELECT * FROM medusa_test.users"
 
  email             | name          | state
 -------------------+---------------+-------
- <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="accdc0c5cfc9ecc9d4cdc1dcc0c982cfc3c1">[email&nbsp;protected]</a> |   Alice Smith |    TX
-   <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="781a171a381d00191508141d561b1715">[email&nbsp;protected]</a> |     Bob Jones |    VA
- <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="a6c2c7d0cfc2e6c3dec7cbd6cac388c5c9cb">[email&nbsp;protected]</a> |    David Yang |    NV
- <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="751614071a1935100d14180519105b161a18">[email&nbsp;protected]</a> | Carol Jackson |    CA
+ <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="accdc0c5cfc9ecc9d4cdc1dcc0c982cfc3c1">[email protected]</a> |   Alice Smith |    TX
+   <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="781a171a381d00191508141d561b1715">[email protected]</a> |     Bob Jones |    VA
+ <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="a6c2c7d0cfc2e6c3dec7cbd6cac388c5c9cb">[email protected]</a> |    David Yang |    NV
+ <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="751614071a1935100d14180519105b161a18">[email protected]</a> | Carol Jackson |    CA
 
-(4 rows)</pre>
+(4 rows)
+```
+
 
 You've successfully restored your lost data in just a few commands!
 

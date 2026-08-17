@@ -30,11 +30,14 @@ Since then, other frameworks have popped up. They also provide monitoring capabi
 
 [Spring Boot](https://spring.io/projects/spring-boot) is the framework that started the trend regarding providing monitoring capabilities. To enable them is only a matter of adding a single dependency known as the **Actuator**:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="xml">&lt;dependency&gt;
-    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
-    &lt;artifactId&gt;spring-boot-starter-actuator&lt;/artifactId&gt;
-    &lt;version&gt;2.4.1&lt;/version&gt;
-&lt;/dependency&gt;</pre>
+```xml
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-actuator</artifactId>
+    <version>2.4.1</version>
+</dependency>
+```
+
 
 The Actuator offers three kinds of endpoints:
 
@@ -52,19 +55,25 @@ You can secure HTTP endpoints via Spring Security. This allows widespread use-ca
 
 To add management capabilities, add a single dependency:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="xml">&lt;dependency&gt;
-    &lt;groupId&gt;io.micronaut&lt;/groupId&gt;
-    &lt;artifactId&gt;micronaut-management&lt;/artifactId&gt;
-    &lt;version&gt;2.2.2&lt;/version&gt;
-&lt;/dependency&gt;</pre>
+```xml
+<dependency>
+    <groupId>io.micronaut</groupId>
+    <artifactId>micronaut-management</artifactId>
+    <version>2.2.2</version>
+</dependency>
+```
+
 
 Micronauts expose endpoints over HTTP. To also expose them over JMX, you need to add an extra dependency.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="xml">&lt;dependency&gt;
-    &lt;groupId&gt;io.micronaut.jmx&lt;/groupId&gt;
-    &lt;artifactId&gt;micronaut-jmx&lt;/artifactId&gt;
-    &lt;version&gt;2.1.0&lt;/version&gt;
-&lt;/dependency&gt;</pre>
+```xml
+<dependency>
+    <groupId>io.micronaut.jmx</groupId>
+    <artifactId>micronaut-jmx</artifactId>
+    <version>2.1.0</version>
+</dependency>
+```
+
 
 By default, all endpoints are enabled, but `/cache` and `/stop`.
 
@@ -95,16 +104,19 @@ Interestingly enough, I found at least two Microprofile implementations in the f
 
 A specific dependency implements each capability.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="xml">&lt;dependency&gt;
-    &lt;groupId&gt;io.quarkus&lt;/groupId&gt;
-    &lt;artifactId&gt;quarkus-smallrye-metrics&lt;/artifactId&gt;
-    &lt;version&gt;1.10.5.Final&lt;/version&gt;
-&lt;/dependency&gt;
-&lt;dependency&gt;
-    &lt;groupId&gt;io.quarkus&lt;/groupId&gt;
-    &lt;artifactId&gt;quarkus-smallrye-health&lt;/artifactId&gt;
-    &lt;version&gt;1.10.5.Final&lt;/version&gt;
-&lt;/dependency&gt;</pre>
+```xml
+<dependency>
+    <groupId>io.quarkus</groupId>
+    <artifactId>quarkus-smallrye-metrics</artifactId>
+    <version>1.10.5.Final</version>
+</dependency>
+<dependency>
+    <groupId>io.quarkus</groupId>
+    <artifactId>quarkus-smallrye-health</artifactId>
+    <version>1.10.5.Final</version>
+</dependency>
+```
+
 
 Also, Quarkus provides multiple endpoints specific to its CDI implementation (ArC). Because of its focus on Cloud-Native, Quarkus implements compile-time CDI. Hence, it's able to detect beans that are not used anywhere else and not instantiate them. Note that ArC endpoints are only available in development mode unless explicitly enabled.
 

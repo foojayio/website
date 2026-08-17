@@ -30,7 +30,7 @@ And why MongoDB might be a better relational database than you ever realized. {#
 
 [*Design reviews*](https://www.mongodb.com/events/mongodb-schema-design-reviews/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=foojay.io&utm_term=tony.kim)*are one-on-one meetings where MongoDB experts deliver advice on data modeling best practices and application design challenges. In this series, we are going to explore common real-life scenarios where design reviews helped developers achieve meaningful success with MongoDB.*
 
-*** ** * ** ***
+
 
 <br />
 
@@ -62,7 +62,8 @@ This approach to modeling many-to-many relationships is common when working with
 
 Using this data model, the query that we were trying to perform was designed to provide a list of all profiles with an address in a given city, and that had used a specific device type to access the service---for example, all profiles with an address in Austin that had used an iPhone 12 to access the service. The output from the query was required to embed details of each device of the specified type used by a matching profile. Profiles were to be returned ordered by profile ID and in pages of 10 documents. An example output document would look like this:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">{
+```
+{
   "SSN": "438-40-3508",
   "contact": {
     "address": {
@@ -87,7 +88,9 @@ Using this data model, the query that we were trying to perform was designed to 
       "parentalControls": false
     }
   ]
-}</pre>
+}
+```
+
 
 Understanding the query aggregation pipeline {#h2-2-understanding-the-query-aggregation-pipeline}
 -------------------------------------------------------------------------------------------------
@@ -101,24 +104,31 @@ In this case, the initial pipeline was run against the profiles collection and i
 
 [**$match**](https://www.mongodb.com/docs/manual/reference/operator/aggregation/match/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=foojay.io&utm_term=tony.kim#-match--aggregation-):
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">{
+```
+{
   "contact.address.city": "Austin"
-}</pre>
+}
+```
+
 
 This is typically the first stage in a pipeline. A $match stage performs a query against the input documents and outputs only the matching documents. If this is the first stage in the pipeline, the query is run against the underlying collection---in this case, profiles---and will make use of an index on the collection if one exists supporting the query. In the example above, we were searching the profiles collection for all documents where the contact address city was set to "Austin."
 
 [**$lookup**](https://www.mongodb.com/docs/manual/reference/operator/aggregation/lookup/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=foojay.io&utm_term=tony.kim#-lookup--aggregation-)
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">{
+```
+{
   from: "Mappings",
   localField: "profileID",
   foreignField: "profileID",
   as: "mappingData"
-}</pre>
+}
+```
+
 
 This was the first of two $lookup stages in the pipeline. A $lookup stage is MongoDB's equivalent of a SQL join. In this case, the pipeline was joining the "Austin" profile documents identified in the prior stage, to corresponding entries in the "Mappings" collection. The join was based on a primary/foreign key relationship from the profileID field in the profile documents, to the profileID field in the mappings documents. The matched mappings documents were added to a new array in the profile documents called mappingData. For example, a profile document with two matched entries in the mappings collection might look as follows:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">{
+```
+{
   "_id": {"$oid": "6781d3ed41099532d431e774"},
   "DOB": "1987-06-17T00:00:00Z",
   "SSN": "592-55-1484",
@@ -148,19 +158,25 @@ This was the first of two $lookup stages in the pipeline. A $lookup stage is Mon
       "profileID": "VMV4AMDTCZ-1"
     }
   ]
-}</pre>
+}
+```
+
 
 [**$unwind**](https://www.mongodb.com/docs/manual/reference/operator/aggregation/unwind/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=foojay.io&utm_term=tony.kim#-unwind--aggregation-)
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">{
+```
+{
     $unwind: "$mappingData"
-}</pre>
+}
+```
+
 
 The first of two $unwind stages in the pipeline, these are used whenever we want to flatten an array in our pipeline documents, usually so that the data can be reorganised or grouped by a different field in subsequent stages. If a document contained three elements in the array being unwound, it would be replaced with three documents where the array was replaced with a sub-document representing one of each of the three array elements.
 
 In this case, the pipeline was unwinding the array of mapping documents so they could then be joined to the corresponding device documents. Applying the $unwind operation to our example document from the prior stage, with an array of two mapping documents, would result in it being converted to two separate documents:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">{
+```
+{
   "_id": {...},
   "DOB": "1987-06-17T00:00:00Z",
   "SSN": "592-55-1484",
@@ -192,13 +208,16 @@ In this case, the pipeline was unwinding the array of mapping documents so they 
     "deviceSN": "b2f255ea-6951-4ed5-bd6f-052dc2ac9880",
     "profileID": "VMV4AMDTCZ-1"
   }
-}</pre>
+}
+```
+
 
 This results in documents that are very similar to the format that a SQL join would produce, with the data from the "parent" table repeated for each linked row in the child table.  
 
 [**$lookup**](https://www.mongodb.com/docs/manual/reference/operator/aggregation/lookup/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=foojay.io&utm_term=tony.kim)
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">{
+```
+{
   from: "Devices",
   localField: "mappingData.deviceSN",
   foreignField: "deviceSN",
@@ -215,7 +234,9 @@ This results in documents that are very similar to the format that a SQL join wo
     }
   ],
   as: "deviceData"
-}</pre>
+}
+```
+
 
 The second $lookup stage in the pipeline carried out the join from the mappings documents to the corresponding device documents. Unlike the last lookup that uses a direct local and foreign key to perform the collation, this form of the lookup stage used an embedded sub-pipeline to allow us to specify more complex criteria for the join, and also to re-shape the matched documents as needed.
 
@@ -223,7 +244,8 @@ In this case, it specified that, in addition to deviceSN in the device documents
 
 If the two member documents from the prior $unwind stage both mapped to a device document with device name "iPhone 12," the resulting output documents would look like:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">{
+```
+{
   "_id": {...},
   "DOB": "1987-06-17T00:00:00Z",
   "SSN": "592-55-1484",
@@ -269,13 +291,18 @@ If the two member documents from the prior $unwind stage both mapped to a device
     }
   ],
   "mappingData": {...}
-}</pre>
+}
+```
+
 
 [**$unwind**](https://www.mongodb.com/docs/manual/reference/operator/aggregation/unwind/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=foojay.io&utm_term=tony.kim#-unwind--aggregation-)
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">  {
+```
+  {
     $unwind: "$deviceData"
-  }</pre>
+  }
+```
+
 
 $lookup (join) stages anticipate that multiple child documents might have to be added to the parent document and so add the matched child documents to an array in the parent document ---deviceData in our pipeline.  
 
@@ -285,7 +312,8 @@ This also had the effect of removing any input documents with an empty deviceDat
 
 The example output documents would now look like this (note deviceData is now a sub-document, not an array):
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">{
+```
+{
   "_id": {...},
   "DOB": "1987-06-17T00:00:00Z",
   "SSN": "592-55-1484",
@@ -327,11 +355,14 @@ The example output documents would now look like this (note deviceData is now a 
     "parentalControls": false
   },
   "mappingData": {...}
-}</pre>
+}
+```
+
 
 [**$group**](https://www.mongodb.com/docs/manual/reference/operator/aggregation/group/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=foojay.io&utm_term=tony.kim#-group--aggregation-)
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">{
+```
+{
   _id: "$profileID",
   firstName: {
     $first: "$firstName"
@@ -348,11 +379,14 @@ The example output documents would now look like this (note deviceData is now a 
   deviceData: {
     $push: "$deviceData"
   }
-}</pre>
+}
+```
+
 
 At this point, the pipeline had one document for every combination of profile and device matching our selected city and device name. A $group stage was now used to merge documents so that we had a single document for each profile, with an array of their matching devices. This also had the effect of removing fields not needed in our final output.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">{
+```
+{
   "_id": "VMV4AMDTCZ-1",
   "SSN": "592-55-1484",
   "contact": {...},
@@ -378,23 +412,29 @@ At this point, the pipeline had one document for every combination of profile an
       "parentalControls": false
     }
   ]
-}</pre>
+}
+```
+
 
 [**$set**](https://www.mongodb.com/docs/manual/reference/operator/aggregation/set/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=foojay.io&utm_term=tony.kim#-set--aggregation-)
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">{
+```
+{
   $set:
     {
       profileID: "$_id",
       _id: "$$REMOVE"
     }
- }</pre>
+ }
+```
+
 
 A $set stage was now added to rename the _id field created by the prior $group stage back to profileID for readability.
 
 [**$sort**](https://www.mongodb.com/docs/manual/reference/operator/aggregation/sort/#-sort--aggregation-?utm_campaign=devrel&utm_source=third-party&utm_medium=cta&utm_content=Aggregation%20Optimization1&utm_term=graeme.robinson)**/** [**$skip**](https://www.mongodb.com/docs/manual/reference/operator/aggregation/skip/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=foojay.io&utm_term=tony.kim#-skip--aggregation-)**/** [**$limit**](https://www.mongodb.com/docs/manual/reference/operator/aggregation/limit/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=foojay.io&utm_term=tony.kim#-limit--aggregation-)
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">{
+```
+{
   $sort: {
     profileID: 1
   }
@@ -404,7 +444,9 @@ A $set stage was now added to rename the _id field created by the prior $group s
 },
 {
   $limit: 10
-}</pre>
+}
+```
+
 
 The final stages in the pipeline sorted the documents by profileID and then used $skip and $limit stages to return the required page of ten results.
 

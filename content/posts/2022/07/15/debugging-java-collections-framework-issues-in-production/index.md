@@ -44,11 +44,17 @@ Erasure of Collection Elements {#h2-1-erasure-of-collection-elements}
 
 The collection framework includes another challenge when debugging: erasures. In Java one would expect code like this to work:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">List&lt;MyObject&gt; myList = new ArrayList&lt;&gt;();</pre>
+```java
+List<MyObject> myList = new ArrayList<>();
+```
+
 
 Then the log might look like this:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">The property value of the first element is {myList.get(0).getProperty()}</pre>
+```
+The property value of the first element is {myList.get(0).getProperty()}
+```
+
 
 This will fail.
 
@@ -58,7 +64,10 @@ As such, Lightrun, which works at the bytecode level, is oblivious to them.
 
 The solution is to write the code as if the generic isn't present and cast to the appropriate class:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">The property value of the first element is {((MyObject)myList.get(0)).getProperty()}</pre>
+```
+The property value of the first element is {((MyObject)myList.get(0)).getProperty()}
+```
+
 
 Getting Around Quota Limits {#h2-2-getting-around-quota-limits}
 ---------------------------------------------------------------
@@ -101,7 +110,10 @@ But if we only log the element we need from the collections class we'll be able 
 
 The code below uses the java streams API to covert elements. In that conversion code I can stick a log and only print it if the vet is me. This is the condition which uses the getFirstName()method of the Vet class:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">vet.getFirstName().equals("Shai")</pre>
+```java
+vet.getFirstName().equals("Shai")
+```
+
 
 If it's met I can print out the full details for the entry: `Current vet is {newVet}`.
 
@@ -116,28 +128,34 @@ It applies to all kinds of collections, it also works well for collections and s
 
 The biggest fault by a far, is code that's overly concise. I'm at fault here too... E.g. this code returns directly from the method:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">return vets.findAllByOrderById(Pageable.ofSize(5).withPage(page)).stream().map(vet -&gt; {
+```java
+return vets.findAllByOrderById(Pageable.ofSize(5).withPage(page)).stream().map(vet -> {
   VetDTO newVet = new VetDTO();
   newVet.setId(vet.getId());
   newVet.setLastName(vet.getLastName());
   newVet.setFirstName(vet.getFirstName());
-  Set&lt;PetDTO&gt; pets = findPetDTOSet(vet.getId());
-  newVet.setPets(pets);
-  return newVet;
-}).collect(Collectors.toList());</pre>
-
-It seems so much cooler than this code which returns from the method after value assignment:
-
-<pre class="EnlighterJSRAW" data-enlighter-language="java">List&lt;VetDTO&gt; returnValue = vets.findAllByOrderById(Pageable.ofSize(5).withPage(page)).stream().map(vet -&gt; {
-  VetDTO newVet = new VetDTO();
-  newVet.setId(vet.getId());
-  newVet.setLastName(vet.getLastName());
-  newVet.setFirstName(vet.getFirstName());
-  Set&lt;PetDTO&gt; pets = findPetDTOSet(vet.getId());
+  Set<PetDTO> pets = findPetDTOSet(vet.getId());
   newVet.setPets(pets);
   return newVet;
 }).collect(Collectors.toList());
-return returnValue;</pre>
+```
+
+
+It seems so much cooler than this code which returns from the method after value assignment:
+
+```java
+List<VetDTO> returnValue = vets.findAllByOrderById(Pageable.ofSize(5).withPage(page)).stream().map(vet -> {
+  VetDTO newVet = new VetDTO();
+  newVet.setId(vet.getId());
+  newVet.setLastName(vet.getLastName());
+  newVet.setFirstName(vet.getFirstName());
+  Set<PetDTO> pets = findPetDTOSet(vet.getId());
+  newVet.setPets(pets);
+  return newVet;
+}).collect(Collectors.toList());
+return returnValue;
+```
+
 
 But the second one lets us debug the collection locally as well as remotely. It also makes it much easier to add a log statement covering the collection result value which is something you should generally consider.
 

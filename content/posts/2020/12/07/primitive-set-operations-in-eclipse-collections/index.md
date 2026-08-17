@@ -27,7 +27,7 @@ The sections below cover each operation's objective, design considerations, and 
 
 The last section covers the takeaways.
 
-*** ** * ** ***
+
 
 ### Union: What Does This Operation Do? {#h3-0-union-what-does-this-operation-do}
 
@@ -113,7 +113,7 @@ public void union()
 `
 ```
 
-*** ** * ** ***
+
 
 ### Intersect: What Does This Operation Do? {#h3-1-intersect-what-does-this-operation-do}
 
@@ -154,7 +154,7 @@ Eclipse Collections has an existing API that allows us to select all elements th
 
 Unit tests for intersect covering [scenarios](https://github.com/eclipse/eclipse-collections/blob/00557933f648e2c3a2112bcfc7cfb349a7609844/eclipse-collections-code-generator/src/main/resources/test/set/mutable/abstractPrimitiveSetTestCase.stg#L502) for equal-sized, unequal-sized, and empty sets.
 
-*** ** * ** ***
+
 
 ### Difference: What Does This Operation Do? {#h3-2-difference-what-does-this-operation-do}
 
@@ -186,7 +186,7 @@ Eclipse Collections has an existing API that allows us to reject which returns a
 
 Unit tests for difference covering scenarios for equal-sized, unequal-sized, and empty sets.
 
-*** ** * ** ***
+
 
 ### Takeaways {#h3-3-takeaways}
 

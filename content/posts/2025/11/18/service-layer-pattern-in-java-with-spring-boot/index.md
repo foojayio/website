@@ -122,14 +122,17 @@ This is a perfect use case for the Service Layer pattern---the controller should
 
 First, we define our domain object---the User entity that represents a user in our system.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public class User {
-&nbsp;&nbsp;&nbsp;&nbsp;private String id;
-&nbsp;&nbsp;&nbsp;&nbsp;private String email;
-&nbsp;&nbsp;&nbsp;&nbsp;private String name;
-&nbsp;&nbsp;&nbsp;&nbsp;private LocalDateTime createdAt;
-&nbsp;&nbsp;&nbsp;&nbsp;private boolean active;
-&nbsp;&nbsp;&nbsp;&nbsp;// constructors, getters, setters
-}</pre>
+```
+public class User {
+    private String id;
+    private String email;
+    private String name;
+    private LocalDateTime createdAt;
+    private boolean active;
+    // constructors, getters, setters
+}
+```
+
 
 This is a plain Java object (POJO) that represents our core domain concept. It's framework-agnostic and contains no business logic---just data. This model will be used across all layers: The controller returns it as JSON, the service applies business rules to it, and the repository persists it to MongoDB.
 
@@ -137,14 +140,17 @@ This is a plain Java object (POJO) that represents our core domain concept. It's
 
 The repository defines our data access contract. It focuses purely on CRUD operations and simple queries---no business logic here.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public interface UserRepository {
-&nbsp;&nbsp;&nbsp;&nbsp;Optional&lt;User&gt; findById(String id);
-&nbsp;&nbsp;&nbsp;&nbsp;Optional&lt;User&gt; findByEmail(String email);
-&nbsp;&nbsp;&nbsp;&nbsp;List&lt;User&gt; findAll();
-&nbsp;&nbsp;&nbsp;&nbsp;User save(User user);
-&nbsp;&nbsp;&nbsp;&nbsp;void deleteById(String id);
-&nbsp;&nbsp;&nbsp;&nbsp;boolean existsByEmail(String email);
-}</pre>
+```
+public interface UserRepository {
+    Optional<User> findById(String id);
+    Optional<User> findByEmail(String email);
+    List<User> findAll();
+    User save(User user);
+    void deleteById(String id);
+    boolean existsByEmail(String email);
+}
+```
+
 
 The repository is the **data access layer**. It sits at the bottom of our architecture and is the only layer that knows how to talk to the database. Notice how these methods are very mechanical---"find this," "save that," "does this exist?" There's no business logic like "createUser" or "deactivateUser"---those belong in the service.
 
@@ -154,13 +160,16 @@ The repository doesn't enforce business rules. It will happily save a user with 
 
 The service interface defines our **business operations**. Notice how these methods are named from a business perspective, not a data perspective.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public interface UserService {
-&nbsp;&nbsp;&nbsp;&nbsp;User createUser(String email, String name);
-&nbsp;&nbsp;&nbsp;&nbsp;User getUserById(String id);
-&nbsp;&nbsp;&nbsp;&nbsp;User updateUserName(String id, String newName);
-&nbsp;&nbsp;&nbsp;&nbsp;void deactivateUser(String id);
-&nbsp;&nbsp;&nbsp;&nbsp;List&lt;User&gt; getAllActiveUsers();
-}</pre>
+```
+public interface UserService {
+    User createUser(String email, String name);
+    User getUserById(String id);
+    User updateUserName(String id, String newName);
+    void deactivateUser(String id);
+    List<User> getAllActiveUsers();
+}
+```
+
 
 Compare createUser() with the repository's save(). The service method is business-focused: "Create a user with these details." It doesn't say *how* the user is saved. Compare getAllActiveUsers() with the repository's findAll(). The service adds filtering logic (only active users) that represents a business requirement.
 
@@ -170,83 +179,86 @@ This allows for multiple implementations (useful for testing with mocks) and mak
 
 This is where the real work happens---**the business logic layer**. The service orchestrates operations across multiple components and enforces business rules. This uses a fictitious EmailService to help create users and verify unique user creation.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@Service&nbsp;&nbsp;
+```
+@Service  
 
-public class UserServiceImpl implements UserService {&nbsp;&nbsp;
-&nbsp;&nbsp;&nbsp;&nbsp;private final UserRepository userRepository;&nbsp;&nbsp;
-&nbsp;&nbsp;&nbsp;&nbsp;private final EmailService emailService;&nbsp;&nbsp;
-&nbsp;&nbsp;&nbsp;&nbsp;public UserServiceImpl(UserRepository userRepository, EmailService emailService) {&nbsp;&nbsp;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this.userRepository = userRepository;&nbsp;&nbsp;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this.emailService = emailService;&nbsp;&nbsp;
-&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;&nbsp;
+public class UserServiceImpl implements UserService {  
+    private final UserRepository userRepository;  
+    private final EmailService emailService;  
+    public UserServiceImpl(UserRepository userRepository, EmailService emailService) {  
+        this.userRepository = userRepository;  
+        this.emailService = emailService;  
+    }  
 
-&nbsp;&nbsp;&nbsp;&nbsp;@Override&nbsp;&nbsp;
-&nbsp;&nbsp;&nbsp;&nbsp;public User createUser(String email, String name) {&nbsp; // No throws clause needed!&nbsp;&nbsp;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// Business rule: email must be unique&nbsp; &nbsp; &nbsp; &nbsp; if (userRepository.existsByEmail(email)) {&nbsp;&nbsp;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;throw new DuplicateEmailException("User with email " + email + " already exists");&nbsp;&nbsp;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;&nbsp;
+    @Override  
+    public User createUser(String email, String name) {  // No throws clause needed!  
+        // Business rule: email must be unique        if (userRepository.existsByEmail(email)) {  
+            throw new DuplicateEmailException("User with email " + email + " already exists");  
+        }  
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// Business rule: validate email format&nbsp;&nbsp;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (!isValidEmail(email)) {&nbsp;&nbsp;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;throw new InvalidEmailException("Invalid email format: " + email);&nbsp;&nbsp;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;&nbsp;
+        // Business rule: validate email format  
+        if (!isValidEmail(email)) {  
+            throw new InvalidEmailException("Invalid email format: " + email);  
+        }  
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// Create and save the user&nbsp;&nbsp;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;User user = new User();&nbsp;&nbsp;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;user.setId(generateId());&nbsp;&nbsp;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;user.setEmail(email);&nbsp;&nbsp;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;user.setName(name);&nbsp;&nbsp;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;user.setCreatedAt(LocalDateTime.now());&nbsp;&nbsp;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;user.setActive(true);&nbsp;&nbsp;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;User savedUser = userRepository.save(user);&nbsp;&nbsp;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// Business operation: send welcome email&nbsp;&nbsp;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;emailService.sendWelcomeEmail(savedUser);&nbsp;&nbsp;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return savedUser;&nbsp;&nbsp;
-&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;&nbsp;
+        // Create and save the user  
+        User user = new User();  
+        user.setId(generateId());  
+        user.setEmail(email);  
+        user.setName(name);  
+        user.setCreatedAt(LocalDateTime.now());  
+        user.setActive(true);  
+        User savedUser = userRepository.save(user);  
+        // Business operation: send welcome email  
+        emailService.sendWelcomeEmail(savedUser);  
+        return savedUser;  
+    }  
 
-&nbsp;&nbsp;&nbsp;&nbsp;@Override&nbsp;&nbsp;
-&nbsp;&nbsp;&nbsp;&nbsp;public User getUserById(String id) {&nbsp; // No throws clause needed!&nbsp;&nbsp;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return userRepository.findById(id)&nbsp;&nbsp;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.orElseThrow(() -&gt; new UserNotFoundException("User not found with id: " + id));&nbsp;&nbsp;
-&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;&nbsp;
+    @Override  
+    public User getUserById(String id) {  // No throws clause needed!  
+        return userRepository.findById(id)  
+                .orElseThrow(() -> new UserNotFoundException("User not found with id: " + id));  
+    }  
 
-&nbsp;&nbsp;&nbsp;&nbsp;@Override&nbsp;
-&nbsp;&nbsp;&nbsp;&nbsp;public User updateUserName(String id, String newName) {&nbsp; // No throws clause needed!&nbsp;&nbsp;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;User user = getUserById(id);&nbsp;&nbsp;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// Business rule: can't update deactivated users&nbsp;&nbsp;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (!user.isActive()) {&nbsp;&nbsp;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;throw new UserInactiveException("Cannot update inactive user");&nbsp;&nbsp;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;&nbsp;
+    @Override 
+    public User updateUserName(String id, String newName) {  // No throws clause needed!  
+        User user = getUserById(id);  
+        // Business rule: can't update deactivated users  
+        if (!user.isActive()) {  
+            throw new UserInactiveException("Cannot update inactive user");  
+        }  
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;user.setName(newName);&nbsp;&nbsp;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return userRepository.save(user);&nbsp;&nbsp;
-&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;&nbsp;
+        user.setName(newName);  
+        return userRepository.save(user);  
+    }  
 
-&nbsp;&nbsp;&nbsp;&nbsp;@Override&nbsp;&nbsp;
-&nbsp;&nbsp;&nbsp;&nbsp;public void deactivateUser(String id) {&nbsp; // No throws clause needed!&nbsp;&nbsp;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;User user = getUserById(id);&nbsp;&nbsp;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;user.setActive(false);&nbsp;&nbsp;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;userRepository.save(user);&nbsp;&nbsp;
+    @Override  
+    public void deactivateUser(String id) {  // No throws clause needed!  
+        User user = getUserById(id);  
+        user.setActive(false);  
+        userRepository.save(user);  
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// Business operation: send goodbye email&nbsp;&nbsp;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;emailService.sendDeactivationEmail(user);&nbsp;&nbsp;
-&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;&nbsp;
+        // Business operation: send goodbye email  
+        emailService.sendDeactivationEmail(user);  
+    }  
 
-&nbsp;&nbsp;&nbsp;&nbsp;@Override&nbsp;&nbsp;
-&nbsp;&nbsp;&nbsp;&nbsp;public List&lt;User&gt; getAllActiveUsers() {&nbsp;&nbsp;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return userRepository.findAll().stream()&nbsp;&nbsp;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.filter(User::isActive)&nbsp;&nbsp;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.collect(Collectors.toList());&nbsp;&nbsp;
-&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;&nbsp;
+    @Override  
+    public List<User> getAllActiveUsers() {  
+        return userRepository.findAll().stream()  
+                .filter(User::isActive)  
+                .collect(Collectors.toList());  
+    }  
 
-&nbsp;&nbsp;&nbsp;&nbsp;private boolean isValidEmail(String email) {&nbsp;&nbsp;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return email != null &amp;&amp; email.matches("^[A-Za-z0-9+_.-]+@(.+)$");&nbsp;&nbsp;
-&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;&nbsp;
+    private boolean isValidEmail(String email) {  
+        return email != null && email.matches("^[A-Za-z0-9+_.-]+@(.+)$");  
+    }  
 
-&nbsp;&nbsp;&nbsp;&nbsp;private String generateId() {&nbsp;&nbsp;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return UUID.randomUUID().toString();&nbsp;&nbsp;
-&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;&nbsp;
-}</pre>
+    private String generateId() {  
+        return UUID.randomUUID().toString();  
+    }  
+}
+```
+
 
 **What's happening here**:
 
@@ -262,47 +274,50 @@ Notice how the service is the only place that knows the complete business workfl
 
 The controller is the **presentation layer**. It stays thin and focused solely on HTTP concerns---routing requests, handling status codes, and formatting responses.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@RestController&nbsp;&nbsp;
-@RequestMapping("/api/users")&nbsp;&nbsp;
+```
+@RestController  
+@RequestMapping("/api/users")  
 
-public class UserController {&nbsp;&nbsp;
-&nbsp;&nbsp;&nbsp;&nbsp;private final UserService userService;&nbsp;&nbsp;
-&nbsp;&nbsp;&nbsp;&nbsp;public UserController(UserService userService) {&nbsp;&nbsp;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this.userService = userService;&nbsp;&nbsp;
-&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;&nbsp;
+public class UserController {  
+    private final UserService userService;  
+    public UserController(UserService userService) {  
+        this.userService = userService;  
+    }  
 
-&nbsp;&nbsp;&nbsp;&nbsp;@PostMapping&nbsp;&nbsp;
-&nbsp;&nbsp;&nbsp;&nbsp;public ResponseEntity&lt;User&gt; createUser(@Valid @RequestBody CreateUserRequest request) {&nbsp;&nbsp;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;User user = userService.createUser(request.email(), request.name());&nbsp;&nbsp;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return ResponseEntity.status(HttpStatus.CREATED).body(user);&nbsp;&nbsp;
-&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;&nbsp;
+    @PostMapping  
+    public ResponseEntity<User> createUser(@Valid @RequestBody CreateUserRequest request) {  
+        User user = userService.createUser(request.email(), request.name());  
+        return ResponseEntity.status(HttpStatus.CREATED).body(user);  
+    }  
 
-&nbsp;&nbsp;&nbsp;&nbsp;@GetMapping("/{id}")&nbsp;&nbsp;
-&nbsp;&nbsp;&nbsp;&nbsp;public ResponseEntity&lt;User&gt; getUser(@PathVariable String id) {&nbsp;&nbsp;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;User user = userService.getUserById(id);&nbsp;&nbsp;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return ResponseEntity.ok(user);&nbsp;&nbsp;
-&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;&nbsp;
+    @GetMapping("/{id}")  
+    public ResponseEntity<User> getUser(@PathVariable String id) {  
+        User user = userService.getUserById(id);  
+        return ResponseEntity.ok(user);  
+    }  
 
-&nbsp;&nbsp;&nbsp;&nbsp;@PutMapping("/{id}/name")&nbsp;&nbsp;
-&nbsp;&nbsp;&nbsp;&nbsp;public ResponseEntity&lt;User&gt; updateName(&nbsp;&nbsp;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@PathVariable String id,&nbsp;&nbsp;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@Valid @RequestBody UpdateNameRequest request) {&nbsp;&nbsp;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;User user = userService.updateUserName(id, request.name());&nbsp;&nbsp;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return ResponseEntity.ok(user);&nbsp;&nbsp;
-&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;&nbsp;
+    @PutMapping("/{id}/name")  
+    public ResponseEntity<User> updateName(  
+            @PathVariable String id,  
+            @Valid @RequestBody UpdateNameRequest request) {  
+        User user = userService.updateUserName(id, request.name());  
+        return ResponseEntity.ok(user);  
+    }  
 
-&nbsp;&nbsp;&nbsp;&nbsp;@DeleteMapping("/{id}")&nbsp;&nbsp;
-&nbsp;&nbsp;&nbsp;&nbsp;public ResponseEntity&lt;Void&gt; deactivateUser(@PathVariable String id) {&nbsp;&nbsp;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;userService.deactivateUser(id);&nbsp;&nbsp;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return ResponseEntity.noContent().build();&nbsp;&nbsp;
-&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;&nbsp;
+    @DeleteMapping("/{id}")  
+    public ResponseEntity<Void> deactivateUser(@PathVariable String id) {  
+        userService.deactivateUser(id);  
+        return ResponseEntity.noContent().build();  
+    }  
 
-&nbsp;&nbsp;&nbsp;&nbsp;@GetMapping("/active")&nbsp;&nbsp;
-&nbsp;&nbsp;&nbsp;&nbsp;public ResponseEntity&lt;List&lt;User&gt;&gt; getActiveUsers() {&nbsp;&nbsp;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;List&lt;User&gt; users = userService.getAllActiveUsers();&nbsp;&nbsp;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return ResponseEntity.ok(users);&nbsp;&nbsp;
-&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;&nbsp;
-}</pre>
+    @GetMapping("/active")  
+    public ResponseEntity<List<User>> getActiveUsers() {  
+        List<User> users = userService.getAllActiveUsers();  
+        return ResponseEntity.ok(users);  
+    }  
+}
+```
+
 
 **What the controller does**:
 
@@ -328,7 +343,8 @@ Now, let's see how to add MongoDB to our user management system. **MongoDB** is 
 
 The easiest way to add MongoDB is to use [Spring Data MongoDB](https://spring.io/projects/spring-data-mongodb), which requires minimal code. If you want to see the full code, check out the [GitHub repository](https://github.com/timotheekelly/spring-service-layer) for the article:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">package com.mongodb.springservicelayer.repository;
+```
+package com.mongodb.springservicelayer.repository;
 
 import com.mongodb.springservicelayer.model.User;
 import org.springframework.data.mongodb.repository.MongoRepository;
@@ -336,36 +352,41 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-public interface UserRepository extends MongoRepository&lt;User, String&gt; {
-&nbsp;&nbsp;&nbsp;&nbsp;Optional&lt;User&gt; findByEmail(String email);
-&nbsp;&nbsp;&nbsp;&nbsp;boolean existsByEmail(String email);
-&nbsp;&nbsp;&nbsp;&nbsp;// findById, findAll, save, deleteById are inherited from MongoRepository
-}</pre>
+public interface UserRepository extends MongoRepository<User, String> {
+    Optional<User> findByEmail(String email);
+    boolean existsByEmail(String email);
+    // findById, findAll, save, deleteById are inherited from MongoRepository
+}
+```
+
 
 And we'll let Spring Data know that our model maps to a document in the Users collection in MongoDB:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@Document(collection = "users")
+```
+@Document(collection = "users")
 
 public class User {
-&nbsp;&nbsp;&nbsp;&nbsp;@Id
-&nbsp;&nbsp;&nbsp;&nbsp;private String id;
-&nbsp;&nbsp;&nbsp;&nbsp;@Indexed(unique = true)
-&nbsp;&nbsp;&nbsp;&nbsp;private String email;
-&nbsp;&nbsp;&nbsp;&nbsp;private String name;
-&nbsp;&nbsp;&nbsp;&nbsp;private LocalDateTime createdAt;
-&nbsp;&nbsp;&nbsp;&nbsp;private boolean active;
-&nbsp;&nbsp;&nbsp;&nbsp;public User() {
-&nbsp;&nbsp;&nbsp;&nbsp;}
+    @Id
+    private String id;
+    @Indexed(unique = true)
+    private String email;
+    private String name;
+    private LocalDateTime createdAt;
+    private boolean active;
+    public User() {
+    }
 
-&nbsp;&nbsp;&nbsp;&nbsp;public User(String id, String email, String name, LocalDateTime createdAt, boolean active) {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this.id = id;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this.email = email;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this.name = name;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this.createdAt = createdAt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this.active = active;
-&nbsp;&nbsp;&nbsp;&nbsp;}
+    public User(String id, String email, String name, LocalDateTime createdAt, boolean active) {
+        this.id = id;
+        this.email = email;
+        this.name = name;
+        this.createdAt = createdAt;
+        this.active = active;
+    }
 
-// Getters and setters</pre>
+// Getters and setters
+```
+
 
 That's it! Spring Data MongoDB automatically generates the implementation. You get:
 
@@ -378,16 +399,22 @@ No boilerplate code needed!
 
 Add MongoDB to your pom.xml:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&lt;dependency&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&lt;artifactId&gt;spring-boot-starter-data-mongodb&lt;/artifactId&gt;
-&lt;/dependency&gt;</pre>
+```
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-data-mongodb</artifactId>
+</dependency>
+```
+
 
 Configure the connection in application.properties:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">spring.data.mongodb.uri=&lt;Your-connection-string&gt;
+```
+spring.data.mongodb.uri=<Your-connection-string>
 
-spring.data.mongodb.database=service-layer-demo</pre>
+spring.data.mongodb.database=service-layer-demo
+```
+
 
 Note: You will need a [MongoDB Atlas account](https://account.mongodb.com/account/register?utm_campaign=devrel&utm_source=third-part-content&utm_medium=cta&utm_content=service+layer+pattern&utm_term=tim.kelly) with a cluster set up to retrieve your [connection string](https://www.mongodb.com/docs/manual/reference/connection-string/?utm_campaign=devrel&utm_source=third-part-content&utm_medium=cta&utm_content=service+layer+pattern&utm_term=tim.kelly).
 
@@ -420,30 +447,36 @@ Best practices {#h2-18-best-practices}
 
 **6. Test services independently**: Mock the repository and test your business logic in isolation.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@Test
+```
+@Test
 
 public void createUser_duplicateEmail_throwsException() {
-&nbsp;&nbsp;&nbsp;&nbsp;when(userRepository.existsByEmail("<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="027667717642677a636f726e672c616d6f">[email&nbsp;protected]</a>")).thenReturn(true);
-&nbsp;&nbsp;&nbsp;&nbsp;assertThrows(DuplicateEmailException.class, () -&gt; {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;userService.createUser("<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="dca8b9afa89cb9a4bdb1acb0b9f2bfb3b1">[email&nbsp;protected]</a>", "Test User");
-&nbsp;&nbsp;&nbsp;&nbsp;});
-}</pre>
+    when(userRepository.existsByEmail("<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="027667717642677a636f726e672c616d6f">[email protected]</a>")).thenReturn(true);
+    assertThrows(DuplicateEmailException.class, () -> {
+        userService.createUser("<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="dca8b9afa89cb9a4bdb1acb0b9f2bfb3b1">[email protected]</a>", "Test User");
+    });
+}
+```
+
 
 Common mistakes to avoid {#h2-19-common-mistakes-to-avoid}
 ----------------------------------------------------------
 
 **Anemic services**: Don't create services that just pass through to the repository. Services should add value through business logic.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">// Bad - just a pass-through
+```
+// Bad - just a pass-through
 public User getUser(String id) {
-&nbsp;&nbsp;&nbsp;&nbsp;return userRepository.findById(id).orElse(null);
+    return userRepository.findById(id).orElse(null);
 }
 
 // Good - adds business logic
 public User getUser(String id) {
-&nbsp;&nbsp;&nbsp;&nbsp;return userRepository.findById(id)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.orElseThrow(() -&gt; new UserNotFoundException(id));
-}</pre>
+    return userRepository.findById(id)
+        .orElseThrow(() -> new UserNotFoundException(id));
+}
+```
+
 
 **Business logic in repositories**: Keep repositories focused on data access. Business rules belong in services.
 

@@ -60,7 +60,10 @@ First, the `---` operator is defined:
 
 `Pipe.kt`
 
-<pre class="EnlighterJSRAW" data-enlighter-language="kotlin">infix fun &lt;X, Y&gt; X.`---`(f: (X) -&gt; Y): Y = f(this)</pre>
+```kotlin
+infix fun <X, Y> X.`---`(f: (X) -> Y): Y = f(this)
+```
+
 
 **Definition of the Pipe ("---") Operator**
 
@@ -91,14 +94,17 @@ basic DSL for an `Article` domain type.
 
 `Pipe.kt`
 
-<pre class="EnlighterJSRAW" data-enlighter-language="kotlin">data class Article(val title: Title, val content: String)
+```kotlin
+data class Article(val title: Title, val content: String)
 
 @JvmInline
 value class Title(val value: String) {
     override fun toString(): String = value
 }
 
-val title: (String) -&gt; Title = { Title(it) }</pre>
+val title: (String) -> Title = { Title(it) }
+```
+
 
 **Definition of an "Article" DSL**
 
@@ -109,8 +115,11 @@ content, and I'll also define more functions with **transformations** , so we ca
 
 `fun main | Pipe.kt`
 
-<pre class="EnlighterJSRAW" data-enlighter-language="kotlin">val inputTitle = "FP in Kotlin: Defining a Pipe   Operator  "
-val inputContent = "Lorem ipsum dolor sit amet..."</pre>
+```kotlin
+val inputTitle = "FP in Kotlin: Defining a Pipe   Operator  "
+val inputContent = "Lorem ipsum dolor sit amet..."
+```
+
 
 **Sample User Input for Example Snippet**
 
@@ -118,11 +127,14 @@ Then, we'll have some useful example transformations:
 
 `fun main | Pipe.kt`
 
-<pre class="EnlighterJSRAW" data-enlighter-language="kotlin">val clean: (String) -&gt; String = { it.trim().replace("\\s+".toRegex(), " ") }
-val uppercase: (String) -&gt; String = { it.uppercase() }
-val markdownTitle: (String) -&gt; String = { "# $it" }
-val formatTitle: (String) -&gt; String =
-    { it `---` clean `---` uppercase `---` markdownTitle }</pre>
+```kotlin
+val clean: (String) -> String = { it.trim().replace("\\s+".toRegex(), " ") }
+val uppercase: (String) -> String = { it.uppercase() }
+val markdownTitle: (String) -> String = { "# $it" }
+val formatTitle: (String) -> String =
+    { it `---` clean `---` uppercase `---` markdownTitle }
+```
+
 
 **Transformations for Example Snippet**
 
@@ -130,12 +142,15 @@ Finally, we can create an `Article` with `title` and `content`:
 
 `fun main | Pipe.kt`
 
-<pre class="EnlighterJSRAW" data-enlighter-language="kotlin">print(
+```kotlin
+print(
     Article(
         inputTitle `---` formatTitle `---` title,
         inputContent
     )
-)</pre>
+)
+```
+
 
 **Building an "Article" for the Example Snippet**
 
@@ -150,10 +165,13 @@ piping it to the transformations declared:
 
 The program's output is:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">Article(
+```
+Article(
     title=# FP IN KOTLIN: DEFINING A PIPE OPERATOR,
     content=Lorem ipsum dolor sit amet...
-)</pre>
+)
+```
+
 
 **Program's Output (Formatted)**
 

@@ -47,9 +47,10 @@ Baseline: regular Rust-to-native {#h2-1-baseline-regular-rust-to-native}
 
 For the regular native compilation, I'm using a multistage Docker file:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml">FROM rust:1.84-slim AS build                                             #1
+```yaml
+FROM rust:1.84-slim AS build                                             #1
 
-RUN &lt;&lt;EOB                                                                #2
+RUN <<EOB                                                                #2
   apt-get update
   apt-get install -y musl-tools musl-dev
   rustup target add aarch64-unknown-linux-musl                           #3
@@ -71,7 +72,9 @@ FROM gcr.io/distroless/static                                            #5
 
 COPY --from=build /native/target/aarch64-unknown-linux-musl/release/httpbin httpbin #6
 
-ENTRYPOINT ["./httpbin"]</pre>
+ENTRYPOINT ["./httpbin"]
+```
+
 
 1. Start from the latest Rust image
 2. Heredocs for the win
@@ -111,23 +114,27 @@ I had to choose without being an expert in any of these. I finally decided on Wa
 
 We must intercept code that calls with system APIs and redirect them to the runtime. Instead of runtime interception, the Rust ecosystem provides a patch mechanism: we replace code that calls system APIs with code that calls WASI APIs. We must know which dependency calls which system API and hope a patch exists for our dependency version.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="ini">[patch.crates-io]
+```ini
+[patch.crates-io]
 tokio = { git = "https://github.com/second-state/wasi_tokio.git", branch = "v1.36.x" }  #1-2
 socket2 = { git = "https://github.com/second-state/socket2.git", branch = "v0.5.x" }    #1
 
 [dependencies]
 tokio = { version = "1.36", features = ["rt", "macros", "net", "time", "io-util"] }     #2
 axum = "0.8"
-serde = { version = "1.0.217", features = ["derive"] }</pre>
+serde = { version = "1.0.217", features = ["derive"] }
+```
+
 
 1. Patch the `tokio` and `socket2` crates with WASI-related calls
 2. The latest `tokio` crate is 1.43, but the latest (and only) patch v1.36. We can't use the latest version because there's no patch.
 
 We must change the Dockerfile to compiler WebAssembly code instead of native:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml">FROM --platform=$BUILDPLATFORM rust:1.84-slim AS build
+```yaml
+FROM --platform=$BUILDPLATFORM rust:1.84-slim AS build
 
-RUN &lt;&lt;EOT bash
+RUN <<EOT bash
     set -ex
     apt-get update
     apt-get install -y git clang
@@ -144,7 +151,9 @@ COPY src src
 
 WORKDIR /wasm
 
-RUN RUSTFLAGS="--cfg wasmedge --cfg tokio_unstable" cargo build --target wasm32-wasip1 --release #2-3</pre>
+RUN RUSTFLAGS="--cfg wasmedge --cfg tokio_unstable" cargo build --target wasm32-wasip1 --release #2-3
+```
+
 
 1. Install the WASM target
 2. Compile to WASM
@@ -154,20 +163,26 @@ At this stage, we have two options for the second stage:
 
 * Use the WasmEdge runtime as a base image: 
 
-<pre class="EnlighterJSRAW" data-enlighter-language="dockerfile">FROM --platform=$BUILDPLATFORM wasmedge/slim-runtime:0.13.5
+```dockerfile
+FROM --platform=$BUILDPLATFORM wasmedge/slim-runtime:0.13.5
 
 COPY --from=build /wasm/target/wasm32-wasip1/release/httpbin.wasm /httpbin.wasm
 
-CMD ["wasmedge", "--dir", ".:/", "/httpbin.wasm"]</pre>
+CMD ["wasmedge", "--dir", ".:/", "/httpbin.wasm"]
+```
+
 
   From a usage perspective, it's pretty similar to the native approach.
 * Copy the WebAssembly file and make it a runtime responsibility: 
 
-<pre class="EnlighterJSRAW" data-enlighter-language="dockerfile">FROM scratch
+```dockerfile
+FROM scratch
 
 COPY --from=build /wasm/target/wasm32-wasip1/release/httpbin.wasm /httpbin.wasm
 
-ENTRYPOINT ["/httpbin.wasm"]</pre>
+ENTRYPOINT ["/httpbin.wasm"]
+```
+
 
   It's where things get interesting.
 
@@ -190,15 +205,22 @@ From then on, I'll use the proper terminology for OCI images and containers. Not
 
 Finally, we can run the above OCI image containing the Wasm file by selecting a Wasm runtime, Wasmedge, in my case. Let's do it:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash">docker run --rm -p3000:3000 --runtime=io.containerd.wasmedge.v1 ghcr.io/ajavageek/wasm-kubernetes:runtime</pre>
+```bash
+docker run --rm -p3000:3000 --runtime=io.containerd.wasmedge.v1 ghcr.io/ajavageek/wasm-kubernetes:runtime
+```
+
 
 `io.containerd.wasmedge.v1` is the current version of the Wasmedge runtime. You must be authenticated with GitHub if you want to try it out.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash">curl localhost:3000/get\?foo=bar | jq</pre>
+```bash
+curl localhost:3000/get\?foo=bar | jq
+```
+
 
 The result is the same as for the native version:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="json">{
+```json
+{
   "flavor": "runtime",
   "args": {
     "foo": "bar"
@@ -209,7 +231,9 @@ The result is the same as for the native version:
     "user-agent": "curl/8.7.1"
   },
   "url": "/get?foo=bar"
-}</pre>
+}
+```
+
 
 Wasi on Docker Desktop allows you to spin up an HTTP server that behaves like a regular native image! Even better, the image size is as tiny as the WebAssembly file it contains:
 
@@ -230,15 +254,22 @@ The latter executes a process; in our case, it's `containerd`. Yet, `containerd`
 
 Despite some of the [mainstream](https://learn.microsoft.com/en-us/azure/aks/use-wasi-node-pools) [Cloud providers](https://www.spinkube.dev/docs/install/azure-kubernetes-service/) offering Wasm integration, none of them provide such a low-level one. I'll continue on my laptop, but Docker Desktop doesn't offer a direct integration either: it's time to be creative. For example, [minikube](https://minikube.sigs.k8s.io/) is a full-fledged Kubernetes distribution that creates an intermediate Linux virtual machine within a Docker environment. We can SSH into the VM and configure it to our heart's content. Let's start by installing `minikube`.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash">brew install minikube</pre>
+```bash
+brew install minikube
+```
+
 
 Now, we start `minikube` with the `containerd` driver and specify a profile to enable differently configured VMs. We unimaginatively call this profile `wasm`.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash">minikube start --driver=docker --container-runtime=containerd -p=wasm</pre>
+```bash
+minikube start --driver=docker --container-runtime=containerd -p=wasm
+```
+
 
 Depending on whether you have already installed `minikube` and whether it has already downloaded its images, starting can take a few seconds to dozens of minutes. Be patient. The output should be something akin to:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash">😄  [wasm] minikube v1.35.0 on Darwin 15.1.1 (arm64)
+```bash
+😄  [wasm] minikube v1.35.0 on Darwin 15.1.1 (arm64)
 ✨  Using the docker driver based on user configuration
 📌  Using Docker Desktop driver with root privileges
 👍  Starting "wasm" primary control-plane node in "wasm" cluster
@@ -253,36 +284,54 @@ Depending on whether you have already installed `minikube` and whether it has al
 🔎  Verifying Kubernetes components...
     ▪ Using image gcr.io/k8s-minikube/storage-provisioner:v5
 🌟  Enabled addons: storage-provisioner, default-storageclass
-🏄  Done! kubectl is now configured to use "wasm" cluster and "default" namespace by default</pre>
+🏄  Done! kubectl is now configured to use "wasm" cluster and "default" namespace by default
+```
+
 
 At this point, our goal is to install on the underlying VM:
 
 * Wasmedge to run Wasm workloads
 * A shim to bridge between `containerd` and `wasmedge`
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash">minikube ssh -p wasm</pre>
+```bash
+minikube ssh -p wasm
+```
+
 
 We can install Wasmedge, but I found nowhere to download the shim. In the [next step](https://wasmedge.org/docs/develop/deploy/cri-runtime/containerd), we will build both. We first need to install Rust:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash">curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh</pre>
+```bash
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+```
+
 
 The script likely complains that it can't execute the downloaded binary:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">Cannot execute /tmp/tmp.NXPz8utAQx/rustup-init (likely because of mounting /tmp as noexec).
-Please copy the file to a location where you can execute binaries and run ./rustup-init.</pre>
+```
+Cannot execute /tmp/tmp.NXPz8utAQx/rustup-init (likely because of mounting /tmp as noexec).
+Please copy the file to a location where you can execute binaries and run ./rustup-init.
+```
+
 
 Follow the instructions:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash">cp /tmp/tmp.NXPz8utAQx/rustup-init .
-./rustup-init</pre>
+```bash
+cp /tmp/tmp.NXPz8utAQx/rustup-init .
+./rustup-init
+```
+
 
 Proceed with the default installation by pressing the `ENTER` button. When it's finished, source your current shell.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash">. "$HOME/.cargo/env"</pre>
+```bash
+. "$HOME/.cargo/env"
+```
+
 
 The system is ready to build Wasmedge and the shim.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash">sudo apt-get update
+```bash
+sudo apt-get update
 sudo apt-get install -y git
 
 git clone https://github.com/containerd/runwasi.git
@@ -291,20 +340,29 @@ cd runwasi
 ./scripts/setup-linux.sh
 
 make build-wasmedge
-INSTALL="sudo install" LN="sudo ln -sf" make install-wasmedge</pre>
+INSTALL="sudo install" LN="sudo ln -sf" make install-wasmedge
+```
+
 
 The last step requires configuring the `containerd` process with the shim. Insert the following snippet in the `[plugins."io.containerd.grpc.v1.cri".containerd.runtimes]` section of the `/etc/containerd/config.toml` file:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="ini">[plugins."io.containerd.grpc.v1.cri".containerd.runtimes.wasmedgev1]
-  runtime_type = "io.containerd.wasmedge.v1"</pre>
+```ini
+[plugins."io.containerd.grpc.v1.cri".containerd.runtimes.wasmedgev1]
+  runtime_type = "io.containerd.wasmedge.v1"
+```
+
 
 Restart `containerd` to load the new config.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash">sudo systemctl restart containerd</pre>
+```bash
+sudo systemctl restart containerd
+```
+
 
 Our system is finally ready to accept Webassembly workloads. Users can deploy a Wasmedge `pod` with the following manifest:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml">apiVersion: node.k8s.io/v1
+```yaml
+apiVersion: node.k8s.io/v1
 kind: RuntimeClass
 metadata:
   name: wasmedge                                                         #1
@@ -320,7 +378,9 @@ spec:
   containers:
     - name: runtime
       image: ghcr.io/ajavageek/wasm-kubernetes:runtime
-  runtimeClassName: wasmedge                                             #3</pre>
+  runtimeClassName: wasmedge                                             #3
+```
+
 
 1. Wasmedge workloads should use this name
 2. Handler to use. It should be the last segment of the section added in the TOML file, *i.e.* , `containerd.runtimes.wasmedgev2`
@@ -341,43 +401,59 @@ To compare the approaches and test our work, we can use the `minikube` `ingress`
 
 Let's start by installing the addon:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash">minikube -p wasm addons enable ingress</pre>
+```bash
+minikube -p wasm addons enable ingress
+```
+
 
 It deploys an Nginx Ingress Controller in the `ingress-nginx` namespace:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">💡  ingress is an addon maintained by Kubernetes. For any concerns contact minikube on GitHub.
+```
+💡  ingress is an addon maintained by Kubernetes. For any concerns contact minikube on GitHub.
 You can view the list of minikube maintainers at: https://github.com/kubernetes/minikube/blob/master/OWNERS
 💡  After the addon is enabled, please run "minikube tunnel" and your ingress resources would be available at "127.0.0.1"
     ▪ Using image registry.k8s.io/ingress-nginx/kube-webhook-certgen:v1.4.4
     ▪ Using image registry.k8s.io/ingress-nginx/kube-webhook-certgen:v1.4.4
     ▪ Using image registry.k8s.io/ingress-nginx/controller:v1.11.3
 🔎  Verifying ingress addon...
-🌟  The 'ingress' addon is enabled</pre>
+🌟  The 'ingress' addon is enabled
+```
+
 
 We must create a dedicated virtual cluster to deploy the `Pod` later.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash">helm upgrade --install runtime vcluster/vcluster --namespace runtime --create-namespace  --values vcluster.yaml</pre>
+```bash
+helm upgrade --install runtime vcluster/vcluster --namespace runtime --create-namespace  --values vcluster.yaml
+```
+
 
 We will define the `Ingress`, the `Service`, and their related `Pod` in each virtual cluster. We need vCluster to synchronize the `Ingress` with the Ingress Controller. Here's the configuration to achieve this:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml">sync:
+```yaml
+sync:
   toHost:
     ingresses:
-      enabled: true</pre>
+      enabled: true
+```
+
 
 The output should be similar to:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">Release "runtime" does not exist. Installing it now.
+```
+Release "runtime" does not exist. Installing it now.
 NAME: runtime
 LAST DEPLOYED: Thu Jan 30 11:53:14 2025
 NAMESPACE: runtime
 STATUS: deployed
 REVISION: 1
-TEST SUITE: None</pre>
+TEST SUITE: None
+```
+
 
 We can amend the above manifest with the `Service` and `Ingress` to expose the `Pod`:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml">apiVersion: v1
+```yaml
+apiVersion: v1
 kind: Service
 metadata:
   name: runtime
@@ -407,7 +483,9 @@ spec:
               service:
                 name: runtime
                 port:
-                  number: 3000</pre>
+                  number: 3000
+```
+
 
 1. Expose the `Pod` inside the cluster
 2. Nginx-specific annotations to handle path regular expression and rewrite it
@@ -415,18 +493,27 @@ spec:
 
 Nginx will forward all requests starting with `/runtime` to the `runtime` service, removing the prefix. To apply the manifest, we first connect to the previously created virtual cluster:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash">vcluster connect runtime</pre>
+```bash
+vcluster connect runtime
+```
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">11:53:21 info Waiting for vcluster to come up...
+
+```
+11:53:21 info Waiting for vcluster to come up...
 11:53:39 done vCluster is up and running
 11:53:39 info Starting background proxy container...
 11:53:39 done Switched active kube context to vcluster_embed_embed_vcluster_runtime_runtime_wasm
 - Use `vcluster disconnect` to return to your previous kube context
-- Use `kubectl get namespaces` to access the vcluster</pre>
+- Use `kubectl get namespaces` to access the vcluster
+```
+
 
 Now apply the manifest:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash">kubectl apply -f runtime.yaml</pre>
+```bash
+kubectl apply -f runtime.yaml
+```
+
 
 We do the same with the `embed` and the `native` pods, barring the `runtimeClassName` as they are "regular" images.
 
@@ -438,24 +525,34 @@ The final deployment diagram is the following:
 
 The final touch is to tunnel to expose services:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash">minikube -p wasm tunnel</pre>
+```bash
+minikube -p wasm tunnel
+```
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">✅  Tunnel successfully started
+
+```
+✅  Tunnel successfully started
 
 📌  NOTE: Please do not close this terminal as this process must stay alive for the tunnel to be accessible ...
 
 ❗  The service/ingress runtime-x-default-x-runtime requires privileged ports to be exposed: [80 443]
 🔑  sudo permission will be asked for it.
 🏃  Starting tunnel for service runtime-x-default-x-runtime.
-Password:</pre>
+Password:
+```
+
 
 Let's request the lightweight container that uses the Wasmedge runtime:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash">curl localhost/runtime/get\?foo=bar | jq</pre>
+```bash
+curl localhost/runtime/get\?foo=bar | jq
+```
+
 
 We get the expected output:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="json">{
+```json
+{
   "flavor": "runtime",
   "args": {
     "foo": "bar"
@@ -474,7 +571,9 @@ We get the expected output:
     "x-forwarded-port": "80"
   },
   "url": "/get?foo=bar"
-}</pre>
+}
+```
+
 
 We should get similar results with the other approaches, with different `flavor` values.
 

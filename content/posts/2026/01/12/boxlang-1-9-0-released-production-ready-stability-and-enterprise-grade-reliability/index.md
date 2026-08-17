@@ -42,30 +42,37 @@ Key Features and Code Examples {#h2-1-key-features-and-code-examples}
 
 BoxLang now automatically parses query parameters and form fields as arrays using modern naming conventions:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">// HTML form with multiple selections
-&lt;form method="POST"&gt;
-    &lt;input type="checkbox" name="colors[]" value="red" /&gt;
-    &lt;input type="checkbox" name="colors[]" value="blue" /&gt;
-    &lt;input type="checkbox" name="colors[]" value="green" /&gt;
-    &lt;button type="submit"&gt;Submit&lt;/button&gt;
-&lt;/form&gt;</pre>
+```
+// HTML form with multiple selections
+<form method="POST">
+    <input type="checkbox" name="colors[]" value="red" />
+    <input type="checkbox" name="colors[]" value="blue" />
+    <input type="checkbox" name="colors[]" value="green" />
+    <button type="submit">Submit</button>
+</form>
+```
+
 
 Then it can read them when submitted:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">// BoxLang automatically parses as array
+```
+// BoxLang automatically parses as array
 selectedColors = form.colors;
 // Result: ["red", "blue", "green"]
 
 // Works with query parameters too
-// URL: /page?tags[]=boxlang&amp;tags[]=java&amp;tags[]=modern
+// URL: /page?tags[]=boxlang&tags[]=java&tags[]=modern
 tags = url.tags;
-// Result: ["boxlang", "java", "modern"]</pre>
+// Result: ["boxlang", "java", "modern"]
+```
+
 
 ### Datasource Lifecycle Management {#h3-3-datasource-lifecycle-management}
 
 Critical fixes prevent connection pool leaks and resource exhaustion:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">class {
+```
+class {
     this.name = "MyApp";
 
     this.datasources = {
@@ -83,13 +90,16 @@ Critical fixes prevent connection pool leaks and resource exhaustion:
         // No more connection pool leaks!
         writeLog( "Datasources cleaned up automatically" );
     }
-}</pre>
+}
+```
+
 
 ### Oracle Database Improvements {#h3-4-oracle-database-improvements}
 
 Named parameters and ref cursors now work correctly:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">// Named parameters work correctly
+```
+// Named parameters work correctly
 queryExecute(
     "SELECT * FROM users WHERE id = :userId AND status = :status",
     {
@@ -103,13 +113,16 @@ queryExecute(
 bx:storedproc procedure="getUserData" datasource="oracle_ds" {
     bx:procparam type="in" value=123 type="integer";
     bx:procparam type="out" variable="result" type="refcursor";
-}</pre>
+}
+```
+
 
 ### Enhanced SOAP Client with Fluent API {#h3-5-enhanced-soap-client-with-fluent-api}
 
 BoxLang 1.9.0 includes major enhancements to the SOAP client introduced in 1.8.0, now with full class capabilities and improved reliability:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">// Create SOAP client with fluent configuration
+```
+// Create SOAP client with fluent configuration
 ws = soap( "http://api.example.com/service.wsdl" )
     .timeout( 60 )
     .withBasicAuth( "apiuser", "apipass" )
@@ -126,7 +139,9 @@ ws.setHeader( "Authorization", "Bearer token123" );
 operations = ws.getOperationNames();
 if ( ws.hasOperation( "ProcessOrder" ) ) {
     order = ws.invoke( "ProcessOrder", orderData );
-}</pre>
+}
+```
+
 
 **Key SOAP Improvements:**
 

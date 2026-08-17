@@ -74,17 +74,21 @@ Here's how to do it with Apache APISIX. Apache APISIX offers a plugin-based arch
 
 Let's start with some basic upstreams, one for each version:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml">upstreams:
+```yaml
+upstreams:
   - id: v1
     nodes:
       "v1:8080": 1
   - id: v2
     nodes:
-      "v2:8080": 1</pre>
+      "v2:8080": 1
+```
+
 
 We can use the `traffic-split` plugin to forward most of the traffic to v1 and a fraction to v2:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml">routes:
+```yaml
+routes:
   - id: 1
     uri: "*"                                                     #1
     upstream_id: v1           
@@ -94,7 +98,9 @@ We can use the `traffic-split` plugin to forward most of the traffic to v1 and a
           - weighted_upstreams:                                  #2
             - upstream_id: v2                                    #3
               weight: 1                                          #3
-            - weight: 99                                         #3</pre>
+            - weight: 99                                         #3
+```
+
 
 1. Define a catch-all route
 2. Configure how to split traffic; here, weights
@@ -102,7 +108,8 @@ We can use the `traffic-split` plugin to forward most of the traffic to v1 and a
 
 Again, we monitor everything and make sure results are as expected. Then, we can increase the fraction of the traffic forwarded to v2, *e.g.*:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml">routes:
+```yaml
+routes:
   - id: 1
     uri: "*"
     upstream_id: v1
@@ -112,7 +119,9 @@ Again, we monitor everything and make sure results are as expected. Then, we can
           - weighted_upstreams:
             - upstream_id: v2
               weight: 5                                          #1
-            - weight: 95                                         #1</pre>
+            - weight: 95                                         #1
+```
+
 
 1. Increase the traffic to v2 to 5%
 
@@ -123,7 +132,8 @@ More controlled releases {#h2-4-more-controlled-releases}
 
 In the above, I moved from internal users to a fraction of external users. Perhaps releasing to every internal user is too big a risk in your organization, and you need even more control. Note that you can further configure the `traffic-split` plugin in this case.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml">routes:
+```yaml
+routes:
   - id: 1
     uri: /*
     upstream_id: v1
@@ -135,21 +145,32 @@ In the above, I moved from internal users to a fraction of external users. Perha
           - weighted_upstreams:
             - upstream_id: v2
               weight: 5
-            - weight: 95</pre>
+            - weight: 95
+```
+
 
 1. Only split traffic if the `X-Canary` HTTP header has the configured value.
 
 The following command always forwards to v1:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="shell">curl http://localhost:9080</pre>
+```bash
+curl http://localhost:9080
+```
+
 
 The following command also always forwards to v1:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="shell">curl -H 'X-Canary: Let-Me-Go-To-v1' http://localhost:9080</pre>
+```bash
+curl -H 'X-Canary: Let-Me-Go-To-v1' http://localhost:9080
+```
+
 
 The following command splits the traffic according to the configured weights, *i.e.*, 95/5:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="shell">curl -H 'X-Canary: Let-Me-Go-To-v2' http://localhost:9080</pre>
+```bash
+curl -H 'X-Canary: Let-Me-Go-To-v2' http://localhost:9080
+```
+
 
 Conclusion {#h2-5-conclusion}
 -----------------------------
@@ -171,6 +192,6 @@ The complete source code for this post can be found on [GitHub](https://github.c
 * [Smooth Canary Release Using APISIX Ingress Controller with Flagger](https://api7.ai/blog/apisix-ingress-and-flagger-smooth-canary-release)
 * [Apache APISIX Canary Deployments](https://fluxcd.io/flagger/tutorials/apisix-progressive-delivery/)
 
-*** ** * ** ***
+
 
 *Originally published at [A Java Geek](https://blog.frankel.ch/canary-releases-apisix/) on December 3^rd^, 2023*

@@ -60,7 +60,8 @@ The project can now be built and deployed to a container, such as Payara server.
 
 The following code shows the generated PoolserviceApplication class, which was created by the Initializr, contains the @SpringBootApplicationannotation.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">package org.demo.poolservice;
+```java
+package org.demo.poolservice;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -72,7 +73,9 @@ public class PoolserviceApplication {
         SpringApplication.run(PoolserviceApplication.class, args);
     }
 
-}</pre>
+}
+```
+
 
 The @SpringBootApplication annotation is a shortcut annotation that combines the default functionality of the following three annotations:
 
@@ -84,7 +87,8 @@ The @SpringBootApplication annotation is a shortcut annotation that combines the
 
 Since the application is configured by default, generate a new RESTful service by creating a class named HelloController in the same package and placing the following code into it:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">package org.demo.poolservice;
+```
+package org.demo.poolservice;
 
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -97,7 +101,9 @@ public class HelloController {
         return "Greetings from Spring Boot This is the main service!";
     }
 
-}</pre>
+}
+```
+
 
 The @RestController annotation wires the class up as a RESTful web service controller by combining the traditional @Controller and @ResponseBodyannotation functionality.
 
@@ -113,7 +119,8 @@ This class can be made a contextual bean by annotating it with @Component and sp
 
 The functionality of the class is very simple, as it reads temperatures from a file that are in the format: (23.5, 78.3), and makes them accessible via *currentTemperatureC* and *currentTemperatureF*, respectively.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">package org.demo.poolservice;
+```java
+package org.demo.poolservice;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -130,7 +137,7 @@ public class TemperatureReader {
     private String currentTemperatureC;
 
     protected String readTemperatureFile() {
-        String temperatureFile = "/&lt;&gt;/temperature.txt";
+        String temperatureFile = "/<>/temperature.txt";
         System.out.println("Temperature File: " + temperatureFile);
         java.nio.file.Path path = Paths.get(temperatureFile);
         String currentTemperature = null;
@@ -180,7 +187,8 @@ public class TemperatureReader {
     }
 
 }
-</pre>
+```
+
 
 #### 5. Create a Temperature Controller
 
@@ -192,7 +200,8 @@ The URL mapping for the service is supplied via the @RequestMapping("/temperatur
 
 The functionality contained within the index() method is very minimal, as it merely calls upon the temperatureReader.getCurrentTemperatureF() method to return the current temperature in Fahrenheit.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">package org.demo.poolservice;
+```java
+package org.demo.poolservice;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -210,7 +219,8 @@ public class TemperatureController {
     }
 
 }
-</pre>
+```
+
 
 To see the temperature, visit the URL:   
 

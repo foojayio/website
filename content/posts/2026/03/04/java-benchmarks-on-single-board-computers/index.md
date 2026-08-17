@@ -23,7 +23,7 @@ enlighterjs: true
 frozen: false
 ---
 
-*** ** * ** ***
+
 
 In my "Java on Single Board Computers" series, I already published several posts and videos in which I unpack the board, connect it for the first time, and try to install and run some simple Java code. In this post, I want to share some benchmarks of Java on these boards to get a better idea of the performance we can expect from Java on these platforms.
 
@@ -57,18 +57,22 @@ This is the tool you run on your single-board computer. It's a JBang script that
 
 You can run it directly from GitHub with a single command, after setting up your GitHub API token and the repository details (if needed):
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">export GITHUB_TOKEN={ghp_yourtoken}
+```
+export GITHUB_TOKEN={ghp_yourtoken}
 export BENCH_GITHUB_OWNER={your_github_account}
 export BENCH_GITHUB_REPO={your_fork}
 export BENCH_GITHUB_BRANCH={your_branch}
 
-jbang https://github.com/FDelporte/sbc-java-comparison/raw/main/BenchmarkRunner.java</pre>
+jbang https://github.com/FDelporte/sbc-java-comparison/raw/main/BenchmarkRunner.java
+```
+
 
 If you want to run it without uploading results, add the `--skip-push` flag. And if your board has memory constraints, you can limit the heap size with `--heap-limit 768m` for example.
 
 The script generates a report that looks like this:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">{
+```
+{
   "systemInfo" : {
     "boardInfo" : {
       "model" : "RK3588 OPi 5 Ultra",
@@ -103,7 +107,9 @@ The script generates a report that looks like this:
     ...
   ],
   "timestamp" : "2026-02-18T10:47:46.198052372Z"
-}</pre>
+}
+```
+
 
 ### SummarizeReports.java - The Automation Tool {#h3-2-summarizereports-java-the-automation-tool}
 
@@ -207,8 +213,11 @@ The results confirm: **Java runs without problems on all these platforms, from A
 
 I encourage you to run the benchmark on your own boards and contribute the results! The process is simple:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group=""># Make sure you have Java 25 and JBang installed
-jbang https://github.com/FDelporte/sbc-java-comparison/raw/main/BenchmarkRunner.java  --skip-push</pre>
+```
+# Make sure you have Java 25 and JBang installed
+jbang https://github.com/FDelporte/sbc-java-comparison/raw/main/BenchmarkRunner.java  --skip-push
+```
+
 
 If you want your results added to the public dashboard, follow the instructions in the [repository README](https://github.com/FDelporte/sbc-java-comparison) to set up GitHub API access and submit your results.
 

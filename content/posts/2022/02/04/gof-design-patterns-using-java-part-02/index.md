@@ -22,7 +22,7 @@ frozen: false
 [Link to Article : GoF Design Patterns Using Java - Part 01](https://foojay.io/today/gang-of-four-design-patterns-using-core-java-part-01/ "Link to Article : GoF Design Patterns Using Java - Part 01")  
 [Link to GitHub Code Samples in Core Java for this Article](https://github.com/sumithpuri/skp-code-marathon-pattaya "Link to GitHub Code Samples in Core Java for this Article")  
 
-*** ** * ** ***
+
 
 **Adapter Pattern \[[Sample Code](https://github.com/sumithpuri/skp-code-marathon-pattaya/tree/master/src/main/java/me/sumithpuri/github/pattaya/adapter "Sample Code")\]** {#h2-0-adapter-pattern-sample-code}
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -95,7 +95,7 @@ The example attached is a very crude but helpful one, that of an OnlineShopping 
 OnlineShopping maintains an instance variable of each of these states and also a currentState variable. The various state methods that exist within OnlineShopping are selection(), purchase(), authorise(), assemble() and dispatch(). When client calls these methods, the actual invocations are performed on the state implementation held in the currentState variable. All state implementations implement the State interface, which specifies the lifecycle methods.  
 ShoppingClient is the main class. Try adding your own states along with the required lifecycle method.
 
-*** ** * ** ***
+
 
 **\[About SKP's Core Java/Java EE Roots\]**
 

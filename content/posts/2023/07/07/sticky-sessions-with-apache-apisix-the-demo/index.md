@@ -55,7 +55,8 @@ The heart of the application {#h2-1-the-heart-of-the-application}
 
 The heart of the application is a session-scoped bean that wraps a counter, which can only be incremented:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">@Component
+```java
+@Component
 @SessionScope
 public class Counter implements Serializable {              //1
 
@@ -68,13 +69,16 @@ public class Counter implements Serializable {              //1
     public void incrementValue() {
         value++;
     }
-}</pre>
+}
+```
+
 
 1. Necessary for Hazelcast serialization to work
 
 We can use this bean in the controller:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">@Controller
+```java
+@Controller
 public class IndexController {
 
     private final Counter counter;
@@ -89,17 +93,22 @@ public class IndexController {
         model.addAttribute("counter", counter.getValue());
         return "index";
     }
-}</pre>
+}
+```
+
 
 1. Inject the session-scoped bean in the singleton controller thanks to Spring's magic
 2. When we send a `GET` request to the root, increment the counter value and pass it to the model
 
 Finally, we display the bean's value on the Thymeleaf page:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="html">&lt;!DOCTYPE html&gt;
-&lt;html xmlns:th="http://www.thymeleaf.org" lang="en"&gt;
-&lt;body&gt;
-&lt;div th:text="${counter}"&gt;3&lt;/div&gt;</pre>
+```html
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<body>
+<div th:text="${counter}">3</div>
+```
+
 
 Configuring Spring Session with Hazelcast {#h2-2-configuring-spring-session-with-hazelcast}
 -------------------------------------------------------------------------------------------
@@ -110,17 +119,21 @@ We need only a few tweaks to configure Spring Session with Hazelcast.
 
 First, annotate the Spring Boot application class with the relevant annotation:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">@SpringBootApplication
+```java
+@SpringBootApplication
 @EnableHazelcastHttpSession
 public class SessionApplication {
     ...
-}</pre>
+}
+```
+
 
 Hazelcast requires a specific configuration as well. We can use XML, YAML, or code.  
 
 Since it's a demo, I can choose whatever I want, so let's code it. Spring Boot requires either an Hazelcast object or a configuration object. The latter is enough:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">@Bean
+```java
+@Bean
 public Config hazelcastConfig() {
   var config = new Config();
   var networkConfig = config.getNetworkConfig();
@@ -140,7 +153,9 @@ public Config hazelcastConfig() {
                   .setTypeClass(MapSession.class);
   config.getSerializationConfig().addSerializerConfig(serializerConfig);
   return config;
-}</pre>
+}
+```
+
 
 1. Choose a random port to avoid port conflict
 2. Allow Hazelcast to search for other instances and automagically form a cluster. It's going to be necessary when deployed as per our design
@@ -155,17 +170,20 @@ One can think about sessions as a gigantic hash table. In regular applications, 
 
 Here's how I set up a basic Spring Security configuration:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">@Bean
+```java
+@Bean
 public SecurityFilterChain securityFilterChain(UserDetailsService service, HttpSecurity http) throws Exception {
   return http.userDetailsService(service)                                    //1
-             .authorizeHttpRequests(authorize -&gt; authorize.requestMatchers(
+             .authorizeHttpRequests(authorize -> authorize.requestMatchers(
                  PathRequest.toStaticResources().atCommonLocations())        //2
                             .permitAll()                                     //2
                             .anyRequest().authenticated()                    //3
-             ).formLogin(form -&gt; form.permitAll()
+             ).formLogin(form -> form.permitAll()
                                      .defaultSuccessUrl("/")                 //4
              ).build();
-}</pre>
+}
+```
+
 
 1. The default in-memory user details service doesn't allow custom user details classes. I had to provide my own.
 2. Allow everybody to access static resources at "common" locations
@@ -180,32 +198,42 @@ Beside the counter, I want to display two additional pieces of data: the hostnam
 
 For the hostname, I add the following method to the controller:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">@ModelAttribute("hostname")
+```java
+@ModelAttribute("hostname")
 private String hostname() throws UnknownHostException {
     return InetAddress.getLocalHost().getHostName();
-}</pre>
+}
+```
+
 
 Displaying the logged-in user requires an additional dependency:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="xml">&lt;dependency&gt;
-    &lt;groupId&gt;org.thymeleaf.extras&lt;/groupId&gt;
-    &lt;artifactId&gt;thymeleaf-extras-springsecurity6&lt;/artifactId&gt;
-&lt;/dependency&gt;</pre>
+```xml
+<dependency>
+    <groupId>org.thymeleaf.extras</groupId>
+    <artifactId>thymeleaf-extras-springsecurity6</artifactId>
+</dependency>
+```
+
 
 On the page, it's straightforward:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="html">&lt;!DOCTYPE html&gt;
-&lt;html xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"&gt;  &lt;!--1--&gt;
-&lt;body&gt;
-&lt;td sec:authentication="principal.label"&gt;Me&lt;/td&gt;                    &lt;!--2--&gt;</pre>
+```html
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">  <!--1-->
+<body>
+<td sec:authentication="principal.label">Me</td>                    <!--2-->
+```
+
 
 1. Add the `sec` namespace. It's not necessary but may help the IDE to help you
 2. Require the underlying `UserDetail` implementation to have a `getLabel()` method
 
 Last but not least, we need to configure Apache APISIX with sticky sessions, as we saw last week:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml">routes:
+```yaml
+routes:
   - uri: /*
     upstream:
       nodes:
@@ -214,11 +242,14 @@ Last but not least, we need to configure Apache APISIX with sticky sessions, as 
       type: chash
       hash_on: cookie
       key: cookie_JSESSIONID
-#END</pre>
+#END
+```
+
 
 Here's the design implemented on Docker Compose:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml">services:
+```yaml
+services:
   apisix:
     image: apache/apisix:3.3.0-debian
     volumes:
@@ -234,7 +265,9 @@ Here's the design implemented on Docker Compose:
     hostname: webapp1                                                #3
   webapp2:
     build: ./webapp
-    hostname: webapp2                                                #3</pre>
+    hostname: webapp2                                                #3
+```
+
 
 1. Use the previous configuration file
 2. Only expose the API Gateway to the outside world
@@ -277,6 +310,6 @@ The complete source code for this post can be found on [GitHub](https://github.c
 * [Spring Session and Spring Security with Hazelcast](https://docs.spring.io/spring-session/reference/guides/java-hazelcast.html)
 * [Spring Session Hazelcast](https://docs.hazelcast.com/tutorials/spring-session-hazelcast)
 
-*** ** * ** ***
+
 
 *Originally published at [A Java Geek](https://blog.frankel.ch/sticky-sessions-apache-apisix/2/) on July 2^nd^, 2023*

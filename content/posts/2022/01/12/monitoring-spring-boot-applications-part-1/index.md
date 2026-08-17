@@ -57,7 +57,10 @@ Let's understand these options in detail.
 
 If you are using OpenJDK 11 or higher version, you can enable flight recorder by passing the flag -`XX:StartFlightRecording` while starting your Spring Boot or Java applications. Since you can pass the flag at an application startup, it is good to rely on JFR for your application monitoring. Following is the example:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">java -XX:StartFlightRecording:filename=myrecording.jfr,duration=60s -jar myapp.jar</pre>
+```java
+java -XX:StartFlightRecording:filename=myrecording.jfr,duration=60s -jar myapp.jar
+```
+
 
 In this example, after enabling JFR, the data is dumped to `myrecording.jfr` file and analyzed using a client-side tool JDK Mission Control. JMC has to be downloaded separately as it's not part of your JDK. It is available for download from [here](https://github.com/openjdk/jmc#downloading-builds).
 
@@ -65,11 +68,15 @@ In this example, after enabling JFR, the data is dumped to `myrecording.jfr` fil
 
 Suppose you don't always want JFR to monitor your application as discussed in the first option but only want to diagnose when any issue occurs. In that case, jcmd is a handy option as it will send diagnostic commands to running Java applications. You have to pass the PID of the running java process or the main class and the actual command.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">jcmd 24597 JFR.start duration=60s filename=myapprecording.jfr</pre>
+```java
+jcmd 24597 JFR.start duration=60s filename=myapprecording.jfr
+```
+
 
 In the above example, we have started JFR recordings for 60-seconds on the running Java process with the PID 24597 and saved it to `myapprecording.jfr` file in the current directory. To view all the available commands for a running Java application, specify jcmd help. Following are some of the commands that we can use with jcmd.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">jcmd 24597 help
+```
+jcmd 24597 help
 
 24597:
 
@@ -83,7 +90,9 @@ JFR.dump
 
 JFR.start
 
-JFR.stop</pre>
+JFR.stop
+```
+
 
 Here is a summary of those commands: <https://gist.github.com/yrashish/0fb966ef0294a5c336e9253ba78effe7>
 

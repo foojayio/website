@@ -70,39 +70,54 @@ The accelerometer is very sensitive; in fact, it's difficult to hold a phone or 
 
 Gluon's offerings include the [Attach API](https://gluonhq.com/products/mobile/attach/) that lets you access the various hardware features of typical mobile devices and tablets. Both Apple IOS and Android devices have accelerometers. Here's how to access the accelerometer in your JavaFX mobile application.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">try {
+```java
+try {
     service = AccelerometerService.create().get();
     System.out.println("Got accelerometer service.");
 } catch (Exception e) {
     // No accelerometer, using mouse events.
     System.out.println("No accelerometer service.");
          . . . 
-}</pre>
+}
+```
+
 
 Once you have the `AccelerometerService` initialized, you can start and stop it, depending on whether the game is in progress.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">// start the accelerometer service
+```java
+// start the accelerometer service
 service.start();
 // stop the accelerometer service
-service.stop();</pre>
+service.stop();
+```
+
 
 The TiltMaze game lets you control a rolling ball by tilting the phone. As you tilt the phone left or right, the game moves the ball along the X-axis by updating the `translateX` property of the ball.
 
 Similarly, as you tilt the phone vertically, the game moves the ball along the Y-axis by updating its `translateY` property. Since the accelerometer measures changes in velocity, these readings let you simulate a rolling ball by updating the ball's position. While the game is playing, we read the accelerometer in an Animation loop, as follows.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="false" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">acceleration = service.getCurrentAcceleration();
+```java
+acceleration = service.getCurrentAcceleration();
 xv = acceleration.getX();
-yv = acceleration.getY() * -1;</pre>
+yv = acceleration.getY() * -1;
+```
+
 
 Using these values, we check for possible collisions or falling into holes before updating the ball's XY position.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="false" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">ball.setTranslateX(ball.getTranslateX() + xv);
-ball.setTranslateY(ball.getTranslateY() + yv);</pre>
+```java
+ball.setTranslateX(ball.getTranslateX() + xv);
+ball.setTranslateY(ball.getTranslateY() + yv);
+```
+
 
 As the ball rolls, we also mark its path by updating a JavaFX Path object, adding a `LineTo` segment to the path with each update.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="false" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">path.getElements().add(
-        new LineTo(ball.getTranslateX(), ball.getTranslateY()));</pre>
+```java
+path.getElements().add(
+        new LineTo(ball.getTranslateX(), ball.getTranslateY()));
+```
+
 
 Figure 3 shows a game in progress. The ball's path is marked in blue and the countdown timer has 6.5 seconds remaining. Of course, the game must perform collision detection with the maze barriers, holes, and outside boundaries. We leave this code for you to digest at your leisure!  
 ![](TiltMaze-InPlay-small.png) Figure 3. TiltMaze during play  

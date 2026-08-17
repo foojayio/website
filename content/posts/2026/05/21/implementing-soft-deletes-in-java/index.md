@@ -52,30 +52,37 @@ As a basis for our examples in this guide, we are using the sample_mflix databas
 
 What we want to do is to change the schema of the users collection from its current form:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">{
+```
+{
   "_id": {
     "$oid": "59b99dddcfa9a34dcd788604"
   },
   "name": "Thoros of Myr",
-  "email": "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="d8a8b9adb487b3b9a1bd98bfb9b5bdb7beacb0aab7b6f6bdab">[email&nbsp;protected]</a>",
+  "email": "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="d8a8b9adb487b3b9a1bd98bfb9b5bdb7beacb0aab7b6f6bdab">[email protected]</a>",
   "password": "$2b$12$bkA1MM3UEwZ4N0VpCQY68eMY8HKTHWtk2xI2QnG4MuW5UWHlBrF8G"
-}</pre>
+}
+```
+
 
 To something that includes a flag regarding the deletion:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">{
+```
+{
   "_id": {
     "$oid": "59b99dddcfa9a34dcd788604"
   },
   "name": "Thoros of Myr",
-  "email": "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="c8b8a9bda497a3a9b1ad88afa9a5ada7aebca0baa7a6e6adbb">[email&nbsp;protected]</a>",
+  "email": "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="c8b8a9bda497a3a9b1ad88afa9a5ada7aebca0baa7a6e6adbb">[email protected]</a>",
   "password": "$2b$12$bkA1MM3UEwZ4N0VpCQY68eMY8HKTHWtk2xI2QnG4MuW5UWHlBrF8G",
   "deletedAt": null
-}</pre>
+}
+```
+
 
 It's worth mentioning that you could also omit the field for an active document instead. MongoDB will still return it in queries that are filtering for {"deletedAt": null}. However, an index on the field will not be able to efficiently return all active documents when the field is absent. Therefore, we will prime our collection by actively setting null values and later update documents with correct timestamps for soft deletion. But first, we will set up a reusable "mongoclient" object to make use of [MongoDB connection pooling](https://www.mongodb.com/docs/manual/administration/connection-pool-overview/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=soft-imp-mongodb-foojay&utm_term=hugh.murray) instead of connecting a new client with every application call. This will reduce latency significantly and reduce the number of times new connections have to be created:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public final class MongoClientProvider {
+```
+public final class MongoClientProvider {
 
     private static volatile MongoClient mongoClient;
     private static final Object LOCK = new Object();
@@ -98,7 +105,7 @@ It's worth mentioning that you could also omit the field for an active document 
 
     private static MongoClient createClient() {
 
-        ConnectionString connString = new ConnectionString("&lt;my connection string&gt;");
+        ConnectionString connString = new ConnectionString("<my connection string>");
 
         MongoClientSettings settings = MongoClientSettings.builder()
                 .applyConnectionString(connString)
@@ -119,7 +126,7 @@ It's worth mentioning that you could also omit the field for an active document 
 
    // make sure the MongoClient is closed properly when the JVM shuts down
    private static void registerShutdownHook() {
-      Runtime.getRuntime().addShutdownHook(new Thread(() -&gt; {
+      Runtime.getRuntime().addShutdownHook(new Thread(() -> {
          if (mongoClient != null) {
             try {
                mongoClient.close();
@@ -131,11 +138,14 @@ It's worth mentioning that you could also omit the field for an active document 
    }
 
 }
-}</pre>
+}
+```
+
 
 Now we can use the getClient() Method to efficiently call upon a connection to the database. Next, we can start priming the collection:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">import com.mongodb.client.MongoDatabase;
+```
+import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.result.UpdateResult;
 import org.bson.Document;
@@ -149,7 +159,7 @@ public static void main(String[] args) {
     try (MongoClient mongoClient = getClient()) {
 
         MongoDatabase database = mongoClient.getDatabase("sample_mflix");
-        MongoCollection&lt;Document&gt; collection = database.getCollection("users");
+        MongoCollection<Document> collection = database.getCollection("users");
 
         UpdateResult result = collection.updateMany(
 Filters.empty(), //empty filter to apply to all documents
@@ -158,11 +168,14 @@ Updates.set("deletedAt", null)
 
         }
     }
-}</pre>
+}
+```
+
 
 This method will update the whole collection in one go. For larger collections, it can be a good idea to perform operations like that in batches to avoid loading everything into memory at once and also gain more control over throughput, for example, when working within a production environment that has to maintain a regular workload during the change. Performing the change in batches could look like this:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">import com.mongodb.client.model.Filters;
+```
+import com.mongodb.client.model.Filters;
 import com.mongodb.client.model.Updates;
 import com.mongodb.client.result.UpdateResult;
 
@@ -182,7 +195,7 @@ public class BatchUpdateExample {
         try (MongoClient mongoClient = getClient()) {
 
             MongoDatabase db = mongoClient.getDatabase("sample_mflix");
-            MongoCollection&lt;Document&gt; collection = db.getCollection("users");
+            MongoCollection<Document> collection = db.getCollection("users");
 
             int batchSize = 100;
             ObjectId lastId = null;
@@ -195,12 +208,12 @@ public class BatchUpdateExample {
                 }
 
                 // Fetch batch
-                FindIterable&lt;Document&gt; docs = collection.find(filter)
+                FindIterable<Document> docs = collection.find(filter)
                         .sort(new Document("_id", 1))
                         .limit(batchSize);
 
                 // put each document Id into a List
-                List&lt;ObjectId&gt; ids = new ArrayList&lt;&gt;();
+                List<ObjectId> ids = new ArrayList<>();
                 for (Document doc : docs) {
                     ObjectId id = doc.getObjectId("_id");
                     ids.add(id);
@@ -221,11 +234,14 @@ public class BatchUpdateExample {
             }
         }
     }
-}</pre>
+}
+```
+
 
 Now that the collection is prepared, we can start applying the soft delete logic. Delete a single document by changing "deletedAt" from null to a current timestamp:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">import com.mongodb.client.model.Filters;
+```
+import com.mongodb.client.model.Filters;
 import com.mongodb.client.model.Updates;
 import java.util.Date;
 
@@ -233,24 +249,27 @@ public static void softDeleteUser(String id) {
 
       try (MongoClient mongoClient = getClient()) {
             MongoDatabase db = mongoClient.getDatabase("sample_mflix");
-            MongoCollection&lt;Document&gt; collection = db.getCollection("users");
+            MongoCollection<Document> collection = db.getCollection("users");
 
     		collection.updateOne(
             		Filters.eq("_id", new org.bson.types.ObjectId(id)),
                     	Updates.set("deletedAt", new Date())
     		);
 	}
-}</pre>
+}
+```
+
 
 Now that the deletes are in place, we need to adapt our queries (add deletedAt:null to filters) in order to ignore fetching soft-deleted documents.
 
 Let's say we usually query for users by name and e-mail address, like so:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public static Document getUser(String name, String mail)) {
+```
+public static Document getUser(String name, String mail)) {
 Try (MongoClient mongoClient = getClient()) {
 
    MongoDatabase db = client.getDatabase("sample_mflix");
-   MongoCollection&lt;Document&gt; collection = database.getCollection("users");
+   MongoCollection<Document> collection = database.getCollection("users");
 
    Bson filter = Filters.and(Filters.eq("name", name), Filters.eq("email", mail));
 
@@ -260,15 +279,18 @@ Try (MongoClient mongoClient = getClient()) {
 }
 
 Return Document emptyDoc = createEmptyDocument();
-}</pre>
+}
+```
+
 
 We will now expand our filter to ensure that soft-deleted documents are not retrieved by our query.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public static Document getUserIfNoSoftDelete(String name, String mail)) {
+```
+public static Document getUserIfNoSoftDelete(String name, String mail)) {
 Try (MongoClient mongoClient = getClient()) {
 
    MongoDatabase db = client.getDatabase("sample_mflix");
-   MongoCollection&lt;Document&gt; collection = database.getCollection("users");
+   MongoCollection<Document> collection = database.getCollection("users");
 
    Bson filter = Filters.and(Filters.eq("name", name), Filters.eq("email", mail), Filters.eq(deletedAt, null));
 
@@ -279,15 +301,18 @@ Try (MongoClient mongoClient = getClient()) {
 
 Return Document emptyDoc = createEmptyDocument();
 
-}</pre>
+}
+```
+
 
 The next thing will be indexing the field; otherwise, our queries will slow down
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public static void createSoftDeleteIndex() {
+```
+public static void createSoftDeleteIndex() {
 Try (MongoClient mongoClient = getClient()) {
 
    MongoDatabase database = client.getDatabase("sample_mflix");
-   MongoCollection&lt;Document&gt; collection = database.getCollection("users");
+   MongoCollection<Document> collection = database.getCollection("users");
 
    // Create compound index
    String indexName = collection.createIndex(
@@ -299,23 +324,28 @@ Try (MongoClient mongoClient = getClient()) {
    new IndexOptions().name("idx_email_name_deletedAt")
    );
 }
-}</pre>
+}
+```
+
 
 Lastly, we want to be able to recover a soft-deleted document. The reason may be an accidental deletion or a data rollback of some sort. To achieve this, we can simply set the deletedAt field that stores the timestamp of the deletion to null again:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">import com.mongodb.client.model.Filters;
+```
+import com.mongodb.client.model.Filters;
 import com.mongodb.client.model.Updates;
 import java.util.Date;
 public static void recoverDocument(String id) {
       try (MongoClient mongoClient = getClient()) {
             MongoDatabase db = mongoClient.getDatabase("sample_mflix");
-            MongoCollection&lt;Document&gt; collection = db.getCollection("users");
+            MongoCollection<Document> collection = db.getCollection("users");
     		collection.updateOne(
             		Filters.eq("_id", new org.bson.types.ObjectId(id)),
                     		Updates.set("deletedAt", null)
     		);
 	}
-}</pre>
+}
+```
+
 
 Now we have implemented a deletion method that keeps deleted documents in the database for later recovery, auditing, or other purposes
 
@@ -325,7 +355,8 @@ An alternative to flagging is to use soft deletes by moving documents into an ar
 
 To implement this approach, we first need to create the secondary collection:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">import com.mongodb.client.MongoClient;
+```
+import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoDatabase;
 
@@ -340,11 +371,14 @@ public static void createCollectionExample() {
             database.createCollection("users_archive");
         }
     }
-}</pre>
+}
+```
+
 
 Now we can move documents to that collection and, by that realize a soft delete.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">import com.mongodb.client.MongoClient;
+```
+import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
@@ -359,8 +393,8 @@ public static void softDeleteWithArchive() {
         try (MongoClient client = getClient()) {
             MongoDatabase db = client.getDatabase("sample_mflix");
 
-            MongoCollection&lt;Document&gt; users = db.getCollection("users");
-            MongoCollection&lt;Document&gt; archive = db.getCollection("users_archive");
+            MongoCollection<Document> users = db.getCollection("users");
+            MongoCollection<Document> archive = db.getCollection("users_archive");
 
             ObjectId userId = new ObjectId("64f123456789abcdef123456"); // replace with real ID
 
@@ -376,7 +410,9 @@ public static void softDeleteWithArchive() {
             } 
         }
     }
-}</pre>
+}
+```
+
 
 In order to recover a document using this method, it can just be moved back the same way. Additionally, adding a field with a timestamp can be an option. This way, it is documented when a document has been soft-deleted. That information can be relevant, for example, when certain retention periods have to be met before a document can be removed completely. More on that when we come to the topic of cleanups.
 
@@ -384,12 +420,13 @@ In order to recover a document using this method, it can just be moved back the 
 
 When using this method we need to make sure to also cascade deletions into related collections. For our example, let's take a look at the comments collection.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">{
+```
+{
   "_id": {
     "$oid": "5a9427648b0beebeb69579e7"
   },
   "name": "Mercedes Tyler",
-  "email": "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="1b767e69787e7f7e68446f62777e695b7d7a707e7c767a727735787476">[email&nbsp;protected]</a>",
+  "email": "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="1b767e69787e7f7e68446f62777e695b7d7a707e7c767a727735787476">[email protected]</a>",
   "movie_id": {
     "$oid": "573a1390f29313caabcd4323"
   },
@@ -397,11 +434,14 @@ When using this method we need to make sure to also cascade deletions into relat
   "date": {
     "$date": "2002-08-18T04:56:07.000Z"
   }
-}</pre>
+}
+```
+
 
 Each comment inside this collection is written by a specific user and is referenced by the field "name" which also exists in the user collection. When that user is deleted, it might also be desirable to delete all related comments. Now the question is whether to actually remove those comments from the database or to again implement a soft delete so they are restorable. This depends on your specific use cases and retention policies. Let's say, for example, you use soft deletes on your user collection because certain legal regulations require you to keep this information for a set period of time. In this case, the comments can probably be hard deleted since you will never want to touch them again. Another scenario might be that your application offers a user recovery feature, allowing a user who has deleted their account in the past to reactivate it and recover all their information. In that case, you might want to implement soft deletion for all related data to support that feature. For this example, it is assumed that related documents will be hard deleted. This would be one way to implement that behavior:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">import com.mongodb.client.MongoClient;
+```
+import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
@@ -414,13 +454,15 @@ import static com.mongodb.client.model.Filters.eq;
 public static void cascadeDeletion (String userName){
         try (MongoClient client = getClient()) {
             MongoDatabase db = client.getDatabase("sample_mflix");
-            MongoCollection&lt;Document&gt; collection = db.getCollection("comments");
+            MongoCollection<Document> collection = db.getCollection("comments");
 
             // Delete all comments that are posted by the deleted user
             DeleteResult result = collection.deleteMany(eq("name", userName));
         }
     }
-}</pre>
+}
+```
+
 
 This could either be included in the softDelete() function itself or called separately.
 
@@ -430,7 +472,8 @@ In many scenarios, a soft delete will only be a temporary solution. Documents ar
 
 Any document that does not contain that field at all will not be impacted by the TTL index.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">import com.mongodb.client.MongoClient;
+```
+import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
@@ -446,7 +489,7 @@ public static void createTTLIndex () {
 
         try (MongoClient client = getClient) {
             MongoDatabase db = client.getDatabase("sample_mflix");
-            MongoCollection&lt;Document&gt; collection = db.getCollection("users");
+            MongoCollection<Document> collection = db.getCollection("users");
 
             // TTL index: expire documents 1 year (365 days) after deletedAt
             IndexOptions options = new IndexOptions()
@@ -455,7 +498,9 @@ public static void createTTLIndex () {
             String indexName = collection.createIndex(ascending("deletedAt"), options);
         }
     }
-}</pre>
+}
+```
+
 
 Pros and cons of soft deletes {#Pros-and-cons-of-soft-deletes}
 --------------------------------------------------------------

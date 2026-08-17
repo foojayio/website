@@ -36,7 +36,8 @@ Try it out {#h2-0-try-it-out}
 
 If you want to dive in directly, grab yourself a Raspberry Pi, open a terminal and install ZIP and SDKMAN.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ sudo apt install zip
+```
+$ sudo apt install zip
 $ curl -s "https://beta.sdkman.io" | bash
 
 # Open a new terminal or run this command
@@ -53,15 +54,19 @@ Available Java Versions for Linux ARM 32bit Hard Float
  Zulu          |     | 11.0.13      | zulu    |            | 11.0.13-zulu
                |     | 8.0.312      | zulu    |            | 8.0.312-zulu
 ================================================================================
-</pre>
+```
+
 
 Yep, that's right, even for the Raspberry Pi different distributions can be used! So let's try out Azul Zulu 11.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ sdk install java 11.0.13-zulu
+```
+$ sdk install java 11.0.13-zulu
 $ java -version
 openjdk version "11.0.13" 2021-10-19 LTS
 OpenJDK Runtime Environment Zulu11.52+13-CA (build 11.0.13+8-LTS)
-OpenJDK Client VM Zulu11.52+13-CA (build 11.0.13+8-LTS, mixed mode)</pre>
+OpenJDK Client VM Zulu11.52+13-CA (build 11.0.13+8-LTS, mixed mode)
+```
+
 
 Confirmed! Azul Zulu 11 installed with SDKMAN runs fine on a Raspberry Pi.
 
@@ -82,7 +87,8 @@ The architecture can be checked with the `uname` command and these are some of t
 
 If you want to know more about your system, use the `lscpu` command, this is the output on a Raspberry Pi 4 with 32-bit OS:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ lscpu
+```
+$ lscpu
 Architecture:        armv7l
 Byte Order:          Little Endian
 CPU(s):              4
@@ -97,14 +103,17 @@ Stepping:            r0p3
 CPU max MHz:         1500.0000
 CPU min MHz:         600.0000
 BogoMIPS:            108.00
-Flags:               half thumb fastmult vfp edsp neon vfpv3 tls vfpv4 idiva idivt vfpd32 lpae evtstrm crc32</pre>
+Flags:               half thumb fastmult vfp edsp neon vfpv3 tls vfpv4 idiva idivt vfpd32 lpae evtstrm crc32
+```
+
 
 64-bit Operating System {#h2-2-64-bit-operating-system}
 -------------------------------------------------------
 
 After a long time of trialing a beta version, on February 2th, Raspberry Pi officially announced a 64-bit version of their operating system. You can [read more about this release on the Raspberry Pi Blog](https://www.raspberrypi.com/news/raspberry-pi-os-64-bit/). And because this is a more used architecture, the output of SDKMAN is really impressive...
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">================================================================================
+```
+================================================================================
 Available Java Versions for Linux ARM 64bit
 ================================================================================
  Vendor        | Use | Version      | Dist    | Status     | Identifier
@@ -123,11 +132,13 @@ Available Java Versions for Linux ARM 64bit
                |     | 11.0.14      | zulu    |            | 11.0.14-zulu        
                |     | 8.0.322      | zulu    |            | 8.0.322-zulu        
 ================================================================================
-</pre>
+```
+
 
 So using the Temurin 17 version is as easy as `sdk install java 17.0.2-tem`:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ sdk install java 17.0.2-tem
+```
+$ sdk install java 17.0.2-tem
 
 Downloading: java 17.0.2-tem
 
@@ -148,7 +159,8 @@ $ java -version
 openjdk version "17.0.2" 2022-01-18
 OpenJDK Runtime Environment Temurin-17.0.2+8 (build 17.0.2+8)
 OpenJDK 64-Bit Server VM Temurin-17.0.2+8 (build 17.0.2+8, mixed mode, sharing)
-</pre>
+```
+
 
 Conclusion {#h2-3-conclusion}
 -----------------------------

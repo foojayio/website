@@ -39,50 +39,54 @@ Apache Camel is broken up into components. A component in Camel is a self contai
 
 To keep the download as small as possible, the project ships with a "core" that contains a subset of the available components. You can always add components as their need arises in your projects. To get started, first add the dependencyManagement block to your pom.xml file.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&lt;dependencyManagement&gt;
- &lt;dependencies&gt;
-   &lt;!-- Camel BOM --&gt;
-   &lt;dependency&gt;
-      &lt;groupId&gt;org.apache.camel&lt;/groupId&gt;
-      &lt;artifactId&gt;camel-bom&lt;/artifactId&gt;
-      &lt;version&gt;3.20.5&lt;/version&gt;
-      &lt;scope&gt;import&lt;/scope&gt;
-      &lt;type&gt;pom&lt;/type&gt;
-   &lt;/dependency&gt;
- &lt;/dependencies&gt;
-&lt;/dependencyManagement&gt;
+```
+<dependencyManagement>
+ <dependencies>
+   <!-- Camel BOM -->
+   <dependency>
+      <groupId>org.apache.camel</groupId>
+      <artifactId>camel-bom</artifactId>
+      <version>3.20.5</version>
+      <scope>import</scope>
+      <type>pom</type>
+   </dependency>
+ </dependencies>
+</dependencyManagement>
 
-&lt;dependency&gt;
-&lt;groupId&gt;org.apache.camel&lt;/groupId&gt;
-&lt;artifactId&gt;camel-core&lt;/artifactId&gt;
-&lt;/dependency&gt;
+<dependency>
+<groupId>org.apache.camel</groupId>
+<artifactId>camel-core</artifactId>
+</dependency>
 
-&lt;dependency&gt;
-&lt;groupId&gt;org.apache.camel&lt;/groupId&gt;
-&lt;artifactId&gt;camel-endpointdsl&lt;/artifactId&gt;
-&lt;/dependency&gt;
+<dependency>
+<groupId>org.apache.camel</groupId>
+<artifactId>camel-endpointdsl</artifactId>
+</dependency>
 
-&lt;dependency&gt;
-&lt;groupId&gt;org.apache.camel&lt;/groupId&gt;
-&lt;artifactId&gt;camel-cdi&lt;/artifactId&gt;
-&lt;/dependency&gt;
+<dependency>
+<groupId>org.apache.camel</groupId>
+<artifactId>camel-cdi</artifactId>
+</dependency>
 
-&lt;dependency&gt;
-&lt;groupId&gt;org.apache.camel&lt;/groupId&gt;
-&lt;artifactId&gt;camel-cdi-main&lt;/artifactId&gt;
-&lt;/dependency&gt;</pre>
+<dependency>
+<groupId>org.apache.camel</groupId>
+<artifactId>camel-cdi-main</artifactId>
+</dependency>
+```
+
 
 The camel-core dependency is the core camel project. The camel-endpointdsl gives you a nice, typesafe DSL for crafting your Camel routes. Then camel-cdi is a CDI integration (which doesn't fully work at the moment however).
 
 With those in place, let's take a look at a first, "hello world" example . This example reads files and moves files from one folder into the other. Though reading and writing files on the Java Platform has improved significantly over the last few years, using the file component of Apache Camel makes it even better. The following FileRoute.java class shows a simple read and move file operation.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public class FileRoute extends EndpointRouteBuilder {
+```
+public class FileRoute extends EndpointRouteBuilder {
 
     @Override
     public void configure() throws Exception {
         from(file("/data/inbox/"))
                 .log("Received file ${file:name}")
-                .process(exchange -&gt; {
+                .process(exchange -> {
                     Message in = exchange.getIn();
                     String body = in.getBody(String.class);
                     //Do something to the read file
@@ -91,7 +95,9 @@ With those in place, let's take a look at a first, "hello world" example . This 
 
     }
 
-}</pre>
+}
+```
+
 
 The above class is a Camel Route that reads a file, does some processing on the read content, and then sends it to another place. This is a summary of how Camel works. This route processes a org.apache.camel.Message, wrapped in a org.apache.camel.Exchange. A lot of your Camel use will revolve around taking messages from one place, optionally doing something with the message, and then transferring the result to another place.
 
@@ -99,7 +105,8 @@ Camel routes are designed to be read. So in the FileRoute above, you can read it
 
 With your route in place, you will need to tell Camel about it. In the absence of the full functionality of the camel-cdi bridge, we can easily register our route as shown below.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@Singleton
+```
+@Singleton
 @Startup
 public class CamelBootstrap {
 
@@ -126,7 +133,9 @@ public class CamelBootstrap {
     }
   }
 
-}</pre>
+}
+```
+
 
 CamelBootstrap is a singleton EJB that starts on application boot. Within it, we inject a org.apache.camel.cdi.CdiCamelContext instance, on which we call the addRoutes method in a post construct listener of the class. We then start the context. The class also listens for the pre destroy event and within it, stops the context. With this class in place, we have a fully functional Apache Camel application.
 

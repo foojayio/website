@@ -32,7 +32,10 @@ First, I've created a new Vaadin application: <https://start.vaadin.com>
 
 Then I did a production build:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">mvn package -Pproduction</pre>
+```
+mvn package -Pproduction
+```
+
 
 That will generate an executable JAR file in the target directory.
 
@@ -41,7 +44,10 @@ First Deployment {#h2-1-first-deployment}
 
 Google AppEngine provides F2 instance type with enough memory for Spring Boot and Java 17 by default. There is no need to configure anything, and I can simply execute:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">gcloud app deploy</pre>
+```
+gcloud app deploy
+```
+
 
 This work! But is there even a simpler way?
 
@@ -50,19 +56,25 @@ Maven Plugin {#h2-2-maven-plugin}
 
 I could use a Maven plugin to deploy the application:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="xml" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&lt;plugin&gt;
-    &lt;groupId&gt;com.google.cloud.tools&lt;/groupId&gt;
-    &lt;artifactId&gt;appengine-maven-plugin&lt;/artifactId&gt;
-    &lt;version&gt;2.4.2&lt;/version&gt;
-    &lt;configuration&gt;
-        &lt;projectId&gt;GCLOUD_CONFIG&lt;/projectId&gt;
-        &lt;version&gt;GCLOUD_CONFIG&lt;/version&gt;
-    &lt;/configuration&gt;
-&lt;/plugin&gt;</pre>
+```xml
+<plugin>
+    <groupId>com.google.cloud.tools</groupId>
+    <artifactId>appengine-maven-plugin</artifactId>
+    <version>2.4.2</version>
+    <configuration>
+        <projectId>GCLOUD_CONFIG</projectId>
+        <version>GCLOUD_CONFIG</version>
+    </configuration>
+</plugin>
+```
+
 
 And now I just have to call:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">mvn package appengine:deploy -Pproduction</pre>
+```
+mvn package appengine:deploy -Pproduction
+```
+
 
 Session State {#h2-3-session-state}
 -----------------------------------
@@ -73,8 +85,11 @@ We must enable session affinity to ensure our application runs correctly in mult
 
 This can be done in the app.yaml as well
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">network:
-    session_affinity: true</pre>
+```
+network:
+    session_affinity: true
+```
+
 
 But what does session affinity mean? Let's check the documentation:
 

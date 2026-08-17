@@ -57,11 +57,14 @@ BoxLang now ships in two distinct flavors to meet different security and deploym
 * **Immutable deployments** - code cannot be modified at runtime
 * Perfect for production environments requiring security certifications
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java"># Development/Standard deployment
+```java
+# Development/Standard deployment
 java -jar boxlang-1.8.0.jar myapp.bx
 
 # Secure production deployment (pre-compiled only)
-java -jar boxlang-noop-1.8.0.jar myapp.bx</pre>
+java -jar boxlang-noop-1.8.0.jar myapp.bx
+```
+
 
 *Enterprise Security Win*: Deploy with boxlang-noop in production to guarantee no runtime code compilation, meeting strict security policies for PCI-DSS, HIPAA, SOC 2, and government compliance requirements.
 
@@ -84,25 +87,31 @@ Compilers are now **modular add-ons** that can be loaded dynamically via classpa
 * Useful for understanding compilation process
 * Primarily for backward compatibility
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">// boxlang.json - Choose your compiler
+```java
+// boxlang.json - Choose your compiler
 {
   "compiler": "asm",  // Use ASM compiler (default)
   // OR
   "compiler": "java"  // Use Java source compiler
-}</pre>
+}
+```
+
 
 ##### 🚀 Revolutionary IBoxpiler Interface
 
 The new IBoxpiler interface enables true plug-and-play compiler development:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public interface IBoxpiler {
+```java
+public interface IBoxpiler {
     // Compile BoxLang source to bytecode
     byte[] compile( SourceCode source );
 
     // Get compiler metadata
     String getName();
     String getVersion();
-}</pre>
+}
+```
+
 
 **What This Means:**
 
@@ -114,7 +123,8 @@ The new IBoxpiler interface enables true plug-and-play compiler development:
 * 🔬 **Research \& Innovation** - Experiment with new compilation techniques  
   **Example Use Cases:**
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">// Financial services: Compiler with embedded audit logging
+```java
+// Financial services: Compiler with embedded audit logging
 compiler = new AuditCompiler()
     .enableTracing()
     .logToCompliance( "audit.log" );
@@ -127,7 +137,9 @@ compiler = new EmbeddedCompiler()
 // Blockchain: Compiler with cryptographic verification
 compiler = new VerifiableCompiler()
     .signOutput()
-    .enableProofOfCompilation();</pre>
+    .enableProofOfCompilation();
+```
+
 
 ##### 💼 Enterprise Benefits
 
@@ -176,7 +188,8 @@ New `http()` BIF - Chainable HTTP Magic
 
 The new `http()` BIF provides an elegant, chainable interface for building and executing HTTP requests:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">// Simple GET request - clean and direct
+```java
+// Simple GET request - clean and direct
 result = http( "https://api.example.com/data" ).send();
 println( "Status: #result.statusCode#" );
 
@@ -184,19 +197,19 @@ println( "Status: #result.statusCode#" );
 result = http( "https://api.example.com/users" )
     .post()
     .header( "Content-Type", "application/json" )
-    .body( { name : "John Doe", email : "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="e3898c8b8da3869b828e938f86cd808c8e">[email&nbsp;protected]</a>" } )
+    .body( { name : "John Doe", email : "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="e3898c8b8da3869b828e938f86cd808c8e">[email protected]</a>" } )
     .send();
 
 // Transform response inline
 users = http( "https://api.example.com/users" )
     .get()
-    .transform( ( result ) =&gt; deserializeJSON( result.fileContent ) )
+    .transform( ( result ) => deserializeJSON( result.fileContent ) )
     .send(); // Returns deserialized array directly!
 
 // Stream large responses with chunking
 http( "https://api.example.com/large-data" )
     .get()
-    .onChunk( ( chunk ) =&gt; {
+    .onChunk( ( chunk ) => {
         println( "Received: #chunk.data.len()# bytes" );
     } )
     .send();
@@ -204,7 +217,9 @@ http( "https://api.example.com/large-data" )
 // Async execution with BoxFuture
 future = http( "https://api.example.com/data" )
     .get()
-    .sendAsync();</pre>
+    .sendAsync();
+```
+
 
 **Key Features:**
 
@@ -222,25 +237,28 @@ Completely Rewritten `bx:http` Component
 
 The `bx:http` component has been rebuilt to match the fluent BIF capabilities while maintaining full CFML compatibility:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">// Server-Sent Events (SSE) support
-&lt;bx:http
+```java
+// Server-Sent Events (SSE) support
+<bx:http
     url="https://api.example.com/events"
     sse="true"
-    onMessage="#( event ) =&gt; handleSSEEvent( event )#" /&gt;
+    onMessage="#( event ) => handleSSEEvent( event )#" />
 
 // Client certificate authentication
-&lt;bx:http
+<bx:http
     url="https://secure-api.com/data"
     clientCert="/path/to/cert.p12"
     clientCertPassword="secret"
-    result="apiData" /&gt;
+    result="apiData" />
 
 // Streaming with callbacks
-&lt;bx:http
+<bx:http
     url="https://api.example.com/stream"
-    onChunk="#( chunk ) =&gt; processChunk( chunk )#"
-    onError="#( error ) =&gt; logError( error )#"
-    onComplete="#() =&gt; println( 'Complete!' )#" /&gt;</pre>
+    onChunk="#( chunk ) => processChunk( chunk )#"
+    onError="#( error ) => logError( error )#"
+    onComplete="#() => println( 'Complete!' )#" />
+```
+
 
 **New Features:**
 
@@ -254,21 +272,25 @@ HTTP Service - Enterprise-Grade Connection Management
 
 A new `HttpService` manages HTTP client instances, connection pooling, and lifecycle automatically:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">// Clients are automatically managed and reused
+```java
+// Clients are automatically managed and reused
 client1 = http( "https://api.example.com" );
 client2 = http( "https://api.example.com" ); // Reuses same connection pool
 
 // Access HTTP statistics
 stats = getBoxRuntime().getHttpService().getStats();
 println( "Total requests: #stats.totalRequests#" );
-println( "Active connections: #stats.activeConnections#" );</pre>
+println( "Active connections: #stats.activeConnections#" );
+```
+
 
 🧼 SOAP/WSDL Client Integration - Web Services Made Simple {#h2-7-soap-wsdl-client-integration-web-services-made-simple}
 ------------------------------------------------------------------------------------------------------------------------
 
 BoxLang now includes comprehensive SOAP web service support with automatic WSDL parsing and fluent method invocation:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">// Create SOAP client from WSDL
+```java
+// Create SOAP client from WSDL
 ws = soap( "http://example.com/service.wsdl" )
     .timeout( 60 )
     .withBasicAuth( "username", "password" );
@@ -286,7 +308,9 @@ result = invoke( ws, "getUserInfo", { userID : 123 } );
 
 // Inspect available operations
 operations = ws.getOperationNames();
-opInfo = ws.getOperationInfo( "getUserInfo" );</pre>
+opInfo = ws.getOperationInfo( "getUserInfo" );
+```
+
 
 **Features:**
 
@@ -305,7 +329,8 @@ Perfect for integrating with legacy SOAP services, enterprise APIs, and third-pa
 
 New lifecycle hooks enable graceful application shutdown with resource cleanup:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">// In Application.bx
+```java
+// In Application.bx
 component {
     this.name = "MyApp";
 
@@ -313,12 +338,14 @@ component {
         application.resources = setupResources();
 
         // Register shutdown listener
-        getBoxContext().registerShutdownListener( () =&gt; {
+        getBoxContext().registerShutdownListener( () => {
             application.resources.close();
             println( "Application shutdown complete" );
         } );
     }
-}</pre>
+}
+```
+
 
 **Use Cases:**
 
@@ -332,9 +359,12 @@ component {
 
 Class metadata now includes `simpleName` for easier reflection:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">meta = getMetadata( myObject );
+```java
+meta = getMetadata( myObject );
 println( "Class: #meta.fullName#" );
-println( "Simple name: #meta.simpleName#" ); // New in 1.8.0</pre>
+println( "Simple name: #meta.simpleName#" ); // New in 1.8.0
+```
+
 
 🤖 Core Runtime Enhancements {#h2-10-core-runtime-enhancements}
 ---------------------------------------------------------------
@@ -343,18 +373,22 @@ println( "Simple name: #meta.simpleName#" ); // New in 1.8.0</pre>
 
 The BoxLang MiniServer now supports loading configuration from JSON files:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java"># Looks for miniserver.json in current directory
+```java
+# Looks for miniserver.json in current directory
 boxlang-miniserver
 
 # Or specify path explicitly
 boxlang-miniserver /path/to/config.json
 
 # CLI arguments override JSON configuration
-boxlang-miniserver miniserver.json --port 9090 --debug</pre>
+boxlang-miniserver miniserver.json --port 9090 --debug
+```
+
 
 **Example Configuration:**
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">{
+```java
+{
     "port" : 8080,
     "host" : "0.0.0.0",
     "webRoot" : "/var/www/myapp",
@@ -363,7 +397,9 @@ boxlang-miniserver miniserver.json --port 9090 --debug</pre>
     "rewriteFileName" : "index.bxm",
     "healthCheck" : true,
     "envFile" : "/etc/boxlang/.env.production"
-}</pre>
+}
+```
+
 
 **Configuration Priority:**
 
@@ -376,12 +412,15 @@ boxlang-miniserver miniserver.json --port 9090 --debug</pre>
 
 The experimental compiler setting is now a top-level directive in `boxlang.json:`
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">{
+```java
+{
     "compiler" : "asm",
     "runtime" : {
         // runtime settings
     }
-}</pre>
+}
+```
+
 
 Valid values: `"asm"` (default), `"java"`, `"noop"`
 
@@ -389,14 +428,17 @@ Valid values: `"asm"` (default), `"java"`, `"noop"`
 
 The `DynamicClassLoader` now supports `addPaths()` for loading external JARs at runtime:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">// Load external JARs dynamically
+```java
+// Load external JARs dynamically
 getRequestClassLoader().addPaths( [
     "/path/to/library.jar",
     "/path/to/another.jar"
 ] );
 
 // Now load classes from those JARs
-MyClass = createObject( "java", "com.example.MyClass", getRequestClassLoader() );</pre>
+MyClass = createObject( "java", "com.example.MyClass", getRequestClassLoader() );
+```
+
 
 ### Performance Optimizations {#h3-13-performance-optimizations}
 
@@ -559,8 +601,9 @@ Removed all JavaParser dependencies externally unless explicitly checked - reduc
 
 **HTTP Migration**: Consider migrating to the new fluent HTTP APIs:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">// Old style (component)
-&lt;bx:http url="https://api.example.com" method="GET" result="myResult" /&gt;
+```java
+// Old style (component)
+<bx:http url="https://api.example.com" method="GET" result="myResult" />
 
 // New style (fluent BIF)
 myResult = http( "https://api.example.com" ).send();
@@ -568,12 +611,15 @@ myResult = http( "https://api.example.com" ).send();
 // With transformation
 data = http( "https://api.example.com/users.json" )
     .get()
-    .transform( ( result ) =&gt; deserializeJSON( result.fileContent ) )
-    .send();</pre>
+    .transform( ( result ) => deserializeJSON( result.fileContent ) )
+    .send();
+```
+
 
 **SOAP Integration** : Use the new `soap()` BIF for web services:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">// New soap() BIF (recommended)
+```java
+// New soap() BIF (recommended)
 ws = soap( "http://example.com/service.wsdl" )
     .timeout( 60 )
     .withBasicAuth( "user", "pass" );
@@ -582,16 +628,21 @@ ws = soap( "http://example.com/service.wsdl" )
 ws = createObject( "webservice", "http://example.com/service.wsdl" );
 
 // Invoke methods
-result = ws.methodName( arg1, arg2 );</pre>
+result = ws.methodName( arg1, arg2 );
+```
+
 
 **Configuration** : Update `boxlang.json` to use the new top-level compiler directive:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">{
+```java
+{
     "compiler" : "asm",
     "runtime" : {
         // settings
     }
-}</pre>
+}
+```
+
 
 ### 🙏 Thank You {#h3-34-thank-you}
 
@@ -611,11 +662,14 @@ Special thanks to all contributors who reported issues, tested pre-releases, and
 Ready to experience revolutionary HTTP capabilities, SOAP integration, and rock-solid stability?  
 **Upgrade to BoxLang 1.8.0 today!**
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java"># Update with CommandBox
-box install <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="680a07100409060f285946504658">[email&nbsp;protected]</a>
+```java
+# Update with CommandBox
+box install <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="680a07100409060f285946504658">[email protected]</a>
 
 # Or download from boxlang.io
-https://boxlang.io/download</pre>
+https://boxlang.io/download
+```
+
 
 ### 🙏 Thank You {#h3-36-thank-you}
 

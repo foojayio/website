@@ -44,14 +44,17 @@ To authenticate with the API, we'll generate an [API key](https://platform.opena
 
 Here is a sample API request:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="false" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">curl https://api.openai.com/v1/images/generations \
+```bash
+curl https://api.openai.com/v1/images/generations \
 -H "Content-Type: application/json" \
 -H "Authorization: Bearer $OPENAI\_API\_KEY" \
 -d '{
    "prompt": "A cute baby sea otter",
    "n": 2,
    "size": "1024x1024"
-}'</pre>
+}'
+```
+
 
 ### Create Image Response {#h3-2-create-image-response}
 
@@ -61,7 +64,8 @@ The number of objects in the *data* array will equal the optional *n* parameter 
 
 Here is a sample API response:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="json" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="false" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">{
+```json
+{
 "created": 1589478378,
 "data": [
    {
@@ -71,7 +75,9 @@ Here is a sample API response:
       "url": "https://..."
    }
 ]
-}</pre>
+}
+```
+
 
 Setting up the Quarkus Application {#h2-3-setting-up-the-quarkus-application}
 -----------------------------------------------------------------------------
@@ -84,22 +90,29 @@ To startup our application, go to and configure it by selecting the following ex
 * REST Client Reactive Jackson  
   Or using maven with the following command:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="false" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">mvn io.quarkus.platform:quarkus-maven-plugin:3.2.3.Final:create \
+```bash
+mvn io.quarkus.platform:quarkus-maven-plugin:3.2.3.Final:create \
 -DprojectGroupId=com.foojay.openai \
 -DprojectArtifactId=quarkus-openai-app \
 -Dextensions='resteasy-reactive-jackson,rest-client-reactive-jackson,resteasy-reactive' \
--DnoCode</pre>
+-DnoCode
+```
+
 
 After creating the project, add your OpenAI API Key with the following line inside the *application.properties* file.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="false" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group=""># OpenAI properties 
-openai.api.key=$OPENAI_API_KEY</pre>
+```bash
+# OpenAI properties 
+openai.api.key=$OPENAI_API_KEY
+```
+
 
 ### The Model {#h3-4-the-model}
 
 Now starting from what we have seen before, we create a class to model the API request body of OpenAI Image Generation API:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="false" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public class CreateImageRequest {
+```java
+public class CreateImageRequest {
 
     @JsonProperty("prompt")
     private String prompt;
@@ -136,23 +149,26 @@ Now starting from what we have seen before, we create a class to model the API r
     public void setSize(String size) {
         this.size = size;
     }
-}</pre>
+}
+```
+
 
 Let's define the API response class:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="false" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public class CreateImageResponse {
+```java
+public class CreateImageResponse {
 
     @JsonProperty("created")
     private Integer created;
 
     @JsonProperty("data")
-    private List&lt;Item&gt; urls;
+    private List<Item> urls;
 
-    public List&lt;Item&gt; getUrls() {
+    public List<Item> getUrls() {
         return urls;
     }
 
-    public void setUrls(List&lt;Item&gt; urls) {
+    public void setUrls(List<Item> urls) {
         this.urls = urls;
     }
 
@@ -163,11 +179,14 @@ Let's define the API response class:
     public void setCreated(Integer created) {
         this.created = created;
     }
-}</pre>
+}
+```
+
 
 And finally, the *Item* class
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="false" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public class Item {
+```java
+public class Item {
     @JsonProperty("url")
     private String url;
 
@@ -178,13 +197,16 @@ And finally, the *Item* class
     public void setUrl(String url) {
         this.url = url;
     }
-}</pre>
+}
+```
+
 
 ### REST Client {#h3-5-rest-client}
 
 To invoke the OpenAI API we define our REST client using the new REST Client Reactive, which allows a declarative way to define the API to be invoked using the new Jakarta EE and Microprofile annotations.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="false" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@RegisterRestClient(baseUri = "https://api.openai.com")
+```java
+@RegisterRestClient(baseUri = "https://api.openai.com")
 @Path("/v1")
 public interface OpenAIRestClient {
 
@@ -198,7 +220,9 @@ public interface OpenAIRestClient {
         @ClientHeaderParam(name = "Authorization", value = "Bearer ${openai.api.key}")
         CreateImageResponse generateImage(CreateImageRequest createImageRequest);
 
-}</pre>
+}
+```
+
 
 The `@RegisterRestClient` allows Quarkus to know that this interface should be available for CDI injection as a REST Client, the baseUri properties define the url the client point to. `@Path`, `@POST` are standard Jakarta REST annotations defining how to access the API.
 
@@ -208,7 +232,8 @@ To manage API auth, as we have seen before, we need to pass the API KEY inside t
 
 To test our client, let's define a REST resource that we will call from out browser.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="false" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@Path("/quarkus-openai")
+```java
+@Path("/quarkus-openai")
 public class OpenAIEndpoint {
 
     @RestClient
@@ -235,7 +260,9 @@ public class OpenAIEndpoint {
         }
         return Response.seeOther(uri).build();
     }
-}</pre>
+}
+```
+
 
 We define `OpenAIEndpoint` and inject the REST client using `@RestClient` annotation. Then we create the API `generateImage` that accepts the prompt and optionally the number of images and their size.
 
@@ -243,7 +270,10 @@ Inside the method, we build the request and pass it to our client; calling the m
 
 To see the result let's start our project with the command:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="false" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">quarkus dev</pre>
+```bash
+quarkus dev
+```
+
 
 and point the browser to this example url passing our prompt as the value of *description* parameters:
 

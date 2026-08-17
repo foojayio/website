@@ -39,17 +39,21 @@ In this section, we will see how to attach jdb to java application and start deb
 
 This is format of the jdb command:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">jdb [options] [classname] [arguments]
+```
+jdb [options] [classname] [arguments]
 
 options:    This represents the jdb command-line options (e.g. attach, launch).
 classname:  This represents the name of the main class to debug.
-arguments:  This represents the arguments that are passed to the main() method of the class.</pre>
+arguments:  This represents the arguments that are passed to the main() method of the class.
+```
+
 
 #### Sample Java App for Debugging
 
 Following is a sample Java class we are going to debug and try to understand the different features available. It is important to compile this class with the "-g" option (javac -g Test.java), which generates all the debugging information including local variables. By default, only line number and source file information is generated.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public class Test
+```java
+public class Test
 {
     public static void main(String[] args)
     {
@@ -66,23 +70,34 @@ Following is a sample Java class we are going to debug and try to understand the
         {
         }
     }
-}</pre>
+}
+```
+
 
 #### Attach jdb to the Java application
 
 The command below is the most common way to start an application with the jdb debugger. Here we are not passing any jdb options, we have only passed the class name, which doesn't require any argument:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">jdb Test</pre>
+```
+jdb Test
+```
+
 
 In this way, we start executing the main class "Test" in a similar way to how we start in a professional IDE. jdb stops the JVM before executing that class's first instruction.
 
 Another way to use the jdb command is by attaching it to a JVM that's already running. The syntax for starting JVM with debugger port is:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">java -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005 Test</pre>
+```
+java -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005 Test
+```
+
 
 To attach jdb with this remote jvm use below syntax:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">jdb -attach 5005</pre>
+```
+jdb -attach 5005
+```
+
 
 In this article, we will not see remote debugging in detail.
 
@@ -90,64 +105,89 @@ In this article, we will not see remote debugging in detail.
 
 Following is the command to attach jdb with Java program Test:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">/jdk/bin/jdb Test 
+```
+/jdk/bin/jdb Test 
 Initializing jdb ...
-&gt;</pre>
+>
+```
+
 
 Set a break point at line 5 using "stop", as follows:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">&gt; stop at Test:5
+```
+> stop at Test:5
 Deferring breakpoint Test:5.
 It will be set after the class is loaded.
-&gt;</pre>
+>
+```
+
 
 Start execution of application's main class using "run":
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">&gt; run
+```
+> run
 run  Test
 Set uncaught java.lang.Throwable
 Set deferred uncaught java.lang.Throwable
-&gt;
+>
 VM Started: Set deferred breakpoint Test:5
 
 Breakpoint hit: "thread=main", Test.main(), line=5 bci=0
-5           System.out.println("First Line of main function");</pre>
+5           System.out.println("First Line of main function");
+```
+
 
 Execute current line using "step":
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">main[1] step
-&gt; First Line of main function
+```
+main[1] step
+> First Line of main function
 Step completed: "thread=main", Test.main(), line=6 bci=8
-6            System.out.println("Second Line of main function");</pre>
+6            System.out.println("Second Line of main function");
+```
+
 
 Execute current line using "step":
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">main[1] step
-&gt; Second Line of main function
+```
+main[1] step
+> Second Line of main function
 Step completed: "thread=main", Test.main(), line=7 bci=16
-7            System.out.println("Third Line of main function");</pre>
+7            System.out.println("Third Line of main function");
+```
+
 
 Printing local variable i using "print":
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">main[1] print i
-i = 0</pre>
+```
+main[1] print i
+i = 0
+```
+
 
 Printing all local variables in current stack frame using "locals":
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">main[1] locals
+```
+main[1] locals
 Method arguments:
 args = instance of java.lang.String[0] (id=841)
 Local variables:
-i = 0</pre>
+i = 0
+```
+
 
 Dump a thread's stack using "where":
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">main[1] where
-[1] Test.main (Test.java:10)</pre>
+```
+main[1] where
+[1] Test.main (Test.java:10)
+```
+
 
 List threads in running application using "threads":
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">main[1] threads
+```
+main[1] threads
 Group system:
 (java.lang.ref.Reference$ReferenceHandler)804 Reference Handler running
 (java.lang.ref.Finalizer$FinalizerThread)805 Finalizer cond. waiting
@@ -156,21 +196,30 @@ Group system:
 Group main:
 (java.lang.Thread)1 main running
 Group InnocuousThreadGroup:
-(jdk.internal.misc.InnocuousThread)807 Common-Cleaner cond. waiting</pre>
+(jdk.internal.misc.InnocuousThread)807 Common-Cleaner cond. waiting
+```
+
 
 Continue execution from the breakpoint using `cont`:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">main[1] cont
-&gt; i: 0
-i: 2</pre>
+```
+main[1] cont
+> i: 0
+i: 2
+```
+
 
 All available commands in jdb using "help":
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">main[1] help</pre>
+```
+main[1] help
+```
+
 
 ### Command List {#h3-1-command-list}
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">connectors -- list available connectors and transports in this VM
+```
+connectors -- list available connectors and transports in this VM
 run [class [args]] -- start execution of application's main class
 threads [threadgroup] -- list threads
 thread -- set default thread
@@ -256,7 +305,9 @@ exit (or quit) -- exit debugger
 : a full class name with package qualifiers
 : a class name with a leading or trailing wildcard ('*')
 : thread number as reported in the 'threads' command
-: a Java(TM) Programming Language expression.</pre>
+: a Java(TM) Programming Language expression.
+```
+
 
 Most common syntax is supported.
 
@@ -264,7 +315,10 @@ Startup commands can be placed in either "jdb.ini" or ".jdbrc" in user.home or u
 
 Quitting jdb:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">quit</pre>
+```
+quit
+```
+
 
 ### Conclusion {#h3-2-conclusion}
 

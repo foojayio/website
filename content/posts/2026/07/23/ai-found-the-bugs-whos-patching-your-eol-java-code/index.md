@@ -157,10 +157,10 @@ The patch wave gets talked about as a future event. For end-of-life Java it star
 
 A system for software that has someone left to remediate it.
 
-*** ** * ** ***
+
 
 *Data note: Maven Central analysis covers 849,571 packages and 20.9 million published versions. A package is counted as inactive if it has published no release of any kind in the past two years: 457,087 packages (54%) meet that definition. Crude heuristic, deliberately so; a project that hasn't shipped anything in two years is not shipping your security fix in fourteen days.*
 
-*** ** * ** ***
+
 
 *Steve Poole is a Java Champion and Developer Advocate at HeroDevs, which provides security support for end-of-life open source software. He writes at noregressions.dev.*

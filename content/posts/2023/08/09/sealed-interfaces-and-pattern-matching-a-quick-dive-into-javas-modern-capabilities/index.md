@@ -26,10 +26,12 @@ In this tutorial, we will explore sealed classes, how to use them to find all su
 
 Let's start with a basic interface definition named `Shape`.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public interface Shape {
+```java
+public interface Shape {
     double getArea();
 }
-</pre>
+```
+
 
 In a conventional scenario, any class can implement `Shape`, and finding all classes that do this is not straightforward. However, with the introduction of sealed classes, we can specify precisely which classes are allowed to implement an interface.
 
@@ -38,9 +40,12 @@ Defining a Sealed Interface {#h2-0-defining-a-sealed-interface}
 
 Here is how you can declare a sealed interface with permitted subclasses:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public sealed interface Shape permits Circle, Rectangle, Square {
+```java
+public sealed interface Shape permits Circle, Rectangle, Square {
     double getArea();
-}</pre>
+}
+```
+
 
 In the example above, we declared `Shape` as a sealed interface and explicitly specified that only `Circle`, `Rectangle`, and `Square` classes can implement `Shape`. This is a powerful feature, as it gives us more control over our class hierarchy and prevents unwanted class implementations.
 
@@ -49,10 +54,13 @@ Finding All Permitted Subclasses {#h2-1-finding-all-permitted-subclasses}
 
 With a sealed interface, finding all subclasses or implementors becomes straightforward:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">var permittedSubclasses = Shape.class.getPermittedSubclasses();
-for (Class&lt;?&gt; subclass : permittedSubclasses) {
+```java
+var permittedSubclasses = Shape.class.getPermittedSubclasses();
+for (Class<?> subclass : permittedSubclasses) {
     System.out.println("subclass = " + subclass);
-}</pre>
+}
+```
+
 
 The method `getPermittedSubclasses()` returns an array of `Class` objects representing the permitted subclasses of `Shape`. We can then loop through the array and print out all the subclasses.
 
@@ -61,11 +69,14 @@ Pattern Matching with Sealed Classes {#h2-2-pattern-matching-with-sealed-classes
 
 Pattern matching is another powerful feature in Java that goes hand-in-hand with sealed classes. With pattern matching, we can perform operations based on the type of the object:  
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">switch (shape){
-    case Circle circle -&gt; System.out.println("circle = " + circle);
-    case Rectangle rectangle -&gt; System.out.println("rectangle = " + rectangle);
-    case Square square -&gt; System.out.println("square = " + square);
-}</pre>
+```java
+switch (shape){
+    case Circle circle -> System.out.println("circle = " + circle);
+    case Rectangle rectangle -> System.out.println("rectangle = " + rectangle);
+    case Square square -> System.out.println("square = " + square);
+}
+```
+
 
 In the example above, we are checking the type of shape object, and depending on the type, different operations are performed. Note that since we're using a sealed interface, we know exactly which classes could be the type of shape, so we can handle them all explicitly.
 

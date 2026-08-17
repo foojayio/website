@@ -30,7 +30,10 @@ I mentioned startup as a separate time frame, because it's useful to inspect sta
 
 I found that having this startup recording very useful to tune the readiness of an application, as we'll see after. Time bound recording at JVM startup:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">-XX:StartFlightRecording=settings=profile,duration=6m,name=app-startup,filename=/var/log/jfr/app-startup.jfr</pre>
+```
+-XX:StartFlightRecording=settings=profile,duration=6m,name=app-startup,filename=/var/log/jfr/app-startup.jfr
+```
+
 
 Eventually it's possible to tweak this recording with, other parameters like:
 
@@ -40,7 +43,8 @@ Eventually it's possible to tweak this recording with, other parameters like:
 
 In addition to these recording parameter, it can be useful to set a few JFR wide options, i.e. that affects all recordings, e.g. `-XX:FlightRecorderOptions=stackdepth=96`, which augments the size of the *captured* stack, be advised, that the bigger the number the higher the impact. In the container, checking JFR:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">❯ jcmd $(pgrep java) JFR.check
+```
+❯ jcmd $(pgrep java) JFR.check
 6:
 Recording 1: name=app-startup duration=6m (running) [1]
 ❯ jcmd $(pgrep java) JFR.check
@@ -49,7 +53,9 @@ No available recordings. [2]
 
 Use jcmd 6 JFR.start to start a recording.
 ❯ ls -lah /var/log/jfr/app-startup.jfr
--rw-r--r--   1 root root 57M May  6 22:35 /var/log/jfr/app-startup.jfr</pre>
+-rw-r--r--   1 root root 57M May  6 22:35 /var/log/jfr/app-startup.jfr
+```
+
 
 |---|----------------------------------------------------|
 | 1 | Indicates the configured 30s recording is ongoing. |
@@ -61,18 +67,24 @@ I'll show how to use this recording later in this article.
 
 Once startup has been recording, it's useful to set up a continuous recording. The good thing is that the JVM allows to define multiple recording in the command line. Let's add another `-XX:StartFlightRecording` with the `delay` parameter. Delayed continuous recording:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">-XX:StartFlightRecording=settings=profile,delay=5m,maxage=10m,name=post-startup,filename=/var/log/jfr/post-startup.jfr</pre>
+```
+-XX:StartFlightRecording=settings=profile,delay=5m,maxage=10m,name=post-startup,filename=/var/log/jfr/post-startup.jfr
+```
+
 
 This will register a continuous profiling that will start 5m after the JVM starts. And it sets a retention of 10 minutes, or a retention of the default maximum size which is `250 MiB` in JDK11.
 
 If this is the only recording, `JFR.check` will output something like that.In the container, checking JFR:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ jcmd $(pgrep java) JFR.check
+```
+$ jcmd $(pgrep java) JFR.check
 6:
 Recording 1: name=post-startup maxage=10m (delayed) [1]
 ❯ jcmd $(pgrep java) JFR.check
 6:
-Recording 1: name=app-startup maxage=10m (running) [2]</pre>
+Recording 1: name=app-startup maxage=10m (running) [2]
+```
+
 
 |---|----------------------------------------------------------------------------|
 | 1 | Indicates there's a recording that will start at some point in the future. |
@@ -90,8 +102,11 @@ The JVM source code suggests that JFR has the notion of [emergency JFR dump](htt
 
 Putting it all together, let's put these in the `JDK_JAVA_OPTIONS`. Record startup then record continuously, and dump on exit:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">-XX:StartFlightRecording=settings=profile,duration=6m,name=app-startup,dumponexit=true,filename=/var/log/jfr/app-startup.jfr
+```
+-XX:StartFlightRecording=settings=profile,duration=6m,name=app-startup,dumponexit=true,filename=/var/log/jfr/app-startup.jfr
 -XX:StartFlightRecording=settings=profile,delay=5m,maxage=10m,name=post-startup,dumponexit=true,filename=/var/log/jfr/post-startup.jfr
--XX:FlightRecorderOptions=stackdepth=96</pre>
+-XX:FlightRecorderOptions=stackdepth=96
+```
+
 
 After acquiring the record files, you are ready to exploit them. We've seen `jfr` on which it's possible to build upon, now in the upcoming sections, we'll briefly present the other elephant in the room (in a positive way), **JDK Mission Control** which empowers its users with remarkable diagnosis skills!

@@ -38,7 +38,7 @@ Our hope is that this change will keep the OpenJDK community engaged and informe
 
 <br />
 
-*** ** * ** ***
+
 
 How to add your events {#h2-0-how-to-add-your-events}
 -----------------------------------------------------
@@ -62,7 +62,7 @@ Other organizations that want to use our API directly and send events via an end
 3. Provide additional information about your organization, including its name, description, and details about the types of events it will host.
 4. Once the Foojay Calendar admin generates your API key, you can use it to access the Foojay Calendar API.
 
-*** ** * ** ***
+
 
 ### 2. Working with an API endpoint {#h3-2-2-working-with-an-api-endpoint}
 
@@ -95,7 +95,7 @@ Once the event has been successfully added, you'll receive a **201 code and even
 If there is an issue, you will receive a response with a **4xx code**:
 ![](image2-1024x480.png)
 
-*** ** * ** ***
+
 
 Example on the Frontend {#h2-4-example-on-the-frontend}
 -------------------------------------------------------
@@ -103,7 +103,7 @@ Example on the Frontend {#h2-4-example-on-the-frontend}
 Below is a description of the API fields and their corresponding elements on the front-end.
 ![](image7-1024x353.png)
 
-*** ** * ** ***
+
 
 Example Based on an Existing Event {#h2-5-example-based-on-an-existing-event}
 -----------------------------------------------------------------------------

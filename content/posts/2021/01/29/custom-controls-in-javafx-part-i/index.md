@@ -62,7 +62,8 @@ So, my personal approach is to collect all styles related to check-box from mode
 
 This file then might look similar to the following...
 
-<pre class="EnlighterJSRAW" data-enlighter-language="css">.check-box &gt; .box {}
+```css
+.check-box > .box {}
     -fx-background-color: -fx-shadow-highlight-color, -fx-outer-border, -fx-inner-border, -fx-body-color;
     -fx-background-insets: 0 0 -1 0, 0, 1, 2;
     -fx-background-radius: 3px, 3px, 2px, 1px;
@@ -71,13 +72,13 @@ This file then might look similar to the following...
     -fx-alignment: CENTER;
     -fx-content-display: LEFT;
 }
-.check-box:hover &gt; .box {
+.check-box:hover > .box {
     -fx-color: -fx-hover-base;
 }
 .check-box:armed .box {
     -fx-color: -fx-pressed-base;
 }
-.check-box:focused &gt; .box {
+.check-box:focused > .box {
     -fx-background-color: -fx-focus-color, -fx-inner-border, -fx-body-color, -fx-faint-focus-color, -fx-body-color;
     -fx-background-insets: -0.2, 1, 2, -1.4, 2.6;
     -fx-background-radius: 3, 2, 1, 4, 1;
@@ -85,11 +86,11 @@ This file then might look similar to the following...
 .check-box:disabled {
     -fx-opacity: 0.4;
 }
-.check-box:show-mnemonics &gt; .mnemonic-underline {
+.check-box:show-mnemonics > .mnemonic-underline {
     -fx-stroke: -fx-text-base-color;
 }
-.check-box:selected &gt; .box &gt; .mark,
-.check-box:indeterminate  &gt; .box &gt; .mark {
+.check-box:selected > .box > .mark,
+.check-box:indeterminate  > .box > .mark {
     -fx-background-color: -fx-mark-highlight-color, -fx-mark-color;
     -fx-background-insets: 1 0 -1 0, 0;
 }
@@ -97,23 +98,25 @@ This file then might look similar to the following...
     -fx-label-padding: 0.0em 0.0em 0.0em 0.416667em; /* 0 0 0 5 */
     -fx-text-fill: -fx-text-background-color;
 }
-.check-box &gt; .box {
+.check-box > .box {
     -fx-background-radius: 3, 2, 1;
     -fx-padding: 0.166667em 0.166667em 0.25em 0.25em; /* 2 2 3 3 */
 }
-.check-box &gt; .box &gt; .mark {
+.check-box > .box > .mark {
     -fx-background-color: null;
     -fx-padding: 0.416667em 0.416667em 0.5em 0.5em; /* 5 5 6 6 */
     -fx-shape: "M-0.25,6.083c0.843-0.758,4.583,4.833,5.75,4.833S14.5-1.5,15.917-0.917c1.292,0.532-8.75,17.083-10.5,17.083C3,16.167-1.083,6.833-0.25,6.083z";
 }
-.check-box:indeterminate &gt; .box {
+.check-box:indeterminate > .box {
     -fx-padding: 0;
 }
-.check-box:indeterminate  &gt; .box &gt; .mark {
+.check-box:indeterminate  > .box > .mark {
     -fx-shape: "M0,0H10V2H0Z";
     -fx-scale-shape: false;
     -fx-padding: 0.666667em;
-}</pre>
+}
+```
+
 
 If you are not familiar with the CSS variant that is used in JavaFX, you might want to take a look [here](https://openjfx.io/javadoc/15/javafx.graphics/javafx/scene/doc-files/cssref.html "here").
 
@@ -132,13 +135,16 @@ Here are the things that need to be changed..
 
 To get rid of the gradients is an easy task, we simply have to define some colors that we will use instead of the gradients. For that, I define them as follows in the restyled.css file:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="css">.check-box {
+```css
+.check-box {
     -material-design-color: #3f51b5;
     -material-design-color-transparent-12: #3f51b51f;
     -material-design-color-transparent-24: #3f51b53e;
     -material-design-color-transparent-40: #3f51b566;
     ...
-}</pre>
+}
+```
+
 
 The nice thing about this is that we can now use -material-design-color everywhere we need it in the CSS file as long as we are in `.check-box`.
 
@@ -146,11 +152,14 @@ The next thing to change is the checkmark itself. In JavaFX CSS you will find a 
 
 In the modena.css file it is the following code that defines the checkmark.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="css">.check-box &gt; .box &gt; .mark {
+```css
+.check-box > .box > .mark {
     -fx-background-color: null;
     -fx-padding: 0.416667em 0.416667em 0.5em 0.5em; /* 5 5 6 6 */
     -fx-shape: "M-0.25,6.083c0.843-0.758,4.583,4.833,5.75,4.833S14.5-1.5,15.917-0.917c1.292,0.532-8.75,17.083-10.5,17.083C3,16.167-1.083,6.833-0.25,6.083z";
-}</pre>
+}
+```
+
 
 As you can see it defines the `.mark`````````````inside the `````````````.box`````````````inside the `````````````.check-box`.
 
@@ -166,19 +175,23 @@ So in our case the new shape for the path should look as follows.
 
 And the CSS with the SVG path will look like follows:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="css">.check-box &gt; .box &gt; .mark {
+```css
+.check-box > .box > .mark {
     -fx-background-color: null;
     -fx-padding: 0.45em;
     -fx-scale-x: 1.1;
     -fx-scale-y: 0.8;
     -fx-shape: "M9.998,13.946L22.473,1.457L26.035,5.016L10.012,21.055L0.618,11.688L4.178,8.127L9.998,13.946Z";
-}</pre>
+}
+```
+
 
 As you can see we also adjusted the scaling to make it fit better in the existing CheckBox.
 
 The next thing we need to change is the box itself because it doesn't need a background gradient but only a border. So instead of setting a linear gradient to the background as in the modena.css, we set the background to transparent and instead set a border as follows:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="css">.check-box &gt; .box {
+```css
+.check-box > .box {
     -fx-background-color: transparent;
     -fx-background-insets: 0;
     -fx-border-color: #0000008a;
@@ -188,16 +201,21 @@ The next thing we need to change is the box itself because it doesn't need a bac
     -fx-text-fill: -fx-text-base-color;
     -fx-alignment: CENTER;
     -fx-content-display: LEFT;
-}</pre>
+}
+```
+
 
 Because the box should be filled when the CheckBox is selected we have to make the following adjustments to the CSS code:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="css">.check-box:selected &gt; .box {
+```css
+.check-box:selected > .box {
     -fx-background-color: -material-design-color;
     -fx-background-radius: 2px;
     -fx-background-insets: 0;
     -fx-border-color: transparent;
-}</pre>
+}
+```
+
 
 As you can see, we now simply fill the background and set the border to transparent
 
@@ -205,11 +223,14 @@ So the only thing that is missing right now is the hover, focused and selected s
 
 Using CSS makes it really easy to add this circle. Let's take a look at the focused state. This is what the CSS looks like:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="css">.check-box:focused &gt; .box {
+```css
+.check-box:focused > .box {
     -fx-background-color: #6161613e, transparent;
     -fx-background-insets: -14, 0;
     -fx-background-radius: 1024;
-}</pre>
+}
+```
+
 
 There is one thing which is a bit special and that is the fact that the circle is larger than the control itself. To achieve this, we need to set two background colors in `-fx-background-color: #6161613e, transparent;`````` and define the areas for these background colors by setting ````````-fx-background-insets: -14, 0;`````````. `To get a circle we now simply have to set the background radius to ``````-fx-background-radius:1024;` and we are good to go. You could set the background radius also to a smaller number but it should not be smaller than the size of the circle, otherwise you will get a rounded rectangle instead of a circle.
 
@@ -235,12 +256,15 @@ So, it's really all about playing around with the CSS insets, background colors,
 
 And so, the only thing that is now missing is to add this circle with the right color to the other states, e.g., "selected:focused", which will need the following CSS code:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="css">.check-box:selected:focused &gt; .box {
+```css
+.check-box:selected:focused > .box {
     -fx-background-color: -material-design-color-transparent-24, -material-design-color;
     -fx-background-insets: -14, 0;
     -fx-background-radius: 1024, 2px;
     -fx-border-color: transparent;
-}</pre>
+}
+```
+
 
 And the result of this change will look like this...
 

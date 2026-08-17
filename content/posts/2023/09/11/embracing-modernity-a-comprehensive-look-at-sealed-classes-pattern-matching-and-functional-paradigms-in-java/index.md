@@ -59,7 +59,8 @@ The claim that pattern matching with switch promotes dubious coding practices in
 
 **Sealed Classes**
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public sealed interface Shape permits Circle, Rectangle, Square {
+```
+public sealed interface Shape permits Circle, Rectangle, Square {
 }
 
 final class Circle implements Shape {
@@ -86,17 +87,22 @@ non-sealed class Square implements Shape {
     public Square(double side) {
         this.side = side;
     }
-}</pre>
+}
+```
+
 
 **Pattern Matching and Switch Statements**
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public static String getShapeDescription(Shape shape){
+```
+public static String getShapeDescription(Shape shape){
    return switch (shape) {
-       case Circle circle -&gt; "Circle with radius " + circle.getRadius();
-       case Rectangle rectangle -&gt; "Rectangle with width " + rectangle.getWidth() + " and height " + rectangle.getHeight();
-       case Square square -&gt; "Square with side " + square.side;
+       case Circle circle -> "Circle with radius " + circle.getRadius();
+       case Rectangle rectangle -> "Rectangle with width " + rectangle.getWidth() + " and height " + rectangle.getHeight();
+       case Square square -> "Square with side " + square.side;
    };
-}</pre>
+}
+```
+
 
 ### **Functional Paradigm and Its Relevance** {#h3-4-functional-paradigm-and-its-relevance}
 
@@ -114,7 +120,8 @@ The functional paradigm emphasizes immutability, first-class functions, and decl
 
 #### **Code Example: Functional Approach**
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public sealed interface Shape permits Circle, Rectangle, Square { }
+```
+public sealed interface Shape permits Circle, Rectangle, Square { }
 record Circle(double radius) implements Shape { }
 record Rectangle(double length, double width) implements Shape { }
 record Square(double side) implements Shape { }
@@ -124,12 +131,14 @@ record Square(double side) implements Shape { }
 public static String getShapeDescription(Shape shape) {
 
    return switch (shape) {
-      case Circle c -&gt; "This is a circle with radius: " + c.radius();
-      case Rectangle r -&gt; "This is a rectangle with length: " + r.length() + " and width: " + r.width();
-      case Square s -&gt; "This is a square with side length: " + s.side();
+      case Circle c -> "This is a circle with radius: " + c.radius();
+      case Rectangle r -> "This is a rectangle with length: " + r.length() + " and width: " + r.width();
+      case Square s -> "This is a square with side length: " + s.side();
     };
 
-}</pre>
+}
+```
+
 
 ### **Conclusion** {#h3-5-conclusion}
 

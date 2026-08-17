@@ -115,6 +115,6 @@ My goals are evident this year. I've joined a new company, so I need to learn mo
 
 Happy New Year!
 
-*** ** * ** ***
+
 
 *Originally published at [A Java Geek](https://blog.frankel.ch/2024-retrospective/) on January 5^th^, 2025*

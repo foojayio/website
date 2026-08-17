@@ -65,72 +65,87 @@ I have used it for Maven projects, and I have employed this approach to accompli
 
 ### **1. First add the following plugin to the pom.xml** {#h3-1-1-first-add-the-following-plugin-to-the-pom-xml}
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&lt;plugin&gt;
- &lt;groupId&gt;org.openrewrite.maven&lt;/groupId&gt;
- &lt;artifactId&gt;rewrite-maven-plugin&lt;/artifactId&gt;
- &lt;version&gt;5.21.0&lt;/version&gt;
- &lt;configuration&gt;
-  &lt;activeRecipes&gt; ... &lt;/activeRecipes&gt;
- &lt;/configuration&gt;
-&lt;/plugin&gt;</pre>
+```
+<plugin>
+ <groupId>org.openrewrite.maven</groupId>
+ <artifactId>rewrite-maven-plugin</artifactId>
+ <version>5.21.0</version>
+ <configuration>
+  <activeRecipes> ... </activeRecipes>
+ </configuration>
+</plugin>
+```
+
 
 ### **2. Under the activeRecipes tag, please add the following UpgradeSpringBoot_3_2 recipe** {#h3-2-2-under-the-activerecipes-tag-please-add-the-following-upgradespringboot-3-2-recipe}
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&lt;recipe&gt;org.openrewrite.java.migrate.UpgradeToJava21&lt;/recipe&gt;
-&lt;recipe&gt;org.openrewrite.java.spring.boot3.UpgradeSpringBoot_3_2&lt;/recipe&gt;</pre>
+```
+<recipe>org.openrewrite.java.migrate.UpgradeToJava21</recipe>
+<recipe>org.openrewrite.java.spring.boot3.UpgradeSpringBoot_3_2</recipe>
+```
+
 
 ### 3. And the above recipes can be activated by adding the following dependency {#h3-3-3-and-the-above-recipes-can-be-activated-by-adding-the-following-dependency}
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&lt;dependencies&gt;
-&lt;dependency&gt;
-  &lt;groupId&gt;org.openrewrite.recipe&lt;/groupId&gt;
-  &lt;artifactId&gt;rewrite-migrate-java&lt;/artifactId&gt;
-  &lt;version&gt;2.7.1&lt;/version&gt;
- &lt;/dependency&gt;
- &lt;dependency&gt;
-  &lt;groupId&gt;org.openrewrite.recipe&lt;/groupId&gt;
-  &lt;artifactId&gt;rewrite-spring&lt;/artifactId&gt;
-  &lt;version&gt;5.3.0&lt;/version&gt;
- &lt;/dependency&gt;
-&lt;/dependencies&gt;</pre>
+```
+<dependencies>
+<dependency>
+  <groupId>org.openrewrite.recipe</groupId>
+  <artifactId>rewrite-migrate-java</artifactId>
+  <version>2.7.1</version>
+ </dependency>
+ <dependency>
+  <groupId>org.openrewrite.recipe</groupId>
+  <artifactId>rewrite-spring</artifactId>
+  <version>5.3.0</version>
+ </dependency>
+</dependencies>
+```
+
 
 ### **4. Finally configuration would be** {#h3-4-4-finally-configuration-would-be}
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&lt;project&gt;
-  &lt;build&gt;
-    &lt;plugins&gt;
-      &lt;plugin&gt;
-        &lt;groupId&gt;org.openrewrite.maven&lt;/groupId&gt;
-        &lt;artifactId&gt;rewrite-maven-plugin&lt;/artifactId&gt;
-        &lt;version&gt;5.21.0&lt;/version&gt;
-        &lt;configuration&gt;
-          &lt;activeRecipes&gt;
-            &lt;recipe&gt;org.openrewrite.java.migrate.UpgradeToJava21&lt;/recipe&gt;
-            &lt;recipe&gt;org.openrewrite.java.spring.boot3.UpgradeSpringBoot_3_2&lt;/recipe&gt;
-          &lt;/activeRecipes&gt;
-        &lt;/configuration&gt;
-        &lt;dependencies&gt;
-         &lt;dependency&gt;
-	     &lt;groupId&gt;org.openrewrite.recipe&lt;/groupId&gt;
-	     &lt;artifactId&gt;rewrite-migrate-java&lt;/artifactId&gt;
-	     &lt;version&gt;2.7.1&lt;/version&gt;
-	  &lt;/dependency&gt;
-          &lt;dependency&gt;
-            &lt;groupId&gt;org.openrewrite.recipe&lt;/groupId&gt;
-            &lt;artifactId&gt;rewrite-spring&lt;/artifactId&gt;
-            &lt;version&gt;5.3.0&lt;/version&gt;
-          &lt;/dependency&gt;
-        &lt;/dependencies&gt;
-      &lt;/plugin&gt;
-    &lt;/plugins&gt;
-  &lt;/build&gt;
-&lt;/project&gt;</pre>
+```
+<project>
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.openrewrite.maven</groupId>
+        <artifactId>rewrite-maven-plugin</artifactId>
+        <version>5.21.0</version>
+        <configuration>
+          <activeRecipes>
+            <recipe>org.openrewrite.java.migrate.UpgradeToJava21</recipe>
+            <recipe>org.openrewrite.java.spring.boot3.UpgradeSpringBoot_3_2</recipe>
+          </activeRecipes>
+        </configuration>
+        <dependencies>
+         <dependency>
+	     <groupId>org.openrewrite.recipe</groupId>
+	     <artifactId>rewrite-migrate-java</artifactId>
+	     <version>2.7.1</version>
+	  </dependency>
+          <dependency>
+            <groupId>org.openrewrite.recipe</groupId>
+            <artifactId>rewrite-spring</artifactId>
+            <version>5.3.0</version>
+          </dependency>
+        </dependencies>
+      </plugin>
+    </plugins>
+  </build>
+</project>
+```
+
 
 ### **5. Perform the dryRun** {#h3-5-5-perform-the-dryrun}
 
 Performing a `rewrite:dryRun` and verifying the generated file rewrite.patch under the target/rewrite folder is considered the recommended approach.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">mvn rewrite:dryRun</pre>
+```
+mvn rewrite:dryRun
+```
+
 
 <https://github.com/bsmahi/migratespring/blob/master/target/rewrite/rewrite.patch>
 
@@ -146,7 +161,10 @@ If you observe `rewrite.patch` file you can observe the difference in the each o
 
 After gaining confidence in using the dryRun feature, you should proceed to execute the `rewrite:run` command
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">mvn rewrite:run</pre>
+```
+mvn rewrite:run
+```
+
 
 Conclusion {#h2-7-conclusion}
 -----------------------------

@@ -40,11 +40,13 @@ Three additions that materially expand what the runtime can do.
 
 The string trimming BIFs now accept an optional chars argument. Strip arbitrary character sets without reaching for `rereplace()`.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">"**Urgent**".trim( "*" )       // "Urgent"
+```java
+"**Urgent**".trim( "*" )       // "Urgent"
 "000123".ltrim( "0" )          // "123"
 "report....".rtrim( "." )      // "report"
 "//path/to/dir//".trim( "/" )  // "path/to/dir"
-</pre>
+```
+
 
 Each character in `chars` is treated as an independent trim target --- the same behavior you'd expect from Python or JavaScript. One less regex workaround.
 
@@ -52,11 +54,13 @@ Each character in `chars` is treated as an independent trim target --- the same 
 
 Class metadata can now be loaded directly from a filesystem path, bypassing the class loader and import resolution entirely.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">meta = getClassMetadata( "/opt/apps/models/User.bx" )
+```java
+meta = getClassMetadata( "/opt/apps/models/User.bx" )
 writeDump( meta.name )        // "User"
 writeDump( meta.properties )  // array of property definitions
 writeDump( meta.functions )   // array of function signatures
-</pre>
+```
+
 
 This is a cornerstone API for tooling. Linters, IDE integrations, documentation generators, and migration scanners can now inspect `.bx` and .`cfc` files without booting them into the runtime, firing `onApplicationStart`, or wrestling with import edge cases. The kind of unglamorous primitive that makes an ecosystem possible.
 
@@ -67,7 +71,8 @@ Two new arguments give you deterministic control over the environment of spawned
 * `inheritEnvironment` (boolean, default `true`) --- when `false`, the child starts with a clean slate
 * `environment` (struct) --- an explicit map of variables to inject
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">result = systemExecute(
+```java
+result = systemExecute(
     name               = "env",
     arguments          = "",
     inheritEnvironment = false,
@@ -79,7 +84,8 @@ Two new arguments give you deterministic control over the environment of spawned
 )
 
 writeOutput( result.output )
-</pre>
+```
+
 
 Before 1.13.0, every `systemExecute()` call inherited the full parent environment --- including secrets, tokens, and internal config. Security-conscious deployments now have an explicit, auditable way to lock that down.
 
@@ -105,12 +111,14 @@ This is a flagship moment. The formatter graduates from experimental to producti
 
 #### Migration tooling built in:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java"># Generate a fresh .bxformat.json with defaults
+```java
+# Generate a fresh .bxformat.json with defaults
 boxlang format --initConfig
 
 # Convert an existing .cfformat.json to .bxformat.json
 boxlang format --convertConfig --input ./
-</pre>
+```
+
 
 Async \& Concurrency Hardening {#h2-5-async-concurrency-hardening}
 ------------------------------------------------------------------
@@ -119,9 +127,11 @@ Concurrency bugs are the worst kind of bug --- intermittent, non-deterministic, 
 
 **API surface normalization** . Missing async methods are restored: `all()`, `allApply()`, `thenAsync()`, `delay()`, and `shutdownAndAwaitTermination()` now exist with correct signatures. Positional spread arguments (`...args`) are supported in calls --- unblocking a common functional-programming pattern.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">args     = [ "Ada", "Lovelace" ]
+```java
+args     = [ "Ada", "Lovelace" ]
 fullName = formatName( ...args )
-</pre>
+```
+
 
 **`BoxFuture()` lifecycle** . A `BoxFuture` created during an HTTP request used to throw scope-access errors if the parent request completed before the future resolved. The context lifecycle is now properly decoupled --- background work survives request teardown without touching stale scopes.
 
@@ -136,21 +146,27 @@ fullName = formatName( ...args )
 
 **Pass predicate is now configurable** through three channels --- pick whichever fits your deployment model:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java"># CLI
+```java
+# CLI
 boxlang server start --pass-predicate "/api/*"
-</pre>
+```
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">// boxlang.json
+
+```java
+// boxlang.json
 {
   "web": {
     "passPredicate": "/api/*"
   }
 }
-</pre>
+```
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java"># Environment variable
+
+```java
+# Environment variable
 export BOXLANG_PASS_PREDICATE="/api/*"
-</pre>
+```
+
 
 **Transfer reliability fixes:**
 
@@ -165,25 +181,31 @@ CFML compatibility is a continuous workstream, not a one-time port. This release
 
 **[SOAP](https://boxlang.ortusbooks.com/boxlang-language/reference/built-in-functions/net/soap "SOAP") header support** . Consumers can now include optional `<Header>` blocks for WS-Security, transactional metadata, and routing.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">soapService.call(
+```java
+soapService.call(
     method  = "processOrder",
     headers = { Security : { UsernameToken : { Username : "admin" } } }
 )
-</pre>
+```
+
 
 `query.setColumnNames()`. Query objects now support column renaming through a dedicated method, matching the Adobe CF and Lucee API.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">q = queryNew( "fname,lname", "varchar,varchar", [ [ "Ada", "Lovelace" ] ] )
+```java
+q = queryNew( "fname,lname", "varchar,varchar", [ [ "Ada", "Lovelace" ] ] )
 q.setColumnNames( [ "firstName", "lastName" ] )
 writeDump( q.columnList )  // "firstName,lastName"
-</pre>
+```
+
 
 **[CLI](https://boxlang.ortusbooks.com/getting-started/configuration "CLI") `.box.env` support** . The CLI now reads `~/.box.env` on startup, loading user-level environment variables that persist across sessions.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java"># ~/.box.env
+```java
+# ~/.box.env
 DB_HOST=localhost
 DB_PORT=5432
-</pre>
+```
+
 
 Runtime Hardening  
 

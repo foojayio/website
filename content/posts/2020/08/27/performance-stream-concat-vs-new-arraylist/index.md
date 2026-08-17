@@ -22,14 +22,17 @@ frozen: false
 
 During a code review, I suggested some code improvements related to JDK8+ streams. The original code looked very similar to the following:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">List&lt;Element&gt; result = content.getFancyStuffs().stream()
-  .flatMap(item -&gt; {
-        List&lt;Element&gt; objects = new ArrayList&lt;&gt;();
+```java
+List<Element> result = content.getFancyStuffs().stream()
+  .flatMap(item -> {
+        List<Element> objects = new ArrayList<>();
         objects.add(item.getElement());
         objects.addAll(item.getElements());
         return objects.stream();
       })
-  .collect(toList());</pre>
+  .collect(toList());
+```
+
 
 Some more details here --- the `getFancyStuffs()` returns a list of `FancyStuff` elements. The `FancyStuff` class contains two getters where `getElement()` returns a single `Element` whereas the `getElements()` returns (guess what?) a list of `Element`s.
 
@@ -37,13 +40,16 @@ The interesting part was the lambda which creates a new `ArrayList` and adds a s
 
 My suggestion, based on better readability, was to use the following code instead:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">List&lt;Element&gt; result = content.getFancyStuffs().stream()
-  .flatMap(fs -&gt; 
+```java
+List<Element> result = content.getFancyStuffs().stream()
+  .flatMap(fs -> 
       Stream.concat(
          Stream.of(fs.getElement()), 
          fs.getElements().stream())
       )
-  .collect(Collectors.toList());</pre>
+  .collect(Collectors.toList());
+```
+
 
 So far so good. But, after some time, I began to think about the two solutions. I asked myself: Which is faster? Which uses more memory? (The usual questions a developer is asking... don't you?)
 
@@ -55,28 +61,34 @@ So the first code part for performance measurement looks like this:
 
 ### Solution 1 {#h3-0-solution-1}
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">Benchmark
-public List&lt;Element&gt; with_new_arraylist(Container content) {
-    return content.getFancyStuffs().stream().flatMap(item -&gt; {
-      ArrayList&lt;Element&gt; objects = new ArrayList&lt;&gt;();
+```java
+Benchmark
+public List<Element> with_new_arraylist(Container content) {
+    return content.getFancyStuffs().stream().flatMap(item -> {
+      ArrayList<Element> objects = new ArrayList<>();
       objects.add(item.getElement());
       objects.addAll(item.getElements());
       return objects.stream();
     }).collect(Collectors.toList());
-}</pre>
+}
+```
+
 
 and the second part:
 
 ### Solution 2 {#h3-1-solution-2}
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@Benchmark
-public List&lt;Element&gt; with_stream_concat(Container content) {
+```java
+@Benchmark
+public List<Element> with_stream_concat(Container content) {
   return content.getFancyStuffs()
   .stream()
-  .flatMap(fs -&gt; Stream.concat(Stream.of(fs.getElement()),    
+  .flatMap(fs -> Stream.concat(Stream.of(fs.getElement()),    
          fs.getElements().stream()))
   .collect(Collectors.toList());
-}</pre>
+}
+```
+
 
 while writing the above code, I thought about some parts of it and I came up with two other possible variations.
 
@@ -84,29 +96,35 @@ while writing the above code, I thought about some parts of it and I came up wit
 
 The following example where I put elements directly into the constructor of the `ArrayList`. This means it could only happen that in rarer cases the size of the array list must be resized which depends on the number of elements in `item.getElements()`.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@Benchmark
-public List&lt;Element&gt; with_new_arraylist_constructor(Container content) {
-  return content.getFancyStuffs().stream().flatMap(item -&gt; {
-    ArrayList&lt;Element&gt; objects = new ArrayList&lt;&gt;(item.getElements());
+```java
+@Benchmark
+public List<Element> with_new_arraylist_constructor(Container content) {
+  return content.getFancyStuffs().stream().flatMap(item -> {
+    ArrayList<Element> objects = new ArrayList<>(item.getElements());
     objects.add(item.getElement());
     return objects.stream();
   }).collect(Collectors.toList());
-}</pre>
+}
+```
+
 
 ### Solution 4 {#h3-3-solution-4}
 
 Finally, this one where I already calculate the size of the final list by giving the number of elements via the constructor. This will prevent the resizing of the array list at all cause the size will fit always.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@Benchmark
-public List&lt;Element&gt; with_new_arraylist_constructor_size(Container content) {
-  return content.getFancyStuffs().stream().flatMap(item -&gt; {
-    ArrayList&lt;Element&gt; objects = 
-         new ArrayList&lt;&gt;(item.getElements().size() + 1);
+```java
+@Benchmark
+public List<Element> with_new_arraylist_constructor_size(Container content) {
+  return content.getFancyStuffs().stream().flatMap(item -> {
+    ArrayList<Element> objects = 
+         new ArrayList<>(item.getElements().size() + 1);
     objects.add(item.getElement());
     objects.addAll(item.getElements());
     return objects.stream();
   }).collect(Collectors.toList());
-}</pre>
+}
+```
+
 
 ### Measurement {#h3-4-measurement}
 

@@ -79,18 +79,21 @@ But now there are other ways to execute Java code!
 
 **Java 9** brought us `jshell` as part of the Java Development Kit (JDK). This is a command line interface to execute Java code and can, for instance, be used to test some Java code. As described in the final "Dependences" chapter of [JEP 222](https://openjdk.org/jeps/222) the code is still compiled, but this happens behinds the scenes.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">% jshell
+```
+% jshell
 |  Welcome to JShell -- Version 18.0.1
 |  For an introduction type: /help intro
 
-jshell&gt; String message = "Hello World";
-message ==&gt; "Hello World"
+jshell> String message = "Hello World";
+message ==> "Hello World"
 
-jshell&gt; "Test: " + message
-$2 ==&gt; "Test: Hello World" 
+jshell> "Test: " + message
+$2 ==> "Test: Hello World" 
 
-jshell&gt; 8*9
-$3 ==&gt; 72</pre>
+jshell> 8*9
+$3 ==> 72
+```
+
 
 **Java 11** introduced a new way to **execute single-file code**. This allows you to run "java HelloWorld.java," for instance, just like how you would execute a PHP or bash script.
 
@@ -155,7 +158,10 @@ Take whichever you want that will work on your device, as they are all based on 
 
 If you are running on macOS or Linux, you should look at **[SDKMAN](https://sdkman.io/)**. This tool can show you a complete list of all available distributions for your system and install them with a single command. For instance:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">sdk install java 17.0.4-zulu</pre>
+```
+sdk install java 17.0.4-zulu
+```
+
 
 **Fact: most of the OpenJDK distributions provide installers for the various platforms and tools like SDKMAN allow to easily install and switch between versions.**
 
@@ -206,7 +212,8 @@ Let's look at an example with two classes, `A` and `B`, having a method `doSomet
 
 When a class `C` would inherit from both `A` and `B`, calling the method `doSomething()` would introduce ambiguity as both `A` and `B` provide this method, and it's not clear for the compiler which one you want to use.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public class ExampleC implements ExampleA, ExampleB {
+```
+public class ExampleC implements ExampleA, ExampleB {
     @Override
     public void doSomething() {
         System.out.println("Output of C");
@@ -228,15 +235,23 @@ interface ExampleB {
     default void doSomething() {
         System.out.println("Output of B");
     }
-}</pre>
+}
+```
+
 
 The above code without the `doSomething`-method in `ExampleC` will generate this error:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">class ExampleC inherits unrelated defaults for doSomething() from types ExampleA and ExampleB</pre>
+```
+class ExampleC inherits unrelated defaults for doSomething() from types ExampleA and ExampleB
+```
+
 
 But by adding it, the compiler understands how we want this method to behave and will output:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">Output of C</pre>
+```
+Output of C
+```
+
 
 **Fact: Since JDK 8 multiple inheritance of behavior is available.**
 

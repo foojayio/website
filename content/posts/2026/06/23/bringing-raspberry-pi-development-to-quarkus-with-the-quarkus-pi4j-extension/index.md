@@ -76,7 +76,8 @@ One of the easiest ways to understand the value of the extension is by controlli
 
 With the Pi4J Context automatically managed by Quarkus, the code becomes straightforward:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@ApplicationScoped
+```
+@ApplicationScoped
 public class LedService {
 
     @Inject
@@ -88,7 +89,9 @@ public class LedService {
 
         led.high();
     }
-}</pre>
+}
+```
+
 
 ### Configuration Without Recompilation {#h3-3-configuration-without-recompilation}
 
@@ -100,7 +103,10 @@ With the Quarkus Pi4J extension, GPIO mappings can be configured through applica
 
 For example:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">pi4j.gpio.led.address=22</pre>
+```
+pi4j.gpio.led.address=22
+```
+
 
 The application can then inject and use the configured GPIO directly, keeping hardware details outside of the business logic.
 
@@ -119,15 +125,21 @@ Instead of manually creating GPIO instances throughout the application, develope
 
 A GPIO can be referenced by its physical address:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@Inject
+```
+@Inject
 @GPIO(address = 22)
-DigitalOutput led;</pre>
+DigitalOutput led;
+```
+
 
 Or by a logical name defined in configuration:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@Inject
+```
+@Inject
 @Named("led")
-DigitalOutput led;</pre>
+DigitalOutput led;
+```
+
 
 Using named GPIOs is particularly useful for larger projects because the application becomes independent of the actual pin assignment. If the hardware wiring changes, only the configuration needs to be updated while the Java code remains unchanged.
 

@@ -43,13 +43,17 @@ It sounds great, but it's a security risk. Imagine a site that allows the upload
 
 To prevent such catastrophic scenarios, one can set the [X-Content-Type-Options](https://owasp.org/www-project-secure-headers/#x-content-type-options) response header:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">X-Content-Type-Options: nosniff</pre>
+```
+X-Content-Type-Options: nosniff
+```
+
 
 As an example, I'll use the [Apache APISIX API Gateway](https://apisix.apache.org/). Apache APISIX is built upon a plugin architecture. As its name implies, the [response-rewrite](https://apisix.apache.org/docs/apisix/plugins/response-rewrite/) plugin allows to modify the response, including HTTP response headers.
 
 You can configure Apache APISIX via HTTP calls. Here's the command to prevent sniffing:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="shell">curl -i http://apisix:9080/apisix/admin/routes/1 -H 'X-API-KEY: edd1c9f034335f136f87ad84b625c8f1' -X PUT -d '
+```bash
+curl -i http://apisix:9080/apisix/admin/routes/1 -H 'X-API-KEY: edd1c9f034335f136f87ad84b625c8f1' -X PUT -d '
 {
   "uri": "/*",
   "plugins": {
@@ -59,7 +63,9 @@ You can configure Apache APISIX via HTTP calls. Here's the command to prevent sn
       }
     }
   }
-}'</pre>
+}'
+```
+
 
 Apache APISIX will set the header on request matching the route. Since the route is a catchall, the browser will sniff response from no response.
 
@@ -77,7 +83,8 @@ The [X-Frame-Options](https://owasp.org/www-project-secure-headers/#x-frame-opti
 
 Let's use the `response-rewrite` plugin again:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="shell">curl -i http://apisix:9080/apisix/admin/routes/1 -H 'X-API-KEY: edd1c9f034335f136f87ad84b625c8f1' -X PUT -d '
+```bash
+curl -i http://apisix:9080/apisix/admin/routes/1 -H 'X-API-KEY: edd1c9f034335f136f87ad84b625c8f1' -X PUT -d '
 {
   "uri": "/*",
   "plugins": {
@@ -87,7 +94,9 @@ Let's use the `response-rewrite` plugin again:
       }
     }
   }
-}'</pre>
+}'
+```
+
 
 At this point, compliant browsers will prevent bad actors from framing your website.
 
@@ -119,7 +128,8 @@ The biggest drawback of is that it works only after the user has visited the sit
 
 At this point, you're used to the `response-rewrite` plugin:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="shell">curl -i http://apisix:9080/apisix/admin/routes/1 -H 'X-API-KEY: edd1c9f034335f136f87ad84b625c8f1' -X PUT -d '
+```bash
+curl -i http://apisix:9080/apisix/admin/routes/1 -H 'X-API-KEY: edd1c9f034335f136f87ad84b625c8f1' -X PUT -d '
 {
   "uri": "/*",
   "plugins": {
@@ -129,7 +139,9 @@ At this point, you're used to the `response-rewrite` plugin:
       }
     }
   }
-}'</pre>
+}'
+```
+
 
 Fine-grained content control {#h2-3-fine-grained-content-control}
 -----------------------------------------------------------------
@@ -143,8 +155,10 @@ On the other hand, you may want to load additional resources yourself. Such reso
 
 Here's a sample :
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">Content-Security-Policy: default-src 'none'; script-src 'self'; connect-src 'self'; img-src 'self'; style-src 'self'; frame-ancestors 'self'; form-action 'self';
-</pre>
+```
+Content-Security-Policy: default-src 'none'; script-src 'self'; connect-src 'self'; img-src 'self'; style-src 'self'; frame-ancestors 'self'; form-action 'self';
+```
+
 
 The policy allows images, scripts, form submission, and CSS *from the same origin*. However, it disallows any other resources to load.
 
@@ -159,7 +173,8 @@ Apache APISIX offers a hot reload feature and an administrative HTTP endpoint.
 
 Now, to the configuration:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="shell">curl -i http://apisix:9080/apisix/admin/routes/1 -H 'X-API-KEY: edd1c9f034335f136f87ad84b625c8f1' -X PUT -d '
+```bash
+curl -i http://apisix:9080/apisix/admin/routes/1 -H 'X-API-KEY: edd1c9f034335f136f87ad84b625c8f1' -X PUT -d '
 {
   "uri": "/*",
   "plugins": {
@@ -169,7 +184,9 @@ Now, to the configuration:
       }
     }
   }
-}'</pre>
+}'
+```
+
 
 Conclusion {#h2-4-conclusion}
 -----------------------------

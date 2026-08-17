@@ -74,18 +74,24 @@ Imagine two teams working with different Gateway API providers, each requiring a
 
 We can now create our virtual clusters.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="shell">vcluster create teamx</pre>
+```bash
+vcluster create teamx
+```
+
 
 The output should be similar to the following:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">08:01:02 info Creating namespace vcluster-teamx
-08:01:02 info Detected local kubernetes cluster orbstack. Will deploy vcluster with a NodePort &amp; sync real nodes
+```
+08:01:02 info Creating namespace vcluster-teamx
+08:01:02 info Detected local kubernetes cluster orbstack. Will deploy vcluster with a NodePort & sync real nodes
 08:01:02 info Chart not embedded: "open chart/vcluster-0.21.1.tgz: file does not exist", pulling from helm repository.
 08:01:02 info Create vcluster teamx...
 08:01:02 info execute command: helm upgrade teamx https://charts.loft.sh/charts/vcluster-0.21.1.tgz --create-namespace --kubeconfig /var/folders/kb/g075x6tx36360yvwjrb1x6yr0000gn/T/83460322 --namespace vcluster-teamx --install --repository-config='' --values /var/folders/kb/g075x6tx36360yvwjrb1x6yr0000gn/T/1777816672
 08:01:03 done Successfully created virtual cluster teamx in namespace vcluster-teamx
 08:01:07 info Waiting for vcluster to come up...
-08:01:32 done vCluster is up and running</pre>
+08:01:32 done vCluster is up and running
+```
+
 
 Because we didn't specify any namespace, `vcluster` created one with the same name as the virtual cluster. If you prefer to set a specific namespace, use the `-n` option, .e.g._, `vcluster create mycluster -n mynamespace`.
 
@@ -95,35 +101,53 @@ We use the `vcluster connect` command to connect to a virtual cluster. However, 
 
 At this point, it's as if we were in a separate Kubernetes cluster. Team X can install the CRDs using the version that they require.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="shell">kubectl apply -f https://github.com/kubernetes-sigs/gateway-api/releases/download/v1.0.0/standard-install.yaml</pre>
+```bash
+kubectl apply -f https://github.com/kubernetes-sigs/gateway-api/releases/download/v1.0.0/standard-install.yaml
+```
+
 
 The output is:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">customresourcedefinition.apiextensions.k8s.io/gatewayclasses.gateway.networking.k8s.io created
+```
+customresourcedefinition.apiextensions.k8s.io/gatewayclasses.gateway.networking.k8s.io created
 customresourcedefinition.apiextensions.k8s.io/gateways.gateway.networking.k8s.io created
 customresourcedefinition.apiextensions.k8s.io/httproutes.gateway.networking.k8s.io created
-customresourcedefinition.apiextensions.k8s.io/referencegrants.gateway.networking.k8s.io created</pre>
+customresourcedefinition.apiextensions.k8s.io/referencegrants.gateway.networking.k8s.io created
+```
+
 
 Team Y can do the same with their version. Because we are both teams X and Y, we need to disconnect first from the virtual cluster.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="shell">vcluster disconnect</pre>
+```bash
+vcluster disconnect
+```
+
 
 You should see the result of the operation:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">08:05:29 info Successfully disconnected and switched back to the original context: orbstack</pre>
+```
+08:05:29 info Successfully disconnected and switched back to the original context: orbstack
+```
+
 
 Let's impersonate team Y, create the virtual cluster, and install another version of the CRDs:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="shell">vcluster create teamy
-kubectl apply -f https://github.com/kubernetes-sigs/gateway-api/releases/download/v1.2.0/standard-install.yaml</pre>
+```bash
+vcluster create teamy
+kubectl apply -f https://github.com/kubernetes-sigs/gateway-api/releases/download/v1.2.0/standard-install.yaml
+```
+
 
 The output of the second command is the following:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">customresourcedefinition.apiextensions.k8s.io/gatewayclasses.gateway.networking.k8s.io created
+```
+customresourcedefinition.apiextensions.k8s.io/gatewayclasses.gateway.networking.k8s.io created
 customresourcedefinition.apiextensions.k8s.io/gateways.gateway.networking.k8s.io created
 customresourcedefinition.apiextensions.k8s.io/grpcroutes.gateway.networking.k8s.io created
 customresourcedefinition.apiextensions.k8s.io/httproutes.gateway.networking.k8s.io created
-customresourcedefinition.apiextensions.k8s.io/referencegrants.gateway.networking.k8s.io created</pre>
+customresourcedefinition.apiextensions.k8s.io/referencegrants.gateway.networking.k8s.io created
+```
+
 
 Version 1.2 has a new GRPC route that is not found in version 1.0. This way, team X can now install their Gateway API provider that works with v1.0 and team Y the one that works with 1.2.
 

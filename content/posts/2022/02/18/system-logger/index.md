@@ -44,7 +44,8 @@ The API is a bit different than other logging APIs: it avoids different logging 
 
 If you don't provide any corresponding implementation on the classpath, `System.Logger` defaults to .
 
-<pre class="EnlighterJSRAW" data-enlighter-language="kotlin">public class LoggerExample {
+```kotlin
+public class LoggerExample {
 
   private static final System.Logger LOGGER = System.getLogger("c.f.b.DefaultLogger"); // 1
 
@@ -52,14 +53,19 @@ If you don't provide any corresponding implementation on the classpath, `System.
       LOGGER.log(DEBUG, "A debug message");
       LOGGER.log(INFO, "Hello world!");
   }
-}</pre>
+}
+```
+
 
 1. Get the logger
 
 Running the above snippet outputs the following:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">Dec 24, 2021 10:38:15 AM c.f.b.DefaultLogger main
-INFO: Hello world!</pre>
+```
+Dec 24, 2021 10:38:15 AM c.f.b.DefaultLogger main
+INFO: Hello world!
+```
+
 
 Compatible implementations {#h2-1-compatible-implementations}
 -------------------------------------------------------------
@@ -68,47 +74,59 @@ Most applications currently use [Log4J2](https://logging.apache.org/log4j/2.x/) 
 
 For Log4J, we need to add two dependencies:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="xml">&lt;dependencies&gt;
-    &lt;dependency&gt;
-        &lt;groupId&gt;org.apache.logging.log4j&lt;/groupId&gt;
-        &lt;artifactId&gt;log4j-core&lt;/artifactId&gt;            &lt;!-- 1 --&gt;
-        &lt;version&gt;2.17.0&lt;/version&gt;
-    &lt;/dependency&gt;
-    &lt;dependency&gt;
-        &lt;groupId&gt;org.apache.logging.log4j&lt;/groupId&gt;    &lt;!-- 2 --&gt;
-        &lt;artifactId&gt;log4j-jpl&lt;/artifactId&gt;
-        &lt;version&gt;2.17.0&lt;/version&gt;
-    &lt;/dependency&gt;
-&lt;/dependencies&gt;</pre>
+```xml
+<dependencies>
+    <dependency>
+        <groupId>org.apache.logging.log4j</groupId>
+        <artifactId>log4j-core</artifactId>            <!-- 1 -->
+        <version>2.17.0</version>
+    </dependency>
+    <dependency>
+        <groupId>org.apache.logging.log4j</groupId>    <!-- 2 -->
+        <artifactId>log4j-jpl</artifactId>
+        <version>2.17.0</version>
+    </dependency>
+</dependencies>
+```
+
 
 1. Log4J implementation
 2. Bridge from `System.Logger` to Log4J
 
 The same logging snippet as above now outputs the following:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">11:00:07.373 [main] INFO  c.f.b.DefaultLogger - Hello world!</pre>
+```
+11:00:07.373 [main] INFO  c.f.b.DefaultLogger - Hello world!
+```
+
 
 To use SLF4J instead, use the following dependencies:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="xml">&lt;dependencies&gt;
-    &lt;dependency&gt;
-        &lt;groupId&gt;org.slf4j&lt;/groupId&gt;
-        &lt;artifactId&gt;slf4j-simple&lt;/artifactId&gt;               &lt;!-- 1 --&gt;
-        &lt;version&gt;2.0.0-alpha5&lt;/version&gt;
-    &lt;/dependency&gt;
-    &lt;dependency&gt;
-        &lt;groupId&gt;org.slf4j&lt;/groupId&gt;
-        &lt;artifactId&gt;slf4j-jdk-platform-logging&lt;/artifactId&gt; &lt;!-- 2 --&gt;
-        &lt;version&gt;2.0.0-alpha5&lt;/version&gt;
-    &lt;/dependency&gt;
-&lt;/dependencies&gt;</pre>
+```xml
+<dependencies>
+    <dependency>
+        <groupId>org.slf4j</groupId>
+        <artifactId>slf4j-simple</artifactId>               <!-- 1 -->
+        <version>2.0.0-alpha5</version>
+    </dependency>
+    <dependency>
+        <groupId>org.slf4j</groupId>
+        <artifactId>slf4j-jdk-platform-logging</artifactId> <!-- 2 -->
+        <version>2.0.0-alpha5</version>
+    </dependency>
+</dependencies>
+```
+
 
 1. Basic SLF4J implementation. Any other implementation will do, *e.g.* Logback
 2. Bridge from `System.Logger` to Log4J
 
 The snippet outputs:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">[main] INFO c.f.b.DefaultLogger - Hello world!</pre>
+```
+[main] INFO c.f.b.DefaultLogger - Hello world!
+```
+
 
 Your own `System.Logger` implementation {#h2-2-your-own-system-logger-implementation}
 -------------------------------------------------------------------------------------
@@ -123,7 +141,8 @@ We can create our own based on `System.out` for educational purposes.
 
 The first step is to implement the logger itself.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public class ConsoleLogger implements System.Logger {
+```java
+public class ConsoleLogger implements System.Logger {
 
     private final String name;
 
@@ -138,7 +157,7 @@ The first step is to implement the logger itself.
 
     @Override
     public boolean isLoggable(Level level) {
-        return level.getSeverity() &gt;= Level.INFO.getSeverity();
+        return level.getSeverity() >= Level.INFO.getSeverity();
     }
 
     @Override
@@ -155,30 +174,41 @@ The first step is to implement the logger itself.
             System.out.println(MessageFormat.format(format, params));
         }
     }
-}</pre>
+}
+```
+
 
 Then, we need to code the `System.LoggerFinder`:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public class ConsoleLoggerFinder extends System.LoggerFinder {
+```java
+public class ConsoleLoggerFinder extends System.LoggerFinder {
 
-    private static final Map&lt;String, ConsoleLogger&gt; LOGGERS = new HashMap&lt;&gt;(); // 1
+    private static final Map<String, ConsoleLogger> LOGGERS = new HashMap<>(); // 1
 
     @Override
     public System.Logger getLogger(String name, Module module) {
         return LOGGERS.computeIfAbsent(name, ConsoleLogger::new);              // 2
     }
-}</pre>
+}
+```
+
 
 1. Keep a map of all existing loggers
 2. Create a logger if it doesn't already exist and store it
 
 Finally, we create a service file:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">ch.frankel.blog.ConsoleLoggerFinder</pre>
+```
+ch.frankel.blog.ConsoleLoggerFinder
+```
+
 
 And now, running the same code snippet outputs:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">Hello world!</pre>
+```
+Hello world!
+```
+
 
 Conclusion {#h2-3-conclusion}
 -----------------------------

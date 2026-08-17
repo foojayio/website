@@ -41,7 +41,8 @@ Meet the [K8ssandra Operator](https://github.com/k8ssandra/k8ssandra-operator). 
 
 Figure 1 below shows what a configuration might look like. This example would create a cluster with two data centers deployed across two different Kubernetes clusters.{#130b}
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">apiVersion: k8ssandra.io/v1alpha1
+```
+apiVersion: k8ssandra.io/v1alpha1
 kind: K8ssandraCluster
 metadata:
   name: demo
@@ -73,7 +74,9 @@ spec:
         size: 3
         stargate:
           size: 1
-          heapSize: 256M</pre>
+          heapSize: 256M
+```
+
 
 Figure 1: Creating a cluster with two data centers deployed across two different Kubernetes clusters.
 

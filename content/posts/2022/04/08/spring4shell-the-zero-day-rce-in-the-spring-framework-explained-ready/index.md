@@ -30,7 +30,8 @@ Explaining Spring4Shell {#h2-0-explaining-spring4shell}
 
 If we have a controller with a request mapping loaded into memory, we are already vulnerable to this issue. Below, you see our `GreetingController` with a `PostMapping` to `/greeting`. When we call our application in, for instance, Tomcat at `https://mydomain/myapp/greeting` it tries to transform the input to a POJO (Plain Old Java Object) which, in our case, is the `Greeting` object.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@Controller
+```
+@Controller
 public class GreetingController {
 
   @PostMapping("/greeting")
@@ -39,7 +40,9 @@ public class GreetingController {
      return "result";
   }
 
-}</pre>
+}
+```
+
 
 However, because Spring uses [serialization](https://snyk.io/blog/serialization-and-deserialization-in-java/) under the hood to map these values to the Java object, it is possible to also set other values. After some exploration, it turns out that you are able to set the properties of a class. This is interesting if you run on Tomcat.
 

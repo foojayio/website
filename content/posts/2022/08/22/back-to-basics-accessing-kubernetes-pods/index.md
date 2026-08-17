@@ -34,7 +34,8 @@ For the sake of the demo, I'll be using [Kind](https://kind.sigs.k8s.io/):
 
 I'll use a two-nodes cluster:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml">kind: Cluster
+```yaml
+kind: Cluster
 apiVersion: kind.x-k8s.io/v1alpha4
 nodes:
 - role: control-plane
@@ -42,12 +43,17 @@ nodes:
   - containerPort: 30800             # 1
     hostPort: 30800                  # 1
 - role: worker                       # 2
-- role: worker                       # 2</pre>
+- role: worker                       # 2
+```
+
 
 1. Port forwarding to cope with the Docker VM layer on Mac (see below)
 2. Two nodes
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash">kind create cluster -- config kind.yml</pre>
+```bash
+kind create cluster -- config kind.yml
+```
+
 
 ![](cluster.png)
 
@@ -55,39 +61,57 @@ Next, we need a container. It shouldn't just run and stop: Let's use the latest 
 
 With Kind, we have to preload images, so they are available.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash">docker pull nginx:1.23
-kind load docker-image nginx:1.23</pre>
+```bash
+docker pull nginx:1.23
+kind load docker-image nginx:1.23
+```
+
 
 Finally, I alias `kubetcl` to `k`:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash">alias k=kubectl</pre>
+```bash
+alias k=kubectl
+```
+
 
 No outside access by default {#h2-1-no-outside-access-by-default}
 -----------------------------------------------------------------
 
 The default situation is to provide no access to the outside of the cluster.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash">k create deployment nginx --image=nginx:1.23 # 1</pre>
+```bash
+k create deployment nginx --image=nginx:1.23 # 1
+```
+
 
 1. Create a deployment of a single pod
 
 Let's check if everything is fine:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash">k get pods</pre>
+```bash
+k get pods
+```
+
 
     NAME                     READY   STATUS    RESTARTS   AGE
     nginx-6c7985744b-c7cpl   1/1     Running   0          67s
 
 The pod has an IP, but we cannot reach it outside the cluster.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash">k get pod nginx-6c7985744b-c7cpl --template '{{.status.podIP}}'</pre>
+```bash
+k get pod nginx-6c7985744b-c7cpl --template '{{.status.podIP}}'
+```
+
 
     10.244.1.2
 
 Let's confirm the IP by running a shell inside the pod itself:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash">k exec -it nginx-6c7985744b-c7cpl -- /bin/bash
-hostname -I</pre>
+```bash
+k exec -it nginx-6c7985744b-c7cpl -- /bin/bash
+hostname -I
+```
+
 
 ```bash
 10.244.1.2
@@ -102,8 +126,11 @@ Internal IPs are not stable {#h2-2-internal-ips-are-not-stable}
 
 We created a deployment. Hence, if we delete the single pod, Kubernetes will detect it and create a new one, thanks to its self-healing capabilities.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash">k delete pod nginx-6c7985744b-c7cpl
-k get pods</pre>
+```bash
+k delete pod nginx-6c7985744b-c7cpl
+k get pods
+```
+
 
 ```bash
 NAME                     READY   STATUS    RESTARTS   AGE
@@ -112,8 +139,11 @@ nginx-6c7985744b-c6f92   1/1     Running   0          71s
 
 Let's check its new IP:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash">k exec -it nginx-6c7985744b-c6f92 -- /bin/bash
-hostname -I</pre>
+```bash
+k exec -it nginx-6c7985744b-c6f92 -- /bin/bash
+hostname -I
+```
+
 
 `10.244.2.2`
 
@@ -126,8 +156,11 @@ To solve this issue, Kubernetes provides the `Service` object. Services represen
 
 Let's expose the existing deployment with a service:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash">k expose deployment nginx --type=ClusterIP --port=8080
-k get svc</pre>
+```bash
+k expose deployment nginx --type=ClusterIP --port=8080
+k get svc
+```
+
 
 ```bash
 NAME         TYPE        CLUSTER-IP    EXTERNAL-IP   PORT(S)    AGE
@@ -148,8 +181,11 @@ Accessing a pod from outside the cluster is when things become interesting.
 
 We first need to remove the existing deployment and service.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash">k delete deployment nginx
-k delete svc nginx</pre>
+```bash
+k delete deployment nginx
+k delete svc nginx
+```
+
 
 The simplest way to allow external access is to change the service's type to `NodePort`.  
 `NodePort` adds an access port to a `ClusterIP`.
@@ -159,7 +195,8 @@ The simplest way to allow external access is to change the service's type to `No
 
 I want the pod to return its IP and hostname to demo it. We must move away from the command line to a dedicated Kubernetes manifest file because we have to configure Nginx. It results in the same state as with the command line, with the added Nginx configuration:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml">apiVersion: apps/v1
+```yaml
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: nginx
@@ -220,20 +257,27 @@ spec:
   ports:
     - port: 80
       nodePort: 30800
-</pre>
+```
+
 
 1. Override the default configuration to return hostname and IP address
 2. `NodePort` maps the pod's port to an externally accessible port
 
 Let's apply the configuration:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash">k apply -f deployment.yml</pre>
+```bash
+k apply -f deployment.yml
+```
+
 
 Note that I'm running on Mac; hence, there's a VM container around Docker, like in Windows. For this reason, Kind needs to port forward the VM to the host. Please check the [documentation](https://kind.sigs.k8s.io/docs/user/configuration/#extra-port-mappings) on how to achieve it.
 
 Once Kubernetes has scheduled the pod, we can access it on the configured port:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash">curl localhost:30800</pre>
+```bash
+curl localhost:30800
+```
+
 
     host: nginx-b69d8877c-p2s79
     IP:   10.244.2.2
@@ -248,8 +292,11 @@ The pathway of the request is as follows (notwithstanding the VM layer on Mac/Wi
 
 Now, let's increase the number of pods in our deployment to two:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash">k scale deployment nginx --replicas=2
-k get pods -o wide</pre>
+```bash
+k scale deployment nginx --replicas=2
+k get pods -o wide
+```
+
 
 Kubernetes balances the cluster so that each pod resides on a different node:
 
@@ -259,7 +306,10 @@ Kubernetes balances the cluster so that each pod resides on a different node:
 
 To which node/pod will requests be sent?
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash">while true; do curl localhost:30800; done</pre>
+```bash
+while true; do curl localhost:30800; done
+```
+
 
     host: nginx-b69d8877c-w7db4
     IP:   10.244.2.2
@@ -293,7 +343,8 @@ First, we need a `LoadBalancer` implementation. Kind has out-of-the-box integrat
 
 It's no use paraphrasing Kind's excellent documentation on [how to install MetalLB](https://kind.sigs.k8s.io/docs/user/loadbalancer/). We can update the manifest accordingly:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash">apiVersion: v1
+```bash
+apiVersion: v1
 kind: Service
 metadata:
   name: nginx
@@ -303,11 +354,16 @@ spec:
   type: LoadBalancer
   ports:
     - port: 80
-      targetPort: 30800</pre>
+      targetPort: 30800
+```
+
 
 Let's look at the services:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash">k get svc</pre>
+```bash
+k get svc
+```
+
 
     NAME         TYPE           CLUSTER-IP      EXTERNAL-IP   PORT(S)          AGE
     kubernetes   ClusterIP      10.96.0.1       <none>        443/TCP          4h37m
@@ -338,12 +394,15 @@ Installing an `Ingress` depends a lot on the implementation. The only common fac
 
 To demo, I'll use the [Apache APISIX Ingress controller](https://apisix.apache.org/docs/ingress-controller/getting-started/). I won't paraphrase the [installation instructions](https://apisix.apache.org/docs/ingress-controller/deployments/minikube/). The only difference is to set the `NodePort` to a set value:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash">helm install apisix apisix/apisix \
+```bash
+helm install apisix apisix/apisix \
   --set gateway.type=NodePort \
   --set gateway.http.nodePort=30800 \
   --set ingress-controller.enabled=true \
   --namespace ingress-apisix \
-  --set ingress-controller.config.apisix.serviceNamespace=ingress-apisix</pre>
+  --set ingress-controller.config.apisix.serviceNamespace=ingress-apisix
+```
+
 
 Note that though the documentation mentions Minikube, it's applicable to *any* local cluster, including Kind.
 
@@ -360,7 +419,8 @@ To demo, we will have two services: each one will have an underlying deployment 
 
 Let's update the topology accordingly:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml">apiVersin: apps/v1
+```yaml
+apiVersin: apps/v1
 kind: Deployment
 metadata:
   name: left
@@ -418,13 +478,16 @@ data:
                 return 200 "left\n";
             }
         }
-    }</pre>
+    }
+```
+
 
 The above snippet only describes the `left` path; it should contain a similar configuration for the `right` path.
 
 At this point, we can create the configuration to route paths to services:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml">apiVersion: apisix.apache.org/v2beta3            # 1
+```yaml
+apiVersion: apisix.apache.org/v2beta3            # 1
 kind: ApisixRoute                                # 1
 metadata:
   name: apisix-route
@@ -443,7 +506,9 @@ spec:
         - "/right"
     backends:
     - serviceName: right                         # 3
-      servicePort: 80                            # 3</pre>
+      servicePort: 80                            # 3
+```
+
 
 1. Use the `ApisixRoute` CRD created by the installation
 2. Forward request to the `left` service
@@ -455,7 +520,10 @@ Here's what it should look like. Note that I've chosen to represent only the `le
 
 To check that it works, let's curl again.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash">curl localhost:30800</pre>
+```bash
+curl localhost:30800
+```
+
 
     {"error_msg":"404 Route Not Found"}
 
@@ -463,7 +531,10 @@ It's a good sign: APISIX is responding.
 
 We can now try to curl the `right` path to ensure it will forward to the relevant pod.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash">curl localhost:30800/right</pre>
+```bash
+curl localhost:30800/right
+```
+
 
     right
 

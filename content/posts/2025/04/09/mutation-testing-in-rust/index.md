@@ -34,17 +34,18 @@ I found two crates for mutation testing in Rust:
 
 I've ported the sample code from my previous Java code to Rust:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="rust">struct LowPassPredicate {
+```rust
+struct LowPassPredicate {
     threshold: i32,
 }
 
 impl LowPassPredicate {
-    pub fn new(threshold: i32) -&gt; Self {
+    pub fn new(threshold: i32) -> Self {
         LowPassPredicate { threshold }
     }
 
-    pub fn test(&amp;self, value: i32) -&gt; bool {
-        value &lt; self.threshold
+    pub fn test(&self, value: i32) -> bool {
+        value < self.threshold
     }
 }
 
@@ -63,7 +64,9 @@ mod tests {
         let low_pass_predicate = LowPassPredicate::new(5);
         assert_eq!(low_pass_predicate.test(6), false);
     }
-}</pre>
+}
+```
+
 
 Using `cargo-mutants` is a two-step process:
 
@@ -84,65 +87,95 @@ Finding and fixing the issue {#h2-1-finding-and-fixing-the-issue}
 
 I investigated the source code and found the place where it mutates operators:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="rust">// We try replacing logical ops with == and !=, which are effectively
+```rust
+// We try replacing logical ops with == and !=, which are effectively
 // XNOR and XOR when applied to booleans. However, they're often unviable
 // because they require parenthesis for disambiguation in many expressions.
-BinOp::Eq(_) =&gt; vec![quote! { != }],
-BinOp::Ne(_) =&gt; vec![quote! { == }],
-BinOp::And(_) =&gt; vec![quote! { || }],
-BinOp::Or(_) =&gt; vec![quote! { &amp;&amp; }],
-BinOp::Lt(_) =&gt; vec![quote! { == }, quote! {&gt;}],
-BinOp::Gt(_) =&gt; vec![quote! { == }, quote! {&lt;}],
-BinOp::Le(_) =&gt; vec![quote! {&gt;}],
-BinOp::Ge(_) =&gt; vec![quote! {&lt;}],
-BinOp::Add(_) =&gt; vec![quote! {-}, quote! {*}],</pre>
+BinOp::Eq(_) => vec![quote! { != }],
+BinOp::Ne(_) => vec![quote! { == }],
+BinOp::And(_) => vec![quote! { || }],
+BinOp::Or(_) => vec![quote! { && }],
+BinOp::Lt(_) => vec![quote! { == }, quote! {>}],
+BinOp::Gt(_) => vec![quote! { == }, quote! {<}],
+BinOp::Le(_) => vec![quote! {>}],
+BinOp::Ge(_) => vec![quote! {<}],
+BinOp::Add(_) => vec![quote! {-}, quote! {*}],
+```
+
 
 Indeed, `, but not to ``<=`. I forked the repo and updated the code accordingly:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="rust">BinOp::Lt(_) =&gt; vec![quote! { == }, quote! {&gt;}, quote!{ &lt;= }],
-BinOp::Gt(_) =&gt; vec![quote! { == }, quote! {&lt;}, quote!{ =&gt; }],</pre>
+```rust
+BinOp::Lt(_) => vec![quote! { == }, quote! {>}, quote!{ <= }],
+BinOp::Gt(_) => vec![quote! { == }, quote! {<}, quote!{ => }],
+```
+
 
 I installed the new forked version:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash">cargo install --git https://github.com/nfrankel/cargo-mutants.git --locked</pre>
+```bash
+cargo install --git https://github.com/nfrankel/cargo-mutants.git --locked
+```
+
 
 I reran the command:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash">cargo mutants</pre>
+```bash
+cargo mutants
+```
+
 
 The output is the following:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">Found 5 mutants to test
+```
+Found 5 mutants to test
 ok       Unmutated baseline in 0.1s build + 0.3s test
  INFO Auto-set test timeout to 20s
-MISSED   src/lib.rs:11:15: replace &lt; with &lt;= in LowPassPredicate::test in 0.2s build + 0.2s test
-5 mutants tested in 2s: 1 missed, 4 caught</pre>
+MISSED   src/lib.rs:11:15: replace < with <= in LowPassPredicate::test in 0.2s build + 0.2s test
+5 mutants tested in 2s: 1 missed, 4 caught
+```
+
 
 You can find the same information in the `missed.txt` file. I thought I fixed it and was ready to make a Pull Request to the `cargo-mutants` repo. I just needed to add the test at the boundary:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="rust">#[test]
+```rust
+#[test]
 fn should_return_false_when_equals_limit() {
     let low_pass_predicate = LowPassPredicate::new(5);
     assert_eq!(low_pass_predicate.test(5), false);
-}</pre>
+}
+```
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash">cargo test</pre>
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">running 3 tests
+```bash
+cargo test
+```
+
+
+```
+running 3 tests
 test tests::should_return_false_when_above_limit ... ok
 test tests::should_return_false_when_equals_limit ... ok
 test tests::should_return_true_when_under_limit ... ok
 
-test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s</pre>
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+```
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash">cargo mutants</pre>
+
+```bash
+cargo mutants
+```
+
 
 And all mutants are killed!
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">Found 5 mutants to test
+```
+Found 5 mutants to test
 ok       Unmutated baseline in 0.1s build + 0.2s test
  INFO Auto-set test timeout to 20s
-5 mutants tested in 2s: 5 caught</pre>
+5 mutants tested in 2s: 5 caught
+```
+
 
 Conclusion {#h2-2-conclusion}
 -----------------------------
@@ -157,6 +190,6 @@ I learned more about `cargo-mutants` and could improve the code in the process.
 * [Welcome to cargo-mutants](https://mutants.rs)
 * [GitHub cargo-mutants](https://github.com/sourcefrog/cargo-mutants)
 
-*** ** * ** ***
+
 
 *Originally published at [A Java Geek](https://blog.frankel.ch/mutation-testing-rust/) on March 30^th^, 2025*

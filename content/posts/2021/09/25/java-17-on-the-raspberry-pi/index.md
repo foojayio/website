@@ -46,16 +46,20 @@ For this post, I used the `/raspios_arm64/images/` version of 2021-05-28 and "bu
 
 After booting we can check the version in the terminal:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ lsb_release -d
+```
+$ lsb_release -d
 Description:	Debian GNU/Linux 10 (buster)
 $ uname -a
-Linux raspberrypi 5.10.17-v8+ #1414 SMP PREEMPT Fri Apr 30 13:23:25 BST 2021 aarch64 GNU/Linux</pre>
+Linux raspberrypi 5.10.17-v8+ #1414 SMP PREEMPT Fri Apr 30 13:23:25 BST 2021 aarch64 GNU/Linux
+```
+
 
 ### SDKMAN {#h3-1-sdkman}
 
 [SDKMAN](https://sdkman.io/) is very useful tool to quickly install a new Java version, or switch between already installed versions. With a few terminal commands, we can install it on our Raspberry Pi.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ sudo apt install zip
+```
+$ sudo apt install zip
 $ curl -s "https://get.sdkman.io" | bash
 $ source "$HOME/.sdkman/bin/sdkman-init.sh"
 $ sdk version
@@ -66,11 +70,13 @@ $ sdk version
 ================================================================================
 
 SDKMAN 5.12.2
-</pre>
+```
+
 
 OK nice, we have SDKMAN running on the Raspberry Pi now! There is an impressive list of Java editions you can install! This is the list on 23th of September 2021 you get with the command `sdk list java`:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">================================================================================
+```
+================================================================================
 Available Java Versions
 ================================================================================
  Vendor        | Use | Version      | Dist    | Status     | Identifier
@@ -130,11 +136,14 @@ Available Java Versions
 Use the Identifier for installation:
 
     $ sdk install java 11.0.3.hs-adpt
-================================================================================</pre>
+================================================================================
+```
+
 
 Let's install the Temurin version 17 provided by [adoptium.net](https://adoptium.net) (formerly known as adoptopenjdk.net).
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">pi@raspberrypi:~ $ java -version
+```
+pi@raspberrypi:~ $ java -version
 openjdk version "11.0.12" 2021-07-20
 OpenJDK Runtime Environment (build 11.0.12+7-post-Debian-2deb10u1)
 OpenJDK 64-Bit Server VM (build 11.0.12+7-post-Debian-2deb10u1, mixed mode)
@@ -151,7 +160,8 @@ pi@raspberrypi:~ $ java -version
 openjdk version "17" 2021-09-14
 OpenJDK Runtime Environment Temurin-17+35 (build 17+35)
 OpenJDK 64-Bit Server VM Temurin-17+35 (build 17+35, mixed mode, sharing)
-</pre>
+```
+
 
 Indeed `sdk install java 17.0.0-tem` is all that's needed to switch to Java 17!
 
@@ -159,23 +169,29 @@ Indeed `sdk install java 17.0.0-tem` is all that's needed to switch to Java 17!
 
 As no official Java 17 is available at the time this article was written, an other approach is to install an early access version provided by jdk.java.net. At 23th of August an EA-version was available and could be installed based on [this step-by-step description on opensource.com](https://opensource.com/article/19/11/install-java-linux):
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ wget https://download.java.net/java/GA/jdk17/0d483333a00540d886896bac774ff48b/35/GPL/openjdk-17_linux-aarch64_bin.tar.gz
+```
+$ wget https://download.java.net/java/GA/jdk17/0d483333a00540d886896bac774ff48b/35/GPL/openjdk-17_linux-aarch64_bin.tar.gz
 $ mkdir ~/bin
-$ echo PATH=$PATH:$HOME/bin &gt;&gt; ~/.bashrc
+$ echo PATH=$PATH:$HOME/bin >> ~/.bashrc
 $ source ~/.bashrc
 $ tar --extract --file openjdk-17_linux-aarch64_bin.tar.gz --directory=$HOME/bin
 $ bin/jdk-17/bin/java -version
 openjdk version "17" 2021-09-14
 OpenJDK Runtime Environment (build 17+35-2724)
-OpenJDK 64-Bit Server VM (build 17+35-2724, mixed mode, sharing)</pre>
+OpenJDK 64-Bit Server VM (build 17+35-2724, mixed mode, sharing)
+```
+
 
 Now let's make it easier to start Java:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ sudo update-alternatives --install "/usr/bin/java" "java" "/home/pi/bin/jdk-17/bin/java" 1
+```
+$ sudo update-alternatives --install "/usr/bin/java" "java" "/home/pi/bin/jdk-17/bin/java" 1
 $ java -version
 openjdk version "17" 2021-09-14
 OpenJDK Runtime Environment (build 17+35-2724)
-OpenJDK 64-Bit Server VM (build 17+35-2724, mixed mode, sharing)</pre>
+OpenJDK 64-Bit Server VM (build 17+35-2724, mixed mode, sharing)
+```
+
 
 Look at that, Java 17 on the Raspberry Pi! 😉
 
@@ -183,22 +199,31 @@ Look at that, Java 17 on the Raspberry Pi! 😉
 
 Check "[Java Development with VS Code on the Raspberry Pi](https://foojay.io/today/java-development-with-vs-code-on-the-raspberry-pi/)" for more info about using VSC on the Raspberry Pi, but in short install like this:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ sudo apt update
-$ sudo apt install code</pre>
+```
+$ sudo apt update
+$ sudo apt install code
+```
+
 
 Now let's try the smallest Java program you can write to check and print the Java version...
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public class HelloWorld {
+```java
+public class HelloWorld {
     public static void main(String[] args) {
         System.out.println("Hello World, greeting you with Java version: " 
             + System.getProperty("java.version"));
     }
-}</pre>
+}
+```
+
 
 And, finally, as we can run Java files without compiling them, since Java 11, we can just run it like this:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ java HelloWorld.java
-Hello World, greeting you with Java version: 17</pre>
+```
+$ java HelloWorld.java
+Hello World, greeting you with Java version: 17
+```
+
 
 ![](Screenshot-2021-08-21-at-15.40.18.png) Hello World Java code running on Raspberry Pi with JDK 17
 
@@ -210,7 +235,8 @@ Now let's see if we can run the minimal example project of the Pi4J project to c
 
 This is fully described on "[Minimal example application](https://pi4j.com/getting-started/minimal-example-application/)", but this is the *TL;DR;* version, open a terminal and run the following commands to install Maven, get the demo code, build and run:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">$ sudo apt install maven
+```
+$ sudo apt install maven
 $ git clone https://github.com/Pi4J/pi4j-example-minimal.git
 $ cd pi4j-example-minimal/
 $ mvn clean package
@@ -228,7 +254,9 @@ LED low
 ...
 LED low
 LED high
-Button was pressed for the 5th time</pre>
+Button was pressed for the 5th time
+```
+
 
 Conclusion {#h2-5-conclusion}
 -----------------------------

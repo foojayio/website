@@ -36,7 +36,8 @@ As software developers, we know the importance of logging 📝. But scattering l
 
 Look at this example:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">public void updateUser(User user) {
+```
+public void updateUser(User user) {
 
   // Log method entry
   log.info("Updating user {}", user.getId()); 
@@ -46,15 +47,20 @@ Look at this example:
 
   // Log method exit
   log.info("User updated");
-}</pre>
+}
+```
+
 
 Without AOP, your logs might be a mix of different actions, making it hard to filter what's important:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">INFO: Updating user 12345
+```
+INFO: Updating user 12345
 
 INFO: User updated 12345
 
-INFO: Deleted user 67890</pre>
+INFO: Deleted user 67890
+```
+
 
 The same logger call shows up everywhere. Yuck!
 
@@ -73,33 +79,39 @@ Here are examples and code snippets that illustrate how to use this aspect:
 
 First, you would define a custom annotation **@Loggable** which could look something like this:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">@Target({ElementType.METHOD, ElementType.TYPE})
+```
+@Target({ElementType.METHOD, ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Loggable {
     boolean showValues() default false;
     String[] showParameters() default {};
     String[] hideParameters() default {};
-}</pre>
+}
+```
+
 
 Then define the *[LoggingAspect](https://github.com/mezocode/healthcare-management-system/blob/main/src/main/java/com/mezocode/healthcare/shared/aop/LoggingAspect.java)*.
 
 Finally, utilize the smart **@Loggable** in your application at either the class or method level, e.g., [DoctorController](https://github.com/mezocode/healthcare-management-system/blob/main/src/main/java/com/mezocode/healthcare/doctor/controller/DoctorController.java):
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">@Loggable(hideParameters = {"name"})
+```
+@Loggable(hideParameters = {"name"})
 public class DoctorController {
 
     private final DoctorService doctorService;
 
     @GetMapping
     @LogExecution
-    public List&lt;DoctorDto&gt; getAllDoctors() {
+    public List<DoctorDto> getAllDoctors() {
         return doctorService.getAllDoctors();
     }
     @GetMapping("/{id}")
     public DoctorDto getDoctor(@PathVariable Long id, @RequestParam String name, @RequestParam String date) {
         return doctorService.getDoctor(id, name, date);
     }
-}</pre>
+}
+```
+
 
 Now logging is cleanly separated from core code via AOP!
 
@@ -107,11 +119,14 @@ After Code Sample Output
 
 With AOP, your logs are now consistent and centralized:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">DoctorController -&gt; getAllDoctors()
+```
+DoctorController -> getAllDoctors()
 
 Execution time of getAllDoctors is 104ms
 
-DoctorController -&gt; getDoctor(id = 1, date = mydate)</pre>
+DoctorController -> getDoctor(id = 1, date = mydate)
+```
+
 
 This output shows method names and parameters being logged systematically, and the name parameter is hidden, thanks to AOP.
 
@@ -122,19 +137,25 @@ We can take it further by controlling what gets logged based on metadata.
 
 For example:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">@Loggable(showParams = {"id"}, hideParams = {"password"})
+```
+@Loggable(showParams = {"id"}, hideParams = {"password"})
 public void updateUser(Long id, String password) {
 // User update logic
-}</pre>
+}
+```
+
 
 **Smart Logging Technique Output** {#h2-3-smart-logging-technique-output}
 -------------------------------------------------------------------------
 
 With smart logging annotations, you get precise control over logged information:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">INFO: Entering UserService.updateUser with params [id=12345] 
+```
+INFO: Entering UserService.updateUser with params [id=12345] 
 
-INFO: Exiting UserService.updateUser</pre>
+INFO: Exiting UserService.updateUser
+```
+
 
 Passwords are masked, while IDs are shown, enhancing both security and clarity.
 

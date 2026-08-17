@@ -74,8 +74,9 @@ Without further ado, here it is:
 
 Having drawn the diagram, we can locate pretty quickly where the issue is:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public abstract class AbstractCacheRecordStore&lt;R extends CacheRecord, CRM extends SampleableCacheRecordMap&lt;Data, R&gt;&gt;
-        implements ICacheRecordStore, EvictionListener&lt;Data, R&gt; {
+```java
+public abstract class AbstractCacheRecordStore<R extends CacheRecord, CRM extends SampleableCacheRecordMap<Data, R>>
+        implements ICacheRecordStore, EvictionListener<Data, R> {
 
     protected long onRecordAccess(Data key, R record, ExpiryPolicy expiryPolicy, long now) {
         record.setAccessTime(now);                                            // 1
@@ -84,7 +85,9 @@ Having drawn the diagram, we can locate pretty quickly where the issue is:
     }
 
     //...
-}</pre>
+}
+```
+
 
 1. The `DefaultRecordStore` reads the `Record`, which triggers the update of the last access time.
 

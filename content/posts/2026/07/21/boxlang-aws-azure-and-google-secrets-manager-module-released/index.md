@@ -48,7 +48,8 @@ One Pattern to Rule Them All {#h2-0-one-pattern-to-rule-them-all}
 
 No matter which cloud provider you use, the interface is the same:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">// AWS
+```java
+// AWS
 dbPassword = getSystemSetting( "aws.DB_PASSWORD" )
 
 // Azure
@@ -56,14 +57,17 @@ dbPassword = getSystemSetting( "azure.DB-PASSWORD" )
 
 // Google
 dbPassword = getSystemSetting( "google.DB_PASSWORD" )
-</pre>
+```
+
 
 That's it. BoxLang's `getSystemSetting()` BIF understands cloud provider namespaces. Your application code never knows where the secret lives -- and that's the point. Swap providers, rotate credentials, move between environments: your code doesn't change.
 
 Need a fallback for local development?
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">apiKey = getSystemSetting( "aws.API_KEY", "local-dev-key" )
-</pre>
+```java
+apiKey = getSystemSetting( "aws.API_KEY", "local-dev-key" )
+```
+
 
 If the secret can't be resolved (no credentials, wrong environment, network issue), BoxLang falls back gracefully to your default. No exceptions to swallow, no conditional logic to write.
 
@@ -72,7 +76,8 @@ InstallationInstallation {#h2-1-installationinstallation}
 
 ### CommandBoxVia CommandBox {#h3-2-commandboxvia-commandbox}
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java"># AWS
+```java
+# AWS
 box install bx-plus,bx-aws-secrets
 
 # Azure
@@ -80,14 +85,17 @@ box install bx-plus,bx-azure-secrets
 
 # Google
 box install bx-plus,bx-google-secrets
-</pre>
+```
+
 
 ### Via BoxLang OS Binary {#h3-3-via-boxlang-os-binary}
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">install-bx-module bx-plus bx-aws-secrets
+```java
+install-bx-module bx-plus bx-aws-secrets
 install-bx-module bx-plus bx-azure-secrets
 install-bx-module bx-plus bx-google-secrets
-</pre>
+```
+
 
 All three modules require an active BoxLang+ license. See plans at boxlang.io/plans.
 
@@ -106,7 +114,8 @@ This means a multi-tenant server can run multiple applications, each with their 
 
 ### Per-Application Configuration (Application.bx) {#h3-5-per-application-configuration-application-bx}
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">class {
+```java
+class {
     this.name = "myApp"
 
     // AWS example
@@ -133,11 +142,13 @@ This means a multi-tenant server can run multiple applications, each with their 
         cacheTTL        : 300
     }
 }
-</pre>
+```
+
 
 ### Global Server Configuration (boxlang.json) {#h3-6-global-server-configuration-boxlang-json}
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">{
+```java
+{
   "modules": {
     "bxaws-secrets": {
       "settings": {
@@ -161,14 +172,16 @@ This means a multi-tenant server can run multiple applications, each with their 
     }
   }
 }
-</pre>
+```
+
 
 Real-World Usage: Datasource Configuration {#h2-7-real-world-usage-datasource-configuration}
 --------------------------------------------------------------------------------------------
 
 This is where it gets satisfying. No more credentials in your datasource config, no more environment variable juggling:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">class {
+```java
+class {
     this.name = "myApp"
 
     this.datasources = {
@@ -180,7 +193,8 @@ This is where it gets satisfying. No more credentials in your datasource config,
         }
     }
 }
-</pre>
+```
+
 
 Rotate the secret in AWS Secrets Manager, and the next cache expiry cycle picks it up automatically. No redeployment, no config change, no 2am wake-up call.
 
@@ -200,7 +214,8 @@ All three modules have first-class local development stories.
 
 #### AWS with LocalStack:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">{
+```java
+{
   "modules": {
     "bxaws-secrets": {
       "settings": {
@@ -212,25 +227,32 @@ All three modules have first-class local development stories.
     }
   }
 }
-</pre>
+```
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">aws --endpoint-url=http://localhost:4566 secretsmanager create-secret \
+
+```java
+aws --endpoint-url=http://localhost:4566 secretsmanager create-secret \
   --name DB_PASSWORD \
   --secret-string "local-password"
-</pre>
+```
+
 
 #### Azure with Azure CLI:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">az login
+```java
+az login
 az keyvault secret set --vault-name my-vault --name DB-PASSWORD --value "local-password"
-</pre>
+```
+
 
 #### Google with gcloud:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">gcloud auth application-default login
+```java
+gcloud auth application-default login
 gcloud secrets create DB_PASSWORD --replication-policy="automatic"
-gcloud secrets versions add DB_PASSWORD --data-file=- &lt;&lt;&lt; "local-password"
-</pre>
+gcloud secrets versions add DB_PASSWORD --data-file=- <<< "local-password"
+```
+
 
 In each case, the same application code that runs in production works locally with no changes. That's the contract.
 
@@ -257,11 +279,13 @@ These modules are available exclusively to **BoxLang+** and **BoxLang++** subscr
 Get Started {#h2-12-get-started}
 --------------------------------
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java"># Pick your provider and install
+```java
+# Pick your provider and install
 box install bx-plus,bx-aws-secrets
 box install bx-plus,bx-azure-secrets
 box install bx-plus,bx-google-secrets
-</pre>
+```
+
 
 Full documentation:
 

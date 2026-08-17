@@ -89,13 +89,16 @@ I chose the former, and it works as expected. However, I made a huge mistake: I 
 
 The next step is to configure proxying in HA if you didn't do it before. **By default, HA discards requests that come from proxies.** To let `cloudflared` (the process, not Cloudflare itself) proxy request, we need to explicitly allow it, and specify which IPs we allow.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml">http:
+```yaml
+http:
   server_port: 443                                          #1
   ssl_certificate: /ssl/fullchain.pem                       #1
   ssl_key: /ssl/privkey.pem                                 #1
   use_x_forwarded_for: true
   trusted_proxies:
-    - 172.30.33.0/24                                        #2</pre>
+    - 172.30.33.0/24                                        #2
+```
+
 
 1. Legacy configuration for the Let's Encrypt add-on
 2. Allow requests from the local `cloudflared` process
@@ -143,7 +146,7 @@ In both cases, we benefit not only from Cloudflare SSL certificates but also fro
 * [Cloudflare Tunnel](https://developers.cloudflare.com/cloudflare-one/connections/connect-networks/)
 * [Cloudflared](https://github.com/brenner-tobias/addon-cloudflared)
 
-*** ** * ** ***
+
 
 *Originally published at [A Java Geek](https://blog.frankel.ch/home-assistant/6/) on May 11^th^, 2025*
 

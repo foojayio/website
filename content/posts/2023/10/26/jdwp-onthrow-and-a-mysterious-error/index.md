@@ -36,7 +36,8 @@ Recap {#h2-0-recap}
 
 We use a [simple example program](https://github.com/parttimenerd/java-dbg/blob/64855dde4531dfa5038ffca5aff9320f989df379/src/test/java/OnThrowAndJCmd.java) with throws and catches the exception `Ex` twice:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public class OnThrowAndJCmd {
+```java
+public class OnThrowAndJCmd {
 
     public static void main(String[] args) throws InterruptedException {
         System.out.println("Hello world!");
@@ -50,7 +51,7 @@ We use a [simple example program](https://github.com/parttimenerd/java-dbg/blob/
         } catch (Ex e) {
             System.out.println("Caught");
         }
-        for (int i = 0; i &lt; 1000; i++) {
+        for (int i = 0; i < 1000; i++) {
             System.out.print(i + " ");
             Thread.sleep(2000);
         }
@@ -61,23 +62,31 @@ class Ex extends RuntimeException {
     public Ex(String msg) {
         super(msg);
     }
-}</pre>
+}
+```
+
 
 We then use one terminal to run the program with the JDWP agent attached and the other to run JDB:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">java "-agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=*:5005,onthrow=Ex,launch=exit" src/test/java/OnThrowAndJCmd.java
+```bash
+java "-agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=*:5005,onthrow=Ex,launch=exit" src/test/java/OnThrowAndJCmd.java
 
 # in another terminal
-jdb -attach 5005</pre>
+jdb -attach 5005
+```
+
 
 Then JDB prints us the expected error trace:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">Exception in thread "event-handler" java.lang.NullPointerException: Cannot invoke "com.sun.jdi.ObjectReference.referenceType()" because the return value of "com.sun.jdi.event.ExceptionEvent.exception()" is null
+```
+Exception in thread "event-handler" java.lang.NullPointerException: Cannot invoke "com.sun.jdi.ObjectReference.referenceType()" because the return value of "com.sun.jdi.event.ExceptionEvent.exception()" is null
         at jdk.jdi/com.sun.tools.example.debug.tty.TTY.exceptionEvent(TTY.java:171)
         at jdk.jdi/com.sun.tools.example.debug.tty.EventHandler.exceptionEvent(EventHandler.java:295)
         at jdk.jdi/com.sun.tools.example.debug.tty.EventHandler.handleEvent(EventHandler.java:133)
         at jdk.jdi/com.sun.tools.example.debug.tty.EventHandler.run(EventHandler.java:78)
-        at java.base/java.lang.Thread.run(Thread.java:1583)</pre>
+        at java.base/java.lang.Thread.run(Thread.java:1583)
+```
+
 
 This might be, and I'm foreshadowing, the reason why IDEs like [IntelliJ IDEA](https://www.jetbrains.com/idea/) don't support attaching to a JDWP agent with `onthrow` enabled.
 
@@ -102,7 +111,8 @@ So clearly, none of the properties should be null in our case. Exception events 
 
 For good measure, we also tell JDB to get notified of all other triggered `Ex` exceptions (`> catch Ex`), so we can obtain the printed information for the initial and the second exception:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="cpp" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">Exception event: 
+```cpp
+Exception event: 
     thread: 0x0
     clazz: 0x0
     method: 0x0
@@ -120,7 +130,9 @@ Exception event:
     object: 0x12b50fb12
     catch_clazz: 0x12b50fb1a
     catch_method: 0x12b188290
-    catch_location: 37</pre>
+    catch_location: 37
+```
+
 
 This clearly shows that the exception that started the debugging session was not sent correctly.
 
@@ -130,7 +142,8 @@ How does onthrow work? {#h2-2-how-does-onthrow-work}
 When the JDWP agent starts, it registers a JVMTI Exception event callback called [cbEarlyException](https://github.com/openjdk/jdk/blob/ad7a8e86e0334390f87ae44cf749d2b47f1409a1/src/jdk.jdwp.agent/share/native/libjdwp/debugInit.c#L430) via [SetEventCallBacks](https://github.com/openjdk/jdk/blob/ad7a8e86e0334390f87ae44cf749d2b47f1409a1/src/jdk.jdwp.agent/share/native/libjdwp/debugInit.c#L326):
 > > 
 
-<pre class="EnlighterJSRAW" data-enlighter-language="cpp" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">void JNICALL Exception(
+```cpp
+void JNICALL Exception(
   jvmtiEnv *jvmti_env,
   JNIEnv* jni_env, 
   jthread thread,
@@ -138,7 +151,9 @@ When the JDWP agent starts, it registers a JVMTI Exception event callback called
   jlocation location, 
   jobject exception, 
   jmethodID catch_method, 
-  jlocation catch_location)</pre>
+  jlocation catch_location)
+```
+
 
 >
 > Exception events are generated whenever an exception is first detected in a Java programming language method.
@@ -154,7 +169,8 @@ Fixing the bug {#h2-3-fixing-the-bug}
 
 Now that we know exactly what went wrong, we can create an issue in the official JDK Bug System (JDK-8317920). Then, we can fix it by creating the event in the `cbEarlyException` handler itself and passing it to the new `opt_info` parameter of the `initialize` method (see [GitHub](https://github.com/openjdk/jdk/blob/3bcb66dc4fb8bbdcf526145acded53f68d1842f8/src/jdk.jdwp.agent/share/native/libjdwp/debugInit.c#L429)):
 
-<pre class="EnlighterJSRAW" data-enlighter-language="cpp" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">static void JNICALL
+```cpp
+static void JNICALL
 cbEarlyException(jvmtiEnv *jvmti_env, JNIEnv *env,
         jthread thread, jmethodID method, jlocation location,
         jobject exception,
@@ -168,16 +184,18 @@ cbEarlyException(jvmtiEnv *jvmti_env, JNIEnv *env,
     info.method = method;
     info.location = location;
     info.object = exception;
-    if (gdata-&gt;vthreadsSupported) {
+    if (gdata->vthreadsSupported) {
         info.is_vthread = isVThread(thread);
     }
     info.u.exception.catch_clazz = getMethodClass(jvmti_env, catch_method);
     info.u.exception.catch_method = catch_method;
     info.u.exception.catch_location = catch_location;
     // ... // check if exception matches
-    initialize(env, thread, EI_EXCEPTION, &amp;info);
+    initialize(env, thread, EI_EXCEPTION, &info);
     // ...
-}</pre>
+}
+```
+
 
 The related Pull Request on GitHub is [#16145](https://github.com/openjdk/jdk/pull/16145). It will hopefully be merged soon. The last time someone reported and fixed an issue related to the `onthrow` option [was in early 2002](https://bugs.openjdk.org/browse/JDK-4554734), so it is the first change in more than 20 years. The issue was about `onthrow` requiring the `launch` option to be present.
 
@@ -186,14 +204,17 @@ It works (even with your IDE) {#h2-4-it-works-even-with-your-ide}
 
 With this fix in place, it works. JDB even selects the main thread as the current thread:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">➜ jdb -attach 5005
+```bash
+➜ jdb -attach 5005
 Set uncaught java.lang.Throwable
 Set deferred uncaught java.lang.Throwable
 Initializing jdb ...
-&gt; 
+> 
 Exception occurred: Ex (to be caught at: OnThrowAndJCmd.main(), line=7 bci=18)"thread=main", OnThrowAndJCmd.main(), line=6 bci=17
 
-main[1]</pre>
+main[1]
+```
+
 
 But does fixing this issue also mean that IDEs like IntelliJ IDEA now support attaching to agents with `onthrow` enabled? Yes, at least if we set a breakpoint somewhere after the first exception has been thrown (like with the `onjcmd` option):
 ![](https://mostlynerdless.de/wp-content/uploads/2023/10/Screenshot-2023-10-11-at-13.00.17-2000x1111.png)

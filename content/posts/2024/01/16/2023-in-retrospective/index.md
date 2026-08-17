@@ -100,7 +100,7 @@ I fulfilled the two first goals but unfortunately failed the last item. I have o
 
 I lack imagination, so I'll keep the same goals for this year as last year's and add exploring the API7.ai ecosystem as well. Let's see how it fares. Happy New Year!
 
-*** ** * ** ***
+
 
 *Originally published on [A Java Geek](https://blog.frankel.ch/2023-retrospective/) on January 7^th^, 2024*
 

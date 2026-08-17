@@ -26,7 +26,8 @@ When we pass an object reference to a method, we are changing the object that is
 
 Considering the explanation above, can you solve the following **Java Challenge**? What is going to happen when you run the following code?
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">public class ArrayChallenge2 {
+```java
+public class ArrayChallenge2 {
     public static void main(String... doYourBest) {
         int[] anyArray = new int[5];
         anyArray[0] = 0;
@@ -42,12 +43,13 @@ Considering the explanation above, can you solve the following **Java Challenge*
         Arrays.stream(anyArray).forEach(System.out::println);
     }
     private static void doSum(int[] anyArray) {
-        for (int i = 0; i &lt; anyArray.length; i++) {
+        for (int i = 0; i < anyArray.length; i++) {
             anyArray[i] = anyArray[i] + 2;
         }
     }
 }
-</pre>
+```
+
 
 a) 0  
 
@@ -101,16 +103,21 @@ The key concept here is that we are using object references instead of real obje
 
 After executing the following code:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">int[] anyArray = new int[5]; // We are instantiating an Array object here.
+```java
+int[] anyArray = new int[5]; // We are instantiating an Array object here.
 int[] otherArray = anyArray; // We are assigning the reference to the same Array object.
-// ….we have 2 variables pointing to the same object.</pre>
+// ….we have 2 variables pointing to the same object.
+```
+
 
 Arrays in Java are objects, so when we pass an Array to a method we are accessing the object. Any change made inside the doSum method is going to reflect the Array object. Therefore, we will be applying the sum of 2 on the same Array object twice.
 
 At the line we are printing the result of this Java Challenge, we are transforming anyArray to a stream. Then we are using the forEach method from the Stream class to print each element from anyArray. We are using the concept of method reference which is a syntax sugar to use less code and do more in Java. In short, the System.out::println code will print every element from anyArray that is being iterated in the stream.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">Arrays.stream(anyArray).forEach(System.out::println);
-</pre>
+```java
+Arrays.stream(anyArray).forEach(System.out::println);
+```
+
 
 If you prefer, you can watch the FULL explanation video about several Java quizzes on the Java Challengers channel:
 

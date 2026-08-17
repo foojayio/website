@@ -73,7 +73,8 @@ AspectJ requires some setup in the build configuration and IDE. However once con
 
 Here's a simple logging aspect using AspectJ:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">import org.aspectj.lang.annotation.Aspect;
+```
+import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.JoinPoint;
@@ -99,7 +100,9 @@ public class LoggingAspect {
     public void logAfter(JoinPoint joinPoint) {
         System.out.println("Exiting Method: " + joinPoint.getSignature().getName() + " in " + joinPoint.getTarget().getClass().getSimpleName());
     }
-}</pre>
+}
+```
+
 
 The pointcut expression identifies the join points (method executions) where advice will be applied.
 

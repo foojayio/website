@@ -132,7 +132,8 @@ The sources of this application are [available on GitHub in the same repository 
 
 To separate the generic code from your specific WiFi and HiveMQ Cloud credentials, a separate file is used. Create a file `secrets.py` and save it to the Pico with the following content, using your login, password, etc.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">secrets = {
+```
+secrets = {
    'ssid' : 'WIFI_NETWORK_NAME',
    'password' : 'WIFI_PASSWORD',
    'timezone' : 'Europe/Brussels',
@@ -140,13 +141,16 @@ To separate the generic code from your specific WiFi and HiveMQ Cloud credential
    'mqtt_key' : 'HIVEMQ_PASSWORD',
    'broker' : 'YOUR_INSTANCE.hivemq.cloud',
    'port' : 8883
-}</pre>
+}
+```
+
 
 #### Main code
 
 Below you find the full code for this project. I tried to explain every step by adding comments and prints. Create a new file in Mu, copy this code and save it to the Pico as `code.py`.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">import time
+```
+import time
 import board
 import busio
 import adafruit_hcsr04
@@ -257,7 +261,9 @@ while not killed:
         continue
 
     # Sleep a second
-    time.sleep(1)</pre>
+    time.sleep(1)
+```
+
 
 Because `code.py` is the default filename for the main code, this file will be executed directly, or you can soft-reset the board with `CTRL+D` in the terminal of Mu.
 
@@ -265,7 +271,8 @@ Because `code.py` is the default filename for the main code, this file will be e
 
 In the terminal of Mu, the print-output is shown.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">Auto-reload is on. Simply save files over USB to run them or enter REPL to disable.
+```
+Auto-reload is on. Simply save files over USB to run them or enter REPL to disable.
 code.py output:
 Checking ESP32
     ESP32 found and in idle mode
@@ -286,7 +293,9 @@ Starting the distance measurement
     Published a message to:  pico/distance
     Message for queue: {"value": 106.352}
     Published a message to:  pico/distance
-    Message for queue: {"value": 107.202}</pre>
+    Message for queue: {"value": 107.202}
+```
+
 
 Adding the data to our JavaFX dashboard {#h2-7-adding-the-data-to-our-javafx-dashboard}
 ---------------------------------------------------------------------------------------
@@ -297,11 +306,15 @@ With a few small changes, we can now add the data of the Pico messages to our Ja
 
 First, we add a new variable:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">private final Tile gaucheDistancePico;</pre>
+```
+private final Tile gaucheDistancePico;
+```
+
 
 Inside the constructor, we initialize the tile similar to the existing ones and define a subscription to the topic where the Pico publishes its distance measurements.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">gaucheDistancePico = TileBuilder.create()
+```
+gaucheDistancePico = TileBuilder.create()
     .skinType(Tile.SkinType.GAUGE)
     .prefSize(TILE_WIDTH, TILE_HEIGHT)
     .title("Distance Pico")
@@ -313,11 +326,14 @@ client.toAsync().subscribeWith()
     .topicFilter("pico/distance")
     .qos(MqttQos.AT_LEAST_ONCE)
     .callback(this::handlePicoData)
-    .send();</pre>
+    .send();
+```
+
 
 One last additional method is needed to parse the received data and update the tile:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public void handlePicoData(Mqtt5Publish message) {
+```
+public void handlePicoData(Mqtt5Publish message) {
     var sensorData = new String(message.getPayloadAsBytes());
     logger.info("Pico distance data: {}", sensorData);
     try {
@@ -326,7 +342,9 @@ One last additional method is needed to parse the received data and update the t
     } catch (JsonProcessingException ex) {
         logger.error("Could not parse the data to JSON: {}", ex.getMessage());
     }
-}</pre>
+}
+```
+
 
 ### Extended layout {#h3-9-extended-layout}
 
@@ -343,6 +361,6 @@ HiveMQ Cloud is a great (and free up to 100 devices!) way to experiment with mes
 
 I hope these three posts can help you to get started to create your own project!
 
-*** ** * ** ***
+
 
 *This series has been written on request of HiveMQ and was originally published on the [HiveMQ Blog](https://www.hivemq.com/blog/mqtt-raspberrypi-part01-sensor-data-hivemqcloud-java-pi4j/).*

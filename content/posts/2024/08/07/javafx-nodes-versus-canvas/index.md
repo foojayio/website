@@ -20,7 +20,7 @@ enlighterjs: true
 frozen: false
 ---
 
-*** ** * ** ***
+
 
 **Recently I was working on an article about Azul Zulu with JavaFX support for ARM systems, like the Raspberry Pi. As you can see in [this video](https://www.youtube.com/watch?v=XhDQvkcYJ88), I found out my little test application with a lot of "bouncing balls" started losing performance on the Raspberry Pi with more than 1000 of those balls.**
 
@@ -49,8 +49,11 @@ Summarized:
 
 These are a few typical components that extend from Node:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">Label label = new Label("Hello World!");
-Button button = new Button("Click Me!");</pre>
+```
+Label label = new Label("Hello World!");
+Button button = new Button("Click Me!");
+```
+
 
 ### JavaFX Canvas {#h3-2-javafx-canvas}
 
@@ -64,23 +67,30 @@ Summarized:
 
 This is an example that draws a rectangle:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">Canvas canvas = new Canvas(400, 300);
+```
+Canvas canvas = new Canvas(400, 300);
 GraphicsContext gc = canvas.getGraphicsContext2D();
 gc.setFill(Color.BLUE);
-gc.fillRect(50, 50, 100, 70);</pre>
+gc.fillRect(50, 50, 100, 70);
+```
+
 
 Demo Code {#h2-3-demo-code}
 ---------------------------
 
 The demo application can be found in [this GitHub Gist](https://gist.github.com/FDelporte/c74cdf59ecd9ef1b14df86e08faa0c56). The value at the beginning of the code defines which approach is used:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">private static int TYPE_OF_TEST = 1; // 1 = Nodes, 2 = Canvas</pre>
+```
+private static int TYPE_OF_TEST = 1; // 1 = Nodes, 2 = Canvas
+```
+
 
 ### Using Nodes {#h3-4-using-nodes}
 
 When you use Nodes, a Pane is added to the screen in which balls gets added. Each ball is a Circle Node with a move method:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">class BallNode extends Circle {
+```
+class BallNode extends Circle {
     private final Color randomColor = Color.color(Math.random(), Math.random(), Math.random());
     private final int size = r.nextInt(1, 10);
     private double dx = r.nextInt(1, 5);
@@ -104,21 +114,24 @@ When you use Nodes, a Pane is added to the screen in which balls gets added. Eac
     }
 
     private boolean hitRightOrLeftEdge() {
-        return (getLayoutX() &lt; (scene.getX() + getRadius())) ||
-            (getLayoutX() &gt; (scene.getWidth() - getRadius()));
+        return (getLayoutX() < (scene.getX() + getRadius())) ||
+            (getLayoutX() > (scene.getWidth() - getRadius()));
     }
 
     private boolean hitTopOrBottom() {
-        return (getLayoutY() &lt; (scene.getY() - getRadius())) ||
-            (getLayoutY() &gt; (scene.getHeight() - getRadius() - 60));
+        return (getLayoutY() < (scene.getY() - getRadius())) ||
+            (getLayoutY() > (scene.getHeight() - getRadius() - 60));
     }
-}</pre>
+}
+```
+
 
 ### Using Canvas {#h3-5-using-canvas}
 
 When you use the Canvas, each Ball is a data object, and all balls get drawn on the Canvas at every tick:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">class BallDrawing {
+```
+class BallDrawing {
     private final Color fill = Color.color(Math.random(), Math.random(), Math.random());
     private final int size = r.nextInt(1, 10);
     private double x = r.nextInt(APP_WIDTH);
@@ -138,30 +151,33 @@ When you use the Canvas, each Ball is a data object, and all balls get drawn on 
     }
 
     private boolean hitRightOrLeftEdge() {
-        return (x &lt; (scene.getX() + size)) ||
-            (x &gt; (scene.getWidth() - size));
+        return (x < (scene.getX() + size)) ||
+            (x > (scene.getWidth() - size));
     }
 
     private boolean hitTopOrBottom() {
-        return (y &lt; (scene.getY() - size)) ||
-            (y &gt; (scene.getHeight() - size - 60));
+        return (y < (scene.getY() - size)) ||
+            (y > (scene.getHeight() - size - 60));
     }
 
     // Getters
-}</pre>
+}
+```
+
 
 ### Moving the Objects {#h3-6-moving-the-objects}
 
 The application uses a Timeline to add more objects, and move them, every five milliseconds:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">Timeline timeline = new Timeline(new KeyFrame(Duration.millis(5), t -&gt; onTick()));
+```
+Timeline timeline = new Timeline(new KeyFrame(Duration.millis(5), t -> onTick()));
 timeline.setCycleCount(Timeline.INDEFINITE);
 timeline.play();
 
 private void onTick() {
     if (TYPE_OF_TEST == 1) {
         // Add ball nodes to the pane
-        for (var i = 0; i &lt; ADD_BALLS_PER_TICK; i++) {
+        for (var i = 0; i < ADD_BALLS_PER_TICK; i++) {
             paneBalls.getChildren().add(new BallNode());
         }
 
@@ -171,7 +187,7 @@ private void onTick() {
         }
     } else if (TYPE_OF_TEST == 2) {
         // Add balls to the list of balls to be drawn
-        for (var i = 0; i &lt; ADD_BALLS_PER_TICK; i++) {
+        for (var i = 0; i < ADD_BALLS_PER_TICK; i++) {
             ballDrawings.add(new BallDrawing());
         }
 
@@ -185,7 +201,9 @@ private void onTick() {
             context.fillOval(ballDrawing.getX(), ballDrawing.getY(), ballDrawing.getSize(),  ballDrawing.getSize());
         }
     } 
-}</pre>
+}
+```
+
 
 ### Executing the Applications {#h3-7-executing-the-applications}
 

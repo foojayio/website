@@ -34,14 +34,15 @@ Let's start with a small example to motivate this. Consider for a moment that we
 
 We develop this service using Javalin:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public static void main(String[] args) throws Exception {
+```java
+public static void main(String[] args) throws Exception {
     // create a server with 4 threads in the thread pool                                                                               
-    Javalin.create(conf -&gt; {                                                  
-            conf.jetty.server(() -&gt;                                           
+    Javalin.create(conf -> {                                                  
+            conf.jetty.server(() ->                                           
                 new Server(new QueuedThreadPool(4))                           
             );                                                                
             })                                                                
-            .get("/fib/{fib}", ctx -&gt; {                                       
+            .get("/fib/{fib}", ctx -> {                                       
                 handleRequest(ctx, newSessionId());                           
             })                                                                
             .start(7070);                                                     
@@ -57,11 +58,13 @@ static void handleRequest(Context ctx, int sessionId) {
 }                                                                             
 
 public static int fib(int n) {                                                
-    if (n &lt;= 1) {                                                             
+    if (n <= 1) {                                                             
         return n;                                                             
     }                                                                         
     return fib(n - 1) + fib(n - 2);                                           
-}                                                                                                                                                     </pre>
+}
+```
+
 
 This is a pretty standard tiny web endpoint, minus all the user and session handling. It lets the customer query the n-th Fibonacci number by querying /fib/{n}.
 
@@ -69,7 +72,8 @@ Our built-in logging prints n and the session ID on standard out, but what if we
 
 This is where custom JFR events come in handy:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public class SessionEvent extends jdk.jfr.Event {
+```java
+public class SessionEvent extends jdk.jfr.Event {
     int sessionId;
     int n;
 
@@ -77,13 +81,16 @@ This is where custom JFR events come in handy:
         this.sessionId = sessionId;
         this.n = n;
     }
-}</pre>
+}
+```
+
 
 The custom event class extends the j[dk.jfr.Event](https://docs.oracle.com/en/java/javase/21/docs/api/jdk.jfr/jdk/jfr/Event.html) class and simply define a few fields for the custom data. These fields can be annotated with `@Label("Human readable label")` and `@Description("Longer description")` to document them.
 
 We can now use this event class to record the relevant data in the `handleRequest` method:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">static void handleRequest(Context ctx, int sessionId) {            
+```java
+static void handleRequest(Context ctx, int sessionId) {            
     int n = Integer.parseInt(ctx.pathParam("fib"));                
     System.out.printf("Handle session %d n = %d\n", sessionId, n);
     // create event 
@@ -93,7 +100,9 @@ We can now use this event class to record the relevant data in the `handleReques
     ctx.result("fibonacci: " + fib(n));
     // add end and store                          
     event.commit();                                                
-}                                                                  </pre>
+}
+```
+
 
 This small addition records the timing and duration of each request, as well as `n` and the session ID in the JFR profile. The sample code, including a request generator, can be found on [GitHub](https://github.com/parttimenerd/custom-jfr-event-sample).
 

@@ -36,10 +36,13 @@ One of the most universally hated features in Java is checked exceptions. They a
 
 The biggest problem with checked exceptions is the fact that they don't fit nicely into functional syntax. This is true for nullability as well (which I will discuss shortly). That's a fair complaint. Functional programming support was tacked onto Java and in terms of exception handling it was poorly done. The Java compiler could have detected checked exceptions and required an error callback. This was a mistake made when these capabilities were introduced in Java 8. E.g. if these APIs were better introduced into Java we could have written code like this:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">api.call1()
-    .call2(() -&gt; codeThatThrowsACheckedException())
-    .errorHandler(ex -&gt; handleError(ex))
-    .finalCall();</pre>
+```
+api.call1()
+    .call2(() -> codeThatThrowsACheckedException())
+    .errorHandler(ex -> handleError(ex))
+    .finalCall();
+```
+
 
 The compiler could force us to write the `errorHandler` callback if it was missing which would satisfy the spirit of the checked exceptions perfectly. This is possible because checked exceptions are a feature of the compiler, not the JVM. A compiler could detect a checked exception in the lambda and require a specially annotated exception handling callback.
 
@@ -111,8 +114,11 @@ This used to be a bigger issue in the past but looking at a typical Java file vs
 
 I don't get that. I love the semicolon requirement and am always baffled by people who have a problem with that. As an author it lets me format my code while ignoring line length. I can line break wherever I want, the semicolon is the part that matters. If anything, I would have loved to cancel the ability to write conditional statements without the curly braces e.g.:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">if(..) x();
-else y();</pre>
+```
+if(..) x();
+else y();
+```
+
 
 That's terrible. I block these in my style requirements; they are a recipe for disaster with an unclear beginning or end.
 

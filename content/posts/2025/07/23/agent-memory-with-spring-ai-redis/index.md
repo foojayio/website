@@ -91,17 +91,21 @@ The full application can be found on GitHub: <https://github.com/redis-developer
 
 From a Spring Boot application, add the following dependencies to your Maven or Gradle file:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">implementation("org.springframework.ai:spring-ai-transformers:1.0.0")
+```
+implementation("org.springframework.ai:spring-ai-transformers:1.0.0")
 implementation("org.springframework.ai:spring-ai-starter-vector-store-redis")
 implementation("org.springframework.ai:spring-ai-starter-model-openai")
 
-implementation("com.redis.om:redis-om-spring:1.0.0-RC3")</pre>
+implementation("com.redis.om:redis-om-spring:1.0.0-RC3")
+```
+
 
 ### 2. Define the Memory model {#h3-6-2-define-the-memory-model}
 
 The core of our implementation is the Memory class that represents items stored in long-term memory:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">data class Memory(
+```
+data class Memory(
     val id: String? = null,
     val content: String,
     val memoryType: MemoryType,
@@ -113,13 +117,16 @@ The core of our implementation is the Memory class that represents items stored 
 enum class MemoryType {
     EPISODIC,  // Personal experiences and preferences
     SEMANTIC   // General knowledge and facts
-}</pre>
+}
+```
+
 
 ### 3. Configure the Vector Store {#h3-7-3-configure-the-vector-store}
 
 We'll use Spring AI's `RedisVectorStore` to store and search vector embeddings of memories:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">@Configuration
+```
+@Configuration
 class MemoryVectorStoreConfig {
 
     @Bean
@@ -142,7 +149,9 @@ class MemoryVectorStoreConfig {
             .vectorAlgorithm(RedisVectorStore.Algorithm.HSNW)
             .build()
     }
-}</pre>
+}
+```
+
 
 Let's break this down:
 
@@ -159,7 +168,8 @@ Let's break this down:
 
 The MemoryService handles storing and retrieving memories from Redis:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">@Service
+```
+@Service
 class MemoryService(
     private val memoryVectorStore: RedisVectorStore
 ) {
@@ -215,10 +225,10 @@ class MemoryService(
         userId: String? = null,
         limit: Int = 5,
         distanceThreshold: Float = 0.9f
-    ): List&lt;StoredMemory&gt; {
+    ): List<StoredMemory> {
         // Build filter expression
         val b = FilterExpressionBuilder()
-        val filterList = mutableListOf&lt;FilterExpressionBuilder.Op&gt;()
+        val filterList = mutableListOf<FilterExpressionBuilder.Op>()
 
         // Add user filter
         val effectiveUserId = userId ?: systemUserId
@@ -231,9 +241,9 @@ class MemoryService(
 
         // Combine filters
         val filterExpression = when (filterList.size) {
-            0 -&gt; null
-            1 -&gt; filterList[0]
-            else -&gt; filterList.reduce { acc, expr -&gt; b.and(acc, expr) }
+            0 -> null
+            1 -> filterList[0]
+            else -> filterList.reduce { acc, expr -> b.and(acc, expr) }
         }?.build()
 
         // Execute search
@@ -246,8 +256,8 @@ class MemoryService(
         )
 
         // Transform results to StoredMemory objects
-        return searchResults.mapNotNull { result -&gt;
-            if (distanceThreshold &lt; (result.score ?: 1.0)) {
+        return searchResults.mapNotNull { result ->
+            if (distanceThreshold < (result.score ?: 1.0)) {
                 val metadata = result.metadata
                 val memoryObj = Memory(
                     id = result.id,
@@ -267,7 +277,9 @@ class MemoryService(
             }
         }
     }
-}</pre>
+}
+```
+
 
 Key features of the memory service:
 
@@ -288,7 +300,8 @@ The retrieval advisor runs before your LLM call. It takes the user's current mes
 
 The retrieval advisor runs before LLM calls. It takes the user's current message, performs a vector similarity search over Redis, and injects the most relevant memories into the system portion of the prompt so the model can ground its answer.{#ee9b}
 
-<pre class="EnlighterJSRAW" data-enlighter-language="kotlin">@Component
+```kotlin
+@Component
 class LongTermMemoryRetrievalAdvisor(
   private val memoryService: MemoryService,
 ) : CallAdvisor, Ordered {
@@ -312,11 +325,11 @@ class LongTermMemoryRetrievalAdvisor(
     val memoryBlock = buildString {
       appendLine("Use the MEMORY below if relevant. Keep answers factual and concise.")
       appendLine("----- MEMORY -----")
-      memories.forEachIndexed { i, m -&gt; appendLine("${i+1}. ${m.memory.content}") }
+      memories.forEachIndexed { i, m -> appendLine("${i+1}. ${m.memory.content}") }
       appendLine("------------------")
     }
 
-    val enrichedPrompt = req.prompt().augmentSystemMessage { sys -&gt;
+    val enrichedPrompt = req.prompt().augmentSystemMessage { sys ->
       val existing = sys.text
       sys.mutate()
         .text(
@@ -336,20 +349,23 @@ class LongTermMemoryRetrievalAdvisor(
 
     return chain.nextCall(enrichedReq)
   }
-}</pre>
+}
+```
+
 
 ### 5.2 Advisor for Long-term memory recording {#0151}
 
 The recorder advisor runs after the assistant responds. It looks at the last user message and the assistant's reply, asks the model to extract atomic, useful facts (episodic or semantic), deduplicates them, and stores them in Redis.{#8206}
 
-<pre class="EnlighterJSRAW" data-enlighter-language="kotlin">@Component
+```kotlin
+@Component
 class LongTermMemoryRecorderAdvisor(
   private val memoryService: MemoryService,
   private val chatModel: ChatModel
 ) : CallAdvisor, Ordered {
 
   data class MemoryCandidate(val content: String, val type: MemoryType, val userId: String?)
-  data class ExtractionResult(val memories: List&lt;MemoryCandidate&gt; = emptyList())
+  data class ExtractionResult(val memories: List<MemoryCandidate> = emptyList())
 
   private val extractorConverter = BeanOutputConverter(ExtractionResult::class.java)
 
@@ -415,7 +431,7 @@ class LongTermMemoryRecorderAdvisor(
 
     // 4) Persist memories (MemoryService handles dedupe/thresholding)
     val userId = (req.context["ltm_user_id"] as? String) // optional per-call param
-    parsed.memories.forEach { m -&gt;
+    parsed.memories.forEach { m ->
       val owner = m.userId ?: userId
       memoryService.storeMemory(
         content = m.content,
@@ -426,13 +442,16 @@ class LongTermMemoryRecorderAdvisor(
 
     return res
   }
-}</pre>
+}
+```
+
 
 ### 6. Plugging the advisors in our ChatClient {#41a4}
 
 In our `ChatConfig` class, we will configure our `ChatClient` as:{#0f6b}
 
-<pre class="EnlighterJSRAW" data-enlighter-language="kotlin">@Bean
+```kotlin
+@Bean
 fun chatClient(
     chatModel: ChatModel,
     // chatMemory: ChatMemory, (Necessary for short-term memory)
@@ -445,13 +464,16 @@ fun chatClient(
             longTermRecorder,
             longTermMemoryRetrieval
         ).build()
-}</pre>
+}
+```
+
 
 ### 7. Implement the Chat Service {#h3-13-7-implement-the-chat-service}
 
 Since the advisors have been plugged in the `ChatClient` itself, we don't need to worry about managing memory ourselves when interacting with the LLM. The only thing we need to make sure is that with every interaction we send the expected parameters, namely the session or user ID, so that the advisors know which history to look at.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="kotlin">@Service
+```kotlin
+@Service
 class ChatService(
     private val chatClient: ChatClient,
     private val shortTermMemoryRepository: ShortTermMemoryRepository,
@@ -484,7 +506,7 @@ class ChatService(
         )
     }
 
-    fun getConversationHistory(userId: String): List&lt;Message?&gt; {
+    fun getConversationHistory(userId: String): List<Message?> {
         return chatMemoryRepository.findByConversationId(userId)
     }
 
@@ -492,13 +514,16 @@ class ChatService(
         shortTermMemoryRepository.deleteById(userId)
         log.info("Cleared conversation history for user $userId from Redis")
     }
-}</pre>
+}
+```
+
 
 ### 8. Configure the Agent System Prompt {#h3-14-8-configure-the-agent-system-prompt}
 
 The agent is configured with a system prompt that explains its capabilities and access to different types of memory:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">@Bean
+```
+@Bean
 fun travelAgentSystemPrompt(): Message {
     val promptText = """
         You are a travel assistant helping users plan their trips. You remember user preferences
@@ -516,13 +541,16 @@ fun travelAgentSystemPrompt(): Message {
     """.trimIndent()
 
     return SystemMessage(promptText)
-}</pre>
+}
+```
+
 
 ### 9. Create the REST Controller {#h3-15-9-create-the-rest-controller}
 
 The REST controller exposes endpoints for chat and memory management:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">@RestController
+```
+@RestController
 @RequestMapping("/api")
 class ChatController(private val chatService: ChatService) {
 
@@ -536,20 +564,20 @@ class ChatController(private val chatService: ChatService) {
     }
 
     @GetMapping("/history/{userId}")
-    fun getHistory(@PathVariable userId: String): List&lt;MessageDto&gt; {
-        return chatService.getConversationHistory(userId).map { message -&gt;
+    fun getHistory(@PathVariable userId: String): List<MessageDto> {
+        return chatService.getConversationHistory(userId).map { message ->
             MessageDto(
                 role = when (message) {
-                    is SystemMessage -&gt; "system"
-                    is UserMessage -&gt; "user"
-                    is AssistantMessage -&gt; "assistant"
-                    else -&gt; "unknown"
+                    is SystemMessage -> "system"
+                    is UserMessage -> "user"
+                    is AssistantMessage -> "assistant"
+                    else -> "unknown"
                 },
                 content = when (message) {
-                    is SystemMessage -&gt; message.content
-                    is UserMessage -&gt; message.content
-                    is AssistantMessage -&gt; message.content
-                    else -&gt; ""
+                    is SystemMessage -> message.content
+                    is UserMessage -> message.content
+                    is AssistantMessage -> message.content
+                    else -> ""
                 }
             )
         }
@@ -559,7 +587,9 @@ class ChatController(private val chatService: ChatService) {
     fun clearHistory(@PathVariable userId: String) {
         chatService.clearConversationHistory(userId)
     }
-}</pre>
+}
+```
+
 
 Running the Demo {#h2-16-running-the-demo}
 ------------------------------------------
@@ -568,18 +598,27 @@ The easiest way to run the demo is with Docker Compose, which sets up all requir
 
 ### Step 1: Clone the repository {#h3-17-step-1-clone-the-repository}
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">git clone https://github.com/redis/redis-springboot-recipes.git
-cd redis-springboot-recipes/artificial-intelligence/agent-long-term-memory-with-spring-ai</pre>
+```
+git clone https://github.com/redis/redis-springboot-recipes.git
+cd redis-springboot-recipes/artificial-intelligence/agent-long-term-memory-with-spring-ai
+```
+
 
 ### Step 2: Configure your environment {#h3-18-step-2-configure-your-environment}
 
 Create a `.env` file with your OpenAI API key:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">OPENAI_API_KEY=sk-your-api-key</pre>
+```
+OPENAI_API_KEY=sk-your-api-key
+```
+
 
 ### Step 3: Start the services {#h3-19-step-3-start-the-services}
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">docker compose up --build</pre>
+```
+docker compose up --build
+```
+
 
 This will start:
 

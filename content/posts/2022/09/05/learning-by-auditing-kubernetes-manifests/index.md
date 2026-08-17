@@ -103,14 +103,17 @@ I think this one is pretty well-known, but it's still worth repeating. A contain
 
 While both provide process isolation, it's not foolproof. If a container running as root is compromised, an attacker could use the extra permissions to attack further. To fix the issue, use the following snippet:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml">apiVersion: v1
+```yaml
+apiVersion: v1
 kind: Pod
 metadata:
-  name: &lt;name&gt;
+  name: <name>
 spec:
     securityContext:
     runAsNonRoot: true
-    runAsUser: &lt;user&gt;</pre>
+    runAsUser: <user>
+```
+
 
 Set a high UID user {#h2-4-set-a-high-uid-user}
 -----------------------------------------------
@@ -120,13 +123,16 @@ Set a high UID user {#h2-4-set-a-high-uid-user}
 
 In the previous rule check, we didn't run as `root`, which is UID 1. However, even with other UIDs, we risk impersonating another user on the host system if the container is compromised. To drastically reduce the probability, configured users should only start from UID 10,000.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml">apiVersion: v1
+```yaml
+apiVersion: v1
 kind: Pod
 metadata:
-  name: &lt;name&gt;
+  name: <name>
 spec:
     securityContext:
-    runAsUser: &lt;+10,000&gt;</pre>
+    runAsUser: <+10,000>
+```
+
 
 Set the seccomp profile {#h2-5-set-the-seccomp-profile}
 -------------------------------------------------------
@@ -144,16 +150,20 @@ Addressing the issue depends on the version of your Kubernetes cluster:
 
 * For Kubernetes up to 1.18, annotations to the rescue: 
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml">apiVersion: v1
+```yaml
+apiVersion: v1
 kind: Pod
 metadata:
   name: 
   annotations:
-    seccomp.security.alpha.kubernetes.io/pod: "runtime/default"</pre>
+    seccomp.security.alpha.kubernetes.io/pod: "runtime/default"
+```
+
 
 * For Kubernetes 1.19+, the `securityContext` attribute features a `secompProfile`:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml">apiVersion: v1
+```yaml
+apiVersion: v1
 kind: Pod
 metadata:
   name: 
@@ -162,7 +172,9 @@ spec:
     seccompProfile:
       type: RuntimeDefault
   containers:
-    ...</pre>
+    ...
+```
+
 
 Conclusion {#h2-6-conclusion}
 -----------------------------

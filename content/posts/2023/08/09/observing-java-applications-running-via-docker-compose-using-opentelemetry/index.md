@@ -30,8 +30,10 @@ Turns out, there is a simple way to collect observability data from your applica
 
 For convenience, you can download the files into a path that is relative to the Docker Compose file location.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">curl --create-dirs -O -L --output-dir ./otel https://github.com/open-telemetry/opentelemetry-java-instrumentation/releases/latest/download/opentelemetry-javaagent.jar
-</pre>
+```bash
+curl --create-dirs -O -L --output-dir ./otel https://github.com/open-telemetry/opentelemetry-java-instrumentation/releases/latest/download/opentelemetry-javaagent.jar
+```
+
 
 #### 2. Add a docker-compose override file
 
@@ -39,7 +41,8 @@ Create a file `docker-composer.override.otel.yml` which we'll use to extend the 
 
 Add the following code, and replace `[your-service]` below with the service you wish to instrument:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">#docker-compose.override.otel.yml
+```yaml
+#docker-compose.override.otel.yml
 version: '3'
 services:
   [your-service]:
@@ -50,12 +53,16 @@ services:
    - OTEL_SERVICE_NAME=[your-service]
    - DEPLOYMENT_ENV=DOCKER_LOCAL
   extra_hosts:
-        - "host.docker.internal:host-gateway"</pre>
+        - "host.docker.internal:host-gateway"
+```
+
 
 #### 3. Run the original docker-compose file along with the extended file we just created
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">docker compose -f docker-compose.yml -f docker-compose.override.otel.yml up -d
-</pre>
+```bash
+docker compose -f docker-compose.yml -f docker-compose.override.otel.yml up -d
+```
+
 
 ### WHAT CAN YOU DO WITH THE DATA? {#h3-1-what-can-you-do-with-the-data}
 
@@ -65,8 +72,11 @@ We can easily deploy a few containers locally to receive and visualize our obser
 
 Download and start the stack:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">curl -L -O https://raw.githubusercontent.com/doppleware/developer-observability-oss/main/docker-compose.trace.yml
-docker compose -f docker-compose.trace.yml up -dDownload and start the stack:</pre>
+```bash
+curl -L -O https://raw.githubusercontent.com/doppleware/developer-observability-oss/main/docker-compose.trace.yml
+docker compose -f docker-compose.trace.yml up -dDownload and start the stack:
+```
+
 
 Start your application with the `docker-composer.override.otel.yml` file.
 
@@ -92,14 +102,18 @@ Digma's benefit is that it is used not only to collect data but also to analyze 
 
 Similar to the previous example, we start by downloading the OTEL agent, and we'll also use the Digma OTEL extension to get additional data:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="bash" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">curl --create-dirs -O -L --output-dir ./otel
+```bash
+curl --create-dirs -O -L --output-dir ./otel
 https://github.com/open-telemetry/opentelemetry-java-instrumentation/releases/latest/download/opentelemetry-javaagent.jar
 curl --create-dirs -O -L --output-dir ./otel
-https://github.com/digma-ai/otel-java-instrumentation/releases/latest/download/digma-otel-agent-extension.jar</pre>
+https://github.com/digma-ai/otel-java-instrumentation/releases/latest/download/digma-otel-agent-extension.jar
+```
+
 
 We then modify our override file, adding the extension as well as an environment variable. As before, please update \[your-service\] with your application name.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">#docker-compose.override.otel.yml
+```yaml
+#docker-compose.override.otel.yml
 version: '3'
 services:
   [your-service]:
@@ -113,7 +127,9 @@ services:
    - OTEL_METRICS_EXPORTER=none
    - DEPLOYMENT_ENV=DOCKER_LOCAL
   extra_hosts:
-        - "host.docker.internal:host-gateway"</pre>
+        - "host.docker.internal:host-gateway"
+```
+
 
 After running our application and triggering some actions, we'll be able to see the observability info in the IDE, closely integrated with your code:
 

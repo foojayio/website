@@ -48,7 +48,7 @@ Great architects also know when **not** to use it.
 
 <br />
 
-*** ** * ** ***
+
 
 Why This Article? {#h2-2-why-this-article}
 ------------------------------------------
@@ -74,7 +74,7 @@ Let us examine the most common situations where EDA may actually be the wrong ar
 
 Don't use EDA for everything{#caption-attachment-124878}
 
-*** ** * ** ***
+
 
 1. Avoid EDA for Simple CRUD Applications {#h2-3-1-avoid-eda-for-simple-crud-applications}
 ------------------------------------------------------------------------------------------
@@ -90,13 +90,17 @@ Adding Kafka or another event broker usually creates more problems than value.
 
 Instead of:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="shell">REST
+```bash
+REST
  ↓
-Database</pre>
+Database
+```
+
 
 You suddenly have:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="shell">REST
+```bash
+REST
  ↓
 Producer
  ↓
@@ -104,7 +108,9 @@ Broker
  ↓
 Consumer
  ↓
-Database</pre>
+Database
+```
+
 
 Congratulations. 🎉
 
@@ -122,16 +128,19 @@ All of that just to update one row.
 
 ### Direct CRUD Is Often Enough {#h3-4-direct-crud-is-often-enough}
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">@PostMapping("/customers")
+```java
+@PostMapping("/customers")
 public Customer create(@RequestBody Customer c) {
     return repository.save(c);
-}</pre>
+}
+```
+
 
 One request, one transaction and one database update. For small CRUD applications, this is easier to maintain than introducing asynchronous messaging and distributed infrastructure.
 
 **The complexity budget of EDA should be paid only when it brings clear business value.**
 
-*** ** * ** ***
+
 
 2. Avoid EDA When Strong Consistency Is Required {#h2-5-2-avoid-eda-when-strong-consistency-is-required}
 --------------------------------------------------------------------------------------------------------
@@ -147,11 +156,14 @@ Examples include:
 
 Imagine this sequence:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="shell">Debit account
+```bash
+Debit account
 ↓
 Publish event
 ↓
-Credit account</pre>
+Credit account
+```
+
 
 If something crashes in the middle, money may disappear.
 
@@ -163,24 +175,30 @@ Those are classic ACID transaction scenarios.
 
 ### Preserve Atomicity with One Transaction {#h3-6-preserve-atomicity-with-one-transaction}
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">@Transactional
+```java
+@Transactional
 public void transfer(Account from, Account to, BigDecimal amount) {
     from.withdraw(amount);
     to.deposit(amount);
-}</pre>
+}
+```
+
 
 Some business operations require atomicity. Distributed events introduce temporary inconsistency that may violate important business invariants.
 
 **This does not mean EDA is incompatible with finance. Many banks use it extensively, but usually after the transactional boundary.**
 
-*** ** * ** ***
+
 
 3. Avoid EDA When Users Expect an Immediate Response {#h2-7-3-avoid-eda-when-users-expect-an-immediate-response}
 ----------------------------------------------------------------------------------------------------------------
 
 Imagine clicking:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="shell">Pay Now</pre>
+```bash
+Pay Now
+```
+
 
 Would you like the UI to answer:
 > "We will eventually process your payment."
@@ -189,11 +207,14 @@ Probably not.
 
 Sometimes users expect:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="shell">Click
+```bash
+Click
 ↓
 Immediate validation
 ↓
-Immediate confirmation</pre>
+Immediate confirmation
+```
+
 
 Synchronous APIs are often the right tool.
 
@@ -208,27 +229,34 @@ Those actions do not need to block the user experience.
 
 ### Use Synchronous APIs for Immediate Responses {#h3-8-use-synchronous-apis-for-immediate-responses}
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">@PostMapping("/login")
+```java
+@PostMapping("/login")
 public Token login(LoginRequest request) {
     return authenticationService.authenticate(request);
-}</pre>
+}
+```
+
 
 Authentication is conversational. The client waits for the answer before continuing. An asynchronous workflow would only increase latency and complexity.
 
-*** ** * ** ***
+
 
 4. Avoid EDA When There Is No Fan-Out {#h2-9-4-avoid-eda-when-there-is-no-fan-out}
 ----------------------------------------------------------------------------------
 
 One of the biggest strengths of EDA is fan-out:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="shell">One producer
+```bash
+One producer
 ↓
-Many consumers</pre>
+Many consumers
+```
+
 
 For example:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="shell">OrderCreated
+```bash
+OrderCreated
 ↓
 Inventory
 ↓
@@ -240,32 +268,43 @@ Recommendation Engine
 ↓
 Fraud Detection
 ↓
-Email</pre>
+Email
+```
+
 
 Beautiful.
 
 Now imagine:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="shell">Producer
+```bash
+Producer
 ↓
-One consumer</pre>
+One consumer
+```
+
 
 That is basically an asynchronous method call.
 
 You added a broker to replace:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">service.process(order);</pre>
+```java
+service.process(order);
+```
+
 
 That is not always a good trade-off.
 
 ### Prefer a Direct Service Call for One Consumer {#h3-10-prefer-a-direct-service-call-for-one-consumer}
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">orderValidator.validate(order);
-paymentService.process(order);</pre>
+```java
+orderValidator.validate(order);
+paymentService.process(order);
+```
+
 
 If only one service consumes the information, direct calls are usually simpler, easier to debug and cheaper to operate than an event broker.
 
-*** ** * ** ***
+
 
 5. Avoid EDA When Your Team Is Not Operationally Ready {#h2-11-5-avoid-eda-when-your-team-is-not-operationally-ready}
 ---------------------------------------------------------------------------------------------------------------------
@@ -297,15 +336,18 @@ Without observability, debugging distributed systems becomes painful.
 
 ### Reliable EDA Requires Idempotent Consumers {#h3-12-reliable-eda-requires-idempotent-consumers}
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">if(processedIds.contains(event.id())) {
+```java
+if(processedIds.contains(event.id())) {
     return;
 }
 
-handle(event);</pre>
+handle(event);
+```
+
 
 Consumers should safely process duplicate events. Idempotency is one of the foundations of reliable event-driven systems.
 
-*** ** * ** ***
+
 
 6. Avoid EDA When the Business Process Is a Conversation {#h2-13-6-avoid-eda-when-the-business-process-is-a-conversation}
 -------------------------------------------------------------------------------------------------------------------------
@@ -316,7 +358,8 @@ It struggles when every step depends immediately on the previous answer.
 
 For example:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="shell">Client
+```bash
+Client
 ↓
 Validate
 ↓
@@ -326,7 +369,9 @@ Reserve
 ↓
 Confirm
 ↓
-Return result</pre>
+Return result
+```
+
 
 Each step requires immediate feedback.
 
@@ -336,25 +381,31 @@ REST or gRPC are usually better suited.
 
 ### Use Synchronous Calls for Sequential Workflows {#h3-14-use-synchronous-calls-for-sequential-workflows}
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">Quote quote = pricingService.calculate(order);
-reservationService.reserve(quote);</pre>
+```java
+Quote quote = pricingService.calculate(order);
+reservationService.reserve(quote);
+```
+
 
 Sequential workflows where each step depends on the previous result are often easier to express using synchronous service calls.
 
-*** ** * ** ***
+
 
 7. Avoid EDA When You Do Not Have a Real Event Model {#h2-15-7-avoid-eda-when-you-do-not-have-a-real-event-model}
 -----------------------------------------------------------------------------------------------------------------
 
 Some teams create events such as:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="shell">CustomerUpdated
+```bash
+CustomerUpdated
 
 OrderUpdated
 
 ProductUpdated
 
-InvoiceUpdated</pre>
+InvoiceUpdated
+```
+
 
 Those are often just CRUD notifications.
 
@@ -371,13 +422,16 @@ Those events have meaning beyond the database.
 
 ### Model Business Facts, Not Database Updates {#h3-16-model-business-facts-not-database-updates}
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">publisher.publish(
+```java
+publisher.publish(
     new OrderPlaced(orderId, customerId)
-);</pre>
+);
+```
+
 
 Events should describe something meaningful that happened in the business domain, not simply mirror SQL `UPDATE` statements.
 
-*** ** * ** ***
+
 
 What Event-Driven Architecture Is Excellent At {#h2-17-what-event-driven-architecture-is-excellent-at}
 ------------------------------------------------------------------------------------------------------
@@ -403,7 +457,7 @@ It becomes even more powerful when combined with patterns such as:
 * Dead-Letter Queues
 * Schema Registry
 
-*** ** * ** ***
+
 
 Common Event-Driven Architecture Anti-Patterns {#h2-18-common-event-driven-architecture-anti-patterns}
 ------------------------------------------------------------------------------------------------------
@@ -417,7 +471,7 @@ Common Event-Driven Architecture Anti-Patterns {#h2-18-common-event-driven-archi
 * ❌ Using events to hide slow services
 * ❌ Assuming asynchronous always means scalable
 
-*** ** * ** ***
+
 
 Key Takeaways 🎯 {#h2-19-key-takeaways}
 ---------------------------------------
@@ -431,7 +485,7 @@ Key Takeaways 🎯 {#h2-19-key-takeaways}
 * Business events should represent domain facts, not CRUD operations.
 * A good architect chooses the simplest solution that satisfies today's requirements while leaving room for tomorrow's growth.
 
-*** ** * ** ***
+
 
 Architecture is about trade-offs, not trends.
 
@@ -441,7 +495,7 @@ Sometimes the best event is...
 
 #EventDrivenArchitecture #EDA #Kafka #ApacheKafka #SoftwareArchitecture #Microservices #Java #SpringBoot #DistributedSystems #CloudNative #CQRS #EventSourcing #SystemDesign #Backend #SoftwareEngineering #Architecture #TechLeadership
 
-*** ** * ** ***
+
 
 Go Further with Java Certification {#h2-20-go-further-with-java-certification}
 ------------------------------------------------------------------------------

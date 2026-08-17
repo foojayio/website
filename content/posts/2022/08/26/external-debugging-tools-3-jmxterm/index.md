@@ -49,46 +49,64 @@ Usually one controls and reads JMX via web interface tools or dedicated administ
 
 Once downloaded we can use it to connect to a server using:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">java -jar ~/Downloads/jmxterm-1.0.2-uber.jar --url localhost:30002
-</pre>
+```
+java -jar ~/Downloads/jmxterm-1.0.2-uber.jar --url localhost:30002
+```
+
 
 You should update the hostname/port based on your connection. Once connected we can list the JMX domains using the prompt:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">&gt; domains #following domains are available JMImplementation com.sun.management java.lang java.nio java.util.logging javax.cache jdk.management.jfr
-</pre>
+```
+> domains #following domains are available JMImplementation com.sun.management java.lang java.nio java.util.logging javax.cache jdk.management.jfr
+```
+
 
 We can then pick a specific domain to explore. This is where the visual tool is usually beneficial as it can provide you with faster navigation through the hierarchy and quick assessment of the information. In this case I just want to set the logging level:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">&gt; domain java.util.logging #domain is set to java.util.logging
-</pre>
+```
+> domain java.util.logging #domain is set to java.util.logging
+```
+
 
 We can follow this by listing the beans within the domain. Then pick the bean that we wish to use since there's only one bean in this specific domain:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">&gt; beans #domain = java.util.logging: java.util.logging:type=Logging
-&gt; bean java.util.logging:type=Logging #bean is set to java.util.logging:type=Logging</pre>
+```
+> beans #domain = java.util.logging: java.util.logging:type=Logging
+> bean java.util.logging:type=Logging #bean is set to java.util.logging:type=Logging
+```
+
 
 What can I do with this bean? For that we have the info command that lists the operations and attributes of the bean:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">&gt; info #mbean = java.util.logging:type=Logging #class name = sun.management.ManagementFactoryHelper$PlatformLoggingImpl # attributes %0 - LoggerNames ([Ljava.lang.String;, r) %1 - ObjectName (javax.management.ObjectName, r) # operations %0 - java.lang.String getLoggerLevel(java.lang.String p0) %1 - java.lang.String getParentLoggerName(java.lang.String p0) %2 - void setLoggerLevel(java.lang.String p0,java.lang.String p1) #there's no notifications</pre>
+```
+> info #mbean = java.util.logging:type=Logging #class name = sun.management.ManagementFactoryHelper$PlatformLoggingImpl # attributes %0 - LoggerNames ([Ljava.lang.String;, r) %1 - ObjectName (javax.management.ObjectName, r) # operations %0 - java.lang.String getLoggerLevel(java.lang.String p0) %1 - java.lang.String getParentLoggerName(java.lang.String p0) %2 - void setLoggerLevel(java.lang.String p0,java.lang.String p1) #there's no notifications
+```
+
 
 Once I have these I can check the current logger level, it isn't set since we didn't set it explicitly and the global default is used:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">&gt; run getLoggerLevel "org.apache.tomcat.websocket.WsWebSocketContainer" #calling operation getLoggerLevel of mbean java.util.logging:type=Logging with params [org.apache.tomcat.websocket.WsWebSocketContainer] #operation returns: 
-</pre>
+```
+> run getLoggerLevel "org.apache.tomcat.websocket.WsWebSocketContainer" #calling operation getLoggerLevel of mbean java.util.logging:type=Logging with params [org.apache.tomcat.websocket.WsWebSocketContainer] #operation returns:
+```
+
 
 I can explicitly set it to INFO and then get it again to verify that the operation worked as expected using this code:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">&gt; run setLoggerLevel org.apache.tomcat.websocket.WsWebSocketContainer INFO #calling operation setLoggerLevel of mbean java.util.logging:type=Logging with params [org.apache.tomcat.websocket.WsWebSocketContainer, INFO] #operation returns: null
-&gt; run getLoggerLevel "org.apache.tomcat.websocket.WsWebSocketContainer" #calling operation getLoggerLevel of mbean java.util.logging:type=Logging with params [org.apache.tomcat.websocket.WsWebSocketContainer] #operation returns: INFO
-</pre>
+```
+> run setLoggerLevel org.apache.tomcat.websocket.WsWebSocketContainer INFO #calling operation setLoggerLevel of mbean java.util.logging:type=Logging with params [org.apache.tomcat.websocket.WsWebSocketContainer, INFO] #operation returns: null
+> run getLoggerLevel "org.apache.tomcat.websocket.WsWebSocketContainer" #calling operation getLoggerLevel of mbean java.util.logging:type=Logging with params [org.apache.tomcat.websocket.WsWebSocketContainer] #operation returns: INFO
+```
+
 
 This is just the tip of the iceberg. We can get many things such as spring settings, internal VM information, etc. In this example I can query VM information directly from the console:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">&gt; domain com.sun.management #domain is set to com.sun.management
-&gt; beans #domain = com.sun.management: com.sun.management:type=DiagnosticCommand com.sun.management:type=HotSpotDiagnostic
-&gt; bean com.sun.management:type=HotSpotDiagnostic #bean is set to com.sun.management:type=HotSpotDiagnostic
-&gt; info #mbean = com.sun.management:type=HotSpotDiagnostic #class name = com.sun.management.internal.HotSpotDiagnostic # attributes %0 - DiagnosticOptions ([Ljavax.management.openmbean.CompositeData;, r) %1 - ObjectName (javax.management.ObjectName, r) # operations %0 - void dumpHeap(java.lang.String p0,boolean p1) %1 - javax.management.openmbean.CompositeData getVMOption(java.lang.String p0) %2 - void setVMOption(java.lang.String p0,java.lang.String p1) #there's no notifications
-</pre>
+```
+> domain com.sun.management #domain is set to com.sun.management
+> beans #domain = com.sun.management: com.sun.management:type=DiagnosticCommand com.sun.management:type=HotSpotDiagnostic
+> bean com.sun.management:type=HotSpotDiagnostic #bean is set to com.sun.management:type=HotSpotDiagnostic
+> info #mbean = com.sun.management:type=HotSpotDiagnostic #class name = com.sun.management.internal.HotSpotDiagnostic # attributes %0 - DiagnosticOptions ([Ljavax.management.openmbean.CompositeData;, r) %1 - ObjectName (javax.management.ObjectName, r) # operations %0 - void dumpHeap(java.lang.String p0,boolean p1) %1 - javax.management.openmbean.CompositeData getVMOption(java.lang.String p0) %2 - void setVMOption(java.lang.String p0,java.lang.String p1) #there's no notifications
+```
+
 
 Finally {#h2-2-finally}
 -----------------------

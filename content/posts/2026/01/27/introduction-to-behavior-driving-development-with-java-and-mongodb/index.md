@@ -37,7 +37,10 @@ In this tutorial, you'll:
 
 You can find all the code presented in this tutorial in the [GitHub repository](https://github.com/soujava/behavior-driven-development-mongodb):
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">git clone <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="e88f819ca88f819c809d8ac68b8785">[email&nbsp;protected]</a>:soujava/behavior-driven-development-mongodb.git</pre>
+```
+git clone <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="e88f819ca88f819c809d8ac68b8785">[email protected]</a>:soujava/behavior-driven-development-mongodb.git
+```
+
 
 Prerequisites {#h2-0-prerequisites}
 -----------------------------------
@@ -52,7 +55,10 @@ For this tutorial, you'll need:
 
 You can use the following Docker command to start a standalone MongoDB instance:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">docker run --rm -d --name mongodb-instance -p 27017:27017 mongo</pre>
+```
+docker run --rm -d --name mongodb-instance -p 27017:27017 mongo
+```
+
 
 In this tutorial, we'll use aJava SE project---without any heavyweight frameworks---to demonstrate how to combine Jakarta Data, JNoSQL, and JUnit 5 to write expressive, testable queries against MongoDB. Our focus will be on clarity, maintainability, and aligning tests with the business language, not just with database fields.
 
@@ -61,200 +67,207 @@ Step 1: Create the project structure {#h2-1-step-1-create-the-project-structure}
 
 The first step is generating the project using Maven. To make it easier, we have the Maven Archetype. Thus, generate the following command:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">mvn archetype:generate &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; \
+```
+mvn archetype:generate                     \
 
-"-DarchetypeGroupId=io.cucumber" &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; \
+"-DarchetypeGroupId=io.cucumber"           \
 
 "-DarchetypeArtifactId=cucumber-archetype" \
 
-"-DarchetypeVersion=7.30.0"&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; \
+"-DarchetypeVersion=7.30.0"                \
 
-"-DgroupId=org.soujava.demos.mongodb"&nbsp; &nbsp; &nbsp; \
+"-DgroupId=org.soujava.demos.mongodb"      \
 
 "-DartifactId=behavior-driven-development" \
 
-"-Dpackage=org.soujava.demos.mongodb"&nbsp; &nbsp; &nbsp; \
+"-Dpackage=org.soujava.demos.mongodb"      \
 
-"-Dversion=1.0.0-SNAPSHOT" &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; \
+"-Dversion=1.0.0-SNAPSHOT"                 \
 
-"-DinteractiveMode=false"</pre>
+"-DinteractiveMode=false"
+```
+
 
 The next step is to include Eclipse JNoSQL with MongoDB, the Jakarta EE components implementations: CDI, JSON, and the Eclipse Microprofile implementation.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
-&lt;project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;xmlns="http://maven.apache.org/POM/4.0.0"
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&lt;groupId&gt;org.soujava.demos.mongodb&lt;/groupId&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&lt;artifactId&gt;behavior-driven-development&lt;/artifactId&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&lt;version&gt;1.0.0-SNAPSHOT&lt;/version&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&lt;packaging&gt;jar&lt;/packaging&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&lt;properties&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;project.build.sourceEncoding&gt;UTF-8&lt;/project.build.sourceEncoding&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;maven.compiler.source&gt;21&lt;/maven.compiler.source&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;maven.compiler.target&gt;21&lt;/maven.compiler.target&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;jnosql.version&gt;1.1.10&lt;/jnosql.version&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;weld.se.core.version&gt;6.0.3.Final&lt;/weld.se.core.version&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;mockito.verson&gt;5.18.0&lt;/mockito.verson&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&lt;/properties&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&lt;dependencyManagement&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;dependencies&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;dependency&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;groupId&gt;io.cucumber&lt;/groupId&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;artifactId&gt;cucumber-bom&lt;/artifactId&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;version&gt;7.30.0&lt;/version&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;type&gt;pom&lt;/type&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;scope&gt;import&lt;/scope&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/dependency&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;dependency&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;groupId&gt;org.junit&lt;/groupId&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;artifactId&gt;junit-bom&lt;/artifactId&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;version&gt;5.14.0&lt;/version&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;type&gt;pom&lt;/type&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;scope&gt;import&lt;/scope&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/dependency&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;dependency&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;groupId&gt;org.assertj&lt;/groupId&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;artifactId&gt;assertj-bom&lt;/artifactId&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;version&gt;3.27.6&lt;/version&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;type&gt;pom&lt;/type&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;scope&gt;import&lt;/scope&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/dependency&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/dependencies&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&lt;/dependencyManagement&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&lt;dependencies&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;dependency&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;groupId&gt;org.jboss.weld.se&lt;/groupId&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;artifactId&gt;weld-se-shaded&lt;/artifactId&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;version&gt;${weld.se.core.version}&lt;/version&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;scope&gt;compile&lt;/scope&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/dependency&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;dependency&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;groupId&gt;org.eclipse&lt;/groupId&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;artifactId&gt;yasson&lt;/artifactId&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;version&gt;3.0.4&lt;/version&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;scope&gt;compile&lt;/scope&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/dependency&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;dependency&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;groupId&gt;io.smallrye.config&lt;/groupId&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;artifactId&gt;smallrye-config-core&lt;/artifactId&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;version&gt;3.13.3&lt;/version&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;scope&gt;compile&lt;/scope&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/dependency&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;dependency&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;groupId&gt;org.eclipse.jnosql.databases&lt;/groupId&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;artifactId&gt;jnosql-mongodb&lt;/artifactId&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;version&gt;${jnosql.version}&lt;/version&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/dependency&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;dependency&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;groupId&gt;io.cucumber&lt;/groupId&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;artifactId&gt;cucumber-java&lt;/artifactId&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;scope&gt;test&lt;/scope&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/dependency&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;dependency&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;groupId&gt;io.cucumber&lt;/groupId&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;artifactId&gt;cucumber-junit-platform-engine&lt;/artifactId&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;scope&gt;test&lt;/scope&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/dependency&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;dependency&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;groupId&gt;org.junit.platform&lt;/groupId&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;artifactId&gt;junit-platform-suite&lt;/artifactId&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;scope&gt;test&lt;/scope&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/dependency&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;dependency&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;groupId&gt;org.assertj&lt;/groupId&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;artifactId&gt;assertj-core&lt;/artifactId&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;scope&gt;test&lt;/scope&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/dependency&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;dependency&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;groupId&gt;org.junit.vintage&lt;/groupId&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;artifactId&gt;junit-vintage-engine&lt;/artifactId&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;scope&gt;test&lt;/scope&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/dependency&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;dependency&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;groupId&gt;org.junit.jupiter&lt;/groupId&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;artifactId&gt;junit-jupiter-api&lt;/artifactId&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;scope&gt;test&lt;/scope&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/dependency&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;dependency&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;groupId&gt;org.junit.jupiter&lt;/groupId&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;artifactId&gt;junit-jupiter-engine&lt;/artifactId&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;scope&gt;test&lt;/scope&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/dependency&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;dependency&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;groupId&gt;org.junit.jupiter&lt;/groupId&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;artifactId&gt;junit-jupiter-params&lt;/artifactId&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;scope&gt;test&lt;/scope&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/dependency&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;dependency&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;groupId&gt;org.mockito&lt;/groupId&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;artifactId&gt;mockito-core&lt;/artifactId&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;version&gt;${mockito.verson}&lt;/version&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;scope&gt;test&lt;/scope&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/dependency&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;dependency&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;groupId&gt;org.mockito&lt;/groupId&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;artifactId&gt;mockito-junit-jupiter&lt;/artifactId&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;version&gt;${mockito.verson}&lt;/version&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;scope&gt;test&lt;/scope&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/dependency&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;dependency&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;groupId&gt;org.testcontainers&lt;/groupId&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;artifactId&gt;mongodb&lt;/artifactId&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;version&gt;1.21.3&lt;/version&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;scope&gt;test&lt;/scope&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/dependency&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&lt;/dependencies&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&lt;build&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;plugins&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;plugin&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;artifactId&gt;maven-compiler-plugin&lt;/artifactId&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;version&gt;3.14.1&lt;/version&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/plugin&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;plugin&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;artifactId&gt;maven-surefire-plugin&lt;/artifactId&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;version&gt;3.5.4&lt;/version&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;configuration&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;properties&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;!-- Work around. Surefire does not include enough
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;information to disambiguate between different
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;examples and scenarios. --&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;configurationParameters&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cucumber.junit-platform.naming-strategy=long
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/configurationParameters&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/properties&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/configuration&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/plugin&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/plugins&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&lt;/build&gt;
-&lt;/project&gt;</pre>
+```
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>org.soujava.demos.mongodb</groupId>
+    <artifactId>behavior-driven-development</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+    <packaging>jar</packaging>
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>21</maven.compiler.source>
+        <maven.compiler.target>21</maven.compiler.target>
+        <jnosql.version>1.1.10</jnosql.version>
+        <weld.se.core.version>6.0.3.Final</weld.se.core.version>
+        <mockito.verson>5.18.0</mockito.verson>
+    </properties>
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>io.cucumber</groupId>
+                <artifactId>cucumber-bom</artifactId>
+                <version>7.30.0</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.junit</groupId>
+                <artifactId>junit-bom</artifactId>
+                <version>5.14.0</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.assertj</groupId>
+                <artifactId>assertj-bom</artifactId>
+                <version>3.27.6</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+    <dependencies>
+        <dependency>
+            <groupId>org.jboss.weld.se</groupId>
+            <artifactId>weld-se-shaded</artifactId>
+            <version>${weld.se.core.version}</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse</groupId>
+            <artifactId>yasson</artifactId>
+            <version>3.0.4</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.smallrye.config</groupId>
+            <artifactId>smallrye-config-core</artifactId>
+            <version>3.13.3</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.jnosql.databases</groupId>
+            <artifactId>jnosql-mongodb</artifactId>
+            <version>${jnosql.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-java</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-junit-platform-engine</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.platform</groupId>
+            <artifactId>junit-platform-suite</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.assertj</groupId>
+            <artifactId>assertj-core</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.vintage</groupId>
+            <artifactId>junit-vintage-engine</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-engine</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-params</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-core</artifactId>
+            <version>${mockito.verson}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-junit-jupiter</artifactId>
+            <version>${mockito.verson}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.testcontainers</groupId>
+            <artifactId>mongodb</artifactId>
+            <version>1.21.3</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.14.1</version>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.5.4</version>
+                <configuration>
+                    <properties>
+                        <!-- Work around. Surefire does not include enough
+                             information to disambiguate between different
+                             examples and scenarios. -->
+                        <configurationParameters>
+                            cucumber.junit-platform.naming-strategy=long
+                        </configurationParameters>
+                    </properties>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>
+```
+
 
 To simplify the scope of the tutorial, we will reuse the modeling and entity from the previous post about data-driven testing with MongoDB and Java. Thus, we will use the same hotel management at the org.soujava.demos.mongodb.document package:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">package org.soujava.demos.mongodb.document;
+```
+package org.soujava.demos.mongodb.document;
 public enum CleanStatus {
-&nbsp;&nbsp;&nbsp;&nbsp;CLEAN,
-&nbsp;&nbsp;&nbsp;&nbsp;DIRTY,
-&nbsp;&nbsp;&nbsp;&nbsp;INSPECTION_NEEDED
+    CLEAN,
+    DIRTY,
+    INSPECTION_NEEDED
 }
 
 package org.soujava.demos.mongodb.document;
 public enum RoomStatus {
-&nbsp;&nbsp;&nbsp;&nbsp;AVAILABLE,
-&nbsp;&nbsp;&nbsp;&nbsp;RESERVED,
-&nbsp;&nbsp;&nbsp;&nbsp;UNDER_MAINTENANCE,
-&nbsp;&nbsp;&nbsp;&nbsp;OUT_OF_SERVICE
+    AVAILABLE,
+    RESERVED,
+    UNDER_MAINTENANCE,
+    OUT_OF_SERVICE
 }
 
 package org.soujava.demos.mongodb.document;
 public enum RoomType {
-&nbsp;&nbsp;&nbsp;&nbsp;STANDARD,
-&nbsp;&nbsp;&nbsp;&nbsp;DELUXE,
-&nbsp;&nbsp;&nbsp;&nbsp;SUITE,
-&nbsp;&nbsp;&nbsp;&nbsp;VIP_SUITE
+    STANDARD,
+    DELUXE,
+    SUITE,
+    VIP_SUITE
 }
 
 package org.soujava.demos.mongodb.document;
@@ -266,156 +279,159 @@ import org.eclipse.jnosql.databases.mongodb.mapping.ObjectIdConverter;
 import java.util.Objects;
 @Entity
 public class Room {
-&nbsp;&nbsp;&nbsp;&nbsp;@Id
-&nbsp;&nbsp;&nbsp;&nbsp;@Convert(ObjectIdConverter.class)
-&nbsp;&nbsp;&nbsp;&nbsp;private String id;
-&nbsp;&nbsp;&nbsp;&nbsp;@Column
-&nbsp;&nbsp;&nbsp;&nbsp;private int number;
-&nbsp;&nbsp;&nbsp;&nbsp;@Column
-&nbsp;&nbsp;&nbsp;&nbsp;private RoomType type;
-&nbsp;&nbsp;&nbsp;&nbsp;@Column
-&nbsp;&nbsp;&nbsp;&nbsp;private RoomStatus status;
-&nbsp;&nbsp;&nbsp;&nbsp;@Column
-&nbsp;&nbsp;&nbsp;&nbsp;private CleanStatus cleanStatus;
-&nbsp;&nbsp;&nbsp;&nbsp;@Column
-&nbsp;&nbsp;&nbsp;&nbsp;private boolean smokingAllowed;
-&nbsp;&nbsp;&nbsp;&nbsp;@Column
-&nbsp;&nbsp;&nbsp;&nbsp;private boolean underMaintenance;
-&nbsp;&nbsp;&nbsp;&nbsp;public Room() {
-&nbsp;&nbsp;&nbsp;&nbsp;}
+    @Id
+    @Convert(ObjectIdConverter.class)
+    private String id;
+    @Column
+    private int number;
+    @Column
+    private RoomType type;
+    @Column
+    private RoomStatus status;
+    @Column
+    private CleanStatus cleanStatus;
+    @Column
+    private boolean smokingAllowed;
+    @Column
+    private boolean underMaintenance;
+    public Room() {
+    }
 
-&nbsp;&nbsp;&nbsp;&nbsp;public Room(String id, int number,
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;RoomType type, RoomStatus status,
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CleanStatus cleanStatus,
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;boolean smokingAllowed, boolean underMaintenance) {
+    public Room(String id, int number,
+                RoomType type, RoomStatus status,
+                CleanStatus cleanStatus,
+                boolean smokingAllowed, boolean underMaintenance) {
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this.id = id;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this.number = number;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this.type = type;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this.status = status;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this.cleanStatus = cleanStatus;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this.smokingAllowed = smokingAllowed;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this.underMaintenance = underMaintenance;
-&nbsp;&nbsp;&nbsp;&nbsp;}
+        this.id = id;
+        this.number = number;
+        this.type = type;
+        this.status = status;
+        this.cleanStatus = cleanStatus;
+        this.smokingAllowed = smokingAllowed;
+        this.underMaintenance = underMaintenance;
+    }
 
-&nbsp;&nbsp;&nbsp;&nbsp;public String getId() {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return id;
-&nbsp;&nbsp;&nbsp;&nbsp;}
+    public String getId() {
+        return id;
+    }
 
-&nbsp;&nbsp;&nbsp;&nbsp;public int getNumber() {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return number;
-&nbsp;&nbsp;&nbsp;&nbsp;}
+    public int getNumber() {
+        return number;
+    }
 
-&nbsp;&nbsp;&nbsp;&nbsp;public RoomType getType() {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return type;
-&nbsp;&nbsp;&nbsp;&nbsp;}
+    public RoomType getType() {
+        return type;
+    }
 
-&nbsp;&nbsp;&nbsp;&nbsp;public RoomStatus getStatus() {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return status;
-&nbsp;&nbsp;&nbsp;&nbsp;}
+    public RoomStatus getStatus() {
+        return status;
+    }
 
-&nbsp;&nbsp;&nbsp;&nbsp;public CleanStatus getCleanStatus() {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return cleanStatus;
-&nbsp;&nbsp;&nbsp;&nbsp;}
+    public CleanStatus getCleanStatus() {
+        return cleanStatus;
+    }
 
-&nbsp;&nbsp;&nbsp;&nbsp;public boolean isSmokingAllowed() {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return smokingAllowed;
-&nbsp;&nbsp;&nbsp;&nbsp;}
+    public boolean isSmokingAllowed() {
+        return smokingAllowed;
+    }
 
-&nbsp;&nbsp;&nbsp;&nbsp;public boolean isUnderMaintenance() {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return underMaintenance;
-&nbsp;&nbsp;&nbsp;&nbsp;}
+    public boolean isUnderMaintenance() {
+        return underMaintenance;
+    }
 
-&nbsp;&nbsp;&nbsp;&nbsp;public void update(RoomStatus newStatus) {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this.status = newStatus;
-&nbsp;&nbsp;&nbsp;&nbsp;}
+    public void update(RoomStatus newStatus) {
+        this.status = newStatus;
+    }
 
-&nbsp;&nbsp;&nbsp;&nbsp;@Override
-&nbsp;&nbsp;&nbsp;&nbsp;public boolean equals(Object o) {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (o == null || getClass() != o.getClass()) {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return false;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Room room = (Room) o;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return Objects.equals(id, room.id);
-&nbsp;&nbsp;&nbsp;&nbsp;}
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Room room = (Room) o;
+        return Objects.equals(id, room.id);
+    }
 
-&nbsp;&nbsp;&nbsp;&nbsp;@Override
-&nbsp;&nbsp;&nbsp;&nbsp;public int hashCode() {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return Objects.hashCode(id);
-&nbsp;&nbsp;&nbsp;&nbsp;}
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(id);
+    }
 
-&nbsp;&nbsp;&nbsp;&nbsp;@Override
-&nbsp;&nbsp;&nbsp;&nbsp;public String toString() {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return "Room{" +
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"id='" + id + '\'' +
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;", roomNumber=" + number +
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;", type=" + type +
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;", status=" + status +
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;", cleanStatus=" + cleanStatus +
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;", smokingAllowed=" + smokingAllowed +
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;", underMaintenance=" + underMaintenance +
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'}';
-&nbsp;&nbsp;&nbsp;&nbsp;}
+    @Override
+    public String toString() {
+        return "Room{" +
+                "id='" + id + '\'' +
+                ", roomNumber=" + number +
+                ", type=" + type +
+                ", status=" + status +
+                ", cleanStatus=" + cleanStatus +
+                ", smokingAllowed=" + smokingAllowed +
+                ", underMaintenance=" + underMaintenance +
+                '}';
+    }
 
-&nbsp;&nbsp;&nbsp;&nbsp;public static RoomBuilder builder() {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return new RoomBuilder();
-&nbsp;&nbsp;&nbsp;&nbsp;}
+    public static RoomBuilder builder() {
+        return new RoomBuilder();
+    }
 }
 
 package org.soujava.demos.mongodb.document;
 
 public class RoomBuilder {
-&nbsp;&nbsp;&nbsp;&nbsp;private String id;
-&nbsp;&nbsp;&nbsp;&nbsp;private int roomNumber;
-&nbsp;&nbsp;&nbsp;&nbsp;private RoomType type;
-&nbsp;&nbsp;&nbsp;&nbsp;private RoomStatus status;
-&nbsp;&nbsp;&nbsp;&nbsp;private CleanStatus cleanStatus;
-&nbsp;&nbsp;&nbsp;&nbsp;private boolean smokingAllowed;
-&nbsp;&nbsp;&nbsp;&nbsp;private boolean underMaintenance;
+    private String id;
+    private int roomNumber;
+    private RoomType type;
+    private RoomStatus status;
+    private CleanStatus cleanStatus;
+    private boolean smokingAllowed;
+    private boolean underMaintenance;
 
-&nbsp;&nbsp;&nbsp;&nbsp;public RoomBuilder id(String id) {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this.id = id;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return this;
-&nbsp;&nbsp;&nbsp;&nbsp;}
+    public RoomBuilder id(String id) {
+        this.id = id;
+        return this;
+    }
 
-&nbsp;&nbsp;&nbsp;&nbsp;public RoomBuilder number(int roomNumber) {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this.roomNumber = roomNumber;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return this;
-&nbsp;&nbsp;&nbsp;&nbsp;}
+    public RoomBuilder number(int roomNumber) {
+        this.roomNumber = roomNumber;
+        return this;
+    }
 
-&nbsp;&nbsp;&nbsp;&nbsp;public RoomBuilder type(RoomType type) {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this.type = type;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return this;
-&nbsp;&nbsp;&nbsp;&nbsp;}
+    public RoomBuilder type(RoomType type) {
+        this.type = type;
+        return this;
+    }
 
-&nbsp;&nbsp;&nbsp;&nbsp;public RoomBuilder status(RoomStatus status) {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this.status = status;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return this;
-&nbsp;&nbsp;&nbsp;&nbsp;}
+    public RoomBuilder status(RoomStatus status) {
+        this.status = status;
+        return this;
+    }
 
-&nbsp;&nbsp;&nbsp;&nbsp;public RoomBuilder cleanStatus(CleanStatus cleanStatus) {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this.cleanStatus = cleanStatus;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return this;
-&nbsp;&nbsp;&nbsp;&nbsp;}
+    public RoomBuilder cleanStatus(CleanStatus cleanStatus) {
+        this.cleanStatus = cleanStatus;
+        return this;
+    }
 
-&nbsp;&nbsp;&nbsp;&nbsp;public RoomBuilder smokingAllowed(boolean smokingAllowed) {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this.smokingAllowed = smokingAllowed;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return this;
-&nbsp;&nbsp;&nbsp;&nbsp;}
+    public RoomBuilder smokingAllowed(boolean smokingAllowed) {
+        this.smokingAllowed = smokingAllowed;
+        return this;
+    }
 
-&nbsp;&nbsp;&nbsp;&nbsp;public RoomBuilder underMaintenance(boolean underMaintenance) {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this.underMaintenance = underMaintenance;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return this;
-&nbsp;&nbsp;&nbsp;&nbsp;}
+    public RoomBuilder underMaintenance(boolean underMaintenance) {
+        this.underMaintenance = underMaintenance;
+        return this;
+    }
 
-&nbsp;&nbsp;&nbsp;&nbsp;public Room build() {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return new Room(id, roomNumber, type, status, cleanStatus, smokingAllowed, underMaintenance);
-&nbsp;&nbsp;&nbsp;&nbsp;}
-}</pre>
+    public Room build() {
+        return new Room(id, roomNumber, type, status, cleanStatus, smokingAllowed, underMaintenance);
+    }
+}
+```
+
 
 The next step is to create an interface of communication between MongoDB and Java. We will simplify our lives using Jakarta Data. Thus, we will have a single interface, where we will connect to MongoDB as a repository interface, and the Jakarta provider will handle the implementation.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">package org.soujava.demos.mongodb.document;
+```
+package org.soujava.demos.mongodb.document;
 
 import jakarta.data.repository.Query;
 import jakarta.data.repository.Repository;
@@ -425,68 +441,80 @@ import java.util.Optional;
 
 @Repository
 public interface RoomRepository {
-&nbsp;&nbsp;&nbsp;&nbsp;@Query("FROM Room")
-&nbsp;&nbsp;&nbsp;&nbsp;List&lt;Room&gt; findAll();
-&nbsp;&nbsp;&nbsp;&nbsp;@Save
-&nbsp;&nbsp;&nbsp;&nbsp;Room save(Room room);
-&nbsp;&nbsp;&nbsp;&nbsp;void deleteBy();
-&nbsp;&nbsp;&nbsp;&nbsp;Optional&lt;Room&gt; findByNumber(Integer number);
-}</pre>
+    @Query("FROM Room")
+    List<Room> findAll();
+    @Save
+    Room save(Room room);
+    void deleteBy();
+    Optional<Room> findByNumber(Integer number);
+}
+```
+
 
 We will enable CDI and the proper files, thus generating the bean.xml and the configuration properties file at the src/main/resources/META-INF.
 
 beans.xml
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&lt;beans xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+```
+<beans xmlns="http://xmlns.jcp.org/xml/ns/javaee"
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee
+       xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee
 
 http://xmlns.jcp.org/xml/ns/javaee/beans_1_1.xsd"
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;bean-discovery-mode="all"&gt;
+       bean-discovery-mode="all">
 
-&lt;/beans&gt;</pre>
+</beans>
+```
+
 
 microprofile-config.properties
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">jnosql.mongodb.url=mongodb://localhost:27017
+```
+jnosql.mongodb.url=mongodb://localhost:27017
 
 # mandatory define the database name
 
-jnosql.document.database=hotels</pre>
+jnosql.document.database=hotels
+```
+
 
 Exploring the methodology, we should start with the behavior and then do the implementation. Therefore, at the test, we will generate our first feature file at the resource. We will create a *room.feature* at the src/test/resources/org/soujava/demos/mongodb folder.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">Feature: Manage hotel rooms
+```
+Feature: Manage hotel rooms
 
-&nbsp;&nbsp;Scenario: Register a new room
-&nbsp;&nbsp;&nbsp;&nbsp;Given the hotel management system is operational
-&nbsp;&nbsp;&nbsp;&nbsp;When I register a room with number 203
-&nbsp;&nbsp;&nbsp;&nbsp;Then the room with number 203 should appear in the room list
+  Scenario: Register a new room
+    Given the hotel management system is operational
+    When I register a room with number 203
+    Then the room with number 203 should appear in the room list
 
-&nbsp;&nbsp;Scenario: Register multiple rooms
-&nbsp;&nbsp;&nbsp;&nbsp;Given the hotel management system is operational
-&nbsp;&nbsp;&nbsp;&nbsp;When I register the following rooms:
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| number | type&nbsp; &nbsp; &nbsp; | status &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; | cleanStatus |
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| 101&nbsp; &nbsp; | STANDARD&nbsp; | AVAILABLE&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; | CLEAN &nbsp; &nbsp; &nbsp; |
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| 102&nbsp; &nbsp; | SUITE &nbsp; &nbsp; | RESERVED &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; | DIRTY &nbsp; &nbsp; &nbsp; |
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| 103&nbsp; &nbsp; | VIP_SUITE | UNDER_MAINTENANCE&nbsp; | CLEAN &nbsp; &nbsp; &nbsp; |
-&nbsp;&nbsp;&nbsp;&nbsp;Then there should be 3 rooms available in the system
+  Scenario: Register multiple rooms
+    Given the hotel management system is operational
+    When I register the following rooms:
+      | number | type      | status             | cleanStatus |
+      | 101    | STANDARD  | AVAILABLE          | CLEAN       |
+      | 102    | SUITE     | RESERVED           | DIRTY       |
+      | 103    | VIP_SUITE | UNDER_MAINTENANCE  | CLEAN       |
+    Then there should be 3 rooms available in the system
 
-&nbsp;&nbsp;Scenario: Change room status
-&nbsp;&nbsp;&nbsp;&nbsp;Given the hotel management system is operational
-&nbsp;&nbsp;&nbsp;&nbsp;And a room with number 101 is registered as AVAILABLE
-&nbsp;&nbsp;&nbsp;&nbsp;When I mark the room 101 as OUT_OF_SERVICE
-&nbsp;&nbsp;&nbsp;&nbsp;Then the room 101 should be marked as OUT_OF_SERVICE</pre>
+  Scenario: Change room status
+    Given the hotel management system is operational
+    And a room with number 101 is registered as AVAILABLE
+    When I mark the room 101 as OUT_OF_SERVICE
+    Then the room 101 should be marked as OUT_OF_SERVICE
+```
+
 
 Step 2: Create the test infrastructure {#h2-2-step-2-create-the-test-infrastructure}
 ------------------------------------------------------------------------------------
 
 As we will need to generate a MongoDB instance for the test, we will use a container and run the test on it. We will create a DatabaseContainer as a singlethon instance. At the src/test/java/org/soujava/demos/mongodb/config, make the class DatabaseContainer.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">package org.soujava.demos.mongodb.config;
+```
+package org.soujava.demos.mongodb.config;
 
 import org.eclipse.jnosql.communication.Settings;
 import org.eclipse.jnosql.databases.mongodb.communication.MongoDBDocumentConfiguration;
@@ -500,37 +528,40 @@ import java.util.HashMap;
 import java.util.Map;
 
 public enum DatabaseContainer {
-&nbsp;&nbsp;&nbsp;&nbsp;INSTANCE;
-&nbsp;&nbsp;&nbsp;&nbsp;private final GenericContainer&lt;?&gt; mongodb =
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;new GenericContainer&lt;&gt;("mongo:latest")
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.withExposedPorts(27017)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.waitingFor(Wait.defaultWaitStrategy());
-&nbsp;&nbsp;&nbsp;&nbsp;{
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;mongodb.start();
-&nbsp;&nbsp;&nbsp;&nbsp;}
+    INSTANCE;
+    private final GenericContainer<?> mongodb =
+            new GenericContainer<>("mongo:latest")
+                    .withExposedPorts(27017)
+                    .waitingFor(Wait.defaultWaitStrategy());
+    {
+        mongodb.start();
+    }
 
-&nbsp;&nbsp;&nbsp;&nbsp;public MongoDBDocumentManager get(String database) {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Settings settings = getSettings(database);
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MongoDBDocumentConfiguration configuration = new MongoDBDocumentConfiguration();
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MongoDBDocumentManagerFactory factory = configuration.apply(settings);
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return factory.apply(database);
-&nbsp;&nbsp;&nbsp;&nbsp;}
+    public MongoDBDocumentManager get(String database) {
+        Settings settings = getSettings(database);
+        MongoDBDocumentConfiguration configuration = new MongoDBDocumentConfiguration();
+        MongoDBDocumentManagerFactory factory = configuration.apply(settings);
+        return factory.apply(database);
+    }
 
-&nbsp;&nbsp;&nbsp;&nbsp;private Settings getSettings(String database) {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Map&lt;String,Object&gt; settings = new HashMap&lt;&gt;();
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;settings.put(MongoDBDocumentConfigurations.HOST.get()+".1", host());
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;settings.put(MappingConfigurations.DOCUMENT_DATABASE.get(), database);
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return Settings.of(settings);
-&nbsp;&nbsp;&nbsp;&nbsp;}
+    private Settings getSettings(String database) {
+        Map<String,Object> settings = new HashMap<>();
+        settings.put(MongoDBDocumentConfigurations.HOST.get()+".1", host());
+        settings.put(MappingConfigurations.DOCUMENT_DATABASE.get(), database);
+        return Settings.of(settings);
+    }
 
-&nbsp;&nbsp;&nbsp;&nbsp;public String host() {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return mongodb.getHost() + ":" + mongodb.getFirstMappedPort();
-&nbsp;&nbsp;&nbsp;&nbsp;}
-}</pre>
+    public String host() {
+        return mongodb.getHost() + ":" + mongodb.getFirstMappedPort();
+    }
+}
+```
+
 
 The next step is making this database available to the CDI container. We will create a ManagerSupplier that teaches the CDI how to generate a MongoDB instance. In this case, we will use the properties from the MongoDB test container.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">import jakarta.annotation.Priority;
+```
+import jakarta.annotation.Priority;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.enterprise.inject.Alternative;
 import jakarta.enterprise.inject.Default;
@@ -546,67 +577,79 @@ import java.util.function.Supplier;
 @ApplicationScoped
 @Alternative
 @Priority(Interceptor.Priority.APPLICATION)
-public class ManagerSupplier implements Supplier&lt;DatabaseManager&gt; {
-&nbsp;&nbsp;&nbsp;&nbsp;@Produces
-&nbsp;&nbsp;&nbsp;&nbsp;@Database(DatabaseType.DOCUMENT)
-&nbsp;&nbsp;&nbsp;&nbsp;@Default
-&nbsp;&nbsp;&nbsp;&nbsp;@Typed({DatabaseManager.class, MongoDBDocumentManager.class})
-&nbsp;&nbsp;&nbsp;&nbsp;public MongoDBDocumentManager get() {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return DatabaseContainer.INSTANCE.get("hotel");
-&nbsp;&nbsp;&nbsp;&nbsp;}
-}</pre>
+public class ManagerSupplier implements Supplier<DatabaseManager> {
+    @Produces
+    @Database(DatabaseType.DOCUMENT)
+    @Default
+    @Typed({DatabaseManager.class, MongoDBDocumentManager.class})
+    public MongoDBDocumentManager get() {
+        return DatabaseContainer.INSTANCE.get("hotel");
+    }
+}
+```
+
 
 Cucumber has the feature to allow injection using an ObjectFactory. Once we are using CDI, we will generate an implementation to create those classes using CDI. In this case, at the src/test/java/org/soujava/demos/mongodb/config, generate the WeldCucumberObjectFactory class.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">package org.soujava.demos.mongodb.config;
+```
+package org.soujava.demos.mongodb.config;
 
 import io.cucumber.core.backend.ObjectFactory;
 import org.jboss.weld.environment.se.Weld;
 import org.jboss.weld.environment.se.WeldContainer;
 
 public class WeldCucumberObjectFactory implements ObjectFactory {
-&nbsp;&nbsp;&nbsp;&nbsp;private Weld weld;
-&nbsp;&nbsp;&nbsp;&nbsp;private WeldContainer container;
-&nbsp;&nbsp;&nbsp;&nbsp;@Override
-&nbsp;&nbsp;&nbsp;&nbsp;public void start() {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;weld = new Weld();
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;container = weld.initialize();
-&nbsp;&nbsp;&nbsp;&nbsp;}
+    private Weld weld;
+    private WeldContainer container;
+    @Override
+    public void start() {
+        weld = new Weld();
+        container = weld.initialize();
+    }
 
-&nbsp;&nbsp;&nbsp;&nbsp;@Override
-&nbsp;&nbsp;&nbsp;&nbsp;public void stop() {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (weld != null) {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;weld.shutdown();
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
-&nbsp;&nbsp;&nbsp;&nbsp;}
+    @Override
+    public void stop() {
+        if (weld != null) {
+            weld.shutdown();
+        }
+    }
 
-&nbsp;&nbsp;&nbsp;&nbsp;@Override
-&nbsp;&nbsp;&nbsp;&nbsp;public boolean addClass(Class&lt;?&gt; stepClass) {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return true; // accept all step classes
-&nbsp;&nbsp;&nbsp;&nbsp;}
+    @Override
+    public boolean addClass(Class<?> stepClass) {
+        return true; // accept all step classes
+    }
 
-&nbsp;&nbsp;&nbsp;&nbsp;@Override
-&nbsp;&nbsp;&nbsp;&nbsp;public &lt;T&gt; T getInstance(Class&lt;T&gt; type) {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return (T) container.select(type).get();
-&nbsp;&nbsp;&nbsp;&nbsp;}
-}</pre>
+    @Override
+    public <T> T getInstance(Class<T> type) {
+        return (T) container.select(type).get();
+    }
+}
+```
+
 
 SPI loads this class, so we need to register our new class to be executed by Cucumber. Create the src/test/resources/META-INF/services and put the io.cucumber.core.backend.ObjectFactory file.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">org.soujava.demos.mongodb.config.WeldCucumberObjectFactory</pre>
+```
+org.soujava.demos.mongodb.config.WeldCucumberObjectFactory
+```
+
 
 Also, at the src/test/resources/META-INF, generate the beans.xml file:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&lt;beans xmlns="http://xmlns.jcp.org/xml/ns/javaee"
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;http://xmlns.jcp.org/xml/ns/javaee/beans_1_1.xsd"
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;bean-discovery-mode="annotated&gt;
-&lt;/beans&gt;</pre>
+```
+<beans xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee
+       http://xmlns.jcp.org/xml/ns/javaee/beans_1_1.xsd"
+       bean-discovery-mode="annotated>
+</beans>
+```
+
 
 The class on configuration is the class that will convert the table into the Room entities, where at the src/test/java/org/soujava/demos/mongodb, we will create the RoomDataTableMapper class:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">package org.soujava.demos.mongodb;
+```
+package org.soujava.demos.mongodb;
 
 import io.cucumber.java.DataTableType;
 import jakarta.enterprise.context.ApplicationScoped;
@@ -618,23 +661,26 @@ import java.util.Map;
 
 @ApplicationScoped
 public class RoomDataTableMapper {
-&nbsp;&nbsp;&nbsp;&nbsp;@DataTableType
-&nbsp;&nbsp;&nbsp;&nbsp;public Room roomEntry(Map&lt;String, String&gt; entry) {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return Room.builder()
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.number(Integer.parseInt(entry.get("number")))
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.type(RoomType.valueOf(entry.get("type")))
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.status(RoomStatus.valueOf(entry.get("status")))
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.cleanStatus(CleanStatus.valueOf(entry.get("cleanStatus")))
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.build();
-&nbsp;&nbsp;&nbsp;&nbsp;}
-}</pre>
+    @DataTableType
+    public Room roomEntry(Map<String, String> entry) {
+        return Room.builder()
+                .number(Integer.parseInt(entry.get("number")))
+                .type(RoomType.valueOf(entry.get("type")))
+                .status(RoomStatus.valueOf(entry.get("status")))
+                .cleanStatus(CleanStatus.valueOf(entry.get("cleanStatus")))
+                .build();
+    }
+}
+```
+
 
 Step 3: Generate our first scenario test {#h2-3-step-3-generate-our-first-scenario-test}
 ----------------------------------------------------------------------------------------
 
 The code infrastructure is ready, where we set the ObjectFactory using Weld, and the table mapper to convert the table into our entities. The next step is the test generation itself. As it's necessary to highlight in the BDD methodology, we start with the test. Then we start the implementation, but once the focus is more on showing the tool with MongoDB than the methodology itself, we finalize this tutorial with what should be the first step. We will create our last class in this tutorial: the HotelRoomSteps.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">package org.soujava.demos.mongodb;
+```
+package org.soujava.demos.mongodb;
 
 import io.cucumber.java.Before;
 import io.cucumber.java.en.*;
@@ -648,85 +694,87 @@ import java.util.Optional;
 @ApplicationScoped
 public class HotelRoomSteps {
 
-&nbsp;&nbsp;&nbsp;&nbsp;@Inject
-&nbsp;&nbsp;&nbsp;&nbsp;private RoomRepository repository;
+    @Inject
+    private RoomRepository repository;
 
-&nbsp;&nbsp;&nbsp;&nbsp;@Before
-&nbsp;&nbsp;&nbsp;&nbsp;public void cleanDatabase() {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;repository.deleteBy();
-&nbsp;&nbsp;&nbsp;&nbsp;}
+    @Before
+    public void cleanDatabase() {
+        repository.deleteBy();
+    }
 
-&nbsp;&nbsp;&nbsp;&nbsp;@Given("the hotel management system is operational")
-&nbsp;&nbsp;&nbsp;&nbsp;public void theHotelManagementSystemIsOperational() {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Assertions.assertThat(repository).as("RoomRepository should be initialized").isNotNull();
-&nbsp;&nbsp;&nbsp;&nbsp;}
+    @Given("the hotel management system is operational")
+    public void theHotelManagementSystemIsOperational() {
+        Assertions.assertThat(repository).as("RoomRepository should be initialized").isNotNull();
+    }
 
-&nbsp;&nbsp;&nbsp;&nbsp;@When("I register a room with number {int}")
-&nbsp;&nbsp;&nbsp;&nbsp;public void iRegisterARoomWithNumber(Integer number) {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Room room = Room.builder()
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.number(number)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.type(RoomType.STANDARD)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.status(RoomStatus.AVAILABLE)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.cleanStatus(CleanStatus.CLEAN)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.build();
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;repository.save(room);
-&nbsp;&nbsp;&nbsp;&nbsp;}
+    @When("I register a room with number {int}")
+    public void iRegisterARoomWithNumber(Integer number) {
+        Room room = Room.builder()
+                .number(number)
+                .type(RoomType.STANDARD)
+                .status(RoomStatus.AVAILABLE)
+                .cleanStatus(CleanStatus.CLEAN)
+                .build();
+        repository.save(room);
+    }
 
-&nbsp;&nbsp;&nbsp;&nbsp;@Then("the room with number {int} should appear in the room list")
-&nbsp;&nbsp;&nbsp;&nbsp;public void theRoomWithNumberShouldAppearInTheRoomList(Integer number) {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;List&lt;Room&gt; rooms = repository.findAll();
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Assertions.assertThat(rooms)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.extracting(Room::getNumber)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.contains(number);
-&nbsp;&nbsp;&nbsp;&nbsp;}
+    @Then("the room with number {int} should appear in the room list")
+    public void theRoomWithNumberShouldAppearInTheRoomList(Integer number) {
+        List<Room> rooms = repository.findAll();
+        Assertions.assertThat(rooms)
+                .extracting(Room::getNumber)
+                .contains(number);
+    }
 
-&nbsp;&nbsp;&nbsp;&nbsp;@When("I register the following rooms:")
-&nbsp;&nbsp;&nbsp;&nbsp;public void iRegisterTheFollowingRooms(List&lt;Room&gt; rooms) {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;rooms.forEach(repository::save);
-&nbsp;&nbsp;&nbsp;&nbsp;}
+    @When("I register the following rooms:")
+    public void iRegisterTheFollowingRooms(List<Room> rooms) {
+        rooms.forEach(repository::save);
+    }
 
-&nbsp;&nbsp;&nbsp;&nbsp;@Then("there should be {int} rooms available in the system")
-&nbsp;&nbsp;&nbsp;&nbsp;public void thereShouldBeRoomsAvailableInTheSystem(int expectedCount) {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;List&lt;Room&gt; rooms = repository.findAll();
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Assertions.assertThat(rooms).hasSize(expectedCount);
-&nbsp;&nbsp;&nbsp;&nbsp;}
+    @Then("there should be {int} rooms available in the system")
+    public void thereShouldBeRoomsAvailableInTheSystem(int expectedCount) {
+        List<Room> rooms = repository.findAll();
+        Assertions.assertThat(rooms).hasSize(expectedCount);
+    }
 
-&nbsp;&nbsp;&nbsp;&nbsp;@Given("a room with number {int} is registered as {word}")
-&nbsp;&nbsp;&nbsp;&nbsp;public void aRoomWithNumberIsRegisteredAs(Integer number, String statusName) {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;RoomStatus status = RoomStatus.valueOf(statusName);
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Room room = Room.builder()
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.number(number)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.type(RoomType.STANDARD)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.status(status)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.cleanStatus(CleanStatus.CLEAN)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.build();
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;repository.save(room);
-&nbsp;&nbsp;&nbsp;&nbsp;}
+    @Given("a room with number {int} is registered as {word}")
+    public void aRoomWithNumberIsRegisteredAs(Integer number, String statusName) {
+        RoomStatus status = RoomStatus.valueOf(statusName);
+        Room room = Room.builder()
+                .number(number)
+                .type(RoomType.STANDARD)
+                .status(status)
+                .cleanStatus(CleanStatus.CLEAN)
+                .build();
+        repository.save(room);
+    }
 
-&nbsp;&nbsp;&nbsp;&nbsp;@When("I mark the room {int} as {word}")
-&nbsp;&nbsp;&nbsp;&nbsp;public void iMarkTheRoomAs(Integer number, String newStatusName) {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;RoomStatus newStatus = RoomStatus.valueOf(newStatusName);
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Optional&lt;Room&gt; roomOpt = repository.findByNumber(number);
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Assertions.assertThat(roomOpt)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.as("Room %s should exist", number)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.isPresent();
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Room updatedRoom = roomOpt.orElseThrow();
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;updatedRoom.update(newStatus);
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;repository.save(updatedRoom);
-&nbsp;&nbsp;&nbsp;&nbsp;}
+    @When("I mark the room {int} as {word}")
+    public void iMarkTheRoomAs(Integer number, String newStatusName) {
+        RoomStatus newStatus = RoomStatus.valueOf(newStatusName);
+        Optional<Room> roomOpt = repository.findByNumber(number);
+        Assertions.assertThat(roomOpt)
+                .as("Room %s should exist", number)
+                .isPresent();
+        Room updatedRoom = roomOpt.orElseThrow();
+        updatedRoom.update(newStatus);
+        repository.save(updatedRoom);
+    }
 
-&nbsp;&nbsp;&nbsp;&nbsp;@Then("the room {int} should be marked as {word}")
-&nbsp;&nbsp;&nbsp;&nbsp;public void theRoomShouldBeMarkedAs(Integer number, String expectedStatusName) {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;RoomStatus expectedStatus = RoomStatus.valueOf(expectedStatusName);
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Optional&lt;Room&gt; roomOpt = repository.findByNumber(number);
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Assertions.assertThat(roomOpt)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.as("Room %s should exist", number)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.isPresent()
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.get()
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.extracting(Room::getStatus)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.isEqualTo(expectedStatus);
-&nbsp;&nbsp;&nbsp;&nbsp;}
-}</pre>
+    @Then("the room {int} should be marked as {word}")
+    public void theRoomShouldBeMarkedAs(Integer number, String expectedStatusName) {
+        RoomStatus expectedStatus = RoomStatus.valueOf(expectedStatusName);
+        Optional<Room> roomOpt = repository.findByNumber(number);
+        Assertions.assertThat(roomOpt)
+                .as("Room %s should exist", number)
+                .isPresent()
+                .get()
+                .extracting(Room::getStatus)
+                .isEqualTo(expectedStatus);
+    }
+}
+```
+
 
 Conclusion {#h2-4-conclusion}
 -----------------------------

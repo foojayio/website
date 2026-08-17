@@ -58,13 +58,16 @@ Within the system declaration, the annotation *@Part* allows the developer to de
 
 Example:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">//…
+```java
+//…
 @SYDec("…")
 class SY {
     @Part(ip = "10.0.0.1", port = 8001) foo.S bar;
     @Cap AY usePart;
     // …
-}</pre>
+}
+```
+
 
 Within the fragment of a system declaration above,
 
@@ -82,7 +85,8 @@ The method that specifies the desired behavior of an activity is annotated with 
 
 Example:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">// …
+```java
+// …
 @AYSpec("…")
 class AY {
     // …
@@ -91,7 +95,9 @@ class AY {
         var r1 = sy.bar.b.soSth(/* … */); // blocking access
         var r2 = sy.bar.c.soSth(/* … */); // concurrent access
     }
-}</pre>
+}
+```
+
 
 Within the fragment of the activity specification above, the method
 
@@ -155,7 +161,8 @@ The next subsections describe the individual implementations.
 
 The developer realizes *multiplier's* system specification within the directory *multiplier* . The source code is in the subdirectory *src* and consists of the module information *module-info.java* , the system declaration *SY.java* , and the activity specification *Multiply.java*.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="raw" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="multiplier/src" data-enlighter-group="multiplier">multiplier/
+```
+multiplier/
 └── src
     ├── module-info.java
     └── multiplier
@@ -163,22 +170,31 @@ The developer realizes *multiplier's* system specification within the directory 
             ├── Multiply.java
             └── SY.java
 
-3 directories, 3 files</pre>
+3 directories, 3 files
+```
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="module-info.java" data-enlighter-group="multiplier">module multiplier.spec {
+
+```java
+module multiplier.spec {
     requires static fepcos.annotations;
-}</pre>
+}
+```
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="SY.java" data-enlighter-group="multiplier">package multiplier.spec;
+
+```java
+package multiplier.spec;
 
 import fepcos.sy.*;
 
 @SYDec("A System that multiplies numbers.")
 class SY {
     @Cap Multiply mul;
-}</pre>
+}
+```
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="Multiply.java" data-enlighter-group="multiplier">package multiplier.spec;
+
+```java
+package multiplier.spec;
 
 import fepcos.ay.*;
 
@@ -192,7 +208,9 @@ class Multiply {
     void go(SY sy) {
         z = x*y;
     }
-}</pre>
+}
+```
+
 
 Since the principle of *multiplier's* source code is essentially the same as that of *adder* , I will not explain it further here and refer you to my [last post](https://foojay.io/today/fuchs-2023-fepcos-j-01/).
 
@@ -200,18 +218,22 @@ Since the principle of *multiplier's* source code is essentially the same as tha
 
 After running ***fjp*** , the subdirectory *tgt* contains the system export module *multiplier.exp.jar* , the system import module *multiplier.imp.jar* , and the system documentation *multiplier.imp-doc.zip*.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="raw" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">multiplier/tgt/
+```
+multiplier/tgt/
 ├── multiplier.exp.jar
 ├── multiplier.imp-doc.zip
 └── multiplier.imp.jar
 
-0 directories, 3 files</pre>
+0 directories, 3 files
+```
+
 
 ### Implementing the composed system *calculator* {#h3-11-implementing-the-composed-system-calculator}
 
 The developer realizes the system specification within the directory *calculator* and stores the required modular Jar flies in the subdirectory *mlib* and the source code in the subdirectory *src*.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="raw" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">calculator/
+```
+calculator/
 ├── mlib
 │   ├── adder.imp.jar
 │   └── multiplier.imp.jar
@@ -223,7 +245,9 @@ The developer realizes the system specification within the directory *calculator
     │       └── SY.java
     └── module-info.java
 
-4 directories, 6 files</pre>
+4 directories, 6 files
+```
+
 
 In detail, *adder.imp.jar* and *multiplier.imp.jar* are the required parts´ system import modules that ***fjp*** has generated. Further, the source code of the system specification *calculator.spec* consists of the module information *module-info.java* , the system declaration *SY.java* , and the activity specifications *Add.java* and *Multiply.java*.
 
@@ -233,11 +257,14 @@ The following describes the Java code in detail.
 
 The module *calculator.spec* realizes the system specification.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="calculator - module-info.java" data-enlighter-group="calculator.module-info">module calculator.spec {
+```java
+module calculator.spec {
     requires static fepcos.annotations;
     requires adder.imp;
     requires multiplier.imp;
-}</pre>
+}
+```
+
 
 It requires the annotations FEPCOS-J provides in the module *fepcos.annotations* for compile time. The two packages, *fepcos.sy* and *fepcos.ay* , belong to *fepcos.annotations*. These two packages contain all the annotations for the example.
 
@@ -247,7 +274,8 @@ The composed system *calculator* uses the basic systems *adder* and *multiplier*
 
 The class SY belongs to the *`package calculator.spec`* and imports `fepcos.sy.*`, which contains the annotations *@SYDec* , *@Cap* , and *@Part*. The following explains their usage.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="calculator - SY.java" data-enlighter-group="calculator.SY">package calculator.spec;
+```java
+package calculator.spec;
 
 import fepcos.sy.*;
 
@@ -258,7 +286,9 @@ class SY {
 
     @Cap Add add;
     @Cap Multiply mul;
-}</pre>
+}
+```
+
 
 *@SYDec* specifies that the annotated `class SY` is the system declaration. ***fjp*** generates the system documentation by using the String of the annotation.
 
@@ -278,7 +308,8 @@ declares part `multiplier`. It is accessible via internet socket 10.1.0.2:8001 b
 
 The following code of activity specifications `Add` and `Multiply` essentially correspond to each other. For that reason, the next paragraph points out the similarities. Details of the activities are described afterwards.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="calculator - Add.java" data-enlighter-group="calculator.ay">package calculator.spec;
+```java
+package calculator.spec;
 
 import fepcos.ay.*;
 
@@ -295,9 +326,12 @@ class Add {
         // set the output parameter
         z = res.z;
     }
-}</pre>
+}
+```
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="calculator - Multiply.java" data-enlighter-group="calculator.ay">package calculator.spec;
+
+```java
+package calculator.spec;
 
 import fepcos.ay.*;
 
@@ -314,7 +348,9 @@ class Multiply {
         // set the output parameter
         z = res.z;
     }
-}</pre>
+}
+```
+
 
 Both activity specifications are in the `package calculator.spec` and import the package `fepcos.ay.*`, which contains annotations *@AYSpec* , *@In* , *@Out* , and *@Behavior* . Further, *@AYSpec* expresses that the annotated class is the activity specification.
 
@@ -348,18 +384,22 @@ In detail, the instance of the ***fjp*** -generated system interface `sy.multipl
 
 After running ***fjp*** , the subdirectory *tgt* contains the system export module *calculator.exp.jar* , the system import module *calculator.imp.jar* , and the system documentation *calculator.imp-doc.zip*.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="raw" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">calculator/tgt/
+```
+calculator/tgt/
 ├── calculator.exp.jar
 ├── calculator.imp-doc.zip
 └── calculator.imp.jar
 
-0 directories, 3 files</pre>
+0 directories, 3 files
+```
+
 
 ### Implementing the application *app* {#h3-12-implementing-the-application-app}
 
 The developer realizes the system user *app* within the directory *app* and stores the required modular Jar files in the subdirectory *mlib* and the source code in the subdirectory *src*.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="raw" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">app/
+```
+app/
 ├── mlib
 │   └── calculator.imp.jar
 └── src
@@ -367,7 +407,9 @@ The developer realizes the system user *app* within the directory *app* and stor
     │   └── Main.java
     └── module-info.java
 
-3 directories, 3 files</pre>
+3 directories, 3 files
+```
+
 
 In detail, *calculator.imp.jar* is the composed system's import module, which ***fjp*** has generated. Further, the source code of the system user *app* consists of the module information *module-info.java* and the application *Main.java*.
 
@@ -375,9 +417,12 @@ In detail, *calculator.imp.jar* is the composed system's import module, which **
 
 The module *app* realizes the system user, an application.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="app - module-info.java" data-enlighter-group="app.module-info">module app {
+```java
+module app {
     requires calculator.imp;
-}</pre>
+}
+```
+
 
 It requires the ***fjp*** -generated system import module *calculator.imp*.
 
@@ -385,7 +430,8 @@ It requires the ***fjp*** -generated system import module *calculator.imp*.
 
 The application is realized in `package app` by the `class Main`.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="app - Main.java" data-enlighter-group="app.Main">package app;
+```java
+package app;
 
 public class Main {
     final static int X = 5;
@@ -404,7 +450,9 @@ public class Main {
             System.out.println(e);
         }
     }
-}</pre>
+}
+```
+
 
 `Main` defines two constants `X` and `Y` and accesses the composed system `calculator` in the method
 
@@ -444,12 +492,15 @@ After compiling the source code by using the command
 
 the subdirectory *build* contains the compiled Java classes.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="raw" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">app/build/
+```
+app/build/
 ├── app
 │   └── Main.class
 └── module-info.class
 
-1 directory, 2 files</pre>
+1 directory, 2 files
+```
+
 
 FEPCOS-J based deployment of the example {#sec4}
 ------------------------------------------------

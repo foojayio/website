@@ -43,7 +43,8 @@ It ships with two APIs that serve different tastes: a **fluent builder** for exp
 
 When readability matters, the fluent builder gives you a clean, chainable surface for token construction. Call `jwtNew()` and chain your claims. Terminate with `.sign()` or `.encrypt()`.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">token = jwtNew()
+```java
+token = jwtNew()
     .subject( "user-123" )
     .issuer( "auth-service" )
     .audience( "mobile-client" )
@@ -51,7 +52,8 @@ When readability matters, the fluent builder gives you a clean, chainable surfac
     .expireIn( 3600 )
     .header( "kid", "v1" )
     .sign( secret, "HS256" );
-</pre>
+```
+
 
 Every standard claim has a named method. Custom claims go through `.claim( key, val )`. Headers via `.header( key, val )`. Swap `.sign()` for `.encrypt()` and you have a JWE. It reads like what it does. 🎯
 
@@ -73,34 +75,41 @@ For teams that prefer a direct, functional style, all operations are available a
 
 ### HMAC Sign and Verify {#h3-2-hmac-sign-and-verify}
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">secret  = jwtGenerateSecret( 256 );
+```java
+secret  = jwtGenerateSecret( 256 );
 token   = jwtCreate( { sub: "user-123", iss: "my-api", roles: [ "admin" ] }, secret, "HS256" );
 payload = jwtVerify( token, secret, "HS256" );
 writeOutput( payload.sub ); // user-123
-</pre>
+```
+
 
 ### RSA Sign and Verify {#h3-3-rsa-sign-and-verify}
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">keys    = jwtGenerateKeyPair( "RS256" );
+```java
+keys    = jwtGenerateKeyPair( "RS256" );
 token   = jwtCreate( { sub: "user-123" }, keys.privateKey, "RS256" );
 payload = jwtVerify( token, keys.publicKey, "RS256" );
-</pre>
+```
+
 
 ### JWE Encryption {#h3-4-jwe-encryption}
 
 Sensitive payloads --- PII, PHI, internal claims that must stay opaque --- belong in a JWE, not a JWS. bx-jwt handles both:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">token   = jwtEncrypt(
+```java
+token   = jwtEncrypt(
     { sub: "patient-456", phi: { dob: "1990-01-15" } },
     secret32bytes,
     { keyAlgorithm: "dir", encAlgorithm: "A256GCM" }
 );
 payload = jwtDecrypt( token, secret32bytes, { keyAlgorithm: "dir", encAlgorithm: "A256GCM" } );
-</pre>
+```
+
 
 Or nest them --- sign first, encrypt the signed token --- for the full sign-then-encrypt pattern:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">// Inner signed JWT
+```java
+// Inner signed JWT
 signedToken = jwtCreate( { sub: "u1", role: "admin" }, innerPrivKey, "RS256", {
     headers: { cty: "JWT" }
 } );
@@ -110,11 +119,13 @@ encryptedToken = jwtEncrypt( signedToken, outerPubKey, {
     keyAlgorithm : "RSA-OAEP-256",
     encAlgorithm : "A256GCM"
 } );
-</pre>
+```
+
 
 This is where `bx-jwt` separates from basic JWT libraries. The **Key Registry** lets you define named keys once in configuration and reference them by name throughout your entire application. Keys never appear in application logic. Rotation is a config change, not a code change.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">// ModuleConfig.bx
+```java
+// ModuleConfig.bx
 settings = {
     keys: {
         "api-signing": {
@@ -140,20 +151,25 @@ settings = {
     generateIat       : true,
     generateJti       : true
 }
-</pre>
+```
+
 
 With defaults fully configured, the key and algorithm arguments become optional everywhere:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">// No key argument, no algorithm argument — resolved from registry
+```java
+// No key argument, no algorithm argument — resolved from registry
 token   = jwtCreate( { sub: "user-123" } );
 payload = jwtVerify( token );
-</pre>
+```
+
 
 Keys can also be registered at runtime via the `JWTService`:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">jwtService = getBoxContext().getRuntime().getGlobalService( "JWTService" );
+```java
+jwtService = getBoxContext().getRuntime().getGlobalService( "JWTService" );
 jwtService.registerKey( "session-key", { algorithm: "HS256", secret: generateSecureKey() } );
-</pre>
+```
+
 
 `bx-jwt` is built with the attack surface in mind. Security properties are **unconditional** --- they cannot be turned off:
 
@@ -177,24 +193,29 @@ Use `jwtGenerateSecret( bits )` and you're always compliant.
 
 Algorithm-confusion attacks exploit servers that accept any algorithm the token header declares. Lock your application to a known set:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">// Only HS256 and RS256 are accepted — anything else throws
+```java
+// Only HS256 and RS256 are accepted — anything else throws
 allowedAlgorithms: [ "HS256", "RS256" ]
-</pre>
+```
+
 
 ### Clock Skew Tolerance {#h3-8-clock-skew-tolerance}
 
 Distributed systems have clock drift. bx-jwt ships with a configurable `clockSkew` (default: 60 seconds) that prevents legitimate tokens from failing `exp`/`nbf` validation due to minor time differences between services. Tune it per environment:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">// Strict environment
+```java
+// Strict environment
 payload = jwtVerify( token, secret, "HS256", { clockSkew: 0 } );
 
 // Distributed system with known drift
 payload = jwtVerify( token, secret, "HS256", { clockSkew: 120 } );
-</pre>
+```
+
 
 ### Authentication Middleware {#h3-9-authentication-middleware}
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">function requireAuth() {
+```java
+function requireAuth() {
     var authHeader = getHttpRequestData().headers[ "Authorization" ] ?: ""
     if ( !authHeader.startsWith( "Bearer " ) ) {
         bx:header statusCode=401;
@@ -212,11 +233,13 @@ payload = jwtVerify( token, secret, "HS256", { clockSkew: 120 } );
         claims: { iss: "auth-service", aud: "api" }
     } );
 }
-</pre>
+```
+
 
 ### Token Refresh with Grace Period {#h3-10-token-refresh-with-grace-period}
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">function refreshToken( token ) {
+```java
+function refreshToken( token ) {
     try {
         return jwtRefresh( token, application.jwtSecret, "HS256", {
             allowExpired : true,   // honor recently expired tokens
@@ -228,17 +251,20 @@ payload = jwtVerify( token, secret, "HS256", { clockSkew: 120 } );
         return "";
     }
 }
-</pre>
+```
+
 
 ### Kid-Based Key Rotation {#h3-11-kid-based-key-rotation}
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">function verifyWithKeyRotation( token ) {
+```java
+function verifyWithKeyRotation( token ) {
     var decoded = jwtDecode( token );
     var kid     = decoded.header.kid ?: "default";
     var key     = getKeyForKid( kid );
     return jwtVerify( token, key, decoded.header.alg );
 }
-</pre>
+```
+
 
 ### Signing (JWS) {#h3-12-signing-jws}
 
@@ -255,12 +281,14 @@ payload = jwtVerify( token, secret, "HS256", { clockSkew: 120 } );
 | RSA-OAEP-256  | A256GCM            | RSA key pair             |
 | dir           | A256GCM            | 256-bit symmetric secret |
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java"># CommandBox
+```java
+# CommandBox
 box install bx-jwt
 
 # BoxLang CLI
 install-bx-module bx-jwt
-</pre>
+```
+
 
 **bx-jwt requires a BoxLang+ or BoxLang++ subscription. 🔑**
 

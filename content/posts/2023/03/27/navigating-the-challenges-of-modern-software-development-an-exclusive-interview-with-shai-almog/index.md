@@ -61,7 +61,7 @@ This led me to write for an online publication, where I composed a very early Ja
 
 *Shai Almog's self-guided, hands-on journey in the software industry demonstrates the power of passion and adaptability. Embracing Java's introduction and engaging with the tech community helped shape his career. His story underlines the value of staying informed, embracing change, and contributing to the broader community for success in the software world.*
 
-*** ** * ** ***
+
 
 ### Bazlur: That's fascinating to hear about your background and how you got started in programming at such a young age. How do you think your early exposure to programming and your passion for operating systems and different programming languages has shaped your career and approach to software development today? {#h3-2-bazlur-that-s-fascinating-to-hear-about-your-background-and-how-you-got-started-in-programming-at-such-a-young-age-how-do-you-think-your-early-exposure-to-programming-and-your-passion-for-operating-systems-and-different-programming-languages-has-shaped-your-career-and-approach-to-software-development-today}
 
@@ -72,7 +72,7 @@ The ego isn't necessarily bad. We need the confidence it brings to do great thin
 **Editor's Note:**   
 *Shai Almog's experience emphasizes the need to balance confidence with humility. Mentorship played a crucial role in his personal growth, revealing the importance of continuous learning, adaptability, and embracing compassion and patience in one's career.*
 
-*** ** * ** ***
+
 
 ### Bazlur: It's fantastic to hear that you had mentors who played a crucial role in developing your soft skills and helping you balance your ego early in your career. Finding the right mentor can be critical for success, so I'm interested in knowing more about how you identified and connected with these mentors. What strategies did you use to find good mentors, and what advice would you give to someone who is looking to find a mentor in the software industry? {#h3-3-bazlur-it-s-fantastic-to-hear-that-you-had-mentors-who-played-a-crucial-role-in-developing-your-soft-skills-and-helping-you-balance-your-ego-early-in-your-career-finding-the-right-mentor-can-be-critical-for-success-so-i-m-interested-in-knowing-more-about-how-you-identified-and-connected-with-these-mentors-what-strategies-did-you-use-to-find-good-mentors-and-what-advice-would-you-give-to-someone-who-is-looking-to-find-a-mentor-in-the-software-industry}
 
@@ -90,7 +90,7 @@ This was such a contrast to my previous manager, who was so invested in the tech
 
 *Shai Almog's experience demonstrates the impact of observing and learning from the people around us, even without formal mentorship. He absorbed valuable lessons from project managers and senior developers who displayed qualities he admired. His story emphasizes the importance of self-awareness, adaptability, and learning through observation, which can help anyone seeking guidance and growth in their career.*
 
-*** ** * ** ***
+
 
 ### Bazlur: It's clear that you were able to learn a lot from the people you worked with throughout your career, even without formal mentorship relationships. I'm curious, what advice would you give to junior developers just starting out in the software industry and looking for guidance and support in their career development? {#h3-4-bazlur-it-s-clear-that-you-were-able-to-learn-a-lot-from-the-people-you-worked-with-throughout-your-career-even-without-formal-mentorship-relationships-i-m-curious-what-advice-would-you-give-to-junior-developers-just-starting-out-in-the-software-industry-and-looking-for-guidance-and-support-in-their-career-development}
 
@@ -107,7 +107,7 @@ That's a painful experience, but we need to put ourselves through those experien
 **Editor's Note:**   
 *Shai Almog's insights emphasize the importance of self-awareness and objectivity in personal growth and career development. By being open to feedback and willing to face uncomfortable truths, junior developers can learn from their experiences and continuously improve their skills. Embracing self-reflection and adjusting one's perspective, even when it's challenging, is crucial for long-term success and personal growth in any career.*
 
-*** ** * ** ***
+
 
 ### Bazlur: It's great that you mentioned public speaking. What do you think? Is it essential for a developer to speak at conferences? There is a common belief that most developers are shy and not confident enough to share their knowledge with others, and some would consider this imposter syndrome. What advice would you give those hesitant to speak at conferences or share their expertise with others? How can they overcome imposter syndrome and develop the confidence to share their knowledge and experiences with a broader audience? {#h3-5-bazlur-it-s-great-that-you-mentioned-public-speaking-what-do-you-think-is-it-essential-for-a-developer-to-speak-at-conferences-there-is-a-common-belief-that-most-developers-are-shy-and-not-confident-enough-to-share-their-knowledge-with-others-and-some-would-consider-this-imposter-syndrome-what-advice-would-you-give-those-hesitant-to-speak-at-conferences-or-share-their-expertise-with-others-how-can-they-overcome-imposter-syndrome-and-develop-the-confidence-to-share-their-knowledge-and-experiences-with-a-broader-audience}
 
@@ -123,7 +123,7 @@ The one difference is that I'm not embarrassed to admit that today...
 
 *Shai Almog highlights that public speaking isn't essential for all developers, and everyone has unique strengths. He acknowledges the prevalence of imposter syndrome and suggests that embracing vulnerability can help overcome it. His advice encourages those hesitant to share their expertise to recognize that everyone starts somewhere, and by embracing both confidence and humility, one can grow as a developer and communicator.*   
 
-*** ** * ** ***
+
 
 ### Bazlur Rahman: Let's shift gears and talk about the current state of software development. In your opinion, what are some of the biggest challenges that developers face today? Additionally, do you have any advice on how to overcome these challenges? {#h3-6-bazlur-rahman-let-s-shift-gears-and-talk-about-the-current-state-of-software-development-in-your-opinion-what-are-some-of-the-biggest-challenges-that-developers-face-today-additionally-do-you-have-any-advice-on-how-to-overcome-these-challenges}
 
@@ -147,7 +147,7 @@ The first is SEO. Modern SEO has destroyed search engines. They have become usel
 
 *Shai Almog identifies the increasing costs and complexity in software development, along with the challenges of information noise, as significant issues developers face today. He emphasizes the need for finding the right balance in system design and honing skills in resource-constrained environments. Furthermore, Shai highlights the importance of critical thinking and continuous learning to navigate the cluttered landscape of SEO and AI-generated code, ensuring developers can address complex problems and maintain high-quality work.*
 
-*** ** * ** ***
+
 
 ### Bazlur: You mentioned AI-generated code, and I'm curious about your thoughts on AI, especially with the advent of ChatGPT. With its rapid improvement, it's possible that many of the trivial tasks that developers are hired for, such as making UI or writing JavaScript, will soon be easily done by AI. Do you believe this could lead to programmers losing their jobs? Is it concerning? And what advice would you give to those entering the field in light of these developments? {#h3-7-bazlur-you-mentioned-ai-generated-code-and-i-m-curious-about-your-thoughts-on-ai-especially-with-the-advent-of-chatgpt-with-its-rapid-improvement-it-s-possible-that-many-of-the-trivial-tasks-that-developers-are-hired-for-such-as-making-ui-or-writing-javascript-will-soon-be-easily-done-by-ai-do-you-believe-this-could-lead-to-programmers-losing-their-jobs-is-it-concerning-and-what-advice-would-you-give-to-those-entering-the-field-in-light-of-these-developments}
 
@@ -168,7 +168,7 @@ I think more people will gravitate toward getting their information from trusted
 
 *Shai Almog points out that while AI advancements, like ChatGPT, can help automate some programming tasks, they primarily tackle low-hanging fruit and do not replace the need for skilled developers. He believes AI-generated code may make programming more accessible and productive but acknowledges that it can also introduce challenges, such as a decline in trust for online resources. Shai suggests that developers should focus on honing their skills, working on complex problems, and seeking trusted sources of information to stay relevant and successful in the industry.*
 
-*** ** * ** ***
+
 
 ### Bazlur: As someone who has transitioned from a developer to a developer advocate, what advice would you give to someone who is just starting out in the software industry and unsure of which career path to pursue? Could you also provide insights into the various roles within the industry, such as developer, quality assurance, manager, and developer advocacy, and the specific skills and interests needed for each of these roles? In particular, could you discuss the advantages of pursuing a career as a developer advocate in software development and offer advice on how to pursue that path? {#h3-8-bazlur-as-someone-who-has-transitioned-from-a-developer-to-a-developer-advocate-what-advice-would-you-give-to-someone-who-is-just-starting-out-in-the-software-industry-and-unsure-of-which-career-path-to-pursue-could-you-also-provide-insights-into-the-various-roles-within-the-industry-such-as-developer-quality-assurance-manager-and-developer-advocacy-and-the-specific-skills-and-interests-needed-for-each-of-these-roles-in-particular-could-you-discuss-the-advantages-of-pursuing-a-career-as-a-developer-advocate-in-software-development-and-offer-advice-on-how-to-pursue-that-path}
 
@@ -186,7 +186,7 @@ Save as much as you can and put it all into index funds. But unfortunately, I ma
 
 *Shai Almog emphasizes the importance of being open to exploring different roles and pivoting throughout one's career to find satisfaction and success. Although he doesn't explicitly detail the specific roles within the industry, his experiences highlight the need for adaptability and a willingness to learn new skills. Shai also underscores the significance of financial freedom and advises younger professionals to save and invest wisely to maintain stability and flexibility in their career journey.*
 
-*** ** * ** ***
+
 
 ### Bazlur: Thank you, Shai Almog, for sharing your insights. I'm sure our readers will find them immensely beneficial. On a different note, do you have any enjoyable or memorable stories from your time in the software industry that you would be willing to share with us? {#h3-9-bazlur-thank-you-shai-almog-for-sharing-your-insights-i-m-sure-our-readers-will-find-them-immensely-beneficial-on-a-different-note-do-you-have-any-enjoyable-or-memorable-stories-from-your-time-in-the-software-industry-that-you-would-be-willing-to-share-with-us}
 
@@ -206,7 +206,7 @@ For my recent co-recursive interview, Adam listened to me talk for 4 hours. I di
 **Editor's Note:**   
 *Shai Almog's anecdotes reveal the diverse and sometimes unpredictable nature of a career in the software industry. From coding in a burning building to unique work experiences at Sun Microsystems, his stories demonstrate the importance of adaptability and maintaining a sense of humor in the face of challenges. These experiences serve as a reminder that a successful career is often built on a foundation of unexpected moments and lessons learned along the way.*
 
-*** ** * ** ***
+
 
 ### Bazlur: Wow, that sounds like an incredible experience. Thank you so much for sharing your insights with us. We really appreciate your time. If we have any further questions, we will be sure to reach out to you. Before we end, is there any parting advice or resources you would like to share with our readers, such as a list of recommended books or any other useful information? {#h3-10-bazlur-wow-that-sounds-like-an-incredible-experience-thank-you-so-much-for-sharing-your-insights-with-us-we-really-appreciate-your-time-if-we-have-any-further-questions-we-will-be-sure-to-reach-out-to-you-before-we-end-is-there-any-parting-advice-or-resources-you-would-like-to-share-with-our-readers-such-as-a-list-of-recommended-books-or-any-other-useful-information}
 
@@ -224,7 +224,7 @@ Also, JavaZone is my favorite conference. <https://www.youtube.com/@JavaZoneNo>
 
 I loved the Freakonomics books and blog, which help understand incentives in a very engineering-friendly way.
 
-*** ** * ** ***
+
 
 ### Conclusion {#h3-11-conclusion}
 

@@ -24,16 +24,17 @@ When a HTTP request comes in, a 'normal' web application would map the request t
 
 This is where reactive programming can help us out. Instead of having a large thread-pool and a "thread-per-request" model, a reactive application only has one thread per CPU core that keeps running and if it hits an IO operation then it offloads this operation and works on something else until the IO has completed. We say that such application is non-blocking. The approach came into existence when a group of companies cooperated in the Reactive Streams initiative to define the key principles and four JVM interfaces. After that, they pretty much each went their own way to create a reactive library based on these agreements. One of these libraries, Project Reactor, is the fundament on which Spring built their reactive web framework Spring WebFlux. This reactive stack enables us to build non-blocking web applications in a structure that looks familiar in terms of classes, methods and annotations if you worked with Spring MVC, but the actual method implementations can be quite a learning curve. Have a look at the controller below.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">@RestController
+```java
+@RestController
 @RequestMapping("/cats")
 class CatController(
     @Autowired val catRepository: CatRepository
 ) {
     @PutMapping("{id}")
-    fun updateProduct(@PathVariable(value = "id") id: Long, @RequestBody newCat: Cat): Mono&lt;ResponseEntity&lt;Cat?&gt;&gt; {
+    fun updateProduct(@PathVariable(value = "id") id: Long, @RequestBody newCat: Cat): Mono<ResponseEntity<Cat?>> {
         return catRepository
             .findById(id)
-            .flatMap { existingCat -&gt;
+            .flatMap { existingCat ->
                 catRepository.save(
                     existingCat.copy(
                         name = newCat.name,
@@ -42,10 +43,12 @@ class CatController(
                     )
                 )
             }
-            .map { updatedCat -&gt; ResponseEntity.ok(updatedCat) }
+            .map { updatedCat -> ResponseEntity.ok(updatedCat) }
             .defaultIfEmpty(ResponseEntity.notFound().build())
     }
-}</pre>
+}
+```
+
 
 As you see, the imperative style we came to love is replaced by a declaritive paradigm with many combinators. Our code suddenly consists of functional call chains that propogate inputs from publishers to subscribers. Also, we now suddenly need to deal with abstractions like Mono and Flux in all the layers of our application and, as such, our codebase becomes coupled to the reactive library we use. In the end, it feels like we have to leave behind everything we know just to get the non-blocking goodies. That seems like a high price, so can we do different?
 
@@ -84,12 +87,15 @@ We start by creating a fresh Spring Boot project using the [Spring Initializr](h
 
 We then need to add two more test dependencies for Mockk and SpringMockk:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">dependencies {
+```java
+dependencies {
     ...
     testImplementation("io.mockk:mockk:1.10.2")
     testImplementation("com.ninja-squad:springmockk:3.0.1")
     ...
-}</pre>
+}
+```
+
 
 These are not strictly required to run our application but are used in the tests. I recommend you to check Maven Central for the latest versions.
 
@@ -98,7 +104,8 @@ Router {#h2-2-router}
 
 Router functions take an argument of type `ServerRequest` and return a `ServerResponse`. These are the WebFlux variants of Spring MVC's `RequestEntity` and `ResponseEntity`, respectively. We use the Kotlin router DSL to define our routes:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">@Configuration
+```java
+@Configuration
 class CatRouterConfiguration(
     private val catHandler: CatHandler
 ) {
@@ -123,7 +130,9 @@ class CatRouterConfiguration(
             }
         }
     }
-}</pre>
+}
+```
+
 
 The `coRouter` function creates a RouterFunction based on the further nested statements. You can use the `String.nest` extension function to group routes that share a common path prefix. Similar groupings can be made based on accept and contentType headers, as well as other predicates. The actual routes are added through functions that correspond to the HTTP methods: `GET`, `POST`, `PUT`, `DELETE` and the others. The actual processing is handled by the Handler.
 
@@ -132,7 +141,8 @@ Handler {#h2-3-handler}
 
 Implementations of `HandlerFunction` represent functions that takes in requests and generates responses based on these. Similar to the methods in a service, related handler functions are grouped in a handler class using a Kotlin-specific DSL. These functions read and parse the path variables and request bodies, reach out to the repositories, and build a `ServerResponse` to return to the router.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">@Component
+```java
+@Component
 class CatHandler(
     private val catRepository: CatRepository
 ) {
@@ -201,12 +211,17 @@ class CatHandler(
             ServerResponse.notFound().buildAndAwait()
         }
     }
-}</pre>
+}
+```
+
 
 Here we also observe the Kotlin extensions that Spring baked into WebFlux. The convention is that the `ServerResponse` builder's Reactor-based methods are prefixed by 'await' or suffixed by 'AndAwait' to form the suspending methods used in the coroutines approach. To see that it internally is still the same mechanism, let's zoom in on the `bodyValueAndAwait` method:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">suspend fun ServerResponse.BodyBuilder.bodyValueAndAwait(body: Any): ServerResponse =
-        bodyValue(body).awaitSingle()</pre>
+```java
+suspend fun ServerResponse.BodyBuilder.bodyValueAndAwait(body: Any): ServerResponse =
+        bodyValue(body).awaitSingle()
+```
+
 
 As we can see, the Reactor method `bodyValue` is called and chained by `awaitSingle` from the `kotlinx.coroutines` package, which awaits the single value from the Publisher and returns the resulting value, to create the coroutines variant called `bodyValueAndAwait`.
 
@@ -215,13 +230,16 @@ Repository {#h2-4-repository}
 
 The last stop before the database are the repositories at the persistence infrastructure layer. Similar to the other layers, we need to be non-blocking here. We, therefore, cannot use the blocking JDBC and need to use the reactive alternative called [R2DBC](https://r2dbc.io/). Spring Data Reactive luckily offers interfaces for non-blocking repositories that look a lot like their blocking counterparts `JpaRepository` or `CrudRepository`. If we choose to implement the R2DBC variant called `ReactiveCrudRepository` then these methods would return the Reactor data types `Mono` and `Flux`. Fortunately for us, as with the other layers, WebFlux provides extensions for Kotlin and coroutines in the form of `CoroutineCrudRepository` that return just the entities:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">interface CatRepository : CoroutineCrudRepository&lt;Cat, Long&gt; {
-    override fun findAll(): Flow&lt;Cat&gt;
+```java
+interface CatRepository : CoroutineCrudRepository<Cat, Long> {
+    override fun findAll(): Flow<Cat>
     override suspend fun findById(id: Long): Cat?
     override suspend fun existsById(id: Long): Boolean
-    override suspend fun &lt;S : Cat&gt; save(entity: S): Cat
+    override suspend fun <S : Cat> save(entity: S): Cat
     override suspend fun deleteById(id: Long)
-}</pre>
+}
+```
+
 
 Tests {#h2-5-tests}
 -------------------
@@ -236,7 +254,8 @@ This first approach is the one I see most often in other articles: we mock the `
 
 We mock the repository using [Mockk](https://mockk.io/), a mocking framework built specifically for Kotlin. It is a good match for the application we created as Mockk has built-in support for coroutines. A deepdive into Mockk is beyond the scope of this article. What you should know is that we can use the combination of `coEvery` and `coAnswers` to set return values for the methods of `CatRepository` we want to mock. Also, Spring does not (yet) offer support to mock beans with Mockk like it gives us the `@MockBean` annotation for Mockito. Therefore, we use [SpringMockk](https://github.com/Ninja-Squad/springmockk) and its `@MockkBean` annotation to achieve the same thing.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">@WebFluxTest
+```java
+@WebFluxTest
 @Import(CatRouterConfiguration::class, CatHandler::class)
 class MockedRepositoryIntegrationTest(
     @Autowired private val client: WebTestClient
@@ -281,7 +300,7 @@ class MockedRepositoryIntegrationTest(
             .exchange()
             .expectStatus()
             .isOk
-            .expectBodyList&lt;CatDto&gt;()
+            .expectBodyList<CatDto>()
             .hasSize(2)
             .contains(aCat().toDto(), anotherCat().toDto())
     }
@@ -300,7 +319,7 @@ class MockedRepositoryIntegrationTest(
             .exchange()
             .expectStatus()
             .isOk
-            .expectBody&lt;CatDto&gt;()
+            .expectBody<CatDto>()
             .isEqualTo(aCat().toDto())
     }
 
@@ -320,7 +339,7 @@ class MockedRepositoryIntegrationTest(
 
     @Test
     fun `Add a new cat`() {
-        val savedCat = slot&lt;Cat&gt;()
+        val savedCat = slot<Cat>()
         coEvery {
             repository.save(capture(savedCat))
         } coAnswers {
@@ -336,13 +355,13 @@ class MockedRepositoryIntegrationTest(
             .exchange()
             .expectStatus()
             .isOk
-            .expectBody&lt;CatDto&gt;()
+            .expectBody<CatDto>()
             .isEqualTo(savedCat.captured.toDto())
     }
 
     @Test
     fun `Add a new cat with empty request body`() {
-        val savedCat = slot&lt;Cat&gt;()
+        val savedCat = slot<Cat>()
         coEvery {
             repository.save(capture(savedCat))
         } coAnswers {
@@ -368,7 +387,7 @@ class MockedRepositoryIntegrationTest(
             aCat()
         }
 
-        val savedCat = slot&lt;Cat&gt;()
+        val savedCat = slot<Cat>()
         coEvery {
             repository.save(capture(savedCat))
         } coAnswers {
@@ -386,13 +405,13 @@ class MockedRepositoryIntegrationTest(
             .exchange()
             .expectStatus()
             .isOk
-            .expectBody&lt;CatDto&gt;()
+            .expectBody<CatDto>()
             .isEqualTo(updatedCat)
     }
 
     @Test
     fun `Update cat with non-existing id`() {
-        val requestedId = slot&lt;Long&gt;()
+        val requestedId = slot<Long>()
         coEvery {
             repository.findById(capture(requestedId))
         } coAnswers {
@@ -472,7 +491,9 @@ class MockedRepositoryIntegrationTest(
 
         coVerify(exactly = 0) { repository.deleteById(any()) }
     }
-}</pre>
+}
+```
+
 
 ### 2. Tests without mocking {#h3-7-2-tests-without-mocking}
 
@@ -482,7 +503,8 @@ One difference with the other test suite is that we use `@AutoConfigureWebTestCl
 
 Also, as we cannot mock the repository's answers anymore, we need another way to set its state at the start of the test. I defined an extension method `CatRepository.seed` to save cats to the database and an `@AfterEach` method to clean up after the test. Both use `runBlocking` to create a coroutine that blocks the current thread interruptible until its completion. If we do not block the thread then JUnit proceeds with the actual test before the cats are actually inserted into or deleted from the database.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">@SpringBootTest
+```java
+@SpringBootTest
 @AutoConfigureWebTestClient
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 class InMemoryDatabaseIntegrationTest(
@@ -533,7 +555,7 @@ class InMemoryDatabaseIntegrationTest(
             .exchange()
             .expectStatus()
             .isOk
-            .expectBodyList&lt;CatDto&gt;()
+            .expectBodyList<CatDto>()
             .hasSize(2)
             .contains(aCat().toDto(), anotherCat().toDto())
     }
@@ -548,7 +570,7 @@ class InMemoryDatabaseIntegrationTest(
             .exchange()
             .expectStatus()
             .isOk
-            .expectBody&lt;CatDto&gt;()
+            .expectBody<CatDto>()
             .isEqualTo(anotherCat().toDto())
     }
 
@@ -573,7 +595,7 @@ class InMemoryDatabaseIntegrationTest(
             .exchange()
             .expectStatus()
             .isOk
-            .expectBody&lt;CatDto&gt;()
+            .expectBody<CatDto>()
             .isEqualTo(aCat().toDto())
     }
 
@@ -604,7 +626,7 @@ class InMemoryDatabaseIntegrationTest(
             .exchange()
             .expectStatus()
             .isOk
-            .expectBody&lt;CatDto&gt;()
+            .expectBody<CatDto>()
             .isEqualTo(updatedCat)
     }
 
@@ -657,7 +679,9 @@ class InMemoryDatabaseIntegrationTest(
             .expectStatus()
             .isNotFound
     }
-}</pre>
+}
+```
+
 
 Conclusion {#h2-8-conclusion}
 -----------------------------

@@ -87,11 +87,14 @@ This setup will allow to learn:
 
 The setup is very easy for Spring Boot, it often consists of adding JobRunr's Spring Boot starter artifact as a dependency. The following snippet shows how to include it when using Maven as a build tool.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="xml" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&lt;dependency&gt; 
-    &lt;groupId&gt;org.jobrunr&lt;/groupId&gt; 
-    &lt;artifactId&gt;jobrunr-spring-boot-4-starter&lt;/artifactId&gt;
-    &lt;version&gt;${jobrunr.version}&lt;/version&gt; 
-&lt;/dependency&gt;</pre>
+```xml
+<dependency> 
+    <groupId>org.jobrunr</groupId> 
+    <artifactId>jobrunr-spring-boot-4-starter</artifactId>
+    <version>${jobrunr.version}</version> 
+</dependency>
+```
+
 
 JobRunr requires adding database dependencies. We can skip this step as this is usually done when initializing the Spring Boot application. Nonetheless, it's worth noting that JobRunr [supports several databases](https://www.jobrunr.io/en/documentation/installation/storage/ "supports several databases"). Another DB related feature is that all JobRunr related migrations are automatically handled by default. You can always decide otherwise and [take control over the DB setup](https://www.jobrunr.io/en/documentation/installation/storage/#setting-up-the-database-yourself "take control over the DB setup").
 
@@ -102,15 +105,21 @@ JobRunr also needs a JSON processing library, but as Spring Boot by default come
 
 JobRunr can be configured using `application.properties`. Job processing and the dashboard are disabled by default. To enable them, we'll add the following to the configuration file:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="raw" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">org.jobrunr.dashboard.enabled=true
-org.jobrunr.background-job-server.enabled=true</pre>
+```
+org.jobrunr.dashboard.enabled=true
+org.jobrunr.background-job-server.enabled=true
+```
+
 
 While we're still in `application.properties` we will also add:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="raw" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">monthly-sales-report.cron=0 0 1 * *
+```
+monthly-sales-report.cron=0 0 1 * *
 daily-resupply.cron=0 0 * * *
 
-stock-locations=Brussels,Antwerp,Bruges,Liege</pre>
+stock-locations=Brussels,Antwerp,Bruges,Liege
+```
+
 
 Those will be useful to our recurring jobs as we'll see later!
 
@@ -134,7 +143,8 @@ The `OrderFulfillmentController` will provide an endpoint to enqueue jobs. These
 
 Here is an initial implementation of the `OrderFulfillmentService` class, we'll add more to it later.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@Service
+```java
+@Service
 public class OrderFulfillmentService {
     private static final Logger LOGGER = LoggerFactory.getLogger(OrderFulfillmentService.class);
     public void sendOrderConfirmation(UUID orderId) throws InterruptedException {
@@ -154,13 +164,16 @@ public class OrderFulfillmentService {
         LOGGER.info("Order {}: initiating shipment", orderId);
         Thread.sleep(5000);
     }
-}</pre>
+}
+```
+
 
 *Note that we use `Thread.sleep` to simulate work, this forces us to explicitly handle `InterruptedException`, in an actual application, it's probably not needed.*
 
 The `OrderFulfillmentTasks` class makes use of the `OrderFulfillmentService`. Notice the additional `@Job`, which allows setting values to a job's attributes. This annotation is very handy! You may also use the alternative: the `JobBuilder`. We're doing exactly that in the body of the method, the jobs are configured using the `JobBuilder` and then saved atomically. This method is essentially a job that creates other jobs, so it also benefits from JobRunr's fault tolerance capabilities.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@Service
+```java
+@Service
 public class OrderFulfillmentTasks {
 
     private final OrderFulfillmentService orderFulfillmentService;
@@ -174,33 +187,38 @@ public class OrderFulfillmentTasks {
         BackgroundJob.create(of(
                 aJob()
                         .withName(format("order-%s-confirmation", orderId))
-                        .withDetails(() -&gt; orderFulfillmentService.sendOrderConfirmation(orderId)),
+                        .withDetails(() -> orderFulfillmentService.sendOrderConfirmation(orderId)),
                 aJob()
                         .withName(format("order-%s-warehouse-notification", orderId))
                         .withAmountOfRetries(20)
-                        .withDetails(() -&gt; orderFulfillmentService.notifyWarehouse(orderId)),
+                        .withDetails(() -> orderFulfillmentService.notifyWarehouse(orderId)),
                 aJob()
                         .withName(format("order-%s-shipment-initiation", orderId))
-                        .withDetails(() -&gt; orderFulfillmentService.initiateShipment(orderId))
+                        .withDetails(() -> orderFulfillmentService.initiateShipment(orderId))
         ));
     }
-}</pre>
+}
+```
+
 
 Note the use of `withAmountOfRetries(20)` for the warehouse notification task, we have to increase the amount of retries since our internal service is quite unstable.
 
 The `OrderFulfillmentController` is quite simple as it exposes a single endpoint that requests JobRunr to enqueue jobs. Once the metadata of these jobs are saved in the database, the server workers will process them asynchronously when they are ready.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@RestController
+```java
+@RestController
 public class OrderFulfillmentController {
 
     @GetMapping("/confirm-order")
     public String confirmOrder() {
         UUID orderId = UUID.randomUUID();
-        BackgroundJob.&lt;OrderFulfillmentTasks&gt;enqueue(x -&gt; x.enqueueConfirmedOrderTasks(orderId));
+        BackgroundJob.<OrderFulfillmentTasks>enqueue(x -> x.enqueueConfirmedOrderTasks(orderId));
 
         return "Done";
     }
-}</pre>
+}
+```
+
 
 ### Creating recurring tasks {#h3-9-creating-recurring-tasks}
 
@@ -208,7 +226,8 @@ The first part of our order fulfillment system is done. Now, we'll add recurring
 
 Let's update the `OrderFulfillmentService` to add the logic for these two tasks.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@Service
+```java
+@Service
 public class OrderFulfillmentService {
     // ...
 
@@ -226,17 +245,19 @@ public class OrderFulfillmentService {
         Thread.sleep(5000);
     }
 }
-</pre>
+```
+
 
 We now update the `OrderFulfillmentTasks` to register those tasks. As they are recurring, we annotate them with `@Recurring` and a few attributes.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@Service
+```java
+@Service
 public class OrderFulfillmentTasks {
 
    // Add the following attribute to the class
 
     @Value("${stock-locations}")
-    private List&lt;String&gt; stockLocations;
+    private List<String> stockLocations;
 
     // ...
 
@@ -259,7 +280,8 @@ public class OrderFulfillmentTasks {
     }
 
 }
-</pre>
+```
+
 
 JobRunr will automatically register methods annotated with `@Reccuring` and schedule them for execution at the specified times!
 > Note the use of application properties, we promised to come back to them. We use them to configure the CRON expressions of our recurring jobs. The last property is used to provide the locations of our different warehouses. Here we have assumed that our imaginary company operates from Belgium and set the zoneId accordingly.
@@ -270,7 +292,8 @@ The system may encounter an issue that causes jobs to fail during execution. In 
 
 JobRunr allows us to hook into a job lifecycle using [Job Filters](https://www.jobrunr.io/en/documentation/pro/job-filters/ "Job Filters"). The following code simulates the idea of sending a notification when all retries have been exhausted.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@Component
+```java
+@Component
 public class OrderFulfilmentTasksFilter implements JobServerFilter {
     private static final Logger LOGGER = LoggerFactory.getLogger(OrderFulfilmentTasksFilter.class);
 
@@ -279,11 +302,14 @@ public class OrderFulfilmentTasksFilter implements JobServerFilter {
         // TODO alert operational team of Job failure
         LOGGER.info("All retries failed for Job {}", job.getJobName());
     }
-}</pre>
+}
+```
+
 
 JobRunr does not automatically register custom job filters. We need additional code to make sure our hook will be called by JobRunr's background job servers. We can achieve this by overriding the `BackgroundJobServer` bean. Here, we illustrate another approach using Spring's `BeanPostProcessor`.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@Component
+```java
+@Component
 public class BackgroundJobServerBeanPostProcessor implements BeanPostProcessor {
     private final OrderFulfilmentTasksFilter orderFulfilmentTasksFilter;
 
@@ -298,7 +324,9 @@ public class BackgroundJobServerBeanPostProcessor implements BeanPostProcessor {
         }
         return bean;
     }
-}</pre>
+}
+```
+
 
 ### Running the application {#h3-11-running-the-application}
 

@@ -62,45 +62,47 @@ At the end of the project, we will have something like this:
 
 To start implementing our project, we'll create a pom.xml file with the following content:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
-&lt;project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd"&gt;
-&lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
-&lt;groupId&gt;br.com.ricas&lt;/groupId&gt;
-&lt;artifactId&gt;my-modular-parent&lt;/artifactId&gt;
-&lt;version&gt;0.0.1-SNAPSHOT&lt;/version&gt;
-&lt;name&gt;modular application&lt;/name&gt;
-&lt;description&gt;This repository is the modular parent&lt;/description&gt;
-&lt;packaging&gt;pom&lt;/packaging&gt;
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+<modelVersion>4.0.0</modelVersion>
+<groupId>br.com.ricas</groupId>
+<artifactId>my-modular-parent</artifactId>
+<version>0.0.1-SNAPSHOT</version>
+<name>modular application</name>
+<description>This repository is the modular parent</description>
+<packaging>pom</packaging>
 
-    &lt;modules&gt;
-        &lt;module&gt;domain&lt;/module&gt;
-        &lt;module&gt;infrastructure&lt;/module&gt;
-        &lt;module&gt;application&lt;/module&gt;
-    &lt;/modules&gt;
+    <modules>
+        <module>domain</module>
+        <module>infrastructure</module>
+        <module>application</module>
+    </modules>
 
-    &lt;properties&gt;
-        &lt;java.version&gt;21&lt;/java.version&gt;
-    &lt;/properties&gt;
+    <properties>
+        <java.version>21</java.version>
+    </properties>
 
-    &lt;build&gt;
-        &lt;plugins&gt;
-            &lt;plugin&gt;
-                &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;
-                &lt;artifactId&gt;maven-compiler-plugin&lt;/artifactId&gt;
-                &lt;version&gt;3.11.0&lt;/version&gt;
-                &lt;configuration&gt;
-                    &lt;source&gt;${java.version}&lt;/source&gt;
-                    &lt;target&gt;${java.version}&lt;/target&gt;
-                    &lt;parameters&gt;true&lt;/parameters&gt;
-                    &lt;release&gt;${java.version}&lt;/release&gt;
-                &lt;/configuration&gt;
-            &lt;/plugin&gt;
-        &lt;/plugins&gt;
-    &lt;/build&gt;
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.11.0</version>
+                <configuration>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                    <parameters>true</parameters>
+                    <release>${java.version}</release>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 
-&lt;/project&gt;
-</pre>
+</project>
+```
+
 
 Notice that this project contains a few modules that we'll create in the next steps. For that, we'll create three folders: domain, infrastructure, and application. At the end, we'll have something like this:
 
@@ -110,29 +112,31 @@ Notice that this project contains a few modules that we'll create in the next st
 
 Let's start with the domain. As mentioned before, this layer will be 100% isolated and won't have any dependencies on frameworks, databases, or external resources. Here's the pom.xmlof domain layer:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
-&lt;project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd"&gt;
-    &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
-    &lt;parent&gt;
-        &lt;groupId&gt;br.com.ricas&lt;/groupId&gt;
-        &lt;artifactId&gt;my-modular-parent&lt;/artifactId&gt;
-        &lt;version&gt;0.0.1-SNAPSHOT&lt;/version&gt;
-        &lt;relativePath&gt;../pom.xml&lt;/relativePath&gt;
-    &lt;/parent&gt;
-    &lt;artifactId&gt;my-modular-domain&lt;/artifactId&gt;
-    &lt;version&gt;0.0.1-SNAPSHOT&lt;/version&gt;
-    &lt;description&gt;
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>br.com.ricas</groupId>
+        <artifactId>my-modular-parent</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+        <relativePath>../pom.xml</relativePath>
+    </parent>
+    <artifactId>my-modular-domain</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <description>
         This module contains only pure domain logic.
         It has no external dependencies and is completely agnostic to any frameworks or infrastructure concerns
-    &lt;/description&gt;
+    </description>
 
-    &lt;properties&gt;
-        &lt;java.version&gt;21&lt;/java.version&gt;
-    &lt;/properties&gt;
+    <properties>
+        <java.version>21</java.version>
+    </properties>
 
-&lt;/project&gt;
-</pre>
+</project>
+```
+
 
 The parent is the module we created earlier.
 
@@ -140,34 +144,36 @@ The parent is the module we created earlier.
 
 The application layer will be responsible for orchestrating the domain layer. I've worked on projects where the application layer was also responsible for handling the application's entry points, like REST calls, for example. However, in this project, we'll keep this layer isolated and without access to any external resources, leaving it purely for orchestrating the domain layer.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
-&lt;project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd"&gt;
-    &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
-    &lt;parent&gt;
-        &lt;groupId&gt;br.com.ricas&lt;/groupId&gt;
-        &lt;artifactId&gt;my-modular-parent&lt;/artifactId&gt;
-        &lt;version&gt;0.0.1-SNAPSHOT&lt;/version&gt;
-        &lt;relativePath&gt;../pom.xml&lt;/relativePath&gt;
-    &lt;/parent&gt;
-    &lt;artifactId&gt;my-modular-application&lt;/artifactId&gt;
-    &lt;version&gt;0.0.1-SNAPSHOT&lt;/version&gt;
-    &lt;description&gt;
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>br.com.ricas</groupId>
+        <artifactId>my-modular-parent</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+        <relativePath>../pom.xml</relativePath>
+    </parent>
+    <artifactId>my-modular-application</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <description>
         This module defines use cases and orchestrates domain logic by leveraging the interfaces (ports) from the domain module.
         - it depends on Domain module
-    &lt;/description&gt;
+    </description>
 
-    &lt;dependencies&gt;
-        &lt;dependency&gt;
-            &lt;groupId&gt;br.com.ricas&lt;/groupId&gt;
-            &lt;artifactId&gt;my-modular-domain&lt;/artifactId&gt;
-            &lt;version&gt;0.0.1-SNAPSHOT&lt;/version&gt;
-        &lt;/dependency&gt;
+    <dependencies>
+        <dependency>
+            <groupId>br.com.ricas</groupId>
+            <artifactId>my-modular-domain</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
 
-    &lt;/dependencies&gt;
+    </dependencies>
 
-&lt;/project&gt;
-</pre>
+</project>
+```
+
 
 Notice that, in addition to referencing the parent module, it also depends on the domain module.
 
@@ -175,92 +181,103 @@ Notice that, in addition to referencing the parent module, it also depends on th
 
 Inside this layer, we'll have all the external resources for our application, such as databases, messaging services, HTTP APIs, and others. By isolating the domain layer from the infrastructure layer, if tomorrow we decide to switch frameworks (for example, from Spring to Quarkus), we just need to change this module without impacting the others. Here's the pom.xml:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
-&lt;project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd"&gt;
-    &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
-    &lt;parent&gt;
-        &lt;groupId&gt;br.com.ricas&lt;/groupId&gt;
-        &lt;artifactId&gt;my-modular-parent&lt;/artifactId&gt;
-        &lt;version&gt;0.0.1-SNAPSHOT&lt;/version&gt;
-        &lt;relativePath&gt;../pom.xml&lt;/relativePath&gt;
-    &lt;/parent&gt;
-    &lt;artifactId&gt;my-modular-infrastructure&lt;/artifactId&gt;
-    &lt;version&gt;0.0.1-SNAPSHOT&lt;/version&gt;
-    &lt;description&gt;This repository is the infrastructure modular part&lt;/description&gt;
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>br.com.ricas</groupId>
+        <artifactId>my-modular-parent</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+        <relativePath>../pom.xml</relativePath>
+    </parent>
+    <artifactId>my-modular-infrastructure</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <description>This repository is the infrastructure modular part</description>
 
-    &lt;dependencies&gt;
-       &lt;!-- INFRA DEPENDS ON DOMAIN AND APPLICATION --&gt;
-        &lt;dependency&gt;
-            &lt;groupId&gt;br.com.ricas&lt;/groupId&gt;
-            &lt;artifactId&gt;my-modular-domain&lt;/artifactId&gt;
-            &lt;version&gt;0.0.1-SNAPSHOT&lt;/version&gt;
-        &lt;/dependency&gt;
+    <dependencies>
+       <!-- INFRA DEPENDS ON DOMAIN AND APPLICATION -->
+        <dependency>
+            <groupId>br.com.ricas</groupId>
+            <artifactId>my-modular-domain</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
 
-        &lt;dependency&gt;
-            &lt;groupId&gt;br.com.ricas&lt;/groupId&gt;
-            &lt;artifactId&gt;my-modular-application&lt;/artifactId&gt;
-            &lt;version&gt;0.0.1-SNAPSHOT&lt;/version&gt;
-        &lt;/dependency&gt;
+        <dependency>
+            <groupId>br.com.ricas</groupId>
+            <artifactId>my-modular-application</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
 
-        &lt;dependency&gt;
-            &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
-            &lt;artifactId&gt;spring-boot-starter-web&lt;/artifactId&gt;
-            &lt;version&gt;3.5.0&lt;/version&gt;
-        &lt;/dependency&gt;
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+            <version>3.5.0</version>
+        </dependency>
 
-        &lt;dependency&gt;
-            &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
-            &lt;artifactId&gt;spring-boot-starter-data-mongodb&lt;/artifactId&gt;
-            &lt;version&gt;3.5.0&lt;/version&gt;
-        &lt;/dependency&gt;
-    &lt;/dependencies&gt;
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-mongodb</artifactId>
+            <version>3.5.0</version>
+        </dependency>
+    </dependencies>
 
-    &lt;build&gt;
-        &lt;plugins&gt;
-            &lt;plugin&gt;
-                &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
-                &lt;artifactId&gt;spring-boot-maven-plugin&lt;/artifactId&gt;
-                &lt;version&gt;3.5.0&lt;/version&gt;
-            &lt;/plugin&gt;
-        &lt;/plugins&gt;
-    &lt;/build&gt;
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>3.5.0</version>
+            </plugin>
+        </plugins>
+    </build>
 
-&lt;/project&gt;
-</pre>
+</project>
+```
+
 
 In this module, we'll have dependencies on our application and domain modules, and we'll also include other external resources.
 
 Now, in the root folder just run:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">mvn clean install</pre>
+```
+mvn clean install
+```
+
 
 **Domain Implementation**
 
 Let's start by implementing our domain module. As explained earlier, this module will only have access to domain logic, without any dependencies on frameworks or external systems. We'll begin by creating a simple Product record. For that, let's create a package named model:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">package br.com.ricas.model;
+```java
+package br.com.ricas.model;
 public record Product(
         String id,
         String name,
         String description,
         double price
-) {}</pre>
+) {}
+```
+
 
 Next, let's define an output port for accessing this resource:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">package br.com.ricas.port;
+```java
+package br.com.ricas.port;
 import br.com.ricas.model.Product;
 import java.util.List;
 public interface ProductPort {
     Product save(Product product);
-    List&lt;Product&gt; findAll(
+    List<Product> findAll(
             int page,
             int sizePerPage,
             String sortField,
             String sortDirection
     );
-}</pre>
+}
+```
+
 
 Perfect! That's all for now. Notice that we only have objects that belong to the Java language itself and nothing else. At the end, we'll have a structure like this:
 
@@ -280,7 +297,8 @@ We have a few key packages here:
 
 Let's start by creating the request folder with its record:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">package request;
+```java
+package request;
 
 import br.com.ricas.model.Product;
 
@@ -293,11 +311,13 @@ public record ProductRequest(
         return new Product(null, name, description, price);
     }
 }
-</pre>
+```
+
 
 Now, the response:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">package response;
+```java
+package response;
 
 public record ProductResponse(
         String id,
@@ -305,24 +325,29 @@ public record ProductResponse(
         String description,
         double price
 ) {}
-</pre>
+```
+
 
 Let's also go ahead and create another record that we'll use for our future requests, especially for pagination.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">package response;
+```java
+package response;
 
 import java.util.List;
 
-public record PageResponse&lt;T&gt;(
-            List&lt;T&gt; content,
+public record PageResponse<T>(
+            List<T> content,
             int page,
             int size,
             long totalElements
-    ) {}</pre>
+    ) {}
+```
+
 
 Moving ahead, let's create the ProductService class:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">package service;
+```java
+package service;
 
 import br.com.ricas.model.Product;
 import br.com.ricas.port.ProductPort;
@@ -344,17 +369,19 @@ public class ProductService {
         return new ProductResponse(product.id(), product.name(), product.description(), product.price());
     }
 
-    public List&lt;ProductResponse&gt; find(
+    public List<ProductResponse> find(
             int page,
             int sizePerPage,
             String sortField,
             String sortDirection
     ) {
         return productPort.findAll(page, sizePerPage, sortField, sortDirection).stream().map(
-                it -&gt; new ProductResponse(it.id(), it.name(), it.description(), it.price())
+                it -> new ProductResponse(it.id(), it.name(), it.description(), it.price())
         ).toList();
     }
-}</pre>
+}
+```
+
 
 This ProductService class orchestrates the domain logic using the ProductPort. It provides two methods:
 
@@ -377,7 +404,8 @@ Now let's talk about the infrastructure layer. This layer will contain everythin
 
 Let's start by creating a configuration class in the br.com.ricas.config package:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">package br.com.ricas.config;
+```java
+package br.com.ricas.config;
 
 import br.com.ricas.port.ProductPort;
 import org.springframework.context.annotation.Bean;
@@ -392,7 +420,8 @@ public class ApplicationServicesConfig {
         return new ProductService(productPort);
     }
 }
-</pre>
+```
+
 
 In this class, we're injecting (or more precisely, we're wiring up) the ProductService from the application module by providing the required ProductPort dependency. This approach ensures that our ProductService is correctly initialized and can orchestrate domain logic without directly depending on any external framework itself.
 
@@ -402,20 +431,23 @@ By isolating this configuration in the infrastructure layer, we ensure that any 
 
 Moving forward with our development, we're going to connect to MongoDB using the spring-boot-starter-data-mongodb dependency that we included in the infrastructure module's pom.xml. The first thing we'll do is create an interface to handle basic CRUD operations with MongoDB:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">package br.com.ricas.database.mongodb;
+```java
+package br.com.ricas.database.mongodb;
 
 import br.com.ricas.entity.ProductDocument;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface ProductRepository extends MongoRepository&lt;ProductDocument, String&gt; {
+public interface ProductRepository extends MongoRepository<ProductDocument, String> {
 }
-</pre>
+```
+
 
 Next, we'll create the implementation for the the ProductPort interface that we defined in the domain module:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">package br.com.ricas.database.mongodb;
+```java
+package br.com.ricas.database.mongodb;
 
 import br.com.ricas.entity.ProductDocument;
 import br.com.ricas.model.Product;
@@ -449,11 +481,11 @@ public class ProductPortImpl implements ProductPort {
     }
 
     @Override
-    public List&lt;Product&gt; findAll(int page, int sizePerPage, String sortField, String sortDirection) {
+    public List<Product> findAll(int page, int sizePerPage, String sortField, String sortDirection) {
         Pageable pageable = PageRequest.of(page, sizePerPage, Sort.by(sortDirection, sortField));
 
         return productRepository.findAll(pageable)
-                .stream().map(it -&gt; new Product(
+                .stream().map(it -> new Product(
                         it.getId(),
                         it.getName(),
                         it.getDescription(),
@@ -462,13 +494,15 @@ public class ProductPortImpl implements ProductPort {
     }
 
 }
-</pre>
+```
+
 
 This implementation connects our domain logic to the database in a clean and controlled way. Again, this isolation makes the system easier to maintain and evolve, since the domain logic remains untouched by infrastructure changes.
 
 Let's create the ProductDocument:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">@Document(collection = "products")
+```java
+@Document(collection = "products")
 public class ProductDocument {
     @Id
     private String id;
@@ -481,11 +515,14 @@ public class ProductDocument {
     }
 
   // getters and setters
-}</pre>
+}
+```
+
 
 The controller:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">package br.com.ricas.http;
+```java
+package br.com.ricas.http;
 
 import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
@@ -508,20 +545,20 @@ public class ProductController {
     }
 
     @PostMapping
-    public ResponseEntity&lt;ProductResponse&gt; addProduct(@RequestBody ProductRequest product) {
+    public ResponseEntity<ProductResponse> addProduct(@RequestBody ProductRequest product) {
         ProductResponse productResponse = productService.create(product);
         return ResponseEntity.ok(productResponse);
     }
 
     @GetMapping
-    public ResponseEntity&lt;PageResponse&lt;ProductResponse&gt;&gt; getProducts(
+    public ResponseEntity<PageResponse<ProductResponse>> getProducts(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "100") int sizePerPage,
             @RequestParam(defaultValue = "ID") String sortField,
             @RequestParam(defaultValue = "DESC") Sort.Direction sortDirection
     ) {
-        List&lt;ProductResponse&gt; productResponses = productService.find(page, sizePerPage, sortField, sortDirection.name());
-        PageResponse&lt;ProductResponse&gt; response = new PageResponse&lt;&gt;(
+        List<ProductResponse> productResponses = productService.find(page, sizePerPage, sortField, sortDirection.name());
+        PageResponse<ProductResponse> response = new PageResponse<>(
                 productResponses,
                 page,
                 sizePerPage,
@@ -530,19 +567,25 @@ public class ProductController {
 
         return ResponseEntity.ok(response);
     }
-}</pre>
+}
+```
+
 
 Let's create an application.yml as well:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">spring:
+```java
+spring:
  data:
    mongodb:
      uri: ${MONGODB_URI}
-     database: my_database</pre>
+     database: my_database
+```
+
 
 And finally:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java">package br.com.ricas;
+```java
+package br.com.ricas;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -553,7 +596,9 @@ public class InfrastructureApplication {
     public static void main(String[] args) {
         SpringApplication.run(InfrastructureApplication.class, args);
     }
-}</pre>
+}
+```
+
 
 By the end, we will have:
 
@@ -563,24 +608,33 @@ By the end, we will have:
 
 Now that we have everything set up, let's see how to run the application and test our endpoints! To build and start the application, open a terminal at the root of the project and run:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">export MONGODB_URI="&lt;YOUR_CONNECTION_STRING&gt;"
+```
+export MONGODB_URI="<YOUR_CONNECTION_STRING>"
 cd infrastructure
-mvn spring-boot:run</pre>
+mvn spring-boot:run
+```
+
 
 POST --- Create a new product:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">POST http://localhost:8080/products
+```
+POST http://localhost:8080/products
 
 Content-Type: application/json
 {
  "name": "Product A",
  "description": "This is a description on product A",
  "price": 450.0
-}</pre>
+}
+```
+
 
 GET --- Fetch a paginated list of products:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">GET http://localhost:8080/products?page=0&amp;sizePerPage=10&amp;sortField=id&amp;sortDirection=ASC</pre>
+```
+GET http://localhost:8080/products?page=0&sizePerPage=10&sortField=id&sortDirection=ASC
+```
+
 
 **Wrapping Things Up**
 

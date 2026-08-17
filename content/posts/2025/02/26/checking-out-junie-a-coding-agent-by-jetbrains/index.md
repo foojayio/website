@@ -23,7 +23,7 @@ frozen: false
 
 Other languages: [Español](https://flounder.dev/es/posts/trying-out-junie/) [한국어](https://flounder.dev/ko/posts/trying-out-junie/) [Português](https://flounder.dev/pt/posts/trying-out-junie/) [中文](https://flounder.dev/zh/posts/trying-out-junie/)
 
-*** ** * ** ***
+
 
 Recently, I talked about [Duplicate Finder](https://flounder.dev/duplicate-finder/) on the [Foojay Podcast](https://foojay.io/today/category/podcast/) hosted by [Frank Delporte](https://foojay.social/@frankdelporte). We briefly touched upon implementing support for other formats, and Frank asked if I'm planning on adding AsciiDoc, as it could be useful for his technical writing at Azul.
 
@@ -110,7 +110,7 @@ One area where coding agents are not yet fully autonomous is identifying potenti
 
 **Tip** : **Evaluate Expression** has a lot of interesting use-cases beyond exploring collections. For example, [here's how](https://flounder.dev/posts/efficient-debugging-exceptions/) you can use it to prototype fixes and apply them to a running application.
 
-*** ** * ** ***
+
 
 Everything looks fine, except processing a single file is taking a surprisingly long time. Looking into it, I also found out that parsing a batch of \~35 files always fails with an `OutOfMemoryError` . Upon analyzing the implementation, I didn't find any obvious flaws such as inefficient loops or leaking resources. Running the app with `-XX:+HeapDumpOnOutOfMemoryError` gave me a heap dump, which revealed numerous JRuby types with huge retained sizes. This hinted at the library as a possible source of the problem.
 

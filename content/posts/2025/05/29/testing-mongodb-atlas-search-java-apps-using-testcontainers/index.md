@@ -25,9 +25,12 @@ This will be an exploration of testing MongoDB Atlas Search solutions written in
 
 TLDR; if (like me!) you want to get straight to the code rather than reading lots of tedious words:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">git clone https://github.com/luketn/mongodb-atlas-local-testcontainers.git
+```
+git clone https://github.com/luketn/mongodb-atlas-local-testcontainers.git
 cd mongodb-atlas-local-testcontainers
-mvn test</pre>
+mvn test
+```
+
 
 What is MongoDB Atlas Search, anyway? {#h2-0-what-is-mongodb-atlas-search-anyway}
 ---------------------------------------------------------------------------------
@@ -106,7 +109,8 @@ We'll build a simple Java data access layer with unit tests, then gradually add 
 
 Here's a simple DataAccess class in Java, using the awesome Java record immutable data type Person. It has simple CRUD methods:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">package com.mycodefu;
+```
+package com.mycodefu;
 
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
@@ -123,7 +127,7 @@ import static com.mongodb.client.model.Filters.eq;
 
 public class PersonDataAccess implements AutoCloseable {
    private final MongoClient mongoClient;
-   private final MongoCollection&lt;Person&gt; collection;
+   private final MongoCollection<Person> collection;
 
    public record Person(
            @BsonId
@@ -165,11 +169,14 @@ public class PersonDataAccess implements AutoCloseable {
    public void close() {
        this.mongoClient.close();
    }
-}</pre>
+}
+```
+
 
 So let's see how we'd use TestContainers and JUnit5 to unit test this class:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">package com.mycodefu;
+```
+package com.mycodefu;
 
 import com.mycodefu.PersonDataAccess.Person;
 import org.junit.jupiter.api.*;
@@ -261,7 +268,9 @@ class PersonDataAccessTest {
        // Then
        assertNull(retrievedPerson);
    }
-}</pre>
+}
+```
+
 
 There are a few really nice things to notice about the code:
 
@@ -289,11 +298,15 @@ Let's write some code to add some test data before the tests run, and create a M
 
 Create a stub method in the data access class:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public List&lt;Person&gt; findPersonByBio(String query) {return List.of();}</pre>
+```
+public List<Person> findPersonByBio(String query) {return List.of();}
+```
+
 
 Then, we'll add the test class to invoke the stub method and test our assertions about what it should do:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">package com.mycodefu;
+```
+package com.mycodefu;
 
 import com.mongodb.client.ListSearchIndexesIterable;
 import com.mycodefu.PersonDataAccess.Person;
@@ -377,9 +390,9 @@ class PersonDataAccessSearchTest {
        Instant startTime = Instant.now();
        Awaitility.await()
                .atMost(10, TimeUnit.SECONDS)
-               .until(() -&gt; {
-                   ListSearchIndexesIterable&lt;Document&gt; searchIndexes = personDataAccess.collection.listSearchIndexes();
-                   Document personIndex = searchIndexes.into(new ArrayList&lt;&gt;()).stream().filter(index -&gt; index.getString("name").equals("person_search")).findFirst().orElseThrow();
+               .until(() -> {
+                   ListSearchIndexesIterable<Document> searchIndexes = personDataAccess.collection.listSearchIndexes();
+                   Document personIndex = searchIndexes.into(new ArrayList<>()).stream().filter(index -> index.getString("name").equals("person_search")).findFirst().orElseThrow();
                    return personIndex.getString("status").equals("READY");
                });
        System.out.printf("Index created and ready in %dms%n", Duration.between(startTime, Instant.now()).toMillis());
@@ -391,11 +404,11 @@ class PersonDataAccessSearchTest {
        String word = "dedicated";
 
        // When
-       List&lt;Person&gt; dedicatedPeople = personDataAccess.findPersonByBio(word);
+       List<Person> dedicatedPeople = personDataAccess.findPersonByBio(word);
 
        // Then
        assertEquals(3, dedicatedPeople.size());
-       assertTrue(dedicatedPeople.stream().allMatch(person -&gt; person.bio().contains(word)));
+       assertTrue(dedicatedPeople.stream().allMatch(person -> person.bio().contains(word)));
    }
 
    @Test
@@ -404,14 +417,14 @@ class PersonDataAccessSearchTest {
        String word = "yesr";
 
        // When fuzzy searched
-       List&lt;Person&gt; yearPeople = personDataAccess.findPersonByBio(word);
+       List<Person> yearPeople = personDataAccess.findPersonByBio(word);
 
        // Then match bios with 'year', or 'years'
        assertEquals(4, yearPeople.size());
-       assertTrue(yearPeople.stream().allMatch(person -&gt; person.bio().contains("year")));
+       assertTrue(yearPeople.stream().allMatch(person -> person.bio().contains("year")));
 
        //find the surrounding words and print them
-       yearPeople.forEach(person -&gt; {
+       yearPeople.forEach(person -> {
            String bio = person.bio();
            int index = bio.indexOf("year");
            int start = Math.max(0, index - 20);
@@ -420,7 +433,9 @@ class PersonDataAccessSearchTest {
            System.out.println(surroundingYear);
        });
    }
-}</pre>
+}
+```
+
 
 OK, so now we have 10 people in the database before the tests run, and we've created an Atlas search index with some different field types over each of the Person document fields.
 
@@ -441,9 +456,10 @@ At this point, our tests are expected to fail---let's go implement the `findPers
 
 We'll use a fuzzy text search on the bio field in `PersonDataAccess`:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public List&lt;Person&gt; findPersonByBio(String query) {
+```
+public List<Person> findPersonByBio(String query) {
    //use Atlas Search to find a person by their bio
-   List&lt;Bson&gt; aggregateStages = List.of(
+   List<Bson> aggregateStages = List.of(
            Aggregates.search(
                    SearchOperator
                            .text(fieldPath("bio"), query)
@@ -462,7 +478,7 @@ We'll use a fuzzy text search on the bio field in `PersonDataAccess`:
        }
    }
 
-   ArrayList&lt;Person&gt; results = collection.aggregate(aggregateStages, Person.class).into(new ArrayList&lt;&gt;());
+   ArrayList<Person> results = collection.aggregate(aggregateStages, Person.class).into(new ArrayList<>());
 
    if (log.isTraceEnabled()) {
        for (Person result : results) {
@@ -471,7 +487,9 @@ We'll use a fuzzy text search on the bio field in `PersonDataAccess`:
    }
 
    return results;
-}</pre>
+}
+```
+
 
 You can see a couple of nice capabilities of MongoDB Atlas Search demonstrated with regular match and fuzzy matches on string indexed fields.
 
@@ -512,17 +530,23 @@ You can mount directories to the container in two ways: by a [resource class pat
 
 This is just like making a volume mapping when running a Docker container at the command line like:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">docker run --rm -it -v $(pwd):/tmp/local -w /tmp/local --entrypoint bash mongodb/mongodb-atlas-local</pre>
+```
+docker run --rm -it -v $(pwd):/tmp/local -w /tmp/local --entrypoint bash mongodb/mongodb-atlas-local
+```
+
 
 To mount a resource directory, we can just add a call to withClasspathResourceMapping to the container instance we are constructing for unit tests:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@Container
+```
+@Container
 private static final MongoDBAtlasLocalContainer mongoDBContainer = new MongoDBAtlasLocalContainer("mongodb/mongodb-atlas-local:8.0.5")
        .withClasspathResourceMapping(
                "/seed-data",
                "/tmp/seed-data",
                BindMode.READ_WRITE
-       );</pre>
+       );
+```
+
 
 So once this container is running, the resource files under the directory /seed-data will be mounted within the container under the path /tmp/seed-data.
 
@@ -530,10 +554,13 @@ So once this container is running, the resource files under the directory /seed-
 
 Let's assume we had a JSON file *documents.jsonl* in that resources location. We could then run mongoimport to import it:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">mongoDBContainer.execInContainer(ExecConfig.builder()
+```
+mongoDBContainer.execInContainer(ExecConfig.builder()
        .workDir("/tmp/seed-data")
        .command(toArray("mongoimport", "-d", "examples", "-c", "person", "documents.jsonl"))
-       .build());</pre>
+       .build());
+```
+
 
 #### Running Mongo Shell scripts
 
@@ -541,26 +568,35 @@ You can also run Mongo Shell scripts which can be helpful for performing little 
 
 Mongo Shell supports eval to directly execute a command:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">mongoDBContainer.execInContainer(ExecConfig.builder()
+```
+mongoDBContainer.execInContainer(ExecConfig.builder()
        .workDir("/tmp/seed-data")
        .command(toArray("mongosh", "--eval", "db.getSiblingDB('examples').person.insert({'test': '123'})"))
-       .build());</pre>
+       .build());
+```
+
 
 Or you can pass a JavaScript file to execute:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">mongoDBContainer.execInContainer(ExecConfig.builder()
+```
+mongoDBContainer.execInContainer(ExecConfig.builder()
        .workDir("/tmp/seed-data")
        .command(toArray("mongosh", "-f", "atlas-index-utils.js"))
-       .build());</pre>
+       .build());
+```
+
 
 #### Running Shell scripts
 
 If you want, you can also execute a bash script like:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">mongoDBContainer.execInContainer(ExecConfig.builder()
+```
+mongoDBContainer.execInContainer(ExecConfig.builder()
        .workDir("/tmp/seed-data")
        .command(toArray("bash", "seed-data.sh"))
-       .build());</pre>
+       .build());
+```
+
 
 ### Loading a *mongodump* BSON database and index {#h3-7-loading-a-mongodump-bson-database-and-index}
 
@@ -573,7 +609,8 @@ If you want these files, you can get the seed data files from the [examples fold
 
 Now, we can change our MongoDB Atlas Search test class to load up data from the resources:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">package com.mycodefu;
+```
+package com.mycodefu;
 
 import com.mongodb.client.ListSearchIndexesIterable;
 import com.mycodefu.PersonDataAccess.Person;
@@ -629,9 +666,9 @@ class PersonDataAccessSearchTest {
        personDataAccess.collection.createSearchIndex("person_search", BsonDocument.parse(personSearchMappings));
        Awaitility.await()
                .atMost(10, TimeUnit.SECONDS)
-               .until(() -&gt; {
-                   ListSearchIndexesIterable&lt;Document&gt; searchIndexes = personDataAccess.collection.listSearchIndexes();
-                   Document personIndex = searchIndexes.into(new ArrayList&lt;&gt;()).stream().filter(index -&gt; index.getString("name").equals("person_search")).findFirst().orElseThrow();
+               .until(() -> {
+                   ListSearchIndexesIterable<Document> searchIndexes = personDataAccess.collection.listSearchIndexes();
+                   Document personIndex = searchIndexes.into(new ArrayList<>()).stream().filter(index -> index.getString("name").equals("person_search")).findFirst().orElseThrow();
                    return personIndex.getString("status").equals("READY");
                });
        System.out.printf("Index created and ready in %dms%n", Duration.between(startIndex, Instant.now()).toMillis());
@@ -643,11 +680,11 @@ class PersonDataAccessSearchTest {
        String word = "dedicated";
 
        // When
-       List&lt;Person&gt; dedicatedPeople = personDataAccess.findPersonByBio(word, false);
+       List<Person> dedicatedPeople = personDataAccess.findPersonByBio(word, false);
 
        // Then
        assertEquals(50, dedicatedPeople.size());
-       assertTrue(dedicatedPeople.stream().allMatch(person -&gt; person.bio().contains(word)));
+       assertTrue(dedicatedPeople.stream().allMatch(person -> person.bio().contains(word)));
    }
 
    @Test
@@ -656,14 +693,14 @@ class PersonDataAccessSearchTest {
        String word = "yesr";
 
        // When fuzzy searched
-       List&lt;Person&gt; yearPeople = personDataAccess.findPersonByBio(word, true);
+       List<Person> yearPeople = personDataAccess.findPersonByBio(word, true);
 
        // Then match bios with 'year', or 'years'
        assertEquals(50, yearPeople.size());
-       assertTrue(yearPeople.stream().allMatch(person -&gt; person.bio().contains("year")));
+       assertTrue(yearPeople.stream().allMatch(person -> person.bio().contains("year")));
 
        //find the surrounding words and print them
-       yearPeople.forEach(person -&gt; {
+       yearPeople.forEach(person -> {
            String bio = person.bio();
            int index = bio.indexOf("year");
            int start = Math.max(0, index - 20);
@@ -672,11 +709,14 @@ class PersonDataAccessSearchTest {
            System.out.println(surroundingYear);
        });
    }
-}</pre>
+}
+```
+
 
 I also tweaked the data access class `findPersonByBio()` method to cope with a larger dataset:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public List&lt;Person&gt; findPersonByBio(String query, boolean fuzzy) {
+```
+public List<Person> findPersonByBio(String query, boolean fuzzy) {
    //use Atlas Search to find a person by their bio
    TextSearchOperator bioOperator = SearchOperator.text(fieldPath("bio"), query);
    if (fuzzy) {
@@ -688,7 +728,7 @@ I also tweaked the data access class `findPersonByBio()` method to cope with a l
                        .maxExpansions(100)
                );
    }
-   List&lt;Bson&gt; aggregateStages = List.of(
+   List<Bson> aggregateStages = List.of(
            Aggregates.search(
                    bioOperator
            , SearchOptions.searchOptions().index("person_search")),
@@ -702,7 +742,7 @@ I also tweaked the data access class `findPersonByBio()` method to cope with a l
        }
    }
 
-   ArrayList&lt;Person&gt; results = collection.aggregate(aggregateStages, Person.class).into(new ArrayList&lt;&gt;());
+   ArrayList<Person> results = collection.aggregate(aggregateStages, Person.class).into(new ArrayList<>());
 
    if (log.isTraceEnabled()) {
        for (Person result : results) {
@@ -711,7 +751,9 @@ I also tweaked the data access class `findPersonByBio()` method to cope with a l
    }
 
    return results;
-}</pre>
+}
+```
+
 
 So now, we are loading our data (all 15,000 documents!) from a gzip'ed archive using the mongorestore utility on a mounted volume in the container. Then, we're loading another resource file with the MongoDB Atlas Search index mapping and creating the index over the loaded data.
 

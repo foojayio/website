@@ -102,17 +102,20 @@ The magic, however, happens within the *MemoryService*, which acts as a gateway 
 
 Each memory record is a document with a text field *content,* an *embedding* vector generated from this content, and a block of structured metadata containing the userID, the memory type classification, an importance score ranging from 0.0 to 1.0, the generation timestamp, and the ID of the conversation from which it was generated.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">{
-&nbsp;&nbsp;"content": "The investigation into the high CPU usage of the payment-service pod is paused, awaiting approval. Immediate next action is to check for unusual spikes in traffic or load.",
-&nbsp;&nbsp;"metadata": {
-&nbsp;&nbsp;&nbsp;&nbsp;"createdAt": "2026-04-22T17:33:48.904423Z",
-&nbsp;&nbsp;&nbsp;&nbsp;"memoryType": "SUMMARY",
-&nbsp;&nbsp;&nbsp;&nbsp;"importanceScore": 0.8,
-&nbsp;&nbsp;&nbsp;&nbsp;"userId": "ops-user",
-&nbsp;&nbsp;&nbsp;&nbsp;"sourceConversationId": "6d79d518-bfae-4b2c-b236-5fc06ce51c34"
-&nbsp;&nbsp;},
+```
+{
+  "content": "The investigation into the high CPU usage of the payment-service pod is paused, awaiting approval. Immediate next action is to check for unusual spikes in traffic or load.",
+  "metadata": {
+    "createdAt": "2026-04-22T17:33:48.904423Z",
+    "memoryType": "SUMMARY",
+    "importanceScore": 0.8,
+    "userId": "ops-user",
+    "sourceConversationId": "6d79d518-bfae-4b2c-b236-5fc06ce51c34"
+  },
 “embedding”:[..]
-}</pre>
+}
+```
+
 
 The *memoryType* field is an enumeration that can take on 5 different categories:
 
@@ -186,18 +189,21 @@ The Atlas Index for Memories {#h2-8-the-atlas-index-for-memories}
 
 Just as with the *knowledge_chunks* collection presented in Part 1 of this tutorial, the *memories* collection also requires its own vector search index in Atlas. In this case, we can define a vector index as follows:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">{
-&nbsp;&nbsp;"fields": [
-&nbsp;&nbsp;&nbsp;&nbsp;{
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"type": "vector",
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"path": "embedding",
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"numDimensions": 1536,
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"similarity": "cosine"
-&nbsp;&nbsp;&nbsp;&nbsp;},
-&nbsp;&nbsp;&nbsp;&nbsp;{ "type": "filter", "path": "metadata.userId" },
-&nbsp;&nbsp;&nbsp;&nbsp;{ "type": "filter", "path": "metadata.memoryType" }
-&nbsp;&nbsp;]
-}</pre>
+```
+{
+  "fields": [
+    {
+      "type": "vector",
+      "path": "embedding",
+      "numDimensions": 1536,
+      "similarity": "cosine"
+    },
+    { "type": "filter", "path": "metadata.userId" },
+    { "type": "filter", "path": "metadata.memoryType" }
+  ]
+}
+```
+
 
 It is important to note in this definition the declaration of the two filter fields, which are necessary for semantic search to pre-filter vectors based on the user performing the search before conducting the similarity search. Without this filter, every query would have to scan the entire collection, which is unsustainable as the application's usage grows.
 

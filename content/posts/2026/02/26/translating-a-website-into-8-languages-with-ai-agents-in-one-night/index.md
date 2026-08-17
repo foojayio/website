@@ -17,7 +17,7 @@ frozen: false
 How I used Claude Sonnet 4.6 and fleets of GitHub Copilot Coding Agents to internationalize java.evolved --- from spec to deployment {#h2-0-how-i-used-claude-sonnet-4-6-and-fleets-of-github-copilot-coding-agents-to-internationalize-java-evolved-from-spec-to-deployment}
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-*** ** * ** ***
+
 
 [java.evolved](https://javaevolved.github.io) is a static site I built to showcase modern Java patterns side-by-side with their legacy equivalents. 112 patterns across 11 categories --- language, collections, streams, concurrency, and more --- each with code comparisons, explanations, and curated documentation links. All generated from YAML content files by a JBang-powered Java build script.
 
@@ -25,7 +25,7 @@ By the end of February 25, the entire site was English-only. By the morning of F
 
 This is the story of that experiment.
 
-*** ** * ** ***
+
 
 The Architecture Decision: Let the AI Draft the Spec {#h2-1-the-architecture-decision-let-the-ai-draft-the-spec}
 ----------------------------------------------------------------------------------------------------------------
@@ -46,7 +46,7 @@ This last point proved prescient. The clean separation between "what changes per
 
 After iterating through review comments over 5 days (the original PR had 12 comments of back-and-forth), the spec was merged on February 25.
 
-*** ** * ** ***
+
 
 Phase 1: Building the Infrastructure {#h2-2-phase-1-building-the-infrastructure}
 --------------------------------------------------------------------------------
@@ -60,7 +60,7 @@ With the spec in hand, I coordinated an agent locally with Coilot CLI to impleme
 
 This was the only PR that required significant intervention. Everything after it was delegation.
 
-*** ** * ** ***
+
 
 Phase 2: The First Translations (Spanish + Portuguese) {#h2-3-phase-2-the-first-translations-spanish-portuguese}
 ----------------------------------------------------------------------------------------------------------------
@@ -69,7 +69,7 @@ The first real translation --- Spanish --- came in [PR #84](https://github.com/j
 
 Brazilian Portuguese followed immediately in [PR #85](https://github.com/javaevolved/javaevolved.github.io/pull/85), completing all 112 pattern files (going from 3/112 translated to 112/112 --- 100% coverage). These first two translations validated the architecture and surfaced a CI issue: the deploy workflow's path triggers didn't match YAML files or the `translations/` directory. A quick fix in [PR #86](https://github.com/javaevolved/javaevolved.github.io/pull/86) resolved that.
 
-*** ** * ** ***
+
 
 Phase 3: The Fleet --- 6 Languages in Parallel {#h2-4-phase-3-the-fleet-6-languages-in-parallel}
 ------------------------------------------------------------------------------------------------
@@ -105,7 +105,7 @@ By the time the fleet finished:
 * **\~1,008 generated HTML pages** (112 pages × 8 locales)
 * **8 localized search indexes** (`snippets.json` per locale)
 
-*** ** * ** ***
+
 
 The Arabic Surprise: RTL Support {#h2-6-the-arabic-surprise-rtl-support}
 ------------------------------------------------------------------------
@@ -145,7 +145,7 @@ A Copilot Coding Agent [fixed it in PR #97](https://github.com/javaevolved/javae
 
 Arabic prose continues to render RTL. Java code stays LTR. One bug, one issue, one PR, fixed in minutes. That's the entire human intervention required for 8-language support.
 
-*** ** * ** ***
+
 
 Why It Worked: Architecture as Force Multiplier {#h2-8-why-it-worked-architecture-as-force-multiplier}
 ------------------------------------------------------------------------------------------------------
@@ -178,7 +178,7 @@ Each locale follows the same directory structure. Adding a new language is a che
 
 No code changes needed in the generator. No template modifications. The AI spec anticipated this workflow, and the agents followed it exactly.
 
-*** ** * ** ***
+
 
 Lessons Learned {#h2-12-lessons-learned}
 ----------------------------------------
@@ -196,7 +196,7 @@ Lessons Learned {#h2-12-lessons-learned}
 * **CI pipeline fixes:** The deploy workflow needed path trigger updates after the JSON→YAML migration. A routine ops fix
 * **Review and merge:** Each PR needed a human to review and merge. The content quality was consistently good, but spot-checking translations in languages you speak is still important
 
-*** ** * ** ***
+
 
 The Timeline {#h2-15-the-timeline}
 ----------------------------------
@@ -219,7 +219,7 @@ The Timeline {#h2-15-the-timeline}
 
 **From spec merge to 8-language site: \~7 hours.** From fleet launch to all 6 languages merged: **\~1 hour.**
 
-*** ** * ** ***
+
 
 Conclusion {#h2-16-conclusion}
 ------------------------------
@@ -234,6 +234,6 @@ And the only bug was a CSS rule that took 13 minutes from report to fix.
 
 The future isn't AI replacing developers. It's developers designing systems that let AI do what it's good at --- repetitive, structured, parallelizable work --- while humans focus on architecture, review, and the occasional RTL bug.
 
-*** ** * ** ***
+
 
 *java.evolved is open source at [github.com/javaevolved/javaevolved.github.io](https://github.com/javaevolved/javaevolved.github.io). The i18n specification lives at [specs/i18n/i18n-spec.md](https://github.com/javaevolved/javaevolved.github.io/blob/main/specs/i18n/i18n-spec.md).*

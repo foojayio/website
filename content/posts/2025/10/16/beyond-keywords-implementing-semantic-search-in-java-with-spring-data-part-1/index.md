@@ -72,8 +72,11 @@ Tag your Atlas Cluster {#h2-2-tag-your-atlas-cluster}
 
 If you're deploying this application on MongoDB Atlas, you can use [Resource Tags](https://www.mongodb.com/docs/atlas/tags/?utm_campaign=devrel&utm_source=third-part-content&utm_medium=cta&utm_content=mongodb-hybrid-search&utm_term=ricardo.mello) to label your clusters or projects for tracking and cost visibility. For instance, I recommend tagging your cluster with values that describe this tutorial:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">Key: application
-Value: hybrid-search</pre>
+```
+Key: application
+Value: hybrid-search
+```
+
 
 Adding tags is a simple but powerful way to organize your MongoDB Atlas resources, especially if you manage multiple clusters, environments, or demos. Tags make it easier to:
 
@@ -127,16 +130,19 @@ MongoDB Atlas Vector Search (index and retrieval) {#h2-5-mongodb-atlas-vector-se
 
 To compare embeddings at query time, MongoDB Atlas needs a search index that tells it which field stores your vectors, their dimensionality, and which similarity metric to use. Once the collection is in place, [create the following index](https://www.mongodb.com/docs/atlas/atlas-vector-search/vector-search-type/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=spring-data-monogbd-hybrid-search-foojay&utm_term=tony.kim):
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">db.embedded_movies.createSearchIndex(
-&nbsp;&nbsp;"vector_index",
-&nbsp;&nbsp;"vectorSearch",
-&nbsp;&nbsp;{ "fields": [{
-&nbsp;&nbsp;&nbsp;&nbsp;"type": "vector",
-&nbsp;&nbsp;&nbsp;&nbsp;"path": "plot_embedding_voyage_3_large",
-&nbsp;&nbsp;&nbsp;&nbsp;"numDimensions": 2048,
-&nbsp;&nbsp;&nbsp;&nbsp;"similarity": "dotProduct"
-&nbsp;&nbsp;}]}
-)</pre>
+```
+db.embedded_movies.createSearchIndex(
+  "vector_index",
+  "vectorSearch",
+  { "fields": [{
+    "type": "vector",
+    "path": "plot_embedding_voyage_3_large",
+    "numDimensions": 2048,
+    "similarity": "dotProduct"
+  }]}
+)
+```
+
 
 Let's break it down:
 
@@ -155,21 +161,24 @@ Now that we've seen what vector search is, how embeddings are generated, and cre
 
 After opening the project, the first thing is to configure our MongoDB connection and a few settings for the embedding provider and vector search. Open or create your application.yml file:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">spring:
-&nbsp;data:
-&nbsp;&nbsp;&nbsp;mongodb:
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;uri: ${MONGODB_URI}
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;database: sample_mflix
+```
+spring:
+ data:
+   mongodb:
+     uri: ${MONGODB_URI}
+     database: sample_mflix
 voyage:
-&nbsp;api-key: ${VOYAGE_API_KEY}
-&nbsp;base-url: https://api.voyageai.com/v1
-&nbsp;model: voyage-3-large
-&nbsp;output-dimension: 2048
-&nbsp;vector-index-name: vector_index
-&nbsp;vector-collection-name: embedded_movies
-&nbsp;vector-field: plot_embedding_voyage_3_large
-&nbsp;top-k: 8
-&nbsp;num-candidates: 160</pre>
+ api-key: ${VOYAGE_API_KEY}
+ base-url: https://api.voyageai.com/v1
+ model: voyage-3-large
+ output-dimension: 2048
+ vector-index-name: vector_index
+ vector-collection-name: embedded_movies
+ vector-field: plot_embedding_voyage_3_large
+ top-k: 8
+ num-candidates: 160
+```
+
 
 What this does (briefly):
 
@@ -179,48 +188,57 @@ What this does (briefly):
 
 Next, we need to connect our application.yml settings to the code. To do that, we create a @ConfigurationProperties record (VoyageConfigProperties) that maps all voyage.\* values into a strongly-typed object we can use later in the application.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">import org.springframework.boot.context.properties.ConfigurationProperties;
+```
+import org.springframework.boot.context.properties.ConfigurationProperties;
 
 @ConfigurationProperties(prefix = "voyage")
 public record VoyageConfigProperties(
-&nbsp;&nbsp;&nbsp;&nbsp;String model,
-&nbsp;&nbsp;&nbsp;&nbsp;int outputDimension,
-&nbsp;&nbsp;&nbsp;&nbsp;String vectorIndexName,
-&nbsp;&nbsp;&nbsp;&nbsp;String vectorCollectionName,
-&nbsp;&nbsp;&nbsp;&nbsp;String vectorField,
-&nbsp;&nbsp;&nbsp;&nbsp;int topK,
-&nbsp;&nbsp;&nbsp;&nbsp;int numCandidates,
-&nbsp;&nbsp;&nbsp;&nbsp;String baseUrl,
-&nbsp;&nbsp;&nbsp;&nbsp;String apiKey){}</pre>
+    String model,
+    int outputDimension,
+    String vectorIndexName,
+    String vectorCollectionName,
+    String vectorField,
+    int topK,
+    int numCandidates,
+    String baseUrl,
+    String apiKey){}
+```
+
 
 ### The document model {#h3-8-the-document-model}
 
 Our embedded_movies collection contains several fields that describe each movie, such as title, year, plot, and cast. To work with this data in our application, we'll define a simple record that maps to the collection but only includes the fields we want to return to the client. Create a record named Movie and annotate it with *Document("embedded_movies")*:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">import org.springframework.data.mongodb.core.mapping.Document;
+```
+import org.springframework.data.mongodb.core.mapping.Document;
 import java.util.List;
 
 @Document("embedded_movies")
 public record Movie(
-&nbsp;&nbsp;&nbsp;String title,
-&nbsp;&nbsp;&nbsp;String year,
-&nbsp;&nbsp;&nbsp;String fullplot,
-&nbsp;&nbsp;&nbsp;String plot,
-&nbsp;&nbsp;&nbsp;String poster,
-&nbsp;&nbsp;&nbsp;Imdb imdb,
-&nbsp;&nbsp;&nbsp;List&lt;String&gt; genres,
-&nbsp;&nbsp;&nbsp;List&lt;String&gt; cast)
+   String title,
+   String year,
+   String fullplot,
+   String plot,
+   String poster,
+   Imdb imdb,
+   List<String> genres,
+   List<String> cast)
 {
-&nbsp;&nbsp;&nbsp;record Imdb(Double rating) {}
-}</pre>
+   record Imdb(Double rating) {}
+}
+```
+
 
 ### Wire the request DTO {#h3-9-wire-the-request-dto}
 
 Next, let's create a request record with a single query field to hold the user's search text, for now. We'll revisit this class later to add extra fields for filtering:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public record MovieSearchRequest(
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;String query
-) {}</pre>
+```
+public record MovieSearchRequest(
+      String query
+) {}
+```
+
 
 ### Communicating with Voyage AI {#h3-10-communicating-with-voyage-ai}
 
@@ -230,42 +248,51 @@ To model this exchange, we'll use two records:
 
 **EmbeddingsRequest**: This represents the payload we send to Voyage AI. It includes the input text, the model name, and a few optional parameters like input_type and output_dimension.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">import java.util.List;
+```
+import java.util.List;
 
 public record EmbeddingsRequest(
-&nbsp;&nbsp;&nbsp;List&lt;String&gt; input,
-&nbsp;&nbsp;&nbsp;String model,
-&nbsp;&nbsp;&nbsp;String input_type,
-&nbsp;&nbsp;&nbsp;Integer output_dimension
-) {}</pre>
+   List<String> input,
+   String model,
+   String input_type,
+   Integer output_dimension
+) {}
+```
+
 
 **EmbeddingsResponse**: This represents the response from Voyage AI.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">import java.util.List;
+```
+import java.util.List;
 
-public record EmbeddingsResponse(List&lt;Item&gt; data) {
-&nbsp;public record Item(List&lt;Double&gt; embedding) {}
-}</pre>
+public record EmbeddingsResponse(List<Item> data) {
+ public record Item(List<Double> embedding) {}
+}
+```
+
 
 #### The VoyageEmbeddingsClient
 
 To call the Voyage AI API, we'll define a small HTTP client using Spring's declarative HTTP interfaces:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">import org.springframework.http.MediaType;
+```
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.service.annotation.HttpExchange;
 import org.springframework.web.service.annotation.PostExchange;
 
 @HttpExchange(
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;url = "/embeddings",
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;contentType = MediaType.APPLICATION_JSON_VALUE,
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;accept = MediaType.APPLICATION_JSON_VALUE
+       url = "/embeddings",
+       contentType = MediaType.APPLICATION_JSON_VALUE,
+       accept = MediaType.APPLICATION_JSON_VALUE
 )
 
 public interface VoyageEmbeddingsClient {
-&nbsp;@PostExchange
-&nbsp;EmbeddingsResponse embed(@RequestBody EmbeddingsRequest body);
-}</pre>
+ @PostExchange
+ EmbeddingsResponse embed(@RequestBody EmbeddingsRequest body);
+}
+```
+
 
 **In short**: This interface acts as a strongly-typed wrapper around Voyage AI's /embeddings endpoint, letting us call the API as if it were a regular Java method.
 
@@ -273,7 +300,8 @@ public interface VoyageEmbeddingsClient {
 
 To actually use our VoyageEmbeddingsClient, we need to configure how Spring will build it. That's what the following class does:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">import org.springframework.context.annotation.Bean;
+```
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.client.RestClient;
 import org.springframework.web.client.support.RestClientAdapter;
@@ -281,17 +309,19 @@ import org.springframework.web.service.invoker.HttpServiceProxyFactory;
 
 @Configuration
 public class VoyageClientConfig {
-&nbsp;&nbsp;&nbsp;@Bean
-&nbsp;&nbsp;public VoyageEmbeddingsClient voyageEmbeddingsClient(VoyageConfigProperties props) {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;RestClient client = RestClient.builder()
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.baseUrl(props.baseUrl())
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.defaultHeader("Authorization", "Bearer " + props.apiKey())
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.defaultHeader("Content-Type", "application/json")
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.build();
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;HttpServiceProxyFactory factory = HttpServiceProxyFactory.builderFor(RestClientAdapter.create(client)).build();
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return factory.createClient(VoyageEmbeddingsClient.class);
-&nbsp;&nbsp;}
-}</pre>
+   @Bean
+  public VoyageEmbeddingsClient voyageEmbeddingsClient(VoyageConfigProperties props) {
+      RestClient client = RestClient.builder()
+          .baseUrl(props.baseUrl())
+          .defaultHeader("Authorization", "Bearer " + props.apiKey())
+          .defaultHeader("Content-Type", "application/json")
+          .build();
+      HttpServiceProxyFactory factory = HttpServiceProxyFactory.builderFor(RestClientAdapter.create(client)).build();
+      return factory.createClient(VoyageEmbeddingsClient.class);
+  }
+}
+```
+
 
 **In short**: This config builds the HTTP client, injects the API key into every request, and exposes a ready-to-use VoyageEmbeddingsClient bean.
 
@@ -299,28 +329,31 @@ public class VoyageClientConfig {
 
 Next, let's add an EmbeddingService that wraps our client and handles generating embeddings for a given query text.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">import org.springframework.stereotype.Service;
+```
+import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.logging.Logger;
 
 @Service
 public class EmbeddingService {
-&nbsp;&nbsp;private final Logger logger = Logger.getLogger(EmbeddingService.class.getName());
-&nbsp;&nbsp;private final VoyageEmbeddingsClient client;
-&nbsp;&nbsp;private final VoyageConfigProperties config;
-&nbsp;&nbsp;public EmbeddingService(VoyageEmbeddingsClient client, VoyageConfigProperties config) {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this.client = client;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this.config = config;
-&nbsp;&nbsp;}
-&nbsp;&nbsp;public List&lt;Double&gt; embedQuery(
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;String text) {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;logger.info("Generating embeddings .. ");
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var res = client.embed(new EmbeddingsRequest(
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;List.of(text), config.model(), "query", config.outputDimension()));
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;logger.info("Embeddings generated successfully!");
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return res.data().getFirst().embedding();
-&nbsp;&nbsp;}
-}</pre>
+  private final Logger logger = Logger.getLogger(EmbeddingService.class.getName());
+  private final VoyageEmbeddingsClient client;
+  private final VoyageConfigProperties config;
+  public EmbeddingService(VoyageEmbeddingsClient client, VoyageConfigProperties config) {
+     this.client = client;
+     this.config = config;
+  }
+  public List<Double> embedQuery(
+        String text) {
+     logger.info("Generating embeddings .. ");
+     var res = client.embed(new EmbeddingsRequest(
+           List.of(text), config.model(), "query", config.outputDimension()));
+     logger.info("Embeddings generated successfully!");
+     return res.data().getFirst().embedding();
+  }
+}
+```
+
 
 This service calls the Voyage AI API with the user's text, generates the embedding using the configured model, and returns the vector as a list of numbers.
 
@@ -333,7 +366,8 @@ The VectorSearchOperation class is at the core of this feature, and it's what we
 
 To run the search, let's create a MovieService that generates embeddings for the user's query and executes the vector search against the embedded_movies collection:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">import org.springframework.boot.context.properties.EnableConfigurationProperties;
+```
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.aggregation.Aggregation;
 import org.springframework.data.mongodb.core.aggregation.VectorSearchOperation;
@@ -344,31 +378,33 @@ import java.util.List;
 @EnableConfigurationProperties(VoyageConfigProperties.class)
 public class MovieService {
 
-&nbsp;&nbsp;&nbsp;private final MongoTemplate mongoTemplate;
+   private final MongoTemplate mongoTemplate;
 
-&nbsp;&nbsp;&nbsp;private final VoyageConfigProperties config;
-&nbsp;&nbsp;&nbsp;private final EmbeddingService embeddingService;
+   private final VoyageConfigProperties config;
+   private final EmbeddingService embeddingService;
 
-&nbsp;&nbsp;&nbsp;MovieService(MongoTemplate mongoTemplate, VoyageConfigProperties config, EmbeddingService embeddingService) {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this.mongoTemplate = mongoTemplate;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this.config = config;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this.embeddingService = embeddingService;
-&nbsp;&nbsp;&nbsp;}
+   MovieService(MongoTemplate mongoTemplate, VoyageConfigProperties config, EmbeddingService embeddingService) {
+      this.mongoTemplate = mongoTemplate;
+      this.config = config;
+      this.embeddingService = embeddingService;
+   }
 
-&nbsp;&nbsp;&nbsp;public List&lt;Movie&gt; searchMovies(MovieSearchRequest req) {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;VectorSearchOperation vectorSearchOperation = VectorSearchOperation.search(config.vectorIndexName())
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.path(config.vectorField())
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.vector(embeddingService.embedQuery(req.query()))
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.limit(config.topK())
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.numCandidates(config.numCandidates());
+   public List<Movie> searchMovies(MovieSearchRequest req) {
+      VectorSearchOperation vectorSearchOperation = VectorSearchOperation.search(config.vectorIndexName())
+            .path(config.vectorField())
+            .vector(embeddingService.embedQuery(req.query()))
+            .limit(config.topK())
+            .numCandidates(config.numCandidates());
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return mongoTemplate.aggregate(
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Aggregation.newAggregation(vectorSearchOperation),
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;config.vectorCollectionName(),
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Movie.class
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;).getMappedResults();
-&nbsp;&nbsp;&nbsp;}
-}</pre>
+      return mongoTemplate.aggregate(
+            Aggregation.newAggregation(vectorSearchOperation),
+            config.vectorCollectionName(),
+            Movie.class
+      ).getMappedResults();
+   }
+}
+```
+
 
 The *searchMovies* method takes the user's text, generates an embedding with EmbeddingService, and uses Spring Data's new [VectorSearchOperation](https://docs.spring.io/spring-data/mongodb/reference/5.0/mongodb/repositories/vector-search.html) to query MongoDB Atlas Vector Search, returning the most relevant movies directly as mapped Movie objects.
 
@@ -376,7 +412,8 @@ The *searchMovies* method takes the user's text, generates an embedding with Emb
 
 With everything in place, the last step is to expose our API through a simple controller. This class wires the MovieService and makes the /movies/search endpoint available:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">import org.springframework.http.ResponseEntity;
+```
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -387,45 +424,50 @@ import java.util.List;
 @RequestMapping("/movies")
 public class MovieController {
 
-&nbsp;&nbsp;&nbsp;private final MovieService movieService;
+   private final MovieService movieService;
 
-&nbsp;&nbsp;&nbsp;public MovieController(MovieService movieService) {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this.movieService = movieService;
-&nbsp;&nbsp;&nbsp;}
+   public MovieController(MovieService movieService) {
+      this.movieService = movieService;
+   }
 
-&nbsp;&nbsp;&nbsp;@PostMapping("/search")
-&nbsp;&nbsp;&nbsp;public ResponseEntity&lt;List&lt;Movie&gt;&gt; searchMovies(@RequestBody MovieSearchRequest req) {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return ResponseEntity.ok(movieService.searchMovies(req));
-&nbsp;&nbsp;&nbsp;}
-}</pre>
+   @PostMapping("/search")
+   public ResponseEntity<List<Movie>> searchMovies(@RequestBody MovieSearchRequest req) {
+      return ResponseEntity.ok(movieService.searchMovies(req));
+   }
+}
+```
+
 
 **In short**: The controller takes in a search request, delegates to MovieService, and returns a list of matching movies.
 
 By the end, you'll have a project structure similar to this.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">spring-data-mongodb-hybrid-search/
+```
+spring-data-mongodb-hybrid-search/
 ├── .idea/
 ├── .mvn/
 └── src/
-&nbsp;&nbsp;&nbsp;└── main/
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;├── java/
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;│ &nbsp; └── com/
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;│ &nbsp; &nbsp; &nbsp; └── mongodb/
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;│ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ├── EmbeddingService.java
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;│ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ├── EmbeddingsRequest.java
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;│ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ├── EmbeddingsResponse.java
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;│ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ├── Movie.java
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;│ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ├── MovieController.java
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;│ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ├── MovieSearchRequest.java
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;│ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ├── MovieService.java
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;│ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ├── SpringDataMongodbHybridSearchApplication.java
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;│ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ├── VoyageClientConfig.java
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;│ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ├── VoyageConfigProperties.java
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;│ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; └── VoyageEmbeddingsClient.java
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└── resources/
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;├── static/
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;├── templates/
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└── application.yml</pre>
+   └── main/
+       ├── java/
+       │   └── com/
+       │       └── mongodb/
+       │           ├── EmbeddingService.java
+       │           ├── EmbeddingsRequest.java
+       │           ├── EmbeddingsResponse.java
+       │           ├── Movie.java
+       │           ├── MovieController.java
+       │           ├── MovieSearchRequest.java
+       │           ├── MovieService.java
+       │           ├── SpringDataMongodbHybridSearchApplication.java
+       │           ├── VoyageClientConfig.java
+       │           ├── VoyageConfigProperties.java
+       │           └── VoyageEmbeddingsClient.java
+       └── resources/
+           ├── static/
+           ├── templates/
+           └── application.yml
+```
+
 
 **Note**: There's no strict separation into layers or packages here. It's up to you, the reader, to organize the code however you prefer.
 
@@ -434,43 +476,55 @@ Running the application {#h2-14-running-the-application}
 
 Set the required environment variables:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">export MONGODB_URI=&lt;YOUR CONNECTION&gt;
+```
+export MONGODB_URI=<YOUR CONNECTION>
 
-export VOYAGE_API_KEY=&lt;YOUR API KEY&gt;</pre>
+export VOYAGE_API_KEY=<YOUR API KEY>
+```
+
 
 Then, start the application:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">mvn spring-boot:run</pre>
+```
+mvn spring-boot:run
+```
+
 
 With the app running, let's perform a POST request to our new endpoint:
 
 ### Example request {#h3-15-example-request}
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">### Searching movies
+```
+### Searching movies
 POST http://localhost:8080/movies/search
 Content-Type: application/json
 
 {
-&nbsp;"query": "a science fiction movie about rebels fighting an empire in space"
-}</pre>
+ "query": "a science fiction movie about rebels fighting an empire in space"
+}
+```
+
 
 You should see results coming back from the embedded_movies collection, movies semantically close to the description, even though the exact title wasn't mentioned.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">{
-&nbsp;"title": "Star Wars: Episode IV - A New Hope",
-&nbsp;"year": "1977",
-&nbsp;"fullplot": "A young boy from Tatooine..",
-&nbsp;"plot": "Luke Skywalker joins ..",
-&nbsp;"imdb": {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"rating": 8.7
-&nbsp;&nbsp;&nbsp;},
-&nbsp;"genres": [
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"Action",
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"Adventure",
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"Fantasy"
-&nbsp;&nbsp;],
-&nbsp;...
-}</pre>
+```
+{
+ "title": "Star Wars: Episode IV - A New Hope",
+ "year": "1977",
+ "fullplot": "A young boy from Tatooine..",
+ "plot": "Luke Skywalker joins ..",
+ "imdb": {
+     "rating": 8.7
+   },
+ "genres": [
+     "Action",
+     "Adventure",
+     "Fantasy"
+  ],
+ ...
+}
+```
+
 
 Looking ahead {#h2-16-looking-ahead}
 ------------------------------------

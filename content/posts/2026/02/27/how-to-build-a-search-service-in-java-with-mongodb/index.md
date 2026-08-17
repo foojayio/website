@@ -72,7 +72,10 @@ Search service interface {#h2-2-search-service-interface}
 
 Let's now concretely define the service interface based on the design. Our goal is to support a request, such as *find "Music" genre movies for the query "purple rain" against the \`title\` and \`plot\` fields*, returning only five results at a time that only include the field's title, genres, plot, and year. That request from our presentation layer's perspective is this HTTP GET request:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">http://service_host:8080/search?q=purple%20rain&amp;limit=5&amp;skip=0&amp;project=title,genres,plot,year&amp;search=title,plot&amp;filter=genres:Music</pre>
+```
+http://service_host:8080/search?q=purple%20rain&limit=5&skip=0&project=title,genres,plot,year&search=title,plot&filter=genres:Music
+```
+
 
 These parameters, along with a \`debug\` parameter, are detailed in the following table:
 

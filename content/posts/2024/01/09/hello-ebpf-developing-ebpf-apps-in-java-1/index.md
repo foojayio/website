@@ -66,15 +66,21 @@ The Python API is just a wrapper around the bcc library using the built-in [cffi
 
 For example the following method of the Python API
 
-<pre class="EnlighterJSRAW" data-enlighter-language="python" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">    def get_syscall_fnname(self, name):
+```python
+    def get_syscall_fnname(self, name):
         name = _assert_is_bytes(name)
-        return self.get_syscall_prefix() + name</pre>
+        return self.get_syscall_prefix() + name
+```
+
 
 is translated into Java as follows:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">    public String get_syscall_fnname(String fnName) {
+```java
+    public String get_syscall_fnname(String fnName) {
         return get_syscall_prefix() + fnName;
-    }</pre>
+    }
+```
+
 
 This is the reason why the library has the same license as the Python API, Apache 2.0. The API is purposefully close to the Python API and only deviates where absolutely necessary, adding a few helper methods to improve it slightly. This makes it easier to work with the examples from the book and speeds up the initial development. But finishing a translation of the Python API is not the end goal:
 
@@ -102,8 +108,9 @@ Running the first example {#h2-5-running-the-first-example}
 
 The Java library is still in its infancy, but we are already implementing the most basic eBPF program from the book that prints "Hello World!" every time a new program is started via [execve](https://www.man7.org/linux/man-pages/man2/execve.2.html):
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">&gt; ./run.sh bcc.HelloWorld
-           &lt;...&gt;-30325   [042] ...21 10571.161861: bpf_trace_printk: Hello, World!\n
+```
+> ./run.sh bcc.HelloWorld
+           <...>-30325   [042] ...21 10571.161861: bpf_trace_printk: Hello, World!\n
              zsh-30325   [004] ...21 10571.164091: bpf_trace_printk: Hello, World!\n
              zsh-30325   [115] ...21 10571.166249: bpf_trace_printk: Hello, World!\n
              zsh-39907   [127] ...21 10571.167210: bpf_trace_printk: Hello, World!\n
@@ -115,13 +122,15 @@ The Java library is still in its infancy, but we are already implementing the mo
  MediaSu~isor #3-22497   [000] ...21 10573.417254: bpf_trace_printk: Hello, World!\n
  MediaPD~oder #1-39914   [083] ...21 10573.418197: bpf_trace_printk: Hello, World!\n
  MediaSu~isor #3-39913   [116] ...21 10573.418249: bpf_trace_printk: Hello, World!\n
-</pre>
+```
+
 
 This helps you track the processes that use [execve](https://www.man7.org/linux/man-pages/man2/execve.2.html) and lets you observe that Firefox creates many processes.
 
 The related code can be found in [chapter2/HelloWorld.java](https://github.com/parttimenerd/hello-ebpf/blob/main/src/main/java/me/bechberger/ebpf/samples/chapter2/HelloWorld.java):
 
-<pre class="EnlighterJSRAW" data-enlighter-language="java" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">public class HelloWorld {
+```java
+public class HelloWorld {
   public static void main(String[] args) {
     try (BPF b = BPF.builder("""
             int hello(void *ctx) {
@@ -134,7 +143,9 @@ The related code can be found in [chapter2/HelloWorld.java](https://github.com/p
       b.trace_print();
     }
   }
-}</pre>
+}
+```
+
 
 Which is equivalent to the Python [code](https://github.com/parttimenerd/hello-ebpf/blob/main/pysamples/chapter2/hello.py) from the book. But, of course, many features have not yet been implemented.
 

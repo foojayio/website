@@ -58,19 +58,27 @@ SQL Injection {#h2-2-sql-injection}
 
 SQL injection involves building your own queries by concatenating a query string manually. Let's look at vulnerable SQL like this:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">String sql = "SELECT * from Users WHERE id = " + id;
-</pre>
+```
+String sql = "SELECT * from Users WHERE id = " + id;
+```
+
 
 Considering the sample URL we used before we could request a URL like this: `https://site.com/viewUser?id=1 OR true=true`.
 
 This URL would result in an attacker fetching all the users as the condition will become:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">SELECT * from Users WHERE id = 1 OR true=true</pre>
+```
+SELECT * from Users WHERE id = 1 OR true=true
+```
+
 
 Which is always true. This is a relatively tame outcome. SQL statements can be chained to drop tables deleting the entire database. A solution to this is using the prepared statement syntax, where the implementation treats all the content as a string. This prevents the SQL keywords from being exploited e.g.:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="generic">PreparedStatement sql = connection.prepareStatement("SELECT * from Users WHERE id = ?");
-sql.setString(1, id);</pre>
+```
+PreparedStatement sql = connection.prepareStatement("SELECT * from Users WHERE id = ?");
+sql.setString(1, id);
+```
+
 
 In this situation when we set the value for the id it will treat it as a string even if there are SQL keywords or special characters. Using APIs like JPA (Spring Data, Hibernate, etc.) will also protect you from SQL injection when using similar APIs.
 
