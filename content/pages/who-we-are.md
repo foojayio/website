@@ -10,9 +10,9 @@ frozen: false
 
 {{< img src="/images/pages/who-we-are/Foojay-and-Java-Duke-with-weblink.png" class="alignleft size-large is-resized" width="666" height="681" style="width:300px" >}}
 
-Foojay - **F** riends **O** f **O** pen**J**DK - is the integrated dashboard for all things Java: a central resource for daily information, curated highlights and categorized reference material for the Java community.
+Foojay.io, the website for **F** riends **O** f **O** pen**J**DK, is the integrated dashboard for all things Java: a central resource for daily information, curated highlights and categorized reference material for the Java community. 
 
-Rather than one single blog or one vendor's view, Foojay collates news, technical deep-dives, release data and community voices into one place - free, vendor-neutral and created by the Java community.
+Rather than one single blog or one vendor's view, Foojay collates news, technical deep-dives, release data, podcasts, and community voices into one place. It's a free and vendor-neutral place for the Java community.
 
 On Foojay, you can find the following content (and more!):
 
