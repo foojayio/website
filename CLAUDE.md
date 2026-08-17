@@ -195,11 +195,26 @@ IntelliJ's terminal, read this before making changes.
   sidebar renders on. It replaced a dead scaffold that read a
   `params.sponsors` list from `hugo.toml` that was never populated, so the
   widget had always silently rendered nothing.
-- **Sponsor URLs keep the WP slug**: bundle folders are named after the
-  WordPress slug (e.g. `azul`,
-  not `azul`) and `hugo.toml`'s `[permalinks] sponsors` maps the section to
-  `/sponsor/:slugorcontentbasename/`, reproducing the legacy path exactly so
-  no alias is needed. Renaming a folder silently breaks a live URL.
+- **Sponsor folders can be renamed; the WP URL still has to work.**
+  `hugo.toml`'s `[permalinks] sponsors` maps the section to
+  `/sponsor/:slugorcontentbasename/`, so the bundle FOLDER name is the URL. By
+  default `ConvertSponsors.java` names it after the WordPress slug, which
+  reproduces the legacy path exactly. Some WP slugs are SEO strings rather than
+  names, though (Azul's was
+  `azul-enterprise-java-platform-foojay-io-gold-sponsor`), so folders do get
+  shortened by hand — `content/sponsors/azul/` is one. Two things make that
+  safe, both automatic:
+  1. Each bundle records `wpSlug:`, and the script looks a bundle up by folder
+     name **or** `wpSlug` (falling back to `canonical:` for bundles written
+     before `wpSlug` existed). Without this a re-run doesn't recognise the
+     renamed bundle and writes a **second** one under the old slug — with an
+     empty `authors:`, silently emptying the sponsor's article list. This
+     actually happened once during the rename; the duplicate was deleted.
+  2. When folder name and `wpSlug` differ, the script emits an `aliases:` entry
+     for the old `/sponsor/<wpSlug>/` path, so the live URL keeps redirecting.
+
+  So: rename the folder freely, then **re-run the script** to regenerate
+  `wpSlug`/`aliases`. Never hand-edit those two fields.
 - Posts are contributed via PR (see `CONTRIBUTING.md`); the repo is public.
 - **`data/jugs.yaml` is generated, not authored here** — it's overwritten by
   `scripts/FetchJugs.java` at every deploy and daily sync. Never add/edit a

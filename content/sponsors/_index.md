@@ -1,8 +1,8 @@
 ---
 title: "Our Sponsors"
 heroTitle: "Who Keeps Foojay Running"
-# Co-located in this branch bundle rather than static/, so it travels with the
-# page and resolves through resource-url.html like every other content image.
+# Served from static/images/sponsors/ and resolved through resource-url.html,
+# which strips the leading slash so the baseURL subpath applies.
 #
 # CROPPED from the 592x309 original at
 # foojay.io/wp-content/themes/foojay/img/sponsors-banner.png down to 235x309.
