@@ -12,7 +12,7 @@ youtube: "https://www.youtube.com/channel/UCSoJZa--HhjV9iXtbHUmm8A"
 bluesky: "https://bsky.app/profile/azulsystems.bsky.social"
 mastodon: ""
 twitter: "https://x.com/azulsystems"
-github: ""
+github: "https://github.com/AzulSystems"
 # Hand-maintained: author slugs (content/authors/<letter>/<slug>/) whose posts
 # are this sponsor's articles. ConvertSponsors.java preserves this list verbatim.
 authors:
