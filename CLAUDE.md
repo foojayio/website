@@ -53,7 +53,7 @@ should catch a mistake at PR time rather than letting it fail silently.
   folder). Run at every deploy (`build-deploy.yml`, before the Hugo build)
   and once a day (`sync-external-content.yml`, before `FetchJugEvents.java`), both of
   which commit the refreshed file back to `main` — same pattern as
-  `events.json`. JUG leaders add/update their own group by opening a PR
+  `jug-events.json`. JUG leaders add/update their own group by opening a PR
   against that repo, not this one. Derives `meetup_slug`/`meetup_url`
   whenever a JUG's `website` is a meetup.com URL.
 - **`scripts/FetchJavaChampions.java`**: regenerates `data/java-champions.yaml`
@@ -69,7 +69,7 @@ should catch a mistake at PR time rather than letting it fail silently.
   reads JUG coordinates.
 - **`scripts/FetchJugEvents.java`** (was `FetchMeetupEvents.java`): pulls JUG
   events for `.github/workflows/sync-external-content.yml`, writing
-  `data/events.json`. **Needs no credential, and is not Meetup-specific.** It
+  `data/jug-events.json`. **Needs no credential, and is not Meetup-specific.** It
   used to POST to Meetup's GraphQL API, which requires a Meetup Pro
   subscription plus an OAuth client — a paid dependency for reading events
   Meetup already publishes to anyone, and one that capped the calendar at the
@@ -128,7 +128,7 @@ should catch a mistake at PR time rather than letting it fail silently.
   everything external here (JUG list, Champions, events) changes slowly, and
   the view count is the one thing that moves continuously. Both workflows
   commit to `main`, so they share a `concurrency: data-sync` group and rebase
-  before pushing rather than racing. And it **only rewrites `data/events.json` when the events themselves
+  before pushing rather than racing. And it **only rewrites `data/jug-events.json` when the events themselves
   changed**: `generatedAt` moves on every run, so writing unconditionally would
   commit, and therefore deploy, on a timestamp. `--dry-run` / `--limit N` /
   `--jug <slug>` print the JSON instead of writing a file that would be missing
@@ -785,11 +785,46 @@ should catch a mistake at PR time rather than letting it fail silently.
   not land in `unmatched`; `fetchAll` merges duplicate keys with `Math::max`, so
   the page keeps the higher count rather than summing two views of one page.
   Renaming the file back would silently move the key and drop the bigger number.
-- **`/calendar/` is two views of `data/events.json`, and only one of them is
-  content.** `themes/foojay/layouts/events/single.html` flattens the file's
-  groups into a single list of events and joins each group's `jug` slug to
-  `data/jugs.yaml` for the country (all 32 groups match), so the page file holds
-  a one-line intro and nothing else -- the event count, the group count, the
+- **The calendar has two sources, and the split is "does it publish a feed?"**
+  `scripts/FetchJugEvents.java` syncs JUG meetups into `data/jug-events.json`
+  daily; a conference has no feed anyone can subscribe to, so those are
+  **hand-added, one file per event, by pull request**:
+  `data/events/<slug>.yaml`, `name`/`url`/`start` required, `end`/`type`/
+  `venue`/`city`/`country`/`online` optional. `template/event.yaml` is the
+  starter file (its comments are the schema), `CONTRIBUTING.md` the
+  walkthrough, and `ValidateFrontmatter.checkEvents` the PR-time check.
+
+  Three things about it are load-bearing:
+  1. **The generated file is `jug-events.json`, not `events.json`.** Hugo maps
+     `data/events.json` and a `data/events/` folder onto the same
+     `hugo.Data.events` key and merges them, so a generated feed and
+     hand-written entries would share one namespace -- and the layout would
+     have to skip `groups`/`generatedAt`/`source` by name to iterate the
+     entries. Renamed instead. `index hugo.Data "jug-events"` is how the layout
+     reads it (a dash can't be a field selector).
+  2. **One file per event, never a shared list.** Two contributors adding two
+     conferences in the same week both append to the end of a list file and
+     both get a merge conflict; with a file each they never touch the same
+     bytes. Same reason GlobalWWJugs has one file per JUG.
+  3. **Nothing has to be deleted.** The layout drops an event the day after it
+     ends, so a stale file is inert -- a calendar whose upkeep is a chore is a
+     calendar that rots.
+
+  `checkEvents` enforces a **closed key set**, which is the check that earns
+  its keep: data files are not content, so Hugo says nothing about
+  `website:` instead of `url:` or `dates:` instead of `start:` -- the event
+  just renders with a piece missing. Everything else is derived: the dot colour
+  from the filename hash, the days a multi-day conference occupies from its
+  dates, the "N conferences" count (and whether that word widens to
+  "conferences & workshops") from the entries themselves.
+
+- **`/calendar/` is two views of its events, and only one of them is
+  content.** `themes/foojay/layouts/events/single.html` flattens
+  `jug-events.json`'s groups into a single list, joins each group's `jug` slug
+  to `data/jugs.yaml` for the country (all 32 groups match), and appends the
+  `data/events/` entries with the same keys -- so downstream, the grid, the
+  agenda, the dialog and the JSON island are one code path and the only thing
+  that differs is `kind`. The page file holds a one-line intro and nothing else -- the event count, the group count, the
   country count and the "Groups on the calendar" legend are all derived, the
   same way `/jugs/` and `/java-champions/` are. Each JUG's dot colour is a hue
   hashed from its slug (`hash.FNV32a`), so a group keeps one colour across the
@@ -821,6 +856,32 @@ should catch a mistake at PR time rather than letting it fail silently.
   broken fetch. Note the upstream data is not always sane: a few recurring
   "Stammtisch" events carry an end time a week after their start, which is why
   the agenda renders a bare "until 4 Sep" instead of pretending to know better.
+
+  **A multi-day event occupies every day it runs; a meetup occupies one.** The
+  layout gives each event a `days` array -- one date for a meetup, five for
+  Devoxx Belgium -- and the script buckets the grid on that, so a conference is
+  a band of "Day 1/5"..."Day 5/5" chips tinted in its own hue rather than one
+  chip on the Monday. The asymmetry is deliberate and is why `days` exists
+  instead of the script reading `date`/`endDate`: those same broken Stammtisch
+  entries would otherwise smear an upstream typo across seven cells.
+
+  **The month arrows work in both views, and they mean different things.** In
+  the grid they step a month, empty or not. In the list they step to the
+  previous/next month **that has events** and scroll its section into view --
+  the agenda has no section for an empty month, so stepping into one is a
+  button that visibly does nothing, which is what they did before. An arrow at
+  either end is `disabled`, not silently inert. The toolbar is `position:
+  sticky` under the site header for the same reason: a 40-event agenda is
+  several screens, so a toolbar that scrolled away would let you step forward
+  exactly once. `Today` stays in the view the reader chose rather than forcing
+  the grid -- forcing it dropped a phone, which opens on the agenda, into the
+  one view that does not fit on it.
+
+  The source/attribution note sits **full width under the calendar, not in the
+  rail**: it is the only prose on the page, and at 300px it ran long enough to
+  push the two legends into a scroll they did not need. Both legend lists are
+  capped at `27rem` with `overflow-y: auto`, because they grow with the data --
+  90 JUGs publish a calendar.
 - **A multi-page series is a folder of pages with a `weight`, and nothing else.**
   The 11 Java Quick Start tutorial steps used to hand-write the same
   `<< Prev` / `Next >>` markdown pair TWICE each (top and bottom of every page),

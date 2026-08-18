@@ -64,7 +64,7 @@ import java.util.stream.Stream;
  * WHY A DATA FILE AND NOT `legacy_views:` FRONTMATTER. The TODO wondered about
  * a frontmatter field. It would mean rewriting 2145 content files on every
  * re-run -- a large diff, every time, over numbers no author wrote or wants to
- * review. One generated file matches what data/jugs.yaml, data/events.json and
+ * review. One generated file matches what data/jugs.yaml, data/jug-events.json and
  * data/java-champions.yaml already do here.
  *
  * Usage:

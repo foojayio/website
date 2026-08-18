@@ -52,7 +52,7 @@ jobs:
         run: |
           git config user.name "foojay-bot"
           git config user.email "actions@github.com"
-          git add data/jugs.yaml data/java-champions.yaml data/events.json
+          git add data/jugs.yaml data/java-champions.yaml data/jug-events.json
           if git diff --cached --quiet; then
             echo "No JUG list, Java Champions or event changes."
           else

@@ -30,7 +30,15 @@ the same folder.
   Rendered at `/jugs/` with a Leaflet world map + a client-side name/country filter.
 - `data/java-champions.yaml` — **generated**, rendered at `/java-champions/`
   with a client-side filter.
-- `data/events.json` — **generated** by the external-content sync workflow.
+- `data/jug-events.json` — **generated** by the external-content sync workflow:
+  JUG meetups, pulled from the iCal feed each group publishes. Overwritten
+  daily, so nothing hand-written survives in it.
+- `data/events/<slug>.yaml` — **hand-maintained**, one file per conference,
+  workshop or other event with no feed to sync. Added by pull request (start
+  from `template/event.yaml`; see `CONTRIBUTING.md`). This is the reason the
+  generated file above is named `jug-events.json` rather than `events.json`:
+  a `data/events.json` and a `data/events/` folder collide on one `hugo.Data`
+  key.
 - `data/views.json` — **generated**, the read count per post (see "Read counter").
 - `data/legacy-views.json` — **generated**, each post's WordPress view count at
   the last import. Kept in the repo because it is the only copy: the number
@@ -40,8 +48,9 @@ the same folder.
 - `scripts/` — jbang/Java conversion, external-data, and validation scripts (see below).
 - `worker/views/` — the read counter: a Cloudflare Worker + D1 table on
   `foojay.io/api/views/*`. Deployed by hand, not by CI (see "Read counter").
-- `template/` — a starter `index.md` (all frontmatter documented) + a categories
-  list for authors writing a new post; see `CONTRIBUTING.md`.
+- `template/` — starter files (all fields documented) for a post, an author, a
+  page, a board member and a calendar event, plus the categories list; see
+  `CONTRIBUTING.md`.
 - `.github/workflows/` — CI: PR checks, Pages deploy, external-content sync.
 
 ## Scripts (jbang)
@@ -79,7 +88,7 @@ scraping against one real page, and `ConvertPosts` supports `--days N` / `--sinc
 ```bash
 jbang scripts/FetchJugs.java            # -> data/jugs.yaml          (World-Wide-JUGs/GlobalWWJugs)
 jbang scripts/FetchJavaChampions.java   # -> data/java-champions.yaml (aalmiray/java-champions)
-jbang scripts/FetchJugEvents.java      # -> data/events.json         (iCal feeds: JUG sites, Google Calendar, Meetup)
+jbang scripts/FetchJugEvents.java      # -> data/jug-events.json     (iCal feeds: JUG sites, Google Calendar, Meetup)
 jbang scripts/FetchViewCounts.java      # -> data/views.json          (our own counter, worker/views/)
 ```
 
@@ -270,7 +279,7 @@ held in a separate column and are never overwritten.
   Shares a `concurrency: data-sync` group with the workflow below, since both
   commit to `main`.
 - **`sync-external-content.yml`** — cron, once a day: refreshes `data/jugs.yaml`,
-  `data/java-champions.yaml`, `data/views.json` and `data/events.json`,
+  `data/java-champions.yaml`, `data/views.json` and `data/jug-events.json`,
   committing the results.
 - **`pr-check.yml`** — on PRs: runs `ValidateFrontmatter.java` and a Hugo build
   (GitHub Pages has no per-PR preview URL).

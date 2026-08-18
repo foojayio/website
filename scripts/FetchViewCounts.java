@@ -34,7 +34,7 @@ import java.util.TreeMap;
  * (.github/workflows/sync-view-counts.yml -- its own workflow, because the read
  * counter moves continuously while everything in sync-external-content.yml
  * changes slowly enough to be daily), both of which commit the refreshed file
- * back to main -- the same pattern as data/jugs.yaml and data/events.json.
+ * back to main -- the same pattern as data/jugs.yaml and data/jug-events.json.
  *
  * NEVER FAILS THE BUILD. If the counter is unreachable this leaves the
  * committed data/views.json alone and exits 0. Yesterday's numbers on the page

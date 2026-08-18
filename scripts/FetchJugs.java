@@ -28,7 +28,7 @@ import java.util.regex.Pattern;
  * one-time snapshot. Run at every deploy (.github/workflows/build-deploy.yml)
  * and before every event sync (.github/workflows/sync-external-content.yml) --
  * both commit the refreshed file back to main, same pattern as
- * data/events.json.
+ * data/jug-events.json.
  *
  * JUG leaders add/update their OWN group by opening a PR against
  * World-Wide-JUGs/GlobalWWJugs's `_jugs/` folder, not this repo -- that's

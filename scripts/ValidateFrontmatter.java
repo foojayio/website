@@ -7,6 +7,9 @@ import org.yaml.snakeyaml.Yaml;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.time.LocalDate;
+import java.time.ZoneOffset;
+import java.time.format.DateTimeParseException;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -74,6 +77,7 @@ public class ValidateFrontmatter {
         problems.addAll(checkBoardMembers(Path.of("content/pages/board")));
         problems.addAll(checkSeriesWeights(Path.of("content/pages")));
         problems.addAll(checkFeaturedAuthors(Path.of("hugo.toml"), authorSlugs));
+        problems.addAll(checkEvents(Path.of("data/events")));
 
         if (problems.isEmpty()) {
             System.out.println("Frontmatter check passed.");
@@ -493,6 +497,125 @@ public class ValidateFrontmatter {
             }
         }
         return problems;
+    }
+
+    /**
+     * A hand-added calendar entry: data/events/<slug>.yaml, one file per
+     * conference / community day / online event, opened as a pull request.
+     * See template/event.yaml for the field-by-field version a contributor
+     * reads.
+     *
+     * These need checking harder than most content does, for two reasons.
+     * They are DATA, so Hugo will not complain about them the way it does
+     * about a page -- a misspelled key is simply a key nothing reads, and the
+     * event renders with a piece silently missing. And they are the one thing
+     * on the site a first-time contributor is likely to send without ever
+     * having built it locally: it is six lines of YAML, so of course they
+     * won't.
+     *
+     * Hence the closed key set below. It is the check that earns its keep:
+     * `website:` instead of `url:`, `dates:` instead of `start:`, `location:`
+     * instead of `city:` are all things a reasonable person types, and every
+     * one of them fails without a symptom. The schema is ours, so we can
+     * afford to say exactly what belongs in it.
+     *
+     * What is NOT checked, deliberately: whether the event is in the past.
+     * The layout drops an event the day after it ends, so an old file is
+     * harmless -- failing the build over one would mean the calendar rots
+     * into a chore, which is the opposite of the point.
+     */
+    static final Set<String> EVENT_KEYS = Set.of(
+            "name", "type", "url", "start", "end", "venue", "city", "country", "online");
+
+    static List<String> checkEvents(Path eventsDir) throws IOException {
+        List<String> problems = new ArrayList<>();
+        if (!Files.isDirectory(eventsDir)) return problems;
+
+        List<Path> files;
+        try (Stream<Path> s = Files.list(eventsDir)) {
+            files = s.filter(Files::isRegularFile).sorted().toList();
+        }
+
+        for (Path file : files) {
+            String filename = file.getFileName().toString();
+            // Hugo reads data/ as data: anything it cannot unmarshal fails the
+            // BUILD, with a message about "format" that says nothing about what
+            // to do. Catch it here, where we can.
+            if (!filename.endsWith(".yaml") && !filename.endsWith(".yml")) {
+                problems.add(file + ": only .yaml files belong in data/events/"
+                        + " (Hugo reads every file in data/ as data and fails the build on"
+                        + " anything else) -- put notes in template/event.yaml or CONTRIBUTING.md");
+                continue;
+            }
+
+            String slug = stripExt(filename);
+            if (!SLUG_FMT.matcher(slug).matches()) {
+                problems.add(file + ": file name '" + slug + "' is not a clean slug"
+                        + " (lowercase letters, digits and dashes only, e.g. devoxx-belgium-2026)");
+            }
+
+            Object loaded = new Yaml().load(Files.readString(file));
+            if (!(loaded instanceof Map)) {
+                problems.add(file + ": not a YAML mapping (start from template/event.yaml)");
+                continue;
+            }
+            @SuppressWarnings("unchecked")
+            Map<String, Object> e = (Map<String, Object>) loaded;
+
+            for (String key : e.keySet()) {
+                if (!EVENT_KEYS.contains(key)) {
+                    problems.add(file + ": unknown field '" + key + "' -- nothing reads it."
+                            + " Known fields: " + new TreeSet<>(EVENT_KEYS));
+                }
+            }
+
+            problems.addAll(checkRequired(file, e, List.of("name", "url", "start")));
+
+            // An online event has no city; anything else without one cannot be
+            // found, and the country is what the "N countries" count is built
+            // from.
+            if (!Boolean.TRUE.equals(e.get("online"))) {
+                problems.addAll(checkRequired(file, e, List.of("city", "country")));
+            }
+
+            if (e.get("url") instanceof String url && !url.isBlank() && !url.startsWith("http")) {
+                problems.add(file + ": url '" + url + "' should be the event's full https:// address");
+            }
+
+            LocalDate start = eventDate(file, "start", e.get("start"), problems);
+            LocalDate end = e.get("end") == null ? start : eventDate(file, "end", e.get("end"), problems);
+            if (start != null && end != null) {
+                if (end.isBefore(start)) {
+                    problems.add(file + ": end (" + end + ") is before start (" + start + ")");
+                } else if (start.plusDays(31).isBefore(end)) {
+                    // A month-long conference is a mistyped year, and it would
+                    // otherwise draw a band across every cell of the calendar.
+                    problems.add(file + ": start (" + start + ") to end (" + end + ") is longer than"
+                            + " 31 days -- check the year");
+                }
+            }
+        }
+        return problems;
+    }
+
+    /**
+     * A date from an event file. SnakeYAML turns an unquoted `2026-10-05` into
+     * a Date and a quoted one into a String, and a contributor writes whichever
+     * looks right to them, so both have to work -- as does a full timestamp
+     * (`2026-10-05T19:00:00+02:00`), which is how an entry says the time of day
+     * matters.
+     */
+    static LocalDate eventDate(Path file, String field, Object value, List<String> problems) {
+        if (value == null) return null;
+        if (value instanceof Date d) return d.toInstant().atZone(ZoneOffset.UTC).toLocalDate();
+        String s = value.toString().trim();
+        try {
+            return LocalDate.parse(s.length() > 10 ? s.substring(0, 10) : s);
+        } catch (DateTimeParseException ex) {
+            problems.add(file + ": " + field + " '" + s + "' is not a date --"
+                    + " write YYYY-MM-DD, or YYYY-MM-DDTHH:MM:SS+HH:MM when the time matters");
+            return null;
+        }
     }
 
     static Map<String, Object> readFrontmatter(Path file) throws IOException {

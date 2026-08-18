@@ -1,6 +1,6 @@
 ---
 title: "Events Calendar"
-description: "Upcoming meetups and talks from Java User Groups around the world."
+description: "Upcoming meetups, conferences and workshops from the Java community worldwide."
 canonical: "https://foojay.io/calendar/"
 url: "/calendar/"
 type: "events"
@@ -9,6 +9,6 @@ aliases:
 frozen: true
 ---
 
-What's on in the Java community: meetups, talks and workshops hosted by Java
-User Groups worldwide. Switch between the month view and the full list, and
-click an event to see the details or to sign up on Meetup.
+What's on in the Java community: meetups hosted by Java User Groups worldwide,
+plus the conferences and workshops on the calendar. Switch between the month
+view and the full list, and click an event to see the details or to sign up.

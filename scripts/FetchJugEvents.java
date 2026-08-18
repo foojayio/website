@@ -28,7 +28,7 @@ import java.util.regex.Pattern;
 
 /**
  * Pulls upcoming events for every JUG in data/jugs.yaml that publishes a
- * calendar, and writes data/events.json for the calendar page at /calendar/.
+ * calendar, and writes data/jug-events.json for the calendar page at /calendar/.
  * Runs once a day from .github/workflows/sync-external-content.yml, which runs
  * FetchJugs.java first so this always sees the current upstream JUG list.
  *
@@ -76,7 +76,7 @@ import java.util.regex.Pattern;
 public class FetchJugEvents {
 
     static final Path JUGS_FILE = Path.of("data/jugs.yaml");
-    static final Path OUTPUT_FILE = Path.of("data/events.json");
+    static final Path OUTPUT_FILE = Path.of("data/jug-events.json");
 
     /** How many upcoming events to keep per JUG. Google feeds hold years. */
     static final int EVENTS_PER_GROUP = 10;
@@ -364,7 +364,7 @@ public class FetchJugEvents {
         return null;
     }
 
-    /** One VEVENT -> the event shape data/events.json holds, or null to skip it. */
+    /** One VEVENT -> the event shape data/jug-events.json holds, or null to skip it. */
     static Map<String, Object> toEvent(Map<String, String> ve) {
         if (ve.getOrDefault("STATUS", "").equalsIgnoreCase("CANCELLED")) return null;
 
@@ -566,7 +566,7 @@ public class FetchJugEvents {
 
     // ----------------------------------------------------------------- misc --
 
-    /** True when two renderings of data/events.json differ only in generatedAt. */
+    /** True when two renderings of data/jug-events.json differ only in generatedAt. */
     static boolean sameEvents(String existing, String fresh) {
         try {
             var a = (com.fasterxml.jackson.databind.node.ObjectNode) JSON.readTree(existing);

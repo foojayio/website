@@ -1,0 +1,59 @@
+# A conference, community day, workshop or online event on foojay.io/calendar/
+#
+# Copy this file to data/events/<event-slug>.yaml, fill it in, open a pull
+# request. Name the file after the event INCLUDING its year -- lowercase
+# letters, digits and dashes only:
+#
+#     data/events/devoxx-belgium-2026.yaml
+#     data/events/jfokus-2027.yaml
+#
+# One file per event, so two people adding two conferences in the same week
+# never touch the same file and never get a merge conflict. Next year's edition
+# is a new file, not an edit of this one.
+#
+# Do NOT add an event to data/jug-events.json: that file is regenerated from the
+# JUGs' calendar feeds and committed every day, so a hand-written entry in it is
+# gone within 24 hours. Recurring JUG meetups belong in the JUG's own calendar,
+# which foojay picks up automatically once the group is listed at
+# https://github.com/World-Wide-JUGs/GlobalWWJugs
+#
+# Delete the comments and the optional lines you don't need.
+
+# --- Required -------------------------------------------------------------
+
+# Shown on the calendar. Include the year, like the filename does.
+name: "Devoxx Belgium 2026"
+
+# The event's own site -- where the calendar sends a reader.
+url: "https://devoxx.be/"
+
+# First day, YYYY-MM-DD. Add a time only when it matters (a single evening or
+# an online session): "2026-10-05T19:00:00+02:00", with the event's own UTC
+# offset. Without one, the event is shown as running all day.
+start: "2026-10-05"
+
+# Where it is. Both required unless `online: true` below.
+city: "Antwerp"
+country: "Belgium"
+
+# --- Optional -------------------------------------------------------------
+
+# What kind of event this is. Shown next to it on the calendar. Defaults to
+# "Conference"; other sensible values are "Workshop", "Community Day",
+# "Hackathon", "Webinar", "Unconference".
+type: "Conference"
+
+# LAST day, inclusive, YYYY-MM-DD. Leave it out for a one-day event -- a
+# multi-day conference is drawn as a band across those days in the month view.
+end: "2026-10-09"
+
+# The building, if it is worth naming.
+venue: "Kinepolis Antwerpen"
+
+# true for an online-only event; then city/country can be left out.
+online: false
+
+# Nothing else: the colour on the calendar comes from the filename, the day
+# count and the month band from the dates, the counts in the page header from
+# the entries themselves. And you never have to come back to delete this file
+# -- the event drops off the calendar on its own the day after it ends.

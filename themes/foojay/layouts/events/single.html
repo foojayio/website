@@ -1,12 +1,27 @@
 {{ define "main" }}
 {{/* /calendar/ -- the events calendar.
 
-     Everything on this page is derived from data/events.json (written daily by
-     scripts/FetchJugEvents.java from whatever iCal feed each JUG publishes --
-     its own .ics, a Google Calendar, or Meetup's export) joined to
-     data/jugs.yaml on the group's `jug` slug for the country. There is nothing to author: the
-     page file holds a one-line intro and this layout does the rest, the same
-     way /jugs/ and /java-champions/ work.
+     TWO SOURCES, one calendar, and the difference between them is whether the
+     event publishes a feed:
+
+     1. JUG meetups come from data/jug-events.json (written daily by
+        scripts/FetchJugEvents.java from whatever iCal feed each JUG
+        publishes -- its own .ics, a Google Calendar, or Meetup's export),
+        joined to data/jugs.yaml on the group's `jug` slug for the country.
+     2. Conferences and anything else with no feed come from
+        data/events/<slug>.yaml, one hand-written file per event, added
+        through a pull request. A conference publishes no iCal feed to
+        scrape, and that generated JSON is overwritten every single day, so
+        a hand-added event cannot live in it -- see data/events/README.md.
+
+     The generated file is named jug-events.json rather than events.json for
+     exactly that reason: data/events.json and a data/events/ folder share one
+     key in hugo.Data, and merging a generated feed with hand-written entries
+     into one namespace is a collision waiting to happen.
+
+     Everything a reader sees is still derived: the page file holds a one-line
+     intro and this layout does the rest, the same way /jugs/ and
+     /java-champions/ work.
 
      Two renderings of one set of events, and only one of them is content: the
      agenda list below is server-rendered (so it is what Pagefind indexes and
@@ -15,9 +30,9 @@
      The toolbar starts `hidden` because every control on it is JS-only --
      without the script the page is simply the agenda. */}}
 
-{{ $data := hugo.Data.events }}
+{{ $data := index hugo.Data "jug-events" }}
 
-{{/* Join key: events.json's `jug` is a data/jugs.yaml slug -- verified, all 32
+{{/* Join key: jug-events.json's `jug` is a data/jugs.yaml slug -- verified, all 32
      groups match -- which is where the country comes from. */}}
 {{ $jugBySlug := dict }}
 {{ range hugo.Data.jugs }}
@@ -74,7 +89,16 @@
       {{ $endDate = $end.Format "2006-01-02" }}
       {{ $endTime = $end.Format "15:04" }}
     {{ end }}
+    {{/* A meetup occupies ONE cell in the month grid even when its feed claims
+         an end a week later: a handful of recurring "Stammtisch" entries carry
+         exactly that, and smearing them across seven days would fill the grid
+         with an upstream typo. A conference below genuinely spans its days,
+         which is why `days` exists at all. */}}
     {{ $events = $events | append (dict
+        "kind"       "meetup"
+        "days"       (slice ($start.Format "2006-01-02"))
+        "allDay"     false
+        "when"       (printf "%s%s" ($start.Format "15:04") (cond (ne $endTime "") (printf "\u2013%s" $endTime) ""))
         "title"      $e.title
         "url"        $e.url
         "group"      $g.name
@@ -100,6 +124,125 @@
       ) }}
   {{ end }}
 {{ end }}
+
+{{/* ------------------------------------------------------------------------
+     Hand-added events: data/events/<slug>.yaml, one file per event, opened as
+     a pull request (data/events/README.md is the contributor's instructions,
+     template/event.yaml the starter file, and
+     ValidateFrontmatter.checkEvents the PR-time check).
+
+     They land in the same $events slice as the JUG meetups above and carry the
+     same keys, so the grid, the agenda, the dialog and the JSON island stay
+     one code path -- the ONLY thing that differs downstream is `kind`.
+
+     Everything here is derived from the file except the eight fields the
+     README documents: the colour from the filename, the day cells a
+     conference occupies from its dates, the counts in the page header from
+     the entries themselves.
+     ------------------------------------------------------------------------ */}}
+{{ $today := now.Format "2006-01-02" }}
+{{/* Where a contributor goes to add one: the starter file, not the folder --
+     template/event.yaml documents every field in its comments, and the first
+     instruction in it is where to copy it to. Landing on the folder means
+     landing on eight filled-in examples and no schema. Derived from the giscus
+     repo setting rather than hardcoded, so a repo rename moves every link. */}}
+{{ $repo := printf "https://github.com/%s" (site.Params.giscus.repo | default "foojayio/website") }}
+{{ $repoEvents := printf "%s/blob/main/template/event.yaml" $repo }}
+{{ $conferences := slice }}
+{{ range $slug, $c := (index hugo.Data "events" | default dict) }}
+  {{/* A README.md sitting in the folder is not an entry. Hugo ignores it (it
+       only reads yaml/json/toml), but guard anyway: a file that somehow parses
+       without a name is skipped rather than rendered as a blank row. */}}
+  {{ if $c.name }}
+    {{ if not $c.start }}
+      {{ errorf "data/events/%s.yaml: missing `start` -- see data/events/README.md" $slug }}
+    {{ end }}
+    {{ $start := time.AsTime $c.start }}
+    {{ $end := $start }}
+    {{ with $c.end }}{{ $end = time.AsTime . }}{{ end }}
+    {{ $endDate := $end.Format "2006-01-02" }}
+
+    {{/* Past events drop off on their own, the day after they end -- so
+         nobody has to remember to delete last year's file, and forgetting to
+         is not a bug. */}}
+    {{ if ge $endDate $today }}
+      {{/* Whether the entry carries a time of day, rather than a flag saying
+           so: "2026-10-05" is midnight and means all day, while
+           "2026-10-05T19:00:00+02:00" means 19:00. Derive it, don't ask. */}}
+      {{ $allDay := and (eq $start.Hour 0) (eq $start.Minute 0) }}
+
+      {{/* Every date the event covers, so a five-day conference is five cells
+           in the month grid rather than one chip on the Monday. Capped: a
+           mistyped year would otherwise expand into thousands of entries, and
+           the PR check rejects a span this long anyway. */}}
+      {{ $span := int (div (sub $end.Unix $start.Unix) 86400) }}
+      {{ if lt $span 0 }}{{ $span = 0 }}{{ end }}
+      {{ if gt $span 30 }}{{ $span = 30 }}{{ end }}
+      {{ $days := slice }}
+      {{ range $i := seq 0 $span }}
+        {{ $days = $days | append (($start.AddDate 0 0 $i).Format "2006-01-02") }}
+      {{ end }}
+
+      {{/* One line for when it is: a day range for a multi-day event, the
+           clock for a timed one, nothing for a single all-day event (the date
+           beside it already says it). */}}
+      {{ $when := "" }}
+      {{ if gt (len $days) 1 }}
+        {{ if eq ($start.Format "2006-01") ($end.Format "2006-01") }}
+          {{ $when = printf "%s–%s" ($start.Format "2") ($end.Format "2 January") }}
+        {{ else }}
+          {{ $when = printf "%s – %s" ($start.Format "2 January") ($end.Format "2 January") }}
+        {{ end }}
+      {{ else if not $allDay }}
+        {{ $when = $start.Format "15:04" }}
+      {{ end }}
+
+      {{ $place := "" }}
+      {{ if eq $c.online true }}
+        {{ $place = "Online" }}
+      {{ else }}
+        {{ $parts := slice }}
+        {{ with $c.venue }}{{ $parts = $parts | append . }}{{ end }}
+        {{ with $c.city }}{{ $parts = $parts | append . }}{{ end }}
+        {{ $place = delimit $parts ", " }}
+      {{ end }}
+
+      {{ $event := dict
+          "kind"       "event"
+          "type"       ($c.type | default "Conference")
+          "days"       $days
+          "allDay"     $allDay
+          "when"       $when
+          "title"      $c.name
+          "url"        ($c.url | default "")
+          "group"      ($c.type | default "Conference")
+          "groupUrl"   ($c.url | default "")
+          "jug"        ""
+          "country"    ($c.country | default "")
+          "hue"        (mod (hash.FNV32a $slug) 360)
+          "sort"       $start.Unix
+          "date"       ($start.Format "2006-01-02")
+          "endDate"    $endDate
+          "day"        ($start.Format "2")
+          "weekday"    ($start.Format "Mon")
+          "time"       ($start.Format "15:04")
+          "endTime"    ""
+          "dateLabel"  ($start.Format "Monday, 2 January 2006")
+          "monthKey"   ($start.Format "2006-01")
+          "monthLabel" ($start.Format "January 2006")
+          "venue"      ($c.venue | default "")
+          "city"       ($c.city | default "")
+          "online"     (eq $c.online true)
+          "place"      $place
+          "placeShort" (cond (eq $c.online true) "Online" ($c.city | default $c.venue | default ($c.country | default "")))
+        }}
+      {{ $events = $events | append $event }}
+      {{ $conferences = $conferences | append $event }}
+    {{ end }}
+  {{ end }}
+{{ end }}
+{{ $conferences = sort $conferences "sort" }}
+
 {{ $events = sort $events "sort" }}
 
 {{/* Months present in the data, in order, plus their labels -- Hugo's `group`
@@ -114,7 +257,12 @@
     {{ $monthKeys = $monthKeys | append .monthKey }}
     {{ $monthLabels = merge $monthLabels (dict .monthKey .monthLabel) }}
   {{ end }}
-  {{ if not (in $groupNames .group) }}{{ $groupNames = $groupNames | append .group }}{{ end }}
+  {{/* "Groups" means JUG meetups: a conference is not a group and gets its own
+       legend section below, so counting it here would inflate "N Java User
+       Groups" with things that are not one. */}}
+  {{ if eq .kind "meetup" }}
+    {{ if not (in $groupNames .group) }}{{ $groupNames = $groupNames | append .group }}{{ end }}
+  {{ end }}
   {{ if and .country (not (in $countries .country)) }}{{ $countries = $countries | append .country }}{{ end }}
 {{ end }}
 
@@ -128,6 +276,14 @@
       <p class="cal-stats">
         <strong>{{ len $events }}</strong> events &middot;
         <strong>{{ len $groupNames }}</strong> Java User Groups &middot;
+        {{/* "conferences" while they all are; the moment a workshop or a
+             community day is added, the label widens on its own rather than
+             counting a workshop as a conference. */}}
+        {{ with $conferences }}
+          {{ $types := slice }}
+          {{ range . }}{{ if not (in $types .type) }}{{ $types = $types | append .type }}{{ end }}{{ end }}
+          <strong>{{ len . }}</strong> {{ if and (eq (len $types) 1) (eq (index $types 0) "Conference") }}conferences{{ else }}conferences &amp; workshops{{ end }} &middot;
+        {{ end }}
         <strong>{{ len $countries }}</strong> countries
       </p>
       {{ end }}
@@ -142,7 +298,31 @@
   {{ if $events }}
   <div class="calendar" data-calendar>
     <aside class="calendar__aside">
-      <a class="btn btn--accent cal-cta" href="https://github.com/World-Wide-JUGs/GlobalWWJugs/tree/master/_jugs" target="_blank" rel="noopener">+ Add your JUG</a>
+      {{/* The two routes onto this calendar, as two buttons, because they are
+           genuinely different jobs: a JUG's meetups are synced from its feed
+           once its entry exists upstream, while a conference is a pull request
+           against this repo. */}}
+      <div class="cal-ctas">
+        <a class="btn btn--accent cal-cta" href="https://github.com/World-Wide-JUGs/GlobalWWJugs/tree/master/_jugs" target="_blank" rel="noopener">+ Add your JUG</a>
+        <a class="btn btn--ghost cal-cta" href="{{ $repoEvents }}" target="_blank" rel="noopener">+ Add an event</a>
+      </div>
+
+      {{ with $conferences }}
+      <section class="cal-legend">
+        <h2 class="cal-legend__head">Conferences &amp; community events</h2>
+        <ul class="cal-legend__list">
+          {{ range . }}
+            <li class="cal-legend__item">
+              <span class="cal-dot" style="--cal-dot: hsl({{ .hue }} 62% 46%)" aria-hidden="true"></span>
+              <span class="cal-legend__name">
+                {{ if .url }}<a href="{{ .url }}" target="_blank" rel="noopener">{{ .title }}</a>{{ else }}{{ .title }}{{ end }}
+                <span class="cal-legend__country">{{ with .when }}{{ . }}{{ else }}{{ dateFormat "2 January" .date }}{{ end }}{{ with .country }} &middot; {{ . }}{{ end }}</span>
+              </span>
+            </li>
+          {{ end }}
+        </ul>
+      </section>
+      {{ end }}
 
       <section class="cal-legend">
         <h2 class="cal-legend__head">Groups on the calendar</h2>
@@ -161,18 +341,6 @@
           {{ end }}
         </ul>
       </section>
-
-      {{/* Same note, and the same reason, as the one on /jugs/: the data behind
-           this page is regenerated on a schedule, so say where it comes from
-           where it is actually shown rather than only in a code comment. */}}
-      <p class="cal-source">
-        Events are pulled from the Meetup groups listed in the community-run
-        <a href="https://github.com/World-Wide-JUGs/GlobalWWJugs" target="_blank" rel="noopener">World Wide JUGs</a>
-        directory and refreshed several times a day. If your JUG is missing or its events
-        aren't showing up, add or fix its entry there &mdash; it appears here automatically.
-        {{ with $data.generatedAt }}<br><span class="cal-source__synced">Last synced {{ dateFormat "2 January 2006, 15:04 MST" . }}.</span>{{ end }}
-        {{ with $errored }}<br><span class="cal-source__errors">{{ len . }} group{{ if gt (len .) 1 }}s{{ end }} could not be synced last time: {{ delimit . ", " }}.</span>{{ end }}
-      </p>
     </aside>
 
     <div class="calendar__main">
@@ -197,11 +365,16 @@
 
       <div class="cal-agenda" data-cal-list>
         {{ range $mk := $monthKeys }}
-          <section class="cal-month">
+          {{/* data-month is what the toolbar's arrows scroll to in list view --
+               the agenda only holds months that HAVE events, so the arrows step
+               between those rather than through empty ones. */}}
+          <section class="cal-month" data-month="{{ $mk }}">
             <h2 class="cal-month__head">{{ index $monthLabels $mk }}</h2>
             <ul class="cal-month__list">
               {{ range $e := (where $events "monthKey" $mk) }}
-                <li class="cal-row">
+                {{/* The colour goes on the ROW, not only on the dot, so the
+                     type pill on a conference row can use it too. */}}
+                <li class="cal-row{{ if ne $e.kind "meetup" }} cal-row--event{{ end }}" style="--cal-dot: hsl({{ $e.hue }} 62% 46%)">
                   <div class="cal-row__date">
                     <span class="cal-row__day">{{ $e.day }}</span>
                     <span class="cal-row__weekday">{{ $e.weekday }}</span>
@@ -213,11 +386,17 @@
                     {{ if $e.url }}<a class="cal-row__title" href="{{ $e.url }}" target="_blank" rel="noopener">{{ $e.title }}</a>
                     {{ else }}<span class="cal-row__title">{{ $e.title }}</span>{{ end }}
                     <p class="cal-row__meta">
-                      <span class="cal-dot" style="--cal-dot: hsl({{ $e.hue }} 62% 46%)" aria-hidden="true"></span>
+                      <span class="cal-dot" aria-hidden="true"></span>
                       <span class="cal-row__group">{{ $e.group }}</span>
-                      <span class="cal-row__sep">&middot;</span>
-                      <span class="cal-row__time">{{ $e.time }}{{ with $e.endTime }}&ndash;{{ . }}{{ end }}</span>
-                      {{ if and $e.endDate (ne $e.endDate $e.date) }}<span class="cal-row__sep">&middot;</span><span class="cal-row__span">until {{ dateFormat "2 Jan" $e.endDate }}</span>{{ end }}
+                      {{/* `when` is built once, per source: "19:00-21:00" for a
+                           meetup, "5-9 October" for a multi-day conference, and
+                           empty for a single all-day one -- where the date
+                           beside the row already says everything. */}}
+                      {{ with $e.when }}<span class="cal-row__sep">&middot;</span><span class="cal-row__time">{{ . }}</span>{{ end }}
+                      {{/* Only a meetup gets the "until" tail: a conference's
+                           span is already in `when`, and repeating it would read
+                           as two different facts. */}}
+                      {{ if and (eq $e.kind "meetup") $e.endDate (ne $e.endDate $e.date) }}<span class="cal-row__sep">&middot;</span><span class="cal-row__span">until {{ dateFormat "2 Jan" $e.endDate }}</span>{{ end }}
                       {{/* The venue already names the city, so the country is
                            only worth showing when there is no venue at all. */}}
                       {{ $where := or $e.place $e.country }}
@@ -232,6 +411,25 @@
       </div>
     </div>
   </div>
+
+  {{/* Same note, and the same reason, as the one on /jugs/: the data behind
+       this page is regenerated on a schedule, so say where it comes from
+       where it is actually shown rather than only in a code comment.
+
+       Full width, under the calendar, rather than in the rail: it is the one
+       piece of prose here, and at 300px it ran long enough to push the two
+       legends into a scroll they didn't need. */}}
+  <p class="cal-source">
+    JUG meetups are pulled from the calendar each group publishes, via the community-run
+    <a href="https://github.com/World-Wide-JUGs/GlobalWWJugs" target="_blank" rel="noopener">World Wide JUGs</a>
+    directory, and refreshed daily. If your JUG is missing or its events
+    aren't showing up, add or fix its entry there &mdash; it appears here automatically.
+    Conferences, workshops and other one-offs have no such feed, so they are added by
+    pull request: one small
+    <a href="{{ $repoEvents }}" target="_blank" rel="noopener">YAML file per event</a>.
+    {{ with $data.generatedAt }}<br><span class="cal-source__synced">Last synced {{ dateFormat "2 January 2006, 15:04 MST" . }}.</span>{{ end }}
+    {{ with $errored }}<br><span class="cal-source__errors">{{ len . }} group{{ if gt (len .) 1 }}s{{ end }} could not be synced last time: {{ delimit . ", " }}.</span>{{ end }}
+  </p>
 
   {{/* The grid's data. Rendered as JSON rather than assembled in JS from the
        raw file so the browser never has to re-derive a date, a time or a
@@ -267,12 +465,17 @@
                     'July', 'August', 'September', 'October', 'November', 'December'];
       var WEEKDAYS = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 
-      /* Bucketed on the date string the template already computed, so a day
-         cell is a lookup and nothing is re-parsed in the browser. */
+      /* Bucketed on the date strings the template already computed, so a day
+         cell is a lookup and nothing is re-parsed in the browser. `days` is
+         every date the event covers -- one entry for a meetup, five for a
+         five-day conference, which is what makes a conference read as a band
+         across the month rather than a chip on its first day. */
       var byDate = {};
       events.forEach(function (e, i) {
         e.index = i;
-        (byDate[e.date] = byDate[e.date] || []).push(e);
+        (e.days && e.days.length ? e.days : [e.date]).forEach(function (d) {
+          (byDate[d] = byDate[d] || []).push(e);
+        });
       });
 
       function pad(n) { return n < 10 ? '0' + n : '' + n; }
@@ -283,7 +486,7 @@
       var cursor = new Date(today.getFullYear(), today.getMonth(), 1);
 
       function renderGrid() {
-        label.textContent = MONTHS[cursor.getMonth()] + ' ' + cursor.getFullYear();
+        updateLabel();
 
         var first = new Date(cursor.getFullYear(), cursor.getMonth(), 1);
         /* Weeks start on Monday, as they do on the live calendar. */
@@ -317,11 +520,17 @@
                 // Either way it opens the detail dialog.
                 var tag = e.url ? 'a' : 'span';
                 var attrs = e.url ? ' href="' + e.url + '" target="_blank" rel="noopener"' : ' role="button" tabindex="0"';
-                html += '<li><' + tag + ' class="cal-chip"' + attrs +
+                // The chip's top line: the clock for a timed event, and for a
+                // multi-day one which day of it this cell is -- so a reader
+                // landing on the Wednesday knows it started on Monday.
+                var span = (e.days && e.days.length) || 1;
+                var nth = e.days ? e.days.indexOf(k) + 1 : 1;
+                var lead = span > 1 ? 'Day ' + nth + '/' + span : (e.allDay ? 'All day' : e.time);
+                html += '<li><' + tag + ' class="cal-chip' + (e.kind === 'meetup' ? '' : ' cal-chip--event') + '"' + attrs +
                         ' data-cal-event="' + e.index + '"' +
                         ' style="--cal-dot: hsl(' + e.hue + ' 62% 46%)"' +
-                        ' title="' + escapeAttr(e.time + ' · ' + e.title + ' · ' + e.group) + '">' +
-                        '<span class="cal-chip__time">' + e.time + '</span>' +
+                        ' title="' + escapeAttr(lead + ' · ' + e.title + ' · ' + e.group) + '">' +
+                        '<span class="cal-chip__time">' + escapeHtml(lead) + '</span>' +
                         '<span class="cal-chip__title">' + escapeHtml(e.title) + '</span>' +
                         (e.placeShort ? '<span class="cal-chip__place">' + escapeHtml(e.placeShort) + '</span>' : '') +
                         '</' + tag + '></li>';
@@ -370,7 +579,9 @@
         dialog.querySelector('[data-cal-dialog-group]').textContent = e.group + (e.country ? ' · ' + e.country : '');
         dialog.querySelector('[data-cal-dialog-group]').style.setProperty('--cal-dot', 'hsl(' + e.hue + ' 62% 46%)');
         dialog.querySelector('[data-cal-dialog-title]').textContent = e.title;
-        var when = e.dateLabel + ', ' + e.time + (e.endTime ? '–' + e.endTime : '');
+        // Same `when` string the agenda prints, so the two views cannot
+        // disagree about a date range or a start time.
+        var when = e.dateLabel + (e.when ? ', ' + e.when : '');
         dialog.querySelector('[data-cal-dialog-when]').textContent = when;
         var where = dialog.querySelector('[data-cal-dialog-where]');
         where.textContent = e.place;
@@ -380,7 +591,8 @@
         link.hidden = !e.url;
         // Events come from Meetup and from the JUGs' own calendars now, so the
         // button says where it actually goes.
-        link.textContent = /(^|\.)meetup\.com/.test(hostOf(e.url)) ? 'View on Meetup' : 'View event page';
+        link.textContent = /(^|\.)meetup\.com/.test(hostOf(e.url)) ? 'View on Meetup'
+          : (e.kind === 'meetup' ? 'View event page' : 'Visit the event website');
         dialog.showModal();
       }
 
@@ -390,27 +602,107 @@
         dialog.addEventListener('click', function (ev) { if (ev.target === dialog) dialog.close(); });
       }
 
-      root.querySelector('[data-cal-prev]').addEventListener('click', function () {
-        cursor.setMonth(cursor.getMonth() - 1);
-        renderGrid();
+      /* The months the AGENDA actually renders, ascending. The grid can show an
+         empty February; the list cannot, because there is no section to scroll
+         to -- so in list view the arrows step between months that have
+         something in them instead of walking through blanks that look like a
+         broken button. */
+      var monthKeys = [];
+      Array.prototype.forEach.call(root.querySelectorAll('[data-month]'), function (sec) {
+        monthKeys.push(sec.getAttribute('data-month'));
       });
-      root.querySelector('[data-cal-next]').addEventListener('click', function () {
-        cursor.setMonth(cursor.getMonth() + 1);
-        renderGrid();
-      });
+
+      var prevBtn = root.querySelector('[data-cal-prev]');
+      var nextBtn = root.querySelector('[data-cal-next]');
+      var view = 'grid';
+
+      function cursorKey() { return cursor.getFullYear() + '-' + pad(cursor.getMonth() + 1); }
+      function setCursor(key) {
+        var parts = key.split('-');
+        cursor = new Date(parseInt(parts[0], 10), parseInt(parts[1], 10) - 1, 1);
+      }
+      function updateLabel() {
+        label.textContent = MONTHS[cursor.getMonth()] + ' ' + cursor.getFullYear();
+      }
+
+      /* Where the cursor sits in the agenda: its own index when that month has
+         events, otherwise the nearest one in the direction of travel. */
+      function listIndex(delta) {
+        var key = cursorKey();
+        var i = monthKeys.indexOf(key);
+        if (i >= 0) return i + delta;
+        for (var j = 0; j < monthKeys.length; j++) {
+          if (monthKeys[j] > key) return delta > 0 ? j : j - 1;
+        }
+        return delta > 0 ? monthKeys.length : monthKeys.length - 1;
+      }
+
+      function scrollToMonth(key) {
+        var section = root.querySelector('[data-month="' + key + '"]');
+        if (section) section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+
+      /* An arrow that cannot go anywhere says so, rather than absorbing the
+         click: in list view there is a first and a last month. */
+      function syncArrows() {
+        if (view !== 'list') {
+          prevBtn.disabled = false;
+          nextBtn.disabled = false;
+          return;
+        }
+        prevBtn.disabled = listIndex(-1) < 0;
+        nextBtn.disabled = listIndex(1) >= monthKeys.length;
+      }
+
+      function step(delta) {
+        if (view === 'list') {
+          var i = listIndex(delta);
+          if (i < 0 || i >= monthKeys.length) return;
+          setCursor(monthKeys[i]);
+          updateLabel();
+          scrollToMonth(monthKeys[i]);
+        } else {
+          cursor.setMonth(cursor.getMonth() + delta);
+          renderGrid();
+        }
+        syncArrows();
+      }
+
+      prevBtn.addEventListener('click', function () { step(-1); });
+      nextBtn.addEventListener('click', function () { step(1); });
       root.querySelector('[data-cal-today]').addEventListener('click', function () {
         cursor = new Date(today.getFullYear(), today.getMonth(), 1);
         renderGrid();
-        show('grid');
+        /* Stay in the view the reader chose -- forcing the grid here dropped a
+           phone, which opens on the agenda, into the one view that does not fit
+           on it. In the list, "Today" means the soonest month with events. */
+        if (view === 'list') {
+          var i = listIndex(1);
+          if (monthKeys.indexOf(cursorKey()) < 0 && i >= 0 && i < monthKeys.length) {
+            setCursor(monthKeys[i]);
+            updateLabel();
+          }
+          scrollToMonth(cursorKey());
+        }
+        syncArrows();
       });
 
       var switches = root.querySelectorAll('[data-cal-view]');
-      function show(view) {
+      function show(next) {
+        view = next;
         grid.hidden = view !== 'grid';
         list.hidden = view !== 'list';
         Array.prototype.forEach.call(switches, function (btn) {
           btn.setAttribute('aria-pressed', String(btn.getAttribute('data-cal-view') === view));
         });
+        /* Switching views keeps the label honest: the cursor may be parked on a
+           month the agenda has no section for. */
+        if (view === 'list' && monthKeys.length && monthKeys.indexOf(cursorKey()) < 0) {
+          var i = listIndex(1);
+          setCursor(monthKeys[Math.min(Math.max(i, 0), monthKeys.length - 1)]);
+          updateLabel();
+        }
+        syncArrows();
       }
       Array.prototype.forEach.call(switches, function (btn) {
         btn.addEventListener('click', function () { show(btn.getAttribute('data-cal-view')); });
@@ -425,8 +717,9 @@
     })();
   </script>
   {{ else }}
-  <p class="cal-empty">No events have synced yet. The calendar is refreshed several times a day from the
-    Meetup groups in the <a href="https://github.com/World-Wide-JUGs/GlobalWWJugs" target="_blank" rel="noopener">World Wide JUGs</a> directory.</p>
+  <p class="cal-empty">No events yet. JUG meetups are refreshed daily from the calendars listed in the
+    <a href="https://github.com/World-Wide-JUGs/GlobalWWJugs" target="_blank" rel="noopener">World Wide JUGs</a> directory,
+    and conferences are <a href="{{ $repoEvents }}" target="_blank" rel="noopener">added by pull request</a>.</p>
   {{ end }}
 </div>
 {{ end }}

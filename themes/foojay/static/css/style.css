@@ -742,7 +742,17 @@ body[data-nav-open="true"] .nav-backdrop { opacity: 1; visibility: visible; }
 .cal-stats { margin: 0; color: var(--ink-soft); font-size: .95rem; }
 .cal-stats strong { color: var(--ink); font-variant-numeric: tabular-nums; }
 
-.cal-cta { justify-self: stretch; text-align: center; }
+/* Two ways onto the calendar, so two buttons: a JUG is added upstream in the
+   World Wide JUGs directory, a conference by a pull request here. Wrapped so
+   they sit together rather than inheriting the aside's 1.5rem section gap. */
+.cal-ctas { display: grid; grid-template-columns: 1fr 1fr; gap: .5rem; }
+/* Side by side in a 300px rail, so they need to be narrower than a default
+   button and their labels centred -- .btn is an inline-flex box, so text-align
+   alone would leave both labels hard against the left edge. */
+.cal-cta {
+  justify-self: stretch; justify-content: center; text-align: center;
+  padding: .5rem .6rem; font-size: .85rem;
+}
 
 /* The group legend doubles as the key to the grid's dots and as the list of
    which JUGs actually have something coming up. */
@@ -750,7 +760,19 @@ body[data-nav-open="true"] .nav-backdrop { opacity: 1; visibility: visible; }
   margin: 0 0 .75rem; font-size: .82rem; font-weight: 700;
   text-transform: uppercase; letter-spacing: .1em; color: var(--ink-muted);
 }
-.cal-legend__list { list-style: none; margin: 0; padding: 0; display: grid; gap: .55rem; }
+/* Capped and scrollable: both lists grow with the data -- 90 JUGs publish a
+   calendar and a busy month puts dozens of them here -- and an aside that runs
+   longer than the calendar it explains pushes the sponsor widgets and the
+   source note off the bottom of the page. The cap is generous enough that a
+   quiet month never scrolls at all. */
+.cal-legend__list {
+  list-style: none; margin: 0; padding: 0; display: grid; gap: .55rem;
+  max-height: 27rem; overflow-y: auto; overscroll-behavior: contain;
+  scrollbar-width: thin; scrollbar-color: var(--border-strong) transparent;
+  /* Standing room for the scrollbar, so it never sits on the event count and
+     the rows don't shift sideways the moment the list gets long enough. */
+  padding-right: .25rem;
+}
 .cal-legend__item { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: .55rem; align-items: baseline; font-size: .92rem; }
 .cal-legend__name a { color: var(--ink); font-weight: 600; }
 .cal-legend__name a:hover { color: var(--brand-accent-strong); }
@@ -765,16 +787,27 @@ body[data-nav-open="true"] .nav-backdrop { opacity: 1; visibility: visible; }
   display: inline-block; flex: none;
 }
 
-.cal-source { margin: 0; color: var(--ink-muted); font-size: .85rem; line-height: 1.55; }
+/* Under the calendar and across both columns, not in the rail: it is prose,
+   and prose in a 300px column is a stack of four-word lines that crowds out
+   the legends the rail is actually for. */
+.cal-source {
+  margin: 1.75rem 0 0; padding-top: 1.25rem; border-top: 1px solid var(--border);
+  color: var(--ink-muted); font-size: .85rem; line-height: 1.55;
+}
 .cal-source__synced { display: inline-block; margin-top: .35rem; }
 .cal-source__errors { display: inline-block; margin-top: .35rem; }
 .cal-empty { color: var(--ink-muted); }
 
 /* Toolbar ------------------------------------------------------- */
 
+/* Sticky under the site header: in list view the arrows scroll the agenda, and
+   a 40-event agenda is several screens long -- a toolbar that scrolled away
+   would let you step forward exactly once. */
 .cal-toolbar {
   display: flex; align-items: center; justify-content: space-between;
   flex-wrap: wrap; gap: 1rem; margin-bottom: 1.25rem;
+  position: sticky; top: var(--header-h); z-index: 5;
+  background: var(--surface); padding: .75rem 0;
 }
 .cal-nav { display: flex; align-items: center; gap: .5rem; }
 .cal-nav__btn {
@@ -782,7 +815,11 @@ body[data-nav-open="true"] .nav-backdrop { opacity: 1; visibility: visible; }
   border: 1px solid var(--border-strong); background: var(--surface); color: var(--ink);
   font-size: 1.1rem; line-height: 1; display: grid; place-items: center;
 }
-.cal-nav__btn:hover { border-color: var(--ink); }
+.cal-nav__btn:hover:not(:disabled) { border-color: var(--ink); }
+/* In list view the arrows step between months that HAVE events, so there is a
+   real first and last -- an arrow that would go nowhere is dimmed rather than
+   silently doing nothing, which is how it read before. */
+.cal-nav__btn:disabled { opacity: .35; cursor: default; }
 .cal-nav__label {
   font-family: var(--font-display); font-size: 1.15rem; font-weight: 700; color: var(--ink);
   min-width: 10.5ch; text-align: center;
@@ -843,6 +880,18 @@ body[data-nav-open="true"] .nav-backdrop { opacity: 1; visibility: visible; }
 }
 .cal-chip:hover { background: var(--brand-accent-soft); color: var(--ink); text-decoration: none; }
 .cal-chip__time { display: block; color: var(--ink-muted); font-variant-numeric: tabular-nums; font-size: .95em; }
+/* A hand-added event (a conference, a community day) reads as a band across
+   the days it runs, so it needs to be distinguishable from a single evening's
+   meetup at a glance. Tinted with its OWN colour rather than one shared
+   "conference" colour: --cal-dot is already on the element, so the band and
+   the legend dot match without a second variable. The flat declaration above
+   it is the fallback for a browser without color-mix. */
+.cal-chip--event {
+  background: var(--surface-sunken);
+  background: color-mix(in srgb, var(--cal-dot) 14%, var(--surface-sunken));
+  border-left-width: 4px;
+}
+.cal-chip--event:hover { background: color-mix(in srgb, var(--cal-dot) 26%, var(--surface-sunken)); }
 /* Two lines of title, then ellipsis: a cell is ~140px wide, and one line cuts
    most meetup titles off before the topic. The full title is in the chip's
    tooltip, the detail dialog and the list view. */
@@ -860,6 +909,9 @@ body[data-nav-open="true"] .nav-backdrop { opacity: 1; visibility: visible; }
 
 /* Agenda (also the no-JavaScript view) -------------------------- */
 
+/* Room for the sticky header AND the sticky toolbar above it, so an arrow
+   click lands the month's heading in view rather than underneath them. */
+.cal-month { scroll-margin-top: calc(var(--header-h) + 5rem); }
 .cal-month + .cal-month { margin-top: 2rem; }
 .cal-month__head {
   margin: 0 0 .85rem; font-size: 1.05rem; text-transform: uppercase; letter-spacing: .06em;
@@ -884,6 +936,17 @@ body[data-nav-open="true"] .nav-backdrop { opacity: 1; visibility: visible; }
   color: var(--ink-muted); font-size: .88rem;
 }
 .cal-row__group { color: var(--ink-soft); font-weight: 600; }
+/* In the agenda a meetup's "group" is the JUG's name, which is self-evidently
+   a name; a hand-added event's is its TYPE ("Conference", "Workshop"), which
+   is a label and reads as one. */
+/* Outlined rather than filled: the hue is derived from a hash, so it lands
+   anywhere on the wheel, and light text on a hashed background is a contrast
+   lottery. The border carries the colour, the text stays legible. */
+.cal-row--event .cal-row__group {
+  padding: .05rem .45rem; border-radius: 999px;
+  border: 1px solid var(--cal-dot, var(--border)); color: var(--ink-soft);
+  font-size: .78em; text-transform: uppercase; letter-spacing: .06em;
+}
 .cal-row__time { font-variant-numeric: tabular-nums; }
 .cal-row__sep { opacity: .5; }
 /* An online event has no venue to name, so say so rather than leaving the
