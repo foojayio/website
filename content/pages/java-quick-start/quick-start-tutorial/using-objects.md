@@ -8,7 +8,7 @@ jdoodle: true
 aliases:
   - "/java-quick-start/quick-start-tutorial/using-objects/"
 frozen: false
-weight: 7
+weight: 8
 ---
 
 {{< youtube vJf6_d0c56I >}}
