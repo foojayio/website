@@ -180,8 +180,12 @@ public final class HtmlToMarkdown {
      * swapped out for placeholder tokens so the converter can't flatten away the
      * classes/attributes they depend on. Both are restored after conversion (the
      * shortcode/raw HTML never passes through the Markdown converter).
+     *
+     * Public because ImportWpComments.java converts WordPress *comment* bodies
+     * with it -- same repairs (entities, code fences, nbsp indents), but none of
+     * convert()'s image localization, which a comment doesn't need.
      */
-    static String toMarkdown(Element content) {
+    public static String toMarkdown(Element content) {
         List<String> preserved = new ArrayList<>();
 
         // WordPress stamps every heading with a positional anchor

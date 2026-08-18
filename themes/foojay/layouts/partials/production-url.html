@@ -1,0 +1,19 @@
+{{- /*
+  The page's absolute URL as it will be AFTER cutover, regardless of where this
+  build is being served from.
+
+  Needed because `hugo.toml`'s baseURL is the throwaway GitHub Pages trial URL
+  (https://foojayio.github.io/website/) until the switch to https://foojay.io/,
+  so .Permalink is fine for anything the build regenerates (canonical, og:url,
+  RSS) and wrong for the few places where a URL is handed to an outside system
+  that keeps it: giscus writes one into each discussion body when it creates a
+  thread, and that body is not ours to rewrite later.
+
+  Derived, not configured per page: the site's own baseURL path prefix is
+  stripped off .RelPermalink and params.productionBaseURL is put in front. Once
+  baseURL IS the production URL this resolves to exactly .Permalink, so it keeps
+  working after cutover and the param can simply stay as it is.
+*/ -}}
+{{- $prod := .Site.Params.productionBaseURL | default .Site.BaseURL -}}
+{{- $prefix := strings.TrimSuffix "/" (urls.Parse .Site.BaseURL).Path -}}
+{{- printf "%s%s" (strings.TrimSuffix "/" $prod) (strings.TrimPrefix $prefix .RelPermalink) -}}

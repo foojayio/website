@@ -86,9 +86,14 @@ sync.
 jbang scripts/ValidateFrontmatter.java  # PR-time content check (also runs in CI)
 ```
 
+```bash
+jbang scripts/ImportWpComments.java --dry-run   # legacy WP comments -> GitHub Discussions
+```
+
 `MigratePostsToBundles.java`, `MigrateAuthorsToBundles.java`, and
 `SanitizeSlugs.java` are one-time migrations that have already been run — kept for
-reference, not part of the normal loop.
+reference, not part of the normal loop. `ImportWpComments.java` is a one-off too,
+but it hasn't been run yet — see "Comments".
 
 ## Local preview
 
@@ -115,6 +120,64 @@ hugo --baseURL "http://localhost:3000/"
 npx pagefind --site public
 npx serve public
 ```
+
+## Comments
+
+Comments and reactions come from [giscus](https://giscus.app), which stores each
+post's thread as a **GitHub Discussion on this repo** — no database, no third-party
+account, and moderation happens with the GitHub tools the team already has.
+`themes/foojay/layouts/partials/comments.html` (called from `posts/single.html`)
+renders the widget; it renders *nothing* until `[params.giscus]` in `hugo.toml` is
+filled in, so an unconfigured build simply has no comment section.
+
+One-time setup:
+
+1. Repo **Settings → General → Features → Discussions**: enable it, then create a
+   category named **Blog Comments** (announcement-style is wrong here — the
+   category must accept comments from anyone). Keeping post threads out of
+   "General" matters: there will eventually be one per commented post.
+2. Install the [giscus app](https://github.com/apps/giscus) on the repo.
+3. Fill in `repoId` and `categoryId` in `hugo.toml`. Both are public node ids, not
+   secrets — read them from [giscus.app](https://giscus.app) or from:
+
+   ```bash
+   GITHUB_TOKEN=... jbang scripts/ImportWpComments.java --print-config
+   ```
+
+A thread is keyed on the **post slug** (`data-mapping="specific"`), not its
+pathname: this site serves `/website/today/<slug>/` during the trial and
+`/today/<slug>/` after cutover, and pathname-keyed threads would all be orphaned
+the day the domain moves. `data-strict="1"` makes the match exact — see the
+partial's header comment for why fuzzy matching would attach some posts'
+comments to the wrong thread.
+
+### Importing the legacy WordPress comments
+
+`scripts/ImportWpComments.java` moves the existing foojay.io comments (580
+approved ones across 270 posts) into those discussions, so cutover doesn't reset
+every post to zero comments.
+
+```bash
+export GITHUB_TOKEN=...                                   # the foojay.io account's token
+jbang scripts/ImportWpComments.java --dry-run             # mapping check, writes nothing
+jbang scripts/ImportWpComments.java --dry-run --slug java-for-scripting   # + the exact bodies
+jbang scripts/ImportWpComments.java --slug java-for-scripting             # one post, for real
+jbang scripts/ImportWpComments.java                       # the lot
+```
+
+- The token must belong to **the foojay.io account**, since the original
+  commenters' GitHub identities are unknown — so every imported comment is posted
+  by that account and opens with `Originally posted by <author> on <date> in
+  Foojay.io Discussions.` Needs `public_repo` (classic) or "Discussions: Read and
+  write" (fine-grained).
+- It is **idempotent**, with the state derived from GitHub rather than a file in
+  this repo: a discussion is reused when the term already has one, and a comment
+  is skipped when its `<!-- wp-comment-id: N -->` marker is already in the thread.
+  So a run interrupted by GitHub's content-creation rate limit — likely, at ~850
+  writes — is resumed by running the same command again, optionally in `--limit`
+  batches.
+- Run it **again just before cutover** to pick up comments posted on WordPress in
+  the meantime.
 
 ## Workflows (`.github/workflows/`)
 

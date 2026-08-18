@@ -23,6 +23,17 @@
   <meta name="twitter:card" content="{{ if .Params.image }}summary_large_image{{ else }}summary{{ end }}">
   {{ if $isPost }}
   <meta property="article:published_time" content="{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}">
+  {{/* giscus stamps a link to the article into the discussion body when it
+       creates that article's thread, and it uses THIS meta tag if present,
+       otherwise the URL of the page it happens to be running on (see
+       client.ts: `backLink = getMetaContent('giscus:backlink') || cleanedLocation`).
+       Without it, every thread a visitor starts during the trial would keep a
+       dead foojayio.github.io/website link after cutover -- and a discussion
+       body posted by a reader is not something we can go back and rewrite.
+       Note this is deliberately NOT .Params.canonical: on the 838 cross-posted
+       articles that points at the original publisher, while the backlink has to
+       point at the foojay.io article the thread belongs to. */}}
+  <meta name="giscus:backlink" content="{{ partial "production-url.html" . }}">
   {{ end }}
   {{/* Thin/JS-only content shouldn't be indexed as a normal page: the search
        results page has no server-rendered content of its own to rank on. */}}

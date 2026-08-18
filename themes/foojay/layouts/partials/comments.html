@@ -1,38 +1,59 @@
 <!--
-  giscus: comments + reactions ("likes"), backed by GitHub Discussions on
-  this repo. Zero infra to run.
+  giscus: comments + reactions ("likes"), backed by GitHub Discussions on this
+  repo. Zero infra to run, and the moderation tools are the ones the team
+  already uses.
 
-  Required one-time setup (see README.md "Engagement / comments" section):
+  Required one-time setup (see README.md "Comments"):
     1. Enable Discussions on github.com/foojayio/website (repo Settings ->
-       Features -> Discussions).
+       Features -> Discussions) and add a "Blog Comments" category, so 2000+
+       post threads don't drown the real discussions in "General".
     2. Install the giscus app on the repo: https://github.com/apps/giscus
-    3. Go to https://giscus.app, fill in the repo, pick a Discussion
-       category (a dedicated "Blog Comments" category is recommended over
-       "General" so these threads don't mix with real discussions), enable
-       reactions, and copy the generated repo-id/category-id into
-       [params.giscus] in hugo.toml.
+    3. Fill in [params.giscus] in hugo.toml. The two ids come from
+       https://giscus.app, or straight out of
+       `jbang scripts/ImportWpComments.java --print-config`.
+  Until all four values are set this partial renders nothing, so an
+  unconfigured build simply has no comment section.
 
-  Known gap: this starts every post at 0 comments -- it does NOT carry over
-  the handful of legacy WordPress comments. If that matters, a one-time
-  import (posting the old comments as the opening replies in each mapped
-  Discussion) would need to happen before cutover; flagging as optional,
-  unbuilt scope.
+  THE TERM IS THE POST SLUG, NOT THE PATHNAME.
+  giscus finds a page's discussion by searching for its "term". The obvious
+  choice, mapping="pathname", is wrong here: this site runs at
+  /website/today/<slug>/ during the trial and at /today/<slug>/ after cutover,
+  so every thread created before the move would be orphaned after it. The slug
+  survives that (it IS the permalink, see hugo.toml's :slugorcontentbasename),
+  and it needs nothing from the author -- it's the bundle folder name.
+
+  strict="1" for the same "must not silently attach to the wrong post" reason:
+  non-strict matching is a fuzzy in:title search that takes the first hit, and
+  30 foojay slugs are substrings of another slug ("...-postgresql-connections"
+  inside "...-postgresql-connections-part-2-batching"). Strict matches on a hash
+  of the term instead, which is exact.
+
+  Legacy comments: the WordPress comments (580 of them, on 270 posts) are moved
+  into these discussions by scripts/ImportWpComments.java, which writes each
+  thread exactly the way giscus itself would, so an imported thread and one
+  giscus creates for a brand-new post are indistinguishable. Each imported
+  comment opens with an "Originally posted by ... in Foojay.io Discussions" line,
+  because the commenters' GitHub identities are unknown.
 -->
 {{ with .Site.Params.giscus }}
 {{ if and .repo .repoId .category .categoryId }}
+{{ $term := or $.Params.slug $.File.ContentBaseName }}
 <section id="giscus-comments" class="giscus-section">
+  <h2 class="giscus-section__title">Join the discussion</h2>
   <script src="https://giscus.app/client.js"
           data-repo="{{ .repo }}"
           data-repo-id="{{ .repoId }}"
           data-category="{{ .category }}"
           data-category-id="{{ .categoryId }}"
-          data-mapping="pathname"
-          data-strict="0"
+          data-mapping="specific"
+          data-term="{{ $term }}"
+          data-strict="1"
           data-reactions-enabled="1"
           data-emit-metadata="0"
           data-input-position="top"
           data-theme="preferred_color_scheme"
           data-lang="en"
+          data-loading="lazy"
           crossorigin="anonymous"
           async>
   </script>

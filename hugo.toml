@@ -48,6 +48,13 @@ enableRobotsTXT = true
   # Values are author slugs, the same identifiers posts and sponsors use.
   # The list isn't limited to two, but the layouts are designed for that.
   featuredAuthors = ["cristobal-escobar", "shai-almog"]
+  # Where the site lives after cutover, which is NOT baseURL during the trial.
+  # Only for URLs handed to an outside system that stores them and that we can't
+  # rewrite later -- currently just the giscus backlink (see
+  # partials/production-url.html). Everything the build regenerates uses
+  # .Permalink and needs no help. When baseURL becomes this value, the two agree
+  # and nothing has to change.
+  productionBaseURL = "https://foojay.io/"
   # Path to the JUG list consumed by the events sidebar/calendar page.
   jugsDataFile = "jugs"
   eventsDataFile = "events"
@@ -59,6 +66,21 @@ enableRobotsTXT = true
   [[params.headerCta]]
     label = "Join our Slack"
     url = "/today/join-slack-com-t-foojay-signup/"
+
+# Comments + reactions, via giscus on this repo's GitHub Discussions -- see
+# themes/foojay/layouts/partials/comments.html for the setup steps and for why
+# the thread is keyed on the post slug rather than its pathname.
+# repoId/categoryId are not secrets (they're public node ids, and they end up in
+# the page's HTML), but they can only be read from the GitHub API: get them from
+# https://giscus.app or from
+#   jbang scripts/ImportWpComments.java --print-config
+# The comment section renders only when all four values are filled in, so it stays
+# invisible until the "Blog Comments" category exists and its id is pasted here.
+[params.giscus]
+  repo = "foojayio/website"
+  repoId = "R_kgDOTog_lQ"
+  category = "Blog Comments"
+  categoryId = "DIC_kwDOTog_lc4DDoVm"
 
 [outputs]
   home = ["HTML", "RSS"]

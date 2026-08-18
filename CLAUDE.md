@@ -139,6 +139,27 @@ should catch a mistake at PR time rather than letting it fail silently.
   scrapers now use too, so a re-scrape emits the same thing and a re-run here is
   a no-op. `--dry-run` / `--path` as usual. See the gallery convention below for
   what the shortcode derives rather than stores.
+- **`scripts/ImportWpComments.java`**: one-off migration that moves the legacy
+  WordPress comments (580 approved, across 270 posts, read from foojay.io's open
+  `/wp-json/wp/v2/comments` — no admin access needed) into the GitHub Discussions
+  that giscus reads, so cutover doesn't reset every post to zero comments. Posts
+  as the foojay.io account (`GITHUB_TOKEN`), because the commenters' GitHub
+  identities are unknown, and opens each comment with `Originally posted by
+  <author> on <date> in Foojay.io Discussions.` — the attribution the TODO asked
+  for. Bodies go through `HtmlToMarkdown.toMarkdown` (made public for this), so a
+  comment gets the same entity/fence/nbsp repairs the post bodies got.
+  Deliberately **not** part of `ConvertPosts.java`, which the TODO wondered about:
+  that script writes files and is re-run against the live WP site constantly,
+  while this writes irreversible public content to a third-party API and needs a
+  credential — the same reason `ConvertSponsors.java` is run by hand. Idempotent
+  with the state derived from GitHub rather than a file here (a discussion is
+  reused when its term already has one; a comment is skipped when its
+  `<!-- wp-comment-id: N -->` marker is already in the thread), which is what
+  makes it resumable across GitHub's content-creation rate limit — ~850 writes,
+  `--limit N` batches, automatic back-off. `--dry-run` reports without writing
+  (and with `--slug` prints the exact bodies); `--print-config` resolves the
+  repo/category node ids for `hugo.toml`. Run it again just before cutover to
+  pick up comments posted on WordPress in the meantime. **Not yet run.**
 - **`scripts/StripHeadingAnchors.java`**: one-off migration that removed the
   WordPress heading anchors (`## Title {#h2-2-title}`) from `content/`. WP
   stamps every heading with `id="h2-<index>-<slug>"`, Flexmark carries an id
@@ -244,20 +265,26 @@ should catch a mistake at PR time rather than letting it fail silently.
    --site public && npx serve public` instead. Not yet run for real (this
    sandbox has no network access to the npm registry to fetch Pagefind), so
    treat it the same as the conversion scripts: reviewed, untested.
-7. **Comments/likes/views** (`themes/foojay/layouts/partials/stats.html` +
-   `comments.html`) are built (giscus for comments+reactions, GoatCounter for
-   a live client-side view count) but **not yet wired into
-   `posts/single.html`** and not yet added to `hugo.toml` params — this was
-   mid-flight when the search work took priority. To finish: call both
-   partials from `posts/single.html`, add `[params.giscus]` (repo/repo-id/
-   category/category-id from giscus.app, after enabling GitHub Discussions)
-   and `[params.goatcounter]` (`code = "..."` after signing up) to hugo.toml.
-   Also open: whether to capture each post's current WP view count into a
-   `legacy_views` frontmatter field (cheap, and the number disappears once
-   WordPress is decommissioned) and whether to build a one-time seeding
-   script to backfill it into GoatCounter via its `/api/v0/count` API (which
-   does support backdated `created_at` per hit for exactly this) — ask before
-   building the seeder, it needs a real GoatCounter account to test against.
+7. **Comments are wired but not switched on; views aren't built.**
+   `comments.html` (giscus) is called from `posts/single.html` and
+   `[params.giscus]` is in `hugo.toml` with `repoId`/`categoryId` left blank —
+   the partial renders nothing until those are filled in, so **three manual
+   steps remain**: enable Discussions on the repo with a comment-accepting
+   "Blog Comments" category, install the giscus app, paste the two ids
+   (`jbang scripts/ImportWpComments.java --print-config` prints the block).
+   Then run the comment import (see the script's entry above and README
+   "Comments"); nothing here has been run against GitHub yet, so treat both the
+   import and the widget as reviewed-but-untested.
+   **Views** are the open half: `stats.html` (a GoatCounter client-side counter
+   + share button) is still unwired and has no `[params.goatcounter]`, which is
+   the "Read counter" TODO item, not this one — it also wants the number on the
+   homepage's most-read list, which nothing computes yet. Still open there:
+   whether to capture each post's current WP view count into a `legacy_views`
+   frontmatter field (cheap, and the number disappears once WordPress is
+   decommissioned) and whether to build a one-time seeding script to backfill it
+   into GoatCounter via its `/api/v0/count` API (which does support backdated
+   `created_at` per hit for exactly this) — ask before building the seeder, it
+   needs a real GoatCounter account to test against.
 8. **The paid homepage banner carousel is NOT built — and it's revenue-bearing.**
    The live WP home page (its page title is literally "Home – CTA and Sponsor
    Blocks") opens with a Splide carousel of "Sponsored Content" teasers —
@@ -463,6 +490,37 @@ should catch a mistake at PR time rather than letting it fail silently.
 
   So: rename the folder freely, then **re-run the script** to regenerate
   `wpSlug`/`aliases`. Never hand-edit those two fields.
+- **A post's comment thread is keyed on its slug, never its pathname.**
+  `comments.html` configures giscus with `data-mapping="specific"` +
+  `data-term="<slug>"` (`or .Params.slug .File.ContentBaseName` — the same thing
+  `:slugorcontentbasename` resolves to, so it is derived, not authored). Pathname
+  mapping is the tempting default and it is a trap here: the trial deploy serves
+  `/website/today/<slug>/` and production serves `/today/<slug>/`, so every thread
+  created before cutover would be orphaned after it. `data-strict="1"` goes with
+  it: non-strict mode is a fuzzy `in:title` search that takes the first hit, and
+  30 foojay slugs are substrings of another slug
+  (`...-postgresql-connections` inside `...-postgresql-connections-part-2-batching`),
+  so it would silently show one post's comments on another. Strict matches a hash
+  of the term in the discussion body instead. `ImportWpComments.java` writes that
+  hash marker exactly the way giscus does (`<!-- sha1: … -->`, SHA-1 of the term,
+  verified against giscus's `lib/utils.ts`), so an imported thread and one giscus
+  creates for a new post are indistinguishable. Change one of these three
+  (mapping, term, strict) and you must change the script too — they agree by
+  construction, and a mismatch shows up as an empty comment section, not an error.
+
+  The **link** giscus stamps into a discussion body needs the same care for a
+  different reason: it defaults to the URL of the page the widget is running on,
+  which during the trial is the throwaway `foojayio.github.io/website` one, and a
+  body posted by a reader is not ours to rewrite afterwards. So `baseof.html`
+  emits `<meta name="giscus:backlink">` on post pages from
+  `partials/production-url.html` (= `params.productionBaseURL` + the page's path,
+  with the trial prefix stripped), and `ImportWpComments.java` writes the same
+  `https://foojay.io/today/<slug>/` form. That URL is correct *today* as well —
+  it's the live WordPress post — so nothing is broken before the switch. Note the
+  backlink is deliberately not `.Params.canonical`: on the 838 cross-posted
+  articles that field points at the original publisher, not at foojay. This is
+  the only place a trial URL could leak somewhere permanent; everything else
+  (canonical, og:url, RSS, JSON-LD) is regenerated on every build.
 - Posts are contributed via PR (see `CONTRIBUTING.md`); the repo is public.
 - **`data/jugs.yaml` is generated, not authored here** — it's overwritten by
   `scripts/FetchJugs.java` at every deploy and daily sync. Never add/edit a
