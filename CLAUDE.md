@@ -651,9 +651,24 @@ should catch a mistake at PR time rather than letting it fail silently.
   empty scraped stub won -- so the real events calendar (`type: "events"`)
   rendered nowhere and a footer link led to a blank page. Hugo does not warn
   about two files claiming one `url:`. They are now one file under
-  `content/pages/`, which is also what keeps the `pages/all-events` view key
-  (20,984 legacy views) resolving; a root-level `content/*.md` has no section
-  and `views-key.html` would not count it.
+  `content/pages/`, which is what keeps a view key resolving at all; a
+  root-level `content/*.md` has no section and `views-key.html` would not count
+  it.
+
+  **The events calendar is `content/pages/calendar.md`, served at `/calendar/`.**
+  A second empty scraped stub was doing the same trick one URL over --
+  `content/pages/calendar.md` claimed `url: "/calendar/"` with an empty body,
+  which is also the URL the "Event Calendar" menu item points at, so the item in
+  the primary nav led to a blank page while `/all-events/` held the real thing.
+  Resolved the other way round this time, because the view key follows the FILE
+  name (`views-key.html` uses `.File.ContentBaseName`, not the URL) and
+  WordPress counted 52,272 views on `/calendar/` against 20,984 on
+  `/all-events/`: the events page is now named `calendar.md`, serves
+  `/calendar/`, and carries `/all-events/` as an alias. `FetchWpViews.java`'s
+  `PAGE_ALIASES` maps WP's `all-events` page onto the `calendar` key so it does
+  not land in `unmatched`; `fetchAll` merges duplicate keys with `Math::max`, so
+  the page keeps the higher count rather than summing two views of one page.
+  Renaming the file back would silently move the key and drop the bigger number.
 - **A multi-page series is a folder of pages with a `weight`, and nothing else.**
   The 11 Java Quick Start tutorial steps used to hand-write the same
   `<< Prev` / `Next >>` markdown pair TWICE each (top and bottom of every page),
@@ -696,6 +711,50 @@ should catch a mistake at PR time rather than letting it fail silently.
   its own. `imagebackground` is the same escape hatch board logos have, for
   artwork that needs its own ground in both themes.
 
+- **The logo file is cropped to its artwork, and sized in CSS.**
+  `themes/foojay/static/images/foojay-logo.png` was a 1500x500 export whose mark
+  only occupied 1022x352 of it -- 32% of the width and 30% of the height was
+  transparent margin. Since `site-logo.html` sizes the image by HEIGHT
+  (`.logo__img { height }`), that padding was a silent 30% shrink: a 34px box
+  drew a 24px wordmark, and every attempt to "make the logo bigger" fought the
+  file rather than the CSS. The file is now cropped, so the height in CSS is the
+  height the mark renders at (36px in the header, 44px in the footer). Re-export
+  a padded PNG and both shrink again with nothing in the templates to show why.
+- **The header search field is collapsed to its magnifier, and the button is a
+  real submit.** An always-open 210px input plus two CTAs made the top bar run
+  the full 1240px on a big screen. `search-form.html` now renders the field plus
+  a `[data-search-toggle]` submit button; `nav.js` opens the field on the first
+  click (`preventDefault`) and lets the second one through, so the form still
+  submits with a query typed and a visitor with no JavaScript lands on the
+  search page instead of clicking a dead icon. Three details are load-bearing:
+  the collapsed input is `visibility: hidden` rather than only `opacity: 0`, or
+  it stays a tab stop; that visibility is transitioned `0s linear .2s` when
+  closing but `0s` when open, because **`focus()` on a `visibility: hidden`
+  element does nothing** -- ease it in and the click lands the caret nowhere; and
+  the drawer copy under `.header-actions--mobile` is deliberately excluded in
+  both the CSS and the JS filter, since below 900px there is room for the field
+  and no hover to discover an icon with. The nav also sits next to the brand now
+  (`margin-left: auto` moved from `.primary-nav` to the header's own
+  `.header-actions`), so the free space collects before the actions instead of
+  spreading every item to the far edges.
+- **WordPress's placeholder title/description are not metadata -- replace them
+  on sight.** Yoast served `title: "foojay – a place for friends of OpenJDK"` /
+  `description: "foojay is the place for all OpenJDK Update Release Information.
+  Learn More."` on any page whose own meta it had nothing for, so the scrapers
+  faithfully stored it: 7 pages shared one `<h1>` and 8 shared one
+  `og:description`. They are now written per page (`/calendar/`,
+  `/java-almanac/`, `/privacy-policy/`, `/terms-of-use/`, `/team/`, `/where/`,
+  `/sustainability-for-java-developers/`, `/download/`). `.Title` is the page's
+  H1 *and* half its `<title>`, so a placeholder there is visible twice on every
+  affected page, not just in a search result.
+
+  One post carried the same string as a PREFIX -- "foojay – a place for friends
+  of OpenJDKJava 21+ on Raspberry Pi Zero 2 ..." -- because the `<h1>` fallback
+  in `ConvertPosts.scrapePost` picked up a site-title element sitting next to the
+  post title and Jsoup's `text()` ran the two together. `stripSiteSuffix` is now
+  `stripSiteName` and strips that leading copy as well as the trailing "| foojay"
+  one, so a re-scrape cannot put it back. Anchored to that exact wording, so a
+  post legitimately about being a place for friends of OpenJDK keeps its title.
 - **Sponsors appear site-wide via the sidebar**, not just on `/our-sponsors/`:
   `themes/foojay/layouts/partials/sidebar-sponsors.html` lists every sponsor
   tier-ordered, with the logo sized by tier (gold largest). Deliberately NOT
