@@ -141,7 +141,7 @@ enableRobotsTXT = true
   url = "/today/category/podcast/"
   weight = 12
   [menu.main.params]
-    desc = "Conversations with the people building Java"
+    desc = "Conversations with the people building and using Java"
 
 [[menu.main]]
   name = "JC-AI Newsletter"
@@ -149,7 +149,7 @@ enableRobotsTXT = true
   url = "/today/category/jc-ai-newsletter/"
   weight = 13
   [menu.main.params]
-    desc = "Newsletter curated by Miro Wengner"
+    desc = "AI Newsletter curated by Miro Wengner"
 
 [[menu.main]]
   name = "Foojay.io AI Portal"
@@ -165,7 +165,7 @@ enableRobotsTXT = true
   url = "/calendar/"
   weight = 15
   [menu.main.params]
-    desc = "JUG meetups and conferences, synced daily"
+    desc = "JUG meetups, conferences, and other events"
 
 # ---------------------------------------------------------------------------
 
