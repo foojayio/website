@@ -1,0 +1,49 @@
+name: Sync view counts
+
+# Split out of sync-external-content.yml, which is now daily: the read counter
+# is the one piece of data here that moves continuously (every reader moves it)
+# and the only one that isn't external -- it comes from our own Cloudflare
+# Worker at foojay.io/api/views. Six-hourly keeps the numbers baked into the
+# HTML within a few hours of the counter even when nothing else is pushed.
+#
+# Offset from the 01:20 daily sync so the two don't collide; they also share a
+# concurrency group in case a run ever overlaps.
+
+on:
+  schedule:
+    - cron: "50 3,9,15,21 * * *"
+  workflow_dispatch: {}
+
+concurrency:
+  group: data-sync
+  cancel-in-progress: false
+
+jobs:
+  views:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up JBang
+        uses: jbangdev/setup-jbang@main
+
+      # Never fails the run: if the counter is unreachable the script keeps the
+      # committed data/views.json and exits 0, so a Worker outage costs the
+      # site nothing but staler numbers.
+      - name: Refresh view counts
+        run: jbang scripts/FetchViewCounts.java
+
+      - name: Commit updated data
+        run: |
+          git config user.name "foojay-bot"
+          git config user.email "actions@github.com"
+          git add data/views.json
+          if git diff --cached --quiet; then
+            echo "No view count changes."
+          else
+            git commit -m "chore: sync view counts"
+            git pull --rebase --autostash
+            git push
+          fi

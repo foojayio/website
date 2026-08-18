@@ -29,14 +29,15 @@ jobs:
 
       # Refreshes data/jugs.yaml from the World Wide JUGs directory
       # (https://github.com/World-Wide-JUGs/GlobalWWJugs) so the /jugs/ page
-      # is never more than one build behind that upstream list. Also run
-      # by .github/workflows/sync-external-content.yml, independent of deploys.
+      # is never more than one build behind that upstream list. Also run once
+      # a day by .github/workflows/sync-external-content.yml, independent of
+      # deploys.
       - name: Refresh JUG list
         run: jbang scripts/FetchJugs.java
 
       # Refreshes data/java-champions.yaml from the official Java Champions
       # directory (https://github.com/aalmiray/java-champions) so /java-champions/
-      # is never more than one build behind it. Also run four times a day by
+      # is never more than one build behind it. Also run once a day by
       # .github/workflows/sync-external-content.yml, independent of deploys.
       - name: Refresh Java Champions list
         run: jbang scripts/FetchJavaChampions.java
@@ -45,7 +46,10 @@ jobs:
       # view count on each post and card is baked into the HTML rather than
       # fetched by the reader's browser. Never fails the build: if the counter
       # is unreachable the committed file is left alone and yesterday's numbers
-      # ship, which beats a red deploy over an analytics blip.
+      # ship, which beats a red deploy over an analytics blip. Also run every
+      # six hours by .github/workflows/sync-view-counts.yml -- the counter is
+      # the one data source here that moves continuously, which is why it has
+      # its own workflow instead of riding the daily external-content sync.
       - name: Refresh view counts
         run: jbang scripts/FetchViewCounts.java
 

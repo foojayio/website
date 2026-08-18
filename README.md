@@ -74,12 +74,12 @@ scraping against one real page, and `ConvertPosts` supports `--days N` / `--sinc
 <date>` to convert only a recent window.
 
 **External data** — regenerate the `data/*` files from community-run upstreams
-(run at every deploy and four times a day; see "Workflows"):
+(run at every deploy, and on a cron; see "Workflows"):
 
 ```bash
 jbang scripts/FetchJugs.java            # -> data/jugs.yaml          (World-Wide-JUGs/GlobalWWJugs)
 jbang scripts/FetchJavaChampions.java   # -> data/java-champions.yaml (aalmiray/java-champions)
-jbang scripts/FetchMeetupEvents.java    # -> data/events.json         (Meetup GraphQL; needs Pro + OAuth)
+jbang scripts/FetchJugEvents.java      # -> data/events.json         (iCal feeds: JUG sites, Google Calendar, Meetup)
 jbang scripts/FetchViewCounts.java      # -> data/views.json          (our own counter, worker/views/)
 ```
 
@@ -265,7 +265,11 @@ held in a separate column and are never overwritten.
 - **`build-deploy.yml`** — on push to `main`: refreshes `data/jugs.yaml`,
   `data/java-champions.yaml` + `data/views.json` (commits them back with
   `[skip ci]`), builds with Hugo, runs Pagefind, and deploys to GitHub Pages.
-- **`sync-external-content.yml`** — cron, four times a day: refreshes `data/jugs.yaml`,
+- **`sync-view-counts.yml`** — cron, every 6 hours: refreshes `data/views.json`
+  from the read counter (the one piece of data here that moves continuously).
+  Shares a `concurrency: data-sync` group with the workflow below, since both
+  commit to `main`.
+- **`sync-external-content.yml`** — cron, once a day: refreshes `data/jugs.yaml`,
   `data/java-champions.yaml`, `data/views.json` and `data/events.json`,
   committing the results.
 - **`pr-check.yml`** — on PRs: runs `ValidateFrontmatter.java` and a Hugo build
@@ -282,11 +286,13 @@ held in a separate column and are never overwritten.
 - **Cloudflare cache**: the `/today/` listing is CDN-cached, so a *just*-published
   post can be missing from a crawl for a while even though its own page is live.
   Convert it directly with `--url` if you need it immediately.
-- **Meetup events** (`FetchMeetupEvents.java`) come from each group's public
-  iCal feed plus the schema.org JSON-LD on each event page — no Meetup Pro
-  subscription, no OAuth token, no secret to configure. Both sources are
-  permitted by meetup.com's `robots.txt`; re-check it before widening what the
-  script fetches. It runs once a day from `sync-external-content.yml`.
+- **JUG events** (`FetchJugEvents.java`) come from whatever iCal feed a JUG
+  publishes — its own `.ics`, a public Google Calendar, or Meetup's iCal export
+  — plus the schema.org JSON-LD on each event page for venues. No Meetup Pro
+  subscription, no OAuth token, no secret to configure. Runs once a day from
+  `sync-external-content.yml`. `DiscoverJugCalendars.java` (by hand) reports
+  JUGs whose site advertises a calendar their upstream directory entry doesn't
+  record, so it can be fixed in GlobalWWJugs.
 - **Theme** (`themes/foojay/`) recreates the current site's structure (nav, post
   grid, sidebar widgets, footer) but not its exact visual design — treat
   `static/css/style.css` as a starting point to refine against real brand assets.

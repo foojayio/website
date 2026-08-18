@@ -30,8 +30,10 @@ import java.util.TreeMap;
  * anything that ranks posts by views has to have them all at once. Baking makes
  * the number up to a day stale, which for a view count is not a defect.
  *
- * Run at every deploy (.github/workflows/build-deploy.yml) and four times a day
- * (.github/workflows/sync-external-content.yml), both of which commit the refreshed file
+ * Run at every deploy (.github/workflows/build-deploy.yml) and every six hours
+ * (.github/workflows/sync-view-counts.yml -- its own workflow, because the read
+ * counter moves continuously while everything in sync-external-content.yml
+ * changes slowly enough to be daily), both of which commit the refreshed file
  * back to main -- the same pattern as data/jugs.yaml and data/events.json.
  *
  * NEVER FAILS THE BUILD. If the counter is unreachable this leaves the

@@ -20,7 +20,7 @@ import java.util.*;
  * java-champions.yml (https://github.com/aalmiray/java-champions), a single
  * YAML file listing every Java Champion -- this is the data behind
  * https://javachampions.org/. Run at every deploy
- * (.github/workflows/build-deploy.yml) and four times a day
+ * (.github/workflows/build-deploy.yml) and once a day
  * (.github/workflows/sync-external-content.yml) -- both commit the refreshed file
  * back to main, same pattern as data/jugs.yaml.
  *

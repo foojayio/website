@@ -850,6 +850,13 @@ body[data-nav-open="true"] .nav-backdrop { opacity: 1; visibility: visible; }
   display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;
   overflow: hidden; font-weight: 600;
 }
+/* Where it is, in the cell itself -- the city, or the JUG's country when the
+   feed gave no venue. One line: a cell is ~140px wide, and the full address is
+   in the dialog and the list. */
+.cal-chip__place {
+  display: block; color: var(--ink-muted); font-size: .95em;
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
 
 /* Agenda (also the no-JavaScript view) -------------------------- */
 

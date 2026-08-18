@@ -26,7 +26,7 @@ import java.util.regex.Pattern;
  * (https://github.com/World-Wide-JUGs/GlobalWWJugs), so the /jugs/ page and
  * the Meetup calendar sync always reflect that upstream list instead of a
  * one-time snapshot. Run at every deploy (.github/workflows/build-deploy.yml)
- * and before every Meetup sync (.github/workflows/sync-external-content.yml) --
+ * and before every event sync (.github/workflows/sync-external-content.yml) --
  * both commit the refreshed file back to main, same pattern as
  * data/events.json.
  *
@@ -63,7 +63,7 @@ public class FetchJugs {
 
     static final Path OUTPUT_FILE = Path.of("data/jugs.yaml");
 
-    // Matches meetup.com URLs so we can hand FetchMeetupEvents.java a clean
+    // Matches meetup.com URLs so we can hand FetchJugEvents.java a clean
     // group slug without every JUG file needing its own dedicated field for it.
     // The optional locale segment is why this isn't just "the first path
     // segment": Meetup serves a group under /de-DE/JUG-Bonn/ as readily as
@@ -160,7 +160,7 @@ public class FetchJugs {
         // (added in GlobalWWJugs, e.g. _jugs/BelgianJUG.md). We deliberately do
         // NOT infer it from `website` even when that happens to be a meetup.com
         // URL -- only use a Meetup link when it's specifically given. Both forms
-        // are written: meetup_slug is what FetchMeetupEvents.java needs for the
+        // are written: meetup_slug is what FetchJugEvents.java needs for the
         // GraphQL API, meetup_url is the ready-to-link full address.
         String meetup = trimToNull(front.get("meetup"));
         if (meetup != null) {
@@ -250,7 +250,7 @@ public class FetchJugs {
                 # folder instead: https://github.com/World-Wide-JUGs/GlobalWWJugs/tree/master/_jugs
                 #
                 # meetup_slug/meetup_url are set only when a JUG's file has an explicit
-                # `meetup` field (never inferred from `website`); scripts/FetchMeetupEvents.java
+                # `meetup` field (never inferred from `website`); scripts/FetchJugEvents.java
                 # uses meetup_slug to pull calendar events.
 
                 """.stripIndent();

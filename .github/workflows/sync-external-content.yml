@@ -1,19 +1,24 @@
 name: Sync external content
 
+# The three lists that come from OTHER people's repositories and sites: the
+# World Wide JUGs directory, the Java Champions list, and the JUG event feeds.
+# All three move slowly -- a JUG is added, a Champion edits their entry, an
+# event is announced days or weeks ahead -- so this runs once a day.
+#
+# View counts are the opposite (they move continuously, from our own Worker)
+# and live in sync-view-counts.yml on a six-hourly schedule.
+
 on:
   schedule:
-    # Four times a day, six hours apart. Everything this workflow pulls moves
-    # on its own schedule somewhere else -- a JUG posts an event, a Champion
-    # edits their entry, readers keep reading -- so a once-daily sync meant the
-    # site could be most of a day behind an upstream change. Kept off the hour
-    # boundary GitHub's cron queue is busiest on.
-    #
-    # Split into two entries only so the Meetup sync can tell them apart: it
-    # runs once a day, on the 01:20 one (see its `if:` below). Everything else
-    # runs on all four.
+    # Once a day, kept off the hour boundary GitHub's cron queue is busiest on.
     - cron: "20 1 * * *"
-    - cron: "20 7,13,19 * * *"
   workflow_dispatch: {}
+
+# Shared with sync-view-counts.yml: both workflows commit to main, and a
+# concurrent push would fail on a non-fast-forward. Queue instead of racing.
+concurrency:
+  group: data-sync
+  cancel-in-progress: false
 
 jobs:
   sync:
@@ -26,44 +31,36 @@ jobs:
       - name: Set up JBang
         uses: jbangdev/setup-jbang@main
 
-      # Independent. Keeps the view counts on the site
-      # within a few hours of the counter even when nothing is pushed.
-      - name: Refresh view counts
-        run: jbang scripts/FetchViewCounts.java
-
-      # Refresh the JUG list first so this always targets the current
-      # upstream World Wide JUGs directory, not whatever was last committed
-      # (also refreshed independently at every deploy by build-deploy.yml).
+      # First, so the event fetch below sees the current upstream JUG list
+      # rather than whatever was last committed (also refreshed independently
+      # at every deploy by build-deploy.yml).
       - name: Refresh JUG list
-      - if: github.event_name != 'schedule' || github.event.schedule == '20 1 * * *'
         run: jbang scripts/FetchJugs.java
 
       # Independent of the JUG list above -- just piggybacking on the same
-      # schedule/workflow rather than adding a whole new one.
+      # schedule rather than adding a whole workflow for one script.
       - name: Refresh Java Champions list
-      - if: github.event_name != 'schedule' || github.event.schedule == '20 1 * * *'
         run: jbang scripts/FetchJavaChampions.java
 
-      # Once a day, not four times like the steps above: this one makes ~130
-      # requests to meetup.com (an iCal feed per group, then a page per event),
-      # and a JUG's event list doesn't move hour to hour -- an event is
-      # announced days or weeks ahead. Needs no credential; see the script.
-      - name: Fetch events from Meetup
-        if: github.event_name != 'schedule' || github.event.schedule == '20 1 * * *'
-        run: jbang scripts/FetchMeetupEvents.java
+      # ~150 requests across meetup.com, Google Calendar and the JUGs' own
+      # sites: an iCal feed per JUG, then a page per event that still needs a
+      # venue. Needs no credential; see the script.
+      - name: Fetch JUG events
+        run: jbang scripts/FetchJugEvents.java
 
       - name: Commit updated data
         run: |
           git config user.name "foojay-bot"
           git config user.email "actions@github.com"
-          git add data/jugs.yaml data/java-champions.yaml data/events.json data/views.json
+          git add data/jugs.yaml data/java-champions.yaml data/events.json
           if git diff --cached --quiet; then
-            echo "No JUG list, Java Champions, event or view count changes."
+            echo "No JUG list, Java Champions or event changes."
           else
             # Deliberately no [skip ci], unlike build-deploy.yml's own commit:
             # this push SHOULD trigger a deploy, that being the whole point of
-            # refreshing the data. Four syncs a day means at most four extra
-            # deploys a day, and only on the runs where something changed.
-            git commit -m "chore: sync JUG list + Java Champions + Meetup events + view counts"
+            # refreshing the data. And only on the runs where something changed
+            # -- every script here leaves its file untouched otherwise.
+            git commit -m "chore: sync JUG list + Java Champions + JUG events"
+            git pull --rebase --autostash
             git push
           fi

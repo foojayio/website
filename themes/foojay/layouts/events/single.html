@@ -1,9 +1,10 @@
 {{ define "main" }}
 {{/* /calendar/ -- the events calendar.
 
-     Everything on this page is derived from data/events.json (written by
-     scripts/FetchMeetupEvents.java, four times a day) joined to data/jugs.yaml
-     on the group's `jug` slug for the country. There is nothing to author: the
+     Everything on this page is derived from data/events.json (written daily by
+     scripts/FetchJugEvents.java from whatever iCal feed each JUG publishes --
+     its own .ics, a Google Calendar, or Meetup's export) joined to
+     data/jugs.yaml on the group's `jug` slug for the country. There is nothing to author: the
      page file holds a one-line intro and this layout does the rest, the same
      way /jugs/ and /java-champions/ work.
 
@@ -55,6 +56,16 @@
       {{ with $e.city }}{{ $parts = $parts | append . }}{{ end }}
       {{ $place = delimit $parts ", " }}
     {{ end }}
+    {{/* The short form, for a month-grid cell ~140px wide: the city alone
+         ("Darmstadt"), not the whole venue line ("DICOS GmbH
+         Kommunikationssysteme, Darmstadt"). Falls back to the venue and then
+         to the JUG's country, so a chip always says where. */}}
+    {{ $placeShort := "" }}
+    {{ if eq $e.online true }}
+      {{ $placeShort = "Online" }}
+    {{ else }}
+      {{ $placeShort = $e.city | default $e.venue | default $country }}
+    {{ end }}
     {{ $start := time.AsTime $e.startTime }}
     {{ $endDate := "" }}
     {{ $endTime := "" }}
@@ -85,6 +96,7 @@
         "city"       ($e.city | default "")
         "online"     (eq $e.online true)
         "place"      $place
+        "placeShort" $placeShort
       ) }}
   {{ end }}
 {{ end }}
@@ -195,7 +207,11 @@
                     <span class="cal-row__weekday">{{ $e.weekday }}</span>
                   </div>
                   <div class="cal-row__body">
-                    <a class="cal-row__title" href="{{ $e.url }}" target="_blank" rel="noopener">{{ $e.title }}</a>
+                    {{/* Not every feed carries a URL -- a Google Calendar
+                         entry has no event page to link to -- so the title is
+                         a link only when there is somewhere to go. */}}
+                    {{ if $e.url }}<a class="cal-row__title" href="{{ $e.url }}" target="_blank" rel="noopener">{{ $e.title }}</a>
+                    {{ else }}<span class="cal-row__title">{{ $e.title }}</span>{{ end }}
                     <p class="cal-row__meta">
                       <span class="cal-dot" style="--cal-dot: hsl({{ $e.hue }} 62% 46%)" aria-hidden="true"></span>
                       <span class="cal-row__group">{{ $e.group }}</span>
@@ -228,7 +244,7 @@
     <h2 class="cal-dialog__title" id="cal-dialog-title" data-cal-dialog-title></h2>
     <p class="cal-dialog__when" data-cal-dialog-when></p>
     <p class="cal-dialog__where" data-cal-dialog-where hidden></p>
-    <a class="btn btn--accent btn--sm cal-dialog__link" data-cal-dialog-link href="#" target="_blank" rel="noopener">View on Meetup</a>
+    <a class="btn btn--accent btn--sm cal-dialog__link" data-cal-dialog-link href="#" target="_blank" rel="noopener">View event page</a>
   </dialog>
 
   <script>
@@ -296,12 +312,19 @@
             if (dayEvents) {
               html += '<ul class="cal-cell__events">';
               dayEvents.forEach(function (e) {
-                html += '<li><a class="cal-chip" href="' + e.url + '" target="_blank" rel="noopener"' +
+                // A chip is a real link when the feed gave a URL, and a button
+                // when it didn't (a Google Calendar entry has no event page).
+                // Either way it opens the detail dialog.
+                var tag = e.url ? 'a' : 'span';
+                var attrs = e.url ? ' href="' + e.url + '" target="_blank" rel="noopener"' : ' role="button" tabindex="0"';
+                html += '<li><' + tag + ' class="cal-chip"' + attrs +
                         ' data-cal-event="' + e.index + '"' +
                         ' style="--cal-dot: hsl(' + e.hue + ' 62% 46%)"' +
                         ' title="' + escapeAttr(e.time + ' · ' + e.title + ' · ' + e.group) + '">' +
                         '<span class="cal-chip__time">' + e.time + '</span>' +
-                        '<span class="cal-chip__title">' + escapeHtml(e.title) + '</span></a></li>';
+                        '<span class="cal-chip__title">' + escapeHtml(e.title) + '</span>' +
+                        (e.placeShort ? '<span class="cal-chip__place">' + escapeHtml(e.placeShort) + '</span>' : '') +
+                        '</' + tag + '></li>';
               });
               html += '</ul>';
             }
@@ -314,6 +337,10 @@
         grid.innerHTML = html;
       }
 
+      function hostOf(url) {
+        try { return new URL(url).hostname; } catch (e) { return ''; }
+      }
+
       function escapeHtml(s) {
         return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
       }
@@ -322,6 +349,14 @@
       /* A chip is a real link to the event on Meetup -- so it can be opened in
          a new tab, copied or followed without JavaScript -- and the click is
          intercepted to show the details we already have instead. */
+      grid.addEventListener('keydown', function (ev) {
+        if (ev.key !== 'Enter' && ev.key !== ' ') return;
+        var chip = ev.target.closest('[data-cal-event][role="button"]');
+        if (!chip) return;
+        ev.preventDefault();
+        openDialog(events[parseInt(chip.getAttribute('data-cal-event'), 10)]);
+      });
+
       grid.addEventListener('click', function (ev) {
         var chip = ev.target.closest('[data-cal-event]');
         if (!chip || !dialog || typeof dialog.showModal !== 'function') return;
@@ -340,7 +375,12 @@
         var where = dialog.querySelector('[data-cal-dialog-where]');
         where.textContent = e.place;
         where.hidden = !e.place;
-        dialog.querySelector('[data-cal-dialog-link]').href = e.url;
+        var link = dialog.querySelector('[data-cal-dialog-link]');
+        link.href = e.url || '#';
+        link.hidden = !e.url;
+        // Events come from Meetup and from the JUGs' own calendars now, so the
+        // button says where it actually goes.
+        link.textContent = /(^|\.)meetup\.com/.test(hostOf(e.url)) ? 'View on Meetup' : 'View event page';
         dialog.showModal();
       }
 
