@@ -112,14 +112,10 @@ The second chart shows the same app running with Optimizer Hub. The initial pre-
 
 The results mean we can change the readiness check to allow traffic 30 seconds earlier, at the 60-second mark.
 
-<figure class="wp-block-gallery has-nested-images columns-default is-cropped wp-block-gallery-1 is-layout-flex wp-block-gallery-is-layout-flex">
- <figure class="wp-block-image size-large">
-  <img decoding="async" width="1024" height="547" data-id="121494" src="aws-warm-up-queues-1.jpg" alt="" class="wp-image-121494">
- </figure>
- <figure class="wp-block-image size-large">
-  <img decoding="async" width="1024" height="547" data-id="121493" src="aws-warm-up-queues-2.jpg" alt="" class="wp-image-121493">
- </figure>
-</figure>
+{{< gallery >}}
+aws-warm-up-queues-1.jpg
+aws-warm-up-queues-2.jpg
+{{< /gallery >}}
 
 ## Compiler threads
 
@@ -129,14 +125,10 @@ In the first chart, the allowed JIT threads are maxed out all the way until the 
 
 In the second graph with Optimizer Hub and Cloud Native Compiler, there is no client-side tier 2 JIT compilation happening at all.
 
-<figure class="wp-block-gallery has-nested-images columns-default is-cropped wp-block-gallery-2 is-layout-flex wp-block-gallery-is-layout-flex">
- <figure class="wp-block-image size-large">
-  <img loading="lazy" decoding="async" width="1024" height="547" data-id="121492" src="aws-warm-up-compiler-threads-1.jpg" alt="" class="wp-image-121492">
- </figure>
- <figure class="wp-block-image size-large">
-  <img loading="lazy" decoding="async" width="1024" height="547" data-id="121491" src="aws-warm-up-compiler-threads-2.jpg" alt="" class="wp-image-121491">
- </figure>
-</figure>
+{{< gallery >}}
+aws-warm-up-compiler-threads-1.jpg
+aws-warm-up-compiler-threads-2.jpg
+{{< /gallery >}}
 
 ## CPU use percentage
 
@@ -146,14 +138,10 @@ The first chart shows consistent high CPU -- over 50% of the 8 vCores allotted -
 
 The second chart shows what happens when the compilation activity is removed from the client. There are still short bumps in CPU utilization in periods when the JVM has no optimized code at all, but the CPU then settles immediately at around 55% of the 5 vCores allotted. The machine is able to handle all of the requests, staying within its response time SLAs and within its CPU utilization autoscaling limits, with 3 fewer vCores.
 
-<figure class="wp-block-gallery has-nested-images columns-default is-cropped wp-block-gallery-3 is-layout-flex wp-block-gallery-is-layout-flex">
- <figure class="wp-block-image size-large">
-  <img loading="lazy" decoding="async" width="1024" height="547" data-id="121490" src="aws-warm-up-cpu-use-1.jpg" alt="" class="wp-image-121490">
- </figure>
- <figure class="wp-block-image size-large">
-  <img loading="lazy" decoding="async" width="1024" height="547" data-id="121489" src="aws-warm-up-cpu-use-2.jpg" alt="" class="wp-image-121489">
- </figure>
-</figure>
+{{< gallery >}}
+aws-warm-up-cpu-use-1.jpg
+aws-warm-up-cpu-use-2.jpg
+{{< /gallery >}}
 
 ## Case study: real-world impact
 

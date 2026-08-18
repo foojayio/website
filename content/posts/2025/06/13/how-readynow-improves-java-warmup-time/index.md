@@ -104,40 +104,28 @@ Let's compare gc.log files generated during the two runs with [GC Log Analyzer](
 
 In the first run, we can see the number of compiles gradually grows over time and reaches the maximum after about 40 seconds. Thanks to the information in the profile log file, in the second run, the compiler already has all the required information to move these Tier 1 compilations to the very start of the application and finish all these compilations in one second.
 
-<figure class="wp-block-gallery has-nested-images columns-default is-cropped wp-block-gallery-1 is-layout-flex wp-block-gallery-is-layout-flex">
- <figure class="wp-block-image size-large">
-  <img decoding="async" width="1024" height="547" data-id="116412" src="understanding_readynow_tier1_no_readynow-1024x547.png" alt="" class="wp-image-116412">
- </figure>
- <figure class="wp-block-image size-large">
-  <img decoding="async" width="1024" height="547" data-id="116411" src="understanding_readynow_tier1_with_readynow-1-1024x547.png" alt="" class="wp-image-116411">
- </figure>
-</figure>
+{{< gallery >}}
+understanding_readynow_tier1_no_readynow-1024x547.png
+understanding_readynow_tier1_with_readynow-1-1024x547.png
+{{< /gallery >}}
 
 ### Tier 2 Compile Counts
 
 The charts for the Tier 2 compilation reveal that we reduced a significant part of the compilations from 40 seconds to 17 seconds. Although this is already a significant improvement, it also helps us to define that the generated profile log file is still not perfectly trained for this use case. In one of the next parts of this blog series, we'll explore the topic of generational profile logs further.
 
-<figure class="wp-block-gallery has-nested-images columns-default is-cropped wp-block-gallery-2 is-layout-flex wp-block-gallery-is-layout-flex">
- <figure class="wp-block-image size-large">
-  <img loading="lazy" decoding="async" width="1024" height="547" data-id="116414" src="understanding_readynow_tier2_no_readynow-1024x547.png" alt="" class="wp-image-116414">
- </figure>
- <figure class="wp-block-image size-large">
-  <img loading="lazy" decoding="async" width="1024" height="547" data-id="116413" src="understanding_readynow_tier2_with_readynow-1024x547.png" alt="" class="wp-image-116413">
- </figure>
-</figure>
+{{< gallery >}}
+understanding_readynow_tier2_no_readynow-1024x547.png
+understanding_readynow_tier2_with_readynow-1024x547.png
+{{< /gallery >}}
 
 ### Compiler queue run
 
 The chart with the code waiting in a queue to be compiled also shows a big difference. In the first run, we can see a huge spike starting at around second 26, when the actual Dacapo-test starts, which causes a lot of load on the application. Thanks to the profile log, this queue is moved to the start of the application. As described before, ReadyNow uses the decisions of the previous run to immediately compile most of the native code and have it available when needed. As a result, we only see a small peak at 26 seconds.
 
-<figure class="wp-block-gallery has-nested-images columns-default is-cropped wp-block-gallery-3 is-layout-flex wp-block-gallery-is-layout-flex">
- <figure class="wp-block-image size-large">
-  <img loading="lazy" decoding="async" width="1024" height="547" data-id="116416" src="understanding_readynow_compiler_queu_no_readynow-1-1024x547.png" alt="" class="wp-image-116416">
- </figure>
- <figure class="wp-block-image size-large">
-  <img loading="lazy" decoding="async" width="1024" height="547" data-id="116415" src="understanding_readynow_compiler_queu_with_readynow-1-1024x547.png" alt="" class="wp-image-116415">
- </figure>
-</figure>
+{{< gallery >}}
+understanding_readynow_compiler_queu_no_readynow-1-1024x547.png
+understanding_readynow_compiler_queu_with_readynow-1-1024x547.png
+{{< /gallery >}}
 
 ## Conclusion
 

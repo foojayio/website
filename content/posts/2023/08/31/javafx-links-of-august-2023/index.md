@@ -21,17 +21,11 @@ I've taken a holiday this month, so probably missed a lot of the amazing JavaFX 
 
 But the most essential and thrilling news is the release of the new version of [jfx-central.com](https://www.jfx-central.com/)! A complete new home for "all things JavaFX" thanks to the amazing work of a whole [team of JavaFX enthousiast](https://www.jfx-central.com/team). Indeed, yes, it's a website but actually a JavaFX application, so you can also run it as a desktop app. And what's even more important... the [full sources are available on GitHub](https://github.com/dlemmermann/jfxcentral2).
 
-<figure class="wp-block-gallery has-nested-images columns-default is-cropped wp-block-gallery-1 is-layout-flex wp-block-gallery-is-layout-flex">
- <figure class="wp-block-image size-large">
-  <a href="homepage.png" target="_blank" rel="noopener"><img fetchpriority="high" decoding="async" width="1024" height="616" data-id="102067" src="homepage-1024x616.png" alt="" class="wp-image-102067"></a>
- </figure>
- <figure class="wp-block-image size-large">
-  <a href="libraries.png" target="_blank" rel="noopener"><img decoding="async" width="1024" height="812" data-id="102066" src="libraries-1024x812.png" alt="" class="wp-image-102066"></a>
- </figure>
- <figure class="wp-block-image size-large">
-  <a href="showcases.png" target="_blank" rel="noopener"><img decoding="async" width="1024" height="749" data-id="102068" src="showcases-1024x749.png" alt="" class="wp-image-102068"></a>
- </figure>
-</figure>
+{{< gallery >}}
+homepage-1024x616.png
+libraries-1024x812.png
+showcases-1024x749.png
+{{< /gallery >}}
 
 ## Applications
 

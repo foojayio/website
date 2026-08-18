@@ -45,18 +45,10 @@ sudo apt install code -y
 
 You can now start VSC from the start button and you will find it in the "Programming" list.
 
-<figure class="wp-block-gallery columns-2 is-cropped wp-block-gallery-1 is-layout-flex wp-block-gallery-is-layout-flex">
- <ul class="blocks-gallery-grid">
-  <li class="blocks-gallery-item">
-   <figure>
-    <img decoding="async" width="930" height="1024" src="programming-tools-in-raspberry-pi-os-930x1024.png" alt="" data-id="37814" data-full-url="https://foojay.io/wp-content/uploads/2021/02/programming-tools-in-raspberry-pi-os.png" data-link="https://foojay.io/?attachment_id=37814" class="wp-image-37814">
-   </figure></li>
-  <li class="blocks-gallery-item">
-   <figure>
-    <img decoding="async" width="1024" height="770" src="vsc-on-raspberry-pi-1024x770.png" alt="" data-id="37813" data-full-url="https://foojay.io/wp-content/uploads/2021/02/vsc-on-raspberry-pi.png" data-link="https://foojay.io/?attachment_id=37813" class="wp-image-37813">
-   </figure></li>
- </ul>
-</figure>
+{{< gallery cols="2" >}}
+programming-tools-in-raspberry-pi-os-930x1024.png
+vsc-on-raspberry-pi-1024x770.png
+{{< /gallery >}}
 
 There it is, version 1.53.2 on a Linux ARM processor, in the screenshot with Maven and the Java Extension Pack installed!
 

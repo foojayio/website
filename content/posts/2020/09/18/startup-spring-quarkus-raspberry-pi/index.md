@@ -41,34 +41,14 @@ The same application was developed in both Spring and Quarkus:
 
 Both projects are available on GitHub in "[JavaOnRaspberryPi \> Chapter_10_Spring \> java-spring-rest-db](https://github.com/FDelporte/JavaOnRaspberryPi/tree/master/Chapter_10_Spring/java-spring-rest-db)" and "[JavaQuarkusRestDb](https://github.com/FDelporte/JavaQuarkusRestDb)". If you like to get more information of the code itself, you can check the blog post links at the bottom of this page.
 
-<figure class="wp-block-gallery columns-3 is-cropped wp-block-gallery-1 is-layout-flex wp-block-gallery-is-layout-flex">
- <ul class="blocks-gallery-grid">
-  <li class="blocks-gallery-item">
-   <figure>
-    <img decoding="async" width="1024" height="814" src="spring-db-swagger-1024x814.png" alt="" data-id="35354" data-full-url="https://foojay.io/wp-content/uploads/2020/09/spring-db-swagger.png" data-link="https://foojay.io/?attachment_id=35354" class="wp-image-35354">
-   </figure></li>
-  <li class="blocks-gallery-item">
-   <figure>
-    <img loading="lazy" decoding="async" width="1024" height="484" src="spring-db-swagger-measurement-post-1024x484.png" alt="" data-id="35355" data-full-url="https://foojay.io/wp-content/uploads/2020/09/spring-db-swagger-measurement-post.png" data-link="https://foojay.io/?attachment_id=35355" class="wp-image-35355">
-   </figure></li>
-  <li class="blocks-gallery-item">
-   <figure>
-    <img loading="lazy" decoding="async" width="1024" height="173" src="spring-db-swagger-sensor-post-error-1024x173.png" alt="" data-id="35359" data-full-url="https://foojay.io/wp-content/uploads/2020/09/spring-db-swagger-sensor-post-error.png" data-link="https://foojay.io/?attachment_id=35359" class="wp-image-35359">
-   </figure></li>
-  <li class="blocks-gallery-item">
-   <figure>
-    <img loading="lazy" decoding="async" width="1024" height="320" src="spring-db-swagger-sensor-post-1024x320.png" alt="" data-id="35357" data-full-url="https://foojay.io/wp-content/uploads/2020/09/spring-db-swagger-sensor-post.png" data-link="https://foojay.io/?attachment_id=35357" class="wp-image-35357">
-   </figure></li>
-  <li class="blocks-gallery-item">
-   <figure>
-    <img loading="lazy" decoding="async" width="634" height="504" src="spring-db-swagger-measurement-post-result-1.png" alt="" data-id="35356" data-full-url="https://foojay.io/wp-content/uploads/2020/09/spring-db-swagger-measurement-post-result-1.png" data-link="https://foojay.io/?attachment_id=35356" class="wp-image-35356">
-   </figure></li>
-  <li class="blocks-gallery-item">
-   <figure>
-    <img loading="lazy" decoding="async" width="646" height="303" src="spring-db-swagger-sensor-post-result.png" alt="" data-id="35358" data-full-url="https://foojay.io/wp-content/uploads/2020/09/spring-db-swagger-sensor-post-result.png" data-link="https://foojay.io/?attachment_id=35358" class="wp-image-35358">
-   </figure></li>
- </ul>
-</figure>
+{{< gallery cols="3" >}}
+spring-db-swagger-1024x814.png
+spring-db-swagger-measurement-post-1024x484.png
+spring-db-swagger-sensor-post-error-1024x173.png
+spring-db-swagger-sensor-post-1024x320.png
+spring-db-swagger-measurement-post-result-1.png
+spring-db-swagger-sensor-post-result.png
+{{< /gallery >}}
 
 I use Spring every day, but Quarkus was new for me. But thanks to [the detailed documentation](https://quarkus.io/guides/datasource), building a new application with the same functionality as the Spring version, only took a couple of hours. This post is not a guide pro or contra one of these frameworks, but just a non-scientific attempt to compare the start-up speeds.
 
@@ -82,22 +62,11 @@ Some of the keynotes while developing:
 * Easy to integrate H2 web console to consult the database
 * Overload of examples and documentation available
 
-<figure class="wp-block-gallery columns-3 is-cropped wp-block-gallery-2 is-layout-flex wp-block-gallery-is-layout-flex">
- <ul class="blocks-gallery-grid">
-  <li class="blocks-gallery-item">
-   <figure>
-    <img loading="lazy" decoding="async" width="478" height="440" src="spring-h2-login.png" alt="" data-id="35349" data-full-url="https://foojay.io/wp-content/uploads/2020/09/spring-h2-login.png" data-link="https://foojay.io/?attachment_id=35349" class="wp-image-35349">
-   </figure></li>
-  <li class="blocks-gallery-item">
-   <figure>
-    <img loading="lazy" decoding="async" width="637" height="244" src="spring-h2-measurements.png" alt="" data-id="35353" data-full-url="https://foojay.io/wp-content/uploads/2020/09/spring-h2-measurements.png" data-link="https://foojay.io/?attachment_id=35353" class="wp-image-35353">
-   </figure></li>
-  <li class="blocks-gallery-item">
-   <figure>
-    <img loading="lazy" decoding="async" width="636" height="213" src="spring-h2-sensors.png" alt="" data-id="35352" data-full-url="https://foojay.io/wp-content/uploads/2020/09/spring-h2-sensors.png" data-link="https://foojay.io/?attachment_id=35352" class="wp-image-35352">
-   </figure></li>
- </ul>
-</figure>
+{{< gallery cols="3" >}}
+spring-h2-login.png
+spring-h2-measurements.png
+spring-h2-sensors.png
+{{< /gallery >}}
 
 #### Quarkus
 

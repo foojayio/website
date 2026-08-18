@@ -52,17 +52,11 @@ I received a VisionFive 2 Lite for testing:
 * [Ubuntu Images and other software](https://github.com/starfive-tech/VisionFive2/releases)
   * Used: `ubuntu-24.04.3-preinstalled-desktop-riscv64+vf2-lite.img`
 
-<figure class="wp-block-gallery has-nested-images columns-default is-cropped wp-block-gallery-1 is-layout-flex wp-block-gallery-is-layout-flex">
- <figure class="wp-block-image size-large">
-  <img fetchpriority="high" decoding="async" width="1024" height="578" data-id="122408" src="visionfive-1024x578.jpg" alt="" class="wp-image-122408">
- </figure>
- <figure class="wp-block-image size-large">
-  <img decoding="async" width="763" height="1024" data-id="122407" src="visionfive-back-763x1024.jpg" alt="" class="wp-image-122407">
- </figure>
- <figure class="wp-block-image size-large">
-  <img loading="lazy" decoding="async" width="842" height="1024" data-id="122406" src="visionfive-front-842x1024.jpg" alt="" class="wp-image-122406">
- </figure>
-</figure>
+{{< gallery >}}
+visionfive-1024x578.jpg
+visionfive-back-763x1024.jpg
+visionfive-front-842x1024.jpg
+{{< /gallery >}}
 
 I burned the Ubuntu image to an SD card, but if you want to use eMMC, you can follow these instructions: [Flashing OS to Onboard eMMC (eMMC Version)](https://doc-en.rvspace.org/VisionFive2Lite/VisionFive2LiteQSG/VisionFive2_QSGLite/flashing_os_to_onboard_emmc_emmc_version.html). This OS has the pre-configured account `user` with password `starfive`.
 

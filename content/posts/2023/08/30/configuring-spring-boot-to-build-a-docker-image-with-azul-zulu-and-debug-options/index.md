@@ -294,14 +294,10 @@ From within your IDE, for instance, IntelliJ IDEA, you can start a debug connect
 Connected to the target VM, address: 'localhost:8000', transport: 'socket'
 ```
 
-<figure class="wp-block-gallery has-nested-images columns-default is-cropped wp-block-gallery-1 is-layout-flex wp-block-gallery-is-layout-flex">
- <figure class="wp-block-image size-large">
-  <a href="debug-config.png" target="_blank" rel="noopener"><img decoding="async" width="1024" height="663" data-id="102024" src="debug-config-1024x663.png" alt="" class="wp-image-102024"></a>
- </figure>
- <figure class="wp-block-image size-large">
-  <a href="debug-breakpoint.jpg" target="_blank" rel="noopener"><img decoding="async" width="1024" height="812" data-id="102025" src="debug-breakpoint.jpg" alt="" class="wp-image-102025"></a>
- </figure>
-</figure>
+{{< gallery >}}
+debug-config-1024x663.png
+debug-breakpoint.jpg
+{{< /gallery >}}
 
 ### Connecting to JMX
 
@@ -309,17 +305,11 @@ The JMX connection configured on port 5000 allows you to connect to the running 
 
 Click on any of the three images below for a larger image.
 
-<figure class="wp-block-gallery has-nested-images columns-default is-cropped wp-block-gallery-2 is-layout-flex wp-block-gallery-is-layout-flex">
- <figure class="wp-block-image size-large">
-  <a href="springboot-jmx-config.png" target="_blank" rel="noopener"><img loading="lazy" decoding="async" width="799" height="502" data-id="102028" src="springboot-jmx-config.png" alt="" class="wp-image-102028"></a>
- </figure>
- <figure class="wp-block-image size-large">
-  <a href="springboot-jmx-jfr-recording.png" target="_blank" rel="noopener"><img loading="lazy" decoding="async" width="722" height="619" data-id="102026" src="springboot-jmx-jfr-recording.png" alt="" class="wp-image-102026"></a>
- </figure>
- <figure class="wp-block-image size-large">
-  <a href="springboot-jmx-result.png" target="_blank" rel="noopener"><img loading="lazy" decoding="async" width="1024" height="662" data-id="102027" src="springboot-jmx-result-1024x662.png" alt="" class="wp-image-102027"></a>
- </figure>
-</figure>
+{{< gallery >}}
+springboot-jmx-config.png
+springboot-jmx-jfr-recording.png
+springboot-jmx-result-1024x662.png
+{{< /gallery >}}
 
 ## Conclusion
 

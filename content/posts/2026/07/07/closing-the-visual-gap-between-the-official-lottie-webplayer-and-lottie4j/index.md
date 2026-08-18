@@ -81,26 +81,11 @@ Where are we now? Check the images below.
 2. The second screenshot is the **"before"**. Both the JavaFX and the webview version have a lot of differences. This also means I was using the wrong comparison source images to validate the JavaFX result!
 3. The third screenshot is the **"after"** which shows a lot of improvements. First and most important, the comparison images from the webview are now pixel-perfect as they get rendered based on the latest version of the official Lottie web player. And you can also see that the JavaFX result is now a really close match! The background gradients are not pixel-perfect yet, and I still see small differences in the text, which confirms the 95% similarity score. But overall, I'm very happy with the improvements!
 
-<figure data-wp-context="{&quot;galleryId&quot;:&quot;6a83e0dd07fc0&quot;}" data-wp-interactive="core/gallery" class="wp-block-gallery has-nested-images columns-default is-cropped wp-block-gallery-1 is-layout-flex wp-block-gallery-is-layout-flex">
- <figure data-wp-context="{&quot;imageId&quot;:&quot;6a83e0dd08ca0&quot;}" data-wp-interactive="core/image" data-wp-key="6a83e0dd08ca0" class="wp-block-image size-large wp-lightbox-container">
-  <img decoding="async" width="910" height="438" data-wp-class--hide="state.isContentHidden" data-wp-class--show="state.isContentVisible" data-wp-init="callbacks.setButtonStyles" data-wp-on--click="actions.showLightbox" data-wp-on--load="callbacks.setButtonStyles" data-wp-on--pointerdown="actions.preloadImage" data-wp-on--pointerenter="actions.preloadImageWithDelay" data-wp-on--pointerleave="actions.cancelPreload" data-wp-on-window--resize="callbacks.setButtonStyles" data-id="124480" src="20260702-lottie4j-previewer.png" alt="" class="wp-image-124480"><button class="lightbox-trigger" type="button" aria-haspopup="dialog" data-wp-bind--aria-label="state.thisImage.triggerButtonAriaLabel" data-wp-init="callbacks.initTriggerButton" data-wp-on--click="actions.showLightbox" data-wp-style--right="state.thisImage.buttonRight" data-wp-style--top="state.thisImage.buttonTop">
-   <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="none" viewbox="0 0 12 12">
-    <path fill="#fff" d="M2 0a2 2 0 0 0-2 2v2h1.5V2a.5.5 0 0 1 .5-.5h2V0H2Zm2 10.5H2a.5.5 0 0 1-.5-.5V8H0v2a2 2 0 0 0 2 2h2v-1.5ZM8 12v-1.5h2a.5.5 0 0 0 .5-.5V8H12v2a2 2 0 0 1-2 2H8Zm2-12a2 2 0 0 1 2 2v2h-1.5V2a.5.5 0 0 0-.5-.5H8V0h2Z" />
-   </svg></button>
- </figure>
- <figure data-wp-context="{&quot;imageId&quot;:&quot;6a83e0dd0986e&quot;}" data-wp-interactive="core/image" data-wp-key="6a83e0dd0986e" class="wp-block-image size-large wp-lightbox-container">
-  <img decoding="async" width="1013" height="351" data-wp-class--hide="state.isContentHidden" data-wp-class--show="state.isContentVisible" data-wp-init="callbacks.setButtonStyles" data-wp-on--click="actions.showLightbox" data-wp-on--load="callbacks.setButtonStyles" data-wp-on--pointerdown="actions.preloadImage" data-wp-on--pointerenter="actions.preloadImageWithDelay" data-wp-on--pointerleave="actions.cancelPreload" data-wp-on-window--resize="callbacks.setButtonStyles" data-id="124481" src="20260702-lottie4j-before.png" alt="" class="wp-image-124481"><button class="lightbox-trigger" type="button" aria-haspopup="dialog" data-wp-bind--aria-label="state.thisImage.triggerButtonAriaLabel" data-wp-init="callbacks.initTriggerButton" data-wp-on--click="actions.showLightbox" data-wp-style--right="state.thisImage.buttonRight" data-wp-style--top="state.thisImage.buttonTop">
-   <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="none" viewbox="0 0 12 12">
-    <path fill="#fff" d="M2 0a2 2 0 0 0-2 2v2h1.5V2a.5.5 0 0 1 .5-.5h2V0H2Zm2 10.5H2a.5.5 0 0 1-.5-.5V8H0v2a2 2 0 0 0 2 2h2v-1.5ZM8 12v-1.5h2a.5.5 0 0 0 .5-.5V8H12v2a2 2 0 0 1-2 2H8Zm2-12a2 2 0 0 1 2 2v2h-1.5V2a.5.5 0 0 0-.5-.5H8V0h2Z" />
-   </svg></button>
- </figure>
- <figure data-wp-context="{&quot;imageId&quot;:&quot;6a83e0dd09b5e&quot;}" data-wp-interactive="core/image" data-wp-key="6a83e0dd09b5e" class="wp-block-image size-large wp-lightbox-container">
-  <img loading="lazy" decoding="async" width="1015" height="350" data-wp-class--hide="state.isContentHidden" data-wp-class--show="state.isContentVisible" data-wp-init="callbacks.setButtonStyles" data-wp-on--click="actions.showLightbox" data-wp-on--load="callbacks.setButtonStyles" data-wp-on--pointerdown="actions.preloadImage" data-wp-on--pointerenter="actions.preloadImageWithDelay" data-wp-on--pointerleave="actions.cancelPreload" data-wp-on-window--resize="callbacks.setButtonStyles" data-id="124482" src="20260702-lottie4j-after.png" alt="" class="wp-image-124482"><button class="lightbox-trigger" type="button" aria-haspopup="dialog" data-wp-bind--aria-label="state.thisImage.triggerButtonAriaLabel" data-wp-init="callbacks.initTriggerButton" data-wp-on--click="actions.showLightbox" data-wp-style--right="state.thisImage.buttonRight" data-wp-style--top="state.thisImage.buttonTop">
-   <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="none" viewbox="0 0 12 12">
-    <path fill="#fff" d="M2 0a2 2 0 0 0-2 2v2h1.5V2a.5.5 0 0 1 .5-.5h2V0H2Zm2 10.5H2a.5.5 0 0 1-.5-.5V8H0v2a2 2 0 0 0 2 2h2v-1.5ZM8 12v-1.5h2a.5.5 0 0 0 .5-.5V8H12v2a2 2 0 0 1-2 2H8Zm2-12a2 2 0 0 1 2 2v2h-1.5V2a.5.5 0 0 0-.5-.5H8V0h2Z" />
-   </svg></button>
- </figure>
-</figure>
+{{< gallery >}}
+20260702-lottie4j-previewer.png
+20260702-lottie4j-before.png
+20260702-lottie4j-after.png
+{{< /gallery >}}
 
 ### The Cost
 

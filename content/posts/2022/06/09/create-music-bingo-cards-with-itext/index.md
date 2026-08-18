@@ -41,14 +41,10 @@ We asked our guests to give us their two favorite songs. We added some extra "pa
 
 Each print-out has the name of the player and contains the songs selected by the player. The card is filled with other random songs, so each player has a different card.
 
-<figure class="wp-block-gallery has-nested-images columns-default is-cropped wp-block-gallery-1 is-layout-flex wp-block-gallery-is-layout-flex">
- <figure class="wp-block-image size-medium">
-  <img fetchpriority="high" decoding="async" width="411" height="510" data-id="56193" src="vik-411x510.png" alt="PDF Bingo Card" class="wp-image-56193">
- </figure>
- <figure class="wp-block-image size-medium">
-  <img decoding="async" width="414" height="510" data-id="56194" src="frank-414x510.png" alt="PDF Bingo card " class="wp-image-56194">
- </figure>
-</figure>
+{{< gallery >}}
+vik-411x510.png |  | PDF Bingo Card
+frank-414x510.png |  | PDF Bingo card
+{{< /gallery >}}
 
 First goal of the game was to have a full horizontal line, and after we had three winners of those, we switched to having a full Bingo card. Some of the songs were only played for 10-15 seconds, others needed more time as some dancing and singing got involved. For that last part, I want to apologize to our neighbors...
 

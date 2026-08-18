@@ -259,25 +259,11 @@ animationBuilder()
 
 When the application starts, you have the choice to select between an IP address of the Raspberry Pi with the Mosquitto queue and "Mock Data". After selecting this second option, 16 devices will be created inside the application, where each device is driven by the randomly generated data. This is ideal for testing all of the application functions.
 
-<figure class="wp-block-gallery columns-3 is-cropped wp-block-gallery-1 is-layout-flex wp-block-gallery-is-layout-flex">
- <ul class="blocks-gallery-grid">
-  <li class="blocks-gallery-item">
-   <figure>
-    <img loading="lazy" decoding="async" width="1024" height="462" src="mock-selection-1024x462.png" alt="" data-id="36783" data-full-url="https://foojay.io/wp-content/uploads/2021/01/mock-selection.png" data-link="https://foojay.io/?attachment_id=36783" class="wp-image-36783">
-   </figure></li>
-  <li class="blocks-gallery-item">
-   <figure>
-    <img loading="lazy" decoding="async" width="1024" height="599" src="mock-overview-1024x599.png" alt="" data-id="36784" data-full-url="https://foojay.io/wp-content/uploads/2021/01/mock-overview.png" data-link="https://foojay.io/?attachment_id=36784" class="wp-image-36784">
-   </figure></li>
-  <li class="blocks-gallery-item">
-   <figure>
-    <img loading="lazy" decoding="async" width="1024" height="659" src="mock-cpu-graph-1024x659.png" alt="" data-id="36785" data-full-url="https://foojay.io/wp-content/uploads/2021/01/mock-cpu-graph.png" data-link="https://foojay.io/?attachment_id=36785" class="wp-image-36785">
-   </figure></li>
- </ul>
- <figcaption class="blocks-gallery-caption">
-  Screenshots of the application with "Mock Data"
- </figcaption>
-</figure>
+{{< gallery cols="3" caption=`Screenshots of the application with "Mock Data"` >}}
+mock-selection-1024x462.png
+mock-overview-1024x599.png
+mock-cpu-graph-1024x659.png
+{{< /gallery >}}
 
 ### Running the Application with Real Data
 

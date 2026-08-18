@@ -113,16 +113,10 @@ I'm probably a bit old-fashioned, but I still prefer paper books. I'm always dis
 
 This book provides a lot of information on a limited number of pages, so there are many references to websites where you can find more information. It would have been nice if a few of those had been handled more in detail, especially the Kotlin-specific parts, such as the Kotlin Coroutines.
 
-<figure class="wp-block-gallery has-nested-images columns-default is-cropped wp-block-gallery-1 is-layout-flex wp-block-gallery-is-layout-flex">
- <figure class="wp-block-image size-large">
-  <a href="content-animating.jpg" target="_blank" rel="noopener"><img decoding="async" width="1024" height="578" data-id="110883" src="content-animating-1024x578.jpg" alt="" class="wp-image-110883"></a>
- </figure>
- <figure class="wp-block-image size-large">
-  <a href="books-side-by-side.jpg" target="_blank" rel="noopener"><img decoding="async" width="1024" height="578" data-id="110885" src="books-side-by-side-1024x578.jpg" alt="" class="wp-image-110885"></a>
- </figure>
- <figure class="wp-block-image size-large">
-  <a href="books-on-top.jpg" target="_blank" rel="noopener"><img loading="lazy" decoding="async" width="1024" height="577" data-id="110884" src="books-on-top-1024x577.jpg" alt="" class="wp-image-110884"></a>
- </figure>
-</figure>
+{{< gallery >}}
+content-animating-1024x578.jpg
+books-side-by-side-1024x578.jpg
+books-on-top-1024x577.jpg
+{{< /gallery >}}
 
 If you are new to JavaFX+Kotlin, this book is a good starting point and gives enough examples to help you understand how to create an application and benefit from Kotlin's features. If you are new to JavaFX, I would advise you to combine it with the "JavaFX Bible" written by Stephen Chin, Johan Vos, James Weaver, and many others: [The Definitive Guide to Modern Java Clients with JavaFX 17: Cross-Platform Mobile and Cloud Development](https://www.amazon.nl/Definitive-Guide-Modern-Clients-JavaFX/dp/1484272676/) (635 pages, 63€ on paper, 44.3€ for ebook on Amazon.nl). BTW this book is printed in full color! 🙂

@@ -86,22 +86,11 @@ This application renders a water molecule in JavaFX 3D.
 
 This application can load different 3D image file formats and visualize them.
 
-<figure class="wp-block-gallery columns-3 is-cropped wp-block-gallery-1 is-layout-flex wp-block-gallery-is-layout-flex">
- <ul class="blocks-gallery-grid">
-  <li class="blocks-gallery-item">
-   <figure>
-    <img loading="lazy" decoding="async" width="250" height="385" src="duke-welcome-1.jpg" alt="" data-id="36189" data-full-url="https://foojay.io/wp-content/uploads/2020/10/duke-welcome-1.jpg" data-link="https://foojay.io/?attachment_id=36189" class="wp-image-36189">
-   </figure></li>
-  <li class="blocks-gallery-item">
-   <figure>
-    <img loading="lazy" decoding="async" width="795" height="621" src="MoleculeSampleApp.png" alt="" data-id="36190" data-full-url="https://foojay.io/wp-content/uploads/2020/10/MoleculeSampleApp.png" data-link="https://foojay.io/?attachment_id=36190" class="wp-image-36190">
-   </figure></li>
-  <li class="blocks-gallery-item">
-   <figure>
-    <img loading="lazy" decoding="async" width="798" height="487" src="3DViewer.png" alt="" data-id="36188" data-full-url="https://foojay.io/wp-content/uploads/2020/10/3DViewer.png" data-link="https://foojay.io/?attachment_id=36188" class="wp-image-36188">
-   </figure></li>
- </ul>
-</figure>
+{{< gallery cols="3" >}}
+duke-welcome-1.jpg
+MoleculeSampleApp.png
+3DViewer.png
+{{< /gallery >}}
 
 ### **Build and run on PC**
 

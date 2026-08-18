@@ -47,17 +47,9 @@ In this article I will show you how to create a GitHub Actions workflow from scr
 
 If you have forked ![Fork Button](Screen-Shot-2021-10-21-at-9.40.06-AM.png) an existing project that may or may not contain a workflow (having GitHub Actions) you will still need to activate GitHub Actions on your fork as shown below:
 
-<figure class="wp-block-gallery columns-1 is-cropped wp-block-gallery-1 is-layout-flex wp-block-gallery-is-layout-flex">
- <ul class="blocks-gallery-grid">
-  <li class="blocks-gallery-item">
-   <figure>
-    <img loading="lazy" decoding="async" width="876" height="327" src="Activate_GH_Action_of_Fork.png" alt="" data-id="50500" data-full-url="https://foojay.io/wp-content/uploads/2021/10/Activate_GH_Action_of_Fork.png" data-link="https://foojay.io/?attachment_id=50500" class="wp-image-50500">
-   </figure></li>
- </ul>
- <figcaption class="blocks-gallery-caption">
-  Activating GitHub Actions on a Forked project
- </figcaption>
-</figure>
+{{< gallery cols="1" caption="Activating GitHub Actions on a Forked project" >}}
+Activate_GH_Action_of_Fork.png
+{{< /gallery >}}
 
 ## Yaml Loves You
 

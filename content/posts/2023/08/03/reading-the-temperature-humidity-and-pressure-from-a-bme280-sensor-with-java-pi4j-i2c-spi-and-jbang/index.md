@@ -70,14 +70,10 @@ In my example, the sensor in a version of [Adafruit](https://www.adafruit.com/pr
 
 You can control the sensor both with I2C and SPI, so there are two wirings provided.
 
-<figure class="wp-block-gallery has-nested-images columns-2 is-cropped wp-block-gallery-1 is-layout-flex wp-block-gallery-is-layout-flex">
- <figure class="wp-block-image size-large">
-  <a href="bme280_wiring_i2c_breadboard.png" target="_blank" rel="noopener"><img fetchpriority="high" decoding="async" width="852" height="563" data-id="101450" src="bme280_wiring_i2c_breadboard.png" alt="" class="wp-image-101450"></a>
- </figure>
- <figure class="wp-block-image size-large">
-  <a href="bme280_wiring_spi_breadboard.png" target="_blank" rel="noopener"><img decoding="async" width="611" height="652" data-id="101451" src="bme280_wiring_spi_breadboard.png" alt="" class="wp-image-101451"></a>
- </figure>
-</figure>
+{{< gallery cols="2" >}}
+bme280_wiring_i2c_breadboard.png
+bme280_wiring_spi_breadboard.png
+{{< /gallery >}}
 
 ### Java Code
 

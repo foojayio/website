@@ -37,17 +37,11 @@ As the FHNW University uses this OS in different courses, and the Pi4J project p
 
 For all the info about what's included in each version, check the overview on [pi4j.com/pi4j-os](https://pi4j.com/pi4j-os/).
 
-<figure class="wp-block-gallery has-nested-images columns-default is-cropped wp-block-gallery-1 is-layout-flex wp-block-gallery-is-layout-flex">
- <figure class="wp-block-image size-large">
-  <img fetchpriority="high" decoding="async" width="1024" height="577" data-id="101715" src="desktop-with-ip-info-1024x577.png" alt="" class="wp-image-101715">
- </figure>
- <figure class="wp-block-image size-large">
-  <img decoding="async" width="1024" height="396" data-id="101713" src="pure-javafx-example-1024x396.png" alt="" class="wp-image-101713">
- </figure>
- <figure class="wp-block-image size-large">
-  <img decoding="async" width="1024" height="768" data-id="101714" src="pure-javafx-kiosk-1024x768.jpg" alt="" class="wp-image-101714">
- </figure>
-</figure>
+{{< gallery >}}
+desktop-with-ip-info-1024x577.png
+pure-javafx-example-1024x396.png
+pure-javafx-kiosk-1024x768.jpg
+{{< /gallery >}}
 
 ## History of the project
 

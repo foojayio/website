@@ -549,7 +549,9 @@ body[data-nav-open="true"] .nav-backdrop { opacity: 1; visibility: visible; }
   margin-top: 2.5rem; padding-top: 1.5rem; border-top: 1px solid var(--border);
 }
 .related-posts h3 { font-size: 1.1rem; text-transform: uppercase; letter-spacing: .08em; }
-.related-posts ul { list-style: none; margin: 0; padding: 0; display: grid; gap: .5rem; }
+/* A real bulleted list -- markers need display: list-item, so no grid here. */
+.related-posts ul { list-style: disc; margin: 0; padding-left: 1.25rem; }
+.related-posts li { margin: .4rem 0; }
 .related-posts a { font-family: var(--font-display); font-weight: 600; color: var(--ink); }
 .related-posts a:hover { color: var(--brand-accent-strong); }
 
@@ -953,9 +955,11 @@ body[data-nav-open="true"] .nav-backdrop { opacity: 1; visibility: visible; }
    uncomment this to invert the single asset.
    :root[data-theme="dark"] .logo__img { filter: invert(1) hue-rotate(180deg); } */
 
-/* --- Preserved WordPress inline image formatting (floats, resized, galleries) ---
-   ConvertPosts/ConvertPages keep these as raw HTML instead of Markdown so the
-   float / dimensions / caption / gallery grid survive. */
+/* --- WordPress inline image formatting (floats, resized, captions) ---------
+   Emitted by the {{< img >}} shortcode, or kept as raw HTML where the float /
+   dimensions / caption would not survive Markdown. Galleries are NOT here --
+   they are the {{< gallery >}} shortcode below, for migrated and new posts
+   alike. */
 .prose .alignleft { float: left; margin: 0.3rem 1.4rem 1rem 0; }
 .prose .alignright { float: right; margin: 0.3rem 0 1rem 1.4rem; }
 .prose .aligncenter { display: block; margin-inline: auto; }
@@ -963,22 +967,11 @@ body[data-nav-open="true"] .nav-backdrop { opacity: 1; visibility: visible; }
 .prose figure { margin: 1.5rem 0; }
 .prose figure img, .prose img.alignleft, .prose img.alignright { height: auto; max-width: 100%; }
 .prose figcaption, .prose .wp-element-caption { font-size: 0.85em; opacity: 0.72; text-align: center; margin-top: 0.4rem; }
-.prose .wp-block-gallery { display: flex; flex-wrap: wrap; gap: 0.6rem; margin: 1.5rem 0; padding: 0; list-style: none; }
-.prose .wp-block-gallery figure { flex: 1 1 45%; margin: 0; }
-.prose .wp-block-gallery img { width: 100%; height: auto; }
-/* Older WordPress galleries nest a <ul class="blocks-gallery-grid"> inside the
-   .wp-block-gallery figure, so the rule above hits the <ul> rather than the
-   images and those 15 posts rendered as a plain bulleted list. Flatten the list
-   and let its items be the grid cells. */
-.prose .blocks-gallery-grid { display: flex; flex-wrap: wrap; gap: 0.6rem; width: 100%; margin: 0; padding: 0; list-style: none; }
-.prose .blocks-gallery-item { flex: 1 1 45%; margin: 0; list-style: none; }
-.prose .blocks-gallery-item figure { flex: none; width: 100%; }
-.prose .blocks-gallery-caption { flex-basis: 100%; }
 
 /* --- {{< gallery >}} shortcode (layouts/shortcodes/gallery.html) ------------
-   What an author writing a NEW post uses. auto-fit means --gallery-cols is a
-   maximum: cells reflow to fewer columns as the container narrows, so no media
-   query is needed and a 3-column gallery becomes 1 column on a phone. */
+   Every gallery on the site, migrated or new. auto-fit means --gallery-cols is
+   a maximum: cells reflow to fewer columns as the container narrows, so no
+   media query is needed and a 3-column gallery becomes 1 column on a phone. */
 .prose .gallery {
   --gallery-gap: 0.8rem;
   display: grid;
@@ -992,6 +985,8 @@ body[data-nav-open="true"] .nav-backdrop { opacity: 1; visibility: visible; }
 }
 .prose .gallery__item { margin: 0; }
 .prose .gallery__item img { width: 100%; height: auto; display: block; border-radius: 4px; }
+/* One caption for the whole gallery, under the grid rather than in a cell. */
+.prose .gallery__caption { margin-top: 0.6rem; }
 .prose figure::after { content: ""; display: block; clear: both; }
 
 /* ---------------------------------------------------------------- search --
@@ -1045,6 +1040,13 @@ body[data-nav-open="true"] .nav-backdrop { opacity: 1; visibility: visible; }
 .lightbox__img { max-width: 96vw; max-height: 92vh; width: auto; height: auto; border-radius: 4px; box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5); cursor: zoom-out; }
 .lightbox__close { position: absolute; top: 0.75rem; right: 1.25rem; background: none; border: 0; color: #fff; font-size: 2.4rem; line-height: 1; cursor: pointer; padding: 0.25rem 0.5rem; }
 .lightbox__close:hover { opacity: 0.8; }
+/* Step through the page's images. Sized for a thumb on a phone, and kept off
+   the image itself so a wide picture is never covered by an arrow. */
+.lightbox__nav { position: absolute; top: 50%; transform: translateY(-50%); z-index: 1; background: rgba(0, 0, 0, 0.35); border: 0; color: #fff; font-size: 2.6rem; line-height: 1; cursor: pointer; padding: 0.4rem 0.9rem; border-radius: 4px; }
+.lightbox__nav:hover { background: rgba(0, 0, 0, 0.6); }
+.lightbox__nav--prev { left: 0.4rem; }
+.lightbox__nav--next { right: 0.4rem; }
+.lightbox__nav[hidden] { display: none; }
 body.lightbox-open { overflow: hidden; }
 
 /* --- Post header: circular hero thumbnail floated left of the title.

@@ -29,26 +29,11 @@ Based on many inputs, Trinity helps evaluate whether machine learning models pro
 
 Trinity allows users to navigate and explore hundreds of layers in AI models and hyper-dimensional data by visualizing them in 3D.
 
-<figure class="wp-block-gallery has-nested-images columns-default is-cropped wp-block-gallery-1 is-layout-flex wp-block-gallery-is-layout-flex">
- <figure class="wp-block-image size-large">
-  <a href="trinity-skyline.png" target="_blank" rel="noopener"><img fetchpriority="high" decoding="async" width="1024" height="576" data-id="61170" src="trinity-skyline-1024x576.png" alt="" class="wp-image-61170"></a>
-  <figcaption>
-   Trinity intro and main menu
-  </figcaption>
- </figure>
- <figure class="wp-block-image size-large">
-  <a href="trinity-hyperspace.png" target="_blank" rel="noopener"><img decoding="async" width="1024" height="576" data-id="61169" src="trinity-hyperspace-1024x576.png" alt="" class="wp-image-61169"></a>
-  <figcaption>
-   Trinity Hyperspace Tool
-  </figcaption>
- </figure>
- <figure class="wp-block-image size-large">
-  <a href="trinity-hypersurface.png" target="_blank" rel="noopener"><img decoding="async" width="1024" height="576" data-id="61168" src="trinity-hypersurface-1024x576.png" alt="" class="wp-image-61168"></a>
-  <figcaption>
-   Trinity Hypersurface Tool
-  </figcaption>
- </figure>
-</figure>
+{{< gallery >}}
+trinity-skyline-1024x576.png | Trinity intro and main menu
+trinity-hyperspace-1024x576.png | Trinity Hyperspace Tool
+trinity-hypersurface-1024x576.png | Trinity Hypersurface Tool
+{{< /gallery >}}
 
 ## Project History
 

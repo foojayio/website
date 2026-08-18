@@ -29,18 +29,10 @@ Igor shared this [nice video where he set up a Kafka cluster on Raspberry Pi](ht
 
 This week he also published a very nice example using [Quarkus, Qute, and Pi4J to control a LED number display](http://www.igfasouza.com/blog/quarkus-qute-with-raspberry-pi/). The [sources for this project are also available on GitHub](https://github.com/igfasouza/qute-example-pi4j).
 
-<figure class="wp-block-gallery columns-2 is-cropped wp-block-gallery-1 is-layout-flex wp-block-gallery-is-layout-flex">
- <ul class="blocks-gallery-grid">
-  <li class="blocks-gallery-item">
-   <figure>
-    <img fetchpriority="high" decoding="async" width="300" height="260" src="igor-souza-kafka-300x260.png" alt="" data-id="35391" data-full-url="https://foojay.io/wp-content/uploads/2020/09/igor-souza-kafka.png" data-link="https://foojay.io/?attachment_id=35391" class="wp-image-35391">
-   </figure></li>
-  <li class="blocks-gallery-item">
-   <figure>
-    <img decoding="async" width="300" height="260" src="igor-souza-realtimebus-300x260.png" alt="" data-id="35392" data-full-url="https://foojay.io/wp-content/uploads/2020/09/igor-souza-realtimebus.png" data-link="https://foojay.io/?attachment_id=35392" class="wp-image-35392">
-   </figure></li>
- </ul>
-</figure>
+{{< gallery cols="2" >}}
+igor-souza-kafka-300x260.png
+igor-souza-realtimebus-300x260.png
+{{< /gallery >}}
 
 {{< youtube i576hpXrglQ >}}
 
@@ -74,22 +66,11 @@ With a Raspberry Pi B+, OpenJDK 8, and Pi4J inside this radio, it became a jukeb
 
 Another project of Daniel, called "[OpenSourceLogger](https://github.com/DanielMartensson/OpenSourceLogger)" which is also shared on GitHub, provides a web application with Pi4J and Vaadin to control and measure analog inputs and outputs and store them into a MySQL database (requires a Raspberry Pi 4).
 
-<figure class="wp-block-gallery columns-3 is-cropped wp-block-gallery-2 is-layout-flex wp-block-gallery-is-layout-flex">
- <ul class="blocks-gallery-grid">
-  <li class="blocks-gallery-item">
-   <figure>
-    <img loading="lazy" decoding="async" width="800" height="653" src="Radio.jpg" alt="" data-id="35393" data-link="https://foojay.io/blog/spectacular-java-projects-on-the-raspberry-pi/radio/" class="wp-image-35393">
-   </figure></li>
-  <li class="blocks-gallery-item">
-   <figure>
-    <img loading="lazy" decoding="async" width="1024" height="711" src="opensourcelogger-1024x711.png" alt="" data-id="35400" data-link="https://foojay.io/blog/spectacular-java-projects-on-the-raspberry-pi/opensourcelogger/" class="wp-image-35400">
-   </figure></li>
-  <li class="blocks-gallery-item">
-   <figure>
-    <img loading="lazy" decoding="async" width="1024" height="753" src="opensourcelogger-wiring-1024x753.png" alt="" data-id="35401" data-full-url="https://foojay.io/wp-content/uploads/2020/09/opensourcelogger-wiring.png" data-link="https://foojay.io/blog/spectacular-java-projects-on-the-raspberry-pi/opensourcelogger-wiring/" class="wp-image-35401">
-   </figure></li>
- </ul>
-</figure>
+{{< gallery cols="3" >}}
+Radio.jpg
+opensourcelogger-1024x711.png
+opensourcelogger-wiring-1024x753.png
+{{< /gallery >}}
 
 #### [Frank Delporte](https://twitter.com/frankdelporte) - Drumbooth controller
 

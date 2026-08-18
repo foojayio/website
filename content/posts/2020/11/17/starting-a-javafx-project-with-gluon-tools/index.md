@@ -118,40 +118,21 @@ Gluon also created a [plugin for IntelliJ IDEA](https://plugins.jetbrains.com/pl
 
 In your IntelliJ IDEA, double click the SHIFT key to open the universal search box and type "Plugins" and select the first option. Now you can search in the marketplace and install the Gluon plugin.
 
-<figure class="wp-block-gallery columns-2 is-cropped wp-block-gallery-1 is-layout-flex wp-block-gallery-is-layout-flex">
- <ul class="blocks-gallery-grid">
-  <li class="blocks-gallery-item">
-   <figure>
-    <a href="intellij-plugins.png"><img loading="lazy" decoding="async" width="300" height="260" src="intellij-plugins-300x260.png" alt="" data-id="36317" data-full-url="https://foojay.io/wp-content/uploads/2020/11/intellij-plugins.png" data-link="https://foojay.io/?attachment_id=36317" class="wp-image-36317"></a>
-   </figure></li>
-  <li class="blocks-gallery-item">
-   <figure>
-    <a href="intellij-plugins-marketplace.png"><img loading="lazy" decoding="async" width="300" height="260" src="intellij-plugins-marketplace-300x260.png" alt="" data-id="36318" data-full-url="https://foojay.io/wp-content/uploads/2020/11/intellij-plugins-marketplace.png" data-link="https://foojay.io/?attachment_id=36318" class="wp-image-36318"></a>
-   </figure></li>
- </ul>
-</figure>
+{{< gallery cols="2" >}}
+intellij-plugins-300x260.png
+intellij-plugins-marketplace-300x260.png
+{{< /gallery >}}
 
 Starting a new mobile JavaFX project now has become a very easy process. From the main menu select File \> New \> Project. In the left list, you will now find "Gluon" and four different options for a new project.
 ![](intellij-new-project.png)
 
 In the next windows, you can select different options, Maven or Gradle, names of the pre-created first and second view,... Once the project is created and opened in IntelliJ IDEA, you can run it with `mvn javafx:run`.
 
-<figure class="wp-block-gallery columns-3 is-cropped wp-block-gallery-2 is-layout-flex wp-block-gallery-is-layout-flex">
- <ul class="blocks-gallery-grid">
-  <li class="blocks-gallery-item">
-   <figure>
-    <a href="intellij-new-project-1.png"><img loading="lazy" decoding="async" width="983" height="637" src="intellij-new-project-1.png" alt="" data-id="36320" data-full-url="https://foojay.io/wp-content/uploads/2020/11/intellij-new-project-1.png" data-link="https://foojay.io/?attachment_id=36320" class="wp-image-36320"></a>
-   </figure></li>
-  <li class="blocks-gallery-item">
-   <figure>
-    <a href="intellij-new-project-run.png"><img loading="lazy" decoding="async" width="1024" height="666" src="intellij-new-project-run-1024x666.png" alt="" data-id="36321" data-full-url="https://foojay.io/wp-content/uploads/2020/11/intellij-new-project-run.png" data-link="https://foojay.io/?attachment_id=36321" class="wp-image-36321"></a>
-   </figure></li>
-  <li class="blocks-gallery-item">
-   <figure>
-    <a href="intellij-new-project-views.png"><img loading="lazy" decoding="async" width="985" height="430" src="intellij-new-project-views.png" alt="" data-id="36322" data-full-url="https://foojay.io/wp-content/uploads/2020/11/intellij-new-project-views.png" data-link="https://foojay.io/?attachment_id=36322" class="wp-image-36322"></a>
-   </figure></li>
- </ul>
-</figure>
+{{< gallery cols="3" >}}
+intellij-new-project-1.png
+intellij-new-project-run-1024x666.png
+intellij-new-project-views.png
+{{< /gallery >}}
 
 As you can see in this video, within 30 seconds you have a new JavaFX project opened in IntelliJ IDEA which you can immediately run and test.
 

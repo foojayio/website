@@ -112,17 +112,11 @@ public class CustomStreamingResponseHandler {
 }
 ```
 
-<figure class="wp-block-gallery has-nested-images columns-default is-cropped wp-block-gallery-1 is-layout-flex wp-block-gallery-is-layout-flex">
- <figure class="wp-block-image size-large">
-  <a href="langchain4j-code.png" target="_blank" rel="noopener"><img fetchpriority="high" decoding="async" width="1024" height="566" data-id="106477" src="langchain4j-code-1024x566.png" alt="" class="wp-image-106477"></a>
- </figure>
- <figure class="wp-block-image size-large">
-  <a href="langchain4j-question-javafx.png" target="_blank" rel="noopener"><img decoding="async" width="1024" height="372" data-id="106478" src="langchain4j-question-javafx-1024x372.png" alt="" class="wp-image-106478"></a>
- </figure>
- <figure class="wp-block-image size-large">
-  <a href="langchain4j-question-story.png" target="_blank" rel="noopener"><img loading="lazy" decoding="async" width="1024" height="371" data-id="106476" src="langchain4j-question-story-1024x371.png" alt="" class="wp-image-106476"></a>
- </figure>
-</figure>
+{{< gallery >}}
+langchain4j-code-1024x566.png
+langchain4j-question-javafx-1024x372.png
+langchain4j-question-story-1024x371.png
+{{< /gallery >}}
 
 ## Chat With the Azul Documentation
 
@@ -290,17 +284,11 @@ void ask(SearchAction action) {
 }
 ```
 
-<figure class="wp-block-gallery has-nested-images columns-default is-cropped wp-block-gallery-2 is-layout-flex wp-block-gallery-is-layout-flex">
- <figure class="wp-block-image size-large">
-  <a href="langchain4j-docs-azul-home.png" target="_blank" rel="noopener"><img loading="lazy" decoding="async" width="1024" height="722" data-id="106480" src="langchain4j-docs-azul-home-1024x722.png" alt="" class="wp-image-106480"></a>
- </figure>
- <figure class="wp-block-image size-large">
-  <a href="langchain4j-docs-azul-json.png" target="_blank" rel="noopener"><img loading="lazy" decoding="async" width="1024" height="486" data-id="106481" src="langchain4j-docs-azul-json-1024x486.png" alt="" class="wp-image-106481"></a>
- </figure>
- <figure class="wp-block-image size-large">
-  <a href="langchain4j-docs-what-is-prime.png" target="_blank" rel="noopener"><img loading="lazy" decoding="async" width="1024" height="609" data-id="106479" src="langchain4j-docs-what-is-prime-1024x609.png" alt="" class="wp-image-106479"></a>
- </figure>
-</figure>
+{{< gallery >}}
+langchain4j-docs-azul-home-1024x722.png
+langchain4j-docs-azul-json-1024x486.png
+langchain4j-docs-what-is-prime-1024x609.png
+{{< /gallery >}}
 
 ## Conclusion
 

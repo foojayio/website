@@ -98,17 +98,11 @@ Connections between PBOE and LED strip:
 
 The following pictures show you the connections with one LED strip on channel 0 of the PBOE:
 
-<figure class="wp-block-gallery has-nested-images columns-default is-cropped wp-block-gallery-1 is-layout-flex wp-block-gallery-is-layout-flex">
- <figure class="wp-block-image size-large">
-  <img fetchpriority="high" decoding="async" width="1024" height="768" data-id="102722" src="full-setup-1024x768.jpg" alt="" class="wp-image-102722">
- </figure>
- <figure class="wp-block-image size-large">
-  <img decoding="async" width="768" height="1024" data-id="102721" src="pixelblaze-output-expander-768x1024.jpg" alt="" class="wp-image-102721">
- </figure>
- <figure class="wp-block-image size-large">
-  <img loading="lazy" decoding="async" width="1024" height="768" data-id="102723" src="raspberry-pi-connections-1024x768.jpg" alt="" class="wp-image-102723">
- </figure>
-</figure>
+{{< gallery >}}
+full-setup-1024x768.jpg
+pixelblaze-output-expander-768x1024.jpg
+raspberry-pi-connections-1024x768.jpg
+{{< /gallery >}}
 
 ## Sample Application
 
@@ -283,14 +277,9 @@ Closing /dev/ttyS0
 
 This is only a short introduction, the [Pi4J website offers more detailed information and extra examples](https://pi4j.com/examples/jbang/), including the use of LED matrixes and a JavaFX user interface to define the colors being displayed on a LED strip.
 
-<figure class="wp-block-gallery has-nested-images columns-default is-cropped wp-block-gallery-2 is-layout-flex wp-block-gallery-is-layout-flex">
- <figure class="wp-block-image size-large">
-  <img loading="lazy" decoding="async" width="1024" height="589" data-id="102725" src="javafx-ui-1024x589.png" alt="" class="wp-image-102725">
- </figure>
- <figure class="wp-block-image size-large">
-  <img loading="lazy" decoding="async" width="1024" height="473" data-id="102724" src="matrix-line-1024x473.jpg" alt="" class="wp-image-102724">
- </figure>
- <figure class="wp-block-image size-large">
-  <img loading="lazy" decoding="async" width="1024" height="473" data-id="102726" src="matrix-test-1024x473.jpg" alt="" class="wp-image-102726">
- </figure>
-</figure>
+{{< gallery >}}
+javafx-ui-1024x589.png
+matrix-line-1024x473.jpg
+matrix-test-1024x473.jpg
+{{< /gallery >}}
+

@@ -1,56 +1,90 @@
 {{- /* Image gallery -- a responsive grid of co-located images.
 
-       WHY THIS EXISTS. 55 migrated posts contain galleries, but only as raw
-       WordPress block HTML (<figure class="wp-block-gallery"> with nested
-       figures, or the older <ul class="blocks-gallery-grid">). That markup is
-       preserved verbatim by HtmlToMarkdown's SELECTOR_PRESERVE so those posts
-       keep working, but nobody can be asked to TYPE it -- which left an author
-       writing a new post with no way to make a gallery at all. This is that way.
+       USAGE -- one image per line, filename first:
 
-       USAGE -- positional, for the common case:
-           {{< gallery "one.png" "two.png" "three.png" >}}
+           {{< gallery >}}
+           one.png
+           two.png | An optional caption
+           {{< /gallery >}}
 
-       Or named, when you want to set the column count or add captions
-       (a `|` separates a filename from its caption):
-           {{< gallery images="one.png|First shot, two.png|Second shot" cols="3" >}}
+       A `|` separates the filename from its caption, and a second `|` adds alt
+       text when it should differ from the caption (rare -- the caption is used
+       as the alt text otherwise). Because each image is on its own line there
+       is nothing to quote or escape: commas, quotes and colons in a caption are
+       all just text.
+
+       Optional attributes on the opening tag:
+
+           {{< gallery cols="2" caption="One caption for the whole gallery" >}}
+
+       cols is a MAXIMUM, not a fixed count: the grid uses auto-fit, so images
+       reflow to fewer columns on a narrow screen, and a gallery never opens
+       more columns than it has images. Default 3.
+
+       There is also a one-line form for the simple case. Note the closing `/`
+       -- this template reads .Inner, so Hugo requires every call to be either
+       closed (above) or self-closed (here):
+
+           {{< gallery "one.png" "two.png" />}}
 
        Filenames resolve through resource-url.html, so a bare name means "the
        file sitting next to index.md in this post's folder" -- the same rule as
        a plain Markdown image. Full URLs and /static paths work too.
 
-       cols is a MAXIMUM, not a fixed count: the grid uses auto-fit, so the
-       images reflow to fewer columns on a narrow screen. Default 3.
-
        Images are click-to-enlarge for free -- static/js/lightbox.js binds every
-       `.prose img`, so no per-image markup is needed here. */ -}}
+       `.prose img`, so no per-image markup is needed here. Where a filename
+       carries WordPress's `-1024x768` size suffix and the full-size original
+       sits in the same bundle, the image is wrapped in a link to that original
+       so the lightbox opens the full-size version instead of the thumbnail --
+       derived rather than asked for, which is what the migrated WordPress
+       galleries used to spell out as <a href> markup. */ -}}
+
+{{- /* Items: positional args on a self-closed call, otherwise one per line. */ -}}
+{{- $items := slice -}}
+{{- if and (not .IsNamedParams) .Params -}}
+  {{- range .Params }}{{ with trim . " " }}{{ $items = $items | append . }}{{ end }}{{ end -}}
+{{- else -}}
+  {{- range split .Inner "\n" }}{{ with trim . " \t\r" }}{{ $items = $items | append . }}{{ end }}{{ end -}}
+{{- end -}}
 
 {{- $cols := int (.Get "cols" | default 3) -}}
 {{- if or (lt $cols 1) (gt $cols 6) }}{{ $cols = 3 }}{{ end -}}
-
-{{- /* Named `images="a.png, b.png"` wins; otherwise take the positional args. */ -}}
-{{- $items := slice -}}
-{{- with .Get "images" -}}
-  {{- range split . "," -}}
-    {{- with trim . " " }}{{ $items = $items | append . }}{{ end -}}
-  {{- end -}}
-{{- else -}}
-  {{- range .Params }}{{ with trim . " " }}{{ $items = $items | append . }}{{ end }}{{ end -}}
-{{- end -}}
+{{- /* Never open more columns than there are images, or a two-image gallery
+       renders two thirds of a row wide and a third of one empty. */ -}}
+{{- if and $items (lt (len $items) $cols) }}{{ $cols = len $items }}{{ end -}}
 
 {{- if $items -}}
-<div class="gallery" style="--gallery-cols: {{ $cols }}">
+<figure class="gallery" style="--gallery-cols: {{ $cols }}">
   {{- range $items -}}
     {{- $parts := split . "|" -}}
     {{- $file := trim (index $parts 0) " " -}}
     {{- $caption := "" -}}
     {{- if gt (len $parts) 1 }}{{ $caption = trim (index $parts 1) " " }}{{ end -}}
+    {{- $alt := $caption -}}
+    {{- if gt (len $parts) 2 }}{{ $alt = trim (index $parts 2) " " }}{{ end -}}
     {{- $src := partial "resource-url.html" (dict "page" $.Page "src" $file) -}}
+    {{- /* Full-size original of a WordPress `name-800x600.png` thumbnail:
+           `name.png`, or `name-scaled.png` for the ones WP downscaled on
+           upload. Only when it really is in this bundle. */ -}}
+    {{- $full := "" -}}
+    {{- if findRE `-\d+x\d+\.[a-zA-Z0-9]+$` $file -}}
+      {{- $base := replaceRE `-\d+x\d+(\.[a-zA-Z0-9]+)$` "$1" $file -}}
+      {{- $scaled := replaceRE `(\.[a-zA-Z0-9]+)$` "-scaled$1" $base -}}
+      {{- with $.Page.Resources.GetMatch $base -}}
+        {{- $full = .RelPermalink -}}
+      {{- else -}}
+        {{- with $.Page.Resources.GetMatch $scaled }}{{ $full = .RelPermalink }}{{ end -}}
+      {{- end -}}
+    {{- end -}}
     <figure class="gallery__item">
-      <img src="{{ $src }}" alt="{{ $caption }}" loading="lazy" class="is-zoomable">
+      {{- with $full }}<a href="{{ . }}">{{ end -}}
+      <img src="{{ $src }}" alt="{{ $alt }}" loading="lazy" class="is-zoomable">
+      {{- with $full }}</a>{{ end -}}
       {{- with $caption }}<figcaption class="wp-element-caption">{{ . }}</figcaption>{{ end -}}
     </figure>
   {{- end -}}
-</div>
+  {{- with .Get "caption" }}<figcaption class="gallery__caption">{{ . }}</figcaption>{{ end -}}
+</figure>
 {{- else -}}
-  {{- errorf "gallery shortcode in %q: no images given. Use {{< gallery \"a.png\" \"b.png\" >}} or images=\"a.png,b.png\"" $.Page.File.Path -}}
+  {{- errorf "gallery shortcode in %q: no images given. Put one filename per line between {{< gallery >}} and {{< /gallery >}}" $.Page.File.Path -}}
 {{- end -}}

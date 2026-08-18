@@ -40,22 +40,11 @@ Work is ongoing for a totally refactored V2 which will bring modules and improve
 
 Robert is the founding father of the Pi4J project. He started in 2012 and quickly got a lot of attention from the Java community. Pi4J is now actively in use in a lot of projects. He also presented his work in the Devoxx 2014 and Oracle Code One 2019 conferences.
 
-<figure class="wp-block-gallery columns-3 is-cropped wp-block-gallery-1 is-layout-flex wp-block-gallery-is-layout-flex">
- <ul class="blocks-gallery-grid">
-  <li class="blocks-gallery-item">
-   <figure>
-    <img decoding="async" width="1024" height="901" src="github-pi4j-search-1024x901.png" alt="" data-id="44976" data-full-url="https://foojay.io/wp-content/uploads/2021/05/github-pi4j-search.png" data-link="https://foojay.io/?attachment_id=44976" class="wp-image-44976">
-   </figure></li>
-  <li class="blocks-gallery-item">
-   <figure>
-    <img decoding="async" width="1024" height="768" src="robert-savage-devoxx-2014-1024x768.jpg" alt="" data-id="44977" data-full-url="https://foojay.io/wp-content/uploads/2021/05/robert-savage-devoxx-2014-scaled.jpg" data-link="https://foojay.io/?attachment_id=44977" class="wp-image-44977">
-   </figure></li>
-  <li class="blocks-gallery-item">
-   <figure>
-    <img loading="lazy" decoding="async" width="800" height="973" src="robert-savage.png" alt="" data-id="44978" data-full-url="https://foojay.io/wp-content/uploads/2021/05/robert-savage.png" data-link="https://foojay.io/?attachment_id=44978" class="wp-image-44978">
-   </figure></li>
- </ul>
-</figure>
+{{< gallery cols="3" >}}
+github-pi4j-search-1024x901.png
+robert-savage-devoxx-2014-1024x768.jpg
+robert-savage.png
+{{< /gallery >}}
 
 **The very first version of Pi4J dates from 2012. What was your trigger to start using Java on the Raspberry Pi and build this framework?**
 

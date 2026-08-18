@@ -132,15 +132,25 @@ do anything for that.
 
 ### Image gallery
 
-Several images as a responsive grid — just list the filenames:
+Several images as a responsive grid — one filename per line. A `|` adds a
+caption to an image:
 
-{{< gallery "one.png" "two.png" "three.png" >}}
+{{< gallery >}}
+one.png
+two.png | The second one
+three.png
+{{< /gallery >}}
 
-Want captions, or a different number of columns? Use the named form. A `|`
-separates a filename from its caption, and `cols` is a *maximum* — the grid
-still drops to fewer columns on a phone:
+`cols` sets the number of columns (default 3, and a *maximum* — the grid still
+drops to fewer columns on a phone), and `caption` writes one caption under the
+whole gallery:
 
-{{< gallery images="one.png|The first one, two.png|The second one" cols="2" >}}
+{{< gallery cols="2" caption="Our setup for the recording" >}}
+one.png
+two.png
+{{< /gallery >}}
+
+Clicking an image enlarges it, so no thumbnails or links are needed.
 
 ### YouTube video
 

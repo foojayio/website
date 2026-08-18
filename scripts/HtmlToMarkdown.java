@@ -53,15 +53,22 @@ public final class HtmlToMarkdown {
     // Markdown, because Markdown can't represent what makes them special:
     //   - [data-pym-src] / iframe / .wp-block-embed
     //       widgets & embeds whose tag/class/attributes are load-bearing
-    //   - floated images (align left/right), resized / smaller images
-    //     (is-resized, size-medium/thumbnail) and galleries -- Markdown's
-    //     ![](...) drops the float, the dimensions, the <figcaption> and the
-    //     gallery grid, so these keep their original WordPress HTML.
+    //   - floated images (align left/right) and resized / smaller images
+    //     (is-resized, size-medium/thumbnail) -- Markdown's ![](...) drops the
+    //     float, the dimensions and the <figcaption>. Those go through the
+    //     {{< img >}} shortcode below rather than staying raw.
     // (The image src inside them is still localized first, in localizeImages.)
-    // Kept as raw HTML: code widgets, embeds and galleries (multi-image, complex).
     private static final String SELECTOR_PRESERVE = String.join(", ",
             "[data-pym-src]", "iframe",
-            "figure.wp-block-embed", ".wp-block-embed",
+            "figure.wp-block-embed", ".wp-block-embed");
+    // WordPress galleries -> {{< gallery >}} shortcode (see shortcodes/gallery.html).
+    // Both block shapes: the modern figure-of-figures and the older one nesting a
+    // <ul class="blocks-gallery-grid">. A gallery is a list of filenames with the
+    // odd caption, so that is what lands in content/ -- 30 lines of WordPress
+    // block markup is not something a contributor can be asked to type, and the
+    // grid, the lightbox and the link to the full-size original are the theme's
+    // job to supply rather than the author's to spell out.
+    private static final String SELECTOR_GALLERY = String.join(", ",
             ".wp-block-gallery", "figure.gallery", ".gallery");
     // Single formatted images (float / resized / captioned). These become a
     // {{< img >}} shortcode (see shortcodes/img.html) rather than raw HTML, so the
@@ -71,6 +78,9 @@ public final class HtmlToMarkdown {
             "figure.alignleft", "figure.alignright", "img.alignleft", "img.alignright",
             "figure.is-resized", "img.is-resized",
             "figure.size-medium", "figure.size-thumbnail", "img.size-medium", "img.size-thumbnail");
+    // WordPress's column count for a gallery block: `columns-3`. `columns-default`
+    // does not match on purpose -- it means "however many the theme picks".
+    private static final Pattern GALLERY_COLUMNS = Pattern.compile("\\bcolumns-([1-9])\\b");
     private static final Pattern FORMATTING_CLASS = Pattern.compile("align(?:left|right|center)|size-[\\w-]+|is-resized");
     private static final String PRESERVE_TOKEN = "PRESERVEDHTMLBLOCKZZ";
     private static final String PRESERVE_TOKEN_END = "ZZEND";
@@ -221,8 +231,17 @@ public final class HtmlToMarkdown {
             if (!fixed.equals(text)) code.text(fixed);
         }
 
-        // Code widgets, embeds and galleries -> raw HTML (done before the image
-        // pass so a gallery's inner images aren't turned into standalone shortcodes).
+        // Galleries -> {{< gallery >}}. Before both passes below, so a gallery's
+        // own images are never lifted out of it as standalone shortcodes.
+        for (Element el : outermostMatches(content, SELECTOR_GALLERY)) {
+            String shortcode = galleryShortcode(el);
+            if (shortcode == null) continue; // no images in it -- leave it to the passes below
+            String token = PRESERVE_TOKEN + preserved.size() + PRESERVE_TOKEN_END;
+            preserved.add(shortcode);
+            el.replaceWith(new Element("p").text(token));
+        }
+
+        // Code widgets and embeds -> raw HTML.
         for (Element el : outermostMatches(content, SELECTOR_PRESERVE)) {
             String token = PRESERVE_TOKEN + preserved.size() + PRESERVE_TOKEN_END;
             preserved.add(el.outerHtml());
@@ -436,6 +455,96 @@ public final class HtmlToMarkdown {
         appendParam(sb, "style", img.attr("style"));
         appendParam(sb, "caption", caption != null ? caption.text() : "");
         return sb.append(" >}}").toString();
+    }
+
+    /**
+     * Turns a WordPress gallery block into the {{< gallery >}} shortcode
+     * (themes/foojay/layouts/shortcodes/gallery.html), or null if it holds no
+     * images at all -- in which case the caller leaves it to the raw-HTML pass.
+     *
+     * Both WordPress shapes are handled: the modern figure-of-figures, and the
+     * older one nesting a <ul class="blocks-gallery-grid">. What survives is
+     * what the page actually shows -- the filenames in order, each image's own
+     * caption and alt text, one caption for the whole gallery, and the column
+     * count from WordPress's `columns-N` class:
+     *
+     *     {{< gallery cols="2" caption="The three views" >}}
+     *     one-1024x768.png | Its caption
+     *     two-1024x768.png | | Alt text, where it differs from the caption
+     *     {{< /gallery >}}
+     *
+     * Deliberately dropped: the <a href> WordPress wraps each image in. It
+     * points at the full-size original of the `-1024x768` thumbnail beside it,
+     * and the shortcode DERIVES that link from the filename instead (see the
+     * template), so recording it here would be storing something the build can
+     * work out. The three links to a WordPress attachment PAGE go with it --
+     * those pages don't exist after cutover, and the lightbox ignores a link
+     * that isn't an image anyway.
+     */
+    static String galleryShortcode(Element gallery) {
+        List<String> lines = new ArrayList<>();
+        for (Element img : gallery.select("img")) {
+            String src = img.attr("src").trim();
+            if (src.isEmpty()) continue;
+            String caption = ownCaption(img, gallery);
+            String alt = sanitizeField(img.attr("alt"));
+            // The caption doubles as the alt text in the template, so a third
+            // field is only written when the two genuinely differ.
+            String line = sanitizeField(src);
+            if (!alt.isEmpty() && !alt.equals(caption)) line += " | " + caption + " | " + alt;
+            else if (!caption.isEmpty()) line += " | " + caption;
+            lines.add(line);
+        }
+        if (lines.isEmpty()) return null;
+
+        StringBuilder sb = new StringBuilder("{{< gallery");
+        Matcher cm = GALLERY_COLUMNS.matcher(gallery.className());
+        // `columns-default` (WordPress's own default is 3) carries no
+        // information the template doesn't already have -- left off.
+        if (cm.find()) sb.append(" cols=\"").append(cm.group(1)).append('"');
+        String caption = sanitizeField(galleryCaption(gallery));
+        if (!caption.isEmpty()) sb.append(" caption=").append(quoteParam(caption));
+        sb.append(" >}}\n");
+        for (String line : lines) sb.append(line).append('\n');
+        return sb.append("{{< /gallery >}}").toString();
+    }
+
+    /** The caption belonging to one gallery image: the figcaption of the
+     *  <figure>/<li> wrapping it, never the gallery's own. */
+    private static String ownCaption(Element img, Element gallery) {
+        for (Element el = img.parent(); el != null && el != gallery; el = el.parent()) {
+            if (!"figure".equals(el.tagName()) && !"li".equals(el.tagName())) continue;
+            for (Element child : el.children()) {
+                if ("figcaption".equals(child.tagName())) return sanitizeField(child.text());
+            }
+        }
+        return "";
+    }
+
+    /** The caption for the gallery as a whole: WordPress marks it
+     *  `blocks-gallery-caption`, and in both shapes it is a direct child of the
+     *  gallery element (so an item's caption can never be picked up here). */
+    private static String galleryCaption(Element gallery) {
+        Element marked = gallery.selectFirst("figcaption.blocks-gallery-caption");
+        if (marked != null) return marked.text();
+        for (Element child : gallery.children()) {
+            if ("figcaption".equals(child.tagName())) return child.text();
+        }
+        return "";
+    }
+
+    /** One field of a gallery line: single-line, and free of the `|` the
+     *  template splits filename / caption / alt on. */
+    private static String sanitizeField(String value) {
+        if (value == null) return "";
+        return value.replace('|', '/').replaceAll("\\s+", " ").trim();
+    }
+
+    /** A shortcode parameter value. Hugo takes a backtick-delimited raw string,
+     *  which is what a caption containing a double quote needs -- one does. */
+    private static String quoteParam(String value) {
+        if (!value.contains("\"")) return '"' + value + '"';
+        return '`' + value.replace('`', '\'') + '`';
     }
 
     /** Keeps only the WordPress alignment/size/resize classes (drops wp-image-NN etc.). */

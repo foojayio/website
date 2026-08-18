@@ -94,18 +94,10 @@ You can get the full code from [this GitHub repository](https://github.com/igfas
 
 There are some XBM files inside the resources folder and you can follow up on the API example to display these images.
 
-<figure class="wp-block-gallery columns-2 is-cropped wp-block-gallery-1 is-layout-flex wp-block-gallery-is-layout-flex">
- <ul class="blocks-gallery-grid">
-  <li class="blocks-gallery-item">
-   <figure>
-    <a href="lcd_example02.jpg"><img loading="lazy" decoding="async" width="1024" height="404" src="lcd_example02-1024x404.jpg" alt="" data-id="44927" data-full-url="https://foojay.io/wp-content/uploads/2021/05/lcd_example02.jpg" data-link="https://foojay.io/?attachment_id=44927" class="wp-image-44927"></a>
-   </figure></li>
-  <li class="blocks-gallery-item">
-   <figure>
-    <a href="lcd_example03.jpg"><img loading="lazy" decoding="async" width="1024" height="364" src="lcd_example03-1024x364.jpg" alt="" data-id="44928" data-full-url="https://foojay.io/wp-content/uploads/2021/05/lcd_example03.jpg" data-link="https://foojay.io/?attachment_id=44928" class="wp-image-44928"></a>
-   </figure></li>
- </ul>
-</figure>
+{{< gallery cols="2" >}}
+lcd_example02-1024x404.jpg
+lcd_example03-1024x364.jpg
+{{< /gallery >}}
 
 Some additional work is still needed to finish the logic for a combobox to show all XMB files inside resources and once selected, display that image on the LCD. But as you can see in this video, the Thymeleaf table can already be used to draw an image, which can be displayed on the screen.
 

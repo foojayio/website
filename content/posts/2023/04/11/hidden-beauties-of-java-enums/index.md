@@ -45,17 +45,11 @@ A few of my "pet projects" make extensive use of Java enums, and while working o
 
 Let's take a look at a few of these use cases.
 
-<figure class="wp-block-gallery has-nested-images columns-default is-cropped wp-block-gallery-1 is-layout-flex wp-block-gallery-is-layout-flex">
- <figure class="wp-block-image size-large">
-  <a href="pi4j.png" target="_blank" rel="noopener"><img fetchpriority="high" decoding="async" width="940" height="1024" data-id="65467" src="pi4j-940x1024.png" alt="" class="wp-image-65467"></a>
- </figure>
- <figure class="wp-block-image size-large">
-  <a href="lottie4j.png" target="_blank" rel="noopener"><img decoding="async" width="1024" height="638" data-id="65468" src="lottie4j-1024x638.png" alt="" class="wp-image-65468"></a>
- </figure>
- <figure class="wp-block-image size-large">
-  <a href="4drums.png" target="_blank" rel="noopener"><img loading="lazy" decoding="async" width="1024" height="832" data-id="65466" src="4drums-1024x832.png" alt="" class="wp-image-65466"></a>
- </figure>
-</figure>
+{{< gallery >}}
+pi4j-940x1024.png
+lottie4j-1024x638.png
+4drums-1024x832.png
+{{< /gallery >}}
 
 ### Raspberry Pi Boards in an Enum Database
 

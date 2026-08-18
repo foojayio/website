@@ -25,17 +25,11 @@ In August, our family vacation brought us to Kazakhstan. An important trip, as i
 
 So finally, early this year, we decided to start organizing our trip. And it was amazing, visited different cities and national parks, and had a fantastic time.
 
-<figure class="wp-block-gallery has-nested-images columns-default is-cropped wp-block-gallery-1 is-layout-flex wp-block-gallery-is-layout-flex">
- <figure class="wp-block-image size-large">
-  <a href="foto-02.jpg" target="_blank" rel="noopener"><img fetchpriority="high" decoding="async" width="1024" height="768" data-id="114201" src="foto-02-1024x768.jpg" alt="" class="wp-image-114201"></a>
- </figure>
- <figure class="wp-block-image size-large">
-  <a href="foto-07.jpg" target="_blank" rel="noopener"><img decoding="async" width="1024" height="578" data-id="114203" src="foto-07-1024x578.jpg" alt="" class="wp-image-114203"></a>
- </figure>
- <figure class="wp-block-image size-large">
-  <a href="foto-01.jpg" target="_blank" rel="noopener"><img decoding="async" width="1024" height="768" data-id="114204" src="foto-01-1024x768.jpg" alt="" class="wp-image-114204"></a>
- </figure>
-</figure>
+{{< gallery >}}
+foto-02-1024x768.jpg
+foto-07-1024x578.jpg
+foto-01-1024x768.jpg
+{{< /gallery >}}
 
 *(yes, I may have walked around in a Foojay T-shirt and JVM cap)*
 

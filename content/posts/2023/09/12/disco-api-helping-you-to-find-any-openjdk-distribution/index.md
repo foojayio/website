@@ -51,17 +51,11 @@ The Disco API is a Java project (of course...) you can find on [GitHub](https://
 
 These endpoints are fully documented in the [README of the GitHub project](https://github.com/foojayio/discoapi) and can be called directly from a [Swagger UI](https://api.foojay.io/swagger-ui).
 
-<figure class="wp-block-gallery has-nested-images columns-default is-cropped wp-block-gallery-1 is-layout-flex wp-block-gallery-is-layout-flex">
- <figure class="wp-block-image size-large">
-  <a href="swagger-apis.png" target="_blank" rel="noopener"><img fetchpriority="high" decoding="async" width="802" height="1024" data-id="102105" src="swagger-apis-802x1024.png" alt="Overview of all the APIs in Swagger" class="wp-image-102105"></a>
- </figure>
- <figure class="wp-block-image size-large">
-  <a href="swagger-major-versions.png" target="_blank" rel="noopener"><img decoding="async" width="1024" height="678" data-id="102103" src="swagger-major-versions-1024x678.png" alt="Swagger result with all major versions" class="wp-image-102103"></a>
- </figure>
- <figure class="wp-block-image size-large">
-  <a href="swagger-packages.png" target="_blank" rel="noopener"><img loading="lazy" decoding="async" width="1024" height="623" data-id="102104" src="swagger-packages-1024x623.png" alt="Swagger result of package search" class="wp-image-102104"></a>
- </figure>
-</figure>
+{{< gallery >}}
+swagger-apis-802x1024.png |  | Overview of all the APIs in Swagger
+swagger-major-versions-1024x678.png |  | Swagger result with all major versions
+swagger-packages-1024x623.png |  | Swagger result of package search
+{{< /gallery >}}
 
 Let's look at a few examples.
 
@@ -191,17 +185,11 @@ There are several plugins and extensions available that already make use of the 
 
 JDKMon is another little tool written in JavaFX that tries to detect all JDKs installed on your machine and will inform you about new updates and vulnerabilities of each OpenJDK distribution it has found. In addition, JDKMon is also able to monitor JavaFX SDK versions that are installed on your machine. You can download the latest version from the [GitHub repository](https://github.com/HanSolo/JDKMon/releases).
 
-<figure class="wp-block-gallery has-nested-images columns-default is-cropped wp-block-gallery-2 is-layout-flex wp-block-gallery-is-layout-flex">
- <figure class="wp-block-image size-large">
-  <a href="jdkmon-found.png" target="_blank" rel="noopener"><img loading="lazy" decoding="async" width="984" height="876" data-id="102108" src="jdkmon-found.png" alt="JDKMon showing all the found OpenJDK distributions on the machine" class="wp-image-102108"></a>
- </figure>
- <figure class="wp-block-image size-thumbnail">
-  <a href="jdkmon-vulnerabilities.png" target="_blank" rel="noopener"><img loading="lazy" decoding="async" width="300" height="260" data-id="102107" src="jdkmon-vulnerabilities-300x260.png" alt="Alert showing the vulnerabilities in an OpenJDK package" class="wp-image-102107"></a>
- </figure>
- <figure class="wp-block-image size-large">
-  <a href="jdkmon-download.png" target="_blank" rel="noopener"><img loading="lazy" decoding="async" width="620" height="824" data-id="102106" src="jdkmon-download.png" alt="Dark/Light view of the download screen" class="wp-image-102106"></a>
- </figure>
-</figure>
+{{< gallery >}}
+jdkmon-found.png |  | JDKMon showing all the found OpenJDK distributions on the machine
+jdkmon-vulnerabilities-300x260.png |  | Alert showing the vulnerabilities in an OpenJDK package
+jdkmon-download.png |  | Dark/Light view of the download screen
+{{< /gallery >}}
 
 ### GitHub Actions
 
@@ -222,17 +210,11 @@ To be able to use any OpenJDK distribution in a GitHub Action, you can't use the
 
 You can check all available combinations on the [Disco Testing Matrix](https://github.com/foojayio/discoTestingMatrix). It verifies JDK tests on various distros and versions using Github Actions.
 
-<figure class="wp-block-gallery has-nested-images columns-default is-cropped wp-block-gallery-3 is-layout-flex wp-block-gallery-is-layout-flex">
- <figure class="wp-block-image size-large">
-  <a href="matrix-overview.png" target="_blank" rel="noopener"><img loading="lazy" decoding="async" width="774" height="961" data-id="102109" src="matrix-overview.png" alt="Part of the overview, the actual page is much longer..." class="wp-image-102109"></a>
- </figure>
- <figure class="wp-block-image size-large">
-  <a href="matrix-workflows.png" target="_blank" rel="noopener"><img loading="lazy" decoding="async" width="1024" height="928" data-id="102111" src="matrix-workflows-1024x928.png" alt="A part of the GitHub Actions" class="wp-image-102111"></a>
- </figure>
- <figure class="wp-block-image size-large">
-  <a href="matrix-action.png" target="_blank" rel="noopener"><img loading="lazy" decoding="async" width="1024" height="638" data-id="102110" src="matrix-action-1024x638.png" alt="One of the GitHub Actions" class="wp-image-102110"></a>
- </figure>
-</figure>
+{{< gallery >}}
+matrix-overview.png |  | Part of the overview, the actual page is much longer...
+matrix-workflows-1024x928.png |  | A part of the GitHub Actions
+matrix-action-1024x638.png |  | One of the GitHub Actions
+{{< /gallery >}}
 
 ## Conclusion
 

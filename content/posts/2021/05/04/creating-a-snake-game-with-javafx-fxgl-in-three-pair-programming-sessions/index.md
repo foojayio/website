@@ -38,22 +38,11 @@ For the first video, we started from a minimal project I prepared, containing th
 
 Wouldn't it be fun to control the game with a real joystick? That was the challenge in our second video where we used the sources of the first one to extend them and make them run them on a Raspberry Pi with a physical controller.
 
-<figure class="wp-block-gallery columns-3 is-cropped wp-block-gallery-1 is-layout-flex wp-block-gallery-is-layout-flex">
- <ul class="blocks-gallery-grid">
-  <li class="blocks-gallery-item">
-   <figure>
-    <img fetchpriority="high" decoding="async" width="915" height="1024" src="picade_hat_pin_numbers-915x1024.png" alt="" data-id="44763" data-full-url="https://foojay.io/wp-content/uploads/2021/04/picade_hat_pin_numbers.png" data-link="https://foojay.io/?attachment_id=44763" class="wp-image-44763">
-   </figure></li>
-  <li class="blocks-gallery-item">
-   <figure>
-    <img decoding="async" width="1024" height="768" src="assembled-1024x768.png" alt="" data-id="44764" data-full-url="https://foojay.io/wp-content/uploads/2021/04/assembled.png" data-link="https://foojay.io/?attachment_id=44764" class="wp-image-44764">
-   </figure></li>
-  <li class="blocks-gallery-item">
-   <figure>
-    <img loading="lazy" decoding="async" width="1024" height="683" src="arcade_parts_kit-1024x683.jpg" alt="" data-id="44765" data-full-url="https://foojay.io/wp-content/uploads/2021/04/arcade_parts_kit.jpg" data-link="https://foojay.io/?attachment_id=44765" class="wp-image-44765">
-   </figure></li>
- </ul>
-</figure>
+{{< gallery cols="3" >}}
+picade_hat_pin_numbers-915x1024.png
+assembled-1024x768.png
+arcade_parts_kit-1024x683.jpg
+{{< /gallery >}}
 
 The Pi4J project provides a **friendly object-oriented I/O API and implementation libraries for Java Programmers** to access the **full I/O capabilities of the Raspberry Pi platform**. This makes it the ideal starting point to integrate it into our Snake game.
 

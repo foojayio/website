@@ -21,17 +21,11 @@ frozen: false
 
 ***Some time ago on Twitter, I discovered [@Orango_Mango](https://twitter.com/orango_mango), who shared his progress in creating a 3D engine with JavaFX. The shared videos started with a [Rubik's cube in January '23](https://twitter.com/orango_mango/status/1610894079654563843), over a [basic tumbling car in February](https://twitter.com/orango_mango/status/1620493609287172096), to a [full Minecraft-like world in April](https://twitter.com/orango_mango/status/1646218237535813639). Who is this @OrangoMango? And why did he take up the challenge to create a 3D engine with Java and JavaFX? Let's find out...***
 
-<figure class="wp-block-gallery has-nested-images columns-default is-cropped wp-block-gallery-1 is-layout-flex wp-block-gallery-is-layout-flex">
- <figure class="wp-block-image size-medium">
-  <img fetchpriority="high" decoding="async" width="319" height="510" data-id="66393" src="rubikscube-319x510.png" alt="" class="wp-image-66393">
- </figure>
- <figure class="wp-block-image size-medium">
-  <img decoding="async" width="415" height="510" data-id="66394" src="3dcar-415x510.png" alt="" class="wp-image-66394">
- </figure>
- <figure class="wp-block-image size-medium">
-  <img decoding="async" width="645" height="510" data-id="66395" src="minecraft-645x510.png" alt="" class="wp-image-66395">
- </figure>
-</figure>
+{{< gallery >}}
+rubikscube-319x510.png
+3dcar-415x510.png
+minecraft-645x510.png
+{{< /gallery >}}
 
 ***Let's start with the first mystery... Who is behind the @Orango_Mango account? Can you introduce yourself?***
 
@@ -59,17 +53,11 @@ I know that Java is an old language, but I think it's still the best for making 
 
 For example, Minecraft is made in Java, and was my inspiration for a 3D engine. And the JavaFX canvas API is really impressive, it has everything a game needs (drawing images, shapes, and even pixels). As Android and Java are so related, it will also allow me to port my code to mobile.
 
-<figure class="wp-block-gallery has-nested-images columns-default is-cropped wp-block-gallery-2 is-layout-flex wp-block-gallery-is-layout-flex">
- <figure class="wp-block-image size-large">
-  <img loading="lazy" decoding="async" width="962" height="572" data-id="66391" src="minecraft-trees.png" alt="" class="wp-image-66391">
- </figure>
- <figure class="wp-block-image size-large">
-  <img loading="lazy" decoding="async" width="320" height="209" data-id="66390" src="minecraft-water.png" alt="" class="wp-image-66390">
- </figure>
- <figure class="wp-block-image size-large">
-  <img loading="lazy" decoding="async" width="970" height="1024" data-id="66392" src="3dgraphics-970x1024.png" alt="" class="wp-image-66392">
- </figure>
-</figure>
+{{< gallery >}}
+minecraft-trees.png
+minecraft-water.png
+3dgraphics-970x1024.png
+{{< /gallery >}}
 
 ***Java and JavaFX on mobile is indeed a very nice approach and doesn't get the amount of attention it deserves. I guess you know the work Gluon is doing on this topic? If not, please take a look at [their docs](https://docs.gluonhq.com/#platforms_android).***
 
@@ -95,14 +83,10 @@ Although Java uses a lot of memory, those 2GB are somehow fine for my 3D engine.
 
 I actually have a laptop with Windows but I don't like it for coding. For that task, I prefer Linux and a Raspberry Pi isn't that expensive... So my setup is very simple, a Raspberry Pi and one screen.
 
-<figure class="wp-block-gallery has-nested-images columns-default is-cropped wp-block-gallery-3 is-layout-flex wp-block-gallery-is-layout-flex">
- <figure class="wp-block-image size-large">
-  <img loading="lazy" decoding="async" width="1024" height="768" data-id="66397" src="desk-rpi-1024x768.jpg" alt="" class="wp-image-66397">
- </figure>
- <figure class="wp-block-image size-large">
-  <img loading="lazy" decoding="async" width="1024" height="768" data-id="66396" src="desk-monitor-1024x768.jpg" alt="" class="wp-image-66396">
- </figure>
-</figure>
+{{< gallery >}}
+desk-rpi-1024x768.jpg
+desk-monitor-1024x768.jpg
+{{< /gallery >}}
 
 ***As you learned all this on your own, can you share what was the most challenging part of getting started with Java and JavaFX?***
 

@@ -64,11 +64,9 @@ Project Panama is an umbrella project that comprises many JEPs (Java Enhancement
 
 Shown below is the timeline of the roadmap:
 
-<figure class="wp-block-gallery has-nested-images columns-default is-cropped wp-block-gallery-1 is-layout-flex wp-block-gallery-is-layout-flex">
- <figure class="wp-block-image size-large">
-  <img decoding="async" width="1024" height="349" data-id="52487" src="timeline_panama-1024x349.png" alt="" class="wp-image-52487">
- </figure>
-</figure>
+{{< gallery >}}
+timeline_panama-1024x349.png
+{{< /gallery >}}
 
 **Note:** The infographic above is missing the following Java Enhancement proposals:
 

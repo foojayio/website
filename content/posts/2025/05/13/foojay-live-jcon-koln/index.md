@@ -18,16 +18,10 @@ Please follow us on [LinkedIn](https://www.linkedin.com/company/foojayio/) and/o
 
 Just like last year, these interviews will be grouped into podcast episodes, so stay tuned for more Java knowledge sharing!
 
-<figure class="wp-block-gallery has-nested-images columns-default is-cropped wp-block-gallery-1 is-layout-flex wp-block-gallery-is-layout-flex">
- <figure class="wp-block-image size-large">
-  <img fetchpriority="high" decoding="async" width="1024" height="578" data-id="116206" src="foojay-at-jcon-booth-1-1024x578.jpg" alt="" class="wp-image-116206">
- </figure>
- <figure class="wp-block-image size-large">
-  <img decoding="async" width="1024" height="578" data-id="116205" src="foojay-at-jcon-booth-2-1024x578.jpg" alt="" class="wp-image-116205">
- </figure>
- <figure class="wp-block-image size-large">
-  <img decoding="async" width="1024" height="578" data-id="116207" src="foojay-at-jcon-booth-3-1024x578.jpg" alt="" class="wp-image-116207">
- </figure>
-</figure>
+{{< gallery >}}
+foojay-at-jcon-booth-1-1024x578.jpg
+foojay-at-jcon-booth-2-1024x578.jpg
+foojay-at-jcon-booth-3-1024x578.jpg
+{{< /gallery >}}
 
 {{< youtube videoseries >}}

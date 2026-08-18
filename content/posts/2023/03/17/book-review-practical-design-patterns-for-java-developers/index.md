@@ -24,17 +24,11 @@ frozen: false
 
 This book is for sale on [Amazon in Kindle and Paperback editions](https://www.amazon.de/dp/180461467X).
 
-<figure class="wp-block-gallery has-nested-images columns-default is-cropped wp-block-gallery-1 is-layout-flex wp-block-gallery-is-layout-flex">
- <figure class="wp-block-image size-large">
-  <img fetchpriority="high" decoding="async" width="830" height="1024" data-id="62853" src="practical-cover-830x1024.jpg" alt="" class="wp-image-62853">
- </figure>
- <figure class="wp-block-image size-large">
-  <img decoding="async" width="600" height="740" data-id="62852" src="practical-backside.jpg" alt="" class="wp-image-62852">
- </figure>
- <figure class="wp-block-image size-large">
-  <img decoding="async" width="426" height="426" data-id="62851" src="miro.jpg" alt="" class="wp-image-62851">
- </figure>
-</figure>
+{{< gallery >}}
+practical-cover-830x1024.jpg
+practical-backside.jpg
+miro.jpg
+{{< /gallery >}}
 
 We'll start this post with the personal verdict of two avid readers of this book:
 

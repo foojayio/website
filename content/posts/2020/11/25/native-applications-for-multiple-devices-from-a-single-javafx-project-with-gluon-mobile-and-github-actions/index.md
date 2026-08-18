@@ -31,51 +31,23 @@ In this post, we will use such a project and build it with GitHub Actions as a n
 
 This application is built around a Java library I created last year for my book ["Getting Started with Java on the Raspberry Pi"](https://webtechie.be/books/) which helps you to calculate the value of a resistor from its color rings. This library is further described on ["Resistor color codes and calculations as a Java Maven library"](https://webtechie.be/post/2019-11-25-resistor-color-codes-and-calculations-a-java-maven-library/).
 
-<figure class="wp-block-gallery columns-2 is-cropped wp-block-gallery-1 is-layout-flex wp-block-gallery-is-layout-flex">
- <ul class="blocks-gallery-grid">
-  <li class="blocks-gallery-item">
-   <figure>
-    <img decoding="async" width="479" height="377" src="javafx-table.png" alt="" data-id="36365" data-link="https://foojay.io/?attachment_id=36365" class="wp-image-36365">
-   </figure></li>
-  <li class="blocks-gallery-item">
-   <figure>
-    <img decoding="async" width="659" height="363" src="resistorcalculator-maven.png" alt="" data-id="36366" data-link="https://foojay.io/?attachment_id=36366" class="wp-image-36366">
-   </figure></li>
- </ul>
-</figure>
+{{< gallery cols="2" >}}
+javafx-table.png
+resistorcalculator-maven.png
+{{< /gallery >}}
 
 ### Based on "Gluon Mobile Multiview"
 
 Based on a "Gluon Mobile Multiview" project, it was only a matter of hours to create a working application with two calculation views and one "About" view. Many thanks to [José Pereda](https://twitter.com/JPeredaDnr) of Gluon who was so kind to improve my ugly proof-of-concept to a much better-looking layout with some clever tweaks and CSS improvements.
 
-<figure class="wp-block-gallery columns-6 is-cropped wp-block-gallery-2 is-layout-flex wp-block-gallery-is-layout-flex">
- <ul class="blocks-gallery-grid">
-  <li class="blocks-gallery-item">
-   <figure>
-    <a href="app-about.png"><img loading="lazy" decoding="async" width="334" height="635" src="app-about.png" alt="" data-id="36367" data-link="https://foojay.io/?attachment_id=36367" class="wp-image-36367"></a>
-   </figure></li>
-  <li class="blocks-gallery-item">
-   <figure>
-    <a href="app-colors.png"><img loading="lazy" decoding="async" width="333" height="636" src="app-colors.png" alt="" data-id="36368" data-link="https://foojay.io/?attachment_id=36368" class="wp-image-36368"></a>
-   </figure></li>
-  <li class="blocks-gallery-item">
-   <figure>
-    <a href="app-led.png"><img loading="lazy" decoding="async" width="334" height="637" src="app-led.png" alt="" data-id="36369" data-link="https://foojay.io/?attachment_id=36369" class="wp-image-36369"></a>
-   </figure></li>
-  <li class="blocks-gallery-item">
-   <figure>
-    <a href="app-menu.png"><img loading="lazy" decoding="async" width="335" height="637" src="app-menu.png" alt="" data-id="36370" data-link="https://foojay.io/?attachment_id=36370" class="wp-image-36370"></a>
-   </figure></li>
-  <li class="blocks-gallery-item">
-   <figure>
-    <a href="github-project-1.png"><img loading="lazy" decoding="async" width="1024" height="672" src="github-project-1-1024x672.png" alt="" data-id="36398" data-full-url="https://foojay.io/wp-content/uploads/2020/11/github-project-1.png" data-link="https://foojay.io/today/native-applications-for-multiple-devices-from-a-single-javafx-project-with-gluon-mobile-and-github-actions/github-project-1/" class="wp-image-36398"></a>
-   </figure></li>
-  <li class="blocks-gallery-item">
-   <figure>
-    <a href="intellij-app.png"><img loading="lazy" decoding="async" width="311" height="493" src="intellij-app.png" alt="" data-id="36372" data-link="https://foojay.io/?attachment_id=36372" class="wp-image-36372"></a>
-   </figure></li>
- </ul>
-</figure>
+{{< gallery cols="6" >}}
+app-about.png
+app-colors.png
+app-led.png
+app-menu.png
+github-project-1-1024x672.png
+intellij-app.png
+{{< /gallery >}}
 
 ### **It's Not Finished Yet...**
 
@@ -223,25 +195,11 @@ And the resulting file "target/client/x86_64-darwin/Resistor Calculator" is copi
 
 When I started working on this post and project, I just wanted to reach successful native builds for all platforms. But then Gluon stepped in and pushed this a lot further and guess what? This application is now on both "[Google Play](https://play.google.com/store/apps/details?id=be.webtechie.resistorcalculatorapp)" and the "[Apple App Store](https://apps.apple.com/us/app/gluon-resistor-calculator/id1540638756)" thanks to the work of [Erwin Morrhey](https://twitter.com/erwin1).
 
-<figure class="wp-block-gallery columns-3 is-cropped wp-block-gallery-3 is-layout-flex wp-block-gallery-is-layout-flex">
- <ul class="blocks-gallery-grid">
-  <li class="blocks-gallery-item">
-   <figure>
-    <img loading="lazy" decoding="async" width="1018" height="1011" src="apple-app-store.png" alt="" data-id="36374" data-full-url="https://foojay.io/wp-content/uploads/2020/11/apple-app-store.png" data-link="https://foojay.io/?attachment_id=36374" class="wp-image-36374">
-   </figure></li>
-  <li class="blocks-gallery-item">
-   <figure>
-    <img loading="lazy" decoding="async" width="1024" height="849" src="google-play-1024x849.png" alt="" data-id="36375" data-full-url="https://foojay.io/wp-content/uploads/2020/11/google-play.png" data-link="https://foojay.io/?attachment_id=36375" class="wp-image-36375">
-   </figure></li>
-  <li class="blocks-gallery-item">
-   <figure>
-    <img loading="lazy" decoding="async" width="124" height="124" src="onlink_to_resistorcalc_small.png" alt="" data-id="36376" data-full-url="https://foojay.io/wp-content/uploads/2020/11/onlink_to_resistorcalc_small.png" data-link="https://foojay.io/?attachment_id=36376" class="wp-image-36376">
-   </figure></li>
- </ul>
- <figcaption class="blocks-gallery-caption">
-  The app in the stores and a QR code to install on your phone
- </figcaption>
-</figure>
+{{< gallery cols="3" caption="The app in the stores and a QR code to install on your phone" >}}
+apple-app-store.png
+google-play-1024x849.png
+onlink_to_resistorcalc_small.png
+{{< /gallery >}}
 
 All the required steps to build AND upload to both the stores are included in the GitHub Actions!!!
 
@@ -253,18 +211,10 @@ Action file: [maven-ios.yml](https://github.com/FDelporte/ResistorCalculatorApp/
 
 Additional settings are required which you can hide from your script by defining them in the secrets-section of your GitHub project, just like we already did with the Gluon license key.
 
-<figure class="wp-block-gallery columns-2 is-cropped wp-block-gallery-4 is-layout-flex wp-block-gallery-is-layout-flex">
- <ul class="blocks-gallery-grid">
-  <li class="blocks-gallery-item">
-   <figure>
-    <img loading="lazy" decoding="async" width="1024" height="410" src="ios-setting-new-secret-1024x410.png" alt="" data-id="36377" data-full-url="https://foojay.io/wp-content/uploads/2020/11/ios-setting-new-secret.png" data-link="https://foojay.io/?attachment_id=36377" class="wp-image-36377">
-   </figure></li>
-  <li class="blocks-gallery-item">
-   <figure>
-    <img loading="lazy" decoding="async" width="796" height="461" src="ios-succeeded.png" alt="" data-id="36379" data-full-url="https://foojay.io/wp-content/uploads/2020/11/ios-succeeded.png" data-link="https://foojay.io/?attachment_id=36379" class="wp-image-36379">
-   </figure></li>
- </ul>
-</figure>
+{{< gallery cols="2" >}}
+ios-setting-new-secret-1024x410.png
+ios-succeeded.png
+{{< /gallery >}}
 
 Again we can use existing GitHub Actions to extend our previous "MacOS native" build file:
 

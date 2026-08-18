@@ -50,22 +50,11 @@ Note: **Note**: Qute is still an experimental feature.
 
 Using Quarkus, Qute and Pi4J an example application is built to show a 7-segments diplay on the PC which controls such an electronic component connected to a Raspberry Pi.
 
-<figure class="wp-block-gallery columns-3 is-cropped wp-block-gallery-1 is-layout-flex wp-block-gallery-is-layout-flex">
- <ul class="blocks-gallery-grid">
-  <li class="blocks-gallery-item">
-   <figure>
-    <img fetchpriority="high" decoding="async" width="1024" height="768" src="quarkus_pi4j01-1024x768.jpg" alt="" data-id="35411" data-full-url="https://foojay.io/wp-content/uploads/2020/09/quarkus_pi4j01.jpg" data-link="https://foojay.io/?attachment_id=35411" class="wp-image-35411">
-   </figure></li>
-  <li class="blocks-gallery-item">
-   <figure>
-    <img decoding="async" width="500" height="345" src="7-seg-disp-ca.png" alt="" data-id="35410" data-full-url="https://foojay.io/wp-content/uploads/2020/09/7-seg-disp-ca.png" data-link="https://foojay.io/?attachment_id=35410" class="wp-image-35410">
-   </figure></li>
-  <li class="blocks-gallery-item">
-   <figure>
-    <img loading="lazy" decoding="async" width="187" height="300" src="Screenshot-2020-09-22-at-13.50.54-187x300-1.png" alt="" data-id="35409" data-full-url="https://foojay.io/wp-content/uploads/2020/09/Screenshot-2020-09-22-at-13.50.54-187x300-1.png" data-link="https://foojay.io/?attachment_id=35409" class="wp-image-35409">
-   </figure></li>
- </ul>
-</figure>
+{{< gallery cols="3" >}}
+quarkus_pi4j01-1024x768.jpg
+7-seg-disp-ca.png
+Screenshot-2020-09-22-at-13.50.54-187x300-1.png
+{{< /gallery >}}
 
 The full [code is shared on GitHub](https://github.com/igfasouza/qute-example-pi4j) but the main class is pretty small and easy to understand:
 
@@ -156,18 +145,10 @@ The setup used in the example of Igor has the main advantage that you only need 
 
 To solve this problem, a [shift register SN74HC595 IC](https://www.ti.com/lit/ds/symlink/sn74hc595.pdf) can be used which only requires 3 GPIOs to control all 8 LED-segments. On my blog I have this way of working further described in the post "[Controlling a LED number display with JavaFX and Python on Raspberry Pi](https://webtechie.be/post/2019-12-18-controlling-a-led-number-display-with-javafx-and-python-on-raspberry-pi/)". As you can see in the image below, the number of connections to the Raspberry Pi is reduced, but the wiring on the breadboard becomes a bit more complicated...
 
-<figure class="wp-block-gallery columns-2 is-cropped wp-block-gallery-2 is-layout-flex wp-block-gallery-is-layout-flex">
- <ul class="blocks-gallery-grid">
-  <li class="blocks-gallery-item">
-   <figure>
-    <img loading="lazy" decoding="async" width="720" height="701" src="led_segment_scheme_breadboard.png" alt="" data-id="35413" data-full-url="https://foojay.io/wp-content/uploads/2020/09/led_segment_scheme_breadboard.png" data-link="https://foojay.io/?attachment_id=35413" class="wp-image-35413">
-   </figure></li>
-  <li class="blocks-gallery-item">
-   <figure>
-    <img loading="lazy" decoding="async" width="1024" height="498" src="segment_display_fully_wired-1024x498.jpg" alt="" data-id="35414" data-full-url="https://foojay.io/wp-content/uploads/2020/09/segment_display_fully_wired-scaled.jpg" data-link="https://foojay.io/?attachment_id=35414" class="wp-image-35414">
-   </figure></li>
- </ul>
-</figure>
+{{< gallery cols="2" >}}
+led_segment_scheme_breadboard.png
+segment_display_fully_wired-1024x498.jpg
+{{< /gallery >}}
 
 ## Conclusion
 

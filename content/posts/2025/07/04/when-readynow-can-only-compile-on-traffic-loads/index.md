@@ -103,17 +103,11 @@ As explained in an earlier blog post, "How to Train ReadyNow to Achieve Optimal 
 
 The chart you see above is the result of the third-generation profile. Below are the results with the first, second, and third profiles. As you can see, the initial compiler queues spike immediately after startup, increasing as ReadyNow has more information about the code to be compiled. More importantly, the spike gets even smaller when the traffic starts with the second run of the JMeter test.
 
-<figure class="wp-block-gallery has-nested-images columns-default is-cropped wp-block-gallery-1 is-layout-flex wp-block-gallery-is-layout-flex">
- <figure class="wp-block-image size-large">
-  <img loading="lazy" decoding="async" width="1024" height="508" data-id="116430" src="gc-with-readynow-gen-1-1024x508.png" alt="" class="wp-image-116430">
- </figure>
- <figure class="wp-block-image size-large">
-  <img loading="lazy" decoding="async" width="1024" height="508" data-id="116429" src="gc-with-readynow-gen-2-1024x508.png" alt="" class="wp-image-116429">
- </figure>
- <figure class="wp-block-image size-large">
-  <img loading="lazy" decoding="async" width="1024" height="508" data-id="116428" src="gc-with-readynow-gen-3-1024x508.png" alt="" class="wp-image-116428">
- </figure>
-</figure>
+{{< gallery >}}
+gc-with-readynow-gen-1-1024x508.png
+gc-with-readynow-gen-2-1024x508.png
+gc-with-readynow-gen-3-1024x508.png
+{{< /gallery >}}
 
 ## Result
 

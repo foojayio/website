@@ -28,14 +28,10 @@ But because the Raspberry Pi 5 uses a new approach, with the [new RP1 chip](http
 
 Luckily Alexander Liggesmeyer, a Pi4J user, took up the challenge to find a solution!
 
-<figure class="wp-block-gallery has-nested-images columns-default is-cropped wp-block-gallery-1 is-layout-flex wp-block-gallery-is-layout-flex">
- <figure class="wp-block-image size-large">
-  <img fetchpriority="high" decoding="async" width="1024" height="683" data-id="106455" src="raspberrypi5.jpg" alt="" class="wp-image-106455">
- </figure>
- <figure class="wp-block-image size-large">
-  <img decoding="async" width="866" height="648" data-id="106454" src="rp1.jpg" alt="" class="wp-image-106454">
- </figure>
-</figure>
+{{< gallery >}}
+raspberrypi5.jpg
+rp1.jpg
+{{< /gallery >}}
 
 (Images from https://www.raspberrypi.com)
 
@@ -80,17 +76,11 @@ Spring Boot is a well-known Java framework for developing APIs.
 
 Pi4J allows me to control the Raspberry Pi's GPIO interfaces directly from Java.
 
-<figure class="wp-block-gallery has-nested-images columns-default is-cropped wp-block-gallery-2 is-layout-flex wp-block-gallery-is-layout-flex">
- <figure class="wp-block-image size-large">
-  <a href="alexander.jpg" target="_blank" rel="noopener"><img decoding="async" width="598" height="694" data-id="106456" src="alexander.jpg" alt="" class="wp-image-106456"></a>
- </figure>
- <figure class="wp-block-image size-large">
-  <a href="cocktailmaker_circuit.png" target="_blank" rel="noopener"><img loading="lazy" decoding="async" width="1024" height="732" data-id="106458" src="cocktailmaker_circuit-1024x732.png" alt="" class="wp-image-106458"></a>
- </figure>
- <figure class="wp-block-image size-large">
-  <a href="screen-cocktail-scaled.jpg" target="_blank" rel="noopener"><img loading="lazy" decoding="async" width="1024" height="475" data-id="106457" src="screen-cocktail-1024x475.jpg" alt="" class="wp-image-106457"></a>
- </figure>
-</figure>
+{{< gallery >}}
+alexander.jpg
+cocktailmaker_circuit-1024x732.png
+screen-cocktail-1024x475.jpg
+{{< /gallery >}}
 
 ***When you discovered that Pi4J wasn't compatible with this new chip, what made you decide to dive into the problem and add a new provider?***
 

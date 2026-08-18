@@ -81,14 +81,10 @@ I received the following boards.
 * [Documentation](https://docs.beagleboard.org/boards/pocketbeagle-2/index.html#pocketbeagle-2-home)
 * [PocketBeagle TechLab](https://www.beagleboard.org/boards/techlab): *Designed from lessons-learned in teaching hundreds of individuals getting their first introduction to programming, Linux, and ultimately hacking the kernel itself.*
 
-<figure class="wp-block-gallery has-nested-images columns-default is-cropped wp-block-gallery-1 is-layout-flex wp-block-gallery-is-layout-flex">
- <figure class="wp-block-image size-large">
-  <img fetchpriority="high" decoding="async" width="856" height="1024" data-id="122696" src="beagleboards-boxes-856x1024.jpg" alt="" class="wp-image-122696">
- </figure>
- <figure class="wp-block-image size-large">
-  <img decoding="async" width="1024" height="608" data-id="122697" src="beagleboards-1024x608.jpg" alt="" class="wp-image-122697">
- </figure>
-</figure>
+{{< gallery >}}
+beagleboards-boxes-856x1024.jpg
+beagleboards-1024x608.jpg
+{{< /gallery >}}
 
 ## First Tests
 

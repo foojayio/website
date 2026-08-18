@@ -114,26 +114,12 @@ $ java -Dcom.sun.management.jmxremote \
 
 I waited two minutes before taking each screenshot below.
 
-<figure class="wp-block-gallery columns-2 is-cropped">
- <ul class="blocks-gallery-grid">
-  <li class="blocks-gallery-item">
-   <figure>
-    <a href="java-11-spring-1024x610.png"><img decoding="async" width="1024" height="610" src="java-11-spring-1024x610.png" alt="Spring with Java 11" data-id="35371" data-full-url="https://foojay.io/wp-content/uploads/2020/09/java-11-spring.png" data-link="https://foojay.io/?attachment_id=35371" class="wp-image-35371"></a>
-   </figure></li>
-  <li class="blocks-gallery-item">
-   <figure>
-    <a href="java-11-quarkus-1024x612.png"><img decoding="async" width="1024" height="612" src="java-11-quarkus-1024x612.png" alt="Quarkus with Java 11" data-id="35370" data-full-url="https://foojay.io/wp-content/uploads/2020/09/java-11-quarkus.png" data-link="https://foojay.io/?attachment_id=35370" class="wp-image-35370"></a>
-   </figure></li>
-  <li class="blocks-gallery-item">
-   <figure>
-    <a href="java-15-spring-1024x610.png"><img loading="lazy" decoding="async" width="1024" height="610" src="java-15-spring-1024x610.png" alt="Spring with Java 15" data-id="35373" data-full-url="https://foojay.io/wp-content/uploads/2020/09/java-15-spring.png" data-link="https://foojay.io/?attachment_id=35373" class="wp-image-35373"></a>
-   </figure></li>
-  <li class="blocks-gallery-item">
-   <figure>
-    <a href="java-15-quarkus-1024x609.png"><img loading="lazy" decoding="async" width="1024" height="609" src="java-15-quarkus-1024x609.png" alt="Quarkus with Java 15" data-id="35372" data-full-url="https://foojay.io/wp-content/uploads/2020/09/java-15-quarkus.png" data-link="https://foojay.io/?attachment_id=35372" class="wp-image-35372"></a>
-   </figure></li>
- </ul>
-</figure>
+{{< gallery cols="2" >}}
+java-11-spring-1024x610.png |  | Spring with Java 11
+java-11-quarkus-1024x612.png |  | Quarkus with Java 11
+java-15-spring-1024x610.png |  | Spring with Java 15
+java-15-quarkus-1024x609.png |  | Quarkus with Java 15
+{{< /gallery >}}
 
 #### Profiling Conclusions
 

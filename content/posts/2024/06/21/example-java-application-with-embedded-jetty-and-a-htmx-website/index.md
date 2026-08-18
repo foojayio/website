@@ -216,14 +216,10 @@ Another demo requests a list item (`<li>`) with a timestamp from the API on `/re
 </ul>
 ```
 
-<figure class="wp-block-gallery has-nested-images columns-default is-cropped wp-block-gallery-1 is-layout-flex wp-block-gallery-is-layout-flex">
- <figure class="wp-block-image size-large">
-  <a href="index-before.png" target="_blank" rel="noopener"><img decoding="async" width="1024" height="539" data-id="107457" src="index-before-1024x539.png" alt="" class="wp-image-107457"></a>
- </figure>
- <figure class="wp-block-image size-large">
-  <a href="index-after.png" target="_blank" rel="noopener"><img loading="lazy" decoding="async" width="1024" height="567" data-id="107458" src="index-after-1024x567.png" alt="" class="wp-image-107458"></a>
- </figure>
-</figure>
+{{< gallery >}}
+index-before-1024x539.png
+index-after-1024x567.png
+{{< /gallery >}}
 
 ### htmx with websocket
 
@@ -245,14 +241,10 @@ By adding `ws-send` in any HTML-element, you instruct htmx to replace it's defau
 
 In `MyEventSocket` a `scheduleAtFixedRate` is implemented to send a timestamp from the server back to the client every second so it can display it's still connected.
 
-<figure class="wp-block-gallery has-nested-images columns-default is-cropped wp-block-gallery-2 is-layout-flex wp-block-gallery-is-layout-flex">
- <figure class="wp-block-image size-large">
-  <a href="websocket-before.png" target="_blank" rel="noopener"><img loading="lazy" decoding="async" width="1024" height="302" data-id="107459" src="websocket-before-1024x302.png" alt="" class="wp-image-107459"></a>
- </figure>
- <figure class="wp-block-image size-large">
-  <a href="websocket-after.png" target="_blank" rel="noopener"><img loading="lazy" decoding="async" width="1024" height="366" data-id="107460" src="websocket-after-1024x366.png" alt="" class="wp-image-107460"></a>
- </figure>
-</figure>
+{{< gallery >}}
+websocket-before-1024x302.png
+websocket-after-1024x366.png
+{{< /gallery >}}
 
 ## Running the Application
 

@@ -25,14 +25,10 @@ Earlier this month, I [released V0.0.1 of my new Java library to interact with D
 * **Introduction of DMX Universes**: to be able to control fixtures connected to the two ports of my IP-to-DMX controller, universes needed to be added. (more info below)
 * **USB-to-DMX Support**: First working protocol over serial communication to DMX512! (more info below)
 
-<figure class="wp-block-gallery has-nested-images columns-default is-cropped wp-block-gallery-1 is-layout-flex wp-block-gallery-is-layout-flex">
- <figure class="wp-block-image size-large">
-  <img fetchpriority="high" decoding="async" width="1024" height="637" data-id="117016" src="ip-to-dmx-universes-1024x637.jpg" alt="" class="wp-image-117016">
- </figure>
- <figure class="wp-block-image size-large">
-  <img decoding="async" width="1024" height="572" data-id="117015" src="usb-to-dmx-1024x572.jpg" alt="" class="wp-image-117015">
- </figure>
-</figure>
+{{< gallery >}}
+ip-to-dmx-universes-1024x637.jpg
+usb-to-dmx-1024x572.jpg
+{{< /gallery >}}
 
 ## Introduction of DMX Universes
 

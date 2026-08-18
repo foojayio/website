@@ -145,17 +145,11 @@ The "[Vanilla JavaScript](http://vanilla-js.com/)" (= no libraries, just HTML/CS
 
 The dashboard pulls the latest summary and other data files from the repository, so it's a living comparison that grows as more test reports become available.
 
-<figure class="wp-block-gallery has-nested-images columns-default is-cropped wp-block-gallery-1 is-layout-flex wp-block-gallery-is-layout-flex">
- <figure class="wp-block-image size-large">
-  <img fetchpriority="high" decoding="async" width="1024" height="555" data-id="122819" src="sbc-benchmarks-filters-1024x555.png" alt="" class="wp-image-122819">
- </figure>
- <figure class="wp-block-image size-large">
-  <img decoding="async" width="1024" height="612" data-id="122820" src="sbc-benchmarks-overall-1024x612.png" alt="" class="wp-image-122820">
- </figure>
- <figure class="wp-block-image size-large">
-  <img loading="lazy" decoding="async" width="1024" height="789" data-id="122818" src="sbc-benchmarks-tests-1024x789.png" alt="" class="wp-image-122818">
- </figure>
-</figure>
+{{< gallery >}}
+sbc-benchmarks-filters-1024x555.png
+sbc-benchmarks-overall-1024x612.png
+sbc-benchmarks-tests-1024x789.png
+{{< /gallery >}}
 
 These are screenshots from a first test round. Check the [actual last status at webtechie.be/sbc/](https://webtechie.be/sbc/).
 

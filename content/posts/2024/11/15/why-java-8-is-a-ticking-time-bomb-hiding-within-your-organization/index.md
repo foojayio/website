@@ -37,17 +37,11 @@ Java versions that are still supported get a new build every three months contai
 
 Or look at it from another perspective: if you didn't upgrade every three months or longer, your system is vulnerable to many CVEs at this very moment!
 
-<figure class="wp-block-gallery has-nested-images columns-default wp-block-gallery-1 is-layout-flex wp-block-gallery-is-layout-flex">
- <figure class="wp-block-image size-large">
-  <a href="azul-roadmap-end-of-2024.png" target="_blank" rel="noopener"><img fetchpriority="high" decoding="async" width="1024" height="627" data-id="114663" src="azul-roadmap-end-of-2024-1024x627.png" alt="The Azul roadmap, status end of 2024" class="wp-image-114663"></a>
- </figure>
- <figure class="wp-block-image size-large">
-  <a href="cve-high-score.png" target="_blank" rel="noopener"><img decoding="async" width="932" height="923" data-id="114664" src="cve-high-score.png" alt="Some of the most recent CVEs with the highest score" class="wp-image-114664"></a>
- </figure>
- <figure class="wp-block-image size-large">
-  <a href="cves-october-2024.png" target="_blank" rel="noopener"><img decoding="async" width="934" height="980" data-id="114662" src="cves-october-2024.png" alt="All the CVEs in the OpenJDK update of October 2024" class="wp-image-114662"></a>
- </figure>
-</figure>
+{{< gallery >}}
+azul-roadmap-end-of-2024-1024x627.png |  | The Azul roadmap, status end of 2024
+cve-high-score.png |  | Some of the most recent CVEs with the highest score
+cves-october-2024.png |  | All the CVEs in the OpenJDK update of October 2024
+{{< /gallery >}}
 
 ### Performance Improvements
 

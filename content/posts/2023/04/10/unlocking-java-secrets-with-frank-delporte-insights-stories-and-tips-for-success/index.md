@@ -119,17 +119,11 @@ I was one of the first users in Belgium of the Media 100, such a computer-based 
 
 Going from analog copies with quality loss, to lossless digital video, was only one of the significant improvements.
 
-<figure class="wp-block-gallery has-nested-images columns-default is-cropped wp-block-gallery-1 is-layout-flex wp-block-gallery-is-layout-flex">
- <figure class="wp-block-image size-full">
-  <a href="editing-film.jpg" target="_blank" rel="noopener"><img decoding="async" width="474" height="266" data-id="65687" src="editing-film.jpg" alt="" class="wp-image-65687"></a>
- </figure>
- <figure class="wp-block-image size-full is-style-default">
-  <a href="editing-video-analogue.jpg" target="_blank" rel="noopener"><img decoding="async" width="720" height="480" data-id="65686" src="editing-video-analogue.jpg" alt="" class="wp-image-65686"></a>
- </figure>
- <figure class="wp-block-image size-full">
-  <a href="editing-video-media100.jpg" target="_blank" rel="noopener"><img loading="lazy" decoding="async" width="450" height="250" data-id="65688" src="editing-video-media100.jpg" alt="" class="wp-image-65688"></a>
- </figure>
-</figure>
+{{< gallery >}}
+editing-film.jpg
+editing-video-analogue.jpg
+editing-video-media100.jpg
+{{< /gallery >}}
 
 Soon after, my clients wanted to distribute their company movie to (potential) customers easily and attractively. That's when Macromedia Director and Flash became my new working tools as they allowed me to combine slides, video, and coding on DVD and CD-Rom. The logical next step was to put the same content online. You may remember the annoying "Skip Intro" Flash animations that were used on many websites for some years, and yes, I have to admit, I also created those... Everyone sought new ways to convert static boring text pages into more appealing content. We probably made a lot of wrong decisions at that time, but don't we still? Anyhow, soon I needed a database to create dynamic and easily updatable websites and started using Access Database for it - bad idea - and SQL Server.
 

@@ -36,14 +36,10 @@ Robert von Burg worked on improvements to the I2C implementation in Pi4J. The ch
 
 Tom Aarts added PWM hardware support for the Raspberry Pi 5 via a new provider `linuxfs-pwm`. The previous PWM PiGpio provider does not support the Raspberry Pi 5 RP1 chip. To use this new provider, changes are required in your dependencies and Java code. See [this blog post for more details and a code example](https://pi4j.com/blog/2024/20240423_pwm_rpi5/).
 
-<figure class="wp-block-gallery has-nested-images columns-default is-cropped wp-block-gallery-1 is-layout-flex wp-block-gallery-is-layout-flex">
- <figure class="wp-block-image size-large">
-  <a href="led-connection.jpg" target="_blank" rel="noopener"><img fetchpriority="high" decoding="async" width="480" height="640" data-id="110749" src="led-connection.jpg" alt="" class="wp-image-110749"></a>
- </figure>
- <figure class="wp-block-image size-large">
-  <a href="pwm-config-txt.jpg" target="_blank" rel="noopener"><img decoding="async" width="470" height="363" data-id="110748" src="pwm-config-txt.jpg" alt="" class="wp-image-110748"></a>
- </figure>
-</figure>
+{{< gallery >}}
+led-connection.jpg
+pwm-config-txt.jpg
+{{< /gallery >}}
 
 ## New Class to Get Board Info
 
@@ -51,14 +47,10 @@ The new `BoardInfoHelper` class and the related enums and methods can provide th
 
 This new class is already used as the basis for the website [api.pi4j.com](https://api.pi4j.com), which visualizes all the info defined inside the library, like board info, header pins, type of pins, etc. This website runs on a Raspberry Pi board, so the [System Information screen](https://api.pi4j.com/system-information) shows the info about that board, using this new class.
 
-<figure class="wp-block-gallery has-nested-images columns-default is-cropped wp-block-gallery-2 is-layout-flex wp-block-gallery-is-layout-flex">
- <figure class="wp-block-image size-large">
-  <a href="api-boards.png" target="_blank" rel="noopener"><img decoding="async" width="915" height="1024" data-id="110751" src="api-boards-915x1024.png" alt="" class="wp-image-110751"></a>
- </figure>
- <figure class="wp-block-image size-large">
-  <a href="api-system-information.png" target="_blank" rel="noopener"><img loading="lazy" decoding="async" width="1024" height="813" data-id="110750" src="api-system-information-1024x813.png" alt="" class="wp-image-110750"></a>
- </figure>
-</figure>
+{{< gallery >}}
+api-boards-915x1024.png
+api-system-information-1024x813.png
+{{< /gallery >}}
 
 ## Interview with Robert von Burg
 
@@ -70,17 +62,11 @@ My name is Robert von Burg. I've started programming in 1998 learning a bit of C
 
 For the last decade I've been working at [Atexxi](https://www.atexxi.ch/), where I'm a co-owner and founder. We are developing our eSyNet platform, enabling hospitals, pharmacies, and elderly/nursing homes to digitize their drug logistics. Our platform is software-based, but it could not work without our electronic cabinets and accessories, with which the users of our system interact and thus allow inventory to be tracked. Our goal is to unburden nurses and move the administrative work surrounding drug logistics of nurses to the pharmacy.
 
-<figure class="wp-block-gallery has-nested-images columns-default is-cropped wp-block-gallery-3 is-layout-flex wp-block-gallery-is-layout-flex">
- <figure class="wp-block-image size-large">
-  <a href="eitch.jpg" target="_blank" rel="noopener"><img loading="lazy" decoding="async" width="250" height="318" data-id="110752" src="eitch.jpg" alt="" class="wp-image-110752"></a>
- </figure>
- <figure class="wp-block-image size-large">
-  <a href="IMG_8095-scaled.jpg" target="_blank" rel="noopener"><img loading="lazy" decoding="async" width="1024" height="683" data-id="110753" src="IMG_8095-1024x683.jpg" alt="" class="wp-image-110753"></a>
- </figure>
- <figure class="wp-block-image size-large">
-  <a href="IMG_20200430_153450.jpg" target="_blank" rel="noopener"><img loading="lazy" decoding="async" width="767" height="1024" data-id="110754" src="IMG_20200430_153450-767x1024.jpg" alt="" class="wp-image-110754"></a>
- </figure>
-</figure>
+{{< gallery >}}
+eitch.jpg
+IMG_8095-1024x683.jpg
+IMG_20200430_153450-767x1024.jpg
+{{< /gallery >}}
 
 ***How did you get involved in the Pi4J development?***
 
@@ -110,17 +96,11 @@ These devices, as they become more powerful with each generation, make it easier
 
 **Tom Aarts** started contributing to the Pi4J project when he did his first commit in the [pi4j-example-devices repository](https://github.com/Pi4J/pi4j-example-devices/). Currently, you can find example implementations for a long list of devices (see screenshot below), using V2 of Pi4J. While creating these implementations, he found some missing pieces and bugs in the core library and also fixed them. For instance, this blog post is [about the ongoing PWM improvements for the Raspberry Pi 5](https://pi4j.com/blog/2024/20240423_pwm_rpi5/). Furthermore, Tom often assists users who [filed a Pi4J V2 issue](https://github.com/Pi4J/pi4j-v2/issues) or [started a discussion](https://github.com/Pi4J/pi4j-v2/discussions).
 
-<figure class="wp-block-gallery has-nested-images columns-default is-cropped wp-block-gallery-4 is-layout-flex wp-block-gallery-is-layout-flex">
- <figure class="wp-block-image size-large">
-  <a href="tom.jpg" target="_blank" rel="noopener"><img loading="lazy" decoding="async" width="808" height="1024" data-id="110757" src="tom-808x1024.jpg" alt="" class="wp-image-110757"></a>
- </figure>
- <figure class="wp-block-image size-large">
-  <a href="desk.jpg" target="_blank" rel="noopener"><img loading="lazy" decoding="async" width="1024" height="768" data-id="110756" src="desk-1024x768.jpg" alt="" class="wp-image-110756"></a>
- </figure>
- <figure class="wp-block-image size-large">
-  <a href="pi4j-example-devices.png" target="_blank" rel="noopener"><img loading="lazy" decoding="async" width="1024" height="812" data-id="110755" src="pi4j-example-devices-1024x812.png" alt="" class="wp-image-110755"></a>
- </figure>
-</figure>
+{{< gallery >}}
+tom-808x1024.jpg
+desk-1024x768.jpg
+pi4j-example-devices-1024x812.png
+{{< /gallery >}}
 
 ***Can you introduce yourself? What is your history in software (Java) development?***
 
@@ -144,17 +124,11 @@ I focus on device support and examples to assist in issues and discussions. I am
 
 I have a couple of home projects for clocks and temperature and a large number of prototype boards to support the various chips I implemented.
 
-<figure class="wp-block-gallery has-nested-images columns-default is-cropped wp-block-gallery-5 is-layout-flex wp-block-gallery-is-layout-flex">
- <figure class="wp-block-image size-large">
-  <a href="setup-1.jpg" target="_blank" rel="noopener"><img loading="lazy" decoding="async" width="768" height="1024" data-id="110758" src="setup-1-768x1024.jpg" alt="" class="wp-image-110758"></a>
- </figure>
- <figure class="wp-block-image size-large">
-  <a href="setup-2.jpg" target="_blank" rel="noopener"><img loading="lazy" decoding="async" width="768" height="1024" data-id="110759" src="setup-2-768x1024.jpg" alt="" class="wp-image-110759"></a>
- </figure>
- <figure class="wp-block-image size-large">
-  <a href="setup-3.jpg" target="_blank" rel="noopener"><img loading="lazy" decoding="async" width="768" height="1024" data-id="110760" src="setup-3-768x1024.jpg" alt="" class="wp-image-110760"></a>
- </figure>
-</figure>
+{{< gallery >}}
+setup-1-768x1024.jpg
+setup-2-768x1024.jpg
+setup-3-768x1024.jpg
+{{< /gallery >}}
 
 ***You answer a lot of questions in the Pi4J discussions and tickets. What is the most challenging part of being able to help users?***
 

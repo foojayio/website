@@ -3,8 +3,12 @@
 ## ConverPosts
 
 * [ ] Search for `[\[email protected\]](/cdn-cgi/l/email-protection)`
-  * If JFX Central -> links@jfx-central.com
-* [ ] Image galleries
+  * Email address in posts seem to get lost in the conversion to Hugo markdown. 
+  * Some examples:
+    * content/posts/2020/08/23/a-javafx-app-on-zulufx-in-60-seconds/index.md
+    * content/posts/2026/07/31/javafx-links-of-july-2026/index.md
+  * For instance, for JFX Links of the month posts it should link to links@jfx-central.com
+* [X] Image galleries -> `{{< gallery >}}` shortcode, migrated with `scripts/MigrateGalleriesToShortcode.java`
 * [X] Tags -> won't do as we have fixed list of categories
 
 ## Missing Content

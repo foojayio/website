@@ -39,14 +39,10 @@ Some examples:
 * **[Blue Snowball](https://www.coolblue.be/nl/product/780315/blue-snowball-ice-zwart.html)**
 * **[Rhode recording kit](https://www.thomann.de/intl/rode_complete_studio_kit.htm)**: includes an interface to connect and adjust the volume of a headset easily
 
-<figure class="wp-block-gallery has-nested-images columns-default is-cropped wp-block-gallery-1 is-layout-flex wp-block-gallery-is-layout-flex">
- <figure class="wp-block-image size-large">
-  <a href="blue-snowball.png" target="_blank" rel="noopener"><img fetchpriority="high" decoding="async" width="425" height="500" data-id="101012" src="blue-snowball.png" alt="" class="wp-image-101012"></a>
- </figure>
- <figure class="wp-block-image size-large">
-  <a href="rhode-studio-kit.jpg" target="_blank" rel="noopener"><img decoding="async" width="600" height="600" data-id="101011" src="rhode-studio-kit.jpg" alt="" class="wp-image-101011"></a>
- </figure>
-</figure>
+{{< gallery >}}
+blue-snowball.png
+rhode-studio-kit.jpg
+{{< /gallery >}}
 
 If you use audio recording software, like Audacity, adjust the level to record at -10db.
 
@@ -92,17 +88,11 @@ The [**ATEM Mini**](https://www.blackmagicdesign.com/products/atemmini) is a ver
 
 The ATEM is recognized as a webcam when connected via USB to your computer. You can do live video cutting during a recording or call when you want to switch between cameras and computer screens easily, and you can even do a picture-in-picture.
 
-<figure class="wp-block-gallery has-nested-images columns-default is-cropped wp-block-gallery-2 is-layout-flex wp-block-gallery-is-layout-flex">
- <figure class="wp-block-image size-large">
-  <a href="atem-software.png" target="_blank" rel="noopener"><img loading="lazy" decoding="async" width="1024" height="590" data-id="98921" src="atem-software-1024x590.png" alt="" class="wp-image-98921"></a>
- </figure>
- <figure class="wp-block-image size-large">
-  <a href="atem-in-action-1-scaled.jpg" target="_blank" rel="noopener"><img loading="lazy" decoding="async" width="1024" height="768" data-id="98924" src="atem-in-action-1-1024x768.jpg" alt="" class="wp-image-98924"></a>
- </figure>
- <figure class="wp-block-image size-large">
-  <a href="atem-p-in-p.png" target="_blank" rel="noopener"><img loading="lazy" decoding="async" width="1024" height="573" data-id="98922" src="atem-p-in-p-1024x573.png" alt="" class="wp-image-98922"></a>
- </figure>
-</figure>
+{{< gallery >}}
+atem-software-1024x590.png
+atem-in-action-1-1024x768.jpg
+atem-p-in-p-1024x573.png
+{{< /gallery >}}
 
 Be careful, webcams only have a USB output, so they can not be used with the ATEM. If you can find a Raspberry Pi (chip and stock problems...), you can use those as a cheap camera as [described here](https://webtechie.be/post/2021-12-20-raspberry-pi-as-hdmi-camera-for-atem-mini/).
 
@@ -116,17 +106,11 @@ For video editing, [**DaVinci Resolve** by Blackmagic Design](https://www.blackm
 
 I also use DaVinci Resolve for podcast editing, as I bought the additional **[Speed Editor](https://www.blackmagicdesign.com/products/davinciresolve/keyboard)**, which enables cutting "euhs", repeats, and pauses with the push of a few buttons. This approach speeds up the editing process significantly! You can buy this device included with a license for the full version of DaVinci Resolve, but if you search on eBay, you can also find it a lot cheaper without such a license if you already have one.
 
-<figure class="wp-block-gallery has-nested-images columns-default is-cropped wp-block-gallery-3 is-layout-flex wp-block-gallery-is-layout-flex">
- <figure class="wp-block-image size-large">
-  <a href="podcast-editing-audacity.png" target="_blank" rel="noopener"><img loading="lazy" decoding="async" width="1024" height="695" data-id="62984" src="podcast-editing-audacity-1024x695.png" alt="" class="wp-image-62984"></a>
- </figure>
- <figure class="wp-block-image size-large">
-  <a href="podcast-editing-davinci.png" target="_blank" rel="noopener"><img loading="lazy" decoding="async" width="1024" height="614" data-id="62985" src="podcast-editing-davinci-1024x614.png" alt="" class="wp-image-62985"></a>
- </figure>
- <figure class="wp-block-image size-large">
-  <a href="IMG_20230316_162046-scaled.jpg" target="_blank" rel="noopener"><img loading="lazy" decoding="async" width="1024" height="768" data-id="62986" src="IMG_20230316_162046-1024x768.jpg" alt="" class="wp-image-62986"></a>
- </figure>
-</figure>
+{{< gallery >}}
+podcast-editing-audacity-1024x695.png
+podcast-editing-davinci-1024x614.png
+IMG_20230316_162046-1024x768.jpg
+{{< /gallery >}}
 
 ## Example Setups
 
@@ -148,17 +132,11 @@ As I record and edit the Foojay podcasts, I invested a little more to extend my 
 
 To further improve my setup, I need to move a 19"-rack to a different room, as my router and NAS make some fan noise. Some foam on the walls would probably also improve the audio quality further. My speakers are mounted too high, so I need to ruin the wall a bit more with new (and unused) drill holes. And cable management is a challenging problem to tackle!
 
-<figure class="wp-block-gallery has-nested-images columns-default is-cropped wp-block-gallery-4 is-layout-flex wp-block-gallery-is-layout-flex">
- <figure class="wp-block-image size-large">
-  <a href="recording-setup-frank-1-scaled.jpg" target="_blank" rel="noopener"><img loading="lazy" decoding="async" width="1024" height="768" data-id="62290" src="recording-setup-frank-1-1024x768.jpg" alt="" class="wp-image-62290"></a>
- </figure>
- <figure class="wp-block-image size-large">
-  <a href="recording-setup-frank-2-scaled.jpg" target="_blank" rel="noopener"><img loading="lazy" decoding="async" width="1024" height="768" data-id="62291" src="recording-setup-frank-2-1024x768.jpg" alt="" class="wp-image-62291"></a>
- </figure>
- <figure class="wp-block-image size-large">
-  <a href="wallmount-raspberry-pi-camera.webp" target="_blank" rel="noopener"><img loading="lazy" decoding="async" width="640" height="480" data-id="62285" src="wallmount-raspberry-pi-camera.webp" alt="" class="wp-image-62285"></a>
- </figure>
-</figure>
+{{< gallery >}}
+recording-setup-frank-1-1024x768.jpg
+recording-setup-frank-2-1024x768.jpg
+wallmount-raspberry-pi-camera.webp
+{{< /gallery >}}
 
 **Frank used this setup for the [Foojay podcast](https://foojay.io/today/category/podcast/) and created the "[Java Quick Start](https://foojay.io/java-quick-start/)" tutorial.**
 

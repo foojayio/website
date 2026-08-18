@@ -42,17 +42,11 @@ Lottie4J is organized into three main modules:
 2. **FXPlayer**: A JavaFX component that actually plays the animations
 3. **FXFileViewer**: A demo application that shows animations and visualizes their structure
 
-<figure class="wp-block-gallery has-nested-images columns-default is-cropped wp-block-gallery-1 is-layout-flex wp-block-gallery-is-layout-flex">
- <figure class="wp-block-image size-large">
-  <img fetchpriority="high" decoding="async" width="763" height="512" data-id="122892" src="json-parsing.png" alt="" class="wp-image-122892">
- </figure>
- <figure class="wp-block-image size-large">
-  <img decoding="async" width="1024" height="457" data-id="122890" src="fxfileviewer-1024x457.png" alt="" class="wp-image-122890">
- </figure>
- <figure class="wp-block-image size-large">
-  <img loading="lazy" decoding="async" width="1024" height="793" data-id="122891" src="github-repo-1024x793.png" alt="" class="wp-image-122891">
- </figure>
-</figure>
+{{< gallery >}}
+json-parsing.png
+fxfileviewer-1024x457.png
+github-repo-1024x793.png
+{{< /gallery >}}
 
 ## Making Sense of the JSON
 

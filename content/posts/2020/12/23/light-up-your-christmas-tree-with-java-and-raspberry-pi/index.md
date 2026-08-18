@@ -45,25 +45,11 @@ The Raspberry Pi is a full-PC-on-a-small-board. There are different types, but w
 
 If you buy a new Raspberry Pi, make sure you also have a mini-SD card with minimum 16Gb of space. With the [Imager tool](https://www.raspberrypi.org/software/), you can burn the "Raspberry Pi OS (Full)" to this card. This is a full operating system, based on Debian 32bit, containing a lot of tools, and most importantly OpenJDK 11!
 
-<figure class="wp-block-gallery columns-3 is-cropped wp-block-gallery-1 is-layout-flex wp-block-gallery-is-layout-flex">
- <ul class="blocks-gallery-grid">
-  <li class="blocks-gallery-item">
-   <figure>
-    <img fetchpriority="high" decoding="async" width="681" height="458" src="imager-start.png" alt="" data-id="36638" data-full-url="https://foojay.io/wp-content/uploads/2020/12/imager-start.png" data-link="https://foojay.io/?attachment_id=36638" class="wp-image-36638">
-   </figure></li>
-  <li class="blocks-gallery-item">
-   <figure>
-    <img decoding="async" width="679" height="457" src="imager-os.png" alt="" data-id="36640" data-full-url="https://foojay.io/wp-content/uploads/2020/12/imager-os.png" data-link="https://foojay.io/?attachment_id=36640" class="wp-image-36640">
-   </figure></li>
-  <li class="blocks-gallery-item">
-   <figure>
-    <img loading="lazy" decoding="async" width="679" height="460" src="imager-os-full.png" alt="" data-id="36639" data-full-url="https://foojay.io/wp-content/uploads/2020/12/imager-os-full.png" data-link="https://foojay.io/?attachment_id=36639" class="wp-image-36639">
-   </figure></li>
- </ul>
- <figcaption class="blocks-gallery-caption">
-  Raspberry Pi Imager tool
- </figcaption>
-</figure>
+{{< gallery cols="3" caption="Raspberry Pi Imager tool" >}}
+imager-start.png
+imager-os.png
+imager-os-full.png
+{{< /gallery >}}
 
 When you start your board for the first time, you'll need to configure the Wifi, and some additional settings. When done, open a terminal and run `java -version` to make sure you used to correct OS.
 
@@ -86,49 +72,21 @@ So, it isn't aimed at simple DIY, but as a base-computer to be integrated in pro
 
 This new version 4 is based on the Raspberry Pi 4 and is [available in 32 variants](https://www.raspberrypi.org/products/compute-module-4), with a range of RAM and eMMC Flash options, and with or without wireless connectivity.
 
-<figure class="wp-block-gallery columns-3 is-cropped wp-block-gallery-2 is-layout-flex wp-block-gallery-is-layout-flex">
- <ul class="blocks-gallery-grid">
-  <li class="blocks-gallery-item">
-   <figure>
-    <img loading="lazy" decoding="async" width="483" height="323" src="compute.jpg" alt="" data-id="36644" data-full-url="https://foojay.io/wp-content/uploads/2020/12/compute.jpg" data-link="https://foojay.io/?attachment_id=36644" class="wp-image-36644">
-   </figure></li>
-  <li class="blocks-gallery-item">
-   <figure>
-    <img loading="lazy" decoding="async" width="393" height="291" src="compute_back.jpg" alt="" data-id="36642" data-link="https://foojay.io/?attachment_id=36642" class="wp-image-36642">
-   </figure></li>
-  <li class="blocks-gallery-item">
-   <figure>
-    <img loading="lazy" decoding="async" width="546" height="364" src="compute_io_board.jpg" alt="" data-id="36641" data-link="https://foojay.io/?attachment_id=36641" class="wp-image-36641">
-   </figure></li>
- </ul>
- <figcaption class="blocks-gallery-caption">
-  Raspberry Pi Compute Module
- </figcaption>
-</figure>
+{{< gallery cols="3" caption="Raspberry Pi Compute Module" >}}
+compute.jpg
+compute_back.jpg
+compute_io_board.jpg
+{{< /gallery >}}
 
 #### **Raspberry Pi 400**
 
 This product reminded me of my very first computer 35 years ago, the Commodore 64... It's a keyboard with an integrated computer! The Raspberry Pi 4 with 4Gb of memory has been redesigned to fit in the official, already-existing Raspberry Pi keyboard. All you need is an SD card, power supply, monitor, and mouse. For 75€ this is truly an amazing machine bringing a lot of computer-power to everyone for a low budget.
 
-<figure class="wp-block-gallery columns-3 is-cropped wp-block-gallery-3 is-layout-flex wp-block-gallery-is-layout-flex">
- <ul class="blocks-gallery-grid">
-  <li class="blocks-gallery-item">
-   <figure>
-    <img loading="lazy" decoding="async" width="600" height="400" src="pi_400_front.jpg" alt="" data-id="36646" data-full-url="https://foojay.io/wp-content/uploads/2020/12/pi_400_front.jpg" data-link="https://foojay.io/?attachment_id=36646" class="wp-image-36646">
-   </figure></li>
-  <li class="blocks-gallery-item">
-   <figure>
-    <img loading="lazy" decoding="async" width="600" height="400" src="pi_400_back.jpg" alt="" data-id="36645" data-full-url="https://foojay.io/wp-content/uploads/2020/12/pi_400_back.jpg" data-link="https://foojay.io/?attachment_id=36645" class="wp-image-36645">
-   </figure></li>
-  <li class="blocks-gallery-item">
-   <figure>
-    <img loading="lazy" decoding="async" width="740" height="379" src="commodore64.png" alt="" data-id="36643" data-full-url="https://foojay.io/wp-content/uploads/2020/12/commodore64.png" data-link="https://foojay.io/?attachment_id=36643" class="wp-image-36643">
-   </figure></li>
- </ul>
- <figcaption class="blocks-gallery-caption">
-  Raspberry Pi 400 versus Commodore 64
- </figcaption>
-</figure>
+{{< gallery cols="3" caption="Raspberry Pi 400 versus Commodore 64" >}}
+pi_400_front.jpg
+pi_400_back.jpg
+commodore64.png
+{{< /gallery >}}
 
 ### **Install additional tools**
 
@@ -180,29 +138,12 @@ This is an electronics project, so we need to connect some components to our Ras
 
 You can calculate the exact resistor value for each LED-type, but we use the same one here for all LEDs. Maybe they will not give full brightness, but at least we will not burn them 🙂 By the way, there is even a JavaFX mobile application in the Google and Apple app store for this calculation, see "[Building native applications for all PC and mobile platforms from a single JavaFX project with Gluon Mobile and GitHub Actions](https://foojay.io/today/native-applications-for-multiple-devices-from-a-single-javafx-project-with-gluon-mobile-and-github-actions/)"\].
 
-<figure class="wp-block-gallery columns-4 is-cropped wp-block-gallery-4 is-layout-flex wp-block-gallery-is-layout-flex">
- <ul class="blocks-gallery-grid">
-  <li class="blocks-gallery-item">
-   <figure>
-    <a href="jvm-advent-leds.png"><img loading="lazy" decoding="async" width="1024" height="844" src="jvm-advent-leds-1024x844.png" alt="" data-id="36648" data-full-url="https://foojay.io/wp-content/uploads/2020/12/jvm-advent-leds.png" data-link="https://foojay.io/?attachment_id=36648" class="wp-image-36648"></a>
-   </figure></li>
-  <li class="blocks-gallery-item">
-   <figure>
-    <a href="wiring-1-scaled.jpg"><img loading="lazy" decoding="async" width="1024" height="498" src="wiring-1-1024x498.jpg" alt="" data-id="36649" data-full-url="https://foojay.io/wp-content/uploads/2020/12/wiring-1-scaled.jpg" data-link="https://foojay.io/?attachment_id=36649" class="wp-image-36649"></a>
-   </figure></li>
-  <li class="blocks-gallery-item">
-   <figure>
-    <a href="wiring-2-scaled.jpg"><img loading="lazy" decoding="async" width="1024" height="498" src="wiring-2-1024x498.jpg" alt="" data-id="36650" data-full-url="https://foojay.io/wp-content/uploads/2020/12/wiring-2-scaled.jpg" data-link="https://foojay.io/?attachment_id=36650" class="wp-image-36650"></a>
-   </figure></li>
-  <li class="blocks-gallery-item">
-   <figure>
-    <a href="wiring-3-scaled.jpg"><img loading="lazy" decoding="async" width="498" height="1024" src="wiring-3-498x1024.jpg" alt="" data-id="36651" data-full-url="https://foojay.io/wp-content/uploads/2020/12/wiring-3-scaled.jpg" data-link="https://foojay.io/?attachment_id=36651" class="wp-image-36651"></a>
-   </figure></li>
- </ul>
- <figcaption class="blocks-gallery-caption">
-  Wiring scheme and pictures for this project
- </figcaption>
-</figure>
+{{< gallery cols="4" caption="Wiring scheme and pictures for this project" >}}
+jvm-advent-leds-1024x844.png
+wiring-1-1024x498.jpg
+wiring-2-1024x498.jpg
+wiring-3-498x1024.jpg
+{{< /gallery >}}
 
 ### **The Application**
 

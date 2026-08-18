@@ -23,14 +23,10 @@ As we want to spread the love for OpenJDK, i.e., Java, Kotlin, and other OpenJDK
 
 So... today we're announcing a new section: [Java Quick Start](https://foojay.io/java-quick-start/) (with hopefully more quick starts to follow, e.g., 'Kotlin Quick Start'), which you can reach via the main menu, which includes a 30 minute [video-series](https://www.youtube.com/playlist?list=PL-3Bf_FLNZLCI7MEiWscgdIwSB8p2Z7Xb) with an introduction to the Java programming language:
 
-<figure class="wp-block-gallery has-nested-images columns-default is-cropped wp-block-gallery-1 is-layout-flex wp-block-gallery-is-layout-flex">
- <figure class="wp-block-image size-large">
-  <img fetchpriority="high" decoding="async" width="852" height="481" data-id="61858" src="foojay-menu-quick-start.png" alt="" class="wp-image-61858">
- </figure>
- <figure class="wp-block-image size-large">
-  <img decoding="async" width="942" height="1024" data-id="61859" src="foojay-playlist-getting-started-942x1024.png" alt="" class="wp-image-61859">
- </figure>
-</figure>
+{{< gallery >}}
+foojay-menu-quick-start.png
+foojay-playlist-getting-started-942x1024.png
+{{< /gallery >}}
 
 ## What You Will Learn
 

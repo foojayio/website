@@ -129,6 +129,16 @@ should catch a mistake at PR time rather than letting it fail silently.
   and preserved raw-HTML blocks are never touched — a post has a *table of
   entity names* as its subject matter, and in raw HTML `&amp;` is correct
   markup.
+- **`scripts/MigrateGalleriesToShortcode.java`**: one-off migration that
+  replaced the WordPress gallery markup in `content/` with the
+  `{{< gallery >}}` shortcode — 55 posts, 94 galleries, 259 images, both block
+  shapes (nested `<figure>`s and the older `<ul class="blocks-gallery-grid">`).
+  Same reasoning and same shape as `MigrateEnlighterToFences.java`: a
+  contributor can't be asked to type 30 lines of block markup, and a gallery is
+  a list of filenames. It calls `HtmlToMarkdown.galleryShortcode`, which the
+  scrapers now use too, so a re-scrape emits the same thing and a re-run here is
+  a no-op. `--dry-run` / `--path` as usual. See the gallery convention below for
+  what the shortcode derives rather than stores.
 - **`scripts/StripHeadingAnchors.java`**: one-off migration that removed the
   WordPress heading anchors (`## Title {#h2-2-title}`) from `content/`. WP
   stamps every heading with `id="h2-<index>-<slug>"`, Flexmark carries an id
@@ -376,18 +386,37 @@ should catch a mistake at PR time rather than letting it fail silently.
   (Redis shows 11 articles here vs 1 there) — author-based attribution is
   broader than whatever WP was doing. That's the intended semantics; if a
   sponsor should own fewer posts, narrow its `authors:` list.
-- **Galleries: raw WP HTML for migrated posts, `{{< gallery >}}` for new ones.**
-  55 migrated posts carry WordPress gallery markup, preserved verbatim by
-  `SELECTOR_PRESERVE` (two shapes: modern nested `<figure>`s, and 15 posts using
-  the older `<ul class="blocks-gallery-grid">`, which had **no CSS at all** and
-  rendered as a bulleted list until it was added). Nobody can be asked to type
-  that markup, so `themes/foojay/layouts/shortcodes/gallery.html` is what an
-  author uses: `{{< gallery "a.png" "b.png" >}}`, or
-  `{{< gallery images="a.png|caption, b.png|caption" cols="2" >}}`. `cols` is a
-  maximum — the CSS grid auto-fits to fewer columns on narrow screens. Filenames
-  go through `resource-url.html`, so a bare name means the file next to
-  `index.md`. No lightbox wiring needed: `static/js/lightbox.js` binds every
-  `.prose img`.
+- **Galleries are the `{{< gallery >}}` shortcode — migrated posts included.**
+  A gallery is a list of filenames, so that is what `content/` holds: one per
+  line between `{{< gallery >}}` and `{{< /gallery >}}`, `| caption` after a
+  filename, `| |` before alt text when it differs from the caption, plus
+  optional `cols=` and `caption=` (one caption for the whole grid) on the
+  opening tag. Everything else is the template's job
+  (`themes/foojay/layouts/shortcodes/gallery.html`): the CSS grid (`cols` is a
+  maximum, auto-fit drops to fewer columns on narrow screens and never opens
+  more columns than there are images), `resource-url.html` resolution (a bare
+  name means the file next to `index.md`), and the lightbox
+  (`static/js/lightbox.js` binds every `.prose img` plus the post hero, and
+  steps through all of a page's images with ‹ › buttons, arrow keys or a swipe
+  — one entry per distinct full-size source, so a featured image that is also a
+  gallery image isn't shown twice).
+
+  It also **derives the link to each image's full-size original**: WordPress
+  wrapped a `shot-1024x768.png` thumbnail in an `<a href="shot.png">` so the
+  lightbox opens the full image, and the template works that filename out
+  (`-scaled` variant too) instead of the content storing it. 84 of those links
+  came back identically, 7 images gained one, and the 34 links that pointed at
+  the image itself went away — the lightbox falls back to the `img` src, so they
+  never did anything.
+
+  The 55 migrated posts (94 galleries, 259 images) previously carried WordPress
+  block markup verbatim: modern nested `<figure>`s, plus 15 posts on the older
+  `<ul class="blocks-gallery-grid">`. `MigrateGalleriesToShortcode.java`
+  converted them and `HtmlToMarkdown.galleryShortcode` — the same method — emits
+  the shortcode from the scrapers, so a re-scrape produces the same shape. Both
+  WP shapes and their CSS are gone from the repo; don't reintroduce them.
+  Verified by rebuilding: only those 55 post bodies changed, with the same 94
+  galleries, same 259 images in the same order, and the same captions.
 - **Featured Authors are two slugs in `hugo.toml`, and nothing else.**
   `params.featuredAuthors` lists the author slugs (folder names under
   `content/authors/`) currently spotlighted; foojay rotates the pick monthly and

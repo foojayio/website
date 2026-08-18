@@ -47,17 +47,11 @@ This virtual laboratory application allows students to perform chemistry and bio
 
 The main goal of this application is to help students simulate experiments that they usually only learn in theory so they can better understand and visualize scientific concepts. Based on the implemented experiments, this application is mainly for 9th-grade students and teachers.
 
-<figure class="wp-block-gallery has-nested-images columns-default is-cropped wp-block-gallery-1 is-layout-flex wp-block-gallery-is-layout-flex">
- <figure class="wp-block-image size-large">
-  <img decoding="async" width="734" height="1024" data-id="115593" src="lab-1-734x1024.jpg" alt="" class="wp-image-115593">
- </figure>
- <figure class="wp-block-image size-large">
-  <img decoding="async" width="667" height="1024" data-id="115594" src="lab-3-667x1024.jpg" alt="" class="wp-image-115594">
- </figure>
- <figure class="wp-block-image size-large">
-  <img loading="lazy" decoding="async" width="828" height="752" data-id="115592" src="lab-5.jpg" alt="" class="wp-image-115592">
- </figure>
-</figure>
+{{< gallery >}}
+lab-1-734x1024.jpg
+lab-3-667x1024.jpg
+lab-5.jpg
+{{< /gallery >}}
 
 ***Are the project sources shared, and is it easy to add extra experiments and translations?***
 

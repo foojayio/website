@@ -40,14 +40,10 @@ $ sudo apt update
 $ sudo apt upgrade
 ```
 
-<figure class="wp-block-gallery has-nested-images columns-default is-cropped wp-block-gallery-1 is-layout-flex wp-block-gallery-is-layout-flex">
- <figure class="wp-block-image size-large">
-  <img fetchpriority="high" decoding="async" width="1024" height="678" data-id="98783" src="imager-64bit-1024x678.png" alt="" class="wp-image-98783">
- </figure>
- <figure class="wp-block-image size-large">
-  <img decoding="async" width="1024" height="419" data-id="98784" src="azul-download-1024x419.png" alt="" class="wp-image-98784">
- </figure>
-</figure>
+{{< gallery >}}
+imager-64bit-1024x678.png
+azul-download-1024x419.png
+{{< /gallery >}}
 
 ## Install Azul Zulu OpenJDK
 
@@ -294,14 +290,10 @@ $ uname -a
 Linux crac 6.1.32-v8-CRAC+ #2 SMP PREEMPT Thu Jun 15 11:08:18 BST 2023 aarch64 GNU/Linux
 ```
 
-<figure class="wp-block-gallery has-nested-images columns-default is-cropped wp-block-gallery-2 is-layout-flex wp-block-gallery-is-layout-flex">
- <figure class="wp-block-image size-large">
-  <img decoding="async" width="1024" height="739" data-id="98785" src="raspberrypi-os-kernel-criu-1-1024x739.png" alt="" class="wp-image-98785">
- </figure>
- <figure class="wp-block-image size-large">
-  <img loading="lazy" decoding="async" width="1024" height="734" data-id="98786" src="raspberrypi-os-kernel-criu-2-1024x734.png" alt="" class="wp-image-98786">
- </figure>
-</figure>
+{{< gallery >}}
+raspberrypi-os-kernel-criu-1-1024x739.png
+raspberrypi-os-kernel-criu-2-1024x734.png
+{{< /gallery >}}
 
 ### Retry the Checkpoint Creation with Fix 1
 

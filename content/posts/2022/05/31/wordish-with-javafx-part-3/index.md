@@ -55,20 +55,11 @@ After navigating from the Wordish game view to the How to Play view, we must ret
 
 Furthermore, we must also save the games' results in order to display the game statistics and create the bar chart in the Statistics view. Figure 2 shows these three views of Wordish.
 
-<figure class="wp-block-gallery has-nested-images columns-default is-cropped wp-block-gallery-1 is-layout-flex wp-block-gallery-is-layout-flex">
- <figure class="wp-block-image size-large">
-  <img decoding="async" width="619" height="1024" data-id="56034" src="playgame5-copy-619x1024.png" alt="" class="wp-image-56034">
- </figure>
- <figure class="wp-block-image size-large">
-  <img decoding="async" width="619" height="1024" data-id="56033" src="howto-screen-1-619x1024.png" alt="" class="wp-image-56033">
- </figure>
- <figure class="wp-block-image size-large">
-  <img loading="lazy" decoding="async" width="1052" height="1740" data-id="56031" src="chart-stats.png" alt="" class="wp-image-56031">
- </figure>
- <figcaption class="blocks-gallery-caption">
-  Figure 2. The three views of Wordish
- </figcaption>
-</figure>
+{{< gallery caption="Figure 2. The three views of Wordish" >}}
+playgame5-copy-619x1024.png
+howto-screen-1-619x1024.png
+chart-stats.png
+{{< /gallery >}}
 
 There are several ways to implement data sharing among the views. One, Gluon includes a convenient library called [Glisten Afterburner](https://gluonhq.com/gluon-mobile-next-iteration/)(part of Gluon Mobil) that implements a minimalistic dependency injection.
 

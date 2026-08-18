@@ -301,17 +301,11 @@ Short value 1111111111111111 to unsigned: 65535
 
 A nice example of the use of bits and bytes, is included in my book. A LED number display is a typical component used in a lot of experiments with electronics and is also used in e.g. alarm clocks. Such a display has 7 segments to for the number, and one for the dot. So a total of 8 true/false values to define what must be displayed. This makes it the perfect example of how 8 booleans can be combined into one byte.
 
-<figure class="wp-block-gallery has-nested-images columns-default is-cropped wp-block-gallery-1 is-layout-flex wp-block-gallery-is-layout-flex">
- <figure class="wp-block-image size-large">
-  <a href="https://foojay.io/?attachment_id=114458" target="_blank" rel="noopener"><img fetchpriority="high" decoding="async" width="502" height="382" data-id="114458" src="led_segment_app.png" alt="" class="wp-image-114458"></a>
- </figure>
- <figure class="wp-block-image size-large">
-  <a href="https://foojay.io/?attachment_id=114459" target="_blank" rel="noopener"><img decoding="async" width="1024" height="498" data-id="114459" src="segment_display_fully_wired-1024x498.jpg" alt="" class="wp-image-114459"></a>
- </figure>
- <figure class="wp-block-image size-large">
-  <a href="https://foojay.io/?attachment_id=114460" target="_blank" rel="noopener"><img loading="lazy" decoding="async" width="642" height="512" data-id="114460" src="demo-application.png" alt="" class="wp-image-114460"></a>
- </figure>
-</figure>
+{{< gallery >}}
+led_segment_app.png
+segment_display_fully_wired-1024x498.jpg
+demo-application.png
+{{< /gallery >}}
 
 In 2019, I even published a JavaFX library with a component to visualize such a display, as you can [read here: "LED number display JavaFX library published on Maven"](https://webtechie.be/post/2019-10-02-led-number-display-javafx-library-published-to-maven/).
 
