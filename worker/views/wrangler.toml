@@ -1,0 +1,30 @@
+# Deployed by hand, not by CI -- see README.md in this folder.
+#
+# Same reasoning as scripts/ConvertSponsors.java and ImportWpComments.java:
+# this writes to something outside the repo, on the live foojay.io domain,
+# with a credential CI has no business holding. The Hugo build only ever READS
+# the counts (scripts/FetchViewCounts.java), and that needs no secret.
+
+name = "foojay-views"
+main = "src/index.js"
+compatibility_date = "2026-08-01"
+
+# The whole point of the design: the counter lives on foojay.io itself, so no
+# adblocker can distinguish it from any other request to the site. Nothing in
+# WordPress serves /api/, so this route can go up while WP is still live -- and
+# it should, so the thing is proven before cutover depends on it.
+routes = [
+  { pattern = "foojay.io/api/views/*", zone_name = "foojay.io" }
+]
+
+[vars]
+# Origins allowed to count a view. The github.io entry is the trial deploy and
+# can be dropped at cutover. See originAllowed() in src/index.js for what this
+# does and does not buy.
+ALLOWED_ORIGINS = "https://foojay.io,https://www.foojay.io,https://foojayio.github.io"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "foojay-views"
+# Filled in by `wrangler d1 create foojay-views` -- see README.md.
+database_id = "REPLACE_WITH_D1_DATABASE_ID"

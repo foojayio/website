@@ -43,12 +43,54 @@
 
 ## Features
 
-* [ ] Read counter
-  * Can we integrate a free system that counts the number of reads per post/page?
-  * Do not use Google Analytics for this purpose, as it is not privacy-friendly.
-  * Number of reads should be displayed on page below the title in the line with, e.g., "Jun 9, 2026
-    Frank Delporte 4 min read"
-  * A script needs to be added to have a conversion of the current number of reads from the WordPress database to the Hugo site. This is a one-time operation, but it needs to be done before the site goes live and needs to be repeated until we go live.
+* [X] Read counter -> our own Cloudflare Worker + D1 on `foojay.io/api/views/*`
+  * **Not a hosted analytics service**, and the reason goes past "not Google
+    Analytics": the Worker receives a slug and stores a slug and an integer. No
+    cookie, no identifier, no IP, no user agent — nothing collected, so nothing
+    to anonymise. Being first-party also means no adblocker can tell it from the
+    rest of the site, which the third-party alternatives (GoatCounter, Plausible,
+    Cloudflare Analytics) can't say — their own docs open with "check if your
+    adblocker is blocking us", and on an audience of Java developers that is not
+    a rounding error. foojay.io is already on Cloudflare DNS, so the route needed
+    no migration. Free tier: 100k requests/day against ~5–10k pageviews/day.
+  * Displayed next to the date, byline and reading time (`11,459 views`) on the
+    article **and on every card**, and on **pages, `/pedia/` entries and author
+    profiles** too — page head, under the term, and on the author's profile and
+    featured-author card. Baked into the HTML at build time from
+    `data/views.json` rather than fetched client-side — no JS, no number that
+    appears after paint, and cards can't be done any other way.
+  * Keyed `<section>/<slug>` (`posts/some-article`, `pedia/bytecode`,
+    `authors/jbellis`), never a pathname — the trial serves
+    `/website/today/<slug>/` and production `/today/<slug>/`, so pathname keys
+    would zero every count at cutover. The section half stops the four sections
+    colliding in a permanent store. `partials/views-key.html` is the single
+    definition: add a section there and it starts being counted, no other change
+    and no Worker redeploy.
+  * `scripts/FetchWpViews.java` is the import. foojay.io runs the Post Views
+    Counter plugin, which serves the numbers on an **open** REST route, so no WP
+    admin, database or credential is needed — same posture as the comment import.
+    **2210 entries, 13.8M views**: all 2145 posts (the 3 emoji slugs resolve
+    through the same `sanitizeSlug` the conversion used), 35 pages and all 30
+    pedia entries. The pedia glossary is a custom WP post type (`terminology`)
+    that isn't in the REST API, so each entry's id is read out of its rendered
+    page instead. The 7 items reported unmatched are WP listing pages (`today`,
+    `author`, `sitemap`, `home-page`, …) with no single Hugo page behind them.
+  * **Author pages have no WordPress baseline** — the plugin can count user
+    archives but the option is off on foojay.io (verified: its user-views route
+    returns 0 for every author checked). They start at zero when the Worker goes
+    live, and the script says so on every run so it doesn't look like a bug.
+  * Re-runnable until cutover, as asked: the WordPress number is the Worker's
+    `legacy` column and live views accumulate in `live`, so seeding **sets** a
+    new baseline instead of adding to one. Rejected a `legacy_views:` frontmatter
+    field for this — it would rewrite 2145 content files on every catch-up run;
+    `data/legacy-views.json` is one generated file, like `data/jugs.yaml`.
+  * **Remaining: deploy the Worker** (`worker/views/README.md` — create D1, load
+    schema, set `SEED_TOKEN`, `wrangler deploy`), then seed it. Worth doing early:
+    nothing in WordPress serves `/api/`, so the route can go up while WP is still
+    live, and the counter starts accumulating real views before cutover depends
+    on it. Until then `data/views.json` is `{}` and no number renders.
+  * The old GoatCounter scaffold (`partials/stats.html`) is deleted. It also held
+    an unwired share button — nothing replaces that; ask if it's wanted.
 * [X] Discussions -> giscus on this repo's GitHub Discussions
   * `partials/comments.html` is now called from `posts/single.html`, and
     `[params.giscus]` is in `hugo.toml`. **It renders nothing until you finish

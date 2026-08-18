@@ -1,0 +1,22 @@
+{{/*
+  The read counter, shown on posts, pages, pedia entries and author profiles.
+
+  partials/views-key.html decides what is counted and under which key; this
+  partial only renders. The number is baked in at build time from
+  data/views.json (refreshed by scripts/FetchViewCounts.java from the counter in
+  worker/views/), so it needs no JavaScript and can't shift the layout after
+  paint. Renders nothing when a page has no count yet -- correct on a brand new
+  post, on every author page until the Worker has been live a while (WordPress
+  has no author-archive numbers to import), and during local development where
+  data/views.json may be empty.
+*/}}
+{{- $key := partial "views-key.html" . -}}
+{{- $count := 0 -}}
+{{- with $key -}}
+  {{- with site.Data.views -}}
+    {{- with index . $key -}}{{- $count = . -}}{{- end -}}
+  {{- end -}}
+{{- end -}}
+{{- if gt $count 0 -}}
+<span class="views">{{ lang.FormatNumberCustom 0 $count }} views</span>
+{{- end -}}

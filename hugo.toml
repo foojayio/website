@@ -82,6 +82,19 @@ enableRobotsTXT = true
   category = "Blog Comments"
   categoryId = "DIC_kwDOTog_lc4DDoVm"
 
+# The read counter -- our own Cloudflare Worker on foojay.io itself, not a
+# hosted analytics service. It stores a slug and an integer and nothing else,
+# and because it is first-party no adblocker can distinguish it from the rest
+# of the site, which a third-party tracker script very much cannot say.
+# See worker/views/README.md to deploy it, and CLAUDE.md for the design.
+#
+# Setting `endpoint` is what switches counting on: partials/views-beacon.html
+# renders nothing without it, so an unconfigured or local build never posts a
+# hit. DISPLAYING a count is independent of it -- that comes from
+# data/views.json, which the build refreshes via scripts/FetchViewCounts.java.
+[params.views]
+  endpoint = "https://foojay.io/api/views"
+
 [outputs]
   home = ["HTML", "RSS"]
   section = ["HTML", "RSS"]

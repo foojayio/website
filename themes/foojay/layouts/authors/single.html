@@ -10,6 +10,12 @@
       {{ with (or .Params.avatarFull .Params.avatar) }}<img class="author-avatar" data-pagefind-meta="image[src]" src="{{ partial "resource-url.html" (dict "page" $ "src" .) }}" alt="{{ $.Title }}">{{ end }}
       <h1>{{ .Title }}</h1>
       {{ with .Params.bio }}<p class="author-bio">{{ . }}</p>{{ end }}
+      {{/* Author pages start from zero rather than from a WordPress number:
+           the Post Views Counter plugin's user-archive counting is switched
+           off on foojay.io, so there is nothing to import (verified against
+           several authors -- see scripts/FetchWpViews.java). This renders
+           nothing until the counter has seen some traffic. */}}
+      {{ with partial "views.html" . }}<p class="author-meta">{{ . | safeHTML }}</p>{{ end }}
       {{ partial "author-social.html" . }}
     </div>
 

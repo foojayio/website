@@ -15,3 +15,7 @@
 
 # Logs from conversion scripts
 scripts/*.log
+
+# Wrangler (the view counter Worker -- worker/views/)
+node_modules/
+.wrangler/

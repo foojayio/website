@@ -14,6 +14,7 @@
       <a class="pedia-card" href="{{ .Permalink }}">
         <h3>{{ .Title }}</h3>
         {{ with .Params.description }}<p>{{ . | truncate 150 }}</p>{{ end }}
+        {{ partial "views.html" . }}
       </a>
     {{ end }}
   </div>

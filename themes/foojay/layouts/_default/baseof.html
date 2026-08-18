@@ -103,5 +103,11 @@
        forgot it. The flag is still honoured for any page that sets it. */}}
   {{ if strings.Contains .Content "EnlighterJSRAW" }}{{ partial "enlighterjs.html" . }}{{ end }}
   {{ if .Params.jdoodle }}{{ partial "jdoodle.html" . }}{{ end }}
+
+  {{/* Counts this read. The partial decides for itself whether this page is
+       counted (partials/views-key.html) and renders nothing when it isn't or
+       when [params.views] endpoint is unset -- so which sections have a read
+       counter is defined in exactly one place, not repeated here. */}}
+  {{ partial "views-beacon.html" . }}
 </body>
 </html>

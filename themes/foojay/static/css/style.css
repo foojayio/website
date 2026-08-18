@@ -436,7 +436,8 @@ body[data-nav-open="true"] .nav-backdrop { opacity: 1; visibility: visible; }
 }
 .post-card-meta a { color: var(--ink-muted); font-weight: 600; }
 .post-card-meta a:hover { color: var(--brand-accent-strong); }
-.post-card-meta time + a::before { content: "·"; margin-right: .5rem; color: var(--border-strong); }
+.post-card-meta time + a::before,
+.post-card-meta .views::before { content: "·"; margin-right: .5rem; color: var(--border-strong); }
 
 .post-card-categories, .post-categories, .chip-row {
   display: flex; flex-wrap: wrap; gap: .4rem;
@@ -844,6 +845,23 @@ body[data-nav-open="true"] .nav-backdrop { opacity: 1; visibility: visible; }
 
 .post-categories--top { margin-bottom: .9rem; }
 .reading-time { color: var(--ink-muted); }
+/* The read counter. tabular-nums so a column of cards doesn't jitter as the
+   digit widths change, nowrap so "11,459 views" never breaks across lines. */
+.views {
+  color: var(--ink-muted); font-variant-numeric: tabular-nums; white-space: nowrap;
+}
+/* Placements outside a post: the page head, the author profile, a glossary
+   card and the featured-author card. Posts and post cards get their spacing
+   and separator dots from .post-meta / .post-card-meta instead. */
+.page-head__views { margin-top: .6rem; font-size: .9rem; }
+.author-profile .author-meta { grid-column: 2; margin: 0 0 .8rem; font-size: .9rem; }
+.pedia-card .views { display: block; margin-top: .55rem; font-size: .82rem; }
+.featured-author__count .views::before {
+  content: "·"; margin-right: .45rem; color: var(--border-strong);
+}
+/* An author with no articles yet still gets a count, and then the separator
+   would be leading a line it has nothing to separate. */
+.featured-author__count .views:first-child::before { content: none; }
 .post-single .post-meta > * + *::before {
   content: "·"; margin-right: .55rem; color: var(--border-strong);
 }

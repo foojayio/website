@@ -30,18 +30,25 @@ the same folder.
   Rendered at `/jugs/` with a Leaflet world map + a client-side name/country filter.
 - `data/java-champions.yaml` — **generated**, rendered at `/java-champions/`
   with a client-side filter.
-- `data/events.json` — **generated** daily by the Meetup sync workflow.
+- `data/events.json` — **generated** by the external-content sync workflow.
+- `data/views.json` — **generated**, the read count per post (see "Read counter").
+- `data/legacy-views.json` — **generated**, each post's WordPress view count at
+  the last import. Kept in the repo because it is the only copy: the number
+  disappears with the WordPress site.
 - `themes/foojay/` — the Hugo theme (structural recreation of the current site;
   see "Known limitations" below).
 - `scripts/` — jbang/Java conversion, external-data, and validation scripts (see below).
+- `worker/views/` — the read counter: a Cloudflare Worker + D1 table on
+  `foojay.io/api/views/*`. Deployed by hand, not by CI (see "Read counter").
 - `template/` — a starter `index.md` (all frontmatter documented) + a categories
   list for authors writing a new post; see `CONTRIBUTING.md`.
-- `.github/workflows/` — CI: PR checks, Pages deploy, daily external-data + Meetup sync.
+- `.github/workflows/` — CI: PR checks, Pages deploy, external-content sync.
 
 ## Scripts (jbang)
 
 Requires [JBang](https://www.jbang.dev/) and **Java 21+** (`ConvertPosts.java`
-uses virtual threads; the rest need 17+).
+uses virtual threads and `FetchWpViews.java` an auto-closing executor; the rest
+need 17+).
 
 **Content conversion** — scrape the live WordPress site into `content/`:
 
@@ -67,12 +74,13 @@ scraping against one real page, and `ConvertPosts` supports `--days N` / `--sinc
 <date>` to convert only a recent window.
 
 **External data** — regenerate the `data/*` files from community-run upstreams
-(run at every deploy and daily; see "Workflows"):
+(run at every deploy and four times a day; see "Workflows"):
 
 ```bash
 jbang scripts/FetchJugs.java            # -> data/jugs.yaml          (World-Wide-JUGs/GlobalWWJugs)
 jbang scripts/FetchJavaChampions.java   # -> data/java-champions.yaml (aalmiray/java-champions)
 jbang scripts/FetchMeetupEvents.java    # -> data/events.json         (Meetup GraphQL; needs Pro + OAuth)
+jbang scripts/FetchViewCounts.java      # -> data/views.json          (our own counter, worker/views/)
 ```
 
 The `data/*` files are **generated — never hand-edit them.** Add or fix a JUG or
@@ -88,6 +96,7 @@ jbang scripts/ValidateFrontmatter.java  # PR-time content check (also runs in CI
 
 ```bash
 jbang scripts/ImportWpComments.java --dry-run   # legacy WP comments -> GitHub Discussions
+jbang scripts/FetchWpViews.java                 # legacy WP view counts -> data/legacy-views.json
 ```
 
 `MigratePostsToBundles.java`, `MigrateAuthorsToBundles.java`, and
@@ -179,13 +188,86 @@ jbang scripts/ImportWpComments.java                       # the lot
 - Run it **again just before cutover** to pick up comments posted on WordPress in
   the meantime.
 
+## Read counter
+
+Every post shows its number of reads next to the date, byline and reading time,
+on the article itself and on every card that links to it. **Pages, `/pedia/`
+glossary entries and author profiles** carry one too — in the page head, under
+the term, and on the author's profile and featured-author card.
+
+The counter is **ours** — a Cloudflare Worker over a D1 table, served from
+`foojay.io/api/views/*` (`worker/views/`, deploy steps in its README). Three
+reasons it isn't a hosted analytics service:
+
+- **It is not Google Analytics, and not anyone else either.** The Worker receives
+  a slug and stores a slug and an integer. There is no cookie, no identifier, no
+  IP, no user agent — nothing to anonymise, because nothing is collected. That is
+  a stronger claim than a privacy policy promising not to look.
+- **It is first-party, so the number is real.** Anything served from a
+  third-party analytics domain is blocked for a large slice of an audience of
+  Java developers, and the count would quietly be far too low. Nothing
+  distinguishes `foojay.io/api/views` from the rest of the site.
+- **The WordPress numbers load in as the starting value**, so the site renders
+  one number rather than adding a legacy count to a live one in every template.
+
+Two halves, deliberately separate:
+
+| | |
+|---|---|
+| **Counting** | `partials/views-beacon.html` posts the slug via `navigator.sendBeacon` on a post page. Renders nothing unless `[params.views] endpoint` is set in `hugo.toml`, so a local build never counts. A `sessionStorage` flag keeps a refresh from counting twice; it dies with the tab. |
+| **Displaying** | `partials/views.html` reads `data/views.json`, refreshed at every deploy and four times a day by `scripts/FetchViewCounts.java`. The number is baked into the HTML — no JavaScript, no dash that turns into a number after paint. |
+
+`data/views.json` currently holds the WordPress numbers (copied from
+`data/legacy-views.json`), so the counts are already on the site before the
+Worker exists. Once it is deployed and seeded, every build overwrites this
+with `legacy + live` from the counter.
+
+The count is keyed `<section>/<slug>` — `posts/some-article`, `pedia/bytecode`,
+`authors/jbellis` — and **never on a pathname**: this site serves
+`/website/today/<slug>/` during the trial and `/today/<slug>/` after cutover, so
+a pathname-keyed count would reset to zero everywhere the day the domain moves.
+Same reasoning, same key shape as a giscus comment thread (see "Comments"). The
+section half keeps the four sections from colliding in what is a permanent
+store. `partials/views-key.html` is the single definition — **add a section
+there and it starts being counted**, no other change needed.
+
+Baking the number in means it can be a few hours stale, which for a view count
+is not a defect, and `FetchViewCounts.java` never fails a build: if the counter
+is unreachable it keeps the committed `data/views.json` and carries on.
+
+### Importing the WordPress view counts
+
+foojay.io runs the Post Views Counter plugin, which exposes its numbers on an
+open REST route — so this needs no WP admin, database or credential, the same as
+the comment import.
+
+Three of the four sections have a WordPress source. Posts and pages come from
+`/wp/v2/`; the glossary is a custom post type (`terminology`) WordPress doesn't
+expose to REST, so the script reads each entry's id back out of its rendered
+page. **Author profiles have no baseline at all** — the plugin *can* count user
+archives but the option is off on foojay.io, so they start at zero when the
+Worker goes live. The script says so on every run rather than leaving a section
+quietly empty.
+
+```bash
+jbang scripts/FetchWpViews.java                 # -> data/legacy-views.json (~3 min)
+jbang scripts/FetchWpViews.java --limit 20      # quick test run
+VIEWS_SEED_TOKEN=... jbang scripts/FetchWpViews.java --seed   # ...and push to the counter
+```
+
+**Run it again whenever you want to catch up with WordPress, right up to
+cutover.** Seeding *sets* the baseline rather than adding to it, so a re-run is
+idempotent and can't double a number; views counted here in the meantime are
+held in a separate column and are never overwritten.
+
 ## Workflows (`.github/workflows/`)
 
-- **`build-deploy.yml`** — on push to `main`: refreshes `data/jugs.yaml` +
-  `data/java-champions.yaml` (commits them back with `[skip ci]`), builds with
-  Hugo, runs Pagefind, and deploys to GitHub Pages.
-- **`meetup-sync.yml`** — daily cron: refreshes `data/jugs.yaml`,
-  `data/java-champions.yaml`, and `data/events.json`, committing the results.
+- **`build-deploy.yml`** — on push to `main`: refreshes `data/jugs.yaml`,
+  `data/java-champions.yaml` + `data/views.json` (commits them back with
+  `[skip ci]`), builds with Hugo, runs Pagefind, and deploys to GitHub Pages.
+- **`sync-external-content.yml`** — cron, four times a day: refreshes `data/jugs.yaml`,
+  `data/java-champions.yaml`, `data/views.json` and `data/events.json`,
+  committing the results.
 - **`pr-check.yml`** — on PRs: runs `ValidateFrontmatter.java` and a Hugo build
   (GitHub Pages has no per-PR preview URL).
 

@@ -1,0 +1,31 @@
+{{- /* The key a page's read count is stored under, or "" if it isn't counted.
+
+       One definition, used by views.html (display), views-beacon.html
+       (counting) and scripts/FetchWpViews.java (the WordPress import), so
+       those three can't drift apart -- a mismatch would show up as a count
+       that silently stays at zero, not as an error.
+
+       `<section>/<slug>`, not a bare slug and not a pathname:
+
+       - The SLUG half is `or .Params.slug .File.ContentBaseName`, which is what
+         hugo.toml's :slugorcontentbasename resolves to. So it's derived from the
+         bundle folder or file name, with nothing for an author to write. A
+         pathname would have been the tempting alternative and is a trap: the
+         trial deploy serves /website/today/<slug>/ and production serves
+         /today/<slug>/, so every count would reset to zero at cutover. Same
+         reasoning, same key shape as a giscus comment thread (comments.html).
+       - The SECTION half keeps the four counted sections from colliding. They
+         don't today -- 2561 slugs across posts, pages, pedia, authors and
+         sponsors are all distinct -- but that is luck, not a rule: nothing stops
+         a pedia entry named "graalvm" and an author page from wanting the same
+         key, and the counter is a permanent store where a collision would
+         silently merge two pages' numbers.
+
+       Add a section here to start counting it. Nothing else needs to change --
+       the Worker accepts any `<section>/<slug>` key. */ -}}
+{{- $counted := slice "posts" "pages" "pedia" "authors" -}}
+{{- $key := "" -}}
+{{- if and .IsPage .File (in $counted .Section) -}}
+  {{- $key = printf "%s/%s" .Section (or .Params.slug .File.ContentBaseName) -}}
+{{- end -}}
+{{- return $key -}}

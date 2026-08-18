@@ -9,6 +9,10 @@
 
     <h1>{{ .Title }}</h1>
 
+    {{/* .post-meta gets its spacing and separators from .post-single, which
+         this article already carries. */}}
+    {{ with partial "views.html" . }}<div class="post-meta">{{ . | safeHTML }}</div>{{ end }}
+
     <div class="prose">
       {{ .Content }}
     </div>

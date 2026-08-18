@@ -27,9 +27,11 @@
       {{ end }}
       <div class="featured-author__body">
         <h3 class="featured-author__name"><a href="{{ $author.Permalink }}">{{ $author.Title }}</a></h3>
-        {{ with $posts }}
+        {{ $views := partial "views.html" $author }}
+        {{ if or $posts $views }}
         <p class="featured-author__count">
-          <a href="{{ $author.Permalink }}">{{ len . }} article{{ if ne (len .) 1 }}s{{ end }}</a>
+          {{ with $posts }}<a href="{{ $author.Permalink }}">{{ len . }} article{{ if ne (len .) 1 }}s{{ end }}</a>{{ end }}
+          {{ $views }}
         </p>
         {{ end }}
         {{ with $author.Params.bio }}<p class="author-bio">{{ . }}</p>{{ end }}

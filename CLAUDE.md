@@ -50,7 +50,7 @@ should catch a mistake at PR time rather than letting it fail silently.
   community-run [World Wide JUGs directory](https://github.com/World-Wide-JUGs/GlobalWWJugs)
   (one Markdown-with-YAML-frontmatter file per JUG under its `_jugs/`
   folder). Run at every deploy (`build-deploy.yml`, before the Hugo build)
-  and daily (`meetup-sync.yml`, before `FetchMeetupEvents.java`), both of
+  and four times a day (`sync-external-content.yml`, before `FetchMeetupEvents.java`), both of
   which commit the refreshed file back to `main` — same pattern as
   `events.json`. JUG leaders add/update their own group by opening a PR
   against that repo, not this one. Derives `meetup_slug`/`meetup_url`
@@ -59,7 +59,7 @@ should catch a mistake at PR time rather than letting it fail silently.
   from [aalmiray/java-champions](https://github.com/aalmiray/java-champions)'s
   single `java-champions.yml` file — the data behind
   [javachampions.org](https://javachampions.org/). Run at every deploy and
-  daily, same as `FetchJugs.java` above. Champions add/update their own entry
+  four times a day, same as `FetchJugs.java` above. Champions add/update their own entry
   by editing that file directly upstream, not this repo. No coordinates yet
   (unlike JUGs) — a pending PR
   ([aalmiray/java-champions#318](https://github.com/aalmiray/java-champions/pull/318))
@@ -67,7 +67,7 @@ should catch a mistake at PR time rather than letting it fail silently.
   merged; pick that field up here once it does, same way `FetchJugs.java`
   reads JUG coordinates.
 - **`scripts/FetchMeetupEvents.java`**: pulls JUG events via Meetup's GraphQL
-  API for `.github/workflows/meetup-sync.yml` (daily cron), writing
+  API for `.github/workflows/sync-external-content.yml` (cron, four times a day), writing
   `data/events.json`. Only queries JUGs that have a `meetup_slug` (i.e. that
   actually use Meetup) in `data/jugs.yaml`. Requires a Meetup Pro
   subscription + OAuth token (`MEETUP_OAUTH_TOKEN` secret) — Meetup retired
@@ -160,6 +160,39 @@ should catch a mistake at PR time rather than letting it fail silently.
   (and with `--slug` prints the exact bodies); `--print-config` resolves the
   repo/category node ids for `hugo.toml`. Run it again just before cutover to
   pick up comments posted on WordPress in the meantime. **Not yet run.**
+- **`worker/views/`**: the read counter — a Cloudflare Worker over a D1 table
+  of `<section>/<slug> -> (legacy, live)`, routed at `foojay.io/api/views/*`. Deployed by
+  hand (`wrangler deploy`), never by CI, for the same reason
+  `ConvertSponsors.java` is run by hand: it writes outside the repo and needs a
+  credential. See "read counter" under the conventions below for why this
+  exists instead of a hosted analytics service, and `worker/views/README.md`
+  for the setup steps. **Not yet deployed.**
+- **`scripts/FetchWpViews.java`**: captures the view counts WordPress holds for
+  every post, page and pedia entry (the Post Views Counter plugin exposes them
+  on an open REST route — no admin, DB or credential needed, same posture as
+  `ImportWpComments.java`) into `data/legacy-views.json`, and with `--seed`
+  loads them into the Worker as its `legacy` baseline. Posts and pages come
+  from `/wp/v2/`; the **pedia glossary is a custom post type (`terminology`)
+  that WordPress does not expose to REST**, so each entry's id is read back out
+  of its rendered page's body class (`postid-124618`) — all 30 resolve.
+  **Author profiles have no WordPress baseline at all**: the plugin can count
+  user archives, but the option is off on foojay.io (its user-views route
+  returns 0 for every author checked), so they start at zero. The script prints
+  that on every run rather than leaving a section silently empty. Run by hand, repeatedly,
+  until cutover — the TODO's "one-time operation that needs to be repeated".
+  Seeding **sets** rather than adds, and live views accumulate in a separate
+  column, so a re-run can't double or discard a number. One request per post
+  (the route sums when handed several ids, so there is no batching), eight at a
+  time, ~3 minutes for the site; `--limit N` for a test run. Needs a browser
+  `User-Agent` — WP Engine's WAF 403s a bare Java one. Every one of the 2145
+  posts and all 30 pedia entries match. The 7 items it reports as unmatched are
+  WordPress listing pages (`today`, `author`, `sitemap`, `home-page`, …) with no
+  single Hugo page behind them; `PAGE_ALIASES` covers the one page whose Hugo
+  file is named differently (`jugs` → `java-user-groups-jugs`).
+- **`scripts/FetchViewCounts.java`**: the CI half — reads
+  `/api/views/all` into `data/views.json` at every deploy and four times a day, so the
+  numbers are baked into the HTML. **Never fails the build**: if the counter is
+  unreachable it keeps the committed file and exits 0.
 - **`scripts/StripHeadingAnchors.java`**: one-off migration that removed the
   WordPress heading anchors (`## Title {#h2-2-title}`) from `content/`. WP
   stamps every heading with `id="h2-<index>-<slug>"`, Flexmark carries an id
@@ -201,8 +234,9 @@ should catch a mistake at PR time rather than letting it fail silently.
   `.github/workflows/pr-check.yml` in lieu of a visual preview (GitHub Pages
   has no per-PR preview URLs).
 - **`.github/workflows/build-deploy.yml`**: builds with Hugo and deploys to
-  GitHub Pages on push to `main`. Also refreshes and commits `data/jugs.yaml`
-  before building (see `FetchJugs.java` above) — needs `permissions.contents:
+  GitHub Pages on push to `main`. Also refreshes and commits `data/jugs.yaml`,
+  `data/java-champions.yaml` and `data/views.json` before building
+  (see `FetchJugs.java` above) — needs `permissions.contents:
   write` and a `[skip ci]` commit message for exactly this reason (otherwise
   that commit would re-trigger the same workflow).
 - **`data/jugs.yaml`**: auto-generated by `scripts/FetchJugs.java` — see
@@ -210,6 +244,15 @@ should catch a mistake at PR time rather than letting it fail silently.
   Rendered at `/jugs/` (`content/pages/java-user-groups-jugs.md`, `type:
   "jugs"` → `themes/foojay/layouts/jugs/single.html`), including a Leaflet +
   marker-clustering world map built from its `latitude`/`longitude` fields.
+- **`data/views.json`**: auto-generated by `scripts/FetchViewCounts.java` —
+  `slug -> total reads`, the numbers rendered on posts and cards. Never
+  hand-edit it. Seeded from `data/legacy-views.json` so the counts are live on
+  the site *now*, before the Worker exists; once it is deployed this is
+  overwritten with `legacy + live` on every build.
+- **`data/legacy-views.json`**: auto-generated by `scripts/FetchWpViews.java` —
+  each post's WordPress view count at the last import. Committed because it is
+  the **only** copy: these numbers vanish with the WordPress site, and they are
+  what seeds the counter.
 - **`data/java-champions.yaml`**: auto-generated by
   `scripts/FetchJavaChampions.java` — see above. Never hand-edit it; add/fix
   an entry upstream in aalmiray/java-champions instead. Rendered at
@@ -265,7 +308,7 @@ should catch a mistake at PR time rather than letting it fail silently.
    --site public && npx serve public` instead. Not yet run for real (this
    sandbox has no network access to the npm registry to fetch Pagefind), so
    treat it the same as the conversion scripts: reviewed, untested.
-7. **Comments are wired but not switched on; views aren't built.**
+7. **Comments are wired but not switched on; the view counter needs deploying.**
    `comments.html` (giscus) is called from `posts/single.html` and
    `[params.giscus]` is in `hugo.toml` with `repoId`/`categoryId` left blank —
    the partial renders nothing until those are filled in, so **three manual
@@ -275,16 +318,19 @@ should catch a mistake at PR time rather than letting it fail silently.
    Then run the comment import (see the script's entry above and README
    "Comments"); nothing here has been run against GitHub yet, so treat both the
    import and the widget as reviewed-but-untested.
-   **Views** are the open half: `stats.html` (a GoatCounter client-side counter
-   + share button) is still unwired and has no `[params.goatcounter]`, which is
-   the "Read counter" TODO item, not this one — it also wants the number on the
-   homepage's most-read list, which nothing computes yet. Still open there:
-   whether to capture each post's current WP view count into a `legacy_views`
-   frontmatter field (cheap, and the number disappears once WordPress is
-   decommissioned) and whether to build a one-time seeding script to backfill it
-   into GoatCounter via its `/api/v0/count` API (which does support backdated
-   `created_at` per hit for exactly this) — ask before building the seeder, it
-   needs a real GoatCounter account to test against.
+   **Views** are built (see "read counter" below) but the Worker is **not
+   deployed** — the templates, both scripts and the Worker source are in the
+   repo and the WordPress numbers are captured in `data/legacy-views.json`, but
+   until someone runs `wrangler deploy` from `worker/views/` nothing is counted
+   and `data/views.json` stays `{}` (the partial then renders nothing, which is
+   the correct degradation, not a bug). Four steps, all in
+   `worker/views/README.md`: create the D1 database, load `schema.sql`, set
+   `SEED_TOKEN`, deploy. Then `jbang scripts/FetchWpViews.java --seed`. Do it
+   early rather than at cutover: the route can go up while WordPress is still
+   live (nothing in WP serves `/api/`), and a counter proven over weeks beats
+   one switched on the day it has to work. The GoatCounter scaffold that used to
+   live in `partials/stats.html` is gone — deleted, not migrated; it also
+   carried an unwired share button, which nothing has replaced.
 8. **The paid homepage banner carousel is NOT built — and it's revenue-bearing.**
    The live WP home page (its page title is literally "Home – CTA and Sponsor
    Blocks") opens with a Splide carousel of "Sponsored Content" teasers —
@@ -521,8 +567,64 @@ should catch a mistake at PR time rather than letting it fail silently.
   articles that field points at the original publisher, not at foojay. This is
   the only place a trial URL could leak somewhere permanent; everything else
   (canonical, og:url, RSS, JSON-LD) is regenerated on every build.
+- **The read counter is ours, first-party, and keyed `<section>/<slug>`.** The
+  view count on a post, page, pedia entry or author profile comes from a
+  Cloudflare Worker + D1 table on `foojay.io/api/views/*` (`worker/views/`), not
+  from GoatCounter, Plausible, Cloudflare Analytics or anything else hosted.
+  Three reasons, and all three have to hold:
+  1. **Privacy by construction, not by policy.** The Worker receives a slug and
+     stores a slug and an integer. No cookie, no identifier, no IP, no user
+     agent — there is nothing there to anonymise. The TODO asked for something
+     that isn't Google Analytics; this is a stronger answer than swapping one
+     tracker for a politer one.
+  2. **First-party, so the number is true.** A third-party analytics domain is
+     blocked for a large share of an audience of Java developers, and the count
+     would silently run tens of percent low — the one failure mode a *published*
+     number can't have. Nothing distinguishes `foojay.io/api/views` from the
+     rest of the site. (foojay.io is already on Cloudflare DNS, so the route
+     needed no migration.)
+  3. **One number, not two.** WordPress's count is loaded in as the Worker's
+     `legacy` column and live views accumulate in `live`; `/all` returns the
+     sum. So no template anywhere adds a legacy count to a live one, and there
+     is no `legacy_views:` frontmatter field — which the TODO floated and which
+     would have meant rewriting 2145 content files on every catch-up run.
+
+  **Counting and displaying are separate on purpose.**
+  `partials/views-beacon.html` posts the slug (`navigator.sendBeacon`, so
+  nothing on the page waits for it) and renders nothing unless
+  `[params.views] endpoint` is set, so a local or unconfigured build never
+  counts. The number shown comes from `data/views.json`, refreshed by
+  `scripts/FetchViewCounts.java` at every deploy and four times a day, and is baked into
+  the HTML — no JavaScript, no dash that becomes a number after paint, and it
+  works on cards, which a per-page client-side fetch cannot do well.
+  Up-to-a-day-stale is not a defect in a view count.
+
+  **`partials/views-key.html` is the single definition of what gets counted and
+  under which key** — `views.html` (display), `views-beacon.html` (counting) and
+  `FetchWpViews.java` (the import) all follow it, and a drift between them shows
+  up as a number that silently stays at zero rather than as an error. Add a
+  section to the `$counted` slice there and it starts being counted; nothing
+  else changes, because the Worker validates the key's *shape* rather than an
+  allow-list of section names (an allow-list would mean a forgotten redeploy
+  silently dropping a whole section).
+
+  The slug half is `or .Params.slug .File.ContentBaseName`, which is what
+  `:slugorcontentbasename` resolves to — derived from the bundle folder, nothing
+  for an author to write or get wrong, and exactly the key a giscus comment
+  thread uses. A **pathname** would have been the tempting alternative and is a
+  trap for the same reason it is with giscus: the trial serves
+  `/website/today/<slug>/` and production serves `/today/<slug>/`, so every
+  count would reset to zero at cutover. The **section half** keeps the four
+  counted sections from colliding. They don't today — 2561 slugs across posts,
+  pages, pedia, authors and sponsors are all distinct — but that is luck, not a
+  rule, and this is a permanent store where a collision would silently merge two
+  pages' numbers.
+
+  **Author pages are counted but have no WordPress baseline**, so they start at
+  zero on the day the Worker goes live — the plugin's user-archive counting is
+  off on foojay.io. Don't go looking for the import that "must have failed".
 - Posts are contributed via PR (see `CONTRIBUTING.md`); the repo is public.
 - **`data/jugs.yaml` is generated, not authored here** — it's overwritten by
-  `scripts/FetchJugs.java` at every deploy and daily sync. Never add/edit a
+  `scripts/FetchJugs.java` at every deploy and every external-content sync. Never add/edit a
   JUG entry directly in this repo; changes belong upstream in
   [World-Wide-JUGs/GlobalWWJugs](https://github.com/World-Wide-JUGs/GlobalWWJugs).

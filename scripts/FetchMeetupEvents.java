@@ -21,8 +21,8 @@ import java.util.*;
  * Pulls upcoming events for every JUG in data/jugs.yaml that has a Meetup
  * group (a `meetup_slug`, derived by scripts/FetchJugs.java from any JUG
  * whose `website` is a meetup.com URL) from Meetup's GraphQL API, and writes
- * data/events.json for the Hugo site's calendar page. Run daily by
- * .github/workflows/meetup-sync.yml, which runs FetchJugs.java first so this
+ * data/events.json for the Hugo site's calendar page. Run four times a day by
+ * .github/workflows/sync-external-content.yml, which runs FetchJugs.java first so this
  * always sees the current upstream JUG list rather than a stale commit.
  *
  * JUGs without a Meetup group (their own website/calendar instead) are

@@ -1,0 +1,41 @@
+{{/*
+  Counts one read, by POSTing the page's key to the counter in worker/views/.
+
+  Renders nothing unless BOTH the page is a counted one (views-key.html) and
+  `[params.views] endpoint` is set in hugo.toml -- so a local or unconfigured
+  build never posts a hit, and adding a section to views-key.html is all it
+  takes to start counting it.
+
+  Everything that could have been a privacy problem is absent by construction
+  rather than by promise: the request carries a key and nothing else -- no
+  identifier, no cookie, no storage that outlives the tab -- and the Worker
+  stores a key and an integer. That is also why this is a hand-rolled endpoint
+  on foojay.io instead of a hosted analytics script: a third-party domain would
+  be blocked for a large slice of a Java-developer audience, and the count would
+  quietly be far too low.
+
+  The sessionStorage entry is the one piece of client state, and it exists only
+  so refreshing a page doesn't count twice. It dies with the tab.
+
+  sendBeacon is the right primitive here: the browser hands the request to the
+  OS and forgets it, so nothing about page rendering waits on the counter, and a
+  reader who leaves immediately is still counted. The fetch fallback is for the
+  handful of browsers without it.
+*/}}
+{{- $key := partial "views-key.html" . -}}
+{{- with site.Params.views.endpoint -}}
+{{- with $key -}}
+<script>
+(function () {
+  var key = {{ . }};
+  var url = {{ $.Site.Params.views.endpoint }} + '/hit/' + key.split('/').map(encodeURIComponent).join('/');
+  try {
+    if (sessionStorage.getItem('foojay-viewed-' + key)) return;
+    sessionStorage.setItem('foojay-viewed-' + key, '1');
+  } catch (e) { /* private mode, storage disabled -- count it anyway */ }
+  if (navigator.sendBeacon) navigator.sendBeacon(url);
+  else fetch(url, { method: 'POST', mode: 'no-cors', keepalive: true }).catch(function () {});
+})();
+</script>
+{{- end -}}
+{{- end -}}
