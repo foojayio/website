@@ -381,9 +381,22 @@ body[data-nav-open="true"] .nav-backdrop { opacity: 1; visibility: visible; }
 .page-head__inner { max-width: var(--max-width); margin-inline: auto; padding-inline: var(--gutter); }
 .page-head .eyebrow { margin-bottom: .5rem; }
 .page-head h1 { margin-bottom: .35rem; }
-.page-head p { color: var(--ink-soft); max-width: 62ch; margin: 0; }
+/* Page-head text runs the full width of the shell. The usual reading-column
+   cap (62ch) left the right half of every page head empty, and a head is a
+   short intro read once, not body copy read for minutes. */
+.page-head p { color: var(--ink-soft); margin: 0; }
 .page-head__meta { display: flex; align-items: center; flex-wrap: wrap; gap: .9rem; }
 .page-head__meta p { margin: 0; }
+
+/* AI portal: its editorial intro lives in the page head, so its paragraphs need
+   the spacing `.page-head p` deliberately removes for the single-line meta text
+   every other page head holds. */
+.page-head__intro { margin: 0 0 1.1rem; }
+.page-head__intro p { margin: 0; }
+.page-head__intro p + p { margin-top: .75rem; }
+/* A section-head whose subject is a chip list (the portal's "Topics covered")
+   rather than a lead paragraph. */
+.section-head .chip-row { margin-top: .75rem; }
 .btn--sm { padding: .3rem .75rem; font-size: .82rem; }
 
 .eyebrow {
@@ -392,6 +405,9 @@ body[data-nav-open="true"] .nav-backdrop { opacity: 1; visibility: visible; }
   text-transform: uppercase; letter-spacing: .12em; color: var(--brand-accent-strong);
 }
 .eyebrow::before { content: ""; width: 22px; height: 3px; background: var(--brand-accent); border-radius: 2px; }
+/* The AI portal's eyebrow is a back link to /today/ (as it is on WordPress);
+   keep it looking like an eyebrow rather than a body link. */
+.eyebrow a { color: inherit; }
 
 .section-head {
   display: flex; align-items: flex-end; justify-content: space-between;

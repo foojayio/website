@@ -156,6 +156,8 @@ enableRobotsTXT = true
   parent = "News"
   url = "/ai/"
   weight = 14
+  [menu.main.params]
+    desc = "Java and AI: guides, tutorials and machine learning on the JVM"
 
 [[menu.main]]
   name = "Event Calendar"

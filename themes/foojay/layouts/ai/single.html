@@ -1,0 +1,80 @@
+{{ define "main" }}
+{{/* The AI portal is a curated landing page for one category -- on WordPress it
+     literally IS the "Machine Learning" category page with an editorial intro on
+     top. So the only thing content/pages/ai.md states is `list_category`, and
+     everything below (lead post, grid, topic chips, count) is derived from it.
+     Nothing to keep in sync when a new AI post lands. */}}
+{{ $category := .Params.list_category }}
+{{ $posts := where (where site.RegularPages "Section" "posts") "Params.categories" "intersect" (slice $category) }}
+{{ $posts = $posts.ByDate.Reverse }}
+
+<div class="page-head">
+  <div class="page-head__inner">
+    <span class="eyebrow"><a href="{{ "today/" | relURL }}">Friends of OpenJDK Today</a></span>
+    <h1>{{ .Title }}</h1>
+    {{ with .Content }}<div class="page-head__intro prose">{{ . }}</div>{{ end }}
+    <div class="page-head__meta">
+      <p>{{ len $posts }} article{{ if ne (len $posts) 1 }}s{{ end }} on AI and machine learning in Java.</p>
+      {{/* The portal has no feed of its own; the category it curates does. */}}
+      {{ with site.GetPage (printf "/categories/%s" ($category | urlize)) }}
+        {{ with .OutputFormats.Get "rss" }}
+        <a class="btn btn--ghost btn--sm" href="{{ .Permalink }}" rel="alternate" type="application/rss+xml">Subscribe via RSS</a>
+        {{ end }}
+      {{ end }}
+    </div>
+    {{ with partial "views.html" . }}<div class="page-head__views">{{ . | safeHTML }}</div>{{ end }}
+  </div>
+</div>
+
+<div class="layout-with-sidebar">
+  <div class="content-col">
+
+    {{/* Topics covered: the categories these posts actually carry, most-used
+         first, each linking to its own category page -- the same derived-not-
+         stored idiom as a sponsor profile's topic list. The curated category
+         itself is dropped: every post on the page has it, so it says nothing. */}}
+    {{ $counts := dict }}
+    {{ range $posts }}
+      {{ range .Params.categories }}
+        {{ if ne . $category }}
+          {{ $counts = merge $counts (dict . (add (int (index $counts . | default 0)) 1)) }}
+        {{ end }}
+      {{ end }}
+    {{ end }}
+    {{ $ranked := slice }}
+    {{ range $name, $n := $counts }}{{ $ranked = $ranked | append (dict "name" $name "n" $n) }}{{ end }}
+    {{ with first 12 (sort $ranked "n" "desc") }}
+    <section class="section-head">
+      <div>
+        <h2>Topics covered</h2>
+        <div class="chip-row">
+          {{ range . }}
+          <a href="{{ printf "today/category/%s/" (.name | urlize) | relURL }}">{{ .name }} <span class="chip-count">{{ .n }}</span></a>
+          {{ end }}
+        </div>
+      </div>
+    </section>
+    {{ end }}
+
+    {{/* Lead card + grid, mirroring the home page: the newest post gets the
+         "Latest post" treatment the WordPress portal gives it, the rest follow,
+         each card carrying its own categories. The full list is rendered rather
+         than paginated -- .Paginate only works on list pages, and a portal that
+         shows every article beats one that hides two thirds of them behind
+         pages Hugo can't build here. The category page below paginates. */}}
+    {{ with $posts }}
+      {{ partial "post-card-lead.html" (index . 0) }}
+      <div class="post-grid">
+        {{/* maxCategories 0 -> every category, not the usual first two: on a
+             portal the chips are how a reader narrows down. */}}
+        {{ range after 1 . }}{{ partial "post-card.html" (dict "page" . "maxCategories" 0) }}{{ end }}
+      </div>
+    {{ end }}
+
+    {{ with site.GetPage (printf "/categories/%s" ($category | urlize)) }}
+    <p class="section-more"><a class="btn btn--ghost" href="{{ .Permalink }}">Browse the {{ .Title }} category</a></p>
+    {{ end }}
+  </div>
+  {{ partial "sidebar.html" . }}
+</div>
+{{ end }}

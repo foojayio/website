@@ -1,7 +1,23 @@
+{{- /* A post card. Called either with the Page itself -- the normal case, and
+       what every listing does -- or with a dict:
+         page            the Page (required)
+         maxCategories   how many category chips to show; 0 = all
+                         (default 2, so a card stays a card)
+       The AI portal passes 0: there the category chips ARE the navigation, so a
+       post's full topic list is the point rather than clutter. */ -}}
+{{- $p := . -}}
+{{- $maxCategories := 2 -}}
+{{- if reflect.IsMap . -}}
+  {{- $p = .page -}}
+  {{/* isset, not `default`: 0 is a meaningful value here and `default` would
+       read it as "unset" and fall back to 2. */}}
+  {{- if isset . "maxCategories" -}}{{- $maxCategories = .maxCategories -}}{{- end -}}
+{{- end -}}
+{{- with $p -}}
 <article class="post-card">
   {{ with .Params.image }}
-  <a href="{{ $.Permalink }}" class="post-card-image" tabindex="-1" aria-hidden="true">
-    <img src="{{ partial "resource-url.html" (dict "page" $ "src" .) }}" alt="" loading="lazy" decoding="async">
+  <a href="{{ $p.Permalink }}" class="post-card-image" tabindex="-1" aria-hidden="true">
+    <img src="{{ partial "resource-url.html" (dict "page" $p "src" .) }}" alt="" loading="lazy" decoding="async">
   </a>
   {{ end }}
 
@@ -16,8 +32,11 @@
   {{ with .Params.description }}<p class="post-card-excerpt">{{ . | truncate 140 }}</p>{{ end }}
 
   {{ with .Params.categories }}
+  {{ $cats := . }}
+  {{ if gt $maxCategories 0 }}{{ $cats = first $maxCategories $cats }}{{ end }}
   <div class="post-card-categories">
-    {{ range first 2 . }}<a href="{{ printf "today/category/%s/" (. | urlize) | relURL }}">{{ . }}</a>{{ end }}
+    {{ range $cats }}<a href="{{ printf "today/category/%s/" (. | urlize) | relURL }}">{{ . }}</a>{{ end }}
   </div>
   {{ end }}
 </article>
+{{- end -}}

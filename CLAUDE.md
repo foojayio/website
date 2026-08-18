@@ -514,6 +514,22 @@ should catch a mistake at PR time rather than letting it fail silently.
   instead — that's two files to edit per rotation and, worse, two to remember to
   unset, which is exactly how a "featured" author silently stays featured
   forever.
+- **The AI portal is a derived category landing page.** `/ai/`
+  (`content/pages/ai.md`, `type: "ai"` -> `themes/foojay/layouts/ai/single.html`)
+  is what WordPress serves as the **"Machine Learning" category page** (WP slug
+  `ai-ml`) with an editorial intro on top. So the page file holds the intro plus
+  one key -- `list_category: "Machine Learning"` -- and the layout derives the
+  rest: the lead card, the full article grid, the "Topics covered" chip row
+  (categories those posts carry, most-used first) and the article count. A new
+  AI post shows up by carrying the category; there is no list to maintain and no
+  count stored. Don't turn it into a hand-picked `posts:` list in frontmatter.
+  Two details worth knowing before editing it: the grid is **not** paginated
+  (`.Paginate` only works on list pages, so a page-kind template can't use it --
+  the "Browse the ... category" link at the bottom leads to the paginated term
+  page), and its cards pass `maxCategories: 0` to `partials/post-card.html` so
+  every category chip shows instead of the usual first two -- on a portal the
+  chips are the navigation. That option is the only reason the partial accepts a
+  dict; called with a Page it behaves exactly as before.
 - **Sponsors appear site-wide via the sidebar**, not just on `/our-sponsors/`:
   `themes/foojay/layouts/partials/sidebar-sponsors.html` lists every sponsor
   tier-ordered, with the logo sized by tier (gold largest). Deliberately NOT

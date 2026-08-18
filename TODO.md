@@ -38,8 +38,22 @@
 ## Missing Content
 
 * [X] log4j-cve.md
-* [ ] advisory boardext
-* [ ] Foojay.io AI Portal
+* [ ] advisory board text
+* [X] Foojay.io AI Portal -> `content/pages/ai.md` + `themes/foojay/layouts/ai/single.html`
+  * On WordPress the page is the **"Machine Learning" category landing page**
+    (WP category slug `ai-ml`, 66 posts) with an editorial intro on top -- not a
+    hand-picked list. So `ai.md` holds the intro and one key,
+    `list_category: "Machine Learning"`, and the layout derives everything else:
+    lead card, the full article grid, the "Topics covered" chips and the count.
+    A new AI post appears here by carrying the category, with nothing to update.
+  * Our 66 matches WordPress's 66 exactly, same order.
+  * Cards on this page show **every** category, not the usual first two --
+    `post-card.html` now takes an optional `maxCategories` (0 = all). Verified
+    render-neutral elsewhere: across 1188 pages that render cards, every card's
+    markup is byte-identical to before.
+  * Not paginated (Hugo's `.Paginate` only works on list pages, and a portal
+    that shows all 66 beats one that hides two thirds); the category page it
+    links to does paginate.
 
 ## Features
 
